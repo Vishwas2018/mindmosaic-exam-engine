@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import { motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { chapter2Scenes } from "../chapter2-scenes";
@@ -16,7 +16,6 @@ import {
   layerForegroundOpacity,
   layerOpacity,
 } from "../cinematic/sceneProgress";
-import { useHydrated } from "../cinematic/useHydrated";
 import { useMinWidth } from "../cinematic/useMinWidth";
 import { chapterTwo } from "../content";
 import { useMotionLevel } from "../motion/useMotionLevel";
@@ -27,8 +26,6 @@ import { mmButton } from "./primitives";
 const timing = cinematicMotion.chapter2;
 /** Layer 0 is the intro, so the six scenes are layers 1..6. */
 const SCENE_LAYER_OFFSET = 1;
-/** Photographs mount this many layers ahead of the active one (and one behind), so a fast scroll never reaches an empty panel. */
-const IMAGE_LOOKAHEAD = 2;
 
 /**
  * Chapter 2 of the cinematic landing page: "Choose your pathway." One pinned
@@ -39,20 +36,17 @@ const IMAGE_LOOKAHEAD = 2;
  *
  * From `pinnedMinWidth` up the section is tall and its inner stage `sticky`.
  * Below it, and under reduced motion, nothing is pinned or hidden: the intro,
- * six scenes and the hand-off simply stack as readable content, and the
- * product UI is shown fully built. While pinned, only the active scene and
- * its neighbours mount their photograph, so the four pictures never load
- * together.
+ * six scenes and the hand-off simply stack as readable content. Each scene
+ * pairs its explanation (right) with a stationary MindMosaic product window
+ * (left, program-previews/); there are no photographs, so nothing loads late.
  *
  * Availability and status come from the canonical programme data via
- * chapter2-scenes.ts; photographs come from the landing media registry.
+ * chapter2-scenes.ts.
  */
 export function ChapterTwoPrograms() {
   const animated = useMotionLevel() !== "off";
   const pinned = useMinWidth(cinematicMotion.pinnedMinWidth);
   const choreographed = pinned && animated;
-  // Photographs mount only after hydration, so the server HTML (always the natural-flow shape) never lists all four.
-  const hydrated = useHydrated();
 
   // Scroll transforms read pinned state through a motion value so a resize across the breakpoint re-evaluates them.
   const pinnedValue = useMotionValue(pinned ? 1 : 0);
@@ -111,7 +105,6 @@ export function ChapterTwoPrograms() {
     observer.observe(stage);
     return () => observer.disconnect();
   }, [applySeam, choreographed, seam]);
-  const nearViewport = useInView(sectionRef, { margin: "60% 0px 60% 0px" });
 
   const scrollToLayer = useCallback(
     (layer: number) => {
@@ -227,7 +220,6 @@ export function ChapterTwoPrograms() {
                 scene={scene}
                 layerIndex={layer}
                 progress={choreographed ? q : null}
-                imageEnabled={hydrated && (!choreographed || (nearViewport && layer - active <= IMAGE_LOOKAHEAD && active - layer <= 1))}
               />
             </div>
           );

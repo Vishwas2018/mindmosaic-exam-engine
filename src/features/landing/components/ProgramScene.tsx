@@ -1,37 +1,21 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { animate, motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
-import {
-  ArrowRight,
-  BookOpen,
-  Check,
-  Clock,
-  Layers,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  Trophy,
-  type LucideIcon,
-} from "lucide-react";
+import { motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
+import { ArrowRight, Check, Clock } from "lucide-react";
 
 import type { ProgramSceneData } from "../chapter2-scenes";
 import { cinematicMotion } from "../cinematic/config";
-import { between, easeInOut, easeOutCubic, lerp } from "../cinematic/math";
 import {
   chapter2LayerStarts,
   layerEnter,
   layerBackdropOpacity,
   layerExit,
   layerForegroundOpacity,
-  layerLocal,
   layerOpacity,
   layerPresence,
 } from "../cinematic/sceneProgress";
-import { landingMedia, resolveSlotSrc } from "../media";
-import { SceneVisual } from "./chapter-two-visuals";
+import { ProgramPreview } from "./program-previews";
 import { mmButton, underlineLinkClasses, underlineTransition } from "./primitives";
 
 const timing = cinematicMotion.chapter2;
@@ -50,53 +34,6 @@ const STATUS_STYLES = {
   "in-development": { icon: Clock, classes: "border-dashed border-mm-line-quiet bg-white/70 text-mm-ink-soft" },
 } as const;
 
-const SCENE_DETAILS: Record<
-  ProgramSceneData["id"],
-  {
-    icon: LucideIcon;
-    badgeTitle: string;
-    badgeSubtitle: string;
-    haloBg: string;
-  }
-> = {
-  naplan: {
-    icon: ShieldCheck,
-    badgeTitle: "Assessment-style practice",
-    badgeSubtitle: "Timed and untimed formats",
-    haloBg: "from-purple-600/12 via-indigo-500/8 to-transparent",
-  },
-  icas: {
-    icon: Sparkles,
-    badgeTitle: "Extension-style practice",
-    badgeSubtitle: "Reading, reasoning and unfamiliar problems",
-    haloBg: "from-amber-500/14 via-orange-500/8 to-transparent",
-  },
-  curriculum: {
-    icon: BookOpen,
-    badgeTitle: "Concept-first learning",
-    badgeSubtitle: "Explanation → example → practice",
-    haloBg: "from-teal-500/12 via-indigo-500/8 to-transparent",
-  },
-  amc: {
-    icon: Trophy,
-    badgeTitle: "Competition-style reasoning",
-    badgeSubtitle: "Multi-step and pattern problems",
-    haloBg: "from-indigo-600/14 via-blue-500/10 to-transparent",
-  },
-  singapore: {
-    icon: Layers,
-    badgeTitle: "Visual problem solving",
-    badgeSubtitle: "Bar models and number relationships",
-    haloBg: "from-rose-500/12 via-orange-500/8 to-transparent",
-  },
-  selective: {
-    icon: Target,
-    badgeTitle: "Entry-test preparation",
-    badgeSubtitle: "Formats vary by jurisdiction",
-    haloBg: "from-violet-600/14 via-emerald-500/8 to-transparent",
-  },
-};
-
 function StatusPill({ scene }: { scene: ProgramSceneData }) {
   const { icon: Icon, classes } = STATUS_STYLES[scene.statusTone];
   return (
@@ -107,35 +44,6 @@ function StatusPill({ scene }: { scene: ProgramSceneData }) {
         {scene.statusLine}
       </span>
     </p>
-  );
-}
-
-function SceneBadge({
-  icon: Icon,
-  title,
-  subtitle,
-  opacity,
-}: {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  /** Badge text takes turns with its neighbour's like any other copy; the panel under it stays put. */
-  opacity: MotionValue<number> | null;
-}) {
-  return (
-    <motion.div
-      aria-hidden="true"
-      style={opacity ? { opacity } : undefined}
-      className="pointer-events-none absolute right-3.5 top-3.5 z-10 hidden items-center gap-2.5 rounded-xl border border-white/60 bg-white/90 px-3.5 py-2 shadow-[0_8px_20px_-6px_rgba(24,21,31,0.18)] backdrop-blur-md sm:flex"
-    >
-      <span className="grid h-7 w-7 place-items-center rounded-lg bg-mm-tint text-mm-brand">
-        <Icon className="h-4 w-4" strokeWidth={2.2} />
-      </span>
-      <div className="flex flex-col text-left leading-tight">
-        <span className="text-[12px] font-bold text-mm-ink">{title}</span>
-        <span className="text-[11px] font-medium text-mm-ink-soft">{subtitle}</span>
-      </div>
-    </motion.div>
   );
 }
 
@@ -196,130 +104,27 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
   );
 }
 
-/** The photograph panel: decorative, from the media registry, mounted shortly before it is needed while pinned. */
-function ScenePhoto({
-  slotKey,
-  sceneId,
-  scale,
-  opacity,
-  badgeOpacity,
-  enabled,
-}: {
-  slotKey: NonNullable<ProgramSceneData["mediaSlot"]>;
-  sceneId: ProgramSceneData["id"];
-  scale: MotionValue<number> | null;
-  /** Background cross-fade while choreographed. */
-  opacity: MotionValue<number> | null;
-  badgeOpacity: MotionValue<number> | null;
-  enabled: boolean;
-}) {
-  const slot = landingMedia.chapter2[slotKey].primary;
-  const detail = SCENE_DETAILS[sceneId];
-  // Once an image has been wanted it stays mounted, so scrolling back never re-fetches or flashes.
-  const [seen, setSeen] = useState(false);
-  // While pinned the panel is invisible until its photograph has loaded AND decoded, then eases in. A scene that
-  // arrives before its picture (cold cache, fast scroll) therefore holds the previous scene's panel instead of
-  // flashing an empty tinted frame.
-  const ready = useMotionValue(0);
-  const idle = useMotionValue(1);
-  const panelOpacity = useTransform([opacity ?? idle, ready], ([layer, isReady]: number[]) => layer! * isReady!);
-  const reveal = () => void animate(ready, 1, { duration: 0.22, ease: "easeOut" });
-  useEffect(() => {
-    // One-way latch on a prop: it cannot loop, and it must run after commit so it never re-renders mid-render.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (enabled) setSeen(true);
-  }, [enabled]);
-  return (
-    <motion.div
-      aria-hidden={slot.decorative ? "true" : undefined}
-      style={opacity ? { opacity: panelOpacity } : undefined}
-      className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-mm-tint shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)]"
-    >
-      {seen && (
-        <motion.div
-          style={scale ? { scale, transformOrigin: slot.focalDesktop } : undefined}
-          className="absolute inset-0 will-change-transform"
-        >
-          <Image
-            src={resolveSlotSrc(slot)}
-            alt={slot.alt}
-            fill
-            sizes="(min-width: 1024px) 56vw, 100vw"
-            quality={75}
-            // Pinned: mounting is already gated on the active layer (ChapterTwoPrograms), so load as soon as
-            // mounted. Natural flow mounts all six at once and must stay lazy. Either way, decode off the scroll path:
-            // otherwise a hidden image is first decoded on the frame it starts to fade in.
-            loading={scale ? "eager" : "lazy"}
-            onLoad={(event) => {
-              const decoded = event.currentTarget.decode?.() ?? Promise.resolve();
-              void decoded.catch(() => undefined).finally(reveal);
-            }}
-            onError={reveal}
-            style={
-              {
-                "--pos-m": slot.focalMobile,
-                "--pos-t": slot.focalTablet,
-                "--pos-d": slot.focalDesktop,
-              } as CSSProperties
-            }
-            className="object-cover [object-position:var(--pos-m)] md:[object-position:var(--pos-t)] lg:[object-position:var(--pos-d)]"
-          />
-        </motion.div>
-      )}
-      {/* Directional scrims for readability and seamless visual integration */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 bg-gradient-to-r from-black/10 via-transparent to-transparent lg:block" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
-      <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} opacity={badgeOpacity} />
-    </motion.div>
-  );
-}
-
-function CurriculumBackdrop() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(#18151f12_1px,transparent_1px)] [background-size:20px_20px]" />
-      <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gradient-to-br from-teal-400/15 via-indigo-300/10 to-transparent blur-2xl" />
-      <div className="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-tr from-purple-400/10 to-transparent blur-2xl" />
-      <div className="absolute left-8 top-0 bottom-0 hidden w-[1px] bg-gradient-to-b from-transparent via-mm-line/60 to-transparent sm:block" />
-      <span className="absolute right-8 top-16 h-3 w-3 rotate-45 rounded-[1.5px] bg-mm-brand/30" />
-      <span className="absolute right-20 top-24 h-2 w-2 rotate-45 rounded-[1px] bg-mm-coral/40" />
-      <span className="absolute bottom-12 left-16 h-3.5 w-3.5 rotate-45 rounded-[2px] bg-mm-lilac/50" />
-    </div>
-  );
-}
-
-function SingaporeBackdrop() {
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#18151f0a_1px,transparent_1px),linear-gradient(to_bottom,#18151f0a_1px,transparent_1px)] [background-size:28px_28px]" />
-      <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gradient-to-br from-coral/15 via-amber-400/10 to-transparent blur-2xl" />
-      <div className="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-tr from-rose-400/12 to-transparent blur-2xl" />
-      <div className="absolute inset-x-8 top-1/3 h-[1px] bg-gradient-to-r from-transparent via-mm-line/50 to-transparent" />
-      <span className="absolute right-10 top-14 h-3.5 w-3.5 rotate-45 rounded-[1.5px] bg-mm-coral/50" />
-      <span className="absolute right-24 top-20 h-2 w-2 rotate-45 rounded-[1px] bg-mm-brand/30" />
-      <span className="absolute bottom-16 left-12 h-3 w-3 rotate-45 rounded-[1.5px] bg-mm-brand-mid/40" />
-    </div>
-  );
-}
-
 /**
  * One programme scene. `progress` is the chapter's progress (0..1) while the
  * pinned stage is choreographed, and `null` otherwise (phones, tablets,
- * reduced motion): then the scene is plain, fully built, natural-flow content.
- * Photograph and product UI are decorative/read-only; every word that matters
- * (heading, status, facts) is DOM text in `SceneCopy`.
+ * reduced motion): then the scene is plain, natural-flow content.
+ *
+ * The preview window sits on the left and never moves: no scale, no travel.
+ * Scenes hand over by opacity alone. The incoming window is opaque and exactly
+ * covers the outgoing one before that one fades (`layerBackdropOpacity`), so
+ * the frame never dips, and the copy beside it takes turns with its neighbour
+ * over the same few percent of scroll. The window is decorative and read-only;
+ * every word that matters (heading, status, facts) is DOM text in `SceneCopy`.
  */
 export function ProgramScene({
   scene,
   layerIndex,
   progress,
-  imageEnabled,
 }: {
   scene: ProgramSceneData;
   /** Position in the chapter's layer chain: 0 is the intro, so scenes start at 1. */
   layerIndex: number;
   progress: MotionValue<number> | null;
-  imageEnabled: boolean;
 }) {
   const fallback = useMotionValue(0);
   const q = progress ?? fallback;
@@ -327,15 +132,14 @@ export function ProgramScene({
   const starts = chapter2LayerStarts;
 
   const layerVisibility = useTransform(q, (value) => layerOpacity(value, starts, layerIndex, timing.crossfade));
-  // Backdrops stack: the incoming photo/panel covers the outgoing one before that one fades (no mid-fade dip).
   const lastSceneLayer = starts.length - 2;
-  const opacity = useTransform(q, (value) =>
+  const windowOpacity = useTransform(q, (value) =>
     layerBackdropOpacity(value, starts, layerIndex, timing.crossfade, layerIndex < lastSceneLayer),
   );
   const pointerEvents = useTransform(layerVisibility, (value) => (value > 0.5 ? "auto" : "none"));
   // A scene far from the viewport's current layer is skipped by paint entirely (its a11y tree stays).
   const presence = useTransform(q, (value) => layerPresence(value, starts, layerIndex, timing.crossfade));
-  // Text and product UI take turns across a cross-fade; only the background (photo/panel) dissolves.
+  // Copy takes turns across a cross-fade; the window stacks instead (see above).
   const foreground = useTransform(q, (value) =>
     layerForegroundOpacity(value, starts, layerIndex, timing.crossfade),
   );
@@ -345,26 +149,6 @@ export function ProgramScene({
       (1 - layerEnter(value, starts, layerIndex, timing.crossfade)) * timing.copyRisePx -
       layerExit(value, starts, layerIndex, timing.crossfade) * timing.copyLiftPx,
   );
-  const local = useTransform(q, (value) => layerLocal(value, starts, layerIndex));
-
-  const preset = scene.mediaSlot
-    ? cinematicMotion.presets[landingMedia.chapter2[scene.mediaSlot].primary.motionPreset]
-    : cinematicMotion.presets.still;
-  const photoScale = useTransform(local, (value) =>
-    value < timing.photoHandoff.start
-      ? lerp(preset.fromScale, preset.settledScale, easeInOut(between(value, timing.photoSettle.start, timing.photoSettle.end)))
-      : lerp(preset.settledScale, preset.handoffScale, easeInOut(between(value, timing.photoHandoff.start, timing.photoHandoff.end))),
-  );
-  const productScale = useTransform(local, (value) =>
-    lerp(timing.productScale.from, 1, easeOutCubic(between(value, timing.productScale.window.start, timing.productScale.window.end))),
-  );
-  const cardY = useTransform(local, (value) =>
-    lerp(18, 0, easeOutCubic(between(value, timing.productScale.window.start, timing.productScale.window.end))),
-  );
-  const build = useTransform(local, (value) => between(value, timing.build.start, timing.build.end));
-
-  const hasPhoto = Boolean(scene.mediaSlot);
-  const detail = SCENE_DETAILS[scene.id];
 
   return (
     <motion.section
@@ -373,67 +157,23 @@ export function ProgramScene({
       style={choreographed ? { opacity: presence, pointerEvents } : undefined}
       className={`${LAYER_CLASSES} border-t border-mm-line-soft py-[clamp(44px,7vw,88px)] first:border-t-0 lg:border-t-0 lg:py-0 motion-reduce:lg:border-t motion-reduce:lg:py-[clamp(44px,7vw,88px)]`}
     >
-      <div className="mm-width grid gap-8 lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-0 motion-reduce:lg:pt-0">
-        <motion.div style={choreographed ? { y: copyY, opacity: foreground } : undefined} className="lg:col-span-5">
+      <div className="mm-width grid gap-8 lg:h-full lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-0 motion-reduce:lg:pt-0">
+        <motion.div
+          style={choreographed ? { y: copyY, opacity: foreground } : undefined}
+          className="lg:order-2 lg:col-span-5"
+        >
           <SceneCopy scene={scene} />
         </motion.div>
 
         <motion.div
-          style={choreographed ? { scale: productScale } : undefined}
-          className="relative min-w-0 lg:col-span-7 lg:origin-center"
+          data-preview={scene.id}
+          style={choreographed ? { opacity: windowOpacity } : undefined}
+          className="relative min-w-0 lg:order-1 lg:col-span-7"
         >
-          {/* Ambient stage halo matching programme identity */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-4 -z-10 overflow-hidden rounded-[36px] sm:-inset-6"
-          >
-            <div
-              className={`h-full w-full rounded-full bg-gradient-to-tr ${detail.haloBg} opacity-70 blur-3xl`}
-            />
-          </div>
-
-          {hasPhoto ? (
-            <div className="relative">
-              <ScenePhoto
-                slotKey={scene.mediaSlot!}
-                sceneId={scene.id}
-                scale={choreographed ? photoScale : null}
-                opacity={choreographed ? opacity : null}
-                badgeOpacity={choreographed ? foreground : null}
-                enabled={imageEnabled}
-              />
-              <motion.div
-                style={choreographed ? { opacity: foreground, y: cardY } : undefined}
-                className="relative z-[1] -mt-14 px-2 sm:px-6 lg:hidden"
-              >
-                <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
-              </motion.div>
-            </div>
-          ) : (
-            <div className="relative">
-              <motion.div
-                aria-hidden="true"
-                style={choreographed ? { opacity } : undefined}
-                className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-gradient-to-b from-white via-mm-wash/50 to-mm-tint p-4 shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] sm:p-6 lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)] lg:p-8"
-              >
-                {scene.id === "curriculum" ? <CurriculumBackdrop /> : <SingaporeBackdrop />}
-                <SceneBadge
-                  icon={detail.icon}
-                  title={detail.badgeTitle}
-                  subtitle={detail.badgeSubtitle}
-                  opacity={choreographed ? foreground : null}
-                />
-              </motion.div>
-              <motion.div
-                style={choreographed ? { opacity: foreground, y: cardY } : undefined}
-                className="relative z-[1] -mt-14 px-2 sm:px-6 lg:absolute lg:inset-x-6 xl:inset-x-8 lg:bottom-6 xl:bottom-8 lg:mt-0 lg:px-0"
-              >
-                <div className="mx-auto w-full max-w-[510px] xl:max-w-[540px]">
-                  <SceneVisual type={scene.visualType} build={choreographed ? build : null} />
-                </div>
-              </motion.div>
-            </div>
-          )}
+          <ProgramPreview
+            sceneId={scene.id}
+            className="aspect-[1.15] lg:max-h-[min(76svh,720px)] lg:w-full"
+          />
         </motion.div>
       </div>
     </motion.section>
