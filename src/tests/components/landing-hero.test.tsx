@@ -16,49 +16,69 @@ describe("Chapter 1 intro", () => {
 
   it("wires both CTAs and the availability link to real routes", () => {
     render(<ChapterOneIntro />);
-    expect(screen.getByRole("link", { name: hero.primaryCta.label })).toHaveAttribute("href", hero.primaryCta.href);
-    expect(screen.getByRole("link", { name: hero.secondaryCta.label })).toHaveAttribute(
-      "href",
-      hero.secondaryCta.href,
-    );
+    // The CTAs appear on the stage and in the fixed bar used by the stacked layouts.
+    for (const link of screen.getAllByRole("link", { name: hero.primaryCta.label })) {
+      expect(link).toHaveAttribute("href", hero.primaryCta.href);
+    }
+    for (const link of screen.getAllByRole("link", { name: hero.secondaryCta.label })) {
+      expect(link).toHaveAttribute("href", hero.secondaryCta.href);
+    }
     expect(screen.getByRole("link", { name: hero.availability.link.label })).toHaveAttribute(
       "href",
       hero.availability.link.href,
     );
   });
 
-  it("shows exactly one photograph, the active media-registry slot, versioned and decorative", () => {
+  it("carries each scene's own eyebrow, two-line headline and paragraph, in the story order", () => {
     const { container } = render(<ChapterOneIntro />);
-    const photos = [...container.querySelectorAll("img")];
-    expect(photos).toHaveLength(1);
-    expect(decodeURIComponent(photos[0]!.getAttribute("src") ?? "")).toContain(
-      resolveSlotSrc(landingMedia.chapter1.intro.primary),
-    );
-    expect(photos[0]).toHaveAttribute("alt", "");
+    const copies = [...container.querySelectorAll("[data-scene-copy]")];
+    expect(copies).toHaveLength(hero.scenes.length);
+    hero.scenes.forEach((scene, index) => {
+      const copy = copies[index]!;
+      expect(copy).toHaveAttribute("data-scene-copy", scene.id);
+      expect(copy).toHaveTextContent(scene.eyebrow);
+      expect(copy).toHaveTextContent(scene.headline[0]);
+      expect(copy).toHaveTextContent(scene.headline[1]);
+      expect(copy).toHaveTextContent(scene.body);
+    });
   });
 
-  it("never loads an alternate candidate", () => {
+  it("opens on the promise: scene 1's copy is the page heading and subheadline", () => {
+    expect(hero.scenes[0]!.headline).toEqual([hero.heading, hero.headingEmphasis]);
+    expect(hero.scenes[0]!.body).toBe(hero.subheadline);
+  });
+
+  it("shows scene 1's photograph first and fetches the others lazily, versioned and decorative", () => {
+    const { container } = render(<ChapterOneIntro />);
+    const layerPhotos = [...container.querySelectorAll("[data-scene-layer] img")];
+    expect(layerPhotos.length).toBeGreaterThanOrEqual(1);
+    expect(decodeURIComponent(layerPhotos[0]!.getAttribute("src") ?? "")).toContain(
+      resolveSlotSrc(landingMedia.chapter1.scenes.learn),
+    );
+    for (const photo of container.querySelectorAll("img")) expect(photo).toHaveAttribute("alt", "");
+  });
+
+  it("never loads an alternate Chapter 1 candidate", () => {
     const { container } = render(<ChapterOneIntro />);
     const html = container.innerHTML;
     for (const slot of Object.values(landingMedia.chapter1.intro.alternates)) {
-      if (slot.selection === "active") continue;
       expect(html).not.toContain(slot.basePath.split("/").pop()!.replace(".webp", ""));
     }
   });
 
-  it("is a single still chapter: no slideshow, timers, pause control or live region", () => {
+  it("is driven by scroll alone: no slideshow, pause control or live region", () => {
     const { container } = render(<ChapterOneIntro />);
     expect(screen.queryByRole("group", { name: /slide/i })).toBeNull();
     expect(screen.queryByRole("button", { name: /slide|pause|play/i })).toBeNull();
     expect(container.querySelector("[aria-live]")).toBeNull();
-    expect(container.querySelectorAll("button")).toHaveLength(0);
+    // The only buttons are the six scene navigator buttons.
+    expect(container.querySelectorAll("button")).toHaveLength(hero.scenes.length);
   });
 
-  it("draws the decorative mosaic hand-off without exposing it to assistive tech", () => {
+  it("builds the decorative mosaic hand-off without exposing it to assistive tech", () => {
     const { container } = render(<ChapterOneIntro />);
-    const mosaic = container.querySelector("[data-mosaic-transition]")!;
-    expect(mosaic).toHaveAttribute("aria-hidden", "true");
-    expect(mosaic.querySelectorAll("span").length).toBeGreaterThan(8);
+    const mosaic = container.querySelector("[data-mosaic-tiles]");
+    if (mosaic) expect(mosaic).toHaveAttribute("aria-hidden", "true");
   });
 
   it("lists every credibility point", () => {

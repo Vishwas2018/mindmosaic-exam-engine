@@ -177,6 +177,119 @@ export function buildChapterSlots<Option extends string>(
 
 const chapter1Intro = buildChapterSlots<Chapter1Option>(chapter1Candidates, CHAPTER_1_ACTIVE_OPTION);
 
+/**
+ * Chapter 1 scene photography: six slots, one per story beat, in story order
+ * (Learn, Practise, Prepare, Understand, Progress, Explore). These are the Claude
+ * Design concept photographs, native 1672x941, used as INTERIM assets until the owner
+ * approves 2560x1440 production renders. They carry no baked-in fade: the left-hand
+ * readability scrim is CSS. Photographs never zoom or pan in the scroll story.
+ */
+export const HERO_SCENE_IDS = ["learn", "practise", "prepare", "understand", "progress", "explore"] as const;
+export type HeroSceneId = (typeof HERO_SCENE_IDS)[number];
+
+const chapter1SceneCandidates: Record<HeroSceneId, SlotCandidate> = {
+  learn: {
+    label: "Scene 01 - Learn",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-01-learn.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "Two students discovering an idea together at a sunlit table",
+    focalMobile: "72% 45%",
+    focalTablet: "72% 45%",
+    focalDesktop: "72% 45%",
+    motionPreset: "still",
+    treatment: "face-visible",
+    assetStatus: "interim",
+    notes:
+      "Native 1672x941 from the Claude Design Chapter 1 prototype; replace with a 2560x1440 render as a new revision. The only face-visible scene.",
+  },
+  practise: {
+    label: "Scene 02 - Practise",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-02-practise.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A student seen from behind, writing in a notebook at a desk",
+    focalMobile: "75% 50%",
+    focalTablet: "75% 50%",
+    focalDesktop: "75% 50%",
+    motionPreset: "still",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Native 1672x941 from the Claude Design Chapter 1 prototype; replace with a 2560x1440 render as a new revision.",
+  },
+  prepare: {
+    label: "Scene 03 - Prepare",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-03-prepare.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "An ordered study desk with books, a notebook and a simple timer. No people",
+    focalMobile: "75% 50%",
+    focalTablet: "75% 50%",
+    focalDesktop: "75% 50%",
+    motionPreset: "still",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Native 1672x941 from the Claude Design Chapter 1 prototype; replace with a 2560x1440 render as a new revision. No people.",
+  },
+  understand: {
+    label: "Scene 04 - Understand",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-04-understand.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "Close-up of a hand working through steps and diagrams in a notebook",
+    focalMobile: "80% 55%",
+    focalTablet: "80% 55%",
+    focalDesktop: "80% 55%",
+    motionPreset: "still",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Native 1672x941 from the Claude Design Chapter 1 prototype; replace with a 2560x1440 render as a new revision.",
+  },
+  progress: {
+    label: "Scene 05 - Progress",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-05-progress.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A parent and child seen from behind, reviewing work together",
+    focalMobile: "75% 45%",
+    focalTablet: "75% 45%",
+    focalDesktop: "75% 45%",
+    motionPreset: "still",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Native 1672x941 from the Claude Design Chapter 1 prototype; replace with a 2560x1440 render as a new revision. No readable statistics in frame.",
+  },
+  explore: {
+    label: "Scene 06 - Explore",
+    basePath: `${CHAPTER_1_DIR}/ch01-scene-06-explore.webp`,
+    revision: "v1",
+    decorative: true,
+    alt: "",
+    sceneDescription: "A study desk with a globe, an open atlas notebook and books",
+    focalMobile: "72% 50%",
+    focalTablet: "72% 50%",
+    focalDesktop: "72% 50%",
+    motionPreset: "still",
+    treatment: "hands-only",
+    assetStatus: "interim",
+    notes:
+      "Native 1672x941 from the Claude Design Chapter 1 prototype; replace with a 2560x1440 render as a new revision.",
+  },
+};
+
+const chapter1Scenes = Object.fromEntries(
+  HERO_SCENE_IDS.map((id) => [id, buildChapterSlots<"primary">({ primary: chapter1SceneCandidates[id] }, "primary").primary]),
+) as Record<HeroSceneId, LandingMediaSlot>;
+
 const CHAPTER_2_DIR = "/landing/media/chapter-02-programs";
 
 /**
@@ -310,6 +423,8 @@ export const landingMedia = {
       /** Stored candidates. Never loaded by the page; they exist so a swap is one word. */
       alternates: chapter1Intro.alternates,
     },
+    /** The six scroll-story scenes, by id; render them in `HERO_SCENE_IDS` order. */
+    scenes: chapter1Scenes,
   },
   chapter2: chapter2Slots,
 } as const;

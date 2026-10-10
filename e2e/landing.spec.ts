@@ -47,12 +47,15 @@ test.describe("home page", () => {
     await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
   });
 
-  test("Chapter 1 is one fixed photograph: no slideshow, timers or pause control", async ({ page }) => {
+  test("Chapter 1 is a six-scene scroll story: scene copy and photographs, no slideshow, timers or pause control", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     const chapter = page.locator('section[data-chapter="1"]');
-    await expect(chapter.locator("img")).toHaveCount(1);
-    await expect(chapter.locator("img")).toHaveAttribute("src", /ch01-hero-primary-v1\.webp/);
-    await expect(chapter.getByRole("button")).toHaveCount(0);
+    await expect(chapter.locator("[data-scene-copy]")).toHaveCount(6);
+    await expect(chapter.locator("[data-scene-layer]")).toHaveCount(6);
+    await expect(chapter.locator("[data-scene-layer] img").first()).toHaveAttribute("src", /ch01-scene-01-learn-v1/);
+    // The only buttons are the six scene navigator buttons.
+    await expect(chapter.getByRole("button")).toHaveCount(6);
     await expect(page.getByRole("group", { name: /slide/i })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /slideshow|pause|play/i })).toHaveCount(0);
   });
@@ -81,11 +84,12 @@ test.describe("home page", () => {
     });
     expect(tops.every(Number.isFinite)).toBe(true);
     // Chapter 2's layers share one pinned stage (so their order is scroll order, not page position);
-    // all of them sit after the Chapter 1 hero and before the product tour.
-    const heroBottom = await page.evaluate(() => {
+    // all of them sit after the Chapter 1 hero and before the product tour. Chapter 2 starts `seamSvh` early:
+    // its stage is revealed over Chapter 1's pinned Explore scene (the mirror-mosaic seam).
+    const heroBottom = await page.evaluate((seamSvh) => {
       const hero = document.querySelector('section[data-chapter="1"]')!.getBoundingClientRect();
-      return hero.bottom + window.scrollY;
-    });
+      return hero.bottom + window.scrollY - (seamSvh / 100) * window.innerHeight;
+    }, cinematicMotion.chapter1.seamSvh);
     for (const top of tops.slice(0, 3)) {
       expect(top).toBeGreaterThanOrEqual(heroBottom - 1);
       expect(top).toBeLessThan(tops[3]!);
@@ -110,23 +114,79 @@ test.describe("home page", () => {
     expect(await stagePosition()).toBe("static");
   });
 
-  test("Chapter 1 zooms the photograph with scroll, and with reduced motion it stays still", async ({ page }) => {
+  test("Chapter 1 changes scene copy and photograph with scroll alone, without ever zooming a photograph", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    const scale = () =>
+    const state = () =>
       page.evaluate(() => {
-        const wrapper = document.querySelector('section[data-chapter="1"] img')!.parentElement!;
-        return new DOMMatrix(getComputedStyle(wrapper).transform).a;
+        const copies = [...document.querySelectorAll<HTMLElement>('section[data-chapter="1"] [data-scene-copy]')];
+        const layer = document.querySelector<HTMLElement>('section[data-chapter="1"] [data-scene-layer]')!;
+        return {
+          currentCopy: copies.findIndex((el) => el.getAttribute("aria-hidden") !== "true"),
+          layerTransform: getComputedStyle(layer).transform,
+        };
       });
-
     await page.goto("/");
-    await expect.poll(scale).toBeGreaterThan(1.04);
-    await page.mouse.wheel(0, 650);
-    await expect.poll(scale).toBeLessThan(1.02);
+    await expect.poll(async () => (await state()).currentCopy).toBe(0);
+    // Scene 2 holds from t = 1, i.e. one sixth of the pinned travel (380svh of 900px).
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = "auto";
+      const s = document.querySelector('section[data-chapter="1"]')!;
+      window.scrollTo({ top: (1.2 / 6) * (s.getBoundingClientRect().height - innerHeight), behavior: "instant" });
+    });
+    await expect.poll(async () => (await state()).currentCopy).toBe(1);
+    // Photographs never scale or pan: no transform on any layer.
+    expect((await state()).layerTransform).toBe("none");
 
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
     await page.mouse.wheel(0, 650);
-    await expect.poll(scale).toBe(1);
+    // Reduced motion: nothing is choreographed, scene 1 stays and the rest are in the readable list.
+    await expect.poll(async () => (await state()).currentCopy).toBe(0);
+    await expect(page.locator('section[data-chapter="1"] article')).toHaveCount(5);
+  });
+
+  test("Chapter 1 hands off to Chapter 2 through the mirror-mosaic seam: pinned Explore, a growing tile mask, then the plain stage", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = "auto";
+    });
+    const goTo = (seamProgress: number) =>
+      page.evaluate((u) => {
+        const chapter1 = document.querySelector('section[data-chapter="1"]')!;
+        // The story ends 380svh in; the seam is the next 100svh.
+        window.scrollTo({ top: chapter1.getBoundingClientRect().top + window.scrollY + (3.8 + u) * innerHeight, behavior: "instant" });
+      }, seamProgress);
+    const state = () =>
+      page.evaluate(() => {
+        const stage1 = document.querySelector<HTMLElement>('section[data-chapter="1"] > div')!;
+        const stage2 = document.querySelector<HTMLElement>('section[data-chapter="2"] > div')!;
+        return {
+          stage1Top: Math.round(stage1.getBoundingClientRect().top),
+          stage2Top: Math.round(stage2.getBoundingClientRect().top),
+          clip: getComputedStyle(stage2).clipPath,
+          current: [...document.querySelectorAll("[data-scene-copy]")].findIndex((el) => el.getAttribute("aria-hidden") !== "true"),
+        };
+      });
+
+    // Mid-seam: Chapter 1 is still pinned on Explore, Chapter 2's stage is held at the top and masked by tiles.
+    await goTo(0.5);
+    await expect.poll(async () => (await state()).clip).toMatch(/^path\(/);
+    const mid = await state();
+    expect(mid.stage1Top).toBe(0);
+    expect(mid.stage2Top).toBe(0);
+    expect(mid.current).toBe(5);
+
+    // Seam done: the mask is gone and Chapter 2's own timeline has begun.
+    await goTo(1.05);
+    await expect.poll(async () => (await state()).clip).toBe("none");
+    expect((await state()).stage2Top).toBe(0);
+
+    // And back: reverse scrolling retraces the same mask.
+    await goTo(0.5);
+    await expect.poll(async () => (await state()).clip).toMatch(/^path\(/);
   });
 
   test("Chapter 2 replaces the old Programs section and shows real status for every programme", async ({ page }) => {

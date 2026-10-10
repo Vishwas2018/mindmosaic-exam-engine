@@ -64,29 +64,41 @@ describe("useMinWidth", () => {
 });
 
 describe("Chapter 1 motion and accessibility", () => {
-  it("under reduced motion applies no scroll-driven transforms, no pinning, and a static mosaic", () => {
+  it("under reduced motion is not pinned, mounts no tile field and shows only scene 1 on the stage", () => {
     mockViewport({ width: 1440, reduce: true });
     const { container } = render(<ChapterOneIntro />);
-    const photo = container.querySelector("img")!;
-    expect(photo.parentElement!.getAttribute("style") ?? "").not.toMatch(/scale|transform/);
-    expect(container.querySelector("[data-mosaic-transition]")).toHaveAttribute("data-mosaic-transition", "static");
+    expect(container.querySelector("[data-mosaic-tiles]")).toBeNull();
     expect(container.querySelector("section")!.className).toContain("motion-reduce:lg:h-auto");
     expect(container.querySelector("section > div")!.className).toContain("motion-reduce:lg:static");
+    // Only the first scene's photograph is ever mounted without the scroll choreography.
+    expect(container.querySelectorAll("[data-scene-layer] img")).toHaveLength(1);
+    // Scenes 2 to 6 are in the readable list instead.
+    expect(container.querySelectorAll("article")).toHaveLength(5);
   });
 
-  it("animates the image and mosaic when motion is allowed", () => {
+  it("mounts the tile field and the release layer when motion is allowed", () => {
     mockViewport({ width: 1440, reduce: false });
     const { container } = render(<ChapterOneIntro />);
-    expect(container.querySelector("[data-mosaic-transition]")).toHaveAttribute("data-mosaic-transition", "animated");
-    expect(container.querySelector("img")!.parentElement!.getAttribute("style") ?? "").toMatch(/scale|transform/);
+    expect(container.querySelector("[data-mosaic-tiles]")).not.toBeNull();
   });
 
-  it("renders the decorative photograph with an empty alt, hidden from assistive tech", () => {
+  it("renders every photograph decorative: empty alt, hidden from assistive tech", () => {
     mockViewport({ width: 1440 });
     const { container } = render(<ChapterOneIntro />);
-    const photo = container.querySelector("img")!;
-    expect(landingMedia.chapter1.intro.primary.decorative).toBe(true);
-    expect(photo).toHaveAttribute("alt", "");
-    expect(photo.closest("[aria-hidden='true']")).not.toBeNull();
+    for (const slot of Object.values(landingMedia.chapter1.scenes)) expect(slot.decorative).toBe(true);
+    for (const photo of container.querySelectorAll("[data-scene-layer] img")) {
+      expect(photo).toHaveAttribute("alt", "");
+      expect(photo.closest("[aria-hidden='true']")).not.toBeNull();
+    }
+  });
+
+  it("has one H1, six scene messages, and only the first announced to assistive tech", () => {
+    mockViewport({ width: 1440 });
+    const { container } = render(<ChapterOneIntro />);
+    expect(container.querySelectorAll("h1")).toHaveLength(1);
+    const copies = container.querySelectorAll("[data-scene-copy]");
+    expect(copies).toHaveLength(6);
+    expect(copies[0]).not.toHaveAttribute("aria-hidden", "true");
+    for (const copy of Array.from(copies).slice(1)) expect(copy).toHaveAttribute("aria-hidden", "true");
   });
 });
