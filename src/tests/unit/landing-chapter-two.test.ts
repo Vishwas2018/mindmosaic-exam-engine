@@ -170,7 +170,11 @@ describe("Chapter 2 media registry", () => {
       "components/ChapterTwoPrograms.tsx",
       "components/ProgramScene.tsx",
       "components/ProgramSceneProgress.tsx",
-      "components/chapter-two-visuals.tsx",
+      "components/program-previews/PreviewWindow.tsx",
+      "components/program-previews/NaplanPreview.tsx",
+      "components/program-previews/AmcPreview.tsx",
+      "components/program-previews/SingaporePreview.tsx",
+      "components/program-previews/SelectivePreview.tsx",
       "chapter2-scenes.ts",
     ]) {
       const source = readFileSync(join(process.cwd(), "src/features/landing", file), "utf8");

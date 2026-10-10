@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { motionValue } from "framer-motion";
 import { describe, expect, it } from "vitest";
 
@@ -72,74 +72,69 @@ describe("Chapter 2 programmes", () => {
     expect(screen.getByText(/Scholarship-style preparation is a planned direction, not open/)).toBeInTheDocument();
   });
 
-  it("uses a decorative empty-alt photograph on all six programme scenes", () => {
+  it("shows a stationary product window on all six scenes and no photographs", () => {
     const { container } = render(<ChapterTwoPrograms />);
-    // The product cards carry the real MindMosaic mark as an <img>; only the photographs are under test here.
-    const images = [...container.querySelectorAll("img")].filter((image) =>
-      decodeURIComponent(image.getAttribute("src") ?? "").includes("/landing/media/chapter-02-programs/"),
+    const photos = [...container.querySelectorAll("img")].filter((image) =>
+      decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
     );
-    expect(images).toHaveLength(6);
-    for (const image of images) expect(image.getAttribute("alt")).toBe("");
+    expect(photos).toHaveLength(0);
     for (const id of ["naplan", "icas", "curriculum", "amc", "singapore", "selective"]) {
-      const sources = [...container.querySelectorAll(`[data-scene="${id}"] img`)].map((image) =>
-        decodeURIComponent(image.getAttribute("src") ?? ""),
-      );
-      expect(sources.some((src) => src.includes("chapter-02-programs")), id).toBe(true);
+      const windows = container.querySelectorAll(`[data-scene="${id}"] [data-preview-window]`);
+      expect(windows, id).toHaveLength(1);
+      const frame = windows[0] as HTMLElement;
+      expect(frame.getAttribute("aria-hidden"), id).toBe("true");
+      expect(frame.hasAttribute("inert"), id).toBe(true);
+      // The official lockup mark is on every screen.
+      expect(frame.querySelector('img[src*="mark"]'), id).not.toBeNull();
     }
   });
 
-  it("mounts a scene photograph only when enabled and keeps it mounted afterwards", () => {
-    const naplan = chapter2Scenes[0]!;
-    const photos = (container: HTMLElement) =>
-      [...container.querySelectorAll("img")].filter((image) =>
-        decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
-      );
-    const { container, rerender } = render(
-      <ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled={false} />,
-    );
-    expect(photos(container)).toHaveLength(0);
-    rerender(<ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled />);
-    expect(photos(container)).toHaveLength(1);
-    expect(photos(container)[0]!.getAttribute("loading")).toBe("lazy");
-    rerender(<ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled={false} />);
-    expect(photos(container)).toHaveLength(1);
+  it("draws live programmes from the real app and labels the three in-development ones as planned concepts", () => {
+    const { container } = render(<ChapterTwoPrograms />);
+    const preview = (id: string) => container.querySelector(`[data-scene="${id}"] [data-preview-window]`)!.textContent ?? "";
+    // Real exam runner, real ICAS hub, real lesson.
+    expect(preview("naplan")).toContain("Question 6 of 20");
+    expect(preview("naplan")).toContain("Mia has 24 stickers");
+    expect(preview("icas")).toContain("ICAS practice");
+    expect(preview("curriculum")).toContain("Learning Intention");
+    for (const id of ["naplan", "icas", "curriculum"]) {
+      expect(preview(id), id).not.toMatch(/Planned|Illustrative concept/);
+    }
+    for (const id of ["amc", "singapore", "selective"]) {
+      expect(preview(id), id).toMatch(/Planned · .* · in development/);
+      expect(preview(id), id).toContain("Illustrative concept screen. Not available yet.");
+    }
   });
 
-  it("loads a pinned scene's photograph as soon as it is mounted, but keeps natural flow lazy", () => {
-    const naplan = chapter2Scenes[0]!;
-    const progress = motionValue(0);
-    const { container } = render(<ProgramScene scene={naplan} layerIndex={1} progress={progress} imageEnabled />);
-    const photo = [...container.querySelectorAll("img")].find((image) =>
-      decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
-    );
-    expect(photo?.getAttribute("loading")).toBe("eager");
+  it("paints a branded skeleton before the window is measured, with the screen already in the DOM", () => {
+    const { container } = render(<ChapterTwoPrograms />);
+    for (const id of ["naplan", "icas", "curriculum", "amc", "singapore", "selective"]) {
+      const frame = container.querySelector(`[data-scene="${id}"] [data-preview-window]`)!;
+      // jsdom has no layout, so nothing is measured: the skeleton (with the official mark) is what a slow or failed JS visit sees.
+      const skeleton = frame.querySelector("[data-preview-skeleton]");
+      expect(skeleton, id).not.toBeNull();
+      expect(skeleton!.querySelector('img[src*="mark"]'), id).not.toBeNull();
+      expect(frame.querySelector("[data-preview-canvas]")!.textContent!.length, id).toBeGreaterThan(80);
+    }
   });
 
-  it("keeps a pinned scene's photograph panel hidden until the picture has loaded, then eases it in", async () => {
+  it("keeps the window still: scene progress changes opacity only, never a transform", () => {
     const naplan = chapter2Scenes[0]!;
-    const { container } = render(
-      <ProgramScene scene={naplan} layerIndex={1} progress={motionValue(0.15)} imageEnabled />,
-    );
-    const panel = container.querySelector<HTMLElement>('[class*="aspect-[4/3]"]')!;
-    const photo = [...container.querySelectorAll("img")].find((image) =>
-      decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
-    )!;
-    expect(Number(getComputedStyle(panel).opacity)).toBe(0);
-    fireEvent.load(photo);
-    await waitFor(() => expect(Number(getComputedStyle(panel).opacity)).toBe(1));
+    const progress = motionValue(0.15);
+    const { container } = render(<ProgramScene scene={naplan} layerIndex={1} progress={progress} />);
+    const wrapper = container.querySelector<HTMLElement>("[data-preview]")!;
+    for (const value of [0.04, 0.1, 0.15, 0.2, 0.3]) {
+      progress.set(value);
+      expect(wrapper.style.transform, String(value)).toBe("");
+      expect(wrapper.style.scale, String(value)).toBe("");
+    }
   });
 
-  it("gives meaningful product graphics accessible names and marks no answer", () => {
-    render(<ChapterTwoPrograms />);
-    expect(screen.getByRole("article", { name: "Sample NAPLAN-style practice paper" })).toBeInTheDocument();
-    expect(screen.getByRole("article", { name: "Sample curriculum lesson" })).toBeInTheDocument();
-    const model = screen.getByRole("img", { name: /^Bar model\./ });
-    expect(model.getAttribute("aria-label")).toBe(
-      "Bar model. Mia has 3 units, Ben has 5 units. Together that is 8 units, which is 40 stickers.",
-    );
-    expect(screen.getByRole("article", { name: "Sample ICAS-style extension question" })).not.toHaveTextContent(
-      /selected/i,
-    );
+  it("places the preview before the explanation from lg up", () => {
+    const { container } = render(<ProgramScene scene={chapter2Scenes[0]!} layerIndex={1} progress={null} />);
+    expect(container.querySelector("[data-preview]")!.className).toMatch(/lg:order-1/);
+    expect(container.querySelector("[data-preview]")!.className).toMatch(/lg:col-span-7/);
+    expect(container.querySelector("h3")!.closest("div[class*='lg:order-2']")).not.toBeNull();
   });
 
   it("links an Available scene to its programme and ends on the Chapter 3 hand-off", () => {
@@ -162,7 +157,9 @@ describe("Chapter 2 programmes", () => {
   it("has no pinned progress navigator in flow mode, and no timers or live regions", () => {
     const { container } = render(<ChapterTwoPrograms />);
     expect(screen.queryByRole("navigation", { name: chapterTwo.progressLabel })).toBeNull();
-    expect(container.querySelector("[aria-live]")).toBeNull();
+    // The decorative product windows reuse real app components (the lesson stepper has a live region); they are inert and hidden.
+    const live = [...container.querySelectorAll("[aria-live]")].filter((node) => !node.closest("[data-preview-window]"));
+    expect(live).toHaveLength(0);
     expect(screen.queryByRole("button", { name: /play|pause|slideshow/i })).toBeNull();
   });
 });
