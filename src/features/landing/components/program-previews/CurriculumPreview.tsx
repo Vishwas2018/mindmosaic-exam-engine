@@ -6,6 +6,7 @@ import { LEVEL_3_NUMBER_LESSONS } from "@/features/curriculum/lessons/content/le
 import type { ConceptSection as ConceptSectionData, WorkedExampleSection } from "@/features/curriculum/lessons/schema";
 
 import { StudentHeader } from "./chrome";
+import { useCompact } from "./compact";
 
 /**
  * The published "Unit Fractions" lesson as /student/learn/lessons/VC2M3N03 shows it: the lesson header, then the
@@ -22,10 +23,11 @@ const PREVIEW_CONCEPT: ConceptSectionData = {
 };
 
 export function CurriculumPreview() {
+  const compact = useCompact();
   return (
     <div className="flex h-full flex-col bg-page">
-      <StudentHeader active="learn" />
-      <div className="grid min-h-0 flex-1 grid-cols-2 items-start gap-4 overflow-hidden px-6 py-5">
+      <StudentHeader active="learn" example />
+      <div className={`grid min-h-0 flex-1 items-start gap-4 overflow-hidden px-6 py-5 ${compact ? "grid-cols-1" : "grid-cols-2"}`}>
         <div className="flex min-w-0 flex-col gap-4">
           <header className="overflow-hidden rounded-2xl border border-parchment-border bg-white p-5 shadow-sm">
             <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase text-plum-muted">
@@ -47,7 +49,7 @@ export function CurriculumPreview() {
                 <span className="uppercase tracking-wider">Learning Intention</span>
               </div>
               <p className="m-0 mt-1.5 text-[14px] font-semibold leading-snug text-plum-dark">{LESSON.learningIntention}</p>
-              <div className="mt-3 border-t border-parchment-border/60 pt-3">
+              <div className={`mt-3 border-t border-parchment-border/60 pt-3 ${compact ? "hidden" : ""}`}>
                 <p className="m-0 text-[11px] font-bold uppercase tracking-wider text-plum-muted">Success Criteria:</p>
                 <ul className="m-0 mt-1.5 grid list-none gap-1.5 p-0 text-[12.5px] leading-snug text-plum-muted">
                   {LESSON.successCriteria.map((criterion) => (
@@ -60,10 +62,10 @@ export function CurriculumPreview() {
               </div>
             </div>
           </header>
-          <WorkedExampleStepper section={EXAMPLE} />
+          {!compact && <WorkedExampleStepper section={EXAMPLE} />}
         </div>
         <div className="min-w-0">
-          <ConceptSection section={PREVIEW_CONCEPT} />
+          <ConceptSection section={compact ? { ...PREVIEW_CONCEPT, keyTerms: undefined } : PREVIEW_CONCEPT} />
         </div>
       </div>
     </div>

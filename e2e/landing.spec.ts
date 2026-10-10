@@ -427,7 +427,7 @@ test.describe("Chapter 2 programmes", () => {
       await expect(frame).toBeVisible();
       await settled(page);
       const { frameBox, canvasBox } = await frame.evaluate((el) => {
-        const canvas = el.firstElementChild as HTMLElement;
+        const canvas = el.querySelector("[data-preview-canvas]") as HTMLElement;
         const f = el.getBoundingClientRect();
         const c = canvas.getBoundingClientRect();
         return {

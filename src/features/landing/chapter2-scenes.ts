@@ -18,14 +18,6 @@
 import { programmes, routes, type Programme } from "./content";
 import type { Chapter2MediaKey } from "./media";
 
-export type SceneVisualType =
-  | "exam-paper"
-  | "extension-question"
-  | "lesson"
-  | "problem-card"
-  | "bar-model"
-  | "skill-categories";
-
 export type SceneStatusTone = "available" | "limited" | "in-development";
 
 export interface ProgramSceneData {
@@ -51,7 +43,6 @@ export interface ProgramSceneData {
   /** Optional caveat shown under the facts. */
   note?: string;
   cta: { label: string; href: string };
-  visualType: SceneVisualType;
   /** Registry key for the photograph. Absent for DOM/SVG-only scenes. */
   mediaSlot?: Chapter2MediaKey;
 }
@@ -104,7 +95,6 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
       "Short sets or a full-length simulation",
     ],
     cta: { label: "Explore NAPLAN-style practice", href: `${routes.programs}/naplan-style` },
-    visualType: "exam-paper",
     mediaSlot: "naplan",
   },
   {
@@ -124,7 +114,6 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
       "Short exam-style sets",
     ],
     cta: { label: "Explore ICAS-style practice", href: `${routes.programs}/icas-style` },
-    visualType: "extension-question",
     mediaSlot: "icas",
   },
   {
@@ -145,7 +134,6 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
     ],
     note: "Published Maths and English lessons are available to signed-in students in Years 3 and 5. Broader curriculum coverage and exact mapping are still being developed.",
     cta: { label: "Explore learning", href: routes.learn },
-    visualType: "lesson",
     mediaSlot: "curriculum",
   },
   {
@@ -161,7 +149,6 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
     facts: ["Multi-step reasoning", "Pattern spotting", "Problems designed to be worked, not recalled"],
     note: "Planned scope. No year level is open yet.",
     cta: { label: "See all programs", href: routes.programs },
-    visualType: "problem-card",
     mediaSlot: "amc",
   },
   {
@@ -177,7 +164,6 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
     facts: ["Bar models and model drawing", "Number relationships", "Fractions and ratio", "Taught step by step, then practised"],
     note: "Planned scope. No year level is open yet.",
     cta: { label: "Explore learning", href: routes.learn },
-    visualType: "bar-model",
     mediaSlot: "singapore",
   },
   {
@@ -193,51 +179,6 @@ export const chapter2Scenes: readonly ProgramSceneData[] = [
     facts: ["Mathematical reasoning", "Reading", "Thinking skills", "Writing"],
     note: "Formats and eligibility vary by state and programme. Scholarship-style preparation is a planned direction, not open.",
     cta: { label: "See all programs", href: routes.programs },
-    visualType: "skill-categories",
     mediaSlot: "selective",
   },
 ] as const;
-
-/**
- * Sample content for the scene visuals. All original and illustrative: none
- * of it is a real exam question, no option is marked as the answer, and the
- * NAPLAN-style and lesson samples reuse the `learningDemo` copy so the page
- * never shows two different "real product" examples.
- */
-export const chapter2Demos = {
-  extension: {
-    label: "Sample ICAS-style extension question",
-    meta: "ICAS-style · Mathematics · Year 5",
-    tag: "Extension question",
-    question:
-      "A number machine adds 3 and then doubles. When 4 goes in, 14 comes out. What number goes in to make 22 come out?",
-    options: ["6", "8", "9", "11"],
-    hintLabel: "Thinking prompt",
-    hint: "Work backwards: undo the last step first.",
-  },
-  problem: {
-    label: "Sample AMC-style pattern problem",
-    meta: "AMC-style · Pattern problem",
-    question: "Each figure adds one more row of dots than the one before. How many dots will Figure 6 have?",
-    options: ["15", "18", "21", "24", "28"],
-    figures: [1, 2, 3, 4],
-  },
-  barModel: {
-    label: "Sample Singapore Maths bar model",
-    meta: "Singapore Maths · Ratio",
-    question: "Mia and Ben share 40 stickers in the ratio 3 : 5. How many stickers does Ben get?",
-    rows: [
-      { name: "Mia", units: 3 },
-      { name: "Ben", units: 5 },
-    ],
-    totalUnits: 8,
-    total: 40,
-    steps: ["Draw one bar for each person.", "Together they make 8 equal units.", "8 units = 40, so find 1 unit."],
-  },
-  skills: {
-    label: "Sample selective-style practice paper",
-    meta: "Selective-style · Practice paper",
-    tag: "Timed sections",
-    note: "Planned structure. Formats vary by state.",
-  },
-} as const;

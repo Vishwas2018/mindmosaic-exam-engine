@@ -1,6 +1,7 @@
 import { ArrowRight, BookOpen, Calculator, FlaskConical, Laptop2, SpellCheck } from "lucide-react";
 
 import { StudentHeader } from "./chrome";
+import { useCompact } from "./compact";
 
 /**
  * The ICAS-style practice hub as it stands in /practice/icas. The names and blurbs are the live catalogue's
@@ -20,9 +21,10 @@ const ALSO = [
 ] as const;
 
 export function IcasPreview() {
+  const compact = useCompact();
   return (
     <div className="flex h-full flex-col bg-page">
-      <StudentHeader active="practice" />
+      <StudentHeader active="practice" example />
       <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 py-5">
         <div className="relative shrink-0 overflow-hidden rounded-3xl border-2 border-teal-border bg-white p-6 shadow-warm-card">
           <div
@@ -49,27 +51,34 @@ export function IcasPreview() {
           </div>
         </div>
 
-        <div className="grid shrink-0 grid-cols-3 gap-4">
+        <div className={`grid shrink-0 gap-4 ${compact ? "grid-cols-1 gap-3" : "grid-cols-3"}`}>
           {ICAS_PREVIEW_CORE.map(({ icon: Icon, name, blurb }) => (
             <div
               key={name}
-              className="flex flex-col justify-between rounded-2xl border border-parchment-border bg-white p-5 shadow-warm-sm"
+              className={`flex justify-between rounded-2xl border border-parchment-border bg-white shadow-warm-sm ${
+                compact ? "items-center gap-3 p-4" : "flex-col p-5"
+              }`}
             >
-              <div>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-teal-light text-teal-accent">
+              <div className={compact ? "flex min-w-0 items-center gap-3" : undefined}>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-light text-teal-accent ${compact ? "" : "mb-3"}`}>
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p className="m-0 font-jakarta text-[15px] font-bold leading-snug text-plum-dark">{name}</p>
-                <p className="m-0 mt-1.5 font-vietnam text-[12.5px] leading-relaxed text-plum-muted">{blurb}</p>
+                {!compact && <p className="m-0 mt-1.5 font-vietnam text-[12.5px] leading-relaxed text-plum-muted">{blurb}</p>}
               </div>
-              <span className="mt-4 flex h-10 items-center justify-center gap-2 rounded-xl bg-teal-accent font-jakarta text-[13px] font-bold text-white">
-                Configure session
+              <span
+                className={`flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-teal-accent font-jakarta text-[13px] font-bold text-white ${
+                  compact ? "px-3" : "mt-4"
+                }`}
+              >
+                {compact ? "Start" : "Configure session"}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </span>
             </div>
           ))}
         </div>
 
+        {!compact && (
         <div className="min-h-0 flex-1">
           <p className="m-0 mb-2.5 font-jakarta text-[15px] font-bold text-plum-dark">Also part of ICAS</p>
           <div className="grid grid-cols-3 gap-4">
@@ -86,6 +95,7 @@ export function IcasPreview() {
             ))}
           </div>
         </div>
+        )}
       </div>
     </div>
   );

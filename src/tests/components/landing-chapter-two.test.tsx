@@ -106,6 +106,18 @@ describe("Chapter 2 programmes", () => {
     }
   });
 
+  it("paints a branded skeleton before the window is measured, with the screen already in the DOM", () => {
+    const { container } = render(<ChapterTwoPrograms />);
+    for (const id of ["naplan", "icas", "curriculum", "amc", "singapore", "selective"]) {
+      const frame = container.querySelector(`[data-scene="${id}"] [data-preview-window]`)!;
+      // jsdom has no layout, so nothing is measured: the skeleton (with the official mark) is what a slow or failed JS visit sees.
+      const skeleton = frame.querySelector("[data-preview-skeleton]");
+      expect(skeleton, id).not.toBeNull();
+      expect(skeleton!.querySelector('img[src*="mark"]'), id).not.toBeNull();
+      expect(frame.querySelector("[data-preview-canvas]")!.textContent!.length, id).toBeGreaterThan(80);
+    }
+  });
+
   it("keeps the window still: scene progress changes opacity only, never a transform", () => {
     const naplan = chapter2Scenes[0]!;
     const progress = motionValue(0.15);

@@ -6,6 +6,8 @@ import { MultipleChoiceRenderer } from "@/features/exam-engine/question-renderer
 import type { CandidateQuestion } from "@/features/exam-engine/types";
 
 import { learningDemo } from "../../content";
+import { useCompact } from "./compact";
+import { ExampleCue } from "./chrome";
 
 const demo = learningDemo.prepareDemo;
 
@@ -27,6 +29,7 @@ const SELECTED = String.fromCharCode(97 + demo.selectedIndex);
 
 /** NAPLAN-style practice as it runs in /exam: header with timer, navigator, the real multiple-choice renderer. */
 export function NaplanPreview() {
+  const compact = useCompact();
   const flagged = new Set<number>(demo.flaggedQuestions);
   const answered = demo.currentQuestion - 1;
   return (
@@ -40,14 +43,18 @@ export function NaplanPreview() {
         </div>
         <div className="flex min-h-[60px] items-center justify-between gap-3 px-6 py-2">
           <MindMosaicLogo size="md" trademark="none" />
-          <div className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-page px-3.5 text-sm font-extrabold tabular-nums text-ink">
-            <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
-            34:12 remaining
+          <div className="flex items-center gap-4">
+            <ExampleCue />
+            <div className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-page px-3.5 text-sm font-extrabold tabular-nums text-ink">
+              <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
+              {compact ? "34:12" : "34:12 remaining"}
+            </div>
           </div>
         </div>
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 py-5">
+        {!compact && (
         <section className="flex shrink-0 items-end justify-between gap-6">
           <div>
             <Badge variant="purple">Full-length practice paper</Badge>
@@ -59,8 +66,10 @@ export function NaplanPreview() {
             <ProgressBar value={answered} max={demo.questionCount} label="Questions answered" showValue />
           </div>
         </section>
+        )}
 
-        <div className="grid min-h-0 flex-1 grid-cols-[200px_minmax(0,1fr)] items-stretch gap-4">
+        <div className={`grid min-h-0 flex-1 items-stretch gap-4 ${compact ? "grid-cols-1" : "grid-cols-[200px_minmax(0,1fr)]"}`}>
+          {!compact && (
           <Card className="min-h-0 overflow-hidden p-4" variant="default">
             <div className="flex items-center justify-between gap-3">
               <p className="m-0 flex items-center gap-2 font-jakarta text-[13px] font-extrabold text-plum-dark">
@@ -110,6 +119,7 @@ export function NaplanPreview() {
               ))}
             </ul>
           </Card>
+          )}
 
           <Card className="flex min-h-0 flex-col overflow-hidden" variant="default">
             <div className="flex shrink-0 items-center justify-between gap-3 border-b border-primary/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-6 py-4">
@@ -120,17 +130,19 @@ export function NaplanPreview() {
                 <p className="m-0 mt-1 text-[13px] font-semibold text-plum-muted">Grade 3 · Numeracy · Division · Easy</p>
               </div>
               <div className="flex items-center gap-2">
-                <Button variant="secondary" size="sm" tabIndex={-1}>
-                  <PencilLine aria-hidden="true" className="h-4 w-4" />
-                  Rough work
-                </Button>
+                {!compact && (
+                  <Button variant="secondary" size="sm" tabIndex={-1}>
+                    <PencilLine aria-hidden="true" className="h-4 w-4" />
+                    Rough work
+                  </Button>
+                )}
                 <Button variant="secondary" size="sm" tabIndex={-1}>
                   <Flag aria-hidden="true" className="h-4 w-4" />
                   Flag for review
                 </Button>
               </div>
             </div>
-            <div className="min-h-0 flex-1 overflow-hidden px-6 py-5">
+            <div className={`min-h-0 flex-1 overflow-hidden px-6 ${compact ? "py-3" : "py-5"}`}>
               <MultipleChoiceRenderer question={QUESTION as never} answer={SELECTED} />
             </div>
             <div className="flex shrink-0 items-center justify-between gap-3 border-t border-primary/8 bg-canvas/65 px-6 py-3.5">

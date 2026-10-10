@@ -1,6 +1,7 @@
 import { Lightbulb, Search, Undo2 } from "lucide-react";
 
 import { ConceptCaption, PlannedBadge, StudentHeader } from "./chrome";
+import { useCompact } from "./compact";
 
 const OPTIONS = ["47", "71", "95", "96", "191"] as const;
 const HINTS = [
@@ -11,16 +12,17 @@ const HINTS = [
 
 /** Illustrative concept: a competition-style, non-routine problem. Original wording; nothing here is a past paper. */
 export function AmcPreview() {
+  const compact = useCompact();
   return (
     <div className="flex h-full flex-col bg-page">
       <StudentHeader active="practice" />
       <div className="flex shrink-0 items-center justify-between gap-3 px-6 pt-4">
         <p className="m-0 font-vietnam text-[12px] font-semibold uppercase tracking-wider text-plum-muted">
-          Practice / AMC (Australian Mathematics Competition)
+          {compact ? "Practice / AMC" : "Practice / AMC (Australian Mathematics Competition)"}
         </p>
         <PlannedBadge programme="AMC" />
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_250px] gap-4 px-6 py-4">
+      <div className={`grid min-h-0 flex-1 gap-4 px-6 py-4 ${compact ? "grid-cols-1" : "grid-cols-[minmax(0,1fr)_250px]"}`}>
         <section className="flex min-h-0 flex-col overflow-hidden rounded-3xl border border-royal/10 bg-white shadow-[0_18px_50px_rgba(49,32,86,0.09)]">
           <div className="flex shrink-0 items-center justify-between border-b border-primary/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-6 py-4">
             <div>
@@ -33,12 +35,12 @@ export function AmcPreview() {
             <p className="m-0 font-jakarta text-[17px] font-bold leading-snug text-plum-dark">
               Each number in this pattern is double the one before it, plus 1. What is the sixth number?
             </p>
-            <div className="flex items-end gap-3 rounded-2xl border border-parchment-border bg-surface-container-low px-5 py-4">
+            <div className="flex items-end gap-2 overflow-hidden rounded-2xl border border-parchment-border bg-surface-container-low px-3 py-4">
               {[2, 5, 11, 23].map((value, index) => (
                 <div key={value} className="flex flex-col items-center gap-1.5">
                   <div
                     className="grid place-items-center rounded-lg bg-primary text-[15px] font-extrabold tabular-nums text-white"
-                    style={{ width: 48 + index * 8, height: 36 + index * 10, opacity: 0.55 + index * 0.15 }}
+                    style={{ width: (compact ? 34 : 48) + index * (compact ? 4 : 8), height: 36 + index * 10, opacity: 0.55 + index * 0.15 }}
                   >
                     {value}
                   </div>
@@ -47,14 +49,14 @@ export function AmcPreview() {
               ))}
               {[5, 6].map((term) => (
                 <div key={term} className="flex flex-col items-center gap-1.5">
-                  <div className="grid h-[84px] w-[88px] place-items-center rounded-lg border-2 border-dashed border-primary/45 text-[18px] font-extrabold text-primary">
+                  <div className={`grid h-[84px] place-items-center ${compact ? "w-[40px]" : "w-[88px]"} rounded-lg border-2 border-dashed border-primary/45 text-[18px] font-extrabold text-primary`}>
                     ?
                   </div>
                   <span className="text-[10.5px] font-bold text-plum-muted">Term {term}</span>
                 </div>
               ))}
             </div>
-            <div className="grid grid-cols-5 gap-2.5">
+            <div className={`grid gap-2.5 ${compact ? "grid-cols-3" : "grid-cols-5"}`}>
               {OPTIONS.map((option, index) => (
                 <div
                   key={option}
@@ -77,6 +79,7 @@ export function AmcPreview() {
             </div>
           </div>
         </section>
+        {!compact && (
         <aside className="flex min-h-0 flex-col gap-3 overflow-hidden">
           <p className="m-0 font-jakarta text-[13px] font-extrabold uppercase tracking-wider text-plum-muted">Ways to start</p>
           {HINTS.map(({ icon: Icon, title, body }) => (
@@ -94,6 +97,7 @@ export function AmcPreview() {
             Worked solutions with every problem, once this track launches.
           </div>
         </aside>
+        )}
       </div>
       <ConceptCaption>AMC · in development</ConceptCaption>
     </div>

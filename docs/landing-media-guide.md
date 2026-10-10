@@ -121,7 +121,7 @@ Timing numbers (when the copy fades, when the mosaic assembles, the desktop pin 
 
 **What it is.** One pinned screen that tells six programme scenes as you scroll normally (about 6.8 screens of scrolling on desktop). Nothing auto-plays and scrolling is never taken over. Phones and tablets, and anyone who asks for reduced motion, get the same six scenes stacked as ordinary page content.
 
-**Components.** `ChapterTwoPrograms.tsx` (the chapter), `ProgramScene.tsx` (one scene), `ProgramSceneProgress.tsx` (the 01-06 progress bar), `program-previews/` (the stationary product windows; the older `chapter-two-visuals.tsx` cards are no longer rendered). Scene copy and facts: `src/features/landing/chapter2-scenes.ts`. Timing: `chapter2` block in `src/features/landing/cinematic/config.ts`.
+**Components.** `ChapterTwoPrograms.tsx` (the chapter), `ProgramScene.tsx` (one scene), `ProgramSceneProgress.tsx` (the 01-06 progress bar), `program-previews/` (the stationary product windows). Scene copy and facts: `src/features/landing/chapter2-scenes.ts`. Timing: `chapter2` block in `src/features/landing/cinematic/config.ts`.
 
 **Honest status.** A scene's "Available" or "In development" is read from the programme list in `content.ts` (`programmes`), the same data the Programs page uses. To change a status, change it there; the scene follows. Only NAPLAN-style and ICAS-style (Years 3 and 5) are Available. Scholarship preparation is mentioned only as a planned direction.
 

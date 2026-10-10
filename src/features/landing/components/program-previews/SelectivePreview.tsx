@@ -1,6 +1,7 @@
 import { Circle, Square, Triangle } from "lucide-react";
 
 import { ConceptCaption, PlannedBadge, StudentHeader } from "./chrome";
+import { useCompact } from "./compact";
 
 const SECTIONS = ["Reading comprehension", "Quantitative reasoning", "Abstract reasoning", "Writing"] as const;
 const ACTIVE = 2;
@@ -18,14 +19,14 @@ const ICON = { circle: Circle, square: Square, triangle: Triangle } as const;
 function GridCell({ cell }: { cell: Cell }) {
   if (!cell) {
     return (
-      <div className="grid h-[78px] place-items-center rounded-xl border-2 border-dashed border-primary/45 text-[22px] font-extrabold text-primary">
+      <div className="grid h-[64px] place-items-center rounded-xl border-2 border-dashed border-primary/45 text-[22px] font-extrabold text-primary">
         ?
       </div>
     );
   }
   const Icon = ICON[cell.shape];
   return (
-    <div className="flex h-[78px] items-center justify-center gap-1.5 rounded-xl border border-parchment-border bg-white">
+    <div className="flex h-[64px] items-center justify-center gap-1.5 rounded-xl border border-parchment-border bg-white">
       {Array.from({ length: cell.count }, (_, index) => (
         <Icon key={index} className="h-6 w-6 text-primary" strokeWidth={2.4} aria-hidden="true" />
       ))}
@@ -38,6 +39,7 @@ function GridCell({ cell }: { cell: Cell }) {
  * shown, because none exist; the sections are common shapes of selective-entry tests, and which apply varies.
  */
 export function SelectivePreview() {
+  const compact = useCompact();
   return (
     <div className="flex h-full flex-col bg-page">
       <StudentHeader active="practice" />
@@ -47,7 +49,8 @@ export function SelectivePreview() {
         </p>
         <PlannedBadge programme="Selective" />
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[210px_minmax(0,1fr)] gap-4 px-6 py-4">
+      <div className={`grid min-h-0 flex-1 gap-4 px-6 py-4 ${compact ? "grid-cols-1" : "grid-cols-[210px_minmax(0,1fr)]"}`}>
+        {!compact && (
         <aside className="flex min-h-0 flex-col gap-2.5 overflow-hidden">
           <p className="m-0 font-jakarta text-[13px] font-extrabold uppercase tracking-wider text-plum-muted">Test sections</p>
           {SECTIONS.map((section, index) => (
@@ -71,20 +74,21 @@ export function SelectivePreview() {
             Which sections apply varies from test to test.
           </p>
         </aside>
+        )}
         <section className="flex min-h-0 flex-col overflow-hidden rounded-3xl border border-royal/10 bg-white shadow-[0_18px_50px_rgba(49,32,86,0.09)]">
           <div className="flex shrink-0 items-center justify-between border-b border-primary/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-6 py-4">
             <div>
               <p className="m-0 text-[12.5px] font-extrabold uppercase tracking-[0.1em] text-primary">Section 3 · Abstract reasoning</p>
-              <p className="m-0 mt-1 text-[12.5px] font-semibold text-plum-muted">Practice sitting · timed by section</p>
+              <p className="m-0 mt-1 text-[12.5px] font-semibold text-plum-muted">{compact ? "Section 3 of 4 · timed by section" : "Practice sitting · timed by section"}</p>
             </div>
-            <span className="rounded-full bg-primary-tint px-3 py-1 text-[12px] font-bold text-primary">Review before submit</span>
+            {!compact && <span className="rounded-full bg-primary-tint px-3 py-1 text-[12px] font-bold text-primary">Review before submit</span>}
           </div>
           <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 py-5">
             <p className="m-0 font-jakarta text-[16px] font-bold leading-snug text-plum-dark">Which choice completes the pattern?</p>
             <div className="grid grid-cols-3 gap-2.5">
               {GRID.flatMap((row, r) => row.map((cell, c) => <GridCell key={`${r}${c}`} cell={cell} />))}
             </div>
-            <div className="grid grid-cols-4 gap-2.5">
+            <div className={`grid gap-2.5 ${compact ? "grid-cols-2" : "grid-cols-4"}`}>
               {[1, 2, 3, 4].map((count, index) => (
                 <div key={count} className="flex min-h-12 items-center gap-2.5 rounded-xl border border-royal/15 bg-white px-3 py-2">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-page text-[13px] font-bold text-muted">

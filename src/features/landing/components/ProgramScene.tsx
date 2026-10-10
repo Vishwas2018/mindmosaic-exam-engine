@@ -172,7 +172,7 @@ export function ProgramScene({
         >
           <ProgramPreview
             sceneId={scene.id}
-            className="aspect-[1.15] lg:max-h-[min(76svh,720px)] lg:w-full"
+            className="aspect-[3/4.5] sm:aspect-[1.15] lg:max-h-[min(76svh,720px)] lg:w-full"
           />
         </motion.div>
       </div>
