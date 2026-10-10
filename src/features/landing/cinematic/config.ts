@@ -59,20 +59,63 @@ export const cinematicMotion = {
   layerBlend: { foregroundWindow: 0.6, fadeOutEnd: 0.7, fadeInStart: 0.3, backdropInEnd: 0.7 },
 
   chapter1: {
-    /** Section height from `pinnedMinWidth` up: the pinned stage is 100svh, the rest is travel. */
-    desktopScrollHeightSvh: 200,
-    imageSettle: { start: 0, end: 0.7 } satisfies Range,
-    imageHandoff: { start: 0.85, end: 1 } satisfies Range,
-    copyExit: { start: 0.5, end: 0.78 } satisfies Range,
-    /** How far the copy lifts (px, upward) by the end of its exit. */
-    copyLiftPx: 28,
+    /**
+     * Section height from `pinnedMinWidth` up: a 100svh stage plus 380svh of travel,
+     * six segments of about 63svh. Shorter than Chapter 2 (680svh), and the headline
+     * block stays on screen until the stage itself scrolls away.
+     */
+    desktopScrollHeightSvh: 480,
+    /**
+     * The story's own clock `t` runs 0..6 along the pinned travel: scene `i` is fully
+     * on screen at `t = i`. Every frame is a pure function of `t`, so scrolling back
+     * retraces exactly the same frames.
+     *
+     * Scene `i` (i > 0) fades IN over its predecessor during `t` in
+     * `[i - 1 + crossfade.start, i - 1 + crossfade.start + crossfade.span]`; the
+     * predecessor stays fully opaque underneath, so the page never shows through.
+     * The photographs never zoom or pan: only the cross-fade changes the picture.
+     */
+    crossfade: { start: 0.6, span: 0.4 },
+    /**
+     * Scene copy hand-over: one soft-edged left-to-right wipe (a CSS mask with a
+     * `feather` wide edge) that starts `start` into a segment and takes `span` of it,
+     * finishing before the incoming photograph is fully in.
+     */
+    copyWipe: { start: 0.72, span: 0.16, feather: 0.2 },
+    /** Where "go to scene i" lands, in `t` after the scene's own start (scene 1 lands on 0). */
+    anchorOffset: 0.15,
+    /** Photographs mounted ahead of the active scene (and one behind), one request at a time. */
+    photoLookahead: 2,
+    /** A photograph still loading after this long shows a small status label, ms. */
+    slowLoadMs: 800,
+    /** Fade-in of a just-decoded photograph over its blurred preview, ms. */
+    photoFadeMs: 450,
     /** Entrance stagger between copy blocks, ms (CSS `--mm-delay`). */
     copyStaggerMs: 70,
     /**
-     * Mosaic fragments assemble in `steps` staggered groups: group n starts at
-     * `start + n * startStagger` and finishes at `end + n * endStagger`.
+     * Mosaic hand-off into Chapter 2, in `t`. Accent tiles (the seeds) appear in the
+     * lower right at Understand, Progress and Explore; from `sweep.start` ivory tiles
+     * sweep across the photograph, the navigator fades, the left zone releases to
+     * ivory, and the stage unpins onto the page colour Chapter 2 starts on.
      */
-    mosaicReveal: { start: 0.52, end: 0.82, startStagger: 0.025, endStagger: 0.02, steps: 8 },
+    mosaic: {
+      rows: 9,
+      /** Share of the viewport width the tile field covers, from the right edge. */
+      coverage: 0.56,
+      accentFade: 0.3,
+      sweep: { start: 5.4, span: 0.55 },
+      navFade: { start: 5.45, span: 0.25 },
+      release: { start: 5.75, span: 0.25 },
+      /** `row` counts from the right edge, `band` from the bottom; `at` is the `t` it appears. */
+      accents: [
+        { row: 1, band: 1, tone: "coral", at: 3.25 },
+        { row: 2, band: 1, tone: "brand", at: 4.25 },
+        { row: 1, band: 2, tone: "lilac", at: 4.4 },
+        { row: 3, band: 1, tone: "wash", at: 5.05 },
+        { row: 2, band: 2, tone: "brand", at: 5.15 },
+        { row: 1, band: 3, tone: "wash", at: 5.25 },
+      ],
+    },
   },
 
   /**

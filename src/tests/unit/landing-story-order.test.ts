@@ -29,16 +29,19 @@ describe("cinematic config", () => {
     expect(Number(lg![1]) * 16).toBe(cinematicMotion.pinnedMinWidth);
   });
 
-  it("keeps every timeline window ordered and inside 0..1", () => {
-    const { imageSettle, imageHandoff, copyExit, mosaicReveal } = cinematicMotion.chapter1;
-    for (const range of [imageSettle, imageHandoff, copyExit]) {
-      expect(range.start).toBeGreaterThanOrEqual(0);
-      expect(range.end).toBeLessThanOrEqual(1);
-      expect(range.start).toBeLessThan(range.end);
+  it("keeps Chapter 1's story clock windows ordered and inside 0..6", () => {
+    const { crossfade, copyWipe, mosaic, desktopScrollHeightSvh } = cinematicMotion.chapter1;
+    // The photograph cross-fade of segment k ends exactly when scene k+1 is fully in; the copy wipe finishes first.
+    expect(crossfade.start + crossfade.span).toBeCloseTo(1, 10);
+    expect(copyWipe.start + copyWipe.span).toBeLessThanOrEqual(crossfade.start + crossfade.span + 0.3);
+    for (const window of [mosaic.sweep, mosaic.navFade, mosaic.release]) {
+      expect(window.start).toBeGreaterThanOrEqual(5);
+      expect(window.start + window.span).toBeLessThanOrEqual(6);
     }
-    expect(imageSettle.end).toBeLessThanOrEqual(imageHandoff.start);
-    const lastEnd = mosaicReveal.end + (mosaicReveal.steps - 1) * mosaicReveal.endStagger;
-    expect(lastEnd).toBeLessThanOrEqual(1);
+    // The ivory release is the last thing to finish, so the stage unpins onto the page colour.
+    expect(mosaic.release.start + mosaic.release.span).toBe(6);
+    expect(mosaic.sweep.start).toBeLessThan(mosaic.navFade.start);
+    expect(desktopScrollHeightSvh).toBeLessThan(cinematicMotion.chapter2.desktopScrollHeightSvh);
   });
 
   it("converts a 200svh section into a pinned travel of half its scroll", () => {
