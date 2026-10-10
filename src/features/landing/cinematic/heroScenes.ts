@@ -82,21 +82,9 @@ export function heroSceneAnchor(index: number): number {
   return index === 0 ? 0 : index + timing.anchorOffset;
 }
 
-/** Navigator opacity (also the scene copy's): it leaves as the hand-off starts. */
-export function heroNavOpacity(t: number): number {
-  const { start, span } = timing.mosaic.navFade;
-  return 1 - easeInOut(between(t, start, start + span));
-}
-
-/** Opacity of the ivory layer that releases the left zone onto the page colour. */
-export function heroReleaseOpacity(t: number): number {
-  const { start, span } = timing.mosaic.release;
-  return easeInOut(between(t, start, start + span));
-}
-
 /* ---------- The mosaic tile field ---------- */
 
-export type HeroTileTone = "ivory" | "coral" | "brand" | "lilac" | "wash";
+export type HeroTileTone = "coral" | "brand" | "lilac" | "wash";
 
 export interface HeroTile {
   /** Left and top edge, px. */
@@ -105,53 +93,27 @@ export interface HeroTile {
   /** Side length, px. */
   size: number;
   tone: HeroTileTone;
-  /** True for the accent "seed" tiles. */
-  accent: boolean;
-  /** `t` at which an accent tile appears. */
+  /** `t` at which the tile appears. */
   at: number;
-  /** 0..1 sweep delay: tiles furthest from the right edge go last, with a fixed jitter. */
-  delay: number;
-}
-
-/** Deterministic 0..1 jitter (no randomness, so server and client agree). */
-function jitter(row: number, band: number): number {
-  const n = Math.sin(row * 12.9898 + band * 78.233) * 43758.5453;
-  return n - Math.floor(n);
 }
 
 /**
- * The tile field for a stage of `width` x `height` px: square tiles, `rows` to the stage's height,
- * packed into the lower right corner and covering `coverage` of the width.
+ * The accent "seed" tiles for a stage of `width` x `height` px: square tiles, `rows` to the stage's height,
+ * packed into the lower right corner.
  */
 export function heroTiles(width: number, height: number): HeroTile[] {
-  const { rows, coverage, accents } = timing.mosaic;
+  const { rows, accents } = timing.mosaic;
   const size = height / rows;
-  const columns = Math.ceil((width * coverage) / size);
-  const tiles: HeroTile[] = [];
-  for (let row = 0; row < columns; row += 1) {
-    for (let band = 0; band < rows; band += 1) {
-      const accent = accents.find((a) => a.row === row && a.band === band);
-      tiles.push({
-        x: width - (row + 1) * size,
-        y: height - (band + 1) * size,
-        size,
-        tone: accent ? accent.tone : "ivory",
-        accent: Boolean(accent),
-        at: accent ? accent.at : 0,
-        delay: 0.62 * ((columns - 1 - row) / Math.max(1, columns - 1)) + 0.38 * jitter(row, band),
-      });
-    }
-  }
-  return tiles;
+  return accents.map((accent) => ({
+    x: width - (accent.row + 1) * size,
+    y: height - (accent.band + 1) * size,
+    size,
+    tone: accent.tone,
+    at: accent.at,
+  }));
 }
 
-/** Opacity and scale of one tile at story time `t`. */
+/** Opacity and scale of one accent tile at story time `t`. */
 export function heroTileState(t: number, tile: HeroTile): { opacity: number; scale: number } {
-  const { sweep, accentFade } = timing.mosaic;
-  if (tile.accent) {
-    return { opacity: easeInOut(between(t, tile.at, tile.at + accentFade)), scale: 0.78 };
-  }
-  const swept = between(t, sweep.start, sweep.start + sweep.span);
-  const opacity = easeInOut(between(swept, tile.delay * 0.55, tile.delay * 0.55 + 0.45));
-  return { opacity, scale: 0.55 + 0.47 * opacity };
+  return { opacity: easeInOut(between(t, tile.at, tile.at + timing.mosaic.accentFade)), scale: 0.78 };
 }

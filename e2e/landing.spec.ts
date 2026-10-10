@@ -84,11 +84,12 @@ test.describe("home page", () => {
     });
     expect(tops.every(Number.isFinite)).toBe(true);
     // Chapter 2's layers share one pinned stage (so their order is scroll order, not page position);
-    // all of them sit after the Chapter 1 hero and before the product tour.
-    const heroBottom = await page.evaluate(() => {
+    // all of them sit after the Chapter 1 hero and before the product tour. Chapter 2 starts `seamSvh` early:
+    // its stage is revealed over Chapter 1's pinned Explore scene (the mirror-mosaic seam).
+    const heroBottom = await page.evaluate((seamSvh) => {
       const hero = document.querySelector('section[data-chapter="1"]')!.getBoundingClientRect();
-      return hero.bottom + window.scrollY;
-    });
+      return hero.bottom + window.scrollY - (seamSvh / 100) * window.innerHeight;
+    }, cinematicMotion.chapter1.seamSvh);
     for (const top of tops.slice(0, 3)) {
       expect(top).toBeGreaterThanOrEqual(heroBottom - 1);
       expect(top).toBeLessThan(tops[3]!);
@@ -142,6 +143,50 @@ test.describe("home page", () => {
     // Reduced motion: nothing is choreographed, scene 1 stays and the rest are in the readable list.
     await expect.poll(async () => (await state()).currentCopy).toBe(0);
     await expect(page.locator('section[data-chapter="1"] article')).toHaveCount(5);
+  });
+
+  test("Chapter 1 hands off to Chapter 2 through the mirror-mosaic seam: pinned Explore, a growing tile mask, then the plain stage", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = "auto";
+    });
+    const goTo = (seamProgress: number) =>
+      page.evaluate((u) => {
+        const chapter1 = document.querySelector('section[data-chapter="1"]')!;
+        // The story ends 380svh in; the seam is the next 100svh.
+        window.scrollTo({ top: chapter1.getBoundingClientRect().top + window.scrollY + (3.8 + u) * innerHeight, behavior: "instant" });
+      }, seamProgress);
+    const state = () =>
+      page.evaluate(() => {
+        const stage1 = document.querySelector<HTMLElement>('section[data-chapter="1"] > div')!;
+        const stage2 = document.querySelector<HTMLElement>('section[data-chapter="2"] > div')!;
+        return {
+          stage1Top: Math.round(stage1.getBoundingClientRect().top),
+          stage2Top: Math.round(stage2.getBoundingClientRect().top),
+          clip: getComputedStyle(stage2).clipPath,
+          current: [...document.querySelectorAll("[data-scene-copy]")].findIndex((el) => el.getAttribute("aria-hidden") !== "true"),
+        };
+      });
+
+    // Mid-seam: Chapter 1 is still pinned on Explore, Chapter 2's stage is held at the top and masked by tiles.
+    await goTo(0.5);
+    await expect.poll(async () => (await state()).clip).toMatch(/^path\(/);
+    const mid = await state();
+    expect(mid.stage1Top).toBe(0);
+    expect(mid.stage2Top).toBe(0);
+    expect(mid.current).toBe(5);
+
+    // Seam done: the mask is gone and Chapter 2's own timeline has begun.
+    await goTo(1.05);
+    await expect.poll(async () => (await state()).clip).toBe("none");
+    expect((await state()).stage2Top).toBe(0);
+
+    // And back: reverse scrolling retraces the same mask.
+    await goTo(0.5);
+    await expect.poll(async () => (await state()).clip).toMatch(/^path\(/);
   });
 
   test("Chapter 2 replaces the old Programs section and shows real status for every programme", async ({ page }) => {

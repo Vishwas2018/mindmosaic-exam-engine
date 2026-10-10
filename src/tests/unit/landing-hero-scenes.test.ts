@@ -8,8 +8,6 @@ import {
   heroCopyState,
   heroLayerVisible,
   heroNavFill,
-  heroNavOpacity,
-  heroReleaseOpacity,
   heroSceneAnchor,
   heroSceneCover,
   heroTiles,
@@ -123,35 +121,23 @@ describe("Chapter 1 navigator", () => {
   });
 });
 
-describe("Chapter 1 mosaic hand-off", () => {
-  it("ends on the page colour with no scenery left: release fully in at t = 6, nav gone, every tile in", () => {
-    expect(heroReleaseOpacity(6)).toBe(1);
-    expect(heroNavOpacity(6)).toBe(0);
-    for (const tile of heroTiles(1440, 900)) {
-      const state = heroTileState(6, tile);
-      expect(state.opacity).toBeGreaterThan(0.99);
-    }
-  });
-
-  it("holds the hand-off back until the Explore scene has settled", () => {
-    expect(heroReleaseOpacity(5.7)).toBe(0);
-    expect(heroNavOpacity(5.4)).toBe(1);
-    for (const tile of heroTiles(1440, 900)) {
-      if (!tile.accent) expect(heroTileState(5.3, tile).opacity).toBe(0);
-    }
-  });
-
-  it("builds nine rows of square tiles from the lower right, with accents appearing in order", () => {
+describe("Chapter 1 accent tiles", () => {
+  it("builds square seed tiles in the lower right, appearing in story order and never leaving", () => {
     const tiles = heroTiles(1440, 900);
     const size = 900 / 9;
+    expect(tiles).toHaveLength(cinematicMotion.chapter1.mosaic.accents.length);
     expect(tiles.every((tile) => tile.size === size)).toBe(true);
-    expect(Math.max(...tiles.map((tile) => tile.x + tile.size))).toBe(1440);
-    expect(Math.max(...tiles.map((tile) => tile.y + tile.size))).toBe(900);
-    expect(tiles.filter((tile) => tile.accent)).toHaveLength(cinematicMotion.chapter1.mosaic.accents.length);
-    const first = tiles.find((tile) => tile.accent && tile.tone === "coral")!;
+    expect(Math.max(...tiles.map((tile) => tile.x + tile.size))).toBeLessThanOrEqual(1440);
+    expect(Math.max(...tiles.map((tile) => tile.y + tile.size))).toBeLessThanOrEqual(900);
+    const first = tiles.find((tile) => tile.tone === "coral")!;
     expect(heroTileState(first.at - 0.01, first).opacity).toBe(0);
-    expect(heroTileState(first.at + 1, first).opacity).toBe(1);
+    expect(heroTileState(6, first).opacity).toBe(1);
     // Deterministic: server and client agree.
     expect(heroTiles(1440, 900)).toEqual(tiles);
+  });
+
+  it("keeps the Explore scene's copy and navigator at full strength to the end of the story (the seam covers them, they do not fade)", () => {
+    expect(heroCopyState(6, 5)).toMatchObject({ visible: true, mask: "none", current: true });
+    expect(heroNavFill(6, 5)).toBe(1);
   });
 });

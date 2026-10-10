@@ -60,11 +60,18 @@ export const cinematicMotion = {
 
   chapter1: {
     /**
-     * Section height from `pinnedMinWidth` up: a 100svh stage plus 380svh of travel,
-     * six segments of about 63svh. Shorter than Chapter 2 (680svh), and the headline
-     * block stays on screen until the stage itself scrolls away.
+     * The story's own height from `pinnedMinWidth` up: a 100svh stage plus 380svh of travel,
+     * six segments of about 63svh. Chapter progress `q` reaches 1 after this travel.
      */
-    desktopScrollHeightSvh: 480,
+    storyScrollHeightSvh: 480,
+    /**
+     * Extra scroll after the story, spent on the seam into Chapter 2 (see `chapterSeam`): Chapter 1
+     * stays pinned on its Explore scene while Chapter 2's pinned stage is revealed over it. The section
+     * is `storyScrollHeightSvh + seamSvh` tall; Chapter 2 starts `seamSvh` early (negative margin).
+     */
+    seamSvh: 100,
+    /** Section height from `pinnedMinWidth` up (story plus seam). */
+    desktopScrollHeightSvh: 580,
     /**
      * The story's own clock `t` runs 0..6 along the pinned travel: scene `i` is fully
      * on screen at `t = i`. Every frame is a pure function of `t`, so scrolling back
@@ -93,20 +100,14 @@ export const cinematicMotion = {
     /** Entrance stagger between copy blocks, ms (CSS `--mm-delay`). */
     copyStaggerMs: 70,
     /**
-     * Mosaic hand-off into Chapter 2, in `t`. Accent tiles (the seeds) appear in the
-     * lower right at Understand, Progress and Explore; from `sweep.start` ivory tiles
-     * sweep across the photograph, the navigator fades, the left zone releases to
-     * ivory, and the stage unpins onto the page colour Chapter 2 starts on.
+     * Accent "seed" tiles in the lower right of the photograph: one coral tile at Understand, two more at
+     * Progress, three at Explore. The Chapter 2 seam sweeps over them. `row` counts from the right edge
+     * and `band` from the bottom (both 0-based); `at` is the story time `t` at which it appears.
      */
     mosaic: {
       rows: 9,
-      /** Share of the viewport width the tile field covers, from the right edge. */
       coverage: 0.56,
       accentFade: 0.3,
-      sweep: { start: 5.4, span: 0.55 },
-      navFade: { start: 5.45, span: 0.25 },
-      release: { start: 5.75, span: 0.25 },
-      /** `row` counts from the right edge, `band` from the bottom; `at` is the `t` it appears. */
       accents: [
         { row: 1, band: 1, tone: "coral", at: 3.25 },
         { row: 2, band: 1, tone: "brand", at: 4.25 },
@@ -116,6 +117,27 @@ export const cinematicMotion = {
         { row: 1, band: 3, tone: "wash", at: 5.25 },
       ],
     },
+  },
+
+  /**
+   * The Chapter 1 -> Chapter 2 mirror-mosaic seam (Claude Design, MindMosaic-Chapter-2.dc.html). While
+   * Chapter 1's Explore scene is still pinned, Chapter 2's pinned stage is held in place over it and
+   * revealed through a grid of growing tiles that sweeps right to left. `seam` progress is 0..1 along the
+   * `chapter1.seamSvh` of scroll in which Chapter 2's section rises from the bottom of the viewport to its
+   * top, so the sweep always finishes exactly as Chapter 2's own timeline begins.
+   *
+   * Tile `k` grows with `smoothstep((u * span - delay * stagger) / grow)`, where `u` is seam progress and
+   * `delay` runs 0 (right edge) to 1 (left edge) with a fixed jitter, as in the design.
+   */
+  chapterSeam: {
+    rows: 6,
+    columns: { min: 4, max: 24 },
+    /** Total of the three terms below, as in the design's 0.2..0.72 window. */
+    span: 0.52,
+    stagger: 0.36,
+    grow: 0.16,
+    /** Weights of the delay: distance from the right edge, jitter, distance from the top. */
+    delayMix: { distance: 0.7, jitter: 0.2, row: 0.1 },
   },
 
   /**

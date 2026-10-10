@@ -13,8 +13,6 @@ import {
   heroCopyState,
   heroLayerVisible,
   heroNavFill,
-  heroNavOpacity,
-  heroReleaseOpacity,
   heroSceneAnchor,
   heroSceneCover,
   heroTiles,
@@ -36,7 +34,6 @@ import { mmButton, underlineLinkClasses, underlineTransition } from "./primitive
 const DIAMOND_TONES = ["bg-mm-brand", "bg-mm-coral", "bg-mm-lilac", "bg-mm-brand-mid"] as const;
 
 const TILE_TONES: Record<HeroTileTone, string> = {
-  ivory: "bg-mm-page",
   coral: "bg-mm-coral",
   brand: "bg-mm-brand",
   lilac: "bg-mm-lilac",
@@ -77,21 +74,20 @@ interface StageNodes {
   copies: (HTMLElement | null)[];
   fills: (HTMLElement | null)[];
   tiles: (HTMLElement | null)[];
-  release: HTMLElement | null;
-  nav: HTMLElement | null;
 }
 
 /**
  * Chapter 1 of the cinematic landing page: one full-screen photographic stage that the page scroll
  * walks through six scenes (Learn, Practise, Prepare, Understand, Progress, Explore), each with its
- * own photograph AND its own eyebrow, headline and paragraph, then hands off to Chapter 2 through
- * the mosaic. Designed in Claude Design (MindMosaic-Chapter-1.dc.html).
+ * own photograph AND its own eyebrow, headline and paragraph, then holds on Explore while Chapter 2's
+ * stage is revealed over it through the mirror-mosaic seam (ChapterTwoPrograms, cinematic/seamReveal.ts).
+ * Designed in Claude Design (MindMosaic-Chapter-1.dc.html and -Chapter-2.dc.html).
  *
  * Scroll is the only input: no autoplay, timer, wheel handling or snapping. From `pinnedMinWidth` up
  * the section is tall and its inner stage `sticky`, and every frame is a pure function of the story
  * clock `t` (cinematic/heroScenes.ts), so scrolling back retraces the same frames. The photographs
  * stay at a fixed scale; only a cross-fade changes the picture. Per-frame writes (layer opacity, the
- * copy wipe, navigator fills, mosaic tiles) go straight to the DOM from the scroll listener, not
+ * copy wipe, navigator fills, accent tiles) go straight to the DOM from the scroll listener, not
  * through React renders. Every number is in `cinematicMotion.chapter1` (cinematic/config.ts).
  *
  * CTAs, the credibility list, the availability line and the navigator are the same for all six
@@ -118,7 +114,8 @@ export function ChapterOneIntro() {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const travel = pinnedTravelFactor(timing.desktopScrollHeightSvh);
+  // q runs along the story's own travel; the seam scroll after it holds q at 1 (the Explore scene).
+  const travel = pinnedTravelFactor(timing.storyScrollHeightSvh);
   const q = useTransform([scrollYProgress, pinnedValue], ([scroll, isPinned]: number[]) =>
     clamp01(scroll! * (isPinned ? travel : 1)),
   );
@@ -149,13 +146,12 @@ export function ChapterOneIntro() {
 
   const tiles = useMemo(() => (choreographed && size ? heroTiles(size.width, size.height) : []), [choreographed, size]);
 
-  const nodes = useRef<StageNodes>({ layers: [], copies: [], fills: [], tiles: [], release: null, nav: null });
+  const nodes = useRef<StageNodes>({ layers: [], copies: [], fills: [], tiles: [] });
 
   /** Writes frame `t` to the DOM. Pure function of `t`: the same scroll position is always the same picture. */
   const apply = useCallback(
     (t: number) => {
       const n = nodes.current;
-      const navOpacity = heroNavOpacity(t);
       for (let i = 0; i < HERO_SCENE_COUNT; i += 1) {
         const layer = n.layers[i];
         if (layer) {
@@ -165,7 +161,7 @@ export function ChapterOneIntro() {
         const copy = n.copies[i];
         if (copy) {
           const state = heroCopyState(t, i);
-          copy.style.opacity = state.visible ? String(navOpacity) : "0";
+          copy.style.opacity = state.visible ? "1" : "0";
           copy.style.maskImage = state.mask;
           copy.style.webkitMaskImage = state.mask;
           copy.inert = !state.current;
@@ -181,11 +177,6 @@ export function ChapterOneIntro() {
         element.style.opacity = String(state.opacity);
         element.style.transform = `scale(${state.scale.toFixed(3)})`;
       });
-      if (n.release) n.release.style.opacity = String(heroReleaseOpacity(t));
-      if (n.nav) {
-        n.nav.style.opacity = String(navOpacity);
-        n.nav.style.pointerEvents = navOpacity < 0.2 ? "none" : "";
-      }
     },
     [tiles],
   );
@@ -315,37 +306,27 @@ export function ChapterOneIntro() {
           </span>
         )}
 
-        {/* The hand-off: the left zone releases to ivory, then the mosaic tiles sweep the photograph. */}
+        {/* Accent "seed" tiles: the first pieces of the mosaic the Chapter 2 seam sweeps over. */}
         {choreographed && (
-          <>
-            <div
-              aria-hidden="true"
-              ref={(element) => {
-                nodes.current.release = element;
-              }}
-              style={{ opacity: 0 }}
-              className="pointer-events-none absolute inset-0 bg-mm-page"
-            />
-            <div aria-hidden="true" data-mosaic-tiles className="pointer-events-none absolute inset-0">
-              {tiles.map((tile, index) => (
-                <div
-                  key={index}
-                  ref={(element) => {
-                    nodes.current.tiles[index] = element;
-                  }}
-                  style={{
-                    left: tile.x,
-                    top: tile.y,
-                    width: tile.size + 1,
-                    height: tile.size + 1,
-                    opacity: 0,
-                    borderRadius: tile.accent ? 4 : 0,
-                  }}
-                  className={`absolute will-change-[opacity,transform] ${TILE_TONES[tile.tone]}`}
-                />
-              ))}
-            </div>
-          </>
+          <div aria-hidden="true" data-mosaic-tiles className="pointer-events-none absolute inset-0">
+            {tiles.map((tile, index) => (
+              <div
+                key={index}
+                ref={(element) => {
+                  nodes.current.tiles[index] = element;
+                }}
+                style={{
+                  left: tile.x,
+                  top: tile.y,
+                  width: tile.size + 1,
+                  height: tile.size + 1,
+                  opacity: 0,
+                  borderRadius: 4,
+                }}
+                className={`absolute will-change-[opacity,transform] ${TILE_TONES[tile.tone]}`}
+              />
+            ))}
+          </div>
         )}
 
         <div className="mm-width relative flex flex-1 flex-col justify-end pb-[clamp(56px,9vh,96px)] pt-[calc(var(--mm-header-h)+min(34svh,300px))] lg:justify-center lg:pb-[clamp(110px,17vh,168px)] lg:pt-[calc(var(--mm-header-h)+2vh)]">
@@ -450,12 +431,7 @@ export function ChapterOneIntro() {
         </div>
 
         {/* The scene navigator: the pinned stage only. Phones, tablets and reduced motion use the list below. */}
-        <div
-          ref={(element) => {
-            nodes.current.nav = element;
-          }}
-          className="mm-width pointer-events-none absolute inset-x-0 bottom-[clamp(18px,3.4vh,32px)] z-10 hidden lg:block motion-reduce:lg:hidden"
-        >
+        <div className="mm-width pointer-events-none absolute inset-x-0 bottom-[clamp(18px,3.4vh,32px)] z-10 hidden lg:block motion-reduce:lg:hidden">
           <div className="pointer-events-auto w-fit">
             <HeroSceneNav
               active={active}
