@@ -142,7 +142,11 @@ export function NaplanPreview() {
                 </Button>
               </div>
             </div>
-            <div className={`min-h-0 flex-1 overflow-hidden px-6 ${compact ? "py-3" : "py-5"}`}>
+            <div
+              className={`min-h-0 flex-1 overflow-hidden px-6 ${
+                compact ? "py-3 [&_fieldset]:space-y-2.5 [&_[role=radiogroup]]:gap-2 [&_label]:min-h-11 [&_label]:py-2.5" : "py-5"
+              }`}
+            >
               <MultipleChoiceRenderer question={QUESTION as never} answer={SELECTED} />
             </div>
             <div className="flex shrink-0 items-center justify-between gap-3 border-t border-primary/8 bg-canvas/65 px-6 py-3.5">

@@ -35,7 +35,7 @@ export function AmcPreview() {
             <p className="m-0 font-jakarta text-[17px] font-bold leading-snug text-plum-dark">
               Each number in this pattern is double the one before it, plus 1. What is the sixth number?
             </p>
-            <div className="flex items-end gap-2 overflow-hidden rounded-2xl border border-parchment-border bg-surface-container-low px-3 py-4">
+            <div className="flex shrink-0 items-end gap-2 overflow-hidden rounded-2xl border border-parchment-border bg-surface-container-low px-3 py-4">
               {[2, 5, 11, 23].map((value, index) => (
                 <div key={value} className="flex flex-col items-center gap-1.5">
                   <div
@@ -44,7 +44,7 @@ export function AmcPreview() {
                   >
                     {value}
                   </div>
-                  <span className="text-[10.5px] font-bold text-plum-muted">Term {index + 1}</span>
+                  <span className="text-[11.5px] font-bold text-plum-muted">Term {index + 1}</span>
                 </div>
               ))}
               {[5, 6].map((term) => (
@@ -52,11 +52,11 @@ export function AmcPreview() {
                   <div className={`grid h-[84px] place-items-center ${compact ? "w-[40px]" : "w-[88px]"} rounded-lg border-2 border-dashed border-primary/45 text-[18px] font-extrabold text-primary`}>
                     ?
                   </div>
-                  <span className="text-[10.5px] font-bold text-plum-muted">Term {term}</span>
+                  <span className="text-[11.5px] font-bold text-plum-muted">Term {term}</span>
                 </div>
               ))}
             </div>
-            <div className={`grid gap-2.5 ${compact ? "grid-cols-3" : "grid-cols-5"}`}>
+            <div className={`grid shrink-0 gap-2.5 ${compact ? "grid-cols-3" : "grid-cols-5"}`}>
               {OPTIONS.map((option, index) => (
                 <div
                   key={option}
@@ -69,6 +69,7 @@ export function AmcPreview() {
                 </div>
               ))}
             </div>
+            {!compact && (
             <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-dashed border-parchment-border bg-surface-container-low/60 px-4 py-3">
               <p className="m-0 font-jakarta text-[12px] font-extrabold uppercase tracking-wider text-plum-muted">Your working</p>
               <div className="mt-2 grid flex-1 content-start gap-[26px] opacity-60">
@@ -77,6 +78,7 @@ export function AmcPreview() {
                 ))}
               </div>
             </div>
+            )}
           </div>
         </section>
         {!compact && (

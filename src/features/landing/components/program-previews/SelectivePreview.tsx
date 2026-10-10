@@ -16,17 +16,18 @@ const GRID: ReadonlyArray<ReadonlyArray<Cell>> = [
 ];
 const ICON = { circle: Circle, square: Square, triangle: Triangle } as const;
 
-function GridCell({ cell }: { cell: Cell }) {
+function GridCell({ cell, compact }: { cell: Cell; compact: boolean }) {
+  const height = compact ? "h-[50px]" : "h-[64px]";
   if (!cell) {
     return (
-      <div className="grid h-[64px] place-items-center rounded-xl border-2 border-dashed border-primary/45 text-[22px] font-extrabold text-primary">
+      <div className={`grid ${height} place-items-center rounded-xl border-2 border-dashed border-primary/45 text-[22px] font-extrabold text-primary`}>
         ?
       </div>
     );
   }
   const Icon = ICON[cell.shape];
   return (
-    <div className="flex h-[64px] items-center justify-center gap-1.5 rounded-xl border border-parchment-border bg-white">
+    <div className={`flex ${height} items-center justify-center gap-1.5 rounded-xl border border-parchment-border bg-white`}>
       {Array.from({ length: cell.count }, (_, index) => (
         <Icon key={index} className="h-6 w-6 text-primary" strokeWidth={2.4} aria-hidden="true" />
       ))}
@@ -85,10 +86,10 @@ export function SelectivePreview() {
           </div>
           <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 py-5">
             <p className="m-0 font-jakarta text-[16px] font-bold leading-snug text-plum-dark">Which choice completes the pattern?</p>
-            <div className="grid grid-cols-3 gap-2.5">
-              {GRID.flatMap((row, r) => row.map((cell, c) => <GridCell key={`${r}${c}`} cell={cell} />))}
+            <div className="grid shrink-0 grid-cols-3 gap-2.5">
+              {GRID.flatMap((row, r) => row.map((cell, c) => <GridCell key={`${r}${c}`} cell={cell} compact={compact} />))}
             </div>
-            <div className={`grid gap-2.5 ${compact ? "grid-cols-2" : "grid-cols-4"}`}>
+            <div className={`grid shrink-0 gap-2.5 ${compact ? "grid-cols-2" : "grid-cols-4"}`}>
               {[1, 2, 3, 4].map((count, index) => (
                 <div key={count} className="flex min-h-12 items-center gap-2.5 rounded-xl border border-royal/15 bg-white px-3 py-2">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-page text-[13px] font-bold text-muted">
