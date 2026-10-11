@@ -188,6 +188,13 @@ export const cinematicMotion = {
    */
   chapter3: {
     desktopScrollHeightSvh: 500,
+    /**
+     * Chapter 3's section is pulled up under the last `entryOverlapSvh` of Chapter 2's pinned stage. Chapter 2's
+     * hand-off card and Chapter 3's centred intro both scroll at page speed once Chapter 2 unpins, so the gap
+     * between them was a fixed ~0.3 viewport of near-empty scroll. This closes it without moving either one
+     * relative to the other. Keep it below the share of the viewport under the hand-off card (about 25svh).
+     */
+    entryOverlapSvh: 24,
     layerStarts: {
       intro: 0,
       learn: 0.08,
@@ -223,6 +230,8 @@ export const cinematicMotion = {
    */
   chapter4: {
     desktopScrollHeightSvh: 400,
+    /** Same gap closure as `chapter3.entryOverlapSvh`. Chapter 3's hand-off clears the lower 42svh, so 30 is safe. */
+    entryOverlapSvh: 30,
     layerStarts: {
       intro: 0,
       latest: 0.1,
