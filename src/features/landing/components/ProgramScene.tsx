@@ -3,7 +3,7 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
+import { animate, motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
 import {
   ArrowRight,
   BookOpen,
@@ -23,10 +23,12 @@ import { between, easeInOut, easeOutCubic, lerp } from "../cinematic/math";
 import {
   chapter2LayerStarts,
   layerEnter,
+  layerBackdropOpacity,
   layerExit,
   layerForegroundOpacity,
   layerLocal,
   layerOpacity,
+  layerPresence,
 } from "../cinematic/sceneProgress";
 import { landingMedia, resolveSlotSrc } from "../media";
 import { SceneVisual } from "./chapter-two-visuals";
@@ -112,14 +114,18 @@ function SceneBadge({
   icon: Icon,
   title,
   subtitle,
+  opacity,
 }: {
   icon: LucideIcon;
   title: string;
   subtitle: string;
+  /** Badge text takes turns with its neighbour's like any other copy; the panel under it stays put. */
+  opacity: MotionValue<number> | null;
 }) {
   return (
-    <div
+    <motion.div
       aria-hidden="true"
+      style={opacity ? { opacity } : undefined}
       className="pointer-events-none absolute right-3.5 top-3.5 z-10 hidden items-center gap-2.5 rounded-xl border border-white/60 bg-white/90 px-3.5 py-2 shadow-[0_8px_20px_-6px_rgba(24,21,31,0.18)] backdrop-blur-md sm:flex"
     >
       <span className="grid h-7 w-7 place-items-center rounded-lg bg-mm-tint text-mm-brand">
@@ -129,7 +135,7 @@ function SceneBadge({
         <span className="text-[12px] font-bold text-mm-ink">{title}</span>
         <span className="text-[11px] font-medium text-mm-ink-soft">{subtitle}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -190,12 +196,13 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
   );
 }
 
-/** The photograph panel: decorative, from the media registry, lazy and mounted on demand while pinned. */
+/** The photograph panel: decorative, from the media registry, mounted shortly before it is needed while pinned. */
 function ScenePhoto({
   slotKey,
   sceneId,
   scale,
   opacity,
+  badgeOpacity,
   enabled,
 }: {
   slotKey: NonNullable<ProgramSceneData["mediaSlot"]>;
@@ -203,12 +210,20 @@ function ScenePhoto({
   scale: MotionValue<number> | null;
   /** Background cross-fade while choreographed. */
   opacity: MotionValue<number> | null;
+  badgeOpacity: MotionValue<number> | null;
   enabled: boolean;
 }) {
   const slot = landingMedia.chapter2[slotKey].primary;
   const detail = SCENE_DETAILS[sceneId];
   // Once an image has been wanted it stays mounted, so scrolling back never re-fetches or flashes.
   const [seen, setSeen] = useState(false);
+  // While pinned the panel is invisible until its photograph has loaded AND decoded, then eases in. A scene that
+  // arrives before its picture (cold cache, fast scroll) therefore holds the previous scene's panel instead of
+  // flashing an empty tinted frame.
+  const ready = useMotionValue(0);
+  const idle = useMotionValue(1);
+  const panelOpacity = useTransform([opacity ?? idle, ready], ([layer, isReady]: number[]) => layer! * isReady!);
+  const reveal = () => void animate(ready, 1, { duration: 0.22, ease: "easeOut" });
   useEffect(() => {
     // One-way latch on a prop: it cannot loop, and it must run after commit so it never re-renders mid-render.
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -217,7 +232,7 @@ function ScenePhoto({
   return (
     <motion.div
       aria-hidden={slot.decorative ? "true" : undefined}
-      style={opacity ? { opacity } : undefined}
+      style={opacity ? { opacity: panelOpacity } : undefined}
       className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-mm-tint shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)]"
     >
       {seen && (
@@ -231,7 +246,15 @@ function ScenePhoto({
             fill
             sizes="(min-width: 1024px) 56vw, 100vw"
             quality={75}
-            loading="lazy"
+            // Pinned: mounting is already gated on the active layer (ChapterTwoPrograms), so load as soon as
+            // mounted. Natural flow mounts all six at once and must stay lazy. Either way, decode off the scroll path:
+            // otherwise a hidden image is first decoded on the frame it starts to fade in.
+            loading={scale ? "eager" : "lazy"}
+            onLoad={(event) => {
+              const decoded = event.currentTarget.decode?.() ?? Promise.resolve();
+              void decoded.catch(() => undefined).finally(reveal);
+            }}
+            onError={reveal}
             style={
               {
                 "--pos-m": slot.focalMobile,
@@ -246,7 +269,7 @@ function ScenePhoto({
       {/* Directional scrims for readability and seamless visual integration */}
       <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 bg-gradient-to-r from-black/10 via-transparent to-transparent lg:block" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
-      <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} />
+      <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} opacity={badgeOpacity} />
     </motion.div>
   );
 }
@@ -303,8 +326,15 @@ export function ProgramScene({
   const choreographed = progress !== null;
   const starts = chapter2LayerStarts;
 
-  const opacity = useTransform(q, (value) => layerOpacity(value, starts, layerIndex, timing.crossfade));
-  const pointerEvents = useTransform(opacity, (value) => (value > 0.5 ? "auto" : "none"));
+  const layerVisibility = useTransform(q, (value) => layerOpacity(value, starts, layerIndex, timing.crossfade));
+  // Backdrops stack: the incoming photo/panel covers the outgoing one before that one fades (no mid-fade dip).
+  const lastSceneLayer = starts.length - 2;
+  const opacity = useTransform(q, (value) =>
+    layerBackdropOpacity(value, starts, layerIndex, timing.crossfade, layerIndex < lastSceneLayer),
+  );
+  const pointerEvents = useTransform(layerVisibility, (value) => (value > 0.5 ? "auto" : "none"));
+  // A scene far from the viewport's current layer is skipped by paint entirely (its a11y tree stays).
+  const presence = useTransform(q, (value) => layerPresence(value, starts, layerIndex, timing.crossfade));
   // Text and product UI take turns across a cross-fade; only the background (photo/panel) dissolves.
   const foreground = useTransform(q, (value) =>
     layerForegroundOpacity(value, starts, layerIndex, timing.crossfade),
@@ -340,7 +370,7 @@ export function ProgramScene({
     <motion.section
       aria-labelledby={`chapter-two-${scene.id}-heading`}
       data-scene={scene.id}
-      style={choreographed ? { opacity: 1, pointerEvents } : undefined}
+      style={choreographed ? { opacity: presence, pointerEvents } : undefined}
       className={`${LAYER_CLASSES} border-t border-mm-line-soft py-[clamp(44px,7vw,88px)] first:border-t-0 lg:border-t-0 lg:py-0 motion-reduce:lg:border-t motion-reduce:lg:py-[clamp(44px,7vw,88px)]`}
     >
       <div className="mm-width grid gap-8 lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-0 motion-reduce:lg:pt-0">
@@ -369,6 +399,7 @@ export function ProgramScene({
                 sceneId={scene.id}
                 scale={choreographed ? photoScale : null}
                 opacity={choreographed ? opacity : null}
+                badgeOpacity={choreographed ? foreground : null}
                 enabled={imageEnabled}
               />
               <motion.div
@@ -386,7 +417,12 @@ export function ProgramScene({
                 className="relative aspect-[4/3] overflow-hidden rounded-[clamp(20px,2.4vw,32px)] border border-black/5 bg-gradient-to-b from-white via-mm-wash/50 to-mm-tint p-4 shadow-[0_20px_50px_-20px_rgba(24,21,31,0.22)] sm:p-6 lg:aspect-auto lg:h-[min(76svh,720px)] xl:h-[min(80svh,760px)] 2xl:h-[min(82svh,800px)] lg:p-8"
               >
                 {scene.id === "curriculum" ? <CurriculumBackdrop /> : <SingaporeBackdrop />}
-                <SceneBadge icon={detail.icon} title={detail.badgeTitle} subtitle={detail.badgeSubtitle} />
+                <SceneBadge
+                  icon={detail.icon}
+                  title={detail.badgeTitle}
+                  subtitle={detail.badgeSubtitle}
+                  opacity={choreographed ? foreground : null}
+                />
               </motion.div>
               <motion.div
                 style={choreographed ? { opacity: foreground, y: cardY } : undefined}

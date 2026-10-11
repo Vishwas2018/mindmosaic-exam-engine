@@ -1,4 +1,5 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { motionValue } from "framer-motion";
 import { describe, expect, it } from "vitest";
 
 import { ChapterTwoPrograms } from "@/features/landing/components/ChapterTwoPrograms";
@@ -102,6 +103,30 @@ describe("Chapter 2 programmes", () => {
     expect(photos(container)[0]!.getAttribute("loading")).toBe("lazy");
     rerender(<ProgramScene scene={naplan} layerIndex={1} progress={null} imageEnabled={false} />);
     expect(photos(container)).toHaveLength(1);
+  });
+
+  it("loads a pinned scene's photograph as soon as it is mounted, but keeps natural flow lazy", () => {
+    const naplan = chapter2Scenes[0]!;
+    const progress = motionValue(0);
+    const { container } = render(<ProgramScene scene={naplan} layerIndex={1} progress={progress} imageEnabled />);
+    const photo = [...container.querySelectorAll("img")].find((image) =>
+      decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
+    );
+    expect(photo?.getAttribute("loading")).toBe("eager");
+  });
+
+  it("keeps a pinned scene's photograph panel hidden until the picture has loaded, then eases it in", async () => {
+    const naplan = chapter2Scenes[0]!;
+    const { container } = render(
+      <ProgramScene scene={naplan} layerIndex={1} progress={motionValue(0.15)} imageEnabled />,
+    );
+    const panel = container.querySelector<HTMLElement>('[class*="aspect-[4/3]"]')!;
+    const photo = [...container.querySelectorAll("img")].find((image) =>
+      decodeURIComponent(image.getAttribute("src") ?? "").includes("/chapter-02-programs/"),
+    )!;
+    expect(Number(getComputedStyle(panel).opacity)).toBe(0);
+    fireEvent.load(photo);
+    await waitFor(() => expect(Number(getComputedStyle(panel).opacity)).toBe(1));
   });
 
   it("gives meaningful product graphics accessible names and marks no answer", () => {

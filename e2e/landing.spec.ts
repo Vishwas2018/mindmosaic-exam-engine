@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { PUBLIC_SIGNUP_ENABLED } from "../src/features/auth/signup-policy";
+import { cinematicMotion } from "../src/features/landing/cinematic/config";
 import { PROHIBITED_PRODUCT_CLAIMS } from "../src/features/landing/copy-guards";
 
 /*
@@ -537,7 +538,8 @@ test.describe("Chapter 3 how it works", () => {
       await scrollToProgress(page, q);
       await page.waitForTimeout(110);
       const copy = await headingOpacities(page);
-      expect(copy.filter((o) => o > 0.05).length, `copy at q=${q.toFixed(3)}: ${copy}`).toBeLessThanOrEqual(1);
+      // A faint outgoing/incoming overlap (<= 25%) is the hand-over itself; two headings both legible would be a defect.
+      expect(copy.filter((o) => o > 0.3).length, `copy at q=${q.toFixed(3)}: ${copy}`).toBeLessThanOrEqual(1);
     }
     // The question state itself stays fully visible across the Practise/Understand boundary.
     for (const q of [0.465, 0.48, 0.5, 0.52, 0.535]) {
@@ -806,5 +808,146 @@ test.describe("Chapter 4 progress and parents", () => {
       "H3 See the pattern.",
       "H3 See the bigger picture.",
     ]);
+  });
+});
+
+/*
+ * Continuous-scroll acceptance. These tests scroll the way a person does (a stream of
+ * wheel events), not by jumping to settled scene progress, and judge every frame
+ * on the way past each chapter boundary: is something readable, are two things
+ * legible at once, does a photograph panel ever dip to show the page behind it, and
+ * does a released stage leave exactly as fast as the page scrolls.
+ */
+test.describe("Continuous scroll across chapters", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  type Frame = {
+    y: number;
+    overflow: number;
+    chapters: Record<string, { top: number; bottom: number; text: number; photoCoverage: number; photos: number; loaded: number }>;
+  };
+
+  const sampleFrame = (page: import("@playwright/test").Page): Promise<Frame> =>
+    page.evaluate(() => {
+      const effective = (el: Element, stop: Element | null) => {
+        let o = 1;
+        for (let e: Element | null = el; e && e !== stop; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity);
+        return o;
+      };
+      const frame: Frame = { y: Math.round(scrollY), overflow: document.documentElement.scrollWidth - innerWidth, chapters: {} };
+      for (const section of document.querySelectorAll<HTMLElement>("section[data-chapter]")) {
+        const r = section.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) continue;
+        let text = 0;
+        for (const t of section.querySelectorAll("h2, h3, p")) {
+          const tr = t.getBoundingClientRect();
+          if (tr.width === 0 || tr.bottom < 0 || tr.top > innerHeight) continue;
+          text = Math.max(text, effective(t, section.parentElement));
+        }
+        const photos = [...section.querySelectorAll("img")].filter((i) => i.getBoundingClientRect().width > 0);
+        const alphas = photos.map((i) => effective(i, section.parentElement));
+        frame.chapters[section.dataset.chapter!] = {
+          top: Math.round(r.top),
+          bottom: Math.round(r.bottom),
+          text,
+          photoCoverage: 1 - alphas.reduce((a, o) => a * (1 - o), 1),
+          photos: photos.length,
+          loaded: photos.filter((i, n) => alphas[n]! > 0.1 && i.complete && i.naturalWidth > 0).length,
+        };
+      }
+      return frame;
+    });
+
+  /** Scrolls with real wheel events in small steps, sampling after every one; optionally only across [from, to]. */
+  async function wheelThrough(
+    page: import("@playwright/test").Page,
+    direction: 1 | -1,
+    step = 60,
+    range?: { from: number; to: number },
+  ): Promise<Frame[]> {
+    const frames: Frame[] = [];
+    const total = range ? range.to - range.from : await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
+    if (range) {
+      await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), direction === 1 ? range.from : range.to);
+      // Let the scenes mounted for this position start and finish loading, as a reader pausing at the chapter's start would.
+      await page.waitForLoadState("networkidle");
+      await page.waitForTimeout(250);
+    }
+    await page.mouse.move(720, 450);
+    for (let travelled = 0; travelled < total + step; travelled += step) {
+      await page.mouse.wheel(0, direction * step);
+      await page.waitForTimeout(14);
+      frames.push(await sampleFrame(page));
+    }
+    return frames;
+  }
+
+  test("never goes blank or doubles up while wheeling through every pinned chapter", async ({ page }) => {
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1);
+    for (const chapter of ["2", "3", "4"]) {
+      const pinned = frames.filter((f) => {
+        const c = f.chapters[chapter];
+        return c && c.top <= 0 && c.bottom >= 900;
+      });
+      expect(pinned.length, `chapter ${chapter} pinned frames`).toBeGreaterThan(40);
+      const weakest = Math.min(...pinned.map((f) => f.chapters[chapter]!.text));
+      expect(weakest, `chapter ${chapter}: weakest foreground over the whole pinned run`).toBeGreaterThanOrEqual(0.12);
+    }
+    for (const f of frames) expect(f.overflow, `horizontal overflow at y=${f.y}`).toBeLessThanOrEqual(0);
+  });
+
+  test("a stage releases exactly as fast as the page scrolls (no jump at the hand-off)", async ({ page }) => {
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1);
+    for (let i = 1; i < frames.length; i += 1) {
+      const dy = frames[i]!.y - frames[i - 1]!.y;
+      for (const chapter of Object.keys(frames[i]!.chapters)) {
+        const before = frames[i - 1]!.chapters[chapter];
+        if (!before) continue;
+        const moved = frames[i]!.chapters[chapter]!.bottom - before.bottom + dy;
+        expect(Math.abs(moved), `chapter ${chapter} bottom edge at y=${frames[i]!.y}`).toBeLessThanOrEqual(2);
+      }
+    }
+  });
+
+  test("Chapter 2 photographs stack: the panel never dips and a visible one is always loaded", async ({ page }) => {
+    await page.goto("/");
+    const frames = await wheelThrough(page, 1, 30, { from: 1700, to: 7100 });
+    const timing = cinematicMotion.chapter2;
+    const pinned = frames.filter((f) => {
+      const c = f.chapters["2"];
+      return c && c.top <= 0 && c.bottom >= 900;
+    });
+    // Chapter progress of a frame: how far the pinned travel has run.
+    const progressOf = (f: Frame) => -f.chapters["2"]!.top / (f.chapters["2"]!.bottom - f.chapters["2"]!.top - 900);
+    // A photograph that is even slightly visible must already be decoded and loaded.
+    for (const f of pinned) {
+      const c = f.chapters["2"]!;
+      if (c.photoCoverage > 0.1) expect(c.loaded, `visible panel without its photograph at y=${f.y}`).toBeGreaterThan(0);
+    }
+    // NAPLAN -> ICAS are two consecutive photographs: across their whole cross-fade the page must never show through.
+    const handover = pinned.filter((f) => Math.abs(progressOf(f) - timing.layerStarts.icas) <= timing.crossfade);
+    expect(handover.length, "frames sampled across the NAPLAN to ICAS hand-over").toBeGreaterThan(8);
+    for (const f of handover) {
+      expect(f.chapters["2"]!.photoCoverage, `photograph coverage at y=${f.y}`).toBeGreaterThanOrEqual(0.99);
+    }
+  });
+
+  test("scrolling back up retraces the same frames", async ({ page }) => {
+    await page.goto("/");
+    const down = await wheelThrough(page, 1, 120);
+    const up = await wheelThrough(page, -1, 120);
+    const byY = new Map(down.map((f) => [f.y, f]));
+    let compared = 0;
+    for (const f of up) {
+      const match = byY.get(f.y);
+      const a = match?.chapters["2"];
+      const b = f.chapters["2"];
+      if (!a || !b || a.top > 0 || a.bottom < 900) continue;
+      compared += 1;
+      expect(Math.abs(a.text - b.text), `foreground at y=${f.y} must not depend on direction`).toBeLessThan(0.1);
+    }
+    expect(compared).toBeGreaterThan(10);
   });
 });

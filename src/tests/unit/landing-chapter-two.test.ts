@@ -239,12 +239,12 @@ describe("scene progress maths", () => {
     }
   });
 
-  it("makes text and product UI take turns across a cross-fade, never overlapping or garbling", () => {
+  it("hands text and product UI over without a blank beat or two legible copies", () => {
     for (let index = 0; index < starts.length - 1; index += 1) {
       for (let q = 0; q <= 1; q += 0.002) {
         const leaving = layerForegroundOpacity(q, starts, index, fade);
         const entering = layerForegroundOpacity(q, starts, index + 1, fade);
-        expect(Math.min(leaving, entering), `layers ${index}/${index + 1} at q=${q.toFixed(3)}`).toBe(0);
+        expect(Math.min(leaving, entering), `layers ${index}/${index + 1} at q=${q.toFixed(3)}`).toBeLessThanOrEqual(0.25);
       }
     }
     expect(layerForegroundOpacity(layerAnchor(starts, 3), starts, 3, fade)).toBe(1);
