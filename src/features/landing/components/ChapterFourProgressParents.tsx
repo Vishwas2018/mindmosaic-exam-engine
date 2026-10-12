@@ -235,7 +235,7 @@ export function ChapterFourProgressParents() {
       data-chapter="4"
       style={
         choreographed
-          ? ({ height: `${timing.desktopScrollHeightSvh}svh` } as CSSProperties)
+          ? ({ height: `${timing.desktopScrollHeightSvh}svh`, marginTop: `-${timing.entryOverlapSvh}svh` } as CSSProperties)
           : undefined
       }
       className="relative bg-mm-page"

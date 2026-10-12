@@ -219,7 +219,11 @@ export function ChapterThreeHowItWorks() {
       ref={sectionRef}
       aria-labelledby="chapter-three-heading"
       data-chapter="3"
-      style={choreographed ? ({ height: `${timing.desktopScrollHeightSvh}svh` } as CSSProperties) : undefined}
+      style={
+        choreographed
+          ? ({ height: `${timing.desktopScrollHeightSvh}svh`, marginTop: `-${timing.entryOverlapSvh}svh` } as CSSProperties)
+          : undefined
+      }
       className="relative bg-mm-page"
     >
       {choreographed ? (
