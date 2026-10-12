@@ -164,12 +164,64 @@ export const nav = {
 
 /**
  * Chapter 1 copy: the two-line promise, one sentence of what MindMosaic is, the
- * CTA pair and a short credibility line. The photograph is NOT here: it comes
- * from the media registry (src/features/landing/media.ts), slot
- * landingMedia.chapter1.intro.primary. `demo` is the real-HTML sample question
- * card content (12 m x 8 m = 96 m2; option C is correct).
+ * CTA pair and a short credibility line. `scenes` are the six story beats the
+ * scroll walks through (Learn, Practise, Prepare, Understand, Progress, Explore):
+ * each has its own eyebrow, two-line headline and paragraph, taken word for word
+ * from the Claude Design Chapter 1 prototype (`COPY`). Scene 1 is the promise
+ * above (`heading` / `headingEmphasis` / `subheadline`). Every scene claim is
+ * held to what the product ships: practice for Years 3 and 5, a read-only parent
+ * view, limited curriculum learning. Photographs are NOT here: they come from
+ * the media registry (src/features/landing/media.ts), slots
+ * landingMedia.chapter1.scenes, one per entry of `scenes` in the same order.
+ * Nothing here rotates on a timer: scroll position is the only input.
+ * `demo` is the real-HTML sample question card content (12 m x 8 m = 96 m2;
+ * option C is correct).
  */
 export const hero = {
+  scenes: [
+    {
+      id: "learn",
+      label: "Learn",
+      eyebrow: "Learn · For Australian students",
+      headline: ["Learn with purpose.", "Practise with confidence."],
+      body: "Learning, practice and exam preparation brought together in one place — with clear lessons, original questions, worked explanations and progress that helps students understand what to work on next.",
+    },
+    {
+      id: "practise",
+      label: "Practise",
+      eyebrow: "Practise",
+      headline: ["Practice that builds", "real confidence."],
+      body: "Practise with original questions in the subjects and year levels available today, with clear feedback to support understanding.",
+    },
+    {
+      id: "prepare",
+      label: "Prepare",
+      eyebrow: "Prepare",
+      headline: ["Ready for the", "real challenge."],
+      body: "Build familiarity with NAPLAN-style and ICAS-style practice for Years 3 and 5, including timed options where available.",
+    },
+    {
+      id: "understand",
+      label: "Understand",
+      eyebrow: "Understand",
+      headline: ["Learn from", "every answer."],
+      body: "Review answers with clear feedback and worked explanations in supported practice formats.",
+    },
+    {
+      id: "progress",
+      label: "Progress",
+      eyebrow: "Progress",
+      headline: ["See where learning", "is going."],
+      body: "See completed work, results and subject-level patterns in a clear, read-only parent view.",
+    },
+    {
+      id: "explore",
+      label: "Explore",
+      eyebrow: "Explore",
+      headline: ["Learning beyond", "one pathway."],
+      body: "Start with available NAPLAN- and ICAS-style practice, explore limited curriculum learning, and see what is in development.",
+    },
+  ],
   demo: {
     label: "Hero sample: maths question",
     subject: "Mathematics",

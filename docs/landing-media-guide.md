@@ -65,6 +65,10 @@ The two originally generated alternates (solo child study scene; editorial refle
 - Photography only. No logos, no interface screenshots, no text inside the picture: the real MindMosaic logo is drawn by the page. Keep it rich and warm, not grey or washed out.
 - At most two photographs on the whole home page may show faces (design rule 39.2). Chapter 1's active picture uses one of those two. If you choose a face-free option, check its `treatment` in the registry.
 
+### Chapter 1 scroll story: six scene photographs
+
+The home page's Chapter 1 is a six-scene scroll story (Learn, Practise, Prepare, Understand, Progress, Explore). Its photographs are the six slots in `landingMedia.chapter1.scenes` (`ch01-scene-NN-<scene>-v1.webp` in the same folder), all `interim` (native 1672 x 941) Claude Design concept photographs. To replace one, add a new file with a new revision (`-v2`), bump `revision` on that scene in `media.ts`, and regenerate its inlined blurred preview in `src/features/landing/hero-previews.ts`. The photographs never zoom or pan (`motionPreset: "still"`), carry no baked-in fade (the readability scrim is CSS), and are decorative (empty alt). Only Scene 1 shows faces. The older `chapter1.intro` slots above are no longer rendered by the page.
+
 ### Switch to another Chapter 1 picture (A or C)
 
 1. Open `src/features/landing/media.ts`.

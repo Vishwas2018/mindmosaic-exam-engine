@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { chapter2Scenes } from "../chapter2-scenes";
 import { cinematicMotion, pinnedTravelFactor } from "../cinematic/config";
 import { clamp01 } from "../cinematic/math";
+import { seamClipPath, seamGrid, type SeamGrid } from "../cinematic/seamReveal";
 import {
   activeLayer as activeLayerAt,
   chapter2LayerStarts,
@@ -66,6 +67,50 @@ export function ChapterTwoPrograms() {
 
   const [active, setActive] = useState(0);
   useMotionValueEvent(q, "change", (value) => setActive(activeLayerAt(value, chapter2LayerStarts)));
+
+  // The Chapter 1 -> 2 seam. While Chapter 1's Explore scene is still pinned, this section rises over it for
+  // `seamSvh` of scroll (negative top margin). The stage is held at the top of the viewport (cancelling that
+  // rise) and revealed through a grid of growing tiles, so Explore turns into this introduction in place; the
+  // sweep finishes exactly as this chapter's own timeline begins. See cinematic/seamReveal.ts.
+  const stageRef = useRef<HTMLDivElement>(null);
+  const seamGridRef = useRef<SeamGrid | null>(null);
+  const { scrollYProgress: seam } = useScroll({ target: sectionRef, offset: ["start end", "start start"] });
+  const applySeam = useCallback(
+    (u: number) => {
+      const stage = stageRef.current;
+      if (!stage) return;
+      if (!choreographed || u >= 1) {
+        stage.style.transform = "";
+        stage.style.clipPath = "";
+        return;
+      }
+      const grid = seamGridRef.current;
+      stage.style.transform = `translate3d(0,${(-(1 - clamp01(u)) * 100).toFixed(3)}svh,0)`;
+      stage.style.clipPath = grid ? seamClipPath(grid, clamp01(u)) : "path('M0 0Z')";
+    },
+    [choreographed],
+  );
+  useMotionValueEvent(seam, "change", applySeam);
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!choreographed || !stage) {
+      seamGridRef.current = null;
+      applySeam(1);
+      return;
+    }
+    const measure = () => {
+      seamGridRef.current = seamGrid(stage.clientWidth, stage.clientHeight);
+      applySeam(seam.get());
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", measure);
+      return () => window.removeEventListener("resize", measure);
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, [applySeam, choreographed, seam]);
   const nearViewport = useInView(sectionRef, { margin: "60% 0px 60% 0px" });
 
   const scrollToLayer = useCallback(
@@ -105,17 +150,25 @@ export function ChapterTwoPrograms() {
       ref={sectionRef}
       aria-labelledby="chapter-two-heading"
       data-chapter="2"
-      style={{ "--chapter-height": `${timing.desktopScrollHeightSvh}svh` } as CSSProperties}
-      className="relative bg-mm-page lg:h-[var(--chapter-height)] motion-reduce:lg:h-auto"
+      style={
+        {
+          "--chapter-height": `${timing.desktopScrollHeightSvh}svh`,
+          "--seam-height": cinematicMotion.chapter1.seamSvh,
+        } as CSSProperties
+      }
+      className="relative bg-mm-page lg:-mt-[calc(var(--seam-height)*1svh)] lg:h-[var(--chapter-height)] lg:scroll-mt-[calc(var(--seam-height)*-1svh)] lg:bg-transparent motion-reduce:lg:mt-0 motion-reduce:lg:h-auto motion-reduce:lg:scroll-mt-0 motion-reduce:lg:bg-mm-page"
     >
-      <div className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh motion-reduce:lg:static motion-reduce:lg:h-auto motion-reduce:lg:overflow-visible">
+      <div
+        ref={stageRef}
+        className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:bg-mm-page motion-reduce:lg:static motion-reduce:lg:h-auto motion-reduce:lg:overflow-visible"
+      >
         <motion.div
           data-layer="intro"
           style={choreographed ? { opacity: introForeground, pointerEvents: introPointer } : undefined}
           className={`${LAYER_CLASSES} lg:opacity-100 lg:pointer-events-auto`}
         >
           <div className="mm-width grid gap-8 pb-6 pt-[clamp(56px,10vw,120px)] lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-6 motion-reduce:lg:pt-[clamp(56px,10vw,120px)]">
-            <div className="flex flex-col gap-4 lg:col-span-7">
+            <div className="flex flex-col gap-4 lg:order-2 lg:col-span-7">
               <p className="m-0 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">
                 <span aria-hidden="true" className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
                 {chapterTwo.eyebrow}
@@ -136,7 +189,7 @@ export function ChapterTwoPrograms() {
             </div>
             <ol
               aria-label="The six pathways"
-              className="m-0 grid list-none gap-0 rounded-2xl border border-mm-line/80 bg-white/75 p-5 shadow-[0_16px_40px_-16px_rgba(24,21,31,0.12)] backdrop-blur-sm sm:p-6 lg:col-span-5"
+              className="m-0 grid list-none gap-0 rounded-2xl border border-mm-line/80 bg-white/75 p-5 shadow-[0_16px_40px_-16px_rgba(24,21,31,0.12)] backdrop-blur-sm sm:p-6 lg:order-1 lg:col-span-5"
             >
               {chapter2Scenes.map((scene) => (
                 <li
