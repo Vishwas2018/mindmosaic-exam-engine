@@ -318,7 +318,10 @@ test.describe("Chapter 2 programmes", () => {
       const section = document.querySelector('section[data-chapter="2"]') as HTMLElement;
       const heightSvh = (section.offsetHeight / window.innerHeight) * 100;
       const factor = heightSvh / (heightSvh - 100);
-      window.scrollTo(0, section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight);
+      window.scrollTo({
+        top: section.getBoundingClientRect().top + window.scrollY + (q / factor) * section.offsetHeight,
+        behavior: "instant",
+      });
     }, progress);
   };
 
@@ -335,12 +338,23 @@ test.describe("Chapter 2 programmes", () => {
       }),
     );
 
-  const chapter2Images = (page: PwPage) =>
-    page.evaluate(
+  /** scrollTo can be smooth: resolves once the page has stopped moving. */
+  const settled = (page: PwPage) =>
+    page.waitForFunction(
       () =>
-        [...document.querySelectorAll("img")].filter((img) =>
-          decodeURIComponent(img.getAttribute("src") ?? "").includes("chapter-02-programs"),
-        ).length,
+        new Promise<boolean>((resolve) => {
+          const y = window.scrollY;
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve(window.scrollY === y)));
+        }),
+    );
+
+  /** Every scene's preview window rect, rounded: the window must never move, scale or resize. */
+  const previewRects = (page: PwPage) =>
+    page.evaluate(() =>
+      [...document.querySelectorAll('section[data-chapter="2"] [data-scene] [data-preview-window]')].map((el) => {
+        const r = el.getBoundingClientRect();
+        return [r.left, r.top, r.width, r.height].map((n) => Math.round(n * 10) / 10);
+      }),
     );
 
   test("pins a 680svh stage on desktop and shows exactly one scene at each scene progress", async ({ page }) => {
@@ -372,14 +386,64 @@ test.describe("Chapter 2 programmes", () => {
     expect(await sceneOpacities(page)).toEqual(expected);
   });
 
-  test("loads photographs on demand, never all six at once", async ({ page }) => {
+  test("shows no photographs: six stationary product windows sit left of the explanation", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
     await page.waitForLoadState("networkidle");
-    expect(await chapter2Images(page)).toBe(0);
+    expect(await page.locator('section[data-chapter="2"] img[src*="chapter-02-programs"]').count()).toBe(0);
     await scrollToProgress(page, SCENE_PROGRESS[0]!);
-    await expect.poll(() => chapter2Images(page)).toBeGreaterThan(0);
-    expect(await chapter2Images(page)).toBeLessThan(6);
+    await expect(page.locator('[data-scene="naplan"] [data-preview-window]')).toBeVisible();
+    await settled(page);
+    const rects = await previewRects(page);
+    expect(rects).toHaveLength(6);
+    // Identical frame in every scene, at about 58% of the content width and to the left of the copy.
+    for (const rect of rects) expect(rect).toEqual(rects[0]);
+    const copyLeft = await page.locator('[data-scene="naplan"] h3').evaluate((el) => el.getBoundingClientRect().left);
+    expect(rects[0]![0]! + rects[0]![2]!).toBeLessThanOrEqual(copyLeft);
+    expect(rects[0]![2]!).toBeGreaterThan(1440 * 0.5);
+  });
+
+  test("the preview window never moves or scales, through scenes and cross-fades, forwards or in reverse", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    await scrollToProgress(page, SCENE_PROGRESS[0]!);
+    await settled(page);
+    const reference = (await previewRects(page))[0]!;
+    // Mid-scene, then straight through every cross-fade (layer starts +/- the 0.05 fade), then back.
+    const samples = [0.1, 0.145, 0.2, 0.22, 0.25, 0.37, 0.4, 0.52, 0.55, 0.67, 0.7, 0.82, 0.85, 0.89, 0.7, 0.4, 0.22, 0.1];
+    for (const progress of samples) {
+      await scrollToProgress(page, progress);
+      await settled(page);
+      for (const rect of await previewRects(page)) expect(rect, `progress ${progress}`).toEqual(reference);
+    }
+  });
+
+  test("each preview fills its frame and the three planned ones say so", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    for (const [index, id] of SCENES.entries()) {
+      await scrollToProgress(page, SCENE_PROGRESS[index]!);
+      const frame = page.locator(`[data-scene="${id}"] [data-preview-window]`);
+      await expect(frame).toBeVisible();
+      await settled(page);
+      const { frameBox, canvasBox } = await frame.evaluate((el) => {
+        const canvas = el.querySelector("[data-preview-canvas]") as HTMLElement;
+        const f = el.getBoundingClientRect();
+        const c = canvas.getBoundingClientRect();
+        return {
+          frameBox: [f.width, f.height],
+          canvasBox: [c.width, c.height],
+        };
+      });
+      expect(Math.abs(canvasBox[0]! - frameBox[0]!), id).toBeLessThan(2);
+      expect(Math.abs(canvasBox[1]! - frameBox[1]!), id).toBeLessThan(2);
+      const text = (await frame.textContent()) ?? "";
+      if (["amc", "singapore", "selective"].includes(id)) {
+        expect(text, id).toContain("Illustrative concept screen. Not available yet.");
+      } else {
+        expect(text, id).not.toContain("Illustrative concept");
+      }
+    }
   });
 
   test("the progress navigator marks the current programme and scrolls normally when used", async ({ page }) => {
@@ -471,7 +535,10 @@ test.describe("Chapter 2 programmes", () => {
     await page.setViewportSize({ width: 375, height: 900 });
     await page.goto("/");
     const outline = await page.evaluate(() =>
-      [...document.querySelectorAll('section[data-chapter="2"] h2, section[data-chapter="2"] h3')].map(
+      // The decorative product windows reuse real app components, headings and all; they are aria-hidden.
+      [...document.querySelectorAll('section[data-chapter="2"] h2, section[data-chapter="2"] h3')]
+        .filter((el) => !el.closest("[data-preview-window]"))
+        .map(
         (el) => `${el.tagName} ${el.textContent?.trim()}`,
       ),
     );
@@ -884,7 +951,10 @@ test.describe("Continuous scroll across chapters", () => {
   type Frame = {
     y: number;
     overflow: number;
-    chapters: Record<string, { top: number; bottom: number; text: number; photoCoverage: number; photos: number; loaded: number }>;
+    chapters: Record<
+      string,
+      { top: number; bottom: number; text: number; photoCoverage: number; photos: number; loaded: number; previewCoverage: number }
+    >;
   };
 
   const sampleFrame = (page: import("@playwright/test").Page): Promise<Frame> =>
@@ -913,6 +983,10 @@ test.describe("Continuous scroll across chapters", () => {
           photoCoverage: 1 - alphas.reduce((a, o) => a * (1 - o), 1),
           photos: photos.length,
           loaded: photos.filter((i, n) => alphas[n]! > 0.1 && i.complete && i.naturalWidth > 0).length,
+          // Chapter 2's stacked product windows: how much of the frame is covered by at least one of them.
+          previewCoverage:
+            1 -
+            [...section.querySelectorAll("[data-preview]")].reduce((a, el) => a * (1 - effective(el, section.parentElement)), 1),
         };
       }
       return frame;
@@ -971,7 +1045,7 @@ test.describe("Continuous scroll across chapters", () => {
     }
   });
 
-  test("Chapter 2 photographs stack: the panel never dips and a visible one is always loaded", async ({ page }) => {
+  test("Chapter 2 preview windows stack: the frame never dips between one programme and the next", async ({ page }) => {
     await page.goto("/");
     const frames = await wheelThrough(page, 1, 30, { from: 1700, to: 7100 });
     const timing = cinematicMotion.chapter2;
@@ -981,17 +1055,17 @@ test.describe("Continuous scroll across chapters", () => {
     });
     // Chapter progress of a frame: how far the pinned travel has run.
     const progressOf = (f: Frame) => -f.chapters["2"]!.top / (f.chapters["2"]!.bottom - f.chapters["2"]!.top - 900);
-    // A photograph that is even slightly visible must already be decoded and loaded.
-    for (const f of pinned) {
-      const c = f.chapters["2"]!;
-      if (c.photoCoverage > 0.1) expect(c.loaded, `visible panel without its photograph at y=${f.y}`).toBeGreaterThan(0);
+    // From the moment NAPLAN's window is fully in until the last programme's, a window is always fully covering the frame,
+    // including across every one of the five cross-fades.
+    const between = pinned.filter(
+      (f) => progressOf(f) >= timing.layerStarts.naplan + timing.crossfade && progressOf(f) <= timing.layerStarts.handoff - timing.crossfade,
+    );
+    expect(between.length, "frames sampled across the six programmes").toBeGreaterThan(40);
+    for (const f of between) {
+      expect(f.chapters["2"]!.previewCoverage, `preview coverage at y=${f.y}`).toBeGreaterThanOrEqual(0.99);
     }
-    // NAPLAN -> ICAS are two consecutive photographs: across their whole cross-fade the page must never show through.
     const handover = pinned.filter((f) => Math.abs(progressOf(f) - timing.layerStarts.icas) <= timing.crossfade);
     expect(handover.length, "frames sampled across the NAPLAN to ICAS hand-over").toBeGreaterThan(8);
-    for (const f of handover) {
-      expect(f.chapters["2"]!.photoCoverage, `photograph coverage at y=${f.y}`).toBeGreaterThanOrEqual(0.99);
-    }
   });
 
   test("scrolling back up retraces the same frames", async ({ page }) => {
