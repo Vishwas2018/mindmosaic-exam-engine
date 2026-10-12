@@ -128,3 +128,15 @@ describe("blend config", () => {
     }
   });
 });
+
+describe("chapter entry overlap", () => {
+  it("pulls Chapter 3 and 4 up under the previous hand-off, but never as far as the hand-off card", () => {
+    // Chapter 2's hand-off card ends about 68% of the way down its stage and Chapter 3's about 58%; the overlap covers
+    // the empty lower part of the previous stage only, so the two never collide while they scroll together.
+    const { chapter3, chapter4 } = cinematicMotion;
+    expect(chapter3.entryOverlapSvh).toBeGreaterThan(0);
+    expect(chapter3.entryOverlapSvh).toBeLessThanOrEqual(25);
+    expect(chapter4.entryOverlapSvh).toBeGreaterThan(0);
+    expect(chapter4.entryOverlapSvh).toBeLessThanOrEqual(40);
+  });
+});
