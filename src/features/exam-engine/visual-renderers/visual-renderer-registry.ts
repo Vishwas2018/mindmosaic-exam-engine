@@ -4,6 +4,7 @@ import type {
 } from "@/features/exam-engine/types";
 
 import { BarChartRenderer } from "./BarChartRenderer";
+import { BarModelRenderer } from "./BarModelRenderer";
 import { CoordinateGridRenderer } from "./CoordinateGridRenderer";
 import { FractionModelRenderer } from "./FractionModelRenderer";
 import { GeometryShapeRenderer } from "./GeometryShapeRenderer";
@@ -26,6 +27,7 @@ const renderers = {
   fraction_model: FractionModelRenderer,
   labelled_svg: LabelledSvgRenderer,
   hotspot_svg: HotspotSvgRenderer,
+  bar_model: BarModelRenderer,
 } satisfies Record<VisualType, VisualRendererComponent>;
 
 export type SupportedVisualRendererType = keyof typeof renderers;

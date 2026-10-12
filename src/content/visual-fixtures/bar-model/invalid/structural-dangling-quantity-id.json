@@ -1,0 +1,72 @@
+{
+  "why": "A relationship references a quantity that does not exist.",
+  "layer": "structural",
+  "errorCodes": [
+    "dangling_quantity_id"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-dangling-quantity",
+    "type": "bar_model",
+    "title": "Marbles given away",
+    "altText": "Kai had some marbles at the start. He gave 15 marbles away and now has 32 left. The bars show before and after. The number he started with is unknown.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "groups": [
+        {
+          "id": "kai",
+          "barIds": [
+            "kai-before",
+            "kai-after"
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "id": "given-away",
+          "label": "Given away",
+          "value": 15,
+          "display": "value"
+        }
+      ],
+      "bars": [
+        {
+          "id": "kai-before",
+          "label": "Kai",
+          "stage": "before",
+          "segments": [
+            {
+              "id": "start",
+              "label": "Start",
+              "unknown": "s",
+              "display": "unknown",
+              "target": true
+            }
+          ]
+        },
+        {
+          "id": "kai-after",
+          "label": "Kai",
+          "stage": "after",
+          "segments": [
+            {
+              "id": "left",
+              "label": "Left",
+              "value": 32,
+              "display": "value"
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "kind": "remove",
+          "fromStage": "kai-before",
+          "toStage": "kai-after",
+          "quantityId": "taken"
+        }
+      ]
+    }
+  }
+}

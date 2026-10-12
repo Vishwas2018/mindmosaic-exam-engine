@@ -77,6 +77,12 @@ export default defineConfig({
      * gating alone would have removed that coverage rather than relocating
      * it. Nothing outside this file sets this variable.
      */
-    env: { SHOWCASE_ENABLED: "1" },
+    /*
+     * Same posture for the dev-only bar-model preview (Phase 1 is
+     * render-only; src/features/visuals/bar-model/preview-gate.ts). The
+     * 404-in-production half is proven by bar-model-preview.spec.ts, which
+     * starts this same build WITHOUT the variable.
+     */
+    env: { SHOWCASE_ENABLED: "1", BAR_MODEL_PREVIEW_ENABLED: "1" },
   },
 });

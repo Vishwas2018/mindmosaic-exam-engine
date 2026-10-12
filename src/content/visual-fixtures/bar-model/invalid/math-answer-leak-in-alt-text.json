@@ -1,0 +1,52 @@
+{
+  "why": "The alt text states the answer, 27.",
+  "layer": "mathematical",
+  "errorCodes": [
+    "answer_leak"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-answer-leak",
+    "type": "bar_model",
+    "title": "Lamingtons in a tray",
+    "altText": "A bar model of one tray of lamingtons. The whole tray is 45 and 18 are dark chocolate, so the missing part is 27.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "bars": [
+        {
+          "id": "tray",
+          "label": "Tray",
+          "segments": [
+            {
+              "id": "dark",
+              "label": "Dark",
+              "value": 18,
+              "display": "value"
+            },
+            {
+              "id": "pink",
+              "label": "Pink",
+              "unknown": "p",
+              "display": "unknown",
+              "target": true
+            }
+          ]
+        }
+      ],
+      "braces": [
+        {
+          "id": "whole",
+          "kind": "total",
+          "label": "All",
+          "value": 45,
+          "display": "value",
+          "spans": [
+            "dark",
+            "pink"
+          ]
+        }
+      ]
+    }
+  }
+}
