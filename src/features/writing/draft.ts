@@ -1,16 +1,16 @@
 import { z } from "zod";
 
-import { WRITING_FORMS } from "./task";
+import { WRITING_FORMS, writingTaskSchema, type WritingTask } from "./task";
 
 /**
- * Shape of a writing-prompt DRAFT in content/writing-drafts. Mirrors the
- * roadmap-drafts posture: candidate material, never imported by a learner
- * route, and never signed off here.
+ * Shape of a writing-prompt DRAFT in content/writing-drafts. Same posture as
+ * the other unsigned content drafts: candidate material, never imported by a
+ * learner route, and never signed off here.
  *
  * `approvedBy` and `review` are required to be null in a draft. A prompt only
  * becomes a WritingTask a child can reach when a human approves it and it is
- * added to PUBLISHED_WRITING_TASKS (src/features/writing/task.ts). That step is
- * separate work and is not claimed by anything in this file.
+ * served from an approval record (src/server/writing/tasks.ts), which only
+ * `content:record-approvals` can create. Nothing in this file claims approval.
  */
 export const writingDraftSchema = z.object({
   id: z.string().regex(/^w[0-9]+-[a-z]+-draft-[0-9]{3}$/),
@@ -25,6 +25,8 @@ export const writingDraftSchema = z.object({
     authoredOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     originality: z.string().min(1),
   }),
+  /** Bumped when a reviewed prompt is edited, so the new text needs a fresh review. */
+  revision: z.number().int().min(1).default(1),
   review: z.null(),
   approvedBy: z.null(),
 });
@@ -49,4 +51,24 @@ export const writingDraftPacketSchema = z
   });
 
 export type WritingDraft = z.infer<typeof writingDraftSchema>;
+
+/**
+ * The reviewable subject for a draft: exactly what a child would see and what
+ * an approval binds to. Provenance and the null review fields are authoring
+ * metadata and are not part of the approved content.
+ */
+export function writingDraftToTask(draft: WritingDraft): { readonly task: WritingTask; readonly revision: number } {
+  return {
+    task: writingTaskSchema.parse({
+      id: draft.id,
+      title: draft.title,
+      form: draft.form,
+      yearLevel: draft.yearLevel,
+      prompt: draft.prompt,
+      timeLimitMinutes: draft.timeLimitMinutes,
+      suggestedWords: draft.suggestedWords,
+    }),
+    revision: draft.revision,
+  };
+}
 export type WritingDraftPacket = z.infer<typeof writingDraftPacketSchema>;

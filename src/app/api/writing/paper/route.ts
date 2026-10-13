@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { paperWritingAttemptRequestSchema } from "@/features/writing/contracts";
-import { resolveWritingTask } from "@/features/writing/task";
+import { resolveWritingTask } from "@/server/writing/tasks";
 import { isResponse, readWritingRequest, writingError } from "@/server/writing/route-helpers";
 import { recordMarkedPaperAttempt, recordPaperWritingAttempt, toAttemptDto } from "@/server/writing/service";
 

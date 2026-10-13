@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { startWritingAttemptRequestSchema } from "@/features/writing/contracts";
-import { resolveWritingTask } from "@/features/writing/task";
+import { resolveWritingTask } from "@/server/writing/tasks";
 import { isResponse, readWritingRequest, writingError } from "@/server/writing/route-helpers";
 import { startWritingAttempt, toAttemptDto } from "@/server/writing/service";
 

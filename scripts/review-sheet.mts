@@ -19,6 +19,8 @@ import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { toCandidateQuestion } from "@/features/exam-engine/types/candidate-question";
 import type { Question } from "@/schemas/question.schema";
 import { evaluateQuestionCorrectness } from "./check-question-correctness.mjs";
+import { loadWritingDraftSubjects } from "./lib/writing-draft-tasks";
+import { renderWritingReviewSheet } from "./lib/writing-review-sheet";
 
 function formatProgrammeTitle(programmeId: string): string {
   const parts = programmeId.split("-");
@@ -37,7 +39,9 @@ function parseCliArgs(args: readonly string[]): {
   outDir: string;
   csvPath?: string;
   htmlPath?: string;
+  writing: boolean;
 } {
+  let writing = false;
   let programme: string | undefined;
   let candidateIds: string[] | undefined;
   let outDir = "content/question-factory/reports/human-approval";
@@ -62,14 +66,21 @@ function parseCliArgs(args: readonly string[]): {
       csvPath = args[++i];
     } else if (arg === "--html" && args[i + 1]) {
       htmlPath = args[++i];
+    } else if (arg === "--writing") {
+      writing = true;
     } else {
       throw new Error(`Unknown or incomplete review-sheet argument: ${arg}`);
     }
   }
 
-  if (!programme) throw new Error("Usage: content:review-sheet -- --programme <id> [--skill <skillId>] [--limit 25]");
+  if (writing && (programme || skill || candidateIds)) {
+    throw new Error("--writing builds a sheet of writing prompts; it cannot be combined with --programme, --skill or --candidate-ids.");
+  }
+  if (!programme && !writing) {
+    throw new Error("Usage: content:review-sheet -- --programme <id> [--skill <skillId>] [--limit 25] | --writing [--limit 25]");
+  }
   if (!Number.isSafeInteger(limit) || limit < 1 || limit > 25) throw new Error("--limit must be an integer from 1 to 25.");
-  return { programme, skill, limit, candidateIds, outDir, csvPath, htmlPath };
+  return { programme, skill, limit, candidateIds, outDir, csvPath, htmlPath, writing };
 }
 
 function escapeCsvCell(val: string | number | null | undefined): string {
@@ -122,8 +133,32 @@ function renderAnswerKeySummary(question: Question): string {
   return `<strong>${escapeHtml(key.kind)}:</strong> ${escapeHtml(JSON.stringify(key))}`;
 }
 
+async function writeWritingSheet(options: ReturnType<typeof parseCliArgs>): Promise<void> {
+  const subjects = (await loadWritingDraftSubjects()).slice(0, options.limit);
+  if (subjects.length === 0) {
+    console.log("No writing prompts matched the review criteria.");
+    return;
+  }
+  await mkdir(options.outDir, { recursive: true });
+  const sheetId = `review-sheet-writing-prompts-${new Date().toISOString().replace(/[:.]/g, "-")}`;
+  const finalCsvPath = options.csvPath ?? path.join(options.outDir, `${sheetId}.csv`);
+  const finalHtmlPath = options.htmlPath ?? path.join(options.outDir, `${sheetId}.html`);
+  const sheet = renderWritingReviewSheet(subjects, path.basename(finalCsvPath));
+  await writeFile(finalCsvPath, sheet.csv, { encoding: "utf8", flag: "wx" });
+  try {
+    await writeFile(finalHtmlPath, sheet.html, { encoding: "utf8", flag: "wx" });
+  } catch (error) {
+    await unlink(finalCsvPath);
+    throw error;
+  }
+  console.log(`Generated review sheet for ${subjects.length} writing prompt(s):`);
+  console.log(`  HTML: ${finalHtmlPath}`);
+  console.log(`  CSV:  ${finalCsvPath}`);
+}
+
 async function main(): Promise<void> {
   const options = parseCliArgs(process.argv.slice(2));
+  if (options.writing) return writeWritingSheet(options);
 
   let questions: readonly Question[] = publishedExamBank;
   const stagedSources = new Map<string, { revision: number; sourceManifestHash: null }>();

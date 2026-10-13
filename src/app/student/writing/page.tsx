@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { WRITING_BACK_LINK_CLASS, WritingPageShell } from "@/features/writing/components/WritingPageShell";
 import { WritingResultsList } from "@/features/writing/components/WritingResultsList";
-import { listWritingTasks } from "@/features/writing/task";
+import { listWritingTasks } from "@/server/writing/tasks";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { loadWritingHistory } from "@/server/writing/queries";

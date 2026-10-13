@@ -5,14 +5,17 @@ import path from "node:path";
 
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import {
+  WRITING_APPROVALS_DIRECTORY,
   getSourceManifestForQuestion,
   parseApprovalCsv,
   recordApprovalsToDisk,
   validateApprovalBatch,
   validateSingleApproval,
 } from "@/features/content-governance/approval-verification";
-import { canonicalQuestionHash } from "@/features/content-governance/publication-integrity";
+import { canonicalQuestionHash, canonicalWritingPromptHash } from "@/features/content-governance/publication-integrity";
 import { getPublicationEligibility } from "@/server/publication-evidence";
+import { loadApprovedWritingPrompts } from "@/server/writing/tasks";
+import { loadWritingDraftSubjects } from "./lib/writing-draft-tasks";
 
 const command = process.argv[2];
 const args = process.argv.slice(3);
@@ -112,6 +115,7 @@ if (command === "queue") {
     rows,
     reviewerFullName: reviewer.trim(),
     questionBank: publishedExamBank,
+    writingPrompts: await loadWritingDraftSubjects(),
   });
 
   if (!validation.ok) {
@@ -125,15 +129,34 @@ if (command === "queue") {
   if (validation.newApprovals.length > 0) {
     await recordApprovalsToDisk(validation.newApprovals);
   }
+  if (validation.newWritingApprovals.length > 0) {
+    await recordApprovalsToDisk(validation.newWritingApprovals, WRITING_APPROVALS_DIRECTORY);
+  }
 
   console.log(`\nApproval Recording Summary for reviewer '${reviewer}':`);
-  console.log(`  New approvals recorded:       ${validation.newApprovals.length}`);
-  console.log(`  Already recorded (skipped):   ${validation.alreadyRecorded.length}`);
+  console.log(`  New approvals recorded:       ${validation.newApprovals.length + validation.newWritingApprovals.length}`);
+  console.log(`  Already recorded (skipped):   ${validation.alreadyRecorded.length + validation.alreadyRecordedWriting.length}`);
   console.log(`  Rejected (no approval written): ${validation.rejectedCount}`);
   console.log(`  Revision requested:           ${validation.revisedCount}`);
   console.log(`  Unreviewed / blank:           ${validation.unreviewedCount}`);
 } else if (command === "verify") {
   const report = getPublicationEligibility();
+
+  // Writing prompts: the same approval records, verified by the same function.
+  // Beyond what a child is served (the approved snapshot), every approval must
+  // still match its current draft, so an edit after review is caught here.
+  const drafts = await loadWritingDraftSubjects();
+  const writing = loadApprovedWritingPrompts(path.join(process.cwd(), WRITING_APPROVALS_DIRECTORY));
+  const writingProblems = [...writing.problems];
+  const draftsById = new Map(drafts.map((draft) => [draft.task.id, draft]));
+  for (const [id, approval] of writing.approvals) {
+    const draft = draftsById.get(id);
+    if (!draft) writingProblems.push(`${id}: approved_prompt_has_no_draft`);
+    else if (canonicalWritingPromptHash(draft.task) !== approval.contentHash || draft.revision !== approval.revision) {
+      writingProblems.push(`${id}: draft_changed_since_approval`);
+    }
+  }
+
   console.log(
     JSON.stringify(
       {
@@ -141,12 +164,18 @@ if (command === "queue") {
         eligible: report.questions.length,
         awaitingApproval: report.excluded.filter((q) => q.reason === "awaiting_human_approval").length,
         problems: report.problems,
+        writingPrompts: {
+          drafts: drafts.length,
+          eligible: writing.prompts.length,
+          awaitingApproval: drafts.filter((draft) => !writing.approvals.has(draft.task.id)).length,
+          problems: writingProblems,
+        },
       },
       null,
       2,
     ),
   );
-  if (report.problems.length) process.exitCode = 1;
+  if (report.problems.length || writingProblems.length) process.exitCode = 1;
 } else {
   throw new Error("Expected queue, record, record-batch, record-approvals, or verify.");
 }

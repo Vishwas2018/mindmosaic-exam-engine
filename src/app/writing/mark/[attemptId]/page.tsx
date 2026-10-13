@@ -4,7 +4,8 @@ import { notFound, redirect } from "next/navigation";
 
 import { AttemptMarkForm } from "@/features/writing/components/MarkEntry";
 import { WRITING_BACK_LINK_CLASS, WritingPageShell } from "@/features/writing/components/WritingPageShell";
-import { resolveWritingRubric, resolveWritingTask, listWritingTasks } from "@/features/writing/task";
+import { resolveWritingRubric } from "@/features/writing/task";
+import { resolveWritingTask, listWritingTasks } from "@/server/writing/tasks";
 import { scholarshipWrittenExpressionRubric } from "@/features/writing/rubrics/scholarship-written-expression";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";

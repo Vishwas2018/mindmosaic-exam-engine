@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 import { PrintSheet } from "@/features/writing/components/PrintSheet";
-import { resolveWritingTask } from "@/features/writing/task";
+import { resolveWritingTask } from "@/server/writing/tasks";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 

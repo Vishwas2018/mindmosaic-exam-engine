@@ -12,19 +12,35 @@ prompt, and the validator rejects a draft where either is set.
 
 - Nothing under `src/` imports this folder
   (`src/tests/unit/writing-drafts.test.ts` fails if anything does).
-- `PUBLISHED_WRITING_TASKS` in `src/features/writing/task.ts` is empty. A prompt
-  joins it only through the human approval (`approvedBy`) step every other piece
-  of MindMosaic content goes through, which is separate work.
-- Until then every real writing route answers 404 for every task id.
+- A child is served a prompt only from an approval record under
+  `content/publication-approvals/writing-prompts/`, verified by the shared
+  approval verifier. There is no hand-kept list of published tasks.
+- Until a prompt is approved every real writing route answers 404 for its id.
 
 ## How a prompt becomes approved
 
-Through the shared approval path from the publication-governance PR (#35), not a
-separate mechanism: review sheet, then `content:record-approvals` (the single
-verifier), then an approval record under `content/publication-approvals/`, which
-the server loads and re-verifies before serving. It is not wired yet, because
-that PR has not merged. The plan, and the one open decision (a subject kind on
-the shared verifier), are in the "Approval plan" section of PR #47.
+The same path as a question, with a `writing_prompt` kind of the shared record:
+
+1. `npm run content:review-sheet -- --writing` writes an HTML page and a CSV
+   (the same columns as a question sheet) for the drafts, at most 25 rows. The
+   CSV carries each prompt's `contentHash` and `revision`; the reviewer's five
+   columns start blank.
+2. A human reviews each prompt against the three checks (correctness,
+   originality, age appropriateness) and records `approve`, `reject` or `revise`.
+3. `npm run content:record-approvals -- --sheet <csv> --reviewer "<Full Name>"`
+   runs the one batch validator (`validateApprovalBatch`, which calls
+   `verifyApprovalRecord`) and writes
+   `content/publication-approvals/writing-prompts/<promptId>.json`: the reviewer,
+   the fingerprint and a snapshot of the exact prompt. It is committed through a PR.
+4. `npm run content:verify-publication` verifies every record and reports a
+   `writingPrompts` block. It fails if a record is invalid or if a draft was
+   edited after approval (`draft_changed_since_approval`).
+5. The server (`src/server/writing/tasks.ts`) loads the records, verifies each
+   with the same function and serves the **embedded snapshot**. Any problem
+   serves nothing.
+
+Editing a draft means raising its `revision` and getting a fresh review sheet.
+Approving the ten is a human decision and has not been done here.
 
 ## Originality
 

@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import { isWritingPreviewAllowed } from "@/features/writing/preview-gate";
-import { DEV_FIXTURE_WRITING_TASK, listWritingTasks, PUBLISHED_WRITING_TASKS, resolveWritingTask } from "@/features/writing/task";
+import { DEV_FIXTURE_WRITING_TASK } from "@/features/writing/task";
+import { listWritingTasks, resolveWritingTask } from "@/server/writing/tasks";
 
 describe("writing preview gate", () => {
   it("is open outside production", () => {
@@ -24,8 +25,7 @@ describe("writing preview gate", () => {
 });
 
 describe("which writing tasks a child can reach", () => {
-  it("no task is published yet, so production reaches none (fail closed)", () => {
-    expect(PUBLISHED_WRITING_TASKS).toHaveLength(0);
+  it("no task is approved yet, so production reaches none (fail closed)", () => {
     const production = { NODE_ENV: "production" };
     expect(listWritingTasks(production)).toHaveLength(0);
     expect(resolveWritingTask(DEV_FIXTURE_WRITING_TASK.id, production)).toBeNull();

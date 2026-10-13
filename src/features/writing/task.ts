@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { scholarshipWrittenExpressionRubric } from "./rubrics/scholarship-written-expression";
-import { isWritingPreviewAllowed } from "./preview-gate";
 import type { WritingRubric } from "./rubric";
 
 export const WRITING_FORMS = ["narrative", "persuasive", "descriptive", "informative", "expository"] as const;
@@ -29,17 +28,10 @@ export const writingTaskSchema = z.object({
 export type WritingTask = z.infer<typeof writingTaskSchema>;
 
 /**
- * Tasks a child may reach. EMPTY ON PURPOSE.
+ * A child reaches a task only through src/server/writing/tasks.ts: a prompt
+ * that has an approval record verified by the shared approval verifier, served
+ * from the snapshot inside that record. There is no hand-kept list here.
  *
- * The first set of prompts lives in content/writing-drafts as unsigned drafts.
- * Nothing under src/ imports that folder (src/tests/unit/writing-drafts.test.ts
- * enforces it), and a prompt joins this list only through the same human
- * approval (`approvedBy`) every other piece of MindMosaic content goes through.
- * Until then the real routes answer 404 for every task id: fail closed.
- */
-export const PUBLISHED_WRITING_TASKS: readonly WritingTask[] = [];
-
-/**
  * Dev preview only. Reachable exactly when the preview gate is open, which is
  * never in production and never when VERCEL_ENV is "production". It is not one
  * of the draft prompts and is not meant to be a good one.
@@ -54,16 +46,6 @@ export const DEV_FIXTURE_WRITING_TASK: WritingTask = writingTaskSchema.parse({
   timeLimitMinutes: 15,
   suggestedWords: { min: 150, max: 350 },
 });
-
-type Env = Readonly<Record<string, string | undefined>>;
-
-export function listWritingTasks(env: Env = process.env): readonly WritingTask[] {
-  return isWritingPreviewAllowed(env) ? [...PUBLISHED_WRITING_TASKS, DEV_FIXTURE_WRITING_TASK] : PUBLISHED_WRITING_TASKS;
-}
-
-export function resolveWritingTask(id: string, env: Env = process.env): WritingTask | null {
-  return listWritingTasks(env).find((task) => task.id === id) ?? null;
-}
 
 const RUBRICS: readonly WritingRubric[] = [scholarshipWrittenExpressionRubric];
 

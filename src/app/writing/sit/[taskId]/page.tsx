@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 
 import { WRITING_BACK_LINK_CLASS, WritingPageShell } from "@/features/writing/components/WritingPageShell";
 import { WritingRunner } from "@/features/writing/components/WritingRunner";
-import { resolveWritingTask } from "@/features/writing/task";
+import { resolveWritingTask } from "@/server/writing/tasks";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { loadOpenWritingAttempt } from "@/server/writing/queries";
