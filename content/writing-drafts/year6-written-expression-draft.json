@@ -1,0 +1,166 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Ten original Year 6 writing prompts, two for each of narrative, persuasive, descriptive, informative and expository writing, each sized for a 15-minute response. Unsigned AI drafts: no independent originality review, human approval or publication is claimed. They are not reachable by any learner route.",
+  "prompts": [
+    {
+      "id": "w6-narrative-draft-001",
+      "title": "The note on the last page",
+      "form": "narrative",
+      "yearLevel": 6,
+      "prompt": "While tidying a shelf in the school library, you open an old book and find that its last page has been taken out and replaced with a handwritten note. The note has your name on it.\n\nWrite a story about what the note says and what you decide to do next.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-narrative-draft-002",
+      "title": "When the lighthouse went dark",
+      "form": "narrative",
+      "yearLevel": 6,
+      "prompt": "For a hundred years the lighthouse at the end of Mariner's Point has shone every night. Tonight, as a storm rolls in, its light suddenly goes out.\n\nWrite a story about what happens next, told by someone who lives nearby.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-persuasive-draft-003",
+      "title": "A garden in the car park",
+      "form": "persuasive",
+      "yearLevel": 6,
+      "prompt": "Your school council is deciding whether to turn an unused corner of the car park into a vegetable garden looked after by students.\n\nWrite a persuasive piece for the school newsletter. Argue either for or against the plan, and give reasons that would convince a parent reading it.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-persuasive-draft-004",
+      "title": "The pool or the skate park",
+      "form": "persuasive",
+      "yearLevel": 6,
+      "prompt": "A small town can afford only one of two projects: repairing its old public swimming pool, or building a new skate park beside the river.\n\nWrite a letter to the mayor persuading them to choose one project over the other. Use reasons and examples to support your choice.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-descriptive-draft-005",
+      "title": "The market at lighting-up time",
+      "form": "descriptive",
+      "yearLevel": 6,
+      "prompt": "Describe an outdoor market at the moment the stalls are being lit for the evening.\n\nUse what can be seen, heard, smelt, tasted and felt so that your reader feels as though they are walking between the stalls.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-descriptive-draft-006",
+      "title": "Rain after the dry",
+      "form": "descriptive",
+      "yearLevel": 6,
+      "prompt": "After a long, dry summer, the first rain finally reaches a farm. Describe the moments when the rain arrives, as seen, heard and smelt by someone standing on the verandah.\n\nChoose your words carefully so the reader can picture it.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-informative-draft-007",
+      "title": "A guide for a new student",
+      "form": "informative",
+      "yearLevel": 6,
+      "prompt": "A younger student is about to join your school next term and is nervous about the first week.\n\nWrite an information guide that helps them settle in. Organise it so they can find things easily, and include the facts and tips you think matter most.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-informative-draft-008",
+      "title": "A job in our community",
+      "form": "informative",
+      "yearLevel": 6,
+      "prompt": "Choose one job that helps your community, such as a nurse, a bus driver, a baker or a council gardener.\n\nWrite an information report that explains what the person does, what skills the job needs and why the work matters to the people around them.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-expository-draft-009",
+      "title": "Starting is easier than finishing",
+      "form": "expository",
+      "yearLevel": 6,
+      "prompt": "Many people find it easier to begin something new than to see it through to the end.\n\nWrite an explanation of why you think this happens, and discuss what can help a person keep going. Use examples to make your ideas clear.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    },
+    {
+      "id": "w6-expository-draft-010",
+      "title": "A friend who tells the truth",
+      "form": "expository",
+      "yearLevel": 6,
+      "prompt": "Someone once said, \"A good friend is someone who tells you the truth.\"\n\nWrite an essay explaining what you think this means. Discuss whether it is always true, and use examples from real life or from stories you know.",
+      "timeLimitMinutes": 15,
+      "suggestedWords": { "min": 150, "max": 300 },
+      "provenance": {
+        "authoredBy": "claude-sonnet-5-5 (AI draft)",
+        "authoredOn": "2026-10-13",
+        "originality": "Written from scratch for MindMosaic. Not copied or paraphrased from any published, prep-book or past-test prompt. No independent originality review yet."
+      },
+      "review": null,
+      "approvedBy": null
+    }
+  ]
+}
