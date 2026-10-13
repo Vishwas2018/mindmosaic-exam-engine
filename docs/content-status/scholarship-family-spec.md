@@ -1,4 +1,4 @@
-# Independent School Scholarship Practice (Edutest-style & ACER-compatible) — Family Scoping & Architecture Specification, Phase 0
+# Independent School Scholarship Practice — Family Scoping & Architecture Specification, Phase 0
 
 **Status:** Investigation and specification only. **No code, schema, migration, taxonomy, or content changes have been made in this phase.**  
 **Document author:** Antigravity (Google DeepMind agentic assistant)  
@@ -20,12 +20,10 @@ MindMosaic must produce **strictly original, scholarship-style practice** only:
 3. **Factual format boundaries only:** MindMosaic's design is strictly grounded in publicly disclosed structural facts published directly on provider and school websites: section titles, duration, broad reasoning domains, and public assessment criteria.
 4. **Engineering assumptions for unreleased metrics:** Exact item counts per test section are not published by Edutest. MindMosaic **does not** infer item counts from leaked materials or proprietary tutoring papers. All section item counts in this specification are explicitly labelled as **engineering assumptions**, realistically calibrated to published 30-minute test limits.
 5. **Origin tracking:** Every scholarship item authored for MindMosaic must carry `origin: "ai_generated"` (or `"human_authored"` / `"original_seed"`) and must pass the platform's independent content governance gates.
-6. **Provider naming and trademark disclaimer:**
-   - *Trademark context:* "Edutest" is a registered trademark of Edutest Pty Ltd (ACN 089 970 034). "ACER" is a registered trademark of the Australian Council for Educational Research Ltd.
-   - *Legal principle (Australian law):* Under the *Trade Marks Act 1995* (Cth) s 122(1)(b), using a registered trademark in good faith to indicate the intended purpose, compatibility, or style of educational services is permitted provided it does not suggest sponsorship, affiliation, or endorsement.
-   - *User-facing naming recommendation:* Use **"Scholarship-style practice (Edutest-style)"** for the primary track, paired with a mandatory, prominent disclaimer on the catalogue tile, onboarding modal, and test start screen:
+6. **Provider naming and trademark policy:**
+   - *Trademark policy:* Use of provider names to be confirmed with legal advice before any public or paid launch.
+   - *User-facing naming decision:* Use **"Scholarship-style practice"** in all titles and tiles. Mention Edutest only in descriptive text (e.g. *"formatted like common independent-school scholarship tests such as Edutest"*), always paired with the prominent non-endorsement disclaimer:
      > *"MindMosaic scholarship practice is an original, independent educational preparation resource. It is not affiliated with, approved by, or endorsed by Edutest Pty Ltd, the Australian Council for Educational Research (ACER), or Huntingtower School."*
-   - *Neutral fallback:* If the product owner prefers zero trademark exposure in marketing headers, use the neutral descriptor: **"Independent School Scholarship Practice (Format E)"** (with Format A reserved for ACER), while retaining the style notes in the syllabus description.
 
 ---
 
@@ -545,7 +543,7 @@ Three major branches are currently active or awaiting merge in the repository. T
 
 | In-Flight Branch | Core Purpose | Files Touched |
 |---|---|---|
-| **`feat/programme-governance-roadmap`** | Publication governance, approval ledger, server exam bank | `src/server/exam-bank.ts`, `src/features/content-governance/*`, `scripts/check-publication-gates.mts`, `scripts/questions-publish.mts`, `scripts/check-question-correctness.mts`, `supabase/migrations/20261005090000_*` |
+| **`feat/publication-governance`** | Publication governance, approval ledger, server exam bank | `src/server/exam-bank.ts`, `src/features/content-governance/*`, `scripts/check-publication-gates.mts`, `scripts/questions-publish.mts`, `scripts/check-question-correctness.mts`, `supabase/migrations/20261005090000_*` |
 | **`content/roadmap-drafts-review`** | Unsigned draft preflight validation | `content/roadmap-drafts/*`, `scripts/validate-roadmap-drafts.mts`, `.github/workflows/ci.yml` |
 | **`feat/bar-model-visual` (PR #45)** | Bar model visual schema and renderers | `src/schemas/visual.schema.ts`, `src/features/exam-engine/visual-renderers/*`, `scripts/validate-bar-models.mts` |
 
@@ -557,13 +555,13 @@ Three major branches are currently active or awaiting merge in the repository. T
 | `src/features/exam-engine/exam-patterns/*` | None | Low | Clean edit. |
 | `src/features/taxonomy/*` | None | Low | Clean edit. |
 | `src/features/exam-engine/scoring/server-scoring-contract.ts` | None | Low | Clean edit. |
-| `scripts/check-question-correctness.mts` | `feat/programme-governance-roadmap` | **HIGH** | `programme-governance-roadmap` modifies `check-question-correctness.mts` significantly. Do not touch this script until PR #44 / governance merges to `dev`, OR branch off after merge. |
-| `supabase/migrations/*` | `feat/programme-governance-roadmap` | Medium | New migration timestamp must be strictly ordered after `20261005090000`. |
-| `src/server/exam-bank.ts` | `feat/programme-governance-roadmap` | **HIGH** | Governance branch changes runtime projection and exam bank loaders. Wait for governance merge before modifying bank assembly. |
+| `scripts/check-question-correctness.mts` | `feat/publication-governance` | **HIGH** | `feat/publication-governance` modifies `check-question-correctness.mts` significantly. Do not touch this script until governance merges to `dev`, OR branch off after merge. |
+| `supabase/migrations/*` | `feat/publication-governance` | Medium | New migration timestamp must be strictly ordered after `20261005090000`. |
+| `src/server/exam-bank.ts` | `feat/publication-governance` | **HIGH** | Governance branch changes runtime projection and exam bank loaders. Wait for governance merge before modifying bank assembly. |
 | `src/schemas/visual.schema.ts` | `feat/bar-model-visual` (PR #45) | Medium | Scholarship track uses existing `table` and text renderers; does not require editing `visual.schema.ts`. Zero collision. |
 
 ### 9.3 Recommended Build Sequencing to Avoid Conflicts
-1. **Merge Order:** Allow `feat/bar-model-visual` (PR #45) and `feat/programme-governance-roadmap` to merge into `dev` first.
+1. **Merge Order:** Allow `feat/bar-model-visual` (PR #45) and `feat/publication-governance` to merge into `dev` first.
 2. **Branching Point:** Branch Phase 1 (`feat/scholarship-track-core`) strictly from the freshly updated `origin/dev` once governance lands.
 3. **Draft Staging:** While governance is merging, draft content generation batches can be held in local JSON staging without touching runtime projection files.
 
@@ -574,7 +572,7 @@ Three major branches are currently active or awaiting merge in the repository. T
 1. **Pacing Stress & Speed Disparity (Risk):** 45 questions in 30 minutes (40 seconds/question) for Verbal Reasoning and 45 seconds/question for Numerical Reasoning creates intense cognitive pressure. If the child attempts this without graduated difficulty, it could lead to discouragement.  
    *Mitigation:* Provide an untimed "Confidence Mode" alongside the strict timed exam pattern.
 2. **Reading Stimulus Depth & Intellectual Property (Risk):** Drafting original, high-quality Year 6 reading comprehension passages (historical, narrative, scientific) requires significant creative writing effort to avoid cliché while maintaining high Lexile difficulty.  
-   *Mitigation:* Dedicate focused prompt engineering to generating authentic public-domain-style literature excerpts and historical essays.
+   *Mitigation:* All passages must be strictly original; no excerpts or adaptations of existing texts. Dedicate focused prompt engineering to generating authentic, original literary prose and historical essays.
 3. **Machine Verification Limits in Verbal Reasoning (Risk):** While letter series and ciphers are 100% computable, verbal analogies and classification rely on semantic nuances that automated regex/rule engines can misinterpret.  
    *Mitigation:* Use strict lexical databases for automated pre-checks, but enforce mandatory human sign-off on every verbal analogy item.
 4. **Parent Marking Friction in Writing (Risk):** If the parent finds marking a 6-criterion rubric tedious, writing practice might be skipped or completed without feedback.  
@@ -590,39 +588,28 @@ Three major branches are currently active or awaiting merge in the repository. T
 
 ---
 
-## 11. Decisions Needed from the Product Owner
+## 11. Decisions Confirmed by Product Owner
 
-The following 5 decisions govern how Phase 1 will be built. Recommendations are provided for each:
+The 5 architectural and scoping decisions have been formally approved in direction by the product owner (13 October 2026):
 
-### Decision 1: Exam Style & Architecture Isolation
-Should scholarship testing be introduced as a new dedicated `scholarship_style` exam style, or folded into the existing `selective_entry` family?
-- *Option A:* Fold into `selective_entry` (less schema duplication, but couples independent and state selective rules).
-- *Option B (Recommended):* Create a dedicated `scholarship_style` and `scholarship_entry` family.
-- **Recommendation:** **Option B.** Keeps independent scholarship timing, rubrics, and taxonomy cleanly separated from state selective school models.
+### Decision 1: Exam Style & Architecture Isolation — Option B Approved
+- **Decision:** Dedicated `scholarship_style` exam style and dedicated `scholarship_entry` family.
+- **Implementation:** Completely isolated from state selective entry, with dedicated section timers, rubrics, and taxonomy.
 
-### Decision 2: Descriptive Trademark vs Neutral Naming
-Should the student-facing track use "Scholarship-style practice (Edutest-style)" with a legal disclaimer, or completely neutral phrasing?
-- *Option A (Recommended):* Use **"Scholarship-style practice (Edutest-style)"** with the prominent non-endorsement disclaimer on all entry screens.
-- *Option B:* Use neutral naming: **"Independent School Scholarship Practice (Format E)"**.
-- **Recommendation:** **Option A.** Clearly communicates test relevance to the child and parent while remaining legally compliant under Australian nominative fair use principles.
+### Decision 2: Descriptive Trademark vs Neutral Naming — Approved Policy
+- **Decision:** Use **"Scholarship-style practice"** in all titles and tiles.
+- **Provider Names:** Mention Edutest only in descriptive text (*"formatted like common independent-school scholarship tests such as Edutest"*), always with the non-endorsement disclaimer.
+- **Legal Advice:** "Use of provider names to be confirmed with legal advice before any public or paid launch."
 
-### Decision 3: Mid-December Bank Depth Target
-Should the mid-December 2026 milestone deliver **1 complete practice paper per section** (160 items + 10 writing prompts, ~6 review hours) or the **full 3-paper retake depth** (480 items + 20 prompts, ~16 review hours)?
-- *Option A (Recommended):* **1 complete 5-section mock paper by mid-December** (MVP), expanding to 3-paper retake depth across the summer holidays in January.
-- *Option B:* Full 3-paper depth by mid-December (requires intensive review workload in November).
-- **Recommendation:** **Option A.** Guarantees a fully functional, usable end-to-end exam suite in the child's hands before holidays start, without risking reviewer burnout.
+### Decision 3: Mid-December Bank Depth Target — Option A Approved
+- **Decision:** **Option A.** One complete 5-section paper (160 items + 10 writing prompts) by 16 December 2026; three-paper depth in January 2027.
 
-### Decision 4: Mode Selection — Timed Exam Only vs "Confidence Mode"
-Should the practice engine only provide strict 30-minute / 15-minute timed simulations, or also offer an untimed "Skill Practice / Confidence Mode"?
-- *Option A:* Strict timed exam simulations only (maximum fidelity to exam-day pressure).
-- *Option B (Recommended):* Both: provide the official 30-minute timed simulation *and* an untimed "Untimed Practice" option reusing the same bank.
-- **Recommendation:** **Option B.** Essential for high-ability Year 5 students transitioning into Year 6 reasoning. Practising tricky numerical matrices or verbal analogies without a countdown clock builds competence before applying the 40-second time squeeze.
+### Decision 4: Mode Selection — Option B Approved (Simple Confidence Mode)
+- **Decision:** Both strict timed simulations and untimed **Confidence Mode**.
+- **Confidence Mode Implementation:** Keep it simple: the same paper, with no timer and with the explanations shown after each answer.
 
-### Decision 5: Written Expression Input Mode
-Should Written Expression strictly require on-screen typing, or should it offer an official "Print Prompt & Paper" option for handwritten practice?
-- *Option A:* On-screen typing only (in `EssayRenderer`).
-- *Option B (Recommended):* Dual mode: on-screen typing as default, with a "Print Prompt & Ruled Sheet" button for authentic handwriting practice.
-- **Recommendation:** **Option B.** Many independent schools require paper-based handwriting for the written expression component. Giving the child experience with physical pen-to-paper speed under a 15-minute timer is invaluable preparation.
+### Decision 5: Written Expression Input Mode — Option B Approved (Print Default)
+- **Decision:** Printed prompt plus ruled sheet is the default for the timed simulation, because Edutest answers are on paper. Typing is for practice. (Writing engine built separately; out of scope for reasoning phase).
 
 ---
 
