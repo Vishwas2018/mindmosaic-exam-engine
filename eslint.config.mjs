@@ -180,6 +180,14 @@ const eslintConfig = defineConfig([
               message:
                 "The authoring question bank (answer keys included) is server-only. Import it via src/server/exam-bank.ts from a Route Handler or server component — see docs/ASSESSMENT_SECURITY_MODEL.md.",
             },
+            {
+              group: [
+                "@/tests/**",
+                "**/src/tests/**",
+              ],
+              message:
+                "Production code must never import test helpers or fixtures — see Section 12 governance rules.",
+            },
           ],
         },
       ],

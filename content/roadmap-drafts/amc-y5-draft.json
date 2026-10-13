@@ -1,0 +1,1226 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts prepared in the Codex roadmap implementation session. No review or human approval is claimed. Do not serve or publish these files directly.",
+  "questions": [
+    {
+      "id": "roadmap-amc-y5-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A library packs 6 books into each box. After filling 7 boxes, 5 books remain. How many books are there altogether?",
+      "options": [
+        {
+          "id": "a",
+          "text": "47"
+        },
+        {
+          "id": "b",
+          "text": "53"
+        },
+        {
+          "id": "c",
+          "text": "37"
+        },
+        {
+          "id": "d",
+          "text": "35"
+        },
+        {
+          "id": "e",
+          "text": "42"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Seven boxes hold 7 × 6 = 42 books. Add the 5 unpacked books: 42 + 5 = 47.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Multi-step multiplication and addition",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "The pattern 4, 9, 14, 19, ... continues by the same rule. What is the ninth number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "49"
+        },
+        {
+          "id": "b",
+          "text": "45"
+        },
+        {
+          "id": "c",
+          "text": "39"
+        },
+        {
+          "id": "d",
+          "text": "54"
+        },
+        {
+          "id": "e",
+          "text": "44"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The pattern increases by 5. From the first to the ninth term there are 8 increases, so 4 + 8 × 5 = 44.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Continue and generalise number patterns",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A film starts at 2:35 pm and lasts 1 hour 48 minutes. How many minutes after 2:00 pm does it finish?",
+      "options": [
+        {
+          "id": "a",
+          "text": "143"
+        },
+        {
+          "id": "b",
+          "text": "163"
+        },
+        {
+          "id": "c",
+          "text": "123"
+        },
+        {
+          "id": "d",
+          "text": "153"
+        },
+        {
+          "id": "e",
+          "text": "133"
+        }
+      ],
+      "visuals": [],
+      "explanation": "From 2:00 to the start is 35 minutes. Add 108 minutes for the film: 35 + 108 = 143 minutes.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Elapsed time",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Three quarters of the 60 seats in a hall are occupied. How many seats are occupied?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "45"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "40"
+        }
+      ],
+      "visuals": [],
+      "explanation": "One quarter of 60 is 15. Three quarters is 3 × 15 = 45.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Find a fraction of a quantity",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Two angles around a point are 90° and 120°. What is the size of the remaining angle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "160"
+        },
+        {
+          "id": "b",
+          "text": "170"
+        },
+        {
+          "id": "c",
+          "text": "140"
+        },
+        {
+          "id": "d",
+          "text": "150"
+        },
+        {
+          "id": "e",
+          "text": "130"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Angles around a point total 360°. The missing angle is 360 − 90 − 120 = 150°.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Angles around a point",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "On a map, 1 centimetre represents 5 kilometres. Two towns are 7 centimetres apart on the map. How far apart are they?",
+      "options": [
+        {
+          "id": "a",
+          "text": "35"
+        },
+        {
+          "id": "b",
+          "text": "40"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "45"
+        },
+        {
+          "id": "e",
+          "text": "30"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Each centimetre represents 5 kilometres, so 7 × 5 = 35 kilometres.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Use a simple scale",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Four equal teams collect 72 cans altogether. Then each team collects 3 more cans. How many cans does each team have now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "24"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "20"
+        },
+        {
+          "id": "d",
+          "text": "21"
+        },
+        {
+          "id": "e",
+          "text": "75"
+        }
+      ],
+      "visuals": [],
+      "explanation": "First share 72 equally: 72 ÷ 4 = 18. Then add 3, giving 21 cans per team.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Division followed by addition",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Three pens cost $2.40 each. How much change is received from $10?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$3.20"
+        },
+        {
+          "id": "b",
+          "text": "$2.40"
+        },
+        {
+          "id": "c",
+          "text": "$7.20"
+        },
+        {
+          "id": "d",
+          "text": "$7.60"
+        },
+        {
+          "id": "e",
+          "text": "$2.80"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The pens cost 3 × $2.40 = $7.20. The change is $10.00 − $7.20 = $2.80.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Decimal money calculations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "What is the greatest factor of 36 that is less than 10?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The factors of 36 below 10 are 1, 2, 3, 4, 6 and 9. The greatest is 9.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Factors and divisibility",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A rectangle has an area of 48 square centimetres and a width of 6 centimetres. What is its perimeter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "14"
+        },
+        {
+          "id": "b",
+          "text": "28"
+        },
+        {
+          "id": "c",
+          "text": "24"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "32"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The length is 48 ÷ 6 = 8 cm. The perimeter is 6 + 8 + 6 + 8 = 28 cm.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Connect area and perimeter",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A number is multiplied by 4, then 7 is subtracted. The result is 45. What is the number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "15"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "17"
+        },
+        {
+          "id": "e",
+          "text": "9"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Undo subtracting 7 by adding 7: 45 + 7 = 52. Then divide by 4: 52 ÷ 4 = 13.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Work backwards through operations",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "For every 2 red beads in a pattern there are 3 blue beads. The pattern has 30 beads. How many are blue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Each group has 5 beads. There are 30 ÷ 5 = 6 groups, with 6 × 3 = 18 blue beads.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Apply a ratio to a total",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A 12 cm by 8 cm rectangle has a 4 cm by 3 cm corner cut away. What area remains?",
+      "options": [
+        {
+          "id": "a",
+          "text": "72"
+        },
+        {
+          "id": "b",
+          "text": "88"
+        },
+        {
+          "id": "c",
+          "text": "92"
+        },
+        {
+          "id": "d",
+          "text": "80"
+        },
+        {
+          "id": "e",
+          "text": "84"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The full rectangle has area 12 × 8 = 96 cm². The cut-out is 4 × 3 = 12 cm², so 96 − 12 = 84 cm² remains.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Area of a composite shape",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Which number between 40 and 70 is divisible by both 6 and 9?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "54"
+        },
+        {
+          "id": "c",
+          "text": "72"
+        },
+        {
+          "id": "d",
+          "text": "63"
+        },
+        {
+          "id": "e",
+          "text": "42"
+        }
+      ],
+      "visuals": [],
+      "explanation": "54 is divisible by 6 because 54 ÷ 6 = 9, and by 9 because 54 ÷ 9 = 6.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Common multiples",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A café offers 3 sandwich fillings and 2 types of bread. Choosing one filling and one bread, how many different sandwiches are possible?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Each of the 3 fillings can be paired with either bread, giving 3 × 2 = 6 sandwiches.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Systematic counting",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Two bells ring together at 9:00 am. One rings every 8 minutes and the other every 12 minutes. When will they next ring together?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9:20 am"
+        },
+        {
+          "id": "b",
+          "text": "9:32 am"
+        },
+        {
+          "id": "c",
+          "text": "9:16 am"
+        },
+        {
+          "id": "d",
+          "text": "9:48 am"
+        },
+        {
+          "id": "e",
+          "text": "9:24 am"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The first positive time that is a multiple of both 8 and 12 is 24 minutes, so they ring together at 9:24 am.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Least common multiples in time",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A tank is three fifths full. After 24 litres are added, it is full. What is the tank's capacity?",
+      "options": [
+        {
+          "id": "a",
+          "text": "96"
+        },
+        {
+          "id": "b",
+          "text": "60"
+        },
+        {
+          "id": "c",
+          "text": "40"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "72"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The empty part is two fifths and equals 24 litres. One fifth is 12 litres, so five fifths is 60 litres.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Use complementary fractions",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "The five scores 12, 18, 15, 21 and 14 are arranged from least to greatest. What is the median?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "16"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "21"
+        }
+      ],
+      "visuals": [],
+      "explanation": "In order the scores are 12, 14, 15, 18, 21. The middle score is 15.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Probability",
+        "skill": "Find the median",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "apple"
+        },
+        {
+          "id": "b",
+          "text": "banana"
+        },
+        {
+          "id": "c",
+          "text": "cannot be known"
+        },
+        {
+          "id": "d",
+          "text": "pear"
+        },
+        {
+          "id": "e",
+          "text": "apple or banana"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Ben has pear. Asha must therefore have banana, because she cannot have apple. Chen has the remaining fruit, apple.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Deduce from constraints",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A shape is made from two 5 cm squares joined along one complete side. What is the perimeter of the joined shape?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "25"
+        },
+        {
+          "id": "d",
+          "text": "40"
+        },
+        {
+          "id": "e",
+          "text": "35"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The joined shape is a 10 cm by 5 cm rectangle. Its perimeter is 10 + 5 + 10 + 5 = 30 cm.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Perimeter of joined shapes",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-021",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A two-digit number has digits that add to 11. Reversing its digits makes a number 27 greater. What is the original number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "65"
+        },
+        {
+          "id": "b",
+          "text": "29"
+        },
+        {
+          "id": "c",
+          "text": "47"
+        },
+        {
+          "id": "d",
+          "text": "38"
+        },
+        {
+          "id": "e",
+          "text": "56"
+        }
+      ],
+      "visuals": [],
+      "explanation": "A reversal that is 27 greater means the tens digit rises by 3. The digits 4 and 7 add to 11, so the original number is 47.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Digit reasoning",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-022",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A robot must move 3 squares right and 2 squares up to reach a target. It never moves left or down. How many different five-move routes can it take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "explanation": "Choose the 2 positions of the upward moves among 5 moves. Listing the pairs gives 10 different routes.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Enumerate constrained routes",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-023",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A bag contains 4 red, 3 blue and 1 green counter. Which statement is true about one counter drawn without looking?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Green is impossible"
+        },
+        {
+          "id": "b",
+          "text": "Red is as likely as all non-red colours together"
+        },
+        {
+          "id": "c",
+          "text": "Blue and green are equally likely"
+        },
+        {
+          "id": "d",
+          "text": "Blue is more likely than red"
+        },
+        {
+          "id": "e",
+          "text": "Red is certain"
+        }
+      ],
+      "visuals": [],
+      "explanation": "There are 4 red counters and 4 non-red counters, so red and non-red have equal probability.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Probability",
+        "skill": "Compare probabilities",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "Using each digit 2, 4, 5 and 7 once, what is the greatest even number that can be made?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5472"
+        },
+        {
+          "id": "b",
+          "text": "7452"
+        },
+        {
+          "id": "c",
+          "text": "7524"
+        },
+        {
+          "id": "d",
+          "text": "7542"
+        },
+        {
+          "id": "e",
+          "text": "5742"
+        }
+      ],
+      "visuals": [],
+      "explanation": "An even number must end in 2 or 4. Putting 2 last allows the larger leading digits 7, 5 and 4, giving 7542.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Place value under a divisibility constraint",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-025",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A 10 cm square is divided by a vertical line 4 cm from its left side. What is the difference between the areas of the two rectangles?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "text": "40"
+        },
+        {
+          "id": "e",
+          "text": "60"
+        }
+      ],
+      "visuals": [],
+      "explanation": "The rectangles have widths 4 cm and 6 cm, so their areas are 40 cm² and 60 cm². The difference is 20 cm².",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Compare areas within a partition",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-026",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "What is the sum of all positive multiples of 3 that are no greater than 30?",
+      "options": [],
+      "visuals": [],
+      "explanation": "The multiples are 3, 6, ..., 30. Pairing first with last gives five pairs of 33, so the total is 5 × 33 = 165.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "skill": "Sum an arithmetic sequence",
+        "difficulty": "challenging",
+        "marks": 6,
+        "estimatedTimeSeconds": 180,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 165,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-027",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "A grid has 4 columns and 3 rows of equal square cells. How many rectangles of all sizes have sides along the grid lines?",
+      "options": [],
+      "visuals": [],
+      "explanation": "Choose 2 of the 5 vertical lines and 2 of the 4 horizontal lines. There are 10 × 6 = 60 rectangles.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "skill": "Systematically count rectangles",
+        "difficulty": "challenging",
+        "marks": 7,
+        "estimatedTimeSeconds": 180,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 60,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-028",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "How many whole-number solutions are there to 3a + 5b = 30 when a and b may be zero?",
+      "options": [],
+      "visuals": [],
+      "explanation": "Try b = 0 to 6. Whole-number values of a occur for (a,b) = (10,0), (5,3) and (0,6), so there are 3 solutions.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Enumerate whole-number solutions",
+        "difficulty": "challenging",
+        "marks": 8,
+        "estimatedTimeSeconds": 180,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 3,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-029",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "The first row of a display has 2 counters. Each new row has 3 more counters than the row above. How many counters are in the first 8 rows altogether?",
+      "options": [],
+      "visuals": [],
+      "explanation": "The rows contain 2, 5, 8, 11, 14, 17, 20 and 23 counters. Adding them gives 100.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "skill": "Build and sum a growing pattern",
+        "difficulty": "challenging",
+        "marks": 9,
+        "estimatedTimeSeconds": 180,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 100,
+        "tolerance": 0
+      }
+    },
+    {
+      "id": "roadmap-amc-y5-030",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "prompt": "How many three-digit numbers have digits that add to 6, if zero is allowed but the hundreds digit cannot be zero?",
+      "options": [],
+      "visuals": [],
+      "explanation": "For hundreds digits 1 to 6, the remaining two digits must total 5, 4, 3, 2, 1 or 0. These give 6 + 5 + 4 + 3 + 2 + 1 = 21 numbers.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Systematic enumeration with place value",
+        "difficulty": "challenging",
+        "marks": 10,
+        "estimatedTimeSeconds": 180,
+        "tags": []
+      },
+      "answerKey": {
+        "kind": "number",
+        "value": 21,
+        "tolerance": 0
+      }
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 export * from "./BarChartRenderer";
+export * from "./BarModelRenderer";
 export * from "./CoordinateGridRenderer";
 export * from "./FractionModelRenderer";
 export * from "./GeometryShapeRenderer";

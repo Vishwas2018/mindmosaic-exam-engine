@@ -1,0 +1,70 @@
+{
+  "why": "Adding 15 cannot make the total 10: the start would be negative.",
+  "layer": "mathematical",
+  "errorCodes": [
+    "infeasible_negative"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-infeasible",
+    "type": "bar_model",
+    "title": "Marbles after adding more",
+    "altText": "Kai had some marbles, was given 15 more, and now has 10. The number he started with is unknown.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "groups": [
+        {
+          "id": "kai",
+          "barIds": [
+            "kai-before",
+            "kai-after"
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "id": "added",
+          "label": "Added",
+          "value": 15,
+          "display": "value"
+        }
+      ],
+      "bars": [
+        {
+          "id": "kai-before",
+          "label": "Kai",
+          "stage": "before",
+          "segments": [
+            {
+              "id": "start",
+              "unknown": "s",
+              "display": "unknown",
+              "target": true
+            }
+          ]
+        },
+        {
+          "id": "kai-after",
+          "label": "Kai",
+          "stage": "after",
+          "segments": [
+            {
+              "id": "now",
+              "value": 10,
+              "display": "value"
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "kind": "add",
+          "fromStage": "kai-before",
+          "toStage": "kai-after",
+          "quantityId": "added"
+        }
+      ]
+    }
+  }
+}
