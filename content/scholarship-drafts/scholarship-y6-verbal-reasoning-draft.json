@@ -152,7 +152,7 @@
       "options": [
         {
           "id": "a",
-          "text": "HARVEST"
+          "text": "SHELTER"
         },
         {
           "id": "b",
@@ -391,11 +391,11 @@
         },
         {
           "id": "b",
-          "text": "TROUT"
+          "text": "SARDINE"
         },
         {
           "id": "c",
-          "text": "SALMON"
+          "text": "SNAPPER"
         },
         {
           "id": "d",
@@ -411,7 +411,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "Trout, salmon, tuna, and mackerel are fish with gills; a dolphin is a marine mammal that breathes air through lungs.",
+      "explanation": "Sardine, snapper, tuna, and mackerel are marine fish with gills; a dolphin is a marine mammal that breathes air through lungs.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -947,27 +947,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which word can be placed immediately after 'RAIN' and immediately before 'COAT' to make two valid compound words?",
+      "prompt": "Which word can be placed immediately after 'NEWS' and immediately before 'WEIGHT' to make two valid compound words?",
       "options": [
         {
           "id": "a",
-          "text": "WATER"
+          "text": "PRINT"
         },
         {
           "id": "b",
-          "text": "PROOF"
+          "text": "PAPER"
         },
         {
           "id": "c",
-          "text": "STORM"
+          "text": "FLASH"
         },
         {
           "id": "d",
-          "text": "DROP"
+          "text": "DESK"
         },
         {
           "id": "e",
-          "text": "FALL"
+          "text": "REPORT"
         }
       ],
       "visuals": [],
@@ -975,7 +975,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Rainproof and proof-coat (or water-proof): Raincoat exists, but 'RAIN' + 'BOW' -> rainbow/bow-coat no. Testing 'WATER': 'RAINWATER' and 'WATERCOAT' no. For: RAIN + DROP? Dropcoat no. For: RAIN + PROOF -> rainproof, proofcoat (protective coating).",
+      "explanation": "'Newspaper' and 'paperweight' are both valid compound words. None of the other options forms two valid compound words.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -994,27 +994,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Find the word that has a similar meaning to both 'TENDER' (gentle/caring) and 'OFFER' (to submit for consideration):",
+      "prompt": "Find the single word that can mean both 'a solid rectangular piece of building material' and 'to obstruct or impede movement':",
       "options": [
         {
           "id": "a",
-          "text": "TENDER"
+          "text": "BLOCK"
         },
         {
           "id": "b",
-          "text": "SERVE"
+          "text": "BRICK"
         },
         {
           "id": "c",
-          "text": "PRESENT"
+          "text": "BARRIER"
         },
         {
           "id": "d",
-          "text": "SETTLE"
+          "text": "STOP"
         },
         {
           "id": "e",
-          "text": "EXTEND"
+          "text": "CUBE"
         }
       ],
       "visuals": [],
@@ -1022,7 +1022,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "'Tender' can mean gentle or sensitive (an adjective), and it can also mean to formally offer or present a proposal (a verb).",
+      "explanation": "'Block' as a noun is a solid rectangular mass or building piece; as a verb, 'to block' means to obstruct or impede movement.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1088,27 +1088,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which single word can mean both 'a heavy blunt tool' and 'a club in playing cards'?",
+      "prompt": "Which single word can mean both 'a digging tool with a flat metal blade' and 'one of the four suits in a deck of cards'?",
       "options": [
         {
           "id": "a",
-          "text": "SPADE"
+          "text": "SHOVEL"
         },
         {
           "id": "b",
-          "text": "HAMMER"
+          "text": "FORK"
         },
         {
           "id": "c",
-          "text": "MALLET"
+          "text": "HEART"
         },
         {
           "id": "d",
-          "text": "CLUB"
+          "text": "SPADE"
         },
         {
           "id": "e",
-          "text": "BATON"
+          "text": "TROWEL"
         }
       ],
       "visuals": [],
@@ -1116,7 +1116,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "A 'club' is a heavy bludgeon tool or weapon; 'clubs' is also one of the four suits in a standard deck of cards.",
+      "explanation": "'Spade' is a sharp-edged digging tool; 'spades' is one of the four suits in a standard deck of playing cards.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1182,7 +1182,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which word can follow 'SUN' and precede 'HOUSE' to form two compound words (or well-known two-word terms)?",
+      "prompt": "Which word can follow 'SUN' and precede 'HOUSE' to form two compound words?",
       "options": [
         {
           "id": "a",
@@ -1190,7 +1190,7 @@
         },
         {
           "id": "b",
-          "text": "BEAM"
+          "text": "BURST"
         },
         {
           "id": "c",
@@ -1198,11 +1198,11 @@
         },
         {
           "id": "d",
-          "text": "STONE"
+          "text": "SET"
         },
         {
           "id": "e",
-          "text": "GLASS"
+          "text": "DIAL"
         }
       ],
       "visuals": [],
@@ -1210,7 +1210,7 @@
         "kind": "single_option",
         "optionId": "c"
       },
-      "explanation": "'Sunlight' is a compound word; 'Lighthouse' is a well-known compound word.",
+      "explanation": "'Sunlight' and 'lighthouse' are both valid compound words. None of the other options forms two valid compound words.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1840,7 +1840,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "In a secret code, BARK is written as Dctm (each letter shifted forward by 2). How is LEAF written in the same code?",
+      "prompt": "In a secret code, BARK is written as DCTM (each letter shifted forward by 2). How is LEAF written in the same code?",
       "options": [
         {
           "id": "a",
@@ -2263,14 +2263,14 @@
       "id": "scholarship-y6-vr-021",
       "skill": "vr-word-relationships",
       "targetOption": "b",
-      "correctValue": "PROOF",
+      "correctValue": "PAPER",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-022": {
       "id": "scholarship-y6-vr-022",
       "skill": "vr-word-relationships",
       "targetOption": "a",
-      "correctValue": "TENDER",
+      "correctValue": "BLOCK",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-023": {
@@ -2284,7 +2284,7 @@
       "id": "scholarship-y6-vr-024",
       "skill": "vr-word-relationships",
       "targetOption": "d",
-      "correctValue": "CLUB",
+      "correctValue": "SPADE",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-025": {

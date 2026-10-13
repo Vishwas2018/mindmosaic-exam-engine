@@ -12,6 +12,7 @@
  * 8. Runtime import guard: verifies no runtime source imports scholarship-drafts.
  */
 
+import fs from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -161,16 +162,117 @@ export function checkAnswerPositions(file: string, questions: DraftQuestion[]): 
   return distribution;
 }
 
-export function checkDuplicateStems(questions: DraftQuestion[]): void {
-  const seenStems = new Map<string, string>();
+export interface PromptEntry {
+  id: string;
+  prompt: string;
+  source?: string;
+}
+
+export function checkDuplicateStems(questions: PromptEntry[]): void {
+  const seenStems = new Map<string, PromptEntry>();
   for (const q of questions) {
     // Normalise whitespace and punctuation for near-duplicate check
     const norm = q.prompt.toLowerCase().replace(/[^a-z0-9]/g, "");
     if (seenStems.has(norm)) {
-      throw new Error(`Duplicate or near-duplicate stem detected between ${seenStems.get(norm)} and ${q.id}: "${q.prompt}"`);
+      const existing = seenStems.get(norm)!;
+      if (existing.id === q.id) continue;
+      throw new Error(
+        `Duplicate or near-duplicate stem detected between ${existing.id} (${existing.source ?? "unknown"}) and ${q.id} (${q.source ?? "unknown"}): "${q.prompt}"`
+      );
     }
-    seenStems.set(norm, q.id);
+    seenStems.set(norm, q);
   }
+}
+
+export async function verifyCompoundWordItems(questions: DraftQuestion[]): Promise<void> {
+  const allowlistPath = path.join(DRAFTS_DIR, "compound-words-allowlist.json");
+  if (!fs.existsSync(allowlistPath)) {
+    throw new Error(`Missing compound words allowlist file at ${allowlistPath}`);
+  }
+  const allowlistRaw = await readFile(allowlistPath, "utf-8");
+  const allowlistArr = JSON.parse(allowlistRaw) as string[];
+  const allowlist = new Set(allowlistArr.map(w => w.trim().toLowerCase()));
+
+  for (const q of questions) {
+    if (q.metadata.skill === "vr-word-relationships" && q.prompt.toLowerCase().includes("compound word")) {
+      const matches = Array.from(q.prompt.matchAll(/'([A-Za-z]+)'/g)).map(m => m[1].toLowerCase());
+      if (matches.length < 2) {
+        throw new Error(`${q.id}: Could not extract prefix and suffix words from compound word prompt: "${q.prompt}"`);
+      }
+      const [prefix, suffix] = matches;
+
+      for (const opt of q.options) {
+        const candidate = opt.text.trim().toLowerCase();
+        const word1 = `${prefix}${candidate}`;
+        const word2 = `${candidate}${suffix}`;
+        const formsBoth = allowlist.has(word1) && allowlist.has(word2);
+
+        if (opt.id === q.answerKey.optionId) {
+          if (!formsBoth) {
+            throw new Error(
+              `${q.id}: Answer option '${opt.text}' must form two valid compound words in allowlist. Failed on '${word1}' or '${word2}'`
+            );
+          }
+        } else {
+          if (formsBoth) {
+            throw new Error(
+              `${q.id}: Distractor option '${opt.text}' also forms two valid compound words in allowlist ('${word1}', '${word2}')`
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+export async function loadAllDraftQuestions(localQuestions: DraftQuestion[]): Promise<PromptEntry[]> {
+  const all: PromptEntry[] = localQuestions.map(q => ({
+    id: q.id,
+    prompt: q.prompt,
+    source: "content/scholarship-drafts",
+  }));
+
+  const roadmapDir = "content/roadmap-drafts";
+  if (fs.existsSync(roadmapDir)) {
+    const entries = await readdir(roadmapDir);
+    for (const entry of entries) {
+      if (!entry.endsWith(".json") || entry.includes("review") || entry.includes("allowlist")) continue;
+      try {
+        const raw = await readFile(path.join(roadmapDir, entry), "utf-8");
+        const json = JSON.parse(raw) as { questions?: Array<{ id?: string; prompt?: string }> };
+        if (Array.isArray(json.questions)) {
+          for (const q of json.questions) {
+            if (q.id && q.prompt) {
+              all.push({ id: q.id, prompt: q.prompt, source: `content/roadmap-drafts/${entry}` });
+            }
+          }
+        }
+      } catch {}
+    }
+  } else {
+    try {
+      const { execSync } = await import("node:child_process");
+      const tree = execSync("git ls-tree --name-only origin/content/roadmap-drafts-review:content/roadmap-drafts", { encoding: "utf-8" });
+      const jsonFiles = tree.split("\n").map(l => l.trim()).filter(l => l.endsWith(".json") && !l.includes("review"));
+      for (const jf of jsonFiles) {
+        try {
+          const raw = execSync(`git show origin/content/roadmap-drafts-review:content/roadmap-drafts/${jf}`, { encoding: "utf-8" });
+          const json = JSON.parse(raw) as { questions?: Array<{ id?: string; prompt?: string }> };
+          if (Array.isArray(json.questions)) {
+            for (const q of json.questions) {
+              if (q.id && q.prompt) {
+                all.push({ id: q.id, prompt: q.prompt, source: `git:roadmap-drafts/${jf}` });
+              }
+            }
+          }
+        } catch {}
+      }
+    } catch {
+      // Git branch not available
+    }
+  }
+
+  return all;
 }
 
 export function verifySolverMatch(q: DraftQuestion, sidecar: z.infer<typeof draftSidecarSchema>): void {
@@ -302,7 +404,7 @@ export async function validateScholarshipDrafts(): Promise<{
 }> {
   await assertNoRuntimeDraftReference("src");
 
-  const files = (await readdir(DRAFTS_DIR)).filter(f => f.endsWith(".json")).sort();
+  const files = (await readdir(DRAFTS_DIR)).filter(f => f.endsWith(".json") && !f.includes("allowlist")).sort();
   if (files.length === 0) {
     throw new Error(`No JSON draft files found in ${DRAFTS_DIR}`);
   }
@@ -370,8 +472,12 @@ export async function validateScholarshipDrafts(): Promise<{
     }
   }
 
-  // 7. Check near-duplicate stems
-  checkDuplicateStems(allStems);
+  // 7. Compound word allowlist check
+  await verifyCompoundWordItems(allStems);
+
+  // 8. Check near-duplicate stems across all draft folders (roadmap and scholarship)
+  const allDraftEntries = await loadAllDraftQuestions(allStems);
+  checkDuplicateStems(allDraftEntries);
 
   return {
     totalQuestions,

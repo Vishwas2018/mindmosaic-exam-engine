@@ -336,11 +336,11 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "What number comes next in the sequence?\n7, 10, 16, 25, 37, ?",
+      "prompt": "What number comes next in the sequence?\n2, 4, 10, 20, 34, ?",
       "options": [
         {
           "id": "a",
-          "text": "49"
+          "text": "48"
         },
         {
           "id": "b",
@@ -348,7 +348,7 @@
         },
         {
           "id": "c",
-          "text": "51"
+          "text": "54"
         },
         {
           "id": "d",
@@ -356,7 +356,7 @@
         },
         {
           "id": "e",
-          "text": "54"
+          "text": "56"
         }
       ],
       "visuals": [],
@@ -364,7 +364,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Differences are +3, +6, +9, +12, next difference is +15: 37 + 15 = 52.",
+      "explanation": "Differences between consecutive terms are +2, +6, +10, +14 (increasing by 4 each step). The next difference is +18: 34 + 18 = 52.",
       "metadata": {
         "subject": "numerical_reasoning",
         "strand": "Numerical Reasoning",
@@ -712,7 +712,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 3, 4, 13 ]\n[ 2, 5, 11 ]\n[ 4, 2, ? ]",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 3, 2, 11 ]\n[ 1, 5, 8 ]\n[ 4, 2, ? ]",
       "options": [
         {
           "id": "a",
@@ -740,7 +740,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Row combination rule: cell[2] = 3 * cell[0] + cell[1]. Row 0: 3*3+4=13. Row 1: 3*2+5=11. Row 2: 3*4+2=14.",
+      "explanation": "Row combination rule: cell[2] = 3 * cell[0] + cell[1]. Row 0: 3*3 + 2 = 11. Row 1: 3*1 + 5 = 8. Row 2: 3*4 + 2 = 14.",
       "metadata": {
         "subject": "numerical_reasoning",
         "strand": "Numerical Reasoning",
@@ -1417,27 +1417,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "I am thinking of a 2-digit number N. The sum of its digits is 11. When its digits are reversed, the new number is 27 greater than N. What is N?",
+      "prompt": "A two-digit number N has a tens digit that is 3 greater than its units digit. When N is divided by the sum of its digits, the quotient is 7 and the remainder is 3. What is N?",
       "options": [
         {
           "id": "a",
-          "text": "47"
+          "text": "52"
         },
         {
           "id": "b",
-          "text": "38"
+          "text": "41"
         },
         {
           "id": "c",
-          "text": "56"
+          "text": "63"
         },
         {
           "id": "d",
-          "text": "29"
+          "text": "74"
         },
         {
           "id": "e",
-          "text": "65"
+          "text": "85"
         }
       ],
       "visuals": [],
@@ -1445,7 +1445,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "Let N = 10T + U. T + U = 11. (10U + T) - N = 27 => 9(U - T) = 27 => U - T = 3. T = 4, U = 7, so N = 47.",
+      "explanation": "Let N = 10*T + U. T - U = 3 (so T = U + 3). The sum of digits is T + U = 2*U + 3. Given N = 7*(T + U) + 3: 10*(U + 3) + U = 7*(2*U + 3) + 3 => 11*U + 30 = 14*U + 24 => 3*U = 6 => U = 2. Then T = 5, and N = 52.",
       "metadata": {
         "subject": "numerical_reasoning",
         "strand": "Numerical Reasoning",
@@ -2007,11 +2007,11 @@
       "solver": "number_series",
       "solverParams": {
         "sequence": [
-          7,
+          2,
+          4,
           10,
-          16,
-          25,
-          37
+          20,
+          34
         ]
       }
     },
@@ -2191,13 +2191,13 @@
         "grid": [
           [
             3,
-            4,
-            13
+            2,
+            11
           ],
           [
-            2,
+            1,
             5,
-            11
+            8
           ],
           [
             4,
@@ -2566,7 +2566,7 @@
       "id": "scholarship-y6-nr-031",
       "skill": "nr-logic-deduction-numbers",
       "targetOption": "a",
-      "correctValue": 47,
+      "correctValue": 52,
       "solver": "arithmetical_reasoning",
       "solverParams": {
         "variables": [
@@ -2588,8 +2588,9 @@
         ],
         "constraints": [
           "N === 10*T + U",
-          "T + U === 11",
-          "(10*U + T) - N === 27"
+          "T - U === 3",
+          "Math.floor(N / (T + U)) === 7",
+          "N % (T + U) === 3"
         ],
         "targetVariable": "N"
       }
