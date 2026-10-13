@@ -1,5 +1,6 @@
 import { hashContent } from "@/features/question-factory/provenance/content-hash";
 import type { Question } from "@/schemas/question.schema";
+import { canonicalQuestionHash, validateHumanApproval, type HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
 
 import type { LoadedManifest } from "./load-manifests";
 import {
@@ -73,6 +74,7 @@ export interface PlannedStimulus extends ProjectedStimulus {
 }
 
 export interface PlannedItem extends ProjectedQuestion {
+  readonly humanApproval?: HumanPublicationApproval;
   readonly itemId: string;
   readonly itemVersionId: string;
   readonly stimulusId: string | null;
@@ -95,6 +97,8 @@ export interface ProjectionPlan {
 }
 
 export interface BuildPlanInput {
+  /** Production projection supplies only verified, revision-bound approvals. */
+  readonly approvals?: ReadonlyMap<string, HumanPublicationApproval>;
   /** `publishedExamBank` — curated plus factory-published, in bank order. */
   readonly questions: readonly Question[];
   /** Loaded from `content/question-factory/published-manifests/`. */
@@ -157,6 +161,29 @@ export function buildProjectionPlan(input: BuildPlanInput): ProjectionPlan {
         `curated question '${question.id}' unexpectedly has manifest ${manifest.id}`,
       );
       continue;
+    }
+    if (manifest?.question && canonicalQuestionHash(manifest.question) !== canonicalQuestionHash(question)) {
+      problems.push(`factory question '${question.id}' differs from its canonical manifest content`);
+      continue;
+    }
+    const humanApproval = input.approvals?.get(question.id);
+    const requiresApproval = input.approvals !== undefined ||
+      (input.curatedPublishedAt && input.curatedPublishedAt >= "2026-10-01T00:00:00.000Z");
+    if (!humanApproval && requiresApproval) {
+      problems.push(`question '${question.id}' has no verified human approval`);
+      continue;
+    }
+    if (humanApproval) {
+      if (manifest && !manifest.sourceManifestHash) {
+        problems.push(`question '${question.id}' has no verified source-manifest hash`);
+        continue;
+      }
+      const approvalCheck = validateHumanApproval(humanApproval, question, manifest?.revision ?? 1,
+        manifest?.sourceManifestHash ?? null);
+      if (!approvalCheck.ok) {
+        problems.push(`question '${question.id}': ${approvalCheck.reason}`);
+        continue;
+      }
     }
 
     const source: ProjectionSource = manifest
@@ -221,6 +248,7 @@ export function buildProjectionPlan(input: BuildPlanInput): ProjectionPlan {
 
     items.push({
       ...projected,
+      ...(humanApproval ? { humanApproval } : {}),
       itemId,
       itemVersionId: itemVersionIdOf(projected.contentHash),
       stimulusId,

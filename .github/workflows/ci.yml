@@ -63,6 +63,8 @@ jobs:
       # recompute, and the candidate/answer split holds. No database needed —
       # the projected-rows half runs in the `rls` job below, where one exists.
       - run: npm run projection:verify
+      - run: npm run content:verify-publication
+      - run: npm run audit:bank
       # `test:ci`, not `test`. A vitest worker fork can exit mid-run, and vitest
       # reports the crashed file as MISSING rather than failing — "Test Files 11
       # passed (12)" with every word saying passed, and once, observed here, with
@@ -127,6 +129,9 @@ jobs:
         env:
           SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       - run: npm run migrations:status
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
+      - run: npm run programmes:check-gates
         env:
           SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       # Guarded, for the reason given on `test:ci` in the core job — and with
