@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { questionBank } from "@/content/questions/question-bank";
 import { publishedExamBank } from "@/content/questions/practice-bank";
@@ -12,6 +12,12 @@ import {
   type PublicationGateMode,
 } from "@/features/content-governance/gate-config";
 import { getExamBank } from "@/server/exam-bank";
+
+// Model the required zero-approval scenario without requiring the real
+// repository to stay unapproved after the owner begins reviewing content.
+vi.mock("@/server/publication-evidence", () => ({
+  getPublicationEligibility: () => ({ problems: [], approvals: new Map() }),
+}));
 
 describe("Publication Gate Modes (Sections 2, 15, 16)", () => {
   it("defaults to report mode for unconfigured programmes (Section 2)", () => {
