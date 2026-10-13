@@ -1,9 +1,11 @@
 import "./lib/allow-server-only.mts";
 
-import { mkdir, unlink, writeFile } from "node:fs/promises";
+import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import postcss from "postcss";
+import tailwindcss from "@tailwindcss/postcss";
 
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { getSourceManifestForQuestion } from "@/features/content-governance/approval-verification";
@@ -227,6 +229,12 @@ async function main(): Promise<void> {
     );
   }
 
+  // Reuse the application's tokens and actual renderer utilities in this
+  // standalone page. No running Next server or prior build is required.
+  const stylesheet = path.resolve("src/app/globals.css");
+  const rendererStyles = await postcss([tailwindcss({ base: process.cwd() })])
+    .process(await readFile(stylesheet, "utf8"), { from: stylesheet });
+
   // Write CSV
   const sheetId = `review-sheet-${options.programme}-${new Date().toISOString().replace(/[:.]/g, "-")}`;
   const csvFileName = `${sheetId}.csv`;
@@ -244,25 +252,26 @@ async function main(): Promise<void> {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(htmlTitle)}</title>
+  <style>${rendererStyles.css.replace(/<\/style/gi, "<\\/style")}</style>
   <style>
     :root {
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --color-primary: #1e1b4b;
-      --color-border: #e2e8f0;
-      --color-bg: #f8fafc;
-      --color-card: #ffffff;
-      --color-text: #0f172a;
-      --color-muted: #64748b;
-      --color-tag-bg: #f1f5f9;
-      --color-success-bg: #ecfdf5;
-      --color-success-text: #065f46;
-      --color-info-bg: #eff6ff;
-      --color-info-text: #1e40af;
-      --color-warn-bg: #fffbeb;
-      --color-warn-text: #92400e;
+      --font-sans: var(--font-geist, "Helvetica Neue"), system-ui, -apple-system, "Segoe UI", sans-serif;
+      --color-primary: var(--mm-brand);
+      --color-border: var(--mm-line);
+      --color-bg: var(--bg-page);
+      --color-card: var(--mm-surface);
+      --color-text: var(--mm-ink);
+      --color-muted: var(--mm-muted);
+      --color-tag-bg: var(--mm-surface-quiet);
+      --color-success-bg: var(--mm-positive-soft);
+      --color-success-text: var(--mm-positive);
+      --color-info-bg: var(--mm-tint);
+      --color-info-text: var(--mm-brand);
+      --color-warn-bg: var(--mm-warm);
+      --color-warn-text: var(--warning);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      margin: 0;
       font-family: var(--font-sans);
       background-color: var(--color-bg);
       color: var(--color-text);
@@ -278,7 +287,7 @@ async function main(): Promise<void> {
       margin-bottom: 2rem;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    h1 { font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-instrument-sans, "Helvetica Neue"), system-ui, sans-serif; font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.5rem; }
     .lead { color: var(--color-muted); font-size: 1rem; margin-bottom: 1.5rem; }
     .stats-grid {
       display: grid;
@@ -342,25 +351,25 @@ async function main(): Promise<void> {
       color: var(--color-muted);
       margin-bottom: 1.5rem;
     }
-    .meta-item { display: flex; gap: 0.25rem; }
+    .meta-item { display: flex; flex-wrap: wrap; min-width: 0; gap: 0.25rem; }
     .meta-item strong { color: var(--color-text); }
     .student-view-box {
-      border: 2px dashed #cbd5e1;
+      border: 2px dashed var(--mm-line-quiet);
       border-radius: 0.75rem;
       padding: 1.5rem;
-      background: #fafafa;
+      background: var(--mm-surface-quiet);
       margin-bottom: 1.5rem;
     }
     .student-view-label {
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      color: #94a3b8;
+      color: var(--mm-muted);
       letter-spacing: 0.05em;
       margin-bottom: 1rem;
     }
     .audit-box {
-      background: #f8fafc;
+      background: var(--mm-surface-quiet);
       border: 1px solid var(--color-border);
       border-radius: 0.5rem;
       padding: 1rem;
@@ -387,7 +396,13 @@ async function main(): Promise<void> {
       text-align: left;
     }
     .checklist-table th { background: var(--color-tag-bg); }
-    code { font-family: monospace; background: #e2e8f0; padding: 0.1rem 0.3rem; border-radius: 0.25rem; }
+    code { font-family: monospace; background: var(--mm-surface-quiet); padding: 0.1rem 0.3rem; border-radius: 0.25rem; overflow-wrap: anywhere; }
+    @media (max-width: 640px) {
+      header, .question-card { padding: 1rem; }
+      .student-view-box { padding: 0.75rem; }
+      .question-id, .checklist-table td { overflow-wrap: anywhere; }
+      .checklist-table th, .checklist-table td { padding: 0.5rem; }
+    }
   </style>
 </head>
 <body>
