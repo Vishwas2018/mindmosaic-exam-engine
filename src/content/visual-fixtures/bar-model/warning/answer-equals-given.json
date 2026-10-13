@@ -1,0 +1,45 @@
+{
+  "id": "bar-model-warning-coincidence",
+  "type": "bar_model",
+  "title": "Seedlings in a garden bed",
+  "altText": "A garden bed has 36 seedlings. 18 of them are basil and the rest are mint. The number of mint seedlings is unknown.",
+  "data": {
+    "layout": {
+      "mode": "schematic"
+    },
+    "bars": [
+      {
+        "id": "bed",
+        "label": "Garden bed",
+        "segments": [
+          {
+            "id": "basil",
+            "label": "Basil",
+            "value": 18,
+            "display": "value"
+          },
+          {
+            "id": "mint",
+            "label": "Mint",
+            "unknown": "m",
+            "display": "unknown",
+            "target": true
+          }
+        ]
+      }
+    ],
+    "braces": [
+      {
+        "id": "all",
+        "kind": "total",
+        "label": "All",
+        "value": 36,
+        "display": "value",
+        "spans": [
+          "basil",
+          "mint"
+        ]
+      }
+    ]
+  }
+}

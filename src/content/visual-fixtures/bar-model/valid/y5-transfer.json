@@ -1,0 +1,124 @@
+{
+  "id": "bar-model-y5-transfer",
+  "type": "bar_model",
+  "title": "Stickers shared out",
+  "altText": "Ava has 70 stickers and Ben has 38. Ava gives Ben some stickers and then they have the same amount. The number of stickers Ava gives is unknown.",
+  "data": {
+    "layout": {
+      "mode": "schematic"
+    },
+    "groups": [
+      {
+        "id": "swap",
+        "barIds": [
+          "ava-before",
+          "ben-before",
+          "ava-after",
+          "ben-after"
+        ]
+      }
+    ],
+    "quantities": [
+      {
+        "id": "gift",
+        "label": "Given",
+        "unknown": "g",
+        "display": "unknown",
+        "target": true
+      }
+    ],
+    "bars": [
+      {
+        "id": "ava-before",
+        "label": "Ava",
+        "stage": "before",
+        "segments": [
+          {
+            "id": "ava-keeps",
+            "label": "Keeps",
+            "unknown": "e",
+            "display": "blank"
+          },
+          {
+            "id": "ava-gives",
+            "label": "Gives",
+            "quantityId": "gift",
+            "display": "unknown",
+            "role": "change"
+          }
+        ]
+      },
+      {
+        "id": "ben-before",
+        "label": "Ben",
+        "stage": "before",
+        "segments": [
+          {
+            "id": "ben-had",
+            "value": 38,
+            "display": "value"
+          }
+        ]
+      },
+      {
+        "id": "ava-after",
+        "label": "Ava",
+        "stage": "after",
+        "segments": [
+          {
+            "id": "ava-now",
+            "unknown": "x",
+            "display": "blank"
+          }
+        ]
+      },
+      {
+        "id": "ben-after",
+        "label": "Ben",
+        "stage": "after",
+        "segments": [
+          {
+            "id": "ben-now",
+            "unknown": "y",
+            "display": "blank"
+          }
+        ]
+      }
+    ],
+    "braces": [
+      {
+        "id": "ava-total",
+        "kind": "total",
+        "value": 70,
+        "display": "value",
+        "spans": [
+          "ava-keeps",
+          "ava-gives"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "kind": "transfer",
+        "fromBar": "ava-before",
+        "toBar": "ben-before",
+        "quantityId": "gift",
+        "beforeBars": [
+          "ava-before",
+          "ben-before"
+        ],
+        "afterBars": [
+          "ava-after",
+          "ben-after"
+        ]
+      },
+      {
+        "kind": "equal",
+        "barIds": [
+          "ava-after",
+          "ben-after"
+        ]
+      }
+    ]
+  }
+}

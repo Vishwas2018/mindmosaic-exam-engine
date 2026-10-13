@@ -42,3 +42,21 @@ export function calculateBoundedStepCount(
   const rawCount = Math.floor((max - min) / step) + 1;
   return Math.min(Math.max(rawCount, 0), maxCount);
 }
+
+/**
+ * Bounds for `bar_model` (Model Method). Same two-layer posture as the tick
+ * caps above: the Zod schema rejects oversized models at content-validation
+ * time, and the solver/layout re-check them as defence in depth so a model
+ * that never went through the schema still cannot produce an unbounded SVG
+ * or an unbounded linear system.
+ */
+export const MAX_BAR_MODEL_BARS = 6;
+export const MAX_BAR_MODEL_SEGMENTS_PER_BAR = 8;
+export const MAX_BAR_MODEL_SEGMENTS_TOTAL = 24;
+export const MAX_BAR_MODEL_UNITS_PER_SEGMENT = 12;
+export const MAX_BAR_MODEL_UNITS_PER_BAR = 16;
+export const MAX_BAR_MODEL_UNIT_DEFINITIONS = 4;
+export const MAX_BAR_MODEL_BRACES = 10;
+export const MAX_BAR_MODEL_BRACE_SPAN = 8;
+export const MAX_BAR_MODEL_GROUPS = 3;
+export const MAX_BAR_MODEL_VALUE = 1_000_000;

@@ -1,0 +1,58 @@
+{
+  "why": "A brace skips the segment between its two ends.",
+  "layer": "structural",
+  "errorCodes": [
+    "non_contiguous_brace"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-non-contiguous",
+    "type": "bar_model",
+    "title": "Lamingtons in a tray",
+    "altText": "A bar model of one tray of lamingtons. The whole tray is 45. One part is 18 dark chocolate lamingtons. The other part, the pink ones, is unknown.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "bars": [
+        {
+          "id": "tray",
+          "label": "Tray",
+          "segments": [
+            {
+              "id": "dark",
+              "label": "Dark",
+              "value": 18,
+              "display": "value"
+            },
+            {
+              "id": "milk",
+              "label": "Milk",
+              "value": 9,
+              "display": "value"
+            },
+            {
+              "id": "pink",
+              "label": "Pink",
+              "unknown": "p",
+              "display": "unknown",
+              "target": true
+            }
+          ]
+        }
+      ],
+      "braces": [
+        {
+          "id": "whole",
+          "kind": "total",
+          "label": "All",
+          "value": 45,
+          "display": "value",
+          "spans": [
+            "dark",
+            "pink"
+          ]
+        }
+      ]
+    }
+  }
+}

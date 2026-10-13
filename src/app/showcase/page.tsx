@@ -230,13 +230,13 @@ export default function ShowcasePage() {
                   Visual renderers
                 </h2>
                 <p className="mt-1 text-sm text-muted">
-                  Deterministic output for all {VISUAL_TYPES.length} visual types.
+                  Deterministic output for all {VISUAL_TYPES.length - 1} learner-facing visual types.
                 </p>
               </div>
             </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {VISUAL_TYPES.map((type) => {
+              {VISUAL_TYPES.filter((type) => type !== "bar_model").map((type) => {
                 const visual = showcaseVisuals.find((item) => item.type === type);
                 return (
                   <Card

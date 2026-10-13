@@ -117,6 +117,7 @@ describe("navigation graph", () => {
     "/auth/confirm",
     "/auth/reset",
     "/dev/routes",
+    "/dev/bar-model", // dev-only QA preview; 404 in production, never linked
     "/showcase",
   ]);
 

@@ -1,0 +1,56 @@
+{
+  "id": "bar-model-y3-comparison",
+  "type": "bar_model",
+  "title": "Shells on the beach",
+  "altText": "Two bars compare shells. Zara has 34 shells and Ben has 21 shells. A difference brace shows how many more shells Zara has, and its amount is unknown.",
+  "data": {
+    "layout": {
+      "mode": "schematic"
+    },
+    "groups": [
+      {
+        "id": "shells",
+        "barIds": [
+          "zara",
+          "ben"
+        ]
+      }
+    ],
+    "bars": [
+      {
+        "id": "zara",
+        "label": "Zara",
+        "segments": [
+          {
+            "id": "zara-shells",
+            "value": 34,
+            "display": "value"
+          }
+        ]
+      },
+      {
+        "id": "ben",
+        "label": "Ben",
+        "segments": [
+          {
+            "id": "ben-shells",
+            "value": 21,
+            "display": "value"
+          }
+        ]
+      }
+    ],
+    "braces": [
+      {
+        "id": "more",
+        "kind": "difference",
+        "label": "More",
+        "unknown": "d",
+        "display": "unknown",
+        "target": true,
+        "longerBarId": "zara",
+        "shorterBarId": "ben"
+      }
+    ]
+  }
+}

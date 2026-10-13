@@ -48,6 +48,10 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run validate:questions
+      # bar_model fixtures: every valid example solves to its exact target and
+      # every invalid one is rejected by its intended layer (schema,
+      # structural or mathematical). Phase 1 is render-only; no question uses it.
+      - run: npm run visuals:validate-bar-models
       - run: npm run check:answers -- --include-published
       # Enforced promotion gate over the pre-promotion set (everything under
       # content/manual-questions not yet promoted): composition/schema
