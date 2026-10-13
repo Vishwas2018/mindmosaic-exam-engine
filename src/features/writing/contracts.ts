@@ -25,20 +25,23 @@ export const submitWritingAttemptRequestSchema = z.object({
   reason: z.enum(["user_submitted", "timer_expired"]),
 });
 
-export const paperWritingAttemptRequestSchema = z.object({
-  childId: z.string().uuid(),
-  taskId: z.string().min(1).max(120),
-  text: z.string().min(1).max(MAX_TEXT),
-  /** Minutes the child actually took, if the parent timed it. */
-  durationMinutes: z.number().int().min(1).max(60).optional(),
-});
-
 export const markWritingAttemptRequestSchema = z.object({
   rubricId: z.string().min(1),
   rubricVersion: z.number().int().min(1),
   scores: z.record(z.string(), z.number().int()),
   comments: z.record(z.string(), z.string().max(500)).optional(),
   feedback: z.string().max(2000).optional(),
+});
+
+export const paperWritingAttemptRequestSchema = z.object({
+  childId: z.string().uuid(),
+  taskId: z.string().min(1).max(120),
+  /** Optional: a parent may mark straight from the paper without typing the response in. */
+  text: z.string().max(MAX_TEXT).optional(),
+  /** Minutes the child actually took, if the parent timed it. */
+  durationMinutes: z.number().int().min(1).max(60).optional(),
+  /** When present, the attempt and its marks are recorded together in one step. */
+  mark: markWritingAttemptRequestSchema.optional(),
 });
 
 export interface WritingAttemptDto {
@@ -50,7 +53,7 @@ export interface WritingAttemptDto {
   /** Epoch milliseconds; null when untimed. */
   deadlineAt: number | null;
   responseText: string;
-  responseSource: "student_typed" | "parent_typed";
+  responseSource: "student_typed" | "parent_typed" | "paper_only";
   submittedAt: string | null;
   submissionReason: "user_submitted" | "timer_expired" | null;
   /** The server's clock when this was produced, so the client can correct for device clock skew. */

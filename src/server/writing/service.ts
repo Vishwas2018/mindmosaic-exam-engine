@@ -19,7 +19,7 @@ export interface WritingAttemptRow {
   started_at: string;
   deadline_at: string | null;
   response_text: string;
-  response_source: "student_typed" | "parent_typed";
+  response_source: "student_typed" | "parent_typed" | "paper_only";
   submitted_at: string | null;
   submission_reason: "user_submitted" | "timer_expired" | null;
 }
@@ -109,7 +109,7 @@ export function submitWritingAttempt(
 
 export function recordPaperWritingAttempt(
   supabase: SupabaseClient,
-  input: { childId: string; taskId: string; text: string; durationSeconds: number | null },
+  input: { childId: string; taskId: string; text: string | null; durationSeconds: number | null },
 ) {
   return call<WritingAttemptRow>(() =>
     supabase.rpc("record_paper_writing_attempt", {
@@ -117,6 +117,35 @@ export function recordPaperWritingAttempt(
       p_task_id: input.taskId,
       p_text: input.text,
       p_duration_seconds: input.durationSeconds,
+    }),
+  );
+}
+
+export function recordMarkedPaperAttempt(
+  supabase: SupabaseClient,
+  input: {
+    childId: string;
+    taskId: string;
+    text: string | null;
+    durationSeconds: number | null;
+    rubricId: string;
+    rubricVersion: number;
+    scores: Record<string, number>;
+    comments: Record<string, string>;
+    feedback: string | null;
+  },
+) {
+  return call<WritingAttemptRow>(() =>
+    supabase.rpc("record_marked_paper_attempt", {
+      p_child: input.childId,
+      p_task_id: input.taskId,
+      p_text: input.text,
+      p_duration_seconds: input.durationSeconds,
+      p_rubric_id: input.rubricId,
+      p_rubric_version: input.rubricVersion,
+      p_scores: input.scores,
+      p_comments: input.comments,
+      p_feedback: input.feedback,
     }),
   );
 }

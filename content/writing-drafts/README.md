@@ -17,6 +17,15 @@ prompt, and the validator rejects a draft where either is set.
   of MindMosaic content goes through, which is separate work.
 - Until then every real writing route answers 404 for every task id.
 
+## How a prompt becomes approved
+
+Through the shared approval path from the publication-governance PR (#35), not a
+separate mechanism: review sheet, then `content:record-approvals` (the single
+verifier), then an approval record under `content/publication-approvals/`, which
+the server loads and re-verifies before serving. It is not wired yet, because
+that PR has not merged. The plan, and the one open decision (a subject kind on
+the shared verifier), are in the "Approval plan" section of PR #47.
+
 ## Originality
 
 Written from scratch. None is copied or paraphrased from a published, prep-book

@@ -2803,6 +2803,7 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       functionExists("submit_writing_attempt"),
       functionExists("record_paper_writing_attempt"),
       functionExists("mark_writing_attempt"),
+      functionExists("record_marked_paper_attempt"),
       policyExists("writing_attempts", "writing_attempts: parent reads linked children"),
       policyExists("writing_marks", "writing_marks: student reads own"),
       {

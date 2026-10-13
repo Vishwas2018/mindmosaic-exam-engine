@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
-import { RubricMarkForm } from "@/features/writing/components/RubricMarkForm";
+import { AttemptMarkForm } from "@/features/writing/components/MarkEntry";
 import { WRITING_BACK_LINK_CLASS, WritingPageShell } from "@/features/writing/components/WritingPageShell";
 import { resolveWritingRubric, resolveWritingTask, listWritingTasks } from "@/features/writing/task";
 import { scholarshipWrittenExpressionRubric } from "@/features/writing/rubrics/scholarship-written-expression";
@@ -66,15 +66,22 @@ export default async function ParentMarkWritingPage({ params }: { params: Promis
 
       <section aria-labelledby="response-heading" className="mt-4 rounded-2xl border border-royal/10 bg-white p-5">
         <h2 id="response-heading" className="text-sm font-bold uppercase tracking-wide text-muted">
-          {found.attempt.responseSource === "parent_typed" ? "Typed in by a parent from paper" : "Written on screen"}
+          {found.attempt.responseSource === "paper_only"
+            ? "Marked on paper"
+            : found.attempt.responseSource === "parent_typed"
+              ? "Typed in by a parent from paper"
+              : "Written on screen"}
         </h2>
         <p data-testid="response-text" className="mt-2 whitespace-pre-wrap text-lg leading-8 text-ink">
-          {found.attempt.responseText || "(No writing was handed in.)"}
+          {found.attempt.responseText ||
+            (found.attempt.responseSource === "paper_only"
+              ? "Written on paper. No typed copy was added."
+              : "(No writing was handed in.)")}
         </p>
       </section>
 
       <div className="mt-6">
-        <RubricMarkForm rubric={rubric} attemptId={found.attempt.id} initial={initial} backHref="/parent/writing" />
+        <AttemptMarkForm rubric={rubric} attemptId={found.attempt.id} initial={initial} backHref="/parent/writing" />
       </div>
     </WritingPageShell>
   );

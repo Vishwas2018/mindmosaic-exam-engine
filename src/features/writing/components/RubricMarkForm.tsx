@@ -8,9 +8,18 @@ import { buttonClasses } from "@/components/ui";
 
 import { rubricIsComplete, rubricLevels, rubricMaxMarks, rubricTotal, type RubricScores, type WritingRubric } from "../rubric";
 
+export interface MarkPayload {
+  rubricId: string;
+  rubricVersion: number;
+  scores: Partial<RubricScores>;
+  comments: Record<string, string>;
+  feedback?: string;
+}
+
 interface Props {
   rubric: WritingRubric;
-  attemptId: string;
+  /** Saves the marks. Throws (or rejects) on failure. The form never decides where they go. */
+  save: (marks: MarkPayload) => Promise<void>;
   /** Existing marks, when re-marking. */
   initial?: { scores: RubricScores; comments: Record<string, string>; feedback: string | null } | null;
   backHref: string;
@@ -27,7 +36,7 @@ interface Props {
  * the database from the stored rubric (mark_writing_attempt), and the ceiling is
  * never sent.
  */
-export function RubricMarkForm({ rubric, attemptId, initial = null, backHref }: Props) {
+export function RubricMarkForm({ rubric, save: saveMarks, initial = null, backHref }: Props) {
   const [scores, setScores] = useState<Partial<RubricScores>>(initial?.scores ?? {});
   const [comments, setComments] = useState<Record<string, string>>(initial?.comments ?? {});
   const [feedback, setFeedback] = useState(initial?.feedback ?? "");
@@ -42,18 +51,13 @@ export function RubricMarkForm({ rubric, attemptId, initial = null, backHref }: 
   async function save() {
     setState("saving");
     try {
-      const response = await fetch(`/api/writing/attempts/${attemptId}/mark`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          rubricId: rubric.id,
-          rubricVersion: rubric.version,
-          scores,
-          comments: Object.fromEntries(Object.entries(comments).filter(([, value]) => value.trim() !== "")),
-          feedback: feedback.trim() === "" ? undefined : feedback,
-        }),
+      await saveMarks({
+        rubricId: rubric.id,
+        rubricVersion: rubric.version,
+        scores,
+        comments: Object.fromEntries(Object.entries(comments).filter(([, value]) => value.trim() !== "")),
+        feedback: feedback.trim() === "" ? undefined : feedback,
       });
-      if (!response.ok) throw new Error("mark_failed");
       setState("saved");
     } catch {
       setState("error");
@@ -137,7 +141,11 @@ export function RubricMarkForm({ rubric, attemptId, initial = null, backHref }: 
                 rows={2}
                 maxLength={500}
                 value={comments[criterion.id] ?? ""}
-                onChange={(event) => setComments((current) => ({ ...current, [criterion.id]: event.currentTarget.value }))}
+                onChange={(event) => {
+                  /* Read the value now: the updater below runs after the event has been released. */
+                  const value = event.currentTarget.value;
+                  setComments((current) => ({ ...current, [criterion.id]: value }));
+                }}
                 className="mt-2 w-full rounded-xl border border-royal/20 px-3 py-2 text-base"
               />
             </details>

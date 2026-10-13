@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { PaperResponseForm } from "@/features/writing/components/PaperResponseForm";
 import { WRITING_BACK_LINK_CLASS, WritingPageShell } from "@/features/writing/components/WritingPageShell";
 import { WritingResultsList } from "@/features/writing/components/WritingResultsList";
 import { listWritingTasks } from "@/features/writing/task";
@@ -47,10 +46,19 @@ export default async function ParentWritingPage() {
         </p>
       ) : (
         <div className="mt-6 space-y-8">
-          <PaperResponseForm
-            linkedChildren={children}
-            tasks={tasks.map((task) => ({ id: task.id, title: task.title }))}
-          />
+          <div className="rounded-2xl border border-royal/10 bg-white p-5">
+            <h2 className="text-lg font-extrabold text-ink">Sat it on paper?</h2>
+            <p className="mt-1 text-sm text-muted">
+              Score the sheet straight away. You do not need to type the writing in.
+            </p>
+            <Link
+              href="/writing/mark/new"
+              data-testid="mark-paper-link"
+              className="mt-3 inline-block rounded-xl bg-royal px-4 py-2 text-sm font-extrabold text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/30"
+            >
+              Mark a paper response
+            </Link>
+          </div>
           {children.map((child) => (
             <section key={child.id} aria-labelledby={`child-${child.id}`}>
               <h2 id={`child-${child.id}`} className="text-lg font-extrabold text-ink">

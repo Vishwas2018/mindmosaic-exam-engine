@@ -64,7 +64,8 @@ create table public.writing_attempts (
   started_at       timestamptz not null default now(),
   deadline_at      timestamptz,
   response_text    text not null default '' check (char_length(response_text) <= 20000),
-  response_source  text not null default 'student_typed' check (response_source in ('student_typed', 'parent_typed')),
+  -- paper_only: sat and marked on paper, nothing typed in. response_text is then empty.
+  response_source  text not null default 'student_typed' check (response_source in ('student_typed', 'parent_typed', 'paper_only')),
   draft_saved_at   timestamptz,
   submitted_at     timestamptz,
   submission_reason text check (submission_reason in ('user_submitted', 'timer_expired')),
@@ -79,7 +80,8 @@ create table public.writing_attempts (
   constraint writing_attempts_submitted_pair check (
     (submitted_at is null) = (submission_reason is null)
   ),
-  constraint writing_attempts_paper_is_submitted check (mode <> 'paper' or submitted_at is not null)
+  constraint writing_attempts_paper_is_submitted check (mode <> 'paper' or submitted_at is not null),
+  constraint writing_attempts_paper_only_is_empty check (response_source <> 'paper_only' or (mode = 'paper' and response_text = ''))
 );
 
 create index writing_attempts_student_idx on public.writing_attempts (student_id, started_at desc);
@@ -278,8 +280,10 @@ begin
 end;
 $$;
 
--- A parent records a response that was handwritten on paper. Creates an
--- already-submitted `paper` attempt for a linked child.
+-- A parent records an attempt that was sat on paper. Creates an
+-- already-submitted `paper` attempt for a linked child. Typing the response in
+-- is OPTIONAL: with no text the attempt is `paper_only` and is marked from the
+-- sheet in the parent's hands.
 create or replace function public.record_paper_writing_attempt(
   p_child uuid, p_task_id text, p_text text, p_duration_seconds integer
 ) returns public.writing_attempts
@@ -287,12 +291,13 @@ language plpgsql security definer set search_path = public, pg_temp
 as $$
 declare
   v_row public.writing_attempts;
+  v_typed boolean := p_text is not null and char_length(btrim(p_text, E' \t\r\n')) > 0;
 begin
   if auth.uid() is null or not public.is_parent_of(p_child) then
     raise exception 'no such linked child' using errcode = 'MM310';
   end if;
-  if p_text is null or char_length(btrim(p_text)) = 0 or char_length(p_text) > 20000 then
-    raise exception 'a typed response is required' using errcode = 'MM312';
+  if p_text is not null and char_length(p_text) > 20000 then
+    raise exception 'invalid response text' using errcode = 'MM312';
   end if;
   if p_duration_seconds is not null and p_duration_seconds not between 60 and 3600 then
     raise exception 'invalid duration' using errcode = 'MM312';
@@ -300,8 +305,10 @@ begin
   insert into public.writing_attempts
     (student_id, task_id, mode, duration_seconds, started_at, response_text,
      response_source, submitted_at, submission_reason, created_by)
-  values (p_child, p_task_id, 'paper', p_duration_seconds, now(), p_text,
-          'parent_typed', now(), 'user_submitted', auth.uid())
+  values (p_child, p_task_id, 'paper', p_duration_seconds, now(),
+          case when v_typed then p_text else '' end,
+          case when v_typed then 'parent_typed' else 'paper_only' end,
+          now(), 'user_submitted', auth.uid())
   returning * into v_row;
   return v_row;
 end;
@@ -378,6 +385,27 @@ begin
 end;
 $$;
 
+-- One step for "marked on paper": records the paper attempt (typed text
+-- optional) and its rubric marks in a single transaction, so a bad score leaves
+-- no half-recorded attempt behind. Both halves are the functions above, so every
+-- rule they enforce (linked parent, whole-number scores for every criterion,
+-- server-derived total and ceiling) applies unchanged.
+create or replace function public.record_marked_paper_attempt(
+  p_child uuid, p_task_id text, p_text text, p_duration_seconds integer,
+  p_rubric_id text, p_rubric_version integer,
+  p_scores jsonb, p_comments jsonb, p_feedback text
+) returns public.writing_attempts
+language plpgsql security definer set search_path = public, pg_temp
+as $$
+declare
+  v_row public.writing_attempts;
+begin
+  v_row := public.record_paper_writing_attempt(p_child, p_task_id, p_text, p_duration_seconds);
+  perform public.mark_writing_attempt(v_row.id, p_rubric_id, p_rubric_version, p_scores, p_comments, p_feedback);
+  return v_row;
+end;
+$$;
+
 revoke all on function public.start_writing_attempt(text, text, integer) from public, anon;
 revoke all on function public.save_writing_draft(uuid, text) from public, anon;
 revoke all on function public.submit_writing_attempt(uuid, text, text) from public, anon;
@@ -388,6 +416,8 @@ grant execute on function public.save_writing_draft(uuid, text) to authenticated
 grant execute on function public.submit_writing_attempt(uuid, text, text) to authenticated;
 grant execute on function public.record_paper_writing_attempt(uuid, text, text, integer) to authenticated;
 grant execute on function public.mark_writing_attempt(uuid, text, integer, jsonb, jsonb, text) to authenticated;
+revoke all on function public.record_marked_paper_attempt(uuid, text, text, integer, text, integer, jsonb, jsonb, text) from public, anon;
+grant execute on function public.record_marked_paper_attempt(uuid, text, text, integer, text, integer, jsonb, jsonb, text) to authenticated;
 
 -- ---------------------------------------------------------------------------
 -- Erasure (spec section 17.5). A child's writing is personal data, so

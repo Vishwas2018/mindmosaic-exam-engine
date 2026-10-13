@@ -324,11 +324,126 @@ describe("paper attempts typed in by a parent", () => {
     );
   });
 
-  it("an unlinked parent cannot record a response for someone else's child, and an empty response is refused", async () => {
+  it("an unlinked parent cannot record a response for someone else's child", async () => {
     await asAuthenticated(client, PARENT_E);
     await failsWith(`select public.record_paper_writing_attempt($1, $2, 'text', 900)`, [STUDENT_A, TASK], /MM310/);
+    await failsWith(`select public.record_paper_writing_attempt($1, $2, null, 900)`, [STUDENT_A, TASK], /MM310/);
+  });
+
+  it("typing the response in is optional: no text, or only whitespace, is a paper-only attempt with an empty response", async () => {
     await asAuthenticated(client, PARENT_C);
-    await failsWith(`select public.record_paper_writing_attempt($1, $2, '   ', 900)`, [STUDENT_A, TASK], /MM312/);
+    for (const text of [null, "", "   \n "]) {
+      const { rows } = await client.query(
+        `select mode, response_source, response_text, submission_reason from public.record_paper_writing_attempt($1, $2, $3, null)`,
+        [STUDENT_A, TASK, text],
+      );
+      expect(rows[0]).toEqual({ mode: "paper", response_source: "paper_only", response_text: "", submission_reason: "user_submitted" });
+    }
+  });
+
+  it("a paper-only attempt can then be marked like any other", async () => {
+    await asAuthenticated(client, PARENT_C);
+    const { rows } = await client.query(`select id from public.record_paper_writing_attempt($1, $2, null, null)`, [STUDENT_A, TASK]);
+    const mark = await client.query(
+      `select awarded_marks::int as awarded, max_marks::int as max from public.mark_writing_attempt($1, 'scholarship-written-expression', 1, $2::jsonb, '{}'::jsonb, null)`,
+      [rows[0].id, JSON.stringify(SCORES)],
+    );
+    expect(mark.rows[0]).toEqual({ awarded: 21, max: 30 });
+  });
+
+  it("the table refuses a paper-only row that carries text, or one that is not a paper attempt", async () => {
+    await backToPostgres();
+    await failsWith(
+      `insert into public.writing_attempts (student_id, task_id, mode, created_by, submitted_at, submission_reason, response_source, response_text)
+       values ($1, 't', 'paper', $1, now(), 'user_submitted', 'paper_only', 'some text')`,
+      [STUDENT_A],
+      /writing_attempts_paper_only_is_empty/,
+    );
+    await failsWith(
+      `insert into public.writing_attempts (student_id, task_id, mode, created_by, response_source)
+       values ($1, 't', 'untimed', $1, 'paper_only')`,
+      [STUDENT_A],
+      /writing_attempts_paper_only_is_empty/,
+    );
+  });
+});
+
+describe("marked on paper in one step (record_marked_paper_attempt)", () => {
+  /* Two statements, not a join: rows a function inserts are not visible to the same statement's snapshot. */
+  const record = `select public.record_marked_paper_attempt($1, $2, $3, null, 'scholarship-written-expression', 1, $4::jsonb, $5::jsonb, $6)`;
+  const call = record;
+  async function recorded(args: unknown[]) {
+    await client.query(record, args);
+    const { rows } = await client.query(
+      `select a.id, a.response_source, a.response_text, m.awarded_marks::int as awarded, m.max_marks::int as max
+         from public.writing_attempts a join public.writing_marks m on m.attempt_id = a.id`,
+    );
+    return rows;
+  }
+
+  it("records the attempt and all six scores and comments with no response text", async () => {
+    await asAuthenticated(client, PARENT_C);
+    const rows = await recorded([
+      STUDENT_A,
+      TASK,
+      null,
+      JSON.stringify(SCORES),
+      JSON.stringify({ spelling: "Double letters.", creativity: "Lovely image of the lighthouse." }),
+      "Well done.",
+    ]);
+    expect(rows[0]).toMatchObject({ response_source: "paper_only", response_text: "", awarded: 21, max: 30 });
+
+    const criteria = await client.query(`select criterion_id, score, comment from public.writing_mark_criteria order by criterion_id`);
+    expect(criteria.rows).toHaveLength(6);
+    expect(criteria.rows.find((row) => row.criterion_id === "creativity")?.comment).toBe("Lovely image of the lighthouse.");
+    expect(criteria.rows.find((row) => row.criterion_id === "punctuation")?.comment).toBeNull();
+  });
+
+  it("keeps an optional typed response when one is given", async () => {
+    await asAuthenticated(client, PARENT_C);
+    const rows = await recorded([STUDENT_A, TASK, "The door creaked open.", JSON.stringify(SCORES), "{}", null]);
+    expect(rows[0]).toMatchObject({ response_source: "parent_typed", response_text: "The door creaked open." });
+  });
+
+  it("the child sees the marks it produced", async () => {
+    await asAuthenticated(client, PARENT_C);
+    await client.query(call, [STUDENT_A, TASK, null, JSON.stringify(SCORES), "{}", null]);
+    await asAuthenticated(client, STUDENT_A);
+    const { rows } = await client.query(`select awarded_marks::int as awarded from public.writing_marks`);
+    expect(rows).toEqual([{ awarded: 21 }]);
+  });
+
+  it("a bad score rolls the whole thing back: no attempt is left behind", async () => {
+    await asAuthenticated(client, PARENT_C);
+    await failsWith(call, [STUDENT_A, TASK, null, JSON.stringify({ ...SCORES, spelling: 9 }), "{}", null], /MM312/);
+    const missing: Record<string, number> = { ...SCORES };
+    delete missing.grammar;
+    await failsWith(call, [STUDENT_A, TASK, null, JSON.stringify(missing), "{}", null], /MM312/);
+    expect((await client.query(`select 1 from public.writing_attempts`)).rows).toEqual([]);
+    expect((await client.query(`select 1 from public.writing_marks`)).rows).toEqual([]);
+  });
+
+  it("only a linked parent can use it: not another family's parent, not a child, not anonymous", async () => {
+    const args = [STUDENT_A, TASK, null, JSON.stringify(SCORES), "{}", null];
+    await asAuthenticated(client, PARENT_E);
+    await failsWith(call, args, /MM310/);
+    await asAuthenticated(client, STUDENT_A);
+    await failsWith(call, args, /MM310/);
+    await asAuthenticated(client, STUDENT_B);
+    await failsWith(call, args, /MM310/);
+    await asAnon(client);
+    await failsWith(call, args, /permission denied/);
+    await backToPostgres();
+    expect((await client.query(`select 1 from public.writing_attempts`)).rows).toEqual([]);
+  });
+
+  it("erasing the child removes a paper-only attempt and its marks", async () => {
+    await asAuthenticated(client, PARENT_C);
+    await client.query(call, [STUDENT_A, TASK, null, JSON.stringify(SCORES), "{}", null]);
+    await backToPostgres();
+    await client.query(`select public.erase_student($1, null)`, [STUDENT_A]);
+    expect((await client.query(`select 1 from public.writing_attempts`)).rows).toEqual([]);
+    expect((await client.query(`select 1 from public.writing_mark_criteria`)).rows).toEqual([]);
   });
 });
 
