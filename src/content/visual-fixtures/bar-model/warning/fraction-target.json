@@ -1,0 +1,61 @@
+{
+  "id": "bar-model-warning-fraction",
+  "type": "bar_model",
+  "title": "Ribbon cut in two",
+  "altText": "A 9 metre ribbon is cut into 2 equal pieces. The bar shows two equal units. The length of one piece is unknown.",
+  "data": {
+    "layout": {
+      "mode": "schematic"
+    },
+    "units": [
+      {
+        "id": "piece",
+        "label": "piece"
+      }
+    ],
+    "bars": [
+      {
+        "id": "ribbon",
+        "label": "Ribbon",
+        "segments": [
+          {
+            "id": "first",
+            "units": 1,
+            "unitId": "piece",
+            "display": "blank"
+          },
+          {
+            "id": "second",
+            "units": 1,
+            "unitId": "piece",
+            "display": "blank"
+          }
+        ]
+      }
+    ],
+    "braces": [
+      {
+        "id": "whole",
+        "kind": "total",
+        "label": "Ribbon",
+        "value": 9,
+        "display": "value",
+        "spans": [
+          "first",
+          "second"
+        ]
+      },
+      {
+        "id": "one-piece",
+        "kind": "part",
+        "label": "One piece",
+        "unknown": "n",
+        "display": "unknown",
+        "target": true,
+        "spans": [
+          "first"
+        ]
+      }
+    ]
+  }
+}

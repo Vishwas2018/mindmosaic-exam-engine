@@ -16,24 +16,30 @@
  * arguments, 1 internal error.
  */
 import { getWorkspaceRoot } from "../src/features/question-factory/config";
+import { parseApprovalCsv, type ApprovalInputRow } from "../src/features/content-governance/approval-verification";
 import { orchestratePublication, type PublicationOutcome } from "../src/features/question-factory/publication";
 import { FsFactoryRepository } from "../src/features/question-factory/storage";
+import { readFile } from "node:fs/promises";
 
 interface ParsedArgs {
   readonly candidateIds: readonly string[];
-  readonly approvedBy?: string;
+  readonly sheet?: string;
+  readonly packet?: string;
+  readonly reviewer?: string;
   readonly json: boolean;
 }
 
 function printUsage(): void {
   process.stderr.write(
-    ["Usage: questions:publish --candidate-ids <id1,id2,...> [--approved-by <signature>] [--json]", ""].join("\n"),
+    ["Usage: questions:publish --candidate-ids <id1,id2,...> (--sheet <reviewed.csv> | --packet <reviewed.json>) --reviewer '<full name>' [--json]", ""].join("\n"),
   );
 }
 
 function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
   let candidateIdsRaw: string | undefined;
-  let approvedBy: string | undefined;
+  let sheet: string | undefined;
+  let packet: string | undefined;
+  let reviewer: string | undefined;
   let json = false;
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -42,8 +48,14 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
       case "--candidate-ids":
         candidateIdsRaw = argv[++index];
         break;
-      case "--approved-by":
-        approvedBy = argv[++index];
+      case "--sheet":
+        sheet = argv[++index];
+        break;
+      case "--packet":
+        packet = argv[++index];
+        break;
+      case "--reviewer":
+        reviewer = argv[++index];
         break;
       case "--json":
         json = true;
@@ -67,7 +79,8 @@ function parseArgs(argv: readonly string[]): ParsedArgs | undefined {
     .map((id) => id.trim())
     .filter((id) => id.length > 0);
 
-  return { candidateIds, approvedBy, json };
+  if (Boolean(sheet) === Boolean(packet) || (packet && candidateIds.length !== 1)) return undefined;
+  return { candidateIds, sheet, packet, reviewer, json };
 }
 
 function emitHuman(results: readonly PublicationOutcome[]): void {
@@ -86,12 +99,38 @@ async function main(): Promise<number> {
   const workspaceRoot = getWorkspaceRoot();
   const repository = new FsFactoryRepository(workspaceRoot);
   const publishedAt = new Date().toISOString();
-  const approvedBy = args.approvedBy ?? process.env.MM_CONTENT_OWNER_ID;
+  let rows: ApprovalInputRow[];
+  let reviewer = args.reviewer;
+  if (args.sheet) {
+    rows = parseApprovalCsv(await readFile(args.sheet, "utf8"));
+  } else {
+    const packet = JSON.parse(await readFile(args.packet!, "utf8")) as Record<string, unknown>;
+    reviewer ??= typeof packet.approvedBy === "string" ? packet.approvedBy : undefined;
+    const checks = packet.checks as Record<string, unknown> | undefined;
+    rows = [{ questionId: String(packet.questionId ?? ""),
+      contentHash: typeof packet.contentHash === "string" ? packet.contentHash : undefined,
+      revision: typeof packet.revision === "number" ? packet.revision : undefined,
+      sourceManifestHash: packet.sourceManifestHash === null ? null : undefined,
+      correctness: checks?.correctness === true ? "yes" : "",
+      originality: checks?.originality === true ? "yes" : "",
+      ageAppropriateness: checks?.ageAppropriateness === true ? "yes" : "",
+      decision: typeof packet.decision === "string" ? packet.decision : "" }];
+  }
+  if (!reviewer || reviewer.trim().split(/\s+/).length < 2) throw new Error("A reviewer full name is required.");
+  const rowByQuestion = new Map<string, ApprovalInputRow>();
+  for (const row of rows) {
+    if (rowByQuestion.has(row.questionId)) throw new Error(`Duplicate review row for ${row.questionId}.`);
+    rowByQuestion.set(row.questionId, row);
+  }
   const additionalReservedIds = new Set<string>();
 
   const results: PublicationOutcome[] = [];
   for (const candidateId of args.candidateIds) {
-    const result = await orchestratePublication(candidateId, repository, { publishedAt, approvedBy, additionalReservedIds });
+    const staged = await repository.read("staged", candidateId) as { question?: { id?: string } } | undefined;
+    const reviewedRow = staged?.question?.id ? rowByQuestion.get(staged.question.id) : undefined;
+    const result = await orchestratePublication(candidateId, repository, { publishedAt,
+      reviewedApproval: reviewedRow ? { row: reviewedRow, reviewerFullName: reviewer } : undefined,
+      additionalReservedIds });
     if (result.outcome === "published") additionalReservedIds.add(result.manifest.questionId);
     results.push(result);
   }

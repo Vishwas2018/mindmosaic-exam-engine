@@ -1,0 +1,76 @@
+{
+  "id": "bar-model-y5-equal-units",
+  "type": "bar_model",
+  "title": "Marbles in equal bags",
+  "altText": "Noor has 2 equal bags of marbles and Tomas has 5 bags of the same size. Together they have 56 marbles. The number of marbles Tomas has is unknown.",
+  "data": {
+    "layout": {
+      "mode": "schematic"
+    },
+    "units": [
+      {
+        "id": "bag",
+        "label": "bag"
+      }
+    ],
+    "groups": [
+      {
+        "id": "bags",
+        "barIds": [
+          "noor",
+          "tomas"
+        ]
+      }
+    ],
+    "bars": [
+      {
+        "id": "noor",
+        "label": "Noor",
+        "segments": [
+          {
+            "id": "noor-bags",
+            "units": 2,
+            "unitId": "bag",
+            "display": "blank"
+          }
+        ]
+      },
+      {
+        "id": "tomas",
+        "label": "Tomas",
+        "segments": [
+          {
+            "id": "tomas-bags",
+            "units": 5,
+            "unitId": "bag",
+            "display": "blank"
+          }
+        ]
+      }
+    ],
+    "braces": [
+      {
+        "id": "together",
+        "kind": "total",
+        "label": "Together",
+        "value": 56,
+        "display": "value",
+        "barIds": [
+          "noor",
+          "tomas"
+        ]
+      },
+      {
+        "id": "tomas-total",
+        "kind": "total",
+        "label": "Tomas",
+        "unknown": "t",
+        "display": "unknown",
+        "target": true,
+        "spans": [
+          "tomas-bags"
+        ]
+      }
+    ]
+  }
+}
