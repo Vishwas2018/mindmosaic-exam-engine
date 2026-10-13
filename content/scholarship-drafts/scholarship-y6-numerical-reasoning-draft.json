@@ -1,0 +1,2855 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Batch 1 Year 6 Scholarship Practice drafts. Governed original content; never imported by runtime code.",
+  "questions": [
+    {
+      "id": "scholarship-y6-nr-001",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n5, 11, 17, 23, 29, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "33"
+        },
+        {
+          "id": "b",
+          "text": "34"
+        },
+        {
+          "id": "c",
+          "text": "36"
+        },
+        {
+          "id": "d",
+          "text": "37"
+        },
+        {
+          "id": "e",
+          "text": "35"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Arithmetic progression adding 6 each step: 29 + 6 = 35.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-002",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n4, 12, 36, 108, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "216"
+        },
+        {
+          "id": "b",
+          "text": "312"
+        },
+        {
+          "id": "c",
+          "text": "324"
+        },
+        {
+          "id": "d",
+          "text": "334"
+        },
+        {
+          "id": "e",
+          "text": "432"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Geometric sequence multiplying by 3: 108 * 3 = 324.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-003",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n3, 5, 9, 15, 23, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "31"
+        },
+        {
+          "id": "b",
+          "text": "33"
+        },
+        {
+          "id": "c",
+          "text": "32"
+        },
+        {
+          "id": "d",
+          "text": "34"
+        },
+        {
+          "id": "e",
+          "text": "35"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Differences are +2, +4, +6, +8, next is +10: 23 + 10 = 33.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-004",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n1, 1, 2, 3, 5, 8, 13, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "21"
+        },
+        {
+          "id": "b",
+          "text": "19"
+        },
+        {
+          "id": "c",
+          "text": "20"
+        },
+        {
+          "id": "d",
+          "text": "22"
+        },
+        {
+          "id": "e",
+          "text": "24"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Fibonacci sequence where each term is the sum of the previous two: 8 + 13 = 21.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-005",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the alternating sequence?\n2, 20, 5, 17, 8, 14, 11, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "11"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Odd positions add 3 (2, 5, 8, 11); even positions subtract 3 (20, 17, 14, 11).",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-006",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n80, 73, 66, 59, 52, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "43"
+        },
+        {
+          "id": "b",
+          "text": "44"
+        },
+        {
+          "id": "c",
+          "text": "46"
+        },
+        {
+          "id": "d",
+          "text": "47"
+        },
+        {
+          "id": "e",
+          "text": "45"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Arithmetic progression subtracting 7 each step: 52 - 7 = 45.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-007",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n4, 7, 13, 22, 34, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "46"
+        },
+        {
+          "id": "b",
+          "text": "47"
+        },
+        {
+          "id": "c",
+          "text": "49"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "51"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Differences are +3, +6, +9, +12, next difference is +15: 34 + 15 = 49 (second difference is 3).",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-008",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n2, 4, 10, 20, 34, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "48"
+        },
+        {
+          "id": "b",
+          "text": "50"
+        },
+        {
+          "id": "c",
+          "text": "54"
+        },
+        {
+          "id": "d",
+          "text": "52"
+        },
+        {
+          "id": "e",
+          "text": "56"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Differences between consecutive terms are +2, +6, +10, +14 (increasing by 4 each step). The next difference is +18: 34 + 18 = 52.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-009",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the alternating sequence?\n10, 50, 13, 46, 16, 42, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "17"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "19"
+        },
+        {
+          "id": "d",
+          "text": "20"
+        },
+        {
+          "id": "e",
+          "text": "38"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Odd terms add 3 (10, 13, 16 -> 19); even terms subtract 4 (50, 46, 42 -> 38). Next is odd term: 19.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-010",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What number comes next in the sequence?\n3, 4, 7, 11, 18, 29, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "47"
+        },
+        {
+          "id": "b",
+          "text": "43"
+        },
+        {
+          "id": "c",
+          "text": "45"
+        },
+        {
+          "id": "d",
+          "text": "46"
+        },
+        {
+          "id": "e",
+          "text": "48"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Lucas / Fibonacci-like sequence where each term is the sum of the previous two: 18 + 29 = 47.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-011",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 4, 7, 11 ]\n[ 5, 8, 13 ]\n[ 6, 9, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "14"
+        },
+        {
+          "id": "b",
+          "text": "16"
+        },
+        {
+          "id": "c",
+          "text": "17"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        },
+        {
+          "id": "e",
+          "text": "18"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Row combination rule: cell[2] = cell[0] + cell[1]. Row 0: 4 + 7 = 11. Row 1: 5 + 8 = 13. Row 2: 6 + 9 = 15.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-012",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 12, 8, 10 ]\n[ 7, 14, 9 ]\n[ 11, 8, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "10"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Each row sums to 30: 12+8+10=30, 7+14+9=30, 11+8+? = 30 -> ? = 11.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-013",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 2, 5, 9 ]\n[ 3, 7, 13 ]\n[ 4, 6, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "12"
+        },
+        {
+          "id": "b",
+          "text": "13"
+        },
+        {
+          "id": "c",
+          "text": "14"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        },
+        {
+          "id": "e",
+          "text": "16"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Row combination rule: cell[2] = 2 * cell[0] + cell[1]. Row 0: 2*2 + 5 = 9. Row 1: 2*3 + 7 = 13. Row 2: 2*4 + 6 = 14.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-014",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 15, 6, 8 ]\n[ 9, 11, 9 ]\n[ 5, 12, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Each column sums to 29: Col 0: 15+9+5=29. Col 1: 6+11+12=29. Col 2: 8+9+? = 29 -> ? = 12.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-015",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 3, 7, 11 ]\n[ 5, 9, 13 ]\n[ 4, 8, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "14"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Across each row, numbers increase by 4: 4, 8, 12.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-016",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 3, 2, 11 ]\n[ 1, 5, 8 ]\n[ 4, 2, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "16"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Row combination rule: cell[2] = 3 * cell[0] + cell[1]. Row 0: 3*3 + 2 = 11. Row 1: 3*1 + 5 = 8. Row 2: 3*4 + 2 = 14.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-017",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 14, 10, 16 ]\n[ 8, 12, 20 ]\n[ 18, 18, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "8"
+        },
+        {
+          "id": "e",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Each row sums to 40: Row 0: 14+10+16=40. Row 1: 8+12+20=40. Row 2: 18+18+? = 40 -> ? = 4.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-018",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 6, 12, 18 ]\n[ 8, 16, 24 ]\n[ 5, 10, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "12"
+        },
+        {
+          "id": "b",
+          "text": "14"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "16"
+        },
+        {
+          "id": "e",
+          "text": "20"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Each row adds the first number across columns (or ratio x1, x2, x3): 5, 10, 15.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-019",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 10, 14, 12 ]\n[ 15, 9, 12 ]\n[ 11, 13, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Each row sums to 36: Row 0: 10+14+12=36. Row 1: 15+9+12=36. Row 2: 11+13+? = 36 -> ? = 12.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-020",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the missing number (?) in the 3x3 grid:\n[ 1, 8, 10 ]\n[ 4, 5, 13 ]\n[ 3, 7, ? ]",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "13"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Row combination: cell[2] = 2 * cell[0] + cell[1]. Row 0: 2*1+8=10. Row 1: 2*4+5=13. Row 2: 2*3+7 = 13.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-number-matrices",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-021",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A farmer has chickens and sheep in a paddock. Together there are 24 heads and 68 legs. How many sheep are in the paddock?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "14"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Let C = chickens (2 legs), S = sheep (4 legs). C + S = 24 and 2C + 4S = 68. 2C + 2S = 48, so 2S = 20 -> S = 10.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-022",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Marcus is currently three times as old as his sister Chloe. In 8 years, Marcus will be twice as old as Chloe will be then. How old is Chloe now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        },
+        {
+          "id": "e",
+          "text": "8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "M = 3*C. In 8 years: M + 8 = 2*(C + 8). 3C + 8 = 2C + 16 -> C = 8.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "At a school stationery shop, 3 notebooks and 2 pens cost $19. Meanwhile, 2 notebooks and 4 pens cost $18. How much does 1 notebook cost?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        },
+        {
+          "id": "e",
+          "text": "7"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "3N + 2P = 19 and 2N + 4P = 18 (so N + 2P = 9). Subtracting: (3N + 2P) - (N + 2P) = 19 - 9 => 2N = 10 => N = $5.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-024",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A ribbon measuring 84 cm is cut into two pieces. One piece is 16 cm longer than the other. What is the length of the shorter piece in centimetres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "34"
+        },
+        {
+          "id": "b",
+          "text": "32"
+        },
+        {
+          "id": "c",
+          "text": "35"
+        },
+        {
+          "id": "d",
+          "text": "36"
+        },
+        {
+          "id": "e",
+          "text": "50"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "S + L = 84 and L = S + 16. 2S + 16 = 84 => 2S = 68 => S = 34 cm.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-025",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A bus starts its morning route carrying some passengers. At the first stop, 6 passengers get off and 10 get on. At the second stop, half the remaining passengers get off, leaving 18 passengers on board. How many passengers were originally on the bus?",
+      "options": [
+        {
+          "id": "a",
+          "text": "28"
+        },
+        {
+          "id": "b",
+          "text": "32"
+        },
+        {
+          "id": "c",
+          "text": "30"
+        },
+        {
+          "id": "d",
+          "text": "34"
+        },
+        {
+          "id": "e",
+          "text": "36"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Work backwards: before the second stop there were 18 * 2 = 36 passengers. Before the first stop: 36 - 10 + 6 = 32 passengers.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-026",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Five consecutive integers have a sum of 135. What is the largest of these five integers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "27"
+        },
+        {
+          "id": "b",
+          "text": "28"
+        },
+        {
+          "id": "c",
+          "text": "30"
+        },
+        {
+          "id": "d",
+          "text": "29"
+        },
+        {
+          "id": "e",
+          "text": "31"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Let middle number be n. 5n = 135 => n = 27. The numbers are 25, 26, 27, 28, 29. The largest is 29.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-027",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A fruit stall sells apples for $2 each and mangoes for $5 each. Leo buys 12 pieces of fruit in total and pays $39. How many mangoes did Leo buy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        },
+        {
+          "id": "e",
+          "text": "8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A + M = 12, 2A + 5M = 39. 2A + 2M = 24. 3M = 15 => M = 5 mangoes.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-028",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Ethan has twice as many trading cards as Oliver. After Ethan gives 15 cards to Oliver, they both have an equal number of cards. How many cards did Ethan have originally?",
+      "options": [
+        {
+          "id": "a",
+          "text": "45"
+        },
+        {
+          "id": "b",
+          "text": "60"
+        },
+        {
+          "id": "c",
+          "text": "50"
+        },
+        {
+          "id": "d",
+          "text": "55"
+        },
+        {
+          "id": "e",
+          "text": "65"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "E = 2*O. After transfer: E - 15 = O + 15. 2O - 15 = O + 15 => O = 30. Ethan originally had 2 * 30 = 60 cards.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-029",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a 30-question mathematics quiz, 4 marks are awarded for each correct answer and 1 mark is deducted for each incorrect answer. Grace attempted all 30 questions and scored 85 marks. How many questions did Grace answer correctly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "21"
+        },
+        {
+          "id": "c",
+          "text": "22"
+        },
+        {
+          "id": "d",
+          "text": "24"
+        },
+        {
+          "id": "e",
+          "text": "23"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "C + W = 30 and 4C - 1W = 85. Adding: 5C = 115 => C = 23 correct answers.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-030",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A rectangular garden has a perimeter of 54 metres. The length is 7 metres longer than the width. What is the length of the garden in metres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "15"
+        },
+        {
+          "id": "c",
+          "text": "18"
+        },
+        {
+          "id": "d",
+          "text": "17"
+        },
+        {
+          "id": "e",
+          "text": "20"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "2*(L + W) = 54 => L + W = 27. L = W + 7. 2W + 7 = 27 => 2W = 20 => W = 10 m, L = 17 m.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-arithmetical-reasoning",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-031",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A two-digit number N has a tens digit that is 3 greater than its units digit. When N is divided by the sum of its digits, the quotient is 7 and the remainder is 3. What is N?",
+      "options": [
+        {
+          "id": "a",
+          "text": "52"
+        },
+        {
+          "id": "b",
+          "text": "41"
+        },
+        {
+          "id": "c",
+          "text": "63"
+        },
+        {
+          "id": "d",
+          "text": "74"
+        },
+        {
+          "id": "e",
+          "text": "85"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Let N = 10*T + U. T - U = 3 (so T = U + 3). The sum of digits is T + U = 2*U + 3. Given N = 7*(T + U) + 3: 10*(U + 3) + U = 7*(2*U + 3) + 3 => 11*U + 30 = 14*U + 24 => 3*U = 6 => U = 2. Then T = 5, and N = 52.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-032",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In the sum AB + A = 52, where A and B represent distinct single non-zero digits, what digit does B represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        },
+        {
+          "id": "e",
+          "text": "9"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "10A + B + A = 11A + B = 52. If A = 4, 11*4 = 44, so B = 52 - 44 = 8. A=4 and B=8 are distinct non-zero digits.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-033",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A 3-digit number N has hundreds digit H, tens digit T, and units digit U. H is three times U, and T is 2 less than H. If the sum of all three digits is 12, what is N?",
+      "options": [
+        {
+          "id": "a",
+          "text": "642"
+        },
+        {
+          "id": "b",
+          "text": "624"
+        },
+        {
+          "id": "c",
+          "text": "973"
+        },
+        {
+          "id": "d",
+          "text": "318"
+        },
+        {
+          "id": "e",
+          "text": "633"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "H = 3U, T = H - 2 = 3U - 2. Sum = H + T + U = 3U + (3U - 2) + U = 7U - 2 = 12 => 7U = 14 => U = 2. H = 6, T = 4. N = 642.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-034",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the positive integer N such that when N is divided by 5 it leaves a remainder of 3, and when divided by 7 it leaves a remainder of 2, with N being less than 30.",
+      "options": [
+        {
+          "id": "a",
+          "text": "13"
+        },
+        {
+          "id": "b",
+          "text": "23"
+        },
+        {
+          "id": "c",
+          "text": "16"
+        },
+        {
+          "id": "d",
+          "text": "18"
+        },
+        {
+          "id": "e",
+          "text": "28"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Multiples of 5 plus 3: 8, 13, 18, 23, 28. Multiples of 7 plus 2: 9, 16, 23. The common integer is 23.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-035",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Three friends, Jack, Maya, and Noah, have some marbles. Jack has 4 more marbles than Maya. Noah has twice as many marbles as Maya. Together they have 44 marbles. How many marbles does Maya have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Let Maya have M. Jack has M + 4. Noah has 2M. (M + 4) + M + 2M = 44 => 4M + 4 = 44 => 4M = 40 => M = 10 marbles.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-036",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In the multiplication puzzle 4A × 3 = 138, where A is a single digit, what digit is A?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        },
+        {
+          "id": "e",
+          "text": "8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "138 / 3 = 46. Thus 4A = 46, so A = 6.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-037",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A two-digit prime number N has a tens digit that is smaller than its units digit. The product of its two digits is 21. What is N?",
+      "options": [
+        {
+          "id": "a",
+          "text": "73"
+        },
+        {
+          "id": "b",
+          "text": "21"
+        },
+        {
+          "id": "c",
+          "text": "31"
+        },
+        {
+          "id": "d",
+          "text": "71"
+        },
+        {
+          "id": "e",
+          "text": "37"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The single-digit factors of 21 are 3 and 7. Since tens < units, N = 37 (which is prime).",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-038",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The product of two positive integers X and Y is 72, and their sum is 18 (with X > Y). What is their positive difference (D = X - Y)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        },
+        {
+          "id": "e",
+          "text": "8"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The pair of factors of 72 that add to 18 are 12 and 6 (12 * 6 = 72, 12 + 6 = 18). Their difference is 12 - 6 = 6.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-039",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a magic triangle, each of the three sides has three numbers summing to 20. The numbers at the three vertices are 5, 7, and 9. What is the sum of the three middle numbers along the edges (E)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "16"
+        },
+        {
+          "id": "c",
+          "text": "17"
+        },
+        {
+          "id": "d",
+          "text": "18"
+        },
+        {
+          "id": "e",
+          "text": "19"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Each vertex number is counted twice in the three side sums: Sum(sides) = 3 * 20 = 60. Sum(vertices) = 5 + 7 + 9 = 21. Sum of edges = 60 - 2 * 21 = 60 - 42 = 18.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-040",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A 4-digit code C consists of the digits 1, 3, 5, and 8, each used exactly once. The code is an even number greater than 5000. What is the smallest possible code meeting these conditions?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5138"
+        },
+        {
+          "id": "b",
+          "text": "5318"
+        },
+        {
+          "id": "c",
+          "text": "5183"
+        },
+        {
+          "id": "d",
+          "text": "8135"
+        },
+        {
+          "id": "e",
+          "text": "5381"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "To be even, the last digit must be 8. To be greater than 5000 and smallest possible, the thousands digit must be 5. The remaining digits are 1 and 3; to minimise the value, arrange them in ascending order: 1 then 3. The code is 5138.",
+      "metadata": {
+        "subject": "numerical_reasoning",
+        "strand": "Numerical Reasoning",
+        "skill": "nr-logic-deduction-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    }
+  ],
+  "parameters": {
+    "scholarship-y6-nr-001": {
+      "id": "scholarship-y6-nr-001",
+      "skill": "nr-number-series",
+      "targetOption": "e",
+      "correctValue": 35,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          5,
+          11,
+          17,
+          23,
+          29
+        ]
+      }
+    },
+    "scholarship-y6-nr-002": {
+      "id": "scholarship-y6-nr-002",
+      "skill": "nr-number-series",
+      "targetOption": "c",
+      "correctValue": 324,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          4,
+          12,
+          36,
+          108
+        ]
+      }
+    },
+    "scholarship-y6-nr-003": {
+      "id": "scholarship-y6-nr-003",
+      "skill": "nr-number-series",
+      "targetOption": "b",
+      "correctValue": 33,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          3,
+          5,
+          9,
+          15,
+          23
+        ]
+      }
+    },
+    "scholarship-y6-nr-004": {
+      "id": "scholarship-y6-nr-004",
+      "skill": "nr-number-series",
+      "targetOption": "a",
+      "correctValue": 21,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          1,
+          1,
+          2,
+          3,
+          5,
+          8,
+          13
+        ]
+      }
+    },
+    "scholarship-y6-nr-005": {
+      "id": "scholarship-y6-nr-005",
+      "skill": "nr-number-series",
+      "targetOption": "e",
+      "correctValue": 11,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          2,
+          20,
+          5,
+          17,
+          8,
+          14,
+          11
+        ]
+      }
+    },
+    "scholarship-y6-nr-006": {
+      "id": "scholarship-y6-nr-006",
+      "skill": "nr-number-series",
+      "targetOption": "e",
+      "correctValue": 45,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          80,
+          73,
+          66,
+          59,
+          52
+        ]
+      }
+    },
+    "scholarship-y6-nr-007": {
+      "id": "scholarship-y6-nr-007",
+      "skill": "nr-number-series",
+      "targetOption": "c",
+      "correctValue": 49,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          4,
+          7,
+          13,
+          22,
+          34
+        ]
+      }
+    },
+    "scholarship-y6-nr-008": {
+      "id": "scholarship-y6-nr-008",
+      "skill": "nr-number-series",
+      "targetOption": "d",
+      "correctValue": 52,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          2,
+          4,
+          10,
+          20,
+          34
+        ]
+      }
+    },
+    "scholarship-y6-nr-009": {
+      "id": "scholarship-y6-nr-009",
+      "skill": "nr-number-series",
+      "targetOption": "c",
+      "correctValue": 19,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          10,
+          50,
+          13,
+          46,
+          16,
+          42
+        ]
+      }
+    },
+    "scholarship-y6-nr-010": {
+      "id": "scholarship-y6-nr-010",
+      "skill": "nr-number-series",
+      "targetOption": "a",
+      "correctValue": 47,
+      "solver": "number_series",
+      "solverParams": {
+        "sequence": [
+          3,
+          4,
+          7,
+          11,
+          18,
+          29
+        ]
+      }
+    },
+    "scholarship-y6-nr-011": {
+      "id": "scholarship-y6-nr-011",
+      "skill": "nr-number-matrices",
+      "targetOption": "d",
+      "correctValue": 15,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            4,
+            7,
+            11
+          ],
+          [
+            5,
+            8,
+            13
+          ],
+          [
+            6,
+            9,
+            null
+          ]
+        ],
+        "ruleOrientation": "row"
+      }
+    },
+    "scholarship-y6-nr-012": {
+      "id": "scholarship-y6-nr-012",
+      "skill": "nr-number-matrices",
+      "targetOption": "d",
+      "correctValue": 11,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            12,
+            8,
+            10
+          ],
+          [
+            7,
+            14,
+            9
+          ],
+          [
+            11,
+            8,
+            null
+          ]
+        ]
+      }
+    },
+    "scholarship-y6-nr-013": {
+      "id": "scholarship-y6-nr-013",
+      "skill": "nr-number-matrices",
+      "targetOption": "c",
+      "correctValue": 14,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            2,
+            5,
+            9
+          ],
+          [
+            3,
+            7,
+            13
+          ],
+          [
+            4,
+            6,
+            null
+          ]
+        ]
+      }
+    },
+    "scholarship-y6-nr-014": {
+      "id": "scholarship-y6-nr-014",
+      "skill": "nr-number-matrices",
+      "targetOption": "e",
+      "correctValue": 12,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            15,
+            6,
+            8
+          ],
+          [
+            9,
+            11,
+            9
+          ],
+          [
+            5,
+            12,
+            null
+          ]
+        ],
+        "ruleOrientation": "column"
+      }
+    },
+    "scholarship-y6-nr-015": {
+      "id": "scholarship-y6-nr-015",
+      "skill": "nr-number-matrices",
+      "targetOption": "b",
+      "correctValue": 12,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            3,
+            7,
+            11
+          ],
+          [
+            5,
+            9,
+            13
+          ],
+          [
+            4,
+            8,
+            null
+          ]
+        ]
+      }
+    },
+    "scholarship-y6-nr-016": {
+      "id": "scholarship-y6-nr-016",
+      "skill": "nr-number-matrices",
+      "targetOption": "d",
+      "correctValue": 14,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            3,
+            2,
+            11
+          ],
+          [
+            1,
+            5,
+            8
+          ],
+          [
+            4,
+            2,
+            null
+          ]
+        ],
+        "ruleOrientation": "row"
+      }
+    },
+    "scholarship-y6-nr-017": {
+      "id": "scholarship-y6-nr-017",
+      "skill": "nr-number-matrices",
+      "targetOption": "b",
+      "correctValue": 4,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            14,
+            10,
+            16
+          ],
+          [
+            8,
+            12,
+            20
+          ],
+          [
+            18,
+            18,
+            null
+          ]
+        ],
+        "ruleOrientation": "row"
+      }
+    },
+    "scholarship-y6-nr-018": {
+      "id": "scholarship-y6-nr-018",
+      "skill": "nr-number-matrices",
+      "targetOption": "c",
+      "correctValue": 15,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            6,
+            12,
+            18
+          ],
+          [
+            8,
+            16,
+            24
+          ],
+          [
+            5,
+            10,
+            null
+          ]
+        ]
+      }
+    },
+    "scholarship-y6-nr-019": {
+      "id": "scholarship-y6-nr-019",
+      "skill": "nr-number-matrices",
+      "targetOption": "c",
+      "correctValue": 12,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            10,
+            14,
+            12
+          ],
+          [
+            15,
+            9,
+            12
+          ],
+          [
+            11,
+            13,
+            null
+          ]
+        ],
+        "ruleOrientation": "row"
+      }
+    },
+    "scholarship-y6-nr-020": {
+      "id": "scholarship-y6-nr-020",
+      "skill": "nr-number-matrices",
+      "targetOption": "b",
+      "correctValue": 13,
+      "solver": "number_matrix",
+      "solverParams": {
+        "grid": [
+          [
+            1,
+            8,
+            10
+          ],
+          [
+            4,
+            5,
+            13
+          ],
+          [
+            3,
+            7,
+            null
+          ]
+        ]
+      }
+    },
+    "scholarship-y6-nr-021": {
+      "id": "scholarship-y6-nr-021",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "a",
+      "correctValue": 10,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "C",
+            "min": 0,
+            "max": 24
+          },
+          {
+            "name": "S",
+            "min": 0,
+            "max": 24
+          }
+        ],
+        "constraints": [
+          "C + S === 24",
+          "2*C + 4*S === 68"
+        ],
+        "targetVariable": "S"
+      }
+    },
+    "scholarship-y6-nr-022": {
+      "id": "scholarship-y6-nr-022",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "e",
+      "correctValue": 8,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "M",
+            "min": 1,
+            "max": 60
+          },
+          {
+            "name": "C",
+            "min": 1,
+            "max": 30
+          }
+        ],
+        "constraints": [
+          "M === 3*C",
+          "M + 8 === 2*(C + 8)"
+        ],
+        "targetVariable": "C"
+      }
+    },
+    "scholarship-y6-nr-023": {
+      "id": "scholarship-y6-nr-023",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "b",
+      "correctValue": 5,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "N",
+            "min": 1,
+            "max": 20
+          },
+          {
+            "name": "P",
+            "min": 1,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "3*N + 2*P === 19",
+          "2*N + 4*P === 18"
+        ],
+        "targetVariable": "N"
+      }
+    },
+    "scholarship-y6-nr-024": {
+      "id": "scholarship-y6-nr-024",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "a",
+      "correctValue": 34,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "S",
+            "min": 1,
+            "max": 84
+          },
+          {
+            "name": "L",
+            "min": 1,
+            "max": 84
+          }
+        ],
+        "constraints": [
+          "S + L === 84",
+          "L === S + 16"
+        ],
+        "targetVariable": "S"
+      }
+    },
+    "scholarship-y6-nr-025": {
+      "id": "scholarship-y6-nr-025",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "b",
+      "correctValue": 32,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "P",
+            "min": 1,
+            "max": 100
+          }
+        ],
+        "constraints": [
+          "(P - 6 + 10) / 2 === 18"
+        ],
+        "targetVariable": "P"
+      }
+    },
+    "scholarship-y6-nr-026": {
+      "id": "scholarship-y6-nr-026",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "d",
+      "correctValue": 29,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "L",
+            "min": 5,
+            "max": 50
+          }
+        ],
+        "constraints": [
+          "(L - 4) + (L - 3) + (L - 2) + (L - 1) + L === 135"
+        ],
+        "targetVariable": "L"
+      }
+    },
+    "scholarship-y6-nr-027": {
+      "id": "scholarship-y6-nr-027",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "c",
+      "correctValue": 5,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "A",
+            "min": 0,
+            "max": 12
+          },
+          {
+            "name": "M",
+            "min": 0,
+            "max": 12
+          }
+        ],
+        "constraints": [
+          "A + M === 12",
+          "2*A + 5*M === 39"
+        ],
+        "targetVariable": "M"
+      }
+    },
+    "scholarship-y6-nr-028": {
+      "id": "scholarship-y6-nr-028",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "b",
+      "correctValue": 60,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "E",
+            "min": 10,
+            "max": 100
+          },
+          {
+            "name": "O",
+            "min": 5,
+            "max": 50
+          }
+        ],
+        "constraints": [
+          "E === 2*O",
+          "E - 15 === O + 15"
+        ],
+        "targetVariable": "E"
+      }
+    },
+    "scholarship-y6-nr-029": {
+      "id": "scholarship-y6-nr-029",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "e",
+      "correctValue": 23,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "C",
+            "min": 0,
+            "max": 30
+          },
+          {
+            "name": "W",
+            "min": 0,
+            "max": 30
+          }
+        ],
+        "constraints": [
+          "C + W === 30",
+          "4*C - W === 85"
+        ],
+        "targetVariable": "C"
+      }
+    },
+    "scholarship-y6-nr-030": {
+      "id": "scholarship-y6-nr-030",
+      "skill": "nr-arithmetical-reasoning",
+      "targetOption": "d",
+      "correctValue": 17,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "W",
+            "min": 1,
+            "max": 27
+          },
+          {
+            "name": "L",
+            "min": 1,
+            "max": 27
+          }
+        ],
+        "constraints": [
+          "L + W === 27",
+          "L === W + 7"
+        ],
+        "targetVariable": "L"
+      }
+    },
+    "scholarship-y6-nr-031": {
+      "id": "scholarship-y6-nr-031",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "a",
+      "correctValue": 52,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "N",
+            "min": 10,
+            "max": 99
+          },
+          {
+            "name": "T",
+            "min": 1,
+            "max": 9
+          },
+          {
+            "name": "U",
+            "min": 0,
+            "max": 9
+          }
+        ],
+        "constraints": [
+          "N === 10*T + U",
+          "T - U === 3",
+          "Math.floor(N / (T + U)) === 7",
+          "N % (T + U) === 3"
+        ],
+        "targetVariable": "N"
+      }
+    },
+    "scholarship-y6-nr-032": {
+      "id": "scholarship-y6-nr-032",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "c",
+      "correctValue": 8,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "A",
+            "min": 1,
+            "max": 9
+          },
+          {
+            "name": "B",
+            "min": 1,
+            "max": 9
+          }
+        ],
+        "constraints": [
+          "11*A + B === 52",
+          "A !== B"
+        ],
+        "targetVariable": "B"
+      }
+    },
+    "scholarship-y6-nr-033": {
+      "id": "scholarship-y6-nr-033",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "a",
+      "correctValue": 642,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "N",
+            "min": 100,
+            "max": 999
+          },
+          {
+            "name": "H",
+            "min": 1,
+            "max": 9
+          },
+          {
+            "name": "T",
+            "min": 0,
+            "max": 9
+          },
+          {
+            "name": "U",
+            "min": 1,
+            "max": 9
+          }
+        ],
+        "constraints": [
+          "N === 100*H + 10*T + U",
+          "H === 3*U",
+          "T === H - 2",
+          "H + T + U === 12"
+        ],
+        "targetVariable": "N"
+      }
+    },
+    "scholarship-y6-nr-034": {
+      "id": "scholarship-y6-nr-034",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "b",
+      "correctValue": 23,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "N",
+            "min": 1,
+            "max": 29
+          }
+        ],
+        "constraints": [
+          "N % 5 === 3",
+          "N % 7 === 2"
+        ],
+        "targetVariable": "N"
+      }
+    },
+    "scholarship-y6-nr-035": {
+      "id": "scholarship-y6-nr-035",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "e",
+      "correctValue": 10,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "M",
+            "min": 1,
+            "max": 20
+          },
+          {
+            "name": "J",
+            "min": 1,
+            "max": 25
+          },
+          {
+            "name": "N",
+            "min": 1,
+            "max": 40
+          }
+        ],
+        "constraints": [
+          "J === M + 4",
+          "N === 2*M",
+          "J + M + N === 44"
+        ],
+        "targetVariable": "M"
+      }
+    },
+    "scholarship-y6-nr-036": {
+      "id": "scholarship-y6-nr-036",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "d",
+      "correctValue": 6,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "A",
+            "min": 0,
+            "max": 9
+          }
+        ],
+        "constraints": [
+          "(40 + A) * 3 === 138"
+        ],
+        "targetVariable": "A"
+      }
+    },
+    "scholarship-y6-nr-037": {
+      "id": "scholarship-y6-nr-037",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "e",
+      "correctValue": 37,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "N",
+            "min": 10,
+            "max": 99
+          },
+          {
+            "name": "T",
+            "min": 1,
+            "max": 9
+          },
+          {
+            "name": "U",
+            "min": 1,
+            "max": 9
+          }
+        ],
+        "constraints": [
+          "N === 10*T + U",
+          "T * U === 21",
+          "T < U"
+        ],
+        "targetVariable": "N"
+      }
+    },
+    "scholarship-y6-nr-038": {
+      "id": "scholarship-y6-nr-038",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "a",
+      "correctValue": 6,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "D",
+            "min": 1,
+            "max": 72
+          },
+          {
+            "name": "X",
+            "min": 1,
+            "max": 72
+          },
+          {
+            "name": "Y",
+            "min": 1,
+            "max": 72
+          }
+        ],
+        "constraints": [
+          "X * Y === 72",
+          "X + Y === 18",
+          "X > Y",
+          "D === X - Y"
+        ],
+        "targetVariable": "D"
+      }
+    },
+    "scholarship-y6-nr-039": {
+      "id": "scholarship-y6-nr-039",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "d",
+      "correctValue": 18,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "E",
+            "min": 1,
+            "max": 30
+          }
+        ],
+        "constraints": [
+          "3 * 20 === 2 * (5 + 7 + 9) + E"
+        ],
+        "targetVariable": "E"
+      }
+    },
+    "scholarship-y6-nr-040": {
+      "id": "scholarship-y6-nr-040",
+      "skill": "nr-logic-deduction-numbers",
+      "targetOption": "a",
+      "correctValue": 5138,
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "C",
+            "min": 5100,
+            "max": 5999
+          },
+          {
+            "name": "D2",
+            "min": 1,
+            "max": 3
+          },
+          {
+            "name": "D3",
+            "min": 1,
+            "max": 3
+          }
+        ],
+        "constraints": [
+          "(D2 === 1 || D2 === 3)",
+          "(D3 === 1 || D3 === 3)",
+          "D2 !== D3",
+          "D2 < D3",
+          "C === 5000 + 100*D2 + 10*D3 + 8"
+        ],
+        "targetVariable": "C"
+      }
+    }
+  }
+}

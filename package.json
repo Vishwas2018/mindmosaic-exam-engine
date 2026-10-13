@@ -66,6 +66,7 @@
     "cutover:backfill": "tsx scripts/cutover-backfill.mts",
     "cutover:verify": "tsx scripts/cutover-verify.mts",
     "curriculum:import": "tsx scripts/curriculum-import.mts",
+    "content:validate-scholarship-drafts": "tsx scripts/validate-scholarship-drafts.mts",
     "content:approval-queue": "tsx scripts/content-approvals.mts queue",
     "content:review-sheet": "tsx scripts/review-sheet.mts",
     "content:record-approval": "tsx scripts/content-approvals.mts record",
