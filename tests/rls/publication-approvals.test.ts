@@ -1,7 +1,7 @@
 import type { Client } from "pg";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { connect } from "./db";
-import { asAnon, asAuthenticated, seed, STUDENT_A } from "./fixtures";
+import { asAnon, asAuthenticated, seed, STUDENT_A, STUDENT_B } from "./fixtures";
 
 const ITEM = "99999999-0000-0000-0000-000000000001";
 const VERSION = "99999999-0000-0000-0000-000000000002";
@@ -122,6 +122,41 @@ describe("revision-bound database publication gate", () => {
     // Should default to report mode (not enforced)
     await expect(allocate()).resolves.toMatchObject({ rowCount: 1 });
   });
+
+  it.each(["report", "enforce-unapproved", "enforce-stale-approval"])(
+    "preserves historical session and result reads in %s, without weakening RLS",
+    async state => {
+      await allocate();
+      await client.query(`update public.assessment_sessions
+        set status = 'submitted', submitted_at = now(), version = version + 1 where id = $1`, [SESSION]);
+      await client.query(`insert into public.assessment_results
+        (session_id, student_id, scoring_algorithm_version, total_items, attempted_items,
+         auto_marked_items, manual_review_items, correct_count, incorrect_count, unanswered_count,
+         objective_awarded_marks, objective_available_marks, objective_percentage,
+         time_taken_seconds, started_at, submitted_at, submission_reason)
+        values ($1,$2,'question-scorers.v1',1,0,1,0,0,0,1,0,1,0,30,now(),now(),'user_submitted')`,
+      [SESSION, STUDENT_A]);
+      await asAuthenticated(client, STUDENT_A);
+      const beforeSession = await client.query("select public.get_assessment_session($1) as session", [SESSION]);
+      const beforeResult = await client.query("select * from public.assessment_results where session_id = $1", [SESSION]);
+      expect(beforeSession.rows[0].session).toBeTruthy();
+      expect(beforeResult.rowCount).toBe(1);
+
+      await client.query("reset role");
+      await enableEnforcement("naplan-y3-numeracy", state !== "report");
+      if (state === "enforce-stale-approval") await approve("c".repeat(64));
+      else expect((await client.query("select count(*)::int as count from public.item_publication_approvals")).rows[0].count).toBe(0);
+
+      await asAuthenticated(client, STUDENT_A);
+      expect((await client.query("select public.get_assessment_session($1) as session", [SESSION])).rows)
+        .toEqual(beforeSession.rows);
+      expect((await client.query("select * from public.assessment_results where session_id = $1", [SESSION])).rows)
+        .toEqual(beforeResult.rows);
+      await asAuthenticated(client, STUDENT_B);
+      expect((await client.query("select * from public.assessment_results where session_id = $1", [SESSION])).rowCount).toBe(0);
+      await expect(client.query("select public.get_assessment_session($1)", [SESSION])).rejects.toThrow();
+    },
+  );
 
   it("rejects an approval bound to a different projection hash", async () => {
     await enableEnforcement("naplan-y3-numeracy", true);

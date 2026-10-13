@@ -64,9 +64,10 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
  * was configured against.
  */
 export function getQuestionById(questionId: string): AuthoringQuestion | undefined {
-  return (
-    getExamBank("published").find((question) => question.id === questionId)
-  );
+  // This is a read for an existing teacher-marking session, not allocation.
+  // Enabling approval enforcement must not hide its historical rubric.
+  if (getPublicationEligibility().problems.length) return undefined;
+  return publishedExamBank.find((question) => question.id === questionId);
 }
 
 /**
