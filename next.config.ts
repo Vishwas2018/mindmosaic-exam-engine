@@ -16,6 +16,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // getExamBank reaches these private files through shared server modules used by
+  // page and API routes. Keep the route-wide trace until every transitive route
+  // has been verified in a standalone build; omitting one would silently drop
+  // publication evidence from that route's deployment bundle.
+  outputFileTracingIncludes: {
+    "/*": ["./content/question-factory/published-manifests/*.json", "./content/publication-approvals/*"],
+  },
   // Landing photographs are served as AVIF where supported, WebP otherwise. 85 is the Chapter 1 hero quality.
   images: { formats: ["image/avif", "image/webp"], qualities: [75, 85] },
   async headers() {

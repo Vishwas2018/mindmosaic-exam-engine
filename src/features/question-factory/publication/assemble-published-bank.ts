@@ -1,4 +1,5 @@
 import { questionSchema, type Question } from "@/schemas/question.schema";
+import { validateHumanApproval, validatePublicationSource } from "@/features/content-governance/publication-integrity";
 
 import type { FactoryRepository } from "../storage";
 import type { PublicationManifest } from "./types";
@@ -25,7 +26,7 @@ export interface AssembledPublishedBank {
  * `published-manifests` compartment. Callers decide how (and whether) to
  * merge the result into a served bank.
  */
-export async function assemblePublishedQuestions(repository: FactoryRepository): Promise<AssembledPublishedBank> {
+export async function assemblePublishedQuestions(repository: FactoryRepository, approvals: readonly unknown[] = []): Promise<AssembledPublishedBank> {
   const candidateIds = [...(await repository.list("published-manifests"))].sort();
   const questions: Question[] = [];
   const warnings: string[] = [];
@@ -47,6 +48,16 @@ export async function assemblePublishedQuestions(repository: FactoryRepository):
     }
     if (parsed.data.status !== "published") {
       warnings.push(`Manifest '${candidateId}' embeds a question whose status is not 'published'; skipped.`);
+      continue;
+    }
+    const source = validatePublicationSource(manifest, parsed.data);
+    const matching = approvals.filter((approval) => approval && typeof approval === "object" &&
+      (approval as Record<string, unknown>).questionId === parsed.data.id);
+    if (manifest.humanApproval !== undefined) matching.push(manifest.humanApproval);
+    const approved = source.ok && matching.length === 1 ? validateHumanApproval(matching[0],
+      parsed.data, source.revision, source.sourceManifestHash) : undefined;
+    if (!approved?.ok) {
+      warnings.push(`Manifest '${candidateId}' has no valid unique revision-bound human approval; skipped.`);
       continue;
     }
     if (seenProductionIds.has(parsed.data.id)) {

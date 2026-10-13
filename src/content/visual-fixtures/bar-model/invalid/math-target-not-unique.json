@@ -1,0 +1,59 @@
+{
+  "why": "Pink and mint share 25, so pink is not fixed.",
+  "layer": "mathematical",
+  "errorCodes": [
+    "target_not_unique"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-not-unique",
+    "type": "bar_model",
+    "title": "Lamingtons in a tray",
+    "altText": "A bar model of one tray of lamingtons. The whole tray is 45. One part is 18 dark chocolate lamingtons. The other part, the pink ones, is unknown.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "bars": [
+        {
+          "id": "tray",
+          "label": "Tray",
+          "segments": [
+            {
+              "id": "dark",
+              "label": "Dark",
+              "value": 20,
+              "display": "value"
+            },
+            {
+              "id": "pink",
+              "label": "Pink",
+              "unknown": "p",
+              "display": "unknown",
+              "target": true
+            },
+            {
+              "id": "mint",
+              "label": "Mint",
+              "unknown": "q",
+              "display": "blank"
+            }
+          ]
+        }
+      ],
+      "braces": [
+        {
+          "id": "whole",
+          "kind": "total",
+          "label": "All",
+          "value": 45,
+          "display": "value",
+          "spans": [
+            "dark",
+            "pink",
+            "mint"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -98,6 +98,8 @@ const VISUAL_MINIMUMS: Record<VisualType, number> = {
   fraction_model: 4,
   labelled_svg: 5,
   hotspot_svg: 5,
+  // Phase 1: render-only; no question uses it and the bank has no minimum.
+  bar_model: 0,
 };
 
 /* Grade and exam-style distribution ranges. */

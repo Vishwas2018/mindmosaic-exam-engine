@@ -1,0 +1,1382 @@
+{
+  "draftOnly": true,
+  "authoringNote": "New fictional passages and questions authored as AI drafts in this session. No independent review, approval, taxonomy alignment or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y5-reading-01-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What was the model intended to show?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Where rainwater might go"
+        },
+        {
+          "id": "b",
+          "text": "How quickly cardboard grows"
+        },
+        {
+          "id": "c",
+          "text": "How to price a real shop"
+        },
+        {
+          "id": "d",
+          "text": "Which street had the most people"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The opening sentence gives the model purpose.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-01-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What did the puddle reveal about the first model?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The described drain lacked a channel leading to it"
+        },
+        {
+          "id": "b",
+          "text": "Every shop roof was the wrong colour"
+        },
+        {
+          "id": "c",
+          "text": "The collection cup was overflowing"
+        },
+        {
+          "id": "d",
+          "text": "The sand contained no water"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The display described a drain, but the model lacked a connecting channel.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-01-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why did Sienna use the same amount of water in the next trial?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To avoid explaining her changes"
+        },
+        {
+          "id": "b",
+          "text": "To make the comparison between trials fairer"
+        },
+        {
+          "id": "c",
+          "text": "To guarantee there would be no puddle"
+        },
+        {
+          "id": "d",
+          "text": "To make the shops look taller"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Keeping water amount the same helps compare the changed channel rather than a changed water amount.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-01-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What happened after she added the channel?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "More water was added than before"
+        },
+        {
+          "id": "b",
+          "text": "The puddle became smaller but did not disappear entirely"
+        },
+        {
+          "id": "c",
+          "text": "All the sand remained completely dry"
+        },
+        {
+          "id": "d",
+          "text": "The shops floated into the cup"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The passage reports a smaller puddle and some water remaining in the sand.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-01-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why were drawings of both trials useful at the exhibition?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "They showed the problem and how she revised the model"
+        },
+        {
+          "id": "b",
+          "text": "They hid all evidence of the first puddle"
+        },
+        {
+          "id": "c",
+          "text": "They replaced the need to describe any limitations"
+        },
+        {
+          "id": "d",
+          "text": "They proved that real streets are made of sand"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Showing both trials makes the change and its effect visible.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-01-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What does Sienna's decision not to hide the puddle suggest?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "She wants other students to copy a mistake"
+        },
+        {
+          "id": "b",
+          "text": "She thinks no model should ever change"
+        },
+        {
+          "id": "c",
+          "text": "She values understanding and improving the model"
+        },
+        {
+          "id": "d",
+          "text": "She only cares about attractive shops"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "She uses the problem as a reason to change and explain her model.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-01-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which statement best describes the passage overall?",
+      "stimulus": {
+        "title": "A model worth changing",
+        "body": "Sienna built a model street from cardboard and sand to show where rainwater might go. At first she concentrated on making the shops attractive. When she poured water at one end, a puddle formed behind a shop. Her display card described a drain, but the model had no channel leading to it. Sienna considered wiping away the puddle before anyone saw it. Instead, she removed the shop and cut a shallow channel towards a collection cup. For the next trial she used the same amount of water. The puddle became smaller, although some water still collected in the sand. At the exhibition, she displayed drawings of both trials and explained what she had changed. She also pointed out that a cardboard model could not show everything that happens in a real street."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Attractive models never need testing"
+        },
+        {
+          "id": "b",
+          "text": "A smaller puddle proves every real drain works"
+        },
+        {
+          "id": "c",
+          "text": "An exhibition should include only the final drawing"
+        },
+        {
+          "id": "d",
+          "text": "Testing can reveal useful changes and limitations"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Testing reveals a design problem, a useful revision and the limits of a model.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What do the volunteers promise?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Electrical testing of plugged-in appliances"
+        },
+        {
+          "id": "b",
+          "text": "Help exploring safe repairs, rather than a repair for every object"
+        },
+        {
+          "id": "c",
+          "text": "A replacement for every broken object"
+        },
+        {
+          "id": "d",
+          "text": "Storage of all unfinished objects"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The notice offers help but explicitly gives no guarantee of repair.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "How should loose pieces be brought?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "In a bag"
+        },
+        {
+          "id": "b",
+          "text": "Mixed with other visitors' pieces"
+        },
+        {
+          "id": "c",
+          "text": "Hidden inside a leaking battery case"
+        },
+        {
+          "id": "d",
+          "text": "Left at home in every case"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The notice directs visitors to put loose pieces in a bag.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Where can a visitor check whether an object is suitable?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "At the welcome desk"
+        },
+        {
+          "id": "b",
+          "text": "In a locked storage room"
+        },
+        {
+          "id": "c",
+          "text": "At an online booking station only"
+        },
+        {
+          "id": "d",
+          "text": "At the cloth demonstration after closing"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Suitability questions go to the welcome desk.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What should a visitor collect on arrival?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "An electrical extension cord"
+        },
+        {
+          "id": "b",
+          "text": "A number card"
+        },
+        {
+          "id": "c",
+          "text": "A compulsory donation receipt"
+        },
+        {
+          "id": "d",
+          "text": "A guaranteed repair certificate"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "No booking is required, but visitors collect a number card.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why might waiting times differ?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Every repair needs the same materials"
+        },
+        {
+          "id": "b",
+          "text": "Volunteers only repair the first object"
+        },
+        {
+          "id": "c",
+          "text": "Some repairs are more complicated than others"
+        },
+        {
+          "id": "d",
+          "text": "All children must arrive at noon"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The notice says complicated repairs may take longer.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Who may watch the noon demonstration?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Only visitors with repaired objects"
+        },
+        {
+          "id": "b",
+          "text": "All visitors, including those whose objects cannot be repaired"
+        },
+        {
+          "id": "c",
+          "text": "Only volunteers"
+        },
+        {
+          "id": "d",
+          "text": "Only people making a donation"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The demonstration is explicitly for everyone.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-02-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What must a visitor do with an unfinished object at the end?",
+      "stimulus": {
+        "title": "Repair day notice",
+        "body": "Community repair day will be held at the hall on Saturday from 10 am to 2 pm. Volunteers will help visitors explore safe repairs, but cannot promise that every object can be fixed. Bring one clean object and put any loose pieces in a bag. Do not bring appliances that must be plugged in or objects with leaking batteries. If you are unsure whether an object is suitable, ask at the welcome desk. No booking is needed: collect a number card when you arrive. A complicated repair may take longer than a simple one. Children must attend with an adult. At noon there will be a cloth-tear demonstration for everyone, including visitors whose objects cannot be repaired. Donations towards materials are welcome but optional. Please take your object home at the end; volunteers cannot keep unfinished repairs."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Put it under the welcome desk"
+        },
+        {
+          "id": "b",
+          "text": "Leave it for volunteers to store"
+        },
+        {
+          "id": "c",
+          "text": "Give it to the next visitor"
+        },
+        {
+          "id": "d",
+          "text": "Take it home"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Volunteers cannot keep unfinished repairs.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-03-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "How did the paths on the two maps differ?",
+      "stimulus": {
+        "title": "The missing path",
+        "body": "Theo found two maps of the school garden. Both had the same year printed at the bottom. On one, a path crossed the middle; on the other, it followed the fence. The fence-path map also showed a new shed where the first map had an empty square. A photograph showed tools being carried into the shed on opening day in September. However, neither map gave a month, and the photograph did not show the path. Theo wrote that the fence-path map might be the later one. He kept both maps and noted the reasons for his uncertainty. Later, the caretaker remembered helping to pave a path beside the fence, but could not remember the month. Theo added this recollection as a separate note rather than changing the date printed on either map."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "One showed a path inside the shed"
+        },
+        {
+          "id": "b",
+          "text": "Neither showed a path"
+        },
+        {
+          "id": "c",
+          "text": "One crossed the middle and one followed the fence"
+        },
+        {
+          "id": "d",
+          "text": "Both followed exactly the same route"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The opening comparison states the two routes.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-03-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What feature supported the idea that the fence-path map could be later?",
+      "stimulus": {
+        "title": "The missing path",
+        "body": "Theo found two maps of the school garden. Both had the same year printed at the bottom. On one, a path crossed the middle; on the other, it followed the fence. The fence-path map also showed a new shed where the first map had an empty square. A photograph showed tools being carried into the shed on opening day in September. However, neither map gave a month, and the photograph did not show the path. Theo wrote that the fence-path map might be the later one. He kept both maps and noted the reasons for his uncertainty. Later, the caretaker remembered helping to pave a path beside the fence, but could not remember the month. Theo added this recollection as a separate note rather than changing the date printed on either map."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It showed the September photograph"
+        },
+        {
+          "id": "b",
+          "text": "It had a different year printed on it"
+        },
+        {
+          "id": "c",
+          "text": "It showed a shed absent from the other map"
+        },
+        {
+          "id": "d",
+          "text": "It named the caretaker who drew it"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The new shed provides a clue, although it does not prove exact ordering.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-03-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why could Theo not determine the exact order confidently?",
+      "stimulus": {
+        "title": "The missing path",
+        "body": "Theo found two maps of the school garden. Both had the same year printed at the bottom. On one, a path crossed the middle; on the other, it followed the fence. The fence-path map also showed a new shed where the first map had an empty square. A photograph showed tools being carried into the shed on opening day in September. However, neither map gave a month, and the photograph did not show the path. Theo wrote that the fence-path map might be the later one. He kept both maps and noted the reasons for his uncertainty. Later, the caretaker remembered helping to pave a path beside the fence, but could not remember the month. Theo added this recollection as a separate note rather than changing the date printed on either map."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The caretaker said both maps were false"
+        },
+        {
+          "id": "b",
+          "text": "The photograph gave the wrong school name"
+        },
+        {
+          "id": "c",
+          "text": "The maps contained no buildings"
+        },
+        {
+          "id": "d",
+          "text": "The maps lacked months and the photograph did not show the path"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The available evidence leaves the date and path relationship uncertain.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-03-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What does the word might indicate in Theo's note?",
+      "stimulus": {
+        "title": "The missing path",
+        "body": "Theo found two maps of the school garden. Both had the same year printed at the bottom. On one, a path crossed the middle; on the other, it followed the fence. The fence-path map also showed a new shed where the first map had an empty square. A photograph showed tools being carried into the shed on opening day in September. However, neither map gave a month, and the photograph did not show the path. Theo wrote that the fence-path map might be the later one. He kept both maps and noted the reasons for his uncertainty. Later, the caretaker remembered helping to pave a path beside the fence, but could not remember the month. Theo added this recollection as a separate note rather than changing the date printed on either map."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The printed year has been erased"
+        },
+        {
+          "id": "b",
+          "text": "The maps are no longer useful"
+        },
+        {
+          "id": "c",
+          "text": "The conclusion is guaranteed"
+        },
+        {
+          "id": "d",
+          "text": "The conclusion is possible but not certain"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Might expresses uncertainty rather than a definite conclusion.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-03-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "How did Theo use the caretaker's recollection?",
+      "stimulus": {
+        "title": "The missing path",
+        "body": "Theo found two maps of the school garden. Both had the same year printed at the bottom. On one, a path crossed the middle; on the other, it followed the fence. The fence-path map also showed a new shed where the first map had an empty square. A photograph showed tools being carried into the shed on opening day in September. However, neither map gave a month, and the photograph did not show the path. Theo wrote that the fence-path map might be the later one. He kept both maps and noted the reasons for his uncertainty. Later, the caretaker remembered helping to pave a path beside the fence, but could not remember the month. Theo added this recollection as a separate note rather than changing the date printed on either map."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "He changed both printed dates immediately"
+        },
+        {
+          "id": "b",
+          "text": "He discarded the photograph without explanation"
+        },
+        {
+          "id": "c",
+          "text": "He recorded it separately from the printed map dates"
+        },
+        {
+          "id": "d",
+          "text": "He treated the memory as an exact month"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Theo added the recollection as a separate note.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-03-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which description best fits Theo's method?",
+      "stimulus": {
+        "title": "The missing path",
+        "body": "Theo found two maps of the school garden. Both had the same year printed at the bottom. On one, a path crossed the middle; on the other, it followed the fence. The fence-path map also showed a new shed where the first map had an empty square. A photograph showed tools being carried into the shed on opening day in September. However, neither map gave a month, and the photograph did not show the path. Theo wrote that the fence-path map might be the later one. He kept both maps and noted the reasons for his uncertainty. Later, the caretaker remembered helping to pave a path beside the fence, but could not remember the month. Theo added this recollection as a separate note rather than changing the date printed on either map."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "He keeps evidence and marks uncertainty clearly"
+        },
+        {
+          "id": "b",
+          "text": "He treats every memory as a dated document"
+        },
+        {
+          "id": "c",
+          "text": "He fills every missing date with a guess"
+        },
+        {
+          "id": "d",
+          "text": "He chooses the prettier map and ignores the other"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "He preserves both maps, reasons and a separately labelled recollection.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-04-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What problem did Maya's idea address?",
+      "stimulus": {
+        "title": "Two ideas for the bus stop",
+        "body": "Maya suggested painting a queue line at the school bus stop because late arrivals sometimes crowded around the bus door. She warned that a permanent line in the wrong place might make the crowding worse. Joel proposed a shelter to keep students dry. A shelter would require approval and money, so he suggested using the covered walkway during rain while planning continued. That temporary arrangement would only be safe if staff kept the passage clear for other people. The council agreed to try removable queue markers for two weeks, arrange staff supervision of the wet-weather walkway and obtain a cost estimate for a shelter. The school newsletter described the shelter as a proposal awaiting a decision, rather than an approved building project."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Rain falling inside the bus"
+        },
+        {
+          "id": "b",
+          "text": "The price of bus tickets"
+        },
+        {
+          "id": "c",
+          "text": "Lack of library shelves"
+        },
+        {
+          "id": "d",
+          "text": "Crowding around the bus door"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Maya proposes a queue line in response to crowding.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-04-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why did Maya favour caution about a permanent line?",
+      "stimulus": {
+        "title": "Two ideas for the bus stop",
+        "body": "Maya suggested painting a queue line at the school bus stop because late arrivals sometimes crowded around the bus door. She warned that a permanent line in the wrong place might make the crowding worse. Joel proposed a shelter to keep students dry. A shelter would require approval and money, so he suggested using the covered walkway during rain while planning continued. That temporary arrangement would only be safe if staff kept the passage clear for other people. The council agreed to try removable queue markers for two weeks, arrange staff supervision of the wet-weather walkway and obtain a cost estimate for a shelter. The school newsletter described the shelter as a proposal awaiting a decision, rather than an approved building project."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Students never need to queue"
+        },
+        {
+          "id": "b",
+          "text": "Removable markers could never be seen"
+        },
+        {
+          "id": "c",
+          "text": "Permanent paint always washes off immediately"
+        },
+        {
+          "id": "d",
+          "text": "A badly placed line could make crowding worse"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The passage states that a permanent line in the wrong place might worsen the problem.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-04-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What was the main purpose of Joel's shelter proposal?",
+      "stimulus": {
+        "title": "Two ideas for the bus stop",
+        "body": "Maya suggested painting a queue line at the school bus stop because late arrivals sometimes crowded around the bus door. She warned that a permanent line in the wrong place might make the crowding worse. Joel proposed a shelter to keep students dry. A shelter would require approval and money, so he suggested using the covered walkway during rain while planning continued. That temporary arrangement would only be safe if staff kept the passage clear for other people. The council agreed to try removable queue markers for two weeks, arrange staff supervision of the wet-weather walkway and obtain a cost estimate for a shelter. The school newsletter described the shelter as a proposal awaiting a decision, rather than an approved building project."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Hiding the queue markers"
+        },
+        {
+          "id": "b",
+          "text": "Replacing the school newsletter"
+        },
+        {
+          "id": "c",
+          "text": "Changing the bus route"
+        },
+        {
+          "id": "d",
+          "text": "Keeping students dry"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Joel proposes a shelter against rain.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-04-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What condition was needed for the temporary walkway arrangement?",
+      "stimulus": {
+        "title": "Two ideas for the bus stop",
+        "body": "Maya suggested painting a queue line at the school bus stop because late arrivals sometimes crowded around the bus door. She warned that a permanent line in the wrong place might make the crowding worse. Joel proposed a shelter to keep students dry. A shelter would require approval and money, so he suggested using the covered walkway during rain while planning continued. That temporary arrangement would only be safe if staff kept the passage clear for other people. The council agreed to try removable queue markers for two weeks, arrange staff supervision of the wet-weather walkway and obtain a cost estimate for a shelter. The school newsletter described the shelter as a proposal awaiting a decision, rather than an approved building project."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The shelter must already be built"
+        },
+        {
+          "id": "b",
+          "text": "All other people must leave the school"
+        },
+        {
+          "id": "c",
+          "text": "Staff must keep the passage clear for others"
+        },
+        {
+          "id": "d",
+          "text": "The walkway must be painted permanently"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The passage links safety to keeping the passage clear under staff supervision.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-04-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which action allowed the queue idea to be tested before a permanent decision?",
+      "stimulus": {
+        "title": "Two ideas for the bus stop",
+        "body": "Maya suggested painting a queue line at the school bus stop because late arrivals sometimes crowded around the bus door. She warned that a permanent line in the wrong place might make the crowding worse. Joel proposed a shelter to keep students dry. A shelter would require approval and money, so he suggested using the covered walkway during rain while planning continued. That temporary arrangement would only be safe if staff kept the passage clear for other people. The council agreed to try removable queue markers for two weeks, arrange staff supervision of the wet-weather walkway and obtain a cost estimate for a shelter. The school newsletter described the shelter as a proposal awaiting a decision, rather than an approved building project."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Removing every bus door"
+        },
+        {
+          "id": "b",
+          "text": "Building the shelter immediately"
+        },
+        {
+          "id": "c",
+          "text": "Changing the printed newsletter date"
+        },
+        {
+          "id": "d",
+          "text": "Trying removable markers for two weeks"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Removable markers and a two-week period create a reversible trial.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-04-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why did the newsletter call the shelter a proposal?",
+      "stimulus": {
+        "title": "Two ideas for the bus stop",
+        "body": "Maya suggested painting a queue line at the school bus stop because late arrivals sometimes crowded around the bus door. She warned that a permanent line in the wrong place might make the crowding worse. Joel proposed a shelter to keep students dry. A shelter would require approval and money, so he suggested using the covered walkway during rain while planning continued. That temporary arrangement would only be safe if staff kept the passage clear for other people. The council agreed to try removable queue markers for two weeks, arrange staff supervision of the wet-weather walkway and obtain a cost estimate for a shelter. The school newsletter described the shelter as a proposal awaiting a decision, rather than an approved building project."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "A final building decision had not been made"
+        },
+        {
+          "id": "b",
+          "text": "The shelter had already been completed"
+        },
+        {
+          "id": "c",
+          "text": "All funding had been confirmed"
+        },
+        {
+          "id": "d",
+          "text": "Nobody had suggested a shelter"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The proposal was awaiting a decision and a cost estimate.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-05-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "How long did each observation last?",
+      "stimulus": {
+        "title": "The pond notebook",
+        "body": "For six evenings, a class watched a pond from one marked point on the path. Each observation lasted fifteen minutes. Students counted visible ripples and recorded the weather, without touching plants or animals. On the first still evening they saw many clear ripples. On the third evening, wind made the surface difficult to read and the recorded count was lower. One student suggested that there must have been fewer animals. The teacher pointed out that the class had measured visible ripples, not animals: wind and falling leaves could also disturb the surface. The students added a column for observations they could not distinguish confidently and kept their viewing method the same. Their summary described six evenings of surface activity, rather than the entire pond population or a whole year. They included the limits as well as the numbers."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Three minutes"
+        },
+        {
+          "id": "b",
+          "text": "Six hours"
+        },
+        {
+          "id": "c",
+          "text": "One whole evening"
+        },
+        {
+          "id": "d",
+          "text": "Fifteen minutes"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The passage gives a fifteen-minute duration for each observation.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-05-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What did students count directly?",
+      "stimulus": {
+        "title": "The pond notebook",
+        "body": "For six evenings, a class watched a pond from one marked point on the path. Each observation lasted fifteen minutes. Students counted visible ripples and recorded the weather, without touching plants or animals. On the first still evening they saw many clear ripples. On the third evening, wind made the surface difficult to read and the recorded count was lower. One student suggested that there must have been fewer animals. The teacher pointed out that the class had measured visible ripples, not animals: wind and falling leaves could also disturb the surface. The students added a column for observations they could not distinguish confidently and kept their viewing method the same. Their summary described six evenings of surface activity, rather than the entire pond population or a whole year. They included the limits as well as the numbers."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The total number of leaves on trees"
+        },
+        {
+          "id": "b",
+          "text": "All plants under the water"
+        },
+        {
+          "id": "c",
+          "text": "Every animal in the pond"
+        },
+        {
+          "id": "d",
+          "text": "Visible ripples"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "They counted visible ripples from a marked viewing point.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-05-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why was the third count harder to interpret?",
+      "stimulus": {
+        "title": "The pond notebook",
+        "body": "For six evenings, a class watched a pond from one marked point on the path. Each observation lasted fifteen minutes. Students counted visible ripples and recorded the weather, without touching plants or animals. On the first still evening they saw many clear ripples. On the third evening, wind made the surface difficult to read and the recorded count was lower. One student suggested that there must have been fewer animals. The teacher pointed out that the class had measured visible ripples, not animals: wind and falling leaves could also disturb the surface. The students added a column for observations they could not distinguish confidently and kept their viewing method the same. Their summary described six evenings of surface activity, rather than the entire pond population or a whole year. They included the limits as well as the numbers."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The observation lasted an entire year"
+        },
+        {
+          "id": "b",
+          "text": "Wind made surface movements difficult to distinguish"
+        },
+        {
+          "id": "c",
+          "text": "The class had moved the pond"
+        },
+        {
+          "id": "d",
+          "text": "The students touched all the animals"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The wind made the surface difficult to read.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-05-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why did a lower ripple count not prove there were fewer animals?",
+      "stimulus": {
+        "title": "The pond notebook",
+        "body": "For six evenings, a class watched a pond from one marked point on the path. Each observation lasted fifteen minutes. Students counted visible ripples and recorded the weather, without touching plants or animals. On the first still evening they saw many clear ripples. On the third evening, wind made the surface difficult to read and the recorded count was lower. One student suggested that there must have been fewer animals. The teacher pointed out that the class had measured visible ripples, not animals: wind and falling leaves could also disturb the surface. The students added a column for observations they could not distinguish confidently and kept their viewing method the same. Their summary described six evenings of surface activity, rather than the entire pond population or a whole year. They included the limits as well as the numbers."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Wind guarantees more animals are present"
+        },
+        {
+          "id": "b",
+          "text": "Leaves can never disturb water"
+        },
+        {
+          "id": "c",
+          "text": "Ripples are not a direct count of animals and have other possible causes"
+        },
+        {
+          "id": "d",
+          "text": "Every animal always makes exactly one ripple"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The teacher distinguishes the measured ripples from animals and identifies other causes.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-05-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What was the purpose of the new notebook column?",
+      "stimulus": {
+        "title": "The pond notebook",
+        "body": "For six evenings, a class watched a pond from one marked point on the path. Each observation lasted fifteen minutes. Students counted visible ripples and recorded the weather, without touching plants or animals. On the first still evening they saw many clear ripples. On the third evening, wind made the surface difficult to read and the recorded count was lower. One student suggested that there must have been fewer animals. The teacher pointed out that the class had measured visible ripples, not animals: wind and falling leaves could also disturb the surface. The students added a column for observations they could not distinguish confidently and kept their viewing method the same. Their summary described six evenings of surface activity, rather than the entire pond population or a whole year. They included the limits as well as the numbers."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Recording observations that could not be distinguished confidently"
+        },
+        {
+          "id": "b",
+          "text": "Hiding the windy evening"
+        },
+        {
+          "id": "c",
+          "text": "Recording only the first evening"
+        },
+        {
+          "id": "d",
+          "text": "Replacing every count with a guess"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The extra column keeps uncertain observations visible.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-05-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "What made the final summary careful?",
+      "stimulus": {
+        "title": "The pond notebook",
+        "body": "For six evenings, a class watched a pond from one marked point on the path. Each observation lasted fifteen minutes. Students counted visible ripples and recorded the weather, without touching plants or animals. On the first still evening they saw many clear ripples. On the third evening, wind made the surface difficult to read and the recorded count was lower. One student suggested that there must have been fewer animals. The teacher pointed out that the class had measured visible ripples, not animals: wind and falling leaves could also disturb the surface. The students added a column for observations they could not distinguish confidently and kept their viewing method the same. Their summary described six evenings of surface activity, rather than the entire pond population or a whole year. They included the limits as well as the numbers."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It ignored the observation method"
+        },
+        {
+          "id": "b",
+          "text": "It described the observed evenings and included limits"
+        },
+        {
+          "id": "c",
+          "text": "It removed all numbers from the notebook"
+        },
+        {
+          "id": "d",
+          "text": "It claimed to count all animals for a year"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The summary stays within the measured period and explains the limits of the evidence.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    }
+  ]
+}

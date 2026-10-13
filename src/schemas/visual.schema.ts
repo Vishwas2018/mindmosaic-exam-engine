@@ -1,6 +1,14 @@
 import { z } from "zod";
 
 import {
+  MAX_BAR_MODEL_BARS,
+  MAX_BAR_MODEL_BRACES,
+  MAX_BAR_MODEL_BRACE_SPAN,
+  MAX_BAR_MODEL_GROUPS,
+  MAX_BAR_MODEL_SEGMENTS_PER_BAR,
+  MAX_BAR_MODEL_UNIT_DEFINITIONS,
+  MAX_BAR_MODEL_UNITS_PER_SEGMENT,
+  MAX_BAR_MODEL_VALUE,
   MAX_COORDINATE_GRID_LINES_PER_AXIS,
   MAX_NUMBER_LINE_TICKS,
   calculateBoundedStepCount,
@@ -17,6 +25,7 @@ export const VISUAL_TYPES = [
   "fraction_model",
   "labelled_svg",
   "hotspot_svg",
+  "bar_model",
 ] as const;
 
 export const visualTypeSchema = z.enum(VISUAL_TYPES);
@@ -394,6 +403,255 @@ export const hotspotSvgVisualSchema = visualBaseSchema.extend({
   }),
 });
 
+/* ------------------------------------------------------------------ *
+ * bar_model (Model Method) - Phase 1: schematic, render-only.
+ *
+ * LAYERING. This schema rejects malformed *shape* only: wrong types,
+ * missing fields, bounds, enums, and a blank/unknown element that still
+ * carries a number. Broken references (dangling IDs, non-contiguous
+ * braces, target count) are caught by the structural validator and bad
+ * maths (contradictions, an undetermined target, an answer leak) by the
+ * mathematical validator, both in src/features/visuals/bar-model/.
+ * Zod alone does NOT prove a bar model is solvable.
+ *
+ * ANSWER SECRECY. The learner-facing JSON holds givens only. An unknown or
+ * blank element has no numeric field, so a "hidden" number can never reach
+ * the browser.
+ * ------------------------------------------------------------------ */
+
+/** Rule codes the schema layer attaches to its custom issues. */
+export type BarModelSchemaRule =
+  | "segment_size_form"
+  | "units_incomplete"
+  | "blank_with_value"
+  | "unknown_with_value"
+  | "display_mismatch"
+  | "target_display"
+  | "brace_fields";
+
+const barModelSymbolSchema = z
+  .string()
+  .trim()
+  .regex(
+    /^[A-Za-z][A-Za-z0-9]{0,3}$/,
+    "An unknown symbol is 1-4 letters or digits starting with a letter (never '?').",
+  );
+
+/** A given number: non-negative, at most three decimal places, bounded. */
+const barModelValueSchema = z
+  .number()
+  .finite()
+  .nonnegative()
+  .max(MAX_BAR_MODEL_VALUE)
+  .refine((value) => /^\d+(\.\d{1,3})?$/.test(String(value)), {
+    message: "Use a plain decimal with at most three decimal places.",
+  });
+
+export const barModelDisplaySchema = z.enum(["value", "unknown", "blank"]);
+
+function addBarModelIssue(
+  context: z.RefinementCtx,
+  rule: BarModelSchemaRule,
+  message: string,
+  path: (string | number)[] = [],
+) {
+  context.addIssue({ code: "custom", message, path, params: { rule } });
+}
+
+/** Display-versus-size rules shared by segments, braces and quantities. */
+function checkBarModelDisplay(
+  element: {
+    value?: number;
+    unknown?: string;
+    display: "value" | "unknown" | "blank";
+    target?: true;
+  },
+  context: z.RefinementCtx,
+) {
+  const { value, unknown, display, target } = element;
+  if (value !== undefined && display === "blank") {
+    addBarModelIssue(context, "blank_with_value", "A blank element must not carry a numeric value.", ["value"]);
+  } else if (value !== undefined && display === "unknown") {
+    addBarModelIssue(context, "unknown_with_value", "An unknown element must not carry a numeric value.", ["value"]);
+  }
+  if (unknown !== undefined && display === "value") {
+    addBarModelIssue(context, "display_mismatch", "An unknown element cannot display a value.", ["display"]);
+  }
+  if (target && display !== "unknown") {
+    addBarModelIssue(context, "target_display", 'The target must have display "unknown".', ["display"]);
+  }
+}
+
+const barModelUnitSchema = z.strictObject({
+  id: identifierSchema,
+  label: optionalLabelSchema,
+  value: barModelValueSchema.optional(),
+});
+
+/** A change amount stated once; segments and braces reference it by ID. */
+const barModelQuantitySchema = z
+  .strictObject({
+    id: identifierSchema,
+    label: optionalLabelSchema,
+    value: barModelValueSchema.optional(),
+    unknown: barModelSymbolSchema.optional(),
+    display: barModelDisplaySchema,
+    target: z.literal(true).optional(),
+  })
+  .superRefine((quantity, context) => {
+    if ((quantity.value === undefined) === (quantity.unknown === undefined)) {
+      addBarModelIssue(context, "segment_size_form", "A quantity has exactly one of value or unknown.");
+      return;
+    }
+    checkBarModelDisplay(quantity, context);
+  });
+
+const barModelSegmentSchema = z
+  .strictObject({
+    id: identifierSchema,
+    label: optionalLabelSchema,
+    value: barModelValueSchema.optional(),
+    units: z.number().int().min(1).max(MAX_BAR_MODEL_UNITS_PER_SEGMENT).optional(),
+    unitId: identifierSchema.optional(),
+    unknown: barModelSymbolSchema.optional(),
+    quantityId: identifierSchema.optional(),
+    display: barModelDisplaySchema,
+    target: z.literal(true).optional(),
+    /** Marks a segment that shows a change amount; it must use quantityId. */
+    role: z.literal("change").optional(),
+  })
+  .superRefine((segment, context) => {
+    if ((segment.units === undefined) !== (segment.unitId === undefined)) {
+      addBarModelIssue(context, "units_incomplete", "units and unitId go together.", [
+        segment.units === undefined ? "units" : "unitId",
+      ]);
+    }
+    const forms = [
+      segment.value !== undefined,
+      segment.units !== undefined || segment.unitId !== undefined,
+      segment.unknown !== undefined,
+      segment.quantityId !== undefined,
+    ].filter(Boolean).length;
+    if (forms !== 1) {
+      addBarModelIssue(
+        context,
+        "segment_size_form",
+        "A segment's size is exactly one of value, units + unitId, unknown or quantityId.",
+      );
+      return;
+    }
+    checkBarModelDisplay(segment, context);
+    if (segment.units !== undefined && segment.display !== "blank") {
+      addBarModelIssue(context, "display_mismatch", 'A unit-based segment is drawn with display "blank".', ["display"]);
+    }
+  });
+
+const barModelBarSchema = z.strictObject({
+  id: identifierSchema,
+  label: labelSchema,
+  stage: z.enum(["before", "after"]).optional(),
+  segments: z.array(barModelSegmentSchema).min(1).max(MAX_BAR_MODEL_SEGMENTS_PER_BAR),
+});
+
+const barModelBraceSchema = z
+  .strictObject({
+    id: identifierSchema,
+    kind: z.enum(["total", "part", "difference"]),
+    label: optionalLabelSchema,
+    value: barModelValueSchema.optional(),
+    unknown: barModelSymbolSchema.optional(),
+    quantityId: identifierSchema.optional(),
+    display: barModelDisplaySchema,
+    target: z.literal(true).optional(),
+    role: z.literal("change").optional(),
+    side: z.enum(["above", "below"]).optional(),
+    /** part / total: contiguous segment IDs of one bar. */
+    spans: z.array(identifierSchema).min(1).max(MAX_BAR_MODEL_BRACE_SPAN).optional(),
+    /** total only: a combined total across whole bars. */
+    barIds: z.array(identifierSchema).min(2).max(MAX_BAR_MODEL_BARS).optional(),
+    /** difference only: the gap between two aligned bars. */
+    longerBarId: identifierSchema.optional(),
+    shorterBarId: identifierSchema.optional(),
+  })
+  .superRefine((brace, context) => {
+    const forms = [
+      brace.value !== undefined,
+      brace.unknown !== undefined,
+      brace.quantityId !== undefined,
+    ].filter(Boolean).length;
+    if (forms !== 1) {
+      addBarModelIssue(context, "segment_size_form", "A brace has exactly one of value, unknown or quantityId.");
+      return;
+    }
+    checkBarModelDisplay(brace, context);
+    const hasSpans = brace.spans !== undefined;
+    const hasBars = brace.barIds !== undefined;
+    const hasDifference = brace.longerBarId !== undefined || brace.shorterBarId !== undefined;
+    const ok =
+      brace.kind === "part"
+        ? hasSpans && !hasBars && !hasDifference
+        : brace.kind === "total"
+          ? hasSpans !== hasBars && !hasDifference
+          : brace.longerBarId !== undefined &&
+            brace.shorterBarId !== undefined &&
+            !hasSpans &&
+            !hasBars;
+    if (!ok) {
+      addBarModelIssue(
+        context,
+        "brace_fields",
+        "part needs spans; total needs spans or barIds; difference needs longerBarId and shorterBarId.",
+      );
+    }
+  });
+
+const barModelGroupSchema = z.strictObject({
+  id: identifierSchema,
+  barIds: z.array(identifierSchema).min(2).max(MAX_BAR_MODEL_BARS),
+});
+
+const barModelRelationshipSchema = z.discriminatedUnion("kind", [
+  z.strictObject({
+    kind: z.literal("add"),
+    fromStage: identifierSchema,
+    toStage: identifierSchema,
+    quantityId: identifierSchema,
+  }),
+  z.strictObject({
+    kind: z.literal("remove"),
+    fromStage: identifierSchema,
+    toStage: identifierSchema,
+    quantityId: identifierSchema,
+  }),
+  z.strictObject({
+    kind: z.literal("transfer"),
+    fromBar: identifierSchema,
+    toBar: identifierSchema,
+    quantityId: identifierSchema,
+    beforeBars: z.array(identifierSchema).min(2).max(MAX_BAR_MODEL_BARS),
+    afterBars: z.array(identifierSchema).min(2).max(MAX_BAR_MODEL_BARS),
+  }),
+  z.strictObject({
+    kind: z.literal("equal"),
+    barIds: z.array(identifierSchema).min(2).max(MAX_BAR_MODEL_BARS),
+  }),
+]);
+
+export const barModelDataSchema = z.strictObject({
+  layout: z.strictObject({ mode: z.literal("schematic") }),
+  units: z.array(barModelUnitSchema).max(MAX_BAR_MODEL_UNIT_DEFINITIONS).default([]),
+  quantities: z.array(barModelQuantitySchema).max(MAX_BAR_MODEL_BRACES).default([]),
+  bars: z.array(barModelBarSchema).min(1).max(MAX_BAR_MODEL_BARS),
+  braces: z.array(barModelBraceSchema).max(MAX_BAR_MODEL_BRACES).default([]),
+  groups: z.array(barModelGroupSchema).max(MAX_BAR_MODEL_GROUPS).default([]),
+  relationships: z.array(barModelRelationshipSchema).max(MAX_BAR_MODEL_BRACES).default([]),
+});
+
+export const barModelVisualSchema = visualBaseSchema.extend({
+  type: z.literal("bar_model"),
+  data: barModelDataSchema,
+});
+
 export const visualSchema = z.discriminatedUnion("type", [
   barChartVisualSchema,
   lineGraphVisualSchema,
@@ -405,6 +663,7 @@ export const visualSchema = z.discriminatedUnion("type", [
   fractionModelVisualSchema,
   labelledSvgVisualSchema,
   hotspotSvgVisualSchema,
+  barModelVisualSchema,
 ]);
 
 export const structuredVisualSchema = visualSchema;
@@ -415,3 +674,5 @@ export type VisualType = z.infer<typeof visualTypeSchema>;
 export type VisualAsset = z.infer<typeof visualSchema>;
 export type StructuredVisual = VisualAsset;
 export type BarChartVisual = z.infer<typeof barChartVisualSchema>;
+export type BarModelVisual = z.infer<typeof barModelVisualSchema>;
+export type BarModelData = z.infer<typeof barModelDataSchema>;

@@ -1,0 +1,132 @@
+{
+  "why": "Cal gains 5 from nowhere, so the combined total is not conserved.",
+  "layer": "mathematical",
+  "errorCodes": [
+    "transfer_breaks_conservation"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-conservation",
+    "type": "bar_model",
+    "title": "Stickers shared out",
+    "altText": "Ava gives Ben some stickers. A third bar also changes, so the combined total does not stay the same.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "groups": [
+        {
+          "id": "swap",
+          "barIds": [
+            "ava-before",
+            "ben-before",
+            "cal-before",
+            "ava-after",
+            "ben-after",
+            "cal-after"
+          ]
+        }
+      ],
+      "quantities": [
+        {
+          "id": "gift",
+          "label": "Given",
+          "unknown": "g",
+          "display": "unknown",
+          "target": true
+        }
+      ],
+      "bars": [
+        {
+          "id": "ava-before",
+          "label": "Ava",
+          "stage": "before",
+          "segments": [
+            {
+              "id": "ava-had",
+              "value": 70,
+              "display": "value"
+            }
+          ]
+        },
+        {
+          "id": "ben-before",
+          "label": "Ben",
+          "stage": "before",
+          "segments": [
+            {
+              "id": "ben-had",
+              "value": 38,
+              "display": "value"
+            }
+          ]
+        },
+        {
+          "id": "cal-before",
+          "label": "Cal",
+          "stage": "before",
+          "segments": [
+            {
+              "id": "cal-had",
+              "value": 10,
+              "display": "value"
+            }
+          ]
+        },
+        {
+          "id": "ava-after",
+          "label": "Ava",
+          "stage": "after",
+          "segments": [
+            {
+              "id": "ava-now",
+              "value": 50,
+              "display": "value"
+            }
+          ]
+        },
+        {
+          "id": "ben-after",
+          "label": "Ben",
+          "stage": "after",
+          "segments": [
+            {
+              "id": "ben-now",
+              "value": 58,
+              "display": "value"
+            }
+          ]
+        },
+        {
+          "id": "cal-after",
+          "label": "Cal",
+          "stage": "after",
+          "segments": [
+            {
+              "id": "cal-now",
+              "value": 15,
+              "display": "value"
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "kind": "transfer",
+          "fromBar": "ava-before",
+          "toBar": "ben-before",
+          "quantityId": "gift",
+          "beforeBars": [
+            "ava-before",
+            "ben-before",
+            "cal-before"
+          ],
+          "afterBars": [
+            "ava-after",
+            "ben-after",
+            "cal-after"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "why": "18 + 12 cannot be 40.",
+  "layer": "mathematical",
+  "errorCodes": [
+    "contradictory_givens"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-contradiction",
+    "type": "bar_model",
+    "title": "Lamingtons in a tray",
+    "altText": "A bar model of one tray of lamingtons. The whole tray is 45. One part is 18 dark chocolate lamingtons. The other part, the pink ones, is unknown.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "bars": [
+        {
+          "id": "tray",
+          "label": "Tray",
+          "segments": [
+            {
+              "id": "dark",
+              "label": "Dark",
+              "value": 18,
+              "display": "value"
+            },
+            {
+              "id": "milk",
+              "label": "Milk",
+              "value": 12,
+              "display": "value"
+            },
+            {
+              "id": "pink",
+              "label": "Pink",
+              "unknown": "p",
+              "display": "unknown",
+              "target": true
+            }
+          ]
+        }
+      ],
+      "braces": [
+        {
+          "id": "whole",
+          "kind": "total",
+          "label": "All",
+          "value": 45,
+          "display": "value",
+          "spans": [
+            "dark",
+            "milk",
+            "pink"
+          ]
+        },
+        {
+          "id": "first-two",
+          "kind": "part",
+          "label": "Two kinds",
+          "value": 40,
+          "display": "value",
+          "spans": [
+            "dark",
+            "milk"
+          ]
+        }
+      ]
+    }
+  }
+}

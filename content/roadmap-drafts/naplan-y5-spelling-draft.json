@@ -1,0 +1,806 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI draft sentence contexts. No independent review, approval or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y5-spelling-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The explorers packed only ____ equipment.",
+      "options": [
+        {
+          "id": "a",
+          "text": "necessary"
+        },
+        {
+          "id": "b",
+          "text": "necesary"
+        },
+        {
+          "id": "c",
+          "text": "neccessary"
+        },
+        {
+          "id": "d",
+          "text": "necessery"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Necessary has one c and two s letters.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Consonant pattern in necessary",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Please keep the wet towels ____ from the dry ones.",
+      "options": [
+        {
+          "id": "a",
+          "text": "seperete"
+        },
+        {
+          "id": "b",
+          "text": "seperate"
+        },
+        {
+          "id": "c",
+          "text": "separrate"
+        },
+        {
+          "id": "d",
+          "text": "separate"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Separate has a in its second syllable: sep-a-rate.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed vowels in separate",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? We arrived at the ____ of the performance.",
+      "options": [
+        {
+          "id": "a",
+          "text": "beginnning"
+        },
+        {
+          "id": "b",
+          "text": "beggining"
+        },
+        {
+          "id": "c",
+          "text": "beginning"
+        },
+        {
+          "id": "d",
+          "text": "begining"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Beginning keeps the double n when -ing is added.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double consonant before -ing",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Zara placed the model ____ on the shelf.",
+      "options": [
+        {
+          "id": "a",
+          "text": "carefuly"
+        },
+        {
+          "id": "b",
+          "text": "carefulley"
+        },
+        {
+          "id": "c",
+          "text": "carefully"
+        },
+        {
+          "id": "d",
+          "text": "carfully"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Careful has one final l, and carefully adds -ly, producing two l letters together.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Suffixes -ful and -ly",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The rainbow ____ behind the clouds.",
+      "options": [
+        {
+          "id": "a",
+          "text": "disappeared"
+        },
+        {
+          "id": "b",
+          "text": "disappeard"
+        },
+        {
+          "id": "c",
+          "text": "disapeared"
+        },
+        {
+          "id": "d",
+          "text": "dissapeared"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Disappeared begins dis- and keeps the double p in appear.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Prefix dis- and double consonant",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Blue is my ____ colour.",
+      "options": [
+        {
+          "id": "a",
+          "text": "faverite"
+        },
+        {
+          "id": "b",
+          "text": "favourite"
+        },
+        {
+          "id": "c",
+          "text": "favouret"
+        },
+        {
+          "id": "d",
+          "text": "favoruite"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Favourite uses the Australian -our spelling and ends -ite.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Australian spelling of favourite",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Our ____ watered the garden while we were away.",
+      "options": [
+        {
+          "id": "a",
+          "text": "nieghbour"
+        },
+        {
+          "id": "b",
+          "text": "neighbourr"
+        },
+        {
+          "id": "c",
+          "text": "neigbour"
+        },
+        {
+          "id": "d",
+          "text": "neighbour"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Neighbour contains neigh- and the Australian -our ending.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Letter sequence eigh and Australian -our",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? I ____ the explanation is correct.",
+      "options": [
+        {
+          "id": "a",
+          "text": "belive"
+        },
+        {
+          "id": "b",
+          "text": "beleive"
+        },
+        {
+          "id": "c",
+          "text": "believe"
+        },
+        {
+          "id": "d",
+          "text": "beleeve"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Believe is spelled b-e-l-i-e-v-e.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Letter sequence ie after l",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The nurse checked the patient's ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "tempereture"
+        },
+        {
+          "id": "b",
+          "text": "temparature"
+        },
+        {
+          "id": "c",
+          "text": "temperature"
+        },
+        {
+          "id": "d",
+          "text": "temprature"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Temperature keeps the vowel sequence in tempera- before -ture.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed vowels in temperature",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Feeding the class fish was Jordan's ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "responsibilty"
+        },
+        {
+          "id": "b",
+          "text": "responsibility"
+        },
+        {
+          "id": "c",
+          "text": "responcibility"
+        },
+        {
+          "id": "d",
+          "text": "responsability"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Responsibility ends with -sibility and includes the unstressed i before -ty.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Suffix -ibility",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The committee ____ to postpone the match.",
+      "options": [
+        {
+          "id": "a",
+          "text": "decidded"
+        },
+        {
+          "id": "b",
+          "text": "decided"
+        },
+        {
+          "id": "c",
+          "text": "descided"
+        },
+        {
+          "id": "d",
+          "text": "decideed"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Decide already ends in e, so add d to make decided.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Add -d to a word ending in e",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The measurements were recorded ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "accurately"
+        },
+        {
+          "id": "b",
+          "text": "accuratly"
+        },
+        {
+          "id": "c",
+          "text": "acurately"
+        },
+        {
+          "id": "d",
+          "text": "accuratley"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Accurate keeps its e before the -ly suffix: accurately.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Keep final e before -ly",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? Breaking the window was ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "accidental"
+        },
+        {
+          "id": "b",
+          "text": "accidential"
+        },
+        {
+          "id": "c",
+          "text": "accidentel"
+        },
+        {
+          "id": "d",
+          "text": "acidental"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Accidental begins with double c and ends -ental.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double consonant and unstressed vowel",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? We used a ruler for an exact ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "measurement"
+        },
+        {
+          "id": "b",
+          "text": "measuremant"
+        },
+        {
+          "id": "c",
+          "text": "mesurement"
+        },
+        {
+          "id": "d",
+          "text": "measurment"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Measurement keeps the e in measure before adding -ment.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Suffix -ment",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The missing keys were ____ on the desk.",
+      "options": [
+        {
+          "id": "a",
+          "text": "definately"
+        },
+        {
+          "id": "b",
+          "text": "deffinately"
+        },
+        {
+          "id": "c",
+          "text": "definitly"
+        },
+        {
+          "id": "d",
+          "text": "definitely"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Definitely is built from definite and ends -ly.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed vowels in definitely",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The group discussed how to protect the ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "envirenment"
+        },
+        {
+          "id": "b",
+          "text": "environment"
+        },
+        {
+          "id": "c",
+          "text": "enviornment"
+        },
+        {
+          "id": "d",
+          "text": "enviroment"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Environment keeps the n after enviro- and ends -ment.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Internal syllables in environment",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? It was ____ to speak in front of the crowd.",
+      "options": [
+        {
+          "id": "a",
+          "text": "couragious"
+        },
+        {
+          "id": "b",
+          "text": "corageous"
+        },
+        {
+          "id": "c",
+          "text": "courageous"
+        },
+        {
+          "id": "d",
+          "text": "couragous"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Courageous keeps courage and changes the ending to -eous.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Suffix -eous",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? We asked for ____ before using the hall.",
+      "options": [
+        {
+          "id": "a",
+          "text": "premission"
+        },
+        {
+          "id": "b",
+          "text": "permisson"
+        },
+        {
+          "id": "c",
+          "text": "permision"
+        },
+        {
+          "id": "d",
+          "text": "permission"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Permission has double s and ends -sion.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double consonant and suffix -sion",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The bright label made the box easily ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "noticeible"
+        },
+        {
+          "id": "b",
+          "text": "notiseable"
+        },
+        {
+          "id": "c",
+          "text": "noticeable"
+        },
+        {
+          "id": "d",
+          "text": "noticable"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Noticeable keeps the e so the c keeps its soft sound before -able.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Keep e before -able after soft c",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-spelling-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which spelling correctly completes this sentence? The map showed the ____ between the towns.",
+      "options": [
+        {
+          "id": "a",
+          "text": "distanse"
+        },
+        {
+          "id": "b",
+          "text": "distance"
+        },
+        {
+          "id": "c",
+          "text": "dinstance"
+        },
+        {
+          "id": "d",
+          "text": "distence"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Distance has a in the second syllable and ends with -ce.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed vowel and ce ending",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    }
+  ]
+}

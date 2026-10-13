@@ -1,0 +1,73 @@
+{
+  "why": "A segment may hold at most 12 units.",
+  "layer": "schema",
+  "errorCodes": [
+    "too_big"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-units-out-of-bounds",
+    "type": "bar_model",
+    "title": "Stickers: three times as many",
+    "altText": "Mia has 3 times as many stickers as Leo. Leo has 6 stickers, which is one unit. Mia has 3 of the same unit. The total number of stickers Mia has is unknown.",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "units": [
+        {
+          "id": "share",
+          "label": "Leo's stickers",
+          "value": 6
+        }
+      ],
+      "groups": [
+        {
+          "id": "stickers",
+          "barIds": [
+            "leo",
+            "mia"
+          ]
+        }
+      ],
+      "bars": [
+        {
+          "id": "leo",
+          "label": "Leo",
+          "segments": [
+            {
+              "id": "leo-units",
+              "units": 1,
+              "unitId": "share",
+              "display": "blank"
+            }
+          ]
+        },
+        {
+          "id": "mia",
+          "label": "Mia",
+          "segments": [
+            {
+              "id": "mia-units",
+              "units": 13,
+              "unitId": "share",
+              "display": "blank"
+            }
+          ]
+        }
+      ],
+      "braces": [
+        {
+          "id": "mia-total",
+          "kind": "total",
+          "label": "Mia",
+          "unknown": "m",
+          "display": "unknown",
+          "target": true,
+          "spans": [
+            "mia-units"
+          ]
+        }
+      ]
+    }
+  }
+}
