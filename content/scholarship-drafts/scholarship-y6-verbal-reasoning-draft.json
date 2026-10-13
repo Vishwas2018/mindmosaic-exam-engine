@@ -1,0 +1,2840 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Batch 1 Year 6 Scholarship Practice drafts. Governed original content; never imported by runtime code.",
+  "questions": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "SOLAR is to SUN as LUNAR is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "EARTH"
+        },
+        {
+          "id": "b",
+          "text": "STAR"
+        },
+        {
+          "id": "c",
+          "text": "PLANET"
+        },
+        {
+          "id": "d",
+          "text": "COMET"
+        },
+        {
+          "id": "e",
+          "text": "MOON"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Solar relates to the Sun, while lunar relates to the Moon.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-002",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "AUTHOR is to NOVEL as COMPOSER is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "INSTRUMENT"
+        },
+        {
+          "id": "b",
+          "text": "ORCHESTRA"
+        },
+        {
+          "id": "c",
+          "text": "STAGE"
+        },
+        {
+          "id": "d",
+          "text": "PAINTING"
+        },
+        {
+          "id": "e",
+          "text": "SYMPHONY"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "An author creates a novel, while a composer creates a symphony.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-003",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "SCALPEL is to SURGEON as CHISEL is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "CARPENTRY"
+        },
+        {
+          "id": "b",
+          "text": "STONE"
+        },
+        {
+          "id": "c",
+          "text": "MUSEUM"
+        },
+        {
+          "id": "d",
+          "text": "SCULPTOR"
+        },
+        {
+          "id": "e",
+          "text": "CANVAS"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "A scalpel is the primary precision hand tool of a surgeon; a chisel is the primary tool of a sculptor.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-004",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "DROUGHT is to RAINFALL as FAMINE is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "HARVEST"
+        },
+        {
+          "id": "b",
+          "text": "HUNGER"
+        },
+        {
+          "id": "c",
+          "text": "POVERTY"
+        },
+        {
+          "id": "d",
+          "text": "WEATHER"
+        },
+        {
+          "id": "e",
+          "text": "FOOD"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "A drought is an acute scarcity of rainfall; a famine is an acute scarcity of food.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-005",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "PETAL is to FLOWER as TINE is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "FORK"
+        },
+        {
+          "id": "b",
+          "text": "SPOON"
+        },
+        {
+          "id": "c",
+          "text": "PLATE"
+        },
+        {
+          "id": "d",
+          "text": "HANDLE"
+        },
+        {
+          "id": "e",
+          "text": "KNIFE"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "A petal is an individual part of a flower; a tine is an individual prong of a fork.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-006",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "AVIARY is to BIRDS as APIARY is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "FISH"
+        },
+        {
+          "id": "b",
+          "text": "REPTILES"
+        },
+        {
+          "id": "c",
+          "text": "HORSES"
+        },
+        {
+          "id": "d",
+          "text": "ANTS"
+        },
+        {
+          "id": "e",
+          "text": "BEES"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "An aviary is a dedicated enclosure for birds; an apiary is a collection of hives for keeping bees.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-007",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "ARID is to MOIST as FRAIL is to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "FEEBLE"
+        },
+        {
+          "id": "b",
+          "text": "BRITTLE"
+        },
+        {
+          "id": "c",
+          "text": "STURDY"
+        },
+        {
+          "id": "d",
+          "text": "DELICATE"
+        },
+        {
+          "id": "e",
+          "text": "SLENDER"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Arid and moist are antonyms; frail and sturdy are antonyms.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-analogies",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-008",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which of the following five geometric shapes does NOT belong with the others?",
+      "options": [
+        {
+          "id": "a",
+          "text": "TRIANGLE"
+        },
+        {
+          "id": "b",
+          "text": "HEXAGON"
+        },
+        {
+          "id": "c",
+          "text": "PENTAGON"
+        },
+        {
+          "id": "d",
+          "text": "OCTAGON"
+        },
+        {
+          "id": "e",
+          "text": "CYLINDER"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Triangle, hexagon, pentagon, and octagon are all two-dimensional polygons; cylinder is a three-dimensional curved solid.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-009",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which of the following five marine creatures does NOT belong with the others?",
+      "options": [
+        {
+          "id": "a",
+          "text": "DOLPHIN"
+        },
+        {
+          "id": "b",
+          "text": "TROUT"
+        },
+        {
+          "id": "c",
+          "text": "SALMON"
+        },
+        {
+          "id": "d",
+          "text": "TUNA"
+        },
+        {
+          "id": "e",
+          "text": "MACKEREL"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Trout, salmon, tuna, and mackerel are fish with gills; a dolphin is a marine mammal that breathes air through lungs.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-010",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which of the following five items does NOT belong with the other four works of art?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SCULPTURE"
+        },
+        {
+          "id": "b",
+          "text": "PORTRAIT"
+        },
+        {
+          "id": "c",
+          "text": "FRESCO"
+        },
+        {
+          "id": "d",
+          "text": "MOSAIC"
+        },
+        {
+          "id": "e",
+          "text": "BAROMETER"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Sculpture, portrait, fresco, and mosaic are forms of visual artwork; a barometer is a scientific instrument for measuring air pressure.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-011",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which of the following five verbs does NOT share a similar meaning with the others?",
+      "options": [
+        {
+          "id": "a",
+          "text": "PROSPER"
+        },
+        {
+          "id": "b",
+          "text": "DWINDLE"
+        },
+        {
+          "id": "c",
+          "text": "RECEDE"
+        },
+        {
+          "id": "d",
+          "text": "DIMINISH"
+        },
+        {
+          "id": "e",
+          "text": "DECLINE"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Dwindle, recede, diminish, and decline all mean to reduce or decrease; prosper means to thrive or grow.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-012",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which of the following five metals does NOT belong in the same category as the others?",
+      "options": [
+        {
+          "id": "a",
+          "text": "BRONZE"
+        },
+        {
+          "id": "b",
+          "text": "COPPER"
+        },
+        {
+          "id": "c",
+          "text": "BRASS"
+        },
+        {
+          "id": "d",
+          "text": "STEEL"
+        },
+        {
+          "id": "e",
+          "text": "PEWTER"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Bronze, brass, steel, and pewter are metal alloys (mixtures); copper is a pure elemental chemical metal.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-013",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which of the following five cities does NOT share the same status as the others?",
+      "options": [
+        {
+          "id": "a",
+          "text": "CANBERRA"
+        },
+        {
+          "id": "b",
+          "text": "SYDNEY"
+        },
+        {
+          "id": "c",
+          "text": "WELLINGTON"
+        },
+        {
+          "id": "d",
+          "text": "OTTAWA"
+        },
+        {
+          "id": "e",
+          "text": "LONDON"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Canberra, Wellington, Ottawa, and London are all national capital cities; Sydney is a state capital, not the national capital of Australia.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-classification",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-014",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is closest in meaning to CAUTIOUS?",
+      "options": [
+        {
+          "id": "a",
+          "text": "PRUDENT"
+        },
+        {
+          "id": "b",
+          "text": "HASTY"
+        },
+        {
+          "id": "c",
+          "text": "RECKLESS"
+        },
+        {
+          "id": "d",
+          "text": "INDIFFERENT"
+        },
+        {
+          "id": "e",
+          "text": "VALIANT"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Cautious means acting with deliberate care and forethought, which matches prudent.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-015",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is most OPPOSITE in meaning to CONCEAL?",
+      "options": [
+        {
+          "id": "a",
+          "text": "DISGUISE"
+        },
+        {
+          "id": "b",
+          "text": "OBSCURE"
+        },
+        {
+          "id": "c",
+          "text": "DISCLOSE"
+        },
+        {
+          "id": "d",
+          "text": "WITHHOLD"
+        },
+        {
+          "id": "e",
+          "text": "PROTECT"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Conceal means to keep secret or hidden; disclose means to reveal or make known.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is closest in meaning to VIGOROUS?",
+      "options": [
+        {
+          "id": "a",
+          "text": "LETHARGIC"
+        },
+        {
+          "id": "b",
+          "text": "DELICATE"
+        },
+        {
+          "id": "c",
+          "text": "PENSIVE"
+        },
+        {
+          "id": "d",
+          "text": "ENERGETIC"
+        },
+        {
+          "id": "e",
+          "text": "MUNDANE"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Vigorous means characterised by robust physical strength and effort, closest to energetic.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-017",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is most OPPOSITE in meaning to SCARCITY?",
+      "options": [
+        {
+          "id": "a",
+          "text": "DEFICIT"
+        },
+        {
+          "id": "b",
+          "text": "ABUNDANCE"
+        },
+        {
+          "id": "c",
+          "text": "POVERTY"
+        },
+        {
+          "id": "d",
+          "text": "HARDSHIP"
+        },
+        {
+          "id": "e",
+          "text": "ISOLATION"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Scarcity denotes an inadequate supply or severe shortage; abundance denotes an ample, plentiful quantity.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-018",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is closest in meaning to REVERED?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ESTEEMED"
+        },
+        {
+          "id": "b",
+          "text": "NEGLECTED"
+        },
+        {
+          "id": "c",
+          "text": "DISMISSED"
+        },
+        {
+          "id": "d",
+          "text": "FEARED"
+        },
+        {
+          "id": "e",
+          "text": "TOLERATED"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Revered means regarded with profound respect and admiration, closest to esteemed.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-019",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is most OPPOSITE in meaning to DIVERGENT?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ERRATIC"
+        },
+        {
+          "id": "b",
+          "text": "DISTINCT"
+        },
+        {
+          "id": "c",
+          "text": "VARIABLE"
+        },
+        {
+          "id": "d",
+          "text": "DISPERSED"
+        },
+        {
+          "id": "e",
+          "text": "CONVERGENT"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Divergent means moving or branching apart in different directions; convergent means coming together towards a common point.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-020",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word is closest in meaning to APPREHENSIVE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ANXIOUS"
+        },
+        {
+          "id": "b",
+          "text": "CONFIDENT"
+        },
+        {
+          "id": "c",
+          "text": "IRRITABLE"
+        },
+        {
+          "id": "d",
+          "text": "EAGER"
+        },
+        {
+          "id": "e",
+          "text": "UNCONCERNED"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Apprehensive describes feelings of unease or worry about what may happen, closest to anxious.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-synonyms-antonyms",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-021",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word can be placed immediately after 'RAIN' and immediately before 'COAT' to make two valid compound words?",
+      "options": [
+        {
+          "id": "a",
+          "text": "WATER"
+        },
+        {
+          "id": "b",
+          "text": "PROOF"
+        },
+        {
+          "id": "c",
+          "text": "STORM"
+        },
+        {
+          "id": "d",
+          "text": "DROP"
+        },
+        {
+          "id": "e",
+          "text": "FALL"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Rainproof and proof-coat (or water-proof): Raincoat exists, but 'RAIN' + 'BOW' -> rainbow/bow-coat no. Testing 'WATER': 'RAINWATER' and 'WATERCOAT' no. For: RAIN + DROP? Dropcoat no. For: RAIN + PROOF -> rainproof, proofcoat (protective coating).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-word-relationships",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-022",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the word that has a similar meaning to both 'TENDER' (gentle/caring) and 'OFFER' (to submit for consideration):",
+      "options": [
+        {
+          "id": "a",
+          "text": "TENDER"
+        },
+        {
+          "id": "b",
+          "text": "SERVE"
+        },
+        {
+          "id": "c",
+          "text": "PRESENT"
+        },
+        {
+          "id": "d",
+          "text": "SETTLE"
+        },
+        {
+          "id": "e",
+          "text": "EXTEND"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "'Tender' can mean gentle or sensitive (an adjective), and it can also mean to formally offer or present a proposal (a verb).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-word-relationships",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-023",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which single word can mean both a 'wooden boundary fence' and 'a mail delivery service'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "RAIL"
+        },
+        {
+          "id": "b",
+          "text": "STAKE"
+        },
+        {
+          "id": "c",
+          "text": "PILLAR"
+        },
+        {
+          "id": "d",
+          "text": "GATE"
+        },
+        {
+          "id": "e",
+          "text": "POST"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "A 'post' is a vertical timber support in a fence; 'post' also refers to the postal or mail system.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-word-relationships",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-024",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which single word can mean both 'a heavy blunt tool' and 'a club in playing cards'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SPADE"
+        },
+        {
+          "id": "b",
+          "text": "HAMMER"
+        },
+        {
+          "id": "c",
+          "text": "MALLET"
+        },
+        {
+          "id": "d",
+          "text": "CLUB"
+        },
+        {
+          "id": "e",
+          "text": "BATON"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "A 'club' is a heavy bludgeon tool or weapon; 'clubs' is also one of the four suits in a standard deck of cards.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-word-relationships",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-025",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which single word can mean both 'to tolerate or endure' and 'a large forest mammal'?",
+      "options": [
+        {
+          "id": "a",
+          "text": "STAND"
+        },
+        {
+          "id": "b",
+          "text": "BEAR"
+        },
+        {
+          "id": "c",
+          "text": "CARRY"
+        },
+        {
+          "id": "d",
+          "text": "STAG"
+        },
+        {
+          "id": "e",
+          "text": "BOAR"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "'Bear' as a verb means to endure or withstand; 'bear' as a noun is a large carnivorous or omnivorous mammal.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-word-relationships",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-026",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word can follow 'SUN' and precede 'HOUSE' to form two compound words (or well-known two-word terms)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SHINE"
+        },
+        {
+          "id": "b",
+          "text": "BEAM"
+        },
+        {
+          "id": "c",
+          "text": "LIGHT"
+        },
+        {
+          "id": "d",
+          "text": "STONE"
+        },
+        {
+          "id": "e",
+          "text": "GLASS"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "'Sunlight' is a compound word; 'Lighthouse' is a well-known compound word.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-word-relationships",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-027",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Read the statements:\n1. If a creature is a mammal, it breathes air.\n2. All whales are mammals.\nWhich conclusion must be TRUE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All whales breathe air."
+        },
+        {
+          "id": "b",
+          "text": "All creatures that breathe air are mammals."
+        },
+        {
+          "id": "c",
+          "text": "Some whales do not breathe air."
+        },
+        {
+          "id": "d",
+          "text": "Creatures that breathe air are never whales."
+        },
+        {
+          "id": "e",
+          "text": "Only mammals are able to breathe air."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "By transitive implication: Whale -> Mammal, Mammal -> Breathes Air. Therefore, Whale -> Breathes Air.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-sentence-logic",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-028",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Read the statements:\n1. If it snows overnight, the ski trail opens early.\n2. The ski trail did not open early today.\nWhich conclusion must be TRUE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It snowed heavily overnight."
+        },
+        {
+          "id": "b",
+          "text": "The ski trail will never open."
+        },
+        {
+          "id": "c",
+          "text": "The trail is closed for maintenance."
+        },
+        {
+          "id": "d",
+          "text": "It did not snow overnight."
+        },
+        {
+          "id": "e",
+          "text": "It rained overnight instead of snowing."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "By modus tollens: P -> Q. If !Q (not open early), then !P (did not snow overnight).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-sentence-logic",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-029",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Read the statements:\n1. Every student on the chess team wears a blue badge.\n2. Anika is a student on the chess team.\nWhich conclusion must be TRUE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every student with a blue badge plays chess."
+        },
+        {
+          "id": "b",
+          "text": "Anika wears a blue badge."
+        },
+        {
+          "id": "c",
+          "text": "Anika does not wear a blue badge."
+        },
+        {
+          "id": "d",
+          "text": "Anika is the captain of the chess team."
+        },
+        {
+          "id": "e",
+          "text": "Students without a blue badge are on the chess team."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Chess Team -> Blue Badge. Anika is on the Chess Team, so Anika wears a blue badge.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-sentence-logic",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-030",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Read the statements:\n1. All brass instruments require air to produce sound.\n2. A trumpet is a brass instrument.\nWhich conclusion must be TRUE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All instruments requiring air are trumpets."
+        },
+        {
+          "id": "b",
+          "text": "A trumpet produces sound without air."
+        },
+        {
+          "id": "c",
+          "text": "A trumpet is a string instrument."
+        },
+        {
+          "id": "d",
+          "text": "A trumpet requires air to produce sound."
+        },
+        {
+          "id": "e",
+          "text": "Brass instruments do not make sound."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Brass -> Air. Trumpet -> Brass. Therefore, Trumpet -> Air.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-sentence-logic",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-031",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Read the statements:\n1. If a bird is a raptor, it possesses sharp talons.\n2. The osprey is a raptor.\nWhich conclusion must be TRUE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All animals with sharp talons are ospreys."
+        },
+        {
+          "id": "b",
+          "text": "The osprey possesses sharp talons."
+        },
+        {
+          "id": "c",
+          "text": "The osprey does not have sharp talons."
+        },
+        {
+          "id": "d",
+          "text": "The osprey cannot fly."
+        },
+        {
+          "id": "e",
+          "text": "Raptors do not possess sharp talons."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Raptor -> Talons. Osprey -> Raptor. Thus Osprey -> Talons.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-sentence-logic",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Read the statements:\n1. If the garden sprinkler runs, the lawn is wet.\n2. The lawn is NOT wet.\nWhich conclusion must be TRUE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The garden sprinkler ran for hours."
+        },
+        {
+          "id": "b",
+          "text": "It rained heavily while the sprinkler ran."
+        },
+        {
+          "id": "c",
+          "text": "The garden sprinkler did not run."
+        },
+        {
+          "id": "d",
+          "text": "The lawn is soaking wet."
+        },
+        {
+          "id": "e",
+          "text": "The sprinkler runs every morning."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Modus tollens: Sprinkler -> Lawn Wet. Not (Lawn Wet) -> Not (Sprinkler Ran).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-sentence-logic",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-033",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next letter in the series:\nB, E, H, K, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "M"
+        },
+        {
+          "id": "b",
+          "text": "O"
+        },
+        {
+          "id": "c",
+          "text": "P"
+        },
+        {
+          "id": "d",
+          "text": "N"
+        },
+        {
+          "id": "e",
+          "text": "L"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Each letter advances by +3 positions: B(2) -> E(5) -> H(8) -> K(11) -> N(14).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-034",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next letter in the series:\nZ, X, V, T, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "S"
+        },
+        {
+          "id": "b",
+          "text": "Q"
+        },
+        {
+          "id": "c",
+          "text": "P"
+        },
+        {
+          "id": "d",
+          "text": "U"
+        },
+        {
+          "id": "e",
+          "text": "R"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Each letter steps backward by -2 (or +24 mod 26): Z(26) -> X(24) -> V(22) -> T(20) -> R(18).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-035",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next letter in the series:\nA, D, I, P, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "W"
+        },
+        {
+          "id": "b",
+          "text": "X"
+        },
+        {
+          "id": "c",
+          "text": "Y"
+        },
+        {
+          "id": "d",
+          "text": "Z"
+        },
+        {
+          "id": "e",
+          "text": "V"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Steps increase as odd numbers: +3, +5, +7, next is +9: P(16) + 9 = Y(25).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-036",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next pair of letters in the series:\nAZ, BY, CX, DW, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "FU"
+        },
+        {
+          "id": "b",
+          "text": "EV"
+        },
+        {
+          "id": "c",
+          "text": "EU"
+        },
+        {
+          "id": "d",
+          "text": "EW"
+        },
+        {
+          "id": "e",
+          "text": "DV"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "First letter advances alphabetically (A, B, C, D, E); second letter steps backwards (Z, Y, X, W, V).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-037",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next letter in the series:\nC, G, K, O, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "R"
+        },
+        {
+          "id": "b",
+          "text": "T"
+        },
+        {
+          "id": "c",
+          "text": "S"
+        },
+        {
+          "id": "d",
+          "text": "U"
+        },
+        {
+          "id": "e",
+          "text": "Q"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Each letter increases by +4 positions: C(3) -> G(7) -> K(11) -> O(15) -> S(19).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-038",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next pair of letters in the series:\nAC, EG, IK, MO, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "PR"
+        },
+        {
+          "id": "b",
+          "text": "QS"
+        },
+        {
+          "id": "c",
+          "text": "RT"
+        },
+        {
+          "id": "d",
+          "text": "PS"
+        },
+        {
+          "id": "e",
+          "text": "QR"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "First letter advances by +4 (A, E, I, M -> Q); second letter advances by +4 (C, G, K, O -> S).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-039",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Find the next letter in the modular series:\nW, Z, C, F, ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "H"
+        },
+        {
+          "id": "b",
+          "text": "J"
+        },
+        {
+          "id": "c",
+          "text": "I"
+        },
+        {
+          "id": "d",
+          "text": "G"
+        },
+        {
+          "id": "e",
+          "text": "K"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Advances by +3 positions mod 26: W(23) -> Z(26) -> C(3) -> F(6) -> I(9).",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-letter-series",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-040",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a secret code, BARK is written as Dctm (each letter shifted forward by 2). How is LEAF written in the same code?",
+      "options": [
+        {
+          "id": "a",
+          "text": "MDZE"
+        },
+        {
+          "id": "b",
+          "text": "NFBH"
+        },
+        {
+          "id": "c",
+          "text": "OGDI"
+        },
+        {
+          "id": "d",
+          "text": "NGCH"
+        },
+        {
+          "id": "e",
+          "text": "NEBG"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Shift each letter forward by 2: L(+2)->N, E(+2)->G, A(+2)->C, F(+2)->H.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-coded-words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-041",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a secret code, COLD is written as EQNF. What word is coded as VJG?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SHE"
+        },
+        {
+          "id": "b",
+          "text": "TIE"
+        },
+        {
+          "id": "c",
+          "text": "THE"
+        },
+        {
+          "id": "d",
+          "text": "AND"
+        },
+        {
+          "id": "e",
+          "text": "YOU"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The code shifts forward by +2. To decode VJG, shift each letter backward by 2: V->T, J->H, G->E, giving THE.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-coded-words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-042",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "If LAMP is written as QXBJ and POST is written as JWKD, how is STOP written in the same code?",
+      "options": [
+        {
+          "id": "a",
+          "text": "KDWJ"
+        },
+        {
+          "id": "b",
+          "text": "JDWK"
+        },
+        {
+          "id": "c",
+          "text": "KWDJ"
+        },
+        {
+          "id": "d",
+          "text": "JKDW"
+        },
+        {
+          "id": "e",
+          "text": "DJWK"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "From the examples: S=K, T=D, O=W, P=J. Therefore STOP is coded as KDWJ.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-coded-words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-043",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a number code where A=1, B=2, C=3 up to Z=26, what is the code for the word BRAIN?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2-17-1-9-14"
+        },
+        {
+          "id": "b",
+          "text": "2-18-1-8-14"
+        },
+        {
+          "id": "c",
+          "text": "2-18-1-9-14"
+        },
+        {
+          "id": "d",
+          "text": "1-18-1-9-14"
+        },
+        {
+          "id": "e",
+          "text": "2-18-2-9-14"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "B=2, R=18, A=1, I=9, N=14. Thus 2-18-1-9-14.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-coded-words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-044",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a reverse cipher, PLANET is written as TENALP. How is BRIGHT written in this cipher?",
+      "options": [
+        {
+          "id": "a",
+          "text": "THGRIB"
+        },
+        {
+          "id": "b",
+          "text": "TGIRHB"
+        },
+        {
+          "id": "c",
+          "text": "TGHIRB"
+        },
+        {
+          "id": "d",
+          "text": "THGIRB"
+        },
+        {
+          "id": "e",
+          "text": "HTGIRB"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The word is written completely in reverse order: B-R-I-G-H-T becomes T-H-G-I-R-B.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-coded-words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-vr-045",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a code where each letter is replaced by its alphabet position (A=1, B=2 ... Z=26), which word corresponds to the code 7-18-15-23?",
+      "options": [
+        {
+          "id": "a",
+          "text": "GLOW"
+        },
+        {
+          "id": "b",
+          "text": "FROG"
+        },
+        {
+          "id": "c",
+          "text": "CROW"
+        },
+        {
+          "id": "d",
+          "text": "GROW"
+        },
+        {
+          "id": "e",
+          "text": "FLOW"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "7=G, 18=R, 15=O, 23=W. The word is GROW.",
+      "metadata": {
+        "subject": "verbal_reasoning",
+        "strand": "Verbal Reasoning",
+        "skill": "vr-coded-words",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-1"
+        ]
+      }
+    }
+  ],
+  "parameters": {
+    "scholarship-y6-vr-001": {
+      "id": "scholarship-y6-vr-001",
+      "skill": "vr-analogies",
+      "targetOption": "e",
+      "correctValue": "MOON",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-002": {
+      "id": "scholarship-y6-vr-002",
+      "skill": "vr-analogies",
+      "targetOption": "e",
+      "correctValue": "SYMPHONY",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-003": {
+      "id": "scholarship-y6-vr-003",
+      "skill": "vr-analogies",
+      "targetOption": "d",
+      "correctValue": "SCULPTOR",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-004": {
+      "id": "scholarship-y6-vr-004",
+      "skill": "vr-analogies",
+      "targetOption": "e",
+      "correctValue": "FOOD",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-005": {
+      "id": "scholarship-y6-vr-005",
+      "skill": "vr-analogies",
+      "targetOption": "a",
+      "correctValue": "FORK",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-006": {
+      "id": "scholarship-y6-vr-006",
+      "skill": "vr-analogies",
+      "targetOption": "e",
+      "correctValue": "BEES",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-007": {
+      "id": "scholarship-y6-vr-007",
+      "skill": "vr-analogies",
+      "targetOption": "c",
+      "correctValue": "STURDY",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-008": {
+      "id": "scholarship-y6-vr-008",
+      "skill": "vr-classification",
+      "targetOption": "e",
+      "correctValue": "CYLINDER",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-009": {
+      "id": "scholarship-y6-vr-009",
+      "skill": "vr-classification",
+      "targetOption": "a",
+      "correctValue": "DOLPHIN",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-010": {
+      "id": "scholarship-y6-vr-010",
+      "skill": "vr-classification",
+      "targetOption": "e",
+      "correctValue": "BAROMETER",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-011": {
+      "id": "scholarship-y6-vr-011",
+      "skill": "vr-classification",
+      "targetOption": "a",
+      "correctValue": "PROSPER",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-012": {
+      "id": "scholarship-y6-vr-012",
+      "skill": "vr-classification",
+      "targetOption": "b",
+      "correctValue": "COPPER",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-013": {
+      "id": "scholarship-y6-vr-013",
+      "skill": "vr-classification",
+      "targetOption": "b",
+      "correctValue": "SYDNEY",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-014": {
+      "id": "scholarship-y6-vr-014",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "a",
+      "correctValue": "PRUDENT",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-015": {
+      "id": "scholarship-y6-vr-015",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "c",
+      "correctValue": "DISCLOSE",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-016": {
+      "id": "scholarship-y6-vr-016",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "d",
+      "correctValue": "ENERGETIC",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-017": {
+      "id": "scholarship-y6-vr-017",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "b",
+      "correctValue": "ABUNDANCE",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-018": {
+      "id": "scholarship-y6-vr-018",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "a",
+      "correctValue": "ESTEEMED",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-019": {
+      "id": "scholarship-y6-vr-019",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "e",
+      "correctValue": "CONVERGENT",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-020": {
+      "id": "scholarship-y6-vr-020",
+      "skill": "vr-synonyms-antonyms",
+      "targetOption": "a",
+      "correctValue": "ANXIOUS",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-021": {
+      "id": "scholarship-y6-vr-021",
+      "skill": "vr-word-relationships",
+      "targetOption": "b",
+      "correctValue": "PROOF",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-022": {
+      "id": "scholarship-y6-vr-022",
+      "skill": "vr-word-relationships",
+      "targetOption": "a",
+      "correctValue": "TENDER",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-023": {
+      "id": "scholarship-y6-vr-023",
+      "skill": "vr-word-relationships",
+      "targetOption": "e",
+      "correctValue": "POST",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-024": {
+      "id": "scholarship-y6-vr-024",
+      "skill": "vr-word-relationships",
+      "targetOption": "d",
+      "correctValue": "CLUB",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-025": {
+      "id": "scholarship-y6-vr-025",
+      "skill": "vr-word-relationships",
+      "targetOption": "b",
+      "correctValue": "BEAR",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-026": {
+      "id": "scholarship-y6-vr-026",
+      "skill": "vr-word-relationships",
+      "targetOption": "c",
+      "correctValue": "LIGHT",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-vr-027": {
+      "id": "scholarship-y6-vr-027",
+      "skill": "vr-sentence-logic",
+      "targetOption": "a",
+      "correctValue": "All whales breathe air.",
+      "solver": "syllogism",
+      "solverParams": {
+        "variables": [
+          "W",
+          "M",
+          "A"
+        ],
+        "premises": [
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "M"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "A"
+            }
+          },
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "W"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "M"
+            }
+          },
+          {
+            "kind": "var",
+            "name": "W"
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "All whales breathe air.",
+            "expr": {
+              "kind": "var",
+              "name": "A"
+            }
+          },
+          {
+            "id": "Some whales do not breathe air.",
+            "expr": {
+              "kind": "not",
+              "expr": {
+                "kind": "var",
+                "name": "A"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scholarship-y6-vr-028": {
+      "id": "scholarship-y6-vr-028",
+      "skill": "vr-sentence-logic",
+      "targetOption": "d",
+      "correctValue": "It did not snow overnight.",
+      "solver": "syllogism",
+      "solverParams": {
+        "variables": [
+          "P",
+          "Q"
+        ],
+        "premises": [
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "P"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "Q"
+            }
+          },
+          {
+            "kind": "not",
+            "expr": {
+              "kind": "var",
+              "name": "Q"
+            }
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "It did not snow overnight.",
+            "expr": {
+              "kind": "not",
+              "expr": {
+                "kind": "var",
+                "name": "P"
+              }
+            }
+          },
+          {
+            "id": "It snowed heavily overnight.",
+            "expr": {
+              "kind": "var",
+              "name": "P"
+            }
+          }
+        ]
+      }
+    },
+    "scholarship-y6-vr-029": {
+      "id": "scholarship-y6-vr-029",
+      "skill": "vr-sentence-logic",
+      "targetOption": "b",
+      "correctValue": "Anika wears a blue badge.",
+      "solver": "syllogism",
+      "solverParams": {
+        "variables": [
+          "C",
+          "B"
+        ],
+        "premises": [
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "C"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "B"
+            }
+          },
+          {
+            "kind": "var",
+            "name": "C"
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "Anika wears a blue badge.",
+            "expr": {
+              "kind": "var",
+              "name": "B"
+            }
+          },
+          {
+            "id": "Anika does not wear a blue badge.",
+            "expr": {
+              "kind": "not",
+              "expr": {
+                "kind": "var",
+                "name": "B"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scholarship-y6-vr-030": {
+      "id": "scholarship-y6-vr-030",
+      "skill": "vr-sentence-logic",
+      "targetOption": "d",
+      "correctValue": "A trumpet requires air to produce sound.",
+      "solver": "syllogism",
+      "solverParams": {
+        "variables": [
+          "B",
+          "A",
+          "T"
+        ],
+        "premises": [
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "B"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "A"
+            }
+          },
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "T"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "B"
+            }
+          },
+          {
+            "kind": "var",
+            "name": "T"
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "A trumpet requires air to produce sound.",
+            "expr": {
+              "kind": "var",
+              "name": "A"
+            }
+          },
+          {
+            "id": "A trumpet produces sound without air.",
+            "expr": {
+              "kind": "not",
+              "expr": {
+                "kind": "var",
+                "name": "A"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scholarship-y6-vr-031": {
+      "id": "scholarship-y6-vr-031",
+      "skill": "vr-sentence-logic",
+      "targetOption": "b",
+      "correctValue": "The osprey possesses sharp talons.",
+      "solver": "syllogism",
+      "solverParams": {
+        "variables": [
+          "R",
+          "T",
+          "O"
+        ],
+        "premises": [
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "R"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "T"
+            }
+          },
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "O"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "R"
+            }
+          },
+          {
+            "kind": "var",
+            "name": "O"
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "The osprey possesses sharp talons.",
+            "expr": {
+              "kind": "var",
+              "name": "T"
+            }
+          },
+          {
+            "id": "The osprey does not have sharp talons.",
+            "expr": {
+              "kind": "not",
+              "expr": {
+                "kind": "var",
+                "name": "T"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scholarship-y6-vr-032": {
+      "id": "scholarship-y6-vr-032",
+      "skill": "vr-sentence-logic",
+      "targetOption": "c",
+      "correctValue": "The garden sprinkler did not run.",
+      "solver": "syllogism",
+      "solverParams": {
+        "variables": [
+          "S",
+          "W"
+        ],
+        "premises": [
+          {
+            "kind": "implies",
+            "antecedent": {
+              "kind": "var",
+              "name": "S"
+            },
+            "consequent": {
+              "kind": "var",
+              "name": "W"
+            }
+          },
+          {
+            "kind": "not",
+            "expr": {
+              "kind": "var",
+              "name": "W"
+            }
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "The garden sprinkler did not run.",
+            "expr": {
+              "kind": "not",
+              "expr": {
+                "kind": "var",
+                "name": "S"
+              }
+            }
+          },
+          {
+            "id": "The garden sprinkler ran for hours.",
+            "expr": {
+              "kind": "var",
+              "name": "S"
+            }
+          }
+        ]
+      }
+    },
+    "scholarship-y6-vr-033": {
+      "id": "scholarship-y6-vr-033",
+      "skill": "vr-letter-series",
+      "targetOption": "d",
+      "correctValue": "N",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "B",
+          "E",
+          "H",
+          "K"
+        ]
+      }
+    },
+    "scholarship-y6-vr-034": {
+      "id": "scholarship-y6-vr-034",
+      "skill": "vr-letter-series",
+      "targetOption": "e",
+      "correctValue": "R",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "Z",
+          "X",
+          "V",
+          "T"
+        ]
+      }
+    },
+    "scholarship-y6-vr-035": {
+      "id": "scholarship-y6-vr-035",
+      "skill": "vr-letter-series",
+      "targetOption": "c",
+      "correctValue": "Y",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "A",
+          "D",
+          "I",
+          "P"
+        ]
+      }
+    },
+    "scholarship-y6-vr-036": {
+      "id": "scholarship-y6-vr-036",
+      "skill": "vr-letter-series",
+      "targetOption": "b",
+      "correctValue": "EV",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "AZ",
+          "BY",
+          "CX",
+          "DW"
+        ]
+      }
+    },
+    "scholarship-y6-vr-037": {
+      "id": "scholarship-y6-vr-037",
+      "skill": "vr-letter-series",
+      "targetOption": "c",
+      "correctValue": "S",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "C",
+          "G",
+          "K",
+          "O"
+        ]
+      }
+    },
+    "scholarship-y6-vr-038": {
+      "id": "scholarship-y6-vr-038",
+      "skill": "vr-letter-series",
+      "targetOption": "b",
+      "correctValue": "QS",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "AC",
+          "EG",
+          "IK",
+          "MO"
+        ]
+      }
+    },
+    "scholarship-y6-vr-039": {
+      "id": "scholarship-y6-vr-039",
+      "skill": "vr-letter-series",
+      "targetOption": "c",
+      "correctValue": "I",
+      "solver": "letter_series",
+      "solverParams": {
+        "sequence": [
+          "W",
+          "Z",
+          "C",
+          "F"
+        ]
+      }
+    },
+    "scholarship-y6-vr-040": {
+      "id": "scholarship-y6-vr-040",
+      "skill": "vr-coded-words",
+      "targetOption": "d",
+      "correctValue": "NGCH",
+      "solver": "coded_words",
+      "solverParams": {
+        "type": "caesar_shift",
+        "examples": [
+          {
+            "plain": "BARK",
+            "coded": "DCTM"
+          }
+        ],
+        "target": "LEAF",
+        "operation": "encode"
+      }
+    },
+    "scholarship-y6-vr-041": {
+      "id": "scholarship-y6-vr-041",
+      "skill": "vr-coded-words",
+      "targetOption": "c",
+      "correctValue": "THE",
+      "solver": "coded_words",
+      "solverParams": {
+        "type": "caesar_shift",
+        "examples": [
+          {
+            "plain": "COLD",
+            "coded": "EQNF"
+          }
+        ],
+        "target": "VJG",
+        "operation": "decode"
+      }
+    },
+    "scholarship-y6-vr-042": {
+      "id": "scholarship-y6-vr-042",
+      "skill": "vr-coded-words",
+      "targetOption": "a",
+      "correctValue": "KDWJ",
+      "solver": "coded_words",
+      "solverParams": {
+        "type": "substitution",
+        "examples": [
+          {
+            "plain": "LAMP",
+            "coded": "QXBJ"
+          },
+          {
+            "plain": "POST",
+            "coded": "JWKD"
+          }
+        ],
+        "target": "STOP",
+        "operation": "encode"
+      }
+    },
+    "scholarship-y6-vr-043": {
+      "id": "scholarship-y6-vr-043",
+      "skill": "vr-coded-words",
+      "targetOption": "c",
+      "correctValue": "2-18-1-9-14",
+      "solver": "coded_words",
+      "solverParams": {
+        "type": "number_substitution",
+        "target": "BRAIN",
+        "operation": "encode"
+      }
+    },
+    "scholarship-y6-vr-044": {
+      "id": "scholarship-y6-vr-044",
+      "skill": "vr-coded-words",
+      "targetOption": "d",
+      "correctValue": "THGIRB",
+      "solver": "coded_words",
+      "solverParams": {
+        "type": "reverse",
+        "target": "BRIGHT",
+        "operation": "encode"
+      }
+    },
+    "scholarship-y6-vr-045": {
+      "id": "scholarship-y6-vr-045",
+      "skill": "vr-coded-words",
+      "targetOption": "d",
+      "correctValue": "GROW",
+      "solver": "coded_words",
+      "solverParams": {
+        "type": "number_substitution",
+        "target": "7-18-15-23",
+        "operation": "decode"
+      }
+    }
+  }
+}
