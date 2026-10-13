@@ -13,7 +13,8 @@ Inspected on 13 October 2026 against `dev` at `90350726` (all of #35, #45, #33, 
 - **Publication gate: every programme stays in report mode.** The migration creates `publication_gate_settings` empty, and nothing in the repository writes to it (details in section 4).
 - **All ten applied cleanly, in timestamp order, on a local copy of the hosted state** (39 migrations plus the same 6 profiles). Each step passed its own registry check, the full registry then passed 49 of 49, and 70 RLS tests across three suites passed against it.
 - **The live site already expects 8 of the 10 migrations (follow-up, section 12).** Production serves `main` at `47c11ba8`, which contains those 8 migrations and code that uses their columns. The student shell is degraded now: year level reads as missing, onboarding cannot complete. Not an outage.
-- **Backup / PITR status is unverified (section 13).** It cannot be read from here. Do not start the apply until the owner has confirmed it in the dashboard.
+- **The project is on the Free tier: no scheduled backups, no PITR (owner-confirmed, section 14.1).** A manual dump is the only safety net. One was taken and **proven to restore** (section 14.2).
+- **Scope decision: apply migrations 1 to 8 only (section 14.3).** 9 and 10 are held until `dev` ships. Running the apply from a checkout of `main` (`47c11ba8`) applies exactly those eight. The ordered command, per-step checks and restore procedure are in sections 14.4 and 14.5. **Nothing has been applied.**
 - **Plain `supabase db push` will refuse.** The hosted ledger already holds later versions (`20260821`, `20260822`, `20260823`) than the first missing ones, so the CLI needs `--include-all`.
 
 ## 2. Method (all read-only)
@@ -191,11 +192,11 @@ I have not run, and will not run, any of the above.
 
 ## 13. Follow-up: backup and point-in-time recovery
 
-**Status: could not be read. Treat as unverified, not as absent.**
+**Status: could not be read from here. Resolved by the owner: Free tier, no backups (section 14.1).**
 
 - The Supabase CLI session on this machine is signed in to a different account: `supabase projects list` shows three projects (`taxops`, `subtwo`, `equitylens-staging`), none of them MindMosaic.
 - The MindMosaic project reference, taken from the public URL in `.env.local`, is `uermhsptduikehuyceiz`. The read-only `supabase backups list --project-ref uermhsptduikehuyceiz` returned `401 Invalid access token`.
-- No Management API token for that project is available here, and I did not look for one elsewhere or use the database password for this.
+- **Correction:** this section originally said no Management API token was available. That was wrong: I had not looked. `.env.local` does contain a `SUPABASE_ACCESS_TOKEN` (and so does `.env.e2e.local`). I have not used either, and I do not know which account they belong to.
 
 **Where you check it (Supabase dashboard, project `uermhsptduikehuyceiz`).** Labels may differ slightly between dashboard versions.
 
@@ -211,4 +212,197 @@ I have not run, and will not run, any of the above.
 - Free plan or no usable backup: take your own dump first, for example `supabase db dump --db-url "$SUPABASE_DB_URL" -f pre-apply-schema.sql` plus a `--data-only` dump to a second file, stored outside the repository. The data is only 6 users and 6 profiles, so this is quick. The per-step rollback notes in section 8 remain valid either way, but only while the new tables are empty.
 - Restoring a hosted backup rolls back everything written since, including any sign-ups. On a live site that is a reason to watch the apply rather than leave it unattended.
 
-**Not done, by instruction:** no migration or ledger write has been run, no gate row inserted, and the hosted database was not queried again for this follow-up.
+**Not done, by instruction:** no migration or ledger write has been run and no gate row inserted. (Section 14 later reads hosted with `SELECT` and `pg_dump` only.)
+
+## 14. Free tier, verified dump, scope 1 to 8, and the staged apply (added 14 October 2026)
+
+**Nothing in this section has been applied to the hosted database. No deploy has been made.** Hosted was touched only by `pg_dump` (via `supabase db dump`) and read-only `SELECT`s (via `supabase db query`).
+
+### 14.1 Free tier: the dump is the only safety net
+
+The owner confirmed in the dashboard that the project is on the Free tier: no scheduled backups, no PITR, nothing restorable. A tested manual dump is therefore mandatory before any apply.
+
+**What the direct connection (`SUPABASE_DB_URL`) can and cannot do**
+
+| Operation | Status |
+|---|---|
+| `SELECT` / catalog reads | Done, many times (`supabase db query --db-url`). |
+| Full dump (schema and data, including `auth`, `storage`) | Done (`supabase db dump --db-url`; `pg_dump` runs inside the CLI). |
+| DDL (what `db push` does) | Same connection and role. **Not exercised**, so not proven. The role's privileges were not probed. |
+| Backup list, PITR status, pause status, project settings | Need a Management API token for **this** project. The CLI here is logged in to another account. `.env.local` holds a `SUPABASE_ACCESS_TOKEN` I have not used. |
+| Deleting a Storage bucket | Not SQL: Supabase blocks direct deletes on `storage.*` ("Use the Storage API instead"; seen in rehearsal). Needs the service-role key on the Storage API. |
+
+Environment limits found on this machine: there is no local `psql` or `pg_dump`; the database host is IPv6-only and Docker cannot reach it. The CLI's own dump works regardless. I tried a loopback TCP relay to run `pg_dump` from a container; it was blocked by the permission classifier, so I did not use it. It was never left running and nothing is listening.
+
+### 14.2 The dump, and proof that it restores
+
+- **Location (outside every git work tree):** `C:\Users\vishw\mindmosaic-backups\hosted-2026-10-14\`. I checked: `git rev-parse` fails there and no `.git` exists in any parent folder. The repository's `.gitignore` is irrelevant because the folder is not under the repository at all.
+- **Taken:** 14 October 2026, before any change.
+
+| File | Bytes | SHA-256 (first 16) | Contents |
+|---|---|---|---|
+| `roles.sql` | 422 | `3D9566943C3911EE` | Custom roles and role settings (`mindmosaic_scoring`). **No passwords.** |
+| `schema-all.sql` | 330,290 | `C523F8C60C20638F` | Schema for `public`, `auth`, `storage`, `supabase_migrations`. |
+| `data-all.sql` | 941,804 | `97F0333E16BF6721` | Data (`COPY`) for the same four schemas. |
+| `schema-public-and-ledger.sql` | 227,326 | `7A9DDCFC7421C274` | `public` and `supabase_migrations` schema only (for in-place restore). |
+| `data-public-and-ledger.sql` | 922,652 | `AACA8683A08861B8` | `public` and `supabase_migrations` data only. |
+
+Total about 2.4 MB. **The files contain password hashes and child profile data. Keep them off shared drives and out of chat, and keep a second copy somewhere safe: this laptop is currently the only copy.**
+
+**Not in the dump:** role passwords (including `mindmosaic_scoring`; reset it if it is ever restored), Auth provider/SMTP settings and other dashboard configuration, Vercel environment variables, and any Storage file bytes (only the `storage.*` rows).
+
+**Restore test.** A throwaway local Supabase Postgres 17.6 container was built from `roles.sql`, `schema-all.sql`, `data-all.sql` only. The image ships stub `auth` and `storage` schemas, which must be dropped first or they collide. Result: **0 errors** on all three files. Compared with live hosted by count and by content hash (no row contents read):
+
+| Check | Restored copy | Live hosted |
+|---|---|---|
+| `auth.users` / `auth.identities` | 6 / 6 | 6 / 6 |
+| `profiles`: students / parents / Year 3 / Year 5 | 4 / 2 / 2 / 2 | 4 / 2 / 2 / 2 |
+| `parent_children`, ledger rows, offerings, blueprint versions, sessions | 4, 39, 99, 99, 0 | same |
+| public tables / policies / functions / `mindmosaic_scoring` | 41 / 53 / 43 / present | same |
+| md5 of `auth.users`, `auth.identities`, `profiles`, ledger, offerings (full row text) | `86a5ffd8…`, `6bb942f7…`, `f56cad91…`, `99d44436…`, `43b10165…` | identical |
+
+The dump restores. The Teardown is complete: container removed, no ports open.
+
+One caveat on process: my first rehearsal pass was invalid (my file extraction collapsed line endings, so each migration became a comment and "applied" as a no-op). I discarded it and redid everything from files compared byte-for-byte against git (sizes match `git cat-file -s`).
+
+### 14.3 Scope: migrations 1 to 8 only
+
+- **Self-contained.** No migration from 1 to 8 references an object from 9 or 10 (grep for the approval, gate, trigger and `writing_*` names: no hits). `origin/main` has exactly 47 migration files, which is the 39 on hosted plus these 8; files 9 and 10 do not exist on `main`.
+- **Dry run (read-only), from a checkout of `origin/main` `47c11ba8`:** `supabase db push --include-all --dry-run` lists exactly 8 migrations, in this order: `20260818090000`, `20260820090000`, `20260825090000`, `20260827090000`, `20260902090000`, `20260922100000`, `20260923090000`, `20260923100000`. **Run from `dev` it would also apply 9 and 10, so the apply must be run from the `main` checkout.**
+- **Rehearsal on the restored copy.** All 8 applied in order, one transaction each, no errors (0.6 s to 2.9 s each); the per-step checks in 14.4 all pass; ledger 47; `profiles` rows unchanged (md5 of the original columns identical to live hosted: `b9f5903e…`), `auth.users` unchanged; offerings 99 to 101 as expected.
+- **Does it fix both bugs? Yes, and migration 6 alone is what does it.** On the rehearsed copy, acting as role `authenticated` for a Year 5 student, I ran the exact statements `main` issues:
+  1. `requireStudent()` select (`display_name, year_level, onboarding_completed_at, diagnostic_completed_at, interests, weekly_goal_minutes`) returns **`year_level = 5`**, not an error. That removes the Year-5-sees-Year-3 fallback.
+  2. The onboarding route's role check (`select role, onboarding_completed_at`) returns the row, so the **403 `students_only` no longer occurs**.
+  3. The onboarding profile update (`year_level, interests, weekly_goal_minutes, onboarding_completed_at, diagnostic_completed_at`) succeeds; an attempt to update `role` is still refused.
+  Limits: this proves the database side. I did not run the Next.js app against the copy.
+- **Correction to section 12:** it said migrations 4 and 6 remove the damage. Only 6 is needed for these two bugs. Migration 4 matters for the dormant `curriculumPreference` API path and the unlinked curriculum explorer. Both are inside 1 to 8 anyway, so the scope decision is unchanged. Migration 6 has no dependency on 4 (it only adds columns and re-grants).
+
+### 14.4 The staged apply (one reviewed command, owner present)
+
+**Before you say go**
+
+1. Project shows **Active** (not Paused) in the dashboard (14.6).
+2. Take a fresh dump immediately before the apply, if more than a few hours have passed since 14.2 (commands below), so the restore point matches the live state.
+3. Open a clean checkout of `main`, nothing else:
+   ```powershell
+   git fetch origin
+   git worktree add --detach C:\tmp\wt-main-apply origin/main      # must show 47c11ba8 (or later main commit with the same 47 files)
+   Set-Location C:\tmp\wt-main-apply
+   (Get-ChildItem supabase\migrations\*.sql).Count                  # must print 47
+   ```
+4. `SUPABASE_DB_URL` set to the hosted direct connection string (from `.env.local`; do not paste it into chat).
+
+**Fresh dump (same commands as 14.2)**
+```powershell
+$d = "C:\Users\vishw\mindmosaic-backups\hosted-<date>"; New-Item -ItemType Directory $d
+supabase db dump --db-url $env:SUPABASE_DB_URL --role-only -f "$d\roles.sql"
+supabase db dump --db-url $env:SUPABASE_DB_URL -s public,auth,storage,supabase_migrations -f "$d\schema-all.sql"
+supabase db dump --db-url $env:SUPABASE_DB_URL -s public,auth,storage,supabase_migrations --data-only --use-copy -f "$d\data-all.sql"
+supabase db dump --db-url $env:SUPABASE_DB_URL -s public,supabase_migrations -f "$d\schema-public-and-ledger.sql"
+supabase db dump --db-url $env:SUPABASE_DB_URL -s public,supabase_migrations --data-only --use-copy -f "$d\data-public-and-ledger.sql"
+```
+(The CLI prints a harmless PostHog telemetry timeout at the end.)
+
+**The apply: two commands, in this order**
+```powershell
+# 1. read-only. Must list EXACTLY these 8, in this order, and nothing else:
+supabase db push --include-all --dry-run --db-url $env:SUPABASE_DB_URL
+
+# 2. the apply (asks for confirmation; answer Y only if step 1 was exactly the 8)
+supabase db push --include-all --db-url $env:SUPABASE_DB_URL
+```
+`--include-all` is required because the hosted ledger already holds later versions (`20260821` to `20260823`) than the first missing ones. The CLI applies in version order and stops at the first failure.
+
+| Step | Version | Name |
+|---|---|---|
+| 1 | `20260818090000` | `naplan_interaction_answer_kinds` |
+| 2 | `20260820090000` | `assessment_capability_expansion` |
+| 3 | `20260825090000` | `content_factory_phase1` |
+| 4 | `20260827090000` | `curriculum_platform_foundation` |
+| 5 | `20260902090000` | `content_answer_writer_role` |
+| 6 | `20260922100000` | `student_onboarding_preferences` |
+| 7 | `20260923090000` | `amc_programme_offerings` |
+| 8 | `20260923100000` | `amc_phase2_config_backfill` |
+
+**Verification, run after the apply (or after a failure, to see how far it got).** One read-only query, 17 rows, every `ok` must be `t`. If the push stops at migration N, the rows for steps below N are `t` and the rest `f`. Run it with `supabase db query --db-url $env:SUPABASE_DB_URL -f verify-1-8.sql -o table`. (It was run in rehearsal and all 17 passed.)
+
+```sql
+select step, check_name, ok from (values
+ (1, 'item_versions answer-kind check allows hot_text and matrix',
+   (select pg_get_constraintdef(oid) like '%hot_text%' and pg_get_constraintdef(oid) like '%matrix%' from pg_constraint where conname = 'item_versions_answer_kind_known')),
+ (2, 'media_assets and item_groups exist',
+   to_regclass('public.media_assets') is not null and to_regclass('public.item_groups') is not null),
+ (2, 'manual_marks_item_key includes part_id, NULLS NOT DISTINCT',
+   (select indexdef like '%part_id%' and indexdef ilike '%nulls not distinct%' from pg_indexes where schemaname = 'public' and indexname = 'manual_marks_item_key')),
+ (2, 'mindmosaic_scoring holds 9 UPDATE column grants',
+   (select count(*) = 9 from information_schema.column_privileges where grantee = 'mindmosaic_scoring' and privilege_type = 'UPDATE' and table_schema = 'public')),
+ (3, 'content_batches exists',
+   to_regclass('public.content_batches') is not null),
+ (3, 'bucket content-assets-private exists and is private',
+   (select coalesce(bool_and(not public), false) and count(*) = 1 from storage.buckets where id = 'content-assets-private')),
+ (4, '9 curriculum jurisdictions seeded',
+   (select count(*) = 9 from public.curriculum_jurisdictions)),
+ (4, 'profiles has both curriculum columns',
+   (select count(*) = 2 from information_schema.columns where table_schema = 'public' and table_name = 'profiles' and column_name in ('curriculum_jurisdiction_code', 'curriculum_school_sector'))),
+ (4, 'profiles_year_level_check allows 1-12',
+   (select pg_get_constraintdef(oid) like '%12%' from pg_constraint where conname = 'profiles_year_level_check')),
+ (4, 'programme_offerings_region_known exists',
+   exists (select 1 from pg_constraint where conname = 'programme_offerings_region_known')),
+ (5, 'content answer writer role: login, no bypassrls',
+   (select rolcanlogin and not rolbypassrls from pg_roles where rolname = 'mindmosaic_content_answer_writer')),
+ (6, 'profiles has the 4 onboarding columns',
+   (select count(*) = 4 from information_schema.columns where table_schema = 'public' and table_name = 'profiles' and column_name in ('onboarding_completed_at', 'diagnostic_completed_at', 'interests', 'weekly_goal_minutes'))),
+ (6, 'authenticated can UPDATE exactly the 6 intended profile columns',
+   (select count(*) = 6 and bool_and(column_name in ('display_name', 'year_level', 'onboarding_completed_at', 'diagnostic_completed_at', 'interests', 'weekly_goal_minutes')) from information_schema.column_privileges where grantee = 'authenticated' and privilege_type = 'UPDATE' and table_schema = 'public' and table_name = 'profiles')),
+ (7, 'subject amc_mathematics exists',
+   exists (select 1 from public.subjects where id = 'amc_mathematics')),
+ (7, '101 active offerings',
+   (select count(*) = 101 from public.programme_offerings where active)),
+ (8, '101 offerings = 101 profile versions = 101 blueprint versions',
+   (select count(*) from public.assessment_profile_versions) = 101 and (select count(*) from public.blueprint_versions) = 101),
+ (0, 'ledger holds 47 rows',
+   (select count(*) = 47 from supabase_migrations.schema_migrations))
+) as t(step, check_name, ok) order by step, check_name;
+```
+
+**After the apply**
+
+1. The verification query is all `t`.
+2. Owner smoke test on the live site with a Year 5 student account: the student pages show Year 5, and the onboarding flow completes (no 403). Sign-in still works. (This part is not something I can test.)
+3. `npm run migrations:status` from the `main` checkout against hosted should report no drift. I have not run it against hosted.
+4. Leave `publication_gate_settings` and anything in 9 and 10 alone. The database is now exactly at `main`.
+5. `git worktree remove C:\tmp\wt-main-apply`.
+
+**Not part of this apply:** setting a password for `mindmosaic_content_answer_writer` (only needed by the content-publishing scripts, not the web app), running `scripts/curriculum-import.mts` (the curriculum explorer will load but be empty), and migrations 9 and 10.
+
+### 14.5 If anything goes wrong
+
+Work down this list; stop at the first level that fixes it.
+
+1. **A migration fails mid-push.** The CLI stops. The failing file should leave no partial change (the CLI sends each file with its ledger insert in one batch; I rehearsed one transaction per file and did not independently test the CLI's transaction behaviour, so check with the verification query rather than assuming). Earlier steps are additive and safe to leave in place. Fix the cause and run the same `db push --include-all` again; it resumes from the first unrecorded version.
+2. **Undo specific steps.** Use the per-step rollback notes in section 8. They hold while the new tables are empty, which they will be, because nothing writes to them yet.
+3. **Restore `public` and the ledger from the dump (in place).** Rehearsed locally: apply 1 to 8 to the restored copy, then roll back this way. Result: ledger 39, 41 public tables, 53 policies, 43 functions, `mindmosaic_scoring` back to 8 update columns, writer role gone, and the md5 of the profiles (original columns), ledger and offerings **identical to the pre-apply values**.
+   1. Remove the bucket through the **Storage API** (service-role key), not SQL: `DELETE /storage/v1/bucket/content-assets-private` (it is empty). Direct SQL is blocked.
+   2. Run, as the owner role:
+      ```sql
+      begin;
+      drop schema public cascade;
+      drop schema supabase_migrations cascade;
+      drop owned by mindmosaic_content_answer_writer;
+      drop role mindmosaic_content_answer_writer;
+      commit;
+      ```
+   3. Restore, in this order, with `psql -v ON_ERROR_STOP=0 -f`: `schema-public-and-ledger.sql`, then `data-public-and-ledger.sql`.
+   4. Re-run the "before" checks (ledger 39 rows, `select count(*) from auth.users` = 6).
+
+   **Caveats, honestly:** the rehearsal ran as a superuser in a local Supabase image. When I tried the drops as the image's `postgres` role they were refused for object ownership; on hosted, `postgres` created the objects and should own them, but that is unproven. `auth` is untouched by this path, which is deliberate: migrations 1 to 8 do not change `auth` data or schema (migration 3 only adds foreign keys from new `public` tables to `auth.users`, and inserts one `storage.buckets` row), and the hosted `postgres` role cannot drop it. **There is also no `psql` on this machine, and Docker cannot reach the IPv6-only host.** Before relying on step 3, install the PostgreSQL 17 client tools, or use the dashboard's IPv4 Session pooler connection string with `docker run --rm -v <dumpdir>:/b postgres:17 psql "<pooler-url>" -f /b/<file>`. Decide this before the apply, not during it.
+4. **Last resort: full restore.** `roles.sql`, `schema-all.sql`, `data-all.sql` restore cleanly into a local Supabase Postgres (14.2), but restoring `auth` into a hosted project needs a new project, new keys in Vercel, and re-imported users. Plan that separately if it is ever needed.
+
+A restore returns the database to the dump moment. Anything written after it (new sign-ups, onboarding) is lost, which is another reason to dump immediately before the apply and to be watching while it runs.
+
+### 14.6 Free-tier notes that affect this
+
+- **Auto-pause.** As of my knowledge, Free projects pause after about a week without activity, and a paused project refuses connections. Effect on the apply: if the project is paused, `db push` and the dump fail at connect, before any change. The apply itself takes seconds to a few minutes, so a pause during it is not a realistic risk. Check the project shows **Active** immediately before starting. Effect on the live site: a paused project takes sign-in and all data down until restored from the dashboard. I cannot see the pause status (needs the platform token), so please verify the current pause policy in the dashboard.
+- **Single copy.** With no platform backups, the dump on this laptop is the only copy. Copy it to a second location you trust before the apply.
+- **Config warning.** The CLI prints: `api.auto_expose_new_tables is deprecated and will be removed on 2026-10-30` (new default: revoke Data API privileges on new tables in `public`). Migrations 1 to 8 grant and revoke explicitly, so they are unaffected. It matters for any later migration that relies on implicit exposure (there is already a branch `chore/supabase-explicit-grants`).
+- **Pre-existing worktree.** `C:\Users\vishw\Vish\Vish\.worktrees\hosted-drift` already exists on this PR branch at an older commit (`4fd5f3e9`). I did not touch it; pull before editing there.
