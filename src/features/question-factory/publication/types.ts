@@ -1,4 +1,5 @@
 import type { Question } from "@/schemas/question.schema";
+import type { HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
 
 import type { PublicationIssueCode } from "../config";
 import type { GeneratorAdapter, ReviewRecord } from "../provenance";
@@ -54,6 +55,7 @@ export interface PublicationManifest {
   readonly noChainRecovered?: true;
   /** Recorded human-reviewer signature authorizing publication. */
   readonly approvedBy?: string;
+  readonly humanApproval?: HumanPublicationApproval;
 }
 
 export type PublicationOutcome =

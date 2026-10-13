@@ -31,6 +31,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { programmeIdForQuestion, publicationGateMode } from "@/features/content-governance/gate-config";
+import { canonicalQuestionHash } from "@/features/content-governance/publication-integrity";
 import { normaliseIdentity } from "@/features/question-factory/config/identity-normalisation";
 import {
   MANIFEST_SCHEMA_VERSION_CURRENT,
@@ -38,6 +40,7 @@ import {
 } from "@/features/question-factory/publication/manifest-schema";
 import type { Question } from "@/schemas/question.schema";
 import { getExamBank, getPublishedQuestionCount, getPublishedTopicCount } from "@/server/exam-bank";
+import { getPublicationEligibility } from "@/server/publication-evidence";
 
 /* ------------------------------------------------------------------ */
 /* Paths                                                               */
@@ -316,20 +319,6 @@ function classifyApproval(manifest: Manifest | undefined): ApprovalClass {
 /* ------------------------------------------------------------------ */
 
 /** Key-order-independent JSON, so a re-serialised question still matches. */
-function canonicalise(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalise);
-  if (value === null || typeof value !== "object") return value;
-  return Object.fromEntries(
-    Object.entries(value as Record<string, unknown>)
-      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
-      .map(([key, child]) => [key, canonicalise(child)]),
-  );
-}
-
-function canonicalJson(value: unknown): string {
-  return JSON.stringify(canonicalise(value));
-}
-
 /* ------------------------------------------------------------------ */
 /* Report                                                              */
 /* ------------------------------------------------------------------ */
@@ -750,7 +739,9 @@ for (const [id, list] of manifestById) {
   const served = publishedById.get(id);
   const manifest = list[0];
   if (served === undefined || manifest?.question === undefined) continue;
-  if (canonicalJson(manifest.question) !== canonicalJson(served)) contentMismatches.push(id);
+  try {
+    if (canonicalQuestionHash(manifest.question) !== canonicalQuestionHash(served)) contentMismatches.push(id);
+  } catch { contentMismatches.push(id); }
 }
 
 table(
@@ -889,11 +880,42 @@ table(
   [...manifestEras.entries()].sort((a, b) => b[1] - a[1]).map(([era, count]) => [era, count] as Cell[]),
 );
 
-if (humanApproved === 0) {
-  flagDrift(
-    `0 of ${published.length} served-as-published questions carry evidence of human approval.`,
-  );
+/* ---------- 7. Publication approval ---------- */
+
+heading("7. PUBLICATION APPROVAL");
+const publication = getPublicationEligibility();
+const awaitingApproval = publication.excluded.filter((item) => item.reason === "awaiting_human_approval");
+const excludedByReason = new Map<string, number>();
+for (const item of publication.excluded) {
+  excludedByReason.set(item.reason, (excludedByReason.get(item.reason) ?? 0) + 1);
 }
+table(["state", "questions"], [
+  ["approved, revision-bound", publication.approvals.size],
+  ["awaiting human approval", awaitingApproval.length],
+  ["excluded total", publication.excluded.length],
+  ["integrity problems", publication.problems.length],
+]);
+if (excludedByReason.size) {
+  console.log("\n  Excluded by reason:");
+  table(["reason", "questions"], [...excludedByReason].sort(([a], [b]) => a.localeCompare(b)));
+}
+const programmeApproval = new Map<string, { authored: number; approved: number }>();
+for (const question of published) {
+  const id = programmeIdForQuestion(question);
+  const row = programmeApproval.get(id) ?? { authored: 0, approved: 0 };
+  row.authored++;
+  if (publication.approvals.has(question.id)) row.approved++;
+  programmeApproval.set(id, row);
+}
+console.log("\n  Programme gate modes:");
+table(
+  ["programme", "mode", "approved", "authored", "readiness"],
+  [...programmeApproval].sort(([a], [b]) => a.localeCompare(b)).map(([id, row]) => {
+    const pct = row.authored > 0 ? `${((row.approved / row.authored) * 100).toFixed(1)}%` : "0.0%";
+    return [id, publicationGateMode(id), row.approved, row.authored, pct];
+  }),
+);
+for (const problem of publication.problems) flagDrift(`Publication integrity: ${problem}`);
 
 /* ---------- Drift summary ---------- */
 
@@ -911,9 +933,6 @@ if (drift.length === 0) {
 }
 
 console.log("");
-note(
-  "This script is read-only and reports measured state. It exits 0 even when " +
-    "drift is found, so it can be run freely in any context; act on the DRIFT " +
-    "SUMMARY above.",
-);
+note("This script is read-only. Pending approval is reported; publication integrity problems fail CI.");
 console.log("");
+if (publication.problems.length) process.exitCode = 1;
