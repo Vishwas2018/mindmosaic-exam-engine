@@ -187,7 +187,7 @@ export async function validateApprovalBatch(options: {
       fatalErrors.push("Encountered row with missing questionId.");
       continue;
     }
-    const targetKey = `${qId}:${row.revision ?? "current"}`;
+    const targetKey = qId;
     if (seenTargets.has(targetKey)) {
       fatalErrors.push(`Duplicate approval target for '${qId}' within the same input.`);
     }

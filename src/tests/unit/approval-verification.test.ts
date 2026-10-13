@@ -104,6 +104,20 @@ describe("Approval Verification Core (Sections 5, 6, 7, 11)", () => {
     expect(result.fatalErrors.some((e) => e.includes("Duplicate approval target"))).toBe(true);
   });
 
+  it("rejects repeated question IDs even when row revisions or decisions differ", async () => {
+    const result = await validateApprovalBatch({
+      rows: [
+        { questionId: qA.id, revision: 1, decision: "reject" },
+        { questionId: qA.id, revision: 2, decision: "revise" },
+      ],
+      reviewerFullName: "Test reviewer",
+      questionBank: bank,
+    });
+    expect(result.ok).toBe(false);
+    expect(result.newApprovals).toEqual([]);
+    expect(result.fatalErrors.join(" ")).toContain("Duplicate approval target");
+  });
+
   it("handles a sheet partly recorded earlier correctly (Section 7)", async () => {
     // Existing approval for A matches exact immutable evidence
     const existingA = createTestHumanApproval({ question: qA });
