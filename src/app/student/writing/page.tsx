@@ -40,7 +40,7 @@ export default async function StudentWritingPage() {
             {tasks.map((task) => (
               <li key={task.id}>
                 <Link
-                  href={`/student/writing/${task.id}`}
+                  href={`/writing/sit/${task.id}`}
                   className="flex items-center justify-between gap-3 rounded-2xl border border-royal/10 bg-white p-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
                 >
                   <span className="font-extrabold text-ink">{task.title}</span>

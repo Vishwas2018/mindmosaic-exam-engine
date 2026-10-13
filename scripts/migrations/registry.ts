@@ -2790,6 +2790,35 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
           and exists(select 1 from pg_trigger where tgname = 'immutable_publication_approval' and not tgisinternal) as present` },
     ],
   },
+  {
+    version: "20261013090000",
+    name: "timed_writing_parent_marking",
+    checks: [
+      tableExists("writing_rubrics"),
+      tableExists("writing_attempts"),
+      tableExists("writing_marks"),
+      tableExists("writing_mark_criteria"),
+      functionExists("start_writing_attempt"),
+      functionExists("save_writing_draft"),
+      functionExists("submit_writing_attempt"),
+      functionExists("record_paper_writing_attempt"),
+      functionExists("mark_writing_attempt"),
+      policyExists("writing_attempts", "writing_attempts: parent reads linked children"),
+      policyExists("writing_marks", "writing_marks: student reads own"),
+      {
+        describes: "the one shipped rubric is seeded with its six criteria",
+        sql: `select coalesce(
+                (select jsonb_array_length(criteria) = 6
+                 from public.writing_rubrics
+                 where id = 'scholarship-written-expression' and version = 1),
+                false) as present`,
+      },
+      {
+        describes: "erase_student reaches writing_attempts (a child's writing is erased with the child)",
+        sql: `select position('writing_attempts' in pg_get_functiondef('public.erase_student(uuid, text)'::regprocedure)) > 0 as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

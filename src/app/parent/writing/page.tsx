@@ -48,7 +48,7 @@ export default async function ParentWritingPage() {
       ) : (
         <div className="mt-6 space-y-8">
           <PaperResponseForm
-            children={children}
+            linkedChildren={children}
             tasks={tasks.map((task) => ({ id: task.id, title: task.title }))}
           />
           {children.map((child) => (
@@ -60,7 +60,7 @@ export default async function ParentWritingPage() {
                 <WritingResultsList
                   items={history.filter((item) => item.studentId === child.id)}
                   taskTitles={taskTitles}
-                  markHref={(attemptId) => `/parent/writing/${attemptId}`}
+                  markHref={(attemptId) => `/writing/mark/${attemptId}`}
                   emptyText={`${child.name} hasn't handed in any writing yet.`}
                 />
               </div>

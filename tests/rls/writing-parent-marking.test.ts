@@ -249,7 +249,8 @@ describe("parent marking", () => {
         [open, JSON.stringify(scores)],
         /MM312/,
       );
-    const { grammar: _grammar, ...missing } = SCORES;
+    const missing: Record<string, number> = { ...SCORES };
+    delete missing.grammar;
     await mark(missing);
     await mark({ ...SCORES, handwriting: 3 });
     await mark({ ...SCORES, spelling: 6 });
@@ -339,5 +340,40 @@ describe("rubric data", () => {
     );
     expect(rows).toEqual([{ scale_min: 1, scale_max: 5, n: 6 }]);
     await failsWith(`update public.writing_rubrics set scale_max = 10`, [], /permission denied/);
+  });
+});
+
+describe("erasure (spec section 17.5)", () => {
+  it("erase_student removes the child's writing, marks and criterion scores, and counts the marks", async () => {
+    const id = await submittedAttemptFor(STUDENT_A);
+    await asAuthenticated(client, PARENT_C);
+    await client.query(`select public.mark_writing_attempt($1, 'scholarship-written-expression', 1, $2::jsonb, '{}'::jsonb, null)`, [id, JSON.stringify(SCORES)]);
+    await backToPostgres();
+
+    const { rows } = await client.query(`select (public.erase_student($1, 'ticket-1') ->> 'marksDeleted')::int as marks`, [STUDENT_A]);
+    expect(rows[0].marks).toBeGreaterThanOrEqual(1);
+
+    for (const table of ["writing_attempts", "writing_marks"]) {
+      expect((await client.query(`select 1 from public.${table}`)).rows, table).toEqual([]);
+    }
+    expect((await client.query(`select 1 from public.writing_mark_criteria`)).rows).toEqual([]);
+  });
+
+  it("erasing one child leaves a sibling's writing alone", async () => {
+    await submittedAttemptFor(STUDENT_A);
+    await submittedAttemptFor(STUDENT_B);
+    await backToPostgres();
+    await client.query(`select public.erase_student($1, null)`, [STUDENT_A]);
+    const { rows } = await client.query(`select student_id from public.writing_attempts`);
+    expect(rows).toEqual([{ student_id: STUDENT_B }]);
+  });
+
+  it("a parent's account going away does not take the child's paper response with it", async () => {
+    await asAuthenticated(client, PARENT_C);
+    const { rows } = await client.query(`select id from public.record_paper_writing_attempt($1, $2, 'Typed from paper.', 900)`, [STUDENT_A, TASK]);
+    await backToPostgres();
+    await client.query(`delete from public.profiles where id = $1`, [PARENT_C]);
+    const kept = await client.query(`select created_by, student_id from public.writing_attempts where id = $1`, [rows[0].id]);
+    expect(kept.rows).toEqual([{ created_by: null, student_id: STUDENT_A }]);
   });
 });

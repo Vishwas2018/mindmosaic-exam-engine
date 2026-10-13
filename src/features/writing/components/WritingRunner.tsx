@@ -63,10 +63,14 @@ export function WritingRunner({ task, initialAttempt, resultsHref, printHref }: 
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
   const [confirmingHandIn, setConfirmingHandIn] = useState(false);
-  const [now, setNow] = useState(() => Date.now());
+  /* `now` and the server/device gap, read together so they agree. serverNow is frozen in the
+     attempt, so the first paint (server and hydration alike) shows deadline - serverNow. */
+  const [clock, setClock] = useState(() => {
+    const now = Date.now();
+    return { now, skewMs: initialAttempt ? initialAttempt.serverNow - now : 0 };
+  });
   const [announcement, setAnnouncement] = useState("");
 
-  const skewMs = useRef(initialAttempt ? initialAttempt.serverNow - Date.now() : 0);
   const textRef = useRef(text);
   const lastChangeAt = useRef<number | null>(null);
   const lastFlushedAt = useRef<number | null>(null);
@@ -75,7 +79,8 @@ export function WritingRunner({ task, initialAttempt, resultsHref, printHref }: 
 
   const submitted = attempt?.submittedAt != null;
   const deadlineAt = attempt?.deadlineAt ?? null;
-  const remaining = remainingWithSkew(deadlineAt, now, skewMs.current);
+  const { skewMs } = clock;
+  const remaining = remainingWithSkew(deadlineAt, clock.now, skewMs);
   const warning = submitted ? null : activeWritingWarning(remaining);
 
   const begin = useCallback(
@@ -86,7 +91,8 @@ export function WritingRunner({ task, initialAttempt, resultsHref, printHref }: 
         const response = await postJson("/api/writing/attempts", "POST", { taskId: task.id, mode });
         if (!response.ok) throw new Error("start_failed");
         const { attempt: started } = (await response.json()) as { attempt: WritingAttemptDto };
-        skewMs.current = started.serverNow - Date.now();
+        const now = Date.now();
+        setClock({ now, skewMs: started.serverNow - now });
         setText(started.responseText);
         textRef.current = started.responseText;
         setAttempt(started);
@@ -127,9 +133,9 @@ export function WritingRunner({ task, initialAttempt, resultsHref, printHref }: 
     if (!attempt || submitted) return;
     const timer = setInterval(() => {
       const tickNow = Date.now();
-      setNow(tickNow);
+      setClock((current) => ({ ...current, now: tickNow }));
 
-      if (hasDeadlineExpired(deadlineAt, tickNow + skewMs.current)) {
+      if (hasDeadlineExpired(deadlineAt, tickNow + skewMs)) {
         void submit("timer_expired");
         return;
       }
@@ -150,7 +156,7 @@ export function WritingRunner({ task, initialAttempt, resultsHref, printHref }: 
       }
     }, TICK_MS);
     return () => clearInterval(timer);
-  }, [attempt, submitted, deadlineAt, submit]);
+  }, [attempt, submitted, deadlineAt, skewMs, submit]);
 
   // Announce each warning once, politely, in text (never colour alone).
   useEffect(() => {
@@ -322,7 +328,7 @@ export function WritingRunner({ task, initialAttempt, resultsHref, printHref }: 
         </div>
       ) : confirmingHandIn ? (
         <div className="flex flex-wrap items-center gap-3 rounded-2xl bg-page p-4">
-          <p className="font-semibold text-ink">Hand in now? You won't be able to change it.</p>
+          <p className="font-semibold text-ink">Hand in now? You won&apos;t be able to change it.</p>
           <button type="button" className={buttonClasses({ variant: "primary" })} onClick={() => submit("user_submitted")}>
             Yes, hand in
           </button>

@@ -68,7 +68,10 @@ create table public.writing_attempts (
   draft_saved_at   timestamptz,
   submitted_at     timestamptz,
   submission_reason text check (submission_reason in ('user_submitted', 'timer_expired')),
-  created_by       uuid not null references public.profiles (id) on delete cascade,
+  -- Who typed or started it: the child, or the parent who entered a paper
+  -- response. Provenance only, so a parent's account going away must not take
+  -- the child's writing with it.
+  created_by       uuid references public.profiles (id) on delete set null,
   constraint writing_attempts_timed_has_deadline check (
     (mode = 'timed' and deadline_at is not null and duration_seconds is not null)
     or (mode <> 'timed' and deadline_at is null)
@@ -385,3 +388,119 @@ grant execute on function public.save_writing_draft(uuid, text) to authenticated
 grant execute on function public.submit_writing_attempt(uuid, text, text) to authenticated;
 grant execute on function public.record_paper_writing_attempt(uuid, text, text, integer) to authenticated;
 grant execute on function public.mark_writing_attempt(uuid, text, integer, jsonb, jsonb, text) to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Erasure (spec section 17.5). A child's writing is personal data, so
+-- erase_student must reach it. This restates erase_student (20260815110000)
+-- with exactly two additions, both marked in the body: writing marks are
+-- counted in the marks the child received, and writing_attempts (which
+-- cascades to marks and criterion scores) is deleted before the sittings.
+-- Nothing else in the function changes, and its privileges are unchanged by
+-- CREATE OR REPLACE.
+-- ---------------------------------------------------------------------------
+create or replace function public.erase_student(
+  p_student uuid,
+  p_request_ref text default null
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  v_legacy_sessions  integer := 0;
+  v_target_sessions  integer := 0;
+  v_legacy_responses integer := 0;
+  v_marks            integer := 0;
+  v_assignments      integer := 0;
+begin
+  if p_student is null then
+    raise exception 'erase_student requires a subject'
+      using errcode = 'MM001';
+  end if;
+
+  /* Assignments first: `assignments.attempt_id` is ON DELETE SET NULL, but
+     `assignment_students` rows name the child directly and must go rather than
+     be nulled — a row saying "someone was assigned this" keyed to a deleted
+     child is a link to that child. */
+  delete from public.assignment_students where student_id = p_student;
+  get diagnostics v_assignments = row_count;
+
+  /* Marks the child received. `essay_marks` cascades from `exam_attempts` and
+     `manual_marks` from `assessment_sessions`, so both would go with the
+     sittings below — they are counted here explicitly because "marks" is one of
+     the surfaces §17.5 names, and a count of zero that came from a cascade
+     nobody checked is not evidence. */
+  select count(*) into v_marks
+  from (
+    select 1 from public.essay_marks m
+    join public.exam_attempts a on a.id = m.attempt_id
+    where a.student_id = p_student
+    union all
+    select 1 from public.manual_marks m
+    join public.assessment_sessions s on s.id = m.session_id
+    where s.student_id = p_student
+    union all
+    select 1 from public.writing_marks m
+    join public.writing_attempts w on w.id = m.attempt_id
+    where w.student_id = p_student
+  ) counted;
+
+  select count(*) into v_legacy_responses
+  from public.exam_responses where student_id = p_student;
+
+  /* Writing practice (20261013090000). An attempt holds the child's own
+     writing, so it is personal data and goes with the child. Its marks and
+     per-criterion scores cascade from it and were counted above. Parents'
+     profiles are untouched: `created_by` is provenance only (ON DELETE SET
+     NULL) and `marked_by` names the parent who marked. */
+  delete from public.writing_attempts where student_id = p_student;
+
+  /* THE TARGET MODEL FIRST — see the header. This removes native sittings and
+     backfill copies alike, and with them the ledger rows, the responses, the
+     results and the manual marks that cascade from them. */
+  delete from public.assessment_sessions where student_id = p_student;
+  get diagnostics v_target_sessions = row_count;
+
+  /* Belt: a result row whose session was already gone would be orphaned, which
+     the schema forbids, but an erasure that trusted the schema and left one
+     behind would be indistinguishable from one that worked. */
+  delete from public.assessment_results where student_id = p_student;
+
+  /* Now the legacy model. Attempts, autosave buffers and essay marks cascade. */
+  delete from public.exam_sessions where student_id = p_student;
+  get diagnostics v_legacy_sessions = row_count;
+  delete from public.exam_attempts where student_id = p_student;
+  delete from public.exam_responses where student_id = p_student;
+
+  /* Everything else that names the child. Idempotency records are §17.5's
+     "transient job payloads": they hold the request body of a create call,
+     which is the child's chosen exam scope. */
+  delete from public.idempotency_keys where actor_id = p_student;
+  delete from public.parent_children where child_id = p_student;
+  delete from public.class_students where student_id = p_student;
+
+  /* The profile, and then the mapping key itself. §17.5 step 5: erasure that
+     leaves the identity row behind has replaced a name with a uuid, which is a
+     reversible pseudonym and is not erasure. */
+  delete from public.profiles where id = p_student;
+  delete from auth.users where id = p_student;
+
+  insert into public.erasure_audit (
+    subject_id, legacy_sessions_deleted, target_sessions_deleted,
+    legacy_responses_deleted, marks_deleted, assignment_links_cleared, request_ref
+  ) values (
+    p_student, v_legacy_sessions, v_target_sessions,
+    v_legacy_responses, v_marks, v_assignments, p_request_ref
+  );
+
+  return jsonb_build_object(
+    'subjectId', p_student,
+    'legacySessionsDeleted', v_legacy_sessions,
+    'targetSessionsDeleted', v_target_sessions,
+    'legacyResponsesDeleted', v_legacy_responses,
+    'marksDeleted', v_marks,
+    'assignmentLinksCleared', v_assignments
+  );
+end;
+$$;

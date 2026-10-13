@@ -7,7 +7,7 @@ import { buttonClasses } from "@/components/ui";
 import { countWords } from "@/features/exam-engine/question-renderers/renderer-utils";
 
 interface Props {
-  children: { id: string; name: string }[];
+  linkedChildren: { id: string; name: string }[];
   tasks: { id: string; title: string }[];
 }
 
@@ -17,9 +17,9 @@ interface Props {
  * with the attempt. A photo of the page can be added later without changing
  * this flow (see the PR's follow-ups).
  */
-export function PaperResponseForm({ children, tasks }: Props) {
+export function PaperResponseForm({ linkedChildren, tasks }: Props) {
   const router = useRouter();
-  const [childId, setChildId] = useState(children[0]?.id ?? "");
+  const [childId, setChildId] = useState(linkedChildren[0]?.id ?? "");
   const [taskId, setTaskId] = useState(tasks[0]?.id ?? "");
   const [text, setText] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "error">("idle");
@@ -36,13 +36,13 @@ export function PaperResponseForm({ children, tasks }: Props) {
       });
       if (!response.ok) throw new Error("paper_failed");
       const { attempt } = (await response.json()) as { attempt: { id: string } };
-      router.push(`/parent/writing/${attempt.id}`);
+      router.push(`/writing/mark/${attempt.id}`);
     } catch {
       setState("error");
     }
   }
 
-  if (children.length === 0 || tasks.length === 0) return null;
+  if (linkedChildren.length === 0 || tasks.length === 0) return null;
 
   return (
     <form
@@ -66,7 +66,7 @@ export function PaperResponseForm({ children, tasks }: Props) {
             onChange={(event) => setChildId(event.currentTarget.value)}
             className="mt-1 block w-full rounded-xl border border-royal/20 bg-white px-3 py-2 text-base"
           >
-            {children.map((child) => (
+            {linkedChildren.map((child) => (
               <option key={child.id} value={child.id}>
                 {child.name}
               </option>

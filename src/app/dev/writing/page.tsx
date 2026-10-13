@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
+import { isWritingPreviewAllowed } from "@/features/writing/preview-gate";
 import { DEV_FIXTURE_WRITING_TASK } from "@/features/writing/task";
 import { scholarshipWrittenExpressionRubric } from "@/features/writing/rubrics/scholarship-written-expression";
 
@@ -7,7 +9,11 @@ import { scholarshipWrittenExpressionRubric } from "@/features/writing/rubrics/s
  * A walkthrough of the whole writing flow with seeded local accounts. It shows
  * no secrets: sign-in values come from your own .env.e2e.local.
  */
+export const dynamic = "force-dynamic";
+
 export default function WritingPreviewPage() {
+  /* The layout gates this too. Checking here as well means the page body is never built, so a 404 response carries none of it. */
+  if (!isWritingPreviewAllowed()) notFound();
   const task = DEV_FIXTURE_WRITING_TASK;
   return (
     <main className="mx-auto max-w-3xl space-y-8 px-4 py-10">
@@ -54,7 +60,7 @@ export default function WritingPreviewPage() {
             <Link className="font-bold text-royal underline" href="/dev/writing/print">Print preview</Link>: the A4 prompt and ruled sheet.
           </li>
           <li>
-            As the child: <Link className="font-bold text-royal underline" href={`/student/writing/${task.id}`}>the timed task</Link>. Choose
+            As the child: <Link className="font-bold text-royal underline" href={`/writing/sit/${task.id}`}>the timed task</Link>. Choose
             timed on screen, or untimed.
           </li>
           <li>
