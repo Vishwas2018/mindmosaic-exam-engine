@@ -1,8 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 
+const evidence = vi.hoisted(() => ({
+  verify: vi.fn(() => ({ problems: [] as string[], approvals: new Map() })),
+}));
 vi.mock("@/server/publication-evidence", () => ({
-  getPublicationEligibility: () => ({ problems: [], approvals: new Map() }),
+  getPublicationEligibility: evidence.verify,
 }));
 vi.mock("@/features/content-governance/gate-config", async importOriginal => {
   const actual = await importOriginal<typeof import("@/features/content-governance/gate-config")>();
@@ -23,5 +26,13 @@ describe("historical authoring reads", () => {
     expect(essay).toBeDefined();
     expect(getExamBank("published")).toEqual([]);
     expect(getQuestionById(essay.id)).toBe(essay);
+  });
+
+  it("does not consult stale or invalid approval evidence to read a historical rubric", () => {
+    const essay = publishedExamBank.find(question => question.type === "essay")!;
+    evidence.verify.mockReturnValue({ problems: ["stale_or_invalid_approval"], approvals: new Map() });
+    evidence.verify.mockClear();
+    expect(getQuestionById(essay.id)).toBe(essay);
+    expect(evidence.verify).not.toHaveBeenCalled();
   });
 });
