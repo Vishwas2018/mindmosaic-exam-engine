@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 
 import { SiteFooter } from "@/features/landing/components/Closing";
+import { ChapterFourProgressParents } from "@/features/landing/components/ChapterFourProgressParents";
 import { ChapterOneIntro } from "@/features/landing/components/ChapterOneIntro";
-import { ChapterTwoPlaceholder } from "@/features/landing/components/ChapterTwoPlaceholder";
+import { ChapterThreeHowItWorks } from "@/features/landing/components/ChapterThreeHowItWorks";
+import { ChapterTwoPrograms } from "@/features/landing/components/ChapterTwoPrograms";
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
 import { ForParents } from "@/features/landing/components/ForParents";
-import { LearningDemo } from "@/features/landing/components/LearningDemo";
-import { ProductTour } from "@/features/landing/components/ProductTour";
-import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
 import { QualityBand } from "@/features/landing/components/QualityBand";
-import { RespondsToStudent } from "@/features/landing/components/RespondsToStudent";
 import { SiteNav } from "@/features/landing/components/SiteNav";
 import { TrustAndCare } from "@/features/landing/components/TrustAndCare";
 import { sections, type SectionKey } from "@/features/landing/content";
@@ -33,11 +31,9 @@ export const metadata: Metadata = {
  */
 const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
   hero: ChapterOneIntro,
-  chapterTwo: ChapterTwoPlaceholder,
-  learningDemo: LearningDemo,
-  productTour: ProductTour,
-  programHighlights: ProgramHighlights,
-  respondsToStudent: RespondsToStudent,
+  chapterTwo: ChapterTwoPrograms,
+  chapterThree: ChapterThreeHowItWorks,
+  chapterFour: ChapterFourProgressParents,
   forParents: ForParents,
   qualityBand: QualityBand,
   trustAndCare: TrustAndCare,
