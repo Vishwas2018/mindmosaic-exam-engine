@@ -14,6 +14,7 @@ Inspected on 13 October 2026 against `dev` at `90350726` (all of #35, #45, #33, 
 - **All ten applied cleanly, in timestamp order, on a local copy of the hosted state** (39 migrations plus the same 6 profiles). Each step passed its own registry check, the full registry then passed 49 of 49, and 70 RLS tests across three suites passed against it.
 - **The live site already expects 8 of the 10 migrations (follow-up, section 12).** Production serves `main` at `47c11ba8`, which contains those 8 migrations and code that uses their columns. The student shell is degraded now: year level reads as missing, onboarding cannot complete. Not an outage.
 - **The project is on the Free tier: no scheduled backups, no PITR (owner-confirmed, section 14.1).** A manual dump is the only safety net. One was taken and **proven to restore** (section 14.2).
+- **Section 15 closes the restore gap; section 16 stages the two options (migration 6 only, or all 8) for the owner to choose.** A working `psql` path to hosted exists, the Supabase access token in `.env.local` is dead (401), and the in-place restore was rehearsed as a non-superuser `postgres` with attributes matching hosted.
 - **Scope decision: apply migrations 1 to 8 only (section 14.3).** 9 and 10 are held until `dev` ships. Running the apply from a checkout of `main` (`47c11ba8`) applies exactly those eight. The ordered command, per-step checks and restore procedure are in sections 14.4 and 14.5. **Nothing has been applied.**
 - **Plain `supabase db push` will refuse.** The hosted ledger already holds later versions (`20260821`, `20260822`, `20260823`) than the first missing ones, so the CLI needs `--include-all`.
 
@@ -42,7 +43,7 @@ Repository: 49 migration files. Hosted ledger: 39. Registry object checks: 38 pa
 | 8 | `20260923100000` | `amc_phase2_config_backfill` | no | no | 1 |
 | 9 | `20261005090000` | `revision_bound_publication_approvals` | no | no | 3 |
 | 10 | `20261013090000` | `timed_writing_parent_marking` | no | no | 14 |
-| — | `20260812110000` | `scoring_role` | **yes** | role yes, **one grant check fails** | 1 (section 5) |
+| â€” | `20260812110000` | `scoring_role` | **yes** | role yes, **one grant check fails** | 1 (section 5) |
 
 No migration file is missing from the registry, and no ledger row lacks a file.
 
@@ -76,13 +77,13 @@ Classes: **Safe** (additive or widening, no data dependency), **Safe, needs prov
 | 1 | `20260818090000` | Widens the `item_versions.answer_kind` check to allow `hot_text` and `matrix`. | Safe | None. Superseded by 2, which re-lists the same kinds plus `structured`. | Zero item versions, so the constraint re-check scans nothing. Application support for the new kinds is on `dev`; deploy it before content uses them. |
 | 2 | `20260820090000` | Adds 9 media and item-group tables (RLS on, no learner grants), `assessment_session_items` group columns, `session_responses.part_score_evidence`, `manual_marks.part_id/rubric_version`; replaces the unique index `manual_marks_item_key` and `record_manual_mark`'s conflict target; grants the 9th scoring column. | Safe | After 1 (harmless order). Needs `manual_marks`, `session_responses` (present). | Index swap is equivalent for existing rows (`part_id` null, `NULLS NOT DISTINCT`). Hosted has 0 marks and 0 duplicates. The restated `record_manual_mark` body is otherwise unchanged (compared line by line). Clears the scoring-role mismatch. |
 | 3 | `20260825090000` | Adds the content-factory authoring tables (16, RLS on), 3 enum types, owner-approval functions, a private storage bucket `content-assets-private`; widens provenance checks; adds `item_versions.learner_explanation` and `asset_refs`. | Safe, check first | None on the others. | Re-creates two `item_versions` constraints (0 rows). No name or type clash on hosted. The bucket insert is `on conflict do update` and keeps the bucket private. `owner_approve_*` functions are executable by `authenticated` but require `profiles.role = 'admin'`; hosted has no admin profile. |
-| 4 | `20260827090000` | Adds 9 curriculum registry tables (RLS on, no learner grants, immutable), seeds 9 AU jurisdictions, adds `programme_offerings_region_known`, widens `profiles.year_level` check from {3,5} to 1–12, adds nullable `profiles.curriculum_jurisdiction_code` and `curriculum_school_sector`. | Safe, check first | None. | Touches `profiles`: the widened check admits every existing row; the two new columns are nullable with no inference ("null means not yet collected"). All 99 offerings are `global`, which the new region check allows. |
+| 4 | `20260827090000` | Adds 9 curriculum registry tables (RLS on, no learner grants, immutable), seeds 9 AU jurisdictions, adds `programme_offerings_region_known`, widens `profiles.year_level` check from {3,5} to 1â€“12, adds nullable `profiles.curriculum_jurisdiction_code` and `curriculum_school_sector`. | Safe, check first | None. | Touches `profiles`: the widened check admits every existing row; the two new columns are nullable with no inference ("null means not yet collected"). All 99 offerings are `global`, which the new region check allows. |
 | 5 | `20260902090000` | Creates role `mindmosaic_content_answer_writer` (`LOGIN`, no password), one `INSERT` grant and one policy on `item_answer_versions`. | Safe, needs provisioning | None. | The role cannot authenticate until a password is set out of band. Do **not** put a credential in the migration. Only needed by the content-publishing path. |
 | 6 | `20260922100000` | Adds `profiles.onboarding_completed_at`, `diagnostic_completed_at` (nullable), `interests` (`{}`), `weekly_goal_minutes` (60); revokes then re-grants column `UPDATE` on `profiles` to `authenticated`. | Safe, check first | After 4 (order only). | Touches the 4 student profiles. Defaults are constants (no table rewrite). The revoke and re-grant run in one transaction; the end state is display name, year level and the four new columns (a superset of today's display name and year level), so nothing a learner can do today is removed. No completion state is inferred for existing students: they will be treated as not onboarded. |
 | 7 | `20260923090000` | Seeds subject `amc_mathematics` and two AMC offerings (Year 3 and 5). | Safe | Programme `australian_mathematics_competition` (present), region check from 4 (`global` allowed). | Offerings go from 99 to 101 active. They have no items. Nothing in `src/` lists `programme_offerings` for display, so no new tile was found; confirm in the UI after applying. |
 | 8 | `20260923100000` | Backfills one blueprint version, cell and profile version for each of the two AMC offerings. | Safe | **After 7.** Needs `phase2-fixed-framework` revision 1 (present). | Idempotent (`on conflict do nothing`), raises if the framework row is absent. 101 offerings, 101 profile versions, 101 blueprint versions afterwards. |
-| 9 | `20261005090000` | Creates `item_publication_approvals` and `publication_gate_settings` (both private, empty); adds trigger `approved_session_item` on `assessment_session_items`; **restates `create_assessment_session`**. | Safe, check first | Needs `assessment_profile_versions`, `programmes.assessment_family_id` (present). Independent of 1–8: applied alone on the hosted-like copy. | The one that changes a hot path; see section 7. |
-| 10 | `20261013090000` | Timed writing: 4 tables, 6 functions, read-only RLS, one seeded rubric; restates `erase_student` to also delete a child's writing attempts. | Safe | Independent of 1–9: applied alone, and after 9, on the hosted-like copy. | Restated `erase_student` differs from the hosted body only by the writing additions (counts and deletes of `writing_attempts`); compared line by line. No writing prompt is approved, so no child can reach the feature. |
+| 9 | `20261005090000` | Creates `item_publication_approvals` and `publication_gate_settings` (both private, empty); adds trigger `approved_session_item` on `assessment_session_items`; **restates `create_assessment_session`**. | Safe, check first | Needs `assessment_profile_versions`, `programmes.assessment_family_id` (present). Independent of 1â€“8: applied alone on the hosted-like copy. | The one that changes a hot path; see section 7. |
+| 10 | `20261013090000` | Timed writing: 4 tables, 6 functions, read-only RLS, one seeded rubric; restates `erase_student` to also delete a child's writing attempts. | Safe | Independent of 1â€“9: applied alone, and after 9, on the hosted-like copy. | Restated `erase_student` differs from the hosted body only by the writing additions (counts and deletes of `writing_attempts`); compared line by line. No writing prompt is approved, so no child can reach the feature. |
 
 ## 7. What matters for a database holding child data
 
@@ -122,7 +123,7 @@ Quick read-only SQL checks per step are below. All are `SELECT`.
 | 1 | `20260818090000` | `select pg_get_constraintdef(oid) from pg_constraint where conname='item_versions_answer_kind_known'` lists `hot_text` and `matrix`. | Re-add the constraint without those two kinds. Only valid while no item uses them (today 0 items). Restore from backup otherwise. |
 | 2 | `20260820090000` | `to_regclass('public.media_assets')` and `public.item_groups` not null; `manual_marks_item_key` definition includes `part_id` and `NULLS NOT DISTINCT`; 9 `UPDATE` column grants for `mindmosaic_scoring`. | Drop the 9 new tables and the added columns and constraints; recreate the old index on `(session_id, session_item_id)`; restore `record_manual_mark` from `20260816100000`; revoke the `part_score_evidence` grant; restore the kind list without `structured`. Safe only while the new tables and columns are empty. |
 | 3 | `20260825090000` | `to_regclass('public.content_batches')` not null; `select id, public from storage.buckets where id='content-assets-private'` returns `public = false`; types `content_origin` etc. exist. | Drop the 16 tables, 3 types and 3 functions (and their triggers); remove the bucket through the Storage API; restore the two provenance checks; drop `learner_explanation` and `asset_refs`. Safe while empty. |
-| 4 | `20260827090000` | `select count(*) from curriculum_jurisdictions` = 9; `profiles_year_level_check` allows 1–12; the two new nullable columns exist; `programme_offerings_region_known` exists. | Drop the 9 tables, the two columns and their constraints, and the region check; restore the year check to {3,5} only if no profile has another year. Safe while empty. |
+| 4 | `20260827090000` | `select count(*) from curriculum_jurisdictions` = 9; `profiles_year_level_check` allows 1â€“12; the two new nullable columns exist; `programme_offerings_region_known` exists. | Drop the 9 tables, the two columns and their constraints, and the region check; restore the year check to {3,5} only if no profile has another year. Safe while empty. |
 | 5 | `20260902090000` | `select rolname, rolcanlogin, rolbypassrls from pg_roles where rolname='mindmosaic_content_answer_writer'` returns login true, bypass false; one policy on `item_answer_versions` names it. | Drop the policy, `revoke insert`, `drop role`. Then set its password separately (see approvals). |
 | 6 | `20260922100000` | Four new `profiles` columns exist; the 4 student rows read back unchanged for `display_name`, `year_level`; `authenticated` `UPDATE` columns are `display_name`, `year_level` plus the four new. | Drop the four columns; `revoke update on profiles from authenticated; grant update (display_name, year_level) on profiles to authenticated`. |
 | 7 | `20260923090000` | Subject `amc_mathematics` exists; 2 AMC offerings; 101 active offerings. | Roll back step 8 first, then delete the two offerings and the subject. |
@@ -259,7 +260,7 @@ Total about 2.4 MB. **The files contain password hashes and child profile data. 
 | `profiles`: students / parents / Year 3 / Year 5 | 4 / 2 / 2 / 2 | 4 / 2 / 2 / 2 |
 | `parent_children`, ledger rows, offerings, blueprint versions, sessions | 4, 39, 99, 99, 0 | same |
 | public tables / policies / functions / `mindmosaic_scoring` | 41 / 53 / 43 / present | same |
-| md5 of `auth.users`, `auth.identities`, `profiles`, ledger, offerings (full row text) | `86a5ffd8…`, `6bb942f7…`, `f56cad91…`, `99d44436…`, `43b10165…` | identical |
+| md5 of `auth.users`, `auth.identities`, `profiles`, ledger, offerings (full row text) | `86a5ffd8â€¦`, `6bb942f7â€¦`, `f56cad91â€¦`, `99d44436â€¦`, `43b10165â€¦` | identical |
 
 The dump restores. The Teardown is complete: container removed, no ports open.
 
@@ -269,7 +270,7 @@ One caveat on process: my first rehearsal pass was invalid (my file extraction c
 
 - **Self-contained.** No migration from 1 to 8 references an object from 9 or 10 (grep for the approval, gate, trigger and `writing_*` names: no hits). `origin/main` has exactly 47 migration files, which is the 39 on hosted plus these 8; files 9 and 10 do not exist on `main`.
 - **Dry run (read-only), from a checkout of `origin/main` `47c11ba8`:** `supabase db push --include-all --dry-run` lists exactly 8 migrations, in this order: `20260818090000`, `20260820090000`, `20260825090000`, `20260827090000`, `20260902090000`, `20260922100000`, `20260923090000`, `20260923100000`. **Run from `dev` it would also apply 9 and 10, so the apply must be run from the `main` checkout.**
-- **Rehearsal on the restored copy.** All 8 applied in order, one transaction each, no errors (0.6 s to 2.9 s each); the per-step checks in 14.4 all pass; ledger 47; `profiles` rows unchanged (md5 of the original columns identical to live hosted: `b9f5903e…`), `auth.users` unchanged; offerings 99 to 101 as expected.
+- **Rehearsal on the restored copy.** All 8 applied in order, one transaction each, no errors (0.6 s to 2.9 s each); the per-step checks in 14.4 all pass; ledger 47; `profiles` rows unchanged (md5 of the original columns identical to live hosted: `b9f5903eâ€¦`), `auth.users` unchanged; offerings 99 to 101 as expected.
 - **Does it fix both bugs? Yes, and migration 6 alone is what does it.** On the rehearsed copy, acting as role `authenticated` for a Year 5 student, I ran the exact statements `main` issues:
   1. `requireStudent()` select (`display_name, year_level, onboarding_completed_at, diagnostic_completed_at, interests, weekly_goal_minutes`) returns **`year_level = 5`**, not an error. That removes the Year-5-sees-Year-3 fallback.
   2. The onboarding route's role check (`select role, onboarding_completed_at`) returns the row, so the **403 `students_only` no longer occurs**.
@@ -324,7 +325,7 @@ supabase db push --include-all --db-url $env:SUPABASE_DB_URL
 | 7 | `20260923090000` | `amc_programme_offerings` |
 | 8 | `20260923100000` | `amc_phase2_config_backfill` |
 
-**Verification, run after the apply (or after a failure, to see how far it got).** One read-only query, 17 rows, every `ok` must be `t`. If the push stops at migration N, the rows for steps below N are `t` and the rest `f`. Run it with `supabase db query --db-url $env:SUPABASE_DB_URL -f verify-1-8.sql -o table`. (It was run in rehearsal and all 17 passed.)
+**Verification, run after the apply (or after a failure, to see how far it got).** One read-only query, 17 rows, every `ok` must be `t`. If the push stops at migration N, the rows for steps below N are `t` and the rest `f`. Run it with `supabase db query --db-url $env:SUPABASE_DB_URL -f docs\reports\hosted-db-drift-2026-10-14-verify-1-8.sql -o table`. (It was run in rehearsal and all 17 passed.)
 
 ```sql
 select step, check_name, ok from (values
@@ -388,21 +389,156 @@ Work down this list; stop at the first level that fixes it.
       begin;
       drop schema public cascade;
       drop schema supabase_migrations cascade;
-      drop owned by mindmosaic_content_answer_writer;
       drop role mindmosaic_content_answer_writer;
       commit;
       ```
+      (Do **not** add `drop owned by mindmosaic_content_answer_writer`: as the non-superuser `postgres` it fails with "permission denied to drop objects", which is what blocked my first attempt. It is not needed, because dropping the schema removes the role's grants. Use only the role drop if the role exists, i.e. only if migration 5 was applied.)
    3. Restore, in this order, with `psql -v ON_ERROR_STOP=0 -f`: `schema-public-and-ledger.sql`, then `data-public-and-ledger.sql`.
    4. Re-run the "before" checks (ledger 39 rows, `select count(*) from auth.users` = 6).
 
-   **Caveats, honestly:** the rehearsal ran as a superuser in a local Supabase image. When I tried the drops as the image's `postgres` role they were refused for object ownership; on hosted, `postgres` created the objects and should own them, but that is unproven. `auth` is untouched by this path, which is deliberate: migrations 1 to 8 do not change `auth` data or schema (migration 3 only adds foreign keys from new `public` tables to `auth.users`, and inserts one `storage.buckets` row), and the hosted `postgres` role cannot drop it. **There is also no `psql` on this machine, and Docker cannot reach the IPv6-only host.** Before relying on step 3, install the PostgreSQL 17 client tools, or use the dashboard's IPv4 Session pooler connection string with `docker run --rm -v <dumpdir>:/b postgres:17 psql "<pooler-url>" -f /b/<file>`. Decide this before the apply, not during it.
+   **Superseded caveat:** the earlier version of this section said the in-place path was only rehearsed as a superuser. It has since been rehearsed as the non-superuser `postgres` role, whose attributes match hosted's exactly (section 15). `auth` is untouched by this path, which is deliberate: migrations 1 to 8 do not change `auth` data or schema (migration 3 only adds foreign keys from new `public` tables to `auth.users`, and inserts one `storage.buckets` row), and the hosted `postgres` role cannot drop it. A working `psql` client now exists on this machine (section 15).
 4. **Last resort: full restore.** `roles.sql`, `schema-all.sql`, `data-all.sql` restore cleanly into a local Supabase Postgres (14.2), but restoring `auth` into a hosted project needs a new project, new keys in Vercel, and re-imported users. Plan that separately if it is ever needed.
 
 A restore returns the database to the dump moment. Anything written after it (new sign-ups, onboarding) is lost, which is another reason to dump immediately before the apply and to be watching while it runs.
 
 ### 14.6 Free-tier notes that affect this
 
-- **Auto-pause.** As of my knowledge, Free projects pause after about a week without activity, and a paused project refuses connections. Effect on the apply: if the project is paused, `db push` and the dump fail at connect, before any change. The apply itself takes seconds to a few minutes, so a pause during it is not a realistic risk. Check the project shows **Active** immediately before starting. Effect on the live site: a paused project takes sign-in and all data down until restored from the dashboard. I cannot see the pause status (needs the platform token), so please verify the current pause policy in the dashboard.
+- **Auto-pause.** See section 15.3 for the policy from Supabase's published docs. Effect on the apply: if the project is paused, `db push` and the dump fail at connect, before any change. The apply itself takes seconds to a few minutes, so a pause during it is not a realistic risk. Check the project shows **Active** immediately before starting. Effect on the live site: a paused project takes sign-in and all data down until restored from the dashboard.
 - **Single copy.** With no platform backups, the dump on this laptop is the only copy. Copy it to a second location you trust before the apply.
 - **Config warning.** The CLI prints: `api.auto_expose_new_tables is deprecated and will be removed on 2026-10-30` (new default: revoke Data API privileges on new tables in `public`). Migrations 1 to 8 grant and revoke explicitly, so they are unaffected. It matters for any later migration that relies on implicit exposure (there is already a branch `chore/supabase-explicit-grants`).
 - **Pre-existing worktree.** `C:\Users\vishw\Vish\Vish\.worktrees\hosted-drift` already exists on this PR branch at an older commit (`4fd5f3e9`). I did not touch it; pull before editing there.
+
+## 15. Closing the restore gap (added 14 October 2026, later the same day)
+
+**Nothing here changed hosted.** Hosted was touched only by `SELECT`s, through `psql` and `supabase db query`, with the session set read-only where the tool allowed it.
+
+### 15.1 A working client path to hosted
+
+| Route | Result |
+|---|---|
+| **Native PostgreSQL 17.6 client tools on Windows (works)** | Installed at `C:\Users\vishw\pgclient\pg17\pgsql\bin` (the EnterpriseDB binaries zip, extracted; no installer, no admin rights, nothing on PATH). `psql` connects directly to the hosted direct connection over IPv6 and ran a read-only query: `postgres | ro=on | PostgreSQL 17.6 | 6 auth users | 39 ledger rows`. |
+| Dashboard IPv4 pooler string + Docker | Not needed, so not tried. It remains the fallback: the pooler region is not in the repository, so it would need to be copied from the dashboard. |
+| Docker with the direct connection | Does not work (IPv6-only host). |
+
+Notes: the binaries are EDB's official build downloaded over HTTPS, but they are **not Authenticode-signed and I did not verify them against a published checksum**. Delete `C:\Users\vishw\pgclient` when finished if that matters to you. Native `pg_dump` 17.6 **fails** against this Supabase server (it drops the connection on a `set_config('restrict_nonsystem_relation_kind', â€¦)` call), so keep using `supabase db dump` for dumps and `psql` for restores.
+
+### 15.2 Project plan and pause status from the API: not possible, the token is dead
+
+- `SUPABASE_ACCESS_TOKEN` in `.env.local` (the `sbp_` token; `.env.e2e.local` holds the identical value) returns **HTTP 401** on `GET /v1/projects` and on `GET /v1/projects/uermhsptduikehuyceiz`. It is expired, revoked, or for a different account.
+- So I could not read the plan or pause status from the API. To get it, create a new personal access token in the dashboard (Account, then Access Tokens), put it in `SUPABASE_ACCESS_TOKEN` in your session only, and I can read project status and backups with two GETs. The plan itself was confirmed by you in the dashboard (Free).
+- What I can say from the database side: the project is active right now (it answered many queries today).
+
+### 15.3 Auto-pause window, from Supabase's published docs (not from memory)
+
+From `supabase.com/docs/guides/platform/free-project-pausing`:
+- Free projects are paused for **"low activity over a 7-day period"**.
+- The owner gets a **warning email roughly one week before** the pause takes effect, and a second email after.
+- A paused project can be restored from the dashboard **"up to 1 year after it was paused"**. A second copy of the same guide on another host still says 90 days, so the window has changed over time; confirm on the live page. After the window the docs say backups are no longer retained.
+- Supabase says paid plans are not paused.
+
+What to do: look for a pause-warning email to the account owner, and check the project status shows Active before the apply.
+
+### 15.4 The restore path, proved as closely as possible without touching hosted
+
+**Is hosted's `postgres` role able to do what the rehearsal did?** I compared the role the connection uses on hosted against the role used in the local rehearsal, read-only:
+
+| Attribute | Hosted | Local rehearsal |
+|---|---|---|
+| connected as | `postgres` | `postgres` |
+| superuser | no | no |
+| `CREATEROLE` / `CREATEDB` / `BYPASSRLS` | yes / yes / yes | yes / yes / yes |
+| database owner; member of it | `postgres`; yes | `postgres`; yes |
+| `public` schema owner | `pg_database_owner` | `pg_database_owner` |
+| `supabase_migrations` schema owner | `postgres` | `postgres` |
+| `public` relations / functions not owned by `postgres` | 0 / 0 | 0 / 0 |
+| `supabase_migrations` relations not owned by `postgres` | 0 | 0 |
+| event triggers (all owned by `supabase_admin`) | 6 | 6 (identical list) |
+| server version | 17.6 | 17.6 |
+
+They match on every attribute I could compare. On that basis I re-ran the whole lifecycle locally **as the non-superuser `postgres` role** (previously I used a superuser):
+
+1. Restored the dump into a fresh local Supabase Postgres (as `supabase_admin`, since the image's `auth` and `storage` schemas belong to it; on hosted they already exist).
+2. Applied migrations 1 to 8 as `postgres` (what `db push` does): 8 of 8 succeeded. Migrations 2 and 5 create roles, which works because `postgres` has `CREATEROLE`.
+3. Rolled back as `postgres`: `drop schema public cascade; drop schema supabase_migrations cascade; drop role mindmosaic_content_answer_writer;`: succeeded.
+4. Restored `schema-public-and-ledger.sql` and `data-public-and-ledger.sql` as `postgres`: 0 errors.
+5. Result: ledger 39, 41 public tables, 53 policies, 43 functions, writer role gone, `mindmosaic_scoring` back to 8 update columns, `authenticated` back to 2 profile update columns, and the md5 of the profiles (original columns), the ledger and the offerings **identical to live hosted before the apply** (`b9f5903eâ€¦`, `99d44436â€¦`, `43b10165â€¦`).
+
+**One failure found and fixed in the procedure:** `drop owned by mindmosaic_content_answer_writer` fails for `postgres` ("permission denied to drop objects"). It is not needed and has been removed from 14.5.
+
+**What is still not proven:**
+- It has not been run against hosted, by design.
+- The one step that cannot be SQL, deleting the `content-assets-private` bucket through the Storage API with the service-role key, was **not exercised** (no Storage service locally; the key exists in `.env.local` but I have not tried it). It is only needed if the apply reached migration 3, and an empty private bucket left behind is harmless.
+- `auth` and `storage` data are not part of this restore path. Migrations 1 to 8 do not change them, apart from the one bucket row.
+
+**What a real recovery would require, and how long it would take**
+1. Decide to restore, and put the site in a known state (the `public` schema will not exist for a few minutes, so every data call on the live site fails during it; nothing is lost that the dump holds).
+2. `psql` from `C:\Users\vishw\pgclient\pg17\pgsql\bin`, with `SUPABASE_DB_URL`.
+3. Optional: delete the bucket through the Storage API.
+4. Run the three statements above, then the two restore files, then the "before" checks.
+
+*Timing, measured:* locally the drop and restore took 4.8 s in total (0.6 s drop, 3.6 s schema, 0.6 s data). Against hosted, round trips cost about 145 ms each (200 sequential statements took 28.9 s, including the connection). The schema file has about 780 statements and the data file 42 `COPY` blocks, so the **restore itself should take about 3 to 5 minutes**. Allow another 5 minutes for deciding, connecting and checking. Expect **roughly 10 minutes of degraded site** end to end. This is an estimate from those numbers, not a run against hosted.
+
+## 16. The two options, corrected and staged (owner decides; nothing applied)
+
+**Correction to earlier text:** migration 6 alone fixes both live bugs (Year 5 shown as Year 3, and the onboarding 403). Migration 4 is not needed for either. And the apply **must be run from a checkout of `main`**, never `dev`: `dev` also contains migrations 9 and 10, and `db push --include-all` there would apply them.
+
+**Guard, run in whichever checkout you apply from. All three lines must print True.**
+```powershell
+git merge-base --is-ancestor HEAD origin/main; $?                      # HEAD is on main's history
+(Get-ChildItem supabase\migrations\*.sql).Count -eq 47                  # main has 47 files; dev has 49
+-not (Test-Path supabase\migrations\20261005090000_*.sql) -and -not (Test-Path supabase\migrations\20261013090000_*.sql)   # no 9 or 10
+```
+
+### Option (a): migration 6 only (the minimum that fixes the live bug)
+
+Rehearsed on the restored copy as `postgres`: migration 6 applied alone in one transaction together with its ledger row; as a Year 5 student `requireStudent()`'s select returned `year_level = 5`, the onboarding role check returned the row, and the onboarding update succeeded. Then the other seven applied in version order afterwards (1, 2, 3, 4, 5, 7, 8) and all 17 checks passed with 47 ledger rows, so applying 6 first and the rest later is safe.
+
+`db push` cannot apply a subset, so this uses `psql` and writes the ledger row itself, in one transaction:
+```powershell
+$psql = 'C:\Users\vishw\pgclient\pg17\pgsql\bin\psql.exe'
+& $psql $env:SUPABASE_DB_URL -X -v ON_ERROR_STOP=1 --single-transaction `
+  -f supabase\migrations\20260922100000_student_onboarding_preferences.sql `
+  -c "insert into supabase_migrations.schema_migrations(version,name) values ('20260922100000','student_onboarding_preferences')"
+```
+Either both the migration and its ledger row commit, or neither does. Then verify, and confirm the CLI agrees:
+```powershell
+supabase db query --db-url $env:SUPABASE_DB_URL -f docs\reports\hosted-db-drift-2026-10-14-verify-6-only.sql -o table
+supabase migration list --db-url $env:SUPABASE_DB_URL      # 20260922100000 should show on both sides; 7 versions remain local-only
+```
+`docs\reports\hosted-db-drift-2026-10-14-verify-6-only.sql` (also in this PR; read-only; every `ok` must be `t`. Run on today's hosted state it returns `f f f f t t`, which I did to validate the syntax):
+```sql
+select check_name, ok from (values
+ ('profiles has the 4 onboarding columns',
+   (select count(*) = 4 from information_schema.columns where table_schema = 'public' and table_name = 'profiles' and column_name in ('onboarding_completed_at', 'diagnostic_completed_at', 'interests', 'weekly_goal_minutes'))),
+ ('authenticated can UPDATE exactly the 6 intended profile columns',
+   (select count(*) = 6 and bool_and(column_name in ('display_name', 'year_level', 'onboarding_completed_at', 'diagnostic_completed_at', 'interests', 'weekly_goal_minutes')) from information_schema.column_privileges where grantee = 'authenticated' and privilege_type = 'UPDATE' and table_schema = 'public' and table_name = 'profiles')),
+ ('ledger holds 40 rows (39 + migration 6)',
+   (select count(*) = 40 from supabase_migrations.schema_migrations)),
+ ('migration 6 is the newest ledger row',
+   (select max(version) = '20260922100000' from supabase_migrations.schema_migrations)),
+ ('profiles unchanged: 6 rows, 4 students, 2 in Year 3, 2 in Year 5',
+   (select count(*) = 6 and count(*) filter (where role = 'student') = 4 and count(*) filter (where role = 'student' and year_level = 3) = 2 and count(*) filter (where role = 'student' and year_level = 5) = 2 from public.profiles)),
+ ('no student marked onboarded by the migration',
+   (select count(*) = 0 from public.profiles p where to_jsonb(p)->>'onboarding_completed_at' is not null or to_jsonb(p)->>'diagnostic_completed_at' is not null))
+) as t(check_name, ok);
+```
+Then the owner smoke test on the live site (Year 5 student sees Year 5; onboarding completes with no 403).
+
+*Rollback for (a):* the migration only adds four columns and swaps the column grants on `profiles`. Undo with `alter table public.profiles drop column onboarding_completed_at, drop column diagnostic_completed_at, drop column interests, drop column weekly_goal_minutes; revoke update on public.profiles from authenticated; grant update (display_name, year_level) on public.profiles to authenticated; delete from supabase_migrations.schema_migrations where version = '20260922100000';`. **Do that only before any student has used the new onboarding**, otherwise dropping the columns discards their answers. Beyond that, 14.5 applies.
+
+*What (a) leaves:* hosted still lacks migrations 1 to 5, 7 and 8. `main`'s content-factory scripts, the curriculum explorer and the `curriculumPreference` API path stay unsupported, and the ledger is one short of `main`'s files.
+
+### Option (b): all 8, aligning hosted with deployed `main`
+
+Exactly as in 14.4: the guard above, a fresh dump, the dry run that must list exactly the 8, then `supabase db push --include-all --db-url $env:SUPABASE_DB_URL`, then the 17-row verification. Rehearsed end to end as `postgres` (section 14.3 and 15.4).
+
+### Comparison
+
+| | (a) migration 6 only | (b) all 8 |
+|---|---|---|
+| Fixes Year-5-sees-Year-3 and the onboarding 403 | Yes (rehearsed) | Yes (rehearsed) |
+| Tooling | `psql` + manual ledger insert (one transaction) | `supabase db push` (standard path) |
+| Objects changed on hosted | 4 columns + 1 grant swap on `profiles` | 34 new tables, new roles and bucket, 99 to 101 offerings, `profiles` columns and grants |
+| Leaves hosted behind `main` | Yes, 7 migrations | No |
+| Later work | Still need to apply the other 7 (rehearsed as safe in any order after 6) | None |
+| Blast radius if it fails | Smallest | Larger, but each file is its own transaction and it stops at the first failure |
