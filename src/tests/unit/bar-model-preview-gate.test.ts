@@ -14,4 +14,10 @@ describe("bar-model preview gate", () => {
     expect(isBarModelPreviewAllowed({ NODE_ENV: "production", BAR_MODEL_PREVIEW_ENABLED: "true" })).toBe(false);
     expect(isBarModelPreviewAllowed({ NODE_ENV: "production", BAR_MODEL_PREVIEW_ENABLED: "1" })).toBe(true);
   });
+
+  it("is closed on Vercel production even with the e2e flag or a non-production NODE_ENV", () => {
+    expect(isBarModelPreviewAllowed({ NODE_ENV: "production", VERCEL_ENV: "production", BAR_MODEL_PREVIEW_ENABLED: "1" })).toBe(false);
+    expect(isBarModelPreviewAllowed({ NODE_ENV: "development", VERCEL_ENV: "production" })).toBe(false);
+    expect(isBarModelPreviewAllowed({ NODE_ENV: "production", VERCEL_ENV: "preview", BAR_MODEL_PREVIEW_ENABLED: "1" })).toBe(true);
+  });
 });
