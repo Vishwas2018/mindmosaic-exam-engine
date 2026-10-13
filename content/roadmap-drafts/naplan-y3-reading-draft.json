@@ -15,7 +15,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Paint brushes"
+          "text": "Books"
         },
         {
           "id": "b",
@@ -27,19 +27,19 @@
         },
         {
           "id": "d",
-          "text": "Books"
+          "text": "Paint brushes"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "The first sentence identifies the books they had to move.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -58,25 +58,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The tall pile slid when the cart turned"
-        },
-        {
-          "id": "b",
           "text": "The cart reached the library"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "Fern removed a wheel"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "The books were too wet"
+        },
+        {
+          "id": "d",
+          "text": "The tall pile slid when the cart turned"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "The fall happened when the cart turned with one tall pile.",
       "metadata": {
@@ -101,31 +101,31 @@
       "options": [
         {
           "id": "a",
-          "text": "Putting books in water"
-        },
-        {
-          "id": "b",
           "text": "Moving the library"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "Using one taller pile"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "Making three lower piles"
+        },
+        {
+          "id": "d",
+          "text": "Putting books in water"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
       "explanation": "Fern suggested dividing the load into three lower piles.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -144,7 +144,7 @@
       "options": [
         {
           "id": "a",
-          "text": "A deep puddle"
+          "text": "A locked library door"
         },
         {
           "id": "b",
@@ -156,7 +156,7 @@
         },
         {
           "id": "d",
-          "text": "A locked library door"
+          "text": "A deep puddle"
         }
       ],
       "visuals": [],
@@ -168,7 +168,7 @@
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -187,15 +187,15 @@
       "options": [
         {
           "id": "a",
-          "text": "It reached a different school"
-        },
-        {
-          "id": "b",
           "text": "It was the only path with grass"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "It was smooth enough for the cart"
+        },
+        {
+          "id": "c",
+          "text": "It reached a different school"
         },
         {
           "id": "d",
@@ -205,7 +205,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "The smooth path let them move the loaded cart without lifting it over the step.",
       "metadata": {
@@ -230,7 +230,7 @@
       "options": [
         {
           "id": "a",
-          "text": "She wants the books to get wet"
+          "text": "She ignores problems with the cart"
         },
         {
           "id": "b",
@@ -242,7 +242,7 @@
         },
         {
           "id": "d",
-          "text": "She ignores problems with the cart"
+          "text": "She wants the books to get wet"
         }
       ],
       "visuals": [],
@@ -254,7 +254,7 @@
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -277,7 +277,7 @@
         },
         {
           "id": "b",
-          "text": "Check the route before loading"
+          "text": "Make the pile as tall as possible"
         },
         {
           "id": "c",
@@ -285,19 +285,19 @@
         },
         {
           "id": "d",
-          "text": "Make the pile as tall as possible"
+          "text": "Check the route before loading"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "d"
       },
       "explanation": "Luca explicitly decides to check the path before loading next time.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -316,31 +316,31 @@
       "options": [
         {
           "id": "a",
-          "text": "At the garden gate"
-        },
-        {
-          "id": "b",
           "text": "Under the teacher desk"
         },
         {
+          "id": "b",
+          "text": "Outside the library"
+        },
+        {
           "id": "c",
-          "text": "Beside the classroom door"
+          "text": "At the garden gate"
         },
         {
           "id": "d",
-          "text": "Outside the library"
+          "text": "Beside the classroom door"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The opening sentence places the shelf beside the door.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -359,11 +359,11 @@
       "options": [
         {
           "id": "a",
-          "text": "When the seeds were collected"
+          "text": "When every plant will flower"
         },
         {
           "id": "b",
-          "text": "When every plant will flower"
+          "text": "When the class moves rooms"
         },
         {
           "id": "c",
@@ -371,19 +371,19 @@
         },
         {
           "id": "d",
-          "text": "When the class moves rooms"
+          "text": "When the seeds were collected"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "The envelope lists the month of seed collection.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -406,7 +406,7 @@
         },
         {
           "id": "b",
-          "text": "The colour of every leaf"
+          "text": "Only the number of pot holes"
         },
         {
           "id": "c",
@@ -414,7 +414,7 @@
         },
         {
           "id": "d",
-          "text": "Only the number of pot holes"
+          "text": "The colour of every leaf"
         }
       ],
       "visuals": [],
@@ -426,7 +426,7 @@
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -445,25 +445,25 @@
       "options": [
         {
           "id": "a",
-          "text": "To hide the seed envelope"
-        },
-        {
-          "id": "b",
-          "text": "To make the plant grow without light"
-        },
-        {
-          "id": "c",
           "text": "To keep the soil completely dry"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "To let extra water drain away"
+        },
+        {
+          "id": "c",
+          "text": "To hide the seed envelope"
+        },
+        {
+          "id": "d",
+          "text": "To make the plant grow without light"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "The passage gives drainage as the purpose of the holes.",
       "metadata": {
@@ -488,15 +488,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Recording nothing"
+          "text": "Returning only the empty pot"
         },
         {
           "id": "b",
-          "text": "Drawing what happens"
+          "text": "Recording nothing"
         },
         {
           "id": "c",
-          "text": "Returning only the empty pot"
+          "text": "Drawing what happens"
         },
         {
           "id": "d",
@@ -506,13 +506,13 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The passage explicitly says a drawing is fine.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -531,11 +531,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Pretend the plant grew"
+          "text": "Keep the result secret"
         },
         {
           "id": "b",
-          "text": "Keep the result secret"
+          "text": "Throw the green book away"
         },
         {
           "id": "c",
@@ -543,7 +543,7 @@
         },
         {
           "id": "d",
-          "text": "Throw the green book away"
+          "text": "Pretend the plant grew"
         }
       ],
       "visuals": [],
@@ -555,7 +555,7 @@
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -574,31 +574,31 @@
       "options": [
         {
           "id": "a",
-          "text": "Drawings are less useful than words"
+          "text": "Only large plants belong on the shelf"
         },
         {
           "id": "b",
-          "text": "Unsuccessful attempts can help the class learn"
-        },
-        {
-          "id": "c",
           "text": "Every seed must grow immediately"
         },
         {
+          "id": "c",
+          "text": "Unsuccessful attempts can help the class learn"
+        },
+        {
           "id": "d",
-          "text": "Only large plants belong on the shelf"
+          "text": "Drawings are less useful than words"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The class can learn from a record of an unsuccessful attempt.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -612,36 +612,36 @@
       "prompt": "What was the usual packing-up signal?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
           "id": "a",
-          "text": "A small bell"
-        },
-        {
-          "id": "b",
           "text": "A song from the shed"
         },
         {
+          "id": "b",
+          "text": "A small bell"
+        },
+        {
           "id": "c",
-          "text": "A whistle at the gate"
+          "text": "A flashing torch"
         },
         {
           "id": "d",
-          "text": "A flashing torch"
+          "text": "A whistle at the gate"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "Amira usually rang a small bell.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -655,36 +655,36 @@
       "prompt": "Where did the bird land?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
           "id": "a",
-          "text": "On the nearby fence"
+          "text": "Under a seed tray"
         },
         {
           "id": "b",
-          "text": "Inside the tool box"
-        },
-        {
-          "id": "c",
           "text": "On the bell handle"
         },
         {
+          "id": "c",
+          "text": "On the nearby fence"
+        },
+        {
           "id": "d",
-          "text": "Under a seed tray"
+          "text": "Inside the tool box"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "The bird landed on the fence nearby.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -698,36 +698,36 @@
       "prompt": "How did Amira first attract the others' attention quietly?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
           "id": "a",
-          "text": "She shook the fence"
-        },
-        {
-          "id": "b",
-          "text": "She clapped loudly"
-        },
-        {
-          "id": "c",
           "text": "She raised her hand"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "She rang the bell twice"
+        },
+        {
+          "id": "c",
+          "text": "She clapped loudly"
+        },
+        {
+          "id": "d",
+          "text": "She shook the fence"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "She put down the bell and raised her hand, which others copied.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -741,7 +741,7 @@
       "prompt": "Why did Amira whisper the instructions?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
@@ -750,21 +750,21 @@
         },
         {
           "id": "b",
-          "text": "To stop the children understanding her"
+          "text": "To keep the packing-up activity quiet near the bird"
         },
         {
           "id": "c",
-          "text": "Because she was alone in the garden"
+          "text": "To stop the children understanding her"
         },
         {
           "id": "d",
-          "text": "To keep the packing-up activity quiet near the bird"
+          "text": "Because she was alone in the garden"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "Whispering is consistent with her choice of a quiet signal near the bird.",
       "metadata": {
@@ -784,36 +784,36 @@
       "prompt": "What happened after the last tray was put away?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
           "id": "a",
-          "text": "The children began planting again"
-        },
-        {
-          "id": "b",
-          "text": "The bird flew to a high branch"
-        },
-        {
-          "id": "c",
           "text": "The bird went into the shed"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "The tool box fell over"
+        },
+        {
+          "id": "c",
+          "text": "The bird flew to a high branch"
+        },
+        {
+          "id": "d",
+          "text": "The children began planting again"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The passage gives this event directly after the last tray was put away.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -827,16 +827,16 @@
       "prompt": "What did Amira draw on the card?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
           "id": "a",
-          "text": "A broken bell"
+          "text": "A seed envelope"
         },
         {
           "id": "b",
-          "text": "A seed envelope"
+          "text": "A raised hand"
         },
         {
           "id": "c",
@@ -844,19 +844,19 @@
         },
         {
           "id": "d",
-          "text": "A raised hand"
+          "text": "A broken bell"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "The next day she drew a raised hand.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -870,12 +870,12 @@
       "prompt": "How had the club changed by the end?",
       "stimulus": {
         "title": "The quiet bell",
-        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
+        "body": "Amira usually rang a small bell when garden club needed to pack up. One afternoon, a bird landed on the fence nearby. Amira wanted the club to pack up without frightening it. Amira put down the bell and raised her hand. The other children noticed and raised their hands too. She whispered the packing-up instructions. They moved the tool box and seed trays into the shed without walking towards the bird. After the last tray was put away, the bird flew to a high branch. The next day, Amira drew a raised hand on a card and placed it beside the bell. The club now had a quiet signal as well as a ringing one."
       },
       "options": [
         {
           "id": "a",
-          "text": "It had a choice of quiet and ringing signals"
+          "text": "It had stopped using all tools"
         },
         {
           "id": "b",
@@ -887,13 +887,13 @@
         },
         {
           "id": "d",
-          "text": "It had stopped using all tools"
+          "text": "It had a choice of quiet and ringing signals"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "The closing sentence gives the club two kinds of signal.",
       "metadata": {
@@ -922,15 +922,15 @@
         },
         {
           "id": "b",
-          "text": "In the garden cart"
+          "text": "At the beach"
         },
         {
           "id": "c",
-          "text": "In a swimming pool"
+          "text": "In the garden cart"
         },
         {
           "id": "d",
-          "text": "At the beach"
+          "text": "In a swimming pool"
         }
       ],
       "visuals": [],
@@ -942,7 +942,7 @@
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -961,31 +961,31 @@
       "options": [
         {
           "id": "a",
-          "text": "Owen poured water on his name"
-        },
-        {
-          "id": "b",
           "text": "The boat touched his wet raincoat"
         },
         {
+          "id": "b",
+          "text": "The teacher washed the boat"
+        },
+        {
           "id": "c",
-          "text": "A child put it in the tray first"
+          "text": "Owen poured water on his name"
         },
         {
           "id": "d",
-          "text": "The teacher washed the boat"
+          "text": "A child put it in the tray first"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The boat slipped against the wet raincoat on the way to school.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -1008,11 +1008,11 @@
         },
         {
           "id": "b",
-          "text": "Inside the water tray"
+          "text": "On the classroom tap"
         },
         {
           "id": "c",
-          "text": "On the classroom tap"
+          "text": "Inside the water tray"
         },
         {
           "id": "d",
@@ -1028,7 +1028,7 @@
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -1047,31 +1047,31 @@
       "options": [
         {
           "id": "a",
-          "text": "After morning reading"
-        },
-        {
-          "id": "b",
-          "text": "After the school gates closed"
-        },
-        {
-          "id": "c",
           "text": "Before leaving home"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "After morning reading"
+        },
+        {
+          "id": "c",
           "text": "During the distance race"
+        },
+        {
+          "id": "d",
+          "text": "After the school gates closed"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "The passage gives morning reading as the activity before the check.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -1090,31 +1090,31 @@
       "options": [
         {
           "id": "a",
-          "text": "A lunch box"
-        },
-        {
-          "id": "b",
           "text": "A tiny paper flag"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "A seed tray"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "A library book"
+        },
+        {
+          "id": "d",
+          "text": "A lunch box"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "Owen made a paper flag for the boat to carry.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
@@ -1133,31 +1133,31 @@
       "options": [
         {
           "id": "a",
-          "text": "Wet paper always becomes perfectly flat"
+          "text": "Paper boats should never have names"
         },
         {
           "id": "b",
-          "text": "Something imperfect can be useful in another way"
-        },
-        {
-          "id": "c",
           "text": "Every race must have only one boat"
         },
         {
+          "id": "c",
+          "text": "Wet paper always becomes perfectly flat"
+        },
+        {
           "id": "d",
-          "text": "Paper boats should never have names"
+          "text": "Something imperfect can be useful in another way"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "d"
       },
       "explanation": "The bent boat cannot race well but serves as a flag carrier.",
       "metadata": {
         "subject": "reading",
         "strand": "Interpreting",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 95,
         "tags": []
