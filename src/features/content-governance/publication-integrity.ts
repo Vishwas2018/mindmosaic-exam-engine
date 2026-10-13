@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
 import { validateManifestReviewEvidence } from "@/features/question-factory/publication/manifest-schema";
+import { writingTaskSchema, type WritingTask } from "@/features/writing/task";
 import { questionSchema, type Question } from "@/schemas/question.schema";
 
 const digest = z.string().regex(/^[a-f0-9]{64}$/);
@@ -55,6 +56,129 @@ export function validateHumanApproval(
     return { ok: false, reason: "approved_content_mismatch" };
   }
   return { ok: true, approval: parsed.data };
+}
+
+/**
+ * Private authoring evidence for a writing prompt. A second `kind` of the same
+ * approval record, not a second mechanism: the reviewer rules, the three
+ * checks, the revision binding and the fingerprint are the ones above, and
+ * `verifyApprovalRecord` is the single function that checks either kind. The
+ * embedded `prompt` is the snapshot a child is served, so editing a draft later
+ * cannot change what was approved.
+ */
+export const humanWritingPromptApprovalSchema = z.object({
+  kind: z.literal("human_writing_prompt_approval"),
+  schemaVersion: z.literal(1),
+  promptId: z.string().min(1),
+  revision: z.number().int().nonnegative(),
+  approvedBy: z.string().trim().min(1),
+  approvedAt: z.iso.datetime({ offset: true }),
+  contentHash: digest,
+  /** A prompt has no factory manifest. Kept (always null) so both kinds bind the same facts. */
+  sourceManifestHash: z.null(),
+  checks: z.object({
+    correctness: z.literal(true),
+    originality: z.literal(true),
+    ageAppropriateness: z.literal(true),
+  }).strict(),
+  prompt: writingTaskSchema,
+  fingerprint: digest,
+}).strict();
+
+export type HumanWritingPromptApproval = z.infer<typeof humanWritingPromptApprovalSchema>;
+
+/** Discriminated on `kind`. The question member is the unchanged schema above. */
+export const approvalRecordSchema = z.discriminatedUnion("kind", [
+  humanPublicationApprovalSchema,
+  humanWritingPromptApprovalSchema,
+]);
+
+export type VerifiedApproval = HumanPublicationApproval | HumanWritingPromptApproval;
+
+export function canonicalWritingPromptHash(prompt: unknown): string {
+  return hashJson(writingTaskSchema.parse(prompt));
+}
+
+export function writingApprovalFingerprint(approval: Omit<HumanWritingPromptApproval, "fingerprint">): string {
+  return hashJson(approval);
+}
+
+export type ApprovalSubject =
+  | { readonly kind: "question"; readonly question: Question; readonly revision: number; readonly sourceManifestHash: string | null }
+  | { readonly kind: "writing_prompt"; readonly prompt: WritingTask; readonly revision: number };
+
+function validateHumanWritingPromptApproval(
+  raw: unknown,
+  prompt: WritingTask,
+  revision: number,
+): { ok: true; approval: HumanWritingPromptApproval } | { ok: false; reason: string } {
+  const parsed = humanWritingPromptApprovalSchema.safeParse(raw);
+  if (!parsed.success) return { ok: false, reason: "missing_or_invalid_human_approval" };
+  const { fingerprint, ...facts } = parsed.data;
+  if (fingerprint !== writingApprovalFingerprint(facts)) return { ok: false, reason: "approval_fingerprint_mismatch" };
+  if (facts.promptId !== prompt.id || facts.prompt.id !== prompt.id || facts.revision !== revision) {
+    return { ok: false, reason: "approval_revision_mismatch" };
+  }
+  try {
+    if (facts.contentHash !== canonicalWritingPromptHash(prompt) || facts.contentHash !== canonicalWritingPromptHash(facts.prompt)) {
+      return { ok: false, reason: "approved_content_mismatch" };
+    }
+  } catch {
+    return { ok: false, reason: "approved_content_mismatch" };
+  }
+  return { ok: true, approval: parsed.data };
+}
+
+/**
+ * The one verification function for approval evidence. A question record is
+ * checked by `validateHumanApproval`, untouched, so every existing record
+ * verifies exactly as it did before; a writing-prompt record is checked
+ * against the same facts (fingerprint, id, revision, content hash).
+ */
+export function verifyApprovalRecord(
+  raw: unknown,
+  subject: ApprovalSubject,
+): { ok: true; approval: VerifiedApproval } | { ok: false; reason: string } {
+  if (subject.kind === "question") {
+    return validateHumanApproval(raw, subject.question, subject.revision, subject.sourceManifestHash);
+  }
+  return validateHumanWritingPromptApproval(raw, subject.prompt, subject.revision);
+}
+
+export interface WritingPromptEligibilityReport {
+  readonly prompts: readonly WritingTask[];
+  readonly approvals: ReadonlyMap<string, HumanWritingPromptApproval>;
+  readonly problems: readonly string[];
+}
+
+/**
+ * Which writing prompts a child may be served, from approval records alone.
+ * Fails closed per prompt: an unreadable, duplicated, mis-fingerprinted or
+ * content-mismatched record serves nothing. The snapshot inside the verified
+ * record is what is returned.
+ */
+export function selectApprovedWritingPrompts(records: readonly unknown[]): WritingPromptEligibilityReport {
+  const byId = new Map<string, unknown[]>();
+  const problems: string[] = [];
+  for (const raw of records) {
+    const id = raw && typeof raw === "object" ? (raw as Record<string, unknown>).promptId : undefined;
+    if (typeof id !== "string") { problems.push("writing approval evidence has no promptId"); continue; }
+    byId.set(id, [...(byId.get(id) ?? []), raw]);
+  }
+  const prompts: WritingTask[] = [];
+  const approvals = new Map<string, HumanWritingPromptApproval>();
+  for (const [id, group] of [...byId].sort(([a], [b]) => a.localeCompare(b))) {
+    if (group.length > 1) { problems.push(`${id}: duplicate_approval`); continue; }
+    const parsed = humanWritingPromptApprovalSchema.safeParse(group[0]);
+    if (!parsed.success) { problems.push(`${id}: missing_or_invalid_human_approval`); continue; }
+    const result = verifyApprovalRecord(group[0], {
+      kind: "writing_prompt", prompt: parsed.data.prompt, revision: parsed.data.revision,
+    });
+    if (!result.ok) { problems.push(`${id}: ${result.reason}`); continue; }
+    prompts.push(parsed.data.prompt);
+    approvals.set(id, parsed.data);
+  }
+  return { prompts: Object.freeze(prompts), approvals, problems };
 }
 
 const MANIFEST_FACT_KEYS = [

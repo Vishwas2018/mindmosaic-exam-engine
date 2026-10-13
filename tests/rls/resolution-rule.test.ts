@@ -788,6 +788,7 @@ describe("5. erasure — the whole graph, not just the two exam models (Gate A i
       "exam_sessions.student_id",
       "idempotency_keys.actor_id",
       "parent_children.child_id",
+      "writing_attempts.student_id",
     ]);
     /* Actor columns: the profile named is whoever performed the action
        (teacher, admin, parent, assignment author), never the child being
@@ -801,6 +802,8 @@ describe("5. erasure — the whole graph, not just the two exam models (Gate A i
       "manual_marks.marked_by",
       "parent_children.parent_id",
       "subscriptions.parent_id",
+      "writing_attempts.created_by",
+      "writing_marks.marked_by",
     ]);
 
     const unaccounted = linked.rows

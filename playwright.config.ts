@@ -82,7 +82,12 @@ export default defineConfig({
      * render-only; src/features/visuals/bar-model/preview-gate.ts). The
      * 404-in-production half is proven by bar-model-preview.spec.ts, which
      * starts this same build WITHOUT the variable.
+     *
+     * Same posture for the dev-only writing preview (src/features/writing/
+     * preview-gate.ts): its 404-in-production half is proven by
+     * e2e/writing-preview.spec.ts, which starts this same build WITHOUT the
+     * variable, and again with VERCEL_ENV=production.
      */
-    env: { SHOWCASE_ENABLED: "1", BAR_MODEL_PREVIEW_ENABLED: "1" },
+    env: { SHOWCASE_ENABLED: "1", BAR_MODEL_PREVIEW_ENABLED: "1", WRITING_PREVIEW_ENABLED: "1" },
   },
 });

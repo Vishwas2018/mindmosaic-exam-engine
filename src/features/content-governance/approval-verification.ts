@@ -3,14 +3,28 @@ import path from "node:path";
 
 import { factoryPublishedQuestions } from "@/content/questions/generated";
 import type { Question } from "@/schemas/question.schema";
+import type { WritingTask } from "@/features/writing/task";
 import {
   approvalFingerprint,
   canonicalQuestionHash,
+  canonicalWritingPromptHash,
   humanPublicationApprovalSchema,
-  validateHumanApproval,
+  humanWritingPromptApprovalSchema,
   validatePublicationSource,
+  verifyApprovalRecord,
+  writingApprovalFingerprint,
   type HumanPublicationApproval,
+  type HumanWritingPromptApproval,
+  type VerifiedApproval,
 } from "./publication-integrity";
+
+/** A reviewable writing prompt: the exact task a child would see, and its revision. */
+export interface WritingPromptSubject {
+  readonly task: WritingTask;
+  readonly revision: number;
+}
+
+export const WRITING_APPROVALS_DIRECTORY = "content/publication-approvals/writing-prompts";
 
 export type ApprovalDecision = "approve" | "reject" | "revise" | "";
 
@@ -34,8 +48,8 @@ export interface ValidatedApprovalTarget {
 }
 
 export type ApprovalRowClassification =
-  | { readonly kind: "already-recorded"; readonly questionId: string; readonly approval: HumanPublicationApproval }
-  | { readonly kind: "new-approval"; readonly questionId: string; readonly approval: HumanPublicationApproval }
+  | { readonly kind: "already-recorded"; readonly questionId: string; readonly approval: VerifiedApproval }
+  | { readonly kind: "new-approval"; readonly questionId: string; readonly approval: VerifiedApproval }
   | { readonly kind: "reject"; readonly questionId: string; readonly notes?: string }
   | { readonly kind: "revise"; readonly questionId: string; readonly notes?: string }
   | { readonly kind: "unreviewed"; readonly questionId: string };
@@ -46,6 +60,9 @@ export interface BatchValidationResult {
   readonly rows: readonly ApprovalRowClassification[];
   readonly newApprovals: readonly HumanPublicationApproval[];
   readonly alreadyRecorded: readonly HumanPublicationApproval[];
+  /** Writing-prompt approvals, kept apart so every question consumer sees an unchanged shape. */
+  readonly newWritingApprovals: readonly HumanWritingPromptApproval[];
+  readonly alreadyRecordedWriting: readonly HumanWritingPromptApproval[];
   readonly rejectedCount: number;
   readonly revisedCount: number;
   readonly unreviewedCount: number;
@@ -118,6 +135,29 @@ export async function loadExistingApprovalsMap(
   return map;
 }
 
+export async function loadExistingWritingApprovalsMap(
+  approvalsDirectory = WRITING_APPROVALS_DIRECTORY,
+): Promise<Map<string, HumanWritingPromptApproval>> {
+  const map = new Map<string, HumanWritingPromptApproval>();
+  try {
+    const files = (await readdir(approvalsDirectory)).filter((f) => f.endsWith(".json"));
+    for (const file of files) {
+      try {
+        const raw = JSON.parse(await readFile(path.join(approvalsDirectory, file), "utf8"));
+        const parsed = humanWritingPromptApprovalSchema.safeParse(raw);
+        if (!parsed.success) throw new Error(`Invalid approval evidence in ${file}.`);
+        if (map.has(parsed.data.promptId)) throw new Error(`Duplicate approval evidence for ${parsed.data.promptId}.`);
+        map.set(parsed.data.promptId, parsed.data);
+      } catch (error) {
+        throw new Error(`Could not load approval evidence ${file}: ${String(error)}`);
+      }
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+  return map;
+}
+
 function parseCheck(val: string | boolean | undefined): boolean {
   if (typeof val === "boolean") return val;
   if (typeof val === "string") {
@@ -167,6 +207,9 @@ export async function validateApprovalBatch(options: {
   readonly questionBank: readonly Question[];
   readonly approvedAt?: string;
   readonly existingApprovals?: ReadonlyMap<string, HumanPublicationApproval>;
+  /** Reviewable writing prompts. Ids must not collide with a question id. */
+  readonly writingPrompts?: readonly WritingPromptSubject[];
+  readonly existingWritingApprovals?: ReadonlyMap<string, HumanWritingPromptApproval>;
 }): Promise<BatchValidationResult> {
   const fatalErrors: string[] = [];
   const reviewer = options.reviewerFullName?.trim();
@@ -177,6 +220,13 @@ export async function validateApprovalBatch(options: {
 
   const questionMap = new Map<string, Question>(options.questionBank.map((q) => [q.id, q]));
   const existingMap = options.existingApprovals ?? (await loadExistingApprovalsMap());
+  const promptMap = new Map<string, WritingPromptSubject>((options.writingPrompts ?? []).map((p) => [p.task.id, p]));
+  const existingWritingMap = options.writingPrompts?.length
+    ? (options.existingWritingApprovals ?? (await loadExistingWritingApprovalsMap()))
+    : new Map<string, HumanWritingPromptApproval>();
+  for (const id of promptMap.keys()) {
+    if (questionMap.has(id)) fatalErrors.push(`Writing prompt id '${id}' collides with a question id.`);
+  }
   const now = options.approvedAt ?? new Date().toISOString();
 
   // Rule: Check for duplicate approval targets WITHIN THE SAME INPUT
@@ -201,6 +251,8 @@ export async function validateApprovalBatch(options: {
       rows: [],
       newApprovals: [],
       alreadyRecorded: [],
+      newWritingApprovals: [],
+      alreadyRecordedWriting: [],
       rejectedCount: 0,
       revisedCount: 0,
       unreviewedCount: 0,
@@ -210,6 +262,8 @@ export async function validateApprovalBatch(options: {
   const classifiedRows: ApprovalRowClassification[] = [];
   const newApprovals: HumanPublicationApproval[] = [];
   const alreadyRecorded: HumanPublicationApproval[] = [];
+  const newWritingApprovals: HumanWritingPromptApproval[] = [];
+  const alreadyRecordedWriting: HumanWritingPromptApproval[] = [];
   let rejectedCount = 0;
   let revisedCount = 0;
   let unreviewedCount = 0;
@@ -217,7 +271,8 @@ export async function validateApprovalBatch(options: {
   for (const row of options.rows) {
     const qId = row.questionId.trim();
     const question = questionMap.get(qId);
-    if (!question) {
+    const writing = promptMap.get(qId);
+    if (!question && !writing) {
       fatalErrors.push(`Row references unknown or unauthored question: '${qId}'.`);
       continue;
     }
@@ -246,6 +301,60 @@ export async function validateApprovalBatch(options: {
     }
 
     // decision === "approve": all fields must bind the review to this exact revision.
+
+    if (writing) {
+      const canonical = canonicalWritingPromptHash(writing.task);
+      const reviewErrors = validateReviewedApprovalRow(row, reviewer, {
+        questionId: qId, contentHash: canonical, revision: writing.revision, sourceManifestHash: null,
+      });
+      if (reviewErrors.length) { fatalErrors.push(...reviewErrors); continue; }
+
+      const facts = {
+        kind: "human_writing_prompt_approval" as const,
+        schemaVersion: 1 as const,
+        promptId: writing.task.id,
+        revision: writing.revision,
+        approvedBy: reviewer,
+        approvedAt: now,
+        contentHash: canonical,
+        sourceManifestHash: null,
+        checks: { correctness: true as const, originality: true as const, ageAppropriateness: true as const },
+        prompt: writing.task,
+      };
+      const candidate: HumanWritingPromptApproval = { ...facts, fingerprint: writingApprovalFingerprint(facts) };
+      const verified = verifyApprovalRecord(candidate, { kind: "writing_prompt", prompt: writing.task, revision: writing.revision });
+      if (!verified.ok) {
+        fatalErrors.push(`Approval validation failed for '${qId}': ${verified.reason}`);
+        continue;
+      }
+
+      const existingWriting = existingWritingMap.get(qId);
+      if (existingWriting) {
+        const { fingerprint: existingFp, ...existingFacts } = existingWriting;
+        if (existingFp !== writingApprovalFingerprint(existingFacts)) {
+          fatalErrors.push(
+            `Conflicting existing approval for '${qId}': existing approval has corrupted or conflicting fingerprint.`,
+          );
+          continue;
+        }
+        const same = existingWriting.contentHash === canonical && existingWriting.revision === writing.revision &&
+          row.contentHash === existingWriting.contentHash && row.revision === existingWriting.revision;
+        if (same) {
+          alreadyRecordedWriting.push(existingWriting);
+          classifiedRows.push({ kind: "already-recorded", questionId: qId, approval: existingWriting });
+          continue;
+        }
+        fatalErrors.push(
+          `Conflicting existing approval for '${qId}': existing approval has different content hash, revision, or manifest hash.`,
+        );
+        continue;
+      }
+      newWritingApprovals.push(candidate);
+      classifiedRows.push({ kind: "new-approval", questionId: qId, approval: candidate });
+      continue;
+    }
+    // A question from here on.
+    if (!question) continue;
 
     let source: { revision: number; sourceManifestHash: string | null };
     try {
@@ -283,12 +392,12 @@ export async function validateApprovalBatch(options: {
     const candidateApproval: HumanPublicationApproval = { ...facts, fingerprint };
 
     // Validate using validateHumanApproval
-    const validation = validateHumanApproval(
-      candidateApproval,
+    const validation = verifyApprovalRecord(candidateApproval, {
+      kind: "question",
       question,
-      source.revision,
-      source.sourceManifestHash,
-    );
+      revision: source.revision,
+      sourceManifestHash: source.sourceManifestHash,
+    });
     if (!validation.ok) {
       fatalErrors.push(`Approval validation failed for '${qId}': ${validation.reason}`);
       continue;
@@ -340,6 +449,8 @@ export async function validateApprovalBatch(options: {
       rows: [],
       newApprovals: [],
       alreadyRecorded: [],
+      newWritingApprovals: [],
+      alreadyRecordedWriting: [],
       rejectedCount: 0,
       revisedCount: 0,
       unreviewedCount: 0,
@@ -352,6 +463,8 @@ export async function validateApprovalBatch(options: {
     rows: classifiedRows,
     newApprovals,
     alreadyRecorded,
+    newWritingApprovals,
+    alreadyRecordedWriting,
     rejectedCount,
     revisedCount,
     unreviewedCount,
@@ -362,19 +475,21 @@ export async function validateApprovalBatch(options: {
  * Writes new approvals atomically to disk.
  */
 export async function recordApprovalsToDisk(
-  approvals: readonly HumanPublicationApproval[],
+  approvals: readonly VerifiedApproval[],
   directory = "content/publication-approvals",
 ): Promise<number> {
   const { access, link, mkdir, mkdtemp, rmdir, unlink, writeFile } = await import("node:fs/promises");
   await mkdir(directory, { recursive: true });
-  const paths = approvals.map((approval) => path.join(directory, `${approval.questionId}.json`));
+  const subjectId = (approval: VerifiedApproval) =>
+    approval.kind === "human_writing_prompt_approval" ? approval.promptId : approval.questionId;
+  const paths = approvals.map((approval) => path.join(directory, `${subjectId(approval)}.json`));
   if (new Set(paths).size !== paths.length) throw new Error("Duplicate approval target in write batch.");
   for (const filePath of paths) {
     try { await access(filePath); throw new Error(`Approval file already exists: ${filePath}`); }
     catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error; }
   }
   const staging = await mkdtemp(path.join(directory, ".approval-batch-"));
-  const stagedPaths = approvals.map((approval) => path.join(staging, `${approval.questionId}.json`));
+  const stagedPaths = approvals.map((approval) => path.join(staging, `${subjectId(approval)}.json`));
   const linked: string[] = [];
   try {
     for (const [index, approval] of approvals.entries()) {

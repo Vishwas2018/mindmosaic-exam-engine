@@ -29,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
         "/exam",
         "/results",
         "/dev",
+        "/writing",
       ],
     },
     sitemap: "https://mindmosaic.app/sitemap.xml",

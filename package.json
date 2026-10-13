@@ -32,6 +32,7 @@
     "validate:questions": "tsx scripts/validate-question-bank.mts",
     "validate:lessons": "tsx scripts/validate-lessons.mts",
     "visuals:validate-bar-models": "tsx scripts/validate-bar-models.mts",
+    "content:validate-writing-drafts": "tsx scripts/validate-writing-drafts.mts",
     "check:answers": "tsx scripts/check-question-correctness.mts",
     "check:bundle": "tsx scripts/check-bundle.mts",
     "questions:prompt": "tsx scripts/questions-prompt.mts",

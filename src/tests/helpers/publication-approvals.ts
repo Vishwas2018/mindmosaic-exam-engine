@@ -1,8 +1,12 @@
 import {
   approvalFingerprint,
   canonicalQuestionHash,
+  canonicalWritingPromptHash,
+  writingApprovalFingerprint,
   type HumanPublicationApproval,
+  type HumanWritingPromptApproval,
 } from "@/features/content-governance/publication-integrity";
+import type { WritingTask } from "@/features/writing/task";
 import type { Question } from "@/schemas/question.schema";
 import { parseCandidateQuestion } from "@/features/question-factory/validation";
 import { buildPublishedQuestion } from "@/features/question-factory/publication/build-published-question";
@@ -66,4 +70,26 @@ export function createTestReviewedCandidateApproval(rawCandidate: unknown, revis
     sourceManifestHash: null,
     correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve",
   } };
+}
+
+/** Test-only writing-prompt approval; production cannot import this module. */
+export function createTestWritingApproval(options: {
+  readonly prompt: WritingTask;
+  readonly revision?: number;
+  readonly approvedBy?: string;
+  readonly approvedAt?: string;
+}): HumanWritingPromptApproval {
+  const facts = {
+    kind: "human_writing_prompt_approval" as const,
+    schemaVersion: 1 as const,
+    promptId: options.prompt.id,
+    revision: options.revision ?? 1,
+    approvedBy: options.approvedBy ?? "Verified Human Reviewer",
+    approvedAt: options.approvedAt ?? new Date().toISOString(),
+    contentHash: canonicalWritingPromptHash(options.prompt),
+    sourceManifestHash: null,
+    checks: { correctness: true as const, originality: true as const, ageAppropriateness: true as const },
+    prompt: options.prompt,
+  };
+  return { ...facts, fingerprint: writingApprovalFingerprint(facts) };
 }
