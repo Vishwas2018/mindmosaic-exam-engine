@@ -48,6 +48,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run validate:questions
+      - run: npm run content:validate-roadmap-drafts
+      - run: npm run content:verify-roadmap-amc-answers
       # bar_model fixtures: every valid example solves to its exact target and
       # every invalid one is rejected by its intended layer (schema,
       # structural or mathematical). Phase 1 is render-only; no question uses it.

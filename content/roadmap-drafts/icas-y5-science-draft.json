@@ -1,0 +1,2846 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts. Data are invented for these educational investigations. No independent review or human approval is claimed. Do not serve directly.",
+  "questions": [
+    {
+      "id": "roadmap-icas-y5-science-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which covering kept the water warmest?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three identical cups each held 100 mL of water at 60 °C. Each cup had a different covering and stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "None of the coverings slowed cooling"
+        },
+        {
+          "id": "b",
+          "text": "Cotton"
+        },
+        {
+          "id": "c",
+          "text": "Paper"
+        },
+        {
+          "id": "d",
+          "text": "Foam"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-01",
+          "type": "table",
+          "title": "Cup coverings",
+          "altText": "Results table for the cup coverings investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Temperature after 10 min (°C)"
+            ],
+            "rows": [
+              [
+                "Cotton",
+                49
+              ],
+              [
+                "Foam",
+                55
+              ],
+              [
+                "Paper",
+                46
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Foam had the highest final temperature, 55 °C.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Interpret a results table",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What was the variable deliberately changed?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three identical cups each held 100 mL of water at 60 °C. Each cup had a different covering and stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The covering material"
+        },
+        {
+          "id": "b",
+          "text": "The starting temperature"
+        },
+        {
+          "id": "c",
+          "text": "The amount of water"
+        },
+        {
+          "id": "d",
+          "text": "The waiting time"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-01",
+          "type": "table",
+          "title": "Cup coverings",
+          "altText": "Results table for the cup coverings investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Temperature after 10 min (°C)"
+            ],
+            "rows": [
+              [
+                "Cotton",
+                49
+              ],
+              [
+                "Foam",
+                55
+              ],
+              [
+                "Paper",
+                46
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Only the covering material differed between cups.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Identify the changed variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which condition needed to stay the same for a fair comparison?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three identical cups each held 100 mL of water at 60 °C. Each cup had a different covering and stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The cup size"
+        },
+        {
+          "id": "b",
+          "text": "The covering material"
+        },
+        {
+          "id": "c",
+          "text": "The result order"
+        },
+        {
+          "id": "d",
+          "text": "The final temperature"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-01",
+          "type": "table",
+          "title": "Cup coverings",
+          "altText": "Results table for the cup coverings investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Temperature after 10 min (°C)"
+            ],
+            "rows": [
+              [
+                "Cotton",
+                49
+              ],
+              [
+                "Foam",
+                55
+              ],
+              [
+                "Paper",
+                46
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Using identical cup sizes prevents cup size from affecting heat loss.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Identify a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would most improve confidence in the result?",
+      "stimulus": {
+        "title": "Cup coverings",
+        "body": "Three identical cups each held 100 mL of water at 60 °C. Each cup had a different covering and stood in the same room for 10 minutes."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Measure only the foam cup"
+        },
+        {
+          "id": "b",
+          "text": "Repeat each test several times"
+        },
+        {
+          "id": "c",
+          "text": "Stop tests at different times"
+        },
+        {
+          "id": "d",
+          "text": "Use a different water volume in each cup"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-01",
+          "type": "table",
+          "title": "Cup coverings",
+          "altText": "Results table for the cup coverings investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Temperature after 10 min (°C)"
+            ],
+            "rows": [
+              [
+                "Cotton",
+                49
+              ],
+              [
+                "Foam",
+                55
+              ],
+              [
+                "Paper",
+                46
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Repeating trials helps show whether the pattern is consistent rather than a one-off result.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Suggest a method improvement",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which light period produced the greatest mean growth?",
+      "stimulus": {
+        "title": "Seedlings and light",
+        "body": "Twelve similar bean seedlings were divided into three groups of four. Each group received the same water and soil but a different number of hours of light each day. The table shows mean growth after 14 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "10 hours"
+        },
+        {
+          "id": "b",
+          "text": "The seedlings did not grow in any group"
+        },
+        {
+          "id": "c",
+          "text": "6 hours"
+        },
+        {
+          "id": "d",
+          "text": "2 hours"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-02",
+          "type": "table",
+          "title": "Seedlings and light",
+          "altText": "Results table for the seedlings and light investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Light each day",
+              "Mean growth (cm)"
+            ],
+            "rows": [
+              [
+                "2 hours",
+                4
+              ],
+              [
+                "6 hours",
+                11
+              ],
+              [
+                "10 hours",
+                9
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The greatest mean growth in the table is 11 cm for 6 hours of light.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Read and compare table values",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which conclusion is supported by these results?",
+      "stimulus": {
+        "title": "Seedlings and light",
+        "body": "Twelve similar bean seedlings were divided into three groups of four. Each group received the same water and soil but a different number of hours of light each day. The table shows mean growth after 14 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Ten hours killed every seedling"
+        },
+        {
+          "id": "b",
+          "text": "Light has no effect on growth"
+        },
+        {
+          "id": "c",
+          "text": "Six hours gave more growth than 2 or 10 hours in this test"
+        },
+        {
+          "id": "d",
+          "text": "More light always causes more growth"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-02",
+          "type": "table",
+          "title": "Seedlings and light",
+          "altText": "Results table for the seedlings and light investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Light each day",
+              "Mean growth (cm)"
+            ],
+            "rows": [
+              [
+                "2 hours",
+                4
+              ],
+              [
+                "6 hours",
+                11
+              ],
+              [
+                "10 hours",
+                9
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The data support only the comparison tested; they do not show that more light always gives more growth.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Judge whether a conclusion is supported",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What should be kept the same when the investigation is repeated?",
+      "stimulus": {
+        "title": "Seedlings and light",
+        "body": "Twelve similar bean seedlings were divided into three groups of four. Each group received the same water and soil but a different number of hours of light each day. The table shows mean growth after 14 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The type and amount of soil"
+        },
+        {
+          "id": "b",
+          "text": "The hours of light"
+        },
+        {
+          "id": "c",
+          "text": "The growth result"
+        },
+        {
+          "id": "d",
+          "text": "The group label"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-02",
+          "type": "table",
+          "title": "Seedlings and light",
+          "altText": "Results table for the seedlings and light investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Light each day",
+              "Mean growth (cm)"
+            ],
+            "rows": [
+              [
+                "2 hours",
+                4
+              ],
+              [
+                "6 hours",
+                11
+              ],
+              [
+                "10 hours",
+                9
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The soil should remain the same so light is the main changed factor.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why is the mean of four seedlings more useful than measuring only one?",
+      "stimulus": {
+        "title": "Seedlings and light",
+        "body": "Twelve similar bean seedlings were divided into three groups of four. Each group received the same water and soil but a different number of hours of light each day. The table shows mean growth after 14 days."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It removes the need to water plants"
+        },
+        {
+          "id": "b",
+          "text": "It reduces the effect of an unusual single seedling"
+        },
+        {
+          "id": "c",
+          "text": "It guarantees every seedling grows equally"
+        },
+        {
+          "id": "d",
+          "text": "It changes the light hours"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-02",
+          "type": "table",
+          "title": "Seedlings and light",
+          "altText": "Results table for the seedlings and light investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Light each day",
+              "Mean growth (cm)"
+            ],
+            "rows": [
+              [
+                "2 hours",
+                4
+              ],
+              [
+                "6 hours",
+                11
+              ],
+              [
+                "10 hours",
+                9
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Several seedlings make the result less dependent on one unusually fast- or slow-growing plant.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Suggest a method improvement",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "On which surface did the car travel the shortest mean distance?",
+      "stimulus": {
+        "title": "Toy car surfaces",
+        "body": "A student released the same toy car from the same point on a ramp. The car then travelled across one of three level surfaces. Each surface was tested three times and the mean distance was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Felt"
+        },
+        {
+          "id": "b",
+          "text": "The car stopped at the same point on every surface"
+        },
+        {
+          "id": "c",
+          "text": "Smooth plastic"
+        },
+        {
+          "id": "d",
+          "text": "Cardboard"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-03",
+          "type": "table",
+          "title": "Toy car surfaces",
+          "altText": "Results table for the toy car surfaces investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Surface",
+              "Mean distance (cm)"
+            ],
+            "rows": [
+              [
+                "Smooth plastic",
+                186
+              ],
+              [
+                "Cardboard",
+                132
+              ],
+              [
+                "Felt",
+                74
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The smallest mean distance is 74 cm on felt.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Read and compare measurements",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What was deliberately changed between sets of trials?",
+      "stimulus": {
+        "title": "Toy car surfaces",
+        "body": "A student released the same toy car from the same point on a ramp. The car then travelled across one of three level surfaces. Each surface was tested three times and the mean distance was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The toy car"
+        },
+        {
+          "id": "b",
+          "text": "The number of ramp supports"
+        },
+        {
+          "id": "c",
+          "text": "The level surface"
+        },
+        {
+          "id": "d",
+          "text": "The release point"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-03",
+          "type": "table",
+          "title": "Toy car surfaces",
+          "altText": "Results table for the toy car surfaces investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Surface",
+              "Mean distance (cm)"
+            ],
+            "rows": [
+              [
+                "Smooth plastic",
+                186
+              ],
+              [
+                "Cardboard",
+                132
+              ],
+              [
+                "Felt",
+                74
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The level surface was the factor being compared.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Identify the changed variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "If a rougher fabric than felt were tested, which prediction is most reasonable?",
+      "stimulus": {
+        "title": "Toy car surfaces",
+        "body": "A student released the same toy car from the same point on a ramp. The car then travelled across one of three level surfaces. Each surface was tested three times and the mean distance was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The distance cannot be measured"
+        },
+        {
+          "id": "b",
+          "text": "The car may travel less than 74 cm"
+        },
+        {
+          "id": "c",
+          "text": "The car will fly upwards"
+        },
+        {
+          "id": "d",
+          "text": "The car must travel exactly 186 cm"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-03",
+          "type": "table",
+          "title": "Toy car surfaces",
+          "altText": "Results table for the toy car surfaces investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Surface",
+              "Mean distance (cm)"
+            ],
+            "rows": [
+              [
+                "Smooth plastic",
+                186
+              ],
+              [
+                "Cardboard",
+                132
+              ],
+              [
+                "Felt",
+                74
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The roughest tested surface produced the shortest distance, so a rougher fabric may shorten it further.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Predict a new result from a pattern",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why should the car be released without a push?",
+      "stimulus": {
+        "title": "Toy car surfaces",
+        "body": "A student released the same toy car from the same point on a ramp. The car then travelled across one of three level surfaces. Each surface was tested three times and the mean distance was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "A push measures the car's mass"
+        },
+        {
+          "id": "b",
+          "text": "A push makes three trials unnecessary"
+        },
+        {
+          "id": "c",
+          "text": "A push could add a different force in each trial"
+        },
+        {
+          "id": "d",
+          "text": "A push changes the surface colour"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-03",
+          "type": "table",
+          "title": "Toy car surfaces",
+          "altText": "Results table for the toy car surfaces investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Surface",
+              "Mean distance (cm)"
+            ],
+            "rows": [
+              [
+                "Smooth plastic",
+                186
+              ],
+              [
+                "Cardboard",
+                132
+              ],
+              [
+                "Felt",
+                74
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Different pushes would change the car's starting motion and make surface comparisons less fair.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Identify a controlled method",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "At which temperature did the sugar dissolve fastest?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "Equal spoonfuls of sugar were stirred at the same rate in equal volumes of water at three temperatures. The time until no sugar crystals were visible was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "10 °C"
+        },
+        {
+          "id": "b",
+          "text": "30 °C"
+        },
+        {
+          "id": "c",
+          "text": "50 °C"
+        },
+        {
+          "id": "d",
+          "text": "The sugar did not dissolve at any temperature"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-04",
+          "type": "table",
+          "title": "Dissolving sugar",
+          "altText": "Results table for the dissolving sugar investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Water temperature (°C)",
+              "Time to dissolve (s)"
+            ],
+            "rows": [
+              [
+                10,
+                145
+              ],
+              [
+                30,
+                82
+              ],
+              [
+                50,
+                39
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The fastest result has the shortest time, 39 seconds at 50 °C.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Interpret elapsed-time data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which conclusion is supported by this table?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "Equal spoonfuls of sugar were stirred at the same rate in equal volumes of water at three temperatures. The time until no sugar crystals were visible was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Fifty degrees is always safe to touch"
+        },
+        {
+          "id": "b",
+          "text": "Sugar cannot dissolve below 30 °C"
+        },
+        {
+          "id": "c",
+          "text": "In these trials, warmer water was linked with shorter dissolving time"
+        },
+        {
+          "id": "d",
+          "text": "Temperature never affects dissolving"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-04",
+          "type": "table",
+          "title": "Dissolving sugar",
+          "altText": "Results table for the dissolving sugar investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Water temperature (°C)",
+              "Time to dissolve (s)"
+            ],
+            "rows": [
+              [
+                10,
+                145
+              ],
+              [
+                30,
+                82
+              ],
+              [
+                50,
+                39
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Across the tested temperatures, warmer water had shorter dissolving times.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Judge whether a conclusion is supported",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What should be kept the same to compare water temperature fairly?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "Equal spoonfuls of sugar were stirred at the same rate in equal volumes of water at three temperatures. The time until no sugar crystals were visible was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The amount of sugar"
+        },
+        {
+          "id": "b",
+          "text": "The dissolving time"
+        },
+        {
+          "id": "c",
+          "text": "The water temperature"
+        },
+        {
+          "id": "d",
+          "text": "The final table order"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-04",
+          "type": "table",
+          "title": "Dissolving sugar",
+          "altText": "Results table for the dissolving sugar investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Water temperature (°C)",
+              "Time to dissolve (s)"
+            ],
+            "rows": [
+              [
+                10,
+                145
+              ],
+              [
+                30,
+                82
+              ],
+              [
+                50,
+                39
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Changing the sugar amount could change the dissolving time, so it should stay the same.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What result would be a reasonable prediction for water at 40 °C?",
+      "stimulus": {
+        "title": "Dissolving sugar",
+        "body": "Equal spoonfuls of sugar were stirred at the same rate in equal volumes of water at three temperatures. The time until no sugar crystals were visible was recorded."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Exactly 145 seconds"
+        },
+        {
+          "id": "b",
+          "text": "More than 300 seconds"
+        },
+        {
+          "id": "c",
+          "text": "Between 39 and 82 seconds"
+        },
+        {
+          "id": "d",
+          "text": "Less than 0 seconds"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-04",
+          "type": "table",
+          "title": "Dissolving sugar",
+          "altText": "Results table for the dissolving sugar investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Water temperature (°C)",
+              "Time to dissolve (s)"
+            ],
+            "rows": [
+              [
+                10,
+                145
+              ],
+              [
+                30,
+                82
+              ],
+              [
+                50,
+                39
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Forty degrees lies between 30 °C and 50 °C, so a time between their results is reasonable.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Predict an intermediate result",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which brand absorbed the greatest mean volume?",
+      "stimulus": {
+        "title": "Paper towel absorbency",
+        "body": "Equal-sized sheets of three paper towel brands were dipped into coloured water for 10 seconds. The volume absorbed by each sheet was measured. Five sheets of each brand were tested and the mean was calculated."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "No brand absorbed any water"
+        },
+        {
+          "id": "b",
+          "text": "L"
+        },
+        {
+          "id": "c",
+          "text": "K"
+        },
+        {
+          "id": "d",
+          "text": "M"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-05",
+          "type": "table",
+          "title": "Paper towel absorbency",
+          "altText": "Results table for the paper towel absorbency investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Brand",
+              "Mean water absorbed (mL)"
+            ],
+            "rows": [
+              [
+                "K",
+                18
+              ],
+              [
+                "L",
+                25
+              ],
+              [
+                "M",
+                21
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Brand L has the greatest mean, 25 mL.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Material Sciences",
+        "skill": "Read and compare table values",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-018",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why were equal-sized sheets used?",
+      "stimulus": {
+        "title": "Paper towel absorbency",
+        "body": "Equal-sized sheets of three paper towel brands were dipped into coloured water for 10 seconds. The volume absorbed by each sheet was measured. Five sheets of each brand were tested and the mean was calculated."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It makes every brand identical"
+        },
+        {
+          "id": "b",
+          "text": "Sheet size could affect water absorbed"
+        },
+        {
+          "id": "c",
+          "text": "It removes the need for timing"
+        },
+        {
+          "id": "d",
+          "text": "It changes the water colour"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-05",
+          "type": "table",
+          "title": "Paper towel absorbency",
+          "altText": "Results table for the paper towel absorbency investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Brand",
+              "Mean water absorbed (mL)"
+            ],
+            "rows": [
+              [
+                "K",
+                18
+              ],
+              [
+                "L",
+                25
+              ],
+              [
+                "M",
+                21
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Larger sheets could absorb more simply because they have more material.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Material Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which method change would best test whether the result is repeatable?",
+      "stimulus": {
+        "title": "Paper towel absorbency",
+        "body": "Equal-sized sheets of three paper towel brands were dipped into coloured water for 10 seconds. The volume absorbed by each sheet was measured. Five sheets of each brand were tested and the mean was calculated."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Test more sheets of each brand"
+        },
+        {
+          "id": "b",
+          "text": "Use unknown sheet sizes"
+        },
+        {
+          "id": "c",
+          "text": "Give each brand a different dipping time"
+        },
+        {
+          "id": "d",
+          "text": "Measure only brand L"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-05",
+          "type": "table",
+          "title": "Paper towel absorbency",
+          "altText": "Results table for the paper towel absorbency investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Brand",
+              "Mean water absorbed (mL)"
+            ],
+            "rows": [
+              [
+                "K",
+                18
+              ],
+              [
+                "L",
+                25
+              ],
+              [
+                "M",
+                21
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "More repeated measurements provide a stronger check that the pattern is consistent.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Material Sciences",
+        "skill": "Suggest a method improvement",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "A new brand N absorbs 23 mL in the same test. Where would it rank?",
+      "stimulus": {
+        "title": "Paper towel absorbency",
+        "body": "Equal-sized sheets of three paper towel brands were dipped into coloured water for 10 seconds. The volume absorbed by each sheet was measured. Five sheets of each brand were tested and the mean was calculated."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Between L and M"
+        },
+        {
+          "id": "b",
+          "text": "Below K"
+        },
+        {
+          "id": "c",
+          "text": "Between M and K"
+        },
+        {
+          "id": "d",
+          "text": "Above L only"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-05",
+          "type": "table",
+          "title": "Paper towel absorbency",
+          "altText": "Results table for the paper towel absorbency investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Brand",
+              "Mean water absorbed (mL)"
+            ],
+            "rows": [
+              [
+                "K",
+                18
+              ],
+              [
+                "L",
+                25
+              ],
+              [
+                "M",
+                21
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Twenty-three is less than L's 25 but greater than M's 21, so N would rank between them.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Material Sciences",
+        "skill": "Predict placement of a new result",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-021",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "When was the shadow shortest?",
+      "stimulus": {
+        "title": "Changing shadows",
+        "body": "A metre stick was placed upright in the same position on a sunny day. Its shadow was measured at three times."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "9:00 am"
+        },
+        {
+          "id": "b",
+          "text": "The shadow stayed the same length all day"
+        },
+        {
+          "id": "c",
+          "text": "12:00 noon"
+        },
+        {
+          "id": "d",
+          "text": "3:00 pm"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-06",
+          "type": "table",
+          "title": "Changing shadows",
+          "altText": "Results table for the changing shadows investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Time",
+              "Shadow length (cm)"
+            ],
+            "rows": [
+              [
+                "9:00 am",
+                142
+              ],
+              [
+                "12:00 noon",
+                61
+              ],
+              [
+                "3:00 pm",
+                128
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The shortest recorded length is 61 cm at noon.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Read measurement data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-022",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What was the variable changed naturally during the investigation?",
+      "stimulus": {
+        "title": "Changing shadows",
+        "body": "A metre stick was placed upright in the same position on a sunny day. Its shadow was measured at three times."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The metre stick"
+        },
+        {
+          "id": "b",
+          "text": "The measuring unit"
+        },
+        {
+          "id": "c",
+          "text": "The time of day"
+        },
+        {
+          "id": "d",
+          "text": "The stick's position"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-06",
+          "type": "table",
+          "title": "Changing shadows",
+          "altText": "Results table for the changing shadows investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Time",
+              "Shadow length (cm)"
+            ],
+            "rows": [
+              [
+                "9:00 am",
+                142
+              ],
+              [
+                "12:00 noon",
+                61
+              ],
+              [
+                "3:00 pm",
+                128
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Measurements were taken at different times of day.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Identify the changed variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-023",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which prediction is most reasonable for 1:00 pm?",
+      "stimulus": {
+        "title": "Changing shadows",
+        "body": "A metre stick was placed upright in the same position on a sunny day. Its shadow was measured at three times."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The stick will become shorter"
+        },
+        {
+          "id": "b",
+          "text": "The shadow must be 0 cm"
+        },
+        {
+          "id": "c",
+          "text": "The shadow may be longer than at noon but shorter than at 3:00 pm"
+        },
+        {
+          "id": "d",
+          "text": "The shadow must equal the 9:00 am result"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-06",
+          "type": "table",
+          "title": "Changing shadows",
+          "altText": "Results table for the changing shadows investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Time",
+              "Shadow length (cm)"
+            ],
+            "rows": [
+              [
+                "9:00 am",
+                142
+              ],
+              [
+                "12:00 noon",
+                61
+              ],
+              [
+                "3:00 pm",
+                128
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "After noon the shadow length increased towards the 3:00 pm result, so an intermediate length is reasonable.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Predict from a time pattern",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which conclusion goes beyond the evidence?",
+      "stimulus": {
+        "title": "Changing shadows",
+        "body": "A metre stick was placed upright in the same position on a sunny day. Its shadow was measured at three times."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Shadow length changed with time during these observations"
+        },
+        {
+          "id": "b",
+          "text": "Every day of the year has exactly these shadow lengths"
+        },
+        {
+          "id": "c",
+          "text": "The 3:00 pm shadow was shorter than the 9:00 am shadow"
+        },
+        {
+          "id": "d",
+          "text": "The noon shadow was shortest on this day"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-06",
+          "type": "table",
+          "title": "Changing shadows",
+          "altText": "Results table for the changing shadows investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Time",
+              "Shadow length (cm)"
+            ],
+            "rows": [
+              [
+                "9:00 am",
+                142
+              ],
+              [
+                "12:00 noon",
+                61
+              ],
+              [
+                "3:00 pm",
+                128
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "One day's observations cannot prove exact shadow lengths for every day of the year.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Evaluate the limits of evidence",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-025",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which soil allowed the most water to drain through?",
+      "stimulus": {
+        "title": "Soil drainage",
+        "body": "Equal volumes of three dry soils were placed in identical funnels. Fifty millilitres of water was poured into each. After five minutes, the drained water was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Clay"
+        },
+        {
+          "id": "b",
+          "text": "Garden soil"
+        },
+        {
+          "id": "c",
+          "text": "No water drained through any soil"
+        },
+        {
+          "id": "d",
+          "text": "Sand"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-07",
+          "type": "table",
+          "title": "Soil drainage",
+          "altText": "Results table for the soil drainage investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Soil",
+              "Water drained (mL)"
+            ],
+            "rows": [
+              [
+                "Sand",
+                42
+              ],
+              [
+                "Garden soil",
+                27
+              ],
+              [
+                "Clay",
+                11
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Sand produced the greatest drained volume, 42 mL.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Interpret drainage data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-026",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which factor was deliberately changed?",
+      "stimulus": {
+        "title": "Soil drainage",
+        "body": "Equal volumes of three dry soils were placed in identical funnels. Fifty millilitres of water was poured into each. After five minutes, the drained water was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The funnel size"
+        },
+        {
+          "id": "b",
+          "text": "The soil type"
+        },
+        {
+          "id": "c",
+          "text": "The starting water volume"
+        },
+        {
+          "id": "d",
+          "text": "The waiting time"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-07",
+          "type": "table",
+          "title": "Soil drainage",
+          "altText": "Results table for the soil drainage investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Soil",
+              "Water drained (mL)"
+            ],
+            "rows": [
+              [
+                "Sand",
+                42
+              ],
+              [
+                "Garden soil",
+                27
+              ],
+              [
+                "Clay",
+                11
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The investigation compared different soil types.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Identify the changed variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-027",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why did each funnel need the same volume of soil?",
+      "stimulus": {
+        "title": "Soil drainage",
+        "body": "Equal volumes of three dry soils were placed in identical funnels. Fifty millilitres of water was poured into each. After five minutes, the drained water was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It makes timing unnecessary"
+        },
+        {
+          "id": "b",
+          "text": "Soil volume could affect how much water passes through"
+        },
+        {
+          "id": "c",
+          "text": "It guarantees equal drainage"
+        },
+        {
+          "id": "d",
+          "text": "It changes clay into sand"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-07",
+          "type": "table",
+          "title": "Soil drainage",
+          "altText": "Results table for the soil drainage investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Soil",
+              "Water drained (mL)"
+            ],
+            "rows": [
+              [
+                "Sand",
+                42
+              ],
+              [
+                "Garden soil",
+                27
+              ],
+              [
+                "Clay",
+                11
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Different soil volumes would create different amounts of material for water to pass through.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-028",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which improvement would help identify random measurement error?",
+      "stimulus": {
+        "title": "Soil drainage",
+        "body": "Equal volumes of three dry soils were placed in identical funnels. Fifty millilitres of water was poured into each. After five minutes, the drained water was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Wait for a different time for each soil"
+        },
+        {
+          "id": "b",
+          "text": "Remove the measuring cylinder"
+        },
+        {
+          "id": "c",
+          "text": "Repeat the test and compare results"
+        },
+        {
+          "id": "d",
+          "text": "Use a different starting water volume for each soil"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-07",
+          "type": "table",
+          "title": "Soil drainage",
+          "altText": "Results table for the soil drainage investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Soil",
+              "Water drained (mL)"
+            ],
+            "rows": [
+              [
+                "Sand",
+                42
+              ],
+              [
+                "Garden soil",
+                27
+              ],
+              [
+                "Clay",
+                11
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Repeats reveal whether measurements are consistent or vary unexpectedly.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Suggest a method improvement",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-029",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What is the safest conclusion about wool and felt from these results?",
+      "stimulus": {
+        "title": "Sound muffling",
+        "body": "A buzzer was placed the same distance from a sound meter. It was covered with one layer of each material. One reading was taken for each material."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Both block all sound"
+        },
+        {
+          "id": "b",
+          "text": "Felt is certainly better in every test"
+        },
+        {
+          "id": "c",
+          "text": "Wool is certainly better by exactly 1 dB"
+        },
+        {
+          "id": "d",
+          "text": "Their results are very close, so repeated trials are needed"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-08",
+          "type": "table",
+          "title": "Sound muffling",
+          "altText": "Results table for the sound muffling investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Sound level (dB)"
+            ],
+            "rows": [
+              [
+                "Wool",
+                48
+              ],
+              [
+                "Felt",
+                47
+              ],
+              [
+                "Bubble wrap",
+                61
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "A one-decibel difference from single readings may not be reliable. Repeats are needed before claiming one is better.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Evaluate uncertainty in near-tie data",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-030",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which material clearly produced the highest sound level in this trial?",
+      "stimulus": {
+        "title": "Sound muffling",
+        "body": "A buzzer was placed the same distance from a sound meter. It was covered with one layer of each material. One reading was taken for each material."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Bubble wrap"
+        },
+        {
+          "id": "b",
+          "text": "Felt"
+        },
+        {
+          "id": "c",
+          "text": "Wool"
+        },
+        {
+          "id": "d",
+          "text": "No covering changed the sound level"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-08",
+          "type": "table",
+          "title": "Sound muffling",
+          "altText": "Results table for the sound muffling investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Sound level (dB)"
+            ],
+            "rows": [
+              [
+                "Wool",
+                48
+              ],
+              [
+                "Felt",
+                47
+              ],
+              [
+                "Bubble wrap",
+                61
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Bubble wrap had the highest reading, 61 dB.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Read and compare sound data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-031",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What needed to stay the same for each test?",
+      "stimulus": {
+        "title": "Sound muffling",
+        "body": "A buzzer was placed the same distance from a sound meter. It was covered with one layer of each material. One reading was taken for each material."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The covering material"
+        },
+        {
+          "id": "b",
+          "text": "The buzzer's distance from the meter"
+        },
+        {
+          "id": "c",
+          "text": "The measured sound level"
+        },
+        {
+          "id": "d",
+          "text": "The table row order"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-08",
+          "type": "table",
+          "title": "Sound muffling",
+          "altText": "Results table for the sound muffling investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Sound level (dB)"
+            ],
+            "rows": [
+              [
+                "Wool",
+                48
+              ],
+              [
+                "Felt",
+                47
+              ],
+              [
+                "Bubble wrap",
+                61
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Changing the distance could change the sound reading independently of the covering.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-032",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which change would best improve the comparison?",
+      "stimulus": {
+        "title": "Sound muffling",
+        "body": "A buzzer was placed the same distance from a sound meter. It was covered with one layer of each material. One reading was taken for each material."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Use two layers for only one material"
+        },
+        {
+          "id": "b",
+          "text": "Change the buzzer volume between tests"
+        },
+        {
+          "id": "c",
+          "text": "Take several readings for each material and calculate a mean"
+        },
+        {
+          "id": "d",
+          "text": "Move the meter each time"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-08",
+          "type": "table",
+          "title": "Sound muffling",
+          "altText": "Results table for the sound muffling investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Covering",
+              "Sound level (dB)"
+            ],
+            "rows": [
+              [
+                "Wool",
+                48
+              ],
+              [
+                "Felt",
+                47
+              ],
+              [
+                "Bubble wrap",
+                61
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Repeated readings and means would make the close results easier to compare reliably.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Suggest a method improvement",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-033",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Where did the most water evaporate?",
+      "stimulus": {
+        "title": "Evaporation locations",
+        "body": "Three identical shallow dishes each received 40 mL of water. They were left for six hours in different locations, then the water remaining was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Sunny windowsill"
+        },
+        {
+          "id": "b",
+          "text": "Near a fan"
+        },
+        {
+          "id": "c",
+          "text": "Shaded shelf"
+        },
+        {
+          "id": "d",
+          "text": "No water evaporated from any dish"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-09",
+          "type": "table",
+          "title": "Evaporation locations",
+          "altText": "Results table for the evaporation locations investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Location",
+              "Water remaining (mL)"
+            ],
+            "rows": [
+              [
+                "Sunny windowsill",
+                18
+              ],
+              [
+                "Shaded shelf",
+                31
+              ],
+              [
+                "Near a fan",
+                12
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The dish near the fan had the least water remaining, so it lost the most by evaporation.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Infer change from remaining volume",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-034",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which conclusion is supported?",
+      "stimulus": {
+        "title": "Evaporation locations",
+        "body": "Three identical shallow dishes each received 40 mL of water. They were left for six hours in different locations, then the water remaining was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Every fan has the same effect"
+        },
+        {
+          "id": "b",
+          "text": "Moving air may increase evaporation"
+        },
+        {
+          "id": "c",
+          "text": "Sunlight prevents evaporation"
+        },
+        {
+          "id": "d",
+          "text": "Shade always removes all water"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-09",
+          "type": "table",
+          "title": "Evaporation locations",
+          "altText": "Results table for the evaporation locations investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Location",
+              "Water remaining (mL)"
+            ],
+            "rows": [
+              [
+                "Sunny windowsill",
+                18
+              ],
+              [
+                "Shaded shelf",
+                31
+              ],
+              [
+                "Near a fan",
+                12
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The fan location lost more water than the other tested locations, supporting a cautious link with moving air.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Judge whether a conclusion is supported",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-035",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What was kept the same at the start?",
+      "stimulus": {
+        "title": "Evaporation locations",
+        "body": "Three identical shallow dishes each received 40 mL of water. They were left for six hours in different locations, then the water remaining was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The location"
+        },
+        {
+          "id": "b",
+          "text": "The starting water volume"
+        },
+        {
+          "id": "c",
+          "text": "The remaining volume"
+        },
+        {
+          "id": "d",
+          "text": "The amount evaporated"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-09",
+          "type": "table",
+          "title": "Evaporation locations",
+          "altText": "Results table for the evaporation locations investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Location",
+              "Water remaining (mL)"
+            ],
+            "rows": [
+              [
+                "Sunny windowsill",
+                18
+              ],
+              [
+                "Shaded shelf",
+                31
+              ],
+              [
+                "Near a fan",
+                12
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Every dish started with 40 mL of water.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-036",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "If a fourth dish were placed in a cool, still cupboard, what is a reasonable prediction?",
+      "stimulus": {
+        "title": "Evaporation locations",
+        "body": "Three identical shallow dishes each received 40 mL of water. They were left for six hours in different locations, then the water remaining was measured."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It will always become ice"
+        },
+        {
+          "id": "b",
+          "text": "It must contain more than 40 mL"
+        },
+        {
+          "id": "c",
+          "text": "Its location cannot affect evaporation"
+        },
+        {
+          "id": "d",
+          "text": "It may retain more water than the dish near the fan"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-09",
+          "type": "table",
+          "title": "Evaporation locations",
+          "altText": "Results table for the evaporation locations investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Location",
+              "Water remaining (mL)"
+            ],
+            "rows": [
+              [
+                "Sunny windowsill",
+                18
+              ],
+              [
+                "Shaded shelf",
+                31
+              ],
+              [
+                "Near a fan",
+                12
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Cool, still air would be expected to produce less evaporation than moving air in this investigation.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Chemical Sciences",
+        "skill": "Predict a new result",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-037",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which parachute had the longest mean fall time?",
+      "stimulus": {
+        "title": "Paper parachutes",
+        "body": "Paper parachutes had equal string lengths and carried identical clips. Each was dropped from the same height. The table shows the mean of three fall times for each canopy width."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "30 cm canopy"
+        },
+        {
+          "id": "b",
+          "text": "10 cm canopy"
+        },
+        {
+          "id": "c",
+          "text": "20 cm canopy"
+        },
+        {
+          "id": "d",
+          "text": "Every parachute had the same fall time"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-10",
+          "type": "table",
+          "title": "Paper parachutes",
+          "altText": "Results table for the paper parachutes investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Canopy width (cm)",
+              "Mean fall time (s)"
+            ],
+            "rows": [
+              [
+                10,
+                1.2
+              ],
+              [
+                20,
+                2.1
+              ],
+              [
+                30,
+                2.8
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The 30 cm canopy had the longest mean fall time, 2.8 seconds.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Read and compare time data",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-038",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What was deliberately changed?",
+      "stimulus": {
+        "title": "Paper parachutes",
+        "body": "Paper parachutes had equal string lengths and carried identical clips. Each was dropped from the same height. The table shows the mean of three fall times for each canopy width."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The string length"
+        },
+        {
+          "id": "b",
+          "text": "The canopy width"
+        },
+        {
+          "id": "c",
+          "text": "The clip mass"
+        },
+        {
+          "id": "d",
+          "text": "The drop height"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-10",
+          "type": "table",
+          "title": "Paper parachutes",
+          "altText": "Results table for the paper parachutes investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Canopy width (cm)",
+              "Mean fall time (s)"
+            ],
+            "rows": [
+              [
+                10,
+                1.2
+              ],
+              [
+                20,
+                2.1
+              ],
+              [
+                30,
+                2.8
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The canopy width was the factor being compared.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Identify the changed variable",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-039",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What fall time is a reasonable prediction for a 25 cm canopy?",
+      "stimulus": {
+        "title": "Paper parachutes",
+        "body": "Paper parachutes had equal string lengths and carried identical clips. Each was dropped from the same height. The table shows the mean of three fall times for each canopy width."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "More than 20 seconds"
+        },
+        {
+          "id": "b",
+          "text": "Less than 1.2 seconds"
+        },
+        {
+          "id": "c",
+          "text": "Between 2.1 and 2.8 seconds"
+        },
+        {
+          "id": "d",
+          "text": "Exactly 0 seconds"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-10",
+          "type": "table",
+          "title": "Paper parachutes",
+          "altText": "Results table for the paper parachutes investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Canopy width (cm)",
+              "Mean fall time (s)"
+            ],
+            "rows": [
+              [
+                10,
+                1.2
+              ],
+              [
+                20,
+                2.1
+              ],
+              [
+                30,
+                2.8
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A 25 cm canopy lies between the 20 cm and 30 cm canopies, so an intermediate time is reasonable.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Predict an intermediate result",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 100,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-040",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why were identical clips used?",
+      "stimulus": {
+        "title": "Paper parachutes",
+        "body": "Paper parachutes had equal string lengths and carried identical clips. Each was dropped from the same height. The table shows the mean of three fall times for each canopy width."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It guarantees identical times"
+        },
+        {
+          "id": "b",
+          "text": "It changes the drop height"
+        },
+        {
+          "id": "c",
+          "text": "Clip mass could affect how quickly a parachute falls"
+        },
+        {
+          "id": "d",
+          "text": "It makes canopy width irrelevant"
+        }
+      ],
+      "visuals": [
+        {
+          "id": "roadmap-science-table-10",
+          "type": "table",
+          "title": "Paper parachutes",
+          "altText": "Results table for the paper parachutes investigation. Column headings and measured results are provided in the table.",
+          "data": {
+            "headers": [
+              "Canopy width (cm)",
+              "Mean fall time (s)"
+            ],
+            "rows": [
+              [
+                10,
+                1.2
+              ],
+              [
+                20,
+                2.1
+              ],
+              [
+                30,
+                2.8
+              ]
+            ]
+          }
+        }
+      ],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Different clip masses could change fall time, making canopy widths harder to compare fairly.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Identify a controlled variable",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 120,
+        "tags": []
+      }
+    }
+  ]
+}
