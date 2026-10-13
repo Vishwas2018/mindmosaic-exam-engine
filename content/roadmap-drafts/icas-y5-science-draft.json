@@ -15,11 +15,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Foam"
+          "text": "All were equal"
         },
         {
           "id": "b",
-          "text": "Cotton"
+          "text": "Foam"
         },
         {
           "id": "c",
@@ -27,7 +27,7 @@
         },
         {
           "id": "d",
-          "text": "All were equal"
+          "text": "Cotton"
         }
       ],
       "visuals": [
@@ -60,7 +60,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "Foam left the water at the highest temperature, closest to its starting temperature.",
       "metadata": {
@@ -86,7 +86,7 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
+          "text": "The unit used to report results"
         },
         {
           "id": "b",
@@ -94,11 +94,11 @@
         },
         {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The number of rows in the results table"
         },
         {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The duration for every trial"
         }
       ],
       "visuals": [],
@@ -130,25 +130,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
-        },
-        {
-          "id": "b",
-          "text": "A different starting quantity for every trial"
-        },
-        {
-          "id": "c",
           "text": "The same starting volume and temperature"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Changing two factors at the same time"
+        },
+        {
+          "id": "c",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "d",
+          "text": "A different starting quantity for every trial"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -174,25 +174,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
-        },
-        {
-          "id": "b",
-          "text": "Recording all results with the same unit"
-        },
-        {
-          "id": "c",
           "text": "Keeping the stated conditions constant"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Using a larger cup for only the foam covering"
+        },
+        {
+          "id": "c",
+          "text": "Repeating each observation using the same method"
+        },
+        {
+          "id": "d",
+          "text": "Recording all results with the same unit"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -222,11 +222,11 @@
         },
         {
           "id": "b",
-          "text": "10 mL"
+          "text": "30 mL"
         },
         {
           "id": "c",
-          "text": "30 mL"
+          "text": "10 mL"
         },
         {
           "id": "d",
@@ -289,25 +289,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
-        },
-        {
-          "id": "b",
           "text": "The daily amount of water"
         },
         {
+          "id": "b",
+          "text": "The number of rows in the results table"
+        },
+        {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The duration for every trial"
         },
         {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The unit used to report results"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -333,25 +333,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
-        },
-        {
-          "id": "b",
           "text": "A different starting quantity for every trial"
         },
         {
+          "id": "b",
+          "text": "Different measuring units for each result"
+        },
+        {
           "id": "c",
-          "text": "The same species, soil and light"
+          "text": "Changing two factors at the same time"
         },
         {
           "id": "d",
-          "text": "Changing two factors at the same time"
+          "text": "The same species, soil and light"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -377,25 +377,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
-        },
-        {
-          "id": "b",
-          "text": "Recording all results with the same unit"
-        },
-        {
-          "id": "c",
           "text": "Keeping the stated conditions constant"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Moving only the 30 mL pot into shade"
+        },
+        {
+          "id": "c",
+          "text": "Recording all results with the same unit"
+        },
+        {
+          "id": "d",
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -421,11 +421,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Smooth plastic"
+          "text": "Felt"
         },
         {
           "id": "b",
-          "text": "Felt"
+          "text": "Smooth plastic"
         },
         {
           "id": "c",
@@ -466,7 +466,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "The smooth plastic surface had the largest mean distance under these test conditions.",
       "metadata": {
@@ -492,25 +492,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
-        },
-        {
-          "id": "b",
           "text": "The level surface material"
         },
         {
+          "id": "b",
+          "text": "The number of rows in the results table"
+        },
+        {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The duration for every trial"
         },
         {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The unit used to report results"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -536,15 +536,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
-        },
-        {
-          "id": "b",
           "text": "A different starting quantity for every trial"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "The same trolley and release point"
+        },
+        {
+          "id": "c",
+          "text": "Different measuring units for each result"
         },
         {
           "id": "d",
@@ -554,7 +554,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -580,25 +580,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
-        },
-        {
-          "id": "b",
           "text": "Recording all results with the same unit"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "Keeping the stated conditions constant"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "Giving the trolley a push for just one surface"
+        },
+        {
+          "id": "d",
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -624,19 +624,19 @@
       "options": [
         {
           "id": "a",
-          "text": "Sunny ledge"
-        },
-        {
-          "id": "b",
-          "text": "Cool shelf"
-        },
-        {
-          "id": "c",
           "text": "Near a fan"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "All were equal"
+        },
+        {
+          "id": "c",
+          "text": "Sunny ledge"
+        },
+        {
+          "id": "d",
+          "text": "Cool shelf"
         }
       ],
       "visuals": [
@@ -669,7 +669,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "The sunny ledge had the least water remaining, so it lost the most from the equal starting volumes.",
       "metadata": {
@@ -695,7 +695,7 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
+          "text": "The unit used to report results"
         },
         {
           "id": "b",
@@ -703,7 +703,7 @@
         },
         {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The duration for every trial"
         },
         {
           "id": "d",
@@ -739,25 +739,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
+          "text": "Changing two factors at the same time"
         },
         {
           "id": "b",
-          "text": "A different starting quantity for every trial"
+          "text": "Different measuring units for each result"
         },
         {
           "id": "c",
-          "text": "Identical dishes and the same starting water volume"
+          "text": "A different starting quantity for every trial"
         },
         {
           "id": "d",
-          "text": "Changing two factors at the same time"
+          "text": "Identical dishes and the same starting water volume"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -783,11 +783,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
+          "text": "Recording all results with the same unit"
         },
         {
           "id": "b",
-          "text": "Recording all results with the same unit"
+          "text": "Covering only the dish near the fan"
         },
         {
           "id": "c",
@@ -795,13 +795,13 @@
         },
         {
           "id": "d",
-          "text": "Covering only the dish near the fan"
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -827,19 +827,19 @@
       "options": [
         {
           "id": "a",
-          "text": "45 C"
-        },
-        {
-          "id": "b",
-          "text": "15 C"
-        },
-        {
-          "id": "c",
           "text": "30 C"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "45 C"
+        },
+        {
+          "id": "c",
           "text": "All were equal"
+        },
+        {
+          "id": "d",
+          "text": "15 C"
         }
       ],
       "visuals": [
@@ -872,7 +872,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "The 45-degree sample had the shortest measured time.",
       "metadata": {
@@ -898,25 +898,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
+          "text": "The number of rows in the results table"
         },
         {
           "id": "b",
-          "text": "The starting water temperature"
+          "text": "The duration for every trial"
         },
         {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The starting water temperature"
         },
         {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The unit used to report results"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -946,7 +946,7 @@
         },
         {
           "id": "b",
-          "text": "A different starting quantity for every trial"
+          "text": "Changing two factors at the same time"
         },
         {
           "id": "c",
@@ -954,7 +954,7 @@
         },
         {
           "id": "d",
-          "text": "Changing two factors at the same time"
+          "text": "A different starting quantity for every trial"
         }
       ],
       "visuals": [],
@@ -986,25 +986,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
+          "text": "Crushing the sugar only for the warmest sample"
         },
         {
           "id": "b",
-          "text": "Recording all results with the same unit"
-        },
-        {
-          "id": "c",
           "text": "Keeping the stated conditions constant"
         },
         {
+          "id": "c",
+          "text": "Recording all results with the same unit"
+        },
+        {
           "id": "d",
-          "text": "Crushing the sugar only for the warmest sample"
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -1034,15 +1034,15 @@
         },
         {
           "id": "b",
-          "text": "Frosted sheet"
+          "text": "All were equal"
         },
         {
           "id": "c",
-          "text": "Opaque sheet"
+          "text": "Frosted sheet"
         },
         {
           "id": "d",
-          "text": "All were equal"
+          "text": "Opaque sheet"
         }
       ],
       "visuals": [
@@ -1101,25 +1101,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
+          "text": "The number of rows in the results table"
         },
         {
           "id": "b",
-          "text": "The sheet material"
-        },
-        {
-          "id": "c",
           "text": "The unit used to report results"
         },
         {
+          "id": "c",
+          "text": "The sheet material"
+        },
+        {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The duration for every trial"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -1145,25 +1145,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
-        },
-        {
-          "id": "b",
-          "text": "A different starting quantity for every trial"
-        },
-        {
-          "id": "c",
           "text": "The same torch position and sensor position"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "Different measuring units for each result"
+        },
+        {
+          "id": "c",
           "text": "Changing two factors at the same time"
+        },
+        {
+          "id": "d",
+          "text": "A different starting quantity for every trial"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -1189,25 +1189,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
+          "text": "Moving the torch closer for one sheet"
         },
         {
           "id": "b",
-          "text": "Recording all results with the same unit"
-        },
-        {
-          "id": "c",
           "text": "Keeping the stated conditions constant"
         },
         {
+          "id": "c",
+          "text": "Recording all results with the same unit"
+        },
+        {
           "id": "d",
-          "text": "Moving the torch closer for one sheet"
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -1233,19 +1233,19 @@
       "options": [
         {
           "id": "a",
-          "text": "20 cm"
-        },
-        {
-          "id": "b",
           "text": "30 cm"
         },
         {
+          "id": "b",
+          "text": "All were equal"
+        },
+        {
           "id": "c",
-          "text": "40 cm"
+          "text": "20 cm"
         },
         {
           "id": "d",
-          "text": "All were equal"
+          "text": "40 cm"
         }
       ],
       "visuals": [
@@ -1278,7 +1278,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "The shortest string had the highest measured frequency, which the investigation defines as the highest pitch.",
       "metadata": {
@@ -1304,25 +1304,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
-        },
-        {
-          "id": "b",
-          "text": "The string length"
-        },
-        {
-          "id": "c",
           "text": "The unit used to report results"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "The number of rows in the results table"
+        },
+        {
+          "id": "c",
+          "text": "The string length"
+        },
+        {
+          "id": "d",
+          "text": "The duration for every trial"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -1348,15 +1348,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
+          "text": "The same string material, thickness and tension"
         },
         {
           "id": "b",
-          "text": "A different starting quantity for every trial"
+          "text": "Different measuring units for each result"
         },
         {
           "id": "c",
-          "text": "The same string material, thickness and tension"
+          "text": "A different starting quantity for every trial"
         },
         {
           "id": "d",
@@ -1366,7 +1366,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -1396,21 +1396,21 @@
         },
         {
           "id": "b",
-          "text": "Recording all results with the same unit"
-        },
-        {
-          "id": "c",
           "text": "Keeping the stated conditions constant"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "Tightening only the longest string"
+        },
+        {
+          "id": "d",
+          "text": "Recording all results with the same unit"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -1436,15 +1436,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Middle"
+          "text": "Fence"
         },
         {
           "id": "b",
-          "text": "Gate"
+          "text": "Middle"
         },
         {
           "id": "c",
-          "text": "Fence"
+          "text": "Gate"
         },
         {
           "id": "d",
@@ -1481,7 +1481,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "The middle collector recorded the largest volume for this one shower.",
       "metadata": {
@@ -1507,25 +1507,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
-        },
-        {
-          "id": "b",
           "text": "The collector position"
         },
         {
+          "id": "b",
+          "text": "The duration for every trial"
+        },
+        {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The number of rows in the results table"
         },
         {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The unit used to report results"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -1551,25 +1551,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
-        },
-        {
-          "id": "b",
           "text": "A different starting quantity for every trial"
         },
         {
+          "id": "b",
+          "text": "Different measuring units for each result"
+        },
+        {
           "id": "c",
-          "text": "The same collector size and collecting time"
+          "text": "Changing two factors at the same time"
         },
         {
           "id": "d",
-          "text": "Changing two factors at the same time"
+          "text": "The same collector size and collecting time"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -1595,7 +1595,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
+          "text": "Leaving only the gate collector outside for an extra hour"
         },
         {
           "id": "b",
@@ -1607,13 +1607,13 @@
         },
         {
           "id": "d",
-          "text": "Leaving only the gate collector outside for an extra hour"
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -1639,7 +1639,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Cloth L"
+          "text": "Cloth M"
         },
         {
           "id": "b",
@@ -1647,7 +1647,7 @@
         },
         {
           "id": "c",
-          "text": "Cloth M"
+          "text": "Cloth L"
         },
         {
           "id": "d",
@@ -1684,7 +1684,7 @@
       ],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "Cloth L retained the greatest mass of water using the same dip and drip times.",
       "metadata": {
@@ -1710,7 +1710,7 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
+          "text": "The number of rows in the results table"
         },
         {
           "id": "b",
@@ -1718,11 +1718,11 @@
         },
         {
           "id": "c",
-          "text": "The unit used to report results"
+          "text": "The duration for every trial"
         },
         {
           "id": "d",
-          "text": "The number of rows in the results table"
+          "text": "The unit used to report results"
         }
       ],
       "visuals": [],
@@ -1754,25 +1754,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
+          "text": "Changing two factors at the same time"
         },
         {
           "id": "b",
-          "text": "A different starting quantity for every trial"
-        },
-        {
-          "id": "c",
           "text": "Equal cloth area and the same dip and drip times"
         },
         {
+          "id": "c",
+          "text": "Different measuring units for each result"
+        },
+        {
           "id": "d",
-          "text": "Changing two factors at the same time"
+          "text": "A different starting quantity for every trial"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "Keeping this condition consistent makes the compared factor easier to investigate.",
       "metadata": {
@@ -1802,7 +1802,7 @@
         },
         {
           "id": "b",
-          "text": "Recording all results with the same unit"
+          "text": "Using two layers only for cloth M"
         },
         {
           "id": "c",
@@ -1810,13 +1810,13 @@
         },
         {
           "id": "d",
-          "text": "Using two layers only for cloth M"
+          "text": "Recording all results with the same unit"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {
@@ -1846,15 +1846,15 @@
         },
         {
           "id": "b",
-          "text": "Bed A"
-        },
-        {
-          "id": "c",
           "text": "Bed C"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "All were equal"
+        },
+        {
+          "id": "d",
+          "text": "Bed A"
         }
       ],
       "visuals": [
@@ -1913,25 +1913,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The duration for every trial"
-        },
-        {
-          "id": "b",
           "text": "The garden bed"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "The unit used to report results"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "The number of rows in the results table"
+        },
+        {
+          "id": "d",
+          "text": "The duration for every trial"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The investigation compared this factor; the other listed choices do not describe the tested factor.",
       "metadata": {
@@ -1957,11 +1957,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Different measuring units for each result"
+          "text": "A different starting quantity for every trial"
         },
         {
           "id": "b",
-          "text": "A different starting quantity for every trial"
+          "text": "Different measuring units for each result"
         },
         {
           "id": "c",
@@ -2001,25 +2001,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Repeating each observation using the same method"
-        },
-        {
-          "id": "b",
           "text": "Recording all results with the same unit"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "Keeping the stated conditions constant"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "Observing bed A for twice as long"
+        },
+        {
+          "id": "d",
+          "text": "Repeating each observation using the same method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
       "explanation": "This change introduces another difference, so the results could have more than one cause.",
       "metadata": {

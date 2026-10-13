@@ -15,25 +15,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Plant pots"
+          "text": "Paint brushes"
         },
         {
           "id": "b",
-          "text": "Lunch boxes"
+          "text": "Plant pots"
         },
         {
           "id": "c",
-          "text": "Books"
+          "text": "Lunch boxes"
         },
         {
           "id": "d",
-          "text": "Paint brushes"
+          "text": "Books"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The first sentence identifies the books they had to move.",
       "metadata": {
@@ -58,25 +58,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Fern removed a wheel"
+          "text": "The tall pile slid when the cart turned"
         },
         {
           "id": "b",
-          "text": "The books were too wet"
-        },
-        {
-          "id": "c",
           "text": "The cart reached the library"
         },
         {
+          "id": "c",
+          "text": "Fern removed a wheel"
+        },
+        {
           "id": "d",
-          "text": "The tall pile slid when the cart turned"
+          "text": "The books were too wet"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "The fall happened when the cart turned with one tall pile.",
       "metadata": {
@@ -101,7 +101,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Making three lower piles"
+          "text": "Putting books in water"
         },
         {
           "id": "b",
@@ -109,17 +109,17 @@
         },
         {
           "id": "c",
-          "text": "Putting books in water"
+          "text": "Using one taller pile"
         },
         {
           "id": "d",
-          "text": "Using one taller pile"
+          "text": "Making three lower piles"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "Fern suggested dividing the load into three lower piles.",
       "metadata": {
@@ -144,7 +144,7 @@
       "options": [
         {
           "id": "a",
-          "text": "A locked library door"
+          "text": "A deep puddle"
         },
         {
           "id": "b",
@@ -156,7 +156,7 @@
         },
         {
           "id": "d",
-          "text": "A deep puddle"
+          "text": "A locked library door"
         }
       ],
       "visuals": [],
@@ -187,11 +187,11 @@
       "options": [
         {
           "id": "a",
-          "text": "It had more books to collect"
+          "text": "It reached a different school"
         },
         {
           "id": "b",
-          "text": "It reached a different school"
+          "text": "It was the only path with grass"
         },
         {
           "id": "c",
@@ -199,7 +199,7 @@
         },
         {
           "id": "d",
-          "text": "It was the only path with grass"
+          "text": "It had more books to collect"
         }
       ],
       "visuals": [],
@@ -230,25 +230,25 @@
       "options": [
         {
           "id": "a",
-          "text": "She refuses to carry any books"
-        },
-        {
-          "id": "b",
           "text": "She wants the books to get wet"
         },
         {
+          "id": "b",
+          "text": "She looks for practical solutions"
+        },
+        {
           "id": "c",
-          "text": "She ignores problems with the cart"
+          "text": "She refuses to carry any books"
         },
         {
           "id": "d",
-          "text": "She looks for practical solutions"
+          "text": "She ignores problems with the cart"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "Fern proposes lower piles after the books slide, and helps choose a workable route.",
       "metadata": {
@@ -273,15 +273,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Check the route before loading"
+          "text": "Race the other helpers"
         },
         {
           "id": "b",
-          "text": "Leave all books on the grass"
+          "text": "Check the route before loading"
         },
         {
           "id": "c",
-          "text": "Race the other helpers"
+          "text": "Leave all books on the grass"
         },
         {
           "id": "d",
@@ -291,7 +291,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "Luca explicitly decides to check the path before loading next time.",
       "metadata": {
@@ -316,25 +316,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Under the teacher desk"
-        },
-        {
-          "id": "b",
-          "text": "Outside the library"
-        },
-        {
-          "id": "c",
           "text": "At the garden gate"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "Under the teacher desk"
+        },
+        {
+          "id": "c",
           "text": "Beside the classroom door"
+        },
+        {
+          "id": "d",
+          "text": "Outside the library"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
       "explanation": "The opening sentence places the shelf beside the door.",
       "metadata": {
@@ -367,11 +367,11 @@
         },
         {
           "id": "c",
-          "text": "When the class moves rooms"
+          "text": "When the pot was made"
         },
         {
           "id": "d",
-          "text": "When the pot was made"
+          "text": "When the class moves rooms"
         }
       ],
       "visuals": [],
@@ -402,25 +402,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The colour of every leaf"
+          "text": "The address of the library"
         },
         {
           "id": "b",
-          "text": "Their name and the plant name"
+          "text": "The colour of every leaf"
         },
         {
           "id": "c",
-          "text": "Only the number of pot holes"
+          "text": "Their name and the plant name"
         },
         {
           "id": "d",
-          "text": "The address of the library"
+          "text": "Only the number of pot holes"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The instructions name both the borrower and the plant.",
       "metadata": {
@@ -445,7 +445,7 @@
       "options": [
         {
           "id": "a",
-          "text": "To keep the soil completely dry"
+          "text": "To hide the seed envelope"
         },
         {
           "id": "b",
@@ -453,17 +453,17 @@
         },
         {
           "id": "c",
-          "text": "To let extra water drain away"
+          "text": "To keep the soil completely dry"
         },
         {
           "id": "d",
-          "text": "To hide the seed envelope"
+          "text": "To let extra water drain away"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The passage gives drainage as the purpose of the holes.",
       "metadata": {
@@ -492,7 +492,7 @@
         },
         {
           "id": "b",
-          "text": "Copying another child's record"
+          "text": "Drawing what happens"
         },
         {
           "id": "c",
@@ -500,13 +500,13 @@
         },
         {
           "id": "d",
-          "text": "Drawing what happens"
+          "text": "Copying another child's record"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "The passage explicitly says a drawing is fine.",
       "metadata": {
@@ -531,25 +531,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Bring the record back anyway"
-        },
-        {
-          "id": "b",
-          "text": "Throw the green book away"
-        },
-        {
-          "id": "c",
           "text": "Pretend the plant grew"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Keep the result secret"
+        },
+        {
+          "id": "c",
+          "text": "Bring the record back anyway"
+        },
+        {
+          "id": "d",
+          "text": "Throw the green book away"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "The final sentences invite records even when a plant does not grow.",
       "metadata": {
@@ -574,7 +574,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Every seed must grow immediately"
+          "text": "Drawings are less useful than words"
         },
         {
           "id": "b",
@@ -582,7 +582,7 @@
         },
         {
           "id": "c",
-          "text": "Drawings are less useful than words"
+          "text": "Every seed must grow immediately"
         },
         {
           "id": "d",
@@ -621,15 +621,15 @@
         },
         {
           "id": "b",
-          "text": "A whistle at the gate"
+          "text": "A song from the shed"
         },
         {
           "id": "c",
-          "text": "A flashing torch"
+          "text": "A whistle at the gate"
         },
         {
           "id": "d",
-          "text": "A song from the shed"
+          "text": "A flashing torch"
         }
       ],
       "visuals": [],
@@ -660,25 +660,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Inside the tool box"
-        },
-        {
-          "id": "b",
           "text": "On the nearby fence"
         },
         {
+          "id": "b",
+          "text": "Inside the tool box"
+        },
+        {
           "id": "c",
-          "text": "Under a seed tray"
+          "text": "On the bell handle"
         },
         {
           "id": "d",
-          "text": "On the bell handle"
+          "text": "Under a seed tray"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The bird landed on the fence nearby.",
       "metadata": {
@@ -746,11 +746,11 @@
       "options": [
         {
           "id": "a",
-          "text": "To stop the children understanding her"
+          "text": "Because the bell had disappeared"
         },
         {
           "id": "b",
-          "text": "Because the bell had disappeared"
+          "text": "To stop the children understanding her"
         },
         {
           "id": "c",
@@ -789,15 +789,15 @@
       "options": [
         {
           "id": "a",
-          "text": "The bird flew to a high branch"
+          "text": "The children began planting again"
         },
         {
           "id": "b",
-          "text": "The bird went into the shed"
+          "text": "The bird flew to a high branch"
         },
         {
           "id": "c",
-          "text": "The children began planting again"
+          "text": "The bird went into the shed"
         },
         {
           "id": "d",
@@ -807,7 +807,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "The passage gives this event directly after the last tray was put away.",
       "metadata": {
@@ -832,25 +832,25 @@
       "options": [
         {
           "id": "a",
-          "text": "A seed envelope"
-        },
-        {
-          "id": "b",
-          "text": "A raised hand"
-        },
-        {
-          "id": "c",
           "text": "A broken bell"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "A seed envelope"
+        },
+        {
+          "id": "c",
           "text": "A garden path"
+        },
+        {
+          "id": "d",
+          "text": "A raised hand"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "d"
       },
       "explanation": "The next day she drew a raised hand.",
       "metadata": {
@@ -875,7 +875,7 @@
       "options": [
         {
           "id": "a",
-          "text": "It had stopped using all tools"
+          "text": "It had a choice of quiet and ringing signals"
         },
         {
           "id": "b",
@@ -883,17 +883,17 @@
         },
         {
           "id": "c",
-          "text": "It had a choice of quiet and ringing signals"
+          "text": "It had decided never to pack up"
         },
         {
           "id": "d",
-          "text": "It had decided never to pack up"
+          "text": "It had stopped using all tools"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "The closing sentence gives the club two kinds of signal.",
       "metadata": {
@@ -918,25 +918,25 @@
       "options": [
         {
           "id": "a",
-          "text": "In a swimming pool"
-        },
-        {
-          "id": "b",
           "text": "In the class water tray"
         },
         {
+          "id": "b",
+          "text": "In the garden cart"
+        },
+        {
           "id": "c",
-          "text": "At the beach"
+          "text": "In a swimming pool"
         },
         {
           "id": "d",
-          "text": "In the garden cart"
+          "text": "At the beach"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The boat was folded for the class water tray.",
       "metadata": {
@@ -961,25 +961,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The teacher washed the boat"
+          "text": "Owen poured water on his name"
         },
         {
           "id": "b",
-          "text": "A child put it in the tray first"
-        },
-        {
-          "id": "c",
           "text": "The boat touched his wet raincoat"
         },
         {
+          "id": "c",
+          "text": "A child put it in the tray first"
+        },
+        {
           "id": "d",
-          "text": "Owen poured water on his name"
+          "text": "The teacher washed the boat"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "The boat slipped against the wet raincoat on the way to school.",
       "metadata": {
@@ -1004,11 +1004,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Inside the water tray"
+          "text": "On a veranda bench"
         },
         {
           "id": "b",
-          "text": "Under a wet coat"
+          "text": "Inside the water tray"
         },
         {
           "id": "c",
@@ -1016,13 +1016,13 @@
         },
         {
           "id": "d",
-          "text": "On a veranda bench"
+          "text": "Under a wet coat"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "He placed it on a dry bench on the veranda.",
       "metadata": {
@@ -1051,15 +1051,15 @@
         },
         {
           "id": "b",
-          "text": "Before leaving home"
+          "text": "After the school gates closed"
         },
         {
           "id": "c",
-          "text": "During the distance race"
+          "text": "Before leaving home"
         },
         {
           "id": "d",
-          "text": "After the school gates closed"
+          "text": "During the distance race"
         }
       ],
       "visuals": [],
@@ -1090,7 +1090,7 @@
       "options": [
         {
           "id": "a",
-          "text": "A seed tray"
+          "text": "A lunch box"
         },
         {
           "id": "b",
@@ -1098,11 +1098,11 @@
         },
         {
           "id": "c",
-          "text": "A library book"
+          "text": "A seed tray"
         },
         {
           "id": "d",
-          "text": "A lunch box"
+          "text": "A library book"
         }
       ],
       "visuals": [],
@@ -1133,25 +1133,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Every race must have only one boat"
+          "text": "Wet paper always becomes perfectly flat"
         },
         {
           "id": "b",
-          "text": "Paper boats should never have names"
-        },
-        {
-          "id": "c",
           "text": "Something imperfect can be useful in another way"
         },
         {
+          "id": "c",
+          "text": "Every race must have only one boat"
+        },
+        {
           "id": "d",
-          "text": "Wet paper always becomes perfectly flat"
+          "text": "Paper boats should never have names"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "The bent boat cannot race well but serves as a flag carrier.",
       "metadata": {

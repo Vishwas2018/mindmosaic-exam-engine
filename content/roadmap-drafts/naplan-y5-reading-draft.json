@@ -15,11 +15,11 @@
       "options": [
         {
           "id": "a",
-          "text": "How to price a real shop"
+          "text": "Which street had the most people"
         },
         {
           "id": "b",
-          "text": "How quickly cardboard grows"
+          "text": "How to price a real shop"
         },
         {
           "id": "c",
@@ -27,7 +27,7 @@
         },
         {
           "id": "d",
-          "text": "Which street had the most people"
+          "text": "How quickly cardboard grows"
         }
       ],
       "visuals": [],
@@ -62,7 +62,7 @@
         },
         {
           "id": "b",
-          "text": "The collection cup was overflowing"
+          "text": "The described drain lacked a channel leading to it"
         },
         {
           "id": "c",
@@ -70,13 +70,13 @@
         },
         {
           "id": "d",
-          "text": "The described drain lacked a channel leading to it"
+          "text": "The collection cup was overflowing"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "The display described a drain, but the model lacked a connecting channel.",
       "metadata": {
@@ -101,11 +101,11 @@
       "options": [
         {
           "id": "a",
-          "text": "To make the comparison between trials fairer"
+          "text": "To avoid explaining her changes"
         },
         {
           "id": "b",
-          "text": "To guarantee there would be no puddle"
+          "text": "To make the comparison between trials fairer"
         },
         {
           "id": "c",
@@ -113,13 +113,13 @@
         },
         {
           "id": "d",
-          "text": "To avoid explaining her changes"
+          "text": "To guarantee there would be no puddle"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "Keeping water amount the same helps compare the changed channel rather than a changed water amount.",
       "metadata": {
@@ -144,25 +144,25 @@
       "options": [
         {
           "id": "a",
-          "text": "All the sand remained completely dry"
-        },
-        {
-          "id": "b",
-          "text": "The puddle became smaller but did not disappear entirely"
-        },
-        {
-          "id": "c",
           "text": "The shops floated into the cup"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "More water was added than before"
+        },
+        {
+          "id": "c",
+          "text": "All the sand remained completely dry"
+        },
+        {
+          "id": "d",
+          "text": "The puddle became smaller but did not disappear entirely"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "d"
       },
       "explanation": "The passage reports a smaller puddle and some water remaining in the sand.",
       "metadata": {
@@ -187,11 +187,11 @@
       "options": [
         {
           "id": "a",
-          "text": "They hid all evidence of the first puddle"
+          "text": "They replaced the need to describe any limitations"
         },
         {
           "id": "b",
-          "text": "They proved that real streets are made of sand"
+          "text": "They hid all evidence of the first puddle"
         },
         {
           "id": "c",
@@ -199,7 +199,7 @@
         },
         {
           "id": "d",
-          "text": "They replaced the need to describe any limitations"
+          "text": "They proved that real streets are made of sand"
         }
       ],
       "visuals": [],
@@ -230,7 +230,7 @@
       "options": [
         {
           "id": "a",
-          "text": "She only cares about attractive shops"
+          "text": "She thinks no model should ever change"
         },
         {
           "id": "b",
@@ -238,7 +238,7 @@
         },
         {
           "id": "c",
-          "text": "She thinks no model should ever change"
+          "text": "She only cares about attractive shops"
         },
         {
           "id": "d",
@@ -273,15 +273,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Testing can reveal useful changes and limitations"
-        },
-        {
-          "id": "b",
           "text": "Attractive models never need testing"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "A smaller puddle proves every real drain works"
+        },
+        {
+          "id": "c",
+          "text": "Testing can reveal useful changes and limitations"
         },
         {
           "id": "d",
@@ -291,7 +291,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "Testing reveals a design problem, a useful revision and the limits of a model.",
       "metadata": {
@@ -316,25 +316,25 @@
       "options": [
         {
           "id": "a",
-          "text": "A replacement for every broken object"
-        },
-        {
-          "id": "b",
-          "text": "Electrical testing of plugged-in appliances"
-        },
-        {
-          "id": "c",
           "text": "Storage of all unfinished objects"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Help exploring safe repairs, rather than a repair for every object"
+        },
+        {
+          "id": "c",
+          "text": "Electrical testing of plugged-in appliances"
+        },
+        {
+          "id": "d",
+          "text": "A replacement for every broken object"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "The notice offers help but explicitly gives no guarantee of repair.",
       "metadata": {
@@ -359,25 +359,25 @@
       "options": [
         {
           "id": "a",
-          "text": "In a bag"
-        },
-        {
-          "id": "b",
-          "text": "Hidden inside a leaking battery case"
-        },
-        {
-          "id": "c",
           "text": "Mixed with other visitors' pieces"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Left at home in every case"
+        },
+        {
+          "id": "c",
+          "text": "Hidden inside a leaking battery case"
+        },
+        {
+          "id": "d",
+          "text": "In a bag"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "The notice directs visitors to put loose pieces in a bag.",
       "metadata": {
@@ -402,7 +402,7 @@
       "options": [
         {
           "id": "a",
-          "text": "At an online booking station only"
+          "text": "In a locked storage room"
         },
         {
           "id": "b",
@@ -410,11 +410,11 @@
         },
         {
           "id": "c",
-          "text": "In a locked storage room"
+          "text": "At the cloth demonstration after closing"
         },
         {
           "id": "d",
-          "text": "At the cloth demonstration after closing"
+          "text": "At an online booking station only"
         }
       ],
       "visuals": [],
@@ -445,15 +445,15 @@
       "options": [
         {
           "id": "a",
-          "text": "A guaranteed repair certificate"
-        },
-        {
-          "id": "b",
           "text": "A compulsory donation receipt"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "A number card"
+        },
+        {
+          "id": "c",
+          "text": "A guaranteed repair certificate"
         },
         {
           "id": "d",
@@ -463,7 +463,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "No booking is required, but visitors collect a number card.",
       "metadata": {
@@ -488,25 +488,25 @@
       "options": [
         {
           "id": "a",
-          "text": "All children must arrive at noon"
-        },
-        {
-          "id": "b",
-          "text": "Every repair needs the same materials"
-        },
-        {
-          "id": "c",
           "text": "Volunteers only repair the first object"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Some repairs are more complicated than others"
+        },
+        {
+          "id": "c",
+          "text": "All children must arrive at noon"
+        },
+        {
+          "id": "d",
+          "text": "Every repair needs the same materials"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "The notice says complicated repairs may take longer.",
       "metadata": {
@@ -531,25 +531,25 @@
       "options": [
         {
           "id": "a",
-          "text": "All visitors, including those whose objects cannot be repaired"
-        },
-        {
-          "id": "b",
-          "text": "Only people making a donation"
-        },
-        {
-          "id": "c",
           "text": "Only visitors with repaired objects"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "All visitors, including those whose objects cannot be repaired"
+        },
+        {
+          "id": "c",
           "text": "Only volunteers"
+        },
+        {
+          "id": "d",
+          "text": "Only people making a donation"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "The demonstration is explicitly for everyone.",
       "metadata": {
@@ -578,11 +578,11 @@
         },
         {
           "id": "b",
-          "text": "Take it home"
+          "text": "Put it under the welcome desk"
         },
         {
           "id": "c",
-          "text": "Put it under the welcome desk"
+          "text": "Take it home"
         },
         {
           "id": "d",
@@ -592,7 +592,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "Volunteers cannot keep unfinished repairs.",
       "metadata": {
@@ -617,25 +617,25 @@
       "options": [
         {
           "id": "a",
-          "text": "One crossed the middle and one followed the fence"
+          "text": "Neither showed a path"
         },
         {
           "id": "b",
-          "text": "Both followed exactly the same route"
-        },
-        {
-          "id": "c",
           "text": "One showed a path inside the shed"
         },
         {
+          "id": "c",
+          "text": "Both followed exactly the same route"
+        },
+        {
           "id": "d",
-          "text": "Neither showed a path"
+          "text": "One crossed the middle and one followed the fence"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "The opening comparison states the two routes.",
       "metadata": {
@@ -660,25 +660,25 @@
       "options": [
         {
           "id": "a",
-          "text": "It had a different year printed on it"
-        },
-        {
-          "id": "b",
           "text": "It showed a shed absent from the other map"
         },
         {
+          "id": "b",
+          "text": "It showed the September photograph"
+        },
+        {
           "id": "c",
-          "text": "It named the caretaker who drew it"
+          "text": "It had a different year printed on it"
         },
         {
           "id": "d",
-          "text": "It showed the September photograph"
+          "text": "It named the caretaker who drew it"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "The new shed provides a clue, although it does not prove exact ordering.",
       "metadata": {
@@ -703,25 +703,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The maps contained no buildings"
-        },
-        {
-          "id": "b",
           "text": "The photograph gave the wrong school name"
         },
         {
+          "id": "b",
+          "text": "The caretaker said both maps were false"
+        },
+        {
           "id": "c",
-          "text": "The maps lacked months and the photograph did not show the path"
+          "text": "The maps contained no buildings"
         },
         {
           "id": "d",
-          "text": "The caretaker said both maps were false"
+          "text": "The maps lacked months and the photograph did not show the path"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The available evidence leaves the date and path relationship uncertain.",
       "metadata": {
@@ -746,7 +746,7 @@
       "options": [
         {
           "id": "a",
-          "text": "The conclusion is guaranteed"
+          "text": "The maps are no longer useful"
         },
         {
           "id": "b",
@@ -754,7 +754,7 @@
         },
         {
           "id": "c",
-          "text": "The maps are no longer useful"
+          "text": "The conclusion is guaranteed"
         },
         {
           "id": "d",
@@ -840,11 +840,11 @@
         },
         {
           "id": "c",
-          "text": "He fills every missing date with a guess"
+          "text": "He treats every memory as a dated document"
         },
         {
           "id": "d",
-          "text": "He treats every memory as a dated document"
+          "text": "He fills every missing date with a guess"
         }
       ],
       "visuals": [],
@@ -875,7 +875,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Lack of library shelves"
+          "text": "The price of bus tickets"
         },
         {
           "id": "b",
@@ -887,7 +887,7 @@
         },
         {
           "id": "d",
-          "text": "The price of bus tickets"
+          "text": "Lack of library shelves"
         }
       ],
       "visuals": [],
@@ -918,7 +918,7 @@
       "options": [
         {
           "id": "a",
-          "text": "Removable markers could never be seen"
+          "text": "Students never need to queue"
         },
         {
           "id": "b",
@@ -926,17 +926,17 @@
         },
         {
           "id": "c",
-          "text": "A badly placed line could make crowding worse"
+          "text": "Removable markers could never be seen"
         },
         {
           "id": "d",
-          "text": "Students never need to queue"
+          "text": "A badly placed line could make crowding worse"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The passage states that a permanent line in the wrong place might worsen the problem.",
       "metadata": {
@@ -961,25 +961,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Changing the bus route"
+          "text": "Keeping students dry"
         },
         {
           "id": "b",
-          "text": "Hiding the queue markers"
-        },
-        {
-          "id": "c",
           "text": "Replacing the school newsletter"
         },
         {
+          "id": "c",
+          "text": "Hiding the queue markers"
+        },
+        {
           "id": "d",
-          "text": "Keeping students dry"
+          "text": "Changing the bus route"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "Joel proposes a shelter against rain.",
       "metadata": {
@@ -1004,25 +1004,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Staff must keep the passage clear for others"
-        },
-        {
-          "id": "b",
           "text": "The shelter must already be built"
         },
         {
+          "id": "b",
+          "text": "The walkway must be painted permanently"
+        },
+        {
           "id": "c",
-          "text": "All other people must leave the school"
+          "text": "Staff must keep the passage clear for others"
         },
         {
           "id": "d",
-          "text": "The walkway must be painted permanently"
+          "text": "All other people must leave the school"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "The passage links safety to keeping the passage clear under staff supervision.",
       "metadata": {
@@ -1047,25 +1047,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Building the shelter immediately"
+          "text": "Changing the printed newsletter date"
         },
         {
           "id": "b",
-          "text": "Trying removable markers for two weeks"
+          "text": "Building the shelter immediately"
         },
         {
           "id": "c",
-          "text": "Removing every bus door"
+          "text": "Trying removable markers for two weeks"
         },
         {
           "id": "d",
-          "text": "Changing the printed newsletter date"
+          "text": "Removing every bus door"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "Removable markers and a two-week period create a reversible trial.",
       "metadata": {
@@ -1090,25 +1090,25 @@
       "options": [
         {
           "id": "a",
-          "text": "The shelter had already been completed"
+          "text": "All funding had been confirmed"
         },
         {
           "id": "b",
-          "text": "Nobody had suggested a shelter"
+          "text": "The shelter had already been completed"
         },
         {
           "id": "c",
-          "text": "A final building decision had not been made"
+          "text": "Nobody had suggested a shelter"
         },
         {
           "id": "d",
-          "text": "All funding had been confirmed"
+          "text": "A final building decision had not been made"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The proposal was awaiting a decision and a cost estimate.",
       "metadata": {
@@ -1133,25 +1133,25 @@
       "options": [
         {
           "id": "a",
-          "text": "Six hours"
-        },
-        {
-          "id": "b",
-          "text": "One whole evening"
-        },
-        {
-          "id": "c",
           "text": "Fifteen minutes"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "Three minutes"
+        },
+        {
+          "id": "c",
+          "text": "Six hours"
+        },
+        {
+          "id": "d",
+          "text": "One whole evening"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "The passage gives a fifteen-minute duration for each observation.",
       "metadata": {
@@ -1219,15 +1219,15 @@
       "options": [
         {
           "id": "a",
-          "text": "Wind made surface movements difficult to distinguish"
-        },
-        {
-          "id": "b",
           "text": "The class had moved the pond"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "The observation lasted an entire year"
+        },
+        {
+          "id": "c",
+          "text": "Wind made surface movements difficult to distinguish"
         },
         {
           "id": "d",
@@ -1237,7 +1237,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "The wind made the surface difficult to read.",
       "metadata": {
@@ -1266,11 +1266,11 @@
         },
         {
           "id": "b",
-          "text": "Ripples are not a direct count of animals and have other possible causes"
+          "text": "Leaves can never disturb water"
         },
         {
           "id": "c",
-          "text": "Leaves can never disturb water"
+          "text": "Ripples are not a direct count of animals and have other possible causes"
         },
         {
           "id": "d",
@@ -1280,7 +1280,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The teacher distinguishes the measured ripples from animals and identifies other causes.",
       "metadata": {
@@ -1313,17 +1313,17 @@
         },
         {
           "id": "c",
-          "text": "Recording observations that could not be distinguished confidently"
+          "text": "Hiding the windy evening"
         },
         {
           "id": "d",
-          "text": "Hiding the windy evening"
+          "text": "Recording observations that could not be distinguished confidently"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "The extra column keeps uncertain observations visible.",
       "metadata": {
@@ -1352,21 +1352,21 @@
         },
         {
           "id": "b",
-          "text": "It ignored the observation method"
-        },
-        {
-          "id": "c",
           "text": "It removed all numbers from the notebook"
         },
         {
-          "id": "d",
+          "id": "c",
           "text": "It described the observed evenings and included limits"
+        },
+        {
+          "id": "d",
+          "text": "It ignored the observation method"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
       "explanation": "The summary stays within the measured period and explains the limits of the evidence.",
       "metadata": {

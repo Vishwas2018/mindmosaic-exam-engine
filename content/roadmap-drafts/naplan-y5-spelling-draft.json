@@ -11,15 +11,15 @@
       "options": [
         {
           "id": "a",
-          "text": "necessary"
-        },
-        {
-          "id": "b",
           "text": "neccessary"
         },
         {
-          "id": "c",
+          "id": "b",
           "text": "necessery"
+        },
+        {
+          "id": "c",
+          "text": "necessary"
         },
         {
           "id": "d",
@@ -29,7 +29,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "c"
       },
       "explanation": "Necessary has one c and two s letters.",
       "metadata": {
@@ -91,7 +91,7 @@
       "options": [
         {
           "id": "a",
-          "text": "proposel"
+          "text": "proporsal"
         },
         {
           "id": "b",
@@ -99,17 +99,17 @@
         },
         {
           "id": "c",
-          "text": "proposal"
+          "text": "proposel"
         },
         {
           "id": "d",
-          "text": "proporsal"
+          "text": "proposal"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "Proposal ends with -al and contains one s.",
       "metadata": {
@@ -131,11 +131,11 @@
       "options": [
         {
           "id": "a",
-          "text": "distence"
+          "text": "distannce"
         },
         {
           "id": "b",
-          "text": "distannce"
+          "text": "distence"
         },
         {
           "id": "c",
@@ -175,7 +175,7 @@
         },
         {
           "id": "b",
-          "text": "discription"
+          "text": "descripton"
         },
         {
           "id": "c",
@@ -183,7 +183,7 @@
         },
         {
           "id": "d",
-          "text": "descripton"
+          "text": "discription"
         }
       ],
       "visuals": [],
@@ -211,25 +211,25 @@
       "options": [
         {
           "id": "a",
-          "text": "driping"
+          "text": "dripeng"
         },
         {
           "id": "b",
-          "text": "dripping"
+          "text": "driping"
         },
         {
           "id": "c",
-          "text": "drippping"
+          "text": "dripping"
         },
         {
           "id": "d",
-          "text": "dripeng"
+          "text": "drippping"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "The final p doubles before -ing in dripping.",
       "metadata": {
@@ -251,25 +251,25 @@
       "options": [
         {
           "id": "a",
-          "text": "knifes"
-        },
-        {
-          "id": "b",
           "text": "knivs"
         },
         {
+          "id": "b",
+          "text": "knivies"
+        },
+        {
           "id": "c",
-          "text": "knives"
+          "text": "knifes"
         },
         {
           "id": "d",
-          "text": "knivies"
+          "text": "knives"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "d"
       },
       "explanation": "Knife changes its final -fe to -ves in the plural.",
       "metadata": {
@@ -291,7 +291,7 @@
       "options": [
         {
           "id": "a",
-          "text": "harmoney"
+          "text": "harmony"
         },
         {
           "id": "b",
@@ -299,17 +299,17 @@
         },
         {
           "id": "c",
-          "text": "harmany"
+          "text": "harmoney"
         },
         {
           "id": "d",
-          "text": "harmony"
+          "text": "harmany"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "Harmony ends in -ony.",
       "metadata": {
@@ -335,7 +335,7 @@
         },
         {
           "id": "b",
-          "text": "carefuly"
+          "text": "carefullyy"
         },
         {
           "id": "c",
@@ -343,7 +343,7 @@
         },
         {
           "id": "d",
-          "text": "carefullyy"
+          "text": "carefuly"
         }
       ],
       "visuals": [],
@@ -371,7 +371,7 @@
       "options": [
         {
           "id": "a",
-          "text": "simpel"
+          "text": "simble"
         },
         {
           "id": "b",
@@ -379,11 +379,11 @@
         },
         {
           "id": "c",
-          "text": "simpple"
+          "text": "simpel"
         },
         {
           "id": "d",
-          "text": "simble"
+          "text": "simpple"
         }
       ],
       "visuals": [],
@@ -411,25 +411,25 @@
       "options": [
         {
           "id": "a",
-          "text": "brethe"
-        },
-        {
-          "id": "b",
-          "text": "breathh"
-        },
-        {
-          "id": "c",
           "text": "breath"
         },
         {
-          "id": "d",
+          "id": "b",
           "text": "breth"
+        },
+        {
+          "id": "c",
+          "text": "brethe"
+        },
+        {
+          "id": "d",
+          "text": "breathh"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "Breath is the noun; breathe is the verb.",
       "metadata": {
@@ -451,7 +451,7 @@
       "options": [
         {
           "id": "a",
-          "text": "moveablee"
+          "text": "movable"
         },
         {
           "id": "b",
@@ -463,13 +463,13 @@
         },
         {
           "id": "d",
-          "text": "movable"
+          "text": "moveablee"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "a"
       },
       "explanation": "Movable is one accepted spelling, with -able after mov-.",
       "metadata": {
@@ -491,15 +491,15 @@
       "options": [
         {
           "id": "a",
-          "text": "visible"
+          "text": "vizible"
         },
         {
           "id": "b",
-          "text": "visable"
+          "text": "visible"
         },
         {
           "id": "c",
-          "text": "vizible"
+          "text": "visable"
         },
         {
           "id": "d",
@@ -509,7 +509,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "Visible ends with -ible.",
       "metadata": {
@@ -531,15 +531,15 @@
       "options": [
         {
           "id": "a",
-          "text": "obvius"
+          "text": "obveous"
         },
         {
           "id": "b",
-          "text": "obvious"
+          "text": "obvius"
         },
         {
           "id": "c",
-          "text": "obveous"
+          "text": "obvious"
         },
         {
           "id": "d",
@@ -549,7 +549,7 @@
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "c"
       },
       "explanation": "Obvious includes the letters i-o-u before the final s.",
       "metadata": {
@@ -571,25 +571,25 @@
       "options": [
         {
           "id": "a",
-          "text": "timetabel"
+          "text": "timetabble"
         },
         {
           "id": "b",
-          "text": "timmetable"
-        },
-        {
-          "id": "c",
           "text": "timetable"
         },
         {
+          "id": "c",
+          "text": "timmetable"
+        },
+        {
           "id": "d",
-          "text": "timetabble"
+          "text": "timetabel"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "b"
       },
       "explanation": "Timetable combines time and table.",
       "metadata": {
@@ -615,7 +615,7 @@
         },
         {
           "id": "b",
-          "text": "asistant"
+          "text": "assistant"
         },
         {
           "id": "c",
@@ -623,13 +623,13 @@
         },
         {
           "id": "d",
-          "text": "assistant"
+          "text": "asistant"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "b"
       },
       "explanation": "Assistant has double s near the start and ends with -ant.",
       "metadata": {
@@ -651,25 +651,25 @@
       "options": [
         {
           "id": "a",
-          "text": "results"
-        },
-        {
-          "id": "b",
           "text": "resaults"
         },
         {
+          "id": "b",
+          "text": "results"
+        },
+        {
           "id": "c",
-          "text": "resultts"
+          "text": "resalts"
         },
         {
           "id": "d",
-          "text": "resalts"
+          "text": "resultts"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       },
       "explanation": "Results is the plural of result.",
       "metadata": {
@@ -691,7 +691,7 @@
       "options": [
         {
           "id": "a",
-          "text": "entrence"
+          "text": "entrannce"
         },
         {
           "id": "b",
@@ -703,7 +703,7 @@
         },
         {
           "id": "d",
-          "text": "entrannce"
+          "text": "entrence"
         }
       ],
       "visuals": [],
@@ -731,25 +731,25 @@
       "options": [
         {
           "id": "a",
-          "text": "removd"
-        },
-        {
-          "id": "b",
-          "text": "remmoved"
-        },
-        {
-          "id": "c",
           "text": "removed"
         },
         {
-          "id": "d",
+          "id": "b",
+          "text": "removd"
+        },
+        {
+          "id": "c",
           "text": "remooved"
+        },
+        {
+          "id": "d",
+          "text": "remmoved"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "c"
+        "optionId": "a"
       },
       "explanation": "Remove drops its final e before -ed.",
       "metadata": {
@@ -771,15 +771,15 @@
       "options": [
         {
           "id": "a",
-          "text": "equall"
+          "text": "eqwal"
         },
         {
           "id": "b",
-          "text": "equel"
+          "text": "equall"
         },
         {
           "id": "c",
-          "text": "eqwal"
+          "text": "equel"
         },
         {
           "id": "d",

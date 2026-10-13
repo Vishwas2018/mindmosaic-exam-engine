@@ -11,11 +11,11 @@
       "options": [
         {
           "id": "a",
-          "text": "washed"
+          "text": "washt"
         },
         {
           "id": "b",
-          "text": "washt"
+          "text": "woshed"
         },
         {
           "id": "c",
@@ -23,13 +23,13 @@
         },
         {
           "id": "d",
-          "text": "woshed"
+          "text": "washed"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "d"
       },
       "explanation": "The past tense of wash is washed.",
       "metadata": {
@@ -51,11 +51,11 @@
       "options": [
         {
           "id": "a",
-          "text": "rabit"
+          "text": "rabbit"
         },
         {
           "id": "b",
-          "text": "rabbit"
+          "text": "rabbet"
         },
         {
           "id": "c",
@@ -63,13 +63,13 @@
         },
         {
           "id": "d",
-          "text": "rabbet"
+          "text": "rabit"
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "b"
+        "optionId": "a"
       },
       "explanation": "Rabbit has a double b and one final t.",
       "metadata": {
@@ -91,11 +91,11 @@
       "options": [
         {
           "id": "a",
-          "text": "tabel"
+          "text": "taybel"
         },
         {
           "id": "b",
-          "text": "tabble"
+          "text": "tabel"
         },
         {
           "id": "c",
@@ -103,7 +103,7 @@
         },
         {
           "id": "d",
-          "text": "taybel"
+          "text": "tabble"
         }
       ],
       "visuals": [],
