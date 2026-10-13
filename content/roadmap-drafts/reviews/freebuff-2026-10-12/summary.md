@@ -1,5 +1,9 @@
 # Second-opinion review of content/roadmap-drafts — 2026-10-12
 
+> **Revision note:** This review is advisory only and covers the drafts as they existed before the current revision. Its answer-position counts for the reading files are incorrect; the verified passage-group counts are 7/7/7/6 for Year 3 and 8/8/8/8 for Year 5.
+
+> **13 October revision:** The packets now contain 199 questions, including twenty Year 3 spelling items. Re-authored questions, explanations and shuffled options have not been independently re-reviewed by this advisory reviewer. Historical letter keys and distributions below describe the older snapshots; use the current validator output and revision report for the updated distributions. This review supplies no human approval for either snapshot.
+
 **ADVISORY ONLY. This is an independent, machine-assisted second opinion by Buffy (Freebuff). It is NOT human approval. Per the drafts README, publication requires a named human reviewer and explicit review confirmation; nothing here changes that. No draft file was edited, no approval records were touched, and nothing was pushed.**
 
 Review method: all 182 questions were solved independently before consulting each answer key. Working shown per item in the per-file `-review.json` records. Judgements on un-checkable items are marked in-file; none such occurred — every keyed answer could be solved.
