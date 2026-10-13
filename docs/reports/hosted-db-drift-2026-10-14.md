@@ -12,6 +12,8 @@ Inspected on 13 October 2026 against `dev` at `90350726` (all of #35, #45, #33, 
 - **No migration is destructive.** Every step is additive or widening. None drops a populated table or column.
 - **Publication gate: every programme stays in report mode.** The migration creates `publication_gate_settings` empty, and nothing in the repository writes to it (details in section 4).
 - **All ten applied cleanly, in timestamp order, on a local copy of the hosted state** (39 migrations plus the same 6 profiles). Each step passed its own registry check, the full registry then passed 49 of 49, and 70 RLS tests across three suites passed against it.
+- **The live site already expects 8 of the 10 migrations (follow-up, section 12).** Production serves `main` at `47c11ba8`, which contains those 8 migrations and code that uses their columns. The student shell is degraded now: year level reads as missing, onboarding cannot complete. Not an outage.
+- **Backup / PITR status is unverified (section 13).** It cannot be read from here. Do not start the apply until the owner has confirmed it in the dashboard.
 - **Plain `supabase db push` will refuse.** The hosted ledger already holds later versions (`20260821`, `20260822`, `20260823`) than the first missing ones, so the CLI needs `--include-all`.
 
 ## 2. Method (all read-only)
@@ -21,7 +23,7 @@ Inspected on 13 October 2026 against `dev` at `90350726` (all of #35, #45, #33, 
 - Data was inspected as **counts only**. No row contents were read.
 - Function source for three functions was read with `pg_get_functiondef` and compared with the repository.
 - `supabase migration list --db-url` (read-only) was used as an independent view of the ledger. It agrees: 10 local-only versions and none remote-only.
-- Not checkable read-only: whether `mindmosaic_scoring` has a password set (that lives in `pg_authid`), what Vercel environment variables are set, and what backups or point-in-time recovery the hosted plan provides.
+- Not checkable read-only: whether `mindmosaic_scoring` has a password set (that lives in `pg_authid`), what Vercel environment variables are set, and what backups or point-in-time recovery the hosted plan provides (follow-up in section 13: still not readable).
 
 ## 3. The exact list
 
@@ -95,7 +97,7 @@ Classes: **Safe** (additive or widening, no data dependency), **Safe, needs prov
 ### Other child-data touchpoints
 
 - `profiles` is the only table with child rows touched. Steps 4 and 6 add columns and change the year check and column grants; step 10 changes `erase_student`. None rewrites a row.
-- Old application code remains compatible with every step as far as the SQL shows: new columns are nullable or defaulted, constraints are widened, restated functions keep their signatures, and the column grants are a superset. This was assessed from the SQL, not by running the currently deployed bundle (production tracks `main`, which is behind `dev`).
+- (Superseded by section 12 for the code actually deployed: production is `main`, and `main` already needs migration 6 and part of 4.) Old application code remains compatible with every step as far as the SQL shows: new columns are nullable or defaulted, constraints are widened, restated functions keep their signatures, and the column grants are a superset. This was assessed from the SQL, not by running the currently deployed bundle (production tracks `main`, which is behind `dev`).
 - Apply migrations **before** deploying the newer application. The reverse order breaks (for example, onboarding and writing code expect their tables and columns).
 
 ## 8. Ordered apply plan
@@ -164,3 +166,49 @@ I have not run, and will not run, any of the above.
 - Timings are from empty tables; hosted is also near-empty, so they should hold, but they are not a load test.
 - Backup and recovery capability, role passwords, and the application's environment were not inspectable from here.
 - Whether the deployed production bundle tolerates each intermediate state was assessed from SQL, not run.
+
+## 12. Follow-up: what the live site expects (added 14 October 2026, read-only)
+
+**Method.** Production deployment checked with the Vercel CLI: the latest Production deployment (about 3 Oct 2026) was built from `main` at `47c11ba8`, "Merge pull request #23 from Vishwas2018/dev". I then read `origin/main` at that commit. This is static analysis of the code against the hosted schema in sections 3 and 6. I did not request pages from the live site, and I did not touch the database.
+
+**Answer: yes.** `main` already contains migration files 1 to 8 (not 9 and 10, which exist only on `dev`), and some of its application code uses objects those migrations create. Those objects are absent on hosted, so the following is broken or degraded on the live site right now.
+
+| Severity | Feature (code on `main`) | Missing object | What happens on hosted today |
+|---|---|---|---|
+| **Moderate, every signed-in student** | Student shell loader `requireStudent()` (`src/features/student/require-student.ts`), used by `/student`, `/student/practice`, `/student/learn*`, `/student/engagement`, `/student/exam-preparation` and the app header | `profiles.onboarding_completed_at`, `diagnostic_completed_at`, `interests`, `weekly_goal_minutes` (migration 6) | The `select` names columns that do not exist, so PostgREST returns an error. The code ignores the error and gets no profile. Year level reads as null, which `/student/practice` turns into **Year 3, so a Year 5 student is shown Year 3 content** (hosted has 2 Year 5 students). Display name falls back to the auth metadata name. Onboarding is always "not completed", so the prompt shows on every visit. I read the practice page; the other callers share the loader but I did not read each one. |
+| **Moderate, feature unusable** | `POST /api/student/onboarding/complete` | Same four `profiles` columns (migration 6) | The route selects `onboarding_completed_at` for its role check, gets no profile, and returns **403 `students_only`** before creating anything. A student cannot finish onboarding or the diagnostic. No partial writes. |
+| **Moderate, feature unusable** | `POST /api/student/onboarding/preferences` | `profiles.interests`, `weekly_goal_minutes` (migration 6) | The profile update fails. Preferences cannot be saved. |
+| **Low, dormant** | Parent add-child and edit-child APIs when `curriculumPreference` is sent | `profiles.curriculum_jurisdiction_code`, `curriculum_school_sector` (migration 4) | With that field present, add-child fails after the auth user is created ("account was not set up"; an orphaned auth row, no parent link) and edit-child returns 500. No form in `src/` sends the field, so only a direct API call triggers it. Without the field both work. |
+| **Low** | `/parent/curriculum-explorer` | `curriculum_*` tables (migration 4) | The page catches the query failure and shows "Unable to load curriculum". Nothing in `src/` links to it. After migration 4 it loads but shows nothing until `scripts/curriculum-import.mts` is run; the migration only seeds jurisdictions. |
+| **None for the web app** | Content-factory operator CLI (`scripts/mm-content.mts`, `content-quality-pilots.mts`) | Migration 3 tables, bucket `content-assets-private`, migration 5 role | Used only from scripts, not by any web route. Those scripts would fail against hosted. |
+| **None found** | Migrations 1, 2, 7, 8 | answer kinds, media/group tables, `part_score_evidence`, AMC offerings | No `main` code path in `src/` reads these. `rpc("record_manual_mark")` on `main` passes only the four original parameters, which the hosted function accepts. The sitting and marking paths are unused anyway (0 sessions). I found no AMC tile that reads `programme_offerings`. |
+
+**What still works.** Sign-in, role lookup and the parent, teacher and billing profile reads select only columns that exist, so I found nothing there that breaks.
+
+**Practical reading.** The live site is not down. The student-facing damage is the year-level fallback and an onboarding flow that cannot complete, on a database with 4 student profiles and no sessions. Whether those 4 are real children is unknown. Applying migrations 4 and 6 removes all of it, and the apply plan already orders them correctly. It also means `main` was deployed ahead of its own schema, which is worth a release check afterwards.
+
+**For `dev`.** The newer application would additionally need migrations 9 and 10 (publication approvals and timed writing). It is not deployed, so those two cause no live breakage today.
+
+## 13. Follow-up: backup and point-in-time recovery
+
+**Status: could not be read. Treat as unverified, not as absent.**
+
+- The Supabase CLI session on this machine is signed in to a different account: `supabase projects list` shows three projects (`taxops`, `subtwo`, `equitylens-staging`), none of them MindMosaic.
+- The MindMosaic project reference, taken from the public URL in `.env.local`, is `uermhsptduikehuyceiz`. The read-only `supabase backups list --project-ref uermhsptduikehuyceiz` returned `401 Invalid access token`.
+- No Management API token for that project is available here, and I did not look for one elsewhere or use the database password for this.
+
+**Where you check it (Supabase dashboard, project `uermhsptduikehuyceiz`).** Labels may differ slightly between dashboard versions.
+
+1. **Database, then Backups.**
+   - *Scheduled backups* tab: you want a daily backup timestamped within the last 24 hours, with a listed retention (7 days on Pro; more on higher plans or add-ons).
+   - *Point in Time* tab: you want PITR **enabled**, and an earliest restorable time before today. If it only offers to enable it, it is off.
+2. **Organization settings, then Billing.** Confirm the plan. On the Free plan the dashboard offers no restorable backups, and PITR is not available.
+3. **Project is not paused**, and runs Postgres 17 (the inspection saw 17.6).
+
+**What the result means for the apply:**
+
+- PITR on, or a daily backup taken after the last schema or data change: you have a platform rollback. Record its timestamp or ID before starting.
+- Free plan or no usable backup: take your own dump first, for example `supabase db dump --db-url "$SUPABASE_DB_URL" -f pre-apply-schema.sql` plus a `--data-only` dump to a second file, stored outside the repository. The data is only 6 users and 6 profiles, so this is quick. The per-step rollback notes in section 8 remain valid either way, but only while the new tables are empty.
+- Restoring a hosted backup rolls back everything written since, including any sign-ups. On a live site that is a reason to watch the apply rather than leave it unattended.
+
+**Not done, by instruction:** no migration or ledger write has been run, no gate row inserted, and the hosted database was not queried again for this follow-up.
