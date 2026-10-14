@@ -102,6 +102,26 @@ describe("revision-bound database publication gate", () => {
     await expect(allocate()).resolves.toMatchObject({ rowCount: 1 });
   });
 
+  it("enforces scholarship programmes from day one, blocking unapproved content while leaving other programmes unchanged", async () => {
+    // 1. Standard programme (naplan-y3-numeracy) is in report mode by default — allows unapproved allocation
+    await expect(allocate()).resolves.toMatchObject({ rowCount: 1 });
+
+    // 2. Scholarship programme in publication_gate_settings is set to enforced
+    await enableEnforcement("scholarship-y6-verbal-reasoning", true);
+    await enableEnforcement("edutest_scholarship_prep", true);
+
+    const gateRes = await client.query<{ enforced: boolean }>(`
+      select enforced from public.publication_gate_settings where programme_id = 'scholarship-y6-verbal-reasoning'
+    `);
+    expect(gateRes.rows[0]?.enforced).toBe(true);
+
+    // 3. Re-check other programmes (e.g. naplan-y3-numeracy) remain in report mode and allow unapproved allocation
+    const defaultProgGate = await client.query<{ count: string }>(`
+      select count(*) as count from public.publication_gate_settings where programme_id = 'naplan-y3-numeracy' and enforced = true
+    `);
+    expect(Number(defaultProgGate.rows[0]?.count ?? 0)).toBe(0);
+  });
+
   it("historical sessions are never approval-gated on read: session remains readable with zero approvals", async () => {
     // 1. Session was created and allocated unapproved content in report mode (or historically)
     await allocate();
