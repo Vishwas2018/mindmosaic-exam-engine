@@ -542,3 +542,76 @@ Exactly as in 14.4: the guard above, a fresh dump, the dry run that must list ex
 | Leaves hosted behind `main` | Yes, 7 migrations | No |
 | Later work | Still need to apply the other 7 (rehearsed as safe in any order after 6) | None |
 | Blast radius if it fails | Smallest | Larger, but each file is its own transaction and it stops at the first failure |
+
+
+## 17. Applied: migrations 1 to 8 on hosted (14 October 2026)
+
+**Decision (owner):** option (b), all 8, to leave hosted exactly matching deployed `main`. Go-ahead given with the owner present and watching; his acknowledgement was received before the apply started.
+
+### 17.1 Pre-flight (all passed, before anything was changed)
+
+- Dump folder `C:\Users\vishw\mindmosaic-backups\hosted-2026-10-14\`: 5 files, sizes and SHA-256 prefixes all matched the recorded values.
+- Hosted was unchanged since the dump: content hashes of `auth.users`, profiles (original columns), the ledger and offerings were identical to the dump-time values, so no re-dump was needed.
+- `psql` 17.6 reached hosted as `postgres` with the session read-only. The project answered queries, so it was not paused.
+- Checkout: detached `origin/main` = `47c11ba8`; HEAD on main's history; 47 migration files; no migration 9 or 10 files; not the `dev` tip.
+- `supabase db push --include-all --dry-run` listed exactly the 8 migrations, in order.
+
+### 17.2 The apply
+
+Command, run from the `main` checkout (the connection string was not printed or stored):
+```
+supabase db push --include-all --yes --db-url <hosted direct connection>
+```
+(`--yes` answered the Y/n prompt; the CLI displayed the 8-file list first and the answer was recorded as `y`.)
+
+Result: exit code 0 in 10.7 s. The CLI applied, in this order, with no error on any of them:
+
+| # | Migration | Result |
+|---|---|---|
+| 1 | `20260818090000_naplan_interaction_answer_kinds` | applied |
+| 2 | `20260820090000_assessment_capability_expansion` | applied |
+| 3 | `20260825090000_content_factory_phase1` | applied |
+| 4 | `20260827090000_curriculum_platform_foundation` | applied |
+| 5 | `20260902090000_content_answer_writer_role` | applied |
+| 6 | `20260922100000_student_onboarding_preferences` | applied |
+| 7 | `20260923090000_amc_programme_offerings` | applied |
+| 8 | `20260923100000_amc_phase2_config_backfill` | applied |
+
+The CLI also printed a warning after the last migration: `failed to cache migrations catalog: ... pgdelta-target-ca.crt: ENOENT`. That is a post-step local cache of the migration catalog on the machine running the CLI; it is not a database operation, and the verification below confirms the database state independently. The usual deprecation warnings about `[inbucket]` and `api.auto_expose_new_tables` also appeared.
+
+### 17.3 Verification (read-only, against hosted)
+
+- **Ledger:** 47 rows (was 39). The 8 new versions are present, and `supabase migration list` shows each on both the local and remote side.
+- **The 17 checks** (`hosted-db-drift-2026-10-14-verify-1-8.sql`): **17 of 17 true.**
+- **Year 5 student, acting as role `authenticated`, in a transaction that was rolled back:**
+  - A. The `requireStudent()` select returned `year_level = 5` (and `onboarded = false`, `goal = 60`), not an error.
+  - B. The onboarding role-check select returned `role = student` with no error, so the 403 `students_only` path is gone.
+  - C. The onboarding profile update (`year_level, interests, weekly_goal_minutes, onboarding_completed_at, diagnostic_completed_at`) succeeded.
+  - Afterwards: 0 profile rows have an onboarding or diagnostic timestamp, so nothing from the test persisted.
+- **Data unchanged:** 6 auth users, 6 profiles, 2 Year 5 students, 0 sessions. The md5 of `auth.users` (`86a5ffd8…`) and of the profiles' original columns (`b9f5903e…`) are identical to the dump-time values.
+- **Scope held:** `public.item_publication_approvals` (migration 9) and `public.writing_attempts` (migration 10) do not exist.
+
+### 17.4 New hosted state
+
+| | Before | After |
+|---|---|---|
+| Ledger rows / newest version | 39 / `20260823110000` | 47 / `20260923100000` |
+| Public tables | 41 | 75 |
+| Active programme offerings | 99 | 101 (two AMC) |
+| `profiles` columns | no onboarding or curriculum columns | +4 onboarding columns, +2 curriculum columns, year check 1 to 12 |
+| `mindmosaic_scoring` UPDATE column grants | 8 | 9 (the long-standing registry mismatch is cleared) |
+| Roles | `mindmosaic_scoring` | + `mindmosaic_content_answer_writer` (login, **no password set**) |
+| Storage | none | + private bucket `content-assets-private` (empty) |
+| Auth users, profiles, sessions | 6, 6, 0 | 6, 6, 0 (unchanged) |
+
+Hosted now matches deployed `main` (`47c11ba8`). Migrations 9 and 10 remain held until `dev` ships.
+
+### 17.5 Not done, and what is next
+
+- **No deploy, no code change, no approval, no gate row.** `publication_gate_settings` does not exist yet (migration 9).
+- **Owner smoke test, not done:** on the live site, sign in as a Year 5 student and confirm Year 5 content shows, then complete onboarding. The database side is proven; the running site was not exercised.
+- `npm run migrations:status` was **not** run (it needs the project's Node dependencies, and the machine was short of memory). The 17-row SQL check and the CLI ledger listing stand in for it.
+- `mindmosaic_content_answer_writer` has no password; set one through your secrets process only when the content-publishing scripts need it.
+- The curriculum explorer will now load but be empty until `scripts/curriculum-import.mts` is run.
+- **The dump is now a pre-apply restore point.** Restoring it would return hosted to the state before this apply (section 14.5, rehearsed). Keep it until you are satisfied, and take a fresh dump before applying 9 and 10.
+- Housekeeping: delete the extracted PostgreSQL client folder `C:\Users\vishw\pgclient` when finished, and remove the temporary worktrees.
