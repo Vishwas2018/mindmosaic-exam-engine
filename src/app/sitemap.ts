@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 
 import { isLiveProgram, PROGRAMS } from "@/features/catalogue/catalogue";
 import { STARTABLE_EXAM_PATTERNS } from "@/features/exam-engine/exam-patterns";
+import { siteOrigin } from "@/lib/site-url";
 
-const BASE_URL = "https://mindmosaic.app";
+const BASE_URL = siteOrigin();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
