@@ -14,6 +14,12 @@ import type { VisualAsset } from "@/schemas/visual.schema";
 
 import { CORRECTNESS_LIMITS } from "../config";
 import type { DeclaredWorkingSolution } from "../ingestion/candidate-question";
+import { solveNumberSeries } from "@/features/scholarship/solvers/number-series";
+import { solveNumberMatrix } from "@/features/scholarship/solvers/number-matrices";
+import { solveLetterSeries } from "@/features/scholarship/solvers/letter-series";
+import { solveCode } from "@/features/scholarship/solvers/coded-words";
+import { solveSyllogism } from "@/features/scholarship/solvers/syllogism";
+import { solveArithmeticalReasoning } from "@/features/scholarship/solvers/arithmetical-reasoning";
 import { evaluateExpression, extractArithmeticExpression } from "./arithmetic-expression";
 import { attemptMultistep } from "./derive-multistep-answer";
 import type { DerivedValue } from "./derived-value";
@@ -843,11 +849,118 @@ function attemptNumericPredicateOverOptions(question: Question): DerivationOutco
   return success("numeric_predicate", { kind: "multiple_options", optionIds: matchingIds }, `[${matchingIds.join(",")}]`);
 }
 
+function attemptSolver(question: Question): DerivationOutcome {
+  const solverData = "solverParams" in question
+    ? (question as {
+        solverParams?: {
+          solver?: string;
+          solverParams?: Record<string, unknown>;
+          ruleOrientation?: "row" | "column" | "diagonal";
+        };
+      }).solverParams
+    : undefined;
+  if (!solverData || !solverData.solver || !solverData.solverParams) return NOT_APPLICABLE;
+
+  try {
+    let computedValue: unknown;
+    switch (solverData.solver) {
+      case "number_series": {
+        const res = solveNumberSeries(solverData.solverParams as unknown as Parameters<typeof solveNumberSeries>[0]);
+        if (!res.unique) return cannotDerive("unable_to_derive_answer", `number_series solver failed: ${res.error}`);
+        computedValue = res.value;
+        break;
+      }
+      case "number_matrix": {
+        if (!solverData.ruleOrientation) {
+          return cannotDerive("unable_to_derive_answer", "Number matrix solverParams must explicitly declare ruleOrientation");
+        }
+        const res = solveNumberMatrix({
+          ...solverData.solverParams,
+          ruleOrientation: solverData.ruleOrientation,
+        } as unknown as Parameters<typeof solveNumberMatrix>[0]);
+        if (!res.unique) return cannotDerive("unable_to_derive_answer", `number_matrix solver failed: ${res.error}`);
+        computedValue = res.value;
+        break;
+      }
+      case "letter_series": {
+        const res = solveLetterSeries(solverData.solverParams as unknown as Parameters<typeof solveLetterSeries>[0]);
+        if (!res.unique) return cannotDerive("unable_to_derive_answer", `letter_series solver failed: ${res.error}`);
+        computedValue = res.value;
+        break;
+      }
+      case "coded_words": {
+        const res = solveCode(solverData.solverParams as unknown as Parameters<typeof solveCode>[0]);
+        if (!res.unique) return cannotDerive("unable_to_derive_answer", `coded_words solver failed: ${res.error}`);
+        computedValue = res.value;
+        break;
+      }
+      case "syllogism": {
+        const res = solveSyllogism(solverData.solverParams as unknown as Parameters<typeof solveSyllogism>[0]);
+        if (!res.unique) return cannotDerive("unable_to_derive_answer", `syllogism solver failed: ${res.error}`);
+        computedValue = res.value;
+        break;
+      }
+      case "arithmetical_reasoning": {
+        const constraintsList = (solverData.solverParams.constraints as string[]) ?? [];
+        const constraintFns = constraintsList.map((str: string) => {
+          return (env: Record<string, number>) => {
+            const keys = Object.keys(env);
+            const vals = Object.values(env);
+            const fn = new Function(...keys, `return (${str});`);
+            return Boolean(fn(...vals));
+          };
+        });
+        const res = solveArithmeticalReasoning({
+          variables: (solverData.solverParams.variables as unknown as Parameters<typeof solveArithmeticalReasoning>[0]["variables"]) ?? [],
+          constraints: constraintFns,
+          targetVariable: String(solverData.solverParams.targetVariable ?? ""),
+        });
+        if (!res.unique) return cannotDerive("unable_to_derive_answer", `arithmetical_reasoning solver failed: ${res.error}`);
+        computedValue = res.value;
+        break;
+      }
+      default:
+        return cannotDerive("unable_to_derive_answer", `Unsupported solver type: ${solverData.solver}`);
+    }
+
+    if (computedValue === undefined) {
+      return cannotDerive("unable_to_derive_answer", "Solver produced no computed value");
+    }
+
+    const computedStr = String(computedValue).trim();
+    const matchingOption = question.options?.find((opt) => {
+      const text = opt.text.trim();
+      const normText = text.replace(/[$,\s]/g, "");
+      return (
+        text === computedStr ||
+        text.toUpperCase() === computedStr.toUpperCase() ||
+        text.includes(computedStr) ||
+        normText.includes(computedStr)
+      );
+    });
+
+    if (!matchingOption) {
+      return cannotDerive(
+        "unable_to_derive_answer",
+        `Solver computed '${computedStr}', but no option in question options matches this value`,
+      );
+    }
+
+    return success("scholarship_solver", { kind: "single_option", optionId: matchingOption.id }, computedStr);
+  } catch (err: unknown) {
+    return cannotDerive(
+      "unable_to_derive_answer",
+      `Solver threw an exception: ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
+}
+
 /* ---------------------------------------------------------------------- */
 /* Dispatcher                                                              */
 /* ---------------------------------------------------------------------- */
 
 const DERIVATION_METHODS: readonly ((question: Question, workingSteps?: DeclaredWorkingSolution) => DerivationOutcome)[] = [
+  attemptSolver,
   attemptArithmetic,
   attemptMoney,
   attemptPerimeterArea,

@@ -56,6 +56,13 @@ import type { Question } from "../src/schemas/question.schema";
 import type { VisualAsset } from "../src/schemas/visual.schema";
 import { moreThanTwicePredicate } from "./lib/twice-predicate";
 
+import { solveNumberSeries } from "../src/features/scholarship/solvers/number-series";
+import { solveNumberMatrix } from "../src/features/scholarship/solvers/number-matrices";
+import { solveLetterSeries } from "../src/features/scholarship/solvers/letter-series";
+import { solveCode } from "../src/features/scholarship/solvers/coded-words";
+import { solveSyllogism } from "../src/features/scholarship/solvers/syllogism";
+import { solveArithmeticalReasoning } from "../src/features/scholarship/solvers/arithmetical-reasoning";
+
 export interface CheckOutcome {
   /** True when at least one independent computation verified the answer key. */
   computed: boolean;
@@ -1785,6 +1792,92 @@ export function evaluateQuestionCorrectness(question: Question): CheckOutcome {
     checkLabelDiagram(question, result);
     checkHotspot(question, result);
     checkDragDrop(question, result);
+
+    // If question has solverParams sidecar (or metadata with solver)
+    const qWithSolver = question as {
+      solverParams?: {
+        solver: string;
+        solverParams: Record<string, unknown>;
+        ruleOrientation?: "row" | "column" | "diagonal";
+        constraints?: string[];
+        variables?: Array<{ name: string; min: number; max: number; step?: number }>;
+        targetVariable?: string;
+      };
+    };
+    if (qWithSolver.solverParams) {
+      const sp = qWithSolver.solverParams;
+      let computedValue: unknown;
+      try {
+        switch (sp.solver) {
+          case "number_series": {
+            const res = solveNumberSeries(sp.solverParams as unknown as Parameters<typeof solveNumberSeries>[0]);
+            if (res.unique) computedValue = res.value;
+            else result.failures.push(`number_series solver: ${res.error}`);
+            break;
+          }
+          case "number_matrix": {
+            const res = solveNumberMatrix({
+              ...sp.solverParams,
+              ruleOrientation: sp.ruleOrientation ?? "row",
+            } as unknown as Parameters<typeof solveNumberMatrix>[0]);
+            if (res.unique) computedValue = res.value;
+            else result.failures.push(`number_matrix solver: ${res.error}`);
+            break;
+          }
+          case "letter_series": {
+            const res = solveLetterSeries(sp.solverParams as unknown as Parameters<typeof solveLetterSeries>[0]);
+            if (res.unique) computedValue = res.value;
+            else result.failures.push(`letter_series solver: ${res.error}`);
+            break;
+          }
+          case "coded_words": {
+            const res = solveCode(sp.solverParams as unknown as Parameters<typeof solveCode>[0]);
+            if (res.unique) computedValue = res.value;
+            else result.failures.push(`coded_words solver: ${res.error}`);
+            break;
+          }
+          case "syllogism": {
+            const res = solveSyllogism(sp.solverParams as unknown as Parameters<typeof solveSyllogism>[0]);
+            if (res.unique) computedValue = res.value;
+            else result.failures.push(`syllogism solver: ${res.error}`);
+            break;
+          }
+          case "arithmetical_reasoning": {
+            const constraintsList = (sp.solverParams.constraints as string[]) ?? [];
+            const constraintFns = constraintsList.map((str) => {
+              return (env: Record<string, number>) => {
+                const keys = Object.keys(env);
+                const vals = Object.values(env);
+                const fn = new Function(...keys, `return (${str});`);
+                return Boolean(fn(...vals));
+              };
+            });
+            const res = solveArithmeticalReasoning({
+              variables: (sp.solverParams.variables as unknown as Parameters<typeof solveArithmeticalReasoning>[0]["variables"]) ?? [],
+              constraints: constraintFns,
+              targetVariable: String(sp.solverParams.targetVariable ?? ""),
+            });
+            if (res.unique) computedValue = res.value;
+            else result.failures.push(`arithmetical_reasoning solver: ${res.error}`);
+            break;
+          }
+        }
+
+        const key = question.answerKey;
+        if (computedValue !== undefined && key.kind === "single_option") {
+          const chosenOpt = question.options?.find((o) => o.id === key.optionId);
+          if (chosenOpt && chosenOpt.text.trim() === String(computedValue).trim()) {
+            result.computed = true;
+          } else {
+            result.failures.push(
+              `solver computed value '${computedValue}' does not match answer key option text '${chosenOpt?.text}'`,
+            );
+          }
+        }
+      } catch (err: unknown) {
+        result.failures.push(`solver execution failed: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
 
     if (!result.computed) {
       result.warnings.push(
