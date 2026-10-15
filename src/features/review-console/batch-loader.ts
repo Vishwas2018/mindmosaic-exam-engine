@@ -327,7 +327,14 @@ export async function loadGovernedYear3ApprovalBatch(options?: {
       csvContent = await readFile(path.join(fallbackDir, "year-3-review.csv"), "utf8");
       dir = fallbackDir;
     } catch {
-      throw new Error(`Governed approval batch not found in ${dir} or ${fallbackDir}`);
+      // Fallback for CI runners where content/question-factory/reports/ is gitignored
+      const ciFixtureDir = path.join(cwd, "src/content/review-fixtures/governed-year-3");
+      try {
+        csvContent = await readFile(path.join(ciFixtureDir, "year-3-review.csv"), "utf8");
+        dir = ciFixtureDir;
+      } catch {
+        throw new Error(`Governed approval batch not found in ${dir}, ${fallbackDir}, or ${ciFixtureDir}`);
+      }
     }
   }
 

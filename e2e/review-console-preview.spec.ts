@@ -8,7 +8,7 @@ const CONSOLE_URL = "/dev/review-console";
 test.describe("review console keyboard workflow (dev only)", () => {
   test("full keyboard pass through fixture batch with pinned stimulus and CSV export", async ({ page }) => {
     await setViewport(page, { name: "desktop", width: 1400, height: 900 });
-    await visitAndStabilize(page, CONSOLE_URL, { readyLocator: "main" });
+    await visitAndStabilize(page, CONSOLE_URL, { readyLocator: "[data-testid='batch-select']" });
 
     // Switch to fixture batch
     await page.getByTestId("batch-select").selectOption("fixture-year3");

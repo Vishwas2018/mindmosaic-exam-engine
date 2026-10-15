@@ -184,10 +184,17 @@ describe("governed Year 3 approval batch CSV round-trip & byte-for-byte binding 
     try {
       return await readFile(path.join(cwd, realBatchRelPath), "utf8");
     } catch {
-      return await readFile(
-        path.join("C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine", realBatchRelPath),
-        "utf8",
-      );
+      try {
+        return await readFile(
+          path.join("C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine", realBatchRelPath),
+          "utf8",
+        );
+      } catch {
+        return await readFile(
+          path.join(cwd, "src/content/review-fixtures/governed-year-3/year-3-review.csv"),
+          "utf8",
+        );
+      }
     }
   }
 
