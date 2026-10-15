@@ -20,7 +20,7 @@ export function escapeCsvCell(val: string | number | null | undefined): string {
 export interface ReviewCsvRowInput {
   questionId: string;
   contentHash: string;
-  revision: number;
+  revision: number | string;
   sourceManifestHash: string | null;
   decision: ReviewDecision;
   notes?: string;

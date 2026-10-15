@@ -1,5 +1,13 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
+
 import { parseApprovalCsv } from "@/features/content-governance/approval-verification";
+import {
+  parseCsvRow,
+  parseGovernedApprovalCsv,
+  loadGovernedYear3ApprovalBatch,
+} from "@/features/review-console/batch-loader";
 import {
   APPROVAL_CSV_HEADER,
   escapeCsvCell,
@@ -164,5 +172,147 @@ describe("review console CSV writer governance", () => {
     expect(parsed[1].questionId).toBe("item-2");
     expect(parsed[1].decision).toBe("");
     expect(parsed[1].correctness).toBe("");
+  });
+});
+
+describe("governed Year 3 approval batch CSV round-trip & byte-for-byte binding preservation", () => {
+  const realBatchRelPath =
+    "content/question-factory/reports/human-approval/naplan-external-semantic-review-2026-10-14/year-3-first-human-approval-2026-10-15/year-3-review.csv";
+
+  async function getRealCsvContent(): Promise<string> {
+    const cwd = process.cwd();
+    try {
+      return await readFile(path.join(cwd, realBatchRelPath), "utf8");
+    } catch {
+      return await readFile(
+        path.join("C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine", realBatchRelPath),
+        "utf8",
+      );
+    }
+  }
+
+  it("round-trips Codex's actual 46-row year-3-review.csv and fails on any byte change to the four binding columns across all 46 rows", async () => {
+    const rawCsv = await getRealCsvContent();
+    const inputLines = rawCsv
+      .split(/\r?\n/)
+      .map((l) => l.trim())
+      .filter((l) => l.length > 0);
+
+    expect(inputLines).toHaveLength(47); // 1 header + 46 rows
+    expect(inputLines[0]).toBe(APPROVAL_CSV_HEADER);
+
+    const parsedGovernedRows = parseGovernedApprovalCsv(rawCsv);
+    expect(parsedGovernedRows).toHaveLength(46);
+
+    // Verify each row's 4 binding columns
+    for (let i = 0; i < parsedGovernedRows.length; i++) {
+      const parsedRow = parsedGovernedRows[i];
+      const rawCols = parseCsvRow(inputLines[i + 1]);
+
+      const expectedQuestionId = rawCols[0];
+      const expectedContentHash = rawCols[1];
+      const expectedRevision = rawCols[2];
+      const expectedSourceManifestHash = rawCols[3]; // blank in staged candidates
+
+      // 1. In-memory parsed bindings match input line verbatim
+      expect(parsedRow.questionId, `Row ${i} questionId mismatch`).toBe(expectedQuestionId);
+      expect(parsedRow.contentHash, `Row ${i} contentHash mismatch`).toBe(expectedContentHash);
+      expect(String(parsedRow.revision), `Row ${i} revision mismatch`).toBe(expectedRevision);
+      expect(parsedRow.sourceManifestHash ?? "", `Row ${i} sourceManifestHash mismatch`).toBe(
+        expectedSourceManifestHash,
+      );
+      expect(parsedRow.sourceManifestHash).toBeNull(); // Exactly blank
+
+      // 2. Format row using formatApprovalCsvRow with undecided state
+      const exportedRow = formatApprovalCsvRow({
+        questionId: parsedRow.questionId,
+        contentHash: parsedRow.contentHash,
+        revision: parsedRow.revision,
+        sourceManifestHash: parsedRow.sourceManifestHash,
+        decision: "",
+        notes: "",
+      });
+
+      // 3. Fails on ANY byte change to the four binding columns across all 46 rows
+      const exportedCols = exportedRow.split(",");
+      expect(exportedCols[0], `Row ${i} exported col 0 questionId changed`).toBe(expectedQuestionId);
+      expect(exportedCols[1], `Row ${i} exported col 1 contentHash changed`).toBe(expectedContentHash);
+      expect(exportedCols[2], `Row ${i} exported col 2 revision changed`).toBe(expectedRevision);
+      expect(exportedCols[3], `Row ${i} exported col 3 sourceManifestHash changed`).toBe(
+        expectedSourceManifestHash,
+      );
+
+      // 4. In undecided state, the entire row matches the input CSV row byte-for-byte
+      expect(exportedRow, `Row ${i} full line byte mismatch`).toBe(inputLines[i + 1]);
+    }
+  });
+
+  it("re-proves undecided-row behavior against the real 46-item CSV: unreviewed items leave reviewer checks and decision completely blank", async () => {
+    const { items } = await loadGovernedYear3ApprovalBatch();
+    expect(items).toHaveLength(46);
+
+    // When undecided, serialize full batch
+    const serialized = serializeReviewCsv(items);
+    const parsed = parseApprovalCsv(serialized);
+
+    expect(parsed).toHaveLength(46);
+    for (let i = 0; i < parsed.length; i++) {
+      const row = parsed[i];
+      expect(row.decision, `Item ${i} (${row.questionId}) decision must be blank`).toBe("");
+      expect(row.correctness, `Item ${i} (${row.questionId}) correctness must be blank`).toBe("");
+      expect(row.originality, `Item ${i} (${row.questionId}) originality must be blank`).toBe("");
+      expect(row.ageAppropriateness, `Item ${i} (${row.questionId}) ageAppropriateness must be blank`).toBe("");
+      expect(row.notes, `Item ${i} (${row.questionId}) notes must be blank`).toBe("");
+    }
+  });
+
+  it("preserves all 4 binding columns byte-for-byte when decisions are applied", async () => {
+    const { items } = await loadGovernedYear3ApprovalBatch();
+    expect(items).toHaveLength(46);
+
+    // Apply explicit decisions to first 3 items:
+    items[0].decision = "approve";
+    items[0].notes = "Passage recall verified against paragraph 2.";
+    items[1].decision = "reject";
+    items[1].notes = "Distractor B is also defensible.";
+    items[2].decision = "revise";
+    items[2].notes = "Rephrase question stem.";
+
+    const serialized = serializeReviewCsv(items);
+    const parsed = parseApprovalCsv(serialized);
+
+    expect(parsed).toHaveLength(46);
+
+    // Item 0: Approved
+    expect(parsed[0].decision).toBe("approve");
+    expect(parsed[0].correctness).toBe("yes");
+    expect(parsed[0].originality).toBe("yes");
+    expect(parsed[0].ageAppropriateness).toBe("yes");
+    expect(parsed[0].notes).toBe("Passage recall verified against paragraph 2.");
+    // Binding columns intact
+    expect(parsed[0].questionId).toBe(items[0].id);
+    expect(parsed[0].contentHash).toBe(items[0].contentHash);
+    expect(parsed[0].revision).toBe(Number(items[0].revision));
+    expect(parsed[0].sourceManifestHash).toBeNull();
+
+    // Item 1: Rejected
+    expect(parsed[1].decision).toBe("reject");
+    expect(parsed[1].correctness).toBe("");
+    expect(parsed[1].notes).toBe("Distractor B is also defensible.");
+    expect(parsed[1].questionId).toBe(items[1].id);
+    expect(parsed[1].contentHash).toBe(items[1].contentHash);
+
+    // Item 2: Revise
+    expect(parsed[2].decision).toBe("revise");
+    expect(parsed[2].correctness).toBe("");
+    expect(parsed[2].notes).toBe("Rephrase question stem.");
+
+    // Remaining items (3..45) remain strictly undecided and blank
+    for (let i = 3; i < 46; i++) {
+      expect(parsed[i].decision).toBe("");
+      expect(parsed[i].correctness).toBe("");
+      expect(parsed[i].questionId).toBe(items[i].id);
+      expect(parsed[i].contentHash).toBe(items[i].contentHash);
+    }
   });
 });

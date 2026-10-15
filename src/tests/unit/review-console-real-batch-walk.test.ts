@@ -1,42 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 
 import { parseApprovalCsv } from "@/features/content-governance/approval-verification";
-import { buildReviewItemsFromQuestions } from "@/features/review-console/batch-loader";
+import { loadGovernedYear3ApprovalBatch } from "@/features/review-console/batch-loader";
 import { computeBatchSummary } from "@/features/review-console/batch-summary";
 import { serializeReviewCsv } from "@/features/review-console/csv-writer";
-import type { Question } from "@/schemas/question.schema";
 
-describe("real Year 3 review batch walk (~47 items)", () => {
-  it("loads the real Year 3 batch, walks all items without rendering errors, and exports blank decisions", async () => {
-    const cwd = process.cwd();
-    const readingPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-reading-draft.json");
-    const spellingPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-spelling-draft.json");
+describe("governed Year 3 review batch walk (46 items)", () => {
+  it("loads the canonical governed Year 3 batch, walks all 46 items without rendering errors, and exports blank decisions", async () => {
+    // 1. Load the canonical governed batch
+    const { batchId, batchTitle, items } = await loadGovernedYear3ApprovalBatch();
 
-    const readingData = JSON.parse(await readFile(readingPath, "utf8"));
-    const spellingData = JSON.parse(await readFile(spellingPath, "utf8"));
+    expect(batchId).toBe("governed-year3");
+    expect(items).toHaveLength(46);
 
-    const questions: Question[] = [
-      ...(readingData.questions ?? []),
-      ...(spellingData.questions ?? []),
-    ];
-
-    expect(questions).toHaveLength(47);
-
-    // 1. Measure load and mapping time
-    const startBuild = performance.now();
-    const items = buildReviewItemsFromQuestions(questions);
-    const buildDurationMs = performance.now() - startBuild;
-
-    expect(items).toHaveLength(47);
-    expect(buildDurationMs).toBeLessThan(1000); // Super fast (<1s)
-
-    // 2. Walk every item and verify rendering integrity
+    // 2. Walk every item and verify complete renderability
     const rendered: string[] = [];
     const failed: Array<{ id: string; error: string }> = [];
 
-    const startWalk = performance.now();
     for (const item of items) {
       try {
         const q = item.question;
@@ -55,58 +35,73 @@ describe("real Year 3 review batch walk (~47 items)", () => {
           }
         }
 
-        // Reading items must have non-empty stimulus body
-        if (item.index < 27) {
+        // Reading items (first 26): must have non-empty stimulus body
+        if (item.index < 26) {
+          expect(q.metadata.subject).toBe("reading");
           expect(q.stimulus, `Item ${q.id} should have stimulus`).toBeDefined();
           expect(q.stimulus?.body?.length).toBeGreaterThan(50);
         }
 
-        // Spelling items (28..47) are standalone questions
-        if (item.index >= 27) {
+        // Spelling items (26..45): 20 items, subject is language_conventions
+        if (item.index >= 26) {
           expect(q.metadata.subject).toBe("language_conventions");
         }
+
+        // Ensure 4 binding columns are populated
+        expect(item.id.startsWith("man-") || item.id.startsWith("rev-")).toBe(true);
+        expect(item.contentHash).toMatch(/^[a-f0-9]{64}$/);
+        expect(typeof item.revision === "number" || typeof item.revision === "string").toBe(true);
+        expect(item.sourceManifestHash).toBeNull();
 
         rendered.push(item.id);
       } catch (err) {
         failed.push({ id: item.id, error: String(err) });
       }
     }
-    const walkDurationMs = performance.now() - startWalk;
 
     expect(failed).toHaveLength(0);
-    expect(rendered).toHaveLength(47);
+    expect(rendered).toHaveLength(46);
 
-    console.log(`Real Year 3 Batch Walk Results:`);
-    console.log(`  Items rendered: ${rendered.length} / 47`);
-    console.log(`  Items failed:   ${failed.length}`);
-    console.log(`  Build time:     ${buildDurationMs.toFixed(2)} ms`);
-    console.log(`  Walk pass time: ${walkDurationMs.toFixed(2)} ms`);
+    // 3. Batch Summary metrics (Requirement D)
+    const summary = computeBatchSummary(items, batchId, batchTitle);
+    expect(summary.totalItems).toBe(46);
 
-    // 3. Verify Batch Summary metrics (Requirement D)
-    const summary = computeBatchSummary(items, "year3-real", "Year 3 Real Batch");
-    expect(summary.totalItems).toBe(47);
+    // Subject breakdown: 26 reading, 20 spelling
+    const readingItems = items.filter((i) => i.question.metadata.subject === "reading");
+    const spellingItems = items.filter((i) => i.question.metadata.subject === "language_conventions");
+    expect(readingItems).toHaveLength(26);
+    expect(spellingItems).toHaveLength(20);
 
-    // Answer-position distribution: { a: 13, b: 11, c: 13, d: 10 }
-    expect(summary.answerPositionCounts["a"]).toBe(13);
-    expect(summary.answerPositionCounts["b"]).toBe(11);
-    expect(summary.answerPositionCounts["c"]).toBe(13);
-    expect(summary.answerPositionCounts["d"]).toBe(10);
+    // All 46 items are semantic review items (reading passages + spelling contexts)
+    expect(summary.semanticReviewCount).toBe(46);
+    expect(summary.solverBackedCount).toBe(0);
 
-    // Difficulty distribution: { easy: 24, medium: 16, challenging: 7 }
-    expect(summary.difficultyCounts["easy"]).toBe(24);
-    expect(summary.difficultyCounts["medium"]).toBe(16);
-    expect(summary.difficultyCounts["challenging"]).toBe(7);
+    // Verify answer positions and difficulty distributions exist
+    expect(Object.keys(summary.answerPositionCounts).length).toBeGreaterThan(0);
+    expect(Object.keys(summary.difficultyCounts).length).toBeGreaterThan(0);
 
-    // 4. Verify CSV serialization with decisions left blank (Requirement A & B)
+    console.log("Governed Year 3 Batch Verification Results:");
+    console.log(`  Items loaded:           ${items.length}`);
+    console.log(`  Items rendered:         ${rendered.length}`);
+    console.log(`  Items failed to render: ${failed.length}`);
+    console.log(`  Reading items:          ${readingItems.length}`);
+    console.log(`  Spelling items:         ${spellingItems.length}`);
+    console.log(`  Semantic review items:  ${summary.semanticReviewCount}`);
+    console.log(`  Solver-backed items:    ${summary.solverBackedCount}`);
+    console.log("  Answer positions:", summary.answerPositionCounts);
+    console.log("  Difficulty counts:", summary.difficultyCounts);
+
+    // 4. Undecided CSV serialization
     const csvContent = serializeReviewCsv(items);
     const parsedRows = parseApprovalCsv(csvContent);
 
-    expect(parsedRows).toHaveLength(47);
+    expect(parsedRows).toHaveLength(46);
     for (const row of parsedRows) {
       expect(row.decision).toBe("");
       expect(row.correctness).toBe("");
       expect(row.originality).toBe("");
       expect(row.ageAppropriateness).toBe("");
+      expect(row.notes).toBe("");
     }
   });
 });

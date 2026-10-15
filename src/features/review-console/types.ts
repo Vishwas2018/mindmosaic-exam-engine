@@ -24,7 +24,7 @@ export interface ReviewItem {
   id: string; // questionId
   index: number;
   contentHash: string;
-  revision: number;
+  revision: number | string;
   sourceManifestHash: string | null;
   question: Question;
   decision: ReviewDecision;

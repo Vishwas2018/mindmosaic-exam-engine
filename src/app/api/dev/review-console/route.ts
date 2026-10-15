@@ -2,7 +2,10 @@ import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 
-import { buildReviewItemsFromQuestions } from "@/features/review-console/batch-loader";
+import {
+  buildReviewItemsFromQuestions,
+  loadGovernedYear3ApprovalBatch,
+} from "@/features/review-console/batch-loader";
 import { computeBatchSummary } from "@/features/review-console/batch-summary";
 import { serializeReviewCsv } from "@/features/review-console/csv-writer";
 import { isReviewConsoleAllowed } from "@/features/review-console/preview-gate";
@@ -14,23 +17,44 @@ interface BatchDescriptor {
   id: string;
   title: string;
   description: string;
-  type: "preset" | "roadmap-draft" | "human-approval" | "fixture";
+  type: "governed" | "preset" | "roadmap-draft" | "human-approval" | "fixture";
   itemCount: number;
 }
 
 async function getAvailableBatches(): Promise<BatchDescriptor[]> {
   const batches: BatchDescriptor[] = [];
 
-  // 1. Fixture batch
+  // 1. PRIMARY INPUT: Governed Year 3 Batch (46 items: 26 Reading + 20 Spelling)
+  try {
+    const govResult = await loadGovernedYear3ApprovalBatch();
+    batches.push({
+      id: "governed-year3",
+      title: "Governed: Year 3 Semantic Review (46 items)",
+      description:
+        "Canonical governed batch: 26 Reading + 20 Spelling from content/question-factory/reports/human-approval/naplan-external-semantic-review-2026-10-14/year-3-first-human-approval-2026-10-15/",
+      type: "governed",
+      itemCount: govResult.items.length,
+    });
+  } catch {
+    batches.push({
+      id: "governed-year3",
+      title: "Governed: Year 3 Semantic Review (46 items)",
+      description: "Governed candidate batch: 26 Reading + 20 Spelling.",
+      type: "governed",
+      itemCount: 46,
+    });
+  }
+
+  // 2. Secondary convenience: Built-in 4-item fixture batch
   batches.push({
     id: "fixture-year3",
-    title: "Fixture: Year 3 Review Batch",
+    title: "Fixture: Year 3 Test Fixture",
     description: "Built-in 4-item test fixture with pinned reading passage and spelling question.",
     type: "fixture",
     itemCount: 4,
   });
 
-  // 2. Year 3 combined batch (Reading 27 + Spelling 20 = 47 items)
+  // 3. Secondary convenience: Raw drafts combined (47 items: 27 Reading + 20 Spelling)
   try {
     const readingRaw = JSON.parse(
       await readFile(path.join(process.cwd(), "content/roadmap-drafts/naplan-y3-reading-draft.json"), "utf8"),
@@ -41,8 +65,8 @@ async function getAvailableBatches(): Promise<BatchDescriptor[]> {
     const totalCount = (readingRaw.questions?.length ?? 0) + (spellingRaw.questions?.length ?? 0);
     batches.push({
       id: "roadmap-y3-combined",
-      title: "Year 3 Roadmap Batch (Reading + Spelling)",
-      description: `Governed Year 3 candidate drafts: 27 reading items across 4 passages + 20 spelling items (${totalCount} total items).`,
+      title: "Draft Sources: Year 3 Combined (27 Reading + 20 Spelling)",
+      description: `Raw authoring drafts (${totalCount} total items, un-staged draft IDs).`,
       type: "preset",
       itemCount: totalCount,
     });
@@ -50,7 +74,7 @@ async function getAvailableBatches(): Promise<BatchDescriptor[]> {
     // If files are missing, continue
   }
 
-  // 3. Roadmap draft files
+  // 4. Individual draft files
   try {
     const draftsDir = path.join(process.cwd(), "content/roadmap-drafts");
     const files = await readdir(draftsDir);
@@ -69,35 +93,6 @@ async function getAvailableBatches(): Promise<BatchDescriptor[]> {
           });
         } catch {
           // ignore corrupted
-        }
-      }
-    }
-  } catch {
-    // ignore
-  }
-
-  // 4. Human-approval reports if any
-  try {
-    const approvalDir = path.join(process.cwd(), "content/question-factory/reports/human-approval");
-    const entries = await readdir(approvalDir, { withFileTypes: true });
-    for (const e of entries) {
-      if (e.isDirectory()) {
-        const subDir = path.join(approvalDir, e.name);
-        try {
-          const subFiles = await readdir(subDir);
-          const hasCsv = subFiles.includes("review.csv");
-          const inputJson = subFiles.find((sf) => sf.endsWith("input.json") || sf.endsWith("pack.json"));
-          if (hasCsv || inputJson) {
-            batches.push({
-              id: `report:${e.name}`,
-              title: `Report: ${e.name}`,
-              description: `Report directory in content/question-factory/reports/human-approval/${e.name}`,
-              type: "human-approval",
-              itemCount: 0,
-            });
-          }
-        } catch {
-          // ignore
         }
       }
     }
@@ -128,7 +123,7 @@ async function loadBatchData(batchId: string): Promise<{
     };
   }
 
-  // Case 2: Year 3 Combined (47 items)
+  // Case 2: Year 3 Combined drafts (47 items)
   if (batchId === "roadmap-y3-combined") {
     const readingPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-reading-draft.json");
     const spellingPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-spelling-draft.json");
@@ -140,7 +135,6 @@ async function loadBatchData(batchId: string): Promise<{
       ...(spellingData.questions ?? []),
     ];
 
-    // Check for reviews in content/roadmap-drafts/reviews/freebuff-2026-10-12/
     const reviews: unknown[] = [];
     try {
       const revReading = JSON.parse(
@@ -169,7 +163,7 @@ async function loadBatchData(batchId: string): Promise<{
     };
   }
 
-  // Case 3: Specific draft file (e.g. "draft:naplan-y3-reading-draft.json")
+  // Case 3: Specific draft file
   if (batchId.startsWith("draft:")) {
     const fileName = batchId.replace("draft:", "");
     const draftPath = path.join(cwd, "content/roadmap-drafts", fileName);
@@ -178,31 +172,6 @@ async function loadBatchData(batchId: string): Promise<{
       batchId,
       batchTitle: `Draft: ${fileName}`,
       questions: data.questions ?? [],
-    };
-  }
-
-  // Case 4: Human-approval report directory
-  if (batchId.startsWith("report:")) {
-    const reportName = batchId.replace("report:", "");
-    const dir = path.join(cwd, "content/question-factory/reports/human-approval", reportName);
-    const subFiles = await readdir(dir);
-    let existingCsv: string | undefined;
-    if (subFiles.includes("review.csv")) {
-      existingCsv = await readFile(path.join(dir, "review.csv"), "utf8");
-    }
-
-    let questions: Question[] = [];
-    const inputJsonName = subFiles.find((sf) => sf.endsWith("input.json") || sf.endsWith("pack.json"));
-    if (inputJsonName) {
-      const parsed = JSON.parse(await readFile(path.join(dir, inputJsonName), "utf8"));
-      questions = parsed.questions ?? (Array.isArray(parsed) ? parsed : []);
-    }
-
-    return {
-      batchId,
-      batchTitle: `Report: ${reportName}`,
-      questions,
-      existingCsv,
     };
   }
 
@@ -223,8 +192,21 @@ export async function GET(request: Request) {
   }
 
   if (action === "load") {
-    const batchId = searchParams.get("batch") ?? "roadmap-y3-combined";
+    // Primary default is governed-year3 (46 items)
+    const batchId = searchParams.get("batch") ?? "governed-year3";
     try {
+      if (batchId === "governed-year3") {
+        const govResult = await loadGovernedYear3ApprovalBatch();
+        const summary = computeBatchSummary(govResult.items, govResult.batchId, govResult.batchTitle);
+        return NextResponse.json({
+          ok: true,
+          batchId: govResult.batchId,
+          batchTitle: govResult.batchTitle,
+          items: govResult.items,
+          summary,
+        });
+      }
+
       const data = await loadBatchData(batchId);
       const items = buildReviewItemsFromQuestions(data.questions, {
         existingCsvContent: data.existingCsv,
@@ -266,14 +248,18 @@ export async function POST(request: Request) {
 
     await writeFile(finalPath, csvContent, "utf8");
 
-    const recordCommand = `npm run content:record-approvals -- --sheet "${path.relative(process.cwd(), finalPath).replace(/\\/g, "/")}" --reviewer "${reviewerName || "Your Full Name"}"`;
+    const relFilePath = path.relative(process.cwd(), finalPath).replace(/\\/g, "/");
+    const publishCandidateIds = items.map((i: { id: string }) => i.id).join(",");
+    const publishCommand = `npm run questions:publish -- --candidate-ids ${publishCandidateIds} --sheet "${relFilePath}" --reviewer "${reviewerName || "Your Full Name"}"`;
+    const recordCommand = `npm run content:record-approvals -- --sheet "${relFilePath}" --reviewer "${reviewerName || "Your Full Name"}"`;
 
     return NextResponse.json({
       ok: true,
       csv: csvContent,
       fileName,
       filePath: finalPath,
-      relativeFilePath: path.relative(process.cwd(), finalPath).replace(/\\/g, "/"),
+      relativeFilePath: relFilePath,
+      publishCommand,
       recordCommand,
       totalRows: items.length,
       approvedCount: items.filter((i: { decision?: string }) => i.decision === "approve").length,

@@ -20,7 +20,7 @@ export interface ReviewConsoleProps {
   initialBatchId?: string;
 }
 
-export function ReviewConsole({ initialBatchId = "roadmap-y3-combined" }: ReviewConsoleProps) {
+export function ReviewConsole({ initialBatchId = "governed-year3" }: ReviewConsoleProps) {
   const [batches, setBatches] = useState<BatchOption[]>([]);
   const [selectedBatchId, setSelectedBatchId] = useState<string>(initialBatchId);
   const [loading, setLoading] = useState<boolean>(true);
@@ -43,6 +43,7 @@ export function ReviewConsole({ initialBatchId = "roadmap-y3-combined" }: Review
     filePath?: string;
     relativeFilePath?: string;
     recordCommand?: string;
+    publishCommand?: string;
     fileName?: string;
   } | null>(null);
 
@@ -543,11 +544,22 @@ export function ReviewConsole({ initialBatchId = "roadmap-y3-combined" }: Review
               <div className="rounded-lg bg-amber-50 p-3 text-amber-900 border border-amber-200">
                 <p className="font-bold">Next Step: Mandatory Human Gate</p>
                 <p className="mt-1">
-                  The console records nothing by itself. Run this governed CLI command to verify and record approvals:
+                  The console records nothing by itself. Run the governed command for your batch:
                 </p>
-                <pre className="mt-2 overflow-x-auto rounded bg-black p-2 font-mono text-[11px] text-emerald-400">
-                  {exportResult.recordCommand}
-                </pre>
+                {exportResult.publishCommand ? (
+                  <div className="mt-2">
+                    <p className="text-[11px] font-semibold text-slate-700">For publishing staged candidates:</p>
+                    <pre className="mt-1 overflow-x-auto rounded bg-black p-2 font-mono text-[11px] text-emerald-400">
+                      {exportResult.publishCommand}
+                    </pre>
+                  </div>
+                ) : null}
+                <div className="mt-2">
+                  <p className="text-[11px] font-semibold text-slate-700">For recording approvals on published items:</p>
+                  <pre className="mt-1 overflow-x-auto rounded bg-black p-2 font-mono text-[11px] text-emerald-400">
+                    {exportResult.recordCommand}
+                  </pre>
+                </div>
               </div>
             </div>
 
