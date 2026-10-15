@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 
 import { AuthProvider } from "@/features/auth";
+import { siteOrigin } from "@/lib/site-url";
 
 import "./globals.css";
 
@@ -72,9 +73,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  // Intended production domain — not live yet, but required so relative
-  // og:image / twitter:image URLs resolve to absolute ones in metadata.
-  metadataBase: new URL("https://mindmosaic.app"),
+  // The live production origin, so relative og:image / twitter:image URLs resolve
+  // to absolute ones that exist. See src/lib/site-url.ts.
+  metadataBase: new URL(siteOrigin()),
   title: {
     default: "MindMosaic | Thoughtful practice, real progress",
     template: "%s | MindMosaic",
