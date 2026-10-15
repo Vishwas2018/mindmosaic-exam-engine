@@ -1,3 +1,4 @@
+import { computeSolver, solverValueMatches } from "@/features/question-factory/correctness/solver-verification";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -118,7 +119,7 @@ describe("publish-gate solver verification & fail-closed invariants", () => {
           solver: "arithmetical_reasoning",
           solverParams: {
             variables: [{ name: "X", min: -100, max: 0 }],
-            constraints: ["X === -70"],
+            constraints: [{ op: "eq", variable: "X", value: -70 }],
             targetVariable: "X",
           },
           targetOption: "d",
@@ -142,7 +143,7 @@ describe("publish-gate solver verification & fail-closed invariants", () => {
           solver: "arithmetical_reasoning",
           solverParams: {
             variables: [{ name: "X", min: 1, max: 20 }],
-            constraints: ["X === 12"],
+            constraints: [{ op: "eq", variable: "X", value: 12 }],
             targetVariable: "X",
           },
           targetOption: "c",
@@ -166,7 +167,7 @@ describe("publish-gate solver verification & fail-closed invariants", () => {
           solver: "arithmetical_reasoning",
           solverParams: {
             variables: [{ name: "X", min: 1, max: 30 }],
-            constraints: ["X === 20"],
+            constraints: [{ op: "eq", variable: "X", value: 20 }],
             targetVariable: "X",
           },
         },
@@ -188,7 +189,7 @@ describe("publish-gate solver verification & fail-closed invariants", () => {
           solver: "arithmetical_reasoning",
           solverParams: {
             variables: [{ name: "X", min: 1, max: 50 }],
-            constraints: ["X === 42"],
+            constraints: [{ op: "eq", variable: "X", value: 42 }],
             targetVariable: "X",
           },
         },
@@ -210,7 +211,7 @@ describe("publish-gate solver verification & fail-closed invariants", () => {
           solver: "arithmetical_reasoning",
           solverParams: {
             variables: [{ name: "X", min: 1, max: 50 }],
-            constraints: ["X === 42"],
+            constraints: [{ op: "eq", variable: "X", value: 42 }],
             targetVariable: "X",
           },
         },
@@ -224,26 +225,54 @@ describe("publish-gate solver verification & fail-closed invariants", () => {
       }
     });
 
-    it("POSITIVE TEST: passes solver verification when single-option has unit-formatted text matching numeric solver output", async () => {
+    it("NEGATIVE TEST: fails closed for units without an explicit unit-aware comparator", async () => {
       const ctx = buildContext({
         answerKey: { kind: "single_option", optionId: "e" }, // option "e" is "-70 m"
         solverParams: {
           solver: "arithmetical_reasoning",
           solverParams: {
             variables: [{ name: "X", min: -100, max: 0 }],
-            constraints: ["X === -70"],
+            constraints: [{ op: "eq", variable: "X", value: -70 }],
             targetVariable: "X",
           },
           targetOption: "e",
-          correctValue: "-70 m",
+          correctValue: -70,
         },
       });
 
       const res = await checkPublicationEligibility(ctx, mockRepo);
+      expect(res.ok).toBe(false);
       if (!res.ok) {
         const solverIssues = res.issues.filter((i) => i.code === "publication_solver_verification_failed");
-        expect(solverIssues).toHaveLength(0);
+        expect(solverIssues.length).toBeGreaterThan(0);
       }
     });
   });
+});
+
+
+describe("closed solver data and typed comparison contract", () => {
+  it.each(["AB12", "2 hours 30 minutes", "12 kg", "$12", "12%", "1,2", "12x"])("rejects numeric decoration %s", text => {
+    expect(solverValueMatches(12, text)).toBe(false);
+  });
+  it("compares strings exactly without case folding or numeric coercion", () => {
+    expect(solverValueMatches("AB12", " AB12 ")).toBe(true);
+    expect(solverValueMatches("AB12", "ab12")).toBe(false);
+    expect(solverValueMatches("12", 12)).toBe(false);
+    expect(solverValueMatches("AB12", "ZZ12")).toBe(false);
+  });
+  it("accepts only complete finite decimal numbers with valid comma grouping", () => {
+    expect(solverValueMatches(1200, "1,200.00")).toBe(true);
+    expect(solverValueMatches(-12.5, " -12.50 ")).toBe(true);
+    expect(solverValueMatches(12, "120")).toBe(false);
+    expect(solverValueMatches(Infinity, Infinity)).toBe(false);
+    expect(solverValueMatches(12, NaN)).toBe(false);
+  });
+  it.each(["X === 8", { op: "execute", variable: "X", value: 8 }, { op: "eq", variable: "Y", value: 8 }])(
+    "rejects unsupported constraint data %j", constraint => {
+      expect(computeSolver({ solver: "arithmetical_reasoning", solverParams: {
+        variables: [{ name: "X", min: 1, max: 10 }], constraints: [constraint], targetVariable: "X",
+      } }).ok).toBe(false);
+    },
+  );
 });
