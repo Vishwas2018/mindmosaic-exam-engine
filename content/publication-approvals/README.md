@@ -9,3 +9,7 @@ Run `npm run content:record-approvals -- --sheet <reviewed.csv> --reviewer "<ful
 These records contain private authoring content. They must never be served as learner DTOs, placed in `public/`, or used as metadata. Hashes are tamper evidence within the trusted Git authoring workflow, not cryptographic proof of a person's identity. Human review and protected code review remain mandatory.
 
 Writing prompts use the same record, reviewer rules and verifier as a second `kind` (`human_writing_prompt_approval`). Produce the sheet with `npm run content:review-sheet -- --writing`; `content:record-approvals` writes each approved prompt to `writing-prompts/<promptId>.json` here, with a snapshot of the exact prompt a child is served. See `content/writing-drafts/README.md`. The question loaders read only the `.json` files in this folder, so the subfolder does not affect them.
+
+## Do not remove this folder's anchor files
+
+`README.md` and `.gitkeep` are not decoration. This folder holds no approval `.json` yet, so those two files are the only thing the production build traces into the deployment bundle (`outputFileTracingIncludes` in `next.config.ts` matches files, not directories). If the folder is not in the bundle, `servedBank()` finds no evidence directory, treats it as an evidence problem and serves an **empty bank for practice, published and curated alike**: a total content outage. Never delete both, and never "tidy" `.gitkeep`. `src/tests/unit/publication-approvals-anchor.test.ts` fails CI if the tracing glob would match nothing.
