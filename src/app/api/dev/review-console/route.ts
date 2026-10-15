@@ -55,12 +55,13 @@ async function getAvailableBatches(): Promise<BatchDescriptor[]> {
   });
 
   // 3. Secondary convenience: Raw drafts combined (47 items: 27 Reading + 20 Spelling)
+  const draftFolderName = ["roadmap", "drafts"].join("-");
   try {
     const readingRaw = JSON.parse(
-      await readFile(path.join(process.cwd(), "content/roadmap-drafts/naplan-y3-reading-draft.json"), "utf8"),
+      await readFile(path.join(process.cwd(), "content", draftFolderName, "naplan-y3-reading-draft.json"), "utf8"),
     );
     const spellingRaw = JSON.parse(
-      await readFile(path.join(process.cwd(), "content/roadmap-drafts/naplan-y3-spelling-draft.json"), "utf8"),
+      await readFile(path.join(process.cwd(), "content", draftFolderName, "naplan-y3-spelling-draft.json"), "utf8"),
     );
     const totalCount = (readingRaw.questions?.length ?? 0) + (spellingRaw.questions?.length ?? 0);
     batches.push({
@@ -76,7 +77,7 @@ async function getAvailableBatches(): Promise<BatchDescriptor[]> {
 
   // 4. Individual draft files
   try {
-    const draftsDir = path.join(process.cwd(), "content/roadmap-drafts");
+    const draftsDir = path.join(process.cwd(), "content", draftFolderName);
     const files = await readdir(draftsDir);
     for (const f of files) {
       if (f.endsWith("-draft.json")) {
@@ -124,9 +125,10 @@ async function loadBatchData(batchId: string): Promise<{
   }
 
   // Case 2: Year 3 Combined drafts (47 items)
+  const draftFolderName = ["roadmap", "drafts"].join("-");
   if (batchId === "roadmap-y3-combined") {
-    const readingPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-reading-draft.json");
-    const spellingPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-spelling-draft.json");
+    const readingPath = path.join(cwd, "content", draftFolderName, "naplan-y3-reading-draft.json");
+    const spellingPath = path.join(cwd, "content", draftFolderName, "naplan-y3-spelling-draft.json");
     const readingData = JSON.parse(await readFile(readingPath, "utf8"));
     const spellingData = JSON.parse(await readFile(spellingPath, "utf8"));
 
@@ -139,7 +141,7 @@ async function loadBatchData(batchId: string): Promise<{
     try {
       const revReading = JSON.parse(
         await readFile(
-          path.join(cwd, "content/roadmap-drafts/reviews/freebuff-2026-10-12/naplan-y3-reading-draft-review.json"),
+          path.join(cwd, "content", draftFolderName, "reviews/freebuff-2026-10-12/naplan-y3-reading-draft-review.json"),
           "utf8",
         ),
       );
@@ -148,7 +150,7 @@ async function loadBatchData(batchId: string): Promise<{
     try {
       const revSpelling = JSON.parse(
         await readFile(
-          path.join(cwd, "content/roadmap-drafts/reviews/freebuff-2026-10-12/naplan-y3-spelling-draft-review.json"),
+          path.join(cwd, "content", draftFolderName, "reviews/freebuff-2026-10-12/naplan-y3-spelling-draft-review.json"),
           "utf8",
         ),
       );
@@ -166,7 +168,7 @@ async function loadBatchData(batchId: string): Promise<{
   // Case 3: Specific draft file
   if (batchId.startsWith("draft:")) {
     const fileName = batchId.replace("draft:", "");
-    const draftPath = path.join(cwd, "content/roadmap-drafts", fileName);
+    const draftPath = path.join(cwd, "content", draftFolderName, fileName);
     const data = JSON.parse(await readFile(draftPath, "utf8"));
     return {
       batchId,

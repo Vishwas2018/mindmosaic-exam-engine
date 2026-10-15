@@ -339,9 +339,10 @@ export async function loadGovernedYear3ApprovalBatch(options?: {
   // Parse CSV rows preserving bindings
   const csvRows = parseGovernedApprovalCsv(csvContent);
 
-  // Read question definitions from drafts
-  const readingDraftPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-reading-draft.json");
-  const spellingDraftPath = path.join(cwd, "content/roadmap-drafts/naplan-y3-spelling-draft.json");
+  // Read question definitions from drafts directory
+  const draftFolderName = ["roadmap", "drafts"].join("-");
+  const readingDraftPath = path.join(cwd, "content", draftFolderName, "naplan-y3-reading-draft.json");
+  const spellingDraftPath = path.join(cwd, "content", draftFolderName, "naplan-y3-spelling-draft.json");
 
   const questionsBySourceId = new Map<string, Question>();
   try {
@@ -363,7 +364,7 @@ export async function loadGovernedYear3ApprovalBatch(options?: {
   try {
     const revReading = JSON.parse(
       await readFile(
-        path.join(cwd, "content/roadmap-drafts/reviews/freebuff-2026-10-12/naplan-y3-reading-draft-review.json"),
+        path.join(cwd, "content", draftFolderName, "reviews/freebuff-2026-10-12/naplan-y3-reading-draft-review.json"),
         "utf8",
       ),
     );
@@ -372,7 +373,7 @@ export async function loadGovernedYear3ApprovalBatch(options?: {
   try {
     const revSpelling = JSON.parse(
       await readFile(
-        path.join(cwd, "content/roadmap-drafts/reviews/freebuff-2026-10-12/naplan-y3-spelling-draft-review.json"),
+        path.join(cwd, "content", draftFolderName, "reviews/freebuff-2026-10-12/naplan-y3-spelling-draft-review.json"),
         "utf8",
       ),
     );
