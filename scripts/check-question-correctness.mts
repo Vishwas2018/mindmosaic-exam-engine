@@ -56,6 +56,8 @@ import type { Question } from "../src/schemas/question.schema";
 import type { VisualAsset } from "../src/schemas/visual.schema";
 import { moreThanTwicePredicate } from "./lib/twice-predicate";
 
+import { computeSolver, solverAnswerError } from "../src/features/question-factory/correctness/solver-verification";
+
 export interface CheckOutcome {
   /** True when at least one independent computation verified the answer key. */
   computed: boolean;
@@ -1769,6 +1771,14 @@ interface Report {
 export function evaluateQuestionCorrectness(question: Question): CheckOutcome {
   const result = outcome();
   structuralChecks(question, result);
+  if ("solverParams" in question && question.solverParams !== undefined) {
+    const computed = computeSolver(question.solverParams);
+    const error = computed.ok ? solverAnswerError(question, computed.value) : computed.error;
+    if (error) result.failures.push(error);
+    else result.computed = true;
+    return result;
+  }
+
 
   if (question.answerKey.kind === "manual") {
     if (question.answerKey.rubric.trim().length < 40) {

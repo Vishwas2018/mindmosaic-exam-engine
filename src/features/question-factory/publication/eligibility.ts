@@ -1,3 +1,4 @@
+import { computeSolver, solverAnswerError } from "../correctness/solver-verification";
 import { verifyUpstreamGateChain } from "../gate-chain";
 import type { CandidateQuestion } from "../ingestion/candidate-question";
 import type { CandidateProvenance } from "../provenance";
@@ -23,6 +24,23 @@ export type PublicationEligibilityResult =
 
 function issue(code: PublicationIssue["code"], path: string, message: string): PublicationIssue {
   return { code, path, message };
+}
+
+/**
+ * Extracts the primary numeric token from an option or text string.
+ * Handles negative signs, currency symbols, thousands separators (commas),
+ * decimals, and extracts only the first numeric token to prevent digit
+ * concatenation (e.g. "2 hours 30 minutes" -> 2, not 230).
+ */
+// Legacy display parser only. Never use this helper as correctness evidence.
+export function parsePrimaryNumericToken(text: string): number | null {
+  const trimmed = text.trim();
+  if (!trimmed) return null;
+  const match = trimmed.match(/[-+]?(?:\$\s*)?\d+(?:,\d{3})*(?:\.\d+)?/);
+  if (!match) return null;
+  const cleaned = match[0].replace(/[$,\s]/g, "");
+  const num = Number(cleaned);
+  return Number.isFinite(num) ? num : null;
 }
 
 /**
@@ -82,12 +100,12 @@ export async function checkPublicationEligibility(
     );
   }
 
-  // P0-A: all five gates, per candidate. This previously re-verified only
-  // originality and difficulty, so a candidate whose correctness report said
-  // `review_required` — the gate declaring it could not establish
-  // correctness — published anyway. See
-  // `docs/reports/publication-288-posthoc-audit.md` §2 and
-  // `gate-chain/verify-gate-chain.ts`.
+  if (question.solverParams !== undefined) {
+    const computed = computeSolver(question.solverParams);
+    const error = computed.ok ? solverAnswerError(question, computed.value) : computed.error;
+    if (error) issues.push(issue("publication_solver_verification_failed", "solverParams", error));
+  }
+
   const gateChain = await verifyUpstreamGateChain({ candidateId, provenance }, repository);
   if (!gateChain.ok) {
     for (const entry of gateChain.failures) {

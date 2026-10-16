@@ -80,10 +80,26 @@ export const declaredWorkingSolutionSchema = z.object({
   steps: z.array(workingStepSchema).min(1).max(64),
 });
 
+export const candidateSolverParamsSchema = z.object({
+  solver: z.enum([
+    "number_series",
+    "number_matrix",
+    "letter_series",
+    "coded_words",
+    "syllogism",
+    "arithmetical_reasoning",
+  ]),
+  solverParams: z.record(z.string(), z.unknown()),
+  ruleOrientation: z.enum(["row", "column", "diagonal"]).optional(),
+  targetOption: z.enum(["a", "b", "c", "d", "e"]).optional(),
+  correctValue: z.union([z.string(), z.number()]).optional(),
+});
+
 export type OperandRef = z.infer<typeof operandRefSchema>;
 export type WorkingStep = z.infer<typeof workingStepSchema>;
 export type PromptQuantity = z.infer<typeof promptQuantitySchema>;
 export type DeclaredWorkingSolution = z.infer<typeof declaredWorkingSolutionSchema>;
+export type CandidateSolverParams = z.infer<typeof candidateSolverParamsSchema>;
 
 /**
  * The normalised question shape a `generated`-state ingestion candidate
@@ -138,6 +154,7 @@ export const candidateQuestionSchema = z.object({
   explanation: z.string().trim().min(1).max(3000).optional(),
   metadata: candidateMetadataSchema,
   workingSteps: declaredWorkingSolutionSchema.optional(),
+  solverParams: candidateSolverParamsSchema.optional(),
 });
 
 export type CandidateQuestion = z.infer<typeof candidateQuestionSchema>;

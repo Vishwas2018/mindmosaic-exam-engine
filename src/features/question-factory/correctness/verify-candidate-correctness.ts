@@ -14,6 +14,7 @@
  * and reuses the real scoring engine (`scoreQuestion`) rather than a
  * second scoring implementation.
  */
+import { computeSolver, solverAnswerError } from "./solver-verification";
 import { scoreQuestion } from "@/features/exam-engine/scoring/score-question";
 import { isDeterministicMathsSubject } from "@/features/taxonomy/subject-registry";
 import type { Question } from "@/schemas/question.schema";
@@ -428,7 +429,20 @@ export function verifyCandidateCorrectness(
     const evidenceRecord = buildCorrectnessEvidence({ ...baseEvidenceInput, capability: "unsupported", issues, outcome: "failed" });
     return { status: "failed", capability: "unsupported", issues, evidence: evidenceRecord };
   }
-  const question = productionSchemaOutcome.question;
+  // Production schema strips factory sidecars. Carry validated solver data explicitly.
+  const question = { ...productionSchemaOutcome.question,
+    ...(questionOutcome.data.solverParams !== undefined ? { solverParams: questionOutcome.data.solverParams } : {}),
+  };
+
+  if (question.solverParams !== undefined) {
+    const computed = computeSolver(question.solverParams);
+    const error = computed.ok ? solverAnswerError(question, computed.value) : computed.error;
+    if (error) {
+      const issues = [issue("unable_to_derive_answer", "question.solverParams", error, "error")];
+      const evidence = buildCorrectnessEvidence({ ...baseEvidenceInput, capability: "unsupported", issues, outcome: "failed" });
+      return { status: "failed", capability: "unsupported", issues, evidence };
+    }
+  }
 
   if (isUnsupportedInteractionCategory(question)) {
     const issues = [
@@ -452,7 +466,7 @@ export function verifyCandidateCorrectness(
   let derivedRepresentation: string | undefined;
   let derivationFailureIssue: CorrectnessVerificationIssue | undefined;
 
-  if (isSemantic) {
+  if (isSemantic && question.solverParams === undefined) {
     capability = "requires_independent_semantic_review";
   } else {
     // `workingSteps` is candidate-only metadata (never on the production

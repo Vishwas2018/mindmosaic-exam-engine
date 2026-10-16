@@ -18,12 +18,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { z } from "zod";
 
-import { solveNumberSeries, type NumberSeriesParams } from "../src/features/scholarship/solvers/number-series";
-import { solveNumberMatrix, type NumberMatrixParams } from "../src/features/scholarship/solvers/number-matrices";
-import { solveLetterSeries, type LetterSeriesParams } from "../src/features/scholarship/solvers/letter-series";
-import { solveCode, type CodeParams } from "../src/features/scholarship/solvers/coded-words";
-import { solveSyllogism, type SyllogismParams } from "../src/features/scholarship/solvers/syllogism";
-import { solveArithmeticalReasoning, type ConstraintVariable } from "../src/features/scholarship/solvers/arithmetical-reasoning";
+import { computeSolver, solverAnswerError } from "../src/features/question-factory/correctness/solver-verification";
 
 const DRAFTS_DIR = "content/scholarship-drafts";
 
@@ -283,96 +278,17 @@ export function verifySolverMatch(q: DraftQuestion, sidecar: z.infer<typeof draf
     return;
   }
 
-  const solverType = sidecar.solver;
-  const params = sidecar.solverParams ?? {};
+  const computed = computeSolver({
+    solver: sidecar.solver,
+    solverParams: sidecar.solverParams ?? {},
+    // Draft packets carry orientation inside solverParams; never default it.
+    ruleOrientation: sidecar.solverParams?.ruleOrientation,
+    correctValue: sidecar.correctValue,
+  });
+  if (!computed.ok) throw new Error(`${q.id}: ${computed.error}`);
+  const error = solverAnswerError(q, computed.value);
+  if (error) throw new Error(`${q.id}: ${error}`);
 
-  let computedValue: unknown;
-
-  switch (solverType) {
-    case "number_series": {
-      const res = solveNumberSeries(params as unknown as NumberSeriesParams);
-      if (!res.unique) throw new Error(`${q.id} (number_series): solver failed with: ${res.error}`);
-      computedValue = res.value;
-      break;
-    }
-    case "number_matrix": {
-      const res = solveNumberMatrix(params as unknown as NumberMatrixParams);
-      if (!res.unique) throw new Error(`${q.id} (number_matrix): solver failed with: ${res.error}`);
-      computedValue = res.value;
-      break;
-    }
-    case "letter_series": {
-      const res = solveLetterSeries(params as unknown as LetterSeriesParams);
-      if (!res.unique) throw new Error(`${q.id} (letter_series): solver failed with: ${res.error}`);
-      computedValue = res.value;
-      break;
-    }
-    case "coded_words": {
-      const res = solveCode(params as unknown as CodeParams);
-      if (!res.unique) throw new Error(`${q.id} (coded_words): solver failed with: ${res.error}`);
-      computedValue = res.value;
-      break;
-    }
-    case "syllogism": {
-      const res = solveSyllogism(params as unknown as SyllogismParams);
-      if (!res.unique) throw new Error(`${q.id} (syllogism): solver failed with: ${res.error}`);
-      computedValue = res.value;
-      break;
-    }
-    case "arithmetical_reasoning": {
-      // Evaluate constraint expressions
-      const constraintsList = (params.constraints as string[]) ?? [];
-      const constraintFns = constraintsList.map(str => {
-        return (env: Record<string, number>) => {
-          const keys = Object.keys(env);
-          const vals = Object.values(env);
-          const fn = new Function(...keys, `return (${str});`);
-          return Boolean(fn(...vals));
-        };
-      });
-
-      const res = solveArithmeticalReasoning({
-        variables: (params.variables as unknown as ConstraintVariable[]) ?? [],
-        constraints: constraintFns,
-        targetVariable: params.targetVariable as string,
-      });
-      if (!res.unique) throw new Error(`${q.id} (arithmetical_reasoning): solver failed with: ${res.error}`);
-      computedValue = res.value;
-      break;
-    }
-  }
-
-  // Find option text matching answerKey
-  const chosenOpt = q.options.find(o => o.id === q.answerKey.optionId);
-  if (!chosenOpt) {
-    throw new Error(`${q.id}: answerKey option '${q.answerKey.optionId}' not found in options`);
-  }
-
-  // Check matching: either direct string match or integer match
-  const chosenText = chosenOpt.text.trim();
-  const expectedStr = String(sidecar.correctValue).trim();
-  if (chosenText !== expectedStr) {
-    throw new Error(`${q.id}: option '${q.answerKey.optionId}' text '${chosenText}' does not match sidecar correctValue '${expectedStr}'`);
-  }
-
-  // Also check solver computed value
-  const computedStr = String(computedValue).trim();
-  // Special case: syllogism returns conclusion id (which matches text)
-  if (solverType === "syllogism") {
-    if (computedStr !== chosenText) {
-      throw new Error(`${q.id} (syllogism): computed conclusion '${computedStr}' does not match chosen option '${chosenText}'`);
-    }
-  } else if (solverType === "arithmetical_reasoning") {
-    // For word problems where answer is a derived number (e.g. 10 * 17 = 170, or code = 5138)
-    // Check that computed integer is consistent
-    if (String(computedValue) !== expectedStr && !expectedStr.includes(String(computedValue))) {
-      throw new Error(`${q.id} (arithmetical_reasoning): computed '${computedValue}' does not match '${expectedStr}'`);
-    }
-  } else {
-    if (computedStr.toUpperCase() !== chosenText.toUpperCase()) {
-      throw new Error(`${q.id} (${solverType}): solver produced '${computedStr}', but answerKey has '${chosenText}'`);
-    }
-  }
 }
 
 export async function assertNoRuntimeDraftReference(srcRoot = "src"): Promise<void> {

@@ -2099,7 +2099,8 @@
             8,
             null
           ]
-        ]
+        ],
+        "ruleOrientation": "row"
       }
     },
     "scholarship-y6-nr-013": {
@@ -2125,7 +2126,8 @@
             6,
             null
           ]
-        ]
+        ],
+        "ruleOrientation": "row"
       }
     },
     "scholarship-y6-nr-014": {
@@ -2178,7 +2180,8 @@
             8,
             null
           ]
-        ]
+        ],
+        "ruleOrientation": "row"
       }
     },
     "scholarship-y6-nr-016": {
@@ -2258,7 +2261,8 @@
             10,
             null
           ]
-        ]
+        ],
+        "ruleOrientation": "row"
       }
     },
     "scholarship-y6-nr-019": {
@@ -2311,7 +2315,8 @@
             7,
             null
           ]
-        ]
+        ],
+        "ruleOrientation": "row"
       }
     },
     "scholarship-y6-nr-021": {
