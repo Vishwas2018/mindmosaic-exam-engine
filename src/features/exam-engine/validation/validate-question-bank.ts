@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { validateBarModelVisual } from "@/features/visuals/bar-model/pipeline";
-import { deriveIndependentAnswer } from "@/features/question-factory/correctness/derive-answer";
+import { deriveBarModelAnswer } from "@/features/visuals/bar-model/answer";
 import { fractionFromFiniteNumber, fractionsEqual } from "@/features/question-factory/correctness/numeric";
 
 import {
@@ -34,7 +34,7 @@ export const questionBankSchema = z
         }
       }
       if (barModels.length > 0) {
-        const derived = deriveIndependentAnswer(question);
+        const derived = deriveBarModelAnswer(question);
         const key = question.answerKey;
         const matches = derived.ok && (
           (key.kind === "number" && derived.value.kind === "number" && fractionsEqual(derived.value.value, fractionFromFiniteNumber(key.value))) ||
