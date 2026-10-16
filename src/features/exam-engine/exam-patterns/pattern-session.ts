@@ -62,15 +62,17 @@ export function patternExamConfig(
   pattern: ExamPattern,
   servedQuestionCount: number,
   reduced: boolean,
+  confidenceMode?: boolean,
 ): ExamSelectionConfig {
   return {
     yearLevel: pattern.yearLevel,
     examStyle: pattern.examStyle,
     subject: patternSubjectFilter(pattern),
     questionCount: servedQuestionCount,
-    timing: "timed",
+    timing: confidenceMode ? "untimed" : "timed",
     patternId: pattern.id,
     shortened: reduced,
+    confidenceMode: confidenceMode ?? false,
   };
 }
 
@@ -147,5 +149,21 @@ export const ADAPTATION_COPY: Readonly<
   internal_english_mix: {
     title: "We chose the mix of English questions",
     body: "ICAS English is one paper covering reading and language. ICAS does not publish how many questions come from each area, so we chose the balance ourselves.",
+  },
+  tight_time_pressure: {
+    title: "Pacing is fast",
+    body: "Scholarship tests allow very little time per question. Don't worry if you don't finish every question on your first try.",
+  },
+  no_planning_screen: {
+    title: "Direct prompt presentation",
+    body: "Writing time starts directly with the prompt, matching scholarship test conditions.",
+  },
+  parent_marked_rubric: {
+    title: "Marked using a parent rubric",
+    body: "Written responses are evaluated using structured scholarship marking criteria.",
+  },
+  print_prompt_default: {
+    title: "Printed prompt with ruled sheet",
+    body: "Scholarship written responses are sat on paper. We recommend writing on paper using the printable sheet.",
   },
 };

@@ -13,11 +13,15 @@ import type { ExamResult } from "./exam-report";
 
 export const examSelectionConfigSchema = z.object({
   yearLevel: z.union([yearLevelSchema, z.literal("mixed")]),
-  examStyle: z.enum(["naplan_style", "icas_style", "mixed"]),
+  examStyle: z.enum([
+    "naplan_style",
+    "icas_style",
+    "amc_style",
+    "scholarship_style",
+    "mixed",
+  ]),
   /* The full SubjectFilter vocabulary, matching
-     selection/selection-config.ts. Science, Digital Technologies and
-     Spelling were missing, so a signed-in student could not create a session
-     for any of them; the ICAS simulations need all three. */
+     selection/selection-config.ts. */
   subject: z.enum([
     "numeracy",
     "reading",
@@ -25,6 +29,9 @@ export const examSelectionConfigSchema = z.object({
     "science",
     "digital_technologies",
     "spelling",
+    "amc_mathematics",
+    "verbal_reasoning",
+    "numerical_reasoning",
     "mixed",
   ]),
   /* Any positive count, not just the configurator's three fixed options: an
@@ -39,6 +46,7 @@ export const examSelectionConfigSchema = z.object({
      its time limit and its shortened-paper labelling. */
   patternId: z.string().min(1).optional(),
   shortened: z.boolean().optional(),
+  confidenceMode: z.boolean().optional(),
 });
 
 export const examBankIdSchema = z.enum(["curated", "published", "practice"]);

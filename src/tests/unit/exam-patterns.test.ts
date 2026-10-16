@@ -47,14 +47,15 @@ describe("exam pattern registry", () => {
     expect(ids).toEqual([...new Set(ids)]);
 
     /* §2 and §3: six NAPLAN papers, five ICAS papers per year plus the two
-       English halves, four deferred writing tasks, and four AMC patterns (2 Y3, 2 Y5). */
-    expect(EXAM_PATTERNS).toHaveLength(28);
-    expect(EXAM_PATTERNS.filter((pattern) => pattern.status === "deferred")).toHaveLength(4);
+       English halves, four deferred writing tasks, four AMC patterns (2 Y3, 2 Y5),
+       and five Year 6 scholarship patterns (4 available, 1 deferred). */
+    expect(EXAM_PATTERNS).toHaveLength(33);
+    expect(EXAM_PATTERNS.filter((pattern) => pattern.status === "deferred")).toHaveLength(5);
     expect(STARTABLE_EXAM_PATTERNS.every((pattern) => pattern.status === "available")).toBe(
       true,
     );
     for (const pattern of EXAM_PATTERNS) {
-      if (pattern.id.includes("writing")) {
+      if (pattern.id.includes("writing") || pattern.id.includes("written-expression")) {
         expect(pattern.status).toBe("deferred");
       }
     }
@@ -200,13 +201,19 @@ describe("exam pattern registry", () => {
 
   it("groups by year level then exam type", () => {
     const groups = groupExamPatterns();
-    expect(groups.map((group) => group.yearLevel)).toEqual([3, 5]);
+    expect(groups.map((group) => group.yearLevel)).toEqual([3, 5, 6]);
     for (const group of groups) {
-      expect(group.styles.map((style) => style.examStyle)).toEqual([
-        "naplan_style",
-        "icas_style",
-        "amc_style",
-      ]);
+      if (group.yearLevel === 6) {
+        expect(group.styles.map((style) => style.examStyle)).toEqual([
+          "scholarship_style",
+        ]);
+      } else {
+        expect(group.styles.map((style) => style.examStyle)).toEqual([
+          "naplan_style",
+          "icas_style",
+          "amc_style",
+        ]);
+      }
       for (const style of group.styles) {
         expect(
           style.patterns.every(

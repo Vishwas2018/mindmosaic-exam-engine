@@ -33,6 +33,8 @@ export type SubjectFilter =
   | "digital_technologies"
   | "spelling"
   | "amc_mathematics"
+  | "verbal_reasoning"
+  | "numerical_reasoning"
   | "mixed";
 export type QuestionCountOption = 10 | 20 | 30 | "full";
 /**
@@ -66,6 +68,11 @@ export interface ExamSelectionConfig {
    * short must say so everywhere it is named.
    */
   shortened?: boolean;
+  /**
+   * Confidence Mode: untimed practice where explanations are shown immediately
+   * after answering each question.
+   */
+  confidenceMode?: boolean;
 }
 
 /**
@@ -90,6 +97,7 @@ export const EXAM_STYLE_OPTIONS: readonly ExamStyleFilter[] = [
   "naplan_style",
   "icas_style",
   "amc_style",
+  "scholarship_style",
   "mixed",
 ];
 /**
@@ -113,6 +121,8 @@ export const SUBJECT_OPTIONS: readonly SubjectFilter[] = [
   "digital_technologies",
   "spelling",
   "amc_mathematics",
+  "verbal_reasoning",
+  "numerical_reasoning",
   "mixed",
 ];
 /**
@@ -138,6 +148,8 @@ export const REGISTRY_SUBJECT_BY_FILTER = {
   digital_technologies: "digital_technologies",
   spelling: "spelling",
   amc_mathematics: "amc_mathematics",
+  verbal_reasoning: "verbal_reasoning",
+  numerical_reasoning: "numerical_reasoning",
 } as const satisfies Record<Exclude<SubjectFilter, "mixed">, SubjectId>;
 
 /** Every subject a program can pin, in catalogue display order. */

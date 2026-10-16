@@ -43,19 +43,21 @@ const STYLE_BY_PREFIX: Readonly<Record<string, ExamStyle>> = {
   naplan: "naplan_style",
   icas: "icas_style",
   amc: "amc_style",
+  scholarship: "scholarship_style",
 };
 
 /**
  * Programme id subject segments that are NOT the registry's own id. Only
- * `language` needs one: the filter vocabulary calls it "language", the
- * registry calls it `language_conventions`, and the doc's programme ids use
- * the filter spelling.
+ * `language` and `mathematics` need one: the filter vocabulary calls it "language", the
+ * registry calls it `language_conventions`; scholarship uses "mathematics" which
+ * maps to the registry's `numeracy`.
  */
 const REGISTRY_SUBJECT_BY_SEGMENT: Readonly<Record<string, string>> = {
   language: "language_conventions",
+  mathematics: "numeracy",
 };
 
-const PROGRAMME_ID_PATTERN = /^(naplan|icas|amc)-y(\d{1,2})-([a-z_-]+)$/;
+const PROGRAMME_ID_PATTERN = /^(naplan|icas|amc|scholarship)-y(\d{1,2})-([a-z_-]+)$/;
 
 /**
  * Parse a programme id, or return undefined when it does not name a real
@@ -82,12 +84,16 @@ export function parseProgrammeId(programmeId: string): ProgrammeScope | undefine
   if (!isKnownSubject(subjectId)) return undefined;
   if (!isSubjectSatIn(subjectId, examStyle, yearLevel)) return undefined;
 
-  const subject = (ISOLABLE_SUBJECT_FILTERS as readonly string[]).includes(segment)
+  const candidateFilter = (ISOLABLE_SUBJECT_FILTERS as readonly string[]).includes(segment)
     ? (segment as Exclude<SubjectFilter, "mixed">)
-    : undefined;
+    : (ISOLABLE_SUBJECT_FILTERS as readonly string[]).includes(subjectId)
+      ? (subjectId as Exclude<SubjectFilter, "mixed">)
+      : undefined;
   /* Belt and braces: if a filter exists it must address the same registry
      subject this id resolved to, so the two vocabularies cannot drift. */
-  if (subject && REGISTRY_SUBJECT_BY_FILTER[subject] !== subjectId) return undefined;
+  const subject = candidateFilter && REGISTRY_SUBJECT_BY_FILTER[candidateFilter] === subjectId
+    ? candidateFilter
+    : undefined;
 
   return { yearLevel, examStyle, subjectId, subject };
 }
