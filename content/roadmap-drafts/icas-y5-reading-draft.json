@@ -1,0 +1,350 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts, ICAS-style Year 5 reading. No independent review or human approval claimed. Do not serve directly.",
+  "questions": [
+    {
+      "id": "roadmap-icas-y5-reading-01-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Where was the ladder taken when the new scoreboard was installed?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To the far boundary"
+        },
+        {
+          "id": "b",
+          "text": "Under the shelter"
+        },
+        {
+          "id": "c",
+          "text": "Beside the wooden frame"
+        },
+        {
+          "id": "d",
+          "text": "Into the equipment shed"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The opening paragraph explicitly states that the ladder was carried into the equipment shed. The reader must distinguish this location from other places mentioned in the passage.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What does the word 'lingered' suggest about Mr Vale's actions on the first morning?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "He hurried away from the wooden frame to watch the new figures."
+        },
+        {
+          "id": "b",
+          "text": "He remained beside the wooden frame rather than moving on at once."
+        },
+        {
+          "id": "c",
+          "text": "He waited for the umpire's call so he could change a number."
+        },
+        {
+          "id": "d",
+          "text": "He stopped to check the screen against the paper scorebook."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Mr Vale remains beside the empty frame, handling his scorecard, while the following sentence recalls his former routine. The reader must use these contextual clues to understand that 'lingered' means staying somewhere longer rather than leaving promptly.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What contrast does the writer create by describing the old numbers as 'the colour of weak tea' and the new figures as 'tiny white windows'?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The old numbers appeared dull and faded, while the new figures appeared bright and clear."
+        },
+        {
+          "id": "b",
+          "text": "The old board required a ladder, while the new board could be checked against the scorebook."
+        },
+        {
+          "id": "c",
+          "text": "The new screen briefly went dark during the second over before its figures returned."
+        },
+        {
+          "id": "d",
+          "text": "The new board could be read during the rain without anyone climbing the ladder."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The pale image of weak tea contrasts with the bright, window-like figures visible from the boundary. The reader must compare two descriptions in separate paragraphs and recognise that the imagery emphasises their different appearances, rather than how the boards operate.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why did the narrator most likely expect everyone to celebrate the new scoreboard?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The groundskeeper had described the screen's interruption as a small problem."
+        },
+        {
+          "id": "b",
+          "text": "Mr Vale had shown a younger volunteer how to check the screen."
+        },
+        {
+          "id": "c",
+          "text": "The faded wooden board had been replaced by figures that were clearer from the boundary."
+        },
+        {
+          "id": "d",
+          "text": "The shower had shown that the new board remained visible in the rain."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The narrator describes the faded old numbers and then the bright figures visible from the far boundary. The reader must infer why this improvement seemed worth celebrating and distinguish it from events that occurred later in the match.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "In the third paragraph, what does 'faltered' mean when describing the screen?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Its figures became clearer when viewed from the far boundary."
+        },
+        {
+          "id": "b",
+          "text": "Its figures briefly went dark before appearing again."
+        },
+        {
+          "id": "c",
+          "text": "Its score remained visible throughout the shower."
+        },
+        {
+          "id": "d",
+          "text": "Its figures were checked against the paper scorebook."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The clause following 'faltered' explains that the figures went dark briefly and then returned. The reader must interpret the less-common verb as a temporary interruption in the screen's operation, not its later performance or accuracy.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why does the writer finish by describing Mr Vale smiling at the new board while keeping his old scorecard?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To suggest that Mr Vale prefers the old method because the new screen cannot be trusted"
+        },
+        {
+          "id": "b",
+          "text": "To suggest that the new board has removed every part of Mr Vale's role"
+        },
+        {
+          "id": "c",
+          "text": "To suggest that the brightness of the figures matters more than keeping scores accurate"
+        },
+        {
+          "id": "d",
+          "text": "To suggest that Mr Vale can appreciate the new board while still valuing the old routine"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Mr Vale's smile suggests acceptance, while his careful handling of the old scorecard recalls his long connection with the wooden board. The reader must interpret the contrasting actions together to recognise his mixed feelings rather than assuming complete rejection or complete enthusiasm.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Why did the groundskeeper most likely keep glancing towards the screen after calling its interruption 'Just a hiccup'?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "She wanted to sound reassuring but was still watching for another interruption."
+        },
+        {
+          "id": "b",
+          "text": "She thought the shower had already caused the screen to go dark."
+        },
+        {
+          "id": "c",
+          "text": "She was waiting for the umpire's call before changing a number."
+        },
+        {
+          "id": "d",
+          "text": "She was checking the figures against the paper scorebook."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Calling the interruption a 'hiccup' plays down its seriousness, but her repeated glances suggest she remains watchful. The reader must infer the difference between her reassuring words and her behaviour, rather than attributing Mr Vale's actions or the later shower to her.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-reading-01-q8",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What does the passage establish about the accuracy of the digital scoreboard?",
+      "stimulus": {
+        "title": "The Two Scoreboards",
+        "body": "At a cricket ground near Bendigo, the wooden scoreboard had stood for decades. Its painted numbers had faded to the colour of weak tea. Every Saturday, the scorer, Mr Vale, climbed a narrow ladder to slide new cards into place. When the council installed a digital board, the ladder was carried into the equipment shed.\n\nI expected everyone to celebrate. The new figures blazed like tiny white windows, clear even from the far boundary. Yet on its first morning, Mr Vale lingered beside the empty wooden frame, rolling a scorecard between his fingers. He had spent years listening for the umpire's call before changing each number.\n\nDuring the second over, the screen faltered: its figures went dark for a moment, then returned. \"Just a hiccup,\" said the groundskeeper, although she kept glancing towards it. Later, a shower sent spectators under the shelter. Nobody needed to climb the slippery ladder, and the score remained visible through the rain.\n\nAfter the match, Mr Vale showed a younger volunteer how to check the screen against the paper scorebook. \"Bright numbers can still be wrong,\" he said. He smiled at the new board, but slipped his old scorecard into his pocket."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Its figures were accurate throughout the match because they returned after going dark."
+        },
+        {
+          "id": "b",
+          "text": "Its scores were incorrect during the second over because the figures went dark."
+        },
+        {
+          "id": "c",
+          "text": "Its display briefly failed, but the passage does not establish whether the scores shown were correct."
+        },
+        {
+          "id": "d",
+          "text": "It was more accurate than the wooden board because its figures could be read from the boundary."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The passage establishes that the screen briefly went dark and was clearly visible at other times, while Mr Vale warns that bright figures can still be wrong. The reader must separate display reliability and visibility from numerical accuracy, which the passage never confirms.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    }
+  ]
+}
