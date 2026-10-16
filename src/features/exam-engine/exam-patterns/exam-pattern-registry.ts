@@ -398,6 +398,110 @@ function amcPattern(
   };
 }
 
+const SCHOLARSHIP_PATTERNS = [
+  {
+    id: "scholarship-y6-verbal-reasoning-full",
+    label: "Scholarship-style Year 6 Verbal Reasoning — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "official_length_and_time",
+    adaptations: ["tight_time_pressure"],
+    questionCount: 45,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "verbal-reasoning",
+        programmeId: "scholarship-y6-verbal-reasoning",
+        count: 45,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-numerical-reasoning-full",
+    label: "Scholarship-style Year 6 Numerical Reasoning — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "official_length_and_time",
+    adaptations: ["tight_time_pressure"],
+    questionCount: 40,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "numerical-reasoning",
+        programmeId: "scholarship-y6-numerical-reasoning",
+        count: 40,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-reading-full",
+    label: "Scholarship-style Year 6 Reading Comprehension — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "official_length_and_time",
+    adaptations: ["tight_time_pressure"],
+    questionCount: 35,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "reading",
+        programmeId: "scholarship-y6-reading",
+        count: 35,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-mathematics-full",
+    label: "Scholarship-style Year 6 Mathematics — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "official_length_and_time",
+    adaptations: ["tight_time_pressure"],
+    questionCount: 40,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "mathematics",
+        programmeId: "scholarship-y6-mathematics",
+        count: 40,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-written-expression-full",
+    label: "Scholarship-style Year 6 Written Expression — Timed Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "official_length_and_time",
+    adaptations: ["no_planning_screen", "parent_marked_rubric", "print_prompt_default"],
+    questionCount: 1,
+    timeMinutes: 15,
+    sources: [
+      {
+        id: "writing",
+        programmeId: "scholarship-y6-writing",
+        count: 1,
+        filters: { typeIn: ["essay"] },
+        display: "merged",
+      },
+    ],
+    status: "deferred",
+  },
+] as const;
+
 /**
  * Validated at module load, not only in a test: an invalid registry should be
  * a boot failure everywhere it is imported, rather than something the suite
@@ -419,6 +523,7 @@ export const EXAM_PATTERNS: readonly ExamPattern[] = validateRegistry([
   ...NAPLAN_PATTERNS,
   ...ICAS_PATTERNS,
   ...AMC_PATTERNS,
+  ...SCHOLARSHIP_PATTERNS,
 ]);
 
 /** Patterns a child can actually sit — deferred entries excluded. */
@@ -449,6 +554,7 @@ const STYLE_ORDER: readonly ExamStyle[] = [
   "naplan_style",
   "icas_style",
   "amc_style",
+  "scholarship_style",
 ];
 
 export function groupExamPatterns(

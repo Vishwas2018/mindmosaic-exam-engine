@@ -76,6 +76,7 @@ describe("buildCapacityReport", () => {
       naplan_style: "naplan_style_practice",
       icas_style: "icas_style_practice",
       amc_style: "australian_mathematics_competition",
+      scholarship_style: "edutest_scholarship_prep",
     });
   });
 

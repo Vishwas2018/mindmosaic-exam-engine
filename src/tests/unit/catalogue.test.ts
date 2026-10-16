@@ -83,7 +83,8 @@ describe("catalogue config", () => {
       (program) =>
         !program.id.startsWith("naplan-y") &&
         !program.id.startsWith("icas-y") &&
-        !program.id.startsWith("amc-y"),
+        !program.id.startsWith("amc-y") &&
+        !program.id.startsWith("scholarship-y"),
     );
     expect(roadmap.length).toBeGreaterThan(0);
     for (const program of roadmap) {

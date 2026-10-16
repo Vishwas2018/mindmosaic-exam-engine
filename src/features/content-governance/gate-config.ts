@@ -8,7 +8,7 @@ export function programmeIdForQuestion(question: Question): string {
   const family = question.examStyle.replace(/_style$/, "");
   const subject = question.metadata.subject === "language_conventions"
     ? "language"
-    : question.metadata.subject;
+    : question.metadata.subject.replace(/_/g, "-");
   return `${family}-y${question.yearLevel}-${subject}`;
 }
 
@@ -16,7 +16,9 @@ export function publicationGateMode(
   programmeId: string,
   modes: Readonly<Record<string, PublicationGateMode>> = PROGRAMME_PUBLICATION_MODES,
 ): PublicationGateMode {
-  return modes[programmeId] ?? "report";
+  if (modes[programmeId] !== undefined) return modes[programmeId]!;
+  if (programmeId.startsWith("scholarship-") || programmeId.startsWith("edutest")) return "enforce";
+  return "report";
 }
 
 /** A pure boundary used by runtime and mixed-mode regression tests. */

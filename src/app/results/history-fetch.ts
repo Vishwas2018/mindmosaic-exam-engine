@@ -100,7 +100,9 @@ export async function fetchResultsHistory(params: {
       sitting.sessionId !== params.excludeSessionId && sitting.subject === params.subject,
   );
 
-  const scoredPercentages = summaries
+  const evaluableSummaries = summaries.filter((s) => s.mode !== "confidence");
+
+  const scoredPercentages = evaluableSummaries
     .map((summary) => summary.scorePercent)
     .filter((percent): percent is number => percent !== null);
 
@@ -110,8 +112,8 @@ export async function fetchResultsHistory(params: {
       subjectAttemptCount: summaries.length,
       personalBestPercent:
         scoredPercentages.length > 0 ? Math.max(...scoredPercentages) : null,
-      previousAttempt: summaries[0]
-        ? { scorePercent: summaries[0].scorePercent, submittedAt: summaries[0].submittedAt }
+      previousAttempt: evaluableSummaries[0]
+        ? { scorePercent: evaluableSummaries[0].scorePercent, submittedAt: evaluableSummaries[0].submittedAt }
         : null,
     },
   };

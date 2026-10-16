@@ -94,7 +94,7 @@ export const SUBJECT_REGISTRY = [
   {
     id: "numeracy",
     label: "Numeracy",
-    supportedExamStyles: BOTH_EXAM_STYLES,
+    supportedExamStyles: [...BOTH_EXAM_STYLES, "scholarship_style"],
     yearLevels: ALL_YEARS,
     strands: [
       {
@@ -347,7 +347,7 @@ export const SUBJECT_REGISTRY = [
   {
     id: "reading",
     label: "Reading",
-    supportedExamStyles: BOTH_EXAM_STYLES,
+    supportedExamStyles: [...BOTH_EXAM_STYLES, "scholarship_style"],
     yearLevels: ALL_YEARS,
     strands: [
       {
@@ -602,7 +602,7 @@ export const SUBJECT_REGISTRY = [
   {
     id: "writing",
     label: "Writing",
-    supportedExamStyles: BOTH_EXAM_STYLES,
+    supportedExamStyles: [...BOTH_EXAM_STYLES, "scholarship_style"],
     yearLevels: ALL_YEARS,
     strands: [
       {
@@ -1506,6 +1506,47 @@ export const SUBJECT_REGISTRY = [
       },
     ],
   },
+  {
+    id: "verbal_reasoning",
+    label: "Verbal Reasoning",
+    supportedExamStyles: ["scholarship_style"],
+    yearLevels: [6],
+    strands: [
+      {
+        id: "verbal-aptitude",
+        label: "Verbal Aptitude",
+        examStyles: ["scholarship_style"],
+        skills: [
+          "vr-analogies",
+          "vr-classification",
+          "vr-synonyms-antonyms",
+          "vr-word-relationships",
+          "vr-sentence-logic",
+          "vr-letter-series",
+          "vr-coded-words",
+        ],
+      },
+    ],
+  },
+  {
+    id: "numerical_reasoning",
+    label: "Numerical Reasoning",
+    supportedExamStyles: ["scholarship_style"],
+    yearLevels: [6],
+    strands: [
+      {
+        id: "numerical-aptitude",
+        label: "Numerical Aptitude",
+        examStyles: ["scholarship_style"],
+        skills: [
+          "nr-number-series",
+          "nr-number-matrices",
+          "nr-arithmetical-reasoning",
+          "nr-logic-deduction-numbers",
+        ],
+      },
+    ],
+  },
 ] as const satisfies readonly SubjectRegistryEntry[];
 
 export type SubjectId = (typeof SUBJECT_REGISTRY)[number]["id"];
@@ -1659,6 +1700,7 @@ export function isDeterministicMathsSubject(subject: SubjectId): boolean {
   switch (subject) {
     case "numeracy":
     case "amc_mathematics":
+    case "numerical_reasoning":
       return true;
     case "reading":
     case "writing":
@@ -1667,6 +1709,7 @@ export function isDeterministicMathsSubject(subject: SubjectId): boolean {
     case "digital_technologies":
     case "spelling":
     case "critical_creative_thinking":
+    case "verbal_reasoning":
       return false;
     default: {
       const exhaustive: never = subject;
