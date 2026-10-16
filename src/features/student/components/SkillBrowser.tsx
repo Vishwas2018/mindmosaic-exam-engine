@@ -23,6 +23,7 @@ const SUBJECT_CHIP_LABELS: Record<SubjectChip, string> = {
   digital_technologies: "Digital Technologies",
   spelling: "Spelling",
   amc_mathematics: "AMC Mathematics",
+  singapore_mathematics: "Singapore Maths",
   mixed: "Mixed",
 };
 

@@ -33,6 +33,7 @@ export type SubjectFilter =
   | "digital_technologies"
   | "spelling"
   | "amc_mathematics"
+  | "singapore_mathematics"
   | "mixed";
 export type QuestionCountOption = 10 | 20 | 30 | "full";
 /**
@@ -86,6 +87,7 @@ export const YEAR_LEVEL_OPTIONS: readonly YearLevelFilter[] = [
   ...YEAR_LEVELS,
   "mixed",
 ];
+// Public picker options intentionally exclude authoring-only foundation styles.
 export const EXAM_STYLE_OPTIONS: readonly ExamStyleFilter[] = [
   "naplan_style",
   "icas_style",
@@ -105,6 +107,7 @@ export const EXAM_STYLE_OPTIONS: readonly ExamStyleFilter[] = [
  * registry). This array is the ENGINE's vocabulary, not a picker's option
  * list.
  */
+// Public picker options intentionally exclude authoring-only Singapore Maths.
 export const SUBJECT_OPTIONS: readonly SubjectFilter[] = [
   "numeracy",
   "reading",
@@ -138,6 +141,7 @@ export const REGISTRY_SUBJECT_BY_FILTER = {
   digital_technologies: "digital_technologies",
   spelling: "spelling",
   amc_mathematics: "amc_mathematics",
+  singapore_mathematics: "singapore_mathematics",
 } as const satisfies Record<Exclude<SubjectFilter, "mixed">, SubjectId>;
 
 /** Every subject a program can pin, in catalogue display order. */

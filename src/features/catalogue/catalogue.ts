@@ -9,7 +9,7 @@ import type {
   YearLevelFilter,
 } from "@/features/exam-engine/selection";
 import { getSubject, isSubjectSatIn } from "@/features/taxonomy/subject-registry";
-import { validStyleYearPairs } from "@/features/taxonomy/year-registry";
+import { isStudentDeliveryStyle, validStyleYearPairs } from "@/features/taxonomy/year-registry";
 
 export type ProgramStatus = "live" | "coming_soon";
 
@@ -317,10 +317,11 @@ const EXPANSION_SUBJECTS = ISOLABLE_SUBJECT_FILTERS.map((filter) => {
   };
 });
 
-const STYLE_LABELS: Record<"naplan_style" | "icas_style" | "amc_style", string> = {
+const STYLE_LABELS: Record<"naplan_style" | "icas_style" | "amc_style" | "singapore_style", string> = {
   naplan_style: "NAPLAN-style",
   icas_style: "ICAS-style",
   amc_style: "AMC-style",
+  singapore_style: "Singapore Maths",
 };
 
 /**
@@ -344,7 +345,9 @@ const STYLE_LABELS: Record<"naplan_style" | "icas_style" | "amc_style", string> 
  * questions. The failure mode is "ready content shown as coming soon",
  * never "empty program shown as ready".
  */
-const EXPANSION_PROGRAMS: readonly Program[] = validStyleYearPairs().flatMap(
+const EXPANSION_PROGRAMS: readonly Program[] = validStyleYearPairs().filter(
+  ({ examStyle }) => isStudentDeliveryStyle(examStyle),
+).flatMap(
   ({ examStyle, yearLevel }) =>
     EXPANSION_SUBJECTS.flatMap<Program>((subject) => {
       const prefix =

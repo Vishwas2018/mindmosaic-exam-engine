@@ -13,6 +13,7 @@ import {
   type ExamBankId,
 } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import { isStudentDeliveryStyle } from "@/features/taxonomy/year-registry";
 import { getPublicationEligibility } from "./publication-evidence";
 
 /**
@@ -37,8 +38,11 @@ function servedBank(): readonly AuthoringQuestion[] {
   const report = getPublicationEligibility();
   // Integrity failures must never be treated as successful publication.
   if (report.problems.length) return Object.freeze([]);
+  // A registered foundation can receive draft content without enabling delivery.
+  const deliverable = publishedExamBank.filter((question) => isStudentDeliveryStyle(question.examStyle));
+  const authored = deliverable.length === publishedExamBank.length ? publishedExamBank : deliverable;
   const served = selectServedQuestions(
-    publishedExamBank, new Set(report.approvals.keys()),
+    authored, new Set(report.approvals.keys()),
   );
   servedBankCache = served === publishedExamBank ? publishedExamBank : Object.freeze(served);
   return servedBankCache;
