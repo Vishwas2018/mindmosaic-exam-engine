@@ -18,6 +18,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { z } from "zod";
 
+import { verifyFirstPartyScholarshipAttestation } from "../src/features/question-factory/correctness/scholarship-attestation";
 import { computeSolver, solverAnswerError } from "../src/features/question-factory/correctness/solver-verification";
 
 const DRAFTS_DIR = "content/scholarship-drafts";
@@ -236,6 +237,17 @@ export function verifySolverMatch(q: DraftQuestion, sidecar: z.infer<typeof draf
     return;
   }
 
+  if (sidecar.solver === "arithmetical_reasoning") {
+    // The draft's constraint strings are never executed or interpreted here: arithmetical items are
+    // verified only by the first-party recompute registry, which fails closed when an item has no solver.
+    const attestation = verifyFirstPartyScholarshipAttestation(q as unknown as Parameters<typeof verifyFirstPartyScholarshipAttestation>[0]);
+    if (attestation.error === "not_scholarship_attested_item") {
+      throw new Error(`${q.id}: arithmetical_reasoning sidecar has no first-party recompute solver in scope (skill '${q.metadata.skill}'); draft constraint strings are not executed`);
+    }
+    if (!attestation.ok) throw new Error(`${q.id}: ${attestation.error}: ${attestation.message}`);
+    return;
+  }
+
   const computed = computeSolver({
     solver: sidecar.solver,
     solverParams: sidecar.solverParams ?? {},
@@ -295,6 +307,7 @@ export async function validateScholarshipDrafts(): Promise<{
   let solverBackedCount = 0;
   let humanCheckCount = 0;
   const skillCounts: Record<string, number> = {};
+  const solverFailures: string[] = [];
   const distributions: Record<string, Record<string, number>> = {};
 
   for (const file of files) {
@@ -347,9 +360,18 @@ export async function validateScholarshipDrafts(): Promise<{
         solverBackedCount++;
       }
 
-      // 6. Solver verification
-      verifySolverMatch(q, sidecar);
+      // 6. Solver verification (collected so one failing item does not hide the rest)
+      try {
+        verifySolverMatch(q, sidecar);
+      } catch (error) {
+        solverFailures.push(error instanceof Error ? error.message : String(error));
+      }
     }
+  }
+
+  if (solverFailures.length > 0) {
+    const lines = solverFailures.map((failure) => ` - ${failure}`);
+    throw new Error([`${solverFailures.length} draft item(s) failed solver verification:`, ...lines].join("\n"));
   }
 
   // 7. Compound word allowlist check
