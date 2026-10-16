@@ -36,6 +36,7 @@ const draftPacketSchema = z.object({
 });
 
 export type DraftPacket = z.infer<typeof draftPacketSchema>;
+export type { DraftQuestion };
 
 export function assertNoMojibake(value: unknown, location = "draft packet"): void {
   if (typeof value === "string") {
