@@ -45,6 +45,12 @@ export interface ChildProfile {
    * Postgres happened to return rows in.
    */
   createdAt: string;
+  /**
+   * profiles.access_revoked_at: set when an erasure has been requested for this
+   * child (sign-in is blocked from that moment; the data is removed when the
+   * 30-day window closes). Optional so callers that never read it are unaffected.
+   */
+  accessRevokedAt?: string | null;
 }
 
 /** One exam_attempts row (with its session's config) as read for a parent. */

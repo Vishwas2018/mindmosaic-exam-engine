@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Pencil, Archive as ArchiveIcon, UserRound } from "lucide-react";
+import { Pencil, Archive as ArchiveIcon, Trash2, UserRound } from "lucide-react";
 
 import { Badge, Button, Card, ConfirmDialog, Input, Modal, Select } from "@/components/ui";
 import { isValidPin } from "@/features/auth/student-alias";
@@ -12,6 +12,8 @@ export interface ChildListItem {
   displayName: string;
   yearLevel: number | null;
   sessionCount: number;
+  /** True once the parent has asked for this child's data to be deleted. */
+  erasureScheduled?: boolean;
 }
 
 interface UpdateChildResponse {
@@ -32,6 +34,11 @@ interface UpdateChildResponse {
  * "Archive" removes the parent_children link rather than deleting the
  * child's account or history — reversible in principle, and it keeps this
  * batch schema-free (no archived-flag migration required).
+ *
+ * "Delete my child's data" is the real erasure: it calls
+ * POST /api/parent/children/[childId]/erase, which schedules
+ * public.parent_request_child_erasure (sign-in revoked immediately, data
+ * removed by the erasure processor after the 30-day window).
  */
 export function ChildrenManager({
   initialChildren,
@@ -45,6 +52,7 @@ export function ChildrenManager({
   const [children, setChildren] = useState(initialChildren);
   const [renameTarget, setRenameTarget] = useState<ChildListItem | null>(null);
   const [archiveTarget, setArchiveTarget] = useState<ChildListItem | null>(null);
+  const [eraseTarget, setEraseTarget] = useState<ChildListItem | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
@@ -151,6 +159,39 @@ export function ChildrenManager({
     router.refresh();
   }
 
+  async function handleEraseConfirm() {
+    if (!eraseTarget) return;
+    setSubmitting(true);
+    setFormError(null);
+
+    let result: UpdateChildResponse;
+    try {
+      const response = await fetch(`/api/parent/children/${eraseTarget.id}/erase`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirm: true }),
+      });
+      result = (await response.json().catch(() => null)) ?? { ok: false };
+    } catch {
+      result = { ok: false };
+    }
+
+    setSubmitting(false);
+
+    if (!result.ok) {
+      setFormError(result.message ?? "Could not schedule deletion. Please try again.");
+      setEraseTarget(null);
+      return;
+    }
+
+    const erasedId = eraseTarget.id;
+    setChildren((current) =>
+      current.map((child) => (child.id === erasedId ? { ...child, erasureScheduled: true } : child)),
+    );
+    setEraseTarget(null);
+    router.refresh();
+  }
+
   return (
     <div className="space-y-4">
       {formError && !renameTarget && (
@@ -175,19 +216,32 @@ export function ChildrenManager({
                 <Badge variant="neutral">
                   {child.sessionCount} {child.sessionCount === 1 ? "session" : "sessions"}
                 </Badge>
+                {child.erasureScheduled && <Badge variant="neutral">Deletion scheduled</Badge>}
               </div>
+              {child.erasureScheduled && (
+                <p className="mt-2 max-w-md text-sm font-semibold text-muted">
+                  Sign-in is switched off. Their data will be permanently deleted within 30 days.
+                  Email hello@mindmosaic.app to cancel.
+                </p>
+              )}
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button type="button" variant="secondary" size="sm" onClick={() => openRename(child)}>
-              <Pencil aria-hidden="true" className="h-4 w-4" />
-              Edit
-            </Button>
-            <Button type="button" variant="ghost" size="sm" onClick={() => setArchiveTarget(child)}>
-              <ArchiveIcon aria-hidden="true" className="h-4 w-4" />
-              Archive
-            </Button>
-          </div>
+          {!child.erasureScheduled && (
+            <div className="flex flex-wrap gap-2">
+              <Button type="button" variant="secondary" size="sm" onClick={() => openRename(child)}>
+                <Pencil aria-hidden="true" className="h-4 w-4" />
+                Edit
+              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={() => setArchiveTarget(child)}>
+                <ArchiveIcon aria-hidden="true" className="h-4 w-4" />
+                Archive
+              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={() => setEraseTarget(child)}>
+                <Trash2 aria-hidden="true" className="h-4 w-4" />
+                Delete my child&apos;s data
+              </Button>
+            </div>
+          )}
         </Card>
       ))}
 
@@ -258,6 +312,17 @@ export function ChildrenManager({
         isLoading={submitting}
         onConfirm={handleArchiveConfirm}
         onCancel={() => setArchiveTarget(null)}
+      />
+
+      <ConfirmDialog
+        open={eraseTarget !== null}
+        title={eraseTarget ? `Delete all of ${eraseTarget.displayName}'s data?` : "Delete child's data?"}
+        description="This permanently deletes their profile, every practice session, result and writing attempt, and their sign-in. Their sign-in stops working straight away, and the deletion is carried out within 30 days. It cannot be undone once complete."
+        confirmLabel="Yes, delete everything"
+        variant="danger"
+        isLoading={submitting}
+        onConfirm={handleEraseConfirm}
+        onCancel={() => setEraseTarget(null)}
       />
     </div>
   );

@@ -47,6 +47,7 @@ export default async function ParentChildrenPage() {
     displayName: child.profile.displayName?.trim() || "Your child",
     yearLevel: child.profile.yearLevel,
     sessionCount: child.attempts.length,
+    erasureScheduled: Boolean(child.profile.accessRevokedAt),
   }));
 
   return (

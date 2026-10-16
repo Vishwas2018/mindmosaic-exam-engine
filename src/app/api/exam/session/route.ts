@@ -11,6 +11,7 @@ import { createSessionRequestSchema } from "@/features/exam-engine/scoring/serve
 import { selectExamQuestions, type ExamSelectionConfig } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
+import { RATE_LIMITS, rateLimitResponse } from "@/lib/security/rate-limit";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { createTargetSession } from "@/server/assessment/target-session-writes";
@@ -68,6 +69,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!user) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
+
+  const limited = rateLimitResponse(RATE_LIMITS.examSessionCreate, user.id);
+  if (limited) return limited;
 
   const body = await request.json().catch(() => null);
   const parsed = createSessionRequestSchema.safeParse(body);

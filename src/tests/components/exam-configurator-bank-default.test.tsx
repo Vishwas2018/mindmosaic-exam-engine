@@ -117,4 +117,24 @@ describe("ExamConfigurator — extended bank removed", () => {
     expect(message).not.toHaveTextContent(/extended practice bank/i);
     expect(message).not.toHaveTextContent(/have not been reviewed/i);
   });
+
+  /*
+   * Beta content hygiene: Year 5 Science has no published questions. The
+   * picker must say "coming soon" and keep Start disabled, not scold the
+   * family about a "fewer than requested" shortfall of a pool that is empty.
+   */
+  it("says coming soon, and disables Start, for a combination with no published questions", () => {
+    render(
+      <ExamConfigurator
+        bankEligibility={eligibility}
+        initialScope={{ yearLevel: 5, examStyle: "icas_style", subject: "science" }}
+        lockScope
+        initialBankId="published"
+      />,
+    );
+
+    expect(screen.getByTestId("eligible-count")).toHaveTextContent(/^0 matching questions available/);
+    expect(screen.getByTestId("insufficient-message")).toHaveTextContent(/coming soon/i);
+    expect(screen.getByRole("button", { name: /review instructions/i })).toBeDisabled();
+  });
 });

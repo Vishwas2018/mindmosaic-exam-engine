@@ -31,6 +31,7 @@ export { evaluateAdaptiveEligibility } from "./adaptive-eligibility";
 export type { AdaptiveEligibilityFacts, AdaptiveIneligibilityReason } from "./adaptive-eligibility";
 export { createSeededRandom, hashSeed, seededShuffle } from "./seeded-random";
 export { filterEligibleQuestions, selectExamQuestions } from "./select-questions";
+export { SERVE_MANUALLY_MARKED_QUESTIONS } from "./serving-policy";
 export type { SelectionResult } from "./select-questions";
 export { buildSkillCatalogue } from "./skill-catalogue";
 export type { SkillSummary } from "./skill-catalogue";

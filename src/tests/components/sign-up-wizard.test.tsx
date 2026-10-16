@@ -16,6 +16,14 @@ vi.mock("@/lib/supabase/config", () => ({
   SUPABASE_NOT_CONFIGURED_MESSAGE: "not configured",
 }));
 
+/* This suite tests the wizard itself, which is kept for when sign-up reopens.
+   The deployment's policy (invite-only during the beta) is covered by
+   signup-policy.test.tsx, so the wizard is exercised here with sign-up open. */
+vi.mock("@/features/auth/signup-policy", () => ({
+  PUBLIC_SIGNUP_ENABLED: true,
+  SIGNUP_CLOSED_MESSAGE: "closed",
+}));
+
 const mockSignUp = vi.fn();
 vi.mock("@/lib/supabase/client", () => ({
   createClient: () => ({

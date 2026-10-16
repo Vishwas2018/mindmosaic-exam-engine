@@ -154,6 +154,9 @@ describe("provisionChild", () => {
     expect(call.email).toBe(buildAliasEmail(normalizeLoginCode(result.loginCode!)));
     expect(call.password).toBe(result.pin);
     expect(call.user_metadata).toEqual({ display_name: "Ada", role: "student" });
+    /* The handle_new_user trigger takes the role only from app_metadata
+       (service-role-only); user_metadata.role is ignored. */
+    expect(call.app_metadata).toEqual({ role: "student" });
 
     expect(mockParentChildrenInsert).toHaveBeenCalledWith({
       parent_id: "parent-1",
@@ -219,6 +222,36 @@ describe("provisionChild", () => {
 
     expect(result.ok).toBe(true);
     expect(mockCreateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("refuses a seventh student and creates nothing (per-family cap)", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["A", "B", "C", "D", "E", "F"]);
+
+    const result = await provisionChild({ displayName: "Seventh" });
+
+    expect(result.ok).toBe(false);
+    expect(result.message).toMatch(/up to 6 students/i);
+    expect(mockCreateUser).not.toHaveBeenCalled();
+  });
+
+  it("applies the cap even to a confirmed-duplicate retry", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["A", "B", "C", "D", "E", "F"]);
+
+    const result = await provisionChild({ displayName: "A", allowDuplicate: true });
+
+    expect(result.ok).toBe(false);
+    expect(mockCreateUser).not.toHaveBeenCalled();
+  });
+
+  it("still allows the sixth student", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["A", "B", "C", "D", "E"]);
+
+    const result = await provisionChild({ displayName: "Sixth" });
+
+    expect(result.ok).toBe(true);
   });
 
   it("uses the parent-supplied PIN instead of generating one", async () => {

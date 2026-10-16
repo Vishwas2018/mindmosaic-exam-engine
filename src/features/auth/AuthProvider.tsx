@@ -223,9 +223,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           return { ok: false, message: SIGNUP_CLOSED_MESSAGE };
         }
         /*
-         * The role rides along as user metadata; the on_auth_user_created
-         * database trigger reads it when creating the profiles row and
-         * accepts only 'student' or 'parent'. Public sign-up only ever sends
+         * The role rides along as user metadata for display only: since
+         * 20261016090000 the on_auth_user_created trigger ignores
+         * user_metadata.role and makes every GoTrue self-service user a
          * 'parent' (D1: students are parent-provisioned, never self-service —
          * see ./provision-child.ts); teacher/admin are assigned manually in
          * the database.

@@ -1,5 +1,29 @@
 # Deployment readiness
 
+> ## BETA: invite-only (read this first)
+>
+> For the invited-family beta, public sign-up is **closed**:
+> `PUBLIC_SIGNUP_ENABLED = false` and `supabase/config.toml` `enable_signup = false`.
+> The sections below describe the *open* configuration and remain the procedure
+> for reopening. Dashboard-only steps this repo cannot perform (all owner actions):
+>
+> 1. **Turn "Allow new users to sign up" OFF** (Authentication > Sign In / Providers).
+>    Until you do, `npm run verify:signup-open` still exits 0 and a stranger can POST
+>    to `/auth/v1/signup`. Invite families with Authentication > Users > Invite.
+> 2. **Configure custom SMTP** (section 4). Without it invites, confirmations and
+>    password resets do not reach non-owners.
+> 3. **Enable CAPTCHA** (Turnstile/hCaptcha) and review Auth rate limits. Sign-in,
+>    sign-up and student code+PIN sign-in go browser -> GoTrue directly, so in-app
+>    code cannot rate-limit them.
+> 4. **Do NOT raise the minimum password length above 6.** A student's 6-digit PIN
+>    is their GoTrue password; a higher project minimum breaks new children and PIN
+>    resets. (Guarded locally by `signup-policy.test.tsx`.)
+> 5. Record the project's **region** and publish it in the privacy policy.
+> 6. A **durable** rate limit (Vercel Firewall rules or Upstash) if per-instance
+>    limiting (`src/lib/security/rate-limit.ts`) is not enough.
+> 7. Apply migrations `20261016090000` and `20261016091000`, then
+>    `npm run migrations:record`.
+
 ## 1. Public sign-up is OPEN — REQUIRES THE SUPABASE DASHBOARD
 
 **This is the one step in this document that code in this repo cannot

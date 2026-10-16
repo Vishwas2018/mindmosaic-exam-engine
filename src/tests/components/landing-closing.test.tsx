@@ -89,12 +89,14 @@ describe("SiteFooter", () => {
    * free" alongside Log in — matching the header, which offers the same
    * CTA unconditionally to a guest visitor regardless of the policy flag.
    */
-  it("offers the sign-up CTA in the Product column", async () => {
+  it("offers the Start free CTA in the Product column, routed by the sign-up policy", async () => {
     const { PUBLIC_SIGNUP_ENABLED } = await import("@/features/auth/signup-policy");
-    expect(PUBLIC_SIGNUP_ENABLED).toBe(true);
 
     render(<SiteFooter />);
-    expect(screen.getByRole("link", { name: "Start free" })).toHaveAttribute("href", "/sign-up");
+    expect(screen.getByRole("link", { name: "Start free" })).toHaveAttribute(
+      "href",
+      PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice",
+    );
   });
 
   it("carries the non-affiliation statement and the one real support address", () => {

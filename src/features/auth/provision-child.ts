@@ -54,6 +54,9 @@ export interface ProvisionChildResult {
 
 const MAX_CODE_ATTEMPTS = 3;
 
+/** Most students one parent account may have linked at once. */
+const MAX_CHILDREN_PER_PARENT = 6;
+
 /** Trimmed and case-folded, so "child a", "Child A" and "Child A " are one name. */
 function normalizeChildName(name: string): string {
   return name.trim().toLocaleLowerCase();
@@ -142,13 +145,26 @@ export async function provisionChild(
    * (parent_children "own links", profiles "parent reads linked children"),
    * so this needs no privilege the caller doesn't have.
    */
-  if (!input.allowDuplicate) {
-    const { data: links } = await requesterClient
-      .from("parent_children")
-      .select("child_id")
-      .eq("parent_id", requester.id);
+  const { data: links } = await requesterClient
+    .from("parent_children")
+    .select("child_id")
+    .eq("parent_id", requester.id);
+  const childIds = (links ?? []).map((link) => link.child_id as string);
 
-    const childIds = (links ?? []).map((link) => link.child_id as string);
+  /*
+   * Abuse control (beta): every call below mints an auth.users row with the
+   * service-role key. Without a ceiling a single parent account could create
+   * unbounded accounts. Checked on every call, including allowDuplicate
+   * retries; the cap applies to children currently linked.
+   */
+  if (childIds.length >= MAX_CHILDREN_PER_PARENT) {
+    return {
+      ok: false,
+      message: `A family can have up to ${MAX_CHILDREN_PER_PARENT} students. Contact support if you need more.`,
+    };
+  }
+
+  if (!input.allowDuplicate) {
     if (childIds.length > 0) {
       const { data: existing } = await requesterClient
         .from("profiles")
@@ -189,6 +205,10 @@ export async function provisionChild(
       password: pin,
       email_confirm: true,
       user_metadata: { display_name: displayName, role: "student" },
+      /* The role the on_auth_user_created trigger trusts. app_metadata is
+         writable only with the service-role key; user_metadata.role is
+         ignored by the trigger because any browser can set it at sign-up. */
+      app_metadata: { role: "student" },
     });
 
     if (createError) {

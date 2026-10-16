@@ -5,6 +5,7 @@ import { Home } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthNav } from "@/features/auth";
 
+import { ReportProblemLink } from "@/features/support/ReportProblemLink";
 import { StudentMobileNav } from "./StudentMobileNav";
 import { BACK_TO_SITE, STUDENT_NAV_ITEMS, type StudentNavKey } from "./student-nav";
 
@@ -80,6 +81,7 @@ export function StudentShell({
       </header>
       <main id="main-content" className="site-width pb-20 pt-8 sm:pt-10">
         {children}
+        <ReportProblemLink />
       </main>
     </div>
   );
