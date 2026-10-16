@@ -9,6 +9,7 @@
  * terminal `cannot_derive`/`ambiguous` outcome rather than falling through
  * to a guess.
  */
+import { validateBarModelVisual } from "@/features/visuals/bar-model/pipeline";
 import type { Question } from "@/schemas/question.schema";
 import type { VisualAsset } from "@/schemas/visual.schema";
 
@@ -33,6 +34,7 @@ import {
   fractionsEqual,
   fractionToDisplayString,
   NumericDerivationError,
+  makeFraction,
 } from "./numeric";
 import {
   canonicaliseLabel,
@@ -844,6 +846,43 @@ function attemptNumericPredicateOverOptions(question: Question): DerivationOutco
   return success("numeric_predicate", { kind: "multiple_options", optionIds: matchingIds }, `[${matchingIds.join(",")}]`);
 }
 
+/** Bar-model targets are authoritative structured data, before any prompt heuristic. */
+function attemptBarModel(question: Question): DerivationOutcome {
+  const visuals = question.visuals.filter((visual) => visual.type === "bar_model");
+  if (visuals.length === 0) return NOT_APPLICABLE;
+  if (visuals.length !== 1) {
+    return ambiguous("ambiguous_visual_data", "Exactly one bar_model visual is required to identify the answer target.");
+  }
+  // The pipeline parses untrusted shape, then runs solveBarModel with the
+  // visual's descriptive text so malformed models and answer leaks fail closed.
+  const validation = validateBarModelVisual(visuals[0]);
+  if (!validation.ok || !validation.solution?.target) {
+    return cannotDerive("unable_to_derive_answer", `Invalid bar_model: ${validation.errorCodes.join(", ")}.`);
+  }
+  try {
+    const target = validation.solution.target;
+    const value = makeFraction(BigInt(target.numerator), BigInt(target.denominator));
+    const representation = fractionToDisplayString(value);
+    if (question.answerKey.kind === "number") {
+      return success("bar_model", { kind: "number", value }, representation);
+    }
+    if (question.answerKey.kind !== "single_option") {
+      return cannotDerive("unable_to_derive_answer", "bar_model supports numeric and single-option answers only.");
+    }
+    const matching = question.options.filter((option) => {
+      const parsed = parseNumericToken(option.text);
+      return parsed !== undefined && fractionsEqual(parsed, value);
+    });
+    if (matching.length !== 1) {
+      return cannotDerive("unable_to_derive_answer", "bar_model target must match exactly one numeric option.");
+    }
+    return success("bar_model", { kind: "single_option", optionId: matching[0].id }, representation);
+  } catch (error) {
+    if (error instanceof NumericDerivationError) return cannotDerive(error.code === "numeric_overflow" ? "numeric_overflow" : "unable_to_derive_answer", error.message);
+    throw error;
+  }
+}
+
 function attemptSolver(question: Question): DerivationOutcome {
   if (!("solverParams" in question) || question.solverParams === undefined) return NOT_APPLICABLE;
   const result = computeSolver(question.solverParams);
@@ -864,6 +903,7 @@ function attemptSolver(question: Question): DerivationOutcome {
 /* ---------------------------------------------------------------------- */
 
 const DERIVATION_METHODS: readonly ((question: Question, workingSteps?: DeclaredWorkingSolution) => DerivationOutcome)[] = [
+  attemptBarModel,
   attemptSolver,
   attemptArithmetic,
   attemptMoney,

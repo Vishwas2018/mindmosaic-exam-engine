@@ -6,6 +6,7 @@ import {
   warningBarModelFixtures,
 } from "@/content/visual-fixtures/bar-model";
 import { RENDER_ONLY_VISUAL_TYPES } from "@/features/question-factory/config/render-only-visual-types";
+import { additionQuestion } from "./question-factory/correctness-fixtures";
 import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
 import { ALLOWED_VISUAL_TYPES } from "@/features/question-factory/config";
 import { validateBarModelVisual } from "@/features/visuals/bar-model/pipeline";
@@ -117,24 +118,15 @@ describe("bar_model validator layers", () => {
   });
 });
 
-describe("bar_model is render-only in Phase 1 (not in the question factory)", () => {
-  it("is excluded from the factory's allowed visual types", () => {
-    expect(RENDER_ONLY_VISUAL_TYPES).toContain("bar_model");
-    expect(ALLOWED_VISUAL_TYPES).not.toContain("bar_model");
+describe("bar_model is available to the guarded question factory", () => {
+  it("is allowed now that generation has independent solver verification", () => {
+    expect(RENDER_ONLY_VISUAL_TYPES).not.toContain("bar_model");
+    expect(ALLOWED_VISUAL_TYPES).toContain("bar_model");
   });
 
-  it("is rejected by the candidate-question schema", () => {
-    const visual = validBarModelFixtures[0].visual;
-    const candidate = {
-      id: "cand-bar-model-1",
-      type: "multiple_choice",
-      yearLevel: 3,
-      examStyle: "naplan",
-      prompt: "What is the missing part?",
-      visuals: [visual],
-    };
+  it("is accepted by candidate ingestion without bypassing later validation", () => {
+    const candidate = { ...additionQuestion(), visuals: [validBarModelFixtures[0].visual] };
     const result = candidateQuestionSchema.safeParse(candidate);
-    expect(result.success).toBe(false);
-    expect(JSON.stringify(result.error?.issues)).toContain("render-only");
+    expect(result.success, JSON.stringify(result.error?.issues)).toBe(true);
   });
 });

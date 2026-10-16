@@ -404,7 +404,7 @@ export const hotspotSvgVisualSchema = visualBaseSchema.extend({
 });
 
 /* ------------------------------------------------------------------ *
- * bar_model (Model Method) - Phase 1: schematic, render-only.
+ * bar_model (Model Method) - schematic, independently validated for generation.
  *
  * LAYERING. This schema rejects malformed *shape* only: wrong types,
  * missing fields, bounds, enums, and a blank/unknown element that still
