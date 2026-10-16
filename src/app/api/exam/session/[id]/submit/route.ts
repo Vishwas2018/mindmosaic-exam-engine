@@ -9,6 +9,7 @@ import {
 } from "@/features/exam-engine/scoring/server-scoring-contract";
 import { durationSecondsFor } from "@/features/exam-engine/selection";
 import type { ExamResponses } from "@/features/exam-engine/types";
+import { RATE_LIMITS, rateLimitResponse } from "@/lib/security/rate-limit";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { resolveSittingSource } from "@/server/assessment/read-dispatch";
@@ -54,6 +55,9 @@ export async function POST(
   if (!user) {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
+
+  const limited = rateLimitResponse(RATE_LIMITS.examSubmit, user.id);
+  if (limited) return limited;
 
   const body = await request.json().catch(() => null);
   const parsed = submitSessionRequestSchema.safeParse(body);

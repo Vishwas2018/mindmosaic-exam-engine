@@ -82,7 +82,7 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
        */
       supabase
         .from("profiles")
-        .select("id, display_name, year_level, created_at")
+        .select("id, display_name, year_level, created_at, access_revoked_at")
         .in("id", childIds)
         .order("display_name", { ascending: true })
         .order("created_at", { ascending: true })
@@ -121,6 +121,7 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
         displayName: (child.display_name as string | null) ?? null,
         yearLevel: (child.year_level as number | null) ?? null,
         createdAt: (child.created_at as string | null) ?? "",
+        accessRevokedAt: (child.access_revoked_at as string | null) ?? null,
       },
       attempts: attemptsByChild.get(child.id as string) ?? [],
     }))

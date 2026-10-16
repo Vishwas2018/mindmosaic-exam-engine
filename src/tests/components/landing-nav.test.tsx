@@ -50,13 +50,12 @@ describe("SiteNav (landing)", () => {
    * asserted together with the policy flag it depends on. See
    * signup-policy.test.tsx for the other half.
    */
-  it("points 'Start free' at the sign-up form while public sign-up is open", async () => {
+  it("points 'Start free' at the sign-up form only while public sign-up is open", async () => {
     const { PUBLIC_SIGNUP_ENABLED } = await import("@/features/auth/signup-policy");
-    expect(PUBLIC_SIGNUP_ENABLED).toBe(true);
 
     render(<SiteNav />);
     const cta = screen.getByRole("link", { name: nav.cta.label });
-    expect(cta).toHaveAttribute("href", "/sign-up");
+    expect(cta).toHaveAttribute("href", PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice");
   });
 
   /* The design's active treatment: brand purple plus aria-current. */

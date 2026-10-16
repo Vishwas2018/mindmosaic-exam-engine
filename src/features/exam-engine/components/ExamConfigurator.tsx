@@ -9,6 +9,7 @@ import { useAuth } from "@/features/auth";
 import {
   EXAM_STYLE_OPTIONS,
   QUESTION_COUNT_OPTIONS,
+  SERVE_MANUALLY_MARKED_QUESTIONS,
   SUBJECT_OPTIONS,
   YEAR_LEVEL_OPTIONS,
   durationSecondsFor,
@@ -275,7 +276,7 @@ export function ExamConfigurator({
         durationMinutes={durationMinutes}
         /* Matches the "Mixed subjects include writing tasks marked by a
            person" hint the Subject select already shows. */
-        includesManualMarking={subject === "mixed"}
+        includesManualMarking={SERVE_MANUALLY_MARKED_QUESTIONS && subject === "mixed"}
         onBack={() => {
           setStartError(null);
           setStage("setup");
@@ -371,7 +372,7 @@ export function ExamConfigurator({
             hint={
               lockScope
                 ? "Fixed for this program"
-                : subject === "mixed"
+                : subject === "mixed" && SERVE_MANUALLY_MARKED_QUESTIONS
                   ? "Mixed subjects include writing tasks marked by a person."
                   : undefined
             }
@@ -466,7 +467,9 @@ export function ExamConfigurator({
           className="mx-6 mb-6 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning sm:mx-8"
         >
           {startError ??
-            `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.`}
+            (eligibleCount === 0
+              ? "Questions for this combination are coming soon. Choose a different year, style or subject."
+              : `Only ${eligibleCount} question${eligibleCount === 1 ? "" : "s"} match this combination, which is fewer than the ${requestedCount} requested. Choose a smaller set or broaden your selection.`)}
         </p>
       )}
 

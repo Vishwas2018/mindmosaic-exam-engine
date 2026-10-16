@@ -5,6 +5,7 @@ import { Home } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
+import { ReportProblemLink } from "@/features/support/ReportProblemLink";
 
 /*
  * Every route a parent owns. /billing was the gap: it is a core parent
@@ -120,7 +121,10 @@ export function ParentShell({
         </nav>
       </header>
       <main id="main-content" className="site-width py-10 sm:py-12">
-        <div className="mx-auto max-w-5xl">{children}</div>
+        <div className="mx-auto max-w-5xl">
+          {children}
+          <ReportProblemLink />
+        </div>
       </main>
     </div>
   );

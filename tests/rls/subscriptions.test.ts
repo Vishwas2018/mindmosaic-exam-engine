@@ -25,7 +25,8 @@ const PARENT_E = "00000000-0000-0000-0000-00000000002b";
 let client: Client;
 
 /**
- * Inserts an auth.users row with role: 'parent' in its metadata so
+ * Inserts an auth.users row the way GoTrue creates a parent (service-role
+ * app_metadata role, 20261016090000) so
  * handle_new_user creates a 'parent' profile, which in turn fires the
  * on_parent_profile_created trigger and auto-creates a trialing
  * subscriptions row. Must run as the unrestricted `postgres` role, before
@@ -33,8 +34,8 @@ let client: Client;
  */
 async function insertParent(id: string, email: string): Promise<void> {
   await client.query(
-    `insert into auth.users (id, email, raw_user_meta_data) values ($1, $2, $3::jsonb)`,
-    [id, email, JSON.stringify({ role: "parent" })],
+    `insert into auth.users (id, email, raw_app_meta_data, raw_user_meta_data) values ($1, $2, $3::jsonb, $4::jsonb)`,
+    [id, email, JSON.stringify({ provider: "email", role: "parent" }), JSON.stringify({ role: "parent" })],
   );
 }
 

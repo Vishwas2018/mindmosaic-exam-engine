@@ -4,6 +4,7 @@ import { questionBank } from "@/content/questions/question-bank";
 import {
   MAXIMUM_FULL_EXAM_DURATION_SECONDS,
   MINIMUM_FULL_EXAM_DURATION_SECONDS,
+  SERVE_MANUALLY_MARKED_QUESTIONS,
   createSeededRandom,
   durationSecondsFor,
   filterEligibleQuestions,
@@ -76,13 +77,32 @@ describe("filterEligibleQuestions", () => {
     }
   });
 
-  it("includes every subject, including writing, under mixed", () => {
+  it("includes every subject under mixed, minus questions a person must mark", () => {
     const eligible = filterEligibleQuestions(questionBank, {
       yearLevel: "mixed",
       examStyle: "mixed",
       subject: "mixed",
     });
-    expect(eligible.length).toBe(questionBank.length);
+    const manual = questionBank.filter((question) => question.answerKey.kind === "manual");
+    expect(manual.length).toBeGreaterThan(0);
+    expect(eligible.length).toBe(questionBank.length - manual.length);
+  });
+
+  /*
+   * Beta serving policy (selection/serving-policy.ts): the four essay items
+   * are marked by a person, and a family-only account has no one to mark them,
+   * so their result would read "marks pending review" for ever. They stay in
+   * the bank — only serving skips them.
+   */
+  it("never serves a manually-marked (essay) question while the beta policy is on", () => {
+    expect(SERVE_MANUALLY_MARKED_QUESTIONS).toBe(false);
+    const eligible = filterEligibleQuestions(questionBank, {
+      yearLevel: "mixed",
+      examStyle: "mixed",
+      subject: "mixed",
+    });
+    expect(eligible.some((question) => question.answerKey.kind === "manual")).toBe(false);
+    expect(eligible.some((question) => question.metadata.subject === "writing")).toBe(false);
   });
 
   it("covers every filter combination without errors", () => {

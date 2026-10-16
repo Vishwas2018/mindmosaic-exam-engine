@@ -53,6 +53,8 @@ async function ensureAuthUser(
     password,
     email_confirm: true,
     user_metadata: { display_name: displayName, role: metadataRole },
+    // The role the handle_new_user trigger trusts (service-role-only).
+    app_metadata: { role: metadataRole },
   });
   if (error || !data.user) {
     throw new Error(`Failed to create fixture user ${email}: ${error?.message}`);

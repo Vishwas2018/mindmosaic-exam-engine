@@ -58,6 +58,7 @@
  *     /signup are not routes here (/sign-in and /sign-up are).
  */
 
+import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 import { FAMILY_PLAN } from "@/lib/billing/prices";
 
 /**
@@ -126,7 +127,7 @@ export const routes = {
   terms: "/terms",
   disclaimer: "/assessment-disclaimer",
   /** Account creation — the design's "Start free". */
-  startFree: "/sign-up",
+  startFree: PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice",
   /**
    * Guest practice: free, ungated and genuinely account-free. Kept as its
    * own entry so a future change to what "start free" means can never

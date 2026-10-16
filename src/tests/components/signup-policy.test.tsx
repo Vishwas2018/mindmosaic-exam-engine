@@ -10,9 +10,9 @@ vi.mock("@/lib/supabase/config", () => ({
 import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 
 /**
- * Public sign-up is OPEN on this deployment. This file is what stops the
- * app's half of that from drifting out of step with the half that actually
- * matters.
+ * Public sign-up is CLOSED (invite-only beta) on this deployment. This file
+ * is what stops the app's half of that from drifting out of step with the
+ * half that actually matters.
  *
  * These cases are deliberately NOT a security control and must never be
  * read as one: the anon key ships to every browser, so GoTrue's
@@ -24,8 +24,8 @@ import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
  * an app that claims a door is shut when it is not.
  */
 describe("public sign-up policy", () => {
-  it("is open on this deployment", () => {
-    expect(PUBLIC_SIGNUP_ENABLED).toBe(true);
+  it("is closed on this deployment (invite-only beta)", () => {
+    expect(PUBLIC_SIGNUP_ENABLED).toBe(false);
   });
 
   it("keeps the local Supabase stack in step with the app flag", async () => {
@@ -41,12 +41,13 @@ describe("public sign-up policy", () => {
 });
 
 describe("the marketing surface's account CTAs", () => {
-  it('points "Start free" at the real sign-up form', async () => {
+  it('points "Start free" at the sign-up form only while sign-up is open', async () => {
     const { hero, nav, routes } = await import("@/features/landing/content");
+    const expected = PUBLIC_SIGNUP_ENABLED ? "/sign-up" : "/practice";
 
-    expect(routes.startFree).toBe("/sign-up");
-    expect(nav.cta.href).toBe("/sign-up");
-    expect(hero.primaryCta.href).toBe("/sign-up");
+    expect(routes.startFree).toBe(expected);
+    expect(nav.cta.href).toBe(expected);
+    expect(hero.primaryCta.href).toBe(expected);
   });
 
   /*
@@ -61,5 +62,17 @@ describe("the marketing surface's account CTAs", () => {
     const free = plans.items.find((item) => item.id === "free");
     expect(free?.cta.href).toBe(routes.guestPractice);
     expect(free?.note).toMatch(/no account required/i);
+  });
+});
+
+describe("beta hardening: GoTrue password floor vs student PINs", () => {
+  it("keeps the local GoTrue minimum at or below the 6-digit student PIN length", async () => {
+    const { readFile } = await import("node:fs/promises");
+    const config = await readFile("supabase/config.toml", "utf8");
+    const match = /^minimum_password_length\s*=\s*(\d+)/m.exec(config);
+
+    /* A student's PIN is their GoTrue password. Raising the project minimum
+       above 6 makes provisionChild and PIN resets fail for every child. */
+    expect(Number(match?.[1])).toBeLessThanOrEqual(6);
   });
 });

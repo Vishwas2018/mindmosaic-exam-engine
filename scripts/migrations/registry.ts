@@ -2820,6 +2820,34 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261016090000",
+    name: "signup_role_server_side",
+    checks: [
+      {
+        describes: "handle_new_user no longer reads the role from raw_user_meta_data",
+        sql: `select position('raw_user_meta_data ->> ''role''' in pg_get_functiondef('public.handle_new_user()'::regprocedure)) = 0
+                and position('raw_app_meta_data' in pg_get_functiondef('public.handle_new_user()'::regprocedure)) > 0 as present`,
+      },
+      functionExists("apply_provisioned_role"),
+      {
+        describes: "trigger on_auth_user_role_provisioned on auth.users",
+        sql: `select exists(select 1 from pg_trigger where tgname = 'on_auth_user_role_provisioned' and not tgisinternal) as present`,
+      },
+    ],
+  },
+  {
+    version: "20261016091000",
+    name: "parent_child_erasure_request",
+    checks: [
+      functionExists("parent_request_child_erasure"),
+      {
+        describes: "parent_request_child_erasure is executable by authenticated and not by anon",
+        sql: `select has_function_privilege('authenticated', 'public.parent_request_child_erasure(uuid)', 'execute')
+                and not has_function_privilege('anon', 'public.parent_request_child_erasure(uuid)', 'execute') as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

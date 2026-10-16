@@ -29,8 +29,15 @@
  * and exits non-zero if the live project would refuse the wizard's submit.
  * It is deliberately not a CI gate — it needs live credentials and a real
  * network call. See docs/DEPLOYMENT.md.
+ *
+ * BETA: closed (invite-only). The app flag is false and supabase/config.toml
+ * says `enable_signup = false`. The hosted project's "Allow new users to
+ * sign up" switch is a dashboard step this repo cannot perform; until it is
+ * off, `verify:signup-open` exits 0 against production and a stranger can
+ * still POST to /auth/v1/signup. Families are invited from the dashboard
+ * (Authentication > Users > Invite) or created with the admin API.
  */
-export const PUBLIC_SIGNUP_ENABLED = true;
+export const PUBLIC_SIGNUP_ENABLED = false;
 
 /** Shown wherever a sign-up affordance used to be. */
 export const SIGNUP_CLOSED_MESSAGE =

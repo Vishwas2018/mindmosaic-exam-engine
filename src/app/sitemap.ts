@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 import { isLiveProgram, PROGRAMS } from "@/features/catalogue/catalogue";
 import { STARTABLE_EXAM_PATTERNS } from "@/features/exam-engine/exam-patterns";
 import { siteOrigin } from "@/lib/site-url";
@@ -22,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/pricing`, priority: 0.6 },
     { url: `${BASE_URL}/resources`, priority: 0.6 },
     { url: `${BASE_URL}/sign-in`, priority: 0.3 },
-    { url: `${BASE_URL}/sign-up`, priority: 0.3 },
+    ...(PUBLIC_SIGNUP_ENABLED ? [{ url: `${BASE_URL}/sign-up`, priority: 0.3 }] : []),
     { url: `${BASE_URL}/student-sign-in`, priority: 0.3 },
     { url: `${BASE_URL}/billing`, priority: 0.5 },
     { url: `${BASE_URL}/about`, priority: 0.4 },

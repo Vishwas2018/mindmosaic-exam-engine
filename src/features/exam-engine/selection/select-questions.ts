@@ -1,6 +1,7 @@
 import type { Question } from "@/schemas/question.schema";
 
 import { seededShuffle } from "./seeded-random";
+import { SERVE_MANUALLY_MARKED_QUESTIONS } from "./serving-policy";
 import type { ExamSelectionConfig, SubjectFilter } from "./selection-config";
 
 const SUBJECTS_BY_FILTER: Record<SubjectFilter, readonly string[]> = {
@@ -48,7 +49,8 @@ export function filterEligibleQuestions(
     (question) =>
       (config.yearLevel === "mixed" || question.yearLevel === config.yearLevel) &&
       (config.examStyle === "mixed" || question.examStyle === config.examStyle) &&
-      subjects.includes(question.metadata.subject),
+      subjects.includes(question.metadata.subject) &&
+      (SERVE_MANUALLY_MARKED_QUESTIONS || question.answerKey.kind !== "manual"),
   );
 }
 

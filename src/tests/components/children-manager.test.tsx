@@ -98,4 +98,69 @@ describe("ChildrenManager", () => {
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/could not update this child/i);
   });
+
+  it("deletes a child's data only after confirmation, through POST .../erase", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const user = userEvent.setup();
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+
+    await user.click(screen.getAllByRole("button", { name: /delete my child/i })[0]);
+    /* Opening the dialog must not delete anything. */
+    expect(fetchMock).not.toHaveBeenCalled();
+
+    await user.click(screen.getByRole("button", { name: "Yes, delete everything" }));
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/parent/children/child-1/erase");
+    expect(fetchMock.mock.calls[0][1]).toMatchObject({ method: "POST" });
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toEqual({ confirm: true });
+    expect(await screen.findByText("Deletion scheduled")).toBeInTheDocument();
+  });
+
+  it("does nothing if the parent cancels the deletion dialog", async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    const user = userEvent.setup();
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+
+    await user.click(screen.getAllByRole("button", { name: /delete my child/i })[0]);
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.queryByText("Deletion scheduled")).not.toBeInTheDocument();
+  });
+
+  it("shows a scheduled child as locked, with no edit or delete actions", () => {
+    render(
+      <ChildrenManager
+        availableYearLevels={[3, 5]}
+        initialChildren={[{ ...CHILDREN[0], erasureScheduled: true }]}
+      />,
+    );
+
+    expect(screen.getByText("Deletion scheduled")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /delete my child/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /edit/i })).not.toBeInTheDocument();
+  });
+
+  it("keeps the error visible when scheduling deletion fails", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ ok: false, message: "Could not schedule deletion." }), { status: 500 }),
+      ),
+    );
+
+    const user = userEvent.setup();
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+
+    await user.click(screen.getAllByRole("button", { name: /delete my child/i })[0]);
+    await user.click(screen.getByRole("button", { name: "Yes, delete everything" }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(/could not schedule deletion/i);
+    expect(screen.queryByText("Deletion scheduled")).not.toBeInTheDocument();
+  });
 });

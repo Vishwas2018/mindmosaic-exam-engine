@@ -108,4 +108,12 @@ describe("StudentShell", () => {
       screen.getByRole("main").querySelector("p"),
     ).toHaveTextContent("student content");
   });
+
+  it("offers a Report a problem link for beta testers", () => {
+    renderShell("home");
+    expect(screen.getByRole("link", { name: /report a problem/i })).toHaveAttribute(
+      "href",
+      expect.stringMatching(/^mailto:hello@mindmosaic\.app/),
+    );
+  });
 });

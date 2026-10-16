@@ -6,6 +6,7 @@ import { yearLevelSchema } from "@/schemas/question.schema";
 import { checkOrigin } from "@/features/auth/require-origin";
 import { isValidPin } from "@/features/auth/student-alias";
 import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
+import { RATE_LIMITS, rateLimitResponse } from "@/lib/security/rate-limit";
 import { SUPABASE_URL } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -47,6 +48,9 @@ async function requireLinkedChild(childId: string) {
   if (!user) {
     return { ok: false as const, response: NextResponse.json({ ok: false, message: "Sign in as a parent." }, { status: 401 }) };
   }
+
+  const limited = rateLimitResponse(RATE_LIMITS.childMutate, user.id);
+  if (limited) return { ok: false as const, response: limited };
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
   if (profile?.role !== "parent") {

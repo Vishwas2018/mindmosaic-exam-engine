@@ -273,9 +273,12 @@ function derivedNumbers(summary: ScoredSessionSummary) {
   };
 }
 
+let scoringUrlBefore: string | undefined;
+
 beforeAll(() => {
   /* The module reads this at call time and refuses to fall back to any other
      credential, which is the §9.3.1 property being relied on here. */
+  scoringUrlBefore = process.env.SCORING_DB_URL;
   process.env.SCORING_DB_URL = scoringDbUrl();
 });
 
@@ -291,7 +294,12 @@ afterEach(async () => {
 });
 
 afterAll(() => {
-  delete process.env.SCORING_DB_URL;
+  /* Restore, do not delete: `isolate: false` (vitest.rls.config.ts) shares one
+     process across files, and later files read this variable. Deleting it sent
+     them to the hard-coded default port, so the suite only passed against a
+     stack on exactly that port. */
+  if (scoringUrlBefore === undefined) delete process.env.SCORING_DB_URL;
+  else process.env.SCORING_DB_URL = scoringUrlBefore;
 });
 
 describe("scoring a version-pinned sitting", () => {

@@ -5,6 +5,7 @@ import { yearLevelSchema } from "@/schemas/question.schema";
 import { provisionChild } from "@/features/auth/provision-child";
 import { checkOrigin } from "@/features/auth/require-origin";
 import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
+import { RATE_LIMITS, clientAddress, rateLimitResponse } from "@/lib/security/rate-limit";
 
 /**
  * Route Handler wrapper around provisionChild (../../../../features/auth/provision-child.ts).
@@ -29,6 +30,12 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!originCheck.ok) {
     return originCheck.response;
   }
+
+  /* Each accepted call mints an auth user with the service-role key, so
+     throttle before doing any work. Keyed by address: the signed-in parent is
+     resolved inside provisionChild, which also enforces the per-family cap. */
+  const limited = rateLimitResponse(RATE_LIMITS.childMutate, clientAddress(request));
+  if (limited) return limited;
 
   const body = await request.json().catch(() => null);
   const parsed = requestSchema.safeParse(body);
