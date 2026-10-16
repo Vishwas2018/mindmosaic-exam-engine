@@ -39,7 +39,7 @@ function servedBank(): readonly AuthoringQuestion[] {
   // Integrity failures must never be treated as successful publication.
   if (report.problems.length) return Object.freeze([]);
   // A registered foundation can receive draft content without enabling delivery.
-  const deliverable = publishedExamBank.filter((question) => isStudentDeliveryStyle(question.examStyle));
+  const deliverable = publishedExamBank.filter((question) => isStudentDeliveryStyle(question.examStyle) && question.metadata.subject !== "singapore_mathematics");
   const authored = deliverable.length === publishedExamBank.length ? publishedExamBank : deliverable;
   const served = selectServedQuestions(
     authored, new Set(report.approvals.keys()),

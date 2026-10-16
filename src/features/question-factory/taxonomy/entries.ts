@@ -16,7 +16,6 @@ import type { TaxonomyEntry } from "./types";
 import { SINGAPORE_FOUNDATION_SKILLS } from "./singapore-foundation";
 
 export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
-  ...SINGAPORE_FOUNDATION_SKILLS,
   {
     id: "lang.prod.grammar.active-and-passive-voice",
     displayName: "Active and passive voice",
@@ -5115,4 +5114,5 @@ export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     ],
     generationConstraints: [],
   },
+  ...SINGAPORE_FOUNDATION_SKILLS,
 ];

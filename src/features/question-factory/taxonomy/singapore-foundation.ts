@@ -1,4 +1,4 @@
-import { SINGAPORE_FOUNDATION_YEAR_LEVELS } from "@/features/taxonomy/year-registry";
+import { yearLevelsForStyle } from "@/features/taxonomy/year-registry";
 import type { TaxonomyEntry } from "./types";
 
 // Internal foundation skills, not claims of official curriculum alignment.
@@ -9,7 +9,7 @@ export const SINGAPORE_FOUNDATION_SKILLS: readonly TaxonomyEntry[] = [
 ].map((skill): TaxonomyEntry => ({
   ...skill,
   aliases: [],
-  yearLevels: SINGAPORE_FOUNDATION_YEAR_LEVELS,
+  yearLevels: yearLevelsForStyle("singapore_style"),
   examStyles: ["singapore_style"],
   subject: "singapore_mathematics",
   prerequisites: [],

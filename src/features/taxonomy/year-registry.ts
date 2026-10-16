@@ -21,9 +21,6 @@ export const YEAR_LEVELS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const;
 
 export type YearLevelValue = (typeof YEAR_LEVELS)[number];
 
-/** Internal foundation scope, matching the existing coming-soon programme. */
-export const SINGAPORE_FOUNDATION_YEAR_LEVELS = [3, 4, 5, 6] as const;
-
 /** Valid authoring vocabulary does not grant student delivery or navigation. */
 export const AUTHORING_ONLY_EXAM_STYLES: readonly ExamStyle[] = ["singapore_style"];
 export function isStudentDeliveryStyle(style: ExamStyle): boolean {
@@ -52,7 +49,7 @@ export const EXAM_STYLE_YEAR_LEVELS: Readonly<Record<ExamStyle, readonly YearLev
   /* AMC papers run from Middle Primary (Year 3) to Senior (Year 12). */
   amc_style: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   // Authoring scope only; this is not an official paper or a live offering.
-  singapore_style: SINGAPORE_FOUNDATION_YEAR_LEVELS,
+  singapore_style: [3, 4, 5, 6],
 };
 
 export function isKnownYearLevel(value: unknown): value is YearLevel {

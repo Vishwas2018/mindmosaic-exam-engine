@@ -1,0 +1,30 @@
+{
+  "id": "singapore-y3-part-whole-foundation-seed-001",
+  "batchId": "singapore-foundation-future-authoring",
+  "yearLevel": "year-3",
+  "examStyle": "singapore_style",
+  "subject": "singapore_mathematics",
+  "strand": "Part-whole models",
+  "skill": "sg.math.part-whole",
+  "difficulty": "easy",
+  "questionType": "number_entry",
+  "visualType": "bar_model",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Represent a part-whole relationship using a bar model.",
+  "misconceptionTargets": [
+    "Confusing a part with the whole"
+  ],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [
+    "Provide a neutral description without revealing the target answer."
+  ],
+  "originalityConstraints": [
+    "Use an original context; never copy official or commercial questions."
+  ],
+  "generationConstraints": [
+    "Authoring scaffold only; do not generate, approve or publish as part of foundation registration.",
+    "Use a declarative bar model with one target and independently verify the numeric key."
+  ]
+}

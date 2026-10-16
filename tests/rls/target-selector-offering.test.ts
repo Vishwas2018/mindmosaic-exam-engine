@@ -123,7 +123,7 @@ describe("the canonical subject mapping — every isolable filter selects a non-
     amc_mathematics: { year: 5, style: "amc_style" },
   };
 
-  it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER))(
+  it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER).filter(([, subject]) => subject !== "singapore_mathematics"))(
     "filter '%s' -> bank subject '%s'",
     async (filter, bankSubject) => {
       const offering = OFFERINGS[filter]!;

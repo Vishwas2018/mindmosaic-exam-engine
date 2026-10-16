@@ -11,7 +11,7 @@ it("withholds foundation content even if it reaches the published source and has
   const existing = questionBank[0];
   const foundation = { ...existing, id: "foundation-routing-test-only", examStyle: "singapore_style" as const,
     metadata: { ...existing.metadata, subject: "singapore_mathematics" as const } };
-  vi.doMock("@/content/questions/practice-bank", () => ({ publishedExamBank: [existing, foundation] }));
+  vi.doMock("@/content/questions/practice-bank", () => ({ publishedExamBank: [existing, foundation, { ...foundation, id: "foundation-mismatched-style-test-only", examStyle: existing.examStyle }] }));
   vi.doMock("@/server/publication-evidence", () => ({
     getPublicationEligibility: () => ({ problems: [], approvals: new Map([[foundation.id, {}]]) }),
   }));

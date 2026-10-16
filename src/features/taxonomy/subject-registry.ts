@@ -18,7 +18,7 @@
  */
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
-import { isValidStyleYear, SINGAPORE_FOUNDATION_YEAR_LEVELS, YEAR_LEVELS } from "./year-registry";
+import { yearLevelsForStyle, isValidStyleYear, YEAR_LEVELS } from "./year-registry";
 
 export interface SubjectStrand {
   readonly id: string;
@@ -1510,7 +1510,7 @@ export const SUBJECT_REGISTRY = [
     id: "singapore_mathematics",
     label: "Singapore Maths",
     supportedExamStyles: ["singapore_style"],
-    yearLevels: SINGAPORE_FOUNDATION_YEAR_LEVELS,
+    yearLevels: yearLevelsForStyle("singapore_style"),
     strands: [
       { id: "part-whole-models", label: "Part-whole models", examStyles: ["singapore_style"], skills: ["Model a part and a whole"] },
       { id: "comparison-models", label: "Comparison models", examStyles: ["singapore_style"], skills: ["Model an additive comparison"] },

@@ -19,7 +19,7 @@ export const singaporeFoundationContractSchema = z.object({
     visualType: z.literal("bar_model"),
   }).strict(),
   skills: z.tuple([z.literal("sg.math.part-whole"), z.literal("sg.math.comparison"), z.literal("sg.math.equal-units")]),
-  blueprintId: z.literal("singapore-y3-part-whole-foundation-001"),
+  blueprintId: z.literal("singapore-y3-part-whole-foundation-seed-001"),
 }).strict();
 
 export const SINGAPORE_FOUNDATION_CONTRACT = singaporeFoundationContractSchema.parse({
@@ -36,5 +36,5 @@ export const SINGAPORE_FOUNDATION_CONTRACT = singaporeFoundationContractSchema.p
     questionTypes: ["number_entry", "multiple_choice"], visualType: "bar_model",
   },
   skills: ["sg.math.part-whole", "sg.math.comparison", "sg.math.equal-units"],
-  blueprintId: "singapore-y3-part-whole-foundation-001",
+  blueprintId: "singapore-y3-part-whole-foundation-seed-001",
 });
