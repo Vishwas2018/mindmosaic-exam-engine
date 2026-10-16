@@ -369,17 +369,17 @@ export async function validateScholarshipDrafts(): Promise<{
     }
   }
 
-  if (solverFailures.length > 0) {
-    const lines = solverFailures.map((failure) => ` - ${failure}`);
-    throw new Error([`${solverFailures.length} draft item(s) failed solver verification:`, ...lines].join("\n"));
-  }
-
   // 7. Compound word allowlist check
   await verifyCompoundWordItems(allStems);
 
   // 8. Check near-duplicate stems across all draft folders (roadmap and scholarship)
   const allDraftEntries = await loadAllDraftQuestions(allStems);
   checkDuplicateStems(allDraftEntries);
+
+  if (solverFailures.length > 0) {
+    const lines = solverFailures.map((failure) => ` - ${failure}`);
+    throw new Error([`${solverFailures.length} draft item(s) failed solver verification:`, ...lines].join("\n"));
+  }
 
   return {
     totalQuestions,
