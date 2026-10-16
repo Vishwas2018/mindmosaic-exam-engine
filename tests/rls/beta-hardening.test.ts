@@ -111,6 +111,76 @@ describe("handle_new_user — sign-up can only ever be a parent", () => {
   });
 });
 
+describe("apply_provisioned_role — GoTrue sets app_metadata after the insert", () => {
+  const GOTRUE = { provider: "email", providers: ["email"] };
+
+  async function setAppRole(id: string, role: string): Promise<void> {
+    await asOwner();
+    await client.query(
+      `update auth.users set raw_app_meta_data = raw_app_meta_data || jsonb_build_object('role', $2::text) where id = $1`,
+      [id, role],
+    );
+  }
+
+  async function subscriptions(id: string): Promise<number> {
+    const r = await client.query<{ n: string }>(`select count(*)::text as n from public.subscriptions where parent_id = $1`, [id]);
+    return Number(r.rows[0]!.n);
+  }
+
+  it("moves a GoTrue-created user to student when the service role then sets app_metadata.role, and drops the spurious trial", async () => {
+    /* Step 1, as GoTrue does it: the row arrives with provider only. */
+    expect(await insertAuthUser({ id: NEW_USER, appMeta: GOTRUE, userMeta: { role: "student" } })).toBe("parent");
+    expect(await subscriptions(NEW_USER)).toBe(1);
+
+    /* Step 2: the role is merged in by an UPDATE. */
+    await setAppRole(NEW_USER, "student");
+
+    const role = await client.query<{ role: string }>(`select role from public.profiles where id = $1`, [NEW_USER]);
+    expect(role.rows[0]?.role).toBe("student");
+    expect(await subscriptions(NEW_USER)).toBe(0);
+  });
+
+  it("keeps a trial that has touched Stripe", async () => {
+    await insertAuthUser({ id: NEW_USER, appMeta: GOTRUE });
+    await client.query(`update public.subscriptions set stripe_customer_id = 'cus_x' where parent_id = $1`, [NEW_USER]);
+    await setAppRole(NEW_USER, "student");
+    expect(await subscriptions(NEW_USER)).toBe(1);
+  });
+
+  it("never demotes a parent who already has linked children", async () => {
+    await setAppRole(PARENT_C, "student");
+    const role = await client.query<{ role: string }>(`select role from public.profiles where id = $1`, [PARENT_C]);
+    expect(role.rows[0]?.role).toBe("parent");
+  });
+
+  it("never touches a teacher or an existing student", async () => {
+    await setAppRole(TEACHER_D, "student");
+    await setAppRole(STUDENT_B, "student");
+    const rows = await client.query<{ id: string; role: string }>(
+      `select id, role from public.profiles where id = any($1::uuid[])`,
+      [[TEACHER_D, STUDENT_B]],
+    );
+    const byId = Object.fromEntries(rows.rows.map((r) => [r.id, r.role]));
+    expect(byId[TEACHER_D]).toBe("teacher");
+    expect(byId[STUDENT_B]).toBe("student");
+  });
+
+  it("a later update that does not change the role is a no-op", async () => {
+    await insertAuthUser({ id: NEW_USER, appMeta: GOTRUE });
+    await asOwner();
+    await client.query(`update auth.users set raw_app_meta_data = raw_app_meta_data || '{"x":1}'::jsonb where id = $1`, [NEW_USER]);
+    const role = await client.query<{ role: string }>(`select role from public.profiles where id = $1`, [NEW_USER]);
+    expect(role.rows[0]?.role).toBe("parent");
+  });
+
+  it("is not callable by a signed-in user", async () => {
+    await asAuthenticated(client, PARENT_C);
+    await expect(client.query(`select public.apply_provisioned_role()`)).rejects.toMatchObject({
+      message: expect.stringMatching(/permission denied/i),
+    });
+  });
+});
+
 describe("parent_request_child_erasure", () => {
   async function erase(actor: string, child: string): Promise<Record<string, unknown>> {
     await asAuthenticated(client, actor);

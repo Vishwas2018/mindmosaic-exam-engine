@@ -2829,6 +2829,11 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         sql: `select position('raw_user_meta_data ->> ''role''' in pg_get_functiondef('public.handle_new_user()'::regprocedure)) = 0
                 and position('raw_app_meta_data' in pg_get_functiondef('public.handle_new_user()'::regprocedure)) > 0 as present`,
       },
+      functionExists("apply_provisioned_role"),
+      {
+        describes: "trigger on_auth_user_role_provisioned on auth.users",
+        sql: `select exists(select 1 from pg_trigger where tgname = 'on_auth_user_role_provisioned' and not tgisinternal) as present`,
+      },
     ],
   },
   {
