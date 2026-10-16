@@ -24,6 +24,7 @@ import {
   type Question,
   type QuestionType,
 } from "../src/schemas/question.schema";
+import { validateBarModelVisual } from "../src/features/visuals/bar-model/pipeline";
 import { VISUAL_TYPES, visualSchema, type VisualType } from "../src/schemas/visual.schema";
 
 const failures: string[] = [];
@@ -98,7 +99,7 @@ const VISUAL_MINIMUMS: Record<VisualType, number> = {
   fraction_model: 4,
   labelled_svg: 5,
   hotspot_svg: 5,
-  // Phase 1: render-only; no question uses it and the bank has no minimum.
+  // Generation-ready, but no production content is authored or required yet.
   bar_model: 0,
 };
 
@@ -244,6 +245,10 @@ for (const question of questionBank) {
   for (const visual of question.visuals) {
     if (visual.altText.trim().length < 10) {
       fail(`${label} visual '${visual.id}' is missing meaningful alt text.`);
+    }
+    if (visual.type === "bar_model") {
+      const barModelResult = validateBarModelVisual(visual);
+      if (!barModelResult.ok) fail(`${label} bar_model '${visual.id}' failed: ${barModelResult.errorCodes.join(", ")}.`);
     }
     const visualResult = visualSchema.safeParse(visual);
     if (!visualResult.success) {

@@ -10,6 +10,7 @@ const BANK_SUBJECT_TO_FILTER: Partial<Record<string, SubjectFilter>> = {
   science: "science",
   digital_technologies: "digital_technologies",
   spelling: "spelling",
+  singapore_mathematics: "singapore_mathematics",
 };
 
 export interface SkillSummary {

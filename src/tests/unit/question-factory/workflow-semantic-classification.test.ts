@@ -91,7 +91,7 @@ describe("classifySemanticCategory (PD-2)", () => {
  */
 describe("classifySemanticCategory / isSemanticCategory — DETERMINISTIC_MATHS_SUBJECTS fail-closed routing", () => {
   it("DETERMINISTIC_MATHS_SUBJECTS contains exactly the maths subjects the taxonomy actually defines today ('numeracy' and 'amc_mathematics' — grepped from SUBJECT_REGISTRY, not guessed)", () => {
-    expect([...DETERMINISTIC_MATHS_SUBJECTS]).toEqual(["numeracy", "amc_mathematics"]);
+    expect([...DETERMINISTIC_MATHS_SUBJECTS]).toEqual(["numeracy", "amc_mathematics", "singapore_mathematics"]);
   });
 
   it.each([...DETERMINISTIC_MATHS_SUBJECTS])("routes every maths subject ('%s') to deterministically_computable, never semantic_objective", (subject) => {

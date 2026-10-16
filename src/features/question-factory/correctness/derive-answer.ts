@@ -9,6 +9,7 @@
  * terminal `cannot_derive`/`ambiguous` outcome rather than falling through
  * to a guess.
  */
+import { deriveBarModelAnswer } from "@/features/visuals/bar-model/answer";
 import type { Question } from "@/schemas/question.schema";
 import type { VisualAsset } from "@/schemas/visual.schema";
 
@@ -864,6 +865,7 @@ function attemptSolver(question: Question): DerivationOutcome {
 /* ---------------------------------------------------------------------- */
 
 const DERIVATION_METHODS: readonly ((question: Question, workingSteps?: DeclaredWorkingSolution) => DerivationOutcome)[] = [
+  deriveBarModelAnswer,
   attemptSolver,
   attemptArithmetic,
   attemptMoney,

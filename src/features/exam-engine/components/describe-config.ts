@@ -33,6 +33,7 @@ export const STYLE_LABELS: Record<ExamStyleFilter, string> = {
   naplan_style: "NAPLAN-style practice",
   icas_style: "ICAS-style practice",
   amc_style: "AMC-style practice",
+  singapore_style: "Singapore Maths foundation",
   mixed: "Mixed styles",
 };
 
@@ -44,6 +45,7 @@ export const SUBJECT_LABELS: Record<SubjectFilter, string> = {
   digital_technologies: "Digital Technologies",
   spelling: "Spelling",
   amc_mathematics: "AMC Mathematics",
+  singapore_mathematics: "Singapore Maths",
   mixed: "Mixed subjects",
 };
 

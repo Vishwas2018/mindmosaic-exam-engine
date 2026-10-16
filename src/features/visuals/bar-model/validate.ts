@@ -11,8 +11,8 @@
  *      consistent, feasible, have a uniquely determined target, and must not
  *      disclose that target in descriptive text.
  *
- * Zod alone does not prove a model is solvable, and nothing here is
- * imported by a learner-facing path in Phase 1.
+ * Zod alone does not prove a model is solvable. The bank validator and
+ * question-factory correctness gate run these layers before accepting a model.
  */
 import type { BarModelData } from "@/schemas/visual.schema";
 import {

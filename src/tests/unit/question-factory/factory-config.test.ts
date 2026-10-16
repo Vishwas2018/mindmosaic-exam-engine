@@ -31,15 +31,8 @@ describe("factoryConfig", () => {
 
   it("exposes the same allowed question/visual types as the renderer registries (single source of truth)", () => {
     expect(factoryConfig.allowedQuestionTypes).toEqual([...questionRendererRegistry.supportedTypes]);
-    /*
-     * bar_model is registered for rendering but excluded from factory
-     * generation: Phase 1: render-only; generation is enabled in a later
-     * phase. Every OTHER registered visual type must still be allowed.
-     */
-    expect(factoryConfig.allowedVisualTypes).toEqual(
-      visualRendererRegistry.supportedTypes.filter((type) => type !== "bar_model"),
-    );
-    expect(factoryConfig.allowedVisualTypes).not.toContain("bar_model");
+    expect(factoryConfig.allowedVisualTypes).toEqual([...visualRendererRegistry.supportedTypes]);
+    expect(factoryConfig.allowedVisualTypes).toContain("bar_model");
   });
 
   it("resolves the workspace root under content/question-factory", () => {

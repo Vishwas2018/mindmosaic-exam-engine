@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
+import { EXAM_STYLES, type ExamStyle, type YearLevel } from "@/schemas/question.schema";
 import {
   filterEligibleQuestions,
   ISOLABLE_SUBJECT_FILTERS,
@@ -10,7 +10,7 @@ import {
 import { getExamBank } from "@/server/exam-bank";
 
 import { isSubjectSatIn } from "./subject-registry";
-import { isValidStyleYear, YEAR_LEVELS } from "./year-registry";
+import { isStudentDeliveryStyle, isValidStyleYear, YEAR_LEVELS } from "./year-registry";
 
 /**
  * Which (year, style, subject) cells we actually have gated content for.
@@ -89,7 +89,7 @@ function buildCoverage(): Map<string, CoverageCell> {
   const cells = new Map<string, CoverageCell>();
 
   for (const yearLevel of YEAR_LEVELS) {
-    for (const examStyle of ["naplan_style", "icas_style", "amc_style"] as const) {
+    for (const examStyle of EXAM_STYLES) {
       if (!isValidStyleYear(examStyle, yearLevel)) continue;
       for (const subject of COVERAGE_SUBJECTS) {
         /* A real (style, year) pair is not a real sitting for every
@@ -112,7 +112,7 @@ function buildCoverage(): Map<string, CoverageCell> {
           examStyle,
           subject,
           gatedCount,
-          ready: gatedCount >= GATED_COVERAGE_THRESHOLD,
+          ready: isStudentDeliveryStyle(examStyle) && gatedCount >= GATED_COVERAGE_THRESHOLD,
         });
       }
     }

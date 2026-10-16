@@ -25,7 +25,7 @@ describe("subject registry", () => {
    * and ordered on purpose — this test is the gate that makes adding a subject
    * a deliberate act rather than a side effect.
    */
-  it("covers exactly the nine registered subjects, each with at least one strand", () => {
+  it("covers exactly the ten registered subjects, each with at least one strand", () => {
     expect(SUBJECT_IDS).toEqual([
       "numeracy",
       "reading",
@@ -36,6 +36,7 @@ describe("subject registry", () => {
       "spelling",
       "critical_creative_thinking",
       "amc_mathematics",
+      "singapore_mathematics",
     ]);
     for (const subject of SUBJECT_REGISTRY) {
       expect(subject.strands.length).toBeGreaterThan(0);

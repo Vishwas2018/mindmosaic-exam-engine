@@ -1,3 +1,5 @@
+import { validateBarModelVisual } from "@/features/visuals/bar-model/pipeline";
+import { isDeterministicMathsSubject } from "@/features/taxonomy/subject-registry";
 import { questionSchema, type Question } from "@/schemas/question.schema";
 
 import type { CandidateQuestion } from "../ingestion/candidate-question";
@@ -71,7 +73,23 @@ export type ProductionSchemaCheckOutcome =
 export function checkAgainstProductionSchema(candidate: CandidateQuestion): ProductionSchemaCheckOutcome {
   const synthetic = buildSyntheticProductionQuestion(candidate);
   const result = questionSchema.safeParse(synthetic);
-  if (result.success) return { ok: true, question: result.data };
+  if (result.success) {
+    const question = result.data;
+    const barModels = question.visuals.flatMap((visual, index) => visual.type === "bar_model" ? [{ visual, index }] : []);
+    const issues: StructuralValidationIssue[] = [];
+    for (const { visual, index } of barModels) {
+      const validation = validateBarModelVisual(visual);
+      for (const entry of validation.issues.filter((entry) => entry.severity === "error")) {
+        issues.push(issue("invalid_visuals", `question.visuals.${index}.${entry.path.join(".")}`, `bar_model ${entry.code}: ${entry.message}`));
+      }
+    }
+    if (barModels.length > 1) issues.push(issue("invalid_visuals", "question.visuals", "Exactly one bar_model target visual is supported."));
+    if (barModels.length > 0 && (
+      !isDeterministicMathsSubject(question.metadata.subject) ||
+      (question.answerKey.kind !== "number" && question.answerKey.kind !== "single_option")
+    )) issues.push(issue("invalid_visuals", "question.visuals", "bar_model requires a deterministic maths subject and a numeric or single-option answer key."));
+    return issues.length > 0 ? { ok: false, issues } : { ok: true, question };
+  }
 
   const issues = result.error.issues.map((zodIssue) =>
     issue(

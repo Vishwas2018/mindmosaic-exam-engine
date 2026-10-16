@@ -13,7 +13,7 @@
  * minimum runtime).
  */
 
-import { CORRECTNESS_LIMITS } from "../config";
+import { CORRECTNESS_LIMITS } from "../config/correctness-limits";
 
 export type NumericDerivationErrorCode =
   | "numeric_overflow"

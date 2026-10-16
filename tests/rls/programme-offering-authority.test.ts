@@ -172,7 +172,7 @@ describe("create_assessment_session routes through programme_offerings -- no inl
     amc_mathematics: { year: 5, style: "amc_style" },
   };
 
-  it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER))(
+  it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER).filter(([, subject]) => subject !== "singapore_mathematics"))(
     "every valid offering still selects a non-empty paper: filter '%s' -> bank subject '%s'",
     async (filter, bankSubject) => {
       const offering = OFFERINGS[filter]!;
@@ -187,6 +187,18 @@ describe("create_assessment_session routes through programme_offerings -- no inl
       expect(body.itemCount).toBe(1);
     },
   );
+
+  it("keeps the Singapore authoring foundation out of database offerings and refuses allocation", async () => {
+    const offerings = await client.query(
+      "select 1 from public.programme_offerings where programme_id = 'singapore_primary_mathematics'",
+    );
+    expect(offerings.rows).toEqual([]);
+    await asAuthenticated(client, STUDENT_A);
+    await expect(createSession(client,
+      { yearLevel: 3, examStyle: "singapore_style", subject: "singapore_mathematics", questionCount: 1, timing: "timed" },
+      "idem-singapore-foundation-disabled",
+    )).rejects.toMatchObject({ code: "MM212" });
+  });
 
   it("rejects NAPLAN Year 4 with MM229 (invalid style/year pair, no offering row at any subject)", async () => {
     await asAuthenticated(client, STUDENT_A);

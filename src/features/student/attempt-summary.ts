@@ -73,6 +73,7 @@ const CONFIG_SUBJECT_LABELS: Record<SubjectFilter, string> = {
   digital_technologies: "Digital Technologies",
   spelling: "Spelling",
   amc_mathematics: "AMC Mathematics",
+  singapore_mathematics: "Singapore Maths",
   mixed: "Mixed subjects",
 };
 
@@ -84,6 +85,7 @@ const BANK_SUBJECT_LABELS: Record<string, string> = {
   language_conventions: "Language conventions",
   science: "Science",
   amc_mathematics: "AMC Mathematics",
+  singapore_mathematics: "Singapore Maths",
   /* Named explicitly: the generic fallback below would title-case only the
      first word, giving "Digital technologies". */
   digital_technologies: "Digital Technologies",

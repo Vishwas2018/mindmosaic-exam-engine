@@ -4,7 +4,7 @@
  * ("is 2/4 the same as 1/2?"), comparison, and independent ordering of a
  * set of fraction/decimal option or matching-column texts.
  */
-import { CORRECTNESS_LIMITS } from "../config";
+import { CORRECTNESS_LIMITS } from "../config/correctness-limits";
 import {
   compareFractions,
   type Fraction,
