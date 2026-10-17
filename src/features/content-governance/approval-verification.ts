@@ -1,7 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
-import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
 import type { Question } from "@/schemas/question.schema";
 import type { WritingTask } from "@/features/writing/task";
 import {

@@ -30,7 +30,7 @@ import { readdirSync, readFileSync, statSync, type Dirent } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
 import { programmeIdForQuestion, publicationGateMode } from "@/features/content-governance/gate-config";
 import { canonicalQuestionHash } from "@/features/content-governance/publication-integrity";
 import { normaliseIdentity } from "@/features/question-factory/config/identity-normalisation";

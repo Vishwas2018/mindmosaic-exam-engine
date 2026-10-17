@@ -8,6 +8,8 @@ export interface AssembledPublishedBank {
   readonly questions: readonly Question[];
   /** Non-fatal: a warning means one manifest was skipped, never that the whole assembly failed. */
   readonly warnings: readonly string[];
+  /** Manifests left untouched because an explicit `onlySubject` scope excluded them. Never served by this assembly. */
+  readonly outOfScope: number;
 }
 
 /**
@@ -26,7 +28,17 @@ export interface AssembledPublishedBank {
  * `published-manifests` compartment. Callers decide how (and whether) to
  * merge the result into a served bank.
  */
-export async function assemblePublishedQuestions(repository: FactoryRepository, approvals: readonly unknown[] = []): Promise<AssembledPublishedBank> {
+export async function assemblePublishedQuestions(
+  repository: FactoryRepository,
+  approvals: readonly unknown[] = [],
+  /**
+   * Programme-scoped assembly: only manifests whose embedded question has this subject are
+   * assembled, and every one of them is held to the full strict checks (any failure is a
+   * warning and the caller refuses). Manifests of other subjects are not read as published here.
+   */
+  options: { readonly onlySubject?: string } = {},
+): Promise<AssembledPublishedBank> {
+  let outOfScope = 0;
   const candidateIds = [...(await repository.list("published-manifests"))].sort();
   const questions: Question[] = [];
   const warnings: string[] = [];
@@ -39,6 +51,11 @@ export async function assemblePublishedQuestions(repository: FactoryRepository, 
       continue;
     }
     const manifest = raw as PublicationManifest;
+    if (options.onlySubject !== undefined &&
+        (manifest.question as { metadata?: { subject?: unknown } } | undefined)?.metadata?.subject !== options.onlySubject) {
+      outOfScope += 1;
+      continue;
+    }
     const parsed = questionSchema.safeParse(manifest.question);
     if (!parsed.success) {
       warnings.push(
@@ -75,5 +92,5 @@ export async function assemblePublishedQuestions(repository: FactoryRepository, 
     questions.push(parsed.data);
   }
 
-  return { questions: Object.freeze(questions), warnings };
+  return { questions: Object.freeze(questions), warnings, outOfScope };
 }

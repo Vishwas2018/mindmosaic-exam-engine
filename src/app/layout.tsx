@@ -101,7 +101,7 @@ export default function RootLayout({
         </a>
         {isLocalReviewPreviewEnabled() ? (
           <div role="status" style={{ background: "#7c2d12", color: "#fff", padding: "6px 12px", fontSize: 14, textAlign: "center" }}>
-            LOCAL REVIEW PREVIEW. Includes questions awaiting human approval. Not for children. Never deployed.
+            LOCAL REVIEW PREVIEW. Includes questions awaiting human approval; scholarship papers here are partial reviews, not a complete programme. Not for children. Never deployed.
           </div>
         ) : null}
         <AuthProvider>{children}</AuthProvider>

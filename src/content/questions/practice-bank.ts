@@ -1,23 +1,19 @@
 import type { Question } from "@/schemas/question.schema";
 
-import { factoryPublishedQuestions } from "./generated";
-import legacyQuarantinedIds from "./legacy-quarantined-ids.json";
+import { allFactoryPublishedQuestions } from "./factory-pools";
 import { questionBank } from "./question-bank";
 
 /**
  * The GATED pool: every question a learner can be served that has cleared a
  * review gate, and nothing else — the curated 100 plus the factory-published
- * set.
+ * set plus the strictly assembled AMC pool (every AMC item carries a unique,
+ * revision-bound human approval or `questions:assemble-bank --subject
+ * amc_mathematics` refuses to build it).
  */
-const quarantined = new Set<string>(legacyQuarantinedIds);
-
-/**
- * Items in content/quarantine/legacy-unapproved/ledger.json are excluded from learner delivery
- * even if one were to reappear in the curated or assembled pools.
- */
-export const publishedExamBank: readonly Question[] = Object.freeze(
-  [...questionBank, ...factoryPublishedQuestions].filter((question) => !quarantined.has(question.id)),
-);
+export const publishedExamBank: readonly Question[] = Object.freeze([
+  ...questionBank,
+  ...allFactoryPublishedQuestions,
+]);
 
 /**
  * Practice bank alias. Seeds have been deleted; practiceExamBank aliases

@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
+import { amcPublishedQuestions } from "@/content/questions/generated/amc-index";
 import { factoryPublishedQuestions } from "@/content/questions/generated";
 import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
@@ -61,7 +62,7 @@ const MIN_SAMPLE_FOR_PROPORTION = 20;
  * threshold after the overnight ingest, so its debt entry is retired.
  */
 const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
-  // "factory-published" retired: the biased legacy items are quarantined, leaving the approved AMC set (28.3%).
+  "factory-published": 159 / 281,
 };
 
 /**
@@ -69,7 +70,7 @@ const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
  * its own measured share so the number can fall but never rise.
  */
 const LENGTH_BIAS_DEBT: Readonly<Record<string, number>> = {
-  // "factory-published" retired with the quarantine (now 2.2%).
+  "factory-published": 149 / 229,
 };
 
 interface BiasReport {
@@ -123,6 +124,7 @@ function analyse(bank: readonly Question[]): BiasReport {
 const BANKS: readonly (readonly [string, readonly Question[]])[] = [
   ["curated", questionBank],
   ["factory-published", factoryPublishedQuestions as readonly Question[]],
+  ["amc-published", amcPublishedQuestions as readonly Question[]],
   ["published exam bank", publishedExamBank],
   ["practice exam bank", practiceExamBank],
 ];
