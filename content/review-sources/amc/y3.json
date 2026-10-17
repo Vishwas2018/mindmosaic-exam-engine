@@ -41,8 +41,8 @@
     "questionId": "roadmap-amc-y3-005",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
-    "sourceQuestionHash": "a7492e52c6c1c9ed51c01aa23231e064de77433b9756fa343ce976b18dfd2ab5",
-    "contentHash": "8d3fd521cb92a79752cefe2d638c0938562844e1d28bb3a87ca69c0bdf38ad6b"
+    "sourceQuestionHash": "6a642d81dbd338536ee2573600c70ecc079ca413d507646cf44eebd9371039af",
+    "contentHash": "29b45a0b024ac1a344c7aa05ae04b35413f4b7218ec16a1939a70eeaf98cf834"
   },
   {
     "kind": "amc_draft_review_source",
@@ -140,8 +140,8 @@
     "questionId": "roadmap-amc-y3-016",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
-    "sourceQuestionHash": "4ab20d4c5a6e2d123dac322255e6ace175c215f0dd7d798b5baa0004d598d7cc",
-    "contentHash": "1deb8038dc15a07789157c49929bbfcf3789c291a455b52e17ef528f5ecc0a2e"
+    "sourceQuestionHash": "23f16ef863aaa054068723213ec378c34a9b442296b151c67059dbec8746e2a0",
+    "contentHash": "3e81ab90d3eddce680e2f1291e28fdb8da478ab570cffc7eb81fb2d33dce48f9"
   },
   {
     "kind": "amc_draft_review_source",
