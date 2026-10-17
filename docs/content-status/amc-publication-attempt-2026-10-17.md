@@ -1,4 +1,4 @@
-# AMC governed publication attempt — 17 October 2026
+# AMC governed publication attempt ï¿½ 17 October 2026
 
 Status: BLOCKED, not published. Branch: fix/amc-publication-clean. No merge.
 
@@ -46,4 +46,4 @@ getExamBank("practice"): total 1548; AMC before Y3 0/Y5 0, after Y3 0/Y5 0. Boun
 
 ## Validation
 
-The targeted seven-file attestation/approval suite passed 163 tests; a separate three-file manifest/pending-approval run passed 36 tests. Typecheck passed after the final schema compatibility fix. The roadmap validator passed 199 structurally valid drafts and all listed full-paper fill checks. Final publication integrity verification passed with 57 pending approvals and zero problems. The full npm test run encountered repeated timeouts (including sign-in, signup, year-authority and projection suites) and was interrupted; full-suite green is not claimed. Build, RLS and browser/auth end-to-end checks were not completed in this blocked attempt. This is a draft PR, not merge-ready.
+The targeted seven-file attestation/approval suite passed 163 tests; a separate three-file manifest/pending-approval run passed 36 tests. Typecheck passed after the final schema compatibility fix; lint passed. The roadmap validator passed 199 structurally valid drafts and all listed full-paper fill checks. Final publication integrity verification passed with 57 pending approvals and zero problems. The full npm test run encountered repeated timeouts (including sign-in, signup, year-authority and projection suites) and was interrupted; full-suite green is not claimed. Build, RLS and browser/auth end-to-end checks were not completed in this blocked attempt. This is a draft PR, not merge-ready.
