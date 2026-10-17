@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-013",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "060119e01c44edf230dbfb98bbdf4951a2f1b09f9b96e0c013d9e1d1694e0f4b",
+  "sourceManifestHash": "72c0605bea2cf9dd02437c2813a7a6cd094b45281a9ffd092b8dcee9ee496c9d",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-013",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "There are 3 trays. Each tray holds 4 red and 5 green counters. Then 2 green counters are removed from every tray. How many counters remain in all?",
+    "options": [
+      {
+        "id": "a",
+        "text": "21"
+      },
+      {
+        "id": "b",
+        "text": "18"
+      },
+      {
+        "id": "c",
+        "text": "24"
+      },
+      {
+        "id": "d",
+        "text": "22"
+      },
+      {
+        "id": "e",
+        "text": "20"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Seven counters remain per tray, and the number of trays is unchanged.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Multi-step arithmetic operations",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ea27ce69d2e428aa4a13c2e8c7ba4af366ded5d385223e0579e5e4b9ebeec2f9"
+}

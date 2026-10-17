@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-004",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "ceab63477930c40d2f6b37f97746257ecc42aebcf92d20cfbf3bf88d89a9ec41",
+  "sourceManifestHash": "768294e99a1525f09caa5b2f7baca289285d4fb7fb3ea15bc1c5113a87bb7f6c",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-004",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Three quarters of the 60 seats in a hall are occupied. How many seats are occupied?",
+    "options": [
+      {
+        "id": "a",
+        "text": "15"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "45"
+      },
+      {
+        "id": "d",
+        "text": "48"
+      },
+      {
+        "id": "e",
+        "text": "40"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "One quarter of 60 is 15. Three quarters is 3 × 15 = 45.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Find a fraction of a quantity",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "687d8ca2a6f63feeff5c52ca41a3a27c7e782f893cf27d5e8339b35e4c60c307"
+}

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-012",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "152a3b65f41b65f2e3199263bb6770312d6610425f97fd6c3561bd3374280f95",
+  "sourceManifestHash": "d2e38b8faba87237bf5b82668744189ef4448359278fe40ec522f572ac343a9e",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-012",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Kai has 9 coins. Each coin is either a $1 coin or a $2 coin, and the coins are worth $14 altogether. How many $2 coins does Kai have?",
+    "options": [
+      {
+        "id": "a",
+        "text": "6"
+      },
+      {
+        "id": "b",
+        "text": "4"
+      },
+      {
+        "id": "c",
+        "text": "7"
+      },
+      {
+        "id": "d",
+        "text": "3"
+      },
+      {
+        "id": "e",
+        "text": "5"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Nine $1 coins would be worth $9. Each time a $1 coin is replaced by a $2 coin, the total rises by $1. To rise from $9 to $14 needs 5 replacements, so Kai has five $2 coins.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Reason with Australian coins",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "caa28d1892ac2ef5adeba6f8c96bc67503aba2a581353ed7ee67d01d43297214"
+}

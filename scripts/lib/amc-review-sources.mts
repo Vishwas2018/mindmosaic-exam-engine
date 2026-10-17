@@ -1,4 +1,4 @@
-import "server-only";
+import "./allow-server-only.mts";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";

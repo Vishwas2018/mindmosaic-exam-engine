@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-008",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "ec214788352f11aed05e86cb1be2ebd48a787a08ebcd80e692e7fad35e6db7c1",
+  "sourceManifestHash": "da2b0c419b30c411a5987b28b7b6226a1249c88324d5d154dd561aea34eec0b9",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-008",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Three pens cost $2.40 each. How much change is received from $10?",
+    "options": [
+      {
+        "id": "a",
+        "text": "$3.20"
+      },
+      {
+        "id": "b",
+        "text": "$2.40"
+      },
+      {
+        "id": "c",
+        "text": "$7.20"
+      },
+      {
+        "id": "d",
+        "text": "$7.60"
+      },
+      {
+        "id": "e",
+        "text": "$2.80"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The pens cost 3 × $2.40 = $7.20. The change is $10.00 − $7.20 = $2.80.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Decimal money calculations",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "d1f43007cb8b9780f951bb95af20853084263e4804dbe1c56fa835f7316e644a"
+}

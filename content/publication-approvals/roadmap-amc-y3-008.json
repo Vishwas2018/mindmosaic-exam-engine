@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-008",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "f4cf59287cf3e35b5e9e45c20aec643eb710d49dcac0cf1be9b1d82aa5f7a6ce",
+  "sourceManifestHash": "a131dc952fa9eec4cca8b17116214f8284d8f1baa53d67ba206e80208a06798b",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-008",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Jules is 4 years older than Ari. Together their ages total 20. How old is Jules?",
+    "options": [
+      {
+        "id": "a",
+        "text": "13"
+      },
+      {
+        "id": "b",
+        "text": "9"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "15"
+      },
+      {
+        "id": "e",
+        "text": "11"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Remove the four-year difference to make equal ages, then restore it to the older child.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Algebraic thinking and unknown values",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "b6dc5397c5723f4096b8a0c1b4c302267413a0432103dd198f1cd70f059e0bec"
+}

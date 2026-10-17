@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-022",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "279bd70686f52dcda819f52788f27361bd66c6f51e54bc5f58f0c95570dce2e6",
+  "sourceManifestHash": "dfe4275b0e59ad59cf6364327427f74a19a3dfa985db9e80f1ba438a7470f2d0",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-022",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A robot must move 3 squares right and 2 squares up to reach a target. It never moves left or down. How many different five-move routes can it take?",
+    "options": [
+      {
+        "id": "a",
+        "text": "10"
+      },
+      {
+        "id": "b",
+        "text": "8"
+      },
+      {
+        "id": "c",
+        "text": "5"
+      },
+      {
+        "id": "d",
+        "text": "12"
+      },
+      {
+        "id": "e",
+        "text": "15"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Choose the 2 positions of the upward moves among 5 moves. Listing the pairs gives 10 different routes.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Enumerate constrained routes",
+      "difficulty": "challenging",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "700fce866d61649e2ab324927adb2c31f235cd453b9f4f286399364a57b4229d"
+}
