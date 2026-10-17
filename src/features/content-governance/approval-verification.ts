@@ -1,3 +1,4 @@
+import { AMC_EXCLUDED_FROM_REVIEW, loadAmcReviewTargets } from "./amc-review-sources";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
@@ -94,6 +95,11 @@ export async function getSourceManifestForQuestion(
   );
   if (matches.length === 0) {
     if (factoryIds.has(question.id)) throw new Error(`Missing factory source manifest for ${question.id}.`);
+    if (/^roadmap-amc-y[35]-[0-9]{3}$/.test(question.id)) {
+      const target = (await loadAmcReviewTargets()).find((entry) => entry.question.id === question.id);
+      if (!target || canonicalQuestionHash(question) !== target.source.contentHash) throw new Error(`Stale or missing AMC review source for ${question.id}.`);
+      return { revision: target.source.revision, sourceManifestHash: target.sourceManifestHash };
+    }
     return { revision: 1, sourceManifestHash: null };
   }
   if (!factoryIds.has(question.id)) throw new Error(`Unexpected source manifest for curated item ${question.id}.`);
@@ -301,6 +307,10 @@ export async function validateApprovalBatch(options: {
     }
 
     // decision === "approve": all fields must bind the review to this exact revision.
+    if (AMC_EXCLUDED_FROM_REVIEW[qId]) {
+      fatalErrors.push(`${qId}: ${AMC_EXCLUDED_FROM_REVIEW[qId]}`);
+      continue;
+    }
 
     if (writing) {
       const canonical = canonicalWritingPromptHash(writing.task);

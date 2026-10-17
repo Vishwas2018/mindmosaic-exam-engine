@@ -3,6 +3,7 @@ import "./lib/allow-server-only.mts";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { loadAmcReviewTargets } from "@/features/content-governance/amc-review-sources";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import {
   WRITING_APPROVALS_DIRECTORY,
@@ -111,10 +112,14 @@ if (command === "queue") {
     throw new Error(`No approval rows found in ${sheetFile}.`);
   }
 
+  // Private draft review targets do not enter any served or assembled bank.
+  const draftTargets = rows.some((row) => /^roadmap-amc-y[35]-[0-9]{3}$/.test(row.questionId))
+    ? await loadAmcReviewTargets() : [];
+  const authoredIds = new Set(publishedExamBank.map((question) => question.id));
   const validation = await validateApprovalBatch({
     rows,
     reviewerFullName: reviewer.trim(),
-    questionBank: publishedExamBank,
+    questionBank: [...publishedExamBank, ...draftTargets.filter((target) => !authoredIds.has(target.question.id)).map((target) => target.question)],
     writingPrompts: await loadWritingDraftSubjects(),
   });
 
