@@ -60,7 +60,10 @@ function numberEntrySkill() {
       candidate.recommendedQuestionTypes.includes("number_entry") &&
       candidate.supportedDifficulties.includes("medium") &&
       candidate.yearLevels.length > 0 &&
-      candidate.examStyles.length > 0,
+      candidate.examStyles.length > 0 &&
+      // First-party attested programmes verify through their own hash-pinned registries, not a synthetic key.
+      !candidate.examStyles.includes("amc_style") &&
+      !candidate.examStyles.includes("scholarship_style"),
   );
   if (!entry) throw new Error("No registry entry recommends number_entry — fixture assumption broken.");
   return entry;

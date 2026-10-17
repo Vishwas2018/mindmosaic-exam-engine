@@ -16,6 +16,8 @@ async function reviewSourceResolver(question: { id: string }) {
   if (JSON.stringify(target.question) !== JSON.stringify(question)) throw new Error("Stale or missing AMC review source");
   return { revision: target.source.revision, sourceManifestHash: target.sourceManifestHash };
 }
+/** Revised after the independent review (17 Oct 2026): their earlier approvals were retired, so their rows are blank until a new human decision. */
+const PENDING_REAPPROVAL = new Set(["roadmap-amc-y3-005", "roadmap-amc-y3-016"]);
 const privateReviewOptions = { reviewSourceResolver, excludedReviewIds: new Set(Object.keys(AMC_EXCLUDED_FROM_REVIEW)) };
 describe("clean AMC pre-publication review bindings", () => {
   it("binds all 60 current drafts without asserting publication or human approval", async () => {
@@ -33,7 +35,13 @@ describe("clean AMC pre-publication review bindings", () => {
   it.each([[3, 29], [5, 28]] as const)("Year %i retains %i bound rows and blank review input never grants approval", async (year, count) => {
     const signed = await rows(year);
     expect(signed).toHaveLength(count);
-    expect(signed.every((row) => row.decision === "approve" && row.correctness === "yes" && row.originality === "yes" && row.ageAppropriateness === "yes")).toBe(true);
+    for (const row of signed) {
+      if (PENDING_REAPPROVAL.has(row.questionId)) {
+        expect([row.correctness, row.originality, row.ageAppropriateness, row.decision, row.notes]).toEqual(["", "", "", "", ""]);
+      } else {
+        expect(row.decision === "approve" && row.correctness === "yes" && row.originality === "yes" && row.ageAppropriateness === "yes", row.questionId).toBe(true);
+      }
+    }
     const sheet = signed.map((row) => ({ ...row, correctness: "", originality: "", ageAppropriateness: "", decision: "", notes: "" }));
     const targets = await loadAmcReviewTargets();
     for (const row of sheet) {
@@ -110,9 +118,9 @@ describe("clean AMC pre-publication review bindings", () => {
     expect(() => buildAmcReviewTarget(raw, "content/roadmap-drafts/amc-y5-draft.json")).toThrow("mismatch");
   });
 
-  it("still serves zero AMC questions", () => {
-    const bank = getExamBank("practice");
-    expect(bank.length).toBeGreaterThan(0);
-    expect(bank.filter((question) => question.examStyle === "amc_style")).toEqual([]);
+  it("serves exactly the human-approved AMC questions and none awaiting re-approval", () => {
+    const amc = getExamBank("practice").filter((question) => question.examStyle === "amc_style");
+    expect(amc).toHaveLength(55);
+    for (const id of PENDING_REAPPROVAL) expect(amc.map((question) => question.id)).not.toContain(id);
   });
 });
