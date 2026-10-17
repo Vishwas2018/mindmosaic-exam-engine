@@ -262,7 +262,12 @@ export function selectApprovedQuestions(
         else { revision = source.revision; sourceHash = source.sourceManifestHash; embedded = source.embeddedApproval; }
       }
     } else if (sources.length > 0) reason = "ambiguous_curated_source";
-    const records = [...(approvalMap.get(question.id) ?? []), ...(embedded === undefined ? [] : [embedded])];
+    const externalRecords = approvalMap.get(question.id) ?? [];
+    const amc = question.metadata.subject === "amc_mathematics";
+    if (!reason && amc && externalRecords.length === 0) reason = "missing_external_human_approval";
+    if (!reason && amc && embedded && externalRecords.length === 1 &&
+        (embedded as Record<string, unknown>).fingerprint !== (externalRecords[0] as Record<string, unknown>).fingerprint) reason = "manifest_approval_record_mismatch";
+    const records = amc ? externalRecords : [...externalRecords, ...(embedded === undefined ? [] : [embedded])];
     if (!reason && records.length > 1) reason = "duplicate_approval";
     if (!reason && records.length === 0) {
       excluded.push({ questionId: question.id, reason: "awaiting_human_approval" });

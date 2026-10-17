@@ -1,3 +1,6 @@
+import { questionSchema } from "@/schemas/question.schema";
+import type { HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
+import { hashJson } from "../provenance/content-hash";
 import type { ReviewRecord } from "../provenance";
 import { verifyReviewChain } from "../provenance";
 
@@ -69,6 +72,8 @@ export interface RecoveredReviewEvidence {
 export type CorrectnessBasis = "deterministic" | "independent_semantic_review";
 
 export interface ManifestReviewEvidence {
+  readonly question?: { readonly metadata?: { readonly subject?: string } };
+  readonly humanApproval?: HumanPublicationApproval;
   /** Absent on every manifest written before P0-B; treated as legacy. */
   readonly manifestSchemaVersion?: number;
   readonly correctnessBasis?: CorrectnessBasis;
@@ -119,6 +124,30 @@ export function validateManifestReviewEvidence(
 ): ManifestValidationResult {
   const issues: ManifestValidationIssue[] = [];
   const version = manifestSchemaVersionOf(manifest);
+  if (manifest.question?.metadata?.subject === "amc_mathematics") {
+    const chain = manifest.reviewChain ?? [];
+    const approval = manifest.humanApproval;
+    const bound = (record: ReviewRecord) => record.candidateId === manifest.candidateId && record.result === "passed" &&
+      record.evidenceBinding.candidateContentHash === manifest.contentHash && record.evidenceBinding.candidateRevision === manifest.revision;
+    const firstParty = chain.find((record) => bound(record) && record.stage === "correctness_check_passed" &&
+      record.reviewerIdentity.provider === "other" && record.reviewerIdentity.modelId === "mindmosaic-first-party-amc" &&
+      record.evidenceReferences.some((reference) => /^cva-[a-f0-9]{40}$/.test(reference)));
+    const human = chain.find((record) => bound(record) && record.stage === "published" && record.reviewerIdentity.provider === "human" &&
+      !!approval && record.reviewerIdentity.modelId === approval.approvedBy && record.evidenceReferences.includes(approval.fingerprint));
+    if (!firstParty || !human || !approval || chain.length < 2) {
+      issues.push(issue("reviewChain", "AMC requires both a content-bound first-party attestation stage and a human approval stage; an empty chain or bare approvedBy is forbidden."));
+    }
+    if (approval) {
+      const { fingerprint, ...facts } = approval;
+      const reviewedQuestion = questionSchema.safeParse(manifest.question);
+      if (fingerprint !== hashJson(facts) || manifest.approvedBy !== approval.approvedBy || approval.revision !== manifest.revision ||
+          !reviewedQuestion.success || approval.contentHash !== hashJson(reviewedQuestion.data)) {
+        issues.push(issue("humanApproval", "AMC human approval must be fingerprinted and bound to this exact revision and reviewer."));
+      }
+    }
+    if (version < MANIFEST_SCHEMA_VERSION_CURRENT) issues.push(issue("manifestSchemaVersion", "AMC cannot use a legacy manifest to bypass its two-stage review chain."));
+  }
+
 
   // `recoveredEvidence` must never contain chain-shaped records, whatever
   // the era — this is the structural separation P0-B turns on.

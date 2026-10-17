@@ -173,6 +173,7 @@ if (command === "queue") {
     JSON.stringify(
       {
         authored: publishedExamBank.length,
+        pendingPublication: report.pendingPublication,
         eligible: report.questions.length,
         awaitingApproval: report.excluded.filter((q) => q.reason === "awaiting_human_approval").length,
         problems: report.problems,

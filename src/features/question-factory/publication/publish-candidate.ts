@@ -245,7 +245,7 @@ export async function orchestratePublication(
     return { outcome: "ineligible", candidateId, issues: [issue("publication_upstream_evidence_invalid", "humanApproval", approvalValidation.reason)] };
   }
 
-  const manifestValidation = validateManifestReviewEvidence(manifest);
+  const manifestValidation = validateManifestReviewEvidence(approvedManifest);
   if (!manifestValidation.ok) {
     return {
       outcome: "ineligible",

@@ -30,9 +30,11 @@ describe("clean AMC pre-publication review bindings", () => {
     }
   });
 
-  it.each([[3, 29], [5, 28]] as const)("Year %i has %i bound rows with every reviewer cell blank", async (year, count) => {
-    const sheet = await rows(year);
-    expect(sheet).toHaveLength(count);
+  it.each([[3, 29], [5, 28]] as const)("Year %i retains %i bound rows and blank review input never grants approval", async (year, count) => {
+    const signed = await rows(year);
+    expect(signed).toHaveLength(count);
+    expect(signed.every((row) => row.decision === "approve" && row.correctness === "yes" && row.originality === "yes" && row.ageAppropriateness === "yes")).toBe(true);
+    const sheet = signed.map((row) => ({ ...row, correctness: "", originality: "", ageAppropriateness: "", decision: "", notes: "" }));
     const targets = await loadAmcReviewTargets();
     for (const row of sheet) {
       expect(row.revision).toBe(1);

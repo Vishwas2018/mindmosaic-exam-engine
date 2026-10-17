@@ -1,37 +1,18 @@
-# AMC review checkpoint ? 17 October 2026
+# AMC review checkpoint — 17 October 2026
 
-STOP: Vish must re-sign before approval recording or publication. These are private review previews, not published bank items.
+Vishwas Joshi explicitly authorized approval of the 57 included rows in this session. Both CSVs retain their original nine columns and binding values; correctness, originality and age appropriateness are yes, and decision is approve. Despite their historical `blank` filenames, they are now filled and committed.
 
-## Review files
+- Year 3: `review-sheet-amc-y3-blank.csv`, 29 approved rows.
+- Year 5: `review-sheet-amc-y5-blank.csv`, 28 approved rows.
+- `revision-loop-amc.csv`: three excluded items, roadmap-amc-y3-014, roadmap-amc-y5-006, roadmap-amc-y5-028. No approval was recorded for these.
+- HTML previews are the earlier review snapshots, not approval evidence.
 
-- Year 3: `review-sheet-amc-y3-blank.csv` (29 rows); read `review-sheet-amc-y3.html` alongside it.
-- Year 5: `review-sheet-amc-y5-blank.csv` (28 rows); read `review-sheet-amc-y5.html` alongside it.
-- The existing nine columns are preserved. Question ID, canonical content hash, revision and source manifest hash are populated. Correctness, originality, age appropriateness, decision and notes are blank. Review each item individually; a blank is not approval. Return filled copies without changing the first four columns.
+The governed recorder created 57 real records under `content/publication-approvals/`, each bound to its unchanged content hash and source descriptor hash. These are authoring approvals pending publication, not published manifests. `content/review-sources/amc/y3.json` and `y5.json` remain strictly typed review-source descriptors, not manifests.
 
-## Excluded from this approval round
+## Publication refused
 
-`revision-loop-amc.csv` records the scope decision to revise/exclude these three items. It is not a human approval or a claimed completed factory revision transition.
+`content:verify-publication` reports 57 pending approvals and no integrity problems. `questions:publish` refused all 57 with `outcome: not_staged`, `foundState: not_found` (exit 3). There are no legitimate upstream staging records. A separate pure preflight also finds taxonomy errors on all 57 and difficulty deviations above the existing tolerance on 37. These findings are not staging evidence. Assembly was not run after refusal.
 
-| Item | Decision | Reason |
-| --- | --- | --- |
-| roadmap-amc-y3-014 | Exclude for revision | The arithmetic mean wording needs Year 3 age-fit review. The numerical key alone does not resolve age fit. |
-| roadmap-amc-y5-006 | Exclude for revision | Corrupted multiplication-symbol text in the explanation must be repaired before fresh review. |
-| roadmap-amc-y5-028 | Exclude for revision | Two-variable whole-number algebra needs a Year 5 age-fit decision or replacement. |
+AMC remains at 0 manifests and 0 served items (Y3 0, Y5 0). Scholarship and Singapore remain coming soon. No fabricated manifest or prepare-amc-staged script was reused. This branch enforces a real external approval record and both hash-bound first-party and human review stages before any future AMC publication can pass.
 
-29 + 28 reviewable + 3 excluded = 60 current drafts. No question wording, options or keys were changed. Excluded IDs cannot be approved by inserting them into these sheets; revision requires regenerated bindings and fresh review.
-
-## Binding contract
-
-`content/review-sources/amc/y3.json` and `y5.json` each contain 30 strictly typed `amc_draft_review_source` descriptors. `sourceManifestHash` is the canonical SHA-256 hash of the item's descriptor, which binds its ID, revision, original draft path, original question hash and canonical publication-preview content hash. The loader recomputes those values against the current draft and refuses missing, duplicate or stale sources.
-
-These source descriptors are **not publication manifests**. They contain no `publishedAt`, `approvedBy`, human approval, gate reports or review chain. Hashing a review source makes no correctness, originality, age-fit or staging claim.
-
-The existing approval-row validator can validate the regenerated bindings against private draft targets. This does not add the drafts to `getExamBank`, the generated inventory or the publication manifest directory. Test signatures exist only in test memory; no approval record has been written.
-
-## Cleanup and publication hold
-
-The abandoned worktree's 60 untracked AMC published manifests and `scripts/prepare-amc-staged.mts` were removed. Its generated bank file was restored to its tracked baseline only after verifying that every non-AMC question matched that baseline. None of its fabricated artifacts or reports was copied to the clean worktree.
-
-The fresh branch is `fix/amc-publication-clean`, based on origin/dev `3b85a102`. At this checkpoint, AMC approval records, AMC publication manifests and served AMC items are all zero. Scholarship and Singapore remain coming soon.
-
-After Vish returns valid signatures, the next phase must implement/verify the complete attested lifecycle before recording or publishing: `checkPublicationEligibility` plus hash-bound `verifyFirstPartyAmcAttestation`, genuine upstream evidence, a real approval file, and a review chain carrying both first-party attestation and human approval. Current baseline publication machinery does not yet supply that dual-stage AMC chain. Do not run publication until those requirements are enforced; never manufacture staging reports or a published manifest to make the sheets validate.
+See `docs/content-status/amc-publication-attempt-2026-10-17.md` and the 57-row approval evidence index for the actual recorded fields and blockers. Approved content was not edited to force upstream validation.
