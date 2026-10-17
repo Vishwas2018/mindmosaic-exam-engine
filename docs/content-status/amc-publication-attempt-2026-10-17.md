@@ -47,3 +47,23 @@ getExamBank("practice"): total 1548; AMC before Y3 0/Y5 0, after Y3 0/Y5 0. Boun
 ## Validation
 
 The targeted seven-file attestation/approval suite passed 163 tests; a separate three-file manifest/pending-approval run passed 36 tests. Typecheck passed after the final schema compatibility fix; lint passed. The roadmap validator passed 199 structurally valid drafts and all listed full-paper fill checks. Final publication integrity verification passed with 57 pending approvals and zero problems. The full npm test run encountered repeated timeouts (including sign-in, signup, year-authority and projection suites) and was interrupted; full-suite green is not claimed. Build, RLS and browser/auth end-to-end checks were not completed in this blocked attempt. This is a draft PR, not merge-ready.
+
+## Follow-up: identity and taxonomy repaired; difficulty hold remains
+
+On the follow-up instruction, ingestion was repaired and pushed in c97758f7: a complete pinned first-party AMC candidate retains its roadmap draft ID only after its independent attestation succeeds. Unregistered or modified source content still receives an infrastructure-minted ID. This branch has no stage-*-candidates.mts scripts; the real id replacement was in manual-ingestion/ingest.ts. The real inbox-ingestion regression suite passed 32 tests, including preserved hash/solver resolution and rejection of a modified question's claim to the registered identity. No direct staging records were constructed.
+
+Explicit skill entries were registered and pushed in a7fa8f11. There are 51 distinct skill/strand entries for the 57 included items. All 57 now pass checkTaxonomy with exact subject, strand, year and style matches; no fuzzy matching was added. The combined registry remains collision-free, and unknown variants still fail. All three taxonomy tests passed. The preceding section's all-57 taxonomy errors describes the earlier attempt and is now resolved.
+
+Difficulty remains a genuine blocker. roadmap-amc-y5-027 asks: "A grid has 4 columns and 3 rows of equal square cells. How many rectangles of all sizes have sides along the grid lines?" Its explanation selects two of five vertical lines and two of four horizontal lines, then multiplies 10 by 6 to obtain 60. That is a two-dimensional combinatorial reasoning task; an easy Year 5 label cannot be justified merely because its wording is short. I am flagging it rather than forcing a label. Even changing challenging to medium would still differ from the estimator's easy by 0.5 > 0.15.
+
+The actual pure verifyCandidateDifficulty function, supplied the unchanged candidate and declared challenging label in a clearly marked diagnostic context, returned status failed, code difficulty_deviation_exceeded:
+
+> Estimated difficulty 'easy' deviates from declared difficulty 'challenging' by 1.0000, exceeding the tolerance of 0.15.
+
+This is a preflight diagnostic, not a persisted difficulty report or a claim that the governed lifecycle reached that stage. The verifier's declared difficulty comes from the bound blueprint during the real pipeline, not from question metadata alone. No bound AMC blueprint or successful upstream evidence was invented for the diagnostic.
+
+[The 37-row difficulty preflight](amc-difficulty-preflight-2026-10-17.csv) records before and after labels (unchanged), proxy estimates and dispositions. It is not a claim of 37 completed label migrations. Stopped at this flagged item before changing labels or rebinding approvals. The other 36 label decisions were not applied. Questions, keys, approvals, source descriptors and solver pins remain unchanged.
+
+The new ingest/stage/publish chain was not run after this blocker. Existing 57 human approvals remain pending, with zero AMC manifests and zero AMC bank entries. No new human or attestation review stages have been fabricated. PR #62 remains a draft; no merge.
+
+Follow-up verification: final typecheck passed. The four-file AMC attestation/taxonomy/manifest/pending-approval suite passed 98 tests. A fresh runtime audit revalidated all 57 content/source-bound approvals, reported zero problems, and confirmed AMC Y3 0/Y5 0, no AMC manifests, and no approval/manifest/bank presence for any of the three excluded ids.
