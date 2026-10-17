@@ -6,6 +6,7 @@ import {runManualIngestion} from '@/features/question-factory/manual-ingestion';
 import {runPipeline} from '@/features/question-factory/pipeline';
 import {orchestrateStaging} from '@/features/question-factory/staging';
 import {orchestratePublication} from '@/features/question-factory/publication';
+import {assemblePublishedQuestions} from '@/features/question-factory/publication/assemble-published-bank';
 import {parseApprovalCsv} from '@/features/content-governance/approval-verification';
 import {amcIntakeBlueprint} from '../../../../scripts/lib/amc-intake-blueprint.mjs';
 import {candidateQuestionSchema} from '@/features/question-factory/ingestion/candidate-question';
@@ -30,6 +31,10 @@ it('publishes AMC only after real ingestion, every upstream gate, staging and th
   const result=await orchestratePublication(q.id,repo,{...options,recordedAmcApproval:approval});
   expect(result.outcome,JSON.stringify(result)).toBe('published');if(result.outcome!=='published')return;
   expect(result.manifest.humanApproval).toEqual(approval);
+  expect((await assemblePublishedQuestions(repo,[])).questions).toHaveLength(0);
+  expect((await assemblePublishedQuestions(repo,[approval,approval])).questions).toHaveLength(0);
+  const assembled=await assemblePublishedQuestions(repo,[approval]);
+  expect(assembled.warnings).toEqual([]);expect(assembled.questions).toHaveLength(1);
   expect(result.manifest.reviewChain?.map(r=>[r.stage,r.reviewerIdentity.modelId])).toEqual([['correctness_check_passed','mindmosaic-first-party-amc'],['published','Vishwas Joshi']]);
  }finally{await rm(root,{recursive:true,force:true});}
 },60000);

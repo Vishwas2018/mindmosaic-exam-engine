@@ -53,7 +53,14 @@ export async function assemblePublishedQuestions(repository: FactoryRepository, 
     const source = validatePublicationSource(manifest, parsed.data);
     const matching = approvals.filter((approval) => approval && typeof approval === "object" &&
       (approval as Record<string, unknown>).questionId === parsed.data.id);
-    if (manifest.humanApproval !== undefined) matching.push(manifest.humanApproval);
+    const amc = parsed.data.metadata.subject === "amc_mathematics";
+    // AMC must have exactly one external record. Its identical embedded
+    // snapshot is corroboration, not a second human signature.
+    if (!amc && manifest.humanApproval !== undefined) matching.push(manifest.humanApproval);
+    if (amc && (matching.length !== 1 || manifest.humanApproval?.fingerprint !== (matching[0] as { fingerprint?: unknown } | undefined)?.fingerprint)) {
+      warnings.push(`Manifest '${candidateId}' lacks a unique matching external AMC approval; skipped.`);
+      continue;
+    }
     const approved = source.ok && matching.length === 1 ? validateHumanApproval(matching[0],
       parsed.data, source.revision, source.sourceManifestHash) : undefined;
     if (!approved?.ok) {
