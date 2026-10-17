@@ -1,3 +1,5 @@
+Historical log. Current outcome: [57 governed manifests; assembly blocked](amc-governed-publication-result-2026-10-17.md). AMC is not assembled or served.
+
 # AMC governed publication attempt � 17 October 2026
 
 Status: BLOCKED, not published. Branch: fix/amc-publication-clean. No merge.

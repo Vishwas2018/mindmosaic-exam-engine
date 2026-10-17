@@ -1,4 +1,4 @@
-# AMC governed publication result — 17 October 2026
+# AMC governed publication result ï¿½ 17 October 2026
 
 **BLOCKED AT ASSEMBLY. Do not merge PR #62.** There are 57 genuine AMC publication manifests, but none of the AMC items has entered the assembled or served bank. The unchanged assembled snapshot is inconsistent with the new manifests, so the branch currently fails closed to an empty practice bank. This is an isolated draft branch; dev/main were not merged.
 
@@ -55,3 +55,6 @@ Excluded roadmap-amc-y3-014, roadmap-amc-y5-006, roadmap-amc-y5-028 each have no
 ## Verification
 
 The eight-file AMC/solver regression run passed 127 tests; the assembly integration regression additionally passed with real upstream gate execution and positive/missing/duplicate approval cases. Typecheck passed before the final assembly fix; final typecheck/lint results are recorded below when complete. Publication verification after assembly is intentionally NOT claimed green: the 57 unassembled manifests are integrity failures. The prior full-suite run was interrupted on timeouts; full CI green is not claimed.
+
+
+Final post-publication verification was actually rerun and exited 1, reporting the 57 orphan_manifest entries quoted in the evidence JSON. Final typecheck passed (exit 0). No full-suite green claim is made while assembly is blocked.
