@@ -54,7 +54,7 @@ Excluded roadmap-amc-y3-014, roadmap-amc-y5-006, roadmap-amc-y5-028 each have no
 
 ## Verification
 
-The eight-file AMC/solver regression run passed 127 tests; the assembly integration regression additionally passed with real upstream gate execution and positive/missing/duplicate approval cases. Typecheck passed before the final assembly fix; final typecheck/lint results are recorded below when complete. Publication verification after assembly is intentionally NOT claimed green: the 57 unassembled manifests are integrity failures. The prior full-suite run was interrupted on timeouts; full CI green is not claimed.
+The eight-file AMC/solver regression run passed 127 tests; the assembly integration regression additionally passed with real upstream gate execution and positive/missing/duplicate approval cases. Final typecheck and lint both passed after the assembly fix. Publication verification after assembly is intentionally NOT claimed green: the 57 unassembled manifests are integrity failures. The prior full-suite run was interrupted on timeouts; full CI green is not claimed.
 
 
-Final post-publication verification was actually rerun and exited 1, reporting the 57 orphan_manifest entries quoted in the evidence JSON. Final typecheck passed (exit 0). No full-suite green claim is made while assembly is blocked.
+Final post-publication verification was actually rerun and exited 1, reporting the 57 orphan_manifest entries quoted in the evidence JSON. Final typecheck and lint passed (exit 0 each). No full-suite green claim is made while assembly is blocked.
