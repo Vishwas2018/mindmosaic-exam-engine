@@ -1,0 +1,168 @@
+items reviewed by second pass so far: 160; unparsed: 0
+maths: agree with key 12/40 (30%)
+nr: agree with key 9/40 (22%)
+vr: agree with key 21/45 (47%)
+rc: agree with key 33/35 (94%)
+overall: 75/160 (47%)
+on machine-proven keys: 28/99 (28%)  <- the second reviewer's own error rate
+on keys with no machine proof (VR 001-026, all Reading): 47/61 (77%)
+  status unchanged: 19/58 (33%)
+  status relabelled: 11/31 (35%)
+  status revised: 43/65 (66%)
+  status replaced: 2/6 (33%)
+items with content unchanged since first pass: 90; first pass (opus) agreed on all 90; second pass agrees on 30/90 (33%)
+  both agree: 30; only first pass: 60; only second: 0 (first pass agreed with every key); neither: 0
+
+disagreements on UNPROVEN keys (human semantic check needed):
+  scholarship-y6-vr-001 key e second-pass a (changed since first pass: True) others=['b']
+  scholarship-y6-vr-002 key e second-pass a (changed since first pass: False) others=['b']
+  scholarship-y6-vr-003 key d second-pass a (changed since first pass: False) others=['b']
+  scholarship-y6-vr-004 key e second-pass b (changed since first pass: False) others=['c']
+  scholarship-y6-vr-006 key e second-pass a (changed since first pass: True) others=['b']
+  scholarship-y6-vr-007 key c second-pass a (changed since first pass: False) others=['b']
+  scholarship-y6-vr-012 key b second-pass e (changed since first pass: False) others=['b']
+  scholarship-y6-vr-013 key b second-pass e (changed since first pass: False) others=['b']
+  scholarship-y6-vr-021 key b second-pass a (changed since first pass: False) others=['b']
+  scholarship-y6-vr-024 key d second-pass b (changed since first pass: True) others=['c']
+  scholarship-y6-vr-025 key b second-pass a (changed since first pass: True) others=['b']
+  scholarship-y6-vr-026 key c second-pass a (changed since first pass: False) others=['b']
+  scholarship-y6-rc-006 key b second-pass a (changed since first pass: True) others=['b']
+  scholarship-y6-rc-012 key b second-pass a (changed since first pass: True) others=['b']
+
+disagreements on PROVEN keys (second-pass error, key stands):
+  scholarship-y6-maths-003 key e second-pass a
+  scholarship-y6-maths-004 key b second-pass a
+  scholarship-y6-maths-005 key d second-pass a
+  scholarship-y6-maths-006 key c second-pass b
+  scholarship-y6-maths-008 key d second-pass a
+  scholarship-y6-maths-009 key e second-pass a
+  scholarship-y6-maths-011 key e second-pass a
+  scholarship-y6-maths-014 key c second-pass b
+  scholarship-y6-maths-015 key d second-pass a
+  scholarship-y6-maths-016 key d second-pass b
+  scholarship-y6-maths-017 key e second-pass b
+  scholarship-y6-maths-020 key c second-pass a
+  scholarship-y6-maths-021 key b second-pass a
+  scholarship-y6-maths-022 key d second-pass b
+  scholarship-y6-maths-023 key c second-pass a
+  scholarship-y6-maths-024 key e second-pass a
+  scholarship-y6-maths-027 key e second-pass a
+  scholarship-y6-maths-028 key d second-pass a
+  scholarship-y6-maths-029 key b second-pass a
+  scholarship-y6-maths-030 key c second-pass a
+  scholarship-y6-maths-031 key c second-pass a
+  scholarship-y6-maths-032 key b second-pass a
+  scholarship-y6-maths-033 key e second-pass b
+  scholarship-y6-maths-034 key d second-pass a
+  scholarship-y6-maths-036 key d second-pass a
+  scholarship-y6-maths-038 key c second-pass a
+  scholarship-y6-maths-039 key b second-pass a
+  scholarship-y6-maths-040 key e second-pass b
+  scholarship-y6-nr-001 key e second-pass a
+  scholarship-y6-nr-002 key c second-pass a
+  scholarship-y6-nr-003 key b second-pass a
+  scholarship-y6-nr-005 key e second-pass a
+  scholarship-y6-nr-006 key e second-pass a
+  scholarship-y6-nr-007 key c second-pass a
+  scholarship-y6-nr-008 key d second-pass a
+  scholarship-y6-nr-009 key c second-pass a
+  scholarship-y6-nr-011 key d second-pass a
+  scholarship-y6-nr-012 key d second-pass b
+  scholarship-y6-nr-013 key c second-pass b
+  scholarship-y6-nr-014 key e second-pass b
+  scholarship-y6-nr-015 key b second-pass a
+  scholarship-y6-nr-016 key d second-pass a
+  scholarship-y6-nr-017 key b second-pass a
+  scholarship-y6-nr-018 key c second-pass a
+  scholarship-y6-nr-019 key c second-pass b
+  scholarship-y6-nr-022 key e second-pass a
+  scholarship-y6-nr-023 key b second-pass a
+  scholarship-y6-nr-025 key b second-pass a
+  scholarship-y6-nr-026 key d second-pass a
+  scholarship-y6-nr-027 key c second-pass a
+  scholarship-y6-nr-028 key b second-pass a
+  scholarship-y6-nr-029 key e second-pass a
+  scholarship-y6-nr-030 key d second-pass a
+  scholarship-y6-nr-032 key c second-pass a
+  scholarship-y6-nr-034 key b second-pass a
+  scholarship-y6-nr-035 key e second-pass a
+  scholarship-y6-nr-036 key d second-pass b
+  scholarship-y6-nr-037 key e second-pass a
+  scholarship-y6-nr-039 key d second-pass a
+  scholarship-y6-vr-030 key d second-pass a
+  scholarship-y6-vr-033 key d second-pass a
+  scholarship-y6-vr-034 key e second-pass a
+  scholarship-y6-vr-035 key c second-pass a
+  scholarship-y6-vr-036 key b second-pass a
+  scholarship-y6-vr-037 key c second-pass a
+  scholarship-y6-vr-038 key b second-pass a
+  scholarship-y6-vr-039 key c second-pass a
+  scholarship-y6-vr-040 key d second-pass a
+  scholarship-y6-vr-041 key c second-pass a
+  scholarship-y6-vr-044 key d second-pass a
+  scholarship-y6-vr-045 key d second-pass a
+
+alternative answers the second pass says are also defensible (unproven keys):
+  scholarship-y6-vr-001 key e second a also ['b']
+  scholarship-y6-vr-002 key e second a also ['b']
+  scholarship-y6-vr-003 key d second a also ['b']
+  scholarship-y6-vr-004 key e second b also ['c']
+  scholarship-y6-vr-005 key a second a also ['b']
+  scholarship-y6-vr-006 key e second a also ['b']
+  scholarship-y6-vr-007 key c second a also ['b']
+  scholarship-y6-vr-008 key e second e also ['b']
+  scholarship-y6-vr-009 key a second a also ['b']
+  scholarship-y6-vr-010 key e second e also ['b', 'c']
+  scholarship-y6-vr-011 key a second a also ['b']
+  scholarship-y6-vr-012 key b second e also ['b']
+  scholarship-y6-vr-013 key b second e also ['b']
+  scholarship-y6-vr-014 key a second a also ['b']
+  scholarship-y6-vr-015 key c second c also ['b']
+  scholarship-y6-vr-016 key d second d also ['a']
+  scholarship-y6-vr-017 key b second b also ['a']
+  scholarship-y6-vr-018 key a second a also ['b']
+  scholarship-y6-vr-019 key e second e also ['a']
+  scholarship-y6-vr-020 key a second a also ['b']
+  scholarship-y6-vr-021 key b second a also ['b']
+  scholarship-y6-vr-022 key a second a also ['b', 'c']
+  scholarship-y6-vr-023 key e second e also ['b']
+  scholarship-y6-vr-024 key d second b also ['c']
+  scholarship-y6-vr-025 key b second a also ['b']
+  scholarship-y6-vr-026 key c second a also ['b']
+  scholarship-y6-rc-001 key a second a also ['b']
+  scholarship-y6-rc-002 key c second c also ['b']
+  scholarship-y6-rc-003 key e second e also ['b']
+  scholarship-y6-rc-004 key b second b also ['c']
+  scholarship-y6-rc-005 key d second d also ['b']
+  scholarship-y6-rc-006 key b second a also ['b']
+  scholarship-y6-rc-007 key e second e also ['b']
+  scholarship-y6-rc-008 key a second a also ['b']
+  scholarship-y6-rc-009 key b second b also ['c']
+  scholarship-y6-rc-010 key c second c also ['b']
+  scholarship-y6-rc-011 key e second e also ['b']
+  scholarship-y6-rc-012 key b second a also ['b']
+  scholarship-y6-rc-013 key d second d also ['b']
+  scholarship-y6-rc-014 key a second a also ['b']
+  scholarship-y6-rc-015 key c second c also ['a']
+  scholarship-y6-rc-016 key d second d also ['b']
+  scholarship-y6-rc-017 key a second a also ['b']
+  scholarship-y6-rc-018 key c second c also ['b']
+  scholarship-y6-rc-019 key e second e also ['a']
+  scholarship-y6-rc-020 key b second b also ['c']
+  scholarship-y6-rc-021 key c second c also ['b']
+  scholarship-y6-rc-022 key d second d also ['b']
+  scholarship-y6-rc-023 key b second b also ['a']
+  scholarship-y6-rc-024 key a second a also ['b']
+  scholarship-y6-rc-025 key e second e also ['b']
+  scholarship-y6-rc-026 key e second e also ['b']
+  scholarship-y6-rc-027 key c second c also ['b']
+  scholarship-y6-rc-028 key a second a also ['b']
+  scholarship-y6-rc-029 key d second d also ['b']
+  scholarship-y6-rc-030 key b second b also ['c']
+  scholarship-y6-rc-031 key b second b also ['a']
+  scholarship-y6-rc-032 key d second d also ['b']
+  scholarship-y6-rc-033 key c second c also ['b']
+  scholarship-y6-rc-034 key e second e also ['b']
+  scholarship-y6-rc-035 key a second a also ['b']
+
+label vs second-pass difficulty estimate: {"challenging->challenging": 4, "easy->easy": 61, "medium->easy": 52, "medium->medium": 43}

@@ -8,7 +8,7 @@
  * decision columns are written blank for the human reviewer.
  *
  *   npx tsx scripts/scholarship-review-sheets.mts --blind-dir <dir with review-<packet>.json> --out-dir <dir>
- *     [--first-pass-dir <dir with blind-review-<packet>.json> --ledger <remediation-ledger.json>]
+ *     [--first-pass-dir <dir with blind-review-<packet>.json> --ledger <remediation-ledger.json>] [--blind-label <text>]
  *
  * `--blind-dir` is the current independent pass. With `--first-pass-dir` and `--ledger`, an earlier pass is shown
  * only for items whose content is unchanged since it was made; a revised item's earlier answers are marked stale
@@ -146,7 +146,7 @@ async function main(): Promise<void> {
     "# Scholarship Year 6 draft items: advisory reviewer notes",
     "",
     "Advisory for the human reviewer only; not a decision. No approval is recorded and nothing is published, enabled or merged.",
-    "Blind pass: an independent reviewer saw only prompt, stimulus, options, skill and claimed difficulty (keys, explanations and sidecars withheld).",
+    optionalArg("--blind-label") ?? "Blind pass: an independent reviewer saw only prompt, stimulus, options, skill and claimed difficulty (keys, explanations and sidecars withheld).",
     "Machine pass: first-party hash-bound recompute for nr-021..040 and maths-001..040, the closed-language solvers for the rest of NR/VR, and none for Reading (human semantic check).",
     "The contentHash column in each CSV is the hash an attestation binds to, so a sheet decision goes stale if the item is edited.",
     "",
