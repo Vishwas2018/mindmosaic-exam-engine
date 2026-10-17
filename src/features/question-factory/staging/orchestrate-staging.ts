@@ -6,6 +6,7 @@ import { parseCandidateProvenance, parseCandidateQuestion } from "../validation"
 import { applyTransition } from "../workflow";
 import type { StagingIssueCode } from "../config";
 import { FACTORY_THRESHOLDS } from "../config";
+import { buildDifficultyReportId, type StoredDifficultyReport } from "../difficulty";
 
 export interface StagingIssue {
   readonly code: StagingIssueCode;
@@ -176,5 +177,11 @@ export async function orchestrateStaging(
     }
   }
 
+  const difficulty = await repository.read("reports", buildDifficultyReportId(candidateId)) as StoredDifficultyReport | undefined;
+  if (questionOutcome.data.metadata.subject === "amc_mathematics" && difficulty?.result.outcome === "advisory") {
+    for (const warning of difficulty.result.evidence.issues) {
+      process.emitWarning(`${candidateId}: ${warning.message}`, { code: "AMC_DIFFICULTY_ADVISORY" });
+    }
+  }
   return { outcome: "staged", candidateId, contentHash: provenance.contentHash, revision: provenance.revision, replayed: moveResult.replayed };
 }

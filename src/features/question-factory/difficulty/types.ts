@@ -77,6 +77,6 @@ export interface DifficultyVerificationContext {
 export type DifficultyOutcome = "confirmed" | "mismatch" | "insufficient_evidence";
 
 export type DifficultyResult =
-  | { readonly status: "passed"; readonly outcome: "confirmed"; readonly evidence: DifficultyEvidence }
+  | { readonly status: "passed"; readonly outcome: "confirmed" | "advisory"; readonly evidence: DifficultyEvidence }
   | { readonly status: "failed"; readonly outcome: "mismatch"; readonly issues: readonly DifficultyIssue[]; readonly evidence: DifficultyEvidence }
   | { readonly status: "quarantined"; readonly outcome: "insufficient_evidence"; readonly issues: readonly DifficultyIssue[]; readonly evidence: DifficultyEvidence };
