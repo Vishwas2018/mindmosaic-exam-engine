@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-012",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "59c18decf276d25eba4e8c530633b989745bfd71b40e58541bb54d2dbc32cfb3",
+  "sourceManifestHash": "c153eeec63d5faa5caa7e5d960b77cb74aa17f669e73268305c7eecf0a3b8f17",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-012",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "For every 2 red beads in a pattern there are 3 blue beads. The pattern has 30 beads. How many are blue?",
+    "options": [
+      {
+        "id": "a",
+        "text": "20"
+      },
+      {
+        "id": "b",
+        "text": "18"
+      },
+      {
+        "id": "c",
+        "text": "15"
+      },
+      {
+        "id": "d",
+        "text": "10"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each group has 5 beads. There are 30 ÷ 5 = 6 groups, with 6 × 3 = 18 blue beads.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Apply a ratio to a total",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "3c9e88657c9e7487d9d06d2395ccfae95afae6c3aea845464a1e06c589ce9767"
+}

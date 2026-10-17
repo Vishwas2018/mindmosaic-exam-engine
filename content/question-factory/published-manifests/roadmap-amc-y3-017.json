@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-017",
+  "questionId": "roadmap-amc-y3-017",
+  "contentHash": "032f05fe70c6e0ab67284b51688716772489e79bf7cdc63950afb870742b0a6b",
+  "revision": 1,
+  "blueprintId": "amc-y3-017-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "dc223b0c87fb2756b3b3fc724b0278b08dfe6d79b8b94e0ea0697d549c6ca55d",
+  "difficultyFingerprint": "9c81e6831556a84aca34be55b8bba5b4dbfa301d689a45249279eb4710cc7fa0",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-017",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A clock shows 3:45 pm. What time will it show 35 minutes later?",
+    "options": [
+      {
+        "id": "a",
+        "text": "4:25 pm"
+      },
+      {
+        "id": "b",
+        "text": "4:30 pm"
+      },
+      {
+        "id": "c",
+        "text": "4:10 pm"
+      },
+      {
+        "id": "d",
+        "text": "3:80 pm"
+      },
+      {
+        "id": "e",
+        "text": "4:20 pm"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Fifteen minutes takes the time from 3:45 pm to 4:00 pm. There are 20 minutes left, so the time becomes 4:20 pm.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Calculate elapsed time across an hour",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6d27de698ba8255014501e421f7761cd980bd752e8242479bd11a97a1d70ade4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-017",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-f0d1d1ab6c8d97b311def6fe572635bdd42e0ad4"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:26.509Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "032f05fe70c6e0ab67284b51688716772489e79bf7cdc63950afb870742b0a6b",
+        "blueprintHash": "d86c589401dfddb00327f3d0c543891b028a44c6d4f5deafb8dc6b7d9daebcf1",
+        "candidateRevision": 1,
+        "reviewResultHash": "6c94bd78006bc4a80fe3018f9b0b93ccb16a4b248d7d60f65385bbc01ab14c58"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f11ff535eeb686bdf6a758e4b8022971397fc2700ecf8b7241e5d9315ebb826c"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-017",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "87fe42a63eaad2e69ef5b667ef93a47a447059db17631e2ded888f8032ff67ca"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "ee0616afbd9ab02384022de9ee7521cc861902b796287fa1500a75a76b406d3c",
+      "evidenceBinding": {
+        "candidateContentHash": "032f05fe70c6e0ab67284b51688716772489e79bf7cdc63950afb870742b0a6b",
+        "candidateRevision": 1,
+        "blueprintHash": "d86c589401dfddb00327f3d0c543891b028a44c6d4f5deafb8dc6b7d9daebcf1",
+        "reviewResultHash": "87fe42a63eaad2e69ef5b667ef93a47a447059db17631e2ded888f8032ff67ca"
+      },
+      "previousReviewHash": "f11ff535eeb686bdf6a758e4b8022971397fc2700ecf8b7241e5d9315ebb826c",
+      "reviewHash": "0396238a0440db0891bd49a459a756ac2d8be2788dcdd35ba7dd3ea8301bbec8"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-017",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "b19c65750cf6e75c6faea35120e5d43e688a08ccf36e5624f85cb6971f00ef4a",
+    "sourceManifestHash": "ee0616afbd9ab02384022de9ee7521cc861902b796287fa1500a75a76b406d3c",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-017",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A clock shows 3:45 pm. What time will it show 35 minutes later?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4:25 pm"
+        },
+        {
+          "id": "b",
+          "text": "4:30 pm"
+        },
+        {
+          "id": "c",
+          "text": "4:10 pm"
+        },
+        {
+          "id": "d",
+          "text": "3:80 pm"
+        },
+        {
+          "id": "e",
+          "text": "4:20 pm"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Fifteen minutes takes the time from 3:45 pm to 4:00 pm. There are 20 minutes left, so the time becomes 4:20 pm.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Calculate elapsed time across an hour",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "87fe42a63eaad2e69ef5b667ef93a47a447059db17631e2ded888f8032ff67ca"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-017",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "032f05fe70c6e0ab67284b51688716772489e79bf7cdc63950afb870742b0a6b",
+    "contentHash": "b19c65750cf6e75c6faea35120e5d43e688a08ccf36e5624f85cb6971f00ef4a"
+  }
+}

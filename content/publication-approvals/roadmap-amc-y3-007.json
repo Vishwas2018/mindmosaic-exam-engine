@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-007",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "22c20cf4b21c80dd9dbfddcd9c9331037e4a55155028d86c66afc0430774dcb2",
+  "sourceManifestHash": "e08561ebc7f433adb895d9dff07ac36b6e9129b488c4d609dbe3a4e277a06f4c",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-007",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Tiles numbered from 1 to 18 lie in a row. Every third tile is turned over. How many tiles remain face up?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9"
+      },
+      {
+        "id": "b",
+        "text": "13"
+      },
+      {
+        "id": "c",
+        "text": "15"
+      },
+      {
+        "id": "d",
+        "text": "12"
+      },
+      {
+        "id": "e",
+        "text": "11"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "One tile out of every group of three is turned over; two remain face up.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Divisibility and remainders",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "9193768f897de76c37848acd27d2b9a7b293aa579f7517070924dd738f4ff29f"
+}

@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y3-026",
+  "questionId": "roadmap-amc-y3-026",
+  "contentHash": "13f01e803f6da231cf9eef3f1167e08a31e3c5989048463072d5a3c85f2f3e70",
+  "revision": 1,
+  "blueprintId": "amc-y3-026-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "e06ffe984561796b68f35e2d07fa3bf0802d8461c0eac0f28c761815ad1fbe14",
+  "difficultyFingerprint": "8caea63e391073dc04d8dc04c0a727d95e3878181f8a330b12c34edd2fed00b2",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-026",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Three baskets hold 41 apples altogether. The first basket has 5 more apples than the second basket. The third basket has twice as many apples as the second basket. Then 3 apples are moved from the first basket to the third basket. How many apples are now in the third basket?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 21,
+      "tolerance": 0
+    },
+    "explanation": "Remove the 5 extra apples from the total: 41 - 5 = 36. The second basket holds one equal share, the first one share plus 5, and the third two shares. Each share is 36 ? 4 = 9. The third basket starts with 18 apples and receives 3, giving 21.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Reason about an unknown using several conditions",
+      "difficulty": "challenging",
+      "marks": 6,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6b41a473291c9a7955bb6266c273a202733e4bad721f14f1ad5edee646a680bf",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-026",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-65094332e53a14cd44ff23059455c805003e50c1"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:29.335Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "13f01e803f6da231cf9eef3f1167e08a31e3c5989048463072d5a3c85f2f3e70",
+        "blueprintHash": "6c35e11d65c22ceacc880cec606c7b8ff767356483e18de1f7837fa45aa278ae",
+        "candidateRevision": 1,
+        "reviewResultHash": "95b73019d0c6425967e876ee85f527b63607eb53b2bffe7506c41ff61e756e1f"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f440cf214a6d55d971251743c8aedfcd1ce85f940da346dd1cc5d3f01cb81ef0"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-026",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "5d1f075acfbaa47dea0cd76e80a404fb80a779f1e2f3de77c32d15f534521fb9"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "24dc58e405cf810ccd27ff3178f5dcb113ebaebddae2eab112801df63a6349cf",
+      "evidenceBinding": {
+        "candidateContentHash": "13f01e803f6da231cf9eef3f1167e08a31e3c5989048463072d5a3c85f2f3e70",
+        "candidateRevision": 1,
+        "blueprintHash": "6c35e11d65c22ceacc880cec606c7b8ff767356483e18de1f7837fa45aa278ae",
+        "reviewResultHash": "5d1f075acfbaa47dea0cd76e80a404fb80a779f1e2f3de77c32d15f534521fb9"
+      },
+      "previousReviewHash": "f440cf214a6d55d971251743c8aedfcd1ce85f940da346dd1cc5d3f01cb81ef0",
+      "reviewHash": "1230fb915fed0a3d96050e4c5f1cf98c603a0865555199f47547daf508cae4dc"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-026",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "b2ae0c14dfeeb32138317086d2680ae39d77f133bb05a4b2b743f8194b23c557",
+    "sourceManifestHash": "24dc58e405cf810ccd27ff3178f5dcb113ebaebddae2eab112801df63a6349cf",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-026",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Three baskets hold 41 apples altogether. The first basket has 5 more apples than the second basket. The third basket has twice as many apples as the second basket. Then 3 apples are moved from the first basket to the third basket. How many apples are now in the third basket?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 21,
+        "tolerance": 0
+      },
+      "explanation": "Remove the 5 extra apples from the total: 41 - 5 = 36. The second basket holds one equal share, the first one share plus 5, and the third two shares. Each share is 36 ? 4 = 9. The third basket starts with 18 apples and receives 3, giving 21.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Reason about an unknown using several conditions",
+        "difficulty": "challenging",
+        "marks": 6,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "5d1f075acfbaa47dea0cd76e80a404fb80a779f1e2f3de77c32d15f534521fb9"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-026",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "13f01e803f6da231cf9eef3f1167e08a31e3c5989048463072d5a3c85f2f3e70",
+    "contentHash": "b2ae0c14dfeeb32138317086d2680ae39d77f133bb05a4b2b743f8194b23c557"
+  }
+}

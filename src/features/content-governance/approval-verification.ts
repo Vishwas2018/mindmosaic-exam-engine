@@ -94,6 +94,7 @@ export async function getSourceManifestForQuestion(
   );
   if (matches.length === 0) {
     if (factoryIds.has(question.id)) throw new Error(`Missing factory source manifest for ${question.id}.`);
+
     return { revision: 1, sourceManifestHash: null };
   }
   if (!factoryIds.has(question.id)) throw new Error(`Unexpected source manifest for curated item ${question.id}.`);
@@ -207,6 +208,9 @@ export async function validateApprovalBatch(options: {
   readonly questionBank: readonly Question[];
   readonly approvedAt?: string;
   readonly existingApprovals?: ReadonlyMap<string, HumanPublicationApproval>;
+  /** Authoring CLI-only source resolver. Student serving never receives draft targets. */
+  readonly reviewSourceResolver?: (question: Question) => Promise<{ revision: number; sourceManifestHash: string | null }>;
+  readonly excludedReviewIds?: ReadonlySet<string>;
   /** Reviewable writing prompts. Ids must not collide with a question id. */
   readonly writingPrompts?: readonly WritingPromptSubject[];
   readonly existingWritingApprovals?: ReadonlyMap<string, HumanWritingPromptApproval>;
@@ -301,6 +305,10 @@ export async function validateApprovalBatch(options: {
     }
 
     // decision === "approve": all fields must bind the review to this exact revision.
+    if (options.excludedReviewIds?.has(qId)) {
+      fatalErrors.push(`${qId}: excluded from this approval round; revision and fresh review required.`);
+      continue;
+    }
 
     if (writing) {
       const canonical = canonicalWritingPromptHash(writing.task);
@@ -358,7 +366,7 @@ export async function validateApprovalBatch(options: {
 
     let source: { revision: number; sourceManifestHash: string | null };
     try {
-      source = await getSourceManifestForQuestion(question);
+      source = await (options.reviewSourceResolver ?? getSourceManifestForQuestion)(question);
     } catch (err) {
       fatalErrors.push(`Failed to verify source for '${qId}': ${err instanceof Error ? err.message : String(err)}`);
       continue;
@@ -521,6 +529,9 @@ export async function validateSingleApproval(options: {
   readonly reviewerFullName: string;
   readonly approvedAt?: string;
   readonly existingApprovals?: ReadonlyMap<string, HumanPublicationApproval>;
+  /** Authoring CLI-only source resolver. Student serving never receives draft targets. */
+  readonly reviewSourceResolver?: (question: Question) => Promise<{ revision: number; sourceManifestHash: string | null }>;
+  readonly excludedReviewIds?: ReadonlySet<string>;
   readonly questionBank: readonly Question[];
 }): Promise<
   | { readonly ok: true; readonly approval: HumanPublicationApproval; readonly alreadyRecorded: boolean }

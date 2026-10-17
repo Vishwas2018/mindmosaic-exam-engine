@@ -80,7 +80,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Working backwards and inverse operations",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -168,7 +168,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Multi-step arithmetic operations",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -212,7 +212,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Divisibility and remainders",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -256,7 +256,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Working backwards and inverse operations",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -344,7 +344,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Algebraic thinking and unknown values",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -652,7 +652,7 @@
         "subject": "amc_mathematics",
         "strand": "Logic & Problem-Solving",
         "skill": "Non-routine deduction and logical elimination",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 4,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -828,7 +828,7 @@
         "subject": "amc_mathematics",
         "strand": "Statistics & Chance",
         "skill": "Venn diagrams and set logic",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 4,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -872,7 +872,7 @@
         "subject": "amc_mathematics",
         "strand": "Geometry & Measurement",
         "skill": "Perimeter, area, and volume problem solving",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 4,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -916,7 +916,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Working backwards and inverse operations",
-        "difficulty": "challenging",
+        "difficulty": "medium",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -960,7 +960,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Place value with zero",
-        "difficulty": "challenging",
+        "difficulty": "easy",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -1004,7 +1004,7 @@
         "subject": "amc_mathematics",
         "strand": "Measurement & Geometry",
         "skill": "Compare perimeters",
-        "difficulty": "challenging",
+        "difficulty": "medium",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -1048,7 +1048,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Equation balance and substitution",
-        "difficulty": "challenging",
+        "difficulty": "medium",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -1092,7 +1092,7 @@
         "subject": "amc_mathematics",
         "strand": "Logic & Problem-Solving",
         "skill": "Order items from clues",
-        "difficulty": "challenging",
+        "difficulty": "easy",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []

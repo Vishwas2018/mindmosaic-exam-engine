@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-010",
+  "questionId": "roadmap-amc-y5-010",
+  "contentHash": "c55997c9caa2fde080f9a79f2ec2492fe89b677e33f8e4d1fa9a59eaeeb0e1d3",
+  "revision": 1,
+  "blueprintId": "amc-y5-010-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "52234b9ab9a8abd30364ffc09a3b1f6b77a4ea5506c171813e5bb3c995c95258",
+  "difficultyFingerprint": "3bfb062c0fbddd88bfdc85c3a6b7d23ce6068a2122f379fbc5cd7056d0e61a47",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-010",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangle has an area of 48 square centimetres and a width of 6 centimetres. What is its perimeter?",
+    "options": [
+      {
+        "id": "a",
+        "text": "14"
+      },
+      {
+        "id": "b",
+        "text": "28"
+      },
+      {
+        "id": "c",
+        "text": "24"
+      },
+      {
+        "id": "d",
+        "text": "48"
+      },
+      {
+        "id": "e",
+        "text": "32"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The length is 48 ÷ 6 = 8 cm. The perimeter is 6 + 8 + 6 + 8 = 28 cm.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Connect area and perimeter",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "302a14cc6661fb3548aa8458a69c5e864c40ea3b59063d7341dc92d42015ed01",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-010",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-41a26621260b755b3eb2c1d5f2504e18180c8417"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:33.042Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "c55997c9caa2fde080f9a79f2ec2492fe89b677e33f8e4d1fa9a59eaeeb0e1d3",
+        "blueprintHash": "28571d1e0d4fadd1d1bd4903abce36f88f5dd83fee6bf2d623a618b77082c59b",
+        "candidateRevision": 1,
+        "reviewResultHash": "a734abb348bb0b99a21f8ac3db5bc4c3c01c556ce4b6fa4f70616772f8a3c125"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ffaaa2d72c36c1206c45892ea45f566b474f110cc81cb034c9e19a66553fea58"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-010",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "d533425783c29bbe4ca3255d42da5f691480e2fbd3c2c9ec015403d9083e594d"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "a200b5128bd0759042be7e67783ce8a58f5f12dcf6b31a3ed87db73e980801f0",
+      "evidenceBinding": {
+        "candidateContentHash": "c55997c9caa2fde080f9a79f2ec2492fe89b677e33f8e4d1fa9a59eaeeb0e1d3",
+        "candidateRevision": 1,
+        "blueprintHash": "28571d1e0d4fadd1d1bd4903abce36f88f5dd83fee6bf2d623a618b77082c59b",
+        "reviewResultHash": "d533425783c29bbe4ca3255d42da5f691480e2fbd3c2c9ec015403d9083e594d"
+      },
+      "previousReviewHash": "ffaaa2d72c36c1206c45892ea45f566b474f110cc81cb034c9e19a66553fea58",
+      "reviewHash": "60feda6324c63d25f39827b97e2710af1c21bb9072ee865d357fa601b3d023f0"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-010",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "6e99599c41aced589c47361ae0020c9ee8c3f64ee9d725b63359f79634c76f1e",
+    "sourceManifestHash": "a200b5128bd0759042be7e67783ce8a58f5f12dcf6b31a3ed87db73e980801f0",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A rectangle has an area of 48 square centimetres and a width of 6 centimetres. What is its perimeter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "14"
+        },
+        {
+          "id": "b",
+          "text": "28"
+        },
+        {
+          "id": "c",
+          "text": "24"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "32"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The length is 48 ÷ 6 = 8 cm. The perimeter is 6 + 8 + 6 + 8 = 28 cm.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Connect area and perimeter",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "d533425783c29bbe4ca3255d42da5f691480e2fbd3c2c9ec015403d9083e594d"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-010",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "c55997c9caa2fde080f9a79f2ec2492fe89b677e33f8e4d1fa9a59eaeeb0e1d3",
+    "contentHash": "6e99599c41aced589c47361ae0020c9ee8c3f64ee9d725b63359f79634c76f1e"
+  }
+}

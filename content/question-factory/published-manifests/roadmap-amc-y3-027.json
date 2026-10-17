@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y3-027",
+  "questionId": "roadmap-amc-y3-027",
+  "contentHash": "f106db7f168fb81f1e38f85b63fcb3ebe9ea3da9f5b67960b85973e055bff470",
+  "revision": 1,
+  "blueprintId": "amc-y3-027-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "63a2b3a78249d4a9747cd4eee11b719878a617688c02c76a0b6b9bd9255474b4",
+  "difficultyFingerprint": "3f81ac9743b98c0cf5dc65d5e899992a6e84fdf8ad6ff348bb0e1ff749873bbb",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-027",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A two-digit number has digits that add to 10. Reversing its digits makes a number 18 greater than the original number. What is the original number?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 46,
+      "tolerance": 0
+    },
+    "explanation": "The reversed number is larger, so the ones digit is larger than the tens digit. Try the digit pairs that add to 10: 19 becomes 91 (72 greater), 28 becomes 82 (54 greater), 37 becomes 73 (36 greater), and 46 becomes 64 (18 greater). The original number is 46.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Reason about place value using two constraints",
+      "difficulty": "challenging",
+      "marks": 7,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f24524fb27e2b1f4f449cd9a4686d47c28263c438a971d143352f6484225b4b7",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-027",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-bd61045c2497dbb36bc3d80daaa582aa7b2df3a3"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:29.633Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "f106db7f168fb81f1e38f85b63fcb3ebe9ea3da9f5b67960b85973e055bff470",
+        "blueprintHash": "91042c9d54b92fa8a6f688473131f691dff975020482a00e0fbd00243b17fb40",
+        "candidateRevision": 1,
+        "reviewResultHash": "cd29d4da5cf5d847b1d983df7759dc09f3fc0653e1bdb44acef7d3534455a5ba"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1f8c132ba16b4a75c679db20d373e81cb0c63d22a0fc1b765b90c95d891b57b2"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-027",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "914589146ff782f79f45a96c4f82983c55b39cb6fc646d10f5f9cc94aeef8a4b"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "7c839f12c1d505b0c7d0518c1dcec04f7e70a7316d351e11dc51f4952934a17a",
+      "evidenceBinding": {
+        "candidateContentHash": "f106db7f168fb81f1e38f85b63fcb3ebe9ea3da9f5b67960b85973e055bff470",
+        "candidateRevision": 1,
+        "blueprintHash": "91042c9d54b92fa8a6f688473131f691dff975020482a00e0fbd00243b17fb40",
+        "reviewResultHash": "914589146ff782f79f45a96c4f82983c55b39cb6fc646d10f5f9cc94aeef8a4b"
+      },
+      "previousReviewHash": "1f8c132ba16b4a75c679db20d373e81cb0c63d22a0fc1b765b90c95d891b57b2",
+      "reviewHash": "c6da5c643b91a9fec23a1fcb6f6677d61fa691bfbc7255a22cd1d9e18f143991"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-027",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "a323756784afa1e271dbaf2e0faa1e011346200782a11dc8e8cbd199bde0e200",
+    "sourceManifestHash": "7c839f12c1d505b0c7d0518c1dcec04f7e70a7316d351e11dc51f4952934a17a",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-027",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A two-digit number has digits that add to 10. Reversing its digits makes a number 18 greater than the original number. What is the original number?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 46,
+        "tolerance": 0
+      },
+      "explanation": "The reversed number is larger, so the ones digit is larger than the tens digit. Try the digit pairs that add to 10: 19 becomes 91 (72 greater), 28 becomes 82 (54 greater), 37 becomes 73 (36 greater), and 46 becomes 64 (18 greater). The original number is 46.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Reason about place value using two constraints",
+        "difficulty": "challenging",
+        "marks": 7,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "914589146ff782f79f45a96c4f82983c55b39cb6fc646d10f5f9cc94aeef8a4b"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-027",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "f106db7f168fb81f1e38f85b63fcb3ebe9ea3da9f5b67960b85973e055bff470",
+    "contentHash": "a323756784afa1e271dbaf2e0faa1e011346200782a11dc8e8cbd199bde0e200"
+  }
+}

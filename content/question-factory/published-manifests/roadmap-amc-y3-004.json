@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-004",
+  "questionId": "roadmap-amc-y3-004",
+  "contentHash": "b5a68b647c8cb2f40efa941edbc3098764ef19328721791e0c2570b82a268c58",
+  "revision": 1,
+  "blueprintId": "amc-y3-004-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "711d3f44357fb95e005c5f35384873cf30d9b17ebe939cb7b5c66a57e7eb9a10",
+  "difficultyFingerprint": "a95282638a77421e70058960338f516c4c092ae8ef97827323cf67564628de49",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-004",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A model train trip starts at 9:20 am. It travels for 25 minutes, stops for 10 minutes, then travels for 15 more minutes. How many minutes after 9:00 am does it finish?",
+    "options": [
+      {
+        "id": "a",
+        "text": "69"
+      },
+      {
+        "id": "b",
+        "text": "70"
+      },
+      {
+        "id": "c",
+        "text": "73"
+      },
+      {
+        "id": "d",
+        "text": "67"
+      },
+      {
+        "id": "e",
+        "text": "71"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Include the twenty minutes before the start, both travel times and the stop.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Multi-step arithmetic operations",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8f439f3d29e64a94bbad9099bcf09fdb81b18c490725d32399b1385e4910284f",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-004",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-68b1f3abfb02937c467c8aeb212231b2da29a7a1"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:23.076Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "b5a68b647c8cb2f40efa941edbc3098764ef19328721791e0c2570b82a268c58",
+        "blueprintHash": "79e7a6bd1579c1c6e3bd5292d8658a9b7ecafc7078c9cb94a86991c2bfd04d85",
+        "candidateRevision": 1,
+        "reviewResultHash": "7fc0398eba24759c3f1aec044a7f9e0e14711c980ad2ac661693a8dfa673c3ed"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "dcda947beedca44ce6ec938f6125f61e3fc19eac40d470901574543bf5f4dfef"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-004",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "0de7f1f61aa163eaa976af4164c372dd283c6fa45b5d2842489922dbd7267a20"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "a610db6f0f08f4f23dd0b888ebbf9e874788a1a2658e36b57739daf5a31bf4d4",
+      "evidenceBinding": {
+        "candidateContentHash": "b5a68b647c8cb2f40efa941edbc3098764ef19328721791e0c2570b82a268c58",
+        "candidateRevision": 1,
+        "blueprintHash": "79e7a6bd1579c1c6e3bd5292d8658a9b7ecafc7078c9cb94a86991c2bfd04d85",
+        "reviewResultHash": "0de7f1f61aa163eaa976af4164c372dd283c6fa45b5d2842489922dbd7267a20"
+      },
+      "previousReviewHash": "dcda947beedca44ce6ec938f6125f61e3fc19eac40d470901574543bf5f4dfef",
+      "reviewHash": "e4d270c21eae27adaf3029530ea6a117425f66bef70875ce08bc683da8b98018"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-004",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "6efef15cd01aa32f1dac83188291f3dc6be8642d9c6a246efca87ae9ae61bf56",
+    "sourceManifestHash": "a610db6f0f08f4f23dd0b888ebbf9e874788a1a2658e36b57739daf5a31bf4d4",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-004",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A model train trip starts at 9:20 am. It travels for 25 minutes, stops for 10 minutes, then travels for 15 more minutes. How many minutes after 9:00 am does it finish?",
+      "options": [
+        {
+          "id": "a",
+          "text": "69"
+        },
+        {
+          "id": "b",
+          "text": "70"
+        },
+        {
+          "id": "c",
+          "text": "73"
+        },
+        {
+          "id": "d",
+          "text": "67"
+        },
+        {
+          "id": "e",
+          "text": "71"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Include the twenty minutes before the start, both travel times and the stop.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Multi-step arithmetic operations",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "0de7f1f61aa163eaa976af4164c372dd283c6fa45b5d2842489922dbd7267a20"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-004",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "b5a68b647c8cb2f40efa941edbc3098764ef19328721791e0c2570b82a268c58",
+    "contentHash": "6efef15cd01aa32f1dac83188291f3dc6be8642d9c6a246efca87ae9ae61bf56"
+  }
+}

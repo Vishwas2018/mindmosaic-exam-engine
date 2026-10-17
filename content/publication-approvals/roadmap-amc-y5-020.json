@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-020",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "7f30857724840b78a1328b3e6e3db09e88e98bfb7a0505ff054b2eefd6a58242",
+  "sourceManifestHash": "ee513b8b7afe626c0eeed3c25f2496496cf9f1349a5a4917ad9a853c759717e0",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-020",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A shape is made from two 5 cm squares joined along one complete side. What is the perimeter of the joined shape?",
+    "options": [
+      {
+        "id": "a",
+        "text": "20"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "25"
+      },
+      {
+        "id": "d",
+        "text": "40"
+      },
+      {
+        "id": "e",
+        "text": "35"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The joined shape is a 10 cm by 5 cm rectangle. Its perimeter is 10 + 5 + 10 + 5 = 30 cm.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Perimeter of joined shapes",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "e59c53f24a50bb41d5ea94edd4459d60c5a2c58e4ce62f2921ead0b03bc6601a"
+}

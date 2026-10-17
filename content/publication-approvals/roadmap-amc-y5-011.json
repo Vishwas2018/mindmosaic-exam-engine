@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-011",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "e17e3875c5c0e66a1b5495b11245c0f2ad497291a0db947e838efe9e8f90f956",
+  "sourceManifestHash": "d31484733065575a1b88098ff67694e4869e7226ef405468bbc4d384c2823512",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-011",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A number is multiplied by 4, then 7 is subtracted. The result is 45. What is the number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "11"
+      },
+      {
+        "id": "b",
+        "text": "15"
+      },
+      {
+        "id": "c",
+        "text": "13"
+      },
+      {
+        "id": "d",
+        "text": "17"
+      },
+      {
+        "id": "e",
+        "text": "9"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Undo subtracting 7 by adding 7: 45 + 7 = 52. Then divide by 4: 52 ÷ 4 = 13.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Work backwards through operations",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "700bf0134e633cdfce159e37ef800349657e46dbb0be24e6d8b9a7ab086c47bc"
+}

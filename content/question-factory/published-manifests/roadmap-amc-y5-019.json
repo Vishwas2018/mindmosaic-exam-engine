@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-019",
+  "questionId": "roadmap-amc-y5-019",
+  "contentHash": "1b0ce93ed17f541af2b9e8fd0c78772a594c9169f64a12287a11b8dc18ed11c1",
+  "revision": 1,
+  "blueprintId": "amc-y5-019-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "e9e58004a8ae0f59707f953c5384fba1b4c9b28de686a49b549b66a0565ef45c",
+  "difficultyFingerprint": "21cfc4647ae71fbab7187a5f5a807fea302aa77cf3fdb04d18b18084aa9d0010",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-019",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "apple"
+      },
+      {
+        "id": "b",
+        "text": "banana"
+      },
+      {
+        "id": "c",
+        "text": "cannot be known"
+      },
+      {
+        "id": "d",
+        "text": "pear"
+      },
+      {
+        "id": "e",
+        "text": "apple or banana"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Ben has pear. Asha must therefore have banana, because she cannot have apple. Chen has the remaining fruit, apple.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Deduce from constraints",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "44c07e8d2b5d6d58365f73cb1658c9d783f9db285aadf6665c35c273f6348c15",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-019",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-cf1ff5889ce8d35668acd39655b0ba44b137bf73"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:35.497Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "1b0ce93ed17f541af2b9e8fd0c78772a594c9169f64a12287a11b8dc18ed11c1",
+        "blueprintHash": "ef013d44474de3c405d374468be6d820993bf8273c7982c822783da47ca763c2",
+        "candidateRevision": 1,
+        "reviewResultHash": "1f144e7e3a677e48178816f62d56b141807074fdcfdb7d162f6f8d543fdb826a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "147d90ae4a6ae09c58f37ce7ca8ac431352d9d92c8e71d7642245fa2708d5a73"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-019",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "2f74d10b628e012d15830ba24fbc7b0fc902c0baae267d8cf3bb2b840bd5dc10"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "2dd609952541def8b4be2e55163f375f12c50d159b26c193d14db33fe401dd32",
+      "evidenceBinding": {
+        "candidateContentHash": "1b0ce93ed17f541af2b9e8fd0c78772a594c9169f64a12287a11b8dc18ed11c1",
+        "candidateRevision": 1,
+        "blueprintHash": "ef013d44474de3c405d374468be6d820993bf8273c7982c822783da47ca763c2",
+        "reviewResultHash": "2f74d10b628e012d15830ba24fbc7b0fc902c0baae267d8cf3bb2b840bd5dc10"
+      },
+      "previousReviewHash": "147d90ae4a6ae09c58f37ce7ca8ac431352d9d92c8e71d7642245fa2708d5a73",
+      "reviewHash": "67473993b0e8848a1e842d15af5972e5ba060186dac39a9df131f1bd08c36269"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-019",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "fb354034d87e0a0d717b78a51d0d597e61e142161ff0979f4aca63db7aabf2ff",
+    "sourceManifestHash": "2dd609952541def8b4be2e55163f375f12c50d159b26c193d14db33fe401dd32",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-019",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "apple"
+        },
+        {
+          "id": "b",
+          "text": "banana"
+        },
+        {
+          "id": "c",
+          "text": "cannot be known"
+        },
+        {
+          "id": "d",
+          "text": "pear"
+        },
+        {
+          "id": "e",
+          "text": "apple or banana"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Ben has pear. Asha must therefore have banana, because she cannot have apple. Chen has the remaining fruit, apple.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Deduce from constraints",
+        "difficulty": "easy",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "2f74d10b628e012d15830ba24fbc7b0fc902c0baae267d8cf3bb2b840bd5dc10"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-019",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "1b0ce93ed17f541af2b9e8fd0c78772a594c9169f64a12287a11b8dc18ed11c1",
+    "contentHash": "fb354034d87e0a0d717b78a51d0d597e61e142161ff0979f4aca63db7aabf2ff"
+  }
+}

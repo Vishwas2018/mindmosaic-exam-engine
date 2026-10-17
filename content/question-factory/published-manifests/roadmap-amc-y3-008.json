@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-008",
+  "questionId": "roadmap-amc-y3-008",
+  "contentHash": "423c6d744dde92be35db7cb1d3a9e3dc4f1bdad0b8ae079d8d124d0640b33f0b",
+  "revision": 1,
+  "blueprintId": "amc-y3-008-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "1f02656d2850f57f6aea08808cba0ff13db2bc6c2fc6df4f837e3b080073084c",
+  "difficultyFingerprint": "b8f37309f53c0be19eb204e561a1b53e61600ef67c32e90d42796148207594f7",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-008",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Jules is 4 years older than Ari. Together their ages total 20. How old is Jules?",
+    "options": [
+      {
+        "id": "a",
+        "text": "13"
+      },
+      {
+        "id": "b",
+        "text": "9"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "15"
+      },
+      {
+        "id": "e",
+        "text": "11"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Remove the four-year difference to make equal ages, then restore it to the older child.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Algebraic thinking and unknown values",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "04e794f56e541280ba97f9bd9ed9f0075ff5dc3cd93325c835066b3885edc989",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-008",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-8a73eb4d79bce499c217898505940a178738caf1"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:24.144Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "423c6d744dde92be35db7cb1d3a9e3dc4f1bdad0b8ae079d8d124d0640b33f0b",
+        "blueprintHash": "05a8ad110a943b760d1de20b176b8bf3fe5057b7cd88cbe759659a5efdfa872d",
+        "candidateRevision": 1,
+        "reviewResultHash": "585054d1e8b78b746d313afed90210cc18df1864370f9619cd19b8a5754163f9"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "508c8e9f5c6500d471a911cb92c8311aff9149bf1f736e4f5872e5d8e6841653"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-008",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "e4a2467c74ff253cca367b765dc96a4310f5d4e869fcc94a7fe3f4b3eff7ee54"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "f8209faed803cea42651293d0c09e8554a23e654b00e7f32851797c4e2219054",
+      "evidenceBinding": {
+        "candidateContentHash": "423c6d744dde92be35db7cb1d3a9e3dc4f1bdad0b8ae079d8d124d0640b33f0b",
+        "candidateRevision": 1,
+        "blueprintHash": "05a8ad110a943b760d1de20b176b8bf3fe5057b7cd88cbe759659a5efdfa872d",
+        "reviewResultHash": "e4a2467c74ff253cca367b765dc96a4310f5d4e869fcc94a7fe3f4b3eff7ee54"
+      },
+      "previousReviewHash": "508c8e9f5c6500d471a911cb92c8311aff9149bf1f736e4f5872e5d8e6841653",
+      "reviewHash": "7f9b1efab61fd020e6aee7b35c789d89994c71364ed28e64abd993330cb10454"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-008",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "de8212e61060e39b1916c17e946d1194a4d79cbd97b01b56e34bb4b8dd804302",
+    "sourceManifestHash": "f8209faed803cea42651293d0c09e8554a23e654b00e7f32851797c4e2219054",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-008",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Jules is 4 years older than Ari. Together their ages total 20. How old is Jules?",
+      "options": [
+        {
+          "id": "a",
+          "text": "13"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        },
+        {
+          "id": "e",
+          "text": "11"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Remove the four-year difference to make equal ages, then restore it to the older child.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Algebraic thinking and unknown values",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "e4a2467c74ff253cca367b765dc96a4310f5d4e869fcc94a7fe3f4b3eff7ee54"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-008",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "423c6d744dde92be35db7cb1d3a9e3dc4f1bdad0b8ae079d8d124d0640b33f0b",
+    "contentHash": "de8212e61060e39b1916c17e946d1194a4d79cbd97b01b56e34bb4b8dd804302"
+  }
+}

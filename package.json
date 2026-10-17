@@ -70,6 +70,7 @@
     "content:validate-scholarship-drafts": "tsx scripts/validate-scholarship-drafts.mts",
     "content:approval-queue": "tsx scripts/content-approvals.mts queue",
     "content:review-sheet": "tsx scripts/review-sheet.mts",
+    "content:review-amc-drafts": "tsx scripts/review-amc-drafts.mts",
     "content:record-approval": "tsx scripts/content-approvals.mts record",
     "content:record-approvals": "tsx scripts/content-approvals.mts record-batch",
     "content:verify-publication": "tsx scripts/content-approvals.mts verify",

@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-030",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "488594932944f5c36131539b5a1a4552bea545d5582ffaf359b78e503c97bd6b",
+  "sourceManifestHash": "123b433310e3da4a4dd2a7b35ae82a5ceba436eeee878c54c7e5d0be9791c406",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-030",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Using the digits 1, 2, 4 and 7, how many different three-digit even numbers less than 400 can be made without repeating a digit?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "The hundreds digit must be 1 or 2, and the ones digit must be 2 or 4. With 1 in the hundreds place, the possibilities are 124, 142, 172 and 174. With 2 in the hundreds place, they are 214 and 274. There are 6 numbers altogether.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "List possibilities under several conditions",
+      "difficulty": "challenging",
+      "marks": 10,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "55ef1deeedf8449ee0a0be499c9fde459e6a080a9c0a6c7819ad7219b1930752"
+}

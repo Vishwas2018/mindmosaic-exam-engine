@@ -9,6 +9,9 @@
  * terminal `cannot_derive`/`ambiguous` outcome rather than falling through
  * to a guess.
  */
+import { verifyFirstPartyAmcAttestation } from "./amc-attestation";
+import { candidateQuestionSchema } from "../ingestion/candidate-question";
+import { hashJson } from "../provenance/content-hash";
 import type { Question } from "@/schemas/question.schema";
 import type { VisualAsset } from "@/schemas/visual.schema";
 
@@ -844,6 +847,17 @@ function attemptNumericPredicateOverOptions(question: Question): DerivationOutco
   return success("numeric_predicate", { kind: "multiple_options", optionIds: matchingIds }, `[${matchingIds.join(",")}]`);
 }
 
+function attemptFirstPartyAmc(question: Question): DerivationOutcome {
+  if (question.metadata.subject !== "amc_mathematics") return NOT_APPLICABLE;
+  const candidate = candidateQuestionSchema.safeParse(question);
+  if (!candidate.success) return cannotDerive("unable_to_derive_answer", "Invalid AMC question shape.");
+  const attested = verifyFirstPartyAmcAttestation(candidate.data, hashJson(candidate.data));
+  if (!attested.ok) return cannotDerive("unable_to_derive_answer", attested.message);
+  if (attested.matchedOptionId) return success("first_party_amc_attestation", { kind: "single_option", optionId: attested.matchedOptionId }, String(attested.computedValue));
+  if (typeof attested.computedValue !== "number") return cannotDerive("unable_to_derive_answer", "Non-numeric AMC result.");
+  return success("first_party_amc_attestation", { kind: "number", value: fractionFromFiniteNumber(attested.computedValue) }, String(attested.computedValue));
+}
+
 function attemptSolver(question: Question): DerivationOutcome {
   if (!("solverParams" in question) || question.solverParams === undefined) return NOT_APPLICABLE;
   const result = computeSolver(question.solverParams);
@@ -864,6 +878,7 @@ function attemptSolver(question: Question): DerivationOutcome {
 /* ---------------------------------------------------------------------- */
 
 const DERIVATION_METHODS: readonly ((question: Question, workingSteps?: DeclaredWorkingSolution) => DerivationOutcome)[] = [
+  attemptFirstPartyAmc,
   attemptSolver,
   attemptArithmetic,
   attemptMoney,

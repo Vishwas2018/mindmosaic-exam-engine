@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y5-030",
+  "questionId": "roadmap-amc-y5-030",
+  "contentHash": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086",
+  "revision": 1,
+  "blueprintId": "amc-y5-030-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "4f15c38eeb802952118792d033be47ee7cc2bd8558f2afa336a6405de6f33466",
+  "difficultyFingerprint": "db30d2c169c969111c7293de8c2d10f8206272294649a8790f28621af92d8e9e",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-030",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How many three-digit numbers have digits that add to 6, if zero is allowed but the hundreds digit cannot be zero?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 21,
+      "tolerance": 0
+    },
+    "explanation": "For hundreds digits 1 to 6, the remaining two digits must total 5, 4, 3, 2, 1 or 0. These give 6 + 5 + 4 + 3 + 2 + 1 = 21 numbers.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Systematic enumeration with place value",
+      "difficulty": "challenging",
+      "marks": 10,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3ecf9619f073cb872b277a8a70ae5189660541654ec086ca7b85d7266678c49c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-030",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-7abaeaa7e9b4950ec830af5776fd9af06bdccad2"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:39.139Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086",
+        "blueprintHash": "0e5970fa45da9be24f948593452adc0446210b6f941e1d6fc0018d110adab439",
+        "candidateRevision": 1,
+        "reviewResultHash": "1b9181de12d7c61a441780c1597199e0b1d30b9d39e4b81aa365b6f9c2033203"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "30be25d64f6f22ebc098ef493c4bf9dbbbe8d8d300683040da229acca7f0d453"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-030",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "be69d863811e14a30c0da59247e321aab5dcc3feb76bbb31624812f80ce30f95"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "61346ba550d645cab5dd76742a89b6e7d55c9518a9ad2931aa969e634ab0a349",
+      "evidenceBinding": {
+        "candidateContentHash": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086",
+        "candidateRevision": 1,
+        "blueprintHash": "0e5970fa45da9be24f948593452adc0446210b6f941e1d6fc0018d110adab439",
+        "reviewResultHash": "be69d863811e14a30c0da59247e321aab5dcc3feb76bbb31624812f80ce30f95"
+      },
+      "previousReviewHash": "30be25d64f6f22ebc098ef493c4bf9dbbbe8d8d300683040da229acca7f0d453",
+      "reviewHash": "91e4b5c7ef5b94c4a484737bc36f22633fede1d67de797a5422f14fd547253b6"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-030",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "36f2adb7338419ff9b8175c0f42518c0d8d1895d68e50621e9bda028757e1daa",
+    "sourceManifestHash": "61346ba550d645cab5dd76742a89b6e7d55c9518a9ad2931aa969e634ab0a349",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-030",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "How many three-digit numbers have digits that add to 6, if zero is allowed but the hundreds digit cannot be zero?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 21,
+        "tolerance": 0
+      },
+      "explanation": "For hundreds digits 1 to 6, the remaining two digits must total 5, 4, 3, 2, 1 or 0. These give 6 + 5 + 4 + 3 + 2 + 1 = 21 numbers.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Systematic enumeration with place value",
+        "difficulty": "challenging",
+        "marks": 10,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "be69d863811e14a30c0da59247e321aab5dcc3feb76bbb31624812f80ce30f95"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-030",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086",
+    "contentHash": "36f2adb7338419ff9b8175c0f42518c0d8d1895d68e50621e9bda028757e1daa"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-006",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "d86d2d8a407ac1a202ee20853084254d24ce8984c7e71c1a16ca1addcb23d9a6",
+  "sourceManifestHash": "472a02677814b8ad4bbfb3ff5e8e5b78f5b4c9ba7a088885617266268d488d67",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-006",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A number is increased by 7 and then doubled. The result is 40. What was the starting number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "16"
+      },
+      {
+        "id": "b",
+        "text": "10"
+      },
+      {
+        "id": "c",
+        "text": "14"
+      },
+      {
+        "id": "d",
+        "text": "13"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Undo doubling first and then undo adding seven.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Working backwards and inverse operations",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "2acaeb10e6b69c499495736c90a0de34059b53614bd0209c3516413bc814ee60"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "amc-y3-023-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-3",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Measurement & Geometry",
+  "skill": "amc.compare-perimeters",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "targetCount": 1,
+  "marks": 5,
+  "estimatedTimeSeconds": 150,
+  "learningObjective": "Compare perimeters",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-009",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "e13315f30e832e7521a073409c878d2d271a8ed6af41a7927dd5a28b2bccd6a4",
+  "sourceManifestHash": "7f096a1d9aa66cc6f387460192494672a31b352c2636664d50ca26605077ee4e",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-009",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the greatest factor of 36 that is less than 10?",
+    "options": [
+      {
+        "id": "a",
+        "text": "4"
+      },
+      {
+        "id": "b",
+        "text": "9"
+      },
+      {
+        "id": "c",
+        "text": "8"
+      },
+      {
+        "id": "d",
+        "text": "6"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The factors of 36 below 10 are 1, 2, 3, 4, 6 and 9. The greatest is 9.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Factors and divisibility",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "46f476947c5dde7fd9acd8441c6799465a5e69b06bc79f28498390e5320fc8ab"
+}

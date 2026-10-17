@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-025",
+  "questionId": "roadmap-amc-y5-025",
+  "contentHash": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
+  "revision": 1,
+  "blueprintId": "amc-y5-025-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "ba565b08e2aa92dbb1c1e09f6c7466f54449358684a5c695ed57a7a3441a9b8b",
+  "difficultyFingerprint": "6aa9b71e1d7798b7cf3c092e7d99f38aec1aabd3cf4b3020987b88caa315748f",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-025",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A 10 cm square is divided by a vertical line 4 cm from its left side. What is the difference between the areas of the two rectangles?",
+    "options": [
+      {
+        "id": "a",
+        "text": "20"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "10"
+      },
+      {
+        "id": "d",
+        "text": "40"
+      },
+      {
+        "id": "e",
+        "text": "60"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "The rectangles have widths 4 cm and 6 cm, so their areas are 40 cm² and 60 cm². The difference is 20 cm².",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Compare areas within a partition",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "fc29d5245864f55affe8ed5447c1f4b8e4ca40e2a2924fb6ef01fb424e9963b1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-025",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-05f0771ce80d93a7258596a22125f0d7796c04da"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:37.186Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
+        "blueprintHash": "aeb0742c55873937e7cd790e00dafcdb9c4fa9e09f726ff96d031602e603ea75",
+        "candidateRevision": 1,
+        "reviewResultHash": "188b0f0aff391eb58a2e1f10f9b024ccc652b906ecbde16f8efab37cb1285ba7"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f466bdb6d3523cc7ebddfc6575366469e7c12cadd76c5e4db59170c82251eb33"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-025",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "0d6ed943cbc59c6a8382583ee22e5f6393ecc94767a8ba99f1aefdc9770fc3e6"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:30.151Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "0a7dc64f519a45a7b741c7517eeb7e3d7ba47c16fa6b2796caad7b5991ef0fd9",
+      "evidenceBinding": {
+        "candidateContentHash": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
+        "candidateRevision": 1,
+        "blueprintHash": "aeb0742c55873937e7cd790e00dafcdb9c4fa9e09f726ff96d031602e603ea75",
+        "reviewResultHash": "0d6ed943cbc59c6a8382583ee22e5f6393ecc94767a8ba99f1aefdc9770fc3e6"
+      },
+      "previousReviewHash": "f466bdb6d3523cc7ebddfc6575366469e7c12cadd76c5e4db59170c82251eb33",
+      "reviewHash": "040b961b8461b9003e2dce80a2a6dce206a66482e1a370e665798401c4b50ef6"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-025",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:30.151Z",
+    "contentHash": "357dbc8dfd3ed7b0bcb3344ead612d8dd40af7f2ff7454a7ce434e237e3c62c2",
+    "sourceManifestHash": "0a7dc64f519a45a7b741c7517eeb7e3d7ba47c16fa6b2796caad7b5991ef0fd9",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-025",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A 10 cm square is divided by a vertical line 4 cm from its left side. What is the difference between the areas of the two rectangles?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "text": "40"
+        },
+        {
+          "id": "e",
+          "text": "60"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The rectangles have widths 4 cm and 6 cm, so their areas are 40 cm² and 60 cm². The difference is 20 cm².",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Compare areas within a partition",
+        "difficulty": "easy",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "0d6ed943cbc59c6a8382583ee22e5f6393ecc94767a8ba99f1aefdc9770fc3e6"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-025",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
+    "contentHash": "357dbc8dfd3ed7b0bcb3344ead612d8dd40af7f2ff7454a7ce434e237e3c62c2"
+  }
+}

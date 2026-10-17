@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-002",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "f16254b6315d5cfe941e76d18cd0c9cfa1d06760f6a23da5dabb6562ec11f69e",
+  "sourceManifestHash": "d2c8031d62eecf7c9b201a9fe6775f1d6c7207864734218672745d08e74a1cf6",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-002",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Mina puts 4 stickers on each page of a notebook. She uses 24 stickers and leaves 3 pages empty. How many pages does the notebook have?",
+    "options": [
+      {
+        "id": "a",
+        "text": "12"
+      },
+      {
+        "id": "b",
+        "text": "6"
+      },
+      {
+        "id": "c",
+        "text": "10"
+      },
+      {
+        "id": "d",
+        "text": "8"
+      },
+      {
+        "id": "e",
+        "text": "9"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Divide the stickers by four to find used pages, then add the three empty pages.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Working backwards and inverse operations",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "e4db5b8d84f9515a698725191923007b2e6b07e54ab27e2975991c8314092ccb"
+}

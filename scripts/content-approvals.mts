@@ -3,6 +3,7 @@ import "./lib/allow-server-only.mts";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { AMC_EXCLUDED_FROM_REVIEW, loadAmcReviewTargets } from "./lib/amc-review-sources.mjs";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import {
   WRITING_APPROVALS_DIRECTORY,
@@ -111,11 +112,22 @@ if (command === "queue") {
     throw new Error(`No approval rows found in ${sheetFile}.`);
   }
 
+  // Private draft review targets do not enter any served or assembled bank.
+  const draftTargets = rows.some((row) => /^roadmap-amc-y[35]-[0-9]{3}$/.test(row.questionId))
+    ? await loadAmcReviewTargets() : [];
+  const authoredIds = new Set(publishedExamBank.map((question) => question.id));
   const validation = await validateApprovalBatch({
     rows,
     reviewerFullName: reviewer.trim(),
-    questionBank: publishedExamBank,
+    questionBank: [...publishedExamBank, ...draftTargets.filter((target) => !authoredIds.has(target.question.id)).map((target) => target.question)],
     writingPrompts: await loadWritingDraftSubjects(),
+    excludedReviewIds: new Set(Object.keys(AMC_EXCLUDED_FROM_REVIEW)),
+    reviewSourceResolver: async (question) => {
+      const target = draftTargets.find((entry) => entry.question.id === question.id);
+      if (!target) return getSourceManifestForQuestion(question);
+      if (canonicalQuestionHash(question) !== target.source.contentHash) throw new Error(`Stale AMC review source: ${question.id}`);
+      return { revision: target.source.revision, sourceManifestHash: target.sourceManifestHash };
+    },
   });
 
   if (!validation.ok) {
@@ -161,6 +173,7 @@ if (command === "queue") {
     JSON.stringify(
       {
         authored: publishedExamBank.length,
+        pendingPublication: report.pendingPublication,
         eligible: report.questions.length,
         awaitingApproval: report.excluded.filter((q) => q.reason === "awaiting_human_approval").length,
         problems: report.problems,

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-005",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "0e66d9aef5af30c8f78b590a199bb2292178e40b8d1de898e0b7dd4cc973fc3c",
+  "sourceManifestHash": "b25ad42278bd678552ae063a5fdbcfc0ccf7fc8d1a074d71dd5ab523ed349108",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-005",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Two angles around a point are 90° and 120°. What is the size of the remaining angle?",
+    "options": [
+      {
+        "id": "a",
+        "text": "160"
+      },
+      {
+        "id": "b",
+        "text": "170"
+      },
+      {
+        "id": "c",
+        "text": "140"
+      },
+      {
+        "id": "d",
+        "text": "150"
+      },
+      {
+        "id": "e",
+        "text": "130"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Angles around a point total 360°. The missing angle is 360 − 90 − 120 = 150°.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Angles around a point",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "617bcbd9386842423122d574bea3b3c8162e3da085e8ea66c5749487913fa735"
+}

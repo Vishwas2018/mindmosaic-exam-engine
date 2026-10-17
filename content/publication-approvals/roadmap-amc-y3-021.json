@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-021",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "432443326c781aaeb4cca07452c3345694b4e8d4943eebadd7f25031f63684b2",
+  "sourceManifestHash": "7b4c4a06c5b764da923417f3d8090bcadbe3abc21fa73cf96da4c1b0cdb47d60",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-021",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A box starts with some tokens. Lena adds 8, doubles the total, then removes 6. There are now 44 tokens. How many were there at the start?",
+    "options": [
+      {
+        "id": "a",
+        "text": "14"
+      },
+      {
+        "id": "b",
+        "text": "17"
+      },
+      {
+        "id": "c",
+        "text": "16"
+      },
+      {
+        "id": "d",
+        "text": "18"
+      },
+      {
+        "id": "e",
+        "text": "20"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Reverse the steps: add six, halve, then subtract eight.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Working backwards and inverse operations",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "63105986273f30e263d85762268123f7a553475e1082f965a64b79b69279282a"
+}

@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y3-029",
+  "questionId": "roadmap-amc-y3-029",
+  "contentHash": "b24c55861cfdf17eee479b04f07e57eddba1756f98729ff2297f58eb6a92c57b",
+  "revision": 1,
+  "blueprintId": "amc-y3-029-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "2fa7bb9ef06347f304e0829376e8bdc7e19cf215887b6303f4aaf71c29dd24b5",
+  "difficultyFingerprint": "f677a4cbd0ab57bd587baadffa5ae3181fc036c608a3968d051ba5f0a2773542",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-029",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bus starts with some children. At the first stop, 5 children get off and 7 get on. At the second stop, half of the children on the bus get off, then 4 get on. There are now 13 children on the bus. How many children were on the bus at the start?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 16,
+      "tolerance": 0
+    },
+    "explanation": "Work backwards. Before the last 4 joined, 13 - 4 = 9 children remained. This was half the bus, so there were 18 before that stop. Undo the first stop: 18 - 7 + 5 = 16 children at the start. Check: 16 - 5 + 7 = 18; half remain, then 4 join, giving 13.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Work backwards through several changes",
+      "difficulty": "challenging",
+      "marks": 9,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f061212cc47bf16e1e609d785355b0c6c9b836601ec6b1fd96b80acedcb3d5ee",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-029",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-319e655a72fbf3c2b41ac2c25e723b48115ac093"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:30.272Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "b24c55861cfdf17eee479b04f07e57eddba1756f98729ff2297f58eb6a92c57b",
+        "blueprintHash": "cf33b6258b4d59276ae463e1cb66dfa92a927e9eeb43a520068d43ae186b60cc",
+        "candidateRevision": 1,
+        "reviewResultHash": "a8764f14886376de476e36474edfd5d4e95bd4d05321d610c6a97b2986c2b07c"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "45a347979d664b004cc132921ac6cd21c7fc15570b7cc53745720df93f4d127e"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-029",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "baeb46dfd76ea77cd1c1548bf7d4dc65b1c3b2d8e0db138e9eec3be24dea61f0"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "361c2a797de7942471f62df7697d94ba1b5986ae09b7a0d63acdd3760518befe",
+      "evidenceBinding": {
+        "candidateContentHash": "b24c55861cfdf17eee479b04f07e57eddba1756f98729ff2297f58eb6a92c57b",
+        "candidateRevision": 1,
+        "blueprintHash": "cf33b6258b4d59276ae463e1cb66dfa92a927e9eeb43a520068d43ae186b60cc",
+        "reviewResultHash": "baeb46dfd76ea77cd1c1548bf7d4dc65b1c3b2d8e0db138e9eec3be24dea61f0"
+      },
+      "previousReviewHash": "45a347979d664b004cc132921ac6cd21c7fc15570b7cc53745720df93f4d127e",
+      "reviewHash": "017b85e1cb59aa4ea025d460e6430134420b3de6f141ae776572e3c176d9ede0"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-029",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "b74c31132ebef0958c444e815c389657e795f31b1dc3b28ba238db2e0d36e7cb",
+    "sourceManifestHash": "361c2a797de7942471f62df7697d94ba1b5986ae09b7a0d63acdd3760518befe",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-029",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A bus starts with some children. At the first stop, 5 children get off and 7 get on. At the second stop, half of the children on the bus get off, then 4 get on. There are now 13 children on the bus. How many children were on the bus at the start?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 16,
+        "tolerance": 0
+      },
+      "explanation": "Work backwards. Before the last 4 joined, 13 - 4 = 9 children remained. This was half the bus, so there were 18 before that stop. Undo the first stop: 18 - 7 + 5 = 16 children at the start. Check: 16 - 5 + 7 = 18; half remain, then 4 join, giving 13.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Work backwards through several changes",
+        "difficulty": "challenging",
+        "marks": 9,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "baeb46dfd76ea77cd1c1548bf7d4dc65b1c3b2d8e0db138e9eec3be24dea61f0"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-029",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "b24c55861cfdf17eee479b04f07e57eddba1756f98729ff2297f58eb6a92c57b",
+    "contentHash": "b74c31132ebef0958c444e815c389657e795f31b1dc3b28ba238db2e0d36e7cb"
+  }
+}

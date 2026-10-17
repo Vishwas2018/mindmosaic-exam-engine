@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-011",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "76e0827b7585b53eb55828b93e0ade5e8946a930e89e7fdabefcb381d3de56ae",
+  "sourceManifestHash": "5da448f14d01fa58dbda5e8096d13a70329a56c374fc4af82cb3dca666c496d7",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-011",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On a 5 by 5 checkerboard, the top-left square is dark and neighbouring squares alternate colours. How many squares are dark?",
+    "options": [
+      {
+        "id": "a",
+        "text": "10"
+      },
+      {
+        "id": "b",
+        "text": "13"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "14"
+      },
+      {
+        "id": "e",
+        "text": "16"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each pair of neighbouring squares contributes one dark square, with one extra dark square on an odd board.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Grid puzzles and spatial reasoning",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ae90554733210b3ed48a59ad1f336f40278e891f0115250048160058f84426df"
+}

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-021",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "17b00b24cc1e38453b89664f4ec04ea3fb4f48b6614da01e205a051a02874075",
+  "sourceManifestHash": "a998b8ec40df3b49a099fd1ef79b18491bc8549bbf042b9d23f8eb221e4b4e20",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-021",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A two-digit number has digits that add to 11. Reversing its digits makes a number 27 greater. What is the original number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "65"
+      },
+      {
+        "id": "b",
+        "text": "29"
+      },
+      {
+        "id": "c",
+        "text": "47"
+      },
+      {
+        "id": "d",
+        "text": "38"
+      },
+      {
+        "id": "e",
+        "text": "56"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "A reversal that is 27 greater means the tens digit rises by 3. The digits 4 and 7 add to 11, so the original number is 47.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Digit reasoning",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "503a36c2ab6ba681e2b34e7a2ae4c616672a07fe6dd3021581376fd3d500cf93"
+}

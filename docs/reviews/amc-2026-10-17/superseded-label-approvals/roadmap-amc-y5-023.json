@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-023",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "1069114ab872645e8762391f6c395bf5f180accac3f135522190c325ec5c0753",
+  "sourceManifestHash": "355089c7afbd0253bdd3efef4b46ca3215617a38c33925fe8ee1bb4585d36d66",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-023",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bag contains 4 red, 3 blue and 1 green counter. Which statement is true about one counter drawn without looking?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Green is impossible"
+      },
+      {
+        "id": "b",
+        "text": "Red is as likely as all non-red colours together"
+      },
+      {
+        "id": "c",
+        "text": "Blue and green are equally likely"
+      },
+      {
+        "id": "d",
+        "text": "Blue is more likely than red"
+      },
+      {
+        "id": "e",
+        "text": "Red is certain"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "There are 4 red counters and 4 non-red counters, so red and non-red have equal probability.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Statistics & Probability",
+      "topic": "Statistics & Probability",
+      "skill": "Compare probabilities",
+      "difficulty": "challenging",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "baf7622d1d37bcc405fd647b24260c32e6cda7b61299fe684540893816b6b7f0"
+}

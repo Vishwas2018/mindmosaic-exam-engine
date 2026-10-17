@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-012",
+  "questionId": "roadmap-amc-y5-012",
+  "contentHash": "0b26e4c1e47018365941160e30bf8e6fbd1e1efded8ff9f43a300193840cd660",
+  "revision": 1,
+  "blueprintId": "amc-y5-012-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a16242823f8896480f82d1f677ee6700ab452c820a8a0fffec64c76eedc9535a",
+  "difficultyFingerprint": "1788c4529ee620a05afa289c1d93affdefcde456105a009b56d07dd659271c94",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-012",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "For every 2 red beads in a pattern there are 3 blue beads. The pattern has 30 beads. How many are blue?",
+    "options": [
+      {
+        "id": "a",
+        "text": "20"
+      },
+      {
+        "id": "b",
+        "text": "18"
+      },
+      {
+        "id": "c",
+        "text": "15"
+      },
+      {
+        "id": "d",
+        "text": "10"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each group has 5 beads. There are 30 ÷ 5 = 6 groups, with 6 × 3 = 18 blue beads.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Apply a ratio to a total",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "144f5530c7765bfdc0543b90da82326331ebcb86202bafbb6997825105ed3411",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-012",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-60ab03a7e5b58662ec4775038e021b927bced2b4"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:33.570Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "0b26e4c1e47018365941160e30bf8e6fbd1e1efded8ff9f43a300193840cd660",
+        "blueprintHash": "3512dc259b29607a039e3f48940983852b20c1decd5e5a36fb899068d78d8133",
+        "candidateRevision": 1,
+        "reviewResultHash": "c07020ae06e556ea0bfa082e272c5e9b60745049ecb7d6ec170311ef5c24660b"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ee49fb1cde1c78e75f1d918861710bd980393cd85013f3c8a4a44d6b17e257dd"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-012",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "3c9e88657c9e7487d9d06d2395ccfae95afae6c3aea845464a1e06c589ce9767"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "c153eeec63d5faa5caa7e5d960b77cb74aa17f669e73268305c7eecf0a3b8f17",
+      "evidenceBinding": {
+        "candidateContentHash": "0b26e4c1e47018365941160e30bf8e6fbd1e1efded8ff9f43a300193840cd660",
+        "candidateRevision": 1,
+        "blueprintHash": "3512dc259b29607a039e3f48940983852b20c1decd5e5a36fb899068d78d8133",
+        "reviewResultHash": "3c9e88657c9e7487d9d06d2395ccfae95afae6c3aea845464a1e06c589ce9767"
+      },
+      "previousReviewHash": "ee49fb1cde1c78e75f1d918861710bd980393cd85013f3c8a4a44d6b17e257dd",
+      "reviewHash": "dba4c7b2bfcba072582d96d2672b5a25c4c1250ef3e090042fb991f11e19a30d"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-012",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "59c18decf276d25eba4e8c530633b989745bfd71b40e58541bb54d2dbc32cfb3",
+    "sourceManifestHash": "c153eeec63d5faa5caa7e5d960b77cb74aa17f669e73268305c7eecf0a3b8f17",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-012",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "For every 2 red beads in a pattern there are 3 blue beads. The pattern has 30 beads. How many are blue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Each group has 5 beads. There are 30 ÷ 5 = 6 groups, with 6 × 3 = 18 blue beads.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Apply a ratio to a total",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "3c9e88657c9e7487d9d06d2395ccfae95afae6c3aea845464a1e06c589ce9767"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-012",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "0b26e4c1e47018365941160e30bf8e6fbd1e1efded8ff9f43a300193840cd660",
+    "contentHash": "59c18decf276d25eba4e8c530633b989745bfd71b40e58541bb54d2dbc32cfb3"
+  }
+}

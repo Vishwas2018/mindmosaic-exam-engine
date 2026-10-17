@@ -1,13 +1,15 @@
 import { createHash } from "node:crypto";
 
 import { FACTORY_THRESHOLDS, FACTORY_VERSIONS } from "../config";
-import { hashJson } from "../provenance";
+import { hashJson, appendReviewRecord } from "../provenance";
+import { verifyFirstPartyAmcAttestation } from "./amc-attestation";
 import { resolveBoundBlueprint } from "../shared/bound-blueprint";
 import type { FactoryRepository, FactoryCompartment } from "../storage";
 import { compartmentForState } from "../storage";
 import {
   buildStructuralValidationReportId,
   parseCandidateProvenance,
+  parseCandidateQuestion,
   type StoredStructuralValidationReport,
 } from "../validation";
 import { applyTransition, decideGateFailureOutcome, type CandidateState } from "../workflow";
@@ -817,7 +819,27 @@ export async function orchestrateCorrectnessVerification(
     // `structural_validation_passed` -> `correctness_check_passed` are both
     // `review-queue`, so `move()` cannot record it (it requires
     // `from !== to`). Persist the state change directly via `update()`.
-    const updatedRecord: Record<string, unknown> = { ...record, state: transitionTarget };
+    if (!provenanceOutcome.ok) return { outcome: "repository_error", candidateId, message: "Invalid correctness provenance." };
+    const provenance = provenanceOutcome.data;
+    let updatedProvenance = provenance;
+    const amcQuestion = parseCandidateQuestion(candidate.question);
+    if (amcQuestion.ok && amcQuestion.data.metadata.subject === "amc_mathematics" && result.status === "passed") {
+      if (!blueprintHash) return { outcome: "repository_error", candidateId, message: "AMC review requires a resolved blueprint." };
+      const verified = verifyFirstPartyAmcAttestation(amcQuestion.data, provenance.contentHash);
+      if (!verified.ok) return { outcome: "repository_error", candidateId, message: verified.message };
+      const reference = buildCorrectnessAttestationId(candidateId);
+      if (!provenance.reviewRecords.some((entry) => entry.stage === "correctness_check_passed" && entry.evidenceReferences.includes(reference))) {
+        const entry = appendReviewRecord(provenance.reviewRecords, { candidateId, stage: "correctness_check_passed",
+          reviewerIdentity: { provider: "other", modelId: "mindmosaic-first-party-amc", modelFamily: "mindmosaic", interactionMode: "external_manual" },
+          reviewerVersion: "1", result: "passed", confidence: 1, findings: ["Hash-pinned first-party recomputation independently matches the declared key."],
+          evidenceReferences: [reference], ambiguityStatus: "none", reviewedAt: options.verifiedAt,
+          reviewPromptVersion: "amc-first-party-1", reviewPromptHash: hashJson({ verifier: "amc-first-party-1" }),
+          evidenceBinding: { candidateContentHash: provenance.contentHash, candidateRevision: provenance.revision, blueprintHash,
+            reviewResultHash: result.evidence.verificationFingerprint } });
+        updatedProvenance = { ...provenance, reviewRecords: [...provenance.reviewRecords, entry] };
+      }
+    }
+    const updatedRecord: Record<string, unknown> = { ...record, state: transitionTarget, provenance: updatedProvenance };
     const updateOutcome = await attemptUpdate(
       repository,
       candidateId,

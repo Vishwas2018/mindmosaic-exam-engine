@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "683555c99beea3e5554264d86ba76eb9c91671d222d8f3455be8f8a00f42ba77",
+  "sourceManifestHash": "94a5f1f01f05753f799fb3e72d6fb866d22875d1a528d129851fbfd5e6287c66",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-001",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A library packs 6 books into each box. After filling 7 boxes, 5 books remain. How many books are there altogether?",
+    "options": [
+      {
+        "id": "a",
+        "text": "47"
+      },
+      {
+        "id": "b",
+        "text": "53"
+      },
+      {
+        "id": "c",
+        "text": "37"
+      },
+      {
+        "id": "d",
+        "text": "35"
+      },
+      {
+        "id": "e",
+        "text": "42"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Seven boxes hold 7 × 6 = 42 books. Add the 5 unpacked books: 42 + 5 = 47.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Multi-step multiplication and addition",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "776e95aa7cab52bc6154fdf1651cd9b43f85f78a4a6f14bfe6687d2a4ec0e9b1"
+}

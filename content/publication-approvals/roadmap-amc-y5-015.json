@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-015",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "7169f6554659352624a3bfa5a13ecd3fd8aea59aa71895a18f0372c5d36845b2",
+  "sourceManifestHash": "214939b298e4987ddb0bd47644dacfa9c7a5a941e6e4ca07fb0125da9a9fd9c7",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-015",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A café offers 3 sandwich fillings and 2 types of bread. Choosing one filling and one bread, how many different sandwiches are possible?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9"
+      },
+      {
+        "id": "b",
+        "text": "5"
+      },
+      {
+        "id": "c",
+        "text": "8"
+      },
+      {
+        "id": "d",
+        "text": "6"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Each of the 3 fillings can be paired with either bread, giving 3 × 2 = 6 sandwiches.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Systematic counting",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "69e31091fe07a04ff5011522cc866263a59c9859c4ddfbb8cbd95cef3405cba3"
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-020",
+  "questionId": "roadmap-amc-y3-020",
+  "contentHash": "2ef798ec66c7273e73eb15fcbbfe0767ae15a4a0f265a7c31915f3b310dbfd74",
+  "revision": 1,
+  "blueprintId": "amc-y3-020-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "64e7fe04172c35d4a72a245a0786a058bb2aa17a46cbcfd79ba9041b89958c74",
+  "difficultyFingerprint": "4973e7d87656c4472ae3e48b5975babeb61373e8c9cdc857d0115860836cc349",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-020",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangle is 8 cm long and 5 cm wide. A second rectangle has the same perimeter and is 2 cm longer. How many square centimetres is the area of the second rectangle?",
+    "options": [
+      {
+        "id": "a",
+        "text": "31"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "27"
+      },
+      {
+        "id": "d",
+        "text": "29"
+      },
+      {
+        "id": "e",
+        "text": "33"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Keeping the perimeter means the increase in length must be matched by the same decrease in width.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Geometry & Measurement",
+      "topic": "Geometry & Measurement",
+      "skill": "Perimeter, area, and volume problem solving",
+      "difficulty": "challenging",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "702965a3607c8488b9ebb683f775aea8920ba1f66bcba78e04cef14bea19ac3b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-020",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-18a911af1aa31573208ffe61d648cc71422285a0"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:27.339Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "2ef798ec66c7273e73eb15fcbbfe0767ae15a4a0f265a7c31915f3b310dbfd74",
+        "blueprintHash": "7d460dd7f9899f00741df6d424b7427e7a0c0254a76942b66b6ab883aed6545f",
+        "candidateRevision": 1,
+        "reviewResultHash": "c3418fe0d10ba0f5293e3f9ce6ec403521149132c8e13772ac783ba87912daaa"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f96e33f8df4207ddb9befd7df5e6965f6bc15b4c269268669f6f4482c7c9e45a"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-020",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "410e854dd3f802cd8d0e6e07ec6935310cee4fb0810729294ae14d8c84e54ca9"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "0bb1b7f7c8f37007aee04bc037f497e7fc8a8fe8ab636dcdf78d3c0bf4bc4ecc",
+      "evidenceBinding": {
+        "candidateContentHash": "2ef798ec66c7273e73eb15fcbbfe0767ae15a4a0f265a7c31915f3b310dbfd74",
+        "candidateRevision": 1,
+        "blueprintHash": "7d460dd7f9899f00741df6d424b7427e7a0c0254a76942b66b6ab883aed6545f",
+        "reviewResultHash": "410e854dd3f802cd8d0e6e07ec6935310cee4fb0810729294ae14d8c84e54ca9"
+      },
+      "previousReviewHash": "f96e33f8df4207ddb9befd7df5e6965f6bc15b4c269268669f6f4482c7c9e45a",
+      "reviewHash": "5db1817eb748db03508cd052bba09c80726d1599b2a782423859c6a322e83d91"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-020",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "ede4a3fc8c703ed0846e2212e95688bd74e7caffb99c6d19258ba8dffb7e59ae",
+    "sourceManifestHash": "0bb1b7f7c8f37007aee04bc037f497e7fc8a8fe8ab636dcdf78d3c0bf4bc4ecc",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-020",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A rectangle is 8 cm long and 5 cm wide. A second rectangle has the same perimeter and is 2 cm longer. How many square centimetres is the area of the second rectangle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "31"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "27"
+        },
+        {
+          "id": "d",
+          "text": "29"
+        },
+        {
+          "id": "e",
+          "text": "33"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Keeping the perimeter means the increase in length must be matched by the same decrease in width.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Geometry & Measurement",
+        "topic": "Geometry & Measurement",
+        "skill": "Perimeter, area, and volume problem solving",
+        "difficulty": "challenging",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "410e854dd3f802cd8d0e6e07ec6935310cee4fb0810729294ae14d8c84e54ca9"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-020",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "2ef798ec66c7273e73eb15fcbbfe0767ae15a4a0f265a7c31915f3b310dbfd74",
+    "contentHash": "ede4a3fc8c703ed0846e2212e95688bd74e7caffb99c6d19258ba8dffb7e59ae"
+  }
+}

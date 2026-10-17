@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-004",
+  "questionId": "roadmap-amc-y5-004",
+  "contentHash": "74365071c40f64be287817381c83b5f524e6acc384feffcc0773b7979b327b8d",
+  "revision": 1,
+  "blueprintId": "amc-y5-004-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "0714df705737be0e161775ef2a163544dda1ab0fa1273c349f26d0c51301e9da",
+  "difficultyFingerprint": "b2af2950f81de76f3e8c0c3ad38d02ca8f1625456f9edf0632fca47492e4bbda",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-004",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Three quarters of the 60 seats in a hall are occupied. How many seats are occupied?",
+    "options": [
+      {
+        "id": "a",
+        "text": "15"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "45"
+      },
+      {
+        "id": "d",
+        "text": "48"
+      },
+      {
+        "id": "e",
+        "text": "40"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "One quarter of 60 is 15. Three quarters is 3 × 15 = 45.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Find a fraction of a quantity",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "397a882fe871b6383ace556dbc17242ae83bc0ca2203e25874dbe32df738b4c3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-004",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-56d982af4c9e1b235ed61ab136f2d481aa3b43bb"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:31.699Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "74365071c40f64be287817381c83b5f524e6acc384feffcc0773b7979b327b8d",
+        "blueprintHash": "3f29705a21cdcd46251e866d8b47cf539eed7d7be10e72239f8395ee0801fe8c",
+        "candidateRevision": 1,
+        "reviewResultHash": "3fe823cc6de4bbb8f7ae2d975ffd8eaae9927e3082c38a682c7bbe162546216b"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "82835fcb2bdc5b31de569f21411be9af49ab59ae5e1aeac4728798cdc6614f9b"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-004",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "687d8ca2a6f63feeff5c52ca41a3a27c7e782f893cf27d5e8339b35e4c60c307"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "768294e99a1525f09caa5b2f7baca289285d4fb7fb3ea15bc1c5113a87bb7f6c",
+      "evidenceBinding": {
+        "candidateContentHash": "74365071c40f64be287817381c83b5f524e6acc384feffcc0773b7979b327b8d",
+        "candidateRevision": 1,
+        "blueprintHash": "3f29705a21cdcd46251e866d8b47cf539eed7d7be10e72239f8395ee0801fe8c",
+        "reviewResultHash": "687d8ca2a6f63feeff5c52ca41a3a27c7e782f893cf27d5e8339b35e4c60c307"
+      },
+      "previousReviewHash": "82835fcb2bdc5b31de569f21411be9af49ab59ae5e1aeac4728798cdc6614f9b",
+      "reviewHash": "9259a800c3f1e6ea0ac42f1089f3ec6a495d8a0c47d5684bcffa227945c5842f"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-004",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "ceab63477930c40d2f6b37f97746257ecc42aebcf92d20cfbf3bf88d89a9ec41",
+    "sourceManifestHash": "768294e99a1525f09caa5b2f7baca289285d4fb7fb3ea15bc1c5113a87bb7f6c",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Three quarters of the 60 seats in a hall are occupied. How many seats are occupied?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "45"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "40"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "One quarter of 60 is 15. Three quarters is 3 × 15 = 45.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Find a fraction of a quantity",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "687d8ca2a6f63feeff5c52ca41a3a27c7e782f893cf27d5e8339b35e4c60c307"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-004",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "74365071c40f64be287817381c83b5f524e6acc384feffcc0773b7979b327b8d",
+    "contentHash": "ceab63477930c40d2f6b37f97746257ecc42aebcf92d20cfbf3bf88d89a9ec41"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-029",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "b74c31132ebef0958c444e815c389657e795f31b1dc3b28ba238db2e0d36e7cb",
+  "sourceManifestHash": "361c2a797de7942471f62df7697d94ba1b5986ae09b7a0d63acdd3760518befe",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-029",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bus starts with some children. At the first stop, 5 children get off and 7 get on. At the second stop, half of the children on the bus get off, then 4 get on. There are now 13 children on the bus. How many children were on the bus at the start?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 16,
+      "tolerance": 0
+    },
+    "explanation": "Work backwards. Before the last 4 joined, 13 - 4 = 9 children remained. This was half the bus, so there were 18 before that stop. Undo the first stop: 18 - 7 + 5 = 16 children at the start. Check: 16 - 5 + 7 = 18; half remain, then 4 join, giving 13.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Work backwards through several changes",
+      "difficulty": "challenging",
+      "marks": 9,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "baeb46dfd76ea77cd1c1548bf7d4dc65b1c3b2d8e0db138e9eec3be24dea61f0"
+}

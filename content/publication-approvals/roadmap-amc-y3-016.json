@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-016",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "1deb8038dc15a07789157c49929bbfcf3789c291a455b52e17ef528f5ecc0a2e",
+  "sourceManifestHash": "c56000a65596e5793b1d3eec5d3fe098f33672b977fa16cc6e035043605b8148",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-016",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four plates each hold 6 apple pieces. Two more apple pieces are added to every plate. How many apple pieces are on the plates now?",
+    "options": [
+      {
+        "id": "a",
+        "text": "30"
+      },
+      {
+        "id": "b",
+        "text": "32"
+      },
+      {
+        "id": "c",
+        "text": "24"
+      },
+      {
+        "id": "d",
+        "text": "28"
+      },
+      {
+        "id": "e",
+        "text": "26"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "At first there are 4 × 6 = 24 pieces. Adding 2 pieces to each of 4 plates adds 8 more. Altogether there are 24 + 8 = 32 pieces.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Apply equal groups in two steps",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "b52ca58ccdafbe260d74c00f115bf3a6eb4c84d6ca07d58dba82c497f21bc3be"
+}

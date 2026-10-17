@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "9523d5b67912f46386ee02ae6e49056834da31a5631614bad74334ed67c6b0d6",
+  "sourceManifestHash": "6bd1bb5af3888ae7eb3bdd314fc1886dc931bf0cc4dbd9102f439c395bcc1bdb",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-001",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bunting strip repeats a group of 2 blue flags followed by 3 yellow flags. How many yellow flags are in the first 20 flags?",
+    "options": [
+      {
+        "id": "a",
+        "text": "15"
+      },
+      {
+        "id": "b",
+        "text": "12"
+      },
+      {
+        "id": "c",
+        "text": "13"
+      },
+      {
+        "id": "d",
+        "text": "11"
+      },
+      {
+        "id": "e",
+        "text": "9"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each complete group has five flags, including three yellow flags. Count complete groups.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Number sequences and recurrence relations",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "cfaecaafb26fe709eb36f205154d8e4b57d03e411aabbed0fd462ee924cc7618"
+}

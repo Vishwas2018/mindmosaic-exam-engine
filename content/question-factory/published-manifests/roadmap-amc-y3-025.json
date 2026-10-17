@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-025",
+  "questionId": "roadmap-amc-y3-025",
+  "contentHash": "1ccc852afcb809c43f9b3f3b4913917b3f52ba111e635852a0eb2980e3ecc0cb",
+  "revision": 1,
+  "blueprintId": "amc-y3-025-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "56f49eb4de562e9b1a4dec2d5963e8b1b071412e9fd6d8f6cda480247c8ccaac",
+  "difficultyFingerprint": "4296fc78fb51c37a199e499432755a4069c35de0eb9be712254d83376365397b",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-025",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four runners finish a race. Mia finishes before Noah. Noah finishes before Priya. Zoe finishes after Priya. Who finishes second?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Priya"
+      },
+      {
+        "id": "b",
+        "text": "Zoe"
+      },
+      {
+        "id": "c",
+        "text": "It cannot be known"
+      },
+      {
+        "id": "d",
+        "text": "Noah"
+      },
+      {
+        "id": "e",
+        "text": "Mia"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "The clues make one order: Mia, Noah, Priya, Zoe. Noah is second.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Order items from clues",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "beaa0762698722f7dc00dc07856959a65142c01ce1f7de2de875c39beb95fabc",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-025",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-3e86fa1c42188120a3c1b43ee6a144cc2bb0aceb"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:29.023Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "1ccc852afcb809c43f9b3f3b4913917b3f52ba111e635852a0eb2980e3ecc0cb",
+        "blueprintHash": "4a47a2beb40df305f2c1a1d84275c0a55647fee41954950ab1cdfc008018abc8",
+        "candidateRevision": 1,
+        "reviewResultHash": "e48042c318913b9732e70adc4610221f5eb3bb160b9ee8a9832d612829d7030f"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2c7b3f15d6ed86e6c90160de57ccc6d69ee278b463ec6322b58ae97dbb2618e3"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-025",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "6d063fc3c172b361e4bcbbaf55336d747192359a74d43cf5cc5d527fd4e7c131"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:25.891Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "b843b3e8cfbf9156bd6ecdccd7b42ed5725f25ef365b328bec18b5ecaa3dcf20",
+      "evidenceBinding": {
+        "candidateContentHash": "1ccc852afcb809c43f9b3f3b4913917b3f52ba111e635852a0eb2980e3ecc0cb",
+        "candidateRevision": 1,
+        "blueprintHash": "4a47a2beb40df305f2c1a1d84275c0a55647fee41954950ab1cdfc008018abc8",
+        "reviewResultHash": "6d063fc3c172b361e4bcbbaf55336d747192359a74d43cf5cc5d527fd4e7c131"
+      },
+      "previousReviewHash": "2c7b3f15d6ed86e6c90160de57ccc6d69ee278b463ec6322b58ae97dbb2618e3",
+      "reviewHash": "178b2209d82d53735a916aea178419b9a36e30ca03f606879e6fa3aa3c7cdb97"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-025",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:25.891Z",
+    "contentHash": "de7ef1bc7e489106cee4dfa012eea608972de77a1a466eb772ef5f23c8de902e",
+    "sourceManifestHash": "b843b3e8cfbf9156bd6ecdccd7b42ed5725f25ef365b328bec18b5ecaa3dcf20",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-025",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Four runners finish a race. Mia finishes before Noah. Noah finishes before Priya. Zoe finishes after Priya. Who finishes second?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Priya"
+        },
+        {
+          "id": "b",
+          "text": "Zoe"
+        },
+        {
+          "id": "c",
+          "text": "It cannot be known"
+        },
+        {
+          "id": "d",
+          "text": "Noah"
+        },
+        {
+          "id": "e",
+          "text": "Mia"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The clues make one order: Mia, Noah, Priya, Zoe. Noah is second.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Order items from clues",
+        "difficulty": "easy",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "6d063fc3c172b361e4bcbbaf55336d747192359a74d43cf5cc5d527fd4e7c131"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-025",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "1ccc852afcb809c43f9b3f3b4913917b3f52ba111e635852a0eb2980e3ecc0cb",
+    "contentHash": "de7ef1bc7e489106cee4dfa012eea608972de77a1a466eb772ef5f23c8de902e"
+  }
+}

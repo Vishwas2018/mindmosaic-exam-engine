@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-015",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:25.891Z",
+  "contentHash": "8e5168af791e3e28b6fd9a1c47dd21fb78e21a9489ae6607c11042b6f2003d34",
+  "sourceManifestHash": "caab35187783f24959fd1ff5eb31399b8528d4567c8abeb7bcab68b675c8bc77",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-015",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A straight ribbon is cut into 7 equal pieces. Each cut divides one existing piece into two. How many cuts are needed?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5"
+      },
+      {
+        "id": "b",
+        "text": "9"
+      },
+      {
+        "id": "c",
+        "text": "7"
+      },
+      {
+        "id": "d",
+        "text": "3"
+      },
+      {
+        "id": "e",
+        "text": "6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Start with one piece. Every cut adds one more piece.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Non-routine deduction and logical elimination",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "9c2dce8bdeb2b02680cdc6865e965dd68497ac43c97b058aa73b1f97d7ec328e"
+}

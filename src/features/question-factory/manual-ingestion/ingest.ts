@@ -1,5 +1,6 @@
 import { FACTORY_VERSIONS, type NormalisedIdentity } from "../config";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
+import { verifyFirstPartyAmcAttestation } from "../correctness/amc-attestation";
 import {
   candidateProvenanceSchema,
   hashJson,
@@ -35,14 +36,21 @@ export async function ingestOneCandidate(
   /** Resolved by the caller from the run's binding manifest (preflight-verified); takes precedence over the run-level `blueprintId` and the placeholder. */
   boundBlueprintId?: string,
 ): Promise<ManualCandidateIngestionResult> {
-  const candidateId = mintManualCandidateId({
+  const mintedId = mintManualCandidateId({
     sourceFileName,
     batchId: request.batchId,
     pipelineRunId: request.pipelineRunId,
     indexInFile,
     sourceContentHash,
   });
-  // Mirrors `ingestion/ingest.ts` (Mission 2A): the candidate's internal
+  // A registered first-party snapshot has a stable draft identity used by
+  // its independent solver and review bindings. Preserve it only after
+  // verifying the complete pinned content and recomputed answer. Arbitrary
+  // external ids (including a spoofed AMC id) still receive minted ids.
+  const registered = candidateQuestionSchema.safeParse(candidateContent);
+  const registeredAmc = registered.success && verifyFirstPartyAmcAttestation(registered.data, hashJson(registered.data)).ok;
+  const candidateId = registeredAmc ? registered.data.id : mintedId;
+  // Mirrors `ingestion/ingest.ts` (Mission 2A): an unregistered internal
   // `id` field is infrastructure this adapter mints, never a claim an
   // external generator gets to make — any `id` the source content
   // declares is discarded, never trusted.
@@ -70,7 +78,9 @@ export async function ingestOneCandidate(
     blueprintId: boundBlueprintId ?? request.blueprintId ?? MANUAL_INGESTION_PLACEHOLDER_BLUEPRINT_ID,
     batchId: request.batchId,
     pipelineRunId: request.pipelineRunId,
-    revision: 0,
+    // These registered authoring snapshots already have review revision 1.
+    // Ordinary external ingestion still starts at revision 0.
+    revision: registeredAmc ? 1 : 0,
     generatedAt: ingestedAt,
     generatorAdapter: { class: "manual_external", identity: declaredIdentity },
     generatorVersion: MANUAL_INGESTION_ADAPTER_VERSION,

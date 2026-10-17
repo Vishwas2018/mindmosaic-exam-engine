@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-003",
+  "questionId": "roadmap-amc-y5-003",
+  "contentHash": "6cbb60e9d80b322167f49ae29f67c058cf9b497aa4710f24f54e002ce1f2335a",
+  "revision": 1,
+  "blueprintId": "amc-y5-003-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "78772522ae6f97bdabdd0b1721bed7534baa47420602d7ccf7a6474a54da0e68",
+  "difficultyFingerprint": "a7f003455c65449763870af97f0dd939075bb02d283dd4785215467aa72cf00e",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-003",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A film starts at 2:35 pm and lasts 1 hour 48 minutes. How many minutes after 2:00 pm does it finish?",
+    "options": [
+      {
+        "id": "a",
+        "text": "143"
+      },
+      {
+        "id": "b",
+        "text": "163"
+      },
+      {
+        "id": "c",
+        "text": "123"
+      },
+      {
+        "id": "d",
+        "text": "153"
+      },
+      {
+        "id": "e",
+        "text": "133"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "From 2:00 to the start is 35 minutes. Add 108 minutes for the film: 35 + 108 = 143 minutes.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Elapsed time",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0974815ea5b2e5fd159016bc6ed4b4c8df82dc7f3e98d8829dd17a1ea65af0f4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-003",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-141eb2aac712306867867324945217695be0565a"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:31.365Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "6cbb60e9d80b322167f49ae29f67c058cf9b497aa4710f24f54e002ce1f2335a",
+        "blueprintHash": "0ba8a1666afda86efec92d6aace461727d52ff579c3661983dfd732ebb43a3c2",
+        "candidateRevision": 1,
+        "reviewResultHash": "0b7eebc75f64b320e1990b1819d23da7a4bf007e6b5b6624e970486014050a83"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "21d90b2c4948b794e1b1acbd7599a68d465f8dc1c76945a5d40d4bda30cd5d71"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-003",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "19191196a294a8a34ff8f0769c40c8131b3f611543ec06ab13b6e9cb724c65b3"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "80e160ea86f43ce905e701fd082f4094987c890ce82b30509f7598ad6f2e6b27",
+      "evidenceBinding": {
+        "candidateContentHash": "6cbb60e9d80b322167f49ae29f67c058cf9b497aa4710f24f54e002ce1f2335a",
+        "candidateRevision": 1,
+        "blueprintHash": "0ba8a1666afda86efec92d6aace461727d52ff579c3661983dfd732ebb43a3c2",
+        "reviewResultHash": "19191196a294a8a34ff8f0769c40c8131b3f611543ec06ab13b6e9cb724c65b3"
+      },
+      "previousReviewHash": "21d90b2c4948b794e1b1acbd7599a68d465f8dc1c76945a5d40d4bda30cd5d71",
+      "reviewHash": "ebc98c2f672857f1af058519d540acfbc614b484986db0c1245038018021ee22"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-003",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "b7cebb5156675f9b9af2a163e83c6538f08e745d70233af97f512103ba69f2ff",
+    "sourceManifestHash": "80e160ea86f43ce905e701fd082f4094987c890ce82b30509f7598ad6f2e6b27",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A film starts at 2:35 pm and lasts 1 hour 48 minutes. How many minutes after 2:00 pm does it finish?",
+      "options": [
+        {
+          "id": "a",
+          "text": "143"
+        },
+        {
+          "id": "b",
+          "text": "163"
+        },
+        {
+          "id": "c",
+          "text": "123"
+        },
+        {
+          "id": "d",
+          "text": "153"
+        },
+        {
+          "id": "e",
+          "text": "133"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "From 2:00 to the start is 35 minutes. Add 108 minutes for the film: 35 + 108 = 143 minutes.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Elapsed time",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "19191196a294a8a34ff8f0769c40c8131b3f611543ec06ab13b6e9cb724c65b3"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-003",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "6cbb60e9d80b322167f49ae29f67c058cf9b497aa4710f24f54e002ce1f2335a",
+    "contentHash": "b7cebb5156675f9b9af2a163e83c6538f08e745d70233af97f512103ba69f2ff"
+  }
+}

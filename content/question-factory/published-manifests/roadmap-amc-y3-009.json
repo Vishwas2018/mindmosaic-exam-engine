@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-009",
+  "questionId": "roadmap-amc-y3-009",
+  "contentHash": "b2ee3ced91af7ac65f0a15a4bfa4a145c85b6292b6f66f1d1628c1091f36f93d",
+  "revision": 1,
+  "blueprintId": "amc-y3-009-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a4fa38c4777b3010ddbd0285f56b54aee8b88bab49e651e5cdadd7c814e59480",
+  "difficultyFingerprint": "82cc4dc6184140f03c158e0f5a41fbe5fddd44d6832177f29db76fd3867c33b2",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-009",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangular garden has 4 equal rows of 6 plants. Half the plants have white flowers. How many plants have flowers of another colour?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9"
+      },
+      {
+        "id": "b",
+        "text": "15"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "11"
+      },
+      {
+        "id": "e",
+        "text": "13"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Find the total number of plants, then take half.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Fractions, decimals, and percentages",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cabcdb6cc859828e68d331823fa9e6ea8e2b46046f36c6ad151f2542ea978f74",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-009",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-975967aef7ab9d4ac5bad4837621b761f4e18de4"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:24.410Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "b2ee3ced91af7ac65f0a15a4bfa4a145c85b6292b6f66f1d1628c1091f36f93d",
+        "blueprintHash": "1faa1db01a04cfb7d9ad6282437be783f587595ea6a020b022ca2a3bef5f6ec3",
+        "candidateRevision": 1,
+        "reviewResultHash": "43182163c1722e8a2a54cea495928e6e32ca8b9fa15e2ccd089c3fb4db7f3182"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "735812cd21f7f3acd29bb948ebe6a7a94cfb22057001940abf36ec6e1cea1bee"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-009",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "7a2da403341ec3cb73e06da1fff1144dafb61692b55b740b2c7ad69017eef6b6"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "bd7cc4e6026ccea2fe6279fc16c6cd32a2370c6630c01d4100c4ae918ff672f8",
+      "evidenceBinding": {
+        "candidateContentHash": "b2ee3ced91af7ac65f0a15a4bfa4a145c85b6292b6f66f1d1628c1091f36f93d",
+        "candidateRevision": 1,
+        "blueprintHash": "1faa1db01a04cfb7d9ad6282437be783f587595ea6a020b022ca2a3bef5f6ec3",
+        "reviewResultHash": "7a2da403341ec3cb73e06da1fff1144dafb61692b55b740b2c7ad69017eef6b6"
+      },
+      "previousReviewHash": "735812cd21f7f3acd29bb948ebe6a7a94cfb22057001940abf36ec6e1cea1bee",
+      "reviewHash": "14c8b086b6fb97f2cf214f5a9b06739c086e30b0cc9ec04b079fee9c1e44efbc"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-009",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "e1966da4425720fa79a4d436bf0a26983e224dee63fe277cec84d64fe148a409",
+    "sourceManifestHash": "bd7cc4e6026ccea2fe6279fc16c6cd32a2370c6630c01d4100c4ae918ff672f8",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-009",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A rectangular garden has 4 equal rows of 6 plants. Half the plants have white flowers. How many plants have flowers of another colour?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "15"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Find the total number of plants, then take half.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Fractions, decimals, and percentages",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "7a2da403341ec3cb73e06da1fff1144dafb61692b55b740b2c7ad69017eef6b6"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-009",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "b2ee3ced91af7ac65f0a15a4bfa4a145c85b6292b6f66f1d1628c1091f36f93d",
+    "contentHash": "e1966da4425720fa79a4d436bf0a26983e224dee63fe277cec84d64fe148a409"
+  }
+}
