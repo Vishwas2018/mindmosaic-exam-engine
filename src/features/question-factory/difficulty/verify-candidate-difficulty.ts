@@ -13,6 +13,7 @@
  * `parseCandidateQuestion`) rather than re-declaring a second parse of
  * the same untrusted `candidate.provenance`/`candidate.question` blobs.
  */
+import { isDifficultyAdvisory } from "./advisory-scope";
 import { FACTORY_THRESHOLDS } from "../config";
 import { parseCandidateProvenance, parseCandidateQuestion } from "../validation";
 import { computeDifficultyDeviation, estimateDifficulty } from "./estimate-difficulty";
@@ -79,7 +80,7 @@ export function verifyCandidateDifficulty(
   // AMC cognitive demand is reviewed independently. This text-only proxy
   // records a warning, never overrides that label. Malformed input and all
   // content/provenance/upstream bindings remain hard failures.
-  const advisory = question.metadata.subject === "amc_mathematics";
+  const advisory = isDifficultyAdvisory(question);
   function warn(problem: DifficultyIssue): DifficultyResult {
     const warning = { ...problem, severity: "review_required" as const };
     const evidence = buildDifficultyEvidence({ ...baseEvidenceInput, issues: [warning], outcome: "passed" });
