@@ -1,7 +1,7 @@
 import "./lib/allow-server-only.mts";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { AMC_EXCLUDED_FROM_REVIEW, AMC_REVIEW_SOURCE_DIRECTORY, buildAmcReviewTarget } from "../src/features/content-governance/amc-review-sources";
+import { AMC_EXCLUDED_FROM_REVIEW, AMC_REVIEW_SOURCE_DIRECTORY, buildAmcReviewTarget } from "./lib/amc-review-sources.mjs";
 
 const out = "docs/reviews/amc-2026-10-17";
 const header = "questionId,contentHash,revision,sourceManifestHash,correctness,originality,ageAppropriateness,decision,notes";

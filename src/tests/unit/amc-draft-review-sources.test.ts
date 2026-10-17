@@ -2,7 +2,7 @@ import { readFile, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { AMC_EXCLUDED_FROM_REVIEW, buildAmcReviewTarget, loadAmcReviewTargets } from "@/features/content-governance/amc-review-sources";
+import { AMC_EXCLUDED_FROM_REVIEW, buildAmcReviewTarget, loadAmcReviewTargets } from "../../../scripts/lib/amc-review-sources.mjs";
 import { parseApprovalCsv, validateApprovalBatch } from "@/features/content-governance/approval-verification";
 import { getExamBank } from "@/server/exam-bank";
 
@@ -11,6 +11,12 @@ async function rows(year: 3 | 5) {
   return parseApprovalCsv(await readFile(`${reviewDirectory}/review-sheet-amc-y${year}-blank.csv`, "utf8"));
 }
 
+async function reviewSourceResolver(question: { id: string }) {
+  const target = (await loadAmcReviewTargets()).find((entry) => entry.question.id === question.id)!;
+  if (JSON.stringify(target.question) !== JSON.stringify(question)) throw new Error("Stale or missing AMC review source");
+  return { revision: target.source.revision, sourceManifestHash: target.sourceManifestHash };
+}
+const privateReviewOptions = { reviewSourceResolver, excludedReviewIds: new Set(Object.keys(AMC_EXCLUDED_FROM_REVIEW)) };
 describe("clean AMC pre-publication review bindings", () => {
   it("binds all 60 current drafts without asserting publication or human approval", async () => {
     const targets = await loadAmcReviewTargets();
@@ -36,7 +42,7 @@ describe("clean AMC pre-publication review bindings", () => {
       for (const cell of ["correctness", "originality", "ageAppropriateness", "decision", "notes"] as const) expect(row[cell]).toBe("");
       expect(AMC_EXCLUDED_FROM_REVIEW[row.questionId]).toBeUndefined();
     }
-    const result = await validateApprovalBatch({ rows: sheet, questionBank: targets.map((target) => target.question), reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() });
+    const result = await validateApprovalBatch({ ...privateReviewOptions, rows: sheet, questionBank: targets.map((target) => target.question), reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() });
     expect(result.ok).toBe(true);
     expect(result.unreviewedCount).toBe(count);
     expect(result.newApprovals).toEqual([]);
@@ -46,12 +52,12 @@ describe("clean AMC pre-publication review bindings", () => {
     const targets = await loadAmcReviewTargets();
     const [blank] = await rows(3);
     const signed = { ...blank, correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve" };
-    const options = { rows: [signed], questionBank: targets.map((target) => target.question), reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() };
+    const options = { ...privateReviewOptions, rows: [signed], questionBank: targets.map((target) => target.question), reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() };
     const valid = await validateApprovalBatch(options);
     expect(valid.ok).toBe(true);
     expect(valid.newApprovals).toHaveLength(1);
     expect(valid.newApprovals[0].sourceManifestHash).toBe(blank.sourceManifestHash);
-    const missing = await validateApprovalBatch({ ...options, rows: [{ ...signed, sourceManifestHash: null }] });
+    const missing = await validateApprovalBatch({ ...privateReviewOptions, ...options, rows: [{ ...signed, sourceManifestHash: null }] });
     expect(missing.ok).toBe(false);
     expect(missing.fatalErrors).toContain(`Stale or missing source manifest hash for '${blank.questionId}'.`);
   });
@@ -60,7 +66,7 @@ describe("clean AMC pre-publication review bindings", () => {
     const targets = await loadAmcReviewTargets();
     const [blank] = await rows(3);
     const changed = targets.map((target) => target.question.id === blank.questionId ? { ...target.question, prompt: `${target.question.prompt} Changed.` } : target.question);
-    const result = await validateApprovalBatch({ rows: [{ ...blank, correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve" }], questionBank: changed, reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() });
+    const result = await validateApprovalBatch({ ...privateReviewOptions, rows: [{ ...blank, correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve" }], questionBank: changed, reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() });
     expect(result.ok).toBe(false);
     expect(result.fatalErrors.join(" ")).toContain("Stale or missing AMC review source");
   });
@@ -70,7 +76,7 @@ describe("clean AMC pre-publication review bindings", () => {
     const revisions = parseApprovalCsv(await readFile(`${reviewDirectory}/revision-loop-amc.csv`, "utf8"));
     expect(revisions.map((row) => row.questionId).sort()).toEqual(Object.keys(AMC_EXCLUDED_FROM_REVIEW).sort());
     expect(revisions.every((row) => row.decision === "revise")).toBe(true);
-    const result = await validateApprovalBatch({ rows: revisions.map((row) => ({ ...row, correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve" })), questionBank: targets.map((target) => target.question), reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() });
+    const result = await validateApprovalBatch({ ...privateReviewOptions, rows: revisions.map((row) => ({ ...row, correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve" })), questionBank: targets.map((target) => target.question), reviewerFullName: "Binding Test Reviewer", existingApprovals: new Map() });
     expect(result.ok).toBe(false);
     expect(result.fatalErrors).toHaveLength(3);
     expect(result.newApprovals).toEqual([]);

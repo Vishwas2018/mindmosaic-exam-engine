@@ -3,7 +3,7 @@ import "./lib/allow-server-only.mts";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { loadAmcReviewTargets } from "@/features/content-governance/amc-review-sources";
+import { AMC_EXCLUDED_FROM_REVIEW, loadAmcReviewTargets } from "./lib/amc-review-sources.mjs";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import {
   WRITING_APPROVALS_DIRECTORY,
@@ -121,6 +121,13 @@ if (command === "queue") {
     reviewerFullName: reviewer.trim(),
     questionBank: [...publishedExamBank, ...draftTargets.filter((target) => !authoredIds.has(target.question.id)).map((target) => target.question)],
     writingPrompts: await loadWritingDraftSubjects(),
+    excludedReviewIds: new Set(Object.keys(AMC_EXCLUDED_FROM_REVIEW)),
+    reviewSourceResolver: async (question) => {
+      const target = draftTargets.find((entry) => entry.question.id === question.id);
+      if (!target) return getSourceManifestForQuestion(question);
+      if (canonicalQuestionHash(question) !== target.source.contentHash) throw new Error(`Stale AMC review source: ${question.id}`);
+      return { revision: target.source.revision, sourceManifestHash: target.sourceManifestHash };
+    },
   });
 
   if (!validation.ok) {

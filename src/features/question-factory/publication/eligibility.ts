@@ -1,3 +1,4 @@
+import { verifyFirstPartyAmcAttestation } from "../correctness/amc-attestation";
 import { computeSolver, solverAnswerError } from "../correctness/solver-verification";
 import { verifyUpstreamGateChain } from "../gate-chain";
 import type { CandidateQuestion } from "../ingestion/candidate-question";
@@ -100,6 +101,10 @@ export async function checkPublicationEligibility(
     );
   }
 
+  if (question.metadata.subject === "amc_mathematics") {
+    const attested = verifyFirstPartyAmcAttestation(question, provenance.contentHash);
+    if (!attested.ok) issues.push(issue("publication_solver_verification_failed", "amc_attestation", attested.message));
+  }
   if (question.solverParams !== undefined) {
     const computed = computeSolver(question.solverParams);
     const error = computed.ok ? solverAnswerError(question, computed.value) : computed.error;

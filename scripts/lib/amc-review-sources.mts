@@ -5,7 +5,7 @@ import { z } from "zod";
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
 import { parseCandidateQuestion } from "@/features/question-factory/validation/candidate-checks";
 import { buildPublishedQuestion } from "@/features/question-factory/publication/build-published-question";
-import { canonicalQuestionHash } from "./publication-integrity";
+import { canonicalQuestionHash } from "@/features/content-governance/publication-integrity";
 import type { Question } from "@/schemas/question.schema";
 
 export const AMC_REVIEW_SOURCE_DIRECTORY = "content/review-sources/amc";
