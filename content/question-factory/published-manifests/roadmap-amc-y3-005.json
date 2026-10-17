@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-005",
+  "questionId": "roadmap-amc-y3-005",
+  "contentHash": "a7492e52c6c1c9ed51c01aa23231e064de77433b9756fa343ce976b18dfd2ab5",
+  "revision": 1,
+  "blueprintId": "amc-y3-005-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "25dbe31666f9583417e00aa81a2088267a1237eace4c2938b5555101033bdde7",
+  "difficultyFingerprint": "9932ec90dc9a9c26ba1f939f46857b90fa1424d1f1ffbaa6f5596325385c9298",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-005",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Ravi has 31 beads. He makes bracelets using 6 beads each. How many more beads would he need so that all his beads make complete bracelets?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5"
+      },
+      {
+        "id": "b",
+        "text": "8"
+      },
+      {
+        "id": "c",
+        "text": "4"
+      },
+      {
+        "id": "d",
+        "text": "2"
+      },
+      {
+        "id": "e",
+        "text": "6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "The bead count leaves a remainder of one on division by six, so five more complete the last bracelet.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Divisibility and remainders",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "89556fff5989dc263fb8e8d787e371cd41f6afc78e4b9e8d9cd0e0de261d7fb3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-005",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-99e74303439b0dc29366ee173375d853794b31df"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:23.340Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "a7492e52c6c1c9ed51c01aa23231e064de77433b9756fa343ce976b18dfd2ab5",
+        "blueprintHash": "decbdd52ea29cc97e697245c8acb92f75af86f356cd01742a6060be4059e07bd",
+        "candidateRevision": 1,
+        "reviewResultHash": "a030e8e7a6e706186ded3f0435569a8097ac78ad5c98f13dd866e80eef0ab908"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7584ba8847a13a6091a80164996ea7cf28d2f3880750e33e0c6172f59c914563"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-005",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "c41bee9e4929768d1f712029ad0339ef84f20f949875463fe6ef434e9dc5931c"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "7c8025b9ac860c7772065d28b4cc12dfdf36ae8aed943bdb52d01ab14d093649",
+      "evidenceBinding": {
+        "candidateContentHash": "a7492e52c6c1c9ed51c01aa23231e064de77433b9756fa343ce976b18dfd2ab5",
+        "candidateRevision": 1,
+        "blueprintHash": "decbdd52ea29cc97e697245c8acb92f75af86f356cd01742a6060be4059e07bd",
+        "reviewResultHash": "c41bee9e4929768d1f712029ad0339ef84f20f949875463fe6ef434e9dc5931c"
+      },
+      "previousReviewHash": "7584ba8847a13a6091a80164996ea7cf28d2f3880750e33e0c6172f59c914563",
+      "reviewHash": "4f62db4697a1d08ba10cd0b9c52f12ca125379557e6fcebf09516cc63a266d2e"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-005",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "8d3fd521cb92a79752cefe2d638c0938562844e1d28bb3a87ca69c0bdf38ad6b",
+    "sourceManifestHash": "7c8025b9ac860c7772065d28b4cc12dfdf36ae8aed943bdb52d01ab14d093649",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-005",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Ravi has 31 beads. He makes bracelets using 6 beads each. How many more beads would he need so that all his beads make complete bracelets?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "text": "2"
+        },
+        {
+          "id": "e",
+          "text": "6"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The bead count leaves a remainder of one on division by six, so five more complete the last bracelet.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "c41bee9e4929768d1f712029ad0339ef84f20f949875463fe6ef434e9dc5931c"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-005",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "a7492e52c6c1c9ed51c01aa23231e064de77433b9756fa343ce976b18dfd2ab5",
+    "contentHash": "8d3fd521cb92a79752cefe2d638c0938562844e1d28bb3a87ca69c0bdf38ad6b"
+  }
+}

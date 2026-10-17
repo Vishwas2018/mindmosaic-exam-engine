@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-005",
+  "questionId": "roadmap-amc-y5-005",
+  "contentHash": "483a233b876518e0d6d55dcfcf982cc0e50ce2143f08c5f40c52fac7251d89a9",
+  "revision": 1,
+  "blueprintId": "amc-y5-005-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "9b73cad506da4e1cc3fc94b35ea77c62ac4da28f614f4c5121e9b9af4dc506d9",
+  "difficultyFingerprint": "9d1b0904495f6a0ce786efad8be631fb195d2982009821b402c60e955c55df80",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-005",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Two angles around a point are 90° and 120°. What is the size of the remaining angle?",
+    "options": [
+      {
+        "id": "a",
+        "text": "160"
+      },
+      {
+        "id": "b",
+        "text": "170"
+      },
+      {
+        "id": "c",
+        "text": "140"
+      },
+      {
+        "id": "d",
+        "text": "150"
+      },
+      {
+        "id": "e",
+        "text": "130"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Angles around a point total 360°. The missing angle is 360 − 90 − 120 = 150°.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Angles around a point",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "018eb59392ab42905d7c05b523b0afb57b29020823a50b8c2a891eee1ef9e899",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-005",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-26cd8d49564945d29f6b518ba242c921a3a4dbf0"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:31.962Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "483a233b876518e0d6d55dcfcf982cc0e50ce2143f08c5f40c52fac7251d89a9",
+        "blueprintHash": "f2f7d2f1267df1f075c2b2b7968135d44faceab7aee22da7c8a3e89e596d71d2",
+        "candidateRevision": 1,
+        "reviewResultHash": "a1eb1d2479cd76b84eb795dfac5659ec60f998357b1b12573f9ecac85eaacd09"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c54e1ead918a951371149815b14fdb9bb0820399dd683851edb8e945fa60db79"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-005",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "617bcbd9386842423122d574bea3b3c8162e3da085e8ea66c5749487913fa735"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "b25ad42278bd678552ae063a5fdbcfc0ccf7fc8d1a074d71dd5ab523ed349108",
+      "evidenceBinding": {
+        "candidateContentHash": "483a233b876518e0d6d55dcfcf982cc0e50ce2143f08c5f40c52fac7251d89a9",
+        "candidateRevision": 1,
+        "blueprintHash": "f2f7d2f1267df1f075c2b2b7968135d44faceab7aee22da7c8a3e89e596d71d2",
+        "reviewResultHash": "617bcbd9386842423122d574bea3b3c8162e3da085e8ea66c5749487913fa735"
+      },
+      "previousReviewHash": "c54e1ead918a951371149815b14fdb9bb0820399dd683851edb8e945fa60db79",
+      "reviewHash": "27027e29153aab320a483ea59f5306ed6f1d034e05b6ebeb0015fd8e982caf5a"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-005",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "0e66d9aef5af30c8f78b590a199bb2292178e40b8d1de898e0b7dd4cc973fc3c",
+    "sourceManifestHash": "b25ad42278bd678552ae063a5fdbcfc0ccf7fc8d1a074d71dd5ab523ed349108",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Two angles around a point are 90° and 120°. What is the size of the remaining angle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "160"
+        },
+        {
+          "id": "b",
+          "text": "170"
+        },
+        {
+          "id": "c",
+          "text": "140"
+        },
+        {
+          "id": "d",
+          "text": "150"
+        },
+        {
+          "id": "e",
+          "text": "130"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Angles around a point total 360°. The missing angle is 360 − 90 − 120 = 150°.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Angles around a point",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "617bcbd9386842423122d574bea3b3c8162e3da085e8ea66c5749487913fa735"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-005",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "483a233b876518e0d6d55dcfcf982cc0e50ce2143f08c5f40c52fac7251d89a9",
+    "contentHash": "0e66d9aef5af30c8f78b590a199bb2292178e40b8d1de898e0b7dd4cc973fc3c"
+  }
+}

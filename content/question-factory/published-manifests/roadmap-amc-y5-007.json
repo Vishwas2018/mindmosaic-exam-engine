@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-007",
+  "questionId": "roadmap-amc-y5-007",
+  "contentHash": "a41329c70bafb9ffb47e3585eeda830ffb8ccdb97a99d7cd970dc5d5b92d653a",
+  "revision": 1,
+  "blueprintId": "amc-y5-007-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "0a77f236040b5e9aebc21a53b68f91de12f76713f0a242818ffae0f87b26ad05",
+  "difficultyFingerprint": "ca6add711b3690498eba1ce50853fb32db2608a65ff3490d72fa601f8e0a49a5",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-007",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four equal teams collect 72 cans altogether. Then each team collects 3 more cans. How many cans does each team have now?",
+    "options": [
+      {
+        "id": "a",
+        "text": "24"
+      },
+      {
+        "id": "b",
+        "text": "18"
+      },
+      {
+        "id": "c",
+        "text": "20"
+      },
+      {
+        "id": "d",
+        "text": "21"
+      },
+      {
+        "id": "e",
+        "text": "75"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "First share 72 equally: 72 ÷ 4 = 18. Then add 3, giving 21 cans per team.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Division followed by addition",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "66d1a4ee3c7d181e0d633e5ef06b46d0be582fe4aec658e01a77b4af26cb1028",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-007",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-b8c16cdf21858886163cd84fc822819752e31330"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:32.258Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "a41329c70bafb9ffb47e3585eeda830ffb8ccdb97a99d7cd970dc5d5b92d653a",
+        "blueprintHash": "08fe6f0d06541798c240d5005054727f6146b3d7a22b199a954581b690136408",
+        "candidateRevision": 1,
+        "reviewResultHash": "0eaa69e18f68a8df630be09bcabba9801859be70d7317a577bb1cb4ad3b2f1a4"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c946404f9460518e4f0aa6b607148dc8971f077a2cf6aca94c67cc8f52170cf6"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-007",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "a6629f2044542c4d49c5b3fd030a6ca44028ff955422b49b09dd1fabfe9d0102"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "2f3f294b80c5fdeeb533b2f97a0389e137e0dda37334f39e95f9b4a9d02a99ce",
+      "evidenceBinding": {
+        "candidateContentHash": "a41329c70bafb9ffb47e3585eeda830ffb8ccdb97a99d7cd970dc5d5b92d653a",
+        "candidateRevision": 1,
+        "blueprintHash": "08fe6f0d06541798c240d5005054727f6146b3d7a22b199a954581b690136408",
+        "reviewResultHash": "a6629f2044542c4d49c5b3fd030a6ca44028ff955422b49b09dd1fabfe9d0102"
+      },
+      "previousReviewHash": "c946404f9460518e4f0aa6b607148dc8971f077a2cf6aca94c67cc8f52170cf6",
+      "reviewHash": "3eb01a198fc3b6e0df3f2db3703e1452b025f71ce78e389117272067ae33a703"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-007",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "9d3fd68a759b7072dc105f600a5e8c74065aef6adaecfcfb71cf213d28538a86",
+    "sourceManifestHash": "2f3f294b80c5fdeeb533b2f97a0389e137e0dda37334f39e95f9b4a9d02a99ce",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Four equal teams collect 72 cans altogether. Then each team collects 3 more cans. How many cans does each team have now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "24"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "20"
+        },
+        {
+          "id": "d",
+          "text": "21"
+        },
+        {
+          "id": "e",
+          "text": "75"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "First share 72 equally: 72 ÷ 4 = 18. Then add 3, giving 21 cans per team.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Division followed by addition",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "a6629f2044542c4d49c5b3fd030a6ca44028ff955422b49b09dd1fabfe9d0102"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-007",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "a41329c70bafb9ffb47e3585eeda830ffb8ccdb97a99d7cd970dc5d5b92d653a",
+    "contentHash": "9d3fd68a759b7072dc105f600a5e8c74065aef6adaecfcfb71cf213d28538a86"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-011",
+  "questionId": "roadmap-amc-y5-011",
+  "contentHash": "7907a9787cc0dd676c0b4312ddf3bccbd188daef079a9370c5f3201f7621efea",
+  "revision": 1,
+  "blueprintId": "amc-y5-011-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "efb22aa54e2dfa1422307b0271abe11a94ca663cd6e95e824b9a955e61fefcc5",
+  "difficultyFingerprint": "35190f6708166c957bbed205173d598ac979c096312df7276a06c6a5cbe0eceb",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-011",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A number is multiplied by 4, then 7 is subtracted. The result is 45. What is the number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "11"
+      },
+      {
+        "id": "b",
+        "text": "15"
+      },
+      {
+        "id": "c",
+        "text": "13"
+      },
+      {
+        "id": "d",
+        "text": "17"
+      },
+      {
+        "id": "e",
+        "text": "9"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Undo subtracting 7 by adding 7: 45 + 7 = 52. Then divide by 4: 52 ÷ 4 = 13.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Work backwards through operations",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "32999dd9e07a0820ea050696558c137350b7ef3d3fedba7bd783ede1bf3f72cc",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-011",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-a9de7cd6ca705b7c3c492b387222948645e5820a"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:33.327Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "7907a9787cc0dd676c0b4312ddf3bccbd188daef079a9370c5f3201f7621efea",
+        "blueprintHash": "8e64466fc8e6ee9d661e58ebfbd44444845c5227a8512dc2276a953f62cc8b14",
+        "candidateRevision": 1,
+        "reviewResultHash": "208b6481adcee262106c929e3e1806be97874dafbf6213fb65df9ca1229e3491"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a4ff97a4a4c6f21b00084a2d93f6d5f423e75d44470d9e1e66bfad182fab16e3"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-011",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "700bf0134e633cdfce159e37ef800349657e46dbb0be24e6d8b9a7ab086c47bc"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:30.151Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "d31484733065575a1b88098ff67694e4869e7226ef405468bbc4d384c2823512",
+      "evidenceBinding": {
+        "candidateContentHash": "7907a9787cc0dd676c0b4312ddf3bccbd188daef079a9370c5f3201f7621efea",
+        "candidateRevision": 1,
+        "blueprintHash": "8e64466fc8e6ee9d661e58ebfbd44444845c5227a8512dc2276a953f62cc8b14",
+        "reviewResultHash": "700bf0134e633cdfce159e37ef800349657e46dbb0be24e6d8b9a7ab086c47bc"
+      },
+      "previousReviewHash": "a4ff97a4a4c6f21b00084a2d93f6d5f423e75d44470d9e1e66bfad182fab16e3",
+      "reviewHash": "3398f1683c21ca91ae0bc4c929a1f22b1c67950689997507a9302f76016b07a7"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-011",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:30.151Z",
+    "contentHash": "e17e3875c5c0e66a1b5495b11245c0f2ad497291a0db947e838efe9e8f90f956",
+    "sourceManifestHash": "d31484733065575a1b88098ff67694e4869e7226ef405468bbc4d384c2823512",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-011",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A number is multiplied by 4, then 7 is subtracted. The result is 45. What is the number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "15"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "17"
+        },
+        {
+          "id": "e",
+          "text": "9"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Undo subtracting 7 by adding 7: 45 + 7 = 52. Then divide by 4: 52 ÷ 4 = 13.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Work backwards through operations",
+        "difficulty": "easy",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "700bf0134e633cdfce159e37ef800349657e46dbb0be24e6d8b9a7ab086c47bc"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-011",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "7907a9787cc0dd676c0b4312ddf3bccbd188daef079a9370c5f3201f7621efea",
+    "contentHash": "e17e3875c5c0e66a1b5495b11245c0f2ad497291a0db947e838efe9e8f90f956"
+  }
+}

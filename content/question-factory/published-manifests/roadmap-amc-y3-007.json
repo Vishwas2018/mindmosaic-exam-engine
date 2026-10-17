@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-007",
+  "questionId": "roadmap-amc-y3-007",
+  "contentHash": "11c6a8dad09a51c55b5f953544c86113c4354ce0fd763de2ddd8b166096b69d8",
+  "revision": 1,
+  "blueprintId": "amc-y3-007-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "e72c40bf1dc1dfb732b424d3f9dd868b92718604ca96a4c2458e21a0730c2854",
+  "difficultyFingerprint": "d816f1e6c190f6f0e5b9eca157d7a5824c99718fcecf0f8ab94779ccac0e82c7",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-007",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Tiles numbered from 1 to 18 lie in a row. Every third tile is turned over. How many tiles remain face up?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9"
+      },
+      {
+        "id": "b",
+        "text": "13"
+      },
+      {
+        "id": "c",
+        "text": "15"
+      },
+      {
+        "id": "d",
+        "text": "12"
+      },
+      {
+        "id": "e",
+        "text": "11"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "One tile out of every group of three is turned over; two remain face up.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Divisibility and remainders",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ba3756a720a8a4697e8df04abf2de45d94f4d636d67faf51a382e8bc792df2f1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-007",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-e6403c7ddee9ac2a0c070faadc66bf046c5912bc"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:23.876Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "11c6a8dad09a51c55b5f953544c86113c4354ce0fd763de2ddd8b166096b69d8",
+        "blueprintHash": "6f79aef40e2a6eb2576f01d0a9964803498f0041590052ebd1e91eaecee570d7",
+        "candidateRevision": 1,
+        "reviewResultHash": "38fe302f7619183d7fb8e7833031dedfa0b3a17a678829e270e1572b74737920"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e88b1165f2a33d5e0d5ee691344a4992a2555628a4b92a293e35e96404f2e0ca"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-007",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "9193768f897de76c37848acd27d2b9a7b293aa579f7517070924dd738f4ff29f"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "e08561ebc7f433adb895d9dff07ac36b6e9129b488c4d609dbe3a4e277a06f4c",
+      "evidenceBinding": {
+        "candidateContentHash": "11c6a8dad09a51c55b5f953544c86113c4354ce0fd763de2ddd8b166096b69d8",
+        "candidateRevision": 1,
+        "blueprintHash": "6f79aef40e2a6eb2576f01d0a9964803498f0041590052ebd1e91eaecee570d7",
+        "reviewResultHash": "9193768f897de76c37848acd27d2b9a7b293aa579f7517070924dd738f4ff29f"
+      },
+      "previousReviewHash": "e88b1165f2a33d5e0d5ee691344a4992a2555628a4b92a293e35e96404f2e0ca",
+      "reviewHash": "60a2e9e0872cb170dde516747b72c55d44512e8c4e9eba3cd39f4486596d94e8"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-007",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "22c20cf4b21c80dd9dbfddcd9c9331037e4a55155028d86c66afc0430774dcb2",
+    "sourceManifestHash": "e08561ebc7f433adb895d9dff07ac36b6e9129b488c4d609dbe3a4e277a06f4c",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-007",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Tiles numbered from 1 to 18 lie in a row. Every third tile is turned over. How many tiles remain face up?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "13"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "11"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "One tile out of every group of three is turned over; two remain face up.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "9193768f897de76c37848acd27d2b9a7b293aa579f7517070924dd738f4ff29f"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-007",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "11c6a8dad09a51c55b5f953544c86113c4354ce0fd763de2ddd8b166096b69d8",
+    "contentHash": "22c20cf4b21c80dd9dbfddcd9c9331037e4a55155028d86c66afc0430774dcb2"
+  }
+}

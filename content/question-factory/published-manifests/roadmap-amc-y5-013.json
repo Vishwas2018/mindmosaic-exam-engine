@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-013",
+  "questionId": "roadmap-amc-y5-013",
+  "contentHash": "048222181a6f9d5d8e42ed043bf54834f3155879213980a65df606d031adb935",
+  "revision": 1,
+  "blueprintId": "amc-y5-013-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "f72d95064387a3428adbaff061d6b298539389e447fda41f755fadfc7eab1074",
+  "difficultyFingerprint": "5388f01e8b272f9a6e6a87b1c5449330d41e96b943f417e57533323f098e235e",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-013",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A 12 cm by 8 cm rectangle has a 4 cm by 3 cm corner cut away. What area remains?",
+    "options": [
+      {
+        "id": "a",
+        "text": "72"
+      },
+      {
+        "id": "b",
+        "text": "88"
+      },
+      {
+        "id": "c",
+        "text": "92"
+      },
+      {
+        "id": "d",
+        "text": "80"
+      },
+      {
+        "id": "e",
+        "text": "84"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The full rectangle has area 12 × 8 = 96 cm². The cut-out is 4 × 3 = 12 cm², so 96 − 12 = 84 cm² remains.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Area of a composite shape",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "b833dd3126030cf85c1d1587977287cddbbb195ee931dfeb7ee7819b80b06304",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-013",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-986ac19fa4810028064075514c37edc65b2ac842"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:33.832Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "048222181a6f9d5d8e42ed043bf54834f3155879213980a65df606d031adb935",
+        "blueprintHash": "f6e732cc9572156a601cc076fcd5972e79abe099618f8ca7ec95799e0265a949",
+        "candidateRevision": 1,
+        "reviewResultHash": "40362761b78e768f96219efd367423c6b97c38657ce0afd767ec94a2a92b7e73"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ff8032d954d253a1d070ed4ab430e8bffc90ba364a957b4da99f2f0bffa427b0"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-013",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "33309cc587b1c6d5e70f7fac116284a5e231c07db1e0a0dedaa9523f9dcf0f9b"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "975764f9a6117d6df4a859b598e97ac12d8b7301ea508b89bccc546ae17b4a35",
+      "evidenceBinding": {
+        "candidateContentHash": "048222181a6f9d5d8e42ed043bf54834f3155879213980a65df606d031adb935",
+        "candidateRevision": 1,
+        "blueprintHash": "f6e732cc9572156a601cc076fcd5972e79abe099618f8ca7ec95799e0265a949",
+        "reviewResultHash": "33309cc587b1c6d5e70f7fac116284a5e231c07db1e0a0dedaa9523f9dcf0f9b"
+      },
+      "previousReviewHash": "ff8032d954d253a1d070ed4ab430e8bffc90ba364a957b4da99f2f0bffa427b0",
+      "reviewHash": "19f978353ed94e4e91b826d19c10255d87bb056381741d9c98dd3b5843a2835e"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-013",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "99042f67e7134086eca2cd142f5b55d88fd649571b319a4dcccaffa11098f0d9",
+    "sourceManifestHash": "975764f9a6117d6df4a859b598e97ac12d8b7301ea508b89bccc546ae17b4a35",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-013",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A 12 cm by 8 cm rectangle has a 4 cm by 3 cm corner cut away. What area remains?",
+      "options": [
+        {
+          "id": "a",
+          "text": "72"
+        },
+        {
+          "id": "b",
+          "text": "88"
+        },
+        {
+          "id": "c",
+          "text": "92"
+        },
+        {
+          "id": "d",
+          "text": "80"
+        },
+        {
+          "id": "e",
+          "text": "84"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The full rectangle has area 12 × 8 = 96 cm². The cut-out is 4 × 3 = 12 cm², so 96 − 12 = 84 cm² remains.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Area of a composite shape",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "33309cc587b1c6d5e70f7fac116284a5e231c07db1e0a0dedaa9523f9dcf0f9b"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-013",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "048222181a6f9d5d8e42ed043bf54834f3155879213980a65df606d031adb935",
+    "contentHash": "99042f67e7134086eca2cd142f5b55d88fd649571b319a4dcccaffa11098f0d9"
+  }
+}

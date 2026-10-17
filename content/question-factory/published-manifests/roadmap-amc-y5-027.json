@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y5-027",
+  "questionId": "roadmap-amc-y5-027",
+  "contentHash": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
+  "revision": 1,
+  "blueprintId": "amc-y5-027-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "d21661556b1d216cb0e76db7d1689b359abfc01e25931220c0bcd60d9c3f41a8",
+  "difficultyFingerprint": "2bb0ca27b5410ca97080b87dc6623d3dfd67662e73bc905b1305706453c5235f",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-027",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A grid has 4 columns and 3 rows of equal square cells. How many rectangles of all sizes have sides along the grid lines?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 60,
+      "tolerance": 0
+    },
+    "explanation": "Choose 2 of the 5 vertical lines and 2 of the 4 horizontal lines. There are 10 × 6 = 60 rectangles.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Systematically count rectangles",
+      "difficulty": "challenging",
+      "marks": 7,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4a4cb09db538ab3f70bf14df7f9a0cf761f76c1cc8130e2b5a9426cf99b0a5b3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-027",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-90e7e0397a8061c07f3c61a3f6a7ea0ebe611911"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:38.109Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
+        "blueprintHash": "17b835b0878401f8b6b475425f5a1ddbe624947d771f4c2b174e3f0b33f237fd",
+        "candidateRevision": 1,
+        "reviewResultHash": "765dd99f515dd5bf38b647cf7a70237c4c32bac1a1457319a43cf407f766b926"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "a92adb0e9e5f062b3dca75f143d3b8816c0bababb80c0931cc4ac9f8e72d7a38"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-027",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "8245c539a7d5d83e0c3e86d15b82ab6c0681015718cbef6612213d1c6820cfd4"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "a1ff58ee4642c3c7ade87b58833610a8da8b0726ff069c4827379079b20e760e",
+      "evidenceBinding": {
+        "candidateContentHash": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
+        "candidateRevision": 1,
+        "blueprintHash": "17b835b0878401f8b6b475425f5a1ddbe624947d771f4c2b174e3f0b33f237fd",
+        "reviewResultHash": "8245c539a7d5d83e0c3e86d15b82ab6c0681015718cbef6612213d1c6820cfd4"
+      },
+      "previousReviewHash": "a92adb0e9e5f062b3dca75f143d3b8816c0bababb80c0931cc4ac9f8e72d7a38",
+      "reviewHash": "ca5b79b0eccb6fc66276d43e43b7447fa4ba069008607388e9d92535f591c2d2"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-027",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "8daed704aaf01eac9a50872ef0d45f4c738da2a57bb594fffd7611c7ae88f495",
+    "sourceManifestHash": "a1ff58ee4642c3c7ade87b58833610a8da8b0726ff069c4827379079b20e760e",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-027",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A grid has 4 columns and 3 rows of equal square cells. How many rectangles of all sizes have sides along the grid lines?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 60,
+        "tolerance": 0
+      },
+      "explanation": "Choose 2 of the 5 vertical lines and 2 of the 4 horizontal lines. There are 10 × 6 = 60 rectangles.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Systematically count rectangles",
+        "difficulty": "challenging",
+        "marks": 7,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "8245c539a7d5d83e0c3e86d15b82ab6c0681015718cbef6612213d1c6820cfd4"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-027",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
+    "contentHash": "8daed704aaf01eac9a50872ef0d45f4c738da2a57bb594fffd7611c7ae88f495"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-001",
+  "questionId": "roadmap-amc-y5-001",
+  "contentHash": "7d9225fe329da1d42df241f74a3ee287676f5352b760f7f281314372b62f3758",
+  "revision": 1,
+  "blueprintId": "amc-y5-001-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b5049f562a995ce7b237f82393314674d06a432782335204db79d0953247285f",
+  "difficultyFingerprint": "32bd45106650e45af29bf53fbdb1c75cea9b0210fae22b2c2e721871531ac641",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-001",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A library packs 6 books into each box. After filling 7 boxes, 5 books remain. How many books are there altogether?",
+    "options": [
+      {
+        "id": "a",
+        "text": "47"
+      },
+      {
+        "id": "b",
+        "text": "53"
+      },
+      {
+        "id": "c",
+        "text": "37"
+      },
+      {
+        "id": "d",
+        "text": "35"
+      },
+      {
+        "id": "e",
+        "text": "42"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Seven boxes hold 7 × 6 = 42 books. Add the 5 unpacked books: 42 + 5 = 47.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Multi-step multiplication and addition",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "32a1d2e6e9820b7d6d703b61bc6daa8ae8a79873a6a924f7372367187fb5d798",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-001",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-54918e1162b266203f1217de8b9cbcf6eb0286e0"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:30.846Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "7d9225fe329da1d42df241f74a3ee287676f5352b760f7f281314372b62f3758",
+        "blueprintHash": "f7b0072bfdc4ea355d4a45882d0e2bbedabf7113c72dabf06d2b0222b6398608",
+        "candidateRevision": 1,
+        "reviewResultHash": "41d72972bc1bebbc219c8e5a483e88f73f4b427809a3a5ac7576d998f6dc8ef9"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "aeb4ea056001fc91b6b77fab7f2b2e721b0785800533ccc47e65acf3600ee666"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-001",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "776e95aa7cab52bc6154fdf1651cd9b43f85f78a4a6f14bfe6687d2a4ec0e9b1"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "94a5f1f01f05753f799fb3e72d6fb866d22875d1a528d129851fbfd5e6287c66",
+      "evidenceBinding": {
+        "candidateContentHash": "7d9225fe329da1d42df241f74a3ee287676f5352b760f7f281314372b62f3758",
+        "candidateRevision": 1,
+        "blueprintHash": "f7b0072bfdc4ea355d4a45882d0e2bbedabf7113c72dabf06d2b0222b6398608",
+        "reviewResultHash": "776e95aa7cab52bc6154fdf1651cd9b43f85f78a4a6f14bfe6687d2a4ec0e9b1"
+      },
+      "previousReviewHash": "aeb4ea056001fc91b6b77fab7f2b2e721b0785800533ccc47e65acf3600ee666",
+      "reviewHash": "1dfc3a4c24faeabc04b42c2995c1a8bcec4902161402de9b88cff3f27d128537"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-001",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "683555c99beea3e5554264d86ba76eb9c91671d222d8f3455be8f8a00f42ba77",
+    "sourceManifestHash": "94a5f1f01f05753f799fb3e72d6fb866d22875d1a528d129851fbfd5e6287c66",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A library packs 6 books into each box. After filling 7 boxes, 5 books remain. How many books are there altogether?",
+      "options": [
+        {
+          "id": "a",
+          "text": "47"
+        },
+        {
+          "id": "b",
+          "text": "53"
+        },
+        {
+          "id": "c",
+          "text": "37"
+        },
+        {
+          "id": "d",
+          "text": "35"
+        },
+        {
+          "id": "e",
+          "text": "42"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Seven boxes hold 7 × 6 = 42 books. Add the 5 unpacked books: 42 + 5 = 47.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Multi-step multiplication and addition",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "776e95aa7cab52bc6154fdf1651cd9b43f85f78a4a6f14bfe6687d2a4ec0e9b1"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-001",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "7d9225fe329da1d42df241f74a3ee287676f5352b760f7f281314372b62f3758",
+    "contentHash": "683555c99beea3e5554264d86ba76eb9c91671d222d8f3455be8f8a00f42ba77"
+  }
+}

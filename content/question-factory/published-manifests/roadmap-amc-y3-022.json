@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-022",
+  "questionId": "roadmap-amc-y3-022",
+  "contentHash": "9cadba7b772cfa3510c817b76a09f16f1e0dd9a07f24dbf0579ab3ec68eea047",
+  "revision": 1,
+  "blueprintId": "amc-y3-022-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "9db8b183a6377ca3cef8d3499cfd993b32b4ee70ca4cbff3bb8e69a28bc314e1",
+  "difficultyFingerprint": "2e13523a42850f73a496fd66a364bff7cea9f3bf40a999b1b72a2f03f435ba62",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-022",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Use the digits 4, 0 and 7 once each. What is the smallest three-digit number you can make?",
+    "options": [
+      {
+        "id": "a",
+        "text": "740"
+      },
+      {
+        "id": "b",
+        "text": "704"
+      },
+      {
+        "id": "c",
+        "text": "470"
+      },
+      {
+        "id": "d",
+        "text": "47"
+      },
+      {
+        "id": "e",
+        "text": "407"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "A three-digit number cannot start with 0. Put the smaller non-zero digit, 4, in the hundreds place, then 0 and 7. The number is 407.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Place value with zero",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5ab410c6d95bb2b1e64c2cee078a5772a62232a2e92695a382960ad40191d47e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-022",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-483f058cd1594b9f22d2287ff4efc6bdacd7b9e5"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:28.071Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "9cadba7b772cfa3510c817b76a09f16f1e0dd9a07f24dbf0579ab3ec68eea047",
+        "blueprintHash": "d92ede281eba7702d9b7a686876779eb9c70c203d31479fa6aa237e4687ff92a",
+        "candidateRevision": 1,
+        "reviewResultHash": "ca808b96dc8267505c6b11950eb202059e7fb4dec1d29ce716caa23b2a1008b0"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5fa1efc83e6e453cadd9eaf95c4c98e3e7bb703d62d887c6fa1ae4a0214956cd"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-022",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "24715a74e268f130afcb93a6c97e0255e963a7a66602bdb5056e4ba21225ff02"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:25.891Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "e446107f80ff7b4758a4db5ad84451d675d514423504c6e002a75f13df84c1d5",
+      "evidenceBinding": {
+        "candidateContentHash": "9cadba7b772cfa3510c817b76a09f16f1e0dd9a07f24dbf0579ab3ec68eea047",
+        "candidateRevision": 1,
+        "blueprintHash": "d92ede281eba7702d9b7a686876779eb9c70c203d31479fa6aa237e4687ff92a",
+        "reviewResultHash": "24715a74e268f130afcb93a6c97e0255e963a7a66602bdb5056e4ba21225ff02"
+      },
+      "previousReviewHash": "5fa1efc83e6e453cadd9eaf95c4c98e3e7bb703d62d887c6fa1ae4a0214956cd",
+      "reviewHash": "1b9e34c65ffbb5a2b296a09a681f21a2f2e56c5dc4ded060801c9a991f3c00cd"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-022",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:25.891Z",
+    "contentHash": "929e897416c980b6404bb922ff2b0cb62ad82ebbb137275fcca9b006bfc0fdfb",
+    "sourceManifestHash": "e446107f80ff7b4758a4db5ad84451d675d514423504c6e002a75f13df84c1d5",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-022",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Use the digits 4, 0 and 7 once each. What is the smallest three-digit number you can make?",
+      "options": [
+        {
+          "id": "a",
+          "text": "740"
+        },
+        {
+          "id": "b",
+          "text": "704"
+        },
+        {
+          "id": "c",
+          "text": "470"
+        },
+        {
+          "id": "d",
+          "text": "47"
+        },
+        {
+          "id": "e",
+          "text": "407"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "A three-digit number cannot start with 0. Put the smaller non-zero digit, 4, in the hundreds place, then 0 and 7. The number is 407.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Place value with zero",
+        "difficulty": "easy",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "24715a74e268f130afcb93a6c97e0255e963a7a66602bdb5056e4ba21225ff02"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-022",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "9cadba7b772cfa3510c817b76a09f16f1e0dd9a07f24dbf0579ab3ec68eea047",
+    "contentHash": "929e897416c980b6404bb922ff2b0cb62ad82ebbb137275fcca9b006bfc0fdfb"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-017",
+  "questionId": "roadmap-amc-y5-017",
+  "contentHash": "e07090f0c233065db9cae53b0e2568dcb356b6e8f0aae95fac90481c788b38e1",
+  "revision": 1,
+  "blueprintId": "amc-y5-017-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "9a02341647827b51c8c32f41cf38b3c6ebcf44e9d95a8c0e542a02c09a076f6b",
+  "difficultyFingerprint": "2ffc623acb3680807c75742d64cd175091fcdb5da7b2a9adc1c9c970401094de",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-017",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A tank is three fifths full. After 24 litres are added, it is full. What is the tank's capacity?",
+    "options": [
+      {
+        "id": "a",
+        "text": "96"
+      },
+      {
+        "id": "b",
+        "text": "60"
+      },
+      {
+        "id": "c",
+        "text": "40"
+      },
+      {
+        "id": "d",
+        "text": "48"
+      },
+      {
+        "id": "e",
+        "text": "72"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The empty part is two fifths and equals 24 litres. One fifth is 12 litres, so five fifths is 60 litres.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Use complementary fractions",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "f8373f2e1a91a9b6d398a40ee9fe7fdb6c509296e84495624a43af3f96c5247b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-017",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-8b145a0c4d52009fbed6ddb73421743891b26d27"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:34.930Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "e07090f0c233065db9cae53b0e2568dcb356b6e8f0aae95fac90481c788b38e1",
+        "blueprintHash": "76ef57919359f69736d71517f0a6e019eeaf6af124c8d5533da67a66fb181a05",
+        "candidateRevision": 1,
+        "reviewResultHash": "55001085a86edf5b27b35dc28e9e2ed6eb74f1eaa2db7b74d10bd953e00e1ecc"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "f5725c47328e964af80e1ab23e4f5e830e941376d1682578757e276bc6f0de9b"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-017",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "25b4d0d232f19d9e400dc809e9acbe67c6d1d8006ef90198b3b9c9548cdc7144"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "5354a95370ef8679c39c7db8b0a8b6bc842024028cbcfceabb157778956ed742",
+      "evidenceBinding": {
+        "candidateContentHash": "e07090f0c233065db9cae53b0e2568dcb356b6e8f0aae95fac90481c788b38e1",
+        "candidateRevision": 1,
+        "blueprintHash": "76ef57919359f69736d71517f0a6e019eeaf6af124c8d5533da67a66fb181a05",
+        "reviewResultHash": "25b4d0d232f19d9e400dc809e9acbe67c6d1d8006ef90198b3b9c9548cdc7144"
+      },
+      "previousReviewHash": "f5725c47328e964af80e1ab23e4f5e830e941376d1682578757e276bc6f0de9b",
+      "reviewHash": "1d22a551d5c118deb5d1a23d751a627151d9109662bfafe0e88f516be4e31991"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-017",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "0059de2eb4d3d677877783a8997f7bcd85abbe979f7d6806c72f246863cc5a1e",
+    "sourceManifestHash": "5354a95370ef8679c39c7db8b0a8b6bc842024028cbcfceabb157778956ed742",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-017",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A tank is three fifths full. After 24 litres are added, it is full. What is the tank's capacity?",
+      "options": [
+        {
+          "id": "a",
+          "text": "96"
+        },
+        {
+          "id": "b",
+          "text": "60"
+        },
+        {
+          "id": "c",
+          "text": "40"
+        },
+        {
+          "id": "d",
+          "text": "48"
+        },
+        {
+          "id": "e",
+          "text": "72"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The empty part is two fifths and equals 24 litres. One fifth is 12 litres, so five fifths is 60 litres.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Use complementary fractions",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "25b4d0d232f19d9e400dc809e9acbe67c6d1d8006ef90198b3b9c9548cdc7144"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-017",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "e07090f0c233065db9cae53b0e2568dcb356b6e8f0aae95fac90481c788b38e1",
+    "contentHash": "0059de2eb4d3d677877783a8997f7bcd85abbe979f7d6806c72f246863cc5a1e"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-003",
+  "questionId": "roadmap-amc-y3-003",
+  "contentHash": "e6de5a4cf674828abb6460d7fd7197b1878ef50426483bd7f519dac61cf672fa",
+  "revision": 1,
+  "blueprintId": "amc-y3-003-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "16d7711f0119e9fdef081d41022f6beaac083acdc3dc8b3bee53a44a3201de40",
+  "difficultyFingerprint": "60a52fed2fc1c8a22583c81352e1ca0fa602b71478bd3739af3211722fb5c4de",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-003",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A row has 9 chairs. A red card is placed on the middle chair. How many chairs are to its left?",
+    "options": [
+      {
+        "id": "a",
+        "text": "4"
+      },
+      {
+        "id": "b",
+        "text": "1"
+      },
+      {
+        "id": "c",
+        "text": "7"
+      },
+      {
+        "id": "d",
+        "text": "3"
+      },
+      {
+        "id": "e",
+        "text": "5"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "An odd row has one middle chair and equal numbers on each side.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Non-routine deduction and logical elimination",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ce47ff192257fdc3a9ec5566ee872ce05ef441ab880e673b7fc9c835985f959e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-003",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-2a89365b92e02242a9d66634f133761208aa3df9"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:22.799Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "e6de5a4cf674828abb6460d7fd7197b1878ef50426483bd7f519dac61cf672fa",
+        "blueprintHash": "73319e7cdadf422acdfc06f9c88e7e2e1fa7b57b82a067b42947ff07903433a9",
+        "candidateRevision": 1,
+        "reviewResultHash": "fe0f292bf4536601e7e3f03f07debd0a562837a54275a00a1c3e11fbbd216b01"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1ae28232ad3cfbe8d98164a4d0f4dea15df786742b5657f1e9cb6cf1515b8470"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-003",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "961cb9c732a7a869e550fff12d70c2ac957ee592fefeb05bd6d9db108f02b448"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "2a4af2539fe78b2d28ee4017a9f37032032256905c160e18b04ade3f3f9e38e7",
+      "evidenceBinding": {
+        "candidateContentHash": "e6de5a4cf674828abb6460d7fd7197b1878ef50426483bd7f519dac61cf672fa",
+        "candidateRevision": 1,
+        "blueprintHash": "73319e7cdadf422acdfc06f9c88e7e2e1fa7b57b82a067b42947ff07903433a9",
+        "reviewResultHash": "961cb9c732a7a869e550fff12d70c2ac957ee592fefeb05bd6d9db108f02b448"
+      },
+      "previousReviewHash": "1ae28232ad3cfbe8d98164a4d0f4dea15df786742b5657f1e9cb6cf1515b8470",
+      "reviewHash": "d27bddd03d49aa544369b744a6b5b8d2baff20f5fe26a8ce5ffc8023e931c7c9"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-003",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "406a7228369b11d83fecf2492bad5c1865f507e7a53df5e2c1183af7add2e25c",
+    "sourceManifestHash": "2a4af2539fe78b2d28ee4017a9f37032032256905c160e18b04ade3f3f9e38e7",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-003",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A row has 9 chairs. A red card is placed on the middle chair. How many chairs are to its left?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        },
+        {
+          "id": "e",
+          "text": "5"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "An odd row has one middle chair and equal numbers on each side.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Non-routine deduction and logical elimination",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "961cb9c732a7a869e550fff12d70c2ac957ee592fefeb05bd6d9db108f02b448"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-003",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "e6de5a4cf674828abb6460d7fd7197b1878ef50426483bd7f519dac61cf672fa",
+    "contentHash": "406a7228369b11d83fecf2492bad5c1865f507e7a53df5e2c1183af7add2e25c"
+  }
+}

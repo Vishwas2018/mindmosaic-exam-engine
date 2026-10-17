@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y3-028",
+  "questionId": "roadmap-amc-y3-028",
+  "contentHash": "82c5dfd63aa8efe3db81097675134beb2978db7b052b95e1195ac1c8fe395fba",
+  "revision": 1,
+  "blueprintId": "amc-y3-028-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "97b28df9345ce2c8c81cb9e4bff9368b82439f8121d4d927b80b86b42306a4a8",
+  "difficultyFingerprint": "798ab926e8278e87823b87f9d43c7f03e9bea55798c781e381d650648bc33df3",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-028",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A tile display has 3 tiles in its first row. Each new row has 2 more tiles than the row above. A box contains 60 tiles. After building the first 6 rows, how many extra tiles must be bought to complete the seventh row?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 3,
+      "tolerance": 0
+    },
+    "explanation": "The first six rows use 3 + 5 + 7 + 9 + 11 + 13 = 48 tiles, leaving 60 - 48 = 12. The seventh row needs 15 tiles, so 15 - 12 = 3 extra tiles must be bought.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Combine a growing pattern with a resource constraint",
+      "difficulty": "challenging",
+      "marks": 8,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "19c1c7de72a0211fdf9821a663d18683014d8c52ba68e20d81b5a54c4414f87b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-028",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-73a020d09a5041e8514154866b614af2d2d57040"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:29.971Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "82c5dfd63aa8efe3db81097675134beb2978db7b052b95e1195ac1c8fe395fba",
+        "blueprintHash": "bc957a0dab67395aa8ce96b065f93d4a30fc4185015a9f0e2290c28fef3f4229",
+        "candidateRevision": 1,
+        "reviewResultHash": "1e7848fcd175a0a64c71c3720d50a05b73ad84f93878c259bca4ef234b9e0656"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "181a56db2fed15048810de372135984155dda49678a306f20f93c7fc2194decc"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-028",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "19c50d1444c30c593db0f5b3333d5adb7d0222d625b52def6b7ac5446962f31f"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "12ddf1944d8acbcdb2e60795ba4a2e47dcad724185fe8362d8d3b95e3c66a6b9",
+      "evidenceBinding": {
+        "candidateContentHash": "82c5dfd63aa8efe3db81097675134beb2978db7b052b95e1195ac1c8fe395fba",
+        "candidateRevision": 1,
+        "blueprintHash": "bc957a0dab67395aa8ce96b065f93d4a30fc4185015a9f0e2290c28fef3f4229",
+        "reviewResultHash": "19c50d1444c30c593db0f5b3333d5adb7d0222d625b52def6b7ac5446962f31f"
+      },
+      "previousReviewHash": "181a56db2fed15048810de372135984155dda49678a306f20f93c7fc2194decc",
+      "reviewHash": "2244bf955fa8861498c3ac7d09f325d11c9dbfab20479f0d079b91e17591ea65"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-028",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "c0604d838a2bcf7f391a9f21e4cc6848157c1b377725f3e1e4802b3965269e7a",
+    "sourceManifestHash": "12ddf1944d8acbcdb2e60795ba4a2e47dcad724185fe8362d8d3b95e3c66a6b9",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-028",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A tile display has 3 tiles in its first row. Each new row has 2 more tiles than the row above. A box contains 60 tiles. After building the first 6 rows, how many extra tiles must be bought to complete the seventh row?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 3,
+        "tolerance": 0
+      },
+      "explanation": "The first six rows use 3 + 5 + 7 + 9 + 11 + 13 = 48 tiles, leaving 60 - 48 = 12. The seventh row needs 15 tiles, so 15 - 12 = 3 extra tiles must be bought.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Combine a growing pattern with a resource constraint",
+        "difficulty": "challenging",
+        "marks": 8,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "19c50d1444c30c593db0f5b3333d5adb7d0222d625b52def6b7ac5446962f31f"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-028",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "82c5dfd63aa8efe3db81097675134beb2978db7b052b95e1195ac1c8fe395fba",
+    "contentHash": "c0604d838a2bcf7f391a9f21e4cc6848157c1b377725f3e1e4802b3965269e7a"
+  }
+}

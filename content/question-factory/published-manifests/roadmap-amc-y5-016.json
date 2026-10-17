@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-016",
+  "questionId": "roadmap-amc-y5-016",
+  "contentHash": "904ec24b0c0d776b5fc3582b1b303a56abf837554adba2a36a840168f4f82185",
+  "revision": 1,
+  "blueprintId": "amc-y5-016-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "32b913ccca9cfdff4621f2c551361c005011f6aa04c8dbbc8cb6eb63443f3423",
+  "difficultyFingerprint": "aff024bf315481488de61f8e3986cec4ec2e9c6110b8346609975f4e588bf6cb",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-016",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Two bells ring together at 9:00 am. One rings every 8 minutes and the other every 12 minutes. When will they next ring together?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9:20 am"
+      },
+      {
+        "id": "b",
+        "text": "9:32 am"
+      },
+      {
+        "id": "c",
+        "text": "9:16 am"
+      },
+      {
+        "id": "d",
+        "text": "9:48 am"
+      },
+      {
+        "id": "e",
+        "text": "9:24 am"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The first positive time that is a multiple of both 8 and 12 is 24 minutes, so they ring together at 9:24 am.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Least common multiples in time",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "24dcdb978be0bafb66cbe69122a52506ce74645f47378bd2ea2d8aff731feb73",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-016",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-54dcadfd8281f63e6d851bcd25d651eb0401197a"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:34.648Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "904ec24b0c0d776b5fc3582b1b303a56abf837554adba2a36a840168f4f82185",
+        "blueprintHash": "329f653415348739c25fcf947097478f624439421c8086dd177f6feb5a1d2a7b",
+        "candidateRevision": 1,
+        "reviewResultHash": "bd209a309d31e1419e0c3053570a2b534b7bcfd27afed77fcf42f2ab56d98f16"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "6c62019e5e4f363a1d1eb3376c1c36c2a37034383652af9d9b03809c432ea88d"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-016",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "e9bbfa9b695fc8d0d4e0e29b94a2d78818bc13226852c839abc0f81e6b1c972d"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "412b5401632a52248fa8cf9986bcbe63c528c6b66520ff092e4487e307c7262b",
+      "evidenceBinding": {
+        "candidateContentHash": "904ec24b0c0d776b5fc3582b1b303a56abf837554adba2a36a840168f4f82185",
+        "candidateRevision": 1,
+        "blueprintHash": "329f653415348739c25fcf947097478f624439421c8086dd177f6feb5a1d2a7b",
+        "reviewResultHash": "e9bbfa9b695fc8d0d4e0e29b94a2d78818bc13226852c839abc0f81e6b1c972d"
+      },
+      "previousReviewHash": "6c62019e5e4f363a1d1eb3376c1c36c2a37034383652af9d9b03809c432ea88d",
+      "reviewHash": "e4679b0e642a4595137bf0c9499a266e09bee41057a52e8e355abb5523b594c6"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-016",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "59abdb6926336383a513d1c8149fdd3fda41cbeb4f3380dc908a014812bfe2e2",
+    "sourceManifestHash": "412b5401632a52248fa8cf9986bcbe63c528c6b66520ff092e4487e307c7262b",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-016",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Two bells ring together at 9:00 am. One rings every 8 minutes and the other every 12 minutes. When will they next ring together?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9:20 am"
+        },
+        {
+          "id": "b",
+          "text": "9:32 am"
+        },
+        {
+          "id": "c",
+          "text": "9:16 am"
+        },
+        {
+          "id": "d",
+          "text": "9:48 am"
+        },
+        {
+          "id": "e",
+          "text": "9:24 am"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The first positive time that is a multiple of both 8 and 12 is 24 minutes, so they ring together at 9:24 am.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Least common multiples in time",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "e9bbfa9b695fc8d0d4e0e29b94a2d78818bc13226852c839abc0f81e6b1c972d"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-016",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "904ec24b0c0d776b5fc3582b1b303a56abf837554adba2a36a840168f4f82185",
+    "contentHash": "59abdb6926336383a513d1c8149fdd3fda41cbeb4f3380dc908a014812bfe2e2"
+  }
+}

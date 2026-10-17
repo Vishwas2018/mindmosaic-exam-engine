@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-008",
+  "questionId": "roadmap-amc-y5-008",
+  "contentHash": "c2c8a08e83d07886d53fc11936c2cade0d5b58d63f975a5c8e684b344891676e",
+  "revision": 1,
+  "blueprintId": "amc-y5-008-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "2e8f39efb7904eaa10abfb6f8eaf6114fb17e3339cd5f91b55e92b8358cb816f",
+  "difficultyFingerprint": "aa0a0bed2ccc97b5efa6947bb5b80e498cf06d8af8de966304036bf72de55c69",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-008",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Three pens cost $2.40 each. How much change is received from $10?",
+    "options": [
+      {
+        "id": "a",
+        "text": "$3.20"
+      },
+      {
+        "id": "b",
+        "text": "$2.40"
+      },
+      {
+        "id": "c",
+        "text": "$7.20"
+      },
+      {
+        "id": "d",
+        "text": "$7.60"
+      },
+      {
+        "id": "e",
+        "text": "$2.80"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The pens cost 3 × $2.40 = $7.20. The change is $10.00 − $7.20 = $2.80.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Decimal money calculations",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e8a67c401b04b2374bf5bb8a6915165a61812ca6e149f78653d3e97c5e327d1c",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-008",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-d14717681970cb292e693903b101a7154e9e5abe"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:32.508Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "c2c8a08e83d07886d53fc11936c2cade0d5b58d63f975a5c8e684b344891676e",
+        "blueprintHash": "6b4700e9960c39da1e689946455e3dc1bd09d4b2378a48aabd546d4d9b197e84",
+        "candidateRevision": 1,
+        "reviewResultHash": "d967c3c0a825c52cf86411d7885e671c6920b46d558a65719e8370ef229d43a0"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "dba1e60496adbe9ee8cb7b211d4d0194f02efe9f2d09f0c4f34122cfb60181db"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-008",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "d1f43007cb8b9780f951bb95af20853084263e4804dbe1c56fa835f7316e644a"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "da2b0c419b30c411a5987b28b7b6226a1249c88324d5d154dd561aea34eec0b9",
+      "evidenceBinding": {
+        "candidateContentHash": "c2c8a08e83d07886d53fc11936c2cade0d5b58d63f975a5c8e684b344891676e",
+        "candidateRevision": 1,
+        "blueprintHash": "6b4700e9960c39da1e689946455e3dc1bd09d4b2378a48aabd546d4d9b197e84",
+        "reviewResultHash": "d1f43007cb8b9780f951bb95af20853084263e4804dbe1c56fa835f7316e644a"
+      },
+      "previousReviewHash": "dba1e60496adbe9ee8cb7b211d4d0194f02efe9f2d09f0c4f34122cfb60181db",
+      "reviewHash": "68688348662b844ea35e74a45c30c5087867160cc5d47a3aa6ae6eb55b69a206"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-008",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "ec214788352f11aed05e86cb1be2ebd48a787a08ebcd80e692e7fad35e6db7c1",
+    "sourceManifestHash": "da2b0c419b30c411a5987b28b7b6226a1249c88324d5d154dd561aea34eec0b9",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Three pens cost $2.40 each. How much change is received from $10?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$3.20"
+        },
+        {
+          "id": "b",
+          "text": "$2.40"
+        },
+        {
+          "id": "c",
+          "text": "$7.20"
+        },
+        {
+          "id": "d",
+          "text": "$7.60"
+        },
+        {
+          "id": "e",
+          "text": "$2.80"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The pens cost 3 × $2.40 = $7.20. The change is $10.00 − $7.20 = $2.80.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Decimal money calculations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "d1f43007cb8b9780f951bb95af20853084263e4804dbe1c56fa835f7316e644a"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-008",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "c2c8a08e83d07886d53fc11936c2cade0d5b58d63f975a5c8e684b344891676e",
+    "contentHash": "ec214788352f11aed05e86cb1be2ebd48a787a08ebcd80e692e7fad35e6db7c1"
+  }
+}

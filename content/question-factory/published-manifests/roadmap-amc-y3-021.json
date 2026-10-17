@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-021",
+  "questionId": "roadmap-amc-y3-021",
+  "contentHash": "075e2fdd94bc8e84da764d8778d4ecf613ea3442c5175d5dcfef123ebb49a4c5",
+  "revision": 1,
+  "blueprintId": "amc-y3-021-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "37f5d22cbcd26b82c2ec60d979141eb6c3ca06ed80b3a5d2a1de9f5467d04fc1",
+  "difficultyFingerprint": "cc78d2d85c17cb296a92b9104e4cb4e2990e5a5f4ee034320de83d0d9135c9c2",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-021",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A box starts with some tokens. Lena adds 8, doubles the total, then removes 6. There are now 44 tokens. How many were there at the start?",
+    "options": [
+      {
+        "id": "a",
+        "text": "14"
+      },
+      {
+        "id": "b",
+        "text": "17"
+      },
+      {
+        "id": "c",
+        "text": "16"
+      },
+      {
+        "id": "d",
+        "text": "18"
+      },
+      {
+        "id": "e",
+        "text": "20"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Reverse the steps: add six, halve, then subtract eight.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Working backwards and inverse operations",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "308b24a1cada17d7be8ce2fcdfa24b7318d029b38a33edbbb895e5b61d14f7fa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-021",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-0f5d51915e0ccccaadc77920f9e94f72525a6eb7"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:27.671Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "075e2fdd94bc8e84da764d8778d4ecf613ea3442c5175d5dcfef123ebb49a4c5",
+        "blueprintHash": "41403301c3043e54e64e75d2a253e0ae8484a7f68c44e1e0a0843f29c7bce7c2",
+        "candidateRevision": 1,
+        "reviewResultHash": "0b56f60654e712c68b4c0b6f42b5a33c026fe8ab56a66ebf0999708b2e8a00e8"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "fb70c46112b8c1a3d5804d53b934fcf7e0ff8febee3ff8e5b1137fde95d3cc83"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-021",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "63105986273f30e263d85762268123f7a553475e1082f965a64b79b69279282a"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "7b4c4a06c5b764da923417f3d8090bcadbe3abc21fa73cf96da4c1b0cdb47d60",
+      "evidenceBinding": {
+        "candidateContentHash": "075e2fdd94bc8e84da764d8778d4ecf613ea3442c5175d5dcfef123ebb49a4c5",
+        "candidateRevision": 1,
+        "blueprintHash": "41403301c3043e54e64e75d2a253e0ae8484a7f68c44e1e0a0843f29c7bce7c2",
+        "reviewResultHash": "63105986273f30e263d85762268123f7a553475e1082f965a64b79b69279282a"
+      },
+      "previousReviewHash": "fb70c46112b8c1a3d5804d53b934fcf7e0ff8febee3ff8e5b1137fde95d3cc83",
+      "reviewHash": "5e7328b753293864f87359c18cf38fe60d031f66497b4fece87ff9cffa690c8d"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-021",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "432443326c781aaeb4cca07452c3345694b4e8d4943eebadd7f25031f63684b2",
+    "sourceManifestHash": "7b4c4a06c5b764da923417f3d8090bcadbe3abc21fa73cf96da4c1b0cdb47d60",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-021",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A box starts with some tokens. Lena adds 8, doubles the total, then removes 6. There are now 44 tokens. How many were there at the start?",
+      "options": [
+        {
+          "id": "a",
+          "text": "14"
+        },
+        {
+          "id": "b",
+          "text": "17"
+        },
+        {
+          "id": "c",
+          "text": "16"
+        },
+        {
+          "id": "d",
+          "text": "18"
+        },
+        {
+          "id": "e",
+          "text": "20"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Reverse the steps: add six, halve, then subtract eight.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Working backwards and inverse operations",
+        "difficulty": "medium",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "63105986273f30e263d85762268123f7a553475e1082f965a64b79b69279282a"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-021",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "075e2fdd94bc8e84da764d8778d4ecf613ea3442c5175d5dcfef123ebb49a4c5",
+    "contentHash": "432443326c781aaeb4cca07452c3345694b4e8d4943eebadd7f25031f63684b2"
+  }
+}

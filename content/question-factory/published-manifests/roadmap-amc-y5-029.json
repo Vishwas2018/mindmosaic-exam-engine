@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y5-029",
+  "questionId": "roadmap-amc-y5-029",
+  "contentHash": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
+  "revision": 1,
+  "blueprintId": "amc-y5-029-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a5baf562c0ca5442a29c8d81f1c6500f118f366b308fe97c5bc9fe8ba8bb0538",
+  "difficultyFingerprint": "d6a8ea7d41b46cc94985accc3e5a3f986263b61b46036a915a7383a697b7bbbb",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-029",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The first row of a display has 2 counters. Each new row has 3 more counters than the row above. How many counters are in the first 8 rows altogether?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 100,
+      "tolerance": 0
+    },
+    "explanation": "The rows contain 2, 5, 8, 11, 14, 17, 20 and 23 counters. Adding them gives 100.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Build and sum a growing pattern",
+      "difficulty": "medium",
+      "marks": 9,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "6c9a2534239c76b4ba6abe013002e923fe9e01ff44ff3d72a93461ebaecc9fea",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-029",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-3ec487bc2936ff4cb89d60162a6f98ec20f6d515"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:38.710Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
+        "blueprintHash": "364e6f192182db1d92cc21b0c5e23f6e9648b6fbd2002b8e12affe8aa7be4ade",
+        "candidateRevision": 1,
+        "reviewResultHash": "298c2936ea946a9e137dca9f73d2838f9232b0b01a5e71d818bed1a97889a7e8"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "64deed3bb8f0360ea252f5ae1235f9b42ebd40308e6e4dda68d7d4446a73635f"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-029",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "df3e59ce9e864b88526a61f0b929ed40897a382f6ffacd06b817d7568742a6ef"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "9916fcdfe00bba13d0edad7d87b0728e02a41937131df21f6d0c671df84f7656",
+      "evidenceBinding": {
+        "candidateContentHash": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
+        "candidateRevision": 1,
+        "blueprintHash": "364e6f192182db1d92cc21b0c5e23f6e9648b6fbd2002b8e12affe8aa7be4ade",
+        "reviewResultHash": "df3e59ce9e864b88526a61f0b929ed40897a382f6ffacd06b817d7568742a6ef"
+      },
+      "previousReviewHash": "64deed3bb8f0360ea252f5ae1235f9b42ebd40308e6e4dda68d7d4446a73635f",
+      "reviewHash": "a8431440003aaa5ccca1f496f1db8ba1efcf0bcc0f66e77525bc00ec49c1388c"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-029",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "dd927d53d9a920c6eecd21b654785d624609fa30357a01bb2789f1567eb7f4d4",
+    "sourceManifestHash": "9916fcdfe00bba13d0edad7d87b0728e02a41937131df21f6d0c671df84f7656",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-029",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "The first row of a display has 2 counters. Each new row has 3 more counters than the row above. How many counters are in the first 8 rows altogether?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 100,
+        "tolerance": 0
+      },
+      "explanation": "The rows contain 2, 5, 8, 11, 14, 17, 20 and 23 counters. Adding them gives 100.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Build and sum a growing pattern",
+        "difficulty": "medium",
+        "marks": 9,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "df3e59ce9e864b88526a61f0b929ed40897a382f6ffacd06b817d7568742a6ef"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-029",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
+    "contentHash": "dd927d53d9a920c6eecd21b654785d624609fa30357a01bb2789f1567eb7f4d4"
+  }
+}

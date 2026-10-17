@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-002",
+  "questionId": "roadmap-amc-y3-002",
+  "contentHash": "d7cc6b54ecfdca6730a172a4daaf96c71ad20ff41f270b7e55f4a915c041e440",
+  "revision": 1,
+  "blueprintId": "amc-y3-002-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "767bf4c3f7a7353e3a2e56e5cba450e7e626c4bb4ddb50cb73f4aec6dca2eee8",
+  "difficultyFingerprint": "6b421b3ac56209013140b343b6fd9802e661165c928e75437f5c6ccda767f2bb",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-002",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Mina puts 4 stickers on each page of a notebook. She uses 24 stickers and leaves 3 pages empty. How many pages does the notebook have?",
+    "options": [
+      {
+        "id": "a",
+        "text": "12"
+      },
+      {
+        "id": "b",
+        "text": "6"
+      },
+      {
+        "id": "c",
+        "text": "10"
+      },
+      {
+        "id": "d",
+        "text": "8"
+      },
+      {
+        "id": "e",
+        "text": "9"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Divide the stickers by four to find used pages, then add the three empty pages.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Working backwards and inverse operations",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "cae7ef32de4f8091bb082a72d4254145418e0d1b80a7fe4673db5649bf62411a",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-002",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-9faabbbf76b4e061e9b14990c73393e087058f09"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:22.563Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "d7cc6b54ecfdca6730a172a4daaf96c71ad20ff41f270b7e55f4a915c041e440",
+        "blueprintHash": "50be907e959581a90fe5d9621f20a11f1738977475910564b41eeab4095d3e3a",
+        "candidateRevision": 1,
+        "reviewResultHash": "180f346fcfa94dba1976e1cd02a72844054902033b7e1e5314b6a76170145e4d"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "05175a845d5895b0ce6a4f32feff323ab965491ea56d763c860a7e20e3b1db91"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-002",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "e4db5b8d84f9515a698725191923007b2e6b07e54ab27e2975991c8314092ccb"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "d2c8031d62eecf7c9b201a9fe6775f1d6c7207864734218672745d08e74a1cf6",
+      "evidenceBinding": {
+        "candidateContentHash": "d7cc6b54ecfdca6730a172a4daaf96c71ad20ff41f270b7e55f4a915c041e440",
+        "candidateRevision": 1,
+        "blueprintHash": "50be907e959581a90fe5d9621f20a11f1738977475910564b41eeab4095d3e3a",
+        "reviewResultHash": "e4db5b8d84f9515a698725191923007b2e6b07e54ab27e2975991c8314092ccb"
+      },
+      "previousReviewHash": "05175a845d5895b0ce6a4f32feff323ab965491ea56d763c860a7e20e3b1db91",
+      "reviewHash": "9c5da20b31c03e7c098f90189d0639092bfa04d594684bd216f74334795b8529"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-002",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "f16254b6315d5cfe941e76d18cd0c9cfa1d06760f6a23da5dabb6562ec11f69e",
+    "sourceManifestHash": "d2c8031d62eecf7c9b201a9fe6775f1d6c7207864734218672745d08e74a1cf6",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-002",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Mina puts 4 stickers on each page of a notebook. She uses 24 stickers and leaves 3 pages empty. How many pages does the notebook have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "12"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "text": "8"
+        },
+        {
+          "id": "e",
+          "text": "9"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Divide the stickers by four to find used pages, then add the three empty pages.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Working backwards and inverse operations",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "e4db5b8d84f9515a698725191923007b2e6b07e54ab27e2975991c8314092ccb"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-002",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "d7cc6b54ecfdca6730a172a4daaf96c71ad20ff41f270b7e55f4a915c041e440",
+    "contentHash": "f16254b6315d5cfe941e76d18cd0c9cfa1d06760f6a23da5dabb6562ec11f69e"
+  }
+}
