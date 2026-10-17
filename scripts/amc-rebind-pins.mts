@@ -18,7 +18,7 @@ let text = await readFile(BINDINGS, "utf8");
 for (const id of ids) {
   const year = /^roadmap-amc-y([35])-/.exec(id)?.[1];
   if (!year) throw new Error(`Not an AMC id: ${id}`);
-  const sourceFile = `content/roadmap-drafts/amc-y${year}-draft.json` as const;
+  const sourceFile = `content/roadmap-drafts/amc-y${year}-draft.json` as "content/roadmap-drafts/amc-y3-draft.json" | "content/roadmap-drafts/amc-y5-draft.json";
   const packet = JSON.parse(await readFile(sourceFile, "utf8")) as { questions: { id: string }[] };
   const raw = packet.questions.find((q) => q.id === id);
   if (!raw) throw new Error(`Draft not found: ${id}`);
