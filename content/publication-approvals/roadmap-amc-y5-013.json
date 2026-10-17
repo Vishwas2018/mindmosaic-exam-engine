@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-013",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "99042f67e7134086eca2cd142f5b55d88fd649571b319a4dcccaffa11098f0d9",
-  "sourceManifestHash": "975764f9a6117d6df4a859b598e97ac12d8b7301ea508b89bccc546ae17b4a35",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "08b66c6dc27794c3547872480af2b5c058c79f8064c8a5550a1cbe2222c329e2",
+  "sourceManifestHash": "24c55a4d115920e2fb3a5e36e1eacb5143c7f584a7cc66ee636533e449f5afbb",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Measurement & Geometry",
       "topic": "Measurement & Geometry",
       "skill": "Area of a composite shape",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "marks": 4,
       "estimatedTimeSeconds": 120,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "3252bfea5d2b53b75f50dd79cb6006db9ed0b8407c6bce4bb312a5c7da88ff17"
+  "fingerprint": "cba65e3b5cbd676e8254c57fc88520561873c2453505f35da161189b3781e712"
 }

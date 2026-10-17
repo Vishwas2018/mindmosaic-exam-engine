@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-015",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "d936e2f6e2e40d3aab7ad209819fc0019a652cda1fdb01e21a397af76ca0247c",
-  "sourceManifestHash": "881546dc27de473ef23b768551f4b54072967527da99dc3f6dad38ac85f7b6b8",
+  "approvedAt": "2026-10-17T03:53:25.891Z",
+  "contentHash": "8e5168af791e3e28b6fd9a1c47dd21fb78e21a9489ae6607c11042b6f2003d34",
+  "sourceManifestHash": "caab35187783f24959fd1ff5eb31399b8528d4567c8abeb7bcab68b675c8bc77",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Logic & Problem-Solving",
       "topic": "Logic & Problem-Solving",
       "skill": "Non-routine deduction and logical elimination",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "marks": 4,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "7b881ca2d7f1b0606c78d1595c773a63158289bc7d46a01898da889eabb53b22"
+  "fingerprint": "9c2dce8bdeb2b02680cdc6865e965dd68497ac43c97b058aa73b1f97d7ec328e"
 }

@@ -652,7 +652,7 @@
         "subject": "amc_mathematics",
         "strand": "Logic & Problem-Solving",
         "skill": "Non-routine deduction and logical elimination",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 4,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -696,7 +696,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Apply equal groups in two steps",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 4,
         "estimatedTimeSeconds": 120,
         "tags": []
@@ -960,7 +960,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Place value with zero",
-        "difficulty": "challenging",
+        "difficulty": "easy",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -1092,7 +1092,7 @@
         "subject": "amc_mathematics",
         "strand": "Logic & Problem-Solving",
         "skill": "Order items from clues",
-        "difficulty": "challenging",
+        "difficulty": "easy",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []

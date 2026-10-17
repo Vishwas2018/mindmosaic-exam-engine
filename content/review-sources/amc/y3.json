@@ -131,8 +131,8 @@
     "questionId": "roadmap-amc-y3-015",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
-    "sourceQuestionHash": "7a1786fff7412164535b8cba4458124f15b40b2a882fb22d829a7777674c43d1",
-    "contentHash": "d936e2f6e2e40d3aab7ad209819fc0019a652cda1fdb01e21a397af76ca0247c"
+    "sourceQuestionHash": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
+    "contentHash": "8e5168af791e3e28b6fd9a1c47dd21fb78e21a9489ae6607c11042b6f2003d34"
   },
   {
     "kind": "amc_draft_review_source",
@@ -140,8 +140,8 @@
     "questionId": "roadmap-amc-y3-016",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
-    "sourceQuestionHash": "4ab20d4c5a6e2d123dac322255e6ace175c215f0dd7d798b5baa0004d598d7cc",
-    "contentHash": "1deb8038dc15a07789157c49929bbfcf3789c291a455b52e17ef528f5ecc0a2e"
+    "sourceQuestionHash": "23f16ef863aaa054068723213ec378c34a9b442296b151c67059dbec8746e2a0",
+    "contentHash": "3e81ab90d3eddce680e2f1291e28fdb8da478ab570cffc7eb81fb2d33dce48f9"
   },
   {
     "kind": "amc_draft_review_source",
@@ -194,8 +194,8 @@
     "questionId": "roadmap-amc-y3-022",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
-    "sourceQuestionHash": "54860d7eba2dbb09d52a89e2885380efc84bf8a0d4695d89f9dc905ededee03b",
-    "contentHash": "b1627388d22e9ff35d0fd62a7bad6795ac5f2ddf9ff1ec6602f265a1c2a6daf0"
+    "sourceQuestionHash": "9cadba7b772cfa3510c817b76a09f16f1e0dd9a07f24dbf0579ab3ec68eea047",
+    "contentHash": "929e897416c980b6404bb922ff2b0cb62ad82ebbb137275fcca9b006bfc0fdfb"
   },
   {
     "kind": "amc_draft_review_source",
@@ -221,8 +221,8 @@
     "questionId": "roadmap-amc-y3-025",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
-    "sourceQuestionHash": "d406bcd79e95adc547fbbed7bc75812b5f394fbac68056e39f2857dc913b2a88",
-    "contentHash": "cd39d9fdb3e50cdfe739d142417c6ee0fbc93b7efcb4911254f532dd36ceaf9b"
+    "sourceQuestionHash": "1ccc852afcb809c43f9b3f3b4913917b3f52ba111e635852a0eb2980e3ecc0cb",
+    "contentHash": "de7ef1bc7e489106cee4dfa012eea608972de77a1a466eb772ef5f23c8de902e"
   },
   {
     "kind": "amc_draft_review_source",

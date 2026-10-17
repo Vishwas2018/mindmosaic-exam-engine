@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-026",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "56699bd4cacb1b28204caca74aea7ad358e5eea519d7c419d253d78bd81fb4e3",
+  "sourceManifestHash": "589a91932c2ed53f4f0b436e68574a85967ee459aee3c45be701210564249fe2",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-026",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the sum of all positive multiples of 3 that are no greater than 30?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 165,
+      "tolerance": 0
+    },
+    "explanation": "The multiples are 3, 6, ..., 30. Pairing first with last gives five pairs of 33, so the total is 5 × 33 = 165.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Sum an arithmetic sequence",
+      "difficulty": "challenging",
+      "marks": 6,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "d63c1cc5a485b70da419612814b3768e24e77af76259422fc21a6c91e396e247"
+}

@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-022",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "b1627388d22e9ff35d0fd62a7bad6795ac5f2ddf9ff1ec6602f265a1c2a6daf0",
-  "sourceManifestHash": "e8c3845e68536eacc119cf12256b05aed44cdfdff527e2b17a9b447bd0d5f582",
+  "approvedAt": "2026-10-17T03:53:25.891Z",
+  "contentHash": "929e897416c980b6404bb922ff2b0cb62ad82ebbb137275fcca9b006bfc0fdfb",
+  "sourceManifestHash": "e446107f80ff7b4758a4db5ad84451d675d514423504c6e002a75f13df84c1d5",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Place value with zero",
-      "difficulty": "challenging",
+      "difficulty": "easy",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "63b5134b38da3b87266e5c8d2a46014093790c5d8193130526105d2b14b299f9"
+  "fingerprint": "24715a74e268f130afcb93a6c97e0255e963a7a66602bdb5056e4ba21225ff02"
 }

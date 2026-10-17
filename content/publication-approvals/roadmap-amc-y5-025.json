@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-025",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "6751f155b0373cfd2bbd66912bb9fd00720faa9f6628cc0e4af0afa790477b64",
-  "sourceManifestHash": "cda6ad20a72d677dfe793d4bdf3b0415c693fec8a26e3922302d8537a33498c3",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "357dbc8dfd3ed7b0bcb3344ead612d8dd40af7f2ff7454a7ce434e237e3c62c2",
+  "sourceManifestHash": "0a7dc64f519a45a7b741c7517eeb7e3d7ba47c16fa6b2796caad7b5991ef0fd9",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Measurement & Geometry",
       "topic": "Measurement & Geometry",
       "skill": "Compare areas within a partition",
-      "difficulty": "challenging",
+      "difficulty": "easy",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "7b3bb65886fe2a04b870e1bda3dc435a4d097fb849f39dab9224b9cb7beced67"
+  "fingerprint": "0d6ed943cbc59c6a8382583ee22e5f6393ecc94767a8ba99f1aefdc9770fc3e6"
 }

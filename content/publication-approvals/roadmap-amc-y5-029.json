@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-029",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "818b513693d4d090133e5bd6f07a5bf4f750668e1c577375396c9105ffc9b503",
-  "sourceManifestHash": "4db08d847e805b05d230b8b593b94f66eac92b72c167c900cb392e065bb9a188",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "1392cf29d0a266c40095d3a6c08695e5391cd22315820dba01164c1ab9b049b0",
+  "sourceManifestHash": "07614839fe1ae1908600bf492bf086bf55d76120bbbff9629e7337f8775e4c37",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -33,7 +33,7 @@
       "strand": "Patterns & Algebra",
       "topic": "Patterns & Algebra",
       "skill": "Build and sum a growing pattern",
-      "difficulty": "challenging",
+      "difficulty": "easy",
       "marks": 9,
       "estimatedTimeSeconds": 180,
       "tags": [],
@@ -42,5 +42,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "7aa3ee8b51f9b7ca3b92d0b6516dea7715d455eccd4fe4c79b785a939a820a34"
+  "fingerprint": "2273bca0af42d37c2fc3e3744a4baa7a75594802437c3006f2184e7fe80a53aa"
 }

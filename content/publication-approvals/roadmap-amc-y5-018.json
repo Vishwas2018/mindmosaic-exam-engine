@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-018",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "8b24c1fad706bbaf310e076d1a3b8acdca180ec077f45666a562c6c2d4406fb2",
-  "sourceManifestHash": "6cba9ca7aa20fe879baf44dff72bb858d8dc904632ae2ef62996af37674123d3",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "52a51f63c3876e63052d61d982a7a6becdda9786f45f2d4637349f03f2c8ac68",
+  "sourceManifestHash": "0255a95cd204e3d9a6b7fe55d8e95ef6287728485d57d1cf06ed17c5991062ac",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Statistics & Probability",
       "topic": "Statistics & Probability",
       "skill": "Find the median",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "marks": 4,
       "estimatedTimeSeconds": 120,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "a785467fd45092b00c4ca996fb1198a89742237020521d9dd9342c70a16e11b7"
+  "fingerprint": "0d6bf9c6481463f03110fea0c1b203bef94eda8444ce2e04ca2064725cecc0db"
 }

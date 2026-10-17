@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-025",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "cd39d9fdb3e50cdfe739d142417c6ee0fbc93b7efcb4911254f532dd36ceaf9b",
-  "sourceManifestHash": "6a05bc0eda1178be37a75a00cc9b219f197cb5f53223c9137b3f7da206f6c1b3",
+  "approvedAt": "2026-10-17T03:53:25.891Z",
+  "contentHash": "de7ef1bc7e489106cee4dfa012eea608972de77a1a466eb772ef5f23c8de902e",
+  "sourceManifestHash": "b843b3e8cfbf9156bd6ecdccd7b42ed5725f25ef365b328bec18b5ecaa3dcf20",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Logic & Problem-Solving",
       "topic": "Logic & Problem-Solving",
       "skill": "Order items from clues",
-      "difficulty": "challenging",
+      "difficulty": "easy",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "3f5ac29ba809c562bb2b88a0c070d4d36647f10b63a3e9f93ee4160844342191"
+  "fingerprint": "6d063fc3c172b361e4bcbbaf55336d747192359a74d43cf5cc5d527fd4e7c131"
 }

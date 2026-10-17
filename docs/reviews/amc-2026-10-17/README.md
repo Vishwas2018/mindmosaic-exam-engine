@@ -16,3 +16,5 @@ The governed recorder created 57 real records under `content/publication-approva
 AMC remains at 0 manifests and 0 served items (Y3 0, Y5 0). Scholarship and Singapore remain coming soon. No fabricated manifest or prepare-amc-staged script was reused. This branch enforces a real external approval record and both hash-bound first-party and human review stages before any future AMC publication can pass.
 
 See `docs/content-status/amc-publication-attempt-2026-10-17.md` and the 57-row approval evidence index for the actual recorded fields and blockers. Approved content was not edited to force upstream validation.
+
+Continuation: 16 defensible difficulty-only corrections have now been applied and re-recorded through the governed approval writer; the prior signatures remain in superseded-label-approvals/. Twenty-one difficulty mismatches remain flagged. The content-status report and 37-row preflight describe the exact before/after decisions. All 57 current approvals are valid; no AMC item is published.

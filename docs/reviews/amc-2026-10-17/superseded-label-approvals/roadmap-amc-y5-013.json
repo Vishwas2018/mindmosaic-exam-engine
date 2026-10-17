@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-013",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "99042f67e7134086eca2cd142f5b55d88fd649571b319a4dcccaffa11098f0d9",
+  "sourceManifestHash": "975764f9a6117d6df4a859b598e97ac12d8b7301ea508b89bccc546ae17b4a35",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-013",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A 12 cm by 8 cm rectangle has a 4 cm by 3 cm corner cut away. What area remains?",
+    "options": [
+      {
+        "id": "a",
+        "text": "72"
+      },
+      {
+        "id": "b",
+        "text": "88"
+      },
+      {
+        "id": "c",
+        "text": "92"
+      },
+      {
+        "id": "d",
+        "text": "80"
+      },
+      {
+        "id": "e",
+        "text": "84"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The full rectangle has area 12 × 8 = 96 cm². The cut-out is 4 × 3 = 12 cm², so 96 − 12 = 84 cm² remains.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Area of a composite shape",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "3252bfea5d2b53b75f50dd79cb6006db9ed0b8407c6bce4bb312a5c7da88ff17"
+}
