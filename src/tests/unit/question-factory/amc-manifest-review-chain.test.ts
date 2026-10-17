@@ -20,6 +20,7 @@ const first = appendReviewRecord([], draft(false));
 const human = appendReviewRecord([first], draft(true));
 const base = { candidateId: id, contentHash, revision: 1, manifestSchemaVersion: 2,
   chainOrigin: "in_pipeline" as const, correctnessBasis: "deterministic" as const,
+  humanApprovalSource: JSON.parse(readFileSync("content/review-sources/amc/y3.json", "utf8")).find((s: {questionId:string})=>s.questionId===id),
   question: approval.question, approvedBy: approval.approvedBy, humanApproval: approval };
 
 describe("AMC manifests require both durable review stages", () => {

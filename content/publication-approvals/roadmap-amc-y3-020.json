@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-020",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "38bd793b0858c7fe41bbe4babc42a83e8cd5e108b1a427769d703ed1ec0ab1dc",
-  "sourceManifestHash": "67da5808d7741bf1d88e0e61a3f76ee0333160d45ecf2cb8227990459101049c",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "ede4a3fc8c703ed0846e2212e95688bd74e7caffb99c6d19258ba8dffb7e59ae",
+  "sourceManifestHash": "0bb1b7f7c8f37007aee04bc037f497e7fc8a8fe8ab636dcdf78d3c0bf4bc4ecc",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Geometry & Measurement",
       "topic": "Geometry & Measurement",
       "skill": "Perimeter, area, and volume problem solving",
-      "difficulty": "medium",
+      "difficulty": "challenging",
       "marks": 4,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "7cdfab827e66c6c7b10e7146452e564f93f3af9a0ed403b56110b542c58743a2"
+  "fingerprint": "410e854dd3f802cd8d0e6e07ec6935310cee4fb0810729294ae14d8c84e54ca9"
 }

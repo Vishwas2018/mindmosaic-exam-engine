@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-004",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "52e8d140dcf55d798be699f03b2a122a35d850b81c2933e34b2bb0ed92882e4e",
-  "sourceManifestHash": "0480143471e6b7e5be6c57586b73da3e85d89868883268cd6d1510fafd5f17ad",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "6efef15cd01aa32f1dac83188291f3dc6be8642d9c6a246efca87ae9ae61bf56",
+  "sourceManifestHash": "a610db6f0f08f4f23dd0b888ebbf9e874788a1a2658e36b57739daf5a31bf4d4",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Multi-step arithmetic operations",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 3,
       "estimatedTimeSeconds": 90,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "d8a3b73badf1b66a24c3676e52e64b191b3216c3250d5f6385eb804f815b7d8b"
+  "fingerprint": "0de7f1f61aa163eaa976af4164c372dd283c6fa45b5d2842489922dbd7267a20"
 }

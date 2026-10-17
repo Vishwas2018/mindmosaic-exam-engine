@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-003",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "88e12c7fb013ce56d8827f3224c63ba14a5964eeb6e8fe0feb70258e2758f68e",
-  "sourceManifestHash": "f18bc0fd82b4c0fbefe7ab85cae02db2ddba02d0fa886bd07610e41685e3cb88",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "b7cebb5156675f9b9af2a163e83c6538f08e745d70233af97f512103ba69f2ff",
+  "sourceManifestHash": "80e160ea86f43ce905e701fd082f4094987c890ce82b30509f7598ad6f2e6b27",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Measurement & Geometry",
       "topic": "Measurement & Geometry",
       "skill": "Elapsed time",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 3,
       "estimatedTimeSeconds": 90,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "020507990941af00e76119292438600cddfc62c888dea6200a65fb66743242ad"
+  "fingerprint": "19191196a294a8a34ff8f0769c40c8131b3f611543ec06ab13b6e9cb724c65b3"
 }

@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-008",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "f4cf59287cf3e35b5e9e45c20aec643eb710d49dcac0cf1be9b1d82aa5f7a6ce",
-  "sourceManifestHash": "a131dc952fa9eec4cca8b17116214f8284d8f1baa53d67ba206e80208a06798b",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "de8212e61060e39b1916c17e946d1194a4d79cbd97b01b56e34bb4b8dd804302",
+  "sourceManifestHash": "f8209faed803cea42651293d0c09e8554a23e654b00e7f32851797c4e2219054",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Patterns & Algebra",
       "topic": "Patterns & Algebra",
       "skill": "Algebraic thinking and unknown values",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 3,
       "estimatedTimeSeconds": 90,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "b6dc5397c5723f4096b8a0c1b4c302267413a0432103dd198f1cd70f059e0bec"
+  "fingerprint": "e4a2467c74ff253cca367b765dc96a4310f5d4e869fcc94a7fe3f4b3eff7ee54"
 }

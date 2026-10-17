@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-026",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T03:53:30.151Z",
-  "contentHash": "43cc5d57a9747d9763386f1879a807e1ed96b0fc16b7bed7c04fdeb22ae124ee",
-  "sourceManifestHash": "336c24ebd312439bf0668c99a62f9d524f538e6aa6905c9861487fc328974686",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "c7d3df807ca64b47d341595ad0201b232637fbb2cad68aebff82509b98e71d8e",
+  "sourceManifestHash": "2c95a54561f7d824674994178d774cc13b277d95ac7cc718e14e983d20a6b320",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -33,7 +33,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Sum an arithmetic sequence",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 6,
       "estimatedTimeSeconds": 180,
       "tags": [],
@@ -42,5 +42,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "3fcebe69be34a17b18c16d227cb845dd64f92c05eb6e5b9994bc808341dd4e5c"
+  "fingerprint": "d694934254c60a84ef2a4fc4a9481c49711c21265e66b27e3b6c2b5080903a73"
 }

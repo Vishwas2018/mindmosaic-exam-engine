@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-021",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "44024092e352135d7d39870f915ab67b6cb9102672ff7cc7fc54b83f91f296ff",
-  "sourceManifestHash": "154214d2f914ecb9b6285e5b1824bd2b33a737f46d87eb69f93d61dbd9898117",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "17b00b24cc1e38453b89664f4ec04ea3fb4f48b6614da01e205a051a02874075",
+  "sourceManifestHash": "a998b8ec40df3b49a099fd1ef79b18491bc8549bbf042b9d23f8eb221e4b4e20",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Patterns & Algebra",
       "topic": "Patterns & Algebra",
       "skill": "Digit reasoning",
-      "difficulty": "challenging",
+      "difficulty": "medium",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "d4378a21ec1dc38deddd75f55344289c1ce0cfca7e03558befc9d3d9418d1738"
+  "fingerprint": "503a36c2ab6ba681e2b34e7a2ae4c616672a07fe6dd3021581376fd3d500cf93"
 }

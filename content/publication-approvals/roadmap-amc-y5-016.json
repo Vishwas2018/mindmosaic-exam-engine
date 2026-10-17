@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-016",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T03:53:30.151Z",
-  "contentHash": "7f955fd562d822571920ef63f081819fb23d9e05e17bb3fe225cf42243a82f07",
-  "sourceManifestHash": "ffcb8417e2ad84426eff95c41c81b298026d8f54eccbf26ae240dec4ef8d8c3c",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "59abdb6926336383a513d1c8149fdd3fda41cbeb4f3380dc908a014812bfe2e2",
+  "sourceManifestHash": "412b5401632a52248fa8cf9986bcbe63c528c6b66520ff092e4487e307c7262b",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Least common multiples in time",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 4,
       "estimatedTimeSeconds": 120,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "dd6df90ce26bc1128cb243576e65ba5a4a7ce3649ca16ea0c90c27323a58e87b"
+  "fingerprint": "e9bbfa9b695fc8d0d4e0e29b94a2d78818bc13226852c839abc0f81e6b1c972d"
 }

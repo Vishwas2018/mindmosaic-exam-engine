@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-023",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "989508e292cb1cd356a7e515d330ade7df9db875c906359e361bc20dc52d5be8",
-  "sourceManifestHash": "c0f851c066ed75d5330d788afddcd9292594f3696d7972027f7b041df6ae4717",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "440ba1a0ff70bb74b470f907d6ef14802479c02fca8bd225a47c406d9ae44f27",
+  "sourceManifestHash": "c9e698eaa69e969983a34e77f2a2e8c4466769a132957969467898b471dfdea6",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Measurement & Geometry",
       "topic": "Measurement & Geometry",
       "skill": "Compare perimeters",
-      "difficulty": "challenging",
+      "difficulty": "medium",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "3f339bbbe614124764a286c8a1667181d134027e5ae2d457e9ac0e0bd8d85333"
+  "fingerprint": "f8def71690f3156e3e97ba3662d7b5ebb1c22935b3c9cbb1eb66f8bfbdb102a4"
 }

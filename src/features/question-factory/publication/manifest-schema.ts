@@ -1,4 +1,5 @@
 import { questionSchema } from "@/schemas/question.schema";
+import { verifiedAmcApprovalSourceHash } from "@/features/content-governance/amc-review-source";
 import type { HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
 import { hashJson } from "../provenance/content-hash";
 import type { ReviewRecord } from "../provenance";
@@ -74,6 +75,7 @@ export type CorrectnessBasis = "deterministic" | "independent_semantic_review";
 export interface ManifestReviewEvidence {
   readonly question?: { readonly metadata?: { readonly subject?: string } };
   readonly humanApproval?: HumanPublicationApproval;
+  readonly humanApprovalSource?: unknown;
   /** Absent on every manifest written before P0-B; treated as legacy. */
   readonly manifestSchemaVersion?: number;
   readonly correctnessBasis?: CorrectnessBasis;
@@ -141,7 +143,9 @@ export function validateManifestReviewEvidence(
       const { fingerprint, ...facts } = approval;
       const reviewedQuestion = questionSchema.safeParse(manifest.question);
       if (fingerprint !== hashJson(facts) || manifest.approvedBy !== approval.approvedBy || approval.revision !== manifest.revision ||
-          !reviewedQuestion.success || approval.contentHash !== hashJson(reviewedQuestion.data)) {
+          !reviewedQuestion.success || approval.contentHash !== hashJson(reviewedQuestion.data) ||
+          verifiedAmcApprovalSourceHash(manifest.humanApprovalSource, manifest.candidateId, manifest.contentHash,
+            approval.contentHash, manifest.revision) !== approval.sourceManifestHash) {
         issues.push(issue("humanApproval", "AMC human approval must be fingerprinted and bound to this exact revision and reviewer."));
       }
     }

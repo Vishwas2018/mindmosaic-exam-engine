@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-024",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "4a9f19cb4b15d6a24c845ceaa3c365eb13da25387afc757038e8f98d734df74a",
-  "sourceManifestHash": "e4e2a21dd0e24761cc12d09d0568fc6693373b715085f1080433e64c9cc55833",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "501a04be335612954100d20605470e4197feb71b57710f225ee6a15517cbc3b8",
+  "sourceManifestHash": "bb0f7a06d36a766b26c3ebffaefd214f33df47e81dda33edae256aff225bfccf",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Patterns & Algebra",
       "topic": "Patterns & Algebra",
       "skill": "Equation balance and substitution",
-      "difficulty": "challenging",
+      "difficulty": "medium",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "4439998b335623a9aab3192f353009996db44aba7c94ad8983587e2a6d91c161"
+  "fingerprint": "dc0f09867ab6600a0dd592d7b3e84c9d64e2baa2190bc171b542d1846c899a27"
 }

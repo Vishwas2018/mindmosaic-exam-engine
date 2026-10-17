@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-010",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "7adc35c2077e50665610f8db3e14c683d7d7149c6c86cda86078e3088169a6b3",
-  "sourceManifestHash": "b1aaf8fd72a7291c215e1306689acc9f58609cfaa8673e1ab9bf156d5ad2c130",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "6e99599c41aced589c47361ae0020c9ee8c3f64ee9d725b63359f79634c76f1e",
+  "sourceManifestHash": "a200b5128bd0759042be7e67783ce8a58f5f12dcf6b31a3ed87db73e980801f0",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Measurement & Geometry",
       "topic": "Measurement & Geometry",
       "skill": "Connect area and perimeter",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 3,
       "estimatedTimeSeconds": 90,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "d020c4e556a8df2a037eae96e1c2fe35e590ee3ec1c1ad5b1d77f97fa88ad7ec"
+  "fingerprint": "d533425783c29bbe4ca3255d42da5f691480e2fbd3c2c9ec015403d9083e594d"
 }

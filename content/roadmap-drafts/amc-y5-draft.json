@@ -124,7 +124,7 @@
         "subject": "amc_mathematics",
         "strand": "Measurement & Geometry",
         "skill": "Elapsed time",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -432,7 +432,7 @@
         "subject": "amc_mathematics",
         "strand": "Measurement & Geometry",
         "skill": "Connect area and perimeter",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 3,
         "estimatedTimeSeconds": 90,
         "tags": []
@@ -564,7 +564,7 @@
         "subject": "amc_mathematics",
         "strand": "Measurement & Geometry",
         "skill": "Area of a composite shape",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 4,
         "estimatedTimeSeconds": 120,
         "tags": []
@@ -696,7 +696,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Least common multiples in time",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 4,
         "estimatedTimeSeconds": 120,
         "tags": []
@@ -828,7 +828,7 @@
         "subject": "amc_mathematics",
         "strand": "Logic & Problem-Solving",
         "skill": "Deduce from constraints",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 4,
         "estimatedTimeSeconds": 120,
         "tags": []
@@ -872,7 +872,7 @@
         "subject": "amc_mathematics",
         "strand": "Measurement & Geometry",
         "skill": "Perimeter of joined shapes",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 4,
         "estimatedTimeSeconds": 120,
         "tags": []
@@ -916,7 +916,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Digit reasoning",
-        "difficulty": "challenging",
+        "difficulty": "medium",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -1048,7 +1048,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Place value under a divisibility constraint",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 5,
         "estimatedTimeSeconds": 150,
         "tags": []
@@ -1115,7 +1115,7 @@
         "subject": "amc_mathematics",
         "strand": "Number & Arithmetic",
         "skill": "Sum an arithmetic sequence",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 6,
         "estimatedTimeSeconds": 180,
         "tags": []
@@ -1187,7 +1187,7 @@
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
         "skill": "Build and sum a growing pattern",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 9,
         "estimatedTimeSeconds": 180,
         "tags": []

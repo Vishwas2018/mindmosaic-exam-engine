@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-019",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:28.745Z",
-  "contentHash": "b0f842dd2dbbc8420d8e19bfce860a431480203bfb01e481db39a2aff307dad3",
-  "sourceManifestHash": "3acac3d95566c5e3469df07b199249586cbc832818193312ccff4ceae02da2ed",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "fb354034d87e0a0d717b78a51d0d597e61e142161ff0979f4aca63db7aabf2ff",
+  "sourceManifestHash": "2dd609952541def8b4be2e55163f375f12c50d159b26c193d14db33fe401dd32",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Logic & Problem-Solving",
       "topic": "Logic & Problem-Solving",
       "skill": "Deduce from constraints",
-      "difficulty": "medium",
+      "difficulty": "easy",
       "marks": 4,
       "estimatedTimeSeconds": 120,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "d6ece65296053cdf7c40c988f3985040df5fc0fbc8c7deff0a1df3769ca91124"
+  "fingerprint": "2f74d10b628e012d15830ba24fbc7b0fc902c0baae267d8cf3bb2b840bd5dc10"
 }

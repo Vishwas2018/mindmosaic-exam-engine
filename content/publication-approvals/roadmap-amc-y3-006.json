@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-006",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "e9ef01860bd107f11dd678bfb91128ce72a8b855f14ded8412b11e0c228d8140",
-  "sourceManifestHash": "5f551d18c78847e510e9f586a6b8b702c37cee3fc7df45fba3926825dd4c6741",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "d86d2d8a407ac1a202ee20853084254d24ce8984c7e71c1a16ca1addcb23d9a6",
+  "sourceManifestHash": "472a02677814b8ad4bbfb3ff5e8e5b78f5b4c9ba7a088885617266268d488d67",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Patterns & Algebra",
       "topic": "Patterns & Algebra",
       "skill": "Working backwards and inverse operations",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 3,
       "estimatedTimeSeconds": 90,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "f139394111b69e51b944d717dcd89fdf5bf31ee3454c46657586738ee42d98ea"
+  "fingerprint": "2acaeb10e6b69c499495736c90a0de34059b53614bd0209c3516413bc814ee60"
 }

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-004",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "52e8d140dcf55d798be699f03b2a122a35d850b81c2933e34b2bb0ed92882e4e",
+  "sourceManifestHash": "0480143471e6b7e5be6c57586b73da3e85d89868883268cd6d1510fafd5f17ad",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-004",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A model train trip starts at 9:20 am. It travels for 25 minutes, stops for 10 minutes, then travels for 15 more minutes. How many minutes after 9:00 am does it finish?",
+    "options": [
+      {
+        "id": "a",
+        "text": "69"
+      },
+      {
+        "id": "b",
+        "text": "70"
+      },
+      {
+        "id": "c",
+        "text": "73"
+      },
+      {
+        "id": "d",
+        "text": "67"
+      },
+      {
+        "id": "e",
+        "text": "71"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Include the twenty minutes before the start, both travel times and the stop.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Multi-step arithmetic operations",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "d8a3b73badf1b66a24c3676e52e64b191b3216c3250d5f6385eb804f815b7d8b"
+}

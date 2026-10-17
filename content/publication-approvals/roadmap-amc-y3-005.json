@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-005",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T01:59:20.115Z",
-  "contentHash": "67737af8abee9436505dcf6461b19796ffdcb2f6b93c90066ef81c61e5ef6008",
-  "sourceManifestHash": "8e76b5d814d4da6ac6e2e7d34575b91e13530ddfb0575be0b91183c2712baf65",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "8d3fd521cb92a79752cefe2d638c0938562844e1d28bb3a87ca69c0bdf38ad6b",
+  "sourceManifestHash": "7c8025b9ac860c7772065d28b4cc12dfdf36ae8aed943bdb52d01ab14d093649",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Divisibility and remainders",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 3,
       "estimatedTimeSeconds": 90,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "10a3cf0b9df585d5aa350a8e79a50edc0d2735f9b14b4d5538e595cc9bc2bfca"
+  "fingerprint": "c41bee9e4929768d1f712029ad0339ef84f20f949875463fe6ef434e9dc5931c"
 }

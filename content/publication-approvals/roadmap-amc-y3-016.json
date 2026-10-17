@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y3-016",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T03:53:25.891Z",
-  "contentHash": "3e81ab90d3eddce680e2f1291e28fdb8da478ab570cffc7eb81fb2d33dce48f9",
-  "sourceManifestHash": "b784f46de8ede076f71d8be5b45042d955d258527cb0053f2811fde288533fca",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "1deb8038dc15a07789157c49929bbfcf3789c291a455b52e17ef528f5ecc0a2e",
+  "sourceManifestHash": "c56000a65596e5793b1d3eec5d3fe098f33672b977fa16cc6e035043605b8148",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Apply equal groups in two steps",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 4,
       "estimatedTimeSeconds": 120,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "99d99e7436247b71a83c5803a93740723d187e614cbdd0d7c258af846d207f1a"
+  "fingerprint": "b52ca58ccdafbe260d74c00f115bf3a6eb4c84d6ca07d58dba82c497f21bc3be"
 }

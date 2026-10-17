@@ -48,9 +48,8 @@ export async function ingestOneCandidate(
   // verifying the complete pinned content and recomputed answer. Arbitrary
   // external ids (including a spoofed AMC id) still receive minted ids.
   const registered = candidateQuestionSchema.safeParse(candidateContent);
-  const candidateId = registered.success &&
-    verifyFirstPartyAmcAttestation(registered.data, hashJson(registered.data)).ok
-    ? registered.data.id : mintedId;
+  const registeredAmc = registered.success && verifyFirstPartyAmcAttestation(registered.data, hashJson(registered.data)).ok;
+  const candidateId = registeredAmc ? registered.data.id : mintedId;
   // Mirrors `ingestion/ingest.ts` (Mission 2A): an unregistered internal
   // `id` field is infrastructure this adapter mints, never a claim an
   // external generator gets to make — any `id` the source content
@@ -79,7 +78,9 @@ export async function ingestOneCandidate(
     blueprintId: boundBlueprintId ?? request.blueprintId ?? MANUAL_INGESTION_PLACEHOLDER_BLUEPRINT_ID,
     batchId: request.batchId,
     pipelineRunId: request.pipelineRunId,
-    revision: 0,
+    // These registered authoring snapshots already have review revision 1.
+    // Ordinary external ingestion still starts at revision 0.
+    revision: registeredAmc ? 1 : 0,
     generatedAt: ingestedAt,
     generatorAdapter: { class: "manual_external", identity: declaredIdentity },
     generatorVersion: MANUAL_INGESTION_ADAPTER_VERSION,

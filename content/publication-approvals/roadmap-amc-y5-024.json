@@ -4,9 +4,9 @@
   "questionId": "roadmap-amc-y5-024",
   "revision": 1,
   "approvedBy": "Vishwas Joshi",
-  "approvedAt": "2026-10-17T03:53:30.151Z",
-  "contentHash": "6dc87567128f97256b144261805058f89828e12317fdb77fefec02af660219a9",
-  "sourceManifestHash": "93411cc0afaad48f35fc50ff064922a6bef080b3fe8e09976933d6ef740fabaa",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "b0f8a6298f1eae1b17f446caea7c488fee13542e89804704dcdf7cec63a02fed",
+  "sourceManifestHash": "1832ed7c9768e5adf5746a5eadb14d81a0c2627af4b84f8bad437546250ff4c3",
   "checks": {
     "correctness": true,
     "originality": true,
@@ -53,7 +53,7 @@
       "strand": "Number & Arithmetic",
       "topic": "Number & Arithmetic",
       "skill": "Place value under a divisibility constraint",
-      "difficulty": "easy",
+      "difficulty": "medium",
       "marks": 5,
       "estimatedTimeSeconds": 150,
       "tags": [],
@@ -62,5 +62,5 @@
       "schemaVersion": 1
     }
   },
-  "fingerprint": "c782bae3a6acf8e33d543191c9089d3ac4db6a13413cc702f119413ef2fd3781"
+  "fingerprint": "9a5783e581cbc014006244b9fa6a71b221eec2b9c89c389e146fd2eedf9acd53"
 }

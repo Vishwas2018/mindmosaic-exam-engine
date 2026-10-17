@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-029",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "1392cf29d0a266c40095d3a6c08695e5391cd22315820dba01164c1ab9b049b0",
+  "sourceManifestHash": "07614839fe1ae1908600bf492bf086bf55d76120bbbff9629e7337f8775e4c37",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-029",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The first row of a display has 2 counters. Each new row has 3 more counters than the row above. How many counters are in the first 8 rows altogether?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 100,
+      "tolerance": 0
+    },
+    "explanation": "The rows contain 2, 5, 8, 11, 14, 17, 20 and 23 counters. Adding them gives 100.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Build and sum a growing pattern",
+      "difficulty": "easy",
+      "marks": 9,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "2273bca0af42d37c2fc3e3744a4baa7a75594802437c3006f2184e7fe80a53aa"
+}
