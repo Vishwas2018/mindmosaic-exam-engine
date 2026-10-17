@@ -1,20 +1,9 @@
-# AMC review checkpoint ï¿½ 17 October 2026
+# AMC review and publication checkpoint — 17 October 2026
 
-Vishwas Joshi explicitly authorized approval of the 57 included rows in this session. Both CSVs retain their original nine columns and binding values; correctness, originality and age appropriateness are yes, and decision is approve. Despite their historical `blank` filenames, they are now filled and committed.
+Current status: **57 real approved AMC manifests created; assembly blocked by 542 pre-existing non-AMC manifests without valid human approvals. No AMC items are served. Do not merge PR #62.**
 
-- Year 3: `review-sheet-amc-y3-blank.csv`, 29 approved rows.
-- Year 5: `review-sheet-amc-y5-blank.csv`, 28 approved rows.
-- `revision-loop-amc.csv`: three excluded items, roadmap-amc-y3-014, roadmap-amc-y5-006, roadmap-amc-y5-028. No approval was recorded for these.
-- HTML previews are the earlier review snapshots, not approval evidence.
+The two nine-column sheets contain 29 Y3 and 28 Y5 approve rows under Vishwas Joshi's explicit authorization. Binding values reflect the current cognitive-demand labels. The three excluded items remain in revision-loop-amc.csv and have no approvals or manifests. Historical HTML previews are not approval evidence.
 
-The governed recorder created 57 real records under `content/publication-approvals/`, each bound to its unchanged content hash and source descriptor hash. These are authoring approvals pending publication, not published manifests. `content/review-sources/amc/y3.json` and `y5.json` remain strictly typed review-source descriptors, not manifests.
+All 57 records under content/publication-approvals/ are real and hash-bound. Superseded signatures remain in superseded-label-approvals/ and superseded-before-cognitive-review/. All 57 governed manifests carry both first-party attestation and human approval review stages. The estimator is advisory for AMC; correctness, taxonomy and human approval remain hard. Seven earlier down-labels were reverted; all 57 final labels and reasons are recorded in docs/content-status/amc-cognitive-demand-2026-10-17.csv.
 
-## Publication refused
-
-`content:verify-publication` reports 57 pending approvals and no integrity problems. `questions:publish` refused all 57 with `outcome: not_staged`, `foundState: not_found` (exit 3). There are no legitimate upstream staging records. The follow-up fixed ingestion identity preservation and registered exact taxonomy entries for all 57. Difficulty deviations remain on 37; y5-027 is flagged because an easy label cannot be justified for its combinatorial task. These findings are not staging evidence. Assembly was not run after refusal.
-
-AMC remains at 0 manifests and 0 served items (Y3 0, Y5 0). Scholarship and Singapore remain coming soon. No fabricated manifest or prepare-amc-staged script was reused. This branch enforces a real external approval record and both hash-bound first-party and human review stages before any future AMC publication can pass.
-
-See `docs/content-status/amc-publication-attempt-2026-10-17.md` and the 57-row approval evidence index for the actual recorded fields and blockers. Approved content was not edited to force upstream validation.
-
-Continuation: 16 defensible difficulty-only corrections have now been applied and re-recorded through the governed approval writer; the prior signatures remain in superseded-label-approvals/. Twenty-one difficulty mismatches remain flagged. The content-status report and 37-row preflight describe the exact before/after decisions. All 57 current approvals are valid; no AMC item is published.
+Read docs/content-status/amc-governed-publication-result-2026-10-17.md for the exact chain and assembly refusal. The full per-item reviewChain and approval evidence is in amc-governed-publish-evidence-2026-10-17.json alongside that report. Assembly preserved the old snapshot; the resulting unassembled-manifest integrity mismatch makes the practice bank fail closed on this branch. No dev/main merge occurred. Scholarship and Singapore remain coming soon.
