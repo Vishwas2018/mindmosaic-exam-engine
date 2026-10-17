@@ -61,6 +61,12 @@ export type {
   ScoringOutcomeSummary,
   ScoringStatusSummary,
 } from "./types";
+export {
+  SCHOLARSHIP_FIRST_PARTY_SOLVERS,
+  isScholarshipAttestedItem,
+  verifyFirstPartyScholarshipAttestation,
+} from "./scholarship-attestation";
+export type { ScholarshipAttestationResult } from "./scholarship-attestation";
 export { validateCachedCorrectnessReplay } from "./validate-cached-replay";
 export type { CachedReplayContext, CachedReplayValidationOutcome } from "./validate-cached-replay";
 export { validateCorrectnessAttestationBinding } from "./validate-correctness-attestation-binding";

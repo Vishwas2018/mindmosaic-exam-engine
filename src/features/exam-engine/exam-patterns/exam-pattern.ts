@@ -42,6 +42,14 @@ export const ADAPTATIONS = [
   "no_section_lock",
   /** The ICAS English area split is ours, not published. */
   "internal_english_mix",
+  /** Scholarship examinations impose strict pacing (35–45s per item). */
+  "tight_time_pressure",
+  /** 15-minute prompt examination starts timer immediately without planning interval. */
+  "no_planning_screen",
+  /** Essay tasks are parent-marked according to a 6-criterion rubric. */
+  "parent_marked_rubric",
+  /** Scholarship timed simulation defaults to printed prompt and ruled sheet. */
+  "print_prompt_default",
 ] as const;
 
 export const adaptationSchema = z.enum(ADAPTATIONS);
@@ -125,8 +133,8 @@ export const examPatternSchema = z
       .min(1)
       .regex(/^[a-z0-9-]+$/, "Pattern ids are URL segments: lower-case, hyphens only."),
     label: z.string().min(1),
-    examStyle: z.enum(["naplan_style", "icas_style", "amc_style"]),
-    yearLevel: z.union([z.literal(3), z.literal(5)]),
+    examStyle: z.enum(["naplan_style", "icas_style", "amc_style", "scholarship_style"]),
+    yearLevel: z.union([z.literal(3), z.literal(5), z.literal(6)]),
 
     presentation: examPatternPresentationSchema,
     basis: examPatternBasisSchema,

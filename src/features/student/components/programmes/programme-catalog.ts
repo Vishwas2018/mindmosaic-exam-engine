@@ -89,19 +89,19 @@ export const COMING_SOON_PROGRAMMES: readonly ComingSoonProgramme[] = [
   },
   {
     slug: "scholarship-prep",
-    cardTitle: "Scholarship Prep",
-    fullTitle: "Independent School Scholarship Preparation",
-    scopeLabel: "Year 5–7 · Scholarship Entry",
+    cardTitle: "Scholarship-style practice",
+    fullTitle: "Scholarship-style practice",
+    scopeLabel: "Year 6 · Scholarship Entry",
     accent: "teal",
     icon: ScholarshipIcon,
-    cardDescription: "Higher-order reasoning, abstract logic and verbal agility.",
+    cardDescription: "Higher-order reasoning, abstract logic and verbal agility formatted like common independent-school scholarship tests.",
     about:
-      "Independent school scholarship exams, such as those set by ACER and Edutest, assess verbal and numerical reasoning together with a written expression task, typically at a higher level of abstraction than school classwork.",
+      "Original Year 6 scholarship-style practice formatted like common independent-school scholarship tests such as Edutest. MindMosaic practice tests assess verbal reasoning, numerical reasoning, reading comprehension, mathematics and written expression. MindMosaic practice tests are original materials and are not affiliated with, authorised by, or endorsed by Edutest or ACER.",
     focusAreas: [
       { title: "Verbal reasoning & vocabulary", description: "Analogies, classification, and precise word relationships." },
-      { title: "Abstract & non-verbal logic", description: "Sequence, rotation and spatial-pattern reasoning tasks." },
-      { title: "Applied mathematics", description: "Multi-step, worded numerical reasoning problems." },
-      { title: "Written expression", description: "Structured short-response writing under timed conditions." },
+      { title: "Numerical reasoning", description: "Number sequences, matrix patterns, and multi-step deduction." },
+      { title: "Reading & mathematics", description: "Complex comprehension passages and timed mathematical problem solving." },
+      { title: "Written expression", description: "Structured 15-minute written responses under timed conditions." },
     ],
   },
   {

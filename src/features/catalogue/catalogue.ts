@@ -274,6 +274,13 @@ const COMING_SOON_PROGRAMS: readonly Program[] = [
     blurb: "Bar-model and mastery-based maths practice.",
     status: "coming_soon",
   },
+  {
+    id: "scholarship-prep",
+    slug: "scholarship-prep",
+    name: "Scholarship-style practice",
+    blurb: "Original Year 6 practice formatted like common independent-school scholarship tests such as Edutest. MindMosaic practice tests are original materials and are not affiliated with, authorised by, or endorsed by Edutest or ACER.",
+    status: "coming_soon",
+  },
   /*
    * "SAT Prep" (US college-entrance preparation) was removed. Every other
    * entry in this catalogue, live or planned, is Australian primary-school
@@ -317,10 +324,14 @@ const EXPANSION_SUBJECTS = ISOLABLE_SUBJECT_FILTERS.map((filter) => {
   };
 });
 
-const STYLE_LABELS: Record<"naplan_style" | "icas_style" | "amc_style", string> = {
+const STYLE_LABELS: Record<
+  "naplan_style" | "icas_style" | "amc_style" | "scholarship_style",
+  string
+> = {
   naplan_style: "NAPLAN-style",
   icas_style: "ICAS-style",
   amc_style: "AMC-style",
+  scholarship_style: "Scholarship-style",
 };
 
 /**
@@ -352,7 +363,9 @@ const EXPANSION_PROGRAMS: readonly Program[] = validStyleYearPairs().flatMap(
           ? "naplan"
           : examStyle === "icas_style"
             ? "icas"
-            : "amc";
+            : examStyle === "amc_style"
+              ? "amc"
+              : "scholarship";
       const slug = `${prefix}-y${yearLevel}-${subject.slugSegment}`;
       /* Skip only the exact cells that already have a hand-written program
          with its own name, blurb and bank pin — Years 3 and 5 across

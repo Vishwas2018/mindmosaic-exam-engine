@@ -1,0 +1,674 @@
+{
+  "packet": "scholarship-y6-reading-draft.json",
+  "reviewer": "gemma:7b",
+  "blindnessConfirmed": true,
+  "blindnessNote": "Request contained only prompt, passage, options, skill and claimed difficulty; no key, explanation or sidecar.",
+  "difficultyVerdictConvention": "'too_hard' means the claimed label overstates how hard the item really is; 'too_easy' means the label understates it.",
+  "items": [
+    {
+      "id": "scholarship-y6-rc-001",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The opening paragraph establishes a sense of calm anticipation as the characters prepare to explore the estuary.",
+      "parsed": true,
+      "seconds": 71.5
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "myAnswer": "c",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The comparison suggests that the stilt roots create a framework resembling the ribs of a boat.",
+      "parsed": true,
+      "seconds": 75.2
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage suggests that Grandfather has a deep understanding of the estuary's ecosystem and the osprey's behaviour.",
+      "parsed": true,
+      "seconds": 76.7
+    },
+    {
+      "id": "scholarship-y6-rc-004",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The young fish seek refuge from the open bay where they are vulnerable to predators.",
+      "parsed": true,
+      "seconds": 73.3
+    },
+    {
+      "id": "scholarship-y6-rc-005",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The word 'synchronous' refers to the crabs' claws moving in unison, suggesting a coordinated action.",
+      "parsed": true,
+      "seconds": 73.2
+    },
+    {
+      "id": "scholarship-y6-rc-006",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author uses long, silent wait and vivid imagery to create suspense.",
+      "parsed": true,
+      "seconds": 74.8
+    },
+    {
+      "id": "scholarship-y6-rc-007",
+      "myAnswer": "e",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The metaphor suggests that the tides and the life within the estuary are influenced by the moon's gravitational pull.",
+      "parsed": true,
+      "seconds": 81.1
+    },
+    {
+      "id": "scholarship-y6-rc-008",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage conveys a sense of awe and respect for the natural beauty and intricate workings of the estuary.",
+      "parsed": true,
+      "seconds": 71.1
+    },
+    {
+      "id": "scholarship-y6-rc-009",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage suggests that the signal is a nonverbal communication that has been established between Maya and her grandfather since she was six years old.",
+      "parsed": true,
+      "seconds": 90.8
+    },
+    {
+      "id": "scholarship-y6-rc-010",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage explains that the resin secretes from glandular cells and serves two purposes: waterproofing leaves and deterring insects.",
+      "parsed": true,
+      "seconds": 93.6
+    },
+    {
+      "id": "scholarship-y6-rc-011",
+      "myAnswer": "e",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The sentence describes how spinifex plants can survive in harsh and arid conditions.",
+      "parsed": true,
+      "seconds": 83.1
+    },
+    {
+      "id": "scholarship-y6-rc-012",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage describes how spinifex pitch softens when heated and hardens when cooled, making it suitable for toolmaking.",
+      "parsed": true,
+      "seconds": 89.6
+    },
+    {
+      "id": "scholarship-y6-rc-013",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage suggests that spinifex nanofibres can significantly enhance the strength and flexibility of materials without adding excessive weight.",
+      "parsed": true,
+      "seconds": 104.5
+    },
+    {
+      "id": "scholarship-y6-rc-014",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage is clearly divided into sections discussing the plant's adaptations, traditional uses, and modern research.",
+      "parsed": true,
+      "seconds": 93.5
+    },
+    {
+      "id": "scholarship-y6-rc-015",
+      "myAnswer": "c",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The text suggests that spinifex plays multiple roles in the arid dune fields, so its disappearance would likely have a cascading effect.",
+      "parsed": true,
+      "seconds": 93.6
+    },
+    {
+      "id": "scholarship-y6-rc-016",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author emphasizes the unexpected potential of spinifex for sustainable biomaterials.",
+      "parsed": true,
+      "seconds": 113.9
+    },
+    {
+      "id": "scholarship-y6-rc-017",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The cylindrical curling of spinifex leaves reduces surface area, minimizing water loss in arid conditions.",
+      "parsed": true,
+      "seconds": 114.8
+    },
+    {
+      "id": "scholarship-y6-rc-018",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The provided sentence describes fibres that are significantly longer than their width.",
+      "parsed": true,
+      "seconds": 103.6
+    },
+    {
+      "id": "scholarship-y6-rc-019",
+      "myAnswer": "e",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author argues that light pollution harms both wildlife and culture, and that practical solutions exist to reduce it.",
+      "parsed": true,
+      "seconds": 88.2
+    },
+    {
+      "id": "scholarship-y6-rc-020",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author suggests that brighter lighting is not always effective in deterring crime.",
+      "parsed": true,
+      "seconds": 85.1
+    },
+    {
+      "id": "scholarship-y6-rc-021",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The metaphor suggests that skyglow is like a layer of dirty air that spoils the night sky.",
+      "parsed": true,
+      "seconds": 97.3
+    },
+    {
+      "id": "scholarship-y6-rc-022",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage suggests artificial lighting disorients shearwater fledglings, leading to fatal collisions with traffic or structures.",
+      "parsed": true,
+      "seconds": 92.9
+    },
+    {
+      "id": "scholarship-y6-rc-023",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author suggests that local councils replace unshielded lamps with hooded fixtures to direct illumination downwards.",
+      "parsed": true,
+      "seconds": 88.6
+    },
+    {
+      "id": "scholarship-y6-rc-024",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The provided text explains that 'diurnal' refers to activities that occur during the daytime.",
+      "parsed": true,
+      "seconds": 93.1
+    },
+    {
+      "id": "scholarship-y6-rc-025",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author acknowledges the concern that reducing light pollution might increase crime, but argues that well-designed lighting can illuminate necessary areas without blinding pedestrians.",
+      "parsed": true,
+      "seconds": 93
+    },
+    {
+      "id": "scholarship-y6-rc-026",
+      "myAnswer": "e",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author uses the example of Aboriginal navigators to highlight the deep cultural significance of the night sky.",
+      "parsed": true,
+      "seconds": 87.1
+    },
+    {
+      "id": "scholarship-y6-rc-027",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author clearly expresses concern about light pollution's ecological and cultural impacts.",
+      "parsed": true,
+      "seconds": 84.6
+    },
+    {
+      "id": "scholarship-y6-rc-028",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage clearly explains that the Roaring Forties offered the potential for faster speeds due to strong winds and swells.",
+      "parsed": true,
+      "seconds": 94.8
+    },
+    {
+      "id": "scholarship-y6-rc-029",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage explains that longitude is affected by the time difference between the ship's local meridian and Greenwich time.",
+      "parsed": true,
+      "seconds": 103.7
+    },
+    {
+      "id": "scholarship-y6-rc-030",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The harsh conditions of the Roaring Forties, with bitter cold, damp, and salt spray, likely affected the performance of marine chronometers.",
+      "parsed": true,
+      "seconds": 95.3
+    },
+    {
+      "id": "scholarship-y6-rc-031",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage describes 'dead reckoning' as estimating position based on available information like compass direction and speed.",
+      "parsed": true,
+      "seconds": 102.5
+    },
+    {
+      "id": "scholarship-y6-rc-032",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author suggests that navigating the narrow entrance to Bass Strait was extremely perilous, requiring meticulous attention from the captain.",
+      "parsed": true,
+      "seconds": 115.4
+    },
+    {
+      "id": "scholarship-y6-rc-033",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The word 'palpable' refers to a strong, noticeable tension in the atmosphere.",
+      "parsed": true,
+      "seconds": 106.5
+    },
+    {
+      "id": "scholarship-y6-rc-034",
+      "myAnswer": "e",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The passage clearly states that the 'lunar distance' method required a clear view of the moon and hours of intricate spherical trigonometry.",
+      "parsed": true,
+      "seconds": 108.7
+    },
+    {
+      "id": "scholarship-y6-rc-035",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The final sentence emphasizes the immense skill and nerve required for safe voyages through treacherous waters.",
+      "parsed": true,
+      "seconds": 97.4
+    }
+  ]
+}

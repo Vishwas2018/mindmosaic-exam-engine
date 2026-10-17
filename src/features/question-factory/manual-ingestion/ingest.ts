@@ -1,6 +1,7 @@
 import { FACTORY_VERSIONS, type NormalisedIdentity } from "../config";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
 import { verifyFirstPartyAmcAttestation } from "../correctness/amc-attestation";
+import scholarshipIdentityPins from "../correctness/scholarship-identity-pins.json";
 import {
   candidateProvenanceSchema,
   hashJson,
@@ -49,8 +50,13 @@ export async function ingestOneCandidate(
   // external ids (including a spoofed AMC id) still receive minted ids.
   const registered = candidateQuestionSchema.safeParse(candidateContent);
   const registeredAmc = registered.success && verifyFirstPartyAmcAttestation(registered.data, hashJson(registered.data)).ok;
-  const candidateId = registeredAmc ? registered.data.id : mintedId;
-  // Mirrors `ingestion/ingest.ts` (Mission 2A): an unregistered internal
+  // A scholarship draft likewise has a stable draft identity used by its solver registries and review
+  // records, preserved only when the COMPLETE candidate content hashes to the pin recorded by
+  // scripts/pin-scholarship-identities.mts. A changed item, or an arbitrary external id, still gets a minted id.
+  const registeredScholarship = registered.success &&
+    (scholarshipIdentityPins as Record<string, string>)[registered.data.id] === hashJson(registered.data);
+  const candidateId = registeredAmc || registeredScholarship ? registered.data!.id : mintedId;
+  // Mirrors `ingestion/ingest.ts` (Mission 2A): the candidate's internal
   // `id` field is infrastructure this adapter mints, never a claim an
   // external generator gets to make — any `id` the source content
   // declares is discarded, never trusted.
