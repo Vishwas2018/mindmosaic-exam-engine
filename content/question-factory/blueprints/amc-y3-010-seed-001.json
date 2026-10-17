@@ -1,0 +1,24 @@
+{
+  "id": "amc-y3-010-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-3",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Patterns & Algebra",
+  "skill": "amc.pattern-rules-and-table-relationships",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "targetCount": 1,
+  "marks": 3,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Pattern rules and table relationships",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}

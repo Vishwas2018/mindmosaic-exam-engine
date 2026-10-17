@@ -1,0 +1,24 @@
+{
+  "id": "amc-y5-026-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-5",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Number & Arithmetic",
+  "skill": "amc.sum-an-arithmetic-sequence",
+  "difficulty": "medium",
+  "questionType": "number_entry",
+  "targetCount": 1,
+  "marks": 6,
+  "estimatedTimeSeconds": 180,
+  "learningObjective": "Sum an arithmetic sequence",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}
