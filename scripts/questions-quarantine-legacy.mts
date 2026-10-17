@@ -38,7 +38,8 @@ async function main(): Promise<number> {
   const approvedIds = new Set(assembled.questions.map((q) => q.id));
   const approvalIds = new Set(approvals.map((a) => (a as { questionId?: string }).questionId));
 
-  const toMove: { id: string; bytes: Buffer; manifest: Record<string, any> }[] = [];
+  type Manifest = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  const toMove: { id: string; bytes: Buffer; manifest: Manifest }[] = [];
   const refused: string[] = [];
   for (const file of (await readdir(MANIFESTS)).filter((f) => f.endsWith(".json")).sort()) {
     const id = file.replace(/\.json$/, "");
@@ -57,7 +58,7 @@ async function main(): Promise<number> {
   if (!apply) { process.stdout.write("dry run: pass --apply to move manifests.\n"); return 0; }
 
   const ledgerPath = path.join(QUARANTINE, "ledger.json");
-  let ledger: { entries: any[] } = { entries: [] };
+  let ledger: { entries: Record<string, any>[] } = { entries: [] }; // eslint-disable-line @typescript-eslint/no-explicit-any
   try { ledger = JSON.parse(await readFile(ledgerPath, "utf8")); } catch { /* first run */ }
   await mkdir(path.join(QUARANTINE, "manifests"), { recursive: true });
   const known = new Set(ledger.entries.map((e) => e.candidateId));

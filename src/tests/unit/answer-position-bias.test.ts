@@ -61,7 +61,7 @@ const MIN_SAMPLE_FOR_PROPORTION = 20;
  * threshold after the overnight ingest, so its debt entry is retired.
  */
 const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
-  "factory-published": 159 / 281,
+  // "factory-published" retired: the biased legacy items are quarantined, leaving the approved AMC set (28.3%).
 };
 
 /**
@@ -69,7 +69,7 @@ const POSITION_BIAS_DEBT: Readonly<Record<string, number>> = {
  * its own measured share so the number can fall but never rise.
  */
 const LENGTH_BIAS_DEBT: Readonly<Record<string, number>> = {
-  "factory-published": 149 / 229,
+  // "factory-published" retired with the quarantine (now 2.2%).
 };
 
 interface BiasReport {
