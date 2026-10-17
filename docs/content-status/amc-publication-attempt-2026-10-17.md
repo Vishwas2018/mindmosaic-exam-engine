@@ -2,6 +2,8 @@
 
 Status: BLOCKED, not published. Branch: fix/amc-publication-clean. No merge.
 
+Current checkpoint: ingestion identity and all 57 taxonomy mappings are fixed. Sixteen difficulty labels are corrected with fresh governed approval bindings; 21 remain flagged. The 57 current approvals are valid and pending. AMC bank Y3 0/Y5 0; published manifests 0. Later sections retain the earlier attempt history.
+
 ## Persisted work
 
 The committed first-party modules on content/amc-publication-pipeline were already present on this branch. No committed AMC-specific 60-solver module existed there. The replacement uses the legitimate committed roadmap AMC verifier computations and immutable content-hash pins, not the abandoned staging script. Guardrails cover stale content, missing/throwing/non-finite/ambiguous/mismatched computation and candidate-supplied logic.
@@ -73,3 +75,6 @@ Follow-up verification: final typecheck passed. The four-file AMC attestation/ta
 The subsequent continue instruction was applied to the independent item work. Sixteen overstated labels were changed to easy after inspecting the actual reasoning: Y3 015/016/022/025, and Y5 011/013/014/015/016/018/020/023/024/025/026/029. The 37-row preflight now quotes each original and resulting label and gives the mathematical reason for each change. Twenty-one items remain flagged rather than having their label forced to match the estimator; this includes y5-027. No question text, option, key, explanation, marks or timing was changed.
 
 The 16 old approval records were preserved verbatim under docs/reviews/amc-2026-10-17/superseded-label-approvals/. The new snapshot pins, review descriptors and signed CSV bindings were regenerated for the label-only changes, and content:record-approvals under Vishwas Joshi created 4 replacement Y3 approvals and 12 replacement Y5 approvals (41 unchanged approvals replayed). No approval fingerprint was edited by hand. A regression compares all 16 canonical questions with their archived approved snapshots and requires difficulty to be the only differing field. The three-file recalibration/attestation/pending suite passed 89 tests; all 57 current signatures passed the fresh binding audit. Runtime AMC remains Y3 0/Y5 0 and manifests remain zero.
+
+
+Final follow-up verification: typecheck 0, lint 0, content:validate-roadmap-drafts 0 (199 drafts and all listed full-paper fill checks), content:verify-publication 0 (57 pending approvals, problems []). The solver regression files passed 32 tests. The latest recalibration/attestation/pending suite passed 89 tests. No full-suite or merge-ready claim is made.
