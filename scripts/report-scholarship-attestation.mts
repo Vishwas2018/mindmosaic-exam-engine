@@ -1,6 +1,6 @@
 /**
  * Prints the first-party attestation result for every in-scope scholarship
- * numerical-reasoning item (nr-021..nr-040): the independently recomputed value,
+ * item (numerical reasoning nr-021..nr-040 and mathematics maths-001..maths-040): the independently recomputed value,
  * the keyed option, and whether they agree. Exits non-zero if any item is not
  * attested, so a disagreement is surfaced as a defect rather than forced.
  *
@@ -14,10 +14,17 @@ import {
   type ScholarshipQuestionLike,
 } from "../src/features/question-factory/correctness/scholarship-attestation";
 
-const PACKET = "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json";
+const PACKETS = [
+  "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+  "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+];
+const EXPECTED_ITEMS = 60;
 
-const packet = JSON.parse(await readFile(PACKET, "utf8")) as { questions: ScholarshipQuestionLike[] };
-const items = packet.questions.filter((question) => isScholarshipAttestedItem(question));
+const items: ScholarshipQuestionLike[] = [];
+for (const file of PACKETS) {
+  const packet = JSON.parse(await readFile(file, "utf8")) as { questions: ScholarshipQuestionLike[] };
+  items.push(...packet.questions.filter((question) => isScholarshipAttestedItem(question)));
+}
 
 let failures = 0;
 console.log("| item | recomputed | keyed option | result |");
@@ -32,4 +39,4 @@ for (const question of items) {
   );
 }
 console.log(`\n${items.length - failures}/${items.length} attested, ${failures} failed.`);
-process.exit(failures === 0 && items.length === 20 ? 0 : 1);
+process.exit(failures === 0 && items.length === EXPECTED_ITEMS ? 0 : 1);

@@ -2,6 +2,7 @@ import type { Question } from "@/schemas/question.schema";
 import type { CandidateQuestion } from "../ingestion/candidate-question";
 import { hashJson } from "../provenance";
 import { solverValueMatches } from "./solver-verification";
+import { SCHOLARSHIP_MATHS_FIRST_PARTY_SOLVERS } from "./scholarship-maths-solvers";
 
 export type ScholarshipQuestionLike = Question | CandidateQuestion;
 
@@ -32,6 +33,19 @@ export interface ScholarshipAttestationResult {
 export interface ScholarshipSolverEntry {
   readonly givens: readonly number[];
   readonly solve: (givens: readonly number[]) => number;
+  /** Fixed affixes every option of the item carries (for example `$` or `m²`); absent means bare numbers. */
+  readonly unit?: ScholarshipAnswerUnit;
+  /**
+   * How the prompt's numbers are fingerprinted against `givens`. `integers` (default) is the original whole-number
+   * tokeniser. `quantities` reads signed, comma-grouped and decimal quantities and is used by the mathematics registry.
+   */
+  readonly tokens?: "integers" | "quantities";
+}
+
+/** Exact prefix and suffix an option must carry around its number, so units are compared rather than stripped. */
+export interface ScholarshipAnswerUnit {
+  readonly prefix?: string;
+  readonly suffix?: string;
 }
 
 /** Skills whose answers must be attested by a first-party solver rather than candidate-supplied solverParams. */
@@ -90,6 +104,7 @@ export const SCHOLARSHIP_FIRST_PARTY_SOLVERS: Readonly<Record<string, Scholarshi
   "scholarship-y6-nr-023": {
     // purchases: a1 notebooks + b1 pens = c1, a2 notebooks + b2 pens = c2; the prompt also states "1 notebook"
     givens: [3, 2, 19, 2, 4, 18, 1],
+    unit: { prefix: "$" },
     solve: ([a1, b1, c1, a2, b2, c2, unit]) => {
       const det = a1 * b2 - b1 * a2;
       if (det === 0) throw new Error("nr-023: singular system");
@@ -204,15 +219,15 @@ export const SCHOLARSHIP_FIRST_PARTY_SOLVERS: Readonly<Record<string, Scholarshi
     givens: [4, 3, 138],
     solve: ([tens, factor, product]) => onlyValue(range(0, 9), (a) => (10 * tens + a) * factor === product, "nr-036"),
   },
-  // two-digit prime, tens digit < units digit, digit product 21
+  // two-digit prime whose digits multiply to 18 (primality, not digit order, singles out the number)
   "scholarship-y6-nr-037": {
-    givens: [21],
+    givens: [18],
     solve: ([product]) =>
       onlyValue(
         range(10, 99),
         (n) => {
           const [tens, units] = digitsOf(n);
-          return isPrime(n) && tens < units && tens * units === product;
+          return isPrime(n) && tens * units === product;
         },
         "nr-037",
       ),
@@ -259,10 +274,49 @@ export function promptNumbers(prompt: string): Set<number> {
   return new Set((prompt.match(/(?<![\d.,])\d+(?![\d])/g) ?? []).map(Number));
 }
 
+/**
+ * Signed, comma-grouped and decimal quantities stated in a prompt, as a set. A leading minus counts only when it is
+ * attached to the digits and follows a space, bracket or the start (so `(-12)` and `-6` are negative, `- 14` is not).
+ */
+export function promptQuantities(prompt: string): Set<number> {
+  const tokens = prompt.match(/(?<![\w.,])-?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?/g) ?? [];
+  return new Set(tokens.map((token) => Number(token.replace(/,/g, ""))));
+}
+
+const UNIT_NUMBER = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/;
+
+/**
+ * True when `text` is exactly `prefix + number + suffix` and the number equals `computed`.
+ * Units are compared, never stripped: `$108` does not match a computed 108 with no unit, and `108 m` does not match `$`.
+ */
+export function optionMatchesQuantity(computed: number, text: string, unit: ScholarshipAnswerUnit = {}): boolean {
+  if (!Number.isFinite(computed)) return false;
+  const { prefix = "", suffix = "" } = unit;
+  const normalised = text.trim().replace(/\u2212/g, "-");
+  if (!normalised.startsWith(prefix) || !normalised.endsWith(suffix)) return false;
+  const body = normalised.slice(prefix.length, normalised.length - suffix.length);
+  if (!UNIT_NUMBER.test(body)) return false;
+  return Number(body.replace(/,/g, "")) === computed;
+}
+
+/**
+ * Scholarship numeracy items attested by the first-party mathematics registry (not NAPLAN/ICAS numeracy). Scoped to the
+ * registered draft ids, so other scholarship numeracy candidates keep the existing solver-verification path.
+ */
+function isScholarshipMathsItem(question: ScholarshipQuestionLike): boolean {
+  return (
+    /^scholarship-y6-maths-\d{3}$/.test(question.id) &&
+    question.metadata?.subject === "numeracy" &&
+    question.examStyle === "scholarship_style" &&
+    (question.metadata.skill ?? "").startsWith("maths-")
+  );
+}
+
 /** True when the item is in scope for first-party scholarship attestation and must not use candidate solverParams. */
 export function isScholarshipAttestedItem(question: ScholarshipQuestionLike): boolean {
   return (
-    question.metadata?.subject === "numerical_reasoning" && SCHOLARSHIP_ATTESTED_SKILLS.has(question.metadata.skill ?? "")
+    (question.metadata?.subject === "numerical_reasoning" && SCHOLARSHIP_ATTESTED_SKILLS.has(question.metadata.skill ?? "")) ||
+    isScholarshipMathsItem(question)
   );
 }
 
@@ -297,9 +351,9 @@ export function verifyFirstPartyScholarshipAttestation(
     };
   }
 
-  const entry = Object.hasOwn(SCHOLARSHIP_FIRST_PARTY_SOLVERS, question.id)
-    ? SCHOLARSHIP_FIRST_PARTY_SOLVERS[question.id]
-    : undefined;
+  // A numerical-reasoning item may only use the NR registry and a mathematics item only the mathematics registry.
+  const registry = isScholarshipMathsItem(question) ? SCHOLARSHIP_MATHS_FIRST_PARTY_SOLVERS : SCHOLARSHIP_FIRST_PARTY_SOLVERS;
+  const entry = Object.hasOwn(registry, question.id) ? registry[question.id] : undefined;
   if (!entry) {
     return {
       ok: false,
@@ -309,7 +363,7 @@ export function verifyFirstPartyScholarshipAttestation(
     };
   }
 
-  const stated = promptNumbers(question.prompt);
+  const stated = entry.tokens === "quantities" ? promptQuantities(question.prompt) : promptNumbers(question.prompt);
   const given = new Set(entry.givens);
   const sameNumbers = stated.size === given.size && [...stated].every((value) => given.has(value));
   if (!sameNumbers) {
@@ -350,7 +404,9 @@ export function verifyFirstPartyScholarshipAttestation(
     };
   }
 
-  const matches = (question.options ?? []).filter((option) => solverValueMatches(computed, option.text));
+  const matches = (question.options ?? []).filter((option) =>
+    entry.unit ? optionMatchesQuantity(computed, option.text, entry.unit) : solverValueMatches(computed, option.text),
+  );
   if (matches.length === 0) {
     return {
       ok: false,

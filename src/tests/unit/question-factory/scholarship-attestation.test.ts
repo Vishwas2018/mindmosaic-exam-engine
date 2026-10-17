@@ -4,6 +4,7 @@ import { checkPublicationEligibility } from "@/features/question-factory/publica
 import {
   SCHOLARSHIP_FIRST_PARTY_SOLVERS,
   isScholarshipAttestedItem,
+  optionMatchesQuantity,
   promptNumbers,
   verifyFirstPartyScholarshipAttestation,
   type ScholarshipSolverEntry,
@@ -53,7 +54,8 @@ describe("scholarship first-party attestation: nr-021..nr-040", () => {
     const result = verifyFirstPartyScholarshipAttestation(q, hashJson(q));
     expect(result.error, result.message).toBeUndefined();
     expect(result.ok).toBe(true);
-    expect(String(result.computedValue)).toBe(keyedText(q));
+    // The keyed option must carry exactly the computed number and the registered unit (bare numbers for most items, "$" for nr-023).
+    expect(optionMatchesQuantity(result.computedValue!, keyedText(q), SCHOLARSHIP_FIRST_PARTY_SOLVERS[id].unit)).toBe(true);
     expect(result.matchedOptionId).toBe((q.answerKey as { optionId: string }).optionId);
   });
 
