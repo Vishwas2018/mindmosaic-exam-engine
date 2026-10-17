@@ -946,28 +946,28 @@
       "prompt": "What is the main argument of 'In Defence of the Dark'?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
           "id": "a",
-          "text": "Cities should switch off all outdoor lighting at night."
+          "text": "Cities should switch off all outdoor lighting once the sun has set."
         },
         {
           "id": "b",
-          "text": "Brighter streetlights are the best way to protect people."
+          "text": "Brighter streetlights are the best way to protect people at night."
         },
         {
           "id": "c",
-          "text": "Wildlife should be moved away from built-up areas."
+          "text": "Native wildlife should be moved away from built-up areas for good."
         },
         {
           "id": "d",
-          "text": "Stargazing is more important than public safety."
+          "text": "Seeing the stars is more important than keeping people safe."
         },
         {
           "id": "e",
-          "text": "Light at night is a form of pollution that harms wildlife and culture, and can be reduced sensibly."
+          "text": "Light pollution harms nature and culture, and can be sensibly reduced."
         }
       ],
       "visuals": [],
@@ -998,7 +998,7 @@
       "prompt": "Why does the author mention research about lighting and crime in paragraph 2?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1050,7 +1050,7 @@
       "prompt": "In paragraph 1, the phrase 'sickly orange smog' is used to describe skyglow. What does the metaphor suggest?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1102,7 +1102,7 @@
       "prompt": "How does artificial lighting specifically threaten short-tailed shearwater fledglings?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1154,7 +1154,7 @@
       "prompt": "Which practical change does the author recommend for local councils?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1206,7 +1206,7 @@
       "prompt": "What does the word 'diurnal' mean in paragraph 3?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1258,16 +1258,16 @@
       "prompt": "How does the author answer the worry that reducing light pollution would make people less safe?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
           "id": "a",
-          "text": "By arguing that crime is a normal part of city life"
+          "text": "By arguing that crime is simply a normal part of city life"
         },
         {
           "id": "b",
-          "text": "By urging people to stay indoors after dark"
+          "text": "By urging people to stay indoors once it gets dark outside"
         },
         {
           "id": "c",
@@ -1275,11 +1275,11 @@
         },
         {
           "id": "d",
-          "text": "By claiming that darkness has never been linked to crime"
+          "text": "By claiming that darkness has never once been linked to crime"
         },
         {
           "id": "e",
-          "text": "By saying that well-designed, shielded lighting lights the places people walk without blinding glare"
+          "text": "By saying that well-designed lighting can light footpaths without glare"
         }
       ],
       "visuals": [],
@@ -1310,7 +1310,7 @@
       "prompt": "The mention of Aboriginal navigators and living songlines in paragraph 1 mainly serves to:",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1323,15 +1323,15 @@
         },
         {
           "id": "c",
-          "text": "show that star charts have changed completely over time"
+          "text": "show that star charts have changed completely over many centuries"
         },
         {
           "id": "d",
-          "text": "explain why astronomy departments need government funding"
+          "text": "explain why astronomy departments urgently need more government funding"
         },
         {
           "id": "e",
-          "text": "show that the night sky has deep cultural value that light pollution is putting at risk"
+          "text": "show that the night sky has cultural value that skyglow is damaging"
         }
       ],
       "visuals": [],
@@ -1362,7 +1362,7 @@
       "prompt": "Which word best describes the author's attitude to solving light pollution?",
       "stimulus": {
         "title": "In Defence of the Dark",
-        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal marsupials such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to count fewer than thirty stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is far weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, nocturnal mammals such as sugar gliders and microbats delay foraging for hours when illuminated by excessive street lamps, severely curtailing their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
       },
       "options": [
         {
@@ -1619,7 +1619,7 @@
       "type": "reading_comprehension",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "In paragraph 4, why does the author say captains felt they were 'threading the eye of a needle' at the western entrance to Bass Strait?",
+      "prompt": "Which factor made the western entrance to Bass Strait especially dangerous for a captain who could not confirm his ship's position?",
       "stimulus": {
         "title": "Charting the Roaring Forties",
         "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and hours of intricate spherical trigonometry. By the 1850s, ships carried multiple spring-driven chronometers nestled in gimbals to buffer against the tossing sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold and penetrating damp thickened clock lubricants, while constant salt spray rusted escapements.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
@@ -1627,38 +1627,38 @@
       "options": [
         {
           "id": "a",
-          "text": "Sailors had to sew torn sails there."
+          "text": "Compass needles failed near the coast, so no captain could trust his heading."
         },
         {
           "id": "b",
-          "text": "Icebergs blocked it for most of the year."
+          "text": "Icebergs drifting north from Antarctica crowded the channel for most of the year."
         },
         {
           "id": "c",
-          "text": "It was a narrow, shallow canal."
+          "text": "Reefs left little room for error, so a small slip in position could wreck a ship."
         },
         {
           "id": "d",
-          "text": "Reefs left so little room that the ship had to be steered with great care."
+          "text": "Chronometers could not be carried into coastal waters, so timekeeping was impossible."
         },
         {
           "id": "e",
-          "text": "The wind dropped completely and trapped ships for months."
+          "text": "Heavy swells forced captains to lower their sails and wait there for months."
         }
       ],
       "visuals": [],
       "answerKey": {
         "kind": "single_option",
-        "optionId": "d"
+        "optionId": "c"
       },
-      "explanation": "Paragraph 4 says reefs left 'so little room' at the western entrance to Bass Strait that captains felt they were threading the eye of a needle: they had to steer through a tight gap with great care.",
+      "explanation": "Paragraph 2 explains that a small timing error could put a ship onto an unseen reef, and paragraph 4 says cloud hid the sun and stars so captains could not check their position as they approached the entrance to Bass Strait, where reefs left little room. Together these made even a small mistake in position potentially disastrous.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
-        "skill": "rc-figurative-language",
-        "difficulty": "easy",
+        "skill": "rc-factual-inference",
+        "difficulty": "medium",
         "marks": 1,
-        "estimatedTimeSeconds": 45,
+        "estimatedTimeSeconds": 60,
         "tags": [
           "scholarship",
           "batch-2",
@@ -1775,7 +1775,7 @@
       "type": "reading_comprehension",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "What does the final sentence of the passage suggest about safe voyages?",
+      "prompt": "Which conclusion about these voyages is best supported by the passage as a whole?",
       "stimulus": {
         "title": "Charting the Roaring Forties",
         "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and hours of intricate spherical trigonometry. By the 1850s, ships carried multiple spring-driven chronometers nestled in gimbals to buffer against the tossing sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold and penetrating damp thickened clock lubricants, while constant salt spray rusted escapements.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
@@ -1783,23 +1783,23 @@
       "options": [
         {
           "id": "a",
-          "text": "They showed the sailors' skill and nerve against a powerful ocean."
+          "text": "Safe arrival depended on skill and judgement because instruments could fail."
         },
         {
           "id": "b",
-          "text": "Modern navigation has made the sailors' courage irrelevant."
+          "text": "Chronometers were of no practical use anywhere in the Southern Ocean."
         },
         {
           "id": "c",
-          "text": "Chronometers were useless in the Southern Ocean."
+          "text": "Dead reckoning was always more accurate than any chronometer on board."
         },
         {
           "id": "d",
-          "text": "Sailing ships should never have used this route."
+          "text": "The route was so dangerous that very few ships ever attempted it."
         },
         {
           "id": "e",
-          "text": "Captains relied on luck rather than skill."
+          "text": "Captains relied mainly on luck because accurate navigation was impossible."
         }
       ],
       "visuals": [],
@@ -1807,14 +1807,14 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "The passage ends: 'Reaching port safely was a triumph of skill and nerve over a formidable ocean.'",
+      "explanation": "Paragraph 3 says the Roaring Forties tested chronometers to their limits, and paragraph 4 says cloud hid the sun and stars so captains had to rely on dead reckoning. Arrival therefore depended on skill and judgement, not on instruments alone.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
-        "skill": "rc-main-idea",
-        "difficulty": "easy",
+        "skill": "rc-factual-inference",
+        "difficulty": "medium",
         "marks": 1,
-        "estimatedTimeSeconds": 45,
+        "estimatedTimeSeconds": 60,
         "tags": [
           "scholarship",
           "batch-2",
@@ -1954,7 +1954,7 @@
       "id": "scholarship-y6-rc-019",
       "skill": "rc-main-idea",
       "targetOption": "e",
-      "correctValue": "Light at night is a form of pollution that harms wildlife and culture, and can be reduced sensibly.",
+      "correctValue": "Light pollution harms nature and culture, and can be sensibly reduced.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-020": {
@@ -1996,14 +1996,14 @@
       "id": "scholarship-y6-rc-025",
       "skill": "rc-argument-evaluation",
       "targetOption": "e",
-      "correctValue": "By saying that well-designed, shielded lighting lights the places people walk without blinding glare",
+      "correctValue": "By saying that well-designed lighting can light footpaths without glare",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-026": {
       "id": "scholarship-y6-rc-026",
       "skill": "rc-authorial-craft",
       "targetOption": "e",
-      "correctValue": "show that the night sky has deep cultural value that light pollution is putting at risk",
+      "correctValue": "show that the night sky has cultural value that skyglow is damaging",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-027": {
@@ -2043,9 +2043,9 @@
     },
     "scholarship-y6-rc-032": {
       "id": "scholarship-y6-rc-032",
-      "skill": "rc-figurative-language",
-      "targetOption": "d",
-      "correctValue": "Reefs left so little room that the ship had to be steered with great care.",
+      "skill": "rc-factual-inference",
+      "targetOption": "c",
+      "correctValue": "Reefs left little room for error, so a small slip in position could wreck a ship.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-033": {
@@ -2064,9 +2064,9 @@
     },
     "scholarship-y6-rc-035": {
       "id": "scholarship-y6-rc-035",
-      "skill": "rc-main-idea",
+      "skill": "rc-factual-inference",
       "targetOption": "a",
-      "correctValue": "They showed the sailors' skill and nerve against a powerful ocean.",
+      "correctValue": "Safe arrival depended on skill and judgement because instruments could fail.",
       "requiresHumanSemanticCheck": true
     }
   }

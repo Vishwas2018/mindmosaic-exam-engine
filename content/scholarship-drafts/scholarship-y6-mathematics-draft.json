@@ -1783,7 +1783,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A store adds a 10% Goods and Services Tax (GST) to wholesale prices. If the final price of a tablet including GST is $440, what was the price before GST was added?",
+      "prompt": "A store adds 10% Goods and Services Tax (GST) to the price of each item. If a tablet costs $440 including GST, what was its price before GST was added?",
       "options": [
         {
           "id": "a",
