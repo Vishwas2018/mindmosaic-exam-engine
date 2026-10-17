@@ -13,6 +13,7 @@ import {
   type ExamBankId,
 } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import { getLocalReviewPreviewQuestions } from "./local-review-preview";
 import { getPublicationEligibility } from "./publication-evidence";
 
 /**
@@ -40,7 +41,10 @@ function servedBank(): readonly AuthoringQuestion[] {
   const served = selectServedQuestions(
     publishedExamBank, new Set(report.approvals.keys()),
   );
-  servedBankCache = served === publishedExamBank ? publishedExamBank : Object.freeze(served);
+  const preview = getLocalReviewPreviewQuestions();
+  servedBankCache = preview.length
+    ? Object.freeze([...served, ...preview])
+    : served === publishedExamBank ? publishedExamBank : Object.freeze(served);
   return servedBankCache;
 }
 

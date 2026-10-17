@@ -9,6 +9,7 @@ import {
 
 import { AuthProvider } from "@/features/auth";
 import { siteOrigin } from "@/lib/site-url";
+import { isLocalReviewPreviewEnabled } from "@/server/local-review-preview";
 
 import "./globals.css";
 
@@ -98,6 +99,11 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
+        {isLocalReviewPreviewEnabled() ? (
+          <div role="status" style={{ background: "#7c2d12", color: "#fff", padding: "6px 12px", fontSize: 14, textAlign: "center" }}>
+            LOCAL REVIEW PREVIEW. Includes questions awaiting human approval. Not for children. Never deployed.
+          </div>
+        ) : null}
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
