@@ -1111,7 +1111,7 @@
         },
         {
           "id": "b",
-          "text": "It destroys the nesting burrows on coastal island cliffs."
+          "text": "It makes them delay feeding for hours so predators catch them."
         },
         {
           "id": "c",
@@ -1119,7 +1119,7 @@
         },
         {
           "id": "d",
-          "text": "It disorients their navigation, causing fatal crashes into roadways and structures."
+          "text": "It confuses young birds on their first flight, so they end up among roads and buildings."
         },
         {
           "id": "e",
@@ -1131,7 +1131,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Paragraph 3 explains that fledglings navigate by stars and moon, but become 'fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls'.",
+      "explanation": "Paragraph 3 says fledglings navigate by the moon and stars on their first flight, but coastal road lighting disorients them and they crash into traffic or walls. The feeding delays in the same paragraph describe sugar gliders and microbats, not shearwaters.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1159,23 +1159,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Banning car headlights along coastal highways"
+          "text": "Switching to blue-white LED lamps that shine in every direction"
         },
         {
           "id": "b",
-          "text": "Replacing unshielded lamps with downward-facing hooded fixtures"
+          "text": "Fitting hooded fixtures so street lamps shine only towards the ground"
         },
         {
           "id": "c",
-          "text": "Paying for blackout curtains in every home"
+          "text": "Turning off all street lighting in suburbs after midnight"
         },
         {
           "id": "d",
-          "text": "Switching off the city power grid for one week each month"
+          "text": "Making streetlights much brighter so no shadows remain"
         },
         {
           "id": "e",
-          "text": "Planting tall pine trees beside power lines"
+          "text": "Replacing street lamps with floodlights on tall poles"
         }
       ],
       "visuals": [],
@@ -1183,7 +1183,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Paragraph 4: 'Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures.'",
+      "explanation": "Paragraph 4 recommends replacing unshielded lamps with downward-facing hooded fixtures that direct light only where people walk. The author rejects total darkness and recommends warm-amber rather than blue-white LEDs.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1975,14 +1975,14 @@
       "id": "scholarship-y6-rc-022",
       "skill": "rc-factual-retrieval",
       "targetOption": "d",
-      "correctValue": "It disorients their navigation, causing fatal crashes into roadways and structures.",
+      "correctValue": "It confuses young birds on their first flight, so they end up among roads and buildings.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-023": {
       "id": "scholarship-y6-rc-023",
       "skill": "rc-factual-inference",
       "targetOption": "b",
-      "correctValue": "Replacing unshielded lamps with downward-facing hooded fixtures",
+      "correctValue": "Fitting hooded fixtures so street lamps shine only towards the ground",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-024": {
