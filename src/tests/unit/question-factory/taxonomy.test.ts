@@ -65,7 +65,7 @@ describe("skill taxonomy registry", () => {
 
   it("still resolves every skill outside the recorded ingest debt", () => {
     /*
-     * 118 questions currently resolve through the taxonomy. The remaining
+     * 119 questions currently resolve through the taxonomy. The remaining
      * curated free-text labels are recorded in the ingest-debt fixture.
      *
      * The resolved subset came through the question factory's taxonomy-aware
@@ -76,7 +76,7 @@ describe("skill taxonomy registry", () => {
       .map((question) => question.metadata.skill)
       .filter((skill): skill is string => Boolean(skill))
       .filter((skill) => !UNMAPPED_CURATED_SKILL_LABELS.includes(skill));
-    expect(mapped.length).toBe(118);
+    expect(mapped.length).toBe(119);
     for (const skill of mapped) {
       expect(skillTaxonomyRegistry.resolve(skill)).toBeDefined();
     }

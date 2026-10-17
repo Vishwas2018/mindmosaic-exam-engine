@@ -15,6 +15,9 @@ export const PUBLICATION_CONTROLLED_FILES = Object.freeze({
   generatedBatchFilePattern: path.join(GENERATED_QUESTIONS_RELATIVE_PATH, "batch-{batchId}.json"),
   /** Static loader/index for the generated batches - imports and validates JSON only. */
   generatedBankIndex: path.join(GENERATED_QUESTIONS_RELATIVE_PATH, "index.ts"),
+  /** Programme-scoped strict assembly (AMC): its batch file and loader, written only by `questions:assemble-bank --subject amc_mathematics`. */
+  generatedAmcBankIndex: path.join(GENERATED_QUESTIONS_RELATIVE_PATH, "amc-index.ts"),
+  generatedAmcBatchFile: path.join(GENERATED_QUESTIONS_RELATIVE_PATH, "batch-amc-published.json"),
   /** Consumed by scripts/validate-question-bank.mts; never edited by that script. */
   bankContract: path.join(PRODUCTION_QUESTIONS_RELATIVE_PATH, "question-bank-contract.generated.json"),
   questionBankSummary: path.join(PRODUCTION_QUESTIONS_RELATIVE_PATH, "question-bank-summary.ts"),

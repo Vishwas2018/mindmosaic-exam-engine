@@ -249,7 +249,6 @@ export const UNMAPPED_CURATED_SKILL_LABELS: readonly string[] = [
   "Explaining why some things are kept the same",
   "Explaining why the Sun is not seen at midnight",
   "Find a fraction of a group then the remaining part",
-  "Find a fraction of a quantity",
   "Find a rule for a growing pattern and extend it",
   "Find a total from equal rows using multiplication",
   "Find a unit cost",

@@ -1,7 +1,7 @@
 /* Must precede every other import: `@/server/exam-bank` is `server-only`. */
 import "./allow-server-only.mts";
 
-import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
 import { buildProjectionPlan, loadPublishedManifests, type ProjectionPlan } from "@/features/content-projection";
 import { getExamBank } from "@/server/exam-bank";
 import { getPublicationEligibility } from "@/server/publication-evidence";

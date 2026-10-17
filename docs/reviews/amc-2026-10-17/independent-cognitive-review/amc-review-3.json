@@ -1,0 +1,39 @@
+{
+  "reviewer": "Claude Opus 5.5 (claude-opus-5-5), independent blind reviewer",
+  "item1": {
+    "id": "roadmap-amc-y3-005 (variant A)",
+    "solution": "31 = 5 x 6 + 1. The next multiple of 6 above 31 is 36, so 36 - 31 = 5 extra beads (6 complete bracelets). Answer: a) 5.",
+    "correct_option": "a",
+    "exactly_one_correct": true,
+    "distractors": {
+      "b_1": "Gives the remainder (31 / 6 = 5 r 1) instead of the shortfall to the next multiple. The classic trap for this question type, and the strongest distractor.",
+      "c_4": "Skip-counting slip: treats 35 as the next multiple (mixing up the 5s and 6s, or a counting error), so 35 - 31 = 4.",
+      "d_2": "Uses the wrong times table: 33 is a multiple of 3 (half of 6), so 33 - 31 = 2. Also possible from a rough 'a few more' guess. The weakest distractor, but still defensible.",
+      "e_6": "Thinks he needs one whole extra bracelet's worth of beads (6) and does not account for the 1 leftover bead. Or computes 5 + 1."
+    },
+    "option_b_assessment": "Plausible and uniquely incorrect. 31 + 1 = 32 is not a multiple of 6 (32 / 6 = 5 r 2), so b) cannot be read as correct. It is the most attractive wrong answer because it is the remainder.",
+    "distractor_set_sound_for_year3": true,
+    "distractor_notes": "Every distractor maps to a recognisable Year 3 error (remainder confusion, skip-count slip, wrong table, whole-group overshoot). The options are distinct and the arithmetic is within Year 3 range. d) 2 is the least compelling but is acceptable.",
+    "accidental_second_correct_reading": "None. 'Smallest number of extra beads he needs' rules out removing beads, and 0 is not an option. Larger valid totals (11, 17, ...) are not smallest and are not offered. Only 5 works among the options.",
+    "verdict": "pass"
+  },
+  "item2": {
+    "id": "roadmap-amc-y3-016",
+    "solution": "Each plate goes from 6 to 6 + 2 = 8 pieces; 4 x 8 = 32. Equivalently 4 x 6 = 24 and 4 x 2 = 8, so 24 + 8 = 32. Answer: b) 32.",
+    "correct_option": "b",
+    "exactly_one_correct": true,
+    "reasoning_steps": [
+      "Read that 2 pieces are added to EVERY plate, not 2 pieces in total.",
+      "Find the new amount per plate (8), or the total added (4 x 2 = 8).",
+      "Multiply 4 x 8 = 32 (or add 24 + 8 = 32)."
+    ],
+    "traps": {
+      "c_24": "Ignores the added pieces (4 x 6 only).",
+      "e_26": "Adds 2 once in total instead of 2 per plate (24 + 2).",
+      "d_28": "Adds 4 (the number of plates) instead of 4 x 2, or adds 2 to only two plates (24 + 4).",
+      "a_30": "Adds 6 (adds a plate's worth, or 3 plates x 2), giving 24 + 6. A weaker but plausible slip."
+    },
+    "difficulty": "easy",
+    "difficulty_reasoning": "A two-step problem using small numbers and one known Year 3 fact (4 x 8 or 4 x 6). The only demand beyond recall is reading 'every plate' correctly. There is no multi-stage inference, no unusual representation and no working backwards. On a Year 3 AMC-style paper this belongs in the opening easy band. It is not medium: in medium items students typically have to combine concepts or reason about structure (like item 1's remainder-to-next-multiple step), and this item asks for neither."
+  }
+}
