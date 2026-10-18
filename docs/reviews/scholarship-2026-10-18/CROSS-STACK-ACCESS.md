@@ -31,6 +31,6 @@ Container `supabase_db_mindmosaic-rls-harness`: retained log starts at 2026-10-1
 
 ## Conclusion and what changed
 
-No evidence that anything on the other stack was written, altered or deleted, and the code path rules out writes from the scoring module; but a few dozen short read-only connections to it did occur, which should not have, and for the earliest runs the stack's own records cannot confirm even that. If the owner of `mindmosaic-rls-harness` wants certainty, they can compare their fixtures against their own expectations; nothing here needs reverting.
+No evidence that anything on the other stack was written, altered or deleted, and the code path rules out writes from the scoring module; but an unknown number of short read-only connections (about eleven per affected full run) to it did occur, which should not have, and for the earliest runs the stack's own records cannot confirm even that. If the owner of `mindmosaic-rls-harness` wants certainty, they can compare their fixtures against their own expectations; nothing here needs reverting.
 
 The class of mistake is now closed in the repository: every database variable is checked, before any connection, to be a local address naming the same host and port as `RLS_TEST_DB_URL`; the dedicated roles' default URLs are derived from that primary instead of from a fixed port; the variable is restored after every file; and a run can be pinned with `RLS_EXPECTED_DB_PORT`. The guard has unit tests and was shown refusing a split configuration and a hosted URL without opening a connection.
