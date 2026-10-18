@@ -53,5 +53,7 @@ describe("scholarship paper start screen", () => {
   it("tells families that the paper length and time are MindMosaic's own", () => {
     render(<PatternAdaptations pattern={pattern} />);
     expect(screen.getByText(/the length and time are our own/i)).toBeInTheDocument();
+    expect(screen.getByText(/not a real scholarship test paper/i)).toBeInTheDocument();
+    expect(screen.queryByText(/ICAS/)).not.toBeInTheDocument();
   });
 });

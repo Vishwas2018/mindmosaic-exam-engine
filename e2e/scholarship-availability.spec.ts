@@ -31,7 +31,9 @@ test.describe("scholarship papers while nothing is approved", () => {
       await expect(page.getByTestId("reduced-module-notice")).toHaveCount(0);
     }
     await page.goto("/exams/scholarship-y6-numerical-reasoning-full");
+    await page.getByTestId("pattern-adaptations-scholarship-y6-numerical-reasoning-full").locator("summary").click();
     await expect(page.getByText("The length and time are our own")).toBeVisible();
+    await expect(page.getByText(/not a real scholarship test paper/i)).toBeVisible();
     await expect(page.getByRole("link", { name: /where scholarship-style practice is up to/i })).toHaveAttribute(
       "href",
       "/practice/scholarship-prep",

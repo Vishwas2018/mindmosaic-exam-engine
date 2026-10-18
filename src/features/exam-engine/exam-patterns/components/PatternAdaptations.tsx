@@ -3,6 +3,14 @@ import Link from "next/link";
 import type { ExamPattern } from "../exam-pattern";
 import { ADAPTATION_COPY } from "../pattern-session";
 
+/* The name of the real assessment each style imitates, so the disclosure never names the wrong one. */
+const REAL_ASSESSMENT_NAME: Readonly<Record<string, string>> = {
+  naplan_style: "NAPLAN",
+  icas_style: "ICAS",
+  amc_style: "AMC",
+  scholarship_style: "scholarship test",
+};
+
 /**
  * "How this differs from the real assessment" — every adaptation the pattern
  * declares, in words an eight-year-old's parent can read, plus the standing
@@ -41,7 +49,7 @@ export function PatternAdaptations({
       <div className="border-t border-mm-line px-4 py-4 text-[14.5px] leading-[1.6] text-mm-muted">
         <p>
           This is practice written by MindMosaic. It is not a real{" "}
-          {pattern.examStyle === "naplan_style" ? "NAPLAN" : "ICAS"} paper and no
+          {REAL_ASSESSMENT_NAME[pattern.examStyle] ?? "test"} paper and no
           question here comes from one.
         </p>
         {pattern.adaptations.length > 0 && (
