@@ -3,7 +3,7 @@ import "server-only";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { selectApprovedQuestions, type PublicationEligibilityReport } from "@/features/content-governance/publication-integrity";
 

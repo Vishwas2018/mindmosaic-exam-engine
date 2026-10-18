@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card } from "@/components/ui";
@@ -55,6 +56,9 @@ export function ExamPatternStarter({
   const startPatternExam = useExamStore((state) => state.startPatternExam);
   const startServerPatternExam = useExamStore((state) => state.startServerPatternExam);
   const serverMode = auth.status === "authenticated";
+
+  /* A signed-in-only paper is never put in the public guest bank, so a guest cannot start it at all. */
+  const signInRequired = pattern.guestAccess === "signed_in_only" && !serverMode && auth.status !== "loading";
 
   const asPracticeModule = readiness.state === "short";
   const servedCount = asPracticeModule ? readiness.availableCount : pattern.questionCount;
@@ -216,6 +220,20 @@ export function ExamPatternStarter({
           </p>
         )}
 
+        {signInRequired && (
+          <p
+            data-testid="sign-in-required-notice"
+            role="status"
+            className="mb-6 rounded-xl bg-royal/10 px-4 py-3 text-sm font-semibold leading-6 text-royal"
+          >
+            This paper is for signed-in students, so the questions stay on our server until you sit them.{" "}
+            <Link href="/sign-in" className="font-bold underline">
+              Sign in to start
+            </Link>
+            .
+          </p>
+        )}
+
         {pattern.examStyle === "scholarship_style" && (
           <fieldset className="m-0 mb-6 border-0 p-0">
             <legend className="mb-3 p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
@@ -317,7 +335,7 @@ export function ExamPatternStarter({
             setStartError(null);
             setStage("instructions");
           }}
-          disabled={isStarting || isCreating || auth.status === "loading"}
+          disabled={isStarting || isCreating || auth.status === "loading" || signInRequired}
         >
           {asPracticeModule
             ? `Start ${patternSubjectName(pattern)} practice module`

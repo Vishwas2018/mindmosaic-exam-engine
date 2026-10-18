@@ -50,7 +50,7 @@
  */
 
 import { fileURLToPath } from "node:url";
-import { factoryPublishedQuestions } from "../src/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "../src/content/questions/factory-pools";
 import { questionBank } from "../src/content/questions/question-bank";
 import type { Question } from "../src/schemas/question.schema";
 import type { VisualAsset } from "../src/schemas/visual.schema";

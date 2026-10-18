@@ -42,8 +42,10 @@ export const ADAPTATIONS = [
   "no_section_lock",
   /** The ICAS English area split is ours, not published. */
   "internal_english_mix",
-  /** Scholarship examinations impose strict pacing (35–45s per item). */
+  /** Scholarship-style practice is paced tightly (35–45s per item). */
   "tight_time_pressure",
+  /** The question count and time allowed are MindMosaic's own, not a published format. */
+  "unofficial_paper_shape",
   /** 15-minute prompt examination starts timer immediately without planning interval. */
   "no_planning_screen",
   /** Essay tasks are parent-marked according to a 6-criterion rubric. */
@@ -156,6 +158,16 @@ export const examPatternSchema = z
     stimulusRule: stimulusRuleSchema.optional(),
 
     status: examPatternStatusSchema.default("available"),
+    /**
+     * Whether a shorter practice module may be drawn when the full paper cannot be filled. "not_offered" is
+     * enforced inside the selection itself, so no client request can obtain a partial paper for the pattern.
+     */
+    practiceModule: z.enum(["offered", "not_offered"]).default("offered"),
+    /**
+     * "signed_in_only" papers are sat only through a server-selected session, because the guest flow needs the
+     * whole authoring bank, answer keys included, in the browser. Such papers are never put in the guest bank.
+     */
+    guestAccess: z.enum(["allowed", "signed_in_only"]).default("allowed"),
   })
   .superRefine((pattern, ctx) => {
     const sourceIds = new Set<string>();

@@ -27,7 +27,10 @@ export function selectServedQuestions<T extends Question>(
   approvedIds: ReadonlySet<string>,
   modes: Readonly<Record<string, PublicationGateMode>> = PROGRAMME_PUBLICATION_MODES,
 ): readonly T[] {
-  const hasEnforced = Object.values(modes).some((m) => m === "enforce");
+  // Enforcement can come from the explicit switches or from a programme default (scholarship-*), so it is
+  // decided per authored question rather than from the explicit map alone.
+  const hasEnforced = authored.some((question) =>
+    publicationGateMode(programmeIdForQuestion(question), modes) === "enforce");
   if (!hasEnforced) return authored;
   const filtered = authored.filter((question) =>
     publicationGateMode(programmeIdForQuestion(question), modes) === "report" ||

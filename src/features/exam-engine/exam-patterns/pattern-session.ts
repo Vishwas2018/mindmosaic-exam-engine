@@ -152,7 +152,11 @@ export const ADAPTATION_COPY: Readonly<
   },
   tight_time_pressure: {
     title: "Pacing is fast",
-    body: "Scholarship tests allow very little time per question. Don't worry if you don't finish every question on your first try.",
+    body: "This practice paper is timed tightly, with very little time per question. Don't worry if you don't finish every question on your first try.",
+  },
+  unofficial_paper_shape: {
+    title: "The length and time are our own",
+    body: "The number of questions and the time allowed are MindMosaic's own choices for practice. Scholarship tests differ between schools and test providers, so treat this as practice rather than a prediction of any one test.",
   },
   no_planning_screen: {
     title: "Direct prompt presentation",
