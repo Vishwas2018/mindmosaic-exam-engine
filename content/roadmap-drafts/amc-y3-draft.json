@@ -1110,7 +1110,7 @@
       "prompt": "Three baskets hold 41 apples altogether. The first basket has 5 more apples than the second basket. The third basket has twice as many apples as the second basket. Then 3 apples are moved from the first basket to the third basket. How many apples are now in the third basket?",
       "options": [],
       "visuals": [],
-      "explanation": "Remove the 5 extra apples from the total: 41 - 5 = 36. The second basket holds one equal share, the first one share plus 5, and the third two shares. Each share is 36 ? 4 = 9. The third basket starts with 18 apples and receives 3, giving 21.",
+      "explanation": "Remove the 5 extra apples from the total: 41 - 5 = 36. The second basket holds one equal share, the first one share plus 5, and the third two shares. Each share is 36 ÷ 4 = 9. The third basket starts with 18 apples and receives 3, giving 21.",
       "metadata": {
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",
