@@ -14,7 +14,7 @@ Start here, then open the sheets.
 | Verbal Reasoning, 45 items | Keys verified; no valid independent review; gate would also block 27 on difficulty | Run the different-provider review | `external-review/README.md`: paste `prompt-with-packet.txt` into a fresh ChatGPT/Gemini/Qwen session and bring back the JSON |
 | Reading, 35 items | Same (16 estimator-blocked) | Same | Same |
 | Written expression | Deferred; no prompt approved | Nothing now | Out of scope |
-| Delivery code | Strict assembly, enforced serve-time approval, no partial papers, sign-in only, availability tied to content; tests below | Review the PR | Draft PR into `dev` |
+| Delivery code | Strict assembly, enforced serve-time approval, no partial papers, sign-in only, availability tied to content; tests below | Review the PR | Draft PR into `dev` (not yet published) |
 | Database | Migration verified on an isolated fresh database; **production state not checked** | Run a read-only migration status check against production | `RELEASE-PLAN.md` section 4 |
 | Production | On hold | Approve content, then separately authorise the rollout; owner merges `dev` to `main` | After all of the above |
 
@@ -40,7 +40,11 @@ Complete-paper feasibility: **no section has enough approvable items for a whole
 | `review-sheets/` | Per-section HTML (exact question, options, key, explanation, difficulty, estimator, bucket) and a blank approval CSV per section. The CSV rows bind the canonical published-content hash and revision 0 that `questions:publish` checks. Earlier sheets bound a different hash and revision 1 and could not have been used to publish |
 | `difficulty/` | The 35 blocked items item by item, the estimator verdict for all 160, the earlier assessment kept for provenance, and the separate (inactive) policy proposal |
 | `external-review/` | Answer-withheld packet, exact prompt with the packet hash, response schema, and the instructions |
+| `difficulty/difficulty-decision-sheet.csv` / `.html` | One row per item (all 160): declared label, estimator label, whether the gate would block it, an advisory label with rationale, the earlier Opus label, and blank cells for the external reviewer and for Vish. 78 items would be blocked today. Regenerate with `npx tsx scripts/scholarship-difficulty-decision-sheet.mts` |
 | `status.json`, `revised-in-this-release.json` | Machine-readable state |
+| `RLS-FLAKINESS.md`, `CROSS-STACK-ACCESS.md`, `evidence/` | The two RLS failure modes (one fixed, one a native worker crash characterised and made loud), the earlier access to another local database stack: what is confirmed and what is not |
+| `BRANCH-PROTECTION.md` | The one setting only the repository owner can change |
+| `HANDOFF.md` | Four separate statuses and the remaining blockers |
 | `RELEASE-PLAN.md` | Scope, dependencies, migration status, availability, deployment, monitoring and rollback |
 | `TEST-RESULTS.md` | Every check run, with results and exact rerun commands |
 
