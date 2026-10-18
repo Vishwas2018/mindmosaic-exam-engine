@@ -31,6 +31,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 
 import { connect, scoringDbUrl } from "./db";
+import { scopeEnvToFile } from "./support/scoped-env";
 import { asRouteCaller, asRouteOwner, RoutePostgresClient } from "./support/route-postgres-client";
 
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
@@ -103,7 +104,6 @@ const LEGACY_CONFIG = {
   timing: "untimed",
 };
 
-let scoringUrlBefore: string | undefined;
 
 function jsonRequest(url: string, body: unknown): Request {
   return new Request(url, {
@@ -203,9 +203,10 @@ async function seedItem(
   );
 }
 
+/* Set for this file only and put back afterwards, even if a test fails (see support/scoped-env.ts). */
+scopeEnvToFile("SCORING_DB_URL", scoringDbUrl);
+
 beforeAll(async () => {
-  scoringUrlBefore = process.env.SCORING_DB_URL;
-  process.env.SCORING_DB_URL = scoringDbUrl();
 
   client = await connect();
   await resetFixtures();
@@ -235,8 +236,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await resetFixtures();
   await client.end();
-  if (scoringUrlBefore === undefined) delete process.env.SCORING_DB_URL;
-  else process.env.SCORING_DB_URL = scoringUrlBefore;
 });
 
 describe("the target cohort's full HTTP walk", () => {
