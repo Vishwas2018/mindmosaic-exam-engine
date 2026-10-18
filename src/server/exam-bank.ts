@@ -85,9 +85,12 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
  * server-selected CandidateQuestions from /api/exam/session).
  */
 export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
-  const publishedSummary = buildBankEligibilitySummary(getExamBank("published"));
+  /* The generic builder never offers scholarship-style content: it is sat only as a whole named paper. */
+  const generic = (bankId: "curated" | "published") =>
+    getExamBank(bankId).filter((question) => question.examStyle !== "scholarship_style");
+  const publishedSummary = buildBankEligibilitySummary(generic("published"));
   return {
-    curated: buildBankEligibilitySummary(getExamBank("curated")),
+    curated: buildBankEligibilitySummary(generic("curated")),
     published: publishedSummary,
     practice: publishedSummary,
   };

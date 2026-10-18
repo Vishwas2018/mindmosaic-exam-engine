@@ -195,7 +195,15 @@ export async function POST(request: Request): Promise<NextResponse> {
   } else {
     /* parsed.data guarantees exactly one of config/patternId is present. */
     config = parsed.data.config!;
-    const selection = selectExamQuestions(bank, config, seed);
+    /* Scholarship-style content is sat only as a whole named paper, never as a custom-length or mixed draw. */
+    if (config.examStyle === "scholarship_style") {
+      return NextResponse.json({ error: "scholarship_requires_paper" }, { status: 422 });
+    }
+    const selection = selectExamQuestions(
+      bank.filter((question) => question.examStyle !== "scholarship_style"),
+      config,
+      seed,
+    );
     if (!selection.ok) {
       return NextResponse.json(
         {
