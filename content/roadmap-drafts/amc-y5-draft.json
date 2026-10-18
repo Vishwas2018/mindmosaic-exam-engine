@@ -799,7 +799,7 @@
       "type": "multiple_choice",
       "yearLevel": 5,
       "examStyle": "amc_style",
-      "prompt": "Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?",
+      "prompt": "Five friends—Asha, Ben, Chen, Dev and Ella—each choose a different fruit from: apple, banana, cherry, date and grape.\n\n• Asha chooses cherry.\n• Dev chooses date.\n• Ben does not choose banana or grape.\n• Chen does not choose grape.\n\nWhich fruit does Chen choose?",
       "options": [
         {
           "id": "a",
@@ -811,31 +811,31 @@
         },
         {
           "id": "c",
-          "text": "cannot be known"
+          "text": "cherry"
         },
         {
           "id": "d",
-          "text": "pear"
+          "text": "date"
         },
         {
           "id": "e",
-          "text": "apple or banana"
+          "text": "grape"
         }
       ],
       "visuals": [],
-      "explanation": "Ben has pear. Asha must therefore have banana, because she cannot have apple. Chen has the remaining fruit, apple.",
+      "explanation": "Asha chooses cherry and Dev chooses date, leaving apple, banana and grape. Ben does not choose banana or grape, so Ben must choose apple. From the remaining fruits (banana and grape), Chen does not choose grape. Therefore, Chen chooses banana (and Ella chooses grape).",
       "metadata": {
         "subject": "amc_mathematics",
         "strand": "Logic & Problem-Solving",
         "skill": "Deduce from constraints",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 4,
         "estimatedTimeSeconds": 120,
         "tags": []
       },
       "answerKey": {
         "kind": "single_option",
-        "optionId": "a"
+        "optionId": "b"
       }
     },
     {

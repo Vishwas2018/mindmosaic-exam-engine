@@ -58,9 +58,9 @@ describe("projection plan — the exit-gate counts", () => {
        least useful failure this suite can produce. */
     expect(result.problems).toEqual([]);
     expect(result.counts.total).toBe(publishedExamBank.length);
-    expect(result.counts.total).toBe(1603);
+    expect(result.counts.total).toBe(1601);
     expect(result.counts.curated).toBe(1005);
-    expect(result.counts.factory).toBe(598);
+    expect(result.counts.factory).toBe(596);
   });
 
   it("splits the two pools exactly as the banks do", async () => {
@@ -100,7 +100,7 @@ describe("projection plan — the exit-gate counts", () => {
       .filter((id): id is string => id !== null);
     expect(new Set(claimed).size).toBe(claimed.length);
     expect(claimed.length).toBe(result.manifests.length);
-    expect(result.manifests.length).toBe(598);
+    expect(result.manifests.length).toBe(596);
   });
 });
 
@@ -252,26 +252,26 @@ describe("the platform contract", () => {
     }
 
     /*
-     * 306 manifests carry verified reviewRecords chains (251 legacy + 55 AMC). 62 have evidence rescued from ingest artefacts
+     * 304 manifests carry verified reviewRecords chains (251 legacy + 53 AMC). 62 have evidence rescued from ingest artefacts
      * (self-declaring verifiability: "none"); the other 230 have none at all.
      */
-    expect(kinds.get("verified_chain")).toBe(306);
+    expect(kinds.get("verified_chain")).toBe(304);
     expect(kinds.get("recovered_unverifiable")).toBe(62);
     expect(kinds.get("none")).toBe(230);
     /*
-     * 288 legacy manifests are schemaVersion 1; 310 (255 + 55 AMC) published through the real question-factory pipeline
+     * 288 legacy manifests are schemaVersion 1; 308 (255 + 53 AMC) published through the real question-factory pipeline
      * are schemaVersion 2.
      */
     const schemaVersions = result.manifests.map((m) => m.manifestSchemaVersion);
     expect(schemaVersions.filter((v) => v === 1)).toHaveLength(288);
-    expect(schemaVersions.filter((v) => v === 2)).toHaveLength(310);
+    expect(schemaVersions.filter((v) => v === 2)).toHaveLength(308);
     expect(schemaVersions.every((v) => v === 1 || v === 2)).toBe(true);
     /*
-     * 255 factory manifests carry correctnessBasis (85 deterministic incl. 55 AMC first-party recompute + 225 independent_semantic_review).
+     * 255 factory manifests carry correctnessBasis (83 deterministic incl. 53 AMC first-party recompute + 225 independent_semantic_review).
      */
     const withCorrectnessBasis = result.manifests.filter((m) => m.correctnessBasis !== undefined);
-    expect(withCorrectnessBasis).toHaveLength(310);
-    expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "deterministic")).toHaveLength(85);
+    expect(withCorrectnessBasis).toHaveLength(308);
+    expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "deterministic")).toHaveLength(83);
     expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "independent_semantic_review")).toHaveLength(225);
   });
 

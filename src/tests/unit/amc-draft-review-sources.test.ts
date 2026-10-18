@@ -17,7 +17,7 @@ async function reviewSourceResolver(question: { id: string }) {
   return { revision: target.source.revision, sourceManifestHash: target.sourceManifestHash };
 }
 /** Revised after the independent review (17 Oct 2026): their earlier approvals were retired, so their rows are blank until a new human decision. */
-const PENDING_REAPPROVAL = new Set(["roadmap-amc-y3-005", "roadmap-amc-y3-016"]);
+const PENDING_REAPPROVAL = new Set(["roadmap-amc-y3-005", "roadmap-amc-y3-016", "roadmap-amc-y3-026", "roadmap-amc-y5-019"]);
 const privateReviewOptions = { reviewSourceResolver, excludedReviewIds: new Set(Object.keys(AMC_EXCLUDED_FROM_REVIEW)) };
 describe("clean AMC pre-publication review bindings", () => {
   it("binds all 60 current drafts without asserting publication or human approval", async () => {
@@ -120,7 +120,7 @@ describe("clean AMC pre-publication review bindings", () => {
 
   it("serves exactly the human-approved AMC questions and none awaiting re-approval", () => {
     const amc = getExamBank("practice").filter((question) => question.examStyle === "amc_style");
-    expect(amc).toHaveLength(55);
+    expect(amc).toHaveLength(53);
     for (const id of PENDING_REAPPROVAL) expect(amc.map((question) => question.id)).not.toContain(id);
   });
 });

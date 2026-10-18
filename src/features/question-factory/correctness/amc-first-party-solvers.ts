@@ -88,10 +88,18 @@ export const AMC_FIRST_PARTY_SOLVERS: Readonly<Record<string, () => number | str
   "roadmap-amc-y5-017": () => 24 / (2 / 5),
   "roadmap-amc-y5-018": () => [12, 18, 15, 21, 14].sort((a, b) => a - b)[2],
   "roadmap-amc-y5-019": () => {
-    const fruits = ["apple", "banana", "pear"];
-    const assignments = permutations([0, 1, 2]).filter((order) => order[1] === 2 && order[0] !== 0);
+    const fruits = ["apple", "banana", "cherry", "date", "grape"] as const;
+    // friends: [Asha (0), Ben (1), Chen (2), Dev (3), Ella (4)]
+    // fruits: [apple (0), banana (1), cherry (2), date (3), grape (4)]
+    const assignments = permutations([0, 1, 2, 3, 4]).filter(
+      (order) =>
+        order[0] === 2 && // Asha chooses cherry
+        order[3] === 3 && // Dev chooses date
+        order[1] !== 1 && order[1] !== 4 && // Ben does not choose banana or grape
+        order[2] !== 4 // Chen does not choose grape
+    );
     if (assignments.length !== 1) throw new Error("Fruit assignment is not unique");
-    return fruits[assignments[0][2]];
+    return fruits[assignments[0][2]]; // Chen's fruit
   },
   "roadmap-amc-y5-020": () => 2 * (10 + 5),
   "roadmap-amc-y5-021": () => Array.from({ length: 90 }, (_, index) => index + 10).find(value => {
