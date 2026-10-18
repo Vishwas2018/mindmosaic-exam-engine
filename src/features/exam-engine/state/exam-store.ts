@@ -128,6 +128,8 @@ export interface StartPatternExamOptions extends StartExamOptions {
   form?: number;
   /** How many disjoint forms exist — from readiness, never invented. */
   formCount?: number;
+  /** Confidence Mode: untimed practice with explanations shown immediately. */
+  confidenceMode?: boolean;
 }
 
 export interface ExamActions {
@@ -157,7 +159,7 @@ export interface ExamActions {
     pattern: ExamPattern,
     options?: Pick<
       StartPatternExamOptions,
-      "asPracticeModule" | "bankId" | "form" | "formCount"
+      "asPracticeModule" | "bankId" | "form" | "formCount" | "confidenceMode"
     >,
   ) => Promise<boolean>;
   /**
@@ -372,7 +374,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       seed,
       bankId: options?.bankId ?? "curated",
       config,
-      questions: toCandidateQuestions(selection.questions),
+      questions: toCandidateQuestions(selection.questions, {
+        confidenceMode: config.confidenceMode,
+      }),
       startedAt,
       durationSeconds,
       deadlineAt,
@@ -403,6 +407,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       pattern,
       selection.questions.length,
       selection.reduced,
+      options?.confidenceMode,
     );
     const durationSeconds = sessionDurationSeconds(config, selection.questions);
     const startedAt = clock();
@@ -417,7 +422,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
          seeds would be exactly the thing the pattern doc forbids. */
       bankId: options?.bankId ?? "published",
       config,
-      questions: toCandidateQuestions(selection.questions),
+      questions: toCandidateQuestions(selection.questions, {
+        confidenceMode: options?.confidenceMode,
+      }),
       startedAt,
       durationSeconds,
       deadlineAt,
@@ -438,6 +445,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           form: options?.form ?? 0,
           formCount: options?.formCount ?? 1,
           bankId,
+          confidenceMode: options?.confidenceMode ?? false,
         }),
       });
       if (!response.ok) {
@@ -457,6 +465,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         pattern,
         created.questions.length,
         created.questions.length < pattern.questionCount,
+        options?.confidenceMode,
       );
       const durationSeconds = sessionDurationSeconds(config, created.questions);
       const startedAt = clock();

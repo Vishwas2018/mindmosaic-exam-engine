@@ -1,0 +1,832 @@
+{
+ "packet": "vr",
+ "reviewer": "claude-opus-5-5",
+ "blindnessConfirmed": true,
+ "items": [
+  {
+   "id": "scholarship-y6-vr-001",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "Solar relates to the Sun; lunar relates to the Moon.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "stock textbook analogy"
+   ],
+   "originality": "resembles-published",
+   "originalityNote": "SOLAR:SUN::LUNAR:MOON is a canonical analogy found in many practice books.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy. Consider a fresher adjective pair (e.g. AQUATIC:WATER::ARBOREAL:?) if originality matters."
+  },
+  {
+   "id": "scholarship-y6-vr-002",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "An author creates a novel; a composer creates a symphony.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Creator:work analogy, very common type.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy. ORCHESTRA is a fair distractor (performs, not creates)."
+  },
+  {
+   "id": "scholarship-y6-vr-003",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "A scalpel is the tool a surgeon uses; a chisel is the tool a sculptor uses.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [
+    "CARPENTRY is a trade, not a person, so it is ruled out only by part of speech; carpenters also use chisels"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Tool:user analogy, common.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Fine. CARPENTRY is a good part-of-speech trap; keep it as a noun of activity, not CARPENTER."
+  },
+  {
+   "id": "scholarship-y6-vr-004",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "A drought is a severe lack of rainfall; a famine is a severe lack of food.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "HUNGER is a strong consequence-based distractor, but the lack-of relation selects FOOD only"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Lack-of analogy, fresh pairing.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good item."
+  },
+  {
+   "id": "scholarship-y6-vr-005",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "A petal is a part of a flower; a tine is a prong/part of a fork.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [
+    "relies on knowing TINE; that is the point of the item"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Part:whole analogy with a vocabulary hook.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good."
+  },
+  {
+   "id": "scholarship-y6-vr-006",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "An aviary houses birds; an apiary houses bees.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "stock analogy"
+   ],
+   "originality": "resembles-published",
+   "originalityNote": "AVIARY:BIRDS::APIARY:BEES is a very well-known vocabulary analogy in selective-test prep.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Acceptable but stock; ANTS is a good near-miss distractor."
+  },
+  {
+   "id": "scholarship-y6-vr-007",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "Arid and moist are opposites; the opposite of frail is sturdy.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [
+    "ARID's usual opposite is WET/HUMID; MOIST is acceptable"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Antonym analogy.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy; all distractors are synonyms of FRAIL so the antonym stands out immediately."
+  },
+  {
+   "id": "scholarship-y6-vr-008",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "Triangle, hexagon, pentagon, octagon are 2D polygons; a cylinder is a 3D solid with curved surfaces.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "trivially easy; prompt says 'geometric shapes'"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Standard odd-one-out.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy, or swap CYLINDER for a subtler odd one out (e.g. CIRCLE, not a polygon)."
+  },
+  {
+   "id": "scholarship-y6-vr-009",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Dolphin is a mammal; sardine, snapper, tuna and mackerel are fish.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [
+    "secondary reading: SNAPPER is the only non-oily fish, but the mammal reading is far stronger"
+   ],
+   "originality": "resembles-published",
+   "originalityNote": "Dolphin-is-a-mammal odd-one-out is a stock puzzle.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy. Stock concept."
+  },
+  {
+   "id": "scholarship-y6-vr-010",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "A barometer is a weather instrument, not a work of art.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "prompt gives the answer away by stating 'the other four works of art'",
+    "PORTRAIT is a subject genre while the others are media/forms (minor)"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Odd-one-out.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "revise",
+   "notes": "Change prompt to 'Which word does NOT belong with the others?' and replace BAROMETER with a subtler intruder (e.g. EASEL - art-related but not a work of art)."
+  },
+  {
+   "id": "scholarship-y6-vr-011",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Dwindle, recede, diminish, decline all mean to lessen/go down; prosper means to thrive.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Odd-one-out by meaning.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good vocabulary item."
+  },
+  {
+   "id": "scholarship-y6-vr-012",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "Copper is a pure element; bronze, brass, steel and pewter are alloys.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [
+    "relies on science knowledge (alloys) and PEWTER vocabulary rather than pure verbal reasoning"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Alloy odd-one-out appears in quiz books but content is fresh enough.",
+   "difficultyEstimate": "hard",
+   "difficultyVerdict": "too_hard",
+   "recommendation": "revise",
+   "notes": "Either relabel hard or move to a general-knowledge strand; some Year 6 students will not know pewter or brass composition."
+  },
+  {
+   "id": "scholarship-y6-vr-013",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "Canberra, Wellington, Ottawa and London are national capitals; Sydney is not.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [
+    "general-knowledge dependent; slight culture bias toward Commonwealth geography",
+    "'status' is vague wording"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Capital-city odd-one-out, Sydney/Canberra trap is common in Australian materials.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Wording 'status' is vague but naming 'capital' would give it away; acceptable. Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-014",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Cautious = careful = prudent.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Synonym.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good."
+  },
+  {
+   "id": "scholarship-y6-vr-015",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "Conceal = hide; opposite is disclose (reveal).",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Antonym.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good; DISGUISE/OBSCURE/WITHHOLD are synonym-traps."
+  },
+  {
+   "id": "scholarship-y6-vr-016",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "Vigorous = energetic.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [
+    "LETHARGIC is the antonym trap"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Synonym.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-017",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "Scarcity = shortage; opposite = abundance.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Antonym.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-018",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Revered = deeply respected = esteemed.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [
+    "FEARED is a plausible awe-related distractor but clearly weaker"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Synonym.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good."
+  },
+  {
+   "id": "scholarship-y6-vr-019",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "Divergent (moving apart) vs convergent (coming together).",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "answer can be found by morphology alone (DI-/CON- + VERGENT) without knowing meaning"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Antonym.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "revise",
+   "notes": "Replace CONVERGENT with a non-cognate antonym such as SIMILAR/UNIFORM, or keep it but relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-020",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Apprehensive = worried/anxious.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Synonym.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good; EAGER is a nice trap."
+  },
+  {
+   "id": "scholarship-y6-vr-021",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "NEWSPAPER and PAPERWEIGHT; NEWSPRINT works but PRINTWEIGHT does not; NEWSFLASH/NEWSDESK work but FLASHWEIGHT/DESKWEIGHT do not.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Linking compound word, standard type.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good; three distractors satisfy the first half, which is good design."
+  },
+  {
+   "id": "scholarship-y6-vr-022",
+   "myAnswer": "a",
+   "confidence": "medium",
+   "working": "BLOCK = a building block (e.g. concrete block) and = to obstruct.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [
+    "the first definition describes BRICK more naturally than BLOCK, and 'to brick (up)' can mean to seal/obstruct, so BRICK is a weak second reading"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Homonym type.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "revise",
+   "notes": "Tighten definition 1 to 'a solid cube or chunk, e.g. of wood or ice' so BRICK is not attractive, or keep as intended trap after confirming 'brick' verb sense is not defensible."
+  },
+  {
+   "id": "scholarship-y6-vr-023",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "POST = an upright wooden pole in a fence; POST = mail service (Australia Post).",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [
+    "'wooden boundary fence' is inaccurate - a post is part of a fence, not a fence",
+    "RAIL is also part of a fence"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Homonym type.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "revise",
+   "notes": "Reword to 'an upright wooden pole, as in a fence' and 'the mail delivery service'."
+  },
+  {
+   "id": "scholarship-y6-vr-024",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "SPADE = digging tool and card suit.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [
+    "stock homonym"
+   ],
+   "originality": "resembles-published",
+   "originalityNote": "Spade/suit homonym is a very common practice item.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-025",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "BEAR = tolerate (can't bear it) and a large forest mammal.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [
+    "stock homonym; STAG/BOAR also fit the mammal half (intentional), STAND fits the verb half (intentional)"
+   ],
+   "originality": "resembles-published",
+   "originalityNote": "Bear/bear is a canonical homonym puzzle.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy. Good half-match distractors."
+  },
+  {
+   "id": "scholarship-y6-vr-026",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "SUNLIGHT and LIGHTHOUSE; SUNSHINE/SUNSET/SUNDIAL/SUNBURST fail the second half.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [
+    "stock (lighthouse)"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Linking compound word.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-027",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Whales are mammals; mammals breathe air; so all whales breathe air.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [
+    "B and E are converse-error traps"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Syllogism.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-028",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "Modus tollens: if snow then early opening; not early opening, so no snow.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [
+    "note: real-world reading (trail could fail to open for other reasons even after snow) is excluded by the premise; fine"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Conditional logic.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good."
+  },
+  {
+   "id": "scholarship-y6-vr-029",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "Every chess team student wears a blue badge; Anika is on the team; so Anika wears one.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [
+    "near-duplicate structure of 027/030/031"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Syllogism.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-030",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "All brass instruments need air; a trumpet is brass; so it needs air.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [
+    "near-duplicate of 029/031 (modus ponens); distractors B/C/E are absurd and give no challenge"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Syllogism.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "revise",
+   "notes": "Vary the logic form (e.g. 'Some...', or an affirming-the-consequent trap as the most attractive distractor) and replace absurd distractors."
+  },
+  {
+   "id": "scholarship-y6-vr-031",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "Raptors have sharp talons; osprey is a raptor; so osprey has sharp talons.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [
+    "third consecutive modus-ponens item; 'possesses' slightly formal"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Syllogism.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "revise",
+   "notes": "Convert to a harder form (e.g. 'A bird has sharp talons. Must it be a raptor?') to test converse error."
+  },
+  {
+   "id": "scholarship-y6-vr-032",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "Modus tollens: lawn not wet, so sprinkler did not run.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [
+    "structure duplicates 028"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Conditional logic.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Fine; consider varying context from 028."
+  },
+  {
+   "id": "scholarship-y6-vr-033",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "+3 each step: B,E,H,K,N.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Letter series.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-034",
+   "myAnswer": "e",
+   "confidence": "high",
+   "working": "-2 each step: Z,X,V,T,R.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "e"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Letter series.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-035",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "Positions 1,4,9,16 are squares; next 25 = Y.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Square-number letter series.",
+   "difficultyEstimate": "hard",
+   "difficultyVerdict": "too_hard",
+   "recommendation": "approve",
+   "notes": "Relabel hard (or keep medium-hard); a solid discriminating item."
+  },
+  {
+   "id": "scholarship-y6-vr-036",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "First letter +1 (E), second letter -1 (V): EV.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Paired series.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-037",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "+4 each step: C,G,K,O,S.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Letter series.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-038",
+   "myAnswer": "b",
+   "confidence": "high",
+   "working": "Consecutive alternate letters: AC EG IK MO QS (+4 per pair, each pair skips one).",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "b"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Paired series.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good."
+  },
+  {
+   "id": "scholarship-y6-vr-039",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "23,26,3,6 (+3 wrapping round), next 9 = I.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [
+    "'modular' is unfamiliar jargon for Year 6 and gives away the wrap-around hint"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Wrap-around letter series.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "revise",
+   "notes": "Remove the word 'modular'; let students discover the wrap-around."
+  },
+  {
+   "id": "scholarship-y6-vr-040",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "+2: L->N, E->G, A->C, F->H = NGCH.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [
+    "prompt states the rule '(each letter shifted forward by 2)', removing the reasoning step"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Caesar shift code.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "revise",
+   "notes": "Delete the parenthetical rule so students must infer it from BARK -> DCTM."
+  },
+  {
+   "id": "scholarship-y6-vr-041",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "COLD->EQNF is +2; decode VJG by -2: T,H,E = THE.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Caesar shift decoding.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good; decoding direction adds a step."
+  },
+  {
+   "id": "scholarship-y6-vr-042",
+   "myAnswer": "a",
+   "confidence": "high",
+   "working": "Letter substitution: P->J, O->W, S->K, T->D (consistent across both words). STOP -> K,D,W,J = KDWJ.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "a"
+   ],
+   "semanticFlags": [
+    "LAMP is redundant except to confirm P->J; fine"
+   ],
+   "originality": "common-genre",
+   "originalityNote": "Substitution code.",
+   "difficultyEstimate": "medium",
+   "difficultyVerdict": "appropriate",
+   "recommendation": "approve",
+   "notes": "Good; distractors are permutations, which tests careful mapping."
+  },
+  {
+   "id": "scholarship-y6-vr-043",
+   "myAnswer": "c",
+   "confidence": "high",
+   "working": "B2 R18 A1 I9 N14.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "c"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "A1Z26 code.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  },
+  {
+   "id": "scholarship-y6-vr-044",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "Reverse BRIGHT: T,H,G,I,R,B = THGIRB.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "Reversal code.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy; distractors are good transposition traps."
+  },
+  {
+   "id": "scholarship-y6-vr-045",
+   "myAnswer": "d",
+   "confidence": "high",
+   "working": "7=G, 18=R, 15=O, 23=W: GROW.",
+   "uniqueAnswer": true,
+   "defensibleOptions": [
+    "d"
+   ],
+   "semanticFlags": [],
+   "originality": "common-genre",
+   "originalityNote": "A1Z26 decode.",
+   "difficultyEstimate": "easy",
+   "difficultyVerdict": "too_easy",
+   "recommendation": "approve",
+   "notes": "Relabel easy."
+  }
+ ],
+ "packetSummary": "All 45 items have exactly one defensible answer on my independent solve; 022 has a weak secondary BRICK reading. Main systemic issue: every item is labelled medium, but about 26 are easy for a strong Year 6 student (simple +n series, A1Z26 codes, modus ponens syllogisms, transparent synonyms); 012 and 035 are hard. Content revisions: 010 (prompt gives answer away), 040 (rule stated in prompt), 039 ('modular' hint), 019 (morphology gives answer), 023 (post is not a fence), 022 (definition fits BRICK), 012 (science-knowledge dependent), 030/031 (repetitive modus ponens with absurd distractors). Stock/near-canonical: 001, 006, 009, 024, 025. Counts: {\"approve\": 36, \"revise\": 9}"
+}

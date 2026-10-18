@@ -9,6 +9,8 @@
  * terminal `cannot_derive`/`ambiguous` outcome rather than falling through
  * to a guess.
  */
+import { isScholarshipAttestedItem, verifyFirstPartyScholarshipAttestation } from "./scholarship-attestation";
+import { hashJson } from "../provenance";
 import type { Question } from "@/schemas/question.schema";
 import type { VisualAsset } from "@/schemas/visual.schema";
 
@@ -844,6 +846,16 @@ function attemptNumericPredicateOverOptions(question: Question): DerivationOutco
   return success("numeric_predicate", { kind: "multiple_options", optionIds: matchingIds }, `[${matchingIds.join(",")}]`);
 }
 
+function attemptFirstPartyScholarship(question: Question): DerivationOutcome {
+  if (!isScholarshipAttestedItem(question)) return NOT_APPLICABLE;
+  if ("solverParams" in question && question.solverParams !== undefined) {
+    return cannotDerive("unable_to_derive_answer", "Candidate-supplied solverParams are forbidden for first-party attested scholarship items.");
+  }
+  const attested = verifyFirstPartyScholarshipAttestation(question, hashJson(question));
+  if (!attested.ok || attested.matchedOptionId === undefined) return cannotDerive("unable_to_derive_answer", attested.message ?? "Scholarship attestation failed.");
+  return success("first_party_scholarship_attestation", { kind: "single_option", optionId: attested.matchedOptionId }, String(attested.computedValue));
+}
+
 function attemptSolver(question: Question): DerivationOutcome {
   if (!("solverParams" in question) || question.solverParams === undefined) return NOT_APPLICABLE;
   const result = computeSolver(question.solverParams);
@@ -864,6 +876,7 @@ function attemptSolver(question: Question): DerivationOutcome {
 /* ---------------------------------------------------------------------- */
 
 const DERIVATION_METHODS: readonly ((question: Question, workingSteps?: DeclaredWorkingSolution) => DerivationOutcome)[] = [
+  attemptFirstPartyScholarship,
   attemptSolver,
   attemptArithmetic,
   attemptMoney,

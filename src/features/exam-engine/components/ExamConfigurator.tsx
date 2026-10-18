@@ -194,12 +194,15 @@ export function ExamConfigurator({
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
 
+  const confidenceMode = searchParams.get("confidenceMode") === "true";
+
   const config: ExamSelectionConfig = {
     yearLevel,
     examStyle,
     subject,
     questionCount,
     timing,
+    confidenceMode: confidenceMode || undefined,
   };
 
   /*

@@ -5,6 +5,7 @@ import type { CandidateProvenance } from "../provenance";
 import { hashJson } from "../provenance";
 import type { FactoryRepository } from "../storage";
 import type { PublicationIssue } from "./types";
+import { isScholarshipAttestedItem, verifyFirstPartyScholarshipAttestation } from "../correctness/scholarship-attestation";
 
 export interface PublicationEligibilityContext {
   readonly candidateId: string;
@@ -110,6 +111,30 @@ export async function checkPublicationEligibility(
   if (!gateChain.ok) {
     for (const entry of gateChain.failures) {
       issues.push(issue("publication_upstream_evidence_invalid", entry.path, entry.message));
+    }
+  }
+
+  if (isScholarshipAttestedItem(question)) {
+    // Scholarship arithmetical-reasoning / deduction items are verified only by the first-party,
+    // hash-bound attestation; candidate-supplied solver logic is never trusted for them.
+    if (question.solverParams !== undefined) {
+      issues.push(
+        issue(
+          "publication_solver_verification_failed",
+          "solverParams",
+          "Candidate-supplied solverParams are not permitted for first-party attested scholarship items.",
+        ),
+      );
+    }
+    const scholarshipAttestation = verifyFirstPartyScholarshipAttestation(question, provenance.contentHash);
+    if (!scholarshipAttestation.ok) {
+      issues.push(
+        issue(
+          "publication_solver_verification_failed",
+          "scholarship_attestation",
+          scholarshipAttestation.message ?? "First-party scholarship attestation failed",
+        ),
+      );
     }
   }
 

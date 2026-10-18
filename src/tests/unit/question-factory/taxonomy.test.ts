@@ -629,6 +629,8 @@ describe("Year 4 and Year 6 enablement", () => {
     "every Year %i entry carries icas_style — NAPLAN is not sat at Year 4 or Year 6",
     (year) => {
       for (const entry of entriesForYear(year)) {
+        // Scholarship-style skills are their own sitting family, not ICAS/NAPLAN.
+        if (entry.examStyles.length === 1 && entry.examStyles[0] === "scholarship_style") continue;
         expect(entry.examStyles).toContain("icas_style");
       }
     },
@@ -691,7 +693,7 @@ describe("Year 4 and Year 6 enablement", () => {
     // with no realisable cell at that year — enabling nothing while
     // implying a sitting that does not exist.
     for (const entry of SKILL_TAXONOMY_ENTRIES) {
-      if (entry.examStyles.includes("icas_style")) continue;
+      if (entry.examStyles.includes("icas_style") || entry.examStyles.includes("scholarship_style")) continue;
       expect(entry.yearLevels).not.toContain(4);
       expect(entry.yearLevels).not.toContain(6);
     }
