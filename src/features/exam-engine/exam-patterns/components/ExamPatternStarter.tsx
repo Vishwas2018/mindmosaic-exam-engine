@@ -234,7 +234,9 @@ export function ExamPatternStarter({
           </p>
         )}
 
-        {pattern.examStyle === "scholarship_style" && (
+        {/* Confidence Mode puts every explanation in the browser before it is asked for. A signed-in-only paper is
+            served answer-stripped, so the option is not offered: it needs a per-answer server reveal first. */}
+        {pattern.examStyle === "scholarship_style" && pattern.guestAccess !== "signed_in_only" && (
           <fieldset className="m-0 mb-6 border-0 p-0">
             <legend className="mb-3 p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
               Sitting mode

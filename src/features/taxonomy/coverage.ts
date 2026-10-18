@@ -7,7 +7,8 @@ import {
   REGISTRY_SUBJECT_BY_FILTER,
   type SubjectFilter,
 } from "@/features/exam-engine/selection";
-import { getExamBank } from "@/server/exam-bank";
+import { findPaperForCell } from "@/features/exam-engine/exam-patterns";
+import { getExamBank, getPatternReadiness } from "@/server/exam-bank";
 
 import { isSubjectSatIn } from "./subject-registry";
 import { isValidStyleYear, YEAR_LEVELS } from "./year-registry";
@@ -107,12 +108,19 @@ function buildCoverage(): Map<string, CoverageCell> {
           examStyle,
           subject,
         }).length;
+        /* A cell that is sat only as a whole named paper (scholarship) is ready exactly when that whole paper can be
+           drawn from approved content, never at a count threshold: 30 approved items of a 40-question paper is not a
+           program a learner can start. */
+        const paper = findPaperForCell({ yearLevel, examStyle, subject });
+        const ready = examStyle === "scholarship_style"
+          ? paper !== undefined && getPatternReadiness()[paper.id]?.state === "ready"
+          : gatedCount >= GATED_COVERAGE_THRESHOLD;
         cells.set(coverageKey(yearLevel, examStyle, subject), {
           yearLevel,
           examStyle,
           subject,
           gatedCount,
-          ready: gatedCount >= GATED_COVERAGE_THRESHOLD,
+          ready,
         });
       }
     }

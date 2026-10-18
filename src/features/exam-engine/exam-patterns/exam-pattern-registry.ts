@@ -1,6 +1,7 @@
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
 import { examPatternSchema, type ExamPattern } from "./exam-pattern";
+import { parseProgrammeId } from "./programme-id";
 
 /**
  * Every practice-paper shape the product offers, transcribed from
@@ -549,6 +550,23 @@ export const STARTABLE_EXAM_PATTERNS: readonly ExamPattern[] = EXAM_PATTERNS.fil
 
 export function getExamPattern(patternId: string): ExamPattern | undefined {
   return EXAM_PATTERNS.find((pattern) => pattern.id === patternId);
+}
+
+/**
+ * The one named paper a (year, style, subject) cell is sat as, for styles whose content is sat only as a whole paper
+ * (scholarship). Undefined for every other cell, which keeps its generic practice builder.
+ */
+export function findPaperForCell(cell: {
+  readonly yearLevel: number;
+  readonly examStyle: string;
+  readonly subject: string;
+}): ExamPattern | undefined {
+  if (cell.examStyle !== "scholarship_style") return undefined;
+  return EXAM_PATTERNS.find((pattern) => {
+    if (pattern.examStyle !== cell.examStyle || pattern.yearLevel !== cell.yearLevel || pattern.status !== "available") return false;
+    const scope = parseProgrammeId(pattern.sources[0].programmeId);
+    return scope?.subject === cell.subject && pattern.sources.length === 1;
+  });
 }
 
 /**

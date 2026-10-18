@@ -100,10 +100,12 @@ export default async function ExamPatternPage({
                 </p>
                 <p className="mt-4 text-sm leading-6 text-muted">
                   <Link
-                    href="/practice"
+                    href={pattern.examStyle === "scholarship_style" ? "/practice/scholarship-prep" : "/practice"}
                     className="font-bold text-royal underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-royal"
                   >
-                    Try a shorter practice set instead
+                    {pattern.examStyle === "scholarship_style"
+                      ? "See where scholarship-style practice is up to"
+                      : "Try a shorter practice set instead"}
                   </Link>
                 </p>
               </Card>

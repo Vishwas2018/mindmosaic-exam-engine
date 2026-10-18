@@ -27,6 +27,7 @@ export type {
 export {
   EXAM_PATTERNS,
   STARTABLE_EXAM_PATTERNS,
+  findPaperForCell,
   getExamPattern,
   groupExamPatterns,
 } from "./exam-pattern-registry";

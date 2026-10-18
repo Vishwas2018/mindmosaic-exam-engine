@@ -37,6 +37,14 @@ describe("scholarship paper start screen", () => {
     expect(screen.getByTestId("start-pattern")).toHaveTextContent(/review instructions/i);
   });
 
+  it("does not offer Confidence Mode, which would put every explanation in the browser before it is asked for", () => {
+    auth.status = "authenticated";
+    render(<ExamPatternStarter pattern={pattern} readiness={ready} />);
+    expect(screen.queryByTestId("mode-confidence-mode")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("mode-timed-simulation")).not.toBeInTheDocument();
+    expect(screen.getByTestId("pattern-sitting-shape")).toHaveTextContent("40 questions · 30 minutes");
+  });
+
   it("an unavailable scholarship readiness has nothing to draw and no partial count", () => {
     expect(unavailable.state).toBe("unavailable");
     expect(unavailable.availableCount).toBe(0);
