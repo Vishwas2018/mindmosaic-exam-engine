@@ -4,7 +4,7 @@ Work in this order for EVERY item in the packet that follows: solve it yourself 
 
 Reply with ONE JSON object and nothing else (no commentary, no markdown fences), covering all 80 items, in exactly this shape:
 {
-  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "8025227042755cb247cb4d9ac915b956a8d64ba8178c245c41a8c705a1859ba5" },
+  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872" },
   "items": [ { "id": "scholarship-y6-vr-001", "myAnswer": "a|b|c|d|e|none", "reasoning": "one or two sentences", "singleDefensibleAnswer": true, "issues": "ambiguity, factual error, copied-sentence key, weak distractors, or an empty string", "difficulty": "easy|medium|challenging", "verdict": "PASS|REVISE|REJECT", "fix": "a precise fix if REVISE or REJECT, otherwise an empty string" } ]
 }
 
@@ -952,7 +952,7 @@ e) expensive and difficult to manufacture
 ------------------------------------------------------------------------
 
 PASSAGE: In Defence of the Dark
-Look up into the night sky from any Australian metropolitan suburb and you are likely to count only a few dozen stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.
+Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.
 
 Unlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.
 
