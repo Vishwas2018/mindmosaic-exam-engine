@@ -1,6 +1,6 @@
 {
   "packet": "packet.txt",
-  "packetSha256": "0c06dc1851ea6e104bfe0046cd55c331ba8714cb32ab0cbfaa0fe73f14ae28c1",
+  "packetSha256": "8025227042755cb247cb4d9ac915b956a8d64ba8178c245c41a8c705a1859ba5",
   "itemCount": 80,
   "note": "candidateHash/publishedContentHash bind a returned review to the exact content version in this release. A review returned for a different packetSha256 does not apply.",
   "items": [
@@ -350,8 +350,8 @@
     {
       "id": "scholarship-y6-rc-005",
       "section": "rc",
-      "candidateHash": "1187465e995cf70ce388e0f5acf6ae7d081840c3f7bc40db8508bc0a2a021c45",
-      "publishedContentHash": "180a900608fb133546b3df0ac183299b7fc075c64503c86efaa905cf36abdc2c",
+      "candidateHash": "765aeb63fbb8d56543dd0b74241de24200e7b86deb45de8f6406e48c80515e5c",
+      "publishedContentHash": "19221306f55ef58813d62853c21608fdafb5ab78a2efdbe7157d8fd3c0b79e81",
       "inExternalPacket": true
     },
     {
@@ -378,8 +378,8 @@
     {
       "id": "scholarship-y6-rc-009",
       "section": "rc",
-      "candidateHash": "95aa5467cb67b7b1ae6d666e0d6b96128fef3c94eae83343eba726a888d31864",
-      "publishedContentHash": "41b5c001b8aebc7593d912a672c92b8baf9768537c3224a68d5409dab208d38c",
+      "candidateHash": "df62151139d406d537f147dd9aa853503f3751b60e2ca026130cec95f16f2fa8",
+      "publishedContentHash": "61a974a3e5309d1b720c5e1681a64db54bf99e970c192d6dc4f0d8401f67ea62",
       "inExternalPacket": true
     },
     {
@@ -441,8 +441,8 @@
     {
       "id": "scholarship-y6-rc-018",
       "section": "rc",
-      "candidateHash": "3a8e042ded6afcfaf4670328a9f88c818f6171cc3746b031e16d05cdd195c86f",
-      "publishedContentHash": "8c2cc033dfd7c81e5560d635d33ecc315fe50fde7300474116fc2872d8050cbe",
+      "candidateHash": "2d4c7fb5c0a559a324d180995331a585bd618688f6d41a06d04d75457907fbb4",
+      "publishedContentHash": "ae1f8dcb0b0d4c89c457cb18cdc138be84345bbd804dd00c98b05685b9b30dc4",
       "inExternalPacket": true
     },
     {
@@ -469,8 +469,8 @@
     {
       "id": "scholarship-y6-rc-022",
       "section": "rc",
-      "candidateHash": "5a56106d02d549e2e1b2686c4f312c0860aab02a1e1661eae17a35e6aba88940",
-      "publishedContentHash": "c5bb405af6fad779d97c7ad35b63ff0949966fcc0eab297b6b6fe3d22615c325",
+      "candidateHash": "8387f0a96838d7d43b773ddfcf90c44bc9af9e94c964c7649a38150082e2390b",
+      "publishedContentHash": "a3058a58210458611de240a5cdc42391c877bc9950b50af3fdb2eb5bb41585b2",
       "inExternalPacket": true
     },
     {
@@ -518,22 +518,22 @@
     {
       "id": "scholarship-y6-rc-029",
       "section": "rc",
-      "candidateHash": "6254ed82d8e066157485832b0df1c72a020bfcd808430a222c86f64d95623bc2",
-      "publishedContentHash": "88ecfc899a53904f35ff393e6d50dd3d279bbf3ae78ff28b869bf2b9a0772310",
+      "candidateHash": "399fe705703270dce42b5d93a898259fb0a784167dea1fd59bafa9a21d181889",
+      "publishedContentHash": "c27da830f7612241ee2e37929cc5c8dbfd03cfbb1d493eceda0c33486ab6c6f3",
       "inExternalPacket": true
     },
     {
       "id": "scholarship-y6-rc-030",
       "section": "rc",
-      "candidateHash": "bb05760526471195bc84e154afeaedd84588898e68bbf7ed4cb551664ad612a5",
-      "publishedContentHash": "cb7d3920ca0b63e76d07e985457893bba66970aeed8c9b7021e9100231b5b49b",
+      "candidateHash": "555c22003fa6b58d56d0e4eb15850d41eb1f9dd2eea5d50eded37fbeffac4c1a",
+      "publishedContentHash": "4af433d323affeb4e9a298853a4a98750ce557f0d99b68f2d83117cb129ff2d2",
       "inExternalPacket": true
     },
     {
       "id": "scholarship-y6-rc-031",
       "section": "rc",
-      "candidateHash": "ca85cd920229c23311daa7585c647028c4bd121b5efaa84fa84b93ed87c6f576",
-      "publishedContentHash": "0eca311ec536aa44a81009067dab87160b841c15dc23f86268a82393c8b50880",
+      "candidateHash": "90bfee9b5669cbd1bce8ad3b12a0a6d76d0e7d124b4534f2aef31d7bdc6e32c2",
+      "publishedContentHash": "20651fd7e5d6d9360b4a5c1efab42ccd1a30f1e5899e1e8ffdff755764943642",
       "inExternalPacket": true
     },
     {
@@ -553,8 +553,8 @@
     {
       "id": "scholarship-y6-rc-034",
       "section": "rc",
-      "candidateHash": "1a0a2e913900540725d3132d7bed2d8bcd1e02d4ce651d8b7b59987abc9315df",
-      "publishedContentHash": "bfa0751be77e24f66b0b3dabf080f47183a626e9770bf8d3ea4d485651a40c05",
+      "candidateHash": "bb59885265a27df2b524b8fec10f4787dc599361102fc1f1bf2a444bd38607d6",
+      "publishedContentHash": "6f158d4a2bfb79066e84dba27ac8ec0423d3b4ed4c044bec7d27bfbcd24baa98",
       "inExternalPacket": true
     },
     {

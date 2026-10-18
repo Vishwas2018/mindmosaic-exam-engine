@@ -737,11 +737,11 @@ Question:
 The word 'synchronous' in paragraph 2 most nearly means:
 
 Options:
-a) one after another in turn
-b) quick and frantic
-c) slow and stately
+a) one after another, in a fixed order
+b) quick and frantic, with no pattern
+c) slow and stately, like a procession
 d) at exactly the same time as one another
-e) faint and scattered
+e) faint and scattered across the mud
 
 ------------------------------------------------------------------------
 
@@ -793,11 +793,11 @@ Question:
 What can be inferred from the 'quiet signal they had shared since she was six years old'?
 
 Options:
-a) Maya has been learning to row for six years.
-b) Maya and her grandfather have long watched wildlife together and trust each other's signals.
-c) Maya was afraid of the water when she was six.
-d) Grandfather uses the signal only when danger is near.
-e) Maya and her grandfather often argue and use signs to avoid talking.
+a) Maya has been taking rowing lessons with her grandfather for six years.
+b) They have long watched wildlife together and trust each other's signals.
+c) Maya was afraid of the water at six, so her grandfather invented a signal.
+d) Grandfather uses the signal only when he senses that danger is near.
+e) Maya and her grandfather often argue, so they use signs to avoid talking.
 
 ------------------------------------------------------------------------
 
@@ -929,11 +929,11 @@ Question:
 In paragraph 4, the phrase 'high aspect ratio' describes fibres that are:
 
 Options:
-a) heavy and cube-shaped
-b) mostly transparent
+a) heavy and shaped like small cubes
+b) mostly see-through and glassy
 c) very long compared with their width
-d) visible only from a high angle
-e) expensive to manufacture
+d) visible only when seen from a high angle
+e) expensive and difficult to manufacture
 
 ------------------------------------------------------------------------
 
@@ -995,11 +995,11 @@ Question:
 How does artificial lighting specifically threaten short-tailed shearwater fledglings?
 
 Options:
-a) It warms the ocean water until their fish prey swims away.
-b) It makes them delay feeding for hours so predators catch them.
-c) It prevents adult birds from laying eggs during springtime.
+a) It warms the ocean water until the fish they eat swim away from the colony.
+b) It makes them delay feeding for hours, so predators catch them at dusk.
+c) It stops adult birds from laying their eggs during the spring breeding season.
 d) It confuses young birds on their first flight, so they end up among roads and buildings.
-e) It blinds them permanently so they cannot hunt at sea.
+e) It blinds them permanently, so they can no longer hunt out at sea.
 
 ------------------------------------------------------------------------
 
@@ -1103,10 +1103,10 @@ Question:
 According to the passage, how are time and longitude linked?
 
 Options:
-a) One hour of time difference equals one degree of longitude.
-b) Every four minutes of sailing equals one nautical mile.
-c) The angle of the noon sun gives the ship's longitude.
-d) Every four minutes of difference between local time and Greenwich time equals one degree of longitude.
+a) One hour of time difference between ship and Greenwich equals one degree of longitude.
+b) Every four minutes of sailing at sea equals one nautical mile of distance.
+c) The angle of the noon sun above the horizon gives the ship's longitude.
+d) Every four minutes of time difference from Greenwich equals one degree of longitude.
 e) A ship's longitude equals its speed multiplied by the hours since noon.
 
 ------------------------------------------------------------------------
@@ -1117,11 +1117,11 @@ Question:
 Why were marine chronometers likely to become inaccurate in the Roaring Forties?
 
 Options:
-a) Magnetic storms reversed their springs.
-b) Cold disturbed their rates and damp, salty air could rust their delicate parts.
+a) Magnetic storms reversed the direction of their springs.
+b) Cold upset their rates and damp, salty air could rust their parts.
 c) Their gimbals swung too freely and shook them apart.
-d) Captains often forgot to wind them during gales.
-e) The wind made the springs lose tension.
+d) Captains often forgot to wind them during the gales.
+e) The strong wind made the springs lose their tension.
 
 ------------------------------------------------------------------------
 
@@ -1131,11 +1131,11 @@ Question:
 In paragraph 4, 'dead reckoning' is best described as:
 
 Options:
-a) predicting currents from tide tables
+a) predicting the strength of currents from printed tide tables
 b) working out position from the course steered and the distance travelled
-c) fixing position from the angle of the noon sun
-d) following the flight paths of seabirds
-e) relying on radio signals from lighthouses
+c) fixing position from the angle of the noon sun above the horizon
+d) following the flight paths of seabirds towards the nearest land
+e) relying on signals flashed from lighthouses along the coast
 
 ------------------------------------------------------------------------
 
@@ -1173,11 +1173,11 @@ Question:
 According to paragraph 3, why was the 'lunar distance' method hard to use?
 
 Options:
-a) It worked only in port, never at sea.
-b) It needed instruments that cost more than a chronometer.
-c) It gave latitude, not longitude.
-d) It was banned by the Admiralty after a shipwreck.
-e) It needed a clear view of the moon and hours of complicated calculation.
+a) It worked only when the ship was in port, never out at sea.
+b) It needed instruments that cost far more than a chronometer.
+c) It gave the ship's latitude only, and not its longitude.
+d) It was banned by the Admiralty after a famous shipwreck.
+e) It needed a clear view of the moon and hours of calculation.
 
 ------------------------------------------------------------------------
 

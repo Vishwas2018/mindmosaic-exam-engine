@@ -223,15 +223,15 @@
       "options": [
         {
           "id": "a",
-          "text": "one after another in turn"
+          "text": "one after another, in a fixed order"
         },
         {
           "id": "b",
-          "text": "quick and frantic"
+          "text": "quick and frantic, with no pattern"
         },
         {
           "id": "c",
-          "text": "slow and stately"
+          "text": "slow and stately, like a procession"
         },
         {
           "id": "d",
@@ -239,7 +239,7 @@
         },
         {
           "id": "e",
-          "text": "faint and scattered"
+          "text": "faint and scattered across the mud"
         }
       ],
       "visuals": [],
@@ -431,23 +431,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Maya has been learning to row for six years."
+          "text": "Maya has been taking rowing lessons with her grandfather for six years."
         },
         {
           "id": "b",
-          "text": "Maya and her grandfather have long watched wildlife together and trust each other's signals."
+          "text": "They have long watched wildlife together and trust each other's signals."
         },
         {
           "id": "c",
-          "text": "Maya was afraid of the water when she was six."
+          "text": "Maya was afraid of the water at six, so her grandfather invented a signal."
         },
         {
           "id": "d",
-          "text": "Grandfather uses the signal only when danger is near."
+          "text": "Grandfather uses the signal only when he senses that danger is near."
         },
         {
           "id": "e",
-          "text": "Maya and her grandfather often argue and use signs to avoid talking."
+          "text": "Maya and her grandfather often argue, so they use signs to avoid talking."
         }
       ],
       "visuals": [],
@@ -899,11 +899,11 @@
       "options": [
         {
           "id": "a",
-          "text": "heavy and cube-shaped"
+          "text": "heavy and shaped like small cubes"
         },
         {
           "id": "b",
-          "text": "mostly transparent"
+          "text": "mostly see-through and glassy"
         },
         {
           "id": "c",
@@ -911,11 +911,11 @@
         },
         {
           "id": "d",
-          "text": "visible only from a high angle"
+          "text": "visible only when seen from a high angle"
         },
         {
           "id": "e",
-          "text": "expensive to manufacture"
+          "text": "expensive and difficult to manufacture"
         }
       ],
       "visuals": [],
@@ -1107,15 +1107,15 @@
       "options": [
         {
           "id": "a",
-          "text": "It warms the ocean water until their fish prey swims away."
+          "text": "It warms the ocean water until the fish they eat swim away from the colony."
         },
         {
           "id": "b",
-          "text": "It makes them delay feeding for hours so predators catch them."
+          "text": "It makes them delay feeding for hours, so predators catch them at dusk."
         },
         {
           "id": "c",
-          "text": "It prevents adult birds from laying eggs during springtime."
+          "text": "It stops adult birds from laying their eggs during the spring breeding season."
         },
         {
           "id": "d",
@@ -1123,7 +1123,7 @@
         },
         {
           "id": "e",
-          "text": "It blinds them permanently so they cannot hunt at sea."
+          "text": "It blinds them permanently, so they can no longer hunt out at sea."
         }
       ],
       "visuals": [],
@@ -1471,19 +1471,19 @@
       "options": [
         {
           "id": "a",
-          "text": "One hour of time difference equals one degree of longitude."
+          "text": "One hour of time difference between ship and Greenwich equals one degree of longitude."
         },
         {
           "id": "b",
-          "text": "Every four minutes of sailing equals one nautical mile."
+          "text": "Every four minutes of sailing at sea equals one nautical mile of distance."
         },
         {
           "id": "c",
-          "text": "The angle of the noon sun gives the ship's longitude."
+          "text": "The angle of the noon sun above the horizon gives the ship's longitude."
         },
         {
           "id": "d",
-          "text": "Every four minutes of difference between local time and Greenwich time equals one degree of longitude."
+          "text": "Every four minutes of time difference from Greenwich equals one degree of longitude."
         },
         {
           "id": "e",
@@ -1523,11 +1523,11 @@
       "options": [
         {
           "id": "a",
-          "text": "Magnetic storms reversed their springs."
+          "text": "Magnetic storms reversed the direction of their springs."
         },
         {
           "id": "b",
-          "text": "Cold disturbed their rates and damp, salty air could rust their delicate parts."
+          "text": "Cold upset their rates and damp, salty air could rust their parts."
         },
         {
           "id": "c",
@@ -1535,11 +1535,11 @@
         },
         {
           "id": "d",
-          "text": "Captains often forgot to wind them during gales."
+          "text": "Captains often forgot to wind them during the gales."
         },
         {
           "id": "e",
-          "text": "The wind made the springs lose tension."
+          "text": "The strong wind made the springs lose their tension."
         }
       ],
       "visuals": [],
@@ -1575,7 +1575,7 @@
       "options": [
         {
           "id": "a",
-          "text": "predicting currents from tide tables"
+          "text": "predicting the strength of currents from printed tide tables"
         },
         {
           "id": "b",
@@ -1583,15 +1583,15 @@
         },
         {
           "id": "c",
-          "text": "fixing position from the angle of the noon sun"
+          "text": "fixing position from the angle of the noon sun above the horizon"
         },
         {
           "id": "d",
-          "text": "following the flight paths of seabirds"
+          "text": "following the flight paths of seabirds towards the nearest land"
         },
         {
           "id": "e",
-          "text": "relying on radio signals from lighthouses"
+          "text": "relying on signals flashed from lighthouses along the coast"
         }
       ],
       "visuals": [],
@@ -1731,23 +1731,23 @@
       "options": [
         {
           "id": "a",
-          "text": "It worked only in port, never at sea."
+          "text": "It worked only when the ship was in port, never out at sea."
         },
         {
           "id": "b",
-          "text": "It needed instruments that cost more than a chronometer."
+          "text": "It needed instruments that cost far more than a chronometer."
         },
         {
           "id": "c",
-          "text": "It gave latitude, not longitude."
+          "text": "It gave the ship's latitude only, and not its longitude."
         },
         {
           "id": "d",
-          "text": "It was banned by the Admiralty after a shipwreck."
+          "text": "It was banned by the Admiralty after a famous shipwreck."
         },
         {
           "id": "e",
-          "text": "It needed a clear view of the moon and hours of complicated calculation."
+          "text": "It needed a clear view of the moon and hours of calculation."
         }
       ],
       "visuals": [],
@@ -1884,7 +1884,7 @@
       "id": "scholarship-y6-rc-009",
       "skill": "rc-character-inference",
       "targetOption": "b",
-      "correctValue": "Maya and her grandfather have long watched wildlife together and trust each other's signals.",
+      "correctValue": "They have long watched wildlife together and trust each other's signals.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-010": {
@@ -2024,14 +2024,14 @@
       "id": "scholarship-y6-rc-029",
       "skill": "rc-factual-inference",
       "targetOption": "d",
-      "correctValue": "Every four minutes of difference between local time and Greenwich time equals one degree of longitude.",
+      "correctValue": "Every four minutes of time difference from Greenwich equals one degree of longitude.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-030": {
       "id": "scholarship-y6-rc-030",
       "skill": "rc-factual-retrieval",
       "targetOption": "b",
-      "correctValue": "Cold disturbed their rates and damp, salty air could rust their delicate parts.",
+      "correctValue": "Cold upset their rates and damp, salty air could rust their parts.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-031": {
@@ -2059,7 +2059,7 @@
       "id": "scholarship-y6-rc-034",
       "skill": "rc-factual-inference",
       "targetOption": "e",
-      "correctValue": "It needed a clear view of the moon and hours of complicated calculation.",
+      "correctValue": "It needed a clear view of the moon and hours of calculation.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-035": {
