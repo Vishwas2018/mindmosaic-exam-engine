@@ -1,15 +1,7 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-const clients = vi.hoisted(() => ({ constructed: 0 }));
-vi.mock("pg", () => ({
-  Client: class {
-    constructor() {
-      clients.constructed += 1;
-    }
-    on() {}
-    async connect() {}
-  },
-}));
+/* No module mocks here: the RLS project runs every file in one process with a shared module registry (isolate: false),
+   so a mocked "pg" would leak into every file that runs after this one. */
 
 import {
   assertSingleLocalTarget,
@@ -28,7 +20,6 @@ const saved = snapshotEnv(names);
 
 beforeEach(() => {
   for (const name of names) delete process.env[name];
-  clients.constructed = 0;
 });
 afterEach(() => restoreEnv(saved));
 
@@ -74,20 +65,19 @@ describe("database-target guard", () => {
     }
   });
 
-  it("stops every connection helper before a client is even constructed", async () => {
+  it("stops every connection helper with the guard error, not a connection error, so nothing was attempted", async () => {
     process.env.RLS_TEST_DB_URL = ISOLATED;
     process.env.SCORING_DB_URL = "postgresql://mindmosaic_scoring:x@127.0.0.1:56322/postgres";
     await expect(connect()).rejects.toThrow(DbTargetError);
     await expect(connectAsScoringRole()).rejects.toThrow(DbTargetError);
     await expect(connectAsContentAnswerWriterRole()).rejects.toThrow(DbTargetError);
     expect(() => scoringDbUrl()).toThrow(DbTargetError);
-    expect(clients.constructed).toBe(0);
   });
 
-  it("lets a consistent configuration connect", async () => {
-    process.env.RLS_TEST_DB_URL = ISOLATED;
-    await connect();
-    expect(clients.constructed).toBe(1);
+  it("lets the configuration the suite is really running with connect", async () => {
+    restoreEnv(saved);
+    const client = await connect();
+    await client.end();
   });
 });
 
