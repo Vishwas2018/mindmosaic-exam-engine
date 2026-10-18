@@ -563,7 +563,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Total ratio parts = 2 + 3 + 4 = 9 parts. Value of one part = $72,000 / 9 = $8,000. Ben receives 3 parts = 3 * $8,000 = $24,000.",
+      "explanation": "Total ratio parts = 2 + 3 + 4 = 9 parts. Value of one part = $72,000 / 9 = $8,000. The garden receives 3 parts = 3 * $8,000 = $24,000.",
       "metadata": {
         "subject": "numeracy",
         "strand": "Ratios and Rates",

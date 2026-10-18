@@ -1135,7 +1135,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which single word can mean both 'how high or low a musical sound is' and 'a marked field where football is played'?",
+      "prompt": "Which single word can mean both 'how high or low a musical sound is' and 'a marked field where soccer is played'?",
       "options": [
         {
           "id": "a",
@@ -1163,7 +1163,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "'Pitch' is how high or low a note sounds, and a 'pitch' is also a marked playing field for sports such as football.",
+      "explanation": "'Pitch' is how high or low a note sounds, and a 'pitch' is also a marked playing field for sports such as soccer.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
