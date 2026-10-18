@@ -101,8 +101,8 @@ test.describe("Assessment Capability E2E — hot_text, matrix_choice, structured
     await setupAssessmentRouteMocks(page);
 
     await page.goto("/practice/mixed-practice?seed=test-seed-1");
-    await expect(page.getByTestId("start-exam").first()).toBeVisible();
-    await page.getByTestId("start-exam").first().click();
+    await expect(page.getByTestId("start-exam")).toBeVisible();
+    await page.getByTestId("start-exam").click();
     await expect(page.getByTestId("begin-exam")).toBeVisible();
     await page.getByTestId("begin-exam").click();
     await expect(page).toHaveURL(/\/exam/);

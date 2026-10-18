@@ -61,7 +61,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   const consoleErrors = watchConsole(page);
 
   await page.goto("/practice/mixed-practice?seed=e2e-flow-1");
-  await expect(page.getByTestId("start-exam").first()).toBeVisible();
+  await expect(page.getByTestId("start-exam")).toBeVisible();
 
   await configureExam(page, {
     yearLevel: "3",
@@ -73,7 +73,7 @@ test("flow 1: grade 3 numeracy timed exam from setup to review", async ({ page }
   await expect(page.getByTestId("eligible-count")).toContainText("matching questions available");
   await expect(page.getByTestId("config-summary")).toContainText("Grade 3");
 
-  await page.getByTestId("start-exam").first().click();
+  await page.getByTestId("start-exam").click();
 
   // Setup sheet -> standard instructions page -> the exam itself.
 
