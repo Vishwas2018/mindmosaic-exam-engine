@@ -32,12 +32,12 @@ describe("human approval is distinct from AMC publication", () => {
     expect(result.pending).toEqual([]);
     expect(result.publicationRecords).toHaveLength(2);
   });
-  it("verifies all 55 current signatures and serves exactly those AMC questions", () => {
+  it("verifies all 53 current signatures and serves exactly those AMC questions", () => {
     const report = getPublicationEligibility();
     expect(report.problems).toEqual([]);
     expect(report.pendingPublication).toEqual([]);
     const bank = getExamBank("practice");
-    expect(bank.filter((question) => question.examStyle === "amc_style")).toHaveLength(55);
-    expect(report.questions.filter((question) => question.examStyle === "amc_style")).toHaveLength(55);
+    expect(bank.filter((question) => question.examStyle === "amc_style")).toHaveLength(53);
+    expect(report.questions.filter((question) => question.examStyle === "amc_style")).toHaveLength(53);
   });
 });

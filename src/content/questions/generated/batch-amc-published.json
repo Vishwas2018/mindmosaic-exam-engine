@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T13:18:37.679Z",
+  "generatedAt": "2026-10-18T04:27:49.339Z",
   "subject": "amc_mathematics",
   "questions": [
     {
@@ -1103,36 +1103,6 @@
       }
     },
     {
-      "id": "roadmap-amc-y3-026",
-      "type": "number_entry",
-      "yearLevel": 3,
-      "examStyle": "amc_style",
-      "status": "published",
-      "origin": "original_seed",
-      "prompt": "Three baskets hold 41 apples altogether. The first basket has 5 more apples than the second basket. The third basket has twice as many apples as the second basket. Then 3 apples are moved from the first basket to the third basket. How many apples are now in the third basket?",
-      "options": [],
-      "visuals": [],
-      "answerKey": {
-        "kind": "number",
-        "value": 21,
-        "tolerance": 0
-      },
-      "explanation": "Remove the 5 extra apples from the total: 41 - 5 = 36. The second basket holds one equal share, the first one share plus 5, and the third two shares. Each share is 36 ? 4 = 9. The third basket starts with 18 apples and receives 3, giving 21.",
-      "metadata": {
-        "subject": "amc_mathematics",
-        "strand": "Patterns & Algebra",
-        "topic": "Patterns & Algebra",
-        "skill": "Reason about an unknown using several conditions",
-        "difficulty": "challenging",
-        "marks": 6,
-        "estimatedTimeSeconds": 180,
-        "tags": [],
-        "locale": "en-AU",
-        "source": "original",
-        "schemaVersion": 1
-      }
-    },
-    {
       "id": "roadmap-amc-y3-027",
       "type": "number_entry",
       "yearLevel": 3,
@@ -2093,56 +2063,6 @@
         "strand": "Statistics & Probability",
         "topic": "Statistics & Probability",
         "skill": "Find the median",
-        "difficulty": "easy",
-        "marks": 4,
-        "estimatedTimeSeconds": 120,
-        "tags": [],
-        "locale": "en-AU",
-        "source": "original",
-        "schemaVersion": 1
-      }
-    },
-    {
-      "id": "roadmap-amc-y5-019",
-      "type": "multiple_choice",
-      "yearLevel": 5,
-      "examStyle": "amc_style",
-      "status": "published",
-      "origin": "original_seed",
-      "prompt": "Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?",
-      "options": [
-        {
-          "id": "a",
-          "text": "apple"
-        },
-        {
-          "id": "b",
-          "text": "banana"
-        },
-        {
-          "id": "c",
-          "text": "cannot be known"
-        },
-        {
-          "id": "d",
-          "text": "pear"
-        },
-        {
-          "id": "e",
-          "text": "apple or banana"
-        }
-      ],
-      "visuals": [],
-      "answerKey": {
-        "kind": "single_option",
-        "optionId": "a"
-      },
-      "explanation": "Ben has pear. Asha must therefore have banana, because she cannot have apple. Chen has the remaining fruit, apple.",
-      "metadata": {
-        "subject": "amc_mathematics",
-        "strand": "Logic & Problem-Solving",
-        "topic": "Logic & Problem-Solving",
-        "skill": "Deduce from constraints",
         "difficulty": "easy",
         "marks": 4,
         "estimatedTimeSeconds": 120,
