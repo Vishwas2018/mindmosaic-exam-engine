@@ -45,6 +45,7 @@
     "questions:revise": "tsx scripts/questions-revise.mts",
     "questions:pipeline": "tsx scripts/questions-pipeline.mts",
     "questions:stage": "tsx scripts/questions-stage.mts",
+    "questions:requeue-for-review": "tsx scripts/questions-requeue-for-review.mts",
     "questions:publish": "tsx scripts/questions-publish.mts",
     "questions:assemble-bank": "tsx scripts/questions-assemble-bank.mts",
     "questions:assemble-scholarship": "tsx scripts/questions-assemble-bank.mts --exam-style scholarship_style",

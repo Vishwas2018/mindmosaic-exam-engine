@@ -1,0 +1,1208 @@
+You are an independent blind reviewer of Year 6 scholarship-style practice questions written for Australian students aged about 11.
+
+Work in this order for EVERY item in the packet that follows: solve it yourself from the text only, then decide whether exactly one option is defensible, check any passage for factual errors or over-claims, judge whether the distractors are plausible and distinct, whether the correct option can be spotted merely by its length or by copying a passage sentence, and whether the content suits the age. Rate the reasoning difficulty a strong Year 6 candidate would meet: easy, medium or challenging.
+
+Reply with ONE JSON object and nothing else (no commentary, no markdown fences), covering all 80 items, in exactly this shape:
+{
+  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "0c06dc1851ea6e104bfe0046cd55c331ba8714cb32ab0cbfaa0fe73f14ae28c1" },
+  "items": [ { "id": "scholarship-y6-vr-001", "myAnswer": "a|b|c|d|e|none", "reasoning": "one or two sentences", "singleDefensibleAnswer": true, "issues": "ambiguity, factual error, copied-sentence key, weak distractors, or an empty string", "difficulty": "easy|medium|challenging", "verdict": "PASS|REVISE|REJECT", "fix": "a precise fix if REVISE or REJECT, otherwise an empty string" } ]
+}
+
+Set freshSession to true only if this conversation contains nothing but this message. Do not guess your model name; if you cannot tell, use the string unknown and the review will be set aside.
+
+PACKET FOLLOWS
+
+BLIND REVIEW PACKET: Year 6 scholarship-style Verbal Reasoning (45 items) and Reading Comprehension (35 items)
+
+This packet contains item IDs, passages, prompts and options only. It deliberately contains no answer keys, explanations, difficulty labels, earlier reviews or author notes.
+
+========================================================================
+
+
+VERBAL REASONING
+========================================================================
+
+ID: scholarship-y6-vr-001
+
+Question:
+THERMOMETER is to TEMPERATURE as ODOMETER is to:
+
+Options:
+a) SPEED
+b) FUEL
+c) ENGINE
+d) TYRES
+e) DISTANCE
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-002
+
+Question:
+AUTHOR is to NOVEL as COMPOSER is to:
+
+Options:
+a) INSTRUMENT
+b) ORCHESTRA
+c) STAGE
+d) PAINTING
+e) SYMPHONY
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-003
+
+Question:
+SCALPEL is to SURGEON as CHISEL is to:
+
+Options:
+a) CARPENTRY
+b) STONE
+c) MUSEUM
+d) SCULPTOR
+e) CANVAS
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-004
+
+Question:
+DROUGHT is to RAINFALL as FAMINE is to:
+
+Options:
+a) SHELTER
+b) HUNGER
+c) POVERTY
+d) WEATHER
+e) FOOD
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-005
+
+Question:
+PETAL is to FLOWER as TINE is to:
+
+Options:
+a) FORK
+b) SPOON
+c) PLATE
+d) HANDLE
+e) KNIFE
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-006
+
+Question:
+PEDAL is to BICYCLE as OAR is to:
+
+Options:
+a) SAIL
+b) OCEAN
+c) RIVER
+d) ROWER
+e) BOAT
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-007
+
+Question:
+ARID is to MOIST as FRAIL is to:
+
+Options:
+a) FEEBLE
+b) BRITTLE
+c) STURDY
+d) DELICATE
+e) SLENDER
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-008
+
+Question:
+Which of the following five geometric shapes does NOT belong with the others?
+
+Options:
+a) TRIANGLE
+b) HEXAGON
+c) PENTAGON
+d) OCTAGON
+e) CYLINDER
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-009
+
+Question:
+Which of the following five words does NOT share a similar meaning with the others?
+
+Options:
+a) AMBLE
+b) SPRINT
+c) DASH
+d) HURRY
+e) RUSH
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-010
+
+Question:
+Which word does NOT belong with the others?
+
+Options:
+a) SCULPTURE
+b) PORTRAIT
+c) FRESCO
+d) MOSAIC
+e) EASEL
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-011
+
+Question:
+Which of the following five verbs does NOT share a similar meaning with the others?
+
+Options:
+a) PROSPER
+b) DWINDLE
+c) RECEDE
+d) DIMINISH
+e) DECLINE
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-012
+
+Question:
+Which of the following five metals does NOT belong in the same category as the others?
+
+Options:
+a) BRONZE
+b) COPPER
+c) BRASS
+d) STEEL
+e) PEWTER
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-013
+
+Question:
+Which of the following five cities does NOT share the same status as the others?
+
+Options:
+a) CANBERRA
+b) SYDNEY
+c) WELLINGTON
+d) OTTAWA
+e) LONDON
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-014
+
+Question:
+Which word is closest in meaning to CAUTIOUS?
+
+Options:
+a) PRUDENT
+b) HASTY
+c) RECKLESS
+d) INDIFFERENT
+e) VALIANT
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-015
+
+Question:
+Which word is most OPPOSITE in meaning to CONCEAL?
+
+Options:
+a) DISGUISE
+b) OBSCURE
+c) DISCLOSE
+d) WITHHOLD
+e) PROTECT
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-016
+
+Question:
+Which word is closest in meaning to VIGOROUS?
+
+Options:
+a) LETHARGIC
+b) DELICATE
+c) PENSIVE
+d) ENERGETIC
+e) MUNDANE
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-017
+
+Question:
+Which word is most OPPOSITE in meaning to SCARCITY?
+
+Options:
+a) DEFICIT
+b) ABUNDANCE
+c) POVERTY
+d) HARDSHIP
+e) ISOLATION
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-018
+
+Question:
+Which word is closest in meaning to REVERED?
+
+Options:
+a) ESTEEMED
+b) NEGLECTED
+c) DISMISSED
+d) FEARED
+e) TOLERATED
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-019
+
+Question:
+Which word is most OPPOSITE in meaning to FRUGAL?
+
+Options:
+a) THRIFTY
+b) CAREFUL
+c) MODEST
+d) STINGY
+e) EXTRAVAGANT
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-020
+
+Question:
+Which word is closest in meaning to APPREHENSIVE?
+
+Options:
+a) ANXIOUS
+b) CONFIDENT
+c) IRRITABLE
+d) EAGER
+e) UNCONCERNED
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-021
+
+Question:
+Which word can be placed immediately after 'NEWS' and immediately before 'WEIGHT' to make two valid compound words?
+
+Options:
+a) PRINT
+b) PAPER
+c) FLASH
+d) DESK
+e) REPORT
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-022
+
+Question:
+Find the single word that can mean both 'a solid lump of material such as wood, ice or stone' and 'to obstruct or stop movement':
+
+Options:
+a) BLOCK
+b) BRICK
+c) BARRIER
+d) STOP
+e) CUBE
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-023
+
+Question:
+Which single word can mean both 'an upright pole set in the ground' and 'the service that delivers letters and parcels'?
+
+Options:
+a) RAIL
+b) STAKE
+c) PILLAR
+d) GATE
+e) POST
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-024
+
+Question:
+Which single word can mean both 'free from damage or disease' and 'a narrow stretch of sea between two pieces of land'?
+
+Options:
+a) STRONG
+b) CHANNEL
+c) BAY
+d) SOUND
+e) FIRM
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-025
+
+Question:
+Which single word can mean both 'how high or low a musical sound is' and 'a marked field where soccer is played'?
+
+Options:
+a) TONE
+b) PITCH
+c) FIELD
+d) NOTE
+e) COURT
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-026
+
+Question:
+Which word can follow 'SUN' and precede 'HOUSE' to form two compound words?
+
+Options:
+a) SHINE
+b) BURST
+c) LIGHT
+d) SET
+e) DIAL
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-027
+
+Question:
+Read the statements:
+1. If a creature is a mammal, it breathes air.
+2. All whales are mammals.
+Which conclusion must be TRUE?
+
+Options:
+a) All whales breathe air.
+b) All creatures that breathe air are mammals.
+c) Some whales do not breathe air.
+d) Creatures that breathe air are never whales.
+e) Only mammals are able to breathe air.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-028
+
+Question:
+Read the statements:
+1. If it snows overnight, the ski trail opens early.
+2. The ski trail did not open early today.
+Which conclusion must be TRUE?
+
+Options:
+a) It snowed heavily overnight.
+b) The ski trail will never open.
+c) The trail is closed for maintenance.
+d) It did not snow overnight.
+e) It rained overnight instead of snowing.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-029
+
+Question:
+Read the statements:
+1. Every student on the chess team wears a blue badge.
+2. Anika is a student on the chess team.
+Which conclusion must be TRUE?
+
+Options:
+a) Every student with a blue badge plays chess.
+b) Anika wears a blue badge.
+c) Anika does not wear a blue badge.
+d) Anika is the captain of the chess team.
+e) Students without a blue badge are on the chess team.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-030
+
+Question:
+Read the statements:
+1. Either the bridge is closed or the ferry is running.
+2. The ferry is not running.
+Which conclusion must be TRUE?
+
+Options:
+a) The bridge is open.
+b) The ferry will run tomorrow.
+c) The bridge and the ferry are both running.
+d) The bridge is closed.
+e) The river is too rough for boats.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-031
+
+Question:
+Read the statements:
+1. If a shape has four equal sides, it is a rhombus.
+2. If a shape is a rhombus, its opposite sides are parallel.
+3. The opposite sides of this shape are not parallel.
+Which conclusion must be TRUE?
+
+Options:
+a) This shape is a rhombus.
+b) This shape is not a rhombus.
+c) This shape has four equal sides.
+d) Every shape with parallel opposite sides is a rhombus.
+e) This shape has four right angles.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-032
+
+Question:
+Read the statements:
+1. If the garden sprinkler runs, the lawn is wet.
+2. The lawn is NOT wet.
+Which conclusion must be TRUE?
+
+Options:
+a) The garden sprinkler ran for hours.
+b) It rained heavily while the sprinkler ran.
+c) The garden sprinkler did not run.
+d) The lawn is soaking wet.
+e) The sprinkler runs every morning.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-033
+
+Question:
+Find the next letter in the series:
+B, E, H, K, ?
+
+Options:
+a) M
+b) O
+c) P
+d) N
+e) L
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-034
+
+Question:
+Find the next letter in the series:
+Z, X, V, T, ?
+
+Options:
+a) S
+b) Q
+c) P
+d) U
+e) R
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-035
+
+Question:
+Find the next letter in the series:
+A, D, I, P, ?
+
+Options:
+a) W
+b) X
+c) Y
+d) Z
+e) V
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-036
+
+Question:
+Find the next pair of letters in the series:
+AZ, BY, CX, DW, ?
+
+Options:
+a) FU
+b) EV
+c) EU
+d) EW
+e) DV
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-037
+
+Question:
+Find the next letter in the series:
+C, G, K, O, ?
+
+Options:
+a) R
+b) T
+c) S
+d) U
+e) Q
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-038
+
+Question:
+Find the next pair of letters in the series:
+AC, EG, IK, MO, ?
+
+Options:
+a) PR
+b) QS
+c) RT
+d) PS
+e) QR
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-039
+
+Question:
+Find the next letter in the series: W, Z, C, F, ?
+
+Options:
+a) H
+b) J
+c) I
+d) G
+e) K
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-040
+
+Question:
+In a secret code, BARK is written as DCTM. How is LEAF written in the same code?
+
+Options:
+a) MDZE
+b) NFBH
+c) OGDI
+d) NGCH
+e) NEBG
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-041
+
+Question:
+In a secret code, COLD is written as EQNF. What word is coded as VJG?
+
+Options:
+a) SHE
+b) TIE
+c) THE
+d) AND
+e) YOU
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-042
+
+Question:
+If LAMP is written as QXBJ and POST is written as JWKD, how is STOP written in the same code?
+
+Options:
+a) KDWJ
+b) JDWK
+c) KWDJ
+d) JKDW
+e) DJWK
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-043
+
+Question:
+In a number code where A=1, B=2, C=3 up to Z=26, what is the code for the word BRAIN?
+
+Options:
+a) 2-17-1-9-14
+b) 2-18-1-8-14
+c) 2-18-1-9-14
+d) 1-18-1-9-14
+e) 2-18-2-9-14
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-044
+
+Question:
+In a reverse cipher, PLANET is written as TENALP. How is BRIGHT written in this cipher?
+
+Options:
+a) THGRIB
+b) TGIRHB
+c) TGHIRB
+d) THGIRB
+e) HTGIRB
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-vr-045
+
+Question:
+In a code where each letter is replaced by its alphabet position (A=1, B=2 ... Z=26), which word corresponds to the code 7-18-15-23?
+
+Options:
+a) GLOW
+b) FROG
+c) CROW
+d) GROW
+e) FLOW
+
+
+READING COMPREHENSION
+========================================================================
+
+PASSAGE: The Estuary Watchers
+Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.
+
+The tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.
+
+"Watch the overhanging branch near the sandspit," Grandfather murmured, his voice scarcely louder than the rustling leaves. "She returns with the turn of the tide."
+
+Maya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon.
+(The passage above applies to the following questions until a new passage appears.)
+
+ID: scholarship-y6-rc-001
+
+Question:
+What is the main purpose of the opening paragraph?
+
+Options:
+a) To set a quiet, patient mood as the two characters wait
+b) To show how skilfully Maya handles the boat in difficult water
+c) To explain why Maya and her grandfather came to the estuary
+d) To introduce the osprey that the characters have come to watch
+e) To warn the reader that the estuary is a dangerous place
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-002
+
+Question:
+In paragraph 2, the stilt roots of the red mangroves are compared to 'the ribs of an upturned vessel'. This comparison mainly suggests that the roots:
+
+Options:
+a) were old and rotting after many years in salt water
+b) had been shaped by people to guide boats through the channel
+c) formed a curved, sheltering frame above the water
+d) grew in straight rows that made a path for the dinghy
+e) were packed so tightly that no fish could swim between them
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-003
+
+Question:
+What does Grandfather's behaviour reveal about his knowledge of the estuary?
+
+Options:
+a) He has read scientific records of the osprey's nesting habits.
+b) He expects the fish to leave the roots as the tide rises.
+c) He knows exactly where the fiddler crabs bury themselves.
+d) He is unsure when the osprey will arrive but hopes it will.
+e) He knows the osprey's routine and how it follows the tide.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-004
+
+Question:
+Why did the young fish gather among the mangrove roots rather than in the open bay?
+
+Options:
+a) The water in the bay was too cold for their survival.
+b) The sheltered root channels offered safety from predators.
+c) The outgoing tide had trapped them in shallow puddles.
+d) They fed exclusively on the falling mangrove leaves.
+e) The muddy silt was easier to navigate than clear ocean water.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-005
+
+Question:
+The word 'synchronous' in paragraph 2 most nearly means:
+
+Options:
+a) one after another in turn
+b) quick and frantic
+c) slow and stately
+d) at exactly the same time as one another
+e) faint and scattered
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-006
+
+Question:
+How does the author build suspense while the osprey waits to strike?
+
+Options:
+a) By describing the osprey circling the dinghy before it dives
+b) By describing a long, silent wait in which nobody moves
+c) By having Grandfather warn Maya that the dive could be dangerous
+d) By comparing the osprey to a hunter stalking its prey
+e) By switching quickly between the osprey and the fish
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-007
+
+Question:
+In the final sentence, the estuary is described as 'an intricate, living clockwork driven by the moon'. This metaphor suggests that:
+
+Options:
+a) boats and engines have disturbed the balance of coastal life
+b) the estuary is dull and repeats itself in exactly the same way each day
+c) the wildlife can hunt only during the full moon
+d) human clocks measure the tides more accurately than animals can
+e) life in the estuary follows linked rhythms set by the moon's pull on the tides
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-008
+
+Question:
+Which pair of words best describes the overall tone of the passage?
+
+Options:
+a) Thoughtful and admiring
+b) Playful and light-hearted
+c) Tense and fearful
+d) Critical and demanding
+e) Indifferent and detached
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-009
+
+Question:
+What can be inferred from the 'quiet signal they had shared since she was six years old'?
+
+Options:
+a) Maya has been learning to row for six years.
+b) Maya and her grandfather have long watched wildlife together and trust each other's signals.
+c) Maya was afraid of the water when she was six.
+d) Grandfather uses the signal only when danger is near.
+e) Maya and her grandfather often argue and use signs to avoid talking.
+
+------------------------------------------------------------------------
+
+PASSAGE: Architects of the Spinifex
+Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.
+
+Spinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, many species secrete a viscous, aromatic resin from glandular cells across their leaf sheaths. Researchers think this sticky varnish may serve a dual purpose: it is believed to seal the leaf surface against water loss during midsummer heatwaves, and it appears to discourage herbivorous insects that would otherwise feed upon the tough foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.
+
+For tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.
+
+Today, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering.
+(The passage above applies to the following questions until a new passage appears.)
+
+ID: scholarship-y6-rc-010
+
+Question:
+According to paragraph 2, how might the resin help spinifex survive?
+
+Options:
+a) It attracts insects that carry pollen between plants.
+b) It reflects sunlight and keeps the leaves cool.
+c) It may cut water loss and put insects off the leaves.
+d) It helps the roots hold the dunes together.
+e) It makes the dead leaves easier to burn.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-011
+
+Question:
+In paragraph 1, the word 'tenacity' most nearly means:
+
+Options:
+a) rapid growth after rain
+b) spiky, prickly texture
+c) ability to hold water
+d) bright seasonal colour
+e) stubborn endurance
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-012
+
+Question:
+What thermal property made spinifex pitch useful for Indigenous toolmaking?
+
+Options:
+a) It hardens when heated and softens when cooled.
+b) It softens when heated and hardens as it cools.
+c) It stays sticky at every temperature.
+d) It melts only at very high temperatures.
+e) It burns with a bright flame when warmed.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-013
+
+Question:
+Why are nanotechnology researchers interested in spinifex nanofibres?
+
+Options:
+a) They make latex and concrete lighter than before.
+b) They speed up the setting of concrete.
+c) They can only be grown in irrigated fields.
+d) They add strength and flexibility without adding much weight.
+e) They repel insects in the way the resin does.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-014
+
+Question:
+How is the passage organised?
+
+Options:
+a) The plant's adaptations, then its traditional uses, then modern research
+b) Traditional uses first, then the plant's adaptations, then modern research
+c) A problem, then a solution, then an evaluation of the solution
+d) Modern research first, then a history of the plant
+e) Four separate arguments for protecting the plant
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-015
+
+Question:
+Based on the text, what is likely to happen if spinifex disappeared from arid dune fields?
+
+Options:
+a) Insects that feed on tough foliage would lose their main food and decline.
+b) Other grasses would quickly spread and cover the dunes.
+c) Loose dunes would be exposed to wind erosion.
+d) Nanocellulose research would simply move to other plants.
+e) First Nations toolmakers would find a better adhesive.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-016
+
+Question:
+Which statement best sums up the author's view of spinifex in the final sentence?
+
+Options:
+a) Spinifex should be cleared so that grazing land can be improved.
+b) Spinifex is too complex for scientists to copy.
+c) Spinifex resin will soon replace all petroleum products.
+d) A plant once seen as a nuisance may now help build greener materials.
+e) Traditional uses of spinifex were more valuable than modern research.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-017
+
+Question:
+The cylindrical curling of spinifex leaves is an adaptation that helps the plant to:
+
+Options:
+a) lose less water to the wind and heat
+b) trap seeds from competing plants
+c) collect rainwater at the leaf tips
+d) stay cool by reflecting sunlight
+e) make the leaves harder for insects to bite
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-018
+
+Question:
+In paragraph 4, the phrase 'high aspect ratio' describes fibres that are:
+
+Options:
+a) heavy and cube-shaped
+b) mostly transparent
+c) very long compared with their width
+d) visible only from a high angle
+e) expensive to manufacture
+
+------------------------------------------------------------------------
+
+PASSAGE: In Defence of the Dark
+Look up into the night sky from any Australian metropolitan suburb and you are likely to count only a few dozen stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.
+
+Unlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.
+
+The ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.
+
+Reclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night.
+(The passage above applies to the following questions until a new passage appears.)
+
+ID: scholarship-y6-rc-019
+
+Question:
+What is the main argument of 'In Defence of the Dark'?
+
+Options:
+a) Cities should switch off all outdoor lighting once the sun has set.
+b) Brighter streetlights are the best way to protect people at night.
+c) Native wildlife should be moved away from built-up areas for good.
+d) Seeing the stars is more important than keeping people safe.
+e) Light pollution harms nature and culture, and can be sensibly reduced.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-020
+
+Question:
+Why does the author mention research about lighting and crime in paragraph 2?
+
+Options:
+a) To show that crime is rising quickly across Australia
+b) To challenge the belief that brighter lighting always makes places safer
+c) To prove that police need stronger floodlights for night patrols
+d) To show that criminals avoid dark country areas
+e) To argue that cameras cannot record under amber lighting
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-021
+
+Question:
+In paragraph 1, the phrase 'sickly orange smog' is used to describe skyglow. What does the metaphor suggest?
+
+Options:
+a) that city lights keep the air warm and clean
+b) that skyglow is a natural weather event of hot summers
+c) that artificial light spoils the night sky like a layer of dirty air
+d) that skyglow is a small problem that mainly bothers astronomers
+e) that the glow is produced by burning fuel
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-022
+
+Question:
+How does artificial lighting specifically threaten short-tailed shearwater fledglings?
+
+Options:
+a) It warms the ocean water until their fish prey swims away.
+b) It makes them delay feeding for hours so predators catch them.
+c) It prevents adult birds from laying eggs during springtime.
+d) It confuses young birds on their first flight, so they end up among roads and buildings.
+e) It blinds them permanently so they cannot hunt at sea.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-023
+
+Question:
+Which practical change does the author recommend for local councils?
+
+Options:
+a) Switching to blue-white LED lamps that shine in every direction
+b) Fitting hooded fixtures so street lamps shine only towards the ground
+c) Turning off all street lighting in suburbs after midnight
+d) Making streetlights much brighter so no shadows remain
+e) Replacing street lamps with floodlights on tall poles
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-024
+
+Question:
+What does the word 'diurnal' mean in paragraph 3?
+
+Options:
+a) Occurring or active during the daytime
+b) Happening once every seven days
+c) Relating exclusively to deep-sea animals
+d) Extremely fragile and easily damaged
+e) Characterised by unpredictable weather
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-025
+
+Question:
+How does the author answer the worry that reducing light pollution would make people less safe?
+
+Options:
+a) By arguing that crime is simply a normal part of city life
+b) By urging people to stay indoors once it gets dark outside
+c) By proposing that police carry torches instead of using streetlights
+d) By claiming that darkness has never once been linked to crime
+e) By saying that well-designed lighting can light footpaths without glare
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-026
+
+Question:
+The mention of Aboriginal navigators and living songlines in paragraph 1 mainly serves to:
+
+Options:
+a) prove that ancient navigation was simpler than modern GPS
+b) criticise early European explorers for ignoring Aboriginal stories
+c) show that star charts have changed completely over many centuries
+d) explain why astronomy departments urgently need more government funding
+e) show that the night sky has cultural value that skyglow is damaging
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-027
+
+Question:
+Which word best describes the author's attitude to solving light pollution?
+
+Options:
+a) Defeatist
+b) Alarmed
+c) Pragmatic
+d) Hesitant
+e) Nostalgic
+
+------------------------------------------------------------------------
+
+PASSAGE: Charting the Roaring Forties
+Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.
+
+The fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.
+
+Before marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and hours of intricate spherical trigonometry. By the 1850s, ships carried multiple spring-driven chronometers nestled in gimbals to buffer against the tossing sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold and penetrating damp disturbed their rates, and damp, salt-laden air could rust the fine steel parts inside.
+
+Navigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean.
+(The passage above applies to the following questions until a new passage appears.)
+
+ID: scholarship-y6-rc-028
+
+Question:
+Why did 19th-century sailing vessels choose to navigate the perilous Roaring Forties?
+
+Options:
+a) Relentless westerly winds allowed ships to achieve faster speeds, shortening the voyage.
+b) Warm equatorial currents prevented Antarctic icebergs from drifting northward.
+c) The British Admiralty strictly prohibited sailing north of the equator.
+d) The waters were shallow enough for emergency anchoring during storms.
+e) It was the only oceanic route where marine chronometers functioned reliably.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-029
+
+Question:
+According to the passage, how are time and longitude linked?
+
+Options:
+a) One hour of time difference equals one degree of longitude.
+b) Every four minutes of sailing equals one nautical mile.
+c) The angle of the noon sun gives the ship's longitude.
+d) Every four minutes of difference between local time and Greenwich time equals one degree of longitude.
+e) A ship's longitude equals its speed multiplied by the hours since noon.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-030
+
+Question:
+Why were marine chronometers likely to become inaccurate in the Roaring Forties?
+
+Options:
+a) Magnetic storms reversed their springs.
+b) Cold disturbed their rates and damp, salty air could rust their delicate parts.
+c) Their gimbals swung too freely and shook them apart.
+d) Captains often forgot to wind them during gales.
+e) The wind made the springs lose tension.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-031
+
+Question:
+In paragraph 4, 'dead reckoning' is best described as:
+
+Options:
+a) predicting currents from tide tables
+b) working out position from the course steered and the distance travelled
+c) fixing position from the angle of the noon sun
+d) following the flight paths of seabirds
+e) relying on radio signals from lighthouses
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-032
+
+Question:
+Which factor made the western entrance to Bass Strait especially dangerous for a captain who could not confirm his ship's position?
+
+Options:
+a) Compass needles failed near the coast, so no captain could trust his heading.
+b) Icebergs drifting north from Antarctica crowded the channel for most of the year.
+c) Reefs left little room for error, so a small slip in position could wreck a ship.
+d) Chronometers could not be carried into coastal waters, so timekeeping was impossible.
+e) Heavy swells forced captains to lower their sails and wait there for months.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-033
+
+Question:
+The word 'palpable' in the final paragraph most nearly means:
+
+Options:
+a) hidden from view
+b) loud enough to be heard far away
+c) so strong it could almost be felt
+d) short-lived and fading
+e) mixed with excitement
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-034
+
+Question:
+According to paragraph 3, why was the 'lunar distance' method hard to use?
+
+Options:
+a) It worked only in port, never at sea.
+b) It needed instruments that cost more than a chronometer.
+c) It gave latitude, not longitude.
+d) It was banned by the Admiralty after a shipwreck.
+e) It needed a clear view of the moon and hours of complicated calculation.
+
+------------------------------------------------------------------------
+
+ID: scholarship-y6-rc-035
+
+Question:
+Which conclusion about these voyages is best supported by the passage as a whole?
+
+Options:
+a) Safe arrival depended on skill and judgement because instruments could fail.
+b) Chronometers were of no practical use anywhere in the Southern Ocean.
+c) Dead reckoning was always more accurate than any chronometer on board.
+d) The route was so dangerous that very few ships ever attempted it.
+e) Captains relied mainly on luck because accurate navigation was impossible.

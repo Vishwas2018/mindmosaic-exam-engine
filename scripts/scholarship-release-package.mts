@@ -234,6 +234,26 @@ ${rec ? `<p class="rationale"><strong>Difficulty rationale:</strong> ${esc(rec.r
     items: manifest.filter((m) => m.inExternalPacket),
   }, null, 2)}\n`, "utf8");
 
+  const packetSha = sha256(packetText);
+  const prompt = [
+    "You are an independent blind reviewer of Year 6 scholarship-style practice questions written for Australian students aged about 11.",
+    "",
+    "Work in this order for EVERY item in the packet that follows: solve it yourself from the text only, then decide whether exactly one option is defensible, check any passage for factual errors or over-claims, judge whether the distractors are plausible and distinct, whether the correct option can be spotted merely by its length or by copying a passage sentence, and whether the content suits the age. Rate the reasoning difficulty a strong Year 6 candidate would meet: easy, medium or challenging.",
+    "",
+    "Reply with ONE JSON object and nothing else (no commentary, no markdown fences), covering all 80 items, in exactly this shape:",
+    "{",
+    '  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "' + packetSha + '" },',
+    '  "items": [ { "id": "scholarship-y6-vr-001", "myAnswer": "a|b|c|d|e|none", "reasoning": "one or two sentences", "singleDefensibleAnswer": true, "issues": "ambiguity, factual error, copied-sentence key, weak distractors, or an empty string", "difficulty": "easy|medium|challenging", "verdict": "PASS|REVISE|REJECT", "fix": "a precise fix if REVISE or REJECT, otherwise an empty string" } ]',
+    "}",
+    "",
+    "Set freshSession to true only if this conversation contains nothing but this message. Do not guess your model name; if you cannot tell, use the string unknown and the review will be set aside.",
+    "",
+    "PACKET FOLLOWS",
+    "",
+    packetText,
+  ].join("\n");
+  await writeFile(path.join(outDir, "external-review/prompt-with-packet.txt"), prompt, "utf8");
+
   console.log(JSON.stringify(bucketTotals));
 }
 
