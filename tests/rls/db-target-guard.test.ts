@@ -18,9 +18,9 @@ import {
   defaultScoringUrl,
   restoreEnv,
   snapshotEnv,
-} from "../../../tests/rls/support/db-target";
-import { connect, connectAsContentAnswerWriterRole, connectAsScoringRole, scoringDbUrl } from "../../../tests/rls/db";
-import { scopeEnvToFile } from "../../../tests/rls/support/scoped-env";
+} from "./support/db-target";
+import { connect, connectAsContentAnswerWriterRole, connectAsScoringRole, scoringDbUrl } from "./db";
+import { scopeEnvToFile } from "./support/scoped-env";
 
 const ISOLATED = "postgresql://postgres:postgres@127.0.0.1:58322/postgres";
 const names = ["RLS_TEST_DB_URL", "SUPABASE_DB_URL", "DATABASE_URL", "SCORING_DB_URL", "CONTENT_ANSWER_WRITER_DB_URL", "RLS_EXPECTED_DB_PORT"] as const;
