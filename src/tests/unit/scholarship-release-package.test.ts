@@ -73,3 +73,32 @@ describe("scholarship review package matches the current drafts", () => {
     expect(blocked).toHaveLength(35);
   });
 });
+
+describe("difficulty decision sheet", () => {
+  const lines = readFileSync(pkg("difficulty/difficulty-decision-sheet.csv"), "utf8").trim().split("\n");
+  const rows = lines.slice(1).map((line) => line.split(","));
+
+  it("covers all 160 items exactly once with every decision cell blank", () => {
+    expect(rows).toHaveLength(160);
+    expect(new Set(rows.map((r) => r[0])).size).toBe(160);
+    const status = JSON.parse(readFileSync(pkg("status.json"), "utf8")) as { items: { id: string }[] };
+    expect(new Set(rows.map((r) => r[0]))).toEqual(new Set(status.items.map((i) => i.id)));
+    // The last two columns (Vish's decision and notes) and the external reviewer's rating are empty: nothing is decided here.
+    for (const r of rows) {
+      expect(r[r.length - 1], r[0]).toBe("");
+      expect(r[r.length - 2], r[0]).toBe("");
+    }
+  });
+
+  it("gives every item the gate would block today an advisory label, and matches the estimator file", () => {
+    const blocked = rows.filter((r) => /^blocked_/.test(r[5]!));
+    expect(blocked).toHaveLength(78);
+    for (const r of blocked) expect(["easy", "medium", "challenging"], r[0]).toContain(r[7]);
+    const estimator = readFileSync(pkg("difficulty/estimator-all-160.csv"), "utf8").trim().split("\n").slice(1);
+    expect(estimator.filter((l) => /,blocked_/.test(l))).toHaveLength(78);
+  });
+
+  it("only ever offers the estimator's own label as the one that clears the gate", () => {
+    for (const r of rows.filter((x) => x[6] !== "")) expect(r[6], r[0]).toBe(r[4]);
+  });
+});

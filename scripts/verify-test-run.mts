@@ -39,12 +39,22 @@
  * after a red test step, and a guard that only runs when someone remembered a
  * YAML key is the same class of problem it exists to solve.
  */
-import { spawnSync } from "node:child_process";
-import { mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
+import { spawn } from "node:child_process";
+import {
+  copyFileSync,
+  createWriteStream,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 
-import { evaluateRun, type JsonReport } from "./test-run-report";
+import { describeExit, evaluateRun, type JsonReport } from "./test-run-report";
 
 interface ProjectSpec {
   /** vitest config to run. */
@@ -120,7 +130,23 @@ const reportPath = join(reportDir, "report.json");
 try {
   /* Two reporters: the default so a human still sees ordinary vitest output,
      and json so this script has something to check. */
-  const run = spawnSync(
+  const recordDir = process.env.TEST_RUN_RECORD_DIR;
+  const startedAt = new Date();
+  const stamp = startedAt.toISOString().replace(/[:.]/g, "-");
+  let outputText = "";
+  let logStream: ReturnType<typeof createWriteStream> | undefined;
+  if (recordDir !== undefined && recordDir !== "") {
+    mkdirSync(recordDir, { recursive: true });
+    logStream = createWriteStream(join(recordDir, `${projectName}-${stamp}.log`));
+  }
+  const keep = (chunk: Buffer, sink: NodeJS.WriteStream): void => {
+    const text = chunk.toString("utf8");
+    outputText += text;
+    logStream?.write(text);
+    sink.write(chunk);
+  };
+  const run = await new Promise<{ status: number | null; signal: string | null; error?: string }>((done) => {
+    const child = spawn(
     process.execPath,
     [
       join(repoRoot, "node_modules", "vitest", "vitest.mjs"),
@@ -133,8 +159,45 @@ try {
       ...project.args,
       ...passthrough,
     ],
-    { cwd: repoRoot, stdio: "inherit" },
-  );
+    { cwd: repoRoot, stdio: ["inherit", "pipe", "pipe"] },
+    );
+    child.stdout.on("data", (chunk: Buffer) => keep(chunk, process.stdout));
+    child.stderr.on("data", (chunk: Buffer) => keep(chunk, process.stderr));
+    child.on("error", (error) => done({ status: null, signal: null, error: String(error) }));
+    child.on("close", (status, signal) => done({ status, signal }));
+  });
+  logStream?.end();
+
+  /* Output is streamed to the console as it arrives AND kept, so the exit code, the signal and the full log survive the
+     run. Set TEST_RUN_RECORD_DIR to also write the log, a copy of the JSON report and a run record to disk: a worker
+     that dies without a word leaves nothing else behind. */
+  const record = (extra: Record<string, unknown>): void => {
+    if (recordDir === undefined || recordDir === "") return;
+    try {
+      copyFileSync(reportPath, join(recordDir, `${projectName}-${stamp}.report.json`));
+    } catch {
+      /* no report to keep */
+    }
+    writeFileSync(
+      join(recordDir, `${projectName}-${stamp}.record.json`),
+      `${JSON.stringify(
+        {
+          project: projectName,
+          startedAt: startedAt.toISOString(),
+          finishedAt: new Date().toISOString(),
+          exitCode: run.status,
+          signal: run.signal,
+          exit: describeExit(run.status, run.signal),
+          spawnError: run.error ?? null,
+          node: process.version,
+          platform: process.platform,
+          ...extra,
+        },
+        null,
+        2,
+      )}\n`,
+    );
+  };
 
   let report: JsonReport;
   try {
@@ -143,6 +206,8 @@ try {
     /* No report at all is itself a complete-run failure, and must not be
        downgraded to "well, vitest exited 0". */
     console.error(`\nCould not read the vitest JSON report at ${reportPath}: ${String(cause)}`);
+    console.error(`vitest ended with ${describeExit(run.status, run.signal)}`);
+    record({ complete: false, problems: ["no readable JSON report"] });
     process.exit(1);
   }
 
@@ -150,8 +215,12 @@ try {
     expectedFiles,
     report,
     exitCode: run.status,
+    signal: run.signal,
+    ...(run.error === undefined ? {} : { spawnError: run.error }),
+    outputText,
     normalise,
   });
+  record({ complete: problems.length === 0, problems, filesExpected, filesReported, testsConcluded, testsTotal });
 
   if (problems.length > 0) {
     console.error(`\nINCOMPLETE TEST RUN (${projectName}):`);

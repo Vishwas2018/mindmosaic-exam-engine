@@ -19,6 +19,9 @@
  * longer fall back to a different database.
  */
 
+type Env = Readonly<Record<string, string | undefined>>;
+type MutableEnv = Record<string, string | undefined>;
+
 const LOCAL_HOSTS = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
 
 /** The documented default (supabase/config.toml `db.port`). Used only when nothing is configured at all. */
@@ -66,21 +69,21 @@ export function targetOf(label: string, url: string): DbTarget {
   return { host: host === "localhost" || host === "[::1]" || host === "::1" ? "127.0.0.1" : host, port };
 }
 
-export function primaryUrl(env: NodeJS.ProcessEnv = process.env): string {
+export function primaryUrl(env: Env = process.env): string {
   return env.RLS_TEST_DB_URL ?? DEFAULT_PRIMARY_URL;
 }
 
 /** A role-specific URL on the same host and port as the primary. */
-function derived(env: NodeJS.ProcessEnv, credential: string): string {
+function derived(env: Env, credential: string): string {
   const primary = new URL(primaryUrl(env));
   return `postgresql://${credential}@${primary.hostname}:${primary.port || "5432"}${primary.pathname || "/postgres"}`;
 }
 
-export function defaultScoringUrl(env: NodeJS.ProcessEnv = process.env): string {
+export function defaultScoringUrl(env: Env = process.env): string {
   return derived(env, SCORING_CREDENTIAL);
 }
 
-export function defaultContentAnswerWriterUrl(env: NodeJS.ProcessEnv = process.env): string {
+export function defaultContentAnswerWriterUrl(env: Env = process.env): string {
   return derived(env, WRITER_CREDENTIAL);
 }
 
@@ -88,7 +91,7 @@ export function defaultContentAnswerWriterUrl(env: NodeJS.ProcessEnv = process.e
  * Throws unless every configured database URL is local and names the primary host:port. Returns the single
  * target on success.
  */
-export function assertSingleLocalTarget(env: NodeJS.ProcessEnv = process.env): DbTarget {
+export function assertSingleLocalTarget(env: Env = process.env): DbTarget {
   const primary = targetOf("RLS_TEST_DB_URL", primaryUrl(env));
 
   const pin = env.RLS_EXPECTED_DB_PORT;
@@ -117,12 +120,12 @@ export const GUARDED_ENV_VARIABLES = DB_URL_VARIABLES;
 
 export type EnvSnapshot = ReadonlyMap<string, string | undefined>;
 
-export function snapshotEnv(names: readonly string[] = GUARDED_ENV_VARIABLES, env: NodeJS.ProcessEnv = process.env): EnvSnapshot {
+export function snapshotEnv(names: readonly string[] = GUARDED_ENV_VARIABLES, env: Env = process.env): EnvSnapshot {
   return new Map(names.map((name) => [name, env[name]]));
 }
 
 /** Puts every snapshotted variable back exactly: restored if it was set, removed if it was not. */
-export function restoreEnv(snapshot: EnvSnapshot, env: NodeJS.ProcessEnv = process.env): void {
+export function restoreEnv(snapshot: EnvSnapshot, env: MutableEnv = process.env): void {
   for (const [name, value] of snapshot) {
     if (value === undefined) delete env[name];
     else env[name] = value;
