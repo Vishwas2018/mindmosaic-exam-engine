@@ -166,6 +166,9 @@ export function selectSourceQuestions(
   const formCount = Math.min(Math.max(options.formCount ?? 1, 1), MAX_FORMS);
   const form = Math.min(Math.max(options.form ?? 0, 0), formCount - 1);
 
+  /* A pattern that does not offer a practice module never yields a partial draw, whatever the caller asks. */
+  const asPracticeModule = options.asPracticeModule === true && pattern.practiceModule !== "not_offered";
+
   const pool = sourcePool(bank, source);
   const allUnits = buildSelectionUnits(pool, pattern.stimulusRule);
   const units = shuffleUnits(
@@ -196,7 +199,7 @@ export function selectSourceQuestions(
     };
   }
 
-  if (!options.asPracticeModule) {
+  if (!asPracticeModule) {
     return {
       sourceId: source.id,
       requested: source.count,
@@ -237,6 +240,7 @@ export function selectPatternQuestions(
     selectSourceQuestions(bank, pattern, source, seed, { ...options, form, formCount }),
   );
 
+  const asPracticeModule = options.asPracticeModule === true && pattern.practiceModule !== "not_offered";
   const questions = sources.flatMap((source) => source.questions);
   const availableCount = questions.length;
 
@@ -244,7 +248,7 @@ export function selectPatternQuestions(
      asked for the reduced practice module, one unsatisfied source fails the
      whole draw. */
   const allSatisfied = sources.every((source) => source.satisfied);
-  if (!allSatisfied && !options.asPracticeModule) {
+  if (!allSatisfied && !asPracticeModule) {
     return {
       ok: false,
       reason: "insufficient_questions",

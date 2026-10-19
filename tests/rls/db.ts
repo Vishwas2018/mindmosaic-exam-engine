@@ -1,16 +1,25 @@
 import { Client } from "pg";
 
+import {
+  assertSingleLocalTarget,
+  defaultContentAnswerWriterUrl,
+  defaultScoringUrl,
+  primaryUrl,
+} from "./support/db-target";
+
 // Matches the `db.port` in supabase/config.toml. Shifted off Supabase's
 // 543xx defaults because other local Supabase stacks may already be
 // running on this machine, and because 55271-55370 falls inside a Windows
 // TCP excluded-port range on at least one dev box.
-const DEFAULT_DB_URL = "postgresql://postgres:postgres@127.0.0.1:56322/postgres";
-
+//
+// The primary URL, and the defaults of the two dedicated roles derived from it, live in ./support/db-target.ts
+// together with the guard that refuses to run unless every database variable names the same local database.
 export function dbUrl(): string {
-  return process.env.RLS_TEST_DB_URL ?? DEFAULT_DB_URL;
+  return primaryUrl();
 }
 
 export async function connect(): Promise<Client> {
+  assertSingleLocalTarget();
   const client = new Client({ connectionString: dbUrl() });
   /* An 'error' event with no listener is an uncaught exception, not a rejected
      promise — in a vitest fork that kills the worker, and a killed worker is
@@ -32,11 +41,9 @@ export async function connect(): Promise<Client> {
  * impersonation would fail for a reason that has nothing to do with the
  * privileges under test.
  */
-const DEFAULT_SCORING_DB_URL =
-  "postgresql://mindmosaic_scoring:local-dev-scoring-not-a-secret@127.0.0.1:56322/postgres";
-
 export function scoringDbUrl(): string {
-  return process.env.SCORING_DB_URL ?? DEFAULT_SCORING_DB_URL;
+  assertSingleLocalTarget();
+  return process.env.SCORING_DB_URL ?? defaultScoringUrl();
 }
 
 export async function connectAsScoringRole(): Promise<Client> {
@@ -70,11 +77,9 @@ export async function connectAsScoringRole(): Promise<Client> {
  * default written by `npm run content:answer-writer:bootstrap`. Same real-
  * connection reasoning as connectAsScoringRole above.
  */
-const DEFAULT_CONTENT_ANSWER_WRITER_DB_URL =
-  "postgresql://mindmosaic_content_answer_writer:local-dev-content-answer-writer-not-a-secret@127.0.0.1:56322/postgres";
-
 export function contentAnswerWriterDbUrl(): string {
-  return process.env.CONTENT_ANSWER_WRITER_DB_URL ?? DEFAULT_CONTENT_ANSWER_WRITER_DB_URL;
+  assertSingleLocalTarget();
+  return process.env.CONTENT_ANSWER_WRITER_DB_URL ?? defaultContentAnswerWriterUrl();
 }
 
 export async function connectAsContentAnswerWriterRole(): Promise<Client> {

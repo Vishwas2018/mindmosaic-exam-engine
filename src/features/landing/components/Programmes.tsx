@@ -67,12 +67,13 @@ export function Programmes() {
    * and a contiguous range cannot say that.
    */
   const covers = (item: Programme) => {
-    if (item.status !== "available") return false;
+    if (item.status === "in_development") return false;
     if (item.coveredYears) return item.coveredYears.includes(year);
     return year >= item.from && year <= item.to;
   };
   const activeCovered = covers(active);
   const activeInDevelopment = active.status === "in_development";
+  const activeLimited = active.status === "limited";
   const yearLabel = `Year ${year}`;
 
   const years = programmes.groups.find((entry) => entry.id === group)?.years ?? [];
@@ -207,11 +208,13 @@ export function Programmes() {
                   >
                     {inDevelopment
                       ? "In development"
-                      : covered
-                        ? selected
-                          ? "Selected"
-                          : item.category
-                        : "Unavailable"}
+                      : !covered
+                        ? "Unavailable"
+                        : item.status === "limited"
+                          ? "Limited"
+                          : selected
+                            ? "Selected"
+                            : item.category}
                   </span>
                 </button>
               );
@@ -299,31 +302,39 @@ export function Programmes() {
                 scope.
               </p>
             ) : (
-              !activeCovered && (
+              <>
+                {activeLimited && activeCovered && (
+                  <p className="mt-6 rounded-[10px] border border-mm-tint-line bg-mm-tint-soft px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
+                    <strong>Limited.</strong> Some learning content is live for {yearLevelLabel(active)}; the wider
+                    programme is still being developed.
+                  </p>
+                )}
+                {!activeCovered && (
                 <p className="mt-6 rounded-[10px] border border-mm-alert-line bg-mm-alert px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
                   <strong>Not available for {yearLabel}.</strong> Choose a year level within this programme’s
                   coverage, or explore another pathway.
                 </p>
-              )
+                )}
+              </>
             )}
 
             {/*
               The generic "View practice options" primary CTA is suppressed
-              for an in-development programme: offering a practice entry
+              for an in-development or limited programme: offering a practice entry
               directly under a panel that has just said there is no content
               is the affordance half of C-01. The programme's own secondary
               CTA stays — it points at a marketing page (/learn,
               /exam-preparation), not at a session.
             */}
             <div className="mt-7 flex flex-wrap gap-2.5">
-              {!activeInDevelopment && (
+              {active.status === "available" && (
                 <Link href={programmes.primaryCta.href} className={mmButton()}>
                   {programmes.primaryCta.label}
                 </Link>
               )}
               <Link
                 href={active.cta.href}
-                className={mmButton({ variant: activeInDevelopment ? undefined : "outline" })}
+                className={mmButton({ variant: active.status === "available" ? "outline" : undefined })}
               >
                 {active.cta.label}
               </Link>

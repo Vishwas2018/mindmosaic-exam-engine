@@ -1,9 +1,11 @@
+import { computeSolver, solverAnswerError } from "../correctness/solver-verification";
 import { verifyUpstreamGateChain } from "../gate-chain";
 import type { CandidateQuestion } from "../ingestion/candidate-question";
 import type { CandidateProvenance } from "../provenance";
 import { hashJson } from "../provenance";
 import type { FactoryRepository } from "../storage";
 import type { PublicationIssue } from "./types";
+import { isScholarshipAttestedItem, verifyFirstPartyScholarshipAttestation } from "../correctness/scholarship-attestation";
 
 export interface PublicationEligibilityContext {
   readonly candidateId: string;
@@ -23,6 +25,23 @@ export type PublicationEligibilityResult =
 
 function issue(code: PublicationIssue["code"], path: string, message: string): PublicationIssue {
   return { code, path, message };
+}
+
+/**
+ * Extracts the primary numeric token from an option or text string.
+ * Handles negative signs, currency symbols, thousands separators (commas),
+ * decimals, and extracts only the first numeric token to prevent digit
+ * concatenation (e.g. "2 hours 30 minutes" -> 2, not 230).
+ */
+// Legacy display parser only. Never use this helper as correctness evidence.
+export function parsePrimaryNumericToken(text: string): number | null {
+  const trimmed = text.trim();
+  if (!trimmed) return null;
+  const match = trimmed.match(/[-+]?(?:\$\s*)?\d+(?:,\d{3})*(?:\.\d+)?/);
+  if (!match) return null;
+  const cleaned = match[0].replace(/[$,\s]/g, "");
+  const num = Number(cleaned);
+  return Number.isFinite(num) ? num : null;
 }
 
 /**
@@ -82,16 +101,40 @@ export async function checkPublicationEligibility(
     );
   }
 
-  // P0-A: all five gates, per candidate. This previously re-verified only
-  // originality and difficulty, so a candidate whose correctness report said
-  // `review_required` — the gate declaring it could not establish
-  // correctness — published anyway. See
-  // `docs/reports/publication-288-posthoc-audit.md` §2 and
-  // `gate-chain/verify-gate-chain.ts`.
+  if (question.solverParams !== undefined) {
+    const computed = computeSolver(question.solverParams);
+    const error = computed.ok ? solverAnswerError(question, computed.value) : computed.error;
+    if (error) issues.push(issue("publication_solver_verification_failed", "solverParams", error));
+  }
+
   const gateChain = await verifyUpstreamGateChain({ candidateId, provenance }, repository);
   if (!gateChain.ok) {
     for (const entry of gateChain.failures) {
       issues.push(issue("publication_upstream_evidence_invalid", entry.path, entry.message));
+    }
+  }
+
+  if (isScholarshipAttestedItem(question)) {
+    // Scholarship arithmetical-reasoning / deduction items are verified only by the first-party,
+    // hash-bound attestation; candidate-supplied solver logic is never trusted for them.
+    if (question.solverParams !== undefined) {
+      issues.push(
+        issue(
+          "publication_solver_verification_failed",
+          "solverParams",
+          "Candidate-supplied solverParams are not permitted for first-party attested scholarship items.",
+        ),
+      );
+    }
+    const scholarshipAttestation = verifyFirstPartyScholarshipAttestation(question, provenance.contentHash);
+    if (!scholarshipAttestation.ok) {
+      issues.push(
+        issue(
+          "publication_solver_verification_failed",
+          "scholarship_attestation",
+          scholarshipAttestation.message ?? "First-party scholarship attestation failed",
+        ),
+      );
     }
   }
 

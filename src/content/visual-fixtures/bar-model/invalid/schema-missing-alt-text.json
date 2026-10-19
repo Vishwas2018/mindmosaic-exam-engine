@@ -1,0 +1,51 @@
+{
+  "why": "Every visual needs alt text.",
+  "layer": "schema",
+  "errorCodes": [
+    "invalid_type"
+  ],
+  "visual": {
+    "id": "bar-model-invalid-missing-alt",
+    "type": "bar_model",
+    "title": "Lamingtons in a tray",
+    "data": {
+      "layout": {
+        "mode": "schematic"
+      },
+      "bars": [
+        {
+          "id": "tray",
+          "label": "Tray",
+          "segments": [
+            {
+              "id": "dark",
+              "label": "Dark",
+              "value": 18,
+              "display": "value"
+            },
+            {
+              "id": "pink",
+              "label": "Pink",
+              "unknown": "p",
+              "display": "unknown",
+              "target": true
+            }
+          ]
+        }
+      ],
+      "braces": [
+        {
+          "id": "whole",
+          "kind": "total",
+          "label": "All",
+          "value": 45,
+          "display": "value",
+          "spans": [
+            "dark",
+            "pink"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import type { ExamStyle, YearLevel } from "@/schemas/question.schema";
 
 import { examPatternSchema, type ExamPattern } from "./exam-pattern";
+import { parseProgrammeId } from "./programme-id";
 
 /**
  * Every practice-paper shape the product offers, transcribed from
@@ -398,6 +399,126 @@ function amcPattern(
   };
 }
 
+const SCHOLARSHIP_PATTERNS = [
+  {
+    id: "scholarship-y6-verbal-reasoning-full",
+    label: "Scholarship-style Year 6 Verbal Reasoning — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
+    practiceModule: "not_offered",
+    guestAccess: "signed_in_only",
+    questionCount: 45,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "verbal-reasoning",
+        programmeId: "scholarship-y6-verbal-reasoning",
+        count: 45,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-numerical-reasoning-full",
+    label: "Scholarship-style Year 6 Numerical Reasoning — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
+    practiceModule: "not_offered",
+    guestAccess: "signed_in_only",
+    questionCount: 40,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "numerical-reasoning",
+        programmeId: "scholarship-y6-numerical-reasoning",
+        count: 40,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-reading-full",
+    label: "Scholarship-style Year 6 Reading Comprehension — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
+    practiceModule: "not_offered",
+    guestAccess: "signed_in_only",
+    questionCount: 35,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "reading",
+        programmeId: "scholarship-y6-reading",
+        count: 35,
+        filters: { typeIn: ["reading_comprehension"] },
+        display: "merged",
+      },
+    ],
+    /* Four whole passages of eight or nine questions: a passage is never served with orphaned or missing questions. */
+    stimulusRule: {
+      selectWholeGroup: true,
+      questionsPerStimulus: [8, 9],
+      distinctStimuli: [4, 4],
+    },
+  },
+  {
+    id: "scholarship-y6-mathematics-full",
+    label: "Scholarship-style Year 6 Mathematics — Full-Length Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
+    practiceModule: "not_offered",
+    guestAccess: "signed_in_only",
+    questionCount: 40,
+    timeMinutes: 30,
+    sources: [
+      {
+        id: "mathematics",
+        programmeId: "scholarship-y6-mathematics",
+        count: 40,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "merged",
+      },
+    ],
+  },
+  {
+    id: "scholarship-y6-written-expression-full",
+    label: "Scholarship-style Year 6 Written Expression — Timed Practice",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "full_length_practice",
+    basis: "internal",
+    adaptations: ["no_planning_screen", "parent_marked_rubric", "print_prompt_default", "unofficial_paper_shape"],
+    practiceModule: "not_offered",
+    guestAccess: "signed_in_only",
+    questionCount: 1,
+    timeMinutes: 15,
+    sources: [
+      {
+        id: "writing",
+        programmeId: "scholarship-y6-writing",
+        count: 1,
+        filters: { typeIn: ["essay"] },
+        display: "merged",
+      },
+    ],
+    status: "deferred",
+  },
+] as const;
+
 /**
  * Validated at module load, not only in a test: an invalid registry should be
  * a boot failure everywhere it is imported, rather than something the suite
@@ -419,6 +540,7 @@ export const EXAM_PATTERNS: readonly ExamPattern[] = validateRegistry([
   ...NAPLAN_PATTERNS,
   ...ICAS_PATTERNS,
   ...AMC_PATTERNS,
+  ...SCHOLARSHIP_PATTERNS,
 ]);
 
 /** Patterns a child can actually sit — deferred entries excluded. */
@@ -428,6 +550,23 @@ export const STARTABLE_EXAM_PATTERNS: readonly ExamPattern[] = EXAM_PATTERNS.fil
 
 export function getExamPattern(patternId: string): ExamPattern | undefined {
   return EXAM_PATTERNS.find((pattern) => pattern.id === patternId);
+}
+
+/**
+ * The one named paper a (year, style, subject) cell is sat as, for styles whose content is sat only as a whole paper
+ * (scholarship). Undefined for every other cell, which keeps its generic practice builder.
+ */
+export function findPaperForCell(cell: {
+  readonly yearLevel: number;
+  readonly examStyle: string;
+  readonly subject: string;
+}): ExamPattern | undefined {
+  if (cell.examStyle !== "scholarship_style") return undefined;
+  return EXAM_PATTERNS.find((pattern) => {
+    if (pattern.examStyle !== cell.examStyle || pattern.yearLevel !== cell.yearLevel || pattern.status !== "available") return false;
+    const scope = parseProgrammeId(pattern.sources[0].programmeId);
+    return scope?.subject === cell.subject && pattern.sources.length === 1;
+  });
 }
 
 /**
@@ -449,6 +588,7 @@ const STYLE_ORDER: readonly ExamStyle[] = [
   "naplan_style",
   "icas_style",
   "amc_style",
+  "scholarship_style",
 ];
 
 export function groupExamPatterns(

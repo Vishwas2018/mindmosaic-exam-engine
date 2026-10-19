@@ -48,6 +48,12 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run validate:questions
+      - run: npm run content:validate-roadmap-drafts
+      - run: npm run content:verify-roadmap-amc-answers
+      # bar_model fixtures: every valid example solves to its exact target and
+      # every invalid one is rejected by its intended layer (schema,
+      # structural or mathematical). Phase 1 is render-only; no question uses it.
+      - run: npm run visuals:validate-bar-models
       - run: npm run check:answers -- --include-published
       # Enforced promotion gate over the pre-promotion set (everything under
       # content/manual-questions not yet promoted): composition/schema
@@ -63,6 +69,8 @@ jobs:
       # recompute, and the candidate/answer split holds. No database needed —
       # the projected-rows half runs in the `rls` job below, where one exists.
       - run: npm run projection:verify
+      - run: npm run content:verify-publication
+      - run: npm run audit:bank
       # `test:ci`, not `test`. A vitest worker fork can exit mid-run, and vitest
       # reports the crashed file as MISSING rather than failing — "Test Files 11
       # passed (12)" with every word saying passed, and once, observed here, with
@@ -70,6 +78,23 @@ jobs:
       # every test file on disk reported and every test reached a terminal
       # status. See scripts/verify-test-run.mts.
       - run: npm run test:ci
+
+  # Scholarship draft validation (schema, solvers, answer positions, stems, encoding, runtime isolation).
+  # Blocking: a red run fails the workflow. The repository owner must also add `scholarship-drafts` to the required
+  # status checks on dev and main (branch protection lists core, e2e, e2e-auth and rls today); see
+  # docs/reviews/scholarship-2026-10-18/BRANCH-PROTECTION.md. Until then a red job is visible but does not by itself
+  # block a merge.
+  scholarship-drafts:
+    name: scholarship-drafts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run content:validate-scholarship-drafts
 
   # Infra-heavy (Docker + a real local Postgres via the Supabase CLI) —
   # kept as its own job so a Docker-daemon hiccup or a slow container pull
@@ -127,6 +152,9 @@ jobs:
         env:
           SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       - run: npm run migrations:status
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
+      - run: npm run programmes:check-gates
         env:
           SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
       # Guarded, for the reason given on `test:ci` in the core job — and with

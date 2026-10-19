@@ -6,7 +6,6 @@ import Link from "next/link";
 import { MindMosaicLogo } from "@/components/branding";
 
 import { closing, footer, routes, SUPPORT_EMAIL } from "../content";
-import { useMotionLevel } from "../motion/useMotionLevel";
 import { mmButton, MosaicRule } from "./primitives";
 
 /** The tinted closing band: copy left, wide image + mosaic rule right. */
@@ -62,31 +61,20 @@ export function ClosingCta() {
  * sitewide footer — every href here must resolve to a real route.
  *
  * Components/Site Footer.dc.html: the mosaic strip sits full-bleed at the
- * very top edge (not inset in the padded column grid), and a light sheen
- * sweeps across it on a 5.2s loop — MOTION_SPEC.md effect 9, "Expressive
- * only". `pointer-events-none` and `aria-hidden` keep it decorative.
+ * very top edge (not inset in the padded column grid). It is still — the
+ * looping sheen it once carried was removed in the October 2026 redesign,
+ * which allows no endless motion. `aria-hidden` keeps it decorative.
  */
 export function SiteFooter() {
-  const level = useMotionLevel();
-
   return (
     <footer className="bg-mm-page pb-6 text-mm-ink-soft">
       <div aria-hidden="true" className="relative h-2.5 overflow-hidden">
         <MosaicRule tiles={footer.tiles} className="h-full gap-0" tileClassName="rounded-none" />
-        {level === "expressive" && (
-          <span
-            className="pointer-events-none absolute inset-0 mm-footer-shine"
-            style={{
-              background:
-                "linear-gradient(100deg, transparent 35%, rgba(255,255,255,0.6) 50%, transparent 65%)",
-            }}
-          />
-        )}
       </div>
 
       <div className="mm-width pt-[clamp(48px,6vw,80px)]">
-        <div className="grid gap-9 [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]">
-          <div className="grid content-start gap-4 sm:col-span-2 sm:max-w-[420px]">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-9 sm:[grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]">
+          <div className="col-span-2 grid content-start gap-4 sm:max-w-[420px]">
             <Link href="/" aria-label="MindMosaic home" className="w-fit">
               <MindMosaicLogo size="md" />
             </Link>
@@ -116,9 +104,9 @@ export function SiteFooter() {
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-mm-line pt-6 text-[13.5px] text-mm-muted">
           <span>{footer.copyright}</span>
-          <span className="flex gap-5">
+          <span className="flex flex-wrap gap-x-5 gap-y-2">
             {footer.legalLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="text-mm-muted hover:text-mm-brand">
+              <Link key={link.label} href={link.href} className="whitespace-nowrap text-mm-muted hover:text-mm-brand">
                 {link.label}
               </Link>
             ))}

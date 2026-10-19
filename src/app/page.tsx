@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
 
 import { SiteFooter } from "@/features/landing/components/Closing";
+import { ChapterFourProgressParents } from "@/features/landing/components/ChapterFourProgressParents";
+import { ChapterOneIntro } from "@/features/landing/components/ChapterOneIntro";
+import { ChapterThreeHowItWorks } from "@/features/landing/components/ChapterThreeHowItWorks";
+import { ChapterTwoPrograms } from "@/features/landing/components/ChapterTwoPrograms";
 import { FaqAndStart } from "@/features/landing/components/FaqAndStart";
 import { ForParents } from "@/features/landing/components/ForParents";
-import { Hero } from "@/features/landing/components/Hero";
-import { LearningDemo } from "@/features/landing/components/LearningDemo";
-import { ProgramHighlights } from "@/features/landing/components/ProgramHighlights";
 import { QualityBand } from "@/features/landing/components/QualityBand";
 import { SiteNav } from "@/features/landing/components/SiteNav";
+import { TrustAndCare } from "@/features/landing/components/TrustAndCare";
 import { sections, type SectionKey } from "@/features/landing/content";
 
 export const metadata: Metadata = {
   title: "Learning, Practice & Exam Preparation for Australian Students | MindMosaic",
   description:
-    "Curriculum learning, focused practice and realistic exam preparation for Australian students — from foundational skills to NAPLAN-, ICAS-, AMC- and selective-entry-style challenges.",
+    "Learning, practice and exam preparation for Australian students: clear lessons, original questions, worked explanations and a parent progress view. NAPLAN-style and ICAS-style practice for Years 3 and 5 is open now.",
   openGraph: {
     title: "MindMosaic — Learn with purpose. Practise with confidence.",
     description:
-      "Curriculum learning, focused practice and realistic exam preparation for Australian students across primary and secondary years.",
+      "Clear lessons, original questions, worked explanations and a parent progress view for Australian students.",
     type: "website",
   },
 };
@@ -26,20 +28,15 @@ export const metadata: Metadata = {
  * Page composition config — `sections` (content.ts) controls both order and
  * visibility. Adding, removing, reordering, or toggling a section is a
  * content.ts edit; this map is only the key -> component lookup.
- *
- * Six sections, matching Public/Home.dc.html exactly (see content.ts's
- * header comment). The other marketing routes' sections (Credibility,
- * Programmes, HowItWorks, Tutorials, Showcase, QuestionTypes,
- * LearningHub, Quality, Audiences, Plans, Resources) are unchanged and
- * still render on those routes — they're just not part of this page
- * anymore.
  */
 const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
-  hero: Hero,
-  learningDemo: LearningDemo,
-  programHighlights: ProgramHighlights,
+  hero: ChapterOneIntro,
+  chapterTwo: ChapterTwoPrograms,
+  chapterThree: ChapterThreeHowItWorks,
+  chapterFour: ChapterFourProgressParents,
   forParents: ForParents,
   qualityBand: QualityBand,
+  trustAndCare: TrustAndCare,
   faqAndStart: FaqAndStart,
   footer: SiteFooter,
 };
@@ -47,7 +44,7 @@ const sectionComponents: Record<SectionKey, () => React.JSX.Element | null> = {
 export default function HomePage() {
   return (
     <div className="lp-root min-h-screen">
-      <SiteNav />
+      <SiteNav overlay />
       <main id="main-content">
         {sections
           .filter((section) => section.enabled && section.key !== "footer")

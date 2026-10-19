@@ -30,8 +30,9 @@ describe("questionRendererRegistry", () => {
 });
 
 describe("visualRendererRegistry", () => {
-  it("resolves a dedicated renderer for all 10 visual types", () => {
-    expect(visualRendererRegistry.supportedTypes).toHaveLength(10);
+  it("resolves a dedicated renderer for all 11 visual types", () => {
+    expect(VISUAL_TYPES).toHaveLength(11);
+    expect(visualRendererRegistry.supportedTypes).toHaveLength(VISUAL_TYPES.length);
     for (const type of VISUAL_TYPES) {
       expect(visualRendererRegistry.supports(type), type).toBe(true);
       expect(visualRendererRegistry.resolve(type), type).not.toBe(

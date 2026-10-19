@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
 import { examSelectionConfigSchema } from "@/features/exam-engine/scoring/server-scoring-contract";
+import { performanceBand } from "./performance-band";
 
 /**
  * Pure summarisation of a child's stored exam attempts for the parent
@@ -55,6 +56,7 @@ export interface ParentAttemptRow {
   result: unknown;
   /** exam_sessions.config jsonb for the attempt's session, if readable. */
   sessionConfig: unknown;
+  mode?: string;
 }
 
 export interface AttemptSummary {
@@ -69,6 +71,7 @@ export interface AttemptSummary {
   totalQuestions: number;
   attemptedQuestions: number;
   pendingManualReview: boolean;
+  mode?: string;
 }
 
 export interface SubjectSummary {
@@ -167,9 +170,24 @@ interface ParsedAttempt {
   submittedAtMs: number;
 }
 
-function attemptLabel(sessionConfig: unknown): string {
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isConfidenceAttempt(row: ParentAttemptRow): boolean {
+  if (row.mode === "confidence") return true;
+  if (isRecord(row.sessionConfig) && row.sessionConfig.confidenceMode === true) {
+    return true;
+  }
+  return false;
+}
+
+function attemptLabel(sessionConfig: unknown, mode?: string): string {
   const config = examSelectionConfigSchema.safeParse(sessionConfig);
-  return config.success ? describeConfig(config.data) : "Practice exam";
+  const base = config.success ? describeConfig(config.data) : "Practice exam";
+  const isConfidence =
+    mode === "confidence" || (config.success && config.data.confidenceMode === true);
+  return isConfidence ? `${base} (Confidence Mode)` : base;
 }
 
 function computeReadinessScore(parsed: ParsedAttempt[]): number | null {
@@ -279,7 +297,9 @@ export function buildChildSummary(
 
   parsed.sort((a, b) => b.submittedAtMs - a.submittedAtMs);
 
-  const percentages = parsed.map((a) => a.result.objectivePercentage);
+  const evaluableAttempts = parsed.filter((a) => !isConfidenceAttempt(a.row));
+
+  const percentages = evaluableAttempts.map((a) => a.result.objectivePercentage);
   const latestPercentage = percentages[0] ?? null;
   const previousPercentage = percentages[1] ?? null;
   const averagePercentage =
@@ -319,7 +339,7 @@ export function buildChildSummary(
     string,
     { earned: number; available: number; questionCount: number }
   >();
-  for (const attempt of parsed) {
+  for (const attempt of evaluableAttempts) {
     for (const [subject, row] of Object.entries(attempt.result.breakdowns.bySubject)) {
       const totals = subjectTotals.get(subject) ?? {
         earned: 0,
@@ -350,13 +370,14 @@ export function buildChildSummary(
       id: attempt.row.id,
       submittedAt: attempt.row.submittedAt,
       submittedAtLabel: DATE_FORMAT.format(new Date(attempt.submittedAtMs)),
-      label: attemptLabel(attempt.row.sessionConfig),
+      label: attemptLabel(attempt.row.sessionConfig, attempt.row.mode),
       percentage: attempt.result.objectivePercentage,
       marksEarned: attempt.result.objectiveMarksEarned,
       marksAvailable: attempt.result.objectiveMarksAvailable,
       totalQuestions: attempt.result.totalQuestions,
       attemptedQuestions: attempt.result.attemptedQuestions,
       pendingManualReview: attempt.result.manualReviewQuestions > 0,
+      mode: isConfidenceAttempt(attempt.row) ? "confidence" : "standard",
     }));
 
   const displayName = child.displayName?.trim() || "Your child";
@@ -379,7 +400,7 @@ export function buildChildSummary(
     weekActivity,
     subjects,
     recentAttempts,
-    readinessScore: computeReadinessScore(parsed),
+    readinessScore: computeReadinessScore(evaluableAttempts),
     topicsMasteredCount,
     observations: buildObservations({
       displayName,
@@ -391,15 +412,8 @@ export function buildChildSummary(
   };
 }
 
-/**
- * Performance band for a percentage, mirroring the dashboard mockup's
- * Strong / Good / Building / Needs practice labels.
- */
-export type PerformanceBand = "strong" | "good" | "building" | "focus";
-
-export function performanceBand(percentage: number): PerformanceBand {
-  if (percentage >= 80) return "strong";
-  if (percentage >= 65) return "good";
-  if (percentage >= 50) return "building";
-  return "focus";
-}
+export {
+  performanceBand,
+  PERFORMANCE_BAND_LABELS,
+  type PerformanceBand,
+} from "./performance-band";

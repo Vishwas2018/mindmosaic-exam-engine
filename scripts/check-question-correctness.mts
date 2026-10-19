@@ -50,13 +50,15 @@
  */
 
 import { fileURLToPath } from "node:url";
-import { factoryPublishedQuestions } from "../src/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "../src/content/questions/factory-pools";
 import { questionBank } from "../src/content/questions/question-bank";
 import type { Question } from "../src/schemas/question.schema";
 import type { VisualAsset } from "../src/schemas/visual.schema";
 import { moreThanTwicePredicate } from "./lib/twice-predicate";
 
-interface CheckOutcome {
+import { computeSolver, solverAnswerError } from "../src/features/question-factory/correctness/solver-verification";
+
+export interface CheckOutcome {
   /** True when at least one independent computation verified the answer key. */
   computed: boolean;
   failures: string[];
@@ -1766,6 +1768,44 @@ interface Report {
   failures: number;
 }
 
+export function evaluateQuestionCorrectness(question: Question): CheckOutcome {
+  const result = outcome();
+  structuralChecks(question, result);
+  if ("solverParams" in question && question.solverParams !== undefined) {
+    const computed = computeSolver(question.solverParams);
+    const error = computed.ok ? solverAnswerError(question, computed.value) : computed.error;
+    if (error) result.failures.push(error);
+    else result.computed = true;
+    return result;
+  }
+
+
+  if (question.answerKey.kind === "manual") {
+    if (question.answerKey.rubric.trim().length < 40) {
+      result.failures.push("manual rubric is too short");
+    }
+  } else {
+    checkNumberEntry(question, result);
+    checkOptionQuestion(question, result);
+    checkTrueFalse(question, result);
+    checkFillBlank(question, result);
+    checkDropdown(question, result);
+    checkMatching(question, result);
+    checkOrdering(question, result);
+    checkLabelDiagram(question, result);
+    checkHotspot(question, result);
+    checkDragDrop(question, result);
+
+    if (!result.computed) {
+      result.warnings.push(
+        "correctness rests on language semantics or diagram meaning; requires editorial review",
+      );
+    }
+  }
+
+  return result;
+}
+
 const isMainModule = process.argv[1] !== undefined && fileURLToPath(import.meta.url) === process.argv[1];
 
 if (isMainModule) {
@@ -1788,34 +1828,16 @@ const report: Report = {
 const failedQuestions: string[] = [];
 
 for (const question of bankUnderCheck) {
-  const result = outcome();
-  structuralChecks(question, result);
+  const result = evaluateQuestionCorrectness(question);
 
   if (question.answerKey.kind === "manual") {
     report.manualReview += 1;
-    if (question.answerKey.rubric.trim().length < 40) {
-      result.failures.push("manual rubric is too short");
-    }
   } else {
     report.objective += 1;
-    checkNumberEntry(question, result);
-    checkOptionQuestion(question, result);
-    checkTrueFalse(question, result);
-    checkFillBlank(question, result);
-    checkDropdown(question, result);
-    checkMatching(question, result);
-    checkOrdering(question, result);
-    checkLabelDiagram(question, result);
-    checkHotspot(question, result);
-    checkDragDrop(question, result);
-
     if (result.computed) {
       report.computed += 1;
     } else {
       report.editorial += 1;
-      result.warnings.push(
-        "correctness rests on language semantics or diagram meaning; requires editorial review",
-      );
     }
   }
 

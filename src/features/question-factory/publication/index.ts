@@ -6,7 +6,8 @@
  * module's convention in this codebase.
  */
 export { assemblePublishedQuestions } from "./assemble-published-bank";
-export type { AssembledPublishedBank } from "./assemble-published-bank";
+export type { AssembledPublishedBank, AssemblyOptions } from "./assemble-published-bank";
+export { SCHOLARSHIP_QUESTION_ID, scholarshipStrictProblem } from "./assemble-published-bank";
 export { buildPublishedQuestion } from "./build-published-question";
 export type { BuildPublishedQuestionOutcome } from "./build-published-question";
 export { checkPublicationEligibility } from "./eligibility";

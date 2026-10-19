@@ -25,6 +25,7 @@ export const PUBLICATION_ISSUE_CODES = [
   "publication_production_id_collision",
   "publication_id_reused_with_different_content",
   "publication_repository_error",
+  "publication_solver_verification_failed",
 ] as const;
 export type PublicationIssueCode = (typeof PUBLICATION_ISSUE_CODES)[number];
 

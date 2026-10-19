@@ -56,6 +56,10 @@ export default defineConfig({
       // Billing enforcement stays off (default) for this mission's scope —
       // see docs/testing/playwright-auth-test-data-guide.md.
       BILLING_ENFORCEMENT_ENABLED: "",
+      // The writing flow's fixture task is only resolvable behind the dev
+      // preview gate (src/features/writing/preview-gate.ts): there is no
+      // approved writing task yet, and this suite runs a production build.
+      WRITING_PREVIEW_ENABLED: "1",
     },
   },
 });

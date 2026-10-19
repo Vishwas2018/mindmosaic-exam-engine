@@ -1,0 +1,26 @@
+{
+  "project": "rls",
+  "startedAt": "2026-10-18T11:52:32.995Z",
+  "finishedAt": "2026-10-18T11:52:55.849Z",
+  "exitCode": 1,
+  "signal": null,
+  "exit": "exit code 1",
+  "spawnError": null,
+  "node": "v24.15.0",
+  "platform": "win32",
+  "complete": false,
+  "problems": [
+    "vitest exited 1",
+    "output says a vitest worker process exited unexpectedly",
+    "output says the vitest worker pool reported an error",
+    "output says vitest caught an unhandled error",
+    "output says vitest summary lists errors",
+    "29 test file(s) on disk reported no results — a worker almost certainly died: tests/rls/assessment-scoring-role.test.ts, tests/rls/assessment-session-responses.test.ts, tests/rls/assessment-session-resume-state.test.ts, tests/rls/assignment-target-linkage.test.ts, tests/rls/backfill-legacy-sessions.test.ts, tests/rls/classes.test.ts, tests/rls/config-pin-registry.test.ts, tests/rls/config-version-tables.test.ts, tests/rls/content-answer-writer-role.test.ts, tests/rls/content-platform-v2-quality.test.ts, tests/rls/curriculum-adapter-and-import.test.ts, tests/rls/curriculum-platform.test.ts, tests/rls/erasure-operational.test.ts, tests/rls/essay-marks.test.ts, tests/rls/exam-attempts.test.ts, tests/rls/exam-responses.test.ts, tests/rls/pending-manual-marks-consistency.test.ts, tests/rls/privilege-hardening.test.ts, tests/rls/programme-offering-authority.test.ts, tests/rls/publication-approvals.test.ts, tests/rls/read-dispatch.test.ts, tests/rls/runtime-content.test.ts, tests/rls/scholarship-sessions.test.ts, tests/rls/session-storage-model.test.ts, tests/rls/stripe-subscription-events.test.ts, tests/rls/subscriptions.test.ts, tests/rls/target-http-lifecycle.test.ts, tests/rls/target-selector-offering.test.ts, tests/rls/target-sitting-end-to-end.test.ts",
+    "tests/rls/assessment-session-create.test.ts left 8 test(s) non-terminal (first: \"scopes keys to the actor, so two students may use the same key\" as pending)",
+    "only 152 of 160 tests reported a result — 8 never ran"
+  ],
+  "filesExpected": 35,
+  "filesReported": 6,
+  "testsConcluded": 152,
+  "testsTotal": 160
+}

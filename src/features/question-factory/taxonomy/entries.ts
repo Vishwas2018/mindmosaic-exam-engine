@@ -13,8 +13,10 @@
  * by hand-editing individual ids.
  */
 import type { TaxonomyEntry } from "./types";
+import { SCHOLARSHIP_SKILL_TAXONOMY_ENTRIES } from "./scholarship-entries";
 
 export const SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
+  ...SCHOLARSHIP_SKILL_TAXONOMY_ENTRIES,
   {
     id: "lang.prod.grammar.active-and-passive-voice",
     displayName: "Active and passive voice",

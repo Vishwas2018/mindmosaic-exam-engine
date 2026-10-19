@@ -1,0 +1,2752 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Batch 2 Year 6 Scholarship Mathematics drafts. Governed original content; code-verified with solvers; never imported by runtime code.",
+  "questions": [
+    {
+      "id": "scholarship-y6-maths-001",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "At dawn in the Snowy Mountains, the temperature was -6°C. By midday, the temperature had risen by 14°C, but by midnight it fell by 11°C. What was the temperature at midnight?",
+      "options": [
+        {
+          "id": "a",
+          "text": "-3°C"
+        },
+        {
+          "id": "b",
+          "text": "-4°C"
+        },
+        {
+          "id": "c",
+          "text": "3°C"
+        },
+        {
+          "id": "d",
+          "text": "-5°C"
+        },
+        {
+          "id": "e",
+          "text": "0°C"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Starting at -6°C, rising 14°C gives -6 + 14 = 8°C. Falling 11°C gives 8 - 11 = -3°C.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Directed Numbers",
+        "skill": "maths-directed-numbers",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-002",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A research submarine cruises at a depth of 180 metres below sea level (-180 m). It ascends 65 metres, dives 45 metres deeper, and finally ascends 90 metres. What is the submarine's final depth relative to sea level?",
+      "options": [
+        {
+          "id": "a",
+          "text": "-110 m"
+        },
+        {
+          "id": "b",
+          "text": "-80 m"
+        },
+        {
+          "id": "c",
+          "text": "-70 m"
+        },
+        {
+          "id": "d",
+          "text": "-60 m"
+        },
+        {
+          "id": "e",
+          "text": "-120 m"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Initial depth is -180 m. Ascending 65 m gives -180 + 65 = -115 m. Diving 45 m gives -115 - 45 = -160 m. Ascending 90 m gives -160 + 90 = -70 m.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Directed Numbers",
+        "skill": "maths-directed-numbers",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-003",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Evaluate the following integer expression:\n(-12) - (-25) + (-8) - 14",
+      "options": [
+        {
+          "id": "a",
+          "text": "-19"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "-21"
+        },
+        {
+          "id": "d",
+          "text": "-7"
+        },
+        {
+          "id": "e",
+          "text": "-9"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Subtracting a negative is equivalent to addition: -12 + 25 = 13. Adding -8 gives 13 - 8 = 5. Subtracting 14 gives 5 - 14 = -9.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Directed Numbers",
+        "skill": "maths-directed-numbers",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-004",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The summit of Mount Kosciuszko is 2228 metres above sea level. Lake Eyre is 15 metres below sea level (-15 m). What is the difference in elevation between the summit of Mount Kosciuszko and Lake Eyre?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2213 m"
+        },
+        {
+          "id": "b",
+          "text": "2243 m"
+        },
+        {
+          "id": "c",
+          "text": "2233 m"
+        },
+        {
+          "id": "d",
+          "text": "2258 m"
+        },
+        {
+          "id": "e",
+          "text": "2200 m"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Elevation difference = 2228 - (-15) = 2228 + 15 = 2243 metres.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Directed Numbers",
+        "skill": "maths-directed-numbers",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-005",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A mining elevator descends from ground level (0 m) down a vertical mine shaft at a constant speed of 4 metres per second. What is the elevator's elevation relative to ground level after 45 seconds?",
+      "options": [
+        {
+          "id": "a",
+          "text": "-160 m"
+        },
+        {
+          "id": "b",
+          "text": "-175 m"
+        },
+        {
+          "id": "c",
+          "text": "-190 m"
+        },
+        {
+          "id": "d",
+          "text": "-180 m"
+        },
+        {
+          "id": "e",
+          "text": "-200 m"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Descending at 4 m/s for 45 s covers a distance of 4 * 45 = 180 metres downward, reaching -180 m.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Directed Numbers",
+        "skill": "maths-directed-numbers",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-006",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A rainwater tank with a total capacity of 1200 litres is 3/8 full. If 350 litres of water are pumped out for the garden, how many litres of water remain in the tank?",
+      "options": [
+        {
+          "id": "a",
+          "text": "80 L"
+        },
+        {
+          "id": "b",
+          "text": "90 L"
+        },
+        {
+          "id": "c",
+          "text": "100 L"
+        },
+        {
+          "id": "d",
+          "text": "110 L"
+        },
+        {
+          "id": "e",
+          "text": "120 L"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Initial volume = 1200 * (3/8) = 450 litres. After using 350 litres, 450 - 350 = 100 litres remain.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Fractions and Decimals",
+        "skill": "maths-fractions-decimals",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-007",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A sports jacket originally priced at $160 is discounted by 25% during a mid-year sale. At the checkout, loyalty club members receive an additional 10% discount off the sale price. How much does a club member pay for the jacket?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$108"
+        },
+        {
+          "id": "b",
+          "text": "$104"
+        },
+        {
+          "id": "c",
+          "text": "$112"
+        },
+        {
+          "id": "d",
+          "text": "$116"
+        },
+        {
+          "id": "e",
+          "text": "$100"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "25% off $160 reduces the price to 160 * 0.75 = $120. A further 10% off $120 is 120 * 0.90 = $108.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Percentages",
+        "skill": "maths-percentages",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-008",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a school council election, 360 votes were cast. The winning candidate received 55% of the votes, while the second candidate received 35% of the votes. How many more votes did the winner receive than the second candidate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "64"
+        },
+        {
+          "id": "b",
+          "text": "68"
+        },
+        {
+          "id": "c",
+          "text": "70"
+        },
+        {
+          "id": "d",
+          "text": "72"
+        },
+        {
+          "id": "e",
+          "text": "76"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The percentage difference is 55% - 35% = 20%. 20% of 360 votes is 0.20 * 360 = 72 votes.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Percentages",
+        "skill": "maths-percentages",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-009",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A timber plank is 4.8 metres long. A carpenter cuts off three pieces each measuring 85 cm in length, and one piece measuring 1.25 metres in length. What is the length of the remaining timber plank in centimetres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "80 cm"
+        },
+        {
+          "id": "b",
+          "text": "85 cm"
+        },
+        {
+          "id": "c",
+          "text": "90 cm"
+        },
+        {
+          "id": "d",
+          "text": "95 cm"
+        },
+        {
+          "id": "e",
+          "text": "100 cm"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Total plank length = 480 cm. Cuts: 3 * 85 cm = 255 cm, and 1.25 m = 125 cm. Total cut = 255 + 125 = 380 cm. Remaining = 480 - 380 = 100 cm.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Fractions and Decimals",
+        "skill": "maths-fractions-decimals",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-010",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A regional town's population was 12,000 residents in 2015. By 2025, the population had increased to 15,000 residents. What was the percentage increase in the town's population over this decade?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20%"
+        },
+        {
+          "id": "b",
+          "text": "25%"
+        },
+        {
+          "id": "c",
+          "text": "30%"
+        },
+        {
+          "id": "d",
+          "text": "15%"
+        },
+        {
+          "id": "e",
+          "text": "35%"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Population increase = 15,000 - 12,000 = 3,000 residents. Percentage increase = (3,000 / 12,000) * 100 = 25%. (Dividing by the new population instead of the original gives 20%.)",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Percentages",
+        "skill": "maths-percentages",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-011",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A school library has 420 books in its science collection. Three-sevenths (3/7) of the books are about astronomy and one-quarter (1/4) of the books are about biology. No book is in both groups. How many books in the collection are about neither astronomy nor biology?",
+      "options": [
+        {
+          "id": "a",
+          "text": "120"
+        },
+        {
+          "id": "b",
+          "text": "125"
+        },
+        {
+          "id": "c",
+          "text": "130"
+        },
+        {
+          "id": "d",
+          "text": "140"
+        },
+        {
+          "id": "e",
+          "text": "135"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Astronomy books = 420 * 3/7 = 180. Biology books = 420 * 1/4 = 105. Books in neither category = 420 - 180 - 105 = 135 books.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Fractions and Decimals",
+        "skill": "maths-fractions-decimals",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-012",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A fundraiser raised $72,000, which is shared among three school projects (the library, the garden and the sports shed) in the ratio 2 : 3 : 4. How much money does the garden receive?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$16,000"
+        },
+        {
+          "id": "b",
+          "text": "$24,000"
+        },
+        {
+          "id": "c",
+          "text": "$32,000"
+        },
+        {
+          "id": "d",
+          "text": "$20,000"
+        },
+        {
+          "id": "e",
+          "text": "$28,000"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Total ratio parts = 2 + 3 + 4 = 9 parts. Value of one part = $72,000 / 9 = $8,000. The garden receives 3 parts = 3 * $8,000 = $24,000.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-013",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A passenger train travels 210 kilometres in 75 minutes at a constant speed. How many kilometres will it travel in 100 minutes at the same speed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "280 km"
+        },
+        {
+          "id": "b",
+          "text": "290 km"
+        },
+        {
+          "id": "c",
+          "text": "300 km"
+        },
+        {
+          "id": "d",
+          "text": "260 km"
+        },
+        {
+          "id": "e",
+          "text": "310 km"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Speed = 210 / 75 = 2.8 km per minute. In 100 minutes the train travels 2.8 * 100 = 280 km.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-014",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In an athletics club, the ratio of sprinters to distance runners is 5 : 3. If there are 30 more sprinters than distance runners, how many athletes are in the club altogether?",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "110"
+        },
+        {
+          "id": "c",
+          "text": "120"
+        },
+        {
+          "id": "d",
+          "text": "130"
+        },
+        {
+          "id": "e",
+          "text": "140"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The ratio difference is 5 - 3 = 2 parts, representing 30 athletes. Thus 1 part = 30 / 2 = 15 athletes. Total athletes = (5 + 3) * 15 = 120.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-015",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Supermarket brand A sells 750 grams of cereal for $6.00. Brand B sells 1200 grams of cereal for $8.40. How many cents cheaper per 100 grams is brand B compared to brand A?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6 cents"
+        },
+        {
+          "id": "b",
+          "text": "8 cents"
+        },
+        {
+          "id": "c",
+          "text": "12 cents"
+        },
+        {
+          "id": "d",
+          "text": "10 cents"
+        },
+        {
+          "id": "e",
+          "text": "15 cents"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Brand A: 600 cents / 7.5 = 80 cents per 100 g. Brand B: 840 cents / 12 = 70 cents per 100 g. Difference = 80 - 70 = 10 cents per 100 g.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-016",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "It takes 6 painters exactly 12 days to paint a school hall. If 3 more painters of identical working speed join the team from the start, how many days will the larger team take to finish the job?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6 days"
+        },
+        {
+          "id": "b",
+          "text": "7 days"
+        },
+        {
+          "id": "c",
+          "text": "9 days"
+        },
+        {
+          "id": "d",
+          "text": "8 days"
+        },
+        {
+          "id": "e",
+          "text": "10 days"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Total workload = 6 painters * 12 days = 72 painter-days. With 6 + 3 = 9 painters, the time required is 72 / 9 = 8 days. (Taking 3 days off 12 gives 9, which wrongly treats the work as a subtraction.)",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-017",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Concrete is made by mixing cement, sand, and gravel in the ratio 1 : 2 : 3 by weight. If a construction site requires 2400 kilograms of concrete mix, how many kilograms of sand are needed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "400 kg"
+        },
+        {
+          "id": "b",
+          "text": "600 kg"
+        },
+        {
+          "id": "c",
+          "text": "750 kg"
+        },
+        {
+          "id": "d",
+          "text": "900 kg"
+        },
+        {
+          "id": "e",
+          "text": "800 kg"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Total parts = 1 + 2 + 3 = 6 parts. Sand represents 2 parts: (2 / 6) * 2400 = 800 kg.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-018",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Solve for x in the following linear equation:\n4x + 19 = 71",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "13"
+        },
+        {
+          "id": "c",
+          "text": "14"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Subtract 19 from both sides: 4x = 52. Divide by 4: x = 13.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-019",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Ethan is 4 years older than his sister Mia. The sum of their current ages is 32 years. How old is Ethan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "18 years old"
+        },
+        {
+          "id": "b",
+          "text": "14 years old"
+        },
+        {
+          "id": "c",
+          "text": "19 years old"
+        },
+        {
+          "id": "d",
+          "text": "16 years old"
+        },
+        {
+          "id": "e",
+          "text": "20 years old"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Let Ethan's age be E. Mia's age is E - 4. E + (E - 4) = 32 -> 2E = 36 -> E = 18 years old.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-020",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Solve for y in the following linear equation:\n7y - 15 = 3y + 29",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "10"
+        },
+        {
+          "id": "c",
+          "text": "11"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Subtract 3y from both sides: 4y - 15 = 29. Add 15: 4y = 44. Divide by 4: y = 11.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-021",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The sum of three consecutive odd numbers is 87. What is the largest of these three numbers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "29"
+        },
+        {
+          "id": "b",
+          "text": "31"
+        },
+        {
+          "id": "c",
+          "text": "33"
+        },
+        {
+          "id": "d",
+          "text": "27"
+        },
+        {
+          "id": "e",
+          "text": "35"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Let the numbers be x, x + 2, and x + 4. 3x + 6 = 87 -> 3x = 81 -> x = 27. The largest number is 27 + 4 = 31.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-022",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "At a fruit market, 3 apples and 2 mangoes cost $12. At the same prices, 1 apple and 4 mangoes cost $14. What is the cost of a single mango?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$1"
+        },
+        {
+          "id": "b",
+          "text": "$2"
+        },
+        {
+          "id": "c",
+          "text": "$4"
+        },
+        {
+          "id": "d",
+          "text": "$3"
+        },
+        {
+          "id": "e",
+          "text": "$5"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "From the second equation, A = 14 - 4M. Substitute into the first: 3(14 - 4M) + 2M = 12 -> 42 - 12M + 2M = 12 -> 10M = 30 -> M = $3.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-023",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "If p = 5, q = 3 and r = 4, what is the value of 3p + 2qr - 7?",
+      "options": [
+        {
+          "id": "a",
+          "text": "77"
+        },
+        {
+          "id": "b",
+          "text": "20"
+        },
+        {
+          "id": "c",
+          "text": "32"
+        },
+        {
+          "id": "d",
+          "text": "18"
+        },
+        {
+          "id": "e",
+          "text": "39"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "3p = 15 and 2qr = 2 * 3 * 4 = 24. Multiplication is done before addition and subtraction, so the value is 15 + 24 - 7 = 32.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-024",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Solve for w in the equation:\n(2w + 5) / 3 = 11",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "15"
+        },
+        {
+          "id": "d",
+          "text": "16"
+        },
+        {
+          "id": "e",
+          "text": "14"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Multiply both sides by 3: 2w + 5 = 33. Subtract 5: 2w = 28. Divide by 2: w = 14.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 35,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-025",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "When a mystery number is multiplied by 6 and then decreased by 14, the result equals 18 more than twice the number. What is the mystery number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        },
+        {
+          "id": "e",
+          "text": "10"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "6N - 14 = 2N + 18 -> 4N = 32 -> N = 8.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-026",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Two straight lines intersect. A pair of vertically opposite angles measure (3x + 15)° and (5x - 25)°. What is the size of each of these angles in degrees?",
+      "options": [
+        {
+          "id": "a",
+          "text": "75°"
+        },
+        {
+          "id": "b",
+          "text": "65°"
+        },
+        {
+          "id": "c",
+          "text": "70°"
+        },
+        {
+          "id": "d",
+          "text": "80°"
+        },
+        {
+          "id": "e",
+          "text": "85°"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Vertically opposite angles are equal: 3x + 15 = 5x - 25 -> 2x = 40 -> x = 20. Angle = 3(20) + 15 = 75°.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-027",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In triangle ABC, angle A is twice angle B, and angle C is 20° larger than angle B. What is the measure of angle A in degrees?",
+      "options": [
+        {
+          "id": "a",
+          "text": "40°"
+        },
+        {
+          "id": "b",
+          "text": "60°"
+        },
+        {
+          "id": "c",
+          "text": "70°"
+        },
+        {
+          "id": "d",
+          "text": "90°"
+        },
+        {
+          "id": "e",
+          "text": "80°"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Angles sum to 180°: 2B + B + (B + 20) = 180 -> 4B + 20 = 180 -> 4B = 160 -> B = 40°. Therefore A = 2 * 40 = 80°.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-028",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A rectangular sports court has a perimeter of 96 metres. Its length is 12 metres longer than its width. What is the area of the court in square metres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "512 m²"
+        },
+        {
+          "id": "b",
+          "text": "528 m²"
+        },
+        {
+          "id": "c",
+          "text": "550 m²"
+        },
+        {
+          "id": "d",
+          "text": "540 m²"
+        },
+        {
+          "id": "e",
+          "text": "576 m²"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "2(L + W) = 96 -> L + W = 48. Since L = W + 12: 2W + 12 = 48 -> 2W = 36 -> W = 18 m, L = 30 m. Area = 30 * 18 = 540 m².",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-029",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Two angles lie next to each other on a straight line. One angle is 36° less than three times the other angle. What is the measure of the smaller angle in degrees?",
+      "options": [
+        {
+          "id": "a",
+          "text": "48°"
+        },
+        {
+          "id": "b",
+          "text": "54°"
+        },
+        {
+          "id": "c",
+          "text": "52°"
+        },
+        {
+          "id": "d",
+          "text": "56°"
+        },
+        {
+          "id": "e",
+          "text": "60°"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "x + (3x - 36) = 180 -> 4x = 216 -> x = 54°. The other angle is 3(54) - 36 = 126°.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-030",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A rectangular aquarium has a base measuring 80 cm by 50 cm and is 45 cm tall. If 120 litres of water are poured into the empty tank, to what height, in centimetres, does the water rise? (1 litre = 1000 cm³)",
+      "options": [
+        {
+          "id": "a",
+          "text": "24 cm"
+        },
+        {
+          "id": "b",
+          "text": "28 cm"
+        },
+        {
+          "id": "c",
+          "text": "30 cm"
+        },
+        {
+          "id": "d",
+          "text": "32 cm"
+        },
+        {
+          "id": "e",
+          "text": "35 cm"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Base area = 80 * 50 = 4000 cm². Volume = 120 * 1000 = 120,000 cm³. Height = 120,000 / 4000 = 30 cm.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-031",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A square park has side length 40 metres. A square pavilion of side length 12 metres is constructed in one corner, and the rest is planted with grass. What is the area of the grassed section in square metres?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1440 m²"
+        },
+        {
+          "id": "b",
+          "text": "1450 m²"
+        },
+        {
+          "id": "c",
+          "text": "1456 m²"
+        },
+        {
+          "id": "d",
+          "text": "1464 m²"
+        },
+        {
+          "id": "e",
+          "text": "1480 m²"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Total park area = 40 * 40 = 1600 m². Pavilion area = 12 * 12 = 144 m². Grass area = 1600 - 144 = 1456 m².",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-032",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What is the measure of each interior angle of a regular octagon (8-sided polygon) in degrees?",
+      "options": [
+        {
+          "id": "a",
+          "text": "120°"
+        },
+        {
+          "id": "b",
+          "text": "135°"
+        },
+        {
+          "id": "c",
+          "text": "140°"
+        },
+        {
+          "id": "d",
+          "text": "144°"
+        },
+        {
+          "id": "e",
+          "text": "128°"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Sum of interior angles = (8 - 2) * 180° = 1080°. Each interior angle = 1080° / 8 = 135°.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Geometry and Measurement",
+        "skill": "maths-geometry",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-033",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A bag contains 7 red marbles, 9 blue marbles and 4 green marbles. One marble is taken from the bag without looking. What is the probability, as a percentage, that the marble is NOT green?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20%"
+        },
+        {
+          "id": "b",
+          "text": "45%"
+        },
+        {
+          "id": "c",
+          "text": "35%"
+        },
+        {
+          "id": "d",
+          "text": "75%"
+        },
+        {
+          "id": "e",
+          "text": "80%"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "There are 7 + 9 + 4 = 20 marbles, and 7 + 9 = 16 of them are not green. The probability is 16 / 20 = 80%. (20% is the probability of green.)",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Probability",
+        "skill": "maths-probability",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-034",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Two standard six-sided dice are rolled simultaneously. In how many of the 36 possible outcomes is the sum of the numbers equal to 7 or 8?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9 outcomes"
+        },
+        {
+          "id": "b",
+          "text": "10 outcomes"
+        },
+        {
+          "id": "c",
+          "text": "12 outcomes"
+        },
+        {
+          "id": "d",
+          "text": "11 outcomes"
+        },
+        {
+          "id": "e",
+          "text": "13 outcomes"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Sum of 7 has 6 pairs: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1). Sum of 8 has 5 pairs: (2,6),(3,5),(4,4),(5,3),(6,2). Total = 6 + 5 = 11 outcomes.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Probability",
+        "skill": "maths-probability",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-035",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In a class of 30 students, 18 play soccer, 15 play basketball, and 7 play both sports. How many students play neither soccer nor basketball?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4 students"
+        },
+        {
+          "id": "b",
+          "text": "5 students"
+        },
+        {
+          "id": "c",
+          "text": "6 students"
+        },
+        {
+          "id": "d",
+          "text": "3 students"
+        },
+        {
+          "id": "e",
+          "text": "2 students"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Students playing at least one sport = 18 + 15 - 7 = 26. Students playing neither = 30 - 26 = 4 students.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Probability",
+        "skill": "maths-probability",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-036",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A cyclist rides uphill for 18 kilometres at an average speed of 12 km/h, and returns along the same route at 36 km/h. What was the cyclist's total travel time in minutes?",
+      "options": [
+        {
+          "id": "a",
+          "text": "90 minutes"
+        },
+        {
+          "id": "b",
+          "text": "100 minutes"
+        },
+        {
+          "id": "c",
+          "text": "105 minutes"
+        },
+        {
+          "id": "d",
+          "text": "120 minutes"
+        },
+        {
+          "id": "e",
+          "text": "150 minutes"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Uphill time = (18 / 12) * 60 = 90 min. Return time = (18 / 36) * 60 = 30 min. Total time = 90 + 30 = 120 minutes. (Using the average of the two speeds, 24 km/h, over 36 km would wrongly give 90 minutes.)",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Ratios and Rates",
+        "skill": "maths-ratios-rates",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-037",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "An experimental chemical solution is initially at 24°C. A scientist cools the solution by 7°C per minute for 5 consecutive minutes, and then heats it by 3°C. What is the final temperature?",
+      "options": [
+        {
+          "id": "a",
+          "text": "-8°C"
+        },
+        {
+          "id": "b",
+          "text": "-9°C"
+        },
+        {
+          "id": "c",
+          "text": "-7°C"
+        },
+        {
+          "id": "d",
+          "text": "-10°C"
+        },
+        {
+          "id": "e",
+          "text": "-6°C"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Cooling 7°C * 5 = 35°C drop. 24 - 35 = -11°C. Heating by 3°C gives -11 + 3 = -8°C.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Directed Numbers",
+        "skill": "maths-directed-numbers",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-038",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A store adds 10% Goods and Services Tax (GST) to the price of each item. If a tablet costs $440 including GST, what was its price before GST was added?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$380"
+        },
+        {
+          "id": "b",
+          "text": "$390"
+        },
+        {
+          "id": "c",
+          "text": "$400"
+        },
+        {
+          "id": "d",
+          "text": "$396"
+        },
+        {
+          "id": "e",
+          "text": "$410"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Price with 10% GST is 110% of the original price. Pre-tax price = $440 / 1.10 = $400. (Taking 10% off $440 would wrongly give $396.)",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Percentages",
+        "skill": "maths-percentages",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 40,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-039",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "An isosceles triangle has two sides of length (2k + 3) cm and a third side of length (k + 5) cm. If the perimeter is 46 cm, what is the value of k?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        },
+        {
+          "id": "e",
+          "text": "5"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Perimeter = 2(2k + 3) + (k + 5) = 4k + 6 + k + 5 = 5k + 11 = 46 -> 5k = 35 -> k = 7.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Algebra",
+        "skill": "maths-algebra",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-040",
+      "type": "multiple_choice",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "A student creates a 2-digit locker PIN where the first digit is from {2, 4, 6} and the second digit is from {1, 3, 5, 7, 9}. How many different 2-digit PIN codes can be formed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "14"
+        },
+        {
+          "id": "d",
+          "text": "16"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "By the multiplication principle of counting: 3 choices for the first digit * 5 choices for the second digit = 15 different PIN codes.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Probability",
+        "skill": "maths-probability",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 30,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "mathematics"
+        ]
+      }
+    }
+  ],
+  "parameters": {
+    "scholarship-y6-maths-001": {
+      "id": "scholarship-y6-maths-001",
+      "skill": "maths-directed-numbers",
+      "targetOption": "a",
+      "correctValue": "-3°C",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "T",
+            "min": -20,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "T === -6 + 14 - 11"
+        ],
+        "targetVariable": "T"
+      }
+    },
+    "scholarship-y6-maths-002": {
+      "id": "scholarship-y6-maths-002",
+      "skill": "maths-directed-numbers",
+      "targetOption": "c",
+      "correctValue": "-70 m",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "D",
+            "min": -300,
+            "max": 0
+          }
+        ],
+        "constraints": [
+          "D === -180 + 65 - 45 + 90"
+        ],
+        "targetVariable": "D"
+      }
+    },
+    "scholarship-y6-maths-003": {
+      "id": "scholarship-y6-maths-003",
+      "skill": "maths-directed-numbers",
+      "targetOption": "e",
+      "correctValue": "-9",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "X",
+            "min": -50,
+            "max": 50
+          }
+        ],
+        "constraints": [
+          "X === -12 - (-25) + (-8) - 14"
+        ],
+        "targetVariable": "X"
+      }
+    },
+    "scholarship-y6-maths-004": {
+      "id": "scholarship-y6-maths-004",
+      "skill": "maths-directed-numbers",
+      "targetOption": "b",
+      "correctValue": "2243 m",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Diff",
+            "min": 2000,
+            "max": 2500
+          }
+        ],
+        "constraints": [
+          "Diff === 2228 - (-15)"
+        ],
+        "targetVariable": "Diff"
+      }
+    },
+    "scholarship-y6-maths-005": {
+      "id": "scholarship-y6-maths-005",
+      "skill": "maths-directed-numbers",
+      "targetOption": "d",
+      "correctValue": "-180 m",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "E",
+            "min": -300,
+            "max": 0
+          }
+        ],
+        "constraints": [
+          "E === 0 - 4 * 45"
+        ],
+        "targetVariable": "E"
+      }
+    },
+    "scholarship-y6-maths-006": {
+      "id": "scholarship-y6-maths-006",
+      "skill": "maths-fractions-decimals",
+      "targetOption": "c",
+      "correctValue": "100 L",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Rem",
+            "min": 0,
+            "max": 500
+          }
+        ],
+        "constraints": [
+          "Rem === 1200 * 3 / 8 - 350"
+        ],
+        "targetVariable": "Rem"
+      }
+    },
+    "scholarship-y6-maths-007": {
+      "id": "scholarship-y6-maths-007",
+      "skill": "maths-percentages",
+      "targetOption": "a",
+      "correctValue": "$108",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "P",
+            "min": 50,
+            "max": 150
+          }
+        ],
+        "constraints": [
+          "P === 160 * 75 * 90 / 10000"
+        ],
+        "targetVariable": "P"
+      }
+    },
+    "scholarship-y6-maths-008": {
+      "id": "scholarship-y6-maths-008",
+      "skill": "maths-percentages",
+      "targetOption": "d",
+      "correctValue": "72",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Diff",
+            "min": 50,
+            "max": 100
+          }
+        ],
+        "constraints": [
+          "Diff === 360 * 20 / 100"
+        ],
+        "targetVariable": "Diff"
+      }
+    },
+    "scholarship-y6-maths-009": {
+      "id": "scholarship-y6-maths-009",
+      "skill": "maths-fractions-decimals",
+      "targetOption": "e",
+      "correctValue": "100 cm",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Rem",
+            "min": 50,
+            "max": 150
+          }
+        ],
+        "constraints": [
+          "Rem === 480 - 3 * 85 - 125"
+        ],
+        "targetVariable": "Rem"
+      }
+    },
+    "scholarship-y6-maths-010": {
+      "id": "scholarship-y6-maths-010",
+      "skill": "maths-percentages",
+      "targetOption": "b",
+      "correctValue": "25%",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Pct",
+            "min": 10,
+            "max": 50
+          }
+        ],
+        "constraints": [
+          "Pct === (15000 - 12000) * 100 / 12000"
+        ],
+        "targetVariable": "Pct"
+      }
+    },
+    "scholarship-y6-maths-011": {
+      "id": "scholarship-y6-maths-011",
+      "skill": "maths-fractions-decimals",
+      "targetOption": "e",
+      "correctValue": "135",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Rem",
+            "min": 100,
+            "max": 200
+          }
+        ],
+        "constraints": [
+          "Rem === 420 - (420 * 3 / 7 + 420 / 4)"
+        ],
+        "targetVariable": "Rem"
+      }
+    },
+    "scholarship-y6-maths-012": {
+      "id": "scholarship-y6-maths-012",
+      "skill": "maths-ratios-rates",
+      "targetOption": "b",
+      "correctValue": "$24,000",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Ben",
+            "min": 10000,
+            "max": 40000
+          }
+        ],
+        "constraints": [
+          "Ben === (72000 / 9) * 3"
+        ],
+        "targetVariable": "Ben"
+      }
+    },
+    "scholarship-y6-maths-013": {
+      "id": "scholarship-y6-maths-013",
+      "skill": "maths-ratios-rates",
+      "targetOption": "a",
+      "correctValue": "280 km",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Dist",
+            "min": 200,
+            "max": 400
+          }
+        ],
+        "constraints": [
+          "Dist === 210 * 100 / 75"
+        ],
+        "targetVariable": "Dist"
+      }
+    },
+    "scholarship-y6-maths-014": {
+      "id": "scholarship-y6-maths-014",
+      "skill": "maths-ratios-rates",
+      "targetOption": "c",
+      "correctValue": "120",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Total",
+            "min": 80,
+            "max": 160
+          }
+        ],
+        "constraints": [
+          "Total === (8 * 30) / 2"
+        ],
+        "targetVariable": "Total"
+      }
+    },
+    "scholarship-y6-maths-015": {
+      "id": "scholarship-y6-maths-015",
+      "skill": "maths-ratios-rates",
+      "targetOption": "d",
+      "correctValue": "10 cents",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Diff",
+            "min": 1,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "Diff === (600 / 7.5) - (840 / 12)"
+        ],
+        "targetVariable": "Diff"
+      }
+    },
+    "scholarship-y6-maths-016": {
+      "id": "scholarship-y6-maths-016",
+      "skill": "maths-ratios-rates",
+      "targetOption": "d",
+      "correctValue": "8 days",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Days",
+            "min": 1,
+            "max": 12
+          }
+        ],
+        "constraints": [
+          "Days === (6 * 12) / 9"
+        ],
+        "targetVariable": "Days"
+      }
+    },
+    "scholarship-y6-maths-017": {
+      "id": "scholarship-y6-maths-017",
+      "skill": "maths-ratios-rates",
+      "targetOption": "e",
+      "correctValue": "800 kg",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Sand",
+            "min": 500,
+            "max": 1200
+          }
+        ],
+        "constraints": [
+          "Sand === (2400 / 6) * 2"
+        ],
+        "targetVariable": "Sand"
+      }
+    },
+    "scholarship-y6-maths-018": {
+      "id": "scholarship-y6-maths-018",
+      "skill": "maths-algebra",
+      "targetOption": "b",
+      "correctValue": "13",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "X",
+            "min": 1,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "4 * X + 19 === 71"
+        ],
+        "targetVariable": "X"
+      }
+    },
+    "scholarship-y6-maths-019": {
+      "id": "scholarship-y6-maths-019",
+      "skill": "maths-algebra",
+      "targetOption": "a",
+      "correctValue": "18 years old",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "E",
+            "min": 10,
+            "max": 25
+          }
+        ],
+        "constraints": [
+          "E + (E - 4) === 32"
+        ],
+        "targetVariable": "E"
+      }
+    },
+    "scholarship-y6-maths-020": {
+      "id": "scholarship-y6-maths-020",
+      "skill": "maths-algebra",
+      "targetOption": "c",
+      "correctValue": "11",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Y",
+            "min": 1,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "7 * Y - 15 === 3 * Y + 29"
+        ],
+        "targetVariable": "Y"
+      }
+    },
+    "scholarship-y6-maths-021": {
+      "id": "scholarship-y6-maths-021",
+      "skill": "maths-algebra",
+      "targetOption": "b",
+      "correctValue": "31",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "L",
+            "min": 20,
+            "max": 40
+          }
+        ],
+        "constraints": [
+          "(L - 4) + (L - 2) + L === 87"
+        ],
+        "targetVariable": "L"
+      }
+    },
+    "scholarship-y6-maths-022": {
+      "id": "scholarship-y6-maths-022",
+      "skill": "maths-algebra",
+      "targetOption": "d",
+      "correctValue": "$3",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "A",
+            "min": 1,
+            "max": 10
+          },
+          {
+            "name": "M",
+            "min": 1,
+            "max": 10
+          }
+        ],
+        "constraints": [
+          "3 * A + 2 * M === 12",
+          "A + 4 * M === 14"
+        ],
+        "targetVariable": "M"
+      }
+    },
+    "scholarship-y6-maths-023": {
+      "id": "scholarship-y6-maths-023",
+      "skill": "maths-algebra",
+      "targetOption": "c",
+      "correctValue": "32",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Val",
+            "min": 10,
+            "max": 60
+          }
+        ],
+        "constraints": [
+          "Val === 3 * 5 + 2 * 3 * 4 - 7"
+        ],
+        "targetVariable": "Val"
+      }
+    },
+    "scholarship-y6-maths-024": {
+      "id": "scholarship-y6-maths-024",
+      "skill": "maths-algebra",
+      "targetOption": "e",
+      "correctValue": "14",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "W",
+            "min": 1,
+            "max": 25
+          }
+        ],
+        "constraints": [
+          "2 * W + 5 === 33"
+        ],
+        "targetVariable": "W"
+      }
+    },
+    "scholarship-y6-maths-025": {
+      "id": "scholarship-y6-maths-025",
+      "skill": "maths-algebra",
+      "targetOption": "a",
+      "correctValue": "8",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "N",
+            "min": 1,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "6 * N - 14 === 2 * N + 18"
+        ],
+        "targetVariable": "N"
+      }
+    },
+    "scholarship-y6-maths-026": {
+      "id": "scholarship-y6-maths-026",
+      "skill": "maths-geometry",
+      "targetOption": "a",
+      "correctValue": "75°",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "X",
+            "min": 1,
+            "max": 40
+          },
+          {
+            "name": "Ang",
+            "min": 30,
+            "max": 120
+          }
+        ],
+        "constraints": [
+          "3 * X + 15 === 5 * X - 25",
+          "Ang === 3 * X + 15"
+        ],
+        "targetVariable": "Ang"
+      }
+    },
+    "scholarship-y6-maths-027": {
+      "id": "scholarship-y6-maths-027",
+      "skill": "maths-geometry",
+      "targetOption": "e",
+      "correctValue": "80°",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "B",
+            "min": 10,
+            "max": 60
+          },
+          {
+            "name": "A",
+            "min": 20,
+            "max": 120
+          }
+        ],
+        "constraints": [
+          "4 * B + 20 === 180",
+          "A === 2 * B"
+        ],
+        "targetVariable": "A"
+      }
+    },
+    "scholarship-y6-maths-028": {
+      "id": "scholarship-y6-maths-028",
+      "skill": "maths-geometry",
+      "targetOption": "d",
+      "correctValue": "540 m²",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "W",
+            "min": 5,
+            "max": 30
+          },
+          {
+            "name": "Area",
+            "min": 400,
+            "max": 700
+          }
+        ],
+        "constraints": [
+          "2 * (2 * W + 12) === 96",
+          "Area === (W + 12) * W"
+        ],
+        "targetVariable": "Area"
+      }
+    },
+    "scholarship-y6-maths-029": {
+      "id": "scholarship-y6-maths-029",
+      "skill": "maths-geometry",
+      "targetOption": "b",
+      "correctValue": "54°",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "X",
+            "min": 20,
+            "max": 80
+          }
+        ],
+        "constraints": [
+          "4 * X - 36 === 180"
+        ],
+        "targetVariable": "X"
+      }
+    },
+    "scholarship-y6-maths-030": {
+      "id": "scholarship-y6-maths-030",
+      "skill": "maths-geometry",
+      "targetOption": "c",
+      "correctValue": "30 cm",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "H",
+            "min": 10,
+            "max": 50
+          }
+        ],
+        "constraints": [
+          "4000 * H === 120000"
+        ],
+        "targetVariable": "H"
+      }
+    },
+    "scholarship-y6-maths-031": {
+      "id": "scholarship-y6-maths-031",
+      "skill": "maths-geometry",
+      "targetOption": "c",
+      "correctValue": "1456 m²",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Area",
+            "min": 1300,
+            "max": 1600
+          }
+        ],
+        "constraints": [
+          "Area === 40 * 40 - 12 * 12"
+        ],
+        "targetVariable": "Area"
+      }
+    },
+    "scholarship-y6-maths-032": {
+      "id": "scholarship-y6-maths-032",
+      "skill": "maths-geometry",
+      "targetOption": "b",
+      "correctValue": "135°",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Ang",
+            "min": 100,
+            "max": 160
+          }
+        ],
+        "constraints": [
+          "Ang === (8 - 2) * 180 / 8"
+        ],
+        "targetVariable": "Ang"
+      }
+    },
+    "scholarship-y6-maths-033": {
+      "id": "scholarship-y6-maths-033",
+      "skill": "maths-probability",
+      "targetOption": "e",
+      "correctValue": "80%",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Ans",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "constraints": [
+          "Ans === 100 * (7 + 9) / (7 + 9 + 4)"
+        ],
+        "targetVariable": "Ans"
+      }
+    },
+    "scholarship-y6-maths-034": {
+      "id": "scholarship-y6-maths-034",
+      "skill": "maths-probability",
+      "targetOption": "d",
+      "correctValue": "11 outcomes",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Ans",
+            "min": 1,
+            "max": 20
+          }
+        ],
+        "constraints": [
+          "Ans === 6 + 5"
+        ],
+        "targetVariable": "Ans"
+      }
+    },
+    "scholarship-y6-maths-035": {
+      "id": "scholarship-y6-maths-035",
+      "skill": "maths-probability",
+      "targetOption": "a",
+      "correctValue": "4 students",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Neither",
+            "min": 0,
+            "max": 15
+          }
+        ],
+        "constraints": [
+          "Neither === 30 - (18 + 15 - 7)"
+        ],
+        "targetVariable": "Neither"
+      }
+    },
+    "scholarship-y6-maths-036": {
+      "id": "scholarship-y6-maths-036",
+      "skill": "maths-ratios-rates",
+      "targetOption": "d",
+      "correctValue": "120 minutes",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Time",
+            "min": 80,
+            "max": 160
+          }
+        ],
+        "constraints": [
+          "Time === (18 * 60 / 12) + (18 * 60 / 36)"
+        ],
+        "targetVariable": "Time"
+      }
+    },
+    "scholarship-y6-maths-037": {
+      "id": "scholarship-y6-maths-037",
+      "skill": "maths-directed-numbers",
+      "targetOption": "a",
+      "correctValue": "-8°C",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Temp",
+            "min": -25,
+            "max": 10
+          }
+        ],
+        "constraints": [
+          "Temp === 24 - 7 * 5 + 3"
+        ],
+        "targetVariable": "Temp"
+      }
+    },
+    "scholarship-y6-maths-038": {
+      "id": "scholarship-y6-maths-038",
+      "skill": "maths-percentages",
+      "targetOption": "c",
+      "correctValue": "$400",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Price",
+            "min": 300,
+            "max": 500
+          }
+        ],
+        "constraints": [
+          "Price * 110 === 440 * 100"
+        ],
+        "targetVariable": "Price"
+      }
+    },
+    "scholarship-y6-maths-039": {
+      "id": "scholarship-y6-maths-039",
+      "skill": "maths-algebra",
+      "targetOption": "b",
+      "correctValue": "7",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "K",
+            "min": 1,
+            "max": 15
+          }
+        ],
+        "constraints": [
+          "2 * (2 * K + 3) + (K + 5) === 46"
+        ],
+        "targetVariable": "K"
+      }
+    },
+    "scholarship-y6-maths-040": {
+      "id": "scholarship-y6-maths-040",
+      "skill": "maths-probability",
+      "targetOption": "e",
+      "correctValue": "15",
+      "solver": "arithmetical_reasoning",
+      "solverParams": {
+        "variables": [
+          {
+            "name": "Codes",
+            "min": 1,
+            "max": 30
+          }
+        ],
+        "constraints": [
+          "Codes === 3 * 5"
+        ],
+        "targetVariable": "Codes"
+      }
+    }
+  }
+}

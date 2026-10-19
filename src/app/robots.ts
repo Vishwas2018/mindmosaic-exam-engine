@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { siteOrigin } from "@/lib/site-url";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -29,8 +31,9 @@ export default function robots(): MetadataRoute.Robots {
         "/exam",
         "/results",
         "/dev",
+        "/writing",
       ],
     },
-    sitemap: "https://mindmosaic.app/sitemap.xml",
+    sitemap: `${siteOrigin()}/sitemap.xml`,
   };
 }

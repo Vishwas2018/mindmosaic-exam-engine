@@ -2369,12 +2369,13 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
            still in effect via the new mechanism. So this check now asserts
            what "applied" means for A11's behaviour today: the function
            resolves through public.subjects and no longer contains the old
-           literal branch. See A16's own entry below for the rest of the
-           offering-authority proof. */
-        describes: "create_assessment_session resolves the subject filter through public.subjects, not a hardcoded 'language_conventions' literal",
+           v_subject_filter CASE branch. Later migrations may use the same
+           literal to form a programme ID, which is a different operation.
+           See A16's entry below for the rest of the offering-authority proof. */
+        describes: "create_assessment_session resolves the subject filter through public.subjects without the old inline language CASE",
         sql: `select coalesce(
                 (select pg_get_functiondef(p.oid) like '%public.subjects%'
-                    and pg_get_functiondef(p.oid) not like '%''language_conventions''%'
+                    and pg_get_functiondef(p.oid) not like '%when v_subject_filter = ''language''%'
                  from pg_proc p join pg_namespace n on n.oid = p.pronamespace
                  where n.nspname = 'public' and p.proname = 'create_assessment_session'),
                 false) as present`,
@@ -2763,6 +2764,103 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
                    and (select count(*) from public.assessment_profile_versions) = (select count(*) from public.programme_offerings where active)
                    and (select count(*) from public.blueprint_cells) = (select count(*) from public.programme_offerings where active)),
                 false) as present`,
+      },
+    ],
+  },
+  {
+    version: "20261005090000",
+    name: "revision_bound_publication_approvals",
+    checks: [
+      { describes: "private approval table has RLS and no learner privileges",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.item_publication_approvals')), false)
+          and not has_table_privilege('authenticated', 'public.item_publication_approvals', 'select')
+          and not has_table_privilege('anon', 'public.item_publication_approvals', 'select') as present` },
+      { describes: "private opt-in programme gate defaults to report mode",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.publication_gate_settings')), false)
+          and not has_table_privilege('authenticated', 'public.publication_gate_settings', 'select')
+          and not has_table_privilege('anon', 'public.publication_gate_settings', 'select')
+          and exists(select 1 from information_schema.columns
+            where table_schema = 'public' and table_name = 'publication_gate_settings'
+              and column_name = 'enforced' and column_default = 'false') as present` },
+      { describes: "allocation and item inserts enforce approvals only for opted-in programmes; historical reads are unchanged",
+        sql: `select position('item_publication_approvals' in pg_get_functiondef('public.create_assessment_session(jsonb,text)'::regprocedure)) > 0
+          and position('publication_gate_settings' in pg_get_functiondef('public.create_assessment_session(jsonb,text)'::regprocedure)) > 0
+          and position('item_publication_approvals' in pg_get_functiondef('public.get_assessment_session(uuid)'::regprocedure)) = 0
+          and exists(select 1 from pg_trigger where tgname = 'approved_session_item' and not tgisinternal)
+          and exists(select 1 from pg_trigger where tgname = 'immutable_publication_approval' and not tgisinternal) as present` },
+    ],
+  },
+  {
+    version: "20261013090000",
+    name: "timed_writing_parent_marking",
+    checks: [
+      tableExists("writing_rubrics"),
+      tableExists("writing_attempts"),
+      tableExists("writing_marks"),
+      tableExists("writing_mark_criteria"),
+      functionExists("start_writing_attempt"),
+      functionExists("save_writing_draft"),
+      functionExists("submit_writing_attempt"),
+      functionExists("record_paper_writing_attempt"),
+      functionExists("mark_writing_attempt"),
+      functionExists("record_marked_paper_attempt"),
+      policyExists("writing_attempts", "writing_attempts: parent reads linked children"),
+      policyExists("writing_marks", "writing_marks: student reads own"),
+      {
+        describes: "the one shipped rubric is seeded with its six criteria",
+        sql: `select coalesce(
+                (select jsonb_array_length(criteria) = 6
+                 from public.writing_rubrics
+                 where id = 'scholarship-written-expression' and version = 1),
+                false) as present`,
+      },
+      {
+        describes: "erase_student reaches writing_attempts (a child's writing is erased with the child)",
+        sql: `select position('writing_attempts' in pg_get_functiondef('public.erase_student(uuid, text)'::regprocedure)) > 0 as present`,
+      },
+    ],
+  },
+  {
+    version: "20261014090000",
+    name: "scholarship_programme_offerings",
+    checks: [
+      {
+        describes: "scholarship_entry assessment family is seeded",
+        sql: `select exists(select 1 from public.assessment_families where id = 'scholarship_entry') as present`,
+      },
+      {
+        describes: "edutest_scholarship_prep programme is seeded",
+        sql: `select exists(select 1 from public.programmes where id = 'edutest_scholarship_prep') as present`,
+      },
+      {
+        describes: "verbal_reasoning and numerical_reasoning subjects are seeded",
+        sql: `select exists(select 1 from public.subjects where id = 'verbal_reasoning')
+          and exists(select 1 from public.subjects where id = 'numerical_reasoning') as present`,
+      },
+      {
+        describes: "all 5 Year 6 scholarship offerings are seeded",
+        sql: `select (count(*) = 5) as present from public.programme_offerings
+          where programme_id = 'edutest_scholarship_prep' and year_level = 6`,
+      },
+      {
+        describes: "scholarship programmes are set to enforce mode in publication_gate_settings",
+        sql: `select (exists(select 1 from public.publication_gate_settings where programme_id = 'edutest_scholarship_prep' and enforced = true)
+          and exists(select 1 from public.publication_gate_settings where programme_id = 'scholarship-y6-verbal-reasoning' and enforced = true)
+          and exists(select 1 from public.publication_gate_settings where programme_id = 'scholarship-y6-numerical-reasoning' and enforced = true)) as present`,
+      },
+      {
+        describes: "Phase 2 config rows (blueprint, cell, profile) seeded for all 5 scholarship offerings",
+        sql: `select (
+          (select count(*) from public.blueprint_versions where blueprint_id like 'phase2-whole-pool.edutest_scholarship_prep.%') = 5
+          and (select count(*) from public.assessment_profile_versions where profile_id like 'phase2-fixed.edutest_scholarship_prep.%') = 5
+        ) as present`,
+      },
+      {
+        describes: "exam_sessions has first-class mode column",
+        sql: `select exists(
+          select 1 from information_schema.columns
+          where table_schema = 'public' and table_name = 'exam_sessions' and column_name = 'mode'
+        ) as present`,
       },
     ],
   },

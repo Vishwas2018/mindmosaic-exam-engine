@@ -1,0 +1,4 @@
+2026-10-18T11:13:36.594Z fork pid=34980 stdio="pipe" silent=undefined execArgv=["--experimental-import-meta-resolve","--require","C:/tmp/wt-scholarship-prod/node_modules/vitest/suppress-warnings.cjs","--conditions","node","--conditions","development"]
+2026-10-18T11:14:37.124Z child pid=34980 exit code=null signal=SIGTERM
+2026-10-18T11:14:39.323Z fork pid=23736 stdio="pipe" silent=undefined execArgv=["--experimental-import-meta-resolve","--require","C:/tmp/wt-scholarship-prod/node_modules/vitest/suppress-warnings.cjs","--conditions","node","--conditions","development"]
+2026-10-18T11:14:41.693Z child pid=23736 exit code=3221226505 signal=null

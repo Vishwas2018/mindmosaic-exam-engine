@@ -1,0 +1,806 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI draft sentence contexts. No independent review, approval or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y3-spelling-001",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? We ____ over the puddle.",
+      "options": [
+        {
+          "id": "a",
+          "text": "jamped"
+        },
+        {
+          "id": "b",
+          "text": "jumpd"
+        },
+        {
+          "id": "c",
+          "text": "jumped"
+        },
+        {
+          "id": "d",
+          "text": "jumpt"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Jumped keeps the base word jump and adds -ed.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Past-tense -ed ending",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-002",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? A small ____ hopped beside the gate.",
+      "options": [
+        {
+          "id": "a",
+          "text": "rabbit"
+        },
+        {
+          "id": "b",
+          "text": "rabbitt"
+        },
+        {
+          "id": "c",
+          "text": "rabbet"
+        },
+        {
+          "id": "d",
+          "text": "rabit"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Rabbit has a doubled b and one final t.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double consonants in a two-syllable word",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-003",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? Put your cup on the kitchen ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "tayble"
+        },
+        {
+          "id": "b",
+          "text": "tabel"
+        },
+        {
+          "id": "c",
+          "text": "tabble"
+        },
+        {
+          "id": "d",
+          "text": "table"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Table ends with the letters -ble.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed final syllable -le",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-004",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? Ana ____ the basket to the shed.",
+      "options": [
+        {
+          "id": "a",
+          "text": "carried"
+        },
+        {
+          "id": "b",
+          "text": "caried"
+        },
+        {
+          "id": "c",
+          "text": "carrid"
+        },
+        {
+          "id": "d",
+          "text": "carryed"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "For carry, change y to i before adding -ed: carried.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Change y to i before -ed",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-005",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The dog was ____ after the ball.",
+      "options": [
+        {
+          "id": "a",
+          "text": "runing"
+        },
+        {
+          "id": "b",
+          "text": "running"
+        },
+        {
+          "id": "c",
+          "text": "runnen"
+        },
+        {
+          "id": "d",
+          "text": "runnning"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Run doubles the final n before -ing: running.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double the final consonant before -ing",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-006",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? We heard a loud ____ of thunder.",
+      "options": [
+        {
+          "id": "a",
+          "text": "crashe"
+        },
+        {
+          "id": "b",
+          "text": "crashh"
+        },
+        {
+          "id": "c",
+          "text": "crash"
+        },
+        {
+          "id": "d",
+          "text": "crasch"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Crash uses a for its vowel sound and ends in sh.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Common consonant digraph sh",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-007",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? Please ____ the door quietly.",
+      "options": [
+        {
+          "id": "a",
+          "text": "clows"
+        },
+        {
+          "id": "b",
+          "text": "cloze"
+        },
+        {
+          "id": "c",
+          "text": "close"
+        },
+        {
+          "id": "d",
+          "text": "cloes"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The verb close is spelled c-l-o-s-e.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Voiced s sound spelled se",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-008",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The puppy slept in a ____ basket.",
+      "options": [
+        {
+          "id": "a",
+          "text": "cossy"
+        },
+        {
+          "id": "b",
+          "text": "cosey"
+        },
+        {
+          "id": "c",
+          "text": "cosy"
+        },
+        {
+          "id": "d",
+          "text": "cosie"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Cosy is the usual Australian spelling in this sentence.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Australian spelling conventions",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-009",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? Mum cut the apple into ____ pieces.",
+      "options": [
+        {
+          "id": "a",
+          "text": "eigt"
+        },
+        {
+          "id": "b",
+          "text": "eihgt"
+        },
+        {
+          "id": "c",
+          "text": "ate"
+        },
+        {
+          "id": "d",
+          "text": "eight"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The number word eight begins ei- and ends -ght.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Silent-letter number word",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-010",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The class walked ____ the bridge.",
+      "options": [
+        {
+          "id": "a",
+          "text": "acrost"
+        },
+        {
+          "id": "b",
+          "text": "across"
+        },
+        {
+          "id": "c",
+          "text": "accross"
+        },
+        {
+          "id": "d",
+          "text": "acros"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Across has one c and a doubled s.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double consonant in a common preposition",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-011",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The baby bird was ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "hungry"
+        },
+        {
+          "id": "b",
+          "text": "hungray"
+        },
+        {
+          "id": "c",
+          "text": "hungri"
+        },
+        {
+          "id": "d",
+          "text": "hungery"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Hungry is spelled h-u-n-g-r-y without an extra vowel.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed vowel in a two-syllable word",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-012",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? We ____ the shells by colour.",
+      "options": [
+        {
+          "id": "a",
+          "text": "sortid"
+        },
+        {
+          "id": "b",
+          "text": "sorded"
+        },
+        {
+          "id": "c",
+          "text": "sorted"
+        },
+        {
+          "id": "d",
+          "text": "sortted"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Sorted keeps sort and adds -ed.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Past-tense -ed after t",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-013",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The magician made the coin ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "vanish"
+        },
+        {
+          "id": "b",
+          "text": "vannish"
+        },
+        {
+          "id": "c",
+          "text": "vanisch"
+        },
+        {
+          "id": "d",
+          "text": "vanesh"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Vanish has one n and ends with sh.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Short vowel and sh ending",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-014",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The road was too ____ to cross.",
+      "options": [
+        {
+          "id": "a",
+          "text": "bussy"
+        },
+        {
+          "id": "b",
+          "text": "busy"
+        },
+        {
+          "id": "c",
+          "text": "bisy"
+        },
+        {
+          "id": "d",
+          "text": "bizzy"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Busy is the conventional spelling even though its vowel sounds like a short i.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Common irregular spelling",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-015",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? I ____ my library book yesterday.",
+      "options": [
+        {
+          "id": "a",
+          "text": "returned"
+        },
+        {
+          "id": "b",
+          "text": "returnd"
+        },
+        {
+          "id": "c",
+          "text": "returnt"
+        },
+        {
+          "id": "d",
+          "text": "reternd"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Returned keeps return and adds -ed.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Past tense of a multisyllabic word",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-016",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The ____ kitten climbed the curtain.",
+      "options": [
+        {
+          "id": "a",
+          "text": "playfull"
+        },
+        {
+          "id": "b",
+          "text": "playfel"
+        },
+        {
+          "id": "c",
+          "text": "plaiful"
+        },
+        {
+          "id": "d",
+          "text": "playful"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The suffix -ful has one l: playful.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Suffix -ful",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-017",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? We watched the caterpillar ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "slowlye"
+        },
+        {
+          "id": "b",
+          "text": "sloly"
+        },
+        {
+          "id": "c",
+          "text": "slowley"
+        },
+        {
+          "id": "d",
+          "text": "slowly"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Add -ly to slow without changing the base word.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Adverb suffix -ly",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-018",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The two teams had an ____ score.",
+      "options": [
+        {
+          "id": "a",
+          "text": "equil"
+        },
+        {
+          "id": "b",
+          "text": "eequal"
+        },
+        {
+          "id": "c",
+          "text": "equal"
+        },
+        {
+          "id": "d",
+          "text": "equel"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Equal is spelled e-q-u-a-l.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Unstressed vowel in equal",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-019",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The path became ____ after the rain.",
+      "options": [
+        {
+          "id": "a",
+          "text": "muddy"
+        },
+        {
+          "id": "b",
+          "text": "muddie"
+        },
+        {
+          "id": "c",
+          "text": "muddey"
+        },
+        {
+          "id": "d",
+          "text": "mudy"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Muddy has a doubled d before the y ending.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Double consonant before y",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y3-spelling-020",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? The sign gave a helpful ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "warning"
+        },
+        {
+          "id": "b",
+          "text": "warnning"
+        },
+        {
+          "id": "c",
+          "text": "waring"
+        },
+        {
+          "id": "d",
+          "text": "worning"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Warning keeps warn and adds -ing; the n is not doubled.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "Add -ing without unnecessary doubling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    }
+  ]
+}
