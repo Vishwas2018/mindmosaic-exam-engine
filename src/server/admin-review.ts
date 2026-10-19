@@ -11,6 +11,7 @@ import {
   type ReviewCatalogue,
 } from "@/features/admin-review/contracts";
 import { createClient } from "@/lib/supabase/server";
+import releaseIdentities from "@/features/admin-review/release-identities.json";
 
 // Fixed private paths only. No URL/query input ever becomes a filesystem path.
 const PACKETS = [
@@ -40,6 +41,28 @@ const findingsSchema = z.object({
     }),
   ),
 });
+const governanceSchema = z.object({
+  items: z.array(
+    z.object({
+      id: z.string(),
+      bucket: z.string(),
+      reasons: z.array(z.string()),
+      difficultyGate: z.string(),
+      estimator: z.string(),
+      candidateHash: z.string(),
+      publishedContentHash: z.string(),
+    }),
+  ),
+});
+const identities: Record<
+  string,
+  {
+    contentHash: string;
+    historicalContentHash: string;
+    candidateHash: string;
+    publishedContentHash: string;
+  }
+> = releaseIdentities.questions;
 
 function canonical(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
@@ -78,6 +101,29 @@ export async function loadAdminReviewCatalogue(): Promise<ReviewCatalogue> {
     string,
     NonNullable<ReviewCatalogue["entries"][number]["findings"]>
   >();
+  const governance = new Map<
+    string,
+    z.infer<typeof governanceSchema>["items"][number]
+  >();
+  try {
+    const report = governanceSchema.parse(
+      JSON.parse(
+        await readFile(
+          path.join(
+            process.cwd(),
+            "docs/reviews/scholarship-2026-10-18/status.json",
+          ),
+          "utf8",
+        ),
+      ),
+    );
+    for (const item of report.items) governance.set(item.id, item);
+  } catch {
+    catalogue.issues.push(
+      "Release governance status is unavailable; draft content was not loaded.",
+    );
+    return catalogue;
+  }
   for (const section of ["vr", "nr", "rc", "maths"]) {
     try {
       const evidence = findingsSchema.parse(
@@ -102,14 +148,19 @@ export async function loadAdminReviewCatalogue(): Promise<ReviewCatalogue> {
   for (const file of PACKETS) {
     const source = `content/scholarship-drafts/${file}`;
     try {
-      const packet = packetSchema.parse(
-        JSON.parse(
-          await readFile(
-            path.join(process.cwd(), "content/scholarship-drafts", file),
-            "utf8",
-          ),
-        ),
+      const bytes = await readFile(
+        path.join(process.cwd(), "content/scholarship-drafts", file),
       );
+      if (
+        createHash("sha256").update(bytes).digest("hex") !==
+        releaseIdentities.packets[file]
+      ) {
+        catalogue.issues.push(
+          `${source}: source identity differs from release ${releaseIdentities.sourceRevision}; packet withheld.`,
+        );
+        continue;
+      }
+      const packet = packetSchema.parse(JSON.parse(bytes.toString("utf8")));
       for (const [index, raw] of packet.questions.entries()) {
         const result = scholarshipReviewSchema.safeParse(raw);
         if (!result.success || result.data.status !== "draft") {
@@ -126,10 +177,36 @@ export async function loadAdminReviewCatalogue(): Promise<ReviewCatalogue> {
         }
         ids.add(result.data.id);
         const contentHash = hashDraftRevision(raw);
+        const identity = identities[result.data.id];
+        const currentGovernance = governance.get(result.data.id);
+        if (
+          !identity ||
+          identity.contentHash !== contentHash ||
+          !currentGovernance ||
+          identity.candidateHash !== currentGovernance.candidateHash ||
+          identity.publishedContentHash !==
+            currentGovernance.publishedContentHash
+        ) {
+          catalogue.issues.push(
+            `${result.data.id}: release content/governance identity mismatch; item withheld.`,
+          );
+          continue;
+        }
+        const historical = findings.get(result.data.id);
         const common = {
           source,
           contentHash,
-          findings: findings.get(result.data.id),
+          sourceRevision: releaseIdentities.sourceRevision,
+          governance: currentGovernance,
+          findings: historical
+            ? {
+                ...historical,
+                sourceRevision: releaseIdentities.historicalRevision,
+                sourceContentHash: identity.historicalContentHash,
+                matchesCurrentRevision:
+                  identity.historicalContentHash === contentHash,
+              }
+            : undefined,
         };
         catalogue.entries.push({
           kind: "scholarship",

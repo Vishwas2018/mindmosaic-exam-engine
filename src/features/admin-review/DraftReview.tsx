@@ -71,6 +71,12 @@ function ApprovalPanel({
       <details className="text-sm text-muted">
         <summary className="cursor-pointer">Content revision</summary>
         <p className="mt-2 break-all font-mono">{entry.contentHash}</p>
+        {entry.sourceRevision && (
+          <p>
+            Source release:{" "}
+            <span className="break-all font-mono">{entry.sourceRevision}</span>
+          </p>
+        )}
         <p>
           Changes to the source question, shared passage or visuals require
           fresh approval.
@@ -166,13 +172,45 @@ function Findings({ entry }: { entry: ReviewEntry }) {
       className="space-y-2 border-t border-royal/15 pt-5"
     >
       <h2 className="font-semibold text-ink">Independent-review findings</h2>
+      {entry.governance && (
+        <div className="space-y-2">
+          <p className="font-semibold">
+            Current release status:{" "}
+            {entry.governance.bucket.replaceAll("_", " ")}
+          </p>
+          <p>
+            Current difficulty gate: {entry.governance.difficultyGate}.
+            Estimator: {entry.governance.estimator}.
+          </p>
+          <ul className="list-disc space-y-1 pl-5">
+            {entry.governance.reasons.map((reason, index) => (
+              <li key={index}>{reason}</li>
+            ))}
+          </ul>
+          <p className="text-sm text-muted">
+            Governance status is separate from human review approval and
+            publication.
+          </p>
+        </div>
+      )}
       {findings ? (
         <>
           <p className="text-sm text-muted">
             Historical advisory review by {findings.reviewer}, 16 October 2026.
-            Confirm it applies to this revision; recommendations do not grant
-            approval.
+            {findings.matchesCurrentRevision === false
+              ? "Superseded content: these findings do not describe the current revision."
+              : "Historical advisory only: this is not current independent-review or approval evidence."}{" "}
+            Recommendations do not grant approval.
           </p>
+          {findings.sourceRevision && (
+            <details className="text-sm text-muted">
+              <summary>Historical finding identity</summary>
+              <p className="break-all">Source: {findings.sourceRevision}</p>
+              <p className="break-all">
+                Content hash: {findings.sourceContentHash}
+              </p>
+            </details>
+          )}
           <p>
             Recommendation: {findings.recommendation}. Originality:{" "}
             {findings.originality ?? "not assessed"}.
@@ -186,7 +224,8 @@ function Findings({ entry }: { entry: ReviewEntry }) {
             findings.difficultyEstimate !==
               entry.question.metadata.difficulty && (
               <p className="font-semibold text-ink">
-                Difficulty conflict requires human review.
+                Historical difficulty conflict; use the current release gate
+                above.
               </p>
             )}
           {findings.semanticFlags.length > 0 && (
@@ -382,11 +421,13 @@ export function DraftReview({ catalogue }: { catalogue: ReviewCatalogue }) {
       (!section || entry.question.metadata.subject === section) &&
       (!difficulty || entry.question.metadata.difficulty === difficulty) &&
       (!reviewStatus ||
-        (reviewStatus === "approved"
-          ? Boolean(entry.approval)
-          : reviewStatus === "pending"
-            ? !entry.approval
-            : entry.findings?.recommendation === reviewStatus)) &&
+        (reviewStatus.startsWith("release:")
+          ? entry.governance?.bucket === reviewStatus.slice(8)
+          : reviewStatus === "approved"
+            ? Boolean(entry.approval)
+            : reviewStatus === "pending"
+              ? !entry.approval
+              : entry.findings?.recommendation === reviewStatus)) &&
       (!search ||
         `${entry.question.id} ${entry.question.prompt}`
           .toLowerCase()
@@ -543,9 +584,24 @@ export function DraftReview({ catalogue }: { catalogue: ReviewCatalogue }) {
                 <option value="">All statuses</option>
                 <option value="pending">Awaiting human approval</option>
                 <option value="approved">Human approved</option>
-                <option value="revise">Reviewer recommends revision</option>
-                <option value="reject">Reviewer recommends rejection</option>
-                <option value="approve">Reviewer recommends approval</option>
+                <option value="release:ready_for_review">
+                  Release: ready for review
+                </option>
+                <option value="release:requires_revision_or_decision">
+                  Release: requires revision or decision
+                </option>
+                <option value="release:awaiting_external_evidence">
+                  Release: awaiting external evidence
+                </option>
+                <option value="revise">
+                  Historical reviewer recommends revision
+                </option>
+                <option value="reject">
+                  Historical reviewer recommends rejection
+                </option>
+                <option value="approve">
+                  Historical reviewer recommends approval
+                </option>
               </select>
             </label>
             <label className="space-y-2 text-sm font-medium">

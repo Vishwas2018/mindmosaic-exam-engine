@@ -1,6 +1,14 @@
 // @vitest-environment node
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import releaseIdentities from "@/features/admin-review/release-identities.json";
+import { getExamBank } from "@/server/exam-bank";
+import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
+import { hashJson } from "@/features/question-factory/provenance/content-hash";
+import { canonicalQuestionHash } from "@/features/content-governance/publication-integrity";
+import { buildPublishedQuestion } from "@/features/question-factory/publication/build-published-question";
 
 const mocks = vi.hoisted(() => ({
   role: vi.fn(),
@@ -27,7 +35,6 @@ import {
 } from "@/server/admin-review";
 import { approveDraft } from "@/app/admin/review/actions";
 import { scholarshipReviewSchema } from "@/features/admin-review/contracts";
-import { questionSchema } from "@/schemas/question.schema";
 import { assertNoRuntimeDraftReference } from "../../../scripts/validate-scholarship-drafts.mjs";
 
 describe("authenticated Scholarship draft review", () => {
@@ -53,13 +60,21 @@ describe("authenticated Scholarship draft review", () => {
   });
 
   it("rejects a student route importing the private review reader", async () => {
-    vi.mocked(readFile).mockResolvedValueOnce('import { loadAdminReviewCatalogue } from "@/server/admin-review";');
-    await expect(assertNoRuntimeDraftReference("src/app/practice")).rejects.toThrow("outside its authenticated review area");
+    vi.mocked(readFile).mockResolvedValueOnce(
+      'import { loadAdminReviewCatalogue } from "@/server/admin-review";',
+    );
+    await expect(
+      assertNoRuntimeDraftReference("src/app/practice"),
+    ).rejects.toThrow("outside its authenticated review area");
   });
 
   it("rejects a student route referencing unsigned draft files", async () => {
-    vi.mocked(readFile).mockResolvedValueOnce('const directory = "content/scholarship-drafts";');
-    await expect(assertNoRuntimeDraftReference("src/app/practice")).rejects.toThrow("Unsigned scholarship drafts");
+    vi.mocked(readFile).mockResolvedValueOnce(
+      'const directory = "content/scholarship-drafts";',
+    );
+    await expect(
+      assertNoRuntimeDraftReference("src/app/practice"),
+    ).rejects.toThrow("Unsigned scholarship drafts");
   });
 
   it("loads all 160 questions, their shared passages and independent findings without widening student schemas", async () => {
@@ -95,9 +110,78 @@ describe("authenticated Scholarship draft review", () => {
       ),
     ).toBe(true);
     expect(
-      questionSchema.safeParse(catalogue.entries[0].question).success,
+      getExamBank("published").some((question) =>
+        question.id.startsWith("scholarship-y6-"),
+      ),
     ).toBe(false);
     expect(mocks.insert).not.toHaveBeenCalled();
+  });
+
+  it("displays the exact 6b7d3339 release revisions and preserves their governed identities", async () => {
+    const catalogue = await loadAdminReviewCatalogue();
+    expect(releaseIdentities.sourceRevision.startsWith("6b7d3339")).toBe(true);
+    const rawById = new Map<string, unknown>();
+    for (const [file, expected] of Object.entries(releaseIdentities.packets)) {
+      const bytes = readFileSync(`content/scholarship-drafts/${file}`);
+      expect(createHash("sha256").update(bytes).digest("hex"), file).toBe(
+        expected,
+      );
+      for (const question of JSON.parse(bytes.toString("utf8")).questions)
+        rawById.set(question.id, question);
+    }
+    expect(rawById.size).toBe(160);
+    for (const entry of catalogue.entries) {
+      const raw = rawById.get(entry.question.id);
+      expect(entry.question).toEqual(scholarshipReviewSchema.parse(raw));
+      expect(entry.contentHash).toBe(hashDraftRevision(raw));
+      expect(entry.sourceRevision).toBe(releaseIdentities.sourceRevision);
+      const candidate = candidateQuestionSchema.parse(raw);
+      expect(entry.governance?.candidateHash).toBe(hashJson(candidate));
+      const built = buildPublishedQuestion(candidate);
+      if (!built.ok) throw new Error(built.issues.join("; "));
+      expect(entry.governance?.publishedContentHash).toBe(
+        canonicalQuestionHash(built.question),
+      );
+      expect(entry.findings?.matchesCurrentRevision).toBe(
+        entry.findings?.sourceContentHash === entry.contentHash,
+      );
+    }
+    expect(
+      catalogue.entries.find(
+        (entry) => entry.question.id === "scholarship-y6-rc-025",
+      )?.findings?.matchesCurrentRevision,
+    ).toBe(false);
+  });
+
+  it("withholds items whose governance report no longer matches the release", async () => {
+    const status = JSON.parse(
+      readFileSync("docs/reviews/scholarship-2026-10-18/status.json", "utf8"),
+    );
+    status.items[0].candidateHash = "0".repeat(64);
+    vi.mocked(readFile).mockResolvedValueOnce(JSON.stringify(status));
+    const catalogue = await loadAdminReviewCatalogue();
+    expect(catalogue.entries).toHaveLength(159);
+    expect(
+      catalogue.entries.some(
+        (entry) => entry.question.id === status.items[0].id,
+      ),
+    ).toBe(false);
+    expect(catalogue.issues).toContain(
+      `${status.items[0].id}: release content/governance identity mismatch; item withheld.`,
+    );
+  });
+
+  it("withholds a packet changed after the corrected release was pinned", async () => {
+    const original = vi.mocked(readFile).getMockImplementation()!;
+    // Governance report and four historical reports precede the first packet.
+    for (let index = 0; index < 5; index++) vi.mocked(readFile).mockImplementationOnce(original);
+    const packet = JSON.parse(readFileSync("content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json", "utf8"));
+    packet.questions[0].prompt += " Changed after release.";
+    vi.mocked(readFile).mockResolvedValueOnce(Buffer.from(JSON.stringify(packet)));
+    const catalogue = await loadAdminReviewCatalogue();
+    expect(catalogue.entries).toHaveLength(115);
+    expect(catalogue.entries.some((entry) => entry.question.metadata.subject === "verbal_reasoning")).toBe(false);
+    expect(catalogue.issues.some((issue) => issue.includes("source identity differs from release") && issue.includes("packet withheld"))).toBe(true);
   });
 
   it.each(["guest", "student", "parent", "teacher", "revoked admin"])(

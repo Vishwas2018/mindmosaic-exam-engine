@@ -1,4 +1,6 @@
 import { test, expect } from "../fixtures/auth.fixture";
+import { readFileSync } from "node:fs";
+import identities from "../../src/features/admin-review/release-identities.json";
 
 test("Scholarship review is denied to guests and non-admin roles", async ({
   contextAs,
@@ -17,6 +19,80 @@ test("Scholarship review is denied to guests and non-admin roles", async ({
     );
     await page.close();
   }
+});
+
+test("admin renders every corrected release item with current governance and historical findings labelled", async ({
+  contextAs,
+}) => {
+  test.setTimeout(120_000);
+  const page = await (await contextAs("admin")).newPage();
+  await page.goto("/admin/review");
+  await expect(page.getByText("160 drafts match your filters")).toBeVisible();
+  for (const [bucket, count] of [
+    ["ready_for_review", 45],
+    ["requires_revision_or_decision", 35],
+    ["awaiting_external_evidence", 80],
+  ] as const) {
+    await page
+      .getByRole("combobox", { name: "Review status", exact: true })
+      .selectOption(`release:${bucket}`);
+    await expect(
+      page.getByText(`${count} drafts match your filters`),
+    ).toBeVisible();
+  }
+  await page
+    .getByRole("combobox", { name: "Review status", exact: true })
+    .selectOption("");
+  const revised = JSON.parse(
+    readFileSync(
+      "docs/reviews/scholarship-2026-10-18/revised-in-this-release.json",
+      "utf8",
+    ),
+  ) as string[];
+  const questions = Object.keys(identities.packets).flatMap(
+    (file) =>
+      JSON.parse(readFileSync(`content/scholarship-drafts/${file}`, "utf8"))
+        .questions,
+  ) as Array<{
+    id: string;
+    prompt: string;
+    options: Array<{ text: string }>;
+    stimulus?: { body: string };
+  }>;
+  for (const id of revised) {
+    const question = questions.find((item) => item.id === id)!;
+    await page
+      .getByRole("combobox", { name: "Question", exact: true })
+      .selectOption(id);
+    await expect(
+      page.getByText(question.prompt, { exact: true }),
+    ).toBeVisible();
+    for (const option of question.options)
+      await expect(
+        page.getByRole("radio", { name: option.text, exact: true }),
+      ).toBeVisible();
+    if (question.stimulus)
+      await expect(
+        page.getByRole("article").locator("section p").first(),
+      ).toHaveText(question.stimulus.body);
+  }
+  await page
+    .getByRole("combobox", { name: "Question", exact: true })
+    .selectOption("scholarship-y6-rc-025");
+  await expect(
+    page.getByText(
+      /Superseded content: these findings do not describe the current revision/,
+    ),
+  ).toBeVisible();
+  await page.getByText("Content revision", { exact: true }).click();
+  await expect(
+    page.getByText(identities.sourceRevision, { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
+      exact: true,
+    }),
+  ).toBeVisible();
 });
 
 test("admin can browse all 160 drafts and try a complete Reading paper without student API writes", async ({
@@ -58,7 +134,9 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
     ["reading", 35],
     ["numeracy", 40],
   ] as const) {
-    await page.getByRole("combobox", { name: "Section", exact: true }).selectOption(section);
+    await page
+      .getByRole("combobox", { name: "Section", exact: true })
+      .selectOption(section);
     await expect(
       page.getByText(`${count} drafts match your filters`),
     ).toBeVisible();

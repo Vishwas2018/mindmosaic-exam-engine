@@ -50,6 +50,15 @@ export const scholarshipReviewSchema = questionBaseSchema
 export type ReviewEntry = {
   source: string;
   contentHash: string;
+  sourceRevision?: string;
+  governance?: {
+    bucket: string;
+    reasons: string[];
+    difficultyGate: string;
+    estimator: string;
+    candidateHash: string;
+    publishedContentHash: string;
+  };
   findings?: {
     reviewer: string;
     recommendation: string;
@@ -60,6 +69,9 @@ export type ReviewEntry = {
     originality?: string;
     myAnswer: string;
     working?: string;
+    sourceRevision?: string;
+    sourceContentHash?: string;
+    matchesCurrentRevision?: boolean;
   };
   approval?: { approvedBy: string; approvedAt: string };
   kind: "scholarship";
