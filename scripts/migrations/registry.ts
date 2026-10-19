@@ -2820,6 +2820,22 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261019100000",
+    name: "admin_draft_review_approvals",
+    checks: [
+      tableExists("admin_draft_review_approvals"),
+      policyExists("admin_draft_review_approvals", "admin_draft_review_read"),
+      policyExists("admin_draft_review_approvals", "admin_draft_review_insert"),
+      {
+        describes: "draft review history is admin-only and append-only under RLS",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.admin_draft_review_approvals')), false)
+          and has_table_privilege('authenticated', 'public.admin_draft_review_approvals', 'select,insert')
+          and not has_table_privilege('authenticated', 'public.admin_draft_review_approvals', 'update,delete')
+          and not has_table_privilege('anon', 'public.admin_draft_review_approvals', 'select,insert,update,delete') as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

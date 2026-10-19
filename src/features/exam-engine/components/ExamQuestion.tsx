@@ -1,11 +1,11 @@
 "use client";
 
 import { QuestionRenderer } from "@/features/exam-engine/question-renderers";
-import type { CandidateAnswer, CandidateQuestion } from "@/features/exam-engine/types";
+import type { CandidateAnswer, PresentationQuestion } from "@/features/exam-engine/types";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 
 export interface ExamQuestionProps {
-  question: CandidateQuestion;
+  question: PresentationQuestion;
   answer?: CandidateAnswer;
   onAnswerChange?: (answer: CandidateAnswer) => void;
   disabled?: boolean;
