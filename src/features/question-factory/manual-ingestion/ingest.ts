@@ -1,6 +1,7 @@
 import { FACTORY_VERSIONS, type NormalisedIdentity } from "../config";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
 import { verifyFirstPartyAmcAttestation } from "../correctness/amc-attestation";
+import scholarshipIdentityPins from "../correctness/scholarship-identity-pins.json";
 import {
   candidateProvenanceSchema,
   hashJson,
@@ -43,13 +44,21 @@ export async function ingestOneCandidate(
     indexInFile,
     sourceContentHash,
   });
-  // A registered first-party snapshot has a stable draft identity used by
-  // its independent solver and review bindings. Preserve it only after
-  // verifying the complete pinned content and recomputed answer. Arbitrary
-  // external ids (including a spoofed AMC id) still receive minted ids.
+  // A registered first-party snapshot (AMC or scholarship) has a stable draft identity used by
+  // its independent solver and review bindings. Preserve it only after verifying the complete
+  // pinned content hash (and recomputed answer for AMC). Arbitrary external ids still receive
+  // minted ids.
   const registered = candidateQuestionSchema.safeParse(candidateContent);
-  const registeredAmc = registered.success && verifyFirstPartyAmcAttestation(registered.data, hashJson(registered.data)).ok;
-  const candidateId = registeredAmc ? registered.data.id : mintedId;
+  const registeredHash = registered.success ? hashJson(registered.data) : undefined;
+  const registeredAmc =
+    registered.success &&
+    registeredHash !== undefined &&
+    verifyFirstPartyAmcAttestation(registered.data, registeredHash).ok;
+  const registeredScholarship =
+    registered.success &&
+    registeredHash !== undefined &&
+    (scholarshipIdentityPins as Record<string, string>)[registered.data.id] === registeredHash;
+  const candidateId = registeredAmc || registeredScholarship ? registered.data.id : mintedId;
   // Mirrors `ingestion/ingest.ts` (Mission 2A): an unregistered internal
   // `id` field is infrastructure this adapter mints, never a claim an
   // external generator gets to make — any `id` the source content

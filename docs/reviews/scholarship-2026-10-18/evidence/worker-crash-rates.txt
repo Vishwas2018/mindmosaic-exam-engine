@@ -1,0 +1,21 @@
+Worker-fork crash rates measured on the isolated database (Windows, Node v24.15.0, vitest 4.1.10), 18-19 Oct 2026.
+Crash = the vitest worker child exits with code 3221226505 (0xC0000409, STATUS_STACK_BUFFER_OVERRUN), signal null.
+Counts are copied from the console output of each loop; the raw fork-exit logs for the first two loops and the single-file loop are alongside.
+
+workload                                                              crashes / runs
+tests/rls/assessment-session-model.test.ts alone (50 tests)           4 / 30   (worker-fork-exit-codes-single-file-loop.log: 4 x 3221226505, 26 x SIGTERM)
+same file, -t "privileges:"                                           0 / 30
+same file, -t "definer-only tables"                                   1 / 30
+same file, -t "read isolation"                                        0 / 30
+same file, -t "immutability holds"                                    1 / 30
+same file, -t "session lifecycle"                                     0 / 30
+same file, -t "constraints that carry"                                0 / 30
+tests/rls/resolution-rule.test.ts alone (20 tests)                    1 / 30
+tests/rls/classes.test.ts alone                                       0 / 30
+a test file that does nothing and touches no database                 0 / 40
+raw node + pg, 400 connect/begin/failing statement/rollback/end       0 / 38  (two further shell-level failures, exit 127, were not Node crashes)
+whole suite, instrumented loops (probe, hook, hook + node reports)   3 / 14
+whole suite, new guard script with TEST_RUN_RECORD_DIR                1 / 4   (worker-crash-run-record.json, worker-crash-run-output.log)
+
+Each full-suite crash left no JavaScript-level trace: no exit/beforeExit/uncaughtException/unhandledRejection event, no stderr text, and no
+Node diagnostic report with --report-on-fatalerror --report-uncaught-exception.

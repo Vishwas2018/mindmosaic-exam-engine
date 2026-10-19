@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { evaluateRun, type JsonReport } from "../../../scripts/test-run-report";
+import { describeExit, evaluateRun, type JsonReport } from "../../../scripts/test-run-report";
 
 /**
  * The guard that everything else in CI is trusted through
@@ -225,5 +225,54 @@ describe("a malformed report cannot manufacture a pass", () => {
       normalise: identity,
     });
     expect(result.problems.some((p) => p.includes("never ran"))).toBe(true);
+  });
+});
+
+describe("a crashed or silent run can never report success", () => {
+  const complete = (): JsonReport => report();
+
+  it("describes a Windows native crash by its status name instead of a bare number", () => {
+    expect(describeExit(3221226505)).toBe("exit code 3221226505 (0xC0000409, STATUS_STACK_BUFFER_OVERRUN (native fast-fail abort))");
+    expect(describeExit(3221225477)).toContain("STATUS_ACCESS_VIOLATION");
+    expect(describeExit(1)).toBe("exit code 1");
+    expect(describeExit(null, "SIGKILL")).toBe("killed by signal SIGKILL");
+    expect(describeExit(null)).toContain("no exit code");
+  });
+
+  it("fails on a native crash exit code even when the report is otherwise complete", () => {
+    const result = evaluateRun({ expectedFiles: FILES, report: complete(), exitCode: 3221226505, normalise: identity });
+    expect(result.problems.join("\n")).toContain("0xC0000409");
+  });
+
+  it("fails when vitest was killed by a signal, whatever code it carries", () => {
+    const result = evaluateRun({ expectedFiles: FILES, report: complete(), exitCode: 0, signal: "SIGKILL", normalise: identity });
+    expect(result.problems.join("\n")).toContain("killed by signal SIGKILL");
+  });
+
+  it("fails when vitest could not be started", () => {
+    const result = evaluateRun({ expectedFiles: FILES, report: { testResults: [] }, exitCode: null, spawnError: "spawn ENOENT", normalise: identity });
+    expect(result.problems.join("\n")).toContain("could not be run: spawn ENOENT");
+  });
+
+  it("fails on the worst observed shape: a complete-looking report, exit code 0, and the crash text in the output", () => {
+    const output = [
+      " Test Files  2 passed (2)",
+      "⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯",
+      "Vitest caught 1 unhandled error during the test run.",
+      "Error: [vitest-pool]: Worker forks emitted error.",
+      "Caused by: Error: Worker exited unexpectedly",
+      "     Errors  1 error",
+    ].join("\n");
+    const result = evaluateRun({ expectedFiles: FILES, report: complete(), exitCode: 0, outputText: output, normalise: identity });
+    expect(result.problems.length).toBeGreaterThanOrEqual(3);
+    expect(result.problems.join("\n")).toContain("exited unexpectedly");
+  });
+
+  it("stays quiet for a clean run with ordinary output", () => {
+    const result = evaluateRun({
+      expectedFiles: FILES, report: complete(), exitCode: 0, signal: null,
+      outputText: " Test Files  2 passed (2)\n      Tests  4 passed (4)\n", normalise: identity,
+    });
+    expect(result.problems).toEqual([]);
   });
 });

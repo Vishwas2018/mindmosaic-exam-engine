@@ -1,0 +1,40 @@
+HEAD 60f90afa06bd12d37e1cca76ab40fecb6d9348f5
+dirty files: 0
+
+typecheck => exit 0
+lint => exit 0
+unit => exit 0
+build => exit 0
+validate-questions => exit 0
+check-answers => exit 0
+validate-ledger => exit 0
+verify-publication => exit 0
+audit-bank => exit 0
+programmes-readiness => exit 0
+scholarship-drafts => exit 0
+questions-gate => exit 0
+projection-verify-source => exit 0
+roadmap-drafts => exit 0
+roadmap-amc => exit 0
+bar-models => exit 0
+migrations-record => exit 0
+migrations-status => exit 0
+check-gates => exit 0
+rls-attempt-1 => exit 0
+projection-apply-1 => exit 0
+projection-verify-live-1 => exit 0
+projection-apply-2 => exit 0
+projection-verify-live-2 => exit 0
+cutover => exit 0
+e2e-guest => exit 0
+e2e-auth-attempt-1 => exit 0
+ALL DONE
+
+ Test Files  356 passed (356)
+      Tests  6321 passed (6321)
+Complete run (unit): 356 file(s), 6321 test(s), all concluded, none failed.
+Complete run (rls): 36 file(s), 579 test(s), all concluded, none failed.
+  243 passed (12.1m)
+  53 passed (6.5m)
+No drift: 50 of 50 migrations applied, verified against live objects, and recorded.
+RECONCILIATION CLEAN. 2 backfilled sitting(s); 0 version-pinned, 2 legacy_unversioned; backfill idempotent; legacy tables unmodified.

@@ -1,5 +1,6 @@
 import { hashContent } from "@/features/question-factory/provenance/content-hash";
 import type { Question } from "@/schemas/question.schema";
+import { programmeIdForQuestion, publicationGateMode } from "@/features/content-governance/gate-config";
 import { canonicalQuestionHash, validateHumanApproval, type HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
 
 import type { LoadedManifest } from "./load-manifests";
@@ -166,9 +167,13 @@ export function buildProjectionPlan(input: BuildPlanInput): ProjectionPlan {
       problems.push(`factory question '${question.id}' differs from its canonical manifest content`);
       continue;
     }
-    const humanApproval = input.approvals?.get(question.id);
-    const requiresApproval = input.approvals !== undefined ||
-      (input.curatedPublishedAt && input.curatedPublishedAt >= "2026-10-01T00:00:00.000Z");
+    const humanApproval =
+      input.approvals !== undefined ? input.approvals.get(question.id) : manifest?.humanApproval;
+    const itemPublishedAt = manifest?.publishedAt ?? input.curatedPublishedAt;
+    const requiresApproval =
+      Boolean(itemPublishedAt && itemPublishedAt >= "2026-10-01T00:00:00.000Z") ||
+      question.metadata.subject === "amc_mathematics" ||
+      publicationGateMode(programmeIdForQuestion(question)) === "enforce";
     if (!humanApproval && requiresApproval) {
       problems.push(`question '${question.id}' has no verified human approval`);
       continue;

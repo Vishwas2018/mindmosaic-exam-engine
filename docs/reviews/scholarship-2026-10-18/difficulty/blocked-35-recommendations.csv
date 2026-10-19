@@ -1,0 +1,36 @@
+id,declared,estimator,myLabel,myConfidence,recommendation,priorOpusLabel,priorOpusConfidence,rationale
+scholarship-y6-nr-003,medium,easy,easy,medium,relabel_easy,easy,high,"Differences 2,4,6,8 follow one familiar growing-difference rule; take the differences once, extend once."
+scholarship-y6-nr-004,medium,easy,medium,medium,keep,medium,low,"The first differences (3,2,5,7) do not suggest a rule, so the candidate has to abandon the default method and discover that each term is the sum of the previous two."
+scholarship-y6-nr-005,medium,easy,easy,medium,relabel_easy,easy,high,Two interleaved strands each move by a constant 3. Splitting the sequence is the only idea and it is routine for this cohort.
+scholarship-y6-nr-007,medium,easy,easy,medium,relabel_easy,easy,high,"Differences 3,6,9,12 are the multiples of three; one level of differences and an obvious pattern."
+scholarship-y6-nr-008,medium,easy,medium,high,keep,easy,med,"First differences 2,6,10,14 are not constant, so a second level of differences (constant 4) must be found before extending."
+scholarship-y6-nr-009,medium,easy,medium,low,keep,easy,high,"Two interleaved strands with different steps (+3 and -4) and a position trap: the next term belongs to the first strand, and the other strand's next value (38) is offered as a distractor. Borderline easy."
+scholarship-y6-nr-010,medium,easy,medium,low,keep,easy,med,"Additive recurrence (each term is the sum of the previous two). Visible from 3+4=7, but it is a non-linear idea that most Year 6 candidates have not met. Borderline easy."
+scholarship-y6-nr-012,medium,easy,medium,high,keep,medium,low,No rule is stated. The candidate must hypothesise and test an invariant (every row and column sums to 30) before the missing cell can be found.
+scholarship-y6-nr-021,medium,easy,medium,medium,keep,medium,med,Heads-and-legs needs an assume-all-chickens correction or a systematic trial with two coupled constraints; a classic but not a one-step item.
+scholarship-y6-nr-026,easy,medium,easy,high,keep,easy,high,"Five consecutive numbers: the middle term is the mean (27), so the largest is 29. One shortcut, one step."
+scholarship-y6-nr-030,medium,easy,medium,low,keep,easy,med,"Halve the perimeter, then solve a sum-and-difference pair and report the length rather than the width. Short, but three linked steps. Borderline easy."
+scholarship-y6-nr-031,challenging,medium,challenging,high,keep,medium,med,Two coordinated constraints on the digits plus a quotient-and-remainder condition; the candidate has to build N = 7(t+u)+3 with t = u+3 and solve. Clearly the hardest item in the section.
+scholarship-y6-nr-035,easy,medium,easy,high,keep,easy,med,One unknown with direct relationships (M + M+4 + 2M = 44). The label is right; the estimator over-reads its word count.
+scholarship-y6-nr-038,medium,easy,medium,low,keep,easy,high,"A short factor-pair search for sum 18 and product 72, then the difference. Borderline easy because the pair is found quickly."
+scholarship-y6-maths-002,easy,medium,easy,high,keep,easy,high,"Three sequential signed changes with direction words. Several operations but one idea, so easy."
+scholarship-y6-maths-003,medium,easy,medium,medium,keep,easy,med,"A double negative inside a four-term expression; the sign handling, not the arithmetic, is the demand."
+scholarship-y6-maths-008,easy,medium,easy,high,keep,easy,high,"Percentage difference (20%) of a total, or two simple percentages. Routine."
+scholarship-y6-maths-010,easy,medium,easy,medium,keep,easy,high,Percentage increase on friendly numbers. The wrong-base trap (20%) is well known and is offered as a distractor.
+scholarship-y6-maths-012,easy,medium,easy,high,keep,easy,high,"Share $72,000 in the ratio 2:3:4 and report the middle share. Standard."
+scholarship-y6-maths-017,easy,medium,easy,high,keep,easy,high,Ratio parts of a total with friendly numbers.
+scholarship-y6-maths-019,easy,medium,easy,high,keep,easy,high,Sum and difference of two ages with small numbers.
+scholarship-y6-maths-020,medium,easy,medium,medium,keep,easy,med,"Unknown on both sides of a given equation. Procedural, but collecting terms across the equals sign is above routine Year 6 work."
+scholarship-y6-maths-021,medium,easy,medium,low,keep,easy,high,"Three consecutive odd numbers need either the mean shortcut (29, then +2) or x, x+2, x+4 set up and solved. The distractor 29 catches the slip. Borderline easy."
+scholarship-y6-maths-022,medium,easy,medium,medium,keep,medium,high,"Two linear conditions in two unknowns, solved by substitution or elimination. Arguably the hardest maths item in this group and could be argued up to challenging."
+scholarship-y6-maths-023,medium,easy,easy,medium,relabel_easy,easy,high,Direct substitution; the only care needed is reading 2qr as a product and applying order of operations.
+scholarship-y6-maths-025,medium,easy,medium,low,keep,medium,low,"A verbal description must be translated into 6n - 14 = 2n + 18, then solved with the unknown on both sides."
+scholarship-y6-maths-026,medium,easy,medium,low,keep,medium,low,"Vertically opposite angles are equal, then an unknown-on-both-sides solve, then back-substitution to report the angle rather than x."
+scholarship-y6-maths-027,medium,easy,medium,low,keep,medium,med,"All three angles must be expressed through one variable and summed to 180; the distractor 40 is the value of B, not A."
+scholarship-y6-maths-029,medium,easy,medium,medium,keep,medium,med,"Supplementary angles plus a careful translation of '36 less than three times'; the question asks for the smaller angle, so the other angle must be checked."
+scholarship-y6-maths-031,easy,medium,easy,high,keep,easy,high,Subtract one square area from another.
+scholarship-y6-maths-032,medium,easy,medium,medium,keep,medium,med,"Needs the polygon angle-sum rule or the exterior-angle idea, which is stretch content for Year 6; the arithmetic after that is easy."
+scholarship-y6-maths-033,easy,medium,easy,high,keep,easy,high,Complement probability as a percentage; the NOT in the stem is the only trap.
+scholarship-y6-maths-035,medium,easy,medium,medium,keep,medium,med,Inclusion-exclusion (or a Venn diagram) to avoid double-counting the 7 who play both sports.
+scholarship-y6-maths-037,easy,medium,easy,high,keep,easy,high,A repeated change followed by one more; the result crosses zero but the arithmetic is two simple steps.
+scholarship-y6-maths-039,medium,easy,medium,low,keep,medium,low,"Build a perimeter expression that counts the repeated side twice, collect terms, then solve for k."

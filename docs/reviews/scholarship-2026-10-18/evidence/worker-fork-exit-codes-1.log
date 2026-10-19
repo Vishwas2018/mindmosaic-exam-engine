@@ -1,0 +1,12 @@
+2026-10-18T11:08:41.437Z fork pid=23180 args="C:\\tmp\\wt-scholarship-prod\\node_modules\\vitest\\dist\\workers\\forks.js"
+2026-10-18T11:08:43.020Z child pid=23180 exit code=3221226505 signal=null
+2026-10-18T11:08:54.061Z fork pid=36028 args="C:\\tmp\\wt-scholarship-prod\\node_modules\\vitest\\dist\\workers\\forks.js"
+2026-10-18T11:09:55.532Z child pid=36028 exit code=null signal=SIGTERM
+2026-10-18T11:09:57.723Z fork pid=52164 args="C:\\tmp\\wt-scholarship-prod\\node_modules\\vitest\\dist\\workers\\forks.js"
+2026-10-18T11:10:57.840Z child pid=52164 exit code=null signal=SIGTERM
+2026-10-18T11:11:00.087Z fork pid=28876 args="C:\\tmp\\wt-scholarship-prod\\node_modules\\vitest\\dist\\workers\\forks.js"
+2026-10-18T11:11:59.642Z child pid=28876 exit code=null signal=SIGTERM
+2026-10-18T11:12:01.942Z fork pid=22316 args="C:\\tmp\\wt-scholarship-prod\\node_modules\\vitest\\dist\\workers\\forks.js"
+2026-10-18T11:13:01.712Z child pid=22316 exit code=null signal=SIGTERM
+2026-10-18T11:13:03.849Z fork pid=50268 args="C:\\tmp\\wt-scholarship-prod\\node_modules\\vitest\\dist\\workers\\forks.js"
+2026-10-18T11:13:09.023Z child pid=50268 exit code=3221226505 signal=null

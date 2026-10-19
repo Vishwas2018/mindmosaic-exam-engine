@@ -2820,6 +2820,50 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261014090000",
+    name: "scholarship_programme_offerings",
+    checks: [
+      {
+        describes: "scholarship_entry assessment family is seeded",
+        sql: `select exists(select 1 from public.assessment_families where id = 'scholarship_entry') as present`,
+      },
+      {
+        describes: "edutest_scholarship_prep programme is seeded",
+        sql: `select exists(select 1 from public.programmes where id = 'edutest_scholarship_prep') as present`,
+      },
+      {
+        describes: "verbal_reasoning and numerical_reasoning subjects are seeded",
+        sql: `select exists(select 1 from public.subjects where id = 'verbal_reasoning')
+          and exists(select 1 from public.subjects where id = 'numerical_reasoning') as present`,
+      },
+      {
+        describes: "all 5 Year 6 scholarship offerings are seeded",
+        sql: `select (count(*) = 5) as present from public.programme_offerings
+          where programme_id = 'edutest_scholarship_prep' and year_level = 6`,
+      },
+      {
+        describes: "scholarship programmes are set to enforce mode in publication_gate_settings",
+        sql: `select (exists(select 1 from public.publication_gate_settings where programme_id = 'edutest_scholarship_prep' and enforced = true)
+          and exists(select 1 from public.publication_gate_settings where programme_id = 'scholarship-y6-verbal-reasoning' and enforced = true)
+          and exists(select 1 from public.publication_gate_settings where programme_id = 'scholarship-y6-numerical-reasoning' and enforced = true)) as present`,
+      },
+      {
+        describes: "Phase 2 config rows (blueprint, cell, profile) seeded for all 5 scholarship offerings",
+        sql: `select (
+          (select count(*) from public.blueprint_versions where blueprint_id like 'phase2-whole-pool.edutest_scholarship_prep.%') = 5
+          and (select count(*) from public.assessment_profile_versions where profile_id like 'phase2-fixed.edutest_scholarship_prep.%') = 5
+        ) as present`,
+      },
+      {
+        describes: "exam_sessions has first-class mode column",
+        sql: `select exists(
+          select 1 from information_schema.columns
+          where table_schema = 'public' and table_name = 'exam_sessions' and column_name = 'mode'
+        ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

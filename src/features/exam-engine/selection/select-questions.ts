@@ -11,6 +11,8 @@ const SUBJECTS_BY_FILTER: Record<SubjectFilter, readonly string[]> = {
   digital_technologies: ["digital_technologies"],
   spelling: ["spelling"],
   amc_mathematics: ["amc_mathematics"],
+  verbal_reasoning: ["verbal_reasoning"],
+  numerical_reasoning: ["numerical_reasoning"],
   /*
    * Every subject, which is what "mixed" has always meant here — the
    * selection suite asserts this list covers the entire bank.
@@ -35,6 +37,8 @@ const SUBJECTS_BY_FILTER: Record<SubjectFilter, readonly string[]> = {
     "digital_technologies",
     "spelling",
     "amc_mathematics",
+    "verbal_reasoning",
+    "numerical_reasoning",
   ],
 };
 

@@ -1,0 +1,37 @@
+{
+  "reviewer": "Claude Opus 5.5 (claude-opus-5-5), independent blind reviewer D",
+  "items": [
+    {
+      "id": "scholarship-y6-rc-022",
+      "myAnswer": "d",
+      "evidence": "Para 3: 'fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls.' Option d ('confuses young birds on their first flight, so they end up among roads and buildings') paraphrases this as maiden flight = first flight, disoriented = confuses, traffic/concrete walls = roads and buildings.",
+      "singleAnswer": true,
+      "issues": [
+        "Only one option is defensible. b is a good, deliberate distractor: it takes the delayed-foraging and predator harm from the sugar glider/microbat sentence and pins it on the wrong animal. It rewards careful attribution and cannot be defended for shearwaters.",
+        "a, c and e have no support in the passage. e ('blinds them permanently') is a fair misreading trap for 'disoriented', but it is clearly wrong. a and c are weak, easily ruled out, so in practice this is a 2-way choice for a careful reader.",
+        "Mild length cue: d is the longest option (~15 words against 9-13). b is close enough (~12) that the cue is weak. d paraphrases the passage rather than copying it, so verbatim matching does not give it away.",
+        "'end up among roads and buildings' is softer than the passage ('fatally disoriented ... crashing into'). It is still accurate, not misleading.",
+        "No factual problems: grounding of short-tailed shearwater fledglings by coastal lighting (e.g. Phillip Island) is well documented. The language is fine for Year 6.",
+        "Difficulty: at the lower-middle end for scholarship. It is literal retrieval with one attribution trap (b). That is acceptable for an early item in the set."
+      ],
+      "verdict": "PASS",
+      "fix": "Optional polish only. Shorten d to cut the length cue, e.g. 'It confuses them on their first flight, so they fly into roads and walls.' Optionally swap a or c for a closer distractor tied to the passage, e.g. 'It hides the moon and stars, so they cannot leave the island at all.'"
+    },
+    {
+      "id": "scholarship-y6-rc-023",
+      "myAnswer": "b",
+      "evidence": "Para 4: 'Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step.' Option b ('Fitting hooded fixtures so street lamps shine only towards the ground') matches this.",
+      "singleAnswer": true,
+      "issues": [
+        "Only one option is defensible. a turns two recommendations upside down: blue-white instead of warm-amber, and every direction instead of downward. c is contradicted by 'does not require plunging our communities into perilous darkness'. d and e go against para 2's argument that glare and unshielded floodlights are not the answer.",
+        "No clash with the warm-amber LED recommendation, because no option offers it. Do not add an amber option later: the passage does not clearly say whether that step belongs to councils, which would create a two-answer risk.",
+        "Mild lexical cue: b reuses the key phrase 'hooded fixtures' from the passage. The rest is paraphrased ('shine only towards the ground'), so it is not near-verbatim. Option lengths are balanced (8-11 words, with a as long as b).",
+        "The distractors are distinct, but all except c simply reverse the author's view, so a reader who has the gist eliminates them quickly.",
+        "No factual or language problems.",
+        "Difficulty: easy for Year 6 scholarship. It is direct retrieval from one sentence. This is acceptable as a lead-in item but adds little discrimination."
+      ],
+      "verdict": "PASS",
+      "fix": "Optional: to remove the keyword match and lift difficulty, reword b as 'Fitting covers so that street lamps point their light downwards' and replace d or e with a closer distractor, e.g. 'Moving street lamps away from footpaths so pedestrians walk in darkness'. Neither change is needed to pass."
+    }
+  ]
+}

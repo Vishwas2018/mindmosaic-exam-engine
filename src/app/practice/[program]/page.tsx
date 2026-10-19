@@ -13,6 +13,9 @@ import {
 import { resolveProgramStatuses } from "@/features/taxonomy/coverage";
 import { AppHeader } from "@/components/shell/AppHeader";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
+import { findPaperForCell } from "@/features/exam-engine/exam-patterns";
+import { describePaperShape } from "@/features/exam-engine/exam-patterns/pattern-session";
+import { EXAM_STYLE_NAMES } from "@/features/exam-engine/exam-patterns/pattern-presentation";
 import { getBankEligibility } from "@/server/exam-bank";
 
 /**
@@ -55,6 +58,9 @@ export default async function ProgramPracticePage({
   const { program: slug } = await params;
   const program = resolveLiveProgram(slug);
   if (!program) notFound();
+  /* Scholarship-style content is sat only as a whole named paper, so its program page points at that paper rather
+     than offering a custom-length builder it cannot honour. */
+  const paper = program.scope ? findPaperForCell(program.scope) : undefined;
 
   return (
     <div className="min-h-screen overflow-hidden bg-page">
@@ -82,7 +88,7 @@ export default async function ProgramPracticePage({
         <div className="mt-5 max-w-2xl">
           {program.scope && (
             <Badge variant="purple" className="mb-4">
-              {program.scope.examStyle === "naplan_style" ? "NAPLAN-style" : "ICAS-style"}
+              {EXAM_STYLE_NAMES[program.scope.examStyle] ?? "Practice"}
             </Badge>
           )}
           <h1 className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-black leading-[1.02] tracking-[-0.045em] text-ink">
@@ -91,6 +97,25 @@ export default async function ProgramPracticePage({
           <p className="mt-4 text-lg leading-8 text-muted">{program.blurb}</p>
         </div>
 
+        {paper ? (
+          <div className="mt-9">
+            <Card className="p-8" variant="default">
+              <p className="text-base font-bold text-ink" data-testid="program-paper-shape">
+                {describePaperShape(paper.questionCount, paper.timeMinutes)}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                This is sat as one whole paper, signed in, with the time allowed set in advance.
+              </p>
+              <Link
+                href={`/exams/${paper.id}`}
+                data-testid="program-paper-link"
+                className="mt-5 inline-flex min-h-12 items-center rounded-xl bg-royal px-5 text-sm font-bold text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/30"
+              >
+                See the paper
+              </Link>
+            </Card>
+          </div>
+        ) : (
         <div className="mt-9">
           <Suspense
             fallback={
@@ -107,6 +132,7 @@ export default async function ProgramPracticePage({
             />
           </Suspense>
         </div>
+        )}
       </main>
     </div>
   );

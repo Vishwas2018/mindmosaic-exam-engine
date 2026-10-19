@@ -47,12 +47,49 @@ export interface RunEvaluation {
   readonly testsTotal: number;
 }
 
+/**
+ * Windows reports a native crash of a child process as a large exit code (an NTSTATUS value) with no signal and, often,
+ * no output at all. 0xC0000409 is STATUS_STACK_BUFFER_OVERRUN, which the C runtime also uses for a fast-fail abort. It is
+ * what the RLS suite worker fork exits with on a Windows host (docs/reviews/scholarship-2026-10-18/RLS-FLAKINESS.md).
+ */
+const NTSTATUS: Readonly<Record<number, string>> = {
+  0xc0000005: "STATUS_ACCESS_VIOLATION",
+  0xc0000409: "STATUS_STACK_BUFFER_OVERRUN (native fast-fail abort)",
+  0xc000013a: "STATUS_CONTROL_C_EXIT",
+  0xc0000374: "STATUS_HEAP_CORRUPTION",
+};
+
+export function describeExit(code: number | null, signal?: string | null): string {
+  if (signal) return `killed by signal ${signal}`;
+  if (code === null) return "no exit code (process did not report one)";
+  const status = NTSTATUS[code >>> 0];
+  if (status !== undefined) return `exit code ${code} (0x${(code >>> 0).toString(16).toUpperCase()}, ${status})`;
+  return `exit code ${code}`;
+}
+
+/**
+ * Text that vitest prints when a worker died or an error escaped a test, whatever its exit code. The JSON report does
+ * not carry these, and the worst observed case was a crash reported with exit code 0, so the console output is read too.
+ */
+const ALARMING_OUTPUT: readonly { readonly pattern: RegExp; readonly meaning: string }[] = [
+  { pattern: /Worker exited unexpectedly/, meaning: "a vitest worker process exited unexpectedly" },
+  { pattern: /\[vitest-pool\]: Worker forks emitted error/, meaning: "the vitest worker pool reported an error" },
+  { pattern: /Vitest caught \d+ unhandled error/, meaning: "vitest caught an unhandled error" },
+  { pattern: /^\s*Errors\s+\d+ errors?\b/m, meaning: "vitest summary lists errors" },
+];
+
 export interface RunInput {
   /** Repo-relative, forward-slashed paths of every test file found on disk. */
   readonly expectedFiles: readonly string[];
   readonly report: JsonReport;
   /** vitest's own exit status; null when it died by signal. */
   readonly exitCode: number | null;
+  /** Signal that ended vitest, when it did not exit normally. */
+  readonly signal?: string | null;
+  /** Set when the process could not be started or reported a spawn error. */
+  readonly spawnError?: string;
+  /** Everything vitest wrote to stdout and stderr, scanned for crash text. */
+  readonly outputText?: string;
   /** Normalises a reporter-emitted absolute path to the expectedFiles form. */
   readonly normalise: (path: string) => string;
 }
@@ -61,8 +98,16 @@ export function evaluateRun(input: RunInput): RunEvaluation {
   const problems: string[] = [];
   const { expectedFiles, report, exitCode, normalise } = input;
 
-  if (exitCode !== 0) {
+  if (input.spawnError !== undefined) {
+    problems.push(`vitest could not be run: ${input.spawnError}`);
+  }
+  if (exitCode !== 0 || input.signal) {
     problems.push(`vitest exited ${exitCode ?? "by signal"}`);
+    const detail = describeExit(exitCode, input.signal);
+    if (detail !== `exit code ${exitCode}`) problems.push(`vitest ended with ${detail}`);
+  }
+  for (const { pattern, meaning } of ALARMING_OUTPUT) {
+    if (input.outputText !== undefined && pattern.test(input.outputText)) problems.push(`output says ${meaning}`);
   }
 
   const results = report.testResults ?? [];

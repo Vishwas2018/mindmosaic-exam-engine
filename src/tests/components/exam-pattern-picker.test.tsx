@@ -192,7 +192,7 @@ describe("adaptations disclosure", () => {
 describe("picker grouping", () => {
   it("groups year level, then exam type, then subjects", () => {
     const groups = groupExamPatterns();
-    expect(groups.map((group) => group.yearLevel)).toEqual([3, 5]);
+    expect(groups.map((group) => group.yearLevel)).toEqual([3, 5, 6]);
 
     const year3 = groups[0]!;
     expect(year3.styles.map((style) => style.examStyle)).toEqual([
@@ -209,5 +209,10 @@ describe("picker grouping", () => {
     expect(icasY3.indexOf("icas-y3-reading-module")).toBeLessThan(
       icasY3.indexOf("icas-y3-writing-deferred"),
     );
+
+    const year6 = groups[2]!;
+    expect(year6.styles.map((style) => style.examStyle)).toEqual([
+      "scholarship_style",
+    ]);
   });
 });

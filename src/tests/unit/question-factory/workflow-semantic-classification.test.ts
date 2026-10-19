@@ -90,8 +90,8 @@ describe("classifySemanticCategory (PD-2)", () => {
  * `semantic_objective` — the exact `!== "numeracy"` bug this fixes.
  */
 describe("classifySemanticCategory / isSemanticCategory — DETERMINISTIC_MATHS_SUBJECTS fail-closed routing", () => {
-  it("DETERMINISTIC_MATHS_SUBJECTS contains exactly the maths subjects the taxonomy actually defines today ('numeracy' and 'amc_mathematics' — grepped from SUBJECT_REGISTRY, not guessed)", () => {
-    expect([...DETERMINISTIC_MATHS_SUBJECTS]).toEqual(["numeracy", "amc_mathematics"]);
+  it("DETERMINISTIC_MATHS_SUBJECTS contains exactly the maths subjects the taxonomy actually defines today ('numeracy', 'amc_mathematics', and 'numerical_reasoning' — grepped from SUBJECT_REGISTRY, not guessed)", () => {
+    expect([...DETERMINISTIC_MATHS_SUBJECTS]).toEqual(["numeracy", "amc_mathematics", "numerical_reasoning"]);
   });
 
   it.each([...DETERMINISTIC_MATHS_SUBJECTS])("routes every maths subject ('%s') to deterministically_computable, never semantic_objective", (subject) => {

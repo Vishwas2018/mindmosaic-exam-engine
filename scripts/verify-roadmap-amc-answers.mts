@@ -94,7 +94,19 @@ const solvers: Record<string, Solver> = {
   "roadmap-amc-y5-016": () => "9:24 am",
   "roadmap-amc-y5-017": () => 24 / (2 / 5),
   "roadmap-amc-y5-018": () => [12, 18, 15, 21, 14].sort((a, b) => a - b)[2],
-  "roadmap-amc-y5-019": () => "apple",
+  "roadmap-amc-y5-019": () => {
+    const fruits = ["apple", "banana", "cherry", "date", "grape"] as const;
+    const assignments = permutations([0, 1, 2, 3, 4]).filter(
+      (order) =>
+        order[0] === 2 &&
+        order[3] === 3 &&
+        order[1] !== 1 &&
+        order[1] !== 4 &&
+        order[2] !== 4,
+    );
+    if (assignments.length !== 1) throw new Error("Fruit assignment is not unique");
+    return fruits[assignments[0][2]];
+  },
   "roadmap-amc-y5-020": () => 2 * (10 + 5),
   "roadmap-amc-y5-021": () => Array.from({ length: 90 }, (_, index) => index + 10).find(value => {
     const tens = Math.floor(value / 10);

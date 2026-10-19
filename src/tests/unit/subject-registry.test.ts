@@ -9,6 +9,7 @@ import {
   getSubject,
   isKnownStrandLabel,
   isKnownSubject,
+  isDeterministicMathsSubject,
   subjectIdsFromRegistry,
   type SubjectRegistryEntry,
 } from "@/features/taxonomy/subject-registry";
@@ -25,7 +26,7 @@ describe("subject registry", () => {
    * and ordered on purpose — this test is the gate that makes adding a subject
    * a deliberate act rather than a side effect.
    */
-  it("covers exactly the nine registered subjects, each with at least one strand", () => {
+  it("covers exactly the eleven registered subjects, each with at least one strand", () => {
     expect(SUBJECT_IDS).toEqual([
       "numeracy",
       "reading",
@@ -36,6 +37,8 @@ describe("subject registry", () => {
       "spelling",
       "critical_creative_thinking",
       "amc_mathematics",
+      "verbal_reasoning",
+      "numerical_reasoning",
     ]);
     for (const subject of SUBJECT_REGISTRY) {
       expect(subject.strands.length).toBeGreaterThan(0);
@@ -244,6 +247,30 @@ describe("subject registry", () => {
       const styles: readonly string[] = amc?.supportedExamStyles ?? [];
       expect(styles.includes("naplan_style")).toBe(false);
       expect(styles.includes("icas_style")).toBe(false);
+    });
+  });
+
+  describe("scholarship subjects (verbal_reasoning and numerical_reasoning)", () => {
+    const vr = getSubject("verbal_reasoning");
+    const nr = getSubject("numerical_reasoning");
+
+    it("restricts verbal_reasoning and numerical_reasoning to scholarship_style and Year 6", () => {
+      expect(vr?.supportedExamStyles).toEqual(["scholarship_style"]);
+      expect(vr?.yearLevels).toEqual([6]);
+      expect(nr?.supportedExamStyles).toEqual(["scholarship_style"]);
+      expect(nr?.yearLevels).toEqual([6]);
+    });
+
+    it("supports scholarship_style on reading, numeracy, and writing", () => {
+      expect(getSubject("reading")?.supportedExamStyles).toContain("scholarship_style");
+      expect(getSubject("numeracy")?.supportedExamStyles).toContain("scholarship_style");
+      expect(getSubject("writing")?.supportedExamStyles).toContain("scholarship_style");
+    });
+
+    it("registers isDeterministicMathsSubject accurately", () => {
+      expect(isDeterministicMathsSubject("numerical_reasoning")).toBe(true);
+      expect(isDeterministicMathsSubject("verbal_reasoning")).toBe(false);
+      expect(isDeterministicMathsSubject("numeracy")).toBe(true);
     });
   });
 

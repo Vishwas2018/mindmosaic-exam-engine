@@ -19,7 +19,7 @@ export interface AttemptRow {
   id: string;
   submitted_at: string;
   result: unknown;
-  session: { config: unknown } | null;
+  session: { config: unknown; mode?: string } | null;
 }
 
 export interface AttemptSummary {
@@ -46,6 +46,7 @@ export interface AttemptSummary {
    */
   attemptedQuestions: number;
   pendingManualReview: boolean;
+  mode?: "standard" | "confidence";
 }
 
 export interface SubjectMastery {
@@ -73,6 +74,8 @@ const CONFIG_SUBJECT_LABELS: Record<SubjectFilter, string> = {
   digital_technologies: "Digital Technologies",
   spelling: "Spelling",
   amc_mathematics: "AMC Mathematics",
+  verbal_reasoning: "Verbal Reasoning",
+  numerical_reasoning: "Numerical Reasoning",
   mixed: "Mixed subjects",
 };
 
@@ -84,6 +87,8 @@ const BANK_SUBJECT_LABELS: Record<string, string> = {
   language_conventions: "Language conventions",
   science: "Science",
   amc_mathematics: "AMC Mathematics",
+  verbal_reasoning: "Verbal Reasoning",
+  numerical_reasoning: "Numerical Reasoning",
   /* Named explicitly: the generic fallback below would title-case only the
      first word, giving "Digital technologies". */
   digital_technologies: "Digital Technologies",
@@ -93,6 +98,8 @@ const BANK_SUBJECT_LABELS: Record<string, string> = {
 const EXAM_STYLE_LABELS: Record<string, string> = {
   naplan_style: "NAPLAN-style",
   icas_style: "ICAS-style",
+  amc_style: "AMC-style",
+  scholarship_style: "Scholarship-style",
   mixed: "Mixed-style",
 };
 
@@ -127,8 +134,11 @@ export function summarizeAttempt(row: AttemptRow): AttemptSummary {
     typeof config.subject === "string" && config.subject in CONFIG_SUBJECT_LABELS
       ? CONFIG_SUBJECT_LABELS[config.subject as SubjectFilter]
       : undefined;
-  const title =
+  const isConfidence =
+    row.session?.mode === "confidence" || Boolean(config.confidenceMode);
+  const baseTitle =
     [styleLabel, subject].filter(Boolean).join(" ") || "Practice session";
+  const title = isConfidence ? `${baseTitle} (Confidence Mode)` : baseTitle;
 
   const marksAvailable =
     typeof result.objectiveMarksAvailable === "number"
@@ -156,6 +166,7 @@ export function summarizeAttempt(row: AttemptRow): AttemptSummary {
     pendingManualReview:
       typeof result.pendingManualMarks === "number" &&
       result.pendingManualMarks > 0,
+    mode: isConfidence ? "confidence" : "standard",
   };
 }
 
@@ -170,6 +181,10 @@ export function aggregateMastery(
   const totals = new Map<string, { earned: number; available: number }>();
 
   for (const row of rows) {
+    const config = parseConfig(row.session?.config);
+    if (row.session?.mode === "confidence" || Boolean(config.confidenceMode)) {
+      continue;
+    }
     const result = parseResult(row.result);
     const bySubject = isRecord(result.breakdowns)
       ? result.breakdowns.bySubject

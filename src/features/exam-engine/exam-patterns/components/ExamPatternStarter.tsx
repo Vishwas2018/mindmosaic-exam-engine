@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card } from "@/components/ui";
@@ -56,6 +57,9 @@ export function ExamPatternStarter({
   const startServerPatternExam = useExamStore((state) => state.startServerPatternExam);
   const serverMode = auth.status === "authenticated";
 
+  /* A signed-in-only paper is never put in the public guest bank, so a guest cannot start it at all. */
+  const signInRequired = pattern.guestAccess === "signed_in_only" && !serverMode && auth.status !== "loading";
+
   const asPracticeModule = readiness.state === "short";
   const servedCount = asPracticeModule ? readiness.availableCount : pattern.questionCount;
   const minutes = asPracticeModule
@@ -63,6 +67,7 @@ export function ExamPatternStarter({
     : pattern.timeMinutes;
 
   const [form, setForm] = useState(0);
+  const [confidenceMode, setConfidenceMode] = useState(false);
   const [stage, setStage] = useState<"overview" | "instructions">("overview");
   const [startError, setStartError] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
@@ -101,7 +106,7 @@ export function ExamPatternStarter({
     "push",
   );
 
-  const config = patternExamConfig(pattern, servedCount, asPracticeModule);
+  const config = patternExamConfig(pattern, servedCount, asPracticeModule, confidenceMode);
   const sittingLabel = patternSittingLabel(pattern, servedCount, asPracticeModule);
 
   const handleStart = async () => {
@@ -112,6 +117,7 @@ export function ExamPatternStarter({
       asPracticeModule,
       form,
       formCount: Math.max(1, readiness.distinctPapers),
+      confidenceMode,
     };
 
     if (serverMode) {
@@ -161,7 +167,7 @@ export function ExamPatternStarter({
         config={config}
         title={sittingLabel}
         questionCount={servedCount}
-        timing="timed"
+        timing={confidenceMode ? "untimed" : "timed"}
         durationMinutes={minutes}
         includesManualMarking={false}
         onBack={() => {
@@ -194,7 +200,9 @@ export function ExamPatternStarter({
           className="mt-3 text-base font-bold text-muted"
           data-testid="pattern-sitting-shape"
         >
-          {describePaperShape(servedCount, minutes)}
+          {confidenceMode
+            ? `${servedCount} questions · Untimed (Confidence Mode)`
+            : describePaperShape(servedCount, minutes)}
         </p>
       </div>
 
@@ -210,6 +218,65 @@ export function ExamPatternStarter({
             ready. You can sit those {readiness.availableCount} as a practice module, with
             the time adjusted to match. It is not the full-length paper.
           </p>
+        )}
+
+        {signInRequired && (
+          <p
+            data-testid="sign-in-required-notice"
+            role="status"
+            className="mb-6 rounded-xl bg-royal/10 px-4 py-3 text-sm font-semibold leading-6 text-royal"
+          >
+            This paper is for signed-in students, so the questions stay on our server until you sit them.{" "}
+            <Link href="/sign-in" className="font-bold underline">
+              Sign in to start
+            </Link>
+            .
+          </p>
+        )}
+
+        {/* Confidence Mode puts every explanation in the browser before it is asked for. A signed-in-only paper is
+            served answer-stripped, so the option is not offered: it needs a per-answer server reveal first. */}
+        {pattern.examStyle === "scholarship_style" && pattern.guestAccess !== "signed_in_only" && (
+          <fieldset className="m-0 mb-6 border-0 p-0">
+            <legend className="mb-3 p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
+              Sitting mode
+            </legend>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                aria-pressed={!confidenceMode}
+                data-testid="mode-timed-simulation"
+                onClick={() => setConfidenceMode(false)}
+                className={`flex flex-col items-start rounded-xl border p-4 text-left transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
+                  !confidenceMode
+                    ? "border-mm-brand bg-purple-50/50 shadow-sm ring-1 ring-mm-brand"
+                    : "border-mm-line bg-white hover:border-mm-brand/50"
+                }`}
+              >
+                <span className="text-sm font-bold text-ink">Timed simulation</span>
+                <span className="mt-1 text-xs text-muted">
+                  Strict exam timing ({minutes} min). Auto-submits on expiry.
+                </span>
+              </button>
+
+              <button
+                type="button"
+                aria-pressed={confidenceMode}
+                data-testid="mode-confidence-mode"
+                onClick={() => setConfidenceMode(true)}
+                className={`flex flex-col items-start rounded-xl border p-4 text-left transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand ${
+                  confidenceMode
+                    ? "border-mm-brand bg-purple-50/50 shadow-sm ring-1 ring-mm-brand"
+                    : "border-mm-line bg-white hover:border-mm-brand/50"
+                }`}
+              >
+                <span className="text-sm font-bold text-ink">Confidence Mode</span>
+                <span className="mt-1 text-xs text-muted">
+                  Untimed practice. Immediate step-by-step explanations after each answer.
+                </span>
+              </button>
+            </div>
+          </fieldset>
         )}
 
         {readiness.distinctPapers > 1 && (
@@ -243,9 +310,13 @@ export function ExamPatternStarter({
         )}
 
         <p className="text-sm leading-6 text-muted">
-          You will answer {servedCount} question{servedCount === 1 ? "" : "s"} in{" "}
-          {minutes} minutes. You can flag questions and come back to them, and the paper
-          submits itself if the time runs out.
+          {confidenceMode
+            ? `You will answer ${servedCount} question${
+                servedCount === 1 ? "" : "s"
+              } at your own pace. Explanations will appear as soon as you answer each question.`
+            : `You will answer ${servedCount} question${
+                servedCount === 1 ? "" : "s"
+              } in ${minutes} minutes. You can flag questions and come back to them, and the paper submits itself if the time runs out.`}
         </p>
       </div>
 
@@ -254,7 +325,9 @@ export function ExamPatternStarter({
       <div className="flex flex-col gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <p className="inline-flex items-center gap-1.5 text-sm font-bold text-ink">
           <Clock3 aria-hidden="true" className="h-4 w-4 text-royal" />
-          {minutes} minute limit with safe auto-submit
+          {confidenceMode
+            ? "Untimed · Step-by-step explanations after each answer"
+            : `${minutes} minute limit with safe auto-submit`}
         </p>
         <Button
           variant="orange"
@@ -264,7 +337,7 @@ export function ExamPatternStarter({
             setStartError(null);
             setStage("instructions");
           }}
-          disabled={isStarting || isCreating || auth.status === "loading"}
+          disabled={isStarting || isCreating || auth.status === "loading" || signInRequired}
         >
           {asPracticeModule
             ? `Start ${patternSubjectName(pattern)} practice module`

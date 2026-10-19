@@ -19,7 +19,7 @@
  *   * the raw answer key does not appear in anything the module returns.
  */
 import type { Client } from "pg";
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   ScoringRefused,
@@ -28,6 +28,7 @@ import {
 } from "@/server/scoring/answer-access";
 
 import { connect, scoringDbUrl } from "./db";
+import { scopeEnvToFile } from "./support/scoped-env";
 
 /** Namespaced so teardown can be exact, and so a crash cannot poison a rerun. */
 const STUDENT = "77777777-0000-0000-0000-0000000000a1";
@@ -273,11 +274,11 @@ function derivedNumbers(summary: ScoredSessionSummary) {
   };
 }
 
-beforeAll(() => {
-  /* The module reads this at call time and refuses to fall back to any other
-     credential, which is the §9.3.1 property being relied on here. */
-  process.env.SCORING_DB_URL = scoringDbUrl();
-});
+/* The module reads this at call time and refuses to fall back to any other
+   credential, which is the §9.3.1 property being relied on here. Set for this file only and put back afterwards,
+   even when a test fails: the run is one long-lived process, and this file used to delete the variable outright,
+   which sent every later file that read it to the built-in default database (docs/reviews/scholarship-2026-10-18). */
+scopeEnvToFile("SCORING_DB_URL", scoringDbUrl);
 
 beforeEach(async () => {
   client = await connect();
@@ -290,9 +291,6 @@ afterEach(async () => {
   await client.end();
 });
 
-afterAll(() => {
-  delete process.env.SCORING_DB_URL;
-});
 
 describe("scoring a version-pinned sitting", () => {
   it("computes correctness from the pinned answer and records it server-side", async () => {

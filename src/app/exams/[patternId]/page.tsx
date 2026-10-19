@@ -10,6 +10,7 @@ import { getExamPattern } from "@/features/exam-engine/exam-patterns";
 import { ExamPatternStarter } from "@/features/exam-engine/exam-patterns/components/ExamPatternStarter";
 import { PatternAdaptations } from "@/features/exam-engine/exam-patterns/components/PatternAdaptations";
 import { describePaperShape } from "@/features/exam-engine/exam-patterns/pattern-session";
+import { EXAM_STYLE_NAMES } from "@/features/exam-engine/exam-patterns/pattern-presentation";
 import { getPatternReadiness } from "@/server/exam-bank";
 
 /**
@@ -28,9 +29,10 @@ export async function generateMetadata({
   const { patternId } = await params;
   const pattern = getExamPattern(patternId);
   if (!pattern) return { title: "Full-length practice" };
+  const styleLabel = EXAM_STYLE_NAMES[pattern.examStyle] ?? "Practice";
   return {
     title: pattern.label,
-    description: `${describePaperShape(pattern.questionCount, pattern.timeMinutes)}. Practice written by MindMosaic — not a real ${pattern.examStyle === "naplan_style" ? "NAPLAN" : "ICAS"} paper.`,
+    description: `${describePaperShape(pattern.questionCount, pattern.timeMinutes)}. Practice written by MindMosaic — ${styleLabel} paper.`,
   };
 }
 
@@ -64,7 +66,7 @@ export default async function ExamPatternPage({
 
         <div className="mt-5 max-w-2xl">
           <Badge variant="purple" className="mb-4">
-            {pattern.examStyle === "naplan_style" ? "NAPLAN-style" : "ICAS-style"}
+            {EXAM_STYLE_NAMES[pattern.examStyle] ?? "Practice"}
           </Badge>
           <h1 className="text-[clamp(2.25rem,4.5vw,3.25rem)] font-black leading-[1.02] tracking-[-0.045em] text-ink">
             {pattern.label}
@@ -98,10 +100,12 @@ export default async function ExamPatternPage({
                 </p>
                 <p className="mt-4 text-sm leading-6 text-muted">
                   <Link
-                    href="/practice"
+                    href={pattern.examStyle === "scholarship_style" ? "/practice/scholarship-prep" : "/practice"}
                     className="font-bold text-royal underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-royal"
                   >
-                    Try a shorter practice set instead
+                    {pattern.examStyle === "scholarship_style"
+                      ? "See where scholarship-style practice is up to"
+                      : "Try a shorter practice set instead"}
                   </Link>
                 </p>
               </Card>

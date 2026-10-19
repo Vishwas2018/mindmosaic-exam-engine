@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scholarship Year 6 answer-withheld packet response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewer", "items"],
+  "properties": {
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "date", "freshSession", "packetSha256"],
+      "properties": {
+        "provider": { "type": "string", "description": "The company that produced the model, exactly as the product shows it, for example openai or google." },
+        "model": { "type": "string", "description": "The exact model name the product displays. Never guess or abbreviate." },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "freshSession": { "const": true, "description": "True only if this was a new conversation containing nothing but the prompt and the packet." },
+        "packetSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$", "description": "Copied from the line in the prompt." }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 80,
+      "maxItems": 80,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "myAnswer", "reasoning", "singleDefensibleAnswer", "issues", "difficulty", "verdict", "fix"],
+        "properties": {
+          "id": { "type": "string" },
+          "myAnswer": { "enum": ["a", "b", "c", "d", "e", "none"] },
+          "reasoning": { "type": "string", "minLength": 1 },
+          "singleDefensibleAnswer": { "type": "boolean" },
+          "issues": { "type": "string" },
+          "difficulty": { "enum": ["easy", "medium", "challenging"] },
+          "verdict": { "enum": ["PASS", "REVISE", "REJECT"] },
+          "fix": { "type": "string" }
+        }
+      }
+    }
+  }
+}

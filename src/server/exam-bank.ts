@@ -58,6 +58,14 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
 }
 
 /**
+ * The bank a guest's browser may hold, answer keys included. Scholarship-style content is signed-in only: it is
+ * served through server-selected, answer-stripped sessions and never through the public guest payload.
+ */
+export function getGuestExamBank(bankId: "curated" | "published"): readonly AuthoringQuestion[] {
+  return getExamBank(bankId).filter((question) => question.examStyle !== "scholarship_style");
+}
+
+/**
  * Looks up one question (rubric and answer key included) by id across both
  * banks. Used by the teacher marking view, which needs a manual-review
  * question's rubric without knowing which bank the originating session
@@ -77,9 +85,12 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
  * server-selected CandidateQuestions from /api/exam/session).
  */
 export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
-  const publishedSummary = buildBankEligibilitySummary(getExamBank("published"));
+  /* The generic builder never offers scholarship-style content: it is sat only as a whole named paper. */
+  const generic = (bankId: "curated" | "published") =>
+    getExamBank(bankId).filter((question) => question.examStyle !== "scholarship_style");
+  const publishedSummary = buildBankEligibilitySummary(generic("published"));
   return {
-    curated: buildBankEligibilitySummary(getExamBank("curated")),
+    curated: buildBankEligibilitySummary(generic("curated")),
     published: publishedSummary,
     practice: publishedSummary,
   };

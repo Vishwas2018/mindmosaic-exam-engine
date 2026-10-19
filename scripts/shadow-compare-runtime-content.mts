@@ -53,9 +53,9 @@ console.log("Shadow comparison â€” source side");
 console.log("===============================");
 
 check(plan.problems.length === 0, "the plan reports no problems", plan.problems.join("; "));
-check(plan.counts.total === 1548, `1,548 projected items (got ${plan.counts.total})`);
+check(plan.counts.total === 1601, `1,601 projected items (got ${plan.counts.total})`);
 check(plan.counts.curated === 1005, `1,005 curated (got ${plan.counts.curated})`);
-check(plan.counts.factory === 543, `543 factory (got ${plan.counts.factory})`);
+check(plan.counts.factory === 596, `596 factory (got ${plan.counts.factory})`);
 check(
   plan.counts.curated + plan.counts.factory === plan.counts.total,
   "the two pools account for every item",
