@@ -9,6 +9,12 @@ export const metadata: Metadata = { title: "Admin" };
 
 const TOOLS = [
   {
+    href: "/admin/review",
+    icon: FileSearch,
+    title: "Draft review",
+    description: "Try unpublished questions, including Scholarship reasoning, and inspect declared answers without recording student progress.",
+  },
+  {
     href: "/admin/analytics",
     icon: BarChart3,
     title: "Analytics",
@@ -46,7 +52,7 @@ export default function AdminHomePage() {
     <AdminShell title="Admin tools">
       <div className="max-w-xl">
         <p className="text-base leading-7 text-muted">
-          Aggregate product analytics only. Individual student data access
+          Review draft content and explore aggregate product analytics. Individual student data access
           follows the documented support workflow, not these dashboards.
         </p>
       </div>

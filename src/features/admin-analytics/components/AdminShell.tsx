@@ -5,7 +5,7 @@ import { clsx } from "clsx";
 
 import { MindMosaicLogo } from "@/components/branding";
 
-export type AdminSection = "analytics" | "intelligence" | "operations";
+export type AdminSection = "analytics" | "intelligence" | "operations" | "review";
 
 const NAV_ITEMS: ReadonlyArray<{
   section: AdminSection;
@@ -13,6 +13,12 @@ const NAV_ITEMS: ReadonlyArray<{
   label: string;
   icon: typeof BarChart3;
 }> = [
+  {
+    section: "review",
+    href: "/admin/review",
+    label: "Draft review",
+    icon: FileSearch,
+  },
   {
     section: "analytics",
     href: "/admin/analytics",
@@ -138,7 +144,7 @@ export function AdminShell({
           */}
           <nav
             aria-label="Admin sections"
-            className="-mx-1 flex gap-1 overflow-x-auto px-5 pb-2 lg:hidden"
+            className="flex gap-1 overflow-x-auto px-5 pb-2 lg:hidden"
           >
             <Link
               href="/admin"
