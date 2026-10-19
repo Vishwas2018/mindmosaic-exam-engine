@@ -4,7 +4,7 @@ Work in this order for EVERY item in the packet that follows: solve it yourself 
 
 Reply with ONE JSON object and nothing else (no commentary, no markdown fences), covering all 80 items, in exactly this shape:
 {
-  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872" },
+  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "e7b6f95ad7e7b42421e83d9a13951e92d01c17e901c93d68f641868d1e4fcf51" },
   "items": [ { "id": "scholarship-y6-vr-001", "myAnswer": "a|b|c|d|e|none", "reasoning": "one or two sentences", "singleDefensibleAnswer": true, "issues": "ambiguity, factual error, copied-sentence key, weak distractors, or an empty string", "difficulty": "easy|medium|challenging", "verdict": "PASS|REVISE|REJECT", "fix": "a precise fix if REVISE or REJECT, otherwise an empty string" } ]
 }
 
@@ -476,15 +476,15 @@ ID: scholarship-y6-vr-032
 
 Question:
 Read the statements:
-1. If the garden sprinkler runs, the lawn is wet.
-2. The lawn is NOT wet.
+1. If the garden sprinkler ran this morning, the lawn is wet now.
+2. The lawn is NOT wet now.
 Which conclusion must be TRUE?
 
 Options:
-a) The garden sprinkler ran for hours.
+a) The garden sprinkler ran for hours this morning.
 b) It rained heavily while the sprinkler ran.
-c) The garden sprinkler did not run.
-d) The lawn is soaking wet.
+c) The garden sprinkler did not run this morning.
+d) The lawn is soaking wet now.
 e) The sprinkler runs every morning.
 
 ------------------------------------------------------------------------
@@ -766,7 +766,7 @@ How does the author build suspense while the osprey waits to strike?
 
 Options:
 a) By describing the osprey circling the dinghy before it dives
-b) By describing a long, silent wait in which nobody moves
+b) By describing a long, quiet wait before the osprey suddenly dives
 c) By having Grandfather warn Maya that the dive could be dangerous
 d) By comparing the osprey to a hunter stalking its prey
 e) By switching quickly between the osprey and the fish
@@ -818,7 +818,7 @@ e) Maya and her grandfather often argue, so they use signs to avoid talking.
 PASSAGE: Architects of the Spinifex
 Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.
 
-Spinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, many species secrete a viscous, aromatic resin from glandular cells across their leaf sheaths. Researchers think this sticky varnish may serve a dual purpose: it is believed to seal the leaf surface against water loss during midsummer heatwaves, and it appears to discourage herbivorous insects that would otherwise feed upon the tough foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.
+Spinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.
 
 For tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.
 
@@ -828,14 +828,14 @@ Today, modern materials scientists are investigating spinifex from a new perspec
 ID: scholarship-y6-rc-010
 
 Question:
-According to paragraph 2, how might the resin help spinifex survive?
+According to paragraph 2, what biological functions does the spinifex resin serve?
 
 Options:
-a) It attracts insects that carry pollen between plants.
-b) It reflects sunlight and keeps the leaves cool.
-c) It may cut water loss and put insects off the leaves.
-d) It helps the roots hold the dunes together.
-e) It makes the dead leaves easier to burn.
+a) It attracts desert insects that carry pollen between plants.
+b) It reflects harsh sunlight to keep interior stems cool.
+c) It helps reduce water loss and deters insect herbivores.
+d) It anchors widespread root networks into loose desert sand.
+e) It helps fallen leaf litter break down into topsoil nutrients.
 
 ------------------------------------------------------------------------
 
@@ -870,14 +870,14 @@ e) It burns with a bright flame when warmed.
 ID: scholarship-y6-rc-013
 
 Question:
-Why are nanotechnology researchers interested in spinifex nanofibres?
+Why are nanotechnology researchers interested in adding spinifex nanofibres to materials?
 
 Options:
-a) They make latex and concrete lighter than before.
-b) They speed up the setting of concrete.
-c) They can only be grown in irrigated fields.
-d) They add strength and flexibility without adding much weight.
-e) They repel insects in the way the resin does.
+a) They allow concrete and rubber to set much faster during manufacturing.
+b) They make synthetic polymers completely waterproof and fire-resistant.
+c) They reduce the total cost of production by replacing all raw latex.
+d) They improve strength and flexibility without adding significant weight.
+e) They prevent microscopic cracks from conducting heat or electricity.
 
 ------------------------------------------------------------------------
 
@@ -940,19 +940,19 @@ e) make the leaves harder for insects to bite
 ID: scholarship-y6-rc-018
 
 Question:
-In paragraph 4, the phrase 'high aspect ratio' describes fibres that are:
+In paragraph 4, the phrase 'high aspect ratio' describes fibres that have:
 
 Options:
-a) heavy and shaped like small cubes
-b) mostly see-through and glassy
-c) very long compared with their width
-d) visible only when seen from a high angle
-e) expensive and difficult to manufacture
+a) a large surface area curled into a spherical shape
+b) a very high density relative to their total volume
+c) a great length in proportion to their narrow width
+d) an equal measurement across length, width and depth
+e) a steep taper that narrows sharply from base to tip
 
 ------------------------------------------------------------------------
 
 PASSAGE: In Defence of the Dark
-Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Artificial light pollution is spreading at an estimated two per cent or more each year, yet society remains strangely indifferent to its ecological and cultural costs.
+Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.
 
 Unlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.
 
@@ -967,11 +967,11 @@ Question:
 What is the main argument of 'In Defence of the Dark'?
 
 Options:
-a) Cities should switch off all outdoor lighting once the sun has set.
-b) Brighter streetlights are the best way to protect people at night.
-c) Native wildlife should be moved away from built-up areas for good.
-d) Seeing the stars is more important than keeping people safe.
-e) Light pollution harms nature and culture, and can be sensibly reduced.
+a) Public safety concerns mean outdoor lighting must take priority over ecological disruption.
+b) Modern LED technology has already resolved most urban glare and night-sky problems.
+c) Protecting nocturnal wildlife requires relocating vulnerable species to remote reserves.
+d) Economic growth in cities inevitably requires accepting higher levels of illumination.
+e) Light pollution causes serious ecological and cultural harm, but design can reduce it.
 
 ------------------------------------------------------------------------
 
@@ -981,11 +981,11 @@ Question:
 Why does the author mention research about lighting and crime in paragraph 2?
 
 Options:
-a) To show that crime is rising quickly across Australia
-b) To challenge the belief that brighter lighting always makes places safer
-c) To prove that police need stronger floodlights for night patrols
-d) To show that criminals avoid dark country areas
-e) To argue that cameras cannot record under amber lighting
+a) To argue for switching off municipal streetlights along all suburban pathways
+b) To question the assumption that increasing illumination always improves public safety
+c) To demonstrate that rising electricity costs outweigh any possible crime reduction
+d) To recommend that surveillance cameras replace human street patrols after dark
+e) To show that local councils should leave crime prevention entirely to police
 
 ------------------------------------------------------------------------
 
@@ -1023,11 +1023,11 @@ Question:
 Which practical change does the author recommend for local councils?
 
 Options:
-a) Switching to blue-white LED lamps that shine in every direction
-b) Fitting hooded fixtures so street lamps shine only towards the ground
-c) Turning off all street lighting in suburbs after midnight
-d) Making streetlights much brighter so no shadows remain
-e) Replacing street lamps with floodlights on tall poles
+a) Installing higher-mounted poles to spread light across a wider area
+b) Fitting shielded fixtures that direct illumination downward onto footpaths
+c) Using intense blue-white LEDs to improve clarity for passing motorists
+d) Removing street lamps completely from all suburban roads after midnight
+e) Switching to motion-activated floodlights that illuminate entire streets
 
 ------------------------------------------------------------------------
 
@@ -1051,11 +1051,11 @@ Question:
 How does the author answer the worry that reducing light pollution would make people less safe?
 
 Options:
-a) By arguing that crime is simply a normal part of city life
-b) By urging people to stay indoors once it gets dark outside
-c) By proposing that police carry torches instead of using streetlights
-d) By claiming that darkness has never once been linked to crime
-e) By saying that well-designed lighting can light footpaths without glare
+a) By citing studies showing that darkness naturally deters all opportunistic offenders
+b) By proposing that lighting be switched off only during early morning hours before dawn
+c) By pointing out that pedestrian visibility on footpaths depends mainly on street layout
+d) By suggesting that security cameras provide better protection than any street illumination
+e) By explaining that carefully shielded fixtures can illuminate walkways without blinding glare
 
 ------------------------------------------------------------------------
 
@@ -1065,11 +1065,11 @@ Question:
 The mention of Aboriginal navigators and living songlines in paragraph 1 mainly serves to:
 
 Options:
-a) prove that ancient navigation was simpler than modern GPS
-b) criticise early European explorers for ignoring Aboriginal stories
-c) show that star charts have changed completely over many centuries
-d) explain why astronomy departments urgently need more government funding
-e) show that the night sky has cultural value that skyglow is damaging
+a) trace the chronological history of maritime navigation methods across Australia
+b) contrast the dark night sky of inland deserts with that of suburban coastlines
+c) explain the astronomical methods used by early travellers to track desert routes
+d) argue that astronomy programs should preserve traditional celestial terminology
+e) highlight that the disappearing night sky carries a deep cultural cost for society
 
 ------------------------------------------------------------------------
 
@@ -1092,7 +1092,7 @@ Throughout the nineteenth century, the maritime route connecting Great Britain t
 
 The fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.
 
-Before marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and hours of intricate spherical trigonometry. By the 1850s, ships carried multiple spring-driven chronometers nestled in gimbals to buffer against the tossing sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold and penetrating damp disturbed their rates, and damp, salt-laden air could rust the fine steel parts inside.
+Before marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.
 
 Navigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean.
 (The passage above applies to the following questions until a new passage appears.)
@@ -1103,11 +1103,11 @@ Question:
 Why did 19th-century sailing vessels choose to navigate the perilous Roaring Forties?
 
 Options:
-a) Relentless westerly winds allowed ships to achieve faster speeds, shortening the voyage.
-b) Warm equatorial currents prevented Antarctic icebergs from drifting northward.
-c) The British Admiralty strictly prohibited sailing north of the equator.
-d) The waters were shallow enough for emergency anchoring during storms.
-e) It was the only oceanic route where marine chronometers functioned reliably.
+a) Relentless westerly winds allowed vessels to reach high speeds, cutting weeks off the voyage.
+b) Milder ocean currents and calmer swells reduced structural wear on ship hulls and rigging.
+c) Frequent intervals of calm weather allowed navigators to resupply at scheduled island ports.
+d) Equatorial trade winds allowed ships to bypass the stormy currents surrounding Antarctica.
+e) Shallow coastal waters along the route provided dependable emergency anchorages in storms.
 
 ------------------------------------------------------------------------
 
@@ -1131,11 +1131,11 @@ Question:
 Why were marine chronometers likely to become inaccurate in the Roaring Forties?
 
 Options:
-a) Magnetic storms reversed the direction of their springs.
-b) Cold upset their rates and damp, salty air could rust their parts.
-c) Their gimbals swung too freely and shook them apart.
-d) Captains often forgot to wind them during the gales.
-e) The strong wind made the springs lose their tension.
+a) Sustained magnetic variation from polar storms reversed their balance springs.
+b) Persistent cold altered their daily rates and salty moisture risked rusting fine parts.
+c) Pivoted gimbal mountings tilted the mechanisms until their internal gears dislodged.
+d) Violent atmospheric pressure changes caused their sealed vacuum chambers to crack.
+e) Continuous rolling friction wore down their jewelled escapements within weeks.
 
 ------------------------------------------------------------------------
 
@@ -1187,11 +1187,11 @@ Question:
 According to paragraph 3, why was the 'lunar distance' method hard to use?
 
 Options:
-a) It worked only when the ship was in port, never out at sea.
-b) It needed instruments that cost far more than a chronometer.
-c) It gave the ship's latitude only, and not its longitude.
-d) It was banned by the Admiralty after a famous shipwreck.
-e) It needed a clear view of the moon and hours of calculation.
+a) It required taking solar noon sights simultaneously from two vessels.
+b) It depended on sightings of shore-based lighthouses beyond the horizon.
+c) It could only determine latitude and gave no information about longitude.
+d) It required maintaining a perfectly motionless pendulum clock on deck.
+e) It required clear views of celestial bodies and extensive trigonometry.
 
 ------------------------------------------------------------------------
 
@@ -1201,8 +1201,8 @@ Question:
 Which conclusion about these voyages is best supported by the passage as a whole?
 
 Options:
-a) Safe arrival depended on skill and judgement because instruments could fail.
-b) Chronometers were of no practical use anywhere in the Southern Ocean.
-c) Dead reckoning was always more accurate than any chronometer on board.
-d) The route was so dangerous that very few ships ever attempted it.
-e) Captains relied mainly on luck because accurate navigation was impossible.
+a) Safe arrival required experienced seamanship and judgement alongside mechanical tools.
+b) Technological advances in marine chronometers largely eliminated navigational uncertainty.
+c) Navigators relied on celestial observation because dead reckoning proved generally unhelpful.
+d) Severe gale conditions led commercial merchant fleets to favour slower equatorial routes.
+e) Accurate charts and coastal lighthouses made Bass Strait approaches routine rather than tense.

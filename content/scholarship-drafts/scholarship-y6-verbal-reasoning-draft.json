@@ -1464,11 +1464,11 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Read the statements:\n1. If the garden sprinkler runs, the lawn is wet.\n2. The lawn is NOT wet.\nWhich conclusion must be TRUE?",
+      "prompt": "Read the statements:\n1. If the garden sprinkler ran this morning, the lawn is wet now.\n2. The lawn is NOT wet now.\nWhich conclusion must be TRUE?",
       "options": [
         {
           "id": "a",
-          "text": "The garden sprinkler ran for hours."
+          "text": "The garden sprinkler ran for hours this morning."
         },
         {
           "id": "b",
@@ -1476,11 +1476,11 @@
         },
         {
           "id": "c",
-          "text": "The garden sprinkler did not run."
+          "text": "The garden sprinkler did not run this morning."
         },
         {
           "id": "d",
-          "text": "The lawn is soaking wet."
+          "text": "The lawn is soaking wet now."
         },
         {
           "id": "e",
@@ -1492,7 +1492,7 @@
         "kind": "single_option",
         "optionId": "c"
       },
-      "explanation": "Modus tollens: Sprinkler -> Lawn Wet. Not (Lawn Wet) -> Not (Sprinkler Ran).",
+      "explanation": "Statement 1 establishes that if the sprinkler ran this morning, the lawn would be wet now. Statement 2 states that the lawn is not wet now. By contrapositive reasoning (modus tollens), if the consequence is false, the condition cannot have occurred: the garden sprinkler did not run this morning.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -2639,7 +2639,7 @@
       "id": "scholarship-y6-vr-032",
       "skill": "vr-sentence-logic",
       "targetOption": "c",
-      "correctValue": "The garden sprinkler did not run.",
+      "correctValue": "The garden sprinkler did not run this morning.",
       "solver": "syllogism",
       "solverParams": {
         "variables": [
@@ -2668,7 +2668,7 @@
         ],
         "conclusions": [
           {
-            "id": "The garden sprinkler did not run.",
+            "id": "The garden sprinkler did not run this morning.",
             "expr": {
               "kind": "not",
               "expr": {
@@ -2678,7 +2678,7 @@
             }
           },
           {
-            "id": "The garden sprinkler ran for hours.",
+            "id": "The garden sprinkler ran for hours this morning.",
             "expr": {
               "kind": "var",
               "name": "S"

@@ -48,3 +48,136 @@ The automated originality gate passed all 80 NR and mathematics candidates, and 
 ## Provenance
 
 All 160 are original MindMosaic drafts imported with their declared generator identity (Anthropic, `claude-sonnet-5`) and stable ids; the candidate hashes are pinned in `src/features/question-factory/correctness/scholarship-identity-pins.json`. Source commits are listed in `README.md`.
+
+
+## Advisory External Review (19 Oct 2026) & Remediation of 14 Flagged Items
+
+An external advisory review of the 80 Verbal Reasoning and Reading items was returned by OpenAI (`gpt-6.1-sol-wm`) on 19 Oct 2026 against packet hash `790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872`.
+
+### Validation against Independence Policy
+1. **Packet Binding:** Verified. Packet hash `790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872` matched the release packet exactly.
+2. **Reviewer Provider:** OpenAI is a distinct provider family from the generator (Anthropic Claude).
+3. **Fresh Session Requirement:** The review explicitly recorded `"freshSession": false`. Under `docs/REVIEW_INDEPENDENCE_POLICY.md`, this response fails the gate requirement and **cannot constitute independent verification or authorise publication**. It is treated strictly as editorial advisory evidence.
+4. **Key Agreement:** The reviewer found a single defensible answer for all 80 items and agreed with the declared key on 100% of items (80/80).
+5. **Verdicts:** 66 items marked PASS; 14 items marked REVISE (VR: 032; RC: 006, 010, 013, 018, 019, 020, 023, 025, 026, 028, 030, 034, 035).
+
+---
+
+### Authoritative Primary & Secondary Sources Consulted
+- **Spinifex Botany & Ecology:**
+  - Lazarides, M. (1997). *A revision of Triodia including Plectrachne (Poaceae, Eragrostideae)*. Australian Systematic Botany 10(3): 381-489.
+  - Gamage, B. L., et al. (2012). *Resins from Triodia species*. Phytochemistry 73: 32-40.
+  - CSIRO Plant Industry Surveys of Arid Zone Grasses.
+  - *Substantiation:* resinated *Triodia* species secrete a viscous hydrophobic mixture of non-volatile/volatile diterpenoids, triterpenoids and cuticular waxes from epidermal glands on leaf sheaths. In arid conditions this forms a water-insoluble barrier that reduces non-stomatal cuticular transpiration during heatwaves, while the bitter and sticky terpenoids provide chemical and mechanical protection against insect herbivores.
+- **Light Pollution Growth Metrics:**
+  - Kyba, C. C. M., et al. (2017). *Artificially lit surface of Earth at night increasing in radiance and extent*. Science Advances 3(11): e1701528.
+  - Kyba, C. C. M., et al. (2023). *Citizen scientists report global rapid reductions in the visibility of stars from 2011 to 2022*. Science 379(6629): 265-268.
+  - *Substantiation:* Global satellite measurements (VIIRS on Suomi NPP) showed Earth's artificially lit outdoor surface area grew by 2.2% per year from 2012 to 2016. Citizen-science naked-eye skyglow observations show global sky brightness increasing at ~9.6% per year (2011-2022). The passage now specifies the exact satellite metric, time period (2012-2016), and global geography to eliminate ambiguity.
+- **Historical Navigation & Marine Horology:**
+  - Bowditch, N. *American Practical Navigator*, Defense Mapping Agency / US Navy.
+  - Andrewes, W. J. H. (ed.) (1996). *The Quest for Longitude*. Collection of Historical Scientific Instruments, Harvard University.
+  - Sobel, D. (1995). *Longitude*. Fourth Estate.
+  - *Substantiation:* (1) Gimbal suspensions (Cardan mountings) maintain the chronometer level/horizontal relative to gravity despite pitching/rolling, rather than acting as shock-absorbing buffers. (2) Bitter cold altered the daily rate of gain or loss by altering balance spring stiffness; salt moisture presented corrosion risks to fine steel parts (springs/pivots) if cases were breached. (3) Manual clearing of lunar distances using spherical trigonometry and tables took 30 minutes to several hours of manual calculation.
+
+---
+
+### Item-by-Item Disposition of all 14 Advisory Findings
+
+1. **scholarship-y6-vr-032**
+   - *Reviewer Finding:* Present tense conditional ("runs", "is wet") mismatched past tense conclusion ("did not run").
+   - *Independent Assessment:* Accepted. A temporal mismatch creates technical ambiguity in formal logic.
+   - *Action:* Aligned conditional, premise, and conclusion to consistent time frames: "If the garden sprinkler ran this morning, the lawn is wet now. The lawn is NOT wet now." Conclusion: "The garden sprinkler did not run this morning."
+   - *Solver & Key:* Retained key `c`. Sidecar solver updated and verified: `solveSyllogism` proves modus tollens deduction.
+
+2. **scholarship-y6-rc-006**
+   - *Reviewer Finding:* Key option b asserted "nobody moves", but the passage describes silence ("neither person spoke") and the dinghy drifting and turning.
+   - *Independent Assessment:* Accepted. Immobility was contradicted by the dinghy turning and Maya lifting field glasses.
+   - *Action:* Replaced option b with: "By describing a long, quiet wait before the osprey suddenly dives". Retained key `b`.
+   - *Distractors & Balancing:* Distractor lengths (52-64 chars) balanced with key (64 chars). Explanation updated.
+
+3. **scholarship-y6-rc-010**
+   - *Reviewer Finding:* Passage attributed resin functions to unnamed researchers without botanical grounding; hedging alone insufficient.
+   - *Independent Assessment:* Accepted. Grounded in Lazarides (1997) and Gamage et al. (2012).
+   - *Passage Action:* Stimulus updated to state that botanical studies show the hydrophobic coating forms a water-insoluble barrier reducing non-stomatal water loss during extreme heat, while bitter compounds deter insect herbivores.
+   - *Question Action:* Stem and options updated to test biological functions: "It helps reduce water loss and deters insect herbivores" (key `c`). Distractors reflect genuine ecological concepts (pollination, reflection, root anchoring, litter breakdown) with matched lengths (55-62 chars).
+
+4. **scholarship-y6-rc-013**
+   - *Reviewer Finding:* Key copied passage phrase; distractors were weak/contradicted. Reviewer recommended converting to application question.
+   - *Independent Assessment:* Partially accepted. Distractor quality and option length needed improvement, but converting a valid factual retrieval question to an application question was rejected (per user rule preserving legitimate comprehension questions).
+   - *Action:* Retained factual retrieval skill (`rc-factual-retrieval`). Replaced weak distractors with plausible material property trade-offs (manufacturing cure rate, fireproofing, latex replacement, heat/electrical conductivity).
+   - *Key & Balancing:* Key retained as `d` ("They improve strength and flexibility without adding significant weight."). All options balanced to 68-70 chars.
+
+5. **scholarship-y6-rc-018**
+   - *Reviewer Finding:* Technical term 'high aspect ratio' immediately glossed as long and thin; distractors unrelated to dimensional ratios.
+   - *Independent Assessment:* Accepted in part. Selected dimensional ratio interpretations over numerical arithmetic pairs to preserve the vocabulary-in-context skill.
+   - *Action:* Replaced distractors with authentic geometric/dimensional ratios (surface-to-volume/spherical, mass-density, cubic symmetry, tapering).
+   - *Key & Balancing:* Key retained as `c` ("a great length in proportion to their narrow width"). All 5 options strictly balanced to 50-51 characters.
+
+6. **scholarship-y6-rc-019**
+   - *Reviewer Finding:* Key unique, but distractors were extreme straw positions ("switch off all lights", "move wildlife away for good"). Passage 2% growth lacked metric/period/region.
+   - *Independent Assessment:* Accepted.
+   - *Passage Action:* Passage updated to cite global satellite measurements (2012-2016) showing Earth's artificially lit outdoor area expanded by over 2% annually.
+   - *Question Action:* Replaced extreme distractors with plausible policy/economic perspectives (safety priority, LED optimism, remote species relocation, economic inevitability). Key retained as `e` (86 chars, distractors 83-88 chars).
+
+7. **scholarship-y6-rc-020**
+   - *Reviewer Finding:* Distractors regarding amber cameras, police floodlights and country criminals lacked textual plausibility.
+   - *Independent Assessment:* Accepted.
+   - *Action:* Replaced distractors with credible rhetorical purposes (blanket streetlight bans, electricity costs vs crime reduction, surveillance cameras, police mandate). Key retained as `b` ("To question the assumption that increasing illumination always improves public safety"). All options balanced (76-85 chars).
+
+8. **scholarship-y6-rc-023**
+   - *Reviewer Finding:* Key repeated proposed fixture change; distractors were extreme straw policies.
+   - *Independent Assessment:* Accepted.
+   - *Action:* Provided realistic municipal lighting design options (wider-mounted pole dispersal, intense blue-white LEDs for motorists, midnight road cutoffs, motion-activated floodlights).
+   - *Key & Balancing:* Key retained as `b` ("Fitting shielded fixtures that direct illumination downward onto footpaths"). All options balanced to 69-74 chars.
+
+9. **scholarship-y6-rc-025**
+   - *Reviewer Finding:* Distractors were implausibly absolute ("crime is normal", "stay indoors", "police carry torches", "darkness never linked to crime").
+   - *Independent Assessment:* Accepted.
+   - *Action:* Replaced with nuanced safety stances (studies on darkness deterrence, early morning curfews, footpath visibility from street layout, camera surveillance).
+   - *Key & Balancing:* Key retained as `e` ("By explaining that carefully shielded fixtures can illuminate walkways without blinding glare"). All options balanced to 86-94 chars.
+
+10. **scholarship-y6-rc-026**
+    - *Reviewer Finding:* GPS superiority, explorer criticism and departmental funding distractors were weak.
+    - *Independent Assessment:* Accepted.
+    - *Action:* Replaced with plausible literary/rhetorical functions of cultural references (maritime history, outback vs coastal sky contrast, astronomical desert mapping, traditional celestial terminology).
+    - *Key & Balancing:* Key retained as `e` ("highlight that the disappearing night sky carries a deep cultural cost for society"). All options balanced to 81-85 chars.
+
+11. **scholarship-y6-rc-028**
+    - *Reviewer Finding:* Options alleging Admiralty ban north of equator and chronometers working only on this route were implausible.
+    - *Independent Assessment:* Accepted.
+    - *Action:* Replaced with genuine 19th-century maritime trade-offs (reduced hull/rigging wear, calm island resupply ports, equatorial trade wind avoidance, shallow coastal shelter).
+    - *Key & Balancing:* Key retained as `a` ("Relentless westerly winds allowed vessels to reach high speeds, cutting weeks off the voyage."). All options balanced to 90-93 chars.
+
+12. **scholarship-y6-rc-030**
+    - *Reviewer Finding:* Chronometer failure claims and salt-air corrosion needed qualification; gimbals described imprecisely as buffering tossing rather than maintaining horizontal orientation.
+    - *Independent Assessment:* Accepted.
+    - *Passage Action:* Passage updated: gimbals "mounted in gimbals to keep them level amid the pitching sea"; cold "altered their daily rate of gain or loss"; damp salt air "threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases".
+    - *Question Action:* Options updated to plausible mechanical/horological failure mechanisms (polar magnetic variation, gimbal gear dislodgement, barometric vacuum chambers, rolling friction). Key retained as `b`. Options balanced to 79-87 chars.
+
+13. **scholarship-y6-rc-034**
+    - *Reviewer Finding:* Distractors were implausible (port-only, Admiralty ban); hours-of-calculation claim needed qualification.
+    - *Independent Assessment:* Accepted.
+    - *Passage Action:* Passage qualified: "painstaking spherical trigonometry that could take up to several hours of manual arithmetic".
+    - *Question Action:* Replaced distractors with authentic navigational limitations (simultaneous observations from two vessels, shore-based landmarks, latitude-only determination, pendulum clocks at sea). Key retained as `e` ("It required clear views of celestial bodies and extensive trigonometry."). Options balanced to 71-74 chars.
+
+14. **scholarship-y6-rc-035**
+    - *Reviewer Finding:* Distractors contained categorical giveaway words ("always", "anywhere", "impossible", "luck"), making the balanced key obvious.
+    - *Independent Assessment:* Accepted.
+    - *Action:* Rewrote all distractors with equal qualification and nuance (technological optimism eliminating uncertainty, celestial observations rendering dead reckoning unhelpful, fleet avoidance of Southern Ocean, routine Bass Strait approaches).
+    - *Key & Balancing:* Key retained as `a` ("Safe arrival required experienced seamanship and judgement alongside mechanical tools."). Options balanced to 87-94 chars.
+
+---
+
+### Passage Dependants & Release Package Integrity
+- **Updated Shared Stimuli:**
+  - *Architects of the Spinifex*: paragraph 2 revised across all 9 questions (`rc-010` to `rc-018`).
+  - *In Defence of the Dark*: paragraph 1 revised across all 9 questions (`rc-019` to `rc-027`).
+  - *Charting the Roaring Forties*: paragraph 3 revised across all 8 questions (`rc-028` to `rc-035`).
+  - *The Estuary Watchers*: stimulus unchanged; `rc-006` option text updated.
+- **Answer Distributions:** Unchanged across all sections (VR: 9 each of a, b, c, d, e; RC: a:7, b:8, c:8, d:5, e:7).
+- **Candidate Pins:** All 160 identities recomputed and pinned in `src/features/question-factory/correctness/scholarship-identity-pins.json`.
+- **Regenerated External Packet:**
+  - Regenerated at `docs/reviews/scholarship-2026-10-18/external-review/packet.txt`.
+  - New SHA-256: `e7b6f95ad7e7b42421e83d9a13951e92d01c17e901c93d68f641868d1e4fcf51`.
+  - Synced to `c:\tmp\scholarship-handoff\external-review\`.
+  - Machine verification test `src/tests/unit/scholarship-release-package.test.ts` passes (10/10).
