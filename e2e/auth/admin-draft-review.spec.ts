@@ -27,7 +27,8 @@ test("admin renders every corrected release item with current governance and his
   test.setTimeout(120_000);
   const page = await (await contextAs("admin")).newPage();
   await page.goto("/admin/review");
-  await expect(page.getByText("160 drafts match your filters")).toBeVisible();
+  await expect(page.getByRole("status")).toBeVisible();
+  await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
   for (const [bucket, count] of [
     ["ready_for_review", 45],
     ["requires_revision_or_decision", 35],
@@ -36,9 +37,10 @@ test("admin renders every corrected release item with current governance and his
     await page
       .getByRole("combobox", { name: "Review status", exact: true })
       .selectOption(`release:${bucket}`);
-    await expect(
-      page.getByText(`${count} drafts match your filters`),
-    ).toBeVisible();
+    await expect(page.getByRole("status")).toBeVisible();
+    await expect(page.getByRole("status")).toHaveText(
+      `${count} drafts match your filters`,
+    );
   }
   await page
     .getByRole("combobox", { name: "Review status", exact: true })
@@ -111,7 +113,8 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   await expect(
     page.getByText("Scholarship: 160 draft questions across four sections."),
   ).toBeVisible();
-  await expect(page.getByText("160 drafts match your filters")).toBeVisible();
+  await expect(page.getByRole("status")).toBeVisible();
+  await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.screenshot({
     path: testInfo.outputPath("review-desktop.png"),
@@ -137,9 +140,10 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
     await page
       .getByRole("combobox", { name: "Section", exact: true })
       .selectOption(section);
-    await expect(
-      page.getByText(`${count} drafts match your filters`),
-    ).toBeVisible();
+    await expect(page.getByRole("status")).toBeVisible();
+    await expect(page.getByRole("status")).toHaveText(
+      `${count} drafts match your filters`,
+    );
   }
   await page.getByRole("button", { name: "Complete draft papers" }).click();
   await page
