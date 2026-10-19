@@ -7,7 +7,8 @@ import {
   REGISTRY_SUBJECT_BY_FILTER,
   type SubjectFilter,
 } from "@/features/exam-engine/selection";
-import { getExamBank } from "@/server/exam-bank";
+import { findPaperForCell } from "@/features/exam-engine/exam-patterns";
+import { getExamBank, getPatternReadiness } from "@/server/exam-bank";
 
 import { isSubjectSatIn } from "./subject-registry";
 import { isValidStyleYear, YEAR_LEVELS } from "./year-registry";
@@ -89,7 +90,7 @@ function buildCoverage(): Map<string, CoverageCell> {
   const cells = new Map<string, CoverageCell>();
 
   for (const yearLevel of YEAR_LEVELS) {
-    for (const examStyle of ["naplan_style", "icas_style", "amc_style"] as const) {
+    for (const examStyle of ["naplan_style", "icas_style", "amc_style", "scholarship_style"] as const) {
       if (!isValidStyleYear(examStyle, yearLevel)) continue;
       for (const subject of COVERAGE_SUBJECTS) {
         /* A real (style, year) pair is not a real sitting for every
@@ -107,12 +108,19 @@ function buildCoverage(): Map<string, CoverageCell> {
           examStyle,
           subject,
         }).length;
+        /* A cell that is sat only as a whole named paper (scholarship) is ready exactly when that whole paper can be
+           drawn from approved content, never at a count threshold: 30 approved items of a 40-question paper is not a
+           program a learner can start. */
+        const paper = findPaperForCell({ yearLevel, examStyle, subject });
+        const ready = examStyle === "scholarship_style"
+          ? paper !== undefined && getPatternReadiness()[paper.id]?.state === "ready"
+          : gatedCount >= GATED_COVERAGE_THRESHOLD;
         cells.set(coverageKey(yearLevel, examStyle, subject), {
           yearLevel,
           examStyle,
           subject,
           gatedCount,
-          ready: gatedCount >= GATED_COVERAGE_THRESHOLD,
+          ready,
         });
       }
     }

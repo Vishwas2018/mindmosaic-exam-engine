@@ -42,6 +42,8 @@ export const EXAM_STYLE_YEAR_LEVELS: Readonly<Record<ExamStyle, readonly YearLev
   icas_style: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   /* AMC papers run from Middle Primary (Year 3) to Senior (Year 12). */
   amc_style: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  /* Scholarship entry exams (Edutest, ACER) for Year 7 entry are sat in Year 6. */
+  scholarship_style: [6],
 };
 
 export function isKnownYearLevel(value: unknown): value is YearLevel {

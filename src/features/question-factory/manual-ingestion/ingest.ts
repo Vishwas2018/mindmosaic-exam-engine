@@ -1,5 +1,6 @@
 import { FACTORY_VERSIONS, type NormalisedIdentity } from "../config";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
+import scholarshipIdentityPins from "../correctness/scholarship-identity-pins.json";
 import {
   candidateProvenanceSchema,
   hashJson,
@@ -35,13 +36,21 @@ export async function ingestOneCandidate(
   /** Resolved by the caller from the run's binding manifest (preflight-verified); takes precedence over the run-level `blueprintId` and the placeholder. */
   boundBlueprintId?: string,
 ): Promise<ManualCandidateIngestionResult> {
-  const candidateId = mintManualCandidateId({
+  const mintedId = mintManualCandidateId({
     sourceFileName,
     batchId: request.batchId,
     pipelineRunId: request.pipelineRunId,
     indexInFile,
     sourceContentHash,
   });
+  // A scholarship draft has a stable draft identity used by its solver registries and review
+  // records. Preserve it only when the COMPLETE candidate content hashes to the pin recorded by
+  // scripts/pin-scholarship-identities.mts. A changed item, or an arbitrary external id, still
+  // receives a minted id and so cannot inherit a solver registration or review.
+  const registered = candidateQuestionSchema.safeParse(candidateContent);
+  const candidateId = registered.success &&
+    (scholarshipIdentityPins as Record<string, string>)[registered.data.id] === hashJson(registered.data)
+    ? registered.data.id : mintedId;
   // Mirrors `ingestion/ingest.ts` (Mission 2A): the candidate's internal
   // `id` field is infrastructure this adapter mints, never a claim an
   // external generator gets to make — any `id` the source content

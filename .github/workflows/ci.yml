@@ -79,12 +79,14 @@ jobs:
       # status. See scripts/verify-test-run.mts.
       - run: npm run test:ci
 
-  # February draft migration is tracked separately from live-content/security gates.
-  # Advisory until scholarship launch; must become required and green before launch.
+  # Scholarship draft validation (schema, solvers, answer positions, stems, encoding, runtime isolation).
+  # Blocking: a red run fails the workflow. The repository owner must also add `scholarship-drafts` to the required
+  # status checks on dev and main (branch protection lists core, e2e, e2e-auth and rls today); see
+  # docs/reviews/scholarship-2026-10-18/BRANCH-PROTECTION.md. Until then a red job is visible but does not by itself
+  # block a merge.
   scholarship-drafts:
     name: scholarship-drafts
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

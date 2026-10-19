@@ -1,0 +1,769 @@
+{
+  "packet": "scholarship-y6-mathematics-draft.json",
+  "reviewer": "gemma:7b",
+  "blindnessConfirmed": true,
+  "blindnessNote": "Request contained only prompt, passage, options, skill and claimed difficulty; no key, explanation or sidecar.",
+  "difficultyVerdictConvention": "'too_hard' means the claimed label overstates how hard the item really is; 'too_easy' means the label understates it.",
+  "items": [
+    {
+      "id": "scholarship-y6-maths-001",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We start by adding the temperature rise to the dawn temperature, then subtract the temperature drop.",
+      "parsed": true,
+      "seconds": 52
+    },
+    {
+      "id": "scholarship-y6-maths-002",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The submarine starts at -180m and ascends 65m, so its depth is -115m. Then it dives 45m deeper, so its depth is -160m. Finally, it ascends 90m, so its final depth is -70m.",
+      "parsed": true,
+      "seconds": 52.2
+    },
+    {
+      "id": "scholarship-y6-maths-003",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Using the order of operations, we evaluate the integers from left to right. The final answer is -19.",
+      "parsed": true,
+      "seconds": 33.6
+    },
+    {
+      "id": "scholarship-y6-maths-004",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We subtract the elevation of Lake Eyre from the elevation of Mount Kosciuszko to find the difference.",
+      "parsed": true,
+      "seconds": 41.4
+    },
+    {
+      "id": "scholarship-y6-maths-005",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The elevator travels 4 metres per second, so after 45 seconds it will descend 45 metres.",
+      "parsed": true,
+      "seconds": 37.8
+    },
+    {
+      "id": "scholarship-y6-maths-006",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We subtract the water pumped out from the total capacity to find the remaining water.",
+      "parsed": true,
+      "seconds": 39.1
+    },
+    {
+      "id": "scholarship-y6-maths-007",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We first calculate the discount on the original price, then apply the additional discount to the sale price.",
+      "parsed": true,
+      "seconds": 52.5
+    },
+    {
+      "id": "scholarship-y6-maths-008",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Calculated the percentage difference between the winner and second candidate, then converted it to votes.",
+      "parsed": true,
+      "seconds": 49.5
+    },
+    {
+      "id": "scholarship-y6-maths-009",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Converted all lengths to cm for easier calculation.",
+      "parsed": true,
+      "seconds": 44.9
+    },
+    {
+      "id": "scholarship-y6-maths-010",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can calculate the percentage increase by dividing the change in population by the original population and multiplying by 100.",
+      "parsed": true,
+      "seconds": 56.8
+    },
+    {
+      "id": "scholarship-y6-maths-011",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can find the number of books about astronomy and biology separately, then subtract that from the total number of books to find those about neither.",
+      "parsed": true,
+      "seconds": 54.2
+    },
+    {
+      "id": "scholarship-y6-maths-012",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can translate the ratio 2 : 3 : 4 to 2/9 : 3/9 : 4/9. This means that for every $1 of the library's share, the garden receives $3 of the total.",
+      "parsed": true,
+      "seconds": 55.9
+    },
+    {
+      "id": "scholarship-y6-maths-013",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can use a ratio to solve this problem. The distance travelled is directly proportional to the time taken.",
+      "parsed": true,
+      "seconds": 42.2
+    },
+    {
+      "id": "scholarship-y6-maths-014",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let the number of distance runners be x. Then the number of sprinters is x + 30.",
+      "parsed": true,
+      "seconds": 39.1
+    },
+    {
+      "id": "scholarship-y6-maths-015",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can compare the price per gram of each brand. Brand B's cereal is $8.40 / 1200g = $0.70/g, while brand A's cereal is $6.00 / 750g = $0.80/g. Therefore, brand B is 10 cents cheaper per 100 grams.",
+      "parsed": true,
+      "seconds": 50.9
+    },
+    {
+      "id": "scholarship-y6-maths-016",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The additional painters increase the daily output by a third.",
+      "parsed": true,
+      "seconds": 30.2
+    },
+    {
+      "id": "scholarship-y6-maths-017",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can find the weight of sand by multiplying the total weight of concrete mix (2400 kg) by the ratio of sand to concrete mix (2).",
+      "parsed": true,
+      "seconds": 39.8
+    },
+    {
+      "id": "scholarship-y6-maths-018",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We subtract 19 from both sides of the equation to get 4x = 52, then divide both sides by 4 to find x = 13.",
+      "parsed": true,
+      "seconds": 40
+    },
+    {
+      "id": "scholarship-y6-maths-019",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let Ethan's age be x years and Mia's age be y years. Using the given information, we can form two equations: x = y + 4 and x + y = 32. Solving these equations, we find x = 18.",
+      "parsed": true,
+      "seconds": 41.2
+    },
+    {
+      "id": "scholarship-y6-maths-020",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Solving for y involves isolating the variable on one side of the equation.",
+      "parsed": true,
+      "seconds": 30.5
+    },
+    {
+      "id": "scholarship-y6-maths-021",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x, x+2 and x+4 represent the three odd numbers. Their sum is x + (x+2) + (x+4) = 3x + 6 = 87.",
+      "parsed": true,
+      "seconds": 43.1
+    },
+    {
+      "id": "scholarship-y6-maths-022",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Set up two equations using the given information and solve for the cost of a mango.",
+      "parsed": true,
+      "seconds": 34
+    },
+    {
+      "id": "scholarship-y6-maths-023",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Substituting the given values into the expression and performing the necessary arithmetic operations.",
+      "parsed": true,
+      "seconds": 34.4
+    },
+    {
+      "id": "scholarship-y6-maths-024",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Combined both sides by multiplying by 3 to isolate the variable w.",
+      "parsed": true,
+      "seconds": 38.6
+    },
+    {
+      "id": "scholarship-y6-maths-025",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let the mystery number be x. The equation can be written as 6x - 14 = 2x + 18.",
+      "parsed": true,
+      "seconds": 40.5
+    },
+    {
+      "id": "scholarship-y6-maths-026",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We set the two angles equal to each other and solve for x. Then we substitute the value of x back into one of the angles to find the size of each angle.",
+      "parsed": true,
+      "seconds": 41
+    },
+    {
+      "id": "scholarship-y6-maths-027",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used the given relationships between the angles to form an equation that solved for angle A.",
+      "parsed": true,
+      "seconds": 33.5
+    },
+    {
+      "id": "scholarship-y6-maths-028",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the width of the court. The length is x + 12. The perimeter is 2(x + 12) + 2x = 96.",
+      "parsed": true,
+      "seconds": 44.7
+    },
+    {
+      "id": "scholarship-y6-maths-029",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the measure of the smaller angle. The larger angle is 3x - 36.",
+      "parsed": true,
+      "seconds": 37.5
+    },
+    {
+      "id": "scholarship-y6-maths-030",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Volume of water = area of base × height. Height = volume / area of base.",
+      "parsed": true,
+      "seconds": 41
+    },
+    {
+      "id": "scholarship-y6-maths-031",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Found the area of the park and pavilion, then subtracted the area of the pavilion from the park's area.",
+      "parsed": true,
+      "seconds": 38.4
+    },
+    {
+      "id": "scholarship-y6-maths-032",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Using the formula for the measure of an interior angle of a regular polygon, I substituted 8 for the number of sides.",
+      "parsed": true,
+      "seconds": 33.8
+    },
+    {
+      "id": "scholarship-y6-maths-033",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can calculate the probability by dividing the number of marbles that are not green by the total number of marbles in the bag.",
+      "parsed": true,
+      "seconds": 35.5
+    },
+    {
+      "id": "scholarship-y6-maths-034",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can list out the outcomes where the sum is 7 or 8 to count them.",
+      "parsed": true,
+      "seconds": 33
+    },
+    {
+      "id": "scholarship-y6-maths-035",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can find the number of students playing neither sport by subtracting the number of students playing either soccer or basketball from the total number of students.",
+      "parsed": true,
+      "seconds": 34
+    },
+    {
+      "id": "scholarship-y6-maths-036",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used average speed formula: time = distance / speed for each leg of the journey.",
+      "parsed": true,
+      "seconds": 34.9
+    },
+    {
+      "id": "scholarship-y6-maths-037",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The solution cools by 7°C for 5 minutes, resulting in a temperature decrease of 35°C. Then, it heats up by 3°C, resulting in a net change of -32°C.",
+      "parsed": true,
+      "seconds": 41.7
+    },
+    {
+      "id": "scholarship-y6-maths-038",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can subtract the GST (10%) from the final price to find the price before GST.",
+      "parsed": true,
+      "seconds": 34.4
+    },
+    {
+      "id": "scholarship-y6-maths-039",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Applied perimeter formula and solved a linear equation.",
+      "parsed": true,
+      "seconds": 33
+    },
+    {
+      "id": "scholarship-y6-maths-040",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can choose the first digit from 3 options and the second digit from 5 options.",
+      "parsed": true,
+      "seconds": 34.6
+    }
+  ]
+}

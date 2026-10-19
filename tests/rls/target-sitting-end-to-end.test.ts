@@ -42,6 +42,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { scoreAssessmentSession } from "@/server/scoring/answer-access";
 
 import { connect, scoringDbUrl } from "./db";
+import { scopeEnvToFile } from "./support/scoped-env";
 
 const STUDENT = "77777777-0000-0000-0000-0000000000e6";
 const TEACHER = "77777777-0000-0000-0000-0000000000e7";
@@ -63,7 +64,6 @@ let client: Client;
 let sessionId: string;
 let assignmentId: string;
 let served: { sessionItemId: string; itemCode: string; marks: number }[] = [];
-let scoringUrlBefore: string | undefined;
 
 async function asOwner(): Promise<void> {
   await client.query("reset role");
@@ -155,6 +155,9 @@ async function seedItem(label: string, kind: "single_option" | "manual", marks: 
   );
 }
 
+/* Set for this file only and put back afterwards, even if a test fails (see support/scoped-env.ts). */
+scopeEnvToFile("SCORING_DB_URL", scoringDbUrl);
+
 beforeAll(async () => {
   /* The scoring module reads its credential from the environment at call time.
      Set here rather than relied on from the shell because `isolate: false`
@@ -162,8 +165,6 @@ beforeAll(async () => {
      `assessment-scoring.test.ts` deletes this variable in its own teardown —
      which, run before this file, would otherwise make step 6 fail with "not
      set" on a machine where it plainly was. Restored to whatever it was. */
-  scoringUrlBefore = process.env.SCORING_DB_URL;
-  process.env.SCORING_DB_URL = scoringDbUrl();
 
   client = await connect();
   await resetFixtures(client);
@@ -221,8 +222,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await resetFixtures(client);
   await client.end();
-  if (scoringUrlBefore === undefined) delete process.env.SCORING_DB_URL;
-  else process.env.SCORING_DB_URL = scoringUrlBefore;
 });
 
 describe("A6 — one target sitting, end to end", () => {

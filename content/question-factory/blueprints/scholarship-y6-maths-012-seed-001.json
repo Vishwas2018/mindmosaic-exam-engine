@@ -1,0 +1,24 @@
+{
+  "id": "scholarship-y6-maths-012-seed-001",
+  "batchId": "scholarship-y6-2026-10-17",
+  "yearLevel": "year-6",
+  "examStyle": "scholarship_style",
+  "subject": "numeracy",
+  "strand": "Ratios and Rates",
+  "skill": "scholarship.maths-ratios-rates",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "targetCount": 1,
+  "marks": 1,
+  "estimatedTimeSeconds": 40,
+  "learningObjective": "Ratios rates (scholarship-style)",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+  ]
+}

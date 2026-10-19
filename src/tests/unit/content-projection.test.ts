@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
 import { publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import {

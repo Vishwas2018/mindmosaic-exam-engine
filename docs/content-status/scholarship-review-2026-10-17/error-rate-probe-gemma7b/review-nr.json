@@ -1,0 +1,769 @@
+{
+  "packet": "scholarship-y6-numerical-reasoning-draft.json",
+  "reviewer": "gemma:7b",
+  "blindnessConfirmed": true,
+  "blindnessNote": "Request contained only prompt, passage, options, skill and claimed difficulty; no key, explanation or sidecar.",
+  "difficultyVerdictConvention": "'too_hard' means the claimed label overstates how hard the item really is; 'too_easy' means the label understates it.",
+  "items": [
+    {
+      "id": "scholarship-y6-nr-001",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Added 6 to each number in the sequence.",
+      "parsed": true,
+      "seconds": 34
+    },
+    {
+      "id": "scholarship-y6-nr-002",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Multiplied each number by 3 to get the next one in the sequence.",
+      "parsed": true,
+      "seconds": 39.4
+    },
+    {
+      "id": "scholarship-y6-nr-003",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The sequence follows a pattern of adding consecutive odd numbers to the previous number.",
+      "parsed": true,
+      "seconds": 50.9
+    },
+    {
+      "id": "scholarship-y6-nr-004",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Added 3, then 5, then 7, so the next number should be 19 more.",
+      "parsed": true,
+      "seconds": 54.4
+    },
+    {
+      "id": "scholarship-y6-nr-005",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The sequence follows an alternating addition and subtraction of 8 from the previous number.",
+      "parsed": true,
+      "seconds": 67.2
+    },
+    {
+      "id": "scholarship-y6-nr-006",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Subtracting 7 from each number in the sequence.",
+      "parsed": true,
+      "seconds": 56.7
+    },
+    {
+      "id": "scholarship-y6-nr-007",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Added consecutive odd numbers to the previous number in the sequence.",
+      "parsed": true,
+      "seconds": 56.9
+    },
+    {
+      "id": "scholarship-y6-nr-008",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The sequence follows a pattern of adding consecutive even numbers to the previous number.",
+      "parsed": true,
+      "seconds": 51.3
+    },
+    {
+      "id": "scholarship-y6-nr-009",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The sequence follows an alternating addition and subtraction of 40 and 13 respectively.",
+      "parsed": true,
+      "seconds": 61.3
+    },
+    {
+      "id": "scholarship-y6-nr-010",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The sequence follows a pattern of adding consecutive odd numbers to the previous number.",
+      "parsed": true,
+      "seconds": 68.9
+    },
+    {
+      "id": "scholarship-y6-nr-011",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row differences to find the missing number is 3, so the answer should be 14.",
+      "parsed": true,
+      "seconds": 75.7
+    },
+    {
+      "id": "scholarship-y6-nr-012",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column sums to identify the missing number.",
+      "parsed": true,
+      "seconds": 48.7
+    },
+    {
+      "id": "scholarship-y6-nr-013",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column differences to identify the missing number.",
+      "parsed": true,
+      "seconds": 50.7
+    },
+    {
+      "id": "scholarship-y6-nr-014",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column sums to identify the missing number.",
+      "parsed": true,
+      "seconds": 58.6
+    },
+    {
+      "id": "scholarship-y6-nr-015",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column differences to identify the missing number as 10.",
+      "parsed": true,
+      "seconds": 82.1
+    },
+    {
+      "id": "scholarship-y6-nr-016",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column sums to identify the missing number.",
+      "parsed": true,
+      "seconds": 78.7
+    },
+    {
+      "id": "scholarship-y6-nr-017",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column sums to identify the missing number as 2.",
+      "parsed": true,
+      "seconds": 61.7
+    },
+    {
+      "id": "scholarship-y6-nr-018",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column differences to identify the missing number as 12.",
+      "parsed": true,
+      "seconds": 56.4
+    },
+    {
+      "id": "scholarship-y6-nr-019",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column differences to identify the missing number.",
+      "parsed": true,
+      "seconds": 62.6
+    },
+    {
+      "id": "scholarship-y6-nr-020",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used row and column differences to identify the missing number.",
+      "parsed": true,
+      "seconds": 53.8
+    },
+    {
+      "id": "scholarship-y6-nr-021",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the number of chickens and y the number of sheep. We know x + y = 24 and 2x + 4y = 68.",
+      "parsed": true,
+      "seconds": 66.6
+    },
+    {
+      "id": "scholarship-y6-nr-022",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let Marcus' current age be x and Chloe's current age be y. Using the given information, we can form two equations: x = 3y and x + 8 = 2(y + 8). Solving these equations, we find y = 6.",
+      "parsed": true,
+      "seconds": 69.5
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let the cost of a notebook and a pen be x and y respectively. Using the given information, we can form two equations and solve for x.",
+      "parsed": true,
+      "seconds": 69.7
+    },
+    {
+      "id": "scholarship-y6-nr-024",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x cm be the length of the shorter piece. The longer piece is x + 16 cm. Together, the pieces measure 84 cm.",
+      "parsed": true,
+      "seconds": 72.6
+    },
+    {
+      "id": "scholarship-y6-nr-025",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the original number of passengers. After the first stop, there are x-6+10 passengers. After the second stop, there are (x-6+10)/2 remaining passengers.",
+      "parsed": true,
+      "seconds": 78
+    },
+    {
+      "id": "scholarship-y6-nr-026",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the smallest of the five consecutive numbers. The largest is x + 4. Their sum is x + (x+1) + (x+2) + (x+3) + (x+4) = 5x + 10 = 135. Solving for x gives x = 26.",
+      "parsed": true,
+      "seconds": 81
+    },
+    {
+      "id": "scholarship-y6-nr-027",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can represent the number of apples and mangoes as x and y respectively, and then use the given information to form two equations. Solving those equations gives us y = 4.",
+      "parsed": true,
+      "seconds": 73.6
+    },
+    {
+      "id": "scholarship-y6-nr-028",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the number of cards Ethan originally had. Then, Oliver originally had half that. After Ethan gives 15 cards, they both have x cards.",
+      "parsed": true,
+      "seconds": 73.4
+    },
+    {
+      "id": "scholarship-y6-nr-029",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Grace scored 85 marks with 4 marks for each correct answer and 1 mark deduction for each incorrect answer.",
+      "parsed": true,
+      "seconds": 75.9
+    },
+    {
+      "id": "scholarship-y6-nr-030",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the width of the garden. The length is x + 7. The perimeter is 2(x + x + 7) = 54.",
+      "parsed": true,
+      "seconds": 83.2
+    },
+    {
+      "id": "scholarship-y6-nr-031",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "challenging",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the units digit and x + 3 be the tens digit. Then, the number is 10(x + 3) + x = 11x + 30.",
+      "parsed": true,
+      "seconds": 98.4
+    },
+    {
+      "id": "scholarship-y6-nr-032",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Substituting A + B for 52 and rearranging the equation gives AB = 52 - A. Since A and B are different non-zero digits, the largest possible value for AB is 50, which occurs when A = 5. This eliminates options b, c, and e.",
+      "parsed": true,
+      "seconds": 92.9
+    },
+    {
+      "id": "scholarship-y6-nr-033",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can substitute the given information into the number N (3H, T, U) and solve for each digit.",
+      "parsed": true,
+      "seconds": 69
+    },
+    {
+      "id": "scholarship-y6-nr-034",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can set up two equations: N = 5x + 3 and N = 7y + 2. Solving each for N and equating them gives us 5x + 3 = 7y + 2. Solving for x and y gives us x = 7y - 1. Substituting this back into the first equation gives us N = 5(7y - 1) + 3 = 35y - 5 + 3 = 35y - 2.",
+      "parsed": true,
+      "seconds": 122.2
+    },
+    {
+      "id": "scholarship-y6-nr-035",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Let x be the number of marbles Maya has. Jack has x + 4 and Noah has 2x marbles. Together, they have 44 marbles, so x + (x + 4) + 2x = 44.",
+      "parsed": true,
+      "seconds": 96.1
+    },
+    {
+      "id": "scholarship-y6-nr-036",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Substituting the given values into the equation and solving for A.",
+      "parsed": true,
+      "seconds": 73.1
+    },
+    {
+      "id": "scholarship-y6-nr-037",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Prime two-digit numbers with a product of 18 are limited. Listing them quickly reveals the answer.",
+      "parsed": true,
+      "seconds": 72.8
+    },
+    {
+      "id": "scholarship-y6-nr-038",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We can set up two equations: X*Y = 72 and X + Y = 18. Solving these simultaneously gives X = 12 and Y = 6.",
+      "parsed": true,
+      "seconds": 87
+    },
+    {
+      "id": "scholarship-y6-nr-039",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "Used the given information to calculate the sum of the two corner numbers not included in the middle numbers, then subtracted that from 20 to find the sum of the three middle numbers.",
+      "parsed": true,
+      "seconds": 77.7
+    },
+    {
+      "id": "scholarship-y6-nr-040",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "We start by finding the largest digit that can be the tens-thousands place, which is 8. Then, we look for the largest digit that can be the thousands place, which is 5. The smallest possible code that meets the conditions is 8135.",
+      "parsed": true,
+      "seconds": 76
+    }
+  ]
+}

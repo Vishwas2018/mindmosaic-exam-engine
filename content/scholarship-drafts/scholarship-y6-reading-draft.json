@@ -1,0 +1,2073 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Batch 2 Year 6 Scholarship Reading Comprehension drafts. Governed original content; never imported by runtime code.",
+  "questions": [
+    {
+      "id": "scholarship-y6-rc-001",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What is the main purpose of the opening paragraph?",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To set a quiet, patient mood as the two characters wait"
+        },
+        {
+          "id": "b",
+          "text": "To show how skilfully Maya handles the boat in difficult water"
+        },
+        {
+          "id": "c",
+          "text": "To explain why Maya and her grandfather came to the estuary"
+        },
+        {
+          "id": "d",
+          "text": "To introduce the osprey that the characters have come to watch"
+        },
+        {
+          "id": "e",
+          "text": "To warn the reader that the estuary is a dangerous place"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The paragraph builds a hushed, patient mood ('the colour of wet slate', oars that make no ripple, a motionless grandfather, a silent signal). Maya's rowing is mentioned but is not the point, the purpose of the trip is not explained, the osprey does not appear until later, and nothing suggests danger.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-authorial-craft",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In paragraph 2, the stilt roots of the red mangroves are compared to 'the ribs of an upturned vessel'. This comparison mainly suggests that the roots:",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "were old and rotting after many years in salt water"
+        },
+        {
+          "id": "b",
+          "text": "had been shaped by people to guide boats through the channel"
+        },
+        {
+          "id": "c",
+          "text": "formed a curved, sheltering frame above the water"
+        },
+        {
+          "id": "d",
+          "text": "grew in straight rows that made a path for the dinghy"
+        },
+        {
+          "id": "e",
+          "text": "were packed so tightly that no fish could swim between them"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Ribs curve over the inside of a hull, so the comparison pictures the roots arching over the water as a frame. The next sentences add that young fish 'sought sanctuary' there, which supports the idea of shelter.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-figurative-language",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What does Grandfather's behaviour reveal about his knowledge of the estuary?",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "He has read scientific records of the osprey's nesting habits."
+        },
+        {
+          "id": "b",
+          "text": "He expects the fish to leave the roots as the tide rises."
+        },
+        {
+          "id": "c",
+          "text": "He knows exactly where the fiddler crabs bury themselves."
+        },
+        {
+          "id": "d",
+          "text": "He is unsure when the osprey will arrive but hopes it will."
+        },
+        {
+          "id": "e",
+          "text": "He knows the osprey's routine and how it follows the tide."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Grandfather says 'She returns with the turn of the tide' and tells Maya where to look, so he knows the osprey's routine and how it is tied to the tide.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-character-inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-004",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Why did the young fish gather among the mangrove roots rather than in the open bay?",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The water in the bay was too cold for their survival."
+        },
+        {
+          "id": "b",
+          "text": "The sheltered root channels offered safety from predators."
+        },
+        {
+          "id": "c",
+          "text": "The outgoing tide had trapped them in shallow puddles."
+        },
+        {
+          "id": "d",
+          "text": "They fed exclusively on the falling mangrove leaves."
+        },
+        {
+          "id": "e",
+          "text": "The muddy silt was easier to navigate than clear ocean water."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Paragraph 2 states that young bream and silver mullet 'sought sanctuary from the open bay' within the arching root network.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-005",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The word 'synchronous' in paragraph 2 most nearly means:",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "one after another, in a fixed order"
+        },
+        {
+          "id": "b",
+          "text": "quick and frantic, with no pattern"
+        },
+        {
+          "id": "c",
+          "text": "slow and stately, like a procession"
+        },
+        {
+          "id": "d",
+          "text": "at exactly the same time as one another"
+        },
+        {
+          "id": "e",
+          "text": "faint and scattered across the mud"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "'Synchronous' means happening at the same time. The crabs wave their claws together, in the same rhythm.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-vocabulary-context",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-006",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "How does the author build suspense while the osprey waits to strike?",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "By describing the osprey circling the dinghy before it dives"
+        },
+        {
+          "id": "b",
+          "text": "By describing a long, silent wait before the sudden dive"
+        },
+        {
+          "id": "c",
+          "text": "By having Grandfather warn Maya that the dive could be dangerous"
+        },
+        {
+          "id": "d",
+          "text": "By comparing the osprey to a hunter stalking its prey"
+        },
+        {
+          "id": "e",
+          "text": "By switching quickly between the osprey and the fish"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The author builds suspense through stillness and silence: 'For twenty minutes neither person spoke' while the dinghy drifts and the perched osprey watches the shallows, stretching out the silent wait until the bird suddenly launches into its dive. There is no circling, warning, comparison to a stalking hunter, or rapid switching between viewpoints.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-authorial-craft",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-007",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In the final sentence, the estuary is described as 'an intricate, living clockwork driven by the moon'. This metaphor suggests that:",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "boats and engines have disturbed the balance of coastal life"
+        },
+        {
+          "id": "b",
+          "text": "the estuary is dull and repeats itself in exactly the same way each day"
+        },
+        {
+          "id": "c",
+          "text": "the wildlife can hunt only during the full moon"
+        },
+        {
+          "id": "d",
+          "text": "human clocks measure the tides more accurately than animals can"
+        },
+        {
+          "id": "e",
+          "text": "life in the estuary follows linked rhythms set by the moon's pull on the tides"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "A clockwork has many parts that work together in a regular pattern. 'Driven by the moon' ties that pattern to the tides, so the metaphor shows the estuary's life following linked, regular rhythms. It is not dull repetition: the words 'intricate' and 'living' work against that reading.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-figurative-language",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-008",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which pair of words best describes the overall tone of the passage?",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Thoughtful and admiring"
+        },
+        {
+          "id": "b",
+          "text": "Playful and light-hearted"
+        },
+        {
+          "id": "c",
+          "text": "Tense and fearful"
+        },
+        {
+          "id": "d",
+          "text": "Critical and demanding"
+        },
+        {
+          "id": "e",
+          "text": "Indifferent and detached"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The author describes the estuary and the watchers with quiet attention and respect, so the tone is thoughtful and admiring. There is some suspense during the osprey's hunt, but the passage is not fearful.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-tone-analysis",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-009",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What can be inferred from the 'quiet signal they had shared since she was six years old'?",
+      "stimulus": {
+        "title": "The Estuary Watchers",
+        "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Maya has been taking rowing lessons with her grandfather for six years."
+        },
+        {
+          "id": "b",
+          "text": "They have long watched wildlife together and trust each other's signals."
+        },
+        {
+          "id": "c",
+          "text": "Maya was afraid of the water at six, so her grandfather invented a signal."
+        },
+        {
+          "id": "d",
+          "text": "Grandfather uses the signal only when he senses that danger is near."
+        },
+        {
+          "id": "e",
+          "text": "Maya and her grandfather often argue, so they use signs to avoid talking."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "A signal 'shared' for years that Maya answers by holding the boat still shows long experience together and mutual trust. The passage says nothing about learning to row, fear, danger or arguments.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-character-inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-010",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "According to paragraph 2, what distinguishes the twenty-six resin-producing Triodia species from hard-leaved species?",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Their roots spread through clay soils rather than loose desert sand."
+        },
+        {
+          "id": "b",
+          "text": "Their leaves remain flat and open to capture morning moisture."
+        },
+        {
+          "id": "c",
+          "text": "They belong to a softer-leaved group with resin-secreting outer leaf cells."
+        },
+        {
+          "id": "d",
+          "text": "They store aromatic resin inside hollow stems beneath the soil surface."
+        },
+        {
+          "id": "e",
+          "text": "Their breathing pores sit on the outer leaf surface instead of in deep grooves."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Paragraph 2 states that the twenty-six resin-producing Triodia species belong to a softer-leaved group that secretes resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin. Spinifex leaves curl into cylinders with breathing pores sheltered in deep grooves, and roots anchor sandy dunes.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-retrieval",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-011",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In paragraph 1, the word 'tenacity' most nearly means:",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "rapid growth after rain"
+        },
+        {
+          "id": "b",
+          "text": "spiky, prickly texture"
+        },
+        {
+          "id": "c",
+          "text": "ability to hold water"
+        },
+        {
+          "id": "d",
+          "text": "bright seasonal colour"
+        },
+        {
+          "id": "e",
+          "text": "stubborn endurance"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The sentence says spinifex survives 'where few other plants can endure', so tenacity means stubborn endurance.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-vocabulary-context",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-012",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What thermal property made spinifex pitch useful for Indigenous toolmaking?",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It hardens when heated and softens when cooled."
+        },
+        {
+          "id": "b",
+          "text": "It softens when heated and hardens as it cools."
+        },
+        {
+          "id": "c",
+          "text": "It stays sticky at every temperature."
+        },
+        {
+          "id": "d",
+          "text": "It melts only at very high temperatures."
+        },
+        {
+          "id": "e",
+          "text": "It burns with a bright flame when warmed."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Paragraph 3: 'When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement.' Option a reverses the order.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-013",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Why are nanotechnology researchers interested in adding spinifex nanofibres to materials?",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "They allow concrete and rubber to set much faster during manufacturing."
+        },
+        {
+          "id": "b",
+          "text": "They make synthetic polymers waterproof and resistant to high temperatures."
+        },
+        {
+          "id": "c",
+          "text": "They lower production costs by replacing natural rubber latex."
+        },
+        {
+          "id": "d",
+          "text": "They improve strength and flexibility without adding significant weight."
+        },
+        {
+          "id": "e",
+          "text": "They prevent microscopic cracks from conducting heat or electricity."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Paragraph 4 states that microscopic spinifex nanofibres 'enhance tensile strength and flexibility without adding significant weight' when blended into materials like latex or concrete. The passage does not claim they speed up setting, make polymers waterproof, replace latex, or block heat and electrical conduction.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-retrieval",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-014",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "How is the passage organised?",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The plant's adaptations, then its traditional uses, then modern research"
+        },
+        {
+          "id": "b",
+          "text": "Traditional uses first, then the plant's adaptations, then modern research"
+        },
+        {
+          "id": "c",
+          "text": "A problem, then a solution, then an evaluation of the solution"
+        },
+        {
+          "id": "d",
+          "text": "Modern research first, then a history of the plant"
+        },
+        {
+          "id": "e",
+          "text": "Four separate arguments for protecting the plant"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Paragraphs 1 and 2 describe the plant's adaptations, paragraph 3 describes traditional use of the pitch, and paragraph 4 describes modern research.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-text-structure",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-015",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Based on the text, what is likely to happen if spinifex disappeared from arid dune fields?",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Insects that feed on tough foliage would lose their main food and decline."
+        },
+        {
+          "id": "b",
+          "text": "Other grasses would quickly spread and cover the dunes."
+        },
+        {
+          "id": "c",
+          "text": "Loose dunes would be exposed to wind erosion."
+        },
+        {
+          "id": "d",
+          "text": "Nanocellulose research would simply move to other plants."
+        },
+        {
+          "id": "e",
+          "text": "First Nations toolmakers would find a better adhesive."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Paragraph 2 says the root networks 'lock down loose dunes, preventing severe wind erosion'. Without spinifex that protection would be lost. The other outcomes are not supported by the text.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-cause-effect",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-016",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which statement best sums up the author's view of spinifex in the final sentence?",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Spinifex should be cleared so that grazing land can be improved."
+        },
+        {
+          "id": "b",
+          "text": "Spinifex is too complex for scientists to copy."
+        },
+        {
+          "id": "c",
+          "text": "Spinifex resin will soon replace all petroleum products."
+        },
+        {
+          "id": "d",
+          "text": "A plant once seen as a nuisance may now help build greener materials."
+        },
+        {
+          "id": "e",
+          "text": "Traditional uses of spinifex were more valuable than modern research."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The last sentence says a grass 'long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering'.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-main-idea",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-017",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The cylindrical curling of spinifex leaves is an adaptation that helps the plant to:",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "lose less water to the wind and heat"
+        },
+        {
+          "id": "b",
+          "text": "trap seeds from competing plants"
+        },
+        {
+          "id": "c",
+          "text": "collect rainwater at the leaf tips"
+        },
+        {
+          "id": "d",
+          "text": "stay cool by reflecting sunlight"
+        },
+        {
+          "id": "e",
+          "text": "make the leaves harder for insects to bite"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Paragraph 2 says the tight cylinders 'drastically reduce the surface area exposed to evaporating winds', which saves water.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-018",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In paragraph 4, the phrase 'high aspect ratio' describes fibres that have:",
+      "stimulus": {
+        "title": "Architects of the Spinifex",
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "a wide surface area curved into a hollow tube"
+        },
+        {
+          "id": "b",
+          "text": "a high density compared with their overall volume"
+        },
+        {
+          "id": "c",
+          "text": "a great length in proportion to their narrow width"
+        },
+        {
+          "id": "d",
+          "text": "equal dimensions across length, width, and thickness"
+        },
+        {
+          "id": "e",
+          "text": "a sharp taper that narrows from base to tip"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "In materials science and geometry, 'aspect ratio' is the ratio of an object's length to its width. Paragraph 4 confirms this immediately by glossing the fibres as 'long, thin, and extraordinarily strong', meaning their length is very large compared to their narrow width.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-vocabulary-context",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-019",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What is the main argument of 'In Defence of the Dark'?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Coastal lighting near seabird colonies poses the greatest threat to wildlife."
+        },
+        {
+          "id": "b",
+          "text": "Suburban floodlights often reduce pedestrian visibility instead of preventing street crime."
+        },
+        {
+          "id": "c",
+          "text": "Regional dark-sky reserves are more practical than changing urban lighting systems."
+        },
+        {
+          "id": "d",
+          "text": "Replacing older street lamps with modern LEDs is the key to saving energy."
+        },
+        {
+          "id": "e",
+          "text": "Light pollution harms wildlife and culture, but thoughtful design can reduce it."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The author explains the cultural and ecological damage caused by artificial skyglow, rejects plunging communities into darkness, and argues that practical, well-engineered lighting reforms can restore dark skies while maintaining public safety. Options a, b, c, and d each focus too narrowly on a single detail or misstate the author's proposed solutions.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-main-idea",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-020",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Why does the author mention research about lighting and crime in paragraph 2?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To argue for switching off municipal streetlights along suburban pathways"
+        },
+        {
+          "id": "b",
+          "text": "To challenge the belief that brighter lighting automatically makes places safer"
+        },
+        {
+          "id": "c",
+          "text": "To suggest that rising power costs outweigh the benefits of bright street lighting"
+        },
+        {
+          "id": "d",
+          "text": "To recommend that surveillance cameras replace street lighting in busy suburbs"
+        },
+        {
+          "id": "e",
+          "text": "To show that local councils should focus on daytime traffic management"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "In paragraph 2, the author notes that bright streetscapes are 'reflexively equated with civic progress and public safety', but points out that evidence connecting unshielded floodlights to crime reduction is 'mixed, and weaker than most people assume'. This challenges the common assumption that brighter lighting automatically improves public safety.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-authorial-craft",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-021",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In paragraph 1, the phrase 'sickly orange smog' is used to describe skyglow. What does the metaphor suggest?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "that city lights keep the air warm and clean"
+        },
+        {
+          "id": "b",
+          "text": "that skyglow is a natural weather event of hot summers"
+        },
+        {
+          "id": "c",
+          "text": "that artificial light spoils the night sky like a layer of dirty air"
+        },
+        {
+          "id": "d",
+          "text": "that skyglow is a small problem that mainly bothers astronomers"
+        },
+        {
+          "id": "e",
+          "text": "that the glow is produced by burning fuel"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "'Smog' is polluted air that hides the view. Describing skyglow as a 'sickly' smog presents artificial light as a pollutant that spoils the sky.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-figurative-language",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-022",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "How does artificial lighting specifically threaten short-tailed shearwater fledglings?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It warms the ocean water until the fish they eat swim away from the colony."
+        },
+        {
+          "id": "b",
+          "text": "It makes them delay feeding for hours, so predators catch them at dusk."
+        },
+        {
+          "id": "c",
+          "text": "It stops adult birds from laying their eggs during the spring breeding season."
+        },
+        {
+          "id": "d",
+          "text": "It confuses young birds on their first flight, so they end up among roads and buildings."
+        },
+        {
+          "id": "e",
+          "text": "It blinds them permanently, so they can no longer hunt out at sea."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Paragraph 3 says fledglings navigate by the moon and stars on their first flight, but coastal road lighting disorients them and they crash into traffic or walls. The feeding delays in the same paragraph describe sugar gliders and microbats, not shearwaters.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-retrieval",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-023",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which practical change does the author recommend for local councils?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Installing taller lamp posts to spread illumination across wider areas"
+        },
+        {
+          "id": "b",
+          "text": "Fitting hooded fixtures that direct light downward onto footpaths"
+        },
+        {
+          "id": "c",
+          "text": "Using bright blue-white LEDs to improve visibility for night drivers"
+        },
+        {
+          "id": "d",
+          "text": "Turning off suburban street lamps between midnight and early dawn"
+        },
+        {
+          "id": "e",
+          "text": "Replacing footpath lamps with floodlights along major residential streets"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Paragraph 4 recommends replacing unshielded lamps with 'downward-facing hooded fixtures that direct illumination exclusively where pedestrians step'. The author advises against blue-white glare and unshielded floodlights, and explicitly rejects plunging communities into darkness.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-024",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "What does the word 'diurnal' mean in paragraph 3?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Occurring or active during the daytime"
+        },
+        {
+          "id": "b",
+          "text": "Happening once every seven days"
+        },
+        {
+          "id": "c",
+          "text": "Relating exclusively to deep-sea animals"
+        },
+        {
+          "id": "d",
+          "text": "Extremely fragile and easily damaged"
+        },
+        {
+          "id": "e",
+          "text": "Characterised by unpredictable weather"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "'Diurnal' describes activities and conditions of daytime, placed in contrast with 'nocturnal darkness'.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-vocabulary-context",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-025",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "How does the author answer the worry that reducing light pollution would make people less safe?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "By arguing that protecting nocturnal wildlife should outweigh pedestrian safety concerns"
+        },
+        {
+          "id": "b",
+          "text": "By proposing that suburban street lighting be dimmed or switched off after midnight"
+        },
+        {
+          "id": "c",
+          "text": "By suggesting that local councils install security cameras to compensate for darker streets"
+        },
+        {
+          "id": "d",
+          "text": "By encouraging residents to rely on handheld torches when walking at night"
+        },
+        {
+          "id": "e",
+          "text": "By explaining that shielded fixtures can light footpaths clearly without harsh glare"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Paragraph 4 addresses this concern directly: 'Reclaiming our night sky does not require plunging our communities into perilous darkness.' The author explains that downward-facing hooded fixtures direct light onto footpaths where pedestrians walk, maintaining safe visibility without casting blinding glare into the sky.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-argument-evaluation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-026",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The mention of Aboriginal navigators and living songlines in paragraph 1 mainly serves to:",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "trace the history of maritime navigation methods across Australia"
+        },
+        {
+          "id": "b",
+          "text": "contrast the clear night skies of inland deserts with coastal suburban skies"
+        },
+        {
+          "id": "c",
+          "text": "explain the astronomical techniques that traditional travellers used to cross land"
+        },
+        {
+          "id": "d",
+          "text": "encourage schools to include traditional star names in science lessons"
+        },
+        {
+          "id": "e",
+          "text": "show that losing the night sky to skyglow carries a deep cultural cost"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "By noting that the Milky Way guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories, the author shows that the loss of the night sky to skyglow is a profound cultural loss, not merely an ecological or scientific issue.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-authorial-craft",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-027",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which word best describes the author's attitude to solving light pollution?",
+      "stimulus": {
+        "title": "In Defence of the Dark",
+        "body": "Look up into the night sky from any Australian metropolitan suburb and you are likely to see only a scattering of the brightest stars. The vast, glittering tapestry of the Milky Way—which guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories—has been washed out by a sickly orange smog known as skyglow. Global satellite measurements from 2012 to 2016 showed that Earth's artificially lit outdoor area expanded by over two per cent each year, yet society remains strangely indifferent to its ecological and cultural costs.\n\nUnlike chemical spills or plastic debris, light at night is rarely perceived as dangerous contamination. On the contrary, bright streetscapes are reflexively equated with civic progress and public safety. Yet the evidence that blinding, unshielded floodlights reliably deter opportunistic crime is mixed, and weaker than most people assume; harsh glare casts deep, pitch-black shadows and leaves pedestrians less able to see what lies beyond the light. What well-engineered lighting requires is precision and restraint, not unrestrained wattage.\n\nThe ecological consequences of perpetual twilight are alarming. Australia's unique wildlife evolved under dependable rhythms of diurnal warmth and nocturnal darkness. On offshore islands, fledglings of the short-tailed shearwater embark on their maiden migratory flights guided by the moon and stars, only to be fatally disoriented by coastal roadway lighting, crashing into traffic or concrete walls. In urban bushland remnants, some nocturnal mammals, such as sugar gliders and certain microbats, have been observed to forage less or emerge later when lit by bright street lamps, shrinking their feeding windows and exposing them to prowling feral predators.\n\nReclaiming our night sky does not require plunging our communities into perilous darkness. Practical, cost-effective solutions already exist. Local councils can replace unshielded lamps that cast glare in every direction with downward-facing hooded fixtures that direct illumination exclusively where pedestrians step. Furthermore, shifting to warm-amber LED wavelengths instead of harsh blue-white glare minimises atmospheric light scattering while sparing nocturnal photoreceptors. By establishing certified Dark Sky Reserves in regional areas and enacting strict urban lighting codes, we can restore the natural nocturnal ecology and ensure future generations retain their ancient birthright: the wonder of a truly dark night."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Defeatist"
+        },
+        {
+          "id": "b",
+          "text": "Alarmed"
+        },
+        {
+          "id": "c",
+          "text": "Pragmatic"
+        },
+        {
+          "id": "d",
+          "text": "Hesitant"
+        },
+        {
+          "id": "e",
+          "text": "Nostalgic"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The author is alarmed by the problem in paragraph 3, but the attitude to solving it is practical: concrete, 'cost-effective solutions already exist' such as hooded lamps, warm LEDs and lighting codes.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-tone-analysis",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-028",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Why did 19th-century sailing vessels choose to navigate the perilous Roaring Forties?",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Strong westerly winds enabled ships to sail much faster, shortening the voyage."
+        },
+        {
+          "id": "b",
+          "text": "Steady ocean currents in the region reduced structural strain on wooden hulls and sails."
+        },
+        {
+          "id": "c",
+          "text": "Regular island ports along the route allowed crews to take on fresh supplies."
+        },
+        {
+          "id": "d",
+          "text": "Clearer southern skies made daily noon sun observations easier for navigators."
+        },
+        {
+          "id": "e",
+          "text": "Sheltered coastal waters offered safe anchorages during winter storms."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Paragraph 1 explains that vessels sailed into the Roaring Forties because 'driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage'.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-retrieval",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-029",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "According to the passage, how are time and longitude linked?",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "One hour of time difference between ship and Greenwich equals one degree of longitude."
+        },
+        {
+          "id": "b",
+          "text": "Every four minutes of sailing at sea equals one nautical mile of distance."
+        },
+        {
+          "id": "c",
+          "text": "The angle of the noon sun above the horizon gives the ship's longitude."
+        },
+        {
+          "id": "d",
+          "text": "Every four minutes of time difference from Greenwich equals one degree of longitude."
+        },
+        {
+          "id": "e",
+          "text": "A ship's longitude equals its speed multiplied by the hours since noon."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Paragraph 2: 'Every four minutes of time discrepancy corresponded to one degree of longitude.' The noon sun gives latitude, not longitude, and one hour would be fifteen degrees.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-030",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Why were marine chronometers likely to become inaccurate in the Roaring Forties?",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Sustained magnetic variation from southern storms affected their brass cases."
+        },
+        {
+          "id": "b",
+          "text": "Bitter cold altered their daily rates and damp salt air could rust fine parts."
+        },
+        {
+          "id": "c",
+          "text": "Pivoted gimbal mountings tilted the mechanisms until their internal gears shifted."
+        },
+        {
+          "id": "d",
+          "text": "Sudden drops in barometric pressure slowed the movement of their hands."
+        },
+        {
+          "id": "e",
+          "text": "Constant pitching motion prevented the mainspring from staying wound between checks."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Paragraph 3 states that weeks of bitter cold altered the chronometers' daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases. Gimbals kept the instruments level rather than shifting their gears.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-retrieval",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-031",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "In paragraph 4, 'dead reckoning' is best described as:",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "predicting the strength of currents from printed tide tables"
+        },
+        {
+          "id": "b",
+          "text": "working out position from the course steered and the distance travelled"
+        },
+        {
+          "id": "c",
+          "text": "fixing position from the angle of the noon sun above the horizon"
+        },
+        {
+          "id": "d",
+          "text": "following the flight paths of seabirds towards the nearest land"
+        },
+        {
+          "id": "e",
+          "text": "relying on signals flashed from lighthouses along the coast"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Paragraph 4: 'estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line'. The noon sun was used for latitude.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-vocabulary-context",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-032",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which factor made the western entrance to Bass Strait especially dangerous for a captain who could not confirm his ship's position?",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Compass needles failed near the coast, so no captain could trust his heading."
+        },
+        {
+          "id": "b",
+          "text": "Icebergs drifting north from Antarctica crowded the channel for most of the year."
+        },
+        {
+          "id": "c",
+          "text": "Reefs left little room for error, so a small slip in position could wreck a ship."
+        },
+        {
+          "id": "d",
+          "text": "Chronometers could not be carried into coastal waters, so timekeeping was impossible."
+        },
+        {
+          "id": "e",
+          "text": "Heavy swells forced captains to lower their sails and wait there for months."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Paragraph 2 explains that a small timing error could put a ship onto an unseen reef, and paragraph 4 says cloud hid the sun and stars so captains could not check their position as they approached the entrance to Bass Strait, where reefs left little room. Together these made even a small mistake in position potentially disastrous.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-033",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "The word 'palpable' in the final paragraph most nearly means:",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "hidden from view"
+        },
+        {
+          "id": "b",
+          "text": "loud enough to be heard far away"
+        },
+        {
+          "id": "c",
+          "text": "so strong it could almost be felt"
+        },
+        {
+          "id": "d",
+          "text": "short-lived and fading"
+        },
+        {
+          "id": "e",
+          "text": "mixed with excitement"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "'The tension on the quarterdeck was palpable' means so strong that people could almost feel it.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-vocabulary-context",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-034",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "According to paragraph 3, why was the 'lunar distance' method hard to use?",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "It relied on comparing multiple spring-driven clocks mounted in gimbal rings."
+        },
+        {
+          "id": "b",
+          "text": "It required measuring the noon sun's angle when the sky was overcast."
+        },
+        {
+          "id": "c",
+          "text": "The brass sextants used for the sightings were easily rusted by damp, salty winds."
+        },
+        {
+          "id": "d",
+          "text": "The tables worked well near the equator but lost accuracy further south."
+        },
+        {
+          "id": "e",
+          "text": "It needed clear sightings of the moon and stars and hours of calculation."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Paragraph 3 states that lunar distance calculations 'required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic'. Gimballed clocks and salt-air rusting relate to marine chronometers, and noon sun sights were used for latitude.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 50,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "scholarship-y6-rc-035",
+      "type": "reading_comprehension",
+      "yearLevel": 6,
+      "examStyle": "scholarship_style",
+      "prompt": "Which conclusion about these voyages is best supported by the passage as a whole?",
+      "stimulus": {
+        "title": "Charting the Roaring Forties",
+        "body": "Throughout the nineteenth century, the maritime route connecting Great Britain to the booming colonial ports of Melbourne and Sydney was among the most treacherous journeys on Earth. Passing south of the Cape of Good Hope, clipper ships and immigrant barques swung east into the tempestuous belt of ocean between the 40th and 50th parallels of south latitude—a region sailors christened the 'Roaring Forties'. Driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage. Yet surviving this oceanic highway demanded navigational mastery under harrowing conditions.\n\nThe fundamental challenge was calculating longitude—the ship's east-west position on the globe. While latitude could be readily determined by measuring the noon sun's angle above the horizon with a sextant, longitude required knowing the exact time difference between the vessel's local meridian and the prime meridian at Greenwich, England. Every four minutes of time discrepancy corresponded to one degree of longitude, or roughly sixty nautical miles at the equator. A clock that was wrong by only one minute could therefore leave a ship up to fifteen nautical miles from where its navigator believed it to be, far enough to put a vessel onto an unseen reef.\n\nBefore marine chronometers became affordable and widespread, mariners often relied on laborious 'lunar distance' calculations, which required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic. By the 1850s, ships carried multiple spring-driven chronometers mounted in gimbals to keep them level amid the pitching sea. Yet the Roaring Forties tested these delicate mechanical devices to their limits. Weeks of bitter cold altered their daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases.\n\nNavigators were frequently forced to rely on dead reckoning—estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line into the foam. For weeks at a time, dense squalls and leaden overcast skies completely obscured the sun and stars, leaving captains blind to astronomical confirmation. As ships approached the hazardous western entrance to Bass Strait, where reefs left so little room that every captain felt he was threading the eye of a needle, the tension on the quarterdeck was palpable. Reaching port safely was a triumph of skill and nerve over a formidable ocean."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "Reaching port safely required experienced seamanship alongside mechanical instruments."
+        },
+        {
+          "id": "b",
+          "text": "The adoption of marine chronometers largely removed navigational risk from ocean voyages."
+        },
+        {
+          "id": "c",
+          "text": "Dead reckoning proved too imprecise to help captains during prolonged gales."
+        },
+        {
+          "id": "d",
+          "text": "Lunar distance calculations remained the preferred method for finding longitude in the 1850s."
+        },
+        {
+          "id": "e",
+          "text": "Inaccurate coastal charts posed a greater danger to ships than southern weather."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The passage shows that mechanical chronometers could drift in extreme cold and overcast skies often blocked celestial sights, forcing captains to rely on dead reckoning. Reaching port safely—especially through Bass Strait—was 'a triumph of skill and nerve', showing that human judgement and seamanship were essential alongside instruments.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Reading Comprehension",
+        "skill": "rc-factual-inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": [
+          "scholarship",
+          "batch-2",
+          "reading"
+        ]
+      }
+    }
+  ],
+  "parameters": {
+    "scholarship-y6-rc-001": {
+      "id": "scholarship-y6-rc-001",
+      "skill": "rc-authorial-craft",
+      "targetOption": "a",
+      "correctValue": "To set a quiet, patient mood as the two characters wait",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-002": {
+      "id": "scholarship-y6-rc-002",
+      "skill": "rc-figurative-language",
+      "targetOption": "c",
+      "correctValue": "formed a curved, sheltering frame above the water",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-003": {
+      "id": "scholarship-y6-rc-003",
+      "skill": "rc-character-inference",
+      "targetOption": "e",
+      "correctValue": "He knows the osprey's routine and how it follows the tide.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-004": {
+      "id": "scholarship-y6-rc-004",
+      "skill": "rc-factual-inference",
+      "targetOption": "b",
+      "correctValue": "The sheltered root channels offered safety from predators.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-005": {
+      "id": "scholarship-y6-rc-005",
+      "skill": "rc-vocabulary-context",
+      "targetOption": "d",
+      "correctValue": "at exactly the same time as one another",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-006": {
+      "id": "scholarship-y6-rc-006",
+      "skill": "rc-authorial-craft",
+      "targetOption": "b",
+      "correctValue": "By describing a long, silent wait before the sudden dive",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-007": {
+      "id": "scholarship-y6-rc-007",
+      "skill": "rc-figurative-language",
+      "targetOption": "e",
+      "correctValue": "life in the estuary follows linked rhythms set by the moon's pull on the tides",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-008": {
+      "id": "scholarship-y6-rc-008",
+      "skill": "rc-tone-analysis",
+      "targetOption": "a",
+      "correctValue": "Thoughtful and admiring",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-009": {
+      "id": "scholarship-y6-rc-009",
+      "skill": "rc-character-inference",
+      "targetOption": "b",
+      "correctValue": "They have long watched wildlife together and trust each other's signals.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-010": {
+      "id": "scholarship-y6-rc-010",
+      "skill": "rc-factual-retrieval",
+      "targetOption": "c",
+      "correctValue": "They belong to a softer-leaved group with resin-secreting outer leaf cells.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-011": {
+      "id": "scholarship-y6-rc-011",
+      "skill": "rc-vocabulary-context",
+      "targetOption": "e",
+      "correctValue": "stubborn endurance",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-012": {
+      "id": "scholarship-y6-rc-012",
+      "skill": "rc-factual-inference",
+      "targetOption": "b",
+      "correctValue": "It softens when heated and hardens as it cools.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-013": {
+      "id": "scholarship-y6-rc-013",
+      "skill": "rc-factual-retrieval",
+      "targetOption": "d",
+      "correctValue": "They improve strength and flexibility without adding significant weight.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-014": {
+      "id": "scholarship-y6-rc-014",
+      "skill": "rc-text-structure",
+      "targetOption": "a",
+      "correctValue": "The plant's adaptations, then its traditional uses, then modern research",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-015": {
+      "id": "scholarship-y6-rc-015",
+      "skill": "rc-cause-effect",
+      "targetOption": "c",
+      "correctValue": "Loose dunes would be exposed to wind erosion.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-016": {
+      "id": "scholarship-y6-rc-016",
+      "skill": "rc-main-idea",
+      "targetOption": "d",
+      "correctValue": "A plant once seen as a nuisance may now help build greener materials.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-017": {
+      "id": "scholarship-y6-rc-017",
+      "skill": "rc-factual-inference",
+      "targetOption": "a",
+      "correctValue": "lose less water to the wind and heat",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-018": {
+      "id": "scholarship-y6-rc-018",
+      "skill": "rc-vocabulary-context",
+      "targetOption": "c",
+      "correctValue": "a great length in proportion to their narrow width",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-019": {
+      "id": "scholarship-y6-rc-019",
+      "skill": "rc-main-idea",
+      "targetOption": "e",
+      "correctValue": "Light pollution harms wildlife and culture, but thoughtful design can reduce it.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-020": {
+      "id": "scholarship-y6-rc-020",
+      "skill": "rc-authorial-craft",
+      "targetOption": "b",
+      "correctValue": "To challenge the belief that brighter lighting automatically makes places safer",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-021": {
+      "id": "scholarship-y6-rc-021",
+      "skill": "rc-figurative-language",
+      "targetOption": "c",
+      "correctValue": "that artificial light spoils the night sky like a layer of dirty air",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-022": {
+      "id": "scholarship-y6-rc-022",
+      "skill": "rc-factual-retrieval",
+      "targetOption": "d",
+      "correctValue": "It confuses young birds on their first flight, so they end up among roads and buildings.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-023": {
+      "id": "scholarship-y6-rc-023",
+      "skill": "rc-factual-inference",
+      "targetOption": "b",
+      "correctValue": "Fitting hooded fixtures that direct light downward onto footpaths",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-024": {
+      "id": "scholarship-y6-rc-024",
+      "skill": "rc-vocabulary-context",
+      "targetOption": "a",
+      "correctValue": "Occurring or active during the daytime",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-025": {
+      "id": "scholarship-y6-rc-025",
+      "skill": "rc-argument-evaluation",
+      "targetOption": "e",
+      "correctValue": "By explaining that shielded fixtures can light footpaths clearly without harsh glare",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-026": {
+      "id": "scholarship-y6-rc-026",
+      "skill": "rc-authorial-craft",
+      "targetOption": "e",
+      "correctValue": "show that losing the night sky to skyglow carries a deep cultural cost",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-027": {
+      "id": "scholarship-y6-rc-027",
+      "skill": "rc-tone-analysis",
+      "targetOption": "c",
+      "correctValue": "Pragmatic",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-028": {
+      "id": "scholarship-y6-rc-028",
+      "skill": "rc-factual-retrieval",
+      "targetOption": "a",
+      "correctValue": "Strong westerly winds enabled ships to sail much faster, shortening the voyage.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-029": {
+      "id": "scholarship-y6-rc-029",
+      "skill": "rc-factual-inference",
+      "targetOption": "d",
+      "correctValue": "Every four minutes of time difference from Greenwich equals one degree of longitude.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-030": {
+      "id": "scholarship-y6-rc-030",
+      "skill": "rc-factual-retrieval",
+      "targetOption": "b",
+      "correctValue": "Bitter cold altered their daily rates and damp salt air could rust fine parts.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-031": {
+      "id": "scholarship-y6-rc-031",
+      "skill": "rc-vocabulary-context",
+      "targetOption": "b",
+      "correctValue": "working out position from the course steered and the distance travelled",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-032": {
+      "id": "scholarship-y6-rc-032",
+      "skill": "rc-factual-inference",
+      "targetOption": "c",
+      "correctValue": "Reefs left little room for error, so a small slip in position could wreck a ship.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-033": {
+      "id": "scholarship-y6-rc-033",
+      "skill": "rc-vocabulary-context",
+      "targetOption": "c",
+      "correctValue": "so strong it could almost be felt",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-034": {
+      "id": "scholarship-y6-rc-034",
+      "skill": "rc-factual-inference",
+      "targetOption": "e",
+      "correctValue": "It needed clear sightings of the moon and stars and hours of calculation.",
+      "requiresHumanSemanticCheck": true
+    },
+    "scholarship-y6-rc-035": {
+      "id": "scholarship-y6-rc-035",
+      "skill": "rc-factual-inference",
+      "targetOption": "a",
+      "correctValue": "Reaching port safely required experienced seamanship alongside mechanical instruments.",
+      "requiresHumanSemanticCheck": true
+    }
+  }
+}

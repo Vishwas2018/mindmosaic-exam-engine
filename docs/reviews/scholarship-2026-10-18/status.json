@@ -1,0 +1,2819 @@
+{
+  "totals": {
+    "ready_for_review": 45,
+    "requires_revision_or_decision": 35,
+    "awaiting_external_evidence": 80
+  },
+  "items": [
+    {
+      "id": "scholarship-y6-nr-001",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_series) = 35; matches key",
+      "candidateHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+      "publishedContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-002",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_series) = 324; matches key",
+      "candidateHash": "ebe0bcbff00c49924da0d819347558a4a7e5d4ac97ad39969546e9424cd9c90e",
+      "publishedContentHash": "1a35cc3b431591ae8fb4fc29bc234f10f03cec1a39c68be2225fe719b4077ead",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-003",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 33; matches key",
+      "candidateHash": "aa6d1989a8adb73e088bd97e4904b5184e6f9eb56d1107f60d51b661ee4e835b",
+      "publishedContentHash": "0d16b7ad9ad6f236fec34b069f1022ccad2614b69d7efdef063d1196f2eb9272",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "relabel_easy",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-004",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 31; matches key",
+      "candidateHash": "b589c5a898429c1e9068aed016cfab00ebac6bd81b67bd2bcd479ad6e292c40e",
+      "publishedContentHash": "2a45894a43f4a7be5193df8abcfe31546f4912ec509919bda65eb248f66198df",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-005",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 11; matches key",
+      "candidateHash": "343202f2defdf3f86b22b9bca70ea3385e9d2e28e3ae251f4bd2707f822a6045",
+      "publishedContentHash": "2b0529a40d1f3f06ff1509b9e325ba6da183b6d7f9e1aba9a37fc1e44a34e755",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "relabel_easy",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-006",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_series) = 45; matches key",
+      "candidateHash": "4225568d55c63b4a99bf795d15c6ed0d5f6983f2bcdce8fd1cb42ef1ddbaebb0",
+      "publishedContentHash": "b8a203bed187e71ab86d029dff697a0b609ae8faaebdce73215389d5cb814fab",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-007",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 49; matches key",
+      "candidateHash": "a17cf6174a1021cb9e656a51e4427b2b28539b5256bcf705330f9c61a86a5ebd",
+      "publishedContentHash": "4ab54a8739b7d59a314b56b5b5819106a997e759bb827acbf979b6609f863a96",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "relabel_easy",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-008",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 52; matches key",
+      "candidateHash": "df11504d476587bb707d5676dba4a0db43cabcfb8e3813e4d5904b426e3a1a13",
+      "publishedContentHash": "d0d259fe8d3378aea14e34f612b3f62d76c0b16dc864b798ea89d7c52b3bc8af",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-009",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 19; matches key",
+      "candidateHash": "686274b92c266ff73b60f0dad8449e2bf08135e941fc30e581b7e4fa47e66e6f",
+      "publishedContentHash": "a31e3d7729b7bc03a503c5d976a2ad452c7f8c77aa5113af59c905b2c204e62d",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-010",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_series) = 47; matches key",
+      "candidateHash": "2960635f437da748898e6356b57ef058134929b332d3fd3129893e2f39568e4c",
+      "publishedContentHash": "b67302a5737b5536fe5b8e7a461b6d217b645fe006abe003352d23b2c93a3eac",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-011",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 15; matches key",
+      "candidateHash": "9aa85b6fc3f1b419aeceb062e7bfe036a1d7c951a2cf934373a79cbe53768036",
+      "publishedContentHash": "6cb52d3e8ce0ab45fef9d4d0ce6032f3c4d2aa6765fc8d6bacba299258e50973",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-012",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (number_matrix) = 11; matches key",
+      "candidateHash": "466bb9924438531954ce60f634f5b571b3b91f0201eabe1f0bcfcb96445b11e4",
+      "publishedContentHash": "8ebc17bb31e12f41dafe7882eda35578f1220d489a0a66cae5c61d089ae34748",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-013",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 14; matches key",
+      "candidateHash": "fdf545cf2b88a8b6a31ac439a14de8ed2b7953623f6d74008adb9cf5ce4f3ce0",
+      "publishedContentHash": "a3142a304d5a7133108321517faed150ef0407c3cfe92b7c5741406002bbca2f",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-014",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 12; matches key",
+      "candidateHash": "82c5c609de3cf32fabbd785c2f434c3da541d016cfa31b1a1b2b1eebb75b97ce",
+      "publishedContentHash": "86ccedd8368315255cd836bb17ea8d20e785ef27b97fc86a7930ad5cae65f1b8",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-015",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 12; matches key",
+      "candidateHash": "c84a9ad08f752071474a53f463cb7457bdac8d9981d3c29ee35222d79d9f6a81",
+      "publishedContentHash": "678ba87aef3b694f37996590b4873835bd95ab601d94a2b20e2624c1ad58c64b",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-016",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 4; matches key",
+      "candidateHash": "3585665c14cb96917e83e7cad9d88d40891d7658cfa44124c05b19a9e973f9a3",
+      "publishedContentHash": "5cf95dd2309604cee68ef80a5686a13e0869d6cb45723fd55904339519d12424",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-017",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 4; matches key",
+      "candidateHash": "d410f84933715db6c8751e1da584aadcdf2b21df7e3243c9eeb19af625d3da2d",
+      "publishedContentHash": "955c36d32827f5954d0f5826687579fb4b41eda22ea20c22008c00028f9cbba3",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-018",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 15; matches key",
+      "candidateHash": "152eb303fe1e01bf8bb67ddc13700ea7426a722c0e916eb578173176e3d74d42",
+      "publishedContentHash": "36d3f33bd624d693d24fcb16cbd5c111e20ac51c0b27d525924fbc0787f6462f",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-019",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 12; matches key",
+      "candidateHash": "877b7cb1f906ab4c0213418792c96098903136faaa0d12217b0d18dcbc623211",
+      "publishedContentHash": "e75acba4b348039dd0f7be0b876ad46960a4959ea7bced4663d90e9749a1ee42",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-020",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (number_matrix) = 13; matches key",
+      "candidateHash": "b7ee0e222be41f3f728fd0402c6b553f90bec32bd00a1609d73bda814bed3f0a",
+      "publishedContentHash": "1833e9216384c523076bd0f6ecb29450f105266cd98205410022f3a771927eb4",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-021",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 10; matches key",
+      "candidateHash": "23cac13d178516dcdaee5bb04d9baa338275212cb3b6b3be1a795b41ba6da68c",
+      "publishedContentHash": "a78f2dee38d3aba63ec86f26bae8e5d6e6cefec4438d65ea414d527fd4de4b1c",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-022",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 8; matches key",
+      "candidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "publishedContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 5; matches key",
+      "candidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "publishedContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-024",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 34; matches key",
+      "candidateHash": "f9b321c87e287ac0248d0e195ec504876f1d30825dee70dfcc7ff88f83eb8158",
+      "publishedContentHash": "746caee7851825c94f6d1e464e76a57c70626d5e55e1cc86edec54aac8c99787",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-025",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 32; matches key",
+      "candidateHash": "639a1e5280531952c3783b6d5ae511c5a16f79b3a62ade8b0c6a020a6ec85169",
+      "publishedContentHash": "e7b344833769090ecc18a500c2725d6f20e9573c0ac7a5401738d469ef38f148",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-026",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 29; matches key",
+      "candidateHash": "1b34bd174e0b335a3cfbe54e8c7de1dd4e0ae72ef6c2b2b4233095fd58bdb1cc",
+      "publishedContentHash": "a12c17dc244014d5b22865dd7aeba5646f4832d0961798ba506769254ab5a470",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-027",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 5; matches key",
+      "candidateHash": "98176c2e95e8057ac70c0bd3f5388810586ff2cfff0a2804b30bead33d0aff99",
+      "publishedContentHash": "2a0533cc460806bd7a62c3654102645bf781c8a5f5adad6aa15899e153addffa",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-028",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 60; matches key",
+      "candidateHash": "c7d739377dd7a37913421e847d95b31524fe8d30ebf02aba9c0789095f460169",
+      "publishedContentHash": "aafd044db112797f1440e855aa86569e370a38a9a49e78d3fc714a375c2d82ce",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-029",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 23; matches key",
+      "candidateHash": "6170e950d51288764bffde746fb175d301e1579ea974300d0e5ebfd9da65c6f2",
+      "publishedContentHash": "dfe5aa88ec49aaed9229509dd911b4a3803b8ccdfd2b6de8a56d1cd7536ec4f5",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-030",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 17; matches key",
+      "candidateHash": "3e3002ef682ac408bd08eabca82b8a420a910abc48a12cfd67f6632eff405628",
+      "publishedContentHash": "fa9d1ff1691632eed84a8f42796dd73eb97aea97101b126f1e53f83d3ee5fab1",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-031",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared challenging, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "challenging",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 52; matches key",
+      "candidateHash": "49d27c233955000f4e0e8711917b834be130ff53e7f6d8e639623d1d03d2a974",
+      "publishedContentHash": "046b432518f0245c68496a3a1b1fdfe345c64a4026feafb59c31833bc607fe82",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "challenging",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-032",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 8; matches key",
+      "candidateHash": "c9e80b08a7f1f230606c8167a9d49a39eb2ad8d8a8e1fb242fb8d1e9233dee34",
+      "publishedContentHash": "cae9c74b3279a078afd99260499aa573e9520d9ef2b31acbd363825aab39dc49",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-033",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 642; matches key",
+      "candidateHash": "62350d693a77f42c4b335f5b32bb10d410e0d3abc6936c05386598ae35acc15b",
+      "publishedContentHash": "9dd9a1557228bbc5cd66ba23a4b9a8f32227acfe4fe7e1929d0b02db42aa73a6",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-034",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 23; matches key",
+      "candidateHash": "739a7b59e38f9cfb14fbe7528d878a6dc98c718da370fb221b4eb78a409629fa",
+      "publishedContentHash": "030bd02ca81eb3e2141bc0f012bee946640dc63d854676aca38a5e31cced91ae",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-035",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 10; matches key",
+      "candidateHash": "c58bd61b366c4b318847781a3d9103a392ce161926c0471bfdc6df32e2ecac65",
+      "publishedContentHash": "37dc679a46e05d32eee4d647c7ea9cb083312c8aeda031503bb90c1b6efeed3c",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-036",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 6; matches key",
+      "candidateHash": "af2be8a0e09695dd4b47e5bc98478da7f95e87c82ecfd9dc56cff4c5a03cbca9",
+      "publishedContentHash": "dc0b305e71b92a868f2ef58a3d7cf05a03bfea157576504cdc5b214c06a25acb",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-037",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 29; matches key",
+      "candidateHash": "83625886b17554ec1125d78f6806d72818f56242dd6fbdc43a2263bbc3290087",
+      "publishedContentHash": "fb29583af6fc47004779a88ed4371761bfd505a29562b27b88b3af07f31a8607",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-038",
+      "section": "nr",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 6; matches key",
+      "candidateHash": "6db639755877e24f0f3bf248a3108afa07cbc3a7fa4c7b8a570958534fc4add8",
+      "publishedContentHash": "74ec825214db8a2ee7eead88385362ec76a32a5a6c1184511083998f5a1b3133",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-039",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 18; matches key",
+      "candidateHash": "70f79c702f7d085692fd69f7fe94fb6e6b54d42f3313172f4cae5e5fc6f1e414",
+      "publishedContentHash": "60ef88a846fd3bff2c94ee1e7552577928888030e684e0a5a5a8cc30fdd638f9",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-nr-040",
+      "section": "nr",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 5138; matches key",
+      "candidateHash": "cbcd1a8cbc0d5d5ce3e23fa9d1863090933770be7e52821bf0d90fe337f77d5e",
+      "publishedContentHash": "f6014a367c53ea9f91fd366e82f56e07e28799def2b4b8819c3d958ea8ff3270",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-001",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = -3; matches key",
+      "candidateHash": "d2cc160575a84c0d2fa9cc661edc189c5fc7ce0d782e2f4cec66b294f59dfdb3",
+      "publishedContentHash": "bd38902cffa962e8d6931f50b080c09707c0f822c671e09e58453a3804720978",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-002",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = -70; matches key",
+      "candidateHash": "a5cdc9aa61465369939325da73f48c57d86392579689c9d66389db8cd5e828a7",
+      "publishedContentHash": "8fe5ce66ba40a670fa10e00fb9b04fe8979f0078385c04018fe465fd77abf405",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-003",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = -9; matches key",
+      "candidateHash": "a2854ae437999e46743f5d719498ee666bccc414eff33909af3ad503860ff3f5",
+      "publishedContentHash": "e1e52b498998cdcad01ebe7b9a4a6027c00a405d683ca23931a09d3c9d2fca6a",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-004",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 2243; matches key",
+      "candidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "publishedContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-005",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = -180; matches key",
+      "candidateHash": "15387fcecc4efab224874084d73972be51b9ec7dd04c33e6bcf95c6604353e47",
+      "publishedContentHash": "6da51155cfae8f56b42a6c2e25c45218dd63a807cd179be13c2c0d272b5e0176",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-006",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 100; matches key",
+      "candidateHash": "c7a481ff000fec7cff83f9ccf7cd198ff0d102ac050284a48615aba6f2bdc447",
+      "publishedContentHash": "ae0b957940c4ad851ad514ff6edbc556607ecc7daeba2d6f281c7b5c0dd2aafd",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-007",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 108; matches key",
+      "candidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "publishedContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-008",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 72; matches key",
+      "candidateHash": "d4e52e2901e353b3b1f0fc758fb77a72f36f52e707d876f98b89bab288135b8e",
+      "publishedContentHash": "cd383471ede01eb13e59cea25c8f687620fe493cf05d9a39582264c16bd3d68a",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-009",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 100; matches key",
+      "candidateHash": "43ed970e2723401cbc361d510ac90e8a8e976ee959c0dbf396cf7ffaa5809f07",
+      "publishedContentHash": "769b0e8d8d69184f67c7f8f5b48094b95e28b999a661cd57067b4153dd2bbe46",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-010",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 25; matches key",
+      "candidateHash": "05e8ce28ec883c79b8e2ff8d0b854444d9d2d5f256eefd751b5632353a1174cd",
+      "publishedContentHash": "f62b4089d27aa6120e380f6802b1f3262ea0fe5569116f86f91a44fb1f7a4f8c",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-011",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 135; matches key",
+      "candidateHash": "5090d2b6cbdfaf2fc6e1696ab5d4b91da6d51eb7398cf31c7769e9eac0893579",
+      "publishedContentHash": "3e71627ff483c27f8e85e6535538036cd8b7edbcbdf2a51eba594d9f4a94172e",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-012",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 24000; matches key",
+      "candidateHash": "fe595783162e433ee95bac279c50311d29e7978cdb6d27a18432b02497df8bf6",
+      "publishedContentHash": "936254a1d8b234554fdbbe7013ab6da9bc21a2ea69a3af06409c1737d82dd656",
+      "revisedThisRound": true,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-013",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 280; matches key",
+      "candidateHash": "6f541e8de6db5d61df76f2b7ce2bfec3b9bdbc7fd1a8081bddeba90725efbfcd",
+      "publishedContentHash": "685a78b1f890768599fe91d5008e00e753ba124d32c218fb9b695d6d4450beb8",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-014",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 120; matches key",
+      "candidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+      "publishedContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-015",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 10; matches key",
+      "candidateHash": "ab12867e181e9ca7c626c72f29d1ff9d21be943f76b988df39a683cd060bbb3f",
+      "publishedContentHash": "6e479ea955331a78263616338ae36eb5b84341bd1715b1453093a0210c8b7d6d",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-016",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 8; matches key",
+      "candidateHash": "04e56433e0812fa6d68f745512c66a5d1097c5fc7986e8ca4bb2d399235060e0",
+      "publishedContentHash": "826b57efa2cc0a39d07892c6916cacfacad10166be93e5798392432be37eee78",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-017",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 800; matches key",
+      "candidateHash": "50257c7923016a26b6a01069bca182e4b8789ab2710266fc38bfb4c464a2402f",
+      "publishedContentHash": "37da83c941db6e6517e477afbf2d2466f27bdb340879b74932f97598fe13b269",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-018",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 13; matches key",
+      "candidateHash": "15b5fd7c6386cf484fb1e4e93bae493c9aa557b8e0bc5e2b98026ea06d830e28",
+      "publishedContentHash": "bbbebf4c7ee5c71c73e22e404f45e495137e398363b7af75734a568125408735",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-019",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 18; matches key",
+      "candidateHash": "310bfd823bb82d07fdb51fc73b7ba9aaa50195ccd2aa983d0803706420e1c7a3",
+      "publishedContentHash": "aa503aab32af36b989749da1b1e6fa6171557b7fe2193502d319ec94ab5284bf",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-020",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 11; matches key",
+      "candidateHash": "40a0d30bc1b0901927b23db59c50cd52733724530c93cedebc7506aafe99d160",
+      "publishedContentHash": "e9d1ab8a56a8a5dc476cb6a7a540ccc5c5c1de234350602af309392e16dce108",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-021",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 31; matches key",
+      "candidateHash": "594bc49867ec31f791bbe61aa1da69df31f3990d68c880370d4d4f91c8584c6d",
+      "publishedContentHash": "e2f92d99f40a2dd892ca8b6c4b9c57ac3b941e1567874e9bc45105134ddf27d3",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-022",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 3; matches key",
+      "candidateHash": "a7c7efcf9b11137befd8e691d82953dfdee2b49572560573d857574c1e0e4ccb",
+      "publishedContentHash": "5bd8080c117a4b322162ace732bd9864d03998025089cdcf934b7e0a14141a35",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-023",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 32; matches key",
+      "candidateHash": "060c779e02ff33688a3abb776c696850955d0cc899b5e9b4c509f89800b3d793",
+      "publishedContentHash": "75cdf5f3a0db40581b2a2334e3c48460ba3b1506dd4d0884265974f2aecc2160",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "relabel_easy",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-024",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 14; matches key",
+      "candidateHash": "e7fdc00b4617573cb4759ca7a5dbef14c2de909b34cf57e2f5b3f6aa7493851e",
+      "publishedContentHash": "72715a793cbcaded6bf734c7a0f5b3c71b181d6b54707e715f92d9fb4763928b",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-025",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 8; matches key",
+      "candidateHash": "54b91b9ffb8d44c409378440e70b3f9d1bf5177cb0ba90678a7081789c0bf20f",
+      "publishedContentHash": "3b5702e11d171e05efcc2ccef4f50ec5c74902b101165d88454efccc54ad0b35",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-026",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 75; matches key",
+      "candidateHash": "bf46facbee1764cc2d353242367859c52e80b06ac096fdcb53a4e26174cb30dc",
+      "publishedContentHash": "f2e648502a171816739d12ec3fa9e363d5fd1ebbe9fa4b99b4a3cd4891b9c776",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-027",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 80; matches key",
+      "candidateHash": "106b175e5e37e22b1bf60c4248b2d79afb3dbfe7dbeef0018fb2da685926d678",
+      "publishedContentHash": "30367bbc8e0bb6f43cfe6fad610b12f9adf4f87c8859d7ff89fa59a560443e22",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-028",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 540; matches key",
+      "candidateHash": "5a2b91dbd5d863d6a1cc0587e12c8fd031dc06b10bda0c7cf7ca02483985db22",
+      "publishedContentHash": "5d74690d6ab4ec6fe71fb777b8bbf218f0af6569b177a1667084525cb4344254",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-029",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 54; matches key",
+      "candidateHash": "457e0105ecabd7db7a926857f83571316d71d109e0be7837e00a3381d355dfce",
+      "publishedContentHash": "75915d52a57d50c930a2af009289073ded92eb4a43aacfa36afbf1033e8cbf1f",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-030",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 30; matches key",
+      "candidateHash": "1e16c4800ec67256612761787eb48049856938170646fe1afcfacf5833c81feb",
+      "publishedContentHash": "ff2000ac085f80afd85bead02a4de15a15771cec61b61a55903641335bc289f1",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-031",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 1456; matches key",
+      "candidateHash": "89698158de42d42429bca02414d63db5b2c5329a620075fe300111c0fdd38b40",
+      "publishedContentHash": "b00092e3692070df08400662dc098c86984e0ee67addab7fb74f2f462fe1263e",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-032",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 135; matches key",
+      "candidateHash": "aeaafb5263ef09c95b13a06a48a71bb5d060dbf58ca7827968fbbb6c2cf2b615",
+      "publishedContentHash": "70f452f6ae098d1e5e9b11ebe41c08c337132eb52159698ca61482685e482861",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-033",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 80; matches key",
+      "candidateHash": "7d5025770d8bdf672e5570e60e3152c957ac3003914b36300f9d3640c45928ad",
+      "publishedContentHash": "1e8d85cf6023f3d355c89cd5ddbdccd07bd875bc812bc6a833072237e55c22c8",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-034",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 11; matches key",
+      "candidateHash": "33d54ed1309d85801a3ce44c97b614b4540acaf4d37b4c5b4aa2e6c621a4d885",
+      "publishedContentHash": "0224354932316ad6b371ac1b382ba66c4322f65bd4544556d026568d1999b2ec",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-035",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 4; matches key",
+      "candidateHash": "8dda0cb3f375c3da54d52d71e6a9111d10c1ce5407b4eea3a0e12343fb16dc3c",
+      "publishedContentHash": "f122069cbbf1923a9f57d11f901e74c19c639c033930852496bf36318f951d92",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "medium"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-036",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 120; matches key",
+      "candidateHash": "f52fbc2ca46ae49b9a38d5a9d3bf66b56b914a54b37a963523452d37ea3f3b3c",
+      "publishedContentHash": "57794d86c54280529348b01cf756c2c37653ddae0398548922b2e161f01da532",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-037",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared easy, estimator medium); needs a label decision or an approved advisory policy"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = -8; matches key",
+      "candidateHash": "6a5f14750a832e07af7bd24af5e14fff29fc1f896767149f69f48ca04ee796ba",
+      "publishedContentHash": "b3d387f2c67d91d4278be93cc12d7bed783fe22d13479da5e3fca610a3a41f48",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "easy",
+        "recommendation": "keep",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-038",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 400; matches key",
+      "candidateHash": "10d55104b92ad4ac3eb5e70f9a0ac4d2ff42ced3bfac929d5b4688a5db04aabc",
+      "publishedContentHash": "1cb39f559bec2f63643a5675da2edd7e8e26b5d1edd0720a4ca84e50352667af",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-maths-039",
+      "section": "maths",
+      "bucket": "requires_revision_or_decision",
+      "reasons": [
+        "difficulty gate blocks it (declared medium, estimator easy); needs a label decision or an approved advisory policy"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "first-party hash-bound recompute = 7; matches key",
+      "candidateHash": "641dad2efbd8bee2e3742731b828e10f90f10e97f987ad2440d7b9c2479d6d56",
+      "publishedContentHash": "f46e6c82d3a9662e0815923051a3d9d9bcfa5f8b8e57fddc04f0e1b1d240b55d",
+      "revisedThisRound": false,
+      "difficultyRecommendation": {
+        "label": "medium",
+        "recommendation": "keep",
+        "confidence": "low"
+      }
+    },
+    {
+      "id": "scholarship-y6-maths-040",
+      "section": "maths",
+      "bucket": "ready_for_review",
+      "reasons": [
+        "first-party or closed-language answer proof matches the key; difficulty gate passes"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "first-party hash-bound recompute = 15; matches key",
+      "candidateHash": "4a6367a26b93d5a1a95ba48b8f061a6732c2f53ad2ac627e7e789b215d05cad7",
+      "publishedContentHash": "fe7f00330ab79896d80e8eeaebd8cef03a4f57fdff014d0f69a03e520eb03387",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-001",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "publishedContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-002",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "6fe08eac0cb9f777cb2392a252038975d49b3db2b0e030300dd94873883ca6d4",
+      "publishedContentHash": "326a18cbc4138ad18023489ac1639bb7f77f77ab00b7f0126e17f2a215cabba4",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-003",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "42704ded00fbf7f91df9ec34902794f2dc8dd7d13208c96d9f50c44d229808e1",
+      "publishedContentHash": "75093ff77ecd44f69431072380bfb1135d7679f5ac4de5652fd4cb08fa88c1e2",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-004",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "5202203623a54b382e41e82f95813fb261e61bea291652ec0c22569b88cfc0d8",
+      "publishedContentHash": "4f6872cfb8caea373ea205d528172ee5abe446b6058feb8b5ce811a285f38f6b",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-005",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "d1aa137640354b962d9421e136a9b8b49a177b85b8c56fc75473a2ee5d7fa0f2",
+      "publishedContentHash": "98730f91f2f2546ae00abb6bc83597be4113609b4cfa7257885f96ed7700f9ec",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-006",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "d237c3cf8cbf1f07e217631a946ebd6e8d504427e09472519697597cb074f772",
+      "publishedContentHash": "46e2b9aa281583c2175530b07d7bbd096951c449def48da71581f3e5b3fb4ad0",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-007",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "fd10845ad62f9aca1bf991cca2c8aa96c2a2b3d903f1864a39395f5567fc9db7",
+      "publishedContentHash": "651afdf81202b3a7fce226542a796a8b94fad96a12d0e93e4c1ebe29dbe4e344",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-008",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "6c6cbfc8b7ba0093586c6602717142817b72920a4cdce42c1bf3bd2b9d688447",
+      "publishedContentHash": "257c9cce11fd246f6d10aab9edcc979fb9acee5c328916ab30333532034694d3",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-009",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "642363bc8ae760164c6b7adf34ea0bb11e514ee010df7decf202b207d857c7c9",
+      "publishedContentHash": "2ce999407197ca0065f291a34c5d67bc5eb2e3a8a5128b63e757f1b207d38907",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-010",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "48ae5322f11f403693ff991622795ea7782dd8eb011c462efc56aa1abf1f2483",
+      "publishedContentHash": "37d2e8861e61253d7b9fec2dcc639eaccb524f76d8cca2e2615e53f324f001d7",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-011",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "9080315a2be0ddaa377c3df499941762a967181d8dea1a551c7500e94ecaf373",
+      "publishedContentHash": "eb9da1e78675d95f9477f4dc0f3b219cff9743f86d546b17c1a6d083de102809",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-012",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared challenging, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "b",
+      "declaredDifficulty": "challenging",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "823756b6d0644eb07a3ca7ac8a93b1864f7c387a4c451757d44027aa1f2d504a",
+      "publishedContentHash": "65f158465b656ae3c70e78a8b156bf871a6fe27a79c6570dcab639e3fcc822fc",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-013",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "7f51578bf057bccd34ee0ad1c2fce268731b8045acd1c4419e10b0d75f21c358",
+      "publishedContentHash": "4e283e1673ccb6dcef682f9ef142e7bd1d4ed31c009033b49b56fa1b06f2cdc7",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-014",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "f27fb9d8bb85a49b554aef7589ef350ea9d0e37b54f97e84d3aa4563079f59ce",
+      "publishedContentHash": "402dddb3c44750d867572ddb0215a70c9e2da34a7ebae3840039760861e5ec18",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-015",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "bfb2487c64546610654cf492650a9c4a4af23333c3c7ccdb2aa5645d45c96ca9",
+      "publishedContentHash": "c9e9b657401eddcb6c9c0798ade9a9966017fecd809ebb2fbbccf3550bb27501",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "publishedContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-017",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "94c4bbf9055a5ce46d0377a8d880e90d92f1aba8c0099985a842553b0eeda848",
+      "publishedContentHash": "2ef04f179afbd742b8f871fffac173bfd34c01fef807c0e795968fd2a1af9bb0",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-018",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "3e63935c468a4239e9f8fcb097c82faa2286c075d69ab7eff893da4390e71264",
+      "publishedContentHash": "eb6c436220aa3c9e8305b00a8205f7f97f1907b330ce9ef4a6444342dbf9327a",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-019",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "3067d71336099242b257ee2b5b98aea6ddd82c7193897930e67a5807f37479a8",
+      "publishedContentHash": "bda1f344aba39b7a01521b894b92ada3a22d7a55bae8699684f0a6594ad84344",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-020",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "565c7866ac298b9ec51767829afee4e5b8232fba0da3327f86be5549f6a88e88",
+      "publishedContentHash": "0162eb3a573a2033c5a3511ec2c4abe88873266db054da829f95161bdb29165c",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-021",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "c9c1cb77d15421f5683d62312d32e220cfe7190f1670086f814d5bf077c72e2e",
+      "publishedContentHash": "4051e818c5af8381359198f10e73e3c1a9d4574a7bfad3b737965adedb3828e8",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-022",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "9999560d38230c6e13fbf163379feb42dc13a3a8e0e53b7227711c041d7a2f06",
+      "publishedContentHash": "3eb269188041b5ccade8247a0f3fed1a2bcaefd799b18bb9269b5cb37d29bc1d",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-023",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "7b5680378f30a1c18592766552c0dcaf9dbb7c1563df85e5a1f33c0d0080ec39",
+      "publishedContentHash": "e5fa3b6e788f3a9b09b6fea004c5332e51e8bc44993d93b3347bdf35288b5ff8",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-024",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "9a7252a2f42746d8f192df6faa6a04d05552da38d54cf394ec5de3696ce7488c",
+      "publishedContentHash": "585032ff5c26c6e7282bba4ee2bcbbef760c200d0da667ffe1dee90b4cfe4456",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-025",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "c17cdb60676133e27e55114b0b1b9c35c6d65b25459ce49445fd4d72f959d904",
+      "publishedContentHash": "ceef50658da30a9f48b8b82925dc2e2ed4096106a3c72c325093e0b707e08053",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-vr-026",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "8673e0a8cd9559b70fd7746608722aea0107542b9ce235c08db4204b61b93d36",
+      "publishedContentHash": "0d3a052ad5cde82b33f30cf4e5bf1c3bba7d4fc4339af7e933a35ca5c72dfb7f",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-027",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (syllogism) = All whales breathe air.; matches key",
+      "candidateHash": "854697c6c453a88b0818ce97bc67be56bbd710ea06516fc3b13176e8050a953c",
+      "publishedContentHash": "3aad971ac8900ea7a563de35304e37703d4cfe4093975f378f8b18cb63f5f445",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-028",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator challenging); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "challenging",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (syllogism) = It did not snow overnight.; matches key",
+      "candidateHash": "7de8ff0243a7f26da7e689bb6ca82d5230983f9324a60140ca010203b3803021",
+      "publishedContentHash": "f52ab676692d80e5dfc0e15b1a34eaf7f2100bd9332591427a12b58af6c20376",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-029",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (syllogism) = Anika wears a blue badge.; matches key",
+      "candidateHash": "8269bd09035f72949121425e6699fdfaaf8a791d76411cf2727beffafada8424",
+      "publishedContentHash": "d981d3dc05af02266bacd8463aef14f858016b86bd239499fa9ae49229d55a29",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-030",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (syllogism) = The bridge is closed.; matches key",
+      "candidateHash": "43655920c143ee5c0f6d7c57dfbb8eb1df0c58ebad7aafe65e3d6997105da044",
+      "publishedContentHash": "8be8d00fecc57cdb7c475ca214d302021ea78adc43de399bacf7bef485b4ba32",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-031",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared challenging, estimator medium); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "b",
+      "declaredDifficulty": "challenging",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (syllogism) = This shape is not a rhombus.; matches key",
+      "candidateHash": "5fe61bb9f182f0588e2e0ea7f195e96594d965384787d55f1c8fb243d0093584",
+      "publishedContentHash": "206bfe71fcd54ad342876f765b1f81bbe187534ea6655c12c5f5c96c9b2bd346",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (syllogism) = The garden sprinkler did not run this morning.; matches key",
+      "candidateHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+      "publishedContentHash": "758d25fa7ee8c039f97a74432c50dd50f3d635fb7735d8dd892c3e322f7a3b22",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-vr-033",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (letter_series) = N; matches key",
+      "candidateHash": "3e2691e59a0383dfb45e05f7dfb16715d16d2623b0a989458f50dd458423b660",
+      "publishedContentHash": "462b9461fb55076d2927c80b35118a228de17c175c946ba0a213987f4a5c6413",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-034",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (letter_series) = R; matches key",
+      "candidateHash": "d90e547aa159100e151505e9f5e4456ecca5a66e06eeb548f571862b0fe96c94",
+      "publishedContentHash": "e7f426d2bd9df4ca61da9bddd25e3c0964abe8fdff1fbf261553e2682cc3d800",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-035",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared challenging, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "c",
+      "declaredDifficulty": "challenging",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (letter_series) = Y; matches key",
+      "candidateHash": "ca38c36fdadd0559701476f6e9b5cf9f0ee342742414edf3af3ec44ef26fc24c",
+      "publishedContentHash": "baaebaaf4996056c3f09e92ade218eb95c77a6600d90def999b00c69b814932f",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-036",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (letter_series) = EV; matches key",
+      "candidateHash": "c31296eb1c6baa75cbb19a4a6a932c812ace4639f7e60a84667416afaa6697df",
+      "publishedContentHash": "8925640bf0c13ba3fe6f0d1b5aa39ed00c69421e0faa9b9a46ad54b2199484ea",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-037",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (letter_series) = S; matches key",
+      "candidateHash": "b62a30e22a47c35d3443282c2422d9dee889106097b899e67d6a82fbded4a19b",
+      "publishedContentHash": "8d1936f0d279cdd434fe074cd54fd74b29f9b0b6baacef08f6fbc2262f7d74a6",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-038",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (letter_series) = QS; matches key",
+      "candidateHash": "bfde5004996d60c1313276c693fe800f6034e4dc75d2559ed9c283e2d9dc1a47",
+      "publishedContentHash": "63cee0b5606d84443aa6c5f0a75b65e32471185932e66c6f7ecae5a136f9a2b6",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-039",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (letter_series) = I; matches key",
+      "candidateHash": "f6245120e6fc6952aa55363421113c0cc52ae24fb80e451cb58cb30c3eeefa31",
+      "publishedContentHash": "fc42f6546b72d8e177f8e9d99e44c1e323757cde35c3c7f3abbb67b05156b695",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-040",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (coded_words) = NGCH; matches key",
+      "candidateHash": "bfded64fc5006aebed48191b01b71f9061df41b3f8b5672c7f8e8b7c7fbde7f6",
+      "publishedContentHash": "8180c7e898b4f4637d33a060cae64551504b59404fe2a30c3bd076633c49a188",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-041",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (coded_words) = THE; matches key",
+      "candidateHash": "55fba00c575a301b9bc319be6ff7405e668cfc810ea75540d25c1e5357b33417",
+      "publishedContentHash": "7e65da227f75bee7748731c7d98968f1c804d73769d4372abecd1053be1a01a5",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-042",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator easy); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "easy",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "closed-language solver (coded_words) = KDWJ; matches key",
+      "candidateHash": "828e4f8644b423c54157953a7a30341bfcea5a1f818b3e0cbf7e4b0e2faf2607",
+      "publishedContentHash": "064e8e7f9385a145f9364047faf68c2dcdd8933589cc06b63e4fc12412770562",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-043",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (coded_words) = 2-18-1-9-14; matches key",
+      "candidateHash": "5d31cde6b80fde950ac5da893a7660a767d77318932a1f238f79552b11df6686",
+      "publishedContentHash": "04efbe099a4dfbd9dec0d4e5216554834e2f541d675c8bf41a7167a6e5d12fc7",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-044",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (coded_words) = THGIRB; matches key",
+      "candidateHash": "3de50a2ecb3c31892a45651ebf00da86c1b23bfe60567ce6a12659021e1187f8",
+      "publishedContentHash": "aa8b5afc9829a75df82377e85907f400179dd8ad3657b2eaa62664ce4aa619e2",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-vr-045",
+      "section": "vr",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "easy",
+      "difficultyGate": "passes",
+      "machineProof": "closed-language solver (coded_words) = GROW; matches key",
+      "candidateHash": "34393fadf12a3e712d33d2b8aea291747a8d3b2f3fd0426362ded91df9f98a6d",
+      "publishedContentHash": "58717237f50e8764f58fd4b7f2583e1165d9a88f0d553f46300d14010b058447",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-001",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "publishedContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "publishedContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "publishedContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-004",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "fe20a0148bdfc4aa4342942bcba64ea35cc257f2e75734b77800ff207f446b9f",
+      "publishedContentHash": "f814d720d0d1fdf39aea037b03a628a125fec646ff7f0e8b153d5e637413945c",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-005",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "765aeb63fbb8d56543dd0b74241de24200e7b86deb45de8f6406e48c80515e5c",
+      "publishedContentHash": "19221306f55ef58813d62853c21608fdafb5ab78a2efdbe7157d8fd3c0b79e81",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-006",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "5593a92a4b97efffc699d577ea2fbabe986ffd97ca10219b86fb26d2f2dc289f",
+      "publishedContentHash": "08b5b90f8baeb20f6714972ed6092d69a5908569cf018ed2022bb9c31316fdc2",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-007",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "c663e83da2ce9142852b0354f895fc7c43d1fb1413a1b595bf0b2cb4cc6b1559",
+      "publishedContentHash": "e65d9c6e3b5b6dee1746e3a4a47d23f28ef4a966780e33df291698a486fc86a6",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-008",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "4921875d31d9483a97f52754525b1474ffecb8055d4f4ed77a6c8bce688ceec9",
+      "publishedContentHash": "876c51b00d489afd5f1d8588691c8e0cad7ff344c090193af21c234d7f405540",
+      "revisedThisRound": false
+    },
+    {
+      "id": "scholarship-y6-rc-009",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "df62151139d406d537f147dd9aa853503f3751b60e2ca026130cec95f16f2fa8",
+      "publishedContentHash": "61a974a3e5309d1b720c5e1681a64db54bf99e970c192d6dc4f0d8401f67ea62",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-010",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "58acf07434dbc48c5c71fcf06e234525a99b7d441774617e2781b1f777e4953f",
+      "publishedContentHash": "9fd65d831bc11634af7b0bbedec8374e0eb9698b5d1b283d2077c2bb0ec2ce19",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-011",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "27c555a180394486dc5d6af5aaf0757daad449433aae156c1878b8634ec7c227",
+      "publishedContentHash": "981194a4f49babca90be39990bbe195452ebc8469aa6d69d139975349ddda786",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-012",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "62f7b4c0238c3f85b112741ea878ec14ec4d17771ffa88269527f6cd5b6985b7",
+      "publishedContentHash": "5db28bbf66133af543e78a41003d3459090a6b5354c436c1641ec3a7c9642e22",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-013",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "5e7776f979e7dd3d07d3cc6814b1ae82673d4bd13f3159ed389e6bdace470e44",
+      "publishedContentHash": "f89f97df21186ac526f3efda2027aee69136298c6a2754d13573d12670276606",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-014",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "80670ffb86fad1e63e23719bf48dd01d885523b6582949be65db8ceeef698f43",
+      "publishedContentHash": "a9e98759583d2b490313c3542a194136a5a3654ed0b5920bb881ff35abd71093",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-015",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared medium, estimator challenging); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "challenging",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "fbeae93f5efd054e480feaacee6f05f62ddc1e4759783330e16c09e758c9810c",
+      "publishedContentHash": "8ab9b7fe7ccf539b4038def677e44b7e9e44c453f0a28a71aa25ec767ef74012",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-016",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "8ad255937e7c6b3c5f03818131c1ae8df52f26e3c19b5b24ad2198a948cb7d50",
+      "publishedContentHash": "9b60a97772fd9e5bc3eb3f694565ee01d23288de2fac7f1a24e40226a036a6e0",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-017",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "85865bc5c588e3efd8a796b94c9616de61d31154207198cd90fd01237a09c293",
+      "publishedContentHash": "316f9436aa4fe41dba511ddb02422b845855f07899e146dee881e69527d27650",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-018",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "c7fefe19fcecb93f763938618ac7a5f79ba880dc589d3b19a86b357ad3819620",
+      "publishedContentHash": "e53fd8cb2fa3fd42182bce3c7cbf649f720fc18c2ee5c8e629be75f1a9194afe",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-019",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "00ae57590bb2a301b811a35f059066aa5e33682ff74954f2ccb29725fa733477",
+      "publishedContentHash": "d0db2d83e4b9eabb3f76b77d694a6eaf5c2f62f1186711d5f116c2552033a1f9",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-020",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "54d4fdf5c94c78bc844d4cfac9ba618e79b5765751503d7830e8823f99e690bc",
+      "publishedContentHash": "5db756c2b23d512538b72613fa9970d2a64afd9963ee99485ba2c13f23f49620",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-021",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "8c092334632ba761c7335832437c41fdf446f432ac9a0d66745f8a0f3afff3e2",
+      "publishedContentHash": "f91cbae68d7abcd98cf16ae3b85c26b806c29486e10723c70f8e233bdd088c18",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-022",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "d",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "8bd719f4fbf1c98236cd902db4f7be32b733ddc683e5865a2a97b348bb06a23d",
+      "publishedContentHash": "99755a91b546a4fd8105fb9c303136d1fdb1892393073bdf6c3ea6c831d933d3",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-023",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "d77748cfb5cf72a49846f0e9af14e4333c3032fdc7904c420e1dfa0e758ea166",
+      "publishedContentHash": "505d465155875ec5add4612ad3e8ddc22c928aa91aeca2ecedeb7605a7963daa",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-024",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "18f690b2cc2000b257300e26f4da8901bf1321a52c2d2ba90924d699c1343776",
+      "publishedContentHash": "9e76d8a7d4d18e0ec560c4d40973a9815dd5d991ac4b7713008bb1fa3d1254bc",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-025",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "e",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "1d7801860c9c1d0b31f5165b821e7819a5d5af5dce5c471ccb058e3f6ee0acbf",
+      "publishedContentHash": "0402f4382a99d527a0660bb506f47a7133090f388840c58335fb863154b2db81",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-026",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "32783f3be275931429d5f9970605c3c5af920cb43c674bc6ce4ad4650087c389",
+      "publishedContentHash": "34c37354b6170453b3d1fae14ba41ccc2fa281581da13b8a2e7bb636b67b2962",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-027",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "0f856764fd9127c0b4c54daf6ca3a71a470f6ee40791388a9b7f70de581459ac",
+      "publishedContentHash": "238b93eff7e5bbd296ae015d5c2868fe1213637582e6b924898394724f830f93",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-028",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "a",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "d55ad12af9086f4e11ac21072e6698ed83a35c4fc7728369c076a28ba04033a9",
+      "publishedContentHash": "090cfaf9860ee43ced0145e511da7181c1ca3830f47053513593beb01290d0fd",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-029",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "d",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "1b8c65710f610304b3e5e976265cf50b67a9629b310d54df22fd62c939f03df1",
+      "publishedContentHash": "5c181d492e144e7a2926d7bbd7c04d2a8ccfb0d1d79d8bba87c5cb7674760ecd",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-030",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "7b81dae3fce56fdc62224546a95296fc01e1389b4e03517b075ced0a23b1c532",
+      "publishedContentHash": "1ed3eafd9e679e38a063f95b800e4624e2ad5e80e9c2a3b15989563fde2cd1f1",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-031",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "b",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "5039535ed3b23247327ee9c5e6c651093b945a604cc88ed7fbf210e5843030e1",
+      "publishedContentHash": "efa5241494df8c4091c6d6083cb435d3d4b2562745791cfa47a77f7d612e143f",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-032",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "1945e85d5446c0fe58605a7b02050f363a74c6ac0c9105a357d5c619a3acfecf",
+      "publishedContentHash": "0368a5f0814e7d027e7c8bdada3f2b816a0b8245e9f67eefb1bb4c2d05754220",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-033",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "c",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "eec20d97356daab324270c347af5f6e82761c8a45d31697a91f49d650335dd35",
+      "publishedContentHash": "3fba915a5281b6760252535a10abb44a7b0b4533837e5ef9b9d55c3e8dd85a0d",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-034",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "difficulty gate would also block it (declared easy, estimator medium); the external reviewer's difficulty rating is the independent evidence",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "e",
+      "declaredDifficulty": "easy",
+      "estimator": "medium",
+      "difficultyGate": "blocked_deviation",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "54c23b00f6dfb7db062707a0a0939b77132c4d449806fe506ff6d08a02240874",
+      "publishedContentHash": "ef4c17d800ae61b1c6c931c07ab59d16fc3c095e836bb1fd852f3fa005f65a91",
+      "revisedThisRound": true
+    },
+    {
+      "id": "scholarship-y6-rc-035",
+      "section": "rc",
+      "bucket": "awaiting_external_evidence",
+      "reasons": [
+        "AI-generated judgement content: policy needs a different-provider reviewer (not Anthropic); none is on file",
+        "content revised in this release; any earlier Claude review of it is stale"
+      ],
+      "key": "a",
+      "declaredDifficulty": "medium",
+      "estimator": "medium",
+      "difficultyGate": "passes",
+      "machineProof": "no machine proof; human semantic judgement required",
+      "candidateHash": "0bcc6ef6225524780ba47c1481468ef32112061942c891bf906df42172346591",
+      "publishedContentHash": "396ef125c05ba81befabb3fc22ddb8a527e7887aaaa077a47c9bda27e7426d07",
+      "revisedThisRound": true
+    }
+  ]
+}

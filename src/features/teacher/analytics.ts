@@ -31,6 +31,8 @@ export interface StudentAttempt {
   studentId: string;
   submittedAt: string;
   result: unknown;
+  mode?: string;
+  confidenceMode?: boolean;
 }
 
 export type StudentStanding = "on_track" | "needs_attention" | "at_risk";
@@ -113,7 +115,10 @@ export function summariseStudent(
   attempts: readonly StudentAttempt[],
 ): StudentSummary {
   const own = attempts.filter((attempt) => attempt.studentId === studentId);
-  const slices = own
+  const evaluable = own.filter(
+    (attempt) => attempt.mode !== "confidence" && !attempt.confidenceMode,
+  );
+  const slices = evaluable
     .map((attempt) => parseResult(attempt.result))
     .filter((slice): slice is AttemptResultSlice => slice !== null);
 
@@ -163,6 +168,7 @@ export function studentSubjectMastery(
   const totals = new Map<string, SubjectTotals>();
   for (const attempt of attempts) {
     if (attempt.studentId !== studentId) continue;
+    if (attempt.mode === "confidence" || attempt.confidenceMode) continue;
     const slice = parseResult(attempt.result);
     if (slice) accumulateSubjects(totals, slice);
   }
@@ -268,6 +274,7 @@ export function percentageTrend(percentagesOldestFirst: readonly number[]): Tren
 
 function orderedPercentages(attempts: readonly StudentAttempt[]): number[] {
   return attempts
+    .filter((attempt) => attempt.mode !== "confidence" && !attempt.confidenceMode)
     .slice()
     .sort((a, b) => Date.parse(a.submittedAt) - Date.parse(b.submittedAt))
     .flatMap((attempt) => {

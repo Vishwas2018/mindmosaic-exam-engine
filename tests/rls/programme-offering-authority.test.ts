@@ -170,6 +170,8 @@ describe("create_assessment_session routes through programme_offerings -- no inl
     // AMC seeds Year 3 (Middle Primary) and Year 5 (Upper Primary) —
     // either is a real offering; Year 5 matches this fixture's convention.
     amc_mathematics: { year: 5, style: "amc_style" },
+    verbal_reasoning: { year: 6, style: "scholarship_style" },
+    numerical_reasoning: { year: 6, style: "scholarship_style" },
   };
 
   it.each(Object.entries(REGISTRY_SUBJECT_BY_FILTER))(

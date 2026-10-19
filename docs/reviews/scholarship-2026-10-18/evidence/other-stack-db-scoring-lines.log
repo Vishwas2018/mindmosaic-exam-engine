@@ -1,0 +1,233 @@
+The files belonging to this database system will be owned by user "postgres".
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/init-scripts
+/usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/migrate.sh
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/init-scripts/00-schema.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/init-scripts/00000000000000-initial-schema.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/init-scripts/00000000000001-auth-schema.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/init-scripts/00000000000002-storage-schema.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/init-scripts/00000000000003-post-setup.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/00-extension.sql
+psql:/docker-entrypoint-initdb.d/migrations/00-extension.sql:1: NOTICE:  schema "extensions" already exists, skipping
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/10000000000000_demote-postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20211115181400_update-auth-permissions.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20211118015519_create-realtime-schema.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20211122051245_update-realtime-permissions.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20211124212715_update-auth-owner.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20211130151719_update-realtime-permissions.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220118070449_enable-safeupdate-postgrest.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220126121436_finer-postgrest-triggers.sql
+psql:/docker-entrypoint-initdb.d/migrations/20220126121436_finer-postgrest-triggers.sql:3: NOTICE:  event trigger "api_restart" does not exist, skipping
+psql:/docker-entrypoint-initdb.d/migrations/20220126121436_finer-postgrest-triggers.sql:4: NOTICE:  function extensions.notify_api_restart() does not exist, skipping
+psql:/docker-entrypoint-initdb.d/migrations/20220126121436_finer-postgrest-triggers.sql:59: NOTICE:  event trigger "pgrst_ddl_watch" does not exist, skipping
+psql:/docker-entrypoint-initdb.d/migrations/20220126121436_finer-postgrest-triggers.sql:64: NOTICE:  event trigger "pgrst_drop_watch" does not exist, skipping
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220224211803_fix-postgrest-supautils.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220317095840_pg_graphql.sql
+psql:/docker-entrypoint-initdb.d/migrations/20220317095840_pg_graphql.sql:5: NOTICE:  function graphql_public.graphql(text,text,jsonb) does not exist, skipping
+psql:/docker-entrypoint-initdb.d/migrations/20220317095840_pg_graphql.sql:90: NOTICE:  event trigger "issue_pg_graphql_access" does not exist, skipping
+psql:/docker-entrypoint-initdb.d/migrations/20220317095840_pg_graphql.sql:143: NOTICE:  event trigger "issue_graphql_placeholder" does not exist, skipping
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220321174452_fix-postgrest-alter-type-event-trigger.sql
+psql:/docker-entrypoint-initdb.d/migrations/20220321174452_fix-postgrest-alter-type-event-trigger.sql:3: NOTICE:  event trigger "api_restart" does not exist, skipping
+psql:/docker-entrypoint-initdb.d/migrations/20220321174452_fix-postgrest-alter-type-event-trigger.sql:4: NOTICE:  function extensions.notify_api_restart() does not exist, skipping
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220322085208_gotrue-session-limit.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220404205710_pg_graphql-on-by-default.sql
+psql:/docker-entrypoint-initdb.d/migrations/20220404205710_pg_graphql-on-by-default.sql:142: NOTICE:  extension "pg_graphql" does not exist, skipping
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220609081115_grant-supabase-auth-admin-and-supabase-storage-admin-to-postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220613123923_pg_graphql-pg-dump-perms.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20220713082019_pg_cron-pg_net-temp-perms-fix.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20221028101028_set_authenticator_timeout.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20221103090837_revoke_admin.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20221207154255_create_pgsodium_and_vault.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20230201083204_grant_auth_roles_to_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20230224042246_grant_extensions_perms_for_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20230306081037_grant_pg_monitor_to_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20230327032006_grant_auth_roles_to_supabase_storage_admin.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20230529180330_alter_api_roles_for_inherit.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20231013070755_grant_authenticator_to_supabase_storage_admin.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20231017062225_grant_pg_graphql_permissions_for_custom_roles.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20231020085357_revoke_writes_on_cron_job_from_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20231130133139_set_lock_timeout_to_authenticator_role.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20240124080435_alter_lo_export_lo_import_owner.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20240606060239_grant_predefined_roles_to_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20241031003909_create_orioledb.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20241215003910_backfill_pgmq_metadata.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250205060043_disable_log_statement_on_internal_roles.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250205144616_move_orioledb_to_extensions_schema.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250218031949_pgsodium_mask_role.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250220051611_pg_net_perms_fix.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250312095419_pgbouncer_ownership.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250402065937_alter_internal_event_triggers_owner_to_supabase_admin.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250402093753_grant_subscription_to_postgres_16_and_above.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250417190610_update_pgbouncer_get_auth.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250421084701_revoke_admin_roles_from_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250605172253_grant_with_admin_to_postgres_16_and_above.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250623125453_tmp_grant_storage_tables_to_postgres_with_grant_option.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250709135250_grant_storage_schema_to_postgres_with_grant_option.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20250710151649_supabase_read_only_user_default_transaction_read_only.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20251001204436_predefined_role_grants.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20251105172723_grant_pg_reload_conf_to_postgres.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20251121132723_correct_search_path_pgbouncer.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20260211120934_supabase_privileged_role.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20260413000000_fix-authenticator-session-preload-libraries.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20260421000000_pg_graphql-off-by-default.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /docker-entrypoint-initdb.d/migrations/20260421000001_rescope_pg_graphql_access_trigger.sql
+/docker-entrypoint-initdb.d/migrate.sh: running /etc/postgresql.schema.sql
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/migrations
+172.21.0.1 2026-10-18 06:34:09.209 UTC [388] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:09.209 UTC [388] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:09.341 UTC [390] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:09.341 UTC [390] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:09.448 UTC [392] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:09.448 UTC [392] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:09.598 UTC [394] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:09.598 UTC [394] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:09.703 UTC [396] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:09.703 UTC [396] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:09.882 UTC [398] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:09.882 UTC [398] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.044 UTC [400] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.044 UTC [400] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.223 UTC [402] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.223 UTC [402] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.358 UTC [404] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.358 UTC [404] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.514 UTC [406] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.514 UTC [406] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.650 UTC [408] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.650 UTC [408] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.776 UTC [410] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.776 UTC [410] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:10.930 UTC [412] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:10.930 UTC [412] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:11.061 UTC [414] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:11.061 UTC [414] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:29.859 UTC [581] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:29.859 UTC [581] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:31.500 UTC [601] mindmosaic_content_answer_writer@postgres FATAL:  password authentication failed for user "mindmosaic_content_answer_writer"
+172.21.0.1 2026-10-18 06:34:31.500 UTC [601] mindmosaic_content_answer_writer@postgres DETAIL:  User "mindmosaic_content_answer_writer" has no password assigned.
+172.21.0.1 2026-10-18 06:34:35.113 UTC [632] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:35.113 UTC [632] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:35.141 UTC [633] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:35.141 UTC [633] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:35.819 UTC [634] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:35.819 UTC [634] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:44.874 UTC [776] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:44.874 UTC [776] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:34:46.236 UTC [793] mindmosaic_scoring@postgres FATAL:  password authentication failed for user "mindmosaic_scoring"
+172.21.0.1 2026-10-18 06:34:46.236 UTC [793] mindmosaic_scoring@postgres DETAIL:  User "mindmosaic_scoring" has no password assigned.
+172.21.0.1 2026-10-18 06:35:26.569 UTC [862] mindmosaic_content_answer_writer@postgres FATAL:  password authentication failed for user "mindmosaic_content_answer_writer"
+172.21.0.1 2026-10-18 06:35:26.569 UTC [862] mindmosaic_content_answer_writer@postgres DETAIL:  User "mindmosaic_content_answer_writer" has no password assigned.
+172.21.0.1 2026-10-18 06:35:27.349 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table profiles
+172.21.0.1 2026-10-18 06:35:27.349 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.profiles
+172.21.0.1 2026-10-18 06:35:27.403 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table exam_attempts
+172.21.0.1 2026-10-18 06:35:27.403 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.exam_attempts
+172.21.0.1 2026-10-18 06:35:27.463 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table exam_sessions
+172.21.0.1 2026-10-18 06:35:27.463 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.exam_sessions
+172.21.0.1 2026-10-18 06:35:27.529 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table exam_responses
+172.21.0.1 2026-10-18 06:35:27.529 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.exam_responses
+172.21.0.1 2026-10-18 06:35:27.597 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table essay_marks
+172.21.0.1 2026-10-18 06:35:27.597 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.essay_marks
+172.21.0.1 2026-10-18 06:35:27.650 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table subscriptions
+172.21.0.1 2026-10-18 06:35:27.650 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.subscriptions
+172.21.0.1 2026-10-18 06:35:27.714 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table manual_marks
+172.21.0.1 2026-10-18 06:35:27.714 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.manual_marks
+172.21.0.1 2026-10-18 06:35:27.766 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_results
+172.21.0.1 2026-10-18 06:35:27.766 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.assessment_results
+172.21.0.1 2026-10-18 06:35:27.819 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_results
+172.21.0.1 2026-10-18 06:35:27.819 UTC [864] mindmosaic_scoring@postgres STATEMENT:  select * from public.assessment_results
+172.21.0.1 2026-10-18 06:35:27.865 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:35:27.865 UTC [864] mindmosaic_scoring@postgres STATEMENT:  update public.session_responses set response_value = '"forged"'::jsonb
+172.21.0.1 2026-10-18 06:35:27.910 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:35:27.910 UTC [864] mindmosaic_scoring@postgres STATEMENT:  update public.session_responses set client_sequence = 99
+172.21.0.1 2026-10-18 06:35:27.958 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:35:27.958 UTC [864] mindmosaic_scoring@postgres STATEMENT:  delete from public.session_responses
+172.21.0.1 2026-10-18 06:35:28.006 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table item_answer_versions
+172.21.0.1 2026-10-18 06:35:28.006 UTC [864] mindmosaic_scoring@postgres STATEMENT:  truncate public.item_answer_versions
+172.21.0.1 2026-10-18 06:35:28.055 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_session_items
+172.21.0.1 2026-10-18 06:35:28.055 UTC [864] mindmosaic_scoring@postgres STATEMENT:  update public.assessment_session_items set global_ordinal = 2
+172.21.0.1 2026-10-18 06:35:28.101 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_sessions
+172.21.0.1 2026-10-18 06:35:28.101 UTC [864] mindmosaic_scoring@postgres STATEMENT:  delete from public.assessment_sessions
+172.21.0.1 2026-10-18 06:35:28.155 UTC [864] mindmosaic_scoring@postgres LOG:  statement: create table public.scoring_backdoor (id int)
+172.21.0.1 2026-10-18 06:35:28.156 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied for schema public at character 14
+172.21.0.1 2026-10-18 06:35:28.156 UTC [864] mindmosaic_scoring@postgres STATEMENT:  create table public.scoring_backdoor (id int)
+172.21.0.1 2026-10-18 06:35:28.208 UTC [864] mindmosaic_scoring@postgres LOG:  statement: create role scoring_backdoor
+172.21.0.1 2026-10-18 06:35:28.208 UTC [864] mindmosaic_scoring@postgres ERROR:  permission denied to create role
+172.21.0.1 2026-10-18 06:35:28.208 UTC [864] mindmosaic_scoring@postgres DETAIL:  Only roles with the CREATEROLE attribute may create roles.
+172.21.0.1 2026-10-18 06:35:28.208 UTC [864] mindmosaic_scoring@postgres STATEMENT:  create role scoring_backdoor
+172.21.0.1 2026-10-18 06:36:21.273 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table item_answer_versions
+172.21.0.1 2026-10-18 06:36:21.273 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.item_answer_versions
+172.21.0.1 2026-10-18 06:36:21.317 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table item_answer_versions
+172.21.0.1 2026-10-18 06:36:21.317 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  update public.item_answer_versions set private_explanation = 'forged'
+172.21.0.1 2026-10-18 06:36:21.364 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table item_answer_versions
+172.21.0.1 2026-10-18 06:36:21.364 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  delete from public.item_answer_versions where item_version_id = $1
+172.21.0.1 2026-10-18 06:36:21.407 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table item_versions
+172.21.0.1 2026-10-18 06:36:21.407 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.item_versions
+172.21.0.1 2026-10-18 06:36:21.451 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table items
+172.21.0.1 2026-10-18 06:36:21.451 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.items
+172.21.0.1 2026-10-18 06:36:21.492 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table assessment_sessions
+172.21.0.1 2026-10-18 06:36:21.492 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.assessment_sessions
+172.21.0.1 2026-10-18 06:36:21.531 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:36:21.531 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.session_responses
+172.21.0.1 2026-10-18 06:36:21.575 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table profiles
+172.21.0.1 2026-10-18 06:36:21.575 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.profiles
+172.21.0.1 2026-10-18 06:36:21.617 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table assessment_results
+172.21.0.1 2026-10-18 06:36:21.617 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.assessment_results
+172.21.0.1 2026-10-18 06:36:21.658 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table authoring_question_revisions
+172.21.0.1 2026-10-18 06:36:21.658 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.authoring_question_revisions
+172.21.0.1 2026-10-18 06:36:21.705 UTC [1396] mindmosaic_content_answer_writer@postgres LOG:  statement: create table public.writer_backdoor (id int)
+172.21.0.1 2026-10-18 06:36:21.706 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for schema public at character 14
+172.21.0.1 2026-10-18 06:36:21.706 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  create table public.writer_backdoor (id int)
+172.21.0.1 2026-10-18 06:36:21.754 UTC [1396] mindmosaic_content_answer_writer@postgres LOG:  statement: create role writer_backdoor
+172.21.0.1 2026-10-18 06:36:21.754 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied to create role
+172.21.0.1 2026-10-18 06:36:21.754 UTC [1396] mindmosaic_content_answer_writer@postgres DETAIL:  Only roles with the CREATEROLE attribute may create roles.
+172.21.0.1 2026-10-18 06:36:21.754 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  create role writer_backdoor
+172.21.0.1 2026-10-18 06:36:21.799 UTC [1397] mindmosaic_scoring@postgres ERROR:  permission denied for table item_answer_versions
+172.21.0.1 2026-10-18 06:36:21.799 UTC [1397] mindmosaic_scoring@postgres STATEMENT:  insert into public.item_answer_versions
+172.21.0.1 2026-10-18 06:36:21.840 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table assessment_session_items
+172.21.0.1 2026-10-18 06:36:21.840 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.assessment_session_items
+172.21.0.1 2026-10-18 06:36:21.845 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:36:21.845 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.session_responses
+172.21.0.1 2026-10-18 06:36:21.850 UTC [1396] mindmosaic_content_answer_writer@postgres ERROR:  permission denied for table assessment_sessions
+172.21.0.1 2026-10-18 06:36:21.850 UTC [1396] mindmosaic_content_answer_writer@postgres STATEMENT:  select 1 from public.assessment_sessions
+172.21.0.1 2026-10-18 06:36:39.855 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table profiles
+172.21.0.1 2026-10-18 06:36:39.855 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.profiles
+172.21.0.1 2026-10-18 06:36:39.900 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table exam_attempts
+172.21.0.1 2026-10-18 06:36:39.900 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.exam_attempts
+172.21.0.1 2026-10-18 06:36:39.944 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table exam_sessions
+172.21.0.1 2026-10-18 06:36:39.944 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.exam_sessions
+172.21.0.1 2026-10-18 06:36:39.982 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table exam_responses
+172.21.0.1 2026-10-18 06:36:39.982 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.exam_responses
+172.21.0.1 2026-10-18 06:36:40.023 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table essay_marks
+172.21.0.1 2026-10-18 06:36:40.023 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.essay_marks
+172.21.0.1 2026-10-18 06:36:40.062 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table subscriptions
+172.21.0.1 2026-10-18 06:36:40.062 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.subscriptions
+172.21.0.1 2026-10-18 06:36:40.102 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table manual_marks
+172.21.0.1 2026-10-18 06:36:40.102 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.manual_marks
+172.21.0.1 2026-10-18 06:36:40.148 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_results
+172.21.0.1 2026-10-18 06:36:40.148 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select 1 from public.assessment_results
+172.21.0.1 2026-10-18 06:36:40.192 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_results
+172.21.0.1 2026-10-18 06:36:40.192 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  select * from public.assessment_results
+172.21.0.1 2026-10-18 06:36:40.244 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:36:40.244 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  update public.session_responses set response_value = '"forged"'::jsonb
+172.21.0.1 2026-10-18 06:36:40.296 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:36:40.296 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  update public.session_responses set client_sequence = 99
+172.21.0.1 2026-10-18 06:36:40.342 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table session_responses
+172.21.0.1 2026-10-18 06:36:40.342 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  delete from public.session_responses
+172.21.0.1 2026-10-18 06:36:40.386 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table item_answer_versions
+172.21.0.1 2026-10-18 06:36:40.386 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  truncate public.item_answer_versions
+172.21.0.1 2026-10-18 06:36:40.425 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_session_items
+172.21.0.1 2026-10-18 06:36:40.425 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  update public.assessment_session_items set global_ordinal = 2
+172.21.0.1 2026-10-18 06:36:40.482 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for table assessment_sessions
+172.21.0.1 2026-10-18 06:36:40.482 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  delete from public.assessment_sessions
+172.21.0.1 2026-10-18 06:36:40.523 UTC [1606] mindmosaic_scoring@postgres LOG:  statement: create table public.scoring_backdoor (id int)
+172.21.0.1 2026-10-18 06:36:40.524 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied for schema public at character 14
+172.21.0.1 2026-10-18 06:36:40.524 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  create table public.scoring_backdoor (id int)
+172.21.0.1 2026-10-18 06:36:40.564 UTC [1606] mindmosaic_scoring@postgres LOG:  statement: create role scoring_backdoor
+172.21.0.1 2026-10-18 06:36:40.564 UTC [1606] mindmosaic_scoring@postgres ERROR:  permission denied to create role
+172.21.0.1 2026-10-18 06:36:40.564 UTC [1606] mindmosaic_scoring@postgres DETAIL:  Only roles with the CREATEROLE attribute may create roles.
+172.21.0.1 2026-10-18 06:36:40.564 UTC [1606] mindmosaic_scoring@postgres STATEMENT:  create role scoring_backdoor
+# retained log window
+2026-10-18 06:33:11
+2026-10-18 11:00:00
+# settings read: log_connections=off, log_statement=ddl, log_min_duration_statement=-1

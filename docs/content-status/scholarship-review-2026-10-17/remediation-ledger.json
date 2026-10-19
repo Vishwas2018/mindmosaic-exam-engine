@@ -1,0 +1,3077 @@
+{
+  "baseCommit": "ec9718eb",
+  "items": {
+    "scholarship-y6-nr-001": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy (blind: one-step constant difference)."
+    },
+    "scholarship-y6-nr-002": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-nr-003": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-004": {
+      "status": "replaced",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "reject",
+        "difficultyVerdict": "too_easy",
+        "originality": "resembles-published"
+      },
+      "action": "REPLACED. Canonical Fibonacci 1,1,2,3,5,8,13 swapped for the original add-previous-two sequence 2, 5, 7, 12, 19 (next 31); solver confirms a single rule."
+    },
+    "scholarship-y6-nr-005": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-006": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-nr-007": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-008": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-009": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-010": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-series",
+        "to": "nr-number-series"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-011": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-012": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-013": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Row 2 changed to [3, 8, 14] so only the 2a+b rule fits both given rows; the competing 2b-1 rule now gives 15 on row 2 and is eliminated."
+    },
+    "scholarship-y6-nr-014": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-015": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-nr-016": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": "Replaced the arbitrary 3a+b rule with the more natural 2a-b on a new grid (7,3,11 / 5,4,6 / 6,8,?); relabelled medium."
+    },
+    "scholarship-y6-nr-017": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-018": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-nr-019": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-020": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-number-matrices",
+        "to": "nr-number-matrices"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-021": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-022": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-023": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Options now carry the $ unit; the first-party matcher compares the $ prefix instead of stripping it."
+    },
+    "scholarship-y6-nr-024": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-nr-025": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-026": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "'integers' changed to 'whole numbers'; relabelled easy."
+    },
+    "scholarship-y6-nr-027": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-028": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-029": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-030": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-arithmetical-reasoning",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-031": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "challenging"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled challenging (sound and unique; algebraic route is hard for Year 6)."
+    },
+    "scholarship-y6-nr-032": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Defined AB as a two-digit number with tens digit A and units digit B."
+    },
+    "scholarship-y6-nr-033": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-034": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-035": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-arithmetical-reasoning"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Retagged nr-arithmetical-reasoning (it is a plain arithmetic word problem) and relabelled easy."
+    },
+    "scholarship-y6-nr-036": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Defined 4A as a two-digit number with tens digit 4; relabelled easy."
+    },
+    "scholarship-y6-nr-037": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Made the 'prime' condition do real work: digit product 18 gives 29, 36, 63 and 92, and only 29 is prime; the redundant tens<units clue is gone. Solver rebuilt on the new given."
+    },
+    "scholarship-y6-nr-038": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-nr-039": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Stated the shared-corner structure explicitly (two corners plus one middle number per side) and dropped the '(E)' label."
+    },
+    "scholarship-y6-nr-040": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "nr-logic-deduction-numbers",
+        "to": "nr-logic-deduction-numbers"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-001": {
+      "status": "replaced",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "resembles-published"
+      },
+      "action": "REPLACED stock SOLAR:SUN::LUNAR:MOON with an original instrument:quantity analogy (THERMOMETER:TEMPERATURE::ODOMETER:DISTANCE; SPEED is the speedometer trap)."
+    },
+    "scholarship-y6-vr-002": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-003": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-004": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-005": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-006": {
+      "status": "replaced",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "resembles-published"
+      },
+      "action": "REPLACED stock AVIARY:BIRDS::APIARY:BEES with an original part:whole analogy (PEDAL:BICYCLE::OAR:BOAT)."
+    },
+    "scholarship-y6-vr-007": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-analogies",
+        "to": "vr-analogies"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-008": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-classification",
+        "to": "vr-classification"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-009": {
+      "status": "replaced",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-classification",
+        "to": "vr-classification"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "resembles-published"
+      },
+      "action": "REPLACED stock dolphin-is-a-mammal odd-one-out with an original meaning item (AMBLE against SPRINT, DASH, HURRY, RUSH)."
+    },
+    "scholarship-y6-vr-010": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-classification",
+        "to": "vr-classification"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Prompt no longer says 'works of art' (which gave the answer away); BAROMETER replaced by EASEL, a subtler intruder."
+    },
+    "scholarship-y6-vr-011": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-classification",
+        "to": "vr-classification"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-012": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "challenging"
+      },
+      "skill": {
+        "from": "vr-classification",
+        "to": "vr-classification"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": "Kept the content but relabelled challenging (needs knowledge of alloys and pewter)."
+    },
+    "scholarship-y6-vr-013": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-classification",
+        "to": "vr-classification"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-014": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-015": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-016": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-017": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-018": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-019": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "REWORDED the antonym target: CONVERGENT (answerable by morphology) replaced by FRUGAL with EXTRAVAGANT as the opposite."
+    },
+    "scholarship-y6-vr-020": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-synonyms-antonyms",
+        "to": "vr-synonyms-antonyms"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-021": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-word-relationships",
+        "to": "vr-word-relationships"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-022": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-word-relationships",
+        "to": "vr-word-relationships"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Definition 1 tightened to 'a solid lump of material such as wood, ice or stone' so BRICK is no longer attractive."
+    },
+    "scholarship-y6-vr-023": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-word-relationships",
+        "to": "vr-word-relationships"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Reworded to 'an upright pole set in the ground' and 'the service that delivers letters and parcels'."
+    },
+    "scholarship-y6-vr-024": {
+      "status": "replaced",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-word-relationships",
+        "to": "vr-word-relationships"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "resembles-published"
+      },
+      "action": "REPLACED stock SPADE homonym with an original one (SOUND: free from damage; a narrow stretch of sea)."
+    },
+    "scholarship-y6-vr-025": {
+      "status": "replaced",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-word-relationships",
+        "to": "vr-word-relationships"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "resembles-published"
+      },
+      "action": "REPLACED canonical BEAR/bear with an original one (PITCH: how high a note is; a marked playing field)."
+    },
+    "scholarship-y6-vr-026": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-word-relationships",
+        "to": "vr-word-relationships"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-027": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-sentence-logic",
+        "to": "vr-sentence-logic"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-028": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-sentence-logic",
+        "to": "vr-sentence-logic"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-029": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-sentence-logic",
+        "to": "vr-sentence-logic"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-030": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-sentence-logic",
+        "to": "vr-sentence-logic"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Replaced the third modus-ponens item with a disjunctive syllogism (bridge closed or ferry running); all five options are now checked by the truth-table solver."
+    },
+    "scholarship-y6-vr-031": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "challenging"
+      },
+      "skill": {
+        "from": "vr-sentence-logic",
+        "to": "vr-sentence-logic"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Replaced the fourth modus-ponens item with a three-statement contrapositive chain (rhombus); all five options checked by the truth-table solver."
+    },
+    "scholarship-y6-vr-032": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-sentence-logic",
+        "to": "vr-sentence-logic"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-033": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-034": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-035": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "challenging"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-036": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-037": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-038": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-039": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-letter-series",
+        "to": "vr-letter-series"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Removed the word 'modular' so the wrap-around is discovered, not hinted."
+    },
+    "scholarship-y6-vr-040": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-coded-words",
+        "to": "vr-coded-words"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Removed the parenthetical shift rule so students must infer it from BARK -> DCTM."
+    },
+    "scholarship-y6-vr-041": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-coded-words",
+        "to": "vr-coded-words"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-042": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "vr-coded-words",
+        "to": "vr-coded-words"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-043": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-coded-words",
+        "to": "vr-coded-words"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-044": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-coded-words",
+        "to": "vr-coded-words"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-vr-045": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "vr-coded-words",
+        "to": "vr-coded-words"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-001": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-authorial-craft",
+        "to": "rc-authorial-craft"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-002": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-figurative-language",
+        "to": "rc-figurative-language"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Passage corrected (red mangroves have the arching stilt roots; grey mangroves have pneumatophores). Stem now names the red mangroves; option c no longer says 'wooden'; distractors made plausible; relabelled medium."
+    },
+    "scholarship-y6-rc-003": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-character-inference",
+        "to": "rc-character-inference"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-004": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-inference",
+        "to": "rc-factual-inference"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": "Passage corrected (see passage notes)."
+    },
+    "scholarship-y6-rc-005": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-vocabulary-context",
+        "to": "rc-vocabulary-context"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Distractors replaced with near-misses (including 'one after another in turn' as the sequential trap); cue word 'synchronized' removed from rc-007."
+    },
+    "scholarship-y6-rc-006": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-authorial-craft",
+        "to": "rc-authorial-craft"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-007": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-figurative-language",
+        "to": "rc-figurative-language"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated challenging -> medium (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-008": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-tone-analysis",
+        "to": "rc-tone-analysis"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-009": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-character-inference",
+        "to": "rc-character-inference"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-010": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-retrieval",
+        "to": "rc-factual-retrieval"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-011": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-vocabulary-context",
+        "to": "rc-vocabulary-context"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Key shortened to 'stubborn endurance' and context-plausible traps added."
+    },
+    "scholarship-y6-rc-012": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-factual-inference",
+        "to": "rc-factual-inference"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Distractors now include the reversal trap (hardens when heated, softens when cooled)."
+    },
+    "scholarship-y6-rc-013": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-retrieval",
+        "to": "rc-factual-retrieval"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-014": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-text-structure",
+        "to": "rc-text-structure"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Stem changed to 'How is the passage organised?' and distractors now reorder the real sections; relabelled medium."
+    },
+    "scholarship-y6-rc-015": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-cause-effect",
+        "to": "rc-cause-effect"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Distractors replaced with plausible but unsupported outcomes."
+    },
+    "scholarship-y6-rc-016": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-main-idea",
+        "to": "rc-main-idea"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-017": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-inference",
+        "to": "rc-factual-inference"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-018": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-vocabulary-context",
+        "to": "rc-vocabulary-context"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated challenging -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-019": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-main-idea",
+        "to": "rc-main-idea"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": "Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-020": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-authorial-craft",
+        "to": "rc-authorial-craft"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Passage softened ('the evidence ... is far weaker than most people assume') so the crime-and-lighting claim no longer overstates the research; stem updated. Label recalibrated challenging -> medium (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-021": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-figurative-language",
+        "to": "rc-figurative-language"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-022": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-retrieval",
+        "to": "rc-factual-retrieval"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": "Passage corrected (see passage notes)."
+    },
+    "scholarship-y6-rc-023": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-inference",
+        "to": "rc-factual-inference"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-024": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-vocabulary-context",
+        "to": "rc-vocabulary-context"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-025": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-argument-evaluation",
+        "to": "rc-argument-evaluation"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated challenging -> medium (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-026": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-authorial-craft",
+        "to": "rc-authorial-craft"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-027": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-tone-analysis",
+        "to": "rc-tone-analysis"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "'Nostalgic only' became 'Nostalgic'; 'Aggressive' became 'Alarmed' (a real trap from paragraph 3)."
+    },
+    "scholarship-y6-rc-028": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-retrieval",
+        "to": "rc-factual-retrieval"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Passage corrected (see passage notes)."
+    },
+    "scholarship-y6-rc-029": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-factual-inference",
+        "to": "rc-factual-inference"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-030": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-retrieval",
+        "to": "rc-factual-retrieval"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-rc-031": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-vocabulary-context",
+        "to": "rc-vocabulary-context"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-032": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-figurative-language",
+        "to": "rc-figurative-language"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Passage now uses its own simile ('threading the eye of a needle'); the stem quotes it exactly and the invented place-name claim is gone. Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-033": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "rc-vocabulary-context",
+        "to": "rc-vocabulary-context"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Label recalibrated challenging -> medium (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-034": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-factual-inference",
+        "to": "rc-factual-inference"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "original"
+      },
+      "action": "Passage corrected (lunar distances need a clear view of the moon, not night skies; chronometers became affordable, not a single 18th-century invention); stem, key and distractors updated. Label recalibrated medium -> easy (first-pass verdict: too_hard)."
+    },
+    "scholarship-y6-rc-035": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "rc-main-idea",
+        "to": "rc-main-idea"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "original"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-001": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-directed-numbers",
+        "to": "maths-directed-numbers"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-002": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-directed-numbers",
+        "to": "maths-directed-numbers"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-maths-003": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-directed-numbers",
+        "to": "maths-directed-numbers"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-004": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-directed-numbers",
+        "to": "maths-directed-numbers"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-005": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-directed-numbers",
+        "to": "maths-directed-numbers"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-006": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-fractions-decimals",
+        "to": "maths-fractions-decimals"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-maths-007": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-percentages",
+        "to": "maths-percentages"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-008": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-percentages",
+        "to": "maths-percentages"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-009": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-fractions-decimals",
+        "to": "maths-fractions-decimals"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-010": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-percentages",
+        "to": "maths-percentages"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Numbers changed to 12,000 -> 15,000 so the wrong-base answer (20%) is a distractor."
+    },
+    "scholarship-y6-maths-011": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-fractions-decimals",
+        "to": "maths-fractions-decimals"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Added 'No book is in both groups' and reworded the question."
+    },
+    "scholarship-y6-maths-012": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Estate context replaced by a school fundraiser."
+    },
+    "scholarship-y6-maths-013": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "100 minutes instead of 150, so a unit rate is needed; redundant phrase dropped."
+    },
+    "scholarship-y6-maths-014": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-015": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-016": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "New numbers (6 painters, 12 days, 3 more): the naive subtraction answer is 9, not the key 8."
+    },
+    "scholarship-y6-maths-017": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-018": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-019": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-maths-020": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-021": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-022": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "challenging",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled medium (the draft label 'challenging' is valid in the draft schema; the content is guess-and-check friendly)."
+    },
+    "scholarship-y6-maths-023": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_hard",
+        "originality": "common-genre"
+      },
+      "action": "Replaced the negative-number and index item with 3p + 2qr - 7 (p=5, q=3, r=4), keeping the order-of-operations trap (77) without out-of-level sign rules."
+    },
+    "scholarship-y6-maths-024": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-025": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "revise",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Reworded to '18 more than twice the number' to remove the ambiguity."
+    },
+    "scholarship-y6-maths-026": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Wording clarified ('A pair of vertically opposite angles')."
+    },
+    "scholarship-y6-maths-027": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-028": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-029": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Wording clarified ('Two angles lie next to each other on a straight line')."
+    },
+    "scholarship-y6-maths-030": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Tank height (45 cm) added so the water level is possible."
+    },
+    "scholarship-y6-maths-031": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-maths-032": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-geometry",
+        "to": "maths-geometry"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-033": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-probability",
+        "to": "maths-probability"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "revise",
+        "difficultyVerdict": "too_easy",
+        "originality": "common-genre"
+      },
+      "action": "Replaced the addition-only item with a genuine probability item (chance a marble is not green, as a percentage)."
+    },
+    "scholarship-y6-maths-034": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-probability",
+        "to": "maths-probability"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-035": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-probability",
+        "to": "maths-probability"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-036": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-ratios-rates",
+        "to": "maths-ratios-rates"
+      },
+      "firstPass": {
+        "answer": "d",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Added the 90-minute average-speed trap as a distractor."
+    },
+    "scholarship-y6-maths-037": {
+      "status": "relabelled",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-directed-numbers",
+        "to": "maths-directed-numbers"
+      },
+      "firstPass": {
+        "answer": "a",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Relabelled easy."
+    },
+    "scholarship-y6-maths-038": {
+      "status": "revised",
+      "contentChangedSinceFirstPass": true,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-percentages",
+        "to": "maths-percentages"
+      },
+      "firstPass": {
+        "answer": "c",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": "Added the $396 take-10%-off trap as a distractor."
+    },
+    "scholarship-y6-maths-039": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "medium",
+        "to": "medium"
+      },
+      "skill": {
+        "from": "maths-algebra",
+        "to": "maths-algebra"
+      },
+      "firstPass": {
+        "answer": "b",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    },
+    "scholarship-y6-maths-040": {
+      "status": "unchanged",
+      "contentChangedSinceFirstPass": false,
+      "difficulty": {
+        "from": "easy",
+        "to": "easy"
+      },
+      "skill": {
+        "from": "maths-probability",
+        "to": "maths-probability"
+      },
+      "firstPass": {
+        "answer": "e",
+        "recommendation": "approve",
+        "difficultyVerdict": "appropriate",
+        "originality": "common-genre"
+      },
+      "action": ""
+    }
+  },
+  "passages": {
+    "The Estuary Watchers": "Passage corrected: red-mangrove stilt roots vs grey-mangrove pneumatophores; tide stage vs fiddler-crab behaviour; Australian spelling; stock phrases trimmed.",
+    "Architects of the Spinifex": "Passage corrected: Indigenous knowledge in the present tense and acknowledged in the research; the 'hindrance' attributed to pastoralists.",
+    "In Defence of the Dark": "Passage corrected: crime-and-lighting claim softened; skyglow growth rate hedged; living songlines; 'amber' smog no longer clashes with the amber LED recommendation.",
+    "Charting the Roaring Forties": "Passage corrected: the seconds-vs-minutes timing claim (a minute of clock error is up to 15 nautical miles; the old text implied seconds), the Harrison/lunar timeline, 'night skies', the tautology, 'freezing', the invented place-name, and the ending's tone."
+  },
+  "summary": {
+    "nr": {
+      "unchanged": 23,
+      "relabelled": 7,
+      "revised": 9,
+      "replaced": 1
+    },
+    "vr": {
+      "unchanged": 14,
+      "relabelled": 18,
+      "revised": 8,
+      "replaced": 5
+    },
+    "rc": {
+      "unchanged": 0,
+      "relabelled": 0,
+      "revised": 35,
+      "replaced": 0
+    },
+    "maths": {
+      "unchanged": 21,
+      "relabelled": 6,
+      "revised": 13,
+      "replaced": 0
+    }
+  }
+}

@@ -24,6 +24,11 @@ export default defineConfig({
     environment: "node",
     globals: true,
     include: ["tests/rls/**/*.test.ts"],
+    /* Refuse to run unless every database variable names ONE local database: once before any worker starts, and
+       again before every file (the run is a single process, so one file's environment is the next file's).
+       Nothing connects and nothing is queried before these pass. See tests/rls/support/db-target.ts. */
+    globalSetup: ["tests/rls/support/global-guard.ts"],
+    setupFiles: ["tests/rls/support/setup-guard.ts"],
     testTimeout: 20_000,
     hookTimeout: 20_000,
     /**
