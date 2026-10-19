@@ -4,7 +4,7 @@ Work in this order for EVERY item in the packet that follows: solve it yourself 
 
 Reply with ONE JSON object and nothing else (no commentary, no markdown fences), covering all 80 items, in exactly this shape:
 {
-  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "e7b6f95ad7e7b42421e83d9a13951e92d01c17e901c93d68f641868d1e4fcf51" },
+  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc" },
   "items": [ { "id": "scholarship-y6-vr-001", "myAnswer": "a|b|c|d|e|none", "reasoning": "one or two sentences", "singleDefensibleAnswer": true, "issues": "ambiguity, factual error, copied-sentence key, weak distractors, or an empty string", "difficulty": "easy|medium|challenging", "verdict": "PASS|REVISE|REJECT", "fix": "a precise fix if REVISE or REJECT, otherwise an empty string" } ]
 }
 
@@ -967,11 +967,11 @@ Question:
 What is the main argument of 'In Defence of the Dark'?
 
 Options:
-a) Public safety concerns mean outdoor lighting must take priority over ecological disruption.
-b) Modern LED technology has already resolved most urban glare and night-sky problems.
-c) Protecting nocturnal wildlife requires relocating vulnerable species to remote reserves.
-d) Economic growth in cities inevitably requires accepting higher levels of illumination.
-e) Light pollution causes serious ecological and cultural harm, but design can reduce it.
+a) Urban artificial lighting should be phased out entirely to protect vulnerable nocturnal ecosystems.
+b) The disappearance of starlit skies represents a cultural loss that technology cannot compensate for.
+c) Preserving astronomical research requires restricting bright lighting exclusively to certified reserves.
+d) Modern cities will inevitably erase the night sky unless economic expansion is deliberately halted.
+e) Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it.
 
 ------------------------------------------------------------------------
 
@@ -1051,11 +1051,11 @@ Question:
 How does the author answer the worry that reducing light pollution would make people less safe?
 
 Options:
-a) By citing studies showing that darkness naturally deters all opportunistic offenders
-b) By proposing that lighting be switched off only during early morning hours before dawn
-c) By pointing out that pedestrian visibility on footpaths depends mainly on street layout
-d) By suggesting that security cameras provide better protection than any street illumination
-e) By explaining that carefully shielded fixtures can illuminate walkways without blinding glare
+a) By arguing that pedestrian safety concerns should be treated as secondary to wildlife protection
+b) By advocating that suburban street lighting be switched off entirely during late overnight hours
+c) By asserting that artificial illumination has no measurable influence on pedestrian accident rates
+d) By recommending that residents carry personal torches rather than maintaining municipal streetlights
+e) By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky
 
 ------------------------------------------------------------------------
 
@@ -1187,11 +1187,11 @@ Question:
 According to paragraph 3, why was the 'lunar distance' method hard to use?
 
 Options:
-a) It required taking solar noon sights simultaneously from two vessels.
-b) It depended on sightings of shore-based lighthouses beyond the horizon.
-c) It could only determine latitude and gave no information about longitude.
-d) It required maintaining a perfectly motionless pendulum clock on deck.
-e) It required clear views of celestial bodies and extensive trigonometry.
+a) It could only be conducted during daylight hours when the sun crossed the meridian.
+b) It depended on having an accurate mechanical clock on board to verify the sighting.
+c) It was designed only to determine latitude and provided no help with east-west position.
+d) It required stable sighting equipment that could only be operated in sheltered harbours.
+e) It required unobstructed celestial sightings alongside hours of demanding calculations.
 
 ------------------------------------------------------------------------
 
@@ -1201,8 +1201,8 @@ Question:
 Which conclusion about these voyages is best supported by the passage as a whole?
 
 Options:
-a) Safe arrival required experienced seamanship and judgement alongside mechanical tools.
-b) Technological advances in marine chronometers largely eliminated navigational uncertainty.
-c) Navigators relied on celestial observation because dead reckoning proved generally unhelpful.
-d) Severe gale conditions led commercial merchant fleets to favour slower equatorial routes.
-e) Accurate charts and coastal lighthouses made Bass Strait approaches routine rather than tense.
+a) Safe completion of the voyage depended on human skill and judgement alongside mechanical tools.
+b) The widespread adoption of marine chronometers largely eliminated uncertainty from ocean voyages.
+c) Traditional dead reckoning techniques proved too unreliable to be of practical use in gale seas.
+d) Observing lunar distances remained the most dependable way to establish longitude in the 1850s.
+e) The main navigational hazard on the Australian route was flawed charting rather than bad weather.

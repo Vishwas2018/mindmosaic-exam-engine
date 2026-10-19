@@ -951,23 +951,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Public safety concerns mean outdoor lighting must take priority over ecological disruption."
+          "text": "Urban artificial lighting should be phased out entirely to protect vulnerable nocturnal ecosystems."
         },
         {
           "id": "b",
-          "text": "Modern LED technology has already resolved most urban glare and night-sky problems."
+          "text": "The disappearance of starlit skies represents a cultural loss that technology cannot compensate for."
         },
         {
           "id": "c",
-          "text": "Protecting nocturnal wildlife requires relocating vulnerable species to remote reserves."
+          "text": "Preserving astronomical research requires restricting bright lighting exclusively to certified reserves."
         },
         {
           "id": "d",
-          "text": "Economic growth in cities inevitably requires accepting higher levels of illumination."
+          "text": "Modern cities will inevitably erase the night sky unless economic expansion is deliberately halted."
         },
         {
           "id": "e",
-          "text": "Light pollution causes serious ecological and cultural harm, but design can reduce it."
+          "text": "Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it."
         }
       ],
       "visuals": [],
@@ -975,7 +975,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "The author explains the severe cultural and ecological consequences of artificial light pollution, rejects total darkness ('does not require plunging our communities into perilous darkness'), and argues that practical, well-engineered lighting solutions can reclaim dark skies while maintaining safety.",
+      "explanation": "The author demonstrates that artificial skyglow causes severe cultural loss (Aboriginal songlines) and ecological damage (disoriented shearwaters, disrupted nocturnal mammals), but rejects total darkness and argues that practical, well-engineered lighting solutions can reclaim dark skies while preserving public safety.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1263,23 +1263,23 @@
       "options": [
         {
           "id": "a",
-          "text": "By citing studies showing that darkness naturally deters all opportunistic offenders"
+          "text": "By arguing that pedestrian safety concerns should be treated as secondary to wildlife protection"
         },
         {
           "id": "b",
-          "text": "By proposing that lighting be switched off only during early morning hours before dawn"
+          "text": "By advocating that suburban street lighting be switched off entirely during late overnight hours"
         },
         {
           "id": "c",
-          "text": "By pointing out that pedestrian visibility on footpaths depends mainly on street layout"
+          "text": "By asserting that artificial illumination has no measurable influence on pedestrian accident rates"
         },
         {
           "id": "d",
-          "text": "By suggesting that security cameras provide better protection than any street illumination"
+          "text": "By recommending that residents carry personal torches rather than maintaining municipal streetlights"
         },
         {
           "id": "e",
-          "text": "By explaining that carefully shielded fixtures can illuminate walkways without blinding glare"
+          "text": "By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky"
         }
       ],
       "visuals": [],
@@ -1287,7 +1287,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "The author clarifies that restoring dark skies does not mean 'plunging our communities into perilous darkness'. Instead, well-engineered lighting uses 'precision and restraint', directing light where pedestrians walk while avoiding harsh glare that creates pitch-black shadows.",
+      "explanation": "Paragraph 4 addresses this concern directly: 'Reclaiming our night sky does not require plunging our communities into perilous darkness.' The author explains that downward-facing hooded fixtures illuminate footpaths where pedestrians walk, providing visibility without casting wasteful, blinding glare into the sky.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1731,23 +1731,23 @@
       "options": [
         {
           "id": "a",
-          "text": "It required taking solar noon sights simultaneously from two vessels."
+          "text": "It could only be conducted during daylight hours when the sun crossed the meridian."
         },
         {
           "id": "b",
-          "text": "It depended on sightings of shore-based lighthouses beyond the horizon."
+          "text": "It depended on having an accurate mechanical clock on board to verify the sighting."
         },
         {
           "id": "c",
-          "text": "It could only determine latitude and gave no information about longitude."
+          "text": "It was designed only to determine latitude and provided no help with east-west position."
         },
         {
           "id": "d",
-          "text": "It required maintaining a perfectly motionless pendulum clock on deck."
+          "text": "It required stable sighting equipment that could only be operated in sheltered harbours."
         },
         {
           "id": "e",
-          "text": "It required clear views of celestial bodies and extensive trigonometry."
+          "text": "It required unobstructed celestial sightings alongside hours of demanding calculations."
         }
       ],
       "visuals": [],
@@ -1755,7 +1755,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Paragraph 3 states that lunar distance calculations 'required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic'. The method calculated longitude rather than latitude, was performed at sea on a single ship, and did not rely on shore landmarks or pendulum clocks.",
+      "explanation": "Paragraph 3 states that lunar distance calculations 'required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic'. The method calculated longitude (not latitude), was performed at sea using sextants without relying on harbour conditions, and served as an alternative to clocks rather than depending on them.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1783,23 +1783,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Safe arrival required experienced seamanship and judgement alongside mechanical tools."
+          "text": "Safe completion of the voyage depended on human skill and judgement alongside mechanical tools."
         },
         {
           "id": "b",
-          "text": "Technological advances in marine chronometers largely eliminated navigational uncertainty."
+          "text": "The widespread adoption of marine chronometers largely eliminated uncertainty from ocean voyages."
         },
         {
           "id": "c",
-          "text": "Navigators relied on celestial observation because dead reckoning proved generally unhelpful."
+          "text": "Traditional dead reckoning techniques proved too unreliable to be of practical use in gale seas."
         },
         {
           "id": "d",
-          "text": "Severe gale conditions led commercial merchant fleets to favour slower equatorial routes."
+          "text": "Observing lunar distances remained the most dependable way to establish longitude in the 1850s."
         },
         {
           "id": "e",
-          "text": "Accurate charts and coastal lighthouses made Bass Strait approaches routine rather than tense."
+          "text": "The main navigational hazard on the Australian route was flawed charting rather than bad weather."
         }
       ],
       "visuals": [],
@@ -1807,7 +1807,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "The passage details how mechanical chronometers could drift in extreme cold and overcast skies frequently blocked celestial sights, forcing navigators to rely on dead reckoning. Safe passage—particularly through hazardous choke points like Bass Strait—depended heavily on human seamanship, nerve, and judgement, not mechanical instruments alone.",
+      "explanation": "The passage details how mechanical chronometers could drift in extreme cold and leaden skies frequently blocked celestial observations, forcing captains to navigate by dead reckoning. Safe arrival—especially when threading the reefs of Bass Strait—was 'a triumph of skill and nerve', demonstrating that mechanical instruments could not replace seasoned human judgement.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1954,7 +1954,7 @@
       "id": "scholarship-y6-rc-019",
       "skill": "rc-main-idea",
       "targetOption": "e",
-      "correctValue": "Light pollution causes serious ecological and cultural harm, but design can reduce it.",
+      "correctValue": "Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-020": {
@@ -1996,7 +1996,7 @@
       "id": "scholarship-y6-rc-025",
       "skill": "rc-argument-evaluation",
       "targetOption": "e",
-      "correctValue": "By explaining that carefully shielded fixtures can illuminate walkways without blinding glare",
+      "correctValue": "By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-026": {
@@ -2059,14 +2059,14 @@
       "id": "scholarship-y6-rc-034",
       "skill": "rc-factual-inference",
       "targetOption": "e",
-      "correctValue": "It required clear views of celestial bodies and extensive trigonometry.",
+      "correctValue": "It required unobstructed celestial sightings alongside hours of demanding calculations.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-035": {
       "id": "scholarship-y6-rc-035",
       "skill": "rc-factual-inference",
       "targetOption": "a",
-      "correctValue": "Safe arrival required experienced seamanship and judgement alongside mechanical tools.",
+      "correctValue": "Safe completion of the voyage depended on human skill and judgement alongside mechanical tools.",
       "requiresHumanSemanticCheck": true
     }
   }

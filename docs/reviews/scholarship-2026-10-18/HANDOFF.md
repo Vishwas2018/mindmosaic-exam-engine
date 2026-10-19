@@ -22,7 +22,7 @@ The branch exists only locally; there is no PR. Needed from the repository owner
 
 - 160 of 160 keys independently verified. 14 items flagged by the 19 Oct advisory OpenAI review (VR: 032; RC: 006, 010, 013, 018, 019, 020, 023, 025, 026, 028, 030, 034, 035) have been remediated with authoritative botanical, astrophysical, and horological sources.
 - 32 items revised in this release (`revised-in-this-release.json`), with all dependent questions on shared passages updated and re-pinned.
-- Answer-withheld external review packet regenerated: new SHA-256 is `e7b6f95ad7e7b42421e83d9a13951e92d01c17e901c93d68f641868d1e4fcf51` (manifest and prompt-with-packet updated).
+- Answer-withheld external review packet regenerated: new SHA-256 is `81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc` (manifest and prompt-with-packet updated).
 - 45 items (NR 26, maths 19) pass every machine gate and await **Vish's review**.
 - 35 NR and maths items are correct but blocked on difficulty labels: **Vish decides** (`difficulty/difficulty-decision-sheet.csv`; recommended: relabel `nr-003`, `nr-005`, `nr-007`, `maths-023` to easy; do not approve the advisory policy just to clear the rest).
 - 80 Verbal and Reading items have **no valid different-provider review** (the 19 Oct OpenAI review recorded `freshSession: false` and is advisory only; earlier reviews are stale against the revised packet); the estimator would also block 43 of them on difficulty. The regenerated answer-withheld packet and prompt are in `external-review/`.
@@ -37,6 +37,6 @@ Nothing is approved, no complete paper can be sat, and production's migration st
 
 1. Owner: push, draft PR, compare with #51, add `scholarship-drafts` to required checks.
 2. Vish: review the 45 ready items; decide the 35 difficulty labels (and the 43 Verbal/Reading estimator conflicts, after the external review).
-3. Vish: run the fresh different-provider review of the 80 Verbal and Reading items using the regenerated packet (`e7b6f95ad7e7b42421e83d9a13951e92d01c17e901c93d68f641868d1e4fcf51`, ensuring `freshSession: true`), verify with `scripts/verify-scholarship-external-review.mts`, then ingest and re-run the gates.
+3. Vish: run the fresh different-provider review of the 80 Verbal and Reading items using the regenerated packet (`81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc`, ensuring `freshSession: true`), verify with `scripts/verify-scholarship-external-review.mts`, then ingest and re-run the gates.
 4. Owner: read-only migration status check against production.
 5. Vish: approve content; separately authorise the rollout.

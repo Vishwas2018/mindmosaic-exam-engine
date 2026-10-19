@@ -142,13 +142,13 @@ scholarship-y6-rc-015,rc,medium,challenging,0.5,1.000,blocked_deviation,426,1.00
 scholarship-y6-rc-016,rc,easy,medium,0.5,1.000,blocked_deviation,428,1.00,0.00
 scholarship-y6-rc-017,rc,easy,medium,0.5,1.000,blocked_deviation,410,1.00,0.00
 scholarship-y6-rc-018,rc,easy,medium,0.5,1.000,blocked_deviation,421,1.00,0.33
-scholarship-y6-rc-019,rc,easy,medium,0.5,1.000,blocked_deviation,433,1.00,0.00
+scholarship-y6-rc-019,rc,easy,medium,0.5,1.000,blocked_deviation,441,1.00,0.00
 scholarship-y6-rc-020,rc,medium,medium,0,1.000,passes,433,1.00,0.33
 scholarship-y6-rc-021,rc,medium,medium,0,1.000,passes,432,1.00,0.33
 scholarship-y6-rc-022,rc,easy,medium,0.5,1.000,blocked_deviation,443,1.00,0.33
 scholarship-y6-rc-023,rc,easy,medium,0.5,1.000,blocked_deviation,421,1.00,0.33
 scholarship-y6-rc-024,rc,medium,medium,0,1.000,passes,398,1.00,0.00
-scholarship-y6-rc-025,rc,medium,medium,0,1.000,passes,442,1.00,0.33
+scholarship-y6-rc-025,rc,medium,medium,0,1.000,passes,450,1.00,0.33
 scholarship-y6-rc-026,rc,easy,medium,0.5,1.000,blocked_deviation,435,1.00,0.00
 scholarship-y6-rc-027,rc,medium,medium,0,1.000,passes,380,1.00,0.00
 scholarship-y6-rc-028,rc,easy,medium,0.5,1.000,blocked_deviation,480,1.00,0.00
@@ -157,5 +157,5 @@ scholarship-y6-rc-030,rc,easy,medium,0.5,1.000,blocked_deviation,470,1.00,0.33
 scholarship-y6-rc-031,rc,easy,medium,0.5,1.000,blocked_deviation,463,1.00,0.33
 scholarship-y6-rc-032,rc,medium,medium,0,1.000,passes,491,1.00,0.33
 scholarship-y6-rc-033,rc,medium,medium,0,1.000,passes,436,1.00,0.00
-scholarship-y6-rc-034,rc,easy,medium,0.5,1.000,blocked_deviation,467,1.00,0.33
-scholarship-y6-rc-035,rc,medium,medium,0,1.000,passes,472,1.00,0.33
+scholarship-y6-rc-034,rc,easy,medium,0.5,1.000,blocked_deviation,481,1.00,0.33
+scholarship-y6-rc-035,rc,medium,medium,0,1.000,passes,487,1.00,0.33
