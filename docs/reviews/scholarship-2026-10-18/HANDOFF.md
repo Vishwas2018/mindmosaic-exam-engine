@@ -20,12 +20,12 @@ The branch exists only locally; there is no PR. Needed from the repository owner
 
 ## 3. Content readiness: partial; not a release
 
-- 160 of 160 keys independently verified. 14 items flagged by the 19 Oct advisory OpenAI review (VR: 032; RC: 006, 010, 013, 018, 019, 020, 023, 025, 026, 028, 030, 034, 035) have been remediated with authoritative botanical, astrophysical, and horological sources.
+- 160 of 160 keys independently verified. 14 items flagged by the 19 Oct advisory OpenAI review (`vr-032`, `rc-006`, `rc-010`, `rc-013`, `rc-018`, `rc-019`, `rc-020`, `rc-023`, `rc-025`, `rc-026`, `rc-028`, `rc-030`, `rc-034`, `rc-035`) have been remediated against primary sources, with unsupported spinifex resin function claims removed and replaced by verbatim-sourced facts.
 - 32 items revised in this release (`revised-in-this-release.json`), with all dependent questions on shared passages updated and re-pinned.
-- Answer-withheld external review packet regenerated: new SHA-256 is `81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc` (manifest and prompt-with-packet updated).
-- 45 items (NR 26, maths 19) pass every machine gate and await **Vish's review**.
-- 35 NR and maths items are correct but blocked on difficulty labels: **Vish decides** (`difficulty/difficulty-decision-sheet.csv`; recommended: relabel `nr-003`, `nr-005`, `nr-007`, `maths-023` to easy; do not approve the advisory policy just to clear the rest).
-- 80 Verbal and Reading items have **no valid different-provider review** (the 19 Oct OpenAI review recorded `freshSession: false` and is advisory only; earlier reviews are stale against the revised packet); the estimator would also block 43 of them on difficulty. The regenerated answer-withheld packet and prompt are in `external-review/`.
+- Answer-withheld external review packet regenerated: new SHA-256 is `5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198` (manifest and prompt-with-packet updated and synced to `C:\tmp\scholarship-handoff\external-review\`).
+- **45 items** (NR 26, Maths 19) pass every machine gate and await **Vish's review** (`ready_for_review`).
+- **35 items** (NR 14, Maths 21) are correct on answer proofs but blocked at the difficulty gate (`requires_revision_or_decision`): **Vish decides** (`difficulty/difficulty-decision-sheet.csv`; recommended: relabel `nr-003`, `nr-005`, `nr-007`, `maths-023` to easy; do not approve the advisory policy just to clear the rest).
+- **80 Verbal Reasoning (45) and Reading (35) items** are in `awaiting_external_evidence`: they have **no valid different-provider review** (the 19 Oct OpenAI review recorded `freshSession: false` and is advisory only; earlier reviews are stale against the revised packet), **AND the text-length difficulty estimator would also block 43 of them on difficulty** (**27 of 45 Verbal Reasoning** + **16 of 35 Reading**; see `difficulty/estimator-all-160.csv` and `difficulty/difficulty-decision-sheet.csv` where `35 + 43 = 78` items are `blocked_deviation`). The regenerated answer-withheld packet and prompt are in `external-review/`.
 - No section has enough approvable items for a whole paper (26/40, 19/40, 0/45, 0/35).
 - No approval, signature or human check was recorded by anyone. Content remains unapproved and unavailable to students.
 
@@ -36,7 +36,7 @@ Nothing is approved, no complete paper can be sat, and production's migration st
 ## Remaining blockers, in order
 
 1. Owner: push, draft PR, compare with #51, add `scholarship-drafts` to required checks.
-2. Vish: review the 45 ready items; decide the 35 difficulty labels (and the 43 Verbal/Reading estimator conflicts, after the external review).
-3. Vish: run the fresh different-provider review of the 80 Verbal and Reading items using the regenerated packet (`81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc`, ensuring `freshSession: true`), verify with `scripts/verify-scholarship-external-review.mts`, then ingest and re-run the gates.
+2. Vish: review the 45 ready items; decide the 35 NR/Maths difficulty labels (and the 43 Verbal/Reading estimator conflicts — 27 VR + 16 RC — after the external review).
+3. Vish: run the fresh different-provider review of the 80 Verbal and Reading items using the regenerated packet (`5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198`, ensuring `freshSession: true`), verify with `scripts/verify-scholarship-external-review.mts`, then ingest and re-run the gates.
 4. Owner: read-only migration status check against production.
 5. Vish: approve content; separately authorise the rollout.

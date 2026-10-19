@@ -279,7 +279,7 @@
         },
         {
           "id": "b",
-          "text": "By describing a long, quiet wait before the osprey suddenly dives"
+          "text": "By describing a long, silent wait before the sudden dive"
         },
         {
           "id": "c",
@@ -299,7 +299,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "The author builds suspense through stillness and silence: 'For twenty minutes neither person spoke' while the dinghy drifts and the perched osprey watches the shallows, stretching out the quiet wait until the bird suddenly launches into its dive. There is no circling, warning, comparison to a stalking hunter, or rapid switching between viewpoints.",
+      "explanation": "The author builds suspense through stillness and silence: 'For twenty minutes neither person spoke' while the dinghy drifts and the perched osprey watches the shallows, stretching out the silent wait until the bird suddenly launches into its dive. There is no circling, warning, comparison to a stalking hunter, or rapid switching between viewpoints.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -475,31 +475,31 @@
       "type": "reading_comprehension",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "According to paragraph 2, what biological functions does the spinifex resin serve?",
+      "prompt": "According to paragraph 2, what distinguishes the twenty-six resin-producing Triodia species from hard-leaved species?",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
           "id": "a",
-          "text": "It attracts desert insects that carry pollen between plants."
+          "text": "Their roots spread through clay soils rather than loose desert sand."
         },
         {
           "id": "b",
-          "text": "It reflects harsh sunlight to keep interior stems cool."
+          "text": "Their leaves remain flat and open to capture morning moisture."
         },
         {
           "id": "c",
-          "text": "It helps reduce water loss and deters insect herbivores."
+          "text": "They belong to a softer-leaved group with resin-secreting outer leaf cells."
         },
         {
           "id": "d",
-          "text": "It anchors widespread root networks into loose desert sand."
+          "text": "They store aromatic resin inside hollow stems beneath the soil surface."
         },
         {
           "id": "e",
-          "text": "It helps fallen leaf litter break down into topsoil nutrients."
+          "text": "Their breathing pores sit on the outer leaf surface instead of in deep grooves."
         }
       ],
       "visuals": [],
@@ -507,7 +507,7 @@
         "kind": "single_option",
         "optionId": "c"
       },
-      "explanation": "Paragraph 2 states that the resin forms a water-insoluble barrier that helps reduce non-stomatal water loss during heatwaves and contains bitter compounds that deter insect herbivores from feeding on the leaves. Pollination, reflection, anchoring sand, and leaf litter breakdown are not functions of the resin.",
+      "explanation": "Paragraph 2 states that the twenty-six resin-producing Triodia species belong to a softer-leaved group that secretes resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin. Spinifex leaves curl into cylinders with breathing pores sheltered in deep grooves, and roots anchor sandy dunes.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -530,7 +530,7 @@
       "prompt": "In paragraph 1, the word 'tenacity' most nearly means:",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -582,7 +582,7 @@
       "prompt": "What thermal property made spinifex pitch useful for Indigenous toolmaking?",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -634,7 +634,7 @@
       "prompt": "Why are nanotechnology researchers interested in adding spinifex nanofibres to materials?",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -643,11 +643,11 @@
         },
         {
           "id": "b",
-          "text": "They make synthetic polymers completely waterproof and fire-resistant."
+          "text": "They make synthetic polymers waterproof and resistant to high temperatures."
         },
         {
           "id": "c",
-          "text": "They reduce the total cost of production by replacing all raw latex."
+          "text": "They lower production costs by replacing natural rubber latex."
         },
         {
           "id": "d",
@@ -663,7 +663,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Paragraph 4 states that microscopic spinifex nanofibres 'enhance tensile strength and flexibility without adding significant weight' when blended into materials like latex or concrete. The passage does not claim they alter curing time, provide fireproofing, eliminate latex, or stop electrical conduction.",
+      "explanation": "Paragraph 4 states that microscopic spinifex nanofibres 'enhance tensile strength and flexibility without adding significant weight' when blended into materials like latex or concrete. The passage does not claim they speed up setting, make polymers waterproof, replace latex, or block heat and electrical conduction.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -686,7 +686,7 @@
       "prompt": "How is the passage organised?",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -738,7 +738,7 @@
       "prompt": "Based on the text, what is likely to happen if spinifex disappeared from arid dune fields?",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -790,7 +790,7 @@
       "prompt": "Which statement best sums up the author's view of spinifex in the final sentence?",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -842,7 +842,7 @@
       "prompt": "The cylindrical curling of spinifex leaves is an adaptation that helps the plant to:",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
@@ -894,16 +894,16 @@
       "prompt": "In paragraph 4, the phrase 'high aspect ratio' describes fibres that have:",
       "stimulus": {
         "title": "Architects of the Spinifex",
-        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
+        "body": "Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.\n\nSpinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.\n\nFor tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.\n\nToday, modern materials scientists are investigating spinifex from a new perspective. Nanotechnology researchers at Australian universities, some working with Aboriginal communities who hold generations of knowledge about the plant, have discovered that spinifex contains nanocellulose fibres with an exceptionally high aspect ratio—long, thin, and extraordinarily strong. When blended into latex, polymers, or concrete, these microscopic plant fibres enhance tensile strength and flexibility without adding significant weight. Because the tough grass thrives on marginal arid soils without requiring irrigation or fertilisers, it offers a sustainable source of high-performance biomaterials. Thus, a desert grass long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering."
       },
       "options": [
         {
           "id": "a",
-          "text": "a large surface area curled into a spherical shape"
+          "text": "a wide surface area curved into a hollow tube"
         },
         {
           "id": "b",
-          "text": "a very high density relative to their total volume"
+          "text": "a high density compared with their overall volume"
         },
         {
           "id": "c",
@@ -911,11 +911,11 @@
         },
         {
           "id": "d",
-          "text": "an equal measurement across length, width and depth"
+          "text": "equal dimensions across length, width, and thickness"
         },
         {
           "id": "e",
-          "text": "a steep taper that narrows sharply from base to tip"
+          "text": "a sharp taper that narrows from base to tip"
         }
       ],
       "visuals": [],
@@ -951,23 +951,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Urban artificial lighting should be phased out entirely to protect vulnerable nocturnal ecosystems."
+          "text": "Coastal lighting near seabird colonies poses the greatest threat to wildlife."
         },
         {
           "id": "b",
-          "text": "The disappearance of starlit skies represents a cultural loss that technology cannot compensate for."
+          "text": "Suburban floodlights often reduce pedestrian visibility instead of preventing street crime."
         },
         {
           "id": "c",
-          "text": "Preserving astronomical research requires restricting bright lighting exclusively to certified reserves."
+          "text": "Regional dark-sky reserves are more practical than changing urban lighting systems."
         },
         {
           "id": "d",
-          "text": "Modern cities will inevitably erase the night sky unless economic expansion is deliberately halted."
+          "text": "Replacing older street lamps with modern LEDs is the key to saving energy."
         },
         {
           "id": "e",
-          "text": "Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it."
+          "text": "Light pollution harms wildlife and culture, but thoughtful design can reduce it."
         }
       ],
       "visuals": [],
@@ -975,7 +975,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "The author demonstrates that artificial skyglow causes severe cultural loss (Aboriginal songlines) and ecological damage (disoriented shearwaters, disrupted nocturnal mammals), but rejects total darkness and argues that practical, well-engineered lighting solutions can reclaim dark skies while preserving public safety.",
+      "explanation": "The author explains the cultural and ecological damage caused by artificial skyglow, rejects plunging communities into darkness, and argues that practical, well-engineered lighting reforms can restore dark skies while maintaining public safety. Options a, b, c, and d each focus too narrowly on a single detail or misstate the author's proposed solutions.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1003,23 +1003,23 @@
       "options": [
         {
           "id": "a",
-          "text": "To argue for switching off municipal streetlights along all suburban pathways"
+          "text": "To argue for switching off municipal streetlights along suburban pathways"
         },
         {
           "id": "b",
-          "text": "To question the assumption that increasing illumination always improves public safety"
+          "text": "To challenge the belief that brighter lighting automatically makes places safer"
         },
         {
           "id": "c",
-          "text": "To demonstrate that rising electricity costs outweigh any possible crime reduction"
+          "text": "To suggest that rising power costs outweigh the benefits of bright street lighting"
         },
         {
           "id": "d",
-          "text": "To recommend that surveillance cameras replace human street patrols after dark"
+          "text": "To recommend that surveillance cameras replace street lighting in busy suburbs"
         },
         {
           "id": "e",
-          "text": "To show that local councils should leave crime prevention entirely to police"
+          "text": "To show that local councils should focus on daytime traffic management"
         }
       ],
       "visuals": [],
@@ -1027,7 +1027,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "In paragraph 2, the author notes that bright streetscapes are 'reflexively equated with civic progress and public safety', but points out that evidence connecting unshielded floodlights to crime reduction is 'mixed, and weaker than most people assume'. This challenges the widespread belief that more light automatically creates a safer environment.",
+      "explanation": "In paragraph 2, the author notes that bright streetscapes are 'reflexively equated with civic progress and public safety', but points out that evidence connecting unshielded floodlights to crime reduction is 'mixed, and weaker than most people assume'. This challenges the common assumption that brighter lighting automatically improves public safety.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1159,23 +1159,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Installing higher-mounted poles to spread light across a wider area"
+          "text": "Installing taller lamp posts to spread illumination across wider areas"
         },
         {
           "id": "b",
-          "text": "Fitting shielded fixtures that direct illumination downward onto footpaths"
+          "text": "Fitting hooded fixtures that direct light downward onto footpaths"
         },
         {
           "id": "c",
-          "text": "Using intense blue-white LEDs to improve clarity for passing motorists"
+          "text": "Using bright blue-white LEDs to improve visibility for night drivers"
         },
         {
           "id": "d",
-          "text": "Removing street lamps completely from all suburban roads after midnight"
+          "text": "Turning off suburban street lamps between midnight and early dawn"
         },
         {
           "id": "e",
-          "text": "Switching to motion-activated floodlights that illuminate entire streets"
+          "text": "Replacing footpath lamps with floodlights along major residential streets"
         }
       ],
       "visuals": [],
@@ -1183,7 +1183,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Paragraph 4 recommends replacing unshielded lamps with 'downward-facing hooded fixtures that direct illumination exclusively where pedestrians step'. The author discourages blue-white glare and does not advocate total blackouts or unshielded floodlights.",
+      "explanation": "Paragraph 4 recommends replacing unshielded lamps with 'downward-facing hooded fixtures that direct illumination exclusively where pedestrians step'. The author advises against blue-white glare and unshielded floodlights, and explicitly rejects plunging communities into darkness.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1263,23 +1263,23 @@
       "options": [
         {
           "id": "a",
-          "text": "By arguing that pedestrian safety concerns should be treated as secondary to wildlife protection"
+          "text": "By arguing that protecting nocturnal wildlife should outweigh pedestrian safety concerns"
         },
         {
           "id": "b",
-          "text": "By advocating that suburban street lighting be switched off entirely during late overnight hours"
+          "text": "By proposing that suburban street lighting be dimmed or switched off after midnight"
         },
         {
           "id": "c",
-          "text": "By asserting that artificial illumination has no measurable influence on pedestrian accident rates"
+          "text": "By suggesting that local councils install security cameras to compensate for darker streets"
         },
         {
           "id": "d",
-          "text": "By recommending that residents carry personal torches rather than maintaining municipal streetlights"
+          "text": "By encouraging residents to rely on handheld torches when walking at night"
         },
         {
           "id": "e",
-          "text": "By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky"
+          "text": "By explaining that shielded fixtures can light footpaths clearly without harsh glare"
         }
       ],
       "visuals": [],
@@ -1287,7 +1287,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Paragraph 4 addresses this concern directly: 'Reclaiming our night sky does not require plunging our communities into perilous darkness.' The author explains that downward-facing hooded fixtures illuminate footpaths where pedestrians walk, providing visibility without casting wasteful, blinding glare into the sky.",
+      "explanation": "Paragraph 4 addresses this concern directly: 'Reclaiming our night sky does not require plunging our communities into perilous darkness.' The author explains that downward-facing hooded fixtures direct light onto footpaths where pedestrians walk, maintaining safe visibility without casting blinding glare into the sky.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1315,23 +1315,23 @@
       "options": [
         {
           "id": "a",
-          "text": "trace the chronological history of maritime navigation methods across Australia"
+          "text": "trace the history of maritime navigation methods across Australia"
         },
         {
           "id": "b",
-          "text": "contrast the dark night sky of inland deserts with that of suburban coastlines"
+          "text": "contrast the clear night skies of inland deserts with coastal suburban skies"
         },
         {
           "id": "c",
-          "text": "explain the astronomical methods used by early travellers to track desert routes"
+          "text": "explain the astronomical techniques that traditional travellers used to cross land"
         },
         {
           "id": "d",
-          "text": "argue that astronomy programs should preserve traditional celestial terminology"
+          "text": "encourage schools to include traditional star names in science lessons"
         },
         {
           "id": "e",
-          "text": "highlight that the disappearing night sky carries a deep cultural cost for society"
+          "text": "show that losing the night sky to skyglow carries a deep cultural cost"
         }
       ],
       "visuals": [],
@@ -1339,7 +1339,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "By noting that the Milky Way has guided Aboriginal navigators for tens of thousands of years and remains part of living songlines, the author establishes that the loss of the night sky to skyglow is an irreplaceable cultural loss, not merely an inconvenience for astronomers.",
+      "explanation": "By noting that the Milky Way guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories, the author shows that the loss of the night sky to skyglow is a profound cultural loss, not merely an ecological or scientific issue.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1419,23 +1419,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Relentless westerly winds allowed vessels to reach high speeds, cutting weeks off the voyage."
+          "text": "Strong westerly winds enabled ships to sail much faster, shortening the voyage."
         },
         {
           "id": "b",
-          "text": "Milder ocean currents and calmer swells reduced structural wear on ship hulls and rigging."
+          "text": "Steady ocean currents in the region reduced structural strain on wooden hulls and sails."
         },
         {
           "id": "c",
-          "text": "Frequent intervals of calm weather allowed navigators to resupply at scheduled island ports."
+          "text": "Regular island ports along the route allowed crews to take on fresh supplies."
         },
         {
           "id": "d",
-          "text": "Equatorial trade winds allowed ships to bypass the stormy currents surrounding Antarctica."
+          "text": "Clearer southern skies made daily noon sun observations easier for navigators."
         },
         {
           "id": "e",
-          "text": "Shallow coastal waters along the route provided dependable emergency anchorages in storms."
+          "text": "Sheltered coastal waters offered safe anchorages during winter storms."
         }
       ],
       "visuals": [],
@@ -1443,7 +1443,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "Paragraph 1 explains that clipper ships sailed into the Roaring Forties because 'driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage'.",
+      "explanation": "Paragraph 1 explains that vessels sailed into the Roaring Forties because 'driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage'.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1523,23 +1523,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Sustained magnetic variation from polar storms reversed their balance springs."
+          "text": "Sustained magnetic variation from southern storms affected their brass cases."
         },
         {
           "id": "b",
-          "text": "Persistent cold altered their daily rates and salty moisture risked rusting fine parts."
+          "text": "Bitter cold altered their daily rates and damp salt air could rust fine parts."
         },
         {
           "id": "c",
-          "text": "Pivoted gimbal mountings tilted the mechanisms until their internal gears dislodged."
+          "text": "Pivoted gimbal mountings tilted the mechanisms until their internal gears shifted."
         },
         {
           "id": "d",
-          "text": "Violent atmospheric pressure changes caused their sealed vacuum chambers to crack."
+          "text": "Sudden drops in barometric pressure slowed the movement of their hands."
         },
         {
           "id": "e",
-          "text": "Continuous rolling friction wore down their jewelled escapements within weeks."
+          "text": "Constant pitching motion prevented the mainspring from staying wound between checks."
         }
       ],
       "visuals": [],
@@ -1547,7 +1547,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Paragraph 3 states that bitter cold altered the instruments' daily rate of gain or loss, and damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture entered their protective cases. Gimbals served to keep instruments level rather than damaging gears, and chronometers did not contain vacuum chambers.",
+      "explanation": "Paragraph 3 states that weeks of bitter cold altered the chronometers' daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases. Gimbals kept the instruments level rather than shifting their gears.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1731,23 +1731,23 @@
       "options": [
         {
           "id": "a",
-          "text": "It could only be conducted during daylight hours when the sun crossed the meridian."
+          "text": "It relied on comparing multiple spring-driven clocks mounted in gimbal rings."
         },
         {
           "id": "b",
-          "text": "It depended on having an accurate mechanical clock on board to verify the sighting."
+          "text": "It required measuring the noon sun's angle when the sky was overcast."
         },
         {
           "id": "c",
-          "text": "It was designed only to determine latitude and provided no help with east-west position."
+          "text": "The brass sextants used for the sightings were easily rusted by damp, salty winds."
         },
         {
           "id": "d",
-          "text": "It required stable sighting equipment that could only be operated in sheltered harbours."
+          "text": "The tables worked well near the equator but lost accuracy further south."
         },
         {
           "id": "e",
-          "text": "It required unobstructed celestial sightings alongside hours of demanding calculations."
+          "text": "It needed clear sightings of the moon and stars and hours of calculation."
         }
       ],
       "visuals": [],
@@ -1755,7 +1755,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Paragraph 3 states that lunar distance calculations 'required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic'. The method calculated longitude (not latitude), was performed at sea using sextants without relying on harbour conditions, and served as an alternative to clocks rather than depending on them.",
+      "explanation": "Paragraph 3 states that lunar distance calculations 'required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic'. Gimballed clocks and salt-air rusting relate to marine chronometers, and noon sun sights were used for latitude.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1783,23 +1783,23 @@
       "options": [
         {
           "id": "a",
-          "text": "Safe completion of the voyage depended on human skill and judgement alongside mechanical tools."
+          "text": "Reaching port safely required experienced seamanship alongside mechanical instruments."
         },
         {
           "id": "b",
-          "text": "The widespread adoption of marine chronometers largely eliminated uncertainty from ocean voyages."
+          "text": "The adoption of marine chronometers largely removed navigational risk from ocean voyages."
         },
         {
           "id": "c",
-          "text": "Traditional dead reckoning techniques proved too unreliable to be of practical use in gale seas."
+          "text": "Dead reckoning proved too imprecise to help captains during prolonged gales."
         },
         {
           "id": "d",
-          "text": "Observing lunar distances remained the most dependable way to establish longitude in the 1850s."
+          "text": "Lunar distance calculations remained the preferred method for finding longitude in the 1850s."
         },
         {
           "id": "e",
-          "text": "The main navigational hazard on the Australian route was flawed charting rather than bad weather."
+          "text": "Inaccurate coastal charts posed a greater danger to ships than southern weather."
         }
       ],
       "visuals": [],
@@ -1807,7 +1807,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "The passage details how mechanical chronometers could drift in extreme cold and leaden skies frequently blocked celestial observations, forcing captains to navigate by dead reckoning. Safe arrival—especially when threading the reefs of Bass Strait—was 'a triumph of skill and nerve', demonstrating that mechanical instruments could not replace seasoned human judgement.",
+      "explanation": "The passage shows that mechanical chronometers could drift in extreme cold and overcast skies often blocked celestial sights, forcing captains to rely on dead reckoning. Reaching port safely—especially through Bass Strait—was 'a triumph of skill and nerve', showing that human judgement and seamanship were essential alongside instruments.",
       "metadata": {
         "subject": "reading",
         "strand": "Reading Comprehension",
@@ -1863,7 +1863,7 @@
       "id": "scholarship-y6-rc-006",
       "skill": "rc-authorial-craft",
       "targetOption": "b",
-      "correctValue": "By describing a long, quiet wait before the osprey suddenly dives",
+      "correctValue": "By describing a long, silent wait before the sudden dive",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-007": {
@@ -1891,7 +1891,7 @@
       "id": "scholarship-y6-rc-010",
       "skill": "rc-factual-retrieval",
       "targetOption": "c",
-      "correctValue": "It helps reduce water loss and deters insect herbivores.",
+      "correctValue": "They belong to a softer-leaved group with resin-secreting outer leaf cells.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-011": {
@@ -1954,14 +1954,14 @@
       "id": "scholarship-y6-rc-019",
       "skill": "rc-main-idea",
       "targetOption": "e",
-      "correctValue": "Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it.",
+      "correctValue": "Light pollution harms wildlife and culture, but thoughtful design can reduce it.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-020": {
       "id": "scholarship-y6-rc-020",
       "skill": "rc-authorial-craft",
       "targetOption": "b",
-      "correctValue": "To question the assumption that increasing illumination always improves public safety",
+      "correctValue": "To challenge the belief that brighter lighting automatically makes places safer",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-021": {
@@ -1982,7 +1982,7 @@
       "id": "scholarship-y6-rc-023",
       "skill": "rc-factual-inference",
       "targetOption": "b",
-      "correctValue": "Fitting shielded fixtures that direct illumination downward onto footpaths",
+      "correctValue": "Fitting hooded fixtures that direct light downward onto footpaths",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-024": {
@@ -1996,14 +1996,14 @@
       "id": "scholarship-y6-rc-025",
       "skill": "rc-argument-evaluation",
       "targetOption": "e",
-      "correctValue": "By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky",
+      "correctValue": "By explaining that shielded fixtures can light footpaths clearly without harsh glare",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-026": {
       "id": "scholarship-y6-rc-026",
       "skill": "rc-authorial-craft",
       "targetOption": "e",
-      "correctValue": "highlight that the disappearing night sky carries a deep cultural cost for society",
+      "correctValue": "show that losing the night sky to skyglow carries a deep cultural cost",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-027": {
@@ -2017,7 +2017,7 @@
       "id": "scholarship-y6-rc-028",
       "skill": "rc-factual-retrieval",
       "targetOption": "a",
-      "correctValue": "Relentless westerly winds allowed vessels to reach high speeds, cutting weeks off the voyage.",
+      "correctValue": "Strong westerly winds enabled ships to sail much faster, shortening the voyage.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-029": {
@@ -2031,7 +2031,7 @@
       "id": "scholarship-y6-rc-030",
       "skill": "rc-factual-retrieval",
       "targetOption": "b",
-      "correctValue": "Persistent cold altered their daily rates and salty moisture risked rusting fine parts.",
+      "correctValue": "Bitter cold altered their daily rates and damp salt air could rust fine parts.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-031": {
@@ -2059,14 +2059,14 @@
       "id": "scholarship-y6-rc-034",
       "skill": "rc-factual-inference",
       "targetOption": "e",
-      "correctValue": "It required unobstructed celestial sightings alongside hours of demanding calculations.",
+      "correctValue": "It needed clear sightings of the moon and stars and hours of calculation.",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-rc-035": {
       "id": "scholarship-y6-rc-035",
       "skill": "rc-factual-inference",
       "targetOption": "a",
-      "correctValue": "Safe completion of the voyage depended on human skill and judgement alongside mechanical tools.",
+      "correctValue": "Reaching port safely required experienced seamanship alongside mechanical instruments.",
       "requiresHumanSemanticCheck": true
     }
   }

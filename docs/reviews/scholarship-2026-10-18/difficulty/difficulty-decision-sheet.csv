@@ -133,7 +133,7 @@ scholarship-y6-rc-006,rc,awaiting_external_evidence,medium,medium,passes,,,,no c
 scholarship-y6-rc-007,rc,awaiting_external_evidence,medium,medium,passes,,,,no conflict: estimator agrees with label,,,,,,
 scholarship-y6-rc-008,rc,awaiting_external_evidence,easy,medium,blocked_deviation,medium,medium,low,relabel_medium,yes,,,Tone has to be inferred across the whole passage.,,
 scholarship-y6-rc-009,rc,awaiting_external_evidence,medium,medium,passes,,,,no conflict: estimator agrees with label,,,,,,
-scholarship-y6-rc-010,rc,awaiting_external_evidence,easy,medium,blocked_deviation,medium,easy,high,keep,no,,,Literal retrieval from paragraph 2 (now with tentative wording).,,
+scholarship-y6-rc-010,rc,awaiting_external_evidence,easy,medium,blocked_deviation,medium,easy,high,keep,no,,,Literal retrieval from paragraph 2.,,
 scholarship-y6-rc-011,rc,awaiting_external_evidence,medium,medium,passes,,,,no conflict: estimator agrees with label,,,,,,
 scholarship-y6-rc-012,rc,awaiting_external_evidence,medium,medium,passes,,,,no conflict: estimator agrees with label,,,,,,
 scholarship-y6-rc-013,rc,awaiting_external_evidence,easy,medium,blocked_deviation,medium,easy,high,keep,no,,,Literal retrieval.,,

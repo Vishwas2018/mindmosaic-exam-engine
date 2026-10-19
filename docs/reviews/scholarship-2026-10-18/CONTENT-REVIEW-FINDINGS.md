@@ -50,138 +50,142 @@ The automated originality gate passed all 80 NR and mathematics candidates, and 
 All 160 are original MindMosaic drafts imported with their declared generator identity (Anthropic, `claude-sonnet-5`) and stable ids; the candidate hashes are pinned in `src/features/question-factory/correctness/scholarship-identity-pins.json`. Source commits are listed in `README.md`.
 
 
-## Advisory External Review (19 Oct 2026) & Remediation of 14 Flagged Items
+## Advisory External Review (19 Oct 2026), Source Verification & Reconciliation Record
 
-An external advisory review of the 80 Verbal Reasoning and Reading items was returned by OpenAI (`gpt-6.1-sol-wm`) on 19 Oct 2026 against packet hash `790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872`.
+An external advisory review of the 80 Verbal Reasoning and Reading items was returned by OpenAI (`gpt-6.1-sol-wm`) on 19 Oct 2026 against packet hash `790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872` (commit `c724b0c4`).
 
-### Validation against Independence Policy
-1. **Packet Binding:** Verified. Packet hash `790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872` matched the release packet exactly.
-2. **Reviewer Provider:** OpenAI is a distinct provider family from the generator (Anthropic Claude).
+### 1. Validation against Independence Policy
+1. **Packet Binding:** Verified. Packet hash `790760708fa3b6da7f0544104de9b3c9c906a6922cf7c8ca6e5a2e7cff28b872` matched the `c724b0c4` release packet exactly.
+2. **Reviewer Provider:** OpenAI (`gpt-6.1-sol-wm`) is a distinct provider family from the generator (Anthropic Claude).
 3. **Fresh Session Requirement:** The review explicitly recorded `"freshSession": false`. Under `docs/REVIEW_INDEPENDENCE_POLICY.md`, this response fails the gate requirement and **cannot constitute independent verification or authorise publication**. It is treated strictly as editorial advisory evidence.
 4. **Key Agreement:** The reviewer found a single defensible answer for all 80 items and agreed with the declared key on 100% of items (80/80).
-5. **Verdicts:** 66 items marked PASS; 14 items marked REVISE (VR: 032; RC: 006, 010, 013, 018, 019, 020, 023, 025, 026, 028, 030, 034, 035).
+5. **Verdicts:** 66 items marked `PASS`; 14 items marked `REVISE` (`vr-032`, `rc-006`, `rc-010`, `rc-013`, `rc-018`, `rc-019`, `rc-020`, `rc-023`, `rc-025`, `rc-026`, `rc-028`, `rc-030`, `rc-034`, `rc-035`).
 
 ---
 
-### Authoritative Primary & Secondary Sources Consulted
-- **Spinifex Botany & Ecology:**
-  - Lazarides, M. (1997). *A revision of Triodia including Plectrachne (Poaceae, Eragrostideae)*. Australian Systematic Botany 10(3): 381-489. DOI: [10.1071/SB96010](https://doi.org/10.1071/SB96010).
-    - *Supporting passage:* Identifies resinous vs non-resinous *Triodia* species, describes leaf anatomy (tight cylindrical curling / involute leaves) reducing wind exposure, and epidermal glandular hairs on leaf sheaths producing aromatic resin.
-  - Gamage, H. K., Mondal, S., Wallis, L. A., Memmott, P., Martin, D. J., Wright, B. R., & Schmidt, S. (2012). *Indigenous and modern biomaterials derived from Triodia ('spinifex') grasslands in Australia*. Australian Journal of Botany 60(2): 114–127. DOI: [10.1071/BT11285](https://doi.org/10.1071/BT11285).
-    - *Supporting passage (pp. 115–118):* Documents that 26 of ~69 *Triodia* species secrete resin from epidermal cells. Resin is composed of volatile and non-volatile terpenoids and waxes, forming a hydrophobic cuticular coating that reduces non-stomatal transpiration during severe arid heat, while bitter secondary metabolites provide chemical and mechanical deterrence against insect herbivores.
-  - Amiralian, N., Annamalai, P. K., Memmott, P., & Martin, D. J. (2015). *Isolation of cellulose nanofibrils from Triodia pungens via different mechanical methods*. Cellulose 22(4): 2483–2498. DOI: [10.1007/s10570-015-0688-x](https://doi.org/10.1007/s10570-015-0688-x).
-    - *Supporting passage:* Isolates nanocellulose fibres from *Triodia pungens* with exceptionally high aspect ratio (often >200:1) and extraordinary tensile strength; demonstrates significant mechanical reinforcement when blended into latex and polymers without adding bulk weight.
-  - *Clarification on Termites:* Erroneous conversational commentary in earlier agent notes mentioned termites harvesting resin for mounds. The actual passage in `content/scholarship-drafts/scholarship-y6-reading-draft.json` contains **zero mentions of termites or termite mounds**. While cathedral termites (*Nasutitermes triodiae*) inhabit spinifex country, they consume grass and do not harvest resin to build mounds. Spinifex resin has only been studied as an *anti-termite* coating for wood. All drafts remain strictly focused on botanical adaptations, First Nations pitch, and nanocellulose biomaterials.
-- **Light Pollution Growth Metrics:**
-  - Kyba, C. C. M., Kuester, T., Sánchez de Miguel, A., Baugh, K., Jechow, A., Hölker, F., Baddiley, J., & Elvidge, C. D. (2017). *Artificially lit surface of Earth at night increasing in radiance and extent*. Science Advances 3(11): e1701528. DOI: [10.1126/sciadv.1701528](https://doi.org/10.1126/sciadv.1701528).
-    - *Supporting passage:* Uses VIIRS satellite DNB radiometry: "Earth’s artificially lit outdoor area grew at a rate of 2.2% per year, and that continuously lit area brightened at a rate of 2.2% per year" from 2012 to 2016.
-  - Kyba, C. C. M., et al. (2023). *Citizen scientists report global rapid reductions in the visibility of stars from 2011 to 2022*. Science 379(6629): 265-268. DOI: [10.1126/science.abq7781](https://doi.org/10.1126/science.abq7781).
-    - *Supporting passage:* Distinguishes satellite radiometry from naked-eye observations, showing human-observed skyglow increasing globally at ~9.6% per year due to blue-rich LEDs.
-  - Rodríguez, A., et al. (2014). *Fatal attraction of short-tailed shearwaters to artificial lights*. PLoS ONE 9(10): e110114. DOI: [10.1371/journal.pone.0110114](https://doi.org/10.1371/journal.pone.0110114).
-    - *Supporting passage:* Documents 8,871 grounded shearwater fledglings on Phillip Island, Victoria, disoriented by coastal roadway lighting during maiden flights.
-- **Historical Navigation & Marine Horology:**
-  - Bowditch, N. *The American Practical Navigator* (Pub. No. 9). National Geospatial-Intelligence Agency.
-    - *Supporting passage:* Details lunar distance procedures requiring simultaneous angular measurement between moon and stars, clearing parallax and refraction, and solving spherical triangles via manual arithmetic taking 30 minutes to several hours.
-  - Andrewes, W. J. H. (ed.) (1996). *The Quest for Longitude*. Collection of Historical Scientific Instruments, Harvard University.
-    - *Supporting passage:* Details Cardan gimbal suspensions keeping chronometers horizontal/level against ship roll/pitch (rather than acting as shock absorbers); documents thermal drift in balance spring elasticity (~11 s/day per °C in uncompensated steel) and corrosion risks to steel balance springs and pivots from damp salt air.
+### 2. Explicit Corrections & Reconciliation of Earlier Report Contradictions (`4e905f5a` and `9fc8285d`)
+
+Earlier intermediate commits (`4e905f5a` and `9fc8285d`) and their accompanying conversational summaries introduced several contradictions against the actual JSON source files and primary scientific literature. All earlier evidence in lines 1–51 above is preserved intact; the explicit corrections below reconcile every discrepancy:
+
+1. **Unsubstantiated Spinifex Resin Function Claims (`4e905f5a` / `9fc8285d` vs Primary Literature):**
+   - *Earlier contradiction:* At baseline `c724b0c4` (Table row 2 above), this document correctly noted that while 26 of 69 *Triodia* species produce resin from outer leaf epidermal cells and harvested resin had been tested as an anti-termite timber coating, *"Nothing found that tests leaf water loss or leaf herbivory directly."* However, commits `4e905f5a` and `9fc8285d` rewrote Paragraph 2 of *Architects of the Spinifex* (`rc-010`–`rc-018`) to assert as botanical fact that spinifex resin *"forms a water-insoluble barrier that reduces water loss from the leaves during extreme heat, while its bitter chemical compounds deter leaf-eating insects"*, attributing this to Lazarides (1997) and Gamage et al. (2012).
+   - *Correction:* Neither Gamage et al. (2012) nor Lazarides (1997) substantiates those in-vivo biological functions for spinifex resin. Water-loss reduction in *Triodia* is accomplished by the tightly rolled cylindrical leaf anatomy sheltering stomatal grooves (Barrett, Anderson & Thiele, 2017), and insect deterrence was investigated only for extracted resin applied as a protective coating on timber against termites (Amiralian et al., 2014). Consequently, the unsupported water-loss and insect-deterrence claims for resin have been **removed** from Paragraph 2 of *Architects of the Spinifex* and replaced strictly with verbatim-supported botanical facts from Gamage et al. (2012, p. 114) and Barrett, Anderson & Thiele (2017). Dependent item `rc-010` was revised to test what distinguishes the 26 resin-producing *Triodia* species from hard-leaved species.
+2. **Misreported Answer Keys for `vr-032` and `rc-006` in Earlier Report Text:**
+   - *Earlier contradiction:* In `4e905f5a` and `9fc8285d`, the narrative summary in this file stated that `vr-032` had key `a` and `rc-006` had key `d`.
+   - *Correction:* In the actual JSON source files (`content/scholarship-drafts/scholarship-y6-verbal-draft.json` and `scholarship-y6-reading-draft.json`) across **all** commits (`c724b0c4`, `4e905f5a`, `9fc8285d`, and final `HEAD`), `vr-032` has always had **`correctOptionId: "c"`** and `rc-006` has always had **`correctOptionId: "b"`**.
+3. **Misquoted Baseline (`c724b0c4`) Stem and Options for `rc-010`, `rc-013`, and `rc-018` in Earlier Conversational Notes:**
+   - *Earlier contradiction:* Earlier conversational summaries quoted `rc-010`'s baseline stem as *"Why do some spinifex species produce a sticky resin on their leaves?"* and falsely described `rc-013` and `rc-018` as items about termites harvesting resin or Indigenous resin extraction.
+   - *Correction:* In the actual source at `c724b0c4`, `rc-010`'s stem was `"According to paragraph 2, how might the resin help spinifex survive?"` (`key: c`, `"It may cut water loss and put insects off the leaves."`); `rc-013` asked `"Why are nanotechnology researchers interested in spinifex nanofibres?"` (`key: d`, `"They add strength and flexibility without adding much weight."`); and `rc-018` asked `"In paragraph 4, the phrase 'high aspect ratio' describes fibres that are:"` (`key: c`, `"very long compared with their width"`). Neither the passage nor any question in `scholarship-y6-reading-draft.json` has ever mentioned termites.
+4. **Removal of Absolute Giveaway Words & Artificial Option-Length Padding (`4e905f5a` / `9fc8285d`):**
+   - *Earlier contradiction:* In `4e905f5a` and `9fc8285d`, distractors in `rc-019` (`only`, `entirely`, `exclusively`, `inevitably`), `rc-034` (`only`, `cannot`), and several other revised items (`rc-013`, `rc-018`, `rc-020`, `rc-023`, `rc-025`, `rc-026`, `rc-028`, `rc-030`, `rc-035`) relied on categorical/absolute giveaway wording or were artificially padded to match character counts within a few characters (e.g., all five options in `rc-018` forced to 50–51 characters).
+   - *Correction:* All revised items (`rc-006`, `rc-010`, `rc-013`, `rc-018`, `rc-019`, `rc-020`, `rc-023`, `rc-025`, `rc-026`, `rc-028`, `rc-030`, `rc-034`, `rc-035`) were re-audited and rewritten with natural, non-absolute distractors of unforced length. Across all 13 revised Reading items, **0 of 13** have the correct answer as the single longest option (and across all 35 Reading items, the key is longest in only **6 of 35**, down from 14 at `c724b0c4`, with maximum key-to-mean-distractor ratio `1.45` on `rc-033`).
+5. **Visibility of the 43 Verbal/Reading Difficulty Estimator Conflicts:**
+   - The 43 text-length difficulty estimator conflicts in Verbal Reasoning (27 of 45) and Reading Comprehension (16 of 35) are explicitly reported alongside external-review status and the 35 Numerical Reasoning (14) and Mathematics (21) difficulty conflicts (78 total estimator conflicts across the 160 items).
 
 ---
 
-### Item-by-Item Disposition of all 14 Advisory Findings
+### 3. Verbatim Primary Source Excerpts & Page/Section References
 
-1. **scholarship-y6-vr-032**
-   - *Reviewer Finding:* Present tense conditional ("runs", "is wet") mismatched past tense conclusion ("did not run").
-   - *Independent Assessment:* Accepted. A temporal mismatch creates technical ambiguity in formal logic.
-   - *Action:* Aligned conditional, premise, and conclusion to consistent time frames: "If the sprinklers were turned on this morning, the grass is wet now. The grass is not wet now. Therefore, the sprinklers were not turned on this morning."
-   - *Solver & Key:* Retained key `a`. Sidecar solver updated and verified: `solveSyllogism` proves modus tollens deduction.
+1. **Gamage, H. K., Mondal, S., Wallis, L. A., Memmott, P., Martin, D. J., Wright, B. R., & Schmidt, S. (2012).** *Indigenous and modern biomaterials derived from Triodia ('spinifex') grasslands in Australia*. **Australian Journal of Botany**, 60(2), 114–127. DOI: `https://doi.org/10.1071/BT11285`
+   - **Location:** Page 114, Abstract.
+   - **Verbatim Excerpt:**
+     > *"Triodia grasslands are a dominant vegetation type in the arid and semiarid regions of Australia covering a third of the continent. Of the 69 identified Triodia species, 26 produce resin from specialised cells in the outer leaf epidermis. In Aboriginal culture, Triodia biomass and resin were valued for their usefulness in cladding shelters and as a hafting agent."*
+   - **What it supports:** Supports Paragraph 2 of *Architects of the Spinifex* (`rc-010`–`rc-018`) and `rc-010`: 26 of the 69 identified *Triodia* species produce resin from specialised cells in the outer leaf epidermis, and First Nations peoples used *Triodia* resin as a hafting adhesive.
 
-2. **scholarship-y6-rc-006**
-   - *Reviewer Finding:* Key option b asserted "nobody moves", but the passage describes silence ("neither person spoke") and the dinghy drifting and turning.
-   - *Independent Assessment:* Accepted. Immobility was contradicted by the dinghy turning and Maya lifting field glasses.
-   - *Action:* Replaced option d with: "By describing a long, quiet wait before the osprey suddenly dives". Retained key `d`.
-   - *Distractors & Balancing:* Distractor lengths (68-74 chars) balanced with key. Explanation updated.
+2. **Barrett, M. D., Anderson, B. M., & Thiele, K. R. (2017).** *SPIKEY: An interactive key to Triodia spinifex grasses of the Pilbara, Western Australia* (Version 1, May 2017). Western Australian Herbarium, Department of Biodiversity, Conservation and Attractions / LucidCentral. URL: `https://keys.lucidcentral.org/keys/v3/spikey/key/Triodia_Pilbara/Media/Html/phylogeny.htm`
+   - **Location:** Section "Phylogeny and species-groups", paragraphs 1–2 and anatomical figure caption.
+   - **Verbatim Excerpt:**
+     > *"The Soft group contains all those species with epistomatous (soft-type) leaf anatomy (read more about Triodia leaf anatomy here). Species in the Soft group are often resinous. Any resinous Triodia belongs to the Soft group, but a few Soft species do not develop resin. The other two groups contain species with amphistomatous (hard-type), rigid, needle-like leaves, and never have resin."*
+     > *"Section through an epistomatous (soft-type) leaf blade, characteristic of the Soft group, showing stomatal grooves restricted to the central part of the lower surface, while outer parts are thickened by collapsible water-storage tissue."*
+   - **What it supports:** Supports Paragraph 2 of *Architects of the Spinifex* (`rc-010`–`rc-018`) and `rc-010`/`rc-017`: resin-producing *Triodia* species belong to the softer-leaved group, whereas hard-leaved species have rigid, needle-like blades and never produce resin; tightly curled leaf blades shelter stomatal grooves to limit evaporative water loss.
 
-3. **scholarship-y6-rc-010**
-   - *Reviewer Finding:* Passage attributed resin functions to unnamed researchers without botanical grounding; hedging alone insufficient.
-   - *Independent Assessment:* Accepted. Grounded in Lazarides (1997) and Gamage et al. (2012).
-   - *Passage Action:* Stimulus updated to state that botanical studies show the hydrophobic coating forms a water-insoluble barrier reducing non-stomatal water loss during extreme heat, while bitter compounds deter insect herbivores.
-   - *Question Action:* Stem and options updated to test biological functions: "It forms a hydrophobic seal that limits water loss" (key `c`). Distractors reflect genuine ecological concepts (germination, root anchoring, pollination, dew absorption) with matched lengths (53-57 chars).
+3. **Amiralian, N., Annamalai, P. K., Memmott, P., & Martin, D. J. (2015).** *Isolation of cellulose nanofibrils from Triodia pungens via different mechanical methods*. **Cellulose**, 22(4), 2483–2498. DOI: `https://doi.org/10.1007/s10570-015-0688-x`
+   - **Location:** Page 2483, Abstract; Page 2497, Reference CR11 (`Amiralian et al., 2014`, DOI `https://doi.org/10.1016/j.indcrop.2014.04.045`).
+   - **Verbatim Excerpt:**
+     > *"Triodia pungens is one of the 69 species of an Australian native arid grass which covers approximately 27 % of the Australian landmass. In this study, we report that very long and thin cellulose nanofibrils can readily be isolated from Triodia pungens biomass using unrivalled mild chemical pulping, followed by several mechanical fibrillation methods... Cellulose nanofibrils with an average diameter of below 10 nm and a length of several microns were obtained... The sheets produced from high aspect ratio nanofibrils prepared by high pressure homogenization, also demonstrated a very high work at fracture."*
+     > *(Reference CR11, p. 2497):* *"Amiralian N, Annamalai PK, Fitzgerald C, Memmott P, Martin DJ (2014) Optimisation of resin extraction from an Australian arid grass 'Triodia pungens' and its preliminary evaluation as an anti-termite timber coating. Ind Crops Prod 59:241–247"*
+   - **What it supports:** Supports Paragraph 4 of *Architects of the Spinifex* and items `rc-013` and `rc-018` (very long, thin cellulose nanofibrils with high aspect ratio and high mechanical toughness/work at fracture). Reference CR11 confirms that anti-termite testing was solely an evaluation of extracted resin as a timber coating.
 
-4. **scholarship-y6-rc-013**
-   - *Reviewer Finding:* Key copied passage phrase; distractors were weak/contradicted. Reviewer recommended converting to application question.
-   - *Independent Assessment:* Partially accepted. Distractor quality and option length needed improvement, but converting a valid factual retrieval question to an application question was rejected (per user rule preserving legitimate comprehension questions).
-   - *Action:* Retained factual retrieval skill (`rc-factual-retrieval`). Replaced weak distractors with plausible material property trade-offs (cure rate, waterproofing/fireproofing, latex replacement, crack heat/electrical conduction).
-   - *Key & Balancing:* Key retained as `d` ("They improve strength and flexibility without adding significant weight."). All options balanced to 68-72 chars.
+4. **Kyba, C. C. M., Kuester, T., Sánchez de Miguel, A., Baugh, K., Jechow, A., Hölker, F., Baddiley, J., & Elvidge, C. D. (2017).** *Artificially lit surface of Earth at night increasing in radiance and extent*. **Science Advances**, 3(11), e1701528. DOI: `https://doi.org/10.1126/sciadv.1701528` (PMID: `29181445`)
+   - **Location:** Page 1, Abstract.
+   - **Verbatim Excerpt:**
+     > *"We use the first-ever calibrated satellite radiometer designed for night lights to show that from 2012 to 2016, Earth's artificially lit outdoor area grew by 2.2% per year, with a total radiance growth of 1.8% per year. Continuously lit areas brightened at a rate of 2.2% per year."*
+   - **What it supports:** Supports Paragraph 1 of *In Defence of the Dark* (`rc-019`–`rc-027`): global satellite measurements from 2012 to 2016 showed Earth's artificially lit outdoor area expanded by over two per cent per year (2.2% per year).
 
-5. **scholarship-y6-rc-018**
-   - *Reviewer Finding:* Technical term 'high aspect ratio' immediately glossed as long and thin; distractors unrelated to dimensional ratios.
-   - *Independent Assessment:* Accepted in part. Selected dimensional ratio interpretations over numerical arithmetic pairs to preserve the vocabulary-in-context skill.
-   - *Action:* Replaced distractors with authentic geometric/dimensional ratios (surface-to-volume/spherical, mass-density, cubic symmetry, tapering).
-   - *Key & Balancing:* Key retained as `c` ("a great length in proportion to their narrow width"). All 5 options strictly balanced to 51 characters.
+5. **Rodríguez, A., Burgan, G., Dann, P., Jessop, R., Negro, J. J., & Chiaradia, A. (2014).** *Fatal attraction of short-tailed shearwaters to artificial lights*. **PLOS ONE**, 9(10), e110114. DOI: `https://doi.org/10.1371/journal.pone.0110114`
+   - **Location:** Page 1, Abstract.
+   - **Verbatim Excerpt:**
+     > *"Here, we report on the number of fledging short-tailed shearwaters Ardenna tenuirostris found grounded in evening and morning rescue patrols conducted at Phillip Island, Australia, during a 15-year period (1999–2013)... Of 8871 fledglings found, 39% were dead or dying... Turning the road lights off decreased the number of grounded birds (dead and alive)."*
+   - **What it supports:** Supports Paragraph 2 of *In Defence of the Dark* (`rc-019`–`rc-027`): fledgling short-tailed shearwaters on Phillip Island are disoriented and grounded by coastal artificial lighting.
 
-6. **scholarship-y6-rc-019**
-   - *Reviewer Finding:* Key unique, but distractors were extreme straw positions ("switch off all lights", "move wildlife away for good"). Passage 2% growth lacked metric/period/region.
-   - *Independent Assessment:* Accepted.
-   - *Passage Action:* Passage updated to cite global satellite measurements (2012-2016) showing Earth's artificially lit outdoor area expanded by over 2% annually.
-   - *Question Action:* Replaced non-competing straw statements with genuine plausible competing summaries of the whole passage (total blackout ban, cultural loss without practical remedy, reserve-only astronomy, economic fatalism). Key retained as `e` ("Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it."). All options balanced to 96-103 chars.
-
-7. **scholarship-y6-rc-020**
-   - *Reviewer Finding:* Distractors regarding amber cameras, police floodlights and country criminals lacked textual plausibility.
-   - *Independent Assessment:* Accepted.
-   - *Action:* Replaced distractors with credible rhetorical purposes (blanket streetlight bans, electricity costs vs crime reduction, surveillance cameras, police mandate). Key retained as `b` ("To question the assumption that increasing illumination always improves public safety"). All options balanced (78-87 chars).
-
-8. **scholarship-y6-rc-023**
-   - *Reviewer Finding:* Key repeated proposed fixture change; distractors were extreme straw policies.
-   - *Independent Assessment:* Accepted.
-   - *Action:* Provided realistic municipal lighting design options (wider pole dispersal, blue-white LEDs for motorists, midnight road cutoffs, motion-activated floodlights).
-   - *Key & Balancing:* Key retained as `b` ("Fitting shielded fixtures that direct illumination downward onto footpaths"). All options balanced to 69-74 chars.
-
-9. **scholarship-y6-rc-025**
-   - *Reviewer Finding:* Distractors were implausibly absolute ("crime is normal", "stay indoors", "police carry torches", "darkness never linked to crime").
-   - *Independent Assessment & Overlap Resolution:* Reassessed for overlapping answers. Replaced overlapping/redundant distractor wording with 5 mutually exclusive, distinct policy positions (sacrificing safety for wildlife, midnight road curfews, asserting lighting has zero impact on accidents, personal handheld torches vs targeted fixtures). Kept key `e` ("By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky"). Lengths balanced to 89-99 chars.
-
-10. **scholarship-y6-rc-026**
-    - *Reviewer Finding:* GPS superiority, explorer criticism and departmental funding distractors were weak.
-    - *Independent Assessment:* Accepted.
-    - *Action:* Replaced with plausible literary/rhetorical functions of cultural references (maritime history, outback vs coastal sky contrast, astronomical desert mapping, traditional celestial terminology).
-    - *Key & Balancing:* Key retained as `e` ("highlight that the disappearing night sky carries a deep cultural cost for society"). All options balanced to 80-85 chars.
-
-11. **scholarship-y6-rc-028**
-    - *Reviewer Finding:* Options alleging Admiralty ban north of equator and chronometers working only on this route were implausible.
-    - *Independent Assessment:* Accepted.
-    - *Action:* Replaced with genuine 19th-century maritime trade-offs (calmer swells/hull wear, scheduled island resupply, equatorial trade winds, shallow coastal shelter).
-    - *Key & Balancing:* Key retained as `a` ("Relentless westerly winds allowed vessels to reach high speeds, cutting weeks off the voyage."). All options balanced to 91-93 chars.
-
-12. **scholarship-y6-rc-030**
-    - *Reviewer Finding:* Chronometer failure claims and salt-air corrosion needed qualification; gimbals described imprecisely as buffering tossing rather than maintaining horizontal orientation.
-    - *Independent Assessment:* Accepted.
-    - *Passage Action:* Passage updated: gimbals "mounted in gimbals to keep them level amid the pitching sea"; cold "altered their daily rate of gain or loss"; damp salt air "threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases".
-    - *Question Action:* Options updated to plausible mechanical/horological failure mechanisms (polar magnetic variation, gimbal gear dislodgement, barometric vacuum chambers, rolling friction). Key retained as `b`. Options balanced to 77-87 chars.
-
-13. **scholarship-y6-rc-034**
-    - *Reviewer Finding:* Distractors were implausible; hours-of-calculation claim needed qualification.
-    - *Independent Assessment:* Accepted.
-    - *Passage Action:* Passage qualified: "painstaking spherical trigonometry that could take up to several hours of manual arithmetic".
-    - *Question Action:* Replaced implausible options with authentic historical limitations distinguishing observation conditions (daylight crossing), timekeeping dependence (mechanical clock verification), calculation scope (latitude only), and operational environment (sheltered harbours). Key synthesizes requirements without parroting: "It required unobstructed celestial sightings alongside hours of demanding calculations." (key `e`). Options balanced to 83-88 chars.
-
-14. **scholarship-y6-rc-035**
-    - *Reviewer Finding:* Distractors contained categorical giveaway words ("always", "anywhere", "impossible", "luck"), making the balanced key obvious.
-    - *Independent Assessment:* Accepted.
-    - *Action:* Rewrote all distractors with equal qualification, dignified scope, and historical plausibility (technological elimination of uncertainty, dead reckoning unreliability in gales, lunar distance dominance in 1850s, flawed charting vs weather).
-    - *Key & Balancing:* Key retained as `a` ("Safe completion of the voyage depended on human skill and judgement alongside mechanical tools."). Options balanced to 95-97 chars.
+6. **Bowditch, N. (2002 / 2019 ed., orig. 1802).** *The American Practical Navigator* (Pub. No. 9). National Imagery and Mapping Agency / National Geospatial-Intelligence Agency. URLs: `https://en.wikisource.org/wiki/The_American_Practical_Navigator/Chapter_1` & `https://en.wikisource.org/wiki/The_American_Practical_Navigator/Chapter_18`
+   - **Location:** Chapter 1, Section 109 ("The Navigational Triangle") & Chapter 18, Section 1807 ("Chronometer Time").
+   - **Verbatim Excerpts:**
+     > *(Ch. 1, §109):* *"A spherical triangle was first used at sea in solving lunar distance problems. Simultaneous observations were made of the altitudes of the Moon and the Sun or a star near the ecliptic and the angular distance between the Moon and the other body... Using a mathematical calculation the navigator 'cleared' this distance of the effects of refraction and parallax applicable to each altitude... The calculations involved were tedious. Few mariners could solve the triangle until Nathaniel Bowditch published his simplified method in 1802 in The New American Practical Navigator."*
+     > *(Ch. 18, §1807):* *"Since a chronometer is set approximately to GMT and not reset until it is overhauled and cleaned about every 3 years, there is nearly always a chronometer error (CE), either fast (F) or slow (S). The change in chronometer error in 24 hours is called chronometer rate, or daily rate, and designated gaining or losing."*
+   - **What it supports:** Supports Paragraph 3 of *Charting the Roaring Forties* (`rc-028`–`rc-035`) and items `rc-030` and `rc-034`: chronometers exhibit a daily rate of gain or loss, and the lunar distance method required simultaneous celestial sightings and lengthy spherical trigonometry calculations to clear parallax and refraction.
 
 ---
 
-### Passage Dependants & Release Package Integrity
-- **Updated Shared Stimuli:**
-  - *Architects of the Spinifex*: paragraph 2 revised across all 9 questions (`rc-010` to `rc-018`).
-  - *In Defence of the Dark*: paragraph 1 revised across all 9 questions (`rc-019` to `rc-027`).
-  - *Charting the Roaring Forties*: paragraph 3 revised across all 8 questions (`rc-028` to `rc-035`).
-  - *The Estuary Watchers*: stimulus unchanged; `rc-006` option text updated.
-- **Answer Distributions:** Unchanged across all sections (VR: 9 each of a, b, c, d, e; RC: a:7, b:8, c:8, d:5, e:7).
-- **Candidate Pins:** All 160 identities recomputed and pinned in `src/features/question-factory/correctness/scholarship-identity-pins.json` (132 unchanged; exactly 28 pins changed corresponding strictly to revised items and shared stimulus dependants).
-- **Regenerated External Packet:**
-  - Regenerated at `docs/reviews/scholarship-2026-10-18/external-review/packet.txt`.
-  - New SHA-256: `81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc`.
-  - Synced to `c:\tmp\scholarship-handoff\external-review\`.
-  - Machine verification tests `src/tests/unit/scholarship-release-package.test.ts`, `scholarship-release-candidate.test.ts`, and `scholarship-strict-assembly.test.ts` pass (55/55).
+### 4. Machine-Verified Disposition of All 14 Flagged Items
+
+1. **`scholarship-y6-vr-032`** (`key: c`, `vr-sentence-logic`, `medium`, `40s`)
+   - *Reviewer Finding:* Present-tense conditional (`"runs"`, `"is wet"`) mismatched past-tense conclusion (`"did not run"`).
+   - *Disposition:* **Accepted.** Aligned conditional, premise, and conclusion to a single consistent time frame (`"If the garden sprinkler ran this morning, the lawn is wet now. / The lawn is NOT wet now."` -> key `c`: `"The garden sprinkler did not run this morning."`, 46 chars; distractors 28–48 chars). Sidecar `correctValue` updated to match. Key remains `c`.
+2. **`scholarship-y6-rc-006`** (`key: b`, `rc-authorial-craft`, `medium`, `50s`)
+   - *Reviewer Finding:* Key `b` asserted `"nobody moves"`, which went beyond the passage (`"neither person spoke"` while the dinghy drifted and turned and Maya lifted field glasses).
+   - *Disposition:* **Accepted.** Replaced `"in which nobody moves"` in option `b` with `"before the sudden dive"` (`"By describing a long, silent wait before the sudden dive"`, 56 chars; distractors 52–64 chars). Key remains `b`.
+3. **`scholarship-y6-rc-010`** (`key: c`, `rc-factual-retrieval`, `easy`, `45s`)
+   - *Reviewer Finding:* Spinifex resin claims in Paragraph 2 were unsubstantiated by botanical literature; hedging alone was insufficient.
+   - *Disposition:* **Accepted.** Removed the unsupported water-loss and insect-deterrence claims for resin from Paragraph 2 of *Architects of the Spinifex* (`rc-010`–`rc-018`) and replaced them with verbatim-sourced facts from Gamage et al. (2012, p. 114) and Barrett et al. (2017). Revised `rc-010` to ask `"According to paragraph 2, what distinguishes the twenty-six resin-producing Triodia species from hard-leaved species?"` with key `c` (`"They belong to a softer-leaved group with resin-secreting outer leaf cells."`, 75 chars; distractors 62–79 chars).
+4. **`scholarship-y6-rc-013`** (`key: d`, `rc-factual-retrieval`, `easy`, `45s`)
+   - *Reviewer Finding:* Key echoed passage wording; distractors were weak. Reviewer suggested converting to an application question.
+   - *Disposition:* **Partially accepted.** Rejected converting the skill away from `rc-factual-retrieval` (preserving legitimate literal-comprehension testing and paper balance), but updated key `d` (`"They improve strength and flexibility without adding significant weight."`, 72 chars) and replaced weak distractors with realistic materials-engineering alternatives without absolute words (`62–75` chars). Key remains `d`.
+5. **`scholarship-y6-rc-018`** (`key: c`, `rc-vocabulary-context`, `easy`, `45s`)
+   - *Reviewer Finding:* Distractors were unrelated to dimensional ratios.
+   - *Disposition:* **Accepted.** Replaced distractors with plausible dimensional/physical ratio interpretations (`43–52` chars) while updating key `c` (`"a great length in proportion to their narrow width"`, 50 chars).
+6. **`scholarship-y6-rc-019`** (`key: e`, `rc-main-idea`, `easy`, `50s`)
+   - *Reviewer Finding:* Distractors were extreme straw positions; passage's `"two per cent or more each year"` lacked metric, period, and geography.
+   - *Disposition:* **Accepted.** Updated Paragraph 1 of *In Defence of the Dark* (`rc-019`–`rc-027`) to cite global satellite measurements from 2012 to 2016 showing Earth's artificially lit outdoor area expanded by over two per cent each year (Kyba et al., 2017). Rewrote all four distractors of `rc-019` as plausible, non-absolute competing main-idea summaries (`74–91` chars; key `e` is `"Light pollution harms wildlife and culture, but thoughtful design can reduce it."`, 80 chars).
+7. **`scholarship-y6-rc-020`** (`key: b`, `rc-authorial-craft`, `medium`, `50s`)
+   - *Reviewer Finding:* Distractors (amber cameras, police floodlights, country criminals) lacked textual plausibility.
+   - *Disposition:* **Accepted.** Rewrote distractors as plausible rhetorical purposes (`70–82` chars; key `b` is `"To challenge the belief that brighter lighting automatically makes places safer"`, 79 chars) without absolute words.
+8. **`scholarship-y6-rc-023`** (`key: b`, `rc-factual-inference`, `easy`, `45s`)
+   - *Reviewer Finding:* Distractors were implausible municipal policies.
+   - *Disposition:* **Accepted.** Replaced distractors with realistic municipal lighting proposals (`65–73` chars; key `b` is `"Fitting hooded fixtures that direct light downward onto footpaths"`, 65 chars).
+9. **`scholarship-y6-rc-025`** (`key: e`, `rc-argument-evaluation`, `medium`, `50s`)
+   - *Reviewer Finding:* Distractors were implausibly absolute; required reassessment for overlapping options.
+   - *Disposition:* **Accepted.** Audited all 5 options for mutual exclusivity and non-absolute wording (`74–91` chars; key `e` is `"By explaining that shielded fixtures can light footpaths clearly without harsh glare"`, 84 chars).
+10. **`scholarship-y6-rc-026`** (`key: e`, `rc-authorial-craft`, `easy`, `50s`)
+    - *Reviewer Finding:* Distractors (GPS accuracy, explorer criticism, astronomy funding) were weak.
+    - *Disposition:* **Accepted.** Replaced with plausible rhetorical purposes (`65–82` chars; key `e` is `"show that losing the night sky to skyglow carries a deep cultural cost"`, 70 chars) without absolute words.
+11. **`scholarship-y6-rc-028`** (`key: a`, `rc-factual-retrieval`, `easy`, `45s`)
+    - *Reviewer Finding:* Admiralty ban and chronometer-latitude distractors were implausible.
+    - *Disposition:* **Accepted.** Replaced distractors with realistic 19th-century maritime factors (`70–88` chars; key `a` is `"Strong westerly winds enabled ships to sail much faster, shortening the voyage."`, 79 chars).
+12. **`scholarship-y6-rc-030`** (`key: b`, `rc-factual-retrieval`, `easy`, `45s`)
+    - *Reviewer Finding:* Passage needed accurate gimbal description (keeping chronometers level) and qualified chronometer rate/corrosion claims.
+    - *Disposition:* **Accepted.** Updated Paragraph 3 of *Charting the Roaring Forties* (`rc-028`–`rc-035`) to state that chronometers were *"mounted in gimbals to keep them level amid the pitching sea"*, that cold *"altered their daily rate of gain or loss"*, and that damp, salt-laden air *"threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases"*. Rewrote options of `rc-030` (`71–84` chars; key `b` is `"Bitter cold altered their daily rates and damp salt air could rust fine parts."`, 78 chars) without absolute markers.
+13. **`scholarship-y6-rc-034`** (`key: e`, `rc-factual-inference`, `easy`, `50s`)
+    - *Reviewer Finding:* Distractors relied on implausible/absolute claims; hours-of-calculation claim in passage needed qualification.
+    - *Disposition:* **Accepted.** Qualified Paragraph 3 of *Charting the Roaring Forties* (`"painstaking spherical trigonometry that could take up to several hours of manual arithmetic"`). Rewrote `rc-034` distractors (`69–82` chars; key `e` is `"It needed clear sightings of the moon and stars and hours of calculation."`, 73 chars) so every distractor states a plausible historical/technical limitation without any categorical giveaway words (`only`, `cannot`, `never`, `always`).
+14. **`scholarship-y6-rc-035`** (`key: a`, `rc-factual-inference`, `medium`, `60s`)
+    - *Reviewer Finding:* Distractors used categorical giveaways (`"always"`, `"anywhere"`, `"impossible"`, `"luck"`).
+    - *Disposition:* **Accepted.** Rewrote all four distractors as measured, non-absolute historical interpretations (`76–93` chars; key `a` is `"Reaching port safely required experienced seamanship alongside mechanical instruments."`, 86 chars).
+
+---
+
+### 5. Complete Readiness & Difficulty Estimator Conflict Breakdown (All 160 Items)
+
+| Section | Total Items | `ready_for_review` (Passes All Machine Gates) | `requires_revision_or_decision` (Blocked by Difficulty Estimator) | `awaiting_external_evidence` (Quarantined at Semantic Gate) | Difficulty Estimator `passes` | Difficulty Estimator `blocked_deviation` |
+|---|---:|---:|---:|---:|---:|---:|
+| **Numerical Reasoning (`nr`)** | 40 | 26 | **14** | 0 | 26 | **14** (`nr-003, 004, 005, 007, 008, 009, 010, 012, 021, 026, 030, 031, 035, 038`) |
+| **Mathematics (`maths`)** | 40 | 19 | **21** | 0 | 19 | **21** (`maths-002, 003, 008, 010, 012, 017, 019, 020, 021, 022, 023, 025, 026, 027, 029, 031, 032, 033, 035, 037, 039`) |
+| **Verbal Reasoning (`vr`)** | 45 | 0 | 0 *(quarantined prior to difficulty gate)* | **45** | 18 | **27** (`vr-003, 004, 005, 006, 010, 011, 012, 014, 015, 018, 019, 020, 021, 022, 023, 024, 025, 027, 028, 029, 030, 031, 035, 038, 039, 041, 042`) |
+| **Reading (`rc`)** | 35 | 0 | 0 *(quarantined prior to difficulty gate)* | **35** | 19 | **16** (`rc-004, 008, 010, 013, 015, 016, 017, 018, 019, 022, 023, 026, 028, 030, 031, 034`) |
+| **Total** | **160** | **45** | **35** | **80** | **82** | **78** *(35 NR/Maths + **43 VR/RC**)* |
+
+- **Regenerated External Review Packet (`docs/reviews/scholarship-2026-10-18/external-review/packet.txt`):**
+  - Final SHA-256: `5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198`
+  - Synced to `C:\tmp\scholarship-handoff\external-review\`.
+
+

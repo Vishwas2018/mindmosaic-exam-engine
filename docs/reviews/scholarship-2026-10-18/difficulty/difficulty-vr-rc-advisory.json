@@ -30,7 +30,7 @@
     "scholarship-y6-vr-042": { "label": "medium", "confidence": "medium", "recommendation": "keep", "rationale": "Two examples must be combined to read an unfamiliar substitution; no single shift." },
     "scholarship-y6-rc-004": { "label": "easy", "confidence": "high", "recommendation": "keep", "rationale": "Answer is stated: the young fish 'sought sanctuary'." },
     "scholarship-y6-rc-008": { "label": "medium", "confidence": "low", "recommendation": "relabel_medium", "rationale": "Tone has to be inferred across the whole passage." },
-    "scholarship-y6-rc-010": { "label": "easy", "confidence": "high", "recommendation": "keep", "rationale": "Literal retrieval from paragraph 2 (now with tentative wording)." },
+    "scholarship-y6-rc-010": { "label": "easy", "confidence": "high", "recommendation": "keep", "rationale": "Literal retrieval from paragraph 2." },
     "scholarship-y6-rc-013": { "label": "easy", "confidence": "high", "recommendation": "keep", "rationale": "Literal retrieval." },
     "scholarship-y6-rc-015": { "label": "medium", "confidence": "medium", "recommendation": "keep", "rationale": "Requires linking the root-network sentence to a consequence not stated outright." },
     "scholarship-y6-rc-016": { "label": "medium", "confidence": "low", "recommendation": "relabel_medium", "rationale": "Summarising the author's view from a closing sentence needs a little abstraction." },

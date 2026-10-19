@@ -4,7 +4,7 @@ Work in this order for EVERY item in the packet that follows: solve it yourself 
 
 Reply with ONE JSON object and nothing else (no commentary, no markdown fences), covering all 80 items, in exactly this shape:
 {
-  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "81b681d60f68e9eff4a80139750434825ba554d9ed9ddfde3329b17a7ca795dc" },
+  "reviewer": { "provider": "<the company that made you, as the product shows it>", "model": "<your exact model name as the product shows it>", "date": "YYYY-MM-DD", "freshSession": true, "packetSha256": "5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198" },
   "items": [ { "id": "scholarship-y6-vr-001", "myAnswer": "a|b|c|d|e|none", "reasoning": "one or two sentences", "singleDefensibleAnswer": true, "issues": "ambiguity, factual error, copied-sentence key, weak distractors, or an empty string", "difficulty": "easy|medium|challenging", "verdict": "PASS|REVISE|REJECT", "fix": "a precise fix if REVISE or REJECT, otherwise an empty string" } ]
 }
 
@@ -766,7 +766,7 @@ How does the author build suspense while the osprey waits to strike?
 
 Options:
 a) By describing the osprey circling the dinghy before it dives
-b) By describing a long, quiet wait before the osprey suddenly dives
+b) By describing a long, silent wait before the sudden dive
 c) By having Grandfather warn Maya that the dive could be dangerous
 d) By comparing the osprey to a hunter stalking its prey
 e) By switching quickly between the osprey and the fish
@@ -818,7 +818,7 @@ e) Maya and her grandfather often argue, so they use signs to avoid talking.
 PASSAGE: Architects of the Spinifex
 Across the arid interior of Australia, hummock grasslands dominated by species of spinifex (Triodia) form one of the continent's most resilient biomes. Surviving where few other plants can endure, spinifex thrives across nutrient-impoverished dune fields and rocky ranges subjected to scorching heat and prolonged drought. As individual hummocks mature, their centres die away to create expanding rings that trap blowing leaf litter, nourishing the surrounding soil. The secret to this tenacity lies in the plant's remarkable anatomical and biochemical adaptations.
 
-Spinifex leaves are long, slender, and curled into tight cylinders, which drastically reduces the surface area exposed to evaporating winds. More importantly, botanical studies show that many species secrete a viscous, aromatic resin from epidermal glands across their leaf sheaths. This hydrophobic coating of terpenoids and waxes forms a water-insoluble barrier that helps reduce non-stomatal water loss during extreme heat, while the sticky, bitter compounds deter insect herbivores from feeding on the foliage. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.
+Spinifex leaves are long, slender, and curled into tight cylinders that shelter their breathing pores inside deep grooves, drastically reducing the surface area exposed to evaporating winds. Furthermore, of the sixty-nine identified Triodia species, twenty-six belong to a softer-leaved group that secretes a viscous, aromatic resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin at all. In the sandy soil, widespread root networks lock down loose dunes, preventing severe wind erosion and anchoring the fragile desert floor.
 
 For tens of thousands of years, First Nations peoples have recognised the extraordinary usefulness of this natural substance, and many still draw on that knowledge today. By threshing spinifex hummocks over flat rocks and gently warming the gathered residue, Indigenous toolmakers produced a thermoplastic adhesive known as spinifex pitch. When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement used to bind stone flakes to wooden spear shafts and haft stone axes.
 
@@ -828,14 +828,14 @@ Today, modern materials scientists are investigating spinifex from a new perspec
 ID: scholarship-y6-rc-010
 
 Question:
-According to paragraph 2, what biological functions does the spinifex resin serve?
+According to paragraph 2, what distinguishes the twenty-six resin-producing Triodia species from hard-leaved species?
 
 Options:
-a) It attracts desert insects that carry pollen between plants.
-b) It reflects harsh sunlight to keep interior stems cool.
-c) It helps reduce water loss and deters insect herbivores.
-d) It anchors widespread root networks into loose desert sand.
-e) It helps fallen leaf litter break down into topsoil nutrients.
+a) Their roots spread through clay soils rather than loose desert sand.
+b) Their leaves remain flat and open to capture morning moisture.
+c) They belong to a softer-leaved group with resin-secreting outer leaf cells.
+d) They store aromatic resin inside hollow stems beneath the soil surface.
+e) Their breathing pores sit on the outer leaf surface instead of in deep grooves.
 
 ------------------------------------------------------------------------
 
@@ -874,8 +874,8 @@ Why are nanotechnology researchers interested in adding spinifex nanofibres to m
 
 Options:
 a) They allow concrete and rubber to set much faster during manufacturing.
-b) They make synthetic polymers completely waterproof and fire-resistant.
-c) They reduce the total cost of production by replacing all raw latex.
+b) They make synthetic polymers waterproof and resistant to high temperatures.
+c) They lower production costs by replacing natural rubber latex.
 d) They improve strength and flexibility without adding significant weight.
 e) They prevent microscopic cracks from conducting heat or electricity.
 
@@ -943,11 +943,11 @@ Question:
 In paragraph 4, the phrase 'high aspect ratio' describes fibres that have:
 
 Options:
-a) a large surface area curled into a spherical shape
-b) a very high density relative to their total volume
+a) a wide surface area curved into a hollow tube
+b) a high density compared with their overall volume
 c) a great length in proportion to their narrow width
-d) an equal measurement across length, width and depth
-e) a steep taper that narrows sharply from base to tip
+d) equal dimensions across length, width, and thickness
+e) a sharp taper that narrows from base to tip
 
 ------------------------------------------------------------------------
 
@@ -967,11 +967,11 @@ Question:
 What is the main argument of 'In Defence of the Dark'?
 
 Options:
-a) Urban artificial lighting should be phased out entirely to protect vulnerable nocturnal ecosystems.
-b) The disappearance of starlit skies represents a cultural loss that technology cannot compensate for.
-c) Preserving astronomical research requires restricting bright lighting exclusively to certified reserves.
-d) Modern cities will inevitably erase the night sky unless economic expansion is deliberately halted.
-e) Light pollution causes serious ecological and cultural damage, but thoughtful design can reduce it.
+a) Coastal lighting near seabird colonies poses the greatest threat to wildlife.
+b) Suburban floodlights often reduce pedestrian visibility instead of preventing street crime.
+c) Regional dark-sky reserves are more practical than changing urban lighting systems.
+d) Replacing older street lamps with modern LEDs is the key to saving energy.
+e) Light pollution harms wildlife and culture, but thoughtful design can reduce it.
 
 ------------------------------------------------------------------------
 
@@ -981,11 +981,11 @@ Question:
 Why does the author mention research about lighting and crime in paragraph 2?
 
 Options:
-a) To argue for switching off municipal streetlights along all suburban pathways
-b) To question the assumption that increasing illumination always improves public safety
-c) To demonstrate that rising electricity costs outweigh any possible crime reduction
-d) To recommend that surveillance cameras replace human street patrols after dark
-e) To show that local councils should leave crime prevention entirely to police
+a) To argue for switching off municipal streetlights along suburban pathways
+b) To challenge the belief that brighter lighting automatically makes places safer
+c) To suggest that rising power costs outweigh the benefits of bright street lighting
+d) To recommend that surveillance cameras replace street lighting in busy suburbs
+e) To show that local councils should focus on daytime traffic management
 
 ------------------------------------------------------------------------
 
@@ -1023,11 +1023,11 @@ Question:
 Which practical change does the author recommend for local councils?
 
 Options:
-a) Installing higher-mounted poles to spread light across a wider area
-b) Fitting shielded fixtures that direct illumination downward onto footpaths
-c) Using intense blue-white LEDs to improve clarity for passing motorists
-d) Removing street lamps completely from all suburban roads after midnight
-e) Switching to motion-activated floodlights that illuminate entire streets
+a) Installing taller lamp posts to spread illumination across wider areas
+b) Fitting hooded fixtures that direct light downward onto footpaths
+c) Using bright blue-white LEDs to improve visibility for night drivers
+d) Turning off suburban street lamps between midnight and early dawn
+e) Replacing footpath lamps with floodlights along major residential streets
 
 ------------------------------------------------------------------------
 
@@ -1051,11 +1051,11 @@ Question:
 How does the author answer the worry that reducing light pollution would make people less safe?
 
 Options:
-a) By arguing that pedestrian safety concerns should be treated as secondary to wildlife protection
-b) By advocating that suburban street lighting be switched off entirely during late overnight hours
-c) By asserting that artificial illumination has no measurable influence on pedestrian accident rates
-d) By recommending that residents carry personal torches rather than maintaining municipal streetlights
-e) By showing that targeted fixtures can keep walkways well lit without spilling blinding glare into the sky
+a) By arguing that protecting nocturnal wildlife should outweigh pedestrian safety concerns
+b) By proposing that suburban street lighting be dimmed or switched off after midnight
+c) By suggesting that local councils install security cameras to compensate for darker streets
+d) By encouraging residents to rely on handheld torches when walking at night
+e) By explaining that shielded fixtures can light footpaths clearly without harsh glare
 
 ------------------------------------------------------------------------
 
@@ -1065,11 +1065,11 @@ Question:
 The mention of Aboriginal navigators and living songlines in paragraph 1 mainly serves to:
 
 Options:
-a) trace the chronological history of maritime navigation methods across Australia
-b) contrast the dark night sky of inland deserts with that of suburban coastlines
-c) explain the astronomical methods used by early travellers to track desert routes
-d) argue that astronomy programs should preserve traditional celestial terminology
-e) highlight that the disappearing night sky carries a deep cultural cost for society
+a) trace the history of maritime navigation methods across Australia
+b) contrast the clear night skies of inland deserts with coastal suburban skies
+c) explain the astronomical techniques that traditional travellers used to cross land
+d) encourage schools to include traditional star names in science lessons
+e) show that losing the night sky to skyglow carries a deep cultural cost
 
 ------------------------------------------------------------------------
 
@@ -1103,11 +1103,11 @@ Question:
 Why did 19th-century sailing vessels choose to navigate the perilous Roaring Forties?
 
 Options:
-a) Relentless westerly winds allowed vessels to reach high speeds, cutting weeks off the voyage.
-b) Milder ocean currents and calmer swells reduced structural wear on ship hulls and rigging.
-c) Frequent intervals of calm weather allowed navigators to resupply at scheduled island ports.
-d) Equatorial trade winds allowed ships to bypass the stormy currents surrounding Antarctica.
-e) Shallow coastal waters along the route provided dependable emergency anchorages in storms.
+a) Strong westerly winds enabled ships to sail much faster, shortening the voyage.
+b) Steady ocean currents in the region reduced structural strain on wooden hulls and sails.
+c) Regular island ports along the route allowed crews to take on fresh supplies.
+d) Clearer southern skies made daily noon sun observations easier for navigators.
+e) Sheltered coastal waters offered safe anchorages during winter storms.
 
 ------------------------------------------------------------------------
 
@@ -1131,11 +1131,11 @@ Question:
 Why were marine chronometers likely to become inaccurate in the Roaring Forties?
 
 Options:
-a) Sustained magnetic variation from polar storms reversed their balance springs.
-b) Persistent cold altered their daily rates and salty moisture risked rusting fine parts.
-c) Pivoted gimbal mountings tilted the mechanisms until their internal gears dislodged.
-d) Violent atmospheric pressure changes caused their sealed vacuum chambers to crack.
-e) Continuous rolling friction wore down their jewelled escapements within weeks.
+a) Sustained magnetic variation from southern storms affected their brass cases.
+b) Bitter cold altered their daily rates and damp salt air could rust fine parts.
+c) Pivoted gimbal mountings tilted the mechanisms until their internal gears shifted.
+d) Sudden drops in barometric pressure slowed the movement of their hands.
+e) Constant pitching motion prevented the mainspring from staying wound between checks.
 
 ------------------------------------------------------------------------
 
@@ -1187,11 +1187,11 @@ Question:
 According to paragraph 3, why was the 'lunar distance' method hard to use?
 
 Options:
-a) It could only be conducted during daylight hours when the sun crossed the meridian.
-b) It depended on having an accurate mechanical clock on board to verify the sighting.
-c) It was designed only to determine latitude and provided no help with east-west position.
-d) It required stable sighting equipment that could only be operated in sheltered harbours.
-e) It required unobstructed celestial sightings alongside hours of demanding calculations.
+a) It relied on comparing multiple spring-driven clocks mounted in gimbal rings.
+b) It required measuring the noon sun's angle when the sky was overcast.
+c) The brass sextants used for the sightings were easily rusted by damp, salty winds.
+d) The tables worked well near the equator but lost accuracy further south.
+e) It needed clear sightings of the moon and stars and hours of calculation.
 
 ------------------------------------------------------------------------
 
@@ -1201,8 +1201,8 @@ Question:
 Which conclusion about these voyages is best supported by the passage as a whole?
 
 Options:
-a) Safe completion of the voyage depended on human skill and judgement alongside mechanical tools.
-b) The widespread adoption of marine chronometers largely eliminated uncertainty from ocean voyages.
-c) Traditional dead reckoning techniques proved too unreliable to be of practical use in gale seas.
-d) Observing lunar distances remained the most dependable way to establish longitude in the 1850s.
-e) The main navigational hazard on the Australian route was flawed charting rather than bad weather.
+a) Reaching port safely required experienced seamanship alongside mechanical instruments.
+b) The adoption of marine chronometers largely removed navigational risk from ocean voyages.
+c) Dead reckoning proved too imprecise to help captains during prolonged gales.
+d) Lunar distance calculations remained the preferred method for finding longitude in the 1850s.
+e) Inaccurate coastal charts posed a greater danger to ships than southern weather.
