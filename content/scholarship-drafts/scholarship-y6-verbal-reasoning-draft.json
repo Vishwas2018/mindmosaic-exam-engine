@@ -7,27 +7,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "SOLAR is to SUN as LUNAR is to:",
+      "prompt": "THERMOMETER is to TEMPERATURE as ODOMETER is to:",
       "options": [
         {
           "id": "a",
-          "text": "EARTH"
+          "text": "SPEED"
         },
         {
           "id": "b",
-          "text": "STAR"
+          "text": "FUEL"
         },
         {
           "id": "c",
-          "text": "PLANET"
+          "text": "ENGINE"
         },
         {
           "id": "d",
-          "text": "COMET"
+          "text": "TYRES"
         },
         {
           "id": "e",
-          "text": "MOON"
+          "text": "DISTANCE"
         }
       ],
       "visuals": [],
@@ -35,7 +35,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Solar relates to the Sun, while lunar relates to the Moon.",
+      "explanation": "A thermometer measures temperature; an odometer measures distance travelled. (A speedometer, not an odometer, measures speed.)",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -87,7 +87,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-analogies",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -242,27 +242,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "AVIARY is to BIRDS as APIARY is to:",
+      "prompt": "PEDAL is to BICYCLE as OAR is to:",
       "options": [
         {
           "id": "a",
-          "text": "FISH"
+          "text": "SAIL"
         },
         {
           "id": "b",
-          "text": "REPTILES"
+          "text": "OCEAN"
         },
         {
           "id": "c",
-          "text": "HORSES"
+          "text": "RIVER"
         },
         {
           "id": "d",
-          "text": "ANTS"
+          "text": "ROWER"
         },
         {
           "id": "e",
-          "text": "BEES"
+          "text": "BOAT"
         }
       ],
       "visuals": [],
@@ -270,7 +270,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "An aviary is a dedicated enclosure for birds; an apiary is a collection of hives for keeping bees.",
+      "explanation": "A pedal is a part of a bicycle that is used to drive it along; an oar is a part of a boat that is used to drive it along.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -322,7 +322,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-analogies",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -369,7 +369,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-classification",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -383,27 +383,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which of the following five marine creatures does NOT belong with the others?",
+      "prompt": "Which of the following five words does NOT share a similar meaning with the others?",
       "options": [
         {
           "id": "a",
-          "text": "DOLPHIN"
+          "text": "AMBLE"
         },
         {
           "id": "b",
-          "text": "SARDINE"
+          "text": "SPRINT"
         },
         {
           "id": "c",
-          "text": "SNAPPER"
+          "text": "DASH"
         },
         {
           "id": "d",
-          "text": "TUNA"
+          "text": "HURRY"
         },
         {
           "id": "e",
-          "text": "MACKEREL"
+          "text": "RUSH"
         }
       ],
       "visuals": [],
@@ -411,12 +411,12 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "Sardine, snapper, tuna, and mackerel are marine fish with gills; a dolphin is a marine mammal that breathes air through lungs.",
+      "explanation": "Sprint, dash, hurry and rush all mean to move quickly; amble means to walk slowly and easily.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-classification",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -430,7 +430,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which of the following five items does NOT belong with the other four works of art?",
+      "prompt": "Which word does NOT belong with the others?",
       "options": [
         {
           "id": "a",
@@ -450,7 +450,7 @@
         },
         {
           "id": "e",
-          "text": "BAROMETER"
+          "text": "EASEL"
         }
       ],
       "visuals": [],
@@ -458,7 +458,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Sculpture, portrait, fresco, and mosaic are forms of visual artwork; a barometer is a scientific instrument for measuring air pressure.",
+      "explanation": "A sculpture, portrait, fresco and mosaic are all finished works of art. An easel is a stand that holds a canvas while an artist works; it is a tool, not a work of art.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -557,7 +557,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-classification",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -604,7 +604,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-classification",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -745,7 +745,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-synonyms-antonyms",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -792,7 +792,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-synonyms-antonyms",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -853,27 +853,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which word is most OPPOSITE in meaning to DIVERGENT?",
+      "prompt": "Which word is most OPPOSITE in meaning to FRUGAL?",
       "options": [
         {
           "id": "a",
-          "text": "ERRATIC"
+          "text": "THRIFTY"
         },
         {
           "id": "b",
-          "text": "DISTINCT"
+          "text": "CAREFUL"
         },
         {
           "id": "c",
-          "text": "VARIABLE"
+          "text": "MODEST"
         },
         {
           "id": "d",
-          "text": "DISPERSED"
+          "text": "STINGY"
         },
         {
           "id": "e",
-          "text": "CONVERGENT"
+          "text": "EXTRAVAGANT"
         }
       ],
       "visuals": [],
@@ -881,7 +881,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Divergent means moving or branching apart in different directions; convergent means coming together towards a common point.",
+      "explanation": "Frugal means careful about spending money. Thrifty and stingy are similar in meaning, careful and modest are not opposites, and extravagant (wasteful with money) is the opposite.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -994,7 +994,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Find the single word that can mean both 'a solid rectangular piece of building material' and 'to obstruct or impede movement':",
+      "prompt": "Find the single word that can mean both 'a solid lump of material such as wood, ice or stone' and 'to obstruct or stop movement':",
       "options": [
         {
           "id": "a",
@@ -1022,7 +1022,7 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "'Block' as a noun is a solid rectangular mass or building piece; as a verb, 'to block' means to obstruct or impede movement.",
+      "explanation": "'Block' as a noun is a solid lump of a material; as a verb, 'to block' means to obstruct or stop movement.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1041,7 +1041,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which single word can mean both a 'wooden boundary fence' and 'a mail delivery service'?",
+      "prompt": "Which single word can mean both 'an upright pole set in the ground' and 'the service that delivers letters and parcels'?",
       "options": [
         {
           "id": "a",
@@ -1069,7 +1069,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "A 'post' is a vertical timber support in a fence; 'post' also refers to the postal or mail system.",
+      "explanation": "A 'post' can be an upright pole set in the ground; 'the post' also means the mail service.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1088,27 +1088,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which single word can mean both 'a digging tool with a flat metal blade' and 'one of the four suits in a deck of cards'?",
+      "prompt": "Which single word can mean both 'free from damage or disease' and 'a narrow stretch of sea between two pieces of land'?",
       "options": [
         {
           "id": "a",
-          "text": "SHOVEL"
+          "text": "STRONG"
         },
         {
           "id": "b",
-          "text": "FORK"
+          "text": "CHANNEL"
         },
         {
           "id": "c",
-          "text": "HEART"
+          "text": "BAY"
         },
         {
           "id": "d",
-          "text": "SPADE"
+          "text": "SOUND"
         },
         {
           "id": "e",
-          "text": "TROWEL"
+          "text": "FIRM"
         }
       ],
       "visuals": [],
@@ -1116,7 +1116,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "'Spade' is a sharp-edged digging tool; 'spades' is one of the four suits in a standard deck of playing cards.",
+      "explanation": "'Sound' can mean healthy and undamaged, as in 'a sound structure', and it is also a name for a narrow stretch of sea between two pieces of land.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1135,27 +1135,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Which single word can mean both 'to tolerate or endure' and 'a large forest mammal'?",
+      "prompt": "Which single word can mean both 'how high or low a musical sound is' and 'a marked field where soccer is played'?",
       "options": [
         {
           "id": "a",
-          "text": "STAND"
+          "text": "TONE"
         },
         {
           "id": "b",
-          "text": "BEAR"
+          "text": "PITCH"
         },
         {
           "id": "c",
-          "text": "CARRY"
+          "text": "FIELD"
         },
         {
           "id": "d",
-          "text": "STAG"
+          "text": "NOTE"
         },
         {
           "id": "e",
-          "text": "BOAR"
+          "text": "COURT"
         }
       ],
       "visuals": [],
@@ -1163,7 +1163,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "'Bear' as a verb means to endure or withstand; 'bear' as a noun is a large carnivorous or omnivorous mammal.",
+      "explanation": "'Pitch' is how high or low a note sounds, and a 'pitch' is also a marked playing field for sports such as soccer.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1215,7 +1215,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-word-relationships",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1262,7 +1262,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-sentence-logic",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1356,7 +1356,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-sentence-logic",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1370,27 +1370,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Read the statements:\n1. All brass instruments require air to produce sound.\n2. A trumpet is a brass instrument.\nWhich conclusion must be TRUE?",
+      "prompt": "Read the statements:\n1. Either the bridge is closed or the ferry is running.\n2. The ferry is not running.\nWhich conclusion must be TRUE?",
       "options": [
         {
           "id": "a",
-          "text": "All instruments requiring air are trumpets."
+          "text": "The bridge is open."
         },
         {
           "id": "b",
-          "text": "A trumpet produces sound without air."
+          "text": "The ferry will run tomorrow."
         },
         {
           "id": "c",
-          "text": "A trumpet is a string instrument."
+          "text": "The bridge and the ferry are both running."
         },
         {
           "id": "d",
-          "text": "A trumpet requires air to produce sound."
+          "text": "The bridge is closed."
         },
         {
           "id": "e",
-          "text": "Brass instruments do not make sound."
+          "text": "The river is too rough for boats."
         }
       ],
       "visuals": [],
@@ -1398,7 +1398,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Brass -> Air. Trumpet -> Brass. Therefore, Trumpet -> Air.",
+      "explanation": "If at least one of 'the bridge is closed' and 'the ferry is running' is true, and the ferry is not running, then the bridge must be closed.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1417,27 +1417,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Read the statements:\n1. If a bird is a raptor, it possesses sharp talons.\n2. The osprey is a raptor.\nWhich conclusion must be TRUE?",
+      "prompt": "Read the statements:\n1. If a shape has four equal sides, it is a rhombus.\n2. If a shape is a rhombus, its opposite sides are parallel.\n3. The opposite sides of this shape are not parallel.\nWhich conclusion must be TRUE?",
       "options": [
         {
           "id": "a",
-          "text": "All animals with sharp talons are ospreys."
+          "text": "This shape is a rhombus."
         },
         {
           "id": "b",
-          "text": "The osprey possesses sharp talons."
+          "text": "This shape is not a rhombus."
         },
         {
           "id": "c",
-          "text": "The osprey does not have sharp talons."
+          "text": "This shape has four equal sides."
         },
         {
           "id": "d",
-          "text": "The osprey cannot fly."
+          "text": "Every shape with parallel opposite sides is a rhombus."
         },
         {
           "id": "e",
-          "text": "Raptors do not possess sharp talons."
+          "text": "This shape has four right angles."
         }
       ],
       "visuals": [],
@@ -1445,12 +1445,12 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Raptor -> Talons. Osprey -> Raptor. Thus Osprey -> Talons.",
+      "explanation": "Chain the statements: four equal sides -> rhombus -> parallel opposite sides. This shape does not have parallel opposite sides, so it cannot be a rhombus (and so cannot have four equal sides either).",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-sentence-logic",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1464,11 +1464,11 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Read the statements:\n1. If the garden sprinkler runs, the lawn is wet.\n2. The lawn is NOT wet.\nWhich conclusion must be TRUE?",
+      "prompt": "Read the statements:\n1. If the garden sprinkler ran this morning, the lawn is wet now.\n2. The lawn is NOT wet now.\nWhich conclusion must be TRUE?",
       "options": [
         {
           "id": "a",
-          "text": "The garden sprinkler ran for hours."
+          "text": "The garden sprinkler ran for hours this morning."
         },
         {
           "id": "b",
@@ -1476,11 +1476,11 @@
         },
         {
           "id": "c",
-          "text": "The garden sprinkler did not run."
+          "text": "The garden sprinkler did not run this morning."
         },
         {
           "id": "d",
-          "text": "The lawn is soaking wet."
+          "text": "The lawn is soaking wet now."
         },
         {
           "id": "e",
@@ -1492,7 +1492,7 @@
         "kind": "single_option",
         "optionId": "c"
       },
-      "explanation": "Modus tollens: Sprinkler -> Lawn Wet. Not (Lawn Wet) -> Not (Sprinkler Ran).",
+      "explanation": "Statement 1 establishes that if the sprinkler ran this morning, the lawn would be wet now. Statement 2 states that the lawn is not wet now. By contrapositive reasoning (modus tollens), if the consequence is false, the condition cannot have occurred: the garden sprinkler did not run this morning.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
@@ -1544,7 +1544,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-letter-series",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1591,7 +1591,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-letter-series",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1638,7 +1638,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-letter-series",
-        "difficulty": "medium",
+        "difficulty": "challenging",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1685,7 +1685,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-letter-series",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1732,7 +1732,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-letter-series",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1793,7 +1793,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Find the next letter in the modular series:\nW, Z, C, F, ?",
+      "prompt": "Find the next letter in the series: W, Z, C, F, ?",
       "options": [
         {
           "id": "a",
@@ -1840,7 +1840,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "In a secret code, BARK is written as DCTM (each letter shifted forward by 2). How is LEAF written in the same code?",
+      "prompt": "In a secret code, BARK is written as DCTM. How is LEAF written in the same code?",
       "options": [
         {
           "id": "a",
@@ -1868,12 +1868,12 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Shift each letter forward by 2: L(+2)->N, E(+2)->G, A(+2)->C, F(+2)->H.",
+      "explanation": "Compare BARK with DCTM: every letter moves forward by 2 places (B->D, A->C, R->T, K->M). Applying the same shift to LEAF gives L->N, E->G, A->C, F->H: NGCH.",
       "metadata": {
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-coded-words",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -2014,7 +2014,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-coded-words",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -2061,7 +2061,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-coded-words",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -2108,7 +2108,7 @@
         "subject": "verbal_reasoning",
         "strand": "Verbal Reasoning",
         "skill": "vr-coded-words",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -2123,7 +2123,7 @@
       "id": "scholarship-y6-vr-001",
       "skill": "vr-analogies",
       "targetOption": "e",
-      "correctValue": "MOON",
+      "correctValue": "DISTANCE",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-002": {
@@ -2158,7 +2158,7 @@
       "id": "scholarship-y6-vr-006",
       "skill": "vr-analogies",
       "targetOption": "e",
-      "correctValue": "BEES",
+      "correctValue": "BOAT",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-007": {
@@ -2179,14 +2179,14 @@
       "id": "scholarship-y6-vr-009",
       "skill": "vr-classification",
       "targetOption": "a",
-      "correctValue": "DOLPHIN",
+      "correctValue": "AMBLE",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-010": {
       "id": "scholarship-y6-vr-010",
       "skill": "vr-classification",
       "targetOption": "e",
-      "correctValue": "BAROMETER",
+      "correctValue": "EASEL",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-011": {
@@ -2249,7 +2249,7 @@
       "id": "scholarship-y6-vr-019",
       "skill": "vr-synonyms-antonyms",
       "targetOption": "e",
-      "correctValue": "CONVERGENT",
+      "correctValue": "EXTRAVAGANT",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-020": {
@@ -2284,14 +2284,14 @@
       "id": "scholarship-y6-vr-024",
       "skill": "vr-word-relationships",
       "targetOption": "d",
-      "correctValue": "SPADE",
+      "correctValue": "SOUND",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-025": {
       "id": "scholarship-y6-vr-025",
       "skill": "vr-word-relationships",
       "targetOption": "b",
-      "correctValue": "BEAR",
+      "correctValue": "PITCH",
       "requiresHumanSemanticCheck": true
     },
     "scholarship-y6-vr-026": {
@@ -2467,58 +2467,82 @@
       "id": "scholarship-y6-vr-030",
       "skill": "vr-sentence-logic",
       "targetOption": "d",
-      "correctValue": "A trumpet requires air to produce sound.",
+      "correctValue": "The bridge is closed.",
       "solver": "syllogism",
       "solverParams": {
         "variables": [
           "B",
-          "A",
-          "T"
+          "F",
+          "X",
+          "R"
         ],
         "premises": [
           {
-            "kind": "implies",
-            "antecedent": {
+            "kind": "or",
+            "left": {
               "kind": "var",
               "name": "B"
             },
-            "consequent": {
+            "right": {
               "kind": "var",
-              "name": "A"
+              "name": "F"
             }
           },
           {
-            "kind": "implies",
-            "antecedent": {
+            "kind": "not",
+            "expr": {
               "kind": "var",
-              "name": "T"
-            },
-            "consequent": {
-              "kind": "var",
-              "name": "B"
+              "name": "F"
             }
-          },
-          {
-            "kind": "var",
-            "name": "T"
           }
         ],
         "conclusions": [
           {
-            "id": "A trumpet requires air to produce sound.",
-            "expr": {
-              "kind": "var",
-              "name": "A"
-            }
-          },
-          {
-            "id": "A trumpet produces sound without air.",
+            "id": "The bridge is open.",
             "expr": {
               "kind": "not",
               "expr": {
                 "kind": "var",
-                "name": "A"
+                "name": "B"
               }
+            }
+          },
+          {
+            "id": "The ferry will run tomorrow.",
+            "expr": {
+              "kind": "var",
+              "name": "X"
+            }
+          },
+          {
+            "id": "The bridge and the ferry are both running.",
+            "expr": {
+              "kind": "and",
+              "left": {
+                "kind": "not",
+                "expr": {
+                  "kind": "var",
+                  "name": "B"
+                }
+              },
+              "right": {
+                "kind": "var",
+                "name": "F"
+              }
+            }
+          },
+          {
+            "id": "The bridge is closed.",
+            "expr": {
+              "kind": "var",
+              "name": "B"
+            }
+          },
+          {
+            "id": "The river is too rough for boats.",
+            "expr": {
+              "kind": "var",
+              "name": "R"
             }
           }
         ]
@@ -2528,58 +2552,84 @@
       "id": "scholarship-y6-vr-031",
       "skill": "vr-sentence-logic",
       "targetOption": "b",
-      "correctValue": "The osprey possesses sharp talons.",
+      "correctValue": "This shape is not a rhombus.",
       "solver": "syllogism",
       "solverParams": {
         "variables": [
+          "E",
           "R",
-          "T",
-          "O"
+          "P",
+          "Q",
+          "S"
         ],
         "premises": [
           {
             "kind": "implies",
             "antecedent": {
               "kind": "var",
-              "name": "R"
+              "name": "E"
             },
             "consequent": {
               "kind": "var",
-              "name": "T"
+              "name": "R"
             }
           },
           {
             "kind": "implies",
             "antecedent": {
               "kind": "var",
-              "name": "O"
+              "name": "R"
             },
             "consequent": {
+              "kind": "var",
+              "name": "P"
+            }
+          },
+          {
+            "kind": "not",
+            "expr": {
+              "kind": "var",
+              "name": "P"
+            }
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "This shape is a rhombus.",
+            "expr": {
               "kind": "var",
               "name": "R"
             }
           },
           {
-            "kind": "var",
-            "name": "O"
-          }
-        ],
-        "conclusions": [
-          {
-            "id": "The osprey possesses sharp talons.",
-            "expr": {
-              "kind": "var",
-              "name": "T"
-            }
-          },
-          {
-            "id": "The osprey does not have sharp talons.",
+            "id": "This shape is not a rhombus.",
             "expr": {
               "kind": "not",
               "expr": {
                 "kind": "var",
-                "name": "T"
+                "name": "R"
               }
+            }
+          },
+          {
+            "id": "This shape has four equal sides.",
+            "expr": {
+              "kind": "var",
+              "name": "E"
+            }
+          },
+          {
+            "id": "Every shape with parallel opposite sides is a rhombus.",
+            "expr": {
+              "kind": "var",
+              "name": "S"
+            }
+          },
+          {
+            "id": "This shape has four right angles.",
+            "expr": {
+              "kind": "var",
+              "name": "Q"
             }
           }
         ]
@@ -2589,7 +2639,7 @@
       "id": "scholarship-y6-vr-032",
       "skill": "vr-sentence-logic",
       "targetOption": "c",
-      "correctValue": "The garden sprinkler did not run.",
+      "correctValue": "The garden sprinkler did not run this morning.",
       "solver": "syllogism",
       "solverParams": {
         "variables": [
@@ -2618,7 +2668,7 @@
         ],
         "conclusions": [
           {
-            "id": "The garden sprinkler did not run.",
+            "id": "The garden sprinkler did not run this morning.",
             "expr": {
               "kind": "not",
               "expr": {
@@ -2628,7 +2678,7 @@
             }
           },
           {
-            "id": "The garden sprinkler ran for hours.",
+            "id": "The garden sprinkler ran for hours this morning.",
             "expr": {
               "kind": "var",
               "name": "S"

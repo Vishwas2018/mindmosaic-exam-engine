@@ -93,7 +93,7 @@ describe("Student Discovery Hub Components", () => {
     expect(screen.getByText("AMC (Australian Mathematics Competition)")).toBeInTheDocument();
     expect(screen.getByText("Olympiad")).toBeInTheDocument();
     expect(screen.getByText("Selective Entry")).toBeInTheDocument();
-    expect(screen.getByText("Scholarship Prep")).toBeInTheDocument();
+    expect(screen.getByText("Scholarship-style practice")).toBeInTheDocument();
     expect(screen.getByText("Singapore Maths")).toBeInTheDocument();
 
     const trackButton = screen.getByRole("button", { name: /AMC \(Australian Mathematics Competition\)[\s\S]*Preview track/i });

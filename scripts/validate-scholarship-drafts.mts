@@ -18,74 +18,16 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { z } from "zod";
 
+import { verifyFirstPartyScholarshipAttestation } from "../src/features/question-factory/correctness/scholarship-attestation";
 import { computeSolver, solverAnswerError } from "../src/features/question-factory/correctness/solver-verification";
 
 const DRAFTS_DIR = "content/scholarship-drafts";
 
-// Draft-local schema extensions
-const scholarshipExamStyleSchema = z.enum([
-  "naplan_style",
-  "icas_style",
-  "amc_style",
-  "scholarship_style",
-]);
-
-const scholarshipSubjectSchema = z.enum([
-  "reading",
-  "writing",
-  "conventions_of_language",
-  "numeracy",
-  "science",
-  "amc_mathematics",
-  "verbal_reasoning",
-  "numerical_reasoning",
-]);
-
-const draftOptionSchema = z.object({
-  id: z.enum(["a", "b", "c", "d", "e"]),
-  text: z.string().trim().min(1),
-});
-
-const draftQuestionSchema = z.object({
-  id: z.string().regex(/^scholarship-y6-(vr|nr)-\d{3}$/),
-  type: z.literal("multiple_choice"),
-  yearLevel: z.literal(6),
-  examStyle: scholarshipExamStyleSchema,
-  prompt: z.string().trim().min(5),
-  options: z.array(draftOptionSchema).min(4).max(5),
-  visuals: z.array(z.unknown()).default([]),
-  answerKey: z.object({
-    kind: z.literal("single_option"),
-    optionId: z.enum(["a", "b", "c", "d", "e"]),
-  }),
-  explanation: z.string().trim().min(10),
-  metadata: z.object({
-    subject: scholarshipSubjectSchema,
-    strand: z.string().trim().min(1),
-    skill: z.string().trim().min(1),
-    difficulty: z.enum(["easy", "medium", "hard"]),
-    marks: z.number().int().positive(),
-    estimatedTimeSeconds: z.number().int().positive(),
-    tags: z.array(z.string()).default([]),
-  }),
-});
-
-const draftSidecarSchema = z.object({
-  id: z.string(),
-  skill: z.string(),
-  targetOption: z.enum(["a", "b", "c", "d", "e"]),
-  correctValue: z.union([z.string(), z.number()]),
-  requiresHumanSemanticCheck: z.boolean().optional(),
-  solver: z.enum([
-    "number_series",
-    "number_matrix",
-    "letter_series",
-    "coded_words",
-    "syllogism",
-    "arithmetical_reasoning",
-  ]).optional(),
-  solverParams: z.record(z.string(), z.unknown()).optional(),
-});
+import {
+  draftQuestionSchema,
+  draftSidecarSchema,
+  type DraftQuestion,
+} from "./lib/scholarship-draft-schema";
 
 const draftPacketSchema = z.object({
   draftOnly: z.literal(true),
@@ -95,7 +37,7 @@ const draftPacketSchema = z.object({
 });
 
 export type DraftPacket = z.infer<typeof draftPacketSchema>;
-export type DraftQuestion = z.infer<typeof draftQuestionSchema>;
+export type { DraftQuestion };
 
 export function assertNoMojibake(value: unknown, location = "draft packet"): void {
   if (typeof value === "string") {
@@ -271,10 +213,38 @@ export async function loadAllDraftQuestions(localQuestions: DraftQuestion[]): Pr
 }
 
 export function verifySolverMatch(q: DraftQuestion, sidecar: z.infer<typeof draftSidecarSchema>): void {
+  // Find option text matching answerKey
+  const chosenOpt = q.options.find(o => o.id === q.answerKey.optionId);
+  if (!chosenOpt) {
+    throw new Error(`${q.id}: answerKey option '${q.answerKey.optionId}' not found in options`);
+  }
+
+  // Check matching: either direct string match or integer match
+  const chosenText = chosenOpt.text.trim();
+  const expectedStr = String(sidecar.correctValue).trim();
+  if (chosenText !== expectedStr) {
+    throw new Error(`${q.id}: option '${q.answerKey.optionId}' text '${chosenText}' does not match sidecar correctValue '${expectedStr}'`);
+  }
+
+  if (sidecar.targetOption && sidecar.targetOption !== q.answerKey.optionId) {
+    throw new Error(`${q.id}: sidecar targetOption '${sidecar.targetOption}' does not match answerKey optionId '${q.answerKey.optionId}'`);
+  }
+
   if (!sidecar.solver) {
     if (!sidecar.requiresHumanSemanticCheck) {
       throw new Error(`${q.id}: item must either specify a solver or have requiresHumanSemanticCheck: true`);
     }
+    return;
+  }
+
+  if (sidecar.solver === "arithmetical_reasoning") {
+    // The draft's constraint strings are never executed or interpreted here: arithmetical items are
+    // verified only by the first-party recompute registry, which fails closed when an item has no solver.
+    const attestation = verifyFirstPartyScholarshipAttestation(q as unknown as Parameters<typeof verifyFirstPartyScholarshipAttestation>[0]);
+    if (attestation.error === "not_scholarship_attested_item") {
+      throw new Error(`${q.id}: arithmetical_reasoning sidecar has no first-party recompute solver in scope (skill '${q.metadata.skill}'); draft constraint strings are not executed`);
+    }
+    if (!attestation.ok) throw new Error(`${q.id}: ${attestation.error}: ${attestation.message}`);
     return;
   }
 
@@ -323,6 +293,8 @@ export async function validateScholarshipDrafts(): Promise<{
   totalQuestions: number;
   vrCount: number;
   nrCount: number;
+  readingCount: number;
+  mathsCount: number;
   solverBackedCount: number;
   humanCheckCount: number;
   skillCounts: Record<string, number>;
@@ -340,9 +312,12 @@ export async function validateScholarshipDrafts(): Promise<{
   let totalQuestions = 0;
   let vrCount = 0;
   let nrCount = 0;
+  let readingCount = 0;
+  let mathsCount = 0;
   let solverBackedCount = 0;
   let humanCheckCount = 0;
   const skillCounts: Record<string, number> = {};
+  const solverFailures: string[] = [];
   const distributions: Record<string, Record<string, number>> = {};
 
   for (const file of files) {
@@ -385,6 +360,8 @@ export async function validateScholarshipDrafts(): Promise<{
 
       if (q.metadata.subject === "verbal_reasoning") vrCount++;
       if (q.metadata.subject === "numerical_reasoning") nrCount++;
+      if (q.metadata.subject === "reading") readingCount++;
+      if (q.metadata.subject === "numeracy") mathsCount++;
 
       if (sidecar.requiresHumanSemanticCheck) {
         humanCheckCount++;
@@ -393,8 +370,12 @@ export async function validateScholarshipDrafts(): Promise<{
         solverBackedCount++;
       }
 
-      // 6. Solver verification
-      verifySolverMatch(q, sidecar);
+      // 6. Solver verification (collected so one failing item does not hide the rest)
+      try {
+        verifySolverMatch(q, sidecar);
+      } catch (error) {
+        solverFailures.push(error instanceof Error ? error.message : String(error));
+      }
     }
   }
 
@@ -405,10 +386,17 @@ export async function validateScholarshipDrafts(): Promise<{
   const allDraftEntries = await loadAllDraftQuestions(allStems);
   checkDuplicateStems(allDraftEntries);
 
+  if (solverFailures.length > 0) {
+    const lines = solverFailures.map((failure) => ` - ${failure}`);
+    throw new Error([`${solverFailures.length} draft item(s) failed solver verification:`, ...lines].join("\n"));
+  }
+
   return {
     totalQuestions,
     vrCount,
     nrCount,
+    readingCount,
+    mathsCount,
     solverBackedCount,
     humanCheckCount,
     skillCounts,
@@ -419,7 +407,9 @@ export async function validateScholarshipDrafts(): Promise<{
 async function main(): Promise<void> {
   console.log("=== Validating Scholarship Drafts ===");
   const results = await validateScholarshipDrafts();
-  console.log(`✓ Total questions validated: ${results.totalQuestions} (VR: ${results.vrCount}, NR: ${results.nrCount})`);
+  console.log(
+    `✓ Total questions validated: ${results.totalQuestions} (VR: ${results.vrCount}, NR: ${results.nrCount}, Reading: ${results.readingCount}, Maths: ${results.mathsCount})`,
+  );
   console.log(`✓ Solver-backed items: ${results.solverBackedCount}`);
   console.log(`✓ Flagged requiresHumanSemanticCheck: ${results.humanCheckCount}`);
   console.log("✓ Skill breakdown:");

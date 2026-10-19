@@ -52,6 +52,7 @@ import type { Question } from "@/schemas/question.schema";
 import { scoreAssessmentSession } from "@/server/scoring/answer-access";
 
 import { connect, scoringDbUrl } from "./db";
+import { scopeEnvToFile } from "./support/scoped-env";
 
 const STUDENT = "77770000-0000-0000-0000-0000000000c1";
 const ESSAY_MARKS = 7;
@@ -80,7 +81,6 @@ const ITEM_CODES = publishedExamBank
   .map((question) => question.id);
 
 let client: Client;
-let scoringUrlBefore: string | undefined;
 
 async function asOwner(): Promise<void> {
   await client.query("reset role");
@@ -161,9 +161,10 @@ async function seedItem(itemCode: string, kind: "single_option" | "manual", mark
 
 let sessionId: string;
 
+/* Set for this file only and put back afterwards, even if a test fails (see support/scoped-env.ts). */
+scopeEnvToFile("SCORING_DB_URL", scoringDbUrl);
+
 beforeAll(async () => {
-  scoringUrlBefore = process.env.SCORING_DB_URL;
-  process.env.SCORING_DB_URL = scoringDbUrl();
 
   client = await connect();
   await resetFixtures();
@@ -221,8 +222,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await resetFixtures();
   await client.end();
-  if (scoringUrlBefore === undefined) delete process.env.SCORING_DB_URL;
-  else process.env.SCORING_DB_URL = scoringUrlBefore;
 });
 
 describe("pendingManualMarks agrees across every surface — the sum, not the count", () => {

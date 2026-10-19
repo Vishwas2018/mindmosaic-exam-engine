@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getExamBank } from "@/server/exam-bank";
+import { getGuestExamBank } from "@/server/exam-bank";
 
 /**
  * The guest practice bank, answer keys and explanations included.
@@ -20,7 +20,7 @@ export const dynamic = "force-static";
 
 export function GET(): NextResponse {
   return NextResponse.json({
-    curated: getExamBank("curated"),
-    published: getExamBank("published"),
+    curated: getGuestExamBank("curated"),
+    published: getGuestExamBank("published"),
   });
 }

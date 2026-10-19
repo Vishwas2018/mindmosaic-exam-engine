@@ -1,0 +1,866 @@
+{
+  "packet": "scholarship-y6-verbal-reasoning-draft.json",
+  "reviewer": "gemma:7b",
+  "blindnessConfirmed": true,
+  "blindnessNote": "Request contained only prompt, passage, options, skill and claimed difficulty; no key, explanation or sidecar.",
+  "difficultyVerdictConvention": "'too_hard' means the claimed label overstates how hard the item really is; 'too_easy' means the label understates it.",
+  "items": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy requires understanding the relationship between measuring instruments and the quantities they measure.",
+      "parsed": true,
+      "seconds": 51.1
+    },
+    {
+      "id": "scholarship-y6-vr-002",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy is clear: AUTHOR is to NOVEL as COMPOSER is to INSTRUMENT.",
+      "parsed": true,
+      "seconds": 58.1
+    },
+    {
+      "id": "scholarship-y6-vr-003",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy is clear: both tools are used by skilled professionals in their respective fields.",
+      "parsed": true,
+      "seconds": 55
+    },
+    {
+      "id": "scholarship-y6-vr-004",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy is straightforward: drought and famine are both natural disasters that can lead to scarcity and hardship.",
+      "parsed": true,
+      "seconds": 53.1
+    },
+    {
+      "id": "scholarship-y6-vr-005",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy is clear: both pairs are plant parts.",
+      "parsed": true,
+      "seconds": 50.2
+    },
+    {
+      "id": "scholarship-y6-vr-006",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy is PEDAL (part of a bicycle) is to BICYCLE as OAR (part of a boat) is to SAIL.",
+      "parsed": true,
+      "seconds": 53.9
+    },
+    {
+      "id": "scholarship-y6-vr-007",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The analogy is clear: arid is dry, moist is wet, frail is weak, so the answer should be feeble.",
+      "parsed": true,
+      "seconds": 60.5
+    },
+    {
+      "id": "scholarship-y6-vr-008",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The cylinder is a solid shape, while the others are polygons.",
+      "parsed": true,
+      "seconds": 58.8
+    },
+    {
+      "id": "scholarship-y6-vr-009",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author labelled the difficulty as 'easy,' and while most of the words share a meaning of quick movement, 'amble' refers to a leisurely stroll.",
+      "parsed": true,
+      "seconds": 61.6
+    },
+    {
+      "id": "scholarship-y6-vr-010",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The word 'EASEL' is clearly unrelated to the others which are all forms of art.",
+      "parsed": true,
+      "seconds": 60.7
+    },
+    {
+      "id": "scholarship-y6-vr-011",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The provided question requires identifying the odd verb out based on its meaning.",
+      "parsed": true,
+      "seconds": 57.7
+    },
+    {
+      "id": "scholarship-y6-vr-012",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "challenging",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The answer is likely based on the presence of tin in pewter.",
+      "parsed": true,
+      "seconds": 60.9
+    },
+    {
+      "id": "scholarship-y6-vr-013",
+      "myAnswer": "e",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The answer is clearly identifiable based on the provided information.",
+      "parsed": true,
+      "seconds": 58.6
+    },
+    {
+      "id": "scholarship-y6-vr-014",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The provided definition suggests careful consideration before action.",
+      "parsed": true,
+      "seconds": 66
+    },
+    {
+      "id": "scholarship-y6-vr-015",
+      "myAnswer": "c",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author labelled the difficulty as medium, but I believe it's actually easy. The key is to understand the meaning of CONCEAL, which means to hide or keep something secret.",
+      "parsed": true,
+      "seconds": 62.6
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "myAnswer": "d",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The provided question requires identifying a word that means 'vigorous,' which implies a high level of energy or activity.",
+      "parsed": true,
+      "seconds": 60.4
+    },
+    {
+      "id": "scholarship-y6-vr-017",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The question requires identifying the word that means the opposite of scarcity, which refers to a limited availability of something.",
+      "parsed": true,
+      "seconds": 55
+    },
+    {
+      "id": "scholarship-y6-vr-018",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The author's provided definition of revered suggests a high level of respect and admiration.",
+      "parsed": true,
+      "seconds": 53.1
+    },
+    {
+      "id": "scholarship-y6-vr-019",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The question requires identifying the antonym of 'frugal', which means finding a word that signifies spending money liberally.",
+      "parsed": true,
+      "seconds": 64.8
+    },
+    {
+      "id": "scholarship-y6-vr-020",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The word apprehensive means feeling nervous or uncertain about something. The closest meaning is anxious, which also refers to a feeling of worry or fear.",
+      "parsed": true,
+      "seconds": 57.9
+    },
+    {
+      "id": "scholarship-y6-vr-021",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The answer is likely to be one of the options that creates a familiar compound word.",
+      "parsed": true,
+      "seconds": 58
+    },
+    {
+      "id": "scholarship-y6-vr-022",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The word 'BLOCK' clearly refers to a solid object, while 'to obstruct' means to stop something from moving. Both meanings seem applicable to the question.",
+      "parsed": true,
+      "seconds": 62.7
+    },
+    {
+      "id": "scholarship-y6-vr-023",
+      "myAnswer": "e",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "e",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The options are all related to vertical structures or services that involve delivering something.",
+      "parsed": true,
+      "seconds": 56.4
+    },
+    {
+      "id": "scholarship-y6-vr-024",
+      "myAnswer": "b",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The answer is quite straightforward, requiring an understanding of both definitions.",
+      "parsed": true,
+      "seconds": 52.9
+    },
+    {
+      "id": "scholarship-y6-vr-025",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The answer is either 'tone' or 'pitch', both of which relate to musical sounds.",
+      "parsed": true,
+      "seconds": 53.8
+    },
+    {
+      "id": "scholarship-y6-vr-026",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The options are all related to the concept of sunshine.",
+      "parsed": true,
+      "seconds": 56.3
+    },
+    {
+      "id": "scholarship-y6-vr-027",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The first statement tells us that mammals breathe air, and the second statement tells us that whales are mammals. So, all whales must breathe air.",
+      "parsed": true,
+      "seconds": 83.2
+    },
+    {
+      "id": "scholarship-y6-vr-028",
+      "myAnswer": "d",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "d",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The second statement implies that the condition for the trail opening early did not occur.",
+      "parsed": true,
+      "seconds": 70.3
+    },
+    {
+      "id": "scholarship-y6-vr-029",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "a"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The first statement tells us that all chess team members have a blue badge. The second statement tells us that Anika is on the chess team. Therefore, Anika must have a blue badge.",
+      "parsed": true,
+      "seconds": 83.8
+    },
+    {
+      "id": "scholarship-y6-vr-030",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The second statement implies that the ferry isn't running, so the bridge must be open.",
+      "parsed": true,
+      "seconds": 62.5
+    },
+    {
+      "id": "scholarship-y6-vr-031",
+      "myAnswer": "b",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "b",
+        "c"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "challenging",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "From statement 3, the shape cannot be a rhombus. Therefore, option a is the only possible conclusion.",
+      "parsed": true,
+      "seconds": 73.5
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "myAnswer": "c",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The second statement implies the sprinkler did not run, so option c is likely correct.",
+      "parsed": true,
+      "seconds": 64.3
+    },
+    {
+      "id": "scholarship-y6-vr-033",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The series follows a pattern of adding 1 letter to the previous letter in the series.",
+      "parsed": true,
+      "seconds": 55.4
+    },
+    {
+      "id": "scholarship-y6-vr-034",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The pattern follows a reversal of the alphabet order.",
+      "parsed": true,
+      "seconds": 46.4
+    },
+    {
+      "id": "scholarship-y6-vr-035",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "challenging",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The pattern follows a sequence of adding consecutive vowels to the previous letter.",
+      "parsed": true,
+      "seconds": 64
+    },
+    {
+      "id": "scholarship-y6-vr-036",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The pattern follows a simple rotation of one letter forward in the alphabet.",
+      "parsed": true,
+      "seconds": 55.4
+    },
+    {
+      "id": "scholarship-y6-vr-037",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The pattern follows a progression of 2 letters, alternating between odd and even letters of the alphabet.",
+      "parsed": true,
+      "seconds": 53.7
+    },
+    {
+      "id": "scholarship-y6-vr-038",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The pattern follows a consistent addition of 2 letters to the previous letter in the series.",
+      "parsed": true,
+      "seconds": 55.3
+    },
+    {
+      "id": "scholarship-y6-vr-039",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The series follows a pattern of alternating between adding and subtracting 1 letter in the alphabet.",
+      "parsed": true,
+      "seconds": 57.6
+    },
+    {
+      "id": "scholarship-y6-vr-040",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The code appears to be substituting each letter with the next one in the alphabet.",
+      "parsed": true,
+      "seconds": 60.2
+    },
+    {
+      "id": "scholarship-y6-vr-041",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "too_hard",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The code appears to be substituting letters in alphabetical order. VJG would then be SHE.",
+      "parsed": true,
+      "seconds": 36.2
+    },
+    {
+      "id": "scholarship-y6-vr-042",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "medium",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The code appears to be swapping letters in a specific order. QXBJ is derived from LAMP by swapping the first and fourth letters, and JWKD is derived from POST by swapping the second and fourth letters.",
+      "parsed": true,
+      "seconds": 42
+    },
+    {
+      "id": "scholarship-y6-vr-043",
+      "myAnswer": "c",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "c",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The code for BRA is 2-18-1-9-14, so we just need to apply the same pattern to the remaining letters.",
+      "parsed": true,
+      "seconds": 43.3
+    },
+    {
+      "id": "scholarship-y6-vr-044",
+      "myAnswer": "a",
+      "confidence": "high",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The reverse cipher pattern is clear in the given example, so applying the same pattern to the word BRIGHT should easily reveal the solution.",
+      "parsed": true,
+      "seconds": 33.3
+    },
+    {
+      "id": "scholarship-y6-vr-045",
+      "myAnswer": "a",
+      "confidence": "medium",
+      "uniqueAnswer": false,
+      "defensibleOptions": [
+        "a",
+        "b"
+      ],
+      "semanticFlags": [],
+      "originality": "not assessed",
+      "difficultyEstimate": "easy",
+      "difficultyVerdict": "appropriate",
+      "recommendation": "not assessed",
+      "notes": "Second-family local model; advisory only. Originality and revise/reject are not assessed by this reviewer.",
+      "working": "The code follows a pattern of subtracting a number from the position of each letter in the alphabet.",
+      "parsed": true,
+      "seconds": 34.4
+    }
+  ]
+}

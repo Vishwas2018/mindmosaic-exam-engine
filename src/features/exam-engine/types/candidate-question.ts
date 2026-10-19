@@ -38,13 +38,18 @@ export type AuthoringQuestion = Question;
  */
 export type CandidateQuestion = Omit<
   Question,
-  "answerKey" | "explanation" | "media"
+  "answerKey" | "media" | "explanation"
 > & {
   answerKind: AnswerKind;
   media?: readonly CandidateMediaAsset[];
   /** Instructional word-count guidance for essay-style responses, if any. */
   minWords?: number;
   maxWords?: number;
+  /**
+   * Explanation retained exclusively for Confidence Mode untimed review.
+   * Stripped by default during timed or high-stakes examination attempts.
+   */
+  explanation?: string;
 };
 
 /**
@@ -83,12 +88,15 @@ export function toCandidateMediaAsset(asset: MediaAsset): CandidateMediaAsset {
  * a CandidateQuestion only through this function, never by hand-picking
  * fields off an AuthoringQuestion.
  */
-export function toCandidateQuestion(question: AuthoringQuestion): CandidateQuestion {
-  const { answerKey, explanation: _explanation, media, ...rest } = question;
-  void _explanation;
+export function toCandidateQuestion(
+  question: AuthoringQuestion,
+  options?: { confidenceMode?: boolean },
+): CandidateQuestion {
+  const { answerKey, explanation, media, ...rest } = question;
   const manual = answerKey.kind === "manual" ? answerKey : undefined;
   return {
     ...rest,
+    ...(options?.confidenceMode && explanation ? { explanation } : {}),
     media: media?.map(toCandidateMediaAsset),
     answerKind: answerKey.kind,
     minWords: manual?.minWords,
@@ -98,6 +106,7 @@ export function toCandidateQuestion(question: AuthoringQuestion): CandidateQuest
 
 export function toCandidateQuestions(
   questions: readonly AuthoringQuestion[],
+  options?: { confidenceMode?: boolean },
 ): CandidateQuestion[] {
-  return questions.map(toCandidateQuestion);
+  return questions.map((q) => toCandidateQuestion(q, options));
 }

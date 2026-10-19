@@ -1,6 +1,6 @@
 import type { Question } from "@/schemas/question.schema";
 
-import { factoryPublishedQuestions } from "./generated";
+import { allFactoryPublishedQuestions } from "./factory-pools";
 import { questionBank } from "./question-bank";
 
 /**
@@ -10,7 +10,7 @@ import { questionBank } from "./question-bank";
  */
 export const publishedExamBank: readonly Question[] = Object.freeze([
   ...questionBank,
-  ...factoryPublishedQuestions,
+  ...allFactoryPublishedQuestions,
 ]);
 
 /**

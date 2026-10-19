@@ -71,6 +71,21 @@ export function ExamQuestion({
         onAnswerChange={onAnswerChange}
         disabled={disabled}
       />
+
+      {question.explanation && answer !== undefined && (
+        <section
+          aria-label="Explanation"
+          data-testid="confidence-mode-explanation"
+          className="mt-6 rounded-2xl border border-primary/20 bg-primary-tint/30 p-5 text-plum-dark"
+        >
+          <div className="flex items-center gap-2 font-jakarta text-sm font-bold text-primary">
+            <span>Explanation</span>
+          </div>
+          <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-800">
+            {question.explanation}
+          </p>
+        </section>
+      )}
     </article>
   );
 }

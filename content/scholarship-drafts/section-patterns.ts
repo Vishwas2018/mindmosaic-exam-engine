@@ -10,7 +10,7 @@ export interface ScholarshipPaperSectionPattern {
   examStyle: "scholarship_style";
   yearLevel: 6;
   presentation: "full_length_practice";
-  basis: "official_length_and_time";
+  basis: "internal";
   adaptations: string[];
   questionCount: number;
   timeMinutes: number;
@@ -30,8 +30,8 @@ export const SCHOLARSHIP_Y6_SECTION_PATTERNS: readonly ScholarshipPaperSectionPa
     examStyle: "scholarship_style",
     yearLevel: 6,
     presentation: "full_length_practice",
-    basis: "official_length_and_time",
-    adaptations: ["tight_time_pressure"],
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
     questionCount: 45, // Labelled engineering assumption (40s / question)
     timeMinutes: 30,
     sources: [
@@ -50,8 +50,8 @@ export const SCHOLARSHIP_Y6_SECTION_PATTERNS: readonly ScholarshipPaperSectionPa
     examStyle: "scholarship_style",
     yearLevel: 6,
     presentation: "full_length_practice",
-    basis: "official_length_and_time",
-    adaptations: ["tight_time_pressure"],
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
     questionCount: 40, // Labelled engineering assumption (45s / question)
     timeMinutes: 30,
     sources: [
@@ -70,8 +70,8 @@ export const SCHOLARSHIP_Y6_SECTION_PATTERNS: readonly ScholarshipPaperSectionPa
     examStyle: "scholarship_style",
     yearLevel: 6,
     presentation: "full_length_practice",
-    basis: "official_length_and_time",
-    adaptations: ["tight_time_pressure"],
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
     questionCount: 35, // Labelled engineering assumption (4 passages)
     timeMinutes: 30,
     sources: [
@@ -79,7 +79,7 @@ export const SCHOLARSHIP_Y6_SECTION_PATTERNS: readonly ScholarshipPaperSectionPa
         id: "reading",
         programmeId: "scholarship-y6-reading",
         count: 35,
-        filters: { typeIn: ["multiple_choice"] },
+        filters: { typeIn: ["reading_comprehension"] },
         display: "merged",
       },
     ],
@@ -90,8 +90,8 @@ export const SCHOLARSHIP_Y6_SECTION_PATTERNS: readonly ScholarshipPaperSectionPa
     examStyle: "scholarship_style",
     yearLevel: 6,
     presentation: "full_length_practice",
-    basis: "official_length_and_time",
-    adaptations: ["tight_time_pressure"],
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape"],
     questionCount: 40, // Labelled engineering assumption (45s / question)
     timeMinutes: 30,
     sources: [
@@ -110,7 +110,7 @@ export const SCHOLARSHIP_Y6_SECTION_PATTERNS: readonly ScholarshipPaperSectionPa
     examStyle: "scholarship_style",
     yearLevel: 6,
     presentation: "full_length_practice",
-    basis: "official_length_and_time",
+    basis: "internal",
     adaptations: ["no_planning_screen", "parent_marked_rubric", "print_prompt_default"],
     questionCount: 1,
     timeMinutes: 15,

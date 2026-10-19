@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { factoryPublishedQuestions } from "@/content/questions/generated";
+import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
 import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import type { Question } from "@/schemas/question.schema";

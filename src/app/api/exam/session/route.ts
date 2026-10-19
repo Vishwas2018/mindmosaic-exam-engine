@@ -195,7 +195,15 @@ export async function POST(request: Request): Promise<NextResponse> {
   } else {
     /* parsed.data guarantees exactly one of config/patternId is present. */
     config = parsed.data.config!;
-    const selection = selectExamQuestions(bank, config, seed);
+    /* Scholarship-style content is sat only as a whole named paper, never as a custom-length or mixed draw. */
+    if (config.examStyle === "scholarship_style") {
+      return NextResponse.json({ error: "scholarship_requires_paper" }, { status: 422 });
+    }
+    const selection = selectExamQuestions(
+      bank.filter((question) => question.examStyle !== "scholarship_style"),
+      config,
+      seed,
+    );
     if (!selection.ok) {
       return NextResponse.json(
         {
@@ -219,8 +227,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   /* student_id is not passed: create_exam_session takes it from auth.uid()
      inside the database, so this route cannot record a session against
      anyone but the caller even if it wanted to. Returns the new id. */
+  const mode = config.confidenceMode ? "confidence" : "standard";
   const { data: sessionId, error } = await supabase.rpc("create_exam_session", {
-    p_config: { ...config, bankId },
+    p_config: { ...config, bankId, mode },
     p_seed: seed,
     p_selected_question_ids: selectedQuestions.map((question) => question.id),
     p_expires_at: expiresAt.toISOString(),
@@ -238,6 +247,8 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   return NextResponse.json({
     sessionId,
-    questions: toCandidateQuestions(selectedQuestions),
+    questions: toCandidateQuestions(selectedQuestions, {
+      confidenceMode: config.confidenceMode,
+    }),
   });
 }

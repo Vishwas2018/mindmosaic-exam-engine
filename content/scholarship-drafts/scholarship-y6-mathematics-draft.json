@@ -88,7 +88,7 @@
         "subject": "numeracy",
         "strand": "Directed Numbers",
         "skill": "maths-directed-numbers",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 45,
         "tags": [
@@ -280,7 +280,7 @@
         "subject": "numeracy",
         "strand": "Fractions and Decimals",
         "skill": "maths-fractions-decimals",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 45,
         "tags": [
@@ -439,27 +439,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A regional town's population was 12,000 residents in 2015. By 2025, the population had increased to 15,600 residents. What was the percentage increase in the town's population over this decade?",
+      "prompt": "A regional town's population was 12,000 residents in 2015. By 2025, the population had increased to 15,000 residents. What was the percentage increase in the town's population over this decade?",
       "options": [
         {
           "id": "a",
-          "text": "25%"
+          "text": "20%"
         },
         {
           "id": "b",
-          "text": "30%"
+          "text": "25%"
         },
         {
           "id": "c",
-          "text": "35%"
+          "text": "30%"
         },
         {
           "id": "d",
-          "text": "28%"
+          "text": "15%"
         },
         {
           "id": "e",
-          "text": "32%"
+          "text": "35%"
         }
       ],
       "visuals": [],
@@ -467,7 +467,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Population increase = 15,600 - 12,000 = 3,600 residents. Percentage increase = (3,600 / 12,000) * 100 = 30%.",
+      "explanation": "Population increase = 15,000 - 12,000 = 3,000 residents. Percentage increase = (3,000 / 12,000) * 100 = 25%. (Dividing by the new population instead of the original gives 20%.)",
       "metadata": {
         "subject": "numeracy",
         "strand": "Percentages",
@@ -487,7 +487,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A school library has 420 books in its science collection. Three-sevenths (3/7) of the books are about astronomy, and one-quarter (1/4) of the books are about biology. How many books in the collection are neither astronomy nor biology?",
+      "prompt": "A school library has 420 books in its science collection. Three-sevenths (3/7) of the books are about astronomy and one-quarter (1/4) of the books are about biology. No book is in both groups. How many books in the collection are about neither astronomy nor biology?",
       "options": [
         {
           "id": "a",
@@ -535,7 +535,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "An estate of $72,000 is divided among three siblings—Alice, Ben, and Chloe—in the ratio 2 : 3 : 4. How much money does Ben receive?",
+      "prompt": "A fundraiser raised $72,000, which is shared among three school projects (the library, the garden and the sports shed) in the ratio 2 : 3 : 4. How much money does the garden receive?",
       "options": [
         {
           "id": "a",
@@ -563,7 +563,7 @@
         "kind": "single_option",
         "optionId": "b"
       },
-      "explanation": "Total ratio parts = 2 + 3 + 4 = 9 parts. Value of one part = $72,000 / 9 = $8,000. Ben receives 3 parts = 3 * $8,000 = $24,000.",
+      "explanation": "Total ratio parts = 2 + 3 + 4 = 9 parts. Value of one part = $72,000 / 9 = $8,000. The garden receives 3 parts = 3 * $8,000 = $24,000.",
       "metadata": {
         "subject": "numeracy",
         "strand": "Ratios and Rates",
@@ -583,27 +583,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A passenger train travels 210 kilometres in 75 minutes at constant speed. If the train maintains this exact average speed, how many kilometres will it travel in 150 minutes?",
+      "prompt": "A passenger train travels 210 kilometres in 75 minutes at a constant speed. How many kilometres will it travel in 100 minutes at the same speed?",
       "options": [
         {
           "id": "a",
-          "text": "420 km"
+          "text": "280 km"
         },
         {
           "id": "b",
-          "text": "400 km"
+          "text": "290 km"
         },
         {
           "id": "c",
-          "text": "440 km"
+          "text": "300 km"
         },
         {
           "id": "d",
-          "text": "450 km"
+          "text": "260 km"
         },
         {
           "id": "e",
-          "text": "390 km"
+          "text": "310 km"
         }
       ],
       "visuals": [],
@@ -611,12 +611,12 @@
         "kind": "single_option",
         "optionId": "a"
       },
-      "explanation": "150 minutes is double 75 minutes (150 / 75 = 2). At constant speed, distance doubles: 210 * 2 = 420 km.",
+      "explanation": "Speed = 210 / 75 = 2.8 km per minute. In 100 minutes the train travels 2.8 * 100 = 280 km.",
       "metadata": {
         "subject": "numeracy",
         "strand": "Ratios and Rates",
         "skill": "maths-ratios-rates",
-        "difficulty": "easy",
+        "difficulty": "medium",
         "marks": 1,
         "estimatedTimeSeconds": 35,
         "tags": [
@@ -727,27 +727,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "It takes 6 painters exactly 8 days to paint a school hall. If 2 additional painters of identical working speed join the team from the beginning, how many days will the 8 painters take to finish the job?",
+      "prompt": "It takes 6 painters exactly 12 days to paint a school hall. If 3 more painters of identical working speed join the team from the start, how many days will the larger team take to finish the job?",
       "options": [
         {
           "id": "a",
-          "text": "4 days"
-        },
-        {
-          "id": "b",
-          "text": "5 days"
-        },
-        {
-          "id": "c",
-          "text": "7 days"
-        },
-        {
-          "id": "d",
           "text": "6 days"
         },
         {
-          "id": "e",
+          "id": "b",
+          "text": "7 days"
+        },
+        {
+          "id": "c",
+          "text": "9 days"
+        },
+        {
+          "id": "d",
           "text": "8 days"
+        },
+        {
+          "id": "e",
+          "text": "10 days"
         }
       ],
       "visuals": [],
@@ -755,7 +755,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Total workload = 6 painters * 8 days = 48 painter-days. With 6 + 2 = 8 painters, the time required is 48 / 8 = 6 days.",
+      "explanation": "Total workload = 6 painters * 12 days = 72 painter-days. With 6 + 3 = 9 painters, the time required is 72 / 9 = 8 days. (Taking 3 days off 12 gives 9, which wrongly treats the work as a subtraction.)",
       "metadata": {
         "subject": "numeracy",
         "strand": "Ratios and Rates",
@@ -904,7 +904,7 @@
         "subject": "numeracy",
         "strand": "Algebra",
         "skill": "maths-algebra",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1048,7 +1048,7 @@
         "subject": "numeracy",
         "strand": "Algebra",
         "skill": "maths-algebra",
-        "difficulty": "challenging",
+        "difficulty": "medium",
         "marks": 1,
         "estimatedTimeSeconds": 50,
         "tags": [
@@ -1063,27 +1063,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "If p = 5, q = -3, and r = 4, what is the value of 2p² - 3qr + 5?",
+      "prompt": "If p = 5, q = 3 and r = 4, what is the value of 3p + 2qr - 7?",
       "options": [
         {
           "id": "a",
-          "text": "19"
+          "text": "77"
         },
         {
           "id": "b",
-          "text": "81"
+          "text": "20"
         },
         {
           "id": "c",
-          "text": "91"
+          "text": "32"
         },
         {
           "id": "d",
-          "text": "95"
+          "text": "18"
         },
         {
           "id": "e",
-          "text": "101"
+          "text": "39"
         }
       ],
       "visuals": [],
@@ -1091,7 +1091,7 @@
         "kind": "single_option",
         "optionId": "c"
       },
-      "explanation": "2p² = 2 * 25 = 50. 3qr = 3 * (-3) * 4 = -36. 50 - (-36) + 5 = 50 + 36 + 5 = 91.",
+      "explanation": "3p = 15 and 2qr = 2 * 3 * 4 = 24. Multiplication is done before addition and subtraction, so the value is 15 + 24 - 7 = 32.",
       "metadata": {
         "subject": "numeracy",
         "strand": "Algebra",
@@ -1159,7 +1159,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "When a mystery number is multiplied by 6 and then decreased by 14, the result equals twice the number increased by 18. What is the mystery number?",
+      "prompt": "When a mystery number is multiplied by 6 and then decreased by 14, the result equals 18 more than twice the number. What is the mystery number?",
       "options": [
         {
           "id": "a",
@@ -1207,7 +1207,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Two straight lines intersect. One of the vertically opposite angles measures (3x + 15)° and the other measures (5x - 25)°. What is the degree measure of this angle?",
+      "prompt": "Two straight lines intersect. A pair of vertically opposite angles measure (3x + 15)° and (5x - 25)°. What is the size of each of these angles in degrees?",
       "options": [
         {
           "id": "a",
@@ -1351,7 +1351,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "Two supplementary angles lie on a straight line. One angle is 36° less than three times the other angle. What is the measure of the smaller angle in degrees?",
+      "prompt": "Two angles lie next to each other on a straight line. One angle is 36° less than three times the other angle. What is the measure of the smaller angle in degrees?",
       "options": [
         {
           "id": "a",
@@ -1399,7 +1399,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A rectangular aquarium has a base measuring 80 cm by 50 cm. If 120 litres of water are poured into the empty tank, to what height (in centimetres) does the water rise? (1 litre = 1000 cm³)",
+      "prompt": "A rectangular aquarium has a base measuring 80 cm by 50 cm and is 45 cm tall. If 120 litres of water are poured into the empty tank, to what height, in centimetres, does the water rise? (1 litre = 1000 cm³)",
       "options": [
         {
           "id": "a",
@@ -1480,7 +1480,7 @@
         "subject": "numeracy",
         "strand": "Geometry and Measurement",
         "skill": "maths-geometry",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 45,
         "tags": [
@@ -1543,27 +1543,27 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A bag contains 7 red marbles, 9 blue marbles, and 8 green marbles. What is the total number of marbles in the bag that are NOT green?",
+      "prompt": "A bag contains 7 red marbles, 9 blue marbles and 4 green marbles. One marble is taken from the bag without looking. What is the probability, as a percentage, that the marble is NOT green?",
       "options": [
         {
           "id": "a",
-          "text": "12"
+          "text": "20%"
         },
         {
           "id": "b",
-          "text": "14"
+          "text": "45%"
         },
         {
           "id": "c",
-          "text": "15"
+          "text": "35%"
         },
         {
           "id": "d",
-          "text": "18"
+          "text": "75%"
         },
         {
           "id": "e",
-          "text": "16"
+          "text": "80%"
         }
       ],
       "visuals": [],
@@ -1571,7 +1571,7 @@
         "kind": "single_option",
         "optionId": "e"
       },
-      "explanation": "Marbles that are not green = 7 red + 9 blue = 16 marbles.",
+      "explanation": "There are 7 + 9 + 4 = 20 marbles, and 7 + 9 = 16 of them are not green. The probability is 16 / 20 = 80%. (20% is the probability of green.)",
       "metadata": {
         "subject": "numeracy",
         "strand": "Probability",
@@ -1691,15 +1691,15 @@
       "options": [
         {
           "id": "a",
-          "text": "105 minutes"
+          "text": "90 minutes"
         },
         {
           "id": "b",
-          "text": "110 minutes"
+          "text": "100 minutes"
         },
         {
           "id": "c",
-          "text": "115 minutes"
+          "text": "105 minutes"
         },
         {
           "id": "d",
@@ -1707,7 +1707,7 @@
         },
         {
           "id": "e",
-          "text": "125 minutes"
+          "text": "150 minutes"
         }
       ],
       "visuals": [],
@@ -1715,7 +1715,7 @@
         "kind": "single_option",
         "optionId": "d"
       },
-      "explanation": "Uphill time = (18 / 12) * 60 = 90 min. Downhill time = (18 / 36) * 60 = 30 min. Total time = 90 + 30 = 120 minutes.",
+      "explanation": "Uphill time = (18 / 12) * 60 = 90 min. Return time = (18 / 36) * 60 = 30 min. Total time = 90 + 30 = 120 minutes. (Using the average of the two speeds, 24 km/h, over 36 km would wrongly give 90 minutes.)",
       "metadata": {
         "subject": "numeracy",
         "strand": "Ratios and Rates",
@@ -1768,7 +1768,7 @@
         "subject": "numeracy",
         "strand": "Directed Numbers",
         "skill": "maths-directed-numbers",
-        "difficulty": "medium",
+        "difficulty": "easy",
         "marks": 1,
         "estimatedTimeSeconds": 40,
         "tags": [
@@ -1783,7 +1783,7 @@
       "type": "multiple_choice",
       "yearLevel": 6,
       "examStyle": "scholarship_style",
-      "prompt": "A store adds a 10% Goods and Services Tax (GST) to wholesale prices. If the final price of a tablet including GST is $440, what was the price before GST was added?",
+      "prompt": "A store adds 10% Goods and Services Tax (GST) to the price of each item. If a tablet costs $440 including GST, what was its price before GST was added?",
       "options": [
         {
           "id": "a",
@@ -1799,7 +1799,7 @@
         },
         {
           "id": "d",
-          "text": "$404"
+          "text": "$396"
         },
         {
           "id": "e",
@@ -1811,7 +1811,7 @@
         "kind": "single_option",
         "optionId": "c"
       },
-      "explanation": "Price with 10% GST is 110% of original. Pre-tax price = $440 / 1.10 = $400.",
+      "explanation": "Price with 10% GST is 110% of the original price. Pre-tax price = $440 / 1.10 = $400. (Taking 10% off $440 would wrongly give $396.)",
       "metadata": {
         "subject": "numeracy",
         "strand": "Percentages",
@@ -2108,7 +2108,7 @@
       "id": "scholarship-y6-maths-010",
       "skill": "maths-percentages",
       "targetOption": "b",
-      "correctValue": "30%",
+      "correctValue": "25%",
       "solver": "arithmetical_reasoning",
       "solverParams": {
         "variables": [
@@ -2119,7 +2119,7 @@
           }
         ],
         "constraints": [
-          "Pct === (15600 - 12000) * 100 / 12000"
+          "Pct === (15000 - 12000) * 100 / 12000"
         ],
         "targetVariable": "Pct"
       }
@@ -2168,18 +2168,18 @@
       "id": "scholarship-y6-maths-013",
       "skill": "maths-ratios-rates",
       "targetOption": "a",
-      "correctValue": "420 km",
+      "correctValue": "280 km",
       "solver": "arithmetical_reasoning",
       "solverParams": {
         "variables": [
           {
             "name": "Dist",
-            "min": 300,
-            "max": 500
+            "min": 200,
+            "max": 400
           }
         ],
         "constraints": [
-          "Dist === 210 * 150 / 75"
+          "Dist === 210 * 100 / 75"
         ],
         "targetVariable": "Dist"
       }
@@ -2228,7 +2228,7 @@
       "id": "scholarship-y6-maths-016",
       "skill": "maths-ratios-rates",
       "targetOption": "d",
-      "correctValue": "6 days",
+      "correctValue": "8 days",
       "solver": "arithmetical_reasoning",
       "solverParams": {
         "variables": [
@@ -2239,7 +2239,7 @@
           }
         ],
         "constraints": [
-          "Days === (6 * 8) / 8"
+          "Days === (6 * 12) / 9"
         ],
         "targetVariable": "Days"
       }
@@ -2374,18 +2374,18 @@
       "id": "scholarship-y6-maths-023",
       "skill": "maths-algebra",
       "targetOption": "c",
-      "correctValue": "91",
+      "correctValue": "32",
       "solver": "arithmetical_reasoning",
       "solverParams": {
         "variables": [
           {
             "name": "Val",
-            "min": 50,
-            "max": 120
+            "min": 10,
+            "max": 60
           }
         ],
         "constraints": [
-          "Val === 2 * (5 * 5) - 3 * (-3) * 4 + 5"
+          "Val === 3 * 5 + 2 * 3 * 4 - 7"
         ],
         "targetVariable": "Val"
       }
@@ -2592,18 +2592,18 @@
       "id": "scholarship-y6-maths-033",
       "skill": "maths-probability",
       "targetOption": "e",
-      "correctValue": "16",
+      "correctValue": "80%",
       "solver": "arithmetical_reasoning",
       "solverParams": {
         "variables": [
           {
             "name": "Ans",
-            "min": 5,
-            "max": 25
+            "min": 0,
+            "max": 100
           }
         ],
         "constraints": [
-          "Ans === 7 + 9"
+          "Ans === 100 * (7 + 9) / (7 + 9 + 4)"
         ],
         "targetVariable": "Ans"
       }
