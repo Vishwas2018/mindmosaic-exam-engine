@@ -17,6 +17,9 @@ test("Scholarship review is denied to guests and non-admin roles", async ({
     await expect(page.getByText("SOLAR is to SUN as LUNAR is to:")).toHaveCount(
       0,
     );
+    await expect(
+      page.getByText("THERMOMETER is to TEMPERATURE as ODOMETER is to:", { exact: true }),
+    ).toHaveCount(0);
     await page.close();
   }
 });
@@ -27,6 +30,8 @@ test("admin renders every corrected release item with current governance and his
   test.setTimeout(120_000);
   const page = await (await contextAs("admin")).newPage();
   await page.goto("/admin/review");
+  // Next streaming can retain a hidden server copy outside the active main.
+  // Role locators keep assertions on the accessible review without ignoring duplicates.
   await expect(page.getByRole("status")).toBeVisible();
   await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
   for (const [bucket, count] of [
@@ -67,7 +72,7 @@ test("admin renders every corrected release item with current governance and his
       .getByRole("combobox", { name: "Question", exact: true })
       .selectOption(id);
     await expect(
-      page.getByText(question.prompt, { exact: true }),
+      page.getByRole("main").getByText(question.prompt, { exact: true }),
     ).toBeVisible();
     for (const option of question.options)
       await expect(
@@ -82,16 +87,16 @@ test("admin renders every corrected release item with current governance and his
     .getByRole("combobox", { name: "Question", exact: true })
     .selectOption("scholarship-y6-rc-025");
   await expect(
-    page.getByText(
+    page.getByRole("main").getByText(
       /Superseded content: these findings do not describe the current revision/,
     ),
   ).toBeVisible();
-  await page.getByText("Content revision", { exact: true }).click();
+  await page.getByRole("main").getByText("Content revision", { exact: true }).click();
   await expect(
-    page.getByText(identities.sourceRevision, { exact: true }),
+    page.getByRole("main").getByText(identities.sourceRevision, { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
+    page.getByRole("main").getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
       exact: true,
     }),
   ).toBeVisible();
@@ -111,7 +116,7 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   });
   await page.goto("/admin/review");
   await expect(
-    page.getByText("Scholarship: 160 draft questions across four sections."),
+    page.getByRole("main").getByText("Scholarship: 160 draft questions across four sections."),
   ).toBeVisible();
   await expect(page.getByRole("status")).toBeVisible();
   await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
@@ -150,7 +155,7 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
     .getByLabel("Draft section paper")
     .selectOption({ label: "scholarship y6 reading" });
   await expect(
-    page.getByText(/Complete source packet: 35 questions/),
+    page.getByRole("main").getByText(/Complete source packet: 35 questions/),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "The Estuary Watchers" }),
@@ -160,12 +165,12 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   await page.getByRole("button", { name: "Previous", exact: true }).click();
   await expect(page.getByRole("radio").first()).toBeChecked();
   await page.getByRole("button", { name: "Submit draft paper" }).click();
-  await expect(page.getByText(/Preview total: 1 \/ 35 marks/)).toBeVisible();
+  await expect(page.getByRole("main").getByText(/Preview total: 1 \/ 35 marks/)).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Worked explanation" }),
   ).toBeVisible();
   await expect(
-    page.getByText(/Preview responses|No student progress was recorded/),
+    page.getByRole("main").getByText(/Preview responses|No student progress was recorded/),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Record my explicit approval" }),
