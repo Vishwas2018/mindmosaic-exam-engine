@@ -270,7 +270,17 @@ export async function assertNoRuntimeDraftReference(srcRoot = "src"): Promise<vo
         if (entry.name !== "tests") await checkDir(fullPath);
       } else if (/\.[cm]?[jt]sx?$/.test(entry.name)) {
         const content = await readFile(fullPath, "utf8");
+        const relative = path.relative(srcRoot, fullPath).replaceAll("\\", "/");
+        if (/from\s+["']@\/server\/admin-review["']/.test(content) &&
+            !["app/admin/review/page.tsx", "app/admin/review/actions.ts"].includes(relative)) {
+          throw new Error(`Admin draft reader referenced outside its authenticated review area: ${fullPath}`);
+        }
         if (content.includes("scholarship-drafts")) {
+          // The explicitly authorised review-only read path may bypass student
+          // publication eligibility, but must retain its own server auth gate.
+          if (relative === "server/admin-review.ts" &&
+              /import\s+["']server-only["']/.test(content) &&
+              /await\s+requireRole\(\s*["']admin["'],\s*["']\/admin\/review["']\s*\)/.test(content)) continue;
           throw new Error(`Unsigned scholarship drafts referenced in runtime code: ${fullPath}`);
         }
       }

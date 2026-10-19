@@ -5,8 +5,15 @@ import type { VisualAsset } from "@/schemas/visual.schema";
 import type { CandidateQuestion } from "./candidate-question";
 import type { CandidateAnswer } from "./response";
 
+// Presentation-only fields may describe draft programmes. Student allocation
+// still accepts CandidateQuestion and the governed Question schema exclusively.
+export type PresentationQuestion = Omit<CandidateQuestion, "examStyle" | "metadata"> & {
+  examStyle: string;
+  metadata: Omit<CandidateQuestion["metadata"], "subject" | "difficulty"> & { subject: string; difficulty: string };
+};
+
 export interface QuestionRendererProps {
-  question: CandidateQuestion;
+  question: PresentationQuestion;
   answer?: CandidateAnswer;
   onAnswerChange?: (answer: CandidateAnswer) => void;
   disabled?: boolean;
