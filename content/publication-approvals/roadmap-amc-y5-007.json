@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-007",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "9d3fd68a759b7072dc105f600a5e8c74065aef6adaecfcfb71cf213d28538a86",
+  "sourceManifestHash": "2f3f294b80c5fdeeb533b2f97a0389e137e0dda37334f39e95f9b4a9d02a99ce",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-007",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four equal teams collect 72 cans altogether. Then each team collects 3 more cans. How many cans does each team have now?",
+    "options": [
+      {
+        "id": "a",
+        "text": "24"
+      },
+      {
+        "id": "b",
+        "text": "18"
+      },
+      {
+        "id": "c",
+        "text": "20"
+      },
+      {
+        "id": "d",
+        "text": "21"
+      },
+      {
+        "id": "e",
+        "text": "75"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "First share 72 equally: 72 ÷ 4 = 18. Then add 3, giving 21 cans per team.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Division followed by addition",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "a6629f2044542c4d49c5b3fd030a6ca44028ff955422b49b09dd1fabfe9d0102"
+}

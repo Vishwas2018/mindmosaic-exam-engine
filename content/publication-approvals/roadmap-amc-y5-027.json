@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-027",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "8daed704aaf01eac9a50872ef0d45f4c738da2a57bb594fffd7611c7ae88f495",
+  "sourceManifestHash": "a1ff58ee4642c3c7ade87b58833610a8da8b0726ff069c4827379079b20e760e",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-027",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A grid has 4 columns and 3 rows of equal square cells. How many rectangles of all sizes have sides along the grid lines?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 60,
+      "tolerance": 0
+    },
+    "explanation": "Choose 2 of the 5 vertical lines and 2 of the 4 horizontal lines. There are 10 × 6 = 60 rectangles.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Systematically count rectangles",
+      "difficulty": "challenging",
+      "marks": 7,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "8245c539a7d5d83e0c3e86d15b82ab6c0681015718cbef6612213d1c6820cfd4"
+}

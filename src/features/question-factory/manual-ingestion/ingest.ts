@@ -1,5 +1,6 @@
 import { FACTORY_VERSIONS, type NormalisedIdentity } from "../config";
 import { candidateQuestionSchema } from "../ingestion/candidate-question";
+import { verifyFirstPartyAmcAttestation } from "../correctness/amc-attestation";
 import scholarshipIdentityPins from "../correctness/scholarship-identity-pins.json";
 import {
   candidateProvenanceSchema,
@@ -43,15 +44,22 @@ export async function ingestOneCandidate(
     indexInFile,
     sourceContentHash,
   });
-  // A scholarship draft has a stable draft identity used by its solver registries and review
-  // records. Preserve it only when the COMPLETE candidate content hashes to the pin recorded by
-  // scripts/pin-scholarship-identities.mts. A changed item, or an arbitrary external id, still
-  // receives a minted id and so cannot inherit a solver registration or review.
+  // A registered first-party snapshot (AMC or scholarship) has a stable draft identity used by
+  // its independent solver and review bindings. Preserve it only after verifying the complete
+  // pinned content hash (and recomputed answer for AMC). Arbitrary external ids still receive
+  // minted ids.
   const registered = candidateQuestionSchema.safeParse(candidateContent);
-  const candidateId = registered.success &&
-    (scholarshipIdentityPins as Record<string, string>)[registered.data.id] === hashJson(registered.data)
-    ? registered.data.id : mintedId;
-  // Mirrors `ingestion/ingest.ts` (Mission 2A): the candidate's internal
+  const registeredHash = registered.success ? hashJson(registered.data) : undefined;
+  const registeredAmc =
+    registered.success &&
+    registeredHash !== undefined &&
+    verifyFirstPartyAmcAttestation(registered.data, registeredHash).ok;
+  const registeredScholarship =
+    registered.success &&
+    registeredHash !== undefined &&
+    (scholarshipIdentityPins as Record<string, string>)[registered.data.id] === registeredHash;
+  const candidateId = registeredAmc || registeredScholarship ? registered.data.id : mintedId;
+  // Mirrors `ingestion/ingest.ts` (Mission 2A): an unregistered internal
   // `id` field is infrastructure this adapter mints, never a claim an
   // external generator gets to make — any `id` the source content
   // declares is discarded, never trusted.
@@ -79,7 +87,9 @@ export async function ingestOneCandidate(
     blueprintId: boundBlueprintId ?? request.blueprintId ?? MANUAL_INGESTION_PLACEHOLDER_BLUEPRINT_ID,
     batchId: request.batchId,
     pipelineRunId: request.pipelineRunId,
-    revision: 0,
+    // These registered authoring snapshots already have review revision 1.
+    // Ordinary external ingestion still starts at revision 0.
+    revision: registeredAmc ? 1 : 0,
     generatedAt: ingestedAt,
     generatorAdapter: { class: "manual_external", identity: declaredIdentity },
     generatorVersion: MANUAL_INGESTION_ADAPTER_VERSION,

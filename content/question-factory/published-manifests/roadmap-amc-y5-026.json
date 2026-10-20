@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y5-026",
+  "questionId": "roadmap-amc-y5-026",
+  "contentHash": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
+  "revision": 1,
+  "blueprintId": "amc-y5-026-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "74151791da0033ba2c3dd977c3fa47b994fa1958509420244a2462b19873dd34",
+  "difficultyFingerprint": "575c75395319613b28f48e2edbe81db63c746a62b768e6dd0c2d6a98eb74bba6",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-026",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is the sum of all positive multiples of 3 that are no greater than 30?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 165,
+      "tolerance": 0
+    },
+    "explanation": "The multiples are 3, 6, ..., 30. Pairing first with last gives five pairs of 33, so the total is 5 × 33 = 165.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Sum an arithmetic sequence",
+      "difficulty": "medium",
+      "marks": 6,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "ac6b39fdb6ab8097e897a84fe0eaf74b257d97aaf2c46d4b442294768bb27e13",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-026",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-2fc142d54488fdb8f7e2a616c612251e1402e013"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:37.600Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
+        "blueprintHash": "7dfb5c09eafb22b6481f121f6950a719fb9d6eebf4987a28039ba9fe8e9eb76e",
+        "candidateRevision": 1,
+        "reviewResultHash": "e5b76439b058b907f773056d7689781cbdb1916ed3a701a02a539531b9a683ec"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "640630f98c792f34fa76cce11b21f4a003d7a9a91c0c5ea44ce2162a1d43312c"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-026",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "d694934254c60a84ef2a4fc4a9481c49711c21265e66b27e3b6c2b5080903a73"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "2c95a54561f7d824674994178d774cc13b277d95ac7cc718e14e983d20a6b320",
+      "evidenceBinding": {
+        "candidateContentHash": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
+        "candidateRevision": 1,
+        "blueprintHash": "7dfb5c09eafb22b6481f121f6950a719fb9d6eebf4987a28039ba9fe8e9eb76e",
+        "reviewResultHash": "d694934254c60a84ef2a4fc4a9481c49711c21265e66b27e3b6c2b5080903a73"
+      },
+      "previousReviewHash": "640630f98c792f34fa76cce11b21f4a003d7a9a91c0c5ea44ce2162a1d43312c",
+      "reviewHash": "0b65d7bd2afe8096f22320fcc5361d27d640b99146d6eb3da1ba8821fb10718c"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-026",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "c7d3df807ca64b47d341595ad0201b232637fbb2cad68aebff82509b98e71d8e",
+    "sourceManifestHash": "2c95a54561f7d824674994178d774cc13b277d95ac7cc718e14e983d20a6b320",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-026",
+      "type": "number_entry",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "What is the sum of all positive multiples of 3 that are no greater than 30?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 165,
+        "tolerance": 0
+      },
+      "explanation": "The multiples are 3, 6, ..., 30. Pairing first with last gives five pairs of 33, so the total is 5 × 33 = 165.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Sum an arithmetic sequence",
+        "difficulty": "medium",
+        "marks": 6,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "d694934254c60a84ef2a4fc4a9481c49711c21265e66b27e3b6c2b5080903a73"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-026",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
+    "contentHash": "c7d3df807ca64b47d341595ad0201b232637fbb2cad68aebff82509b98e71d8e"
+  }
+}

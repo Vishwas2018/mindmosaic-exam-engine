@@ -1,9 +1,10 @@
 import { questionBank } from "@/content/questions/question-bank";
-import { approvalFingerprint, canonicalQuestionHash, validateHumanApproval, validatePublicationSource } from "@/features/content-governance/publication-integrity";
+import { approvalFingerprint, canonicalQuestionHash, validateHumanApproval, validatePublicationSource, type HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
+import { verifiedAmcApprovalSourceHash } from "@/features/content-governance/amc-review-source";
 import { validateReviewedApprovalRow, type ApprovalInputRow } from "@/features/content-governance/approval-verification";
 
 import { FACTORY_THRESHOLDS } from "../config";
-import { hashJson } from "../provenance";
+import { hashJson, appendReviewRecord } from "../provenance";
 import type { FactoryRepository } from "../storage";
 import { parseCandidateProvenance, parseCandidateQuestion } from "../validation";
 import { applyTransition } from "../workflow";
@@ -17,6 +18,9 @@ export interface OrchestratePublicationOptions {
   readonly publishedAt: string;
   /** A reviewer-completed packet or sheet row bound to this exact candidate revision. */
   readonly reviewedApproval?: { readonly row: ApprovalInputRow; readonly reviewerFullName: string };
+  /** AMC requires the already-recorded external signature and its registered source. */
+  readonly recordedAmcApproval?: HumanPublicationApproval;
+  readonly amcApprovalSource?: unknown;
   /**
    * Production ids to additionally treat as taken, beyond the curated
    * `questionBank` (checked automatically). Exists so a caller publishing
@@ -169,7 +173,16 @@ export async function orchestratePublication(
     contentHash: canonicalQuestionHash(built.question),
     revision: provenance.revision,
   })] : ["A reviewed packet or sheet row is required before publication."];
-  if (reviewed?.row.sourceManifestHash) reviewErrors.push("A staged candidate cannot name a published source manifest.");
+  const amc = question.metadata.subject === "amc_mathematics";
+  if (reviewed?.row.sourceManifestHash && !amc) reviewErrors.push("A staged candidate cannot name a published source manifest.");
+  if (amc) {
+    const sourceHash = verifiedAmcApprovalSourceHash(options.amcApprovalSource, candidateId, provenance.contentHash,
+      canonicalQuestionHash(built.question), provenance.revision);
+    const signature = sourceHash && options.recordedAmcApproval
+      ? validateHumanApproval(options.recordedAmcApproval, built.question, provenance.revision, sourceHash) : undefined;
+    if (!signature?.ok || signature.approval.approvedBy !== reviewed?.reviewerFullName.trim() ||
+        reviewed?.row.sourceManifestHash !== sourceHash) reviewErrors.push("AMC requires a real recorded approval bound to this exact registered source, revision, content and reviewer.");
+  }
   if (reviewErrors.length) {
     return { outcome: "ineligible", candidateId, issues: [issue(
       "publication_upstream_evidence_invalid", "humanApproval", reviewErrors.join(" "),
@@ -215,13 +228,27 @@ export async function orchestratePublication(
   // computed over `manifestFacts` alone, keeping every pre-P0-B manifest's
   // stored value reproducible and keeping unverifiable recovered evidence
   // structurally unable to alter a tamper-evidence value.
+  let reviewChain = provenance.reviewRecords;
+  if (amc) {
+    const approval = options.recordedAmcApproval!;
+    const firstParty = reviewChain.find(entry => entry.stage === "correctness_check_passed" && entry.reviewerIdentity.modelId === "mindmosaic-first-party-amc");
+    if (!firstParty) return { outcome: "ineligible", candidateId, issues: [issue("publication_upstream_evidence_invalid", "reviewChain", "Missing governed first-party AMC review stage.")] };
+    const human = appendReviewRecord(reviewChain, { candidateId, stage: "published",
+      reviewerIdentity: { provider: "human", modelId: approval.approvedBy, modelFamily: "human", interactionMode: "external_manual" },
+      reviewerVersion: "1", result: "passed", confidence: 1, findings: ["Recorded human approval verified against this exact source, content and revision."],
+      evidenceReferences: [approval.fingerprint], ambiguityStatus: "none", reviewedAt: approval.approvedAt,
+      reviewPromptVersion: "human-publication-approval-1", reviewPromptHash: approval.sourceManifestHash!,
+      evidenceBinding: { candidateContentHash: provenance.contentHash, candidateRevision: provenance.revision,
+        blueprintHash: firstParty.evidenceBinding.blueprintHash, reviewResultHash: approval.fingerprint } });
+    reviewChain = [...reviewChain, human];
+  }
   const manifest: PublicationManifest = {
     ...manifestFacts,
     manifestFingerprint: hashJson(manifestFacts),
     manifestSchemaVersion: MANIFEST_SCHEMA_VERSION_CURRENT,
     chainOrigin: "in_pipeline",
     correctnessBasis: eligibility.correctnessEstablishedBySemanticReview ? "independent_semantic_review" : "deterministic",
-    reviewChain: provenance.reviewRecords,
+    reviewChain,
     approvedBy: reviewerName,
   };
 
@@ -238,14 +265,15 @@ export async function orchestratePublication(
     question: built.question,
   };
   const approvedManifest: PublicationManifest = { ...manifest,
-    humanApproval: { ...approvalFacts, fingerprint: approvalFingerprint(approvalFacts) } };
+    ...(amc ? { humanApproval: options.recordedAmcApproval, humanApprovalSource: options.amcApprovalSource }
+      : { humanApproval: { ...approvalFacts, fingerprint: approvalFingerprint(approvalFacts) } }) };
   const approvalValidation = validateHumanApproval(approvedManifest.humanApproval,
-    built.question, provenance.revision, hashJson(manifest));
+    built.question, provenance.revision, amc ? hashJson(options.amcApprovalSource) : hashJson(manifest));
   if (!approvalValidation.ok) {
     return { outcome: "ineligible", candidateId, issues: [issue("publication_upstream_evidence_invalid", "humanApproval", approvalValidation.reason)] };
   }
 
-  const manifestValidation = validateManifestReviewEvidence(manifest);
+  const manifestValidation = validateManifestReviewEvidence(approvedManifest);
   if (!manifestValidation.ok) {
     return {
       outcome: "ineligible",

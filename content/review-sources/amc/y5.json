@@ -1,0 +1,272 @@
+[
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-001",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "7d9225fe329da1d42df241f74a3ee287676f5352b760f7f281314372b62f3758",
+    "contentHash": "683555c99beea3e5554264d86ba76eb9c91671d222d8f3455be8f8a00f42ba77"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-002",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "d3ee65884a81478b4987f452f559bfabb298a139aa494970e86140bc618a876d",
+    "contentHash": "7d3b0d862a0f0e0ae51ac6fcd9559877f8e4315ec44cb696c6a7573829fe05f8"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-003",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "6cbb60e9d80b322167f49ae29f67c058cf9b497aa4710f24f54e002ce1f2335a",
+    "contentHash": "b7cebb5156675f9b9af2a163e83c6538f08e745d70233af97f512103ba69f2ff"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-004",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "74365071c40f64be287817381c83b5f524e6acc384feffcc0773b7979b327b8d",
+    "contentHash": "ceab63477930c40d2f6b37f97746257ecc42aebcf92d20cfbf3bf88d89a9ec41"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-005",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "483a233b876518e0d6d55dcfcf982cc0e50ce2143f08c5f40c52fac7251d89a9",
+    "contentHash": "0e66d9aef5af30c8f78b590a199bb2292178e40b8d1de898e0b7dd4cc973fc3c"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-006",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "93b739d8908781b715ed3f7b884deff7c96a079309e2940bb51555bfecc357f0",
+    "contentHash": "5e813e503db1533f1058b8f0db776fccc7979eba852dc167619acffe1238b02e"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-007",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "a41329c70bafb9ffb47e3585eeda830ffb8ccdb97a99d7cd970dc5d5b92d653a",
+    "contentHash": "9d3fd68a759b7072dc105f600a5e8c74065aef6adaecfcfb71cf213d28538a86"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-008",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "c2c8a08e83d07886d53fc11936c2cade0d5b58d63f975a5c8e684b344891676e",
+    "contentHash": "ec214788352f11aed05e86cb1be2ebd48a787a08ebcd80e692e7fad35e6db7c1"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-009",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "70797d4b493d2f203073628893023e0296fa0bcaab291f227e0d9c0e6dd9e7db",
+    "contentHash": "e13315f30e832e7521a073409c878d2d271a8ed6af41a7927dd5a28b2bccd6a4"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-010",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "c55997c9caa2fde080f9a79f2ec2492fe89b677e33f8e4d1fa9a59eaeeb0e1d3",
+    "contentHash": "6e99599c41aced589c47361ae0020c9ee8c3f64ee9d725b63359f79634c76f1e"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-011",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "7907a9787cc0dd676c0b4312ddf3bccbd188daef079a9370c5f3201f7621efea",
+    "contentHash": "e17e3875c5c0e66a1b5495b11245c0f2ad497291a0db947e838efe9e8f90f956"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-012",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "0b26e4c1e47018365941160e30bf8e6fbd1e1efded8ff9f43a300193840cd660",
+    "contentHash": "59c18decf276d25eba4e8c530633b989745bfd71b40e58541bb54d2dbc32cfb3"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-013",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "048222181a6f9d5d8e42ed043bf54834f3155879213980a65df606d031adb935",
+    "contentHash": "99042f67e7134086eca2cd142f5b55d88fd649571b319a4dcccaffa11098f0d9"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-014",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "79457b295091f13ecc94a915d811e887e7eb9503fc56de445476bc9bd2609481",
+    "contentHash": "f68437e659e8103ba34c067b202b2e8bcd0292755863aaecf69dfadc29d7e54f"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-015",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "9bfa8c4ffeca2edd6e96fbecf984eb890cea4ea2c45146695e00746416f741a4",
+    "contentHash": "7169f6554659352624a3bfa5a13ecd3fd8aea59aa71895a18f0372c5d36845b2"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-016",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "904ec24b0c0d776b5fc3582b1b303a56abf837554adba2a36a840168f4f82185",
+    "contentHash": "59abdb6926336383a513d1c8149fdd3fda41cbeb4f3380dc908a014812bfe2e2"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-017",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "e07090f0c233065db9cae53b0e2568dcb356b6e8f0aae95fac90481c788b38e1",
+    "contentHash": "0059de2eb4d3d677877783a8997f7bcd85abbe979f7d6806c72f246863cc5a1e"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-018",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "67acb9bcb239b73d6968bf1a159f2de2240cd7331b08b6689f36eade7195e125",
+    "contentHash": "52a51f63c3876e63052d61d982a7a6becdda9786f45f2d4637349f03f2c8ac68"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-019",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "72b207b2bd180dd19cb0ce025417ce75c4867b3c51e9ab5f904df45b3a12c362",
+    "contentHash": "05c7a7cb465286ec4684accb6c2b1427ada5e6ed6ac04be5488db189ef87f494"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-020",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "43f94338f0087aaf5c4198c70e3d0afb77a77b43b5fa938f197ef5a2f46b50e6",
+    "contentHash": "7f30857724840b78a1328b3e6e3db09e88e98bfb7a0505ff054b2eefd6a58242"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-021",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "98dc94125936c56e9b0eff01218338fea8243ac4bb32b20f7d6c0883432f8c32",
+    "contentHash": "17b00b24cc1e38453b89664f4ec04ea3fb4f48b6614da01e205a051a02874075"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-022",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "acb63723cd19fe4122aac3cf3ae6fc2ade10d1a9fcc2d2b96561565c1a5cde01",
+    "contentHash": "279bd70686f52dcda819f52788f27361bd66c6f51e54bc5f58f0c95570dce2e6"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-023",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "5a7ca89db7eab1cfa9c05a9a373ec223384eb226f4d268926d9f1eee850399a6",
+    "contentHash": "cb9c8472c80e61cd1a023c85385b578f4ff577f134d0fd9ce0ed27cb61b8ee67"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-024",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "293aeae6a196e5a60f5d8d775f4fb00041db9c3ca28f871c18d5478fb61e1c25",
+    "contentHash": "b0f8a6298f1eae1b17f446caea7c488fee13542e89804704dcdf7cec63a02fed"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-025",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
+    "contentHash": "357dbc8dfd3ed7b0bcb3344ead612d8dd40af7f2ff7454a7ce434e237e3c62c2"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-026",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
+    "contentHash": "c7d3df807ca64b47d341595ad0201b232637fbb2cad68aebff82509b98e71d8e"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-027",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
+    "contentHash": "8daed704aaf01eac9a50872ef0d45f4c738da2a57bb594fffd7611c7ae88f495"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-028",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "a2bd5e3e6f3ca2ff907ebbd1e1807981b4a4a0c53e0e6a65c1e2bb4cb41a76e3",
+    "contentHash": "2187d6acca5a265949bbd8be74ab68f0c70474f2d3f6996b1333f65a9c4dd5f8"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-029",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
+    "contentHash": "dd927d53d9a920c6eecd21b654785d624609fa30357a01bb2789f1567eb7f4d4"
+  },
+  {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-030",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086",
+    "contentHash": "36f2adb7338419ff9b8175c0f42518c0d8d1895d68e50621e9bda028757e1daa"
+  }
+]

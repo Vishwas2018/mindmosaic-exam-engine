@@ -1,0 +1,40 @@
+import {readFile,mkdtemp,mkdir,writeFile,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';import path from 'node:path';
+import {it,expect} from 'vitest';
+import {FsFactoryRepository} from '@/features/question-factory/storage';
+import {runManualIngestion} from '@/features/question-factory/manual-ingestion';
+import {runPipeline} from '@/features/question-factory/pipeline';
+import {orchestrateStaging} from '@/features/question-factory/staging';
+import {orchestratePublication} from '@/features/question-factory/publication';
+import {assemblePublishedQuestions} from '@/features/question-factory/publication/assemble-published-bank';
+import {parseApprovalCsv} from '@/features/content-governance/approval-verification';
+import {amcIntakeBlueprint} from '../../../../scripts/lib/amc-intake-blueprint.mjs';
+import {candidateQuestionSchema} from '@/features/question-factory/ingestion/candidate-question';
+it('publishes AMC only after real ingestion, every upstream gate, staging and the existing external human signature',async()=>{
+ const root=await mkdtemp(path.join(tmpdir(),'amc-real-chain-'));
+ try{
+  const repo=new FsFactoryRepository(root);const inbox=path.join(root,'inbox');await mkdir(inbox,{recursive:true});
+  const q=candidateQuestionSchema.parse(JSON.parse(await readFile('content/roadmap-drafts/amc-y3-draft.json','utf8')).questions[0]);
+  const blueprint=amcIntakeBlueprint(q);expect((await repo.create('blueprints',blueprint.id,blueprint)).ok).toBe(true);
+  await writeFile(path.join(inbox,'amc.json'),JSON.stringify(q));
+  const ingested=await runManualIngestion({source:'chatgpt',batchId:'amc-test',promptVersion:'existing-draft-import',pipelineRunId:'amc-test-ingest',blueprintId:blueprint.id,inboxRoot:inbox},repo);
+  expect(ingested.status).toBe('completed');
+  const run=await runPipeline({batchId:'amc-test',pipelineRunId:'amc-test-gates',candidateIds:[q.id]},repo,{lockRoot:root});
+  expect(run.status).toBe('completed');if(run.status!=='completed')return;
+  expect(run.report.candidateResults[0].endState,JSON.stringify(run.report)).toBe('difficulty_review_passed');
+  expect((await orchestrateStaging(q.id,repo)).outcome).toBe('staged');
+  const row=parseApprovalCsv(await readFile('docs/reviews/amc-2026-10-17/review-sheet-amc-y3-blank.csv','utf8'))[0];
+  const approval=JSON.parse(await readFile(`content/publication-approvals/${q.id}.json`,'utf8'));
+  const source=JSON.parse(await readFile('content/review-sources/amc/y3.json','utf8')).find((s:{questionId:string})=>s.questionId===q.id);
+  const options={publishedAt:new Date().toISOString(),reviewedApproval:{row,reviewerFullName:'Vishwas Joshi'},amcApprovalSource:source};
+  const missing=await orchestratePublication(q.id,repo,options);expect(missing.outcome).toBe('ineligible');
+  const result=await orchestratePublication(q.id,repo,{...options,recordedAmcApproval:approval});
+  expect(result.outcome,JSON.stringify(result)).toBe('published');if(result.outcome!=='published')return;
+  expect(result.manifest.humanApproval).toEqual(approval);
+  expect((await assemblePublishedQuestions(repo,[])).questions).toHaveLength(0);
+  expect((await assemblePublishedQuestions(repo,[approval,approval])).questions).toHaveLength(0);
+  const assembled=await assemblePublishedQuestions(repo,[approval]);
+  expect(assembled.warnings).toEqual([]);expect(assembled.questions).toHaveLength(1);
+  expect(result.manifest.reviewChain?.map(r=>[r.stage,r.reviewerIdentity.modelId])).toEqual([['correctness_check_passed','mindmosaic-first-party-amc'],['published','Vishwas Joshi']]);
+ }finally{await rm(root,{recursive:true,force:true});}
+},60000);

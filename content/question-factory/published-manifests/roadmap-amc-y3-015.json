@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-015",
+  "questionId": "roadmap-amc-y3-015",
+  "contentHash": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
+  "revision": 1,
+  "blueprintId": "amc-y3-015-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "64faf81ac2b8d7814cb69dc6d2dd4f4bbbe1d2f4f6760fd741d96699051f5986",
+  "difficultyFingerprint": "7a6ae0037fcbc84e565a774a0af882ce52e86de6fb6c48fedfb3803e8fda718f",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-015",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A straight ribbon is cut into 7 equal pieces. Each cut divides one existing piece into two. How many cuts are needed?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5"
+      },
+      {
+        "id": "b",
+        "text": "9"
+      },
+      {
+        "id": "c",
+        "text": "7"
+      },
+      {
+        "id": "d",
+        "text": "3"
+      },
+      {
+        "id": "e",
+        "text": "6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Start with one piece. Every cut adds one more piece.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Non-routine deduction and logical elimination",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8e1ea894f7c07c8003218acf119c8190f72b20057abf2b085e935bb739de41ef",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-015",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-21033d60cf41a361302690fe848eeb5d6df76b28"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:25.923Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
+        "blueprintHash": "59ae57a4777381bb71ead4a670f5f71f10889f6254d1f5de55870f1b23113a6d",
+        "candidateRevision": 1,
+        "reviewResultHash": "35ecf760b3eb5f3b4e6213a51bc295e95b49b41aad48014594ed36ef678aedf0"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7d27931bed571c015884d0e060163c5def26923fdf736a45b5314cde352dd5b5"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-015",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "9c2dce8bdeb2b02680cdc6865e965dd68497ac43c97b058aa73b1f97d7ec328e"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:25.891Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "caab35187783f24959fd1ff5eb31399b8528d4567c8abeb7bcab68b675c8bc77",
+      "evidenceBinding": {
+        "candidateContentHash": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
+        "candidateRevision": 1,
+        "blueprintHash": "59ae57a4777381bb71ead4a670f5f71f10889f6254d1f5de55870f1b23113a6d",
+        "reviewResultHash": "9c2dce8bdeb2b02680cdc6865e965dd68497ac43c97b058aa73b1f97d7ec328e"
+      },
+      "previousReviewHash": "7d27931bed571c015884d0e060163c5def26923fdf736a45b5314cde352dd5b5",
+      "reviewHash": "4ad2975267492ae55570e0e82f6c797aa12d767455d79c1ac0c3b4797fcfc454"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-015",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:25.891Z",
+    "contentHash": "8e5168af791e3e28b6fd9a1c47dd21fb78e21a9489ae6607c11042b6f2003d34",
+    "sourceManifestHash": "caab35187783f24959fd1ff5eb31399b8528d4567c8abeb7bcab68b675c8bc77",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-015",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A straight ribbon is cut into 7 equal pieces. Each cut divides one existing piece into two. How many cuts are needed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        },
+        {
+          "id": "e",
+          "text": "6"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Start with one piece. Every cut adds one more piece.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Non-routine deduction and logical elimination",
+        "difficulty": "easy",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "9c2dce8bdeb2b02680cdc6865e965dd68497ac43c97b058aa73b1f97d7ec328e"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-015",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
+    "contentHash": "8e5168af791e3e28b6fd9a1c47dd21fb78e21a9489ae6607c11042b6f2003d34"
+  }
+}

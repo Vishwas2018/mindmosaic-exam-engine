@@ -1,0 +1,24 @@
+{
+  "id": "amc-y5-021-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-5",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Patterns & Algebra",
+  "skill": "amc.digit-reasoning",
+  "difficulty": "medium",
+  "questionType": "multiple_choice",
+  "targetCount": 1,
+  "marks": 5,
+  "estimatedTimeSeconds": 150,
+  "learningObjective": "Digit reasoning",
+  "misconceptionTargets": [],
+  "reasoningSteps": 3,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-018",
+  "questionId": "roadmap-amc-y3-018",
+  "contentHash": "4e7b7b86ae345af8d439d624b2ad99a13b4879872b8b446bf3dc03e53a3fda8e",
+  "revision": 1,
+  "blueprintId": "amc-y3-018-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "43850b6a8554e42a74f370a0b3800bbc81a77db6b32d41a6d1afc635a872b0cb",
+  "difficultyFingerprint": "886621f4bdf9d089c071b7bc06ed62b3d4218340a62eaadb1c4bdf898b7c5610",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-018",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Two lights blink together at noon. One blinks every 4 minutes and the other every 6 minutes. After how many minutes will they next blink together?",
+    "options": [
+      {
+        "id": "a",
+        "text": "15"
+      },
+      {
+        "id": "b",
+        "text": "12"
+      },
+      {
+        "id": "c",
+        "text": "9"
+      },
+      {
+        "id": "d",
+        "text": "11"
+      },
+      {
+        "id": "e",
+        "text": "13"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The next shared blink is at the smallest positive common multiple of both intervals.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Divisibility and remainders",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "12394b50aaef6049561574c80ce9fe10838a2aeba79ba4409037da32a90cd878",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-018",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-ec378926d953594ab0dc9c3dfcc27f92fdfa2395"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:26.803Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "4e7b7b86ae345af8d439d624b2ad99a13b4879872b8b446bf3dc03e53a3fda8e",
+        "blueprintHash": "44b13fd21104f74f27dd1e22bf6818635ce7a9684ab6189fa780155a2ee78cbc",
+        "candidateRevision": 1,
+        "reviewResultHash": "1fac94b271f81614a3d3d4ed2b642a7ed04d2353071dd315c9f1f386f6265d06"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c223836fbea743d83eb733a1446cf62419998a197a0d74ca8937388c8cd54f66"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-018",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "f4a4abc5708081bb52ef8debed23b2a9273dde4ed1a935669938835cb4a6c725"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "b188eea0459ecbda7e43575c20fe652eda32fe3acbcc4f6f1df37a905698ad96",
+      "evidenceBinding": {
+        "candidateContentHash": "4e7b7b86ae345af8d439d624b2ad99a13b4879872b8b446bf3dc03e53a3fda8e",
+        "candidateRevision": 1,
+        "blueprintHash": "44b13fd21104f74f27dd1e22bf6818635ce7a9684ab6189fa780155a2ee78cbc",
+        "reviewResultHash": "f4a4abc5708081bb52ef8debed23b2a9273dde4ed1a935669938835cb4a6c725"
+      },
+      "previousReviewHash": "c223836fbea743d83eb733a1446cf62419998a197a0d74ca8937388c8cd54f66",
+      "reviewHash": "75e1f23996c6aa8fca55c7a208009dc7a69ec7a96343c41865512ec34b12a097"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-018",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "f21be7ae907f742e51eb59bcbf5a6ff17c7d5a8b0eeb77ec62b0190af48766df",
+    "sourceManifestHash": "b188eea0459ecbda7e43575c20fe652eda32fe3acbcc4f6f1df37a905698ad96",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-018",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Two lights blink together at noon. One blinks every 4 minutes and the other every 6 minutes. After how many minutes will they next blink together?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "13"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The next shared blink is at the smallest positive common multiple of both intervals.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Divisibility and remainders",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "f4a4abc5708081bb52ef8debed23b2a9273dde4ed1a935669938835cb4a6c725"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-018",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "4e7b7b86ae345af8d439d624b2ad99a13b4879872b8b446bf3dc03e53a3fda8e",
+    "contentHash": "f21be7ae907f742e51eb59bcbf5a6ff17c7d5a8b0eeb77ec62b0190af48766df"
+  }
+}

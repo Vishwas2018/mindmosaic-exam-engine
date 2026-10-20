@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-027",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "a323756784afa1e271dbaf2e0faa1e011346200782a11dc8e8cbd199bde0e200",
+  "sourceManifestHash": "7c839f12c1d505b0c7d0518c1dcec04f7e70a7316d351e11dc51f4952934a17a",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-027",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A two-digit number has digits that add to 10. Reversing its digits makes a number 18 greater than the original number. What is the original number?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 46,
+      "tolerance": 0
+    },
+    "explanation": "The reversed number is larger, so the ones digit is larger than the tens digit. Try the digit pairs that add to 10: 19 becomes 91 (72 greater), 28 becomes 82 (54 greater), 37 becomes 73 (36 greater), and 46 becomes 64 (18 greater). The original number is 46.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Reason about place value using two constraints",
+      "difficulty": "challenging",
+      "marks": 7,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "914589146ff782f79f45a96c4f82983c55b39cb6fc646d10f5f9cc94aeef8a4b"
+}

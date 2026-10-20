@@ -1,7 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { questionSchema, type Question } from "@/schemas/question.schema";
-import { validatePublicationSource } from "@/features/content-governance/publication-integrity";
+import { validatePublicationSource, type HumanPublicationApproval } from "@/features/content-governance/publication-integrity";
 
 import {
   manifestSchemaVersionOf,
@@ -51,6 +51,7 @@ export interface LoadedManifest {
   readonly publishedAt: string;
   readonly question?: Question;
   readonly sourceManifestHash?: string;
+  readonly humanApproval?: HumanPublicationApproval;
 }
 
 export interface ManifestLoadResult {
@@ -143,6 +144,9 @@ export async function loadPublishedManifests(
       publishedAt: String(raw.publishedAt),
       question: parsedQuestion.success ? parsedQuestion.data : undefined,
       sourceManifestHash: integrity?.ok ? integrity.sourceManifestHash : undefined,
+      ...(raw.humanApproval
+        ? { humanApproval: raw.humanApproval as HumanPublicationApproval }
+        : {}),
     });
   }
 

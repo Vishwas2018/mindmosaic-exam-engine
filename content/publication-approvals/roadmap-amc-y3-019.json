@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-019",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:30.315Z",
+  "contentHash": "25d9b079787bef0330846b7c0c8ce645ab7f4e29bf16110618a13c3480824804",
+  "sourceManifestHash": "cfd4fc4fddde3926e598d8c865eeb309a05785fb1d0ab192a2313b9e2b2fb856",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-019",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A class has 24 children. Of these, 15 enjoy drawing and 13 enjoy building. Every child enjoys at least one of these activities. How many enjoy both?",
+    "options": [
+      {
+        "id": "a",
+        "text": "3"
+      },
+      {
+        "id": "b",
+        "text": "1"
+      },
+      {
+        "id": "c",
+        "text": "4"
+      },
+      {
+        "id": "d",
+        "text": "7"
+      },
+      {
+        "id": "e",
+        "text": "5"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Adding the two activity totals counts the children in both activities twice. Subtract the class total.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Statistics & Chance",
+      "topic": "Statistics & Chance",
+      "skill": "Venn diagrams and set logic",
+      "difficulty": "challenging",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "fca237419129d4b14732d2e6e90ddfbae5c8ca8bfb222d03e65fe1863d2022be"
+}

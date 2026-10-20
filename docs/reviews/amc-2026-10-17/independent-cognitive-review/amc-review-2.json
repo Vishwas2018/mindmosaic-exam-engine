@@ -1,0 +1,31 @@
+{
+  "reviewer": "Claude Opus 5.5 (claude-opus-5-5)",
+  "items": [
+    {
+      "id": "roadmap-amc-y3-005",
+      "myAnswer": "a",
+      "working": "31 = 5 x 6 + 1, so 5 full bracelets use 30 beads and 1 bead is left over. The next multiple of 6 is 36, and 36 - 31 = 5 extra beads. Check: 31 + 2 = 33, 31 + 4 = 35, 31 + 6 = 37 and 31 + 8 = 39 are not multiples of 6. Only 5 works, so exactly one option is correct.",
+      "unambiguous": true,
+      "distractorIssues": "There is exactly one key and every option is different, but the distractors don't match the likely mistakes. The most common error is giving the remainder, 1, and 1 is not an option. 6 is a fair choice ('one more bracelet's worth'). 8, 4 and 2 match no clear mistake (4 might come from 35 - 31, a miscount). Suggested fix: replace 8 with 1 (the remainder). Could also replace 2 with 7 (31 - 24, a subtraction mix-up) so that every distractor matches a real mistake.",
+      "currentLabel": "medium",
+      "myLabel": "medium",
+      "currentMarks": 3,
+      "myMarks": 3,
+      "verdict": "REVISE",
+      "reason": "The maths and wording are sound and suit Year 3. The task takes two steps: divide with a remainder, then work out how many more reach the next multiple. That is a fair medium. Change one distractor: option b) 8 should become 1 (the remainder trap) so the item tests the main misconception. Marks of 3 are fine for medium if this paper gives 3 marks to medium. If the paper's scheme is easy=3, medium=4, set this to 4."
+    },
+    {
+      "id": "roadmap-amc-y3-016",
+      "myAnswer": "b",
+      "working": "After the change each plate holds 6 + 2 = 8 pieces. 4 plates x 8 = 32. Another way: 4 x 6 = 24 to start, plus 2 on each of 4 plates = 8 more, so 24 + 8 = 32.",
+      "unambiguous": true,
+      "distractorIssues": "Most distractors match a clear mistake: 24 (ignores the added pieces), 26 (adds 2 once instead of to every plate), 28 (4 x 7, or adds 2 to only two plates). 30 is the weakest (24 + 6, or 6 + 2 + ... miscount), but it is still plausible and distinct. No change needed.",
+      "currentLabel": "easy",
+      "myLabel": "medium",
+      "currentMarks": 4,
+      "myMarks": 4,
+      "verdict": "RELABEL",
+      "reason": "One correct key, clear wording ('to every plate' is explicit), and right for Year 3. The task takes two steps (a small multiplication plus adding to every group). The 26 trap is a real AMC-style trick, so this is lower medium rather than easy. The current pair 'easy' + 4 marks doesn't fit together. Relabel as medium and keep 4 marks. Or keep 'easy' and cut the marks to 3, whichever matches the paper's scheme. The question itself needs no change."
+    }
+  ]
+}

@@ -313,7 +313,7 @@ describe("planBlueprintBatch", () => {
     const plan = planBlueprintBatch({
       batchId: "batch-plan-009",
       yearLevels,
-      examStyles: ["naplan_style", "icas_style", "scholarship_style"],
+      examStyles: ["naplan_style", "icas_style", "amc_style", "scholarship_style"],
       targetCountPerBlueprint: 20,
     });
 

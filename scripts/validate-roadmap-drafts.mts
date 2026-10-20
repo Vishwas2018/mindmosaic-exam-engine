@@ -84,13 +84,24 @@ export function assertAnswerPositionQuality(file: string, questions: CandidateQu
   return distribution;
 }
 
+const ALLOWED_PROVENANCE_VALIDATOR = path.join("src", "features", "content-governance", "amc-review-source.ts");
+
 async function assertNoRuntimeDraftReference(root: string): Promise<void> {
   for (const entry of await readdir(root, { withFileTypes: true })) {
     const file = path.join(root, entry.name);
     if (entry.isDirectory()) {
       if (entry.name !== "tests") await assertNoRuntimeDraftReference(file);
-    } else if (/\.[cm]?[jt]sx?$/.test(entry.name) &&
-      (await readFile(file, "utf8")).includes("roadmap-drafts")) {
+    } else if (/\.[cm]?[jt]sx?$/.test(entry.name)) {
+      const source = await readFile(file, "utf8");
+      if (!source.includes("roadmap-drafts")) continue;
+      // `amc-review-source.ts` validates the provenance `sourceFile` string on an `amc_draft_review_source`
+      // record; it must never import a draft JSON file or touch the filesystem.
+      if (
+        file === ALLOWED_PROVENANCE_VALIDATOR &&
+        !/\b(?:import|require|from)\b[^\n]*roadmap-drafts|\bnode:fs\b|\bfs\b/.test(source)
+      ) {
+        continue;
+      }
       throw new Error(`Unsigned roadmap drafts are referenced by runtime source: ${file}`);
     }
   }

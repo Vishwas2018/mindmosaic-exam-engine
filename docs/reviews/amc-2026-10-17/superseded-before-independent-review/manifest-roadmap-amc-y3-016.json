@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-016",
+  "questionId": "roadmap-amc-y3-016",
+  "contentHash": "4ab20d4c5a6e2d123dac322255e6ace175c215f0dd7d798b5baa0004d598d7cc",
+  "revision": 1,
+  "blueprintId": "amc-y3-016-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "fb022a63d8a0dc0719ff9b7eddda64763a7b7973b7b6f3b2bfe9de8be7443ebc",
+  "difficultyFingerprint": "6e9f8d9d5949f3e9582cd0e3e1411d4d1dd6e195e35e1351385dba9d44b83c14",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-016",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four plates each hold 6 apple pieces. Two more apple pieces are added to every plate. How many apple pieces are on the plates now?",
+    "options": [
+      {
+        "id": "a",
+        "text": "30"
+      },
+      {
+        "id": "b",
+        "text": "32"
+      },
+      {
+        "id": "c",
+        "text": "24"
+      },
+      {
+        "id": "d",
+        "text": "28"
+      },
+      {
+        "id": "e",
+        "text": "26"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "At first there are 4 × 6 = 24 pieces. Adding 2 pieces to each of 4 plates adds 8 more. Altogether there are 24 + 8 = 32 pieces.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Apply equal groups in two steps",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "a6b96538b62927045c5ad58f37cbcee774a9157bb10f8da92647d49ea28ed40b",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-016",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-a8b11a9e8e6d68f8909b6c56b236de8eba8a43e8"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:26.210Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "4ab20d4c5a6e2d123dac322255e6ace175c215f0dd7d798b5baa0004d598d7cc",
+        "blueprintHash": "81f18bbad7dd676462910d44a24850db933b9006cee37251665872653f1d4901",
+        "candidateRevision": 1,
+        "reviewResultHash": "9f47f092fd7b12aec7e750f13b772361287530e02233d278001141ce8f1cb441"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "c8650becc0041b27f368300b7c548ff362dbf25c3352e38a185b3153c9e25e1c"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-016",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "b52ca58ccdafbe260d74c00f115bf3a6eb4c84d6ca07d58dba82c497f21bc3be"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "c56000a65596e5793b1d3eec5d3fe098f33672b977fa16cc6e035043605b8148",
+      "evidenceBinding": {
+        "candidateContentHash": "4ab20d4c5a6e2d123dac322255e6ace175c215f0dd7d798b5baa0004d598d7cc",
+        "candidateRevision": 1,
+        "blueprintHash": "81f18bbad7dd676462910d44a24850db933b9006cee37251665872653f1d4901",
+        "reviewResultHash": "b52ca58ccdafbe260d74c00f115bf3a6eb4c84d6ca07d58dba82c497f21bc3be"
+      },
+      "previousReviewHash": "c8650becc0041b27f368300b7c548ff362dbf25c3352e38a185b3153c9e25e1c",
+      "reviewHash": "12568465216bd4c5f055f9b09fc7d19415008ff81e961bec06dfffca29cd0da7"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-016",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "1deb8038dc15a07789157c49929bbfcf3789c291a455b52e17ef528f5ecc0a2e",
+    "sourceManifestHash": "c56000a65596e5793b1d3eec5d3fe098f33672b977fa16cc6e035043605b8148",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-016",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Four plates each hold 6 apple pieces. Two more apple pieces are added to every plate. How many apple pieces are on the plates now?",
+      "options": [
+        {
+          "id": "a",
+          "text": "30"
+        },
+        {
+          "id": "b",
+          "text": "32"
+        },
+        {
+          "id": "c",
+          "text": "24"
+        },
+        {
+          "id": "d",
+          "text": "28"
+        },
+        {
+          "id": "e",
+          "text": "26"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "At first there are 4 × 6 = 24 pieces. Adding 2 pieces to each of 4 plates adds 8 more. Altogether there are 24 + 8 = 32 pieces.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Apply equal groups in two steps",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "b52ca58ccdafbe260d74c00f115bf3a6eb4c84d6ca07d58dba82c497f21bc3be"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-016",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "4ab20d4c5a6e2d123dac322255e6ace175c215f0dd7d798b5baa0004d598d7cc",
+    "contentHash": "1deb8038dc15a07789157c49929bbfcf3789c291a455b52e17ef528f5ecc0a2e"
+  }
+}

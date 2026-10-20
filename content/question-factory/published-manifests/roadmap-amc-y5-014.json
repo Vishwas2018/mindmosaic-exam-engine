@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-014",
+  "questionId": "roadmap-amc-y5-014",
+  "contentHash": "79457b295091f13ecc94a915d811e887e7eb9503fc56de445476bc9bd2609481",
+  "revision": 1,
+  "blueprintId": "amc-y5-014-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "42a0c49a788b053d50f73cf555cb6b69ee4442f6dc847466d05c1f96de48a583",
+  "difficultyFingerprint": "967320ec2c3559ca33b967b33456b80ece8b572174e49315969399fbcd8a15c6",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-014",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which number between 40 and 70 is divisible by both 6 and 9?",
+    "options": [
+      {
+        "id": "a",
+        "text": "36"
+      },
+      {
+        "id": "b",
+        "text": "54"
+      },
+      {
+        "id": "c",
+        "text": "72"
+      },
+      {
+        "id": "d",
+        "text": "63"
+      },
+      {
+        "id": "e",
+        "text": "42"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "54 is divisible by 6 because 54 ÷ 6 = 9, and by 9 because 54 ÷ 9 = 6.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Common multiples",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "c868c37a2b02fbe7f96d128d5120f2e4cc5c2efcbf4d7b4f582f1522c5da9eb5",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-014",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-3591d7358e35b98178491e71e0d7fe6aac08a64f"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:34.108Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "79457b295091f13ecc94a915d811e887e7eb9503fc56de445476bc9bd2609481",
+        "blueprintHash": "aabf1c35573981b9e909764fb3c24057a3adba07108a2fca782d10561986e4b5",
+        "candidateRevision": 1,
+        "reviewResultHash": "581edb64b0e469ae5432c3456896c54d705efc49ad0e40270f7e8de395ba12b7"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "589407be0dfec0334512aaa81e530af87d67811e01cbbb2f5fc923b4b82fcf5e"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-014",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "70ec813c1aafbb7256037703044707d7151b0566834a358673a121a4eb6d030e"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:30.151Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "6d48cd2c97831272eff3a2d7d8416142eaa12299e2004b78acd50455d58e9f70",
+      "evidenceBinding": {
+        "candidateContentHash": "79457b295091f13ecc94a915d811e887e7eb9503fc56de445476bc9bd2609481",
+        "candidateRevision": 1,
+        "blueprintHash": "aabf1c35573981b9e909764fb3c24057a3adba07108a2fca782d10561986e4b5",
+        "reviewResultHash": "70ec813c1aafbb7256037703044707d7151b0566834a358673a121a4eb6d030e"
+      },
+      "previousReviewHash": "589407be0dfec0334512aaa81e530af87d67811e01cbbb2f5fc923b4b82fcf5e",
+      "reviewHash": "d8cd94cc387d6ea83857cd04c2ed57a431654616f2fd1ea278b6f35cabfd2d9b"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-014",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:30.151Z",
+    "contentHash": "f68437e659e8103ba34c067b202b2e8bcd0292755863aaecf69dfadc29d7e54f",
+    "sourceManifestHash": "6d48cd2c97831272eff3a2d7d8416142eaa12299e2004b78acd50455d58e9f70",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-014",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Which number between 40 and 70 is divisible by both 6 and 9?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "54"
+        },
+        {
+          "id": "c",
+          "text": "72"
+        },
+        {
+          "id": "d",
+          "text": "63"
+        },
+        {
+          "id": "e",
+          "text": "42"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "54 is divisible by 6 because 54 ÷ 6 = 9, and by 9 because 54 ÷ 9 = 6.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Common multiples",
+        "difficulty": "easy",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "70ec813c1aafbb7256037703044707d7151b0566834a358673a121a4eb6d030e"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-014",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "79457b295091f13ecc94a915d811e887e7eb9503fc56de445476bc9bd2609481",
+    "contentHash": "f68437e659e8103ba34c067b202b2e8bcd0292755863aaecf69dfadc29d7e54f"
+  }
+}

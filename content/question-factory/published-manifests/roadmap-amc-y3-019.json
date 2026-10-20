@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-019",
+  "questionId": "roadmap-amc-y3-019",
+  "contentHash": "27666bde7e9680cad0155217aa38f0254aac008dd50a10206f04841eaf43bad4",
+  "revision": 1,
+  "blueprintId": "amc-y3-019-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "adbfd77c9c66bf147fef9c8e0f8449dde3868f787580c9b8d8790aeac5dd9330",
+  "difficultyFingerprint": "435d3b84a4d7d346b3fc5f7c32fcd769a47cda91ccd4b44256dcdad37e0d73ad",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-019",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A class has 24 children. Of these, 15 enjoy drawing and 13 enjoy building. Every child enjoys at least one of these activities. How many enjoy both?",
+    "options": [
+      {
+        "id": "a",
+        "text": "3"
+      },
+      {
+        "id": "b",
+        "text": "1"
+      },
+      {
+        "id": "c",
+        "text": "4"
+      },
+      {
+        "id": "d",
+        "text": "7"
+      },
+      {
+        "id": "e",
+        "text": "5"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "Adding the two activity totals counts the children in both activities twice. Subtract the class total.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Statistics & Chance",
+      "topic": "Statistics & Chance",
+      "skill": "Venn diagrams and set logic",
+      "difficulty": "challenging",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "83cb1addb0ad73cd81dbdbd59790a7d9588ee5c71067cb5c5d3593efbd2269d6",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-019",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-ac6271a7bff54b255cd6032b6dca488e15ca4016"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:27.047Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "27666bde7e9680cad0155217aa38f0254aac008dd50a10206f04841eaf43bad4",
+        "blueprintHash": "78ace30afaffb01f7fd8c49815fdb3e465f743b2dfc07eb2b99fc9c9d8d7fa6a",
+        "candidateRevision": 1,
+        "reviewResultHash": "46c8c29a4b33fb6a6538aaf3e700fab7830e93fc32f63f4c995f2add92b9a468"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "d8aa7a1e2825421b4d32b01221073e04c9fe59c282d20fda39d91bd343ec7f54"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-019",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "fca237419129d4b14732d2e6e90ddfbae5c8ca8bfb222d03e65fe1863d2022be"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "cfd4fc4fddde3926e598d8c865eeb309a05785fb1d0ab192a2313b9e2b2fb856",
+      "evidenceBinding": {
+        "candidateContentHash": "27666bde7e9680cad0155217aa38f0254aac008dd50a10206f04841eaf43bad4",
+        "candidateRevision": 1,
+        "blueprintHash": "78ace30afaffb01f7fd8c49815fdb3e465f743b2dfc07eb2b99fc9c9d8d7fa6a",
+        "reviewResultHash": "fca237419129d4b14732d2e6e90ddfbae5c8ca8bfb222d03e65fe1863d2022be"
+      },
+      "previousReviewHash": "d8aa7a1e2825421b4d32b01221073e04c9fe59c282d20fda39d91bd343ec7f54",
+      "reviewHash": "acb6164854f3dda373508b8f9f108b06eb533479f098ba8f92786d51bf3d6907"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-019",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "25d9b079787bef0330846b7c0c8ce645ab7f4e29bf16110618a13c3480824804",
+    "sourceManifestHash": "cfd4fc4fddde3926e598d8c865eeb309a05785fb1d0ab192a2313b9e2b2fb856",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-019",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A class has 24 children. Of these, 15 enjoy drawing and 13 enjoy building. Every child enjoys at least one of these activities. How many enjoy both?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        },
+        {
+          "id": "e",
+          "text": "5"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Adding the two activity totals counts the children in both activities twice. Subtract the class total.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Chance",
+        "topic": "Statistics & Chance",
+        "skill": "Venn diagrams and set logic",
+        "difficulty": "challenging",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "fca237419129d4b14732d2e6e90ddfbae5c8ca8bfb222d03e65fe1863d2022be"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-019",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "27666bde7e9680cad0155217aa38f0254aac008dd50a10206f04841eaf43bad4",
+    "contentHash": "25d9b079787bef0330846b7c0c8ce645ab7f4e29bf16110618a13c3480824804"
+  }
+}

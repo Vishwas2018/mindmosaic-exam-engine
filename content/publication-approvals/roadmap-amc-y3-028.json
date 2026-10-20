@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-028",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "c0604d838a2bcf7f391a9f21e4cc6848157c1b377725f3e1e4802b3965269e7a",
+  "sourceManifestHash": "12ddf1944d8acbcdb2e60795ba4a2e47dcad724185fe8362d8d3b95e3c66a6b9",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-028",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A tile display has 3 tiles in its first row. Each new row has 2 more tiles than the row above. A box contains 60 tiles. After building the first 6 rows, how many extra tiles must be bought to complete the seventh row?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 3,
+      "tolerance": 0
+    },
+    "explanation": "The first six rows use 3 + 5 + 7 + 9 + 11 + 13 = 48 tiles, leaving 60 - 48 = 12. The seventh row needs 15 tiles, so 15 - 12 = 3 extra tiles must be bought.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Combine a growing pattern with a resource constraint",
+      "difficulty": "challenging",
+      "marks": 8,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "19c50d1444c30c593db0f5b3333d5adb7d0222d625b52def6b7ac5446962f31f"
+}

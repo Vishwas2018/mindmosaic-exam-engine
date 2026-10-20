@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-003",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "88e12c7fb013ce56d8827f3224c63ba14a5964eeb6e8fe0feb70258e2758f68e",
+  "sourceManifestHash": "f18bc0fd82b4c0fbefe7ab85cae02db2ddba02d0fa886bd07610e41685e3cb88",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-003",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A film starts at 2:35 pm and lasts 1 hour 48 minutes. How many minutes after 2:00 pm does it finish?",
+    "options": [
+      {
+        "id": "a",
+        "text": "143"
+      },
+      {
+        "id": "b",
+        "text": "163"
+      },
+      {
+        "id": "c",
+        "text": "123"
+      },
+      {
+        "id": "d",
+        "text": "153"
+      },
+      {
+        "id": "e",
+        "text": "133"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "From 2:00 to the start is 35 minutes. Add 108 minutes for the film: 35 + 108 = 143 minutes.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Elapsed time",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "020507990941af00e76119292438600cddfc62c888dea6200a65fb66743242ad"
+}

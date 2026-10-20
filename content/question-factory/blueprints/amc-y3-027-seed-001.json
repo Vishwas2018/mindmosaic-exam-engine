@@ -1,0 +1,24 @@
+{
+  "id": "amc-y3-027-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-3",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Number & Arithmetic",
+  "skill": "amc.reason-about-place-value-using-two-constraints",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "targetCount": 1,
+  "marks": 7,
+  "estimatedTimeSeconds": 180,
+  "learningObjective": "Reason about place value using two constraints",
+  "misconceptionTargets": [],
+  "reasoningSteps": 5,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}

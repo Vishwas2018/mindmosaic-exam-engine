@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-022",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "b1627388d22e9ff35d0fd62a7bad6795ac5f2ddf9ff1ec6602f265a1c2a6daf0",
+  "sourceManifestHash": "e8c3845e68536eacc119cf12256b05aed44cdfdff527e2b17a9b447bd0d5f582",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-022",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Use the digits 4, 0 and 7 once each. What is the smallest three-digit number you can make?",
+    "options": [
+      {
+        "id": "a",
+        "text": "740"
+      },
+      {
+        "id": "b",
+        "text": "704"
+      },
+      {
+        "id": "c",
+        "text": "470"
+      },
+      {
+        "id": "d",
+        "text": "47"
+      },
+      {
+        "id": "e",
+        "text": "407"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "A three-digit number cannot start with 0. Put the smaller non-zero digit, 4, in the hundreds place, then 0 and 7. The number is 407.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Place value with zero",
+      "difficulty": "challenging",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "63b5134b38da3b87266e5c8d2a46014093790c5d8193130526105d2b14b299f9"
+}

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-015",
+  "questionId": "roadmap-amc-y5-015",
+  "contentHash": "9bfa8c4ffeca2edd6e96fbecf984eb890cea4ea2c45146695e00746416f741a4",
+  "revision": 1,
+  "blueprintId": "amc-y5-015-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "c10e5f6aa7dc1daf52db43116ed2b7366095f117afa2bd22732d40de6cdf5dad",
+  "difficultyFingerprint": "fe568fe710cc9a9f1fbc2f97b87fa480e9bca9cd3a0706e7798a344f829bc9c8",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-015",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A café offers 3 sandwich fillings and 2 types of bread. Choosing one filling and one bread, how many different sandwiches are possible?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9"
+      },
+      {
+        "id": "b",
+        "text": "5"
+      },
+      {
+        "id": "c",
+        "text": "8"
+      },
+      {
+        "id": "d",
+        "text": "6"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Each of the 3 fillings can be paired with either bread, giving 3 × 2 = 6 sandwiches.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Systematic counting",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "4165ca99e97d6c0c7452fcf4600b6602ccef05916219f2cabfb260ea20df24df",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-015",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-9837788901c973d452da9d21415454155a3418d3"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:34.384Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "9bfa8c4ffeca2edd6e96fbecf984eb890cea4ea2c45146695e00746416f741a4",
+        "blueprintHash": "24a3e4f9afb8c9c9fe0dfe4b4b56467ca3fa5dfa51546d5036abe52e458381fb",
+        "candidateRevision": 1,
+        "reviewResultHash": "e5e2b5c3f54b2433e831ee88cadfbf870ca46ba284c0a8466300a69c0c17574f"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b03a56589aa36ebc837516e0f253a5b38ea3043cf06d68e2ae7a3c946f372cae"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-015",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "69e31091fe07a04ff5011522cc866263a59c9859c4ddfbb8cbd95cef3405cba3"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:30.151Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "214939b298e4987ddb0bd47644dacfa9c7a5a941e6e4ca07fb0125da9a9fd9c7",
+      "evidenceBinding": {
+        "candidateContentHash": "9bfa8c4ffeca2edd6e96fbecf984eb890cea4ea2c45146695e00746416f741a4",
+        "candidateRevision": 1,
+        "blueprintHash": "24a3e4f9afb8c9c9fe0dfe4b4b56467ca3fa5dfa51546d5036abe52e458381fb",
+        "reviewResultHash": "69e31091fe07a04ff5011522cc866263a59c9859c4ddfbb8cbd95cef3405cba3"
+      },
+      "previousReviewHash": "b03a56589aa36ebc837516e0f253a5b38ea3043cf06d68e2ae7a3c946f372cae",
+      "reviewHash": "bd73182fc73eb9b66efb2492c744df840e6c4bb1d79bce5a61bb655366a3d447"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-015",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:30.151Z",
+    "contentHash": "7169f6554659352624a3bfa5a13ecd3fd8aea59aa71895a18f0372c5d36845b2",
+    "sourceManifestHash": "214939b298e4987ddb0bd47644dacfa9c7a5a941e6e4ca07fb0125da9a9fd9c7",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-015",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A café offers 3 sandwich fillings and 2 types of bread. Choosing one filling and one bread, how many different sandwiches are possible?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Each of the 3 fillings can be paired with either bread, giving 3 × 2 = 6 sandwiches.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Systematic counting",
+        "difficulty": "easy",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "69e31091fe07a04ff5011522cc866263a59c9859c4ddfbb8cbd95cef3405cba3"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-015",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "9bfa8c4ffeca2edd6e96fbecf984eb890cea4ea2c45146695e00746416f741a4",
+    "contentHash": "7169f6554659352624a3bfa5a13ecd3fd8aea59aa71895a18f0372c5d36845b2"
+  }
+}

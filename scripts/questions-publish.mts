@@ -20,6 +20,7 @@ import { parseApprovalCsv, type ApprovalInputRow } from "../src/features/content
 import { orchestratePublication, type PublicationOutcome } from "../src/features/question-factory/publication";
 import { FsFactoryRepository } from "../src/features/question-factory/storage";
 import { readFile } from "node:fs/promises";
+import { humanPublicationApprovalSchema } from "../src/features/content-governance/publication-integrity";
 
 interface ParsedArgs {
   readonly candidateIds: readonly string[];
@@ -128,7 +129,18 @@ async function main(): Promise<number> {
   for (const candidateId of args.candidateIds) {
     const staged = await repository.read("staged", candidateId) as { question?: { id?: string } } | undefined;
     const reviewedRow = staged?.question?.id ? rowByQuestion.get(staged.question.id) : undefined;
+    let recordedAmcApproval;
+    let amcApprovalSource;
+    if (/^roadmap-amc-y[35]-[0-9]{3}$/.test(candidateId) && staged) {
+      recordedAmcApproval = humanPublicationApprovalSchema.parse(JSON.parse(await readFile(`content/publication-approvals/${candidateId}.json`, "utf8")));
+      const year = candidateId.includes("-y3-") ? 3 : 5;
+      const sources = JSON.parse(await readFile(`content/review-sources/amc/y${year}.json`, "utf8")) as { questionId: string }[];
+      const matches = sources.filter(source => source.questionId === candidateId);
+      if (matches.length !== 1) throw new Error(`Missing or duplicate AMC approval source: ${candidateId}`);
+      amcApprovalSource = matches[0];
+    }
     const result = await orchestratePublication(candidateId, repository, { publishedAt,
+      recordedAmcApproval, amcApprovalSource,
       reviewedApproval: reviewedRow ? { row: reviewedRow, reviewerFullName: reviewer } : undefined,
       additionalReservedIds });
     if (result.outcome === "published") additionalReservedIds.add(result.manifest.questionId);

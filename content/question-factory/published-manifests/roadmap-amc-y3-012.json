@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-012",
+  "questionId": "roadmap-amc-y3-012",
+  "contentHash": "efc188a70071a8ea701cd940ae49dbf98b8704876a973fd394f013850d4964c5",
+  "revision": 1,
+  "blueprintId": "amc-y3-012-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "e206bb63158b8f959fedcbce9fe59f1c724d1a36ade328f20d414205744e74ea",
+  "difficultyFingerprint": "493c589dd8a0bc965de65fded43ab26b26072fd4a5224b0594f91e503a8c5b54",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-012",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Kai has 9 coins. Each coin is either a $1 coin or a $2 coin, and the coins are worth $14 altogether. How many $2 coins does Kai have?",
+    "options": [
+      {
+        "id": "a",
+        "text": "6"
+      },
+      {
+        "id": "b",
+        "text": "4"
+      },
+      {
+        "id": "c",
+        "text": "7"
+      },
+      {
+        "id": "d",
+        "text": "3"
+      },
+      {
+        "id": "e",
+        "text": "5"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "Nine $1 coins would be worth $9. Each time a $1 coin is replaced by a $2 coin, the total rises by $1. To rise from $9 to $14 needs 5 replacements, so Kai has five $2 coins.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Reason with Australian coins",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0b74833f87e91ad197ee412d8de9888883a66df1313d7f29ed7ca5a0ab951b4e",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-012",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-4d1540ac65ab62edc9d00324d220ea61bce8f83d"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:25.374Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "efc188a70071a8ea701cd940ae49dbf98b8704876a973fd394f013850d4964c5",
+        "blueprintHash": "a7f3f9d07eaf19ce4e691445ae5b47b12ec52ed700e6ce311a46aa02cfaf4b1b",
+        "candidateRevision": 1,
+        "reviewResultHash": "1617385b3d9c5d6167c582a50b5f4c3cd28637d22a5d9ebbca5e6304fda7c48a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "4912665397b00fc29b905c3f5f045638d73036767c8ebb8c68741db4e3451e52"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-012",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "caa28d1892ac2ef5adeba6f8c96bc67503aba2a581353ed7ee67d01d43297214"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "d2e38b8faba87237bf5b82668744189ef4448359278fe40ec522f572ac343a9e",
+      "evidenceBinding": {
+        "candidateContentHash": "efc188a70071a8ea701cd940ae49dbf98b8704876a973fd394f013850d4964c5",
+        "candidateRevision": 1,
+        "blueprintHash": "a7f3f9d07eaf19ce4e691445ae5b47b12ec52ed700e6ce311a46aa02cfaf4b1b",
+        "reviewResultHash": "caa28d1892ac2ef5adeba6f8c96bc67503aba2a581353ed7ee67d01d43297214"
+      },
+      "previousReviewHash": "4912665397b00fc29b905c3f5f045638d73036767c8ebb8c68741db4e3451e52",
+      "reviewHash": "67ad94d5cd9e422652d692d4b1c73636cf83a3a31bb8d3d81cebb26309d5347e"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-012",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "152a3b65f41b65f2e3199263bb6770312d6610425f97fd6c3561bd3374280f95",
+    "sourceManifestHash": "d2e38b8faba87237bf5b82668744189ef4448359278fe40ec522f572ac343a9e",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-012",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Kai has 9 coins. Each coin is either a $1 coin or a $2 coin, and the coins are worth $14 altogether. How many $2 coins does Kai have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "7"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        },
+        {
+          "id": "e",
+          "text": "5"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "Nine $1 coins would be worth $9. Each time a $1 coin is replaced by a $2 coin, the total rises by $1. To rise from $9 to $14 needs 5 replacements, so Kai has five $2 coins.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Reason with Australian coins",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "caa28d1892ac2ef5adeba6f8c96bc67503aba2a581353ed7ee67d01d43297214"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-012",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "efc188a70071a8ea701cd940ae49dbf98b8704876a973fd394f013850d4964c5",
+    "contentHash": "152a3b65f41b65f2e3199263bb6770312d6610425f97fd6c3561bd3374280f95"
+  }
+}

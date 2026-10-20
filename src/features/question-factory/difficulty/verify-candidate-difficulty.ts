@@ -76,12 +76,23 @@ export function verifyCandidateDifficulty(
     validatedAt: context.validatedAt,
   };
 
+  // AMC cognitive demand is reviewed independently. This text-only proxy
+  // records a warning, never overrides that label. Malformed input and all
+  // content/provenance/upstream bindings remain hard failures.
+  const advisory = question.metadata.subject === "amc_mathematics";
+  function warn(problem: DifficultyIssue): DifficultyResult {
+    const warning = { ...problem, severity: "review_required" as const };
+    const evidence = buildDifficultyEvidence({ ...baseEvidenceInput, issues: [warning], outcome: "passed" });
+    return { status: "passed", outcome: "advisory", evidence };
+  }
+
   if (estimate.estimateConfidence < FACTORY_THRESHOLDS.MIN_DIFFICULTY_ESTIMATE_CONFIDENCE) {
     const failIssue = issue(
       "difficulty_estimate_low_confidence",
       "question",
       `Difficulty-estimate confidence (${estimate.estimateConfidence.toFixed(4)}) is below the minimum (${FACTORY_THRESHOLDS.MIN_DIFFICULTY_ESTIMATE_CONFIDENCE}); the candidate's extractable text is too sparse to estimate difficulty.`,
     );
+    if (advisory) return warn(failIssue);
     const evidence = buildDifficultyEvidence({ ...baseEvidenceInput, issues: [failIssue], outcome: "quarantined" });
     return { status: "quarantined", outcome: "insufficient_evidence", issues: [failIssue], evidence };
   }
@@ -92,6 +103,7 @@ export function verifyCandidateDifficulty(
       "question",
       `Estimated difficulty '${estimate.estimatedDifficulty}' deviates from declared difficulty '${context.declaredDifficulty}' by ${deviation.toFixed(4)}, exceeding the tolerance of ${FACTORY_THRESHOLDS.DIFFICULTY_MATCH_TOLERANCE}.`,
     );
+    if (advisory) return warn(failIssue);
     const evidence = buildDifficultyEvidence({ ...baseEvidenceInput, issues: [failIssue], outcome: "failed" });
     return { status: "failed", outcome: "mismatch", issues: [failIssue], evidence };
   }

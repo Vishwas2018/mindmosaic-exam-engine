@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-025",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:25.891Z",
+  "contentHash": "de7ef1bc7e489106cee4dfa012eea608972de77a1a466eb772ef5f23c8de902e",
+  "sourceManifestHash": "b843b3e8cfbf9156bd6ecdccd7b42ed5725f25ef365b328bec18b5ecaa3dcf20",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-025",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four runners finish a race. Mia finishes before Noah. Noah finishes before Priya. Zoe finishes after Priya. Who finishes second?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Priya"
+      },
+      {
+        "id": "b",
+        "text": "Zoe"
+      },
+      {
+        "id": "c",
+        "text": "It cannot be known"
+      },
+      {
+        "id": "d",
+        "text": "Noah"
+      },
+      {
+        "id": "e",
+        "text": "Mia"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "The clues make one order: Mia, Noah, Priya, Zoe. Noah is second.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Order items from clues",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "6d063fc3c172b361e4bcbbaf55336d747192359a74d43cf5cc5d527fd4e7c131"
+}
