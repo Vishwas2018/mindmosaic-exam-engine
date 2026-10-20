@@ -1,0 +1,25 @@
+{
+  "status": "blocked",
+  "reviewCompleted": false,
+  "itemsReviewed": 0,
+  "returnedModelIdentity": null,
+  "attempts": [
+    {
+      "execution": "execution-attempt-1.json",
+      "httpStatus": 404,
+      "reason": "gemini-2.5-pro unavailable to new users"
+    },
+    {
+      "execution": "execution.json",
+      "httpStatus": 402,
+      "reason": "Prepayment credits depleted for gemini-3.1-pro-preview"
+    }
+  ],
+  "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+  "unresolvedFindings": [
+    "Different-provider blind review required for six VR/Reading items",
+    "Per-candidate governed semantic review ingest pending",
+    "Human decision for exactly 12 bound revisions pending"
+  ],
+  "legacyEvidenceStatus": "unverified; retained unchanged; see legacy-provenance.json"
+}

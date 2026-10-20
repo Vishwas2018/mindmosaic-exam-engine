@@ -76,6 +76,8 @@ describe("Year 6 Scholarship Comprehensive Sample Module", () => {
     expect(pattern?.examStyle).toBe("scholarship_style");
     expect(pattern?.questionCount).toBe(12);
     expect(pattern?.timeMinutes).toBe(18);
+    expect(pattern?.guestAccess).toBe("signed_in_only");
+    expect(pattern?.practiceModule).toBe("not_offered");
     expect(pattern?.adaptations).toContain("tight_time_pressure");
     expect(pattern?.adaptations).toContain("unofficial_paper_shape");
     expect(pattern?.adaptations).toContain("no_section_lock");
@@ -107,6 +109,19 @@ describe("Year 6 Scholarship Comprehensive Sample Module", () => {
     // Verify all 12 candidate IDs are present
     const drawnIds = draw.questions.map((q) => q.id).sort();
     expect(drawnIds).toEqual([...CANDIDATE_12_IDS].sort());
+  });
+
+  it("keeps the exact sample when all 160 items become eligible", () => {
+    const pattern = getExamPattern(SAMPLE_PATTERN_ID)!;
+    for (const seed of ["later-publication", "another-session", "third-session"]) {
+      const draw = selectPatternQuestions(allDrafts, pattern, seed);
+      expect(draw.ok).toBe(true);
+      if (draw.ok) expect(draw.questions.map(q => q.id).sort()).toEqual([...CANDIDATE_12_IDS].sort());
+    }
+    const missingOne = allDrafts.filter(q => q.id !== CANDIDATE_12_IDS[0]);
+    expect(selectPatternQuestions(missingOne, pattern, "missing").ok).toBe(false);
+    expect(selectPatternQuestions(missingOne, pattern, "missing", { asPracticeModule: true }).ok).toBe(false);
+    expect(buildPatternReadiness(missingOne, pattern).state).toBe("unavailable");
   });
 
   it("preserves shared-passage handling for reading questions", () => {

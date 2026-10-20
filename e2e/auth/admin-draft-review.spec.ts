@@ -110,7 +110,7 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   page.on("request", (request) => {
     if (
       request.method() !== "GET" &&
-      /\/api\/(exam|assessment|student)\//.test(request.url())
+      (/\/api\/(exam|assessment|student)\//.test(request.url()) || /\/admin\/review/.test(request.url()))
     )
       studentWrites.push(request.url());
   });
@@ -193,6 +193,7 @@ test("admin can preview the 12-question sample with start, navigation, shared pa
 
   // Verify full papers remain unavailable
   for (const paperId of [
+    "scholarship-y6-comprehensive-sample-module",
     "scholarship-y6-verbal-reasoning-full",
     "scholarship-y6-numerical-reasoning-full",
     "scholarship-y6-reading-full",
@@ -233,12 +234,22 @@ test("admin can preview the 12-question sample with start, navigation, shared pa
   await expect(page.getByRole("heading", { name: "The Estuary Watchers" })).toBeVisible();
   await page.getByRole("radio", { name: "To set a quiet, patient mood as the two characters wait" }).check();
 
+  const readingPacket = JSON.parse(readFileSync("content/scholarship-drafts/scholarship-y6-reading-draft.json", "utf8"));
+  for (const index of [6, 7, 8]) {
+    await page.getByLabel("Paper question").selectOption(String(index));
+    await expect(page.getByRole("article").locator("section p").first()).toHaveText(readingPacket.questions[index - 6].stimulus.body);
+  }
+  await page.getByLabel("Paper question").selectOption("10");
+  await expect(page.getByRole("radio", { name: "$108", exact: true })).toBeVisible();
+  await expect(page.getByRole("article")).toContainText("$160");
+
   // 4. Submission
   await page.getByRole("button", { name: "Submit draft paper" }).click();
 
   // 5. Scoring
   await expect(page.getByRole("main").getByText(/Preview total: 2 \/ 12 marks/)).toBeVisible();
   await expect(page.getByRole("main").getByText(/No student progress was recorded/)).toBeVisible();
+  await expect(page.getByRole("main").getByText("25% off $160 reduces the price to 160 * 0.75 = $120. A further 10% off $120 is 120 * 0.90 = $108.", { exact: true })).toBeVisible();
 
   // 6. Explanations
   await expect(page.getByRole("heading", { name: "Worked explanation" })).toBeVisible();

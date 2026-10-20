@@ -1,0 +1,72 @@
+/** Read-only governance preparation. Never records approvals or publishes. */
+import "./lib/allow-server-only.mts";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { candidateQuestionSchema } from "../src/features/question-factory/ingestion/candidate-question";
+import { hashJson } from "../src/features/question-factory/provenance/content-hash";
+import { canonicalQuestionHash } from "../src/features/content-governance/publication-integrity";
+import { buildPublishedQuestion } from "../src/features/question-factory/publication/build-published-question";
+import { getExamPattern } from "../src/features/exam-engine/exam-patterns/exam-pattern-registry";
+import { isScholarshipAttestedItem, verifyFirstPartyScholarshipAttestation } from "../src/features/question-factory/correctness/scholarship-attestation";
+import { computeSolver, solverAnswerError } from "../src/features/question-factory/correctness/solver-verification";
+
+const dir = "docs/reviews/scholarship-sample-2026-10-21";
+await mkdir(dir, { recursive: true });
+const pattern = getExamPattern("scholarship-y6-comprehensive-sample-module")!;
+const legacy = JSON.parse(await readFile("docs/reviews/scholarship-2026-10-18/status.json", "utf8"));
+const oldPacket = JSON.parse(await readFile("docs/reviews/scholarship-2026-10-18/external-review/packet-manifest.json", "utf8"));
+const reviewText = await readFile(`${dir}/review-summary.json`, "utf8").catch(() => "");
+const review = reviewText ? JSON.parse(reviewText) : null;
+const reviewEvidenceSha256 = reviewText ? createHash("sha256").update(reviewText).digest("hex") : null;
+const items = [];
+const blind = [];
+for (const source of pattern.sources) {
+  const sourcePath = `content/scholarship-drafts/${source.programmeId}-draft.json`;
+  const packet = JSON.parse(await readFile(sourcePath, "utf8"));
+  for (const id of source.filters!.questionIds!) {
+    const raw = packet.questions.find((q: { id: string }) => q.id === id);
+    const candidate = candidateQuestionSchema.parse(raw);
+    const built = buildPublishedQuestion(candidate);
+    if (!built.ok) throw new Error(JSON.stringify(built.issues));
+    const candidateHash = hashJson(candidate);
+    const publicationContentHash = canonicalQuestionHash(built.question);
+    const previous = legacy.items.find((q: { id: string }) => q.id === id);
+    if (candidateHash !== previous.candidateHash || publicationContentHash !== previous.publishedContentHash) throw new Error(`Release identity drift: ${id}`);
+    const old = oldPacket.items.find((q: { id: string }) => q.id === id);
+    if (old && (old.candidateHash !== candidateHash || old.publishedContentHash !== publicationContentHash)) throw new Error(`Old packet identity drift: ${id}`);
+    let deterministicProof: { method: string; passed: boolean } | null = null;
+    if (isScholarshipAttestedItem(candidate)) {
+      deterministicProof = { method: "first-party hash-bound recompute", passed: verifyFirstPartyScholarshipAttestation(candidate).ok };
+    } else if (!old) {
+      const params = packet.parameters[id];
+      const computed = computeSolver(params);
+      deterministicProof = { method: `closed-language solver (${params.solver})`, passed: computed.ok && !solverAnswerError(candidate, computed.value) };
+    }
+    if (deterministicProof && !deterministicProof.passed) throw new Error(`Deterministic proof failed: ${id}`);
+    items.push({ id, sourcePath, skill: candidate.metadata.skill, difficulty: candidate.metadata.difficulty,
+      marks: candidate.metadata.marks, estimatedTimeSeconds: candidate.metadata.estimatedTimeSeconds,
+      candidateHash, publicationContentHash, revision: 0, releaseIdentityMatches: true,
+      sharedPassageHash: candidate.stimulus ? hashJson(candidate.stimulus) : null,
+      deterministicProof,
+      previousFindings: { bucket: previous.bucket, reasons: previous.reasons, difficultyGate: previous.difficultyGate },
+      reviewBinding: { packet: "packet.json", result: "review-summary.json", sha256: reviewEvidenceSha256, status: review?.status ?? "pending" },
+      unresolvedFindings: ["Human decision pending", ...(old && !review?.reviewCompleted ? ["Different-provider review blocked: API credits depleted"] : []), ...(old ? ["Governed per-candidate semantic review ingest pending"] : [])],
+    });
+    // Deliberate allowlist: no keys, explanations, difficulty or author notes sent.
+    blind.push({ id, prompt: candidate.prompt, ...(candidate.stimulus ? { stimulus: candidate.stimulus } : {}), options: candidate.options,
+      ...(candidate.visuals?.length ? { visuals: candidate.visuals } : {}) });
+  }
+}
+if (items.length !== 12 || new Set(items.map(q => q.id)).size !== 12) throw new Error("Sample scope invalid");
+const packetText = JSON.stringify(blind, null, 2) + "\n";
+const packetSha256 = createHash("sha256").update(packetText).digest("hex");
+await writeFile(`${dir}/packet.json`, packetText);
+const manifest = { schemaVersion: 1, patternId: pattern.id, questionCount: 12, timeMinutes: 18,
+  timingBasis: "Authoring judgement; no empirical student timing validation", packetSha256,
+  hashDefinitions: { candidateHash: "hashJson(candidateQuestionSchema.parse(raw))", publicationContentHash: "canonicalQuestionHash(buildPublishedQuestion(candidate).question)", sharedPassageHash: "hashJson(candidate.stimulus)" }, items };
+await writeFile(`${dir}/approval-manifest.json`, JSON.stringify(manifest, null, 2) + "\n");
+const columns = ["id", "sourcePath", "skill", "difficulty", "marks", "estimatedTimeSeconds", "candidateHash", "publicationContentHash", "sharedPassageHash"] as const;
+const csv = (v: unknown) => JSON.stringify(String(v ?? ""));
+await writeFile(`${dir}/approval-manifest.csv`, columns.join(",") + "\n" + items.map(q => columns.map(c => csv(q[c])).join(",")).join("\n") + "\n");
+await writeFile(`${dir}/approval-table.md`, "| ID | Skill | Difficulty | Marks | Seconds | Candidate hash | Publication content hash |\n| --- | --- | --- | --- | --- | --- | --- |\n" + items.map(q => `| ${q.id} | ${q.skill} | ${q.difficulty} | ${q.marks} | ${q.estimatedTimeSeconds} | ${q.candidateHash} | ${q.publicationContentHash} |`).join("\n") + "\n");
+console.log(`Verified ${items.length} exact revisions against release records; packet ${packetSha256}`);

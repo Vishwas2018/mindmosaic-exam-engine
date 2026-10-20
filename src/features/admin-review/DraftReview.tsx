@@ -279,7 +279,7 @@ function Preview({
       className="space-y-5 rounded-2xl border border-royal/15 bg-white p-5 sm:p-6"
     >
       <div className="flex flex-wrap justify-between gap-2 text-sm text-muted">
-        <span>{question.id}</span>
+        <span>{paper ? `${index + 1} of ${entries.length}: ${question.id}` : question.id}</span>
         <span>
           Year {question.yearLevel} · {question.metadata.difficulty} ·{" "}
           {question.metadata.marks} marks
@@ -296,7 +296,7 @@ function Preview({
             >
               {entries.map((item, i) => (
                 <option key={item.question.id} value={i}>
-                  {i + 1} of {entries.length}: {item.question.id}
+                  Question {i + 1}: {item.question.id}
                 </option>
               ))}
             </select>
@@ -527,7 +527,7 @@ export function DraftReview({ catalogue }: { catalogue: ReviewCatalogue }) {
                     .replaceAll("-", " ")}
                 </option>
               ))}
-              {sample12Entries.length > 0 && (
+              {sample12Entries.length === CANDIDATE_12_IDS.length && (
                 <option value="sample-12">
                   Year 6 Comprehensive Sample (12 questions)
                 </option>
