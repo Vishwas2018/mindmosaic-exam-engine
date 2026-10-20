@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
@@ -88,9 +89,12 @@ export function ExamConfigurator({
   const startExam = useExamStore((state) => state.startExam);
   const startServerExam = useExamStore((state) => state.startServerExam);
   const auth = useAuth();
-  /* Signed-in visitors of any role go through the server session flow —
-     the page payload carries no bank for them to practise from locally. */
+  /* Signed-in visitors go through the server session flow —
+     the page payload carries no bank for them to practise from locally.
+     Non-student roles (admin, parent, teacher) are prohibited from creating student sessions (MM-AUTH-01). */
   const serverMode = auth.status === "authenticated";
+  const isNonStudentRole =
+    auth.status === "authenticated" && auth.role !== null && auth.role !== "student";
 
   const [yearLevel, setYearLevel] = useState<YearLevelFilter>(initialScope?.yearLevel ?? 3);
   const [examStyle, setExamStyle] = useState<ExamStyleFilter>(
@@ -223,6 +227,13 @@ export function ExamConfigurator({
     if (isStarting || isCreating) return;
     setStartError(null);
 
+    if (isNonStudentRole) {
+      setStartError(
+        "Exam sessions are only available to student accounts. Please sign in with a student account to start this exam.",
+      );
+      return;
+    }
+
     if (serverMode) {
       /* Server-selected session: the server chooses the seed and stores
          the question ids before the student sees a single question. Any
@@ -231,9 +242,10 @@ export function ExamConfigurator({
       const started = await startServerExam(config, { bankId });
       setIsCreating(false);
       if (!started) {
-        setStartError(
-          "We couldn't start your exam just now. Check your connection and try again.",
-        );
+        const errorMsg =
+          useExamStore.getState().lastServerError ??
+          "We couldn't start your exam just now. Check your connection and try again.";
+        setStartError(errorMsg);
         return;
       }
       setIsStarting(true);
@@ -455,12 +467,67 @@ export function ExamConfigurator({
             setStartError(null);
             setStage("instructions");
           }}
-          disabled={insufficient || isStarting || isCreating || auth.status === "loading"}
+          disabled={
+            insufficient ||
+            isStarting ||
+            isCreating ||
+            auth.status === "loading" ||
+            isNonStudentRole
+          }
         >
           Review instructions
           <ArrowRight aria-hidden="true" className="h-5 w-5" />
         </Button>
       </div>
+
+      {isNonStudentRole && (
+        <div
+          data-testid="non-student-role-notice"
+          role="status"
+          className="mx-6 mb-6 rounded-xl border border-warning/30 bg-warning/10 p-4 text-sm leading-6 text-ink sm:mx-8"
+        >
+          <p className="font-bold text-ink">
+            {auth.role === "admin" && "You are signed in as an administrator."}
+            {auth.role === "parent" && "You are signed in as a parent."}
+            {auth.role === "teacher" && "You are signed in as a teacher."}
+          </p>
+          <p className="mt-1 text-muted">
+            Exam sessions record student progress and can only be sat by student accounts.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-4">
+            {auth.role === "admin" && (
+              <Link
+                href="/admin"
+                className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+              >
+                Admin dashboard
+              </Link>
+            )}
+            {auth.role === "parent" && (
+              <Link
+                href="/parent"
+                className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+              >
+                Parent dashboard
+              </Link>
+            )}
+            {auth.role === "teacher" && (
+              <Link
+                href="/teacher"
+                className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+              >
+                Teacher dashboard
+              </Link>
+            )}
+            <Link
+              href="/sign-in"
+              className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+            >
+              Sign in with a student account
+            </Link>
+          </div>
+        </div>
+      )}
 
       {(insufficient || startError) && (
         <p
