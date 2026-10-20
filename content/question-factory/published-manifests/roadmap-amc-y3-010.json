@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-010",
+  "questionId": "roadmap-amc-y3-010",
+  "contentHash": "a6984819e4bf766598ded3f9f3a3147a51f383548cd2b1c82617e918f98bf97e",
+  "revision": 1,
+  "blueprintId": "amc-y3-010-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "d4155a00f444ffd5963219554c5b09a973c19176d5285c6b54a89af8574e22fb",
+  "difficultyFingerprint": "c1873014b6a47ab621a1bc4650a1ff3003e05689aabe18175017e10e6d462370",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-010",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A robot moves 3 steps forwards, then 1 step backwards, repeating this pair of moves. How far from its starting point is it after 4 complete pairs?",
+    "options": [
+      {
+        "id": "a",
+        "text": "8"
+      },
+      {
+        "id": "b",
+        "text": "5"
+      },
+      {
+        "id": "c",
+        "text": "9"
+      },
+      {
+        "id": "d",
+        "text": "7"
+      },
+      {
+        "id": "e",
+        "text": "11"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Each complete pair of moves gains two steps.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Pattern rules and table relationships",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "3bf162028d0c1d3bf43ee1a9dd22dd12fe2ef06ffa9698d6a1c02187ea183024",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-010",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-cf4312e7e3cfc19f2e2887e8ed73b82fe1b7d965"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:24.687Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "a6984819e4bf766598ded3f9f3a3147a51f383548cd2b1c82617e918f98bf97e",
+        "blueprintHash": "3590185bbce4b11a4eb8c928950af00b7b5986bb6a0aca35ae25d133aaf560ef",
+        "candidateRevision": 1,
+        "reviewResultHash": "40054bc290f779ee6dd3d16938220b8af855835c3aa8c7dddaf502ddfa8b8cee"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e6b610739a5b48a7aba970f97c2d797fa6c24b501e2f880f681de13b6e4d85f6"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-010",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "494d355d8e2203ee2aa6a890f3bbf9a9b3dc3be419165a6d9bf83116e3d81c48"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "a9381bad225857655fef5aef4f3e917ef4181e53c32a607a8b4644c03793a27d",
+      "evidenceBinding": {
+        "candidateContentHash": "a6984819e4bf766598ded3f9f3a3147a51f383548cd2b1c82617e918f98bf97e",
+        "candidateRevision": 1,
+        "blueprintHash": "3590185bbce4b11a4eb8c928950af00b7b5986bb6a0aca35ae25d133aaf560ef",
+        "reviewResultHash": "494d355d8e2203ee2aa6a890f3bbf9a9b3dc3be419165a6d9bf83116e3d81c48"
+      },
+      "previousReviewHash": "e6b610739a5b48a7aba970f97c2d797fa6c24b501e2f880f681de13b6e4d85f6",
+      "reviewHash": "c62c22015443900a0a0c9cceb5c6997d4924b8c6f171a6d926b1d866e407d304"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-010",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "0530866b4e2041e8c972941b5d0f9c2f78e13c5bf0330ae2757b94bc54e437f1",
+    "sourceManifestHash": "a9381bad225857655fef5aef4f3e917ef4181e53c32a607a8b4644c03793a27d",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-010",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A robot moves 3 steps forwards, then 1 step backwards, repeating this pair of moves. How far from its starting point is it after 4 complete pairs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "7"
+        },
+        {
+          "id": "e",
+          "text": "11"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Each complete pair of moves gains two steps.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Pattern rules and table relationships",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "494d355d8e2203ee2aa6a890f3bbf9a9b3dc3be419165a6d9bf83116e3d81c48"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-010",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "a6984819e4bf766598ded3f9f3a3147a51f383548cd2b1c82617e918f98bf97e",
+    "contentHash": "0530866b4e2041e8c972941b5d0f9c2f78e13c5bf0330ae2757b94bc54e437f1"
+  }
+}

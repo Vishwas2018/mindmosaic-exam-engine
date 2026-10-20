@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-021",
+  "questionId": "roadmap-amc-y5-021",
+  "contentHash": "98dc94125936c56e9b0eff01218338fea8243ac4bb32b20f7d6c0883432f8c32",
+  "revision": 1,
+  "blueprintId": "amc-y5-021-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b51175ddc29868b05122af591cd2ae8f49997002e2a11a588d1be2591e790c86",
+  "difficultyFingerprint": "e2e792c8c752a053e0caf6d8fb8a7162039fd3ad14322fbb5592d862638f4a8d",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-021",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A two-digit number has digits that add to 11. Reversing its digits makes a number 27 greater. What is the original number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "65"
+      },
+      {
+        "id": "b",
+        "text": "29"
+      },
+      {
+        "id": "c",
+        "text": "47"
+      },
+      {
+        "id": "d",
+        "text": "38"
+      },
+      {
+        "id": "e",
+        "text": "56"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "A reversal that is 27 greater means the tens digit rises by 3. The digits 4 and 7 add to 11, so the original number is 47.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Digit reasoning",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2fae0ed4a1e5c36aa668ec8a8e55f115be90e8af1483731eb3412328d40ffbbf",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-021",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-a4749c0eedd415703eb6ab3a30e9b2c3280fd20b"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:36.022Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "98dc94125936c56e9b0eff01218338fea8243ac4bb32b20f7d6c0883432f8c32",
+        "blueprintHash": "6a4a87e3b9074a565107628553d3868a6e43bb309269fb3412c559868e3ba133",
+        "candidateRevision": 1,
+        "reviewResultHash": "cae1b1b98085b614e9dba55514f2ad84517bbde0ec5db1de58d19fb0a7559afe"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "93154efc1ae1f2c09ff892210966637f688b539cf670f6d2756b4563419e94e5"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-021",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "503a36c2ab6ba681e2b34e7a2ae4c616672a07fe6dd3021581376fd3d500cf93"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "a998b8ec40df3b49a099fd1ef79b18491bc8549bbf042b9d23f8eb221e4b4e20",
+      "evidenceBinding": {
+        "candidateContentHash": "98dc94125936c56e9b0eff01218338fea8243ac4bb32b20f7d6c0883432f8c32",
+        "candidateRevision": 1,
+        "blueprintHash": "6a4a87e3b9074a565107628553d3868a6e43bb309269fb3412c559868e3ba133",
+        "reviewResultHash": "503a36c2ab6ba681e2b34e7a2ae4c616672a07fe6dd3021581376fd3d500cf93"
+      },
+      "previousReviewHash": "93154efc1ae1f2c09ff892210966637f688b539cf670f6d2756b4563419e94e5",
+      "reviewHash": "e95e9155c9fc9f53a8d86763d65005d319039e807087e8c5b4033f54cf0c2d7d"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-021",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "17b00b24cc1e38453b89664f4ec04ea3fb4f48b6614da01e205a051a02874075",
+    "sourceManifestHash": "a998b8ec40df3b49a099fd1ef79b18491bc8549bbf042b9d23f8eb221e4b4e20",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-021",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A two-digit number has digits that add to 11. Reversing its digits makes a number 27 greater. What is the original number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "65"
+        },
+        {
+          "id": "b",
+          "text": "29"
+        },
+        {
+          "id": "c",
+          "text": "47"
+        },
+        {
+          "id": "d",
+          "text": "38"
+        },
+        {
+          "id": "e",
+          "text": "56"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A reversal that is 27 greater means the tens digit rises by 3. The digits 4 and 7 add to 11, so the original number is 47.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Digit reasoning",
+        "difficulty": "medium",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "503a36c2ab6ba681e2b34e7a2ae4c616672a07fe6dd3021581376fd3d500cf93"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-021",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "98dc94125936c56e9b0eff01218338fea8243ac4bb32b20f7d6c0883432f8c32",
+    "contentHash": "17b00b24cc1e38453b89664f4ec04ea3fb4f48b6614da01e205a051a02874075"
+  }
+}

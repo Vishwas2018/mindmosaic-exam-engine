@@ -1,0 +1,174 @@
+{
+  "candidateId": "roadmap-amc-y3-030",
+  "questionId": "roadmap-amc-y3-030",
+  "contentHash": "7f8d1abdbf4cc1cd8d0f5ff4e55f95e912e2d06325b1249385eefa7d8095c9d7",
+  "revision": 1,
+  "blueprintId": "amc-y3-030-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "58cca06d8e5582959ca3ff90d7b124f3fa886dddd457df140896129688afb389",
+  "difficultyFingerprint": "f5dcdd714743e5db5e0e2ad1e5070e33574f0a44e52d10c02bcd958c8af658ef",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-030",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Using the digits 1, 2, 4 and 7, how many different three-digit even numbers less than 400 can be made without repeating a digit?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "The hundreds digit must be 1 or 2, and the ones digit must be 2 or 4. With 1 in the hundreds place, the possibilities are 124, 142, 172 and 174. With 2 in the hundreds place, they are 214 and 274. There are 6 numbers altogether.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "List possibilities under several conditions",
+      "difficulty": "challenging",
+      "marks": 10,
+      "estimatedTimeSeconds": 180,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "32fcfa733e8af970586093925eeb1a1378a7395cf2b75a2d668ddaf2cf5e48f1",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-030",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-61b0b97ce417fb16ef562384389bf610c51b78bc"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:30.560Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "7f8d1abdbf4cc1cd8d0f5ff4e55f95e912e2d06325b1249385eefa7d8095c9d7",
+        "blueprintHash": "afc5d8db00e5134b34aa8bfab3faa916f972b6cca47e6e52819ba1401e0b6963",
+        "candidateRevision": 1,
+        "reviewResultHash": "cd2f1b4d3d48a5d5fac423667e905dee604818066a6b331ccdbc926ae95672c6"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "26ca2ac8ad3612ba3df51a5a58c149b1e83f5d287f3aafa9700140ae57ce2d66"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-030",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "55ef1deeedf8449ee0a0be499c9fde459e6a080a9c0a6c7819ad7219b1930752"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "123b433310e3da4a4dd2a7b35ae82a5ceba436eeee878c54c7e5d0be9791c406",
+      "evidenceBinding": {
+        "candidateContentHash": "7f8d1abdbf4cc1cd8d0f5ff4e55f95e912e2d06325b1249385eefa7d8095c9d7",
+        "candidateRevision": 1,
+        "blueprintHash": "afc5d8db00e5134b34aa8bfab3faa916f972b6cca47e6e52819ba1401e0b6963",
+        "reviewResultHash": "55ef1deeedf8449ee0a0be499c9fde459e6a080a9c0a6c7819ad7219b1930752"
+      },
+      "previousReviewHash": "26ca2ac8ad3612ba3df51a5a58c149b1e83f5d287f3aafa9700140ae57ce2d66",
+      "reviewHash": "2c9b6ead2dac915dab3f8f2f97dbdeb3c60c0071d73f123958b3d87186f0cd7c"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-030",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "488594932944f5c36131539b5a1a4552bea545d5582ffaf359b78e503c97bd6b",
+    "sourceManifestHash": "123b433310e3da4a4dd2a7b35ae82a5ceba436eeee878c54c7e5d0be9791c406",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-030",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Using the digits 1, 2, 4 and 7, how many different three-digit even numbers less than 400 can be made without repeating a digit?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 6,
+        "tolerance": 0
+      },
+      "explanation": "The hundreds digit must be 1 or 2, and the ones digit must be 2 or 4. With 1 in the hundreds place, the possibilities are 124, 142, 172 and 174. With 2 in the hundreds place, they are 214 and 274. There are 6 numbers altogether.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "List possibilities under several conditions",
+        "difficulty": "challenging",
+        "marks": 10,
+        "estimatedTimeSeconds": 180,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "55ef1deeedf8449ee0a0be499c9fde459e6a080a9c0a6c7819ad7219b1930752"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-030",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "7f8d1abdbf4cc1cd8d0f5ff4e55f95e912e2d06325b1249385eefa7d8095c9d7",
+    "contentHash": "488594932944f5c36131539b5a1a4552bea545d5582ffaf359b78e503c97bd6b"
+  }
+}

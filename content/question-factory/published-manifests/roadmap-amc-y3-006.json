@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-006",
+  "questionId": "roadmap-amc-y3-006",
+  "contentHash": "429e86231215e86a68c540c1bd44b2b96e54453e2608ca1ea91682f05c8991a5",
+  "revision": 1,
+  "blueprintId": "amc-y3-006-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "e3160c6a9f8c13e73a75eeed62a3ffec1b8633f6815af3d0687b2991c8e367ee",
+  "difficultyFingerprint": "b942be284118b0e186f9504bf0ba1648e0a5f6a790c6747e371b1af0a24bea83",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-006",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A number is increased by 7 and then doubled. The result is 40. What was the starting number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "16"
+      },
+      {
+        "id": "b",
+        "text": "10"
+      },
+      {
+        "id": "c",
+        "text": "14"
+      },
+      {
+        "id": "d",
+        "text": "13"
+      },
+      {
+        "id": "e",
+        "text": "12"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "Undo doubling first and then undo adding seven.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Working backwards and inverse operations",
+      "difficulty": "medium",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "811a02c925dc582497ddd3e6d787020eea09dd2cf8a7140f75576a6962fd88aa",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-006",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-d0f9956f58327d893b161ee78225c116a0041a84"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:23.612Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "429e86231215e86a68c540c1bd44b2b96e54453e2608ca1ea91682f05c8991a5",
+        "blueprintHash": "18626619fa4261372b7fd936b1ddabd971ad1a64cbb6ede3d2e84ea8548e4d43",
+        "candidateRevision": 1,
+        "reviewResultHash": "6cbb416a3ced1c0f48e6df39be1eaae3ff2eaa31928d86c509a0a85514b31a14"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "e00c9973c79663c3e3b7a76532c3f85ad20f5b2517ab77495676958128052e3e"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-006",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "2acaeb10e6b69c499495736c90a0de34059b53614bd0209c3516413bc814ee60"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "472a02677814b8ad4bbfb3ff5e8e5b78f5b4c9ba7a088885617266268d488d67",
+      "evidenceBinding": {
+        "candidateContentHash": "429e86231215e86a68c540c1bd44b2b96e54453e2608ca1ea91682f05c8991a5",
+        "candidateRevision": 1,
+        "blueprintHash": "18626619fa4261372b7fd936b1ddabd971ad1a64cbb6ede3d2e84ea8548e4d43",
+        "reviewResultHash": "2acaeb10e6b69c499495736c90a0de34059b53614bd0209c3516413bc814ee60"
+      },
+      "previousReviewHash": "e00c9973c79663c3e3b7a76532c3f85ad20f5b2517ab77495676958128052e3e",
+      "reviewHash": "e77072aa8591e3b6948bab36c5f4305598e7a29274d7f888c33e5998626ffc91"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-006",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "d86d2d8a407ac1a202ee20853084254d24ce8984c7e71c1a16ca1addcb23d9a6",
+    "sourceManifestHash": "472a02677814b8ad4bbfb3ff5e8e5b78f5b4c9ba7a088885617266268d488d67",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-006",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A number is increased by 7 and then doubled. The result is 40. What was the starting number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "16"
+        },
+        {
+          "id": "b",
+          "text": "10"
+        },
+        {
+          "id": "c",
+          "text": "14"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        },
+        {
+          "id": "e",
+          "text": "12"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Undo doubling first and then undo adding seven.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Working backwards and inverse operations",
+        "difficulty": "medium",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "2acaeb10e6b69c499495736c90a0de34059b53614bd0209c3516413bc814ee60"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-006",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "429e86231215e86a68c540c1bd44b2b96e54453e2608ca1ea91682f05c8991a5",
+    "contentHash": "d86d2d8a407ac1a202ee20853084254d24ce8984c7e71c1a16ca1addcb23d9a6"
+  }
+}

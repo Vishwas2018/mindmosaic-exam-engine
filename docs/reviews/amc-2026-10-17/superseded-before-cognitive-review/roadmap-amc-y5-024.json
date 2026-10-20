@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-024",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "6dc87567128f97256b144261805058f89828e12317fdb77fefec02af660219a9",
+  "sourceManifestHash": "93411cc0afaad48f35fc50ff064922a6bef080b3fe8e09976933d6ef740fabaa",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-024",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Using each digit 2, 4, 5 and 7 once, what is the greatest even number that can be made?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5472"
+      },
+      {
+        "id": "b",
+        "text": "7452"
+      },
+      {
+        "id": "c",
+        "text": "7524"
+      },
+      {
+        "id": "d",
+        "text": "7542"
+      },
+      {
+        "id": "e",
+        "text": "5742"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "An even number must end in 2 or 4. Putting 2 last allows the larger leading digits 7, 5 and 4, giving 7542.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Place value under a divisibility constraint",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "c782bae3a6acf8e33d543191c9089d3ac4db6a13413cc702f119413ef2fd3781"
+}

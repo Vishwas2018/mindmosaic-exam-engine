@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-019",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "fb354034d87e0a0d717b78a51d0d597e61e142161ff0979f4aca63db7aabf2ff",
+  "sourceManifestHash": "2dd609952541def8b4be2e55163f375f12c50d159b26c193d14db33fe401dd32",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-019",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?",
+    "options": [
+      {
+        "id": "a",
+        "text": "apple"
+      },
+      {
+        "id": "b",
+        "text": "banana"
+      },
+      {
+        "id": "c",
+        "text": "cannot be known"
+      },
+      {
+        "id": "d",
+        "text": "pear"
+      },
+      {
+        "id": "e",
+        "text": "apple or banana"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Ben has pear. Asha must therefore have banana, because she cannot have apple. Chen has the remaining fruit, apple.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Deduce from constraints",
+      "difficulty": "easy",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "2f74d10b628e012d15830ba24fbc7b0fc902c0baae267d8cf3bb2b840bd5dc10"
+}

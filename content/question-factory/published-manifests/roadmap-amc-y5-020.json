@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-020",
+  "questionId": "roadmap-amc-y5-020",
+  "contentHash": "43f94338f0087aaf5c4198c70e3d0afb77a77b43b5fa938f197ef5a2f46b50e6",
+  "revision": 1,
+  "blueprintId": "amc-y5-020-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "de087057d764c25e03c275ea3f3182c4f47b2e389ff77d0035464a2ba2ae541b",
+  "difficultyFingerprint": "8a48fad80c09946b6738037d7185454a4892687069f2f598b8dbfda29a5cdc0f",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-020",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A shape is made from two 5 cm squares joined along one complete side. What is the perimeter of the joined shape?",
+    "options": [
+      {
+        "id": "a",
+        "text": "20"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "25"
+      },
+      {
+        "id": "d",
+        "text": "40"
+      },
+      {
+        "id": "e",
+        "text": "35"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The joined shape is a 10 cm by 5 cm rectangle. Its perimeter is 10 + 5 + 10 + 5 = 30 cm.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Perimeter of joined shapes",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0e8673fdc7bfc18466bbba63c36c93296aab35ae99e9e32e661a43281e9242f4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-020",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-00e74410aa783176bc77d3c4ec6edb0fad8f752e"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:35.754Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "43f94338f0087aaf5c4198c70e3d0afb77a77b43b5fa938f197ef5a2f46b50e6",
+        "blueprintHash": "b57827f98d6fe5a44e0825034984b89704adc6f87aedb963186e41dac7e93d81",
+        "candidateRevision": 1,
+        "reviewResultHash": "a296f233c616af9edb09fffc279acbf7c95f9703a135caaf0cc122e74018ce4a"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "1f224976792ffdf823b1ee0cd1a1e977114ddfdac2f4f693e93cfe52a5c42e77"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-020",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "e59c53f24a50bb41d5ea94edd4459d60c5a2c58e4ce62f2921ead0b03bc6601a"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "ee513b8b7afe626c0eeed3c25f2496496cf9f1349a5a4917ad9a853c759717e0",
+      "evidenceBinding": {
+        "candidateContentHash": "43f94338f0087aaf5c4198c70e3d0afb77a77b43b5fa938f197ef5a2f46b50e6",
+        "candidateRevision": 1,
+        "blueprintHash": "b57827f98d6fe5a44e0825034984b89704adc6f87aedb963186e41dac7e93d81",
+        "reviewResultHash": "e59c53f24a50bb41d5ea94edd4459d60c5a2c58e4ce62f2921ead0b03bc6601a"
+      },
+      "previousReviewHash": "1f224976792ffdf823b1ee0cd1a1e977114ddfdac2f4f693e93cfe52a5c42e77",
+      "reviewHash": "ddd6a65282916d6e4251e52ba3a7f7edd422b9609872018d2f902f0364839265"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-020",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "7f30857724840b78a1328b3e6e3db09e88e98bfb7a0505ff054b2eefd6a58242",
+    "sourceManifestHash": "ee513b8b7afe626c0eeed3c25f2496496cf9f1349a5a4917ad9a853c759717e0",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-020",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A shape is made from two 5 cm squares joined along one complete side. What is the perimeter of the joined shape?",
+      "options": [
+        {
+          "id": "a",
+          "text": "20"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "25"
+        },
+        {
+          "id": "d",
+          "text": "40"
+        },
+        {
+          "id": "e",
+          "text": "35"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The joined shape is a 10 cm by 5 cm rectangle. Its perimeter is 10 + 5 + 10 + 5 = 30 cm.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Perimeter of joined shapes",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 120,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "e59c53f24a50bb41d5ea94edd4459d60c5a2c58e4ce62f2921ead0b03bc6601a"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-020",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "43f94338f0087aaf5c4198c70e3d0afb77a77b43b5fa938f197ef5a2f46b50e6",
+    "contentHash": "7f30857724840b78a1328b3e6e3db09e88e98bfb7a0505ff054b2eefd6a58242"
+  }
+}

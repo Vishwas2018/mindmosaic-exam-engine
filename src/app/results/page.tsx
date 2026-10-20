@@ -307,8 +307,10 @@ export default function ResultsPage() {
      right expectation ("something like this") without promising the exact
      same filters carry over. */
   const handlePracticeSimilar = () => {
+    const patternId = config.patternId;
     resetExam();
-    router.push("/practice");
+    /* A named paper (AMC, scholarship, ...) retries that same paper's start page. */
+    router.push(patternId && /^[a-z0-9-]+$/.test(patternId) ? `/exams/${patternId}` : "/practice");
   };
 
   const mixedYear = config.yearLevel === "mixed";

@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y3-020",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:20.115Z",
+  "contentHash": "38bd793b0858c7fe41bbe4babc42a83e8cd5e108b1a427769d703ed1ec0ab1dc",
+  "sourceManifestHash": "67da5808d7741bf1d88e0e61a3f76ee0333160d45ecf2cb8227990459101049c",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y3-020",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangle is 8 cm long and 5 cm wide. A second rectangle has the same perimeter and is 2 cm longer. How many square centimetres is the area of the second rectangle?",
+    "options": [
+      {
+        "id": "a",
+        "text": "31"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "27"
+      },
+      {
+        "id": "d",
+        "text": "29"
+      },
+      {
+        "id": "e",
+        "text": "33"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Keeping the perimeter means the increase in length must be matched by the same decrease in width.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Geometry & Measurement",
+      "topic": "Geometry & Measurement",
+      "skill": "Perimeter, area, and volume problem solving",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "7cdfab827e66c6c7b10e7146452e564f93f3af9a0ed403b56110b542c58743a2"
+}

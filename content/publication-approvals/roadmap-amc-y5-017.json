@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-017",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T01:59:28.745Z",
+  "contentHash": "0059de2eb4d3d677877783a8997f7bcd85abbe979f7d6806c72f246863cc5a1e",
+  "sourceManifestHash": "5354a95370ef8679c39c7db8b0a8b6bc842024028cbcfceabb157778956ed742",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-017",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A tank is three fifths full. After 24 litres are added, it is full. What is the tank's capacity?",
+    "options": [
+      {
+        "id": "a",
+        "text": "96"
+      },
+      {
+        "id": "b",
+        "text": "60"
+      },
+      {
+        "id": "c",
+        "text": "40"
+      },
+      {
+        "id": "d",
+        "text": "48"
+      },
+      {
+        "id": "e",
+        "text": "72"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "The empty part is two fifths and equals 24 litres. One fifth is 12 litres, so five fifths is 60 litres.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Use complementary fractions",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "25b4d0d232f19d9e400dc809e9acbe67c6d1d8006ef90198b3b9c9548cdc7144"
+}

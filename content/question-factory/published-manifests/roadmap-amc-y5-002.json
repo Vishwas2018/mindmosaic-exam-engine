@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-002",
+  "questionId": "roadmap-amc-y5-002",
+  "contentHash": "d3ee65884a81478b4987f452f559bfabb298a139aa494970e86140bc618a876d",
+  "revision": 1,
+  "blueprintId": "amc-y5-002-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "2f47706e16280d6e808a07b5784572f3b05d71a9f02c7da759503f206530626f",
+  "difficultyFingerprint": "28bffc98fb1682970acd3a715d2424bbfa8476201efa9f638c9e9523284d0931",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-002",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pattern 4, 9, 14, 19, ... continues by the same rule. What is the ninth number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "49"
+      },
+      {
+        "id": "b",
+        "text": "45"
+      },
+      {
+        "id": "c",
+        "text": "39"
+      },
+      {
+        "id": "d",
+        "text": "54"
+      },
+      {
+        "id": "e",
+        "text": "44"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The pattern increases by 5. From the first to the ninth term there are 8 increases, so 4 + 8 × 5 = 44.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Continue and generalise number patterns",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0e6b258f57de1f1902fa297f06bbb4a938c8325dd51140646ee0b3fb26d744eb",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-002",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-0cd088ab0f0f732ded6bf15c5413d5abb2ac4f56"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:31.122Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "d3ee65884a81478b4987f452f559bfabb298a139aa494970e86140bc618a876d",
+        "blueprintHash": "72e40cd570895f40d7aec71d99082219bd28b5ae5b6f944d2956a120f1f5d17d",
+        "candidateRevision": 1,
+        "reviewResultHash": "b1034d65ab663268ab3c9c92247bf055c5f6cb88bfeed7f38b765d7b93f5ccbc"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "02c523281386e542f87f6f76919d239e7d83ffdfa2838e78cd0aa790fcc60814"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-002",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "210b00cecdf1919dbc22e657333452b4c58906e9109ca2d4f8220eb8c0dd6f03"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "9bd6fa478c0d5cd5d4f40871d8a4bf61ccb92cbd37a91b398c059477f7895071",
+      "evidenceBinding": {
+        "candidateContentHash": "d3ee65884a81478b4987f452f559bfabb298a139aa494970e86140bc618a876d",
+        "candidateRevision": 1,
+        "blueprintHash": "72e40cd570895f40d7aec71d99082219bd28b5ae5b6f944d2956a120f1f5d17d",
+        "reviewResultHash": "210b00cecdf1919dbc22e657333452b4c58906e9109ca2d4f8220eb8c0dd6f03"
+      },
+      "previousReviewHash": "02c523281386e542f87f6f76919d239e7d83ffdfa2838e78cd0aa790fcc60814",
+      "reviewHash": "f1228cdced7ecea501284b73130f3b13311593bbe296fe5be277fc792a0e8b7a"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-002",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "7d3b0d862a0f0e0ae51ac6fcd9559877f8e4315ec44cb696c6a7573829fe05f8",
+    "sourceManifestHash": "9bd6fa478c0d5cd5d4f40871d8a4bf61ccb92cbd37a91b398c059477f7895071",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "The pattern 4, 9, 14, 19, ... continues by the same rule. What is the ninth number?",
+      "options": [
+        {
+          "id": "a",
+          "text": "49"
+        },
+        {
+          "id": "b",
+          "text": "45"
+        },
+        {
+          "id": "c",
+          "text": "39"
+        },
+        {
+          "id": "d",
+          "text": "54"
+        },
+        {
+          "id": "e",
+          "text": "44"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "e"
+      },
+      "explanation": "The pattern increases by 5. From the first to the ninth term there are 8 increases, so 4 + 8 × 5 = 44.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Continue and generalise number patterns",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "210b00cecdf1919dbc22e657333452b4c58906e9109ca2d4f8220eb8c0dd6f03"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-002",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "d3ee65884a81478b4987f452f559bfabb298a139aa494970e86140bc618a876d",
+    "contentHash": "7d3b0d862a0f0e0ae51ac6fcd9559877f8e4315ec44cb696c6a7573829fe05f8"
+  }
+}

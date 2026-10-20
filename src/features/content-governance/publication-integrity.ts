@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { verifiedAmcApprovalSourceHash } from "./amc-review-source";
 
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
 import { validateManifestReviewEvidence } from "@/features/question-factory/publication/manifest-schema";
@@ -213,7 +214,13 @@ export function validatePublicationSource(raw: unknown, question: Question):
     return { ok: false, reason: "invalid_manifest_content" };
   }
   // Approval is separately fingerprinted and bound to all remaining manifest evidence.
-  const { humanApproval: _approval, ...source } = manifest;
+    if (question.metadata.subject === "amc_mathematics") {
+      const sourceHash = verifiedAmcApprovalSourceHash(manifest.humanApprovalSource, String(manifest.candidateId),
+        String(manifest.contentHash), canonicalQuestionHash(question), Number(manifest.revision));
+      if (!sourceHash) return { ok: false, reason: "invalid_amc_approval_source" };
+      return { ok: true, revision: Number(manifest.revision), sourceManifestHash: sourceHash, embeddedApproval: manifest.humanApproval };
+    }
+    const { humanApproval: _approval, ...source } = manifest;
   void _approval;
   return { ok: true, revision: Number(manifest.revision), sourceManifestHash: hashJson(source), embeddedApproval: manifest.humanApproval };
 }
@@ -262,7 +269,12 @@ export function selectApprovedQuestions(
         else { revision = source.revision; sourceHash = source.sourceManifestHash; embedded = source.embeddedApproval; }
       }
     } else if (sources.length > 0) reason = "ambiguous_curated_source";
-    const records = [...(approvalMap.get(question.id) ?? []), ...(embedded === undefined ? [] : [embedded])];
+    const externalRecords = approvalMap.get(question.id) ?? [];
+    const amc = question.metadata.subject === "amc_mathematics";
+    if (!reason && amc && externalRecords.length === 0) reason = "missing_external_human_approval";
+    if (!reason && amc && embedded && externalRecords.length === 1 &&
+        (embedded as Record<string, unknown>).fingerprint !== (externalRecords[0] as Record<string, unknown>).fingerprint) reason = "manifest_approval_record_mismatch";
+    const records = amc ? externalRecords : [...externalRecords, ...(embedded === undefined ? [] : [embedded])];
     if (!reason && records.length > 1) reason = "duplicate_approval";
     if (!reason && records.length === 0) {
       excluded.push({ questionId: question.id, reason: "awaiting_human_approval" });

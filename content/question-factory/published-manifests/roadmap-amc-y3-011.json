@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-011",
+  "questionId": "roadmap-amc-y3-011",
+  "contentHash": "28a9a85f8a567680b0ddfed21fb0a890a7d63d8da89ee6dcb8237b0d7b604b1c",
+  "revision": 1,
+  "blueprintId": "amc-y3-011-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "dab54f00949191bc11abb2f482ee41e7bf17cc05fc4b703dd10d30b041c836e4",
+  "difficultyFingerprint": "8fa7b791e9ba6c762e587bf46e7e11edb3ca8daaaa072169f8ab5ca2f64bcb84",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-011",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On a 5 by 5 checkerboard, the top-left square is dark and neighbouring squares alternate colours. How many squares are dark?",
+    "options": [
+      {
+        "id": "a",
+        "text": "10"
+      },
+      {
+        "id": "b",
+        "text": "13"
+      },
+      {
+        "id": "c",
+        "text": "12"
+      },
+      {
+        "id": "d",
+        "text": "14"
+      },
+      {
+        "id": "e",
+        "text": "16"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each pair of neighbouring squares contributes one dark square, with one extra dark square on an odd board.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Grid puzzles and spatial reasoning",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "5396916891006b4ade89da083d2088cd7cfcfdd6cecfcf8f287fa936eaf9fcd4",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-011",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-b94ff945626a88d3621c886fb4b9a8a346b8ddba"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:24.989Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "28a9a85f8a567680b0ddfed21fb0a890a7d63d8da89ee6dcb8237b0d7b604b1c",
+        "blueprintHash": "5a2671b0b9e6b5199915c88aeddbfeb24e82769b27e09e10c22439f6a4fd7e7b",
+        "candidateRevision": 1,
+        "reviewResultHash": "959ab24ff2238cd879ea181f182bffb757d5c9fc6ae07ea6a6b8a94d975d91e8"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "53556bd82c675e05167aaba232290caae67c4bfbe581bb55cce33a202324a65a"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-011",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "ae90554733210b3ed48a59ad1f336f40278e891f0115250048160058f84426df"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "5da448f14d01fa58dbda5e8096d13a70329a56c374fc4af82cb3dca666c496d7",
+      "evidenceBinding": {
+        "candidateContentHash": "28a9a85f8a567680b0ddfed21fb0a890a7d63d8da89ee6dcb8237b0d7b604b1c",
+        "candidateRevision": 1,
+        "blueprintHash": "5a2671b0b9e6b5199915c88aeddbfeb24e82769b27e09e10c22439f6a4fd7e7b",
+        "reviewResultHash": "ae90554733210b3ed48a59ad1f336f40278e891f0115250048160058f84426df"
+      },
+      "previousReviewHash": "53556bd82c675e05167aaba232290caae67c4bfbe581bb55cce33a202324a65a",
+      "reviewHash": "c013907faf5a5baa37340c5155edcbec7f5f37ed871c008fbc90c5b56f3dd4c9"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-011",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "76e0827b7585b53eb55828b93e0ade5e8946a930e89e7fdabefcb381d3de56ae",
+    "sourceManifestHash": "5da448f14d01fa58dbda5e8096d13a70329a56c374fc4af82cb3dca666c496d7",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-011",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "On a 5 by 5 checkerboard, the top-left square is dark and neighbouring squares alternate colours. How many squares are dark?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "13"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "14"
+        },
+        {
+          "id": "e",
+          "text": "16"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Each pair of neighbouring squares contributes one dark square, with one extra dark square on an odd board.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Grid puzzles and spatial reasoning",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "ae90554733210b3ed48a59ad1f336f40278e891f0115250048160058f84426df"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-011",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "28a9a85f8a567680b0ddfed21fb0a890a7d63d8da89ee6dcb8237b0d7b604b1c",
+    "contentHash": "76e0827b7585b53eb55828b93e0ade5e8946a930e89e7fdabefcb381d3de56ae"
+  }
+}

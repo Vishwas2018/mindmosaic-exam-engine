@@ -56,6 +56,7 @@ export interface PublicationManifest {
   /** Recorded human-reviewer signature authorizing publication. */
   readonly approvedBy?: string;
   readonly humanApproval?: HumanPublicationApproval;
+  readonly humanApprovalSource?: unknown;
 }
 
 export type PublicationOutcome =

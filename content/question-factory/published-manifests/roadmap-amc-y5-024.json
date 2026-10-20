@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-024",
+  "questionId": "roadmap-amc-y5-024",
+  "contentHash": "293aeae6a196e5a60f5d8d775f4fb00041db9c3ca28f871c18d5478fb61e1c25",
+  "revision": 1,
+  "blueprintId": "amc-y5-024-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "457e8b4075135581d78f64c964b26380d00f113cd798bb760fc0206e81332d06",
+  "difficultyFingerprint": "ac5da7c15e2362fe7c20b6dffe01a895357a4bd5fa4db39539d983f8388b9745",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-024",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Using each digit 2, 4, 5 and 7 once, what is the greatest even number that can be made?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5472"
+      },
+      {
+        "id": "b",
+        "text": "7452"
+      },
+      {
+        "id": "c",
+        "text": "7524"
+      },
+      {
+        "id": "d",
+        "text": "7542"
+      },
+      {
+        "id": "e",
+        "text": "5742"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "d"
+    },
+    "explanation": "An even number must end in 2 or 4. Putting 2 last allows the larger leading digits 7, 5 and 4, giving 7542.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Place value under a divisibility constraint",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "0d1e2b04d062133cb6a1340f6602d2fc367ef12788daeb7549239bf6ce757cfe",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-024",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-af4b0f94ea4c29f430b70248d87bc4baa8ff5811"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:36.862Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "293aeae6a196e5a60f5d8d775f4fb00041db9c3ca28f871c18d5478fb61e1c25",
+        "blueprintHash": "48dbdeb7450bd6b52c7c84cc7f794dba242f51f58dcc16e159cd556bb998164d",
+        "candidateRevision": 1,
+        "reviewResultHash": "c611a1f07a5ad8e66ed3a034c921b2fd0583fc900105b48d93258f4c7e6d8c7b"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "350958c08c9444d2ec8851ed4a4d9bdcd12ed2efd685f312909cf469f9d218d0"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-024",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "9a5783e581cbc014006244b9fa6a71b221eec2b9c89c389e146fd2eedf9acd53"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:34.320Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "1832ed7c9768e5adf5746a5eadb14d81a0c2627af4b84f8bad437546250ff4c3",
+      "evidenceBinding": {
+        "candidateContentHash": "293aeae6a196e5a60f5d8d775f4fb00041db9c3ca28f871c18d5478fb61e1c25",
+        "candidateRevision": 1,
+        "blueprintHash": "48dbdeb7450bd6b52c7c84cc7f794dba242f51f58dcc16e159cd556bb998164d",
+        "reviewResultHash": "9a5783e581cbc014006244b9fa6a71b221eec2b9c89c389e146fd2eedf9acd53"
+      },
+      "previousReviewHash": "350958c08c9444d2ec8851ed4a4d9bdcd12ed2efd685f312909cf469f9d218d0",
+      "reviewHash": "159d7b3df30925ee27bd326921ce26abcbd10d99d7faefc204dcc775a550b3b5"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-024",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:34.320Z",
+    "contentHash": "b0f8a6298f1eae1b17f446caea7c488fee13542e89804704dcdf7cec63a02fed",
+    "sourceManifestHash": "1832ed7c9768e5adf5746a5eadb14d81a0c2627af4b84f8bad437546250ff4c3",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-024",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "Using each digit 2, 4, 5 and 7 once, what is the greatest even number that can be made?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5472"
+        },
+        {
+          "id": "b",
+          "text": "7452"
+        },
+        {
+          "id": "c",
+          "text": "7524"
+        },
+        {
+          "id": "d",
+          "text": "7542"
+        },
+        {
+          "id": "e",
+          "text": "5742"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "An even number must end in 2 or 4. Putting 2 last allows the larger leading digits 7, 5 and 4, giving 7542.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Place value under a divisibility constraint",
+        "difficulty": "medium",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "9a5783e581cbc014006244b9fa6a71b221eec2b9c89c389e146fd2eedf9acd53"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-024",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "293aeae6a196e5a60f5d8d775f4fb00041db9c3ca28f871c18d5478fb61e1c25",
+    "contentHash": "b0f8a6298f1eae1b17f446caea7c488fee13542e89804704dcdf7cec63a02fed"
+  }
+}

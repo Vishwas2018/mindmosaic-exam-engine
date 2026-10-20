@@ -1,0 +1,24 @@
+{
+  "id": "amc-y5-005-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-5",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Measurement & Geometry",
+  "skill": "amc.angles-around-a-point",
+  "difficulty": "easy",
+  "questionType": "multiple_choice",
+  "targetCount": 1,
+  "marks": 3,
+  "estimatedTimeSeconds": 90,
+  "learningObjective": "Angles around a point",
+  "misconceptionTargets": [],
+  "reasoningSteps": 1,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}

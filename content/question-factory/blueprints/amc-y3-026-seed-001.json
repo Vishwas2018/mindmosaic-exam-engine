@@ -1,0 +1,24 @@
+{
+  "id": "amc-y3-026-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "yearLevel": "year-3",
+  "examStyle": "amc_style",
+  "subject": "amc_mathematics",
+  "strand": "Patterns & Algebra",
+  "skill": "amc.reason-about-an-unknown-using-several-conditions",
+  "difficulty": "challenging",
+  "questionType": "number_entry",
+  "targetCount": 1,
+  "marks": 6,
+  "estimatedTimeSeconds": 180,
+  "learningObjective": "Reason about an unknown using several conditions",
+  "misconceptionTargets": [],
+  "reasoningSteps": 5,
+  "accessibilityConstraints": [],
+  "originalityConstraints": [
+    "Original first-party practice content; verify against the current published corpus."
+  ],
+  "generationConstraints": [
+    "Import the reviewed source verbatim; never synthesize correctness or review evidence."
+  ]
+}

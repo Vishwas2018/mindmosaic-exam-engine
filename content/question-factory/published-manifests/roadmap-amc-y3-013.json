@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-013",
+  "questionId": "roadmap-amc-y3-013",
+  "contentHash": "304b4c203795a15bbce77435f0015f1136d262a4e16386ddcc46ab36e7e4eb7e",
+  "revision": 1,
+  "blueprintId": "amc-y3-013-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "aab97830773fa65326d391f7e025fbdb0757b00478e85d7d271c9cb59a6f6c3d",
+  "difficultyFingerprint": "e009c1676447cf17d3b0c44d7e5cf672103f5e2c3fc6b95e1fef7da7d3154bfc",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-013",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "There are 3 trays. Each tray holds 4 red and 5 green counters. Then 2 green counters are removed from every tray. How many counters remain in all?",
+    "options": [
+      {
+        "id": "a",
+        "text": "21"
+      },
+      {
+        "id": "b",
+        "text": "18"
+      },
+      {
+        "id": "c",
+        "text": "24"
+      },
+      {
+        "id": "d",
+        "text": "22"
+      },
+      {
+        "id": "e",
+        "text": "20"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Seven counters remain per tray, and the number of trays is unchanged.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Multi-step arithmetic operations",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "8036b7d6b25e29ffbc6617d2d2e21d97372ec3b680e9842ad537d3305b951c29",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-013",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-2b5b01a809a3496d18c3bbdcac158bfff3af263d"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:25.650Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "304b4c203795a15bbce77435f0015f1136d262a4e16386ddcc46ab36e7e4eb7e",
+        "blueprintHash": "50f2c032a09070e36e8c5601729bbc0c15f87988f4091f8c35ee51bdea740185",
+        "candidateRevision": 1,
+        "reviewResultHash": "d59a661b55d5bf7c011746ea7483a928631b66186419cf46f0092f7048348cc9"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "7abf8ad2d7f080c0d1c3cafa1bd2133f4e883aed7adeef56d723f560743338cf"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-013",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "ea27ce69d2e428aa4a13c2e8c7ba4af366ded5d385223e0579e5e4b9ebeec2f9"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "72c0605bea2cf9dd02437c2813a7a6cd094b45281a9ffd092b8dcee9ee496c9d",
+      "evidenceBinding": {
+        "candidateContentHash": "304b4c203795a15bbce77435f0015f1136d262a4e16386ddcc46ab36e7e4eb7e",
+        "candidateRevision": 1,
+        "blueprintHash": "50f2c032a09070e36e8c5601729bbc0c15f87988f4091f8c35ee51bdea740185",
+        "reviewResultHash": "ea27ce69d2e428aa4a13c2e8c7ba4af366ded5d385223e0579e5e4b9ebeec2f9"
+      },
+      "previousReviewHash": "7abf8ad2d7f080c0d1c3cafa1bd2133f4e883aed7adeef56d723f560743338cf",
+      "reviewHash": "a3c2b98c5d5ecadf86b269801012ca0bc4186f9235188fbcdecc1a96763b8299"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-013",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "060119e01c44edf230dbfb98bbdf4951a2f1b09f9b96e0c013d9e1d1694e0f4b",
+    "sourceManifestHash": "72c0605bea2cf9dd02437c2813a7a6cd094b45281a9ffd092b8dcee9ee496c9d",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-013",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "There are 3 trays. Each tray holds 4 red and 5 green counters. Then 2 green counters are removed from every tray. How many counters remain in all?",
+      "options": [
+        {
+          "id": "a",
+          "text": "21"
+        },
+        {
+          "id": "b",
+          "text": "18"
+        },
+        {
+          "id": "c",
+          "text": "24"
+        },
+        {
+          "id": "d",
+          "text": "22"
+        },
+        {
+          "id": "e",
+          "text": "20"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Seven counters remain per tray, and the number of trays is unchanged.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Number & Arithmetic",
+        "topic": "Number & Arithmetic",
+        "skill": "Multi-step arithmetic operations",
+        "difficulty": "medium",
+        "marks": 4,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "ea27ce69d2e428aa4a13c2e8c7ba4af366ded5d385223e0579e5e4b9ebeec2f9"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-013",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "304b4c203795a15bbce77435f0015f1136d262a4e16386ddcc46ab36e7e4eb7e",
+    "contentHash": "060119e01c44edf230dbfb98bbdf4951a2f1b09f9b96e0c013d9e1d1694e0f4b"
+  }
+}

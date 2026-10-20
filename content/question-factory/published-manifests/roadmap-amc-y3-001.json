@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-001",
+  "questionId": "roadmap-amc-y3-001",
+  "contentHash": "fe36e80890fd739304c92db951be2eaacf6c01c5ce7c0a13360174ca727b0276",
+  "revision": 1,
+  "blueprintId": "amc-y3-001-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "58363bb78e406f258a79a233b266ca7718f5bf70a7c47e053a717f71c78e6f75",
+  "difficultyFingerprint": "9dd35e579d1079b3d05ffe809187c3f1488d169a976463ec74c859319110a29d",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-001",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bunting strip repeats a group of 2 blue flags followed by 3 yellow flags. How many yellow flags are in the first 20 flags?",
+    "options": [
+      {
+        "id": "a",
+        "text": "15"
+      },
+      {
+        "id": "b",
+        "text": "12"
+      },
+      {
+        "id": "c",
+        "text": "13"
+      },
+      {
+        "id": "d",
+        "text": "11"
+      },
+      {
+        "id": "e",
+        "text": "9"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "Each complete group has five flags, including three yellow flags. Count complete groups.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Number sequences and recurrence relations",
+      "difficulty": "easy",
+      "marks": 3,
+      "estimatedTimeSeconds": 90,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "2ac9035292c37a75ae4ccef6d082e19cd129ddb5feaaec2da7b9d5991df7c376",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-001",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-d232eb1b9badebb3975732335e384067e91d1a84"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:22.276Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "fe36e80890fd739304c92db951be2eaacf6c01c5ce7c0a13360174ca727b0276",
+        "blueprintHash": "c1e3bcc037c45a0fc2d81a1201a25e8a9732429b5ad01a8354a620e8d0bb5706",
+        "candidateRevision": 1,
+        "reviewResultHash": "e0a14036d3950f193cedeeb186fd87d090dea9f974cdd237faf13954d6b6133e"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "ec23788fb7c1401390851d278b36c070c2fb23fa38b65d6b21b40b29b8d4770f"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-001",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "cfaecaafb26fe709eb36f205154d8e4b57d03e411aabbed0fd462ee924cc7618"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:20.115Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "6bd1bb5af3888ae7eb3bdd314fc1886dc931bf0cc4dbd9102f439c395bcc1bdb",
+      "evidenceBinding": {
+        "candidateContentHash": "fe36e80890fd739304c92db951be2eaacf6c01c5ce7c0a13360174ca727b0276",
+        "candidateRevision": 1,
+        "blueprintHash": "c1e3bcc037c45a0fc2d81a1201a25e8a9732429b5ad01a8354a620e8d0bb5706",
+        "reviewResultHash": "cfaecaafb26fe709eb36f205154d8e4b57d03e411aabbed0fd462ee924cc7618"
+      },
+      "previousReviewHash": "ec23788fb7c1401390851d278b36c070c2fb23fa38b65d6b21b40b29b8d4770f",
+      "reviewHash": "61762866255b3768390f15e7dee1e19f1b51e25e3cf71ba73054f184f8df8906"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-001",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:20.115Z",
+    "contentHash": "9523d5b67912f46386ee02ae6e49056834da31a5631614bad74334ed67c6b0d6",
+    "sourceManifestHash": "6bd1bb5af3888ae7eb3bdd314fc1886dc931bf0cc4dbd9102f439c395bcc1bdb",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-001",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A bunting strip repeats a group of 2 blue flags followed by 3 yellow flags. How many yellow flags are in the first 20 flags?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "11"
+        },
+        {
+          "id": "e",
+          "text": "9"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Each complete group has five flags, including three yellow flags. Count complete groups.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Number sequences and recurrence relations",
+        "difficulty": "easy",
+        "marks": 3,
+        "estimatedTimeSeconds": 90,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "cfaecaafb26fe709eb36f205154d8e4b57d03e411aabbed0fd462ee924cc7618"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-001",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "fe36e80890fd739304c92db951be2eaacf6c01c5ce7c0a13360174ca727b0276",
+    "contentHash": "9523d5b67912f46386ee02ae6e49056834da31a5631614bad74334ed67c6b0d6"
+  }
+}

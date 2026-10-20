@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-016",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T04:07:34.320Z",
+  "contentHash": "59abdb6926336383a513d1c8149fdd3fda41cbeb4f3380dc908a014812bfe2e2",
+  "sourceManifestHash": "412b5401632a52248fa8cf9986bcbe63c528c6b66520ff092e4487e307c7262b",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-016",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Two bells ring together at 9:00 am. One rings every 8 minutes and the other every 12 minutes. When will they next ring together?",
+    "options": [
+      {
+        "id": "a",
+        "text": "9:20 am"
+      },
+      {
+        "id": "b",
+        "text": "9:32 am"
+      },
+      {
+        "id": "c",
+        "text": "9:16 am"
+      },
+      {
+        "id": "d",
+        "text": "9:48 am"
+      },
+      {
+        "id": "e",
+        "text": "9:24 am"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "e"
+    },
+    "explanation": "The first positive time that is a multiple of both 8 and 12 is 24 minutes, so they ring together at 9:24 am.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Number & Arithmetic",
+      "topic": "Number & Arithmetic",
+      "skill": "Least common multiples in time",
+      "difficulty": "medium",
+      "marks": 4,
+      "estimatedTimeSeconds": 120,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "e9bbfa9b695fc8d0d4e0e29b94a2d78818bc13226852c839abc0f81e6b1c972d"
+}

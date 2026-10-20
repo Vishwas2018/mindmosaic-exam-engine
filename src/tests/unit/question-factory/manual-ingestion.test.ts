@@ -10,6 +10,8 @@ import { FACTORY_LIMITS } from "@/features/question-factory/config";
 import { hashContent } from "@/features/question-factory/provenance";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 import { validateCandidateStructure } from "@/features/question-factory/validation";
+import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
+import { verifyFirstPartyAmcAttestation } from "@/features/question-factory/correctness/amc-attestation";
 
 let repoRoot: string;
 let inboxRoot: string;
@@ -477,5 +479,41 @@ describe("runManualIngestion — request validation", () => {
     await dropInboxFile("candidate-1.json", validCandidateContent);
     const outcome = await runManualIngestion(baseRequest({ promptHash: "the-real-hash" }), repo);
     expect(outcome.status).toBe("completed");
+  });
+});
+
+describe("registered first-party AMC ingestion identity", () => {
+  async function original() {
+    return JSON.parse(await readFile("content/roadmap-drafts/amc-y3-draft.json", "utf8")).questions[0];
+  }
+  it("preserves the pinned draft id, content hash and solver resolution through real ingestion", async () => {
+    const question = await original();
+    await dropInboxFile("amc.json", question);
+    const outcome = await runManualIngestion(baseRequest(), repo);
+    expect(outcome.status).toBe("completed");
+    if (outcome.status !== "completed") return;
+    const accepted = outcome.result.fileResults[0].candidateResults[0];
+    expect(accepted.status).toBe("accepted");
+    if (accepted.status !== "accepted") return;
+    expect(accepted.candidate.candidateId).toBe(question.id);
+    const stored = await repo.read("generated", question.id) as ManualIngestedCandidateRecord;
+    expect(stored.state).toBe("generated");
+    const parsed = candidateQuestionSchema.parse(stored.question);
+    expect(parsed.id).toBe(question.id);
+    expect(verifyFirstPartyAmcAttestation(parsed, stored.provenance.contentHash)).toMatchObject({ok:true,matchedOptionId:question.answerKey.optionId});
+  });
+  it("does not let a changed question claim a registered draft identity", async () => {
+    const question = await original();
+    question.prompt += " Changed.";
+    await dropInboxFile("spoofed.json", question);
+    const outcome = await runManualIngestion(baseRequest(), repo);
+    expect(outcome.status).toBe("completed");
+    if (outcome.status !== "completed") return;
+    const accepted = outcome.result.fileResults[0].candidateResults[0];
+    expect(accepted.status).toBe("accepted");
+    if (accepted.status !== "accepted") return;
+    expect(accepted.candidate.candidateId).not.toBe(question.id);
+    const parsed = candidateQuestionSchema.parse(accepted.candidate.question);
+    expect(verifyFirstPartyAmcAttestation(parsed, accepted.candidate.provenance.contentHash).ok).toBe(false);
   });
 });

@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-023",
+  "questionId": "roadmap-amc-y5-023",
+  "contentHash": "5a7ca89db7eab1cfa9c05a9a373ec223384eb226f4d268926d9f1eee850399a6",
+  "revision": 1,
+  "blueprintId": "amc-y5-023-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "1b4587c882ca4beeb31b9863790de3fcb4621621b142000841521acf18467f9b",
+  "difficultyFingerprint": "6bbbf6b2a91573066bdcaa8c55eb533a1a45b659fbb5dc68c3dc60788d493758",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-023",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A bag contains 4 red, 3 blue and 1 green counter. Which statement is true about one counter drawn without looking?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Green is impossible"
+      },
+      {
+        "id": "b",
+        "text": "Red is as likely as all non-red colours together"
+      },
+      {
+        "id": "c",
+        "text": "Blue and green are equally likely"
+      },
+      {
+        "id": "d",
+        "text": "Blue is more likely than red"
+      },
+      {
+        "id": "e",
+        "text": "Red is certain"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "b"
+    },
+    "explanation": "There are 4 red counters and 4 non-red counters, so red and non-red have equal probability.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Statistics & Probability",
+      "topic": "Statistics & Probability",
+      "skill": "Compare probabilities",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "999237df52459dd420d71764f3f503e38362351d5116885c8ee72ca759777884",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-023",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-3526becb6ea3dd5bbee1e3b26ad9aae3ccb46a41"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:36.556Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "5a7ca89db7eab1cfa9c05a9a373ec223384eb226f4d268926d9f1eee850399a6",
+        "blueprintHash": "32bcb14beb11a4c5d8d09eff692c477300bb34397cc5e97fd245099857831dbd",
+        "candidateRevision": 1,
+        "reviewResultHash": "527d2a9361a59577d32102737e43955dcc057e296a9c824af609e163dd0337a3"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "b05c1d19f4ea3dc1f0fc9730c73703e95ceb78b999930c7c3279b5ccf671c86d"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-023",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "e1d182f41953f4297a1556e7d970b152290c6ecdfa1484c6f3fc93e00816b726"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T03:53:30.151Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "b8bcbea75b4598bda9553428b1cf22c6a64911d4b348db7e91300719bbca87bd",
+      "evidenceBinding": {
+        "candidateContentHash": "5a7ca89db7eab1cfa9c05a9a373ec223384eb226f4d268926d9f1eee850399a6",
+        "candidateRevision": 1,
+        "blueprintHash": "32bcb14beb11a4c5d8d09eff692c477300bb34397cc5e97fd245099857831dbd",
+        "reviewResultHash": "e1d182f41953f4297a1556e7d970b152290c6ecdfa1484c6f3fc93e00816b726"
+      },
+      "previousReviewHash": "b05c1d19f4ea3dc1f0fc9730c73703e95ceb78b999930c7c3279b5ccf671c86d",
+      "reviewHash": "cb140df4fdd1466078d51e16510b81f767d4f2583c4baa363dc9c763acafde84"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-023",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T03:53:30.151Z",
+    "contentHash": "cb9c8472c80e61cd1a023c85385b578f4ff577f134d0fd9ce0ed27cb61b8ee67",
+    "sourceManifestHash": "b8bcbea75b4598bda9553428b1cf22c6a64911d4b348db7e91300719bbca87bd",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-023",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A bag contains 4 red, 3 blue and 1 green counter. Which statement is true about one counter drawn without looking?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Green is impossible"
+        },
+        {
+          "id": "b",
+          "text": "Red is as likely as all non-red colours together"
+        },
+        {
+          "id": "c",
+          "text": "Blue and green are equally likely"
+        },
+        {
+          "id": "d",
+          "text": "Blue is more likely than red"
+        },
+        {
+          "id": "e",
+          "text": "Red is certain"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "There are 4 red counters and 4 non-red counters, so red and non-red have equal probability.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Statistics & Probability",
+        "topic": "Statistics & Probability",
+        "skill": "Compare probabilities",
+        "difficulty": "easy",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "e1d182f41953f4297a1556e7d970b152290c6ecdfa1484c6f3fc93e00816b726"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-023",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "5a7ca89db7eab1cfa9c05a9a373ec223384eb226f4d268926d9f1eee850399a6",
+    "contentHash": "cb9c8472c80e61cd1a023c85385b578f4ff577f134d0fd9ce0ed27cb61b8ee67"
+  }
+}

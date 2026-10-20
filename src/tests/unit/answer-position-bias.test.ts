@@ -2,7 +2,8 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { allFactoryPublishedQuestions as factoryPublishedQuestions } from "@/content/questions/factory-pools";
+import { amcPublishedQuestions } from "@/content/questions/generated/amc-index";
+import { factoryPublishedQuestions } from "@/content/questions/generated";
 import { practiceExamBank, publishedExamBank } from "@/content/questions/practice-bank";
 import { questionBank } from "@/content/questions/question-bank";
 import type { Question } from "@/schemas/question.schema";
@@ -123,6 +124,7 @@ function analyse(bank: readonly Question[]): BiasReport {
 const BANKS: readonly (readonly [string, readonly Question[]])[] = [
   ["curated", questionBank],
   ["factory-published", factoryPublishedQuestions as readonly Question[]],
+  ["amc-published", amcPublishedQuestions as readonly Question[]],
   ["published exam bank", publishedExamBank],
   ["practice exam bank", practiceExamBank],
 ];

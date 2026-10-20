@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-024",
+  "questionId": "roadmap-amc-y3-024",
+  "contentHash": "4306ae4980a0533177147c3cd1cc3811f7d686b6031483ba2ccfe23dc2ed02b3",
+  "revision": 1,
+  "blueprintId": "amc-y3-024-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "b32db9cee09797b177b94f82fe40c185b547580c303b596021f55c6bf94d8fc1",
+  "difficultyFingerprint": "9f2e6472c9ae13924076f6bd2ee38572c1c736f765e38764761f7af5e4a74162",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-024",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A shed contains 10 bicycles and tricycles altogether. There are 25 wheels in total. How many tricycles are there?",
+    "options": [
+      {
+        "id": "a",
+        "text": "5"
+      },
+      {
+        "id": "b",
+        "text": "8"
+      },
+      {
+        "id": "c",
+        "text": "4"
+      },
+      {
+        "id": "d",
+        "text": "6"
+      },
+      {
+        "id": "e",
+        "text": "2"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Give every vehicle two wheels first. Each remaining wheel changes a bicycle into a tricycle.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Patterns & Algebra",
+      "topic": "Patterns & Algebra",
+      "skill": "Equation balance and substitution",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "54762643e4db87f2bd49b7291a79de497900ee1e1b6c7a8e12e4b8afb544cdad",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-024",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-bd6f2c6675130dcb9c33548ec2abdee09bb1353e"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:28.741Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "4306ae4980a0533177147c3cd1cc3811f7d686b6031483ba2ccfe23dc2ed02b3",
+        "blueprintHash": "b01837aef6a5ea45ca13814c1005214dfcfb7c179fb9c9d5f6ace15d68c8fa34",
+        "candidateRevision": 1,
+        "reviewResultHash": "b6c60cb02a60611eefc3c89e5d970c9f12d0b361bcb0a3c05bb64d6df8e80337"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "0241beef8afb4f99eecae587f2f6f44b9bc0cdca191dc35a4cf95cff29d83862"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-024",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "dc0f09867ab6600a0dd592d7b3e84c9d64e2baa2190bc171b542d1846c899a27"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "bb0f7a06d36a766b26c3ebffaefd214f33df47e81dda33edae256aff225bfccf",
+      "evidenceBinding": {
+        "candidateContentHash": "4306ae4980a0533177147c3cd1cc3811f7d686b6031483ba2ccfe23dc2ed02b3",
+        "candidateRevision": 1,
+        "blueprintHash": "b01837aef6a5ea45ca13814c1005214dfcfb7c179fb9c9d5f6ace15d68c8fa34",
+        "reviewResultHash": "dc0f09867ab6600a0dd592d7b3e84c9d64e2baa2190bc171b542d1846c899a27"
+      },
+      "previousReviewHash": "0241beef8afb4f99eecae587f2f6f44b9bc0cdca191dc35a4cf95cff29d83862",
+      "reviewHash": "7762db96bf291229715ca09204e6d23ae69bc24f5a11818dca3bba2b400f939e"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-024",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "501a04be335612954100d20605470e4197feb71b57710f225ee6a15517cbc3b8",
+    "sourceManifestHash": "bb0f7a06d36a766b26c3ebffaefd214f33df47e81dda33edae256aff225bfccf",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-024",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A shed contains 10 bicycles and tricycles altogether. There are 25 wheels in total. How many tricycles are there?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        },
+        {
+          "id": "e",
+          "text": "2"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Give every vehicle two wheels first. Each remaining wheel changes a bicycle into a tricycle.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Patterns & Algebra",
+        "topic": "Patterns & Algebra",
+        "skill": "Equation balance and substitution",
+        "difficulty": "medium",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "dc0f09867ab6600a0dd592d7b3e84c9d64e2baa2190bc171b542d1846c899a27"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-024",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "4306ae4980a0533177147c3cd1cc3811f7d686b6031483ba2ccfe23dc2ed02b3",
+    "contentHash": "501a04be335612954100d20605470e4197feb71b57710f225ee6a15517cbc3b8"
+  }
+}

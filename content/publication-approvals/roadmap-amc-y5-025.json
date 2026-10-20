@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "roadmap-amc-y5-025",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-10-17T03:53:30.151Z",
+  "contentHash": "357dbc8dfd3ed7b0bcb3344ead612d8dd40af7f2ff7454a7ce434e237e3c62c2",
+  "sourceManifestHash": "0a7dc64f519a45a7b741c7517eeb7e3d7ba47c16fa6b2796caad7b5991ef0fd9",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "roadmap-amc-y5-025",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A 10 cm square is divided by a vertical line 4 cm from its left side. What is the difference between the areas of the two rectangles?",
+    "options": [
+      {
+        "id": "a",
+        "text": "20"
+      },
+      {
+        "id": "b",
+        "text": "30"
+      },
+      {
+        "id": "c",
+        "text": "10"
+      },
+      {
+        "id": "d",
+        "text": "40"
+      },
+      {
+        "id": "e",
+        "text": "60"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "The rectangles have widths 4 cm and 6 cm, so their areas are 40 cm² and 60 cm². The difference is 20 cm².",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Compare areas within a partition",
+      "difficulty": "easy",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "0d6ed943cbc59c6a8382583ee22e5f6393ecc94767a8ba99f1aefdc9770fc3e6"
+}

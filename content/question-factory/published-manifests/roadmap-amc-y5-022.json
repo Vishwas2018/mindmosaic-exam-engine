@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y5-022",
+  "questionId": "roadmap-amc-y5-022",
+  "contentHash": "acb63723cd19fe4122aac3cf3ae6fc2ade10d1a9fcc2d2b96561565c1a5cde01",
+  "revision": 1,
+  "blueprintId": "amc-y5-022-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "a6d9d0ca1c79890b459705f42ac1edb370f640240ce1a980389ec90fe8137b96",
+  "difficultyFingerprint": "8efcc6617a02c9e406fe864fd5a5c9ba6643a9c005cf1a263554685e8730488a",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y5-022",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A robot must move 3 squares right and 2 squares up to reach a target. It never moves left or down. How many different five-move routes can it take?",
+    "options": [
+      {
+        "id": "a",
+        "text": "10"
+      },
+      {
+        "id": "b",
+        "text": "8"
+      },
+      {
+        "id": "c",
+        "text": "5"
+      },
+      {
+        "id": "d",
+        "text": "12"
+      },
+      {
+        "id": "e",
+        "text": "15"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "a"
+    },
+    "explanation": "Choose the 2 positions of the upward moves among 5 moves. Listing the pairs gives 10 different routes.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Logic & Problem-Solving",
+      "topic": "Logic & Problem-Solving",
+      "skill": "Enumerate constrained routes",
+      "difficulty": "challenging",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "064d7097cc88c75d6e8a27785affc04f88442905257b5519f22df612c11b02ae",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y5-022",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-62791ec0c47e5ce5fc19800207b9864927fe648e"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:36.287Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "acb63723cd19fe4122aac3cf3ae6fc2ade10d1a9fcc2d2b96561565c1a5cde01",
+        "blueprintHash": "7da83a59db78b14d59d21aef43e7d19343f69eb35e11a43373ba5dd20cbef45d",
+        "candidateRevision": 1,
+        "reviewResultHash": "175d62a5edda1525fe98edc7f501e3e1689b947105312284cad663ac14e3a685"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "5ab8ce9902f23480ef3455bdb2230e4190862054d0a3b9dcef084df7dc52e519"
+    },
+    {
+      "candidateId": "roadmap-amc-y5-022",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "700fce866d61649e2ab324927adb2c31f235cd453b9f4f286399364a57b4229d"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T01:59:28.745Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "dfe4275b0e59ad59cf6364327427f74a19a3dfa985db9e80f1ba438a7470f2d0",
+      "evidenceBinding": {
+        "candidateContentHash": "acb63723cd19fe4122aac3cf3ae6fc2ade10d1a9fcc2d2b96561565c1a5cde01",
+        "candidateRevision": 1,
+        "blueprintHash": "7da83a59db78b14d59d21aef43e7d19343f69eb35e11a43373ba5dd20cbef45d",
+        "reviewResultHash": "700fce866d61649e2ab324927adb2c31f235cd453b9f4f286399364a57b4229d"
+      },
+      "previousReviewHash": "5ab8ce9902f23480ef3455bdb2230e4190862054d0a3b9dcef084df7dc52e519",
+      "reviewHash": "aa68238cd4fbbdc8e5582e3a49bca3cfa10035cf546097fe068bd18a600de7c1"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-022",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T01:59:28.745Z",
+    "contentHash": "279bd70686f52dcda819f52788f27361bd66c6f51e54bc5f58f0c95570dce2e6",
+    "sourceManifestHash": "dfe4275b0e59ad59cf6364327427f74a19a3dfa985db9e80f1ba438a7470f2d0",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y5-022",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A robot must move 3 squares right and 2 squares up to reach a target. It never moves left or down. How many different five-move routes can it take?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        },
+        {
+          "id": "e",
+          "text": "15"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Choose the 2 positions of the upward moves among 5 moves. Listing the pairs gives 10 different routes.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Logic & Problem-Solving",
+        "topic": "Logic & Problem-Solving",
+        "skill": "Enumerate constrained routes",
+        "difficulty": "challenging",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "700fce866d61649e2ab324927adb2c31f235cd453b9f4f286399364a57b4229d"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y5-022",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
+    "sourceQuestionHash": "acb63723cd19fe4122aac3cf3ae6fc2ade10d1a9fcc2d2b96561565c1a5cde01",
+    "contentHash": "279bd70686f52dcda819f52788f27361bd66c6f51e54bc5f58f0c95570dce2e6"
+  }
+}

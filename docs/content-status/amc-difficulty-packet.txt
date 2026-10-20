@@ -1,0 +1,887 @@
+AMC DIFFICULTY REVIEW PACKET
+
+Source formats preserved: 48 multiple-choice items with options a-e; 9 number-entry items with no options.
+
+========================================================================
+Year 3 (29 items)
+========================================================================
+
+ID: roadmap-amc-y3-001
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+A bunting strip repeats a group of 2 blue flags followed by 3 yellow flags. How many yellow flags are in the first 20 flags?
+
+Options:
+a) 15
+b) 12
+c) 13
+d) 11
+e) 9
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-002
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+Mina puts 4 stickers on each page of a notebook. She uses 24 stickers and leaves 3 pages empty. How many pages does the notebook have?
+
+Options:
+a) 12
+b) 6
+c) 10
+d) 8
+e) 9
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-003
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+A row has 9 chairs. A red card is placed on the middle chair. How many chairs are to its left?
+
+Options:
+a) 4
+b) 1
+c) 7
+d) 3
+e) 5
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-004
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+A model train trip starts at 9:20 am. It travels for 25 minutes, stops for 10 minutes, then travels for 15 more minutes. How many minutes after 9:00 am does it finish?
+
+Options:
+a) 69
+b) 70
+c) 73
+d) 67
+e) 71
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-005
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+Ravi has 31 beads. He makes bracelets using 6 beads each. How many more beads would he need so that all his beads make complete bracelets?
+
+Options:
+a) 5
+b) 8
+c) 4
+d) 2
+e) 6
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-006
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+A number is increased by 7 and then doubled. The result is 40. What was the starting number?
+
+Options:
+a) 16
+b) 10
+c) 14
+d) 13
+e) 12
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-007
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+Tiles numbered from 1 to 18 lie in a row. Every third tile is turned over. How many tiles remain face up?
+
+Options:
+a) 9
+b) 13
+c) 15
+d) 12
+e) 11
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-008
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+Jules is 4 years older than Ari. Together their ages total 20. How old is Jules?
+
+Options:
+a) 13
+b) 9
+c) 12
+d) 15
+e) 11
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-009
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+A rectangular garden has 4 equal rows of 6 plants. Half the plants have white flowers. How many plants have flowers of another colour?
+
+Options:
+a) 9
+b) 15
+c) 12
+d) 11
+e) 13
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-010
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+A robot moves 3 steps forwards, then 1 step backwards, repeating this pair of moves. How far from its starting point is it after 4 complete pairs?
+
+Options:
+a) 8
+b) 5
+c) 9
+d) 7
+e) 11
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-011
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+On a 5 by 5 checkerboard, the top-left square is dark and neighbouring squares alternate colours. How many squares are dark?
+
+Options:
+a) 10
+b) 13
+c) 12
+d) 14
+e) 16
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-012
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+Kai has 9 coins. Each coin is either a $1 coin or a $2 coin, and the coins are worth $14 altogether. How many $2 coins does Kai have?
+
+Options:
+a) 6
+b) 4
+c) 7
+d) 3
+e) 5
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-013
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+There are 3 trays. Each tray holds 4 red and 5 green counters. Then 2 green counters are removed from every tray. How many counters remain in all?
+
+Options:
+a) 21
+b) 18
+c) 24
+d) 22
+e) 20
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-015
+Current difficulty: easy
+Marks: 4
+
+Prompt:
+A straight ribbon is cut into 7 equal pieces. Each cut divides one existing piece into two. How many cuts are needed?
+
+Options:
+a) 5
+b) 9
+c) 7
+d) 3
+e) 6
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-016
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+Four plates each hold 6 apple pieces. Two more apple pieces are added to every plate. How many apple pieces are on the plates now?
+
+Options:
+a) 30
+b) 32
+c) 24
+d) 28
+e) 26
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-017
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+A clock shows 3:45 pm. What time will it show 35 minutes later?
+
+Options:
+a) 4:25 pm
+b) 4:30 pm
+c) 4:10 pm
+d) 3:80 pm
+e) 4:20 pm
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-018
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+Two lights blink together at noon. One blinks every 4 minutes and the other every 6 minutes. After how many minutes will they next blink together?
+
+Options:
+a) 15
+b) 12
+c) 9
+d) 11
+e) 13
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-019
+Current difficulty: challenging
+Marks: 4
+
+Prompt:
+A class has 24 children. Of these, 15 enjoy drawing and 13 enjoy building. Every child enjoys at least one of these activities. How many enjoy both?
+
+Options:
+a) 3
+b) 1
+c) 4
+d) 7
+e) 5
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-020
+Current difficulty: challenging
+Marks: 4
+
+Prompt:
+A rectangle is 8 cm long and 5 cm wide. A second rectangle has the same perimeter and is 2 cm longer. How many square centimetres is the area of the second rectangle?
+
+Options:
+a) 31
+b) 30
+c) 27
+d) 29
+e) 33
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-021
+Current difficulty: medium
+Marks: 5
+
+Prompt:
+A box starts with some tokens. Lena adds 8, doubles the total, then removes 6. There are now 44 tokens. How many were there at the start?
+
+Options:
+a) 14
+b) 17
+c) 16
+d) 18
+e) 20
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-022
+Current difficulty: easy
+Marks: 5
+
+Prompt:
+Use the digits 4, 0 and 7 once each. What is the smallest three-digit number you can make?
+
+Options:
+a) 740
+b) 704
+c) 470
+d) 47
+e) 407
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-023
+Current difficulty: medium
+Marks: 5
+
+Prompt:
+A rectangle is 7 cm long and 3 cm wide. A square has the same perimeter. How long is one side of the square?
+
+Options:
+a) 4
+b) 7
+c) 5
+d) 10
+e) 6
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-024
+Current difficulty: medium
+Marks: 5
+
+Prompt:
+A shed contains 10 bicycles and tricycles altogether. There are 25 wheels in total. How many tricycles are there?
+
+Options:
+a) 5
+b) 8
+c) 4
+d) 6
+e) 2
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-025
+Current difficulty: easy
+Marks: 5
+
+Prompt:
+Four runners finish a race. Mia finishes before Noah. Noah finishes before Priya. Zoe finishes after Priya. Who finishes second?
+
+Options:
+a) Priya
+b) Zoe
+c) It cannot be known
+d) Noah
+e) Mia
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-026
+Current difficulty: challenging
+Marks: 6
+
+Prompt:
+Three baskets hold 41 apples altogether. The first basket has 5 more apples than the second basket. The third basket has twice as many apples as the second basket. Then 3 apples are moved from the first basket to the third basket. How many apples are now in the third basket?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-027
+Current difficulty: challenging
+Marks: 7
+
+Prompt:
+A two-digit number has digits that add to 10. Reversing its digits makes a number 18 greater than the original number. What is the original number?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-028
+Current difficulty: challenging
+Marks: 8
+
+Prompt:
+A tile display has 3 tiles in its first row. Each new row has 2 more tiles than the row above. A box contains 60 tiles. After building the first 6 rows, how many extra tiles must be bought to complete the seventh row?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-029
+Current difficulty: challenging
+Marks: 9
+
+Prompt:
+A bus starts with some children. At the first stop, 5 children get off and 7 get on. At the second stop, half of the children on the bus get off, then 4 get on. There are now 13 children on the bus. How many children were on the bus at the start?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y3-030
+Current difficulty: challenging
+Marks: 10
+
+Prompt:
+Using the digits 1, 2, 4 and 7, how many different three-digit even numbers less than 400 can be made without repeating a digit?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+========================================================================
+Year 5 (28 items)
+========================================================================
+
+ID: roadmap-amc-y5-001
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+A library packs 6 books into each box. After filling 7 boxes, 5 books remain. How many books are there altogether?
+
+Options:
+a) 47
+b) 53
+c) 37
+d) 35
+e) 42
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-002
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+The pattern 4, 9, 14, 19, ... continues by the same rule. What is the ninth number?
+
+Options:
+a) 49
+b) 45
+c) 39
+d) 54
+e) 44
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-003
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+A film starts at 2:35 pm and lasts 1 hour 48 minutes. How many minutes after 2:00 pm does it finish?
+
+Options:
+a) 143
+b) 163
+c) 123
+d) 153
+e) 133
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-004
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+Three quarters of the 60 seats in a hall are occupied. How many seats are occupied?
+
+Options:
+a) 15
+b) 30
+c) 45
+d) 48
+e) 40
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-005
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+Two angles around a point are 90° and 120°. What is the size of the remaining angle?
+
+Options:
+a) 160
+b) 170
+c) 140
+d) 150
+e) 130
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-007
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+Four equal teams collect 72 cans altogether. Then each team collects 3 more cans. How many cans does each team have now?
+
+Options:
+a) 24
+b) 18
+c) 20
+d) 21
+e) 75
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-008
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+Three pens cost $2.40 each. How much change is received from $10?
+
+Options:
+a) $3.20
+b) $2.40
+c) $7.20
+d) $7.60
+e) $2.80
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-009
+Current difficulty: easy
+Marks: 3
+
+Prompt:
+What is the greatest factor of 36 that is less than 10?
+
+Options:
+a) 4
+b) 9
+c) 8
+d) 6
+e) 12
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-010
+Current difficulty: medium
+Marks: 3
+
+Prompt:
+A rectangle has an area of 48 square centimetres and a width of 6 centimetres. What is its perimeter?
+
+Options:
+a) 14
+b) 28
+c) 24
+d) 48
+e) 32
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-011
+Current difficulty: easy
+Marks: 4
+
+Prompt:
+A number is multiplied by 4, then 7 is subtracted. The result is 45. What is the number?
+
+Options:
+a) 11
+b) 15
+c) 13
+d) 17
+e) 9
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-012
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+For every 2 red beads in a pattern there are 3 blue beads. The pattern has 30 beads. How many are blue?
+
+Options:
+a) 20
+b) 18
+c) 15
+d) 10
+e) 12
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-013
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+A 12 cm by 8 cm rectangle has a 4 cm by 3 cm corner cut away. What area remains?
+
+Options:
+a) 72
+b) 88
+c) 92
+d) 80
+e) 84
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-014
+Current difficulty: easy
+Marks: 4
+
+Prompt:
+Which number between 40 and 70 is divisible by both 6 and 9?
+
+Options:
+a) 36
+b) 54
+c) 72
+d) 63
+e) 42
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-015
+Current difficulty: easy
+Marks: 4
+
+Prompt:
+A café offers 3 sandwich fillings and 2 types of bread. Choosing one filling and one bread, how many different sandwiches are possible?
+
+Options:
+a) 9
+b) 5
+c) 8
+d) 6
+e) 12
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-016
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+Two bells ring together at 9:00 am. One rings every 8 minutes and the other every 12 minutes. When will they next ring together?
+
+Options:
+a) 9:20 am
+b) 9:32 am
+c) 9:16 am
+d) 9:48 am
+e) 9:24 am
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-017
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+A tank is three fifths full. After 24 litres are added, it is full. What is the tank's capacity?
+
+Options:
+a) 96
+b) 60
+c) 40
+d) 48
+e) 72
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-018
+Current difficulty: easy
+Marks: 4
+
+Prompt:
+The five scores 12, 18, 15, 21 and 14 are arranged from least to greatest. What is the median?
+
+Options:
+a) 15
+b) 18
+c) 16
+d) 14
+e) 21
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-019
+Current difficulty: easy
+Marks: 4
+
+Prompt:
+Asha, Ben and Chen each choose a different fruit: apple, banana or pear. Asha does not choose apple. Ben chooses pear. What does Chen choose?
+
+Options:
+a) apple
+b) banana
+c) cannot be known
+d) pear
+e) apple or banana
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-020
+Current difficulty: medium
+Marks: 4
+
+Prompt:
+A shape is made from two 5 cm squares joined along one complete side. What is the perimeter of the joined shape?
+
+Options:
+a) 20
+b) 30
+c) 25
+d) 40
+e) 35
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-021
+Current difficulty: medium
+Marks: 5
+
+Prompt:
+A two-digit number has digits that add to 11. Reversing its digits makes a number 27 greater. What is the original number?
+
+Options:
+a) 65
+b) 29
+c) 47
+d) 38
+e) 56
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-022
+Current difficulty: challenging
+Marks: 5
+
+Prompt:
+A robot must move 3 squares right and 2 squares up to reach a target. It never moves left or down. How many different five-move routes can it take?
+
+Options:
+a) 10
+b) 8
+c) 5
+d) 12
+e) 15
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-023
+Current difficulty: easy
+Marks: 5
+
+Prompt:
+A bag contains 4 red, 3 blue and 1 green counter. Which statement is true about one counter drawn without looking?
+
+Options:
+a) Green is impossible
+b) Red is as likely as all non-red colours together
+c) Blue and green are equally likely
+d) Blue is more likely than red
+e) Red is certain
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-024
+Current difficulty: medium
+Marks: 5
+
+Prompt:
+Using each digit 2, 4, 5 and 7 once, what is the greatest even number that can be made?
+
+Options:
+a) 5472
+b) 7452
+c) 7524
+d) 7542
+e) 5742
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-025
+Current difficulty: easy
+Marks: 5
+
+Prompt:
+A 10 cm square is divided by a vertical line 4 cm from its left side. What is the difference between the areas of the two rectangles?
+
+Options:
+a) 20
+b) 30
+c) 10
+d) 40
+e) 60
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-026
+Current difficulty: medium
+Marks: 6
+
+Prompt:
+What is the sum of all positive multiples of 3 that are no greater than 30?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-027
+Current difficulty: challenging
+Marks: 7
+
+Prompt:
+A grid has 4 columns and 3 rows of equal square cells. How many rectangles of all sizes have sides along the grid lines?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-029
+Current difficulty: medium
+Marks: 9
+
+Prompt:
+The first row of a display has 2 counters. Each new row has 3 more counters than the row above. How many counters are in the first 8 rows altogether?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------
+
+ID: roadmap-amc-y5-030
+Current difficulty: challenging
+Marks: 10
+
+Prompt:
+How many three-digit numbers have digits that add to 6, if zero is allowed but the hundreds digit cannot be zero?
+
+Options:
+None (number-entry item).
+
+------------------------------------------------------------------------

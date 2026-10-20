@@ -1,0 +1,214 @@
+{
+  "candidateId": "roadmap-amc-y3-023",
+  "questionId": "roadmap-amc-y3-023",
+  "contentHash": "3fd6b6f8c95f7182c2a700a964dfd4def8483fd1785459063aa4a4d18f5a9ef9",
+  "revision": 1,
+  "blueprintId": "amc-y3-023-seed-001",
+  "batchId": "amc-reviewed-2026-10-17",
+  "generatorAdapter": {
+    "class": "manual_external",
+    "identity": {
+      "provider": "openai",
+      "modelId": "gpt-4",
+      "modelFamily": "gpt",
+      "interactionMode": "external_manual"
+    }
+  },
+  "originalityFingerprint": "af2386dfab98335fb7384f01cab2895c87310b3c96b830a5eaef3f486e0d06fc",
+  "difficultyFingerprint": "3f1414996d4974e87cef57397fdb5ad1164044f85e9e8903f7955a1dbd87742b",
+  "publishedAt": "2026-10-17T04:12:22.923Z",
+  "question": {
+    "id": "roadmap-amc-y3-023",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "amc_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A rectangle is 7 cm long and 3 cm wide. A square has the same perimeter. How long is one side of the square?",
+    "options": [
+      {
+        "id": "a",
+        "text": "4"
+      },
+      {
+        "id": "b",
+        "text": "7"
+      },
+      {
+        "id": "c",
+        "text": "5"
+      },
+      {
+        "id": "d",
+        "text": "10"
+      },
+      {
+        "id": "e",
+        "text": "6"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "c"
+    },
+    "explanation": "The rectangle's perimeter is 7 + 3 + 7 + 3 = 20 cm. A square has four equal sides, so each side is 20 ÷ 4 = 5 cm.",
+    "metadata": {
+      "subject": "amc_mathematics",
+      "strand": "Measurement & Geometry",
+      "topic": "Measurement & Geometry",
+      "skill": "Compare perimeters",
+      "difficulty": "medium",
+      "marks": 5,
+      "estimatedTimeSeconds": 150,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "manifestFingerprint": "e79f9ce06d3993f5dd5e5ba577c5663294f0bb7ca21007a088df5ac2e40b6cd3",
+  "manifestSchemaVersion": 2,
+  "chainOrigin": "in_pipeline",
+  "correctnessBasis": "deterministic",
+  "reviewChain": [
+    {
+      "candidateId": "roadmap-amc-y3-023",
+      "stage": "correctness_check_passed",
+      "reviewerIdentity": {
+        "provider": "other",
+        "modelId": "mindmosaic-first-party-amc",
+        "modelFamily": "mindmosaic",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Hash-pinned first-party recomputation independently matches the declared key."
+      ],
+      "evidenceReferences": [
+        "cva-59d17824cb17032d3adb402b29467c60884b3bc2"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:11:28.400Z",
+      "reviewPromptVersion": "amc-first-party-1",
+      "reviewPromptHash": "d7a39ab6eccb9d2c057323c26de26c8653144862de9909cec0e0bb12d709c7fa",
+      "evidenceBinding": {
+        "candidateContentHash": "3fd6b6f8c95f7182c2a700a964dfd4def8483fd1785459063aa4a4d18f5a9ef9",
+        "blueprintHash": "c8440ac5d4607b549ce7bc2a2ceec263a182ab1dc699f57209f7e8c300bcd01b",
+        "candidateRevision": 1,
+        "reviewResultHash": "5b7a2a5bf5ca141e69a1cee10a2bf3055044ee62d6eb2979bd0d9738ac828246"
+      },
+      "previousReviewHash": "genesis",
+      "reviewHash": "2cb3222ecfc7f61966532fb91adbdd52b3f0cf1889c0a29074db75b8d9969e26"
+    },
+    {
+      "candidateId": "roadmap-amc-y3-023",
+      "stage": "published",
+      "reviewerIdentity": {
+        "provider": "human",
+        "modelId": "Vishwas Joshi",
+        "modelFamily": "human",
+        "interactionMode": "external_manual"
+      },
+      "reviewerVersion": "1",
+      "result": "passed",
+      "confidence": 1,
+      "findings": [
+        "Recorded human approval verified against this exact source, content and revision."
+      ],
+      "evidenceReferences": [
+        "f8def71690f3156e3e97ba3662d7b5ebb1c22935b3c9cbb1eb66f8bfbdb102a4"
+      ],
+      "ambiguityStatus": "none",
+      "reviewedAt": "2026-10-17T04:07:30.315Z",
+      "reviewPromptVersion": "human-publication-approval-1",
+      "reviewPromptHash": "c9e698eaa69e969983a34e77f2a2e8c4466769a132957969467898b471dfdea6",
+      "evidenceBinding": {
+        "candidateContentHash": "3fd6b6f8c95f7182c2a700a964dfd4def8483fd1785459063aa4a4d18f5a9ef9",
+        "candidateRevision": 1,
+        "blueprintHash": "c8440ac5d4607b549ce7bc2a2ceec263a182ab1dc699f57209f7e8c300bcd01b",
+        "reviewResultHash": "f8def71690f3156e3e97ba3662d7b5ebb1c22935b3c9cbb1eb66f8bfbdb102a4"
+      },
+      "previousReviewHash": "2cb3222ecfc7f61966532fb91adbdd52b3f0cf1889c0a29074db75b8d9969e26",
+      "reviewHash": "e02a240b293ecea28865a8c45136a21e90f5d5a0a82e90353616e866f67ac9ac"
+    }
+  ],
+  "approvedBy": "Vishwas Joshi",
+  "humanApproval": {
+    "kind": "human_publication_approval",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-023",
+    "revision": 1,
+    "approvedBy": "Vishwas Joshi",
+    "approvedAt": "2026-10-17T04:07:30.315Z",
+    "contentHash": "440ba1a0ff70bb74b470f907d6ef14802479c02fca8bd225a47c406d9ae44f27",
+    "sourceManifestHash": "c9e698eaa69e969983a34e77f2a2e8c4466769a132957969467898b471dfdea6",
+    "checks": {
+      "correctness": true,
+      "originality": true,
+      "ageAppropriateness": true
+    },
+    "question": {
+      "id": "roadmap-amc-y3-023",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "amc_style",
+      "status": "published",
+      "origin": "original_seed",
+      "prompt": "A rectangle is 7 cm long and 3 cm wide. A square has the same perimeter. How long is one side of the square?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        },
+        {
+          "id": "e",
+          "text": "6"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The rectangle's perimeter is 7 + 3 + 7 + 3 = 20 cm. A square has four equal sides, so each side is 20 ÷ 4 = 5 cm.",
+      "metadata": {
+        "subject": "amc_mathematics",
+        "strand": "Measurement & Geometry",
+        "topic": "Measurement & Geometry",
+        "skill": "Compare perimeters",
+        "difficulty": "medium",
+        "marks": 5,
+        "estimatedTimeSeconds": 150,
+        "tags": [],
+        "locale": "en-AU",
+        "source": "original",
+        "schemaVersion": 1
+      }
+    },
+    "fingerprint": "f8def71690f3156e3e97ba3662d7b5ebb1c22935b3c9cbb1eb66f8bfbdb102a4"
+  },
+  "humanApprovalSource": {
+    "kind": "amc_draft_review_source",
+    "schemaVersion": 1,
+    "questionId": "roadmap-amc-y3-023",
+    "revision": 1,
+    "sourceFile": "content/roadmap-drafts/amc-y3-draft.json",
+    "sourceQuestionHash": "3fd6b6f8c95f7182c2a700a964dfd4def8483fd1785459063aa4a4d18f5a9ef9",
+    "contentHash": "440ba1a0ff70bb74b470f907d6ef14802479c02fca8bd225a47c406d9ae44f27"
+  }
+}
