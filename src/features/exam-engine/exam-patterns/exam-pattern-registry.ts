@@ -517,6 +517,55 @@ const SCHOLARSHIP_PATTERNS = [
     ],
     status: "deferred",
   },
+  {
+    id: "scholarship-y6-comprehensive-sample-module",
+    label: "Scholarship-style Year 6 Comprehensive Sample — practice module",
+    examStyle: "scholarship_style",
+    yearLevel: 6,
+    presentation: "practice_module",
+    basis: "internal",
+    adaptations: ["tight_time_pressure", "unofficial_paper_shape", "no_section_lock"],
+    practiceModule: "offered",
+    guestAccess: "allowed",
+    questionCount: 12,
+    timeMinutes: 18,
+    sources: [
+      {
+        id: "verbal-reasoning",
+        programmeId: "scholarship-y6-verbal-reasoning",
+        count: 3,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "section",
+      },
+      {
+        id: "numerical-reasoning",
+        programmeId: "scholarship-y6-numerical-reasoning",
+        count: 3,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "section",
+      },
+      {
+        id: "reading",
+        programmeId: "scholarship-y6-reading",
+        count: 3,
+        filters: { typeIn: ["reading_comprehension"] },
+        display: "section",
+      },
+      {
+        id: "mathematics",
+        programmeId: "scholarship-y6-mathematics",
+        count: 3,
+        filters: { typeIn: ["multiple_choice"] },
+        display: "section",
+      },
+    ],
+    sectionOrder: [
+      { id: "sec-verbal-reasoning", label: "Verbal Reasoning", sourceIds: ["verbal-reasoning"], locked: false },
+      { id: "sec-numerical-reasoning", label: "Numerical Reasoning", sourceIds: ["numerical-reasoning"], locked: false },
+      { id: "sec-reading", label: "Reading Comprehension", sourceIds: ["reading"], locked: false },
+      { id: "sec-mathematics", label: "Mathematics", sourceIds: ["mathematics"], locked: false },
+    ],
+  },
 ] as const;
 
 /**

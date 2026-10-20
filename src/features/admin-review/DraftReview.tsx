@@ -440,9 +440,27 @@ export function DraftReview({ catalogue }: { catalogue: ReviewCatalogue }) {
     paperSource ||
     sources.find((source) => source.includes("scholarship")) ||
     sources[0];
-  const paperEntries = catalogue.entries.filter(
-    (entry) => entry.source === chosenSource,
-  );
+  const CANDIDATE_12_IDS = [
+    "scholarship-y6-vr-001",
+    "scholarship-y6-vr-016",
+    "scholarship-y6-vr-032",
+    "scholarship-y6-nr-001",
+    "scholarship-y6-nr-022",
+    "scholarship-y6-nr-023",
+    "scholarship-y6-rc-001",
+    "scholarship-y6-rc-002",
+    "scholarship-y6-rc-003",
+    "scholarship-y6-maths-004",
+    "scholarship-y6-maths-007",
+    "scholarship-y6-maths-014",
+  ] as const;
+  const sample12Entries = CANDIDATE_12_IDS.map((id) =>
+    catalogue.entries.find((entry) => entry.question.id === id),
+  ).filter((entry): entry is ReviewEntry => entry !== undefined);
+  const isSample12 = chosenSource === "sample-12";
+  const paperEntries = isSample12
+    ? sample12Entries
+    : catalogue.entries.filter((entry) => entry.source === chosenSource);
   const label = (value: string) =>
     value === "numeracy" ? "Mathematics" : value.replaceAll("_", " ");
   const selectClass =
@@ -509,12 +527,17 @@ export function DraftReview({ catalogue }: { catalogue: ReviewCatalogue }) {
                     .replaceAll("-", " ")}
                 </option>
               ))}
+              {sample12Entries.length > 0 && (
+                <option value="sample-12">
+                  Year 6 Comprehensive Sample (12 questions)
+                </option>
+              )}
             </select>
           </label>
           <p className="text-sm text-muted">
-            Complete source packet: {paperEntries.length} questions. Includes
-            all shared passages and visuals; browse freely without a time limit.
-            Question filters do not shorten a paper.
+            {isSample12
+              ? `Year 6 Comprehensive Sample practice module: ${paperEntries.length} questions across 4 sections (3 Verbal Reasoning, 3 Numerical Reasoning, 3 Reading Comprehension with shared passage, 3 Mathematics). Untimed review preview.`
+              : `Complete source packet: ${paperEntries.length} questions. Includes all shared passages and visuals; browse freely without a time limit. Question filters do not shorten a paper.`}
           </p>
           {paperEntries.length > 0 && (
             <Preview
