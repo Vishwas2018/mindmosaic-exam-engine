@@ -36,6 +36,7 @@ import {
   type ReviewQuestion,
 } from "@/features/exam-engine/types";
 import { isAutosaveDue } from "./autosave";
+import { parseSessionCreationError } from "./session-error";
 import {
   getEffectiveRemainingSeconds,
   getEffectiveSubmissionReason,
@@ -73,6 +74,8 @@ export interface ExamState {
    * decorative "Autosaved" label that is true by assertion.
    */
   lastAutosavedAt: number | null;
+  /** Last error message from a failed server session creation attempt. */
+  lastServerError: string | null;
   /** Seed used for deterministic selection; null for server sessions (server-chosen, never revealed). */
   seed: string | null;
   /** Which authored bank the session draws from; see ExamBankId. */
@@ -201,6 +204,7 @@ function createInitialExamState(): ExamState {
     sessionMode: "local",
     sessionId: null,
     lastAutosavedAt: null,
+    lastServerError: null,
     seed: null,
     bankId: "curated",
     config: null,
@@ -449,10 +453,19 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         }),
       });
       if (!response.ok) {
+        const errorMsg = await parseSessionCreationError(
+          response,
+          "We couldn't start this paper just now. Please try again.",
+        );
+        set({ lastServerError: errorMsg });
         return false;
       }
       const created = (await response.json()) as CreateSessionResponse;
       if (!created.sessionId || !Array.isArray(created.questions) || created.questions.length === 0) {
+        set({
+          lastServerError:
+            "The server did not return questions for this paper. Please try again shortly.",
+        });
         return false;
       }
       stopAutosaveLoop();
@@ -476,6 +489,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         status: "in_progress",
         sessionMode: "server",
         sessionId: created.sessionId,
+        lastServerError: null,
         seed: null,
         bankId,
         config,
@@ -489,6 +503,10 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       return true;
     } catch (error) {
       console.error("Could not start a server exam simulation.", error);
+      set({
+        lastServerError:
+          "We couldn't connect to the server. Check your internet connection and try again.",
+      });
       return false;
     }
   },
@@ -502,10 +520,19 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         body: JSON.stringify({ config, bankId }),
       });
       if (!response.ok) {
+        const errorMsg = await parseSessionCreationError(
+          response,
+          "We couldn't start your exam just now. Please try again.",
+        );
+        set({ lastServerError: errorMsg });
         return false;
       }
       const created = (await response.json()) as CreateSessionResponse;
       if (!created.sessionId || !Array.isArray(created.questions) || created.questions.length === 0) {
+        set({
+          lastServerError:
+            "The server did not return questions for this exam. Please try again shortly.",
+        });
         return false;
       }
       stopAutosaveLoop();
@@ -523,6 +550,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         status: "in_progress",
         sessionMode: "server",
         sessionId: created.sessionId,
+        lastServerError: null,
         seed: null,
         bankId,
         config,
@@ -536,6 +564,10 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       return true;
     } catch (error) {
       console.error("Could not start a server exam session.", error);
+      set({
+        lastServerError:
+          "We couldn't connect to the server. Check your internet connection and try again.",
+      });
       return false;
     }
   },

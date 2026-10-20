@@ -56,6 +56,9 @@ export function ExamPatternStarter({
   const startPatternExam = useExamStore((state) => state.startPatternExam);
   const startServerPatternExam = useExamStore((state) => state.startServerPatternExam);
   const serverMode = auth.status === "authenticated";
+  /* Non-student roles (admin, parent, teacher) are intentionally prohibited from creating student exam sessions (MM-AUTH-01). */
+  const isNonStudentRole =
+    auth.status === "authenticated" && auth.role !== null && auth.role !== "student";
 
   /* A signed-in-only paper is never put in the public guest bank, so a guest cannot start it at all. */
   const signInRequired = pattern.guestAccess === "signed_in_only" && !serverMode && auth.status !== "loading";
@@ -113,6 +116,13 @@ export function ExamPatternStarter({
     if (isStarting || isCreating) return;
     setStartError(null);
 
+    if (isNonStudentRole) {
+      setStartError(
+        "Exam sessions are only available to student accounts. Please sign in with a student account to start this exam.",
+      );
+      return;
+    }
+
     const options = {
       asPracticeModule,
       form,
@@ -125,9 +135,10 @@ export function ExamPatternStarter({
       const started = await startServerPatternExam(pattern, options);
       setIsCreating(false);
       if (!started) {
-        setStartError(
-          "We couldn't start this paper just now. Check your connection and try again.",
-        );
+        const errorMsg =
+          useExamStore.getState().lastServerError ??
+          "We couldn't start this paper just now. Check your connection and try again.";
+        setStartError(errorMsg);
         return;
       }
       setIsStarting(true);
@@ -234,6 +245,55 @@ export function ExamPatternStarter({
           </p>
         )}
 
+        {isNonStudentRole && (
+          <div
+            data-testid="non-student-role-notice"
+            role="status"
+            className="mb-6 rounded-xl border border-warning/30 bg-warning/10 p-4 text-sm leading-6 text-ink"
+          >
+            <p className="font-bold text-ink">
+              {auth.role === "admin" && "You are signed in as an administrator."}
+              {auth.role === "parent" && "You are signed in as a parent."}
+              {auth.role === "teacher" && "You are signed in as a teacher."}
+            </p>
+            <p className="mt-1 text-muted">
+              Exam sessions record student progress and can only be sat by student accounts.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-4">
+              {auth.role === "admin" && (
+                <Link
+                  href="/admin"
+                  className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+                >
+                  Admin dashboard
+                </Link>
+              )}
+              {auth.role === "parent" && (
+                <Link
+                  href="/parent"
+                  className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+                >
+                  Parent dashboard
+                </Link>
+              )}
+              {auth.role === "teacher" && (
+                <Link
+                  href="/teacher"
+                  className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+                >
+                  Teacher dashboard
+                </Link>
+              )}
+              <Link
+                href="/sign-in"
+                className="font-bold text-royal underline underline-offset-2 hover:text-royal/80 focus-visible:outline-2 focus-visible:outline-royal"
+              >
+                Sign in with a student account
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Confidence Mode puts every explanation in the browser before it is asked for. A signed-in-only paper is
             served answer-stripped, so the option is not offered: it needs a per-answer server reveal first. */}
         {pattern.examStyle === "scholarship_style" && pattern.guestAccess !== "signed_in_only" && (
@@ -337,7 +397,13 @@ export function ExamPatternStarter({
             setStartError(null);
             setStage("instructions");
           }}
-          disabled={isStarting || isCreating || auth.status === "loading" || signInRequired}
+          disabled={
+            isStarting ||
+            isCreating ||
+            auth.status === "loading" ||
+            signInRequired ||
+            isNonStudentRole
+          }
         >
           {asPracticeModule
             ? `Start ${patternSubjectName(pattern)} practice module`
