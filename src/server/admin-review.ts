@@ -11,7 +11,7 @@ import {
   type ReviewCatalogue,
 } from "@/features/admin-review/contracts";
 import { createClient } from "@/lib/supabase/server";
-import releaseIdentities from "@/features/admin-review/release-identities.json";
+import releaseIdentities from "@/features/admin-review/releases/scholarship-2026-10-22.json";
 
 // Fixed private paths only. No URL/query input ever becomes a filesystem path.
 const PACKETS = [
@@ -111,7 +111,7 @@ export async function loadAdminReviewCatalogue(): Promise<ReviewCatalogue> {
         await readFile(
           path.join(
             process.cwd(),
-            "docs/reviews/scholarship-2026-10-18/status.json",
+            "docs/reviews/scholarship-sample-2026-10-22/status.json",
           ),
           "utf8",
         ),

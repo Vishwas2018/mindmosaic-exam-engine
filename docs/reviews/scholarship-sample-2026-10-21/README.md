@@ -47,3 +47,6 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
 Content review is complete for all 12 current revisions. Please decide correctness, originality and age suitability for exactly the candidate/publication hash pairs in `approval-manifest.json`, and accept or revise the retained medium labels for VR-001 and NR-023 despite the two recorded reviewer differences.
 
 Release readiness remains blocked by the active historical admin pin/blank sheet, red release-contract tests and governed review-ingest/staging/publication requirements. Content approval does not authorise publication, merge, deployment, production changes or approval of the other 148 drafts. No human decision is recorded automatically.
+# Subsequent advisory decision and preview preparation
+
+The user supplied an advisory ChatGPT content recommendation bound to this manifest at `16c5c1d`. It is not owner approval. The current versioned preview re-pin, pre-stage worksheet, ingestion blockers and verification are documented in [the 22 October preparation](../scholarship-sample-2026-10-22/README.md). The preceding records and `release-preparation/` retain the pre-activation audit; their 120-entry and red-test statements describe that historical state.

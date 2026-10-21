@@ -1,6 +1,6 @@
 import { test, expect } from "../fixtures/auth.fixture";
 import { readFileSync } from "node:fs";
-import identities from "../../src/features/admin-review/release-identities.json";
+import identities from "../../src/features/admin-review/releases/scholarship-2026-10-22.json";
 
 test("Scholarship review is denied to guests and non-admin roles", async ({
   contextAs,

@@ -9,17 +9,22 @@ import { parseApprovalCsv, validateReviewedApprovalRow } from "@/features/conten
 import { loadScholarshipDraftQuestions } from "@/tests/helpers/scholarship-published";
 
 /**
- * The review package under docs/reviews/scholarship-2026-10-18 is generated from the drafts by
- * scripts/scholarship-release-package.mts. If a draft changes and the package is not regenerated, these fail,
- * so a human can never sign a sheet that names content which is no longer the content.
+ * The immutable October 18 package binds the historical release. Current sample
+ * sheets are versioned separately below; neither package grants human approval.
  */
 const pkg = (p: string) => path.join(process.cwd(), "docs/reviews/scholarship-2026-10-18", p);
 const sections = { nr: "nr", maths: "maths", vr: "vr", rc: "rc" } as const;
 
-describe("scholarship review package matches the current drafts", () => {
+describe("historical scholarship review package retains its exact source bindings", () => {
   for (const key of Object.keys(sections) as (keyof typeof sections)[]) {
     it(`${key}: the blank sheet binds the canonical published hash and ingested revision, and leaves every decision blank`, () => {
-      const questions = loadScholarshipDraftQuestions(key);
+      const originalBytes = readFileSync("docs/reviews/scholarship-sample-2026-10-21/release-preparation/packet-reviewed-original.json");
+      expect(createHash("sha256").update(originalBytes).digest("hex")).toBe("c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf");
+      const original = JSON.parse(originalBytes.toString("utf8")) as { id: string; prompt: string }[];
+      // Exactly one prompt was subsequently amended. All other publication fields
+      // remain unchanged; the original answer-withheld packet preserves that prompt.
+      const questions = loadScholarshipDraftQuestions(key).map(q => q.id === "scholarship-y6-maths-014"
+        ? { ...q, prompt: original.find(item => item.id === q.id)!.prompt } : q);
       const rows = parseApprovalCsv(readFileSync(pkg(`review-sheets/review-sheet-scholarship-y6-${key}-blank.csv`), "utf8"));
       expect(rows.map((r) => r.questionId)).toEqual(questions.map((q) => q.id));
       for (const [index, row] of rows.entries()) {
@@ -71,6 +76,36 @@ describe("scholarship review package matches the current drafts", () => {
     expect(estimator).toHaveLength(161);
     const blocked = estimator.filter((l) => /blocked_/.test(l) && /,(nr|maths),/.test(l));
     expect(blocked).toHaveLength(35);
+  });
+});
+
+describe("current sample pre-stage review sheet", () => {
+  it("binds all 12 current publication and candidate hashes, with no invented provenance or decisions", () => {
+    const root = "docs/reviews/scholarship-sample-2026-10-22";
+    const identities = JSON.parse(readFileSync("src/features/admin-review/releases/scholarship-2026-10-22.json", "utf8"));
+    const manifest = JSON.parse(readFileSync("docs/reviews/scholarship-sample-2026-10-21/approval-manifest.json", "utf8"));
+    const binding = JSON.parse(readFileSync(`${root}/preview-binding.json`, "utf8"));
+    expect(createHash("sha256").update(readFileSync("docs/reviews/scholarship-sample-2026-10-21/approval-manifest.json")).digest("hex")).toBe(binding.manifestSha256);
+    const bytes = readFileSync(`${root}/review-sheet-sample-prestage-blank.csv`);
+    expect(createHash("sha256").update(bytes).digest("hex")).toBe(binding.sheetSha256);
+    const rows = parseApprovalCsv(bytes.toString("utf8"));
+    expect(rows).toHaveLength(12);
+    expect(rows.map(row => row.questionId)).toEqual(manifest.items.map((item: { id: string }) => item.id));
+    const questions = Object.values(sections).flatMap(key => loadScholarshipDraftQuestions(key));
+    for (const row of rows) {
+      const question = questions.find(q => q.id === row.questionId)!;
+      expect(row.contentHash, question.id).toBe(canonicalQuestionHash(question));
+      expect(row.contentHash, question.id).toBe(identities.questions[question.id].publishedContentHash);
+      expect(bytes.toString("utf8")).toContain(`${question.id},${identities.questions[question.id].candidateHash},${row.contentHash},,,,,,,`);
+      expect(row.revision).toBeUndefined();
+      expect(row.sourceManifestHash).toBeNull();
+      for (const field of [row.correctness, row.originality, row.ageAppropriateness, row.decision, row.notes]) expect(field ?? "").toBe("");
+      // Even filling decision cells cannot make a pre-stage row publishable.
+      const filled = { ...row, correctness: "yes", originality: "yes", ageAppropriateness: "yes", decision: "approve" };
+      expect(validateReviewedApprovalRow(filled, "Reviewer Name", { questionId: question.id, contentHash: row.contentHash!, revision: 0, sourceManifestHash: "f".repeat(64) })).toContain(`Stale or missing revision for '${question.id}'.`);
+    }
+    expect(binding.publicationEnabled).toBe(false);
+    expect(binding.ownerApprovalRecorded).toBe(false);
   });
 });
 
