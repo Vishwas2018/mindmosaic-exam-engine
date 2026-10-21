@@ -34,7 +34,7 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
 - Scholarship draft validation: `scripts/validate-scholarship-drafts.mts` passes with 0 violations across all 160 items.
 - Correctness derivation: First-party hash-bound attestation recomputed and passed for `scholarship-y6-maths-014` (computed value: `120`, option: `c`).
 
-## Actual Governance & Release Blockers
+## Content and release status
 
 1. **Content Review Complete:** All 12 current revisions have satisfactory manual review outcomes. Amended maths-014 is bound to its exact packet and file hash; no authenticated API provenance is claimed.
 2. **Governed Review Ingest Pending:** The external review is manual user-attested evidence. An API envelope is not intrinsically mandatory: the repository supports external manual ingestion. Genuine normalised identity, confidence, prompt/revision binding, evidence references and a verified review chain are still required. None is fabricated by the aggregate report.
@@ -44,7 +44,6 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
 
 ## Requested human decision
 
-Review the amended `scholarship-y6-maths-014` text and hashes, and decide on:
-1. Executing independent review of `packet-maths-014.json`.
-2. Formally re-pinning `release-identities.json` for the amended draft packet.
-3. Human approval for publication of the 12 candidate revisions once review clearance is complete.
+Content review is complete for all 12 current revisions. Please decide correctness, originality and age suitability for exactly the candidate/publication hash pairs in `approval-manifest.json`, and accept or revise the retained medium labels for VR-001 and NR-023 despite the two recorded reviewer differences.
+
+Release readiness remains blocked by the active historical admin pin/blank sheet, red release-contract tests and governed review-ingest/staging/publication requirements. Content approval does not authorise publication, merge, deployment, production changes or approval of the other 148 drafts. No human decision is recorded automatically.
