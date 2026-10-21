@@ -16,7 +16,22 @@ Initial local/remote HEAD: `16c5c1ddb22c30c325f8ef03f8845168a9b0fda8`; PR #73 co
 
 One full local guarded unit run was interrupted after source edits made its snapshot obsolete. Running focused suites concurrently caused filesystem-bound test timeouts; the final focused run was isolated and passed all 82. These interrupted/failed development attempts are not represented as full-suite passes. No assertions, thresholds or timeouts were weakened.
 
-Local Docker is unavailable (`dockerDesktopLinuxEngine` named pipe absent). Database RLS and authenticated browser results must therefore come from isolated CI, not the unavailable local database. The configured workflow runs the complete guarded unit suite, default build, publication checks, Scholarship drafts, RLS, public browsers and authenticated browsers against disposable local services. Results for the pushed preparation will be recorded below. Previous-HEAD CI is not evidence for the new loader.
+Local Docker is unavailable (`dockerDesktopLinuxEngine` named pipe absent). Database RLS and authenticated browser results therefore come from isolated CI, not the unavailable local database. Previous-HEAD CI was not used as evidence for the new loader.
+
+## Completed verification of preparation commit 3e204a47
+
+- Local `npm run test:ci`: **371 files, 6,491 tests passed**, every test concluded, none failed.
+- [Pull-request CI run 39693604531](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/39693604531): all five jobs green — core, scholarship-drafts, RLS, public browsers and authenticated browsers. The default production build, typecheck, lint, all core validation/publication audits and guarded full unit suite passed. CI independently concluded all 6,491 unit tests.
+- Public browsers: **243 passed** in that run.
+- Authenticated browsers: **57 passed**, including role denial, current release identities, all 160 catalogue entries, full Reading preview and the 12-question sample's navigation/passages/scoring/explanations with no student API writes. Full Scholarship papers remain unavailable.
+- Guarded RLS: **37 files, 585 passed and 2 expected failures**; all 587 concluded, none failed. Migration/object verification, publication gates, projection round trips and rollback-only cutover verification passed in the isolated database.
+- [Push CI run 39693598727](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/39693598727): also green. Its public-browser summary was 241 passed plus 2 flaky tests that passed the existing automatic retries (sign-in keyboard focus and review-filter contrast during the scan). The parallel PR run passed all 243. Neither assertions nor retry policies were changed.
+- Vercel preview build: success. No manual deployment or production release was performed.
+- Admin build tracing contains the new status report and all four private packets. The amended prompt is absent from static client JavaScript.
+- The real intake script's `--only=<12 manifest IDs> --dry-run` validates all 12 candidates/blueprints without writing records. The preflight explicitly retains the distinct solver-enriched intake identities for VR-032/NR-001; this dry run is not ingestion or approval.
+- Git comparison with 16c5c1d confirms no changes to the four question packets, historical identities/status/sheets, exact advisory manifest, previous raw reviews, existing publication approvals or real generated/review-queue/staged records.
+
+The subsequent documentation-only commit records these results; it changes no source, content, hashes, decisions, tests or governance settings. No manual rerun of completed checks is needed for that documentation update; automatically triggered CI remains enabled.
 
 ## Remaining release gates
 
