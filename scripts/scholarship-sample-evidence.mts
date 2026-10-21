@@ -15,7 +15,7 @@ await mkdir(dir, { recursive: true });
 const pattern = getExamPattern("scholarship-y6-comprehensive-sample-module")!;
 const legacy = JSON.parse(await readFile("docs/reviews/scholarship-2026-10-18/status.json", "utf8"));
 const oldPacket = JSON.parse(await readFile("docs/reviews/scholarship-2026-10-18/external-review/packet-manifest.json", "utf8"));
-const reviewText = await readFile(`${dir}/review-summary.json`, "utf8").catch(() => "");
+const reviewText = await readFile(`${dir}/release-preparation/reconciliation.json`, "utf8");
 const review = reviewText ? JSON.parse(reviewText) : null;
 const reviewEvidenceSha256 = reviewText ? createHash("sha256").update(reviewText).digest("hex") : null;
 const items = [];
@@ -32,6 +32,10 @@ for (const source of pattern.sources) {
     const publicationContentHash = canonicalQuestionHash(built.question);
     const previous = legacy.items.find((q: { id: string }) => q.id === id);
     const isAmended = id === "scholarship-y6-maths-014";
+    if (isAmended && (candidateHash !== "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c" || publicationContentHash !== "aeb211f7441a014aefc7cdf85b510e2df0175d615366b97f1d24c58a0372e03a")) throw new Error("Amendment identity drift; a fresh review binding is required");
+    const boundReview = review.items.find((item: { id: string }) => item.id === id);
+    if (!boundReview || boundReview.candidateHash !== candidateHash || boundReview.publicationContentHash !== publicationContentHash) throw new Error(`Reconciliation is stale: ${id}`);
+    const passedManual = boundReview.reviewStatus === "PASS";
     if (!isAmended && (candidateHash !== previous.candidateHash || publicationContentHash !== previous.publishedContentHash)) throw new Error(`Release identity drift: ${id}`);
     const old = oldPacket.items.find((q: { id: string }) => q.id === id);
     if (!isAmended && old && (old.candidateHash !== candidateHash || old.publishedContentHash !== publicationContentHash)) throw new Error(`Old packet identity drift: ${id}`);
@@ -52,15 +56,19 @@ for (const source of pattern.sources) {
       deterministicProof,
       previousFindings: { bucket: previous.bucket, reasons: previous.reasons, difficultyGate: previous.difficultyGate },
       reviewBinding: {
-        packet: isAmended ? "packet-maths-014.json" : "packet.json",
-        result: "review-summary.json",
+        packet: isAmended ? "packet-maths-014.json" : "release-preparation/packet-reviewed-original.json",
+        packetSha256: boundReview.reviewedPacketSha256,
+        rawEvidenceFile: boundReview.rawEvidenceFile,
+        rawEvidenceSha256: boundReview.rawEvidenceSha256,
+        result: "release-preparation/reconciliation.json",
         sha256: reviewEvidenceSha256,
-        status: isAmended ? "remediation_pending_fresh_review" : (review?.unchangedItemsPassed?.includes(id) ? "passed_user_attested" : "pending")
+        status: passedManual ? "passed_user_attested" : boundReview.reviewStatus
       },
       unresolvedFindings: [
         "Human decision pending",
-        ...(isAmended ? ["Amended prompt requires fresh external different-provider review"] : []),
-        ...(old && !review?.reviewCompleted ? ["Different-provider review blocked: API credits depleted (manual user-attested evidence on file)"] : []),
+        ...(isAmended && !passedManual ? ["Exact amended raw review submission and session provenance pending"] : []),
+        ...(isAmended ? ["Active admin release pin and old blank approval sheet remain historical"] : []),
+        ...(old && !passedManual ? ["Different-provider manual review evidence pending"] : []),
         ...(old ? ["Governed per-candidate semantic review ingest pending"] : [])
       ],
     });
@@ -81,4 +89,4 @@ const columns = ["id", "sourcePath", "skill", "difficulty", "marks", "estimatedT
 const csv = (v: unknown) => JSON.stringify(String(v ?? ""));
 await writeFile(`${dir}/approval-manifest.csv`, columns.join(",") + "\n" + items.map(q => columns.map(c => csv(q[c])).join(",")).join("\n") + "\n");
 await writeFile(`${dir}/approval-table.md`, "| ID | Skill | Difficulty | Marks | Seconds | Candidate hash | Publication content hash |\n| --- | --- | --- | --- | --- | --- | --- |\n" + items.map(q => `| ${q.id} | ${q.skill} | ${q.difficulty} | ${q.marks} | ${q.estimatedTimeSeconds} | ${q.candidateHash} | ${q.publicationContentHash} |`).join("\n") + "\n");
-console.log(`Verified ${items.length} exact revisions against release records; packet ${packetSha256}`);
+console.log(`Verified ${items.length} identities: 11 historical matches and one frozen amendment; packet ${packetSha256}; no release activation`);

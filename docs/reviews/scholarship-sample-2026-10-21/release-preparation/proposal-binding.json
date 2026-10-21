@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "45b6cdab335723b2ef822f854ac7e15e556bb7d7",
+  "activePinChanged": false,
+  "proposalActivated": false,
+  "sourcePinSha256": "5bf7cc0cf28484b25996f39b39b4a449c24fe5a379a98ca9778b9fd005066aa2",
+  "identitiesSha256": "a9bf76e6d0b015fa912e55936ff176f2bd4f47cb4fe64de80057fccd0e893a51",
+  "governanceSha256": "324e9019ef0f2526348efd54930d67cec5e0c009c300b42bc437e0bceffcfce4",
+  "note": "Inactive preparation only. Historical identities and governance reports must remain archived unchanged. Coordinated active loader/status/sheet update and full CI are required before merge."
+}

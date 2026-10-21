@@ -33,14 +33,16 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -66,14 +68,16 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -100,14 +104,16 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -136,9 +142,12 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
@@ -170,9 +179,12 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
@@ -204,9 +216,12 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
@@ -235,14 +250,16 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -268,14 +285,16 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -301,14 +320,16 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -337,9 +358,12 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
@@ -371,9 +395,12 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "packet": "release-preparation/packet-reviewed-original.json",
+        "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+        "rawEvidenceFile": "external-review-chatgpt.json",
+        "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
         "status": "passed_user_attested"
       },
       "unresolvedFindings": [
@@ -409,13 +436,17 @@
       },
       "reviewBinding": {
         "packet": "packet-maths-014.json",
-        "result": "review-summary.json",
-        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
-        "status": "remediation_pending_fresh_review"
+        "packetSha256": "1538048ffb0b04bcd62d152895d7f0952eff94861d583d9c5dd76965aab3c30b",
+        "rawEvidenceFile": "external-review-maths-014.json",
+        "rawEvidenceSha256": null,
+        "result": "release-preparation/reconciliation.json",
+        "sha256": "2ba104cacbea20001da5744df2d7c403a9e38fcba2175934e20502a869c90edf",
+        "status": "missing_raw_submission"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Amended prompt requires fresh external different-provider review"
+        "Exact amended raw review submission and session provenance pending",
+        "Active admin release pin and old blank approval sheet remain historical"
       ]
     }
   ]

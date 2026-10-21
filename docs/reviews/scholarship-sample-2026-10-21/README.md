@@ -2,6 +2,8 @@
 
 This is original MindMosaic practice: 3 Verbal, 3 Numerical, 3 Reading and 3 Mathematics items. The 18-minute duration is authoring judgement, without empirical student timing validation. Other drafts are outside this decision. No approval, publication, production database change, merge or deployment is authorised by this package.
 
+Current reconciliation and safe release sequence: [release preparation](release-preparation/README.md). Eleven retained manual outcomes match current revisions; the exact amended review attachment is still missing. The active historical pin is unchanged, so Mathematics and the 12-item admin selector remain withheld on this branch. The inactive re-pin proposal does not activate or approve anything.
+
 ## Exact identities & Remediation (PR #73)
 
 - **Remediated item:** `scholarship-y6-maths-014` amended under Option 1 (explicit closure/exhaustiveness premise: the athletics club contains only two groups, sprinters and distance runners, and every athlete belongs to exactly one group). Intended answer (`120`, option `c`), options and medium difficulty are preserved. Candidate hash refreshed to `71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c`; publication hash refreshed to `aeb211f7441a014aefc7cdf85b510e2df0175d615366b97f1d24c58a0372e03a`.
@@ -17,7 +19,7 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
 - **Provenance:** Manually submitted, user-attested blind-review response from external ChatGPT session.
 - **Envelope status:** Missing authenticated server API envelope. No server HTTP response headers, request IDs, or cryptographic transport bindings exist. This evidence is classified as manual user-attested advisory evidence, not automated API evidence.
 - **Coverage & Findings:**
-  - Evaluated original 12-item packet (`packet.json`, SHA-256 `c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf`).
+  - Evaluated original 12-item packet (now preserved unchanged at `release-preparation/packet-reviewed-original.json`, SHA-256 `c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf`). The amended combined `packet.json` is a different revision.
   - 12 / 12 answer key agreement.
   - 11 items passed as single defensible answers.
   - Identified ambiguity on `scholarship-y6-maths-014` (`verdict: REVISE`, `singleDefensibleAnswer: false`) due to missing group exhaustiveness, leading directly to Content Remediation Option 1 above.
@@ -35,9 +37,9 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
 ## Actual Governance & Release Blockers
 
 1. **Amended Item Review Pending:** `scholarship-y6-maths-014` requires an independent review on its amended prompt (`packet-maths-014.json`).
-2. **Missing Authenticated API Envelope:** The external review on file is manual user-attested evidence without an authenticated server API transport envelope.
+2. **Governed Review Ingest Pending:** The external review is manual user-attested evidence. An API envelope is not intrinsically mandatory: the repository supports external manual ingestion. Genuine normalised identity, confidence, prompt/revision binding, evidence references and a verified review chain are still required. None is fabricated by the aggregate report.
 3. **Admin Review Release Pin Mismatch:** The admin preview reader (`src/server/admin-review.ts`) validates against `releaseIdentities.packets["scholarship-y6-mathematics-draft.json"]` pinned to release `6b7d3339`. Because `scholarship-y6-mathematics-draft.json` was amended, the admin review loader withholds the mathematics packet until a formal re-pinning of release identities is authorised.
-4. **Human Gate Sign-Off (`approvedBy`):** Content publication requires manual human approval per policy; no approval signatures exist in `content/publication-approvals/`.
+4. **Human Gate Sign-Off (`approvedBy`):** Content publication requires manual human approval per policy; no Scholarship sample approval signatures have been recorded in `content/publication-approvals/`; existing AMC and other approvals are preserved.
 5. **Full Paper Availability:** Live published pool contains 0 questions; full papers remain fail-closed (`unavailable`).
 
 ## Requested human decision
