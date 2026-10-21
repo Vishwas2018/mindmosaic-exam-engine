@@ -4,7 +4,7 @@
   "questionCount": 12,
   "timeMinutes": 18,
   "timingBasis": "Authoring judgement; no empirical student timing validation",
-  "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+  "packetSha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
   "hashDefinitions": {
     "candidateHash": "hashJson(candidateQuestionSchema.parse(raw))",
     "publicationContentHash": "canonicalQuestionHash(buildPublishedQuestion(candidate).question)",
@@ -22,6 +22,7 @@
       "publicationContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": null,
       "previousFindings": {
@@ -34,12 +35,12 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted",
+        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -54,6 +55,7 @@
       "publicationContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": null,
       "previousFindings": {
@@ -66,12 +68,12 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted",
+        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -86,6 +88,7 @@
       "publicationContentHash": "758d25fa7ee8c039f97a74432c50dd50f3d635fb7735d8dd892c3e322f7a3b22",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": null,
       "previousFindings": {
@@ -99,12 +102,12 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted",
+        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -119,6 +122,7 @@
       "publicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": {
         "method": "closed-language solver (number_series)",
@@ -134,8 +138,8 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending"
@@ -152,6 +156,7 @@
       "publicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": {
         "method": "first-party hash-bound recompute",
@@ -167,8 +172,8 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending"
@@ -185,6 +190,7 @@
       "publicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": {
         "method": "first-party hash-bound recompute",
@@ -200,8 +206,8 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending"
@@ -218,6 +224,7 @@
       "publicationContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": "04c201f2b45b361f25223927f33a9f3a1725ce7e1726e95b2d83f182bc6b07d9",
       "deterministicProof": null,
       "previousFindings": {
@@ -230,12 +237,12 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted",
+        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -250,6 +257,7 @@
       "publicationContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": "04c201f2b45b361f25223927f33a9f3a1725ce7e1726e95b2d83f182bc6b07d9",
       "deterministicProof": null,
       "previousFindings": {
@@ -262,12 +270,12 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted",
+        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -282,6 +290,7 @@
       "publicationContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": "04c201f2b45b361f25223927f33a9f3a1725ce7e1726e95b2d83f182bc6b07d9",
       "deterministicProof": null,
       "previousFindings": {
@@ -294,12 +303,12 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending",
-        "Different-provider review blocked: API credits depleted",
+        "Different-provider review blocked: API credits depleted (manual user-attested evidence on file)",
         "Governed per-candidate semantic review ingest pending"
       ]
     },
@@ -314,6 +323,7 @@
       "publicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": {
         "method": "first-party hash-bound recompute",
@@ -329,8 +339,8 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending"
@@ -347,6 +357,7 @@
       "publicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
       "revision": 0,
       "releaseIdentityMatches": true,
+      "previousHashes": null,
       "sharedPassageHash": null,
       "deterministicProof": {
         "method": "first-party hash-bound recompute",
@@ -362,8 +373,8 @@
       "reviewBinding": {
         "packet": "packet.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "passed_user_attested"
       },
       "unresolvedFindings": [
         "Human decision pending"
@@ -376,10 +387,14 @@
       "difficulty": "medium",
       "marks": 1,
       "estimatedTimeSeconds": 45,
-      "candidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
-      "publicationContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf",
-      "revision": 0,
-      "releaseIdentityMatches": true,
+      "candidateHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+      "publicationContentHash": "aeb211f7441a014aefc7cdf85b510e2df0175d615366b97f1d24c58a0372e03a",
+      "revision": 1,
+      "releaseIdentityMatches": false,
+      "previousHashes": {
+        "candidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+        "publicationContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf"
+      },
       "sharedPassageHash": null,
       "deterministicProof": {
         "method": "first-party hash-bound recompute",
@@ -393,13 +408,14 @@
         "difficultyGate": "passes"
       },
       "reviewBinding": {
-        "packet": "packet.json",
+        "packet": "packet-maths-014.json",
         "result": "review-summary.json",
-        "sha256": "9db7d6b2da1f1d270d60738f4e0bc1b870d291f3e413f45fba6d4c075774ba0e",
-        "status": "blocked"
+        "sha256": "82fa4ec43a3cbdd2c793dd841f1f46a13ea4910eb411ddcf81aab75f146a52fd",
+        "status": "remediation_pending_fresh_review"
       },
       "unresolvedFindings": [
-        "Human decision pending"
+        "Human decision pending",
+        "Amended prompt requires fresh external different-provider review"
       ]
     }
   ]

@@ -1,0 +1,124 @@
+{
+  "items": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "myAnswer": "e",
+      "reasoning": "A thermometer measures temperature; an odometer measures distance travelled. Only option e preserves the measurement relationship.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "myAnswer": "d",
+      "reasoning": "Vigorous means energetic, forceful or active. ENERGETIC is the only synonym among the options.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "myAnswer": "c",
+      "reasoning": "The stated conditional is: if the sprinkler ran this morning, the lawn is wet now. Because the lawn is not wet now, the sprinkler cannot have run this morning, by modus tollens. This uses the premises as given rather than assuming real-world causes of wet grass.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-nr-001",
+      "myAnswer": "e",
+      "reasoning": "Each term increases by 6: 5, 11, 17, 23, 29, then 35. Option e is 35.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-nr-022",
+      "myAnswer": "e",
+      "reasoning": "Let Chloe's present age be x, making Marcus's age 3x. In eight years, 3x + 8 = 2(x + 8), so x = 8. Checking: they are now 8 and 24, and in eight years 16 and 32.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "myAnswer": "b",
+      "reasoning": "Let n be the notebook price and p the pen price. The equations are 3n + 2p = 19 and 2n + 4p = 18. Halving the second gives n + 2p = 9; subtracting yields 2n = 10, hence n = $5. A pen costs $2, and both totals check.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "challenging",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-001",
+      "myAnswer": "a",
+      "reasoning": "The first paragraph uses muted pre-dawn imagery, restrained rowing, stillness and a familiar silent signal to establish a quiet, watchful mood. The characters' specific reason for being there is not disclosed until later.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "myAnswer": "c",
+      "reasoning": "The ribs of an overturned vessel evoke a curved structural frame. The arched mangrove roots resemble this shape, making option c the only meaningful interpretation of the image.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "myAnswer": "e",
+      "reasoning": "Grandfather predicts that the osprey returns with the turn of the tide and directs Maya towards its habitual perch. These details indicate familiarity with the bird's routine and tidal conditions, not uncertainty or documented scientific study.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-maths-004",
+      "myAnswer": "b",
+      "reasoning": "The elevation difference between +2228 metres and -15 metres is 2228 - (-15) = 2243 metres.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-maths-007",
+      "myAnswer": "a",
+      "reasoning": "After a 25% discount, the jacket costs $160 x 0.75 = $120. The further 10% reduction applies to $120, giving $120 x 0.90 = $108.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-maths-014",
+      "myAnswer": "c",
+      "reasoning": "The ratio difference is two parts, corresponding to 30 athletes, so one part is 15. There are 75 sprinters and 45 distance runners, totalling 120 people in those two groups. However, the question asks for all athletes in the club without stating that these are its only groups.",
+      "singleDefensibleAnswer": false,
+      "issues": "Material underspecification: the 5:3 ratio determines 120 sprinters and distance runners combined, not necessarily the total number of athletes in the club. A club with 10 or 20 additional athletes in other disciplines would have 130 or 140 athletes, both offered as options. Thus options c, d and e are defensible under the stated information.",
+      "difficulty": "medium",
+      "verdict": "REVISE",
+      "fix": "Change the question to 'How many sprinters and distance runners are there altogether?' Alternatively, state explicitly that every athlete in the club is either a sprinter or a distance runner. Keep 120 as the intended correct answer."
+    }
+  ]
+}

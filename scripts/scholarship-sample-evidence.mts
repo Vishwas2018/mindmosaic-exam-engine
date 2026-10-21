@@ -31,9 +31,10 @@ for (const source of pattern.sources) {
     const candidateHash = hashJson(candidate);
     const publicationContentHash = canonicalQuestionHash(built.question);
     const previous = legacy.items.find((q: { id: string }) => q.id === id);
-    if (candidateHash !== previous.candidateHash || publicationContentHash !== previous.publishedContentHash) throw new Error(`Release identity drift: ${id}`);
+    const isAmended = id === "scholarship-y6-maths-014";
+    if (!isAmended && (candidateHash !== previous.candidateHash || publicationContentHash !== previous.publishedContentHash)) throw new Error(`Release identity drift: ${id}`);
     const old = oldPacket.items.find((q: { id: string }) => q.id === id);
-    if (old && (old.candidateHash !== candidateHash || old.publishedContentHash !== publicationContentHash)) throw new Error(`Old packet identity drift: ${id}`);
+    if (!isAmended && old && (old.candidateHash !== candidateHash || old.publishedContentHash !== publicationContentHash)) throw new Error(`Old packet identity drift: ${id}`);
     let deterministicProof: { method: string; passed: boolean } | null = null;
     if (isScholarshipAttestedItem(candidate)) {
       deterministicProof = { method: "first-party hash-bound recompute", passed: verifyFirstPartyScholarshipAttestation(candidate).ok };
@@ -45,12 +46,23 @@ for (const source of pattern.sources) {
     if (deterministicProof && !deterministicProof.passed) throw new Error(`Deterministic proof failed: ${id}`);
     items.push({ id, sourcePath, skill: candidate.metadata.skill, difficulty: candidate.metadata.difficulty,
       marks: candidate.metadata.marks, estimatedTimeSeconds: candidate.metadata.estimatedTimeSeconds,
-      candidateHash, publicationContentHash, revision: 0, releaseIdentityMatches: true,
+      candidateHash, publicationContentHash, revision: isAmended ? 1 : 0, releaseIdentityMatches: !isAmended,
+      previousHashes: isAmended ? { candidateHash: previous.candidateHash, publicationContentHash: previous.publishedContentHash } : null,
       sharedPassageHash: candidate.stimulus ? hashJson(candidate.stimulus) : null,
       deterministicProof,
       previousFindings: { bucket: previous.bucket, reasons: previous.reasons, difficultyGate: previous.difficultyGate },
-      reviewBinding: { packet: "packet.json", result: "review-summary.json", sha256: reviewEvidenceSha256, status: review?.status ?? "pending" },
-      unresolvedFindings: ["Human decision pending", ...(old && !review?.reviewCompleted ? ["Different-provider review blocked: API credits depleted"] : []), ...(old ? ["Governed per-candidate semantic review ingest pending"] : [])],
+      reviewBinding: {
+        packet: isAmended ? "packet-maths-014.json" : "packet.json",
+        result: "review-summary.json",
+        sha256: reviewEvidenceSha256,
+        status: isAmended ? "remediation_pending_fresh_review" : (review?.unchangedItemsPassed?.includes(id) ? "passed_user_attested" : "pending")
+      },
+      unresolvedFindings: [
+        "Human decision pending",
+        ...(isAmended ? ["Amended prompt requires fresh external different-provider review"] : []),
+        ...(old && !review?.reviewCompleted ? ["Different-provider review blocked: API credits depleted (manual user-attested evidence on file)"] : []),
+        ...(old ? ["Governed per-candidate semantic review ingest pending"] : [])
+      ],
     });
     // Deliberate allowlist: no keys, explanations, difficulty or author notes sent.
     blind.push({ id, prompt: candidate.prompt, ...(candidate.stimulus ? { stimulus: candidate.stimulus } : {}), options: candidate.options,

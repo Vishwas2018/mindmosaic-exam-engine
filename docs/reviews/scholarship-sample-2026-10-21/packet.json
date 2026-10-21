@@ -299,7 +299,7 @@
   },
   {
     "id": "scholarship-y6-maths-014",
-    "prompt": "In an athletics club, the ratio of sprinters to distance runners is 5 : 3. If there are 30 more sprinters than distance runners, how many athletes are in the club altogether?",
+    "prompt": "An athletics club contains only two groups, sprinters and distance runners, and every athlete belongs to exactly one group. The ratio of sprinters to distance runners is 5 : 3. If there are 30 more sprinters than distance runners, how many athletes are in the club altogether?",
     "options": [
       {
         "id": "a",
