@@ -2,7 +2,8 @@
   "sourceCommit": "45b6cdab335723b2ef822f854ac7e15e556bb7d7",
   "originalCommit": "a21d23f4533cd857c2aad42b3057aef08e3d4105",
   "status": "BLOCKED",
-  "satisfactoryCurrentReviews": 11,
+  "contentReviewStatus": "READY_FOR_HUMAN_APPROVAL",
+  "satisfactoryCurrentReviews": 12,
   "evidenceLimitation": "Manual user-attested submissions; no authenticated API provenance. Session/model identity must be supplied honestly. No factory semantic review chain is created by this report.",
   "unchangedDrafts": 159,
   "changedIds": [
@@ -46,7 +47,6 @@
     }
   ],
   "blockers": [
-    "Exact raw amended review submission and its session provenance are required",
     "Governed review-ingest and publication lifecycle pending",
     "Active release pin/governance report and old blank sheet still describe historical source",
     "Explicit human decisions pending; CI release gates are red until coordinated activation"
@@ -235,14 +235,14 @@
       "reviewedPacketSha256": "1538048ffb0b04bcd62d152895d7f0952eff94861d583d9c5dd76965aab3c30b",
       "reviewedProjectionMatches": true,
       "rawEvidenceFile": "external-review-maths-014.json",
-      "rawEvidenceSha256": null,
+      "rawEvidenceSha256": "89a7db747f162f9eb2be9f372bc5f74158c55e3f325f0124a1bf2cd3347ecc83",
       "evidenceType": "manual_user_attested",
       "authenticatedApiProvenance": false,
-      "reviewStatus": "missing_raw_submission",
-      "manualAttestationSha256": null,
-      "answerAgreement": null,
+      "reviewStatus": "PASS",
+      "manualAttestationSha256": "23a9516f42b436a60e07f3e9fdf0d547f4c4a512622fcee5130bb0bf8fd1fc52",
+      "answerAgreement": true,
       "declaredDifficulty": "medium",
-      "reviewerDifficulty": null
+      "reviewerDifficulty": "medium"
     }
   ]
 }

@@ -107,7 +107,7 @@ const rows = manifest.items.map((item: { id: string; candidateHash: string; publ
     declaredDifficulty: q.difficulty, reviewerDifficulty: review?.difficulty ?? null };
 });
 const passed = rows.filter((r: { reviewStatus: string }) => r.reviewStatus === "PASS").length;
-await save("reconciliation.json", { sourceCommit, originalCommit, status: "BLOCKED", satisfactoryCurrentReviews: passed,
+await save("reconciliation.json", { sourceCommit, originalCommit, status: "BLOCKED", contentReviewStatus: passed === 12 ? "READY_FOR_HUMAN_APPROVAL" : "BLOCKED", satisfactoryCurrentReviews: passed,
   evidenceLimitation: "Manual user-attested submissions; no authenticated API provenance. Session/model identity must be supplied honestly. No factory semantic review chain is created by this report.",
   unchangedDrafts: 159, changedIds, activeAdminEntries: activeIds.length, activeMathematicsEntries: activeIds.filter(id => id.includes("-maths-")).length, sampleSelectorAvailable: rows.every((r: { id: string }) => activeIds.includes(r.id)),
   difficultyDisagreements: rows.filter((r: { declaredDifficulty: string; reviewerDifficulty: string | null }) => r.reviewerDifficulty !== null && r.declaredDifficulty !== r.reviewerDifficulty),

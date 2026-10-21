@@ -2,7 +2,7 @@
 
 This is original MindMosaic practice: 3 Verbal, 3 Numerical, 3 Reading and 3 Mathematics items. The 18-minute duration is authoring judgement, without empirical student timing validation. Other drafts are outside this decision. No approval, publication, production database change, merge or deployment is authorised by this package.
 
-Current reconciliation and safe release sequence: [release preparation](release-preparation/README.md). Eleven retained manual outcomes match current revisions; the exact amended review attachment is still missing. The active historical pin is unchanged, so Mathematics and the 12-item admin selector remain withheld on this branch. The inactive re-pin proposal does not activate or approve anything.
+Current reconciliation and safe release sequence: [release preparation](release-preparation/README.md). All twelve retained manual outcomes now match current revisions; the amended review file is preserved unchanged and its separate fresh ChatGPT source is manually attested by the user. The active historical pin is unchanged, so Mathematics and the 12-item admin selector remain withheld on this branch. The inactive re-pin proposal does not activate or approve anything.
 
 ## Exact identities & Remediation (PR #73)
 
@@ -26,7 +26,7 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
   - 2 difficulty differences recorded without modifying authoring classifications: `vr-001` (declared medium vs reviewer easy) and `nr-023` (declared medium vs reviewer challenging).
 
 ### Fresh Review Packet for Amended Item
-- A single-item answer-withheld packet for the amended question is prepared at `packet-maths-014.json`.
+- A single-item answer-withheld packet for the amended question is preserved at `packet-maths-014.json`. The new `external-review-maths-014.json` (SHA-256 `89a7db747f162f9eb2be9f372bc5f74158c55e3f325f0124a1bf2cd3347ecc83`) validates against it with PASS, answer c, single defensible answer and medium difficulty. See the separately recorded manual user attestation; actual product model label is unknown.
 
 ## Implementation and verification
 
@@ -36,7 +36,7 @@ The manifest binds `review-summary.json` by SHA-256. Re-run the generator after 
 
 ## Actual Governance & Release Blockers
 
-1. **Amended Item Review Pending:** `scholarship-y6-maths-014` requires an independent review on its amended prompt (`packet-maths-014.json`).
+1. **Content Review Complete:** All 12 current revisions have satisfactory manual review outcomes. Amended maths-014 is bound to its exact packet and file hash; no authenticated API provenance is claimed.
 2. **Governed Review Ingest Pending:** The external review is manual user-attested evidence. An API envelope is not intrinsically mandatory: the repository supports external manual ingestion. Genuine normalised identity, confidence, prompt/revision binding, evidence references and a verified review chain are still required. None is fabricated by the aggregate report.
 3. **Admin Review Release Pin Mismatch:** The admin preview reader (`src/server/admin-review.ts`) validates against `releaseIdentities.packets["scholarship-y6-mathematics-draft.json"]` pinned to release `6b7d3339`. Because `scholarship-y6-mathematics-draft.json` was amended, the admin review loader withholds the mathematics packet until a formal re-pinning of release identities is authorised.
 4. **Human Gate Sign-Off (`approvedBy`):** Content publication requires manual human approval per policy; no Scholarship sample approval signatures have been recorded in `content/publication-approvals/`; existing AMC and other approvals are preserved.

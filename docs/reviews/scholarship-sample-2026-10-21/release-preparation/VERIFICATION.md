@@ -21,4 +21,12 @@ Raw local logs are `C:/tmp/scholarship-reconcile-*.log`, `C:/tmp/scholarship-pre
 
 Prior full CI on source 45b6cdab is [PR run 39536711901](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/39536711901) and [branch run 39536706368](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/39536706368). It reported all 6,488 unit tests concluded: 6,483 passed / 5 failed, with the same five failures above. RLS and public-browser jobs passed; authenticated browser jobs failed on the withheld mathematics/full-catalogue/sample state. These prior results are not presented as a fresh full-suite pass for the preparation commit. Any automatic CI after push remains authoritative for its SHA.
 
-No broad browser/database rerun was used to bypass the known red release contract. The active identity and blank-sheet mismatches must be resolved as a coordinated, authorised version change and full CI must then pass before merge. The raw amended review attachment is still absent, so no SHA, schema validation or satisfactory-review claim for that new submission is fabricated.
+No broad browser/database rerun was used to bypass the known red release contract. The active identity and blank-sheet mismatches must be resolved as a coordinated, authorised version change and full CI must then pass before merge. The raw amended review was absent during that preparation run. The follow-up below records its later receipt and validation.
+
+## Follow-up: amended manual review received
+
+The exact 422-byte file in the user-specified Downloads directory was copied unchanged. SHA-256: `89a7db747f162f9eb2be9f372bc5f74158c55e3f325f0124a1bf2cd3347ecc83`. The user confirmed a separate fresh ChatGPT conversation; that is retained as manual attestation, with model label unknown and no API identity/envelope claim.
+
+Reconciliation and manifest regeneration validate strict response schema, one exact candidate ID, answer agreement, PASS, uniqueness, medium difficulty, empty issues/fix, amended packet projection and both frozen content hashes. All twelve current manual outcomes now pass. The former 11-item rollup is preserved unchanged. The active pin, candidate files and previous raw reviews remain untouched.
+
+Only focused preparation-script lint/typechecking and evidence-binding validation were repeated for this follow-up; completed runtime/build/full-suite checks were not repeated. Release readiness remains blocked by the unchanged active historical contracts and governed publication lifecycle, rather than by the now-resolved file delivery.
