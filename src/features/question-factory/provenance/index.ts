@@ -5,6 +5,7 @@ export {
 export type {
   CandidateProvenance,
   CandidateProvenanceInput,
+  KnownCandidateProvenanceInput,
   SupersessionClaim,
 } from "./candidate-provenance";
 export {
@@ -22,7 +23,7 @@ export {
 } from "./evidence";
 export type { CandidateEvidenceSnapshot, VerifiedReviewChainEvidence } from "./evidence";
 export { GENERATOR_CLASSES, generatorAdapterSchema } from "./generator";
-export type { GeneratorAdapter, GeneratorClass } from "./generator";
+export type { GeneratorAdapter, GeneratorClass, KnownGeneratorAdapter } from "./generator";
 export {
   REVIEW_CHAIN_GENESIS_HASH,
   appendReviewRecord,

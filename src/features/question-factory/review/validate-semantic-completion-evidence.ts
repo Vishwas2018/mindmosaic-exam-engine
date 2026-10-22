@@ -50,7 +50,7 @@ export interface SemanticCompletionBindingFacts {
   readonly blueprintHash?: string;
   /** Freshly recomputed from the candidate's *current* question content via `classifySemanticCategory` — never read from the evidence record itself. */
   readonly semanticClassification: SemanticClassification;
-  readonly generatorIdentity: NormalisedIdentity;
+  readonly generatorIdentity: NormalisedIdentity | null;
   /** The candidate's current, full `provenance.reviewRecords` chain. */
   readonly reviewRecords: readonly ReviewRecord[];
 }

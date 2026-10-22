@@ -36,7 +36,7 @@ export function isReviewStillValid(
  * self-approval is always ignored, per Shared Governance.
  */
 export function isIndependentReview(
-  generatorIdentity: NormalisedIdentity,
+  generatorIdentity: NormalisedIdentity | null,
   review: ReviewRecord,
 ): boolean {
   return identitiesAreIndependent(generatorIdentity, review.reviewerIdentity);
@@ -97,7 +97,7 @@ export interface VerifiedReviewChainEvidence {
  *    candidate's current content hash, blueprint hash, and revision.
  */
 export function isProductionGradeIndependentReview(
-  generatorIdentity: NormalisedIdentity,
+  generatorIdentity: NormalisedIdentity | null,
   evidence: VerifiedReviewChainEvidence,
   current: CandidateEvidenceSnapshot,
   minimumConfidence: number,
