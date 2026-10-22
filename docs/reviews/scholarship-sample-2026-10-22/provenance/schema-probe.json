@@ -1,0 +1,15 @@
+{
+  "unknownProviderAccepted": false,
+  "unknownAliasResolved": false,
+  "legacyUnknownAliasResolved": false,
+  "otherUnknownCliIdentityResolved": false,
+  "claudeAliasNormalisation": {
+    "provider": "anthropic",
+    "modelId": "claude-sonnet-5",
+    "modelFamily": "claude",
+    "interactionMode": "api"
+  },
+  "arbitraryOtherUnknownShapeAccepted": true,
+  "arbitraryOtherUnknownWouldAppearDifferentProvider": true,
+  "note": "Pure schema/identity probes only; no ingestion runner, repository constructor, gate transition or factory writes invoked. Provider other is not an unknown-origin provenance category."
+}

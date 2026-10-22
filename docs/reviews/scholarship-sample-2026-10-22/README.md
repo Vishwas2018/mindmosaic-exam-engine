@@ -2,6 +2,8 @@
 
 Content recommendation: **APPROVE (advisory)**. Publication readiness: **BLOCKED**.
 
+The subsequent [source-provenance investigation](provenance/README.md) classifies original generation as **unverified for all 12**. It distinguishes historical import declarations from authoring, inventories sibling-worktree records, and proposes an explicit legacy-import migration. No factory records were created and no ingestion was run during that investigation. Generic Claude/human importer declarations must not be used to fill the original-author fields.
+
 The recommendation is bound to the exact 12 revisions in `../scholarship-sample-2026-10-21/approval-manifest.json` at commit `16c5c1ddb22c30c325f8ef03f8845168a9b0fda8`. `advisory-recommendation.json` records its SHA-256 and scope. This is the user-supplied ChatGPT recommendation, not the owner's formal approval or an authorised `approvedBy` signature. No substantive originality concerns were identified; comprehensive plagiarism certification was not performed. VR-001 and NR-023 retain Medium; both independent reviewer disagreements remain advisory evidence.
 
 All twelve current revisions retain satisfactory manual, user-attested reviews. The previous raw reviews, attestation, packets, manifest and hashes are unchanged. No authenticated API provenance is asserted. No question, key, explanation, passage, difficulty label, published bank or existing approval is changed here.
