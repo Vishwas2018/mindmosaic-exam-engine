@@ -1,6 +1,7 @@
 docs/REVIEW_INDEPENDENCE_POLICY.md
 docs/reviews/legacy-content-provenance-phase1/README.md
 docs/reviews/legacy-content-provenance-phase1/changed-files.txt
+docs/reviews/legacy-content-provenance-phase1/manifest-tamper-review.md
 docs/reviews/legacy-content-provenance-phase1/preflight-12.json
 docs/reviews/legacy-content-provenance-phase1/sample-import-manifest.json
 docs/reviews/legacy-content-provenance-phase1/synthetic-record.json
@@ -11,6 +12,7 @@ scripts/legacy-import-sample-preflight.mts
 scripts/legacy-import-synthetic-example.mts
 scripts/questions-import-legacy.mts
 scripts/questions-review-prompt.mts
+src/features/content-governance/publication-integrity.ts
 src/features/question-factory/config/identity-normalisation.ts
 src/features/question-factory/config/mission3b-issue-codes.ts
 src/features/question-factory/config/mission3c-issue-codes.ts
@@ -41,6 +43,7 @@ src/features/question-factory/storage/fs-factory-repository.ts
 src/features/question-factory/validation/validate-candidate-structure.ts
 src/tests/fixtures/legacy-import/source-snapshot.json
 src/tests/unit/question-factory/legacy-import.test.ts
+src/tests/unit/question-factory/legacy-manifest-tamper.test.ts
 src/tests/unit/question-factory/provenance-prompt-hash.test.ts
 src/tests/unit/question-factory/provenance.test.ts
 vitest.config.ts

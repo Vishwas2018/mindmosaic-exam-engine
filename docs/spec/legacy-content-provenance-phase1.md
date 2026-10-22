@@ -29,6 +29,8 @@ Structural validation requires the exact imported blueprint hash and the existin
 
 Semantic evidence helpers propagate a null generator and cannot qualify a production-grade independent review. External review ingestion refuses legacy candidates before any append; the production review-prompt CLI refuses to issue a misleading independent-review pack. Independent-review completion evidence cannot borrow a valid known-generator chain. Deterministic semantic skipping retains its existing meaning and is not a publication exception.
 
+Publication manifests are checked as an allow-list: `validatePublicationSource` refuses any manifest whose `generatorAdapter` is absent, malformed or not one of the three verified-generation classes (`invalid_generator_attribution`), in addition to refusing the explicit `legacy_import` marker. See `docs/reviews/legacy-content-provenance-phase1/manifest-tamper-review.md` for the tampering matrix and the residual trust boundary.
+
 The common upstream staging/publication gate explicitly refuses all legacy imports in Phase 1. Staging replay, publication eligibility, publication replay, publication-manifest validation and bank assembly also refuse the legacy variant. Malformed staged provenance is refused rather than acknowledged as a successful replay. A stored advanced state, manufactured review chain, human approval or deterministic proof does not bypass this hold.
 
 The old human/Claude import and staging scripts are not used by the new path. No existing approval, provenance, release identity or question content is rewritten.
