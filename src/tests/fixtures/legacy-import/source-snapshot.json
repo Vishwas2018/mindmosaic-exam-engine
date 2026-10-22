@@ -1,0 +1,2505 @@
+{
+  "fixtureNotice": "Question payloads/register are frozen from the read-only reference. Tests create synthetic Git/import events in disposable repositories; no original generation is asserted. Packet files are reduced to the twelve selected questions, so synthetic Git packet identities differ from the reference.",
+  "referenceCommit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+  "files": {
+    "docs/reviews/scholarship-sample-2026-10-22/provenance/source-register.json": {
+      "schemaVersion": 1,
+      "investigatedHead": "9e5eb1eb6dd69aef8ff48b720683e9ee378e1e2a",
+      "manifestCommit": "16c5c1ddb22c30c325f8ef03f8845168a9b0fda8",
+      "manifestSha256": "4e754be7fd4df59a9208549c261e7f251abf5d6f1a6b2de55215ed11ad11eb40",
+      "scope": "Available local Git refs and inspected local execution records; not proof of exhaustive historical recovery or remote API authentication.",
+      "originalGenerationClassification": "UNVERIFIED for all 12",
+      "factoryRecordsCreated": false,
+      "items": [
+        {
+          "id": "scholarship-y6-vr-001",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+            "rawQuestionHash": "28b31084ac63eb0b891ee852e48ddc9b6e0477ae6a0d988fc99ce30cbdc640fa",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+            "rawQuestionHash": "28b31084ac63eb0b891ee852e48ddc9b6e0477ae6a0d988fc99ce30cbdc640fa",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+          "currentPublicationContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
+          "currentRawQuestionHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+              "authoredAt": "2026-10-13T13:42:13+11:00",
+              "committedAt": "2026-10-13T13:42:13+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+              "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+              "rawQuestionHash": "28b31084ac63eb0b891ee852e48ddc9b6e0477ae6a0d988fc99ce30cbdc640fa",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "ff16020ca15f79f68676a0f0fd169f688e6980a6",
+              "rawQuestionHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+              "changedFields": [
+                "prompt",
+                "options",
+                "explanation"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-vr-016",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+            "rawQuestionHash": "25763a976f0d3399a6655ab90897bba80736d35966097f55426c72626b07336b",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+            "rawQuestionHash": "25763a976f0d3399a6655ab90897bba80736d35966097f55426c72626b07336b",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+          "currentPublicationContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
+          "currentRawQuestionHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+              "authoredAt": "2026-10-13T13:42:13+11:00",
+              "committedAt": "2026-10-13T13:42:13+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+              "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+              "rawQuestionHash": "25763a976f0d3399a6655ab90897bba80736d35966097f55426c72626b07336b",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "ff16020ca15f79f68676a0f0fd169f688e6980a6",
+              "rawQuestionHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+              "changedFields": [
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-vr-032",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+            "rawQuestionHash": "fa3442fdcec5de4c4b681fd7e1861e1703d721cc3272d3ef3558ca9e13270b20",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+            "rawQuestionHash": "fa3442fdcec5de4c4b681fd7e1861e1703d721cc3272d3ef3558ca9e13270b20",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+          "currentPublicationContentHash": "758d25fa7ee8c039f97a74432c50dd50f3d635fb7735d8dd892c3e322f7a3b22",
+          "currentRawQuestionHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+              "authoredAt": "2026-10-13T13:42:13+11:00",
+              "committedAt": "2026-10-13T13:42:13+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+              "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+              "rawQuestionHash": "fa3442fdcec5de4c4b681fd7e1861e1703d721cc3272d3ef3558ca9e13270b20",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "4e905f5a40b147ebeedad9a01600f9b1b637b59b",
+              "authoredAt": "2026-10-19T16:42:08+11:00",
+              "committedAt": "2026-10-19T16:42:08+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate 14 VR/RC items from advisory review, ground passage claims, regenerate review package",
+              "packetGitBlob": "8a5ec20745742dd935dd4d2100a20bb6edc5654b",
+              "rawQuestionHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+              "changedFields": [
+                "prompt",
+                "options",
+                "explanation"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-nr-001",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+            "rawQuestionHash": "b40be11f959c090fd2493eecab404dc2abfdd2f4ec3b8382bf342ec538b3a225",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+            "rawQuestionHash": "b40be11f959c090fd2493eecab404dc2abfdd2f4ec3b8382bf342ec538b3a225",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+          "currentPublicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+          "currentRawQuestionHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+              "authoredAt": "2026-10-13T13:42:13+11:00",
+              "committedAt": "2026-10-13T13:42:13+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+              "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+              "rawQuestionHash": "b40be11f959c090fd2493eecab404dc2abfdd2f4ec3b8382bf342ec538b3a225",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+              "rawQuestionHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+              "changedFields": [
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-nr-022",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+            "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+            "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+          "currentPublicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+          "currentRawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+              "authoredAt": "2026-10-13T13:42:13+11:00",
+              "committedAt": "2026-10-13T13:42:13+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+              "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+              "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-nr-023",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+            "rawQuestionHash": "b59156139d86a3b4109857c1f5dccb7c90f39a96c7ffd3a36e7b94445349408a",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+            "authoredAt": "2026-10-13T13:42:13+11:00",
+            "committedAt": "2026-10-13T13:42:13+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+            "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+            "rawQuestionHash": "b59156139d86a3b4109857c1f5dccb7c90f39a96c7ffd3a36e7b94445349408a",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+          "currentPublicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+          "currentRawQuestionHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+              "authoredAt": "2026-10-13T13:42:13+11:00",
+              "committedAt": "2026-10-13T13:42:13+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+              "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+              "rawQuestionHash": "b59156139d86a3b4109857c1f5dccb7c90f39a96c7ffd3a36e7b94445349408a",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+              "rawQuestionHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+              "changedFields": [
+                "options",
+                "explanation"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-rc-001",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+            "authoredAt": "2026-10-14T10:10:43+11:00",
+            "committedAt": "2026-10-14T13:13:59+11:00",
+            "onPrLineage": false,
+            "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+            "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+            "rawQuestionHash": "f9fbe2f6bd6519790c5f36bcdfba6f960f3b71c9dbe56f03aff95d0fe8b970b0",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+            "authoredAt": "2026-10-16T22:29:19+11:00",
+            "committedAt": "2026-10-16T22:29:19+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+            "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+            "rawQuestionHash": "71354e1f55d1fd6e9b0f9fdb7942860c2e6a804f64ac7d1f0889b03e374e7653",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+          "currentPublicationContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
+          "currentRawQuestionHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+              "authoredAt": "2026-10-14T10:10:43+11:00",
+              "committedAt": "2026-10-14T13:13:59+11:00",
+              "onPrLineage": false,
+              "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+              "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+              "rawQuestionHash": "f9fbe2f6bd6519790c5f36bcdfba6f960f3b71c9dbe56f03aff95d0fe8b970b0",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+              "authoredAt": "2026-10-14T11:49:25+11:00",
+              "committedAt": "2026-10-14T13:14:00+11:00",
+              "onPrLineage": false,
+              "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+              "packetGitBlob": "5ada544b041b61f57a1d9b0a568eff2b4bea26d1",
+              "rawQuestionHash": "71354e1f55d1fd6e9b0f9fdb7942860c2e6a804f64ac7d1f0889b03e374e7653",
+              "changedFields": [
+                "stimulus"
+              ],
+              "eventType": "repository_revision"
+            },
+            {
+              "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+              "authoredAt": "2026-10-16T22:29:19+11:00",
+              "committedAt": "2026-10-16T22:29:19+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+              "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+              "rawQuestionHash": "71354e1f55d1fd6e9b0f9fdb7942860c2e6a804f64ac7d1f0889b03e374e7653",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "8295e780caa9a3376545897305e688250ea73cba",
+              "rawQuestionHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+              "changedFields": [
+                "prompt",
+                "stimulus",
+                "options",
+                "explanation"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-rc-002",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+            "authoredAt": "2026-10-14T10:10:43+11:00",
+            "committedAt": "2026-10-14T13:13:59+11:00",
+            "onPrLineage": false,
+            "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+            "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+            "rawQuestionHash": "ac312b435cf76798bc5f977a101070694c5af3faecaa99c7169996f9a5015f91",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+            "authoredAt": "2026-10-16T22:29:19+11:00",
+            "committedAt": "2026-10-16T22:29:19+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+            "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+            "rawQuestionHash": "9eb7665ba4181061eec00c7e87e0a26835dce27197c7c01b5bcdcbc317c4db3d",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+          "currentPublicationContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
+          "currentRawQuestionHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+              "authoredAt": "2026-10-14T10:10:43+11:00",
+              "committedAt": "2026-10-14T13:13:59+11:00",
+              "onPrLineage": false,
+              "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+              "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+              "rawQuestionHash": "ac312b435cf76798bc5f977a101070694c5af3faecaa99c7169996f9a5015f91",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+              "authoredAt": "2026-10-14T11:49:25+11:00",
+              "committedAt": "2026-10-14T13:14:00+11:00",
+              "onPrLineage": false,
+              "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+              "packetGitBlob": "5ada544b041b61f57a1d9b0a568eff2b4bea26d1",
+              "rawQuestionHash": "9eb7665ba4181061eec00c7e87e0a26835dce27197c7c01b5bcdcbc317c4db3d",
+              "changedFields": [
+                "stimulus",
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            },
+            {
+              "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+              "authoredAt": "2026-10-16T22:29:19+11:00",
+              "committedAt": "2026-10-16T22:29:19+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+              "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+              "rawQuestionHash": "9eb7665ba4181061eec00c7e87e0a26835dce27197c7c01b5bcdcbc317c4db3d",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "8295e780caa9a3376545897305e688250ea73cba",
+              "rawQuestionHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+              "changedFields": [
+                "prompt",
+                "stimulus",
+                "options",
+                "explanation",
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-rc-003",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+            "authoredAt": "2026-10-14T10:10:43+11:00",
+            "committedAt": "2026-10-14T13:13:59+11:00",
+            "onPrLineage": false,
+            "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+            "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+            "rawQuestionHash": "61113319df7a4be30a9136fc583b537bced83c8071b0bc065785a80a7786e632",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+            "authoredAt": "2026-10-16T22:29:19+11:00",
+            "committedAt": "2026-10-16T22:29:19+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+            "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+            "rawQuestionHash": "3138638f2c0390db422b9bfd89dc93792eb7111ac876d0573994a43daa2f7845",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+          "currentPublicationContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
+          "currentRawQuestionHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+              "authoredAt": "2026-10-14T10:10:43+11:00",
+              "committedAt": "2026-10-14T13:13:59+11:00",
+              "onPrLineage": false,
+              "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+              "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+              "rawQuestionHash": "61113319df7a4be30a9136fc583b537bced83c8071b0bc065785a80a7786e632",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+              "authoredAt": "2026-10-14T11:49:25+11:00",
+              "committedAt": "2026-10-14T13:14:00+11:00",
+              "onPrLineage": false,
+              "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+              "packetGitBlob": "5ada544b041b61f57a1d9b0a568eff2b4bea26d1",
+              "rawQuestionHash": "3138638f2c0390db422b9bfd89dc93792eb7111ac876d0573994a43daa2f7845",
+              "changedFields": [
+                "stimulus"
+              ],
+              "eventType": "repository_revision"
+            },
+            {
+              "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+              "authoredAt": "2026-10-16T22:29:19+11:00",
+              "committedAt": "2026-10-16T22:29:19+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+              "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+              "rawQuestionHash": "3138638f2c0390db422b9bfd89dc93792eb7111ac876d0573994a43daa2f7845",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+              "authoredAt": "2026-10-17T14:42:45+11:00",
+              "committedAt": "2026-10-17T14:42:45+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+              "packetGitBlob": "8295e780caa9a3376545897305e688250ea73cba",
+              "rawQuestionHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+              "changedFields": [
+                "prompt",
+                "stimulus",
+                "options",
+                "explanation"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-maths-004",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+            "authoredAt": "2026-10-14T10:10:43+11:00",
+            "committedAt": "2026-10-14T13:13:59+11:00",
+            "onPrLineage": false,
+            "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+            "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+            "rawQuestionHash": "479a1d9c640bd153364e510ae2644d8b045476f760a2879428c0816789334eb5",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+            "authoredAt": "2026-10-16T22:29:19+11:00",
+            "committedAt": "2026-10-16T22:29:19+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+            "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+            "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+          "currentPublicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+          "currentRawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+              "authoredAt": "2026-10-14T10:10:43+11:00",
+              "committedAt": "2026-10-14T13:13:59+11:00",
+              "onPrLineage": false,
+              "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+              "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+              "rawQuestionHash": "479a1d9c640bd153364e510ae2644d8b045476f760a2879428c0816789334eb5",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+              "authoredAt": "2026-10-14T11:49:25+11:00",
+              "committedAt": "2026-10-14T13:14:00+11:00",
+              "onPrLineage": false,
+              "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+              "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+              "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+              "changedFields": [
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            },
+            {
+              "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+              "authoredAt": "2026-10-16T22:29:19+11:00",
+              "committedAt": "2026-10-16T22:29:19+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+              "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+              "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-maths-007",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+            "authoredAt": "2026-10-14T10:10:43+11:00",
+            "committedAt": "2026-10-14T13:13:59+11:00",
+            "onPrLineage": false,
+            "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+            "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+            "rawQuestionHash": "7123628db6612e9eb5cf523954d80c2e18a3b60dda2d5560e97da87b3be15d31",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+            "authoredAt": "2026-10-16T22:29:19+11:00",
+            "committedAt": "2026-10-16T22:29:19+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+            "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+            "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+          "currentPublicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+          "currentRawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+              "authoredAt": "2026-10-14T10:10:43+11:00",
+              "committedAt": "2026-10-14T13:13:59+11:00",
+              "onPrLineage": false,
+              "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+              "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+              "rawQuestionHash": "7123628db6612e9eb5cf523954d80c2e18a3b60dda2d5560e97da87b3be15d31",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+              "authoredAt": "2026-10-14T11:49:25+11:00",
+              "committedAt": "2026-10-14T13:14:00+11:00",
+              "onPrLineage": false,
+              "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+              "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+              "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+              "changedFields": [
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            },
+            {
+              "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+              "authoredAt": "2026-10-16T22:29:19+11:00",
+              "committedAt": "2026-10-16T22:29:19+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+              "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+              "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        },
+        {
+          "id": "scholarship-y6-maths-014",
+          "sourcePath": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+          "classification": "git_traceable_legacy_draft_original_generation_unverified",
+          "originalGeneration": {
+            "provider": null,
+            "model": null,
+            "prompt": null,
+            "promptHash": null,
+            "generatedAt": null,
+            "candidateGenerationEvent": null,
+            "status": "unverified"
+          },
+          "earliestAvailableGitAppearance": {
+            "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+            "authoredAt": "2026-10-14T10:10:43+11:00",
+            "committedAt": "2026-10-14T13:13:59+11:00",
+            "onPrLineage": false,
+            "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+            "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+            "rawQuestionHash": "bd5e9a7bb3429c78f5bce10808ac484e386e14135226ea8db8e53510aba94653",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "firstAppearanceOnPrLineage": {
+            "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+            "authoredAt": "2026-10-16T22:29:19+11:00",
+            "committedAt": "2026-10-16T22:29:19+11:00",
+            "onPrLineage": true,
+            "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+            "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+            "rawQuestionHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+            "changedFields": [
+              "introduced"
+            ],
+            "eventType": "first_appearance_on_this_lineage"
+          },
+          "currentCandidateHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+          "currentPublicationContentHash": "aeb211f7441a014aefc7cdf85b510e2df0175d615366b97f1d24c58a0372e03a",
+          "currentRawQuestionHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+          "knownRepositoryRevisions": [
+            {
+              "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+              "authoredAt": "2026-10-14T10:10:43+11:00",
+              "committedAt": "2026-10-14T13:13:59+11:00",
+              "onPrLineage": false,
+              "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+              "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+              "rawQuestionHash": "bd5e9a7bb3429c78f5bce10808ac484e386e14135226ea8db8e53510aba94653",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+              "authoredAt": "2026-10-14T11:49:25+11:00",
+              "committedAt": "2026-10-14T13:14:00+11:00",
+              "onPrLineage": false,
+              "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+              "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+              "rawQuestionHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+              "changedFields": [
+                "metadata"
+              ],
+              "eventType": "repository_revision"
+            },
+            {
+              "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+              "authoredAt": "2026-10-16T22:29:19+11:00",
+              "committedAt": "2026-10-16T22:29:19+11:00",
+              "onPrLineage": true,
+              "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+              "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+              "rawQuestionHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+              "changedFields": [
+                "introduced"
+              ],
+              "eventType": "first_appearance_on_this_lineage"
+            },
+            {
+              "commit": "45b6cdab335723b2ef822f854ac7e15e556bb7d7",
+              "authoredAt": "2026-10-21T14:05:56+11:00",
+              "committedAt": "2026-10-21T14:05:56+11:00",
+              "onPrLineage": true,
+              "subject": "fix(scholarship): remediate maths-014 group exhaustiveness, retain user-attested ChatGPT review, and refresh sample manifest",
+              "packetGitBlob": "6828fde20d960150bbf4e8ec979d1147adc971c0",
+              "rawQuestionHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+              "changedFields": [
+                "prompt"
+              ],
+              "eventType": "repository_revision"
+            }
+          ],
+          "limitations": [
+            "Git author/committer and co-author trailers do not establish original question authorship.",
+            "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+            "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+          ]
+        }
+      ]
+    },
+    "docs/reviews/scholarship-sample-2026-10-21/packet.json": [
+      {
+        "id": "scholarship-y6-vr-001",
+        "prompt": "THERMOMETER is to TEMPERATURE as ODOMETER is to:",
+        "options": [
+          {
+            "id": "a",
+            "text": "SPEED"
+          },
+          {
+            "id": "b",
+            "text": "FUEL"
+          },
+          {
+            "id": "c",
+            "text": "ENGINE"
+          },
+          {
+            "id": "d",
+            "text": "TYRES"
+          },
+          {
+            "id": "e",
+            "text": "DISTANCE"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-vr-016",
+        "prompt": "Which word is closest in meaning to VIGOROUS?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LETHARGIC"
+          },
+          {
+            "id": "b",
+            "text": "DELICATE"
+          },
+          {
+            "id": "c",
+            "text": "PENSIVE"
+          },
+          {
+            "id": "d",
+            "text": "ENERGETIC"
+          },
+          {
+            "id": "e",
+            "text": "MUNDANE"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-vr-032",
+        "prompt": "Read the statements:\n1. If the garden sprinkler ran this morning, the lawn is wet now.\n2. The lawn is NOT wet now.\nWhich conclusion must be TRUE?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The garden sprinkler ran for hours this morning."
+          },
+          {
+            "id": "b",
+            "text": "It rained heavily while the sprinkler ran."
+          },
+          {
+            "id": "c",
+            "text": "The garden sprinkler did not run this morning."
+          },
+          {
+            "id": "d",
+            "text": "The lawn is soaking wet now."
+          },
+          {
+            "id": "e",
+            "text": "The sprinkler runs every morning."
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-nr-001",
+        "prompt": "What number comes next in the sequence?\n5, 11, 17, 23, 29, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "33"
+          },
+          {
+            "id": "b",
+            "text": "34"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "37"
+          },
+          {
+            "id": "e",
+            "text": "35"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-nr-022",
+        "prompt": "Marcus is currently three times as old as his sister Chloe. In 8 years, Marcus will be twice as old as Chloe will be then. How old is Chloe now?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "10"
+          },
+          {
+            "id": "e",
+            "text": "8"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-nr-023",
+        "prompt": "At a school stationery shop, 3 notebooks and 2 pens cost $19. Meanwhile, 2 notebooks and 4 pens cost $18. How much does 1 notebook cost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$3"
+          },
+          {
+            "id": "b",
+            "text": "$5"
+          },
+          {
+            "id": "c",
+            "text": "$4"
+          },
+          {
+            "id": "d",
+            "text": "$6"
+          },
+          {
+            "id": "e",
+            "text": "$7"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-rc-001",
+        "prompt": "What is the main purpose of the opening paragraph?",
+        "stimulus": {
+          "title": "The Estuary Watchers",
+          "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+        },
+        "options": [
+          {
+            "id": "a",
+            "text": "To set a quiet, patient mood as the two characters wait"
+          },
+          {
+            "id": "b",
+            "text": "To show how skilfully Maya handles the boat in difficult water"
+          },
+          {
+            "id": "c",
+            "text": "To explain why Maya and her grandfather came to the estuary"
+          },
+          {
+            "id": "d",
+            "text": "To introduce the osprey that the characters have come to watch"
+          },
+          {
+            "id": "e",
+            "text": "To warn the reader that the estuary is a dangerous place"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-rc-002",
+        "prompt": "In paragraph 2, the stilt roots of the red mangroves are compared to 'the ribs of an upturned vessel'. This comparison mainly suggests that the roots:",
+        "stimulus": {
+          "title": "The Estuary Watchers",
+          "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+        },
+        "options": [
+          {
+            "id": "a",
+            "text": "were old and rotting after many years in salt water"
+          },
+          {
+            "id": "b",
+            "text": "had been shaped by people to guide boats through the channel"
+          },
+          {
+            "id": "c",
+            "text": "formed a curved, sheltering frame above the water"
+          },
+          {
+            "id": "d",
+            "text": "grew in straight rows that made a path for the dinghy"
+          },
+          {
+            "id": "e",
+            "text": "were packed so tightly that no fish could swim between them"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-rc-003",
+        "prompt": "What does Grandfather's behaviour reveal about his knowledge of the estuary?",
+        "stimulus": {
+          "title": "The Estuary Watchers",
+          "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+        },
+        "options": [
+          {
+            "id": "a",
+            "text": "He has read scientific records of the osprey's nesting habits."
+          },
+          {
+            "id": "b",
+            "text": "He expects the fish to leave the roots as the tide rises."
+          },
+          {
+            "id": "c",
+            "text": "He knows exactly where the fiddler crabs bury themselves."
+          },
+          {
+            "id": "d",
+            "text": "He is unsure when the osprey will arrive but hopes it will."
+          },
+          {
+            "id": "e",
+            "text": "He knows the osprey's routine and how it follows the tide."
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-maths-004",
+        "prompt": "The summit of Mount Kosciuszko is 2228 metres above sea level. Lake Eyre is 15 metres below sea level (-15 m). What is the difference in elevation between the summit of Mount Kosciuszko and Lake Eyre?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2213 m"
+          },
+          {
+            "id": "b",
+            "text": "2243 m"
+          },
+          {
+            "id": "c",
+            "text": "2233 m"
+          },
+          {
+            "id": "d",
+            "text": "2258 m"
+          },
+          {
+            "id": "e",
+            "text": "2200 m"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-maths-007",
+        "prompt": "A sports jacket originally priced at $160 is discounted by 25% during a mid-year sale. At the checkout, loyalty club members receive an additional 10% discount off the sale price. How much does a club member pay for the jacket?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$108"
+          },
+          {
+            "id": "b",
+            "text": "$104"
+          },
+          {
+            "id": "c",
+            "text": "$112"
+          },
+          {
+            "id": "d",
+            "text": "$116"
+          },
+          {
+            "id": "e",
+            "text": "$100"
+          }
+        ]
+      },
+      {
+        "id": "scholarship-y6-maths-014",
+        "prompt": "An athletics club contains only two groups, sprinters and distance runners, and every athlete belongs to exactly one group. The ratio of sprinters to distance runners is 5 : 3. If there are 30 more sprinters than distance runners, how many athletes are in the club altogether?",
+        "options": [
+          {
+            "id": "a",
+            "text": "100"
+          },
+          {
+            "id": "b",
+            "text": "110"
+          },
+          {
+            "id": "c",
+            "text": "120"
+          },
+          {
+            "id": "d",
+            "text": "130"
+          },
+          {
+            "id": "e",
+            "text": "140"
+          }
+        ]
+      }
+    ],
+    "content/scholarship-drafts/scholarship-y6-mathematics-draft.json": {
+      "draftOnly": true,
+      "authoringNote": "Batch 2 Year 6 Scholarship Mathematics drafts. Governed original content; code-verified with solvers; never imported by runtime code.",
+      "questions": [
+        {
+          "id": "scholarship-y6-maths-004",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "The summit of Mount Kosciuszko is 2228 metres above sea level. Lake Eyre is 15 metres below sea level (-15 m). What is the difference in elevation between the summit of Mount Kosciuszko and Lake Eyre?",
+          "options": [
+            {
+              "id": "a",
+              "text": "2213 m"
+            },
+            {
+              "id": "b",
+              "text": "2243 m"
+            },
+            {
+              "id": "c",
+              "text": "2233 m"
+            },
+            {
+              "id": "d",
+              "text": "2258 m"
+            },
+            {
+              "id": "e",
+              "text": "2200 m"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "b"
+          },
+          "explanation": "Elevation difference = 2228 - (-15) = 2228 + 15 = 2243 metres.",
+          "metadata": {
+            "subject": "numeracy",
+            "strand": "Directed Numbers",
+            "skill": "maths-directed-numbers",
+            "difficulty": "easy",
+            "marks": 1,
+            "estimatedTimeSeconds": 35,
+            "tags": [
+              "scholarship",
+              "batch-2",
+              "mathematics"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-maths-007",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "A sports jacket originally priced at $160 is discounted by 25% during a mid-year sale. At the checkout, loyalty club members receive an additional 10% discount off the sale price. How much does a club member pay for the jacket?",
+          "options": [
+            {
+              "id": "a",
+              "text": "$108"
+            },
+            {
+              "id": "b",
+              "text": "$104"
+            },
+            {
+              "id": "c",
+              "text": "$112"
+            },
+            {
+              "id": "d",
+              "text": "$116"
+            },
+            {
+              "id": "e",
+              "text": "$100"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "a"
+          },
+          "explanation": "25% off $160 reduces the price to 160 * 0.75 = $120. A further 10% off $120 is 120 * 0.90 = $108.",
+          "metadata": {
+            "subject": "numeracy",
+            "strand": "Percentages",
+            "skill": "maths-percentages",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 45,
+            "tags": [
+              "scholarship",
+              "batch-2",
+              "mathematics"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-maths-014",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "An athletics club contains only two groups, sprinters and distance runners, and every athlete belongs to exactly one group. The ratio of sprinters to distance runners is 5 : 3. If there are 30 more sprinters than distance runners, how many athletes are in the club altogether?",
+          "options": [
+            {
+              "id": "a",
+              "text": "100"
+            },
+            {
+              "id": "b",
+              "text": "110"
+            },
+            {
+              "id": "c",
+              "text": "120"
+            },
+            {
+              "id": "d",
+              "text": "130"
+            },
+            {
+              "id": "e",
+              "text": "140"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "c"
+          },
+          "explanation": "The ratio difference is 5 - 3 = 2 parts, representing 30 athletes. Thus 1 part = 30 / 2 = 15 athletes. Total athletes = (5 + 3) * 15 = 120.",
+          "metadata": {
+            "subject": "numeracy",
+            "strand": "Ratios and Rates",
+            "skill": "maths-ratios-rates",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 45,
+            "tags": [
+              "scholarship",
+              "batch-2",
+              "mathematics"
+            ]
+          }
+        }
+      ],
+      "parameters": {
+        "scholarship-y6-maths-004": {
+          "id": "scholarship-y6-maths-004",
+          "skill": "maths-directed-numbers",
+          "targetOption": "b",
+          "correctValue": "2243 m",
+          "solver": "arithmetical_reasoning",
+          "solverParams": {
+            "variables": [
+              {
+                "name": "Diff",
+                "min": 2000,
+                "max": 2500
+              }
+            ],
+            "constraints": [
+              "Diff === 2228 - (-15)"
+            ],
+            "targetVariable": "Diff"
+          }
+        },
+        "scholarship-y6-maths-007": {
+          "id": "scholarship-y6-maths-007",
+          "skill": "maths-percentages",
+          "targetOption": "a",
+          "correctValue": "$108",
+          "solver": "arithmetical_reasoning",
+          "solverParams": {
+            "variables": [
+              {
+                "name": "P",
+                "min": 50,
+                "max": 150
+              }
+            ],
+            "constraints": [
+              "P === 160 * 75 * 90 / 10000"
+            ],
+            "targetVariable": "P"
+          }
+        },
+        "scholarship-y6-maths-014": {
+          "id": "scholarship-y6-maths-014",
+          "skill": "maths-ratios-rates",
+          "targetOption": "c",
+          "correctValue": "120",
+          "solver": "arithmetical_reasoning",
+          "solverParams": {
+            "variables": [
+              {
+                "name": "Total",
+                "min": 80,
+                "max": 160
+              }
+            ],
+            "constraints": [
+              "Total === (8 * 30) / 2"
+            ],
+            "targetVariable": "Total"
+          }
+        }
+      }
+    },
+    "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json": {
+      "draftOnly": true,
+      "authoringNote": "Batch 1 Year 6 Scholarship Practice drafts. Governed original content; never imported by runtime code.",
+      "questions": [
+        {
+          "id": "scholarship-y6-nr-001",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "What number comes next in the sequence?\n5, 11, 17, 23, 29, ?",
+          "options": [
+            {
+              "id": "a",
+              "text": "33"
+            },
+            {
+              "id": "b",
+              "text": "34"
+            },
+            {
+              "id": "c",
+              "text": "36"
+            },
+            {
+              "id": "d",
+              "text": "37"
+            },
+            {
+              "id": "e",
+              "text": "35"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "e"
+          },
+          "explanation": "Arithmetic progression adding 6 each step: 29 + 6 = 35.",
+          "metadata": {
+            "subject": "numerical_reasoning",
+            "strand": "Numerical Reasoning",
+            "skill": "nr-number-series",
+            "difficulty": "easy",
+            "marks": 1,
+            "estimatedTimeSeconds": 45,
+            "tags": [
+              "scholarship",
+              "batch-1"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-nr-022",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "Marcus is currently three times as old as his sister Chloe. In 8 years, Marcus will be twice as old as Chloe will be then. How old is Chloe now?",
+          "options": [
+            {
+              "id": "a",
+              "text": "6"
+            },
+            {
+              "id": "b",
+              "text": "7"
+            },
+            {
+              "id": "c",
+              "text": "9"
+            },
+            {
+              "id": "d",
+              "text": "10"
+            },
+            {
+              "id": "e",
+              "text": "8"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "e"
+          },
+          "explanation": "M = 3*C. In 8 years: M + 8 = 2*(C + 8). 3C + 8 = 2C + 16 -> C = 8.",
+          "metadata": {
+            "subject": "numerical_reasoning",
+            "strand": "Numerical Reasoning",
+            "skill": "nr-arithmetical-reasoning",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 45,
+            "tags": [
+              "scholarship",
+              "batch-1"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-nr-023",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "At a school stationery shop, 3 notebooks and 2 pens cost $19. Meanwhile, 2 notebooks and 4 pens cost $18. How much does 1 notebook cost?",
+          "options": [
+            {
+              "id": "a",
+              "text": "$3"
+            },
+            {
+              "id": "b",
+              "text": "$5"
+            },
+            {
+              "id": "c",
+              "text": "$4"
+            },
+            {
+              "id": "d",
+              "text": "$6"
+            },
+            {
+              "id": "e",
+              "text": "$7"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "b"
+          },
+          "explanation": "Let N be the cost of a notebook and P the cost of a pen. 3N + 2P = 19 and 2N + 4P = 18. Doubling the first equation gives 6N + 4P = 38; subtracting the second gives 4N = 20, so N = $5.",
+          "metadata": {
+            "subject": "numerical_reasoning",
+            "strand": "Numerical Reasoning",
+            "skill": "nr-arithmetical-reasoning",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 45,
+            "tags": [
+              "scholarship",
+              "batch-1"
+            ]
+          }
+        }
+      ],
+      "parameters": {
+        "scholarship-y6-nr-001": {
+          "id": "scholarship-y6-nr-001",
+          "skill": "nr-number-series",
+          "targetOption": "e",
+          "correctValue": 35,
+          "solver": "number_series",
+          "solverParams": {
+            "sequence": [
+              5,
+              11,
+              17,
+              23,
+              29
+            ]
+          }
+        },
+        "scholarship-y6-nr-022": {
+          "id": "scholarship-y6-nr-022",
+          "skill": "nr-arithmetical-reasoning",
+          "targetOption": "e",
+          "correctValue": 8,
+          "solver": "arithmetical_reasoning",
+          "solverParams": {
+            "variables": [
+              {
+                "name": "M",
+                "min": 1,
+                "max": 60
+              },
+              {
+                "name": "C",
+                "min": 1,
+                "max": 30
+              }
+            ],
+            "constraints": [
+              "M === 3*C",
+              "M + 8 === 2*(C + 8)"
+            ],
+            "targetVariable": "C"
+          }
+        },
+        "scholarship-y6-nr-023": {
+          "id": "scholarship-y6-nr-023",
+          "skill": "nr-arithmetical-reasoning",
+          "targetOption": "b",
+          "correctValue": "$5",
+          "solver": "arithmetical_reasoning",
+          "solverParams": {
+            "variables": [
+              {
+                "name": "N",
+                "min": 1,
+                "max": 20
+              },
+              {
+                "name": "P",
+                "min": 1,
+                "max": 20
+              }
+            ],
+            "constraints": [
+              "3*N + 2*P === 19",
+              "2*N + 4*P === 18"
+            ],
+            "targetVariable": "N"
+          }
+        }
+      }
+    },
+    "content/scholarship-drafts/scholarship-y6-reading-draft.json": {
+      "draftOnly": true,
+      "authoringNote": "Batch 2 Year 6 Scholarship Reading Comprehension drafts. Governed original content; never imported by runtime code.",
+      "questions": [
+        {
+          "id": "scholarship-y6-rc-001",
+          "type": "reading_comprehension",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "What is the main purpose of the opening paragraph?",
+          "stimulus": {
+            "title": "The Estuary Watchers",
+            "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": "To set a quiet, patient mood as the two characters wait"
+            },
+            {
+              "id": "b",
+              "text": "To show how skilfully Maya handles the boat in difficult water"
+            },
+            {
+              "id": "c",
+              "text": "To explain why Maya and her grandfather came to the estuary"
+            },
+            {
+              "id": "d",
+              "text": "To introduce the osprey that the characters have come to watch"
+            },
+            {
+              "id": "e",
+              "text": "To warn the reader that the estuary is a dangerous place"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "a"
+          },
+          "explanation": "The paragraph builds a hushed, patient mood ('the colour of wet slate', oars that make no ripple, a motionless grandfather, a silent signal). Maya's rowing is mentioned but is not the point, the purpose of the trip is not explained, the osprey does not appear until later, and nothing suggests danger.",
+          "metadata": {
+            "subject": "reading",
+            "strand": "Reading Comprehension",
+            "skill": "rc-authorial-craft",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 50,
+            "tags": [
+              "scholarship",
+              "batch-2",
+              "reading"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-rc-002",
+          "type": "reading_comprehension",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "In paragraph 2, the stilt roots of the red mangroves are compared to 'the ribs of an upturned vessel'. This comparison mainly suggests that the roots:",
+          "stimulus": {
+            "title": "The Estuary Watchers",
+            "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": "were old and rotting after many years in salt water"
+            },
+            {
+              "id": "b",
+              "text": "had been shaped by people to guide boats through the channel"
+            },
+            {
+              "id": "c",
+              "text": "formed a curved, sheltering frame above the water"
+            },
+            {
+              "id": "d",
+              "text": "grew in straight rows that made a path for the dinghy"
+            },
+            {
+              "id": "e",
+              "text": "were packed so tightly that no fish could swim between them"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "c"
+          },
+          "explanation": "Ribs curve over the inside of a hull, so the comparison pictures the roots arching over the water as a frame. The next sentences add that young fish 'sought sanctuary' there, which supports the idea of shelter.",
+          "metadata": {
+            "subject": "reading",
+            "strand": "Reading Comprehension",
+            "skill": "rc-figurative-language",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 50,
+            "tags": [
+              "scholarship",
+              "batch-2",
+              "reading"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-rc-003",
+          "type": "reading_comprehension",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "What does Grandfather's behaviour reveal about his knowledge of the estuary?",
+          "stimulus": {
+            "title": "The Estuary Watchers",
+            "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": "He has read scientific records of the osprey's nesting habits."
+            },
+            {
+              "id": "b",
+              "text": "He expects the fish to leave the roots as the tide rises."
+            },
+            {
+              "id": "c",
+              "text": "He knows exactly where the fiddler crabs bury themselves."
+            },
+            {
+              "id": "d",
+              "text": "He is unsure when the osprey will arrive but hopes it will."
+            },
+            {
+              "id": "e",
+              "text": "He knows the osprey's routine and how it follows the tide."
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "e"
+          },
+          "explanation": "Grandfather says 'She returns with the turn of the tide' and tells Maya where to look, so he knows the osprey's routine and how it is tied to the tide.",
+          "metadata": {
+            "subject": "reading",
+            "strand": "Reading Comprehension",
+            "skill": "rc-character-inference",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 50,
+            "tags": [
+              "scholarship",
+              "batch-2",
+              "reading"
+            ]
+          }
+        }
+      ],
+      "parameters": {
+        "scholarship-y6-rc-001": {
+          "id": "scholarship-y6-rc-001",
+          "skill": "rc-authorial-craft",
+          "targetOption": "a",
+          "correctValue": "To set a quiet, patient mood as the two characters wait",
+          "requiresHumanSemanticCheck": true
+        },
+        "scholarship-y6-rc-002": {
+          "id": "scholarship-y6-rc-002",
+          "skill": "rc-figurative-language",
+          "targetOption": "c",
+          "correctValue": "formed a curved, sheltering frame above the water",
+          "requiresHumanSemanticCheck": true
+        },
+        "scholarship-y6-rc-003": {
+          "id": "scholarship-y6-rc-003",
+          "skill": "rc-character-inference",
+          "targetOption": "e",
+          "correctValue": "He knows the osprey's routine and how it follows the tide.",
+          "requiresHumanSemanticCheck": true
+        }
+      }
+    },
+    "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json": {
+      "draftOnly": true,
+      "authoringNote": "Batch 1 Year 6 Scholarship Practice drafts. Governed original content; never imported by runtime code.",
+      "questions": [
+        {
+          "id": "scholarship-y6-vr-001",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "THERMOMETER is to TEMPERATURE as ODOMETER is to:",
+          "options": [
+            {
+              "id": "a",
+              "text": "SPEED"
+            },
+            {
+              "id": "b",
+              "text": "FUEL"
+            },
+            {
+              "id": "c",
+              "text": "ENGINE"
+            },
+            {
+              "id": "d",
+              "text": "TYRES"
+            },
+            {
+              "id": "e",
+              "text": "DISTANCE"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "e"
+          },
+          "explanation": "A thermometer measures temperature; an odometer measures distance travelled. (A speedometer, not an odometer, measures speed.)",
+          "metadata": {
+            "subject": "verbal_reasoning",
+            "strand": "Verbal Reasoning",
+            "skill": "vr-analogies",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 40,
+            "tags": [
+              "scholarship",
+              "batch-1"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-vr-016",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "Which word is closest in meaning to VIGOROUS?",
+          "options": [
+            {
+              "id": "a",
+              "text": "LETHARGIC"
+            },
+            {
+              "id": "b",
+              "text": "DELICATE"
+            },
+            {
+              "id": "c",
+              "text": "PENSIVE"
+            },
+            {
+              "id": "d",
+              "text": "ENERGETIC"
+            },
+            {
+              "id": "e",
+              "text": "MUNDANE"
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "d"
+          },
+          "explanation": "Vigorous means characterised by robust physical strength and effort, closest to energetic.",
+          "metadata": {
+            "subject": "verbal_reasoning",
+            "strand": "Verbal Reasoning",
+            "skill": "vr-synonyms-antonyms",
+            "difficulty": "easy",
+            "marks": 1,
+            "estimatedTimeSeconds": 40,
+            "tags": [
+              "scholarship",
+              "batch-1"
+            ]
+          }
+        },
+        {
+          "id": "scholarship-y6-vr-032",
+          "type": "multiple_choice",
+          "yearLevel": 6,
+          "examStyle": "scholarship_style",
+          "prompt": "Read the statements:\n1. If the garden sprinkler ran this morning, the lawn is wet now.\n2. The lawn is NOT wet now.\nWhich conclusion must be TRUE?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The garden sprinkler ran for hours this morning."
+            },
+            {
+              "id": "b",
+              "text": "It rained heavily while the sprinkler ran."
+            },
+            {
+              "id": "c",
+              "text": "The garden sprinkler did not run this morning."
+            },
+            {
+              "id": "d",
+              "text": "The lawn is soaking wet now."
+            },
+            {
+              "id": "e",
+              "text": "The sprinkler runs every morning."
+            }
+          ],
+          "visuals": [],
+          "answerKey": {
+            "kind": "single_option",
+            "optionId": "c"
+          },
+          "explanation": "Statement 1 establishes that if the sprinkler ran this morning, the lawn would be wet now. Statement 2 states that the lawn is not wet now. By contrapositive reasoning (modus tollens), if the consequence is false, the condition cannot have occurred: the garden sprinkler did not run this morning.",
+          "metadata": {
+            "subject": "verbal_reasoning",
+            "strand": "Verbal Reasoning",
+            "skill": "vr-sentence-logic",
+            "difficulty": "medium",
+            "marks": 1,
+            "estimatedTimeSeconds": 40,
+            "tags": [
+              "scholarship",
+              "batch-1"
+            ]
+          }
+        }
+      ],
+      "parameters": {
+        "scholarship-y6-vr-001": {
+          "id": "scholarship-y6-vr-001",
+          "skill": "vr-analogies",
+          "targetOption": "e",
+          "correctValue": "DISTANCE",
+          "requiresHumanSemanticCheck": true
+        },
+        "scholarship-y6-vr-016": {
+          "id": "scholarship-y6-vr-016",
+          "skill": "vr-synonyms-antonyms",
+          "targetOption": "d",
+          "correctValue": "ENERGETIC",
+          "requiresHumanSemanticCheck": true
+        },
+        "scholarship-y6-vr-032": {
+          "id": "scholarship-y6-vr-032",
+          "skill": "vr-sentence-logic",
+          "targetOption": "c",
+          "correctValue": "The garden sprinkler did not run this morning.",
+          "solver": "syllogism",
+          "solverParams": {
+            "variables": [
+              "S",
+              "W"
+            ],
+            "premises": [
+              {
+                "kind": "implies",
+                "antecedent": {
+                  "kind": "var",
+                  "name": "S"
+                },
+                "consequent": {
+                  "kind": "var",
+                  "name": "W"
+                }
+              },
+              {
+                "kind": "not",
+                "expr": {
+                  "kind": "var",
+                  "name": "W"
+                }
+              }
+            ],
+            "conclusions": [
+              {
+                "id": "The garden sprinkler did not run this morning.",
+                "expr": {
+                  "kind": "not",
+                  "expr": {
+                    "kind": "var",
+                    "name": "S"
+                  }
+                }
+              },
+              {
+                "id": "The garden sprinkler ran for hours this morning.",
+                "expr": {
+                  "kind": "var",
+                  "name": "S"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "content/question-factory/blueprints/scholarship-y6-rc-001-seed-001.json": {
+      "id": "scholarship-y6-rc-001-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "reading",
+      "strand": "Reading Comprehension",
+      "skill": "scholarship.rc-authorial-craft",
+      "difficulty": "medium",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 50,
+      "learningObjective": "Authorial craft (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-nr-023-seed-001.json": {
+      "id": "scholarship-y6-nr-023-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "numerical_reasoning",
+      "strand": "Numerical Reasoning",
+      "skill": "scholarship.nr-arithmetical-reasoning",
+      "difficulty": "medium",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "learningObjective": "Arithmetical reasoning (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-rc-003-seed-001.json": {
+      "id": "scholarship-y6-rc-003-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "reading",
+      "strand": "Reading Comprehension",
+      "skill": "scholarship.rc-character-inference",
+      "difficulty": "medium",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 50,
+      "learningObjective": "Character inference (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-maths-014-seed-001.json": {
+      "id": "scholarship-y6-maths-014-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "numeracy",
+      "strand": "Ratios and Rates",
+      "skill": "scholarship.maths-ratios-rates",
+      "difficulty": "medium",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "learningObjective": "Ratios rates (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-vr-032-seed-001.json": {
+      "id": "scholarship-y6-vr-032-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "verbal_reasoning",
+      "strand": "Verbal Reasoning",
+      "skill": "scholarship.vr-sentence-logic",
+      "difficulty": "medium",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "learningObjective": "Sentence logic (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-maths-007-seed-001.json": {
+      "id": "scholarship-y6-maths-007-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "numeracy",
+      "strand": "Percentages",
+      "skill": "scholarship.maths-percentages",
+      "difficulty": "medium",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "learningObjective": "Percentages (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-nr-022-seed-001.json": {
+      "id": "scholarship-y6-nr-022-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "numerical_reasoning",
+      "strand": "Numerical Reasoning",
+      "skill": "scholarship.nr-arithmetical-reasoning",
+      "difficulty": "medium",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "learningObjective": "Arithmetical reasoning (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-vr-016-seed-001.json": {
+      "id": "scholarship-y6-vr-016-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "verbal_reasoning",
+      "strand": "Verbal Reasoning",
+      "skill": "scholarship.vr-synonyms-antonyms",
+      "difficulty": "easy",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "learningObjective": "Synonyms antonyms (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-nr-001-seed-001.json": {
+      "id": "scholarship-y6-nr-001-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "numerical_reasoning",
+      "strand": "Numerical Reasoning",
+      "skill": "scholarship.nr-number-series",
+      "difficulty": "easy",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "learningObjective": "Number series (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-rc-002-seed-001.json": {
+      "id": "scholarship-y6-rc-002-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "reading",
+      "strand": "Reading Comprehension",
+      "skill": "scholarship.rc-figurative-language",
+      "difficulty": "medium",
+      "questionType": "reading_comprehension",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 50,
+      "learningObjective": "Figurative language (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-vr-001-seed-001.json": {
+      "id": "scholarship-y6-vr-001-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "verbal_reasoning",
+      "strand": "Verbal Reasoning",
+      "skill": "scholarship.vr-analogies",
+      "difficulty": "medium",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "learningObjective": "Analogies (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 3,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    },
+    "content/question-factory/blueprints/scholarship-y6-maths-004-seed-001.json": {
+      "id": "scholarship-y6-maths-004-seed-001",
+      "batchId": "scholarship-y6-2026-10-17",
+      "yearLevel": "year-6",
+      "examStyle": "scholarship_style",
+      "subject": "numeracy",
+      "strand": "Directed Numbers",
+      "skill": "scholarship.maths-directed-numbers",
+      "difficulty": "easy",
+      "questionType": "multiple_choice",
+      "targetCount": 1,
+      "marks": 1,
+      "estimatedTimeSeconds": 35,
+      "learningObjective": "Directed numbers (scholarship-style)",
+      "misconceptionTargets": [],
+      "reasoningSteps": 1,
+      "accessibilityConstraints": [],
+      "originalityConstraints": [
+        "Original first-party practice content; verify against the current published corpus."
+      ],
+      "generationConstraints": [
+        "Import the reviewed draft verbatim; never synthesize correctness or review evidence."
+      ]
+    }
+  }
+}

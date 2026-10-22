@@ -6,7 +6,7 @@ import {
   appendReviewRecord,
   computeReviewHash,
   type CandidateEvidenceSnapshot,
-  type CandidateProvenanceInput,
+  type KnownCandidateProvenanceInput as CandidateProvenanceInput,
   type ReviewRecord,
   type ReviewRecordDraft,
   candidateProvenanceSchema,

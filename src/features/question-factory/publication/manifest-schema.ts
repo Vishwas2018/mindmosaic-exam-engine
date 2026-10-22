@@ -73,6 +73,7 @@ export interface RecoveredReviewEvidence {
 export type CorrectnessBasis = "deterministic" | "independent_semantic_review";
 
 export interface ManifestReviewEvidence {
+  readonly generatorAdapter?: { readonly class?: string };
   readonly question?: { readonly metadata?: { readonly subject?: string } };
   readonly humanApproval?: HumanPublicationApproval;
   readonly humanApprovalSource?: unknown;
@@ -125,6 +126,9 @@ export function validateManifestReviewEvidence(
   manifest: ManifestReviewEvidence & { candidateId: string; contentHash: string; revision: number },
 ): ManifestValidationResult {
   const issues: ManifestValidationIssue[] = [];
+  if (manifest.generatorAdapter?.class === "legacy_import") {
+    return { ok: false, issues: [issue("generatorAdapter", "Unverified legacy origin cannot be published in Phase 1.")] };
+  }
   const version = manifestSchemaVersionOf(manifest);
   if (manifest.question?.metadata?.subject === "amc_mathematics") {
     const chain = manifest.reviewChain ?? [];
