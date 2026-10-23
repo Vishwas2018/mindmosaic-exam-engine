@@ -38,6 +38,9 @@ export const firstPartyRecomputeEvidenceSchema = z.discriminatedUnion("outcome",
   z.object({
     outcome: z.literal("recomputed_match"),
     registry: z.enum(["scholarship_nr", "scholarship_maths"]),
+    /** Registry key actually used, e.g. "scholarship-y6-nr-022". The editorial
+     *  record in section 4a is bound to this value, not to a restated string. */
+    solverIdentifier: z.string().min(1),
     solverRevision: z.string().min(1),
     executedAt: z.string().datetime(),
     boundContentHash: z.string().regex(/^[0-9a-f]{64}$/),
@@ -150,10 +153,18 @@ const interpretationVerdictSchema = z.discriminatedUnion("verdict", [
 ]);
 
 export const editorialInterpretationCheckSchema = z.object({
+  /** Bound to the exact candidate and revision, not just to a hash, so that a
+   *  record cannot be lifted from one candidate onto another. */
+  candidateId: z.string().min(1),
+  factoryRevision: z.number().int().min(0),
+  boundContentHash: z.string().regex(/^[0-9a-f]{64}$/),
+
+  /** A named, qualified human. An anonymous or unqualified reviewer is a reject,
+   *  not a weaker pass: this is the only component that reads the prose. */
   reviewerIdentity: z.string().min(1),
   reviewerRole: z.enum(["curriculum_specialist", "senior_examiner", "lead_editor"]),
+  reviewerQualification: z.string().min(10),
   reviewedAt: z.string().datetime(),
-  boundContentHash: z.string().regex(/^[0-9a-f]{64}$/),
 
   /** The solver's reading, shown to the reviewer verbatim. A reviewer who was never
    *  shown the interpretation cannot have affirmed it. */
@@ -253,6 +264,9 @@ Also a separate security design requirement (ADR-017 section 7). A ledger is onl
 ## 9. Assembled bundle
 
 ```ts
+const sameNumbers = (a: readonly number[], b: readonly number[]): boolean =>
+  a.length === b.length && a.every((v, i) => v === b[i]);
+
 export const deterministicLegacyAdmissionBundleSchema = z.object({
   schemaVersion: z.literal(1),
   route: z.literal("deterministic_legacy_admission"),
@@ -261,14 +275,83 @@ export const deterministicLegacyAdmissionBundleSchema = z.object({
 
   binding: candidateRevisionBindingSchema,
   recompute: firstPartyRecomputeEvidenceSchema,
+  editorialInterpretation: editorialInterpretationCheckSchema,   // mandatory; section 4a
   originality: originalitySearchSchema,
-  ageSuitability: ageSuitabilityRecordSchema,
+  ageSuitability: ageSuitabilityRecordSchema,                    // separate, still required
   advisory: z.array(advisoryReviewSchema).default([]),
 
   // Populated only once sections 7 and 8 are designed, reviewed and implemented.
   approval: z.never().optional(),
   ledgerEntryRef: z.never().optional(),
+}).superRefine((b, ctx) => {
+  const reject = (path: string[], message: string) =>
+    ctx.addIssue({ code: "custom", path, message });
+
+  const ed = b.editorialInterpretation;
+
+  // (a) Editorial evidence is bound to THIS candidate and THIS revision.
+  if (ed.candidateId !== b.binding.candidateId)
+    reject(["editorialInterpretation", "candidateId"], "Editorial evidence names a different candidate");
+  if (ed.factoryRevision !== b.binding.factoryRevision)
+    reject(["editorialInterpretation", "factoryRevision"], "Editorial evidence names a different revision");
+
+  // (b) Editorial evidence is bound to THIS content, and to the same content the
+  //     recompute ran against. Either mismatch is stale evidence, never reused.
+  if (ed.boundContentHash !== b.binding.publicationContentHash)
+    reject(["editorialInterpretation", "boundContentHash"], "Editorial evidence is stale for this content");
+
+  // (c) The recompute must itself be a match before anything else is considered.
+  if (b.recompute.outcome !== "recomputed_match") {
+    reject(["recompute"], "Only recomputed_match can contribute to admission");
+  } else {
+    if (ed.boundContentHash !== b.recompute.boundContentHash)
+      reject(["editorialInterpretation", "boundContentHash"],
+             "Editorial evidence and recompute evidence are bound to different content");
+
+    // (d) The interpretation the reviewer was shown must be the one that was
+    //     actually executed - same solver, same givens. Not a restated string.
+    if (ed.solverInterpretationPresented.solverIdentifier !== b.recompute.solverIdentifier)
+      reject(["editorialInterpretation", "solverInterpretationPresented", "solverIdentifier"],
+             "Reviewer was shown a different solver than the one that produced the recompute");
+    if (!sameNumbers(ed.solverInterpretationPresented.declaredGivens, b.recompute.givensReadFromPrompt))
+      reject(["editorialInterpretation", "solverInterpretationPresented", "declaredGivens"],
+             "Reviewer was shown different givens than the recompute used");
+  }
+
+  // (e) Every judgement must be affirmative. uncertain and rejected both reject.
+  for (const field of ["promptToSolverAssumptions", "exhaustiveness", "ambiguity"] as const)
+    if (ed[field].verdict !== "affirmed")
+      reject(["editorialInterpretation", field], `${field} is '${ed[field].verdict}', which is not an affirmation`);
+
+  if (ed.alternativeDefensibleAnswers.verdict !== "none_defensible")
+    reject(["editorialInterpretation", "alternativeDefensibleAnswers"],
+           "Alternative defensible answers were found or could not be ruled out");
 });
 ```
 
+**The cross-binding is the point, not the field.** Adding an `editorialInterpretation` member alone would be satisfied by a reviewer restating whatever strings the bundle author supplied. Refinements (a) to (d) make the record answerable to evidence that exists elsewhere in the bundle: the candidate and revision come from the binding, the content hash must agree with both the binding and the recompute, and the solver identity and givens must be the ones the recompute actually executed.
+
+**One check the schema cannot perform, and the gate must.** A bundle is self-consistent data; `superRefine` can only compare its fields to each other, so a bundle author who fabricates *both* the recompute record and the editorial record consistently would pass. The admission gate must therefore re-derive the authoritative values rather than trust the bundle:
+
+- Re-run `verifyFirstPartyScholarshipAttestation` against the candidate at validation time and compare its result to `recompute`, rather than accepting the stored record.
+- Read `solverIdentifier` and `declaredGivens` from the live registry entry, not from the bundle, and require the editorial record to match *those*.
+- Recompute the content hash from the candidate and require it to equal `boundContentHash` on every component.
+
+Stated as a rule: **nothing in the bundle may be the sole authority for a fact the gate can independently derive.**
+
 `approval` and `ledgerEntryRef` are typed `z.never()` on purpose: the bundle cannot currently validate into an admissible state, which is the correct behaviour while two required controls do not exist. They become real types in the PR that builds them.
+
+### 9.1 The six mandatory components
+
+The bundle carries exactly the six requirements of ADR-017 section 3, in the same order:
+
+| ADR requirement | Bundle member | Schema |
+|---|---|---|
+| 1. First-party recomputed correctness | `recompute` | section 2 |
+| 2. Editorial interpretation check | `editorialInterpretation` | section 4a |
+| 3. Exact candidate and revision binding | `binding` | section 3 |
+| 4. Originality assessment | `originality` | section 4 |
+| 5. Age-suitability and curriculum check | `ageSuitability` | section 5 |
+| 6. Authorised human approval | `approval` | section 7, deliberately unspecified |
+
+`advisory` is not a requirement and carries no weight; it is attached and labelled. Requirements 2 and 5 are **separate** components with separate verdicts, and neither substitutes for the other: an age-suitability `suitable` verdict says nothing about whether the stem admits a second reading.

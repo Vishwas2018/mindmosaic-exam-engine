@@ -96,9 +96,18 @@ Added on independent review finding P1-2, which required the five initial-scope 
 
 The stem is *"Marcus is currently three times as old as his sister Chloe. In 8 years, Marcus will be twice as old as Chloe will be then."* The solver declares `givens: [8]` and evaluates `3 × chloe + years === 2 × (chloe + years)`.
 
-Every structural fact — the factor 3, the factor 2, the direction of the comparison — lives in the solver's expression and appears in the stem only as the words "three times" and "twice". The set-equality guard compares `{8}` to `{8}` and passes. A stem edited to read "four times as old" would still present `{8}`, so the guard would still pass and the solver would still return 8, which is then the wrong answer silently.
+Every structural fact — the factor 3, the factor 2, the direction of the comparison — lives in the solver's expression and appears in the stem only as the words "three times" and "twice". The set-equality guard compares `{8}` to `{8}` and passes.
 
-This is a **drift-detection weakness, not a correctness defect**: the committed stem and the solver do agree today, the key `e` (8) is correct, and the reconciliation confirms the external review derived the same answer. The exposure is that nothing mechanical would notice if they stopped agreeing. The editorial check must therefore affirm `nr-022`'s relational structure explicitly, and any future edit to its stem must be treated as invalidating the recompute even when the hash check happens to be satisfied.
+**Correction (independent review P2-1).** An earlier version of this paragraph said that a stem edited to read "four times as old" would "still pass" and return the wrong answer "silently", and that an edit could leave "the hash check happens to be satisfied". That conflated two different situations and understated the hash binding, which is a real and working control. The two cases are distinct:
+
+| Situation | What happens | Why |
+|---|---|---|
+| **A. Mutated stem checked against the previously recorded hash** | **Detected.** `content_hash_mismatch`, fails closed. | `hashJson(question)` covers the prose. Changing "three times" to "four times" changes the content hash, so the stored `expectedContentHash` no longer matches. This is exactly what the hash binding is for, and it works. |
+| **B. Mutated stem re-hashed, then recomputed fresh against its own new hash** | **Not detected by the numeric machinery.** The recompute returns a clean `recomputed_match`. | The new hash is self-consistent, so the hash check passes by construction. The set-equality guard still sees `{8}` on both sides, because the mutated words contribute no digits. The solver still evaluates its hard-coded `3 ×` relation and still returns 8 — which the mutated stem no longer implies. |
+
+So the exposure is **not** that content changes leave checked hashes unchanged — they do not, and case A proves it. The exposure is narrower and is confined to case B: **a fresh recomputation against newly hashed content cannot detect that the written relationships changed**, because nothing in the numeric path reads the relational prose. Hash binding detects *drift from a known-good revision*; it cannot adjudicate whether a *new* revision's prose matches the solver's model. Only a human reading the stem can do that.
+
+This remains a **drift-detection weakness, not a correctness defect** in the committed content: the committed stem and the solver do agree today, the key `e` (8) is correct, and the reconciliation confirms the review derived the same answer. The consequences for the policy are that `nr-022`'s editorial check must affirm its relational structure explicitly, and that **any new revision of an in-scope candidate requires a fresh editorial interpretation check** — re-hashing and re-running the solver is not sufficient to re-establish eligibility.
 
 **`maths-004` — one genuine internal guard worth recording.** Its solver asserts `signed !== -below → throw`, so a stem whose parenthesised `(-15 m)` contradicted its stated "15 metres below sea level" would fail closed rather than compute. This is the only one of the five that cross-checks two stated quantities against each other. The remaining interpretive assumption — that "difference in elevation" means `summit − signed` — is pinned adequately by the prose, though option `a` (2213 m) exists precisely to catch a student who subtracts 15 instead.
 
@@ -106,7 +115,11 @@ This is a **drift-detection weakness, not a correctness defect**: the committed 
 
 **`nr-023` — strongest binding of the five.** Six of the seven declared givens appear as digits in the stem, including both equations in full. The residual assumption is only which coefficient belongs to notebooks and which to pens, and the stem states that directly.
 
-**`maths-014` — adequate only because of the closure premise.** The exhaustiveness clause added in `45b6cdab` is doing the work that the solver's `(5 + 3) × unit` silently assumed. It must be preserved; removing it reopens the original defect without changing any hash the solver checks.
+**`maths-014` — adequate only because of the closure premise.** The exhaustiveness clause added in `45b6cdab` is doing the work that the solver's `(5 + 3) × unit` silently assumed, and it must be preserved.
+
+**Correction (independent review P2-1).** An earlier version of this entry said that removing the clause "reopens the original defect without changing any hash the solver checks". That was wrong. Removing the clause changes the prose, therefore changes `hashJson(question)`, therefore changes the candidate and publication content hashes. Evidence bound to the current revision would fail `content_hash_mismatch` against the altered content, and this document must not suggest that a content change can leave the checked hashes untouched.
+
+The accurate statement is the case B shape above. Removing the closure premise and then re-hashing produces a *new* revision whose numeric recompute still returns 120 and still matches option `c` alone — exactly as it did before `45b6cdab`, when three options were defensible. The numeric machinery cannot distinguish the two revisions on merit; it is indifferent to the clause that makes one of them sound. The control that catches it is the editorial interpretation check, which is why removing that clause must be treated as voiding eligibility rather than as a cosmetic edit.
 
 ### 3a.4 Consequence
 

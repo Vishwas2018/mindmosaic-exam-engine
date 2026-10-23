@@ -67,14 +67,36 @@ Implement the new predicate, the staging and manifest changes, and the adversari
 
 ## 6. Phase 2e — evidence collection
 
-For in-scope candidates only, and only after 2b–2d:
+For in-scope candidates only, and only after 2b–2d. Each step is performed separately for each of the five: `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014`.
 
 1. Produce first-party recompute evidence bound to exact hashes.
-2. Run a bounded originality search per candidate and record the result, including matches, uncertainty or coverage gaps. A non-clean result stops that candidate.
-3. Record an age-suitability and curriculum judgement from a named reviewer.
-4. Attach the existing manual review as advisory, labelled.
+2. **Obtain a qualified human editorial interpretation assessment — see 6.1 below.**
+3. Run a bounded originality search per candidate and record the result, including matches, uncertainty or coverage gaps. A non-clean result stops that candidate.
+4. Record an age-suitability and curriculum judgement from a named reviewer. This is a **separate** judgement from step 2 and does not substitute for it.
+5. Attach the existing manual review as advisory, labelled.
 
 **Exit:** a complete bundle per candidate, or a recorded reason it could not be completed.
+
+### 6.1 Editorial interpretation evidence collection
+
+This step is new, it is mandatory, and **it has never been performed for any candidate**. No complete admission bundle can exist without it, so none of the five is closer to admissible than this step allows — a passing recompute notwithstanding.
+
+It is performed once per candidate **per revision**. A new revision of an in-scope candidate voids the assessment bound to the previous one; re-hashing and re-running the solver does not re-establish it.
+
+For each of the five candidates:
+
+1. **Resolve the registered solver assumptions from the live registry**, not from the bundle, the sidecar or the draft packet. Capture the registry key, the declared `givens`, and a written statement of the model the solver actually evaluates.
+2. **Present those assumptions to the reviewer explicitly**, alongside the stem, options and declared key. A reviewer who was never shown the solver's interpretation cannot have affirmed it, and the record is required to show what they were shown.
+3. **Record four separate judgements** — prompt-to-solver assumptions, exhaustiveness, ambiguity, and alternative defensible answers — each able to fail on its own. A single overall verdict is not acceptable.
+4. **Bind the record** to `candidateId`, `factoryRevision` and the exact publication content hash, matching the recompute evidence for the same revision.
+5. **Name the reviewer and their qualification.** The reviewer must be one of the three permitted roles. This is the blocker noted in section 9 item 6: no such reviewer is currently engaged.
+
+The per-candidate starting points are in `solver-coverage.md` section 3a. Two warrant specific attention when the assessment is commissioned:
+
+- **`nr-022`** — `givens: [8]`. Both ratios and the direction of the comparison live in the solver and appear in the stem only as the words "three times" and "twice". The reviewer must affirm the relational structure explicitly; the numeric path never compares it to anything.
+- **`maths-014`** — admissibility depends on the exhaustiveness clause added in `45b6cdab`. The reviewer must confirm the clause is present and that it closes the population, since the solver's `(5 + 3) × unit` assumes closure without checking for it.
+
+The existing advisory review may be shown to the reviewer as context. It is not an input to the assessment and cannot pre-empt any of the four judgements.
 
 ## 7. Phase 2f — intake and admission
 
@@ -105,7 +127,7 @@ The honest default is that PR #73 remains draft until the deferred Class B and C
 | 3 | Legacy-origin ledger not designed | Security design |
 | 4 | — *(cleared from the critical path)* The five in-scope candidates already have first-party recompute. `nr-001` and `vr-032` are out of scope, so their missing entries no longer block the route | — |
 | 5 | No originality engine selected; procurement deliberately open pending a coverage, limitation and cost comparison | Owner (procurement) |
-| 6 | No named SME engaged for age-suitability | Owner |
+| 6 | No qualified human reviewer engaged, for either the editorial interpretation check (phase 2e step 2) or age-suitability. Both are mandatory and neither has been performed for any candidate | Owner |
 | 7 | Class B and C deferred; no funded provider API access | Owner (procurement) |
 
 Nothing downstream of blocker 1 should begin until it clears.

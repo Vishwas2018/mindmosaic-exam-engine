@@ -62,6 +62,17 @@ An independent policy review of `63ec92fe` returned REQUEST CHANGES with two P1 
 | **P2-1** | ADR-017 and T2 claimed that with two providers "at most one can share lineage", so "at least one lineage-independent review always survives". | ADR-017 alternatives, `threat-model.md` T2 — withdrawn. Two providers are stronger corroboration; they cannot guarantee lineage independence when the generator is unknown. Class B and C stay deferred and no bypass is introduced. |
 | **P2-2** | The reconciliation presented the original review summary's aggregate packet hash as if it bound both historical review events, and did not distinguish `packet-reviewed-original.json` from the current `packet.json`. | `reconcile.py` and both regenerated outputs — two separately bound review events, each hash independently recomputed from committed bytes; `source-evidence-reconciliation.md` sections 2.1 to 2.3. |
 
+### Corrections from the second independent policy review
+
+A second independent review, of `eb83708f`, returned REQUEST CHANGES with one P1 and three P2 findings. All four are addressed.
+
+| Finding | What was wrong | Where the correction lives |
+|---|---|---|
+| **P1** | `editorialInterpretationCheckSchema` existed in isolation but was absent from the assembled admission bundle and from the gate specification, so the mandatory check was unreachable in practice. | `schemas.md` section 9 — bundle member plus cross-binding refinements and a rule that the gate re-derives solver identity and givens from the live registry; `gate-and-test-changes.md` sections 3.2.1, 4.1, 4.4a and 4.4b; `pr-73-migration-plan.md` section 6.1. |
+| **P2-1** | `solver-coverage.md` implied a content change could leave the checked hashes unchanged, conflating hash drift detection with fresh recomputation. | `solver-coverage.md` section 3a.3 — case A (mutation vs recorded hash → `content_hash_mismatch`, detected) separated from case B (mutation re-hashed → numeric path cannot see changed written relationships). |
+| **P2-2** | ADR-017 and the specification described the manually submitted ChatGPT advisory review as a qualified human examination. | ADR-017 section 3; specification section 2; `threat-model.md` T4 — attributed to the `manual_user_attested` ChatGPT advisory review, with the qualified editorial check recorded as new, mandatory and **never yet performed**. |
+| **P2-3** | This README claimed the reconciliation outputs were not regenerated and were byte-identical to the reviewed versions. True at `63ec92fe`, false from `eb83708f`. | "Reconciliation audit history" below — source evidence unchanged, generated output regenerated and reproducible but **not** byte-identical to what the first review saw. |
+
 No question content, answer key, difficulty value, hash or review record was altered by any of these corrections. Three facts surfaced during verification are recorded rather than repaired: the stale `targetPacket` filename in `review-summary.json` (section 2.2 of the reconciliation), the expected candidate-hash divergence on the two sidecar-bound items (section 2.3), and the weak prompt-to-solver binding on `nr-022` (`solver-coverage.md` section 3a.3).
 
 ## Verification
@@ -72,4 +83,24 @@ No question content, answer key, difficulty value, hash or review record was alt
 
 ## Constraints honoured
 
-PR #73 is unmodified. All 12 questions, the shared reading passage, answer keys, difficulty values and hashes are preserved unchanged. `vr-001` and `nr-023` remain `medium`. The reconciled 12-question evidence is preserved and was not regenerated: no source evidence changed, so `source-evidence-reconciliation.md` and its JSON are byte-identical to the reviewed versions. No factory record is created; nothing is ingested, staged, published, deployed or approved. No PR is merged and this PR remains draft.
+PR #73 is unmodified. All 12 questions, the shared reading passage, answer keys, difficulty values and hashes are preserved unchanged. `vr-001` and `nr-023` remain `medium`. No factory record is created; nothing is ingested, staged, published, deployed or approved. No PR is merged and this PR remains draft.
+
+### Reconciliation audit history
+
+**Correction (independent review P2-3).** This section previously stated that the reconciliation "was not regenerated" and that `source-evidence-reconciliation.md` and its JSON "are byte-identical to the reviewed versions". That was true when written, at `63ec92fe`, and **became false at `eb83708f`**, where both files were regenerated to address finding P2-2. The claim was not updated at the time. It is withdrawn and replaced below.
+
+Two different things must be kept apart, and the withdrawn sentence ran them together:
+
+| | Underlying source and review evidence | Generated reconciliation output |
+|---|---|---|
+| Files | PR #73 drafts, `external-review-chatgpt.json`, `external-review-maths-014.json` and its attestation, `review-summary.json`, `source-register.json`, the Phase 1 preflight | `source-evidence-reconciliation.md`, `source-evidence-reconciliation.json` |
+| Status | **Unchanged.** Not modified, not regenerated, not re-derived, at any point in this programme. PR #73 remains at `dcb60a80`. | **Regenerated at `eb83708f`**, and again at the current HEAD if `reconcile.py` changes. |
+| Why | They are the evidence. Changing them would destroy what is being reconciled. | `reconcile.py` was changed to split the two review events and add the preflight-vs-register cross-check. |
+
+What is and is not verified about the regenerated output:
+
+- **Verified.** Two consecutive runs of `reconcile.py` at a given commit produce byte-identical output, and re-running after commit leaves the working tree clean. This establishes *reproducibility at that commit*.
+- **Verified.** The regenerated run reports the same substantive results as before: 12 of 12 source keys matching, 12 of 12 review answers agreeing, zero inconsistencies.
+- **Not claimed.** That the regenerated files are byte-identical to the versions reviewed at `63ec92fe`. **They are not** — they carry new fields (`reviewEvents`, `packetFiles`, `crossSourceHashCheck`, per-item review bindings) that did not exist in the earlier output. Any reviewer comparing the two revisions should expect a substantial diff in the generated files and should read it as the P2-2 correction landing, not as evidence drift.
+
+The honest summary: **the source evidence is unchanged; the generated reconciliation of it has been regenerated twice and is reproducible, but is not byte-identical to what the first review saw.**

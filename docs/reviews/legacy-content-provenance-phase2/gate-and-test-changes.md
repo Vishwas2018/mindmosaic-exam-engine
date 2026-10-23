@@ -45,7 +45,23 @@ It returns a correctness verdict only. It never returns, sets or implies an inde
 
 ### 3.2 Staging
 
-`orchestrate-staging.ts` continues to refuse `kind: legacy_import` unless **all** hold: route is `deterministic_legacy_admission`; the bundle validates; `recompute.outcome` is `recomputed_match`; `originality.result.status` is `no_match_found`; the age-suitability verdict is `suitable`; every `boundContentHash` matches the candidate's current hashes; a verified ledger row exists; and the approval verifies against the authorised signer registry. Any failure refuses with the existing code.
+`orchestrate-staging.ts` continues to refuse `kind: legacy_import` unless **all** hold: route is `deterministic_legacy_admission`; the bundle validates; `recompute.outcome` is `recomputed_match`; **the editorial interpretation evidence is present and passes every condition in section 3.2.1**; `originality.result.status` is `no_match_found`; the age-suitability verdict is `suitable`; every `boundContentHash` matches the candidate's current hashes; a verified ledger row exists; and the approval verifies against the authorised signer registry. Any failure refuses with the existing code.
+
+#### 3.2.1 Editorial interpretation is a mandatory gate condition
+
+**The gate fails closed on editorial evidence even when the first-party numerical recomputation passes.** A green recompute is a necessary input, never a sufficient one, and the gate must not be implementable in a way that lets the recompute stand in for this check. All of the following are required:
+
+1. `editorialInterpretation` is present and schema-valid.
+2. `candidateId` and `factoryRevision` equal the binding's.
+3. `boundContentHash` equals the candidate's current publication content hash **and** the hash the recompute ran against.
+4. `solverInterpretationPresented.solverIdentifier` and `.declaredGivens` match the values the gate reads from the **live registry**, not the values restated in the bundle.
+5. `reviewerIdentity`, `reviewerRole` and `reviewerQualification` are present, and the role is one of the three permitted.
+6. `promptToSolverAssumptions`, `exhaustiveness` and `ambiguity` are each `affirmed`. `uncertain` rejects exactly as `rejected` does.
+7. `alternativeDefensibleAnswers.verdict` is `none_defensible`.
+
+Any failure refuses. The refusal must be distinguishable in the result from a numeric failure, so that "the maths is right but nobody has read the stem" is legible rather than reported as a correctness error.
+
+**Age-suitability remains a separate condition.** It is not merged into this one and does not satisfy it.
 
 ### 3.3 Manifest validation
 
@@ -56,6 +72,8 @@ Admitted candidates instead carry a distinct adapter class — working name `leg
 ### 3.4 Solver registry
 
 **The initial implementation adds no solver.** The five in-scope candidates — `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` — are already covered by registered first-party entries. Section 3.1 to 3.3 is the whole of the first engineering change.
+
+That the solvers exist does **not** mean the five are close to admissible. None of them has an editorial interpretation record (section 3.2.1), because that requirement is new and has never been performed for any candidate; all five therefore refuse today at the editorial condition alone, before the two missing security prerequisites are even reached.
 
 `nr-001` and `vr-032` are **not** part of it:
 
@@ -71,10 +89,11 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 ### 4.1 Evidence completeness
 
 1. Bundle missing `recompute` — refused.
-2. Bundle missing `originality` — refused.
-3. Bundle missing `ageSuitability` — refused.
-4. Bundle with no approval — refused. (Currently every bundle, by design.)
-5. Bundle with no ledger reference — refused.
+2. Bundle missing `editorialInterpretation` — refused. Expanded in section 4.4a.
+3. Bundle missing `originality` — refused.
+4. Bundle missing `ageSuitability` — refused. Separate from item 2; neither satisfies the other.
+5. Bundle with no approval — refused. (Currently every bundle, by design.)
+6. Bundle with no ledger reference — refused.
 
 ### 4.2 Recompute integrity
 
@@ -102,6 +121,46 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 21. A bundle with valid recompute must not populate `provider`, `model`, `promptHash` or `event` in `originalGeneration` — all are pinned to `z.null()` by `originalGenerationUnverifiedSchema`. (The field is named `event` in the factory schema; `candidateGenerationEvent` is the PR #73 `source-register.json` key for the same fact, and the two must not be confused.)
 22. Any attempt to record `independentReviewStatus` as established for a null-identity generator — refused.
 23. Advisory review entries must not satisfy any admission requirement, regardless of count or agreement.
+
+### 4.4a Editorial interpretation evidence
+
+The gate must refuse every case below **while the first-party numeric recompute returns a clean `recomputed_match`**. That precondition is the point of the section: each case isolates the editorial component from the arithmetic.
+
+18a. Bundle with no `editorialInterpretation` member — refused. (Currently every bundle.)
+18b. `boundContentHash` does not match the candidate's current content — refused as stale, not reused.
+18c. `candidateId` names a different candidate — refused. An editorial record must not be transferable between items.
+18d. `factoryRevision` names a different revision of the same candidate — refused.
+18e. `solverInterpretationPresented.solverIdentifier` differs from the solver the gate resolves from the live registry — refused.
+18f. `solverInterpretationPresented.declaredGivens` differ from the registry's declared givens — refused, including when the bundle's own `recompute` record was fabricated to agree with the editorial record. The gate resolves both from the registry, so a self-consistent pair of forged records still fails.
+18g. `reviewerIdentity` absent, empty or whitespace — refused.
+18h. `reviewerQualification` absent, or `reviewerRole` outside the permitted set — refused. An unqualified reviewer is not a weaker pass.
+18i. `promptToSolverAssumptions.verdict` is `rejected` — refused.
+18j. `exhaustiveness.verdict` is `rejected` — refused.
+18k. `ambiguity.verdict` is `rejected` — refused.
+18l. Any of the three is `uncertain` — refused. Uncertainty is not a soft pass.
+18m. `alternativeDefensibleAnswers.verdict` is `alternatives_defensible`, with `optionIds` populated — refused.
+18n. `alternativeDefensibleAnswers.verdict` is `uncertain` — refused.
+18o. **Numeric recompute PASS with editorial interpretation FAIL** — refused, and the refusal reason must identify the editorial component rather than reporting a correctness failure. This is the headline case: it is the `maths-014` shape, and a gate that admits here has reproduced the defect this whole route exists to avoid.
+18p. A passing recompute with an `ageSuitability` verdict of `suitable` but **no** editorial record — refused. Age-suitability does not satisfy requirement 2.
+18q. An advisory review agreeing with the key, offered in place of the editorial record — refused regardless of how many advisory entries agree.
+
+### 4.4b `nr-022` regression: the word-only mutation
+
+`nr-022` carries the weakest prompt-to-solver binding of the five in-scope candidates (`givens: [8]`; both ratios live in the solver — see `solver-coverage.md` section 3a.3). These two cases pin the behaviour that matters, and they are deliberately different.
+
+**Case A — mutated stem checked against the previously recorded hash.**
+
+18r. Take committed `nr-022`, change "three times as old" to "four times as old" and change nothing else. Supply the **original** `expectedContentHash`. `verifyFirstPartyScholarshipAttestation` must return **`content_hash_mismatch`**, and admission must refuse. This proves the hash binding does what it is for: prose is inside `hashJson(question)`, so a word-only edit is detected against a known-good revision.
+
+**Case B — the same mutation, re-hashed, recomputed fresh.**
+
+18s. Take the same mutated stem, compute its **new** content hash, and run the recompute against that. The recompute **may legitimately return `recomputed_match`**: the hash is self-consistent, the prompt still yields the digit set `{8}`, and the solver still evaluates its hard-coded `3 ×` relation. The test must assert this honestly rather than expecting a numeric failure that will not occur.
+
+18t. Admission for case B must nonetheless **refuse**, because no editorial interpretation record exists for the new revision. A new revision requires fresh editorial evidence; re-hashing and re-running the solver does not re-establish eligibility.
+
+18u. Admission for case B must **still refuse** when an editorial record is supplied that was bound to the *pre-mutation* revision — caught by 18b and 18d.
+
+18v. Case B with an editorial record genuinely bound to the mutated revision is admitted **only if** a qualified reviewer affirms all three judgements and returns `none_defensible` for the mutated stem's own key. The test must construct this outcome from the reviewer's recorded judgement, and **must not hard-code acceptance of any particular revised key**. Whether "four times as old" has a single defensible answer among the committed options, and which option that is, is the reviewer's determination to record — not a constant for this suite to assert. If no such affirmation is recorded, the expected result is refusal.
 
 ### 4.5 Route and attribution tampering
 

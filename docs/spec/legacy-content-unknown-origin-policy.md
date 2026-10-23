@@ -31,7 +31,9 @@ Educational content governance fails when one kind of evidence is read as anothe
 
 **Non-transitivity is the operative rule.** For unknown-origin content, dimension 2 is permanently unavailable and dimension 3 therefore cannot be evaluated. This policy admits content on dimensions 1 **and** 1a, with dimension 4 recorded as a bounded search and human judgement recorded separately. It does not infer 2 or 3 from 1.
 
-Dimensions 1 and 1a are listed separately because collapsing them is a known, evidenced failure. `maths-014` passed its numeric recompute cleanly while its stem still admitted three defensible answers; the defect was found by human review, not by the solver, and the solver's output was identical before and after the fix. A policy that treats a green recompute as a correctness verdict inherits that blind spot. See `docs/reviews/legacy-content-provenance-phase2/threat-model.md` T4.
+Dimensions 1 and 1a are listed separately because collapsing them is a known, evidenced failure. `maths-014` passed its numeric recompute cleanly while its stem still admitted three defensible answers; the solver's output was identical before and after the fix, and the defect was surfaced instead by the **manually submitted ChatGPT advisory review** (`manual_user_attested`, `chatgpt-unversioned`, no authenticated API envelope) — not by the solver, and not by a qualified subject-matter expert, since none has examined any of these candidates. A policy that treats a green recompute as a correctness verdict inherits that blind spot.
+
+Dimension 1a has consequently **never been satisfied for any of the 12 candidates**. It is a new requirement, it is mandatory, and no existing record discharges it. See `docs/reviews/legacy-content-provenance-phase2/threat-model.md` T4.
 
 ---
 
