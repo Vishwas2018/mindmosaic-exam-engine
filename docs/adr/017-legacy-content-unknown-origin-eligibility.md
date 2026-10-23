@@ -1,6 +1,7 @@
 # ADR-017: Deterministic-only admission route for legacy content with unknown original authorship
 
 - **Status:** PROPOSED — not adopted, not authorised, not implemented
+- **Scope direction:** narrowed on owner instruction, 2026-10-23 (five-candidate initial engineering scope; `nr-001` conditional; `vr-032` deferred). Direction shapes this proposal; it is not adoption, and the status above is unchanged.
 - **Date:** 2026-10-23
 - **Supersedes within this programme:** the withdrawn first draft of this ADR (see `docs/reviews/legacy-content-provenance-phase2/README.md`, "Withdrawn material")
 - **Spec:** `docs/spec/legacy-content-unknown-origin-policy.md`
@@ -24,13 +25,35 @@ Two facts constrain what can honestly be proposed today.
 
 Adopt a **single, narrow, explicitly named admission route for deterministically verifiable content only**, and leave every other category at the Phase 1 hold.
 
-### 1. Scope: seven candidates, Class A only
+### 1. Scope: policy eligibility and engineering scope are separate questions
 
-The route applies to content whose correct answer is recomputable by a first-party algorithm from the stated prompt, independently of the candidate's own declared working:
+Two questions are decided separately, and conflating them is how a narrow route becomes a wide one.
 
-`scholarship-y6-vr-032`, `scholarship-y6-nr-001`, `scholarship-y6-nr-022`, `scholarship-y6-nr-023`, `scholarship-y6-maths-004`, `scholarship-y6-maths-007`, `scholarship-y6-maths-014`.
+**Policy eligibility** asks whether a class of content *could ever* be admitted by this route. **Engineering scope** asks which candidates the first implementation is authorised to touch. A candidate can be policy-eligible and still be out of engineering scope, and nothing about it moves until it is in both.
 
-Judgement-based verbal reasoning (`vr-001`, `vr-016`) and the reading-comprehension passage and its items (`rc-001`, `rc-002`, `rc-003`) are **DEFERRED**. They are not retired, not rewritten and not altered. See `docs/reviews/legacy-content-provenance-phase2/deferred-class-b-c-register.md`.
+The route applies to content whose correct answer is recomputable by a first-party algorithm from the stated prompt, independently of the candidate's own declared working.
+
+#### 1.1 In the initial engineering scope — five candidates
+
+`scholarship-y6-nr-022`, `scholarship-y6-nr-023`, `scholarship-y6-maths-004`, `scholarship-y6-maths-007`, `scholarship-y6-maths-014`.
+
+Each is already covered by a registered first-party recompute entry that exists, runs in CI today, declares its own givens and ignores the candidate's `solverParams`. No new solver work is required for any of them. This is the entire scope the first implementation PR may address.
+
+#### 1.2 Policy-eligible, outside the initial engineering scope — one candidate
+
+`scholarship-y6-nr-001` is deterministically recomputable and fits the existing numeric registry shape, so it is **policy-eligible**. It is **not** in the initial engineering scope.
+
+It enters scope only after a genuine first-party registry implementation — an entry declaring its own givens and its own `solve`, so that the recompute derives the answer rather than replaying the candidate's sidecar parameters — **and** regression tests covering it. Wiring the existing parameter-driven `solveNumberSeries` to the candidate's own sidecar rule would not satisfy this and must not be mistaken for it. Until both exist and are separately reviewed, `nr-001` is treated exactly as an out-of-scope candidate and is refused.
+
+#### 1.3 Deferred, eligibility not established — one candidate
+
+`scholarship-y6-vr-032` is **DEFERRED**. Its correctness is propositional (modus tollens) and deterministically decidable, but it is not numeric, and the attestation contract admits only numeric givens, numeric solving and numeric option matching.
+
+Admitting it would require a new non-numeric deterministic attestation category. Whether that category belongs in this route at all is a question this ADR does not answer and does not presume. `vr-032` is deferred until that category is **separately justified and reviewed on its own merits**. It is not in scope, and its policy eligibility is open rather than granted.
+
+#### 1.4 Deferred — Class B and Class C
+
+Judgement-based verbal reasoning (`vr-001`, `vr-016`) and the reading-comprehension passage and its items (`rc-001`, `rc-002`, `rc-003`) are **DEFERRED**. They are not retired, not rewritten and not altered. See `docs/reviews/legacy-content-provenance-phase2/deferred-class-b-c-register.md`, which also carries `vr-032` under its own heading.
 
 ### 2. The route is named for what it proves, and only that
 
@@ -42,7 +65,7 @@ This is consistent with that policy's existing reasoning, which already holds th
 
 ### 3. Required evidence
 
-A Class A candidate MAY become eligible only when all of the following hold. Each is independently verifiable and fails closed when absent, malformed or stale:
+A candidate inside the engineering scope of section 1.1 MAY become eligible only when all of the following hold. A candidate outside that scope is refused regardless of the evidence attached to it. Each is independently verifiable and fails closed when absent, malformed or stale:
 
 1. **First-party recomputed correctness.** A registered first-party solver recomputes the answer from the prompt's own stated quantities, ignoring the candidate's `solverParams` and any sidecar constraint strings, and derives exactly the declared key. Hash-bound to the exact candidate revision.
 2. **Exact candidate and revision binding.** The evidence names the `rawQuestionHash`, `factoryCandidateHash` and `publicationContentHash` it was computed against. Any drift invalidates it.
@@ -62,6 +85,8 @@ In particular, the `legacy_import` generator class is **not** added back to the 
 
 Originality records a search, not a verdict about the world. The schema must be able to represent matches found, partial or uncertain matches, an inconclusive run, and an outright rejection. A record that can only express success is not evidence.
 
+No engine has been selected and no search has been run against any of the 12 candidates. Engine procurement is deliberately left open pending a realistic comparison of coverage, limitations and cost, so this ADR specifies the shape the evidence must take and does not name the tool that will produce it.
+
 No originality record may assert zero risk, originality as a fact, or copyright clearance. Copyright position is a legal determination and is out of scope for any tool in this repository. The honest claim has the form: *this engine, over this corpus, on this date, with this query set, returned these matches.*
 
 ### 6. Approval authentication and the legacy ledger are separate security requirements
@@ -71,7 +96,7 @@ Two controls are named in this programme and are **not** designed by this ADR:
 - **Approval authentication.** Git GPG/SSH signing is a plausible primitive, but signing alone is not authorisation. A usable design must specify signer trust (which keys, registered where, protected by what), the exact canonical payload the signature covers (candidate identity, publication content hash, decision), the binding between the approval artefact and the signing commit, and key lifecycle and revocation. Until all four are specified and reviewed, no claim of cryptographic authorisation may be made.
 - **Durable legacy-origin ledger.** A tamper-evident record of which candidate hashes originated in a legacy import transaction. Phase 1 recorded why this was not built: the importer's journal lives in the untracked factory workspace and the candidate record is consumed at publication.
 
-Each requires its own design, its own review and its own implementation PR. Neither is assumed to exist by this ADR, and no gate described here may depend on a control that has not been built.
+Each requires its own design, its own **independent** review and its own implementation PR. Neither may be designed or reviewed as part of the admission-gate change that consumes it, because a control reviewed only by the change that needs it is not independently reviewed. Neither is assumed to exist by this ADR, and no gate described here may depend on a control that has not been built.
 
 ### 7. No content changes
 
@@ -79,11 +104,12 @@ Answer keys, stems, options, explanations, passages, difficulty metadata, candid
 
 ## Consequences
 
-- Seven candidates gain a defined, narrow, honest path to eligibility. Five keep their existing reviews as advisory evidence and move no further.
-- Two of the seven (`nr-001`, `vr-032`) do not yet have a first-party recompute entry and cannot satisfy requirement 3.1 without one. See `docs/reviews/legacy-content-provenance-phase2/solver-coverage.md`.
+- Five candidates gain a defined, narrow, honest path to eligibility, and no new solver work is required for any of them. Six keep their existing reviews as advisory evidence and move no further.
+- `nr-001` is policy-eligible but out of scope until a genuine first-party registry entry and regression tests exist. `vr-032` is deferred with its eligibility open. Neither has a first-party recompute entry today, so neither can satisfy the requirement in section 3 item 1. See `docs/reviews/legacy-content-provenance-phase2/solver-coverage.md`.
+- Narrowing to five is itself a control: the first implementation touches only candidates whose correctness machinery already exists, so the admission gate is reviewed against working evidence rather than against solvers written to make the gate pass.
 - The programme stops depending on provider API availability, which has failed on every attempt so far.
 - `isProductionGradeIndependentReview` keeps a single, true meaning, so the distinction the 2026-07-30 audit relied on stays legible in stored data.
-- Admitting seven items does **not** authorise releasing a reduced version of the 12-question scholarship sample. The sample is a pinned set; a seven-item release is a different product decision requiring its own authorisation.
+- Admitting five items does **not** authorise releasing a reduced version of the 12-question scholarship sample. The sample is a pinned set; a five-item release is a different product decision requiring its own authorisation.
 
 ## Alternatives considered
 

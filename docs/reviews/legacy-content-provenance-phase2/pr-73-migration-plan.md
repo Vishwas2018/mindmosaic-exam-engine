@@ -7,11 +7,11 @@
 
 ## 0. The most important constraint
 
-**A seven-item deterministic policy does not authorise releasing a shortened scholarship sample.**
+**A five-item deterministic policy does not authorise releasing a shortened scholarship sample.**
 
-If every proposal in this programme were adopted and implemented, at most seven of the twelve candidates could become eligible — and on current solver coverage, realistically five. The remaining items stay deferred. That is a governance outcome, not a release plan.
+If every proposal in this programme were adopted and implemented, five of the twelve candidates could become eligible — six if `nr-001` later meets its condition. The remaining items stay deferred. That is a governance outcome, not a release plan.
 
-Shipping a reduced sample is a separate product decision because it changes what a student actually sees: the subject balance across verbal reasoning, numerical reasoning, mathematics and reading comprehension is part of what makes the sample a sample. A five- or seven-item set with no reading comprehension at all is a different artefact. It needs its own authorisation, its own release identities and its own review, and nothing in this programme should be read as approving it.
+Shipping a reduced sample is a separate product decision because it changes what a student actually sees: the subject balance across verbal reasoning, numerical reasoning, mathematics and reading comprehension is part of what makes the sample a sample. A five- or six-item set with no reading comprehension at all is a different artefact. It needs its own authorisation, its own release identities and its own review, and nothing in this programme should be read as approving it.
 
 Until that separate decision exists, the correct state for PR #73 is: draft, unmodified, unreleased.
 
@@ -30,9 +30,11 @@ Until that separate decision exists, the correct state for PR #73 is: draft, unm
 
 Documentation only. The owner reviews ADR-017 and the specification and decides whether to adopt the narrow deterministic route.
 
-The ADR stays `PROPOSED` until the owner records a decision. Adopting it authorises design work; it authorises no behaviour change.
+The owner recorded scope direction on 2026-10-23, narrowing the initial engineering scope to five candidates (`decisions-for-owner.md` A1–A5). That direction is **not** adoption. The ADR stays `PROPOSED`, and the remaining step in this phase is independent policy review followed by a formal owner adoption decision.
 
-**Exit:** a recorded owner decision, or a request for further change.
+Adopting it authorises design work; it authorises no behaviour change.
+
+**Exit:** an independent policy review, then a recorded owner adoption decision, or a request for further change.
 
 ## 3. Phase 2b — security prerequisites
 
@@ -48,9 +50,14 @@ Each is its own design, review and implementation PR.
 
 ## 4. Phase 2c — solver coverage
 
-Per `solver-coverage.md`: five of the seven already have first-party recompute. Add a registry entry and attested skill for `nr-001`. Decide whether to build a non-numeric deterministic attestation category for `vr-032` or defer it.
+**No solver work is required for the five in-scope candidates.** They already have registered first-party recompute entries running in CI, which is why they are the scope. This phase exists only to confirm that, not to build anything.
 
-**Exit:** a known, recorded correctness route for each in-scope candidate.
+`nr-001` and `vr-032` are handled outside this sequence:
+
+- `nr-001` — a separate change adding `nr-number-series` to `SCHOLARSHIP_ATTESTED_SKILLS` and an independent registry entry, plus the regression tests in `gate-and-test-changes.md` section 4.8. Only then does it enter scope, by an explicit scope amendment rather than automatically.
+- `vr-032` — deferred. No work is scheduled until a non-numeric attestation category is separately justified and independently reviewed.
+
+**Exit:** a confirmed, recorded correctness route for each of the five in-scope candidates.
 
 ## 5. Phase 2d — admission gate implementation
 
@@ -96,8 +103,8 @@ The honest default is that PR #73 remains draft until the deferred Class B and C
 | 1 | ADR-017 not adopted | Repository owner |
 | 2 | Approval authentication not designed; `dev` branch protection absent | Security design + owner |
 | 3 | Legacy-origin ledger not designed | Security design |
-| 4 | `nr-001` and `vr-032` have no first-party recompute entry | Engineering |
-| 5 | No originality search process or engine selected | Owner + engineering |
+| 4 | — *(cleared from the critical path)* The five in-scope candidates already have first-party recompute. `nr-001` and `vr-032` are out of scope, so their missing entries no longer block the route | — |
+| 5 | No originality engine selected; procurement deliberately open pending a coverage, limitation and cost comparison | Owner (procurement) |
 | 6 | No named SME engaged for age-suitability | Owner |
 | 7 | Class B and C deferred; no funded provider API access | Owner (procurement) |
 

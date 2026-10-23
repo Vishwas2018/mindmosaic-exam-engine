@@ -1,6 +1,6 @@
-# Deferred Class B and Class C decision register
+# Deferred candidate decision register — Class A (non-numeric), Class B and Class C
 
-**Status:** DEFERRED. These five candidates and the shared reading passage are held at the Phase 1 position. Nothing about them is retired, rewritten, re-authored, re-keyed or altered.
+**Status:** DEFERRED. These six candidates and the shared reading passage are held at the Phase 1 position. Nothing about them is retired, rewritten, re-authored, re-keyed or altered.
 
 The purpose of this register is to record what is held, what evidence already exists, what is actually missing, and what would have to become true before the question is reopened — so that deferral is a tracked state rather than an omission.
 
@@ -18,7 +18,23 @@ The purpose of this register is to record what is held, what evidence already ex
 
 Plus the complete shared reading passage, "The Estuary Watchers", in `content/scholarship-drafts/scholarship-y6-reading-draft.json`.
 
-`scholarship-y6-vr-032` is **not** in this register. It is nominally Class A, but has no first-party recompute entry and would need a new non-numeric attestation category; `solver-coverage.md` recommends deferring it with Class B unless the owner wants that category built.
+`scholarship-y6-vr-032` is **also deferred**, on owner direction of 2026-10-23, and is recorded in section 1.1 below under its own class. It is not a Class B or Class C item and must not be merged into those categories: its deferral has a different cause and a different reopening condition.
+
+### 1.1 Class A (non-numeric) — `vr-032`
+
+| Candidate | Class | Skill | Key | Difficulty | Status |
+|---|---|---|---|---|---|
+| `scholarship-y6-vr-032` | A (non-numeric) | `vr-sentence-logic` | c | medium | DEFERRED |
+
+`vr-032` is propositional logic (modus tollens). Its correctness is deterministically decidable, which distinguishes it sharply from Class B: no judgement is required to know the answer. What it lacks is a route, not a proof.
+
+The attestation contract admits only numeric givens, numeric `solve` functions and numeric option matching, and `isScholarshipAttestedItem` admits only `numerical_reasoning` and maths subjects. A truth-table recompute matching an option by text is a new attestation shape, not a new registry entry.
+
+**Why it is deferred rather than scheduled.** Extending the attestation contract to a second, non-numeric shape is a larger change than all the remaining Class A work combined, for one question, and it widens a contract whose narrowness is load-bearing. The owner's direction is therefore that the category must be **separately justified** — argued on its own merits and independently reviewed — before it is designed or built. Its policy eligibility is open, not granted.
+
+**Reopening condition.** A separate, independently reviewed justification for a non-numeric deterministic attestation category that establishes: what the category admits and refuses; how a text-matched option avoids the ambiguity the numeric matcher guards against; why the widened contract cannot be used to admit judgement content by restating it as logic; and whether one question warrants it. If that justification is accepted, `vr-032` additionally requires everything Class A requires, including the approval-authentication and ledger controls.
+
+Its existing manual review is retained as advisory corroboration on the same terms as section 3.
 
 ## 2. Explicit non-actions
 
@@ -32,7 +48,7 @@ The following are recorded as **not** proposed, because the withdrawn first draf
 
 ## 3. Evidence preserved as advisory
 
-Each of the five carries a completed manual ChatGPT blind review that agrees with its declared key. These are retained and remain attached as **advisory corroboration**, with the classification their own summary records: `manual_user_attested`, `chatgpt-unversioned`, no authenticated API envelope.
+Each of the five Class B and Class C candidates, and `vr-032` from section 1.1, carries a completed manual ChatGPT blind review that agrees with its declared key. These are retained and remain attached as **advisory corroboration**, with the classification their own summary records: `manual_user_attested`, `chatgpt-unversioned`, no authenticated API envelope.
 
 Advisory evidence does not expire and does not decay into something stronger. It also does not contribute to any admission test, now or later.
 
@@ -62,6 +78,8 @@ A note on the re-authoring argument, which was the withdrawn draft's headline re
 
 ## 5. Reopening conditions
 
+`vr-032` has its own reopening condition, stated in section 1.1. It is not reopened by anything in this section.
+
 Class B is reopened when **all** of:
 
 - Funded, working provider API access exists and a stateless, answer-withheld, hash-pinned review completes with a recorded execution envelope.
@@ -75,6 +93,6 @@ Both additionally require the approval-authentication and ledger controls that g
 
 ## 6. Consequence for the sample
 
-Deferring these five means the 12-question scholarship sample cannot be released in full under this policy.
+Deferring these six means the 12-question scholarship sample cannot be released in full under this policy.
 
-It does **not** mean a seven-item or six-item sample should be released instead. The sample is a pinned set with pinned release identities in `src/features/admin-review/release-identities.json`; shipping a subset changes subject balance and what a student sees, and is a separate product decision requiring its own authorisation. See `pr-73-migration-plan.md`.
+It does **not** mean a five-item or six-item sample should be released instead. The sample is a pinned set with pinned release identities in `src/features/admin-review/release-identities.json`; shipping a subset changes subject balance and what a student sees, and is a separate product decision requiring its own authorisation. See `pr-73-migration-plan.md`.

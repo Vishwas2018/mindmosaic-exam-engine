@@ -1,6 +1,7 @@
-# Solver coverage and missing bindings for the seven Class A candidates
+# Solver coverage and missing bindings for the deterministically recomputable candidates
 
 **Status:** analysis for the PROPOSED Phase 2a policy. No code is changed by this PR.
+**Scope outcome:** this analysis is what the owner's 2026-10-23 narrowing rests on. The initial engineering scope is the five candidates in the "first-party recompute" rows below; `nr-001` is conditional and `vr-032` is deferred.
 **Code state examined:** this branch, which matches `dev` at `714ad64155b3ba3109695bf44c3d14ab7473da4c` for all files cited.
 
 ---
@@ -65,7 +66,9 @@ Entirely outside the attestation scope, which admits only numerical reasoning an
 
 To close, a decision is needed first: either extend attestation with a non-numeric deterministic category whose recompute evaluates a truth table over the stated premises and matches an option by text rather than by quantity, or accept that `vr-032` cannot meet requirement 3.1 of the ADR and defer it with Class B.
 
-**Recommendation: defer `vr-032` unless the owner wants the non-numeric category built.** It is one item, and extending the attestation contract to a new shape is a larger engineering change than the rest of the Class A work combined. Deferring it reduces the Class A scope to six candidates, five of which need no new solver work at all.
+**Recommendation: defer `vr-032` unless the owner wants the non-numeric category built.** It is one item, and extending the attestation contract to a new shape is a larger engineering change than the rest of the Class A work combined.
+
+**Owner direction, 2026-10-23: deferred.** `vr-032` is held until a non-numeric deterministic attestation category is separately justified and independently reviewed. See `deferred-class-b-c-register.md` section 1.1.
 
 ## 4. Consequence for the policy
 
@@ -75,7 +78,12 @@ To close, a decision is needed first: either extend attestation with a non-numer
 | Plus `nr-001` | six | one registry entry and one attested skill |
 | Plus `vr-032` | seven | the above, plus a new non-numeric attestation category |
 
-The ADR proposes the seven-item scope the owner directed. This analysis records that two of those seven have an unmet precondition, which is a blocker for those two candidates specifically, not for the route.
+**Owner direction, 2026-10-23.** The ADR now proposes the five-candidate initial engineering scope — the "Five strongest" row above, which requires no solver work. `nr-001` is policy-eligible but enters scope only on a genuine first-party registry entry **and** regression tests; `vr-032` is deferred pending separate justification of a non-numeric category.
+
+Two notes for the implementer, because the gap between them is where this route could quietly weaken:
+
+- A registry entry for `nr-001` that delegates to the existing `solveNumberSeries` using the candidate's sidecar `rule` is **not** a first-party recompute. It replays the original author's model of the problem, which is precisely what section 1.2 identifies as the weaker mechanism. The entry must declare its own givens (`5, 11, 17, 23, 29`) and its own `solve`, and derive option `e` (35) without reading the sidecar.
+- The regression tests the owner requires must include the refusal cases, not only the passing one. A solver added to make a gate pass, tested only by that gate passing, is not evidence.
 
 ## 5. What was verified, and how
 

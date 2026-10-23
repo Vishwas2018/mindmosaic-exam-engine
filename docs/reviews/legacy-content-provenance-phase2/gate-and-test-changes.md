@@ -55,7 +55,12 @@ Admitted candidates instead carry a distinct adapter class — working name `leg
 
 ### 3.4 Solver registry
 
-Per `solver-coverage.md`: add `nr-number-series` to `SCHOLARSHIP_ATTESTED_SKILLS` and an independent registry entry for `nr-001`. `vr-032` additionally needs a non-numeric deterministic attestation category, or it is deferred with Class B.
+**The initial implementation adds no solver.** The five in-scope candidates — `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` — are already covered by registered first-party entries. Section 3.1 to 3.3 is the whole of the first engineering change.
+
+`nr-001` and `vr-032` are **not** part of it:
+
+- `nr-001` is a later, separately reviewed change: add `nr-number-series` to `SCHOLARSHIP_ATTESTED_SKILLS` and an independent registry entry declaring its own givens and `solve`, plus the regression tests in section 4.8. It must not delegate to the candidate's sidecar `rule`.
+- `vr-032` is deferred. The non-numeric attestation category it would need is not designed, not scheduled and not justified; see `deferred-class-b-c-register.md` section 1.1.
 
 ---
 
@@ -108,16 +113,30 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 
 ### 4.6 Scope containment
 
-29. A Class B candidate (`vr-001`, `vr-016`) presented with a deterministic bundle — refused as out of scope.
-30. A Class C candidate (`rc-001`, `rc-002`, `rc-003`) presented with a deterministic bundle — refused as out of scope.
-31. Every one of the 12 sample candidates, in its current committed state, is refused at staging and publication. This is the regression that proves the Phase 1 hold is still intact.
+Scope is a gate input, not a convention. The in-scope set is enumerated and checked before any evidence is read.
+
+29. `nr-001` presented with a complete and otherwise valid deterministic bundle — refused as out of scope, for as long as it is out of scope. A bundle does not widen scope.
+30. `vr-032` presented with a complete and otherwise valid deterministic bundle — refused as out of scope.
+31. A Class B candidate (`vr-001`, `vr-016`) presented with a deterministic bundle — refused as out of scope.
+32. A Class C candidate (`rc-001`, `rc-002`, `rc-003`) presented with a deterministic bundle — refused as out of scope.
+33. Every one of the 12 sample candidates, in its current committed state, is refused at staging and publication. This is the regression that proves the Phase 1 hold is still intact.
 
 ### 4.7 Regression protection for existing behaviour
 
-32. All 596 committed manifests continue to validate under the PR #74 allow-list.
-33. The existing `legacy-manifest-tamper.test.ts` matrix continues to pass unchanged.
+34. All 596 committed manifests continue to validate under the PR #74 allow-list.
+35. The existing `legacy-manifest-tamper.test.ts` matrix continues to pass unchanged.
 
----
+### 4.8 Regression tests required before `nr-001` enters scope
+
+These are the owner's stated condition on `nr-001`, alongside the registry entry itself. They belong to that later change, not to the initial one.
+
+36. The `nr-001` registry entry derives option `e` from its own declared givens (`5, 11, 17, 23, 29`) with the candidate's sidecar absent entirely — proving the recompute does not depend on it.
+37. The entry refuses when the prompt's stated quantities differ from its declared givens (`prompt_givens_mismatch`).
+38. The entry refuses when the content hash does not match (`content_hash_mismatch`).
+39. The entry refuses, rather than guessing, when more than one option matches the computed value (`option_match_ambiguous`).
+40. `candidateLogicExecuted` is `false` on every passing `nr-001` recompute; a path that reads `solverParams` or the sidecar `rule` fails the suite.
+41. Adding the entry does not widen `isScholarshipAttestedItem` beyond `nr-number-series` — ids `nr-002`…`nr-020` remain out of scope and still refuse.
+42. `vr-032` still refuses after the `nr-001` change lands.
 
 ## 5. CI
 

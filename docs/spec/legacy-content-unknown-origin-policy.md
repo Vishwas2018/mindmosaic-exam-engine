@@ -34,25 +34,41 @@ Educational content governance fails when one kind of evidence is read as anothe
 
 ## 3. Scope
 
-### 3.1 In scope — Class A, seven candidates
+Scope is stated at two levels, because they are decided separately. **Policy eligibility** is whether a candidate could ever be admitted by this route. **Engineering scope** is which candidates the first implementation may address. Admission requires both.
 
 Content is Class A when its correct answer is recomputable by a registered first-party solver from the quantities stated in the prompt, without executing or trusting the candidate's own declared working.
 
-| Candidate | Skill | Declared key |
-|---|---|---|
-| `scholarship-y6-vr-032` | `vr-sentence-logic` | c |
-| `scholarship-y6-nr-001` | `nr-number-series` | e |
-| `scholarship-y6-nr-022` | `nr-arithmetical-reasoning` | e |
-| `scholarship-y6-nr-023` | `nr-arithmetical-reasoning` | b |
-| `scholarship-y6-maths-004` | `maths-directed-numbers` | b |
-| `scholarship-y6-maths-007` | `maths-percentages` | a |
-| `scholarship-y6-maths-014` | `maths-ratios-rates` | c |
+### 3.1 In the initial engineering scope — five candidates
 
-Keys are reproduced from `docs/reviews/legacy-content-provenance-phase2/source-evidence-reconciliation.json`, generated mechanically from PR #73 at `dcb60a80`.
+| Candidate | Skill | Declared key | First-party recompute |
+|---|---|---|---|
+| `scholarship-y6-nr-022` | `nr-arithmetical-reasoning` | e | registered, in CI |
+| `scholarship-y6-nr-023` | `nr-arithmetical-reasoning` | b | registered, in CI |
+| `scholarship-y6-maths-004` | `maths-directed-numbers` | b | registered, in CI |
+| `scholarship-y6-maths-007` | `maths-percentages` | a | registered, in CI |
+| `scholarship-y6-maths-014` | `maths-ratios-rates` | c | registered, in CI |
+
+No new solver work is required for any of these five. Keys are reproduced from `docs/reviews/legacy-content-provenance-phase2/source-evidence-reconciliation.json`, generated mechanically from PR #73 at `dcb60a80`.
+
+### 3.1.1 Policy-eligible, outside the initial engineering scope — one candidate
+
+| Candidate | Skill | Declared key | Condition for entering scope |
+|---|---|---|---|
+| `scholarship-y6-nr-001` | `nr-number-series` | e | a genuine first-party registry entry **and** regression tests, both separately reviewed |
+
+`nr-001` is deterministically recomputable and fits the existing numeric registry shape, so its policy eligibility is settled. Its engineering eligibility is not. The registry entry must declare its own givens and its own `solve`; attaching the existing parameter-driven `solveNumberSeries` to the candidate's sidecar rule replays the original author's model of the problem and does not satisfy this requirement. Until the entry and its regression tests exist, `nr-001` is refused as out of scope.
+
+### 3.1.2 Deferred, eligibility not established — one candidate
+
+| Candidate | Skill | Declared key | Status |
+|---|---|---|---|
+| `scholarship-y6-vr-032` | `vr-sentence-logic` | c | DEFERRED — non-numeric attestation not justified |
+
+`vr-032` is propositional logic: deterministically decidable, but outside the attestation contract, which admits only numeric givens, numeric solving and numeric option matching. Admitting it requires a new non-numeric deterministic attestation category. Whether that category belongs in this route is an open question, not a deferred implementation task. `vr-032` is deferred until that category is separately justified and reviewed on its own merits.
 
 ### 3.2 Deferred — Class B and Class C, five candidates
 
-`vr-001`, `vr-016` (judgement-based verbal reasoning) and `rc-001`, `rc-002`, `rc-003` with their shared passage (literary stimulus) are **DEFERRED**, with existing reviews preserved as advisory evidence. They remain at the Phase 1 hold. No retirement, rewrite, re-authoring or alteration is proposed. See `docs/reviews/legacy-content-provenance-phase2/deferred-class-b-c-register.md`.
+`vr-001`, `vr-016` (judgement-based verbal reasoning) and `rc-001`, `rc-002`, `rc-003` with their shared passage (literary stimulus) are **DEFERRED**, with existing reviews preserved as advisory evidence. Counting `vr-032` from section 3.1.2, six of the twelve candidates are deferred. They remain at the Phase 1 hold. No retirement, rewrite, re-authoring or alteration is proposed. See `docs/reviews/legacy-content-provenance-phase2/deferred-class-b-c-register.md`.
 
 ### 3.3 Unchanged in all cases
 
@@ -104,6 +120,10 @@ The manual ChatGPT review in PR #73 agrees with the declared key on all 12 candi
 ### 5.1 What is claimed
 
 Only this: *engine E, over corpus C, on date D, with query set Q, returned result R.*
+
+### 5.1.1 No engine is selected
+
+Engine procurement is deliberately undecided. No search has been run against any of the 12 candidates. A selection requires a realistic comparison of coverage, documented limitations and cost, per `docs/reviews/legacy-content-provenance-phase2/decisions-for-owner.md` A5. This specification fixes the shape of the record and the statuses it must be able to express; it does not name the tool, and no engine may be assumed.
 
 ### 5.2 What may never be claimed
 
@@ -170,6 +190,7 @@ It is a separate design, a separate review and a separate implementation. No gat
 
 When, and only when, the controls in sections 6 and 7 exist and the engineering change is separately reviewed:
 
+- The gate carries an explicit scope check. A candidate outside the engineering scope of section 3.1 is refused before any evidence is evaluated, so that attaching a bundle to `nr-001`, `vr-032` or a Class B or C candidate cannot admit it. Widening that scope is a documentation change plus a separately reviewed engineering change, never a side effect of adding a solver.
 - A **new** predicate, distinct from `isProductionGradeIndependentReview`, evaluates the deterministic admission bundle. Working name: `hasDeterministicLegacyCorrectnessEvidence`. It returns correctness evidence status only, and never sets or implies an independence verdict.
 - `orchestrateStaging` admits a legacy candidate only when the bundle validates, the ledger row exists and verifies, and the approval verifies against the authorised signer registry. Absent any one, it refuses as today.
 - `validatePublicationSource` keeps refusing the `legacy_import` adapter class. Admitted candidates carry a distinct adapter class, bound to a verified ledger row, so that an admitted manifest and an unadmitted one differ by more than fields a single writer controls.
@@ -185,8 +206,8 @@ When, and only when, the controls in sections 6 and 7 exist and the engineering 
 
 ---
 
-## 9. The seven-item scope is not a release decision
+## 9. The five-item scope is not a release decision
 
-This policy, if adopted and later implemented, could make seven candidates eligible. It does not authorise shipping a seven-item scholarship sample.
+This policy, if adopted and later implemented, could make five candidates eligible — six if `nr-001` later enters scope. It does not authorise shipping a five-item or six-item scholarship sample.
 
 The 12-question sample in PR #73 is a pinned set with pinned release identities. Releasing a reduced subset changes what a student sees, changes the sample's subject balance, and is a separate product decision requiring its own authorisation. Nothing in this programme should be read as approving it.

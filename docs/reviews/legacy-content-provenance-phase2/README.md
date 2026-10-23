@@ -1,6 +1,6 @@
 # Phase 2a — deterministic legacy admission policy proposal
 
-**Status:** PROPOSED. Documentation only. No code, schema, gate or question content is changed by this PR.
+**Status:** PROPOSED, scope narrowed on owner direction of 2026-10-23. Documentation only. No code, schema, gate or question content is changed by this PR. The direction narrows what is proposed and sets what an independent reviewer should review; it is not adoption, and ADR-017 remains `PROPOSED`.
 
 This directory holds the revised Phase 2 governance proposal for MindMosaic legacy content whose original generation is unverified. It replaces a first draft that was withdrawn (see below).
 
@@ -8,7 +8,16 @@ This directory holds the revised Phase 2 governance proposal for MindMosaic lega
 
 One narrow admission route, `deterministic_legacy_admission`, for legacy candidates whose correct answer can be recomputed by a first-party algorithm from the stated prompt. It establishes **recomputed correctness and nothing else**. Authorship stays unverified, review independence stays unestablished, and neither is inferred from the other.
 
-Everything else — judgement-based verbal reasoning and the reading-comprehension passage and items — is **DEFERRED** at the Phase 1 hold, with existing reviews preserved as advisory evidence. Nothing is retired, rewritten or altered.
+Policy eligibility and engineering scope are stated separately throughout, because they are decided separately:
+
+| Tier | Candidates | Position |
+|---|---|---|
+| Initial engineering scope | `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` | Policy-eligible and in scope. First-party recompute already exists and runs in CI; no solver work required. |
+| Policy-eligible, out of scope | `nr-001` | Enters scope only after a genuine first-party registry entry **and** regression tests, separately reviewed. |
+| Deferred, eligibility open | `vr-032` | Held until a non-numeric deterministic attestation category is separately justified and independently reviewed. |
+| Deferred — Class B and C | `vr-001`, `vr-016`, `rc-001`, `rc-002`, `rc-003` and the shared passage | Held at the Phase 1 position. |
+
+Everything outside the first tier is **DEFERRED** at the Phase 1 hold, with existing reviews preserved as advisory evidence. Nothing is retired, rewritten or altered.
 
 Adopting the ADR authorises design work. It authorises no behaviour change. Every Phase 1 refusal stays active until a separate engineering change is reviewed, authorised and validated.
 
@@ -24,7 +33,7 @@ Adopting the ADR authorises design work. It authorises no behaviour change. Ever
 | `schemas.md` | Proposed evidence shapes. Failure is representable; two controls deliberately unspecified. |
 | `threat-model.md` | Threats, with every countermeasure marked built, proposed or not designed. |
 | `gate-and-test-changes.md` | Engineering roadmap and adversarial test cases for a future PR. |
-| `deferred-class-b-c-register.md` | What is held, what is missing, and the reopening conditions. |
+| `deferred-class-b-c-register.md` | What is held, what is missing, and the reopening conditions. Covers `vr-032` (section 1.1) as well as Class B and C. |
 | `pr-73-migration-plan.md` | Sequence, blockers, and why a shortened sample is not authorised. |
 | `decisions-for-owner.md` | Live decisions, blocked decisions, and what adoption does not authorise. |
 
@@ -50,4 +59,4 @@ The threat model's claim that cross-provider agreement makes identical error "st
 
 ## Constraints honoured
 
-PR #73 is unmodified. No question content, answer key, explanation, passage, difficulty value or hash is changed. `vr-001` and `nr-023` remain `medium`. No factory record is created; nothing is ingested, staged, published, deployed or approved. No PR is merged and this PR remains draft.
+PR #73 is unmodified. All 12 questions, the shared reading passage, answer keys, difficulty values and hashes are preserved unchanged. `vr-001` and `nr-023` remain `medium`. The reconciled 12-question evidence is preserved and was not regenerated: no source evidence changed, so `source-evidence-reconciliation.md` and its JSON are byte-identical to the reviewed versions. No factory record is created; nothing is ingested, staged, published, deployed or approved. No PR is merged and this PR remains draft.

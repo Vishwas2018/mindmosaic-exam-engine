@@ -25,6 +25,8 @@ export const legacyIndependenceStatusSchema = z.literal("not_established_unknown
 
 There is deliberately no `legacy_exception_approved` value. "Exception" names a waiver; this route is not one.
 
+Carrying the `deterministic_legacy_admission` value does not place a candidate in scope. The in-scope candidate set is an explicit, enumerated gate input — currently `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` — checked before any evidence in sections 2 to 6 is read. `nr-001` and `vr-032` are refused at that check today regardless of what is attached to them.
+
 ---
 
 ## 2. First-party recompute evidence
