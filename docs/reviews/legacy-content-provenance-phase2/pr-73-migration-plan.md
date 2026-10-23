@@ -1,84 +1,104 @@
-# Migration Plan for PR #73 (Safe Operational Sequence)
+# Sequence for PR #73 under the deterministic-only policy
 
-**Reference Target:** [PR #73](https://github.com/Vishwas2018/mindmosaic-exam-engine/pull/73) (`feat/scholarship-y6-sample`, commit `dcb60a80f3f6eabdb522b20202929d2e3f328a94`)  
-**Scope:** Exactly the 12 Year 6 Scholarship sample questions.
-
----
-
-## 1. Guiding Principles for Migration
-
-1. **PR #73 Remains Untouched Until Authorisation:** PR #73 stays draft and unmodified during Phase 2 policy review.
-2. **No Skipping Gates:** No script or agent may bypass intermediate verification states.
-3. **Strict Separation of Phases:**
-   - Phase 2a: Governance Policy & ADR Adoption (Current documentation PR).
-   - Phase 2b: Engineering Gate & Schema Implementation (Dedicated engineering PR).
-   - Phase 2c: Evidence Collection & Owner Decision Execution (Operational execution).
-   - Phase 2d: Final Ingestion, Approval Signing & PR #73 Merge.
+**Reference:** [PR #73](https://github.com/Vishwas2018/mindmosaic-exam-engine/pull/73), `feat/scholarship-y6-sample` at `dcb60a80f3f6eabdb522b20202929d2e3f328a94`.
+**Status:** PR #73 is draft, read-only reference evidence, and is not modified by this PR or by this plan.
 
 ---
 
-## 2. Step-by-Step Migration Roadmap
+## 0. The most important constraint
 
-### Phase 2a: Policy Adoption & ADR Ratification (Current Step)
-- Owner reviews and merges this Phase 2 policy proposal (`docs/adr/017-legacy-content-unknown-origin-eligibility.md`, `docs/spec/legacy-content-unknown-origin-policy.md`).
-- Formally ratifies the Differentiated Decoupled Governance model.
+**A seven-item deterministic policy does not authorise releasing a shortened scholarship sample.**
 
----
+If every proposal in this programme were adopted and implemented, at most seven of the twelve candidates could become eligible — and on current solver coverage, realistically five. The remaining items stay deferred. That is a governance outcome, not a release plan.
 
-### Phase 2b: Engineering Gate & Tooling Implementation
-- Branch off fresh `origin/dev` (e.g. `feat/legacy-admission-gates`).
-- Implement the schemas defined in `docs/reviews/legacy-content-provenance-phase2/schemas.md`.
-- Update `evidence.ts`, `orchestrate-staging.ts`, and `manifest-schema.ts`.
-- Add `scripts/questions-admit-legacy.mts` and full unit test suite `legacy-admission-gates.test.ts`.
-- Pass full CI verification gate and merge into `dev`.
+Shipping a reduced sample is a separate product decision because it changes what a student actually sees: the subject balance across verbal reasoning, numerical reasoning, mathematics and reading comprehension is part of what makes the sample a sample. A five- or seven-item set with no reading comprehension at all is a different artefact. It needs its own authorisation, its own release identities and its own review, and nothing in this programme should be read as approving it.
+
+Until that separate decision exists, the correct state for PR #73 is: draft, unmodified, unreleased.
 
 ---
 
-### Phase 2c: Evidence Gathering for the 12 Candidates
+## 1. Principles
 
-#### 1. Deterministic Cohort (7 items: `nr-001`, `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014`, `vr-032`)
-- Run first-party solver test suite: generate `solverExecutionEvidence` JSON for each item, binding derivation hashes.
-- Run automated plagiarism and originality web/corpus scan on the word problem stems.
-- Resolve NR-023 difficulty rating (Medium vs Challenging).
-- Compile Class A evidence bundles.
-
-#### 2. Discrete Verbal Cohort (2 items: `vr-001`, `vr-016`)
-- Prepare answer-withheld review packet for VR-001 and VR-016.
-- Execute authenticated Google Gemini 1.5/2.5 Pro API review calls to complement the existing ChatGPT review.
-- Verify 100% agreement on correct option keys and single defensible answer.
-- Resolve VR-001 difficulty rating (Medium vs Easy).
-- Secure human SME rubric evaluation from curriculum educator.
-- Compile Class B evidence bundles.
-- *(Alternative: If owner prefers zero external API overhead, re-author 2 fresh vocabulary items under standard Phase 1 tooling).*
-
-#### 3. Reading Comprehension Cohort (3 items: `rc-001`, `rc-002`, `rc-003`)
-- **Option A (Legacy Admission):**
-  * Submit full text of Maya & Grandfather Mangrove Estuary passage to plagiarism detection index (Google Books, academic corpora). Confirm 0% verbatim match.
-  * Execute Google Gemini API review on rc-001, rc-002, and rc-003.
-  * Obtain human SME cultural/curriculum evaluation.
-- **Option B (Recommended Clean-Sheet Re-Authoring):**
-  * Author 1 fresh, original Year 6 reading passage and 3 derived questions directly in factory using verified tooling (`kind: "generated"`, version 1).
-  * Run standard external different-provider review.
-  * Retire the legacy unverified reading draft.
+1. PR #73 stays draft and untouched throughout. No agent modifies it.
+2. No gate is skipped, and no intermediate state is assumed.
+3. Phases are strictly separated, and each ends with a reviewable artefact.
+4. Any step that cannot be completed truthfully stops the sequence and is reported, rather than being approximated.
 
 ---
 
-### Phase 2d: Controlled Admission & Approval Signing
+## 2. Phase 2a — policy adoption (this PR)
 
-1. **Execute Truthful Intake:**
-   Run `npm run questions:import-legacy` against the pinned sample manifest (`sample-import-manifest.json`). This creates genuine factory candidate records in `intake_pending` status without fabricating generation fields.
-2. **Execute Governed Admission:**
-   Run `npm run questions:admit-legacy` for each qualifying item, attaching its verified evidence bundle. The tool transitions candidates to `legacy_exception_approved` and appends entries to `content/legacy-provenance-ledger.json`.
-3. **Generate Authenticated Human Approval Sheets:**
-   Generate approval files in `content/publication-approvals/` binding the exact `publicationContentHash` of each admitted candidate.
-4. **Owner Commit Signature:**
-   The repository owner signs the approval commit using their registered GPG/SSH key.
+Documentation only. The owner reviews ADR-017 and the specification and decides whether to adopt the narrow deterministic route.
+
+The ADR stays `PROPOSED` until the owner records a decision. Adopting it authorises design work; it authorises no behaviour change.
+
+**Exit:** a recorded owner decision, or a request for further change.
+
+## 3. Phase 2b — security prerequisites
+
+These gate everything after them, and neither is designed yet.
+
+**2b-1 Approval authentication.** Signer registry and its protection; canonical signed payload binding candidate, content hash and decision; approval-to-commit binding; key lifecycle. Requires branch protection on `dev` that does not currently exist — today `dev` has no rulesets, requires zero approving reviews, and does not enforce protections for admins.
+
+**2b-2 Durable legacy-origin ledger.** Tracked, tamper-evident state binding candidate hashes to their import transaction, resolving the untracked-workspace problem Phase 1 recorded.
+
+Each is its own design, review and implementation PR.
+
+**Exit:** both merged and validated, or the programme stops here.
+
+## 4. Phase 2c — solver coverage
+
+Per `solver-coverage.md`: five of the seven already have first-party recompute. Add a registry entry and attested skill for `nr-001`. Decide whether to build a non-numeric deterministic attestation category for `vr-032` or defer it.
+
+**Exit:** a known, recorded correctness route for each in-scope candidate.
+
+## 5. Phase 2d — admission gate implementation
+
+Implement the new predicate, the staging and manifest changes, and the adversarial suite in `gate-and-test-changes.md`. `isProductionGradeIndependentReview` is not modified. The PR #74 allow-list is not reopened.
+
+**Exit:** full CI green, including the refusal cases proving the Phase 1 hold still holds for all 12 candidates in their current state.
+
+## 6. Phase 2e — evidence collection
+
+For in-scope candidates only, and only after 2b–2d:
+
+1. Produce first-party recompute evidence bound to exact hashes.
+2. Run a bounded originality search per candidate and record the result, including matches, uncertainty or coverage gaps. A non-clean result stops that candidate.
+3. Record an age-suitability and curriculum judgement from a named reviewer.
+4. Attach the existing manual review as advisory, labelled.
+
+**Exit:** a complete bundle per candidate, or a recorded reason it could not be completed.
+
+## 7. Phase 2f — intake and admission
+
+1. Run `npm run questions:import-legacy` against the pinned manifest to create truthful intake records with unverified original generation. This is an intake transaction, not an eligibility event.
+2. Run the admission tool with each bundle and its approval.
+3. Owner signs the approval commit under the Phase 2b design.
+
+No step here fabricates a generation field, and no step changes question content.
+
+## 8. Phase 2g — what happens next is a separate decision
+
+At this point some candidates may be eligible. Three distinct decisions remain, each the owner's and each separate:
+
+1. Whether to release anything at all from a partially eligible sample.
+2. If so, what that release actually is — and specifically whether a subset is an acceptable product, given section 0.
+3. Whether PR #73 merges, and in what form.
+
+The honest default is that PR #73 remains draft until the deferred Class B and C items have a path, because the sample was designed as twelve items across four subjects.
 
 ---
 
-### Phase 2e: Staging, Release Verification & PR #73 Merge
+## 9. Current blockers, in order
 
-1. Run `npm run questions:stage` — verify all admitted legacy candidates pass the newly implemented Phase 2 staging gate.
-2. Run `npm run build`, `npm run test:ci`, `npm run content:verify-publication`.
-3. Verify that the scholarship sample release identities can now be safely re-pinned in `src/server/admin-review.ts`.
-4. Merge PR #73 into `dev`.
+| # | Blocker | Owner |
+|---|---|---|
+| 1 | ADR-017 not adopted | Repository owner |
+| 2 | Approval authentication not designed; `dev` branch protection absent | Security design + owner |
+| 3 | Legacy-origin ledger not designed | Security design |
+| 4 | `nr-001` and `vr-032` have no first-party recompute entry | Engineering |
+| 5 | No originality search process or engine selected | Owner + engineering |
+| 6 | No named SME engaged for age-suitability | Owner |
+| 7 | Class B and C deferred; no funded provider API access | Owner (procurement) |
+
+Nothing downstream of blocker 1 should begin until it clears.

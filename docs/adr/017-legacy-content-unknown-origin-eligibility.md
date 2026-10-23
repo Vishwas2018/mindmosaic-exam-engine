@@ -1,123 +1,92 @@
-# ADR-017: Governed Admission of Legacy Content with Unknown Original Authorship
+# ADR-017: Deterministic-only admission route for legacy content with unknown original authorship
 
-- **Status:** proposed
+- **Status:** PROPOSED — not adopted, not authorised, not implemented
 - **Date:** 2026-10-23
-- **Spec:** `docs/spec/legacy-content-unknown-origin-policy.md` (superseding Phase 1 staging/publication holds for qualifying records)
-- **Phase:** 2 (Legacy Content Governance Programme)
+- **Supersedes within this programme:** the withdrawn first draft of this ADR (see `docs/reviews/legacy-content-provenance-phase2/README.md`, "Withdrawn material")
+- **Spec:** `docs/spec/legacy-content-unknown-origin-policy.md`
+- **Phase:** 2a (policy only)
 
 ## Context
 
-Phase 1 (`docs/spec/legacy-content-provenance-phase1.md`, merged via PR #74 at `714ad64155b3ba3109695bf44c3d14ab7473da4c`) established a strict, fail-closed schema and repository-import mechanism for legacy content (`kind: legacy_import`, provenance version 2). Under Phase 1:
-- `generatorAdapter` is `{ class: "legacy_import", identity: null }`.
-- `originalGeneration` is explicitly `{ status: "unverified", provider: null, model: null, prompt: null, promptHash: null, generatedAt: null, candidateGenerationEvent: null }`.
-- Repository source provenance (Git commit, path, blob SHA, raw question hash, candidate hash, publication content hash, blueprint binding, review packet binding) is immutably recorded and cryptographic preflight passes (e.g. for the 12 sample scholarship candidates in PR #73).
-- **Current Hold:** Because original authorship cannot be determined, `isProductionGradeIndependentReview` (`src/features/question-factory/provenance/evidence.ts`) cannot evaluate `identitiesAreIndependentForJudgementReview` (`docs/REVIEW_INDEPENDENCE_POLICY.md`). Consequently, `orchestrateStaging` (`src/features/question-factory/staging/orchestrate-staging.ts`) and `validatePublicationSource` (`src/features/question-factory/publication/manifest-schema.ts`) fail-closed and strictly refuse any legacy record (`legacy_import_staging_refused`, `legacy_import_publication_refused`).
+Phase 1 (`docs/spec/legacy-content-provenance-phase1.md`, merged by PR #74 at `714ad64155b3ba3109695bf44c3d14ab7473da4c`) established a truthful, fail-closed representation for legacy content: `kind: legacy_import`, provenance version 2, `generatorAdapter: { class: "legacy_import", identity: null }`, and an `originalGeneration` block recording `status: "unverified"` with provider, model, prompt, prompt hash, generation timestamp and generation event all null.
 
-The 12 sample Year 6 Scholarship items in PR #73 (`dcb60a80f3f6eabdb522b20202929d2e3f328a94`) have verified Git history dating back to commits `458c6f86` and `14b1d922`, but lack original LLM API execution logs, request IDs, or authenticated generation prompts (`docs/reviews/scholarship-sample-2026-10-22/provenance/source-register.json`).
+Phase 1 then refused these candidates everywhere: independent-review clearance, staging, publication eligibility, publication replay, manifest validation and bank assembly. The Phase 1 specification is explicit that this blanket refusal is "a conservative implementation boundary, not approval of a new unknown-origin review policy", and that any future eligibility route "needs a separately reviewed governance decision and implementation".
 
-The question before the repository owner is: **May legacy content with unknown original authorship ever become eligible for staging and publication, and under what conditions?**
+This ADR is that governance decision, deliberately scoped as narrowly as the evidence supports.
+
+Two facts constrain what can honestly be proposed today.
+
+**Original authorship is unknown and will remain unknown.** The 12 Year 6 Scholarship sample candidates in PR #73 (`dcb60a80f3f6eabdb522b20202929d2e3f328a94`) have verified Git lineage but no original generation execution record. `docs/reviews/scholarship-sample-2026-10-22/provenance/source-register.json` classifies all 12 as UNVERIFIED. Nothing in this ADR changes that, and no field anywhere may be populated to suggest otherwise.
+
+**No authenticated external provider review exists, for any provider.** Both API attempts recorded in PR #73 failed before producing a review: Google returned `404` (`gemini-2.5-pro` no longer available to new users) and then `402` (`RESOURCE_EXHAUSTED`, prepayment credits depleted); OpenAI returned `429` (`insufficient_quota`, `credit_balance_exhausted`) for `gpt-5.4`. The only completed external review is the manual ChatGPT pass, which `review-summary.json` itself classifies as `manual_user_attested` with "missing authenticated server API envelope, HTTP headers, request ID, and cryptographic transport bindings". Any policy whose admission route depends on obtaining a provider API review is, today, a policy that admits nothing.
 
 ## Decision
 
-The repository adopts a **Differentiated Governed Admission Model** based on content classification and decoupled evidence dimensions. Unknown-origin content is **not** treated as a single homogeneous pool, and is never granted a blanket waiver.
+Adopt a **single, narrow, explicitly named admission route for deterministically verifiable content only**, and leave every other category at the Phase 1 hold.
 
-### 1. Separation of Content Classifications
+### 1. Scope: seven candidates, Class A only
 
-Legacy candidates MUST be assigned to exactly one of three governance classifications:
+The route applies to content whose correct answer is recomputable by a first-party algorithm from the stated prompt, independently of the candidate's own declared working:
 
-1. **Class A — Deterministically Verifiable Reasoning & Mathematics:** Content whose logical correctness, single defensible answer key, distractor falsehood, and computational steps are conclusively provable by pure first-party algorithmic solvers without subjective interpretation.
-   - *Scope:* Numerical reasoning series, arithmetic/algebraic word problems, directed number operations, percentages/rates, and formal propositional sentence logic.
-   - *Sample items:* `scholarship-y6-nr-001`, `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014`, `vr-032`.
+`scholarship-y6-vr-032`, `scholarship-y6-nr-001`, `scholarship-y6-nr-022`, `scholarship-y6-nr-023`, `scholarship-y6-maths-004`, `scholarship-y6-maths-007`, `scholarship-y6-maths-014`.
 
-2. **Class B — Judgement-Based Verbal & Conceptual Reasoning:** Content whose correctness, distractor defensibility, linguistic nuance, and curriculum calibration cannot be proven by pure computation, but instead rely on human or semantic evaluation.
-   - *Scope:* Verbal analogies, vocabulary/synonyms/antonyms, contextual sentence completion, and discrete verbal reasoning.
-   - *Sample items:* `scholarship-y6-vr-001`, `vr-016`.
+Judgement-based verbal reasoning (`vr-001`, `vr-016`) and the reading-comprehension passage and its items (`rc-001`, `rc-002`, `rc-003`) are **DEFERRED**. They are not retired, not rewritten and not altered. See `docs/reviews/legacy-content-provenance-phase2/deferred-class-b-c-register.md`.
 
-3. **Class C — Literary Passages & Cultural/Originality Sensitive Content:** Extended reading passages, stimulus texts, creative scenarios, or culturally sensitive narrative depictions.
-   - *Scope:* Reading comprehension passage stimuli and questions derived directly from passage nuance.
-   - *Sample items:* `scholarship-y6-rc-001`, `rc-002`, `rc-003` (and their shared estuary passage).
+### 2. The route is named for what it proves, and only that
 
----
+The route is `deterministic_legacy_admission`. It establishes **recomputed correctness**. It does not establish authorship, review independence, originality or copyright position, and it must never be recorded, named or surfaced as if it did.
 
-### 2. Policy by Classification
+Concretely: `isProductionGradeIndependentReview` is **not** modified, and must not be made to return `true` for any candidate whose generator identity is null. Unknown-origin candidates admitted under this route carry `independentReviewStatus: "not_established_unknown_origin"` permanently. The different-provider rule in `docs/REVIEW_INDEPENDENCE_POLICY.md` is untouched.
 
-#### Clause 2.1: Class A Admission via Deterministic Mathematical Proof
-For Class A content, correctness is decoupled from authorship provenance. A Class A candidate MUST NOT be required to satisfy the different-provider review rule, as mathematical proof provides superior epistemic certainty over LLM consensus.
-A Class A candidate MAY be admitted to the factory and cleared for staging and publication IF AND ONLY IF all of the following conditions are met:
-1. **Deterministic Execution:** A certified first-party TypeScript solver runs in test isolation and confirms the exact correct answer and disproves all distractors.
-2. **Originality & Plagiarism Scan:** Automated n-gram and web-search audit confirms the item is original and not copied from official NAPLAN, ICAS, ACER, textbook, or competitor commercial papers.
-3. **External Blind Validation:** At least one external blind model evaluation confirms question clarity, single defensible answer, and age appropriateness.
-4. **Human Attestation & Sign-off:** A qualified human editor confirms curriculum alignment and difficulty, and the repository owner provides an authenticated cryptographic approval.
+This is consistent with that policy's existing reasoning, which already holds that deterministically computable content "never reaches this rule — its correctness gate proves it outright and no semantic review is required". The gap Phase 2 closes is not in the independence rule; it is that Phase 1 refused deterministic legacy content for implementation safety rather than on principle.
 
-#### Clause 2.2: Class B Admission via Multi-Provider Orthogonal Consensus
-For Class B content, correctness relies on semantic judgement. Because the original generator provider is unknown, an automated check of `provider !== reviewer.provider` cannot guarantee independence (as the unknown generator might have been the same model family as the reviewer).
-Therefore, Class B content MUST NOT be admitted on a single external review.
-A Class B candidate MAY be admitted IF AND ONLY IF:
-1. **Multi-Provider Orthogonal Consensus:** The item receives independent blind reviews from **at least two distinct, non-affiliated commercial foundation model providers** (e.g. OpenAI GPT-4o AND Google Gemini 1.5/2.5 Pro). Both providers MUST reach 100% agreement on:
-   - The identical correct option.
-   - `singleDefensibleAnswer: true`.
-   - Verdict `PASS` with no unaddressed ambiguity warnings.
-2. **Qualified Human Subject-Matter Expert (SME) Editorial Review:** An authenticated human educator or editorial specialist conducts an explicit rubric review verifying distractor strength, age appropriateness, vocabulary level, and unambiguous key defensibility.
-3. **Originality Scan:** Verified zero-overlap against public and proprietary question corpuses.
-4. **Fallback:** If dual-provider consensus or human SME sign-off cannot be achieved, the item MUST NOT be admitted and MUST be retired or genuinely re-authored under Clause 2.4.
+### 3. Required evidence
 
-#### Clause 2.3: Class C Admission via Rigorous Copyright/Originality Clearance
-Because MindMosaic maintains an uncompromised **Originality Guarantee** (AGENTS.md), literary passages and narrative stimuli carrying unknown generation provenance present significant copyright, training data memorisation, and cultural sensitivity risks.
-A Class C stimulus and its derived questions MAY be admitted IF AND ONLY IF:
-1. **Comprehensive Plagiarism & Text Ingestion Audit:** The complete text undergoes automated multi-engine web search, academic corpus search, and published book database searching with zero verbatim or substantive matches.
-2. **Cultural Sensitivity & Age-Suitability Sign-off:** Human editorial review confirms the passage depicts individuals, cultural practices, and historical/geographical contexts accurately and respectfully.
-3. **Dual External Model Consensus:** All derived comprehension items pass dual external provider blind reviews per Clause 2.2.
-4. **Alternative / Recommended Default:** Due to the elevated risk profile of literary stimuli, genuine **Clean-Sheet Re-Authoring** (Clause 2.4) is strongly recommended over legacy admission for reading comprehension passages.
+A Class A candidate MAY become eligible only when all of the following hold. Each is independently verifiable and fails closed when absent, malformed or stale:
 
-#### Clause 2.4: Clean-Sheet Re-Authoring Pathway
-Where legacy admission criteria cannot be met, or where the cost of multi-provider external audits exceeds authoring effort:
-1. The legacy candidate is permanently retired from the active factory pipeline.
-2. A new candidate is generated from a governed blueprint using verified-generation tooling (`kind: generated`, provenance version 1), with recorded prompt, prompt hash, provider, model ID, and execution event.
-3. The new item follows the standard production review pipeline and different-provider rule.
-4. The legacy item's hash and retirement rationale are archived in the provenance ledger.
+1. **First-party recomputed correctness.** A registered first-party solver recomputes the answer from the prompt's own stated quantities, ignoring the candidate's `solverParams` and any sidecar constraint strings, and derives exactly the declared key. Hash-bound to the exact candidate revision.
+2. **Exact candidate and revision binding.** The evidence names the `rawQuestionHash`, `factoryCandidateHash` and `publicationContentHash` it was computed against. Any drift invalidates it.
+3. **Originality assessment.** A recorded, bounded assessment capable of returning a match, an uncertain result or a rejection (section 5 below).
+4. **Age-suitability and curriculum check.** A recorded human editorial judgement against the Year 6 scholarship standard.
+5. **Independently authorised human approval.** Subject to the separate security design requirement in section 6; until that requirement is met, no candidate is admissible.
 
----
+Advisory evidence — including the existing manual ChatGPT review — may be attached and must be labelled advisory. It is corroboration. It is not part of the admission test and cannot substitute for any of the five items above.
 
-### 3. Trust Boundary & Governance Invariants
+### 4. Phase 1 refusals stay active
 
-1. **No Synthetic Provider Injection:** The system MUST NOT fabricate a fake provider (such as `"unknown"` or `"legacy"`) to force an automated independence test to evaluate true. Generator identity remains strictly `null`.
-2. **Explicit Governance Route:** Admitted legacy candidates carry `governanceRoute: "legacy_exception_approved"`. They do not masquerade as standard generated items.
-3. **Authenticated Human Sign-off:** Sign-offs MUST NOT be unauthenticated strings in JSON (`"approvedBy": "Alice"`). Approvals MUST be cryptographically bound to the candidate's exact `publicationContentHash` via repository-committed GPG/SSH git signatures, an HMAC-signed approval ledger, or authenticated admin credentials.
-4. **Immutable Ledger:** Every legacy admission decision, whether admitted or retired, MUST be recorded in a tamper-evident audit ledger committed to Git.
+Nothing in this ADR relaxes any current gate. `orchestrateStaging`, `validatePublicationSource`, publication eligibility, replay and bank assembly continue to refuse `kind: legacy_import` exactly as they do today. The route described here becomes real only through a separately reviewed engineering change, authorised and validated on its own merits. Adoption of this ADR authorises design, not behaviour.
+
+In particular, the `legacy_import` generator class is **not** added back to the publishable allow-list that PR #74 introduced. An admitted candidate must be distinguishable from an unadmitted one by more than fields a single writer controls.
+
+### 5. Originality evidence must be able to fail
+
+Originality records a search, not a verdict about the world. The schema must be able to represent matches found, partial or uncertain matches, an inconclusive run, and an outright rejection. A record that can only express success is not evidence.
+
+No originality record may assert zero risk, originality as a fact, or copyright clearance. Copyright position is a legal determination and is out of scope for any tool in this repository. The honest claim has the form: *this engine, over this corpus, on this date, with this query set, returned these matches.*
+
+### 6. Approval authentication and the legacy ledger are separate security requirements
+
+Two controls are named in this programme and are **not** designed by this ADR:
+
+- **Approval authentication.** Git GPG/SSH signing is a plausible primitive, but signing alone is not authorisation. A usable design must specify signer trust (which keys, registered where, protected by what), the exact canonical payload the signature covers (candidate identity, publication content hash, decision), the binding between the approval artefact and the signing commit, and key lifecycle and revocation. Until all four are specified and reviewed, no claim of cryptographic authorisation may be made.
+- **Durable legacy-origin ledger.** A tamper-evident record of which candidate hashes originated in a legacy import transaction. Phase 1 recorded why this was not built: the importer's journal lives in the untracked factory workspace and the candidate record is consumed at publication.
+
+Each requires its own design, its own review and its own implementation PR. Neither is assumed to exist by this ADR, and no gate described here may depend on a control that has not been built.
+
+### 7. No content changes
+
+Answer keys, stems, options, explanations, passages, difficulty metadata, candidate hashes and publication hashes are unchanged for all 12 candidates. `vr-001` and `nr-023` retain `difficulty: medium`. Reviewer difficulty observations are recorded as observations and acted on only under explicit, separate owner instruction, because any such edit changes the content hashes and invalidates the bindings above.
 
 ## Consequences
 
-### What this makes easy
-- Enables 7 of the 12 scholarship questions (all 6 mathematics/numerical items and 1 formal logic item) to progress safely through deterministic verification without fabricating non-existent authoring logs.
-- Establishes a rigorous, defensible, auditable standard for admitting high-value legacy content while upholding the product's premium quality guarantee.
-- Provides a clear decision framework for educators, engineers, and repository auditors.
+- Seven candidates gain a defined, narrow, honest path to eligibility. Five keep their existing reviews as advisory evidence and move no further.
+- Two of the seven (`nr-001`, `vr-032`) do not yet have a first-party recompute entry and cannot satisfy requirement 3.1 without one. See `docs/reviews/legacy-content-provenance-phase2/solver-coverage.md`.
+- The programme stops depending on provider API availability, which has failed on every attempt so far.
+- `isProductionGradeIndependentReview` keeps a single, true meaning, so the distinction the 2026-07-30 audit relied on stays legible in stored data.
+- Admitting seven items does **not** authorise releasing a reduced version of the 12-question scholarship sample. The sample is a pinned set; a seven-item release is a different product decision requiring its own authorisation.
 
-### What this makes hard
-- Admitting judgement-based verbal and reading items requires executing external API calls across multiple competing AI providers (e.g. OpenAI and Google) and securing qualified human editorial review.
-- Requires building and maintaining an authenticated approval ledger and updating the factory staging and publication gates.
+## Alternatives considered
 
-### What this forbids
-- Forbids blanket waivers or arbitrary owner overrides lacking documented verification evidence.
-- Forbids admitting reading comprehension passages without verifiable originality/copyright clearance.
-- Forbids any agent or script from modifying a legacy record's provenance to simulate known-provider authoring.
-
-## Alternatives Considered
-
-1. **Option 1: Permanent Ineligibility for All Unknown-Origin Content:**
-   - *Rationale for Rejection:* Discards mathematically sound, deterministically provable, and pedagogically valuable questions purely due to missing local historical logs. Treats deterministic arithmetic identically to subjective literary text, which is epistemically unsound.
-
-2. **Option 2: Blanket Owner Waiver (Admitting All Content on Owner Discretion):**
-   - *Rationale for Rejection:* Completely breaches the repository's fail-closed governance model. Re-introduces the risk of unvetted distractor ambiguities, AI training-data hallucinations, or undetected copyright infringements entering the live published bank.
-
-3. **Option 3: Universal Re-Authoring of All 12 Items:**
-   - *Rationale for Rejection:* Unnecessarily wastes verified mathematical work and existing blind-review investments on items where deterministic correctness is already established beyond doubt. Re-authoring remains available as a surgical fallback where needed (e.g. for Reading passages).
-
-4. **Option 4: Fabricating an "Unknown" Provider Alias to Trick the Different-Provider Rule:**
-   - *Rationale for Rejection:* Strictly forbidden by MindMosaic Standing Rule #9 (Zero Fabrication). Manufacturing a dummy provider produces false-positive independence evaluations and corrupts data lineage.
-
-## Verification
-
-Conformity with this ADR is verified by:
-1. `npm run test:legacy-admission`: New automated test suite validating that legacy candidates lacking required classification-specific evidence fail staging and publication gates.
-2. `npm run questions:validate-ledger`: Ensures all legacy candidates in the factory are accounted for in the tamper-evident ledger.
-3. Cryptographic signature verification over `content/publication-approvals/` before release compilation.
+- **Permanent ineligibility.** Defensible, but discards content whose correctness is mechanically provable, for a reason (unknown authorship) that deterministic proof does not depend on.
+- **Universal re-authoring.** Rejected on current tooling. The only publishable generator class available for new AI-authored prose is `manual_external`, which the repository itself defines as "untrusted external-LLM/hand-written content ingested via the inbox workflow"; `live_provider` is marked "(future)" and is not implemented. Re-authoring today would substitute attested provenance for unknown provenance, not verified provenance for unknown provenance.
+- **Multi-provider consensus for judgement content.** Deferred rather than rejected. It has a real property — with reviewers from two distinct providers, at most one can share lineage with an unknown generator, so at least one lineage-independent review always survives — but it is corroboration, not verified independence, and no provider API call has yet succeeded. Revisit when funded API access exists.

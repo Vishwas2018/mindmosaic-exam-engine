@@ -1,102 +1,142 @@
-# Threat Model & Trust Boundary Analysis (Phase 2 Governance)
+# Threat model for the deterministic legacy admission route
 
-This document provides a formal security, integrity, and threat-boundary analysis for admitting legacy educational content with unknown generation provenance into the MindMosaic Question Factory.
+**Status:** analysis for the PROPOSED Phase 2a policy. Describes current code state and proposed future controls, and labels which is which throughout.
+
+A correction governs this document. The withdrawn first draft credited countermeasures to controls that do not exist in this repository. Every countermeasure below is marked **[built]**, **[proposed]** or **[not designed]**, and no threat is treated as mitigated by a control that has not been built.
 
 ---
 
-## 1. System Model & Assets at Risk
+## 1. Assets
 
-### 1.1 Assets
-1. **Student Exam Experience:** Accurate scoring, unambiguous question stems, fair distractors, and age-calibrated difficulty.
-2. **Product Originality Guarantee:** Complete absence of plagiarised or copyright-infringing content from official examinations (NAPLAN, ICAS, ACER) or commercial publishers.
-3. **Audit Trail Integrity:** Immutable, tamper-evident cryptographic chain connecting raw Git sources, factory candidates, review attestations, human approvals, and compiled publication manifests.
-4. **Platform Reputation:** Brand trust with parents, schools, and educational authorities regarding examination integrity.
+1. **Student exam experience** — accurate scoring, unambiguous stems, fair distractors, calibrated difficulty.
+2. **Originality position** — absence of material reproduced from official papers (NAPLAN, ICAS, ACER), textbooks or commercial publishers. Note this is a position maintained by process, not a guarantee established by a tool.
+3. **Audit trail integrity** — the chain from Git source through candidate, evidence, approval and published manifest.
+4. **Truthfulness of governance records** — that no record claims more than was established. The withdrawn draft is itself an instance of this asset being damaged.
 
-### 1.2 Trust Boundaries
+## 2. Trust boundaries
 
 ```
-[ UNTRUSTED / HISTORICAL ZONE ]
-- Historical local Git repositories, squashes, rebases
-- Local interactive LLM sessions (transcripts, unauthenticated chat exports)
-- Unverified generation prompts, lost database files
-                    |
-                    | (1. Ingestion Boundary: `questions:import-legacy`)
-                    v
-[ CONTROLLED INTAKE ZONE (Phase 1 Workspace) ]
-- `kind: legacy_import`, provenanceVersion: 2
-- `generatorAdapter.identity: null`, `originalGeneration.status: "unverified"`
-- Immutable content & packet SHA-256 bindings
-- Pinned import manifest & transaction journal
-                    |
-                    | (2. Admission Gate: Phase 2 Decoupled Policy)
-                    v
-[ VERIFIED FACTORY ZONE (Phase 2 Staging) ]
-- Deterministic solver proofs (Class A)
-- Multi-provider API consensus (Class B)
-- Plagiarism & originality scans (Class C)
-- Authenticated human approval signatures
-                    |
-                    | (3. Release Boundary: Publication Compiler)
-                    v
-[ PUBLISHED STUDENT-FACING BANK ]
-- Fail-closed runtime projection
-- Tamper-evident manifest entries with signed provenance
+[ UNTRUSTED / HISTORICAL ]
+  Local Git history, squashes, rebases; interactive LLM transcripts;
+  lost prompts and databases; unverifiable authorship claims
+            |
+            |  (1) Ingestion boundary - questions:import-legacy        [built]
+            v
+[ CONTROLLED INTAKE - Phase 1 ]
+  kind: legacy_import, provenanceVersion 2
+  generatorAdapter.identity: null, originalGeneration.status: unverified
+  Content and packet SHA-256 bindings; pinned manifest; transaction journal
+  Refused at review, staging, publication, replay and assembly
+            |
+            |  (2) Admission gate - deterministic recompute + evidence  [proposed]
+            v
+[ ADMITTED FOR DETERMINISTIC CORRECTNESS ]
+  Recomputed correctness only. Authorship still unverified.
+  Independence still not established.
+            |
+            |  (3) Release boundary - approval + ledger          [not designed]
+            v
+[ PUBLISHED BANK ]
 ```
 
----
-
-## 2. Threat Vectors & Countermeasures
-
-### Threat Vector 1: Generator Spoofing & Manifest Re-sealing
-- **Threat:** A developer or agent attempts to convert an unvetted legacy item into a standard item by modifying its JSON to read `kind: "generated"` and inventing a plausible provider (e.g. `"provider": "anthropic", "model": "claude-sonnet-5"`). If successful, the item would bypass legacy restrictions and slip through standard single-reviewer checks.
-- **Impact:** Critical. Subverts the governance hold; allows unverified content into production.
-- **Countermeasure (Defense-in-Depth):**
-  1. *Historical Intake Journal Check:* `src/features/question-factory/publication/manifest-schema.ts` checks the candidate's creation transaction against the factory immutable transaction log. Any hash created by a `legacy_import` transaction that appears in a publication manifest with `kind: "generated"` is rejected with `illegal_provenance_transmutation`.
-  2. *Schema Rejection of Unverified Fields:* The Zod schema for `generated` requires valid `candidateGenerationEvent`, positive integer `promptVersion`, and valid 64-char hex `promptHash`. These cannot be fabricated without triggering consistency verifiers.
+Boundary (3) does not exist. Nothing can cross it today, which is the intended state.
 
 ---
 
-### Threat Vector 2: Self-Review Collusion (Lineage Overlap)
-- **Threat:** An unknown-origin question was originally generated by Model X (e.g. Claude 3.5 Sonnet). An engineer or agent obtains a blind review from Model X (or a sibling model like Claude 3 Opus) and claims independent review clearance. Because both models share training lineage, common knowledge cutoffs, and syntactic biases, both agree on a subtly flawed distractor or inaccurate cultural assumption.
-- **Impact:** High. Flawed questions are certified as defensible.
-- **Countermeasure:**
-  1. *Null Identity Evaluation:* Under `docs/REVIEW_INDEPENDENCE_POLICY.md`, `identitiesAreIndependentForJudgementReview` returns `false` if either generator or reviewer identity is null or identical.
-  2. *Multi-Provider Orthogonal Requirement for Class B:* For judgement content, Phase 2 strictly mandates consensus from **at least two distinct commercial foundation model providers** (e.g. OpenAI GPT-4o AND Google Gemini). It is statistically improbable for models from two competing AI labs with separate architectures, datasets, and RLHF tunings to hallucinate the identical subtle error on a multiple-choice question.
+## 3. Threats
+
+### T1 — Provenance transmutation: relabelling legacy content as generated
+
+**Threat.** A writer edits a candidate to read `kind: "generated"` with a plausible provider, so it clears ordinary single-reviewer checks instead of the legacy hold.
+
+**Impact.** Critical. Defeats the entire governance hold.
+
+**Countermeasures.**
+- **[built]** The `generated` provenance schema requires a valid `candidateGenerationEvent`, a positive integer `promptVersion` and a 64-character hex `promptHash`. These cannot be supplied truthfully for unknown-origin content, and supplying them falsely is a Zero Fabrication violation rather than a technical bypass.
+- **[built]** `validatePublicationSource` enforces a generator-class allow-list (`deterministic_fixture`, `manual_external`, `live_provider`) and refuses absent or malformed attribution, per PR #74.
+- **[not designed]** A journal cross-check that refuses any candidate hash originating in a legacy import transaction from appearing as `generated`. **This does not exist.** Phase 1 recorded why: the importer's journal lives in the untracked factory workspace and the candidate record is consumed at publication. The withdrawn draft asserted this countermeasure as if implemented; it is not.
+
+**Residual risk.** A privileged writer who is willing to fabricate generation fields is not stopped by schema shape alone. This is the trust boundary PR #74 documented and did not close.
+
+### T2 — Lineage overlap in review
+
+**Threat.** The unknown original generator and a chosen reviewer share training lineage, so the reviewer ratifies a shared blind spot.
+
+**Impact.** High for judgement content.
+
+**Countermeasures.**
+- **[built]** `identitiesAreIndependentForJudgementReview` returns false when either identity is null. Placeholder identities (`unknown`, `unverified`, `legacy-unknown`) also fail. No alias workaround exists.
+- **[by design]** The Class A route does not rely on review at all. Deterministic recompute is not a judgement, so lineage overlap is not in its threat path. This is the main reason the route is restricted to deterministic content.
+- **[deferred]** Multi-provider corroboration for Class B. Its honest property is narrow: with reviewers from two distinct providers, at most one can share lineage with an unknown generator, so at least one lineage-independent review survives. That is corroboration, not established independence.
+
+**Correction to the withdrawn draft.** It claimed it is "statistically improbable" for models from two labs to make the identical error. That claim is unevidenced and is withdrawn. Models correlate strongly on common curriculum material through overlapping training data, and agreement on an easy item carries little information.
+
+### T3 — Memorised or reproduced source text
+
+**Threat.** An unverified generation prompt caused a model to reproduce copyrighted text, which then publishes.
+
+**Impact.** Severe legal and reputational exposure.
+
+**Countermeasures.**
+- **[by design]** Correctness evidence is explicitly decoupled from originality. A solver proof clears nothing about reproduction.
+- **[proposed]** A bounded originality search that records what it found, including matches, uncertainty and coverage gaps.
+- **[by design]** The three reading-comprehension items and their passage are deferred rather than admitted, so the highest-exposure material does not move.
+
+**Correction to the withdrawn draft.** It recommended re-authoring as eliminating this risk. Re-authoring does not eliminate it: a freshly generated passage can reproduce memorised text exactly as a legacy one can, and would have had no search run against it. The control that reduces this exposure is the search, which is needed either way.
+
+**Residual risk.** Non-verbatim structural reproduction is not detectable by n-gram search. Paywalled and print-only corpora are not searchable. Both are recorded in the search record rather than assumed away.
+
+### T4 — Ambiguous stems and defensible alternative answers
+
+**Threat.** A stem admits a second valid reading, so a correct student is marked wrong.
+
+**Impact.** High.
+
+**Countermeasures.**
+- **[built]** First-party recompute fails closed on `option_match_ambiguous` and on `prompt_givens_mismatch`, so a stem whose stated quantities do not match the solver's declared givens cannot pass.
+- **[evidenced]** This threat is not hypothetical here. `maths-014` was caught by exactly this path: the external review returned `REVISE` because the 5:3 ratio fixed only the combined sprinter and distance-runner count, leaving three options defensible. The stem was closed in `45b6cdab` and re-reviewed to `PASS`. Both records are retained.
+
+### T5 — Unauthenticated approval injection
+
+**Threat.** A script or compromised commit writes an approval file naming the owner, without the owner having reviewed anything.
+
+**Impact.** Critical. Defeats Standing Rule 8 entirely.
+
+**Countermeasures.**
+- **[not designed]** Signature verification against an authorised signer registry. `.github/allowed_signers` does not exist in this repository.
+- **[absent]** Branch protection that would make a signer registry meaningful. `dev` currently has no rulesets, `required_approving_review_count` is 0, and `enforce_admins` is disabled, so a writer could add their own key in the same change that uses it. A signer list the user of the key can edit is circular.
+
+**Current state.** Approvals are unauthenticated JSON with a display-name `approvedBy`. This threat is **open**, and it is the reason the admission bundle in `schemas.md` cannot validate into an admissible state.
+
+### T6 — Evidence drift between review and published content
+
+**Threat.** Evidence was produced against hash A; an edit produces hash B; the old evidence is reused.
+
+**Impact.** Moderate to high.
+
+**Countermeasures.**
+- **[built]** `verifyFirstPartyScholarshipAttestation` is hash-bound and returns `content_hash_mismatch` when content does not hash to the expected value.
+- **[proposed]** Every evidence component in the bundle carries `boundContentHash`, and a mismatch discards the component rather than reusing it.
+- **[policy]** Difficulty, stem, option, key and explanation edits are treated as new revisions requiring new evidence. This is why the two reviewer difficulty observations are recorded rather than applied.
+
+### T7 — Governance records that overstate what was established
+
+**Threat.** A governance document asserts evidence that the underlying records do not contain, and an owner decides on it. This is the failure that occurred in the withdrawn draft, where nine of twelve answer keys were misstated and two items misdescribed.
+
+**Impact.** High, and distinctive: it bypasses every technical control, because it corrupts the decision rather than the data.
+
+**Countermeasures.**
+- **[built here]** The reconciliation is generated mechanically from committed bytes by `reconcile.py`, which cross-checks source keys, review records, sidecar targets, preflight status and the owner-supplied mapping, and reports inconsistencies rather than repairing them.
+- **[proposed]** Any future per-candidate evidence table is generated from records, never transcribed.
+- **[proposed]** Evidence documents state their generator and inputs so a reviewer can re-run them.
+
+**Residual risk.** Prose claims around a generated table are still hand-written and still need adversarial review. This document included.
 
 ---
 
-### Threat Vector 3: Plagiarism & Training Data Memorisation
-- **Threat:** An unverified prompt instructed an LLM to generate "a scholarship reading passage about an estuary". The LLM memorised and reproduced a copyrighted passage from an Australian children's novel or past competition paper. The solver and LLM reviewers validate the question logic, but the published passage infringes copyright.
-- **Impact:** Severe legal, financial, and reputational liability.
-- **Countermeasure:**
-  1. *Decoupled Originality Dimension:* Correctness solvers explicitly DO NOT clear copyright.
-  2. *Mandatory Multi-Corpus Plagiarism Scan:* All stimulus passages must undergo automated similarity indexing across Google Books, Crossref, and web indices prior to admission.
-  3. *Policy Bias Toward Re-Authoring:* As specified in ADR-017, literary passages default to Pathway 4 (Clean-Sheet Re-Authoring) rather than legacy exception admission.
+## 4. Threats explicitly out of scope
 
----
-
-### Threat Vector 4: Distractor Ambiguity & False Keys
-- **Threat:** In mathematics word problems with ambiguous wording (such as `scholarship-y6-maths-014` before remediation, where "sprinters and distance runners" did not explicitly state that no athlete belonged to both groups), an alternative mathematically valid interpretation exists, confusing top scholarship students.
-- **Impact:** High. Destroys student confidence; produces false scoring.
-- **Countermeasure:**
-  1. *First-Party Deterministic Solvers:* Solvers must model and test boundary conditions and prove distractor invalidity.
-  2. *Answer-Withheld External Packet:* External reviewers solve the question blindly without seeing the intended key. If an external model derives an alternative answer or flags multiple defensible interpretations (as ChatGPT did on the un-remediated `maths-014`), admission is automatically blocked until the stem is mathematically closed.
-
----
-
-### Threat Vector 5: Unauthenticated Approval Injection
-- **Threat:** An untrusted script or compromised commit inserts `"approvedBy": "owner@mindmosaic.com"` into a publication approval JSON file without actual owner review.
-- **Impact:** Critical. Complete bypass of human gate (Standing Rule #8).
-- **Countermeasure:**
-  1. *Cryptographic Approval Schema:* Approval files must not rely on plain text strings.
-  2. *Git GPG/SSH Signature Verification:* The commit introducing the approval file must be signed by an authorised GPG/SSH key registered in the repository's `.github/allowed_signers` ledger.
-  3. *Pre-Commit & CI Verification:* The release gate `npm run content:verify-publication` cryptographically verifies signatures against the canonical public key before compiling the production bundle.
-
----
-
-### Threat Vector 6: Silent Drift between Advisory Reviews and Factory Candidates
-- **Threat:** An advisory review was conducted against Candidate Hash A. Subsequently, an engineer fixes a typo in the explanation or changes metadata, creating Candidate Hash B. The system reuses the review from Hash A.
-- **Impact:** Moderate to High. The reviewed text is not the published text.
-- **Countermeasure:**
-  1. *Content Hash Binding:* The review record binds the exact `candidateHash` and `publicationContentHash`.
-  2. *Strict Hash Comparison:* If the candidate's canonical hash does not match the review's `targetContentHash`, the review is declared stale (`stale_review_hash_mismatch`) and discarded.
+- Compromise of the owner's signing key or developer machine.
+- Malicious modification of the Git history by a repository administrator.
+- Correctness of the first-party solvers themselves, which are covered by their own unit tests.
+- Legal determination of copyright position, which no control here provides.
