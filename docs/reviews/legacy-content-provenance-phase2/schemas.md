@@ -139,6 +139,45 @@ Notes for reviewers:
 
 ---
 
+## 4a. Editorial interpretation check
+
+Added on independent review finding P1-2. This is the component that carries what the numeric recompute cannot reach, so each of its four judgements is recorded separately and each can fail on its own. A single overall "looks fine" boolean would reproduce the defect this record exists to catch.
+
+```ts
+const interpretationVerdictSchema = z.discriminatedUnion("verdict", [
+  z.object({ verdict: z.literal("affirmed"), notes: z.string().min(10) }),
+  z.object({ verdict: z.enum(["rejected", "uncertain"]), detail: z.string().min(10) }),
+]);
+
+export const editorialInterpretationCheckSchema = z.object({
+  reviewerIdentity: z.string().min(1),
+  reviewerRole: z.enum(["curriculum_specialist", "senior_examiner", "lead_editor"]),
+  reviewedAt: z.string().datetime(),
+  boundContentHash: z.string().regex(/^[0-9a-f]{64}$/),
+
+  /** The solver's reading, shown to the reviewer verbatim. A reviewer who was never
+   *  shown the interpretation cannot have affirmed it. */
+  solverInterpretationPresented: z.object({
+    solverIdentifier: z.string().min(1),
+    declaredGivens: z.array(z.number()),
+    statedModel: z.string().min(10),
+  }),
+
+  promptToSolverAssumptions: interpretationVerdictSchema,
+  exhaustiveness: interpretationVerdictSchema,
+  ambiguity: interpretationVerdictSchema,
+  alternativeDefensibleAnswers: z.object({
+    verdict: z.enum(["none_defensible", "alternatives_defensible", "uncertain"]),
+    optionIds: z.array(z.string().min(1)),   // non-empty whenever alternatives are defensible
+    detail: z.string().min(10),
+  }),
+});
+```
+
+Only `affirmed` on the first three, together with `none_defensible` on the fourth, can contribute to admission. `uncertain` rejects and requires adjudication; it is not a soft pass.
+
+`maths-014` is the worked example. Before `45b6cdab`, a conforming record would have had to report `exhaustiveness: rejected` and `alternativeDefensibleAnswers: { verdict: "alternatives_defensible", optionIds: ["c", "d", "e"] }` — while the recompute for the same revision returned a clean match. The schema must be able to hold that pair of facts simultaneously, because that pair is what actually happened.
+
 ## 5. Age-suitability and curriculum record
 
 ```ts

@@ -51,12 +51,45 @@ Boundary (3) does not exist. Nothing can cross it today, which is the intended s
 
 **Impact.** Critical. Defeats the entire governance hold.
 
+**Correction (independent review P1-1).** An earlier version of this section credited `knownCandidateProvenanceSchema` with three protections it does not have. It claimed the schema requires a valid `candidateGenerationEvent`, a positive integer `promptVersion` and a 64-character hexadecimal `promptHash`. **All three claims were false**, and they made the schema look like an authenticity control. It is not one. The corrected description below was read from `src/features/question-factory/provenance/candidate-provenance.ts` on this branch.
+
+**What the schema actually requires.**
+
+| Field | Actual rule | What the withdrawn claim said |
+|---|---|---|
+| `candidateGenerationEvent` | **Does not exist.** The identifier appears nowhere in `src/`. There is no generation-event field, mandatory or optional. | "requires a valid `candidateGenerationEvent`" |
+| `promptVersion` | `z.string().trim().min(1).max(40)` — any nonempty string up to 40 characters. `"x"` validates. | "a positive integer" |
+| `promptHash` | **Optional.** `z.string().trim().min(1).max(128)` when present — no hex character class, no length-64 constraint. `"not-a-hash"` validates. | "a 64-character hex `promptHash`" |
+| `contentHash` | `z.string().trim().min(1).max(128)` — also not validated as a hex digest. | not previously described |
+| `generatedAt` | `z.iso.datetime()` — required, and must parse as an ISO datetime. Any plausible timestamp satisfies it. | not previously described |
+
+Two further properties matter and were not previously stated. `knownCandidateProvenanceSchema` is **not** `.strict()` — only the legacy variant is — so unknown keys are stripped rather than rejected. And in the legacy record the generation-event field is named `event` (`originalGenerationUnverifiedSchema`, pinned to `z.null()`); `candidateGenerationEvent` is a key used by the PR #73 `source-register.json` evidence artefact, not by the factory schema.
+
+**Schema validation cannot authenticate historical generation.** This is the honest general statement, and it follows directly from the table. The schema constrains the *shape* of a provenance record. It has no access to the generation event, no transport evidence, no provider attestation and no way to distinguish a truthful record from a well-formed invented one. A writer who supplies `promptVersion: "v1"`, a plausible `generatedAt` and a plausible `contentHash` produces a record that validates completely. No amount of tightening the field types changes this: a regex on `promptHash` would force a 64-hex string, not a *true* one.
+
 **Countermeasures.**
-- **[built]** The `generated` provenance schema requires a valid `candidateGenerationEvent`, a positive integer `promptVersion` and a 64-character hex `promptHash`. These cannot be supplied truthfully for unknown-origin content, and supplying them falsely is a Zero Fabrication violation rather than a technical bypass.
-- **[built]** `validatePublicationSource` enforces a generator-class allow-list (`deterministic_fixture`, `manual_external`, `live_provider`) and refuses absent or malformed attribution, per PR #74.
+- **[built]** `validatePublicationSource` enforces a generator-class allow-list (`deterministic_fixture`, `manual_external`, `live_provider`) and refuses absent or malformed attribution, per PR #74. This is a real control, and it is the only built one on this path.
+- **[not a countermeasure]** Provenance schema validation. Recorded here explicitly so it is not credited again. It rejects malformed records; it does not reject false ones.
 - **[not designed]** A journal cross-check that refuses any candidate hash originating in a legacy import transaction from appearing as `generated`. **This does not exist.** Phase 1 recorded why: the importer's journal lives in the untracked factory workspace and the candidate record is consumed at publication. The withdrawn draft asserted this countermeasure as if implemented; it is not.
 
-**Residual risk.** A privileged writer who is willing to fabricate generation fields is not stopped by schema shape alone. This is the trust boundary PR #74 documented and did not close.
+**Residual risk — an open technical weakness at the trust boundary, not merely a policy violation.**
+
+The earlier text characterised fabrication as "a Zero Fabrication violation rather than a technical bypass". That framing is withdrawn. Describing the gap as a rule someone would have to break understates it: there is no technical control that the fabricating writer has to defeat, because the fields that would carry the evidence are unconstrained strings, optional, or absent from the schema entirely.
+
+Stated plainly, and treated as **OPEN**:
+
+1. A privileged writer can author a `kind: "generated"` provenance record for unknown-origin content that passes every schema check in the repository today.
+2. The same writer can re-seal the publication manifest so that the fabricated record's fingerprint is internally consistent. Manifest sealing confirms that the manifest matches the content it was sealed over; it does not confirm that the provenance *inside* that content is true.
+3. Nothing in the current pipeline compares a candidate hash against a record of how that candidate actually entered the repository, because no such durable record exists.
+
+Standing Rule 9 (Zero Fabrication) governs this conduct and is the reason it has not occurred. It is a policy, enforced by review and by the honesty of the writer. It is **not** a technical control, and this document must not present it as one.
+
+This weakness is why the two prerequisites in sections 6 and 7 of ADR-017 are prerequisites rather than enhancements, and both are retained unchanged:
+
+- **Authenticated approval** — so that an approval is bound to a key the writer cannot unilaterally register, closing (1) at the human-sign-off step.
+- **Durable legacy-origin ledger** — tracked, tamper-evident state binding candidate hashes to their import transaction, closing (3) and making (2) detectable at assembly.
+
+Neither exists. Until both do, this threat remains open, and the Phase 1 refusal of all `legacy_import` content is the only thing standing in its path.
 
 ### T2 — Lineage overlap in review
 
@@ -67,9 +100,15 @@ Boundary (3) does not exist. Nothing can cross it today, which is the intended s
 **Countermeasures.**
 - **[built]** `identitiesAreIndependentForJudgementReview` returns false when either identity is null. Placeholder identities (`unknown`, `unverified`, `legacy-unknown`) also fail. No alias workaround exists.
 - **[by design]** The Class A route does not rely on review at all. Deterministic recompute is not a judgement, so lineage overlap is not in its threat path. This is the main reason the route is restricted to deterministic content.
-- **[deferred]** Multi-provider corroboration for Class B. Its honest property is narrow: with reviewers from two distinct providers, at most one can share lineage with an unknown generator, so at least one lineage-independent review survives. That is corroboration, not established independence.
+- **[deferred]** Multi-provider corroboration for Class B. Its honest property is narrow: two reviewers from distinct providers are **stronger corroboration** than one. That is corroboration, not established independence, and the strengthening is not quantified.
 
-**Correction to the withdrawn draft.** It claimed it is "statistically improbable" for models from two labs to make the identical error. That claim is unevidenced and is withdrawn. Models correlate strongly on common curriculum material through overlapping training data, and agreement on an easy item carries little information.
+**Corrections.** Two claims previously made about multi-provider review are withdrawn.
+
+1. The withdrawn first draft claimed it is "statistically improbable" for models from two labs to make the identical error. Unevidenced, and withdrawn. Models correlate strongly on common curriculum material through overlapping training data, and agreement on an easy item carries little information.
+
+2. This document previously claimed that with two distinct providers "at most one can share lineage with an unknown generator, so at least one lineage-independent review survives". **Withdrawn on independent review finding P2-1.** The argument presupposes exactly the fact that is missing: that the original generator is a single identifiable model whose lineage can be compared against two others. For unknown-origin content nothing is known about the generator — not the provider, not the model, not whether one model or several were involved — so the overlap cannot be bounded at one, and no review can be shown to be lineage-independent. The phrasing also smuggled a guarantee ("always survives") into what is at best a probabilistic improvement of unknown size.
+
+**The surviving statement.** Reviews from two distinct providers are stronger corroboration than a single review. They do not establish independence, do not guarantee that any individual review is lineage-independent, and do not become an admission route by accumulation. Class B and Class C remain deferred, and this correction introduces no eligibility bypass for either.
 
 ### T3 — Memorised or reproduced source text
 
@@ -92,9 +131,33 @@ Boundary (3) does not exist. Nothing can cross it today, which is the intended s
 
 **Impact.** High.
 
+**Correction (independent review P1-2).** An earlier version of this section credited the first-party recompute with catching the `maths-014` ambiguity. It did not, and could not. The ambiguity was found by the **external advisory review**. Conflating a numeric proof with a semantic one is the specific error corrected here, and it matters because the whole admission route rests on the numeric proof.
+
+**What `verifyFirstPartyScholarshipAttestation` can establish.** Read from `correctness/scholarship-attestation.ts` on this branch:
+
+- The value computed by the registered solver, **under that solver's registered interpretation of the problem**, bound to an exact content hash.
+- That the set of numbers appearing in the prompt equals the set the solver declares as its givens — `prompt_givens_mismatch` otherwise.
+- That the computed value matches exactly one declared option — `option_match_ambiguous` when it matches more than one, `key_mismatch` when it matches none or the wrong one.
+
+**What it cannot establish.** That the prose stem permits only the solver's interpretation. This is not an implementation gap; it is outside what the mechanism does.
+
+Three properties of the implementation make the boundary concrete:
+
+1. **The solver runs on its own declared givens, not on the prompt.** The call is `entry.solve(entry.givens)`. The prompt is consulted only for the set-equality guard above.
+2. **The guard is set equality over numbers, so it is blind to relational language.** `nr-022` declares `givens: [8]`; the prompt's "three times as old" and "twice as old" are words, not digits. The entire relational structure of that problem is hard-coded in the solver and is never checked against the stem.
+3. **`option_match_ambiguous` detects option collision, not interpretive ambiguity.** It fires when one computed number matches two option *texts*. It cannot fire because two different readings of the stem are each defensible.
+
+**The `maths-014` evidence, correctly attributed.** The finding itself is preserved in full and is not re-litigated:
+
+- The **external advisory review** returned `REVISE`, recording that the 5:3 ratio fixed only the combined sprinter and distance-runner count, so a club with other athletes could total 130 or 140 — leaving options c, d and e all defensible. That record is `review-summary.json` → `flaggedItems`, retained unchanged.
+- The registered solver computes `(5 + 3) × 15 = 120`, which matched option `c` alone. Options were 100/110/120/130/140 — all distinct — so `option_match_ambiguous` could not fire. **The solver returned the same clean result before and after the fix.** It was not capable of surfacing the defect, and did not.
+- The stem was closed in `45b6cdab` by adding the exhaustiveness premise, which now reads: *"An athletics club contains only two groups, sprinters and distance runners, and every athlete belongs to exactly one group."* That corrected closure premise is preserved and must not be removed — it is what makes the solver's interpretation the only defensible one.
+- A fresh external review of the amended packet returned `PASS`. That record is preserved, with its own binding (see `source-evidence-reconciliation.md` section 2.1).
+
 **Countermeasures.**
-- **[built]** First-party recompute fails closed on `option_match_ambiguous` and on `prompt_givens_mismatch`, so a stem whose stated quantities do not match the solver's declared givens cannot pass.
-- **[evidenced]** This threat is not hypothetical here. `maths-014` was caught by exactly this path: the external review returned `REVISE` because the 5:3 ratio fixed only the combined sprinter and distance-runner count, leaving three options defensible. The stem was closed in `45b6cdab` and re-reviewed to `PASS`. Both records are retained.
+- **[built]** First-party recompute fails closed on `prompt_givens_mismatch`, `option_match_ambiguous`, `key_mismatch`, `content_hash_mismatch`, solver throw and non-finite result. These are real and they are load-bearing — for the arithmetic.
+- **[required, not built]** A separate qualified human editorial check, per candidate, covering what the solver cannot: whether the solver's assumptions are the stem's assumptions; whether the stated conditions are exhaustive; whether the stem admits a second defensible reading; and whether any non-keyed option is defensible under the stated information. This is a distinct requirement from the age-suitability and curriculum check, and is now recorded as such in the specification.
+- **[evidenced]** `maths-014` is the standing proof that this check is necessary and that the solver does not substitute for it.
 
 ### T5 — Unauthenticated approval injection
 

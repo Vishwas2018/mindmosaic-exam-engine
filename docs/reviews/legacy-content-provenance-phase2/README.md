@@ -51,6 +51,19 @@ Three further claims from the first draft are withdrawn as unsupported:
 
 The threat model's claim that cross-provider agreement makes identical error "statistically improbable" is also withdrawn as unevidenced.
 
+## Corrections from the first independent policy review
+
+An independent policy review of `63ec92fe` returned REQUEST CHANGES with two P1 and two P2 findings. All four are addressed, and each correction is recorded in place rather than quietly applied, so the re-reviewer can check the specific claim that was wrong.
+
+| Finding | What was wrong | Where the correction lives |
+|---|---|---|
+| **P1-1** | The threat model credited `knownCandidateProvenanceSchema` with three protections it does not have: a required `candidateGenerationEvent`, an integer `promptVersion`, and a 64-character hex `promptHash`. | `threat-model.md` T1 — corrected field-by-field against the real schema, with the privileged-writer fabrication and manifest re-sealing gap restated as an **open technical trust-boundary weakness** rather than a policy violation. |
+| **P1-2** | T4 credited the first-party recompute with catching the `maths-014` ambiguity. The external advisory review caught it; the solver returned an identical clean result before and after the fix. | `threat-model.md` T4; a new mandatory editorial interpretation check in the specification (section 4.2 component 4), ADR-017 section 3 requirement 2, `schemas.md` section 4a, and a per-question review of the five in-scope items in `solver-coverage.md` section 3a. |
+| **P2-1** | ADR-017 and T2 claimed that with two providers "at most one can share lineage", so "at least one lineage-independent review always survives". | ADR-017 alternatives, `threat-model.md` T2 — withdrawn. Two providers are stronger corroboration; they cannot guarantee lineage independence when the generator is unknown. Class B and C stay deferred and no bypass is introduced. |
+| **P2-2** | The reconciliation presented the original review summary's aggregate packet hash as if it bound both historical review events, and did not distinguish `packet-reviewed-original.json` from the current `packet.json`. | `reconcile.py` and both regenerated outputs — two separately bound review events, each hash independently recomputed from committed bytes; `source-evidence-reconciliation.md` sections 2.1 to 2.3. |
+
+No question content, answer key, difficulty value, hash or review record was altered by any of these corrections. Three facts surfaced during verification are recorded rather than repaired: the stale `targetPacket` filename in `review-summary.json` (section 2.2 of the reconciliation), the expected candidate-hash divergence on the two sidecar-bound items (section 2.3), and the weak prompt-to-solver binding on `nr-022` (`solver-coverage.md` section 3a.3).
+
 ## Verification
 
 - `source-evidence-reconciliation.json` is generated mechanically from PR #73 at `dcb60a80` plus the Phase 1 preflight. It cross-checks source keys, review records, sidecar targets, preflight status and original-generation status, and reports inconsistencies rather than repairing them. It found none.

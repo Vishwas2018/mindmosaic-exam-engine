@@ -70,6 +70,51 @@ To close, a decision is needed first: either extend attestation with a non-numer
 
 **Owner direction, 2026-10-23: deferred.** `vr-032` is held until a non-numeric deterministic attestation category is separately justified and independently reviewed. See `deferred-class-b-c-register.md` section 1.1.
 
+## 3a. Prompt-to-solver interpretation review of the five in-scope candidates
+
+Added on independent review finding P1-2, which required the five initial-scope questions to be checked for the same class of mismatch that `maths-014` exhibited: solver assumptions that the stem's language does not actually pin down.
+
+**No question content is altered by this review.** It is an analysis of the gap between prose and solver, recorded so that the mandatory editorial check (specification section 4.2 component 4) has a starting point. It is **not** that check, and does not discharge it: that check requires a named, qualified reviewer, which this analysis is not.
+
+### 3a.1 How the binding works, and where it is weak
+
+`verifyFirstPartyScholarshipAttestation` guards the prompt only by set equality: it parses the numbers appearing in the stem and requires that set to equal the solver's declared `givens`. It then runs `entry.solve(entry.givens)`. Relational language — "three times as old", "an additional discount", "only two groups" — contributes no digits and is therefore never compared to anything. **The strength of the binding is proportional to how much of the problem's structure is carried by numbers in the stem.**
+
+### 3a.2 Candidate by candidate
+
+| Candidate | Declared givens | Structure carried by the stem's numbers | Structure hard-coded in the solver | Residual exposure |
+|---|---|---|---|---|
+| `nr-022` | `[8]` | the 8-year interval only | both ratios (3×, 2×), which sibling is older, and that the comparison is of future ages | **highest of the five** |
+| `nr-023` | `[3, 2, 19, 2, 4, 18, 1]` | both equations' coefficients and totals, and the "1 notebook" target | the mapping of each number to notebooks, pens or dollars | low |
+| `maths-004` | `[2228, 15, -15]` | the summit height, the stated depth and its signed form | that "difference" means summit − signed elevation | low |
+| `maths-007` | `[160, 25, 10]` | price and both percentages | that the discounts apply sequentially, second off the sale price | low |
+| `maths-014` | `[5, 3, 30]` | both ratio parts and the gap | that the two groups exhaust the club | low **since** `45b6cdab` |
+
+### 3a.3 Findings
+
+**`nr-022` — materially weaker binding than the other four. Flagged for the editorial check, not for content change.**
+
+The stem is *"Marcus is currently three times as old as his sister Chloe. In 8 years, Marcus will be twice as old as Chloe will be then."* The solver declares `givens: [8]` and evaluates `3 × chloe + years === 2 × (chloe + years)`.
+
+Every structural fact — the factor 3, the factor 2, the direction of the comparison — lives in the solver's expression and appears in the stem only as the words "three times" and "twice". The set-equality guard compares `{8}` to `{8}` and passes. A stem edited to read "four times as old" would still present `{8}`, so the guard would still pass and the solver would still return 8, which is then the wrong answer silently.
+
+This is a **drift-detection weakness, not a correctness defect**: the committed stem and the solver do agree today, the key `e` (8) is correct, and the reconciliation confirms the external review derived the same answer. The exposure is that nothing mechanical would notice if they stopped agreeing. The editorial check must therefore affirm `nr-022`'s relational structure explicitly, and any future edit to its stem must be treated as invalidating the recompute even when the hash check happens to be satisfied.
+
+**`maths-004` — one genuine internal guard worth recording.** Its solver asserts `signed !== -below → throw`, so a stem whose parenthesised `(-15 m)` contradicted its stated "15 metres below sea level" would fail closed rather than compute. This is the only one of the five that cross-checks two stated quantities against each other. The remaining interpretive assumption — that "difference in elevation" means `summit − signed` — is pinned adequately by the prose, though option `a` (2213 m) exists precisely to catch a student who subtracts 15 instead.
+
+**`maths-007` — sequencing is pinned by the prose.** The solver applies 25% then 10% of the reduced price. The stem says *"an additional 10% discount off the sale price"*, which excludes the combined-35% reading that option `b` ($104) represents. Adequate as written; the editorial check should confirm the phrase survives any future edit.
+
+**`nr-023` — strongest binding of the five.** Six of the seven declared givens appear as digits in the stem, including both equations in full. The residual assumption is only which coefficient belongs to notebooks and which to pens, and the stem states that directly.
+
+**`maths-014` — adequate only because of the closure premise.** The exhaustiveness clause added in `45b6cdab` is doing the work that the solver's `(5 + 3) × unit` silently assumed. It must be preserved; removing it reopens the original defect without changing any hash the solver checks.
+
+### 3a.4 Consequence
+
+None of the five requires a content change, and none is proposed. Two points carry into the policy:
+
+1. The editorial check in specification section 4.2 component 4 is mandatory for all five, and `nr-022` additionally requires explicit affirmation of its relational structure.
+2. The claim "five of seven already satisfy the strongest form of the Class A correctness requirement" is true of the **numeric** requirement only. It was never a statement about interpretive soundness, and section 1.1 of this document should be read with that scope.
+
 ## 4. Consequence for the policy
 
 | Scope option | Candidates | Solver work required |

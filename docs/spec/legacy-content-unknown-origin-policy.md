@@ -23,12 +23,15 @@ Educational content governance fails when one kind of evidence is read as anothe
 
 | Dimension | Establishes | Explicitly does not establish |
 |---|---|---|
-| 1. Recomputed correctness | The declared key follows from the stated prompt; distractors do not | Who authored the item; originality; age-fit |
+| 1. Recomputed correctness | The declared key follows from the stated prompt **under the registered solver's interpretation of it** | That the prose admits only that interpretation; who authored the item; originality; age-fit |
+| 1a. Editorial interpretation check | That the stem's language permits only the solver's reading, and that no non-keyed option is defensible | Arithmetic correctness, which dimension 1 establishes |
 | 2. Authorship provenance | Provider, model, prompt, generation event | Whether the answer is correct; whether the text is original |
 | 3. Review independence | Reviewer shares no lineage with the generator | Authorship history; factual truth |
 | 4. Originality search | What a named engine found, over a named corpus, on a date | Originality as a fact; copyright clearance |
 
-**Non-transitivity is the operative rule.** For unknown-origin content, dimension 2 is permanently unavailable and dimension 3 therefore cannot be evaluated. This policy admits content on dimension 1 alone, with dimension 4 recorded as a bounded search and human judgement recorded separately. It does not infer 2 or 3 from 1.
+**Non-transitivity is the operative rule.** For unknown-origin content, dimension 2 is permanently unavailable and dimension 3 therefore cannot be evaluated. This policy admits content on dimensions 1 **and** 1a, with dimension 4 recorded as a bounded search and human judgement recorded separately. It does not infer 2 or 3 from 1.
+
+Dimensions 1 and 1a are listed separately because collapsing them is a known, evidenced failure. `maths-014` passed its numeric recompute cleanly while its stem still admitted three defensible answers; the defect was found by human review, not by the solver, and the solver's output was identical before and after the fix. A policy that treats a green recompute as a correctness verdict inherits that blind spot. See `docs/reviews/legacy-content-provenance-phase2/threat-model.md` T4.
 
 ---
 
@@ -97,7 +100,7 @@ No code path may read this route as independence, and no surface may describe an
 
 ### 4.2 Required evidence bundle
 
-All five components are mandatory. Any missing, malformed, unparseable or stale component evaluates to REJECT.
+All six components are mandatory. Any missing, malformed, unparseable or stale component evaluates to REJECT.
 
 **1. First-party solver execution.** A registered solver recomputes the answer. The recompute must read its inputs from the prompt and must not execute or trust `solverParams`, sidecar constraint strings or the candidate explanation. Records: solver identifier and version, the exact derived option id, the givens read from the prompt, unit handling, distractor evaluation, and the content hash the recompute was bound to.
 
@@ -105,9 +108,18 @@ All five components are mandatory. Any missing, malformed, unparseable or stale 
 
 **3. Originality assessment.** A bounded search record, per section 5.
 
-**4. Age-suitability and curriculum check.** A named human records a judgement on year-level suitability, syllabus mapping and distractor quality against the exact content hash.
+**4. Editorial interpretation check.** A named, qualified human reviewer records, against the exact content hash, a judgement on what the solver cannot reach:
 
-**5. Authorised human approval.** Per section 6. Not available today.
+- **Prompt-to-solver assumptions** — the solver's registered givens and its model of the problem are the ones the stem actually states. The reviewer is shown the solver's interpretation explicitly and must affirm or reject it.
+- **Exhaustiveness** — the stem's stated conditions close the problem, with no unstated population, category or constraint left open.
+- **Ambiguity** — the stem admits no second defensible reading.
+- **Alternative defensible answers** — no non-keyed option is defensible under the stated information.
+
+A `REVISE` or `not_suitable` outcome on any of the four rejects the candidate. This component is mandatory and is **not** satisfied by a passing recompute, by the advisory review of section 4.3, or by the age-suitability check below.
+
+**5. Age-suitability and curriculum check.** A named human records a judgement on year-level suitability, syllabus mapping and distractor quality against the exact content hash.
+
+**6. Authorised human approval.** Per section 6. Not available today.
 
 ### 4.3 Advisory evidence
 

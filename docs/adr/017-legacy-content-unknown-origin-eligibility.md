@@ -57,7 +57,7 @@ Judgement-based verbal reasoning (`vr-001`, `vr-016`) and the reading-comprehens
 
 ### 2. The route is named for what it proves, and only that
 
-The route is `deterministic_legacy_admission`. It establishes **recomputed correctness**. It does not establish authorship, review independence, originality or copyright position, and it must never be recorded, named or surfaced as if it did.
+The route is `deterministic_legacy_admission`. It establishes **recomputed correctness**. It establishes that under a registered first-party interpretation of the problem the arithmetic yields the declared key. It does not establish that the stem admits only that interpretation — that is requirement 2 of section 3, a separate human check — and it does not establish authorship, review independence, originality or copyright position. It must never be recorded, named or surfaced as if it did any of these.
 
 Concretely: `isProductionGradeIndependentReview` is **not** modified, and must not be made to return `true` for any candidate whose generator identity is null. Unknown-origin candidates admitted under this route carry `independentReviewStatus: "not_established_unknown_origin"` permanently. The different-provider rule in `docs/REVIEW_INDEPENDENCE_POLICY.md` is untouched.
 
@@ -67,13 +67,14 @@ This is consistent with that policy's existing reasoning, which already holds th
 
 A candidate inside the engineering scope of section 1.1 MAY become eligible only when all of the following hold. A candidate outside that scope is refused regardless of the evidence attached to it. Each is independently verifiable and fails closed when absent, malformed or stale:
 
-1. **First-party recomputed correctness.** A registered first-party solver recomputes the answer from the prompt's own stated quantities, ignoring the candidate's `solverParams` and any sidecar constraint strings, and derives exactly the declared key. Hash-bound to the exact candidate revision.
-2. **Exact candidate and revision binding.** The evidence names the `rawQuestionHash`, `factoryCandidateHash` and `publicationContentHash` it was computed against. Any drift invalidates it.
-3. **Originality assessment.** A recorded, bounded assessment capable of returning a match, an uncertain result or a rejection (section 5 below).
-4. **Age-suitability and curriculum check.** A recorded human editorial judgement against the Year 6 scholarship standard.
-5. **Independently authorised human approval.** Subject to the separate security design requirement in section 6; until that requirement is met, no candidate is admissible.
+1. **First-party recomputed correctness.** A registered first-party solver recomputes the answer from the prompt's own stated quantities, ignoring the candidate's `solverParams` and any sidecar constraint strings, and derives exactly the declared key **under that solver's registered interpretation of the problem**. Hash-bound to the exact candidate revision. This establishes the arithmetic and nothing about the prose; see requirement 2.
+2. **Editorial interpretation check.** A named, qualified human affirms, against the exact content hash, that the solver's assumptions are the stem's assumptions, that the stated conditions are exhaustive, that the stem admits no second defensible reading, and that no non-keyed option is defensible under the stated information. A recompute cannot supply this: `maths-014` passed its recompute identically before and after the fix that removed three defensible answers, and the defect was found by human review. See `docs/reviews/legacy-content-provenance-phase2/threat-model.md` T4.
+3. **Exact candidate and revision binding.** The evidence names the `rawQuestionHash`, `factoryCandidateHash` and `publicationContentHash` it was computed against. Any drift invalidates it.
+4. **Originality assessment.** A recorded, bounded assessment capable of returning a match, an uncertain result or a rejection (section 5 below).
+5. **Age-suitability and curriculum check.** A recorded human editorial judgement against the Year 6 scholarship standard.
+6. **Independently authorised human approval.** Subject to the separate security design requirement in section 6; until that requirement is met, no candidate is admissible.
 
-Advisory evidence — including the existing manual ChatGPT review — may be attached and must be labelled advisory. It is corroboration. It is not part of the admission test and cannot substitute for any of the five items above.
+Advisory evidence — including the existing manual ChatGPT review — may be attached and must be labelled advisory. It is corroboration. It is not part of the admission test and cannot substitute for any of the six items above. In particular it cannot substitute for requirement 2: the advisory review that found the `maths-014` defect was valuable precisely because a qualified human read the stem, and that function must be performed by an accountable, named reviewer inside the admission test rather than borrowed from an unauthenticated transcript.
 
 ### 4. Phase 1 refusals stay active
 
@@ -105,7 +106,7 @@ Answer keys, stems, options, explanations, passages, difficulty metadata, candid
 ## Consequences
 
 - Five candidates gain a defined, narrow, honest path to eligibility, and no new solver work is required for any of them. Six keep their existing reviews as advisory evidence and move no further.
-- `nr-001` is policy-eligible but out of scope until a genuine first-party registry entry and regression tests exist. `vr-032` is deferred with its eligibility open. Neither has a first-party recompute entry today, so neither can satisfy the requirement in section 3 item 1. See `docs/reviews/legacy-content-provenance-phase2/solver-coverage.md`.
+- `nr-001` is policy-eligible but out of scope until a genuine first-party registry entry and regression tests exist. `vr-032` is deferred with its eligibility open. Neither has a first-party recompute entry today, so neither can satisfy requirement 1 of section 3. See `docs/reviews/legacy-content-provenance-phase2/solver-coverage.md`.
 - Narrowing to five is itself a control: the first implementation touches only candidates whose correctness machinery already exists, so the admission gate is reviewed against working evidence rather than against solvers written to make the gate pass.
 - The programme stops depending on provider API availability, which has failed on every attempt so far.
 - `isProductionGradeIndependentReview` keeps a single, true meaning, so the distinction the 2026-07-30 audit relied on stays legible in stored data.
@@ -115,4 +116,4 @@ Answer keys, stems, options, explanations, passages, difficulty metadata, candid
 
 - **Permanent ineligibility.** Defensible, but discards content whose correctness is mechanically provable, for a reason (unknown authorship) that deterministic proof does not depend on.
 - **Universal re-authoring.** Rejected on current tooling. The only publishable generator class available for new AI-authored prose is `manual_external`, which the repository itself defines as "untrusted external-LLM/hand-written content ingested via the inbox workflow"; `live_provider` is marked "(future)" and is not implemented. Re-authoring today would substitute attested provenance for unknown provenance, not verified provenance for unknown provenance.
-- **Multi-provider consensus for judgement content.** Deferred rather than rejected. It has a real property — with reviewers from two distinct providers, at most one can share lineage with an unknown generator, so at least one lineage-independent review always survives — but it is corroboration, not verified independence, and no provider API call has yet succeeded. Revisit when funded API access exists.
+- **Multi-provider consensus for judgement content.** Deferred rather than rejected. Reviews from two distinct providers are **stronger corroboration** than one, and that is the whole of the claim. An earlier version of this ADR went further and asserted that at most one of two providers could share lineage with the unknown generator, so at least one lineage-independent review would always survive. **That assertion is withdrawn** (independent review finding P2-1): it is unsound when the original generation history is unknown. Nothing is known about which model, which provider, or how many of them produced the original content, so there is no basis for bounding the overlap at one. The original could have been produced by a model related to both reviewers, by an ensemble, or by a system whose lineage intersects both in ways no party can enumerate. Corroboration from two providers therefore **cannot guarantee a lineage-independent review**, and no count of agreeing providers converts corroboration into verified independence. Separately, no provider API call has yet succeeded. Revisit when funded API access exists.

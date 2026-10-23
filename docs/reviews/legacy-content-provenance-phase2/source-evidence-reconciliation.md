@@ -2,7 +2,8 @@
 
 **Status:** evidence record for the PROPOSED Phase 2a policy. No candidate is admitted, staged, published or approved.
 **Source of truth:** PR #73 at `dcb60a80f3f6eabdb522b20202929d2e3f328a94` (read-only; unmodified by this PR).
-**Machine output:** `source-evidence-reconciliation.json`, generated mechanically from committed bytes.
+**Machine output:** `source-evidence-reconciliation.json`, generated mechanically from committed bytes by `reconcile.py` in this directory.
+**Regenerated:** 2026-10-24, on independent review finding P2-2. Two consecutive runs produced byte-identical output.
 **Phase 1 preflight:** `docs/reviews/legacy-content-provenance-phase1/preflight-12.json`, manifest SHA-256 `13bdb8a4756cc123f18017555fef266c62ad523d3ca841cca655f5989e161dd6`.
 
 ---
@@ -25,9 +26,50 @@ This document is therefore generated, not written. Every value below is read fro
 | Solver sidecar target option matches source key (where present) | 12 of 12 |
 | `originalGeneration.status` is `unverified` | 12 of 12 |
 | Phase 1 preflight status | PASS for 12 of 12 |
+| Preflight vs PR #73 source-register: raw question hashes | 12 of 12 agree |
+| Preflight vs PR #73 source-register: publication content hashes | 12 of 12 agree |
+| Preflight vs PR #73 source-register: candidate hashes, under documented semantics | 12 of 12 agree |
 | **Inconsistencies reported** | **none** |
 
 The reconciliation script reports inconsistencies rather than repairing them. It found none, so no source question was altered and none needed to be.
+
+## 2.1 Review evidence bindings — two distinct events
+
+Added on independent review finding P2-2. The earlier version of this reconciliation carried a single `reviewEvidence` block whose `targetPacketSha256` came from the original review summary, and attached it to all twelve rows. That presented one aggregate packet hash as if it identified both historical review events. It does not, and the two events were bound to different packets.
+
+Every hash in this section was **recomputed here from committed bytes** by `reconcile.py` and then compared against the hash recorded in the committed evidence. All four comparisons agree.
+
+| | Event 1 — original advisory review | Event 2 — `maths-014` re-review |
+|---|---|---|
+| Scope | All 12 candidates, before remediation | `scholarship-y6-maths-014` only, after `45b6cdab` |
+| Evidence file | `external-review-chatgpt.json` | `external-review-maths-014.json` |
+| Evidence SHA-256 | `331e7f8a54a9b9bf…` | `89a7db747f162f9e…` |
+| Reviewed packet | `release-preparation/packet-reviewed-original.json` | `packet-maths-014.json` |
+| Packet SHA-256 | `c82c57d77f099f32…` | `1538048ffb0b04bc…` |
+| Manual attestation | none | `external-review-maths-014.attestation.json` |
+| Recorded model | `chatgpt-unversioned` | `unknown` (per the attestation) |
+| Status | `partial_review_remediation_pending` | `rereview_of_amended_item` |
+| Answer agreement | 12 of 12 agree with the declared key | agrees (`c`), verdict `PASS` |
+| Binding provenance | recomputed here; matches the committed claim | recomputed here; matches the committed claim |
+
+Only `maths-014` draws its answer from event 2. Its row additionally records `supersededPrimaryVerdict: "REVISE"` and `supersededPrimaryEventId: "original_advisory_review"`, so the superseded finding stays visible rather than being overwritten by the later `PASS`.
+
+### 2.2 `packet-reviewed-original.json` is not `packet.json`
+
+These are different files with different bytes, and conflating them would misstate what was reviewed:
+
+| File | SHA-256 | What it is |
+|---|---|---|
+| `release-preparation/packet-reviewed-original.json` | `c82c57d77f099f32…` | The bytes the original advisory review actually ran against, archived before remediation |
+| `packet.json` | `5bb764471c1d2aa5…` | The current packet, amended afterwards by the `maths-014` remediation |
+
+**Observation, recorded and not repaired.** The committed `review-summary.json` names its target as `"targetPacket": "packet.json"` while recording `targetPacketSha256: c82c57d7…`. That hash is the **archived original**, not the current `packet.json`. The recorded hash is therefore correct and the recorded filename is now stale, because the packet was amended after the review was performed. This reconciliation binds the event to the file whose bytes actually hash to the recorded value, and reports the naming discrepancy here. No review evidence was altered.
+
+### 2.3 Preflight hashes cross-checked against the PR #73 source register
+
+All 12 raw question hashes and all 12 publication content hashes agree between the Phase 1 preflight and the independent `source-register.json`.
+
+Candidate hashes agree for all 12 **under their documented semantics**, which differ for the two sidecar-bound items. For the ten `transformation: none` candidates the register's `currentCandidateHash` equals the preflight `factoryCandidateHash`. For `vr-032` and `nr-001`, whose transformation is `solver_sidecar`, the register records the **pre-transformation** value, which equals the preflight `rawQuestionHash`; the preflight's `factoryCandidateHash` is the post-binding value. A naive field-by-field comparison reports two mismatches on exactly these two items. That is the expected result of the sidecar binding, not an evidence defect, and `reconcile.py` now encodes the distinction so the check is mechanical rather than a matter of interpretation.
 
 ## 3. Per-candidate reconciliation
 

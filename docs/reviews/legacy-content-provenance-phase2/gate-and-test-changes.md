@@ -99,7 +99,7 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 
 19. A bundle with valid recompute must leave `isProductionGradeIndependentReview` returning `false`.
 20. A bundle with valid recompute must not set `originalGeneration.status` to anything but `unverified`.
-21. A bundle with valid recompute must not populate `provider`, `model`, `promptHash` or `candidateGenerationEvent`.
+21. A bundle with valid recompute must not populate `provider`, `model`, `promptHash` or `event` in `originalGeneration` — all are pinned to `z.null()` by `originalGenerationUnverifiedSchema`. (The field is named `event` in the factory schema; `candidateGenerationEvent` is the PR #73 `source-register.json` key for the same fact, and the two must not be confused.)
 22. Any attempt to record `independentReviewStatus` as established for a null-identity generator — refused.
 23. Advisory review entries must not satisfy any admission requirement, regardless of count or agreement.
 
