@@ -1,0 +1,16 @@
+{
+  "providerEndpoint": "https://generativelanguage.googleapis.com/v1beta",
+  "requestedModel": "gemini-2.5-pro",
+  "returnedModelVersion": null,
+  "responseId": null,
+  "startedAt": "2026-10-20T23:11:43.516Z",
+  "completedAt": "2026-10-20T23:11:44.257Z",
+  "httpStatus": 404,
+  "responseHeaders": {
+    "date": "Tue, 20 Oct 2026 23:11:43 GMT"
+  },
+  "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+  "requestFileSha256": "12e7e97372e3ac510649091be91ebaab15e2f4d8c56cae36b990a3567b4da2f2",
+  "responseSha256": "66dc6157963f8feb4a7bf9dc3e8ed06e6f49ed204819d58205c97cce57c3e924",
+  "transport": "Single stateless HTTPS generateContent request; no previous messages, keys or prior reviews in request"
+}

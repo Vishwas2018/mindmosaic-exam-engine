@@ -62,6 +62,26 @@ const validCandidateContent = {
   },
 };
 
+describe("amended Scholarship snapshot ingestion identity", () => {
+  it("preserves the reviewed maths-014 ID and rejects that identity for altered content", async () => {
+    const packet = JSON.parse(await readFile("content/scholarship-drafts/scholarship-y6-mathematics-draft.json", "utf8"));
+    const original = packet.questions.find((q: { id: string }) => q.id === "scholarship-y6-maths-014");
+    await dropInboxFile("reviewed.json", original);
+    await dropInboxFile("altered.json", { ...original, prompt: original.prompt + " Changed." });
+    await runManualIngestion(baseRequest(), repo);
+    const stored = await repo.read("generated", "scholarship-y6-maths-014") as ManualIngestedCandidateRecord;
+    expect(stored.question).toEqual(candidateQuestionSchema.parse(original));
+    expect(stored.provenance.contentHash).toBe("71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c");
+    expect(stored.state).toBe("generated");
+    expect(stored.provenance.reviewRecords).toEqual([]);
+    const files = await readdir(path.join(repoRoot, "generated"));
+    expect(files.filter(file => file.endsWith(".json"))).toHaveLength(2);
+    const alteredFile = files.find(file => file.endsWith(".json") && file !== "scholarship-y6-maths-014.json")!;
+    const altered = JSON.parse(await readFile(path.join(repoRoot, "generated", alteredFile), "utf8"));
+    expect(altered.candidateId).not.toBe("scholarship-y6-maths-014");
+  });
+});
+
 describe("resolveDeclaredIdentity", () => {
   it("resolves each of the three named sources without an explicit --model", () => {
     expect(resolveDeclaredIdentity({ source: "claude" })).toBeDefined();

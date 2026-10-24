@@ -199,7 +199,7 @@ export function ExamPatternStarter({
       <div className="border-b border-dashed border-royal/20 bg-[linear-gradient(145deg,#FFFFFF_0%,#F7F4FF_100%)] px-6 py-7 sm:px-8 sm:py-8">
         <Badge variant={asPracticeModule ? "purple" : "orange"}>
           <ListChecks aria-hidden="true" className="h-3.5 w-3.5" />
-          {asPracticeModule ? "Practice module" : "Full-length practice"}
+          {asPracticeModule || pattern.presentation === "practice_module" ? "Practice module" : "Full-length practice"}
         </Badge>
         <h2
           data-testid="pattern-sitting-label"
@@ -218,6 +218,11 @@ export function ExamPatternStarter({
       </div>
 
       <div className="px-6 py-7 sm:px-8 sm:py-8">
+        {pattern.id === "scholarship-y6-comprehensive-sample-module" && (
+          <p className="mb-6 text-sm leading-6 text-muted">
+            Original MindMosaic practice. The 18-minute duration is an authoring judgement and has not been validated with student timing data.
+          </p>
+        )}
         {asPracticeModule && (
           <p
             data-testid="reduced-module-notice"
