@@ -39,7 +39,7 @@ Adopting the ADR authorises design work. It authorises no behaviour change. Ever
 | `pr-73-migration-plan.md` | Sequence, blockers, and why a shortened sample is not authorised. |
 | `decisions-for-owner.md` | Live decisions, blocked decisions, and what adoption does not authorise. |
 | `owner-adoption-decision.md` | **The adoption record**: decision, date, reviewed commit, exact authorisation scope, independent review evidence, P2 follow-ups and Phase 2b workstreams. |
-| `phase2b-a0-branch-protection.md` | **Phase 2b A-0**: verified branch-protection state on `dev` and `main`, gap analysis against Workstream A, staged owner configuration plan and rollback. Assessment only — no setting changed. |
+| `phase2b-a0-branch-protection.md` | **Phase 2b A-0**: verified branch-protection, collaborator and CI state; gap analysis against Workstream A; staged owner configuration plan and rollback; the two approval trust models (GitHub PR approval vs revision-bound question approval) and a recommended architecture for the latter. Independent signer-registry protection is **BLOCKED** on there being a second trusted human. Assessment and design guidance only — no setting, workflow or registry changed. |
 
 ## Withdrawn material
 

@@ -151,7 +151,7 @@ Both are mandatory prerequisites. **No admission-gate implementation may bypass 
 
 | Element | Requirement |
 |---|---|
-| Protected signer authorisation | Which keys are authorised, where the registry lives, and how it is protected from modification by the same writer who uses it |
+| Protected signer authorisation | Which keys are authorised, where the registry lives, and how it is protected from modification by the same writer who uses it. **A-0 found this BLOCKED:** with one principal on the repository, no `CODEOWNERS` rule can name an independent owner, so the registry cannot be protected from its own user. A second trusted human is a prerequisite, not a detail |
 | Branch protection | A precondition, not a detail. Protection is enabled on `dev` and `main` and does block force-pushes and deletion, but both have no rulesets, require zero approving reviews and do not enforce protections for admins, so a signer registry is circular without it. Verified 2026-10-24 with administrator access; see `phase2b-a0-branch-protection.md` |
 | Canonical signed payload | The exact serialisation the signature covers, including candidate identity, publication content hash and the decision. An unconstrained signature field is satisfied by a signature over anything |
 | Commit binding | The approval record must name the signing commit, and the verifier must fetch deeply enough to see it |
@@ -170,7 +170,7 @@ Symmetric mechanisms (HMAC over a shared secret) are not acceptable: any party a
 
 ### Recommended execution order
 
-1. **A-0 — branch protection on `dev`.** Everything in workstream A is circular without it, so it goes first and is cheap. Assessed, with a verified gap analysis and a staged configuration and rollback plan, in `phase2b-a0-branch-protection.md`. **No setting has been changed.**
+1. **A-0 — branch protection on `dev`.** Everything in workstream A is circular without it, so it goes first. Assessed in `phase2b-a0-branch-protection.md`, with a verified gap analysis, a staged configuration and rollback plan, and the two approval trust models distinguished. **It is only partly cheap:** the settings portion is, but the part that makes a signer registry trustworthy — independent ownership of the self-authorisation paths — is **BLOCKED**, because the repository has exactly one principal with access (verified 2026-10-24) and so has nobody to name as an independent code owner. Administrator bypass is not an equivalent control. **No setting has been changed.**
 2. **A — authenticated approval architecture.** Design, independent review, then a separately authorised implementation PR.
 3. **B — durable legacy-origin ledger.** Independent of A and can run in parallel once A-0 lands, but sequence it after A if attention is limited: A gates requirement 6, which blocks every candidate, whereas B gates the integrity of an admission that cannot yet occur.
 4. **Phase 2c — `nr-001` registry entry and regression tests**, only if the owner wants it in scope. Unblocked by A and B, and may run in parallel.
