@@ -248,8 +248,8 @@
     "questionId": "roadmap-amc-y5-028",
     "revision": 1,
     "sourceFile": "content/roadmap-drafts/amc-y5-draft.json",
-    "sourceQuestionHash": "a2bd5e3e6f3ca2ff907ebbd1e1807981b4a4a0c53e0e6a65c1e2bb4cb41a76e3",
-    "contentHash": "2187d6acca5a265949bbd8be74ab68f0c70474f2d3f6996b1333f65a9c4dd5f8"
+    "sourceQuestionHash": "5743cf39b78815a617fda04d161c6e38f5724ba490dcef28689faa4b3f1a298a",
+    "contentHash": "28a4e4cc067cbfc7f47ede048c804ff6bf234906c64924e8f8b89604d99af3ab"
   },
   {
     "kind": "amc_draft_review_source",

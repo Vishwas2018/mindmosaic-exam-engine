@@ -579,7 +579,7 @@
       "type": "multiple_choice",
       "yearLevel": 3,
       "examStyle": "amc_style",
-      "prompt": "Four boxes have an average of 8 shells each. Three boxes contain 5, 7 and 10 shells. How many shells are in the fourth box?",
+      "prompt": "Four boxes contain some shells. If all the shells were shared equally among the four boxes, each box would have 8 shells. Three boxes actually contain 5, 7 and 10 shells. How many shells are in the fourth box?",
       "options": [
         {
           "id": "a",
@@ -603,7 +603,7 @@
         }
       ],
       "visuals": [],
-      "explanation": "The average gives the total in all four boxes. Subtract the three known counts.",
+      "explanation": "If the shells are shared equally, each of the 4 boxes has 8, so there are 4 × 8 = 32 shells altogether. The three known boxes hold 5 + 7 + 10 = 22 shells. The fourth box holds 32 - 22 = 10 shells.",
       "metadata": {
         "subject": "amc_mathematics",
         "strand": "Statistics & Chance",

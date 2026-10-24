@@ -1155,10 +1155,10 @@
       "type": "number_entry",
       "yearLevel": 5,
       "examStyle": "amc_style",
-      "prompt": "How many whole-number solutions are there to 3a + 5b = 30 when a and b may be zero?",
+      "prompt": "Counters are sold in bags of 3 and in bags of 5. Mia buys some bags to get exactly 30 counters. She may buy any number of each size of bag, including none of one size. Bags of the same size are identical, and the order in which she buys the bags does not matter. How many different combinations of bags could she buy?",
       "options": [],
       "visuals": [],
-      "explanation": "Try b = 0 to 6. Whole-number values of a occur for (a,b) = (10,0), (5,3) and (0,6), so there are 3 solutions.",
+      "explanation": "Try 0, 1, 2, 3, 4, 5 or 6 bags of 5. The counters left over must be made from bags of 3. With 0 bags of 5, she needs 10 bags of 3. With 3 bags of 5 (15 counters), she needs 5 bags of 3. With 6 bags of 5 (30 counters), she needs no bags of 3. With 1, 2, 4 or 5 bags of 5, the counters left over (25, 20, 10 or 5) cannot be made from bags of 3. So there are 3 combinations.",
       "metadata": {
         "subject": "amc_mathematics",
         "strand": "Patterns & Algebra",

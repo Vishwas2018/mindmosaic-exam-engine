@@ -6,6 +6,7 @@ import { ArrowLeft, BarChart3, Code2, MousePointerClick, Shapes } from "lucide-r
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge, Card, buttonClasses } from "@/components/ui";
+import { showcasePromptLayoutQuestions } from "@/content/questions/showcase-prompt-layout-fixtures";
 import {
   showcaseQuestions,
   showcaseVisuals,
@@ -210,6 +211,31 @@ export default function ShowcasePage() {
                 </Card>
               );
             })}
+          </div>
+        </section>
+
+        <section
+          className="site-width py-14 sm:py-18"
+          aria-labelledby="prompt-layout-title"
+          data-testid="showcase-prompt-layout"
+        >
+          <h2 id="prompt-layout-title" className="text-2xl font-black text-ink sm:text-3xl">
+            Prompt layout
+          </h2>
+          <p className="mt-1 text-sm text-muted">
+            The same multi-line prompt under two exam styles. Line breaks are kept for AMC-style questions only.
+          </p>
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {showcasePromptLayoutQuestions.map((question) => (
+              <Card key={question.id} className="p-6 sm:p-7" variant="default" data-testid={`prompt-layout-${question.examStyle}`}>
+                <h3 className="mb-4 text-lg font-black text-ink">{question.examStyle}</h3>
+                <ExamQuestion
+                  question={toCandidateQuestion(question)}
+                  answer={responses[question.id]}
+                  onAnswerChange={(answer) => setResponses((previous) => ({ ...previous, [question.id]: answer }))}
+                />
+              </Card>
+            ))}
           </div>
         </section>
 
