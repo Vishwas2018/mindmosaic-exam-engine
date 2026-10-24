@@ -169,7 +169,7 @@ Three properties of the implementation make the boundary concrete:
 - **[not designed]** Signature verification against an authorised signer registry. `.github/allowed_signers` does not exist in this repository.
 - **[absent]** Branch protection that would make a signer registry meaningful. `dev` currently has no rulesets, `required_approving_review_count` is 0, and `enforce_admins` is disabled, so a writer could add their own key in the same change that uses it. A signer list the user of the key can edit is circular.
 
-**Current state.** Approvals are unauthenticated JSON with a display-name `approvedBy`. This threat is **open**, and it is the reason the admission bundle in `schemas.md` cannot validate into an admissible state.
+**Current state.** Approvals are unauthenticated JSON with a display-name `approvedBy`. This threat is **open**, and it is the reason no admission bundle can reach an admissible state at the gate: the bundle may parse, but the approval condition in `gate-and-test-changes.md` section 3.2 has nothing to verify against.
 
 ### T6 — Evidence drift between review and published content
 
@@ -189,7 +189,8 @@ Three properties of the implementation make the boundary concrete:
 **Impact.** High, and distinctive: it bypasses every technical control, because it corrupts the decision rather than the data.
 
 **Countermeasures.**
-- **[built here]** The reconciliation is generated mechanically from committed bytes by `reconcile.py`, which cross-checks source keys, review records, sidecar targets, preflight status and the owner-supplied mapping, and reports inconsistencies rather than repairing them.
+- **[built here]** The reconciliation **JSON** is generated mechanically from committed bytes by `reconcile.py`, which cross-checks source keys, review records, sidecar targets, preflight status and the owner-supplied mapping, and reports inconsistencies rather than repairing them.
+- **[not built — an open instance of this very threat]** The reconciliation **markdown** is hand-transcribed from that JSON, and until review finding R4-P2-D it claimed to be machine-generated. Its tables were independently verified correct at `3b56e157`, but the control is a reviewer re-checking them, not a script. Generating them from `reconcile.py` is the durable fix and is not yet done.
 - **[proposed]** Any future per-candidate evidence table is generated from records, never transcribed.
 - **[proposed]** Evidence documents state their generator and inputs so a reviewer can re-run them.
 

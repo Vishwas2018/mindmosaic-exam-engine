@@ -14,7 +14,17 @@ The first Phase 2 candidate-impact analysis was withdrawn. It misstated the answ
 
 The underlying content was never wrong. The committed external review agrees with the committed answer key on all twelve candidates. The defect was confined to the withdrawn analysis, which restated evidence rather than deriving it.
 
-This document is therefore generated, not written. Every value below is read from committed bytes by `reconcile.py`, which re-reads the four draft files, the review records, the Phase 1 preflight and the source register, and cross-checks them against the owner-supplied verified key mapping. No value is transcribed by hand.
+**Correction (review finding R4-P2-D).** An earlier version of this paragraph said "This document is therefore generated, not written… No value is transcribed by hand." **That was false of this file.** `reconcile.py` ends in `json.dump(result, sys.stdout)` and emits **only** `source-evidence-reconciliation.json`; nothing in the repository generates this markdown. Its tables are hand-transcribed from that JSON.
+
+This matters more than a normal provenance slip. A hand-transcribed per-candidate table with nine wrong answer keys is precisely what caused the first draft to be withdrawn, and threat model T7 names transcription as the hazard to avoid. Claiming machine generation for a hand-written table removed the reader's reason to check it.
+
+The accurate position:
+
+- **`source-evidence-reconciliation.json` is machine-generated** by `reconcile.py` from committed bytes: the four draft files, the review records, the Phase 1 preflight and the source register, cross-checked against the owner-supplied verified key mapping. It is reproducible — consecutive runs are byte-identical and regeneration leaves the working tree clean.
+- **This markdown is hand-written narrative over that JSON.** Every figure in it is transcribed, not derived.
+- **The transcription was independently verified.** An independent reviewer machine-compared all 12 rows of both per-candidate tables against the JSON — skill, key, answer text, difficulty, review-derived key, agreement, all three hash prefixes, transformation and preflight status — and found zero mismatches at commit `3b56e157`.
+
+Treat any future edit to the tables below as requiring that comparison to be re-run. The durable fix is to have `reconcile.py` emit these tables; that is recorded as recommended work and is deliberately not done in this documentation-only change.
 
 ## 2. Reconciliation result
 
@@ -155,7 +165,7 @@ Any change requires explicit, separate owner instruction naming the candidate an
 
 This is unchanged by Phase 2 and is not changed by admission. A candidate admitted under `deterministic_legacy_admission` still carries `originalGeneration.status: "unverified"` and `independentReviewStatus: "not_established_unknown_origin"`.
 
-## 8. Reproducing this document
+## 8. Reproducing the JSON (this markdown is not reproduced by it)
 
 ```sh
 # from a worktree on this branch, with PR #73 fetched
@@ -163,3 +173,5 @@ python reconcile.py > docs/reviews/legacy-content-provenance-phase2/source-evide
 ```
 
 The script reads only `git show dcb60a80:<path>` and the committed Phase 1 preflight. It writes no factory record, contacts no network service and modifies no source question. Its `inconsistencies` array is the authoritative check: a non-empty array must be reported to the owner, never silently corrected.
+
+The command above regenerates **the JSON only**. This markdown is not an output of `reconcile.py` and is not reproduced by running it — see section 1. To check this document, compare its tables against the regenerated JSON field by field.

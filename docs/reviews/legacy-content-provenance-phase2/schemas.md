@@ -22,7 +22,9 @@ This repository computes **three different hashes over three different objects**
 | **D2 — factory candidate** | `factoryCandidateHash` | `hashJson(candidateQuestionSchema.parse(candidate))` | The factory candidate, including a solver sidecar where one is bound |
 | **D3 — publication projection** | `publicationContentHash` | `canonicalQuestionHash(buildPublishedQuestion(candidate).question)`, i.e. `hashJson(questionSchema.parse(published))` | The **published** question projection, a different schema shape from D2 |
 
-**D2 is the attestation domain.** `verifyFirstPartyScholarshipAttestation` computes `hashJson(question)` on the factory question and compares it to the `expectedContentHash` it is given. Its only production call site that supplies one is `publication/eligibility.ts`, which passes `provenance.contentHash`; the legacy provenance schema pins `contentHash === repositoryImport.candidateHash`. So a genuine recompute is always bound to **D2**, never to D3.
+**D2 is the attestation domain.** `verifyFirstPartyScholarshipAttestation` computes `hashJson(question)` on the factory question and compares it to the `expectedContentHash` it is given. Its only production call site that supplies an **externally recorded** expected hash is `publication/eligibility.ts`, which passes `provenance.contentHash`; the legacy provenance schema pins `contentHash === repositoryImport.candidateHash`, so that value is D2. `correctness/derive-answer.ts` also calls the attestation with `hashJson(question)` computed from the very object under test — self-consistent by construction, binding nothing external — and `publication/assemble-published-bank.ts` supplies no expected hash at all. So the only call that binds a recompute to a recorded hash binds it to **D2**, never to D3.
+
+*(Corrected on review finding R4-P2-A: an earlier version of this paragraph called `eligibility.ts` the only call site supplying an expected hash, which omitted `derive-answer.ts`. The D2 conclusion is unaffected.)*
 
 **D1 and D2 coincide for the five in-scope candidates** because none of them carries a solver sidecar. They diverge for `vr-032` and `nr-001`, whose `transformation` is `solver_sidecar`. Code must never rely on the coincidence.
 
@@ -239,12 +241,12 @@ export const publicationProjectionBindingSchema = z.object({
   /** Named so the verifier reproduces the exact pipeline, not an equivalent one. */
   projectionFn: z.literal("buildPublishedQuestion"),
   hashFn: z.literal("canonicalQuestionHash"),
-  /** The gate sets this by recomputing. A bundle author cannot assert it. */
-  recomputedByVerifier: z.literal(true),
 });
 ```
 
-The verifier derives D3 as `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` and refuses when the result differs from `binding.publicationContentHash`. This has been confirmed to reproduce the recorded value for all five in-scope candidates (section 0), so a mismatch means drift or fabrication, not an unmodelled projection.
+**Corrected on review finding R4-P2-B.** An earlier draft carried a `recomputedByVerifier: z.literal(true)` field commented "a bundle author cannot assert it". That was exactly backwards: the schema describes the **submitted** bundle, so a `z.literal(true)` would have *required* the author to assert it, and nothing in the shape distinguishes an author-written value from a verifier-written one. It also contradicted Rule 1 above. The field is removed. Whether the verifier recomputed the projection is **gate output**, recorded in the gate's own result, never a bundle input — the gate recomputes unconditionally and has no reason to ask the bundle whether it should.
+
+The verifier derives D3 as `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` and refuses when the result differs from `binding.publicationContentHash`. `buildPublishedQuestion` returns a discriminated outcome, so the verifier must refuse on a non-`ok` projection rather than dereference `.question`; all five in-scope candidates project `ok` today, but a future revision that does not must fail closed, not throw. This has been confirmed to reproduce the recorded value for all five in-scope candidates (section 0), so a mismatch means drift or fabrication, not an unmodelled projection.
 
 ---
 
@@ -390,6 +392,14 @@ export const deterministicLegacyAdmissionBundleSchema = z.object({
     if (!sameNumbers(ed.solverInterpretationPresented.declaredGivens, b.recompute.givensReadFromPrompt))
       reject(["editorialInterpretation", "solverInterpretationPresented", "declaredGivens"],
              "Reviewer was shown different givens than the recompute used");
+    // NOTE (review finding R4, latent hazard): sameNumbers is order- and
+    // multiplicity-sensitive, but the attestation itself compares prompt numbers
+    // as a SET and never emits an ordered list. Both fields above must therefore
+    // be populated from the registry entry's `givens` ARRAY IN ITS DECLARED
+    // ORDER - not from the prompt tokeniser's output, whose order is incidental.
+    // Populating either from the tokeniser would make this condition
+    // unsatisfiable for any candidate whose prompt states its quantities in a
+    // different order from the registry array: the same failure shape as H-1.
   }
 
   // (e) Every judgement must be affirmative. uncertain and rejected both reject.
@@ -434,7 +444,9 @@ export const deterministicLegacyAdmissionBundleSchema = z.object({
 
 Stated as a rule: **nothing in the bundle may be the sole authority for a fact the gate can independently derive.**
 
-`approval` and `ledgerEntryRef` are typed `z.never()` on purpose: the bundle cannot currently validate into an admissible state, which is the correct behaviour while two required controls do not exist. They become real types in the PR that builds them.
+`approval` and `ledgerEntryRef` are typed `z.never().optional()` on purpose: a bundle may **omit** them and still parse, but it can never **carry** them. So no bundle can reach an admissible state at the gate while the two controls do not exist — the refusal comes from the gate conditions in `gate-and-test-changes.md` section 3.2, not from schema validation.
+
+*(Corrected on review finding R4-P2-C: an earlier version said the bundle "cannot currently validate", which is not what `z.never().optional()` does — omission passes. The distinction matters for case **H9** in `gate-and-test-changes.md`, which depends on a complete bundle parsing cleanly.)* They become real types in the PR that builds them.
 
 ### 9.1 The six mandatory components
 

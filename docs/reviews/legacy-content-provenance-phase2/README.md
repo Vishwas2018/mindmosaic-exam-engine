@@ -27,7 +27,7 @@ Adopting the ADR authorises design work. It authorises no behaviour change. Ever
 |---|---|
 | `../../adr/017-legacy-content-unknown-origin-eligibility.md` | The governance decision. Status `PROPOSED`. |
 | `../../spec/legacy-content-unknown-origin-policy.md` | The policy specification: scope, evidence, gates, invariants. |
-| `source-evidence-reconciliation.md` | Corrected 12-item reconciliation, generated from committed bytes. |
+| `source-evidence-reconciliation.md` | Corrected 12-item reconciliation. Hand-written narrative over the JSON; its tables are transcribed, not generated. See its section 1. |
 | `source-evidence-reconciliation.json` | Machine output backing the above. |
 | `solver-coverage.md` | Exact first-party recompute coverage and the missing bindings. |
 | `schemas.md` | Proposed evidence shapes. Failure is representable; two controls deliberately unspecified. |
@@ -93,6 +93,20 @@ Running the real attestation against each confirms the domain: `expectedContentH
 
 The fix makes every hash field domain-explicit (`boundFactoryCandidateHash`, `reviewedFactoryCandidateHash`), carries the D2 → D3 mapping as its own verified binding, and requires the verifier to recompute each hash rather than accept it. Details in `schemas.md` sections 0, 4b and 9.
 
+## Corrections from the fourth independent review
+
+An independent adversarial review of `3b56e157` confirmed the H-1 diagnosis and fix as correct and independently reproduced, and returned REQUEST CHANGES on one P1 and four P2 findings. All five are addressed.
+
+| Finding | What was wrong | Where the correction lives |
+|---|---|---|
+| **R4-P1** | Case 18ae, the stated H-1 regression guard, described a bundle "missing editorial evidence" that nonetheless "passes the hash-domain checks". Impossible: `editorialInterpretation` is a required member, and Zod runs `superRefine` only after the base parse succeeds — so every hash-domain refinement would be skipped and the test would stay green if an unsatisfiable condition were reintroduced. The guard could not detect the defect it existed for. | `gate-and-test-changes.md` case **H9** — rewritten to be schema-complete and to assert `safeParse(...).success === true` with zero issues, with the gate refusing only on approval and ledger. |
+| **R4-P2-A** | `schemas.md` section 0 called `publication/eligibility.ts` the **only** production call site supplying an expected hash. `correctness/derive-answer.ts:867` also does. | `schemas.md` section 0 — corrected to "only call site supplying an *externally recorded* expected hash"; `derive-answer.ts` passes `hashJson(question)` over the object under test, which binds nothing. D2 conclusion unaffected. |
+| **R4-P2-B** | `publicationProjectionBindingSchema.recomputedByVerifier: z.literal(true)` was commented "a bundle author cannot assert it" — backwards, since the schema describes the submitted bundle, so it *required* the author to assert it. Also contradicted Rule 1. | `schemas.md` section 4b — field removed; whether the verifier recomputed is gate output, never bundle input. |
+| **R4-P2-C** | "the bundle cannot currently validate into an admissible state" — but `z.never().optional()` accepts omission, so a complete bundle parses cleanly; the refusal comes from the gate. | `schemas.md` section 9 closing; `threat-model.md` T5. |
+| **R4-P2-D** | `source-evidence-reconciliation.md` claimed "This document is therefore generated, not written… No value is transcribed by hand." False — `reconcile.py` emits only the JSON; the markdown is hand-transcribed. | Reconciliation sections 1 and 8; README documents and audit-history tables; `threat-model.md` T7, which now carries this as an **open instance of threat T7 itself**. The transcription was independently verified correct across all 12 rows of both tables at `3b56e157`. |
+
+Also addressed from the same review's non-blocking observations: a latent H-1-shaped hazard in refinement (d), where `sameNumbers` is order-sensitive while the attestation compares a set — both fields must be populated from the registry's `givens` array in declared order (`schemas.md` section 9); the `buildPublishedQuestion` discriminated result, which the verifier must fail closed on rather than dereference; ADR requirement 2 now names D2; the section 4 test cases are relabelled `C/R/O/I/E/H/N/A/S/G/X` to remove two numbering collisions; and the spec records that its component numbering differs from the ADR's.
+
 No question content, answer key, difficulty value, hash or review record was altered by any of these corrections. Three facts surfaced during verification are recorded rather than repaired: the stale `targetPacket` filename in `review-summary.json` (section 2.2 of the reconciliation), the expected candidate-hash divergence on the two sidecar-bound items (section 2.3), and the weak prompt-to-solver binding on `nr-022` (`solver-coverage.md` section 3a.3).
 
 ## Verification
@@ -113,7 +127,7 @@ Two different things must be kept apart, and the withdrawn sentence ran them tog
 
 | | Underlying source and review evidence | Generated reconciliation output |
 |---|---|---|
-| Files | PR #73 drafts, `external-review-chatgpt.json`, `external-review-maths-014.json` and its attestation, `review-summary.json`, `source-register.json`, the Phase 1 preflight | `source-evidence-reconciliation.md`, `source-evidence-reconciliation.json` |
+| Files | PR #73 drafts, `external-review-chatgpt.json`, `external-review-maths-014.json` and its attestation, `review-summary.json`, `source-register.json`, the Phase 1 preflight | `source-evidence-reconciliation.json` (machine-generated). `source-evidence-reconciliation.md` is hand-written over it — see finding R4-P2-D |
 | Status | **Unchanged.** Not modified, not regenerated, not re-derived, at any point in this programme. PR #73 remains at `dcb60a80`. | **Regenerated at `eb83708f`**, and again at the current HEAD if `reconcile.py` changes. |
 | Why | They are the evidence. Changing them would destroy what is being reconciled. | `reconcile.py` was changed to split the two review events and add the preflight-vs-register cross-check. |
 

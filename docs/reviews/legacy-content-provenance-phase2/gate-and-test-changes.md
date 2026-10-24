@@ -88,75 +88,85 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 
 ### 4.1 Evidence completeness
 
-1. Bundle missing `recompute` — refused.
-2. Bundle missing `editorialInterpretation` — refused. Expanded in section 4.4a.
-3. Bundle missing `originality` — refused.
-4. Bundle missing `ageSuitability` — refused. Separate from item 2; neither satisfies the other.
-5. Bundle with no approval — refused. (Currently every bundle, by design.)
-6. Bundle with no ledger reference — refused.
+- **C1.** Bundle missing `recompute` — refused.
+- **C2.** Bundle missing `editorialInterpretation` — refused. Expanded in section 4.4a (**E1**–**E17**).
+- **C3.** Bundle missing `originality` — refused.
+- **C4.** Bundle missing `ageSuitability` — refused. Separate from **C2**; neither satisfies the other.
+- **C5.** Bundle with no approval — refused. (Currently every bundle, by design.)
+- **C6.** Bundle with no ledger reference — refused.
 
 ### 4.2 Recompute integrity
 
-6. `recompute.outcome` is `key_mismatch` — refused.
-7. `recompute.outcome` is `option_match_ambiguous` — refused.
-8. `recompute.outcome` is `prompt_givens_mismatch` — refused.
-9. `recompute.outcome` is `not_in_scope` — refused, and specifically `vr-032` and `nr-001` must refuse under today's registries.
-10. `candidateLogicExecuted` is `true` — refused: evidence derived from the candidate's own `solverParams` is not independent recomputation.
-11. Recompute bound to a hash that does not match the candidate's current content — refused as stale, not reused.
-12. A genuine `recomputed_match` for `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` — admitted as far as correctness, then refused for the missing approval.
+- **R1.** `recompute.outcome` is `key_mismatch` — refused.
+- **R2.** `recompute.outcome` is `option_match_ambiguous` — refused.
+- **R3.** `recompute.outcome` is `prompt_givens_mismatch` — refused.
+- **R4.** `recompute.outcome` is `not_in_scope` — refused, and specifically `vr-032` and `nr-001` must refuse under today's registries.
+- **R5.** `candidateLogicExecuted` is `true` — refused: evidence derived from the candidate's own `solverParams` is not independent recomputation.
+- **R6.** Recompute bound to a hash that does not match the candidate's current content — refused as stale, not reused.
+- **R7.** A genuine `recomputed_match` for `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` — admitted as far as correctness, then refused for the missing approval.
 
 ### 4.3 Originality integrity
 
-13. `matches_found` — refused.
-14. `uncertain` — refused.
-15. `inconclusive` (engine outage, rate limit) — refused. An unavailable engine is not a pass.
-16. `rejected` — refused.
-17. Originality bound to a different D2 factory-candidate hash — refused.
-18. A record asserting zero risk or copyright clearance — rejected at schema level; the field does not exist.
+- **O1.** `matches_found` — refused.
+- **O2.** `uncertain` — refused.
+- **O3.** `inconclusive` (engine outage, rate limit) — refused. An unavailable engine is not a pass.
+- **O4.** `rejected` — refused.
+- **O5.** Originality bound to a different D2 factory-candidate hash — refused.
+- **O6.** A record asserting zero risk or copyright clearance — rejected at schema level; the field does not exist.
 
 ### 4.4 Independence must not be inferred
 
-19. A bundle with valid recompute must leave `isProductionGradeIndependentReview` returning `false`.
-20. A bundle with valid recompute must not set `originalGeneration.status` to anything but `unverified`.
-21. A bundle with valid recompute must not populate `provider`, `model`, `promptHash` or `event` in `originalGeneration` — all are pinned to `z.null()` by `originalGenerationUnverifiedSchema`. (The field is named `event` in the factory schema; `candidateGenerationEvent` is the PR #73 `source-register.json` key for the same fact, and the two must not be confused.)
-22. Any attempt to record `independentReviewStatus` as established for a null-identity generator — refused.
-23. Advisory review entries must not satisfy any admission requirement, regardless of count or agreement.
+- **I1.** A bundle with valid recompute must leave `isProductionGradeIndependentReview` returning `false`.
+- **I2.** A bundle with valid recompute must not set `originalGeneration.status` to anything but `unverified`.
+- **I3.** A bundle with valid recompute must not populate `provider`, `model`, `promptHash` or `event` in `originalGeneration` — all are pinned to `z.null()` by `originalGenerationUnverifiedSchema`. (The field is named `event` in the factory schema; `candidateGenerationEvent` is the PR #73 `source-register.json` key for the same fact, and the two must not be confused.)
+- **I4.** Any attempt to record `independentReviewStatus` as established for a null-identity generator — refused.
+- **I5.** Advisory review entries must not satisfy any admission requirement, regardless of count or agreement.
 
 ### 4.4a Editorial interpretation evidence
 
 The gate must refuse every case below **while the first-party numeric recompute returns a clean `recomputed_match`**. That precondition is the point of the section: each case isolates the editorial component from the arithmetic.
 
-18a. Bundle with no `editorialInterpretation` member — refused. (Currently every bundle.)
-18b. `reviewedFactoryCandidateHash` does not match the candidate's current D2 hash — refused as stale, not reused.
-18c. `candidateId` names a different candidate — refused. An editorial record must not be transferable between items.
-18d. `factoryRevision` names a different revision of the same candidate — refused.
-18e. `solverInterpretationPresented.solverIdentifier` differs from the solver the gate resolves from the live registry — refused.
-18f. `solverInterpretationPresented.declaredGivens` differ from the registry's declared givens — refused, including when the bundle's own `recompute` record was fabricated to agree with the editorial record. The gate resolves both from the registry, so a self-consistent pair of forged records still fails.
-18g. `reviewerIdentity` absent, empty or whitespace — refused.
-18h. `reviewerQualification` absent, or `reviewerRole` outside the permitted set — refused. An unqualified reviewer is not a weaker pass.
-18i. `promptToSolverAssumptions.verdict` is `rejected` — refused.
-18j. `exhaustiveness.verdict` is `rejected` — refused.
-18k. `ambiguity.verdict` is `rejected` — refused.
-18l. Any of the three is `uncertain` — refused. Uncertainty is not a soft pass.
-18m. `alternativeDefensibleAnswers.verdict` is `alternatives_defensible`, with `optionIds` populated — refused.
-18n. `alternativeDefensibleAnswers.verdict` is `uncertain` — refused.
-18o. **Numeric recompute PASS with editorial interpretation FAIL** — refused, and the refusal reason must identify the editorial component rather than reporting a correctness failure. This is the headline case: it is the `maths-014` shape, and a gate that admits here has reproduced the defect this whole route exists to avoid.
-18p. A passing recompute with an `ageSuitability` verdict of `suitable` but **no** editorial record — refused. Age-suitability does not satisfy requirement 2.
-18q. An advisory review agreeing with the key, offered in place of the editorial record — refused regardless of how many advisory entries agree.
+- **E1.** Bundle with no `editorialInterpretation` member — refused. (Currently every bundle.)
+- **E2.** `reviewedFactoryCandidateHash` does not match the candidate's current D2 hash — refused as stale, not reused.
+- **E3.** `candidateId` names a different candidate — refused. An editorial record must not be transferable between items.
+- **E4.** `factoryRevision` names a different revision of the same candidate — refused.
+- **E5.** `solverInterpretationPresented.solverIdentifier` differs from the solver the gate resolves from the live registry — refused.
+- **E6.** `solverInterpretationPresented.declaredGivens` differ from the registry's declared givens — refused, including when the bundle's own `recompute` record was fabricated to agree with the editorial record. The gate resolves both from the registry, so a self-consistent pair of forged records still fails.
+- **E7.** `reviewerIdentity` absent, empty or whitespace — refused.
+- **E8.** `reviewerQualification` absent, or `reviewerRole` outside the permitted set — refused. An unqualified reviewer is not a weaker pass.
+- **E9.** `promptToSolverAssumptions.verdict` is `rejected` — refused.
+- **E10.** `exhaustiveness.verdict` is `rejected` — refused.
+- **E11.** `ambiguity.verdict` is `rejected` — refused.
+- **E12.** Any of the three is `uncertain` — refused. Uncertainty is not a soft pass.
+- **E13.** `alternativeDefensibleAnswers.verdict` is `alternatives_defensible`, with `optionIds` populated — refused.
+- **E14.** `alternativeDefensibleAnswers.verdict` is `uncertain` — refused.
+- **E15.** **Numeric recompute PASS with editorial interpretation FAIL** — refused, and the refusal reason must identify the editorial component rather than reporting a correctness failure. This is the headline case: it is the `maths-014` shape, and a gate that admits here has reproduced the defect this whole route exists to avoid.
+- **E16.** A passing recompute with an `ageSuitability` verdict of `suitable` but **no** editorial record — refused. Age-suitability does not satisfy requirement 2.
+- **E17.** An advisory review agreeing with the key, offered in place of the editorial record — refused regardless of how many advisory entries agree.
 
 ### 4.4a-H Hash-domain integrity
 
 Added on finding H-1. These cases exist because the three domains are easy to confuse and a confusion is silent: a D3 value in a D2 field looks like a well-formed 64-hex string. Each case must refuse with a message naming the domain error, not a generic mismatch.
 
-18w. `recompute.boundFactoryCandidateHash` carries the candidate's **D3** `publicationContentHash` — refused as a domain error, not as stale evidence.
-18x. `editorialInterpretation.reviewedFactoryCandidateHash` carries the D3 hash — refused as a domain error.
-18y. `originality.boundFactoryCandidateHash` or `ageSuitability.boundFactoryCandidateHash` carries the D3 hash — refused as a domain error.
-18z. A bundle in which **every** component consistently carries D3 instead of D2 — refused. Internal consistency is not validity; the verifier compares against independently recomputed values, so a uniformly wrong bundle fails uniformly.
-18aa. `binding.publicationContentHash` does not equal `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` — refused. The verifier derives D3; it must not read it from the source register.
-18ab. `publicationProjection.factoryCandidateHash` does not equal `binding.factoryCandidateHash` — refused: the projection was run over a different candidate.
-18ac. `publicationProjection` claims `recomputedByVerifier: true` in a submitted bundle — the verifier overwrites this from its own recomputation and never trusts the submitted value; a bundle asserting it must not thereby skip the recomputation.
-18ad. A **solver_sidecar** candidate (`vr-032`, `nr-001`) where D1 equals D2 — refused as inconsistent with `transformation: "solver_sidecar"`, which must change the candidate hash. This case is out of initial scope today and must refuse on scope first; it is specified so the check exists when the scope question is reopened.
-18ae. **Positive control.** For each of the five in-scope candidates, a bundle whose D1, D2 and D3 all equal the independently recomputed values passes the hash-domain checks and then refuses only for the missing approval, ledger and editorial evidence. This case is the regression that would have caught H-1: if any hash-domain condition is unsatisfiable, this test fails.
+- **H1.** `recompute.boundFactoryCandidateHash` carries the candidate's **D3** `publicationContentHash` — refused as a domain error, not as stale evidence.
+- **H2.** `editorialInterpretation.reviewedFactoryCandidateHash` carries the D3 hash — refused as a domain error.
+- **H3.** `originality.boundFactoryCandidateHash` or `ageSuitability.boundFactoryCandidateHash` carries the D3 hash — refused as a domain error.
+- **H4.** A bundle in which **every** component consistently carries D3 instead of D2 — refused. Internal consistency is not validity; the verifier compares against independently recomputed values, so a uniformly wrong bundle fails uniformly.
+- **H5.** `binding.publicationContentHash` does not equal `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` — refused. The verifier derives D3; it must not read it from the source register.
+- **H6.** `publicationProjection.factoryCandidateHash` does not equal `binding.factoryCandidateHash` — refused: the projection was run over a different candidate.
+- **H7.** A bundle that carries any verifier-derived field as if it were an input — the verifier recomputes D2 and D3 itself and never lets a submitted value stand in for the recomputation. Submitting such a field must not short-circuit it. (The field is not part of the bundle schema; see `schemas.md` section 4b.)
+- **H8.** A **solver_sidecar** candidate (`vr-032`, `nr-001`) where D1 equals D2 — refused as inconsistent with `transformation: "solver_sidecar"`, which must change the candidate hash. This case is out of initial scope today and must refuse on scope first; it is specified so the check exists when the scope question is reopened.
+- **H9.** **Positive control — the H-1 regression guard.** This case must be written with care, because the obvious version of it does not work.
+
+**Corrected on review finding R4-P1.** An earlier version of this case described a bundle "missing approval, ledger and editorial evidence" that nonetheless "passes the hash-domain checks". That is impossible. `editorialInterpretation` and `publicationProjection` are **required** members of `deterministicLegacyAdmissionBundleSchema`, and Zod runs `.superRefine` only after the base object parse succeeds. A bundle missing either one fails the base parse, so refinements (b), (b2), (f) and (g) — every condition H-1 concerns — never execute. The test would have asserted refusal, got refusal for the wrong reason, and stayed green even if an unsatisfiable hash condition were reintroduced. The one named guard against H-1 recurring could not detect it.
+
+The case must therefore be **schema-complete**:
+
+- Build, for each of the five in-scope candidates, a bundle in which every required member is present and fully populated: `binding` with D1, D2 and D3 set to the independently recomputed values; `recompute` with `outcome: "recomputed_match"`, `boundFactoryCandidateHash` = recomputed D2, and `solverIdentifier` and `givensReadFromPrompt` resolved from the live registry; `editorialInterpretation` with `reviewedFactoryCandidateHash` = recomputed D2, all three verdicts `affirmed`, `alternativeDefensibleAnswers: "none_defensible"`, and a named qualified reviewer; `publicationProjection` with the derived D3; `originality` `no_match_found`; `ageSuitability` `suitable`. `approval` and `ledgerEntryRef` are omitted, which the schema permits.
+- Assert **`deterministicLegacyAdmissionBundleSchema.safeParse(bundle).success === true` with zero issues.** This assertion is what makes the case a hash-domain regression guard: if any hash condition is ever made unsatisfiable again, it fails here and names the offending path.
+- Then assert that the candidate is still refused at the gate, and that the refusals come **only** from the approval and ledger conditions of section 3.2 — which live outside the schema and are unimplemented.
+
+The negative "missing editorial record" case is already covered by **E1** and by section 4.1 item **C2**, and must not be conflated with this one.
 
 ### 4.4b `nr-022` regression: the word-only mutation
 
@@ -164,52 +174,52 @@ Added on finding H-1. These cases exist because the three domains are easy to co
 
 **Case A — mutated stem checked against the previously recorded hash.**
 
-18r. Take committed `nr-022`, change "three times as old" to "four times as old" and change nothing else. Supply the **original D2** `expectedContentHash` (`8758ac61587d966b…`). `verifyFirstPartyScholarshipAttestation` must return **`content_hash_mismatch`**, and admission must refuse. This proves the hash binding does what it is for: prose is inside `hashJson(question)`, so a word-only edit is detected against a known-good revision.
+- **N1.** Take committed `nr-022`, change "three times as old" to "four times as old" and change nothing else. Supply the **original D2** `expectedContentHash` (`8758ac61587d966b…`). `verifyFirstPartyScholarshipAttestation` must return **`content_hash_mismatch`**, and admission must refuse. This proves the hash binding does what it is for: prose is inside `hashJson(question)`, so a word-only edit is detected against a known-good revision.
 
 **Case B — the same mutation, re-hashed, recomputed fresh.**
 
-18s. Take the same mutated stem, compute its **new D2** hash, and run the recompute against that. The recompute **may legitimately return `recomputed_match`**: the hash is self-consistent, the prompt still yields the digit set `{8}`, and the solver still evaluates its hard-coded `3 ×` relation. The test must assert this honestly rather than expecting a numeric failure that will not occur.
+- **N2.** Take the same mutated stem, compute its **new D2** hash, and run the recompute against that. The recompute **may legitimately return `recomputed_match`**: the hash is self-consistent, the prompt still yields the digit set `{8}`, and the solver still evaluates its hard-coded `3 ×` relation. The test must assert this honestly rather than expecting a numeric failure that will not occur.
 
-18t. Admission for case B must nonetheless **refuse**, because no editorial interpretation record exists for the new revision. A new revision requires fresh editorial evidence; re-hashing and re-running the solver does not re-establish eligibility.
+- **N3.** Admission for case B must nonetheless **refuse**, because no editorial interpretation record exists for the new revision. A new revision requires fresh editorial evidence; re-hashing and re-running the solver does not re-establish eligibility.
 
-18u. Admission for case B must **still refuse** when an editorial record is supplied that was bound to the *pre-mutation* revision — caught by 18b and 18d.
+- **N4.** Admission for case B must **still refuse** when an editorial record is supplied that was bound to the *pre-mutation* revision — caught by **E2** and **E4**.
 
-18v. Case B with an editorial record genuinely bound to the mutated revision is admitted **only if** a qualified reviewer affirms all three judgements and returns `none_defensible` for the mutated stem's own key. The test must construct this outcome from the reviewer's recorded judgement, and **must not hard-code acceptance of any particular revised key**. Whether "four times as old" has a single defensible answer among the committed options, and which option that is, is the reviewer's determination to record — not a constant for this suite to assert. If no such affirmation is recorded, the expected result is refusal.
+- **N5.** Case B with an editorial record genuinely bound to the mutated revision is admitted **only if** a qualified reviewer affirms all three judgements and returns `none_defensible` for the mutated stem's own key. The test must construct this outcome from the reviewer's recorded judgement, and **must not hard-code acceptance of any particular revised key**. Whether "four times as old" has a single defensible answer among the committed options, and which option that is, is the reviewer's determination to record — not a constant for this suite to assert. If no such affirmation is recorded, the expected result is refusal.
 
 ### 4.5 Route and attribution tampering
 
-24. Route rewritten from `legacy_intake_pending` to `deterministic_legacy_admission` without a bundle — refused.
-25. `kind` changed from `legacy_import` to `generated` with fabricated generation fields — refused at publication compilation.
-26. `generatorAdapter.class` set to `legacy_import` in a publication manifest — still refused (PR #74 behaviour preserved).
-27. `generatorAdapter.class` set to `legacy_deterministic_admitted` without a verified ledger row — refused.
-28. Admitted manifest re-sealed with a recomputed fingerprint but no valid approval — refused.
+- **A1.** Route rewritten from `legacy_intake_pending` to `deterministic_legacy_admission` without a bundle — refused.
+- **A2.** `kind` changed from `legacy_import` to `generated` with fabricated generation fields — refused at publication compilation.
+- **A3.** `generatorAdapter.class` set to `legacy_import` in a publication manifest — still refused (PR #74 behaviour preserved).
+- **A4.** `generatorAdapter.class` set to `legacy_deterministic_admitted` without a verified ledger row — refused.
+- **A5.** Admitted manifest re-sealed with a recomputed fingerprint but no valid approval — refused.
 
 ### 4.6 Scope containment
 
 Scope is a gate input, not a convention. The in-scope set is enumerated and checked before any evidence is read.
 
-29. `nr-001` presented with a complete and otherwise valid deterministic bundle — refused as out of scope, for as long as it is out of scope. A bundle does not widen scope.
-30. `vr-032` presented with a complete and otherwise valid deterministic bundle — refused as out of scope.
-31. A Class B candidate (`vr-001`, `vr-016`) presented with a deterministic bundle — refused as out of scope.
-32. A Class C candidate (`rc-001`, `rc-002`, `rc-003`) presented with a deterministic bundle — refused as out of scope.
-33. Every one of the 12 sample candidates, in its current committed state, is refused at staging and publication. This is the regression that proves the Phase 1 hold is still intact.
+- **S1.** `nr-001` presented with a complete and otherwise valid deterministic bundle — refused as out of scope, for as long as it is out of scope. A bundle does not widen scope.
+- **S2.** `vr-032` presented with a complete and otherwise valid deterministic bundle — refused as out of scope.
+- **S3.** A Class B candidate (`vr-001`, `vr-016`) presented with a deterministic bundle — refused as out of scope.
+- **S4.** A Class C candidate (`rc-001`, `rc-002`, `rc-003`) presented with a deterministic bundle — refused as out of scope.
+- **S5.** Every one of the 12 sample candidates, in its current committed state, is refused at staging and publication. This is the regression that proves the Phase 1 hold is still intact.
 
 ### 4.7 Regression protection for existing behaviour
 
-34. All 596 committed manifests continue to validate under the PR #74 allow-list.
-35. The existing `legacy-manifest-tamper.test.ts` matrix continues to pass unchanged.
+- **G1.** All 596 committed manifests continue to validate under the PR #74 allow-list.
+- **G2.** The existing `legacy-manifest-tamper.test.ts` matrix continues to pass unchanged.
 
 ### 4.8 Regression tests required before `nr-001` enters scope
 
 These are the owner's stated condition on `nr-001`, alongside the registry entry itself. They belong to that later change, not to the initial one.
 
-36. The `nr-001` registry entry derives option `e` from its own declared givens (`5, 11, 17, 23, 29`) with the candidate's sidecar absent entirely — proving the recompute does not depend on it.
-37. The entry refuses when the prompt's stated quantities differ from its declared givens (`prompt_givens_mismatch`).
-38. The entry refuses when the content hash does not match (`content_hash_mismatch`).
-39. The entry refuses, rather than guessing, when more than one option matches the computed value (`option_match_ambiguous`).
-40. `candidateLogicExecuted` is `false` on every passing `nr-001` recompute; a path that reads `solverParams` or the sidecar `rule` fails the suite.
-41. Adding the entry does not widen `isScholarshipAttestedItem` beyond `nr-number-series` — ids `nr-002`…`nr-020` remain out of scope and still refuse.
-42. `vr-032` still refuses after the `nr-001` change lands.
+- **X1.** The `nr-001` registry entry derives option `e` from its own declared givens (`5, 11, 17, 23, 29`) with the candidate's sidecar absent entirely — proving the recompute does not depend on it.
+- **X2.** The entry refuses when the prompt's stated quantities differ from its declared givens (`prompt_givens_mismatch`).
+- **X3.** The entry refuses when the content hash does not match (`content_hash_mismatch`).
+- **X4.** The entry refuses, rather than guessing, when more than one option matches the computed value (`option_match_ambiguous`).
+- **X5.** `candidateLogicExecuted` is `false` on every passing `nr-001` recompute; a path that reads `solverParams` or the sidecar `rule` fails the suite.
+- **X6.** Adding the entry does not widen `isScholarshipAttestedItem` beyond `nr-number-series` — ids `nr-002`…`nr-020` remain out of scope and still refuse.
+- **X7.** `vr-032` still refuses after the `nr-001` change lands.
 
 ## 5. CI
 
