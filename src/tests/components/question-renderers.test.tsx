@@ -98,11 +98,11 @@ describe("MultipleChoiceRenderer", () => {
     };
 
     it("keeps authored line breaks for amc_style prompts", () => {
-      expect(layoutLegend("showcase-amc-multiline-prompt")).toHaveClass("whitespace-pre-line");
+      expect(layoutLegend("showcase-demo-amc-multiline")).toHaveClass("whitespace-pre-line");
     });
 
     it("does not change how any other exam style displays its prompt", () => {
-      expect(layoutLegend("showcase-naplan-multiline-prompt")).not.toHaveClass("whitespace-pre-line");
+      expect(layoutLegend("showcase-demo-naplan-multiline")).not.toHaveClass("whitespace-pre-line");
       expect(render(<MultipleChoiceRenderer question={q} />).container.querySelector("legend")).not.toHaveClass(
         "whitespace-pre-line",
       );

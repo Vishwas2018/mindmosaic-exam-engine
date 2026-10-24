@@ -219,11 +219,15 @@ export default function ShowcasePage() {
           aria-labelledby="prompt-layout-title"
           data-testid="showcase-prompt-layout"
         >
-          <h2 id="prompt-layout-title" className="text-2xl font-black text-ink sm:text-3xl">
-            Prompt layout
-          </h2>
+          <div className="flex flex-wrap items-center gap-3">
+            <h2 id="prompt-layout-title" className="text-2xl font-black text-ink sm:text-3xl">
+              Prompt layout
+            </h2>
+            <Badge variant="warning">Demonstration content</Badge>
+          </div>
           <p className="mt-1 text-sm text-muted">
-            The same multi-line prompt under two exam styles. Line breaks are kept for AMC-style questions only.
+            Synthetic placeholder text, not a real or approved question. The same text is shown under two exam
+            styles. Line breaks are kept for AMC-style questions only.
           </p>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             {showcasePromptLayoutQuestions.map((question) => (

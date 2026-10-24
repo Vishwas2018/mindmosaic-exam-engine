@@ -10,7 +10,7 @@
 | Two proposed question revisions | `roadmap-amc-y3-014` and `roadmap-amc-y5-028`: stem and explanation only, in the two draft files |
 | Their pinned bindings | Two rows in `content/review-sources/amc/y3.json` and `y5.json`, two attested hashes in `amc-content-bindings.ts`, two rows in `revision-loop-amc.csv`. Exactly two lines changed in each |
 | `y5-019` presentation defect | An AMC-scoped line-break fix in the multiple-choice renderer (`renderer-utils.ts`, `MultipleChoiceRenderer.tsx`). **The question's content and hash are unchanged** |
-| Tests | New unit test, new component tests, new Playwright regression spec, and a labelled "Prompt layout" section with fixtures on the existing `/showcase` QA page |
+| Tests | New unit test, new component tests, new Playwright regression spec, and a labelled "Prompt layout" section on the existing `/showcase` QA page that uses **clearly synthetic demonstration fixtures** (no real or unpublished question text) |
 | Docs | This file and `decision-pack.md` |
 
 **Not touched:** `y3-005`, `y3-016`, `y3-026`, `y5-006`; any of the 53 published questions, manifests, approvals or bank files; the code exclusions for the three held-back questions; CI workflows; marketing routes; timers and time estimates; GitHub settings.
@@ -39,9 +39,9 @@ Each is a **new content revision**. It needs fresh independent review and your d
 
 ### Independent answer and ambiguity findings
 
-- **A gap I found in the existing check.** The repository's answer verifier and first-party solver are keyed by question ID and never read the prompt, so their "0 mismatches" only shows the keys equal the solver output, not that new wording asks the same question. I therefore added tests that take the numbers stated in the text and enumerate every possibility.
-- **`y3-014`:** 4 × 8 = 32, minus 22, gives 10, and only option d satisfies it. The total of 32 is fixed without a defined term. No ambiguity found.
-- **`y5-028`:** exhaustive enumeration gives (0, 6), (5, 3), (10, 0), so 3. Each rule in the stem matters: without "including none of one size" the answer would be 1, and without "identical" and "order does not matter" a reader could count arrangements. The explanation accounts for every excluded count of 5-bags (25, 20, 10 and 5 leftover are not multiples of 3).
+- **A gap I found in the existing check.** The repository's answer verifier and first-party solver are keyed by question ID and never read the prompt, so their "0 mismatches" only shows the keys equal the solver output, not that new wording asks the same question. I added tests with a narrower, honestly limited purpose: they enumerate arithmetic that is **hard-coded from the revision brief** (4 × 8 less 5 + 7 + 10; every pair with 3x + 5y = 30) and check that the keyed answer follows from it, and they check by plain string presence that the new prompt and explanation contain the expected phrases and figures. **They do not parse the prose or prove it is unambiguous or that a reader would reach those figures.** That is not comprehensive semantic verification, and none exists here; it rests on human review.
+- **`y3-014`:** the hard-coded arithmetic (4 × 8 = 32, less 5 + 7 + 10 = 22) gives 10, and only option d matches it. My own reading of the wording found no ambiguity, but that is an AI reading, not a verified property of the text.
+- **`y5-028`:** enumerating the hard-coded equation gives (0, 6), (5, 3), (10, 0), so 3. In my reading each rule in the stem matters: without "none of one size" the answer would be 1, and without "identical" and "order does not matter" a reader could count arrangements. The explanation accounts for every excluded count of 5-bags (25, 20, 10 and 5 leftover are not multiples of 3).
 - **Left open on purpose:** the `y3-014` distractors are unchanged (7 was a "mean of three" slip and is now weaker); the `y5-028` answer is still a guessable small integer; and the `y3-014` skill label "Averages and data summaries" no longer names the idea in the stem. Each is flagged for you rather than silently altered.
 
 ## 3. `y5-019`: investigated in a real browser
@@ -79,11 +79,17 @@ Those 63 NAPLAN/ICAS prompts span multiple choice (45), dropdown (6), true/false
 
 The fix therefore applies `whitespace-pre-line` only when `examStyle` is `amc_style`, in the multiple-choice prompt only (the only observed case). It changes the rendering of exactly zero currently-served questions. Number-entry prompts have the same gap in principle; there is no AMC example yet, so I left it.
 
-### Regression test
+### A leak I introduced, found in review, and fixed
 
-`e2e/amc-multiline-prompt.spec.ts` (Playwright, desktop and mobile) renders the real `y5-019` stem through the real renderer on `/showcase`. For `amc_style` it asserts `white-space: pre-line`, that the four clue lines are separate, and no overflow; for a `naplan_style` control with identical text it asserts the old behaviour is unchanged.
+My first version of the regression test used a showcase fixture that **reproduced the complete unpublished `y5-019` question, options and answer key**, and the `/showcase` page is a client page, so that text was compiled into a static JavaScript chunk. Measured on the unfixed commit with a deployment-style build (`SHOWCASE_ENABLED` unset): the `/showcase` **page** returned 404 as designed, but the compiled chunk `/_next/static/chunks/app/showcase/page-….js` returned **HTTP 200** (40,673 bytes) containing the stem and the answer-key literal. The chunk URL is content-hashed and is not linked from the home page, so it was not trivially discoverable, but nothing protected it. (My first attempt at this measurement was misleading, because I reused a build made with the flag set; I redid it from a flag-unset build.) The fixtures are now **clearly synthetic demonstration content**, see below.
 
-**Negative control:** with the fix disabled the two AMC tests fail (`Expected "pre-line"`, `Received "normal"`) and the control tests still pass; the fix was restored and the file confirmed intact. The existing showcase specs (pinned at 17 cards, plus the axe audit at every viewport) still pass with the new section.
+### Regression test (now on synthetic text)
+
+`e2e/amc-multiline-prompt.spec.ts` (Playwright, desktop and mobile) renders a **synthetic demonstration prompt** through the real multiple-choice renderer on `/showcase`, under `amc_style` and under a `naplan_style` control with identical text. The section is visibly labelled "Demonstration content". For `amc_style` it asserts `white-space: pre-line`, that each list line is separate, and no overflow; for the control it asserts the old behaviour is unchanged; and it asserts the page contains no real question text. The real `y5-019` evidence in this document comes from the earlier scratch-environment run, not from this test.
+
+**Guards against recurrence** (in `amc-final-seven-remediation.test.ts`): no runtime showcase fixture contains the `y5-019` stem, its options, or any of the 60 AMC draft prompts; fixture IDs are `showcase-demo-…`, tagged `demonstration` and absent from every real bank; and only `src/app/showcase/page.tsx` imports the fixture module. With the real stem put back, three of these tests fail.
+
+**Negative control:** with the renderer fix disabled the two AMC browser tests fail (`Expected "pre-line"`, `Received "normal"`) and the control tests still pass. The existing showcase specs (pinned at 17 cards, plus the axe audit at every viewport) still pass with the new section.
 
 ## 4. The remaining four, and recorded positions
 
@@ -142,26 +148,33 @@ Independent review of the two revised texts is also outstanding. I wrote none an
 
 ## 9. Verification
 
-Run in this worktree on 2026-10-25. Nothing below was run against production.
+Run in this worktree on 2026-10-25. Nothing below was run against production. The table covers the corrected branch (after the showcase-fixture fix); the earlier full-suite run was on the first version.
 
 | Check | Result |
 |---|---|
 | `tsc --noEmit` | exit 0 |
 | `eslint .` | exit 0 |
-| New unit test and extended component tests | 49 of 49 pass |
-| Full unit suite (373 files) | **First run: 371 files and 6526 of 6527 tests passed; 2 files failed, both environmental.** `stripe-webhook-route.test.ts` read a gitignored `.env.local` that a fresh worktree lacks (CI supplies those values as environment variables), and one `legacy-import` CLI test hit its 20 s timeout while the machine was loaded. Re-run in isolation with the CI-style variables: **2 files, 35 of 35 pass.** I did not re-run the entire suite a second time |
-| `validate:questions` | pass |
-| `check:answers -- --include-published` | 0 failures; 1571 warnings, **identical to a pristine `origin/dev` export** |
-| `questions:validate-ledger` | pass |
-| Answer verifier over all 60 drafts | 0 mismatches (but see section 2: it is keyed by ID) |
-| `content:verify-publication` | 53 eligible, 0 problems, nothing pending; zero diff in `published-manifests/` and `publication-approvals/` |
-| Production build (`next build --webpack`) | succeeded |
-| Browser tests on that production build (24) | **24 of 24 pass**: new AMC spec (4), renderer showcase (6), showcase accessibility (3), NAPLAN full-paper flow and picker (3), catalogue (5), smoke (3) |
-| Negative control | AMC spec fails with the fix disabled (`Expected "pre-line"`, `Received "normal"`) |
+| Unit and component tests touching showcase fixtures, AMC, exam patterns and answer-position bias (20 files) | **521 of 521 pass** |
+| Full unit suite (first version of this branch, 373 files) | 371 files and 6526 of 6527 tests passed; 2 files failed, both environmental: `stripe-webhook-route.test.ts` read a gitignored `.env.local` that a fresh worktree lacks (CI supplies those values as environment variables), and one `legacy-import` CLI test hit its 20 s timeout under load. Re-run in isolation with CI-style variables: 2 files, 35 of 35 pass. **The full suite was not re-run after the fixture fix**; the changes since are the fixture module, one showcase section, three test files and docs |
+| `validate:questions`, `check:answers -- --include-published`, `questions:validate-ledger` | pass (0 correctness failures; 1571 warnings, identical to pristine `origin/dev`). `check:answers` and the ledger check were run on the first version, since the fixture fix touches none of the data they read; `validate:questions` was re-run on the corrected branch and passes |
+| `content:verify-publication` and answer verifier (re-run on the corrected branch) | 53 eligible, 0 problems, nothing pending; answer verifier 0 mismatches over 60 drafts; zero diff in `published-manifests/`, `publication-approvals/` and the generated AMC bank |
+| Production build and browser tests on it (desktop and mobile) | **26 of 26 pass**: new AMC spec (6: three tests at each viewport), renderer showcase (6), showcase accessibility (3), NAPLAN full-paper flow and picker (3), catalogue (5), smoke (3) |
+| Negative control (fix disabled) | exactly the two AMC "keeps each line" tests fail (`Expected "pre-line"`, `Received "normal"`); the control and labelling tests pass; with the fix restored, 6 of 6 pass |
+| Guard negative control (real `y5-019` stem put back into the fixture) | 3 unit tests fail; fixture restored byte-for-byte |
+| Deployment-style build (flags unset), served with the showcase gate off | `/showcase` page 404; the showcase chunk is a static file but now contains only the demonstration text. Zero hits for any unpublished question text in `.next/static` and `public/` |
 
-**Not run here:** `test:rls` and `test:e2e:auth` (they need the local Supabase stack); CI will run them on the pull request.
+**Not run here:** `test:rls` and `test:e2e:auth` (they need the local Supabase stack); CI runs them.
 
-Confirmed unchanged: the 53 published questions, manifests and approvals, the generated AMC bank, the four untouched candidates (their registry rows and draft text are identical to `origin/dev`), and NAPLAN/ICAS rendering (the control test, the full-paper flow, and the guarantee that the helper returns an empty class for any style other than `amc_style`). Across the two changed drafts, only `prompt` and `explanation` differ.
+### CI record for the previous head `c9ecdb8c`, kept separate
+
+| Run | Event | Result |
+|---|---|---|
+| [40135923954](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/40135923954) | **push** | **Failed**: `e2e-auth` only. The `next/font` Google loader threw `TypeError: Cannot read properties of null (reading '1')` while compiling `src/app/layout.tsx`, the build failed and the web server never started, so no authenticated test ran. `core`, `e2e`, `rls` and `scholarship-drafts` passed |
+| [40135927715](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/40135927715) | **pull_request** | **Passed**: all five jobs |
+
+So the same commit passed and failed depending on the run, which points to an intermittent font-fetch problem rather than the content of this change. Root cause is not established. It is tracked separately as issue #77, which also records the earlier 24 October failure on `dev`. **No font or global build configuration is changed in this PR.**
+
+Confirmed unchanged: the 53 published questions, manifests and approvals, the generated AMC bank, the four untouched candidates (registry rows and draft text identical to `origin/dev`), and NAPLAN/ICAS rendering (the control test, the full-paper flow, and the helper returning an empty class for any style other than `amc_style`). Across the two changed drafts, only `prompt` and `explanation` differ.
 
 ## 10. Unresolved decisions
 

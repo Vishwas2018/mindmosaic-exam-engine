@@ -17,6 +17,7 @@ An approval binds `revision`, `contentHash` and `sourceManifestHash`. All seven 
 | `y5-028` | **New revision proposed** (bags of counters) | Fresh independent review, then your decision |
 | `y5-019` | **Content unchanged.** A renderer fix removes the presentation defect | Your decision on the unchanged content |
 | `y3-005`, `y3-016`, `y3-026`, `y5-006` | Untouched | Your decision |
+| Showcase test fixtures | **Corrected after review.** An earlier version of this branch put the full unpublished `y5-019` question, options and answer key into a public showcase fixture. They are now clearly synthetic demonstration content, and tests guard against any real or unpublished question text returning | Nothing from you |
 
 ---
 
@@ -74,7 +75,7 @@ sourceManifestHash 9cfbadcd4b13d9cb223cda6038aa68e76c4600deba07a2db3b7f8168699a3
 ```
 Preserved: ID, multiple choice, 4 marks, medium, 150 s, strand, skill, all five options, key d. Only the stem and explanation changed.
 
-- **Independent solution (separate code, bound to the numbers in the text):** 4 × 8 = 32; 5 + 7 + 10 = 22; 32 - 22 = 10. Of the five options only 10 satisfies it.
+- **Independent arithmetic check (hard-coded from the revision brief, not parsed from the wording):** 4 × 8 = 32; 5 + 7 + 10 = 22; 32 - 22 = 10. Of the five options only 10 satisfies it. The test also checks that the prompt contains the expected phrases (string presence). It does not show that a reader would derive these figures from the prose; that rests on human review.
 - **Ambiguity:** none found. "Shared equally" fixes the total at 32 without a defined term. A reader could in principle ask whether shells move between boxes; the stem says the three boxes "actually contain" 5, 7 and 10, so the total is conserved.
 - **Open item (not changed):** the distractors are unchanged. 7 was a "mean of the three" slip under the old wording and is now a weaker near-number; 9, 11 and 13 were already near-fillers. If you want diagnostic distractors, one candidate set is 22 (the three added), 8 (the shared amount), 32 (the total), 10 (key) and 12, but that is a further revision and would need its own review.
 - **Approval:** **new**; the old signature position is "never signed".
@@ -162,7 +163,7 @@ medium · 4 marks · 120 s · Logic & Problem-Solving
 
 Independent solution: exactly one of the 120 assignments satisfies every clue (Asha cherry, Ben apple, Chen banana, Dev date, Ella grape), so the key is right.
 
-**Browser finding (real AMC interface, desktop 1280 and mobile 390):** before the fix the clues collapsed into one run-on paragraph (`white-space: normal`). With the AMC-scoped renderer fix they display one clue per line (`pre-line`) with no horizontal overflow. **The question's identity and hash are unchanged.** This is the first independent review of this rewritten text; earlier signatures and reviews concern the old three-person puzzle.
+**Browser finding (real AMC interface, desktop 1280 and mobile 390, observed in a throwaway environment outside the repo; the committed regression test uses synthetic text, not this question):** before the fix the clues collapsed into one run-on paragraph (`white-space: normal`). With the AMC-scoped renderer fix they display one clue per line (`pre-line`) with no horizontal overflow. **The question's identity and hash are unchanged.** This is the first independent review of this rewritten text; earlier signatures and reviews concern the old three-person puzzle.
 
 **OWNER DECISION (blank):** [ ] APPROVE  [ ] REVISE  [ ] REPLACE   Notes: ____________  Date/initials: ________
 
@@ -186,7 +187,7 @@ sourceManifestHash 3dbf6ae2e561dacb09a1428c8f7265943aaff7b4950b8865a3b158a633e90
 ```
 Preserved: ID, number entry, key 3, tolerance 0, 8 marks, challenging, 180 s, strand, skill.
 
-- **Independent solution (exhaustive, bound to the stated numbers):** all (threes, fives) with 3x + 5y = 30 are (0, 6), (5, 3), (10, 0): exactly 3.
+- **Independent arithmetic check (exhaustive enumeration of the hard-coded equation 3x + 5y = 30, not parsed from the wording):** the pairs are (0, 6), (5, 3), (10, 0): exactly 3. The test separately checks that the prompt contains the expected rule phrases (string presence). It does not prove the prose is unambiguous; that rests on human review.
 - **Why the stem states each rule:** without "including none of one size" the answer would be 1; without "identical" and "order does not matter" a reader could count arrangements and get a much larger number. Each rule is stated and each excluded count is explained.
 - **Open items:** the answer is still the small integer 3 with no tolerance, so a guess has a real chance. Also, the label "challenging" and 8 marks are unchanged although the context is easier to enter than the algebra was; whether that remains right is your call.
 - **Approval:** **new.**

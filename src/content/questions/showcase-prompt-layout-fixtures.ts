@@ -2,79 +2,74 @@ import { validateQuestionBank } from "@/features/exam-engine/validation";
 import type { Question } from "@/schemas/question.schema";
 
 /**
- * Prompt line-break fixtures for the showcase and its browser regression test.
+ * DEMONSTRATION CONTENT ONLY. These are synthetic placeholders for the QA
+ * showcase and its browser regression test. They are not educational
+ * questions, are not part of any examination bank, and must never be copied
+ * from, or made to resemble, a real question.
  *
- * `showcase-amc-multiline-prompt` carries the stem of roadmap-amc-y5-019
- * verbatim (a unit test keeps the two identical). The control is the same
- * text under `naplan_style`, which pins that the AMC-scoped line-break fix
- * does not change how any other exam style displays. They live apart from
- * `showcaseQuestions` because that list is one-per-question-type and is
- * counted by the renderer showcase specs.
+ * In particular this module must never hold text from an unpublished
+ * question. The showcase is a client page, so everything here is compiled
+ * into a static JavaScript chunk, answer keys included, regardless of
+ * whether the route itself is gated. A unit test enforces that no draft or
+ * published question text appears here, and that only the showcase page
+ * imports this module.
+ *
+ * The two fixtures carry the same text under two exam styles. They pin that
+ * line breaks are kept for `amc_style` and that every other style displays
+ * exactly as before. They live apart from `showcaseQuestions` because that
+ * list is one-per-question-type and is counted by the renderer showcase specs.
  */
-export const MULTILINE_PROMPT = [
-  "Five friends—Asha, Ben, Chen, Dev and Ella—each choose a different fruit from: apple, banana, cherry, date and grape.",
+export const DEMO_MULTILINE_PROMPT = [
+  "Demonstration only: this is not a real question.",
   "",
-  "• Asha chooses cherry.",
-  "• Dev chooses date.",
-  "• Ben does not choose banana or grape.",
-  "• Chen does not choose grape.",
+  "• First line of the demonstration list.",
+  "• Second line of the demonstration list.",
+  "• Third line of the demonstration list.",
   "",
-  "Which fruit does Chen choose?",
+  "Choose any option to try the layout.",
 ].join("\n");
 
 const options = [
-  { id: "a", text: "apple" },
-  { id: "b", text: "banana" },
-  { id: "c", text: "cherry" },
-  { id: "d", text: "date" },
-  { id: "e", text: "grape" },
+  { id: "a", text: "Demonstration option 1" },
+  { id: "b", text: "Demonstration option 2" },
+  { id: "c", text: "Demonstration option 3" },
 ];
+
+const demoMetadata = {
+  strand: "Demonstration",
+  topic: "Demonstration",
+  difficulty: "easy" as const,
+  marks: 1,
+  estimatedTimeSeconds: 30,
+  tags: ["demonstration"],
+  locale: "en-AU" as const,
+  source: "original" as const,
+  schemaVersion: 1,
+};
 
 export const showcasePromptLayoutQuestions: readonly Question[] = validateQuestionBank([
   {
-    id: "showcase-amc-multiline-prompt",
+    id: "showcase-demo-amc-multiline",
     type: "multiple_choice",
     yearLevel: 5,
     examStyle: "amc_style",
     status: "published",
-    prompt: MULTILINE_PROMPT,
+    prompt: DEMO_MULTILINE_PROMPT,
     options,
-    answerKey: { kind: "single_option", optionId: "b" },
-    explanation: "Showcase fixture only.",
-    metadata: {
-      subject: "amc_mathematics",
-      strand: "Logic & Problem-Solving",
-      topic: "Logic & Problem-Solving",
-      difficulty: "medium",
-      marks: 4,
-      estimatedTimeSeconds: 120,
-      tags: [],
-      locale: "en-AU",
-      source: "original",
-      schemaVersion: 1,
-    },
+    answerKey: { kind: "single_option", optionId: "a" },
+    explanation: "Demonstration fixture. Not an educational question and not approved for learners.",
+    metadata: { ...demoMetadata, subject: "amc_mathematics" as const },
   },
   {
-    id: "showcase-naplan-multiline-prompt",
+    id: "showcase-demo-naplan-multiline",
     type: "multiple_choice",
     yearLevel: 5,
     examStyle: "naplan_style",
     status: "published",
-    prompt: MULTILINE_PROMPT,
+    prompt: DEMO_MULTILINE_PROMPT,
     options,
-    answerKey: { kind: "single_option", optionId: "b" },
-    explanation: "Showcase fixture only.",
-    metadata: {
-      subject: "numeracy",
-      strand: "Number",
-      topic: "General",
-      difficulty: "medium",
-      marks: 1,
-      estimatedTimeSeconds: 75,
-      tags: [],
-      locale: "en-AU",
-      source: "original",
-      schemaVersion: 1,
-    },
+    answerKey: { kind: "single_option", optionId: "a" },
+    explanation: "Demonstration fixture. Not an educational question and not approved for learners.",
+    metadata: { ...demoMetadata, subject: "numeracy" as const },
   },
 ]);
