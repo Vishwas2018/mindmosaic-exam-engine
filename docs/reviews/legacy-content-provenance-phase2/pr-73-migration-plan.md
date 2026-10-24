@@ -28,13 +28,13 @@ Until that separate decision exists, the correct state for PR #73 is: draft, unm
 
 ## 2. Phase 2a — policy adoption (this PR)
 
-Documentation only. The owner reviews ADR-017 and the specification and decides whether to adopt the narrow deterministic route.
+Documentation only. **COMPLETE.**
 
-The owner recorded scope direction on 2026-10-23, narrowing the initial engineering scope to five candidates (`decisions-for-owner.md` A1–A5). That direction is **not** adoption. The ADR stays `PROPOSED`, and the remaining step in this phase is independent policy review followed by a formal owner adoption decision.
+The owner recorded scope direction on 2026-10-23, narrowing the initial engineering scope to five candidates (`decisions-for-owner.md` A1–A5). Four rounds of independent review followed. **ADR-017 was adopted by explicit owner decision on 2026-10-24**, against reviewed commit `206d0dd4`.
 
-Adopting it authorises design work; it authorises no behaviour change.
+Adoption authorises design work; it authorises no behaviour change, and it does not authorise merging PR #75, which remains draft.
 
-**Exit:** an independent policy review, then a recorded owner adoption decision, or a request for further change.
+**Exit: met.** The recorded owner adoption decision is `owner-adoption-decision.md`. The next phase is 2b, whose recommended execution order is in section 5 of that record.
 
 ## 3. Phase 2b — security prerequisites
 
@@ -122,7 +122,7 @@ The honest default is that PR #73 remains draft until the deferred Class B and C
 
 | # | Blocker | Owner |
 |---|---|---|
-| 1 | ADR-017 not adopted | Repository owner |
+| 1 | ~~ADR-017 not adopted~~ **CLEARED 2026-10-24** — adopted as policy; design work on phase 2b is authorised, behaviour change is not | — |
 | 2 | Approval authentication not designed; `dev` branch protection absent | Security design + owner |
 | 3 | Legacy-origin ledger not designed | Security design |
 | 4 | — *(cleared from the critical path)* The five in-scope candidates already have first-party recompute. `nr-001` and `vr-032` are out of scope, so their missing entries no longer block the route | — |

@@ -1,6 +1,6 @@
 # Legacy content: deterministic-only admission policy (Phase 2 specification)
 
-**Status:** PROPOSED — pending owner authorisation. Not adopted, not implemented.
+**Status:** **ADOPTED** as policy by owner decision, 2026-10-24, at commit `206d0dd4`. **Not implemented**, and no behaviour is authorised. See `docs/reviews/legacy-content-provenance-phase2/owner-adoption-decision.md`.
 **Phase:** 2a (policy only; documentation-only change)
 **Governing decision:** `docs/adr/017-legacy-content-unknown-origin-eligibility.md`
 **Preceding specifications:** `docs/REVIEW_INDEPENDENCE_POLICY.md`, `docs/spec/legacy-content-provenance-phase1.md`
@@ -110,7 +110,7 @@ All six components are mandatory. Any missing, malformed, unparseable or stale c
 
 **1. First-party solver execution.** A registered solver recomputes the answer. The recompute must read its inputs from the prompt and must not execute or trust `solverParams`, sidecar constraint strings or the candidate explanation. Records: solver identifier and version, the exact derived option id, the givens read from the prompt, unit handling, distractor evaluation, and the **D2 factory-candidate hash** the recompute was bound to. The solver identifier and its declared givens are resolved by the verifier from the live first-party registry, never taken from the bundle or from the candidate's sidecar.
 
-**2. Exact candidate and revision binding.** Records `rawQuestionHash` (D1), `factoryCandidateHash` (D2), `publicationContentHash` (D3) and the factory revision. Each must equal the value the verifier **independently recomputes**; none may be accepted as asserted. In particular D3 must be derived by projecting the factory candidate through `buildPublishedQuestion`, not read from the source register, which is where `legacy-import/bindings.ts` currently copies it from. A recompute bound to a hash that no longer matches the candidate is stale and is discarded rather than reused.
+**2. Exact candidate and revision binding.** Records `rawQuestionHash` (D1), `factoryCandidateHash` (D2), `publicationContentHash` (D3) and the factory revision. Each must equal the value the verifier **independently recomputes**; none may be accepted as asserted. In particular D3 must be derived by projecting the factory candidate through `buildPublishedQuestion`, not read from a value carried forward. Manifest preparation (`legacy-import/bindings.ts`) copies D3 from the source register; import preflight (`legacy-import/preflight.ts`) already recomputes it and fails closed with `publication_hash_mismatch`. The admission gate runs after both and derives it again on its own evidence. A recompute bound to a hash that no longer matches the candidate is stale and is discarded rather than reused.
 
 **3. Originality assessment.** A bounded search record, per section 5.
 

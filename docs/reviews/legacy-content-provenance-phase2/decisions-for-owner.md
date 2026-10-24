@@ -1,11 +1,12 @@
 # Decisions requiring owner authorisation
 
-**Status:** the owner recorded policy direction on 2026-10-23. A1–A4 are **decided**; A5 is **deliberately left open**. ADR-017 nonetheless remains `PROPOSED` and is not adopted: the direction below shapes what is proposed and sets the scope an independent reviewer should review, and formal adoption is a separate, later act by the owner.
+**Status:** **ADR-017 was ADOPTED by the owner on 2026-10-24**, at reviewed commit `206d0dd4`, after four rounds of independent review. A1–A4 were decided on 2026-10-23 and are carried into adoption unchanged; A5 remains **deliberately open**. Adoption is policy only — see `owner-adoption-decision.md` for the exact scope of what it does and does not authorise.
 
 The decision set is deliberately smaller than the withdrawn first draft's. Several of its questions assumed capabilities this repository does not have, and are not real choices today. Those appear in section B as blocked rather than as options.
 
 | Decision | Outcome | Recorded |
 |---|---|---|
+| **Adoption of ADR-017** | **ADOPTED — policy and design only** | **2026-10-24** |
 | A1 Adopt the narrow deterministic route | Option A — support the route, correctness only | 2026-10-23 |
 | A2 Candidate scope | Option A — five now, `nr-001` on condition, `vr-032` deferred | 2026-10-23 |
 | A3 Security prerequisites | Option A — commission both, separately and independently reviewed | 2026-10-23 |
@@ -16,9 +17,11 @@ The decision set is deliberately smaller than the withdrawn first draft's. Sever
 
 ## A. Live decisions
 
-### A1 — Adopt the narrow deterministic route? — **DECIDED: Option A**
+### A1 — Adopt the narrow deterministic route? — **DECIDED: Option A; ADR ADOPTED 2026-10-24**
 
-**Owner direction (2026-10-23).** The `deterministic_legacy_admission` route is supported. It must establish correctness only, and must not imply known authorship or verified provider independence. This is support for the route as a policy position; it is not adoption of the ADR, which stays `PROPOSED` pending independent review and a formal adoption decision.
+**Owner decision (2026-10-24).** ADR-017 is adopted as the Phase 2a governance policy, against reviewed commit `206d0dd4`. The adoption is policy design only and authorises no behaviour; `owner-adoption-decision.md` records the scope.
+
+**Owner direction (2026-10-23).** The `deterministic_legacy_admission` route is supported. It must establish correctness only, and must not imply known authorship or verified provider independence. At the time this was recorded it was support for the route as a policy position, not adoption; **adoption followed on 2026-10-24** after four rounds of independent review.
 
 - **Option A (recommended): adopt ADR-017 as scoped.** One named route, `deterministic_legacy_admission`, for deterministically recomputable content only. Everything else stays at the Phase 1 hold. Adoption authorises design work, not behaviour.
 - **Option B: permanent ineligibility.** Keep the Phase 1 hold indefinitely for all unknown-origin content.

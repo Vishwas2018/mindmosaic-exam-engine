@@ -1,6 +1,6 @@
 # Proposed schemas for the deterministic legacy admission route
 
-**Status:** PROPOSED design sketch. Not implemented. No file in `src/` is changed by this PR.
+**Status:** design sketch under the **ADOPTED** ADR-017 (2026-10-24). **Not implemented**; no file in `src/` is changed by this PR, and adoption of the policy does not authorise implementing these shapes.
 
 These shapes exist to be reviewed and argued with. Two design rules govern all of them.
 
@@ -38,7 +38,16 @@ This repository computes **three different hashes over three different objects**
 | `maths-007` | `93bfea7f835eaf40…` | `938bf96f5c97c805…` |
 | `maths-014` | `71d11fa2c35f6551…` | `aeb211f7441a014a…` |
 
-**The D2 → D3 mapping is recomputable and was verified.** For all five candidates, `canonicalQuestionHash(buildPublishedQuestion(candidateQuestionSchema.parse(raw)).question)` reproduces the recorded `publicationContentHash` exactly. The gate must therefore *derive* D3 rather than trust it. This matters because the legacy import path does **not** currently derive it: `legacy-import/bindings.ts` copies `row.currentPublicationContentHash` verbatim from the source register, so the register's assertion is the only thing standing behind that value today.
+**The D2 → D3 mapping is recomputable and was verified.** For all five candidates, `canonicalQuestionHash(buildPublishedQuestion(candidateQuestionSchema.parse(raw)).question)` reproduces the recorded `publicationContentHash` exactly. The gate must therefore *derive* D3 rather than trust it.
+
+**Correction (owner-recorded P2 follow-up, 2026-10-24).** An earlier version of this paragraph said the legacy import path "does **not** currently derive" D3 and that the source register's assertion "is the only thing standing behind that value today". **That was wrong**, and it understated an existing control. Manifest preparation and import preflight are two different stages and must not be described as one:
+
+| Stage | Function | What it does with D3 |
+|---|---|---|
+| **Manifest preparation** | `prepareScholarshipLegacyManifest` (`legacy-import/bindings.ts`) | **Copies** `row.currentPublicationContentHash` verbatim from the source register. It recomputes D1 and D2 but not D3. |
+| **Import preflight** | `preflightLegacyImport` (`legacy-import/preflight.ts`) | **Recomputes D3 and fails closed.** It builds the published projection from the candidate *and* from the pre-sidecar original, and throws `publication_hash_mismatch` unless `canonicalQuestionHash` of **both** equals the manifest's `publicationContentHash`. It separately throws `source_register_binding_mismatch` if the register row disagrees with the manifest. |
+
+So D3 is already independently verified before any import proceeds, by exactly the pipeline this document specifies, and the register's assertion is **not** the only thing standing behind it. Requiring the admission gate to derive D3 therefore extends an existing guarantee to a later stage rather than closing an open hole — the honest reason for the requirement is that the admission gate runs after preflight and must not inherit a value on trust.
 
 ---
 
@@ -230,7 +239,7 @@ Only `affirmed` on the first three, together with `none_defensible` on the fourt
 
 ## 4b. Publication projection binding
 
-Added on independent review finding H-1. The bundle must carry the D2 → D3 mapping explicitly, because `legacy-import/bindings.ts` copies `publicationContentHash` from the source register rather than deriving it. A copied assertion is not a binding.
+Added on independent review finding H-1. The bundle must carry the D2 → D3 mapping explicitly so the admission gate derives it rather than inheriting it. Note the two-stage picture corrected in section 0: manifest preparation (`bindings.ts`) copies `publicationContentHash` from the source register, while import preflight (`preflight.ts`) already recomputes it and fails closed with `publication_hash_mismatch`. The bundle binding exists so that the admission gate, which runs later, repeats that derivation on its own evidence rather than trusting a value carried forward.
 
 ```ts
 export const publicationProjectionBindingSchema = z.object({

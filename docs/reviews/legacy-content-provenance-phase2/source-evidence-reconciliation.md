@@ -1,6 +1,6 @@
 # Corrected 12-item source and evidence reconciliation
 
-**Status:** evidence record for the PROPOSED Phase 2a policy. No candidate is admitted, staged, published or approved.
+**Status:** evidence record for the **ADOPTED** Phase 2a policy (2026-10-24). No candidate is admitted, staged, published or approved, and adoption changes none of that.
 **Source of truth:** PR #73 at `dcb60a80f3f6eabdb522b20202929d2e3f328a94` (read-only; unmodified by this PR).
 **Machine output:** `source-evidence-reconciliation.json`, generated mechanically from committed bytes by `reconcile.py` in this directory.
 **Regenerated:** 2026-10-24, on independent review finding P2-2. Two consecutive runs produced byte-identical output.

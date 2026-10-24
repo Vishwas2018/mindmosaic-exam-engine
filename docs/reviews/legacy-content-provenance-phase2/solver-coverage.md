@@ -1,6 +1,6 @@
 # Solver coverage and missing bindings for the deterministically recomputable candidates
 
-**Status:** analysis for the PROPOSED Phase 2a policy. No code is changed by this PR.
+**Status:** analysis supporting the **ADOPTED** Phase 2a policy (2026-10-24). No code is changed by this PR.
 **Scope outcome:** this analysis is what the owner's 2026-10-23 narrowing rests on. The initial engineering scope is the five candidates in the "first-party recompute" rows below; `nr-001` is conditional and `vr-032` is deferred.
 **Code state examined:** this branch, which matches `dev` at `714ad64155b3ba3109695bf44c3d14ab7473da4c` for all files cited.
 

@@ -1,6 +1,8 @@
 # Phase 2a — deterministic legacy admission policy proposal
 
-**Status:** PROPOSED, scope narrowed on owner direction of 2026-10-23. Documentation only. No code, schema, gate or question content is changed by this PR. The direction narrows what is proposed and sets what an independent reviewer should review; it is not adoption, and ADR-017 remains `PROPOSED`.
+**Status:** **ADOPTED** by explicit owner decision on 2026-10-24, against reviewed commit `206d0dd4`. Documentation only. No code, schema, gate or question content is changed by this PR.
+
+Adoption is a **policy-design decision only**. It authorises design work and nothing else: no gate changes, no candidate admitted, no ingestion, staging, publication, deployment, release or merge. PR #75 remains **draft and unmerged**. Implementation, admission and release each need their own separate owner authorisation. The full record, including the exact scope of authorisation, the independent review evidence and the Phase 2b workstreams, is in `owner-adoption-decision.md`.
 
 This directory holds the revised Phase 2 governance proposal for MindMosaic legacy content whose original generation is unverified. It replaces a first draft that was withdrawn (see below).
 
@@ -25,7 +27,7 @@ Adopting the ADR authorises design work. It authorises no behaviour change. Ever
 
 | File | Purpose |
 |---|---|
-| `../../adr/017-legacy-content-unknown-origin-eligibility.md` | The governance decision. Status `PROPOSED`. |
+| `../../adr/017-legacy-content-unknown-origin-eligibility.md` | The governance decision. Status **`ADOPTED`** (2026-10-24). |
 | `../../spec/legacy-content-unknown-origin-policy.md` | The policy specification: scope, evidence, gates, invariants. |
 | `source-evidence-reconciliation.md` | Corrected 12-item reconciliation. Hand-written narrative over the JSON; its tables are transcribed, not generated. See its section 1. |
 | `source-evidence-reconciliation.json` | Machine output backing the above. |
@@ -36,6 +38,7 @@ Adopting the ADR authorises design work. It authorises no behaviour change. Ever
 | `deferred-class-b-c-register.md` | What is held, what is missing, and the reopening conditions. Covers `vr-032` (section 1.1) as well as Class B and C. |
 | `pr-73-migration-plan.md` | Sequence, blockers, and why a shortened sample is not authorised. |
 | `decisions-for-owner.md` | Live decisions, blocked decisions, and what adoption does not authorise. |
+| `owner-adoption-decision.md` | **The adoption record**: decision, date, reviewed commit, exact authorisation scope, independent review evidence, P2 follow-ups and Phase 2b workstreams. |
 
 ## Withdrawn material
 

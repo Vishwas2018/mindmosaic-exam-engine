@@ -1,6 +1,6 @@
 # Threat model for the deterministic legacy admission route
 
-**Status:** analysis for the PROPOSED Phase 2a policy. Describes current code state and proposed future controls, and labels which is which throughout.
+**Status:** analysis supporting the **ADOPTED** Phase 2a policy (2026-10-24). Describes current code state and proposed future controls, and labels which is which throughout. Adoption does not build any control marked [proposed] or [not designed].
 
 A correction governs this document. The withdrawn first draft credited countermeasures to controls that do not exist in this repository. Every countermeasure below is marked **[built]**, **[proposed]** or **[not designed]**, and no threat is treated as mitigated by a control that has not been built.
 

@@ -1,11 +1,16 @@
 # ADR-017: Deterministic-only admission route for legacy content with unknown original authorship
 
-- **Status:** PROPOSED — not adopted, not authorised, not implemented
-- **Scope direction:** narrowed on owner instruction, 2026-10-23 (five-candidate initial engineering scope; `nr-001` conditional; `vr-032` deferred). Direction shapes this proposal; it is not adoption, and the status above is unchanged.
+- **Status:** **ADOPTED** — adopted as policy by explicit owner decision, 2026-10-24. **Not implemented, and no behaviour is authorised.**
+- **Adopted at commit:** `206d0dd48a07da5bc3e32fea12bd663d140bfddf` (the reviewed HEAD the decision was taken against)
+- **Scope direction:** narrowed on owner instruction, 2026-10-23 (five-candidate initial engineering scope; `nr-001` conditional; `vr-032` deferred), and carried unchanged into adoption.
+- **Decision record:** `docs/reviews/legacy-content-provenance-phase2/owner-adoption-decision.md`
 - **Date:** 2026-10-23
 - **Supersedes within this programme:** the withdrawn first draft of this ADR (see `docs/reviews/legacy-content-provenance-phase2/README.md`, "Withdrawn material")
 - **Spec:** `docs/spec/legacy-content-unknown-origin-policy.md`
 - **Phase:** 2a (policy only)
+- **Policy decision date:** 2026-10-24
+
+> **What adoption means here.** This ADR is now the governing policy position for deterministic legacy content. It authorises **design work only**. It does not change any gate, admit any candidate, or authorise ingestion, staging, publication, deployment, release or the merging of any pull request. Every Phase 1 refusal remains active, all six admission evidence requirements remain mandatory, and the two security prerequisites in section 6 remain unbuilt and blocking. Implementation, admission and release each require their own separate owner authorisation.
 
 ## Context
 
@@ -13,7 +18,7 @@ Phase 1 (`docs/spec/legacy-content-provenance-phase1.md`, merged by PR #74 at `7
 
 Phase 1 then refused these candidates everywhere: independent-review clearance, staging, publication eligibility, publication replay, manifest validation and bank assembly. The Phase 1 specification is explicit that this blanket refusal is "a conservative implementation boundary, not approval of a new unknown-origin review policy", and that any future eligibility route "needs a separately reviewed governance decision and implementation".
 
-This ADR is that governance decision, deliberately scoped as narrowly as the evidence supports.
+This ADR is that governance decision, deliberately scoped as narrowly as the evidence supports. It was adopted by the repository owner on 2026-10-24 against commit `206d0dd4`, after four rounds of independent review; the authorisation it carries is recorded in the decision record cited above and is limited to policy and design.
 
 Two facts constrain what can honestly be proposed today.
 
