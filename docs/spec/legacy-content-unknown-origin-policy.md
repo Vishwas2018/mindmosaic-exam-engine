@@ -104,13 +104,15 @@ No code path may read this route as independence, and no surface may describe an
 
 All six components are mandatory. Any missing, malformed, unparseable or stale component evaluates to REJECT.
 
-**1. First-party solver execution.** A registered solver recomputes the answer. The recompute must read its inputs from the prompt and must not execute or trust `solverParams`, sidecar constraint strings or the candidate explanation. Records: solver identifier and version, the exact derived option id, the givens read from the prompt, unit handling, distractor evaluation, and the content hash the recompute was bound to.
+**0. Hash domains.** Three different hashes exist over three different objects, and no component may use one in place of another. **D1** `rawQuestionHash` = `hashJson(raw)`. **D2** `factoryCandidateHash` = `hashJson(candidateQuestionSchema.parse(candidate))` — **the domain `verifyFirstPartyScholarshipAttestation` binds to**, and the domain every evidence component below binds to. **D3** `publicationContentHash` = `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` — the published projection, a different schema shape. D2 and D3 differ for all five in-scope candidates; D1 and D2 coincide for them only because none carries a solver sidecar. Full table and verified values in `docs/reviews/legacy-content-provenance-phase2/schemas.md` section 0.
 
-**2. Exact candidate and revision binding.** Records `rawQuestionHash`, `factoryCandidateHash`, `publicationContentHash` and the factory revision. A recompute bound to a hash that no longer matches the candidate is stale and is discarded rather than reused.
+**1. First-party solver execution.** A registered solver recomputes the answer. The recompute must read its inputs from the prompt and must not execute or trust `solverParams`, sidecar constraint strings or the candidate explanation. Records: solver identifier and version, the exact derived option id, the givens read from the prompt, unit handling, distractor evaluation, and the **D2 factory-candidate hash** the recompute was bound to. The solver identifier and its declared givens are resolved by the verifier from the live first-party registry, never taken from the bundle or from the candidate's sidecar.
+
+**2. Exact candidate and revision binding.** Records `rawQuestionHash` (D1), `factoryCandidateHash` (D2), `publicationContentHash` (D3) and the factory revision. Each must equal the value the verifier **independently recomputes**; none may be accepted as asserted. In particular D3 must be derived by projecting the factory candidate through `buildPublishedQuestion`, not read from the source register, which is where `legacy-import/bindings.ts` currently copies it from. A recompute bound to a hash that no longer matches the candidate is stale and is discarded rather than reused.
 
 **3. Originality assessment.** A bounded search record, per section 5.
 
-**4. Editorial interpretation check.** A named, qualified human reviewer records, against the exact content hash, a judgement on what the solver cannot reach:
+**4. Editorial interpretation check.** A named, qualified human reviewer records, against the exact **D2 factory-candidate hash** and a hash of the content as actually displayed to them, a judgement on what the solver cannot reach:
 
 - **Prompt-to-solver assumptions** — the solver's registered givens and its model of the problem are the ones the stem actually states. The reviewer is shown the solver's interpretation explicitly and must affirm or reject it.
 - **Exhaustiveness** — the stem's stated conditions close the problem, with no unstated population, category or constraint left open.
@@ -119,7 +121,7 @@ All six components are mandatory. Any missing, malformed, unparseable or stale c
 
 A `REVISE` or `not_suitable` outcome on any of the four rejects the candidate. This component is mandatory and is **not** satisfied by a passing recompute, by the advisory review of section 4.3, or by the age-suitability check below.
 
-**5. Age-suitability and curriculum check.** A named human records a judgement on year-level suitability, syllabus mapping and distractor quality against the exact content hash.
+**5. Age-suitability and curriculum check.** A named human records a judgement on year-level suitability, syllabus mapping and distractor quality against the exact **D2 factory-candidate hash**.
 
 **6. Authorised human approval.** Per section 6. Not available today.
 

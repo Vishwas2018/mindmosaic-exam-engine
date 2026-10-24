@@ -179,7 +179,7 @@ Three properties of the implementation make the boundary concrete:
 
 **Countermeasures.**
 - **[built]** `verifyFirstPartyScholarshipAttestation` is hash-bound and returns `content_hash_mismatch` when content does not hash to the expected value.
-- **[proposed]** Every evidence component in the bundle carries `boundContentHash`, and a mismatch discards the component rather than reusing it.
+- **[proposed]** Every evidence component in the bundle carries a domain-explicit `boundFactoryCandidateHash` (the D2 factory-candidate domain; see `schemas.md` section 0), the verifier recomputes that hash rather than accepting it, and a mismatch discards the component rather than reusing it. A component carrying the D3 publication hash is refused as a domain error, not treated as stale.
 - **[policy]** Difficulty, stem, option, key and explanation edits are treated as new revisions requiring new evidence. This is why the two reviewer difficulty observations are recorded rather than applied.
 
 ### T7 — Governance records that overstate what was established

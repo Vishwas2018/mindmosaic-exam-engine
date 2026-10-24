@@ -14,7 +14,7 @@ The repository already has deterministic correctness machinery. It is important 
 
 `verifyFirstPartyScholarshipAttestation` in `src/features/question-factory/correctness/scholarship-attestation.ts`. Its documented guardrails are exactly what the Class A route requires:
 
-1. Hash-bound: content must hash to the supplied `expectedContentHash`.
+1. Hash-bound: content must hash to the supplied `expectedContentHash`, computed as `hashJson(question)` over the **factory candidate** — the D2 domain of `schemas.md` section 0, not the D3 publication projection.
 2. **Candidate logic is never executed** — `solverParams` and any sidecar constraint strings are ignored.
 3. Fails closed on out-of-scope item, missing solver, throwing solver, non-finite result, prompt numbers that differ from the solver's declared givens, ambiguous option match or key mismatch.
 
@@ -102,7 +102,7 @@ Every structural fact — the factor 3, the factor 2, the direction of the compa
 
 | Situation | What happens | Why |
 |---|---|---|
-| **A. Mutated stem checked against the previously recorded hash** | **Detected.** `content_hash_mismatch`, fails closed. | `hashJson(question)` covers the prose. Changing "three times" to "four times" changes the content hash, so the stored `expectedContentHash` no longer matches. This is exactly what the hash binding is for, and it works. |
+| **A. Mutated stem checked against the previously recorded D2 hash** | **Detected.** `content_hash_mismatch`, fails closed. | `hashJson(question)` covers the prose. Changing "three times" to "four times" changes the content hash, so the stored `expectedContentHash` no longer matches. This is exactly what the hash binding is for, and it works. |
 | **B. Mutated stem re-hashed, then recomputed fresh against its own new hash** | **Not detected by the numeric machinery.** The recompute returns a clean `recomputed_match`. | The new hash is self-consistent, so the hash check passes by construction. The set-equality guard still sees `{8}` on both sides, because the mutated words contribute no digits. The solver still evaluates its hard-coded `3 ×` relation and still returns 8 — which the mutated stem no longer implies. |
 
 So the exposure is **not** that content changes leave checked hashes unchanged — they do not, and case A proves it. The exposure is narrower and is confined to case B: **a fresh recomputation against newly hashed content cannot detect that the written relationships changed**, because nothing in the numeric path reads the relational prose. Hash binding detects *drift from a known-good revision*; it cannot adjudicate whether a *new* revision's prose matches the solver's model. Only a human reading the stem can do that.

@@ -69,7 +69,7 @@ Implement the new predicate, the staging and manifest changes, and the adversari
 
 For in-scope candidates only, and only after 2b–2d. Each step is performed separately for each of the five: `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014`.
 
-1. Produce first-party recompute evidence bound to exact hashes.
+1. Produce first-party recompute evidence bound to the exact **D2 factory-candidate hash**, and record the D1, D2 and D3 hashes plus the verified D2 → D3 projection in the revision binding.
 2. **Obtain a qualified human editorial interpretation assessment — see 6.1 below.**
 3. Run a bounded originality search per candidate and record the result, including matches, uncertainty or coverage gaps. A non-clean result stops that candidate.
 4. Record an age-suitability and curriculum judgement from a named reviewer. This is a **separate** judgement from step 2 and does not substitute for it.
@@ -88,7 +88,7 @@ For each of the five candidates:
 1. **Resolve the registered solver assumptions from the live registry**, not from the bundle, the sidecar or the draft packet. Capture the registry key, the declared `givens`, and a written statement of the model the solver actually evaluates.
 2. **Present those assumptions to the reviewer explicitly**, alongside the stem, options and declared key. A reviewer who was never shown the solver's interpretation cannot have affirmed it, and the record is required to show what they were shown.
 3. **Record four separate judgements** — prompt-to-solver assumptions, exhaustiveness, ambiguity, and alternative defensible answers — each able to fail on its own. A single overall verdict is not acceptable.
-4. **Bind the record** to `candidateId`, `factoryRevision` and the exact publication content hash, matching the recompute evidence for the same revision.
+4. **Bind the record** to `candidateId`, `factoryRevision`, the exact **D2 factory-candidate hash** and a hash of the content as displayed to the reviewer, matching the recompute evidence for the same revision. The D2 hash is `hashJson(candidateQuestionSchema.parse(candidate))`; it is **not** the `publicationContentHash`, which is the D3 published projection and is a different value for all five candidates (`schemas.md` section 0). Collecting the wrong one produces evidence that can never validate.
 5. **Name the reviewer and their qualification.** The reviewer must be one of the three permitted roles. This is the blocker noted in section 9 item 6: no such reviewer is currently engaged.
 
 The per-candidate starting points are in `solver-coverage.md` section 3a. Two warrant specific attention when the assessment is commissioned:

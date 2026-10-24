@@ -45,7 +45,7 @@ It returns a correctness verdict only. It never returns, sets or implies an inde
 
 ### 3.2 Staging
 
-`orchestrate-staging.ts` continues to refuse `kind: legacy_import` unless **all** hold: route is `deterministic_legacy_admission`; the bundle validates; `recompute.outcome` is `recomputed_match`; **the editorial interpretation evidence is present and passes every condition in section 3.2.1**; `originality.result.status` is `no_match_found`; the age-suitability verdict is `suitable`; every `boundContentHash` matches the candidate's current hashes; a verified ledger row exists; and the approval verifies against the authorised signer registry. Any failure refuses with the existing code.
+`orchestrate-staging.ts` continues to refuse `kind: legacy_import` unless **all** hold: route is `deterministic_legacy_admission`; the bundle validates; `recompute.outcome` is `recomputed_match`; **the editorial interpretation evidence is present and passes every condition in section 3.2.1**; `originality.result.status` is `no_match_found`; the age-suitability verdict is `suitable`; the **candidate and revision binding** verifies, meaning every component's `boundFactoryCandidateHash` equals the D2 hash the verifier recomputes and `binding.publicationContentHash` equals the D3 hash it derives via `buildPublishedQuestion` (`schemas.md` section 0); a verified ledger row exists; and the approval verifies against the authorised signer registry. Any failure refuses with the existing code.
 
 #### 3.2.1 Editorial interpretation is a mandatory gate condition
 
@@ -53,7 +53,7 @@ It returns a correctness verdict only. It never returns, sets or implies an inde
 
 1. `editorialInterpretation` is present and schema-valid.
 2. `candidateId` and `factoryRevision` equal the binding's.
-3. `boundContentHash` equals the candidate's current publication content hash **and** the hash the recompute ran against.
+3. `reviewedFactoryCandidateHash` equals the candidate's current **D2 factory-candidate hash** and the D2 hash the recompute ran against. **Corrected on finding H-1:** this previously said "publication content hash", which is D3 and is a different value for all five in-scope candidates; as written the condition could never be met. The verifier recomputes D2 as `hashJson(candidateQuestionSchema.parse(candidate))` and D3 as `canonicalQuestionHash(buildPublishedQuestion(candidate).question)`, and compares each to its own field.
 4. `solverInterpretationPresented.solverIdentifier` and `.declaredGivens` match the values the gate reads from the **live registry**, not the values restated in the bundle.
 5. `reviewerIdentity`, `reviewerRole` and `reviewerQualification` are present, and the role is one of the three permitted.
 6. `promptToSolverAssumptions`, `exhaustiveness` and `ambiguity` are each `affirmed`. `uncertain` rejects exactly as `rejected` does.
@@ -111,7 +111,7 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 14. `uncertain` — refused.
 15. `inconclusive` (engine outage, rate limit) — refused. An unavailable engine is not a pass.
 16. `rejected` — refused.
-17. Originality bound to a different content hash — refused.
+17. Originality bound to a different D2 factory-candidate hash — refused.
 18. A record asserting zero risk or copyright clearance — rejected at schema level; the field does not exist.
 
 ### 4.4 Independence must not be inferred
@@ -127,7 +127,7 @@ A new suite, `src/tests/unit/question-factory/deterministic-legacy-admission.tes
 The gate must refuse every case below **while the first-party numeric recompute returns a clean `recomputed_match`**. That precondition is the point of the section: each case isolates the editorial component from the arithmetic.
 
 18a. Bundle with no `editorialInterpretation` member — refused. (Currently every bundle.)
-18b. `boundContentHash` does not match the candidate's current content — refused as stale, not reused.
+18b. `reviewedFactoryCandidateHash` does not match the candidate's current D2 hash — refused as stale, not reused.
 18c. `candidateId` names a different candidate — refused. An editorial record must not be transferable between items.
 18d. `factoryRevision` names a different revision of the same candidate — refused.
 18e. `solverInterpretationPresented.solverIdentifier` differs from the solver the gate resolves from the live registry — refused.
@@ -144,17 +144,31 @@ The gate must refuse every case below **while the first-party numeric recompute 
 18p. A passing recompute with an `ageSuitability` verdict of `suitable` but **no** editorial record — refused. Age-suitability does not satisfy requirement 2.
 18q. An advisory review agreeing with the key, offered in place of the editorial record — refused regardless of how many advisory entries agree.
 
+### 4.4a-H Hash-domain integrity
+
+Added on finding H-1. These cases exist because the three domains are easy to confuse and a confusion is silent: a D3 value in a D2 field looks like a well-formed 64-hex string. Each case must refuse with a message naming the domain error, not a generic mismatch.
+
+18w. `recompute.boundFactoryCandidateHash` carries the candidate's **D3** `publicationContentHash` — refused as a domain error, not as stale evidence.
+18x. `editorialInterpretation.reviewedFactoryCandidateHash` carries the D3 hash — refused as a domain error.
+18y. `originality.boundFactoryCandidateHash` or `ageSuitability.boundFactoryCandidateHash` carries the D3 hash — refused as a domain error.
+18z. A bundle in which **every** component consistently carries D3 instead of D2 — refused. Internal consistency is not validity; the verifier compares against independently recomputed values, so a uniformly wrong bundle fails uniformly.
+18aa. `binding.publicationContentHash` does not equal `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` — refused. The verifier derives D3; it must not read it from the source register.
+18ab. `publicationProjection.factoryCandidateHash` does not equal `binding.factoryCandidateHash` — refused: the projection was run over a different candidate.
+18ac. `publicationProjection` claims `recomputedByVerifier: true` in a submitted bundle — the verifier overwrites this from its own recomputation and never trusts the submitted value; a bundle asserting it must not thereby skip the recomputation.
+18ad. A **solver_sidecar** candidate (`vr-032`, `nr-001`) where D1 equals D2 — refused as inconsistent with `transformation: "solver_sidecar"`, which must change the candidate hash. This case is out of initial scope today and must refuse on scope first; it is specified so the check exists when the scope question is reopened.
+18ae. **Positive control.** For each of the five in-scope candidates, a bundle whose D1, D2 and D3 all equal the independently recomputed values passes the hash-domain checks and then refuses only for the missing approval, ledger and editorial evidence. This case is the regression that would have caught H-1: if any hash-domain condition is unsatisfiable, this test fails.
+
 ### 4.4b `nr-022` regression: the word-only mutation
 
 `nr-022` carries the weakest prompt-to-solver binding of the five in-scope candidates (`givens: [8]`; both ratios live in the solver — see `solver-coverage.md` section 3a.3). These two cases pin the behaviour that matters, and they are deliberately different.
 
 **Case A — mutated stem checked against the previously recorded hash.**
 
-18r. Take committed `nr-022`, change "three times as old" to "four times as old" and change nothing else. Supply the **original** `expectedContentHash`. `verifyFirstPartyScholarshipAttestation` must return **`content_hash_mismatch`**, and admission must refuse. This proves the hash binding does what it is for: prose is inside `hashJson(question)`, so a word-only edit is detected against a known-good revision.
+18r. Take committed `nr-022`, change "three times as old" to "four times as old" and change nothing else. Supply the **original D2** `expectedContentHash` (`8758ac61587d966b…`). `verifyFirstPartyScholarshipAttestation` must return **`content_hash_mismatch`**, and admission must refuse. This proves the hash binding does what it is for: prose is inside `hashJson(question)`, so a word-only edit is detected against a known-good revision.
 
 **Case B — the same mutation, re-hashed, recomputed fresh.**
 
-18s. Take the same mutated stem, compute its **new** content hash, and run the recompute against that. The recompute **may legitimately return `recomputed_match`**: the hash is self-consistent, the prompt still yields the digit set `{8}`, and the solver still evaluates its hard-coded `3 ×` relation. The test must assert this honestly rather than expecting a numeric failure that will not occur.
+18s. Take the same mutated stem, compute its **new D2** hash, and run the recompute against that. The recompute **may legitimately return `recomputed_match`**: the hash is self-consistent, the prompt still yields the digit set `{8}`, and the solver still evaluates its hard-coded `3 ×` relation. The test must assert this honestly rather than expecting a numeric failure that will not occur.
 
 18t. Admission for case B must nonetheless **refuse**, because no editorial interpretation record exists for the new revision. A new revision requires fresh editorial evidence; re-hashing and re-running the solver does not re-establish eligibility.
 

@@ -73,6 +73,26 @@ A second independent review, of `eb83708f`, returned REQUEST CHANGES with one P1
 | **P2-2** | ADR-017 and the specification described the manually submitted ChatGPT advisory review as a qualified human examination. | ADR-017 section 3; specification section 2; `threat-model.md` T4 — attributed to the `manual_user_attested` ChatGPT advisory review, with the qualified editorial check recorded as new, mandatory and **never yet performed**. |
 | **P2-3** | This README claimed the reconciliation outputs were not regenerated and were byte-identical to the reviewed versions. True at `63ec92fe`, false from `eb83708f`. | "Reconciliation audit history" below — source evidence unchanged, generated output regenerated and reproducible but **not** byte-identical to what the first review saw. |
 
+## Correction from the hash-domain review
+
+A targeted review of `816f12b7` identified one further defect, **H-1**, in the evidence contract.
+
+**Confirmed, and blocking.** The `superRefine` proposed in `schemas.md` section 9 required the editorial record's hash to equal *both* `binding.publicationContentHash` and `recompute.boundContentHash`. Those are different domains: the attestation binds to the **factory candidate** hash, while `publicationContentHash` is the **published projection**. The two differ for all five in-scope candidates, so the pair of conditions was unsatisfiable and would have rejected every genuine bundle.
+
+Independently reproduced with the repository's own `hashJson`, `candidateQuestionSchema`, `buildPublishedQuestion` and `canonicalQuestionHash`:
+
+| Candidate | D2 factory candidate | D3 publication projection | Equal? |
+|---|---|---|---|
+| `nr-022` | `8758ac61587d966b…` | `a0c486d79ec70260…` | no |
+| `nr-023` | `52d196a6d5d1829e…` | `7b80d6a14c2af6e9…` | no |
+| `maths-004` | `8aeef3fbabe39264…` | `2038c2ac1123bb31…` | no |
+| `maths-007` | `93bfea7f835eaf40…` | `938bf96f5c97c805…` | no |
+| `maths-014` | `71d11fa2c35f6551…` | `aeb211f7441a014a…` | no |
+
+Running the real attestation against each confirms the domain: `expectedContentHash = factoryCandidateHash` returns **ok**, and `expectedContentHash = publicationContentHash` returns **`content_hash_mismatch`**, for all five.
+
+The fix makes every hash field domain-explicit (`boundFactoryCandidateHash`, `reviewedFactoryCandidateHash`), carries the D2 → D3 mapping as its own verified binding, and requires the verifier to recompute each hash rather than accept it. Details in `schemas.md` sections 0, 4b and 9.
+
 No question content, answer key, difficulty value, hash or review record was altered by any of these corrections. Three facts surfaced during verification are recorded rather than repaired: the stale `targetPacket` filename in `review-summary.json` (section 2.2 of the reconciliation), the expected candidate-hash divergence on the two sidecar-bound items (section 2.3), and the weak prompt-to-solver binding on `nr-022` (`solver-coverage.md` section 3a.3).
 
 ## Verification
