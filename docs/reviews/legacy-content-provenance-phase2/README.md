@@ -39,6 +39,7 @@ Adopting the ADR authorises design work. It authorises no behaviour change. Ever
 | `pr-73-migration-plan.md` | Sequence, blockers, and why a shortened sample is not authorised. |
 | `decisions-for-owner.md` | Live decisions, blocked decisions, and what adoption does not authorise. |
 | `owner-adoption-decision.md` | **The adoption record**: decision, date, reviewed commit, exact authorisation scope, independent review evidence, P2 follow-ups and Phase 2b workstreams. |
+| `phase2b-a0-branch-protection.md` | **Phase 2b A-0**: verified branch-protection state on `dev` and `main`, gap analysis against Workstream A, staged owner configuration plan and rollback. Assessment only — no setting changed. |
 
 ## Withdrawn material
 
@@ -111,6 +112,17 @@ An independent adversarial review of `3b56e157` confirmed the H-1 diagnosis and 
 Also addressed from the same review's non-blocking observations: a latent H-1-shaped hazard in refinement (d), where `sameNumbers` is order-sensitive while the attestation compares a set — both fields must be populated from the registry's `givens` array in declared order (`schemas.md` section 9); the `buildPublishedQuestion` discriminated result, which the verifier must fail closed on rather than dereference; ADR requirement 2 now names D2; the section 4 test cases are relabelled `C/R/O/I/E/H/N/A/S/G/X` to remove two numbering collisions; and the spec records that its component numbering differs from the ADR's.
 
 No question content, answer key, difficulty value, hash or review record was altered by any of these corrections. Three facts surfaced during verification are recorded rather than repaired: the stale `targetPacket` filename in `review-summary.json` (section 2.2 of the reconciliation), the expected candidate-hash divergence on the two sidecar-bound items (section 2.3), and the weak prompt-to-solver binding on `nr-022` (`solver-coverage.md` section 3a.3).
+
+## The fifth independent review — final
+
+A fifth independent review, of `206d0dd4` (the commit carrying the round-4 corrections), returned **READY FOR OWNER POLICY ADOPTION DECISION**: no outstanding P0 or P1, and two non-blocking P2 follow-ups (F-1 and F-2, tracked in `owner-adoption-decision.md` section 4; F-2 is closed, F-1 remains open). This is the review the 2026-10-24 adoption decision rests on. The round-4 REQUEST CHANGES verdict above is historical and superseded.
+
+The reviewer reported **executing** the proposed Zod schema snippets against synthetic, schema-complete fixtures for all five in-scope candidates: 5/5 `safeParse.success === true`, D1/D2/D3 independently verified, and — as a negative control — 5/5 failures when the erroneous D2/D3 equality was reintroduced.
+
+Two cautions are recorded with it, in `owner-adoption-decision.md` section 3:
+
+- Both reviews are **owner-supplied model-generated** evidence. Neither is a GitHub review submission, a human SME review, or API-authenticated. No review of those kinds exists for this PR.
+- That executed synthetic schema test is **not** case **H9**. H9 is the admission-gate regression test, is specified only, is not implemented, and **is not running in CI**. The round-5 run was one-off and ad hoc, with no committed test file and nothing that re-runs it; it leaves no durable guard. No result is claimed for H9.
 
 ## Verification
 

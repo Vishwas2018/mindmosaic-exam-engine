@@ -53,21 +53,32 @@ Unchanged by adoption, and none currently met:
 
 ## 3. Independent review evidence
 
-The owner supplied the conclusion of a final independent review as evidence for this decision. Its provenance is recorded precisely, because this programme's own policy forbids overstating what evidence establishes.
+Two independent review rounds bear on this decision, and the adoption record previously conflated them by naming the earlier REQUEST CHANGES round as the final review. They are distinguished here because this programme's own policy forbids overstating what evidence establishes.
+
+| | Round 4 — historical | Round 5 — **final** |
+|---|---|---|
+| Reviewed SHA | `3b56e1578b9770312ec5827eadd5a952098d412b` | `206d0dd48a07da5bc3e32fea12bd663d140bfddf` |
+| Verdict | **REQUEST CHANGES** — 1 × P1, 4 × P2 | **READY FOR OWNER POLICY ADOPTION DECISION** |
+| Outstanding P0/P1 | 1 × P1 (R4-P1), since fixed | **None** |
+| Outstanding P2 | 4, all addressed in `206d0dd4` | 2, both **non-blocking follow-ups** (F-1, F-2 in section 4) |
+| Standing | Superseded. It reviewed a commit that no longer is HEAD | The review the adoption decision rests on |
+| Reviewer | A separate review agent, run in isolation from the authoring context | A separate review agent, run in isolation from the authoring context |
+
+Round 4's findings were the input to `206d0dd4`; round 5 reviewed the result and cleared it. Neither round is a GitHub review submission.
+
+### 3.1 Evidence class — both rounds
 
 | Property | Value |
 |---|---|
-| Reviewed SHA | `3b56e1578b9770312ec5827eadd5a952098d412b` |
-| Verdict | REQUEST CHANGES — 1 × P1, 4 × P2 |
-| Reviewer | A separate review agent, run in isolation from the authoring context |
-| Evidence class | **Model-generated review, owner-supplied.** No authenticated API envelope, no request ID, no transport binding |
-| **Not** | A GitHub pull-request review, a human subject-matter expert review, or an API-authenticated independent review. No such review exists for this PR, and none is claimed |
+| Evidence class | **Model-generated review, owner-supplied,** for both rounds |
+| Provenance strength | No authenticated API envelope, no request ID, no transport binding, for either round |
+| **Not** | A GitHub pull-request review, a human subject-matter-expert review, or an API-authenticated independent review. No review of any of those kinds exists for this PR, and none is claimed |
 
-This is the same honesty standard applied to the `manual_user_attested` ChatGPT evidence elsewhere in this programme. The review is corroboration for a policy decision; it is not admission evidence and carries no weight in any gate.
+This is the same honesty standard applied to the `manual_user_attested` ChatGPT evidence elsewhere in this programme. Both reviews are corroboration for a policy decision; neither is admission evidence and neither carries weight in any gate. In particular, the round-5 verdict is a **model's** readiness opinion, not an independent attestation that the policy is correct — the owner's decision in section 1 is the decision, and the review is one input to it.
 
-### 3.1 Findings and disposition
+### 3.2 Round-4 findings and disposition
 
-All five findings were addressed in `206d0dd4`.
+All five round-4 findings were addressed in `206d0dd4`, which is the commit round 5 then reviewed.
 
 | Finding | Substance | Disposition |
 |---|---|---|
@@ -77,13 +88,40 @@ All five findings were addressed in `206d0dd4`.
 | **R4-P2-C** | "the bundle cannot currently validate" misdescribes `z.never().optional()`, which accepts omission | Fixed |
 | **R4-P2-D** | The reconciliation markdown claimed to be machine-generated; `reconcile.py` emits only the JSON | Fixed — and recorded in T7 as an open instance of that threat |
 
-### 3.2 Satisfiability analysis and the H9 positive control
+### 3.3 Satisfiability: the round-5 executed synthetic schema test
 
-The review's central question was whether the corrected contract is satisfiable, since the preceding defect (H-1) was an unsatisfiable contract. Its conclusion was **yes**, on the reasoning that refinements (a)–(f) all force one value (D2) with no field required to equal two different values, that the only D3 constraint touches no D2 field, and that D2 and D3 cannot collide structurally because the published projection carries fields the factory candidate does not.
+The central question across rounds 4 and 5 was whether the corrected contract is **satisfiable**, since the preceding defect (H-1) was an unsatisfiable contract that no test could have caught.
 
-**What this is, precisely:** a reasoned analysis plus reproduced hash values. **H9 has not been executed**, because no implementation exists to execute it against. H9 is a *specified* test case requiring that a schema-complete bundle parse with zero issues; it becomes a running control only in the Phase 2d implementation PR. No test result is claimed here.
+Round 4 answered this by reasoning: refinements (a)–(f) all force one value (D2) with no field required to equal two different values; the only D3 constraint touches no D2 field; and D2 and D3 cannot collide structurally because the published projection carries fields the factory candidate does not.
 
-Independently re-verified in the authoring context before the fixes were applied: the Zod base-parse/`superRefine` ordering behind R4-P1; the `derive-answer.ts:867` call site; `reconcile.py` emitting only JSON; and the numbering collisions. The hash-domain values were reproduced twice, independently, and agree.
+Round 5 answered it by **execution**. The reviewer reported running the proposed Zod schema snippets from `schemas.md` against synthetic, schema-complete fixtures for all five in-scope candidates:
+
+| What the reviewer reported | Result |
+|---|---|
+| `safeParse` on a complete bundle, all five candidates | **5 / 5 `success === true`** |
+| D1, D2 and D3 for all five candidates | Independently recomputed and verified |
+| Negative control: the erroneous D2/D3 equality reintroduced | **5 / 5 failures** |
+
+The negative control is the part that matters. A positive-only result cannot distinguish a satisfiable contract from refinements that never execute — which is exactly how H-1 survived, and exactly what round 4's R4-P1 finding was about. Reintroducing the defect and observing 5/5 failures shows the refinements do run and do discriminate.
+
+**Evidence class.** This is an executed test, but it is executed **model-generated, owner-supplied** evidence, on the same footing as the reviews themselves: there is no committed transcript, no CI record and no transport binding, and it was **not re-executed in the authoring context**. It is recorded here as the reviewer's report of their own run, not as a repository test result.
+
+#### What this test is not
+
+The executed synthetic schema test and the specified H9 regression test are different artefacts and must not be read as each other.
+
+| | Round-5 synthetic schema test | **H9** admission-gate regression test |
+|---|---|---|
+| Exists? | Executed once, by the reviewer, ad hoc | **Specified only.** Not implemented |
+| Subject | The *proposed* Zod snippets in `schemas.md`, run standalone | The *implemented* admission gate |
+| Fixtures | Synthetic, hand-built for the run | Repository fixtures |
+| In CI? | **No.** No committed test file, no CI job, nothing re-runs it | **No.** Becomes a running control only in the Phase 2d implementation PR |
+| Durability | None. A later edit to the snippets is caught by nothing | The standing satisfiability control, once it exists |
+| Status | Reported pass, 5/5, with a passing negative control | **Never executed.** No result is claimed for H9 anywhere |
+
+So the satisfiability question has a reasoned answer (round 4), and a one-off executed corroboration of that answer against the proposed snippets (round 5). What it does **not** have is a durable guard. Until H9 is implemented in Phase 2d, nothing in CI would catch a reintroduced unsatisfiable refinement, and `gate-and-test-changes.md` case H9 remains a specification.
+
+Independently re-verified in the authoring context before the round-4 fixes were applied: the Zod base-parse/`superRefine` ordering behind R4-P1; the `derive-answer.ts:867` call site; `reconcile.py` emitting only JSON; and the numbering collisions. The hash-domain values were reproduced twice, independently, and agree.
 
 ## 4. P2 follow-ups — non-blocking maintenance
 
@@ -114,7 +152,7 @@ Both are mandatory prerequisites. **No admission-gate implementation may bypass 
 | Element | Requirement |
 |---|---|
 | Protected signer authorisation | Which keys are authorised, where the registry lives, and how it is protected from modification by the same writer who uses it |
-| Branch protection | A precondition, not a detail. `dev` currently has no rulesets, requires zero approving reviews and does not enforce protections for admins, so a signer registry is circular without it |
+| Branch protection | A precondition, not a detail. Protection is enabled on `dev` and `main` and does block force-pushes and deletion, but both have no rulesets, require zero approving reviews and do not enforce protections for admins, so a signer registry is circular without it. Verified 2026-10-24 with administrator access; see `phase2b-a0-branch-protection.md` |
 | Canonical signed payload | The exact serialisation the signature covers, including candidate identity, publication content hash and the decision. An unconstrained signature field is satisfied by a signature over anything |
 | Commit binding | The approval record must name the signing commit, and the verifier must fetch deeply enough to see it |
 | Key lifecycle | Registration, rotation, revocation, and the status of approvals signed by a key later revoked |
@@ -132,7 +170,7 @@ Symmetric mechanisms (HMAC over a shared secret) are not acceptable: any party a
 
 ### Recommended execution order
 
-1. **A-0 — branch protection on `dev`.** Everything in workstream A is circular without it, so it goes first and is cheap.
+1. **A-0 — branch protection on `dev`.** Everything in workstream A is circular without it, so it goes first and is cheap. Assessed, with a verified gap analysis and a staged configuration and rollback plan, in `phase2b-a0-branch-protection.md`. **No setting has been changed.**
 2. **A — authenticated approval architecture.** Design, independent review, then a separately authorised implementation PR.
 3. **B — durable legacy-origin ledger.** Independent of A and can run in parallel once A-0 lands, but sequence it after A if attention is limited: A gates requirement 6, which blocks every candidate, whereas B gates the integrity of an admission that cannot yet occur.
 4. **Phase 2c — `nr-001` registry entry and regression tests**, only if the owner wants it in scope. Unblocked by A and B, and may run in parallel.

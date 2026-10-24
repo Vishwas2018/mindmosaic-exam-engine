@@ -171,7 +171,7 @@ Standing Rule 8 requires human sign-off. Phase 1 approvals are plain JSON with a
 
 Git GPG/SSH signing is a plausible primitive, but **signing is not authorisation**, and this specification does not claim otherwise. Before any admission route may rely on it, a separate design must specify and a separate review must accept all four of:
 
-1. **Signer trust.** Which keys are authorised, where the registry lives, and how that registry is protected from modification by the same writer who uses it. A signer list a writer can extend in the commit that uses it is circular. This requires branch protection that is currently absent on `dev`.
+1. **Signer trust.** Which keys are authorised, where the registry lives, and how that registry is protected from modification by the same writer who uses it. A signer list a writer can extend in the commit that uses it is circular. This requires approval-enforcing branch protection, which is absent on `dev`: protection is enabled and blocks force-pushes and deletion, but requires zero approving reviews and is not enforced for administrators.
 2. **Signed payload binding.** The exact canonical serialisation the signature covers, which must include candidate identity, publication content hash and the approval decision. An unconstrained signature field is satisfied by a signature over anything.
 3. **Artefact-to-commit binding.** The approval record must name the commit that signs it. Without it, "the introducing commit" is ambiguous after squash, rebase or cherry-pick, and is unavailable in a shallow CI checkout.
 4. **Key lifecycle.** Registration, rotation, revocation, and what happens to approvals signed by a key later revoked.

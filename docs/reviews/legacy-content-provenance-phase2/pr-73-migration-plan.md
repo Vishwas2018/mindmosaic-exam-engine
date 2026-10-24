@@ -40,7 +40,7 @@ Adoption authorises design work; it authorises no behaviour change, and it does 
 
 These gate everything after them, and neither is designed yet.
 
-**2b-1 Approval authentication.** Signer registry and its protection; canonical signed payload binding candidate, content hash and decision; approval-to-commit binding; key lifecycle. Requires branch protection on `dev` that does not currently exist — today `dev` has no rulesets, requires zero approving reviews, and does not enforce protections for admins.
+**2b-1 Approval authentication.** Signer registry and its protection; canonical signed payload binding candidate, content hash and decision; approval-to-commit binding; key lifecycle. Requires branch protection on `dev` of a kind that does not currently exist. Protection *is* enabled — `core`, `e2e`, `e2e-auth` and `rls` are required and force-pushes and deletion are blocked — but `dev` has no rulesets, `required_approving_review_count` is 0, `dismiss_stale_reviews` is false and `enforce_admins` is disabled, so nothing constrains who approves a change.
 
 **2b-2 Durable legacy-origin ledger.** Tracked, tamper-evident state binding candidate hashes to their import transaction, resolving the untracked-workspace problem Phase 1 recorded.
 
@@ -123,7 +123,7 @@ The honest default is that PR #73 remains draft until the deferred Class B and C
 | # | Blocker | Owner |
 |---|---|---|
 | 1 | ~~ADR-017 not adopted~~ **CLEARED 2026-10-24** — adopted as policy; design work on phase 2b is authorised, behaviour change is not | — |
-| 2 | Approval authentication not designed; `dev` branch protection absent | Security design + owner |
+| 2 | Approval authentication not designed; `dev` protection enforces no approval | Security design + owner |
 | 3 | Legacy-origin ledger not designed | Security design |
 | 4 | — *(cleared from the critical path)* The five in-scope candidates already have first-party recompute. `nr-001` and `vr-032` are out of scope, so their missing entries no longer block the route | — |
 | 5 | No originality engine selected; procurement deliberately open pending a coverage, limitation and cost comparison | Owner (procurement) |

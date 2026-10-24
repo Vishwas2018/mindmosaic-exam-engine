@@ -314,7 +314,7 @@ export const advisoryReviewSchema = z.object({
 
 What a future design must settle before any schema is written:
 
-1. **Signer trust** — which keys are authorised, where the registry lives, and how it is protected from the writer who uses it. `.github/allowed_signers` does not currently exist; `dev` has no rulesets, requires zero approving reviews and does not enforce protections for admins, so a writer could today add their own key in the commit that uses it.
+1. **Signer trust** — which keys are authorised, where the registry lives, and how it is protected from the writer who uses it. `.github/allowed_signers` does not currently exist, and neither does a `CODEOWNERS` file; `dev` has no rulesets, requires zero approving reviews and does not enforce protections for admins, so a writer could today add their own key in the commit that uses it.
 2. **Canonical signed payload** — the exact serialisation covered by the signature, including candidate id, publication content hash and decision. A free-form `signaturePayload: z.string()` is satisfied by a signature over anything and must not be used.
 3. **Artefact-to-commit binding** — the approval record must name the signing commit, and the verifier must fetch deeply enough to see it.
 4. **Key lifecycle** — rotation, revocation, and the status of approvals signed by a key later revoked.

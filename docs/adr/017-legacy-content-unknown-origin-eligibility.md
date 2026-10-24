@@ -18,7 +18,7 @@ Phase 1 (`docs/spec/legacy-content-provenance-phase1.md`, merged by PR #74 at `7
 
 Phase 1 then refused these candidates everywhere: independent-review clearance, staging, publication eligibility, publication replay, manifest validation and bank assembly. The Phase 1 specification is explicit that this blanket refusal is "a conservative implementation boundary, not approval of a new unknown-origin review policy", and that any future eligibility route "needs a separately reviewed governance decision and implementation".
 
-This ADR is that governance decision, deliberately scoped as narrowly as the evidence supports. It was adopted by the repository owner on 2026-10-24 against commit `206d0dd4`, after four rounds of independent review; the authorisation it carries is recorded in the decision record cited above and is limited to policy and design.
+This ADR is that governance decision, deliberately scoped as narrowly as the evidence supports. It was adopted by the repository owner on 2026-10-24 against commit `206d0dd4`, after five rounds of independent review; the authorisation it carries is recorded in the decision record cited above and is limited to policy and design.
 
 Two facts constrain what can honestly be proposed today.
 

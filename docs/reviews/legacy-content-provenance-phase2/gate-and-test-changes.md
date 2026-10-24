@@ -26,7 +26,7 @@ Two corrections to the withdrawn draft are recorded here so the error is not rep
 
 Neither exists. Neither is designed by this PR. Work on sections 3 and 4 should not begin until both are separately designed, reviewed and merged.
 
-1. **Approval authentication** — signer registry and its protection, canonical signed payload, artefact-to-commit binding, key lifecycle. Requires branch protection on `dev` that does not currently exist.
+1. **Approval authentication** — signer registry and its protection, canonical signed payload, artefact-to-commit binding, key lifecycle. Requires review-and-admin-enforcement branch protection on `dev` that does not currently exist: protection is enabled and does block force-pushes and deletion, but `required_approving_review_count` is 0 and `enforce_admins` is disabled, so it constrains no approval.
 2. **Durable legacy-origin ledger** — tracked, tamper-evident state binding candidate hashes to their import transaction.
 
 ---
