@@ -1,0 +1,475 @@
+# Proposed schemas for the deterministic legacy admission route
+
+**Status:** design sketch under the **ADOPTED** ADR-017 (2026-10-24). **Not implemented**; no file in `src/` is changed by this PR, and adoption of the policy does not authorise implementing these shapes.
+
+These shapes exist to be reviewed and argued with. Two design rules govern all of them.
+
+**Rule 1 — a record must be able to express failure.** Any schema that can only encode a passing result is not evidence; it is an assertion with a type annotation. Where the withdrawn draft used `z.literal(0)`, `z.literal(true)` and `z.literal("PASS")`, these shapes use discriminated unions and real enums, so that a match, an uncertainty, an outage or a rejection has somewhere to live.
+
+**Rule 2 — a name must not overstate.** Nothing here is called independent, verified, cleared or zero-risk. The route proves recomputed correctness and says so.
+
+---
+
+## 0. Hash domains — read this before any other section
+
+Added on independent review finding H-1, which found that an earlier version of section 9 equated two different hashes and was therefore unsatisfiable by every genuine bundle.
+
+This repository computes **three different hashes over three different objects**. They are never interchangeable, and a value from one domain can never validate against another. Every hash field below names its domain explicitly, so that copying a value between domains is a type-level mistake rather than a silent pass.
+
+| Domain | Written as | Computed by | Over what |
+|---|---|---|---|
+| **D1 — raw question** | `rawQuestionHash` | `hashJson(raw)` | The draft question object exactly as committed in the PR #73 draft file, unparsed |
+| **D2 — factory candidate** | `factoryCandidateHash` | `hashJson(candidateQuestionSchema.parse(candidate))` | The factory candidate, including a solver sidecar where one is bound |
+| **D3 — publication projection** | `publicationContentHash` | `canonicalQuestionHash(buildPublishedQuestion(candidate).question)`, i.e. `hashJson(questionSchema.parse(published))` | The **published** question projection, a different schema shape from D2 |
+
+**D2 is the attestation domain.** `verifyFirstPartyScholarshipAttestation` computes `hashJson(question)` on the factory question and compares it to the `expectedContentHash` it is given. Its only production call site that supplies an **externally recorded** expected hash is `publication/eligibility.ts`, which passes `provenance.contentHash`; the legacy provenance schema pins `contentHash === repositoryImport.candidateHash`, so that value is D2. `correctness/derive-answer.ts` also calls the attestation with `hashJson(question)` computed from the very object under test — self-consistent by construction, binding nothing external — and `publication/assemble-published-bank.ts` supplies no expected hash at all. So the only call that binds a recompute to a recorded hash binds it to **D2**, never to D3.
+
+*(Corrected on review finding R4-P2-A: an earlier version of this paragraph called `eligibility.ts` the only call site supplying an expected hash, which omitted `derive-answer.ts`. The D2 conclusion is unaffected.)*
+
+**D1 and D2 coincide for the five in-scope candidates** because none of them carries a solver sidecar. They diverge for `vr-032` and `nr-001`, whose `transformation` is `solver_sidecar`. Code must never rely on the coincidence.
+
+**D2 and D3 differ for all five**, verified by recomputation:
+
+| Candidate | D2 `factoryCandidateHash` | D3 `publicationContentHash` |
+|---|---|---|
+| `nr-022` | `8758ac61587d966b…` | `a0c486d79ec70260…` |
+| `nr-023` | `52d196a6d5d1829e…` | `7b80d6a14c2af6e9…` |
+| `maths-004` | `8aeef3fbabe39264…` | `2038c2ac1123bb31…` |
+| `maths-007` | `93bfea7f835eaf40…` | `938bf96f5c97c805…` |
+| `maths-014` | `71d11fa2c35f6551…` | `aeb211f7441a014a…` |
+
+**The D2 → D3 mapping is recomputable and was verified.** For all five candidates, `canonicalQuestionHash(buildPublishedQuestion(candidateQuestionSchema.parse(raw)).question)` reproduces the recorded `publicationContentHash` exactly. The gate must therefore *derive* D3 rather than trust it.
+
+**Correction (owner-recorded P2 follow-up, 2026-10-24).** An earlier version of this paragraph said the legacy import path "does **not** currently derive" D3 and that the source register's assertion "is the only thing standing behind that value today". **That was wrong**, and it understated an existing control. Manifest preparation and import preflight are two different stages and must not be described as one:
+
+| Stage | Function | What it does with D3 |
+|---|---|---|
+| **Manifest preparation** | `prepareScholarshipLegacyManifest` (`legacy-import/bindings.ts`) | **Copies** `row.currentPublicationContentHash` verbatim from the source register. It recomputes D1 and D2 but not D3. |
+| **Import preflight** | `preflightLegacyImport` (`legacy-import/preflight.ts`) | **Recomputes D3 and fails closed.** It builds the published projection from the candidate *and* from the pre-sidecar original, and throws `publication_hash_mismatch` unless `canonicalQuestionHash` of **both** equals the manifest's `publicationContentHash`. It separately throws `source_register_binding_mismatch` if the register row disagrees with the manifest. |
+
+So D3 is already independently verified before any import proceeds, by exactly the pipeline this document specifies, and the register's assertion is **not** the only thing standing behind it. Requiring the admission gate to derive D3 therefore extends an existing guarantee to a later stage rather than closing an open hole — the honest reason for the requirement is that the admission gate runs after preflight and must not inherit a value on trust.
+
+---
+
+## 1. Route and classification
+
+```ts
+export const legacyGovernanceRouteSchema = z.enum([
+  "legacy_intake_pending",            // Phase 1 baseline: imported, blocked everywhere
+  "deterministic_legacy_admission",   // proposed Phase 2a route: recomputed correctness only
+  "legacy_deferred",                  // Class B / C: held, advisory evidence retained
+]);
+
+/** Permanently recorded alongside the route. Never derived from it. */
+export const legacyIndependenceStatusSchema = z.literal("not_established_unknown_origin");
+```
+
+There is deliberately no `legacy_exception_approved` value. "Exception" names a waiver; this route is not one.
+
+Carrying the `deterministic_legacy_admission` value does not place a candidate in scope. The in-scope candidate set is an explicit, enumerated gate input — currently `nr-022`, `nr-023`, `maths-004`, `maths-007`, `maths-014` — checked before any evidence in sections 2 to 6 is read. `nr-001` and `vr-032` are refused at that check today regardless of what is attached to them.
+
+---
+
+## 2. First-party recompute evidence
+
+Mirrors what `verifyFirstPartyScholarshipAttestation` already produces, so the evidence is a record of a real gate result rather than a parallel claim.
+
+```ts
+export const firstPartyRecomputeEvidenceSchema = z.discriminatedUnion("outcome", [
+  z.object({
+    outcome: z.literal("recomputed_match"),
+    registry: z.enum(["scholarship_nr", "scholarship_maths"]),
+    /** Registry key actually used, e.g. "scholarship-y6-nr-022". The editorial
+     *  record in section 4a is bound to this value, not to a restated string. */
+    solverIdentifier: z.string().min(1),
+    solverRevision: z.string().min(1),
+    executedAt: z.string().datetime(),
+    /** D2 ONLY. This is what verifyFirstPartyScholarshipAttestation binds to.
+     *  A D3 publication hash here is a domain error, not a stale value. */
+    boundFactoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/),
+    givensReadFromPrompt: z.array(z.number()).min(1),
+    computedValue: z.union([z.string(), z.number()]),
+    derivedOptionId: z.string().min(1),
+    declaredOptionId: z.string().min(1),
+    candidateLogicExecuted: z.literal(false),  // solverParams and sidecars ignored
+  }),
+  z.object({
+    outcome: z.enum([
+      "not_in_scope",          // isScholarshipAttestedItem returned false
+      "missing_first_party_solver",
+      "solver_execution_failed",
+      "prompt_givens_mismatch",
+      "option_match_ambiguous",
+      "key_mismatch",
+      "content_hash_mismatch",
+    ]),
+    registry: z.enum(["scholarship_nr", "scholarship_maths"]).nullable(),
+    executedAt: z.string().datetime(),
+    boundFactoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/).nullable(),
+    detail: z.string().min(1),
+  }),
+]);
+```
+
+Only `recomputed_match` can contribute to admission. Every other outcome is recorded and rejects.
+
+---
+
+## 3. Revision binding
+
+```ts
+export const candidateRevisionBindingSchema = z.object({
+  candidateId: z.string().min(1),
+  factoryRevision: z.number().int().min(0),
+  rawQuestionHash: z.string().regex(/^[0-9a-f]{64}$/),
+  factoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/),
+  publicationContentHash: z.string().regex(/^[0-9a-f]{64}$/),
+  transformation: z.enum(["none", "solver_sidecar"]),
+  sidecarHash: z.string().regex(/^[0-9a-f]{64}$/).nullable(),
+});
+```
+
+Every other evidence component names the binding it was computed against, and names its **domain** (section 0). The three hashes here are D1, D2 and D3 respectively; they are different values over different objects and are never substitutable. A component whose `boundFactoryCandidateHash` does not match the candidate's current D2 hash is stale and is discarded, never reused.
+
+---
+
+## 4. Originality assessment
+
+The shape the withdrawn draft got wrong. This one can fail, and makes a bounded claim.
+
+```ts
+export const originalitySearchSchema = z.object({
+  searchId: z.string().min(1),
+  engine: z.string().min(1),                 // the actual tool, named
+  corporaSearched: z.array(z.string()).min(1),
+  corporaKnownNotCovered: z.array(z.string()),   // paywalled papers, print textbooks, ...
+  searchedAt: z.string().datetime(),
+  boundFactoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/),   // D2
+  queries: z.array(z.string()).min(1),
+  auditorIdentity: z.string().min(1),
+
+  result: z.discriminatedUnion("status", [
+    z.object({
+      status: z.literal("no_match_found"),
+      highestSimilarity: z.number().min(0).max(1).nullable(),
+      threshold: z.number().min(0).max(1),
+    }),
+    z.object({
+      status: z.literal("matches_found"),
+      matches: z.array(z.object({
+        source: z.string().min(1),
+        matchedSpan: z.string().min(1),
+        similarity: z.number().min(0).max(1),
+      })).min(1),
+    }),
+    z.object({ status: z.literal("uncertain"), detail: z.string().min(1) }),
+    z.object({ status: z.literal("inconclusive"), reason: z.string().min(1) }),
+    z.object({
+      status: z.literal("rejected"),
+      adjudicatedBy: z.string().min(1),
+      rationale: z.string().min(1),
+    }),
+  ]),
+
+  /** The only claim this record makes. Deliberately not a risk verdict. */
+  claim: z.literal("search_result_only_no_originality_or_copyright_determination"),
+});
+```
+
+Notes for reviewers:
+
+- There is no `plagiarismRiskAssessment` field and no "zero risk" value anywhere. Copyright position is a legal determination and no tool in this repository produces one.
+- `corporaKnownNotCovered` is required, so coverage gaps are part of the record rather than an unstated assumption.
+- Superseded searches are retained. Repeated runs until a pass must be visible.
+- Only `no_match_found` can contribute to admission. `uncertain` and `inconclusive` reject and require human adjudication; `matches_found` and `rejected` reject outright.
+
+---
+
+## 4a. Editorial interpretation check
+
+Added on independent review finding P1-2. This is the component that carries what the numeric recompute cannot reach, so each of its four judgements is recorded separately and each can fail on its own. A single overall "looks fine" boolean would reproduce the defect this record exists to catch.
+
+```ts
+const interpretationVerdictSchema = z.discriminatedUnion("verdict", [
+  z.object({ verdict: z.literal("affirmed"), notes: z.string().min(10) }),
+  z.object({ verdict: z.enum(["rejected", "uncertain"]), detail: z.string().min(10) }),
+]);
+
+export const editorialInterpretationCheckSchema = z.object({
+  /** Bound to the exact candidate and revision, not just to a hash, so that a
+   *  record cannot be lifted from one candidate onto another. */
+  candidateId: z.string().min(1),
+  factoryRevision: z.number().int().min(0),
+  /** D2. The reviewer reads the factory question's stem, options and key, so the
+   *  record binds to the factory candidate the recompute also ran against. */
+  reviewedFactoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/),
+  /** Exactly what the reviewer was shown, hashed as displayed. Binds the
+   *  judgement to the rendered content, not merely to an id and a revision. */
+  displayedContentSha256: z.string().regex(/^[0-9a-f]{64}$/),
+
+  /** A named, qualified human. An anonymous or unqualified reviewer is a reject,
+   *  not a weaker pass: this is the only component that reads the prose. */
+  reviewerIdentity: z.string().min(1),
+  reviewerRole: z.enum(["curriculum_specialist", "senior_examiner", "lead_editor"]),
+  reviewerQualification: z.string().min(10),
+  reviewedAt: z.string().datetime(),
+
+  /** The solver's reading, shown to the reviewer verbatim. A reviewer who was never
+   *  shown the interpretation cannot have affirmed it. */
+  solverInterpretationPresented: z.object({
+    solverIdentifier: z.string().min(1),
+    declaredGivens: z.array(z.number()),
+    statedModel: z.string().min(10),
+  }),
+
+  promptToSolverAssumptions: interpretationVerdictSchema,
+  exhaustiveness: interpretationVerdictSchema,
+  ambiguity: interpretationVerdictSchema,
+  alternativeDefensibleAnswers: z.object({
+    verdict: z.enum(["none_defensible", "alternatives_defensible", "uncertain"]),
+    optionIds: z.array(z.string().min(1)),   // non-empty whenever alternatives are defensible
+    detail: z.string().min(10),
+  }),
+});
+```
+
+Only `affirmed` on the first three, together with `none_defensible` on the fourth, can contribute to admission. `uncertain` rejects and requires adjudication; it is not a soft pass.
+
+`maths-014` is the worked example. Before `45b6cdab`, a conforming record would have had to report `exhaustiveness: rejected` and `alternativeDefensibleAnswers: { verdict: "alternatives_defensible", optionIds: ["c", "d", "e"] }` — while the recompute for the same revision returned a clean match. The schema must be able to hold that pair of facts simultaneously, because that pair is what actually happened.
+
+## 4b. Publication projection binding
+
+Added on independent review finding H-1. The bundle must carry the D2 → D3 mapping explicitly so the admission gate derives it rather than inheriting it. Note the two-stage picture corrected in section 0: manifest preparation (`bindings.ts`) copies `publicationContentHash` from the source register, while import preflight (`preflight.ts`) already recomputes it and fails closed with `publication_hash_mismatch`. The bundle binding exists so that the admission gate, which runs later, repeats that derivation on its own evidence rather than trusting a value carried forward.
+
+```ts
+export const publicationProjectionBindingSchema = z.object({
+  /** D2 input to the projection. Must equal binding.factoryCandidateHash. */
+  factoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/),
+  /** D3 output. Must equal binding.publicationContentHash. */
+  publicationContentHash: z.string().regex(/^[0-9a-f]{64}$/),
+  /** Named so the verifier reproduces the exact pipeline, not an equivalent one. */
+  projectionFn: z.literal("buildPublishedQuestion"),
+  hashFn: z.literal("canonicalQuestionHash"),
+});
+```
+
+**Corrected on review finding R4-P2-B.** An earlier draft carried a `recomputedByVerifier: z.literal(true)` field commented "a bundle author cannot assert it". That was exactly backwards: the schema describes the **submitted** bundle, so a `z.literal(true)` would have *required* the author to assert it, and nothing in the shape distinguishes an author-written value from a verifier-written one. It also contradicted Rule 1 above. The field is removed. Whether the verifier recomputed the projection is **gate output**, recorded in the gate's own result, never a bundle input — the gate recomputes unconditionally and has no reason to ask the bundle whether it should.
+
+The verifier derives D3 as `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` and refuses when the result differs from `binding.publicationContentHash`. `buildPublishedQuestion` returns a discriminated outcome, so the verifier must refuse on a non-`ok` projection rather than dereference `.question`; all five in-scope candidates project `ok` today, but a future revision that does not must fail closed, not throw. This has been confirmed to reproduce the recorded value for all five in-scope candidates (section 0), so a mismatch means drift or fabrication, not an unmodelled projection.
+
+---
+
+## 5. Age-suitability and curriculum record
+
+```ts
+export const ageSuitabilityRecordSchema = z.object({
+  reviewerIdentity: z.string().min(1),
+  reviewerRole: z.enum(["curriculum_specialist", "senior_examiner", "lead_editor"]),
+  reviewedAt: z.string().datetime(),
+  boundFactoryCandidateHash: z.string().regex(/^[0-9a-f]{64}$/),   // D2
+  targetYearLevel: z.number().int().min(3).max(6),
+  judgement: z.discriminatedUnion("verdict", [
+    z.object({
+      verdict: z.literal("suitable"),
+      syllabusReference: z.string().min(1),
+      distractorQuality: z.enum(["high", "acceptable"]),
+      notes: z.string().min(10),
+    }),
+    z.object({
+      verdict: z.enum(["not_suitable", "needs_revision"]),
+      reasons: z.array(z.string().min(1)).min(1),
+    }),
+  ]),
+});
+```
+
+---
+
+## 6. Advisory evidence
+
+Attached, labelled, and carrying no weight in any gate.
+
+```ts
+export const advisoryReviewSchema = z.object({
+  evidenceType: z.literal("manual_user_attested"),
+  provider: z.string().min(1),
+  model: z.string().min(1),
+  apiEnvelope: z.literal(false),
+  transportLimitations: z.string().min(1),
+  rawEvidenceSha256: z.string().regex(/^[0-9a-f]{64}$/),
+  targetPacketSha256: z.string().regex(/^[0-9a-f]{64}$/),
+  derivedOptionId: z.string().min(1),
+  agreesWithDeclaredKey: z.boolean(),
+  supersededBy: z.string().nullable(),
+  /** Enforced by the gate, not by convention. */
+  contributesToAdmission: z.literal(false),
+});
+```
+
+---
+
+## 7. Human approval — deliberately not specified here
+
+**This section is intentionally incomplete.** Approval authentication is a separate security design requirement (ADR-017 section 6), and publishing a schema now would imply a design decision that has not been reviewed.
+
+What a future design must settle before any schema is written:
+
+1. **Signer trust** — which keys are authorised, where the registry lives, and how it is protected from the writer who uses it. `.github/allowed_signers` does not currently exist, and neither does a `CODEOWNERS` file; `dev` has no rulesets, requires zero approving reviews and does not enforce protections for admins, so a writer could today add their own key in the commit that uses it.
+2. **Canonical signed payload** — the exact serialisation covered by the signature, including candidate id, publication content hash and decision. A free-form `signaturePayload: z.string()` is satisfied by a signature over anything and must not be used.
+3. **Artefact-to-commit binding** — the approval record must name the signing commit, and the verifier must fetch deeply enough to see it.
+4. **Key lifecycle** — rotation, revocation, and the status of approvals signed by a key later revoked.
+
+Symmetric HMAC is excluded: any party able to verify is able to forge.
+
+Until this is designed and reviewed, the existing `content/publication-approvals/*.json` format (`questionId`, `contentHash`, `sourceManifestHash`, `approvedBy`) remains in force and remains unauthenticated. Any future work should extend that format rather than fork a parallel one.
+
+---
+
+## 8. Legacy-origin ledger — deliberately not specified here
+
+Also a separate security design requirement (ADR-017 section 7). A ledger is only tamper-evident if the thing it binds is tracked state, and Phase 1 recorded that the importer's journal lives in the untracked factory workspace while the candidate record is consumed at publication. Specifying a file format before resolving that would describe a control that cannot be enforced.
+
+---
+
+## 9. Assembled bundle
+
+```ts
+const sameNumbers = (a: readonly number[], b: readonly number[]): boolean =>
+  a.length === b.length && a.every((v, i) => v === b[i]);
+
+export const deterministicLegacyAdmissionBundleSchema = z.object({
+  schemaVersion: z.literal(1),
+  route: z.literal("deterministic_legacy_admission"),
+  independenceStatus: legacyIndependenceStatusSchema,
+  originalGenerationStatus: z.literal("unverified"),
+
+  binding: candidateRevisionBindingSchema,
+  recompute: firstPartyRecomputeEvidenceSchema,
+  editorialInterpretation: editorialInterpretationCheckSchema,   // mandatory; section 4a
+  publicationProjection: publicationProjectionBindingSchema,     // D2 -> D3; section 4b
+  originality: originalitySearchSchema,
+  ageSuitability: ageSuitabilityRecordSchema,                    // separate, still required
+  advisory: z.array(advisoryReviewSchema).default([]),
+
+  // Populated only once sections 7 and 8 are designed, reviewed and implemented.
+  approval: z.never().optional(),
+  ledgerEntryRef: z.never().optional(),
+}).superRefine((b, ctx) => {
+  const reject = (path: string[], message: string) =>
+    ctx.addIssue({ code: "custom", path, message });
+
+  const ed = b.editorialInterpretation;
+
+  // (a) Editorial evidence is bound to THIS candidate and THIS revision.
+  if (ed.candidateId !== b.binding.candidateId)
+    reject(["editorialInterpretation", "candidateId"], "Editorial evidence names a different candidate");
+  if (ed.factoryRevision !== b.binding.factoryRevision)
+    reject(["editorialInterpretation", "factoryRevision"], "Editorial evidence names a different revision");
+
+  // (b) Editorial evidence is bound to THIS content, in the D2 domain.
+  //     CORRECTED (finding H-1): this previously compared the editorial hash to
+  //     binding.publicationContentHash (D3) while also requiring equality with
+  //     the recompute hash (D2). Since D2 != D3 for all five in-scope candidates,
+  //     the pair was unsatisfiable and rejected every genuine bundle.
+  if (ed.reviewedFactoryCandidateHash !== b.binding.factoryCandidateHash)
+    reject(["editorialInterpretation", "reviewedFactoryCandidateHash"],
+           "Editorial evidence is stale or bound to the wrong factory candidate revision");
+
+  // (b2) The D2 -> D3 mapping is carried explicitly and must agree with the binding.
+  if (b.publicationProjection.factoryCandidateHash !== b.binding.factoryCandidateHash)
+    reject(["publicationProjection", "factoryCandidateHash"], "Projection input is not this candidate");
+  if (b.publicationProjection.publicationContentHash !== b.binding.publicationContentHash)
+    reject(["publicationProjection", "publicationContentHash"], "Projection output disagrees with the binding");
+
+  // (c) The recompute must itself be a match before anything else is considered.
+  if (b.recompute.outcome !== "recomputed_match") {
+    reject(["recompute"], "Only recomputed_match can contribute to admission");
+  } else {
+    // Both the recompute and the editorial record live in D2, so these compare.
+    if (b.recompute.boundFactoryCandidateHash !== b.binding.factoryCandidateHash)
+      reject(["recompute", "boundFactoryCandidateHash"],
+             "Recompute is bound to a different factory candidate than the binding");
+    if (ed.reviewedFactoryCandidateHash !== b.recompute.boundFactoryCandidateHash)
+      reject(["editorialInterpretation", "reviewedFactoryCandidateHash"],
+             "Editorial evidence and recompute evidence are bound to different factory candidates");
+
+    // (d) The interpretation the reviewer was shown must be the one that was
+    //     actually executed - same solver, same givens. Not a restated string.
+    if (ed.solverInterpretationPresented.solverIdentifier !== b.recompute.solverIdentifier)
+      reject(["editorialInterpretation", "solverInterpretationPresented", "solverIdentifier"],
+             "Reviewer was shown a different solver than the one that produced the recompute");
+    if (!sameNumbers(ed.solverInterpretationPresented.declaredGivens, b.recompute.givensReadFromPrompt))
+      reject(["editorialInterpretation", "solverInterpretationPresented", "declaredGivens"],
+             "Reviewer was shown different givens than the recompute used");
+    // NOTE (review finding R4, latent hazard): sameNumbers is order- and
+    // multiplicity-sensitive, but the attestation itself compares prompt numbers
+    // as a SET and never emits an ordered list. Both fields above must therefore
+    // be populated from the registry entry's `givens` ARRAY IN ITS DECLARED
+    // ORDER - not from the prompt tokeniser's output, whose order is incidental.
+    // Populating either from the tokeniser would make this condition
+    // unsatisfiable for any candidate whose prompt states its quantities in a
+    // different order from the registry array: the same failure shape as H-1.
+  }
+
+  // (e) Every judgement must be affirmative. uncertain and rejected both reject.
+  for (const field of ["promptToSolverAssumptions", "exhaustiveness", "ambiguity"] as const)
+    if (ed[field].verdict !== "affirmed")
+      reject(["editorialInterpretation", field], `${field} is '${ed[field].verdict}', which is not an affirmation`);
+
+  if (ed.alternativeDefensibleAnswers.verdict !== "none_defensible")
+    reject(["editorialInterpretation", "alternativeDefensibleAnswers"],
+           "Alternative defensible answers were found or could not be ruled out");
+
+  // (f) Every remaining component is also D2-bound. A D3 value here is a domain
+  //     error: it cannot be reached by any honest recomputation of this field.
+  if (b.originality.boundFactoryCandidateHash !== b.binding.factoryCandidateHash)
+    reject(["originality", "boundFactoryCandidateHash"], "Originality search is bound to different content");
+  if (b.ageSuitability.boundFactoryCandidateHash !== b.binding.factoryCandidateHash)
+    reject(["ageSuitability", "boundFactoryCandidateHash"], "Age-suitability review is bound to different content");
+
+  // (g) Domain confusion is caught explicitly rather than inferred from a mismatch,
+  //     so the failure message tells the implementer what actually went wrong.
+  for (const [path, value] of [
+    ["recompute.boundFactoryCandidateHash", b.recompute.outcome === "recomputed_match"
+      ? b.recompute.boundFactoryCandidateHash : null],
+    ["editorialInterpretation.reviewedFactoryCandidateHash", ed.reviewedFactoryCandidateHash],
+    ["originality.boundFactoryCandidateHash", b.originality.boundFactoryCandidateHash],
+    ["ageSuitability.boundFactoryCandidateHash", b.ageSuitability.boundFactoryCandidateHash],
+  ] as const)
+    if (value !== null && value === b.binding.publicationContentHash)
+      reject([path], `${path} carries the D3 publication hash; this field is D2 (see section 0)`);
+});
+```
+
+**The cross-binding is the point, not the field.** Adding an `editorialInterpretation` member alone would be satisfied by a reviewer restating whatever strings the bundle author supplied. Refinements (a) to (d) make the record answerable to evidence that exists elsewhere in the bundle: the candidate and revision come from the binding, the content hash must agree with both the binding and the recompute, and the solver identity and givens must be the ones the recompute actually executed.
+
+**One check the schema cannot perform, and the gate must.** A bundle is self-consistent data; `superRefine` can only compare its fields to each other, so a bundle author who fabricates *both* the recompute record and the editorial record consistently would pass. The admission gate must therefore re-derive the authoritative values rather than trust the bundle:
+
+- Re-run `verifyFirstPartyScholarshipAttestation` against the candidate at validation time, passing the **recomputed D2 hash** as `expectedContentHash`, and compare its result to `recompute` rather than accepting the stored record.
+- Read `solverIdentifier` and `declaredGivens` from the live registry — `SCHOLARSHIP_FIRST_PARTY_SOLVERS` or `SCHOLARSHIP_MATHS_FIRST_PARTY_SOLVERS`, selected by `isScholarshipMathsItem` exactly as the attestation does — and require the editorial record to match *those*. The registry is the authority for both values; the bundle is not, and neither is the sidecar.
+- Recompute **D2** as `hashJson(candidateQuestionSchema.parse(candidate))` and require it to equal `binding.factoryCandidateHash` and every component's `boundFactoryCandidateHash`.
+- Recompute **D3** as `canonicalQuestionHash(buildPublishedQuestion(candidate).question)` and require it to equal `binding.publicationContentHash`. Do not read it from the source register, which is where the current legacy import path takes it from.
+- Recompute **D1** as `hashJson(raw)` and require it to equal `binding.rawQuestionHash`, and — for a `solver_sidecar` candidate only — require D1 ≠ D2 with `sidecarHash` present.
+
+Stated as a rule: **nothing in the bundle may be the sole authority for a fact the gate can independently derive.**
+
+`approval` and `ledgerEntryRef` are typed `z.never().optional()` on purpose: a bundle may **omit** them and still parse, but it can never **carry** them. So no bundle can reach an admissible state at the gate while the two controls do not exist — the refusal comes from the gate conditions in `gate-and-test-changes.md` section 3.2, not from schema validation.
+
+*(Corrected on review finding R4-P2-C: an earlier version said the bundle "cannot currently validate", which is not what `z.never().optional()` does — omission passes. The distinction matters for case **H9** in `gate-and-test-changes.md`, which depends on a complete bundle parsing cleanly.)* They become real types in the PR that builds them.
+
+### 9.1 The six mandatory components
+
+The bundle carries exactly the six requirements of ADR-017 section 3, in the same order:
+
+| ADR requirement | Bundle member | Schema |
+|---|---|---|
+| 1. First-party recomputed correctness | `recompute` | section 2 |
+| 2. Editorial interpretation check | `editorialInterpretation` | section 4a |
+| 3. Exact candidate and revision binding | `binding` | section 3 |
+| 4. Originality assessment | `originality` | section 4 |
+| 5. Age-suitability and curriculum check | `ageSuitability` | section 5 |
+| 6. Authorised human approval | `approval` | section 7, deliberately unspecified |
+
+`publicationProjection` (section 4b) is not a seventh requirement. It is the D2 → D3 binding that requirement 3 asserts, carried explicitly so the verifier can recompute it instead of trusting it.
+
+`advisory` is not a requirement and carries no weight; it is attached and labelled. Requirements 2 and 5 are **separate** components with separate verdicts, and neither substitutes for the other: an age-suitability `suitable` verdict says nothing about whether the stem admits a second reading.

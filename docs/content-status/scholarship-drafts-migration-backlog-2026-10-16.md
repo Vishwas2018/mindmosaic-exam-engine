@@ -47,10 +47,10 @@ These are the full remaining rejected-item set: no number-matrix item remains re
 - Never execute the stored strings, substitute answer literals for the relationships, remove solver sidecars, or relax the fail-closed checks to clear this backlog.
 - Re-run each solver independently and compare the computed result with the unchanged answer key. Any substantive content changes must follow the governed review and hash-binding route; this backlog grants no approval.
 - Require the complete scholarship validator to pass, plus the strict solver regressions and the full required CI checks.
-- Before scholarship launch, Vish must make `scholarship-drafts` required in branch protection and remove its job-level `continue-on-error` so failures are blocking.
+- Before scholarship launch, Vish must make `scholarship-drafts` required in branch protection. **Updated 2026-10-24:** the job-level `continue-on-error` was removed in `02a0b3ac`, so the job is already blocking in the workflow and no workflow edit remains outstanding. The only outstanding item is the branch-protection listing, which is a settings change — see `docs/reviews/legacy-content-provenance-phase2/phase2b-a0-branch-protection.md`.
 
 ## CI separation and required checks
 
-Only `npm run content:validate-scholarship-drafts` moves from `core` into the separate `scholarship-drafts` job. The command and strict validator are unchanged. Job-level `continue-on-error: true` makes this deferred draft check advisory; there is no step-level exception and no exception in `core`.
+Only `npm run content:validate-scholarship-drafts` moves from `core` into the separate `scholarship-drafts` job. The command and strict validator are unchanged. Job-level `continue-on-error: true` made this deferred draft check advisory at the time of writing; there was no step-level exception and none in `core`. **Superseded 2026-10-24:** `continue-on-error` was removed in `02a0b3ac` and `ci.yml` now contains none at any level, so the job is blocking in the workflow. It is still not listed as a required status check in branch protection, so a red run does not block a merge.
 
 Read-only branch-protection inspection on 16 October 2026 returned required contexts `core`, `e2e`, `e2e-auth`, and `rls` (GitHub Actions app ID 15368). The branch-rules endpoint returned `[]`. Neither the scholarship command nor `scholarship-drafts` is required. The split needs no current administrator change; all four existing checks still must pass before merge. No branch-protection setting was changed.
