@@ -50,6 +50,7 @@ export type BlockerCode =
   | "attestation_failed"
   | "taxonomy_skill_unresolvable"
   | "taxonomy_mismatch"
+  | "question_type_not_recommended"
   | "blueprint_unbuildable"
   | "blueprint_stale"
   | "already_published"
@@ -228,6 +229,17 @@ function evaluateOne(world: IntakeWorld, id: string, expected: readonly Expected
     for (const issue of checkTaxonomy(candidate)) {
       blockers.push(blocker("taxonomy_mismatch", `${id}: ${issue.code}: ${issue.message}`));
     }
+    // `checkTaxonomy` ignores the question type, so a skill can resolve and agree on year, subject,
+    // strand and style yet be unusable for this interaction type. `validateBlueprint` rejects that
+    // later as an opaque "unbuildable"; name it here so it cannot read as taxonomy-ready.
+    if (!entry.recommendedQuestionTypes.includes(candidate.type)) {
+      blockers.push(
+        blocker(
+          "question_type_not_recommended",
+          `${id}: taxonomy entry '${entry.id}' recommends ${entry.recommendedQuestionTypes.join(", ")}, not '${candidate.type}'; this needs a reviewed taxonomy change.`,
+        ),
+      );
+    }
   }
 
   // Blueprint: must be derivable, and an existing file must equal the derived one exactly.
@@ -386,7 +398,7 @@ export interface DraftReadiness {
   readonly questionId: string;
   readonly skill: string;
   readonly strand: string;
-  readonly taxonomy: "ok" | "unresolvable" | "mismatch";
+  readonly taxonomy: "ok" | "unresolvable" | "mismatch" | "question_type_incompatible";
   readonly blueprint: "ok" | "unbuildable";
   readonly detail: readonly string[];
 }
@@ -402,7 +414,8 @@ export function evaluateAllDraftReadiness(world: IntakeWorld): readonly DraftRea
     const candidate = parsed.data;
     const detail: string[] = [];
     let taxonomy: DraftReadiness["taxonomy"] = "ok";
-    if (!skillTaxonomyRegistry.resolve(candidate.metadata.skill ?? "")) {
+    const entry = skillTaxonomyRegistry.resolve(candidate.metadata.skill ?? "");
+    if (!entry) {
       taxonomy = "unresolvable";
       detail.push(`skill '${candidate.metadata.skill}' matches no taxonomy id or alias`);
     } else {
@@ -410,6 +423,9 @@ export function evaluateAllDraftReadiness(world: IntakeWorld): readonly DraftRea
       if (issues.length > 0) {
         taxonomy = "mismatch";
         for (const issue of issues) detail.push(`${issue.code}: ${issue.message}`);
+      } else if (!entry.recommendedQuestionTypes.includes(candidate.type)) {
+        taxonomy = "question_type_incompatible";
+        detail.push(`skill '${candidate.metadata.skill}' does not recommend question type '${candidate.type}'`);
       }
     }
     let blueprint: DraftReadiness["blueprint"] = "ok";

@@ -87,6 +87,22 @@ describe("baseline: the real repository today", () => {
     }
   });
 
+  it("detects each stale blueprint for the stated reason, and is the only blueprint source of truth it trusts", () => {
+    const expectations: Record<string, { disk: [string, number]; derived: [string, number] }> = {
+      "roadmap-amc-y3-016": { disk: ["medium", 3], derived: ["easy", 1] },
+      "roadmap-amc-y5-019": { disk: ["easy", 1], derived: ["medium", 3] },
+    };
+    for (const [id, expected] of Object.entries(expectations)) {
+      const blueprintId = `${id.replace("roadmap-", "")}-seed-001`;
+      const onDisk = world.blueprintsOnDisk.get(blueprintId) as { difficulty: string; reasoningSteps: number };
+      expect([onDisk.difficulty, onDisk.reasoningSteps], `${id} on disk`).toEqual(expected.disk);
+      const draft = world.rawDrafts.get(id) as { metadata: { difficulty: string } };
+      const derivedSteps = draft.metadata.difficulty === "challenging" ? 5 : draft.metadata.difficulty === "medium" ? 3 : 1;
+      expect([draft.metadata.difficulty, derivedSteps], `${id} derived`).toEqual(expected.derived);
+      expect(blockerCodes(id), id).toContain("blueprint_stale");
+    }
+  });
+
   it("keeps the three exclusions and the approval gate in force", () => {
     for (const id of ["roadmap-amc-y3-014", "roadmap-amc-y5-006", "roadmap-amc-y5-028"]) {
       expect(blockerCodes(id), id).toContain("excluded_from_review");
