@@ -8,7 +8,7 @@
 | Area | Change |
 |---|---|
 | Two proposed question revisions | `roadmap-amc-y3-014` and `roadmap-amc-y5-028`: stem and explanation in the two draft files, plus (`y3-014` only) the learner-visible strand and skill label, which was corrected after review (section 2) |
-| Their pinned bindings | Two rows in `content/review-sources/amc/y3.json` and `y5.json`, two attested hashes in `amc-content-bindings.ts`, two rows in `revision-loop-amc.csv`. Exactly two lines changed in each |
+| Their pinned bindings | Two rows in `content/review-sources/amc/y3.json` and `y5.json`, two attested hashes in `amc-content-bindings.ts`, two rows in `revision-loop-amc.csv`. Each is a hash-only change (a review-source row has its source and content hashes replaced; a pin and a CSV row have their hash values replaced). `y3-014`'s hashes were re-derived a second time after its learner-visible label was corrected |
 | `y5-019` presentation defect | An AMC-scoped line-break fix in the multiple-choice renderer (`renderer-utils.ts`, `MultipleChoiceRenderer.tsx`) **and, added later, in the post-exam results page** (`src/app/results/page.tsx`, reusing the same helper). **The question's content and hash are unchanged** |
 | Tests | New unit test, new component tests (including one that renders the real results page), two Playwright regression specs (exam page and results page), and a labelled "Prompt layout" section on the existing `/showcase` QA page that uses **clearly synthetic demonstration fixtures** (no real or unpublished question text) |
 | Docs | This file and `decision-pack.md` |
@@ -79,7 +79,7 @@ An app-wide `white-space: pre-line` was **not** an acceptable narrow fix. Scanni
 
 Those 63 NAPLAN/ICAS prompts span multiple choice (45), dropdown (6), true/false (5), number entry (3), multiple select (2), short answer (1) and fill-blank (1). Some, such as a numbered "How to Plant a Sunflower Seed" list, currently display collapsed. Changing them would alter live NAPLAN/ICAS rendering and needs its own visual review. **That is a separate finding I recommend you consider, and is not decided here.**
 
-The fix therefore applies `whitespace-pre-line` only when `examStyle` is `amc_style`, in the multiple-choice prompt only (the only observed case). It changes the rendering of exactly zero currently-served questions. Number-entry prompts have the same gap in principle; there is no AMC example yet, so I left it.
+The fix therefore applies `whitespace-pre-line` only when `examStyle` is `amc_style`, in the multiple-choice exam renderer only (the only observed case), and later also in the post-exam results-page prompt (see the results-page subsection). It changes the rendering of exactly zero currently-served questions. **The exam's number-entry renderer is not changed:** a multi-line AMC number-entry prompt would still collapse there. There is no such AMC question today, so I left it.
 
 ### A leak I introduced, found in review, and fixed
 
@@ -95,7 +95,7 @@ My first version of the regression test used a showcase fixture that **reproduce
 
 ### Results page (added after review)
 
-The review found that the post-exam results page rendered `question.prompt` in a plain paragraph, so a multi-line AMC prompt would still collapse there even though the exam page kept the breaks. `src/app/results/page.tsx` now applies the same `promptLayoutClass(question.examStyle)` helper and a `data-testid` of `review-prompt-<id>` to that paragraph. NAPLAN and ICAS get an empty class, so their markup is byte-identical to before. No question data, scoring or answer key is touched.
+The review found that the post-exam results page rendered `question.prompt` in a plain paragraph, so a multi-line AMC prompt would still collapse there even though the exam page kept the breaks. `src/app/results/page.tsx` now applies the same `promptLayoutClass(question.examStyle)` helper and a `data-testid` of `review-prompt-<id>` to that paragraph. NAPLAN and ICAS get an empty class, so their markup is byte-identical to before. No question data, scoring or answer key is touched. This paragraph is shared by every question type, so on the **results page** a multi-line AMC prompt of any type keeps its breaks, whereas in the **exam** only the multiple-choice renderer does (the number-entry renderer is unchanged).
 
 ## 4. The remaining four, and recorded positions
 
@@ -185,7 +185,7 @@ Run in this worktree on 2026-10-25. Nothing below was run against production. Th
 
 So the same commit passed and failed depending on the run, which points to an intermittent font-fetch problem rather than the content of this change. Root cause is not established. It is tracked separately as issue #77, which also records the earlier 24 October failure on `dev`. **No font or global build configuration is changed in this PR.**
 
-Confirmed unchanged: the 53 published questions, manifests and approvals, the generated AMC bank, the four untouched candidates (registry rows and draft text identical to `origin/dev`), and NAPLAN/ICAS rendering (the control test, the full-paper flow, and the helper returning an empty class for any style other than `amc_style`). Across the two changed drafts, only `prompt` and `explanation` differ.
+Confirmed unchanged: the 53 published questions, manifests and approvals, the generated AMC bank, the four untouched candidates (registry rows and draft text identical to `origin/dev`), and NAPLAN/ICAS rendering (the control test, the full-paper flow, and the helper returning an empty class for any style other than `amc_style`). Across the two changed drafts: for `y5-028` only `prompt` and `explanation` differ from `origin/dev`; for `y3-014` `prompt` and `explanation` differ **and so do the learner-visible `strand` and `skill`** (Patterns & Algebra, Algebraic thinking and unknown values), as described in section 2.
 
 ### Integrity record for the final P2 correction
 
@@ -209,7 +209,7 @@ Checked in this worktree before committing:
 - `y3-014`: whether a conditional "if … would" stem suits Year 3, and the weak distractors 7 and 13.
 - `y3-016` easy versus medium, `y3-026` medium versus challenging, `y5-028` challenging versus medium (owner difficulty decisions).
 - A qualified human age-fit reviewer is still needed for `y3-014` and `y5-028`; the AI reviews, including mine, are author-involved or not independent.
-- The results page and exam page keep line breaks only for multiple-choice AMC prompts; a future multi-line AMC number-entry prompt would need the same treatment.
+- The exam keeps AMC line breaks in the multiple-choice renderer only; the exam's number-entry renderer is unchanged, so a future multi-line AMC number-entry prompt would still collapse during the exam. The results page already preserves breaks for any AMC question type.
 
 ## 10. Unresolved decisions
 
