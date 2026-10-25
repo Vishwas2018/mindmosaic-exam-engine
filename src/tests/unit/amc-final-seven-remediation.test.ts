@@ -18,6 +18,7 @@ import {
   selectPatternQuestions,
 } from "@/features/exam-engine/exam-patterns";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import { getSubject } from "@/features/taxonomy/subject-registry";
 import type { Question } from "@/schemas/question.schema";
 
 /**
@@ -62,6 +63,18 @@ describe("roadmap-amc-y3-014 (equal-sharing wording)", () => {
     expect(question.metadata.difficulty).toBe("medium");
     expect(question.options.map((option) => option.text)).toEqual(["7", "11", "9", "10", "13"]);
     expect(question.answerKey).toEqual({ kind: "single_option", optionId: "d" });
+  });
+
+  it("carries a registered AMC strand and skill that match the equal-sharing problem it now asks", () => {
+    const amc = getSubject("amc_mathematics");
+    const strand = amc?.strands.find((entry) => entry.label === question.metadata.strand);
+    expect(strand, "strand is registered under amc_mathematics").toBeDefined();
+    expect(strand!.skills).toContain(question.metadata.skill);
+    // The exam and results pages show these labels to the student, so the stem
+    // (which no longer asks for an average) must not sit under the statistics label.
+    expect(question.metadata.strand).toBe("Patterns & Algebra");
+    expect(question.metadata.skill).toBe("Algebraic thinking and unknown values");
+    expect(question.metadata.skill).not.toMatch(/average/i);
   });
 
   it("no longer contains the words 'average' or 'mean' in the prompt or explanation", () => {

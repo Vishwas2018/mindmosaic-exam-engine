@@ -25,6 +25,7 @@ import {
   Card,
   buttonClasses,
 } from "@/components/ui";
+import { promptLayoutClass } from "@/features/exam-engine/question-renderers/renderer-utils";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 import {
   formatCorrectAnswer,
@@ -699,7 +700,10 @@ export default function ResultsPage() {
                         </span>
                       </div>
 
-                      <p className="mt-4 text-base font-bold leading-7 text-plum-dark">
+                      <p
+                        data-testid={`review-prompt-${question.id}`}
+                        className={`mt-4 text-base font-bold leading-7 text-plum-dark ${promptLayoutClass(question.examStyle)}`.trim()}
+                      >
                         {question.prompt}
                       </p>
 

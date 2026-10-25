@@ -1,6 +1,6 @@
 # AMC final seven: refreshed owner decision pack
 
-**Baseline:** `origin/dev` `608e1fe4324408ccb4c78c2673f7a50069e2ad65`, plus the remediation in this branch.
+**Baseline:** `origin/dev` `608e1fe4324408ccb4c78c2673f7a50069e2ad65`, plus the remediation in this branch. The exact commit this pack describes is the head of PR #76 at the time you read it (`git rev-parse HEAD`); the hashes below are what an approval would bind to.
 **Status:** nothing here is approved, ingested, staged, published or deployed. **Every owner decision field is blank.** The positions below are recommendations only and are not owner approvals.
 
 Evidence classes: **Verified** (run in this session with the repository's own code), **AI review** (Claude Sonnet 5.5, not a qualified human approval, and the same model family as the earlier Claude Opus 5.5 reviews), **Historical** (used only where its revision and hash binding were confirmed).
@@ -13,11 +13,25 @@ An approval binds `revision`, `contentHash` and `sourceManifestHash`. All seven 
 
 | Question | Change in this branch | Needs |
 |---|---|---|
-| `y3-014` | **New revision proposed** (equal-sharing wording) | Fresh independent review, then your decision |
+| `y3-014` | **New revision proposed** (equal-sharing wording) **and its learner-visible skill label corrected** (Patterns & Algebra, Algebraic thinking and unknown values; was Statistics & Chance, Averages and data summaries). The earlier hashes `ec632c61…` and `853f53d3…` are **superseded** and must not be approved | Fresh qualified human review of the exact revision below, then your decision |
 | `y5-028` | **New revision proposed** (bags of counters) | Fresh independent review, then your decision |
-| `y5-019` | **Content unchanged.** A renderer fix removes the presentation defect | Your decision on the unchanged content |
+| `y5-019` | **Content unchanged.** A renderer fix removes the presentation defect on the exam page, and the same AMC-only fix now applies to the post-exam results page | Your decision on the unchanged content |
 | `y3-005`, `y3-016`, `y3-026`, `y5-006` | Untouched | Your decision |
+| Results page | The post-exam review now keeps authored line breaks for `amc_style` prompts (NAPLAN and ICAS unchanged). No question data, scoring or answer key changed | Nothing from you |
 | Showcase test fixtures | **Corrected after review.** An earlier version of this branch put the full unpublished `y5-019` question, options and answer key into a public showcase fixture. They are now clearly synthetic demonstration content, and tests guard against any real or unpublished question text returning | Nothing from you |
+
+---
+
+## 1a. What review has and has not happened
+
+| Evidence | What it is | What it is not |
+|---|---|---|
+| Earlier Claude Opus 5.5 reviews (12 Oct) | AI review. They describe different questions under six of the seven IDs | Not a review of these revisions |
+| An independent AI review of PR #76 (REQUEST CHANGES) | AI review; its text is not on the PR | Not a qualified human sign-off |
+| Claude Sonnet 5.5 adjudication of the seven | AI advisory evidence, curriculum-referenced | **Not independent for `y3-014` and `y5-028`:** the same model family wrote those two revisions. Not a qualified human sign-off for any question |
+| Repository checks (hash binding, first-party solvers, tests) | Verified mechanically | They prove the keyed arithmetic and the bindings, not that the wording is clear or age-appropriate |
+
+**No qualified human has reviewed any of the seven current revisions, and `y3-014` and `y5-028` have had no independent review of any kind.** Neither is represented as independently approved. The AI findings below are inputs to your decision; they do not replace a qualified reviewer, and no approval or signature is recorded anywhere in this branch.
 
 ---
 
@@ -32,6 +46,14 @@ An approval binds `revision`, `contentHash` and `sourceManifestHash`. All seven 
 | `y5-006` | Y5 T1 (MC, 3 marks) | First approval of the current question; the old encoding allegation is stale |
 | `y5-019` | Y5 T2 (MC, 4 marks) | Content unchanged; decide on it once the renderer fix is accepted |
 | `y5-028` | Y5 T4 (number, 8 marks) | Review the revised wording below; do not approve the old wording |
+
+### Proposed difficulty positions (recommendations only, not decisions)
+
+| Question | Proposed label and marks | Basis | Strength | Change needed to apply |
+|---|---|---|---|---|
+| `y3-016` | **Easy, 4 marks** (as drafted) | Level 3 core content (×4 facts, two steps); marks are the tier position, separate from the label | Moderate. A label judgement without student data | None. A relabel to medium would change the hash |
+| `y3-026` | **Challenging, 6 marks** (as drafted) | Structural challenge (two relations on one unknown plus a transfer step); all five Year 3 tier-4 items are challenging | Weak to moderate. The advisory estimator said medium; the flag was never resolved | None to keep. You must explicitly resolve the flag |
+| `y5-028` | **Challenging, 8 marks** (as drafted) | Level 5 factors, multiples and systematic listing; longest Year 5 stem (64 words); no peer clearly easier at this tier | Weak. Medium fits about as well; marks in this tier are positional and do not follow difficulty | None to keep |
 
 ---
 
@@ -53,6 +75,10 @@ medium · 3 marks · 90 s · Number & Arithmetic · Divisibility and remainders
 
 Independent solution: 31 = 5 × 6 + 1, next multiple of 6 is 36, so 5. Only option a works (checked by brute force). "Smallest" removes the earlier ambiguity (11, 17, 23, 29 also complete bracelets). Distractors: 1 remainder slip, 4 miscounted 35, 2 a 33 slip, 6 a whole bracelet; all distinct. No earlier signature binds this revision, so approval is **new**.
 
+**Full explanation:** The bead count leaves a remainder of one on division by six, so five more complete the last bracelet.
+**Reviewer findings (AI, advisory):** no defect. "Smallest" is necessary and present. Advisory: it uses the ×6 facts (Level 4) and a remainder idea (Level 5), an extension element a capable Year 3 student can reach by skip-counting.
+**Remaining reservations:** none beyond the extension note. **Recommendation:** present for approval.
+
 **OWNER DECISION (blank):** [ ] APPROVE  [ ] REVISE  [ ] REPLACE   Notes: ____________  Date/initials: ________
 
 ### 3.2 `roadmap-amc-y3-014`: Year 3, tier 2: **revision proposed**
@@ -69,16 +95,24 @@ New explanation: If the shells are shared equally, each of the 4 boxes has 8, so
 
 ```
                    old                                                               new
-sourceQuestionHash 50b95ed14969f9d89fb0ef8b1f6ba08efce1340e71c20e78cd0f78f39fa14bd8  b7d9141ab2d511668bb33334dce987f9f253c360dba23f6334a0b59aac0684e7
-contentHash        2e12b48b26d02f2e73b704fad1dbec56301aa52b183846b60f564c7a3250e123  ec632c610ea9d6bd07348cc7d9aa6da117b875d8efcfc1548bafd3636ac419cc
-sourceManifestHash 9cfbadcd4b13d9cb223cda6038aa68e76c4600deba07a2db3b7f8168699a3218  853f53d3ffbb127d657dab5d0bf2f13298ed2483241f72af9090b678ee811540
+sourceQuestionHash 50b95ed14969f9d89fb0ef8b1f6ba08efce1340e71c20e78cd0f78f39fa14bd8  ee5695a9361d8e1b0c61c355315bcb61103830b35a20ea312b1b1a43d123d7c0
+contentHash        2e12b48b26d02f2e73b704fad1dbec56301aa52b183846b60f564c7a3250e123  c7aeef967cf07d5081d165880a821721fafb6468640b0183d7796794823c5b9b
+sourceManifestHash 9cfbadcd4b13d9cb223cda6038aa68e76c4600deba07a2db3b7f8168699a3218  3e62c1793339612c19b9d34f66d986ede1c539998d02364bf7c0384493d25442
 ```
-Preserved: ID, multiple choice, 4 marks, medium, 150 s, strand, skill, all five options, key d. Only the stem and explanation changed.
+medium · 4 marks · 150 s · **Patterns & Algebra · Algebraic thinking and unknown values** (was Statistics & Chance · Averages and data summaries)
+
+Preserved: ID, multiple choice, 4 marks, medium, 150 s, tier-2 placement, stem, all five options, key d, explanation. Changed since the first revision in this branch: **only the strand and skill label**, which alters the source, content and manifest hashes.
+
+**Why the label changed.** The exam and results pages show the strand and skill to the child. The revised question no longer asks for an average: the stem dropped that word because the Victorian Curriculum does not introduce the mean until Level 7. Leaving "Averages and data summaries" on a sharing problem would tell a Year 3 child the question is about a topic they have not met, and would mislabel the skill for any later reporting. The problem is: use an equal-share total (4 × 8 = 32), take away the known amounts (5 + 7 + 10 = 22), and find the unknown amount. That is finding an unknown value in an additive situation. The closest registered AMC skill is **Algebraic thinking and unknown values**, which the published `y3-008` (an unknown given a total) already uses, and it sits in the Patterns & Algebra strand. The other candidate, "Working backwards and inverse operations", was rejected: the published items under it reverse a chain of operations, whereas this problem has no chain to undo. No skill was invented and the mathematics was not changed to fit a category. The link to Victorian Curriculum V2.0 Level 3 (finding unknown values; multiplication with related division) is the reviewer's reading, to be confirmed by a qualified human against the VCAA text.
 
 - **Independent arithmetic check (hard-coded from the revision brief, not parsed from the wording):** 4 × 8 = 32; 5 + 7 + 10 = 22; 32 - 22 = 10. Of the five options only 10 satisfies it. The test also checks that the prompt contains the expected phrases (string presence). It does not show that a reader would derive these figures from the prose; that rests on human review.
 - **Ambiguity:** none found. "Shared equally" fixes the total at 32 without a defined term. A reader could in principle ask whether shells move between boxes; the stem says the three boxes "actually contain" 5, 7 and 10, so the total is conserved.
 - **Open item (not changed):** the distractors are unchanged. 7 was a "mean of the three" slip under the old wording and is now a weaker near-number; 9, 11 and 13 were already near-fillers. If you want diagnostic distractors, one candidate set is 22 (the three added), 8 (the shared amount), 32 (the total), 10 (key) and 12, but that is a further revision and would need its own review.
-- **Approval:** **new**; the old signature position is "never signed".
+- **Approval:** **new**; the old signature position is "never signed". Any review of the superseded `ec632c61…` revision cannot be reused, because the content changed.
+
+**Reviewer findings (AI, advisory, author-involved, not a qualified human):** no demonstrable wording or mathematical defect. Every step is Level 3 core; the only extension element is building the total from a hypothetical equal share. The likeliest misreading, answering 8, is not an option. The learner-visible label problem (P2) is fixed in this revision. Advisory: the stem is 39 words and the only conditional stem of 30 in Year 3; distractors 7 and 13 are weak.
+**Remaining educational reservations:** whether an "if … would" stem suits Year 3 is a qualified teacher's judgement. The repository's own exclusion record still requires a **human age-fit review** before a new sheet, and an AI view does not satisfy it.
+**Recommendation:** present for owner decision once a qualified human age-fit reviewer is named; do not approve on the AI review alone.
 
 **OWNER DECISION (blank):** [ ] APPROVE revised  [ ] REVISE further  [ ] REPLACE   Notes: ____________  Date/initials: ________
 
@@ -100,6 +134,10 @@ Independent solution: 4 × (6 + 2) = 32. Traps 24 (ignores the addition) and 26 
 
 **Approval record:** an archived signature of 2026-10-17 03:53 binds exactly this revision and the repository's validator accepts it, but it predates all three independent reviews, so the position here is a **fresh owner approval**, not automatic reinstatement. Reverting to medium instead would need the draft, registry and attested hash changed together; that path was not tested.
 
+**Full explanation:** At first there are 4 × 6 = 24 pieces. Adding 2 pieces to each of 4 plates adds 8 more. Altogether there are 24 + 8 = 32 pieces.
+**Reviewer findings (AI, advisory):** no defect. Easy is better supported than medium by the curriculum level, but it is a label judgement without student data. The label is separate from the 4 marks, which are the tier position.
+**Remaining reservations:** the label only. **Recommendation (proposed position):** easy, 4 marks.
+
 **OWNER DECISION (blank):** [ ] APPROVE  [ ] REVISE  [ ] REPLACE   Label: [ ] easy  [ ] medium   Notes: ____________  Date/initials: ________
 
 ### 3.4 `roadmap-amc-y3-026`: Year 3, tier 4: untouched
@@ -117,6 +155,10 @@ challenging · 6 marks · 180 s · number entry, tolerance 0 · Patterns & Algeb
 > **Key: 21**
 
 Independent solution: second = 9, first = 14, third = 18; after the move the third has 21. Unique. "Then" places the move after the relationships; a learner answering 18 has stopped one step early.
+
+**Full explanation:** Remove the 5 extra apples from the total: 41 - 5 = 36. The second basket holds one equal share, the first one share plus 5, and the third two shares. Each share is 36 ÷ 4 = 9. The third basket starts with 18 apples and receives 3, giving 21.
+**Reviewer findings (AI, advisory):** answer 21 confirmed and unique. Solvable without algebra by a bar model or by guess-and-check (second basket 8 gives 37, 9 gives 41). All operations are Level 3 core; the challenge is structural. Reasonable as a final-tier Year 3 item.
+**Remaining reservations:** medium versus challenging is an owner decision, not a defect. **Recommendation (proposed position):** challenging, 6 marks, after you record the resolution.
 
 **Unresolved difficulty flag:** the advisory estimator rated it medium against the challenging label (deviation 0.5, "retained pending mathematical difficulty review"). That review was never recorded. **Recommended position: approve only after you explicitly resolve this flag** (keep challenging, relabel, or ask for the review).
 
@@ -137,6 +179,10 @@ easy · 3 marks · 90 s · Measurement & Geometry · Use a simple scale
 > a) 35  b) 40  c) 12  d) 45  e) 30  **Key: a (35)**
 
 Independent solution: 7 × 5 = 35. 12 is the additive slip (7 + 5). **The recorded exclusion ("corrupted multiplication-symbol text") is stale:** the current file holds a valid `×` (U+00D7) and no U+FFFD, and the hash recorded when it was excluded equals today's. **Position: first approval of the current question.** The code exclusion needs a separate governed change before it can be recorded.
+
+**Full explanation:** Each centimetre represents 5 kilometres, so 7 × 5 = 35 kilometres.
+**Reviewer findings (AI, advisory):** no defect. The scale is given in the stem, so no prior knowledge is needed; the options carry no unit but only 35 fits. I did not find a Victorian Curriculum V2.0 map-scale descriptor (an unverified negative from a search), so the curriculum link is unconfirmed.
+**Remaining reservations:** none of substance. **Recommendation:** present for approval; lifting the code exclusion is a separate governed change.
 
 **OWNER DECISION (blank):** [ ] APPROVE  [ ] REVISE  [ ] REPLACE   Notes: ____________  Date/initials: ________
 
@@ -163,7 +209,11 @@ medium · 4 marks · 120 s · Logic & Problem-Solving
 
 Independent solution: exactly one of the 120 assignments satisfies every clue (Asha cherry, Ben apple, Chen banana, Dev date, Ella grape), so the key is right.
 
-**Browser finding (real AMC interface, desktop 1280 and mobile 390, observed in a throwaway environment outside the repo; the committed regression test uses synthetic text, not this question):** before the fix the clues collapsed into one run-on paragraph (`white-space: normal`). With the AMC-scoped renderer fix they display one clue per line (`pre-line`) with no horizontal overflow. **The question's identity and hash are unchanged.** This is the first independent review of this rewritten text; earlier signatures and reviews concern the old three-person puzzle.
+**Browser finding (exam page; real AMC interface, desktop 1280 and mobile 390, observed in a throwaway environment outside the repo; the committed regression tests use synthetic text, not this question):** before the fix the clues collapsed into one run-on paragraph (`white-space: normal`). With the AMC-scoped renderer fix they display one clue per line (`pre-line`) with no horizontal overflow. **The question's identity and hash are unchanged.** This is the first independent review of this rewritten text; earlier signatures and reviews concern the old three-person puzzle.
+
+**Full explanation:** Asha chooses cherry and Dev chooses date, leaving apple, banana and grape. Ben does not choose banana or grape, so Ben must choose apple. From the remaining fruits (banana and grape), Chen does not choose grape. Therefore, Chen chooses banana (and Ella chooses grape).
+**Reviewer findings (AI, advisory):** no content defect. Exactly one of 120 assignments satisfies the clues. Advisory: the first two clues eliminate cherry and date, and easy versus medium is arguable.
+**Remaining reservations:** the results-page line-break gap is fixed in this branch. **Recommendation:** present for approval.
 
 **OWNER DECISION (blank):** [ ] APPROVE  [ ] REVISE  [ ] REPLACE   Notes: ____________  Date/initials: ________
 
@@ -191,6 +241,10 @@ Preserved: ID, number entry, key 3, tolerance 0, 8 marks, challenging, 180 s, st
 - **Why the stem states each rule:** without "including none of one size" the answer would be 1; without "identical" and "order does not matter" a reader could count arrangements and get a much larger number. Each rule is stated and each excluded count is explained.
 - **Open items:** the answer is still the small integer 3 with no tolerance, so a guess has a real chance. Also, the label "challenging" and 8 marks are unchanged although the context is easier to enter than the algebra was; whether that remains right is your call.
 - **Approval:** **new.**
+
+**Reviewer findings (AI, advisory, author-involved, not a qualified human):** accessible at Level 5 (factors, multiples, systematic listing). A student lists 0 to 6 bags of 5 and checks each leftover for divisibility by 3. Likely wrong answers are 1 (mixed combinations only), 7 or 11, or a large arrangement count, which the stem's rules address. Advisory: at 64 words it is the longest Year 5 stem, which raises difficulty for reading rather than mathematical reasons. The skill label "Enumerate whole-number solutions" is child-visible and reads slightly algebraic.
+**Remaining educational reservations:** challenging versus medium is defensible either way. The repository's exclusion record still requires a **human age-fit review**, which an AI view does not satisfy.
+**Recommendation:** present for owner decision once a qualified human age-fit reviewer is named. Proposed position: challenging, 8 marks.
 
 **OWNER DECISION (blank):** [ ] APPROVE revised  [ ] REVISE further  [ ] REPLACE   Notes: ____________  Date/initials: ________
 

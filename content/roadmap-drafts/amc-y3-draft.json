@@ -606,8 +606,8 @@
       "explanation": "If the shells are shared equally, each of the 4 boxes has 8, so there are 4 × 8 = 32 shells altogether. The three known boxes hold 5 + 7 + 10 = 22 shells. The fourth box holds 32 - 22 = 10 shells.",
       "metadata": {
         "subject": "amc_mathematics",
-        "strand": "Statistics & Chance",
-        "skill": "Averages and data summaries",
+        "strand": "Patterns & Algebra",
+        "skill": "Algebraic thinking and unknown values",
         "difficulty": "medium",
         "marks": 4,
         "estimatedTimeSeconds": 150,

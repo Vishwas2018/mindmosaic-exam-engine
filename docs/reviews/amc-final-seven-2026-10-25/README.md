@@ -7,10 +7,10 @@
 
 | Area | Change |
 |---|---|
-| Two proposed question revisions | `roadmap-amc-y3-014` and `roadmap-amc-y5-028`: stem and explanation only, in the two draft files |
+| Two proposed question revisions | `roadmap-amc-y3-014` and `roadmap-amc-y5-028`: stem and explanation in the two draft files, plus (`y3-014` only) the learner-visible strand and skill label, which was corrected after review (section 2) |
 | Their pinned bindings | Two rows in `content/review-sources/amc/y3.json` and `y5.json`, two attested hashes in `amc-content-bindings.ts`, two rows in `revision-loop-amc.csv`. Exactly two lines changed in each |
-| `y5-019` presentation defect | An AMC-scoped line-break fix in the multiple-choice renderer (`renderer-utils.ts`, `MultipleChoiceRenderer.tsx`). **The question's content and hash are unchanged** |
-| Tests | New unit test, new component tests, new Playwright regression spec, and a labelled "Prompt layout" section on the existing `/showcase` QA page that uses **clearly synthetic demonstration fixtures** (no real or unpublished question text) |
+| `y5-019` presentation defect | An AMC-scoped line-break fix in the multiple-choice renderer (`renderer-utils.ts`, `MultipleChoiceRenderer.tsx`) **and, added later, in the post-exam results page** (`src/app/results/page.tsx`, reusing the same helper). **The question's content and hash are unchanged** |
+| Tests | New unit test, new component tests (including one that renders the real results page), two Playwright regression specs (exam page and results page), and a labelled "Prompt layout" section on the existing `/showcase` QA page that uses **clearly synthetic demonstration fixtures** (no real or unpublished question text) |
 | Docs | This file and `decision-pack.md` |
 
 **Not touched:** `y3-005`, `y3-016`, `y3-026`, `y5-006`; any of the 53 published questions, manifests, approvals or bank files; the code exclusions for the three held-back questions; CI workflows; marketing routes; timers and time estimates; GitHub settings.
@@ -26,7 +26,9 @@ Each is a **new content revision**. It needs fresh independent review and your d
 | Old | Four boxes have an average of 8 shells each. Three boxes contain 5, 7 and 10 shells. How many shells are in the fourth box? |
 | New | Four boxes contain some shells. If all the shells were shared equally among the four boxes, each box would have 8 shells. Three boxes actually contain 5, 7 and 10 shells. How many shells are in the fourth box? |
 
-`contentHash` `2e12b48b…e123` becomes `ec632c61…19cc`. Preserved: ID, multiple choice, 4 marks, medium, 150 s, the five options and key d (10).
+`contentHash` `2e12b48b…e123` becomes `c7aeef96…5b9b`. Preserved: ID, multiple choice, 4 marks, medium, 150 s, tier-2 placement, the five options and key d (10).
+
+**Skill label corrected.** The first version of this branch left the child-visible label as Statistics & Chance, "Averages and data summaries". The exam and results pages show that label to the student, and the stem no longer asks for an average (the Victorian Curriculum introduces the mean at Level 7). It is now **Patterns & Algebra, "Algebraic thinking and unknown values"**, an existing registered AMC skill already used by the published `y3-008`. The problem uses an equal-share total (4 × 8 = 32), subtracts the known amounts (22) and finds the unknown amount. "Working backwards and inverse operations" was rejected because that skill's published items reverse a chain of operations and this one has no chain. This changed the three hashes: source `ee5695a9…d7c0`, content `c7aeef96…5b9b`, manifest `3e62c179…5442` (full values in `decision-pack.md`). The earlier values `ec632c61…`, `b7d9141a…` and `853f53d3…` are superseded; nothing was ever approved against them.
 
 ### `roadmap-amc-y5-028`
 
@@ -42,7 +44,7 @@ Each is a **new content revision**. It needs fresh independent review and your d
 - **A gap I found in the existing check.** The repository's answer verifier and first-party solver are keyed by question ID and never read the prompt, so their "0 mismatches" only shows the keys equal the solver output, not that new wording asks the same question. I added tests with a narrower, honestly limited purpose: they enumerate arithmetic that is **hard-coded from the revision brief** (4 × 8 less 5 + 7 + 10; every pair with 3x + 5y = 30) and check that the keyed answer follows from it, and they check by plain string presence that the new prompt and explanation contain the expected phrases and figures. **They do not parse the prose or prove it is unambiguous or that a reader would reach those figures.** That is not comprehensive semantic verification, and none exists here; it rests on human review.
 - **`y3-014`:** the hard-coded arithmetic (4 × 8 = 32, less 5 + 7 + 10 = 22) gives 10, and only option d matches it. My own reading of the wording found no ambiguity, but that is an AI reading, not a verified property of the text.
 - **`y5-028`:** enumerating the hard-coded equation gives (0, 6), (5, 3), (10, 0), so 3. In my reading each rule in the stem matters: without "none of one size" the answer would be 1, and without "identical" and "order does not matter" a reader could count arrangements. The explanation accounts for every excluded count of 5-bags (25, 20, 10 and 5 leftover are not multiples of 3).
-- **Left open on purpose:** the `y3-014` distractors are unchanged (7 was a "mean of three" slip and is now weaker); the `y5-028` answer is still a guessable small integer; and the `y3-014` skill label "Averages and data summaries" no longer names the idea in the stem. Each is flagged for you rather than silently altered.
+- **Left open on purpose:** the `y3-014` distractors are unchanged (7 was a "mean of three" slip and is now weaker); the `y5-028` answer is still a guessable small integer; (the `y3-014` skill label was an open item here and has since been corrected, see above). The rest are flagged for you rather than silently altered.
 
 ## 3. `y5-019`: investigated in a real browser
 
@@ -90,6 +92,10 @@ My first version of the regression test used a showcase fixture that **reproduce
 **Guards against recurrence** (in `amc-final-seven-remediation.test.ts`): no runtime showcase fixture contains the `y5-019` stem, its options, or any of the 60 AMC draft prompts; fixture IDs are `showcase-demo-…`, tagged `demonstration` and absent from every real bank; and only `src/app/showcase/page.tsx` imports the fixture module. With the real stem put back, three of these tests fail.
 
 **Negative control:** with the renderer fix disabled the two AMC browser tests fail (`Expected "pre-line"`, `Received "normal"`) and the control tests still pass. The existing showcase specs (pinned at 17 cards, plus the axe audit at every viewport) still pass with the new section.
+
+### Results page (added after review)
+
+The review found that the post-exam results page rendered `question.prompt` in a plain paragraph, so a multi-line AMC prompt would still collapse there even though the exam page kept the breaks. `src/app/results/page.tsx` now applies the same `promptLayoutClass(question.examStyle)` helper and a `data-testid` of `review-prompt-<id>` to that paragraph. NAPLAN and ICAS get an empty class, so their markup is byte-identical to before. No question data, scoring or answer key is touched.
 
 ## 4. The remaining four, and recorded positions
 
@@ -155,10 +161,15 @@ Run in this worktree on 2026-10-25. Nothing below was run against production. Th
 | `tsc --noEmit` | exit 0 |
 | `eslint .` | exit 0 |
 | Unit and component tests touching showcase fixtures, AMC, exam patterns and answer-position bias (20 files) | **521 of 521 pass** |
-| Full unit suite (first version of this branch, 373 files) | 371 files and 6526 of 6527 tests passed; 2 files failed, both environmental: `stripe-webhook-route.test.ts` read a gitignored `.env.local` that a fresh worktree lacks (CI supplies those values as environment variables), and one `legacy-import` CLI test hit its 20 s timeout under load. Re-run in isolation with CI-style variables: 2 files, 35 of 35 pass. **The full suite was not re-run after the fixture fix**; the changes since are the fixture module, one showcase section, three test files and docs |
+| Full unit suite, final P2 correction (dummy CI-style Stripe variables set) | **374 of 374 files and 6,543 of 6,543 tests pass**, in one run (637 s). The earlier two failures (`stripe-webhook-route.test.ts` reading a gitignored `.env.local`, and a `legacy-import` CLI timeout under load) did not recur in this run; that does not show their cause was fixed in the repo, only that they were environmental in this worktree |
+| New results-page component test (renders the real `ResultsPage` from a submitted store, synthetic fixtures only) | 3 of 3 pass (part of the suite above) |
+| Results-page browser regression (`e2e/results-amc-multiline-prompt.spec.ts`: desktop 1280 and mobile 390; line breaks, NAPLAN control, axe, overflow) | 6 of 6 pass on the final build. **Negative control:** with the results-page class removed (a throwaway build, restored byte-for-byte afterwards) exactly the two "keeps each authored line" tests failed with `Expected "pre-line"`, `Received "normal"`; the NAPLAN control and axe tests passed. The first negative-control run also hit cold-server navigation timeouts, so the clean result is from a second run on a warm server |
 | `validate:questions`, `check:answers -- --include-published`, `questions:validate-ledger` | pass (0 correctness failures; 1571 warnings, identical to pristine `origin/dev`). `check:answers` and the ledger check were run on the first version, since the fixture fix touches none of the data they read; `validate:questions` was re-run on the corrected branch and passes |
 | `content:verify-publication` and answer verifier (re-run on the corrected branch) | 53 eligible, 0 problems, nothing pending; answer verifier 0 mismatches over 60 drafts; zero diff in `published-manifests/`, `publication-approvals/` and the generated AMC bank |
-| Production build and browser tests on it (desktop and mobile) | **26 of 26 pass**: new AMC spec (6: three tests at each viewport), renderer showcase (6), showcase accessibility (3), NAPLAN full-paper flow and picker (3), catalogue (5), smoke (3) |
+| Production build and browser tests on it (desktop and mobile) | **38 of 38 pass in the final combined run**: results-page spec (6), exam-page AMC spec (6), results review accessibility (4), renderer showcase (6), showcase accessibility (3), NAPLAN full-paper flow and picker (3), scholarship simulation (2), catalogue (5), smoke (3) |
+| **Earlier failure, disclosed** | In an earlier combined run, `a11y-results-review` "flagged-only question review" failed once with a 30 s timeout waiting for `begin-exam` during exam start, before the results page was reached. It passed 4 of 4 when run on its own, and the later combined run passed 38 of 38. **Those later passes do not show the earlier combined run passed**; they show the failure did not repeat. Cause not established (cold or loaded host is the likely but unproven explanation). The production build also exceeded Playwright's 300 s web-server window once on this host, after which I built separately and served that build |
+| Validators actually run after the final change | `tsc --noEmit` exit 0; `eslint .` exit 0; `validate:questions`; `check:answers -- --include-published` (0 failures, 1,571 warnings); `questions:validate-ledger`; `content:verify-publication` (summary in the integrity section); `verify-roadmap-amc-answers` (60 items, 0 mismatches) |
+| **Not executed** | `test:rls`, `test:e2e:auth` (need the local Supabase stack; CI runs them); a deployment-style build with the showcase flag unset was not repeated for the P2 change (the P1 measurement on `e35e3817` stands; the new tests add only synthetic text, and the final build was made with the QA flags set as the Playwright config does) |
 | Negative control (fix disabled) | exactly the two AMC "keeps each line" tests fail (`Expected "pre-line"`, `Received "normal"`); the control and labelling tests pass; with the fix restored, 6 of 6 pass |
 | Guard negative control (real `y5-019` stem put back into the fixture) | 3 unit tests fail; fixture restored byte-for-byte |
 | Deployment-style build (flags unset), served with the showcase gate off | `/showcase` page 404; the showcase chunk is a static file but now contains only the demonstration text. Zero hits for any unpublished question text in `.next/static` and `public/` |
@@ -175,6 +186,30 @@ Run in this worktree on 2026-10-25. Nothing below was run against production. Th
 So the same commit passed and failed depending on the run, which points to an intermittent font-fetch problem rather than the content of this change. Root cause is not established. It is tracked separately as issue #77, which also records the earlier 24 October failure on `dev`. **No font or global build configuration is changed in this PR.**
 
 Confirmed unchanged: the 53 published questions, manifests and approvals, the generated AMC bank, the four untouched candidates (registry rows and draft text identical to `origin/dev`), and NAPLAN/ICAS rendering (the control test, the full-paper flow, and the helper returning an empty class for any style other than `amc_style`). Across the two changed drafts, only `prompt` and `explanation` differ.
+
+### Integrity record for the final P2 correction
+
+Checked in this worktree before committing:
+
+| Check | Result |
+|---|---|
+| `content:verify-publication` (complete summary) | `authored` 1601; `eligible` **53**; `awaitingApproval` 1548; `pendingPublication` empty; `problems` **[]**. Writing prompts: 10 drafts, 0 eligible, 0 problems. Baseline unchanged |
+| `y3-014` hashes against the repository's canonical recomputation (`loadAmcReviewTargets`) | Source `ee5695a9…d7c0`, content `c7aeef96…5b9b`, manifest `3e62c179…5442` all equal the recomputed values; the registry row and the attested pin carry the same source and content hashes |
+| Superseded hashes `ec632c61…`, `b7d9141a…`, `853f53d3…` | Appear in no file under `content/`, `src/`, `scripts/` or `e2e/`, and no approval file exists for `y3-014` or `y5-028`. They are named only in these review documents |
+| `y5-028` | No difference from the previous PR head (`e35e3817`) in the Year 5 draft or the Year 5 review-source file |
+| Published manifests, approval records, generated question banks | No diff against `origin/dev` |
+| Code exclusions (`AMC_EXCLUDED_FROM_REVIEW`, `pending-amc-approvals.ts`) | Files unchanged; all three exclusions still active |
+| Owner decision fields | Seven present, all blank; no ticked box |
+| Scholarship, NAPLAN, ICAS questions | Not in the diff (8 modified files and 2 new test files, listed in the commit) |
+| Public assets | A scan of `.next/static` and `public/` on the final build found zero occurrences of the `y5-019` stem, the revised `y3-014` stem or the revised `y5-028` stem. The new tests use only the synthetic demonstration fixtures, and the results-page spec imports them in the Playwright (Node) process, not into the app bundle |
+
+### Outstanding advisory decisions (not resolved by this change)
+
+- `y5-028`: the child-visible skill label "Enumerate whole-number solutions" reads slightly algebraic, and the stem is the longest in Year 5 (64 words). Neither was changed under this authorisation.
+- `y3-014`: whether a conditional "if … would" stem suits Year 3, and the weak distractors 7 and 13.
+- `y3-016` easy versus medium, `y3-026` medium versus challenging, `y5-028` challenging versus medium (owner difficulty decisions).
+- A qualified human age-fit reviewer is still needed for `y3-014` and `y5-028`; the AI reviews, including mine, are author-involved or not independent.
+- The results page and exam page keep line breaks only for multiple-choice AMC prompts; a future multi-line AMC number-entry prompt would need the same treatment.
 
 ## 10. Unresolved decisions
 

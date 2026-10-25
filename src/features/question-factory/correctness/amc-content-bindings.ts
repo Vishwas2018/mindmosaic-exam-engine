@@ -13,7 +13,7 @@ export const AMC_ATTESTED_CONTENT_HASHES: Readonly<Record<string, string>> = Obj
   "roadmap-amc-y3-011": "28a9a85f8a567680b0ddfed21fb0a890a7d63d8da89ee6dcb8237b0d7b604b1c",
   "roadmap-amc-y3-012": "efc188a70071a8ea701cd940ae49dbf98b8704876a973fd394f013850d4964c5",
   "roadmap-amc-y3-013": "304b4c203795a15bbce77435f0015f1136d262a4e16386ddcc46ab36e7e4eb7e",
-  "roadmap-amc-y3-014": "b7d9141ab2d511668bb33334dce987f9f253c360dba23f6334a0b59aac0684e7",
+  "roadmap-amc-y3-014": "ee5695a9361d8e1b0c61c355315bcb61103830b35a20ea312b1b1a43d123d7c0",
   "roadmap-amc-y3-015": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
   "roadmap-amc-y3-016": "23f16ef863aaa054068723213ec378c34a9b442296b151c67059dbec8746e2a0",
   "roadmap-amc-y3-017": "032f05fe70c6e0ab67284b51688716772489e79bf7cdc63950afb870742b0a6b",
