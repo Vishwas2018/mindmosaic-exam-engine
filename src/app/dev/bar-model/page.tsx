@@ -1,18 +1,22 @@
-import { notFound } from "next/navigation";
+import {notFound} from "next/navigation";
 
-import { validBarModelFixtures, warningBarModelFixtures } from "@/content/visual-fixtures/bar-model";
-import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
-import { validateBarModelVisual } from "@/features/visuals/bar-model/pipeline";
-import { isBarModelPreviewAllowed } from "@/features/visuals/bar-model/preview-gate";
+import {barModelPilotFixtures} from "@/content/visual-fixtures/bar-model";
+import {VisualRenderer} from "@/features/exam-engine/visual-renderers";
+import {validateBarModelVisual} from "@/features/visuals/bar-model/pipeline";
+import {isBarModelPreviewAllowed} from "@/features/visuals/bar-model/preview-gate";
 
-const FIXTURES = [
-  ...validBarModelFixtures.map((fixture) => ({ ...fixture, group: "Valid" })),
-  ...warningBarModelFixtures.map((fixture) => ({ ...fixture, group: "Valid with warnings" })),
-];
+const FIXTURES = barModelPilotFixtures.map((fixture) => ({
+  ...fixture,
+  group: "Pilot sample",
+}));
 
-function formatTarget(target: { numerator: string; denominator: string } | null): string {
+function formatTarget(
+  target: {numerator: string; denominator: string} | null,
+): string {
   if (!target) return "none";
-  return target.denominator === "1" ? target.numerator : `${target.numerator}/${target.denominator}`;
+  return target.denominator === "1"
+    ? target.numerator
+    : `${target.numerator}/${target.denominator}`;
 }
 
 export default function BarModelPreviewPage() {
@@ -22,11 +26,17 @@ export default function BarModelPreviewPage() {
 
   return (
     <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
-      <p className="text-sm font-medium text-royal">Dev only · not in production · not linked from navigation</p>
-      <h1 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Bar model preview (Phase 1)</h1>
+      <p className="text-sm font-medium text-royal">
+        Dev only · not in production · not linked from navigation
+      </p>
+      <h1 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">
+        Bar model pilot preview (30 sample questions)
+      </h1>
       <p className="mt-2 text-muted">
-        {FIXTURES.length} fixtures. Each shows the learner view exactly as a child would see it, then a separate
-        developer panel with the solved target, warnings and issues. The developer panel is never shown to learners.
+        {FIXTURES.length} pilot items, split evenly across Year 3 and Year 5.
+        Each shows the learner view exactly as a child would see it, then a
+        separate developer panel with the solved target, warnings and issues.
+        The developer panel is never shown to learners.
       </p>
 
       <div className="mt-8 space-y-10">
@@ -39,7 +49,10 @@ export default function BarModelPreviewPage() {
               aria-labelledby={`fixture-${fixture.name}`}
               className="min-w-0"
             >
-              <h2 id={`fixture-${fixture.name}`} className="text-lg font-bold text-ink">
+              <h2
+                id={`fixture-${fixture.name}`}
+                className="text-lg font-bold text-ink"
+              >
                 {fixture.name}{" "}
                 <span className="text-sm font-medium text-muted">
                   · Year {fixture.yearLevel} · {fixture.group}
@@ -54,7 +67,9 @@ export default function BarModelPreviewPage() {
                   <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
                     Learner view
                   </h3>
-                  {result.visual ? <VisualRenderer visual={result.visual} /> : null}
+                  {result.visual ? (
+                    <VisualRenderer visual={result.visual} />
+                  ) : null}
                 </div>
 
                 <aside
@@ -71,24 +86,38 @@ export default function BarModelPreviewPage() {
                     <dt className="font-semibold">Solved target</dt>
                     <dd data-testid="target" className="break-words">
                       {formatTarget(result.solution?.target ?? null)}
-                      {result.solution && !result.solution.isWhole ? " (not whole)" : ""}
+                      {result.solution && !result.solution.isWhole
+                        ? " (not whole)"
+                        : ""}
                     </dd>
                     <dt className="font-semibold">Expected</dt>
-                    <dd className="break-words">{formatTarget(fixture.target)}</dd>
+                    <dd className="break-words">
+                      {formatTarget(fixture.target)}
+                    </dd>
                     <dt className="font-semibold">Conservation checks</dt>
                     <dd>{result.solution?.conservationChecks ?? 0}</dd>
                     <dt className="font-semibold">Warnings</dt>
                     <dd data-testid="warnings" className="break-words">
-                      {result.warningCodes.length > 0 ? result.warningCodes.join(", ") : "none"}
+                      {result.warningCodes.length > 0
+                        ? result.warningCodes.join(", ")
+                        : "none"}
                     </dd>
                     <dt className="font-semibold">Errors</dt>
-                    <dd className="break-words">{result.errorCodes.length > 0 ? result.errorCodes.join(", ") : "none"}</dd>
+                    <dd className="break-words">
+                      {result.errorCodes.length > 0
+                        ? result.errorCodes.join(", ")
+                        : "none"}
+                    </dd>
                   </dl>
                   {result.issues.length > 0 ? (
                     <ul className="mt-2 list-disc space-y-1 pl-5">
                       {result.issues.map((entry, index) => (
-                        <li key={`${entry.code}-${index}`} className="break-words">
-                          <code>{entry.code}</code> ({entry.severity}): {entry.message}
+                        <li
+                          key={`${entry.code}-${index}`}
+                          className="break-words"
+                        >
+                          <code>{entry.code}</code> ({entry.severity}):{" "}
+                          {entry.message}
                         </li>
                       ))}
                     </ul>
