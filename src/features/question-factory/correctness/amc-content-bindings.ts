@@ -57,7 +57,7 @@ export const AMC_ATTESTED_CONTENT_HASHES: Readonly<Record<string, string>> = Obj
   "roadmap-amc-y5-025": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
   "roadmap-amc-y5-026": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
   "roadmap-amc-y5-027": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
-  "roadmap-amc-y5-028": "5743cf39b78815a617fda04d161c6e38f5724ba490dcef28689faa4b3f1a298a",
+  "roadmap-amc-y5-028": "9211116d5f5fc502e48bdb7005bcb6a150ac5c2a017001245081b78e4f3b809b",
   "roadmap-amc-y5-029": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
   "roadmap-amc-y5-030": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086"
 });

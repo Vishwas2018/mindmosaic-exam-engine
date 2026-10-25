@@ -1161,8 +1161,8 @@
       "explanation": "Try 0, 1, 2, 3, 4, 5 or 6 bags of 5. The counters left over must be made from bags of 3. With 0 bags of 5, she needs 10 bags of 3. With 3 bags of 5 (15 counters), she needs 5 bags of 3. With 6 bags of 5 (30 counters), she needs no bags of 3. With 1, 2, 4 or 5 bags of 5, the counters left over (25, 20, 10 or 5) cannot be made from bags of 3. So there are 3 combinations.",
       "metadata": {
         "subject": "amc_mathematics",
-        "strand": "Patterns & Algebra",
-        "skill": "Enumerate whole-number solutions",
+        "strand": "Logic & Problem-Solving",
+        "skill": "Systematic counting",
         "difficulty": "challenging",
         "marks": 8,
         "estimatedTimeSeconds": 180,
