@@ -63,7 +63,7 @@ try {
     outputs.set(`${REVIEW_DIR}/answer-key-companions/${t.companionFile}`, buildAnswerKeyCompanion(section, audit, packet, t.packetFile));
     outputs.set(
       `${REVIEW_DIR}/${t.ownerFile}`,
-      renderOwnerPack(section, audit, adoptedScope, statusBuckets, recsDoc.recommendations, assessor, t.packetFile, packet.packetSha256, t.docTitle),
+      renderOwnerPack(section, audit, adoptedScope, statusBuckets, recsDoc.recommendations, assessor, t.packetFile, packet.packetSha256, t.docTitle, fsReader),
     );
     manifestEntries.push({ packetId: t.packetId, packetFile: t.packetFile, companionFile: t.companionFile, packet });
   }

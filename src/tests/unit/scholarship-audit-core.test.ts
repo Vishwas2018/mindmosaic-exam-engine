@@ -154,6 +154,45 @@ describe("failure propagates into the audit; a failed check never becomes a 'key
     expect(md).toMatch(/not_established/);
   });
 
+  it("renderOwnerPack distinguishes verified from mismatched identity pins and never calls mismatched pins verified", () => {
+    const auditNr = auditSection(nr, fsReader);
+    const mdNr = renderOwnerPack(nr, auditNr, parseAdoptedScope(fsReader), new Map(), {}, "x", "p.md", "h", "NUMERICAL-40-OWNER-REVIEW", fsReader);
+    // NR has 20 verified D2 pins (021..040) and 20 mismatched pins (001..020)
+    expect(mdNr).toContain("partially verified (20/40 verified, 20 mismatched, 0 missing)");
+    expect(mdNr).toContain(
+      `20 of 40 match recomputed D2 hashes; 20 pins present in ${SOURCE_PATHS.identityPins} differ from D2 (binding not established)`,
+    );
+    expect(mdNr).toContain("a mismatched pin cannot be described as verified repository-revision binding");
+    // Per-question hash bindings in NR:
+    expect(mdNr).toMatch(/scholarship-y6-nr-001[\s\S]*?identity pin: `[a-f0-9]+` \(mismatched vs D2 `[a-f0-9]+`; binding not established\)/);
+    expect(mdNr).toMatch(/scholarship-y6-nr-022[\s\S]*?identity pin: `[a-f0-9]+` \(verified D2 match\)/);
+
+    // Mathematics has 40/40 verified D2 pins
+    const auditMaths = auditSection(maths, fsReader);
+    const mdMaths = renderOwnerPack(maths, auditMaths, parseAdoptedScope(fsReader), new Map(), {}, "x", "p.md", "h", "MATHEMATICS-40-OWNER-REVIEW", fsReader);
+    expect(mdMaths).toContain("verified (40/40 D2 pins match)");
+    expect(mdMaths).toContain("Present but mismatched pins:** 0 of 40 items");
+    expect(mdMaths).toMatch(/scholarship-y6-maths-001[\s\S]*?identity pin: `[a-f0-9]+` \(verified D2 match\)/);
+
+    // Mismatched pin injection via overlay: a tampered pin on Maths immediately becomes mismatched / not established
+    const pins = JSON.parse(fsReader.readText(SOURCE_PATHS.identityPins)) as Record<string, string>;
+    pins["scholarship-y6-maths-001"] = "0000000000000000000000000000000000000000000000000000000000000000";
+    const tamperedReader = overlay({ [SOURCE_PATHS.identityPins]: JSON.stringify(pins) });
+    const mdTampered = renderOwnerPack(maths, auditMaths, parseAdoptedScope(tamperedReader), new Map(), {}, "x", "p.md", "h", "MATHEMATICS-40-OWNER-REVIEW", tamperedReader);
+    expect(mdTampered).toContain("partially verified (39/40 verified, 1 mismatched, 0 missing)");
+    expect(mdTampered).not.toContain("verified (40/40 D2 pins match)");
+    expect(mdTampered).toMatch(/scholarship-y6-maths-001[\s\S]*?identity pin: `0000000000000000000000000000000000000000000000000000000000000000` \(mismatched vs D2 `[a-f0-9]+`; binding not established\)/);
+  });
+
+  it("renderOwnerPack uses qualified independence terminology without asserting generator provider family", () => {
+    const auditNr = auditSection(nr, fsReader);
+    const md = renderOwnerPack(nr, auditNr, parseAdoptedScope(fsReader), new Map(), {}, "Test Assessor", "p.md", "h", "NUMERICAL-40-OWNER-REVIEW", fsReader);
+    expect(md).not.toMatch(/same provider family/i);
+    expect(md).toContain("The historical generator declaration (`anthropic/claude-sonnet-5`) is unverified, and true original generation remains unknown.");
+    expect(md).toContain("independence cannot be established against an unknown original generator");
+    expect(md).toContain("These recommendations remain advisory input and do not constitute production-grade independent evidence.");
+  });
+
   it("inventory records a failure and flips auditStatus when a source key is wrong", () => {
     const text = fsReader.readText(`${"content/scholarship-drafts"}/scholarship-y6-numerical-reasoning-draft.json`);
     const data = JSON.parse(text);

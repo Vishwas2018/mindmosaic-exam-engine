@@ -27,7 +27,7 @@ A matching key and solver result establishes arithmetic consistency only. It doe
 
 ## 3. Difficulty decision table (declared label differs from estimator)
 
-Advisory recommendations come from: Claude Sonnet 5.5 (Claude Code), written 2026-10-18 after independently solving every item and before reading the earlier 2026-10-17 assessment. That assessor is in the same provider family as the declared generator and is **not independent**.
+Advisory recommendations come from documented assessor `Claude Sonnet 5.5 (Claude Code), written 2026-10-18 after independently solving every item and before reading the earlier 2026-10-17 assessment`. The historical generator declaration (`anthropic/claude-sonnet-5`) is unverified, and true original generation remains unknown. Under `docs/REVIEW_INDEPENDENCE_POLICY.md` and ADR-017, independence cannot be established against an unknown original generator. These recommendations remain advisory input and do not constitute production-grade independent evidence.
 
 | ID | Declared | Estimator | Advisory recommendation | Advisory rationale | Owner decision (BLANK) |
 |---|---|---|---|---|---|
@@ -53,14 +53,21 @@ Advisory recommendations come from: Claude Sonnet 5.5 (Claude Code), written 202
 | `scholarship-y6-maths-037` | `easy` | `medium` | keep (easy) | A repeated change followed by one more; the result crosses zero but the arithmetic is two simple steps. | |
 | `scholarship-y6-maths-039` | `medium` | `easy` | keep (medium) | Build a perimeter expression that counts the repeated side twice, collect terms, then solve for k. | |
 
-## 4. Provenance reconciliation (applies to every item here)
+## 4. Provenance reconciliation
 
 | Aspect | Status | Evidence |
 |---|---|---|
 | Verified original generation | not_established | no execution record (provider, model, prompt, hash, timestamp) exists |
 | Historical declared generation | declared, unverified | docs/reviews/scholarship-2026-10-18/CONTENT-REVIEW-FINDINGS.md states `anthropic/claude-sonnet-5`; a documentation statement, not an execution record |
-| Repository revision provenance | pinned candidate hash | src/features/question-factory/correctness/scholarship-identity-pins.json; identifies imported bytes, not their generator |
-| Independent reviewer identity and qualification | not_established | independence cannot be evaluated while the generator is unverified (ADR-017; REVIEW_INDEPENDENCE_POLICY) |
+| Repository revision provenance | verified (40/40 D2 pins match) | all 40 items match recomputed D2 candidate hashes in src/features/question-factory/correctness/scholarship-identity-pins.json; D1/D2/D3 hashes recomputed; binds imported bytes, not original generation (unknown) |
+| Independent reviewer identity and qualification | not_established | independence cannot be evaluated against an unknown original generator (ADR-017; REVIEW_INDEPENDENCE_POLICY) |
+
+### Repository revision binding details for this section
+- **Verified D2 identity pins:** 40 of 40 items match the recomputed D2 factory candidate hash in `src/features/question-factory/correctness/scholarship-identity-pins.json`.
+- **Present but mismatched pins:** 0 of 40 items have identity pins in `src/features/question-factory/correctness/scholarship-identity-pins.json` that differ from recomputed D2 candidate hashes (binding not established; a mismatched pin cannot be described as verified repository-revision binding).
+- **Missing pins:** 0 of 40 items have no entry in `src/features/question-factory/correctness/scholarship-identity-pins.json`.
+- **Recomputed D1/D2/D3 source hashes:** D1 (raw JSON draft), D2 (factory candidate), and D3 (canonical published Question) hashes were successfully recomputed for all 40 items in this section.
+- **Unknown original generation:** Identity pins bind imported candidate bytes only, not their author or generating model. Original generation remains unknown / not_established across all items.
 
 A Git author or co-author trailer, an importer, a historical declaration or a reviewing model is not proof of the original generator.
 
@@ -83,7 +90,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `d2cc160575a84c0d2fa9cc661edc189c5fc7ce0d782e2f4cec66b294f59dfdb3`; D2 `d2cc160575a84c0d2fa9cc661edc189c5fc7ce0d782e2f4cec66b294f59dfdb3`; D3 `bd38902cffa962e8d6931f50b080c09707c0f822c671e09e58453a3804720978`
+- **Hash bindings:** D1 `d2cc160575a84c0d2fa9cc661edc189c5fc7ce0d782e2f4cec66b294f59dfdb3`; D2 `d2cc160575a84c0d2fa9cc661edc189c5fc7ce0d782e2f4cec66b294f59dfdb3`; D3 `bd38902cffa962e8d6931f50b080c09707c0f822c671e09e58453a3804720978`; identity pin: `d2cc160575a84c0d2fa9cc661edc189c5fc7ce0d782e2f4cec66b294f59dfdb3` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -104,7 +111,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Three sequential signed changes with direction words. Several operations but one idea, so easy.)
-- **Hash bindings:** D1 `a5cdc9aa61465369939325da73f48c57d86392579689c9d66389db8cd5e828a7`; D2 `a5cdc9aa61465369939325da73f48c57d86392579689c9d66389db8cd5e828a7`; D3 `8fe5ce66ba40a670fa10e00fb9b04fe8979f0078385c04018fe465fd77abf405`
+- **Hash bindings:** D1 `a5cdc9aa61465369939325da73f48c57d86392579689c9d66389db8cd5e828a7`; D2 `a5cdc9aa61465369939325da73f48c57d86392579689c9d66389db8cd5e828a7`; D3 `8fe5ce66ba40a670fa10e00fb9b04fe8979f0078385c04018fe465fd77abf405`; identity pin: `a5cdc9aa61465369939325da73f48c57d86392579689c9d66389db8cd5e828a7` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -125,7 +132,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (A double negative inside a four-term expression; the sign handling, not the arithmetic, is the demand.)
-- **Hash bindings:** D1 `a2854ae437999e46743f5d719498ee666bccc414eff33909af3ad503860ff3f5`; D2 `a2854ae437999e46743f5d719498ee666bccc414eff33909af3ad503860ff3f5`; D3 `e1e52b498998cdcad01ebe7b9a4a6027c00a405d683ca23931a09d3c9d2fca6a`
+- **Hash bindings:** D1 `a2854ae437999e46743f5d719498ee666bccc414eff33909af3ad503860ff3f5`; D2 `a2854ae437999e46743f5d719498ee666bccc414eff33909af3ad503860ff3f5`; D3 `e1e52b498998cdcad01ebe7b9a4a6027c00a405d683ca23931a09d3c9d2fca6a`; identity pin: `a2854ae437999e46743f5d719498ee666bccc414eff33909af3ad503860ff3f5` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -146,7 +153,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2`; D2 `8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2`; D3 `2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44`
+- **Hash bindings:** D1 `8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2`; D2 `8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2`; D3 `2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44`; identity pin: `8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2` (verified D2 match)
 - **ADR-017 scope:** adr017_initial_engineering_scope
 - **Owner decision:** [                     ]
 
@@ -167,7 +174,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `15387fcecc4efab224874084d73972be51b9ec7dd04c33e6bcf95c6604353e47`; D2 `15387fcecc4efab224874084d73972be51b9ec7dd04c33e6bcf95c6604353e47`; D3 `6da51155cfae8f56b42a6c2e25c45218dd63a807cd179be13c2c0d272b5e0176`
+- **Hash bindings:** D1 `15387fcecc4efab224874084d73972be51b9ec7dd04c33e6bcf95c6604353e47`; D2 `15387fcecc4efab224874084d73972be51b9ec7dd04c33e6bcf95c6604353e47`; D3 `6da51155cfae8f56b42a6c2e25c45218dd63a807cd179be13c2c0d272b5e0176`; identity pin: `15387fcecc4efab224874084d73972be51b9ec7dd04c33e6bcf95c6604353e47` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -188,7 +195,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `c7a481ff000fec7cff83f9ccf7cd198ff0d102ac050284a48615aba6f2bdc447`; D2 `c7a481ff000fec7cff83f9ccf7cd198ff0d102ac050284a48615aba6f2bdc447`; D3 `ae0b957940c4ad851ad514ff6edbc556607ecc7daeba2d6f281c7b5c0dd2aafd`
+- **Hash bindings:** D1 `c7a481ff000fec7cff83f9ccf7cd198ff0d102ac050284a48615aba6f2bdc447`; D2 `c7a481ff000fec7cff83f9ccf7cd198ff0d102ac050284a48615aba6f2bdc447`; D3 `ae0b957940c4ad851ad514ff6edbc556607ecc7daeba2d6f281c7b5c0dd2aafd`; identity pin: `c7a481ff000fec7cff83f9ccf7cd198ff0d102ac050284a48615aba6f2bdc447` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -209,7 +216,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808`; D2 `93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808`; D3 `938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae`
+- **Hash bindings:** D1 `93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808`; D2 `93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808`; D3 `938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae`; identity pin: `93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808` (verified D2 match)
 - **ADR-017 scope:** adr017_initial_engineering_scope
 - **Owner decision:** [                     ]
 
@@ -230,7 +237,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Percentage difference (20%) of a total, or two simple percentages. Routine.)
-- **Hash bindings:** D1 `d4e52e2901e353b3b1f0fc758fb77a72f36f52e707d876f98b89bab288135b8e`; D2 `d4e52e2901e353b3b1f0fc758fb77a72f36f52e707d876f98b89bab288135b8e`; D3 `cd383471ede01eb13e59cea25c8f687620fe493cf05d9a39582264c16bd3d68a`
+- **Hash bindings:** D1 `d4e52e2901e353b3b1f0fc758fb77a72f36f52e707d876f98b89bab288135b8e`; D2 `d4e52e2901e353b3b1f0fc758fb77a72f36f52e707d876f98b89bab288135b8e`; D3 `cd383471ede01eb13e59cea25c8f687620fe493cf05d9a39582264c16bd3d68a`; identity pin: `d4e52e2901e353b3b1f0fc758fb77a72f36f52e707d876f98b89bab288135b8e` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -251,7 +258,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `43ed970e2723401cbc361d510ac90e8a8e976ee959c0dbf396cf7ffaa5809f07`; D2 `43ed970e2723401cbc361d510ac90e8a8e976ee959c0dbf396cf7ffaa5809f07`; D3 `769b0e8d8d69184f67c7f8f5b48094b95e28b999a661cd57067b4153dd2bbe46`
+- **Hash bindings:** D1 `43ed970e2723401cbc361d510ac90e8a8e976ee959c0dbf396cf7ffaa5809f07`; D2 `43ed970e2723401cbc361d510ac90e8a8e976ee959c0dbf396cf7ffaa5809f07`; D3 `769b0e8d8d69184f67c7f8f5b48094b95e28b999a661cd57067b4153dd2bbe46`; identity pin: `43ed970e2723401cbc361d510ac90e8a8e976ee959c0dbf396cf7ffaa5809f07` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -272,7 +279,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Percentage increase on friendly numbers. The wrong-base trap (20%) is well known and is offered as a distractor.)
-- **Hash bindings:** D1 `05e8ce28ec883c79b8e2ff8d0b854444d9d2d5f256eefd751b5632353a1174cd`; D2 `05e8ce28ec883c79b8e2ff8d0b854444d9d2d5f256eefd751b5632353a1174cd`; D3 `f62b4089d27aa6120e380f6802b1f3262ea0fe5569116f86f91a44fb1f7a4f8c`
+- **Hash bindings:** D1 `05e8ce28ec883c79b8e2ff8d0b854444d9d2d5f256eefd751b5632353a1174cd`; D2 `05e8ce28ec883c79b8e2ff8d0b854444d9d2d5f256eefd751b5632353a1174cd`; D3 `f62b4089d27aa6120e380f6802b1f3262ea0fe5569116f86f91a44fb1f7a4f8c`; identity pin: `05e8ce28ec883c79b8e2ff8d0b854444d9d2d5f256eefd751b5632353a1174cd` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -293,7 +300,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `5090d2b6cbdfaf2fc6e1696ab5d4b91da6d51eb7398cf31c7769e9eac0893579`; D2 `5090d2b6cbdfaf2fc6e1696ab5d4b91da6d51eb7398cf31c7769e9eac0893579`; D3 `3e71627ff483c27f8e85e6535538036cd8b7edbcbdf2a51eba594d9f4a94172e`
+- **Hash bindings:** D1 `5090d2b6cbdfaf2fc6e1696ab5d4b91da6d51eb7398cf31c7769e9eac0893579`; D2 `5090d2b6cbdfaf2fc6e1696ab5d4b91da6d51eb7398cf31c7769e9eac0893579`; D3 `3e71627ff483c27f8e85e6535538036cd8b7edbcbdf2a51eba594d9f4a94172e`; identity pin: `5090d2b6cbdfaf2fc6e1696ab5d4b91da6d51eb7398cf31c7769e9eac0893579` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -314,7 +321,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Share $72,000 in the ratio 2:3:4 and report the middle share. Standard.)
-- **Hash bindings:** D1 `fe595783162e433ee95bac279c50311d29e7978cdb6d27a18432b02497df8bf6`; D2 `fe595783162e433ee95bac279c50311d29e7978cdb6d27a18432b02497df8bf6`; D3 `936254a1d8b234554fdbbe7013ab6da9bc21a2ea69a3af06409c1737d82dd656`
+- **Hash bindings:** D1 `fe595783162e433ee95bac279c50311d29e7978cdb6d27a18432b02497df8bf6`; D2 `fe595783162e433ee95bac279c50311d29e7978cdb6d27a18432b02497df8bf6`; D3 `936254a1d8b234554fdbbe7013ab6da9bc21a2ea69a3af06409c1737d82dd656`; identity pin: `fe595783162e433ee95bac279c50311d29e7978cdb6d27a18432b02497df8bf6` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -335,7 +342,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `6f541e8de6db5d61df76f2b7ce2bfec3b9bdbc7fd1a8081bddeba90725efbfcd`; D2 `6f541e8de6db5d61df76f2b7ce2bfec3b9bdbc7fd1a8081bddeba90725efbfcd`; D3 `685a78b1f890768599fe91d5008e00e753ba124d32c218fb9b695d6d4450beb8`
+- **Hash bindings:** D1 `6f541e8de6db5d61df76f2b7ce2bfec3b9bdbc7fd1a8081bddeba90725efbfcd`; D2 `6f541e8de6db5d61df76f2b7ce2bfec3b9bdbc7fd1a8081bddeba90725efbfcd`; D3 `685a78b1f890768599fe91d5008e00e753ba124d32c218fb9b695d6d4450beb8`; identity pin: `6f541e8de6db5d61df76f2b7ce2bfec3b9bdbc7fd1a8081bddeba90725efbfcd` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -356,7 +363,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a`; D2 `bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a`; D3 `607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf`
+- **Hash bindings:** D1 `bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a`; D2 `bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a`; D3 `607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf`; identity pin: `bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a` (verified D2 match)
 - **ADR-017 scope:** adr017_initial_engineering_scope
 - **Owner decision:** [                     ]
 
@@ -377,7 +384,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `ab12867e181e9ca7c626c72f29d1ff9d21be943f76b988df39a683cd060bbb3f`; D2 `ab12867e181e9ca7c626c72f29d1ff9d21be943f76b988df39a683cd060bbb3f`; D3 `6e479ea955331a78263616338ae36eb5b84341bd1715b1453093a0210c8b7d6d`
+- **Hash bindings:** D1 `ab12867e181e9ca7c626c72f29d1ff9d21be943f76b988df39a683cd060bbb3f`; D2 `ab12867e181e9ca7c626c72f29d1ff9d21be943f76b988df39a683cd060bbb3f`; D3 `6e479ea955331a78263616338ae36eb5b84341bd1715b1453093a0210c8b7d6d`; identity pin: `ab12867e181e9ca7c626c72f29d1ff9d21be943f76b988df39a683cd060bbb3f` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -398,7 +405,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `04e56433e0812fa6d68f745512c66a5d1097c5fc7986e8ca4bb2d399235060e0`; D2 `04e56433e0812fa6d68f745512c66a5d1097c5fc7986e8ca4bb2d399235060e0`; D3 `826b57efa2cc0a39d07892c6916cacfacad10166be93e5798392432be37eee78`
+- **Hash bindings:** D1 `04e56433e0812fa6d68f745512c66a5d1097c5fc7986e8ca4bb2d399235060e0`; D2 `04e56433e0812fa6d68f745512c66a5d1097c5fc7986e8ca4bb2d399235060e0`; D3 `826b57efa2cc0a39d07892c6916cacfacad10166be93e5798392432be37eee78`; identity pin: `04e56433e0812fa6d68f745512c66a5d1097c5fc7986e8ca4bb2d399235060e0` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -419,7 +426,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Ratio parts of a total with friendly numbers.)
-- **Hash bindings:** D1 `50257c7923016a26b6a01069bca182e4b8789ab2710266fc38bfb4c464a2402f`; D2 `50257c7923016a26b6a01069bca182e4b8789ab2710266fc38bfb4c464a2402f`; D3 `37da83c941db6e6517e477afbf2d2466f27bdb340879b74932f97598fe13b269`
+- **Hash bindings:** D1 `50257c7923016a26b6a01069bca182e4b8789ab2710266fc38bfb4c464a2402f`; D2 `50257c7923016a26b6a01069bca182e4b8789ab2710266fc38bfb4c464a2402f`; D3 `37da83c941db6e6517e477afbf2d2466f27bdb340879b74932f97598fe13b269`; identity pin: `50257c7923016a26b6a01069bca182e4b8789ab2710266fc38bfb4c464a2402f` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -440,7 +447,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `15b5fd7c6386cf484fb1e4e93bae493c9aa557b8e0bc5e2b98026ea06d830e28`; D2 `15b5fd7c6386cf484fb1e4e93bae493c9aa557b8e0bc5e2b98026ea06d830e28`; D3 `bbbebf4c7ee5c71c73e22e404f45e495137e398363b7af75734a568125408735`
+- **Hash bindings:** D1 `15b5fd7c6386cf484fb1e4e93bae493c9aa557b8e0bc5e2b98026ea06d830e28`; D2 `15b5fd7c6386cf484fb1e4e93bae493c9aa557b8e0bc5e2b98026ea06d830e28`; D3 `bbbebf4c7ee5c71c73e22e404f45e495137e398363b7af75734a568125408735`; identity pin: `15b5fd7c6386cf484fb1e4e93bae493c9aa557b8e0bc5e2b98026ea06d830e28` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -461,7 +468,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Sum and difference of two ages with small numbers.)
-- **Hash bindings:** D1 `310bfd823bb82d07fdb51fc73b7ba9aaa50195ccd2aa983d0803706420e1c7a3`; D2 `310bfd823bb82d07fdb51fc73b7ba9aaa50195ccd2aa983d0803706420e1c7a3`; D3 `aa503aab32af36b989749da1b1e6fa6171557b7fe2193502d319ec94ab5284bf`
+- **Hash bindings:** D1 `310bfd823bb82d07fdb51fc73b7ba9aaa50195ccd2aa983d0803706420e1c7a3`; D2 `310bfd823bb82d07fdb51fc73b7ba9aaa50195ccd2aa983d0803706420e1c7a3`; D3 `aa503aab32af36b989749da1b1e6fa6171557b7fe2193502d319ec94ab5284bf`; identity pin: `310bfd823bb82d07fdb51fc73b7ba9aaa50195ccd2aa983d0803706420e1c7a3` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -482,7 +489,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Unknown on both sides of a given equation. Procedural, but collecting terms across the equals sign is above routine Year 6 work.)
-- **Hash bindings:** D1 `40a0d30bc1b0901927b23db59c50cd52733724530c93cedebc7506aafe99d160`; D2 `40a0d30bc1b0901927b23db59c50cd52733724530c93cedebc7506aafe99d160`; D3 `e9d1ab8a56a8a5dc476cb6a7a540ccc5c5c1de234350602af309392e16dce108`
+- **Hash bindings:** D1 `40a0d30bc1b0901927b23db59c50cd52733724530c93cedebc7506aafe99d160`; D2 `40a0d30bc1b0901927b23db59c50cd52733724530c93cedebc7506aafe99d160`; D3 `e9d1ab8a56a8a5dc476cb6a7a540ccc5c5c1de234350602af309392e16dce108`; identity pin: `40a0d30bc1b0901927b23db59c50cd52733724530c93cedebc7506aafe99d160` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -503,7 +510,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Three consecutive odd numbers need either the mean shortcut (29, then +2) or x, x+2, x+4 set up and solved. The distractor 29 catches the slip. Borderline easy.)
-- **Hash bindings:** D1 `594bc49867ec31f791bbe61aa1da69df31f3990d68c880370d4d4f91c8584c6d`; D2 `594bc49867ec31f791bbe61aa1da69df31f3990d68c880370d4d4f91c8584c6d`; D3 `e2f92d99f40a2dd892ca8b6c4b9c57ac3b941e1567874e9bc45105134ddf27d3`
+- **Hash bindings:** D1 `594bc49867ec31f791bbe61aa1da69df31f3990d68c880370d4d4f91c8584c6d`; D2 `594bc49867ec31f791bbe61aa1da69df31f3990d68c880370d4d4f91c8584c6d`; D3 `e2f92d99f40a2dd892ca8b6c4b9c57ac3b941e1567874e9bc45105134ddf27d3`; identity pin: `594bc49867ec31f791bbe61aa1da69df31f3990d68c880370d4d4f91c8584c6d` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -524,7 +531,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Two linear conditions in two unknowns, solved by substitution or elimination. Arguably the hardest maths item in this group and could be argued up to challenging.)
-- **Hash bindings:** D1 `a7c7efcf9b11137befd8e691d82953dfdee2b49572560573d857574c1e0e4ccb`; D2 `a7c7efcf9b11137befd8e691d82953dfdee2b49572560573d857574c1e0e4ccb`; D3 `5bd8080c117a4b322162ace732bd9864d03998025089cdcf934b7e0a14141a35`
+- **Hash bindings:** D1 `a7c7efcf9b11137befd8e691d82953dfdee2b49572560573d857574c1e0e4ccb`; D2 `a7c7efcf9b11137befd8e691d82953dfdee2b49572560573d857574c1e0e4ccb`; D3 `5bd8080c117a4b322162ace732bd9864d03998025089cdcf934b7e0a14141a35`; identity pin: `a7c7efcf9b11137befd8e691d82953dfdee2b49572560573d857574c1e0e4ccb` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -545,7 +552,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `relabel_easy` (Direct substitution; the only care needed is reading 2qr as a product and applying order of operations.)
-- **Hash bindings:** D1 `060c779e02ff33688a3abb776c696850955d0cc899b5e9b4c509f89800b3d793`; D2 `060c779e02ff33688a3abb776c696850955d0cc899b5e9b4c509f89800b3d793`; D3 `75cdf5f3a0db40581b2a2334e3c48460ba3b1506dd4d0884265974f2aecc2160`
+- **Hash bindings:** D1 `060c779e02ff33688a3abb776c696850955d0cc899b5e9b4c509f89800b3d793`; D2 `060c779e02ff33688a3abb776c696850955d0cc899b5e9b4c509f89800b3d793`; D3 `75cdf5f3a0db40581b2a2334e3c48460ba3b1506dd4d0884265974f2aecc2160`; identity pin: `060c779e02ff33688a3abb776c696850955d0cc899b5e9b4c509f89800b3d793` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -566,7 +573,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `e7fdc00b4617573cb4759ca7a5dbef14c2de909b34cf57e2f5b3f6aa7493851e`; D2 `e7fdc00b4617573cb4759ca7a5dbef14c2de909b34cf57e2f5b3f6aa7493851e`; D3 `72715a793cbcaded6bf734c7a0f5b3c71b181d6b54707e715f92d9fb4763928b`
+- **Hash bindings:** D1 `e7fdc00b4617573cb4759ca7a5dbef14c2de909b34cf57e2f5b3f6aa7493851e`; D2 `e7fdc00b4617573cb4759ca7a5dbef14c2de909b34cf57e2f5b3f6aa7493851e`; D3 `72715a793cbcaded6bf734c7a0f5b3c71b181d6b54707e715f92d9fb4763928b`; identity pin: `e7fdc00b4617573cb4759ca7a5dbef14c2de909b34cf57e2f5b3f6aa7493851e` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -587,7 +594,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (A verbal description must be translated into 6n - 14 = 2n + 18, then solved with the unknown on both sides.)
-- **Hash bindings:** D1 `54b91b9ffb8d44c409378440e70b3f9d1bf5177cb0ba90678a7081789c0bf20f`; D2 `54b91b9ffb8d44c409378440e70b3f9d1bf5177cb0ba90678a7081789c0bf20f`; D3 `3b5702e11d171e05efcc2ccef4f50ec5c74902b101165d88454efccc54ad0b35`
+- **Hash bindings:** D1 `54b91b9ffb8d44c409378440e70b3f9d1bf5177cb0ba90678a7081789c0bf20f`; D2 `54b91b9ffb8d44c409378440e70b3f9d1bf5177cb0ba90678a7081789c0bf20f`; D3 `3b5702e11d171e05efcc2ccef4f50ec5c74902b101165d88454efccc54ad0b35`; identity pin: `54b91b9ffb8d44c409378440e70b3f9d1bf5177cb0ba90678a7081789c0bf20f` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -608,7 +615,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Vertically opposite angles are equal, then an unknown-on-both-sides solve, then back-substitution to report the angle rather than x.)
-- **Hash bindings:** D1 `bf46facbee1764cc2d353242367859c52e80b06ac096fdcb53a4e26174cb30dc`; D2 `bf46facbee1764cc2d353242367859c52e80b06ac096fdcb53a4e26174cb30dc`; D3 `f2e648502a171816739d12ec3fa9e363d5fd1ebbe9fa4b99b4a3cd4891b9c776`
+- **Hash bindings:** D1 `bf46facbee1764cc2d353242367859c52e80b06ac096fdcb53a4e26174cb30dc`; D2 `bf46facbee1764cc2d353242367859c52e80b06ac096fdcb53a4e26174cb30dc`; D3 `f2e648502a171816739d12ec3fa9e363d5fd1ebbe9fa4b99b4a3cd4891b9c776`; identity pin: `bf46facbee1764cc2d353242367859c52e80b06ac096fdcb53a4e26174cb30dc` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -629,7 +636,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (All three angles must be expressed through one variable and summed to 180; the distractor 40 is the value of B, not A.)
-- **Hash bindings:** D1 `106b175e5e37e22b1bf60c4248b2d79afb3dbfe7dbeef0018fb2da685926d678`; D2 `106b175e5e37e22b1bf60c4248b2d79afb3dbfe7dbeef0018fb2da685926d678`; D3 `30367bbc8e0bb6f43cfe6fad610b12f9adf4f87c8859d7ff89fa59a560443e22`
+- **Hash bindings:** D1 `106b175e5e37e22b1bf60c4248b2d79afb3dbfe7dbeef0018fb2da685926d678`; D2 `106b175e5e37e22b1bf60c4248b2d79afb3dbfe7dbeef0018fb2da685926d678`; D3 `30367bbc8e0bb6f43cfe6fad610b12f9adf4f87c8859d7ff89fa59a560443e22`; identity pin: `106b175e5e37e22b1bf60c4248b2d79afb3dbfe7dbeef0018fb2da685926d678` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -650,7 +657,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `5a2b91dbd5d863d6a1cc0587e12c8fd031dc06b10bda0c7cf7ca02483985db22`; D2 `5a2b91dbd5d863d6a1cc0587e12c8fd031dc06b10bda0c7cf7ca02483985db22`; D3 `5d74690d6ab4ec6fe71fb777b8bbf218f0af6569b177a1667084525cb4344254`
+- **Hash bindings:** D1 `5a2b91dbd5d863d6a1cc0587e12c8fd031dc06b10bda0c7cf7ca02483985db22`; D2 `5a2b91dbd5d863d6a1cc0587e12c8fd031dc06b10bda0c7cf7ca02483985db22`; D3 `5d74690d6ab4ec6fe71fb777b8bbf218f0af6569b177a1667084525cb4344254`; identity pin: `5a2b91dbd5d863d6a1cc0587e12c8fd031dc06b10bda0c7cf7ca02483985db22` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -671,7 +678,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Supplementary angles plus a careful translation of '36 less than three times'; the question asks for the smaller angle, so the other angle must be checked.)
-- **Hash bindings:** D1 `457e0105ecabd7db7a926857f83571316d71d109e0be7837e00a3381d355dfce`; D2 `457e0105ecabd7db7a926857f83571316d71d109e0be7837e00a3381d355dfce`; D3 `75915d52a57d50c930a2af009289073ded92eb4a43aacfa36afbf1033e8cbf1f`
+- **Hash bindings:** D1 `457e0105ecabd7db7a926857f83571316d71d109e0be7837e00a3381d355dfce`; D2 `457e0105ecabd7db7a926857f83571316d71d109e0be7837e00a3381d355dfce`; D3 `75915d52a57d50c930a2af009289073ded92eb4a43aacfa36afbf1033e8cbf1f`; identity pin: `457e0105ecabd7db7a926857f83571316d71d109e0be7837e00a3381d355dfce` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -692,7 +699,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `1e16c4800ec67256612761787eb48049856938170646fe1afcfacf5833c81feb`; D2 `1e16c4800ec67256612761787eb48049856938170646fe1afcfacf5833c81feb`; D3 `ff2000ac085f80afd85bead02a4de15a15771cec61b61a55903641335bc289f1`
+- **Hash bindings:** D1 `1e16c4800ec67256612761787eb48049856938170646fe1afcfacf5833c81feb`; D2 `1e16c4800ec67256612761787eb48049856938170646fe1afcfacf5833c81feb`; D3 `ff2000ac085f80afd85bead02a4de15a15771cec61b61a55903641335bc289f1`; identity pin: `1e16c4800ec67256612761787eb48049856938170646fe1afcfacf5833c81feb` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -713,7 +720,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Subtract one square area from another.)
-- **Hash bindings:** D1 `89698158de42d42429bca02414d63db5b2c5329a620075fe300111c0fdd38b40`; D2 `89698158de42d42429bca02414d63db5b2c5329a620075fe300111c0fdd38b40`; D3 `b00092e3692070df08400662dc098c86984e0ee67addab7fb74f2f462fe1263e`
+- **Hash bindings:** D1 `89698158de42d42429bca02414d63db5b2c5329a620075fe300111c0fdd38b40`; D2 `89698158de42d42429bca02414d63db5b2c5329a620075fe300111c0fdd38b40`; D3 `b00092e3692070df08400662dc098c86984e0ee67addab7fb74f2f462fe1263e`; identity pin: `89698158de42d42429bca02414d63db5b2c5329a620075fe300111c0fdd38b40` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -734,7 +741,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Needs the polygon angle-sum rule or the exterior-angle idea, which is stretch content for Year 6; the arithmetic after that is easy.)
-- **Hash bindings:** D1 `aeaafb5263ef09c95b13a06a48a71bb5d060dbf58ca7827968fbbb6c2cf2b615`; D2 `aeaafb5263ef09c95b13a06a48a71bb5d060dbf58ca7827968fbbb6c2cf2b615`; D3 `70f452f6ae098d1e5e9b11ebe41c08c337132eb52159698ca61482685e482861`
+- **Hash bindings:** D1 `aeaafb5263ef09c95b13a06a48a71bb5d060dbf58ca7827968fbbb6c2cf2b615`; D2 `aeaafb5263ef09c95b13a06a48a71bb5d060dbf58ca7827968fbbb6c2cf2b615`; D3 `70f452f6ae098d1e5e9b11ebe41c08c337132eb52159698ca61482685e482861`; identity pin: `aeaafb5263ef09c95b13a06a48a71bb5d060dbf58ca7827968fbbb6c2cf2b615` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -755,7 +762,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (Complement probability as a percentage; the NOT in the stem is the only trap.)
-- **Hash bindings:** D1 `7d5025770d8bdf672e5570e60e3152c957ac3003914b36300f9d3640c45928ad`; D2 `7d5025770d8bdf672e5570e60e3152c957ac3003914b36300f9d3640c45928ad`; D3 `1e8d85cf6023f3d355c89cd5ddbdccd07bd875bc812bc6a833072237e55c22c8`
+- **Hash bindings:** D1 `7d5025770d8bdf672e5570e60e3152c957ac3003914b36300f9d3640c45928ad`; D2 `7d5025770d8bdf672e5570e60e3152c957ac3003914b36300f9d3640c45928ad`; D3 `1e8d85cf6023f3d355c89cd5ddbdccd07bd875bc812bc6a833072237e55c22c8`; identity pin: `7d5025770d8bdf672e5570e60e3152c957ac3003914b36300f9d3640c45928ad` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -776,7 +783,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `33d54ed1309d85801a3ce44c97b614b4540acaf4d37b4c5b4aa2e6c621a4d885`; D2 `33d54ed1309d85801a3ce44c97b614b4540acaf4d37b4c5b4aa2e6c621a4d885`; D3 `0224354932316ad6b371ac1b382ba66c4322f65bd4544556d026568d1999b2ec`
+- **Hash bindings:** D1 `33d54ed1309d85801a3ce44c97b614b4540acaf4d37b4c5b4aa2e6c621a4d885`; D2 `33d54ed1309d85801a3ce44c97b614b4540acaf4d37b4c5b4aa2e6c621a4d885`; D3 `0224354932316ad6b371ac1b382ba66c4322f65bd4544556d026568d1999b2ec`; identity pin: `33d54ed1309d85801a3ce44c97b614b4540acaf4d37b4c5b4aa2e6c621a4d885` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -797,7 +804,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Inclusion-exclusion (or a Venn diagram) to avoid double-counting the 7 who play both sports.)
-- **Hash bindings:** D1 `8dda0cb3f375c3da54d52d71e6a9111d10c1ce5407b4eea3a0e12343fb16dc3c`; D2 `8dda0cb3f375c3da54d52d71e6a9111d10c1ce5407b4eea3a0e12343fb16dc3c`; D3 `f122069cbbf1923a9f57d11f901e74c19c639c033930852496bf36318f951d92`
+- **Hash bindings:** D1 `8dda0cb3f375c3da54d52d71e6a9111d10c1ce5407b4eea3a0e12343fb16dc3c`; D2 `8dda0cb3f375c3da54d52d71e6a9111d10c1ce5407b4eea3a0e12343fb16dc3c`; D3 `f122069cbbf1923a9f57d11f901e74c19c639c033930852496bf36318f951d92`; identity pin: `8dda0cb3f375c3da54d52d71e6a9111d10c1ce5407b4eea3a0e12343fb16dc3c` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -818,7 +825,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `f52fbc2ca46ae49b9a38d5a9d3bf66b56b914a54b37a963523452d37ea3f3b3c`; D2 `f52fbc2ca46ae49b9a38d5a9d3bf66b56b914a54b37a963523452d37ea3f3b3c`; D3 `57794d86c54280529348b01cf756c2c37653ddae0398548922b2e161f01da532`
+- **Hash bindings:** D1 `f52fbc2ca46ae49b9a38d5a9d3bf66b56b914a54b37a963523452d37ea3f3b3c`; D2 `f52fbc2ca46ae49b9a38d5a9d3bf66b56b914a54b37a963523452d37ea3f3b3c`; D3 `57794d86c54280529348b01cf756c2c37653ddae0398548922b2e161f01da532`; identity pin: `f52fbc2ca46ae49b9a38d5a9d3bf66b56b914a54b37a963523452d37ea3f3b3c` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -839,7 +846,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `medium` (confidence 1.00); advisory recommendation `keep` (A repeated change followed by one more; the result crosses zero but the arithmetic is two simple steps.)
-- **Hash bindings:** D1 `6a5f14750a832e07af7bd24af5e14fff29fc1f896767149f69f48ca04ee796ba`; D2 `6a5f14750a832e07af7bd24af5e14fff29fc1f896767149f69f48ca04ee796ba`; D3 `b3d387f2c67d91d4278be93cc12d7bed783fe22d13479da5e3fca610a3a41f48`
+- **Hash bindings:** D1 `6a5f14750a832e07af7bd24af5e14fff29fc1f896767149f69f48ca04ee796ba`; D2 `6a5f14750a832e07af7bd24af5e14fff29fc1f896767149f69f48ca04ee796ba`; D3 `b3d387f2c67d91d4278be93cc12d7bed783fe22d13479da5e3fca610a3a41f48`; identity pin: `6a5f14750a832e07af7bd24af5e14fff29fc1f896767149f69f48ca04ee796ba` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -860,7 +867,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `medium` (confidence 1.00)
-- **Hash bindings:** D1 `10d55104b92ad4ac3eb5e70f9a0ac4d2ff42ced3bfac929d5b4688a5db04aabc`; D2 `10d55104b92ad4ac3eb5e70f9a0ac4d2ff42ced3bfac929d5b4688a5db04aabc`; D3 `1cb39f559bec2f63643a5675da2edd7e8e26b5d1edd0720a4ca84e50352667af`
+- **Hash bindings:** D1 `10d55104b92ad4ac3eb5e70f9a0ac4d2ff42ced3bfac929d5b4688a5db04aabc`; D2 `10d55104b92ad4ac3eb5e70f9a0ac4d2ff42ced3bfac929d5b4688a5db04aabc`; D3 `1cb39f559bec2f63643a5675da2edd7e8e26b5d1edd0720a4ca84e50352667af`; identity pin: `10d55104b92ad4ac3eb5e70f9a0ac4d2ff42ced3bfac929d5b4688a5db04aabc` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -881,7 +888,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `medium`, estimator `easy` (confidence 1.00); advisory recommendation `keep` (Build a perimeter expression that counts the repeated side twice, collect terms, then solve for k.)
-- **Hash bindings:** D1 `641dad2efbd8bee2e3742731b828e10f90f10e97f987ad2440d7b9c2479d6d56`; D2 `641dad2efbd8bee2e3742731b828e10f90f10e97f987ad2440d7b9c2479d6d56`; D3 `f46e6c82d3a9662e0815923051a3d9d9bcfa5f8b8e57fddc04f0e1b1d240b55d`
+- **Hash bindings:** D1 `641dad2efbd8bee2e3742731b828e10f90f10e97f987ad2440d7b9c2479d6d56`; D2 `641dad2efbd8bee2e3742731b828e10f90f10e97f987ad2440d7b9c2479d6d56`; D3 `f46e6c82d3a9662e0815923051a3d9d9bcfa5f8b8e57fddc04f0e1b1d240b55d`; identity pin: `641dad2efbd8bee2e3742731b828e10f90f10e97f987ad2440d7b9c2479d6d56` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 
@@ -902,7 +909,7 @@ A Git author or co-author trailer, an importer, a historical declaration or a re
 
 - **Mechanical observations (not quality judgements):** 5 options; option texts all distinct.
 - **Difficulty:** declared `easy`, estimator `easy` (confidence 1.00)
-- **Hash bindings:** D1 `4a6367a26b93d5a1a95ba48b8f061a6732c2f53ad2ac627e7e789b215d05cad7`; D2 `4a6367a26b93d5a1a95ba48b8f061a6732c2f53ad2ac627e7e789b215d05cad7`; D3 `fe7f00330ab79896d80e8eeaebd8cef03a4f57fdff014d0f69a03e520eb03387`
+- **Hash bindings:** D1 `4a6367a26b93d5a1a95ba48b8f061a6732c2f53ad2ac627e7e789b215d05cad7`; D2 `4a6367a26b93d5a1a95ba48b8f061a6732c2f53ad2ac627e7e789b215d05cad7`; D3 `fe7f00330ab79896d80e8eeaebd8cef03a4f57fdff014d0f69a03e520eb03387`; identity pin: `4a6367a26b93d5a1a95ba48b8f061a6732c2f53ad2ac627e7e789b215d05cad7` (verified D2 match)
 - **ADR-017 scope:** no_adopted_route
 - **Owner decision:** [                     ]
 

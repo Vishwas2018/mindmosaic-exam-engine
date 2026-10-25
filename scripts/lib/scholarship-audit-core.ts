@@ -1031,6 +1031,7 @@ export function renderOwnerPack(
   packetFileName: string,
   packetSha256: string,
   docTitle: string,
+  reader: SourceReader = fsReader,
 ): string {
   assertNoMachineFailures(audit);
   const { data } = section;
@@ -1040,6 +1041,27 @@ export function renderOwnerPack(
   const notEst = statuses.filter((e) => e.machineVerifiedResult.status === "not_established").length;
   const firstParty = statuses.filter((e) => e.machineVerifiedResult.method === "first_party_recompute").length;
   const closed = statuses.filter((e) => e.machineVerifiedResult.method === "closed_language_solver").length;
+
+  const pinsRaw = reader.readText(SOURCE_PATHS.identityPins);
+  const pins = pinsRaw ? (JSON.parse(pinsRaw) as Record<string, string>) : null;
+
+  let verifiedPins = 0;
+  let mismatchedPins = 0;
+  let missingPins = 0;
+  for (const q of data.questions) {
+    const candidate = candidateQuestionSchema.parse(q);
+    const d2 = hashJson(candidate);
+    const pin = pins?.[q.id];
+    if (pins && pin !== undefined) {
+      if (pin === d2) {
+        verifiedPins++;
+      } else {
+        mismatchedPins++;
+      }
+    } else {
+      missingPins++;
+    }
+  }
 
   const gateOf = (q: DraftQuestion) => {
     const est = estimateDifficulty({ prompt: q.prompt, stimulusBody: q.stimulus?.body, optionTexts: q.options.map((o) => o.text), explanation: q.explanation });
@@ -1074,7 +1096,7 @@ export function renderOwnerPack(
   md += `- **Original generation:** not_established for every item (see section 4).\n\n`;
 
   md += `## 3. Difficulty decision table (declared label differs from estimator)\n\n`;
-  md += `Advisory recommendations come from: ${assessor}. That assessor is in the same provider family as the declared generator and is **not independent**.\n\n`;
+  md += `Advisory recommendations come from documented assessor \`${assessor}\`. The historical generator declaration (\`anthropic/claude-sonnet-5\`) is unverified, and true original generation remains unknown. Under \`docs/REVIEW_INDEPENDENCE_POLICY.md\` and ADR-017, independence cannot be established against an unknown original generator. These recommendations remain advisory input and do not constitute production-grade independent evidence.\n\n`;
   md += `| ID | Declared | Estimator | Advisory recommendation | Advisory rationale | Owner decision (BLANK) |\n|---|---|---|---|---|---|\n`;
   for (const q of blocked) {
     const g = gateOf(q);
@@ -1082,12 +1104,32 @@ export function renderOwnerPack(
     md += `| \`${q.id}\` | \`${q.metadata.difficulty}\` | \`${g.est.estimatedDifficulty}\` | ${rec ? `${rec.recommendation}${rec.label ? ` (${rec.label})` : ""}` : "not_established (no advisory entry)"} | ${rec ? rec.rationale.replace(/\|/g, "\\|") : "no advisory entry"} | |\n`;
   }
 
-  md += `\n## 4. Provenance reconciliation (applies to every item here)\n\n`;
+  const repoStatus =
+    pins === null || missingPins === total
+      ? "not_established"
+      : mismatchedPins === 0 && missingPins === 0
+        ? `verified (${verifiedPins}/${total} D2 pins match)`
+        : `partially verified (${verifiedPins}/${total} verified, ${mismatchedPins} mismatched, ${missingPins} missing)`;
+
+  const repoEvidence =
+    pins === null
+      ? `no identity pins found in ${SOURCE_PATHS.identityPins}`
+      : mismatchedPins === 0 && missingPins === 0
+        ? `all ${total} items match recomputed D2 candidate hashes in ${SOURCE_PATHS.identityPins}; D1/D2/D3 hashes recomputed; binds imported bytes, not original generation (unknown)`
+        : `${verifiedPins} of ${total} match recomputed D2 hashes; ${mismatchedPins} pins present in ${SOURCE_PATHS.identityPins} differ from D2 (binding not established); ${missingPins} missing; D1/D2/D3 recomputed; binds imported bytes, not original generation (unknown)`;
+
+  md += `\n## 4. Provenance reconciliation\n\n`;
   md += `| Aspect | Status | Evidence |\n|---|---|---|\n`;
   md += `| Verified original generation | not_established | no execution record (provider, model, prompt, hash, timestamp) exists |\n`;
   md += `| Historical declared generation | declared, unverified | ${SOURCE_PATHS.declaredProvenanceDoc} states \`anthropic/claude-sonnet-5\`; a documentation statement, not an execution record |\n`;
-  md += `| Repository revision provenance | pinned candidate hash | ${SOURCE_PATHS.identityPins}; identifies imported bytes, not their generator |\n`;
-  md += `| Independent reviewer identity and qualification | not_established | independence cannot be evaluated while the generator is unverified (ADR-017; REVIEW_INDEPENDENCE_POLICY) |\n\n`;
+  md += `| Repository revision provenance | ${repoStatus} | ${repoEvidence} |\n`;
+  md += `| Independent reviewer identity and qualification | not_established | independence cannot be evaluated against an unknown original generator (ADR-017; REVIEW_INDEPENDENCE_POLICY) |\n\n`;
+  md += `### Repository revision binding details for this section\n`;
+  md += `- **Verified D2 identity pins:** ${verifiedPins} of ${total} items match the recomputed D2 factory candidate hash in \`${SOURCE_PATHS.identityPins}\`.\n`;
+  md += `- **Present but mismatched pins:** ${mismatchedPins} of ${total} items have identity pins in \`${SOURCE_PATHS.identityPins}\` that differ from recomputed D2 candidate hashes (binding not established; a mismatched pin cannot be described as verified repository-revision binding).\n`;
+  md += `- **Missing pins:** ${missingPins} of ${total} items have no entry in \`${SOURCE_PATHS.identityPins}\`.\n`;
+  md += `- **Recomputed D1/D2/D3 source hashes:** D1 (raw JSON draft), D2 (factory candidate), and D3 (canonical published Question) hashes were successfully recomputed for all ${total} items in this section.\n`;
+  md += `- **Unknown original generation:** Identity pins bind imported candidate bytes only, not their author or generating model. Original generation remains unknown / not_established across all items.\n\n`;
   md += `A Git author or co-author trailer, an importer, a historical declaration or a reviewing model is not proof of the original generator.\n\n`;
 
   md += `## 5. Per-question evidence\n\n`;
@@ -1096,7 +1138,16 @@ export function renderOwnerPack(
     const g = gateOf(q);
     const candidate = candidateQuestionSchema.parse(q);
     const built = buildPublishedQuestion(candidate);
+    const d1 = hashJson(q);
+    const d2 = hashJson(candidate);
     const d3 = built.ok ? canonicalQuestionHash(built.question) : null;
+    const pin = pins?.[q.id];
+    const pinNote =
+      pins && pin !== undefined
+        ? pin === d2
+          ? `\`${pin}\` (verified D2 match)`
+          : `\`${pin}\` (mismatched vs D2 \`${d2}\`; binding not established)`
+        : "missing";
     const optText = q.options.find((o) => o.id === q.answerKey.optionId)?.text;
     const rec = recs[q.id];
     const scopeValue = adoptedScope.byId.get(q.id) ?? "no_adopted_route";
@@ -1116,7 +1167,7 @@ export function renderOwnerPack(
     }
     md += `\n- **Mechanical observations (not quality judgements):** ${e.structuralObservations.optionCount} options; option texts ${e.structuralObservations.allOptionTextsDistinct ? "all distinct" : "NOT all distinct"}.\n`;
     md += `- **Difficulty:** declared \`${q.metadata.difficulty}\`, estimator \`${g.est.estimatedDifficulty}\` (confidence ${g.est.estimateConfidence.toFixed(2)})${rec ? `; advisory recommendation \`${rec.recommendation}\` (${rec.rationale})` : ""}\n`;
-    md += `- **Hash bindings:** D1 \`${hashJson(q)}\`; D2 \`${hashJson(candidate)}\`; D3 \`${d3}\`\n`;
+    md += `- **Hash bindings:** D1 \`${d1}\`; D2 \`${d2}\`; D3 \`${d3}\`; identity pin: ${pinNote}\n`;
     md += `- **ADR-017 scope:** ${scopeValue}\n`;
     md += `- **Owner decision:** [                     ]\n\n`;
   }
