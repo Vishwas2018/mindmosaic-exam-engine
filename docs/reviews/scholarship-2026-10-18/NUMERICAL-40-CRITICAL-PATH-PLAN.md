@@ -1,111 +1,130 @@
-# Numerical Reasoning: 40-Question Critical-Path Release Plan
+# Numerical Reasoning: complete-paper release constraints, authorisation stages and expansion prerequisites
 
-> **Notice:** This document contains independent AI-generated advisory analysis by Antigravity (Google DeepMind). It is **not qualified human approval** and conveys no authorization to publish or deploy.
-
----
-
-## 1. The Core Release Constraint
-
-MindMosaic delivery architecture enforces a **fail-closed, complete-paper invariant** for all scholarship offerings:
-- A Year 6 Numerical Reasoning examination requires **exactly 40 approved questions**.
-- The delivery engine (`src/features/exam-engine/selection/select-questions.ts`) strictly refuses partial papers, shortened modules, or mixed-section draws.
-- If even 1 of the 40 questions is unapproved, missing, or rejected by publication gates, `/exams/scholarship-y6-numerical-reasoning-full` returns `insufficient_questions` and remains completely unavailable to students.
-- **Therefore, Numerical Reasoning cannot launch in increments.** All 40 items must become simultaneously eligible and approved.
+> **Notice:** AI-generated advisory planning material. It is not qualified human review, not approval, and grants no authority to design, implement, admit, approve, publish or deploy anything. Nothing in this document is an executable instruction. Counts below are recomputed in `scholarship-160-inventory.json`.
 
 ---
 
-## 2. Current Status of the 40 Questions
+## 1. The delivery constraint
 
-| Status Dimension | Status Fact | Impact on Release |
+A Year 6 Numerical Reasoning paper is delivered only as a complete paper of 40 approved questions. The selector (`src/features/exam-engine/selection/select-questions.ts`) refuses partial papers, so one missing or unapproved item keeps the whole paper unavailable. A shortened paper is **not authorised** and is a separate product decision if it is ever raised (owner adoption record, section 2).
+
+That constraint is a reason to plan, not a reason to expand scope. A paper needing 40 items does not make 40 items eligible. Each item needs its own evidence and controls, and no expansion is assumed here.
+
+---
+
+## 2. Current recomputed status of the 40 Numerical Reasoning items
+
+| Dimension | Status | Source |
 |---|---|---|
-| **Answer Correctness** | 40 of 40 verified by first-party recompute (021–040) or closed-language solvers (001–020). | Arithmetically sound; 0 defects found. |
-| **Ambiguity / Stem Integrity** | 40 of 40 have unique solutions; `nr-022` flagged for weak relational binding (requires human editorial affirmation). | Ready for human editorial review. |
-| **Difficulty Gate** | **26 pass**, **14 blocked** by estimator deviation. | Requires owner decision on 14 items (4 relabels recommended: `nr-003`, `nr-005`, `nr-007` to easy; keep remaining 11). |
-| **Provenance & Governance Hold** | **40 of 40 blocked** under Phase 1 legacy-import hold (`originalGeneration: unverified`). | Cannot publish under existing gates. |
-| **ADR-017 Initial Scope** | Only **2 items** (`nr-022`, `nr-023`) are in initial engineering scope; **1 item** (`nr-001`) is conditional; **37 items** are outside scope. | **Numerical Reasoning CANNOT launch without an owner decision expanding ADR-017 scope to all 40 items AND implementing Phase 2b.** |
-| **Human Approvals** | **0 of 40 approved.** | No qualified human has reviewed or signed any item. |
+| Machine-verified result (arithmetic / closed-language) | 40 `verified`, 0 `failed`: 20 closed-language solver (nr-001 to nr-020), 20 first-party recompute (nr-021 to nr-040) | inventory `summary.machineKeyCheck` |
+| Stem-to-solver semantic verification | 0 of 40 `verified`; `not_established` | ADR-017 requirement 2, never performed |
+| Independent answer uniqueness, distractor quality, age and curriculum fit | 0 of 40 `verified`; `not_established` | no review record exists |
+| Qualified human review | 0 of 40; `not_established` | no qualified reviewer engaged |
+| Difficulty gate | 26 pass, 14 blocked by estimator deviation | recomputed |
+| Original generation | `not_established` for all 40 | ADR-017; owner adoption record |
+| Human approval | `not_established` for all 40; the approval control does not exist | owner adoption record, requirement 6 |
+| Publication eligibility | 0 of 40; Phase 1 fail-closed gates refuse legacy-import content | owner adoption record, section 2 |
+
+A matching key and solver result is arithmetic consistency only. It is never treated as evidence of correct interpretation, uniqueness, distractor quality or age-fit.
 
 ---
 
-## 3. The 8 Critical Steps to Production Readiness
+## 3. Five separate authorisations
 
-```mermaid
-flowchart TD
-    S1["Step 1: Owner Decisions<br>(Scope Expansion & Difficulty)"] --> S2["Step 2: Phase 2b Security Prerequisites<br>(A-0 Branch Protection & Ledger)"]
-    S2 --> S3["Step 3: First-Party Solvers for Items 001-020<br>(Wired into Attestation Registry)"]
-    S3 --> S4["Step 4: Implementation of ADR-017 Engine<br>(deterministic_legacy_admission Route)"]
-    S4 --> S5["Step 5: Qualified Editorial Stem Checks<br>(Requirement 2: Stem-to-Solver Affirmation)"]
-    S5 --> S6["Step 6: External Originality Search<br>(Corpus & Commercial Practice Check)"]
-    S6 --> S7["Step 7: Owner Sign-Off on Approval Sheet<br>(Bound to Canonical Published Hashes)"]
-    S7 --> S8["Step 8: Governed Assembly & Release<br>(Strict Scholarship Manifest Build)"]
-```
+Each stage needs its own explicit owner decision. None implies another.
 
-### Step 1: Owner Authorisations & Scope Expansion (Owner Action)
-1. **Scope Expansion Decision:** Formally expand the `deterministic_legacy_admission` route beyond the 5 initial items in PR #73 to cover all 40 Numerical Reasoning items.
-2. **Difficulty Resolution:** Decide the 14 blocked items using `docs/reviews/scholarship-2026-10-18/NUMERICAL-40-OWNER-REVIEW.md`:
-   - Relabel `nr-003`, `nr-005`, `nr-007` to `easy` (re-pinning candidate hashes).
-   - Confirm declared labels for the remaining 11 items.
-
-### Step 2: Phase 2b Security Prerequisites (Engineering & Owner)
-1. **GitHub Branch Protection (A-0):**
-   - Add `scholarship-drafts` to required checks on `dev` and `main`.
-   - Configure strict branch up-to-date enforcement and admin enforcement.
-2. **Workstream A:** Implement authenticated human approval architecture (Ed25519 or SSH commit signatures bound to verified signers).
-3. **Workstream B:** Implement the immutable legacy-origin ledger.
-
-### Step 3: Implement Genuine First-Party Recomputes for Items 001–020 (Engineering)
-Currently, items 001–020 use parameter-driven closed-language solvers. Under ADR-017 §1.2, to qualify for first-party attestation:
-1. Extend `SCHOLARSHIP_ATTESTED_SKILLS` to include `nr-number-series` and `nr-number-matrices`.
-2. Register independent first-party solvers in `SCHOLARSHIP_FIRST_PARTY_SOLVERS` declaring their own givens for all 20 items.
-3. Write comprehensive unit tests for each new solver entry.
-
-### Step 4: Implement the `deterministic_legacy_admission` Route (Engineering)
-1. Create the admission gate in `src/features/question-factory/governance/legacy-admission.ts`.
-2. Enforce the 6 mandatory evidence requirements from ADR-017 §3:
-   - First-party recompute (D2-bound).
-   - Editorial stem check.
-   - Exact D1, D2, D3 hash bindings.
-   - Originality assessment record.
-   - Age-suitability affirmation.
-   - Authenticated approval signature.
-
-### Step 5: Conduct Qualified Human Editorial Checks (Human SME Action)
-A named qualified educator / editor must examine all 40 stems against displayed options and solvers, affirming:
-- The solver's assumptions match the stem's language.
-- The conditions are exhaustive and admit no second defensible reading.
-- Pay specific attention to `nr-022` (relational factors in prose).
-
-### Step 6: External Originality Assessment (Human SME / Tooling)
-Execute external originality verification against Australian curriculum test repositories and commercial scholarship practice sets to confirm no questions are derivative.
-
-### Step 7: Record Formal Human Approvals (Owner Action)
-The repository owner reviews the 40 items in `review-sheet-scholarship-y6-nr.html` and executes:
-```bash
-npm run questions:publish -- \
-  --candidate-ids $(cat docs/reviews/scholarship-2026-10-18/nr-40-ids.txt) \
-  --sheet docs/reviews/scholarship-2026-10-18/review-sheets/review-sheet-scholarship-y6-nr-signed.csv \
-  --reviewer "Vishwas Joshi"
-```
-The tool validates that every row matches the canonical D3 published hash and revision 0.
-
-### Step 8: Governed Assembly & Release Verification (Engineering)
-1. Run strict scholarship assembly:
-   ```bash
-   npm run questions:assemble-scholarship
-   ```
-2. Verify:
-   - Exactly 40 questions assembled into `content/question-factory/published-manifests/batch-scholarship-published.json`.
-   - `src/tests/unit/scholarship-availability.test.ts` transitions Numerical Reasoning from "coming soon" to "live".
-   - `src/tests/unit/scholarship-session-route.test.ts` passes.
-3. Full verification suite green (`npm run typecheck`, `npm test`, `npm run test:rls`).
-4. PR into `dev` merged by repository owner.
+| Stage | What it covers | Status today |
+|---|---|---|
+| **Design** | Policy and design work for the `deterministic_legacy_admission` route and the two Phase 2b prerequisites | Authorised by the ADR-017 adoption, as design only |
+| **Implementation** | Writing and merging code for the admission route, authenticated approval and the legacy-origin ledger | **Not authorised.** Each Phase 2b workstream needs its own design, independent review and separately authorised implementation PR |
+| **Admission** | Admitting a specific candidate under the implemented route | **Not authorised.** No candidate is admissible; the five in-scope candidates all refuse at requirement 2 alone |
+| **Approval** | A qualified human recording approval bound to a candidate's published hash | **Not possible.** The authenticated approval control does not exist |
+| **Release** | Assembling, merging to `dev`, promoting to `main`, deploying | **Not authorised.** The repository owner merges `dev` to `main` |
 
 ---
 
-## 4. Work That Can Proceed in Parallel with AMC PR #76
+## 4. Authorised initial engineering scope (ADR-017, adopted 2026-10-24)
 
-While Claude Code completes AMC PR #76:
-- The owner can review and fill the blank decision fields in `NUMERICAL-40-OWNER-REVIEW.md`.
-- Phase 2b design specifications (Workstream A & B) can be prepared in dedicated documentation worktrees.
-- The external provider review of Verbal Reasoning and Reading can be executed via ChatGPT / Gemini.
-- Zero conflicts will occur because all scholarship content is completely decoupled from AMC files.
+Read from the owner adoption record. Only these are in scope, and only for design and later separately authorised engineering:
+
+| Candidate | Section | Standing |
+|---|---|---|
+| `scholarship-y6-nr-022` | Numerical Reasoning | Initial engineering scope |
+| `scholarship-y6-nr-023` | Numerical Reasoning | Initial engineering scope |
+| `scholarship-y6-maths-004`, `maths-007`, `maths-014` | Mathematics | Initial engineering scope |
+| `scholarship-y6-nr-001` | Numerical Reasoning | Policy-eligible on condition only: enters only on a genuine first-party registry entry and regression tests, separately reviewed |
+
+Only two Numerical Reasoning items (nr-022, nr-023) are in initial scope, one more is conditional, and 37 are outside it. **No Numerical Reasoning item has an admission route today that would let a complete 40-item paper exist.** The adopted scope does not claim otherwise.
+
+The `nr-022` stem carries its relational factors in prose while the registered givens contain a single number. That is a question for the editorial interpretation check (requirement 2) and nothing in this audit resolves it.
+
+---
+
+## 5. Proposed future scope expansions (NOT authorised, NOT adopted)
+
+Everything in this section is a recommendation about evidence, not a decision. Expansion would need a separately reviewed policy decision by the owner (an ADR amendment or successor), after which the stages in section 3 apply as normal. No candidate below is eligible today.
+
+### 5.1 Eligibility prerequisites for any expansion candidate
+
+A candidate becomes a candidate for expansion only when all of the following can be shown for that item:
+
+| # | Prerequisite | Evidence that would establish it | Exists today |
+|---|---|---|---|
+| E1 | First-party recomputed correctness | A registry entry declaring its own givens and an independent solver, with regression tests, separately reviewed | Only for nr-021 to nr-040 (items 022 and 023 are in scope); nr-001 to nr-020 use parameter-driven closed-language solvers, which are not first-party |
+| E2 | Editorial interpretation check | A named, qualified human affirms the solver's assumptions are the stem's, bound to the item's D2 hash | No. Never performed for any item |
+| E3 | Exact binding | D1, D2 and D3 independently recomputed and bound in the admission bundle | Hashes are recomputed in the inventory; the admission bundle does not exist |
+| E4 | Originality assessment | An external originality engine or equivalent | No. Engine procurement is open |
+| E5 | Age and curriculum check | A named reviewer's record | No reviewer engaged |
+| E6 | Authenticated human approval | The Phase 2b approval architecture | No. Does not exist |
+| E7 | Owner scope decision | A separately adopted policy decision extending scope to the named candidates | No |
+| E8 | Difficulty gate | Each blocked label decided by the owner, or the item revised | 14 NR items blocked; undecided |
+
+### 5.2 Candidate groups and what each lacks
+
+| Group | Items | Machine proof today | Missing beyond E2 to E8 |
+|---|---|---|---|
+| Conditional | nr-001 | Closed-language solver | A first-party registry entry and regression tests (E1) |
+| Number series | nr-002 to nr-010 | Closed-language solver | First-party entries and `SCHOLARSHIP_ATTESTED_SKILLS` extension for `nr-number-series` (E1) |
+| Number matrices | nr-011 to nr-020 | Closed-language solver | First-party entries and `SCHOLARSHIP_ATTESTED_SKILLS` extension for `nr-number-matrices` (E1) |
+| First-party recomputed, outside scope | nr-021, nr-024 to nr-040 (18 items) | First-party recompute | Owner scope decision (E7) in addition to the common prerequisites |
+
+Whether a closed-language solver can ever stand in for a first-party entry is a policy question this document does not decide.
+
+### 5.3 Class B and Class C are unresolved
+
+Verbal Reasoning (45) and Reading Comprehension (35) have **no adopted admission route**. ADR-017 defers Class B (`vr-001`, `vr-016`), Class C (`rc-001`, `rc-002`, `rc-003` and the shared passage) and leaves `vr-032` open pending a separate justification of a non-numeric deterministic attestation category. Their eligibility stays unresolved unless a separately adopted policy explicitly enables it.
+
+Because the original generator is unknown, independent review of unknown-origin judgement content is `not_established_unknown_origin`, and ADR-017 makes that permanent. A different-provider review of these items may be collected as advisory evidence only; it does not make them eligible and is not production-grade independence.
+
+---
+
+## 6. Design-stage sequence (planning only)
+
+The ordering is the one in the owner adoption record. Each step needs its own authorisation; none is authorised for implementation today.
+
+1. **A-0, branch protection on `dev`.** Partly blocked: with one principal on the repository there is nobody to name as an independent code owner.
+2. **Workstream A, authenticated approval architecture.** Design, independent review, then a separately authorised implementation PR.
+3. **Workstream B, durable legacy-origin ledger.** Same sequence; can run in parallel once A-0 lands.
+4. **Phase 2c, nr-001 registry entry and regression tests.** Only if the owner wants it in scope.
+5. **Phase 2d, admission-gate implementation.** Only after A and B are merged and validated.
+6. **Phase 2e, evidence collection** for the five in-scope candidates. Needs an originality engine and a named qualified reviewer for requirements 2 and 5; neither exists.
+
+### Artefacts referred to that do not exist yet
+
+| Artefact | Status |
+|---|---|
+| Admission-gate module for `deterministic_legacy_admission` | Future; unbuilt |
+| Authenticated approval records and signer registry | Future; unbuilt |
+| Legacy-origin ledger | Future; unbuilt |
+| `qualified-review-records.json` and its schema | Future; schema not adopted |
+| Signed approval sheet bound to canonical hashes | Future; no approval control exists |
+
+No publication, approval or assembly command is offered here as a next step. The legacy admission architecture is unimplemented, and the existing publication tooling refuses `legacy_import` content by design.
+
+---
+
+## 7. Work that does not need any authorisation to start
+
+- Engage a qualified editorial reviewer (requirements 2 and 5). It has lead time and no engineering dependency.
+- Compare originality-engine coverage, limitations and cost.
+- The owner may read the internal owner pack. Reviewers, if any are engaged, receive only the answer-blind packets in `answer-blind/`; their returned decisions are advisory input.
