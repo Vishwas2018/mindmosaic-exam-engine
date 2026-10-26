@@ -3,7 +3,7 @@
 import {useRef, useState} from "react";
 import {useStore} from "zustand";
 
-import {barModelPilotFixtures} from "@/content/visual-fixtures/bar-model";
+import type {BarModelPilotFixture} from "@/content/visual-fixtures/bar-model";
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
 import {VisualRenderer} from "@/features/exam-engine/visual-renderers";
@@ -11,13 +11,13 @@ import {validateBarModelVisual} from "./pipeline";
 import {createPilotSessionStore, scorePilotSession} from "./pilot-session";
 
 /** Internal QA simulation only. Draft fixtures never enter a student bank. */
-export function PilotSession() {
+export function PilotSession({fixtures}: {fixtures: readonly BarModelPilotFixture[]}) {
   const [store] = useState(createPilotSessionStore);
   const state = useStore(store);
   const [entry, setEntry] = useState("");
   const [error, setError] = useState("");
   const heading = useRef<HTMLHeadingElement>(null);
-  const items = barModelPilotFixtures.filter((item) => item.yearLevel === state.year);
+  const items = fixtures.filter((item) => item.yearLevel === state.year);
   const fixture = items[state.index];
   const score = scorePilotSession(items, state.answers);
   const focusHeading = () => requestAnimationFrame(() => heading.current?.focus());

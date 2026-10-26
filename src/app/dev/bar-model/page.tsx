@@ -39,7 +39,7 @@ export default function BarModelPreviewPage() {
         givens-only diagrams alongside separate solver diagnostics.
       </p>
 
-      <PilotSession />
+      <PilotSession fixtures={barModelPilotFixtures} />
       <details className="mt-10">
         <summary className="cursor-pointer rounded-xl py-3 font-semibold text-royal focus-visible:outline-2 focus-visible:outline-royal">
           Developer fixture gallery (contains answer keys)

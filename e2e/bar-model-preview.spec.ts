@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import path from "node:path";
-import {readFile} from "node:fs/promises";
+import {readFile, readdir} from "node:fs/promises";
 
 import { expect, test } from "@playwright/test";
 import {barModelPilotFixtures} from "../src/content/visual-fixtures/bar-model";
@@ -17,6 +17,28 @@ import { expectNoHorizontalOverflow, setViewport, visitAndStabilize } from "./he
  */
 
 const FIXTURE_COUNT = 30;
+
+async function clientJavaScriptFiles(directory: string): Promise<string[]> {
+  const files: string[] = [];
+  for (const entry of await readdir(directory, {withFileTypes: true})) {
+    const filename = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await clientJavaScriptFiles(filename));
+    else if (entry.name.endsWith(".js")) files.push(filename);
+  }
+  return files;
+}
+
+test("production client assets do not embed unpublished pilot questions or keys", async () => {
+  const files = await clientJavaScriptFiles(path.join(process.cwd(), ".next", "static"));
+  expect(files.length).toBeGreaterThan(0);
+  for (const file of files) {
+    const bundle = await readFile(file, "utf8");
+    for (const fixture of barModelPilotFixtures) {
+      expect(bundle.includes(fixture.name), `${path.basename(file)} embeds ${fixture.name}`).toBe(false);
+      expect(bundle.includes(fixture.prompt), `${path.basename(file)} embeds a draft prompt`).toBe(false);
+    }
+  }
+});
 
 test.describe("bar model preview (dev only)", () => {
   for (const viewport of [
