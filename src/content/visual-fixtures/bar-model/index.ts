@@ -274,7 +274,7 @@ const equalUnitsVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
-    units: [{id: `${id}-bag`, label: "bag"}],
+    units: [{id: `${id}-bag`, label: "group"}],
     groups: [{id: `${id}-group`, barIds: [`${id}-a`, `${id}-b`]}],
     bars: [
       {
@@ -831,7 +831,7 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     yearLevel: 5,
     skill: "equal-units",
     difficulty: "easy",
-    unit: "bags",
+    unit: "biscuits",
     prompt:
       "Two packs contain the same number of biscuits in each bag. One pack has 3 bags and the other has 5 bags. Together they have 56 biscuits. How many biscuits are in the larger pack?",
     privateAnswerKey: 35,
@@ -901,7 +901,7 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "medium",
     unit: "coins",
     prompt:
-      "Two bags hold equal-value coin bundles. One bag has 4 bundles and the other has 7 bundles. Together they hold 99 coins. How many coins are in the larger bag?",
+      "Two bags hold bundles with the same number of coins in each bundle. One bag has 4 bundles and the other has 7 bundles. Together they hold 99 coins. How many coins are in the larger bag?",
     privateAnswerKey: 63,
     workedExplanation:
       "11 equal bundles make 99 coins, so each bundle is 9 coins. The larger bag has 7 × 9 = 63 coins.",
@@ -968,7 +968,7 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "easy",
     unit: "sticks",
     prompt:
-      "Two teams collect sets of equal sticks. One team has 2 sets and the other has 6 sets. Together they collect 48 sticks. How many sticks are in the larger team's sets?",
+      "Two teams collect sets with the same number of sticks in each set. One team has 2 sets and the other has 6 sets. Together they collect 48 sticks. How many sticks are in the larger team's sets?",
     privateAnswerKey: 36,
     workedExplanation:
       "Eight equal sets make 48, so one set is 6 sticks. The larger team has 6 × 6 = 36 sticks.",
@@ -989,7 +989,7 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     yearLevel: 5,
     skill: "before-after",
     difficulty: "hard",
-    unit: " pencils",
+    unit: "pencils",
     prompt:
       "A box started with some pencils. 27 were given away and 58 were left. How many pencils were in the box at the start?",
     privateAnswerKey: 85,
@@ -1035,17 +1035,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "medium",
     unit: "cups",
     prompt:
-      "Two jugs hold equal cups of juice. One jug has 3 cups and the other has 7 cups. Together there are 90 cups. How many cups are in the larger jug?",
+      "Two crates hold bottles containing the same amount of juice in each bottle. One crate has 3 bottles and the other has 7 bottles. Together there are 90 cups of juice. How many cups of juice are in the larger crate?",
     privateAnswerKey: 63,
     workedExplanation:
-      "Ten equal cups make 90, so one cup is 9. The larger jug has 7 × 9 = 63 cups.",
+      "Ten equal bottles hold 90 cups, so one bottle holds 9 cups. The larger crate has 7 × 9 = 63 cups.",
     draftProvenance:
       "Draft pilot item generated to keep the equal-units set varied and mathematically consistent.",
     visual: equalUnitsVisual({
       id: "pilot-y5-equal-04",
-      title: "Juice cups",
+      title: "Juice bottles",
       altText:
-        "Two jugs contain 3 and 7 equal cups of juice. Together they total 90 cups.",
+        "Two crates contain 3 and 7 equal bottles of juice. Together they hold 90 cups.",
       bagsA: 3,
       bagsB: 7,
       total: 90,
