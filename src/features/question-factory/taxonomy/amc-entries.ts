@@ -1134,7 +1134,8 @@ export const AMC_SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
     "strand": "Logic & Problem-Solving",
     "prerequisites": [],
     "recommendedQuestionTypes": [
-      "multiple_choice"
+      "multiple_choice",
+      "number_entry"
     ],
     "recommendedVisualTypes": [],
     "supportedDifficulties": [
@@ -1575,6 +1576,35 @@ export const AMC_SKILL_TAXONOMY_ENTRIES: readonly TaxonomyEntry[] = [
       "easy",
       "medium",
       "challenging"
+    ],
+    "curriculumNotes": [
+      "AMC-style reasoning skill; original practice content, not an official AMC question. Difficulty requires item-level calibration."
+    ],
+    "generationConstraints": [
+      "Independently verify the mathematical answer and age appropriateness before publication."
+    ]
+  },
+  {
+    "id": "amc.use-a-simple-scale",
+    "displayName": "Use a simple scale",
+    "aliases": [
+      "Use a simple scale"
+    ],
+    "yearLevels": [
+      5
+    ],
+    "examStyles": [
+      "amc_style"
+    ],
+    "subject": "amc_mathematics",
+    "strand": "Measurement & Geometry",
+    "prerequisites": [],
+    "recommendedQuestionTypes": [
+      "multiple_choice"
+    ],
+    "recommendedVisualTypes": [],
+    "supportedDifficulties": [
+      "easy"
     ],
     "curriculumNotes": [
       "AMC-style reasoning skill; original practice content, not an official AMC question. Difficulty requires item-level calibration."

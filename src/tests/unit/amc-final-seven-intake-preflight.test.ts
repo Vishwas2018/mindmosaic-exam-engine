@@ -75,9 +75,12 @@ describe("baseline: the real repository today", () => {
     for (const result of report.results) expect(result.ready, result.questionId).toBe(false);
   });
 
-  it("reports the two unregistered skill labels as taxonomy and blueprint blockers", () => {
+  it("no longer reports taxonomy, blueprint or hash blockers for y5-006 and y5-028 after the adopted taxonomy changes", () => {
     for (const id of ["roadmap-amc-y5-006", "roadmap-amc-y5-028"]) {
-      expect(blockerCodes(id)).toEqual(expect.arrayContaining(["taxonomy_skill_unresolvable", "blueprint_unbuildable"]));
+      const codes = blockerCodes(id);
+      for (const code of ["taxonomy_skill_unresolvable", "taxonomy_mismatch", "question_type_not_recommended", "blueprint_unbuildable", "registry_hash_mismatch", "attestation_failed"]) {
+        expect(codes, `${id} ${code}`).not.toContain(code);
+      }
     }
   });
 
@@ -126,11 +129,11 @@ describe("baseline: the real repository today", () => {
     expect(ids.filter((id) => id.includes("-y5-"))).toHaveLength(27);
   });
 
-  it("finds all 60 drafts ready for taxonomy and blueprint except the two unregistered skills", () => {
+  it("finds all 60 drafts ready for taxonomy and blueprint", () => {
     const readiness = evaluateAllDraftReadiness(world);
     expect(readiness).toHaveLength(60);
     const notReady = readiness.filter((row) => row.taxonomy !== "ok" || row.blueprint !== "ok").map((row) => row.questionId);
-    expect(notReady).toEqual(["roadmap-amc-y5-006", "roadmap-amc-y5-028"]);
+    expect(notReady).toEqual([]);
   });
 });
 

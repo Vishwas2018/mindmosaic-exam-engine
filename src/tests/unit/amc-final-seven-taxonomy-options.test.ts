@@ -17,8 +17,13 @@ import type { TaxonomyEntry } from "@/features/question-factory/taxonomy/types";
  * evidence about behaviour, not a change anyone has reviewed or adopted.
  *
  * The y5-028 variant is the owner-selectable "Option C" classification
- * (Logic & Problem-Solving, "Systematic counting", number_entry). It exists
- * only as an in-memory copy of the draft.
+ * (Logic & Problem-Solving, "Systematic counting", number_entry).
+ *
+ * The owner has since adopted y5-006 Option A and y5-028 Option C with remedy A,
+ * and the real entries and draft now carry them. The scenarios below therefore
+ * start from `revertAdoption`, which undoes exactly those two taxonomy edits in
+ * memory, so the before/after evidence still runs; the final describe block
+ * asserts the adopted state of the real repository.
  */
 
 const DRAFT_FILE = "content/roadmap-drafts/amc-y5-draft.json" as const;
@@ -30,6 +35,16 @@ const SYSTEMATIC_COUNTING = "amc.systematic-counting";
 const SIMPLE_SCALE_ID = "amc.use-a-simple-scale";
 
 type Transform = (entries: readonly TaxonomyEntry[]) => readonly TaxonomyEntry[];
+
+/** Undoes the two adopted taxonomy edits, in memory only, to reproduce the pre-adoption registry. */
+const revertAdoption: Transform = (entries) =>
+  entries
+    .filter((entry) => entry.id !== SIMPLE_SCALE_ID)
+    .map((entry) => (entry.id === SYSTEMATIC_COUNTING ? { ...entry, recommendedQuestionTypes: ["multiple_choice" as const] } : entry));
+const onPreAdoption =
+  (transform: Transform): Transform =>
+  (entries) =>
+    transform(revertAdoption(entries));
 
 const addNumberEntryToSystematicCounting: Transform = (entries) =>
   entries.map((entry) =>
@@ -122,10 +137,11 @@ const codes = (s: Scenario, world: Scenario["world"], id: string): string[] =>
 
 const TAXONOMY_CODES = ["taxonomy_skill_unresolvable", "taxonomy_mismatch", "question_type_not_recommended", "blueprint_unbuildable"];
 
-const baseline = await loadScenario((entries) => entries);
-const typeAFix = await loadScenario(addNumberEntryToSystematicCounting);
-const withScale = await loadScenario(addSimpleScale);
-const dedicated = await loadScenario(addDedicatedCounting);
+const adopted = await loadScenario((entries) => entries);
+const baseline = await loadScenario(revertAdoption);
+const typeAFix = await loadScenario(onPreAdoption(addNumberEntryToSystematicCounting));
+const withScale = await loadScenario(onPreAdoption(addSimpleScale));
+const dedicated = await loadScenario(onPreAdoption(addDedicatedCounting));
 afterAll(() => vi.resetModules());
 
 describe("y5-028 Option C against the current taxonomy", () => {
@@ -185,8 +201,10 @@ describe("remedy A: add number_entry to amc.systematic-counting (in-memory)", ()
     const found = report.results[0].blockers.map((b) => b.code);
     for (const code of TAXONOMY_CODES) expect(found, code).not.toContain(code);
     expect(report.results[0].facts.blueprint).toBe("would_create");
-    // What remains is the separately authorised work: re-pin, exclusion lift, human approval.
-    expect(found).toEqual(expect.arrayContaining(["registry_hash_mismatch", "attestation_failed", "excluded_from_review", "approval_missing"]));
+    // The re-pin is now committed, so the hashes agree. What remains is the exclusion lift and human approval.
+    expect(found).not.toContain("registry_hash_mismatch");
+    expect(found).not.toContain("attestation_failed");
+    expect([...found].sort()).toEqual(["approval_missing", "excluded_from_review"]);
     expect(report.ready).toBe(false);
   });
 
@@ -228,7 +246,7 @@ describe("remedy B: a dedicated number_entry entry with its own label (in-memory
 
 describe("remedy C: a second entry that keeps the label 'Systematic counting'", () => {
   it("is refused by the registry's own validation (alias collision), so it cannot be registered", async () => {
-    await expect(loadScenario(addSameLabelEntry)).rejects.toThrow(/Skill taxonomy registry failed validation[\s\S]*Systematic counting/);
+    await expect(loadScenario(onPreAdoption(addSameLabelEntry))).rejects.toThrow(/Skill taxonomy registry failed validation[\s\S]*Systematic counting/);
   });
 });
 
@@ -292,7 +310,7 @@ describe("taxonomy strand names versus the learner-facing subject registry", () 
 
 describe("a question-type mismatch can never be reported as intake-ready", () => {
   it("blocks y5-006 when its only matching entry recommends the wrong type, even with a synthetic approval and no exclusion", async () => {
-    const wrongType = await loadScenario(numberEntryOnlyScale);
+    const wrongType = await loadScenario(onPreAdoption(numberEntryOnlyScale));
     const target = wrongType.world.targets.find((entry) => entry.question.id === Y5_006)!;
     const facts = {
       kind: "human_publication_approval" as const,
@@ -347,6 +365,61 @@ describe("existing published AMC questions are unaffected by either taxonomy cha
   it("keeps hashing independent of the taxonomy, so no hash or manifest can move with it", () => {
     for (const file of ["src/features/content-governance/publication-integrity.ts", "src/features/question-factory/provenance/content-hash.ts"]) {
       expect(readFileSync(path.join(process.cwd(), file), "utf8"), file).not.toMatch(/taxonomy/i);
+    }
+  });
+});
+
+describe("adopted state of the real repository (y5-006 Option A, y5-028 Option C with remedy A)", () => {
+  const registry = adopted.taxonomy.skillTaxonomyRegistry;
+
+  it("registers exactly one new entry and changes only the question types of amc.systematic-counting", () => {
+    const before = new Map(baseline.taxonomy.skillTaxonomyRegistry.list().map((entry) => [entry.id, JSON.stringify(entry)]));
+    const after = registry.list();
+    expect(after).toHaveLength(before.size + 1);
+    expect(after.filter((entry) => !before.has(entry.id)).map((entry) => entry.id)).toEqual([SIMPLE_SCALE_ID]);
+    expect(after.filter((entry) => before.has(entry.id) && before.get(entry.id) !== JSON.stringify(entry)).map((entry) => entry.id)).toEqual([SYSTEMATIC_COUNTING]);
+    expect(registry.get(SYSTEMATIC_COUNTING)?.recommendedQuestionTypes).toEqual(["multiple_choice", "number_entry"]);
+    expect(registry.get(SIMPLE_SCALE_ID)).toEqual(simpleScaleEntry.id ? expect.objectContaining({ strand: "Measurement & Geometry", yearLevels: [5], recommendedQuestionTypes: ["multiple_choice"] }) : undefined);
+    expect(registry.resolve("Use a simple scale")?.id).toBe(SIMPLE_SCALE_ID);
+  });
+
+  it("carries the approved y5-028 classification and keeps its question type", () => {
+    const draft = adopted.world.rawDrafts.get(Y5_028) as DraftShape;
+    expect(draft.type).toBe("number_entry");
+    expect(draft.metadata.strand).toBe("Logic & Problem-Solving");
+    expect(draft.metadata.skill).toBe("Systematic counting");
+  });
+
+  it("leaves y5-006 and y5-028 blocked only by the exclusion and the missing human approval", () => {
+    for (const id of [Y5_006, Y5_028]) expect([...codes(adopted, adopted.world, id)].sort(), id).toEqual(["approval_missing", "excluded_from_review"]);
+    const rows = adopted.lib.evaluateAllDraftReadiness(adopted.world);
+    expect(rows.filter((row) => row.taxonomy !== "ok" || row.blueprint !== "ok").map((row) => row.questionId)).toEqual([]);
+  });
+
+  it("matches the re-pinned hashes in the review source, the attestation pin and the revision-loop row", () => {
+    const target = adopted.world.targets.find((entry) => entry.question.id === Y5_028)!;
+    const rows = JSON.parse(readFileSync(path.join(process.cwd(), "content/review-sources/amc/y5.json"), "utf8")) as { questionId: string; sourceQuestionHash: string; contentHash: string }[];
+    const row = rows.find((entry) => entry.questionId === Y5_028)!;
+    expect([row.sourceQuestionHash, row.contentHash]).toEqual([target.source.sourceQuestionHash, target.source.contentHash]);
+    expect(target.source.sourceQuestionHash).toBe("9211116d5f5fc502e48bdb7005bcb6a150ac5c2a017001245081b78e4f3b809b");
+    expect(target.source.contentHash).toBe("4ca0370da7e1bc2e6949ed4df1f4c1156175e7125028727e683da01f56747728");
+    expect(target.sourceManifestHash).toBe("f00249b651f4a93e2d4f87f359ff5111e8d8076000a19c5ff23c6d0e8f5f6592");
+    const csv = readFileSync(path.join(process.cwd(), "docs/reviews/amc-2026-10-17/revision-loop-amc.csv"), "utf8")
+      .split("\n")
+      .find((line) => line.startsWith(`"${Y5_028}"`))!;
+    expect(csv).toContain(target.source.contentHash);
+    expect(csv).toContain(target.sourceManifestHash);
+    const bindings = readFileSync(path.join(process.cwd(), "src/features/question-factory/correctness/amc-content-bindings.ts"), "utf8");
+    expect(bindings).toContain(`"${Y5_028}": "${target.source.sourceQuestionHash}"`);
+  });
+
+  it("serves the same 53 published questions with valid committed blueprints and unchanged skills", () => {
+    expect(adopted.world.servedBankIds.size).toBe(53);
+    for (const id of adopted.world.servedBankIds) {
+      const file = path.join(process.cwd(), "content/question-factory/blueprints", `${id.replace("roadmap-", "")}-seed-001.json`);
+      const blueprint = adopted.blueprints.blueprintSchema.parse(JSON.parse(readFileSync(file, "utf8")));
+      expect(adopted.blueprints.validateBlueprint(blueprint).valid, id).toBe(true);
+      expect(registry.resolveOrThrow(blueprint.skill).id, id).toBe(baseline.taxonomy.skillTaxonomyRegistry.resolveOrThrow(blueprint.skill).id);
     }
   });
 });
