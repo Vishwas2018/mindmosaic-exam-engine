@@ -1,0 +1,364 @@
+KEYED REPORT: BAR-MODEL PILOT (30 ITEMS)
+
+Each item compares the stored private key to the solver target produced by validateBarModelVisual().
+============================================================
+
+ID: pilot-y3-part-whole-01
+Year: 3
+Skill: part-whole
+Difficulty: easy
+Unit: sticks
+Stored key: 22
+Solver target: 22
+Match: PASS
+Worked explanation: The whole tray is 36. One part is 14 red sticks, so subtract to find the remainder: 36 - 14 = 22 blue sticks.
+
+---
+
+ID: pilot-y3-comparison-01
+Year: 3
+Skill: comparison
+Difficulty: easy
+Unit: shells
+Stored key: 12
+Solver target: 12
+Match: PASS
+Worked explanation: Compare the two amounts: 27 - 15 = 12, so Mia has 12 more shells.
+
+---
+
+ID: pilot-y3-times-as-many-01
+Year: 3
+Skill: times-as-many
+Difficulty: medium
+Unit: tokens
+Stored key: 18
+Solver target: 18
+Match: PASS
+Worked explanation: Three equal groups and one equal group make four equal groups in total. 24 ÷ 4 = 6, so the larger box has 3 × 6 = 18 tokens.
+
+---
+
+ID: pilot-y3-part-whole-02
+Year: 3
+Skill: part-whole
+Difficulty: easy
+Unit: apples
+Stored key: 23
+Solver target: 23
+Match: PASS
+Worked explanation: The total is 42. Subtract the green apples: 42 - 19 = 23 red apples.
+
+---
+
+ID: pilot-y3-comparison-02
+Year: 3
+Skill: comparison
+Difficulty: easy
+Unit: flowers
+Stored key: 13
+Solver target: 13
+Match: PASS
+Worked explanation: Find the difference: 31 - 18 = 13, so Ava planted 13 more flowers.
+
+---
+
+ID: pilot-y3-times-as-many-02
+Year: 3
+Skill: times-as-many
+Difficulty: medium
+Unit: books
+Stored key: 28
+Solver target: 28
+Match: PASS
+Worked explanation: Four groups plus one group is five groups altogether. 35 ÷ 5 = 7, so the larger shelf has 4 × 7 = 28 books.
+
+---
+
+ID: pilot-y3-part-whole-03
+Year: 3
+Skill: part-whole
+Difficulty: medium
+Unit: marbles
+Stored key: 33
+Solver target: 33
+Match: PASS
+Worked explanation: Subtract the green marbles from the total: 50 - 17 = 33 red marbles.
+
+---
+
+ID: pilot-y3-comparison-03
+Year: 3
+Skill: comparison
+Difficulty: medium
+Unit: stickers
+Stored key: 25
+Solver target: 25
+Match: PASS
+Worked explanation: The difference is 44 - 19 = 25, so Jay has 25 fewer stickers.
+
+---
+
+ID: pilot-y3-times-as-many-03
+Year: 3
+Skill: times-as-many
+Difficulty: hard
+Unit: cards
+Stored key: 45
+Solver target: 45
+Match: PASS
+Worked explanation: 5 groups plus 1 group is 6 equal groups. 54 ÷ 6 = 9, so Brianna has 5 × 9 = 45 cards.
+
+---
+
+ID: pilot-y3-part-whole-04
+Year: 3
+Skill: part-whole
+Difficulty: easy
+Unit: crayons
+Stored key: 19
+Solver target: 19
+Match: PASS
+Worked explanation: Take the blue crayons away from the total: 28 - 9 = 19 yellow crayons.
+
+---
+
+ID: pilot-y3-comparison-04
+Year: 3
+Skill: comparison
+Difficulty: medium
+Unit: blocks
+Stored key: 15
+Solver target: 15
+Match: PASS
+Worked explanation: The difference is 37 - 22 = 15, so Ruby stacked 15 more blocks.
+
+---
+
+ID: pilot-y3-times-as-many-04
+Year: 3
+Skill: times-as-many
+Difficulty: medium
+Unit: pencils
+Stored key: 20
+Solver target: 20
+Match: PASS
+Worked explanation: Three equal groups make 30, so one group is 10. The larger pot has 2 groups, so it holds 20 pencils.
+
+---
+
+ID: pilot-y3-part-whole-05
+Year: 3
+Skill: part-whole
+Difficulty: hard
+Unit: buttons
+Stored key: 37
+Solver target: 37
+Match: PASS
+Worked explanation: Subtract the red buttons from the whole amount: 63 - 26 = 37 gold buttons.
+
+---
+
+ID: pilot-y3-comparison-05
+Year: 3
+Skill: comparison
+Difficulty: hard
+Unit: stick figures
+Stored key: 23
+Solver target: 23
+Match: PASS
+Worked explanation: Find the difference: 52 - 29 = 23, so Harper drew 23 more stick figures.
+
+---
+
+ID: pilot-y3-times-as-many-05
+Year: 3
+Skill: times-as-many
+Difficulty: hard
+Unit: bears
+Stored key: 36
+Solver target: 36
+Match: PASS
+Worked explanation: Four equal groups make 48, so one group is 12. The larger box has 3 groups, so it holds 36 bears.
+
+---
+
+ID: pilot-y5-equal-units-01
+Year: 5
+Skill: equal-units
+Difficulty: easy
+Unit: bags
+Stored key: 35
+Solver target: 35
+Match: PASS
+Worked explanation: Three bags plus five bags makes eight equal bags. 56 ÷ 8 = 7 biscuits per bag. The larger pack has 5 × 7 = 35 biscuits.
+
+---
+
+ID: pilot-y5-before-after-01
+Year: 5
+Skill: before-after
+Difficulty: easy
+Unit: beans
+Stored key: 45
+Solver target: 45
+Match: PASS
+Worked explanation: Before minus used equals left, so start = 31 + 14 = 45 beans.
+
+---
+
+ID: pilot-y5-transfer-01
+Year: 5
+Skill: transfer
+Difficulty: easy
+Unit: stickers
+Stored key: 7
+Solver target: 7
+Match: PASS
+Worked explanation: If they finish with the same number, the amount transferred makes Ari and Tia's end totals match. The total is 50, so each ends with 25. Ari gives away 32 - 25 = 7 stickers.
+
+---
+
+ID: pilot-y5-equal-units-02
+Year: 5
+Skill: equal-units
+Difficulty: medium
+Unit: coins
+Stored key: 63
+Solver target: 63
+Match: PASS
+Worked explanation: 11 equal bundles make 99 coins, so each bundle is 9 coins. The larger bag has 7 × 9 = 63 coins.
+
+---
+
+ID: pilot-y5-before-after-02
+Year: 5
+Skill: before-after
+Difficulty: medium
+Unit: marbles
+Stored key: 64
+Solver target: 64
+Match: PASS
+Worked explanation: Start = left + lost = 41 + 23 = 64 marbles.
+
+---
+
+ID: pilot-y5-transfer-02
+Year: 5
+Skill: transfer
+Difficulty: medium
+Unit: tokens
+Stored key: 11
+Solver target: 11
+Match: PASS
+Worked explanation: The total is 70 tokens, so each has 35 after trading. Zoe gives away 46 - 35 = 11 tokens.
+
+---
+
+ID: pilot-y5-equal-units-03
+Year: 5
+Skill: equal-units
+Difficulty: easy
+Unit: sticks
+Stored key: 36
+Solver target: 36
+Match: PASS
+Worked explanation: Eight equal sets make 48, so one set is 6 sticks. The larger team has 6 × 6 = 36 sticks.
+
+---
+
+ID: pilot-y5-before-after-03
+Year: 5
+Skill: before-after
+Difficulty: hard
+Unit:  pencils
+Stored key: 85
+Solver target: 85
+Match: PASS
+Worked explanation: Start = left + given away = 58 + 27 = 85 pencils.
+
+---
+
+ID: pilot-y5-transfer-03
+Year: 5
+Skill: transfer
+Difficulty: hard
+Unit: marbles
+Stored key: 11
+Solver target: 11
+Match: PASS
+Worked explanation: The total is 80 marbles, so each ends with 40. Luca gives away 51 - 40 = 11 marbles.
+
+---
+
+ID: pilot-y5-equal-units-04
+Year: 5
+Skill: equal-units
+Difficulty: medium
+Unit: cups
+Stored key: 63
+Solver target: 63
+Match: PASS
+Worked explanation: Ten equal cups make 90, so one cup is 9. The larger jug has 7 × 9 = 63 cups.
+
+---
+
+ID: pilot-y5-before-after-04
+Year: 5
+Skill: before-after
+Difficulty: medium
+Unit: stickers
+Stored key: 62
+Solver target: 62
+Match: PASS
+Worked explanation: Start - given away = left, so start = 44 + 18 = 62 stickers.
+
+---
+
+ID: pilot-y5-transfer-04
+Year: 5
+Skill: transfer
+Difficulty: hard
+Unit: buttons
+Stored key: 16
+Solver target: 16
+Match: PASS
+Worked explanation: The total is 84, so each ends with 42. Eden gives away 58 - 42 = 16 buttons.
+
+---
+
+ID: pilot-y5-equal-units-05
+Year: 5
+Skill: equal-units
+Difficulty: hard
+Unit: sweets
+Stored key: 72
+Solver target: 72
+Match: PASS
+Worked explanation: Fifteen equal packs make 120, so one pack has 8 sweets. The larger jar has 9 × 8 = 72 sweets.
+
+---
+
+ID: pilot-y5-before-after-05
+Year: 5
+Skill: before-after
+Difficulty: hard
+Unit: lollies
+Stored key: 81
+Solver target: 81
+Match: PASS
+Worked explanation: Start = left + eaten = 47 + 34 = 81 lollies.
+
+---
+
+ID: pilot-y5-transfer-05
+Year: 5
+Skill: transfer
+Difficulty: hard
+Unit: cards
+Stored key: 18
+Solver target: 18
+Match: PASS
+Worked explanation: The total is 92, so each ends with 46. Mina gives away 64 - 46 = 18 cards.
+
+---
