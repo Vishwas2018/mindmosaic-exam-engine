@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
@@ -8,6 +8,7 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 import { FAMILY_PLAN } from "@/lib/billing/prices";
+import {useHydrated} from "@/lib/use-hydrated";
 
 import { useAuth } from "../AuthProvider";
 import { evaluatePassword } from "../password";
@@ -91,10 +92,6 @@ export const SIGN_UP_STEPS = [
  */
 const ALL_YEARS = Array.from({ length: 12 }, (_, index) => index + 1);
 
-const subscribeToHydration = () => () => {};
-const clientHydrated = () => true;
-const serverHydrated = () => false;
-
 const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"] as const;
 
 const PROGRAMMES = [
@@ -172,7 +169,7 @@ export function SignUpWizard({
   const auth = useAuth();
   // Prevent typing into server HTML before React can retain the controlled
   // values. Fast interaction otherwise loses the first field during hydration.
-  const hydrated = useSyncExternalStore(subscribeToHydration, clientHydrated, serverHydrated);
+  const hydrated = useHydrated();
 
   const [step, setStepState] = useState(1);
   const setStep = (next: number) => {

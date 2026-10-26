@@ -25,6 +25,7 @@ import {
 } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import {useHydrated} from "@/lib/use-hydrated";
 
 import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
 import { ExamInstructions } from "./ExamInstructions";
@@ -89,6 +90,7 @@ export function ExamConfigurator({
   const startExam = useExamStore((state) => state.startExam);
   const startServerExam = useExamStore((state) => state.startServerExam);
   const auth = useAuth();
+  const hydrated = useHydrated();
   /* Signed-in visitors go through the server session flow —
      the page payload carries no bank for them to practise from locally.
      Non-student roles (admin, parent, teacher) are prohibited from creating student sessions (MM-AUTH-01). */
@@ -335,7 +337,7 @@ export function ExamConfigurator({
       </div>
 
       <div className="px-6 py-7 sm:px-8 sm:py-8">
-        <fieldset className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
+        <fieldset disabled={!hydrated} className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
           <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
             Paper
           </legend>
@@ -399,7 +401,7 @@ export function ExamConfigurator({
           </Select>
         </fieldset>
 
-        <fieldset className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
+        <fieldset disabled={!hydrated} className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
           <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
             Sitting
           </legend>
@@ -468,6 +470,7 @@ export function ExamConfigurator({
             setStage("instructions");
           }}
           disabled={
+            !hydrated ||
             insufficient ||
             isStarting ||
             isCreating ||
