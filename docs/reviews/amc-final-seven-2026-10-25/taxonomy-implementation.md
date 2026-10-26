@@ -31,3 +31,10 @@ Question text, options, keys, marks, difficulty and time for every question; the
 The scenario tests that simulated these edits now start from a `revertAdoption` transform so the before/after evidence still runs, and a new block asserts the adopted state of the real repository. Two baseline assertions in the preflight test changed because the blockers they described are now fixed (taxonomy, blueprint, hash); the exclusion and approval assertions are unchanged.
 
 Preflight result after the change: all 60 drafts are taxonomy and blueprint ready. Each of `y5-006` and `y5-028` is blocked only by `excluded_from_review` and `approval_missing`.
+
+## Blueprint status, and what taxonomy readiness does not mean
+
+- All 60 AMC drafts are taxonomy-resolvable and blueprint-derivable.
+- `y3-016` and `y5-019` have **stale committed blueprints** (they predate the 17 to 18 October label changes). The intake never overwrites a blueprint, and they are not regenerated here: each tracks a label that is still an owner decision.
+- Three questions (`y3-014`, `y5-006`, `y5-028`) have no committed blueprint. One would be created for each at a separately authorised intake step.
+- **No question gains publication eligibility because its taxonomy passes.** The code exclusions, the missing human approvals, ingestion, staging and publication are all unchanged and still required.
