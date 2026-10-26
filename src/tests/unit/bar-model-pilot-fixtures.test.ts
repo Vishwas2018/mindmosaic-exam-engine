@@ -1,5 +1,7 @@
+import {render, screen, within} from "@testing-library/react";
 import {describe, expect, it} from "vitest";
 
+import BarModelPreviewPage from "@/app/dev/bar-model/page";
 import {barModelPilotFixtures} from "@/content/visual-fixtures/bar-model";
 import {validateBarModelVisual} from "@/features/visuals/bar-model/pipeline";
 
@@ -34,5 +36,35 @@ describe("bar_model pilot fixtures", () => {
         denominator: "1",
       });
     }
+  });
+
+  it("renders preview diagnostics from the current pilot schema", () => {
+    const fixture = barModelPilotFixtures[0];
+
+    render(BarModelPreviewPage());
+
+    const fixtureSection = screen
+      .getByRole("heading", {name: new RegExp(fixture.name, "i")})
+      .closest("section");
+
+    expect(screen.getByText(/Bar model pilot preview/i)).toBeInTheDocument();
+    expect(screen.getByText(/30 pilot items/i)).toBeInTheDocument();
+    expect(
+      fixtureSection,
+    ).not.toBeNull();
+    expect(
+      within(fixtureSection as HTMLElement).getByLabelText(
+        new RegExp(`Developer diagnostics for ${fixture.name}`, "i"),
+      ),
+    ).toBeInTheDocument();
+    const diagnostics = within(fixtureSection as HTMLElement).getByLabelText(
+      new RegExp(`Developer diagnostics for ${fixture.name}`, "i"),
+    );
+
+    const expectedRow = within(diagnostics).getByText("Expected").closest("dt");
+    expect(expectedRow).not.toBeNull();
+    expect(expectedRow?.nextElementSibling).toHaveTextContent(
+      String(fixture.privateAnswerKey),
+    );
   });
 });
