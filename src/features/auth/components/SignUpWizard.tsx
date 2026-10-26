@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
@@ -91,6 +91,10 @@ export const SIGN_UP_STEPS = [
  */
 const ALL_YEARS = Array.from({ length: 12 }, (_, index) => index + 1);
 
+const subscribeToHydration = () => () => {};
+const clientHydrated = () => true;
+const serverHydrated = () => false;
+
 const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"] as const;
 
 const PROGRAMMES = [
@@ -166,6 +170,9 @@ export function SignUpWizard({
 }) {
   const router = useRouter();
   const auth = useAuth();
+  // Prevent typing into server HTML before React can retain the controlled
+  // values. Fast interaction otherwise loses the first field during hydration.
+  const hydrated = useSyncExternalStore(subscribeToHydration, clientHydrated, serverHydrated);
 
   const [step, setStepState] = useState(1);
   const setStep = (next: number) => {
@@ -405,7 +412,7 @@ export function SignUpWizard({
         className="mm-rise grid gap-[18px] rounded-[20px] border border-mm-line bg-white p-[clamp(22px,2.4vw,32px)]"
       >
         {step === 1 && (
-          <div className="grid gap-4">
+          <fieldset disabled={!hydrated} className="grid min-w-0 gap-4">
             <div className="grid gap-3.5 sm:grid-cols-2">
               <MmField
                 id="su-first-name"
@@ -514,7 +521,7 @@ export function SignUpWizard({
               </Link>
               .
             </MmCheckbox>
-          </div>
+          </fieldset>
         )}
 
         {step === 2 && (
