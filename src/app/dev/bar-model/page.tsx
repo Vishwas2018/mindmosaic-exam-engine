@@ -92,7 +92,10 @@ export default function BarModelPreviewPage() {
                     </dd>
                     <dt className="font-semibold">Expected</dt>
                     <dd className="break-words">
-                      {formatTarget(fixture.target)}
+                      {formatTarget({
+                        numerator: String(fixture.privateAnswerKey),
+                        denominator: "1",
+                      })}
                     </dd>
                     <dt className="font-semibold">Conservation checks</dt>
                     <dd>{result.solution?.conservationChecks ?? 0}</dd>
