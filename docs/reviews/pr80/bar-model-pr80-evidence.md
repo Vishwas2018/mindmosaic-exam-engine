@@ -140,4 +140,39 @@ Open `http://localhost:3180/dev/bar-model`, choose a year, submit/reveal, finish
 
 Still required: independent human blind review, reconciliation of findings, genuine human sign-off/`approvedBy`, and the governed publication gates before any publication decision. Keep PR #80 draft; do not merge or publish content. Complete final-head CI and any local Windows intermittency should be assessed separately from human content approval.
 
+## Final CI verification at head `10cc1d93` — 27 October 2026
+
+| Gate | Command | Result |
+|---|---|---|
+| Typecheck | `npm run typecheck` | PASS — `tsc --noEmit` clean |
+| Lint | `npm run lint` | PASS — 0 errors (1 pre-existing unused-var warning in `src/content/visual-fixtures/bar-model/index.ts`, unrelated to these edits) |
+| Unit tests | `npm test` (vitest) | Bar-model suites pass in isolation: `bar-model-renderer` 30/30, `writing-approval` 35/35, `exam-configurator-bank-default` 5/5, `sign-up-wizard` 10/10. The full-suite run on this Windows host showed transient failures in those same four files; every one passes when run individually — flaky/environmental (host transform/import load and loopback contention), not a product defect. No assertion was weakened and no retries were added. |
+| Bar-model fixtures | `npm run visuals:validate-bar-models` | PASS — all 55 fixtures behave as intended (30 pilot; `y5-equal-units-04` key 63; all 5 transfer items valid) |
+| Correctness cross-check | `npm run check:answers -- --include-published` | PASS — 0 failures (1571 informational warnings) |
+| Answer-key cross-check | `npx tsx scripts/review-bar-model-pilot.mts` | PASS — 30 independent prompt calculations match stored keys and model-solver results; blind packet + keyed report regenerated |
+| Ledger | `npm run questions:validate-ledger` | PASS — every in-scope ledger row matches a file and vice versa |
+| RLS | `npm run test:rls` (local Supabase `127.0.0.1:56322`, supabase CLI 2.108.0, Docker) | PASS — 37 test files, 585 tests passed, 2 expected failures |
+| Build | `npm run build` | Not green in this sandbox: first attempt failed on Next.js package resolution inside the nested worktree (resolved by `npm ci`; environment artifact, no code defect); the re-run reached static-page prerendering without errors, but turbopack is extremely slow on this Windows host and was stopped. Owner to complete a green build on GitHub Actions. |
+| E2E guest | `npm run test:e2e` | Not run locally — requires a running dev server plus local Supabase; `.env.e2e.local` is gitignored and absent. Blocked for the owner with local infrastructure. |
+| E2E auth | `npm run test:e2e:auth` | Not run locally — same requirements plus seeded auth fixtures. Blocked for the owner. |
+| GitHub Actions | — | Not inspectable anonymously: `api.github.com` returned HTTP 403 (rate limited). PR head `10cc1d93` is in sync with `origin` (`git branch -v`). Owner to confirm green `core`/`rls`/`e2e`/`e2e-auth` checks with credentials before merge. |
+
+## Reviewer packets (regenerated at `10cc1d93`; fixture source SHA-256 `bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e`, verified identical in all three artifacts and against the committed fixtures file)
+
+- `docs/reviews/pr80/bar-model-pr80-blind-review-packet.html` — all 30 items: ID, year, skill, difficulty, unit, prompt, unsolved bar diagram, givens-only description, per-item review fields (independently calculated answer, confidence 1–5, ambiguity, difficulty appropriateness, diagram accuracy, suggested corrections) plus reviewer name/date and instructions. Verified: 30 diagram sections; no answer keys or explanations anywhere in the blind packet.
+- `docs/reviews/pr80/bar-model-pr80-blind-review-packet.pdf` — A4 print render of the HTML packet (generated with Playwright).
+- `docs/reviews/pr80/bar-model-pr80-blind-review-packet.txt` — deterministic givens-only descriptions; same SHA; no keys.
+- `docs/reviews/pr80/bar-model-pr80-keyed-report.txt` — RESTRICTED review artifact: independent calculation versus stored key versus model solver (30/30 PASS) plus worked explanations. Not part of the blind packet; opened only after the blind pass.
+- `docs/reviews/pr80/bar-model-pr80-human-review-tracking.md` — NEW: reviewer name/date, 30-row question-level findings table (independent answer, findings, resolution status, final decision), and sign-off block. Reviewer fields are intentionally blank — no human review has been performed.
+
+## Remaining requirements
+
+- Genuine independent HUMAN blind review (not AI) using the packets above, with findings recorded in the tracking document; the owner then populates `approvedBy`. `approvedBy` is deliberately NOT populated here, and no human review or approval is claimed.
+- Owner completes green complete authenticated CI (build + e2e + e2e:auth + rls — RLS is green locally) and confirms GitHub Actions results with credentials.
+- PR #80 stays draft; no merge, deployment, or content publication; `BAR_MODEL_PREVIEW_ENABLED` remains unset on real Vercel deployments.
+
+## Preserved records
+
+Original review records are untouched: `scratch/pr80-independent-findings.md`, `scratch/pr80-review-matrix.md`, and the prior blind/keyed packets remain in the repository history.
+
 Design contract: checked against `docs/design.md` v2.2; no unapproved deviations. Existing components, colours, typography and visual rendering are preserved.
