@@ -172,6 +172,12 @@ if (PUBLIC_SIGNUP_ENABLED) {
 }
 
 test.describe("email verification (/auth/confirm)", () => {
+  test("includes the resend form in the initial response before client JavaScript", async ({request}) => {
+    const response = await request.get("/auth/confirm");
+    expect(response.ok()).toBe(true);
+    expect(await response.text()).toContain('id="verify-resend-email"');
+  });
+
   test("an invalid/expired link has no horizontal overflow at every viewport and offers resend", async ({
     page,
   }) => {
