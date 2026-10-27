@@ -126,7 +126,26 @@ test.describe("pilot practice journeys", () => {
     await page.setContent(html);
     await expect(page.locator("section")).toHaveCount(30);
     await expect(page.locator('svg[role="img"]')).toHaveCount(30);
-    await expect(page.locator("textarea")).toHaveCount(30);
+
+    // Each of the 30 items carries exactly three reviewer free-text fields:
+    // ambiguity notes, diagram notes and suggested corrections (90 total).
+    for (let i = 0; i < 30; i += 1) {
+      await expect(page.locator("section").nth(i).locator("textarea")).toHaveCount(3);
+      await expect(page.locator("section").nth(i).locator('svg[role="img"]')).toHaveCount(1);
+      await expect(page.locator("section").nth(i).locator('textarea[name^="ambiguity-notes-"]')).toHaveCount(1);
+      await expect(page.locator("section").nth(i).locator('textarea[name^="diagram-notes-"]')).toHaveCount(1);
+      await expect(page.locator("section").nth(i).locator('textarea[name^="corrections-"]')).toHaveCount(1);
+    }
+    await expect(page.locator("textarea")).toHaveCount(90);
+    await expect(page.locator('textarea[name^="ambiguity-notes-"]')).toHaveCount(30);
+    await expect(page.locator('textarea[name^="diagram-notes-"]')).toHaveCount(30);
+    await expect(page.locator('textarea[name^="corrections-"]')).toHaveCount(30);
+
+    // Required per-item review labels are present once per item.
+    await expect(page.locator("label.field").filter({ hasText: "Ambiguity" })).toHaveCount(30);
+    await expect(page.locator("label.field").filter({ hasText: "Diagram accuracy" })).toHaveCount(30);
+    await expect(page.locator("label.field").filter({ hasText: "Suggested corrections" })).toHaveCount(30);
+
     await expect(page.locator("svg").first().locator("text", {hasText: "?"})).toHaveCount(1);
     await page.screenshot({path: testInfo.outputPath("blind-packet.png")});
     await expectNoHorizontalOverflow(page);
