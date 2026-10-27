@@ -17,10 +17,10 @@ import {
   layerOpacity,
 } from "../cinematic/sceneProgress";
 import { focusScrollBehavior, type ScrollToLayerOptions } from "../cinematic/useChapterScroll";
-import { useMinWidth } from "../cinematic/useMinWidth";
+import { usePinnedViewport } from "../cinematic/useMinWidth";
 import { chapterTwo } from "../content";
 import { useMotionLevel } from "../motion/useMotionLevel";
-import { LAYER_CLASSES, ProgramScene } from "./ProgramScene";
+import { LAYER_CLASSES, NATURAL_LAYER_STYLE, ProgramScene } from "./ProgramScene";
 import { ProgramSceneProgress } from "./ProgramSceneProgress";
 import { mmButton } from "./primitives";
 
@@ -46,7 +46,7 @@ const SCENE_LAYER_OFFSET = 1;
  */
 export function ChapterTwoPrograms() {
   const animated = useMotionLevel() !== "off";
-  const pinned = useMinWidth(cinematicMotion.pinnedMinWidth);
+  const pinned = usePinnedViewport(cinematicMotion.pinnedMinWidth, cinematicMotion.pinnedMinHeight);
   const choreographed = pinned && animated;
 
   // Scroll transforms read pinned state through a motion value so a resize across the breakpoint re-evaluates them.
@@ -154,18 +154,18 @@ export function ChapterTwoPrograms() {
           "--seam-height": cinematicMotion.chapter1.seamSvh,
         } as CSSProperties
       }
-      className="relative bg-mm-page lg:-mt-[calc(var(--seam-height)*1svh)] lg:h-[var(--chapter-height)] lg:scroll-mt-[calc(var(--seam-height)*-1svh)] lg:bg-transparent motion-reduce:lg:mt-0 motion-reduce:lg:h-auto motion-reduce:lg:scroll-mt-0 motion-reduce:lg:bg-mm-page"
+      className="relative bg-mm-page lg:-mt-[calc(var(--seam-height)*1svh)] lg:h-[var(--chapter-height)] lg:scroll-mt-[calc(var(--seam-height)*-1svh)] lg:bg-transparent motion-reduce:lg:mt-0 short:lg:mt-0 motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:scroll-mt-0 short:lg:scroll-mt-0 motion-reduce:lg:bg-mm-page short:lg:bg-mm-page"
     >
       <div
         ref={stageRef}
-        className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:bg-mm-page motion-reduce:lg:static motion-reduce:lg:h-auto motion-reduce:lg:overflow-visible"
+        className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:bg-mm-page motion-reduce:lg:static short:lg:static motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:overflow-visible short:lg:overflow-visible"
       >
         <motion.div
           data-layer="intro"
-          style={choreographed ? { opacity: introForeground, pointerEvents: introPointer } : undefined}
+          style={choreographed ? { opacity: introForeground, pointerEvents: introPointer } : NATURAL_LAYER_STYLE}
           className={`${LAYER_CLASSES} lg:opacity-100 lg:pointer-events-auto`}
         >
-          <div className="mm-width grid gap-8 pb-6 pt-[clamp(56px,10vw,120px)] lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-6 motion-reduce:lg:pt-[clamp(56px,10vw,120px)]">
+          <div className="mm-width grid gap-8 pb-6 pt-[clamp(56px,10vw,120px)] lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:pb-6 short:lg:pb-6 motion-reduce:lg:pt-[clamp(56px,10vw,120px)] short:lg:pt-[clamp(56px,10vw,120px)]">
             <div className="flex flex-col gap-4 lg:order-2 lg:col-span-7">
               <p className="m-0 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">
                 <span aria-hidden="true" className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
@@ -233,10 +233,10 @@ export function ChapterTwoPrograms() {
         <motion.div
           data-handoff="chapter-3"
           onFocusCapture={() => onSceneFocus(handoffLayer)}
-          style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : undefined}
-          className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t`}
+          style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : NATURAL_LAYER_STYLE}
+          className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t short:lg:border-t`}
         >
-          <div className="mm-width flex flex-col justify-center py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)]">
+          <div className="mm-width flex flex-col justify-center py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)] short:lg:py-[clamp(48px,8vw,96px)]">
             <div className="relative max-w-3xl overflow-hidden rounded-3xl border border-mm-line/80 bg-gradient-to-br from-white/95 via-mm-wash/50 to-white/90 p-8 shadow-[0_20px_60px_-20px_rgba(24,21,31,0.14)] backdrop-blur-md sm:p-12">
               <div
                 aria-hidden="true"

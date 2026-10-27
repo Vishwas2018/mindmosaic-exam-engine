@@ -208,6 +208,7 @@ export function ChapterFourProgressParents() {
   const { sectionRef, choreographed, q, active, scrollToLayer } = useChapterScroll({
     scrollHeightSvh: timing.desktopScrollHeightSvh,
     starts,
+    pinnedMinHeight: timing.pinnedMinHeight,
   });
 
   const onSceneFocus = useCallback(

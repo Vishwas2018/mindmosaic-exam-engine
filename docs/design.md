@@ -883,6 +883,10 @@ Use a small offset where needed so the ring remains visible against the backgrou
 
 A focused control must also be visible promptly. In the cinematic chapters, tabbing into a scene that is not on screen scrolls it into view **instantly** (never a long smooth scroll while the control sits at opacity 0), and no focused control may sit behind the sticky header or the fixed mobile CTA bar (2.4.11).
 
+**Short viewports fall back to natural flow (owner decision, 2026-10-27).** A pinned stage is one viewport tall with its copy centred above the progress rail, so it only fits from a minimum height: **700px for Chapters 1 to 3, 880px for Chapter 4** (its product cards are taller). Below that, and under reduced motion, the chapter is the same natural-flow reading sequence phones and tablets get: every scene stacked in order, nothing pinned, no progress rail (it only navigates pinned travel), each scene still numbered "01 / 06" in its copy. The heights live in `cinematicMotion` (`pinnedMinHeight`, `chapter4.pinnedMinHeight`); the JS scroll choreography and the `short:` CSS variant read the same number, and a unit test holds them together. Do not hide the rail or the content to avoid an overlap at a height: change the threshold if a stage no longer fits.
+
+The skip link's focus indicator is a 3px brand-purple outline offset 3px over a 3px white ring (about 9:1 on the ivory page, and legible over a dark header); the earlier orange outline measured about 1.8:1.
+
 ### Colour
 
 Never rely only on:

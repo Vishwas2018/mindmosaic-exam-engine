@@ -18,6 +18,11 @@ import { chapter2LayerStarts, layerAnchor } from "../src/features/landing/cinema
  *   PW_PORT=3110 npx playwright test e2e/landing-keyboard-focus.spec.ts
  */
 
+/** A viewport is pinned (cinematic) when it is wide and tall enough; Chapter 4 needs more height than the rest. */
+const pinnedAt = (width: number, height: number, chapter: 1 | 4 = 1) =>
+  width >= cinematicMotion.pinnedMinWidth &&
+  height >= (chapter === 4 ? cinematicMotion.chapter4.pinnedMinHeight : cinematicMotion.pinnedMinHeight);
+
 // A full Tab walk is 40 to 120 stops, each waiting for scroll to settle: allow it the time it needs.
 test.setTimeout(240_000);
 
@@ -285,7 +290,8 @@ for (const [width, height] of WIDTHS) {
 
 test.describe("landing keyboard focus at 200% zoom (emulated)", () => {
   // 200% browser zoom halves the CSS viewport and doubles the device pixel ratio. 2048x1152 at 200% is
-  // 1024x576 CSS px (pinned layout); 1440x900 at 200% is 720x450 (natural flow). Emulation, not text zoom.
+  // 1024x576 CSS px; 1440x900 at 200% is 720x450. Both are shorter than a pinned stage needs, so both are natural
+  // flow (see "short viewports" below). Emulation, not text zoom.
   for (const [w, h] of [
     [1024, 576],
     [720, 450],
@@ -297,12 +303,252 @@ test.describe("landing keyboard focus at 200% zoom (emulated)", () => {
         const stops = await walk(page, "forward");
         await attachWalk(stops, `forward-walk-zoom200-${w}`);
         expect(stops.length).toBeGreaterThan(30);
-        // KNOWN, PRE-EXISTING, OUT OF PHASE A (verified identical on origin/dev): at a 576px-tall viewport the
-        // Chapter 2 progress rail (top 507px) is painted over the scene CTA (503 to 522px). That is a layout
-        // limit of the unchanged scene copy column, not a focus-scroll problem. Allow-listed by name and only
-        // at this viewport so any other regression still fails.
-        const railOverlapsCta = (s: Stop) => w === 1024 && !s.unobscured && /^(Explore learning|See all programs)$/.test(s.label);
-        expect(describeStops(problems(stops, { maxMs: w >= 1024 ? 600 : 2500, knownIssues: railOverlapsCta }))).toBe("");
+        // No allow-list: at 1024x576 the Chapter 2 progress rail used to be painted over the scene CTA
+        // (WCAG 2.4.11). That viewport is now natural flow, where there is no rail to cover anything.
+        expect(describeStops(problems(stops, { maxMs: pinnedAt(w, h) ? 600 : 2500 }))).toBe("");
+      });
+    });
+  }
+});
+
+/* ---------- Short viewports: natural-flow fallback (WCAG 2.4.11 Focus Not Obscured, 1.4.10 Reflow) ---------- */
+
+/*
+ * A pinned stage is exactly one viewport tall, with its copy centred above a progress rail. On a short viewport
+ * that no longer fits (at 1024x576 the Chapter 2 rail was painted over the scene CTA; Chapter 4's cards ran under
+ * the rail and off the bottom of the screen up to about 800px), so below `pinnedMinHeight` (and, for Chapter 4,
+ * its own taller minimum) the chapters are natural flow, exactly as for reduced motion. These are the owner's
+ * viewports; 1280x700 is the shortest pinned height for Chapters 1 to 3.
+ */
+const SHORT_VIEWPORTS: ReadonlyArray<readonly [number, number]> = [
+  [1024, 576],
+  [1152, 600],
+  [1280, 600],
+  [1280, 633],
+  [1536, 640],
+  [1280, 700],
+  [1280, 701],
+  [1440, 900],
+  [1920, 1080],
+];
+
+/** Runs in the page: which chapters are pinned right now, and the facts that make a natural-flow chapter safe. */
+const layoutFacts = () => {
+  const chapter = (n: number) => document.querySelector(`section[data-chapter="${n}"]`)!;
+  const opacityOf = (el: Element) => {
+    let o = 1;
+    for (let n: Element | null = el; n; n = n.parentElement) {
+      const cs = getComputedStyle(n);
+      o *= Number(cs.opacity);
+      if (cs.visibility === "hidden" || cs.display === "none") return 0;
+    }
+    return o;
+  };
+  const sticky = (n: number) => [...chapter(n).querySelectorAll("div")].some((d) => getComputedStyle(d).position === "sticky");
+  const facts = (n: number) => ({
+    pinned: sticky(n),
+    // Headings and scenes that are not painted (opacity 0 / hidden), and scenes stacked over one another.
+    hiddenHeadings: [...chapter(n).querySelectorAll("h2, h3")].filter((h) => opacityOf(h) < 0.99).map((h) => (h.textContent ?? "").trim().slice(0, 30)),
+    layeredScenes: [...chapter(n).querySelectorAll("[data-scene]")].filter((e) => getComputedStyle(e).position === "absolute").length,
+  });
+  const r1 = chapter(1).getBoundingClientRect();
+  const r2 = chapter(2).getBoundingClientRect();
+  return {
+    chapters: { 1: facts(1), 2: facts(2), 3: facts(3), 4: facts(4) },
+    railCount: document.querySelectorAll('nav[aria-label$="progress"]').length,
+    seamOverlap: Math.round(r1.bottom - r2.top),
+    overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  };
+};
+
+for (const [width, height] of SHORT_VIEWPORTS) {
+  test.describe(`short viewports: ${width}x${height}`, () => {
+    test.use({ viewport: { width, height } });
+
+    test("chooses the layout its height allows, and a natural-flow chapter keeps every scene readable", async ({ page }) => {
+      await page.goto("/");
+      const pinned123 = pinnedAt(width, height);
+      const pinned4 = pinnedAt(width, height, 4);
+      await page.waitForFunction(
+        (expected) =>
+          [...document.querySelectorAll('section[data-chapter="2"] div')].some((d) => getComputedStyle(d).position === "sticky") === expected,
+        pinned123,
+        { timeout: 10_000 },
+      );
+      await page.waitForTimeout(150);
+      const f = await page.evaluate(layoutFacts);
+      await test.info().attach("layout-facts", { body: JSON.stringify(f, null, 2), contentType: "application/json" });
+
+      expect(
+        { 1: f.chapters[1].pinned, 2: f.chapters[2].pinned, 3: f.chapters[3].pinned, 4: f.chapters[4].pinned },
+        `${width}x${height}: which chapters are pinned`,
+      ).toEqual({ 1: pinned123, 2: pinned123, 3: pinned123, 4: pinned4 });
+      expect(f.overflow, "no horizontal overflow").toBeLessThanOrEqual(0);
+      // A progress rail belongs to a pinned stage (Chapters 2 and 3 share the 700px minimum; Chapter 4 has its own).
+      expect(f.railCount, "progress rails present only for pinned chapters").toBe((pinned123 ? 2 : 0) + (pinned4 ? 1 : 0));
+
+      for (const [n, natural] of [[1, !pinned123], [2, !pinned123], [3, !pinned123], [4, !pinned4]] as const) {
+        if (!natural) continue;
+        // Chapter 1's scenes 2 to 6 are deliberately not on the stage in natural flow: their copy is the story list below it.
+        if (n !== 1) expect(f.chapters[n].hiddenHeadings, `Chapter ${n}: no heading is blank or at opacity 0 in natural flow`).toEqual([]);
+        expect(f.chapters[n].layeredScenes, `Chapter ${n}: no scene is stacked over another`).toBe(0);
+      }
+      // Chapter 1 to 2 seam: the pinned layout overlaps them by design; natural flow must not.
+      if (!pinned123) expect(f.seamOverlap, "Chapter 1 and Chapter 2 do not overlap").toBeLessThanOrEqual(1);
+    });
+
+    test("forward Tab walk: every stop is visible, unobscured, ringed", async ({ page }) => {
+      await page.goto("/");
+      const stops = await walk(page, "forward");
+      await attachWalk(stops, `forward-walk-${width}x${height}`);
+      expect(stops.length).toBeGreaterThan(30);
+      expect(describeStops(problems(stops, { maxMs: pinnedAt(width, height) ? 600 : 2500 }))).toBe("");
+    });
+
+    test("a pinned stage never paints copy or controls under its progress rail", async ({ page }) => {
+      await page.goto("/");
+      await page.waitForTimeout(400);
+      const total = await page.evaluate(() => document.documentElement.scrollHeight);
+      const collisions: string[] = [];
+      for (let y = 0; y < total; y += Math.round(height * 0.2)) {
+        await page.evaluate((yy) => scrollTo({ top: yy, behavior: "instant" }), y);
+        await page.waitForTimeout(40);
+        collisions.push(
+          ...(await page.evaluate(() => {
+            const out: string[] = [];
+            const opacityOf = (el: Element) => {
+              let o = 1;
+              for (let n: Element | null = el; n; n = n.parentElement) {
+                const cs = getComputedStyle(n);
+                o *= Number(cs.opacity);
+                if (cs.visibility === "hidden" || cs.display === "none") return 0;
+              }
+              return o;
+            };
+            for (const rail of document.querySelectorAll('nav[aria-label$="progress"]')) {
+              const railTop = rail.querySelector("ol")!.getBoundingClientRect().top;
+              const stage = rail.parentElement!;
+              const box = stage.getBoundingClientRect();
+              if (box.top > 1 || box.bottom < innerHeight - 1) continue; // that stage is not the one on screen
+              for (const el of stage.querySelectorAll("a[href], button, h2, h3, p, li")) {
+                if (rail.contains(el) || el.closest('[aria-hidden="true"]') || opacityOf(el) < 0.99) continue;
+                const r = el.getBoundingClientRect();
+                if (r.height > 0 && r.bottom > railTop + 1) {
+                  out.push(`${rail.getAttribute("aria-label")}: "${(el.textContent ?? "").trim().slice(0, 28)}" bottom ${Math.round(r.bottom)} > rail ${Math.round(railTop)}`);
+                }
+              }
+            }
+            return out;
+          })),
+        );
+      }
+      expect([...new Set(collisions)]).toEqual([]);
+    });
+  });
+}
+
+test.describe("short viewport regression: 1280x633", () => {
+  test.use({ viewport: { width: 1280, height: 633 } });
+
+  test("every scene CTA is brought on screen unobscured when it takes keyboard focus", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForTimeout(400);
+    const seen = new Set<string>();
+    // Every link in a scene or hand-off of Chapters 2 to 4: focus it and require it to be visible and unobscured.
+    const links = page.locator("[data-scene] a[href], [data-handoff] a[href]");
+    const count = await links.count();
+    expect(count).toBeGreaterThanOrEqual(6);
+    for (let i = 0; i < count; i += 1) {
+      await links.nth(i).focus();
+      await expect
+        .poll(() => page.evaluate(probeFocus).then((s) => isVisibleStop(s)), { timeout: 2500, message: `link #${i} is visible and unobscured once focused` })
+        .toBe(true);
+      const s = (await page.evaluate(probeFocus))!;
+      expect(s.outlineWidth, `${s.label} ring`).toBeGreaterThanOrEqual(2);
+      seen.add(s.label);
+    }
+    expect([...seen]).toEqual(expect.arrayContaining(["Explore learning", "See all programs"]));
+  });
+});
+
+test.describe("short viewports: resizing across the breakpoint", () => {
+  test.use({ viewport: { width: 1280, height: 900 } });
+
+  const chapterPinned = (page: Page, n: number) =>
+    page.evaluate((c) => [...document.querySelectorAll(`section[data-chapter="${c}"] div`)].some((d) => getComputedStyle(d).position === "sticky"), n);
+
+  test("cinematic to natural flow and back, with no stuck opacity or pin", async ({ page }) => {
+    await page.goto("/");
+    await expect.poll(() => chapterPinned(page, 2)).toBe(true);
+
+    // Mid-chapter in the pinned layout, so scene layers sit at their scroll-driven opacities (most of them 0).
+    await page.evaluate(() => scrollTo({ top: document.querySelector('section[data-chapter="2"]')!.getBoundingClientRect().top + scrollY + 2500, behavior: "instant" }));
+    await page.setViewportSize({ width: 1280, height: 600 });
+    await expect.poll(() => chapterPinned(page, 2)).toBe(false);
+    await page.waitForTimeout(250);
+    // Natural flow: every scene is fully opaque with no leftover inline opacity from the pinned timeline.
+    const natural = await page.evaluate(() =>
+      [...document.querySelectorAll('section[data-chapter="2"] [data-scene]')].map((e) => ({
+        id: e.getAttribute("data-scene"),
+        opacity: getComputedStyle(e).opacity,
+        inline: (e as HTMLElement).style.opacity,
+        position: getComputedStyle(e).position,
+      })),
+    );
+    expect(natural).toHaveLength(6);
+    for (const scene of natural) expect(scene, scene.id ?? "").toMatchObject({ opacity: "1", position: "static" });
+    // Nothing from the pinned timeline is left inline below fully opaque (neutral "1" or none are both fine).
+    for (const scene of natural) expect(["", "1"], `${scene.id} inline opacity`).toContain(scene.inline);
+    expect((await page.evaluate(layoutFacts)).seamOverlap).toBeLessThanOrEqual(1);
+
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await expect.poll(() => chapterPinned(page, 2)).toBe(true);
+    // Choreography is live again: only one programme scene is on screen at a time.
+    await page.evaluate(() => scrollTo({ top: document.querySelector('section[data-chapter="2"]')!.getBoundingClientRect().top + scrollY + 2500, behavior: "instant" }));
+    await page.waitForTimeout(250);
+    const onScreen = await page.evaluate(
+      () => [...document.querySelectorAll('section[data-chapter="2"] [data-scene]')].filter((e) => Number(getComputedStyle(e).opacity) > 0.5).length,
+    );
+    expect(onScreen).toBe(1);
+  });
+
+  test("Chapter 4 follows its own, taller threshold while Chapters 2 and 3 stay pinned", async ({ page }) => {
+    await page.goto("/");
+    await expect.poll(() => chapterPinned(page, 4)).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await expect.poll(() => chapterPinned(page, 4)).toBe(false);
+    expect(await chapterPinned(page, 2)).toBe(true);
+    expect(await chapterPinned(page, 3)).toBe(true);
+  });
+});
+
+test.describe("short viewports: reduced motion is unchanged", () => {
+  test.use({ viewport: { width: 1280, height: 600 } });
+
+  test("nothing pins at a short height either, and every stop is visible", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    expect(await page.evaluate(() => [...document.querySelectorAll("[data-chapter] *")].filter((e) => getComputedStyle(e).position === "sticky").length)).toBe(0);
+    const stops = await walk(page, "forward");
+    expect(stops.length).toBeGreaterThan(30);
+    expect(describeStops(problems(stops, { maxMs: 2500 }))).toBe("");
+  });
+});
+
+test.describe("short viewports: reverse Tab", () => {
+  for (const [width, height] of [
+    [1280, 633],
+    [1024, 576],
+    [1280, 700],
+  ] as const) {
+    test.describe(`${width}x${height}`, () => {
+      test.use({ viewport: { width, height } });
+      test("reverse Tab from the footer to the top is just as visible", async ({ page }) => {
+        await page.goto("/");
+        const stops = await walk(page, "reverse");
+        await attachWalk(stops, `reverse-walk-${width}x${height}`);
+        expect(stops.length).toBeGreaterThan(30);
+        expect(describeStops(problems(stops, { maxMs: pinnedAt(width, height) ? 600 : 2500 }))).toBe("");
       });
     });
   }
@@ -416,6 +662,20 @@ test.describe("landing focus indicator", () => {
     expect(s.shadow).not.toBe("none"); // the soft halo is still there as decoration
     const around = await backgroundAround(page);
     expect(contrast([89, 37, 168], around)).toBeGreaterThanOrEqual(3);
+  });
+
+  test("the skip link's focus indicator is a solid ring that clears 3:1 against the page around it", async ({ page }) => {
+    await page.goto("/");
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
+    const s = (await page.evaluate(probeFocus))!;
+    expect(s.outlineWidth).toBeGreaterThanOrEqual(2);
+    expect(s.outline.startsWith("solid")).toBe(true);
+    const ring = parseRgb(s.outline.replace(/^solid [\d.]+px /, ""));
+    const around = await backgroundAround(page);
+    const ratio = contrast(ring, around);
+    test.info().annotations.push({ type: "contrast", description: `skip link: ring ${ring} vs ${around} = ${ratio.toFixed(2)}:1` });
+    expect(ratio, "skip link ring contrast").toBeGreaterThanOrEqual(3);
   });
 
   test("the dark quality band uses a white outline that clears 3:1", async ({ page }) => {

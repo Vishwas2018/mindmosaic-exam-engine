@@ -52,3 +52,23 @@ describe("cinematic config", () => {
     expect(pinnedTravelFactor(200)).toBe(2);
   });
 });
+
+describe("short-viewport natural-flow fallback", () => {
+  const css = readFileSync(join(process.cwd(), "src/app/globals.css"), "utf8");
+  // `max-height: 699.98px` is the complement of `min-height: 700px` (the repo's idiom for the width one is 1023.98px).
+  const complement = (px: number) => `${(px - 0.02).toFixed(2)}px`;
+
+  it("has a `short` Tailwind variant that is exactly the complement of the JS pinned height", () => {
+    const variant = /@custom-variant short \(@media \(max-height: ([\d.]+px)\)\);/.exec(css);
+    expect(variant, "globals.css declares the `short` variant").not.toBeNull();
+    expect(variant![1]).toBe(complement(cinematicMotion.pinnedMinHeight));
+  });
+
+  it("reserves CTA-bar scroll padding for the same short viewports", () => {
+    expect(css).toContain(`(max-height: ${complement(cinematicMotion.pinnedMinHeight)})`);
+  });
+
+  it("never pins Chapter 4 on a viewport where Chapter 3 is natural flow (its pull-up needs a pinned predecessor)", () => {
+    expect(cinematicMotion.chapter4.pinnedMinHeight).toBeGreaterThanOrEqual(cinematicMotion.pinnedMinHeight);
+  });
+});
