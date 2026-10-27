@@ -16,6 +16,7 @@ import {
   layerForegroundOpacity,
   layerOpacity,
 } from "../cinematic/sceneProgress";
+import { focusScrollBehavior, type ScrollToLayerOptions } from "../cinematic/useChapterScroll";
 import { useMinWidth } from "../cinematic/useMinWidth";
 import { chapterTwo } from "../content";
 import { useMotionLevel } from "../motion/useMotionLevel";
@@ -107,21 +108,25 @@ export function ChapterTwoPrograms() {
   }, [applySeam, choreographed, seam]);
 
   const scrollToLayer = useCallback(
-    (layer: number) => {
+    (layer: number, options?: ScrollToLayerOptions) => {
       const section = sectionRef.current;
       if (!section) return;
       const top = section.getBoundingClientRect().top + window.scrollY;
       const target = top + (layerAnchor(chapter2LayerStarts, layer) / travel) * section.offsetHeight;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
+      window.scrollTo({ top: target, behavior: focusScrollBehavior(options, reduced) });
     },
     [travel],
   );
 
-  // A keyboard user tabbing into a scene that is not on screen brings it on screen: plain scrolling.
+  // A keyboard user tabbing into a layer that is not on screen (a scene, or the hand-off card) brings it on
+  // screen. The jump is instant so the focused control and its focus ring are visible at once, instead of
+  // sitting at opacity 0 for the length of a smooth scroll. Progress-rail clicks still scroll smoothly.
   const onSceneFocus = useCallback(
     (layer: number) => {
-      if (choreographed && layerOpacity(q.get(), chapter2LayerStarts, layer, timing.crossfade) < 0.5) scrollToLayer(layer);
+      if (choreographed && layerOpacity(q.get(), chapter2LayerStarts, layer, timing.crossfade) < 0.5) {
+        scrollToLayer(layer, { instant: true });
+      }
     },
     [choreographed, q, scrollToLayer],
   );
@@ -227,6 +232,7 @@ export function ChapterTwoPrograms() {
 
         <motion.div
           data-handoff="chapter-3"
+          onFocusCapture={() => onSceneFocus(handoffLayer)}
           style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : undefined}
           className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t`}
         >

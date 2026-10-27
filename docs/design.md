@@ -879,6 +879,10 @@ The current visual language uses a broad, low-opacity purple focus ring, commonl
 
 Use a small offset where needed so the ring remains visible against the background.
 
+**The halo alone is not sufficient (owner-approved amendment, 2026-10-27).** A 30% purple ring over the ivory page ground measures about 1.5:1, below the 3:1 non-text contrast WCAG 2.2 requires for a focus indicator (1.4.11, 2.4.7). On the landing surfaces (`.lp-root`) every focusable control therefore also gets a **solid 2px outline** in brand purple `#5925A8` (about 9:1 on ivory), offset 2px, with the soft halo kept as decoration. On dark surfaces (marked `data-focus-surface="dark"`, e.g. the quality band) the outline is white. Other surfaces keep the previous treatment until they are brought across separately.
+
+A focused control must also be visible promptly. In the cinematic chapters, tabbing into a scene that is not on screen scrolls it into view **instantly** (never a long smooth scroll while the control sits at opacity 0), and no focused control may sit behind the sticky header or the fixed mobile CTA bar (2.4.11).
+
 ### Colour
 
 Never rely only on:

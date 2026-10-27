@@ -202,7 +202,7 @@ export function ChapterThreeHowItWorks() {
   // A keyboard user tabbing into a link in a scene that is not showing brings that scene on screen: plain scrolling.
   const onSceneFocus = useCallback(
     (layer: number) => {
-      if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) scrollToLayer(layer);
+      if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) scrollToLayer(layer, { instant: true });
     },
     [q, scrollToLayer],
   );

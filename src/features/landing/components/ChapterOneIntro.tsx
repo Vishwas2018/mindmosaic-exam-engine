@@ -225,6 +225,17 @@ export function ChapterOneIntro() {
     setBarHidden((current) => (current === hide ? current : hide));
   });
 
+  // Shift+Tab from Chapter 2 lands on this stage's controls (the CTAs and the scene rail) while Chapter 2's stage
+  // covers them: the stage is pinned, so the browser thinks they are already on screen and does not scroll. Bring
+  // the Explore hold, where every one of them is visible, back instead. Instant, so the focus ring shows at once.
+  const onStageFocus = useCallback(() => {
+    const section = sectionRef.current;
+    if (!section || !choreographed) return;
+    const holdTop =
+      section.getBoundingClientRect().top + window.scrollY + ((timing.storyScrollHeightSvh - 100) / 100) * window.innerHeight;
+    if (window.scrollY > holdTop + 1) window.scrollTo({ top: holdTop, behavior: "instant" });
+  }, [choreographed]);
+
   const scrollToScene = useCallback(
     (index: number) => {
       const section = sectionRef.current;
@@ -254,6 +265,7 @@ export function ChapterOneIntro() {
     >
       <div
         ref={stageRef}
+        onFocusCapture={onStageFocus}
         className="relative isolate flex min-h-svh flex-col overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:min-h-0 motion-reduce:lg:static motion-reduce:lg:min-h-svh"
       >
         {/* The photographic canvas. Phones/tablets: a top band that fades into the page; lg+: full bleed. */}

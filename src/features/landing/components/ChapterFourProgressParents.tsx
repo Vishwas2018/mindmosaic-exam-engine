@@ -213,7 +213,7 @@ export function ChapterFourProgressParents() {
   const onSceneFocus = useCallback(
     (layer: number) => {
       if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) {
-        scrollToLayer(layer);
+        scrollToLayer(layer, { instant: true });
       }
     },
     [q, scrollToLayer],

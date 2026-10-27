@@ -787,6 +787,38 @@
 }
 
 /*
+ * Keyboard focus on the landing surfaces (WCAG 2.2: 2.4.7 Focus Visible, 1.4.11 Non-text Contrast).
+ * The 4px brand-purple halo at 30% opacity that every control carries (`focus-visible:ring-4
+ * ring-mm-brand/30`) blends to about 1.7:1 against the ivory page ground, below the 3:1 minimum for a
+ * focus indicator, so it cannot be the only cue. Every focusable landing control therefore also gets a
+ * solid 2px outline in the brand purple (about 9:1 on ivory), offset 2px so it clears the control's own
+ * fill; the halo stays as decoration. Unlayered on purpose, like the heading rules above: it beats the
+ * `focus-visible:outline-none` utility the components carry. The skip link keeps its own treatment, and
+ * dark surfaces (the quality band) mark themselves `data-focus-surface="dark"` to get a white outline.
+ */
+.lp-root :is(a, button, summary, input, select, textarea, [tabindex]):focus-visible:not(.skip-link) {
+  outline: 2px solid var(--mm-brand);
+  outline-offset: 2px;
+}
+
+/*
+ * The fixed "Start free / Explore programs" bar (stacked layouts, and reduced motion) covers the bottom of the
+ * viewport. A focused control that sits behind it counts as "in view", so the browser would not scroll it
+ * clear (WCAG 2.4.11 Focus Not Obscured). Reserving the bar's height as scroll padding makes the browser's own
+ * focus scrolling keep controls above it. Applies only while the bar is shown, matching its own
+ * `lg:hidden motion-reduce:lg:flex` rule; once it has left (inert) the padding goes with it.
+ */
+@media (max-width: 1023.98px), (prefers-reduced-motion: reduce) {
+  html:has([data-cta-bar]:not([inert])) {
+    scroll-padding-bottom: 5.5rem;
+  }
+}
+
+.lp-root [data-focus-surface="dark"] :is(a, button, summary, input, select, textarea, [tabindex]):focus-visible:not(.skip-link) {
+  outline-color: #fff;
+}
+
+/*
  * Shared card rest/hover treatment (Part B: shadow rest/hover + -3px
  * lift) — every hover-elevated landing card (WhyLove, Practice by
  * Assessment, pricing) uses this one class instead of repeating the

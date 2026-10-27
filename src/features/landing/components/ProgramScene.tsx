@@ -94,7 +94,7 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
           <Link
             href={scene.cta.href}
             style={underlineTransition}
-            className={underlineLinkClasses({ tone: "brand", className: "text-[15px] font-semibold text-mm-brand" })}
+            className={underlineLinkClasses({ tone: "brand", standalone: true, className: "text-[15px] font-semibold text-mm-brand" })}
           >
             {scene.cta.label}
           </Link>

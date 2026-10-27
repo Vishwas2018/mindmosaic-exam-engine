@@ -9,6 +9,25 @@ import { clamp01 } from "./math";
 import { activeLayer as activeLayerAt, layerAnchor } from "./sceneProgress";
 import { useMinWidth } from "./useMinWidth";
 
+export interface ScrollToLayerOptions {
+  /**
+   * Jump without the smooth animation. Used ONLY when keyboard focus lands in a scene that is not on
+   * screen: the focused control must be visible (with its focus ring) straight away, not after a
+   * second or more of smooth scrolling in which it sits at opacity 0 (WCAG 2.4.7, 2.4.11). Progress-rail
+   * clicks keep the smooth scroll; this is not a global scroll-behaviour change.
+   */
+  instant?: boolean;
+}
+
+/**
+ * `behavior` for a scene scroll. "instant" (not "auto") on purpose: the root element's CSS
+ * `scroll-behavior: smooth` would make "auto" animate. Reduced motion always jumps.
+ */
+export function focusScrollBehavior(options: ScrollToLayerOptions | undefined, reduced: boolean): ScrollBehavior {
+  if (options?.instant) return "instant";
+  return reduced ? "auto" : "smooth";
+}
+
 /**
  * The scroll plumbing a pinned chapter needs, in one place: whether the stage
  * is choreographed (pinned width AND motion allowed), the chapter progress
@@ -29,7 +48,7 @@ export function useChapterScroll({
   choreographed: boolean;
   q: MotionValue<number>;
   active: number;
-  scrollToLayer: (layer: number) => void;
+  scrollToLayer: (layer: number, options?: ScrollToLayerOptions) => void;
 } {
   const animated = useMotionLevel() !== "off";
   const pinned = useMinWidth(cinematicMotion.pinnedMinWidth);
@@ -50,13 +69,13 @@ export function useChapterScroll({
   useMotionValueEvent(q, "change", (value) => setActive(activeLayerAt(value, starts)));
 
   const scrollToLayer = useCallback(
-    (layer: number) => {
+    (layer: number, options?: ScrollToLayerOptions) => {
       const section = sectionRef.current;
       if (!section) return;
       const top = section.getBoundingClientRect().top + window.scrollY;
       const target = top + (layerAnchor(starts, layer) / travel) * section.offsetHeight;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
+      window.scrollTo({ top: target, behavior: focusScrollBehavior(options, reduced) });
     },
     [starts, travel],
   );
