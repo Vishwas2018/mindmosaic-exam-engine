@@ -878,17 +878,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "easy",
     unit: "stickers",
     prompt:
-      "Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give away?",
+      "Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give to Tia?",
     privateAnswerKey: 7,
     workedExplanation:
-      "If they finish with the same number, the amount transferred makes Ari and Tia's end totals match. The total is 50, so each ends with 25. Ari gives away 32 - 25 = 7 stickers.",
+      "If they finish with the same number, the amount transferred makes Ari and Tia's end totals match. The total is 50, so each ends with 25. Ari gives 32 - 25 = 7 stickers to Tia.",
     draftProvenance:
       "Draft pilot item generated from a genuine transfer model: one amount moves from before to after while total stays constant.",
     visual: transferVisual({
       id: "pilot-y5-transfer-01",
-      title: "Stickers given away",
+      title: "Stickers transferred",
       altText:
-        "Ari and Tia each have a before and after bar. Ari gives some stickers away so they finish with equal amounts.",
+        "Ari and Tia each have a before and after bar. Ari gives some stickers to Tia so they finish with equal amounts.",
       beforeA: 32,
       beforeB: 18,
       gift: 7,
@@ -945,17 +945,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "medium",
     unit: "tokens",
     prompt:
-      "Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give away?",
+      "Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give to Josh?",
     privateAnswerKey: 11,
     workedExplanation:
-      "The total is 70 tokens, so each has 35 after trading. Zoe gives away 46 - 35 = 11 tokens.",
+      "The total is 70 tokens, so each has 35 after trading. Zoe gives 46 - 35 = 11 tokens to Josh.",
     draftProvenance:
       "Draft pilot item generated from a transfer model where both before and after totals remain valid and whole.",
     visual: transferVisual({
       id: "pilot-y5-transfer-02",
-      title: "Tokens shared",
+      title: "Tokens transferred",
       altText:
-        "Zoe and Josh each have a before and after bar. Zoe gives some tokens away until both totals match.",
+        "Zoe and Josh each have a before and after bar. Zoe gives some tokens to Josh until both totals match.",
       beforeA: 46,
       beforeB: 24,
       gift: 11,
@@ -1012,17 +1012,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "hard",
     unit: "marbles",
     prompt:
-      "Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give away?",
+      "Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give to Jina?",
     privateAnswerKey: 11,
     workedExplanation:
-      "The total is 80 marbles, so each ends with 40. Luca gives away 51 - 40 = 11 marbles.",
+      "The total is 80 marbles, so each ends with 40. Luca gives 51 - 40 = 11 marbles to Jina.",
     draftProvenance:
       "Draft pilot item generated from a larger transfer question to expand the Year 5 transfer family.",
     visual: transferVisual({
       id: "pilot-y5-transfer-03",
-      title: "Marbles shared",
+      title: "Marbles transferred",
       altText:
-        "Luca and Jina each have a before and after bar. Luca transfers marbles so both end equal.",
+        "Luca and Jina each have a before and after bar. Luca gives some marbles to Jina so both end equal.",
       beforeA: 51,
       beforeB: 29,
       gift: 11,
@@ -1035,17 +1035,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "medium",
     unit: "cups",
     prompt:
-      "Two crates hold bottles containing the same amount of juice in each bottle. One crate has 3 bottles and the other has 7 bottles. Together there are 90 cups of juice. How many cups of juice are in the larger crate?",
+      "Two crates hold equal measures of juice, with the same amount in each measure. One crate holds 3 measures and the other holds 7 measures. Together there are 90 cups of juice. How many cups of juice are in the larger crate?",
     privateAnswerKey: 63,
     workedExplanation:
-      "Ten equal bottles hold 90 cups, so one bottle holds 9 cups. The larger crate has 7 × 9 = 63 cups.",
+      "Ten equal measures hold 90 cups, so one measure holds 9 cups. The larger crate has 7 × 9 = 63 cups.",
     draftProvenance:
       "Draft pilot item generated to keep the equal-units set varied and mathematically consistent.",
     visual: equalUnitsVisual({
       id: "pilot-y5-equal-04",
-      title: "Juice bottles",
+      title: "Juice measures",
       altText:
-        "Two crates contain 3 and 7 equal bottles of juice. Together they hold 90 cups.",
+        "Two crates contain 3 and 7 equal measures of juice. Together they hold 90 cups.",
       bagsA: 3,
       bagsB: 7,
       total: 90,
@@ -1080,17 +1080,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "hard",
     unit: "buttons",
     prompt:
-      "Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give away?",
+      "Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give to Priya?",
     privateAnswerKey: 16,
     workedExplanation:
-      "The total is 84, so each ends with 42. Eden gives away 58 - 42 = 16 buttons.",
+      "The total is 84, so each ends with 42. Eden gives 58 - 42 = 16 buttons to Priya.",
     draftProvenance:
       "Draft pilot item generated from an authentic transfer story with a clean same-end-total condition.",
     visual: transferVisual({
       id: "pilot-y5-transfer-04",
       title: "Buttons transferred",
       altText:
-        "Eden and Priya both have before and after bars. Eden transfers buttons so they end equal.",
+        "Eden and Priya both have before and after bars. Eden gives some buttons to Priya so they end equal.",
       beforeA: 58,
       beforeB: 26,
       gift: 16,
@@ -1146,17 +1146,17 @@ export const barModelPilotFixtures: readonly BarModelPilotFixture[] = [
     difficulty: "hard",
     unit: "cards",
     prompt:
-      "Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give away?",
+      "Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give to Omar?",
     privateAnswerKey: 18,
     workedExplanation:
-      "The total is 92, so each ends with 46. Mina gives away 64 - 46 = 18 cards.",
+      "The total is 92, so each ends with 46. Mina gives 64 - 46 = 18 cards to Omar.",
     draftProvenance:
       "Draft pilot item generated as the concluding genuine-transfer example in the Year 5 pilot set.",
     visual: transferVisual({
       id: "pilot-y5-transfer-05",
       title: "Cards transferred",
       altText:
-        "Mina and Omar each have before and after bars. Mina gives away cards so they finish equal.",
+        "Mina and Omar each have before and after bars. Mina gives some cards to Omar so they finish equal.",
       beforeA: 64,
       beforeB: 28,
       gift: 18,

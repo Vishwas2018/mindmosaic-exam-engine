@@ -1,5 +1,5 @@
 BAR-MODEL PILOT (30 DRAFT ITEMS)
-Fixture source SHA-256: 60613c0bcac049dbf293d95fcc62878ad64902a3da20533855527ef18c738edf
+Fixture source SHA-256: bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e
 Not published. No human approval or independent human review is asserted.
 
 KEYED AUTOMATED CROSS-CHECK: arithmetic from prompt givens versus stored key and model solver.
@@ -248,12 +248,12 @@ Year: 5
 Skill: transfer
 Difficulty: easy
 Unit: stickers
-Prompt: Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give away?
+Prompt: Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give to Tia?
 Independent calculation: (32 - 18) / 2 = 7
 Stored key: 7
 Model solver: 7
 Comparison: PASS
-Explanation: If they finish with the same number, the amount transferred makes Ari and Tia's end totals match. The total is 50, so each ends with 25. Ari gives away 32 - 25 = 7 stickers.
+Explanation: If they finish with the same number, the amount transferred makes Ari and Tia's end totals match. The total is 50, so each ends with 25. Ari gives 32 - 25 = 7 stickers to Tia.
 
 ---
 
@@ -290,12 +290,12 @@ Year: 5
 Skill: transfer
 Difficulty: medium
 Unit: tokens
-Prompt: Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give away?
+Prompt: Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give to Josh?
 Independent calculation: (46 - 24) / 2 = 11
 Stored key: 11
 Model solver: 11
 Comparison: PASS
-Explanation: The total is 70 tokens, so each has 35 after trading. Zoe gives away 46 - 35 = 11 tokens.
+Explanation: The total is 70 tokens, so each has 35 after trading. Zoe gives 46 - 35 = 11 tokens to Josh.
 
 ---
 
@@ -332,12 +332,12 @@ Year: 5
 Skill: transfer
 Difficulty: hard
 Unit: marbles
-Prompt: Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give away?
+Prompt: Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give to Jina?
 Independent calculation: (51 - 29) / 2 = 11
 Stored key: 11
 Model solver: 11
 Comparison: PASS
-Explanation: The total is 80 marbles, so each ends with 40. Luca gives away 51 - 40 = 11 marbles.
+Explanation: The total is 80 marbles, so each ends with 40. Luca gives 51 - 40 = 11 marbles to Jina.
 
 ---
 
@@ -346,12 +346,12 @@ Year: 5
 Skill: equal-units
 Difficulty: medium
 Unit: cups
-Prompt: Two crates hold bottles containing the same amount of juice in each bottle. One crate has 3 bottles and the other has 7 bottles. Together there are 90 cups of juice. How many cups of juice are in the larger crate?
+Prompt: Two crates hold equal measures of juice, with the same amount in each measure. One crate holds 3 measures and the other holds 7 measures. Together there are 90 cups of juice. How many cups of juice are in the larger crate?
 Independent calculation: 90 / (3 + 7) * 7 = 63
 Stored key: 63
 Model solver: 63
 Comparison: PASS
-Explanation: Ten equal bottles hold 90 cups, so one bottle holds 9 cups. The larger crate has 7 × 9 = 63 cups.
+Explanation: Ten equal measures hold 90 cups, so one measure holds 9 cups. The larger crate has 7 × 9 = 63 cups.
 
 ---
 
@@ -374,12 +374,12 @@ Year: 5
 Skill: transfer
 Difficulty: hard
 Unit: buttons
-Prompt: Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give away?
+Prompt: Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give to Priya?
 Independent calculation: (58 - 26) / 2 = 16
 Stored key: 16
 Model solver: 16
 Comparison: PASS
-Explanation: The total is 84, so each ends with 42. Eden gives away 58 - 42 = 16 buttons.
+Explanation: The total is 84, so each ends with 42. Eden gives 58 - 42 = 16 buttons to Priya.
 
 ---
 
@@ -416,11 +416,11 @@ Year: 5
 Skill: transfer
 Difficulty: hard
 Unit: cards
-Prompt: Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give away?
+Prompt: Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give to Omar?
 Independent calculation: (64 - 28) / 2 = 18
 Stored key: 18
 Model solver: 18
 Comparison: PASS
-Explanation: The total is 92, so each ends with 46. Mina gives away 64 - 46 = 18 cards.
+Explanation: The total is 92, so each ends with 46. Mina gives 64 - 46 = 18 cards to Omar.
 
 ---

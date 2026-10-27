@@ -1,5 +1,5 @@
 BAR-MODEL PILOT (30 DRAFT ITEMS)
-Fixture source SHA-256: 60613c0bcac049dbf293d95fcc62878ad64902a3da20533855527ef18c738edf
+Fixture source SHA-256: bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e
 Not published. No human approval or independent human review is asserted.
 
 BLIND PACKET: givens-only diagrams and descriptions; no keys or explanations.
@@ -254,7 +254,7 @@ Year: 5
 Skill: transfer
 Difficulty: easy
 Unit: stickers
-Prompt: Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give away?
+Prompt: Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give to Tia?
 Givens-only diagram description:
 Schematic bar model, not drawn to scale.
 Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
@@ -302,7 +302,7 @@ Year: 5
 Skill: transfer
 Difficulty: medium
 Unit: tokens
-Prompt: Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give away?
+Prompt: Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give to Josh?
 Givens-only diagram description:
 Schematic bar model, not drawn to scale.
 Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
@@ -350,7 +350,7 @@ Year: 5
 Skill: transfer
 Difficulty: hard
 Unit: marbles
-Prompt: Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give away?
+Prompt: Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give to Jina?
 Givens-only diagram description:
 Schematic bar model, not drawn to scale.
 Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
@@ -368,7 +368,7 @@ Year: 5
 Skill: equal-units
 Difficulty: medium
 Unit: cups
-Prompt: Two crates hold bottles containing the same amount of juice in each bottle. One crate has 3 bottles and the other has 7 bottles. Together there are 90 cups of juice. How many cups of juice are in the larger crate?
+Prompt: Two crates hold equal measures of juice, with the same amount in each measure. One crate holds 3 measures and the other holds 7 measures. Together there are 90 cups of juice. How many cups of juice are in the larger crate?
 Givens-only diagram description:
 Schematic bar model, not drawn to scale.
 Each group is the same size, and that size is not given.
@@ -398,7 +398,7 @@ Year: 5
 Skill: transfer
 Difficulty: hard
 Unit: buttons
-Prompt: Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give away?
+Prompt: Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give to Priya?
 Givens-only diagram description:
 Schematic bar model, not drawn to scale.
 Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
@@ -446,7 +446,7 @@ Year: 5
 Skill: transfer
 Difficulty: hard
 Unit: cards
-Prompt: Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give away?
+Prompt: Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give to Omar?
 Givens-only diagram description:
 Schematic bar model, not drawn to scale.
 Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
