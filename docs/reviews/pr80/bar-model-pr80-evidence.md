@@ -138,7 +138,7 @@ npm run dev -- --port 3180
 
 Open `http://localhost:3180/dev/bar-model`, choose a year, submit/reveal, finish and review. The session resets on reload. A production-build QA server or Vercel Preview requires `BAR_MODEL_PREVIEW_ENABLED=1` in the QA/Preview environment; real production refuses the route even with that flag. No remote environment was changed. A live production HTTP check also returned 404; it concerns the deployed revision, not a deployment of this branch.
 
-Still required: independent human blind review, reconciliation of findings, genuine human sign-off/`approvedBy`, and the governed publication gates before any publication decision. Keep PR #80 draft; do not merge or publish content. Complete final-head CI and any local Windows intermittency should be assessed separately from human content approval.
+Release-approval status (owner decision): this 30-item pilot is SAMPLE content and does **not** require independent human blind review or a populated `approvedBy`; those requirements are preserved for production question banks and governed content (see "Release-approval status" below). Keep PR #80 draft; do not merge or publish content without explicit owner authorisation. `BAR_MODEL_PREVIEW_ENABLED` remains unset on real Vercel deployments; complete final-head CI is already green (commit `605ae990`, runs 40437041869 and 40437037960).
 
 ## Final CI verification at head `10cc1d93` — 27 October 2026
 
@@ -165,11 +165,16 @@ Still required: independent human blind review, reconciliation of findings, genu
 - `docs/reviews/pr80/bar-model-pr80-keyed-report.txt` — RESTRICTED review artifact: independent calculation versus stored key versus model solver (30/30 PASS) plus worked explanations. Not part of the blind packet; opened only after the blind pass.
 - `docs/reviews/pr80/bar-model-pr80-human-review-tracking.md` — NEW: reviewer name/date, 30-row question-level findings table (independent answer, findings, resolution status, final decision), and sign-off block. Reviewer fields are intentionally blank — no human review has been performed.
 
-## Remaining requirements
+## Release-approval status (owner decision — 27 October 2026)
 
-- Genuine independent HUMAN blind review (not AI) using the packets above, with findings recorded in the tracking document; the owner then populates `approvedBy`. `approvedBy` is deliberately NOT populated here, and no human review or approval is claimed.
-- Owner confirms green complete authenticated CI on GitHub Actions (build + e2e + e2e:auth + rls all SUCCESS on commit `605ae990`; links in CI results table above).
-- PR #80 stays draft; no merge, deployment, or content publication; `BAR_MODEL_PREVIEW_ENABLED` remains unset on real Vercel deployments.
+The 30 items in this pilot are **SAMPLE / PILOT content only**. Per owner direction, they do **not** require independent human blind review and `approvedBy` must **not** be populated for them. The blind packet, keyed report, and tracking document remain in the repository as evidence of independent automated cross-checking (30/30 answers match stored keys and model-solver results; diagram accuracy reviewed), but no human sign-off is a release blocker for this pilot.
+
+Approval requirements are **preserved unchanged** for production question banks and governed content: those still require a genuine independent human review, a populated `approvedBy`, and the governed publication gates before any publication decision.
+
+## Remaining requirements (technical)
+
+- CI is green: complete authenticated CI on GitHub Actions (build + e2e + e2e:auth + rls all SUCCESS on commit `605ae990`; workflow run 40437041869, second run 40437037960, also all SUCCESS).
+- PR #80 stays **draft** until the owner explicitly authorises merge into `dev`. No merge, deployment, or content publication is performed here. `BAR_MODEL_PREVIEW_ENABLED` remains unset on real Vercel deployments; real production returns 404 for the route (fail-closed).
 
 ## Preserved records
 

@@ -5,6 +5,10 @@
 **Fixture source:** `src/content/visual-fixtures/bar-model/index.ts`
 **Fixture source SHA-256:** `bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e` (verified identical in the blind packet, text packet and keyed report artifacts)
 
+## Owner decision (sample / pilot content — 27 October 2026)
+
+Per owner direction, the 30 items in this pilot are **SAMPLE / PILOT content only**. They do **not** require independent human blind review and `approvedBy` must **not** be populated for them. The reviewer name, 30-row findings table, and sign-off block below are therefore **not required** for this pilot and are intentionally left blank. The tracking structure is preserved for production question banks and governed content, which still require a genuine independent human review, a populated `approvedBy`, and the governed publication gates before any publication decision.
+
 ## Reviewer (to be completed by the human reviewer — do not pre-fill)
 
 Reviewer name: ____________________
@@ -73,5 +77,5 @@ Overall decision: ____________________
 ## Notes
 
 - This tracking document deliberately contains no answer keys. Keys are in `bar-model-pr80-keyed-report.txt` (restricted review artifact).
-- `approvedBy` is not populated here or in the PR evidence; the owner populates it only after genuine independent human sign-off is recorded.
-- PR #80 remains draft. No merge, deployment, content publication, or human approval has been performed.
+- `approvedBy` is not populated for this pilot (sample content — human review not required per owner decision). For production question banks and governed content, the owner populates `approvedBy` only after genuine independent human sign-off is recorded.
+- PR #80 remains draft. No merge, deployment, content publication, or human approval has been performed for this pilot.

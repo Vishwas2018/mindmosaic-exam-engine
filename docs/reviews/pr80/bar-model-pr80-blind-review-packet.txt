@@ -2,6 +2,8 @@ BAR-MODEL PILOT (30 DRAFT ITEMS)
 Fixture source SHA-256: bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e
 Not published. No human approval or independent human review is asserted.
 
+Owner decision: this 30-item pilot is SAMPLE content and does not require independent human approval or a populated approvedBy. Production question banks and governed content retain the human-approval requirement.
+
 BLIND PACKET: givens-only diagrams and descriptions; no keys or explanations.
 
 ID: pilot-y3-part-whole-01

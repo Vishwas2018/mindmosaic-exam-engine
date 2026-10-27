@@ -118,20 +118,26 @@ No difference between my independent solving and the keyed report: **0 discrepan
 - Bar-model representations are appropriate to each skill type; diagrams are schematic/not-to-scale; no answer leakage into the blind packet or production client assets.
 - Production gating is fail-closed and correctly configured.
 
-**Why not PASS / not yet publishable:**
-1. **No genuine independent human blind review has occurred.** This review is automated AI reasoning. The evidence doc correctly states human review is still required.
-2. **No human sign-off / `approvedBy`.** Must remain blank until a named, independent human reviewer of record approves. I have deliberately not populated it.
-3. **CI is not green locally.** Complete authenticated CI must pass before merge; local runs showed intermittency.
-4. **PR #80 is draft** and must remain so until owner authorisation.
+### Release-readiness conclusion (owner decision — 27 October 2026)
 
-### Conditions to reach PASS (owner actions)
-1. Commission and complete a genuine independent human blind review (human reviewer of record, not AI), with documented sign-off / `approvedBy`.
-2. Achieve a fully green complete authenticated CI run (unit + e2e + rls + build + validation gates).
-3. Address optional editorial corrections (see §6) — recommended before pilot release but not blocking mathematical soundness.
-4. Keep `BAR_MODEL_PREVIEW_ENABLED` unset on any real Vercel deployment; keep PR #80 draft; do not merge/publish/deploy until owner authorises.
+The 30 items in this pilot are **SAMPLE / PILOT content only**. Per owner direction, they do **not** require independent human blind review and `approvedBy` must **not** be populated for them. All automated gates are green:
+
+- 30/30 independent answers match stored keys and model-solver results (0 discrepancies).
+- All 55 bar_model fixtures behave as intended (30 pilot; 25 schema/structural/invalid fixtures behave as intended).
+- All production questions and showcase fixtures are valid; ledger consistency PASS.
+- Complete authenticated CI is green on GitHub Actions (build + e2e + e2e:auth + rls all SUCCESS on commit `605ae990`; workflow runs 40437041869 and 40437037960).
+
+The pilot is **mathematically sound, structurally sound, and technically ready for merge into `dev`**. PR #80 remains **draft** until the owner explicitly authorises merge. No merge, deployment, or content publication is performed here.
+
+Approval requirements are **preserved unchanged** for production question banks and governed content: those still require a genuine independent human review, a populated `approvedBy`, and the governed publication gates before any publication decision.
+
+### Conditions before merge (owner actions)
+1. Confirm a fully green complete authenticated CI run — already demonstrated green on commit `605ae990` (workflow run 40437041869; second run 40437037960).
+2. Keep `BAR_MODEL_PREVIEW_ENABLED` unset on any real Vercel deployment; real production returns 404 for the route (fail-closed).
+3. Keep PR #80 draft until the owner explicitly authorises merge into `dev`. Do not merge, deploy, or publish without explicit owner authorisation.
 
 ### Explicit recommendation to owner
-> Treat the 30-item bar-model pilot as **mathematically sound and structurally ready for human review**, but **do not approve or publish** until (a) a genuine independent human reviewer signs off (`approvedBy`), and (b) complete authenticated CI is green. This AI review is not a substitute for human approval.
+> Treat the 30-item bar-model pilot as **mathematically and structurally sound and technically ready for merge into `dev`**. Independent human blind review and `approvedBy` are **not required** for this pilot (sample content). Approval requirements remain in force for production question banks and governed content. Authorise merge only when ready; do not deploy or publish without explicit authorisation.
 
 ## 6. Recommended corrections (editorial / minor, optional pre-pilot)
 

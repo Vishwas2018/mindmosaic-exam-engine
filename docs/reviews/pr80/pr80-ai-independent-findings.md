@@ -90,7 +90,7 @@ Read each item's prompt + givens-only diagram description only. Solved arithmeti
 - Equal-units Y5-4 mixes "bottles" and "cups of juice."
 - Repeated answers across items (e.g. 11 appears for transfer-02 and transfer-03) — not a defect for numeric entry, but low answer-pattern variety.
 
-**No BLOCKER-level issues identified in the blind packet.** All items are solvable, correct, and clearly represented. The pilot appears arithmetically and structurally sound pending human review and keyed-report comparison.
+**No BLOCKER-level issues identified in the blind packet.** All items are solvable, correct, and clearly represented. The pilot is arithmetically and structurally sound; keyed-report comparison is complete (30/30 PASS). Per owner decision, this 30-item pilot is SAMPLE content and does not require independent human blind review or a populated `approvedBy`.
 
-**Reviewer note:** This is an automated AI review. It does NOT constitute independent human blind review, nor human approval. `approvedBy` must not be populated.
+**Reviewer note:** This is an automated AI review. It does NOT constitute independent human blind review, nor human approval. `approvedBy` must not be populated for this pilot (sample content — human review not required per owner decision). Approval requirements remain in force for production question banks and governed content.
 
