@@ -1,6 +1,6 @@
 # Bar-model pilot — human blind review tracking
 
-**PR #80 (draft, targeting `dev`):** `feat/bar-modelling-30-question-pilot` at commit `10cc1d93b4726c096c2ca673c54602ef704a71f3`
+**PR #80 (draft, targeting `dev`):** `feat/bar-modelling-30-question-pilot` at commit `605ae990140454474c8ab4de7b50f907fb1b1b0d`
 **Pilot:** 30 original Singapore Maths bar-model draft items (Year 3 × 15, Year 5 × 15)
 **Fixture source:** `src/content/visual-fixtures/bar-model/index.ts`
 **Fixture source SHA-256:** `bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e` (verified identical in the blind packet, text packet and keyed report artifacts)

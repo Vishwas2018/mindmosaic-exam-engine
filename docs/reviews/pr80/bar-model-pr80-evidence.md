@@ -152,12 +152,12 @@ Still required: independent human blind review, reconciliation of findings, genu
 | Answer-key cross-check | `npx tsx scripts/review-bar-model-pilot.mts` | PASS — 30 independent prompt calculations match stored keys and model-solver results; blind packet + keyed report regenerated |
 | Ledger | `npm run questions:validate-ledger` | PASS — every in-scope ledger row matches a file and vice versa |
 | RLS | `npm run test:rls` (local Supabase `127.0.0.1:56322`, supabase CLI 2.108.0, Docker) | PASS — 37 test files, 585 tests passed, 2 expected failures |
-| Build | `npm run build` | Not green in this sandbox: first attempt failed on Next.js package resolution inside the nested worktree (resolved by `npm ci`; environment artifact, no code defect); the re-run reached static-page prerendering without errors, but turbopack is extremely slow on this Windows host and was stopped. Owner to complete a green build on GitHub Actions. |
-| E2E guest | `npm run test:e2e` | Not run locally — requires a running dev server plus local Supabase; `.env.e2e.local` is gitignored and absent. Blocked for the owner with local infrastructure. |
-| E2E auth | `npm run test:e2e:auth` | Not run locally — same requirements plus seeded auth fixtures. Blocked for the owner. |
-| GitHub Actions | — | Not inspectable anonymously: `api.github.com` returned HTTP 403 (rate limited). PR head `10cc1d93` is in sync with `origin` (`git branch -v`). Owner to confirm green `core`/`rls`/`e2e`/`e2e-auth` checks with credentials before merge. |
+| Build | `npm run build` | GREEN on GitHub Actions (`core` job includes `npm run build`). Run: https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/40437041869/job/121968093655 |
+| E2E guest | `npm run test:e2e` | GREEN on GitHub Actions (`e2e` job). Run: https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/40437041869/job/121968093750 |
+| E2E auth | `npm run test:e2e:auth` | GREEN on GitHub Actions (`e2e-auth` job). Run: https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/40437041869/job/121968093599 |
+| GitHub Actions | `workflow: CI` (push + pull_request) | ALL CHECKS GREEN on commit `605ae990`. Workflow run 40437041869: core=SUCCESS, e2e=SUCCESS, e2e-auth=SUCCESS, rls=SUCCESS, scholarship-drafts=SUCCESS. Vercel Preview Comments=SUCCESS (https://vercel.com/vishwas2018s-projects/mindmosaic-exam-engine/99hDD97ndXwBFMLroUAfzj1iTjky). Second workflow run 40437037960 also all SUCCESS. No missing checks; no branch filters block `feat/bar-modelling-30-question-pilot`. |
 
-## Reviewer packets (regenerated at `10cc1d93`; fixture source SHA-256 `bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e`, verified identical in all three artifacts and against the committed fixtures file)
+## Reviewer packets (regenerated at `605ae990`; fixture source SHA-256 `bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e`, verified identical in all three artifacts and against the committed fixtures file)
 
 - `docs/reviews/pr80/bar-model-pr80-blind-review-packet.html` — all 30 items: ID, year, skill, difficulty, unit, prompt, unsolved bar diagram, givens-only description, per-item review fields (independently calculated answer, confidence 1–5, ambiguity, difficulty appropriateness, diagram accuracy, suggested corrections) plus reviewer name/date and instructions. Verified: 30 diagram sections; no answer keys or explanations anywhere in the blind packet.
 - `docs/reviews/pr80/bar-model-pr80-blind-review-packet.pdf` — A4 print render of the HTML packet (generated with Playwright).
@@ -168,7 +168,7 @@ Still required: independent human blind review, reconciliation of findings, genu
 ## Remaining requirements
 
 - Genuine independent HUMAN blind review (not AI) using the packets above, with findings recorded in the tracking document; the owner then populates `approvedBy`. `approvedBy` is deliberately NOT populated here, and no human review or approval is claimed.
-- Owner completes green complete authenticated CI (build + e2e + e2e:auth + rls — RLS is green locally) and confirms GitHub Actions results with credentials.
+- Owner confirms green complete authenticated CI on GitHub Actions (build + e2e + e2e:auth + rls all SUCCESS on commit `605ae990`; links in CI results table above).
 - PR #80 stays draft; no merge, deployment, or content publication; `BAR_MODEL_PREVIEW_ENABLED` remains unset on real Vercel deployments.
 
 ## Preserved records
