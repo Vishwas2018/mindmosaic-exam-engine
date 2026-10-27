@@ -27,6 +27,22 @@ PR #80 remains draft, targeting `dev`. No merge, content publication, real human
 
 Year 3: 15 (5 easy / 6 medium / 4 hard). Year 5: 15 (4 easy / 5 medium / 6 hard). The owner confirmed preservation of this matrix on 26 October; this is not content-publication approval.
 
+## Year 3 times-as-many — Australian Curriculum v9 alignment examination
+
+Examined the five Year 3 times-as-many items against AC v9 Mathematics Year 3 number (multiplicative comparison as equal groups; recall of multiplication facts for 2, 3, 5, 10 and related division facts) and the pilot's intended difficulty progression. The independent solver confirmed all five match their stored keys (0 discrepancies).
+
+| Item | Prompt structure | Calculation | Facts involved | AC v9 Y3 priority (×2,3,5,10) | Label | Assessment |
+|---|---|---|---|---|---|---|
+| pilot-y3-times-as-many-01 | 3 × smaller, total 24 | 24 ÷ 4 = 6; larger = 3 × 6 = 18 | 3 × 6 = 18; 6 × 4 = 24 | ✔ priority ×3 | medium | Aligned |
+| pilot-y3-times-as-many-02 | 4 × smaller, total 35 | 35 ÷ 5 = 7; larger = 4 × 7 = 28 | 4 × 7 = 28; 7 × 5 = 35 | ⚠ ×4 beyond priority | medium | Stretch; equal-group bar scaffolding |
+| pilot-y3-times-as-many-03 | 5 × smaller, total 54 | 54 ÷ 6 = 9; larger = 5 × 9 = 45 | 5 × 9 = 45; 6 × 9 = 54 | ⚠ 6 × 9 beyond priority | hard | Stretch; flagged hard |
+| pilot-y3-times-as-many-04 | 2 × smaller, total 30 | 30 ÷ 3 = 10; larger = 2 × 10 = 20 | 2 × 10 = 20 | ✔ priority ×2 | medium | Aligned |
+| pilot-y3-times-as-many-05 | 3 × smaller, total 48 | 48 ÷ 4 = 12; larger = 3 × 12 = 36 | 3 × 12 = 36; 4 × 12 = 48 | ⚠ ×12 / ÷4 beyond priority | hard | Stretch; flagged hard |
+
+Finding: items 01 and 04 use only AC v9 Year-3 priority facts (×2, ×3) and are fully aligned. Items 02, 03 and 05 draw on facts beyond the strict Year-3 priority set (×4, 6 × 9, ×12/÷4). This is **not a substantive misalignment requiring a change**: each is multiplicative comparison represented with equal-group bars (structure visible, not reliant on rote fact recall), each yields a unique whole-number answer, and each is difficulty-labelled medium/hard consistent with the pilot progression (Year 3 times-as-many: 0 easy / 3 medium / 2 hard).
+
+Decision: no question, answer, skill or diagram changes. Items 02, 03 and 05 are retained as stretch items; recommend a teacher-guidance note that they draw on facts beyond the Year-3 priority set, and monitor student performance if piloted.
+
 The earlier equal-group wording corrections and answer-unit labels are preserved. Stored answers, manifests, approval records, taxonomy and student banks were not changed by the readiness/bundle fixes.
 
 ## Independent arithmetic and review artifacts
@@ -96,6 +112,21 @@ No fully green local Windows aggregate run is fabricated:
 - Docker/Supabase infrastructure is restored: local harness API `127.0.0.1:56321`, DB `127.0.0.1:56322`, scoring roles bootstrapped, local-only E2E configuration matched the documented demo stack, and fixture seeding succeeded. `.env.e2e.local` remains ignored; `.env.local` and hosted account data were untouched.
 
 Initial command-level details remain in the [earlier committed evidence](https://github.com/Vishwas2018/mindmosaic-exam-engine/blob/28902a54558acbd378f9ffa3daed431771104fcf/docs/reviews/pr80/bar-model-pr80-evidence.md). Logs are local under `C:/tmp/pr80-checks` and `C:/tmp/pr80-followup`; build output, screenshots, environment files and test output are not committed.
+
+## CI reconciliation — final head c02fbf9d vs reported local Windows failures
+
+This session re-ran the PR #80 bar-model content gates at final head `c02fbf9d` (branch `feat/bar-modelling-30-question-pilot`, in sync with origin):
+
+- `npm run visuals:validate-bar-models`: all 55 bar_model fixtures behave as intended (30 pilot; y5-equal-units-04 key 63 and all 5 transfer items valid).
+- `npx tsx scripts/review-bar-model-pilot.mts`: 30 independent prompt calculations match stored keys and model-solver results; blind packet + keyed report current.
+- `npx vitest run bar-model`: 132 tests across 7 files, 0 failed.
+- `npx tsc --noEmit`: clean.
+- `npx eslint src/content/visual-fixtures/bar-model/index.ts`: 0 errors (1 pre-existing unused-vars warning, unrelated to these string-only edits).
+- `npx tsx scripts/check-question-correctness.mts --include-published`: 1601 questions, 0 failures.
+- `npx tsx scripts/validate-question-bank.mts`: all production questions valid.
+- `npx tsx scripts/validate-ledger-consistency.mts`: PASS.
+
+Reconciliation: the bar-model PR #80 content gates at final head are green locally. This is **not** a fully green complete authenticated CI. The following were **not** run in this session because they require infrastructure/credentials not available here (Vercel authentication, a running dev server, and a local Supabase/database): `npm run test:e2e`, `npm run test:e2e:auth`, `npm run test:rls` and `npm run build`. The historical local Windows failures recorded earlier (aggregate unit-run Stripe/host-timing issues, guest-run confirmation/setup failures, authenticated-run dashboard overflow) are not described here as resolved. Complete authenticated CI remains the required gate before merge and must be demonstrated by the owner with proper credentials.
 
 ## Preview and remaining requirements
 
