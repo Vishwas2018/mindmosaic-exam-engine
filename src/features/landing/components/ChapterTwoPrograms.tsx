@@ -132,6 +132,46 @@ export function ChapterTwoPrograms() {
   );
 
   const handoffLayer = chapter2LayerStarts.length - 1;
+
+  // Focus that landed here BEFORE hydration (a slow connection) never fired `onSceneFocus`: the browser scrolled to
+  // the still-natural-flow control on its own, then the pinned layout faded that scene to opacity 0 with focus left
+  // on it. Once, when the stage first becomes choreographed, recover exactly as a focus event would. Nothing runs if
+  // focus is elsewhere or the layer is already on screen, and it never moves focus.
+  useEffect(() => {
+    const section = sectionRef.current;
+    const focused = document.activeElement;
+    if (!choreographed || !section || !focused || !section.contains(focused)) return;
+    const sceneIndex = chapter2Scenes.findIndex((scene) =>
+      section.querySelector(`[data-scene="${scene.id}"]`)?.contains(focused),
+    );
+    const layer = sceneIndex >= 0 ? sceneIndex + SCENE_LAYER_OFFSET : section.querySelector('[data-handoff="chapter-3"]')?.contains(focused) ? handoffLayer : -1;
+    // Fully presented, not merely "above half": the browser's own scroll can finish mid-crossfade, leaving the
+    // focused control on a scene that is still fading in.
+    if (layer < 0 || layerOpacity(q.get(), chapter2LayerStarts, layer, timing.crossfade) >= 0.99) return;
+
+    // The browser's own smooth scroll to the still-natural-flow control may be mid-flight, and an instant scrollTo
+    // does not stop it: it resumes from the new layout and carries the page past the layer (measured: 59-281px
+    // past the anchor, into the crossfade). So hold the layer's anchor for a few frames, re-asserting only while the
+    // page has drifted from it, and let go the moment the user scrolls or presses a key.
+    let frames = 0;
+    let raf = 0;
+    const release = () => {
+      cancelAnimationFrame(raf);
+      for (const type of ["wheel", "touchstart", "keydown", "pointerdown"]) window.removeEventListener(type, release);
+    };
+    const hold = () => {
+      const stage = section.getBoundingClientRect().top + window.scrollY;
+      // The hand-off's anchor sits inside its own fade-in (0.972 opaque), so it settles on the end of the travel.
+      const progress = layer === handoffLayer ? 1 : layerAnchor(chapter2LayerStarts, layer);
+      const target = stage + (progress / travel) * section.offsetHeight;
+      if (Math.abs(window.scrollY - target) > 1) window.scrollTo({ top: target, behavior: "instant" });
+      if (++frames < 45) raf = requestAnimationFrame(hold);
+      else release();
+    };
+    for (const type of ["wheel", "touchstart", "keydown", "pointerdown"]) window.addEventListener(type, release, { passive: true });
+    raf = requestAnimationFrame(hold);
+    return release;
+  }, [choreographed, handoffLayer, travel, q]);
   const introOpacity = useTransform(q, (value) => layerOpacity(value, chapter2LayerStarts, 0, timing.crossfade));
   const handoffOpacity = useTransform(q, (value) => layerOpacity(value, chapter2LayerStarts, handoffLayer, timing.crossfade));
   const introForeground = useTransform(q, (value) =>

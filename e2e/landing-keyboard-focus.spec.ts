@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 import { assertNoSeriousAccessibilityViolations } from "./accessibility";
 import { cinematicMotion, pinnedTravelFactor } from "../src/features/landing/cinematic/config";
-import { chapter2LayerStarts, layerAnchor } from "../src/features/landing/cinematic/sceneProgress";
+import { chapter2LayerStarts, layerAnchor, layerOpacity } from "../src/features/landing/cinematic/sceneProgress";
 
 /*
  * Landing-page keyboard focus, focus indicators and standalone link targets (WCAG 2.2: 2.4.3, 2.4.7,
@@ -256,16 +256,13 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
   });
 
   /*
-   * PENDING (known defect, awaiting owner approval of an application fix; see PR #82). Reproduced 3 of 3: if a
-   * keyboard user focuses a Chapter 2 scene link before React has hydrated, the browser starts a native smooth
-   * scroll (about 1.2s) and focus stays on that link; hydration then fades its scene to opacity 0 and no handler
-   * re-checks the already-focused control, so focus rests on an invisible, obscured link indefinitely (until the
-   * user presses another key). `onSceneFocus` only runs on a focus event, and none follows hydration.
-   * Suggested minimal fix: after the choreographed state first becomes true, re-run `onSceneFocus` for the scene
-   * that contains `document.activeElement`. Remove `.fixme` when that lands.
+   * Focus before hydration. A keyboard user on a slow connection can Tab into server-rendered, natural-flow
+   * content before React has hydrated: the browser scrolls to the control on its own (smooth), no focus handler
+   * exists yet, and hydration then switches Chapter 2 to its pinned layout, fading that scene to opacity 0 with
+   * focus still on it. ChapterTwoPrograms re-runs its focus recovery once when it first becomes choreographed.
+   * These tests hold every script back to reproduce that; the scene and hand-off tests fail without the recovery.
    */
-  test.fixme("a scene link focused before hydration is still visible once the page hydrates", async ({ page }) => {
-    // Hold every script back so the page cannot hydrate (a slow connection), then release them.
+  async function holdScripts(page: Page) {
     let release!: () => void;
     const gate = new Promise<void>((resolve) => (release = resolve));
     await page.route("**/_next/static/**/*.js", async (route) => {
@@ -273,15 +270,86 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
       await route.continue();
     });
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    await page.getByRole("link", { name: "Explore NAPLAN-style practice" }).focus();
-    release();
-    await waitForPinnedHydration(page);
-    // Generous: the native smooth scroll that began before hydration finishes in about 1.2s.
-    await page.waitForTimeout(2500);
-    const s = await page.evaluate(probeFocus);
-    expect(s?.label).toBe("Explore NAPLAN-style practice");
-    expect(isVisibleStop(s), `focused link after hydration: ${JSON.stringify(s)}`).toBe(true);
-  });
+    // The reproduction is real only while nothing has hydrated: the scene still has its server-rendered opacity.
+    expect(await page.evaluate(() => (document.querySelector('[data-scene="naplan"]') as HTMLElement).style.opacity)).toBe("1");
+    return release;
+  }
+
+  /** Real Tab presses on the server-rendered page until the focused element satisfies `where` (a CSS selector it is in). */
+  async function tabInto(page: Page, where: string, text?: string) {
+    for (let i = 0; i < 80; i += 1) {
+      await page.keyboard.press("Tab");
+      const found = await page.evaluate(
+        ([sel, label]) => {
+          const el = document.activeElement;
+          return !!el && !!el.closest(sel!) && (!label || (el.textContent ?? "").trim() === label);
+        },
+        [where, text ?? ""] as const,
+      );
+      if (found) return;
+    }
+    throw new Error(`Tab never reached ${where} ${text ?? ""}`);
+  }
+
+  const settledScrollY = async (page: Page) => {
+    let y = -1;
+    for (let stable = 0; stable < 4; ) {
+      const now = await page.evaluate(() => Math.round(scrollY));
+      stable = now === y ? stable + 1 : 0;
+      y = now;
+      await page.waitForTimeout(50);
+    }
+    return y;
+  };
+
+  for (const [name, selector, label, layer] of [
+    ["a Chapter 2 scene link", '[data-scene="naplan"]', "Explore NAPLAN-style practice", 1],
+    ["the Chapter 2 hand-off CTA", '[data-handoff="chapter-3"]', "Explore all programs", chapter2LayerStarts.length - 1],
+  ] as const) {
+    test(`${name} focused with the keyboard before hydration is visible and in place once the page hydrates`, async ({ page }) => {
+      const release = await holdScripts(page);
+      await tabInto(page, selector, label);
+      expect((await page.evaluate(probeFocus))?.label).toBe(label);
+      release();
+      await waitForPinnedHydration(page);
+      // No further key press: the same link must become visible, unobscured and ringed promptly (an instant jump).
+      await expect.poll(() => page.evaluate(probeFocus).then((s) => isVisibleStop(s)), { timeout: 600 }).toBe(true);
+      const s = (await page.evaluate(probeFocus))!;
+      expect(s.label).toBe(label);
+      expect(s.outlineWidth).toBeGreaterThanOrEqual(2);
+      // The scroll settles (no smooth scroll left in flight) with this layer fully presented. Not "exactly at the
+      // anchor": if hydration lands while the browser's native smooth scroll is still running, that animation can
+      // carry on a couple of hundred px past the instant jump to the anchor, still inside the layer's full-opacity
+      // range (measured: anchor 5078, settled 5312 at 330ms; hydrating after the native scroll ends lands on 5078).
+      const y = await settledScrollY(page);
+      const q = await page.evaluate(
+        ([yy, factor]) => {
+          const section = document.querySelector('section[data-chapter="2"]') as HTMLElement;
+          return ((yy - (section.getBoundingClientRect().top + scrollY)) / section.offsetHeight) * factor;
+        },
+        [y, pinnedTravelFactor(cinematicMotion.chapter2.desktopScrollHeightSvh)] as const,
+      );
+      expect(layerOpacity(q, chapter2LayerStarts, layer, cinematicMotion.chapter2.crossfade), `layer ${layer} presented at y=${y}`).toBeGreaterThanOrEqual(0.99);
+      expect(isVisibleStop(await page.evaluate(probeFocus))).toBe(true);
+    });
+  }
+
+  for (const [name, where, label] of [
+    ["the skip link", "a[href='#main-content'], a[href='#main']", undefined],
+    ["a hero control", 'section[data-chapter="1"]', undefined],
+  ] as const) {
+    test(`hydration scrolls nothing when focus is on ${name}`, async ({ page }) => {
+      const release = await holdScripts(page);
+      await tabInto(page, where, label);
+      const before = await page.evaluate(() => ({ y: Math.round(scrollY), label: document.activeElement?.textContent?.trim() }));
+      release();
+      await waitForPinnedHydration(page);
+      await page.waitForTimeout(1500);
+      const after = await page.evaluate(() => ({ y: Math.round(scrollY), label: document.activeElement?.textContent?.trim() }));
+      expect(after).toEqual(before);
+      expect(before.y).toBeLessThan(5);
+    });
+  }
 
   test("a hand-off CTA keeps axe happy and exposes no aria-hidden focusable", async ({ page }) => {
     await page.goto("/");
