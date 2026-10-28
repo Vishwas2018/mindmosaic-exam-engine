@@ -81,6 +81,24 @@ const probeFocus = () => {
 const isVisibleStop = (s: ReturnType<typeof probeFocus>) =>
   !!s && s.opacity >= 0.99 && s.inViewport && s.unobscured;
 
+/**
+ * Waits until the pinned Chapter 2 stage is hydrated AND choreographed, so its focus handlers are attached.
+ *
+ * `position: sticky` is not enough: it comes from server-rendered CSS, so it is true before React has hydrated,
+ * and a Tab pressed in that window is handled by the browser alone (a smooth native scroll into a scene that
+ * hydration then fades to opacity 0; see the pre-hydration test below). The application's own signal is the
+ * scene's inline `opacity`: `ProgramScene` renders `{ opacity: 1 }` on the server and the first client render,
+ * and the motion-value opacity (0 for a scene that is not on screen, which every scene is at the top of the page)
+ * only once `choreographed` is true. `onSceneFocus` is created from that same `choreographed` flag, so the
+ * handlers are attached in the commit that this condition observes.
+ */
+const waitForPinnedHydration = (page: Page) =>
+  page.waitForFunction(() => {
+    const stage = document.querySelector('section[data-chapter="2"] > div');
+    const scene = document.querySelector<HTMLElement>('section[data-chapter="2"] [data-scene="naplan"]');
+    return !!stage && !!scene && getComputedStyle(stage).position === "sticky" && scene.style.opacity === "0";
+  });
+
 /** Presses `key`, waits for the focused control to be visible, and records how long that took. */
 async function step(page: Page, key: "Tab" | "Shift+Tab", index: number, previousY: number): Promise<Stop | null> {
   await page.keyboard.press(key);
@@ -150,7 +168,7 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
 
   test("forward Tab from the hero to the footer: every stop is visible, unobscured, ringed and prompt", async ({ page }) => {
     await page.goto("/");
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky");
+    await waitForPinnedHydration(page);
     const stops = await walk(page, "forward");
     await attachWalk(stops, "forward-walk-1440");
 
@@ -167,7 +185,7 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
 
   test("the Chapter 2 hand-off CTA is brought on screen and is visible the moment it takes focus", async ({ page }) => {
     await page.goto("/");
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky");
+    await waitForPinnedHydration(page);
     // Start from the last programme scene so the next Tab lands on the hand-off.
     const last = page.locator('[data-scene="selective"]').getByRole("link", { name: /See all programs/ });
     await last.focus();
@@ -181,7 +199,7 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
 
   test("focus-driven scrolling is instant, but progress-rail clicks keep the smooth scroll", async ({ page }) => {
     await page.goto("/");
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky");
+    await waitForPinnedHydration(page);
     const before = await page.evaluate(() => scrollY);
     await page.locator('[data-scene="icas"]').getByRole("link", { name: /Explore ICAS-style practice/ }).focus();
     // One animation frame later the scroll has already finished: scrollY does not keep changing.
@@ -207,7 +225,7 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
 
   test("reverse Tab from the footer to the top is just as visible", async ({ page }) => {
     await page.goto("/");
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky");
+    await waitForPinnedHydration(page);
     const stops = await walk(page, "reverse");
     await attachWalk(stops, "reverse-walk-1440");
     expect(stops.length).toBeGreaterThan(30);
@@ -217,7 +235,7 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
 
   test("the first hop from the hero into Chapter 2 is large, lands on the NAPLAN scene, and is documented here", async ({ page }) => {
     await page.goto("/");
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky");
+    await waitForPinnedHydration(page);
     await page.getByRole("button", { name: /Scene 6/ }).focus();
     const before = await page.evaluate(() => scrollY);
     await page.keyboard.press("Tab");
@@ -237,9 +255,37 @@ test.describe("landing keyboard focus: pinned layout (1440x900)", () => {
     test.info().annotations.push({ type: "documented hop", description: `hero -> Chapter 2: ${Math.round(after - before)}px in one Tab` });
   });
 
+  /*
+   * PENDING (known defect, awaiting owner approval of an application fix; see PR #82). Reproduced 3 of 3: if a
+   * keyboard user focuses a Chapter 2 scene link before React has hydrated, the browser starts a native smooth
+   * scroll (about 1.2s) and focus stays on that link; hydration then fades its scene to opacity 0 and no handler
+   * re-checks the already-focused control, so focus rests on an invisible, obscured link indefinitely (until the
+   * user presses another key). `onSceneFocus` only runs on a focus event, and none follows hydration.
+   * Suggested minimal fix: after the choreographed state first becomes true, re-run `onSceneFocus` for the scene
+   * that contains `document.activeElement`. Remove `.fixme` when that lands.
+   */
+  test.fixme("a scene link focused before hydration is still visible once the page hydrates", async ({ page }) => {
+    // Hold every script back so the page cannot hydrate (a slow connection), then release them.
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    await page.route("**/_next/static/**/*.js", async (route) => {
+      await gate;
+      await route.continue();
+    });
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await page.getByRole("link", { name: "Explore NAPLAN-style practice" }).focus();
+    release();
+    await waitForPinnedHydration(page);
+    // Generous: the native smooth scroll that began before hydration finishes in about 1.2s.
+    await page.waitForTimeout(2500);
+    const s = await page.evaluate(probeFocus);
+    expect(s?.label).toBe("Explore NAPLAN-style practice");
+    expect(isVisibleStop(s), `focused link after hydration: ${JSON.stringify(s)}`).toBe(true);
+  });
+
   test("a hand-off CTA keeps axe happy and exposes no aria-hidden focusable", async ({ page }) => {
     await page.goto("/");
-    await page.waitForFunction(() => getComputedStyle(document.querySelector('section[data-chapter="2"] > div')!).position === "sticky");
+    await waitForPinnedHydration(page);
     await page.getByRole("link", { name: "Explore all programs" }).focus();
     await assertNoSeriousAccessibilityViolations(page, "landing with the Chapter 2 hand-off focused");
     // Decorative product previews are aria-hidden and contain real-looking controls; those must be inert (not tabbable).
@@ -330,6 +376,10 @@ const SHORT_VIEWPORTS: ReadonlyArray<readonly [number, number]> = [
   [1280, 701],
   [1440, 900],
   [1920, 1080],
+  // The mixed layout: Chapters 1 to 3 pinned, Chapter 4 natural flow (a typical laptop browser viewport).
+  [1280, 780],
+  // Either side of Chapter 4's own 880px minimum, at the narrowest, a middle and a wide pinned width.
+  ...[1024, 1280, 1440].flatMap((w) => [879, 880, 881].map((h) => [w, h] as const)),
 ];
 
 /** Runs in the page: which chapters are pinned right now, and the facts that make a natural-flow chapter safe. */
@@ -510,6 +560,24 @@ test.describe("short viewports: resizing across the breakpoint", () => {
       () => [...document.querySelectorAll('section[data-chapter="2"] [data-scene]')].filter((e) => Number(getComputedStyle(e).opacity) > 0.5).length,
     );
     expect(onScreen).toBe(1);
+  });
+
+  test("resizing across Chapter 4's 880px minimum works in both directions", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 881 });
+    await page.goto("/");
+    await expect.poll(() => chapterPinned(page, 4)).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 879 });
+    await expect.poll(() => chapterPinned(page, 4)).toBe(false);
+    expect((await page.evaluate(layoutFacts)).chapters[4].hiddenHeadings).toEqual([]);
+    expect(await chapterPinned(page, 3)).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 880 });
+    await expect.poll(() => chapterPinned(page, 4)).toBe(true);
+    await page.setViewportSize({ width: 1280, height: 879 });
+    await expect.poll(() => chapterPinned(page, 4)).toBe(false);
+    const facts = await page.evaluate(layoutFacts);
+    expect(facts.chapters[4].hiddenHeadings).toEqual([]);
+    expect(facts.chapters[4].layeredScenes).toBe(0);
+    expect(facts.overflow).toBeLessThanOrEqual(0);
   });
 
   test("Chapter 4 follows its own, taller threshold while Chapters 2 and 3 stay pinned", async ({ page }) => {
