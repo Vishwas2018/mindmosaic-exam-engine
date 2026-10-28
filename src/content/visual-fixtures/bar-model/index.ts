@@ -106,6 +106,10 @@ const partWholeVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
+    quantities: [],
+    relationships: [],
+    groups: [],
     bars: [
       {
         id: `${id}-bar`,
@@ -159,6 +163,9 @@ const comparisonVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
+    quantities: [],
+    relationships: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-left`, `${id}-right`]}],
     bars: [
       {
@@ -209,6 +216,8 @@ const timesAsManyVisual = ({
   data: {
     layout: {mode: "schematic"},
     units: [{id: `${id}-unit`, label: "unit"}],
+    quantities: [],
+    relationships: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-big`, `${id}-small`]}],
     bars: [
       {
@@ -280,6 +289,8 @@ const equalUnitsVisual = ({
   data: {
     layout: {mode: "schematic"},
     units: [{id: `${id}-bag`, label: "group"}],
+    quantities: [],
+    relationships: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-a`, `${id}-b`]}],
     bars: [
       {
@@ -348,6 +359,7 @@ const beforeAfterVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-before`, `${id}-after`]}],
     quantities: [
       {id: `${id}-removed`, label: "Removed", value: removed, display: "value"},
@@ -413,6 +425,7 @@ const transferVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
     groups: [
       {
         id: `${id}-group`,

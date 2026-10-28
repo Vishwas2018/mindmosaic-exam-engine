@@ -126,7 +126,17 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
     focusHeading();
   };
 
-  const resetSession = () => {
+  const resetSession = async () => {
+    // Clear server-side submissions so restarting practice creates a fresh
+    // attempt. One child's cleared submissions cannot affect another child's
+    // results because the server store is keyed by userId\0questionId.
+    try {
+      await fetch("/api/practice/singapore-maths/sample/session", {
+        method: "DELETE",
+      });
+    } catch {
+      // Best-effort: client-side state is cleared regardless of server state.
+    }
     setIndex(0);
     setSummary(false);
     setRevealed(false);
