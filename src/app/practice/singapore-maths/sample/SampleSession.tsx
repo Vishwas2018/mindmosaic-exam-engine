@@ -71,8 +71,9 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
       const data = await response.json();
       if (!response.ok) {
         // Unauthorised, not-found, or any other server rejection must not be
-        // recorded as an answered question.
-        setError(data.error ?? "Could not submit that answer. Try again.");
+        // recorded as an answered question. Use a generic message so the
+        // client never leaks server-side error details to the child.
+        setError("Could not submit that answer. Try again.");
         return;
       }
       const isCorrect = data.correct === true;

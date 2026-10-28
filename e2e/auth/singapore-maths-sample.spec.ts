@@ -4,9 +4,10 @@ import {type Page} from "@playwright/test";
 // Correct answers taken from the server's pilot fixture answer keys. These are
 // used only to drive a "correct" submission through the server; the test never
 // reads them from the client (that would defeat the purpose).
-const CORRECT_BY_YEAR: Record<3 | 5, {questionId: string; answer: number}> = {
-  3: {questionId: "pilot-y3-comparison-01", answer: 12},
-  5: {questionId: "pilot-y5-equal-units-01", answer: 35},
+// Question 2 for each year:
+const CORRECT_Q2_BY_YEAR: Record<3 | 5, number> = {
+  3: 12, // pilot-y3-comparison-01: 27 - 15 = 12
+  5: 45, // pilot-y5-before-after-01: start = 31 + 14 = 45
 };
 
 const WRONG_ANSWER = 99999;
@@ -65,7 +66,7 @@ test.describe("Singapore Maths sample practice", () => {
           await expect(
             page.getByRole("heading", {name: `Year ${year} · Question 2 of 15`}),
           ).toBeVisible();
-          const {answer} = CORRECT_BY_YEAR[year];
+          const answer = CORRECT_Q2_BY_YEAR[year];
           await submitAnswer(page, answer);
           await expect(page.getByText(statusText(answer, true))).toBeVisible();
           await expect(

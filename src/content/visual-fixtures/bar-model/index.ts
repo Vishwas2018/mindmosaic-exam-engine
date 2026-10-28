@@ -360,6 +360,7 @@ const beforeAfterVisual = ({
   data: {
     layout: {mode: "schematic"},
     units: [],
+    braces: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-before`, `${id}-after`]}],
     quantities: [
       {id: `${id}-removed`, label: "Removed", value: removed, display: "value"},
