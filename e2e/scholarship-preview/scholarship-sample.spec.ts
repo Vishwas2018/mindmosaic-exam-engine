@@ -94,6 +94,7 @@ test.describe("Scholarship sample: allowlisted student journey", () => {
     await card.click();
     await expect(page).toHaveURL(new RegExp(`/exams/${PATTERN_ID}$`));
     await expect(page.getByRole("heading", { level: 1, name: /Comprehensive Sample/i })).toBeVisible();
+    await expect(page.getByTestId("scholarship-sample-notice")).toHaveText("Unreviewed practice sample — Development testing only");
     await expect(page.getByText(/12 questions/i).first()).toBeVisible();
     await expect(page.getByText(/18 minutes/i).first()).toBeVisible();
 
