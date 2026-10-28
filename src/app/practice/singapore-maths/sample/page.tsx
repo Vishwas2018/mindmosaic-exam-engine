@@ -14,13 +14,14 @@ export const metadata: Metadata = {
   description: programme.about,
 };
 
-export default function SingaporeMathsSamplePage({
+export default async function SingaporeMathsSamplePage({
   searchParams,
 }: {
   searchParams: Promise<{year?: string}>;
 }) {
   const params = await searchParams;
-  const year = params.year === "3" || params.year === "5" ? params.year : undefined;
+  const year: 3 | 5 | undefined =
+    params.year === "3" ? 3 : params.year === "5" ? 5 : undefined;
 
   if (!isSingaporeMathsSampleAllowed()) {
     return (
