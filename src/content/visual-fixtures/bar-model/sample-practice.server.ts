@@ -1,9 +1,9 @@
 /**
  * Server-only sample-practice backing for the Singapore Maths student route.
  *
- * Imports the full (answer-bearing) pilot fixtures from `index.ts`, which is
- * guarded by `import "server-only"`, so this module and everything that
- * imports it can never be reached by a browser bundle.
+ * Imports the full (answer-bearing) pilot fixtures from `index.ts`. This module
+ * carries its own `import "server-only"` (see below), so it and everything
+ * that imports it can never be reached by a browser bundle.
  *
  * Three surfaces are exposed:
  *

@@ -8,8 +8,11 @@ import {samplePracticeFixtures} from "@/content/visual-fixtures/bar-model/sample
 const ROOT = join(import.meta.dirname, "..", "..", "..");
 
 describe("sample practice security — no answer keys reach the client", () => {
-  it("fixture index carries the server-only import", () => {
-    const source = readFileSync(join(ROOT, "src/content/visual-fixtures/bar-model/index.ts"), "utf8");
+  it("server-only module carries the server-only import", () => {
+    const source = readFileSync(
+      join(ROOT, "src/content/visual-fixtures/bar-model/sample-practice.server.ts"),
+      "utf8",
+    );
     expect(source).toContain('import "server-only"');
   });
 
