@@ -11,6 +11,8 @@ import mathAnswerLeak from "./invalid/math-answer-leak-in-alt-text.json";
 import mathContradiction from "./invalid/math-contradictory-givens.json";
 import mathInfeasible from "./invalid/math-infeasible-negative.json";
 import mathNotUnique from "./invalid/math-target-not-unique.json";
+
+
 import mathConservation from "./invalid/math-transfer-breaks-conservation.json";
 import schemaBlank from "./invalid/schema-blank-with-value.json";
 import schemaMissingAlt from "./invalid/schema-missing-alt-text.json";
@@ -101,6 +103,10 @@ const partWholeVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
+    quantities: [],
+    relationships: [],
+    groups: [],
     bars: [
       {
         id: `${id}-bar`,
@@ -154,6 +160,9 @@ const comparisonVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
+    quantities: [],
+    relationships: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-left`, `${id}-right`]}],
     bars: [
       {
@@ -204,6 +213,8 @@ const timesAsManyVisual = ({
   data: {
     layout: {mode: "schematic"},
     units: [{id: `${id}-unit`, label: "unit"}],
+    quantities: [],
+    relationships: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-big`, `${id}-small`]}],
     bars: [
       {
@@ -275,6 +286,8 @@ const equalUnitsVisual = ({
   data: {
     layout: {mode: "schematic"},
     units: [{id: `${id}-bag`, label: "group"}],
+    quantities: [],
+    relationships: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-a`, `${id}-b`]}],
     bars: [
       {
@@ -343,6 +356,8 @@ const beforeAfterVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
+    braces: [],
     groups: [{id: `${id}-group`, barIds: [`${id}-before`, `${id}-after`]}],
     quantities: [
       {id: `${id}-removed`, label: "Removed", value: removed, display: "value"},
@@ -408,6 +423,7 @@ const transferVisual = ({
   altText,
   data: {
     layout: {mode: "schematic"},
+    units: [],
     groups: [
       {
         id: `${id}-group`,
