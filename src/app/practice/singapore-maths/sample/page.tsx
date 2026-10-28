@@ -26,7 +26,14 @@ export default async function SingaporeMathsSamplePage({
   if (!isSingaporeMathsSampleAllowed()) {
     return (
       <div className="min-h-screen overflow-hidden bg-page">
-        <ProgrammeComingSoon programme={programme} />
+        {/* `programmeSlug`, not the resolved `programme` object: this is a
+            Server Component rendering a Client Component, and the catalogue
+            entry carries an `icon` React component. Passing the object sends a
+            function across the server/client boundary, which React rejects at
+            render time ("Functions cannot be passed directly to Client
+            Components"), surfacing as the /practice error boundary. The slug is
+            a string; the client resolves the entry itself. */}
+        <ProgrammeComingSoon programmeSlug={programme.slug} />
       </div>
     );
   }
