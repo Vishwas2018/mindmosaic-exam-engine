@@ -10,9 +10,11 @@ import SingaporeMathsSamplePage from "@/app/practice/singapore-maths/sample/page
  * Components" at render time otherwise, and on /practice that lands in the
  * segment error boundary as "We couldn't load the practice catalogue."
  *
- * The flag-OFF branch regressed exactly this way — it passed the resolved
+ * The Coming Soon branch regressed exactly this way — it passed the resolved
  * catalogue entry, whose `icon` is a React component — and no suite caught it,
- * because the authenticated Playwright suite only ever runs with the flag ON.
+ * because the authenticated Playwright suite only ever ran with the sample
+ * available. That branch is still reached on a Vercel production deployment
+ * and under the explicit opt-out, so both are asserted here.
  */
 
 function isElement(value: unknown): value is ReactElement {
@@ -59,8 +61,8 @@ afterEach(() => {
 });
 
 describe("Singapore Maths sample page — server/client boundary", () => {
-  it("passes no function-valued props when the flag is OFF (coming-soon branch)", async () => {
-    delete process.env.SINGAPORE_MATHS_SAMPLE_ENABLED;
+  it("passes no function-valued props under the explicit opt-out (coming-soon branch)", async () => {
+    process.env.SINGAPORE_MATHS_SAMPLE_ENABLED = "0";
     process.env.VERCEL_ENV = "preview";
 
     const tree = await SingaporeMathsSamplePage({
@@ -81,8 +83,8 @@ describe("Singapore Maths sample page — server/client boundary", () => {
     expect(functionValuedProps(tree)).toEqual([]);
   });
 
-  it("passes no function-valued props when the flag is ON, for both year levels", async () => {
-    process.env.SINGAPORE_MATHS_SAMPLE_ENABLED = "1";
+  it("passes no function-valued props when the sample is available, for both year levels", async () => {
+    delete process.env.SINGAPORE_MATHS_SAMPLE_ENABLED;
     process.env.VERCEL_ENV = "preview";
 
     for (const year of ["3", "5"] as const) {
@@ -94,7 +96,7 @@ describe("Singapore Maths sample page — server/client boundary", () => {
   });
 
   it("passes no function-valued props on the year-selection screen", async () => {
-    process.env.SINGAPORE_MATHS_SAMPLE_ENABLED = "1";
+    delete process.env.SINGAPORE_MATHS_SAMPLE_ENABLED;
     process.env.VERCEL_ENV = "preview";
 
     const tree = await SingaporeMathsSamplePage({

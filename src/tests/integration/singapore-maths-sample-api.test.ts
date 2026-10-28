@@ -3,11 +3,20 @@ import {describe, expect, it} from "vitest";
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
 
 describe("sample practice API security posture", () => {
-  it("flag is OFF by default — all routes return 404", () => {
-    expect(isSingaporeMathsSampleAllowed({})).toBe(false);
+  it("is available by default outside production — no variable to configure", () => {
+    expect(isSingaporeMathsSampleAllowed({})).toBe(true);
   });
 
-  it("flag is OFF in Vercel production even with escape hatch", () => {
+  it("is refused on Vercel production, so every sample route 404s there", () => {
+    expect(
+      isSingaporeMathsSampleAllowed({
+        VERCEL_ENV: "production",
+        NODE_ENV: "production",
+      }),
+    ).toBe(false);
+  });
+
+  it("is refused on Vercel production even when something sets the flag on", () => {
     expect(
       isSingaporeMathsSampleAllowed({
         VERCEL_ENV: "production",
@@ -17,12 +26,12 @@ describe("sample practice API security posture", () => {
     ).toBe(false);
   });
 
-  it("flag can be enabled in non-production with escape hatch", () => {
+  it("can be opted out of outside production, for QA of the Coming Soon branch", () => {
     expect(
       isSingaporeMathsSampleAllowed({
         NODE_ENV: "development",
-        SINGAPORE_MATHS_SAMPLE_ENABLED: "1",
+        SINGAPORE_MATHS_SAMPLE_ENABLED: "0",
       }),
-    ).toBe(true);
+    ).toBe(false);
   });
 });

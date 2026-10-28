@@ -60,9 +60,13 @@ export default defineConfig({
       // preview gate (src/features/writing/preview-gate.ts): there is no
       // approved writing task yet, and this suite runs a production build.
       WRITING_PREVIEW_ENABLED: "1",
-      // Opt the local e2e environment into the Singapore Maths sample practice
-      // (flag is OFF by default and never on in real Vercel production).
-      SINGAPORE_MATHS_SAMPLE_ENABLED: "1",
+      /*
+       * No Singapore Maths variable: the sample is available by default
+       * outside a real Vercel production deployment, and this suite must run
+       * against the same default a Preview deployment and local `next start`
+       * get. e2e/singapore-maths-sample-gate.spec.ts covers the production
+       * refusal and the explicit opt-out.
+       */
     },
   },
 });
