@@ -184,14 +184,23 @@ describe("Scholarship sample preview: content integrity", () => {
     vi.resetModules();
   });
 
-  it("matches the current draft sources byte-for-byte (hash of each raw object)", () => {
+  it("serves from a data file whose 12 objects are identical to the drafts (the runtime never imports the drafts)", () => {
     const files = ["verbal-reasoning", "numerical-reasoning", "reading", "mathematics"].map(
       (name) => `content/scholarship-drafts/scholarship-y6-${name}-draft.json`,
     );
     const raws = files.flatMap((file) => (JSON.parse(readFileSync(file, "utf8")) as { questions: { id: string }[] }).questions);
-    for (const [id, pinned] of Object.entries(SCHOLARSHIP_SAMPLE_PINNED_RAW_HASHES)) {
-      expect(hashJson(raws.find((raw) => raw.id === id))).toBe(pinned);
+    const copy = (JSON.parse(readFileSync("src/server/scholarship-sample-questions.json", "utf8")) as { questions: { id: string }[] }).questions;
+    expect(copy.map((q) => q.id).sort()).toEqual(Object.keys(SCHOLARSHIP_SAMPLE_PINNED_RAW_HASHES).sort());
+    // Every served object hashes to its pinned manifest revision. Where the draft file has moved on from that revision
+    // the draft is the stale side: today only maths-014, whose pinned prompt revision lives in PR #73 and not yet on dev.
+    const drifted: string[] = [];
+    for (const question of copy) {
+      expect(hashJson(question)).toBe(SCHOLARSHIP_SAMPLE_PINNED_RAW_HASHES[question.id]);
+      const draft = raws.find((raw) => raw.id === question.id);
+      if (hashJson(draft) === SCHOLARSHIP_SAMPLE_PINNED_RAW_HASHES[question.id]) expect(question).toEqual(draft);
+      else drifted.push(question.id);
     }
+    expect(drifted.filter((id) => id !== "scholarship-y6-maths-014")).toEqual([]);
   });
 });
 

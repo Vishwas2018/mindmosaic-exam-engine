@@ -131,13 +131,8 @@ export function loadScholarshipSampleQuestions(): Promise<readonly AuthoringQues
 }
 
 async function buildSample(): Promise<readonly AuthoringQuestion[]> {
-  const packets = await Promise.all([
-    import("../../content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json"),
-    import("../../content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json"),
-    import("../../content/scholarship-drafts/scholarship-y6-reading-draft.json"),
-    import("../../content/scholarship-drafts/scholarship-y6-mathematics-draft.json"),
-  ]);
-  const raws = packets.flatMap((packet) => (packet.default as { questions: Record<string, unknown>[] }).questions);
+  const packet = await import("./scholarship-sample-questions.json");
+  const raws = (packet.default as { questions: Record<string, unknown>[] }).questions;
   const built: AuthoringQuestion[] = [];
   for (const [id, pinned] of Object.entries(SCHOLARSHIP_SAMPLE_PINNED_RAW_HASHES)) {
     const matches = raws.filter((raw) => raw.id === id);
