@@ -11,7 +11,12 @@ import mathAnswerLeak from "./invalid/math-answer-leak-in-alt-text.json";
 import mathContradiction from "./invalid/math-contradictory-givens.json";
 import mathInfeasible from "./invalid/math-infeasible-negative.json";
 import mathNotUnique from "./invalid/math-target-not-unique.json";
+
+import "server-only";
+
+
 import mathConservation from "./invalid/math-transfer-breaks-conservation.json";
+import "server-only";
 import schemaBlank from "./invalid/schema-blank-with-value.json";
 import schemaMissingAlt from "./invalid/schema-missing-alt-text.json";
 import schemaUnitsBounds from "./invalid/schema-units-out-of-bounds.json";
