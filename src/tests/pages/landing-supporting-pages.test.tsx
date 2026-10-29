@@ -211,8 +211,8 @@ describe("Programs page", () => {
     const user = userEvent.setup();
     render(<ProgramsPage />);
     const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
-    const year3 = radiogroup.getByRole("radio", { name: /^Year 3/ });
-    const year4 = radiogroup.getByRole("radio", { name: /^Year 4/ });
+    const year3 = within(radiogroup).getByRole("radio", { name: /^Year 3/ });
+    const year4 = within(radiogroup).getByRole("radio", { name: /^Year 4/ });
 
     year3.focus();
     expect(document.activeElement).toBe(year3);
@@ -237,8 +237,8 @@ describe("Programs page", () => {
       "href",
       "#coming-next",
     );
-    expect(screen.getByRole("heading", { id: "open-now-heading" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { id: "coming-next-heading" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Choose a year level" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Pathways in development" })).toBeInTheDocument();
   });
 });
 
