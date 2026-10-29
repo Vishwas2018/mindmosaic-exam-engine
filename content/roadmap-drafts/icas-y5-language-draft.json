@@ -1,0 +1,396 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts, ICAS-style Year 5 language conventions. No independent review or human approval claimed. Do not serve directly.",
+  "questions": [
+    {
+      "id": "roadmap-icas-y5-language-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence uses quotation marks and punctuation correctly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mia said \"The ferry leaves at noon.\""
+        },
+        {
+          "id": "b",
+          "text": "Mia said, \"The ferry leaves at noon\"."
+        },
+        {
+          "id": "c",
+          "text": "Mia said, \"The ferry leaves at noon.\""
+        },
+        {
+          "id": "d",
+          "text": "Mia said, \"The ferry leaves at noon."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Direct speech introduced by 'said' takes a comma before the opening quotation mark, and the full stop belongs inside the closing quotation mark.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence uses correct subject-verb agreement?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The stack of wet towels is beside the door."
+        },
+        {
+          "id": "b",
+          "text": "The stack of wet towels are beside the door."
+        },
+        {
+          "id": "c",
+          "text": "The stack of wet towels were beside the door."
+        },
+        {
+          "id": "d",
+          "text": "The stack of wet towels have been beside the door."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The singular subject 'stack' requires the singular verb 'is'; the nearby plural noun 'towels' does not control verb agreement.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence uses the correct pronoun?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The guide handed the spare map to Mila and I."
+        },
+        {
+          "id": "b",
+          "text": "The guide handed the spare map to Mila and she."
+        },
+        {
+          "id": "c",
+          "text": "The guide handed the spare map to Mila and we."
+        },
+        {
+          "id": "d",
+          "text": "The guide handed the spare map to Mila and me."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The preposition 'to' requires an object pronoun, so 'me' is correct; 'I', 'she' and 'we' are subject pronouns.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence uses the correct verb tense to show that one action was completed before another past action?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By the time the bell rang, the students have finished their posters."
+        },
+        {
+          "id": "b",
+          "text": "By the time the bell rang, the students had finished their posters."
+        },
+        {
+          "id": "c",
+          "text": "By the time the bell rang, the students will finish their posters."
+        },
+        {
+          "id": "d",
+          "text": "By the time the bell rang, the students finish their posters."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The past perfect 'had finished' identifies an action completed before the past event 'the bell rang'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence uses the paired conjunction correctly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Neither the trumpet nor the flute was ready for the concert."
+        },
+        {
+          "id": "b",
+          "text": "Neither the trumpet or the flute was ready for the concert."
+        },
+        {
+          "id": "c",
+          "text": "Neither the trumpet and the flute was ready for the concert."
+        },
+        {
+          "id": "d",
+          "text": "Neither the trumpet but the flute was ready for the concert."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The negative paired conjunction is 'neither ... nor'; 'or', 'and' and 'but' cannot replace 'nor' in this construction.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which option correctly joins the ideas into one complete complex sentence?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Because the path was flooded, so we took the longer route."
+        },
+        {
+          "id": "b",
+          "text": "Because the path was flooded. We took the longer route."
+        },
+        {
+          "id": "c",
+          "text": "Because the path was flooded, we took the longer route."
+        },
+        {
+          "id": "d",
+          "text": "Because the path was flooded, and we took the longer route."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The dependent clause beginning with 'Because' must connect to an independent clause; a comma correctly separates them without an unnecessary conjunction.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence correctly shows that the tools belong to all four gardeners?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The four gardener's tools were beside the gate."
+        },
+        {
+          "id": "b",
+          "text": "The four gardeners' tools were beside the gate."
+        },
+        {
+          "id": "c",
+          "text": "The four gardeners tools were beside the gate."
+        },
+        {
+          "id": "d",
+          "text": "The four gardeners's tools were beside the gate."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "For a regular plural noun ending in s, the possessive apostrophe follows the final s; 'gardeners'' shows ownership by multiple gardeners.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence has correct subject-verb agreement?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only one of the carved signs stand beside the entrance."
+        },
+        {
+          "id": "b",
+          "text": "Only one of the carved signs were standing beside the entrance."
+        },
+        {
+          "id": "c",
+          "text": "Only one of the carved signs have stood beside the entrance."
+        },
+        {
+          "id": "d",
+          "text": "Only one of the carved signs stands beside the entrance."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The subject is the singular expression 'Only one', requiring 'stands'; the plural noun 'signs' belongs to the phrase 'of the carved signs'.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence correctly uses punctuation to introduce a list?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The kit included three items; a torch, a whistle and a map."
+        },
+        {
+          "id": "b",
+          "text": "The kit included three items. A torch, a whistle and a map."
+        },
+        {
+          "id": "c",
+          "text": "The kit included three items: a torch, a whistle and a map."
+        },
+        {
+          "id": "d",
+          "text": "The kit included three items a torch, a whistle and a map."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "A colon correctly introduces a list after the complete clause 'The kit included three items'; a semicolon or full stop would incorrectly separate the list, while omitting punctuation leaves the introduction unclear.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-language-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which sentence correctly uses a possessive relative pronoun?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The student whose scarf was missing checked the lost property box."
+        },
+        {
+          "id": "b",
+          "text": "The student who's scarf was missing checked the lost property box."
+        },
+        {
+          "id": "c",
+          "text": "The student who scarf was missing checked the lost property box."
+        },
+        {
+          "id": "d",
+          "text": "The student whom scarf was missing checked the lost property box."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "'Whose' is the possessive relative pronoun showing that the scarf belongs to the student; 'who's' is a contraction, while 'who' and 'whom' do not express possession.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Grammar and Punctuation",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    }
+  ]
+}
