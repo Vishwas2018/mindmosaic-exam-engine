@@ -87,7 +87,12 @@ export default defineConfig({
      * preview-gate.ts): its 404-in-production half is proven by
      * e2e/writing-preview.spec.ts, which starts this same build WITHOUT the
      * variable, and again with VERCEL_ENV=production.
+     *
+     * Same posture for the dev-only review console (src/features/review-console/
+     * preview-gate.ts): its 404-in-production half is proven by
+     * e2e/review-console-preview.spec.ts, which starts this same build WITHOUT the
+     * variable, and again with VERCEL_ENV=production.
      */
-    env: { SHOWCASE_ENABLED: "1", BAR_MODEL_PREVIEW_ENABLED: "1", WRITING_PREVIEW_ENABLED: "1" },
+    env: { SHOWCASE_ENABLED: "1", BAR_MODEL_PREVIEW_ENABLED: "1", WRITING_PREVIEW_ENABLED: "1", REVIEW_CONSOLE_ENABLED: "1" },
   },
 });
