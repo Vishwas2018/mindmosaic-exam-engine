@@ -65,3 +65,9 @@ export function sampleExplanation(questionId: string): string | null {
   const fixture = fixturesByName.get(questionId);
   return fixture ? fixture.workedExplanation : null;
 }
+
+/** Year level of a sample question, or null for an unknown id. Used to scope a student's attempt to one year. */
+export function sampleYearOf(questionId: string): 3 | 5 | null {
+  const fixture = fixturesByName.get(questionId);
+  return fixture ? fixture.yearLevel : null;
+}

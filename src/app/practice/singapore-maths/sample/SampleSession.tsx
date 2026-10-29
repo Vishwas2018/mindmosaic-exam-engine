@@ -1,6 +1,7 @@
 "use client";
 
-import {useCallback, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+import {useRouter} from "next/navigation";
 
 import {Button} from "@/components/ui/Button";
 import {Input} from "@/components/ui/Input";
@@ -14,20 +15,63 @@ interface SampleSessionProps {
   fixtures: readonly SamplePracticeFixture[];
 }
 
+/** What the server recorded for a question. The explanation is present only when the recorded answer is correct. */
 interface AnswerRecord {
   answer: number;
   correct: boolean;
+  explanation?: string;
 }
 
+interface RestoredSubmission {
+  questionId: string;
+  answer: number;
+  correct: boolean;
+  workedExplanation?: string;
+}
+
+const SAMPLE_API = "/api/practice/singapore-maths/sample";
+
 export function SampleSession({year, fixtures}: SampleSessionProps) {
+  const router = useRouter();
   const [index, setIndex] = useState(0);
   const [entry, setEntry] = useState("");
   const [error, setError] = useState("");
-  const [explanation, setExplanation] = useState("");
+  const [notice, setNotice] = useState("");
   const [revealed, setRevealed] = useState(false);
   const [answers, setAnswers] = useState<Record<string, AnswerRecord>>({});
+  const [restoring, setRestoring] = useState(true);
   const [summary, setSummary] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  /*
+   * The server is the only source of truth for what has been answered. On mount (and so after a
+   * refresh, a second tab, or a different server instance) the recorded answers for this student's
+   * current attempt are restored, so the page can never disagree with the recorded verdicts.
+   * A guest, or any failure, simply starts empty: submitting then fails visibly instead.
+   */
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const response = await fetch(`${SAMPLE_API}/session?year=${year}`);
+        if (!response.ok) return;
+        const data = (await response.json()) as {submissions?: RestoredSubmission[]};
+        if (cancelled || !Array.isArray(data.submissions)) return;
+        const restored: Record<string, AnswerRecord> = {};
+        for (const s of data.submissions) {
+          restored[s.questionId] = {answer: s.answer, correct: s.correct, explanation: s.workedExplanation};
+        }
+        setAnswers(restored);
+      } catch {
+        /* start empty */
+      } finally {
+        if (!cancelled) setRestoring(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [year]);
 
   const fixture = fixtures[index];
   const record = answers[fixture.name];
@@ -46,8 +90,8 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
       setIndex(Math.max(0, Math.min(fixtures.length - 1, next)));
       setEntry("");
       setError("");
+      setNotice("");
       setRevealed(false);
-      setExplanation("");
       focusHeading();
     },
     [fixtures.length],
@@ -62,8 +106,9 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
     if (alreadyAnswered) return;
 
     setError("");
+    setNotice("");
     try {
-      const response = await fetch("/api/practice/singapore-maths/sample/submit", {
+      const response = await fetch(`${SAMPLE_API}/submit`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({questionId: fixture.name, answer}),
@@ -76,14 +121,20 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
         setError("Could not submit that answer. Try again.");
         return;
       }
-      const isCorrect = data.correct === true;
-      // The server's correctness verdict is authoritative; store it so the
-      // status survives navigating away and back (review / Previous / Next).
-      setAnswers({...answers, [fixture.name]: {answer, correct: isCorrect}});
-      if (isCorrect && data.workedExplanation) {
-        setExplanation(data.workedExplanation);
-      } else {
-        setExplanation("");
+      /* The server's RECORDED answer and verdict are authoritative — never the text just typed. */
+      const recordedAnswer = typeof data.answer === "number" ? data.answer : answer;
+      setAnswers({
+        ...answers,
+        [fixture.name]: {
+          answer: recordedAnswer,
+          correct: data.correct === true,
+          explanation: typeof data.workedExplanation === "string" ? data.workedExplanation : undefined,
+        },
+      });
+      if (data.alreadyAnswered === true && recordedAnswer !== answer) {
+        setNotice(
+          `You had already answered this question with ${recordedAnswer}. Your first answer is the one that counts. Start a new attempt from the summary to try again.`,
+        );
       }
       setRevealed(false);
     } catch {
@@ -91,24 +142,14 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
     }
   };
 
-  const handleReveal = async () => {
+  /* The explanation arrived with the correct answer (or with the restored state): showing it needs no request. */
+  const handleReveal = () => {
     if (revealed || !correct) return;
-    try {
-      const response = await fetch("/api/practice/singapore-maths/sample/reveal", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({questionId: fixture.name}),
-      });
-      if (!response.ok) {
-        setError("Explanation not available yet. Submit a correct answer first.");
-        return;
-      }
-      const data = await response.json();
-      setExplanation(data.workedExplanation);
-      setRevealed(true);
-    } catch {
-      setError("Could not load the explanation.");
+    if (!record?.explanation) {
+      setError("Explanation not available. Please reload the page.");
+      return;
     }
+    setRevealed(true);
   };
 
   const handleFinish = () => {
@@ -121,27 +162,28 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
     setIndex(i);
     setSummary(false);
     setRevealed(false);
-    setExplanation("");
+    setNotice("");
     setEntry("");
     setError("");
     focusHeading();
   };
 
-  const resetSession = async () => {
-    // Clear server-side submissions so restarting practice creates a fresh
-    // attempt. One child's cleared submissions cannot affect another child's
-    // results because the server store is keyed by userId\0questionId.
+  /* Retrying is an explicit new attempt: earlier attempts are kept on the server, not deleted. */
+  const startNewAttempt = async () => {
     try {
-      await fetch("/api/practice/singapore-maths/sample/session", {
-        method: "DELETE",
-      });
+      const response = await fetch(`${SAMPLE_API}/session?year=${year}`, {method: "DELETE"});
+      if (!response.ok) {
+        setError("Could not start a new attempt. Try again.");
+        return;
+      }
     } catch {
-      // Best-effort: client-side state is cleared regardless of server state.
+      setError("Could not reach the server. Try again.");
+      return;
     }
     setIndex(0);
     setSummary(false);
     setRevealed(false);
-    setExplanation("");
+    setNotice("");
     setEntry("");
     setError("");
     setAnswers({});
@@ -177,8 +219,16 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
             </li>
           ))}
         </ol>
+        {error ? (
+          <p className="mt-3 text-sm text-danger" role="alert">
+            {error}
+          </p>
+        ) : null}
         <div className="mt-4 flex flex-wrap gap-3">
-          <Button variant="secondary" onClick={resetSession}>
+          <Button variant="secondary" onClick={startNewAttempt}>
+            Start a new attempt
+          </Button>
+          <Button variant="ghost" onClick={() => router.push("/practice/singapore-maths/sample")}>
             Choose another year
           </Button>
         </div>
@@ -189,7 +239,7 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
   if (!fixture) return null;
 
   return (
-    <section aria-label="Practice session" className="mt-8 min-w-0 rounded-xl border border-royal/15 bg-white p-4 sm:p-6">
+    <section aria-label="Practice session" aria-busy={restoring} className="mt-8 min-w-0 rounded-xl border border-royal/15 bg-white p-4 sm:p-6">
       <h2 ref={headingRef} tabIndex={-1} className="text-xl font-semibold text-ink outline-none">
         Year {year} · Question {index + 1} of {fixtures.length}
       </h2>
@@ -221,8 +271,8 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
             }}
             error={error}
           />
-          <Button type="submit" className="mt-3">
-            Submit answer
+          <Button type="submit" className="mt-3" disabled={restoring}>
+            {restoring ? "Loading your answers…" : "Submit answer"}
           </Button>
         </form>
       ) : (
@@ -231,6 +281,12 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
           {correct ? "Correct." : "Not quite."}
         </p>
       )}
+
+      {notice ? (
+        <p className="mt-3 max-w-prose text-sm text-muted" role="status">
+          {notice}
+        </p>
+      ) : null}
 
       {alreadyAnswered && correct && (
         <div className="mt-4">
@@ -243,10 +299,10 @@ export function SampleSession({year, fixtures}: SampleSessionProps) {
           >
             Show explanation
           </Button>
-          {revealed && explanation && (
+          {revealed && record?.explanation && (
             <div id="sample-explanation" className="mt-3 max-w-prose" role="region" aria-label="Worked explanation">
               <h3 className="font-semibold">Worked explanation</h3>
-              <p className="mt-1">{explanation}</p>
+              <p className="mt-1">{record.explanation}</p>
             </div>
           )}
         </div>

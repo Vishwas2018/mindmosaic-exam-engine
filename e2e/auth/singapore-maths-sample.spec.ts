@@ -1,5 +1,5 @@
 import {test, expect} from "../fixtures/auth.fixture";
-import {type Page} from "@playwright/test";
+import {type BrowserContext, type Page} from "@playwright/test";
 
 // Correct answers taken from the server's pilot fixture answer keys. These are
 // used only to drive a "correct" submission through the server; the test never
@@ -12,10 +12,21 @@ const CORRECT_Q2_BY_YEAR: Record<3 | 5, number> = {
 
 const WRONG_ANSWER = 99999;
 
-type ContextAs = (key: string) => Promise<{newPage(): Promise<Page>}>;
+type ContextAs = (key: string) => Promise<BrowserContext>;
+
+/*
+ * Answers are recorded durably, one immutable submission per question per attempt, and the same fixture
+ * account is reused by every test below. Each test therefore starts its own fresh attempt (the explicit
+ * "new attempt" the product offers) so it does not inherit another test's answers.
+ */
+async function startFreshAttempt(context: BrowserContext, year: 3 | 5) {
+  const response = await context.request.delete(`/api/practice/singapore-maths/sample/session?year=${year}`);
+  expect(response.ok()).toBe(true);
+}
 
 async function openSampleYear(contextAs: ContextAs, year: 3 | 5) {
   const context = await contextAs("student-no-attempts");
+  await startFreshAttempt(context, year);
   const page = await context.newPage();
   await page.goto(`/practice/singapore-maths/sample?year=${year}`);
   await expect(
@@ -122,4 +133,66 @@ test.describe("Singapore Maths sample practice", () => {
       });
     });
   }
+});
+
+test.describe("Singapore Maths sample practice: durable answers", () => {
+  test("a refresh keeps every recorded verdict and the explanation, without asking the server to reveal it", async ({contextAs}) => {
+    const page = await openSampleYear(contextAs as ContextAs, 3);
+    const revealRequests: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes("/singapore-maths/sample/reveal")) revealRequests.push(request.url());
+    });
+
+    await submitAnswer(page, WRONG_ANSWER);
+    await expect(page.getByText(statusText(WRONG_ANSWER, false))).toBeVisible();
+    await page.getByRole("button", {name: "Next question"}).click();
+    const answer = CORRECT_Q2_BY_YEAR[3];
+    await submitAnswer(page, answer);
+    await expect(page.getByText(statusText(answer, true))).toBeVisible();
+
+    await page.reload();
+    await expect(page.getByRole("heading", {name: "Year 3 · Question 1 of 15"})).toBeVisible();
+    await expect(page.getByText(statusText(WRONG_ANSWER, false))).toBeVisible();
+    await expect(page.getByRole("button", {name: "Submit answer"})).toHaveCount(0);
+    await page.getByRole("button", {name: "Next question"}).click();
+    await expect(page.getByText(statusText(answer, true))).toBeVisible();
+    await page.getByRole("button", {name: "Show explanation"}).click();
+    await expect(page.getByRole("region", {name: "Worked explanation"})).toBeVisible();
+
+    expect(revealRequests).toEqual([]);
+  });
+
+  test("a stale tab is shown the recorded answer, never a verdict for the answer it just typed", async ({contextAs}) => {
+    const first = await openSampleYear(contextAs as ContextAs, 3);
+    const context = first.context();
+    const stale = await context.newPage();
+    await stale.goto("/practice/singapore-maths/sample?year=3");
+    await expect(stale.getByRole("heading", {name: "Year 3 · Question 1 of 15"})).toBeVisible();
+
+    await first.getByRole("button", {name: "Next question"}).click();
+    await submitAnswer(first, WRONG_ANSWER);
+    await expect(first.getByText(statusText(WRONG_ANSWER, false))).toBeVisible();
+
+    await stale.getByRole("button", {name: "Next question"}).click();
+    await expect(stale.getByRole("button", {name: "Submit answer"})).toBeEnabled();
+    await submitAnswer(stale, CORRECT_Q2_BY_YEAR[3]);
+
+    await expect(stale.getByText(statusText(WRONG_ANSWER, false))).toBeVisible();
+    await expect(stale.getByText(/first answer is the one that counts/i)).toBeVisible();
+    await expect(stale.getByRole("button", {name: "Show explanation"})).toHaveCount(0);
+  });
+
+  test("starting a new attempt is the only retry and survives a refresh", async ({contextAs}) => {
+    const page = await openSampleYear(contextAs as ContextAs, 3);
+    await submitAnswer(page, WRONG_ANSWER);
+    await expect(page.getByText(statusText(WRONG_ANSWER, false))).toBeVisible();
+
+    await page.getByRole("button", {name: "Finish session"}).click();
+    await page.getByRole("button", {name: "Start a new attempt"}).click();
+    await expect(page.getByRole("button", {name: "Submit answer"})).toBeVisible();
+
+    await page.reload();
+    await expect(page.getByRole("button", {name: "Submit answer"})).toBeVisible();
+    await expect(page.getByText(statusText(WRONG_ANSWER, false))).toHaveCount(0);
+  });
 });

@@ -5,9 +5,10 @@ import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sa
 import {parsePilotAnswer} from "@/features/visuals/bar-model/pilot-session";
 import {
   sampleExplanation,
+  sampleYearOf,
   validateSampleAnswer,
 } from "@/content/visual-fixtures/bar-model/sample-practice.server";
-import {recordSampleSubmission, getSampleSubmission} from "@/features/singapore-maths-sample/submission-store";
+import {getSampleStore, SampleStoreUnavailableError} from "@/features/singapore-maths-sample/attempt-store";
 
 interface SubmitBody {
   questionId: string;
@@ -22,6 +23,15 @@ function parseSubmitBody(body: unknown): SubmitBody | null {
   return {questionId: record.questionId, answer: record.answer};
 }
 
+/**
+ * One immutable graded submission per question per attempt (see attempt-store.ts).
+ *
+ * The response always describes the RECORDED submission: `answer` and `correct` are what the server
+ * stored, and `alreadyAnswered` says whether this request was the one that stored it. A later
+ * request with a different answer therefore can never be told its own answer was right or wrong:
+ * it is told what was recorded, and the client shows that. The worked explanation rides along only
+ * when the recorded submission is correct, so the client never needs a second round trip for it.
+ */
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isSingaporeMathsSampleAllowed()) {
     return new NextResponse(null, {status: 404});
@@ -51,7 +61,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   const {questionId, answer} = parsed;
 
   // Reject unrecognised question ids before touching the answer key.
-  if (sampleExplanation(questionId) === null) {
+  const year = sampleYearOf(questionId);
+  if (year === null || sampleExplanation(questionId) === null) {
     return NextResponse.json({error: "not_found"}, {status: 404});
   }
 
@@ -60,25 +71,27 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({error: "invalid_answer"}, {status: 400});
   }
 
-  const result = validateSampleAnswer(questionId, numericAnswer);
-  const submittedCorrect = result.correct === true;
+  const verdict = validateSampleAnswer(questionId, numericAnswer).correct === true;
 
-  // Idempotent: re-submitting the same question returns the recorded result
-  // instead of creating a duplicate. The first submitted answer wins, which
-  // also makes concurrent duplicate submissions race-safe (the check + set
-  // are synchronous with no await between them).
-  const recorded =
-    recordSampleSubmission(user.id, questionId, numericAnswer, submittedCorrect) ??
-    getSampleSubmission(user.id, questionId);
-  const isCorrect = recorded?.correct ?? submittedCorrect;
-
-  if (!isCorrect) {
-    return NextResponse.json({correct: false});
+  try {
+    const {submission, created} = await getSampleStore().recordSubmission(
+      user.id,
+      year,
+      questionId,
+      numericAnswer,
+      verdict,
+    );
+    const explanation = submission.correct ? sampleExplanation(questionId) : null;
+    return NextResponse.json({
+      correct: submission.correct,
+      answer: submission.answer,
+      alreadyAnswered: !created,
+      ...(explanation !== null ? {workedExplanation: explanation} : {}),
+    });
+  } catch (error) {
+    if (error instanceof SampleStoreUnavailableError) {
+      return NextResponse.json({error: "store_unavailable"}, {status: 503});
+    }
+    throw error;
   }
-
-  const explanation = sampleExplanation(questionId);
-  return NextResponse.json({
-    correct: true,
-    ...(explanation !== null ? {workedExplanation: explanation} : {}),
-  });
 }
