@@ -181,9 +181,9 @@ describe("Programs page", () => {
     expect(screen.getByRole("heading", { name: /icas-style/i })).toBeInTheDocument();
   });
 
-  it("lists the six Planned pathways, none of them dated", () => {
+  it("lists the six Planned pathways under an accessible heading, none of them dated", () => {
     render(<ProgramsPage />);
-    const heading = screen.getByRole("heading", { name: "Planned pathways" });
+    const heading = screen.getByRole("heading", { name: "Pathways in development" });
     const section = heading.closest("div")?.parentElement;
     if (!section) throw new Error("Planned pathways section not found");
     for (const name of [
@@ -197,6 +197,48 @@ describe("Programs page", () => {
       expect(within(section).getByText(name)).toBeInTheDocument();
     }
     expect(within(section).queryByText(/\b20\d{2}\b/)).not.toBeInTheDocument();
+  });
+
+  it("describes availability accurately without promising a full set", () => {
+    render(<ProgramsPage />);
+    // Available means enough checked questions to run a set; some sets may be shortened.
+    expect(screen.getByText(/run a set/i)).toBeInTheDocument();
+    expect(screen.queryByText(/fill a full set/i)).not.toBeInTheDocument();
+    expect(programsMetadata.description).not.toContain("full set");
+  });
+
+  it("moves focus between year radios with arrow keys without changing selection", async () => {
+    const user = userEvent.setup();
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year3 = radiogroup.getByRole("radio", { name: /^Year 3/ });
+    const year4 = radiogroup.getByRole("radio", { name: /^Year 4/ });
+
+    year3.focus();
+    expect(document.activeElement).toBe(year3);
+    expect(year3).toHaveAttribute("aria-checked", "true");
+
+    await user.keyboard("{ArrowRight}");
+    expect(document.activeElement).toBe(year4);
+    // Focus moved; selection and rendered content are unchanged until confirmed.
+    expect(year3).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("heading", { name: "Open for Year 3" })).toBeInTheDocument();
+
+    await user.keyboard("{ArrowLeft}");
+    expect(document.activeElement).toBe(year3);
+  });
+
+  it("exposes anchor navigation to the discovery and planned sections", () => {
+    render(<ProgramsPage />);
+    expect(
+      screen.getByRole("link", { name: "Explore available programmes" }),
+    ).toHaveAttribute("href", "#open-now");
+    expect(screen.getByRole("link", { name: "See upcoming pathways" })).toHaveAttribute(
+      "href",
+      "#coming-next",
+    );
+    expect(screen.getByRole("heading", { id: "open-now-heading" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { id: "coming-next-heading" })).toBeInTheDocument();
   });
 });
 

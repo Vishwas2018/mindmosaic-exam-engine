@@ -8,6 +8,7 @@ import { Reveal } from "@/features/landing/components/Reveal";
 import { SiteNav } from "@/features/landing/components/SiteNav";
 import {
   Eyebrow,
+  Section,
   SectionHeading,
   MosaicRule,
   mmButton,
@@ -18,7 +19,7 @@ import { routes } from "@/features/landing/content";
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Choose a year level to see what's open for it today — NAPLAN-style, ICAS-style, curriculum lessons and what's still being written. NAPLAN-style and ICAS-style practice for Years 3 and 5 is open now.",
+    "Choose a year level to see what's open for it today — NAPLAN-style and ICAS-style practice for Years 3 and 5 is open now; other pathways are in development. Availability is based on checked questions, not guaranteed full-length sets.",
 };
 
 export default function ProgramsPage() {
@@ -32,7 +33,7 @@ export default function ProgramsPage() {
         <section
           id="hero"
           aria-labelledby="hero-heading"
-          className="bg-mm-page border-b border-mm-line"
+          className="bg-mm-page border-b border-mm-line py-[clamp(40px,4vw,64px)]"
         >
           <div className="mm-width">
             <div className="grid items-center gap-[clamp(24px,4vw,64px)] lg:grid-cols-2 lg:gap-16">
@@ -66,8 +67,8 @@ export default function ProgramsPage() {
                       </Link>
                     </div>
                     <p className="mt-6 max-w-[540px] text-[14px] leading-[1.6] text-mm-muted">
-                      A program is only listed as available once it has enough checked questions to
-                      fill a full set.
+                      A program is listed as available once enough checked questions exist to run a
+                      set — some sets may be shortened.
                     </p>
                   </div>
                 </Reveal>
@@ -99,28 +100,35 @@ export default function ProgramsPage() {
         </section>
 
         {/* ---------- Open now: year-level discovery ---------- */}
-        <section id="open-now" className="scroll-mt-[96px]">
-          <div className="mm-width">
-            <SectionHeading
-              id="open-now-heading"
-              eyebrow="Open now"
-              title="Choose a year level"
-              intro="NAPLAN-style and ICAS-style practice sets are ready for Year 3 and Year 5. Pick a year to see which subjects are open, then view a programme."
-            />
-            <ProgramsYearPicker years={years} />
-          </div>
-        </section>
+        <Section
+          id="open-now"
+          className="scroll-mt-[96px]"
+          tone="white"
+          labelledBy="open-now-heading"
+        >
+          <SectionHeading
+            id="open-now-heading"
+            eyebrow="Open now"
+            title="Choose a year level"
+            intro="NAPLAN-style and ICAS-style practice sets are ready for Year 3 and Year 5. Pick a year to see which subjects are open, then view a programme."
+          />
+          <ProgramsYearPicker years={years} />
+        </Section>
 
         {/* ---------- Coming next: planned pathways ---------- */}
-        <section id="coming-next" className="scroll-mt-[96px]">
-          <div className="mm-width">
-            <SectionHeading
-              id="coming-next-heading"
-              eyebrow="Coming next"
-              title="Pathways in development"
-              intro="These programmes are being written and checked. They have no release date yet, and none are shown as available."
-            />
-            <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
+        <Section
+          id="coming-next"
+          className="scroll-mt-[96px]"
+          tone="page"
+          labelledBy="coming-next-heading"
+        >
+          <SectionHeading
+            id="coming-next-heading"
+            eyebrow="Coming next"
+            title="Pathways in development"
+            intro="These programmes are being written and checked. They have no release date yet, and none are shown as available."
+          />
+          <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
               {PLANNED_PATHWAYS.map((pathway) => (
                 <Reveal key={pathway.name} kind="up" delayMs={60}>
                   <article className="rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
@@ -148,8 +156,7 @@ export default function ProgramsPage() {
                 className="w-[clamp(180px,20vw,360px)] h-[clamp(16px,2vw,26px)] gap-2"
               />
             </div>
-          </div>
-        </section>
+        </Section>
 
         {/* ---------- Closing CTA ---------- */}
         <section className="bg-mm-tint border-t border-mm-line">

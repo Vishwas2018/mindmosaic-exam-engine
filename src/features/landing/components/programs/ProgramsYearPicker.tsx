@@ -94,21 +94,55 @@ export function ProgramsYearPicker({
   const [year, setYear] = useState<number>(initialYear);
   const live = LIVE_YEARS.has(year);
   const status = years.find((entry) => entry.year === year);
+  const yearsList = Array.from({ length: 12 }, (_, index) => index + 1);
+
+  function selectYear(n: number) {
+    setYear(n);
+  }
+
+  function handleRadioKeyDown(index: number) {
+    return (event: React.KeyboardEvent) => {
+      let next: number | undefined;
+      switch (event.key) {
+        case "ArrowRight":
+        case "ArrowDown":
+          next = (index + 1) % yearsList.length;
+          break;
+        case "ArrowLeft":
+        case "ArrowUp":
+          next = (index - 1 + yearsList.length) % yearsList.length;
+          break;
+        case "Home":
+          next = 0;
+          break;
+        case "End":
+          next = yearsList.length - 1;
+          break;
+        default:
+          return;
+      }
+      event.preventDefault();
+      const radiogroup = event.currentTarget.closest('[role="radiogroup"]');
+      const radios = radiogroup?.querySelectorAll<HTMLElement>('[role="radio"]');
+      radios?.[next]?.focus();
+    };
+  }
 
   return (
     <>
-      <section aria-labelledby="yr-h" className="rounded-[24px] border border-mm-line bg-white p-[clamp(18px,2.4vw,28px)]">
+      <section className="rounded-[24px] border border-mm-line bg-white p-[clamp(18px,2.4vw,28px)]">
         <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="yr-h" className="text-[17px] font-semibold text-mm-ink">
-            Choose a year level
-          </h2>
           <span className="inline-flex items-center gap-2 text-sm text-mm-ink-soft">
             <span aria-hidden="true" className="h-2 w-2 rounded-full bg-mm-brand" />
             Has programs available now
           </span>
         </div>
-        <div role="radiogroup" aria-labelledby="yr-h" className="grid grid-cols-[repeat(auto-fill,minmax(88px,1fr))] gap-2">
-          {Array.from({ length: 12 }, (_, index) => index + 1).map((n) => {
+        <div
+          role="radiogroup"
+          aria-label="Choose a year level"
+          className="grid grid-cols-[repeat(auto-fill,minmax(88px,1fr))] gap-2"
+        >
+          {yearsList.map((n) => {
             const selected = n === year;
             const isLive = LIVE_YEARS.has(n);
             return (
@@ -117,9 +151,10 @@ export function ProgramsYearPicker({
                 type="button"
                 role="radio"
                 aria-checked={selected}
-                onClick={() => setYear(n)}
+                onClick={() => selectYear(n)}
+                onKeyDown={handleRadioKeyDown(n - 1)}
                 className={clsx(
-                  "flex min-h-12 items-center justify-center gap-2 rounded-xl border text-[15px] font-semibold transition-colors",
+                  "flex min-h-12 items-center justify-center gap-2 rounded-xl border text-[15px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-mm-brand focus-visible:ring-offset-2",
                   selected
                     ? "border-mm-brand bg-mm-brand text-white"
                     : "border-mm-line bg-white text-mm-ink hover:border-mm-brand",
@@ -213,7 +248,8 @@ export function ProgramsYearPicker({
             </h2>
             <p className="max-w-[620px] text-[16px] leading-[1.6] text-mm-ink-soft">
               Year {year} content is still being written and checked. It will appear here once
-              there are enough questions for a full set. Years 3 and 5 are open now.
+              there are enough checked questions to run a set (some sets may be shortened). Years 3
+              and 5 are open now.
             </p>
             <div className="mt-1 flex flex-wrap gap-3">
               <button type="button" onClick={() => setYear(3)} className={mmButton()}>
