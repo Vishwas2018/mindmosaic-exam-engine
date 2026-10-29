@@ -16,6 +16,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createTargetSession } from "@/server/assessment/target-session-writes";
 import { resolveSessionStorageModel } from "@/server/assessment/storage-model";
 import { getExamBank } from "@/server/exam-bank";
+import { isScholarshipHiddenFor, withScholarshipSample } from "@/server/scholarship-sample-preview";
 
 /**
  * Creates a server-selected exam session for a signed-in student
@@ -157,7 +158,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   /* Server-chosen, never client-supplied: the client cannot pick or
      predict its own question selection for a signed-in session. */
   const seed = crypto.randomUUID();
-  const bank = getExamBank(bankId);
+  /* Preview-only second source for the Scholarship sample: a no-op unless the gated, allowlisted preview is active. */
+  const bank = await withScholarshipSample(getExamBank(bankId), user.id);
 
   let config: ExamSelectionConfig;
   let selectedQuestions: readonly AuthoringQuestion[];
@@ -167,7 +169,7 @@ export async function POST(request: Request): Promise<NextResponse> {
        server's own copy of the registry, so the only thing the request
        decides is WHICH pattern — never how many questions or how long. */
     const pattern = getExamPattern(patternId);
-    if (!pattern) {
+    if (!pattern || isScholarshipHiddenFor(pattern, user.id)) {
       return NextResponse.json({ error: "unknown_pattern" }, { status: 404 });
     }
     /* Deferred patterns (the writing tasks) are listed in the picker and are
