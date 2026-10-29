@@ -50,6 +50,8 @@ export default defineConfig({
       BILLING_ENFORCEMENT_ENABLED: "",
       SCHOLARSHIP_SAMPLE_PREVIEW: "enabled",
       SCHOLARSHIP_SAMPLE_SUPABASE_REF: "local",
+      /* Required, and refused if this stack were ever bound to it. A placeholder: the e2e stack is a local loopback. */
+      PRODUCTION_SUPABASE_PROJECT_REF: "e2eproductionplaceholder",
       SCHOLARSHIP_SAMPLE_ALLOWED_USER_IDS: ids.allowed,
     },
   },

@@ -40,6 +40,7 @@ function useActivePreview(overrides: Record<string, string> = {}) {
   const env: Record<string, string> = {
     SCHOLARSHIP_SAMPLE_PREVIEW: "enabled",
     SCHOLARSHIP_SAMPLE_SUPABASE_REF: "devref123",
+    PRODUCTION_SUPABASE_PROJECT_REF: "prodref4567",
     NEXT_PUBLIC_SUPABASE_URL: "https://devref123.supabase.co",
     SCHOLARSHIP_SAMPLE_ALLOWED_USER_IDS: ALLOWED,
     VERCEL_ENV: "preview",
@@ -173,6 +174,17 @@ describe("POST /api/exam/session: Scholarship sample", () => {
 
   it("refuses to serve when the Supabase project binding does not match", async () => {
     useActivePreview({ SCHOLARSHIP_SAMPLE_SUPABASE_REF: "notthisproject" });
+    const { createSession } = await loadRoutes();
+    expect((await createSession(sessionRequest())).status).toBe(404);
+    expect(state.rpcCalls).toHaveLength(0);
+  });
+
+  it.each([
+    ["undeclared", ""],
+    ["malformed", "not a ref"],
+    ["the bound project itself", "devref123"],
+  ])("refuses to serve when the production project ref is %s", async (_label, production) => {
+    useActivePreview({ PRODUCTION_SUPABASE_PROJECT_REF: production });
     const { createSession } = await loadRoutes();
     expect((await createSession(sessionRequest())).status).toBe(404);
     expect(state.rpcCalls).toHaveLength(0);

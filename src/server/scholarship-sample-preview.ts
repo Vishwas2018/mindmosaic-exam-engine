@@ -30,7 +30,9 @@ import { getExamBank, getPatternReadiness } from "./exam-bank";
  *      context this code has never heard of, is refused;
  *   3. SCHOLARSHIP_SAMPLE_SUPABASE_REF names the Supabase project this deployment is actually configured with
  *      (or "local" for a loopback stack), so the sample cannot be switched on against a database nobody chose;
- *   4. the signed-in user's id is in SCHOLARSHIP_SAMPLE_ALLOWED_USER_IDS.
+ *   4. PRODUCTION_SUPABASE_PROJECT_REF is declared as a well-formed ref and that project is not the one this
+ *      deployment is bound to (an undeclared or malformed value refuses everything: fail closed);
+ *   5. the signed-in user's id is in SCHOLARSHIP_SAMPLE_ALLOWED_USER_IDS.
  * and the 12 raw question objects still hash to the values pinned from the import manifest.
  * With the flag unset (production, every other environment today) every function below is a no-op and the
  * behaviour of the app is unchanged.
@@ -95,11 +97,28 @@ function allowedUserIds(env: Env): ReadonlySet<string> {
   );
 }
 
+/** A hosted Supabase project ref (`<ref>` in `https://<ref>.supabase.co`): lowercase letters and digits only. */
+const PROJECT_REF = /^[a-z0-9]{8,32}$/;
+
+/**
+ * The production Supabase project ref, as explicitly declared by the owner. Undeclared, blank or malformed (a URL, a
+ * list, anything but a single plain ref) yields null, and the caller then refuses: the sample is never served unless
+ * the deployment can prove which project is production and that it is not bound to it.
+ */
+function declaredProductionRef(env: Env): string | null {
+  const raw = env.PRODUCTION_SUPABASE_PROJECT_REF?.trim().toLowerCase();
+  return raw && PROJECT_REF.test(raw) ? raw : null;
+}
+
 export function isScholarshipSampleAllowedFor(userId: string | null | undefined, env: Env = process.env): boolean {
   if (!userId || !isScholarshipSampleModeActive(env)) return false;
   const ref = configuredSupabaseRef(env);
   if (!ref || env.SCHOLARSHIP_SAMPLE_SUPABASE_REF?.trim().toLowerCase() !== ref) return false;
-  /* Belt and braces: refs the owner has listed as production can never be bound, even by mistake. */
+  /* The production project must be declared, and is refused under all circumstances. Missing/invalid declaration
+     fails closed, because without it nothing proves this deployment is not pointed at production. */
+  const production = declaredProductionRef(env);
+  if (!production || ref === production) return false;
+  /* Belt and braces: any further refs the owner has listed as forbidden can never be bound either. */
   const forbidden = (env.SCHOLARSHIP_SAMPLE_FORBIDDEN_SUPABASE_REFS ?? "").split(",").map((entry) => entry.trim().toLowerCase());
   if (forbidden.includes(ref)) return false;
   return allowedUserIds(env).has(userId.toLowerCase());

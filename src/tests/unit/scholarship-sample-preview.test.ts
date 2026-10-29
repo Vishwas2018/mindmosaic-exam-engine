@@ -31,6 +31,7 @@ const OTHER = "22222222-2222-4222-8222-222222222222";
 const ACTIVE_ENV = {
   SCHOLARSHIP_SAMPLE_PREVIEW: "enabled",
   SCHOLARSHIP_SAMPLE_SUPABASE_REF: "devref123",
+  PRODUCTION_SUPABASE_PROJECT_REF: "prodref4567",
   NEXT_PUBLIC_SUPABASE_URL: "https://devref123.supabase.co",
   SCHOLARSHIP_SAMPLE_ALLOWED_USER_IDS: ALLOWED,
   VERCEL_ENV: "preview",
@@ -237,6 +238,79 @@ describe("Scholarship sample preview gate: deployment-context and identity harde
     expect(
       isScholarshipSampleAllowedFor(ALLOWED, { ...ACTIVE_ENV, SCHOLARSHIP_SAMPLE_FORBIDDEN_SUPABASE_REFS: "x, DEVREF123" }),
     ).toBe(false);
+  });
+
+  describe("production-project exclusion (PRODUCTION_SUPABASE_PROJECT_REF)", () => {
+    it("is granted when a well-formed production ref is declared and differs from the bound project", () => {
+      expect(isScholarshipSampleAllowedFor(ALLOWED, ACTIVE_ENV)).toBe(true);
+      /* Declaration is trimmed and case-insensitive. */
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...ACTIVE_ENV, PRODUCTION_SUPABASE_PROJECT_REF: "  PRODREF4567 " })).toBe(true);
+    });
+
+    it("fails closed when the production ref is absent or blank", () => {
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...ACTIVE_ENV, PRODUCTION_SUPABASE_PROJECT_REF: undefined })).toBe(false);
+      for (const blank of ["", "   "]) {
+        expect(isScholarshipSampleAllowedFor(ALLOWED, { ...ACTIVE_ENV, PRODUCTION_SUPABASE_PROJECT_REF: blank })).toBe(false);
+      }
+    });
+
+    it("fails closed when the production ref is malformed", () => {
+      for (const malformed of [
+        "short", // too short to be a project ref
+        "https://prodref4567.supabase.co", // a URL, not a ref
+        "prodref4567.supabase.co",
+        "prodref4567,otherref89", // a list, not a single ref
+        "prod ref 4567",
+        "prodref-4567",
+        "prodref4567/",
+        "*",
+        "x".repeat(33),
+      ]) {
+        expect(isScholarshipSampleAllowedFor(ALLOWED, { ...ACTIVE_ENV, PRODUCTION_SUPABASE_PROJECT_REF: malformed })).toBe(false);
+      }
+    });
+
+    it("refuses the production project under all circumstances (declared ref matches the bound project)", () => {
+      const boundToProduction = {
+        ...ACTIVE_ENV,
+        SCHOLARSHIP_SAMPLE_SUPABASE_REF: "prodref4567",
+        NEXT_PUBLIC_SUPABASE_URL: "https://prodref4567.supabase.co",
+      };
+      expect(isScholarshipSampleAllowedFor(ALLOWED, boundToProduction)).toBe(false);
+      /* No other setting can rescue it: not the forbidden list, not a different casing, not another Vercel context. */
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...boundToProduction, SCHOLARSHIP_SAMPLE_FORBIDDEN_SUPABASE_REFS: "unrelated" })).toBe(false);
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...boundToProduction, PRODUCTION_SUPABASE_PROJECT_REF: "PRODREF4567" })).toBe(false);
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...boundToProduction, VERCEL_ENV: "development" })).toBe(false);
+    });
+
+    it("a declared ref that differs from the bound project does not by itself grant access (other gates still apply)", () => {
+      const mismatched = { ...ACTIVE_ENV, PRODUCTION_SUPABASE_PROJECT_REF: "anotherref99" };
+      expect(isScholarshipSampleAllowedFor(ALLOWED, mismatched)).toBe(true);
+      expect(isScholarshipSampleAllowedFor(OTHER, mismatched)).toBe(false);
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...mismatched, SCHOLARSHIP_SAMPLE_PREVIEW: "" })).toBe(false);
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...mismatched, VERCEL_ENV: "production" })).toBe(false);
+    });
+
+    it("also applies to a local loopback stack: the declaration is still required", () => {
+      const local = {
+        ...ACTIVE_ENV,
+        VERCEL_ENV: undefined,
+        NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:54321",
+        SCHOLARSHIP_SAMPLE_SUPABASE_REF: "local",
+      };
+      expect(isScholarshipSampleAllowedFor(ALLOWED, local)).toBe(true);
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...local, PRODUCTION_SUPABASE_PROJECT_REF: undefined })).toBe(false);
+      expect(isScholarshipSampleAllowedFor(ALLOWED, { ...local, PRODUCTION_SUPABASE_PROJECT_REF: "not a ref" })).toBe(false);
+    });
+
+    it("an invalid declaration serves nothing: no sample questions, and Scholarship stays hidden from the allowlisted user's peers", async () => {
+      const broken = { ...ACTIVE_ENV, PRODUCTION_SUPABASE_PROJECT_REF: undefined };
+      const bank = Object.freeze([]);
+      expect(await withScholarshipSample(bank, ALLOWED, broken)).toBe(bank);
+      const scholarship = EXAM_PATTERNS.find((pattern) => pattern.examStyle === "scholarship_style")!;
+      expect(isScholarshipHiddenFor(scholarship, ALLOWED, broken)).toBe(true);
+      expect(visibleExamPatterns(ALLOWED, broken).some((pattern) => pattern.examStyle === "scholarship_style")).toBe(false);
+    });
   });
 
   it("rejects anonymous viewers and malformed allowlist entries", () => {
