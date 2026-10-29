@@ -1,0 +1,12 @@
+{
+  "sourceRevision": "45b6cdab335723b2ef822f854ac7e15e556bb7d7",
+  "manifestCommit": "16c5c1ddb22c30c325f8ef03f8845168a9b0fda8",
+  "manifestSha256": "4e754be7fd4df59a9208549c261e7f251abf5d6f1a6b2de55215ed11ad11eb40",
+  "identitiesSha256": "a9bf76e6d0b015fa912e55936ff176f2bd4f47cb4fe64de80057fccd0e893a51",
+  "governanceSha256": "26776f3f1b7d4238136fe503ce1367cdefb1b78f4b8bf1f4e263c08843c838bf",
+  "sheetSha256": "ac7ae35d5b7b727234a6afb54553df4814bc867160df8691241a6eaf28232ca2",
+  "adminPreviewEntries": 160,
+  "sampleEntries": 12,
+  "publicationEnabled": false,
+  "ownerApprovalRecorded": false
+}

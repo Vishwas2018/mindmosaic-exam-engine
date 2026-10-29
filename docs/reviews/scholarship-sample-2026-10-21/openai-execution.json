@@ -1,0 +1,18 @@
+{
+  "providerEndpoint": "https://api.openai.com/v1/chat/completions",
+  "provider": "openai",
+  "requestedModel": "gpt-5.4",
+  "returnedModelVersion": null,
+  "responseId": null,
+  "startedAt": "2026-10-20T23:21:39.239Z",
+  "completedAt": "2026-10-20T23:21:41.029Z",
+  "httpStatus": 429,
+  "responseHeaders": {
+    "date": "Tue, 20 Oct 2026 23:21:40 GMT",
+    "x-request-id": "req_4d6b56d7a2be422b9fd436e5370c287a"
+  },
+  "packetSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+  "requestFileSha256": "e8e592de7c0d1ede97c1f303b64b3e00ce6d7968a46a9752efb03394115405d8",
+  "responseSha256": "23e8ca3925c70e8ae7d69cdbbf0d418ced372632868df81515bfece393f5b639",
+  "transport": "Single stateless HTTPS API request; no previous messages, keys or prior reviews in request"
+}
