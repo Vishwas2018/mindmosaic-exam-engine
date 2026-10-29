@@ -122,6 +122,7 @@ export function ProgramsYearPicker({
           return;
       }
       event.preventDefault();
+      selectYear(next + 1);
       const radiogroup = event.currentTarget.closest('[role="radiogroup"]');
       const radios = radiogroup?.querySelectorAll<HTMLElement>('[role="radio"]');
       radios?.[next]?.focus();
@@ -151,6 +152,7 @@ export function ProgramsYearPicker({
                 type="button"
                 role="radio"
                 aria-checked={selected}
+                tabIndex={selected ? 0 : -1}
                 onClick={() => selectYear(n)}
                 onKeyDown={handleRadioKeyDown(n - 1)}
                 className={clsx(

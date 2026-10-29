@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, within, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -207,8 +207,19 @@ describe("Programs page", () => {
     expect(programsMetadata.description).not.toContain("full set");
   });
 
-  it("moves focus between year radios with arrow keys without changing selection", async () => {
-    const user = userEvent.setup();
+  it("exposes only the checked year radio in the tab order", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year3 = within(radiogroup).getByRole("radio", { name: /^Year 3/ });
+    const year4 = within(radiogroup).getByRole("radio", { name: /^Year 4/ });
+
+    expect(year3).toHaveAttribute("aria-checked", "true");
+    expect(year3).toHaveAttribute("tabIndex", "0");
+    expect(year4).toHaveAttribute("aria-checked", "false");
+    expect(year4).toHaveAttribute("tabIndex", "-1");
+  });
+
+  it("moves focus and selects the next year with ArrowRight", () => {
     render(<ProgramsPage />);
     const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
     const year3 = within(radiogroup).getByRole("radio", { name: /^Year 3/ });
@@ -218,14 +229,73 @@ describe("Programs page", () => {
     expect(document.activeElement).toBe(year3);
     expect(year3).toHaveAttribute("aria-checked", "true");
 
-    await user.keyboard("{ArrowRight}");
-    expect(document.activeElement).toBe(year4);
-    // Focus moved; selection and rendered content are unchanged until confirmed.
-    expect(year3).toHaveAttribute("aria-checked", "true");
-    expect(screen.getByRole("heading", { name: "Open for Year 3" })).toBeInTheDocument();
+    fireEvent.keyDown(year3, { key: "ArrowRight" });
 
-    await user.keyboard("{ArrowLeft}");
-    expect(document.activeElement).toBe(year3);
+    expect(document.activeElement).toBe(year4);
+    expect(year4).toHaveAttribute("aria-checked", "true");
+    expect(year4).toHaveAttribute("tabIndex", "0");
+    expect(year3).toHaveAttribute("aria-checked", "false");
+    expect(year3).toHaveAttribute("tabIndex", "-1");
+    expect(screen.getByRole("heading", { name: "Open for Year 4" })).toBeInTheDocument();
+  });
+
+  it("wraps from the last year back to the first on ArrowDown", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year12 = within(radiogroup).getByRole("radio", { name: /^Year 12/ });
+    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1/ });
+
+    year12.focus();
+    fireEvent.keyDown(year12, { key: "ArrowDown" });
+
+    expect(document.activeElement).toBe(year1);
+    expect(year1).toHaveAttribute("aria-checked", "true");
+    expect(year12).toHaveAttribute("aria-checked", "false");
+  });
+
+  it("selects the first year on Home and the last year on End", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1/ });
+    const year12 = within(radiogroup).getByRole("radio", { name: /^Year 12/ });
+
+    year1.focus();
+    fireEvent.keyDown(year1, { key: "Home" });
+
+    expect(document.activeElement).toBe(year1);
+    expect(year1).toHaveAttribute("aria-checked", "true");
+
+    year12.focus();
+    fireEvent.keyDown(year12, { key: "End" });
+
+    expect(document.activeElement).toBe(year12);
+    expect(year12).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("heading", { name: "Open for Year 12" })).not.toBeInTheDocument();
+  });
+
+  it("selects an unavailable year and shows its explanatory content", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year4 = within(radiogroup).getByRole("radio", { name: /^Year 4/ });
+
+    year4.focus();
+    fireEvent.keyDown(year4, { key: "ArrowRight" }); // Year 4 -> Year 5 (live)
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key: "ArrowLeft" }); // Year 5 -> Year 4 (unavailable)
+
+    expect(year4).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("heading", { name: "Nothing open for Year 4 yet" })).toBeInTheDocument();
+  });
+
+  it("selects a year by mouse click", async () => {
+    const user = userEvent.setup();
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year5 = within(radiogroup).getByRole("radio", { name: /^Year 5/ });
+
+    await user.click(year5);
+
+    expect(year5).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("heading", { name: "Open for Year 5" })).toBeInTheDocument();
   });
 
   it("exposes anchor navigation to the discovery and planned sections", () => {
