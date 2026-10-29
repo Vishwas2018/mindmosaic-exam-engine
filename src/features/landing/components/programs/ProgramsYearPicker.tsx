@@ -8,6 +8,7 @@ import { clsx } from "clsx";
 import type { ProgrammeYearStatus, SubjectRow } from "../../programme-status";
 import { routes } from "../../content";
 import { mmButton } from "../primitives";
+import { Reveal } from "../Reveal";
 
 const LIVE_YEARS = new Set([3, 5]);
 
@@ -18,7 +19,7 @@ function SubjectChip({ subject }: { subject: SubjectRow }) {
       className={clsx(
         "rounded-lg border px-2.5 py-[5px] text-[13.5px]",
         available
-          ? "border-transparent bg-[#D9EFEC] text-[#0B6B63]"
+          ? "border-transparent bg-mm-tint text-mm-brand"
           : "border-dashed border-mm-line-quiet text-mm-quiet",
       )}
     >
@@ -33,19 +34,37 @@ function FamilyCard({
   href,
   subjects,
   note,
+  limited,
 }: {
   name: string;
   href: string;
   subjects: readonly SubjectRow[];
   note?: string;
+  limited?: boolean;
 }) {
   return (
     <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">{name}</h3>
-        <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#D9EFEC] px-2.5 py-1 text-[13px] font-semibold text-[#0B6B63]">
-          <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />
-          Available
+        <span
+          className={clsx(
+            "inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-1 text-[13px] font-semibold",
+            limited
+              ? "border border-mm-line bg-mm-tint-soft text-mm-ink-soft"
+              : "border-transparent bg-mm-tint text-mm-brand",
+          )}
+        >
+          {limited ? (
+            <>
+              <span aria-hidden="true" className="h-[13px] w-[13px] rounded-full bg-mm-ink-soft" />
+              Limited
+            </>
+          ) : (
+            <>
+              <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />
+              Available
+            </>
+          )}
         </span>
       </div>
       <ul className="flex flex-wrap gap-1.5">
@@ -84,7 +103,7 @@ export function ProgramsYearPicker({
             Choose a year level
           </h2>
           <span className="inline-flex items-center gap-2 text-sm text-mm-ink-soft">
-            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#0B6B63]" />
+            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-mm-brand" />
             Has programs available now
           </span>
         </div>
@@ -109,7 +128,7 @@ export function ProgramsYearPicker({
                 {isLive && (
                   <span
                     aria-hidden="true"
-                    className={clsx("h-[7px] w-[7px] rounded-full", selected ? "bg-white" : "bg-[#0B6B63]")}
+                    className={clsx("h-[7px] w-[7px] rounded-full", selected ? "bg-white" : "bg-mm-brand")}
                   />
                 )}
                 Year {n}
@@ -127,41 +146,48 @@ export function ProgramsYearPicker({
               Open for Year {year}
             </h2>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-4">
-              <FamilyCard
-                name={`NAPLAN-style · Year ${year}`}
-                href={`${routes.programs}/naplan-style?year=${year}`}
-                subjects={status.naplan}
-                note="Writing tasks are only in Build your own practice for now."
-              />
-              <FamilyCard
-                name={`ICAS-style · Year ${year}`}
-                href={`${routes.programs}/icas-style?year=${year}`}
-                subjects={status.icas}
-              />
-              <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">Curriculum lessons</h3>
-                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#FFF1E6] px-2.5 py-1 text-[13px] font-semibold text-[#8A4B12]">
-                    Limited
-                  </span>
-                </div>
-                <p className="text-[15.5px] leading-[1.55] text-mm-ink-soft">
-                  Maths and English lessons with a learning intention, worked example and a short
-                  check. Only a limited set of lessons is published so far.
-                </p>
-                <p className="text-sm text-mm-muted">For signed-in students only.</p>
-                <Link
-                  href={routes.startFree}
-                  className="mt-auto flex w-fit items-center gap-2 text-[15.5px] font-semibold text-mm-brand hover:text-mm-brand-deep"
-                >
-                  Start free to use lessons
-                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                </Link>
-              </article>
-              <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">Build your own practice</h3>
-                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#D9EFEC] px-2.5 py-1 text-[13px] font-semibold text-[#0B6B63]">
+              <Reveal kind="up" delayMs={0}>
+                <FamilyCard
+                  name={`NAPLAN-style · Year ${year}`}
+                  href={`${routes.programs}/naplan-style?year=${year}`}
+                  subjects={status.naplan}
+                  note="Writing tasks are only in Build your own practice for now."
+                />
+              </Reveal>
+              <Reveal kind="up" delayMs={60}>
+                <FamilyCard
+                  name={`ICAS-style · Year ${year}`}
+                  href={`${routes.programs}/icas-style?year=${year}`}
+                  subjects={status.icas}
+                />
+              </Reveal>
+              <Reveal kind="up" delayMs={120}>
+                <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">Curriculum lessons</h3>
+                    <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border border-mm-line bg-mm-tint-soft px-2.5 py-1 text-[13px] font-semibold text-mm-ink-soft">
+                      Limited
+                    </span>
+                  </div>
+                  <p className="text-[15.5px] leading-[1.55] text-mm-ink-soft">
+                    Maths and English lessons with a learning intention, worked example and a short
+                    check. Only a limited set of lessons is published so far.
+                  </p>
+                  <p className="text-sm text-mm-muted">For signed-in students only.</p>
+                  <Link
+                    href={routes.startFree}
+                    className="mt-auto flex w-fit items-center gap-2 text-[15.5px] font-semibold text-mm-brand hover:text-mm-brand-deep"
+                  >
+                    Start free to use lessons
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                  </Link>
+                </article>
+              </Reveal>
+              <Reveal kind="up" delayMs={180}>
+                <article className="flex flex-col gap-3.5 rounded-[20px] border border-mm-line bg-white p-[clamp(20px,2.4vw,28px)]">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-xl font-bold tracking-[-0.015em] text-mm-ink">Build your own practice</h3>
+                  <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border-transparent bg-mm-tint px-2.5 py-1 text-[13px] font-semibold text-mm-brand">
                     <Check aria-hidden="true" className="h-[13px] w-[13px]" strokeWidth={3} />
                     Available
                   </span>
@@ -177,6 +203,7 @@ export function ProgramsYearPicker({
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Link>
               </article>
+              </Reveal>
             </div>
           </div>
         ) : (
