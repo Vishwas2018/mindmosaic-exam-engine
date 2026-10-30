@@ -67,7 +67,7 @@ test.describe("parent archive / restore lifecycle", () => {
       /* 5. The same code and PIN no longer sign in, and the message is the generic one. */
       const fresh = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();
       await childSignsIn(fresh, body.loginCode, body.pin);
-      await expect(fresh.getByRole("alert")).toContainText("don't match");
+      await expect(fresh.getByText(/That login code and PIN do not match/)).toBeVisible();
       await expect(fresh).toHaveURL(/student-sign-in/);
 
       /* 6. The parent still sees the child on their dashboard, marked archived. */
