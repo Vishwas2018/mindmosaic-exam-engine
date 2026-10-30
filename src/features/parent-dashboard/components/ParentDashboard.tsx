@@ -124,6 +124,9 @@ function ChildSelector({
                   Grade {child.yearLevel}
                 </span>
               )}
+              {child.archived && (
+                <span className="block text-xs font-semibold text-warning">Archived</span>
+              )}
             </span>
           </button>
         );
@@ -401,6 +404,15 @@ export function ParentDashboard({
             {child.yearLevel !== null && <>Grade {child.yearLevel} · </>}
             Read-only view — results are scored and stored on our servers.
           </p>
+          {child.archived && (
+            <p className="mt-2 text-sm font-semibold text-warning" role="status">
+              {child.displayName}&apos;s login is archived, so they can&apos;t sign in. Their results below are kept.{" "}
+              <Link href="/parent/children" className="underline">
+                Restore from Manage children
+              </Link>
+              .
+            </p>
+          )}
           {child.unreadableAttemptCount > 0 && (
             <p className="mt-2 text-xs font-semibold text-warning">
               {child.unreadableAttemptCount}{" "}
@@ -421,13 +433,15 @@ export function ParentDashboard({
           `sm:w-auto` restores the original inline sizing once there's
           room.
         */}
-        <Link
-          href="/practice"
-          className={buttonClasses({ variant: "primary", size: "sm", className: "w-full sm:w-auto" })}
-        >
-          Start a session for {child.displayName}
-          <ArrowRight aria-hidden="true" className="h-4 w-4" />
-        </Link>
+        {!child.archived && (
+          <Link
+            href="/practice"
+            className={buttonClasses({ variant: "primary", size: "sm", className: "w-full sm:w-auto" })}
+          >
+            Start a session for {child.displayName}
+            <ArrowRight aria-hidden="true" className="h-4 w-4" />
+          </Link>
+        )}
       </div>
 
       {child.attemptCount === 0 ? (

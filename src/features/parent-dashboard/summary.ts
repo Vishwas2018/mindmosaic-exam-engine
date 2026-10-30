@@ -98,6 +98,11 @@ export interface RecommendedAction {
 
 export interface ChildSummary {
   childId: string;
+  /**
+   * True when the child's login is paused (archived). Their results stay visible; set by the page from
+   * Supabase Auth, not derived from attempts. Absent means active.
+   */
+  archived?: boolean;
   displayName: string;
   yearLevel: number | null;
   attemptCount: number;
