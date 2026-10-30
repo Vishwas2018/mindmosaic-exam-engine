@@ -3,6 +3,7 @@ import { Client } from "pg";
 import {
   assertSingleLocalTarget,
   defaultContentAnswerWriterUrl,
+  defaultExamWriterUrl,
   defaultScoringUrl,
   primaryUrl,
 } from "./support/db-target";
@@ -92,6 +93,30 @@ export async function connectAsContentAnswerWriterRole(): Promise<Client> {
       "Could not connect as mindmosaic_content_answer_writer. Run " +
         "`npm run content:answer-writer:bootstrap` to set the local password, or set " +
         "CONTENT_ANSWER_WRITER_DB_URL to a credential for it.",
+      { cause },
+    );
+  }
+  return client;
+}
+
+/**
+ * The `mindmosaic_exam_writer` credential, as src/server/exam-write/legacy-exam-writes.ts would present it. Matches the
+ * default written by `npm run exam-writer:bootstrap`. Same real-connection reasoning as connectAsScoringRole above.
+ */
+export function examWriterDbUrl(): string {
+  assertSingleLocalTarget();
+  return process.env.EXAM_WRITE_DB_URL ?? defaultExamWriterUrl();
+}
+
+export async function connectAsExamWriterRole(): Promise<Client> {
+  const client = new Client({ connectionString: examWriterDbUrl() });
+  client.on("error", () => undefined);
+  try {
+    await client.connect();
+  } catch (cause) {
+    throw new Error(
+      "Could not connect as mindmosaic_exam_writer. Run `npm run exam-writer:bootstrap` to set the local " +
+        "password, or set EXAM_WRITE_DB_URL to a credential for it.",
       { cause },
     );
   }

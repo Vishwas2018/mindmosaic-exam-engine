@@ -8,6 +8,7 @@ import { buildDiagnosticBaseline } from "@/features/student/onboarding/baseline-
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { getExamBank } from "@/server/exam-bank";
+import { createLegacyExamSession, recordLegacyExamAttempt } from "@/server/exam-write/legacy-exam-writes";
 
 export const dynamic = "force-dynamic";
 
@@ -112,22 +113,23 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   // Create session and attempt row in Supabase
   let sessionId: string | null = null;
-  const { data: createdSessionId, error: sessionError } = await supabase.rpc(
-    "create_exam_session",
-    {
-      p_config: sessionConfig,
-      p_seed: seed,
-      p_selected_question_ids: selectedQuestionIds,
-      p_expires_at: expiresAt,
-    },
-  );
+  /* Written by the dedicated exam-writer role (20261031090000); `authenticated` can no longer execute the legacy
+     functions. Best-effort, as before: a failure here must not block finishing onboarding. */
+  const { sessionId: createdSessionId, error: sessionError } = await createLegacyExamSession({
+    studentId: user.id,
+    config: sessionConfig,
+    seed,
+    selectedQuestionIds,
+    expiresAt,
+  });
 
   if (!sessionError && createdSessionId) {
-    sessionId = createdSessionId as string;
-    await supabase.rpc("record_exam_attempt", {
-      p_session_id: sessionId,
-      p_responses: responses,
-      p_result: result,
+    sessionId = createdSessionId;
+    await recordLegacyExamAttempt({
+      studentId: user.id,
+      sessionId,
+      responses,
+      result,
     });
   }
 
