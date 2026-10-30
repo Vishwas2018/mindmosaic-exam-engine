@@ -7,6 +7,7 @@ import {
   ParentShell,
   type ChildListItem,
 } from "@/features/parent-dashboard";
+import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
@@ -42,11 +43,13 @@ export default async function ParentChildrenPage() {
     );
   }
 
+  const archivedIds = await loadArchivedChildIds(data.children.map((child) => child.profile.id));
   const children: ChildListItem[] = data.children.map((child) => ({
     id: child.profile.id,
     displayName: child.profile.displayName?.trim() || "Your child",
     yearLevel: child.profile.yearLevel,
     sessionCount: child.attempts.length,
+    archived: archivedIds.has(child.profile.id),
   }));
 
   return (
@@ -57,7 +60,7 @@ export default async function ParentChildrenPage() {
             Manage children
           </h1>
           <p className="mt-2 text-sm font-semibold text-muted">
-            Rename, update year level, reset a PIN, or archive a linked child.
+            Rename, update year level, reset a PIN, or archive (pause sign-in for) a linked child. Archived children keep their results and can be restored.
           </p>
         </div>
         <ChildrenManager initialChildren={children} availableYearLevels={years} />
