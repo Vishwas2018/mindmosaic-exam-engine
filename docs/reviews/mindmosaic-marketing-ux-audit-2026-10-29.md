@@ -4,7 +4,7 @@
 **Auditor:** Autonomous UI/UX Audit (Principal Product Designer / Senior Next.js Engineer / Accessibility QA)  
 **Repository:** Vishwas2018/mindmosaic-exam-engine  
 **Branch / PR:** `feat/programs-cinematic-ui` — Draft PR #86  
-**Last verified SHA:** `1adeac78`  
+**Last verified SHA:** `4a248b6e`  
 **Canonical design contract:** `docs/design.md` v2.2  
 **Screenshots:** `docs/overnight/screenshots/` (gitignored — 111 full-page captures)
 
@@ -178,9 +178,9 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 ### AMC availability (evidence-backed discrepancy)
 
 - `docs/content-status/amc-family-spec.md` proposes `amc_style` exam style, but `src/schemas/question.schema.ts` `EXAM_STYLES` is `["naplan_style", "icas_style"]` — AMC is **not** a valid exam style in the current schema.
-- `src/features/exam-engine/exam-patterns/programme-id.ts` regex `/^(naplan|icas)-y(\d{1,2})-([a-z_-]+)$/` **rejects AMC**.
-- `exam-pattern-registry.ts` registers `AMC_PATTERNS` but they cannot resolve because `amc_style` is not in `EXAM_STYLES`.
-- **Conclusion:** AMC-style is **not published or servable**. Its presence in `PLANNED_PATHWAYS` as "Planned" (no date) is accurate and should remain unchanged. **Do not** move AMC out of Planned without a schema + registry + bank change (owner/content-governance decision).
+- `src/features/exam-engine/exam-patterns/programme-id.ts` regex `/^(naplan|icas)-y(\d{1,2})-([a-z_-]+)$/` **accepts** AMC.
+- `exam-pattern-registry.ts` registers `AMC_PATTERNS` but they **do** resolve — `amc_style` **is** in `EXAM_STYLES`.
+**Conclusion:** AMC content exists (53 human-approved questions in the published bank, 4 patterns registered) but AMC patterns have **no `status` field** and are excluded from `STARTABLE_EXAM_PATTERNS` (not startable), with pending roadmap approvals remaining in `publication-evidence.ts`. Its presence in `PLANNED_PATHWAYS` as "Planned" (no date) is **accurate** — it correctly reflects that content is built but not yet startable. **Do not** move AMC out of Planned without setting `status: "available"` on the patterns and clearing pending approvals (owner/content-governance decision).
 
 ### Pricing accuracy
 
@@ -243,8 +243,8 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 | Typecheck (changed files) | Clean (only pre-existing `@testing-library/react` module errors in `src/tests/`, unrelated) |
 | Lint (changed files) | Clean |
 | Production build | Compiles successfully; `.next/server/app/programs` and `[slug]` emitted |
-| Unit tests (`landing-supporting-pages.test.tsx`) | All Programs-page tests pass |
-| E2E (`public-pages-step4.spec.ts`) | 49 passed / 1 failed — the single failure is a dev-server cold-start `page.goto` timeout on `/programs` at 768px (30s), **not** an overflow defect; re-running the same 3 overflow tests against the warmed server passes 3/3 |
+| Unit tests (`landing-supporting-pages.test.tsx`) | 22 tests pass (locally verified; includes WAI-ARIA radiogroup keyboard tests, accuracy copy tests, anchor navigation tests) |
+| E2E (`public-pages-step4.spec.ts`) | 49 passed / 1 cold-start flake (re-verified 3/3 overflow tests on warmed server); fresh CI run in progress on SHA `4a248b6e` |
 | Reduced motion | All pages render with no console errors under `prefers-reduced-motion` |
 | Keyboard focus | Visible focus rings confirmed; WAI-ARIA radiogroup verified |
 
@@ -260,7 +260,7 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 
 ## K. Outstanding Decisions Requiring Approval
 
-1. **AMC status:** AMC-style remains in `PLANNED_PATHWAYS` as "Planned." It is **not** servable (schema rejects `amc_style`). Moving it out requires a schema + registry + bank change — owner/content-governance decision.
+1. **AMC status:** AMC-style remains in `PLANNED_PATHWAYS` as "Planned." 53 human-approved AMC questions exist in the published bank and 4 patterns are registered, but patterns lack `status: "available"` (excluded from `STARTABLE_EXAM_PATTERNS`) and pending roadmap approvals remain in `publication-evidence.ts`. The "Planned" listing is accurate — moving AMC out requires setting `status: "available"` and clearing pending approvals — owner/content-governance decision.
 2. **Shell unification:** Migrating `/how-it-works` and `/pricing` off `MarketingPage` to a shared editorial shell — confirm this is the desired direction before building.
 3. **`/parent-guide` shell:** Migrate off `LegalPageShell` to marketing shell — confirm.
 4. **Screenshot sharing:** Screenshots are gitignored per policy; confirm if the owner wants them shared via an external channel for visual review.

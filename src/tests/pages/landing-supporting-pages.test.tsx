@@ -236,14 +236,14 @@ describe("Programs page", () => {
     expect(year4).toHaveAttribute("tabIndex", "0");
     expect(year3).toHaveAttribute("aria-checked", "false");
     expect(year3).toHaveAttribute("tabIndex", "-1");
-    expect(screen.getByRole("heading", { name: "Open for Year 4" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Nothing open for Year 4 yet" })).toBeInTheDocument();
   });
 
   it("wraps from the last year back to the first on ArrowDown", () => {
     render(<ProgramsPage />);
     const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
     const year12 = within(radiogroup).getByRole("radio", { name: /^Year 12/ });
-    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1/ });
+    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1\b/ });
 
     year12.focus();
     fireEvent.keyDown(year12, { key: "ArrowDown" });
@@ -256,7 +256,7 @@ describe("Programs page", () => {
   it("selects the first year on Home and the last year on End", () => {
     render(<ProgramsPage />);
     const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
-    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1/ });
+    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1\b/ });
     const year12 = within(radiogroup).getByRole("radio", { name: /^Year 12/ });
 
     year1.focus();
@@ -270,7 +270,7 @@ describe("Programs page", () => {
 
     expect(document.activeElement).toBe(year12);
     expect(year12).toHaveAttribute("aria-checked", "true");
-    expect(screen.getByRole("heading", { name: "Open for Year 12" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Open for Year 12" })).not.toBeInTheDocument();
   });
 
   it("selects an unavailable year and shows its explanatory content", () => {
