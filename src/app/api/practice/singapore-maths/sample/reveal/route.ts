@@ -2,8 +2,8 @@ import {NextResponse} from "next/server";
 
 import {createClient} from "@/lib/supabase/server";
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
-import {sampleExplanation} from "@/content/visual-fixtures/bar-model/sample-practice.server";
-import {hasCorrectSampleSubmission} from "@/features/singapore-maths-sample/submission-store";
+import {sampleExplanation, sampleYearOf} from "@/content/visual-fixtures/bar-model/sample-practice.server";
+import {getSampleStore, SampleStoreUnavailableError} from "@/features/singapore-maths-sample/attempt-store";
 
 interface RevealBody {
   questionId: string;
@@ -16,6 +16,11 @@ function parseRevealBody(body: unknown): RevealBody | null {
   return {questionId: record.questionId};
 }
 
+/**
+ * Kept for API compatibility and as an access-control boundary. The page no longer calls it: the
+ * explanation already arrives with the correct submission (and with the restored state on reload).
+ * It reads the same durable record, so it agrees with every other route on every instance.
+ */
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isSingaporeMathsSampleAllowed()) {
     return new NextResponse(null, {status: 404});
@@ -43,18 +48,23 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   const {questionId} = parsed;
+  const year = sampleYearOf(questionId);
 
-  // Explanations are released only after the caller has already demonstrated
-  // knowledge of the answer: a correct submission must exist for this student
-  // and this question. Rejects requests with no proof of submission.
-  if (!hasCorrectSampleSubmission(user.id, questionId)) {
-    return NextResponse.json({error: "forbidden"}, {status: 403});
+  try {
+    // Explanations are released only when this student's recorded submission for this question is correct.
+    const recorded = year ? await getSampleStore().getSubmission(user.id, year, questionId) : null;
+    if (!recorded?.correct) {
+      return NextResponse.json({error: "forbidden"}, {status: 403});
+    }
+    const explanation = sampleExplanation(questionId);
+    if (explanation === null) {
+      return NextResponse.json({error: "not_found"}, {status: 404});
+    }
+    return NextResponse.json({workedExplanation: explanation});
+  } catch (error) {
+    if (error instanceof SampleStoreUnavailableError) {
+      return NextResponse.json({error: "store_unavailable"}, {status: 503});
+    }
+    throw error;
   }
-
-  const explanation = sampleExplanation(questionId);
-  if (explanation === null) {
-    return NextResponse.json({error: "not_found"}, {status: 404});
-  }
-
-  return NextResponse.json({workedExplanation: explanation});
 }
