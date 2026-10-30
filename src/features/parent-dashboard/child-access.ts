@@ -1,8 +1,11 @@
 import "server-only";
 
-import { createClient as createAdminClient, type SupabaseClient, type User } from "@supabase/supabase-js";
+import { createClient as createAdminClient, type SupabaseClient } from "@supabase/supabase-js";
 
+import { isArchivedUser } from "@/lib/supabase/archived-session";
 import { SUPABASE_URL } from "@/lib/supabase/config";
+
+export { isArchivedUser };
 
 /**
  * Child account access: archive (pause) and restore.
@@ -15,10 +18,10 @@ import { SUPABASE_URL } from "@/lib/supabase/config";
  * the auth user and all attempts stay, and nothing is deleted.
  *
  * Mechanism (no schema change): Supabase Auth's own ban plus a marker in app_metadata.
- *   - `ban_duration` makes GoTrue refuse password sign-in and refresh-token use with `user_banned`, and
- *     makes the auth server reject an already-issued access token (`GET /auth/v1/user` -> 403). The
- *     app validates every session with getUser() on the server, so every page and API route treats an
- *     archived child as signed out immediately.
+ *   - `ban_duration` makes GoTrue refuse password sign-in and refresh-token use with `user_banned`.
+ *     Hosted Supabase also rejects an already-issued access token for a banned user, but a local stack does
+ *     not, so the application enforces it itself: createClient() in lib/supabase/server.ts reports an
+ *     archived user as signed out, so every page and API route treats the child as signed out at once.
  *   - `app_metadata.archived` records the intent so the parent UI can list archived children without
  *     reading banned_until. app_metadata is writable only with the service-role key; a user cannot edit it.
  * Residual risk, documented in the PR: PostgREST validates a JWT locally, so an access token issued
@@ -35,10 +38,6 @@ export const ARCHIVE_BAN_DURATION = "876000h";
 export type ChildAccessResult =
   | { ok: true; alreadyInState: boolean }
   | { ok: false; reason: "not_found" | "not_student" | "update_failed"; message: string };
-
-export function isArchivedUser(user: Pick<User, "app_metadata"> | null | undefined): boolean {
-  return user?.app_metadata?.archived === true;
-}
 
 export function createServiceRoleClient(env: Readonly<Record<string, string | undefined>> = process.env): SupabaseClient | null {
   const key = env.SUPABASE_SERVICE_ROLE_KEY?.trim();
