@@ -236,6 +236,13 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 
 **Screenshots are outside source control per repository policy** (`.gitignore` line 71–72: `/docs/overnight/screenshots/`). The manifest JSON is likewise gitignored. The owner can inspect them locally at `docs/overnight/screenshots/` or request they be shared externally for independent visual review.
 
+**Screenshot ZIP (for owner upload/review):** `mindmosaic-programs-screenshots.zip` (5.8 MB, local only, not committed) — contains 8 representative screenshots + manifest:
+- Landing desktop 1440×900
+- Programs desktop 1440×900, mobile 375×812, tablet 768×1024, short 1280×633
+- Pricing desktop 1440×900
+- How It Works desktop 1440×900
+- About desktop 1440×900
+
 ## I. Test Results
 
 | Gate | Result |
@@ -244,7 +251,7 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 | Lint (changed files) | Clean |
 | Production build | Compiles successfully; `.next/server/app/programs` and `[slug]` emitted |
 | Unit tests (`landing-supporting-pages.test.tsx`) | 22 tests pass (locally verified; includes WAI-ARIA radiogroup keyboard tests, accuracy copy tests, anchor navigation tests) |
-| E2E (`public-pages-step4.spec.ts`) | 49 passed / 1 cold-start flake (re-verified 3/3 overflow tests on warmed server); fresh CI run in progress on SHA `4a248b6e` |
+| E2E (`public-pages-step4.spec.ts`) | 49 passed / 1 cold-start flake (re-verified 3/3 on warmed server); **CI all green on SHA `6b53b2d1`** — core ×2, e2e ×2, e2e-auth ×2, rls ×2, scholarship-drafts ×2, Vercel |
 | Reduced motion | All pages render with no console errors under `prefers-reduced-motion` |
 | Keyboard focus | Visible focus rings confirmed; WAI-ARIA radiogroup verified |
 
