@@ -67,12 +67,11 @@ export const metadata: Metadata = {
     "Premium, original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice built for confident learners.",
   applicationName: "MindMosaic",
 };
-
 export default function RootLayout({
   children,
-}: Readonly<
+}: Readonly<{
   children: React.ReactNode;
-}> {
+}>) {
   return (
     <html lang="en-AU" data-scroll-behavior="smooth">
       <body
