@@ -4,7 +4,7 @@
 **Auditor:** Autonomous UI/UX Audit (Principal Product Designer / Senior Next.js Engineer / Accessibility QA)  
 **Repository:** Vishwas2018/mindmosaic-exam-engine  
 **Branch / PR:** `feat/programs-cinematic-ui` — Draft PR #86  
-**Last verified SHA:** `4a248b6e`  
+**Last verified SHA:** `30995e36`  
 **Canonical design contract:** `docs/design.md` v2.2  
 **Screenshots:** `docs/overnight/screenshots/` (gitignored — 111 full-page captures)
 
@@ -175,12 +175,12 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 
 ## F. Release & Content Concerns
 
-### AMC availability (evidence-backed discrepancy)
+### AMC availability (evidence-backed findings)
 
-- `docs/content-status/amc-family-spec.md` proposes `amc_style` exam style, but `src/schemas/question.schema.ts` `EXAM_STYLES` is `["naplan_style", "icas_style"]` — AMC is **not** a valid exam style in the current schema.
-- `src/features/exam-engine/exam-patterns/programme-id.ts` regex `/^(naplan|icas)-y(\d{1,2})-([a-z_-]+)$/` **accepts** AMC.
+- `src/schemas/question.schema.ts` line 57 — `EXAM_STYLES = ["naplan_style", "icas_style", "amc_style"]` — `amc_style` **is** a valid exam style.
+- `src/features/exam-engine/exam-patterns/programme-id.ts` line 45 — `amc: "amc_style"`; line 58 — parser **accepts** AMC.
 - `exam-pattern-registry.ts` registers `AMC_PATTERNS` but they **do** resolve — `amc_style` **is** in `EXAM_STYLES`.
-**Conclusion:** AMC content exists (53 human-approved questions in the published bank, 4 patterns registered) but AMC patterns have **no `status` field** and are excluded from `STARTABLE_EXAM_PATTERNS` (not startable), with pending roadmap approvals remaining in `publication-evidence.ts`. Its presence in `PLANNED_PATHWAYS` as "Planned" (no date) is **accurate** — it correctly reflects that content is built but not yet startable. **Do not** move AMC out of Planned without setting `status: "available"` on the patterns and clearing pending approvals (owner/content-governance decision).
+**Conclusion:** AMC content exists (53 human-approved questions in the published bank, 4 patterns registered), and AMC patterns are startable by registry status — `status` defaults to `"available"` per exam-pattern.ts line 160, so they are included in `STARTABLE_EXAM_PATTERNS`. However, all four AMC Year 3/Year 5 patterns are in **"short"** readiness state on the governed bank: Year 3 full/module = 26/30 available, Year 5 full/module = 27/30 available, distinctPapers = 0 for all four. Reduced practice modules can be served; full-length papers cannot yet. `PLANNED_PATHWAYS` listing "AMC-style" as "Planned" (no date) is **accurate**. Moving AMC out of Planned requires clearing pending roadmap approvals in `publication-evidence.ts` and sufficient bank coverage — an owner/content-governance decision. Do not claim AMC is unstartable or that `amc_style` is not a valid exam style; both are factually incorrect on the current repository.
 
 ### Pricing accuracy
 
@@ -251,7 +251,7 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 | Lint (changed files) | Clean |
 | Production build | Compiles successfully; `.next/server/app/programs` and `[slug]` emitted |
 | Unit tests (`landing-supporting-pages.test.tsx`) | 22 tests pass (locally verified; includes WAI-ARIA radiogroup keyboard tests, accuracy copy tests, anchor navigation tests) |
-| E2E (`public-pages-step4.spec.ts`) | 49 passed / 1 cold-start flake (re-verified 3/3 on warmed server); **CI all green on SHA `6b53b2d1`** — core ×2, e2e ×2, e2e-auth ×2, rls ×2, scholarship-drafts ×2, Vercel |
+| E2E (`public-pages-step4.spec.ts`) | 49 passed / 1 cold-start flake (re-verified 3/3 on warmed server); CI on SHA `30995e36`: core pass ×2, e2e-auth pass ×2, rls pass ×2, scholarship-drafts pass ×2, Vercel pass; one E2E job failed during next/font web-server compilation (no browser tests executed) — bounded rerun authorised, result pending |
 | Reduced motion | All pages render with no console errors under `prefers-reduced-motion` |
 | Keyboard focus | Visible focus rings confirmed; WAI-ARIA radiogroup verified |
 
@@ -267,7 +267,7 @@ No new design-system framework. Reuse existing primitives from `src/features/lan
 
 ## K. Outstanding Decisions Requiring Approval
 
-1. **AMC status:** AMC-style remains in `PLANNED_PATHWAYS` as "Planned." 53 human-approved AMC questions exist in the published bank and 4 patterns are registered, but patterns lack `status: "available"` (excluded from `STARTABLE_EXAM_PATTERNS`) and pending roadmap approvals remain in `publication-evidence.ts`. The "Planned" listing is accurate — moving AMC out requires setting `status: "available"` and clearing pending approvals — owner/content-governance decision.
+1. **AMC status:** AMC-style remains in `PLANNED_PATHWAYS` as "Planned." 53 human-approved AMC questions exist in the published bank and 4 patterns are registered. AMC patterns are startable by registry status (`status` defaults to `"available"`) and are included in `STARTABLE_EXAM_PATTERNS`, but all four Year 3/Year 5 patterns are in **"short"** readiness state on the governed bank (26–27 of 30 questions available per pattern; distinctPapers = 0). Pending roadmap approvals remain in `publication-evidence.ts`. The "Planned" listing is accurate — moving AMC out requires clearing pending approvals and sufficient bank coverage for full-length papers — owner/content-governance decision.
 2. **Shell unification:** Migrating `/how-it-works` and `/pricing` off `MarketingPage` to a shared editorial shell — confirm this is the desired direction before building.
 3. **`/parent-guide` shell:** Migrate off `LegalPageShell` to marketing shell — confirm.
 4. **Screenshot sharing:** Screenshots are gitignored per policy; confirm if the owner wants them shared via an external channel for visual review.
