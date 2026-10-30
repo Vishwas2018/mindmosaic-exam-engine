@@ -1,64 +1,51 @@
 import type { Metadata, Viewport } from "next";
-import { localFont } from "next/font/local";
+import localFont from "next/font/local";
 
 import { AuthProvider } from "@/features/auth";
 import { siteOrigin } from "@/lib/site-url";
 
 import "./globals.css";
-
 /*
  * Product-wide typography: DM Sans is the body/UI typeface, DM Serif
  * Display is the display heading accent. Both are self-hosted via
  * next/font/local and expose CSS variables used in globals.css.
  */
 const dmSans = localFont({
-  src: "@/assets/fonts/dm-sans-latin-variable.woff2",
+  src: "../assets/fonts/dm-sans-latin-variable.woff2",
   variable: "--font-dm-sans",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: "300 700",
   style: "normal",
   display: "swap",
 });
 
 const dmSerif = localFont({
-  src: "@/assets/fonts/dm-serif-display-latin-400.woff2",
+  src: "../assets/fonts/dm-serif-display-latin-400.woff2",
   variable: "--font-dm-serif",
   weight: "400",
   style: "normal",
   display: "swap",
 });
 
-/*
- * Roboto 700 is scoped to the wordmark only (MindMosaicLogo) — it is not
- * part of the body/UI type system, so only its CSS variable is exposed
- * here, never added to the body font stack.
- */
 const roboto = localFont({
-  src: "@/assets/fonts/roboto-latin-700.woff2",
+  src: "../assets/fonts/roboto-latin-700.woff2",
   variable: "--font-logo",
   weight: "700",
   style: "normal",
   display: "swap",
 });
 
-/*
- * Marketing-surface type pair from the approved landing design file:
- * Instrument Sans for display, Geist for body. Like `roboto` above, these
- * only expose CSS variables — they are never added to <body>'s own font
- * stack, so they apply exactly where globals.css's `.lp-root, .legal-page`
- * rule opts in and nowhere else.
- */
 const instrumentSans = localFont({
-  src: "@/assets/fonts/instrument-sans-latin-variable.woff2",
+  src: "../assets/fonts/instrument-sans-latin-variable.woff2",
   variable: "--font-instrument-sans",
-  weight: ["400", "500", "600", "700"],
+  weight: "400 700",
   style: "normal",
   display: "swap",
 });
 
 const geist = localFont({
-  src: "@/assets/fonts/geist-latin-variable.woff2",
+  src: "../assets/fonts/geist-latin-variable.woff2",
   variable: "--font-geist",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: "300 700",
   style: "normal",
   display: "swap",
 });
@@ -83,9 +70,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: Readonly<
   children: React.ReactNode;
-}>) {
+}> {
   return (
     <html lang="en-AU" data-scroll-behavior="smooth">
       <body
