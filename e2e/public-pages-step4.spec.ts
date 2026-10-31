@@ -91,9 +91,78 @@ test.describe("public pages step 4 — reduced motion", () => {
 test.describe("public pages step 4 — keyboard", () => {
   test("/programs: year radio buttons are keyboard-reachable with a visible focus ring", async ({ page }) => {
     await page.goto("/programs");
-    const year5 = page.getByRole("radio", { name: /^Year 5/ });
-    await tabUntilFocused(page, year5);
+    const radiogroup = page.getByRole("radiogroup", { name: "Choose a year level" });
+    const year3 = radiogroup.getByRole("radio", { name: /^Year 3 / });
+    const year5 = radiogroup.getByRole("radio", { name: /^Year 5 / });
+
+    // WAI-ARIA: Tab enters the group at the checked radio (Year 3); other
+    // radios are excluded from the tab order (tabIndex=-1).
+    await expect(year3).toHaveAttribute("aria-checked", "true");
+    await expect(year3).toHaveAttribute("tabIndex", "0");
+    await expect(year5).toHaveAttribute("tabIndex", "-1");
+
+    // Tab enters the group at Year 3 (the checked radio) and it carries a
+    // visible focus ring.
+    await tabUntilFocused(page, year3);
     expect(await hasVisibleFocusRing(page)).toBe(true);
+
+    // Arrow keys move focus and change selection.
+    await page.keyboard.press("ArrowRight");
+    await expect(page.getByRole("radio", { name: /^Year 4 / })).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByRole("radio", { name: /^Year 3 / })).toHaveAttribute("aria-checked", "false");
+  });
+
+  test("/programs: arrow keys move focus and select the year (WAI-ARIA radiogroup)", async ({ page }) => {
+    await page.goto("/programs");
+    const radiogroup = page.getByRole("radiogroup", { name: "Choose a year level" });
+    const year3 = radiogroup.getByRole("radio", { name: /^Year 3/ });
+    const year4 = radiogroup.getByRole("radio", { name: /^Year 4/ });
+
+    // Year 3 is checked by default and is the only tabbable radio.
+    await expect(year3).toHaveAttribute("aria-checked", "true");
+    await expect(year3).toHaveAttribute("tabIndex", "0");
+    await expect(year4).toHaveAttribute("aria-checked", "false");
+    await expect(year4).toHaveAttribute("tabIndex", "-1");
+
+    await year3.focus();
+    await page.keyboard.press("ArrowRight");
+
+    await expect(year4).toHaveAttribute("aria-checked", "true");
+    await expect(year4).toHaveAttribute("tabIndex", "0");
+    await expect(year3).toHaveAttribute("aria-checked", "false");
+    await expect(year3).toHaveAttribute("tabIndex", "-1");
+    await expect(page.getByRole("heading", { name: "Open for Year 4" })).toBeVisible();
+  });
+
+  test("/programs: wrapping arrow keys select the first/last year", async ({ page }) => {
+    await page.goto("/programs");
+    const radiogroup = page.getByRole("radiogroup", { name: "Choose a year level" });
+    const year12 = radiogroup.getByRole("radio", { name: /^Year 12 / });
+    const year1 = radiogroup.getByRole("radio", { name: /^Year 1 / });
+
+    await year12.focus();
+    await page.keyboard.press("ArrowDown");
+
+    await expect(year1).toHaveAttribute("aria-checked", "true");
+    await expect(year12).toHaveAttribute("aria-checked", "false");
+    await expect(page.getByRole("heading", { name: "Nothing open for Year 1 yet" })).toBeVisible();
+
+    await year1.focus();
+    await page.keyboard.press("ArrowUp");
+
+    await expect(year12).toHaveAttribute("aria-checked", "true");
+    await expect(year1).toHaveAttribute("aria-checked", "false");
+  });
+
+  test("/programs: selecting an unavailable year shows its explanatory content", async ({ page }) => {
+    await page.goto("/programs");
+    const radiogroup = page.getByRole("radiogroup", { name: "Choose a year level" });
+    const year4 = radiogroup.getByRole("radio", { name: /^Year 4/ });
+
+    await year4.click();
+
+    await expect(year4).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByRole("heading", { name: "Nothing open for Year 4 yet" })).toBeVisible();
   });
 
   test("/programs/naplan-style: the Start free link is keyboard-reachable with a visible focus ring", async ({
