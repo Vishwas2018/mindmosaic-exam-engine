@@ -281,7 +281,7 @@
    * Product-wide UI typeface (brand/BRAND.md "Typography"). Was "Aptos"
    * (a system/Office font with no @font-face or self-hosted files of its
    * own — pure font-stack reliance, nothing to delete). Roboto is loaded
-   * once via next/font/google in src/app/layout.tsx and applied to
+   * once via next/font/local in src/app/layout.tsx and applied to
    * <body>, so --font-roboto is always defined; every surface now
    * inherits it through this one token instead of landing carrying its
    * own separate --font-body mechanism.
