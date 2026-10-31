@@ -133,6 +133,31 @@ export class FsFactoryRepository implements FactoryRepository {
     trustedWriteCapability?: GovernedWriteCapability,
   ): Promise<CreateResult> {
     assertValidCandidateId(candidateId);
+    const trustedCheck = assertGenericOperationAllowed("create", candidateId, trustedWriteCapability);
+    if (!trustedCheck.allowed) return { ok: false, candidateId, compartment, reason: "trusted_family_reserved", message: trustedCheck.message };
+    const lock = await this.acquireLock(candidateId);
+    if (!lock.ok) return { ok: false, candidateId, compartment, reason: "lock_timeout", message: lock.message };
+    try {
+      return await this.createLocked(compartment, candidateId, data, trustedWriteCapability);
+    } finally {
+      await this.releaseLock(candidateId, lock.handle.token);
+      // Creating a record must not leave an empty lock namespace behind.
+      // rmdir never removes another operation's live lock or a non-empty directory.
+      try { await fs.rmdir(path.dirname(this.lockPath(candidateId))); }
+      catch (error) {
+        const code = (error as NodeJS.ErrnoException).code;
+        if (code !== "ENOENT" && code !== "ENOTEMPTY" && code !== "EEXIST") throw error;
+      }
+    }
+  }
+
+  private async createLocked(
+    compartment: FactoryCompartment,
+    candidateId: string,
+    data: unknown,
+    trustedWriteCapability?: GovernedWriteCapability,
+  ): Promise<CreateResult> {
+    assertValidCandidateId(candidateId);
 
     const trustedCheck = assertGenericOperationAllowed("create", candidateId, trustedWriteCapability);
     if (!trustedCheck.allowed) {
@@ -705,12 +730,12 @@ export class FsFactoryRepository implements FactoryRepository {
     candidateId: string,
   ): Promise<{ readonly ok: true; readonly handle: LockHandle } | { readonly ok: false; readonly message: string }> {
     const lockPath = this.lockPath(candidateId);
-    await fs.mkdir(path.dirname(lockPath), { recursive: true });
     const deadline = Date.now() + this.lockMaxWaitMs;
     const token = randomUUID();
 
     for (;;) {
       try {
+        await fs.mkdir(path.dirname(lockPath), { recursive: true });
         const handle = await fs.open(lockPath, "wx");
         try {
           const payload: LockPayload = { candidateId, token, acquiredAt: new Date().toISOString() };
@@ -720,7 +745,8 @@ export class FsFactoryRepository implements FactoryRepository {
         }
         return { ok: true, handle: { token } };
       } catch (error) {
-        if (!isEexist(error)) throw error;
+        // An empty namespace may have been removed between mkdir and open.
+        if (!isEexist(error) && !isEnoent(error)) throw error;
 
         if (Date.now() >= deadline) {
           return {

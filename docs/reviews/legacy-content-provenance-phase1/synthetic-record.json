@@ -1,0 +1,106 @@
+{
+  "fixtureNotice": "SYNTHETIC SCHEMA EXAMPLE ONLY. NOT source-verified; NOT imported. The fake Git objects must fail real preflight. This wrapper is not a factory record.",
+  "schemaValidated": true,
+  "sourceVerified": false,
+  "record": {
+    "candidateId": "synthetic-legacy-example",
+    "state": "generated",
+    "question": {
+      "id": "synthetic-legacy-example",
+      "type": "number_entry",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What is 23 + 48?",
+      "options": [],
+      "visuals": [],
+      "answerKey": {
+        "kind": "number",
+        "value": 71,
+        "tolerance": 0
+      },
+      "explanation": "23 + 48 = 71.",
+      "metadata": {
+        "subject": "numeracy",
+        "strand": "Number",
+        "skill": "num.addition.two-digit",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    "provenance": {
+      "candidateId": "synthetic-legacy-example",
+      "blueprintId": "synthetic-blueprint",
+      "batchId": "synthetic-fixture",
+      "pipelineRunId": "legacy-5cd92776a36025e4ec63bd67d95ce533db23580e7f4b9ce0bbfa1ece9bb47f49",
+      "revision": 0,
+      "generatedAt": null,
+      "generatorAdapter": {
+        "class": "legacy_import",
+        "identity": null
+      },
+      "generatorVersion": null,
+      "promptVersion": null,
+      "promptHash": null,
+      "schemaVersion": "1",
+      "taxonomyVersion": "1",
+      "contentHash": "9252bf727b1727b359f5fe6e1b787a24c6c74b5756196e32b966ab455fa9fd16",
+      "reviewRecords": [],
+      "provenanceVersion": 2,
+      "kind": "legacy_import",
+      "originalGeneration": {
+        "status": "unverified",
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "event": null,
+        "limitations": [
+          "Synthetic schema example; Git objects and repository are invented fixture data, not verified source evidence."
+        ],
+        "evidenceReferences": [
+          "synthetic-fixture-only"
+        ]
+      },
+      "repositoryImport": {
+        "importedAt": "2000-01-01T00:00:00.000Z",
+        "tool": "mindmosaic-legacy-import",
+        "toolVersion": "1",
+        "operator": null,
+        "source": {
+          "repository": "synthetic/fixture",
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "path": "synthetic/source.json",
+          "blob": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "rawQuestionHash": "9252bf727b1727b359f5fe6e1b787a24c6c74b5756196e32b966ab455fa9fd16",
+        "sourceCandidateHash": "9252bf727b1727b359f5fe6e1b787a24c6c74b5756196e32b966ab455fa9fd16",
+        "candidateHash": "9252bf727b1727b359f5fe6e1b787a24c6c74b5756196e32b966ab455fa9fd16",
+        "publicationContentHash": "baed660f911f10cd077b7ae80ac14888fed8305b0947f6bebe489ce9fda4bb36",
+        "blueprint": {
+          "repository": "synthetic/fixture",
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "path": "synthetic/blueprint.json",
+          "blob": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "id": "synthetic-blueprint",
+          "contentHash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "reviewPacket": {
+          "repository": "synthetic/fixture",
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "path": "synthetic/review.json",
+          "blob": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "projectionHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "transformations": [],
+        "manifestHash": "5cd92776a36025e4ec63bd67d95ce533db23580e7f4b9ce0bbfa1ece9bb47f49",
+        "transactionId": "legacy-5cd92776a36025e4ec63bd67d95ce533db23580e7f4b9ce0bbfa1ece9bb47f49"
+      }
+    }
+  }
+}

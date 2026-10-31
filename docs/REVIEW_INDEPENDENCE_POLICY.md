@@ -39,6 +39,14 @@ Deterministically-computable content never reaches this rule — its correctness
 - AI-generated judgement content needs an external, different-provider round-trip (e.g. ChatGPT or Qwen for Claude-generated content). Claude Code must never self-supply these reviews.
 - The 132 published reading/language questions identified by the audit are under retroactive independent review against their published content hashes. Any that fails is removed from the published bank by forward-fix commit.
 
+## Legacy imports with unverified original generation (Phase 1)
+
+`legacy_import` provenance version 2 has a null generator identity and explicitly unverified original-generation fields. A repository importer, Git author/co-author, later editor or reviewer is not substituted for the original generator. Null, missing and placeholder unknown identities cannot satisfy either independence rule. In particular, `other/unknown` is not a different-provider workaround.
+
+Independently proven deterministic correctness remains available. Phase 1 nevertheless refuses staging and publication for **all** legacy-import candidates, including deterministic ones. Judgement-based content cannot acquire production-grade independent-review evidence while its generator identity remains unknown. The external review-ingestion and existing revision routes refuse legacy-origin laundering; retained old reviews remain advisory attachments, not fabricated chains.
+
+This is a conservative implementation boundary, not approval of a new unknown-origin review policy. Any future eligibility route needs a separately reviewed governance decision and implementation; human approval alone cannot override this hold. Existing known-generation rules and historical records are unchanged.
+
 ## Not retroactively enforced on already-published content
 
 This policy gates *future* staging and publication. It does not by itself unpublish content that predates it — the 2026-07-30 owner verdict kept all 288 published while retroactive review runs. Removal decisions come from that review, not from this policy applied backwards.

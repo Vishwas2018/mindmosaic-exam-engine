@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Pencil, Archive as ArchiveIcon, UserRound } from "lucide-react";
+import { Pencil, Archive as ArchiveIcon, ArchiveRestore, UserRound } from "lucide-react";
 
 import { Badge, Button, Card, ConfirmDialog, Input, Modal, Select } from "@/components/ui";
 import { isValidPin } from "@/features/auth/student-alias";
@@ -12,6 +12,8 @@ export interface ChildListItem {
   displayName: string;
   yearLevel: number | null;
   sessionCount: number;
+  /** Login paused. Results and the parent link are kept, and the child can be restored. */
+  archived?: boolean;
 }
 
 interface UpdateChildResponse {
@@ -21,7 +23,7 @@ interface UpdateChildResponse {
 
 /**
  * Screen 16: list every linked child with a session count, and let a parent
- * rename, change year level / reset PIN, or archive (unlink) one. Both
+ * rename, change year level / reset PIN, archive (pause sign-in) or restore one. Both
  * mutations go through /api/parent/children/[childId] rather than any
  * direct Supabase write — a parent has no update policy on a child's
  * profiles row (see supabase/migrations/20260718090000: "profiles: update
@@ -29,9 +31,9 @@ interface UpdateChildResponse {
  * the service-role client after confirming the parent_children link, the
  * same pattern already used by provisionChild for creating one.
  *
- * "Archive" removes the parent_children link rather than deleting the
- * child's account or history — reversible in principle, and it keeps this
- * batch schema-free (no archived-flag migration required).
+ * "Archive" pauses the child's login (QA-003) and keeps the parent_children link, the account and every
+ * result, so it is fully reversible with "Restore". The archived children are listed separately below the
+ * active ones.
  */
 export function ChildrenManager({
   initialChildren,
@@ -45,6 +47,7 @@ export function ChildrenManager({
   const [children, setChildren] = useState(initialChildren);
   const [renameTarget, setRenameTarget] = useState<ChildListItem | null>(null);
   const [archiveTarget, setArchiveTarget] = useState<ChildListItem | null>(null);
+  const [restoringId, setRestoringId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
@@ -146,10 +149,42 @@ export function ChildrenManager({
       return;
     }
 
-    setChildren((current) => current.filter((child) => child.id !== archiveTarget.id));
+    setChildren((current) =>
+      current.map((child) => (child.id === archiveTarget.id ? { ...child, archived: true } : child)),
+    );
     setArchiveTarget(null);
     router.refresh();
   }
+
+  async function handleRestore(child: ChildListItem) {
+    setRestoringId(child.id);
+    setFormError(null);
+
+    let result: UpdateChildResponse;
+    try {
+      const response = await fetch(`/api/parent/children/${child.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ archived: false }),
+      });
+      result = (await response.json().catch(() => null)) ?? { ok: false };
+    } catch {
+      result = { ok: false };
+    }
+
+    setRestoringId(null);
+
+    if (!result.ok) {
+      setFormError(result.message ?? "Could not restore this child. Please try again.");
+      return;
+    }
+
+    setChildren((current) => current.map((item) => (item.id === child.id ? { ...item, archived: false } : item)));
+    router.refresh();
+  }
+
+  const activeChildren = children.filter((child) => !child.archived);
+  const archivedChildren = children.filter((child) => child.archived);
 
   return (
     <div className="space-y-4">
@@ -159,7 +194,7 @@ export function ChildrenManager({
         </p>
       )}
 
-      {children.map((child) => (
+      {activeChildren.map((child) => (
         <Card key={child.id} className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <span
@@ -195,6 +230,63 @@ export function ChildrenManager({
         <Card className="p-6">
           <p className="text-sm font-semibold text-muted">No linked children yet.</p>
         </Card>
+      )}
+
+      {children.length > 0 && activeChildren.length === 0 && (
+        <Card className="p-6">
+          <p className="text-sm font-semibold text-muted">No active children. Restore an archived child below.</p>
+        </Card>
+      )}
+
+      {archivedChildren.length > 0 && (
+        <section aria-labelledby="archived-children-heading" className="space-y-4 pt-2">
+          <div>
+            <h2 id="archived-children-heading" className="text-lg font-extrabold text-ink">
+              Archived children
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-muted">
+              These children can&apos;t sign in. Their results are kept and you can restore them at any time.
+            </p>
+          </div>
+          {archivedChildren.map((child) => (
+            <Card key={child.id} className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <span
+                  aria-hidden="true"
+                  className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-full bg-royal/10 text-royal"
+                >
+                  <UserRound className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-base font-extrabold text-ink">{child.displayName}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-2">
+                    <Badge variant="neutral">Archived</Badge>
+                    {child.yearLevel !== null && <Badge variant="purple">Grade {child.yearLevel}</Badge>}
+                    <Badge variant="neutral">
+                      {child.sessionCount} {child.sessionCount === 1 ? "session" : "sessions"}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Button type="button" variant="secondary" size="sm" onClick={() => openRename(child)}>
+                  <Pencil aria-hidden="true" className="h-4 w-4" />
+                  Edit
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  isLoading={restoringId === child.id}
+                  loadingLabel="Restoring"
+                  onClick={() => handleRestore(child)}
+                >
+                  <ArchiveRestore aria-hidden="true" className="h-4 w-4" />
+                  Restore {child.displayName}
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </section>
       )}
 
       <Modal
@@ -252,7 +344,7 @@ export function ChildrenManager({
       <ConfirmDialog
         open={archiveTarget !== null}
         title={archiveTarget ? `Archive ${archiveTarget.displayName}?` : "Archive child?"}
-        description="They'll no longer appear on your dashboard. This does not delete their account or practice history — contact support to relink them later."
+        description="They won't be able to sign in until you restore them. Their account and results are kept, you can still see them on your dashboard, and you can restore them any time from Manage children."
         confirmLabel="Yes, archive"
         variant="danger"
         isLoading={submitting}

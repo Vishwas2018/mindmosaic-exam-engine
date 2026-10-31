@@ -10,6 +10,7 @@ import {
   ParentShell,
   buildChildSummary,
 } from "@/features/parent-dashboard";
+import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
@@ -83,9 +84,11 @@ export default async function ParentHomePage() {
   }
 
   const now = new Date();
-  const summaries = data.children.map((child) =>
-    buildChildSummary(child.profile, child.attempts, now),
-  );
+  const archivedIds = await loadArchivedChildIds(data.children.map((child) => child.profile.id));
+  const summaries = data.children.map((child) => ({
+    ...buildChildSummary(child.profile, child.attempts, now),
+    archived: archivedIds.has(child.profile.id),
+  }));
   const hasAccess = subscription.status === "ready" && (subscription.subscription?.hasAccess ?? false);
 
   return (

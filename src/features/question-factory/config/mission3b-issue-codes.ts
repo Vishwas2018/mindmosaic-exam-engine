@@ -34,6 +34,7 @@ export const REVIEW_INGESTION_ISSUE_CODES = [
   "unsupported_reviewer_identity",
   "unsupported_generator_identity",
   "self_review_rejected",
+  "legacy_origin_unverified",
   "review_id_conflict",
   "review_prompt_reference_mismatch",
   "review_chain_limit_exceeded",
