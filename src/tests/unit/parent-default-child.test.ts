@@ -154,3 +154,27 @@ describe("pickDefaultChildIndex", () => {
     }
   });
 });
+
+describe("pickDefaultChildIndex with archived children (QA-003)", () => {
+  const archived = (summaryValue: Summary): Summary & { archived: boolean } => ({ ...summaryValue, archived: true });
+
+  it("never opens on an archived child while an active sibling exists, even if the archived child has more results", () => {
+    expect(pickDefaultChildIndex([archived(summary(9)), summary(0)])).toBe(1);
+    expect(pickDefaultChildIndex([archived(summary(9)), summary(2)])).toBe(1);
+  });
+
+  it("prefers an active child with results over an earlier active child with none", () => {
+    expect(pickDefaultChildIndex([archived(summary(5)), summary(0), summary(3)])).toBe(2);
+  });
+
+  it("still opens on an archived child when every child is archived, preferring one that has results", () => {
+    expect(pickDefaultChildIndex([archived(summary(0)), archived(summary(4))])).toBe(1);
+    expect(pickDefaultChildIndex([archived(summary(0)), archived(summary(0))])).toBe(0);
+  });
+
+  it("behaves exactly as before when nobody is archived", () => {
+    expect(pickDefaultChildIndex([summary(0), summary(2)])).toBe(1);
+    expect(pickDefaultChildIndex([summary(0), summary(0)])).toBe(0);
+    expect(pickDefaultChildIndex([])).toBe(0);
+  });
+});
