@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { renderToString } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const push = vi.fn();
@@ -73,6 +74,18 @@ describe("SignUpWizard — step 1, the parent account", () => {
     renderWizard();
     expect(screen.getByText(/step 1 of 3/i)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /create the parent account/i })).toBeInTheDocument();
+  });
+
+  it("keeps server-rendered entry controls disabled until their handlers hydrate", () => {
+    const server = document.createElement("div");
+    server.innerHTML = renderToString(<AuthProvider><SignUpWizard availableYearLevels={[3, 5]} /></AuthProvider>);
+    for (const label of [/first name/i, /last name/i, /email address/i, /create a password/i]) {
+      expect(within(server).getByLabelText(label)).toBeDisabled();
+    }
+    expect(within(server).getByRole("checkbox")).toBeDisabled();
+    renderWizard();
+    expect(screen.getByLabelText(/first name/i)).toBeEnabled();
+    expect(screen.getByRole("checkbox")).toBeEnabled();
   });
 
   /*

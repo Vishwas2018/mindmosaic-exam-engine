@@ -11,7 +11,14 @@ import { ExamPatternStarter } from "@/features/exam-engine/exam-patterns/compone
 import { PatternAdaptations } from "@/features/exam-engine/exam-patterns/components/PatternAdaptations";
 import { describePaperShape } from "@/features/exam-engine/exam-patterns/pattern-session";
 import { EXAM_STYLE_NAMES } from "@/features/exam-engine/exam-patterns/pattern-presentation";
-import { getPatternReadiness } from "@/server/exam-bank";
+import {
+  getPatternReadinessFor,
+  getViewerIdForSamplePreview,
+  isScholarshipHiddenFor,
+  isScholarshipSampleAllowedFor,
+  SCHOLARSHIP_SAMPLE_NOTICE,
+  SCHOLARSHIP_SAMPLE_PATTERN_ID,
+} from "@/server/scholarship-sample-preview";
 
 /**
  * One full-length practice paper: what it is, how it differs from the real
@@ -45,7 +52,11 @@ export default async function ExamPatternPage({
   const pattern = getExamPattern(patternId);
   if (!pattern) notFound();
 
-  const readiness = getPatternReadiness()[pattern.id];
+  /* Unchanged unless the gated Scholarship sample preview is active; then non-allowlisted viewers get a 404. */
+  const viewerId = await getViewerIdForSamplePreview();
+  if (isScholarshipHiddenFor(pattern, viewerId)) notFound();
+
+  const readiness = (await getPatternReadinessFor(viewerId))[pattern.id];
   if (!readiness) notFound();
 
   const isDeferred = pattern.status === "deferred";
@@ -77,6 +88,16 @@ export default async function ExamPatternPage({
               " · Practice module — not a full-length paper"}
           </p>
         </div>
+
+        {pattern.id === SCHOLARSHIP_SAMPLE_PATTERN_ID && isScholarshipSampleAllowedFor(viewerId) && (
+          <p
+            role="note"
+            data-testid="scholarship-sample-notice"
+            className="mt-6 max-w-2xl rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900"
+          >
+            {SCHOLARSHIP_SAMPLE_NOTICE}
+          </p>
+        )}
 
         <div className="mt-9 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
           <div>

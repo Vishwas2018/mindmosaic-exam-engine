@@ -14,6 +14,7 @@ import { createClient } from "@/lib/supabase/server";
 import { resolveSittingSource } from "@/server/assessment/read-dispatch";
 import { submitTargetSession } from "@/server/assessment/target-session-writes";
 import { getExamBank } from "@/server/exam-bank";
+import { withScholarshipSample } from "@/server/scholarship-sample-preview";
 
 /**
  * Scores a submitted exam session server-side and records the attempt
@@ -132,7 +133,7 @@ export async function POST(
 
   /* Recompute the authoring questions from the server's own stored ids —
      order preserved — never from anything the client sent. */
-  const bank = getExamBank(bankId.data);
+  const bank = await withScholarshipSample(getExamBank(bankId.data), user.id);
   const byId = new Map(bank.map((question) => [question.id, question]));
   const questions = (session.selected_question_ids as string[]).map((questionId) =>
     byId.get(questionId),

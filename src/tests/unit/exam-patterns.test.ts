@@ -48,8 +48,8 @@ describe("exam pattern registry", () => {
 
     /* §2 and §3: six NAPLAN papers, five ICAS papers per year plus the two
        English halves, four deferred writing tasks, four AMC patterns (2 Y3, 2 Y5),
-       and five Year 6 scholarship patterns (4 available, 1 deferred). */
-    expect(EXAM_PATTERNS).toHaveLength(33);
+       and six Year 6 scholarship patterns (4 full-length, 1 sample module, 1 deferred). */
+    expect(EXAM_PATTERNS).toHaveLength(34);
     expect(EXAM_PATTERNS.filter((pattern) => pattern.status === "deferred")).toHaveLength(5);
     expect(STARTABLE_EXAM_PATTERNS.every((pattern) => pattern.status === "available")).toBe(
       true,
