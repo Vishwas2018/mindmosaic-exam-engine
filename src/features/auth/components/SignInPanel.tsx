@@ -290,7 +290,7 @@ export function SignInPanel({
             }}
             invalid={error !== null}
           />
-          {error && <MmErrorPanel>{error}</MmErrorPanel>}
+          {error && <MmErrorPanel focusOnMount>{error}</MmErrorPanel>}
           {notice && (
             <p
               role="status"
@@ -466,7 +466,7 @@ export function SignInPanel({
         />
 
         {error && (
-          <MmErrorPanel>
+          <MmErrorPanel focusOnMount>
             <span>
               {error}
               {unconfirmed && (

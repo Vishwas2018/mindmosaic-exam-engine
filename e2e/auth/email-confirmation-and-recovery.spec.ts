@@ -1,0 +1,247 @@
+import { test, expect } from "../fixtures/auth.fixture";
+import { clearMailbox, getLatestEmail } from "../fixtures/mailpit";
+import { createAdminClient } from "../fixtures/supabase-admin";
+
+const ADMIN_CLIENT = createAdminClient();
+
+function randomEmail(prefix = "e2e-auth"): string {
+  return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}@mindmosaic.local`;
+}
+
+test.describe("Authentication resilience: confirmation, recovery, and access guards", () => {
+  test.beforeEach(async () => {
+    await clearMailbox();
+  });
+
+  test("same-browser email confirmation using original email link", async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const email = randomEmail("parent-confirm");
+
+    // 1. Visit sign-up and complete parent registration wizard
+    await page.goto("/sign-up");
+    await page.getByLabel(/first name/i).fill("Same");
+    await page.getByLabel(/last name/i).fill("BrowserParent");
+    await page.getByLabel(/email address/i).fill(email);
+    await page.getByLabel(/create a password/i).fill("Str0ng!ParentPass1");
+    await page.getByRole("checkbox").click();
+
+    // Step 1 -> Step 2
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(page.getByText(/step 2 of 3/i)).toBeVisible();
+
+    // Step 2 -> Step 3: Skip student for now
+    await page.getByRole("button", { name: /skip for now/i }).click();
+    await expect(page.getByText(/step 3 of 3/i)).toBeVisible();
+
+    // Step 3: Create parent account
+    await page.getByRole("button", { name: "Create the account" }).click();
+
+    // Lands on confirmation pending screen
+    await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 10000 });
+
+    // 2. Capture original email from Mailpit
+    const emailData = await getLatestEmail(email);
+    expect(emailData.subject).toMatch(/confirm your email/i);
+    expect(emailData.link).toBeTruthy();
+
+    // 3. Follow original email link in SAME browser context
+    await page.goto(emailData.link);
+
+    // Should verify and redirect to /parent
+    await expect(page.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
+    await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
+    await expect(page).toHaveTitle(/Parent dashboard/);
+
+    await context.close();
+  });
+
+  test("cross-browser email confirmation via original link", async ({ browser }) => {
+    const contextA = await browser.newContext();
+    const pageA = await contextA.newPage();
+    const email = randomEmail("cross-browser-parent");
+
+    // Sign up in Context A
+    await pageA.goto("/sign-up");
+    await pageA.getByLabel(/first name/i).fill("Cross");
+    await pageA.getByLabel(/last name/i).fill("DeviceParent");
+    await pageA.getByLabel(/email address/i).fill(email);
+    await pageA.getByLabel(/create a password/i).fill("Str0ng!ParentPass1");
+    await pageA.getByRole("checkbox").click();
+
+    await pageA.getByRole("button", { name: "Continue" }).click();
+    await expect(pageA.getByText(/step 2 of 3/i)).toBeVisible();
+
+    await pageA.getByRole("button", { name: /skip for now/i }).click();
+    await expect(pageA.getByText(/step 3 of 3/i)).toBeVisible();
+
+    await pageA.getByRole("button", { name: "Create the account" }).click();
+
+    await expect(pageA.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 10000 });
+
+    // Capture email from Mailpit
+    const emailData = await getLatestEmail(email);
+    expect(emailData.link).toBeTruthy();
+
+    // Open in Context B (different browser context with clean storage)
+    const contextB = await browser.newContext();
+    const pageB = await contextB.newPage();
+    await pageB.goto(emailData.link);
+
+    // Device-independent confirmation succeeds and redirects to /parent
+    await expect(pageB.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
+    await expect(pageB).toHaveURL(/\/parent/, { timeout: 15000 });
+    await expect(pageB).toHaveTitle(/Parent dashboard/);
+
+    await contextA.close();
+    await contextB.close();
+  });
+
+  test("cross-device PKCE failure displays actionable message and supports resend", async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const email = randomEmail("pkce-resend");
+
+    // Visit /auth/confirm with a simulated foreign PKCE code in a fresh browser
+    await page.goto(`/auth/confirm?code=foreign-unmatched-pkce-code&email=${encodeURIComponent(email)}`);
+
+    // Must show clear cross-device problem message and focus the heading
+    const heading = page.getByRole("heading", { name: /link expired or invalid/i });
+    await expect(heading).toBeVisible({ timeout: 5000 });
+    await expect(heading).toBeFocused();
+    await expect(page.getByText(/opened on a different device or browser/i)).toBeVisible();
+
+    // Resend form is prefilled with email
+    const emailInput = page.getByLabel(/email address/i);
+    await expect(emailInput).toHaveValue(email);
+
+    // First ensure the user exists so resend can trigger
+    await ADMIN_CLIENT.auth.admin.createUser({
+      email,
+      password: "TempPassword123!",
+      email_confirm: false,
+      user_metadata: { display_name: "PKCE Resend User", role: "parent" },
+    });
+
+    // Submit resend
+    await clearMailbox();
+    await page.getByRole("button", { name: /resend verification email/i }).click();
+
+    await expect(page.getByText(/confirmation email resent/i)).toBeVisible({ timeout: 8000 });
+
+    // Verify fresh email arrived in Mailpit
+    const resentEmail = await getLatestEmail(email);
+    expect(resentEmail.subject).toMatch(/confirm your email/i);
+    expect(resentEmail.link).toBeTruthy();
+
+    await context.close();
+  });
+
+  test("successful password recovery and login with the new password", async ({ browser }) => {
+    const email = randomEmail("recovery-parent");
+    const initialPassword = "OldPassword123!";
+    const newPassword = "NewStrongPassword456!";
+
+    // Create and confirm user in Supabase
+    const { data: created, error: createError } = await ADMIN_CLIENT.auth.admin.createUser({
+      email,
+      password: initialPassword,
+      email_confirm: true,
+      user_metadata: { display_name: "Recovery Parent", role: "parent" },
+    });
+    expect(createError).toBeNull();
+    expect(created.user).toBeTruthy();
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    // 1. Visit forgot password screen and request reset
+    await page.goto("/sign-in?mode=forgot");
+    await page.getByLabel("Email address").fill(email);
+    await page.getByRole("button", { name: "Send reset link" }).click();
+    await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
+
+    // 2. Capture reset email from Mailpit
+    const resetEmail = await getLatestEmail(email);
+    expect(resetEmail.subject).toMatch(/reset your password/i);
+    expect(resetEmail.link).toBeTruthy();
+
+    // 3. Open reset link
+    await page.goto(resetEmail.link);
+
+    // Form appears
+    await expect(page.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
+
+    // 4. Submit new password
+    await page.getByLabel("New password", { exact: true }).fill(newPassword);
+    await page.getByLabel("Confirm new password").fill(newPassword);
+    await page.getByRole("button", { name: "Update password" }).click();
+
+    await expect(page.getByText(/your password has been updated/i)).toBeVisible();
+    await page.waitForURL(/\/sign-in/, { timeout: 10000 });
+
+    // 5. Sign in with the NEW password
+    await page.getByLabel(/email address/i).fill(email);
+    await page.getByLabel(/password/i).fill(newPassword);
+    await page.getByRole("button", { name: /sign in to parent account/i }).click();
+
+    // Successfully reaches parent dashboard
+    await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
+    await expect(page).toHaveTitle(/Parent dashboard/);
+
+    await context.close();
+  });
+
+  test("cold /auth/reset access displays lockout and does not render form", async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    // Anonymous direct navigation to /auth/reset
+    await page.goto("/auth/reset");
+
+    const heading = page.getByRole("heading", { name: /open your reset link/i });
+    await expect(heading).toBeVisible();
+    await expect(heading).toBeFocused();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
+    await expect(page.getByRole("link", { name: /request a new reset link/i })).toBeVisible();
+
+    await context.close();
+  });
+
+  test("ordinary authenticated session cannot bypass recovery requirements", async ({ contextAs }) => {
+    // Context signed in as normal parent
+    const context = await contextAs("parent-no-children");
+    const page = await context.newPage();
+
+    // Navigate cold to /auth/reset while logged in
+    await page.goto("/auth/reset");
+
+    const heading = page.getByRole("heading", { name: /open your reset link/i });
+    await expect(heading).toBeVisible();
+    await expect(heading).toBeFocused();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
+    await expect(page.getByRole("link", { name: /request a new reset link/i })).toBeVisible();
+  });
+
+  test("invalid, expired, and reused recovery links display clear problem states with error focus", async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    // 1. Explicit expired param
+    await page.goto("/auth/reset?error_code=otp_expired");
+    const headingExpired = page.getByRole("heading", { name: /link expired or invalid/i });
+    await expect(headingExpired).toBeVisible();
+    await expect(headingExpired).toBeFocused();
+    await expect(page.getByText(/this password reset link has expired/i)).toBeVisible();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
+
+    // 2. Invalid recovery token_hash
+    await page.goto("/auth/reset?token_hash=invalid-token-12345&type=recovery");
+    const headingInvalid = page.getByRole("heading", { name: /link expired or invalid/i });
+    await expect(headingInvalid).toBeVisible();
+    await expect(headingInvalid).toBeFocused();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
+
+    await context.close();
+  });
+});
