@@ -29,6 +29,16 @@ export const cinematicMotion = {
    */
   pinnedMinWidth: 1024,
 
+  /**
+   * Stage pins from this viewport height up (CSS px). A pinned stage is exactly one viewport tall, with the scene
+   * copy centred above a progress rail that takes the bottom ~70px; below this the copy column no longer fits
+   * between the header and the rail (measured: Chapters 2 and 3 clear the rail from about 612 to 672px at
+   * 1280 to 1920px wide, so 700 leaves at least 23px), and the chapter falls back to natural flow, exactly as
+   * for reduced motion. It must equal the `short` variant in globals.css (`max-height: 699.98px`); a unit test
+   * holds the two together. A chapter whose stage needs more room sets its own `pinnedMinHeight` below.
+   */
+  pinnedMinHeight: 700,
+
   /** Named zoom recipes. A media slot picks one by name (`motionPreset`). */
   presets: {
     heroBreath: { fromScale: 1.05, settledScale: 1, handoffScale: 1.025 },
@@ -230,6 +240,14 @@ export const cinematicMotion = {
    */
   chapter4: {
     desktopScrollHeightSvh: 400,
+    /**
+     * Chapter 4's product cards are taller than the other chapters' scenes: at the 700px default the Parent view
+     * runs under the progress rail and off the bottom of the viewport (measured gap to the rail: -77px at 700,
+     * -27px at 750, +23px at 800 at 1280 wide; about 50px worse at 1024 wide, where it only clears from ~855).
+     * Below this height it is natural flow. Chapter 3 pins down to 700 and this chapter only above this, so a
+     * pinned Chapter 4 always follows a pinned Chapter 3 (its `entryOverlapSvh` pull-up needs that).
+     */
+    pinnedMinHeight: 880,
     /** Same gap closure as `chapter3.entryOverlapSvh`. Chapter 3's hand-off clears the lower 42svh, so 30 is safe. */
     entryOverlapSvh: 30,
     layerStarts: {

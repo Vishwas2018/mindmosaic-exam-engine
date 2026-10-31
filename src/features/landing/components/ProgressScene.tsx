@@ -54,6 +54,7 @@ export function ProgressCopy({ scene }: { scene: Chapter4SceneData }) {
             style={underlineTransition}
             className={underlineLinkClasses({
               tone: "brand",
+              standalone: true,
               className: "text-[15px] font-semibold text-mm-brand",
             })}
           >

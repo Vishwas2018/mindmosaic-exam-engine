@@ -208,12 +208,13 @@ export function ChapterFourProgressParents() {
   const { sectionRef, choreographed, q, active, scrollToLayer } = useChapterScroll({
     scrollHeightSvh: timing.desktopScrollHeightSvh,
     starts,
+    pinnedMinHeight: timing.pinnedMinHeight,
   });
 
   const onSceneFocus = useCallback(
     (layer: number) => {
       if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) {
-        scrollToLayer(layer);
+        scrollToLayer(layer, { instant: true });
       }
     },
     [q, scrollToLayer],
