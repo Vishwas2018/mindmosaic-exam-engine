@@ -139,6 +139,7 @@ jobs:
       # value; production sets SCORING_DB_PASSWORD from its secret store.
       - run: npm run scoring:bootstrap
       - run: npm run content:answer-writer:bootstrap
+      - run: npm run exam-writer:bootstrap
       # Spec §22's "fresh apply plus live object verification", and DoD item 4.
       # `supabase start` above has just applied every migration to an empty
       # database, so this is the only place the registry can be checked against
@@ -235,6 +236,9 @@ jobs:
       # — one shared password/PIN for every seeded fixture identity.
       E2E_FIXTURE_PASSWORD: Fixture-Password-123!
       E2E_FIXTURE_STUDENT_PIN: "194728"
+      # The server-only exam write path (20261031090000). Local-only value, set by
+      # exam-writer:bootstrap below; hosted environments take it from a secret store.
+      EXAM_WRITE_DB_URL: postgresql://mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret@127.0.0.1:56322/postgres
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -247,6 +251,7 @@ jobs:
         with:
           version: 2.108.0
       - run: supabase start
+      - run: npm run exam-writer:bootstrap
       # globalSetup (e2e/setup/auth.setup.ts) also seeds automatically, but
       # seeding explicitly first gives a clear, separately-attributable CI
       # failure if seeding itself is what's broken, rather than folding

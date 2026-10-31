@@ -259,22 +259,11 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     checks: [
       functionExists("create_exam_session"),
       functionExists("record_exam_attempt"),
-      {
-        /* Unlike apply_stripe_subscription_event, these are meant to be
-           called by the signed-in student — so the assertion is that
-           authenticated CAN execute them. Without the explicit grant the
-           routes fail closed, which is safe but is still drift. */
-        describes:
-          "create_exam_session/record_exam_attempt executable by authenticated",
-        sql: `select count(distinct p.proname) = 2 as present
-              from pg_proc p
-              join pg_namespace n on n.oid = p.pronamespace
-              join lateral aclexplode(p.proacl) a on true
-              where n.nspname = 'public'
-                and p.proname in ('create_exam_session', 'record_exam_attempt')
-                and a.privilege_type = 'EXECUTE'
-                and a.grantee::regrole::text = 'authenticated'`,
-      },
+      /* This entry used to assert that authenticated CAN execute both functions (the routes called them with the
+         learner's own JWT). That grant was the P1 assessment-integrity defect: a signed-in student could call either
+         function over PostgREST with a question list or a result of their own. It is revoked by 20261031090100, and
+         the assertion now lives on that entry as its inverse. It is deliberately not repeated here, because this
+         registry also verifies hosted databases that have not yet applied that migration. */
       {
         /* The whole point of the definer path: neither function may be
            reachable by an unauthenticated caller. */
@@ -2877,6 +2866,57 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
           and has_table_privilege('authenticated', 'public.admin_draft_review_approvals', 'select,insert')
           and not has_table_privilege('authenticated', 'public.admin_draft_review_approvals', 'update,delete')
           and not has_table_privilege('anon', 'public.admin_draft_review_approvals', 'select,insert,update,delete') as present`,
+      },
+    ],
+  },
+  {
+    version: "20261031090000",
+    name: "exam_writer_role_and_server_write_functions",
+    checks: [
+      {
+        describes: "role mindmosaic_exam_writer exists and is not super/createdb/createrole/replication, cannot bypass RLS, does not inherit",
+        sql: `select coalesce(
+                (select not rolsuper and not rolcreatedb and not rolcreaterole and not rolbypassrls
+                    and not rolreplication and not rolinherit and rolcanlogin
+                 from pg_roles where rolname = 'mindmosaic_exam_writer'),
+                false) as present`,
+      },
+      functionExists("create_exam_session_for"),
+      functionExists("record_exam_attempt_for"),
+      {
+        describes: "the _for write functions are executable by mindmosaic_exam_writer and by no client role (anon, authenticated, PUBLIC, service_role)",
+        sql: `select (
+                select count(*) = 2 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname in ('create_exam_session_for', 'record_exam_attempt_for')
+                  and has_function_privilege('mindmosaic_exam_writer', p.oid, 'EXECUTE')
+              ) and not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname in ('create_exam_session_for', 'record_exam_attempt_for')
+                  and (has_function_privilege('anon', p.oid, 'EXECUTE')
+                    or has_function_privilege('authenticated', p.oid, 'EXECUTE')
+                    or has_function_privilege('service_role', p.oid, 'EXECUTE'))
+              ) as present`,
+      },
+      {
+        describes: "mindmosaic_exam_writer holds no table privilege",
+        sql: `select not exists (
+                select 1 from information_schema.table_privileges where grantee = 'mindmosaic_exam_writer'
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20261031090100",
+    name: "revoke_legacy_exam_write_rpcs_from_clients",
+    checks: [
+      {
+        describes: "no overload of create_exam_session / record_exam_attempt is executable by anon, authenticated or PUBLIC (P1 lockdown)",
+        sql: `select not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname in ('create_exam_session', 'record_exam_attempt')
+                  and (has_function_privilege('anon', p.oid, 'EXECUTE')
+                    or has_function_privilege('authenticated', p.oid, 'EXECUTE'))
+              ) as present`,
       },
     ],
   },

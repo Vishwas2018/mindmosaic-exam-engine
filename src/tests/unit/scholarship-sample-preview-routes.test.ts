@@ -84,6 +84,18 @@ function mockClient(sessionRow?: Record<string, unknown>) {
 async function loadRoutes(sessionRow?: Record<string, unknown>) {
   vi.resetModules();
   vi.doMock("@/lib/supabase/server", () => ({ createClient: vi.fn(async () => mockClient(sessionRow)) }));
+  /* P1 lockdown: the writes are made by the dedicated exam-writer role (20261031090000) through this module, not by
+     an RPC through the student's own client; the calls are recorded in the same `state.rpcCalls` list. */
+  vi.doMock("@/server/exam-write/legacy-exam-writes", () => ({
+    createLegacyExamSession: async (input: Record<string, unknown>) => {
+      state.rpcCalls.push({ fn: "create_exam_session_for", params: input });
+      return { sessionId: SESSION_ID, error: null };
+    },
+    recordLegacyExamAttempt: async (input: Record<string, unknown>) => {
+      state.rpcCalls.push({ fn: "record_exam_attempt_for", params: input });
+      return { attemptId: "attempt-1", error: null };
+    },
+  }));
   const session = await import("@/app/api/exam/session/route");
   const submit = await import("@/app/api/exam/session/[id]/submit/route");
   return { createSession: session.POST, submitSession: submit.POST };
@@ -98,6 +110,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.doUnmock("@/lib/supabase/server");
+  vi.doUnmock("@/server/exam-write/legacy-exam-writes");
 });
 
 describe("POST /api/exam/session: Scholarship sample", () => {
@@ -111,13 +124,13 @@ describe("POST /api/exam/session: Scholarship sample", () => {
     expect(body.questions.map((q: { id: string }) => q.id).sort()).toEqual(Object.keys(KEYS).sort());
 
     const [{ fn, params }] = state.rpcCalls;
-    expect(fn).toBe("create_exam_session");
-    expect((params.p_selected_question_ids as string[]).sort()).toEqual(Object.keys(KEYS).sort());
-    expect((params.p_config as { patternId: string; questionCount: number; timing: string }).patternId).toBe(PATTERN_ID);
-    expect((params.p_config as { questionCount: number }).questionCount).toBe(12);
-    expect((params.p_config as { timing: string }).timing).toBe("timed");
+    expect(fn).toBe("create_exam_session_for");
+    expect((params.selectedQuestionIds as string[]).sort()).toEqual(Object.keys(KEYS).sort());
+    expect((params.config as { patternId: string; questionCount: number; timing: string }).patternId).toBe(PATTERN_ID);
+    expect((params.config as { questionCount: number }).questionCount).toBe(12);
+    expect((params.config as { timing: string }).timing).toBe("timed");
     // 18 minutes + the standard 5-minute submission grace.
-    const lifetime = (Date.parse(params.p_expires_at as string) - Date.now()) / 1000;
+    const lifetime = (Date.parse(params.expiresAt as string) - Date.now()) / 1000;
     expect(lifetime).toBeGreaterThan(18 * 60 + 5 * 60 - 30);
     expect(lifetime).toBeLessThan(18 * 60 + 5 * 60 + 30);
 
@@ -230,7 +243,7 @@ describe("POST /api/exam/session/[id]/submit: Scholarship sample scoring", () =>
     expect(body.result).toMatchObject({ totalQuestions: 12, correctCount: 12, incorrectCount: 0, objectivePercentage: 100 });
     expect(body.reviewQuestions).toHaveLength(12);
     for (const question of body.reviewQuestions) expect(String(question.explanation).length).toBeGreaterThan(10);
-    expect(state.rpcCalls.at(-1)?.fn).toBe("record_exam_attempt");
+    expect(state.rpcCalls.at(-1)?.fn).toBe("record_exam_attempt_for");
 
     state.rpcCalls = [];
     const partialAnswers = { ...KEYS, "scholarship-y6-maths-004": "a", "scholarship-y6-maths-007": "b", "scholarship-y6-rc-003": "a", "scholarship-y6-maths-014": "a" };
@@ -245,6 +258,6 @@ describe("POST /api/exam/session/[id]/submit: Scholarship sample scoring", () =>
     const response = await submitSession(submitRequest(KEYS), { params: Promise.resolve({ id: SESSION_ID }) });
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: "corrupt_session" });
-    expect(state.rpcCalls.filter((call) => call.fn === "record_exam_attempt")).toHaveLength(0);
+    expect(state.rpcCalls.filter((call) => call.fn === "record_exam_attempt_for")).toHaveLength(0);
   });
 });

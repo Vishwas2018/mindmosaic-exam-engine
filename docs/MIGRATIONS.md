@@ -38,8 +38,10 @@ output and notice.
 
 ## Local dev: `supabase db reset` drops the scoring role's password
 
-`npm run db:reset` runs `supabase db reset && npm run scoring:bootstrap`. Use
-it instead of calling `supabase db reset` directly.
+`npm run db:reset` runs `supabase db reset && npm run scoring:bootstrap && npm run exam-writer:bootstrap`. Use
+it instead of calling `supabase db reset` directly. (`20261031090000` adds a second password-less role,
+`mindmosaic_exam_writer`, set up the same way by `scripts/bootstrap-exam-writer-role.mts`; the application reads its
+credential from `EXAM_WRITE_DB_URL`. See `docs/runbooks/legacy-exam-write-lockdown.md`.)
 
 **Why this exists.** `20260812110000_scoring_role.sql` creates
 `mindmosaic_scoring` (spec §9.3.1) with `LOGIN` and **no password** — a

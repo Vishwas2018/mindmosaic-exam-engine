@@ -16,6 +16,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createTargetSession } from "@/server/assessment/target-session-writes";
 import { resolveSessionStorageModel } from "@/server/assessment/storage-model";
 import { getExamBank } from "@/server/exam-bank";
+import { createLegacyExamSession } from "@/server/exam-write/legacy-exam-writes";
 import { isScholarshipHiddenFor, withScholarshipSample } from "@/server/scholarship-sample-preview";
 
 /**
@@ -35,16 +36,17 @@ import { isScholarshipHiddenFor, withScholarshipSample } from "@/server/scholars
  * fix. See tests/rls/exam-attempts.test.ts (MM-AUTH-01 cases) and
  * src/tests/unit/exam-session-create-route.test.ts.
  *
- * MM-AUD-SEC-001: the session row is written by the SECURITY DEFINER
- * function public.create_exam_session (see
- * supabase/migrations/20260811090000_exam_write_rpcs.sql), not by an
- * insert through the caller's own JWT. `authenticated` no longer holds
- * INSERT on exam_sessions at all (20260811091000), because the policy that
- * used to guard it could only constrain WHO the row belonged to — never
- * that selected_question_ids was the server's own selection rather than a
- * paper the student picked for themselves over PostgREST. The role check
- * below still runs first so a non-student gets a clear 403; the function
- * re-checks it independently (SQLSTATE MM002) as the actual boundary.
+ * MM-AUD-SEC-001 / P1 lockdown: the session row is written by the SECURITY DEFINER
+ * function public.create_exam_session_for, executable only by the dedicated
+ * mindmosaic_exam_writer role (20261031090000), never by an insert through the
+ * caller's own JWT. `authenticated` holds no INSERT on exam_sessions
+ * (20260811091000) and, since 20261031090100, cannot execute the original
+ * client-callable create_exam_session either: that function took the question
+ * list from the caller, so a student could create a one-question "full paper"
+ * over PostgREST. The student id passed here is the one this route has just
+ * authenticated. The role check below still runs first so a non-student gets a
+ * clear 403; the function re-checks it independently (SQLSTATE MM002) as the
+ * actual boundary.
  */
 
 /* Submission grace beyond the timed deadline; late submissions are clamped
@@ -226,15 +228,17 @@ export async function POST(request: Request): Promise<NextResponse> {
       : durationSeconds + TIMED_GRACE_SECONDS;
   const expiresAt = new Date(Date.now() + lifetimeSeconds * 1000);
 
-  /* student_id is not passed: create_exam_session takes it from auth.uid()
-     inside the database, so this route cannot record a session against
-     anyone but the caller even if it wanted to. Returns the new id. */
+  /* The student id is the one this route just authenticated (`user.id`), never anything from the request body, and
+     the write is made by the dedicated mindmosaic_exam_writer role: since 20261031090100 `authenticated` cannot
+     execute the legacy create function, so a client can no longer create a session with a question list of its own.
+     The database still re-checks that the id is a student. */
   const mode = config.confidenceMode ? "confidence" : "standard";
-  const { data: sessionId, error } = await supabase.rpc("create_exam_session", {
-    p_config: { ...config, bankId, mode },
-    p_seed: seed,
-    p_selected_question_ids: selectedQuestions.map((question) => question.id),
-    p_expires_at: expiresAt.toISOString(),
+  const { sessionId, error } = await createLegacyExamSession({
+    studentId: user.id,
+    config: { ...config, bankId, mode },
+    seed,
+    selectedQuestionIds: selectedQuestions.map((question) => question.id),
+    expiresAt: expiresAt.toISOString(),
   });
   if (error || !sessionId) {
     /* MM002 is the function's own role gate firing. The profile check above
@@ -243,6 +247,10 @@ export async function POST(request: Request): Promise<NextResponse> {
        403 the client knows how to handle rather than a generic 500. */
     if (error?.code === "MM002") {
       return NextResponse.json({ error: "students_only" }, { status: 403 });
+    }
+    /* Fails closed when the write role is not configured; never falls back to the user's own client. */
+    if (error?.code === "not_configured") {
+      return NextResponse.json({ error: "not_configured" }, { status: 503 });
     }
     return NextResponse.json({ error: "session_not_created" }, { status: 500 });
   }

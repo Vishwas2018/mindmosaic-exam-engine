@@ -30,7 +30,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { publishedExamBank } from "@/content/questions/practice-bank";
 
-import { connect, scoringDbUrl } from "./db";
+import { connect, examWriterDbUrl, scoringDbUrl } from "./db";
 import { scopeEnvToFile } from "./support/scoped-env";
 import { asRouteCaller, asRouteOwner, RoutePostgresClient } from "./support/route-postgres-client";
 
@@ -205,6 +205,9 @@ async function seedItem(
 
 /* Set for this file only and put back afterwards, even if a test fails (see support/scoped-env.ts). */
 scopeEnvToFile("SCORING_DB_URL", scoringDbUrl);
+/* The legacy walk below creates and records through the exam-write module, which connects as mindmosaic_exam_writer
+   (20261031090000) -- the same role the application uses. The fixtures are committed, so its own connection sees them. */
+scopeEnvToFile("EXAM_WRITE_DB_URL", examWriterDbUrl);
 
 beforeAll(async () => {
 
