@@ -7,11 +7,30 @@ import { useMotionLevel } from "../motion/useMotionLevel";
 import { pinnedTravelFactor, cinematicMotion } from "./config";
 import { clamp01 } from "./math";
 import { activeLayer as activeLayerAt, layerAnchor } from "./sceneProgress";
-import { useMinWidth } from "./useMinWidth";
+import { usePinnedViewport } from "./useMinWidth";
+
+export interface ScrollToLayerOptions {
+  /**
+   * Jump without the smooth animation. Used ONLY when keyboard focus lands in a scene that is not on
+   * screen: the focused control must be visible (with its focus ring) straight away, not after a
+   * second or more of smooth scrolling in which it sits at opacity 0 (WCAG 2.4.7, 2.4.11). Progress-rail
+   * clicks keep the smooth scroll; this is not a global scroll-behaviour change.
+   */
+  instant?: boolean;
+}
+
+/**
+ * `behavior` for a scene scroll. "instant" (not "auto") on purpose: the root element's CSS
+ * `scroll-behavior: smooth` would make "auto" animate. Reduced motion always jumps.
+ */
+export function focusScrollBehavior(options: ScrollToLayerOptions | undefined, reduced: boolean): ScrollBehavior {
+  if (options?.instant) return "instant";
+  return reduced ? "auto" : "smooth";
+}
 
 /**
  * The scroll plumbing a pinned chapter needs, in one place: whether the stage
- * is choreographed (pinned width AND motion allowed), the chapter progress
+ * is choreographed (pinned width AND height, and motion allowed), the chapter progress
  * `q` (0..1 along the pinned travel, plain page scroll), the active layer,
  * and a normal-scrolling `scrollToLayer`. No wheel listeners, no snap, no timers.
  *
@@ -21,18 +40,21 @@ import { useMinWidth } from "./useMinWidth";
 export function useChapterScroll({
   scrollHeightSvh,
   starts,
+  pinnedMinHeight = cinematicMotion.pinnedMinHeight,
 }: {
   scrollHeightSvh: number;
   starts: readonly number[];
+  /** Shortest viewport (CSS px) this chapter's stage pins in; shorter ones get natural flow. */
+  pinnedMinHeight?: number;
 }): {
   sectionRef: React.RefObject<HTMLElement | null>;
   choreographed: boolean;
   q: MotionValue<number>;
   active: number;
-  scrollToLayer: (layer: number) => void;
+  scrollToLayer: (layer: number, options?: ScrollToLayerOptions) => void;
 } {
   const animated = useMotionLevel() !== "off";
-  const pinned = useMinWidth(cinematicMotion.pinnedMinWidth);
+  const pinned = usePinnedViewport(cinematicMotion.pinnedMinWidth, pinnedMinHeight);
   const choreographed = pinned && animated;
 
   // Scroll transforms read pinned state through a motion value so a resize across the breakpoint re-evaluates them.
@@ -50,13 +72,13 @@ export function useChapterScroll({
   useMotionValueEvent(q, "change", (value) => setActive(activeLayerAt(value, starts)));
 
   const scrollToLayer = useCallback(
-    (layer: number) => {
+    (layer: number, options?: ScrollToLayerOptions) => {
       const section = sectionRef.current;
       if (!section) return;
       const top = section.getBoundingClientRect().top + window.scrollY;
       const target = top + (layerAnchor(starts, layer) / travel) * section.offsetHeight;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
+      window.scrollTo({ top: target, behavior: focusScrollBehavior(options, reduced) });
     },
     [starts, travel],
   );

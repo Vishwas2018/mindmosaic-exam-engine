@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useState, type CSSProperties } from "react";
+import { useCallback, useMemo, useState, type CSSProperties } from "react";
 import { motion, useMotionValueEvent, useTransform, type MotionValue } from "framer-motion";
 
 import { chapter3Scenes, chapterThree, type JourneySceneData } from "../chapter3-journey";
-import { cinematicMotion } from "../cinematic/config";
+import { cinematicMotion, pinnedTravelFactor } from "../cinematic/config";
 import { between, easeOutCubic, lerp } from "../cinematic/math";
 import {
   chapter3LayerStarts,
@@ -14,6 +14,7 @@ import {
   layerLocal,
   spanForegroundOpacity,
 } from "../cinematic/sceneProgress";
+import { createFocusHandoff, FocusKeeper, makeAnchorFor } from "../cinematic/useFocusContinuity";
 import { useChapterScroll } from "../cinematic/useChapterScroll";
 import { LessonState, ProductFrame, QuestionState, ResultsState, type QuestionPhase } from "./chapter-three-visuals";
 import { ChapterSceneProgress } from "./ChapterSceneProgress";
@@ -202,9 +203,22 @@ export function ChapterThreeHowItWorks() {
   // A keyboard user tabbing into a link in a scene that is not showing brings that scene on screen: plain scrolling.
   const onSceneFocus = useCallback(
     (layer: number) => {
-      if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) scrollToLayer(layer);
+      if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) scrollToLayer(layer, { instant: true });
     },
     [q, scrollToLayer],
+  );
+
+  // Focus survives the natural-flow <-> pinned tree swap (see useFocusContinuity).
+  const [handoff] = useState(createFocusHandoff);
+  const travel = pinnedTravelFactor(timing.desktopScrollHeightSvh);
+  const anchorFor = useMemo(
+    () => makeAnchorFor(starts, timing.crossfade, chapter3Scenes.map((scene) => scene.id), LAYER_OFFSET),
+    [],
+  );
+  // Distinct keys on purpose: both trees start with a keeper inside a <div>, so without them React would reuse one
+  // instance across the swap, it would never unmount, and nothing would be captured.
+  const keeper = (tree: "natural" | "pinned") => (
+    <FocusKeeper key={tree} sectionRef={sectionRef} handoff={handoff} anchorFor={anchorFor} travel={travel} />
   );
 
   const introOpacity = useTransform(q, (value) => layerForegroundOpacity(value, starts, 0, timing.crossfade));
@@ -228,6 +242,7 @@ export function ChapterThreeHowItWorks() {
     >
       {choreographed ? (
         <div className="sticky top-0 isolate h-svh overflow-hidden">
+          {keeper("pinned")}
           <motion.div
             data-layer="intro"
             style={{ opacity: introOpacity, pointerEvents: introPointer }}
@@ -275,6 +290,7 @@ export function ChapterThreeHowItWorks() {
         </div>
       ) : (
         <div className="relative">
+          {keeper("natural")}
           <IntroContent />
           <div className="mm-width">
             {chapter3Scenes.map((scene) => (
