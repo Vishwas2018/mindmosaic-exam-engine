@@ -13,6 +13,7 @@ import type { Session, SupabaseClient, User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
+import { friendlyLinkError } from "./link-errors";
 import { isProfileRole, type ProfileRole, type SignUpRole } from "./roles";
 import { clearSessionPersistence, shouldDiscardStoredSession } from "./session-persistence";
 import { PUBLIC_SIGNUP_ENABLED, SIGNUP_CLOSED_MESSAGE } from "./signup-policy";
@@ -55,6 +56,14 @@ export interface AuthContextValue {
   resendConfirmationEmail(email: string): Promise<AuthResult>;
   /** Exchanges an email-confirmation `code` (from /auth/confirm) for a session. */
   confirmEmail(code: string): Promise<EmailConfirmResult>;
+  /** Device-independent confirmation: verifies a `token_hash` link, which needs no verifier from the requesting browser. */
+  verifyEmailToken(tokenHash: string, type: "signup" | "email"): Promise<EmailConfirmResult>;
+  /** Device-independent password recovery: opens the recovery session from a `token_hash` link. */
+  verifyRecoveryToken(tokenHash: string): Promise<AuthResult>;
+  /** Exchanges a password recovery `code` for a session, returning a friendly error on cross-device PKCE failure. */
+  exchangeRecoveryCode(code: string): Promise<AuthResult>;
+  /** Adopts the session carried by an implicit-flow link (`#access_token=…&refresh_token=…`). */
+  adoptSessionTokens(accessToken: string, refreshToken: string): Promise<EmailConfirmResult>;
   signOut(): Promise<void>;
 }
 
@@ -162,6 +171,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<AuthContextValue>(() => {
     const origin = () => (typeof window !== "undefined" ? window.location.origin : "");
+
+    /* Shared tail of every confirmation shape: the role lives on the profiles row, not in the token. */
+    const finishConfirmation = async (id: string | undefined): Promise<EmailConfirmResult> => {
+      if (!supabase || !id) return { ok: true, role: null };
+      const { data: profile } = await supabase.from("profiles").select("role").eq("id", id).single();
+      const fetched = isProfileRole(profile?.role) ? profile.role : null;
+      setRole(fetched);
+      return { ok: true, role: fetched };
+    };
 
     return {
       status,
@@ -291,18 +309,50 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       async confirmEmail(code) {
         if (!supabase) return notConfigured();
+        const { data: existingSession } = await supabase.auth.getSession();
+        if (existingSession.session?.user) {
+          return finishConfirmation(existingSession.session.user.id);
+        }
         const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) {
+          const { data: retrySession } = await supabase.auth.getSession();
+          if (retrySession.session?.user) {
+            return finishConfirmation(retrySession.session.user.id);
+          }
+          return { ok: false, message: friendlyLinkError(error.message, error.message) };
+        }
+        return finishConfirmation(data.session?.user.id);
+      },
+
+      async verifyEmailToken(tokenHash, type) {
+        if (!supabase) return notConfigured();
+        const { data, error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
         if (error) return { ok: false, message: error.message };
-        const id = data.session?.user.id;
-        if (!id) return { ok: true, role: null };
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", id)
-          .single();
-        const fetched = isProfileRole(profile?.role) ? profile.role : null;
-        setRole(fetched);
-        return { ok: true, role: fetched };
+        return finishConfirmation(data.session?.user.id);
+      },
+
+      async verifyRecoveryToken(tokenHash) {
+        if (!supabase) return notConfigured();
+        const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: "recovery" });
+        if (error) return { ok: false, message: error.message };
+        return { ok: true };
+      },
+
+      async exchangeRecoveryCode(code) {
+        if (!supabase) return notConfigured();
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) return { ok: false, message: friendlyLinkError(error.message, error.message) };
+        return { ok: true };
+      },
+
+      async adoptSessionTokens(accessToken, refreshToken) {
+        if (!supabase) return notConfigured();
+        const { data, error } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+        if (error) return { ok: false, message: error.message };
+        return finishConfirmation(data.session?.user.id);
       },
 
       async signOut() {
