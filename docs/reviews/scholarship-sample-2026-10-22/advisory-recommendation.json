@@ -1,0 +1,16 @@
+{
+  "kind": "advisory_content_review_recommendation",
+  "source": "user_supplied_ChatGPT_recommendation",
+  "decision": "APPROVE_advisory",
+  "manifestCommit": "16c5c1ddb22c30c325f8ef03f8845168a9b0fda8",
+  "manifestSha256": "4e754be7fd4df59a9208549c261e7f251abf5d6f1a6b2de55215ed11ad11eb40",
+  "scope": "The 12 exact manifest-bound revisions are satisfactory for answer correctness and Year 6 scholarship suitability.",
+  "originality": "No substantive originality concerns identified; comprehensive plagiarism certification has not been performed.",
+  "retainedMedium": [
+    "scholarship-y6-vr-001",
+    "scholarship-y6-nr-023"
+  ],
+  "disagreementsPreserved": true,
+  "ownerApproval": false,
+  "authorisedApprovedBySignature": false
+}

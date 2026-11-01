@@ -1,0 +1,1006 @@
+{
+  "searchedWorktrees": [
+    "C:\\Users\\vishw\\Vish\\Vish\\mindmosaic-exam-engine\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-admin-production-release\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-admin-review\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-bar-model-generation\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-matrix-orientations\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-scholarship-ci\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-scholarship-migration\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-singapore-audit\\content\\question-factory",
+    "C:\\tmp\\mindmosaic-singapore-foundation\\content\\question-factory",
+    "C:\\tmp\\rel-amc\\content\\question-factory",
+    "C:\\tmp\\rel-amcinc\\content\\question-factory",
+    "C:\\tmp\\rel-base\\content\\question-factory",
+    "C:\\tmp\\rel-inc\\content\\question-factory",
+    "C:\\tmp\\rel-int\\content\\question-factory",
+    "C:\\tmp\\rel-policy\\content\\question-factory",
+    "C:\\tmp\\rel-sch\\content\\question-factory",
+    "C:\\tmp\\wt-amc-publication-clean\\content\\question-factory",
+    "C:\\tmp\\wt-amc-release\\content\\question-factory",
+    "C:\\tmp\\wt-icas-y5-science-depth\\content\\question-factory",
+    "C:\\tmp\\wt-scholarship-core\\content\\question-factory",
+    "C:\\tmp\\wt-scholarship-prod\\content\\question-factory",
+    "C:\\tmp\\wt-scholarship-remediation\\content\\question-factory",
+    "C:\\tmp\\wt-scholarship-y6-sample\\content\\question-factory",
+    "C:\\tmp\\wt-y5-drafts\\content\\question-factory",
+    "C:\\Users\\vishw\\Vish\\Vish\\.worktrees\\docs-programme-readiness-audit-2026-10-16\\content\\question-factory",
+    "C:\\Users\\vishw\\Vish\\Vish\\mm-beta-hardening\\content\\question-factory"
+  ],
+  "jsonFilesScanned": 17242,
+  "matchingStoredCandidateRecords": [
+    {
+      "localPath": "C:\\tmp\\rel-inc\\content\\question-factory\\staged\\scholarship-y6-maths-004.json",
+      "sha256": "7c3941c2816c15a36f858183d437b10e7a985357c321413b9f2b76ac33aa104c",
+      "candidateId": "scholarship-y6-maths-004",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:10.957Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-inc\\content\\question-factory\\staged\\scholarship-y6-maths-007.json",
+      "sha256": "a1e34af029b2691dbcb4f3cb1176d2e6b77479291528b4b43a26bf5d9f23e23e",
+      "candidateId": "scholarship-y6-maths-007",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:12.882Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-inc\\content\\question-factory\\staged\\scholarship-y6-maths-014.json",
+      "sha256": "8d035ebc0643dd173ad8890c530aa906f74154d1c162b9f75aa7c0f4ba69057a",
+      "candidateId": "scholarship-y6-maths-014",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:17.403Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": false,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-inc\\content\\question-factory\\staged\\scholarship-y6-nr-001.json",
+      "sha256": "6dfbf62b08f020f3f5a58988fb20342901b5af5c34a9cda502edf99dfd6b6383",
+      "candidateId": "scholarship-y6-nr-001",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:41.282Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "926a14bedf8c0e0a510437674d42ebdd16233269b30d0fab1154cb049800aecc",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-inc\\content\\question-factory\\staged\\scholarship-y6-nr-022.json",
+      "sha256": "829af4f2139e30bbae369cc1015eefa6a783850f28e669c92e72acc516016282",
+      "candidateId": "scholarship-y6-nr-022",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:57.146Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-inc\\content\\question-factory\\staged\\scholarship-y6-nr-023.json",
+      "sha256": "5d4f85c4d03afde63afe2667712e436c4490126cff6a2bfe8530c3c3359c0874",
+      "candidateId": "scholarship-y6-nr-023",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:57.866Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-int\\content\\question-factory\\staged\\scholarship-y6-maths-004.json",
+      "sha256": "7c3941c2816c15a36f858183d437b10e7a985357c321413b9f2b76ac33aa104c",
+      "candidateId": "scholarship-y6-maths-004",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:10.957Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-int\\content\\question-factory\\staged\\scholarship-y6-maths-007.json",
+      "sha256": "a1e34af029b2691dbcb4f3cb1176d2e6b77479291528b4b43a26bf5d9f23e23e",
+      "candidateId": "scholarship-y6-maths-007",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:12.882Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-int\\content\\question-factory\\staged\\scholarship-y6-maths-014.json",
+      "sha256": "8d035ebc0643dd173ad8890c530aa906f74154d1c162b9f75aa7c0f4ba69057a",
+      "candidateId": "scholarship-y6-maths-014",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:17.403Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": false,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-int\\content\\question-factory\\staged\\scholarship-y6-nr-001.json",
+      "sha256": "6dfbf62b08f020f3f5a58988fb20342901b5af5c34a9cda502edf99dfd6b6383",
+      "candidateId": "scholarship-y6-nr-001",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:41.282Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "926a14bedf8c0e0a510437674d42ebdd16233269b30d0fab1154cb049800aecc",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-int\\content\\question-factory\\staged\\scholarship-y6-nr-022.json",
+      "sha256": "829af4f2139e30bbae369cc1015eefa6a783850f28e669c92e72acc516016282",
+      "candidateId": "scholarship-y6-nr-022",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:57.146Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-int\\content\\question-factory\\staged\\scholarship-y6-nr-023.json",
+      "sha256": "5d4f85c4d03afde63afe2667712e436c4490126cff6a2bfe8530c3c3359c0874",
+      "candidateId": "scholarship-y6-nr-023",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:57.866Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\generated\\scholarship-y6-rc-001.json",
+      "sha256": "78b5ece1fb211e9811fd69d9d7faa3d11e4450839220c990015feffb03811e19",
+      "candidateId": "scholarship-y6-rc-001",
+      "state": "generated",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:51:44.971Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\generated\\scholarship-y6-rc-002.json",
+      "sha256": "c4f9cb525278493fbe1f9bb9976af5fc26b99bf83816ac92f1fb1b6407e529d3",
+      "candidateId": "scholarship-y6-rc-002",
+      "state": "generated",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:51:45.614Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\generated\\scholarship-y6-rc-003.json",
+      "sha256": "87de6da64eb573adaa541458517eb5cc0b886d5854ca298dbb11866a2e3c4e2e",
+      "candidateId": "scholarship-y6-rc-003",
+      "state": "generated",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:51:46.224Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\generated\\scholarship-y6-vr-001.json",
+      "sha256": "1058f58b73dfa73b38bb1ec935605fec1de80b9c28443af2a359803b3c01eee8",
+      "candidateId": "scholarship-y6-vr-001",
+      "state": "generated",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:51:11.495Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\generated\\scholarship-y6-vr-016.json",
+      "sha256": "eaf67eb11d11971c364d51e5b4f1eef7e3a272e1894e0896eb3aff92e4d4a882",
+      "candidateId": "scholarship-y6-vr-016",
+      "state": "generated",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:51:23.235Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\generated\\scholarship-y6-vr-032.json",
+      "sha256": "64e5b368844a43f067e20b2dd98c01758edf6cd2c70ba8226bc76afb143833f1",
+      "candidateId": "scholarship-y6-vr-032",
+      "state": "generated",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:51:35.548Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "f4d9bde6f170f93af2de1744058253ffd9af43628259b6a132b1639c543ed459",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "7f8a2c5f12c340cc072d00d3a051f21f34387ec61bf1c1f279e1657d612cd5dc",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": false,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\staged\\scholarship-y6-maths-004.json",
+      "sha256": "7c3941c2816c15a36f858183d437b10e7a985357c321413b9f2b76ac33aa104c",
+      "candidateId": "scholarship-y6-maths-004",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:10.957Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\staged\\scholarship-y6-maths-007.json",
+      "sha256": "a1e34af029b2691dbcb4f3cb1176d2e6b77479291528b4b43a26bf5d9f23e23e",
+      "candidateId": "scholarship-y6-maths-007",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:12.882Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\staged\\scholarship-y6-maths-014.json",
+      "sha256": "8d035ebc0643dd173ad8890c530aa906f74154d1c162b9f75aa7c0f4ba69057a",
+      "candidateId": "scholarship-y6-maths-014",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:52:17.403Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": false,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\staged\\scholarship-y6-nr-001.json",
+      "sha256": "6dfbf62b08f020f3f5a58988fb20342901b5af5c34a9cda502edf99dfd6b6383",
+      "candidateId": "scholarship-y6-nr-001",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:41.282Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "926a14bedf8c0e0a510437674d42ebdd16233269b30d0fab1154cb049800aecc",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\staged\\scholarship-y6-nr-022.json",
+      "sha256": "829af4f2139e30bbae369cc1015eefa6a783850f28e669c92e72acc516016282",
+      "candidateId": "scholarship-y6-nr-022",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:57.146Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\rel-sch\\content\\question-factory\\staged\\scholarship-y6-nr-023.json",
+      "sha256": "5d4f85c4d03afde63afe2667712e436c4490126cff6a2bfe8530c3c3359c0874",
+      "candidateId": "scholarship-y6-nr-023",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-17T09:50:57.866Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\review-queue\\scholarship-y6-vr-001.json",
+      "sha256": "33af037f6d8afe11bdea153f1327cd4c4f272ad571124cdcf4617d85c4c4996a",
+      "candidateId": "scholarship-y6-vr-001",
+      "state": "correctness_check_passed",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:54:24.116Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\staged\\scholarship-y6-maths-004.json",
+      "sha256": "f1f0fc81060884cf985f1446bee2d1cca8345f48a1b8d580e2e2d4a721637553",
+      "candidateId": "scholarship-y6-maths-004",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:55:53.853Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\staged\\scholarship-y6-maths-007.json",
+      "sha256": "c141fb9d28350dbe9b3b5ba1087ea2fdfe8eb456ef9e11ebe9ec1533be24c413",
+      "candidateId": "scholarship-y6-maths-007",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:55:57.160Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\staged\\scholarship-y6-maths-014.json",
+      "sha256": "a74f03b27e13161ccb2107f547f2d4b90cacdf03805c3730a99cc176a4d0ec81",
+      "candidateId": "scholarship-y6-maths-014",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:56:04.846Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "607c2a62fc64fac38fec054588f4d059dc4a49da4cc430d598af009067d137bf",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": false,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\staged\\scholarship-y6-nr-001.json",
+      "sha256": "0fedd1df5f9a8818d8a987639e159d0fbc4e39f84b77e18581d17abe31f9e289",
+      "candidateId": "scholarship-y6-nr-001",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:53:20.598Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "926a14bedf8c0e0a510437674d42ebdd16233269b30d0fab1154cb049800aecc",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\staged\\scholarship-y6-nr-022.json",
+      "sha256": "cb1943bc0fc8338b105bd6a7d8aae96162b61d84575b91ec3ac6e84fabe7ccae",
+      "candidateId": "scholarship-y6-nr-022",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:54:00.714Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\staged\\scholarship-y6-nr-023.json",
+      "sha256": "bf68afeb68e0b9560fe93e65204a8101c42b9ed16a6837ea6beb34b95a1996b2",
+      "candidateId": "scholarship-y6-nr-023",
+      "state": "staged",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:54:02.075Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\quarantined\\scholarship-y6-rc-001.json",
+      "sha256": "b6ffe96eb32c2bc6c746d52ca3f9dc31205d19a00bf82b1b60fc619e052e0fe3",
+      "candidateId": "scholarship-y6-rc-001",
+      "state": "correctness_check_passed",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:55:13.741Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\quarantined\\scholarship-y6-rc-002.json",
+      "sha256": "a9f433e37cce019843b4ac300154a492b336a68b160a7e21ad9a837da94c166f",
+      "candidateId": "scholarship-y6-rc-002",
+      "state": "correctness_check_passed",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:55:15.013Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\quarantined\\scholarship-y6-rc-003.json",
+      "sha256": "556d2d40d4d61f585e04c9ca634109c0dca7ffef7bc41a11017a61574be12c71",
+      "candidateId": "scholarship-y6-rc-003",
+      "state": "correctness_check_passed",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:55:16.025Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\quarantined\\scholarship-y6-vr-016.json",
+      "sha256": "a73b4d819120a5e5a0c3c0989a2e967127f3448164c25acd0b51c8c5b0e2f278",
+      "candidateId": "scholarship-y6-vr-016",
+      "state": "correctness_check_passed",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:54:40.599Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
+      "matchesCurrentCandidate": true,
+      "matchesCurrentPublication": true,
+      "originalGenerationVerified": false
+    },
+    {
+      "localPath": "C:\\tmp\\wt-scholarship-prod\\content\\question-factory\\quarantined\\scholarship-y6-vr-032.json",
+      "sha256": "9408dc8be72186a888c1e7725547885080bea435babba5fb803e5e90cacb56d7",
+      "candidateId": "scholarship-y6-vr-032",
+      "state": "correctness_check_passed",
+      "declaredGenerator": {
+        "class": "manual_external",
+        "identity": {
+          "provider": "anthropic",
+          "modelId": "claude-sonnet-5",
+          "modelFamily": "claude",
+          "interactionMode": "api"
+        }
+      },
+      "declaredPromptVersion": "existing-scholarship-draft-import-1",
+      "hasPromptHash": false,
+      "declaredGeneratedAt": "2026-10-18T04:54:57.911Z",
+      "reviewRecordCount": 0,
+      "interpretation": "Historical stored declaration only; must independently verify authorship/events and gate chains.",
+      "storedCandidateSchemaValid": true,
+      "actualCandidateHash": "f4d9bde6f170f93af2de1744058253ffd9af43628259b6a132b1639c543ed459",
+      "claimedContentHashMatches": true,
+      "actualPublicationContentHash": "7f8a2c5f12c340cc072d00d3a051f21f34387ec61bf1c1f279e1657d612cd5dc",
+      "matchesCurrentCandidate": false,
+      "matchesCurrentPublication": false,
+      "originalGenerationVerified": false
+    }
+  ],
+  "scope": "Available worktree factory compartments only; blueprints excluded (they are design specifications, not generation events). No records created or changed."
+}

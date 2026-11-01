@@ -3,7 +3,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { readFile } from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import releaseIdentities from "@/features/admin-review/release-identities.json";
+import releaseIdentities from "@/features/admin-review/releases/scholarship-2026-10-22.json";
+import historicalIdentities from "@/features/admin-review/release-identities.json";
 import { getExamBank } from "@/server/exam-bank";
 import { candidateQuestionSchema } from "@/features/question-factory/ingestion/candidate-question";
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
@@ -117,9 +118,18 @@ describe("authenticated Scholarship draft review", () => {
     expect(mocks.insert).not.toHaveBeenCalled();
   });
 
-  it("displays the exact 6b7d3339 release revisions and preserves their governed identities", async () => {
+  it("preserves the immutable 6b7d3339 historical release", () => {
+    expect(historicalIdentities.sourceRevision.startsWith("6b7d3339")).toBe(true);
+    expect(createHash("sha256").update(readFileSync("src/features/admin-review/release-identities.json")).digest("hex")).toBe("5bf7cc0cf28484b25996f39b39b4a449c24fe5a379a98ca9778b9fd005066aa2");
+    for (const [id, identity] of Object.entries(historicalIdentities.questions)) {
+      expect(releaseIdentities.questions[id as keyof typeof releaseIdentities.questions].historicalContentHash, id).toBe(identity.historicalContentHash);
+    }
+    expect(releaseIdentities.historicalRevision).toBe(historicalIdentities.historicalRevision);
+  });
+
+  it("displays the exact amended release revisions and preserves their governed identities", async () => {
     const catalogue = await loadAdminReviewCatalogue();
-    expect(releaseIdentities.sourceRevision.startsWith("6b7d3339")).toBe(true);
+    expect(releaseIdentities.sourceRevision).toBe("45b6cdab335723b2ef822f854ac7e15e556bb7d7");
     const rawById = new Map<string, unknown>();
     for (const [file, expected] of Object.entries(releaseIdentities.packets)) {
       const bytes = readFileSync(`content/scholarship-drafts/${file}`);
@@ -155,7 +165,7 @@ describe("authenticated Scholarship draft review", () => {
 
   it("withholds items whose governance report no longer matches the release", async () => {
     const status = JSON.parse(
-      readFileSync("docs/reviews/scholarship-2026-10-18/status.json", "utf8"),
+      readFileSync("docs/reviews/scholarship-sample-2026-10-22/status.json", "utf8"),
     );
     status.items[0].candidateHash = "0".repeat(64);
     vi.mocked(readFile).mockResolvedValueOnce(JSON.stringify(status));

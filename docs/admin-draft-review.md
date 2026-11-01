@@ -11,7 +11,7 @@ The existing `/admin` area contains analytics, content intelligence and operatio
 
 ## Review workflow
 
-The catalogue contains the exact four Year 6 Scholarship packets from 6b7d3339a9c04e3b3196b8e51fdf936be6293624: Verbal Reasoning (45), Numerical Reasoning (40), Reading (35), Mathematics (40). That release is integrated through fresh origin/dev (PR #65), retaining its governance history and artifacts. The older 16 October blind-review reports remain historical source material; they do not grant current independent-review status or approval.
+The catalogue contains the exact four Year 6 Scholarship packets from 45b6cdab335723b2ef822f854ac7e15e556bb7d7: Verbal Reasoning (45), Numerical Reasoning (40), Reading (35), Mathematics (40). This version amends only maths-014's prompt relative to the preserved 6b7d3339 release. The older 16 October blind-review reports remain historical source material; they do not grant current independent-review status or approval. The versioned preparation and remaining publication blockers are documented in [the 22 October package](reviews/scholarship-sample-2026-10-22/README.md).
 
 Filter individual questions by section, authored difficulty, human approval/advisory recommendation, and question ID or prompt. Select **Complete draft papers** to try every item in a section packet, with persistent in-page answers and free navigation. These are untimed review previews of the complete draft packets. Filters never truncate a paper. Both modes reuse `ExamQuestion`, the question renderers and deterministic visual renderers. Reading passages remain embedded in the exact source questions. The current 160-question source set has no structured visuals; supported visuals are rendered if present, with the normal visual schema validation.
 
@@ -33,9 +33,9 @@ Review history is reported unavailable when its table cannot be read; approvals 
 
 ## Exact release identity and historical findings
 
-`src/features/admin-review/release-identities.json` pins the source release commit, four complete packet SHA-256 values, and all 160 raw question hashes, candidate hashes and canonical publication-content hashes. The loader withholds a changed packet or an item whose governance identities disagree. Its displayed question is the validated source question, not a historical copy or a student-bank fallback.
+`src/features/admin-review/releases/scholarship-2026-10-22.json` pins the current source release commit, four complete packet SHA-256 values, and all 160 raw question hashes, candidate hashes and canonical publication-content hashes. The earlier `release-identities.json` remains an immutable historical baseline. The loader withholds a changed packet or an item whose governance identities disagree. Its displayed question is the validated source question, not a historical copy or a student-bank fallback.
 
-The current release status report is shown separately, including its 45 ready-for-review, 35 revision/decision and 80 external-evidence statuses and difficulty gates. These statuses can be filtered independently of historical recommendations and human review decisions. All release governance records remain unchanged.
+The versioned current status report is shown separately, including inherited advisory classifications of 45 ready-for-review, 35 revision/decision and 80 external-evidence statuses and difficulty gates. It explicitly identifies its historical classification source and the maths-014 amendment; updated identity hashes do not establish a factory gate chain. These statuses can be filtered independently of historical recommendations and human review decisions. Historical governance records remain unchanged.
 
 Historical findings identify their source revision and content hash. Of the 160 earlier question identities, 103 differ from the corrected release and are explicitly labelled superseded. Findings whose question hash still matches remain historical advisory evidence, not current external-review or approval evidence. Existing human review approvals also require an exact current question hash.
 

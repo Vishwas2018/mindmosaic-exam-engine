@@ -1,6 +1,6 @@
 import { test, expect } from "../fixtures/auth.fixture";
 import { readFileSync } from "node:fs";
-import identities from "../../src/features/admin-review/release-identities.json";
+import identities from "../../src/features/admin-review/releases/scholarship-2026-10-22.json";
 
 test("Scholarship review is denied to guests and non-admin roles", async ({
   contextAs,
@@ -110,7 +110,7 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   page.on("request", (request) => {
     if (
       request.method() !== "GET" &&
-      /\/api\/(exam|assessment|student)\//.test(request.url())
+      (/\/api\/(exam|assessment|student)\//.test(request.url()) || /\/admin\/review/.test(request.url()))
     )
       studentWrites.push(request.url());
   });
@@ -172,6 +172,90 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   await expect(
     page.getByRole("main").getByText(/Preview responses|No student progress was recorded/),
   ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Record my explicit approval" }),
+  ).toBeDisabled();
+  expect(studentWrites).toEqual([]);
+});
+
+test("admin can preview the 12-question sample with start, navigation, shared passage, submission, scoring, explanations, and verify full papers unavailable", async ({
+  contextAs,
+}) => {
+  const page = await (await contextAs("admin")).newPage();
+  const studentWrites: string[] = [];
+  page.on("request", (request) => {
+    if (
+      request.method() !== "GET" &&
+      /\/api\/(exam|assessment|student)\//.test(request.url())
+    )
+      studentWrites.push(request.url());
+  });
+
+  // Verify full papers remain unavailable
+  for (const paperId of [
+    "scholarship-y6-comprehensive-sample-module",
+    "scholarship-y6-verbal-reasoning-full",
+    "scholarship-y6-numerical-reasoning-full",
+    "scholarship-y6-reading-full",
+    "scholarship-y6-mathematics-full",
+  ]) {
+    await page.goto(`/exams/${paperId}`);
+    await expect(page.getByRole("heading", { name: "Coming soon" })).toBeVisible();
+    await expect(
+      page.getByText("We do not have enough reviewed questions for this paper yet."),
+    ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Start paper" })).toHaveCount(0);
+  }
+
+  // Open admin review
+  await page.goto("/admin/review");
+  await page.getByRole("button", { name: "Complete draft papers" }).click();
+  await page
+    .getByLabel("Draft section paper")
+    .selectOption("sample-12");
+
+  await expect(
+    page.getByRole("main").getByText(/Year 6 Comprehensive Sample practice module: 12 questions/),
+  ).toBeVisible();
+
+  // 1. Start: Q1 (scholarship-y6-vr-001)
+  await expect(page.getByText("1 of 12: scholarship-y6-vr-001")).toBeVisible();
+  await page.getByRole("radio", { name: "DISTANCE" }).check();
+
+  // 2. Navigation: Next and Previous
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(page.getByText("2 of 12: scholarship-y6-vr-016")).toBeVisible();
+  await page.getByRole("button", { name: "Previous", exact: true }).click();
+  await expect(page.getByRole("radio", { name: "DISTANCE" })).toBeChecked();
+
+  // 3. Navigation to RC Q7 (scholarship-y6-rc-001) and shared passage "The Estuary Watchers"
+  await page.getByLabel("Paper question").selectOption("6");
+  await expect(page.getByText("7 of 12: scholarship-y6-rc-001")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The Estuary Watchers" })).toBeVisible();
+  await page.getByRole("radio", { name: "To set a quiet, patient mood as the two characters wait" }).check();
+
+  const readingPacket = JSON.parse(readFileSync("content/scholarship-drafts/scholarship-y6-reading-draft.json", "utf8"));
+  for (const index of [6, 7, 8]) {
+    await page.getByLabel("Paper question").selectOption(String(index));
+    await expect(page.getByRole("article").locator("section p").first()).toHaveText(readingPacket.questions[index - 6].stimulus.body);
+  }
+  await page.getByLabel("Paper question").selectOption("10");
+  await expect(page.getByRole("radio", { name: "$108", exact: true })).toBeVisible();
+  await expect(page.getByRole("article")).toContainText("$160");
+
+  // 4. Submission
+  await page.getByRole("button", { name: "Submit draft paper" }).click();
+
+  // 5. Scoring
+  await expect(page.getByRole("main").getByText(/Preview total: 2 \/ 12 marks/)).toBeVisible();
+  await expect(page.getByRole("main").getByText(/No student progress was recorded/)).toBeVisible();
+  await expect(page.getByRole("main").getByText("25% off $160 reduces the price to 160 * 0.75 = $120. A further 10% off $120 is 120 * 0.90 = $108.", { exact: true })).toBeVisible();
+
+  // 6. Explanations
+  await expect(page.getByRole("heading", { name: "Worked explanation" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Declared answer" })).toBeVisible();
+
+  // 7. Approvals still absent
   await expect(
     page.getByRole("button", { name: "Record my explicit approval" }),
   ).toBeDisabled();

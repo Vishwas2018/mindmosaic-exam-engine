@@ -23,6 +23,7 @@ vi.mock("@/lib/supabase/server", () => ({
 
 import { POST } from "@/app/api/exam/session/route";
 import { loadScholarshipDraftQuestions } from "@/tests/helpers/scholarship-published";
+import { getExamPattern } from "@/features/exam-engine/exam-patterns";
 
 const nr = loadScholarshipDraftQuestions("nr");
 const rc = loadScholarshipDraftQuestions("rc");
@@ -65,6 +66,46 @@ describe("POST /api/exam/session for scholarship papers", () => {
     }
     // No explanation text reaches the browser before submission, even though the draft explanations name the answer.
     for (const q of nr) expect(serialised).not.toContain(q.explanation);
+  });
+
+  it("creates the exact 12-item sample from isolated fixtures, retaining passages and withholding answers", async () => {
+    // Only this mocked bank/RPC changes: no publication approvals or real database writes.
+    state.bank = ["vr", "nr", "rc", "maths"].flatMap(section => loadScholarshipDraftQuestions(section as "vr" | "nr" | "rc" | "maths"));
+    const pattern = getExamPattern("scholarship-y6-comprehensive-sample-module")!;
+    const ids = pattern.sources.flatMap(source => source.filters!.questionIds!);
+    const response = await POST(post({ patternId: pattern.id }));
+    expect(response.status).toBe(200);
+    const body = await response.json();
+    expect(body.questions.map((q: { id: string }) => q.id).sort()).toEqual([...ids].sort());
+    expect(mockCreateRpc.mock.calls[0][1].p_selected_question_ids.sort()).toEqual([...ids].sort());
+    const reading = body.questions.filter((q: { id: string }) => q.id.includes("-rc-"));
+    expect(reading).toHaveLength(3);
+    for (const q of reading) expect(q.stimulus).toEqual(rc[0].stimulus);
+    for (const q of body.questions) {
+      expect(q).not.toHaveProperty("answerKey");
+      expect(q).not.toHaveProperty("explanation");
+    }
+    for (const q of state.bank as typeof nr) {
+      if (ids.includes(q.id)) expect(JSON.stringify(body)).not.toContain(q.explanation);
+    }
+  });
+
+  it("refuses an incomplete sample without substituting other published fixtures", async () => {
+    state.bank = ["vr", "nr", "rc", "maths"].flatMap(section => loadScholarshipDraftQuestions(section as "vr" | "nr" | "rc" | "maths")).filter(q => q.id !== "scholarship-y6-vr-001");
+    expect((await POST(post({ patternId: "scholarship-y6-comprehensive-sample-module", asPracticeModule: true }))).status).toBe(422);
+    expect(mockCreateRpc).not.toHaveBeenCalled();
+  });
+
+  it("denies the sample session to guests and non-student roles", async () => {
+    const body = { patternId: "scholarship-y6-comprehensive-sample-module" };
+    mockGetUser.mockResolvedValue({ data: { user: null } });
+    expect((await POST(post(body))).status).toBe(401);
+    mockGetUser.mockResolvedValue({ data: { user: { id: "non-student" } } });
+    for (const role of ["parent", "teacher", "admin"]) {
+      mockProfileSingle.mockResolvedValue({ data: { role } });
+      expect((await POST(post(body))).status).toBe(403);
+    }
+    expect(mockCreateRpc).not.toHaveBeenCalled();
   });
 
   it("does not ship explanations before submission even when the client asks for Confidence Mode", async () => {

@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": "scholarship-y6-maths-014",
+      "myAnswer": "c",
+      "reasoning": "The difference between the groups is 5 − 3 = 2 ratio parts, representing 30 athletes. Each part therefore represents 15 athletes. The total is (5 + 3) × 15 = 120 athletes.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    }
+  ]
+}
