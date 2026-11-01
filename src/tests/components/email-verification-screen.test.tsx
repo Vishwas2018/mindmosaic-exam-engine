@@ -89,6 +89,7 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
   });
 
   it("shows an expired-link error with resend guidance when there is no code", async () => {
+    const user = userEvent.setup();
     currentParams = new URLSearchParams({ error_code: "otp_expired" });
 
     renderScreen();
@@ -97,7 +98,6 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
     expect(screen.getByText(/this verification link has expired/i)).toBeInTheDocument();
     expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
 
-    const user = userEvent.setup();
     await user.type(screen.getByLabelText(/email address/i), "jamie@example.com");
     await user.click(screen.getByRole("button", { name: /resend verification email/i }));
 
