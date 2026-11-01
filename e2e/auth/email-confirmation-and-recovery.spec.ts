@@ -9,11 +9,20 @@ function randomEmail(prefix = "e2e-auth"): string {
 }
 
 test.describe("Authentication resilience: confirmation, recovery, and access guards", () => {
+  /*
+   * The tests that read a real email need a local mail catcher (Mailpit) and, for confirmation, a stack with email
+   * confirmations on. CI's stack has neither, so they declare it and skip there; the mail-free tests (cold access,
+   * ordinary session, invalid links) always run. See docs/testing for the isolated stack used locally.
+   */
+  const MAIL = Boolean(process.env.E2E_MAILPIT_URL);
+  const needsMail = () => test.skip(!MAIL, "needs a local mail catcher: set E2E_MAILPIT_URL");
+
   test.beforeEach(async () => {
-    await clearMailbox();
+    if (MAIL) await clearMailbox();
   });
 
   test("same-browser email confirmation using original email link", async ({ browser }) => {
+    needsMail();
     const context = await browser.newContext();
     const page = await context.newPage();
     const email = randomEmail("parent-confirm");
@@ -62,6 +71,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
   });
 
   test("cross-browser email confirmation via original link", async ({ browser }) => {
+    needsMail();
     const contextA = await browser.newContext();
     const pageA = await contextA.newPage();
     const email = randomEmail("cross-browser-parent");
@@ -113,6 +123,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
   });
 
   test("cross-device PKCE failure displays actionable message and supports resend", async ({ browser }) => {
+    needsMail();
     const context = await browser.newContext();
     const page = await context.newPage();
     const email = randomEmail("pkce-resend");
@@ -153,6 +164,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
   });
 
   test("successful password recovery and login with the new password", async ({ browser }) => {
+    needsMail();
     const email = randomEmail("recovery-parent");
     const initialPassword = "OldPassword123!";
     const newPassword = "NewStrongPassword456!";
@@ -261,6 +273,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
   });
 
   test("a recovery link cannot be used twice", async ({ browser }) => {
+    needsMail();
     const email = randomEmail("recovery-reuse");
     await ADMIN_CLIENT.auth.admin.createUser({
       email,
@@ -296,6 +309,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
   // Needs a stack whose recovery email template links to /auth/reset?token_hash=…&type=recovery (the DEV target
   // configuration). With the default PKCE template the same scenario is the "different device" message tested above.
   test("recovery opened on a DIFFERENT device completes when the email carries a token_hash", async ({ browser }) => {
+    needsMail();
     test.skip(process.env.E2E_TOKEN_HASH_TEMPLATES !== "1", "requires token_hash email templates");
     const email = randomEmail("recovery-xdevice");
     const newPassword = "CrossDevice-New-789!";
@@ -337,6 +351,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
   });
 
   test("signup confirmation opened on a DIFFERENT device completes when the email carries a token_hash", async ({ browser }) => {
+    needsMail();
     test.skip(process.env.E2E_TOKEN_HASH_TEMPLATES !== "1", "requires token_hash email templates");
     const email = randomEmail("confirm-xdevice");
     const laptop = await browser.newContext();
