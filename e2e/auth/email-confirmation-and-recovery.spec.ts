@@ -53,6 +53,11 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
     await expect(page).toHaveTitle(/Parent dashboard/);
 
+    // The session this link created is a signup session, not a recovery session: the reset form stays closed.
+    await page.goto("/auth/reset");
+    await expect(page.getByRole("heading", { name: /open your reset link/i })).toBeVisible();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
+
     await context.close();
   });
 
@@ -88,10 +93,20 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const pageB = await contextB.newPage();
     await pageB.goto(emailData.link);
 
-    // Device-independent confirmation succeeds and redirects to /parent
-    await expect(pageB.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
-    await expect(pageB).toHaveURL(/\/parent/, { timeout: 15000 });
-    await expect(pageB).toHaveTitle(/Parent dashboard/);
+    if (process.env.E2E_TOKEN_HASH_TEMPLATES === "1") {
+      // token_hash template: device-independent confirmation succeeds and redirects to /parent
+      await expect(pageB.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
+      await expect(pageB).toHaveURL(/\/parent/, { timeout: 15000 });
+      await expect(pageB).toHaveTitle(/Parent dashboard/);
+    } else {
+      // Default PKCE template: the link is bound to context A. B must be told so, focused and offered a resend,
+      // and must not end up signed in.
+      const heading = pageB.getByRole("heading", { name: /link expired or invalid/i });
+      await expect(heading).toBeVisible({ timeout: 10000 });
+      await expect(heading).toBeFocused();
+      await expect(pageB.getByText(/opened on a different device or browser/i)).toBeVisible();
+      expect(pageB.url()).not.toMatch(/\/parent/);
+    }
 
     await contextA.close();
     await contextB.close();
@@ -177,7 +192,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await page.getByLabel("Confirm new password").fill(newPassword);
     await page.getByRole("button", { name: "Update password" }).click();
 
-    await expect(page.getByText(/your password has been updated/i)).toBeVisible();
+    await expect(page.getByText(/password updated/i)).toBeVisible();
     await page.waitForURL(/\/sign-in/, { timeout: 10000 });
 
     // 5. Sign in with the NEW password
@@ -243,5 +258,109 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
 
     await context.close();
+  });
+
+  test("a recovery link cannot be used twice", async ({ browser }) => {
+    const email = randomEmail("recovery-reuse");
+    await ADMIN_CLIENT.auth.admin.createUser({
+      email,
+      password: "OldPassword123!",
+      email_confirm: true,
+      user_metadata: { display_name: "Reuse Parent", role: "parent" },
+    });
+
+    const requester = await browser.newContext();
+    const requesterPage = await requester.newPage();
+    await requesterPage.goto("/sign-in?mode=forgot");
+    await requesterPage.getByLabel("Email address").fill(email);
+    await requesterPage.getByRole("button", { name: "Send reset link" }).click();
+    await expect(requesterPage.getByText(/reset link is on its way/i)).toBeVisible();
+    const resetEmail = await getLatestEmail(email);
+
+    // First use, same browser: succeeds and opens the form.
+    await requesterPage.goto(resetEmail.link);
+    await expect(requesterPage.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
+    await requester.close();
+
+    // Second use, fresh browser: the link is spent. The page must not offer a form.
+    const fresh = await browser.newContext();
+    const freshPage = await fresh.newPage();
+    await freshPage.goto(resetEmail.link);
+    const heading = freshPage.getByRole("heading", { name: /link expired or invalid/i });
+    await expect(heading).toBeVisible({ timeout: 10000 });
+    await expect(heading).toBeFocused();
+    await expect(freshPage.getByLabel("New password", { exact: true })).not.toBeVisible();
+    await fresh.close();
+  });
+
+  // Needs a stack whose recovery email template links to /auth/reset?token_hash=…&type=recovery (the DEV target
+  // configuration). With the default PKCE template the same scenario is the "different device" message tested above.
+  test("recovery opened on a DIFFERENT device completes when the email carries a token_hash", async ({ browser }) => {
+    test.skip(process.env.E2E_TOKEN_HASH_TEMPLATES !== "1", "requires token_hash email templates");
+    const email = randomEmail("recovery-xdevice");
+    const newPassword = "CrossDevice-New-789!";
+    await ADMIN_CLIENT.auth.admin.createUser({
+      email,
+      password: "OldPassword123!",
+      email_confirm: true,
+      user_metadata: { display_name: "Cross Device Parent", role: "parent" },
+    });
+
+    const laptop = await browser.newContext();
+    const laptopPage = await laptop.newPage();
+    await laptopPage.goto("/sign-in?mode=forgot");
+    await laptopPage.getByLabel("Email address").fill(email);
+    await laptopPage.getByRole("button", { name: "Send reset link" }).click();
+    await expect(laptopPage.getByText(/reset link is on its way/i)).toBeVisible();
+    const resetEmail = await getLatestEmail(email);
+    expect(resetEmail.link).toContain("token_hash=");
+    await laptop.close();
+
+    // A completely separate browser context: no cookies, no storage, no code verifier.
+    const phone = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const phonePage = await phone.newPage();
+    await phonePage.goto(resetEmail.link);
+    await expect(phonePage.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 15000 });
+    // The single-use credential is gone from the address bar.
+    expect(phonePage.url()).not.toContain("token_hash");
+
+    await phonePage.getByLabel("New password", { exact: true }).fill(newPassword);
+    await phonePage.getByLabel("Confirm new password").fill(newPassword);
+    await phonePage.getByRole("button", { name: "Update password" }).click();
+    await phonePage.waitForURL(/\/sign-in/, { timeout: 10000 });
+
+    await phonePage.getByLabel(/email address/i).fill(email);
+    await phonePage.getByLabel(/password/i).fill(newPassword);
+    await phonePage.getByRole("button", { name: /sign in to parent account/i }).click();
+    await expect(phonePage).toHaveURL(/\/parent/, { timeout: 15000 });
+    await phone.close();
+  });
+
+  test("signup confirmation opened on a DIFFERENT device completes when the email carries a token_hash", async ({ browser }) => {
+    test.skip(process.env.E2E_TOKEN_HASH_TEMPLATES !== "1", "requires token_hash email templates");
+    const email = randomEmail("confirm-xdevice");
+    const laptop = await browser.newContext();
+    const laptopPage = await laptop.newPage();
+    await laptopPage.goto("/sign-up");
+    await laptopPage.getByLabel(/first name/i).fill("Cross");
+    await laptopPage.getByLabel(/last name/i).fill("Device");
+    await laptopPage.getByLabel(/email address/i).fill(email);
+    await laptopPage.getByLabel(/create a password/i).fill("Str0ng!ParentPass1");
+    await laptopPage.getByRole("checkbox").click();
+    await laptopPage.getByRole("button", { name: "Continue" }).click();
+    await laptopPage.getByRole("button", { name: /skip for now/i }).click();
+    await laptopPage.getByRole("button", { name: "Create the account" }).click();
+    await expect(laptopPage.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 10000 });
+    const mail = await getLatestEmail(email);
+    expect(mail.link).toContain("token_hash=");
+    await laptop.close();
+
+    const phone = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const phonePage = await phone.newPage();
+    await phonePage.goto(mail.link);
+    await expect(phonePage.getByText(/email confirmed/i)).toBeVisible({ timeout: 15000 });
+    await expect(phonePage).toHaveURL(/\/parent/, { timeout: 15000 });
+    expect(phonePage.url()).not.toContain("token_hash");
+    await phone.close();
   });
 });

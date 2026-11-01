@@ -24,6 +24,8 @@ const mockExchangeCodeForSession = vi.fn();
 const mockResend = vi.fn();
 const mockVerifyOtp = vi.fn();
 const mockSetSession = vi.fn();
+const mockGetUser = vi.fn();
+const mockAssurance = vi.fn();
 const mockGetSession = vi.fn(async () => ({ data: { session: null } }));
 const mockOnAuthStateChange = vi.fn(() => ({
   data: { subscription: { unsubscribe: vi.fn() } },
@@ -38,6 +40,8 @@ vi.mock("@/lib/supabase/client", () => ({
       resend: mockResend,
       verifyOtp: mockVerifyOtp,
       setSession: mockSetSession,
+      getUser: mockGetUser,
+      mfa: { getAuthenticatorAssuranceLevel: mockAssurance },
     },
     from: () => ({
       select: () => ({ eq: () => ({ single: async () => ({ data: { role: "parent" } }) }) }),
@@ -62,6 +66,9 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
     mockResend.mockResolvedValue({ error: null });
     mockVerifyOtp.mockReset();
     mockSetSession.mockReset();
+    mockGetUser.mockReset();
+    mockAssurance.mockReset();
+    mockGetSession.mockImplementation(async () => ({ data: { session: null } }));
     window.history.pushState({}, "", "/auth/confirm");
   });
 
@@ -160,5 +167,63 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
     expect(await screen.findByText(/invalid or has already been used/i)).toBeInTheDocument();
     expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
     expect(mockVerifyOtp).not.toHaveBeenCalled();
+  });
+
+  const nowSeconds = () => Math.floor(Date.now() / 1000);
+  function existingSession(methods: Array<{ method: string; timestamp: number }>, serverAccepts = true) {
+    mockGetSession.mockImplementation(async () => ({ data: { session: { user: { id: "u1" } } } }) as never);
+    mockGetUser.mockResolvedValue(
+      serverAccepts
+        ? { data: { user: { id: "u1" } }, error: null }
+        : { data: { user: null }, error: { message: "invalid JWT" } },
+    );
+    mockAssurance.mockResolvedValue({ data: { currentAuthenticationMethods: methods }, error: null });
+  }
+  const verifierGone = {
+    data: { session: null },
+    error: { message: "PKCE code verifier not found in storage." },
+  };
+
+  it("succeeds when the SDK already exchanged this link's code on startup (no second, doomed exchange)", async () => {
+    currentParams = new URLSearchParams({ code: "already-consumed" });
+    existingSession([{ method: "email/signup", timestamp: nowSeconds() }]);
+    mockExchangeCodeForSession.mockResolvedValue(verifierGone);
+
+    renderScreen();
+
+    expect(await screen.findByText(/email confirmed/i)).toBeInTheDocument();
+    expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
+  });
+
+  it("does not mistake an older ordinary session for a confirmation: it still exchanges and reports the failure", async () => {
+    currentParams = new URLSearchParams({ code: "other-device-code" });
+    existingSession([{ method: "password", timestamp: nowSeconds() }]);
+    mockExchangeCodeForSession.mockResolvedValue(verifierGone);
+
+    renderScreen();
+
+    expect(await screen.findByText(/different device or browser/i)).toBeInTheDocument();
+    expect(mockExchangeCodeForSession).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not trust a signup-looking session the server rejects", async () => {
+    currentParams = new URLSearchParams({ code: "forged" });
+    existingSession([{ method: "email/signup", timestamp: nowSeconds() }], false);
+    mockExchangeCodeForSession.mockResolvedValue(verifierGone);
+
+    renderScreen();
+
+    expect(await screen.findByText(/different device or browser/i)).toBeInTheDocument();
+    expect(screen.queryByText(/email confirmed/i)).not.toBeInTheDocument();
+  });
+
+  it("does not trust a stale signup session from earlier", async () => {
+    currentParams = new URLSearchParams({ code: "stale" });
+    existingSession([{ method: "email/signup", timestamp: nowSeconds() - 3600 }]);
+    mockExchangeCodeForSession.mockResolvedValue(verifierGone);
+
+    renderScreen();
+
+    expect(await screen.findByText(/different device or browser/i)).toBeInTheDocument();
   });
 });

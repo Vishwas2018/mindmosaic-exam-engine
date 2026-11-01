@@ -35,6 +35,12 @@ const NO_LINK: LinkProblem = {
   text: "This page opens from the link in your password-reset email. Request a new link if you don't have it.",
 };
 
+/** A session exists but it was not created by a password-recovery link (password, signup, magic-link or OTP sign-in). */
+const NOT_RECOVERY: LinkProblem = {
+  heading: "Open your reset link",
+  text: "This page only opens from the link in a password-reset email, even if you are already signed in. Request a new link if you need one.",
+};
+
 /** How long a PKCE `code` link may take to turn into a session before it is treated as unusable here. */
 const CODE_EXCHANGE_MS = 6000;
 
@@ -52,7 +58,7 @@ const CODE_EXCHANGE_MS = 6000;
  */
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const { updatePassword, verifyRecoveryToken, adoptSessionTokens, configured, status } = useAuth();
+  const { updatePassword, verifyRecoveryToken, verifyRecoverySession, adoptSessionTokens, signOut, session, configured, status } = useAuth();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -74,10 +80,14 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     /* Runs once. These setState calls respond to the URL, an external system, after hydration. */
     const link = readLinkCredentials(new URL(window.location.href).searchParams, window.location.hash);
-    const settle = (result: { ok: boolean; message?: string }) => {
-      if (result.ok) {
+    const settle = async (result: { ok: boolean; message?: string }) => {
+      /* A link that produced a session is still not proof of recovery: a signup or magic-link URL pasted here would
+         also yield one. Only a session the server accepts AND that was created by a recovery link opens the form. */
+      if (result.ok && (await verifyRecoverySession())) {
         stripLinkCredentials();
         setPhase("form");
+      } else if (result.ok) {
+        showProblem(NOT_RECOVERY);
       } else {
         showProblem({ heading: EXPIRED.heading, text: friendlyLinkError(result.message, EXPIRED.text) });
       }
@@ -103,24 +113,43 @@ export default function ResetPasswordPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /* The session's token changes when the SDK finishes exchanging a code, so it is a dependency: re-verify then. */
+  const accessToken = session?.access_token ?? null;
   useEffect(() => {
     if (mode !== "code" && mode !== "none") return;
-    if (status === "authenticated" || status === "unconfigured") {
+    if (status === "unconfigured") {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPhase("form");
-      if (mode === "code") stripLinkCredentials();
       return;
     }
     if (status === "loading") return;
-    if (mode === "none") {
-      showProblem(NO_LINK);
-      return;
+    if (status === "anonymous") {
+      if (mode === "none") showProblem(NO_LINK);
+      return; // "code": the exchange may still be running; the timeout below decides.
     }
-    /* A PKCE code is exchanged against a verifier held by the browser that requested the reset. Give that exchange
-       a moment, then explain rather than leave the user on a form that cannot work. */
+    let active = true;
+    void verifyRecoverySession().then((isRecovery) => {
+      if (!active) return;
+      if (isRecovery) {
+        setPhase("form");
+        if (mode === "code") stripLinkCredentials();
+      } else if (mode === "none") {
+        showProblem(NOT_RECOVERY);
+      }
+      // mode "code": an ordinary session may exist until the exchange replaces it; keep waiting for the timeout.
+    });
+    return () => {
+      active = false;
+    };
+  }, [mode, status, accessToken, verifyRecoverySession]);
+
+  useEffect(() => {
+    if (mode !== "code" || phase !== "checking") return;
+    /* A PKCE code is exchanged against a verifier held by the browser that requested the reset. Give that exchange a
+       moment, then explain rather than leave the user on a form that cannot work. */
     const timer = setTimeout(() => showProblem({ heading: EXPIRED.heading, text: CROSS_DEVICE_MESSAGE }), CODE_EXCHANGE_MS);
     return () => clearTimeout(timer);
-  }, [mode, status]);
+  }, [mode, phase]);
 
   const ready = evaluatePassword(password).allMet && confirm === password;
 
@@ -133,6 +162,8 @@ export default function ResetPasswordPage() {
     setSubmitting(false);
     if (result.ok) {
       setMessage({ tone: "success", text: "Password updated — taking you to sign in…" });
+      /* End the recovery session so the next step is a normal sign-in with the new password. */
+      void signOut();
       setTimeout(() => router.push("/sign-in"), 1500);
     } else if (result.message && /session/i.test(result.message)) {
       // No recovery session (e.g. the link was already used, or opened cold
