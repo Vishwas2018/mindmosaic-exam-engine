@@ -1,11 +1,11 @@
 /**
  * Emailed auth links reach the app in three shapes, and only the first is tied to the browser that asked for it:
- *   - `?code=…`                     PKCE: exchanged with a verifier stored in the *requesting* browser.
- *   - `?token_hash=…&type=…`        OTP: verified by the token alone, so it works on any device.
+ *   - `?code=…`                          PKCE: exchanged with a verifier stored in the *requesting* browser.
+ *   - `?token_hash=…&type=…`             OTP: verified by the token alone, so it works on any device.
  *   - `#access_token=…&refresh_token=…`  implicit: the tokens are the session; the fragment never reaches the server.
  * A PKCE link opened on another phone or laptop therefore fails with a raw GoTrue message about a missing verifier.
  */
-const CROSS_DEVICE = /code verifier/i;
+const CROSS_DEVICE = /code verifier|pkce/i;
 
 export const CROSS_DEVICE_MESSAGE =
   "This link was opened on a different device or browser from the one it was requested on. " +
@@ -49,7 +49,7 @@ export function readLinkCredentials(query: URLSearchParams, fragment: string): L
 export function stripLinkCredentials(): void {
   if (typeof window === "undefined") return;
   const url = new URL(window.location.href);
-  for (const key of ["code", "token_hash", "type", "error_code", "error_description"]) {
+  for (const key of ["code", "token_hash", "type", "error", "error_code", "error_description"]) {
     url.searchParams.delete(key);
   }
   url.hash = "";

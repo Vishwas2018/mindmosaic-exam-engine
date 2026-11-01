@@ -4,6 +4,8 @@ import { useCallback, useState, type InputHTMLAttributes, type ReactNode } from 
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import { useFocusOnShow } from "./use-focus-on-show";
+
 /**
  * Field furniture for the redesigned auth screens, in the design handoff's
  * own measurements: 52-54px tall inputs, 12-13px radius, 1.5px borders,
@@ -180,12 +182,23 @@ export function MmCheckbox({
  * `role="alert"` — the handoff specifies it, and unlike `role="status"`
  * (what the previous AuthCard used) it interrupts, which is right for a
  * sign-in failure the user must act on.
+ * If `focusOnMount` is true, keyboard and screen-reader focus is moved
+ * to the error panel so users are immediately alerted to the error.
  */
-export function MmErrorPanel({ children }: { children: ReactNode }) {
+export function MmErrorPanel({
+  children,
+  focusOnMount = false,
+}: {
+  children: ReactNode;
+  focusOnMount?: boolean;
+}) {
+  const ref = useFocusOnShow<HTMLParagraphElement>(focusOnMount);
   return (
     <p
+      ref={ref}
+      tabIndex={focusOnMount ? -1 : undefined}
       role="alert"
-      className="mm-rise-fast grid grid-cols-[20px_1fr] gap-[11px] rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep"
+      className="mm-rise-fast grid grid-cols-[20px_1fr] gap-[11px] rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep outline-none"
     >
       <span aria-hidden="true" className="font-extrabold text-mm-coral-text">
         !

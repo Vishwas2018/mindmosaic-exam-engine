@@ -60,6 +60,8 @@ export interface AuthContextValue {
   verifyEmailToken(tokenHash: string, type: "signup" | "email"): Promise<EmailConfirmResult>;
   /** Device-independent password recovery: opens the recovery session from a `token_hash` link. */
   verifyRecoveryToken(tokenHash: string): Promise<AuthResult>;
+  /** Exchanges a password recovery `code` for a session, returning a friendly error on cross-device PKCE failure. */
+  exchangeRecoveryCode(code: string): Promise<AuthResult>;
   /** Adopts the session carried by an implicit-flow link (`#access_token=…&refresh_token=…`). */
   adoptSessionTokens(accessToken: string, refreshToken: string): Promise<EmailConfirmResult>;
   signOut(): Promise<void>;
@@ -307,8 +309,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       async confirmEmail(code) {
         if (!supabase) return notConfigured();
+        const { data: existingSession } = await supabase.auth.getSession();
+        if (existingSession.session?.user) {
+          return finishConfirmation(existingSession.session.user.id);
+        }
         const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-        if (error) return { ok: false, message: friendlyLinkError(error.message, error.message) };
+        if (error) {
+          const { data: retrySession } = await supabase.auth.getSession();
+          if (retrySession.session?.user) {
+            return finishConfirmation(retrySession.session.user.id);
+          }
+          return { ok: false, message: friendlyLinkError(error.message, error.message) };
+        }
         return finishConfirmation(data.session?.user.id);
       },
 
@@ -323,6 +335,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: "recovery" });
         if (error) return { ok: false, message: error.message };
+        return { ok: true };
+      },
+
+      async exchangeRecoveryCode(code) {
+        if (!supabase) return notConfigured();
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) return { ok: false, message: friendlyLinkError(error.message, error.message) };
         return { ok: true };
       },
 

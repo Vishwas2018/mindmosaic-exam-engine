@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -84,15 +84,28 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
 
   it("renders the normal form for a signed-in recovery session with no link error", async () => {
     window.history.pushState({}, "", "/auth/reset");
-    mockGetSession.mockImplementation(async () => ({ data: { session: { user: { id: "u1" } } } }) as never);
+    mockGetSession.mockImplementation(async () => ({ data: { session: { user: { id: "u1" }, recovery: true } } }) as never);
     renderReset();
     expect(await screen.findByLabelText("New password")).toBeInTheDocument();
     expect(screen.queryByText(/link expired or invalid/i)).not.toBeInTheDocument();
   });
 
+  it("locks out an ordinary authenticated session accessing /auth/reset cold without a recovery context", async () => {
+    window.history.pushState({}, "", "/auth/reset");
+    mockGetSession.mockImplementation(async () => ({ data: { session: { user: { id: "parent-1" }, amr: [{ method: "password" }] } } }) as never);
+    renderReset();
+
+    expect(await screen.findByRole("heading", { name: /open your reset link/i })).toBeInTheDocument();
+    expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /request a new reset link/i })).toHaveAttribute(
+      "href",
+      "/sign-in?mode=forgot",
+    );
+  });
+
   it("falls back to the expired-link screen when updatePassword fails with a missing session", async () => {
     window.history.pushState({}, "", "/auth/reset");
-    mockGetSession.mockImplementation(async () => ({ data: { session: { user: { id: "u1" } } } }) as never);
+    mockGetSession.mockImplementation(async () => ({ data: { session: { user: { id: "u1" }, recovery: true } } }) as never);
     mockUpdateUser.mockResolvedValue({ error: { message: "Auth session missing!" } });
     const user = userEvent.setup();
     renderReset();
@@ -170,7 +183,8 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
     });
     renderReset();
 
-    expect(await screen.findByRole("heading", { name: /link expired or invalid/i })).toHaveFocus();
+    const heading = await screen.findByRole("heading", { name: /link expired or invalid/i });
+    await waitFor(() => expect(heading).toHaveFocus());
     expect(screen.getByText(/email link is invalid or has expired/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
   });
