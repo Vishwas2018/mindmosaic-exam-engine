@@ -1,0 +1,133 @@
+{
+  "batchId": "fixture-y3-test-batch",
+  "batchTitle": "Year 3 NAPLAN Review Fixture (Test)",
+  "questions": [
+    {
+      "id": "fixture-y3-reading-01-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What were Luca and Fern moving?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time.",
+        "attribution": "MindMosaic Original Practice"
+      },
+      "options": [
+        { "id": "a", "text": "Books" },
+        { "id": "b", "text": "Plant pots" },
+        { "id": "c", "text": "Lunch boxes" },
+        { "id": "d", "text": "Paint brushes" }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The first sentence identifies the books they had to move.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "skill": "read.prod.literal-comprehension.recalling-a-detail",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "fixture-y3-reading-01-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Why did some books fall onto the grass?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time.",
+        "attribution": "MindMosaic Original Practice"
+      },
+      "options": [
+        { "id": "a", "text": "The cart reached the library" },
+        { "id": "b", "text": "Fern removed a wheel" },
+        { "id": "c", "text": "The books were too wet" },
+        { "id": "d", "text": "The tall pile slid when the cart turned" }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "The fall happened when the cart turned with one tall pile.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "skill": "lit.reading.inference",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "fixture-y3-reading-01-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "What did Fern suggest changing?",
+      "stimulus": {
+        "title": "The borrowed cart",
+        "body": "Luca and Fern had to move books from the office to the school library. The caretaker lent them a garden cart. Luca made one tall pile, but a few books slid onto the grass when the cart turned. Fern suggested three lower piles instead. Ahead, a step blocked the cart's small wheels. They could unload everything and lift the cart, or take the longer path around the back of the building. They chose the smooth back path. The other helpers arrived first, but Luca and Fern delivered every book clean and dry. Luca decided to check the path before loading next time.",
+        "attribution": "MindMosaic Original Practice"
+      },
+      "options": [
+        { "id": "a", "text": "Moving the library" },
+        { "id": "b", "text": "Using one taller pile" },
+        { "id": "c", "text": "Making three lower piles" },
+        { "id": "d", "text": "Putting books in water" }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Fern suggested three lower piles instead of one tall pile.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "skill": "read.prod.literal-comprehension.recalling-a-detail",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "fixture-y3-spelling-001",
+      "type": "multiple_choice",
+      "yearLevel": 3,
+      "examStyle": "naplan_style",
+      "prompt": "Which word correctly completes the sentence? We ____ over the puddle.",
+      "options": [
+        { "id": "a", "text": "jamped" },
+        { "id": "b", "text": "jumpd" },
+        { "id": "c", "text": "jumped" },
+        { "id": "d", "text": "jumpt" }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Jumped keeps the base word jump and adds regular past tense -ed.",
+      "metadata": {
+        "subject": "language_conventions",
+        "strand": "Spelling",
+        "skill": "lang.prod.spelling.correcting-misspelt-words",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 45,
+        "tags": []
+      }
+    }
+  ]
+}

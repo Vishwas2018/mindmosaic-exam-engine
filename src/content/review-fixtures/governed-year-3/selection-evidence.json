@@ -1,0 +1,478 @@
+{
+  "selection": {
+    "state": "staged",
+    "question.yearLevel": 3,
+    "count": 46
+  },
+  "counts": {
+    "reading": 26,
+    "spelling": 20
+  },
+  "governedStateAndApprovalsUnchanged": true,
+  "items": [
+    {
+      "sourceId": "roadmap-naplan-y3-reading-01-q1",
+      "candidateId": "man-03b2ecb1b30f7df4be44a1ff",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The borrowed cart"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-01-q2",
+      "candidateId": "man-5373a211aca9a95ac6466115",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": "The borrowed cart"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-01-q3",
+      "candidateId": "rev-70d208245f62fe02f3f9aff6",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The borrowed cart"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-01-q4",
+      "candidateId": "man-6d54b54648e2fa51c530fa1d",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The borrowed cart"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-01-q5",
+      "candidateId": "man-90249ef6fdebe02f040d4c5d",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": "The borrowed cart"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-01-q6",
+      "candidateId": "man-29697e40917e2831fcc168ab",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.inference.inferring-character-motivation",
+      "question.metadata.difficulty": "challenging",
+      "question.stimulus.title": "The borrowed cart"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q1",
+      "candidateId": "man-dc222eb4f84d1dcb7d84a3e1",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q2",
+      "candidateId": "man-9d35f84b100d8bb63403821a",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q3",
+      "candidateId": "man-7ca9da6fa7b3477c76596fbc",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q4",
+      "candidateId": "man-9b77d2d0c6f2387ca2ce0935",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q5",
+      "candidateId": "man-5a62f050d11912e1c41d034f",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q6",
+      "candidateId": "man-aa57c897321d4709c52c2ce5",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-02-q7",
+      "candidateId": "man-1d47b7152bf0dc642aafd838",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "lit.reading.main-idea",
+      "question.metadata.difficulty": "challenging",
+      "question.stimulus.title": "The seed shelf"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q1",
+      "candidateId": "man-b726a8adc02e5ed25571da0c",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q2",
+      "candidateId": "man-15f8025cbfc8baa221ed2462",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q3",
+      "candidateId": "man-9079be2d2ed991e930cd1d7a",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q4",
+      "candidateId": "man-7c85779613b8903278f688e4",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.inference.inferring-character-motivation",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q5",
+      "candidateId": "man-eb75110f872b675d5b660946",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q6",
+      "candidateId": "man-e51de57f296a6cce5abba80d",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-03-q7",
+      "candidateId": "man-3d4b15f354ea7cc176321d91",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "lit.reading.main-idea",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": "The quiet bell"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-04-q1",
+      "candidateId": "man-672fb1880e85479c3582cdc1",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "Boat on the veranda"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-04-q2",
+      "candidateId": "man-ffd16eab34a396c8b4bf5b35",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "Boat on the veranda"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-04-q3",
+      "candidateId": "man-e8c3a2b5337c12801c735634",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "Boat on the veranda"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-04-q4",
+      "candidateId": "man-e87bbdf84f238d564de382b9",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "Boat on the veranda"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-04-q5",
+      "candidateId": "man-91286f6945be41b885249fd0",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "read.prod.literal-comprehension.recalling-a-detail",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": "Boat on the veranda"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-reading-04-q6",
+      "candidateId": "man-64bb80760f04414cc4a5bf31",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "reading",
+      "question.metadata.skill": "lit.reading.main-idea",
+      "question.metadata.difficulty": "challenging",
+      "question.stimulus.title": "Boat on the veranda"
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-001",
+      "candidateId": "man-1df86ade663a5a11d4f41832",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-002",
+      "candidateId": "man-f66a01bc80a7395c779814f0",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-003",
+      "candidateId": "man-8fb0665ef5c0771487683c07",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-004",
+      "candidateId": "man-6187c6bcd695363bba378e2e",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-005",
+      "candidateId": "man-9f7dbc3fb2a9c6005a3ef296",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-006",
+      "candidateId": "man-1161fe65a1a69020a3a0261c",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-007",
+      "candidateId": "man-628122eb880a901e9b4fe76b",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-008",
+      "candidateId": "man-ef323efbfa15ce43f69003d3",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-009",
+      "candidateId": "man-3e484e9685cb12c4c287090e",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-010",
+      "candidateId": "man-adb785e503ad2a693f17d36a",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-011",
+      "candidateId": "man-da796e31ebb3717ca6ac7f8f",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-012",
+      "candidateId": "man-3c30a4defdccb96d7ff9d316",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "easy",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-013",
+      "candidateId": "man-0d93a11806d31cf035715c1c",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-014",
+      "candidateId": "man-2b18014041d3319b14330d6e",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-015",
+      "candidateId": "man-6683a61b7a4c98eda0d8a270",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-016",
+      "candidateId": "man-5daf8c3cad25e0a97aba393a",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "challenging",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-017",
+      "candidateId": "man-a11bf8a4b9924e2ebb16a3c1",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-018",
+      "candidateId": "man-29e077a4288371f538fcf73f",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "challenging",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-019",
+      "candidateId": "man-98ffdb0d1482add048e70ee4",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "medium",
+      "question.stimulus.title": null
+    },
+    {
+      "sourceId": "roadmap-naplan-y3-spelling-020",
+      "candidateId": "man-d2f7e22d7c68af7feeafa206",
+      "state": "staged",
+      "question.yearLevel": 3,
+      "question.metadata.subject": "language_conventions",
+      "question.metadata.skill": "lang.prod.spelling.correcting-misspelt-words",
+      "question.metadata.difficulty": "challenging",
+      "question.stimulus.title": null
+    }
+  ],
+  "excludedPendingQ7": {
+    "candidateId": "rev-b2778f67c801ed50e66fdba6",
+    "state": "correctness_check_passed"
+  }
+}
