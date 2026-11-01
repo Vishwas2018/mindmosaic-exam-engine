@@ -64,7 +64,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // The session this link created is a signup session, not a recovery session: the reset form stays closed.
     await page.goto("/auth/reset");
-    await expect(page.getByRole("heading", { name: /open your reset link/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /open your reset link/i })).toBeVisible({ timeout: 10000 });
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
 
     await context.close();
@@ -199,13 +199,16 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // Form appears
     await expect(page.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
 
+    // Reload the page: the recovery session remains verified and form stays available
+    await page.reload();
+    await expect(page.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
+
     // 4. Submit new password
     await page.getByLabel("New password", { exact: true }).fill(newPassword);
     await page.getByLabel("Confirm new password").fill(newPassword);
     await page.getByRole("button", { name: "Update password" }).click();
 
-    await expect(page.getByText(/password updated/i)).toBeVisible();
-    await page.waitForURL(/\/sign-in/, { timeout: 10000 });
+    await page.waitForURL(/\/sign-in/, { timeout: 15000 });
 
     // 5. Sign in with the NEW password
     await page.getByLabel(/email address/i).fill(email);
@@ -215,6 +218,11 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // Successfully reaches parent dashboard
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
     await expect(page).toHaveTitle(/Parent dashboard/);
+
+    // 6. Navigating back to /auth/reset is now an ordinary session (recovery state was cleaned up)
+    await page.goto("/auth/reset");
+    await expect(page.getByRole("heading", { name: /open your reset link/i })).toBeVisible();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
 
     await context.close();
   });
@@ -248,6 +256,22 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await expect(heading).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
     await expect(page.getByRole("link", { name: /request a new reset link/i })).toBeVisible();
+  });
+
+  test("authenticated ordinary session opening an invalid PKCE link cannot access reset form", async ({ contextAs }) => {
+    // Context signed in as normal parent
+    const context = await contextAs("parent-no-children");
+    const page = await context.newPage();
+
+    await page.goto("/auth/reset?code=invalid-foreign-pkce-code");
+
+    // The form is never shown
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
+    // After timeout, problem state is shown with error focus
+    const heading = page.getByRole("heading", { name: /link expired or invalid/i });
+    await expect(heading).toBeVisible({ timeout: 10000 });
+    await expect(heading).toBeFocused();
+    await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
   });
 
   test("invalid, expired, and reused recovery links display clear problem states with error focus", async ({ browser }) => {

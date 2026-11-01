@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -173,7 +173,7 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
     renderReset();
 
     const heading = await screen.findByRole("heading", { name: /link expired or invalid/i });
-    expect(heading).toHaveFocus();
+    await waitFor(() => expect(heading).toHaveFocus());
   });
 
   it("opens the form from a token_hash link without needing anything from the requesting browser", async () => {
@@ -207,7 +207,8 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
     });
     renderReset();
 
-    expect(await screen.findByRole("heading", { name: /link expired or invalid/i })).toHaveFocus();
+    const expiredHeading = await screen.findByRole("heading", { name: /link expired or invalid/i });
+    await waitFor(() => expect(expiredHeading).toHaveFocus());
     expect(screen.getByText(/email link is invalid or has expired/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
   });
@@ -241,7 +242,8 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
         signedInWith(methods);
         renderReset();
 
-        expect(await screen.findByRole("heading", { name: /open your reset link/i })).toHaveFocus();
+        const coldHeading = await screen.findByRole("heading", { name: /open your reset link/i });
+        await waitFor(() => expect(coldHeading).toHaveFocus());
         expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
       });
     }
@@ -254,6 +256,21 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
       expect(await screen.findByRole("heading", { name: /open your reset link/i })).toBeInTheDocument();
       expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
       expect(mockGetUser).toHaveBeenCalled();
+    });
+
+    it("does not open the form for an authenticated ordinary session opening an invalid PKCE link", async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true });
+      window.history.pushState({}, "", "/auth/reset?code=invalid-code");
+      signedInWith([{ method: "password", timestamp: nowSeconds() }]);
+      renderReset();
+
+      expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(6500);
+      });
+      expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
+      const problemHeading = await screen.findByRole("heading", { name: /link expired or invalid/i });
+      await waitFor(() => expect(problemHeading).toHaveFocus());
     });
 
     it("opens the form after a token_hash link verified as recovery, whose method is recorded as plain otp", async () => {
