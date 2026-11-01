@@ -1,0 +1,396 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts, ICAS-style Year 5 spelling. No independent review or human approval claimed. Do not serve directly.",
+  "questions": [
+    {
+      "id": "roadmap-icas-y5-spelling-001",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? A torch was ____ for finding the path after sunset.",
+      "options": [
+        {
+          "id": "a",
+          "text": "neccessary"
+        },
+        {
+          "id": "b",
+          "text": "necessery"
+        },
+        {
+          "id": "c",
+          "text": "necessary"
+        },
+        {
+          "id": "d",
+          "text": "necesary"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Necessary contains one c and two consecutive s letters, and ends in -ary rather than -ery.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-002",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? The coach asked us to ____ the red ribbons from the blue ones.",
+      "options": [
+        {
+          "id": "a",
+          "text": "separate"
+        },
+        {
+          "id": "b",
+          "text": "seperate"
+        },
+        {
+          "id": "c",
+          "text": "separete"
+        },
+        {
+          "id": "d",
+          "text": "seperrate"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Separate is spelled sep-a-rate, with an a after the p, one r and an a in the final syllable.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-003",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? The drummer kept a steady ____ while the dancers practised.",
+      "options": [
+        {
+          "id": "a",
+          "text": "rythm"
+        },
+        {
+          "id": "b",
+          "text": "rhythym"
+        },
+        {
+          "id": "c",
+          "text": "rythym"
+        },
+        {
+          "id": "d",
+          "text": "rhythm"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Rhythm uses y as its vowel and contains an h after both r and t, without an extra vowel before m.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-004",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? The shop could not ____ that the seedlings would survive the heat.",
+      "options": [
+        {
+          "id": "a",
+          "text": "guarentee"
+        },
+        {
+          "id": "b",
+          "text": "guarantee"
+        },
+        {
+          "id": "c",
+          "text": "guarrantee"
+        },
+        {
+          "id": "d",
+          "text": "garantee"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Guarantee begins with guar-, contains one r and ends in -antee, with two consecutive e letters.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-005",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? Her ____ troubled her after she blamed her friend for the broken pot.",
+      "options": [
+        {
+          "id": "a",
+          "text": "concience"
+        },
+        {
+          "id": "b",
+          "text": "consciense"
+        },
+        {
+          "id": "c",
+          "text": "consience"
+        },
+        {
+          "id": "d",
+          "text": "conscience"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Conscience is formed from con- and science, retaining the sc combination and the -ience ending.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-006",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? The two white lines remained ____ along the length of the court.",
+      "options": [
+        {
+          "id": "a",
+          "text": "parallel"
+        },
+        {
+          "id": "b",
+          "text": "paralel"
+        },
+        {
+          "id": "c",
+          "text": "parrallel"
+        },
+        {
+          "id": "d",
+          "text": "parallell"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Parallel contains one r, two consecutive l letters in the middle and one final l.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-007",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? The ____ puppy hid a sock behind the couch.",
+      "options": [
+        {
+          "id": "a",
+          "text": "mischievious"
+        },
+        {
+          "id": "b",
+          "text": "mischievous"
+        },
+        {
+          "id": "c",
+          "text": "mischevous"
+        },
+        {
+          "id": "d",
+          "text": "mischevious"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "Mischievous contains ie before v and has no extra i after v, ending in -vous rather than -vious.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-008",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? Do not ____ the size of the fish when you tell the story.",
+      "options": [
+        {
+          "id": "a",
+          "text": "exagerrate"
+        },
+        {
+          "id": "b",
+          "text": "exagerate"
+        },
+        {
+          "id": "c",
+          "text": "exaggerate"
+        },
+        {
+          "id": "d",
+          "text": "exaggarate"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "Exaggerate contains two consecutive g letters, followed by e, and only one r.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-009",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? Being allowed to visit the control room was a rare ____.",
+      "options": [
+        {
+          "id": "a",
+          "text": "privilage"
+        },
+        {
+          "id": "b",
+          "text": "priviledge"
+        },
+        {
+          "id": "c",
+          "text": "privelige"
+        },
+        {
+          "id": "d",
+          "text": "privilege"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Privilege contains no d, begins with privi- and ends in -lege rather than -lage or -ledge.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-spelling-010",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which spelling correctly completes this sentence? The small hall could ____ only thirty guests.",
+      "options": [
+        {
+          "id": "a",
+          "text": "accommodate"
+        },
+        {
+          "id": "b",
+          "text": "accomodate"
+        },
+        {
+          "id": "c",
+          "text": "acommodate"
+        },
+        {
+          "id": "d",
+          "text": "accomadate"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "Accommodate contains two consecutive c letters and two consecutive m letters, followed by o in the -modate ending.",
+      "metadata": {
+        "subject": "spelling",
+        "strand": "Spelling",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 60,
+        "tags": []
+      }
+    }
+  ]
+}
