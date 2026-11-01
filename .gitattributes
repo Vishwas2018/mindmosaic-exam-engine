@@ -8,3 +8,6 @@
 # are left untouched; eol=lf pins the working-tree ending as well as the stored
 # one, since core.autocrlf is false here.
 * text=auto eol=lf
+
+# An .xlsx is a zip archive; never normalise line endings inside it.
+*.xlsx binary
