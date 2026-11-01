@@ -1,0 +1,440 @@
+{
+  "draftOnly": true,
+  "authoringNote": "Original AI drafts, ICAS-style Year 5 science. Data are invented for these educational investigations. No independent review or human approval claimed. Do not serve directly.",
+  "questions": [
+    {
+      "id": "roadmap-icas-y5-science-041",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which daily watering amount produced the greatest number of sprouted seeds after seven days?",
+      "stimulus": {
+        "title": "Water and Bean Seed Germination",
+        "body": "Four trays each contained 12 bean seeds planted in equal amounts of the same soil. The trays received the same light and were kept at the same temperature, but each received a different amount of water daily. Students counted how many seeds had sprouted after seven days."
+      },
+      "options": [
+        { "id": "a", "text": "20 mL per day" },
+        { "id": "b", "text": "30 mL per day" },
+        { "id": "c", "text": "40 mL per day" },
+        { "id": "d", "text": "10 mL per day" }
+      ],
+      "visuals": [
+        {
+          "id": "science-bar-41",
+          "type": "bar_chart",
+          "title": "Bean Seeds Sprouted After Seven Days",
+          "altText": "Bar chart showing 4 seeds sprouted with 10 mL daily, 7 with 20 mL, 10 with 30 mL and 6 with 40 mL.",
+          "data": {
+            "labels": ["10 mL", "20 mL", "30 mL", "40 mL"],
+            "values": [4, 7, 10, 6],
+            "xAxisLabel": "Water added per day",
+            "yAxisLabel": "Number of seeds sprouted"
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "b" },
+      "explanation": "The 30 mL tray had 10 sprouted seeds, compared with 7 at 20 mL, 6 at 40 mL and 4 at 10 mL. The student must identify the highest value on the chart.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Read and compare investigation results",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["seed-germination", "water", "bar-chart", "data-interpretation"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-042",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which conclusion about the woodlice is supported by all four trials?",
+      "stimulus": {
+        "title": "Woodlice and Damp Surfaces",
+        "body": "Students placed eight woodlice in the centre of a box. One half contained damp paper and the other contained dry paper, with equal light on both halves. After two minutes, students counted the woodlice on each side. They repeated the investigation four times, swapping the positions of the papers between trials."
+      },
+      "options": [
+        { "id": "a", "text": "All eight woodlice moved to the damp paper in Trial 2." },
+        { "id": "b", "text": "More woodlice were on dry paper than damp paper in Trial 3." },
+        { "id": "c", "text": "More woodlice were on damp paper than dry paper after two minutes in every trial." },
+        { "id": "d", "text": "Woodlice will always choose damp paper whenever the light is equal." }
+      ],
+      "visuals": [
+        {
+          "id": "science-table-42",
+          "type": "table",
+          "title": "Woodlice Positions After Two Minutes",
+          "altText": "Four trials comparing woodlice on damp and dry paper. Damp counts were 6, 7, 5 and 6; dry counts were 2, 1, 3 and 2.",
+          "data": {
+            "headers": ["Trial", "Damp paper (woodlice)", "Dry paper (woodlice)"],
+            "rows": [
+              [1, 6, 2],
+              [2, 7, 1],
+              [3, 5, 3],
+              [4, 6, 2]
+            ]
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "c" },
+      "explanation": "Damp paper had higher counts in all four trials: 6 versus 2, 7 versus 1, 5 versus 3 and 6 versus 2. The results support a preference in these trials, but cannot establish what woodlice will always do.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Judge whether a conclusion is supported",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["woodlice", "habitat-preference", "scientific-conclusions", "repeated-trials"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-043",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "A student claims that the yellow flowers attracted more individual insects than the purple flowers during the investigation. Which evaluation is most accurate?",
+      "stimulus": {
+        "title": "Insect Visits to Flowers",
+        "body": "Two nearby flower patches each contained six open flowers. One patch had purple flowers and the other had yellow flowers. Students watched each patch for ten minutes in the morning and ten minutes in the afternoon on the same day. Every insect landing was counted as a visit, even if the same insect returned. Individual insects were not identified."
+      },
+      "options": [
+        { "id": "a", "text": "Yellow flowers received more visits than purple flowers in both observation periods." },
+        { "id": "b", "text": "Yellow flowers received more total visits than purple flowers across the two periods." },
+        { "id": "c", "text": "Purple flowers received more visits than yellow flowers in both observation periods." },
+        { "id": "d", "text": "Both patches received 20 recorded visits, but these counts do not establish how many different insects visited." }
+      ],
+      "visuals": [
+        {
+          "id": "science-bar-43",
+          "type": "bar_chart",
+          "title": "Insect Landings on Two Flower Patches",
+          "altText": "Bar chart showing 12 purple and 13 yellow flower visits in the morning, and 8 purple and 7 yellow flower visits in the afternoon.",
+          "data": {
+            "labels": ["Purple morning", "Yellow morning", "Purple afternoon", "Yellow afternoon"],
+            "values": [12, 13, 8, 7],
+            "xAxisLabel": "Flower patch and observation period",
+            "yAxisLabel": "Recorded insect landings"
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "d" },
+      "explanation": "Purple flowers received 12 + 8 = 20 visits, while yellow flowers received 13 + 7 = 20 visits. Because repeated landings by the same insect were counted, equal visit totals cannot establish the number of distinct insects attracted.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Biological Sciences",
+        "skill": "Evaluate evidence and measurement limitations",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["insect-behaviour", "flower-visits", "measurement-limitations", "combined-data"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-044",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "What temperature was recorded for the cup wrapped in aluminium foil after 15 minutes?",
+      "stimulus": {
+        "title": "Keeping Water Warm",
+        "body": "Four identical cups each contained 100 mL of water initially at 65 degrees C. One cup was wrapped in wool, one in aluminium foil, one in paper and one was left uncovered. All cups stood in the same room for 15 minutes before their temperatures were measured."
+      },
+      "options": [
+        { "id": "a", "text": "50 degrees C" },
+        { "id": "b", "text": "47 degrees C" },
+        { "id": "c", "text": "57 degrees C" },
+        { "id": "d", "text": "43 degrees C" }
+      ],
+      "visuals": [
+        {
+          "id": "science-bar-44",
+          "type": "bar_chart",
+          "title": "Water Temperature After 15 Minutes",
+          "altText": "Bar chart showing final temperatures of 57 degrees C with wool, 50 with foil, 47 with paper and 43 for the uncovered cup.",
+          "data": {
+            "labels": ["Wool", "Aluminium foil", "Paper", "Uncovered"],
+            "values": [57, 50, 47, 43],
+            "xAxisLabel": "Cup covering",
+            "yAxisLabel": "Temperature after 15 min (degrees C)"
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "a" },
+      "explanation": "The aluminium foil bar shows 50 degrees C, compared with wool at 57, paper at 47 and the uncovered cup at 43. The student must match the material to its recorded temperature.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Read a measured value from a chart",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["heat-transfer", "insulation", "temperature", "bar-chart"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-045",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "A student claims that tilting the solar panel to 30 degrees caused the fan to turn faster. Why does the investigation not establish this conclusion?",
+      "stimulus": {
+        "title": "Solar Panel Angle and Fan Speed",
+        "body": "Students connected a small solar panel to a miniature electric fan. They tested the equipment in two arrangements: in sunlight with the panel tilted at 30 degrees, and in shade with the panel flat at 0 degrees. The same panel and fan were used, and fan turns were counted for one minute in each trial. Each arrangement was tested twice."
+      },
+      "options": [
+        { "id": "a", "text": "The sunlight setup produced 68 and 70 turns, proving that the panel angle caused the difference." },
+        { "id": "b", "text": "The panel was kept at 30 degrees in both light conditions, so the angle could not be compared." },
+        { "id": "c", "text": "The panel angle and light condition changed together, so the effect of the angle could not be isolated." },
+        { "id": "d", "text": "The shaded setup produced 22 and 20 turns, proving that panel angle had no effect on fan speed." }
+      ],
+      "visuals": [
+        {
+          "id": "science-table-45",
+          "type": "table",
+          "title": "Solar Panel Investigation Results",
+          "altText": "Sunlight at 30 degrees produced 68 and 70 fan turns per minute. Shade at 0 degrees produced 22 and 20 turns.",
+          "data": {
+            "headers": ["Light condition", "Panel angle (degrees)", "Trial 1 (turns)", "Trial 2 (turns)"],
+            "rows": [
+              ["Sunlight", 30, 68, 70],
+              ["Shade", 0, 22, 20]
+            ]
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "c" },
+      "explanation": "The sunlight test used 30 degrees and produced 68 and 70 turns, while the shaded test used 0 degrees and produced 22 and 20 turns. Because both light and angle changed, the results cannot show which factor caused the difference.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Energy & Change",
+        "skill": "Evaluate confounding variables and causal claims",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["solar-energy", "fair-testing", "variables", "causation", "evidence-limitations"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-046",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which conclusion about the fabric samples is supported by the results of all three trials?",
+      "stimulus": {
+        "title": "Comparing Fabric Water Retention",
+        "body": "Students tested equal-sized pieces of cotton, felt and nylon. Water drops of equal size were added steadily to each piece until the first drop passed through. Students counted how many drops each fabric held before that happened. Each fabric was tested three times using a fresh, dry piece."
+      },
+      "options": [
+        { "id": "a", "text": "Cotton held more water drops than felt in Trial 2." },
+        { "id": "b", "text": "Felt held more water drops than cotton or nylon in every trial." },
+        { "id": "c", "text": "Nylon held fewer drops than cotton in Trial 1, proving this will always happen in every use." },
+        { "id": "d", "text": "Felt and cotton held an equal number of drops in Trial 3." }
+      ],
+      "visuals": [
+        {
+          "id": "science-table-46",
+          "type": "table",
+          "title": "Water Drops Held Before Dripping",
+          "altText": "Felt held 16, 15 and 17 drops; cotton held 12, 14 and 13; nylon held 3, 4 and 4 across three trials.",
+          "data": {
+            "headers": ["Fabric", "Trial 1 (drops)", "Trial 2 (drops)", "Trial 3 (drops)"],
+            "rows": [
+              ["Felt", 16, 15, 17],
+              ["Cotton", 12, 14, 13],
+              ["Nylon", 3, 4, 4]
+            ]
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "b" },
+      "explanation": "Felt held 16, 15 and 17 drops, exceeding cotton's 12, 14 and 13 and nylon's 3, 4 and 4 in every corresponding trial. The student must compare all three trials without extending the conclusion to untested situations.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Material Sciences",
+        "skill": "Judge whether a conclusion is supported",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["fabric-properties", "water-absorption", "repeated-trials", "scientific-conclusions"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-047",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "A student claims that felt is the most absorbent material because it absorbed the most water. Why is this conclusion not established by a fair comparison?",
+      "stimulus": {
+        "title": "Does Sample Size Affect Absorption?",
+        "body": "Students dipped pieces of cotton, felt and nylon into water for 30 seconds, then allowed each to drip for ten seconds before measuring the water retained. The cotton and nylon pieces were each 10 cm by 10 cm, but the felt piece was 20 cm by 20 cm. Each material was tested once, using the same water depth and timing."
+      },
+      "options": [
+        { "id": "a", "text": "The felt piece was larger than the others, so both material and sample size differed." },
+        { "id": "b", "text": "Felt absorbed 27 mL, which was less than the 18 mL absorbed by cotton." },
+        { "id": "c", "text": "Cotton and nylon had different sample sizes, making their 18 mL and 7 mL results impossible to compare fairly." },
+        { "id": "d", "text": "Felt absorbed 27 mL, proving that it would remain the most absorbent even if all sample sizes were equal." }
+      ],
+      "visuals": [
+        {
+          "id": "science-table-47",
+          "type": "table",
+          "title": "Fabric Size and Water Retained",
+          "altText": "Cotton measuring 10 by 10 cm retained 18 mL, felt measuring 20 by 20 cm retained 27 mL, and nylon measuring 10 by 10 cm retained 7 mL.",
+          "data": {
+            "headers": ["Material", "Length (cm)", "Width (cm)", "Water retained (mL)"],
+            "rows": [
+              ["Cotton", 10, 10, 18],
+              ["Felt", 20, 20, 27],
+              ["Nylon", 10, 10, 7]
+            ]
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "a" },
+      "explanation": "Felt retained 27 mL but measured 20 by 20 cm, while cotton retained 18 mL and measured only 10 by 10 cm. Since the sample sizes differed, the greater total water retained cannot establish which material is more absorbent for an equal-sized piece.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Material Sciences",
+        "skill": "Evaluate fairness and limitations of evidence",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["absorbency", "sample-size", "fair-testing", "controlled-variables", "evidence-limitations"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-048",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "For which 10 cm increase in ramp height did the ball's rolling distance increase by the greatest amount?",
+      "stimulus": {
+        "title": "Ramp Height and Rolling Distance",
+        "body": "Students released the same ball from rest at the top of a ramp set to five different heights. The ramp surface and the flat floor beyond it remained unchanged. Students measured the distance the ball travelled along the flat floor before stopping, recording one result at each height."
+      },
+      "options": [
+        { "id": "a", "text": "From 10 cm to 20 cm" },
+        { "id": "b", "text": "From 20 cm to 30 cm" },
+        { "id": "c", "text": "From 30 cm to 40 cm" },
+        { "id": "d", "text": "From 40 cm to 50 cm" }
+      ],
+      "visuals": [
+        {
+          "id": "science-table-48",
+          "type": "table",
+          "title": "Ramp Height and Distance Travelled",
+          "altText": "Ramp heights of 10, 20, 30, 40 and 50 cm gave rolling distances of 40, 56, 73, 91 and 104 cm respectively.",
+          "data": {
+            "headers": ["Ramp height (cm)", "Rolling distance (cm)"],
+            "rows": [
+              [10, 40],
+              [20, 56],
+              [30, 73],
+              [40, 91],
+              [50, 104]
+            ]
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "c" },
+      "explanation": "The distance increases were 16 cm, 17 cm, 18 cm and 13 cm for successive 10 cm height increases. The largest increase, 18 cm, occurred between ramp heights of 30 cm and 40 cm.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Compare changes between consecutive measurements",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["motion", "ramps", "rolling-distance", "numerical-reasoning", "data-comparison"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-049",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "Which claim about the force needed to pull the wooden block is supported by the investigation?",
+      "stimulus": {
+        "title": "Pulling a Block Across Surfaces",
+        "body": "Students used a spring scale to measure the force needed to pull the same wooden block at a steady speed across three surfaces. They used the same side of the block for every test and repeated each surface test three times. The scale readings were recorded in newtons (N)."
+      },
+      "options": [
+        { "id": "a", "text": "The rubber mat will always require the most force for every wooden block." },
+        { "id": "b", "text": "The tile required more force than the wooden surface in Trial 1." },
+        { "id": "c", "text": "The wooden surface and rubber mat required equal force in Trial 2." },
+        { "id": "d", "text": "The rubber mat required more force than the wooden surface and tile in all three trials." }
+      ],
+      "visuals": [
+        {
+          "id": "science-table-49",
+          "type": "table",
+          "title": "Force Needed to Pull the Block",
+          "altText": "Tile required 2.0, 2.2 and 2.1 N; wood required 3.1, 3.0 and 3.2 N; rubber mat required 4.8, 5.0 and 4.9 N.",
+          "data": {
+            "headers": ["Surface", "Trial 1 (N)", "Trial 2 (N)", "Trial 3 (N)"],
+            "rows": [
+              ["Tile", 2.0, 2.2, 2.1],
+              ["Wood", 3.1, 3.0, 3.2],
+              ["Rubber mat", 4.8, 5.0, 4.9]
+            ]
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "d" },
+      "explanation": "The rubber mat required 4.8, 5.0 and 4.9 N, exceeding both wood's 3.1, 3.0 and 3.2 N and tile's 2.0, 2.2 and 2.1 N in each trial. The student must compare the repeated results without generalising to every possible block.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Physical Sciences",
+        "skill": "Judge whether a conclusion is supported",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["friction", "force", "spring-scale", "repeated-trials", "scientific-conclusions"]
+      }
+    },
+    {
+      "id": "roadmap-icas-y5-science-050",
+      "type": "multiple_choice",
+      "yearLevel": 5,
+      "examStyle": "icas_style",
+      "prompt": "A student claims that the shortest shadow of the entire day occurred at 1 pm. Which statement best evaluates this claim?",
+      "stimulus": {
+        "title": "How Shadows Change During the Day",
+        "body": "Students placed a straight stick upright on a school oval and measured its shadow at four times during one clear day. The stick remained in exactly the same position, and its shadow length was measured from the base to the tip. No observations were made between the four recorded times, including at noon."
+      },
+      "options": [
+        { "id": "a", "text": "The 1 pm shadow was the shortest measured at 61 cm, but the results cannot establish the shortest shadow of the entire day." },
+        { "id": "b", "text": "The 1 pm shadow was 6 cm shorter than at 11 am, proving that no shorter shadow occurred at noon." },
+        { "id": "c", "text": "The 9 am shadow was longer than the 3 pm shadow, proving that 9 am was the longest shadow of the entire day." },
+        { "id": "d", "text": "The 3 pm shadow was shorter than the 1 pm shadow, so the student's claim is contradicted by the measurements." }
+      ],
+      "visuals": [
+        {
+          "id": "science-bar-50",
+          "type": "bar_chart",
+          "title": "Stick Shadow Lengths During One Day",
+          "altText": "Bar chart showing shadow lengths of 132 cm at 9 am, 67 cm at 11 am, 61 cm at 1 pm and 108 cm at 3 pm.",
+          "data": {
+            "labels": ["9 am", "11 am", "1 pm", "3 pm"],
+            "values": [132, 67, 61, 108],
+            "xAxisLabel": "Observation time",
+            "yAxisLabel": "Shadow length (cm)"
+          }
+        }
+      ],
+      "answerKey": { "kind": "single_option", "optionId": "a" },
+      "explanation": "The 1 pm shadow measured 61 cm, shorter than 67 cm at 11 am, 108 cm at 3 pm and 132 cm at 9 am. However, measurements were not taken at noon or between observations, so the shortest shadow of the entire day cannot be established.",
+      "metadata": {
+        "subject": "science",
+        "strand": "Earth & Space Sciences",
+        "skill": "Evaluate conclusions from incomplete observations",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 80,
+        "tags": ["sunlight", "shadows", "earth-rotation", "sampling-limitations", "scientific-evidence"]
+      }
+    }
+  ]
+}
