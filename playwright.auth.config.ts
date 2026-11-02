@@ -53,6 +53,10 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_URL: e2eEnv.supabaseUrl,
       NEXT_PUBLIC_SUPABASE_ANON_KEY: e2eEnv.supabaseAnonKey,
       SUPABASE_SERVICE_ROLE_KEY: e2eEnv.supabaseServiceRoleKey,
+      // The password-recovery grant (src/server/auth/recovery-grant.ts) and the exam writer's loopback opt-in
+      // (src/server/exam-write/target.ts). Local values only; the environment guard above refuses anything else.
+      RECOVERY_GRANT_SECRET: process.env.RECOVERY_GRANT_SECRET ?? "local-e2e-recovery-grant-secret-not-a-secret-0123456789",
+      EXAM_WRITE_ALLOW_LOOPBACK: process.env.EXAM_WRITE_ALLOW_LOOPBACK ?? "1",
       // Billing enforcement stays off (default) for this mission's scope —
       // see docs/testing/playwright-auth-test-data-guide.md.
       BILLING_ENFORCEMENT_ENABLED: "",

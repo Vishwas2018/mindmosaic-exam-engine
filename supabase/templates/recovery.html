@@ -1,3 +1,3 @@
 <h2>Reset your password</h2>
 <p>Follow the link below to reset your password.</p>
-<p><a href="{{ if .RedirectTo }}{{ .RedirectTo }}{{ else }}{{ .SiteURL }}/auth/reset{{ end }}?token_hash={{ .TokenHash }}&type=recovery">Reset password</a></p>
+<p><a href="{{ if .RedirectTo }}{{ .RedirectTo }}{{ else }}{{ .SiteURL }}/auth/reset{{ end }}#token_hash={{ .TokenHash }}&type=recovery">Reset password</a></p>

@@ -14,7 +14,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
 import { friendlyLinkError } from "./link-errors";
-import { RECOVERY_WINDOW_SECONDS, forgetRecovery, recoveryMarkerMatches, rememberRecovery } from "./recovery-marker";
+import { clearRecoveryGrant } from "./recovery-client";
 import { isProfileRole, type ProfileRole, type SignUpRole } from "./roles";
 import { clearSessionPersistence, shouldDiscardStoredSession } from "./session-persistence";
 import { PUBLIC_SIGNUP_ENABLED, SIGNUP_CLOSED_MESSAGE } from "./signup-policy";
@@ -52,21 +52,12 @@ export interface AuthContextValue {
   }): Promise<AuthResult>;
   signInWithOAuth(provider: OAuthProvider, nextPath?: string): Promise<AuthResult>;
   sendPasswordReset(email: string): Promise<AuthResult>;
-  updatePassword(password: string): Promise<AuthResult>;
   /** Resends the sign-up confirmation email (unverified accounts only). */
   resendConfirmationEmail(email: string): Promise<AuthResult>;
   /** Exchanges an email-confirmation `code` (from /auth/confirm) for a session. */
   confirmEmail(code: string): Promise<EmailConfirmResult>;
   /** Device-independent confirmation: verifies a `token_hash` link, which needs no verifier from the requesting browser. */
   verifyEmailToken(tokenHash: string, type: "signup" | "email"): Promise<EmailConfirmResult>;
-  /** Device-independent password recovery: opens the recovery session from a `token_hash` link. */
-  verifyRecoveryToken(tokenHash: string): Promise<AuthResult>;
-  /**
-   * True only when the current session was created by a password-recovery link. The server must accept the token
-   * (`getUser` validates it; decoding a JWT locally proves nothing) and the authentication methods the SDK reports for
-   * it must include a recent `recovery` entry. A password, signup, magic-link or OTP session is not a recovery session.
-   */
-  verifyRecoverySession(): Promise<boolean>;
   /** Adopts the session carried by an implicit-flow link (`#access_token=…&refresh_token=…`). */
   adoptSessionTokens(accessToken: string, refreshToken: string): Promise<EmailConfirmResult>;
   signOut(): Promise<void>;
@@ -159,9 +150,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     const { data: sub } = supabase.auth.onAuthStateChange((event, nextSession) => {
-      /* PASSWORD_RECOVERY is emitted only when the SDK has just turned a recovery link into this session. */
-      if (event === "PASSWORD_RECOVERY") rememberRecovery(nextSession?.access_token);
-      if (event === "SIGNED_OUT") forgetRecovery();
+      /* The recovery grant is an HttpOnly cookie only the server can clear; it is also bound to the session that
+         just ended, so this is belt and braces. */
+      if (event === "SIGNED_OUT") void clearRecoveryGrant();
       setSession(nextSession);
       setUser(nextSession?.user ?? null);
       setStatus(nextSession?.user ? "authenticated" : "anonymous");
@@ -318,13 +309,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { ok: true, message: "If that email has an account, a reset link is on its way." };
       },
 
-      async updatePassword(password) {
-        if (!supabase) return notConfigured();
-        const { error } = await supabase.auth.updateUser({ password });
-        if (error) return { ok: false, message: error.message };
-        return { ok: true, message: "Your password has been updated." };
-      },
-
       async resendConfirmationEmail(email) {
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.resend({
@@ -359,25 +343,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return finishConfirmation(data.session?.user.id);
       },
 
-      async verifyRecoverySession() {
-        if (!supabase) return false;
-        const { data: verified, error } = await supabase.auth.getUser(); // the server must accept the token first
-        if (error || !verified.user) return false;
-        const { data: current } = await supabase.auth.getSession();
-        if (recoveryMarkerMatches(current.session?.access_token)) return true;
-        /* Links delivered by GET /verify (PKCE code, implicit fragment) record the method as `recovery`. The method
-           `otp` is deliberately NOT accepted: any OTP sign-in has it. */
-        return hasRecentMethod(supabase, ["recovery"], RECOVERY_WINDOW_SECONDS);
-      },
-
-      async verifyRecoveryToken(tokenHash) {
-        if (!supabase) return notConfigured();
-        const { data, error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type: "recovery" });
-        if (error) return { ok: false, message: error.message };
-        rememberRecovery(data.session?.access_token); // GoTrue accepted a RECOVERY token: record it for this session
-        return { ok: true };
-      },
-
       async adoptSessionTokens(accessToken, refreshToken) {
         if (!supabase) return notConfigured();
         const { data, error } = await supabase.auth.setSession({
@@ -394,6 +359,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
            can never outlive it and sign the next user out on their first
            boot. */
         clearSessionPersistence();
+        await clearRecoveryGrant();
         await supabase.auth.signOut();
       },
     };

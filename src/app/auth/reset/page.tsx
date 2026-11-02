@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Loader2, MailWarning } from "lucide-react";
@@ -9,6 +9,8 @@ import { twMerge } from "tailwind-merge";
 import { useAuth } from "@/features/auth";
 import { CROSS_DEVICE_MESSAGE, friendlyLinkError, readLinkCredentials, stripLinkCredentials } from "@/features/auth/link-errors";
 import { useFocusOnShow } from "@/features/auth/components/use-focus-on-show";
+import { recoveryStatus, requestGrantForSession, submitNewPassword, verifyRecoveryLink } from "@/features/auth/recovery-client";
+import { clearSessionPersistence } from "@/features/auth/session-persistence";
 import {
   MmErrorPanel,
   MmField,
@@ -45,20 +47,22 @@ const NOT_RECOVERY: LinkProblem = {
 const CODE_EXCHANGE_MS = 6000;
 
 /**
- * Landing page for the password-reset email link (the second half of
- * Account Recovery — the first half is SignInPanel's "forgot" screen).
- * Supabase establishes a short-lived recovery session when the user
- * arrives here, so we simply let them set a new password via
- * `updateUser`. An expired or already-used link comes back as
- * `error`/`error_code` query or hash params instead of a session — that
- * state gets its own screen rather than a confusing form.
+ * Landing page for the password-reset email link (the second half of Account Recovery — the first half is
+ * SignInPanel's "forgot" screen).
  *
- * Restyled onto the mm-* auth system (was the product's generic
- * `@/components/ui` kit) to match /sign-in and /sign-up.
+ * The new password is accepted by OUR server (POST /api/auth/recovery/password), and only with a recovery grant the
+ * server issued after verifying a recovery token itself (src/server/auth/recovery-grant.ts). This page never calls
+ * Supabase's update-user API. Three link shapes lead here:
+ *   token_hash   verified by the server, on whichever device opened the email. The default template puts it in the
+ *                URL fragment, so it is in no request log; it is removed from the address bar before anything else.
+ *   code         a PKCE link the Supabase client exchanges by itself. We do NOT exchange it a second time: we wait for
+ *                the session it creates and ask the server whether that session came from a recovery link.
+ *   tokens       an implicit-flow fragment, adopted once into a session and then treated the same way.
+ * An expired, reused or malformed link comes back as an error and gets its own screen rather than a confusing form.
  */
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const { updatePassword, verifyRecoveryToken, verifyRecoverySession, adoptSessionTokens, signOut, session, configured, status } = useAuth();
+  const { adoptSessionTokens, signOut, session, configured, status } = useAuth();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -69,6 +73,8 @@ export default function ResetPasswordPage() {
   const [problem, setProblem] = useState<LinkProblem | null>(null);
   /* "code" = a PKCE link the Supabase client exchanges by itself; "none" = no credentials in the URL. */
   const [mode, setMode] = useState<"pending" | "code" | "none" | "settled">("pending");
+  /* The per-grant CSRF token. Memory only: a reload fetches it again from the server, which needs the grant cookie. */
+  const csrf = useRef<string | null>(null);
   const shake = useShakeOnInvalidSubmit();
   const headingRef = useFocusOnShow<HTMLHeadingElement>(phase === "problem");
 
@@ -76,23 +82,17 @@ export default function ResetPasswordPage() {
     setProblem(next);
     setPhase("problem");
   };
+  const openForm = (token: string) => {
+    csrf.current = token;
+    setPhase("form");
+  };
 
   useEffect(() => {
     /* Runs once. These setState calls respond to the URL, an external system, after hydration. */
     const link = readLinkCredentials(new URL(window.location.href).searchParams, window.location.hash);
-    const settle = async (result: { ok: boolean; message?: string }) => {
-      /* A link that produced a session is still not proof of recovery: a signup or magic-link URL pasted here would
-         also yield one. Only a session the server accepts AND that was created by a recovery link opens the form. */
-      if (result.ok && (await verifyRecoverySession())) {
-        stripLinkCredentials();
-        setPhase("form");
-      } else if (result.ok) {
-        showProblem(NOT_RECOVERY);
-      } else {
-        showProblem({ heading: EXPIRED.heading, text: friendlyLinkError(result.message, EXPIRED.text) });
-      }
-      setMode("settled");
-    };
+    /* A one-time secret must leave the address bar (history, copy/paste, screenshots) before any network call. A PKCE
+       `code` is left for the Supabase client, which is reading it right now. */
+    if (link.tokenHash || link.accessToken || link.refreshToken) stripLinkCredentials();
     if (link.errorCode) {
       const text =
         link.errorCode === "otp_expired"
@@ -102,10 +102,29 @@ export default function ResetPasswordPage() {
       showProblem({ heading: EXPIRED.heading, text });
       setMode("settled");
     } else if (link.tokenHash && link.type === "recovery") {
-      /* Verified by the token alone, so it works on whichever device the email was opened on. */
-      void verifyRecoveryToken(link.tokenHash).then(settle);
+      /* Verified by the SERVER, so it works on whichever device the email was opened on. */
+      void verifyRecoveryLink(link.tokenHash).then((result) => {
+        if (result.ok) {
+          /* The session the server just made must not be discarded by an old "don't keep me signed in" marker. */
+          clearSessionPersistence();
+          openForm(result.csrfToken);
+        } else {
+          showProblem(
+            result.reason === "unavailable"
+              ? { heading: "We couldn't check your link", text: "Something went wrong on our side. Please try the link again in a moment." }
+              : EXPIRED,
+          );
+        }
+        setMode("settled");
+      });
     } else if (link.accessToken && link.refreshToken) {
-      void adoptSessionTokens(link.accessToken, link.refreshToken).then(settle);
+      void adoptSessionTokens(link.accessToken, link.refreshToken).then(async (adopted) => {
+        const grant = adopted.ok ? await requestGrantForSession() : null;
+        if (grant?.ok) openForm(grant.csrfToken);
+        else if (grant) showProblem(grant.reason === "not_recovery" ? NOT_RECOVERY : EXPIRED);
+        else showProblem({ heading: EXPIRED.heading, text: friendlyLinkError(adopted.message, EXPIRED.text) });
+        setMode("settled");
+      });
     } else {
       setMode(link.code ? "code" : "none");
     }
@@ -113,7 +132,7 @@ export default function ResetPasswordPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /* The session's token changes when the SDK finishes exchanging a code, so it is a dependency: re-verify then. */
+  /* The session's token changes when the SDK finishes exchanging a code, so it is a dependency: ask again then. */
   const accessToken = session?.access_token ?? null;
   useEffect(() => {
     if (mode !== "code" && mode !== "none") return;
@@ -128,10 +147,13 @@ export default function ResetPasswordPage() {
       return; // "code": the exchange may still be running; the timeout below decides.
     }
     let active = true;
-    void verifyRecoverySession().then((isRecovery) => {
+    /* "none": a reload of the form (the grant cookie may still be valid) or a cold visit. "code": the server decides
+       whether the session the SDK just made came from a recovery link. */
+    const ask = mode === "none" ? recoveryStatus : requestGrantForSession;
+    void ask().then((grant) => {
       if (!active) return;
-      if (isRecovery) {
-        setPhase("form");
+      if (grant.ok) {
+        openForm(grant.csrfToken);
         if (mode === "code") stripLinkCredentials();
       } else if (mode === "none") {
         showProblem(NOT_RECOVERY);
@@ -141,7 +163,7 @@ export default function ResetPasswordPage() {
     return () => {
       active = false;
     };
-  }, [mode, status, accessToken, verifyRecoverySession]);
+  }, [mode, status, accessToken]);
 
   useEffect(() => {
     if (mode !== "code" || phase !== "checking") return;
@@ -158,19 +180,32 @@ export default function ResetPasswordPage() {
     if (!ready || submitting) return;
     setSubmitting(true);
     setMessage(null);
-    const result = await updatePassword(password);
+    const result = csrf.current
+      ? await submitNewPassword(password, csrf.current)
+      : ({ ok: false, reason: "recovery_required" } as const);
     setSubmitting(false);
     if (result.ok) {
-      setMessage({ tone: "success", text: "Password updated — taking you to sign in…" });
-      /* End the recovery session so the next step is a normal sign-in with the new password. */
+      setMessage({
+        tone: "success",
+        text: result.otherSessionsRevoked
+          ? "Password updated and other devices signed out — taking you to sign in…"
+          : "Password updated — taking you to sign in…",
+      });
+      csrf.current = null;
+      /* The server has already ended every session; this clears the local copy so the next step is a normal sign-in. */
       void signOut();
       setTimeout(() => router.push("/sign-in"), 1500);
-    } else if (result.message && /session/i.test(result.message)) {
-      // No recovery session (e.g. the link was already used, or opened cold
-      // without following it from the email) — same dead-end as an expired link.
+    } else if (result.reason === "recovery_required") {
+      // The grant is missing, expired or no longer matches the session — same dead end as an expired link.
       showProblem(EXPIRED);
+    } else if (result.reason === "rejected") {
+      setMessage({ tone: "error", text: "That password can't be used. Choose a different one." });
+      shake.trigger();
     } else {
-      setMessage({ tone: "error", text: result.message ?? "Could not update your password." });
+      setMessage({
+        tone: "error",
+        text: result.reason === "weak" ? "Choose a stronger password." : "Could not update your password. Please try again.",
+      });
       shake.trigger();
     }
   }

@@ -36,7 +36,9 @@ export function readLinkCredentials(query: URLSearchParams, fragment: string): L
   const pick = (name: string) => query.get(name) ?? hash.get(name);
   return {
     code: query.get("code"),
-    tokenHash: query.get("token_hash"),
+    /* In the fragment when the template puts it there: a fragment is never sent to the server, so it is in no request
+       log and an email scanner that GETs the link cannot spend it. The query form stays supported for links already sent. */
+    tokenHash: pick("token_hash"),
     type: pick("type"),
     accessToken: hash.get("access_token"),
     refreshToken: hash.get("refresh_token"),
