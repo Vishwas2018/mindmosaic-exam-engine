@@ -239,6 +239,10 @@ jobs:
       # The server-only exam write path (20261031090000). Local-only value, set by
       # exam-writer:bootstrap below; hosted environments take it from a secret store.
       EXAM_WRITE_DB_URL: postgresql://mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret@127.0.0.1:56322/postgres
+      # A loopback writer target is refused unless this is set explicitly (src/server/exam-write/target.ts).
+      EXAM_WRITE_ALLOW_LOOPBACK: "1"
+      # Signs the password-recovery grant (src/server/auth/recovery-grant.ts). A local value, not a secret.
+      RECOVERY_GRANT_SECRET: local-ci-recovery-grant-secret-not-a-secret-0123456789
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -2,6 +2,8 @@ import "server-only";
 
 import { Client } from "pg";
 
+import { checkConnectedRole, decideExamWriteTarget, type ConnectedRole } from "./target";
+
 /**
  * THE LEGACY EXAM WRITE MODULE (ADR-005 interim; the P1 assessment-integrity fix).
  *
@@ -24,6 +26,14 @@ import { Client } from "pg";
  * FAIL CLOSED. If EXAM_WRITE_DB_URL is unset the write is refused with `not_configured`. There is deliberately no
  * fallback to the user's own client or to any other credential: a fallback is exactly the path this change
  * removes. That the credential is named in no other file is asserted by src/tests/unit/scoring-module-boundary.test.ts.
+ *
+ * POSITIVE TARGET IDENTITY (family-beta WP1). Being configured is not enough. Before any connection the URL must
+ * prove which Supabase project it names (./target.ts): the ref derived from the URL, the ref this deployment
+ * declares in EXAM_WRITE_EXPECTED_PROJECT_REF (mandatory for a hosted target) and the ref in the public Supabase URL
+ * must all agree, and the role must be the restricted writer. A loopback database is accepted only with
+ * EXAM_WRITE_ALLOW_LOOPBACK=1 and never on a hosted runtime. After connecting, the role's attributes are read back
+ * from pg_roles and anything elevated is refused. Every rejection is `not_configured` with an enumerated reason:
+ * the URL, the password and the connection string are never placed in an error, a response or a log.
  */
 
 export interface ExamWriteError {
@@ -55,21 +65,70 @@ export interface RecordLegacyExamAttemptInput {
   readonly result: unknown;
 }
 
-/** Read at call time, so importing this file (a bundler may, while tracing) never requires the secret. */
-function connectionString(): string | null {
+/**
+ * Read at call time, so importing this file (a bundler may, while tracing) never requires the secret. Returns the
+ * validated connection string, or the reason it was refused. The reason is an enumerated code, never the URL.
+ */
+function validatedTarget(): { readonly url: string; readonly hosted: boolean } | { readonly reason: string } {
   const url = process.env.EXAM_WRITE_DB_URL?.trim();
-  return url ? url : null;
+  if (!url) return { reason: "missing_url" };
+  const flag = process.env.EXAM_WRITE_ALLOW_LOOPBACK?.trim().toLowerCase();
+  const decision = decideExamWriteTarget({
+    url,
+    expectedRef: process.env.EXAM_WRITE_EXPECTED_PROJECT_REF,
+    publicSupabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    allowLoopback: flag === "1" || flag === "true",
+    hostedRuntime: Boolean(process.env.VERCEL),
+  });
+  return decision.ok ? { url, hosted: decision.kind === "hosted" } : { reason: decision.reason };
+}
+
+async function readConnectedRole(client: Client): Promise<ConnectedRole | null> {
+  try {
+    const result = await client.query<{
+      current_user: string;
+      session_user: string;
+      rolsuper: boolean;
+      rolbypassrls: boolean;
+      rolcreaterole: boolean;
+      rolcreatedb: boolean;
+      rolreplication: boolean;
+    }>(
+      `select current_user::text, session_user::text, r.rolsuper, r.rolbypassrls, r.rolcreaterole, r.rolcreatedb, r.rolreplication
+         from pg_roles r where r.rolname = current_user`,
+    );
+    const row = result.rows[0];
+    return row
+      ? {
+          currentUser: row.current_user,
+          sessionUser: row.session_user,
+          superuser: row.rolsuper,
+          bypassRls: row.rolbypassrls,
+          createRole: row.rolcreaterole,
+          createDb: row.rolcreatedb,
+          replication: row.rolreplication,
+        }
+      : null;
+  } catch {
+    return null;
+  }
 }
 
 async function withWriter<T>(
   run: (client: Client) => Promise<T>,
   fail: (error: ExamWriteError) => T,
 ): Promise<T> {
-  const url = connectionString();
-  if (!url) {
-    return fail({ code: "not_configured", message: "EXAM_WRITE_DB_URL is not set." });
+  const target = validatedTarget();
+  if ("reason" in target) {
+    return fail({ code: "not_configured", message: `Exam write target refused: ${target.reason}.` });
   }
-  const client = new Client({ connectionString: url, connectionTimeoutMillis: 8_000 });
+  /* Hosted connections are encrypted. Certificate-chain verification for Supabase's pooler needs its CA bundle, which
+     is a hosted-verification item (docs/runbooks/legacy-exam-write-lockdown.md); an sslmode in the URL overrides this. */
+  const client = new Client({
+    connectionString: target.url,
+    connectionTimeoutMillis: 8_000,
+    ...(target.hosted ? { ssl: { rejectUnauthorized: false } } : {}),
+  });
   /* An 'error' event with no listener on a pg Client is an uncaught exception, which in a server process is a
      crash rather than a failed request. */
   client.on("error", () => undefined);
@@ -79,6 +138,11 @@ async function withWriter<T>(
     return fail({ code: "unavailable", message: "Could not connect to the exam write role." });
   }
   try {
+    /* The URL named a role; this proves the connection really is it, with no elevated attribute. */
+    const rejection = checkConnectedRole(await readConnectedRole(client));
+    if (rejection) {
+      return fail({ code: "not_configured", message: `Exam write target refused: ${rejection}.` });
+    }
     return await run(client);
   } finally {
     await client.end().catch(() => undefined);
