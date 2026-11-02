@@ -12,6 +12,14 @@ import { e2eEnv } from "./e2e/fixtures/env";
 assertLocalSupabaseEnvironment();
 
 /*
+ * supabase/config.toml points the local Auth service at the token_hash email templates (supabase/templates), so the
+ * links in Mailpit work in any browser. The email specs choose their expectations from this flag, so it must match the
+ * stack: without it they would expect device-bound PKCE links and fail on the cross-browser confirmation. Set it to
+ * "0" only against a stack started with the default (PKCE) templates.
+ */
+process.env.E2E_TOKEN_HASH_TEMPLATES ??= "1";
+
+/*
  * Overridable via PW_AUTH_PORT (see playwright.config.ts / PW_PORT) — a
  * concurrently-running sibling night-* worktree (mm-night-responsive) was
  * actually still holding this repo's hardcoded default, causing a real

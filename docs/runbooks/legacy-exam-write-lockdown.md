@@ -50,7 +50,11 @@ superuser, `BYPASSRLS`, `CREATEROLE`, `CREATEDB` or `REPLICATION` refuses the wr
 code in the server's response; the URL, password and connection string are never logged or returned.
 
 Hosted TLS: connections are encrypted, but certificate-chain verification of Supabase's pooler needs its CA bundle and
-is **not** configured. Treat verified TLS as an open hosted item.
+is **not** configured. Treat verified TLS as an open hosted item. Today the code sets `rejectUnauthorized: false` for hosted targets, so an
+on-path attacker could present any certificate; the password is still protected only by the network path. Before DEV
+carries real traffic, obtain Supabase's CA certificate from the project's database settings, supply it to the module
+(for example as a server-only `EXAM_WRITE_DB_CA` value) and switch to `rejectUnauthorized: true` with that CA. This is a
+code change plus an owner-supplied certificate, and has not been done.
 
 ## Why two migrations
 

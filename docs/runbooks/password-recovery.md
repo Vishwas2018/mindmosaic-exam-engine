@@ -54,6 +54,16 @@ verifier) and shows an explanation; a `token_hash` link can.
   user's `updated_at` was rejected: the Auth service changes it on every token refresh. If the global sign-out fails
   (reported to the user as "other devices could not be signed out") the grant remains usable by that same session until it
   expires; the server retries the sign-out once.
+- **Limits of "single use" (reviewed 2026-11-02, not fixed in code):**
+  - *Sign-out fails twice.* The browser's cookie is cleared, but the signed grant is still valid for its session until it
+    expires (15 minutes) for anyone who captured both the cookie and the session token. The response says
+    `otherSessionsRevoked: false` and the page tells the user; treat that as an incident signal.
+  - *Concurrent requests.* Two simultaneous submits from the same session can both pass the grant check before either
+    sign-out lands; the later `updateUser` wins. Both come from the legitimate holder, so there is no escalation, but the
+    grant is not atomically spent. A strict guarantee needs a server-side spent-`jti` store (database), which does not exist.
+  - *Already-issued access token after sign-out.* The application refuses it: `resolveLiveSession` asks the Auth service
+    (`getUser`), which rejects a token whose session was ended. Supabase's own stateless endpoints (PostgREST) accept the
+    JWT until its `exp`; that is Supabase behaviour and not changed here.
 - **Logout** clears it (`DELETE /api/auth/recovery/session`, called by `signOut`), and sign-out also ends the session.
 - **CSRF**: `SameSite=Strict` cookie, same-origin `Origin` check, JSON-only body, and a per-grant token in
   `x-mm-recovery-csrf` that is available only to a same-origin read that itself needs the cookie.
