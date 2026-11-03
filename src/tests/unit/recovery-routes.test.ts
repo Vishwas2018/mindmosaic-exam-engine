@@ -23,22 +23,30 @@ const auth = {
   signOut: vi.fn(),
 };
 /**
- * An in-memory stand-in for public.claim_recovery_grant / settle_recovery_grant with the SAME semantics as the SQL in
- * supabase/migrations/20261102090000_recovery_grant_claims.sql. The SQL itself is exercised against a real database in
- * tests/rls/recovery-grant-claims.test.ts; this lets the route's decisions be driven deterministically.
+ * An in-memory stand-in for public.claim_recovery_grant / settle_recovery_grant / resolve_recovery_claim with the SAME
+ * semantics as the SQL in supabase/migrations/20261102090000_recovery_grant_claims.sql (fencing token, password-hash digest,
+ * lapsed-claim handling). The SQL itself is exercised against a real database in tests/rls/recovery-grant-claims.test.ts;
+ * this lets the route's decisions be driven deterministically. `pw` stands in for auth.users.encrypted_password.
  */
 const LEASE_MS = 2 * 60 * 1000;
+type ClaimRow = { userId: string; state: "claimed" | "spent"; token: string; pw: number; leaseUntil: number | null };
 const claimsDb = {
-  rows: new Map<string, { userId: string; state: "claimed" | "spent"; leaseUntil: number | null }>(),
+  rows: new Map<string, ClaimRow>(),
   now: () => Date.now(),
+  /** The user's password version: bumped whenever the (fake) Auth service really changes the password. */
+  pw: 0,
+  seq: 0,
   /** "unavailable" = the function is missing / the database is down. */
   mode: "ok" as "ok" | "unavailable",
   /** Make the next N settle calls fail with an RPC error. */
   settleFailures: 0,
+  /** Make the next N resolve calls fail with an RPC error. */
+  resolveFailures: 0,
   /** Hold every claim call until released, to interleave concurrent requests. */
   claimGate: null as Promise<void> | null,
   calls: [] as Array<{ fn: string; args: Record<string, unknown> }>,
 };
+const nextToken = () => `00000000-0000-4000-8000-${String(++claimsDb.seq).padStart(12, "0")}`;
 async function fakeRpc(fn: string, args: Record<string, unknown>) {
   claimsDb.calls.push({ fn, args });
   if (claimsDb.mode === "unavailable") return { data: null, error: { message: "function does not exist" } };
@@ -47,16 +55,23 @@ async function fakeRpc(fn: string, args: Record<string, unknown>) {
   const jti = String(args.p_jti);
   if (fn === "claim_recovery_grant") {
     if (claimsDb.claimGate) await claimsDb.claimGate;
-    const row = claimsDb.rows.get(jti);
+    let row = claimsDb.rows.get(jti);
+    /* A lapsed claim whose password changed is a successful attempt that never settled: spent. */
+    if (row && row.userId === uid && row.state === "claimed" && (row.leaseUntil ?? 0) <= claimsDb.now() && row.pw !== claimsDb.pw) {
+      row.state = "spent";
+      row.leaseUntil = null;
+    }
     if (!row) {
-      claimsDb.rows.set(jti, { userId: uid, state: "claimed", leaseUntil: claimsDb.now() + LEASE_MS });
-      return { data: "claimed", error: null };
+      row = { userId: uid, state: "claimed", token: nextToken(), pw: claimsDb.pw, leaseUntil: claimsDb.now() + LEASE_MS };
+      claimsDb.rows.set(jti, row);
+      return { data: { outcome: "claimed", token: row.token }, error: null };
     }
-    if (row.userId === uid && row.state === "claimed" && (row.leaseUntil ?? 0) <= claimsDb.now()) {
+    if (row.userId === uid && row.state === "claimed" && (row.leaseUntil ?? 0) <= claimsDb.now() && row.pw === claimsDb.pw) {
+      row.token = nextToken();
       row.leaseUntil = claimsDb.now() + LEASE_MS;
-      return { data: "claimed", error: null };
+      return { data: { outcome: "claimed", token: row.token }, error: null };
     }
-    return { data: row.userId === uid && row.state === "spent" ? "spent" : "busy", error: null };
+    return { data: { outcome: row.userId === uid && row.state === "spent" ? "spent" : "busy" }, error: null };
   }
   if (fn === "settle_recovery_grant") {
     if (claimsDb.settleFailures > 0) {
@@ -64,14 +79,39 @@ async function fakeRpc(fn: string, args: Record<string, unknown>) {
       return { data: null, error: { message: "blip" } };
     }
     const row = claimsDb.rows.get(jti);
-    if (!row || row.userId !== uid || row.state !== "claimed") return { data: false, error: null };
+    if (!row || row.userId !== uid) return { data: false, error: null };
     if (args.p_outcome === "spent") {
+      if (row.state === "claimed") {
+        row.state = "spent";
+        row.leaseUntil = null;
+      }
+      return { data: true, error: null };
+    }
+    if (row.state !== "claimed") return { data: false, error: null };
+    if (row.pw !== claimsDb.pw) {
       row.state = "spent";
       row.leaseUntil = null;
-    } else {
-      claimsDb.rows.delete(jti);
+      return { data: false, error: null };
     }
+    if (row.token !== args.p_token) return { data: false, error: null };
+    claimsDb.rows.delete(jti);
     return { data: true, error: null };
+  }
+  if (fn === "resolve_recovery_claim") {
+    if (claimsDb.resolveFailures > 0) {
+      claimsDb.resolveFailures -= 1;
+      return { data: null, error: { message: "blip" } };
+    }
+    const row = claimsDb.rows.get(jti);
+    if (!row || row.userId !== uid) return { data: "unknown", error: null };
+    if (row.state === "spent") return { data: "changed", error: null };
+    if (row.token !== args.p_token) return { data: "unknown", error: null };
+    if (row.pw !== claimsDb.pw) {
+      row.state = "spent";
+      row.leaseUntil = null;
+      return { data: "changed", error: null };
+    }
+    return { data: "unchanged", error: null };
   }
   return { data: null, error: { message: "unknown function" } };
 }
@@ -130,13 +170,20 @@ beforeEach(() => {
   claimsDb.rows.clear();
   claimsDb.mode = "ok";
   claimsDb.settleFailures = 0;
+  claimsDb.resolveFailures = 0;
+  claimsDb.pw = 0;
+  claimsDb.seq = 0;
   claimsDb.claimGate = null;
   claimsDb.calls = [];
   claimsDb.now = () => Date.now();
   auth.user = null;
   auth.token = null;
   auth.verifyOtp.mockReset();
-  auth.updateUser.mockReset().mockResolvedValue({ data: {}, error: null });
+  /* A successful Auth password change really changes the password (what the database digest observes). */
+  auth.updateUser.mockReset().mockImplementation(async () => {
+    claimsDb.pw += 1;
+    return { data: {}, error: null };
+  });
   auth.signOut.mockReset().mockResolvedValue({ error: null });
   logSpies = (["log", "info", "warn", "error", "debug"] as const).map((level) => vi.spyOn(console, level).mockImplementation(() => undefined));
 });
@@ -476,21 +523,14 @@ describe("POST /api/auth/recovery/password: server-side single use", () => {
     expect((await send(grant.csrfToken, { password: "An0ther!Strong1" })).status).toBe(200);
   });
 
-  it("a transient Auth failure (5xx, or a thrown error) releases the claim and does not lock the user out", async () => {
+  it("a definitive 4xx refusal releases the claim; a failed release lapses on its own and the grant works again", async () => {
     signIn(USER_A, "sess-1", []);
     const grant = holdGrant();
-    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 500, message: "boom" } });
-    expect((await send(grant.csrfToken)).status).toBe(502);
-    auth.updateUser.mockRejectedValueOnce(new Error("network"));
+    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 429, message: "rate limited" } });
     expect((await send(grant.csrfToken)).status).toBe(502);
     expect(claimsDb.rows.size).toBe(0);
-    expect((await send(grant.csrfToken)).status).toBe(200);
-  });
 
-  it("if the release itself fails, the claim lease lapses on its own and the grant works again", async () => {
-    signIn(USER_A, "sess-1", []);
-    const grant = holdGrant();
-    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 500, message: "boom" } });
+    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 400, message: "bad" } });
     claimsDb.settleFailures = 2; // both release attempts fail
     expect((await send(grant.csrfToken)).status).toBe(502);
     /* Still claimed and inside the lease: busy, not a permanent lock. */
@@ -498,6 +538,138 @@ describe("POST /api/auth/recovery/password: server-side single use", () => {
     const base = Date.now();
     claimsDb.now = () => base + 3 * 60 * 1000;
     expect((await send(grant.csrfToken)).status).toBe(200);
+  });
+
+  describe("ambiguous Auth answers (the password may already have changed)", () => {
+    const calls = (name: string) => claimsDb.calls.filter((c) => c.fn === name);
+
+    it("a thrown error or 5xx where the password did NOT change keeps the claim (no release), says retry, and the grant works after the lease", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      auth.updateUser.mockRejectedValueOnce(new Error("network"));
+      const first = await send(grant.csrfToken);
+      expect(first.status).toBe(503);
+      expect(await first.json()).toEqual({ error: "update_uncertain" });
+      expect(calls("resolve_recovery_claim")).toHaveLength(1);
+      expect(calls("settle_recovery_grant")).toEqual([]); // never released on a guess
+      expect(claimsDb.rows.size).toBe(1);
+      expect(auth.signOut).not.toHaveBeenCalled();
+
+      /* Inside the lease the in-flight attempt still owns the grant. */
+      expect((await send(grant.csrfToken)).status).toBe(409);
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+
+      /* After the lease, with the password provably unchanged, the same link works. */
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      expect((await send(grant.csrfToken)).status).toBe(200);
+    });
+
+    it("a 5xx AFTER Auth committed the change is recognised from the database: success, grant spent, sessions revoked, no second change", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      auth.updateUser.mockImplementationOnce(async () => {
+        claimsDb.pw += 1; // Auth committed...
+        return { data: {}, error: { status: 504, message: "gateway timeout" } }; // ...but the answer was lost
+      });
+      const response = await send(grant.csrfToken);
+      expect(response.status).toBe(200);
+      expect(await response.json()).toEqual({ ok: true, otherSessionsRevoked: true, grantSpent: true });
+      expect(auth.signOut).toHaveBeenCalledWith({ scope: "global" });
+      expect((await send(grant.csrfToken)).status).toBe(403);
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+
+    it("if the database cannot be asked either, the claim is kept; once the lease lapses the changed password makes the grant spent", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      auth.updateUser.mockImplementationOnce(async () => {
+        claimsDb.pw += 1;
+        throw new Error("socket hang up");
+      });
+      claimsDb.resolveFailures = 2;
+      expect((await send(grant.csrfToken)).status).toBe(503);
+      expect(auth.signOut).not.toHaveBeenCalled();
+      expect([...claimsDb.rows.values()][0]?.state).toBe("claimed");
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      const retry = await send(grant.csrfToken);
+      expect(retry.status).toBe(403);
+      expect(await retry.json()).toEqual({ error: "recovery_required", reason: "spent" });
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("lease expiry, takeover and fencing", () => {
+    it("password changed but 'spent' could not be recorded (and sign-out failed): the lapsed claim becomes spent, never re-claimable", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      claimsDb.settleFailures = 2;
+      auth.signOut.mockResolvedValue({ error: { message: "down" } });
+      const done = await send(grant.csrfToken);
+      expect(await done.json()).toEqual({ ok: true, otherSessionsRevoked: false, grantSpent: false });
+      expect([...claimsDb.rows.values()][0]?.state).toBe("claimed");
+      expect((await send(grant.csrfToken)).status).toBe(409); // inside the lease
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      const replay = await send(grant.csrfToken);
+      expect(replay.status).toBe(403);
+      expect(await replay.json()).toEqual({ error: "recovery_required", reason: "spent" });
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+
+    it("the first request outlives its lease and a second takes over: the first's late release cannot remove the second's claim", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      let finishFirst!: (v: { data: object; error: { status: number; message: string } | null }) => void;
+      auth.updateUser.mockImplementationOnce(() => new Promise((resolve) => (finishFirst = resolve)));
+      const first = send(grant.csrfToken);
+      await new Promise((r) => setTimeout(r, 20));
+      const jti = [...claimsDb.rows.keys()][0]!;
+      const firstToken = claimsDb.rows.get(jti)!.token;
+
+      /* The lease lapses while the first request is still waiting on Auth (password unchanged): a second request takes over. */
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      let finishSecond!: (v: { data: object; error: null }) => void;
+      auth.updateUser.mockImplementationOnce(() => new Promise((resolve) => (finishSecond = resolve)));
+      const second = send(grant.csrfToken, { password: "An0ther!Strong1" });
+      await new Promise((r) => setTimeout(r, 20));
+      const secondToken = claimsDb.rows.get(jti)!.token;
+      expect(secondToken).not.toBe(firstToken);
+
+      /* The first request is now DEFINITIVELY refused by Auth and tries to release: it must not delete the second's claim. */
+      finishFirst({ data: {}, error: { status: 422, message: "weak" } });
+      expect((await first).status).toBe(400);
+      expect(claimsDb.rows.get(jti)).toMatchObject({ state: "claimed", token: secondToken });
+
+      /* The second completes normally. */
+      claimsDb.pw += 1;
+      finishSecond({ data: {}, error: null });
+      expect((await second).status).toBe(200);
+      expect(claimsDb.rows.get(jti)?.state).toBe("spent");
+    });
+
+    it("an old claimant's late SUCCESS still kills the grant (spent is the safe direction), and a second claim after that is refused", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      let finishFirst!: (v: { data: object; error: null }) => void;
+      auth.updateUser.mockImplementationOnce(() => new Promise((resolve) => (finishFirst = resolve)));
+      const first = send(grant.csrfToken);
+      await new Promise((r) => setTimeout(r, 20));
+      const jti = [...claimsDb.rows.keys()][0]!;
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      auth.updateUser.mockImplementationOnce(() => new Promise(() => undefined)); // second request: Auth hangs
+      void send(grant.csrfToken, { password: "An0ther!Strong1" });
+      await new Promise((r) => setTimeout(r, 20));
+      expect(claimsDb.rows.get(jti)?.state).toBe("claimed");
+      claimsDb.pw += 1;
+      finishFirst({ data: {}, error: null });
+      expect((await first).status).toBe(200);
+      expect(claimsDb.rows.get(jti)?.state).toBe("spent");
+      expect((await send(grant.csrfToken)).status).toBe(403);
+    });
   });
 
   it("a failure to record 'spent' is reported, and the session is still ended", async () => {

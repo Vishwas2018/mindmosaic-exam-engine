@@ -12,7 +12,12 @@ import {
   RECOVERY_CSRF_HEADER,
   RECOVERY_GRANT_COOKIE,
 } from "@/server/auth/recovery-grant";
-import { claimRecoveryGrant, settleRecoveryGrant } from "@/server/auth/recovery-claim";
+import {
+  classifyUpdateError,
+  claimRecoveryGrant,
+  resolveRecoveryClaim,
+  settleRecoveryGrant,
+} from "@/server/auth/recovery-claim";
 import { clearGrantCookie, noStore, resolveLiveSession } from "@/server/auth/recovery-session";
 
 /**
@@ -67,27 +72,45 @@ export async function POST(request: Request): Promise<NextResponse> {
   /* CLAIM the grant atomically in the database before anything irreversible. Exactly one of any number of concurrent
      requests gets it. Nothing has changed if this fails, so every non-'claimed' answer is safe to retry or abandon. */
   const claim = await claimRecoveryGrant(supabase, grant.jti, grant.expiresAt);
-  if (claim === "unavailable") return refuse("recovery_unavailable", 503);
-  if (claim === "busy") return refuse("grant_in_use", 409);
-  if (claim === "spent") return refuse("recovery_required", 403, "spent");
+  if (claim.outcome !== "claimed") {
+    if (claim.outcome === "busy") return refuse("grant_in_use", 409);
+    if (claim.outcome === "spent") return refuse("recovery_required", 403, "spent");
+    return refuse("recovery_unavailable", 503);
+  }
+  const { token } = claim;
 
   let updateError: { status?: number } | null = null;
   try {
     ({ error: updateError } = await supabase.auth.updateUser({ password: parsed.data.password }));
   } catch {
-    updateError = {};
+    updateError = {}; // thrown (network, abort): no answer from Auth at all, so AMBIGUOUS
   }
-  if (updateError) {
-    /* The password was not changed. RELEASE the claim so the same grant can be used to try again (422 is GoTrue's
-       "same password" / weak password). If the release itself fails the lease lapses on its own in 2 minutes: the user
-       is never permanently locked out by a transient failure. */
-    await settleRecoveryGrant(supabase, grant.jti, "released");
-    return refuse(updateError.status === 422 ? "password_rejected" : "update_failed", updateError.status === 422 ? 400 : 502);
+
+  const kind = classifyUpdateError(updateError);
+  if (kind === "refused") {
+    /* Auth DEFINITIVELY refused (4xx: weak or same password, rate limit): the password was not changed. RELEASE the claim,
+       with this request's own fencing token, so the same grant can try again. If the release itself fails the lease
+       lapses on its own in 2 minutes: a transient failure never locks the user out. */
+    await settleRecoveryGrant(supabase, grant.jti, token, "released");
+    return refuse(updateError?.status === 422 ? "password_rejected" : "update_failed", updateError?.status === 422 ? 400 : 502);
+  }
+  if (kind === "ambiguous") {
+    /* No definitive answer (network failure, timeout, 5xx): the password MAY have changed. Never release on a guess. Ask
+       the database whether the user's password hash differs from the one recorded at claim time. */
+    const resolved = await resolveRecoveryClaim(supabase, grant.jti, token);
+    if (resolved !== "changed") {
+      /* Unchanged or unknown: the claim is deliberately LEFT in place (the Auth call might still be in flight). It lapses
+         after its 2-minute lease and is then re-claimable only if the password is still unchanged, so the user retries
+         with the same link shortly, and nothing can be applied twice. */
+      return refuse("update_uncertain", 503);
+    }
+    /* 'changed': the password did change; the grant is now spent. Continue as a success. */
   }
 
   /* The password is changed: the grant is now spent, for good, in the database. This must happen while the session is
-     still alive (the sign-out below ends it). */
-  const grantSpent = await settleRecoveryGrant(supabase, grant.jti, "spent");
+     still alive (the sign-out below ends it). Idempotent, and if it fails the claim self-heals: a lapsed claim whose
+     password hash changed becomes spent on the next claim attempt. */
+  const grantSpent = await settleRecoveryGrant(supabase, grant.jti, token, "spent");
 
   /* Then revoke every session of this user, this one included. One retry, because a transient failure here would leave
      the session usable; a persistent one is reported, never hidden. With the grant spent in the database a failed

@@ -63,8 +63,8 @@ verifier) and shows an explanation; a `token_hash` link can.
 `Secure` on https, `Path=/api/auth/recovery`, 15 minutes. Bound to the user id and the Auth `session_id`.
 
 - **Single use is enforced server-side, in the database** (migration `20261102090000_recovery_grant_claims.sql`,
-  `src/server/auth/recovery-claim.ts`). The grant's `jti` is recorded in `public.recovery_grant_claims` through two SECURITY
-  DEFINER functions that act only on the caller's own rows (`auth.uid()`). Clearing the browser cookie is hygiene, **not** invalidation.
+  `src/server/auth/recovery-claim.ts`). The grant's `jti` is recorded in `public.recovery_grant_claims` through three SECURITY
+  DEFINER functions (`claim_recovery_grant`, `settle_recovery_grant`, `resolve_recovery_claim`) that act only on the caller's own rows (`auth.uid()`). Clearing the browser cookie is hygiene, **not** invalidation.
   The password endpoint's order is: validate (origin, live session, grant signature/expiry/binding, CSRF, password policy) → **claim**
   (atomic; exactly one of any number of concurrent requests gets `claimed`, the rest get `busy` → 409) → change the password →
   **settle `spent`** (the grant is dead; replay gets 403 `spent`, from any session) → global sign-out → clear cookie.
@@ -73,16 +73,34 @@ verifier) and shows an explanation; a `token_hash` link can.
   - *Replay after success, global sign-out failure:* refused as `spent` even from the same still-valid session (the grant is spent
     *before* the sign-out is attempted). A failed sign-out is still reported (`otherSessionsRevoked: false`) as an incident signal for
     the *session*, which stays alive until sign-out succeeds or the access token expires.
-  - *Transient failure never locks the user out:* if the password change fails (422 rejected, 5xx, thrown) the claim is **released**
-    and the same grant can try again. If even the release fails, the claim is a 2-minute **lease** that lapses on its own. A crash
-    between claim and outcome is covered by the same lease.
+  - *Fencing and ground truth.* Each claim carries a fresh **fencing token**, and records a **digest of the user's password hash**
+    (`sha256(auth.users.encrypted_password)`; unreadable by every client role) taken at claim time. The database can therefore answer
+    "did the password change since this claim?" without trusting any client's report. Consequences:
+    - *Release only on a definitive refusal.* The route releases (deletes) a claim only when Auth answered with a genuine HTTP 4xx
+      (weak or same password, rate limit, validation): nothing changed. It needs the caller's **own** token, so an old claimant whose
+      lease lapsed can never release a **newer** claimant's claim, and it is refused (grant marked spent) if the hash has changed.
+    - *Ambiguous answers (network failure, abort, 5xx, 408) are never released on a guess.* The route asks the database
+      (`resolve_recovery_claim`): hash changed -> the change happened, the grant is spent, and the request completes as a success
+      (sessions revoked); hash unchanged -> the claim is **left in place** (the Auth call might still be in flight) and the user gets
+      503 `update_uncertain`, "retry shortly". Once the 2-minute lease lapses the same link can be claimed again, **but only if the
+      password is still unchanged**.
+    - *A lapsed claim whose password changed becomes `spent`, not claimable.* That is what makes "password changed but we could not
+      record `spent`" safe: even if the settle call failed *and* the global sign-out failed, the next claim attempt after the lease sees
+      the changed hash and refuses (`spent`). Inside the lease it is `busy`.
+    - *Late reports.* An old claimant that finally learns its change succeeded may still mark the grant `spent` (the safe direction,
+      no token needed). It can never un-claim, release or complete a newer claimant's attempt as a failure.
+  - *Transient failure never locks the user out:* a definitive refusal releases the claim (same grant can retry at once); an
+    uncertain outcome holds it for at most the 2-minute lease; a crash between claim and outcome is covered by the same lease.
   - *Fail closed:* if the claim cannot be made (migration not applied, database error) the endpoint answers 503
     `recovery_unavailable` and changes nothing; nothing was consumed, so the user can retry.
-  - *Residuals (documented, small):* (1) if `settle spent` fails twice after a successful change the response says
-    `grantSpent: false`; the session is still ended by the sign-out, and the 2-minute lease then lapses, so only that same live session
-    could re-claim until it expires (15 min) or signs out. (2) A password change that succeeds at the Auth service but whose response
-    is lost looks like a failure: the claim is released and the user may submit again (idempotent). (3) An authenticated user can call
-    the two functions directly for **their own** grants only (capped at 10 live rows per user).
+  - *Guarantee limits (documented):* (1) The fence stops a stale **database** claim; it cannot cancel a request that Auth is still
+    processing. If a password-change request to Auth stalls for longer than the lease **and** commits after a second claimant has
+    taken over, the same authenticated holder of the same grant could change the password a second time; both changes are by the same
+    session and the first success ends it (global sign-out) or the 15-minute grant expiry bounds it. (2) The hash digest detects "the
+    password changed", not "who changed it": a change made some other way during the lease (a direct Auth call, a second device) also
+    marks the grant spent, which fails closed (user requests a new link). (3) `update_uncertain` makes the user wait up to the lease
+    when Auth is flaky; that is deliberate. (4) An authenticated user can call the three functions directly for **their own** grants
+    only (capped at 10 live rows per user).
   - *Already-issued access token after sign-out:* the application refuses it (`resolveLiveSession` asks the Auth service);
     Supabase's own stateless endpoints (PostgREST) accept the JWT until its `exp`. That is Supabase behaviour, not changed.
 - **Logout** clears it (`DELETE /api/auth/recovery/session`, called by `signOut`), and sign-out also ends the session.

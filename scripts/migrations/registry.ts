@@ -2927,13 +2927,16 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       tableExists("recovery_grant_claims"),
       functionExists("claim_recovery_grant"),
       functionExists("settle_recovery_grant"),
+      functionExists("resolve_recovery_claim"),
       {
         describes: "recovery grant claim functions are executable by authenticated only (not anon), and the table by no client role",
         sql: `select (
                 has_function_privilege('authenticated', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE')
-                and has_function_privilege('authenticated', 'public.settle_recovery_grant(uuid, text)', 'EXECUTE')
+                and has_function_privilege('authenticated', 'public.settle_recovery_grant(uuid, uuid, text)', 'EXECUTE')
                 and not has_function_privilege('anon', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE')
-                and not has_function_privilege('anon', 'public.settle_recovery_grant(uuid, text)', 'EXECUTE')
+                and not has_function_privilege('anon', 'public.settle_recovery_grant(uuid, uuid, text)', 'EXECUTE')
+                and has_function_privilege('authenticated', 'public.resolve_recovery_claim(uuid, uuid)', 'EXECUTE')
+                and not has_function_privilege('anon', 'public.resolve_recovery_claim(uuid, uuid)', 'EXECUTE')
                 and not has_table_privilege('authenticated', 'public.recovery_grant_claims', 'SELECT')
                 and not has_table_privilege('anon', 'public.recovery_grant_claims', 'SELECT')
               ) as present`,

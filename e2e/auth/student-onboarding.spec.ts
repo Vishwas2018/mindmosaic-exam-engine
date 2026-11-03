@@ -18,7 +18,9 @@ test.describe("student onboarding + diagnostic warmup", () => {
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
 
-    const dialog = page.locator("dialog");
+    /* The dashboard also contains other, closed <dialog>s (for example the explore grid's "Track preview"), so a bare
+       locator("dialog") is ambiguous. Select the onboarding dialog by its title; hasText matches whether or not it is open. */
+    const dialog = page.locator("dialog", { hasText: "Welcome to MindMosaic" });
     await expect(dialog).toBeVisible();
 
     // Close via close button

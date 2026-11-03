@@ -82,8 +82,11 @@ Tests: `src/tests/unit/exam-write-tls.test.ts` (pure decisions; a real `pg` clie
 certificates: valid chain connects and sends the password, wrong CA and wrong host do not; writer-module refusals; no
 `rejectUnauthorized: false` in source). Not covered, and only checkable on DEV: that Supabase's real certificate chains to the CA you supply.
 
-Out of scope here, still open: the operator CLIs in `scripts/migrations/verify.ts` use `rejectUnauthorized: false` for non-local ledger
-checks. They are not on any request path and read/write only the migration ledger, but should receive the same treatment.
+Operator CLIs (`npm run migrations:status` / `migrations:record`, via `scripts/migrations/verify.ts`) connect to a non-loopback database
+only with verified TLS now, by the same rule as the writer: set `SUPABASE_DB_CA` (PEM) or `SUPABASE_DB_CA_FILE` to the project CA, leave
+`NODE_TLS_REJECT_UNAUTHORIZED` unset, and a missing or invalid CA refuses before connecting. The connection is built from parts, so an
+`sslmode` in `SUPABASE_DB_URL` cannot disable verification, and "loopback" is decided on the parsed host (a password containing the word
+"localhost" no longer switches encryption off). Whether the real hosted chain verifies is checked on DEV only.
 
 ## Why two migrations
 

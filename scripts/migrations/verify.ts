@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { Client } from "pg";
 
+import { decideHostedTls, hostedClientConfig } from "../../src/server/exam-write/tls";
 import { MIGRATIONS, fileNameFor, type MigrationEntry } from "./registry";
 
 /**
@@ -35,13 +36,47 @@ export function databaseUrl(): string {
   );
 }
 
+const LOOPBACK_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]"]);
+
+/** The CA for a hosted connection: SUPABASE_DB_CA (PEM, literal \n accepted) or the file named by SUPABASE_DB_CA_FILE. */
+function hostedCa(): string | undefined {
+  if (process.env.SUPABASE_DB_CA?.trim()) return process.env.SUPABASE_DB_CA;
+  const file = process.env.SUPABASE_DB_CA_FILE?.trim();
+  return file ? fs.readFileSync(file, "utf8") : undefined;
+}
+
+/**
+ * Connects to the ledger database. A loopback host connects as given. ANY other host is connected to ONLY with verified
+ * TLS: the operator-supplied CA is the sole trust anchor, the certificate must match the URL's host, and
+ * NODE_TLS_REJECT_UNAUTHORIZED=0 or a missing/invalid CA refuses before anything is sent. Whether a host is loopback is
+ * decided on the parsed host, never by searching the string (a password or query containing "localhost" must not
+ * switch encryption off), and the connection is built from parts so an `sslmode` in the URL cannot override verification.
+ */
 export async function connect(): Promise<Client> {
   const connectionString = databaseUrl();
-  const local = /localhost|127\.0\.0\.1/.test(connectionString);
-  const client = new Client({
-    connectionString,
-    ssl: local ? undefined : { rejectUnauthorized: false },
+  let host: string;
+  try {
+    host = new URL(connectionString).hostname.toLowerCase();
+  } catch {
+    throw new Error("SUPABASE_DB_URL is not a valid postgres:// URL (percent-encode special characters in the password).");
+  }
+  if (LOOPBACK_HOSTS.has(host)) {
+    const local = new Client({ connectionString });
+    await local.connect();
+    return local;
+  }
+  const tls = decideHostedTls({
+    caPem: hostedCa(),
+    nodeRejectUnauthorized: process.env.NODE_TLS_REJECT_UNAUTHORIZED,
+    nowMs: Date.now(),
   });
+  if (!tls.ok) {
+    throw new Error(
+      `Refusing to connect to ${host} without verified TLS (${tls.reason}). Set SUPABASE_DB_CA (or SUPABASE_DB_CA_FILE) to the ` +
+        "project's CA certificate from the dashboard's Database settings, and unset NODE_TLS_REJECT_UNAUTHORIZED.",
+    );
+  }
+  const client = new Client(hostedClientConfig(connectionString, tls.ca));
   await client.connect();
   return client;
 }

@@ -37,6 +37,16 @@ export async function assertNoSeriousAccessibilityViolations(
   page: Page,
   context?: string,
 ): Promise<void> {
+  /* Scan the SETTLED page. A control that has just been clicked is usually still mid CSS transition (for example the review
+     tabs fading to their selected colours), and axe reads the computed, half-blended colours of that frame, reporting a
+     contrast ratio no user ever sees at rest. Finite animations and transitions are awaited; rules and exemptions are
+     unchanged, and infinite animations (spinners, skeleton pulses) are not waited for. */
+  await page.evaluate(async () => {
+    const finite = document
+      .getAnimations()
+      .filter((animation) => animation.effect?.getComputedTiming().iterations !== Infinity);
+    await Promise.all(finite.map((animation) => animation.finished.catch(() => undefined)));
+  });
   const results = await new AxeBuilder({ page }).analyze();
   const withoutExemptWordmarkNodes = results.violations
     .map((violation) => ({
