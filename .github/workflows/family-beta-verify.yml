@@ -1,0 +1,177 @@
+name: family-beta-verify
+
+# Authoritative Linux E2E for the family-beta WP1 candidate. The Windows-host runs were invalid (native socket stalls in
+# `next start`; see docs/runbooks/family-beta-rollout-checklist.md), so this is the run of record.
+#
+# Runs ONLY for the candidate branch (and by hand). Reuses ci.yml's recipes: same Node pin, same Supabase CLI version, same
+# published local demo keys, same bootstraps. One job, so the two suites run strictly one after the other on one runner.
+#
+# ISOLATION. Everything is on the runner: a Supabase stack started by `supabase start` on 127.0.0.1:56321-56324. No secret is
+# read (there is no `secrets.` reference in this file), no hosted URL is configured, and the first step refuses to continue if
+# any environment value points anywhere but the local stack. e2e/fixtures/environment-guard.ts independently refuses a
+# non-local host inside Playwright. Nothing here deploys, migrates a hosted project, or touches Vercel.
+
+on:
+  push:
+    branches: [chore/family-beta-wp1-candidate-20261102]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: family-beta-verify-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "24"
+  CI: "true"
+
+jobs:
+  verify:
+    name: verify (auth then public)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:56321
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+      SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
+      E2E_FIXTURE_PASSWORD: Fixture-Password-123!
+      E2E_FIXTURE_STUDENT_PIN: "194728"
+      EXAM_WRITE_DB_URL: postgresql://mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret@127.0.0.1:56322/postgres
+      EXAM_WRITE_ALLOW_LOOPBACK: "1"
+      RECOVERY_GRANT_SECRET: local-ci-recovery-grant-secret-not-a-secret-0123456789
+      E2E_TOKEN_HASH_TEMPLATES: "1"
+      STRIPE_SECRET_KEY: sk_test_dummy_placeholder_not_a_real_key_00000000
+      STRIPE_WEBHOOK_SECRET: whsec_dummy_placeholder_not_a_real_secret_0000
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_dummy_placeholder_not_a_real_key_0000
+      STRIPE_PRICE_FAMILY_MONTHLY: price_dummy_placeholder_monthly_00000000
+      STRIPE_PRICE_FAMILY_ANNUAL: price_dummy_placeholder_annual_000000000
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Refuse any non-local target
+        run: |
+          set -euo pipefail
+          bad=0
+          while IFS='=' read -r k v; do
+            case "$k" in
+              NEXT_PUBLIC_SUPABASE_URL|EXAM_WRITE_DB_URL|SUPABASE_DB_URL|DATABASE_URL|RLS_TEST_DB_URL)
+                case "$v" in
+                  http://127.0.0.1:5632*|postgresql://*@127.0.0.1:56322/*) ;;
+                  *) echo "::error::$k does not point at the local stack"; bad=1 ;;
+                esac ;;
+            esac
+          done < <(env)
+          if env | grep -Ei 'supabase\.co|vercel\.app|\.vercel\.|production' | grep -v '^PATH=' | grep -vi 'RUNNER_\|GITHUB_\|ACCEPT_EULA' >/dev/null; then
+            echo "::error::an environment value mentions a hosted domain or 'prod'"; bad=1
+          fi
+          [ "$bad" = 0 ]
+          echo "SHA=$GITHUB_SHA" | tee -a "$GITHUB_STEP_SUMMARY"
+          git rev-parse HEAD | tee -a "$GITHUB_STEP_SUMMARY"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.108.0
+
+      - name: Start the isolated local Supabase stack
+        run: |
+          supabase start
+          supabase status | sed -E 's/(key|secret|token)[^:]*: .*/\1: <redacted>/I'
+      - run: npm run exam-writer:bootstrap
+      - run: npm run e2e:seed
+
+      - name: Record migration state of the local stack
+        env:
+          SUPABASE_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
+        run: |
+          npm run migrations:record
+          npm run migrations:status
+
+      # 1. Authenticated suite. webServer builds once (next build --webpack) then `next start`; the build id is recorded
+      #    before and after so a mid-run rebuild would show.
+      - name: E2E authenticated (full)
+        id: auth
+        continue-on-error: true
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-auth.json
+        run: |
+          set -o pipefail
+          mkdir -p evidence
+          npx playwright test --config=playwright.auth.config.ts --reporter=list,json 2>&1 | tee evidence/auth-run.log
+      - name: Auth build identity
+        if: always()
+        run: |
+          mkdir -p evidence
+          { echo "auth BUILD_ID=$(cat .next/BUILD_ID)"; find .next -maxdepth 1 -name 'build-manifest.json' -exec sha256sum {} +; } | tee evidence/auth-build.txt
+      - name: Summarise authenticated suite
+        if: always()
+        run: |
+          node scripts/ci/summarise-playwright.mjs "Authenticated E2E (playwright.auth.config.ts)" "$RUNNER_TEMP/pw-auth.json" \
+            --require-spec a11y-parent-dashboard | tee -a "$GITHUB_STEP_SUMMARY" evidence/auth-summary.md
+
+      # 2. The previously unresolved keyboard-walkthrough check, repeated with retries OFF, to tell a real defect from a
+      #    one-off. Run after the full suite so it cannot mask it.
+      - name: Keyboard walkthrough x5 (retries off)
+        if: always()
+        continue-on-error: true
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-kbd.json
+        run: |
+          npx playwright test --config=playwright.auth.config.ts e2e/auth/a11y-parent-dashboard.spec.ts \
+            -g "keyboard walkthrough" --repeat-each=5 --retries=0 --reporter=list,json 2>&1 | tee evidence/kbd-run.log
+          node scripts/ci/summarise-playwright.mjs "Keyboard walkthrough x5, retries 0" "$RUNNER_TEMP/pw-kbd.json" | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-summary.md
+
+      # 3. Public suite, after the authenticated one, with every backend variable removed (guest-only config).
+      - name: E2E public (full)
+        id: public
+        continue-on-error: true
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-public.json
+        run: |
+          set -o pipefail
+          env -u NEXT_PUBLIC_SUPABASE_URL -u NEXT_PUBLIC_SUPABASE_ANON_KEY -u SUPABASE_SERVICE_ROLE_KEY -u EXAM_WRITE_DB_URL \
+              -u EXAM_WRITE_ALLOW_LOOPBACK -u RECOVERY_GRANT_SECRET -u E2E_FIXTURE_PASSWORD -u E2E_FIXTURE_STUDENT_PIN \
+              SHOWCASE_ENABLED=1 BAR_MODEL_PREVIEW_ENABLED=1 WRITING_PREVIEW_ENABLED=1 \
+              npx playwright test --reporter=list,json 2>&1 | tee evidence/public-run.log
+      - name: Public build identity
+        if: always()
+        run: |
+          { echo "public BUILD_ID=$(cat .next/BUILD_ID)"; find .next -maxdepth 1 -name 'build-manifest.json' -exec sha256sum {} +; } | tee evidence/public-build.txt
+      - name: Summarise public suite
+        if: always()
+        run: node scripts/ci/summarise-playwright.mjs "Public E2E (playwright.config.ts)" "$RUNNER_TEMP/pw-public.json" | tee -a "$GITHUB_STEP_SUMMARY" evidence/public-summary.md
+
+      - name: Collect failure evidence
+        if: always()
+        run: |
+          mkdir -p evidence
+          cp "$RUNNER_TEMP"/pw-*.json evidence/ 2>/dev/null || true
+          cp -r test-results evidence/test-results 2>/dev/null || true
+          # Redact anything token-shaped before upload.
+          find evidence -type f \( -name '*.log' -o -name '*.json' -o -name '*.md' -o -name '*.txt' \) -print0 \
+            | xargs -0 -r sed -i -E 's/eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}/<jwt>/g; s/([?&#](token_hash|token|code|access_token|refresh_token)=)[^&" ]+/\1<redacted>/g'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: family-beta-verify-${{ github.sha }}
+          path: evidence
+          retention-days: 14
+
+      - if: always()
+        run: supabase stop
+
+      - name: Fail if either suite failed
+        if: always()
+        run: |
+          echo "auth=${{ steps.auth.outcome }} public=${{ steps.public.outcome }}"
+          [ "${{ steps.auth.outcome }}" = "success" ] && [ "${{ steps.public.outcome }}" = "success" ]
