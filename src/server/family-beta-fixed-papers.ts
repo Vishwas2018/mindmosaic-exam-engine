@@ -87,7 +87,12 @@ export function getFamilyBetaPaperConfig(paper: FamilyBetaPaperKind): FamilyBeta
  */
 export function isFamilyBetaFixedPapersEnabled(env: Env = process.env): boolean {
   if (env.FAMILY_BETA_FIXED_PAPERS_PREVIEW !== "enabled") return false;
+  // Both production markers, not just one: VERCEL_TARGET_ENV is the newer
+  // variable and is absent on older Vercel builds, where VERCEL_ENV is the
+  // only signal. Checking one alone would let a production deployment serve
+  // unapproved content if the flag were ever set there.
   if (env.VERCEL_TARGET_ENV === "production") return false;
+  if (env.VERCEL_ENV === "production") return false;
   return true;
 }
 

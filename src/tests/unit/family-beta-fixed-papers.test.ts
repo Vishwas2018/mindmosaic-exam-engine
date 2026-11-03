@@ -42,6 +42,30 @@ describe("Family Beta Fixed Papers: Gate and Fail-Closed Security", () => {
     ).toBe(false);
   });
 
+  /*
+   * VERCEL_TARGET_ENV is the newer variable and is absent on older Vercel
+   * builds, where VERCEL_ENV is the only production signal. A deployment that
+   * reports production through either name must not serve unapproved content.
+   */
+  it("never activates on a production deployment that reports only VERCEL_ENV", () => {
+    expect(
+      isFamilyBetaFixedPapersEnabled({
+        FAMILY_BETA_FIXED_PAPERS_PREVIEW: "enabled",
+        VERCEL_ENV: "production",
+      }),
+    ).toBe(false);
+  });
+
+  it("still activates on a non-production Vercel deployment", () => {
+    expect(
+      isFamilyBetaFixedPapersEnabled({
+        FAMILY_BETA_FIXED_PAPERS_PREVIEW: "enabled",
+        VERCEL_ENV: "preview",
+        VERCEL_TARGET_ENV: "preview",
+      }),
+    ).toBe(true);
+  });
+
   it("activates in preview/local when the flag is exactly 'enabled'", () => {
     expect(isFamilyBetaFixedPapersEnabled(ENABLED_ENV)).toBe(true);
   });
