@@ -56,15 +56,21 @@ jobs:
         run: |
           set -euo pipefail
           bad=0
+          # Every connection target, by shape rather than by a fixed list, so a newly added
+          # connection (public, server, scoring, projection, content-answer writer, RLS harness)
+          # is covered automatically: anything *_DB_URL, DATABASE_URL or *SUPABASE_URL.
           while IFS='=' read -r k v; do
             case "$k" in
-              NEXT_PUBLIC_SUPABASE_URL|EXAM_WRITE_DB_URL|SUPABASE_DB_URL|DATABASE_URL|RLS_TEST_DB_URL)
+              *_DB_URL|DATABASE_URL|*SUPABASE_URL)
+                echo "checked $k"
                 case "$v" in
                   http://127.0.0.1:5632*|postgresql://*@127.0.0.1:56322/*) ;;
                   *) echo "::error::$k does not point at the local stack"; bad=1 ;;
                 esac ;;
             esac
           done < <(env)
+          # The loop can only reject values that exist, so assert the one target the suites need.
+          test "${NEXT_PUBLIC_SUPABASE_URL:-}" = "http://127.0.0.1:56321"
           if env | grep -Ei 'supabase\.co|vercel\.app|\.vercel\.|production' | grep -v '^PATH=' | grep -vi 'RUNNER_\|GITHUB_\|ACCEPT_EULA' >/dev/null; then
             echo "::error::an environment value mentions a hosted domain or 'prod'"; bad=1
           fi
@@ -72,6 +78,9 @@ jobs:
           echo "SHA=$GITHUB_SHA" | tee -a "$GITHUB_STEP_SUMMARY"
           git rev-parse HEAD | tee -a "$GITHUB_STEP_SUMMARY"
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+
+      # Created up front so every later `tee evidence/...` works even if a suite step dies early.
+      - run: mkdir -p evidence
 
       - uses: actions/setup-node@v4
         with:
@@ -122,18 +131,33 @@ jobs:
       # 2. The previously unresolved keyboard-walkthrough check, repeated with retries OFF, to tell a real defect from a
       #    one-off. Run after the full suite so it cannot mask it.
       - name: Keyboard walkthrough x5 (retries off)
+        id: kbd
         if: always()
         continue-on-error: true
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-kbd.json
         run: |
+          set -o pipefail
           npx playwright test --config=playwright.auth.config.ts e2e/auth/a11y-parent-dashboard.spec.ts \
             -g "keyboard walkthrough" --repeat-each=5 --retries=0 --reporter=list,json 2>&1 | tee evidence/kbd-run.log
-          node scripts/ci/summarise-playwright.mjs "Keyboard walkthrough x5, retries 0" "$RUNNER_TEMP/pw-kbd.json" | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-summary.md
+      # Separate step so a missing/empty report or a failing repeat is recorded in the final gate
+      # below instead of being swallowed by the run step's continue-on-error.
+      - name: Summarise keyboard walkthrough x5
+        id: kbd_summary
+        if: always()
+        continue-on-error: true
+        run: |
+          node scripts/ci/summarise-playwright.mjs "Keyboard walkthrough x5, retries 0" "$RUNNER_TEMP/pw-kbd.json" \
+            --require-spec a11y-parent-dashboard | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-summary.md
 
       # 3. Public suite, after the authenticated one, with every backend variable removed (guest-only config).
+      # `if: always()` is required, not cosmetic: without it this step is SKIPPED whenever an
+      # earlier step failed — including "Summarise authenticated suite", which fails exactly when
+      # the authenticated suite had failures. The public suite must still run; the gate below
+      # keeps the overall result red.
       - name: E2E public (full)
         id: public
+        if: always()
         continue-on-error: true
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-public.json
@@ -170,8 +194,14 @@ jobs:
       - if: always()
         run: supabase stop
 
-      - name: Fail if either suite failed
+      # Any suite failure, any keyboard-repeat failure, and any missing or empty report all land
+      # here as a non-"success" outcome, so none of them can produce a green run.
+      - name: Fail if any suite, repeat or report check failed
         if: always()
         run: |
           echo "auth=${{ steps.auth.outcome }} public=${{ steps.public.outcome }}"
-          [ "${{ steps.auth.outcome }}" = "success" ] && [ "${{ steps.public.outcome }}" = "success" ]
+          echo "kbd=${{ steps.kbd.outcome }} kbd_summary=${{ steps.kbd_summary.outcome }}"
+          [ "${{ steps.auth.outcome }}" = "success" ] \
+            && [ "${{ steps.public.outcome }}" = "success" ] \
+            && [ "${{ steps.kbd.outcome }}" = "success" ] \
+            && [ "${{ steps.kbd_summary.outcome }}" = "success" ]
