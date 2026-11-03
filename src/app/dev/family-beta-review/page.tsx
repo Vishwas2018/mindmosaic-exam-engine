@@ -54,6 +54,18 @@ export default function FamilyBetaReviewIndexPage() {
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-10">
+      {/*
+       * A real way back out of this screen. The paper links below are built
+       * from a template literal, so this page previously had no static
+       * internal link at all and left the reviewer stranded — caught by
+       * src/tests/unit/navigation-graph.test.ts, which is right: this route
+       * mounts no shell, so it has to carry its own step back up.
+       */}
+      <p className="mb-4 text-sm">
+        <Link href="/dev/routes" className="underline">
+          ← Dev route index
+        </Link>
+      </p>
       <h1 className="text-2xl font-bold text-slate-900">
         Family beta — content review (pending human approval)
       </h1>

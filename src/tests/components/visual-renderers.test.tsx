@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { showcaseVisuals } from "@/content/questions/showcase-fixtures";
 import {
+  BarChartRenderer,
   CoordinateGridRenderer,
   NumberLineRenderer,
   PieChartRenderer,
@@ -38,6 +39,57 @@ describe("PieChartRenderer", () => {
       screen.getByRole("img", { name: /How students travel to school/i }),
     ).toBeInTheDocument();
     expect(screen.getByText("Walk")).toBeInTheDocument();
+  });
+});
+
+describe("BarChartRenderer", () => {
+  /*
+   * Every mark inside the SVG is aria-hidden, so this list is the only way a
+   * screen-reader user can read a plotted value. It was missing, which made
+   * any bar-chart item whose altText does not happen to recite its values
+   * unanswerable without sight; LineGraphRenderer already had the equivalent
+   * list and PieChartRenderer a visible legend.
+   */
+  const visual: VisualAsset = {
+    id: "bar-a11y",
+    type: "bar_chart",
+    altText: "Bar chart of four classes with clearly different values.",
+    data: {
+      labels: ["3A", "3B", "4A", "4B"],
+      values: [22, 18, 27, 15],
+      yAxisLabel: "cans",
+      colour: "#4B2E83",
+    },
+  } as unknown as VisualAsset;
+
+  it("exposes every plotted value to assistive technology, not only the altText", () => {
+    render(<BarChartRenderer visual={visual} />);
+
+    expect(
+      screen.getByRole("img", { name: /clearly different values/i }),
+    ).toBeInTheDocument();
+
+    const items = screen.getAllByRole("listitem");
+    expect(items.map((li) => li.textContent)).toEqual([
+      "3A: 22 cans",
+      "3B: 18 cans",
+      "4A: 27 cans",
+      "4B: 15 cans",
+    ]);
+  });
+
+  it("omits the unit suffix when the chart has no y-axis label", () => {
+    const noAxis = {
+      ...visual,
+      data: { ...(visual as unknown as { data: Record<string, unknown> }).data, yAxisLabel: undefined },
+    } as unknown as VisualAsset;
+    render(<BarChartRenderer visual={noAxis} />);
+    expect(screen.getAllByRole("listitem").map((li) => li.textContent)).toEqual([
+      "3A: 22",
+      "3B: 18",
+      "4A: 27",
+      "4B: 15",
+    ]);
   });
 });
 

@@ -157,6 +157,28 @@ jobs:
           node scripts/ci/summarise-playwright.mjs "Keyboard walkthrough x5, retries 0" "$RUNNER_TEMP/pw-kbd.json" \
             --require-spec a11y-parent-dashboard | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-summary.md
 
+      # 2b. The core family-beta student journey, repeated with retries OFF. It flaked on a34fd6f8
+      #     (attempts: 2) in the full authenticated suite, and it is the one journey the whole beta
+      #     rests on: code+PIN sign-in, start a timed exam, autosave, resume after refresh. A
+      #     retry-pass is not good enough evidence for that, so it is repeated and a flake fails.
+      - name: Student exam journey x5 (retries off)
+        id: journey
+        if: always()
+        continue-on-error: true
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-journey.json
+        run: |
+          set -o pipefail
+          npx playwright test --config=playwright.auth.config.ts e2e/auth/student-exam-session.spec.ts \
+            --repeat-each=5 --retries=0 --reporter=list,json 2>&1 | tee evidence/journey-run.log
+      - name: Summarise student exam journey x5
+        id: journey_summary
+        if: always()
+        continue-on-error: true
+        run: |
+          node scripts/ci/summarise-playwright.mjs "Student exam journey x5, retries 0" "$RUNNER_TEMP/pw-journey.json" \
+            --require-spec student-exam-session | tee -a "$GITHUB_STEP_SUMMARY" evidence/journey-summary.md
+
       # 3. Public suite, after the authenticated one, with every backend variable removed (guest-only config).
       # `if: always()` is required, not cosmetic: without it this step is SKIPPED whenever an
       # earlier step failed — including "Summarise authenticated suite", which fails exactly when
@@ -235,7 +257,10 @@ jobs:
           echo "auth=${{ steps.auth.outcome }} public=${{ steps.public.outcome }}"
           echo "kbd=${{ steps.kbd.outcome }} kbd_summary=${{ steps.kbd_summary.outcome }}"
           echo "kbd_public=${{ steps.kbd_public.outcome }} kbd_public_summary=${{ steps.kbd_public_summary.outcome }}"
-          [ "${{ steps.auth.outcome }}" = "success" ] \
+          echo "journey=${{ steps.journey.outcome }} journey_summary=${{ steps.journey_summary.outcome }}"
+          [ "${{ steps.journey.outcome }}" = "success" ] \
+            && [ "${{ steps.journey_summary.outcome }}" = "success" ] \
+            && [ "${{ steps.auth.outcome }}" = "success" ] \
             && [ "${{ steps.public.outcome }}" = "success" ] \
             && [ "${{ steps.kbd.outcome }}" = "success" ] \
             && [ "${{ steps.kbd_summary.outcome }}" = "success" ] \

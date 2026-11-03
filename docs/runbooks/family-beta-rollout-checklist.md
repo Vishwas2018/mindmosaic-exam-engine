@@ -73,6 +73,30 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   `tests/rls/exam-write-target.test.ts` still proves a loopback target IS refused without the flag, and a hosted target
   on a ref mismatch. (The third failure was a cascade — `legacySessionId` was undefined.)
 
+- [x] **`family-beta-verify` PASSED again on Linux at `a34fd6f8`** (run `41736164845`) — the run of record for the
+  gaps below, because it is the first with the mail suite enabled and the public keyboard repeat:
+  - Authenticated E2E: **90 tests, 89 passed, 0 failed, `skipped: 0`** (was 20 skipped). The email-confirmation and
+    password-recovery tests now actually run, and pass. `BUILD_ID=TS23en_JEHVF2zQDRGY1-`.
+  - Keyboard walkthrough ×5, retries 0: **5/5**.
+  - Public E2E: **386 tests, 385 passed, 0 failed**, 1 flaky. `BUILD_ID=iYWplMtVfAA8GcOwVG_RE`.
+  - **Public keyboard walkthroughs ×5, retries 0: 10/10 passed.** So the public sign-in walkthrough flake is *not* a
+    reproducible focus-order defect — ten consecutive attempts with retries off, no failure.
+
+- [x] **`family-beta-verify` PASSED a third time, completely clean, at `99127c60`** (run `41737452741`) — identical
+  application code to `a34fd6f8`, so this is a reproducibility check on the same build:
+  - Authenticated E2E: **90 tests, 90 passed, 0 failed, 0 flaky, 0 skipped**. `BUILD_ID=XqQJzBbNV8LR5ByKl5iSn`.
+  - Keyboard walkthrough ×5, retries 0: **5/5**. Public keyboard walkthroughs ×5, retries 0: **10/10**.
+  - Public E2E: **386 tests, 386 passed, 0 failed, 0 flaky, 0 skipped**. `BUILD_ID=ME5Wc1Sd4n-yFjWH9O9TM`.
+  - **Nothing flaky anywhere**: 476 E2E tests plus 15 retries-off repeat executions, all first-attempt passes. The
+    `student-exam-session` flake seen once on `a34fd6f8` did not recur here, which is consistent with a one-off rather
+    than a defect — but one clean run is not proof, which is why the ×5 repeat was added rather than the observation
+    being treated as a resolution.
+- [x] CI on `99127c60`: `rls`, `e2e`, `e2e-auth`, `scholarship-drafts` all **passed**; `core` **failed** on
+  `navigation-graph.test.ts` — a real omission in the reviewer route added by this candidate, not a flake. The route's
+  index page's only links were template literals, so the test correctly reported it as a screen with no way out
+  except the marketing site. Fixed by giving it an explicit link out, and the route is now also listed on
+  `/dev/routes`. Re-verified locally; the final SHA's run is the confirmation.
+
 ### Two gaps in the green run, both now closed in the workflow
 
 - [x] **The 20 skipped authenticated tests were the entire email path.** `e2e/auth/email-confirmation-and-recovery.spec.ts`
@@ -86,7 +110,15 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   repeat covered the authenticated parent dashboard, which never flaked. A second repeat step now runs the public
   walkthroughs ×5 with `--retries=0`, gated by `--require-spec a11y-auth-pages`, and is added to the final gate. With
   retries off a flake fails the step, so this will tell a real focus-order defect from a one-off.
-- No failure anywhere was hidden by a retry, a skipped assertion or a raised timeout.
+- [x] **The one remaining flake is now repeated too, because it is the journey the beta rests on.** On `a34fd6f8` the
+  authenticated suite's single flake was `student-exam-session.spec.ts` — "student code+PIN sign-in reaches the
+  dashboard, starts a timed exam, autosaves, and resumes after refresh" (attempts: 2). A retry-pass is not adequate
+  evidence for the exact path both children will take, so a `student exam journey ×5, retries 0` step now runs it five
+  times with retries off, gated by `--require-spec student-exam-session`, and joins the final gate. **Its first result
+  is pending** on the run for the final SHA; until that lands, this journey's status is "passes, but observed flaky
+  once and not yet proved stable".
+- No failure anywhere was hidden by a retry, a skipped assertion or a raised timeout. Both flakes were identified by
+  name and each one was either disproved by repetition or put under repetition.
 
 ## 4. Content: verification done, approval outstanding
 
@@ -120,18 +152,40 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   production signal on older Vercel builds, so a production deployment with the flag set could have served unapproved
   content. Both are now refused, with a test for each.
 
-### Open content findings for the owner review (10 items of 78)
+### Open content findings for the owner review (4 items of 78)
 
 Derived from the question objects by `src/server/family-beta-review-findings.ts` and pinned by a test, so the list
 cannot drift from the content. None is a wrong answer key.
 
 | Item | Finding | What it means |
 | --- | --- | --- |
-| Y5 Q8, Q16, Q23, Q26, Q32, Q42 | `CHART-ALT-NO-DATA` | **Accessibility.** `BarChartRenderer`, `LineGraphRenderer` and `PieChartRenderer` mark every bar, point and segment `aria-hidden="true"` and expose only `altText`; there is no data table. These six have generic alt text ("clearly varying values across four points") that names none of the plotted values, so **a screen-reader user cannot answer them at all**. Sighted use is unaffected. Note the genuine tension: for Q8 and Q42 ("lowest value"), putting the values in alt text would give the answer away — the real fix is an accessible data table, which is a design change beyond this candidate. |
 | Y5 Q20 | `NUMBERLINE-OFF-GRID` | `NumberLineRenderer` draws ticks at `min + n × step` (2.0, 2.4, 2.8, …) but the highlighted values are 2.2, 2.6, 3.0, 3.4, so every marker renders **between** ticks and cannot be read off the scale. The prompt states the pattern, so the item is still answerable from text. Y5 Q13 and Q28 are correctly aligned. |
 | Y3 Q26 | `UNIT-NOT-CUED` | Key is `105` with unit `cents`, but the prompt only says "How much do they cost altogether?" — a child answering `1.05` is marked wrong. |
 | Y5 Q36 | `UNIT-NOT-CUED` | Key is `1250 mL`; the prompt says "How many millilitres" — borderline, included for completeness. |
 | Y5 Q33 | `UNIT-AMBIGUOUS` | "Convert 2,750 millilitres to litres" with key `2.75` and no unit stated for the answer. |
+
+### Correction: the chart-accessibility finding was wrong, and the real gap is fixed
+
+An earlier revision of this document reported **six** Year 5 items (Q8, Q16, Q23, Q26, Q32, Q42) as unanswerable with a
+screen reader, on the basis that the chart renderers mark every data mark `aria-hidden` and expose only `altText`, and
+that those six have generic alt text naming none of their plotted values. That reasoning was checked against
+`BarChartRenderer` and then assumed to hold for the other two. It did not:
+
+- `LineGraphRenderer` already renders an `sr-only` `<ul>` listing every point's label, x and y. **Q8, Q16, Q26 and Q42
+  (line graphs) were never inaccessible.**
+- `PieChartRenderer` already exposes each segment's label, value and percentage in a visible legend. **Q32 was never
+  inaccessible.**
+- `BarChartRenderer` was the genuine gap — the only chart renderer with no accessible data equivalent. That affected
+  **Q23**, and any other bar-chart item whose alt text happens not to recite its values.
+
+`BarChartRenderer` now carries the same `sr-only` list as `LineGraphRenderer`, with two tests
+(`src/tests/components/visual-renderers.test.tsx`). That resolves the issue for every bar chart in the application
+rather than for this beta's one item, so **no beta item carries an accessibility finding**, and the finding type has
+been removed from the findings module rather than left in with no members. The list states the data, not the answer —
+the same line the other two renderers already drew.
+
+Residual, for the record: a chart's data reaches assistive technology as a list, not as a `<table>` with headers.
+That is weaker than a true data table but is the repo's existing, consistent pattern and is not a beta blocker.
 
 Also worth an owner decision, not defects: mark weighting is inconsistent for the same skill (Y5 Q8/Q42 "read the
 lowest value" are 2 marks while Q16/Q26 "find the maximum" are 1; "Identifying equivalent fractions" is 1 and 2;
@@ -167,11 +221,11 @@ What each listed beta-impacting area rests on, and where the evidence is. "Local
 | Legacy RPC exposure | Migration `20261031090100` + `tests/rls/exam-write-lockdown.test.ts`. **Not applied on DEV (M3).** |
 | Parent/child, sibling, cross-family authorisation | `tests/rls/*` RLS suite, green on Linux. Hosted two-family check BLOCKED (F1). |
 | Exam creation, autosave, resume, submission, durable results | `exam-session-create-route`, `exam-submit-route`, resume reconciliation; PR #88's durable per-question submissions. Hosted journey BLOCKED (F2). |
-| Duplicate requests, interrupted connections | Idempotency covered in `exam-submit-route.test.ts` (409 path) and `apply-subscription-event.test.ts`. |
-| Client-supplied score manipulation | Server-authoritative scoring; `tests/rls/exam-attempts.test.ts`, `assessment-session-responses.test.ts`, `scoring-module-boundary.test.ts`. |
+| Duplicate requests, interrupted connections | `exam-submit-route.test.ts` ("MM-SEC-02 idempotent submission") covers both the fast-path 409 when a pre-check finds an existing attempt and the 409-not-500 when the insert loses the TOCTOU race with a 23505 unique violation; `apply-subscription-event.test.ts` covers replay on the billing side. |
+| Client-supplied score manipulation | Server-authoritative scoring, plus `scoring-module-boundary.test.ts`, which is a structural guard rather than a behavioural one: it asserts that the exam-write module **exposes no function taking a caller-supplied result or question list from a request**, that no `src` file outside tests calls the legacy `create_exam_session`/`record_exam_attempt` (only the `_for` functions through the writer), that both boundary modules are server-only and re-exported from no barrel, and that they log nothing. Behavioural coverage in `tests/rls/exam-attempts.test.ts` and `assessment-session-responses.test.ts`. |
 | Answer-key leakage; draft/unapproved content access | §4: no leakage on all 78; papers fail-closed and unimported by any family route; gate now refuses both production markers. |
 | **Student PIN abuse protection** | **Bounded, and weaker than it looks in isolation.** A student signs in with `signInWithPassword(alias, pin)` where the PIN is only 6 digits — there is **no application-level lockout or attempt counter**. What actually protects it is that the alias email is derived from an 8-character, ~40-bit secret login code (`student-alias.ts`), which is never stored as a mapping, so an attacker must guess the code *and* the PIN; plus Supabase's `sign_in_sign_ups` throttle, set locally to 30 per 5 minutes per IP. **The hosted DEV throttle was never read (A5), and local `config.toml` values do not apply to a hosted project.** Defensible for a private family beta; read A5 before any wider use. Minor, non-blocking: both generators use `byte % n` (31-char alphabet, 10 digits), a small modulo bias costing a fraction of a bit — not worth churning the auth path before the beta. |
-| Accessibility, loading states, keyboard operation, tablet layout | Keyboard walkthroughs ×5 retries-0 on the authenticated side (5/5) and now repeated on the public side too (§3); interactive renderers tested at desktop and tablet viewports. **Open defect: six Year 5 items are unanswerable with a screen reader (§4).** |
+| Accessibility, loading states, keyboard operation, tablet layout | Keyboard walkthroughs ×5 retries-0 on the authenticated side (5/5) and now repeated on the public side too (§3); interactive renderers tested at desktop and tablet viewports. One real defect found and **fixed**: `BarChartRenderer` was the only chart renderer exposing no accessible data equivalent (§4 correction). No beta item now carries an accessibility finding. |
 | Sensitive logging and operational support | Target decisions carry enumerated reason codes only, never the URL or password (`target.ts`); CI artifacts redact JWTs and token/code query parameters. |
 
 ## 5. Vercel / Preview isolation
@@ -281,6 +335,31 @@ every later step depends on it. Do not reorder: M3 breaks the previous applicati
 - [x] R6 **Review-flag teardown:** delete the branch-scoped `FAMILY_BETA_FIXED_PAPERS_PREVIEW` variable (id
   `Q1qdssAxhMfNJeb3`) when the content review is finished.
 
+## 7b. Sign-in instructions for the family (template — not yet issuable)
+
+The mechanism is settled and tested; only the values are missing, because creating the DEV families needs the hosted
+access that §0 blocks. **Do not send anything from here until §0 and §4's owner gate are closed.** No family member has
+been invited and no message has been sent.
+
+**Parent.** Go to `<DEV URL>/sign-in`, enter the parent email address and the password set at sign-up. First sign-up
+requires confirming the emailed link; a parent who forgets the password uses "Forgot password" on the same page, which
+sends a recovery link valid for one use.
+
+**Each child.** Go to `<DEV URL>/student-sign-in`. There is **no email field**. Enter:
+- the **login code** — 8 characters, shown to the parent as `XXXX-XXXX`, from the parent dashboard's Add-child card;
+- the **PIN** — exactly 6 digits, issued with the code.
+
+The code and PIN are the whole credential, so they are what must be handed over privately (a card, not a message
+thread). The code is not recoverable from the application if lost: the parent re-issues the child from the dashboard.
+
+**Shared-device switching, stated precisely so it is not confused with the other switcher.** The parent dashboard has a
+child selector (`ChildSelector`), but it only chooses *whose results the parent is looking at* — it does not change who
+is signed in. To move the session from one child to the other on a shared tablet, the first child must sign out and the
+second must sign in with their own code and PIN. There is no fast-user-switch.
+
+Values still to be generated, in this order, once unblocked: two synthetic DEV families (one with two children) for
+§6's F1/F2, then the real family's parent account and two children. **Not done.**
+
 ## 8. Known open items not fixed by this candidate
 
 - Direct Supabase Auth password changes by an ordinary session: provider behaviour, owner decision (A4).
@@ -288,7 +367,7 @@ every later step depends on it. Do not reorder: M3 breaks the previous applicati
   cancelled, and a session holder can call Supabase Auth's update-user API directly.
 - `scripts/migrations/verify.ts` requires verified TLS against an operator CA for any non-loopback database; the real
   hosted chain stays unverified until M0 runs.
-- Charts have no accessible data table (§4). Six Year 5 items are unanswerable without sight.
+- A chart's data reaches assistive technology as a list, not a `<table>` with headers (§4 correction) — the repo's existing pattern, weaker than a true data table, not a beta blocker.
 - No partial credit anywhere (§4), on 2-mark items included.
 - The content packet zip could not be hash-verified (§4).
 - Whether the Windows 10 s socket stalls also affect `origin/dev` on that host was not tested.

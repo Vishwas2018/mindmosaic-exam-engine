@@ -115,7 +115,7 @@ Legend for `Findings`: see `docs/runbooks/family-beta-rollout-checklist.md` §4.
 | 5 | ☐ | matching | 1 | Match each time of day to the temperature shown on the graph. | 9 am=15 °C; 12 pm=24 °C; 3 pm=21 °C | — |
 | 6 | ☐ | number_entry | 1 | A school hall has 24 rows of chairs. Each row contains exactly 16 chairs. How many chairs are in the hall altogether? | 384 chairs | — |
 | 7 | ☐ | multiple_select | 1 | Select all the days when more than 20 millimetres of rain fell. | Tuesday, Thursday | — |
-| 8 | ☐ | number_entry | 2 | The line graph below shows the height, in centimetres, of a seedling measured every week. What is the lowest value recorded on the graph? | 3 | CHART-ALT-NO-DATA |
+| 8 | ☐ | number_entry | 2 | The line graph below shows the height, in centimetres, of a seedling measured every week. What is the lowest value recorded on the graph? | 3 | — |
 | 9 | ☐ | number_entry | 1 | Liam is saving for a bicycle that costs $210. He already has $66 in his savings account. If he saves $12 each week from his pocket money, how many more weeks will it take to reach his target? | 12 weeks | — |
 | 10 | ☐ | multiple_choice | 1 | Which lunchtime activity was chosen by exactly one quarter of the students? | Art | — |
 | 11 | ☐ | fill_blank | 2 | Complete the sentence about this rectangle. | perimeter=26; area=40 | — |
@@ -123,23 +123,23 @@ Legend for `Findings`: see `docs/runbooks/family-beta-rollout-checklist.md` §4.
 | 13 | ☐ | number_entry | 1 | The number line below highlights the values 4.5, 5, 5.5, 6, evenly spaced apart. Following the same pattern, what value would be highlighted next? | 6.5 | — |
 | 14 | ☐ | number_entry | 1 | A number was divided by 7 and then multiplied by 7, resulting in 98. What was the starting number? | 98 | — |
 | 15 | ☐ | matching | 2 | Match each fraction on the left to the equivalent fraction on the right that describes exactly the same amount, even though the numbers look quite different. | 5/12=10/24; 3/8=9/24; 1/9=4/36; 2/11=6/33 | — |
-| 16 | ☐ | multiple_choice | 1 | The line graph below shows the number of birds counted at a wetland across four surveys. In which survey was the highest value recorded? | Survey 3 | CHART-ALT-NO-DATA |
+| 16 | ☐ | multiple_choice | 1 | The line graph below shows the number of birds counted at a wetland across four surveys. In which survey was the highest value recorded? | Survey 3 | — |
 | 17 | ☐ | multiple_choice | 1 | Calculate: 7/8 - 1/4. Which answer represents the difference? | 5/8 | — |
 | 18 | ☐ | multiple_choice | 1 | A jug contained 1 1/2 litres of juice. After Sam drank 3/4 of a litre, how much juice remained in the jug? | 3/4 L | — |
 | 19 | ☐ | multiple_select | 1 | A recipe requires an ingredient to weigh less than 4.5 kilograms. Select every recorded weight below that meets this requirement. | 4.2, 3.9 | — |
 | 20 | ☐ | number_entry | 1 | The number line below highlights the values 2.2, 2.6, 3, 3.4, evenly spaced apart. Following the same pattern, what value would be highlighted next? | 3.8 | NUMBERLINE-OFF-GRID |
 | 21 | ☐ | number_entry | 1 | If 18 × 15 = 270, what is 270 ÷ 18? | 15 | — |
 | 22 | ☐ | multiple_choice | 1 | When a triangle is translated 5 cm to the left, which statement is TRUE? | Its size and shape remain congruent | — |
-| 23 | ☐ | number_entry | 1 | The bar chart below shows the number of cans collected by four classes for a recycling drive. What is the combined total shown across all four categories? | 82 | CHART-ALT-NO-DATA |
+| 23 | ☐ | number_entry | 1 | The bar chart below shows the number of cans collected by four classes for a recycling drive. What is the combined total shown across all four categories? | 82 | — |
 | 24 | ☐ | number_entry | 2 | A school canteen sells each juice box for $3.00, and a student buys 8 of them and pays $30. How much change, in dollars, should the student receive? | 6 $ | — |
 | 25 | ☐ | multiple_select | 2 | A parking garage numbers every level so that each level number is a multiple of 7. Select every level number below that could be used in this garage. | 14, 21 | — |
-| 26 | ☐ | multiple_choice | 1 | The line graph below shows the water level, in centimetres, of a tank measured across four weeks. In which week was the highest value recorded? | Wk4 | CHART-ALT-NO-DATA |
+| 26 | ☐ | multiple_choice | 1 | The line graph below shows the water level, in centimetres, of a tank measured across four weeks. In which week was the highest value recorded? | Wk4 | — |
 | 27 | ☐ | matching | 1 | Match each fraction on the left to the equivalent fraction on the right that describes exactly the same amount. | 2/3=4/6; 1/4=3/12; 5/6=10/12 | — |
 | 28 | ☐ | number_entry | 1 | The number line below highlights the values 0.25, 0.5, 0.75, 1, evenly spaced apart. Following the same pattern, what value would be highlighted next? | 1.25 | — |
 | 29 | ☐ | true_false | 1 | True or false? This triangle is a right-angled triangle. | True | — |
 | 30 | ☐ | fill_blank | 1 | The bar model has 6 equal parts, and 2 of them are shaded. Complete the sentence: ___ parts are in the model altogether. | count=6 | — |
 | 31 | ☐ | dropdown | 1 | Use the table of pool visitors to answer both parts. | busiest-day=Wednesday; difference=45 | — |
-| 32 | ☐ | multiple_choice | 2 | The pie chart below shows the favourite sports of 80 students surveyed at assembly. Which category has the largest share? | Netball | CHART-ALT-NO-DATA |
+| 32 | ☐ | multiple_choice | 2 | The pie chart below shows the favourite sports of 80 students surveyed at assembly. Which category has the largest share? | Netball | — |
 | 33 | ☐ | number_entry | 1 | Convert 2,750 millilitres to litres. | 2.75 | UNIT-AMBIGUOUS |
 | 34 | ☐ | number_entry | 1 | Solve for x: 3 × (x + 5) = 36. | 7 | — |
 | 35 | ☐ | label_diagram | 1 | Label each angle in the picture with its correct type. | Right angle=Left angle; Acute angle=Middle angle; Obtuse angle=Right angle position | — |
@@ -149,7 +149,7 @@ Legend for `Findings`: see `docs/runbooks/family-beta-rollout-checklist.md` §4.
 | 39 | ☐ | multiple_choice | 1 | Which point is at position (3, 4)? | P | — |
 | 40 | ☐ | multiple_choice | 1 | A fair spinner has a theoretical probability of 1/4 for landing on Red. If the spinner is spun 200 times, how many times would you EXPECT it to land on Red? | 50 | — |
 | 41 | ☐ | number_entry | 1 | How many vertices does a triangular prism have? | 6 | — |
-| 42 | ☐ | number_entry | 2 | The line graph below shows the number of downloads of a school app recorded over five days. What is the lowest value recorded on the graph? | 60 | CHART-ALT-NO-DATA |
+| 42 | ☐ | number_entry | 2 | The line graph below shows the number of downloads of a school app recorded over five days. What is the lowest value recorded on the graph? | 60 | — |
 
 <details><summary>Pinned ids and hashes for this paper</summary>
 

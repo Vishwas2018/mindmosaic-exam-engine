@@ -13,20 +13,26 @@ import type { AuthoringQuestion } from "@/features/exam-engine/types";
  * Nothing here records or implies approval.
  */
 
-export type FindingKind =
-  | "CHART-ALT-NO-DATA"
-  | "NUMBERLINE-OFF-GRID"
-  | "UNIT-NOT-CUED"
-  | "UNIT-AMBIGUOUS";
+export type FindingKind = "NUMBERLINE-OFF-GRID" | "UNIT-NOT-CUED" | "UNIT-AMBIGUOUS";
 
 export interface ReviewFinding {
   readonly kind: FindingKind;
   readonly detail: string;
 }
 
+/*
+ * There is deliberately no chart-accessibility finding here any more.
+ *
+ * An earlier version of this file flagged six Year 5 items whose chart altText
+ * recites none of its plotted values, on the belief that altText was the only
+ * accessible description. That was true of only one of the three chart
+ * renderers: LineGraphRenderer already carries an sr-only list of every point,
+ * and PieChartRenderer exposes label, value and percentage through a visible
+ * legend, so the line-graph and pie items were never inaccessible.
+ * BarChartRenderer was the real gap, and it now carries the same sr-only list,
+ * which closes the issue for every bar item rather than for the beta's one.
+ */
 export const FINDING_EXPLANATIONS: Readonly<Record<FindingKind, string>> = Object.freeze({
-  "CHART-ALT-NO-DATA":
-    "The chart renderers mark every bar, point and segment aria-hidden and expose only altText, so a screen-reader user receives no plotted values. For these items the values are not in the altText and are not recoverable from the prompt, so the question cannot be answered without sight. Sighted use is unaffected.",
   "NUMBERLINE-OFF-GRID":
     "NumberLineRenderer draws ticks at min + n x step and positions highlights by value, so highlights whose value is not on that grid render between ticks and cannot be read off the scale.",
   "UNIT-NOT-CUED":
@@ -35,41 +41,8 @@ export const FINDING_EXPLANATIONS: Readonly<Record<FindingKind, string>> = Objec
     "Units appear in the prompt but the prompt does not state which unit the answer must be written in.",
 });
 
-/** Charts whose data marks are aria-hidden, leaving altText as the only accessible description. */
-const ARIA_HIDDEN_CHART_TYPES: ReadonlySet<string> = new Set([
-  "bar_chart",
-  "line_graph",
-  "pie_chart",
-]);
-
 const UNIT_WORDS =
   /\b(cents?|dollars?|metres?|centimetres?|millilitres?|litres?|minutes?|chairs?|weeks?)\b/i;
-
-function plottedValues(visual: { type: string; data: Record<string, unknown> }): number[] {
-  const data = visual.data as {
-    values?: number[];
-    points?: { y: number }[];
-    segments?: { value: number }[];
-  };
-  if (visual.type === "bar_chart") return data.values ?? [];
-  if (visual.type === "line_graph") return (data.points ?? []).map((p) => p.y);
-  if (visual.type === "pie_chart") return (data.segments ?? []).map((s) => s.value);
-  return [];
-}
-
-/**
- * Whether the question is answerable without seeing the chart: either the
- * altText carries every plotted value, or the prompt already states the
- * structure the question turns on (for example "split into four equal parts").
- */
-function chartDataIsAccessible(altText: string, prompt: string, values: number[]): boolean {
-  const tokens = new Set((altText.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number));
-  if (values.every((v) => tokens.has(v))) return true;
-  // All segments equal and the prompt says so: the plotted magnitudes are not needed.
-  const allEqual = values.every((v) => v === values[0]);
-  if (allEqual && /\bequal (parts|segments|sections)\b/i.test(prompt)) return true;
-  return false;
-}
 
 export function findingsForQuestion(question: AuthoringQuestion): readonly ReviewFinding[] {
   const q = question as unknown as {
@@ -99,15 +72,6 @@ export function findingsForQuestion(question: AuthoringQuestion): readonly Revie
       }
     }
 
-    if (ARIA_HIDDEN_CHART_TYPES.has(visual.type)) {
-      const values = plottedValues(visual);
-      if (values.length > 0 && !chartDataIsAccessible(visual.altText ?? "", prompt, values)) {
-        findings.push({
-          kind: "CHART-ALT-NO-DATA",
-          detail: `${visual.type} plots ${values.join(", ")}; altText states none of them.`,
-        });
-      }
-    }
   }
 
   if (q.answerKey?.kind === "number") {
