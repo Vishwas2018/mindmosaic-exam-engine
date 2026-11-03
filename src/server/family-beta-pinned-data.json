@@ -1,0 +1,552 @@
+{
+  "year3": [
+    {
+      "slot": 1,
+      "id": "naplan-y3-numeracy-dc-002",
+      "canonicalSha256": "a4a58320a06aaee029a9882165d8c532f15a8bdffb7e78ccb09e2eadea9dfb4c",
+      "type": "ordering",
+      "marks": 1
+    },
+    {
+      "slot": 2,
+      "id": "naplan-y3-numeracy-e2-003",
+      "canonicalSha256": "0d06b3241334a31381489d822d92c003e9ab8491f0563bf69b6a761b7eaf79d5",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 3,
+      "id": "naplan-y3-numeracy-dc-014",
+      "canonicalSha256": "fdac6b2203e1988d88cf53e1277f4c44a86be8c3a5933861e4d6c72b2fdd740e",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 4,
+      "id": "man-aaccbac5e4fcb44ed03ec8a0",
+      "canonicalSha256": "ec99eced67bb7f8dd7278405f2c6b1922890adf388c6aa3e5629549e4715237d",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 5,
+      "id": "naplan-y3-numeracy-db-011",
+      "canonicalSha256": "f7e6712f6c83a96f4b83f3ce30892c7b84f260251ca5ee65244b445f89eb2431",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 6,
+      "id": "man-4270f3f22eda84adf5c4c6ec",
+      "canonicalSha256": "80e16065c3a27bf7b7c91c03b1d84dbca043b29e86ccf94e0147abb0e513c75b",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 7,
+      "id": "g3-nap-num-geo-001",
+      "canonicalSha256": "ebd5fa7cfdda348311b23e0a2b71213dfb45ca4ed99f4cd292c3a8ff26dd3ee5",
+      "type": "true_false",
+      "marks": 1
+    },
+    {
+      "slot": 8,
+      "id": "naplan-y3-numeracy-dc-007",
+      "canonicalSha256": "bc6968eec3f969ce0cd4143f919cf1d8aaa437217ccc03eee0f2cf42de17ce5d",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 9,
+      "id": "man-10ff8545e5a15d34b712482d",
+      "canonicalSha256": "4500490d16e319b59a983150bcd3a0a46d8702b218a4c4141d6d4d38f441c4f5",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 10,
+      "id": "naplan-y3-numeracy-e1-013",
+      "canonicalSha256": "7c75fe732f40756e7f8fe7f69bdd171eb6a60fe1dcf4e5bb935427dce0d2e800",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 11,
+      "id": "naplan-y3-numeracy-dc-008",
+      "canonicalSha256": "1868f25bdac10d0d2047452ff36a98cc8a02f94109960f4587aa5f24397242ec",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 12,
+      "id": "man-3ceeafa77022f47d2e1c24ac",
+      "canonicalSha256": "0c2c8f8bded0f849a8239f13595ae15109e375c56360dbe3c59431f1d9de542a",
+      "type": "multiple_select",
+      "marks": 1
+    },
+    {
+      "slot": 13,
+      "id": "naplan-y3-numeracy-db-013",
+      "canonicalSha256": "51dd8ef8e3a61725f5be0bb38dbf6e7d39acecc71a747ce56747c7ba065e0bb3",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 14,
+      "id": "naplan-y3-numeracy-e2-010",
+      "canonicalSha256": "84389a2163bf292e4b33764dbb3eb1f95a63474f0e04b89828a5c531454d708b",
+      "type": "true_false",
+      "marks": 1
+    },
+    {
+      "slot": 15,
+      "id": "naplan-y3-numeracy-e2-013",
+      "canonicalSha256": "66761de4f57ff2838f0502595b5414e7225ddd3699198bf508b9e7fa14cbce7b",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 16,
+      "id": "man-9cd53ea0e267ec418a6ff3d3",
+      "canonicalSha256": "83eff5cac4cf855b079bf07d1f7755696acb6c5e4a442fc4872823d01bb94e71",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 17,
+      "id": "naplan-y3-numeracy-e1-012",
+      "canonicalSha256": "e38cc6d93f8e2def603020bbe1dd28eaf263bde7244ebbe6b6d89a979924a5bd",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 18,
+      "id": "man-2cd75d1a5850e5c72d31cebf",
+      "canonicalSha256": "9b4fe40b25f0c570760ff029c1f8437537c7567f95aff8614a380fb53ac7d6e1",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 19,
+      "id": "g3-nap-num-frac-001",
+      "canonicalSha256": "8da75fc6f4c622978ba1ad155cc2e9247b82865f8a6f7d92e6da781bb95b0831",
+      "type": "fill_blank",
+      "marks": 1
+    },
+    {
+      "slot": 20,
+      "id": "g3-nap-num-geo-002",
+      "canonicalSha256": "c5c975da6c4a3e4f0d7c7d1b975a20a756c7bfb0414b5a9e545ba99ecc39be4b",
+      "type": "label_diagram",
+      "marks": 1
+    },
+    {
+      "slot": 21,
+      "id": "naplan-y3-numeracy-dc-015",
+      "canonicalSha256": "07ee784159d9022a1d0f3a9f6d9cc75ae92a08641b199640e8af9a6302331c07",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 22,
+      "id": "naplan-y3-numeracy-e2-001",
+      "canonicalSha256": "4c4920fbc18e694a700919ed6fe17731d9e1cc1848660074bd392dedeb6627c5",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 23,
+      "id": "man-e1d2a343e8c817bea07b1923",
+      "canonicalSha256": "e203ef0b156a9cfea8508307bdcd75fffc3fb1f862fb3fb9541a8f229e0ede5b",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 24,
+      "id": "naplan-y3-numeracy-e1-003",
+      "canonicalSha256": "d496fae890799c26f9eba477b05ad06724a5f2a4abe6f577880e60a99a2db3f9",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 25,
+      "id": "naplan-y3-numeracy-db-004",
+      "canonicalSha256": "cfc92ad5de35efb4642da8338006b4352bfa086dc396d0e84357b775b13fe8ee",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 26,
+      "id": "naplan-y3-numeracy-db-008",
+      "canonicalSha256": "448e95de8b5debe36fc42b0f76741294ae4b93fe7208a8ae46fdec662a9627b0",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 27,
+      "id": "man-30f6b506e9f643379eb704df",
+      "canonicalSha256": "75a69f5cf3d89463d13e58693d209e9ca2d3293f750c0a5223bb80a5c35db48c",
+      "type": "multiple_select",
+      "marks": 1
+    },
+    {
+      "slot": 28,
+      "id": "naplan-y3-numeracy-e1-008",
+      "canonicalSha256": "529c2eaa539902b1f662de2c5cd9d32f459f2779b5a8d6596d1baab8154bdea3",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 29,
+      "id": "man-139e3e1bfd42c0ee2df7fd96",
+      "canonicalSha256": "84a7d1723f7aff01f66bd47dc01eb832ec3851131f2fd12471948b49824986ce",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 30,
+      "id": "naplan-y3-numeracy-dc-001",
+      "canonicalSha256": "2ceda8b90acce3cc249a2b29e277c6d5bd18b02a546440ff5de03746b0acf05e",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 31,
+      "id": "naplan-y3-numeracy-e1-002",
+      "canonicalSha256": "3b56abac2a57cad325ed0b2d25100e288665f9cf5e0240993b065b8e0b95bd39",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 32,
+      "id": "naplan-y3-numeracy-db-014",
+      "canonicalSha256": "6c27df0ed7f8fb235d25f172481670ec9057c5d1133a51efb7db303e10089003",
+      "type": "true_false",
+      "marks": 1
+    },
+    {
+      "slot": 33,
+      "id": "man-c6c9b15a78a6ab42e2df410a",
+      "canonicalSha256": "9949d5e02ee0407d6a6b660ab60964a62f86dd18a98da6f4e3d6b87785dad424",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 34,
+      "id": "man-ba3787f651dcdda9bf4756ba",
+      "canonicalSha256": "e503f2e1cd7dac972dd25bce6dd0d1533aac86a2d229540013d18a613756db30",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 35,
+      "id": "man-04393717e49e3e95c32be851",
+      "canonicalSha256": "9fa3add0afa7d34a0a0ae26ffa5400fe466562b83ba090f4445261c81aab0b70",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 36,
+      "id": "man-7abff43f855a513778b486b5",
+      "canonicalSha256": "7b7d8b2dbd1881e0ceb8868ebe9000a7f823dea34e5e8394277bf09c88366958",
+      "type": "number_entry",
+      "marks": 1
+    }
+  ],
+  "year5": [
+    {
+      "slot": 1,
+      "id": "man-9e25e5e48c723a8fb044625f",
+      "canonicalSha256": "40c9a0a51d078b8d372b40eeb716146a552428f0a932c658a68fcb0c4382eca3",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 2,
+      "id": "man-403933661e00341ed7ccf643",
+      "canonicalSha256": "1f690974d3b4829951644a315fb0f59a08e5a10ad577df61111f83a96df9a9f8",
+      "type": "dropdown",
+      "marks": 1
+    },
+    {
+      "slot": 3,
+      "id": "man-fc5cbe3546c64e0b7c536cca",
+      "canonicalSha256": "2a86e02063f4917e3af503c724807dbcdecafec4713f6efd124d7ea96411bf6b",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 4,
+      "id": "man-bdd996eef2aca936e03b0bb8",
+      "canonicalSha256": "449108c6af4b9c56018ec41d68c12e5106823b766aa439648fdb02451599c5d1",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 5,
+      "id": "g5-nap-num-data-005",
+      "canonicalSha256": "434a9a52359a326ecb2c1b7e952919624bca904982fdfc08babeace9e4aa85f4",
+      "type": "matching",
+      "marks": 1
+    },
+    {
+      "slot": 6,
+      "id": "g5-depth-vc2m5n06-001",
+      "canonicalSha256": "967718eb4913cdba0317afc01f33c519e09a86228f6abecb0571d0d67bdca287",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 7,
+      "id": "g5-nap-num-data-002",
+      "canonicalSha256": "0d3869b9387c1fb50fc948984039d9c6bd41f52d2a32b76bbf7dca20ae9f395c",
+      "type": "multiple_select",
+      "marks": 1
+    },
+    {
+      "slot": 8,
+      "id": "man-6b7ea6ed9c499b9a29d05429",
+      "canonicalSha256": "89f18a931cfc390813c507a84023bf0935b7650e589ddad34349023d2b261b01",
+      "type": "number_entry",
+      "marks": 2
+    },
+    {
+      "slot": 9,
+      "id": "g5-depth-vc2m5n09-001",
+      "canonicalSha256": "8f9379ea0d136a2f5a497905b2a0de2b3274f5965906926fa1373c2f6d3a8db7",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 10,
+      "id": "g5-nap-num-data-001",
+      "canonicalSha256": "f1acd256b3bae2f06567a446411c5a49ea349d6fdc5ec489fad8e7bfbeb97ab4",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 11,
+      "id": "g5-nap-num-measure-001",
+      "canonicalSha256": "a721e98ef69ca920453b2bda22acd8590753b997e23c3817d65338abdece255e",
+      "type": "fill_blank",
+      "marks": 2
+    },
+    {
+      "slot": 12,
+      "id": "g5-depth-vc2m5sp03-002",
+      "canonicalSha256": "67715b0e1a2a106ab33cc73436a951ba1d4d078de2a8775050de7bfba7f5aeba",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 13,
+      "id": "man-b50ac517bffe2953164921b7",
+      "canonicalSha256": "ba5498246db5538796b75af257448104fb45d0b4671bc4efcf4165ada5d45ccd",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 14,
+      "id": "man-45aa0b1c7c7257a10eaf633c",
+      "canonicalSha256": "62e362a2074f69168f77ebc9b4b30a14b9be3a2cfb86fe795cbb01be27fa8b1f",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 15,
+      "id": "man-d491915587589b05f4822f13",
+      "canonicalSha256": "618283b051c542528d1c52646803cc642be27058df64579a8880efb777834cfd",
+      "type": "matching",
+      "marks": 2
+    },
+    {
+      "slot": 16,
+      "id": "man-d104ebe1da5d55aef1a70ff7",
+      "canonicalSha256": "fcff039699f90612472a8e3f57a1ef1c12c70e4b69000b0b47312ba5b13506e4",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 17,
+      "id": "man-4fc5e33369f68d95c00b000a",
+      "canonicalSha256": "f3506d33113b795b215d797a371ce860cfdcf11dc2f61f83858545342e0c0103",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 18,
+      "id": "man-fb36f353f7800d150dd581dd",
+      "canonicalSha256": "75ec1af1c41388d0ed9778c305d695edc518dd068092378351e36d0e6b729159",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 19,
+      "id": "man-27466e3f25b791527cf7d001",
+      "canonicalSha256": "87c6ca8b84f0462051901378e03612e92b5eae9232666546357786bd87cbf9f9",
+      "type": "multiple_select",
+      "marks": 1
+    },
+    {
+      "slot": 20,
+      "id": "man-eb2d2e6d5ddfebf6c5085c6e",
+      "canonicalSha256": "8a1032d9b40e3b276d34754b5b6d806ddb9aa0be2d9e141dc97a183ce1fbf855",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 21,
+      "id": "man-af2b6d5ba6f4ef6fcd9bfe71",
+      "canonicalSha256": "cb3f15865204b0df0ca61aade5a0e00ae4bd0f1f67ed5762be1883e5ba46b1c8",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 22,
+      "id": "man-d882abfc258e6f34e8806af2",
+      "canonicalSha256": "83065870ae8f01133fe514eaaf0729df1848d443fdb4fa23083a3670a2cd19b7",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 23,
+      "id": "man-410cc1f2c7db50b1cdd5fdfe",
+      "canonicalSha256": "b4463c215a61e582bf6024e2d66091e998618db737d5a998dce5ace19de37827",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 24,
+      "id": "man-2e619aada91e92bdcdc527b8",
+      "canonicalSha256": "fcab80c23826d1a40af77e5f1105ca80f3c665b091f1ed5a4795ab52eb860938",
+      "type": "number_entry",
+      "marks": 2
+    },
+    {
+      "slot": 25,
+      "id": "man-36f0cdbf782ea13346cef9c1",
+      "canonicalSha256": "112baa85b2142343897d47c87e0ed884ba3413bdaa93700f857aeba057d0e1f4",
+      "type": "multiple_select",
+      "marks": 2
+    },
+    {
+      "slot": 26,
+      "id": "man-42ea2b3403c5329cb9159297",
+      "canonicalSha256": "8faadf85ae0d8344fb48f0c6adf7719c4c0cd603f5416e0bee43bbe5f0da10bc",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 27,
+      "id": "man-6f6b3b1658d356c8cacee404",
+      "canonicalSha256": "0e731096e3ba99c087574b50d58f86ae5e03fd89cccf89a071cfd030a6300fbd",
+      "type": "matching",
+      "marks": 1
+    },
+    {
+      "slot": 28,
+      "id": "man-cc7d3585b70a378fa41e3ccc",
+      "canonicalSha256": "221786bda56472d9b3ed8ef8cf3f92753152922d48f498f62dabf3b35c0c230d",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 29,
+      "id": "g5-nap-num-geo-001",
+      "canonicalSha256": "812a9e0a0fe1057e925602f77bbb3dab626ef201935c4d4e8e6d9bd9e5d2aac5",
+      "type": "true_false",
+      "marks": 1
+    },
+    {
+      "slot": 30,
+      "id": "man-544d2533ffb571a742b0c691",
+      "canonicalSha256": "b05c6cba6ce8b25e4f187429f8e38d8aa54757d99fa3b0dc9341057105cd8b36",
+      "type": "fill_blank",
+      "marks": 1
+    },
+    {
+      "slot": 31,
+      "id": "g5-nap-num-data-004",
+      "canonicalSha256": "c45eee4d931db299d0d58b5c81a6bd324187f04d27fb0bf0d091ddacf15985dd",
+      "type": "dropdown",
+      "marks": 1
+    },
+    {
+      "slot": 32,
+      "id": "man-ba8de1a01ec0864b80a39d29",
+      "canonicalSha256": "e5566327e4133090b7dc89b1e6c20c546c99cc721bd59401c4068c795810c7d3",
+      "type": "multiple_choice",
+      "marks": 2
+    },
+    {
+      "slot": 33,
+      "id": "man-015da9479b9eb0a99afb4eb3",
+      "canonicalSha256": "07654434a18ddecd0fb10472932185bbaa96f49a55e62cdd04e00dee06744316",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 34,
+      "id": "man-2acd9511c6ba59d908f08f6a",
+      "canonicalSha256": "f90433f331d5186547b4cf2c3d98bba378b3e6a539577d8c14623fc281549b42",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 35,
+      "id": "g5-nap-num-geo-002",
+      "canonicalSha256": "ed905492f66b32429543cfc0846e990d97528065a30e8ce2a265a57d7fd8a581",
+      "type": "label_diagram",
+      "marks": 1
+    },
+    {
+      "slot": 36,
+      "id": "g5-depth-vc2m5m01-001",
+      "canonicalSha256": "5c96a62732b4dc2b465a89f3deb0711edee9d4f736f10ca62518b86599033ddb",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 37,
+      "id": "g5-nap-num-money-001",
+      "canonicalSha256": "cd33ed630a7279dbccdc767385567c67239a1a1910276dfcd29a126f3c874e7a",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 38,
+      "id": "man-95b65194339d9d0211b729d7",
+      "canonicalSha256": "02846a64467da182e9c286f6f2cc8146ed38f173a5f6acc363f4df5a63d15deb",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 39,
+      "id": "g5-nap-num-space-001",
+      "canonicalSha256": "53959092145d262d39b6d6cc5d2d0371dd3eca359c7e23074b0bb65999e2670d",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 40,
+      "id": "man-958d08f6313e889ba4179629",
+      "canonicalSha256": "8dad118bfe6ffd962b063295ad9c3e51f3447fa42c94d3bb4fadd43ba1a3cc11",
+      "type": "multiple_choice",
+      "marks": 1
+    },
+    {
+      "slot": 41,
+      "id": "man-9528292bc5d68a056e55b9db",
+      "canonicalSha256": "c126478e81e93ddc5958b6f0dccade0a760c9e2674997d73f948c5c88bc2aa63",
+      "type": "number_entry",
+      "marks": 1
+    },
+    {
+      "slot": 42,
+      "id": "man-138457839d5cfa78f7be4de6",
+      "canonicalSha256": "cbab34d62acdbdded11116158ced94b47d0c68b2f21b92123e4f493e3ac5b8a4",
+      "type": "number_entry",
+      "marks": 2
+    }
+  ]
+}
