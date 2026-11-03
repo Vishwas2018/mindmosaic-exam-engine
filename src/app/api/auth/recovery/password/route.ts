@@ -12,6 +12,7 @@ import {
   RECOVERY_CSRF_HEADER,
   RECOVERY_GRANT_COOKIE,
 } from "@/server/auth/recovery-grant";
+import { claimRecoveryGrant, settleRecoveryGrant } from "@/server/auth/recovery-claim";
 import { clearGrantCookie, noStore, resolveLiveSession } from "@/server/auth/recovery-session";
 
 /**
@@ -23,11 +24,16 @@ import { clearGrantCookie, noStore, resolveLiveSession } from "@/server/auth/rec
  *   3. a recovery grant cookie that verifies (signature, expiry) AND is bound to that exact user and session — so a
  *      forged, expired, replayed or other-account grant is refused;
  *   4. the grant's CSRF token in the `x-mm-recovery-csrf` header;
- *   5. a password that meets the policy.
- * On success it changes the password, revokes EVERY session of the user (global sign-out: this one and the ones on
- * other devices), and clears the grant. The grant is therefore single-use: it was bound to a session that no longer
- * exists. (The Auth service itself also ends the user's OTHER sessions on a password change; the explicit sign-out
- * does not rely on that, and is the part that ends THIS session.)
+ *   5. a password that meets the policy;
+ *   6. an atomic CLAIM of the grant in the database (src/server/auth/recovery-claim.ts), so of any number of concurrent
+ *      requests with the same grant exactly one proceeds ('busy' 409 for the rest) and a used grant is 'spent' (403).
+ * Then it changes the password. On success the grant is marked spent in the database (the real single-use control, not
+ * the cookie), every session of the user is revoked (global sign-out: this one and the ones on other devices) and the
+ * browser's cookie is cleared (hygiene only). On a failed password change the claim is RELEASED so the same grant can
+ * try again, and a crash between claim and outcome is covered by a 2-minute lease: a transient failure never locks the
+ * user out. If the claim cannot be made at all (migration absent, database error) the answer is 503 and nothing changed.
+ * (The Auth service itself also ends the user's OTHER sessions on a password change; the explicit sign-out does not
+ * rely on that, and is the part that ends THIS session.)
  *
  * SCOPE OF THIS PROTECTION. It guards this application's reset path. It cannot stop a session holder calling Supabase
  * Auth's own update-user API directly; see src/server/auth/recovery-grant.ts.
@@ -58,17 +64,37 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!parsed.success) return refuse("invalid_request", 400);
   if (!evaluatePassword(parsed.data.password).allMet) return refuse("password_too_weak", 400);
 
-  const { error } = await supabase.auth.updateUser({ password: parsed.data.password });
-  if (error) {
-    /* The grant stays valid so the user can try another password. 422 is GoTrue's "same password" / weak password. */
-    return refuse(error.status === 422 ? "password_rejected" : "update_failed", error.status === 422 ? 400 : 502);
+  /* CLAIM the grant atomically in the database before anything irreversible. Exactly one of any number of concurrent
+     requests gets it. Nothing has changed if this fails, so every non-'claimed' answer is safe to retry or abandon. */
+  const claim = await claimRecoveryGrant(supabase, grant.jti, grant.expiresAt);
+  if (claim === "unavailable") return refuse("recovery_unavailable", 503);
+  if (claim === "busy") return refuse("grant_in_use", 409);
+  if (claim === "spent") return refuse("recovery_required", 403, "spent");
+
+  let updateError: { status?: number } | null = null;
+  try {
+    ({ error: updateError } = await supabase.auth.updateUser({ password: parsed.data.password }));
+  } catch {
+    updateError = {};
+  }
+  if (updateError) {
+    /* The password was not changed. RELEASE the claim so the same grant can be used to try again (422 is GoTrue's
+       "same password" / weak password). If the release itself fails the lease lapses on its own in 2 minutes: the user
+       is never permanently locked out by a transient failure. */
+    await settleRecoveryGrant(supabase, grant.jti, "released");
+    return refuse(updateError.status === 422 ? "password_rejected" : "update_failed", updateError.status === 422 ? 400 : 502);
   }
 
-  /* The password is changed. Revoke every session of this user, this one included: that is what spends the grant.
-     One retry, because a transient failure here would leave the grant usable; a persistent one is reported, never hidden. */
+  /* The password is changed: the grant is now spent, for good, in the database. This must happen while the session is
+     still alive (the sign-out below ends it). */
+  const grantSpent = await settleRecoveryGrant(supabase, grant.jti, "spent");
+
+  /* Then revoke every session of this user, this one included. One retry, because a transient failure here would leave
+     the session usable; a persistent one is reported, never hidden. With the grant spent in the database a failed
+     sign-out no longer leaves the GRANT replayable, only the already-authenticated session alive. */
   let { error: signOutError } = await supabase.auth.signOut({ scope: "global" });
   if (signOutError) ({ error: signOutError } = await supabase.auth.signOut({ scope: "global" }));
-  const response = noStore({ ok: true, otherSessionsRevoked: !signOutError });
+  const response = noStore({ ok: true, otherSessionsRevoked: !signOutError, grantSpent });
   clearGrantCookie(response, request);
   return response;
 }

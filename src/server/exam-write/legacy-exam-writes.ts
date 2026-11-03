@@ -1,8 +1,9 @@
 import "server-only";
 
-import { Client } from "pg";
+import { Client, type ClientConfig } from "pg";
 
 import { checkConnectedRole, decideExamWriteTarget, type ConnectedRole } from "./target";
+import { decideHostedTls, hostedClientConfig } from "./tls";
 
 /**
  * THE LEGACY EXAM WRITE MODULE (ADR-005 interim; the P1 assessment-integrity fix).
@@ -122,13 +123,22 @@ async function withWriter<T>(
   if ("reason" in target) {
     return fail({ code: "not_configured", message: `Exam write target refused: ${target.reason}.` });
   }
-  /* Hosted connections are encrypted. Certificate-chain verification for Supabase's pooler needs its CA bundle, which
-     is a hosted-verification item (docs/runbooks/legacy-exam-write-lockdown.md); an sslmode in the URL overrides this. */
-  const client = new Client({
-    connectionString: target.url,
-    connectionTimeoutMillis: 8_000,
-    ...(target.hosted ? { ssl: { rejectUnauthorized: false } } : {}),
-  });
+  /* A hosted connection is built from parts with verified TLS (./tls.ts): the operator-supplied CA is the only trust
+     anchor, the hostname is checked, and nothing in the URL can switch either off. No CA, or a process-wide
+     NODE_TLS_REJECT_UNAUTHORIZED=0, is a refusal. A loopback database is local and unencrypted by design. */
+  let config: ClientConfig;
+  if (target.hosted) {
+    const tls = decideHostedTls({
+      caPem: process.env.EXAM_WRITE_DB_CA,
+      nodeRejectUnauthorized: process.env.NODE_TLS_REJECT_UNAUTHORIZED,
+      nowMs: Date.now(),
+    });
+    if (!tls.ok) return fail({ code: "not_configured", message: `Exam write target refused: ${tls.reason}.` });
+    config = hostedClientConfig(target.url, tls.ca);
+  } else {
+    config = { connectionString: target.url, connectionTimeoutMillis: 8_000 };
+  }
+  const client = new Client(config);
   /* An 'error' event with no listener on a pg Client is an uncaught exception, which in a server process is a
      crash rather than a failed request. */
   client.on("error", () => undefined);

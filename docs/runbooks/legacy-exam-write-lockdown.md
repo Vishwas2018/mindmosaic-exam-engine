@@ -49,12 +49,41 @@ opt-in or on a hosted runtime. After connecting, the role's attributes are read 
 superuser, `BYPASSRLS`, `CREATEROLE`, `CREATEDB` or `REPLICATION` refuses the write. The refusal reason is an enumerated
 code in the server's response; the URL, password and connection string are never logged or returned.
 
-Hosted TLS: connections are encrypted, but certificate-chain verification of Supabase's pooler needs its CA bundle and
-is **not** configured. Treat verified TLS as an open hosted item. Today the code sets `rejectUnauthorized: false` for hosted targets, so an
-on-path attacker could present any certificate; the password is still protected only by the network path. Before DEV
-carries real traffic, obtain Supabase's CA certificate from the project's database settings, supply it to the module
-(for example as a server-only `EXAM_WRITE_DB_CA` value) and switch to `rejectUnauthorized: true` with that CA. This is a
-code change plus an owner-supplied certificate, and has not been done.
+### Hosted TLS (verified; fails closed)
+
+A hosted connection is made only with **verified TLS** (`src/server/exam-write/tls.ts`). There is no `rejectUnauthorized: false`
+anywhere in the writer path, and a test fails if one is reintroduced.
+
+| Variable | Hosted | Local / CI |
+|---|---|---|
+| `EXAM_WRITE_DB_CA` | **required**: PEM of the CA that signs the database's certificate (one or more certificates; a single-line value with literal `
+` is accepted) | unset |
+| `NODE_TLS_REJECT_UNAUTHORIZED` | **must be unset** (a value of `0` is refused) | unset |
+
+The write is refused (`503 not_configured`, nothing connects, the reason is an enumerated code) when: `EXAM_WRITE_DB_CA` is
+missing (`tls_ca_missing`); any certificate in it fails to parse, is not a CA, is expired or not yet valid, or a private key was
+pasted in (`tls_ca_invalid`); `NODE_TLS_REJECT_UNAUTHORIZED=0` (`tls_verification_disabled`); or the URL carries any `sslmode`
+other than `verify-full` (`insecure_transport`: `disable`, `allow`, `prefer`, `require`, `verify-ca` and `no-verify` are all refused).
+
+How it works, and why: the installed driver (pg 8.22 / pg-connection-string 2.14) parses a connection string **after** the explicit
+options and lets it override them: any `sslmode` replaces `ssl` (dropping our CA), `sslmode=no-verify` switches verification off, and
+`sslrootcert`/`sslcert`/`sslkey` read files. So the URL is split into host, port, user, password and database, and the `ssl` option is
+ours alone: `rejectUnauthorized: true`, `ca` = the supplied CA only (no fallback to system roots), TLS 1.2 minimum, and
+`checkServerIdentity` pinned to the URL's host. (Measured: without the pin, for an IP host `pg` supplies no server name and Node falls
+back to checking "localhost"; the password reached a server whose certificate named only "localhost".) Real Supabase hosts are DNS names.
+
+**Obtaining the CA (owner action, not done).** Download the certificate from the project's Database settings > SSL configuration in
+the Supabase dashboard, confirm its fingerprint against the dashboard, and store it as the server-only `EXAM_WRITE_DB_CA` on the
+deployment. Not retrieved or configured by this change. The same value serves the direct and pooler hosts only if both chain to that
+CA: **verify against the actual DEV endpoint** (checklist item W3) before relying on it. Rotate it when the CA's validity ends: an
+expired CA is refused, so the writer stops (fail closed) rather than degrading.
+
+Tests: `src/tests/unit/exam-write-tls.test.ts` (pure decisions; a real `pg` client handshake against a local server using generated
+certificates: valid chain connects and sends the password, wrong CA and wrong host do not; writer-module refusals; no
+`rejectUnauthorized: false` in source). Not covered, and only checkable on DEV: that Supabase's real certificate chains to the CA you supply.
+
+Out of scope here, still open: the operator CLIs in `scripts/migrations/verify.ts` use `rejectUnauthorized: false` for non-local ledger
+checks. They are not on any request path and read/write only the migration ledger, but should receive the same treatment.
 
 ## Why two migrations
 

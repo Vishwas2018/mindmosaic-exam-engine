@@ -120,12 +120,12 @@ describe("hosted targets need a positive identity match", () => {
     for (const query of ["host=evil.example.com", "hostaddr=10.0.0.1", "user=postgres", "dbname=other", "port=1"]) {
       expect(reasonOf(hostedInput({ url: `${direct()}?${query}` })), query).toBe("unsupported_parameter");
     }
-    expect(reasonOf(hostedInput({ url: `${direct()}?sslmode=require` }))).toBe("ok");
-    expect(reasonOf(hostedInput({ url: `${pooler()}?pgbouncer=true&sslmode=require` }))).toBe("ok");
+    expect(reasonOf(hostedInput({ url: `${direct()}?sslmode=verify-full` }))).toBe("ok");
+    expect(reasonOf(hostedInput({ url: `${pooler()}?pgbouncer=true&sslmode=verify-full` }))).toBe("ok");
   });
 
-  it("rejects an sslmode that allows plaintext", () => {
-    for (const mode of ["disable", "allow", "prefer", "DISABLE"]) {
+  it("rejects every sslmode except verify-full on a hosted target", () => {
+    for (const mode of ["disable", "allow", "prefer", "DISABLE", "require", "verify-ca", "no-verify", "VERIFY-FULL"]) {
       expect(reasonOf(hostedInput({ url: `${direct()}?sslmode=${mode}` })), mode).toBe("insecure_transport");
     }
   });

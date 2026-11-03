@@ -50,7 +50,15 @@ describe("a valid grant", () => {
   it("validates for the exact user, session and user version it was issued for, and yields a CSRF token", () => {
     const grant = issued();
     const check = inspectRecoveryGrant(grant.cookieValue, BINDING, NOW + 1_000);
-    expect(check).toEqual({ ok: true, csrfToken: grant.csrfToken, expiresAt: grant.expiresAt });
+    expect(check).toEqual({
+      ok: true,
+      csrfToken: grant.csrfToken,
+      expiresAt: grant.expiresAt,
+      jti: expect.stringMatching(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/),
+    });
+    /* Each grant has its own identifier: it is the key of the server-side single-use record. */
+    const other = inspectRecoveryGrant(issued().cookieValue, BINDING, NOW);
+    expect(other.ok && check.ok && other.jti !== check.jti).toBe(true);
     expect(grant.expiresAt).toBe(Math.floor(NOW / 1000) + RECOVERY_GRANT_TTL_SECONDS);
   });
 

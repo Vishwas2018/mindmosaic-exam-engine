@@ -24,13 +24,12 @@ import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
  *   jti  unique per grant; also the seed of the CSRF token
  * It is signed with HMAC-SHA256 under RECOVERY_GRANT_SECRET, compared in constant time, and carries no secret.
  *
- * SINGLE USE. There is no server-side store. A grant is spent by ENDING THE SESSION IT IS BOUND TO: a successful
- * password change is followed by a global sign-out, after which the Auth service rejects the session (measured
- * against the local Auth service: the session's access token stops validating), so the grant no longer matches any
- * live session and is refused. Binding to the user's `updated_at` was rejected because the Auth service moves it on
- * every token refresh, which would lock out legitimate users. If the sign-out call fails the response says so
- * (`otherSessionsRevoked: false`) and the grant stays usable by that same session until it expires in 15 minutes;
- * that residual is documented, not hidden.
+ * SINGLE USE is enforced SERVER-SIDE, in the database (src/server/auth/recovery-claim.ts, migration 20261102090000):
+ * the password endpoint claims the grant's `jti` atomically before changing the password and marks it spent after, so
+ * two concurrent requests cannot both proceed, a replay after success is refused whatever session presents it, and a
+ * failed global sign-out no longer leaves the grant reusable. Clearing the browser cookie is hygiene, never the
+ * control. The grant is ALSO bound to a live Auth session, so a successful sign-out kills it a second way. Binding to
+ * the user's `updated_at` was rejected because the Auth service moves it on every token refresh.
  *
  * CSRF. The cookie is SameSite=Strict and scoped to /api/auth/recovery. The password endpoint additionally requires
  * a same-origin `Origin`, a JSON body, and a per-grant token in a custom header (only readable by a same-origin GET
@@ -75,7 +74,7 @@ export type IssuedGrant =
   | { readonly ok: false; readonly reason: "not_configured" };
 
 export type GrantCheck =
-  | { readonly ok: true; readonly csrfToken: string; readonly expiresAt: number }
+  | { readonly ok: true; readonly csrfToken: string; readonly expiresAt: number; readonly jti: string }
   | { readonly ok: false; readonly reason: GrantRejection };
 
 function secret(): string | null {
@@ -154,7 +153,7 @@ export function inspectRecoveryGrant(
   if (payload.uid !== current.userId || payload.sid !== current.sessionId) {
     return { ok: false, reason: "mismatch" };
   }
-  return { ok: true, csrfToken: csrfFor(key, payload.jti), expiresAt: payload.exp };
+  return { ok: true, csrfToken: csrfFor(key, payload.jti), expiresAt: payload.exp, jti: payload.jti };
 }
 
 /** Constant-time comparison of the header value with the grant's CSRF token. */

@@ -326,6 +326,52 @@ test.describe("password recovery against the real Auth service", () => {
     await context.close();
   });
 
+  test("two simultaneous submissions with one grant: exactly one password change happens (server-side single use)", async ({ browser }) => {
+    const { email } = await createUser("rec-race");
+    const context = await browser.newContext();
+    const page = await openRecoveryForm(context, await requestResetLink(email));
+    const csrf = await csrfOf(context);
+    const FIRST = "Race-First-Password-1!";
+    const SECOND = "Race-Second-Password-2!";
+
+    const [a, b] = await Promise.all([
+      postPassword(context, { csrf, password: FIRST }),
+      postPassword(context, { csrf, password: SECOND }),
+    ]);
+    const statuses = [a.status(), b.status()].sort((x, y) => x - y);
+    /* One winner. The loser is refused as busy (409), as spent (403) or, if the winner's global sign-out already ended
+       the session, as having no session (401): all three mean "this grant is used". It is never a second 200. */
+    expect(statuses[0]).toBe(200);
+    expect([401, 403, 409]).toContain(statuses[1]);
+
+    const winner = a.status() === 200 ? FIRST : SECOND;
+    const loser = winner === FIRST ? SECOND : FIRST;
+    expect(await canSignIn(email, winner)).toBe(true);
+    expect(await canSignIn(email, loser)).toBe(false);
+    expect(await canSignIn(email, OLD_PASSWORD)).toBe(false);
+    await page.close();
+    await context.close();
+  });
+
+  test("a grant whose password change succeeded cannot be replayed from a copy of its cookie", async ({ browser }) => {
+    const { email } = await createUser("rec-replay");
+    const context = await browser.newContext();
+    const page = await openRecoveryForm(context, await requestResetLink(email));
+    const csrf = await csrfOf(context);
+    const copied = await grantCookie(context);
+    expect(copied).toBeDefined();
+    expect((await postPassword(context, { csrf, password: NEW_PASSWORD })).status()).toBe(200);
+
+    /* The attacker model: a copy of the (HttpOnly) cookie taken before the user finished. Put it back and replay it. */
+    await context.addCookies([copied!]);
+    const replay = await postPassword(context, { csrf, password: "Replay-Attacker-Password-3!" });
+    expect([401, 403]).toContain(replay.status());
+    expect(await canSignIn(email, NEW_PASSWORD)).toBe(true);
+    expect(await canSignIn(email, "Replay-Attacker-Password-3!")).toBe(false);
+    await page.close();
+    await context.close();
+  });
+
   test("a grant is useless after the browser's account changes, and cannot be moved to another browser's session", async ({ browser }) => {
     const victim = await createUser("rec-victim");
     const other = await createUser("rec-other", "OtherPassword789!");

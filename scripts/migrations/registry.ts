@@ -2920,6 +2920,26 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261102090000",
+    name: "recovery_grant_claims",
+    checks: [
+      tableExists("recovery_grant_claims"),
+      functionExists("claim_recovery_grant"),
+      functionExists("settle_recovery_grant"),
+      {
+        describes: "recovery grant claim functions are executable by authenticated only (not anon), and the table by no client role",
+        sql: `select (
+                has_function_privilege('authenticated', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE')
+                and has_function_privilege('authenticated', 'public.settle_recovery_grant(uuid, text)', 'EXECUTE')
+                and not has_function_privilege('anon', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE')
+                and not has_function_privilege('anon', 'public.settle_recovery_grant(uuid, text)', 'EXECUTE')
+                and not has_table_privilege('authenticated', 'public.recovery_grant_claims', 'SELECT')
+                and not has_table_privilege('anon', 'public.recovery_grant_claims', 'SELECT')
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

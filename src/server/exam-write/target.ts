@@ -145,11 +145,11 @@ export function decideExamWriteTarget(input: TargetInput): TargetDecision {
     return reject("unrecognised_host");
   }
 
-  /* A hosted connection must not be configured to fall back to plaintext. */
+  /* A hosted connection is verified TLS or nothing. The only sslmode accepted is `verify-full` (certificate chain AND
+     hostname, enforced by ./tls.ts). `disable`/`allow`/`prefer` fall back to plaintext; `require` and `verify-ca`
+     mean different things to libpq and to the `pg` driver; `no-verify` switches verification off. Refused, not mapped. */
   const sslmode = url.searchParams.get("sslmode");
-  if (sslmode !== null && ["disable", "allow", "prefer"].includes(sslmode.toLowerCase())) {
-    return reject("insecure_transport");
-  }
+  if (sslmode !== null && sslmode !== "verify-full") return reject("insecure_transport");
 
   /* Hosted writes need a declared expectation. It is deliberately not optional. */
   const expected = input.expectedRef?.trim();

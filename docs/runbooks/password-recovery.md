@@ -10,17 +10,29 @@ verified on a hosted environment. Nothing here has been applied to a hosted envi
 issues only after verifying a recovery token with the Auth service itself. A parent or child who is merely signed in on
 a shared device cannot use the application to change the password.
 
-**Not protected (Supabase Auth's own behaviour):** any holder of a valid session can call Supabase Auth's
-`PUT /auth/v1/user` directly, with the project's public anon key and the session's bearer token, and the Auth service
-will change the password. The application is not in that request path and cannot block it. This is recorded by a test
-(`e2e/auth/password-recovery-security.spec.ts`, "KNOWN LIMITATION") that fails if Supabase's behaviour changes. What
-reduces the exposure is Supabase project configuration, which is an owner decision and has not been changed:
+**Not covered by this application (Supabase Auth's own policy):** an ordinary authenticated session changing *its own*
+password is normal account management, not by itself a vulnerability, and it happens in Supabase Auth, not in this application.
+`PUT /auth/v1/user` with the project's public anon key and the session's bearer token changes the password. The application is not
+in that request path, does not block it, and **must not be described as blocking it**. The recovery grant is *application recovery
+protection*; reauthentication for direct changes is *provider-level password-change policy*. They are separate controls.
 
-- *Secure password change* (`auth.email.secure_password_change`) asks for a recent sign-in or a re-authentication code;
-  it does not stop a freshly signed-in session.
-- Short session lifetimes and keeping the parent session off shared devices.
+*Intended policy (proposed, owner decision, nothing changed on any hosted project):* a signed-in parent may change their own password
+through Supabase Auth; the recovery grant exists so that the application's own **reset** screen cannot be driven by a merely
+signed-in session (an unlocked shared device). Children sign in with a PIN, not a password they can change here.
 
-Do not describe the grant as "preventing password changes without recovery". It prevents them *through the application*.
+*Measured on the local Auth service (GoTrue, this stack, 2026-11-03; `secure_password_change` is a project setting, default off):*
+
+| `secure_password_change` | Fresh session (just signed in) | Session 3 days old |
+|---|---|---|
+| `false` (repo default) | direct update **succeeds** | direct update **succeeds** |
+| `true` | direct update **succeeds** | **refused**: HTTP 400 `reauthentication_needed` ("Password update requires reauthentication") |
+
+So enabling it narrows the exposure to *stale* sessions (an old session left on a device) and still allows a fresh sign-in to change the
+password; a nonce from `auth.reauthenticate()` (an email code) would be required for the stale case. Whether additional
+reauthentication is *required* is an owner policy choice, recommended **on** for the family beta, **not enabled anywhere and not
+verified on the hosted project**. Pair it with short session lifetimes (`[auth.sessions]`, also unset locally). The hosted value must be
+read from the dashboard (checklist item A4); this document does not know it. The e2e test "KNOWN LIMITATION" fails if the local
+behaviour changes.
 
 ## The flow
 
@@ -50,20 +62,29 @@ verifier) and shows an explanation; a `token_hash` link can.
 `src/server/auth/recovery-grant.ts`. HMAC-SHA256 signed cookie `mm-recovery-grant`: `HttpOnly`, `SameSite=Strict`,
 `Secure` on https, `Path=/api/auth/recovery`, 15 minutes. Bound to the user id and the Auth `session_id`.
 
-- **Single use** comes from ending the session it is bound to (step 5). There is no server-side store. Binding to the
-  user's `updated_at` was rejected: the Auth service changes it on every token refresh. If the global sign-out fails
-  (reported to the user as "other devices could not be signed out") the grant remains usable by that same session until it
-  expires; the server retries the sign-out once.
-- **Limits of "single use" (reviewed 2026-11-02, not fixed in code):**
-  - *Sign-out fails twice.* The browser's cookie is cleared, but the signed grant is still valid for its session until it
-    expires (15 minutes) for anyone who captured both the cookie and the session token. The response says
-    `otherSessionsRevoked: false` and the page tells the user; treat that as an incident signal.
-  - *Concurrent requests.* Two simultaneous submits from the same session can both pass the grant check before either
-    sign-out lands; the later `updateUser` wins. Both come from the legitimate holder, so there is no escalation, but the
-    grant is not atomically spent. A strict guarantee needs a server-side spent-`jti` store (database), which does not exist.
-  - *Already-issued access token after sign-out.* The application refuses it: `resolveLiveSession` asks the Auth service
-    (`getUser`), which rejects a token whose session was ended. Supabase's own stateless endpoints (PostgREST) accept the
-    JWT until its `exp`; that is Supabase behaviour and not changed here.
+- **Single use is enforced server-side, in the database** (migration `20261102090000_recovery_grant_claims.sql`,
+  `src/server/auth/recovery-claim.ts`). The grant's `jti` is recorded in `public.recovery_grant_claims` through two SECURITY
+  DEFINER functions that act only on the caller's own rows (`auth.uid()`). Clearing the browser cookie is hygiene, **not** invalidation.
+  The password endpoint's order is: validate (origin, live session, grant signature/expiry/binding, CSRF, password policy) → **claim**
+  (atomic; exactly one of any number of concurrent requests gets `claimed`, the rest get `busy` → 409) → change the password →
+  **settle `spent`** (the grant is dead; replay gets 403 `spent`, from any session) → global sign-out → clear cookie.
+  - *Concurrent submits:* one wins; the other is 409/403/401. Tested in SQL with 12 real committed connections and over HTTP against
+    the real Auth service.
+  - *Replay after success, global sign-out failure:* refused as `spent` even from the same still-valid session (the grant is spent
+    *before* the sign-out is attempted). A failed sign-out is still reported (`otherSessionsRevoked: false`) as an incident signal for
+    the *session*, which stays alive until sign-out succeeds or the access token expires.
+  - *Transient failure never locks the user out:* if the password change fails (422 rejected, 5xx, thrown) the claim is **released**
+    and the same grant can try again. If even the release fails, the claim is a 2-minute **lease** that lapses on its own. A crash
+    between claim and outcome is covered by the same lease.
+  - *Fail closed:* if the claim cannot be made (migration not applied, database error) the endpoint answers 503
+    `recovery_unavailable` and changes nothing; nothing was consumed, so the user can retry.
+  - *Residuals (documented, small):* (1) if `settle spent` fails twice after a successful change the response says
+    `grantSpent: false`; the session is still ended by the sign-out, and the 2-minute lease then lapses, so only that same live session
+    could re-claim until it expires (15 min) or signs out. (2) A password change that succeeds at the Auth service but whose response
+    is lost looks like a failure: the claim is released and the user may submit again (idempotent). (3) An authenticated user can call
+    the two functions directly for **their own** grants only (capped at 10 live rows per user).
+  - *Already-issued access token after sign-out:* the application refuses it (`resolveLiveSession` asks the Auth service);
+    Supabase's own stateless endpoints (PostgREST) accept the JWT until its `exp`. That is Supabase behaviour, not changed.
 - **Logout** clears it (`DELETE /api/auth/recovery/session`, called by `signOut`), and sign-out also ends the session.
 - **CSRF**: `SameSite=Strict` cookie, same-origin `Origin` check, JSON-only body, and a per-grant token in
   `x-mm-recovery-csrf` that is available only to a same-origin read that itself needs the cookie.
@@ -78,6 +99,7 @@ verifier) and shows an explanation; a `token_hash` link can.
 | Variable | Notes |
 |---|---|
 | `RECOVERY_GRANT_SECRET` | server-only, 32+ random characters (`openssl rand -base64 48`). Required wherever password reset must work. Rotating it invalidates grants in flight (15 minutes). Named in `recovery-grant.ts` only. |
+| migration `20261102090000` | **Required before the new application version serves password resets.** Without it the endpoint fails closed with 503. Forward-only; the previous application ignores the table. Not applied to any hosted project. Verified by `npm run migrations:status` (registry entry added). |
 | email template `recovery` | Local file `supabase/templates/recovery.html` uses the fragment form. **Hosted templates are edited in the Supabase dashboard**, not deployed from this repo; until the owner updates the hosted template, links keep the form already configured there and the page accepts both. |
 
 Local stack note: the Auth container serves templates from its start-up configuration. A stack started before the
@@ -108,4 +130,5 @@ was updated, before any sign-out. The explicit global sign-out does not rely on 
 4. Confirm on the hosted Auth service the same things measured locally: `amr` for `/verify` sessions, session revocation on
    password change, a reused or expired token rejected, a spent session's token refused.
 5. Supabase Auth rate limits for `/recover` and `/verify` (unverified), the email sender and delivery time.
-6. Decide whether to enable *secure password change* on the project (see above).
+6. Decide whether to enable *secure password change* on the project (see above; recommended on, with a stated session lifetime).
+7. Apply `20261102090000` to DEV (owner-authorised) **before** the application version that calls it; then repeat the concurrent-submit and replay checks against the hosted Auth + database.
