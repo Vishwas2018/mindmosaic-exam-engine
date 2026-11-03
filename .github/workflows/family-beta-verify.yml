@@ -38,6 +38,13 @@ jobs:
       SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
       E2E_FIXTURE_PASSWORD: Fixture-Password-123!
       E2E_FIXTURE_STUDENT_PIN: "194728"
+      # The mail catcher that `supabase start` already runs on the runner ([inbucket] in
+      # supabase/config.toml, port 56324, Mailpit API). Without this the 20 mail-dependent tests in
+      # e2e/auth/email-confirmation-and-recovery.spec.ts and e2e/auth/password-recovery-security.spec.ts
+      # SKIP (test.skip(!MAIL, ...)) — which is precisely the email confirmation and password-recovery
+      # coverage this candidate exists to prove, so a run without it proves nothing about recovery.
+      # It is the local stack's own port, so it adds no hosted target.
+      E2E_MAILPIT_URL: http://127.0.0.1:56324
       EXAM_WRITE_DB_URL: postgresql://mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret@127.0.0.1:56322/postgres
       EXAM_WRITE_ALLOW_LOOPBACK: "1"
       RECOVERY_GRANT_SECRET: local-ci-recovery-grant-secret-not-a-secret-0123456789
@@ -175,6 +182,32 @@ jobs:
         if: always()
         run: node scripts/ci/summarise-playwright.mjs "Public E2E (playwright.config.ts)" "$RUNNER_TEMP/pw-public.json" | tee -a "$GITHUB_STEP_SUMMARY" evidence/public-summary.md
 
+      # 4. The public keyboard walkthroughs, repeated with retries OFF. The run on 50916415 recorded a
+      #    flake HERE, not in the authenticated suite: e2e/a11y-auth-pages.spec.ts "sign-in keyboard
+      #    walkthrough" failed its first attempt and passed on retry, so the full-suite result alone
+      #    cannot tell a real focus-order defect from a one-off. Step 2 repeats the PARENT dashboard
+      #    walkthrough, which was never the flaky one; this repeats the specs that were.
+      - name: Public keyboard walkthroughs x5 (retries off)
+        id: kbd_public
+        if: always()
+        continue-on-error: true
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/pw-kbd-public.json
+        run: |
+          set -o pipefail
+          env -u NEXT_PUBLIC_SUPABASE_URL -u NEXT_PUBLIC_SUPABASE_ANON_KEY -u SUPABASE_SERVICE_ROLE_KEY -u EXAM_WRITE_DB_URL \
+              -u EXAM_WRITE_ALLOW_LOOPBACK -u RECOVERY_GRANT_SECRET -u E2E_FIXTURE_PASSWORD -u E2E_FIXTURE_STUDENT_PIN \
+              SHOWCASE_ENABLED=1 BAR_MODEL_PREVIEW_ENABLED=1 WRITING_PREVIEW_ENABLED=1 \
+              npx playwright test e2e/a11y-auth-pages.spec.ts -g "keyboard walkthrough" \
+              --repeat-each=5 --retries=0 --reporter=list,json 2>&1 | tee evidence/kbd-public-run.log
+      - name: Summarise public keyboard walkthroughs x5
+        id: kbd_public_summary
+        if: always()
+        continue-on-error: true
+        run: |
+          node scripts/ci/summarise-playwright.mjs "Public keyboard walkthroughs x5, retries 0" "$RUNNER_TEMP/pw-kbd-public.json" \
+            --require-spec a11y-auth-pages | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-public-summary.md
+
       - name: Collect failure evidence
         if: always()
         run: |
@@ -201,7 +234,10 @@ jobs:
         run: |
           echo "auth=${{ steps.auth.outcome }} public=${{ steps.public.outcome }}"
           echo "kbd=${{ steps.kbd.outcome }} kbd_summary=${{ steps.kbd_summary.outcome }}"
+          echo "kbd_public=${{ steps.kbd_public.outcome }} kbd_public_summary=${{ steps.kbd_public_summary.outcome }}"
           [ "${{ steps.auth.outcome }}" = "success" ] \
             && [ "${{ steps.public.outcome }}" = "success" ] \
             && [ "${{ steps.kbd.outcome }}" = "success" ] \
-            && [ "${{ steps.kbd_summary.outcome }}" = "success" ]
+            && [ "${{ steps.kbd_summary.outcome }}" = "success" ] \
+            && [ "${{ steps.kbd_public.outcome }}" = "success" ] \
+            && [ "${{ steps.kbd_public_summary.outcome }}" = "success" ]
