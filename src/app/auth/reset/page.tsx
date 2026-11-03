@@ -31,6 +31,12 @@ const EXPIRED: LinkProblem = {
   text: "This password reset link has expired or has already been used.",
 };
 
+/** The outcome of an attempt on this link could not be confirmed. The link is retired for safety; a fresh one is free. */
+const UNCERTAIN: LinkProblem = {
+  heading: "Request a new reset link",
+  text: "We could not confirm whether your password was changed, so this link can no longer be used. Try signing in with your new password first. If that does not work, request a new reset link.",
+};
+
 /** Opened /auth/reset directly, with no link and no session: there is nothing to reset yet. */
 const NO_LINK: LinkProblem = {
   heading: "Open your reset link",
@@ -195,6 +201,8 @@ export default function ResetPasswordPage() {
       /* The server has already ended every session; this clears the local copy so the next step is a normal sign-in. */
       void signOut();
       setTimeout(() => router.push("/sign-in"), 1500);
+    } else if (result.reason === "uncertain") {
+      showProblem(UNCERTAIN);
     } else if (result.reason === "recovery_required") {
       // The grant is missing, expired or no longer matches the session — same dead end as an expired link.
       showProblem(EXPIRED);

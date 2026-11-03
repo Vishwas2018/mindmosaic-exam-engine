@@ -34,9 +34,9 @@ import { clearGrantCookie, noStore, resolveLiveSession } from "@/server/auth/rec
  *      requests with the same grant exactly one proceeds ('busy' 409 for the rest) and a used grant is 'spent' (403).
  * Then it changes the password. On success the grant is marked spent in the database (the real single-use control, not
  * the cookie), every session of the user is revoked (global sign-out: this one and the ones on other devices) and the
- * browser's cookie is cleared (hygiene only). On a failed password change the claim is RELEASED so the same grant can
- * try again, and a crash between claim and outcome is covered by a 2-minute lease: a transient failure never locks the
- * user out. If the claim cannot be made at all (migration absent, database error) the answer is 503 and nothing changed.
+ * browser's cookie is cleared (hygiene only). After a DEFINITIVE refusal by Auth the claim is RELEASED so the same grant
+ * can try again. After an UNCERTAIN outcome (timeout, crash, 5xx with the password unchanged) the claim is NOT released:
+ * its 2-minute lease lapses and the grant is abandoned for good, and the user requests a fresh recovery link. If the claim cannot be made at all (migration absent, database error) the answer is 503 and nothing changed.
  * (The Auth service itself also ends the user's OTHER sessions on a password change; the explicit sign-out does not
  * rely on that, and is the part that ends THIS session.)
  *
@@ -75,6 +75,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (claim.outcome !== "claimed") {
     if (claim.outcome === "busy") return refuse("grant_in_use", 409);
     if (claim.outcome === "spent") return refuse("recovery_required", 403, "spent");
+    if (claim.outcome === "lapsed") return refuse("recovery_required", 403, "lapsed"); // uncertain earlier attempt: fresh link
     return refuse("recovery_unavailable", 503);
   }
   const { token } = claim;
@@ -100,8 +101,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     const resolved = await resolveRecoveryClaim(supabase, grant.jti, token);
     if (resolved !== "changed") {
       /* Unchanged or unknown: the claim is deliberately LEFT in place (the Auth call might still be in flight). It lapses
-         after its 2-minute lease and is then re-claimable only if the password is still unchanged, so the user retries
-         with the same link shortly, and nothing can be applied twice. */
+         after its 2-minute lease and then becomes ABANDONED, never claimable again (fail closed: a slow Auth request may
+         still commit). The user is told to request a fresh recovery link; nothing can be applied twice. */
       return refuse("update_uncertain", 503);
     }
     /* 'changed': the password did change; the grant is now spent. Continue as a success. */

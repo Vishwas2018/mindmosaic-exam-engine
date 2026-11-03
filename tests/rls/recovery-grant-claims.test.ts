@@ -71,7 +71,7 @@ async function asUser<T>(sub: string | null, work: (c: Client) => Promise<T>, co
   }
 }
 
-type Claim = { outcome: "claimed"; token: string } | { outcome: "busy" | "spent" };
+type Claim = { outcome: "claimed"; token: string } | { outcome: "busy" | "spent" | "lapsed" };
 const claim = (sub: string, jti: string, exp = inFifteen()) =>
   asUser(sub, async (c) => (await c.query("select public.claim_recovery_grant($1::uuid, $2::timestamptz) as r", [jti, exp])).rows[0].r as Claim);
 /** Claims and returns the token, failing the test if the grant was not won. */
@@ -133,9 +133,18 @@ describe("privileges", () => {
       `select has_table_privilege('anon', 'public.recovery_grant_claims', 'SELECT') as anon_select,
               has_table_privilege('authenticated', 'public.recovery_grant_claims', 'SELECT') as auth_select,
               has_table_privilege('authenticated', 'public.recovery_grant_claims', 'INSERT') as auth_insert,
+              has_table_privilege('service_role', 'public.recovery_grant_claims', 'SELECT') as service_select,
+              has_function_privilege('service_role', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE') as service_exec,
               (select relrowsecurity from pg_class where oid = 'public.recovery_grant_claims'::regclass) as rls`,
     );
-    expect(table.rows[0]).toEqual({ anon_select: false, auth_select: false, auth_insert: false, rls: true });
+    expect(table.rows[0]).toEqual({
+      anon_select: false,
+      auth_select: false,
+      auth_insert: false,
+      service_select: false,
+      service_exec: false,
+      rls: true,
+    });
   });
 
   it("a request with no signed-in user is refused (MM010)", async () => {
@@ -176,20 +185,18 @@ describe("single-use lifecycle", () => {
   });
 });
 
-describe("lease expiry, takeover and fencing", () => {
-  it("a lapsed claim with the password UNCHANGED (a crashed attempt) is claimable again; one inside its lease is busy", async () => {
+describe("lease expiry fails closed (migration 20261103090000)", () => {
+  it("a lapsed claim with the password UNCHANGED is ABANDONED, never claimable again; one inside its lease is busy", async () => {
     const jti = randomUUID();
     const first = await won(USER_X, jti);
     expect(await claim(USER_X, jti)).toEqual({ outcome: "busy" });
     await lapse(jti);
-    const second = await won(USER_X, jti);
-    expect(second).not.toBe(first);
-    expect(await claim(USER_X, jti)).toEqual({ outcome: "busy" });
-    expect((await admin.query("select lease_until > now() as live from public.recovery_grant_claims where jti = $1", [jti])).rows[0].live).toBe(true);
-    await settle(USER_X, jti, second, "released");
+    expect(await claim(USER_X, jti)).toEqual({ outcome: "lapsed" });
+    expect(await rowOf(jti)).toMatchObject({ state: "abandoned", lease_until: null, claim_token: first });
+    expect(await claim(USER_X, jti)).toEqual({ outcome: "lapsed" }); // stays that way, whatever the clock
   });
 
-  it("a lapsed claim whose password HAS changed (success that never settled) becomes spent, not claimable", async () => {
+  it("a lapsed claim whose password HAS changed (success that never settled) becomes spent, not abandoned", async () => {
     const jti = randomUUID();
     await won(USER_X, jti);
     await changePassword(USER_X);
@@ -200,29 +207,45 @@ describe("lease expiry, takeover and fencing", () => {
     expect(await claim(USER_X, jti)).toEqual({ outcome: "spent" });
   });
 
-  it("an OLD claimant cannot release a NEWER claimant's claim (fencing), and the newer claim is untouched", async () => {
+  it("DELAYED Auth success: abandoned first, then the password changes late; the grant is recorded as spent and stays unusable", async () => {
     const jti = randomUUID();
-    const oldToken = await won(USER_X, jti);
+    await won(USER_X, jti);
     await lapse(jti);
-    const newToken = await won(USER_X, jti);
-    expect(await settle(USER_X, jti, oldToken, "released")).toBe(false);
-    expect(await settle(USER_X, jti, null, "released")).toBe(false);
-    expect(await rowOf(jti)).toMatchObject({ state: "claimed", claim_token: newToken });
-    expect(await claim(USER_X, jti)).toEqual({ outcome: "busy" });
-    expect(await settle(USER_X, jti, newToken, "released")).toBe(true);
+    expect(await claim(USER_X, jti)).toEqual({ outcome: "lapsed" });
+    await changePassword(USER_X); // the slow Auth request commits after the lease and after abandonment
+    expect(await claim(USER_X, jti)).toEqual({ outcome: "spent" });
+    expect((await rowOf(jti))?.state).toBe("spent");
   });
 
-  it("an old claimant's late SUCCESS report still marks the grant spent (the safe direction)", async () => {
+  it("TAKEOVER is impossible: a second claimant never gets a token, and the original token is never replaced", async () => {
     const jti = randomUUID();
-    const oldToken = await won(USER_X, jti);
+    const token = await won(USER_X, jti);
     await lapse(jti);
-    await won(USER_X, jti);
-    expect(await settle(USER_X, jti, oldToken, "spent")).toBe(true);
+    for (let i = 0; i < 3; i += 1) expect((await claim(USER_X, jti)).outcome).not.toBe("claimed");
+    expect((await rowOf(jti))?.claim_token).toBe(token);
+  });
+
+  it("an old claimant's LATE definitive refusal cannot release an abandoned claim (the grant stays retired)", async () => {
+    const jti = randomUUID();
+    const token = await won(USER_X, jti);
+    await lapse(jti);
+    expect(await settle(USER_X, jti, token, "released")).toBe(false); // lapsed but not yet marked: still refused (lease over)
+    expect(await claim(USER_X, jti)).toEqual({ outcome: "lapsed" });
+    expect(await settle(USER_X, jti, token, "released")).toBe(false); // abandoned: refused
+    expect(await rowOf(jti)).toMatchObject({ state: "abandoned" });
+  });
+
+  it("an old claimant's late SUCCESS report still marks even an ABANDONED grant spent (the safe direction)", async () => {
+    const jti = randomUUID();
+    const token = await won(USER_X, jti);
+    await lapse(jti);
+    expect(await claim(USER_X, jti)).toEqual({ outcome: "lapsed" });
+    expect(await settle(USER_X, jti, token, "spent")).toBe(true);
     expect((await rowOf(jti))?.state).toBe("spent");
     expect(await claim(USER_X, jti)).toEqual({ outcome: "spent" });
   });
 
-  it("a release is REFUSED, and the grant spent instead, once the password hash has changed since the claim", async () => {
+  it("a release inside the lease is refused, and the grant spent instead, once the password hash has changed since the claim", async () => {
     const jti = randomUUID();
     const token = await won(USER_X, jti);
     await changePassword(USER_X);
@@ -250,14 +273,12 @@ describe("resolve (an ambiguous answer from Auth)", () => {
     expect(await resolve(USER_X, jti, token)).toBe("changed"); // spent stays changed
   });
 
-  it("a superseded token, an unknown grant and another user's grant all resolve to 'unknown'", async () => {
+  it("a wrong token, an unknown grant and another user's grant all resolve to 'unknown'", async () => {
     const jti = randomUUID();
-    const oldToken = await won(USER_X, jti);
-    await lapse(jti);
-    await won(USER_X, jti);
-    expect(await resolve(USER_X, jti, oldToken)).toBe("unknown");
+    const token = await won(USER_X, jti);
+    expect(await resolve(USER_X, jti, randomUUID())).toBe("unknown");
     expect(await resolve(USER_X, randomUUID(), randomUUID())).toBe("unknown");
-    expect(await resolve(USER_Y, jti, oldToken)).toBe("unknown");
+    expect(await resolve(USER_Y, jti, token)).toBe("unknown");
   });
 });
 
@@ -297,15 +318,14 @@ describe("concurrency (real, committed connections)", () => {
     await settle(USER_X, jti, (winners[0] as { token: string }).token, "spent");
   });
 
-  it("of 12 simultaneous claims racing a lapsed lease, exactly one takes it over", async () => {
+  it("of 12 simultaneous claims racing a lapsed lease, NOBODY takes it over: all 12 see lapsed", async () => {
     const jti = randomUUID();
-    await won(USER_X, jti);
+    const original = await won(USER_X, jti);
     await lapse(jti);
     const results = await Promise.all(Array.from({ length: 12 }, () => claim(USER_X, jti)));
-    const winners = results.filter((r) => r.outcome === "claimed");
-    expect(winners).toHaveLength(1);
-    expect(results.filter((r) => r.outcome === "busy")).toHaveLength(11);
-    await settle(USER_X, jti, (winners[0] as { token: string }).token, "spent");
+    expect(results.filter((r) => r.outcome === "claimed")).toHaveLength(0);
+    expect(results.every((r) => r.outcome === "lapsed" || r.outcome === "busy")).toBe(true);
+    expect(await rowOf(jti)).toMatchObject({ state: "abandoned", claim_token: original });
   });
 
   it("racing a lapsed lease whose password CHANGED, nobody wins: all 12 see spent or busy", async () => {

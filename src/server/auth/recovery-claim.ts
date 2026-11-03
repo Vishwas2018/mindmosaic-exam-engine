@@ -17,7 +17,9 @@ import type { SupabaseClient } from "@supabase/supabase-js";
  *            it needs the caller's own token, so an old claimant can never release a newer claimant's claim.
  *   resolve  after an AMBIGUOUS answer from Auth the database compares the user's password hash with the one taken at
  *            claim time: 'changed' (treat as success, grant is now spent) or 'unchanged' (keep the claim, do not release).
- * A lapsed claim is re-claimable only if the password is unchanged; a lapsed claim whose password changed becomes spent.
+ * FAIL CLOSED ON UNCERTAINTY (migration 20261103090000). A claim is never taken over. When its lease lapses it becomes
+ * 'spent' if the password hash changed (the attempt succeeded) and 'abandoned' (answer 'lapsed') if it did not: a slow
+ * request to Auth may still be in flight and commit later, so the grant is dead and the user needs a FRESH recovery link.
  *
  * FAIL CLOSED. If the claim cannot be made (functions missing because the migration is not applied, database error,
  * network) the answer is 'unavailable' and the password is NOT changed. Nothing has been consumed, so the user can retry.
@@ -28,7 +30,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type ClaimResult =
   | { outcome: "claimed"; token: string }
-  | { outcome: "busy" | "spent" | "unavailable" };
+  | { outcome: "busy" | "spent" | "lapsed" | "unavailable" };
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -45,7 +47,7 @@ export async function claimRecoveryGrant(
     if (error || typeof data !== "object" || data === null) return { outcome: "unavailable" };
     const { outcome, token } = data as { outcome?: unknown; token?: unknown };
     if (outcome === "claimed" && typeof token === "string" && UUID.test(token)) return { outcome, token };
-    if (outcome === "busy" || outcome === "spent") return { outcome };
+    if (outcome === "busy" || outcome === "spent" || outcome === "lapsed") return { outcome };
     return { outcome: "unavailable" };
   } catch {
     return { outcome: "unavailable" };

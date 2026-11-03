@@ -44,6 +44,10 @@ that plan; reconcile the two when it is supplied.
      **New dependency, not yet applied anywhere hosted.** It reads `auth.users.encrypted_password` (as a digest, inside SECURITY DEFINER
      functions) and is additive. Without it the reset endpoint returns 503 `recovery_unavailable` and changes nothing (safe, but resets
      are down). It is in `scripts/migrations/registry.ts`, so `migrations:status` reports it as drift until applied.
+   - [ ] M2b `20261103090000` (`recovery_claim_fail_closed`) applied immediately after M2, in the same owner-authorised window.
+     Changes lapsed claims from re-claimable to terminal `abandoned` (the user requests a fresh link) and revokes `service_role` access
+     to the claims table. Replaces M2's re-claim rule; the application in this candidate expects it. **Not applied anywhere hosted.**
+     It is in `scripts/migrations/registry.ts`; `migrations:status` reports drift until applied.
    - [ ] M3 `20261031090100` (revoke legacy RPCs from clients) applied **last**: only after D1 (compatible deployment), the hosted
      create/submit verification in D1, and N1. It breaks the previous application, so it is never applied "with the rest".
 4. **D: compatible deployment before the legacy RPC lockdown**
@@ -54,7 +58,7 @@ that plan; reconcile the two when it is supplied.
    - [ ] N1 A signed-in student calling `create_exam_session` / `record_exam_attempt` / `*_for` over PostgREST: `permission denied`.
    - [ ] N2 Writer URL pointed at the wrong project (ref mismatch) and at a non-verifying configuration: refused before connecting.
    - [ ] N3 Recovery: forged, expired, other-user, other-session grant refused; **two concurrent submits with one grant → exactly one
-     password change**; replay after success → 403 `spent`; ordinary signed-in session with no grant → 403. Also record the 503 `update_uncertain` path is not reachable by accident: do not try to force Auth failures on DEV with real users.
+     password change**; replay after success → 403 `spent`; ordinary signed-in session with no grant → 403. Do **not** force Auth failures on DEV with real users: the `update_uncertain` and `lapsed` paths (user told to request a fresh link; the retired grant never dispatches a second change) are proved by the SQL and route tests, not by breaking DEV.
    - [ ] N4 With the claim function made unavailable on a test project (or by a deliberate wrong target), the reset endpoint is 503 and
      the password is unchanged. (Do not do this on a project with real users.)
 6. **F: families and exam journeys**
@@ -71,7 +75,7 @@ that plan; reconcile the two when it is supplied.
      RPCs to `authenticated`. Options: take the app offline or return the maintenance page; unset `EXAM_WRITE_DB_URL` (writes fail
      closed with 503).
    - [ ] R2 Application rollback: previous deployment still works only while M3 is **not** applied. After M3, roll forward, not back.
-   - [ ] R3 `20261102090000` is additive; the previous application ignores it. No rollback needed for it.
+   - [ ] R3 `20261102090000` and `20261103090000` are additive/forward-only; the previous application ignores the table. No rollback needed.
    - [ ] R4 Credential rotation path for the writer password and `RECOVERY_GRANT_SECRET` (rotating the latter invalidates grants in flight).
 
 ## Known open items (not fixed by this candidate)
@@ -79,6 +83,9 @@ that plan; reconcile the two when it is supplied.
 - Direct Supabase Auth password changes by an ordinary session: provider policy, owner decision (A4).
 - `scripts/migrations/verify.ts` (operator CLI) now requires verified TLS against an operator CA for any non-loopback database; the
   real hosted chain is unverified until M0 is run on DEV.
-- Recovery-claim guarantee limits (password-recovery.md, "Guarantee limits"): a request to Auth that outlives the 2-minute lease and
-  commits after a takeover is not cancellable; `update_uncertain` can make a user wait up to the lease.
-- Local authenticated-e2e instability on this host (see the verification record): pre-existing on `origin/dev`, not caused by this branch.
+- Recovery single-use: the application dispatches at most one password change per grant (except after a definitive Auth refusal), and an
+  uncertain attempt retires the grant (fresh link needed). This is **not** a guarantee about Auth itself: a request already in flight
+  cannot be cancelled, and a session holder can call Supabase Auth's update-user API directly.
+- E2E: the Windows-host runs of this branch are INVALID (the Next server's main thread blocked for exactly 10 s steps in native socket
+  calls, with no cause established; Norton and the Windows network stack were not tested). Linux/CI is the authoritative E2E environment;
+  no Windows E2E count may be quoted. Whether the 10 s stalls also affect `origin/dev` on that host was not tested.

@@ -25,6 +25,9 @@ function isExemptLogoWordmarkNode(violation: Result, node: NodeResult): boolean 
   );
 }
 
+/** Upper bound on waiting for finite CSS animations/transitions to finish before the scan (the app's own are under 400 ms). */
+const SETTLE_BOUND_MS = 1500;
+
 /**
  * Fails the test if axe-core finds any "serious" or "critical" impact
  * violation on the current page. "minor"/"moderate" findings are not
@@ -41,12 +44,17 @@ export async function assertNoSeriousAccessibilityViolations(
      tabs fading to their selected colours), and axe reads the computed, half-blended colours of that frame, reporting a
      contrast ratio no user ever sees at rest. Finite animations and transitions are awaited; rules and exemptions are
      unchanged, and infinite animations (spinners, skeleton pulses) are not waited for. */
-  await page.evaluate(async () => {
+  await page.evaluate(async (boundMs) => {
     const finite = document
       .getAnimations()
       .filter((animation) => animation.effect?.getComputedTiming().iterations !== Infinity);
-    await Promise.all(finite.map((animation) => animation.finished.catch(() => undefined)));
-  });
+    /* BOUNDED: a stuck or very long animation can delay the scan by at most boundMs, never hang it. The scan then runs
+       anyway, so a control still mid-transition after the bound is measured and reported rather than skipped. */
+    await Promise.race([
+      Promise.all(finite.map((animation) => animation.finished.catch(() => undefined))),
+      new Promise((resolve) => setTimeout(resolve, boundMs)),
+    ]);
+  }, SETTLE_BOUND_MS);
   const results = await new AxeBuilder({ page }).analyze();
   const withoutExemptWordmarkNodes = results.violations
     .map((violation) => ({

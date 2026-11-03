@@ -64,7 +64,7 @@ export async function recoveryStatus(): Promise<GrantResult> {
 
 export type PasswordResult =
   | { readonly ok: true; readonly otherSessionsRevoked: boolean }
-  | { readonly ok: false; readonly reason: "recovery_required" | "weak" | "rejected" | "unavailable" };
+  | { readonly ok: false; readonly reason: "recovery_required" | "uncertain" | "weak" | "rejected" | "unavailable" };
 
 export async function submitNewPassword(password: string, csrfToken: string): Promise<PasswordResult> {
   try {
@@ -73,6 +73,8 @@ export async function submitNewPassword(password: string, csrfToken: string): Pr
     if (response.ok) return { ok: true, otherSessionsRevoked: data.otherSessionsRevoked === true };
     if (data.error === "password_too_weak") return { ok: false, reason: "weak" };
     if (data.error === "password_rejected") return { ok: false, reason: "rejected" };
+    /* An earlier attempt on this link may or may not have changed the password: the link is dead, a fresh one is needed. */
+    if (data.error === "update_uncertain" || data.reason === "lapsed") return { ok: false, reason: "uncertain" };
     if (response.status === 401 || response.status === 403) return { ok: false, reason: "recovery_required" };
     return { ok: false, reason: "unavailable" };
   } catch {

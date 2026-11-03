@@ -24,7 +24,7 @@ import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
  *   jti  unique per grant; also the seed of the CSRF token
  * It is signed with HMAC-SHA256 under RECOVERY_GRANT_SECRET, compared in constant time, and carries no secret.
  *
- * SINGLE USE is enforced SERVER-SIDE, in the database (src/server/auth/recovery-claim.ts, migration 20261102090000):
+ * SINGLE USE is enforced SERVER-SIDE, in the database (src/server/auth/recovery-claim.ts, migration 20261102090000, fail-closed by 20261103090000):
  * the password endpoint claims the grant's `jti` atomically before changing the password and marks it spent after, so
  * two concurrent requests cannot both proceed, a replay after success is refused whatever session presents it, and a
  * failed global sign-out no longer leaves the grant reusable. Clearing the browser cookie is hygiene, never the

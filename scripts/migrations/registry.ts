@@ -2943,6 +2943,25 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261103090000",
+    name: "recovery_claim_fail_closed",
+    checks: [
+      functionExists("claim_recovery_grant"),
+      {
+        describes: "a lapsed recovery claim is never re-claimable: the claim table allows the terminal 'abandoned' state, and the functions stay authenticated-only",
+        sql: `select (
+                exists (select 1 from pg_constraint where conrelid = 'public.recovery_grant_claims'::regclass
+                        and conname = 'recovery_grant_claims_state_check' and pg_get_constraintdef(oid) like '%abandoned%')
+                and pg_get_functiondef('public.claim_recovery_grant(uuid, timestamptz)'::regprocedure) like '%abandoned%'
+                and has_function_privilege('authenticated', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE')
+                and not has_function_privilege('anon', 'public.claim_recovery_grant(uuid, timestamptz)', 'EXECUTE')
+                and not has_table_privilege('authenticated', 'public.recovery_grant_claims', 'SELECT')
+                and not has_table_privilege('service_role', 'public.recovery_grant_claims', 'SELECT')
+              ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

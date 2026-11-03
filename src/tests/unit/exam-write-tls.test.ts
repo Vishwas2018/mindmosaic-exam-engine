@@ -102,10 +102,13 @@ async function startFakePostgres(pki: Pki) {
 
 /* Composed, not written out: the boundary test (scoring-module-boundary) forbids naming the credential variable outside its module. */
 const URL_ENV = ["EXAM_WRITE", "DB", "URL"].join("_");
-const NOW = Date.now();
+/* Read AFTER the certificates exist. Taken at import, it can precede a certificate's notBefore (openssl stamps whole seconds
+   at generation time) on a loaded machine, making a valid certificate look "not yet valid". */
+let NOW = Date.now();
 let pki: Pki;
 beforeAll(() => {
   pki = generatePki();
+  NOW = Date.now();
 }, 60_000);
 
 describe("decideHostedTls", () => {
