@@ -122,8 +122,10 @@ export default function FamilyBetaReviewIndexPage() {
           items.
         </li>
         <li>
-          Scoring is server-side only; these review pages never receive an answer key as a client
-          prop.
+          Scoring is server-side only. Be aware that on THIS page the expected answers and
+          explanations are in the page payload — the reveal button only hides them visually — because
+          this is a reviewer surface. That is why it is gated to non-production deployments and must
+          never be opened by a student. The exam itself delivers no answer key.
         </li>
       </ul>
     </main>

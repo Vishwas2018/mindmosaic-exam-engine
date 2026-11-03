@@ -153,6 +153,27 @@ It is behind the papers' own fail-closed gate (404 without `FAMILY_BETA_FIXED_PA
 production deployment), it shows expected answers so it must never be reachable by a student, and **nothing on it
 records approval**.
 
+## 4b. Audit coverage by area
+
+What each listed beta-impacting area rests on, and where the evidence is. "Local/CI" means proved by tests that ran;
+"hosted unverified" means the control exists in code but its hosted configuration was never read (§0).
+
+| Area | State |
+| --- | --- |
+| Parent/student authentication, logout, shared-device switching | Local/CI. Authenticated E2E + `e2e/auth/*`; PRs #93/#94 in the candidate. |
+| Same-device and cross-device recovery | Code + route/SQL tests. **CI coverage was skipping** until this candidate set `E2E_MAILPIT_URL` (§3). Cross-device (E2) still needs a physical second device. |
+| Recovery-grant replay, concurrency, uncertain Auth outcomes | `recovery-grant.test.ts`, `recovery-routes.test.ts` (727 lines), `tests/rls/recovery-grant-claims.test.ts`. Hosted unverified (N3). |
+| Restricted exam writer, positive environment validation, verified TLS | `exam-write-target.test.ts`, `exam-write-tls.test.ts`, `tests/rls/exam-write-target.test.ts`, `exam-write-lockdown.test.ts`. **The real hosted chain is unverified (W3).** |
+| Legacy RPC exposure | Migration `20261031090100` + `tests/rls/exam-write-lockdown.test.ts`. **Not applied on DEV (M3).** |
+| Parent/child, sibling, cross-family authorisation | `tests/rls/*` RLS suite, green on Linux. Hosted two-family check BLOCKED (F1). |
+| Exam creation, autosave, resume, submission, durable results | `exam-session-create-route`, `exam-submit-route`, resume reconciliation; PR #88's durable per-question submissions. Hosted journey BLOCKED (F2). |
+| Duplicate requests, interrupted connections | Idempotency covered in `exam-submit-route.test.ts` (409 path) and `apply-subscription-event.test.ts`. |
+| Client-supplied score manipulation | Server-authoritative scoring; `tests/rls/exam-attempts.test.ts`, `assessment-session-responses.test.ts`, `scoring-module-boundary.test.ts`. |
+| Answer-key leakage; draft/unapproved content access | §4: no leakage on all 78; papers fail-closed and unimported by any family route; gate now refuses both production markers. |
+| **Student PIN abuse protection** | **Bounded, and weaker than it looks in isolation.** A student signs in with `signInWithPassword(alias, pin)` where the PIN is only 6 digits — there is **no application-level lockout or attempt counter**. What actually protects it is that the alias email is derived from an 8-character, ~40-bit secret login code (`student-alias.ts`), which is never stored as a mapping, so an attacker must guess the code *and* the PIN; plus Supabase's `sign_in_sign_ups` throttle, set locally to 30 per 5 minutes per IP. **The hosted DEV throttle was never read (A5), and local `config.toml` values do not apply to a hosted project.** Defensible for a private family beta; read A5 before any wider use. Minor, non-blocking: both generators use `byte % n` (31-char alphabet, 10 digits), a small modulo bias costing a fraction of a bit — not worth churning the auth path before the beta. |
+| Accessibility, loading states, keyboard operation, tablet layout | Keyboard walkthroughs ×5 retries-0 on the authenticated side (5/5) and now repeated on the public side too (§3); interactive renderers tested at desktop and tablet viewports. **Open defect: six Year 5 items are unanswerable with a screen reader (§4).** |
+| Sensitive logging and operational support | Target decisions carry enumerated reason codes only, never the URL or password (`target.ts`); CI artifacts redact JWTs and token/code query parameters. |
+
 ## 5. Vercel / Preview isolation
 
 - [x] **Automatic Preview deployments cannot target production.** The project's `productionBranch` is `main`, so only

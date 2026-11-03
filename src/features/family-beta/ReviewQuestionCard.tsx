@@ -10,12 +10,14 @@ import { VisualRenderer } from "@/features/exam-engine/visual-renderers/VisualRe
  * One reviewable item, rendered with the SAME renderers the exam uses, so what
  * the reviewer sees and interacts with is what a child would see.
  *
- * The answer key and the scoring outcome come from the server as already-
- * computed strings (`answerSummary`, and `scoreLine` once an answer is given):
- * this component never receives an answer key, so the key is not in the
- * client bundle and not in any prop payload. The reviewer reveals the key by
- * choosing to; it is rendered server-side into `answerSummary` only because
- * this whole route is dev-gated and exists for the reviewer.
+ * The expected answer arrives as an already-formatted string (`answerSummary`)
+ * rather than as an answer-key object, so no key structure reaches the client.
+ * It is NOT secret here, though: because the reveal is client state, the
+ * summary and explanation are in this component's props and therefore in the
+ * page payload, whether or not the reviewer presses the button. That is
+ * acceptable only because the whole route is gated to non-production
+ * deployments and exists for the reviewer — it must never be reachable by a
+ * student. The exam path itself delivers candidate questions with no key.
  */
 export interface ReviewQuestionCardProps {
   readonly slot: number;
