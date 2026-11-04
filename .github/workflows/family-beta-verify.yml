@@ -128,6 +128,12 @@ jobs:
         if: always()
         run: |
           mkdir -p evidence
+          set -o pipefail
+          # An empty build identity is not evidence. Without this, a missing .next/BUILD_ID
+          # left `cat` failing inside a command substitution, printed "BUILD_ID=" and still
+          # exited 0 through `tee` - recording a blank identity as though it were one.
+          test -f .next/BUILD_ID
+          mkdir -p evidence
           { echo "auth BUILD_ID=$(cat .next/BUILD_ID)"; find .next -maxdepth 1 -name 'build-manifest.json' -exec sha256sum {} +; } | tee evidence/auth-build.txt
       - name: Summarise authenticated suite
         if: always()
@@ -213,6 +219,12 @@ jobs:
       - name: Public build identity
         if: always()
         run: |
+          set -o pipefail
+          # An empty build identity is not evidence. Without this, a missing .next/BUILD_ID
+          # left `cat` failing inside a command substitution, printed "BUILD_ID=" and still
+          # exited 0 through `tee` - recording a blank identity as though it were one.
+          test -f .next/BUILD_ID
+          mkdir -p evidence
           { echo "public BUILD_ID=$(cat .next/BUILD_ID)"; find .next -maxdepth 1 -name 'build-manifest.json' -exec sha256sum {} +; } | tee evidence/public-build.txt
       - name: Summarise public suite
         if: always()
