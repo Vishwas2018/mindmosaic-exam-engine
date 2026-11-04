@@ -127,6 +127,16 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   steps now `set -o pipefail`. (This also means the earlier green runs' report checks were never load-bearing; their
   *suite* results stand, because those steps did have `pipefail`.)
 
+- [x] **`family-beta-verify` on the final SHA `e526b602`: PASSED** (run `41748083345`), with the hardened gate:
+  - Authenticated E2E: **90 tests, 89 passed, 0 failed, 0 skipped**, 1 flaky (`admin-draft-review.spec.ts`, an admin
+    screen, not a beta path).
+  - Keyboard walkthrough ×5: **5/5**. Student exam journey ×5: **5/5**. Public keyboard walkthroughs ×5: **10/10**.
+  - Public E2E: **386 tests, 385 passed, 0 failed, 0 skipped**, 1 flaky (`a11y-auth-pages` sign-in walkthrough — the
+    one already disproved by 10/10 under repetition).
+  - Gate outcomes, read from the job's own echo rather than the `continue-on-error`-masked step conclusions:
+    `auth=success public=success kbd=success kbd_summary=success journey=success journey_summary=success`.
+- [x] CI on `e526b602`: all five jobs (`core`, `rls`, `e2e`, `e2e-auth`, `scholarship-drafts`) **passed**.
+
 ### Two gaps in the green run, both now closed in the workflow
 
 - [x] **The 20 skipped authenticated tests were the entire email path.** `e2e/auth/email-confirmation-and-recovery.spec.ts`
@@ -163,6 +173,13 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
     exits 1.
   - Confirmed occurrences of this one error so far: `a34fd6f8` (1), `e5b02db3` (1 of 5 in the repeat), `35474d87`
     (2 in the full suite). **At least four, across three runs.** Not a flake.
+  - **`e526b602` (final SHA): the defect did NOT fire.** `family-beta-verify` is green there, legitimately: the one
+    authenticated flaky was `admin-draft-review.spec.ts` — a different spec, which `--no-flaky-spec
+    student-exam-session` is meant to tolerate — and both the journey ×5 and keyboard ×5 were clean. So the gate
+    behaved correctly in both directions on real data: red on `35474d87`'s report when replayed, green here.
+    **This is not evidence the defect is fixed.** Nothing was changed in the rendering path; it fired on three of the
+    four runs observed and simply did not on the fourth. It stays open, and the gate will now stop a run in which it
+    fires instead of waving it through.
 
   `e2e/auth/student-exam-session.spec.ts:56` — `expect(getByTestId("start-exam")).toBeVisible()` — failed with
   **`strict mode violation: getByTestId('start-exam') resolved to 2 elements`**:
