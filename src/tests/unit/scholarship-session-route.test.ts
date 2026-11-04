@@ -9,6 +9,14 @@ vi.mock("@/server/exam-bank", () => ({ getExamBank: vi.fn(() => state.bank) }));
 const mockGetUser = vi.fn();
 const mockProfileSingle = vi.fn();
 const mockCreateRpc = vi.fn();
+/* P1 lockdown: sessions are created by the dedicated exam-writer role (20261031090000), not by an RPC through the
+   student's own client; `mockCreateRpc` stands in for that write so the assertions keep their shape. */
+vi.mock("@/server/exam-write/legacy-exam-writes", () => ({
+  createLegacyExamSession: async (input: Record<string, unknown>) => {
+    const { data, error } = await mockCreateRpc("create_exam_session_for", input);
+    return error ? { sessionId: null, error } : { sessionId: data, error: null };
+  },
+}));
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
@@ -54,9 +62,9 @@ describe("POST /api/exam/session for scholarship papers", () => {
     expect(body.questions).toHaveLength(40);
 
     const [fn, params] = mockCreateRpc.mock.calls[0];
-    expect(fn).toBe("create_exam_session");
-    expect((params as { p_selected_question_ids: string[] }).p_selected_question_ids).toHaveLength(40);
-    expect(new Set((params as { p_selected_question_ids: string[] }).p_selected_question_ids)).toEqual(new Set(nr.map((q) => q.id)));
+    expect(fn).toBe("create_exam_session_for");
+    expect((params as { selectedQuestionIds: string[] }).selectedQuestionIds).toHaveLength(40);
+    expect(new Set((params as { selectedQuestionIds: string[] }).selectedQuestionIds)).toEqual(new Set(nr.map((q) => q.id)));
 
     const serialised = JSON.stringify(body);
     for (const question of body.questions) {

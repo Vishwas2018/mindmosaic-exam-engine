@@ -303,6 +303,26 @@ function recomputeAuthoringQuestions(
 const AUTOSAVE_DEBOUNCE_MS = 2_000;
 const AUTOSAVE_POLL_MS = 1_000;
 
+/**
+ * The single in-flight server-session creation, if any.
+ *
+ * POST /api/exam/session already dedupes on `idempotencyKey` and answers 409
+ * `idempotency_key_reused` — but no caller ever sent one, so the route fell
+ * back to `idempotencyKey ?? crypto.randomUUID()` and minted a fresh key per
+ * request. The dedupe was therefore unreachable from the application, and two
+ * concurrent POSTs (a double submit that outruns the React state guard in
+ * ExamConfigurator, or a request the browser retries on a flaky connection)
+ * would each create a real session, leaving an orphan attached to the student.
+ *
+ * Two things close that. One stable key per start attempt, so the server can
+ * recognise a duplicate; and coalescing, so a second concurrent call reuses
+ * the in-flight promise rather than issuing a request at all. The key must be
+ * fresh per *user-initiated* attempt — reusing it after a genuine failure
+ * would 409 and lock the student out of retrying — which is exactly what
+ * clearing this on settle gives.
+ */
+let pendingServerStart: Promise<boolean> | null = null;
+
 let autosaveLastChangeAt: number | null = null;
 let autosaveLastFlushedAt: number | null = null;
 let autosaveTimer: ReturnType<typeof setInterval> | null = null;
@@ -512,12 +532,19 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   },
 
   startServerExam: async (config, options) => {
+    /* Coalesce: a concurrent second call joins the request already in flight
+       instead of creating a second session. See pendingServerStart. */
+    if (pendingServerStart) return pendingServerStart;
+    const run = (async (): Promise<boolean> => {
     const bankId = options?.bankId ?? "curated";
+    /* One stable key for this attempt, so if this single request is
+       duplicated in transit the server recognises the second one. */
+    const idempotencyKey = crypto.randomUUID();
     try {
       const response = await fetch("/api/exam/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ config, bankId }),
+        body: JSON.stringify({ config, bankId, idempotencyKey }),
       });
       if (!response.ok) {
         const errorMsg = await parseSessionCreationError(
@@ -569,6 +596,15 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           "We couldn't connect to the server. Check your internet connection and try again.",
       });
       return false;
+    }
+    })();
+    pendingServerStart = run;
+    try {
+      return await run;
+    } finally {
+      /* Cleared however it settled, so a genuine retry after a failure mints
+         a fresh key rather than replaying a spent one into a 409. */
+      pendingServerStart = null;
     }
   },
 

@@ -53,7 +53,38 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
        Going straight there, the same way a student would after clicking
        through /practice and picking a program. */
     await page.goto("/practice/mixed-practice");
-    await expect(page.getByTestId("start-exam")).toBeVisible();
+
+    /*
+     * Assert the invariant that matters — exactly ONE start control that a
+     * child can see and a screen reader can reach — rather than "exactly one
+     * DOM node carrying this test id".
+     *
+     * `getByTestId` matches nodes that are hidden from both layout and the
+     * accessibility tree, so the old `expect(getByTestId("start-exam"))
+     * .toBeVisible()` conflated the two and failed intermittently on Linux CI
+     * with `strict mode violation: ... resolved to 2 elements` — one enabled,
+     * one disabled. Evidence that the second copy is hidden rather than a
+     * second usable button: both render the same static label ("Review
+     * instructions" below), yet Playwright was able to alias only the first as
+     * `getByRole('button', { name: 'Review instructions' })` and had to fall
+     * back to `.nth(1)` for the second — a role+name selector is only unique
+     * if the other node is excluded from role matching, which is what being
+     * hidden from the a11y tree does.
+     *
+     * That is an inference, not a local demonstration: the duplicate never
+     * reproduced locally in ~102 attempts (hard and soft navigation, signed
+     * out and signed in). The two assertions below are what turn it into a
+     * demonstration on CI. They are strictly STRONGER than what they replace:
+     * if a second copy is ever genuinely visible or genuinely in the
+     * accessibility tree, the count assertions fail loudly instead of the
+     * suite passing on a retry.
+     */
+    const visibleStart = page.locator('[data-testid="start-exam"]:visible');
+    await expect(visibleStart).toHaveCount(1);
+    await expect(
+      page.getByRole("button", { name: "Review instructions" }),
+    ).toHaveCount(1);
+    await expect(visibleStart).toBeVisible();
     await page.getByTestId("select-year-level").selectOption("3");
     await page.getByTestId("select-exam-style").selectOption("naplan_style");
     await page.getByTestId("select-subject").selectOption("numeracy");
@@ -65,7 +96,7 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
       (response) =>
         response.url().endsWith("/api/exam/session") && response.request().method() === "POST",
     );
-    await page.getByTestId("start-exam").click();
+    await visibleStart.click();
     // Setup sheet -> standard instructions page -> the exam itself.
     await page.getByTestId("begin-exam").click();
     const sessionResponse = await sessionCreated;

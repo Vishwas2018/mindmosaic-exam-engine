@@ -169,6 +169,26 @@ export function BarChartRenderer({ visual, className }: VisualRendererProps) {
         ) : null}
       </svg>
 
+      {/*
+       * Every mark in the SVG above is aria-hidden, so without this list a
+       * screen-reader user received only `altText` and could not read a single
+       * plotted value. LineGraphRenderer already carries the same sr-only
+       * list, and PieChartRenderer exposes its values through a visible
+       * legend; this renderer was the only chart left without an accessible
+       * data equivalent, which made any bar-chart item whose altText does not
+       * happen to recite its values unanswerable without sight.
+       *
+       * This states the DATA, not the answer — the same line the other two
+       * renderers already draw. An item must still be solved from it.
+       */}
+      <ul className="sr-only">
+        {data.values.map((value, index) => (
+          <li key={`sr-${index}-${data.labels[index]}`}>
+            {data.labels[index]}: {value}
+            {data.yAxisLabel ? ` ${data.yAxisLabel}` : ""}
+          </li>
+        ))}
+      </ul>
       {visual.caption ? (
         <figcaption className="mt-2 text-center text-sm text-slate-600">
           {visual.caption}

@@ -83,6 +83,20 @@ const GROUPS: Group[] = [
     ],
   },
   {
+    title: "Dev tools",
+    access: "Non-production deployments only — each one 404s in production",
+    routes: [
+      {
+        path: "/dev/family-beta-review",
+        label: "Family beta content review",
+        flags: ["dev-tool"],
+        note: "shows expected answers; needs FAMILY_BETA_FIXED_PAPERS_PREVIEW=enabled; content is UNAPPROVED",
+      },
+      { path: "/dev/bar-model", label: "Bar model preview", flags: ["dev-tool"] },
+      { path: "/dev/writing", label: "Writing practice preview", flags: ["dev-tool"] },
+    ],
+  },
+  {
     title: "Admin",
     access: "Admin role",
     routes: [

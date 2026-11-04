@@ -1,0 +1,735 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+/**
+ * The recovery endpoints, decision by decision. Signing, origin checking, cookies and `NextResponse` are all real; only
+ * the Auth service is scripted (the live behaviour against GoTrue is e2e/auth/email-confirmation-and-recovery.spec.ts).
+ */
+vi.mock("server-only", () => ({}));
+vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
+
+const cookieJar = new Map<string, string>();
+vi.mock("next/headers", () => ({
+  cookies: async () => ({ get: (name: string) => (cookieJar.has(name) ? { name, value: cookieJar.get(name)! } : undefined) }),
+}));
+
+interface FakeUser {
+  id: string;
+}
+const auth = {
+  user: null as FakeUser | null,
+  token: null as string | null,
+  verifyOtp: vi.fn(),
+  updateUser: vi.fn(),
+  signOut: vi.fn(),
+};
+/**
+ * An in-memory stand-in for public.claim_recovery_grant / settle_recovery_grant / resolve_recovery_claim with the SAME
+ * semantics as the SQL in supabase/migrations/20261102090000_recovery_grant_claims.sql + 20261103090000_recovery_claim_fail_closed.sql (fencing token, password-hash digest,
+ * lapsed-claim handling). The SQL itself is exercised against a real database in tests/rls/recovery-grant-claims.test.ts;
+ * this lets the route's decisions be driven deterministically. `pw` stands in for auth.users.encrypted_password.
+ */
+const LEASE_MS = 2 * 60 * 1000;
+type ClaimRow = { userId: string; state: "claimed" | "spent" | "abandoned"; token: string; pw: number; leaseUntil: number | null };
+const claimsDb = {
+  rows: new Map<string, ClaimRow>(),
+  now: () => Date.now(),
+  /** The user's password version: bumped whenever the (fake) Auth service really changes the password. */
+  pw: 0,
+  seq: 0,
+  /** "unavailable" = the function is missing / the database is down. */
+  mode: "ok" as "ok" | "unavailable",
+  /** Make the next N settle calls fail with an RPC error. */
+  settleFailures: 0,
+  /** Make the next N resolve calls fail with an RPC error. */
+  resolveFailures: 0,
+  /** Hold every claim call until released, to interleave concurrent requests. */
+  claimGate: null as Promise<void> | null,
+  calls: [] as Array<{ fn: string; args: Record<string, unknown> }>,
+};
+const nextToken = () => `00000000-0000-4000-8000-${String(++claimsDb.seq).padStart(12, "0")}`;
+async function fakeRpc(fn: string, args: Record<string, unknown>) {
+  claimsDb.calls.push({ fn, args });
+  if (claimsDb.mode === "unavailable") return { data: null, error: { message: "function does not exist" } };
+  const uid = auth.user?.id;
+  if (!uid) return { data: null, error: { message: "MM010" } };
+  const jti = String(args.p_jti);
+  if (fn === "claim_recovery_grant") {
+    if (claimsDb.claimGate) await claimsDb.claimGate;
+    let row = claimsDb.rows.get(jti);
+    const lapsed = !!row && row.state === "claimed" && (row.leaseUntil ?? 0) <= claimsDb.now();
+    /* Lapsed or abandoned, and the password changed: a successful attempt that never settled: spent. */
+    if (row && row.userId === uid && (lapsed || row.state === "abandoned") && row.pw !== claimsDb.pw) {
+      row.state = "spent";
+      row.leaseUntil = null;
+    }
+    /* Lapsed and unchanged: UNCERTAIN, terminal. A claim is never taken over. */
+    if (row && row.userId === uid && row.state === "claimed" && (row.leaseUntil ?? 0) <= claimsDb.now()) {
+      row.state = "abandoned";
+      row.leaseUntil = null;
+    }
+    if (!row) {
+      row = { userId: uid, state: "claimed", token: nextToken(), pw: claimsDb.pw, leaseUntil: claimsDb.now() + LEASE_MS };
+      claimsDb.rows.set(jti, row);
+      return { data: { outcome: "claimed", token: row.token }, error: null };
+    }
+    if (row.userId !== uid) return { data: { outcome: "busy" }, error: null };
+    return { data: { outcome: row.state === "spent" ? "spent" : row.state === "abandoned" ? "lapsed" : "busy" }, error: null };
+  }
+  if (fn === "settle_recovery_grant") {
+    if (claimsDb.settleFailures > 0) {
+      claimsDb.settleFailures -= 1;
+      return { data: null, error: { message: "blip" } };
+    }
+    const row = claimsDb.rows.get(jti);
+    if (!row || row.userId !== uid) return { data: false, error: null };
+    if (args.p_outcome === "spent") {
+      if (row.state === "claimed" || row.state === "abandoned") {
+        row.state = "spent";
+        row.leaseUntil = null;
+      }
+      return { data: true, error: null };
+    }
+    if (row.state === "spent") return { data: false, error: null };
+    if (row.pw !== claimsDb.pw) {
+      row.state = "spent";
+      row.leaseUntil = null;
+      return { data: false, error: null };
+    }
+    if (row.state !== "claimed" || row.token !== args.p_token || (row.leaseUntil ?? 0) <= claimsDb.now()) {
+      return { data: false, error: null };
+    }
+    claimsDb.rows.delete(jti);
+    return { data: true, error: null };
+  }
+  if (fn === "resolve_recovery_claim") {
+    if (claimsDb.resolveFailures > 0) {
+      claimsDb.resolveFailures -= 1;
+      return { data: null, error: { message: "blip" } };
+    }
+    const row = claimsDb.rows.get(jti);
+    if (!row || row.userId !== uid) return { data: "unknown", error: null };
+    if (row.state === "spent") return { data: "changed", error: null };
+    if (row.token !== args.p_token) return { data: "unknown", error: null };
+    if (row.pw !== claimsDb.pw) {
+      row.state = "spent";
+      row.leaseUntil = null;
+      return { data: "changed", error: null };
+    }
+    return { data: "unchanged", error: null };
+  }
+  return { data: null, error: { message: "unknown function" } };
+}
+
+vi.mock("@/lib/supabase/server", () => ({
+  createClient: async () => ({
+    rpc: fakeRpc,
+    auth: {
+      getUser: async () => (auth.user ? { data: { user: auth.user }, error: null } : { data: { user: null }, error: { message: "no session" } }),
+      getSession: async () => ({ data: { session: auth.token ? { access_token: auth.token } : null } }),
+      verifyOtp: auth.verifyOtp,
+      updateUser: auth.updateUser,
+      signOut: auth.signOut,
+    },
+  }),
+}));
+
+import { POST as verifyPost } from "@/app/api/auth/recovery/verify/route";
+import { DELETE as sessionDelete, GET as sessionGet, POST as sessionPost } from "@/app/api/auth/recovery/session/route";
+import { POST as passwordPost } from "@/app/api/auth/recovery/password/route";
+import { RECOVERY_CSRF_HEADER, RECOVERY_GRANT_COOKIE, issueRecoveryGrant } from "@/server/auth/recovery-grant";
+
+const ORIGIN = "http://127.0.0.1:3101";
+const USER_A: FakeUser = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa" };
+const USER_B: FakeUser = { id: "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb" };
+const STRONG = "Str0ng!NewPassword";
+const TOKEN_HASH = "pkce_super_secret_token_hash_value_123456";
+
+const jwt = (claims: object) => `h.${Buffer.from(JSON.stringify(claims)).toString("base64url")}.s`;
+const nowS = () => Math.floor(Date.now() / 1000);
+
+function signIn(user: FakeUser, sessionId: string, methods: Array<{ method: string; timestamp: number }>) {
+  auth.user = user;
+  auth.token = jwt({ sub: user.id, session_id: sessionId, amr: methods });
+}
+
+function request(path: string, init: { method?: string; headers?: Record<string, string | null>; body?: unknown } = {}) {
+  const headers: Record<string, string> = { host: "127.0.0.1:3101", origin: ORIGIN, "content-type": "application/json" };
+  for (const [name, value] of Object.entries(init.headers ?? {})) {
+    if (value === null) delete headers[name];
+    else headers[name] = value;
+  }
+  return new Request(`${ORIGIN}${path}`, {
+    method: init.method ?? "POST",
+    headers,
+    body: init.body === undefined ? undefined : JSON.stringify(init.body),
+  });
+}
+
+const setCookies = (response: Response) => response.headers.getSetCookie();
+
+let logSpies: ReturnType<typeof vi.spyOn>[];
+beforeEach(() => {
+  process.env.RECOVERY_GRANT_SECRET = "route-test-recovery-secret-0123456789abcdef";
+  cookieJar.clear();
+  claimsDb.rows.clear();
+  claimsDb.mode = "ok";
+  claimsDb.settleFailures = 0;
+  claimsDb.resolveFailures = 0;
+  claimsDb.pw = 0;
+  claimsDb.seq = 0;
+  claimsDb.claimGate = null;
+  claimsDb.calls = [];
+  claimsDb.now = () => Date.now();
+  auth.user = null;
+  auth.token = null;
+  auth.verifyOtp.mockReset();
+  /* A successful Auth password change really changes the password (what the database digest observes). */
+  auth.updateUser.mockReset().mockImplementation(async () => {
+    claimsDb.pw += 1;
+    return { data: {}, error: null };
+  });
+  auth.signOut.mockReset().mockResolvedValue({ error: null });
+  logSpies = (["log", "info", "warn", "error", "debug"] as const).map((level) => vi.spyOn(console, level).mockImplementation(() => undefined));
+});
+afterEach(() => {
+  delete process.env.RECOVERY_GRANT_SECRET;
+  /* Nothing in the recovery path may log, and the one-time token must appear in no log line. */
+  for (const spy of logSpies) {
+    expect(JSON.stringify(spy.mock.calls)).not.toContain(TOKEN_HASH);
+    expect(spy).not.toHaveBeenCalled();
+    spy.mockRestore();
+  }
+});
+
+/** Issues a grant the way the verify route would, for the session currently signed in, and puts it in the cookie jar. */
+function holdGrant(user = auth.user!, sessionId = "sess-1") {
+  const grant = issueRecoveryGrant({ userId: user.id, sessionId });
+  if (!grant.ok) throw new Error("no grant");
+  cookieJar.set(RECOVERY_GRANT_COOKIE, grant.cookieValue);
+  return grant;
+}
+
+describe("POST /api/auth/recovery/verify", () => {
+  it("rejects a cross-site or origin-less request before touching the token", async () => {
+    for (const origin of ["https://evil.example", null]) {
+      const response = await verifyPost(request("/api/auth/recovery/verify", { headers: { origin }, body: { tokenHash: TOKEN_HASH } }));
+      expect(response.status).toBe(403);
+    }
+    expect(auth.verifyOtp).not.toHaveBeenCalled();
+  });
+
+  it("does not spend the one-time token when the grant secret is missing", async () => {
+    delete process.env.RECOVERY_GRANT_SECRET;
+    const response = await verifyPost(request("/api/auth/recovery/verify", { body: { tokenHash: TOKEN_HASH } }));
+    expect(response.status).toBe(503);
+    expect(auth.verifyOtp).not.toHaveBeenCalled();
+  });
+
+  it("rejects a malformed body without calling the Auth service", async () => {
+    for (const body of [{}, { tokenHash: "x" }, { tokenHash: TOKEN_HASH, extra: 1 }, { tokenHash: 5 }]) {
+      const response = await verifyPost(request("/api/auth/recovery/verify", { body }));
+      expect(response.status).toBe(400);
+    }
+    expect(auth.verifyOtp).not.toHaveBeenCalled();
+  });
+
+  it("reports an expired, reused or invalid token generically, issues no grant, and never echoes the token or the Auth message", async () => {
+    auth.verifyOtp.mockResolvedValue({ data: {}, error: { message: `Email link is invalid or has expired ${TOKEN_HASH}` } });
+    const response = await verifyPost(request("/api/auth/recovery/verify", { body: { tokenHash: TOKEN_HASH } }));
+    expect(response.status).toBe(400);
+    const text = await response.text();
+    expect(text).toBe(JSON.stringify({ error: "invalid_or_expired_link" }));
+    expect(text).not.toContain(TOKEN_HASH);
+    expect(setCookies(response)).toEqual([]);
+  });
+
+  it("verifies the token itself, then issues a grant bound to the session it created", async () => {
+    auth.verifyOtp.mockImplementation(async () => {
+      signIn(USER_A, "sess-recovery", [{ method: "otp", timestamp: nowS() }]);
+      return { data: {}, error: null };
+    });
+    const response = await verifyPost(request("/api/auth/recovery/verify", { body: { tokenHash: TOKEN_HASH } }));
+    expect(response.status).toBe(200);
+    expect(auth.verifyOtp).toHaveBeenCalledWith({ token_hash: TOKEN_HASH, type: "recovery" });
+    const body = (await response.json()) as { csrfToken: string };
+    expect(body.csrfToken).toBeTruthy();
+    expect(response.headers.get("cache-control")).toBe("no-store");
+
+    const [cookie] = setCookies(response);
+    expect(cookie).toMatch(new RegExp(`^${RECOVERY_GRANT_COOKIE}=`));
+    expect(cookie).toMatch(/HttpOnly/i);
+    expect(cookie).toMatch(/SameSite=strict/i);
+    expect(cookie).toMatch(/Path=\/api\/auth\/recovery/);
+    expect(cookie).toMatch(/Max-Age=900/);
+    expect(cookie).not.toContain(TOKEN_HASH);
+    expect(JSON.stringify(Object.fromEntries(response.headers))).not.toContain(TOKEN_HASH);
+  });
+
+  it("refuses to issue a grant when the session cannot be read back from the Auth service", async () => {
+    auth.verifyOtp.mockResolvedValue({ data: {}, error: null }); // verified, but no live session afterwards
+    const response = await verifyPost(request("/api/auth/recovery/verify", { body: { tokenHash: TOKEN_HASH } }));
+    expect(response.status).toBe(400);
+    expect(setCookies(response)).toEqual([]);
+  });
+});
+
+describe("POST /api/auth/recovery/session (a session the Auth service made from a recovery link)", () => {
+  it("is refused with no session", async () => {
+    expect((await sessionPost(request("/api/auth/recovery/session"))).status).toBe(401);
+  });
+
+  it.each([
+    ["password sign-in", [{ method: "password", timestamp: nowS() }]],
+    ["signup confirmation", [{ method: "email/signup", timestamp: nowS() }]],
+    ["verifyOtp / magic link (otp)", [{ method: "otp", timestamp: nowS() }]],
+    ["an old recovery", [{ method: "recovery", timestamp: nowS() - 3600 }]],
+    ["no methods at all", []],
+  ])("is refused for an ordinary session: %s", async (_name, methods) => {
+    signIn(USER_A, "sess-1", methods);
+    const response = await sessionPost(request("/api/auth/recovery/session"));
+    expect(response.status).toBe(403);
+    expect(setCookies(response)).toEqual([]);
+  });
+
+  it("issues a grant for a session with a recent recovery method", async () => {
+    signIn(USER_A, "sess-1", [{ method: "recovery", timestamp: nowS() - 30 }]);
+    const response = await sessionPost(request("/api/auth/recovery/session"));
+    expect(response.status).toBe(200);
+    expect(setCookies(response)[0]).toMatch(/HttpOnly/i);
+  });
+
+  it("is refused from another origin", async () => {
+    signIn(USER_A, "sess-1", [{ method: "recovery", timestamp: nowS() }]);
+    expect((await sessionPost(request("/api/auth/recovery/session", { headers: { origin: "https://evil.example" } }))).status).toBe(403);
+  });
+
+  it("GET reports a grant valid only for the session it was issued for", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    expect(await (await sessionGet()).json()).toEqual({ valid: true, csrfToken: grant.csrfToken, expiresAt: grant.expiresAt });
+    signIn(USER_A, "sess-other", []);
+    expect(await (await sessionGet()).json()).toEqual({ valid: false });
+    signIn(USER_B, "sess-1", []);
+    expect(await (await sessionGet()).json()).toEqual({ valid: false });
+    auth.user = null;
+    expect(await (await sessionGet()).json()).toEqual({ valid: false });
+  });
+
+  it("DELETE clears the grant cookie", async () => {
+    const response = await sessionDelete(request("/api/auth/recovery/session", { method: "DELETE" }));
+    expect(setCookies(response)[0]).toMatch(new RegExp(`^${RECOVERY_GRANT_COOKIE}=;`));
+    expect(setCookies(response)[0]).toMatch(/Max-Age=0/);
+  });
+});
+
+describe("POST /api/auth/recovery/password", () => {
+  const send = (over: { headers?: Record<string, string | null>; body?: unknown } = {}, csrf?: string) =>
+    passwordPost(
+      request("/api/auth/recovery/password", {
+        headers: { ...(csrf ? { [RECOVERY_CSRF_HEADER]: csrf } : {}), ...(over.headers ?? {}) },
+        body: over.body === undefined ? { password: STRONG } : over.body,
+      }),
+    );
+
+  it("changes the password with a valid grant + CSRF token, revokes every session, clears the grant, and cannot be replayed", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    const response = await send({}, grant.csrfToken);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true, otherSessionsRevoked: true, grantSpent: true });
+    expect(auth.updateUser).toHaveBeenCalledExactlyOnceWith({ password: STRONG });
+    expect(auth.signOut).toHaveBeenCalledExactlyOnceWith({ scope: "global" });
+    expect(setCookies(response)[0]).toMatch(/Max-Age=0/);
+
+    /* Replay with the same cookie. The global sign-out ended the session the grant was bound to; the Auth service
+       now refuses its token (measured against the local Auth service in e2e), so there is no live session to match. */
+    auth.user = null;
+    auth.token = null;
+    const replay = await send({}, grant.csrfToken);
+    expect(replay.status).toBe(401);
+    /* ...and a NEW session for the same user is a different binding, so a copied cookie does not carry over. */
+    signIn(USER_A, "sess-new-after-sign-in", []);
+    expect((await send({}, grant.csrfToken)).status).toBe(403);
+    expect(auth.updateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("retries the global sign-out once, and reports honestly when sessions still could not be revoked", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    auth.signOut.mockResolvedValueOnce({ error: { message: "blip" } }).mockResolvedValueOnce({ error: null });
+    expect(await (await send({}, grant.csrfToken)).json()).toEqual({ ok: true, otherSessionsRevoked: true, grantSpent: true });
+    expect(auth.signOut).toHaveBeenCalledTimes(2);
+
+    /* A grant is single-use now, so the second scenario needs its own grant. */
+    const second = holdGrant();
+    auth.signOut.mockReset().mockResolvedValue({ error: { message: "boom" } });
+    expect(await (await send({}, second.csrfToken)).json()).toEqual({ ok: true, otherSessionsRevoked: false, grantSpent: true });
+    expect(auth.signOut).toHaveBeenCalledTimes(2);
+  });
+
+  it("refuses an ordinary signed-in session that holds no grant", async () => {
+    signIn(USER_A, "sess-1", [{ method: "password", timestamp: nowS() }]);
+    const response = await send({}, "anything");
+    expect(response.status).toBe(403);
+    expect(await response.json()).toEqual({ error: "recovery_required", reason: "missing" });
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("refuses with no session at all", async () => {
+    expect((await send({}, "x")).status).toBe(401);
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("refuses a forged grant", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    cookieJar.set(RECOVERY_GRANT_COOKIE, grant.cookieValue.replace(/.$/, (c) => (c === "A" ? "B" : "A")));
+    const response = await send({}, grant.csrfToken);
+    expect(response.status).toBe(403);
+    expect((await response.json()) as { reason: string }).toMatchObject({ reason: "bad_signature" });
+    cookieJar.set(RECOVERY_GRANT_COOKIE, "v1.e30.e30");
+    expect((await send({}, grant.csrfToken)).status).toBe(403);
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("refuses an expired grant", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = issueRecoveryGrant({ userId: USER_A.id, sessionId: "sess-1" }, Date.now() - 16 * 60 * 1000);
+    if (!grant.ok) throw new Error("no grant");
+    cookieJar.set(RECOVERY_GRANT_COOKIE, grant.cookieValue);
+    const response = await send({}, grant.csrfToken);
+    expect(response.status).toBe(403);
+    expect((await response.json()) as { reason: string }).toMatchObject({ reason: "expired" });
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("refuses a grant after the browser's account switched (other user, or other session of the same user)", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    signIn(USER_B, "sess-1", []);
+    expect((await send({}, grant.csrfToken)).status).toBe(403);
+    signIn(USER_A, "sess-signed-in-again", []);
+    expect((await send({}, grant.csrfToken)).status).toBe(403);
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("is protected against CSRF: no origin, a foreign origin, a missing or wrong token, or a non-JSON body", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    expect((await send({ headers: { origin: "https://evil.example" } }, grant.csrfToken)).status).toBe(403);
+    expect((await send({ headers: { origin: null } }, grant.csrfToken)).status).toBe(403);
+    expect((await send({}, undefined)).status).toBe(403);
+    expect((await send({}, "not-the-token")).status).toBe(403);
+    expect((await send({ headers: { "content-type": "text/plain" } }, grant.csrfToken)).status).toBe(415);
+    expect((await send({ headers: { "content-type": "application/x-www-form-urlencoded" } }, grant.csrfToken)).status).toBe(415);
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("rejects an invalid body and a policy-failing password before calling the Auth service", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    expect((await send({ body: {} }, grant.csrfToken)).status).toBe(400);
+    expect((await send({ body: { password: STRONG, extra: true } }, grant.csrfToken)).status).toBe(400);
+    const weak = await send({ body: { password: "password" } }, grant.csrfToken);
+    expect(weak.status).toBe(400);
+    expect(await weak.json()).toEqual({ error: "password_too_weak" });
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("keeps the grant usable when the Auth service rejects the password (for example, the same password)", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 422, message: "same_password" } });
+    const rejected = await send({}, grant.csrfToken);
+    expect(rejected.status).toBe(400);
+    expect(await rejected.json()).toEqual({ error: "password_rejected" });
+    expect(auth.signOut).not.toHaveBeenCalled();
+    expect(setCookies(rejected)).toEqual([]);
+    expect((await send({}, grant.csrfToken)).status).toBe(200);
+  });
+
+  it("fails closed when the grant secret is missing", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    delete process.env.RECOVERY_GRANT_SECRET;
+    expect((await send({}, grant.csrfToken)).status).toBe(503);
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+});
+
+describe("POST /api/auth/recovery/password: server-side single use", () => {
+  const send = async (csrf: string, body: unknown = { password: STRONG }) =>
+    passwordPost(request("/api/auth/recovery/password", { headers: { [RECOVERY_CSRF_HEADER]: csrf }, body }));
+
+  it("two concurrent requests with the same grant: exactly one changes the password, the other is refused", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    let release!: () => void;
+    claimsDb.claimGate = new Promise<void>((resolve) => (release = resolve));
+    const first = send(grant.csrfToken);
+    const second = send(grant.csrfToken, { password: "An0ther!Strong1" });
+    /* Both requests are now parked at the claim; let them race. */
+    await new Promise((r) => setTimeout(r, 20));
+    expect(claimsDb.calls.filter((c) => c.fn === "claim_recovery_grant")).toHaveLength(2);
+    release();
+    const statuses = (await Promise.all([first, second])).map((r) => r.status).sort();
+    expect(statuses).toEqual([200, 409]);
+    expect(auth.updateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("replaying the grant after a successful change is refused as spent, even from the same still-valid session", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    expect((await send(grant.csrfToken)).status).toBe(200);
+    /* The session is still live in the Auth stand-in: this is the global-sign-out-failed shape. */
+    const replay = await send(grant.csrfToken);
+    expect(replay.status).toBe(403);
+    expect(await replay.json()).toEqual({ error: "recovery_required", reason: "spent" });
+    expect(auth.updateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("a failed global sign-out does not leave the grant reusable", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    auth.signOut.mockResolvedValue({ error: { message: "down" } });
+    const done = await send(grant.csrfToken);
+    expect(await done.json()).toEqual({ ok: true, otherSessionsRevoked: false, grantSpent: true });
+    expect((await send(grant.csrfToken)).status).toBe(403);
+    expect(auth.updateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("claims before the password change and records 'spent' before the session is ended", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    const events: string[] = [];
+    const rpc = claimsDb.calls;
+    auth.updateUser.mockImplementation(async () => {
+      events.push(`updateUser after ${rpc.map((c) => c.fn).join(",")}`);
+      return { data: {}, error: null };
+    });
+    auth.signOut.mockImplementation(async () => {
+      events.push(`signOut after ${rpc.map((c) => `${c.fn}:${String(c.args.p_outcome ?? "")}`).join(",")}`);
+      return { error: null };
+    });
+    expect((await send(grant.csrfToken)).status).toBe(200);
+    expect(events).toEqual([
+      "updateUser after claim_recovery_grant",
+      "signOut after claim_recovery_grant:,settle_recovery_grant:spent",
+    ]);
+  });
+
+  it("a rejected password releases the claim so the SAME grant can try again", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 422, message: "same_password" } });
+    expect((await send(grant.csrfToken)).status).toBe(400);
+    expect(claimsDb.rows.size).toBe(0);
+    expect((await send(grant.csrfToken, { password: "An0ther!Strong1" })).status).toBe(200);
+  });
+
+  it("a definitive 4xx refusal releases the claim; a FAILED release lapses and the grant is then retired (fresh link), never re-claimed", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 429, message: "rate limited" } });
+    expect((await send(grant.csrfToken)).status).toBe(502);
+    expect(claimsDb.rows.size).toBe(0);
+
+    auth.updateUser.mockResolvedValueOnce({ data: {}, error: { status: 400, message: "bad" } });
+    claimsDb.settleFailures = 2; // both release attempts fail
+    expect((await send(grant.csrfToken)).status).toBe(502);
+    /* Still claimed and inside the lease: busy, not a permanent lock. */
+    expect((await send(grant.csrfToken)).status).toBe(409);
+    const base = Date.now();
+    claimsDb.now = () => base + 3 * 60 * 1000;
+    const lapsed = await send(grant.csrfToken);
+    expect(lapsed.status).toBe(403);
+    expect(await lapsed.json()).toEqual({ error: "recovery_required", reason: "lapsed" });
+    expect(auth.updateUser).toHaveBeenCalledTimes(2); // the refused attempts only; no further dispatch
+  });
+
+  describe("ambiguous Auth answers (the password may already have changed)", () => {
+    const calls = (name: string) => claimsDb.calls.filter((c) => c.fn === name);
+
+    it("a thrown error or 5xx where the password did NOT change keeps the claim (no release); after the lease the grant is ABANDONED and a fresh link is required", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      auth.updateUser.mockRejectedValueOnce(new Error("network"));
+      const first = await send(grant.csrfToken);
+      expect(first.status).toBe(503);
+      expect(await first.json()).toEqual({ error: "update_uncertain" });
+      expect(calls("resolve_recovery_claim")).toHaveLength(1);
+      expect(calls("settle_recovery_grant")).toEqual([]); // never released on a guess
+      expect(claimsDb.rows.size).toBe(1);
+      expect(auth.signOut).not.toHaveBeenCalled();
+
+      /* Inside the lease the in-flight attempt still owns the grant. */
+      expect((await send(grant.csrfToken)).status).toBe(409);
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+
+      /* After the lease the outcome is still uncertain (Auth may be slow): the grant is retired, never re-dispatched. */
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      const after = await send(grant.csrfToken);
+      expect(after.status).toBe(403);
+      expect(await after.json()).toEqual({ error: "recovery_required", reason: "lapsed" });
+      expect([...claimsDb.rows.values()][0]?.state).toBe("abandoned");
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+      /* ...and if the slow request did commit later, the next presentation is recorded as spent. */
+      claimsDb.pw += 1;
+      const again = await send(grant.csrfToken);
+      expect(await again.json()).toEqual({ error: "recovery_required", reason: "spent" });
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+
+    it("a 5xx AFTER Auth committed the change is recognised from the database: success, grant spent, sessions revoked, no second change", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      auth.updateUser.mockImplementationOnce(async () => {
+        claimsDb.pw += 1; // Auth committed...
+        return { data: {}, error: { status: 504, message: "gateway timeout" } }; // ...but the answer was lost
+      });
+      const response = await send(grant.csrfToken);
+      expect(response.status).toBe(200);
+      expect(await response.json()).toEqual({ ok: true, otherSessionsRevoked: true, grantSpent: true });
+      expect(auth.signOut).toHaveBeenCalledWith({ scope: "global" });
+      expect((await send(grant.csrfToken)).status).toBe(403);
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+
+    it("if the database cannot be asked either, the claim is kept; once the lease lapses the changed password makes the grant spent", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      auth.updateUser.mockImplementationOnce(async () => {
+        claimsDb.pw += 1;
+        throw new Error("socket hang up");
+      });
+      claimsDb.resolveFailures = 2;
+      expect((await send(grant.csrfToken)).status).toBe(503);
+      expect(auth.signOut).not.toHaveBeenCalled();
+      expect([...claimsDb.rows.values()][0]?.state).toBe("claimed");
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      const retry = await send(grant.csrfToken);
+      expect(retry.status).toBe(403);
+      expect(await retry.json()).toEqual({ error: "recovery_required", reason: "spent" });
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("lease expiry, takeover and fencing", () => {
+    it("password changed but 'spent' could not be recorded (and sign-out failed): the lapsed claim becomes spent, never re-claimable", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      claimsDb.settleFailures = 2;
+      auth.signOut.mockResolvedValue({ error: { message: "down" } });
+      const done = await send(grant.csrfToken);
+      expect(await done.json()).toEqual({ ok: true, otherSessionsRevoked: false, grantSpent: false });
+      expect([...claimsDb.rows.values()][0]?.state).toBe("claimed");
+      expect((await send(grant.csrfToken)).status).toBe(409); // inside the lease
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      const replay = await send(grant.csrfToken);
+      expect(replay.status).toBe(403);
+      expect(await replay.json()).toEqual({ error: "recovery_required", reason: "spent" });
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+
+    it("DELAYED Auth success beyond the lease: a second request cannot take over or dispatch, and the late success still spends the grant", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      let finishFirst!: (v: { data: object; error: null }) => void;
+      auth.updateUser.mockImplementationOnce(() => new Promise((resolve) => (finishFirst = resolve)));
+      const first = send(grant.csrfToken);
+      await new Promise((r) => setTimeout(r, 20));
+      const jti = [...claimsDb.rows.keys()][0]!;
+
+      /* The lease lapses while the first request is still waiting on Auth (password unchanged). */
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      const second = await send(grant.csrfToken, { password: "An0ther!Strong1" });
+      expect(second.status).toBe(403);
+      expect(await second.json()).toEqual({ error: "recovery_required", reason: "lapsed" });
+      expect(auth.updateUser).toHaveBeenCalledTimes(1); // takeover refused: Auth was never asked a second time
+      expect(claimsDb.rows.get(jti)?.state).toBe("abandoned");
+
+      /* The slow first request now succeeds at Auth and reports in: spent, sessions revoked. */
+      claimsDb.pw += 1;
+      finishFirst({ data: {}, error: null });
+      expect((await first).status).toBe(200);
+      expect(claimsDb.rows.get(jti)?.state).toBe("spent");
+      expect((await send(grant.csrfToken)).status).toBe(403);
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+
+    it("a LATE definitive refusal after abandonment cannot release: the grant stays retired", async () => {
+      signIn(USER_A, "sess-1", []);
+      const grant = holdGrant();
+      let finishFirst!: (v: { data: object; error: { status: number; message: string } }) => void;
+      auth.updateUser.mockImplementationOnce(() => new Promise((resolve) => (finishFirst = resolve)));
+      const first = send(grant.csrfToken);
+      await new Promise((r) => setTimeout(r, 20));
+      const jti = [...claimsDb.rows.keys()][0]!;
+      const base = Date.now();
+      claimsDb.now = () => base + 3 * 60 * 1000;
+      expect((await send(grant.csrfToken)).status).toBe(403); // retires it
+      finishFirst({ data: {}, error: { status: 422, message: "weak" } });
+      expect((await first).status).toBe(400);
+      expect(claimsDb.rows.get(jti)?.state).toBe("abandoned"); // not released, not claimable
+      expect((await send(grant.csrfToken)).status).toBe(403);
+      expect(auth.updateUser).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it("a failure to record 'spent' is reported, and the session is still ended", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    claimsDb.settleFailures = 2;
+    const response = await send(grant.csrfToken);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true, otherSessionsRevoked: true, grantSpent: false });
+    expect(auth.signOut).toHaveBeenCalledWith({ scope: "global" });
+  });
+
+  it("fails closed with nothing changed when the claim store is unavailable (migration absent, database down)", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    claimsDb.mode = "unavailable";
+    const response = await send(grant.csrfToken);
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({ error: "recovery_unavailable" });
+    expect(auth.updateUser).not.toHaveBeenCalled();
+    expect(auth.signOut).not.toHaveBeenCalled();
+    claimsDb.mode = "ok";
+    expect((await send(grant.csrfToken)).status).toBe(200);
+  });
+
+  it("an expired grant and a grant for another session never reach the claim store", async () => {
+    signIn(USER_A, "sess-1", []);
+    const expired = issueRecoveryGrant({ userId: USER_A.id, sessionId: "sess-1" }, Date.now() - 16 * 60 * 1000);
+    if (!expired.ok) throw new Error("no grant");
+    cookieJar.set(RECOVERY_GRANT_COOKIE, expired.cookieValue);
+    expect((await send(expired.csrfToken)).status).toBe(403);
+    const other = holdGrant(USER_A, "sess-other");
+    expect((await send(other.csrfToken)).status).toBe(403);
+    expect(claimsDb.calls).toEqual([]);
+    expect(auth.updateUser).not.toHaveBeenCalled();
+  });
+
+  it("a policy-failing password or bad CSRF token does not consume the grant", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    expect((await send(grant.csrfToken, { password: "password" })).status).toBe(400);
+    expect((await send("wrong")).status).toBe(403);
+    expect(claimsDb.calls).toEqual([]);
+    expect((await send(grant.csrfToken)).status).toBe(200);
+  });
+
+  it("another account presenting a spent grant's cookie is refused without touching the password", async () => {
+    signIn(USER_A, "sess-1", []);
+    const grant = holdGrant();
+    expect((await send(grant.csrfToken)).status).toBe(200);
+    signIn(USER_B, "sess-1", []);
+    expect((await send(grant.csrfToken)).status).toBe(403);
+    expect(auth.updateUser).toHaveBeenCalledTimes(1);
+  });
+});

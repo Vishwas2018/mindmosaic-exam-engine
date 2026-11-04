@@ -30,7 +30,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { publishedExamBank } from "@/content/questions/practice-bank";
 
-import { connect, scoringDbUrl } from "./db";
+import { connect, examWriterDbUrl, scoringDbUrl } from "./db";
 import { scopeEnvToFile } from "./support/scoped-env";
 import { asRouteCaller, asRouteOwner, RoutePostgresClient } from "./support/route-postgres-client";
 
@@ -205,6 +205,15 @@ async function seedItem(
 
 /* Set for this file only and put back afterwards, even if a test fails (see support/scoped-env.ts). */
 scopeEnvToFile("SCORING_DB_URL", scoringDbUrl);
+/* The legacy walk below creates and records through the exam-write module, which connects as mindmosaic_exam_writer
+   (20261031090000) -- the same role the application uses. The fixtures are committed, so its own connection sees them. */
+scopeEnvToFile("EXAM_WRITE_DB_URL", examWriterDbUrl);
+/* The writer refuses a loopback target unless the opt-in is explicit (see validatedTarget() in
+   src/server/exam-write/legacy-exam-writes.ts): without this, every create below is refused before connecting and the
+   route answers 503 not_configured instead of 200. This harness runs against 127.0.0.1 by design, so the opt-in is the
+   correct posture here and the refusal itself stays covered -- tests/rls/exam-write-target.test.ts proves a loopback
+   target IS refused when the flag is absent, and that a hosted target is refused on a ref mismatch. */
+scopeEnvToFile("EXAM_WRITE_ALLOW_LOOPBACK", () => "1");
 
 beforeAll(async () => {
 

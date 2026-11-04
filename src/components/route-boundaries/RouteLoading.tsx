@@ -71,7 +71,8 @@ export function DashboardLoading({
             <Skeleton className="h-10 w-72" />
             <span className="sr-only">{label}</span>
           </div>
-          <Skeleton className="h-4 w-96" />
+          {/* max-w-full: a fixed 24rem line is wider than a 375px phone and made the loading state scroll sideways. */}
+          <Skeleton className="h-4 w-96 max-w-full" />
           {Array.from({ length: cards }, (_, index) => (
             <CardSkeleton key={index} lines={index === 0 ? 2 : 3} />
           ))}

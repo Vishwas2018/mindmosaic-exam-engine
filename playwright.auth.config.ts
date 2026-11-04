@@ -12,6 +12,14 @@ import { e2eEnv } from "./e2e/fixtures/env";
 assertLocalSupabaseEnvironment();
 
 /*
+ * supabase/config.toml points the local Auth service at the token_hash email templates (supabase/templates), so the
+ * links in Mailpit work in any browser. The email specs choose their expectations from this flag, so it must match the
+ * stack: without it they would expect device-bound PKCE links and fail on the cross-browser confirmation. Set it to
+ * "0" only against a stack started with the default (PKCE) templates.
+ */
+process.env.E2E_TOKEN_HASH_TEMPLATES ??= "1";
+
+/*
  * Overridable via PW_AUTH_PORT (see playwright.config.ts / PW_PORT) — a
  * concurrently-running sibling night-* worktree (mm-night-responsive) was
  * actually still holding this repo's hardcoded default, causing a real
@@ -53,6 +61,10 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_URL: e2eEnv.supabaseUrl,
       NEXT_PUBLIC_SUPABASE_ANON_KEY: e2eEnv.supabaseAnonKey,
       SUPABASE_SERVICE_ROLE_KEY: e2eEnv.supabaseServiceRoleKey,
+      // The password-recovery grant (src/server/auth/recovery-grant.ts) and the exam writer's loopback opt-in
+      // (src/server/exam-write/target.ts). Local values only; the environment guard above refuses anything else.
+      RECOVERY_GRANT_SECRET: process.env.RECOVERY_GRANT_SECRET ?? "local-e2e-recovery-grant-secret-not-a-secret-0123456789",
+      EXAM_WRITE_ALLOW_LOOPBACK: process.env.EXAM_WRITE_ALLOW_LOOPBACK ?? "1",
       // Billing enforcement stays off (default) for this mission's scope —
       // see docs/testing/playwright-auth-test-data-guide.md.
       BILLING_ENFORCEMENT_ENABLED: "",
