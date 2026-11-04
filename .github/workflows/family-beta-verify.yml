@@ -134,7 +134,8 @@ jobs:
         run: |
           set -o pipefail
           node scripts/ci/summarise-playwright.mjs "Authenticated E2E (playwright.auth.config.ts)" "$RUNNER_TEMP/pw-auth.json" \
-            --require-spec a11y-parent-dashboard | tee -a "$GITHUB_STEP_SUMMARY" evidence/auth-summary.md
+            --require-spec a11y-parent-dashboard \
+            --no-flaky-spec student-exam-session | tee -a "$GITHUB_STEP_SUMMARY" evidence/auth-summary.md
 
       # 2. The previously unresolved keyboard-walkthrough check, repeated with retries OFF, to tell a real defect from a
       #    one-off. Run after the full suite so it cannot mask it.

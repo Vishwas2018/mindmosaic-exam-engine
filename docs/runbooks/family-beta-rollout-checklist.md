@@ -146,8 +146,23 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   evidence for the exact path both children will take, so a `student exam journey ×5, retries 0` step now runs it five
   times with retries off, gated by `--require-spec student-exam-session`, and joins the final gate.
 
-- [ ] **OPEN DEFECT — the journey repeat FAILED on `e5b02db3`: 4 passed, 1 failed of 5.** This is the single most
-  important open item in this document, and it is why `family-beta-verify` is red on the final SHA.
+- [ ] **OPEN DEFECT — duplicate `start-exam` control on the authenticated practice page.** This is the single most
+  important open item in this document.
+
+  **It fired twice on `35474d87` — a run whose `family-beta-verify` was GREEN.** This is exactly the case where green
+  CI means nothing: in the **full** authenticated suite the test failed, failed again on retry #1, and passed only on
+  retry #2 (`attempts: 3`), both failures with the same `strict mode violation`. The isolated ×5 repeat on the same run
+  passed 5/5. So the ×5 repeat is a **weaker** detector than the full suite — the repeat runs against a warm, idle
+  server, while in the full suite the test runs after ~70 others, which widens the hydration race window. The gate
+  passed because a retry-pass was being counted as a pass.
+  - **Gate fixed:** `summarise-playwright.mjs` takes a new `--no-flaky-spec <substring>`, which makes a retry-pass on
+    a named spec exit 1, and the authenticated step now passes `--no-flaky-spec student-exam-session`. For a journey
+    the product depends on, a retry-pass is a failure. Verified by replaying `35474d87`'s **own** `pw-auth.json`
+    through the new check: it now exits 1 and prints the offending spec. Checked for false positives too — the clean
+    ×5 journey report and the public report (flaky, but a different spec) both still exit 0, and an empty report still
+    exits 1.
+  - Confirmed occurrences of this one error so far: `a34fd6f8` (1), `e5b02db3` (1 of 5 in the repeat), `35474d87`
+    (2 in the full suite). **At least four, across three runs.** Not a flake.
 
   `e2e/auth/student-exam-session.spec.ts:56` — `expect(getByTestId("start-exam")).toBeVisible()` — failed with
   **`strict mode violation: getByTestId('start-exam') resolved to 2 elements`**:
@@ -173,11 +188,12 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   the invalid-Windows note above). It was **not** masked with `.first()`, a `toHaveCount` wait, a retry or a longer
   timeout — AGENTS.md rule 6 says fix the component, and the component's fault is not yet understood.
 
-  **Next step, already in the workflow:** the journey repeat now runs with `--trace=on`, and its `test-results/` are
+  **Next step, already in the workflow:** the journey repeat runs with `--trace=on`, and its `test-results/` are
   copied to `evidence/journey-test-results/` *immediately* after the step rather than in the shared collect step at
-  the end. On `e5b02db3` the public suite reused `test-results/` and overwrote this failure's `error-context.md` and
-  trace before they were uploaded, which is why that run diagnosed nothing. The next red run will carry a DOM
-  snapshot and a trace of the moment both buttons exist.
+  the end (on `e5b02db3` the public suite reused `test-results/` and destroyed this failure's `error-context.md` and
+  trace before upload, which is why that run diagnosed nothing). Note what `35474d87` showed, though: the repeat
+  passed while the full suite failed twice, so the trace is more likely to come from the **full** authenticated suite
+  than from the repeat. The `--no-flaky-spec` gate now makes that run red and preserves its artifacts.
 
   **Beta impact:** a child could momentarily see two start buttons, one greyed out, and a screen-reader user two
   controls with the same name. No data is affected, and the journey completes in 4 of 5 runs. It is a transient
