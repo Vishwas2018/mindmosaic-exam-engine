@@ -1,6 +1,7 @@
 # Family-beta rollout checklist (WP1 candidate)
 
-**Status: NO-GO — blocked on credentials and on human content approval.** Every local and Linux/CI check that can be
+**Status: NO-GO — blocked on an open rendering defect in the core student journey (§3), on credentials, and on human
+content approval.** Every local and Linux/CI check that can be
 run has been run and is recorded below with its result. Nothing has been done on any hosted environment, because the
 credentials required to do it are not available to this workstation (see §0). A box is ticked only with evidence next
 to it; a blocked box is marked BLOCKED, never ticked.
@@ -16,8 +17,26 @@ work is §5 onwards. Production (`uermhsptduikehuyceiz`) is out of scope and unt
 | **No DEV database owner credential.** No `SUPABASE_DB_URL`, `EXAM_WRITE_DB_URL` or `EXAM_WRITE_DB_CA` exists in any local env file or in the Vercel project. The only DEV Postgres URL present is `SCORING_DB_URL` (role `mindmosaic_scoring`), which cannot `CREATE ROLE` or `GRANT`. | Read the variable names (not values) from `.env.local`, `.env.e2e.local`, and the Vercel env listing. | The writer role cannot be created or verified; **W1–W4 BLOCKED**. |
 | **No `RECOVERY_GRANT_SECRET`, and none in Vercel.** | Vercel env listing for the project holds 14 variables; this is not among them. | Hosted password recovery returns 503 `recovery_unavailable`. **A1 BLOCKED.** |
 | **No human content approval.** Not a credential problem — an owner decision. No pinned item carries `approvedBy`. | §4. | The papers must stay unreachable by family users. **Owner gate.** |
+| **Duplicate `start-exam` control on the authenticated practice page**, ~1 in 5 on Linux CI. | §3, journey repeat on `e5b02db3`. | `family-beta-verify` is **red** on the final SHA. Root cause not yet established; deliberately not masked. **GO blocker.** |
 
 Everything in §1–§4 was completed despite these blockers.
+
+### Exactly where each missing value comes from
+
+So this can be unblocked in one sitting. Nothing below should be pasted into a chat, a file in the repo, or a commit;
+the Vercel values go in via the dashboard or `vercel env add`, which never echoes them.
+
+| Needed | Exact screen / field |
+| --- | --- |
+| A working management token | supabase.com → account menu → **Access Tokens** → *Generate new token*. Replace `SUPABASE_ACCESS_TOKEN` in `.env.e2e.local`. This alone unblocks reading DEV migration state (M0). |
+| `SUPABASE_DB_URL` (operator, for `migrations:status`) | Supabase dashboard → project `mfglzabnayacssgertat` → **Project Settings → Database → Connection string → URI**, plus the database password from the same page (*Reset database password* if unknown). Local shell only, never committed. |
+| `SUPABASE_DB_CA` / `SUPABASE_DB_CA_FILE` | Same page → **SSL Configuration → Download certificate**. Check its fingerprint against the dashboard before use. |
+| The `mindmosaic_exam_writer` password | Not retrievable — it is set, not read. Choose a fresh 32+ char random value and set it on DEV with `ALTER ROLE mindmosaic_exam_writer WITH PASSWORD …` in the SQL editor (after M1 creates the role), then use that same value in `EXAM_WRITE_DB_URL`. |
+| `EXAM_WRITE_DB_URL`, `EXAM_WRITE_EXPECTED_PROJECT_REF`, `EXAM_WRITE_DB_CA`, `RECOVERY_GRANT_SECRET` | Vercel → project **mindmosaic-exam-engine** → **Settings → Environment Variables → Add New**, each scoped to **Preview** (and to this branch if you want it isolated). Mark the URL, CA and secret **Sensitive**. `EXAM_WRITE_EXPECTED_PROJECT_REF` is `mfglzabnayacssgertat`. `RECOVERY_GRANT_SECRET` is any fresh 32+ char random string. Redeploy after adding. |
+| Hosted recovery email template (A2) | Supabase dashboard → **Authentication → Emails → Reset Password** — must be the fragment form `/auth/reset#token_hash={{ .TokenHash }}&type=recovery`. Read and record the live value; it is not deployed from this repo. |
+| Redirect allow-list (A3) | **Authentication → URL Configuration → Redirect URLs** — add the DEV origin's `/auth/reset` and `/auth/confirm`. |
+| `secure_password_change`, session lifetimes (A4) | **Authentication → Sign In / Providers** and **Sessions**. Read and record; owner decision. |
+| Rate limits (A5) | **Authentication → Rate Limits** — record the sign-in/sign-up limit in particular, which is what bounds student PIN guessing (§4b). |
 
 ## 1. One release candidate
 
@@ -97,6 +116,17 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   except the marketing site. Fixed by giving it an explicit link out, and the route is now also listed on
   `/dev/routes`. Re-verified locally; the final SHA's run is the confirmation.
 
+- [x] **A third gating hole, found by this failure and fixed: `tee` was swallowing every report check.** Each
+  `summarise-playwright.mjs` step ran as `node … | tee -a "$GITHUB_STEP_SUMMARY" evidence/….md`, and GitHub's default
+  shell is `bash -e`, **not** `bash -eo pipefail`. A pipeline's status is its last command's, so the summariser's
+  `exit 1` was replaced by `tee`'s `exit 0`. On `e5b02db3` the summary printed
+  `tests: 5  passed: 4  failed: 1` and a `### Failures` section, and its step still reported
+  `journey_summary=success`. This had been true of **all five** summarise steps since the workflow was written, so the
+  requirement that an empty or failing report cannot count as passing was **not actually enforced** — the only reason
+  the failure surfaced is that the playwright step itself does set `pipefail`, and the final gate checks both. All five
+  steps now `set -o pipefail`. (This also means the earlier green runs' report checks were never load-bearing; their
+  *suite* results stand, because those steps did have `pipefail`.)
+
 ### Two gaps in the green run, both now closed in the workflow
 
 - [x] **The 20 skipped authenticated tests were the entire email path.** `e2e/auth/email-confirmation-and-recovery.spec.ts`
@@ -114,9 +144,45 @@ No Windows E2E count is quoted anywhere in this document. The Windows runs remai
   authenticated suite's single flake was `student-exam-session.spec.ts` — "student code+PIN sign-in reaches the
   dashboard, starts a timed exam, autosaves, and resumes after refresh" (attempts: 2). A retry-pass is not adequate
   evidence for the exact path both children will take, so a `student exam journey ×5, retries 0` step now runs it five
-  times with retries off, gated by `--require-spec student-exam-session`, and joins the final gate. **Its first result
-  is pending** on the run for the final SHA; until that lands, this journey's status is "passes, but observed flaky
-  once and not yet proved stable".
+  times with retries off, gated by `--require-spec student-exam-session`, and joins the final gate.
+
+- [ ] **OPEN DEFECT — the journey repeat FAILED on `e5b02db3`: 4 passed, 1 failed of 5.** This is the single most
+  important open item in this document, and it is why `family-beta-verify` is red on the final SHA.
+
+  `e2e/auth/student-exam-session.spec.ts:56` — `expect(getByTestId("start-exam")).toBeVisible()` — failed with
+  **`strict mode violation: getByTestId('start-exam') resolved to 2 elements`**:
+
+  1. `<button data-testid="start-exam">` — **enabled**, accessible name "Review instructions"
+  2. `<button disabled data-testid="start-exam">` — **disabled**
+
+  So the page transiently holds **two start controls**: one hydrated and one still in its pre-hydration disabled
+  state. `ExamConfigurator` declares that `data-testid` exactly once
+  (`src/features/exam-engine/components/ExamConfigurator.tsx:467`) and `src/app/practice/[program]/page.tsx` renders
+  the component once, so this is two live copies of the same component, not duplicated markup.
+
+  **What is established:**
+  - The server HTML contains exactly **one** `start-exam` (checked against a local production build).
+  - A direct, unauthenticated load of `/practice/mixed-practice` **never** duplicates: 20/20 local runs polling the
+    DOM from navigation-commit onwards saw a count of 1, with **no console or page errors**.
+  - It reproduces on Linux CI at about **1 in 5** on the authenticated path, after a student code+PIN sign-in.
+  - `useHydrated` (`src/lib/use-hydrated.ts`) uses the correct `useSyncExternalStore` server/client snapshot pattern,
+    so it is not itself a hydration-mismatch source.
+
+  **What is NOT established: the root cause.** The difference between the failing and passing cases is the
+  authenticated session, which needs the local Supabase stack, so it cannot be reproduced on this Windows host (see
+  the invalid-Windows note above). It was **not** masked with `.first()`, a `toHaveCount` wait, a retry or a longer
+  timeout — AGENTS.md rule 6 says fix the component, and the component's fault is not yet understood.
+
+  **Next step, already in the workflow:** the journey repeat now runs with `--trace=on`, and its `test-results/` are
+  copied to `evidence/journey-test-results/` *immediately* after the step rather than in the shared collect step at
+  the end. On `e5b02db3` the public suite reused `test-results/` and overwrote this failure's `error-context.md` and
+  trace before they were uploaded, which is why that run diagnosed nothing. The next red run will carry a DOM
+  snapshot and a trace of the moment both buttons exist.
+
+  **Beta impact:** a child could momentarily see two start buttons, one greyed out, and a screen-reader user two
+  controls with the same name. No data is affected, and the journey completes in 4 of 5 runs. It is a transient
+  rendering defect, not corruption — but it is on the one path both children take, so it is a **GO blocker** until
+  understood.
 - No failure anywhere was hidden by a retry, a skipped assertion or a raised timeout. Both flakes were identified by
   name and each one was either disproved by repetition or put under repetition.
 

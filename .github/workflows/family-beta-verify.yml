@@ -132,6 +132,7 @@ jobs:
       - name: Summarise authenticated suite
         if: always()
         run: |
+          set -o pipefail
           node scripts/ci/summarise-playwright.mjs "Authenticated E2E (playwright.auth.config.ts)" "$RUNNER_TEMP/pw-auth.json" \
             --require-spec a11y-parent-dashboard | tee -a "$GITHUB_STEP_SUMMARY" evidence/auth-summary.md
 
@@ -154,6 +155,7 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
+          set -o pipefail
           node scripts/ci/summarise-playwright.mjs "Keyboard walkthrough x5, retries 0" "$RUNNER_TEMP/pw-kbd.json" \
             --require-spec a11y-parent-dashboard | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-summary.md
 
@@ -170,12 +172,23 @@ jobs:
         run: |
           set -o pipefail
           npx playwright test --config=playwright.auth.config.ts e2e/auth/student-exam-session.spec.ts \
-            --repeat-each=5 --retries=0 --reporter=list,json 2>&1 | tee evidence/journey-run.log
+            --repeat-each=5 --retries=0 --trace=on --reporter=list,json 2>&1 | tee evidence/journey-run.log
+      # Copied immediately, NOT in the shared collect step at the end: the public suite reuses
+      # test-results/ and had already overwritten this failure's error-context.md and trace on
+      # e5b02db3, which is why that run diagnosed nothing. `if: always()` because the interesting
+      # case is precisely the one where the step above failed.
+      - name: Keep the journey's own traces
+        if: always()
+        run: |
+          mkdir -p evidence/journey-test-results
+          cp -r test-results/. evidence/journey-test-results/ 2>/dev/null || true
+          ls -R evidence/journey-test-results | head -40
       - name: Summarise student exam journey x5
         id: journey_summary
         if: always()
         continue-on-error: true
         run: |
+          set -o pipefail
           node scripts/ci/summarise-playwright.mjs "Student exam journey x5, retries 0" "$RUNNER_TEMP/pw-journey.json" \
             --require-spec student-exam-session | tee -a "$GITHUB_STEP_SUMMARY" evidence/journey-summary.md
 
@@ -202,7 +215,9 @@ jobs:
           { echo "public BUILD_ID=$(cat .next/BUILD_ID)"; find .next -maxdepth 1 -name 'build-manifest.json' -exec sha256sum {} +; } | tee evidence/public-build.txt
       - name: Summarise public suite
         if: always()
-        run: node scripts/ci/summarise-playwright.mjs "Public E2E (playwright.config.ts)" "$RUNNER_TEMP/pw-public.json" | tee -a "$GITHUB_STEP_SUMMARY" evidence/public-summary.md
+        run: |
+          set -o pipefail
+          node scripts/ci/summarise-playwright.mjs "Public E2E (playwright.config.ts)" "$RUNNER_TEMP/pw-public.json" \n            | tee -a "$GITHUB_STEP_SUMMARY" evidence/public-summary.md
 
       # 4. The public keyboard walkthroughs, repeated with retries OFF. The run on 50916415 recorded a
       #    flake HERE, not in the authenticated suite: e2e/a11y-auth-pages.spec.ts "sign-in keyboard
@@ -227,6 +242,7 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
+          set -o pipefail
           node scripts/ci/summarise-playwright.mjs "Public keyboard walkthroughs x5, retries 0" "$RUNNER_TEMP/pw-kbd-public.json" \
             --require-spec a11y-auth-pages | tee -a "$GITHUB_STEP_SUMMARY" evidence/kbd-public-summary.md
 
