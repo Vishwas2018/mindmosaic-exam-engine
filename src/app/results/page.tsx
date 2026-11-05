@@ -41,6 +41,7 @@ import type { BreakdownRow } from "@/features/exam-engine/scoring";
 import { computeSessionBadges } from "@/features/exam-engine/scoring/session-badges";
 import { useExamStore } from "@/features/exam-engine/state";
 import { recommendSkills } from "@/features/exam-engine/recommendation";
+import { skillDisplayLabel } from "@/features/exam-engine/skill-label";
 import { PractiseMissedSkills } from "@/features/exam-engine/recommendation/PractiseMissedSkills";
 
 import { ResultsColdLoad } from "./ResultsColdLoad";
@@ -111,7 +112,8 @@ const DIMENSION_LABELS: Record<string, string> = {
 };
 
 function dimensionLabel(key: string): string {
-  return DIMENSION_LABELS[key] ?? key;
+  // Skill keys can be raw taxonomy codes; a child and a parent must only ever see words.
+  return DIMENSION_LABELS[key] ?? skillDisplayLabel(key);
 }
 
 function BreakdownTable({
@@ -334,14 +336,14 @@ export default function ResultsPage() {
       <div className="print:hidden">
         <AppHeader />
       </div>
-      <div className="site-width flex justify-end pt-4 print:hidden">
-        <Badge variant="success">
-          <Check aria-hidden="true" className="h-3.5 w-3.5" />
-          Exam complete
-        </Badge>
-      </div>
-
       <main id="main-content" className="site-width py-10 sm:py-14">
+        {/* Inside <main> so the status badge belongs to a landmark. */}
+        <div className="-mt-6 mb-4 flex justify-end print:hidden sm:-mt-10">
+          <Badge variant="success">
+            <Check aria-hidden="true" className="h-3.5 w-3.5" />
+            {config.patternId !== undefined ? "Exam complete" : "Practice complete"}
+          </Badge>
+        </div>
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-primary">
@@ -378,7 +380,7 @@ export default function ResultsPage() {
                 <div
                   className="score-ring relative"
                   role="img"
-                  aria-label={`Objective score: ${result.objectivePercentage} percent, ${result.objectiveMarksEarned} of ${result.objectiveMarksAvailable} objective marks`}
+                  aria-label={`Your score: ${result.objectivePercentage} percent, ${result.objectiveMarksEarned} of ${result.objectiveMarksAvailable} marks`}
                 >
                   <div className="score-ring-content">
                     <span
@@ -392,11 +394,11 @@ export default function ResultsPage() {
                     </span>
                   </div>
                 </div>
-                <h2 className="mt-7 font-jakarta text-2xl font-black">Objective score</h2>
+                <h2 className="mt-7 font-jakarta text-2xl font-black">Your score</h2>
                 <p className="mt-2 max-w-sm text-center text-sm leading-6 text-white/80">
                   {result.manualReviewQuestions > 0
                     ? `Writing tasks (${result.manualReviewQuestions}) are marked by a person and are not counted in this percentage.`
-                    : "Every question in this exam was marked automatically."}
+                    : "Every question was marked straight away."}
                 </p>
               </section>
 
@@ -483,18 +485,18 @@ export default function ResultsPage() {
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-plum-muted">Marked automatically</dt>
+                    <dt className="font-semibold text-plum-muted">Marked straight away</dt>
                     <dd className="font-black tabular-nums">{result.autoMarkedQuestions}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
-                    <dt className="font-semibold text-plum-muted">Pending manual marks</dt>
+                    <dt className="font-semibold text-plum-muted">Waiting for a person to mark</dt>
                     <dd className="font-black tabular-nums">{result.pendingManualMarks}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="font-semibold text-plum-muted">How it ended</dt>
                     <dd className="font-black" data-testid="submission-reason">
                       {result.submissionReason === "timer_expired"
-                        ? "Time ran out (auto-submitted)"
+                        ? "Time ran out, so it was sent in for you"
                         : "Submitted by you"}
                     </dd>
                   </div>
@@ -691,7 +693,7 @@ export default function ResultsPage() {
                           <span className="capitalize">
                             {question.metadata.subject.replace("_", " ")}
                           </span>{" "}
-                          · {question.metadata.skill ?? question.metadata.topic} ·{" "}
+                          · {skillDisplayLabel(question.metadata.skill ?? question.metadata.topic)} ·{" "}
                           <span className="capitalize">{question.metadata.difficulty}</span>
                           {" · "}
                           {detail.pendingManualReview
@@ -792,7 +794,7 @@ export default function ResultsPage() {
               {homeLabel}
             </Link>
             <Button
-              variant="orange"
+              variant="primary"
               size="lg"
               onClick={handlePracticeSimilar}
               data-testid="practice-similar-again"
@@ -801,7 +803,7 @@ export default function ResultsPage() {
               Practice {SUBJECT_LABELS[config.subject]} again
             </Button>
             <Button
-              variant="primary"
+              variant="secondary"
               size="lg"
               onClick={handleRestart}
               data-testid="try-another-exam"

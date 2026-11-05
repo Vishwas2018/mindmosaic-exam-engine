@@ -376,7 +376,7 @@ export function SignUpWizard({
         </button>
         <p className="text-sm text-mm-muted">
           Already have an account?{" "}
-          <Link href="/sign-in" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
+          <Link href="/sign-in" className={twMerge("-my-3 inline-block rounded py-3 font-bold text-mm-brand hover:underline", mmFocus)}>
             Sign in
           </Link>
         </p>

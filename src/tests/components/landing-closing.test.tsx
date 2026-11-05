@@ -103,3 +103,13 @@ describe("SiteFooter", () => {
     expect(screen.getByText(new RegExp(SUPPORT_EMAIL))).toBeInTheDocument();
   });
 });
+
+describe("Site footer touch targets", () => {
+  it("keeps the standalone legal and support links at least 24px tall (WCAG 2.5.8)", () => {
+    render(<SiteFooter />);
+    for (const link of footer.legalLinks) {
+      expect(screen.getByRole("link", { name: link.label }).className).toContain("min-h-6");
+    }
+    expect(screen.getByRole("link", { name: SUPPORT_EMAIL }).className).toContain("min-h-6");
+  });
+});

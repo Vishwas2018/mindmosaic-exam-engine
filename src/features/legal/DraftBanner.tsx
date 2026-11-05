@@ -7,7 +7,7 @@ import { AlertTriangle } from "lucide-react";
  */
 export function DraftBanner() {
   return (
-    <div role="note" className="border-y border-warning/25 bg-warning/8">
+    <aside aria-label="Draft notice" className="border-y border-warning/25 bg-warning/8">
       <div className="site-width flex items-start gap-3 py-4">
         <AlertTriangle
           aria-hidden="true"
@@ -22,6 +22,6 @@ export function DraftBanner() {
           reviewed by a qualified professional — do not treat it as binding.
         </p>
       </div>
-    </div>
+    </aside>
   );
 }

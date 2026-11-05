@@ -38,6 +38,7 @@ export default async function ParentHomePage() {
   if (!isSupabaseConfigured) {
     return (
       <ParentShell active="/parent">
+        <h1 className="sr-only">Parent dashboard</h1>
         <ErrorState
           title="Accounts aren't set up yet"
           description={SUPABASE_NOT_CONFIGURED_MESSAGE}
@@ -59,6 +60,7 @@ export default async function ParentHomePage() {
   if (data.status === "error") {
     return (
       <ParentShell active="/parent">
+        <h1 className="sr-only">Parent dashboard</h1>
         <ErrorState
           title="We couldn't load your dashboard"
           description="Something went wrong fetching your children's progress. Please refresh to try again."
@@ -71,6 +73,7 @@ export default async function ParentHomePage() {
     return (
       <ParentShell active="/parent">
         <div className="space-y-8">
+          <h1 className="sr-only">Parent dashboard</h1>
           <CheckoutStatusToast />
           <BillingPanel subscription={subscription} />
           <EmptyState

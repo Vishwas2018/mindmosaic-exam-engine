@@ -85,7 +85,7 @@ export function ExamTimer() {
       {formatClock(seconds)}
       {(warning || critical) && (
         <span className="text-xs font-bold uppercase tracking-wide">
-          {critical ? "Hurry" : "Low"}
+          {critical ? "Almost up" : "Low"}
         </span>
       )}
       <span aria-live="polite" role="status" className="sr-only">

@@ -162,7 +162,7 @@ export function SubmitConfirmationDialog({
           >
             Keep working
           </Button>
-          <Button variant="orange" onClick={onConfirm} data-testid="confirm-submit">
+          <Button variant="primary" onClick={onConfirm} data-testid="confirm-submit">
             <Send aria-hidden="true" className="h-4 w-4" />
             Submit now
           </Button>

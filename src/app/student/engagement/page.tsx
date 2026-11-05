@@ -58,6 +58,7 @@ export default async function StudentEngagementPage() {
 
   return (
     <StudentPortalShell active="progress" breadcrumbLabel="My Progress" student={student} shellData={shellData}>
+      <h1 className="sr-only">My Progress</h1>
       <MyProgressHero
         yearLevel={student.yearLevel}
         questionsAnswered={questionsAnswered}

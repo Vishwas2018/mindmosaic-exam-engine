@@ -334,7 +334,7 @@ export function SignInPanel({
           {PUBLIC_SIGNUP_ENABLED ? (
             <>
               New here?{" "}
-              <Link href="/sign-up" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
+              <Link href="/sign-up" className={twMerge("-my-3 inline-block rounded py-3 font-bold text-mm-brand hover:underline", mmFocus)}>
                 Start free
               </Link>
             </>
@@ -344,7 +344,7 @@ export function SignInPanel({
               No account?{" "}
               <Link
                 href="/practice"
-                className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}
+                className={twMerge("-my-3 inline-block rounded py-3 font-bold text-mm-brand hover:underline", mmFocus)}
               >
                 Practise as a guest
               </Link>

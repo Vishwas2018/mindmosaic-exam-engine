@@ -123,3 +123,18 @@ describe("ParentShell", () => {
     expect(within(compact).getAllByRole("link")).toHaveLength(4);
   });
 });
+
+describe("ParentShell touch targets", () => {
+  it("gives the logo and every wide and compact nav link a 44px minimum height", () => {
+    renderShell("/parent");
+    const links = [
+      screen.getByRole("link", { name: "MindMosaic home" }),
+      ...within(screen.getByRole("navigation", { name: "Parent" })).getAllByRole("link"),
+      ...within(screen.getByRole("navigation", { name: "Parent, compact" })).getAllByRole("link"),
+    ];
+    expect(links.length).toBeGreaterThanOrEqual(9);
+    for (const link of links) {
+      expect(link.className).toContain("min-h-11");
+    }
+  });
+});

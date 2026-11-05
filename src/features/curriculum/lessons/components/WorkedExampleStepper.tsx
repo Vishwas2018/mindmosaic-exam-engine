@@ -115,15 +115,21 @@ export function WorkedExampleStepper({ section }: WorkedExampleStepperProps) {
                     setShowAllSteps(false);
                   }}
                   aria-label={`Jump to step ${idx + 1}: ${s.label}`}
-                  className={clsx(
-                    "h-2 flex-1 rounded-full transition-all focus-visible:outline-2 focus-visible:outline-primary",
-                    idx === currentStepIndex
-                      ? "bg-primary ring-2 ring-primary/30"
-                      : idx < currentStepIndex
-                      ? "bg-emerald-500"
-                      : "bg-slate-200 hover:bg-slate-300",
-                  )}
-                />
+                  // The button is the 24px-tall hit area (WCAG 2.5.8); the visible bar is the 8px span inside it.
+                  className="group flex h-6 flex-1 items-center rounded-full focus-visible:outline-2 focus-visible:outline-primary"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={clsx(
+                      "block h-2 w-full rounded-full transition-all",
+                      idx === currentStepIndex
+                        ? "bg-primary ring-2 ring-primary/30"
+                        : idx < currentStepIndex
+                        ? "bg-emerald-500"
+                        : "bg-slate-200 group-hover:bg-slate-300",
+                    )}
+                  />
+                </button>
               ))}
             </div>
           </div>

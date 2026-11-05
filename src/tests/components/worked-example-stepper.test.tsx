@@ -68,6 +68,16 @@ describe("WorkedExampleStepper Component", () => {
     expect(screen.getByText(/Common Mistake to Watch Out For/i)).toBeInTheDocument();
   });
 
+  it("gives every step-jump marker a 24px-tall hit area around its 8px bar", () => {
+    render(<WorkedExampleStepper section={mockWorkedExample} />);
+    const jumps = screen.getAllByRole("button", { name: /Jump to step/i });
+    expect(jumps).toHaveLength(3);
+    for (const jump of jumps) {
+      expect(jump.className).toContain("h-6");
+      expect(jump.querySelector("span")).toHaveClass("h-2");
+    }
+  });
+
   it("toggles between step-by-step and show all steps view", async () => {
     const user = userEvent.setup();
     render(<WorkedExampleStepper section={mockWorkedExample} />);

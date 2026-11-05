@@ -338,12 +338,20 @@ export function ImageSlot({
 }) {
   if (!src) {
     return (
+      /* No photograph is supplied for this slot yet. Visitors get a quiet decorative tile,
+         never the internal asset id; `data-asset-id` keeps the id findable for whoever
+         supplies the image. Purely decorative, so hidden from assistive tech. */
       <div
+        aria-hidden="true"
+        data-asset-id={assetId}
         className={twMerge("relative flex h-full w-full items-center justify-center bg-mm-tint p-6", className)}
         style={aspectRatio ? { aspectRatio } : undefined}
       >
-        <span className="rounded-full border border-dashed border-mm-brand/40 bg-white/80 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.04em] text-mm-brand">
-          Image placeholder · {assetId}
+        <span className="grid grid-cols-2 gap-1.5 opacity-70">
+          <span className="h-5 w-5 rounded-[5px] bg-mm-brand" />
+          <span className="h-5 w-5 rounded-[5px] bg-mm-lilac" />
+          <span className="h-5 w-5 rounded-[5px] bg-mm-coral" />
+          <span className="h-5 w-5 rounded-[5px] bg-mm-brand/30" />
         </span>
       </div>
     );

@@ -21,6 +21,7 @@ import {
   type PracticeState,
 } from "./practice-reducer";
 import { usePracticeSession } from "./use-practice-session";
+import { skillDisplayLabel } from "../skill-label";
 
 /**
  * Practice — design handoff screen 9. Untimed, immediate feedback,
@@ -458,7 +459,7 @@ export function PracticeSession({
                 Question {state.currentIndex + 1} · {typeLabel(question)}
               </p>
               <span className="text-[13px] text-plum-muted">
-                Skill: {question.metadata.skill ?? question.metadata.topic}
+                Skill: {skillDisplayLabel(question.metadata.skill ?? question.metadata.topic)}
               </span>
               <button
                 type="button"

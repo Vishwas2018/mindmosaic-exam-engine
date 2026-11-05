@@ -42,6 +42,20 @@ const TILE_TONES: Record<HeroTileTone, string> = {
 
 const timing = cinematicMotion.chapter1;
 
+/** A scene headline's element: a real `<h2>`, or a plain `<div>` where the page `<h1>` already carries the words. */
+function HeadlineTag({
+  as: Tag,
+  children,
+  ...props
+}: {
+  as: "h2" | "div";
+  children: React.ReactNode;
+  className?: string;
+  "aria-hidden"?: "true";
+}) {
+  return <Tag {...props}>{children}</Tag>;
+}
+
 /** Stagger for the persistent copy column, once, on load. */
 function rise(index: number): CSSProperties {
   return { "--mm-delay": `${index * timing.copyStaggerMs}ms` } as CSSProperties;
@@ -368,16 +382,21 @@ export function ChapterOneIntro() {
                     </span>
                     <span className="text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">{scene.eyebrow}</span>
                   </p>
-                  <h2
+                  {/* Scene 1's headline is the page <h1> (the sr-only one above, which stays in the accessibility
+                      tree for the whole scroll), so it is not announced a second time as a heading. Scenes 2 to 6
+                      are <h2>s; only the current scene's block is ever exposed. */}
+                  <HeadlineTag
+                    as={index === 0 ? "div" : "h2"}
+                    aria-hidden={index === 0 ? "true" : undefined}
                     className="m-0 text-[clamp(38px,min(4.8vw,7.6vh),76px)] leading-[1.02] tracking-[-0.036em] text-mm-ink text-balance max-lg:text-[clamp(38px,9.5vw,64px)]"
                   >
                     <span className={`${index === 0 ? "mm-hero-rise " : ""}block`} style={rise(1)}>
                       {scene.headline[0]}
-                    </span>
+                    </span>{" "}
                     <span className={`${index === 0 ? "mm-hero-rise " : ""}block text-mm-brand`} style={rise(2)}>
                       {scene.headline[1]}
                     </span>
-                  </h2>
+                  </HeadlineTag>
                   <p
                     className={`${index === 0 ? "mm-hero-rise " : ""}m-0 mt-5 max-w-[46ch] text-pretty text-[clamp(16px,1.35vw,20px)] leading-[1.6] text-mm-ink-soft sm:mt-6`}
                     style={rise(3)}

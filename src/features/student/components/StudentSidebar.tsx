@@ -151,9 +151,9 @@ export function StudentSidebar({
             <span className="truncate text-[13px] font-semibold leading-tight text-mm-ink">
               {displayName ?? "Your profile"}
             </span>
-            {/* Placeholder gamification line to match the Stitch mock — no XP/level model exists yet. */}
+            {/* No XP/level model exists, so no points or level are shown rather than invented ones. */}
             <span className="truncate text-[11px] leading-tight text-mm-muted">
-              Scholar · Lvl 12 · <span className="font-semibold text-amber-accent">★ 840xp</span>
+              {yearLevel !== null ? `Student · Year ${yearLevel}` : "Student"}
             </span>
           </div>
           <ChevronsUpDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-stitch-outline" />
@@ -187,7 +187,7 @@ export function StudentSidebar({
                   key={item.key}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-[12.5px] font-medium transition-colors ${
+                  className={`flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-[12.5px] font-medium transition-colors ${
                     isActive
                       ? "bg-mm-tint text-primary"
                       : "text-mm-ink-soft hover:bg-mm-page hover:text-primary"
@@ -236,7 +236,7 @@ export function StudentSidebar({
                     <Link
                       key={pathway.strand}
                       href={href}
-                      className="flex items-center justify-between rounded-lg py-1.5 pl-3 pr-2 text-[11.5px] font-medium text-mm-muted transition-colors hover:bg-white hover:text-mm-ink"
+                      className="flex min-h-11 items-center justify-between rounded-lg py-1.5 pl-3 pr-2 text-[11.5px] font-medium text-mm-muted transition-colors hover:bg-white hover:text-mm-ink"
                     >
                       <span className="truncate pr-1">{pathway.title}</span>
                       <span className="shrink-0 text-[9px] font-mono text-stitch-outline">
@@ -299,7 +299,7 @@ export function StudentSidebar({
               {/* Real, year-scoped catalogue program — matches the label exactly (audit D-05 fix). */}
               <Link
                 href={`/practice/naplan-g${naplanYear}-numeracy`}
-                className="flex items-center gap-2 rounded py-1 pl-4 pr-2 text-[11px] text-mm-muted hover:text-mm-ink"
+                className="flex min-h-11 items-center gap-2 rounded py-1 pl-4 pr-2 text-[11px] text-mm-muted hover:text-mm-ink"
               >
                 <Target aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
                 Year {naplanYear} Numeracy Mock Test
@@ -312,7 +312,7 @@ export function StudentSidebar({
               */}
               <Link
                 href="/practice/naplan"
-                className="flex items-center gap-2 rounded py-1 pl-4 pr-2 text-[11px] text-mm-muted hover:text-mm-ink"
+                className="flex min-h-11 items-center gap-2 rounded py-1 pl-4 pr-2 text-[11px] text-mm-muted hover:text-mm-ink"
               >
                 <BookOpen aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
                 Reading &amp; Language Conventions

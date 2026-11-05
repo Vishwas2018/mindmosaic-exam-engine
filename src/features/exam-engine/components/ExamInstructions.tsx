@@ -64,45 +64,49 @@ export function ExamInstructions({
   navigationFailed = false,
   onRetryNavigation,
 }: ExamInstructionsProps) {
+  /* A named full-length paper is an exam; a quick practice sitting is practice. */
+  const isFullPaper = title !== undefined;
   const steps = [
     {
-      title: "Answer in any order",
-      body: "Move with Next and Previous, or jump straight to a question from the question map. Your answers are kept as you move around.",
+      title: "Do them in any order",
+      body: "Use Next and Previous, or tap a number to jump to a question. Your answers are kept as you go.",
     },
     {
-      title: "Flag anything you want to check",
-      body: "Flag for review marks a question so you can find it again from the map. Flagging never changes your answer.",
+      title: "Flag the tricky ones",
+      body: "Tap Flag for review to find a question again later. Flagging never changes your answer.",
     },
     timing === "timed"
       ? {
           title: `You have ${durationMinutes} minutes`,
-          body: "The timer starts when you select Start exam. If it runs out, the paper submits itself with the answers you have given — nothing is lost.",
+          body: "The clock starts when you press start. If it runs out, the answers you have given are sent in for you. Nothing is lost.",
         }
       : {
-          title: "There is no time limit",
-          body: "Take as long as you need. The time you take is still recorded so you can see it in your results.",
+          title: "No time limit",
+          body: "Take as long as you need. We still note how long it takes, so you can see it in your results.",
         },
     {
-      title: "Submit when you are ready",
+      title: "Check, then submit",
       body: includesManualMarking
-        ? "You will see a summary of what is answered, unanswered and flagged before it is final. Written answers are marked by a person, so those results arrive later."
-        : "You will see a summary of what is answered, unanswered and flagged before it is final. Once submitted, your answers are locked and your results are shown.",
+        ? "Before you finish, you will see what is answered, not answered and flagged. Written answers are marked by a person, so those results arrive later."
+        : "Before you finish, you will see what is answered, not answered and flagged. After you submit, your answers are locked and you see your results.",
     },
     {
-      title: "Leaving early ends the attempt",
-      body: "Exit exam asks you to confirm first. Your progress on that attempt is lost and can't be recovered.",
+      title: "If you leave early",
+      body: "You will be asked to confirm first. Answers from that attempt can’t be brought back.",
     },
   ];
 
   /*
-   * Exam conditions are announced here rather than sprung on a student mid-
-   * sitting: the first time copy stops working should not be a surprise
-   * during a running clock. Timed only, matching ExamIntegrityMonitor.
+   * The timed-sitting rules are said here, in plain words, rather than sprung on a
+   * child mid-sitting: the first time copy stops working should not be a surprise
+   * during a running clock. Timed only, matching ExamIntegrityMonitor. What the app
+   * does is stated exactly (copy and paste off, leaving the tab is noted, a refresh
+   * asks first); only the tone is gentler.
    */
   if (timing === "timed") {
     steps.push({
-      title: "Exam conditions apply",
-      body: "Copy, paste and right-click are switched off, and leaving this window — another tab, another app — is recorded. Refreshing or closing the page will ask you to confirm first.",
+      title: "Quiet rules while the clock runs",
+      body: "Copy, paste and right-click are off, and we note if you switch to another tab or app. If you refresh or close the page, we ask you first.",
     });
   }
 
@@ -110,19 +114,19 @@ export function ExamInstructions({
     <Card className="overflow-hidden p-0" variant="default">
       {/* Same masthead treatment as the setup cover sheet, so this reads as
           the next page of one exam booklet rather than a separate screen. */}
-      <div className="relative border-b border-dashed border-royal/20 bg-[linear-gradient(145deg,#FFFFFF_0%,#F7F4FF_100%)] px-6 py-7 sm:px-8 sm:py-8">
+      <div className="relative border-b border-dashed border-royal/20 bg-[linear-gradient(145deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-6 sm:px-8 sm:py-8">
         <Badge variant="orange">
           <ListChecks aria-hidden="true" className="h-3.5 w-3.5" />
           Before you begin
         </Badge>
         <h2
           data-testid="instructions-summary"
-          className="mt-3 font-[family-name:var(--font-dm-serif)] text-2xl font-normal leading-tight tracking-[-0.02em] text-ink sm:text-3xl"
+          className="mt-3 font-[family-name:var(--font-instrument-sans)] text-2xl font-semibold leading-tight tracking-[-0.02em] text-ink text-balance sm:text-3xl"
         >
           {title ?? describeConfig(config)}
         </h2>
         <p className="mt-3 text-sm font-semibold text-muted">
-          Read these instructions, then start when you are ready.
+          Have a quick read, then start when you are ready.
         </p>
       </div>
 
@@ -152,7 +156,7 @@ export function ExamInstructions({
 
       <ol className="divide-y divide-royal/10">
         {steps.map((step, index) => (
-          <li key={step.title} className="flex gap-4 px-6 py-5 sm:px-8">
+          <li key={step.title} className="flex gap-4 px-5 py-4 sm:px-8 sm:py-5">
             <span
               aria-hidden="true"
               className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal/8 text-sm font-black text-royal"
@@ -184,13 +188,13 @@ export function ExamInstructions({
           You can flag questions and come back to them
         </p>
         <Button
-          variant="orange"
+          variant="primary"
           size="lg"
           data-testid="begin-exam"
           onClick={onStart}
           disabled={isBusy}
         >
-          {isBusy ? "Opening exam…" : "Start exam"}
+          {isBusy ? "Opening…" : isFullPaper ? "Start exam" : "Start practice"}
           <ArrowRight aria-hidden="true" className="h-5 w-5" />
         </Button>
       </div>
