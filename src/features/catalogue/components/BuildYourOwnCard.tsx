@@ -86,6 +86,7 @@ export function BuildYourOwnCard({ program }: { program: Program }) {
           presentation={BUILD_YOUR_OWN_PRESENTATION}
           className="hidden h-full min-h-[220px] w-full lg:block"
           markClassName="h-12 w-12"
+          sizes="420px"
         />
       </div>
     </div>

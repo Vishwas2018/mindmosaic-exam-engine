@@ -198,6 +198,7 @@ export default async function PracticeCataloguePage({
                   presentation={presentation}
                   className="aspect-square rounded-[10px]"
                   markClassName="h-7 w-7"
+                  sizes="160px"
                 />
               ))}
 
@@ -216,6 +217,7 @@ export default async function PracticeCataloguePage({
                   presentation={presentation}
                   className="aspect-square rounded-[10px]"
                   markClassName="h-7 w-7"
+                  sizes="160px"
                 />
               ))}
             </div>

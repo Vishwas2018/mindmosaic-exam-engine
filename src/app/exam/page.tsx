@@ -28,6 +28,7 @@ import {
 import { describeSitting } from "@/features/exam-engine/components/describe-config";
 import { ExamConditionBar } from "@/features/exam-engine/components/ExamConditionBar";
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
+import { skillDisplayLabel } from "@/features/exam-engine/skill-label";
 import { ExamIntegrityMonitor } from "@/features/exam-engine/components/ExamIntegrityMonitor";
 import { ExamTimer } from "@/features/exam-engine/components/ExamTimer";
 import { SubmitConfirmationDialog } from "@/features/exam-engine/components/SubmitConfirmationDialog";
@@ -68,6 +69,23 @@ export default function ExamPage() {
 
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
+
+  /* Below `lg` the question map is a one-row strip; keep the current question
+     centred in it. Scrolls the strip itself, never the page (scrollIntoView would
+     drag the page back up to the strip while a child is working lower down). */
+  const mapStripRef = useRef<HTMLOListElement>(null);
+  useEffect(() => {
+    const strip = mapStripRef.current;
+    const current = strip?.querySelector<HTMLElement>('[aria-current="step"]');
+    if (!strip || !current || strip.scrollWidth <= strip.clientWidth) return;
+    const offset =
+      current.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    strip.scrollTo({
+      left: offset - strip.clientWidth / 2 + current.clientWidth / 2,
+      behavior: reduced ? "auto" : "smooth",
+    });
+  }, [currentQuestionIndex]);
 
   /*
    * A browser refresh mid-exam wipes the Zustand store back to
@@ -279,7 +297,10 @@ export default function ExamPage() {
 
   return (
     <div className="min-h-screen bg-canvas">
-      <header className="border-b border-primary/10 bg-white">
+      {/* Sticky: the countdown and the progress cue must stay on screen while a
+          child scrolls to the question and its answers, which on a phone sit well
+          below the top of the page. Compact (56px) below `sm`. */}
+      <header className="sticky top-0 z-30 border-b border-primary/10 bg-white/95 backdrop-blur-sm">
         {/* Slim at-a-glance progress cue (07-exam-engine.html's header .pbar/.pfill)
             — purely decorative, aria-hidden: the accessible progress readout
             stays the labelled ProgressBar lower in the page. */}
@@ -289,15 +310,31 @@ export default function ExamPage() {
             style={{ width: `${headerProgressPercent}%` }}
           />
         </div>
-        <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-3 py-3">
+        <div className="site-width flex min-h-14 items-center justify-between gap-3 py-1.5 sm:min-h-20 sm:flex-wrap sm:py-3">
           <Link
             href="/"
             aria-label="MindMosaic home"
             className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
           >
-            <MindMosaicLogo />
+            {/* The approved mark-only lockup on a phone, so the countdown never gets squeezed
+                off the edge of the header; the full wordmark from `sm`. */}
+            <span className="sm:hidden">
+              <MindMosaicLogo layout="mark" size="sm" />
+            </span>
+            <span className="hidden sm:block">
+              <MindMosaicLogo />
+            </span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Where the child is, always on screen. Phones only: from `sm` up the
+                question map and the "answered" line carry this. */}
+            <span
+              aria-hidden="true"
+              data-testid="header-position"
+              className="text-sm font-bold tabular-nums text-plum-muted sm:hidden"
+            >
+              {currentQuestionIndex + 1}/{questions.length}
+            </span>
             {/* Timed sittings only — see ExamIntegrityMonitor for why untimed
                 practice is deliberately left unrestricted. */}
             <ExamIntegrityMonitor active={config?.timing === "timed"} />
@@ -309,19 +346,24 @@ export default function ExamPage() {
         </div>
       </header>
 
-      <main id="main-content" className="site-width py-6 sm:py-8">
+      <main id="main-content" className="site-width py-4 sm:py-8">
         {/* Design handoff screen 10, view 3: the strip that makes it
             unambiguous a paper is being sat under exam conditions, and
             carries the countdown, the real autosave state and the way out. */}
         <ExamConditionBar
           description={describeSitting(config)}
+          fullPaper={config.patternId !== undefined && !config.shortened}
           onExit={() => setExitConfirmOpen(true)}
         />
 
-        <section aria-labelledby="assessment-title" className="mb-6 mt-6">
+        {/* On a phone the page title, badge, instructions and progress bar would
+            push the question below the fold, and the condition bar above already
+            names the sitting. They stay in the page for everyone else: the title is
+            kept for assistive tech and reappears from `sm`. */}
+        <section aria-labelledby="assessment-title" className="mb-4 mt-4 sm:mb-6 sm:mt-6">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="hidden flex-wrap items-center gap-2 sm:flex">
                 {/* Names what is being sat. A full-length practice paper says
                     so; a reduced sitting says "practice module", never the
                     full-length pattern's name (exam-patterns.md §6). */}
@@ -335,11 +377,11 @@ export default function ExamPage() {
               </div>
               <h1
                 id="assessment-title"
-                className="mt-3 font-jakarta text-2xl font-black tracking-[-0.035em] text-plum-dark sm:text-3xl"
+                className="sr-only font-jakarta text-2xl font-black tracking-[-0.035em] text-plum-dark sm:not-sr-only sm:mt-3 sm:block sm:text-3xl"
               >
                 {describeSitting(config)}
               </h1>
-              <p className="mt-2 text-sm leading-6 text-plum-muted">
+              <p className="mt-2 hidden text-sm leading-6 text-plum-muted sm:block">
                 Answer each question, flag anything you want to check again, and
                 submit when you are ready. Your answers are kept while you move
                 between questions.
@@ -350,7 +392,7 @@ export default function ExamPage() {
             </p>
           </div>
           <ProgressBar
-            className="mt-5"
+            className="mt-5 hidden sm:block"
             value={answeredCount}
             max={questions.length}
             label="Questions answered"
@@ -359,8 +401,8 @@ export default function ExamPage() {
         </section>
 
         <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
-          <aside className="lg:sticky lg:top-5" aria-labelledby="question-navigation-title">
-            <Card className="p-5" variant="default">
+          <aside className="min-w-0 lg:sticky lg:top-5" aria-labelledby="question-navigation-title">
+            <Card className="p-3 sm:p-4 lg:p-5" variant="default">
               <div className="flex items-center justify-between gap-3">
                 <h2
                   id="question-navigation-title"
@@ -373,14 +415,19 @@ export default function ExamPage() {
                   {answeredCount}/{questions.length}
                 </span>
               </div>
-              <ol className="mt-5 grid grid-cols-5 gap-2 sm:grid-cols-8 lg:grid-cols-4">
+              {/* One scrolling row below `lg` so the question stays near the top of a
+                  phone; the familiar grid from `lg`, where the map is a sticky sidebar. */}
+              <ol
+                ref={mapStripRef}
+                className="mt-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:thin] lg:mt-5 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0"
+              >
                 {questions.map((question, index) => {
                   const isCurrent = index === currentQuestionIndex;
                   const isAnswered = !isUnanswered(responses[question.id]);
                   const questionIsFlagged = flaggedQuestionIds.includes(question.id);
 
                   return (
-                    <li key={question.id}>
+                    <li key={question.id} className="w-12 shrink-0 lg:w-auto lg:shrink">
                       <button
                         type="button"
                         onClick={() => goToQuestion(index)}
@@ -442,7 +489,7 @@ export default function ExamPage() {
                 })}
               </ol>
               {/* The design's four-item legend, one row per cell state. */}
-              <ul className="mt-5 space-y-2 border-t border-primary/8 pt-4 text-xs leading-5 text-plum-muted">
+              <ul className="mt-5 hidden space-y-2 border-t border-primary/8 pt-4 text-xs leading-5 text-plum-muted sm:block">
                 {[
                   { label: "Answered", swatch: "bg-primary-tint border-primary/25" },
                   { label: "Flagged for review", swatch: "bg-coral-light border-coral-border" },
@@ -458,20 +505,20 @@ export default function ExamPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 border-t border-primary/8 pt-4 text-xs leading-5 text-plum-muted">
+              <p className="mt-4 hidden border-t border-primary/8 pt-4 text-xs leading-5 text-plum-muted sm:block">
                 Answers are kept while you move between questions. Rough working on paper is
                 permitted.
               </p>
             </Card>
           </aside>
 
-          <Card className="overflow-hidden" variant="default">
-            <div className="flex flex-col gap-4 border-b border-primary/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <Card className="min-w-0 overflow-hidden" variant="default">
+            <div className="flex flex-col gap-3 border-b border-primary/8 bg-[linear-gradient(110deg,#FFFFFF_0%,#F7F4FF_100%)] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-8 sm:py-5">
               <div>
                 <h2
                   ref={questionHeadingRef}
                   tabIndex={-1}
-                  className="text-sm font-extrabold uppercase tracking-[0.1em] text-primary outline-none"
+                  className="scroll-mt-20 text-sm font-extrabold uppercase tracking-[0.1em] text-primary outline-none"
                 >
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </h2>
@@ -480,7 +527,7 @@ export default function ExamPage() {
                   <span className="capitalize">
                     {currentQuestion.metadata.subject.replace("_", " ")}
                   </span>{" "}
-                  · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
+                  · {skillDisplayLabel(currentQuestion.metadata.skill ?? currentQuestion.metadata.topic)} ·{" "}
                   <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
                 </p>
                 {/* A concise, independent announcement of the question
@@ -559,9 +606,15 @@ export default function ExamPage() {
               </WidgetErrorBoundary>
             </div>
 
-            <div className="flex flex-col-reverse gap-3 border-t border-primary/8 bg-canvas/65 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+            {/* DOM order is Previous, Next, Submit everywhere (so Tab order matches
+                the desktop row). On a phone the stack is Next, Previous, Submit: the
+                forward action is the thumb-reach button, and "Submit" sits last and
+                quiet instead of directly above "Next" where a tap meant for Next could
+                land on it. On the last question Submit is the one primary action. */}
+            <div className="flex flex-col gap-3 border-t border-primary/8 bg-canvas/65 px-4 py-4 sm:flex-row sm:items-center sm:px-8 sm:py-5">
               <Button
                 variant="secondary"
+                className="order-2 sm:order-1 sm:mr-auto"
                 onClick={goToPreviousQuestion}
                 disabled={currentQuestionIndex === 0}
                 data-testid="previous-question"
@@ -570,26 +623,26 @@ export default function ExamPage() {
                 Previous
               </Button>
 
-              <div className="flex flex-col-reverse gap-3 sm:flex-row">
-                {!isLastQuestion && (
-                  <Button
-                    variant="primary"
-                    onClick={goToNextQuestion}
-                    data-testid="next-question"
-                  >
-                    Next question
-                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                  </Button>
-                )}
+              {!isLastQuestion && (
                 <Button
-                  variant={isLastQuestion ? "orange" : "ghost"}
-                  onClick={() => setConfirmOpen(true)}
-                  data-testid="open-submit-dialog"
+                  variant="primary"
+                  className="order-1 sm:order-3"
+                  onClick={goToNextQuestion}
+                  data-testid="next-question"
                 >
-                  <Send aria-hidden="true" className="h-4 w-4" />
-                  Submit exam
+                  Next question
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Button>
-              </div>
+              )}
+              <Button
+                variant={isLastQuestion ? "primary" : "ghost"}
+                className={isLastQuestion ? "order-1 sm:order-3" : "order-3 sm:order-2"}
+                onClick={() => setConfirmOpen(true)}
+                data-testid="open-submit-dialog"
+              >
+                <Send aria-hidden="true" className="h-4 w-4" />
+                {isLastQuestion ? "Finish and submit" : "Submit exam"}
+              </Button>
             </div>
           </Card>
         </div>

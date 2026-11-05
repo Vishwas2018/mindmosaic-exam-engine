@@ -14,6 +14,16 @@ describe("Chapter 1 intro", () => {
     expect(heading).toHaveTextContent(hero.headingEmphasis);
   });
 
+  it("does not announce scene 1's headline a second time as a heading", () => {
+    const { container } = render(<ChapterOneIntro />);
+    const exposedHeadings = screen.getAllByRole("heading").map((node) => node.textContent ?? "");
+    // The page <h1> carries scene 1's words; no <h2> repeats them.
+    expect(exposedHeadings.filter((text) => text.includes(hero.heading))).toHaveLength(1);
+    // The visible scene 1 headline is still on screen, just not a heading, and reads with a space between its lines.
+    const visible = container.querySelector('[data-scene-copy="learn"] div[aria-hidden="true"]');
+    expect(visible).toHaveTextContent(`${hero.heading} ${hero.headingEmphasis}`);
+  });
+
   it("wires both CTAs and the availability link to real routes", () => {
     render(<ChapterOneIntro />);
     // The CTAs appear on the stage and in the fixed bar used by the stacked layouts.

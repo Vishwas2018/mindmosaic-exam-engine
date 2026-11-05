@@ -9,6 +9,7 @@ import { MindMosaicLogo } from "@/components/branding";
 import { buttonClasses } from "@/components/ui";
 import { useAuth } from "@/features/auth";
 import { roleHomeLabel, roleHomePath } from "@/features/auth/roles";
+import { ThemeToggle } from "@/features/theme";
 import type { ProfileRole } from "@/features/auth/roles";
 import { cn } from "@/lib/cn";
 
@@ -241,6 +242,7 @@ export function AppHeader() {
               />
             </div>
           )}
+          <ThemeToggle className="hidden sm:inline-flex" />
           <button
             type="button"
             aria-expanded={menuOpen}
@@ -296,6 +298,7 @@ export function AppHeader() {
                 Sign out
               </button>
             )}
+            <ThemeToggle variant="row" className="sm:hidden" />
             {showGuestActions && (
               <Link
                 href="/sign-in"

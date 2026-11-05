@@ -79,7 +79,10 @@ export function SiteFooter() {
               <MindMosaicLogo size="md" />
             </Link>
             <p className="text-[15px] leading-[1.6] text-mm-ink-soft">{footer.tagline}</p>
-            <Link href={`${routes.help}#contact`} className="w-fit text-[15px] text-mm-brand hover:text-mm-brand-deep">
+            <Link
+              href={`${routes.help}#contact`}
+              className="inline-flex min-h-6 w-fit items-center text-[15px] text-mm-brand hover:text-mm-brand-deep"
+            >
               {SUPPORT_EMAIL}
             </Link>
           </div>
@@ -106,7 +109,11 @@ export function SiteFooter() {
           <span>{footer.copyright}</span>
           <span className="flex flex-wrap gap-x-5 gap-y-2">
             {footer.legalLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="whitespace-nowrap text-mm-muted hover:text-mm-brand">
+              <Link
+                key={link.label}
+                href={link.href}
+                className="inline-flex min-h-6 items-center whitespace-nowrap text-mm-muted hover:text-mm-brand"
+              >
                 {link.label}
               </Link>
             ))}

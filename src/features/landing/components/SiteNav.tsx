@@ -7,6 +7,7 @@ import { LayoutDashboard, LogOut } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { useAuth } from "@/features/auth/AuthProvider";
+import { ThemeToggle } from "@/features/theme";
 import { roleHomeLabel, roleHomePath } from "@/features/auth/roles";
 
 import { nav } from "../content";
@@ -105,7 +106,8 @@ export function SiteNav({ overlay = false }: { overlay?: boolean } = {}) {
       style={
         overlay
           ? {
-              backgroundColor: `rgba(252,251,248,${(SCRIM_TOP + (SCRIM_SCROLLED - SCRIM_TOP) * solid).toFixed(3)})`,
+              // --mm-page-rgb is the page colour as channels (globals.css): #FCFBF8 in the light theme, the dark page in night mode.
+              backgroundColor: `rgb(var(--mm-page-rgb) / ${(SCRIM_TOP + (SCRIM_SCROLLED - SCRIM_TOP) * solid).toFixed(3)})`,
               borderBottomColor: `rgba(89,37,168,${(0.09 + 0.05 * solid).toFixed(3)})`,
               boxShadow: solid >= 1 ? "0 10px 28px -20px rgba(42,18,87,0.5)" : "none",
             }
@@ -190,6 +192,8 @@ export function SiteNav({ overlay = false }: { overlay?: boolean } = {}) {
             </>
           )}
 
+          <ThemeToggle className="hidden sm:inline-flex" />
+
           <button
             ref={buttonRef}
             type="button"
@@ -263,6 +267,7 @@ export function SiteNav({ overlay = false }: { overlay?: boolean } = {}) {
                 </button>
               </>
             )}
+            <ThemeToggle variant="row" className="mt-1 !px-0 !text-[17px] !font-semibold sm:hidden" />
           </div>
         </nav>
       )}

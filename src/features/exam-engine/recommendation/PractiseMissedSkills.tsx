@@ -26,6 +26,7 @@ import type {
 } from "@/features/exam-engine/recommendation";
 import type { ExamSelectionConfig } from "@/features/exam-engine/selection";
 
+import { skillDisplayLabel } from "@/features/exam-engine/skill-label";
 import { buildDrillSeed, saveDrillLaunchRequest } from "./drill-handoff";
 
 export interface PractiseMissedSkillsProps {
@@ -184,7 +185,7 @@ export function PractiseMissedSkills({
           <Target aria-hidden="true" className="h-5 w-5" />
           {isNavigating && !navigationFailed
             ? "Launching…"
-            : `Practise ${selected.skillOrTopic}`}
+            : `Practise ${skillDisplayLabel(selected.skillOrTopic)}`}
         </Button>
       </div>
 
@@ -223,7 +224,7 @@ export function PractiseMissedSkills({
                 {isSelected && (
                   <Check aria-hidden="true" className="h-3.5 w-3.5" />
                 )}
-                {rec.skillOrTopic}
+                {skillDisplayLabel(rec.skillOrTopic)}
                 <span
                   className={`tabular-nums text-xs font-bold ${
                     isSelected ? "text-white" : "text-plum-muted"

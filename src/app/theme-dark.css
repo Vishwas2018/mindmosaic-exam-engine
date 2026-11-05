@@ -1,0 +1,339 @@
+/*
+ * Night mode: the dark palette, applied only while <html data-theme="dark"> (see src/features/theme/theme.ts
+ * for when that is: opt-in, and only on routes whose dark rendering has been verified).
+ *
+ * Every colour in the app is a CSS variable (globals.css `:root`, read through `@theme inline`), so most of
+ * night mode is one remap of those variables. Colours come from the colour contract (docs/design.md §4):
+ *  - page and surfaces: the ink/plum family (`--mm-ink` #18151F, `--mm-plum` #2A1145), lifted just enough to
+ *    separate cards from the page;
+ *  - text: the purple tint (#F3EEFA) and the approved lilac (#C9B6E4) used on the dark auth panel, in the
+ *    same ink > ink-soft > muted order as the light theme;
+ *  - brand purple (#5925A8) stays the colour of every filled primary action, with white text, exactly as in
+ *    the light theme. Where the same token is also used as *text* on a light surface, the text uses lilac
+ *    instead (the "brand text" block below), because #5925A8 text on a dark surface is under 2:1.
+ *
+ * Everything is scoped under `html[data-theme="dark"]`, so with the attribute absent (the default) this file
+ * changes nothing.
+ */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Product surface family */
+  --bg-page: #15111c;
+  --bg-white: #1e1828;
+  --border: #3a3148;
+  --text-dark: #f3eefa;
+  --text-mid: #dcd5e5;
+  --text-light: #b3abbf;
+  --paper: #1b1624;
+  --landing-ink: #f3eefa;
+  --landing-muted: #b3abbf;
+
+  /* Marketing / mm-* family */
+  --mm-page: #15111c;
+  --mm-page-rgb: 21 17 28;
+  --mm-surface: #1e1828;
+  --mm-ink: #f3eefa;
+  --mm-ink-soft: #dcd5e5;
+  --mm-muted: #b3abbf;
+  --mm-quiet: #a59cb2;
+  --mm-muted-2: #a59cb2;
+  --mm-line: #3a3148;
+  --mm-line-soft: #2c2438;
+  --mm-line-quiet: #352d42;
+  --mm-positive: #5fd7cc;
+  --mm-positive-soft: #12302f;
+  --mm-tint: #241b33;
+  --mm-tint-soft: #201829;
+  --mm-tint-quiet: #241d30;
+  --mm-tint-line: #3a2f4d;
+  --mm-tint-line-strong: #44385a;
+  --mm-track: #2c2438;
+  --mm-surface-quiet: #251e30;
+  --mm-alert: #3a1d22;
+  --mm-alert-line: #6b2d33;
+  --mm-warm: #33251c;
+  --mm-ember-ink: #ff9a66;
+  --mm-ember-tint: #33231a;
+  --mm-ember-line: #5a3a28;
+  --mm-wash: #221a2d;
+  --mm-coral-text: #ff8a8d;
+  --mm-coral-deep: #ffb0b2;
+
+  /* Product tint / status family */
+  --canvas: #15111c;
+  --parchment-border: #3a3148;
+  --parchment-subtle: #1e1828;
+  --primary-tint: #2a2038;
+  --coral-light: #3a1d22;
+  --coral-border: #6b2d33;
+  --teal-light: #12302f;
+  --teal-border: #1f514d;
+  --amber-light: #33271a;
+  --amber-border: #5a4426;
+  --plum-dark: #f3eefa;
+  --plum-muted: #b3abbf;
+  --surface-container-lowest: #1e1828;
+  --surface-container-low: #1b1624;
+  --surface-container: #241d30;
+  --surface-container-high: #2c2438;
+  --outline-subtle: #3a3148;
+  --stitch-outline: #a59cb2;
+}
+
+/* ---- Brand colour used as TEXT or as an outline: lilac on dark. Filled backgrounds are untouched. ---- */
+html[data-theme="dark"] :is(.text-brand, .text-mm-brand, .text-primary, .text-royal, .text-royal-strong, .text-brand-bright),
+html[data-theme="dark"] :is(.hover\:text-mm-brand, .hover\:text-brand, .hover\:text-primary, .hover\:text-royal):hover {
+  color: #c9b6e4;
+}
+html[data-theme="dark"] :is(.hover\:text-mm-brand-deep):hover {
+  color: #f3eefa;
+}
+html[data-theme="dark"] :is(.border-mm-brand, .border-primary, .border-royal) {
+  border-color: #8f6bd0;
+}
+
+/* ---- Status colour used as TEXT: lighter on dark. (Their filled backgrounds are untouched.) ---- */
+html[data-theme="dark"] :is(.text-success, .text-teal-accent) {
+  color: #6fe0a4;
+}
+html[data-theme="dark"] :is(.text-warning, .text-amber-accent) {
+  color: #f5b971;
+}
+html[data-theme="dark"] :is(.text-error, .text-coral-accent, .text-red-700, .text-red-600) {
+  color: #ff8a8d;
+}
+
+/* ---- Raw "white" surfaces (the app uses bg-white for cards and panels) become the dark surface. ---- */
+html[data-theme="dark"] .bg-white {
+  background-color: var(--mm-surface);
+}
+html[data-theme="dark"] :is(.bg-white\/60, .bg-white\/65, .bg-white\/70, .bg-white\/75, .bg-white\/80, .bg-white\/85, .bg-white\/90, .bg-white\/95) {
+  background-color: color-mix(in srgb, var(--mm-surface) 88%, transparent);
+}
+html[data-theme="dark"] .hover\:bg-white:hover {
+  background-color: var(--surface-container);
+}
+html[data-theme="dark"] .from-white {
+  --tw-gradient-from: var(--mm-surface);
+}
+html[data-theme="dark"] .to-white {
+  --tw-gradient-to: var(--mm-surface);
+}
+html[data-theme="dark"] .border-white {
+  border-color: var(--mm-line);
+}
+
+/* ---- Tailwind slate neutrals used for text, borders and quiet fills ---- */
+html[data-theme="dark"] :is(.text-slate-900, .text-slate-800) {
+  color: var(--mm-ink);
+}
+html[data-theme="dark"] .text-slate-700 {
+  color: var(--mm-ink-soft);
+}
+html[data-theme="dark"] :is(.text-slate-600, .text-slate-500) {
+  color: var(--mm-muted);
+}
+html[data-theme="dark"] .text-slate-400 {
+  color: var(--mm-quiet);
+}
+html[data-theme="dark"] :is(.border-slate-200, .border-slate-300) {
+  border-color: var(--mm-line);
+}
+html[data-theme="dark"] .bg-slate-50 {
+  background-color: var(--mm-surface-quiet);
+}
+html[data-theme="dark"] :is(.bg-slate-100, .bg-slate-200) {
+  background-color: var(--mm-track);
+}
+html[data-theme="dark"] .hover\:bg-slate-300:hover {
+  background-color: var(--mm-line);
+}
+
+/* ---- Focus indicators: lilac, so they keep their 3:1 against the dark page ---- */
+html[data-theme="dark"] .lp-root :is(a, button, summary, input, select, textarea, [tabindex]):focus-visible:not(.skip-link) {
+  outline-color: #c9b6e4;
+}
+html[data-theme="dark"] :is(.outline-primary, .focus-visible\:outline-primary:focus-visible, .focus-visible\:outline-mm-brand:focus-visible) {
+  outline-color: #c9b6e4;
+}
+html[data-theme="dark"] :is(.focus-visible\:ring-royal\/20, .focus-visible\:ring-royal\/30, .focus-visible\:ring-mm-brand\/30, .focus-visible\:ring-primary\/20):focus-visible {
+  --tw-ring-color: rgb(201 182 228 / 0.55);
+}
+
+/* ---- Native form controls and selection ---- */
+html[data-theme="dark"] ::selection {
+  background: #5925a8;
+  color: #fff;
+}
+html[data-theme="dark"] ::placeholder {
+  color: var(--mm-quiet);
+  opacity: 1;
+}
+html[data-theme="dark"] dialog::backdrop {
+  background: rgb(0 0 0 / 0.62);
+}
+
+/* ---- Soft white-to-lilac (and white-to-warm) gradient surfaces: the contract's one established gradient ---- */
+html[data-theme="dark"] [class*="#FFFFFF_0%"] {
+  background-image: linear-gradient(145deg, var(--mm-surface) 0%, var(--mm-tint-soft) 100%);
+}
+html[data-theme="dark"] [class*="#FFF7EC"] {
+  background-image: linear-gradient(145deg, var(--mm-surface) 0%, var(--mm-warm) 100%);
+}
+
+/* The amber "orange" button is a light fill: its label must stay dark, not follow text-white to near-white. */
+html[data-theme="dark"] .bg-royal-orange {
+  color: #18151f;
+}
+
+/* A hardcoded dark-teal label (English badge in Worth revisiting) is unreadable on the dark teal tint. */
+html[data-theme="dark"] .text-\[\#007566\] {
+  color: #5fd3c0;
+}
+
+/* ---- Light fills stay light, so the text on them keeps the light theme's dark ink ---- */
+html[data-theme="dark"] :is(.bg-mm-coral, .bg-mm-lilac, .bg-mm-brand-mid) {
+  --mm-ink: #18151f;
+  --mm-ink-soft: #3d3846;
+  --mm-muted: #3d3846;
+  --mm-quiet: #3d3846;
+}
+
+/* ---- Legal pages: links use the royal-purple token as text ---- */
+html[data-theme="dark"] .legal-prose a {
+  color: #c9b6e4;
+}
+
+/* ---- Results score ring: the inner disc is a hardcoded white in globals.css ---- */
+html[data-theme="dark"] .score-ring-content {
+  background: var(--mm-surface);
+}
+
+/* ---- State and variant forms of the white and slate neutrals (striped table rows, focused and disabled fields) ---- */
+html[data-theme="dark"] .odd\:bg-white:nth-child(odd),
+html[data-theme="dark"] .focus\:bg-white:focus {
+  background-color: var(--mm-surface);
+}
+html[data-theme="dark"] :is(.bg-slate-50\/50, .bg-slate-50\/60, .bg-slate-50\/70, .bg-slate-50\/80),
+html[data-theme="dark"] .even\:bg-slate-50\/60:nth-child(even),
+html[data-theme="dark"] .hover\:bg-slate-50:hover {
+  background-color: var(--mm-surface-quiet);
+}
+html[data-theme="dark"] .disabled\:bg-slate-100:disabled {
+  background-color: var(--mm-track);
+}
+
+/*
+ * ---- Question visuals stay on white paper ----
+ * Charts, diagrams and tables are exam content with colours specified against white (docs/design.md §28).
+ * In Night mode each one sits on a light panel, with the light theme's tokens restored inside it, so it
+ * renders exactly as designed. (`display: contents` in the light theme, set by VisualRenderer, so this is
+ * the only place it takes a box.)
+ */
+html[data-theme="dark"] .mm-visual-paper {
+  display: block;
+  padding: 10px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #18151f;
+  color-scheme: light;
+
+  --bg-page: #f7f6fb;
+  --bg-white: #ffffff;
+  --border: #e4e0f0;
+  --text-dark: #1a1a2e;
+  --text-mid: #4a4a6a;
+  --text-light: #6b6b8a;
+  --page-background: var(--bg-page);
+  --surface: var(--bg-white);
+  --primary-text: var(--text-dark);
+  --secondary-text: var(--text-mid);
+  --paper: #faf8f4;
+  --mm-page: #fcfbf8;
+  --mm-surface: #ffffff;
+  --mm-ink: #18151f;
+  --mm-ink-soft: #3d3846;
+  --mm-muted: #625d69;
+  --mm-quiet: #5c5664;
+  --mm-muted-2: #6d6774;
+  --mm-line: #e9e4ed;
+  --mm-line-soft: #f1edf5;
+  --mm-line-quiet: #ded8e4;
+  --mm-positive: #0b6b63;
+  --mm-positive-soft: #d9efec;
+  --mm-tint: #f3eefa;
+  --mm-tint-soft: #f7f3fc;
+  --mm-tint-quiet: #f2eef7;
+  --mm-tint-line: #e4d9f2;
+  --mm-tint-line-strong: #dfd3ee;
+  --mm-track: #efeaf4;
+  --mm-surface-quiet: #f7f5f9;
+  --mm-alert: #fff1f1;
+  --mm-alert-line: #ffd3d4;
+  --mm-warm: #fff4ee;
+  --mm-wash: #fbf8fe;
+  --mm-coral-text: #cc2429;
+  --mm-coral-deep: #98262c;
+  --canvas: #fcfbf8;
+  --parchment-border: #ebe6dc;
+  --parchment-subtle: #f7f4ec;
+  --primary-tint: #f6e9ff;
+  --coral-light: #fff0f0;
+  --coral-border: #ffd2d4;
+  --teal-light: #e6f7f5;
+  --teal-border: #bceae4;
+  --amber-light: #fef3c7;
+  --amber-border: #fde68a;
+  --plum-dark: #1e152a;
+  --plum-muted: #564b63;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #faf7f2;
+  --surface-container: #f5efe6;
+  --surface-container-high: #eee7dc;
+  --outline-subtle: #e5dec9;
+  --stitch-outline: #696370;
+}
+/* The raw-utility overrides above also apply inside the panel, so restore the light values there. */
+html[data-theme="dark"] .mm-visual-paper .bg-white {
+  background-color: #ffffff;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.text-brand, .text-mm-brand, .text-primary, .text-royal) {
+  color: #5925a8;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.text-slate-900, .text-slate-800) {
+  color: #1e293b;
+}
+html[data-theme="dark"] .mm-visual-paper .text-slate-700 {
+  color: #334155;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.text-slate-600, .text-slate-500) {
+  color: #475569;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.border-slate-200, .border-slate-300) {
+  border-color: #cbd5e1;
+}
+html[data-theme="dark"] .mm-visual-paper .bg-slate-50 {
+  background-color: #f8fafc;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.bg-slate-100, .bg-slate-200) {
+  background-color: #f1f5f9;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.text-success, .text-teal-accent) {
+  color: #0f6b32;
+}
+html[data-theme="dark"] .mm-visual-paper :is(.text-error, .text-coral-accent, .text-red-700, .text-red-600) {
+  color: #b91c1c;
+}
+
+/* ---- White stops inside gradients, including the translucent forms and `via` ---- */
+html[data-theme="dark"] :is(.from-white\/95) {
+  --tw-gradient-from: color-mix(in srgb, var(--mm-surface) 95%, transparent);
+}
+html[data-theme="dark"] :is(.to-white\/90) {
+  --tw-gradient-to: color-mix(in srgb, var(--mm-surface) 90%, transparent);
+}
+html[data-theme="dark"] .via-white {
+  --tw-gradient-via: var(--mm-surface);
+}

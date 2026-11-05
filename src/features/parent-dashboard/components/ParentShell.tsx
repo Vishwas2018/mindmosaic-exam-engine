@@ -44,7 +44,7 @@ export function ParentShell({
           <Link
             href="/"
             aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            className="inline-flex min-h-11 items-center rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
             <MindMosaicLogo size="md" />
           </Link>
@@ -65,7 +65,7 @@ export function ParentShell({
                 key={link.href}
                 href={link.href}
                 aria-current={active === link.href ? "page" : undefined}
-                className={`rounded-xl px-4 py-2 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                className={`inline-flex min-h-11 items-center rounded-xl px-4 py-2 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
                   active === link.href ? "bg-royal/10 text-royal" : "text-muted hover:text-royal"
                 }`}
               >
@@ -76,7 +76,7 @@ export function ParentShell({
                 way out — this is. */}
             <Link
               href="/"
-              className="ml-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl border-l border-royal/10 px-4 py-2 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              className="ml-1 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-xl border-l border-royal/10 px-4 py-2 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
             >
               <Home aria-hidden="true" className="h-4 w-4" />
               Back to site
@@ -103,7 +103,7 @@ export function ParentShell({
               key={link.href}
               href={link.href}
               aria-current={active === link.href ? "page" : undefined}
-              className={`rounded-full px-4 py-1.5 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+              className={`inline-flex min-h-11 items-center rounded-full px-4 py-1.5 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
                 active === link.href ? "bg-royal/10 text-royal" : "text-muted hover:text-royal"
               }`}
             >
@@ -112,7 +112,7 @@ export function ParentShell({
           ))}
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
             <Home aria-hidden="true" className="h-4 w-4" />
             Back to site

@@ -160,7 +160,7 @@ export function ExamIntegrityMonitor({ active }: { active: boolean }) {
         <span className="hidden sm:inline">
           {total === 0 ? "Exam conditions" : `${total} warning${total === 1 ? "" : "s"}`}
         </span>
-        <span className="sm:hidden">{total === 0 ? "Exam" : total}</span>
+        <span className="sm:hidden">{total === 0 ? <span className="sr-only">Exam conditions</span> : total}</span>
       </span>
 
       <Modal

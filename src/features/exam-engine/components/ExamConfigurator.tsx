@@ -104,7 +104,7 @@ export function ExamConfigurator({
   );
   const [subject, setSubject] = useState<SubjectFilter>(initialScope?.subject ?? "numeracy");
   const [questionCount, setQuestionCount] = useState<QuestionCountOption>(10);
-  const [timing, setTiming] = useState<TimingMode>("timed");
+  const [timing, setTiming] = useState<TimingMode>("untimed");
   const [startError, setStartError] = useState<string | null>(null);
   /*
    * The two pages of the setup booklet. "Start exam" on the cover sheet
@@ -319,7 +319,7 @@ export function ExamConfigurator({
         <p
           data-testid="eligible-count"
           aria-live="polite"
-          className="absolute right-5 top-5 -rotate-3 rounded-full border border-royal-orange/20 bg-white px-3 py-1.5 text-xs font-extrabold leading-none text-warning shadow-[0_6px_16px_rgba(49,32,86,0.1)] sm:right-7 sm:top-7"
+          className="mb-3 w-fit rounded-full border border-royal-orange/20 bg-white px-3 py-1.5 text-xs font-extrabold leading-none text-warning shadow-[0_6px_16px_rgba(49,32,86,0.1)] sm:absolute sm:right-7 sm:top-7 sm:mb-0 sm:-rotate-3"
         >
           {eligibleCount} matching question{eligibleCount === 1 ? "" : "s"} available
         </p>
@@ -330,7 +330,7 @@ export function ExamConfigurator({
         </Badge>
         <h2
           data-testid="config-summary"
-          className="mt-3 max-w-[calc(100%-9rem)] font-[family-name:var(--font-dm-serif)] text-2xl font-normal leading-tight tracking-[-0.02em] text-ink sm:text-3xl"
+          className="mt-3 font-[family-name:var(--font-instrument-sans)] text-2xl font-semibold leading-tight tracking-[-0.02em] text-ink text-balance sm:max-w-[calc(100%-11rem)] sm:text-3xl"
         >
           {describeConfig(config)}
         </h2>
@@ -462,7 +462,7 @@ export function ExamConfigurator({
             session, so it is named for what it does. The actual start lives
             on ExamInstructions ("Start exam", data-testid begin-exam). */}
         <Button
-          variant="orange"
+          variant="primary"
           size="lg"
           data-testid="start-exam"
           onClick={() => {

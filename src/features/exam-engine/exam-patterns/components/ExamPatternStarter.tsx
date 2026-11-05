@@ -203,7 +203,7 @@ export function ExamPatternStarter({
         </Badge>
         <h2
           data-testid="pattern-sitting-label"
-          className="mt-3 font-[family-name:var(--font-dm-serif)] text-2xl font-normal leading-tight tracking-[-0.02em] text-ink sm:text-3xl"
+          className="mt-3 font-[family-name:var(--font-instrument-sans)] text-2xl font-semibold leading-tight tracking-[-0.02em] text-ink text-balance sm:text-3xl"
         >
           {sittingLabel}
         </h2>

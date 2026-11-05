@@ -6,6 +6,7 @@ import { Bell, ChevronDown, Flag, Menu } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthNav } from "@/features/auth";
+import { ThemeToggle } from "@/features/theme";
 
 import { SIDEBAR_NAV_ITEMS } from "./StudentSidebar";
 
@@ -122,6 +123,7 @@ export function StudentTopBar({
         >
           Edit interests &amp; goals
         </button>
+        <ThemeToggle className="hidden sm:inline-flex" />
         <AuthNav showRoleHome={false} />
       </div>
     </header>

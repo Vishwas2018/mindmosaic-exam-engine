@@ -29,8 +29,8 @@ export default function ProgramsPage() {
       <main id="main-content" className="mm-width grid gap-10 py-[clamp(32px,5vw,72px)]">
         <div className="grid items-end gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="flex min-w-0 flex-col gap-[18px]">
-            <nav aria-label="Breadcrumb" className="flex gap-2 text-sm text-mm-ink-soft">
-              <Link href="/" className="text-mm-ink-soft hover:text-mm-brand">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-mm-ink-soft">
+              <Link href="/" className="inline-flex min-h-11 items-center text-mm-ink-soft hover:text-mm-brand">
                 Home
               </Link>
               <span aria-hidden="true">/</span>
