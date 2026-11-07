@@ -54,9 +54,18 @@ describe("student bottom nav", () => {
     const links = within(nav).getAllByRole("link");
     expect(links.map((l) => l.textContent)).toEqual(["My Space", "Learning", "Practice", "Exams", "Results"]);
     expect(links.map((l) => l.getAttribute("aria-label"))).toEqual([
-      "My Space", "Learning Hub", "Practice Studio", "Exam Centre", "My Results",
+      "My Space", "Learning — Learning Hub", "Practice — Practice Studio", "Exams — Exam Centre", "Results — My Results",
     ]);
-    expect(screen.getByRole("link", { name: "Learning Hub" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: /Learning Hub/ })).toHaveAttribute("aria-current", "page");
+  });
+
+  it("keeps each visible label inside its accessible name (WCAG 2.5.3)", () => {
+    render(<StudentBottomNav active="home" />);
+    for (const link of screen.getAllByRole("link")) {
+      const visible = link.textContent ?? "";
+      expect(visible).not.toBe("");
+      expect(link.getAttribute("aria-label")?.toLowerCase()).toContain(visible.toLowerCase());
+    }
   });
 
   it("is hidden from lg up and every target is at least 44px", () => {
