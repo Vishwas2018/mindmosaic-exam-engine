@@ -76,7 +76,7 @@ export function LessonCheckSection({
 
         <div className="flex items-center gap-2 text-xs text-plum-muted">
           <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-          <span>Every practice question is verified and aligned to Victorian Curriculum Level 3 standards.</span>
+          <span>Every practice question is verified with worked solutions.</span>
         </div>
       </div>
     </section>

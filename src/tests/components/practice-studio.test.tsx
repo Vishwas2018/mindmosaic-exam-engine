@@ -210,7 +210,6 @@ describe("PracticeStudioSelector", () => {
       <PracticeStudioSelector
         availability={{ integrity: "unknown", subjects: [] }}
         yearLevel={5}
-        studentYearLevel={5}
       />,
     );
 
@@ -227,7 +226,6 @@ describe("PracticeStudioSelector", () => {
           subjects: [makeSubject({ state: "none", reason: "no_content", uniqueQuestions: 0 })],
         }}
         yearLevel={5}
-        studentYearLevel={5}
       />,
     );
 
