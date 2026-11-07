@@ -475,7 +475,17 @@ Do not use a large filled purple pill for the public navigation active state.
 
 ## 8.2 Product/global header
 
-The application header is:
+**Scope.** This section governs the marketing site and the parent and account surfaces (parent dashboard, billing, sign-in and account pages). The signed-in **student app** (`/student/*`, `/results`) uses a sidebar shell on wide viewports and a bottom navigation below `lg` instead of the header navigation described here. This is a scope rule, not an override: the header specification below is unchanged for everything it governs. Parent billing keeps the header.
+
+The student app shell is:
+
+- five destinations, in this order: My Space, Learning Hub, Practice Studio, Exam Centre, My Results;
+- Help Centre outside the five, in the sidebar foot beside the account controls;
+- a sidebar at `lg` and above; below `lg` a bottom navigation with short labels (My Space, Learning, Practice, Exams, Results) whose accessible names are the full destination names;
+- every control at least 44 x 44 px, with a visible focus ring, and `aria-current="page"` on the active destination;
+- no invented status: no XP or level line, no search box without an index, no version or session chip.
+
+The application header (marketing, parent and account surfaces) is:
 
 - sticky;
 - approximately 72px high;
