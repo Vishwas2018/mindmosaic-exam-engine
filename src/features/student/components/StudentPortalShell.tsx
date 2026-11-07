@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import type { StudentContext } from "@/features/student/require-student";
 
+import { StudentBottomNav } from "./StudentBottomNav";
 import { StudentSidebar, type StudentSidebarKey } from "./StudentSidebar";
 import { StudentTopBar } from "./StudentTopBar";
 import type { StudentPortalShellData } from "./student-portal-shell-data";
@@ -45,11 +46,12 @@ export function StudentPortalShell({
         <div className="min-w-0 flex-1">
           <StudentTopBar breadcrumbLabel={breadcrumbLabel} hasActiveSession={shellData.hasActiveSession} />
 
-          <main id="main-content" className="mx-auto w-full max-w-[1240px] space-y-8 px-4 py-7 sm:px-6 lg:px-8">
+          <main id="main-content" className="mx-auto w-full max-w-[1240px] space-y-8 px-4 py-7 pb-24 sm:px-6 lg:px-8 lg:pb-7">
             {children}
           </main>
         </div>
       </div>
+      <StudentBottomNav active={active} />
     </div>
   );
 }
