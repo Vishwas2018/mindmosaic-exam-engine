@@ -18,23 +18,30 @@ import { getPublicationEligibility } from "./publication-evidence";
  */
 const SURFACED_STYLES: ReadonlySet<StudioProgramme["examStyle"]> = new Set(["naplan_style", "icas_style"]);
 
+/** Only the years MindMosaic serves. No cells for years 2, 4 or 6-12 (D4, clarified). */
+const SURFACED_YEARS: ReadonlySet<StudioProgramme["yearLevel"]> = new Set([3, 5]);
+
 /**
  * Feeds the pure availability module from the served bank.
  *
  * Programme availability is PROGRAMS + resolveProgramStatuses, never route
- * existence. Only scoped programmes in SURFACED_STYLES are surfaced: that excludes the
- * unscoped "Mixed practice" entry, AMC-style and scholarship-style.
+ * existence. Only scoped programmes in SURFACED_STYLES and SURFACED_YEARS are surfaced: that
+ * excludes the unscoped "Mixed practice" entry, AMC-style, scholarship-style and every year
+ * other than 3 and 5.
  *
- * Fail closed: any thrown error, or any publication-integrity problem, is
- * "unknown". `servedBank()` already returns an empty bank in the latter case;
- * the explicit check keeps the reason visible rather than inferring it.
+ * "Couldn't check" is any error path: a throw, a publication-integrity problem
+ * or missing evidence (`servedBank()` itself returns an empty bank for the
+ * latter, so integrity is read first and the emptiness is never taken at face
+ * value). A successful read that returns zero is "no content available".
  *
  * Returns counts only: no question content, no answer keys, so a server
  * component may pass the result to the client.
  */
 export function getStudioAvailability(): StudioAvailability {
   const programmes: StudioProgramme[] = resolveProgramStatuses(PROGRAMS).flatMap((program) =>
-    program.scope && SURFACED_STYLES.has(program.scope.examStyle)
+    program.scope &&
+    SURFACED_STYLES.has(program.scope.examStyle) &&
+    SURFACED_YEARS.has(program.scope.yearLevel)
       ? [{
           yearLevel: program.scope.yearLevel,
           examStyle: program.scope.examStyle,

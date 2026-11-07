@@ -178,28 +178,50 @@ describe("practice studio availability", () => {
       expect(numeracy.uniqueQuestions).not.toBe(0);
     });
 
-    it("reports an empty bank as unknown, never none", () => {
+    it("reports a successful read that found nothing as none/no_content, never unknown", () => {
       const result = build([], programmes);
-      expect(result.integrity).toBe("unknown");
-      expect(result.subjects[0].state).toBe("unknown");
-      expect(result.subjects[0].state).not.toBe("none");
+      expect(result.integrity).toBe("ok");
+      expect(result.subjects[0]).toMatchObject({ state: "none", reason: "no_content", uniqueQuestions: 0 });
+      expect(result.subjects[0].state).not.toBe("unknown");
     });
 
     it("never offers a set size or a time for an unknown entry", () => {
-      const [entry] = build([], programmes).subjects;
+      const [entry] = build(many(30), programmes, "unknown").subjects;
+      expect(entry.state).toBe("unknown");
       expect(offeredSetSizes(entry.uniqueQuestions)).toEqual([]);
       expect(aboutMinutes({ medianSeconds: null, uniqueQuestions: entry.uniqueQuestions }, 10)).toBeNull();
     });
 
     it("keeps a coming-soon programme as none even when the bank cannot be checked", () => {
-      expect(build([], programmes).subjects[1]).toMatchObject({ state: "none", reason: "coming_soon" });
+      expect(build([], programmes, "unknown").subjects[1]).toMatchObject({ state: "none", reason: "coming_soon" });
     });
 
     it("keeps none and unknown on different states and reasons", () => {
       const none = build(many(6, { subject: "reading" }), [live()]).subjects[0];
-      const unknown = build([], [live()]).subjects[0];
+      const unknown = build([], [live()], "unknown").subjects[0];
       expect(none.reason).not.toBe(unknown.reason);
       expect(none.state).not.toBe(unknown.state);
+    });
+  });
+
+  describe("reported metrics (never selection rules)", () => {
+    it("reports content duplicates removed and shared prompt stems separately", () => {
+      const bank = [
+        q({ id: "a1", subject: "reading", strand: "L", prompt: "Main idea?", stimulus: "A" }),
+        q({ id: "a2", subject: "reading", strand: "L", prompt: "Main idea?", stimulus: "B" }),
+        q({ id: "a3", subject: "reading", strand: "L", prompt: "Main idea?", stimulus: "B" }),
+        q({ id: "a4", subject: "reading", strand: "L", prompt: "Other" }),
+      ];
+      const subject = build(bank, [live({ subject: "reading" })]).subjects[0];
+      expect(subject.uniqueQuestions).toBe(3);
+      expect(subject.duplicatesRemoved).toBe(1);
+      expect(subject.sharedPromptStems).toEqual({ groups: 1, questions: 2 });
+    });
+
+    it("reports nothing as zero when the bank could not be checked", () => {
+      const subject = build(many(10), [live()], "unknown").subjects[0];
+      expect(subject.duplicatesRemoved).toBeNull();
+      expect(subject.sharedPromptStems).toBeNull();
     });
   });
 

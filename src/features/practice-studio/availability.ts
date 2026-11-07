@@ -28,8 +28,9 @@ import { filterEligibleQuestions } from "@/features/exam-engine/selection/select
  *        selection engine uses (`filterEligibleQuestions`), so `language` in
  *        the catalogue maps to `language_conventions` in the bank. A short set's
  *        time is the median `estimatedTimeSeconds` of its slice times its size.
- *  - C7  Fails closed. Two states never share wording: `none` (really zero, or
- *        not launched) and `unknown` (could not check). `unknown` carries NO
+ *  - C7  Fails closed. Two states never share wording: `none` (a successful
+ *        read that found zero, or not launched) and `unknown` (the read failed
+ *        or could not be verified). `unknown` carries NO
  *        counts, not zero.
  *  - C9  Programme availability is whatever the caller resolved from
  *        PROGRAMS + resolveProgramStatuses. Only programmes handed in are ever
@@ -96,6 +97,19 @@ export interface SubjectAvailability {
   readonly uniqueQuestions: number | null;
   /** Every strand with content, eligible or not, sorted by label. Empty when unknown or none. */
   readonly strands: readonly StrandAvailability[];
+  /**
+   * Reported, never a selection rule: questions removed because their whole
+   * content (prompt, passage, options, visuals) repeats another question's.
+   * Null when unknown.
+   */
+  readonly duplicatesRemoved: number | null;
+  /**
+   * Reported, never a selection rule: groups of DIFFERENT questions that share
+   * a prompt stem (same prompt text, different passage/options), and how many
+   * questions sit in them. An authoring signal, not a duplicate count. Null
+   * when unknown.
+   */
+  readonly sharedPromptStems: { readonly groups: number; readonly questions: number } | null;
   /** Why a `none` is none. */
   readonly reason: "has_content" | "coming_soon" | "no_content" | "no_strand_reaches_floor" | "unchecked";
 }
@@ -183,6 +197,17 @@ function uniqueByContent(questions: readonly Question[]): Question[] {
   return out;
 }
 
+/** Different questions that share a prompt stem: an authoring signal (see SubjectAvailability). */
+function sharedPromptStems(unique: readonly Question[]): { groups: number; questions: number } {
+  const byPrompt = new Map<string, number>();
+  for (const question of unique) {
+    const key = norm(question.prompt);
+    byPrompt.set(key, (byPrompt.get(key) ?? 0) + 1);
+  }
+  const shared = [...byPrompt.values()].filter((n) => n > 1);
+  return { groups: shared.length, questions: shared.reduce((a, b) => a + b, 0) };
+}
+
 /* ------------------------------------------------------------------ */
 /* Median, set size, time                                              */
 /* ------------------------------------------------------------------ */
@@ -225,11 +250,19 @@ function unknownSubject(p: StudioProgramme): SubjectAvailability {
     state: "unknown",
     uniqueQuestions: null,
     strands: [],
+    duplicatesRemoved: null,
+    sharedPromptStems: null,
     reason: "unchecked",
   };
 }
 
-function noneSubject(p: StudioProgramme, reason: SubjectAvailability["reason"], uniqueQuestions = 0, strands: readonly StrandAvailability[] = []): SubjectAvailability {
+function noneSubject(
+  p: StudioProgramme,
+  reason: SubjectAvailability["reason"],
+  uniqueQuestions = 0,
+  strands: readonly StrandAvailability[] = [],
+  reported: Pick<SubjectAvailability, "duplicatesRemoved" | "sharedPromptStems"> = { duplicatesRemoved: 0, sharedPromptStems: { groups: 0, questions: 0 } },
+): SubjectAvailability {
   return {
     yearLevel: p.yearLevel,
     examStyle: p.examStyle,
@@ -237,16 +270,18 @@ function noneSubject(p: StudioProgramme, reason: SubjectAvailability["reason"], 
     state: "none",
     uniqueQuestions,
     strands,
+    ...reported,
     reason,
   };
 }
 
 export function buildStudioAvailability(input: StudioInput): StudioAvailability {
-  /* Unknown = zero would be wrong in the other direction: an empty served bank
-     is the signature of an integrity failure (servedBank() returns [] whole),
-     and "none yet" would then be shown for every programme. An empty bank is
-     reported as unchecked, never as no content. */
-  const unchecked = input.integrity === "unknown" || input.bank.length === 0;
+  /* A failed or unverifiable read (throw, integrity problem, missing evidence)
+     is `unknown`. A SUCCESSFUL read that returns nothing is a content fact:
+     `none`, reason `no_content`. Folding the second into the first would make
+     the honest state unreachable exactly when approval enforcement makes it
+     normal. The caller decides which it is by setting `integrity`. */
+  const unchecked = input.integrity === "unknown";
   if (unchecked) {
     return {
       integrity: "unknown",
@@ -262,14 +297,14 @@ export function buildStudioAvailability(input: StudioInput): StudioAvailability 
 
     /* Same filter the selection engine uses, so language ↔ language_conventions
        is handled where it already is (REGISTRY_SUBJECT_BY_FILTER). */
-    const slice = uniqueByContent(
-      filterEligibleQuestions(input.bank, {
-        yearLevel: programme.yearLevel,
-        examStyle: programme.examStyle,
-        subject: programme.subject,
-      }),
-    );
-    if (!slice.length) return noneSubject(programme, "no_content");
+    const raw = filterEligibleQuestions(input.bank, {
+      yearLevel: programme.yearLevel,
+      examStyle: programme.examStyle,
+      subject: programme.subject,
+    });
+    const slice = uniqueByContent(raw);
+    const reported = { duplicatesRemoved: raw.length - slice.length, sharedPromptStems: sharedPromptStems(slice) };
+    if (!slice.length) return noneSubject(programme, "no_content", 0, [], reported);
 
     const byStrand = new Map<string, Question[]>();
     for (const question of slice) {
@@ -294,7 +329,7 @@ export function buildStudioAvailability(input: StudioInput): StudioAvailability 
       .sort((a, b) => a.strand.localeCompare(b.strand));
 
     const anyEligible = strands.some((strand) => strand.eligible);
-    if (!anyEligible) return noneSubject(programme, "no_strand_reaches_floor", slice.length, strands);
+    if (!anyEligible) return noneSubject(programme, "no_strand_reaches_floor", slice.length, strands, reported);
     return {
       yearLevel: programme.yearLevel,
       examStyle: programme.examStyle,
@@ -302,6 +337,7 @@ export function buildStudioAvailability(input: StudioInput): StudioAvailability 
       state: "ready",
       uniqueQuestions: slice.length,
       strands,
+      ...reported,
       reason: "has_content",
     };
   });
