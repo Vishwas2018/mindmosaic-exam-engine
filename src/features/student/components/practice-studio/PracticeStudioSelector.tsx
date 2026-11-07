@@ -112,11 +112,11 @@ export function PracticeStudioSelector({
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-mm-tint text-primary">
           <AlertCircle className="h-6 w-6" aria-hidden="true" />
         </div>
-        <h2 className="mt-3 font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
-          Availability check temporarily unavailable
-        </h2>
+        <p className="mt-3 font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+          We couldn&rsquo;t check what practice is available right now.
+        </p>
         <p className="mt-1 text-mm-muted">
-          We couldn&rsquo;t check what practice is available right now. Please try again in a little while.
+          Please try again in a little while.
         </p>
       </div>
     );
