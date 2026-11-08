@@ -233,7 +233,7 @@ export function LearningHubExplorer({
             Year {selectedYear} lessons haven&rsquo;t been published yet
           </h3>
           <p className="mt-2 max-w-md mx-auto text-sm leading-relaxed text-mm-muted">
-            Our curriculum specialists author each lesson with step-by-step worked examples and verified practice. In the meantime, you can explore Year 3 or Year 5 lessons.
+            Our curriculum specialists author each lesson with step-by-step worked examples and practice questions. In the meantime, you can explore Year 3 or Year 5 lessons.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             {availableYears

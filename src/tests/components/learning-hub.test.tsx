@@ -200,7 +200,7 @@ describe("LessonCheckSection", () => {
     );
 
     expect(
-      screen.getByText("Every practice question is verified with worked solutions."),
+      screen.getByText("Every question comes with a worked explanation."),
     ).toBeInTheDocument();
     expect(
       screen.queryByText(/aligned to Victorian Curriculum Level 3 standards/i),
