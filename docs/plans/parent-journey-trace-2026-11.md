@@ -33,7 +33,7 @@ Fourteen design decisions were established in the parent journey specification (
 | **P3** | **Claim Evidence Floor** | **ACCEPTED** | **Requires ≥2 finished papers and ≥8 marks.** Below this floor, the evaluative claim is withheld and real counts are stated. This threshold matches the student journey constant (`MIN_COMPLETED_PAPERS = 2`, `MIN_SCORED_MARKS = 8`), ensuring consistency across student and parent views. |
 | **P4** | **Performance Bands (D-P4)** | **ACCEPTED** | **Zero performance bands rendered on parent screens.** Scores are shown as marks earned out of marks available (`X of Y marks`). Evaluative bands ("Strong", "Developing", etc.) are completely omitted. *(See Section 6 for follow-up on landing page).* |
 | **P5** | **Paid Places vs Profiles** | **ACCEPTED** | **Paid places and child profiles are decoupled.** A subscription purchases active seat capacity. A child profile is an enduring historical record. Running out of places disables active practice access for that profile but never deletes data or charges silently. |
-| **P6** | **Pausing vs Deletion** | **BUILT ALREADY** | **Pausing is reversible self-service; account/child deletion is a verified 30-day support request.** Pausing deactivates sign-in while preserving records (`POST /api/parent/children/pause`). Deletion follows ADR-012 via `DangerZone.tsx`. |
+| **P6** | **Pausing vs Deletion** | **Pausing BUILT / Deletion NEEDS A BUILD** | **Pausing is archive; deletion UI and erasure-request API are a P6 build.** Pausing is a reversible deactivation (archive) via `setChildArchived` in `src/features/parent-dashboard/child-access.ts` through `PATCH /api/parent/children/[childId] { archived: true\|false }`. Deletion is not a self-service button; it is an administrative 30-day verified erasure request. The underlying database migrations (`supabase/migrations/20260817090000_erasure_requests.sql` and `…_erasure_processor.sql`) exist, but no deletion UI or erasure-request API exists yet; P6 builds the deletion UI and request path on top of `erasure_requests`. |
 | **P7** | **Student PIN Security** | **BUILT ALREADY** | **The 6-digit PIN is displayed exactly once upon creation or reset**, only after server confirmation. It is stored as a secure hash; recovery is via a fresh reset, never plaintext retrieval. |
 | **P8** | **Practice Previews** | **ACCEPTED** | **Previews are isolated from student analytics.** When a parent explores practice questions under Support Learning, the session runs in preview mode with zero persistence to student attempt tables. |
 | **P9** | **Assigning Practice** | **PROPOSED POLICY** | **Not built in this stack.** Rendered as a disabled proposal card in the Learning preview interface, avoiding coercive homework paradigms. |
@@ -82,7 +82,7 @@ The design specification establishes 35 artboards across 7 core journeys. All sc
 | | `b26` | Account — mobile | 390px | `/parent/account` | `ParentAccountDashboard` (stacked) |
 | | `b27` | Account states | 1440px | `/parent/account` | Email change, password update, session list |
 | | `b28` | Plan & billing handoff | 1440px | `/parent/account#billing` | `BillingHandoffPanel` (Stripe portal link) |
-| | `b29` | Danger zone & deletion | 1440px | `/parent/account` | `DangerZone` (ADR-012 30-day verified request) |
+| | `b29` | Danger zone & deletion | 1440px | `/parent/account` | `DangerZone` (to build in P6; ADR-012 30-day verified request) |
 | **7. Help** | `b30` | Help Centre | 1440px | `/parent/help` | `ParentHelpCenter` (6 curated topics) |
 | | `b31` | Help Centre — mobile | 390px | `/parent/help` | `ParentHelpCenter` (compact topics) |
 | | `b32` | Article and contact | 1440px | `/parent/help/[slug]` | `HelpArticleView` + `SupportContactForm` |
@@ -136,15 +136,16 @@ Audit of backend services on `origin/dev` (`Claude outputs/mindmosaic-parent-jou
 |---|---|---|
 | **Child Provisioning** | `src/features/auth/provision-child.ts` | Handles name, year level, curriculum, and PIN. Detects and flags duplicate names requiring explicit parent confirmation. |
 | **Student Alias & PIN** | `src/features/auth/student-alias.ts` | Formats 8-character student code (`XXXX-XXXX`) and generates 6-digit PIN. Hashes PIN for storage. |
-| **Child Access & Pausing** | `src/features/parent-dashboard/child-access.ts` | Reversible deactivation preserving student history and guardian links. Endpoint `/api/parent/children/pause`. |
-| **Subscription & Plan Limits** | `src/lib/billing/prices.ts` | Defines Individual and Family plan capacity ceilings (e.g., max 4 children on Family plan). |
+| **Child Access & Pausing** | `src/features/parent-dashboard/child-access.ts` | Reversible deactivation (archiving) preserving student history and guardian links. Per-child pause/restore is `PATCH /api/parent/children/[childId] { archived: true\|false }` (and `DELETE` archives) via `setChildArchived`. Pause-all has no endpoint (needs a build or client loop). |
+| **Subscription & Plan Limits** | `src/lib/billing/prices.ts` | Defines `FAMILY_PLAN.maxChildren = 3`. Note: `prices.ts` defines only a Family plan; there is no Individual plan in code. |
 | **Family Summary** | `src/features/parent-dashboard/summary.ts` | Aggregates finished papers, objective marks earned/available by subject, 7-day activity strip, and `unreadableRowCount`. |
-| **Verified Account Deletion** | `src/features/parent-dashboard/components/DangerZone.tsx` | Implements ADR-012: 30-day verified request via support (`hello@mindmosaic.app`), avoiding self-service data loss. |
 
 ### 5.2 Unbuilt Dependencies & Architectural Mitigations (`NEEDS A BUILD`)
 
 | Missing Capability | Impact on Design | Phase Strategy & Mitigation |
 |---|---|---|
+| **Verified Account Deletion & Erasure API** | No component or deletion API exists today; only the DB migrations `20260817090000_erasure_requests.sql` and `…_erasure_processor.sql` exist. | **P6:** Build the request path (writes an `erasure_requests` row → processor) and the `DangerZone` UI following ADR-012. |
+| **Pause-All Children Endpoint** | No bulk pause endpoint exists (`POST /api/parent/children/pause` does not exist). | **P6 / P3:** Build dedicated bulk route or iterate per-child `PATCH` calls from client. |
 | **Notification Engine & Preferences** | Email dispatch (paper complete, weekly summary) does not exist; no database table for preferences. | **P6:** Render notification controls with honest disabled status or client-side acknowledgment; do not claim emails are sent. |
 | **Data Export Service** | No endpoint generates GDPR/privacy data archives. | **P6:** Present data export as an out-of-band support request matching the ADR-012 model. |
 | **Session Management Surface** | Supabase tracks active auth sessions, but no API surfaces "Active on 3 devices" or remote sign-out. | **P6:** Display account security options with honest current-session indication only. |
@@ -167,11 +168,15 @@ Audit of backend services on `origin/dev` (`Claude outputs/mindmosaic-parent-jou
   - **Within Parent Journey Stack:** Strictly excluded. No parent route or component will import or call `performanceBand()`.
   - **Open Follow-Up Item:** Logged as technical debt for the landing page (`src/features/landing/`). A future landing page audit should align Chapter 4 with the evidence floor rules.
 
-### 6.2 ADR-012 Deletion Model (`DangerZone.tsx`)
-- **Inspection Finding:** The component `src/features/parent-dashboard/components/DangerZone.tsx` implements the approved ADR-012 deletion pattern:
-  - Account deletion is an explicit support request to `hello@mindmosaic.app` with out-of-band verification and a 30-day grace period.
-  - Pausing all children is immediate and reversible via `POST /api/parent/children/pause`.
-- **Resolution:** In Phase P6 (Account), `DangerZone.tsx` will be integrated into the parent account page layout.
+### 6.2 ADR-012 Deletion Model (Design Intent for P6 Build)
+- **Inspection Finding:** On `origin/dev`, no `DangerZone.tsx` component or erasure-request API exists. The underlying database tables and processor exist in `supabase/migrations/20260817090000_erasure_requests.sql` and `…_erasure_processor.sql`.
+- **Resolution:** In Phase P6 (Account), a `DangerZone` UI and erasure request API will be built from scratch following ADR-012:
+  - Account deletion is an explicit request recorded in `erasure_requests` with out-of-band verification and a 30-day grace period.
+  - Pausing all children will be handled either via a new bulk endpoint or by looping per-child `PATCH /api/parent/children/[childId] { archived: true }`.
+
+### 6.3 Subscription Plans (Individual vs Family)
+- **Inspection Finding:** `src/lib/billing/prices.ts` defines only `FAMILY_PLAN` (`maxChildren: 3`). There is currently no Individual plan in code.
+- **Open Question:** Is an Individual plan planned, or does the platform operate solely on the Family plan with up to 3 child seats? For now, the parent screens represent paid places against the Family plan limit (3).
 
 ---
 
@@ -190,7 +195,7 @@ flowchart TD
     P6 --> P7["P7: Help Centre & Support"]
 ```
 
-- **P1 — Nav Shell & Shared Primitives:** Rebuild `ParentShell` with 3-item navigation (This week, Children, Account), `ChildSwitcher`, `MarksMeter`, and state block primitives.
+- **P1 — Nav Shell & Shared Primitives:** Rebuild `ParentShell` with 3-item navigation (This week, Children, Account), `ChildSwitcher`, `MarksMeter`, and state block primitives. Relocate curriculum & writing to child-scoped subroutes and redirect old top-level routes.
 - **P2 — Family Overview (`/parent`):** Implement "This week" dashboard with `ParentOverview`, child activity cards, 7-day strip, and honest partial-failure handling.
 - **P3 — Children Directory & Profile (`/parent/children`, `/parent/children/[id]`):** Profile cards, paid places counter, PIN generation/reveal modal, pausing toggles.
 - **P4 — Child Progress & Results (`/parent/children/[id]/progress`, `/parent/children/[id]/results`):** Strand-level marks breakdown, evidence floor enforcement, result summary.
