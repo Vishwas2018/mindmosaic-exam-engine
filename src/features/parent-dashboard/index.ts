@@ -16,4 +16,35 @@ export {
 export { LearningInsights } from "./components/LearningInsights";
 export { ChildrenManager, type ChildListItem } from "./components/ChildrenManager";
 export { CheckoutStatusToast } from "./components/CheckoutStatusToast";
-export { ParentShell } from "./components/ParentShell";
+export {
+  ParentShell,
+  PARENT_NAV_LINKS,
+  type ParentNavKey,
+  type ParentShellProps,
+} from "./components/ParentShell";
+export {
+  ChildSwitcher,
+  type ChildSwitcherItem,
+  type ChildSwitcherProps,
+} from "./components/ChildSwitcher";
+export {
+  MarksMeter,
+  type MarksMeterProps,
+} from "./components/MarksMeter";
+export {
+  ClaimWithEvidence,
+  type ClaimWithEvidenceProps,
+  MIN_CLAIM_PAPERS,
+  MIN_CLAIM_MARKS,
+  INSUFFICIENT_EVIDENCE_COPY,
+} from "./components/ClaimWithEvidence";
+export {
+  LoadingStateBlock,
+  NothingYetStateBlock,
+  NotEnoughYetStateBlock,
+  CouldNotLoadStateBlock,
+  type BaseStateBlockProps,
+  type NothingYetStateBlockProps,
+  type NotEnoughYetStateBlockProps,
+  type CouldNotLoadStateBlockProps,
+} from "./components/StateBlocks";
