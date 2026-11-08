@@ -39,6 +39,10 @@ export {
   INSUFFICIENT_EVIDENCE_COPY,
 } from "./components/ClaimWithEvidence";
 export {
+  FamilyOverview,
+  type FamilyOverviewProps,
+} from "./components/FamilyOverview";
+export {
   LoadingStateBlock,
   NothingYetStateBlock,
   NotEnoughYetStateBlock,

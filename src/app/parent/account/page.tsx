@@ -197,8 +197,8 @@ export default async function ParentAccountPage() {
               </p>
               <p>
                 Per ADR-012, permanent account and child erasure is a verified administrative
-                request with an out-of-band verification process and a 30-day grace period to
-                prevent accidental loss of learning history.
+                request with out-of-band guardian confirmation to prevent accidental loss
+                of learning history.
               </p>
             </div>
           </section>
