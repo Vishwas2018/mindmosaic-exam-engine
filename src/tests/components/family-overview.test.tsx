@@ -164,16 +164,27 @@ describe("FamilyOverview", () => {
     expect(screen.queryByText("Building")).not.toBeInTheDocument();
   });
 
-  it("enforces evidence floor on evaluative claims scoped to the strand", () => {
+  it("enforces evidence floor on evaluative claims scoped to the subject", () => {
     render(<FamilyOverview summaries={[sampleChildren[1]]} />); // Kiran has only 1 finished paper in numeracy
 
     // Below floor (1 paper < 2 floor): evaluative claim is suppressed
     expect(screen.getAllByText("To practise").length).toBeGreaterThan(0);
     expect(
       screen.getAllByText(
-        "Not enough yet to say anything about a single strand. It needs 2 finished papers and 8 marks.",
+        "Not enough yet to say anything about a single subject. It needs 2 finished papers and 8 marks.",
       ).length,
     ).toBeGreaterThan(0);
+  });
+
+  it("uses exact subject grouping terminology matching the evidence", () => {
+    render(<FamilyOverview summaries={[sampleChildren[1]]} />); // Below floor
+    // Wording uses 'subject' when evaluating subject groupings
+    expect(
+      screen.getAllByText(
+        "Not enough yet to say anything about a single subject. It needs 2 finished papers and 8 marks.",
+      ).length,
+    ).toBeGreaterThan(0);
+    expect(screen.queryByText(/single strand/i)).not.toBeInTheDocument();
   });
 
   it("never allows sibling or family totals to unlock individual strand claims", () => {

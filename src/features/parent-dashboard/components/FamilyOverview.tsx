@@ -326,29 +326,37 @@ export function FamilyOverview({
                     <div className="grid gap-3 sm:grid-cols-2">
                       {topSubject ? (
                         <ClaimWithEvidence
+                          label="Going well"
                           headline={`Going well: ${topSubject.label}`}
                           papersCount={topSubject.paperCount}
                           marksCount={topSubject.marksAvailable}
+                          grouping="subject"
                         />
                       ) : (
                         <ClaimWithEvidence
+                          label="Going well"
                           headline="Going well"
                           papersCount={0}
                           marksCount={0}
+                          grouping="subject"
                         />
                       )}
 
                       {lowestSubject ? (
                         <ClaimWithEvidence
+                          label="To practise"
                           headline={`To practise: ${lowestSubject.label}`}
                           papersCount={lowestSubject.paperCount}
                           marksCount={lowestSubject.marksAvailable}
+                          grouping="subject"
                         />
                       ) : (
                         <ClaimWithEvidence
+                          label="To practise"
                           headline="To practise"
                           papersCount={0}
                           marksCount={0}
+                          grouping="subject"
                         />
                       )}
                     </div>

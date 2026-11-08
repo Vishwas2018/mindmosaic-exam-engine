@@ -6,6 +6,13 @@ export const MIN_CLAIM_MARKS = 8;
 export const INSUFFICIENT_EVIDENCE_COPY =
   "Not enough yet to say anything about a single strand. It needs 2 finished papers and 8 marks.";
 
+export const INSUFFICIENT_SUBJECT_EVIDENCE_COPY =
+  "Not enough yet to say anything about a single subject. It needs 2 finished papers and 8 marks.";
+
+export function insufficientEvidenceCopy(grouping: "subject" | "strand" = "strand"): string {
+  return grouping === "subject" ? INSUFFICIENT_SUBJECT_EVIDENCE_COPY : INSUFFICIENT_EVIDENCE_COPY;
+}
+
 export interface ClaimWithEvidenceProps {
   /**
    * The evaluative headline shown only when the evidence threshold is met.
@@ -14,6 +21,17 @@ export interface ClaimWithEvidenceProps {
   headline: string;
   papersCount: number;
   marksCount: number;
+  /**
+   * Explicit label shown above the card (e.g. "Going well" or "To practise").
+   * If omitted, derived from the prefix of `headline` before a colon.
+   */
+  label?: string;
+  /**
+   * Grouping level for this claim ("subject" or "strand").
+   * Governs the wording in the below-floor message so the claim terminology
+   * matches the grouping of the underlying evidence. Defaults to "strand".
+   */
+  grouping?: "subject" | "strand";
   /**
    * Optional custom floor thresholds (default to standard 2 papers, 8 marks).
    */
@@ -41,6 +59,8 @@ export function ClaimWithEvidence({
   headline,
   papersCount,
   marksCount,
+  label,
+  grouping = "strand",
   minPapers = MIN_CLAIM_PAPERS,
   minMarks = MIN_CLAIM_MARKS,
   className = "",
@@ -49,6 +69,9 @@ export function ClaimWithEvidence({
   const safeMarks = Math.max(0, marksCount);
   const meetsFloor = safePapers >= minPapers && safeMarks >= minMarks;
 
+  const derivedLabel = label ?? "To practise";
+  const copy = insufficientEvidenceCopy(grouping);
+
   if (!meetsFloor) {
     return (
       <div
@@ -56,7 +79,7 @@ export function ClaimWithEvidence({
       >
         <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-muted">
-            To practise
+            {derivedLabel}
           </span>
           <span className="text-xs font-semibold text-muted/75">
             {safePapers} {safePapers === 1 ? "paper" : "papers"} · {safeMarks}{" "}
@@ -64,7 +87,7 @@ export function ClaimWithEvidence({
           </span>
         </div>
         <p className="mt-2 text-sm font-medium text-muted">
-          {INSUFFICIENT_EVIDENCE_COPY}
+          {copy}
         </p>
       </div>
     );

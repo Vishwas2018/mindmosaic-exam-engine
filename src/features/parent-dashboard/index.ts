@@ -37,6 +37,8 @@ export {
   MIN_CLAIM_PAPERS,
   MIN_CLAIM_MARKS,
   INSUFFICIENT_EVIDENCE_COPY,
+  INSUFFICIENT_SUBJECT_EVIDENCE_COPY,
+  insufficientEvidenceCopy,
 } from "./components/ClaimWithEvidence";
 export {
   FamilyOverview,
