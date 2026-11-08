@@ -34,6 +34,7 @@ const sampleChildren: ChildSummary[] = [
         marksEarned: 28,
         marksAvailable: 40,
         questionCount: 40,
+        paperCount: 3,
       },
       {
         subject: "reading",
@@ -42,6 +43,7 @@ const sampleChildren: ChildSummary[] = [
         marksEarned: 18,
         marksAvailable: 30,
         questionCount: 30,
+        paperCount: 2,
       },
     ],
     recentAttempts: [
@@ -92,6 +94,7 @@ const sampleChildren: ChildSummary[] = [
         marksEarned: 8,
         marksAvailable: 10,
         questionCount: 10,
+        paperCount: 1, // Only 1 paper in numeracy
       },
     ],
     recentAttempts: [
@@ -161,8 +164,8 @@ describe("FamilyOverview", () => {
     expect(screen.queryByText("Building")).not.toBeInTheDocument();
   });
 
-  it("enforces evidence floor on evaluative claims", () => {
-    render(<FamilyOverview summaries={[sampleChildren[1]]} />); // Kiran has only 1 finished paper
+  it("enforces evidence floor on evaluative claims scoped to the strand", () => {
+    render(<FamilyOverview summaries={[sampleChildren[1]]} />); // Kiran has only 1 finished paper in numeracy
 
     // Below floor (1 paper < 2 floor): evaluative claim is suppressed
     expect(screen.getAllByText("To practise").length).toBeGreaterThan(0);
@@ -173,11 +176,49 @@ describe("FamilyOverview", () => {
     ).toBeGreaterThan(0);
   });
 
+  it("never allows sibling or family totals to unlock individual strand claims", () => {
+    // Child with 10 total papers, but only 1 paper in reading
+    const asymmetricChild: ChildSummary = {
+      ...sampleChildren[0],
+      attemptCount: 10,
+      subjects: [
+        {
+          subject: "numeracy",
+          label: "Numeracy",
+          percentage: 90,
+          marksEarned: 45,
+          marksAvailable: 50,
+          questionCount: 50,
+          paperCount: 9, // Satisfies floor
+        },
+        {
+          subject: "reading",
+          label: "Reading",
+          percentage: 40,
+          marksEarned: 4,
+          marksAvailable: 10,
+          questionCount: 10,
+          paperCount: 1, // Only 1 paper!
+        },
+      ],
+    };
+
+    render(<FamilyOverview summaries={[asymmetricChild]} />);
+
+    // Top subject (Numeracy) has 9 papers, 50 marks -> Claim unlocked
+    expect(screen.getByText("Going well: Numeracy")).toBeInTheDocument();
+
+    // Lowest subject (Reading) has only 1 paper -> Suppressed with below-floor notice
+    expect(screen.getByText("To practise")).toBeInTheDocument();
+    expect(screen.queryByText("To practise: Reading")).not.toBeInTheDocument();
+  });
+
   it("renders first visit state (b6) when no papers have been finished", () => {
     const unstartedChildren: ChildSummary[] = [
       {
         ...sampleChildren[0],
         attemptCount: 0,
+        unreadableAttemptCount: 0,
         recentAttempts: [],
         subjects: [],
       },
@@ -190,7 +231,69 @@ describe("FamilyOverview", () => {
     expect(screen.getByText(/Children sign in with a code and a PIN/i)).toBeInTheDocument();
   });
 
-  it("renders honest partial failure callout when unreadableAttemptCount > 0", () => {
+  it("handles child switching with one child having results and another having none", () => {
+    const mixedChildren: ChildSummary[] = [
+      sampleChildren[0], // Aisha has 4 papers
+      {
+        ...sampleChildren[1],
+        displayName: "Kiran",
+        attemptCount: 0, // Kiran has none
+        unreadableAttemptCount: 0,
+        recentAttempts: [],
+        subjects: [],
+      },
+    ];
+
+    render(<FamilyOverview summaries={mixedChildren} />);
+
+    // In All children view: Aisha shows her papers, Kiran shows Nothing finished yet
+    expect(screen.getByText("Latest finished paper")).toBeInTheDocument();
+    expect(screen.getByText("Nothing finished yet")).toBeInTheDocument();
+    // Side rail explains figures because Aisha has figures
+    expect(screen.getByText("What these figures are")).toBeInTheDocument();
+
+    // Switch to Kiran (who has 0 papers)
+    fireEvent.click(screen.getByRole("button", { name: /kiran/i }));
+    expect(screen.queryByText("Latest finished paper")).not.toBeInTheDocument();
+    expect(screen.getByText("Nothing finished yet")).toBeInTheDocument();
+    // Side rail for unstarted child shows Three things worth knowing
+    expect(screen.getByText("Three things worth knowing")).toBeInTheDocument();
+
+    // Switch back to Aisha
+    fireEvent.click(screen.getByRole("button", { name: /aisha/i }));
+    expect(screen.getByText("Latest finished paper")).toBeInTheDocument();
+    expect(screen.getByText("What these figures are")).toBeInTheDocument();
+  });
+
+  it("prevents unavailable/unreadable data from appearing as a genuine first visit", () => {
+    const unreadableChild: ChildSummary[] = [
+      {
+        ...sampleChildren[0],
+        displayName: "Dev",
+        attemptCount: 0,
+        unreadableAttemptCount: 2, // 2 unreadable records
+        recentAttempts: [],
+        subjects: [],
+      },
+    ];
+
+    render(<FamilyOverview summaries={unreadableChild} />);
+
+    // Must NOT claim "Nothing finished yet" / "ready to start"
+    expect(screen.queryByText("Nothing finished yet")).not.toBeInTheDocument();
+    expect(screen.queryByText("ready to start")).not.toBeInTheDocument();
+
+    // Must show honest unreadable block
+    expect(screen.getByText("We couldn't read Dev's activity.")).toBeInTheDocument();
+    expect(
+      screen.getByText("2 records were excluded from these totals because the stored format could not be verified."),
+    ).toBeInTheDocument();
+
+    // Side rail must NOT be "Three things worth knowing" (which is reserved for genuine first visits)
+    expect(screen.queryByText("Three things worth knowing")).not.toBeInTheDocument();
+  });
+
+  it("renders honest neutral partial failure callout matching source count", () => {
     const partiallyFailingChildren: ChildSummary[] = [
       {
         ...sampleChildren[0],
@@ -202,9 +305,14 @@ describe("FamilyOverview", () => {
     expect(
       screen.getByRole("heading", { name: "Some of this week's activity couldn't be read" }),
     ).toBeInTheDocument();
+
+    // Neutral wording matching source count noun
     expect(
-      screen.getByText(/2 attempts could not be verified from stored records/i),
+      screen.getByText("2 records were excluded from these totals."),
     ).toBeInTheDocument();
+
+    // Confirms "Your child's raw answers are safe" is NOT rendered
+    expect(screen.queryByText(/raw answers are safe/i)).not.toBeInTheDocument();
   });
 
   it("renders loading state when forcedState=loading", () => {
@@ -217,7 +325,7 @@ describe("FamilyOverview", () => {
     expect(screen.getByRole("alert")).toHaveTextContent("We couldn't load your family summary.");
   });
 
-  it("renders offline banner when forcedState=offline", () => {
+  it("renders offline banner when forcedState=offline or isOffline=true", () => {
     render(<FamilyOverview summaries={sampleChildren} forcedState="offline" />);
     expect(screen.getByText("You are offline.")).toBeInTheDocument();
   });
@@ -228,5 +336,21 @@ describe("FamilyOverview", () => {
     expect(
       screen.getByText(/Everything above is worked out from finished timed papers/i),
     ).toBeInTheDocument();
+  });
+
+  it("strictly omits performance bands and percentages across entire render output", () => {
+    const { container } = render(<FamilyOverview summaries={sampleChildren} />);
+    const textContent = container.textContent ?? "";
+
+    // No performance bands
+    expect(textContent).not.toMatch(/performanceBand/i);
+    expect(textContent).not.toMatch(/\b(Strong|Developing|Focus)\b(?!\s*learning)/);
+
+    // No % glyphs in subject marks
+    const subjectSections = screen.getAllByText("Subject marks");
+    expect(subjectSections.length).toBeGreaterThan(0);
+    subjectSections.forEach((section) => {
+      expect(section.closest("div")?.textContent).not.toContain("%");
+    });
   });
 });

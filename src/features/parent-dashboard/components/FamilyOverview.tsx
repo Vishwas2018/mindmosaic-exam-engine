@@ -19,6 +19,7 @@ export interface FamilyOverviewProps {
   summaries: readonly ChildSummary[];
   parentName?: string;
   forcedState?: "loading" | "error" | "offline";
+  isOffline?: boolean;
 }
 
 /**
@@ -26,19 +27,21 @@ export interface FamilyOverviewProps {
  *
  * Implements:
  * - Decision P2: Heading is "Family Overview"; nav is "This week".
- * - Decision P3: Evidence floor (>=2 papers AND >=8 marks) via ClaimWithEvidence.
- * - Decision D-P4: Zero performance bands, zero percentages. All figures are
- *   marks earned out of marks available via MarksMeter.
+ * - Decision P3 & D-P4: Evidence floor (>=2 papers AND >=8 marks) via ClaimWithEvidence.
+ *   Floor is strictly scoped to the specific child and subject/strand.
  * - Non-negotiable honesty rules: Partial failure callout driven by real
- *   `unreadableRowCount > 0`.
+ *   `unreadableAttemptCount > 0` with neutral wording ("N records were excluded from these totals").
+ * - Child switching: Seamless switching between All children and individual child cards.
+ *   Unavailable or loading data is never presented as a genuine first visit.
  * - Responsive reflow:
  *   Desktop (1440px): 2-column layout (main + side rail).
  *   Tablet (834px): Side rail stacks below main column.
- *   Mobile (390px): Single column, horizontal scrollable child switcher.
+ *   Mobile (390px): Single column, horizontal scrollable child switcher, bottom nav.
  */
 export function FamilyOverview({
   summaries,
   forcedState,
+  isOffline,
 }: FamilyOverviewProps) {
   const [selectedChildId, setSelectedChildId] = useState<string | null>(null);
 
@@ -73,6 +76,23 @@ export function FamilyOverview({
     );
   }
 
+  if (summaries.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl">
+            Family Overview
+          </h1>
+          <p className="mt-1 text-sm text-muted">No children added to your account yet.</p>
+        </div>
+        <NothingYetStateBlock
+          childName="your family"
+          description="Add a child to create their login. Once they finish timed papers, their weekly summary and marks will appear here."
+        />
+      </div>
+    );
+  }
+
   // Filter children list based on switcher selection
   const switcherChildren = summaries.map((s) => ({
     id: s.childId,
@@ -83,14 +103,28 @@ export function FamilyOverview({
     ? summaries.filter((s) => s.childId === selectedChildId)
     : summaries;
 
-  const totalFinishedPapers = summaries.reduce((acc, s) => acc + s.attemptCount, 0);
-  const totalUnreadableCount = summaries.reduce(
+  const currentUnreadableCount = displayedChildren.reduce(
     (acc, s) => acc + s.unreadableAttemptCount,
     0,
   );
-  const isFirstVisit = totalFinishedPapers === 0;
+  const currentFinishedPapers = displayedChildren.reduce(
+    (acc, s) => acc + s.attemptCount,
+    0,
+  );
 
-  const childNames = summaries.map((s) => s.displayName).join(" and ");
+  // A view is a genuine first visit ONLY if there are 0 finished papers AND 0 unreadable records
+  const isFirstVisit =
+    displayedChildren.length > 0 &&
+    currentFinishedPapers === 0 &&
+    currentUnreadableCount === 0;
+
+  // Has unavailable/unreadable data where all attempts failed validation
+  const isUnavailableData =
+    displayedChildren.length > 0 &&
+    currentFinishedPapers === 0 &&
+    currentUnreadableCount > 0;
+
+  const childNames = displayedChildren.map((s) => s.displayName).join(" and ");
 
   return (
     <div className="space-y-8">
@@ -100,14 +134,16 @@ export function FamilyOverview({
           Family Overview
         </h1>
         <p className="mt-1 text-sm text-muted">
-          {isFirstVisit
-            ? `${childNames} ${summaries.length === 1 ? "is" : "are"} set up. Nothing has been finished yet, so there is nothing to report.`
+          {isUnavailableData
+            ? `Some activity for ${childNames} could not be read. Unreadable records are excluded until resolved.`
+            : isFirstVisit
+            ? `${childNames} ${displayedChildren.length === 1 ? "is" : "are"} set up. Nothing has been finished yet, so there is nothing to report.`
             : "Summary of practice and assessments across your children for this week."}
         </p>
       </div>
 
       {/* Offline banner if offline state */}
-      {forcedState === "offline" && (
+      {(forcedState === "offline" || isOffline) && (
         <div
           role="status"
           className="flex items-start gap-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-sm text-amber-900"
@@ -122,8 +158,8 @@ export function FamilyOverview({
         </div>
       )}
 
-      {/* Honest Partial Failure Callout (§1 Honesty Rule #6 & b7): Driven by unreadableRowCount > 0 */}
-      {totalUnreadableCount > 0 && (
+      {/* Honest Partial Failure Callout (§1 Honesty Rule #6 & b7): Neutral wording matching source count */}
+      {currentUnreadableCount > 0 && (
         <div
           role="status"
           className="flex items-start gap-3 rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4 text-sm text-ink shadow-sm"
@@ -132,8 +168,7 @@ export function FamilyOverview({
           <div className="space-y-0.5">
             <h2 className="font-extrabold text-ink">Some of this week&apos;s activity couldn&apos;t be read</h2>
             <p className="text-xs text-muted">
-              {totalUnreadableCount} {totalUnreadableCount === 1 ? "attempt" : "attempts"} could
-              not be verified from stored records. Results shown below only include verified completed papers.
+              {currentUnreadableCount} {currentUnreadableCount === 1 ? "record was" : "records were"} excluded from these totals.
             </p>
           </div>
         </div>
@@ -191,7 +226,9 @@ export function FamilyOverview({
                       <p className="text-xs font-semibold text-muted">
                         {child.yearLevel ? `Year ${child.yearLevel} · ` : ""}
                         {child.attemptCount === 0
-                          ? "ready to start"
+                          ? child.unreadableAttemptCount > 0
+                            ? "activity excluded"
+                            : "ready to start"
                           : `${child.attemptCount} ${child.attemptCount === 1 ? "finished paper" : "finished papers"}`}
                       </p>
                     </div>
@@ -209,28 +246,39 @@ export function FamilyOverview({
                   </div>
                 </div>
 
-                {/* State: No finished attempts yet (b6 First Visit) */}
+                {/* State: No finished attempts yet */}
                 {child.attemptCount === 0 ? (
-                  <div className="space-y-4">
-                    <NothingYetStateBlock
-                      childName={child.displayName}
-                      description={`When ${child.displayName} finishes a timed paper, the result and the strands behind it appear here.`}
-                    />
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      <Link
-                        href={`/parent/children`}
-                        className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 text-xs font-extrabold text-white shadow-sm transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/30"
-                      >
-                        Sign-in details
-                      </Link>
-                      <Link
-                        href={`/parent/children/${child.childId}/curriculum`}
-                        className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/15 bg-white px-4 text-xs font-extrabold text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-                      >
-                        Browse learning
-                      </Link>
+                  child.unreadableAttemptCount > 0 ? (
+                    /* Unavailable / Unreadable Data State: Cannot appear as genuine first visit */
+                    <div className="space-y-4">
+                      <CouldNotLoadStateBlock
+                        title={`We couldn't read ${child.displayName}'s activity.`}
+                        description={`${child.unreadableAttemptCount} ${child.unreadableAttemptCount === 1 ? "record was" : "records were"} excluded from these totals because the stored format could not be verified.`}
+                      />
                     </div>
-                  </div>
+                  ) : (
+                    /* Genuine First Visit State (b6) */
+                    <div className="space-y-4">
+                      <NothingYetStateBlock
+                        childName={child.displayName}
+                        description={`When ${child.displayName} finishes a timed paper, the result and the strands behind it appear here.`}
+                      />
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        <Link
+                          href={`/parent/children`}
+                          className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 text-xs font-extrabold text-white shadow-sm transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/30"
+                        >
+                          Sign-in details
+                        </Link>
+                        <Link
+                          href={`/parent/children/${child.childId}/curriculum`}
+                          className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/15 bg-white px-4 text-xs font-extrabold text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+                        >
+                          Browse learning
+                        </Link>
+                      </div>
+                    </div>
+                  )
                 ) : (
                   /* State: Has finished attempts (b5) */
                   <div className="space-y-6">
@@ -254,7 +302,7 @@ export function FamilyOverview({
                       </div>
                     )}
 
-                    {/* Per-subject Marks (via MarksMeter — never a %, never a band) */}
+                    {/* Per-subject Marks (via MarksMeter — strictly scoped to subject's paperCount, never a %, never a band) */}
                     {validSubjects.length > 0 && (
                       <div className="space-y-3">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-muted">
@@ -267,25 +315,25 @@ export function FamilyOverview({
                               label={s.label}
                               earnedMarks={s.marksEarned}
                               availableMarks={s.marksAvailable}
-                              papersCount={child.attemptCount}
+                              papersCount={s.paperCount}
                             />
                           ))}
                         </div>
                       </div>
                     )}
 
-                    {/* Evaluative Claims (via ClaimWithEvidence — strictly floor enforced) */}
+                    {/* Evaluative Claims (via ClaimWithEvidence — strictly scoped to subject's paperCount and marksAvailable) */}
                     <div className="grid gap-3 sm:grid-cols-2">
                       {topSubject ? (
                         <ClaimWithEvidence
                           headline={`Going well: ${topSubject.label}`}
-                          papersCount={child.attemptCount}
+                          papersCount={topSubject.paperCount}
                           marksCount={topSubject.marksAvailable}
                         />
                       ) : (
                         <ClaimWithEvidence
                           headline="Going well"
-                          papersCount={child.attemptCount}
+                          papersCount={0}
                           marksCount={0}
                         />
                       )}
@@ -293,13 +341,13 @@ export function FamilyOverview({
                       {lowestSubject ? (
                         <ClaimWithEvidence
                           headline={`To practise: ${lowestSubject.label}`}
-                          papersCount={child.attemptCount}
+                          papersCount={lowestSubject.paperCount}
                           marksCount={lowestSubject.marksAvailable}
                         />
                       ) : (
                         <ClaimWithEvidence
                           headline="To practise"
-                          papersCount={child.attemptCount}
+                          papersCount={0}
                           marksCount={0}
                         />
                       )}
