@@ -54,3 +54,20 @@ export {
   type NotEnoughYetStateBlockProps,
   type CouldNotLoadStateBlockProps,
 } from "./components/StateBlocks";
+
+// New Workspace UI Components (P3 - P7)
+export { ParentSetupWizard, type ParentSetupWizardProps } from "./components/ParentSetupWizard";
+export { ChildrenHub, type ChildrenHubProps } from "./components/ChildrenHub";
+export { ChildProfileDetail, type ChildProfileDetailProps } from "./components/ChildProfileDetail";
+export { ChildProgressView, type ChildProgressViewProps } from "./components/ChildProgressView";
+export { AttemptResultDetail, type AttemptResultDetailProps } from "./components/AttemptResultDetail";
+export { AttemptAnswerReview, type AttemptAnswerReviewProps } from "./components/AttemptAnswerReview";
+export { ChildCurriculumView, type ChildCurriculumViewProps } from "./components/ChildCurriculumView";
+export { PracticePreviewView, type PracticePreviewViewProps } from "./components/PracticePreviewView";
+export { ParentAccountView, type ParentAccountViewProps } from "./components/ParentAccountView";
+export { ParentHelpView } from "./components/ParentHelpView";
+export { HelpArticleDetail, type HelpArticleDetailProps } from "./components/HelpArticleDetail";
+export { SupportContactForm } from "./components/SupportContactForm";
+
+// Preview Fixtures
+export * from "./fixtures";
