@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ParentShell } from "@/features/parent-dashboard";
 import { ChildProgressView } from "@/features/parent-dashboard/components/ChildProgressView";
-import { PREVIEW_CHILDREN } from "@/features/parent-dashboard/fixtures";
+import { requireParentPreview } from "@/features/parent-dashboard/preview-mode";
 
 interface Props {
   params: Promise<{ childId: string }>;
@@ -9,16 +9,15 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { childId } = await params;
-  const child = PREVIEW_CHILDREN.find((c) => c.id === childId) || PREVIEW_CHILDREN[0];
-  return {
-    title: `${child.firstName}'s Progress | MindMosaic Parent`,
-    robots: { index: false, follow: false },
-  };
-}
+export const metadata: Metadata = {
+  title: "Child Progress | MindMosaic Parent",
+  robots: { index: false, follow: false },
+};
 
 export default async function ChildProgressPage({ params }: Props) {
+  // Fixture-only screen: 404 outside explicit local preview.
+  await requireParentPreview();
+
   const { childId } = await params;
 
   return (

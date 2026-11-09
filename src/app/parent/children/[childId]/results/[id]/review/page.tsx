@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ParentShell } from "@/features/parent-dashboard";
 import { AttemptAnswerReview } from "@/features/parent-dashboard/components/AttemptAnswerReview";
+import { requireParentPreview } from "@/features/parent-dashboard/preview-mode";
 
 interface Props {
   params: Promise<{ childId: string; id: string }>;
@@ -8,14 +9,15 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Answer Review | MindMosaic Parent",
-    robots: { index: false, follow: false },
-  };
-}
+export const metadata: Metadata = {
+  title: "Answer Review | MindMosaic Parent",
+  robots: { index: false, follow: false },
+};
 
 export default async function AnswerReviewPage({ params }: Props) {
+  // Fixture-only screen: 404 outside explicit local preview.
+  await requireParentPreview();
+
   const { childId, id } = await params;
 
   return (

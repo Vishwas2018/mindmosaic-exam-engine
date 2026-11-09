@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ParentShell } from "@/features/parent-dashboard";
 import { SupportContactForm } from "@/features/parent-dashboard/components/SupportContactForm";
+import { requireParentPreview } from "@/features/parent-dashboard/preview-mode";
 
 export const metadata: Metadata = {
   title: "Contact Support | MindMosaic Parent",
@@ -10,7 +11,10 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function HelpContactPage() {
+export default async function HelpContactPage() {
+  // Fixture-only screen: 404 outside explicit local preview. Nothing is sent.
+  await requireParentPreview();
+
   return (
     <ParentShell active="/parent/account">
       <div className="space-y-6">

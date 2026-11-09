@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ParentShell } from "@/features/parent-dashboard";
 import { ParentHelpView } from "@/features/parent-dashboard/components/ParentHelpView";
+import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
+import { LegacyParentHelpPage } from "./legacy-page";
 
 export const metadata: Metadata = {
   title: "Help Centre | MindMosaic Parent",
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function ParentHelpPage() {
+export default async function ParentHelpPage() {
+  if (!(await isParentPreviewEnabled())) return LegacyParentHelpPage();
+
   return (
     <ParentShell active="/parent/account">
       <ParentHelpView />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ParentShell } from "@/features/parent-dashboard";
 import { PracticePreviewView } from "@/features/parent-dashboard/components/PracticePreviewView";
+import { requireParentPreview } from "@/features/parent-dashboard/preview-mode";
 
 interface Props {
   params: Promise<{ childId: string }>;
@@ -8,14 +9,15 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Question Preview | MindMosaic Parent",
-    robots: { index: false, follow: false },
-  };
-}
+export const metadata: Metadata = {
+  title: "Question Preview | MindMosaic Parent",
+  robots: { index: false, follow: false },
+};
 
 export default async function PracticePreviewPage({ params }: Props) {
+  // Fixture-only screen: 404 outside explicit local preview.
+  await requireParentPreview();
+
   const { childId } = await params;
 
   return (

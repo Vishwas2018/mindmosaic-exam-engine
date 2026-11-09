@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { ParentShell, buildChildSummary } from "@/features/parent-dashboard";
+import { notFound } from "next/navigation";
+import { ParentShell } from "@/features/parent-dashboard";
 import { ChildProfileDetail } from "@/features/parent-dashboard/components/ChildProfileDetail";
-import { PREVIEW_CHILDREN, type PreviewChild } from "@/features/parent-dashboard/fixtures";
-import { loadParentDashboard } from "@/features/parent-dashboard/queries";
-import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
+import { PREVIEW_CHILDREN } from "@/features/parent-dashboard/fixtures";
+import { requireParentPreview } from "@/features/parent-dashboard/preview-mode";
 
 interface Props {
   params: Promise<{ childId: string }>;
@@ -11,60 +11,23 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { childId } = await params;
-  const child = PREVIEW_CHILDREN.find((c) => c.id === childId) || PREVIEW_CHILDREN[0];
-  return {
-    title: `${child.firstName}'s Profile | MindMosaic Parent`,
-    robots: { index: false, follow: false },
-  };
-}
+export const metadata: Metadata = {
+  title: "Child Profile | MindMosaic Parent",
+  robots: { index: false, follow: false },
+};
 
 export default async function ChildProfilePage({ params }: Props) {
+  // Fixture-only screen: 404 outside explicit local preview. Real child records
+  // are never read here, so a real child id can never surface fixture credentials.
+  await requireParentPreview();
+
   const { childId } = await params;
-
-  let child: PreviewChild | undefined = PREVIEW_CHILDREN.find((c) => c.id === childId);
-
-  let isLive = false;
-
-  // If not found in preview list, check if user has actual database profiles
-  if (!child) {
-    const data = await loadParentDashboard();
-    if (data.status === "ready") {
-      const match = data.children.find((c) => c.profile.id === childId);
-      if (match) {
-        isLive = true;
-        const archivedIds = await loadArchivedChildIds([match.profile.id]);
-        const summary = buildChildSummary(match.profile, match.attempts);
-        const totalEarned = summary.subjects.reduce((sum, s) => sum + s.marksEarned, 0);
-        const totalAvailable = summary.subjects.reduce((sum, s) => sum + s.marksAvailable, 0);
-
-        child = {
-          id: match.profile.id,
-          firstName: match.profile.displayName?.trim() || "Child",
-          lastName: "",
-          yearLevel: match.profile.yearLevel ?? 3,
-          curriculum: "Victorian Curriculum v2.0",
-          loginCode: "K7XJ-2P9R",
-          pin: "482901",
-          status: archivedIds.has(match.profile.id) ? "paused" : "active",
-          avatarColor: "purple",
-          finishedPapersCount: summary.attemptCount,
-          totalMarksEarned: totalEarned,
-          totalMarksAvailable: totalAvailable,
-        };
-      }
-    }
-  }
-
-  // If still not matched, default to Aisha as preview
-  if (!child) {
-    child = PREVIEW_CHILDREN[0];
-  }
+  const child = PREVIEW_CHILDREN.find((c) => c.id === childId);
+  if (!child) notFound();
 
   return (
     <ParentShell active="/parent/children">
-      <ChildProfileDetail child={child} isLiveAccount={isLive} />
+      <ChildProfileDetail child={child} />
     </ParentShell>
   );
 }
