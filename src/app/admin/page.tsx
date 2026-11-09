@@ -4,8 +4,17 @@ import { ArrowRight, BarChart3, Cog, FileSearch } from "lucide-react";
 
 import { Card } from "@/components/ui";
 import { AdminShell } from "@/features/admin-analytics/components/AdminShell";
+import { isAdminPreviewEnabled } from "@/features/admin/preview-mode";
+import {
+  AdminPreviewDashboard,
+  type AdminView,
+} from "@/features/admin/components/preview/AdminPreviewDashboard";
 
 export const metadata: Metadata = { title: "Admin" };
+
+interface AdminHomePageProps {
+  searchParams?: Promise<{ view?: string }>;
+}
 
 const TOOLS = [
   {
@@ -37,17 +46,21 @@ const TOOLS = [
   },
 ] as const;
 
-/*
- * Wrapped in AdminShell like its own three children.
+/**
+ * Admin Home Page.
  *
- * This page was a centred stack of cards with a logo above them, and the
- * logo was the only link that left: no section nav, no way back to a
- * dashboard, no sign-out. An admin landing here could reach the three tools
- * or the marketing site, and nothing else — while every page those tools
- * lead to has a full sidebar. The shell's "Admin home" link now resolves to
- * a page that looks like the rest of the section.
+ * In preview mode (ADMIN_WORKSPACE_PREVIEW=1 and loopback), renders the
+ * full interactive Admin Workspace artboards (b0–b26) with zero writes.
+ *
+ * Outside preview mode, renders the authentic authenticated AdminShell.
  */
-export default function AdminHomePage() {
+export default async function AdminHomePage({ searchParams }: AdminHomePageProps) {
+  if (await isAdminPreviewEnabled()) {
+    const params = await searchParams;
+    const initialView = (params?.view as AdminView) ?? "overview";
+    return <AdminPreviewDashboard initialView={initialView} />;
+  }
+
   return (
     <AdminShell title="Admin tools">
       <div className="max-w-xl">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import { requireRole } from "@/features/auth/require-role";
+import { isAdminPreviewEnabled } from "@/features/admin/preview-mode";
 
 /*
  * requireRole() only calls cookies() once Supabase is configured, so a build
@@ -18,6 +19,9 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
-  await requireRole("admin", "/admin");
+  const isPreview = await isAdminPreviewEnabled();
+  if (!isPreview) {
+    await requireRole("admin", "/admin");
+  }
   return children;
 }
