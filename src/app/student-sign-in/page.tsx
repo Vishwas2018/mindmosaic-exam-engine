@@ -6,6 +6,9 @@ import { MindMosaicLogo } from "@/components/branding";
 import { AuthMosaicPanel, AuthPanelPoints } from "@/features/auth/components/AuthMosaicPanel";
 import { SignInPanel } from "@/features/auth/components/SignInPanel";
 
+import { isAuthPreviewEnabled } from "@/features/auth/preview-mode";
+import { AuthPreviewScreens } from "@/features/auth/components/preview/AuthPreviewScreens";
+
 export const metadata: Metadata = {
   title: "Student sign in",
   description: "Sign in with the login code and PIN your parent gave you.",
@@ -15,13 +18,14 @@ export const metadata: Metadata = {
  * The student's own door into the same screen as /sign-in, opened on the
  * Student tab.
  *
- * The route is kept rather than folded away: it is the URL written on the
- * card a child is handed, it is linked from the Help Centre, and sending a
- * nine-year-old to a page where they first have to find the right tab is a
- * worse experience than one extra route. The form itself is the same
- * component, so the two can never drift apart.
+ * In visual preview mode (AUTH_PREVIEW=1 and loopback), renders the
+ * redesigned student sign-in artboards (b10–b12) with state switchers.
  */
-export default function StudentSignInPage() {
+export default async function StudentSignInPage() {
+  if (await isAuthPreviewEnabled()) {
+    return <AuthPreviewScreens initialView="student-signin" />;
+  }
+
   return (
     <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
       <AuthMosaicPanel
