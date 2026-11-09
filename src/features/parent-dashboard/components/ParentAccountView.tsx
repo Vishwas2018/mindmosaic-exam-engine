@@ -9,7 +9,6 @@ import {
   Laptop,
   Download,
   AlertTriangle,
-  CheckCircle2,
   PauseCircle,
   Trash2,
   ArrowRight,
@@ -20,11 +19,13 @@ import { PREVIEW_FAMILY_PLAN } from "../fixtures";
 export interface ParentAccountViewProps {
   initialEmail?: string;
   initialName?: string;
+  isLiveAccount?: boolean;
 }
 
 export function ParentAccountView({
   initialEmail = "priya.raman@example.com",
   initialName = "Priya Raman",
+  isLiveAccount = false,
 }: ParentAccountViewProps) {
   const email = initialEmail;
   const name = initialName;
@@ -52,69 +53,71 @@ export function ParentAccountView({
 
   return (
     <div className="space-y-6">
-      {/* Test State Selector for Reviewers / Artboards */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/10 bg-white/60 p-2.5 text-xs">
-        <span className="font-semibold text-muted">Preview Artboard State:</span>
-        <div className="flex flex-wrap gap-1.5">
-          <button
-            type="button"
-            onClick={() => {
-              setShowEmailChange(false);
-              setEmailChangeStatus("idle");
-              setDeletionStatus("idle");
-            }}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              !showEmailChange && deletionStatus === "idle"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Normal Account (b23/b26)
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setShowEmailChange(true);
-              setEmailChangeStatus("idle");
-            }}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              showEmailChange && emailChangeStatus === "idle"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Change Email (b24-1)
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setShowEmailChange(true);
-              setEmailChangeStatus("sent");
-            }}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              emailChangeStatus === "sent"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Email Confirmation Sent (b24-1)
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setDeletionStatus("requested");
-              setShowEmailChange(false);
-            }}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              deletionStatus === "requested"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Verified Deletion Requested (b24-4)
-          </button>
+      {/* Test State Selector for Reviewers / Artboards - isolated to preview demonstrations */}
+      {!isLiveAccount && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/10 bg-white/60 p-2.5 text-xs">
+          <span className="font-semibold text-muted">Preview Artboard State:</span>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              type="button"
+              onClick={() => {
+                setShowEmailChange(false);
+                setEmailChangeStatus("idle");
+                setDeletionStatus("idle");
+              }}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                !showEmailChange && deletionStatus === "idle"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Normal Account (b23/b26)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowEmailChange(true);
+                setEmailChangeStatus("idle");
+              }}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                showEmailChange && emailChangeStatus === "idle"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Change Email (b24-1)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowEmailChange(true);
+                setEmailChangeStatus("sent");
+              }}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                emailChangeStatus === "sent"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Email Confirmation Sent (b24-1)
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setDeletionStatus("requested");
+                setShowEmailChange(false);
+              }}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                deletionStatus === "requested"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Verified Deletion Requested (b24-4)
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
@@ -178,14 +181,16 @@ export function ParentAccountView({
             </p>
 
             {emailChangeStatus === "sent" ? (
-              <div className="mt-3 flex items-start gap-2.5 rounded-lg bg-emerald-50 p-3 text-emerald-950">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
-                <div>
-                  <span className="font-bold">Confirmation link sent.</span>
-                  <p className="mt-0.5 text-[11px] text-emerald-800">
-                    Check your inbox at <span className="font-semibold">{newEmailInput || "new@example.com"}</span>. Once confirmed, you will use it to sign in.
-                  </p>
+              <div className="mt-3 rounded-lg border border-amber-300 bg-amber-50/80 p-3 text-amber-950">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[10px] font-extrabold uppercase text-amber-900">
+                    Preview Demonstration
+                  </span>
+                  <span className="font-bold text-xs text-amber-950">Email confirmation state preview</span>
                 </div>
+                <p className="mt-1 text-[11px] text-amber-900 leading-relaxed">
+                  Demonstration only. In this preview, no email was dispatched and your account address remains <span className="font-semibold">{email}</span>. Email change API integration is deferred.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleRequestEmailChange} className="mt-3 flex flex-wrap gap-2">
@@ -450,13 +455,15 @@ export function ParentAccountView({
             </p>
 
             {deletionStatus === "requested" ? (
-              <div className="mt-4 rounded-xl border border-rose-300 bg-white p-4 text-xs text-rose-950">
-                <div className="flex items-center gap-2 font-bold">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-                  <span>Erasure request received</span>
+              <div className="mt-4 rounded-xl border border-amber-300 bg-amber-50/80 p-4 text-xs text-amber-950">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[10px] font-extrabold uppercase text-amber-900">
+                    Preview Demonstration
+                  </span>
+                  <span className="font-bold text-amber-950">Erasure request state demonstration</span>
                 </div>
-                <p className="mt-1 text-muted">
-                  We have logged your request in the erasure ledger. A confirmation email has been dispatched to {email}. You must confirm via the link in that email to execute the erasure.
+                <p className="mt-1 text-xs text-amber-900 leading-relaxed">
+                  Demonstration only. In this preview, no request was written to the database, no email was sent, and no account data has changed. In production, administrative erasure requires guardian email confirmation under ADR-012.
                 </p>
               </div>
             ) : (

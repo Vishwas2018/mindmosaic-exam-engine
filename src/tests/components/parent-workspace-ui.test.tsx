@@ -97,7 +97,7 @@ describe("Parent Workspace UI - Screen Components", () => {
       const deleteBtn = screen.getByRole("button", { name: /request deletion of aisha's data/i });
       fireEvent.click(deleteBtn);
 
-      expect(screen.getByText(/deletion request received/i)).toBeInTheDocument();
+      expect(screen.getByText(/erasure request state demonstration/i)).toBeInTheDocument();
       // Strictly verify no 30-day claim
       expect(screen.queryByText(/30[- ]day/i)).not.toBeInTheDocument();
     });
@@ -177,7 +177,7 @@ describe("Parent Workspace UI - Screen Components", () => {
       const deleteBtn = screen.getByRole("button", { name: /request verified account deletion/i });
       fireEvent.click(deleteBtn);
 
-      expect(screen.getByText(/erasure request received/i)).toBeInTheDocument();
+      expect(screen.getByText(/erasure request state demonstration/i)).toBeInTheDocument();
       expect(screen.queryByText(/30[- ]day/i)).not.toBeInTheDocument();
     });
   });
@@ -202,11 +202,11 @@ describe("Parent Workspace UI - Screen Components", () => {
     it("validates and displays confirmation with ticket reference in SupportContactForm", () => {
       render(<SupportContactForm />);
 
-      const confirmStateBtn = screen.getByRole("button", { name: /confirmed with ticket ref/i });
+      const confirmStateBtn = screen.getByRole("button", { name: /demonstration acknowledgment state/i });
       fireEvent.click(confirmStateBtn);
 
-      expect(screen.getByText(/message received/i)).toBeInTheDocument();
-      expect(screen.getByText(/tkt-84920/i)).toBeInTheDocument();
+      expect(screen.getByText(/demonstration submission acknowledgment/i)).toBeInTheDocument();
+      expect(screen.getByText(/sample-preview-only/i)).toBeInTheDocument();
     });
   });
 });

@@ -17,8 +17,8 @@ export function SupportContactForm() {
 
     setStatus("submitting");
     setTimeout(() => {
-      // Decision P13: Reference ID is displayed ONLY after receipt acknowledgment
-      setTicketRef("TKT-84920");
+      // Decision P13: Reference ID format demonstrated; clearly labelled as simulated preview
+      setTicketRef("SAMPLE-PREVIEW-ONLY");
       setStatus("confirmed");
     }, 500);
   };
@@ -45,13 +45,13 @@ export function SupportContactForm() {
             type="button"
             onClick={() => {
               setStatus("confirmed");
-              setTicketRef("TKT-84920");
+              setTicketRef("SAMPLE-PREVIEW-ONLY");
             }}
             className={`rounded-lg px-2.5 py-1 font-semibold transition ${
               status === "confirmed" ? "bg-royal text-white" : "bg-royal/5 text-muted hover:text-royal"
             }`}
           >
-            Confirmed with Ticket Ref (Decision P13)
+            Demonstration Acknowledgment State (Decision P13)
           </button>
           <button
             type="button"
@@ -79,26 +79,31 @@ export function SupportContactForm() {
         </div>
 
         {status === "confirmed" ? (
-          <div className="mt-6 rounded-2xl border border-emerald-300 bg-emerald-50 p-6 text-emerald-950">
-            <div className="flex items-center gap-3">
-              <CheckCircle2 className="h-6 w-6 text-emerald-600 shrink-0" aria-hidden="true" />
+          <div className="mt-6 rounded-2xl border border-amber-300 bg-amber-50/70 p-6 text-amber-950">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-700 shrink-0" aria-hidden="true" />
               <div>
-                <h3 className="text-base font-bold text-emerald-900">Message received</h3>
-                <p className="mt-0.5 text-xs text-emerald-800">
-                  Your message has been acknowledged by our support service.
+                <span className="inline-block rounded-md bg-amber-200/80 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-amber-900">
+                  Preview Demonstration Only
+                </span>
+                <h3 className="mt-1 text-base font-bold text-amber-950">
+                  Demonstration submission acknowledgment
+                </h3>
+                <p className="mt-0.5 text-xs text-amber-900">
+                  This is a visual preview of the support receipt acknowledgment. No message was transmitted, no email was sent, and no real ticket has been generated.
                 </p>
               </div>
             </div>
 
-            <div className="mt-4 rounded-xl bg-white p-4 shadow-2xs">
+            <div className="mt-4 rounded-xl border border-amber-200 bg-white p-4 shadow-2xs">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-                Your support reference
+                Sample Reference ID Format (Decision P13)
               </p>
-              <p className="mt-1 font-mono text-2xl font-bold text-royal tracking-wider">
-                {ticketRef}
+              <p className="mt-1 font-mono text-xl font-bold text-amber-900 tracking-wider">
+                {ticketRef || "SAMPLE-PREVIEW-ONLY"}
               </p>
               <p className="mt-2 text-xs text-muted">
-                We sent a receipt confirmation to <span className="font-semibold text-ink">{email}</span>. A team member typically replies within one Australian business day.
+                Reference ID is generated only after a real server acknowledges receipt. In production, a receipt confirmation is emailed to <span className="font-semibold text-ink">{email}</span>.
               </p>
             </div>
 
@@ -110,9 +115,9 @@ export function SupportContactForm() {
                   setMessage("");
                   setTicketRef(null);
                 }}
-                className="rounded-xl bg-emerald-700 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-800"
+                className="rounded-xl bg-amber-800 px-4 py-2 text-xs font-bold text-white transition hover:bg-amber-900"
               >
-                Send another message
+                Back to contact form
               </button>
             </div>
           </div>

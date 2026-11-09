@@ -25,12 +25,15 @@ export default async function ChildProfilePage({ params }: Props) {
 
   let child: PreviewChild | undefined = PREVIEW_CHILDREN.find((c) => c.id === childId);
 
+  let isLive = false;
+
   // If not found in preview list, check if user has actual database profiles
   if (!child) {
     const data = await loadParentDashboard();
     if (data.status === "ready") {
       const match = data.children.find((c) => c.profile.id === childId);
       if (match) {
+        isLive = true;
         const archivedIds = await loadArchivedChildIds([match.profile.id]);
         const summary = buildChildSummary(match.profile, match.attempts);
         const totalEarned = summary.subjects.reduce((sum, s) => sum + s.marksEarned, 0);
@@ -61,7 +64,7 @@ export default async function ChildProfilePage({ params }: Props) {
 
   return (
     <ParentShell active="/parent/children">
-      <ChildProfileDetail child={child} />
+      <ChildProfileDetail child={child} isLiveAccount={isLive} />
     </ParentShell>
   );
 }

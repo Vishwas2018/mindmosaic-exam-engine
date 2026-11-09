@@ -43,9 +43,11 @@ export default async function ParentChildrenPage() {
     });
   }
 
+  const isLive = Boolean(data.status === "ready" && data.children && data.children.length > 0);
+
   return (
     <ParentShell active="/parent/children">
-      <ChildrenHub initialChildren={initialChildren} />
+      <ChildrenHub initialChildren={initialChildren} isLiveAccount={isLive} />
     </ParentShell>
   );
 }

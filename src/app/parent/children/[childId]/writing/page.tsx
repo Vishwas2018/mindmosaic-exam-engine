@@ -9,6 +9,7 @@ import { listWritingTasks } from "@/server/writing/tasks";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { loadWritingHistory } from "@/server/writing/queries";
+import { PREVIEW_CHILDREN } from "@/features/parent-dashboard/fixtures";
 
 export const metadata: Metadata = {
   title: "Child Writing Practice | MindMosaic",
@@ -24,33 +25,42 @@ export default async function ChildWritingPage({
   params: Promise<{ childId: string }>;
 }) {
   const { childId } = await params;
+  const previewChild = PREVIEW_CHILDREN.find((c) => c.id === childId);
 
-  if (!isSupabaseConfigured) redirect("/parent");
+  let childName = previewChild ? previewChild.firstName : "Your child";
+  let history: Awaited<ReturnType<typeof loadWritingHistory>> = [];
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/sign-in");
+  if (isSupabaseConfigured) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  // Load child profile to verify relationship and display name
-  const { data: childProfile, error: childError } = await supabase
-    .from("profiles")
-    .select("id, display_name, year_level")
-    .eq("id", childId)
-    .single();
+    if (user) {
+      const { data: childProfile } = await supabase
+        .from("profiles")
+        .select("id, display_name, year_level")
+        .eq("id", childId)
+        .single();
 
-  if (childError || !childProfile) {
-    redirect("/parent/children");
+      if (childProfile) {
+        childName = childProfile.display_name?.trim() || childName;
+        history = await loadWritingHistory(supabase, {
+          studentIds: [childId],
+          submittedOnly: true,
+        });
+      } else if (!previewChild) {
+        redirect("/parent/children");
+      }
+    } else if (!previewChild) {
+      redirect("/sign-in");
+    }
+  } else if (!previewChild) {
+    redirect("/parent");
   }
 
-  const childName = childProfile.display_name?.trim() || "Your child";
   const tasks = listWritingTasks();
   const taskTitles = Object.fromEntries(tasks.map((task) => [task.id, task.title]));
-  const history = await loadWritingHistory(supabase, {
-    studentIds: [childId],
-    submittedOnly: true,
-  });
 
   return (
     <ParentShell active="/parent/children">

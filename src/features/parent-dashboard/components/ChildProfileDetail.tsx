@@ -18,9 +18,13 @@ import { type PreviewChild } from "../fixtures";
 
 export interface ChildProfileDetailProps {
   child: PreviewChild;
+  isLiveAccount?: boolean;
 }
 
-export function ChildProfileDetail({ child: initialChild }: ChildProfileDetailProps) {
+export function ChildProfileDetail({
+  child: initialChild,
+  isLiveAccount = false,
+}: ChildProfileDetailProps) {
   const [child, setChild] = useState<PreviewChild>(initialChild);
   const [firstName, setFirstName] = useState(child.firstName);
   const [lastName, setLastName] = useState(child.lastName || "");
@@ -79,56 +83,61 @@ export function ChildProfileDetail({ child: initialChild }: ChildProfileDetailPr
 
   return (
     <div className="space-y-6">
-      {/* Test State Selector for Reviewers / Artboards */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/10 bg-white/60 p-2.5 text-xs">
-        <span className="font-semibold text-muted">Preview Artboard State:</span>
-        <div className="flex flex-wrap gap-1.5">
-          <button
-            type="button"
-            onClick={() => setPinState("idle")}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              pinState === "idle"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Normal Profile (b11)
-          </button>
-          <button
-            type="button"
-            onClick={() => setPinState("confirm")}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              pinState === "confirm"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            PIN Reset Confirm (b12-1)
-          </button>
-          <button
-            type="button"
-            onClick={() => setPinState("revealed")}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              pinState === "revealed"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            New PIN Revealed (b12-1)
-          </button>
-          <button
-            type="button"
-            onClick={() => setPinState("error")}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              pinState === "error"
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            PIN Reset Failed (b12-1)
-          </button>
+      {/* Test State Selector for Reviewers / Artboards - isolated to preview demonstrations */}
+      {!isLiveAccount && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/10 bg-white/60 p-2.5 text-xs">
+          <span className="font-semibold text-muted">Preview Artboard State:</span>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              type="button"
+              onClick={() => {
+                setPinState("idle");
+                setDeletionRequested(false);
+              }}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                pinState === "idle" && !deletionRequested
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Normal Profile (b11)
+            </button>
+            <button
+              type="button"
+              onClick={() => setPinState("confirm")}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                pinState === "confirm"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              PIN Reset Confirm (b12-1)
+            </button>
+            <button
+              type="button"
+              onClick={() => setPinState("revealed")}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                pinState === "revealed"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              New PIN Revealed (b12-1)
+            </button>
+            <button
+              type="button"
+              onClick={() => setPinState("error")}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                pinState === "error"
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              PIN Reset Failed (b12-1)
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Back Link to Children Hub */}
       <nav aria-label="Breadcrumb">
@@ -378,22 +387,24 @@ export function ChildProfileDetail({ child: initialChild }: ChildProfileDetailPr
                 </div>
               </div>
             ) : pinState === "revealed" ? (
-              <div className="mt-5 space-y-3 rounded-xl border border-emerald-300 bg-emerald-50 p-4 text-xs text-emerald-950">
-                <div className="flex items-center gap-2 font-bold text-emerald-900">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-                  <span>New PIN set</span>
+              <div className="mt-5 space-y-3 rounded-xl border border-amber-300 bg-amber-50/70 p-4 text-xs text-amber-950">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[10px] font-extrabold uppercase text-amber-900">
+                    Preview Demonstration
+                  </span>
+                  <span className="font-bold text-xs text-amber-950">{firstName}&apos;s PIN reveal state</span>
                 </div>
-                <div className="rounded-lg bg-white p-3 text-center shadow-xs">
-                  <p className="text-[11px] font-semibold text-muted">{firstName}&apos;s new PIN</p>
-                  <p className="mt-1 font-mono text-2xl font-bold tracking-widest text-royal">{newPin}</p>
+                <div className="rounded-lg border border-amber-200 bg-white p-3 text-center shadow-xs">
+                  <p className="text-[11px] font-semibold text-muted">Sample newly generated PIN</p>
+                  <p className="mt-1 font-mono text-2xl font-bold tracking-widest text-amber-900">{newPin}</p>
                 </div>
-                <p className="text-[11px] text-emerald-800">
-                  Write this down now. We cannot show it again &mdash; we only keep a scrambled cryptographic copy, so the next step is another reset.
+                <p className="text-[11px] text-amber-900 leading-relaxed">
+                  Demonstration only. In this preview, no database write occurred and {firstName}&apos;s live PIN has not changed. In production, newly set PINs are displayed once and stored only as a cryptographic hash.
                 </p>
                 <button
                   type="button"
                   onClick={() => setPinState("idle")}
-                  className="rounded-lg bg-emerald-700 px-3 py-1 font-bold text-white transition hover:bg-emerald-800"
+                  className="rounded-lg bg-amber-800 px-3 py-1 font-bold text-white transition hover:bg-amber-900"
                 >
                   Done
                 </button>
@@ -542,10 +553,15 @@ export function ChildProfileDetail({ child: initialChild }: ChildProfileDetailPr
             </p>
 
             {deletionRequested ? (
-              <div className="mt-3 rounded-xl border border-rose-300 bg-white p-3.5 text-xs text-rose-950">
-                <p className="font-bold">Deletion request received.</p>
-                <p className="mt-0.5 text-muted">
-                  A verification email has been sent to your guardian address to confirm erasure of {firstName}&apos;s data.
+              <div className="mt-3 rounded-xl border border-amber-300 bg-amber-50/80 p-3.5 text-xs text-amber-950">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[10px] font-extrabold uppercase text-amber-900">
+                    Preview Demonstration
+                  </span>
+                  <span className="font-bold text-xs text-amber-950">Erasure request state demonstration</span>
+                </div>
+                <p className="mt-1 text-xs text-amber-900 leading-relaxed">
+                  Demonstration only. In this frontend preview, no erasure request was transmitted to the server and {firstName}&apos;s profile and history have not changed. Live erasure requires guardian verification under ADR-012.
                 </p>
               </div>
             ) : (

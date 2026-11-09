@@ -23,7 +23,11 @@ export default async function ParentAccountPage() {
 
   return (
     <ParentShell active="/parent/account">
-      <ParentAccountView initialEmail={userEmail} initialName={displayName} />
+      <ParentAccountView
+        initialEmail={userEmail}
+        initialName={displayName}
+        isLiveAccount={Boolean(user)}
+      />
     </ParentShell>
   );
 }

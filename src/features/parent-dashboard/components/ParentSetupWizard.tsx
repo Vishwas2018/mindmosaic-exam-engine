@@ -416,6 +416,12 @@ export function ParentSetupWizard({
             aria-labelledby="h-creds"
             className="rounded-2xl border border-royal/10 bg-white p-6 sm:p-8 shadow-sm lg:col-span-8"
           >
+            <div className="mb-4 inline-flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50/80 px-3 py-1.5 text-xs text-amber-950">
+              <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[10px] font-extrabold uppercase text-amber-900">
+                Preview Demonstration
+              </span>
+              <span>Sample credentials for design review. No live child record was created in the database.</span>
+            </div>
             <h2 id="h-creds" className="text-xl font-bold text-ink sm:text-2xl">
               How {createdCredentials?.name || "Aisha"} signs in
             </h2>

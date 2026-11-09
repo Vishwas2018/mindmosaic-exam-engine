@@ -7,9 +7,13 @@ import { PREVIEW_CHILDREN, PREVIEW_FAMILY_PLAN, type PreviewChild } from "../fix
 
 export interface ChildrenHubProps {
   initialChildren?: PreviewChild[];
+  isLiveAccount?: boolean;
 }
 
-export function ChildrenHub({ initialChildren = PREVIEW_CHILDREN }: ChildrenHubProps) {
+export function ChildrenHub({
+  initialChildren = PREVIEW_CHILDREN,
+  isLiveAccount = false,
+}: ChildrenHubProps) {
   const [children, setChildren] = useState<PreviewChild[]>(initialChildren);
   const [placesLimitReached, setPlacesLimitReached] = useState(false);
 
@@ -45,34 +49,36 @@ export function ChildrenHub({ initialChildren = PREVIEW_CHILDREN }: ChildrenHubP
 
   return (
     <div className="space-y-6">
-      {/* Test State Selector for Reviewers / Artboards */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/10 bg-white/60 p-2.5 text-xs">
-        <span className="font-semibold text-muted">Preview Artboard State:</span>
-        <div className="flex flex-wrap gap-1.5">
-          <button
-            type="button"
-            onClick={() => setPlacesLimitReached(false)}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              !placesLimitReached
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Normal (b10/b13/b14: 2 of 3 used)
-          </button>
-          <button
-            type="button"
-            onClick={() => setPlacesLimitReached(true)}
-            className={`rounded-lg px-2.5 py-1 font-semibold transition ${
-              placesLimitReached
-                ? "bg-royal text-white"
-                : "bg-royal/5 text-muted hover:text-royal"
-            }`}
-          >
-            Plan Limit Reached (b12-2: 3 of 3 used)
-          </button>
+      {/* Test State Selector for Reviewers / Artboards - isolated to preview demonstrations */}
+      {!isLiveAccount && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/10 bg-white/60 p-2.5 text-xs">
+          <span className="font-semibold text-muted">Preview Artboard State:</span>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              type="button"
+              onClick={() => setPlacesLimitReached(false)}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                !placesLimitReached
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Normal (b10/b13/b14: 2 of 3 used)
+            </button>
+            <button
+              type="button"
+              onClick={() => setPlacesLimitReached(true)}
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                placesLimitReached
+                  ? "bg-royal text-white"
+                  : "bg-royal/5 text-muted hover:text-royal"
+              }`}
+            >
+              Plan Limit Reached (b12-2: 3 of 3 used)
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Greeting Header */}
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
