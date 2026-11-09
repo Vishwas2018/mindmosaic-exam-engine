@@ -16,11 +16,20 @@ import {
 } from "@/features/billing";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { isBillingPreviewEnabled } from "@/features/billing/preview-mode";
+import {
+  BillingPreviewScreens,
+  type BillingArtboardView,
+} from "@/features/billing/components/preview/BillingPreviewScreens";
 
 export const metadata: Metadata = {
   title: "Billing",
   description: "Subscribe to or manage the MindMosaic Family plan.",
 };
+
+interface BillingPageProps {
+  searchParams?: Promise<{ view?: string }>;
+}
 
 /*
  * A signed-in parent's subscription is per-user data behind auth cookies —
@@ -82,7 +91,13 @@ function Shell({ children }: { children: React.ReactNode }) {
  * here, so either one falls back to the marketing/subscribe view, same as
  * this page's behaviour before this batch.
  */
-export default async function BillingPage() {
+export default async function BillingPage({ searchParams }: BillingPageProps) {
+  if (await isBillingPreviewEnabled()) {
+    const params = await searchParams;
+    const initialView = (params?.view as BillingArtboardView) ?? "active";
+    return <BillingPreviewScreens initialView={initialView} />;
+  }
+
   const result = isSupabaseConfigured ? await getMySubscription() : { status: "error" as const };
   const subscription = result.status === "ready" ? result.subscription : null;
 
