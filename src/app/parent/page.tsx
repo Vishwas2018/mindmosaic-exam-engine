@@ -8,9 +8,11 @@ import {
   CheckoutStatusToast,
   FamilyOverview,
   ParentShell,
+  PREVIEW_FAMILY_OVERVIEW_SUMMARIES,
   buildChildSummary,
 } from "@/features/parent-dashboard";
 import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
+import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
@@ -51,6 +53,23 @@ export default async function ParentHomePage({
 
   const years = yearLevelsWithGatedCoverage();
   if (!isSupabaseConfigured) {
+    if (await isParentPreviewEnabled()) {
+      return (
+        <ParentShell active="/parent">
+          <div className="space-y-6">
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-xs font-medium text-amber-900">
+              <strong className="font-bold">Preview Demonstration:</strong> Showing sample family overview data (Aisha &amp; Kabir) in local preview mode. No database connection is active.
+            </div>
+            <FamilyOverview
+              summaries={PREVIEW_FAMILY_OVERVIEW_SUMMARIES}
+              parentName="Priya"
+              forcedState={forcedState}
+            />
+          </div>
+        </ParentShell>
+      );
+    }
+
     return (
       <ParentShell active="/parent">
         <ErrorState

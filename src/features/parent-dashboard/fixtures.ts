@@ -10,6 +10,8 @@
  * - Deletion timelines follow ADR-012 with zero unapproved time promises (Decision P11).
  */
 
+import type { ChildSummary } from "./summary";
+
 export interface PreviewChild {
   id: string;
   firstName: string;
@@ -351,3 +353,156 @@ export const PREVIEW_HELP_ARTICLES: Record<string, PreviewHelpArticle> = {
     },
   },
 };
+
+export const PREVIEW_FAMILY_OVERVIEW_SUMMARIES: readonly ChildSummary[] = [
+  {
+    childId: "child-aisha",
+    displayName: "Aisha",
+    yearLevel: 3,
+    attemptCount: 4,
+    unreadableAttemptCount: 0,
+    latestPercentage: 84,
+    previousPercentage: 78,
+    averagePercentage: 81,
+    attemptsThisWeek: 3,
+    timeThisWeekSeconds: 3960,
+    streakDays: 3,
+    weekActivity: [
+      { label: "Mon", practised: true, isToday: false },
+      { label: "Tue", practised: false, isToday: false },
+      { label: "Wed", practised: true, isToday: false },
+      { label: "Thu", practised: false, isToday: false },
+      { label: "Fri", practised: true, isToday: false },
+      { label: "Sat", practised: false, isToday: false },
+      { label: "Sun", practised: false, isToday: true },
+    ],
+    subjects: [
+      {
+        subject: "reading",
+        label: "Reading",
+        percentage: 86,
+        marksEarned: 32,
+        marksAvailable: 37,
+        questionCount: 37,
+        paperCount: 2,
+      },
+      {
+        subject: "numeracy",
+        label: "Numeracy",
+        percentage: 78,
+        marksEarned: 35,
+        marksAvailable: 45,
+        questionCount: 45,
+        paperCount: 2,
+      },
+      {
+        subject: "language_conventions",
+        label: "Language conventions",
+        percentage: 75,
+        marksEarned: 15,
+        marksAvailable: 20,
+        questionCount: 20,
+        paperCount: 1,
+      },
+    ],
+    recentAttempts: [
+      {
+        id: "res-reading-301",
+        submittedAt: "2026-11-08T10:15:00Z",
+        submittedAtLabel: "8 Nov 2026",
+        label: "Grade 3 · Reading Practice Paper 2",
+        percentage: 84,
+        marksEarned: 16,
+        marksAvailable: 19,
+        totalQuestions: 19,
+        attemptedQuestions: 19,
+        pendingManualReview: false,
+      },
+      {
+        id: "res-num-302",
+        submittedAt: "2026-11-06T16:40:00Z",
+        submittedAtLabel: "6 Nov 2026",
+        label: "Grade 3 · Numeracy Practice Paper 2",
+        percentage: 78,
+        marksEarned: 18,
+        marksAvailable: 23,
+        totalQuestions: 23,
+        attemptedQuestions: 23,
+        pendingManualReview: false,
+      },
+    ],
+    readinessScore: 81,
+    topicsMasteredCount: 2,
+    observations: [
+      "Consistent marks across 2 Reading papers (32/37 marks).",
+      "Multi-step measurement word problems in Numeracy offer room for practice.",
+    ],
+    recommendedActions: [
+      {
+        id: "act-aisha-num",
+        title: "Review Numeracy Paper 2",
+        description: "Check multi-step measurement questions together.",
+      },
+    ],
+  },
+  {
+    childId: "child-kabir",
+    displayName: "Kabir",
+    yearLevel: 5,
+    attemptCount: 1,
+    unreadableAttemptCount: 0,
+    latestPercentage: 80,
+    previousPercentage: null,
+    averagePercentage: 80,
+    attemptsThisWeek: 1,
+    timeThisWeekSeconds: 2520,
+    streakDays: 1,
+    weekActivity: [
+      { label: "Mon", practised: false, isToday: false },
+      { label: "Tue", practised: false, isToday: false },
+      { label: "Wed", practised: false, isToday: false },
+      { label: "Thu", practised: true, isToday: false },
+      { label: "Fri", practised: false, isToday: false },
+      { label: "Sat", practised: false, isToday: false },
+      { label: "Sun", practised: false, isToday: true },
+    ],
+    subjects: [
+      {
+        subject: "numeracy",
+        label: "Numeracy",
+        percentage: 80,
+        marksEarned: 24,
+        marksAvailable: 30,
+        questionCount: 30,
+        paperCount: 1,
+      },
+    ],
+    recentAttempts: [
+      {
+        id: "res-kabir-501",
+        submittedAt: "2026-11-05T17:10:00Z",
+        submittedAtLabel: "5 Nov 2026",
+        label: "Grade 5 · Numeracy Non-Calculator Paper 1",
+        percentage: 80,
+        marksEarned: 24,
+        marksAvailable: 30,
+        totalQuestions: 30,
+        attemptedQuestions: 30,
+        pendingManualReview: false,
+      },
+    ],
+    readinessScore: 80,
+    topicsMasteredCount: 1,
+    observations: [
+      "1 finished paper recorded so far — complete one more paper to unlock strand-level comparisons.",
+    ],
+    recommendedActions: [
+      {
+        id: "act-kabir-next",
+        title: "Complete a second Numeracy paper",
+        description: "At least 2 papers and 8 marks are required before evaluative subject claims appear.",
+      },
+    ],
+  },
+];
+
