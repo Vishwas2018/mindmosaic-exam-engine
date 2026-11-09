@@ -12,6 +12,7 @@ import {
 import { fetchStudentOverview } from "@/features/student/data";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { requireStudent } from "@/features/student/require-student";
+import { isStudentPreviewEnabled } from "@/features/student/preview-mode";
 import { getStudioAvailability } from "@/server/practice-studio-availability";
 
 export const metadata: Metadata = {
@@ -31,7 +32,15 @@ export const dynamic = "force-dynamic";
  * worked out from finished timed papers (and saying so), recent results. No XP,
  * level, pace or difficulty chips, curriculum-sync badge or metric tiles.
  */
-export default async function StudentHomePage() {
+export default async function StudentHomePage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ state?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  const forcedState = resolvedParams.state;
+  const isPreview = await isStudentPreviewEnabled();
+
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
   const shellData = await fetchStudentPortalShellData(student);
@@ -41,8 +50,39 @@ export default async function StudentHomePage() {
   /* Only Years 3 and 5 are served; any other recorded year reads as 3, as elsewhere in the student app. */
   const yearLevel = student.yearLevel === 5 ? 5 : 3;
 
+  const isFirstVisit = forcedState === "first-visit";
+  const displayedAttempts = isFirstVisit ? [] : overview.attempts;
+  const displayedMastery = isFirstVisit ? [] : overview.mastery;
+
   return (
     <StudentPortalShell active="home" breadcrumbLabel="My Space" student={student} shellData={shellData}>
+      {isPreview && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-royal/15 bg-white p-3 text-xs shadow-xs">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-royal">Preview Artboard Switcher:</span>
+            <span className="text-mm-muted">Explore My Space screen states</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <a
+              href="/student"
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                !forcedState ? "bg-royal text-white" : "bg-royal/5 text-royal hover:bg-royal/10"
+              }`}
+            >
+              Returning Student
+            </a>
+            <a
+              href="/student?state=first-visit"
+              className={`rounded-lg px-2.5 py-1 font-semibold transition ${
+                forcedState === "first-visit" ? "bg-royal text-white" : "bg-royal/5 text-royal hover:bg-royal/10"
+              }`}
+            >
+              First Visit (b4/b5)
+            </a>
+          </div>
+        </div>
+      )}
+
       <OnboardingResumeBanner
         onboardingCompleted={student.onboardingCompleted}
         yearLevel={student.yearLevel}
@@ -55,10 +95,10 @@ export default async function StudentHomePage() {
         </h1>
         <p className="text-sm text-mm-muted">Year {yearLevel}</p>
       </section>
-      <MySpaceHero hasActiveSession={shellData.hasActiveSession} hasFinishedPaper={overview.attempts.length > 0} />
+      <MySpaceHero hasActiveSession={shellData.hasActiveSession} hasFinishedPaper={displayedAttempts.length > 0} />
       <MySpacePathways availability={availability} yearLevel={yearLevel} />
-      <MySpaceProgress attempts={overview.attempts} mastery={overview.mastery} />
-      <MySpaceRecent attempts={overview.attempts} />
+      <MySpaceProgress attempts={displayedAttempts} mastery={displayedMastery} />
+      <MySpaceRecent attempts={displayedAttempts} />
       <StudentOnboardingModal
         firstName={firstName}
         yearLevel={student.yearLevel}

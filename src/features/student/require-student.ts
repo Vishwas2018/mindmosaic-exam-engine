@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { isStudentPreviewEnabled } from "./preview-mode";
+import { PREVIEW_STUDENT_CONTEXT } from "./fixtures/student-preview-fixtures";
 
 export interface StudentContext {
   userId: string;
@@ -24,6 +26,10 @@ export interface StudentContext {
  * by the sibling /student/{assignments,engagement} shell instead).
  */
 export async function requireStudent(): Promise<StudentContext> {
+  if (await isStudentPreviewEnabled()) {
+    return PREVIEW_STUDENT_CONTEXT;
+  }
+
   if (!isSupabaseConfigured) {
     redirect("/");
   }
