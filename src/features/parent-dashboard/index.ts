@@ -16,4 +16,58 @@ export {
 export { LearningInsights } from "./components/LearningInsights";
 export { ChildrenManager, type ChildListItem } from "./components/ChildrenManager";
 export { CheckoutStatusToast } from "./components/CheckoutStatusToast";
-export { ParentShell } from "./components/ParentShell";
+export {
+  ParentShell,
+  PARENT_NAV_LINKS,
+  type ParentNavKey,
+  type ParentShellProps,
+} from "./components/ParentShell";
+export {
+  ChildSwitcher,
+  type ChildSwitcherItem,
+  type ChildSwitcherProps,
+} from "./components/ChildSwitcher";
+export {
+  MarksMeter,
+  type MarksMeterProps,
+} from "./components/MarksMeter";
+export {
+  ClaimWithEvidence,
+  type ClaimWithEvidenceProps,
+  MIN_CLAIM_PAPERS,
+  MIN_CLAIM_MARKS,
+  INSUFFICIENT_EVIDENCE_COPY,
+  INSUFFICIENT_SUBJECT_EVIDENCE_COPY,
+  insufficientEvidenceCopy,
+} from "./components/ClaimWithEvidence";
+export {
+  FamilyOverview,
+  type FamilyOverviewProps,
+} from "./components/FamilyOverview";
+export {
+  LoadingStateBlock,
+  NothingYetStateBlock,
+  NotEnoughYetStateBlock,
+  CouldNotLoadStateBlock,
+  type BaseStateBlockProps,
+  type NothingYetStateBlockProps,
+  type NotEnoughYetStateBlockProps,
+  type CouldNotLoadStateBlockProps,
+} from "./components/StateBlocks";
+
+// New Workspace UI Components (P3 - P7)
+export { ParentSetupWizard, type ParentSetupWizardProps } from "./components/ParentSetupWizard";
+export { ChildrenHub, type ChildrenHubProps } from "./components/ChildrenHub";
+export { ChildProfileDetail, type ChildProfileDetailProps } from "./components/ChildProfileDetail";
+export { ChildProgressView, type ChildProgressViewProps } from "./components/ChildProgressView";
+export { AttemptResultDetail, type AttemptResultDetailProps } from "./components/AttemptResultDetail";
+export { AttemptAnswerReview, type AttemptAnswerReviewProps } from "./components/AttemptAnswerReview";
+export { ChildCurriculumView, type ChildCurriculumViewProps } from "./components/ChildCurriculumView";
+export { PracticePreviewView, type PracticePreviewViewProps } from "./components/PracticePreviewView";
+export { ParentAccountView, type ParentAccountViewProps } from "./components/ParentAccountView";
+export { ParentHelpView } from "./components/ParentHelpView";
+export { HelpArticleDetail, type HelpArticleDetailProps } from "./components/HelpArticleDetail";
+export { SupportContactForm } from "./components/SupportContactForm";
+
+// Preview Fixtures
+export * from "./fixtures";
