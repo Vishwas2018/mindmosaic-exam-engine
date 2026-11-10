@@ -8,6 +8,13 @@ import { twMerge } from "tailwind-merge";
 
 import { useAuth } from "@/features/auth";
 import {
+  CROSS_DEVICE_MESSAGE,
+  friendlyLinkError,
+  readLinkCredentials,
+  stripLinkCredentials,
+} from "@/features/auth/link-errors";
+import { useFocusOnShow } from "@/features/auth/components/use-focus-on-show";
+import {
   MmErrorPanel,
   MmField,
   mmAuthButton,
@@ -17,50 +24,163 @@ import {
 import { PasswordStrength } from "@/features/auth/components/PasswordStrength";
 import { evaluatePassword } from "@/features/auth/password";
 
-function readLinkError(): string | null {
-  if (typeof window === "undefined") return null;
+interface LinkProblem {
+  readonly heading: string;
+  readonly text: string;
+}
+
+const EXPIRED: LinkProblem = {
+  heading: "Link expired or invalid",
+  text: "This password reset link has expired or has already been used.",
+};
+
+/** Opened /auth/reset directly, with no link and no session: there is nothing to reset yet. */
+const NO_LINK: LinkProblem = {
+  heading: "Open your reset link",
+  text: "This page opens from the link in your password-reset email. Request a new link if you don't have it.",
+};
+
+/** How long a PKCE `code` link may take to turn into a session before it is treated as unusable here. */
+const CODE_EXCHANGE_MS = 6000;
+
+function computeInitialStage(): {
+  phase: "checking" | "problem";
+  problem: LinkProblem | null;
+} {
+  if (typeof window === "undefined") return { phase: "checking", problem: null };
   const url = new URL(window.location.href);
-  const hashParams = new URLSearchParams(url.hash.replace(/^#/, ""));
-  const errorCode = url.searchParams.get("error_code") ?? hashParams.get("error_code");
-  const errorDescription = url.searchParams.get("error_description") ?? hashParams.get("error_description");
-  if (!errorCode) return null;
-  return errorCode === "otp_expired"
-    ? "This password reset link has expired."
-    : (errorDescription?.replace(/\+/g, " ") ?? "This password reset link is invalid.");
+  const hash = new URLSearchParams(url.hash.replace(/^#/, ""));
+  const errorCode = url.searchParams.get("error_code") ?? hash.get("error_code");
+  const errorDescription = url.searchParams.get("error_description") ?? hash.get("error_description");
+  if (errorCode) {
+    return {
+      phase: "problem",
+      problem: {
+        heading: EXPIRED.heading,
+        text:
+          errorCode === "otp_expired"
+            ? "This password reset link has expired."
+            : (errorDescription?.replace(/\+/g, " ") ?? "This password reset link is invalid."),
+      },
+    };
+  }
+  return { phase: "checking", problem: null };
+}
+
+/**
+ * Checks if an authenticated session was established via recovery.
+ * Ordinary authenticated sessions (e.g. password sign-in) have amr: [{ method: "password" }],
+ * not recovery or otp, and cannot bypass recovery requirements by navigating cold to /auth/reset.
+ */
+function isRecoveryContext(session: unknown): boolean {
+  if (!session || typeof session !== "object") return false;
+  const s = session as { amr?: Array<{ method: string }>; user?: { amr?: Array<{ method: string }> }; recovery?: boolean };
+  if (s.recovery === true) return true;
+  const amr = s.amr ?? s.user?.amr;
+  if (Array.isArray(amr)) {
+    return amr.some((entry) => entry.method === "recovery" || entry.method === "otp");
+  }
+  // If session exists without explicit non-recovery amr in mock or recovery flow, allow if marked.
+  return false;
 }
 
 /**
  * Landing page for the password-reset email link (the second half of
  * Account Recovery — the first half is SignInPanel's "forgot" screen).
- * Supabase establishes a short-lived recovery session when the user
- * arrives here, so we simply let them set a new password via
- * `updateUser`. An expired or already-used link comes back as
- * `error`/`error_code` query or hash params instead of a session — that
- * state gets its own screen rather than a confusing form.
  *
- * Restyled onto the mm-* auth system (was the product's generic
- * `@/components/ui` kit) to match /sign-in and /sign-up.
+ * Restyled onto the mm-* auth system to match /sign-in and /sign-up.
  */
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const { updatePassword, configured } = useAuth();
+  const { updatePassword, verifyRecoveryToken, adoptSessionTokens, session, configured, status } = useAuth();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{ tone: "error" | "success"; text: string } | null>(null);
-  const [linkError, setLinkError] = useState<string | null>(null);
+
+  const [initial] = useState(computeInitialStage);
+  const [phase, setPhase] = useState<"checking" | "form" | "problem">(initial.phase);
+  const [problem, setProblem] = useState<LinkProblem | null>(initial.problem);
+  const [mode, setMode] = useState<"pending" | "code" | "none" | "settled">(
+    initial.phase === "problem" ? "settled" : "pending",
+  );
+
   const shake = useShakeOnInvalidSubmit();
+  const headingRef = useFocusOnShow<HTMLHeadingElement>(phase === "problem");
+
+  const showProblem = (next: LinkProblem) => {
+    setProblem(next);
+    setPhase("problem");
+    setMode("settled");
+  };
 
   useEffect(() => {
-    /* Deliberately deferred to an effect rather than a lazy useState
-       initializer: reading window.location during render would make the
-       client's first hydration pass diverge from the server-rendered HTML
-       (which always shows the form, having no access to the URL's hash/query
-       error params at request time) — a hydration mismatch, not just an
-       unnecessary render. */
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLinkError(readLinkError());
+    if (initial.phase === "problem") return;
+
+    const link = readLinkCredentials(new URL(window.location.href).searchParams, window.location.hash);
+    const settle = (result: { ok: boolean; message?: string }) => {
+      if (result.ok) {
+        stripLinkCredentials();
+        setPhase("form");
+        setMode("settled");
+      } else {
+        showProblem({ heading: EXPIRED.heading, text: friendlyLinkError(result.message, EXPIRED.text) });
+      }
+    };
+
+    if (link.errorCode) {
+      const text =
+        link.errorCode === "otp_expired"
+          ? "This password reset link has expired."
+          : (link.errorDescription?.replace(/\+/g, " ") ?? "This password reset link is invalid.");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      showProblem({ heading: EXPIRED.heading, text });
+    } else if (link.tokenHash && link.type === "recovery") {
+      void verifyRecoveryToken(link.tokenHash).then(settle);
+    } else if (link.accessToken && link.refreshToken) {
+      void adoptSessionTokens(link.accessToken, link.refreshToken).then(settle);
+    } else {
+      setMode(link.code ? "code" : "none");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (mode !== "code" && mode !== "none") return;
+
+    // Unconfigured environment (guest e2e test suite): show form directly.
+    if (status === "unconfigured") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPhase("form");
+      return;
+    }
+
+    if (status === "loading") return;
+
+    if (mode === "code") {
+      if (status === "authenticated") {
+        setPhase("form");
+        stripLinkCredentials();
+        return;
+      }
+      const timer = setTimeout(
+        () => showProblem({ heading: EXPIRED.heading, text: CROSS_DEVICE_MESSAGE }),
+        CODE_EXCHANGE_MS,
+      );
+      return () => clearTimeout(timer);
+    }
+
+    if (mode === "none") {
+      // Direct access without link credentials:
+      // If user has an active recovery session (e.g. established via recovery token or amr), allow form.
+      if (status === "authenticated" && isRecoveryContext(session)) {
+        setPhase("form");
+        return;
+      }
+      // Otherwise (whether anonymous or an ordinary authenticated session), lock out cold access.
+      showProblem(NO_LINK);
+    }
+  }, [mode, status, session]);
 
   const ready = evaluatePassword(password).allMet && confirm === password;
 
@@ -69,22 +189,43 @@ export default function ResetPasswordPage() {
     if (!ready || submitting) return;
     setSubmitting(true);
     setMessage(null);
+
     const result = await updatePassword(password);
     setSubmitting(false);
+
     if (result.ok) {
-      setMessage({ tone: "success", text: "Password updated — taking you to sign in…" });
-      setTimeout(() => router.push("/sign-in"), 1500);
+      setMessage({
+        tone: "success",
+        text: "Your password has been updated. Taking you to sign in…",
+      });
+      setTimeout(() => {
+        router.push("/sign-in");
+        router.refresh();
+      }, 1500);
     } else if (result.message && /session/i.test(result.message)) {
-      // No recovery session (e.g. the link was already used, or opened cold
-      // without following it from the email) — same dead-end as an expired link.
-      setLinkError("This password reset link has expired or has already been used.");
+      showProblem(EXPIRED);
     } else {
       setMessage({ tone: "error", text: result.message ?? "Could not update your password." });
       shake.trigger();
     }
   }
 
-  if (linkError) {
+  if (phase === "checking") {
+    return (
+      <main
+        id="main-content"
+        className="mm-root flex min-h-screen items-center justify-center bg-mm-page px-4 py-10 text-mm-ink"
+      >
+        <div className="mm-rise w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-[0_20px_60px_rgba(89,37,168,0.1)] sm:p-10">
+          <Loader2 aria-hidden="true" className="mx-auto h-10 w-10 animate-spin text-mm-brand" />
+          <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">Checking your link…</h1>
+          <p role="status" className="mt-2 text-sm text-mm-muted">This only takes a moment.</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (phase === "problem" && problem) {
     return (
       <main
         id="main-content"
@@ -92,11 +233,15 @@ export default function ResetPasswordPage() {
       >
         <div className="mm-rise w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-[0_20px_60px_rgba(89,37,168,0.1)] sm:p-10">
           <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-mm-coral-deep" />
-          <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
-            Link expired or invalid
+          <h1
+            ref={headingRef}
+            tabIndex={-1}
+            className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink outline-none"
+          >
+            {problem.heading}
           </h1>
           <p role="alert" className="mt-2 text-sm leading-[1.5] text-mm-muted">
-            {linkError}
+            {problem.text}
           </p>
           <Link
             href="/sign-in?mode=forgot"
@@ -141,7 +286,7 @@ export default function ResetPasswordPage() {
         {message &&
           (message.tone === "error" ? (
             <div className="mt-5">
-              <MmErrorPanel>{message.text}</MmErrorPanel>
+              <MmErrorPanel focusOnMount>{message.text}</MmErrorPanel>
             </div>
           ) : (
             <p

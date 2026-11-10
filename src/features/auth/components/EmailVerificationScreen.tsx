@@ -6,9 +6,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle2, Loader2, MailWarning } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-import { useAuth } from "../AuthProvider";
+import { useAuth, type EmailConfirmResult } from "../AuthProvider";
+import { friendlyLinkError, readLinkCredentials, stripLinkCredentials } from "../link-errors";
 import { roleHomePath } from "../roles";
 import { MmErrorPanel, MmField, mmAuthButton, mmFocus } from "./auth-fields";
+import { useFocusOnShow } from "./use-focus-on-show";
 
 type Stage = "verifying" | "success" | "error";
 
@@ -23,24 +25,23 @@ function computeInitialStage(
   searchParams: URLSearchParams,
   configured: boolean,
 ): { stage: Stage; message: string | null } {
-  const code = searchParams.get("code");
   const errorCode = searchParams.get("error_code");
   const errorDescription = searchParams.get("error_description");
 
-  if (errorCode || !code) {
-    return {
-      stage: "error",
-      message:
-        errorCode === "otp_expired"
-          ? "This verification link has expired."
-          : (errorDescription?.replace(/\+/g, " ") ??
-              "This verification link is invalid or has already been used."),
-    };
-  }
+  if (errorCode) return { stage: "error", message: errorMessage(errorCode, errorDescription) };
   if (!configured) {
     return { stage: "error", message: "Accounts aren't connected on this device yet." };
   }
+  /* A link with no query credentials may still carry them in the fragment (implicit flow), which neither the server
+     nor the first render can see, so every other case verifies first and decides in the effect. */
   return { stage: "verifying", message: null };
+}
+
+function errorMessage(errorCode: string | null, errorDescription: string | null): string {
+  return errorCode === "otp_expired"
+    ? "This verification link has expired."
+    : (errorDescription?.replace(/\+/g, " ") ??
+        "This verification link is invalid or has already been used.");
 }
 
 /**
@@ -57,7 +58,7 @@ function computeInitialStage(
 export function EmailVerificationScreen() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { confirmEmail, resendConfirmationEmail, configured } = useAuth();
+  const { confirmEmail, verifyEmailToken, adoptSessionTokens, resendConfirmationEmail, configured } = useAuth();
 
   const [initial] = useState(() => computeInitialStage(searchParams, configured));
   const [stage, setStage] = useState<Stage>(initial.stage);
@@ -65,20 +66,34 @@ export function EmailVerificationScreen() {
   const [email, setEmail] = useState(searchParams.get("email") ?? "");
   const [resending, setResending] = useState(false);
   const [resendFeedback, setResendFeedback] = useState<string | null>(null);
+  const headingRef = useFocusOnShow<HTMLHeadingElement>(stage === "error");
 
   useEffect(() => {
     if (initial.stage !== "verifying") return;
-    // Guaranteed present: computeInitialStage only returns "verifying" when a `code` param exists.
-    const code = searchParams.get("code")!;
+    const link = readLinkCredentials(searchParams, window.location.hash);
 
     let active = true;
-    confirmEmail(code).then((result) => {
+    const verify = async (): Promise<EmailConfirmResult> => {
+      if (link.errorCode) return { ok: false, message: errorMessage(link.errorCode, link.errorDescription) };
+      /* token_hash first: it verifies on any device. A PKCE `code` only works in the browser that requested it. */
+      if (link.tokenHash && (link.type === "signup" || link.type === "email")) {
+        return verifyEmailToken(link.tokenHash, link.type);
+      }
+      if (link.code) return confirmEmail(link.code);
+      if (link.accessToken && link.refreshToken) {
+        return adoptSessionTokens(link.accessToken, link.refreshToken);
+      }
+      return { ok: false, message: errorMessage(null, null) };
+    };
+    verify().then((result) => {
       if (!active) return;
       if (!result.ok) {
         setStage("error");
-        setMessage(result.message ?? "Could not verify your email.");
+        setMessage(friendlyLinkError(result.message, "Could not verify your email."));
         return;
       }
+      /* Single-use credentials do not belong in the address bar, history or a shared screenshot. */
+      stripLinkCredentials();
       setStage("success");
       const destination = roleHomePath(result.role);
       setTimeout(() => {
@@ -137,7 +152,11 @@ export function EmailVerificationScreen() {
         {stage === "error" && (
           <>
             <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-mm-coral-deep" />
-            <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
+            <h1
+              ref={headingRef}
+              tabIndex={-1}
+              className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink outline-none"
+            >
               Link expired or invalid
             </h1>
             <MmErrorPanel>{message}</MmErrorPanel>
