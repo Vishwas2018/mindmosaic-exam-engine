@@ -151,7 +151,7 @@ export function StudentCanvasScreen({
   state?: string;
 }) {
   const router = useRouter();
-  const [viewport, setViewport] = useState<ViewportBucket>(detectViewport);
+  const [viewport, setViewport] = useState<ViewportBucket>("desktop");
 
   useEffect(() => {
     const update = () => setViewport(detectViewport());
