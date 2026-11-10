@@ -1,127 +1,143 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { Home } from "lucide-react";
+import { Calendar, HelpCircle, Home, UserCircle, Users } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
 
-/*
- * Every route a parent owns. /billing was the gap: it is a core parent
- * surface (plan, payment method, invoices, cancel/resume) but the only ways
- * in were a "See plans" link buried in the locked-insights card and a
- * redirect from the — currently dormant — subscription gate. A parent who
- * simply wanted to check what they were paying had no way to navigate
- * there.
+/**
+ * Top-level destinations for the parent portal.
  *
- * There is no fourth item because there is no fourth parent route: the
- * inventory in src/app/dev/routes/page.tsx lists exactly /parent,
- * /parent/children and /billing under "Parent", and this nav now covers all
- * three.
+ * Decision P1 (D-P1): Nav is This week / Children / Account.
+ * Billing sits inside Account (linked to /billing for now).
+ * Help is reachable from the universal header on every page.
  */
-const NAV_LINKS = [
-  { href: "/parent", label: "Dashboard" },
-  { href: "/parent/children", label: "Children" },
-  { href: "/billing", label: "Billing" },
+export const PARENT_NAV_LINKS = [
+  { href: "/parent", label: "This week", icon: Calendar },
+  { href: "/parent/children", label: "Children", icon: Users },
+  { href: "/parent/account", label: "Account", icon: UserCircle },
 ] as const;
 
-/**
- * Shared header/shell for every page under /parent, extracted so
- * src/app/parent/page.tsx and src/app/parent/children/page.tsx don't each
- * carry their own copy of the same header + nav markup.
- */
-export function ParentShell({
-  active,
-  children,
-}: {
-  active: (typeof NAV_LINKS)[number]["href"];
+export type ParentNavKey =
+  | "/parent"
+  | "/parent/children"
+  | "/parent/account"
+  | "/billing";
+
+export interface ParentShellProps {
+  active: ParentNavKey;
   children: ReactNode;
-}) {
+}
+
+/**
+ * Shared app shell for every parent-facing page:
+ * - Desktop (>= lg): Top header with logo, 3-destination nav, "Back to site", Help link, role badge, AuthNav.
+ * - Mobile & Tablet (< lg): Universal top header with logo, Help link, AuthNav + fixed bottom navigation bar
+ *   mirroring the student portal conventions (44×44px touch targets, WCAG 2.5.3 label in name, visible focus rings).
+ */
+export function ParentShell({ active, children }: ParentShellProps) {
+  // If active is /billing, it highlights Account since Billing lives inside Account
+  const isNavActive = (href: (typeof PARENT_NAV_LINKS)[number]["href"]) => {
+    if (active === href) return true;
+    if (href === "/parent/account" && active === "/billing") return true;
+    return false;
+  };
+
   return (
     <div className="min-h-screen bg-page">
-      <header className="border-b border-royal/8 bg-white">
+      <header className="sticky top-0 z-30 border-b border-royal/8 bg-white/95 backdrop-blur-md">
         <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
-          <Link
-            href="/"
-            aria-label="MindMosaic home"
-            className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <MindMosaicLogo size="md" />
-          </Link>
-          {/*
-            `xl`, not `sm`: with Billing and Back to site added, four links
-            plus the logo, the role badge and the account name measurably
-            overflow the header row between 640px and 1024px — the compact
-            row below covers that range instead. Was `lg` (1024px), matching
-            StudentShell's original choice, but that's exactly where this
-            nav turns on: e2e-auth CI (Linux, 2026-09-21) measured real
-            overflow at 1024px even on the empty-state fixture (no long
-            name involved) — see StudentShell.tsx, which needed the same
-            `xl` bump for the same reason.
-          */}
-          <nav aria-label="Parent" className="hidden items-center gap-1 xl:flex">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={active === link.href ? "page" : undefined}
-                className={`rounded-xl px-4 py-2 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
-                  active === link.href ? "bg-royal/10 text-royal" : "text-muted hover:text-royal"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            {/* The logo is a link home too, but a logo is not a signposted
-                way out — this is. */}
+          <div className="flex items-center gap-8">
             <Link
               href="/"
-              className="ml-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-xl border-l border-royal/10 px-4 py-2 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              aria-label="MindMosaic home"
+              className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
             >
-              <Home aria-hidden="true" className="h-4 w-4" />
-              Back to site
+              <MindMosaicLogo size="md" />
             </Link>
-          </nav>
-          <div className="flex items-center gap-3">
+
+            {/* Desktop Navigation (>= lg) */}
+            <nav aria-label="Parent" className="hidden items-center gap-1 lg:flex">
+              {PARENT_NAV_LINKS.map((item) => {
+                const isActive = isNavActive(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`inline-flex min-h-11 items-center rounded-xl px-4 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                      isActive
+                        ? "bg-royal/10 text-royal"
+                        : "text-muted hover:bg-royal/5 hover:text-royal"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              <Link
+                href="/"
+                className="ml-1 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-xl border-l border-royal/10 px-4 text-sm font-bold text-muted transition-colors hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              >
+                <Home aria-hidden="true" className="h-4 w-4" />
+                Back to site
+              </Link>
+            </nav>
+          </div>
+
+          {/* Right Header Cluster: Help, Parent Badge, Auth */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              href="/parent/help"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            >
+              <HelpCircle aria-hidden="true" className="h-4 w-4" />
+              <span>Help</span>
+            </Link>
+
             <Badge variant="purple" className="hidden sm:inline-flex">
               Parent
             </Badge>
-            {/* The parent nav above already links the parent dashboard. */}
+
             <AuthNav showRoleHome={false} />
           </div>
         </div>
-        {/*
-          The nav above was `hidden sm:flex`, which left every parent below
-          640px with no way to reach Children or Billing at all — a
-          display:none nav is skipped by Tab too, so it was not merely a
-          visual loss. Same links, always rendered, wrapping rather than
-          hiding, for every width the wide nav doesn't cover.
-        */}
-        <nav aria-label="Parent, compact" className="site-width flex flex-wrap gap-1 pb-3 xl:hidden">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              aria-current={active === link.href ? "page" : undefined}
-              className={`rounded-full px-4 py-1.5 text-sm font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
-                active === link.href ? "bg-royal/10 text-royal" : "text-muted hover:text-royal"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold text-muted transition-colors hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <Home aria-hidden="true" className="h-4 w-4" />
-            Back to site
-          </Link>
-        </nav>
       </header>
-      <main id="main-content" className="site-width py-10 sm:py-12">
+
+      {/* Main Content Area: pb-28 below lg to prevent overlap with bottom navigation */}
+      <main id="main-content" className="site-width py-8 sm:py-10 pb-28 lg:pb-12">
         <div className="mx-auto max-w-5xl">{children}</div>
       </main>
+
+      {/* Mobile/Tablet Bottom Navigation Bar (< lg) */}
+      <nav
+        aria-label="Parent navigation, mobile"
+        className="fixed bottom-0 inset-x-0 z-40 border-t border-royal/10 bg-white/95 backdrop-blur-md shadow-[0_-4px_16px_rgba(49,32,86,0.06)] lg:hidden"
+      >
+        <div className="site-width grid grid-cols-3 gap-1 py-1.5">
+          {PARENT_NAV_LINKS.map((item) => {
+            const Icon = item.icon;
+            const isActive = isNavActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl p-1 transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                  isActive
+                    ? "bg-royal/10 font-extrabold text-royal"
+                    : "font-semibold text-muted hover:bg-royal/5 hover:text-royal"
+                }`}
+              >
+                <Icon aria-hidden="true" className="h-5 w-5" />
+                <span className="text-xs">{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }

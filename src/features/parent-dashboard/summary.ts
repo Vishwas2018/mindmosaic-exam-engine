@@ -82,6 +82,8 @@ export interface SubjectSummary {
   marksEarned: number;
   marksAvailable: number;
   questionCount: number;
+  /** Count of distinct finished papers that contributed marks to this subject. */
+  paperCount: number;
 }
 
 export interface WeekDay {
@@ -342,19 +344,23 @@ export function buildChildSummary(
 
   const subjectTotals = new Map<
     string,
-    { earned: number; available: number; questionCount: number }
+    { earned: number; available: number; questionCount: number; paperCount: number }
   >();
   for (const attempt of evaluableAttempts) {
     for (const [subject, row] of Object.entries(attempt.result.breakdowns.bySubject)) {
-      const totals = subjectTotals.get(subject) ?? {
-        earned: 0,
-        available: 0,
-        questionCount: 0,
-      };
-      totals.earned += row.objectiveMarksEarned;
-      totals.available += row.objectiveMarksAvailable;
-      totals.questionCount += row.total;
-      subjectTotals.set(subject, totals);
+      if (row.total > 0 || row.objectiveMarksAvailable > 0) {
+        const totals = subjectTotals.get(subject) ?? {
+          earned: 0,
+          available: 0,
+          questionCount: 0,
+          paperCount: 0,
+        };
+        totals.earned += row.objectiveMarksEarned;
+        totals.available += row.objectiveMarksAvailable;
+        totals.questionCount += row.total;
+        totals.paperCount += 1;
+        subjectTotals.set(subject, totals);
+      }
     }
   }
   const subjects: SubjectSummary[] = [...subjectTotals.entries()]
@@ -366,6 +372,7 @@ export function buildChildSummary(
       marksEarned: totals.earned,
       marksAvailable: totals.available,
       questionCount: totals.questionCount,
+      paperCount: totals.paperCount,
     }))
     .sort((a, b) => (b.percentage ?? -1) - (a.percentage ?? -1));
 

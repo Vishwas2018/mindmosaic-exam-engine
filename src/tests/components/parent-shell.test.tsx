@@ -2,7 +2,10 @@ import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { AuthProvider } from "@/features/auth";
-import { ParentShell } from "@/features/parent-dashboard/components/ParentShell";
+import {
+  ParentShell,
+  type ParentNavKey,
+} from "@/features/parent-dashboard/components/ParentShell";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }),
@@ -27,9 +30,7 @@ vi.mock("@/lib/supabase/client", () => ({
   }),
 }));
 
-type Active = "/parent" | "/parent/children" | "/billing";
-
-function renderShell(active: Active) {
+function renderShell(active: ParentNavKey) {
   return render(
     <AuthProvider>
       <ParentShell active={active}>
@@ -39,12 +40,7 @@ function renderShell(active: Active) {
   );
 }
 
-/**
- * Two navs render at once — the wide one and the compact row that replaces
- * it below `sm` — so every assertion is scoped to one of them by its
- * accessible name rather than searching the whole document.
- */
-function nav(name: "Parent" | "Parent, compact") {
+function nav(name: "Parent" | "Parent navigation, mobile") {
   return within(screen.getByRole("navigation", { name }));
 }
 
@@ -54,72 +50,65 @@ describe("ParentShell", () => {
     expect(screen.getByText("page body")).toBeInTheDocument();
   });
 
-  /*
-   * /billing is a core parent surface that the nav did not expose at all:
-   * the only ways in were a "See plans" link inside the locked-insights
-   * card and a redirect from the subscription gate, so a parent could not
-   * navigate to their own billing page.
-   */
-  it.each(["Parent", "Parent, compact"] as const)(
-    "exposes every parent route in the %s nav",
+  it.each(["Parent", "Parent navigation, mobile"] as const)(
+    "exposes This week, Children, and Account in the %s nav",
     (navName) => {
       renderShell("/parent");
-      expect(nav(navName).getByRole("link", { name: "Dashboard" })).toHaveAttribute(
+      expect(nav(navName).getByRole("link", { name: /this week/i })).toHaveAttribute(
         "href",
         "/parent",
       );
-      expect(nav(navName).getByRole("link", { name: "Children" })).toHaveAttribute(
+      expect(nav(navName).getByRole("link", { name: /children/i })).toHaveAttribute(
         "href",
         "/parent/children",
       );
-      expect(nav(navName).getByRole("link", { name: "Billing" })).toHaveAttribute(
+      expect(nav(navName).getByRole("link", { name: /account/i })).toHaveAttribute(
         "href",
-        "/billing",
+        "/parent/account",
       );
     },
   );
 
   it("marks the active nav link with aria-current", () => {
     renderShell("/parent/children");
-    expect(nav("Parent").getByRole("link", { name: "Children" })).toHaveAttribute(
+    expect(nav("Parent").getByRole("link", { name: /children/i })).toHaveAttribute(
       "aria-current",
       "page",
     );
-    expect(nav("Parent").getByRole("link", { name: "Dashboard" })).not.toHaveAttribute(
+    expect(nav("Parent").getByRole("link", { name: /this week/i })).not.toHaveAttribute(
       "aria-current",
+    );
+    expect(nav("Parent navigation, mobile").getByRole("link", { name: /children/i })).toHaveAttribute(
+      "aria-current",
+      "page",
     );
   });
 
-  it("marks Billing as the active link on the billing route", () => {
+  it("marks Account as active when viewing the billing route", () => {
     renderShell("/billing");
-    expect(nav("Parent").getByRole("link", { name: "Billing" })).toHaveAttribute(
+    expect(nav("Parent").getByRole("link", { name: /account/i })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(nav("Parent navigation, mobile").getByRole("link", { name: /account/i })).toHaveAttribute(
       "aria-current",
       "page",
     );
   });
 
-  /*
-   * The logo links home, but a logo is a brand mark before it is a
-   * signpost — a signed-in parent needs a labelled way back to the public
-   * site.
-   */
-  it.each(["Parent", "Parent, compact"] as const)(
-    "offers a labelled way back to the public site in the %s nav",
-    (navName) => {
-      renderShell("/parent");
-      expect(nav(navName).getByRole("link", { name: /back to site/i })).toHaveAttribute("href", "/");
-    },
-  );
-
-  /*
-   * The wide nav is `hidden sm:flex`, and a display:none nav is skipped by
-   * Tab as well as hidden — so without this row a parent on a phone could
-   * reach none of their own routes.
-   */
-  it("keeps every destination reachable below the sm breakpoint", () => {
+  it("offers a labelled way back to the public site in the desktop nav", () => {
     renderShell("/parent");
-    const compact = screen.getByRole("navigation", { name: "Parent, compact" });
-    expect(compact).not.toHaveClass("hidden");
-    expect(within(compact).getAllByRole("link")).toHaveLength(4);
+    expect(nav("Parent").getByRole("link", { name: /back to site/i })).toHaveAttribute("href", "/");
+  });
+
+  it("makes Help reachable from the header on every screen", () => {
+    renderShell("/parent");
+    const helpLink = screen.getByRole("link", { name: /help/i });
+    expect(helpLink).toHaveAttribute("href", "/parent/help");
+  });
+
+  it("includes the Parent role badge", () => {
+    renderShell("/parent");
+    expect(screen.getByText("Parent")).toBeInTheDocument();
   });
 });
