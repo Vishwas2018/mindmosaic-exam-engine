@@ -25,13 +25,19 @@ export default async function ChildWritingPage({
 }) {
   const { childId } = await params;
 
-  if (!isSupabaseConfigured) redirect("/parent");
+  if (!isSupabaseConfigured) {
+    redirect("/parent");
+    return null;
+  }
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/sign-in");
+  if (!user) {
+    redirect("/sign-in");
+    return null;
+  }
 
   // Load child profile to verify relationship and display name
   const { data: childProfile, error: childError } = await supabase
@@ -42,6 +48,7 @@ export default async function ChildWritingPage({
 
   if (childError || !childProfile) {
     redirect("/parent/children");
+    return null;
   }
 
   const childName = childProfile.display_name?.trim() || "Your child";

@@ -17,17 +17,16 @@ vi.mock("@/lib/supabase/config", () => ({
   SUPABASE_NOT_CONFIGURED_MESSAGE: "not configured",
 }));
 
-const mockResolveDefaultChildId = vi.hoisted(() => vi.fn());
-vi.mock("@/features/parent-dashboard/queries", () => ({
-  resolveDefaultChildId: mockResolveDefaultChildId,
-}));
-
 vi.mock("@/server/writing/tasks", () => ({
   listWritingTasks: () => [{ id: "task-1", title: "Narrative prompt" }],
 }));
 
+const mockLoadLinkedChildren = vi.hoisted(() => vi.fn());
+const mockLoadWritingHistory = vi.hoisted(() => vi.fn());
+
 vi.mock("@/server/writing/queries", () => ({
-  loadWritingHistory: async () => [],
+  loadLinkedChildren: mockLoadLinkedChildren,
+  loadWritingHistory: mockLoadWritingHistory,
 }));
 
 vi.mock("@/lib/supabase/server", () => ({
@@ -48,35 +47,41 @@ vi.mock("@/lib/supabase/server", () => ({
   })),
 }));
 
-import ParentWritingRedirectPage from "@/app/parent/writing/page";
+import ParentWritingPage from "@/app/parent/writing/page";
 import ChildWritingPage from "@/app/parent/children/[childId]/writing/page";
 
-describe("ParentWritingRedirectPage & ChildWritingPage", () => {
+describe("ParentWritingPage & ChildWritingPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  describe("ParentWritingRedirectPage", () => {
-    it("redirects to child writing route when a default child is found", async () => {
-      mockIsSupabaseConfigured.value = true;
-      mockResolveDefaultChildId.mockResolvedValueOnce("child-99");
-
-      await ParentWritingRedirectPage();
-      expect(mockRedirect).toHaveBeenCalledWith("/parent/children/child-99/writing");
+  describe("ParentWritingPage (Legacy compatibility)", () => {
+    it("redirects to /parent when Supabase is not configured", async () => {
+      mockIsSupabaseConfigured.value = false;
+      await ParentWritingPage();
+      expect(mockRedirect).toHaveBeenCalledWith("/parent");
     });
 
-    it("redirects to /parent/children when no default child is found", async () => {
+    it("renders writing list for all linked children without redirecting to an arbitrary child", async () => {
       mockIsSupabaseConfigured.value = true;
-      mockResolveDefaultChildId.mockResolvedValueOnce(null);
+      mockLoadLinkedChildren.mockResolvedValueOnce([
+        { id: "child-1", name: "Aisha" },
+        { id: "child-2", name: "Kiran" },
+      ]);
+      mockLoadWritingHistory.mockResolvedValueOnce([
+        { id: "att-1", studentId: "child-1", taskId: "task-1", submittedAt: "2026-11-01" },
+      ]);
 
-      await ParentWritingRedirectPage();
-      expect(mockRedirect).toHaveBeenCalledWith("/parent/children");
+      const element = await ParentWritingPage();
+      expect(element).toBeDefined();
+      expect(mockRedirect).not.toHaveBeenCalled();
     });
   });
 
   describe("ChildWritingPage", () => {
     it("renders child writing page for a valid child", async () => {
       mockIsSupabaseConfigured.value = true;
+      mockLoadWritingHistory.mockResolvedValueOnce([]);
       const element = await ChildWritingPage({
         params: Promise.resolve({ childId: "child-1" }),
       });
