@@ -21,17 +21,7 @@ export const metadata: Metadata = {
 
 export default async function StudentLayout({ children }: { children: ReactNode }) {
   if (await isStudentPreviewEnabled()) {
-    return (
-      <div className="relative min-h-screen">
-        <div
-          role="status"
-          className="border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-center text-xs font-medium text-amber-900"
-        >
-          <strong className="font-bold">Student Workspace Preview:</strong> Showing sample student experience (Aisha Raman · Year 3) in local preview mode. No live student records or auth are accessed.
-        </div>
-        {children}
-      </div>
-    );
+    return <>{children}</>;
   }
 
   const gate = await requireRole("student", "/student");

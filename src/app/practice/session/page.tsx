@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { ErrorState, buttonClasses } from "@/components/ui";
+import { StudentCanvasScreen } from "@/features/student/canvas/StudentCanvasScreen";
 import { SUBJECT_LABELS } from "@/features/exam-engine/components/describe-config";
 import {
   PracticeSession,
@@ -59,6 +60,12 @@ function buildSeed(params: {
 
 function PracticeSkillSessionContent() {
   const searchParams = useSearchParams();
+  const canvasState = searchParams.get("state");
+  const isCanvasPreview =
+    !searchParams.has("subject") &&
+    !searchParams.has("launchId") &&
+    Boolean(canvasState);
+
   const parsedParams = useMemo(
     () => parsePracticeSessionParams(searchParams),
     [searchParams],
@@ -131,6 +138,10 @@ function PracticeSkillSessionContent() {
       cancelled = true;
     };
   }, [isValidSession, parsedParams, searchParams]);
+
+  if (isCanvasPreview) {
+    return <StudentCanvasScreen screen="runner" state={canvasState ?? undefined} />;
+  }
 
   // 1. Handle invalid query parameters
   if (!parsedParams.ok) {

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PracticeStudioHero } from "@/features/student/components/practice-studio/PracticeStudioHero";
 import { PracticeStudioHistory } from "@/features/student/components/practice-studio/PracticeStudioHistory";
 import { PracticeStudioSelector } from "@/features/student/components/practice-studio/PracticeStudioSelector";
+import { StudentCanvasScreen } from "@/features/student/canvas/StudentCanvasScreen";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { fetchStudentOverview } from "@/features/student/data";
@@ -34,6 +35,10 @@ export default async function StudentPracticeStudioPage({
   const resolvedParams = searchParams ? await searchParams : {};
   const forcedState = resolvedParams.state;
   const isPreview = await isStudentPreviewEnabled();
+
+  if (isPreview) {
+    return <StudentCanvasScreen screen="practice" state={forcedState} />;
+  }
 
   const student = await requireStudent();
   const overview = await fetchStudentOverview();

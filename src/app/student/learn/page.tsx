@@ -6,9 +6,11 @@ import {
 } from "@/features/curriculum/lessons";
 import { LearningHubHero } from "@/features/student/components/learning-hub/LearningHubHero";
 import { LearningHubExplorer } from "@/features/student/components/learning-hub/LearningHubExplorer";
+import { StudentCanvasScreen } from "@/features/student/canvas/StudentCanvasScreen";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { fetchStudentOverview } from "@/features/student/data";
+import { isStudentPreviewEnabled } from "@/features/student/preview-mode";
 import { requireStudent } from "@/features/student/require-student";
 
 export const metadata: Metadata = { title: "Learning Hub" };
@@ -27,7 +29,16 @@ export const dynamic = "force-dynamic";
  * - Unused Stitch mock components (UnitSpotlight, LabSpotlight, ResourceStrips)
  *   are no longer rendered; files remain in tree for the cleanup PR.
  */
-export default async function StudentLearnPage() {
+export default async function StudentLearnPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ state?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  if (await isStudentPreviewEnabled()) {
+    return <StudentCanvasScreen screen="learn-hub" state={resolvedParams.state} />;
+  }
+
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
   const shellData = await fetchStudentPortalShellData(student);

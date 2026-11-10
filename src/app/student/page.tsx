@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 
+import {
+  MySpaceCanvasScreen,
+  resolveMySpaceState,
+} from "@/features/student/components/my-space/MySpaceCanvasScreen";
 import { MySpaceHero } from "@/features/student/components/my-space/MySpaceHero";
 import { MySpacePathways } from "@/features/student/components/my-space/MySpacePathways";
 import { MySpaceProgress } from "@/features/student/components/my-space/MySpaceProgress";
@@ -40,6 +44,10 @@ export default async function StudentHomePage({
   const resolvedParams = searchParams ? await searchParams : {};
   const forcedState = resolvedParams.state;
   const isPreview = await isStudentPreviewEnabled();
+
+  if (isPreview) {
+    return <MySpaceCanvasScreen state={resolveMySpaceState(forcedState)} />;
+  }
 
   const student = await requireStudent();
   const overview = await fetchStudentOverview();

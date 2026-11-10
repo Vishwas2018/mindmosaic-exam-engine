@@ -4,14 +4,17 @@ import { ArrowLeft, BookX } from "lucide-react";
 import { getPublishedLessons, getLessonByCode } from "@/features/curriculum/lessons";
 import { LessonView } from "@/features/curriculum/lessons/components";
 import { resolveQuestionsForCurriculumNode } from "@/features/curriculum/lessons/resolver";
+import { StudentCanvasScreen } from "@/features/student/canvas/StudentCanvasScreen";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
+import { isStudentPreviewEnabled } from "@/features/student/preview-mode";
 import { requireStudent } from "@/features/student/require-student";
 
 export const dynamic = "force-dynamic";
 
 interface LessonPageProps {
   params: Promise<{ code: string }>;
+  searchParams?: Promise<{ state?: string }>;
 }
 
 export async function generateMetadata({ params }: LessonPageProps): Promise<Metadata> {
@@ -25,7 +28,12 @@ export async function generateMetadata({ params }: LessonPageProps): Promise<Met
   };
 }
 
-export default async function StudentLessonDetailPage({ params }: LessonPageProps) {
+export default async function StudentLessonDetailPage({ params, searchParams }: LessonPageProps) {
+  const resolvedSearch = searchParams ? await searchParams : {};
+  if (await isStudentPreviewEnabled()) {
+    return <StudentCanvasScreen screen="learn-lesson" state={resolvedSearch.state} />;
+  }
+
   const student = await requireStudent();
   const shellData = await fetchStudentPortalShellData(student);
   const { code } = await params;

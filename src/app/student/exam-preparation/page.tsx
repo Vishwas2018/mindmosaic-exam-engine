@@ -7,9 +7,11 @@ import { JurisdictionPicker } from "@/features/student/components/JurisdictionPi
 import { ExamCentreAdviceCard } from "@/features/student/components/exam-centre/ExamCentreAdviceCard";
 import { ExamCentreBatterySpotlight } from "@/features/student/components/exam-centre/ExamCentreBatterySpotlight";
 import { ExamCentreHero } from "@/features/student/components/exam-centre/ExamCentreHero";
+import { StudentCanvasScreen } from "@/features/student/canvas/StudentCanvasScreen";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { fetchStudentOverview } from "@/features/student/data";
+import { isStudentPreviewEnabled } from "@/features/student/preview-mode";
 import { requireStudent } from "@/features/student/require-student";
 
 export const metadata: Metadata = { title: "Exam Centre" };
@@ -92,7 +94,16 @@ function formatDate(iso: string): string {
     : date.toLocaleDateString("en-AU", { day: "numeric", month: "short" });
 }
 
-export default async function StudentExamPreparationPage() {
+export default async function StudentExamPreparationPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ state?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  if (await isStudentPreviewEnabled()) {
+    return <StudentCanvasScreen screen="exams" state={resolvedParams.state} />;
+  }
+
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
   const shellData = await fetchStudentPortalShellData(student);

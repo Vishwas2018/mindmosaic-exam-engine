@@ -9,9 +9,11 @@ import { MyProgressHero } from "@/features/student/components/progress/MyProgres
 import { MyProgressInsightCard } from "@/features/student/components/progress/MyProgressInsightCard";
 import { MyProgressMasteryBoard } from "@/features/student/components/progress/MyProgressMasteryBoard";
 import { MyProgressSessionsTable } from "@/features/student/components/progress/MyProgressSessionsTable";
+import { StudentCanvasScreen } from "@/features/student/canvas/StudentCanvasScreen";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { fetchStudentOverview } from "@/features/student/data";
+import { isStudentPreviewEnabled } from "@/features/student/preview-mode";
 import { requireStudent } from "@/features/student/require-student";
 
 export const metadata: Metadata = {
@@ -47,7 +49,16 @@ export const dynamic = "force-dynamic";
  * consistent with Dashboard/Learning Hub/Exam Centre's behaviour in that
  * edge case.
  */
-export default async function StudentEngagementPage() {
+export default async function StudentEngagementPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ state?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  if (await isStudentPreviewEnabled()) {
+    return <StudentCanvasScreen screen="progress" state={resolvedParams.state} />;
+  }
+
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
   const shellData = await fetchStudentPortalShellData(student);
