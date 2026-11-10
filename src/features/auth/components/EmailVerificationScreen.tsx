@@ -97,7 +97,6 @@ export function EmailVerificationScreen() {
       setStage("success");
       const destination = roleHomePath(result.role);
       setTimeout(() => {
-        if (!active) return;
         router.push(destination);
         router.refresh();
       }, 1200);

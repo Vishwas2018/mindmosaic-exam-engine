@@ -2,7 +2,7 @@
  * Helpers for querying Mailpit (Supabase's local mail catcher at port 56324).
  * Allows e2e tests to inspect real confirmation and password-reset emails sent by GoTrue.
  */
-const MAILPIT_URL = "http://127.0.0.1:56324";
+const MAILPIT_URL = process.env.E2E_MAILPIT_URL ?? "http://127.0.0.1:56324";
 
 export interface CapturedEmail {
   id: string;
