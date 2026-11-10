@@ -108,7 +108,7 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
     expect(screen.getByText(/this password reset link has expired/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /request a new reset link/i })).toHaveAttribute(
       "href",
-      "/sign-in?mode=forgot",
+      "/auth/forgot",
     );
     expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
   });
@@ -164,7 +164,7 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
     expect(screen.queryByLabelText(/new password/i)).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /request a new reset link/i })).toHaveAttribute(
       "href",
-      "/sign-in?mode=forgot",
+      "/auth/forgot",
     );
   });
 

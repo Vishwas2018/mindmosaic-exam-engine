@@ -209,7 +209,7 @@ export default function ResetPasswordPage() {
             {problem.text}
           </p>
           <Link
-            href="/sign-in?mode=forgot"
+            href="/auth/forgot"
             className={mmAuthButton({ className: "mt-6 w-full" })}
           >
             Request a new reset link
