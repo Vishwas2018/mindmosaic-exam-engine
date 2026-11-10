@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "### Error\nTimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Back to canvas' }) to be hidden\u001b[22m\n\u001b[2m    57 × locator resolved to visible <button type=\"button\" data-tb-hit=\"\" data-cds=\"Button\" data-cds-ghost=\"\" data-view-control=\"\" data-cds-icon-only=\"\" aria-keyshortcuts=\"Escape\" aria-describedby=\"_r_3e7_\" aria-label=\"Back to canvas\" data-testid=\"mega-collapse\" class=\"cds-reset group/btn relative isolate inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap select-none cursor-[var(--cds-cursor-interactive)] aria-disabled:cursor-default data-[disabled]:cursor-default border-0 outline-none focus-visible:outline-hidden…>…</button>\u001b[22m\n"
+    }
+  ],
+  "isError": true
+}

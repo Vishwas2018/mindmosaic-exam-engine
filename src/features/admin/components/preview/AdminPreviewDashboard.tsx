@@ -18,12 +18,12 @@ import {
   Check,
   X,
   AlertTriangle,
-  ArrowRight,
-  ExternalLink,
-  ChevronRight,
   Info,
   Layers,
   Sparkles,
+  Menu,
+  RotateCcw,
+  Lock,
 } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
 import {
@@ -45,7 +45,18 @@ export type AdminView =
   | "writing"
   | "support"
   | "activity"
-  | "governance";
+  | "governance"
+  | "states";
+
+export type AdminStateSubView =
+  | "library_states"
+  | "review_states"
+  | "approve_states"
+  | "paper_states"
+  | "publish_states"
+  | "writing_states"
+  | "support_states"
+  | "activity_states";
 
 export interface AdminPreviewDashboardProps {
   initialView?: AdminView;
@@ -61,6 +72,8 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
   );
   const [approvedItems, setApprovedItems] = useState<Record<string, boolean>>({});
   const [demoNotice, setDemoNotice] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeStateSubView, setActiveStateSubView] = useState<AdminStateSubView>("library_states");
 
   const filteredQuestions = PREVIEW_ADMIN_QUESTIONS.filter((q) => {
     if (selectedYear !== "all" && q.yearLevel !== selectedYear) return false;
@@ -90,9 +103,19 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
           <strong className="font-bold">Admin Preview:</strong> Interactive visual states from Claude Design export (b0–b26) in local preview mode. All approval, publishing, and support actions are isolated demonstrations (no database or ledger writes).
         </div>
         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <MindMosaicLogo size="sm" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-royal/15 bg-white text-royal hover:bg-royal/5"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+            <Link href="/" className="inline-flex items-center gap-2">
+              <MindMosaicLogo size="sm" />
+            </Link>
+          </div>
 
           {/* Artboard switcher pills */}
           <div className="flex flex-wrap items-center gap-1 text-xs">
@@ -108,6 +131,7 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
               { id: "support", label: "Support (b18–b20)" },
               { id: "activity", label: "Activity (b21–b22)" },
               { id: "governance", label: "Governance Map (b23)" },
+              { id: "states", label: "State Boards (8 artboards)" },
             ].map((art) => (
               <button
                 key={art.id}
@@ -129,6 +153,50 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
         </div>
       </header>
 
+      {/* Mobile Drawer (visible when mobileMenuOpen is true on < md screens) */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-b border-royal/10 bg-white p-4 shadow-md space-y-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#6e6779]">
+            Admin Workspace Sections
+          </p>
+          <div className="grid grid-cols-2 gap-1.5">
+            {[
+              { id: "overview", label: "Overview", icon: LayoutDashboard },
+              { id: "library", label: "Question library", icon: BookOpen },
+              { id: "review", label: "Question review", icon: FileSearch },
+              { id: "approval", label: "Human approval", icon: CheckCircle2 },
+              { id: "paper", label: "Paper review", icon: FileText },
+              { id: "publication", label: "Publication", icon: UploadCloud },
+              { id: "writing", label: "Writing review", icon: PenTool },
+              { id: "support", label: "Support inquiries", icon: LifeBuoy },
+              { id: "activity", label: "Activity log", icon: History },
+              { id: "governance", label: "Governance map", icon: ShieldCheck },
+              { id: "states", label: "State Boards", icon: Layers },
+            ].map((item) => {
+              const Icon = item.icon;
+              const isActive = currentView === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => {
+                    setCurrentView(item.id as AdminView);
+                    setMobileMenuOpen(false);
+                    setDemoNotice(null);
+                  }}
+                  className={`flex items-center gap-2 rounded-xl p-2.5 text-xs font-semibold text-left transition ${
+                    isActive ? "bg-royal text-white" : "text-[#1f1b24] bg-royal/5 hover:bg-royal/10"
+                  }`}
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  <span className="truncate">{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Main Admin Workspace Shell: Sidebar + Content */}
       <div className="flex-1 flex max-w-7xl w-full mx-auto">
         {/* Admin Navigation Sidebar (aw__side) */}
@@ -149,6 +217,7 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
                 { id: "support", label: "Support inquiries", icon: LifeBuoy, count: 3 },
                 { id: "activity", label: "Activity history", icon: History },
                 { id: "governance", label: "Governance path", icon: ShieldCheck },
+                { id: "states", label: "State boards (b4-b22)", icon: Layers },
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = currentView === item.id;
@@ -783,6 +852,11 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
                 </p>
               </div>
 
+              <div className="rounded-xl border border-royal/10 bg-royal/[0.02] p-3 text-xs text-[#6e6779] flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-royal shrink-0" />
+                <span>Privacy boundary enforced: Student names and identifying details are scrubbed for blind rubric evaluation.</span>
+              </div>
+
               <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
                 <div className="flex items-center justify-between">
                   <h2 className="text-sm font-bold text-[#1f1b24]">Prompt: The Hidden Key Under the Old Oak</h2>
@@ -791,10 +865,10 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
                   </span>
                 </div>
                 <p className="text-xs text-[#6e6779] italic bg-royal/[0.02] p-3 rounded-xl border border-royal/10">
-                  &ldquo;Once upon a time Aisha was walking through the botanic gardens when she saw a glint of gold under a giant oak tree...&rdquo;
+                  &ldquo;Once upon a time the explorer was walking through the botanic gardens when they saw a glint of gold under a giant oak tree...&rdquo;
                 </p>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#6e6779]">Student: Aisha Raman · Submitted 2 days ago</span>
+                  <span className="text-[#6e6779]">Submission: REDACTED-STU-042 (Blind Review Privacy Protected) · Submitted 2 days ago</span>
                   <button
                     type="button"
                     onClick={() =>
@@ -821,6 +895,11 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
                 <p className="mt-1 text-xs text-[#6e6779]">
                   Direct family queries regarding curriculum questions, practice sessions, or account setup.
                 </p>
+              </div>
+
+              <div className="rounded-xl border border-royal/10 bg-royal/[0.02] p-3 text-xs text-[#6e6779] flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-royal shrink-0" />
+                <span>Privacy boundary: Student identities, private responses, and parent emails are masked. Triage does not open student profiles.</span>
               </div>
 
               <div className="space-y-4">
@@ -939,6 +1018,372 @@ export function AdminPreviewDashboard({ initialView = "overview" }: AdminPreview
                   ))}
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* VIEW: STATE BOARDS (b4, b7, b10, b12, b14, b17, b20, b22) */}
+          {currentView === "states" && (
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-2xl font-extrabold tracking-tight text-[#1f1b24]">
+                  Approved State Boards & Edge Cases
+                </h1>
+                <p className="mt-1 text-xs text-[#6e6779]">
+                  Faithful rendering of the 8 design state artboards: Loading skeletons, empty queues vs filter no-matches, error retry, permission denial, stale revisions, and privacy boundaries.
+                </p>
+              </div>
+
+              {/* Sub-navigation for the 8 state boards */}
+              <div className="flex flex-wrap gap-1.5 border-b border-royal/10 pb-3">
+                {[
+                  { id: "library_states", label: "Overview & Library (b4)" },
+                  { id: "review_states", label: "Review States (b7)" },
+                  { id: "approve_states", label: "Approve States (b10)" },
+                  { id: "paper_states", label: "Paper States (b12)" },
+                  { id: "publish_states", label: "Publish States (b14)" },
+                  { id: "writing_states", label: "Writing States (b17)" },
+                  { id: "support_states", label: "Support States (b20)" },
+                  { id: "activity_states", label: "Activity States (b22)" },
+                ].map((st) => (
+                  <button
+                    key={st.id}
+                    type="button"
+                    onClick={() => setActiveStateSubView(st.id as AdminStateSubView)}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                      activeStateSubView === st.id
+                        ? "bg-royal text-white shadow-xs"
+                        : "bg-royal/5 text-royal hover:bg-royal/10"
+                    }`}
+                  >
+                    {st.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* 1. Overview & Library States (b4) */}
+              {activeStateSubView === "library_states" && (
+                <div className="space-y-6">
+                  <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
+                    <h2 className="text-sm font-bold text-[#1f1b24] flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-royal" />
+                      1 · Loading State (Skeletons)
+                    </h2>
+                    <p className="text-xs text-[#6e6779]">
+                      Animated pulse placeholders for metric cards and question library rows while authentic reads load.
+                    </p>
+                    <div className="grid gap-3 sm:grid-cols-4">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="animate-pulse rounded-xl border border-royal/10 bg-royal/5 p-4 space-y-2">
+                          <div className="h-3 w-20 bg-royal/15 rounded" />
+                          <div className="h-6 w-12 bg-royal/20 rounded" />
+                          <div className="h-2 w-28 bg-royal/10 rounded" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-teal-200 bg-teal-50/50 p-6 shadow-xs space-y-3">
+                      <div className="flex items-center gap-2 text-teal-800 font-bold text-sm">
+                        <Check className="h-4 w-4" />
+                        Queue Cleared — Nothing Waiting
+                      </div>
+                      <p className="text-xs text-teal-900 font-medium">
+                        Every agent-reviewed question has a human decision. Come back when the generator runs again.
+                      </p>
+                      <p className="text-[11px] text-[#6e6779]">
+                        An empty queue is celebrated progress; it never shares wording with an empty filter.
+                      </p>
+                    </div>
+
+                    <div className="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-xs space-y-3">
+                      <div className="flex items-center gap-2 text-amber-800 font-bold text-sm">
+                        <Filter className="h-4 w-4" />
+                        No Match for the Filter
+                      </div>
+                      <p className="text-xs text-amber-900 font-medium">
+                        No questions match these filters. Nothing is wrong — try widening the year or clearing a filter.
+                      </p>
+                      <p className="text-[11px] text-[#6e6779]">
+                        Distinguished clearly from zero content in the question bank.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-6 shadow-xs space-y-3">
+                      <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                        <AlertTriangle className="h-4 w-4" />
+                        Could Not Load Queue
+                      </div>
+                      <p className="text-xs text-rose-900 font-medium">
+                        We couldn’t load the queue. Nothing has changed. No question was approved or published.
+                      </p>
+                      <button
+                        type="button"
+                        className="inline-flex items-center gap-1.5 rounded-xl border border-rose-300 bg-white px-3 py-1 text-xs font-bold text-rose-800 hover:bg-rose-50"
+                      >
+                        <RotateCcw className="h-3.5 w-3.5" />
+                        Try again
+                      </button>
+                    </div>
+
+                    <div className="rounded-2xl border border-purple-200 bg-purple-50/50 p-6 shadow-xs space-y-3">
+                      <div className="flex items-center gap-2 text-purple-800 font-bold text-sm">
+                        <Lock className="h-4 w-4" />
+                        Signed in, Wrong Role (Permission Denied)
+                      </div>
+                      <p className="text-xs text-purple-900 font-medium">
+                        This area is for reviewers. Your account doesn’t have review access. If this is wrong, ask an administrator.
+                      </p>
+                      <p className="text-[11px] text-[#6e6779]">
+                        A non-admin who reaches /admin is clearly informed and guided to their own home rather than an empty shell.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 2. Review States (b7) */}
+              {activeStateSubView === "review_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-900 border border-amber-300">
+                        AI Review Flagged
+                      </span>
+                      <span className="text-xs font-mono text-royal">rev 1 · 9d3c110</span>
+                    </div>
+                    <p className="text-xs text-amber-950 font-medium leading-relaxed">
+                      AI reviewer: Two options could be defended as correct under alternative interpretation of the bar diagram. Recommendation: Needs human resolution.
+                    </p>
+                    <p className="text-[11px] text-[#6e6779]">
+                      A flag is a reason to inspect, never an automatic verdict. The screen never auto-rejects on an AI flag.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-royal/15 bg-white p-6 shadow-xs space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="rounded-full bg-royal/10 px-2.5 py-0.5 text-xs font-bold text-royal">
+                          Stale Findings
+                        </span>
+                        <span className="text-xs text-[#6e6779]">Computed for rev 3 · b1774d2</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="rounded-xl bg-royal px-3 py-1 text-xs font-bold text-white hover:bg-royal-deep"
+                      >
+                        Re-run agent review on rev 4 (a3f9c1e)
+                      </button>
+                    </div>
+                    <p className="text-xs text-[#6e6779]">
+                      Content was edited after the automated checks ran. Findings are greyed out to prevent mistaken reliance.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* 3. Approve States (b10) */}
+              {activeStateSubView === "approve_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-teal-200 bg-teal-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-teal-800 font-bold text-sm">
+                      <CheckCircle2 className="h-4 w-4" />
+                      Approved Record: Named Person + Exact Hash + Timestamp
+                    </div>
+                    <p className="text-xs text-teal-950 font-medium">
+                      Maya Chen approved g5-num-chart-001 rev 4 (a3f9c1e) at 2:14 pm, 8 November 2026.
+                    </p>
+                    <p className="text-[11px] text-teal-800 bg-teal-100/60 p-2.5 rounded-lg border border-teal-200">
+                      <strong>Critical boundary:</strong> Human approval creates publication eligibility evidence; it does NOT publish the item. Go to Publication for staging.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                      <Lock className="h-4 w-4" />
+                      Stale Revision Block — Content Changed Under You
+                    </div>
+                    <p className="text-xs text-rose-950 font-medium">
+                      You were looking at rev 4 · a3f9c1e. It is now rev 5 · 7c2e40a. Approval is disabled until you review the current revision.
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        className="rounded-xl bg-royal px-3 py-1 text-xs font-bold text-white hover:bg-royal-deep"
+                      >
+                        Load rev 5 and review
+                      </button>
+                      <button
+                        type="button"
+                        disabled
+                        className="rounded-xl border border-rose-300 bg-rose-100/50 px-3 py-1 text-xs font-bold text-rose-500 cursor-not-allowed"
+                      >
+                        Approve rev 4 (Disabled)
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 4. Paper States (b12) */}
+              {activeStateSubView === "paper_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-amber-800 font-bold text-sm">
+                      <AlertTriangle className="h-4 w-4" />
+                      Short of Approved Content
+                    </div>
+                    <p className="text-xs text-amber-950 font-medium">
+                      This paper can’t be published yet: 12 of 30 questions have only an agent pass. In enforce mode a paper needs every question human-approved.
+                    </p>
+                    <p className="text-[11px] text-[#6e6779]">
+                      Readiness is computed strictly from verified approved items, never from a raw total item count.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-royal/15 bg-white p-6 shadow-xs space-y-3">
+                    <h3 className="text-xs font-bold text-[#1f1b24]">Question 2 Has a Newer Revision</h3>
+                    <p className="text-xs text-[#6e6779]">
+                      The paper pins rev 4; the library now has rev 5. The pinned paper never adopts newer revisions automatically — explicit editorial adoption is required.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* 5. Publish States (b14) */}
+              {activeStateSubView === "publish_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                      <Lock className="h-4 w-4" />
+                      Can’t Publish: No Human Approval (Rule #8 Enforced)
+                    </div>
+                    <p className="text-xs text-rose-950 font-medium">
+                      This revision passed every automated check, but no person has signed it off. Automated checks never supply human sign-off.
+                    </p>
+                    <div className="flex items-center gap-2 text-[11px]">
+                      <span className="rounded bg-teal-100 text-teal-800 px-2 py-0.5 font-bold">Schema Valid</span>
+                      <span className="rounded bg-teal-100 text-teal-800 px-2 py-0.5 font-bold">Machine & Originality Pass</span>
+                      <span className="rounded bg-rose-100 text-rose-800 px-2 py-0.5 font-bold">Human Approval Missing</span>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-amber-800 font-bold text-sm">
+                      <AlertTriangle className="h-4 w-4" />
+                      Can’t Publish: Approval is Stale
+                    </div>
+                    <p className="text-xs text-amber-950 font-medium">
+                      Maya Chen approved rev 3 · b1774d2, but the current revision is rev 4 · a3f9c1e. The newer revision needs its own human approval.
+                    </p>
+                    <p className="text-[11px] text-[#6e6779]">
+                      Publication checks the approved content hash against the manifest root hash. They must match exactly.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* 6. Writing States (b17) */}
+              {activeStateSubView === "writing_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-teal-200 bg-teal-50/50 p-6 shadow-xs space-y-2">
+                    <div className="flex items-center gap-2 text-teal-800 font-bold text-sm">
+                      <CheckCircle2 className="h-4 w-4" />
+                      Mark Confirmed
+                    </div>
+                    <p className="text-xs text-teal-950 font-medium">
+                      9 of 12. The student’s result now displays this verified score with formative feedback, marked by Maya Chen.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                      <RotateCcw className="h-4 w-4" />
+                      Save Failed — Feedback Preserved Locally
+                    </div>
+                    <p className="text-xs text-rose-950 font-medium">
+                      We couldn’t save that mark. Your marks and feedback are preserved in your editor. The child still sees “not yet marked”.
+                    </p>
+                    <button
+                      type="button"
+                      className="rounded-xl bg-rose-700 px-3 py-1 text-xs font-bold text-white hover:bg-rose-800"
+                    >
+                      Retry saving mark
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* 7. Support States (b20) */}
+              {activeStateSubView === "support_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-rose-200 bg-rose-50/50 p-6 shadow-xs space-y-3">
+                    <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                      <AlertTriangle className="h-4 w-4" />
+                      Priority Escalation: “Something upset me”
+                    </div>
+                    <p className="text-xs text-rose-950 font-medium">
+                      A student flagged question g3-read-018 (Year 3) as upsetting. Fixed-reason flag only; zero free text collected. Review the item and decide whether to unpublish while investigating.
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        className="rounded-xl border border-rose-300 bg-white px-3 py-1 text-xs font-bold text-rose-800 hover:bg-rose-50"
+                      >
+                        Inspect question g3-read-018
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-xl bg-rose-700 px-3 py-1 text-xs font-bold text-white hover:bg-rose-800"
+                      >
+                        Unpublish while reviewing
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-2">
+                    <h3 className="text-xs font-bold text-[#1f1b24] flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-royal" />
+                      What a Reviewer Never Sees Here (Privacy Line)
+                    </h3>
+                    <ul className="text-xs text-[#6e6779] list-disc list-inside space-y-1">
+                      <li>A child’s name, email alias, or test session answers — reports concern questions only.</li>
+                      <li>Free text typed by a student — the report widget collects none.</li>
+                      <li>Only question ID, year level, and fixed reason code are transmitted.</li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {/* 8. Activity States (b22) */}
+              {activeStateSubView === "activity_states" && (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-3">
+                    <h3 className="text-xs font-bold text-[#1f1b24]">Loading Activity</h3>
+                    <div className="space-y-2">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="animate-pulse h-10 bg-royal/5 rounded-xl border border-royal/10" />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-royal/10 bg-[#fcfbf8] p-6 shadow-xs space-y-2">
+                    <h3 className="text-xs font-bold text-[#1f1b24]">No Activity in Range</h3>
+                    <p className="text-xs text-[#6e6779]">
+                      Nothing in this range. Widen the dates or clear actor/action filters.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-teal-200 bg-teal-50/30 p-6 shadow-xs space-y-2">
+                    <h3 className="text-xs font-bold text-teal-950">Append-Only Provenance Guarantees</h3>
+                    <p className="text-xs text-teal-900 leading-relaxed">
+                      Every log entry guarantees a real named actor (or System for machine actions, never a human name on a machine step), the exact cryptographic revision hash, an authoritative timestamp, and the immutable action type.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </main>

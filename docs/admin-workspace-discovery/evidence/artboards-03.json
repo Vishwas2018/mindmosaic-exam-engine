@@ -1,0 +1,302 @@
+[
+  {
+    "title": "Support",
+    "testid": "mega-artboard-title-Support.dc.html",
+    "bounds": "0,14070,1440,750",
+    "file": "Support.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-45d828e91001",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nSupport\nStates\nReported questions\nAccount issues\nREASON\tQUESTION\tFROM\tWHEN\t\nThe answer looks wrong\tg5-num-chart-001\tA parent · Year 5\tToday\tOpen question\nSomething looks broken\tg3-read-018\tA parent · Year 3\tYesterday\tOpen question\nSomething upset me\tg3-read-018\tA child\tYesterday\tOpen — priority\nPrivacy boundary\nBuilt into the form\nA report carries the question id, year level and reason — a fixed list, with no free text a child typed.\n“Something upset me” is routed to a person promptly, not queued with the rest.\nA child’s name and answers are not shown here; this screen is about the question, not the reporter.\n\nMatches the report form: fixed reasons, no child free-text, so there is nothing sensitive to show a reviewer here. Account issues (a stuck PIN reset, a billing question) are handled without opening a child’s records.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "States",
+        "href": "SupportStates.dc.html"
+      },
+      {
+        "text": "Open question",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open question",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open — priority",
+        "href": "SupportStates.dc.html"
+      }
+    ],
+    "buttons": [
+      "Reported questions",
+      "Account issues"
+    ]
+  },
+  {
+    "title": "Mobile · Support",
+    "testid": "mega-artboard-title-SupportMobile.dc.html",
+    "bounds": "1520,14070,390,550",
+    "file": "SupportMobile.dc.html",
+    "viewport": [
+      390,
+      844
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-fe3d7f7fa416",
+    "text": "Support\nThe answer looks wrong\n\ng5-num-chart-001 · a parent · Year 5\n\nOpen question\nSomething upset me\n\ng3-read-018 · a child · priority\n\nOpen — priority\nReports carry the question id, year and a fixed reason — no free text a child typed, and no child names or answers shown here.",
+    "links": [
+      {
+        "text": "",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Open question",
+        "href": "ReviewMobile.dc.html"
+      },
+      {
+        "text": "Open — priority",
+        "href": "SupportStates.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "States · Support",
+    "testid": "mega-artboard-title-SupportStates.dc.html",
+    "bounds": "1990,14070,1440,790",
+    "file": "SupportStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-4552570b908c",
+    "text": "SUPPORT\n\nA priority report, and the privacy line\n\nThe one report that routes to a person at once, and what a reviewer may and may not see.\n\n1 · “Something upset me”\nNEEDS SIGN-OFF\n\nShown to a person promptly. Even here, the child typed no free text — the report is a fixed reason against a question.\n\nA child flagged a question as upsetting.\ng3-read-018, Year 3. No free text was collected. Review the question, and decide whether to pull it while you look.\nOpen the question\nUnpublish while reviewing\n\nNEEDS SIGN-OFF the escalation path — who is notified, and how fast — is a policy and a build, not a design default.\n\n2 · What a reviewer never sees here\nA child’s name, email alias, or answers — a report is about the question.\nFree text a child wrote — the form collects none.\nThe question, its id, year level, and the fixed reason — enough to act.",
+    "links": [
+      {
+        "text": "Open the question",
+        "href": "Review.dc.html"
+      }
+    ],
+    "buttons": [
+      "Unpublish while reviewing"
+    ]
+  },
+  {
+    "title": "Activity history",
+    "testid": "mega-artboard-title-Activity.dc.html",
+    "bounds": "0,15560,1440,690",
+    "file": "Activity.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-f2669c28d99f",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nActivity history\nStates\nWho\nAnyone\nMaya Chen\nPriya Raman\nAction\nAll actions\nApproved\nPublished\nUnpublished\nMarked writing\nWhen\nLast 7 days\nLast 30 days\nWHEN\tWHO\tACTION\tWHAT\tREVISION\n2:14 pm today\tMaya Chen\tApproved\tg5-num-chart-001\ta3f9c1e\n4:40 pm yesterday\tMaya Chen\tPublished\tg5-icas-math-07 rev 3\t4b1e9a2\n11:02 am yesterday\tSystem\tAgent review\tg3-num-nl-22 rev 1\t9d3c110\n3:20 pm 2 days ago\tPriya Raman\tUnpublished\tg3-read-011 rev 2\tc08f7a1\n9:15 am 2 days ago\tMaya Chen\tMarked writing\tsession a71f · Q4\t—\nlast week\tPriya Raman\tRejected\tg6-schol-vr-03 rev 5\t2e55b90\n\nEvery approval, publish, unpublish and mark is recorded with a person, an action, the exact revision hash, and a time. The system is named as the actor for automated steps, never a person.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "States",
+        "href": "ActivityStates.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "States · Activity",
+    "testid": "mega-artboard-title-ActivityStates.dc.html",
+    "bounds": "1520,15560,1440,730",
+    "file": "ActivityStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-e9a8ba9702a6",
+    "text": "ACTIVITY HISTORY\n\nLoading, empty and the record it keeps\n\nThe log is append-only: it records what happened, never a guess at intent.\n\n1 · Loading and empty\n\nLoading\n\nLoading activity\n\nNo activity in range\n\nNothing in this range\n\nWiden the dates, or clear the who/action filters.\n\n2 · What each row guarantees\nA real actor — a named person, or “System” for an automated step, never a person’s name on a machine action.\nThe exact revision hash the action applied to.\nA timestamp, and the action — approved, published, unpublished, rejected, marked.",
+    "links": [],
+    "buttons": []
+  },
+  {
+    "title": "Map · Governance path",
+    "testid": "mega-artboard-title-AdminMap.dc.html",
+    "bounds": "0,16990,1480,1260",
+    "file": "AdminMap.dc.html",
+    "viewport": [
+      1480,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-5f73b40c4512",
+    "text": "ADMIN WORKSPACE\n\nThe governance path, end to end\n\nEvery card is a link. The three colours are the three layers that must never be confused: blue is an agent step, purple is a human step, teal is publication.\n\nA QUESTION, FROM GENERATED TO LIVE\nLibrary\nqueue & filters\nAgent review\nchecks + AI reviewer\nQuestion review\na person reads it\nHuman approval\nnamed, revision-bound\nPublish\nlive to children\nA PAPER\nPaper review\norder, marks, time\nPer-question status\napproved or not\nReadiness\nshort vs ready\nPublish paper\nwhen all approved\nWRITING, AND REPORTS\nWriting review\nrubric mark\nConfirm feedback\nmarked by a person\nSupport\nreports, privacy-bounded\nOpen the question\nnot the child\nTHE RECORD\nOverview\nqueues & status\nActivity history\nwho/what/when/hash\nPublication history\nevery publish\nThe one rule this workspace exists to hold\n\nAn automated check never supplies human sign-off. The schema validator, the machine correctness check and the AI reviewer are all agent steps — blue throughout. They inform a person; they never approve. Human approval is a named reviewer signing one immutable revision, bound to its content hash. Publication makes that exact approved revision live, and refuses if the approval does not match the current hash. In report mode the gate records what it would block but still serves; only enforce mode makes human approval a precondition to serving. Every name, hash and date is illustrative sample data.",
+    "links": [
+      {
+        "text": "Libraryqueue & filters",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Agent reviewchecks + AI reviewer",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Question reviewa person reads it",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Human approvalnamed, revision-bound",
+        "href": "Approve.dc.html"
+      },
+      {
+        "text": "Publishlive to children",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Paper revieworder, marks, time",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Per-question statusapproved or not",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Readinessshort vs ready",
+        "href": "PaperStates.dc.html"
+      },
+      {
+        "text": "Publish paperwhen all approved",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing reviewrubric mark",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Confirm feedbackmarked by a person",
+        "href": "WritingStates.dc.html"
+      },
+      {
+        "text": "Supportreports, privacy-bounded",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Open the questionnot the child",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Overviewqueues & status",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Activity historywho/what/when/hash",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "Publication historyevery publish",
+        "href": "Publish.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "Reference · Inventory",
+    "testid": "mega-artboard-title-AdminInventory.dc.html",
+    "bounds": "1560,16990,1440,2260",
+    "file": "AdminInventory.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-d61e104596ef",
+    "text": "ADMIN WORKSPACE\n\nScreen and state inventory\n\n27 artboards across nine journeys. Desktop is 1440 and tablet 834; mobile 390 is drawn for the essential review, approval, writing and support tasks, as the brief scopes. Tablet keeps the sidebar; below about 900px it would collapse to a top menu (the same pattern the real AdminShell uses).\n\nEvery artboard\nJOURNEY\tARTBOARD\tWIDTH\tKIND\tWHAT IT SHOWS\n1 Overview\tOverview\t1440\tScreen\tQueues, family reports, publication status by gate.\n1 Overview\tOverview — tablet\t834\tScreen\tSame, cards reflow to one column.\n2 Library\tQuestion library\t1440\tScreen\tSearch + filter by programme/year/subject/strand/status; status shows the three layers.\n2 Library\tQuestion library — tablet\t834\tScreen\tFilters wrap; table scrolls.\n2 Library\tOverview & library states\t1440\tStates\tLoading, empty queue vs no-match, error, permission-denied.\n3 Review\tQuestion review\t1440\tScreen\tStudent rendering, answer key, explanation, metadata, agent findings, revision history.\n3 Review\tQuestion review — mobile\t390\tScreen\tEssential review: rendering, key, findings, the approval hand-off.\n3 Review\tReview states\t1440\tStates\tAI-flagged, stale findings, being-edited.\n4 Approval\tHuman approval\t1440\tScreen\tApprove / request changes / reject, reviewer + exact revision, agent findings for info only.\n4 Approval\tHuman approval — mobile\t390\tScreen\tEssential approval with the revision binding.\n4 Approval\tApproval states\t1440\tStates\tConfirmed, stale-revision (blocked), concurrent edit, permission-denied.\n5 Paper\tPaper review\t1440\tScreen\tQuestion order, marks, duration, per-question approval, availability.\n5 Paper\tPaper states\t1440\tStates\tShort of approved content, a question moved on.\n6 Publication\tPublication\t1440\tScreen\tReadiness checks, publication history, programme gates.\n6 Publication\tPublication states\t1440\tStates\tBlocked (not approved / stale approval), published, unpublish.\n7 Writing\tWriting review\t1440\tScreen\tPending response, rubric, confirmed feedback.\n7 Writing\tWriting review — mobile\t390\tScreen\tEssential marking.\n7 Writing\tWriting states\t1440\tStates\tConfirmed, nothing waiting, failed save.\n8 Support\tSupport\t1440\tScreen\tReported questions + account issues, privacy boundary.\n8 Support\tSupport — mobile\t390\tScreen\tEssential support triage.\n8 Support\tSupport states\t1440\tStates\tPriority report, what a reviewer never sees.\n9 Activity\tActivity history\t1440\tScreen\tWho/what/when/hash, filterable.\n9 Activity\tActivity states\t1440\tStates\tLoading, empty, what each row guarantees.\nReference\tJourney map\t1480\tMap\tThe governance path, three-colour layers.\nReference\tScreen inventory\t1440\tReference\tThis board.\nReference\tProposed decisions\t1440\tReference\tWhat the design took a position on.\nReference\tBackend dependencies\t1440\tReference\tWhat exists, what to build, what needs sign-off.\nThe three layers, never interchangeable\nAgent review\n\nSchema validation, machine correctness, originality, the AI reviewer. Blue. Informs; never approves.\n\nHuman approval\n\nA named person signs one immutable revision, bound to its content hash. Purple. The only sign-off.\n\nPublished\n\nThe approved revision goes live, if its hash still matches. Teal. Separate, later, reversible.\n\nClaims this design deliberately does not make\nThat a passing check is an approval. Agents inform; a person signs off.\nThat an approval covers “the question”. It covers one revision hash, and goes stale when the content changes.\nThat report-mode content is human-verified. The dashboard states how many of the served questions actually carry an approval.\nA person’s name on an automated step. The actor is “System” for agent actions.\nA child’s identity or free text in Support. Reports are a question id, a year and a fixed reason.",
+    "links": [],
+    "buttons": []
+  },
+  {
+    "title": "Reference · Decisions",
+    "testid": "mega-artboard-title-AdminDecisions.dc.html",
+    "bounds": "3080,16990,1440,1410",
+    "file": "AdminDecisions.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-88e40ec019fe",
+    "text": "ADMIN WORKSPACE\n\nProposed decisions\n\nTen positions. Four are already the product’s behaviour, four are recommendations, two are builds. D4 is the one that decides whether the governance this workspace shows is actually enforced.\n\n#\tPOSITION\tSTATUS\tWHY, AND WHAT TURNS ON IT\nD1\tAgent review, human approval and publication are three states\nShown in three colours, never merged. A status is always one of the three, explicitly.\n\tRECOMMENDED\tThe data model already separates governance (automated), findings (AI reviewer) and approval (approvedBy/approvedAt). The UI must not collapse them, because collapsing them is exactly how un-reviewed content reaches children.\nD2\tApproval binds to an immutable revision hash\nThe reviewer, the revision number and the content hash are recorded together; a changed revision needs a new approval.\n\tBUILT ALREADY\tValidatedApprovalTarget carries revision + contentHash, item_versions are immutable whole-row, and findings carry matchesCurrentRevision. The stale-revision block is enforced, not advisory.\nD3\tA passing check never approves\nMachine checks and the AI reviewer are drawn as information for a person, never as a sign-off, and publication refuses without a human approval.\n\tRECOMMENDED\tThe single most important honesty rule in the whole product. It is why the publication block \"no human approval\" is drawn as the common case.\nD4\tReport vs enforce is shown honestly\nThe dashboard states that report-mode programmes serve un-approved content, and how many served questions carry an approval.\n\tNEEDS SIGN-OFF\tPROGRAMME_PUBLICATION_MODES is empty, so every programme is report except scholarship/edutest. 96.7% of served questions carry no approval. Moving NAPLAN/ICAS to enforce is a product and operational decision.\nD5\tUnpublish and reject are destructive, and confirmed\nBoth warn, state what is kept, and are logged against a name.\n\tRECOMMENDED\tTaking a question out of service changes what children see immediately; it needs a deliberate confirmation.\nD6\tSupport shows the question, not the child\nReports carry an id, a year and a fixed reason. No child name, answers or free text.\n\tBUILT ALREADY\tThe report form collects fixed reasons and no child free text, so there is nothing sensitive to surface. Account issues are handled without opening a child record.\nD7\tA reviewer / senior-reviewer split\nDrawn in the permission-denied state: approving some programmes needs a higher role.\n\tNEEDS A BUILD\tRoles today are student/parent/teacher/admin. Per-programme approval rights and a reviewer tier are a build. The design states the boundary rather than hiding controls.\nD8\tWriting marks are claimed only after the server confirms\nThe child reads \"not yet marked\" until the mark is saved; confirming records the marker.\n\tBUILT ALREADY\tManual marks already go through get_manual_review_response / pending_manual. Same honesty rule as the student results screens.\nD9\tThe activity log names System for automated steps\nNo person is ever the actor on an agent action.\n\tRECOMMENDED\tAn audit trail that attributes a machine step to a person is worse than none; it launders automation as human judgement.\nD10\tA soft lock for concurrent review\nDrawn as \"someone else is reviewing this now\".\n\tNEEDS A BUILD\tNeeds a presence signal. The hard guarantee without it is the stale-revision block plus idempotent approval of an unchanged revision.",
+    "links": [],
+    "buttons": []
+  },
+  {
+    "title": "Reference · Dependencies",
+    "testid": "mega-artboard-title-AdminDeps.dc.html",
+    "bounds": "4600,16990,1440,1510",
+    "file": "AdminDeps.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-249b6b438c02",
+    "text": "ADMIN WORKSPACE\n\nBackend dependencies\n\nChecked against origin/dev on 8 November 2026. The governance data model is unusually complete; what is mostly missing is the reviewer-facing UI this canvas designs, plus roles and a few presence/escalation signals.\n\nAlready in the repository\nBUILT ALREADY\nWHAT\tWHERE\tWHAT IT GIVES THE DESIGN\nThe review record\tadmin-review/contracts\tReviewEntry: source + contentHash + revision, governance (automated gate), findings (AI reviewer, with matchesCurrentRevision), approval (approvedBy/approvedAt). The whole three-layer model.\nApproval, revision-bound\tcontent-governance/approval-verification\tValidatedApprovalTarget (revision + contentHash), ApprovalDecision (approve/reject/revise), human publication + writing-prompt approval schemas, verifyApprovalRecord.\nGate modes\tcontent-governance/gate-config\treport vs enforce per programme; scholarship/edutest enforce, the rest report. Drives the honest publication status.\nPublication integrity\tcontent-governance/publication-integrity\tContent-hash checks that back the stale-approval block.\nImmutable revisions\titem_versions (migration)\tWhole-row immutability, so a revision hash is a stable thing to bind an approval to.\nWriting marks\t/api/teacher/marking, get_manual_review_response\tRubric + feedback + pending_manual. The writing-review screen.\nAn admin shell\tadmin-analytics/AdminShell\tA real sidebar shell with sections (Draft review, Analytics, Operations, Intelligence) and a mobile nav.\nErasure / support plumbing\terasure_requests, erasure_processor (migrations)\tThe account-side of support rests on real, audited request handling.\nHas to be built\nNEEDS A BUILD\nThe reviewer-facing review and approval UI this canvas designs. The data and the schemas exist; the human workflow over them is what is new.\nA reviewer / senior-reviewer role and per-programme approval rights. Roles today are student/parent/teacher/admin.\nPresence & escalation signals: a soft lock for concurrent review, and the routing for a “something upset me” report.\nMarker-facing redaction on writing responses beyond year level.\nA unified activity log view across approvals, publications and marks (the records exist in places; the single audit view is new).\nNeeds a decision from outside design\nNEEDS SIGN-OFF\nWhich programmes move from report to enforce, and when. Until NAPLAN/ICAS enforce, human approval is recorded but not required to serve — the 96.7%-unapproved reality. This is the decision that makes the whole workspace matter.\nThe escalation policy for a child’s distress report: who is notified, how fast, and what is auto-pulled.\nWho may be a reviewer, and whether approval of children’s content needs a named, accountable individual by policy.",
+    "links": [],
+    "buttons": []
+  }
+]

@@ -59,7 +59,7 @@ export const PREVIEW_ADMIN_METRICS: AdminMetric[] = [
     label: "Awaiting human approval",
     count: 6,
     change: "Human sign-off required",
-    trend: "warning" as any,
+    trend: "warning",
     detail: "Mandatory human gate before publication",
   },
   {
@@ -177,30 +177,30 @@ export const PREVIEW_APPROVAL_ITEMS: AdminApprovalItem[] = [
 export const PREVIEW_SUPPORT_TICKETS: AdminSupportTicket[] = [
   {
     id: "TICK-2026-881",
-    parentEmail: "priya.raman@example.com",
+    parentEmail: "p***@masked.invalid (Redacted)",
     subject: "Question about Year 3 Numeracy question scoring",
     status: "open",
     priority: "medium",
     submittedAt: "24 mins ago",
-    messageSnippet: "Hi team, Aisha completed the Geometry practice test and we had a question regarding the bar model working...",
+    messageSnippet: "Hi team, regarding the Year 3 Geometry practice test and the bar model working on question 4...",
   },
   {
     id: "TICK-2026-879",
-    parentEmail: "sarah.m@example.com",
+    parentEmail: "s***@masked.invalid (Redacted)",
     subject: "Updating family plan student place allocation",
     status: "in_progress",
     priority: "high",
     submittedAt: "2 hours ago",
-    messageSnippet: "We have 3 children and wanted to confirm how to reallocate the active slot for our eldest preparing for Year 5 NAPLAN...",
+    messageSnippet: "Confirming how to reallocate the active slot for our eldest child preparing for Year 5 NAPLAN...",
   },
   {
     id: "TICK-2026-874",
-    parentEmail: "graham.t@example.com",
+    parentEmail: "g***@masked.invalid (Redacted)",
     subject: "Clarification on ICAS sample questions availability",
     status: "resolved",
     priority: "low",
     submittedAt: "Yesterday",
-    messageSnippet: "Thanks for the quick turnaround on the curriculum schedule. Everything is clear now.",
+    messageSnippet: "Clarification on ICAS sample questions schedule. Thank you.",
   },
 ];
 
