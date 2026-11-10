@@ -38,11 +38,17 @@ export interface PreviewPaperResult {
   allowedMinutes: number;
   marksEarned: number;
   marksAvailable: number;
-  status: "finished" | "awaiting_parent_marking";
+  questionsAnswered?: number;
+  totalQuestions?: number;
+  pendingQuestions?: number;
+  pendingMarks?: number;
+  status: "finished" | "awaiting_person" | "awaiting_parent_marking";
+  statusLabel?: string;
   strands: Array<{
     name: string;
     marksEarned: number;
     marksAvailable: number;
+    papersCount?: number;
   }>;
 }
 
@@ -52,8 +58,36 @@ export interface PreviewAnswerReviewItem {
   questionText: string;
   studentAnswer: string;
   expectedAnswer: string;
-  isCorrect: boolean;
-  explanation: string;
+  status: "correct" | "incorrect" | "unanswered" | "pending";
+  marksEarned: number;
+  marksAvailable: number;
+  explanation?: string;
+}
+
+export interface SubjectMarksProgress {
+  subject: string;
+  label: string;
+  marksEarned: number;
+  marksAvailable: number;
+  papersCount: number;
+}
+
+export interface StrandMarksProgress {
+  strand: string;
+  label: string;
+  subject: string;
+  marksEarned: number;
+  marksAvailable: number;
+  papersCount: number;
+  belowFloor?: boolean;
+}
+
+export interface ProgressRecommendation {
+  strandName: string;
+  headline: string;
+  description: string;
+  actionLabel: string;
+  actionHref: string;
 }
 
 export interface PreviewHelpArticle {
@@ -124,122 +158,349 @@ export const PREVIEW_FAMILY_PLAN = {
 
 export const PREVIEW_RESULTS_AISHA: PreviewPaperResult[] = [
   {
-    id: "res-reading-301",
-    childId: "child-aisha",
-    title: "NAPLAN-style Reading",
-    subject: "reading",
-    date: "29 October 2026",
-    timed: true,
-    durationMinutes: 28,
-    allowedMinutes: 40,
-    marksEarned: 18,
-    marksAvailable: 25,
-    status: "finished",
-    strands: [
-      { name: "Informative texts", marksEarned: 7, marksAvailable: 10 },
-      { name: "Narrative texts", marksEarned: 6, marksAvailable: 8 },
-      { name: "Persuasive texts", marksEarned: 5, marksAvailable: 7 },
-    ],
-  },
-  {
     id: "res-numeracy-302",
     childId: "child-aisha",
     title: "NAPLAN-style Numeracy",
     subject: "numeracy",
-    date: "25 October 2026",
+    date: "4 Nov 2026",
     timed: true,
-    durationMinutes: 35,
-    allowedMinutes: 45,
-    marksEarned: 23,
-    marksAvailable: 35,
+    durationMinutes: 32,
+    allowedMinutes: 40,
+    marksEarned: 14,
+    marksAvailable: 20,
+    questionsAnswered: 20,
+    totalQuestions: 20,
     status: "finished",
+    statusLabel: "Complete",
     strands: [
-      { name: "Number and algebra", marksEarned: 12, marksAvailable: 16 },
-      { name: "Measurement and geometry", marksEarned: 7, marksAvailable: 11 },
-      { name: "Statistics and probability", marksEarned: 4, marksAvailable: 8 },
+      { name: "Number and algebra", marksEarned: 8, marksAvailable: 12, papersCount: 1 },
+      { name: "Statistics", marksEarned: 6, marksAvailable: 8, papersCount: 1 },
     ],
   },
   {
-    id: "res-writing-303",
+    id: "res-reading-301",
     childId: "child-aisha",
-    title: "Narrative Writing — The Hidden Door",
-    subject: "writing",
-    date: "22 October 2026",
+    title: "NAPLAN-style Reading",
+    subject: "reading",
+    date: "29 Oct 2026",
     timed: true,
-    durationMinutes: 30,
-    allowedMinutes: 40,
-    marksEarned: 0,
-    marksAvailable: 30,
-    status: "awaiting_parent_marking",
+    durationMinutes: 24,
+    allowedMinutes: 30,
+    marksEarned: 11,
+    marksAvailable: 15,
+    questionsAnswered: 14,
+    totalQuestions: 15,
+    pendingQuestions: 2,
+    pendingMarks: 4,
+    status: "awaiting_person",
+    statusLabel: "2 awaiting a person",
     strands: [
-      { name: "Audience & Purpose", marksEarned: 0, marksAvailable: 6 },
-      { name: "Text Structure & Ideas", marksEarned: 0, marksAvailable: 8 },
-      { name: "Character & Setting", marksEarned: 0, marksAvailable: 6 },
-      { name: "Vocabulary & Cohesion", marksEarned: 0, marksAvailable: 10 },
+      { name: "Finding information", marksEarned: 6, marksAvailable: 7, papersCount: 1 },
+      { name: "Reading for meaning", marksEarned: 5, marksAvailable: 8, papersCount: 1 },
+    ],
+  },
+  {
+    id: "res-maths-303",
+    childId: "child-aisha",
+    title: "ICAS-style Mathematics",
+    subject: "numeracy",
+    date: "22 Oct 2026",
+    timed: true,
+    durationMinutes: 36,
+    allowedMinutes: 40,
+    marksEarned: 27,
+    marksAvailable: 40,
+    questionsAnswered: 40,
+    totalQuestions: 40,
+    status: "finished",
+    statusLabel: "Complete",
+    strands: [
+      { name: "Number and algebra", marksEarned: 12, marksAvailable: 14, papersCount: 1 },
+      { name: "Measurement and space", marksEarned: 4, marksAvailable: 10, papersCount: 1 },
+      { name: "Statistics", marksEarned: 3, marksAvailable: 6, papersCount: 1 },
+      { name: "Working mathematically", marksEarned: 8, marksAvailable: 10, papersCount: 1 },
+    ],
+  },
+  {
+    id: "res-reading-304",
+    childId: "child-aisha",
+    title: "Grade 3 Reading Practice",
+    subject: "reading",
+    date: "15 Oct 2026",
+    timed: true,
+    durationMinutes: 22,
+    allowedMinutes: 30,
+    marksEarned: 17,
+    marksAvailable: 25,
+    questionsAnswered: 25,
+    totalQuestions: 25,
+    status: "finished",
+    statusLabel: "Complete",
+    strands: [
+      { name: "Reading for meaning", marksEarned: 11, marksAvailable: 15, papersCount: 1 },
+      { name: "Finding information", marksEarned: 6, marksAvailable: 10, papersCount: 1 },
     ],
   },
 ];
 
+export const PREVIEW_RESULTS_KABIR: PreviewPaperResult[] = [
+  {
+    id: "res-kabir-501",
+    childId: "child-kabir",
+    title: "Grade 5 Numeracy Paper 1",
+    subject: "numeracy",
+    date: "5 Nov 2026",
+    timed: true,
+    durationMinutes: 42,
+    allowedMinutes: 50,
+    marksEarned: 24,
+    marksAvailable: 30,
+    questionsAnswered: 30,
+    totalQuestions: 30,
+    status: "finished",
+    statusLabel: "Complete",
+    strands: [
+      { name: "Number and algebra", marksEarned: 16, marksAvailable: 18, papersCount: 1 },
+      { name: "Measurement and geometry", marksEarned: 8, marksAvailable: 12, papersCount: 1 },
+    ],
+  },
+];
+
+export const PREVIEW_RESULTS_MAYA: PreviewPaperResult[] = [];
+
+export const PREVIEW_SUBJECTS_AISHA: SubjectMarksProgress[] = [
+  {
+    subject: "numeracy",
+    label: "Numeracy",
+    marksEarned: 41,
+    marksAvailable: 60,
+    papersCount: 3,
+  },
+  {
+    subject: "reading",
+    label: "Reading",
+    marksEarned: 22,
+    marksAvailable: 30,
+    papersCount: 2,
+  },
+  {
+    subject: "language_conventions",
+    label: "Language conventions",
+    marksEarned: 6,
+    marksAvailable: 10,
+    papersCount: 1,
+  },
+];
+
+export const PREVIEW_STRANDS_AISHA: StrandMarksProgress[] = [
+  {
+    strand: "number_and_algebra",
+    label: "Number and algebra",
+    subject: "numeracy",
+    marksEarned: 20,
+    marksAvailable: 26,
+    papersCount: 3,
+  },
+  {
+    strand: "statistics",
+    label: "Statistics",
+    subject: "numeracy",
+    marksEarned: 9,
+    marksAvailable: 14,
+    papersCount: 2,
+  },
+  {
+    strand: "measurement_and_space",
+    label: "Measurement and space",
+    subject: "numeracy",
+    marksEarned: 4,
+    marksAvailable: 10,
+    papersCount: 2,
+  },
+  {
+    strand: "working_mathematically",
+    label: "Working mathematically",
+    subject: "numeracy",
+    marksEarned: 4,
+    marksAvailable: 4,
+    papersCount: 1,
+    belowFloor: true,
+  },
+];
+
+export const PREVIEW_RECOMMENDATION_AISHA: ProgressRecommendation = {
+  strandName: "Measurement and space",
+  headline: "Our suggestion, not Aisha’s result",
+  description:
+    "Measurement and space has the lowest marks of the strands with enough behind them — 4 of 10 across 2 papers. A short set on reading scales and comparing lengths would be a sensible next step.",
+  actionLabel: "See Measurement practice",
+  actionHref: "/parent/curriculum-explorer?strand=measurement_and_space",
+};
+
 export const PREVIEW_ANSWER_REVIEW_READING: PreviewAnswerReviewItem[] = [
   {
     questionNumber: 1,
-    strand: "Informative texts",
-    questionText: "What was the main purpose of the park ranger's morning patrol?",
-    studentAnswer: "To inspect track conditions and log wildlife sightings",
-    expectedAnswer: "To inspect track conditions and log wildlife sightings",
-    isCorrect: true,
-    explanation:
-      "Paragraph 2 states that each patrol begins at dawn to assess track safety after overnight storms and record active wildlife.",
+    strand: "Finding information",
+    questionText: "What time does the morning ferry depart from the wharf?",
+    studentAnswer: "At 7:15 am",
+    expectedAnswer: "At 7:15 am",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
   },
   {
     questionNumber: 2,
-    strand: "Informative texts",
-    questionText: "Which instrument did Dr Aris use to test the salinity of the tidal creek?",
-    studentAnswer: "A digital refractometer probe",
-    expectedAnswer: "A digital refractometer probe",
-    isCorrect: true,
-    explanation:
-      "Line 18 explicitly mentions the handheld digital refractometer calibrated for estuarine readings.",
+    strand: "Finding information",
+    questionText: "Where did Uncle Toby keep the spare boat keys?",
+    studentAnswer: "In the rusted metal tin by the winch",
+    expectedAnswer: "In the rusted metal tin by the winch",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
   },
   {
     questionNumber: 3,
-    strand: "Narrative texts",
-    questionText: "Why did Maya hesitate before pushing through the gate?",
-    studentAnswer: "Because it was raining heavily",
-    expectedAnswer: "Because she recognized the warning crest from her grandfather's journal",
-    isCorrect: false,
-    explanation:
-      "The text explains that the carved iron crest made her stop: 'The crest was unmistakable, precisely as drawn on page twelve of the weathered notebook.'",
+    strand: "Finding information",
+    questionText: "What is the main thing the second paragraph tells you about the lighthouse?",
+    studentAnswer: "That it was built to warn ships",
+    expectedAnswer: "That it was built to warn ships",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
   },
   {
     questionNumber: 4,
-    strand: "Narrative texts",
-    questionText: "What does the phrase 'the wind had teeth' suggest about the afternoon weather?",
-    studentAnswer: "It was bitter, sharp and biting cold",
-    expectedAnswer: "It was bitter, sharp and biting cold",
-    isCorrect: true,
-    explanation:
-      "The figurative idiom personifies the gusty wind to evoke penetrating cold.",
+    strand: "Finding information",
+    questionText: "Which bird species was observed nesting near the headland?",
+    studentAnswer: "Sooty oystercatchers",
+    expectedAnswer: "Sooty oystercatchers",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
   },
   {
     questionNumber: 5,
-    strand: "Persuasive texts",
-    questionText: "What evidence does the letter offer in support of dedicated community cycle lanes?",
-    studentAnswer: "A 34% drop in traffic incidents along neighbouring suburban corridors",
-    expectedAnswer: "A 34% drop in traffic incidents along neighbouring suburban corridors",
-    isCorrect: true,
-    explanation:
-      "The third paragraph directly cites council traffic study data showing the safety benefits of separated infrastructure.",
+    strand: "Finding information",
+    questionText: "What was the weather like when the crew first saw the flare?",
+    studentAnswer: "A heavy sea mist with choppy swell",
+    expectedAnswer: "A heavy sea mist with choppy swell",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
   },
   {
     questionNumber: 6,
-    strand: "Persuasive texts",
-    questionText: "Which rhetorical technique is used in the phrase 'Not tomorrow, not next year, but today'?",
-    studentAnswer: "A rhetorical question",
-    expectedAnswer: "Tricolon repetition (rule of three) for urgency",
-    isCorrect: false,
+    strand: "Reading for meaning",
+    questionText: "How did Captain Miller know the tide had begun to turn?",
+    studentAnswer: "The waterline marked the black kelp on the outer pilings",
+    expectedAnswer: "The waterline marked the black kelp on the outer pilings",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
+  },
+  {
+    questionNumber: 7,
+    strand: "Reading for meaning",
+    questionText: "Which word in the last sentence means the same as “enormous”?",
+    studentAnswer: "rocky",
+    expectedAnswer: "vast",
+    status: "incorrect",
+    marksEarned: 0,
+    marksAvailable: 1,
     explanation:
-      "The phrase uses rhythmic three-part parallel phrasing rather than posing a question to the reader.",
+      "Both words describe the cliff, but “vast” is about size and “rocky” is about what it is made of.",
+  },
+  {
+    questionNumber: 8,
+    strand: "Reading for meaning",
+    questionText: "Why did the author compare the harbor fog to a woollen blanket?",
+    studentAnswer: "Because it was white",
+    expectedAnswer: "To emphasize how thick and suffocating the low fog felt across the bay",
+    status: "incorrect",
+    marksEarned: 0,
+    marksAvailable: 1,
+    explanation:
+      "The metaphor suggests sensory density rather than simply color.",
+  },
+  {
+    questionNumber: 9,
+    strand: "Reading for meaning",
+    questionText: "What prompted the town bells to ring at sunset?",
+    studentAnswer: "The annual return of the migratory shearwaters",
+    expectedAnswer: "The safe return of the trawler fleet before the squall",
+    status: "incorrect",
+    marksEarned: 0,
+    marksAvailable: 1,
+    explanation:
+      "The warning sirens were rung for the boats rather than the bird flock.",
+  },
+  {
+    questionNumber: 10,
+    strand: "Finding information",
+    questionText: "Who called the coastguard station first?",
+    studentAnswer: "The harbourmaster on channel 16",
+    expectedAnswer: "The harbourmaster on channel 16",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
+  },
+  {
+    questionNumber: 11,
+    strand: "Reading for meaning",
+    questionText: "Put the four events in the order they happened.",
+    studentAnswer: "Nothing — this one was left blank",
+    expectedAnswer: "Storm, rescue, repair, reopening",
+    status: "unanswered",
+    marksEarned: 0,
+    marksAvailable: 1,
+    explanation:
+      "Not answered rather than answered wrongly. Worth asking whether she ran out of time: this was the second-last question.",
+  },
+  {
+    questionNumber: 12,
+    strand: "Finding information",
+    questionText: "How many lanterns were lit each night during winter?",
+    studentAnswer: "Four brass oil lanterns",
+    expectedAnswer: "Four brass oil lanterns",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
+  },
+  {
+    questionNumber: 13,
+    strand: "Reading for meaning",
+    questionText: "What gave the crew confidence that the beacon was functioning?",
+    studentAnswer: "The sweeping flash every twelve seconds across the reef",
+    expectedAnswer: "The sweeping flash every twelve seconds across the reef",
+    status: "correct",
+    marksEarned: 1,
+    marksAvailable: 1,
+  },
+  {
+    questionNumber: 14,
+    strand: "Finding information",
+    questionText: "In your own words, explain why the keeper stayed through the storm.",
+    studentAnswer:
+      "Because he knew the boats would not see the rocks without the light and he did not want anyone to crash",
+    expectedAnswer: "Awaiting human teacher review against the rubric criteria.",
+    status: "pending",
+    marksEarned: 0,
+    marksAvailable: 2,
+    explanation:
+      "A written answer. Someone reads this and gives it a mark — usually within two school days. Until then it is not counted as right or wrong.",
+  },
+  {
+    questionNumber: 15,
+    strand: "Reading for meaning",
+    questionText: "How did the community show appreciation to the lighthouse keeper?",
+    studentAnswer:
+      "They signed a brass plaque and held a welcoming ceremony at the town hall.",
+    expectedAnswer: "Awaiting human teacher review against the rubric criteria.",
+    status: "pending",
+    marksEarned: 0,
+    marksAvailable: 2,
+    explanation:
+      "A written answer. Someone reads this and gives it a mark — usually within two school days. Until then it is not counted as right or wrong.",
   },
 ];
 

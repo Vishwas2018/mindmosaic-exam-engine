@@ -75,6 +75,31 @@ export {
   PrintSignInCardDialog,
   type PrintSignInCardDialogProps,
 } from "./components/PrintSignInCardDialog";
+export {
+  ChildProgressDashboard,
+  type ChildProgressDashboardProps,
+} from "./components/ChildProgressDashboard";
+export {
+  PaperResultView,
+  type PaperResultViewProps,
+} from "./components/PaperResultView";
+export {
+  WorkedAnswerReview,
+  type WorkedAnswerReviewProps,
+} from "./components/WorkedAnswerReview";
+export {
+  type SubjectMarksProgress,
+  type StrandMarksProgress,
+  type ProgressRecommendation,
+  type PreviewAnswerReviewItem,
+  PREVIEW_RESULTS_AISHA,
+  PREVIEW_RESULTS_KABIR,
+  PREVIEW_RESULTS_MAYA,
+  PREVIEW_SUBJECTS_AISHA,
+  PREVIEW_STRANDS_AISHA,
+  PREVIEW_RECOMMENDATION_AISHA,
+  PREVIEW_ANSWER_REVIEW_READING,
+} from "./fixtures";
 
 
 
