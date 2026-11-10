@@ -8,6 +8,8 @@ import type { StudentContext } from "@/features/student/require-student";
 import { WEEKLY_SESSION_TARGET } from "@/features/student/engagement/achievements";
 import { fetchEngagementAttempts } from "@/features/student/engagement/fetch-engagement";
 import { computeStreakStats, countThisWeek, toDayKey, uniqueSortedDayKeys, weekDots, type WeekDot } from "@/features/student/engagement/streaks";
+import { isStudentPreviewEnabled } from "../preview-mode";
+import { PREVIEW_STUDENT_SHELL_DATA } from "../fixtures/student-preview-fixtures";
 
 export interface StudentPortalShellData {
   mathematicsPathways: readonly LessonPathway[];
@@ -25,6 +27,10 @@ export interface StudentPortalShellData {
  * Progress can render the identical real chrome without re-deriving it.
  */
 export async function fetchStudentPortalShellData(student: StudentContext): Promise<StudentPortalShellData> {
+  if (await isStudentPreviewEnabled()) {
+    return PREVIEW_STUDENT_SHELL_DATA;
+  }
+
   const engagementResult = await fetchEngagementAttempts(student.userId);
   const now = new Date();
   const today = toDayKey(now);

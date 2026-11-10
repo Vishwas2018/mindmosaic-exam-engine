@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { fetchSittingRows } from "@/server/assessment/read-dispatch";
 
 import { buildOverview, type StudentAttemptOverview } from "./attempt-summary";
+import { isStudentPreviewEnabled } from "./preview-mode";
+import { PREVIEW_STUDENT_OVERVIEW } from "./fixtures/student-preview-fixtures";
 
 /**
  * Server-side reads for the signed-in student's screens. Every query runs
@@ -16,6 +18,10 @@ import { buildOverview, type StudentAttemptOverview } from "./attempt-summary";
 const RECENT_ATTEMPTS_LIMIT = 50;
 
 export async function fetchStudentOverview(): Promise<StudentAttemptOverview> {
+  if (await isStudentPreviewEnabled()) {
+    return PREVIEW_STUDENT_OVERVIEW;
+  }
+
   const supabase = await createClient();
 
   /* Both storage models, each sitting once, from the model that created it

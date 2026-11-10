@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import { requireActiveSubscription } from "@/features/billing/require-active-subscription";
 import { requireRole } from "@/features/auth/require-role";
+import { isStudentPreviewEnabled } from "@/features/student/preview-mode";
 
 /*
  * requireRole() only calls cookies() once Supabase is configured, so a build
@@ -19,6 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default async function StudentLayout({ children }: { children: ReactNode }) {
+  if (await isStudentPreviewEnabled()) {
+    return <>{children}</>;
+  }
+
   const gate = await requireRole("student", "/student");
   if (gate.configured) {
     await requireActiveSubscription(gate.userId, "student");
