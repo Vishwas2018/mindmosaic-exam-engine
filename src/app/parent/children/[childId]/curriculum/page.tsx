@@ -124,7 +124,10 @@ export default async function ChildCurriculumPage({
           />
         ) : (
           <div className="rounded-2xl border border-royal/10 bg-white p-4 shadow-sm sm:p-6">
-            <ParentCurriculumExplorer initialItems={items} />
+            <ParentCurriculumExplorer
+              initialItems={items}
+              initialLevel={childProfile?.year_level === 5 ? "5" : "3"}
+            />
           </div>
         )}
       </div>

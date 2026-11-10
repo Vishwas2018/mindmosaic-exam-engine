@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CreditCard, Shield, User, Bell, AlertTriangle } from "lucide-react";
 
 import { ParentShell } from "@/features/parent-dashboard";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -14,14 +15,23 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function ParentAccountPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let userEmail = "Signed-in parent";
+  let displayName = "Parent Account";
 
-  const userEmail = user?.email ?? "Signed-in parent";
-  const userMetadata = user?.user_metadata as { display_name?: string; full_name?: string } | undefined;
-  const displayName = userMetadata?.display_name || userMetadata?.full_name || "Parent Account";
+  if (isSupabaseConfigured) {
+    try {
+      const supabase = await createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      userEmail = user?.email ?? "Signed-in parent";
+      const userMetadata = user?.user_metadata as { display_name?: string; full_name?: string } | undefined;
+      displayName = userMetadata?.display_name || userMetadata?.full_name || "Parent Account";
+    } catch {
+      // Fallback to default labels when auth user cannot be resolved
+    }
+  }
 
   return (
     <ParentShell active="/parent/account">

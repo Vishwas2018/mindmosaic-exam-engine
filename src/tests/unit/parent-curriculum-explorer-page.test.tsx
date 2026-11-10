@@ -34,6 +34,11 @@ vi.mock("@/lib/supabase/client", () => ({
   }),
 }));
 
+const mockSingleProfile = vi.hoisted(() => ({
+  data: { id: "child-1", display_name: "Aisha", year_level: 3 },
+  error: null as unknown,
+}));
+
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: {
@@ -42,19 +47,11 @@ vi.mock("@/lib/supabase/server", () => ({
     from: vi.fn(() => ({
       select: vi.fn(() => ({
         eq: vi.fn(() => ({
-          single: async () => ({
-            data: { id: "child-1", display_name: "Aisha", year_level: 3 },
-            error: null,
-          }),
+          single: async () => mockSingleProfile,
         })),
       })),
     })),
   })),
-}));
-
-const mockResolveDefaultChildId = vi.hoisted(() => vi.fn());
-vi.mock("@/features/parent-dashboard/queries", () => ({
-  resolveDefaultChildId: mockResolveDefaultChildId,
 }));
 
 const mockCatalogueQuery = vi.hoisted(() => vi.fn());
@@ -69,12 +66,14 @@ vi.mock("@/server/curriculum", () => ({
 import ChildCurriculumPage, {
   metadata,
 } from "@/app/parent/children/[childId]/curriculum/page";
-import ParentCurriculumExplorerRedirectPage from "@/app/parent/curriculum-explorer/page";
+import ParentCurriculumExplorerPage from "@/app/parent/curriculum-explorer/page";
 import { AuthProvider } from "@/features/auth";
 
-describe("ChildCurriculumPage & Redirects", () => {
+describe("ChildCurriculumPage & ParentCurriculumExplorerPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockSingleProfile.data = { id: "child-1", display_name: "Aisha", year_level: 3 };
+    mockSingleProfile.error = null;
   });
 
   describe("ChildCurriculumPage (Server Component)", () => {
@@ -99,99 +98,98 @@ describe("ChildCurriculumPage & Redirects", () => {
       );
     });
 
-    it("fetches catalogue items and renders the child curriculum view", async () => {
+    it("fetches catalogue items and renders the child curriculum view for Year 3", async () => {
       mockIsSupabaseConfigured.value = true;
-      mockCatalogueQuery
-        .mockResolvedValueOnce({
-          total: 1,
-          items: [
-            {
-              licenceEvidence: {
-                schemaVersion: 1,
-                evidenceId: "f2000000-0000-4000-8000-000000000001",
-                evidenceKey: "ev-1",
-                licenceId: "lic-1",
-                evidenceUrl: "https://example.com",
-                retrievedAt: "2026-08-28T00:00:00Z",
-                evidenceFingerprint: "0000000000000000000000000000000000000000000000000000000000000000",
-                permitsStorage: false,
-                permitsDisplay: false,
-              },
-              source: {
-                schemaVersion: 1,
-                sourceId: "f3000000-0000-4000-8000-000000000001",
-                sourceKey: "src-1",
-                jurisdictionCode: "VIC",
-                schoolSectors: ["government"],
-                licenceEvidenceId: "f2000000-0000-4000-8000-000000000001",
-                licence: {
-                  id: "lic-1",
-                  name: "CC BY-NC 3.0 AU",
-                  officialTextAccess: "metadata_only",
-                  attributionParty: "VCAA",
-                  sourceUrl: "https://example.com",
-                },
-              },
-              release: {
-                schemaVersion: 1,
-                releaseId: "f4000000-0000-4000-8000-000000000001",
-                releaseKey: "rel-1",
-                sourceId: "f3000000-0000-4000-8000-000000000001",
-                jurisdictionCode: "VIC",
-                schoolSectors: ["government"],
-                title: "Victorian Curriculum F–10 v2.0",
-                releaseVersion: "2.0",
-                publishedOn: "2024-01-01",
-                effectiveFrom: "2024-01-01",
-                status: "active",
-                provenance: {
-                  importedBy: "test",
-                  importedAt: "2026-08-28T00:00:00Z",
-                  sourceFingerprint: "0000000000000000000000000000000000000000000000000000000000000000",
-                },
-                review: {
-                  reviewedBy: "lead",
-                  reviewedAt: "2026-08-28T00:00:00Z",
-                  reviewState: "approved",
-                },
-              },
-              node: {
-                schemaVersion: 1,
-                nodeId: "f5000000-0000-4000-8000-000000000001",
-                nodeKey: "n-1",
-                releaseId: "f4000000-0000-4000-8000-000000000001",
-                officialCode: "VC2M3N01",
-                kind: "content_description",
-                label: "Odd and even numbers",
-                parentNodeId: null,
-                sortOrder: 1,
-              },
-              applicability: [
-                {
-                  schemaVersion: 1,
-                  applicabilityId: "f6000000-0000-4000-8000-000000000001",
-                  curriculumReleaseId: "f4000000-0000-4000-8000-000000000001",
-                  curriculumNodeId: "f5000000-0000-4000-8000-000000000001",
-                  jurisdictionCode: "VIC",
-                  schoolSectors: ["government"],
-                  yearLevels: [3],
-                  levelCodes: ["VIC-L3"],
-                  bandCodes: [],
-                  stageCodes: [],
-                },
-              ],
-              crosswalks: [],
-              taxonomyAlignments: [],
-              coverage: {
-                status: "none",
-                supportingContentCount: 0,
-                policyId: "p-1",
-                computedAt: "2026-08-28T00:00:00Z",
+      mockCatalogueQuery.mockResolvedValueOnce({
+        total: 1,
+        items: [
+          {
+            licenceEvidence: {
+              schemaVersion: 1,
+              evidenceId: "ev-1",
+              evidenceKey: "ev-1",
+              licenceId: "lic-1",
+              evidenceUrl: "https://example.com",
+              retrievedAt: "2026-08-28T00:00:00Z",
+              evidenceFingerprint: "0000000000000000000000000000000000000000000000000000000000000000",
+              permitsStorage: false,
+              permitsDisplay: false,
+            },
+            source: {
+              schemaVersion: 1,
+              sourceId: "src-1",
+              sourceKey: "src-1",
+              jurisdictionCode: "VIC",
+              schoolSectors: ["government"],
+              licenceEvidenceId: "ev-1",
+              licence: {
+                id: "lic-1",
+                name: "CC BY-NC 3.0 AU",
+                officialTextAccess: "metadata_only",
+                attributionParty: "VCAA",
+                sourceUrl: "https://example.com",
               },
             },
-          ],
-          nextCursor: undefined,
-        });
+            release: {
+              schemaVersion: 1,
+              releaseId: "rel-1",
+              releaseKey: "rel-1",
+              sourceId: "src-1",
+              jurisdictionCode: "VIC",
+              schoolSectors: ["government"],
+              title: "Victorian Curriculum F–10 v2.0",
+              releaseVersion: "2.0",
+              publishedOn: "2024-01-01",
+              effectiveFrom: "2024-01-01",
+              status: "active",
+              provenance: {
+                importedBy: "test",
+                importedAt: "2026-08-28T00:00:00Z",
+                sourceFingerprint: "0000000000000000000000000000000000000000000000000000000000000000",
+              },
+              review: {
+                reviewedBy: "lead",
+                reviewedAt: "2026-08-28T00:00:00Z",
+                reviewState: "approved",
+              },
+            },
+            node: {
+              schemaVersion: 1,
+              nodeId: "node-1",
+              nodeKey: "n-1",
+              releaseId: "rel-1",
+              officialCode: "VC2M3N01",
+              kind: "content_description",
+              label: "Odd and even numbers",
+              parentNodeId: null,
+              sortOrder: 1,
+            },
+            applicability: [
+              {
+                schemaVersion: 1,
+                applicabilityId: "app-1",
+                curriculumReleaseId: "rel-1",
+                curriculumNodeId: "node-1",
+                jurisdictionCode: "VIC",
+                schoolSectors: ["government"],
+                yearLevels: [3],
+                levelCodes: ["VIC-L3"],
+                bandCodes: [],
+                stageCodes: [],
+              },
+            ],
+            crosswalks: [],
+            taxonomyAlignments: [],
+            coverage: {
+              status: "none",
+              supportingContentCount: 0,
+              policyId: "p-1",
+              computedAt: "2026-08-28T00:00:00Z",
+            },
+          },
+        ],
+        nextCursor: undefined,
+      });
 
       const pageElement = await ChildCurriculumPage({
         params: Promise.resolve({ childId: "child-1" }),
@@ -203,23 +201,41 @@ describe("ChildCurriculumPage & Redirects", () => {
       expect(screen.getByText("Odd and even numbers")).toBeVisible();
       expect(mockCatalogueQuery).toHaveBeenCalledTimes(1);
     });
+
+    it("initializes Year 5 focus when child is in Year 5", async () => {
+      mockIsSupabaseConfigured.value = true;
+      mockSingleProfile.data = { id: "child-2", display_name: "Kabir", year_level: 5 };
+      mockCatalogueQuery.mockResolvedValueOnce({ total: 0, items: [], nextCursor: undefined });
+
+      const pageElement = await ChildCurriculumPage({
+        params: Promise.resolve({ childId: "child-2" }),
+      });
+      render(<AuthProvider>{pageElement}</AuthProvider>);
+
+      expect(screen.getByText("Kabir's Curriculum Alignment")).toBeVisible();
+      expect(screen.getByText("Year 5 Focus")).toBeVisible();
+    });
   });
 
-  describe("ParentCurriculumExplorerRedirectPage", () => {
-    it("redirects to child curriculum route when a default child is found", async () => {
+  describe("ParentCurriculumExplorerPage (Legacy route compatibility)", () => {
+    it("renders the Victorian Curriculum Explorer directly without redirecting to an arbitrary child", async () => {
       mockIsSupabaseConfigured.value = true;
-      mockResolveDefaultChildId.mockResolvedValueOnce("child-42");
+      mockCatalogueQuery.mockResolvedValueOnce({ total: 0, items: [], nextCursor: undefined });
 
-      await ParentCurriculumExplorerRedirectPage();
-      expect(mockRedirect).toHaveBeenCalledWith("/parent/children/child-42/curriculum");
+      const pageElement = await ParentCurriculumExplorerPage();
+      render(<AuthProvider>{pageElement}</AuthProvider>);
+
+      expect(screen.getByText("Victorian Curriculum Explorer")).toBeVisible();
+      expect(mockRedirect).not.toHaveBeenCalled();
     });
 
-    it("redirects to /parent/children when no default child is found", async () => {
-      mockIsSupabaseConfigured.value = true;
-      mockResolveDefaultChildId.mockResolvedValueOnce(null);
+    it("renders unconfigured state when Supabase is not configured", async () => {
+      mockIsSupabaseConfigured.value = false;
 
-      await ParentCurriculumExplorerRedirectPage();
-      expect(mockRedirect).toHaveBeenCalledWith("/parent/children");
+      const pageElement = await ParentCurriculumExplorerPage();
+      render(<AuthProvider>{pageElement}</AuthProvider>);
+
+      expect(screen.getByText("Database not configured")).toBeVisible();
     });
   });
 });
