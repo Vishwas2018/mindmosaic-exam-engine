@@ -364,4 +364,14 @@ describe("FamilyOverview", () => {
       expect(section.closest("div")?.textContent).not.toContain("%");
     });
   });
+
+  it("renders the seven-day activity display with day labels and status", () => {
+    render(<FamilyOverview summaries={sampleChildren} />);
+    expect(
+      screen.getByRole("group", { name: /Aisha's practice activity this week: 3 of 7 days/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: /Kiran's practice activity this week: 1 of 7 days/i }),
+    ).toBeInTheDocument();
+  });
 });

@@ -138,7 +138,7 @@ export function FamilyOverview({
             ? `Some activity for ${childNames} could not be read. Unreadable records are excluded until resolved.`
             : isFirstVisit
             ? `${childNames} ${displayedChildren.length === 1 ? "is" : "are"} set up. Nothing has been finished yet, so there is nothing to report.`
-            : "Summary of practice and assessments across your children for this week."}
+            : "This week's activity and practice marks across your children."}
         </p>
       </div>
 
@@ -245,6 +245,47 @@ export function FamilyOverview({
                     )}
                   </div>
                 </div>
+
+                {/* Seven-day activity display */}
+                {child.weekActivity && child.weekActivity.length > 0 && (
+                  <div className="rounded-xl border border-royal/8 bg-royal/5 p-3.5">
+                    <div className="flex items-center justify-between pb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-muted">
+                        This week&apos;s activity
+                      </span>
+                      <span className="text-xs font-bold text-royal">
+                        {daysPractised} of 7 days
+                      </span>
+                    </div>
+                    <div
+                      role="group"
+                      aria-label={`${child.displayName}'s practice activity this week: ${daysPractised} of 7 days`}
+                      className="grid grid-cols-7 gap-1.5 pt-1"
+                    >
+                      {child.weekActivity.map((day) => (
+                        <div key={day.label} className="flex flex-col items-center gap-1">
+                          <span
+                            aria-hidden="true"
+                            className={`h-2.5 w-full rounded-full transition-colors ${
+                              day.practised
+                                ? "bg-royal"
+                                : day.isToday
+                                ? "bg-royal/20 border border-royal/40"
+                                : "bg-royal/10"
+                            }`}
+                          />
+                          <span
+                            className={`text-[10px] font-bold ${
+                              day.isToday ? "text-royal font-black" : day.practised ? "text-ink" : "text-muted"
+                            }`}
+                          >
+                            {day.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* State: No finished attempts yet */}
                 {child.attemptCount === 0 ? (
