@@ -61,6 +61,21 @@ export {
   type PreviewChild,
   type PreviewPaperResult,
 } from "./fixtures";
+export {
+  ChildProfileView,
+  type ChildProfileViewProps,
+  type ChildProfileDetails,
+  type SiblingLink,
+} from "./components/ChildProfileView";
+export {
+  PinResetDialog,
+  type PinResetDialogProps,
+} from "./components/PinResetDialog";
+export {
+  PrintSignInCardDialog,
+  type PrintSignInCardDialogProps,
+} from "./components/PrintSignInCardDialog";
+
 
 
 
