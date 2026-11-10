@@ -6,6 +6,7 @@ import "@/features/student/styles/mm-canvas.css";
 import artboardsData from "./canvas-artboards-data.json";
 
 export type StudentCanvasScreenId =
+  | "my-space"
   | "learn-hub"
   | "learn-lesson"
   | "practice"
@@ -55,6 +56,13 @@ function resolveArtboardKey(
   const isTablet = viewport === "tablet";
 
   switch (screen) {
+    case "my-space":
+      if (state === "first-visit") return isMobile ? "FirstRunMobile" : "FirstRunDesktop";
+      if (state === "no-resume") return "NoResume";
+      if (state === "loading") return "Loading";
+      if (state === "empty-error") return "EmptyError";
+      return isMobile ? "Mobile" : isTablet ? "Tablet" : "Main";
+
     case "learn-hub":
       if (state === "states") return "LearnStates";
       if (state === "lesson") return isMobile ? "LearnLessonMobile" : "LearnLesson";
