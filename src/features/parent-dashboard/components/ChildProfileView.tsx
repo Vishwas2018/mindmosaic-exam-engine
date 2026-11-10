@@ -203,10 +203,10 @@ export function ChildProfileView({
               Sign-in card
             </Button>
             <Link
-              href={`/parent/children/${child.id}/curriculum`}
+              href={`/parent/children/${child.id}/progress`}
               className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-royal/20 bg-white px-4 text-xs font-bold text-ink shadow-sm transition hover:border-royal hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
             >
-              Curriculum progress &rarr;
+              Practice progress &rarr;
             </Link>
           </div>
         </div>
@@ -380,7 +380,7 @@ export function ChildProfileView({
             </dl>
 
             <p className="mt-4 text-xs text-muted">
-              The login code never changes. The PIN is the only thing you can reset, and resetting it signs {firstName} out everywhere.
+              The login code never changes. The PIN is the only thing you can reset. Any new sign-in will require this new PIN.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -450,7 +450,7 @@ export function ChildProfileView({
             </div>
           </Card>
 
-          {/* Card 4: Deleting a profile (Proposal ADR-012) */}
+          {/* Card 4: Deleting a profile (Proposal ADR-012, Decision P11) */}
           <Card className="border-error/20 bg-error/5 p-6">
             <div className="flex items-center gap-2 text-error">
               <ShieldAlert className="h-5 w-5" />
@@ -464,15 +464,15 @@ export function ChildProfileView({
             </p>
 
             <ul className="mt-3 list-disc space-y-1 pl-5 text-xs text-error/80">
-              <li>We confirm it is you, away from this screen.</li>
-              <li>You have 30 days to stop it.</li>
-              <li>You receive a message when it has been completed.</li>
+              <li>We confirm your identity away from this screen.</li>
+              <li>You have time to stop the request before erasure begins.</li>
+              <li>You receive a message when the erasure has been completed.</li>
             </ul>
 
             {deletionRequested ? (
               <div className="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs font-semibold text-amber-950">
                 <strong className="block font-bold text-amber-900">Deletion requested.</strong>
-                Check your email to confirm your identity. Nothing is erased before 30 days, and you can stop it at any point until then.
+                Check your email to confirm your identity. We will verify your request before anything is erased, and you can stop it at any point until then.
               </div>
             ) : (
               <div className="mt-6 flex items-center gap-3">
@@ -534,7 +534,7 @@ export function ChildProfileView({
           setDeletionRequestOpen(false);
         }}
         title={`Request deletion for ${firstName}?`}
-        description={`This begins the 30-day out-of-band erasure process. We will send a confirmation link to your verified parent email. Pausing is completely reversible; deletion is permanent once the 30-day window closes.`}
+        description={`This begins the out-of-band erasure process. We will send a confirmation link to your verified parent email. Pausing is completely reversible; deletion permanently erases all records once confirmed and processed.`}
         confirmLabel="Confirm deletion request"
         cancelLabel="Cancel"
         variant="danger"

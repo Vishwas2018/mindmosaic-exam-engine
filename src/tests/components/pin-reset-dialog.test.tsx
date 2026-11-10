@@ -20,7 +20,7 @@ describe("PinResetDialog", () => {
     );
 
     expect(screen.getByRole("heading", { name: /Reset Aisha’s PIN\?/i })).toBeInTheDocument();
-    expect(screen.getByText(/The old PIN stops working straight away and Aisha is signed out on every device/i)).toBeInTheDocument();
+    expect(screen.getByText(/The old PIN stops working straight away and Aisha must use the new PIN/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Reset the PIN" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Keep it" })).toBeInTheDocument();
   });

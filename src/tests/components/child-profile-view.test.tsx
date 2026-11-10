@@ -165,7 +165,7 @@ describe("ChildProfileView", () => {
     expect(await screen.findByRole("button", { name: /Let Aisha back in/i })).toBeInTheDocument();
   });
 
-  it("allows requesting 30-day out-of-band deletion", async () => {
+  it("allows requesting out-of-band deletion", async () => {
     const user = userEvent.setup();
     render(
       <ChildProfileView
@@ -175,10 +175,10 @@ describe("ChildProfileView", () => {
     );
 
     await user.click(screen.getByRole("button", { name: "Request deletion" }));
-    expect(screen.getByText(/This begins the 30-day out-of-band erasure process/i)).toBeInTheDocument();
+    expect(screen.getByText(/This begins the out-of-band erasure process/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Confirm deletion request" }));
     expect(await screen.findByText(/Deletion requested/i)).toBeInTheDocument();
-    expect(screen.getByText(/Nothing is erased before 30 days/i)).toBeInTheDocument();
+    expect(screen.getByText(/We will verify your request before anything is erased/i)).toBeInTheDocument();
   });
 });

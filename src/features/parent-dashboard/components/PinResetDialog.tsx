@@ -96,7 +96,7 @@ export function PinResetDialog({
       }
       description={
         step === "confirm" || step === "resetting"
-          ? `The old PIN stops working straight away and ${childName} is signed out on every device. Her login code and all her work stay exactly as they are.`
+          ? `The old PIN stops working straight away and ${childName} must use the new PIN for any new session or once her current session ends. Her login code and all her work stay exactly as they are.`
           : undefined
       }
       initialFocusRef={primaryButtonRef}

@@ -303,7 +303,7 @@ export function ChildrenManager({
                     Manage
                   </Link>
                   <Link
-                    href={`/parent/children/${child.id}/curriculum`}
+                    href={`/parent/children/${child.id}/progress`}
                     className="inline-flex min-h-9 items-center justify-center rounded-full border border-royal/10 bg-canvas px-3.5 text-xs font-bold text-ink transition hover:bg-royal/10 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
                   >
                     Progress
