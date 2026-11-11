@@ -357,6 +357,34 @@ describe("buildChildSummary", () => {
     );
     expect(summary.recommendedActions[0]).toMatchObject({ id: "focus-reading" });
   });
+
+  it("tracks paperCount per subject accurately across distinct papers", () => {
+    const summary = buildChildSummary(
+      CHILD,
+      [
+        makeAttempt("a", isoDaysAgo(0), makeResult({
+          breakdowns: {
+            bySubject: {
+              numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+            },
+          },
+        })),
+        makeAttempt("b", isoDaysAgo(1), makeResult({
+          breakdowns: {
+            bySubject: {
+              numeracy: { total: 10, correct: 8, objectiveMarksEarned: 8, objectiveMarksAvailable: 10 },
+              reading: { total: 10, correct: 7, objectiveMarksEarned: 7, objectiveMarksAvailable: 10 },
+            },
+          },
+        })),
+      ],
+      NOW,
+    );
+    const numeracy = summary.subjects.find((s) => s.subject === "numeracy");
+    const reading = summary.subjects.find((s) => s.subject === "reading");
+    expect(numeracy?.paperCount).toBe(2);
+    expect(reading?.paperCount).toBe(1);
+  });
 });
 
 describe("performanceBand", () => {

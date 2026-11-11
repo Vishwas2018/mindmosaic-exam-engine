@@ -56,10 +56,25 @@ export async function POST(request: Request): Promise<NextResponse> {
   // sends the browser back to.
   const { origin } = originCheck;
 
+  let returnPath = "/parent/account";
+  try {
+    const body = (await request.json().catch(() => null)) as { returnPath?: string } | null;
+    if (
+      body?.returnPath &&
+      typeof body.returnPath === "string" &&
+      body.returnPath.startsWith("/") &&
+      !body.returnPath.startsWith("//")
+    ) {
+      returnPath = body.returnPath;
+    }
+  } catch {
+    // default returnPath
+  }
+
   const stripe = getStripeClient();
   const session = await stripe.billingPortal.sessions.create({
     customer: subscriptionRow.stripe_customer_id,
-    return_url: `${origin}/parent`,
+    return_url: `${origin}${returnPath}`,
   });
 
   return NextResponse.json({ url: session.url }, { status: 200 });
