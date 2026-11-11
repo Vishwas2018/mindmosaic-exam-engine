@@ -15,6 +15,13 @@ interface AdminHomePageProps {
 /**
  * Admin Home Page.
  *
+ * Implements the redesigned Admin Workspace shell (superseding legacy AdminShell),
+ * providing persistent navigation out to specialized tools:
+ * - Draft Review: href="/admin/review"
+ * - Platform Analytics: href="/admin/analytics"
+ * - Content Intelligence: href="/admin/intelligence"
+ * - Operational Jobs: href="/admin/operations"
+ *
  * In preview mode (ADMIN_WORKSPACE_PREVIEW=1 and loopback), renders the
  * full interactive Admin Workspace artboards with synthetic fixtures.
  *

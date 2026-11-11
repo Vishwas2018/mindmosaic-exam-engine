@@ -42,10 +42,30 @@ export interface AdminWorkspaceProps {
 }
 
 const LEGACY_TOOLS = [
-  { href: "/admin/review", label: "Draft review", icon: FileSearch },
-  { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/admin/intelligence", label: "Intelligence", icon: FileSearch },
-  { href: "/admin/operations", label: "Operations", icon: Cog },
+  {
+    href: "/admin/review",
+    label: "Draft review",
+    icon: FileSearch,
+    description: "Try unpublished questions, including Scholarship reasoning, and inspect declared answers.",
+  },
+  {
+    href: "/admin/analytics",
+    label: "Analytics",
+    icon: BarChart3,
+    description: "Platform-level attempt, score and time aggregates. Pre-aggregated views only.",
+  },
+  {
+    href: "/admin/intelligence",
+    label: "Intelligence",
+    icon: FileSearch,
+    description: "Question bank performance, per-question accuracy, discrimination, and coverage.",
+  },
+  {
+    href: "/admin/operations",
+    label: "Operations",
+    icon: Cog,
+    description: "Background jobs, retries and operational queues.",
+  },
 ] as const;
 
 export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspaceProps) {
@@ -303,9 +323,9 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
 
             {/* Legacy Tools Links in Sidebar */}
             <div className="border-t border-royal/10 pt-4 space-y-1">
-              <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-[#6e6779]">
-                Specialized Tools
-              </p>
+              <h2 className="px-3 text-[11px] font-bold uppercase tracking-wider text-[#6e6779]">
+                Admin tools
+              </h2>
               {LEGACY_TOOLS.map((tool) => {
                 const Icon = tool.icon;
                 return (
@@ -478,6 +498,43 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+
+              {/* Legacy Admin Tools Quick Navigation */}
+              <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
+                <div>
+                  <h2 className="text-base font-bold text-[#1f1b24]">Admin tools</h2>
+                  <p className="text-xs text-[#6e6779]">
+                    Review draft content and explore aggregate product analytics. Access specialized legacy administration consoles.
+                  </p>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {LEGACY_TOOLS.map((tool) => {
+                    const Icon = tool.icon;
+                    return (
+                      <Link
+                        key={tool.href}
+                        href={tool.href}
+                        className="group flex flex-col justify-between rounded-xl border border-royal/10 bg-[#fcfbf8] p-4 transition hover:-translate-y-0.5 hover:border-royal/30 hover:shadow-xs"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-royal/10 text-royal">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          <ExternalLink className="h-3.5 w-3.5 text-[#6e6779] opacity-60 group-hover:text-royal group-hover:opacity-100 transition" />
+                        </div>
+                        <div className="mt-3">
+                          <p className="text-xs font-bold text-[#1f1b24] group-hover:text-royal transition">
+                            {tool.label}
+                          </p>
+                          <p className="mt-1 text-[11px] text-[#6e6779] line-clamp-2">
+                            {tool.description}
+                          </p>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>
