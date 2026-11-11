@@ -106,4 +106,23 @@ describe("POST /api/stripe/portal", () => {
       expect.objectContaining({ customer: "cus_existing_789" }),
     );
   });
+
+  it("honors safe returnPath parameter for post-billing return", async () => {
+    mockMaybeSingle.mockResolvedValue({ data: { stripe_customer_id: "cus_existing_789" } });
+
+    const request = new Request("http://localhost/api/stripe/portal", {
+      method: "POST",
+      headers: { origin: "http://localhost", host: "localhost", "Content-Type": "application/json" },
+      body: JSON.stringify({ returnPath: "/parent/account/billing" }),
+    });
+
+    const response = await POST(request);
+    expect(response.status).toBe(200);
+    expect(mockPortalSessionsCreate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        customer: "cus_existing_789",
+        return_url: "http://localhost/parent/account/billing",
+      }),
+    );
+  });
 });

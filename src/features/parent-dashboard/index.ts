@@ -102,12 +102,21 @@ export {
   type WritingPromptItem,
 } from "./components/ChildWritingHistory";
 export {
+  ParentAccount,
+  type ParentAccountProps,
+} from "./components/ParentAccount";
+export {
+  ParentBillingHandoff,
+  type ParentBillingHandoffProps,
+} from "./components/ParentBillingHandoff";
+export {
   type SubjectMarksProgress,
   type StrandMarksProgress,
   type ProgressRecommendation,
   type PreviewAnswerReviewItem,
   type ProgrammeAvailability,
   type PreviewSampleQuestion,
+  type PreviewParentAccount,
   PREVIEW_RESULTS_AISHA,
   PREVIEW_RESULTS_KABIR,
   PREVIEW_RESULTS_MAYA,
@@ -119,6 +128,7 @@ export {
   PREVIEW_PROGRAMMES_YEAR5,
   PREVIEW_SAMPLE_QUESTIONS_NUMERACY,
   PREVIEW_SAMPLE_QUESTIONS_READING,
+  PREVIEW_PARENT_ACCOUNT,
 } from "./fixtures";
 
 

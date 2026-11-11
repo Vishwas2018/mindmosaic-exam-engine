@@ -924,3 +924,32 @@ export const PREVIEW_SAMPLE_QUESTIONS_READING: PreviewSampleQuestion[] = [
   },
 ];
 
+export interface PreviewParentAccount {
+  name: string;
+  email: string;
+  passwordLastChanged: string;
+  devicesCount: number;
+  planName: string;
+  planPrice: string;
+  nextPaymentDate: string;
+  placesUsed: number;
+  placesTotal: number;
+  cardBrand: string;
+  cardLast4: string;
+}
+
+export const PREVIEW_PARENT_ACCOUNT: PreviewParentAccount = {
+  name: "Priya Raman",
+  email: "priya.raman@example.com",
+  passwordLastChanged: "3 September 2026",
+  devicesCount: 3,
+  planName: "Family",
+  planPrice: "A$19.90 a month",
+  nextPaymentDate: "3 December 2026",
+  placesUsed: 2,
+  placesTotal: 3,
+  cardBrand: "Visa",
+  cardLast4: "4242",
+};
+
+
