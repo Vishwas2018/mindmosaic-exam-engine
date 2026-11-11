@@ -290,7 +290,7 @@ export function SignInPanel({
             }}
             invalid={error !== null}
           />
-          {error && <MmErrorPanel>{error}</MmErrorPanel>}
+          {error && <MmErrorPanel focusOnMount>{error}</MmErrorPanel>}
           {notice && (
             <p
               role="status"
@@ -449,11 +449,7 @@ export function SignInPanel({
             kind === "parent" ? (
               <button
                 type="button"
-                onClick={() => {
-                  setScreen("forgot");
-                  setResetEmail(ident);
-                  setError(null);
-                }}
+                onClick={() => router.push("/auth/forgot")}
                 className={twMerge(
                   "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
                   mmFocus,
@@ -466,7 +462,7 @@ export function SignInPanel({
         />
 
         {error && (
-          <MmErrorPanel>
+          <MmErrorPanel focusOnMount>
             <span>
               {error}
               {unconfirmed && (
