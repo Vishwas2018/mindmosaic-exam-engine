@@ -525,17 +525,20 @@ export const PREVIEW_HELP_CATEGORIES = [
   {
     id: "getting-started",
     title: "Getting your child signed in",
-    description: "Student codes, 6-digit PINs, resetting credentials, and signing in across devices.",
+    description: "Login codes, PINs, and what to do when one is lost.",
+    countLabel: "6 answers",
     articles: [
       { slug: "forgotten-pin", title: "My child has forgotten their PIN" },
       { slug: "student-login-code", title: "Where to find your child's 8-character login code" },
       { slug: "sign-in-card", title: "Printing or saving a student sign-in card" },
+      { slug: "multiple-devices", title: "Can a child sign in on multiple tablets or computers?" },
     ],
   },
   {
     id: "practice-papers",
     title: "Practice and papers",
-    description: "Timed and untimed modes, pausing mid-paper, and question formats.",
+    description: "What is recorded, what is not, and how long things take.",
+    countLabel: "8 answers",
     articles: [
       { slug: "timed-practice", title: "How timed practice works and when to use it" },
       { slug: "pausing-papers", title: "Can a child pause a practice sitting halfway through?" },
@@ -543,43 +546,47 @@ export const PREVIEW_HELP_CATEGORIES = [
     ],
   },
   {
-    id: "results-marks",
+    id: "understanding-results",
     title: "Understanding results",
-    description: "Objective marks, why we show marks not bands, and the evidence floor.",
+    description: "Marks, strands, awaiting marking, and why there is no predicted band.",
+    countLabel: "5 answers",
     articles: [
       { slug: "marks-not-bands", title: "Why MindMosaic reports marks rather than performance bands" },
+      { slug: "predicted-band", title: "Why is there no predicted band?" },
       { slug: "evidence-floor", title: "What the 2-paper and 8-mark evidence floor means" },
-      { slug: "unreadable-rows", title: "What to do if some activity shows as unreadable" },
+      { slug: "awaiting-marking", title: "What does 'Awaiting marking' mean on written answers?" },
     ],
   },
   {
-    id: "writing-marking",
-    title: "Marking writing",
-    description: "Parent marking rubrics, scoring criteria, and moderation notes.",
-    articles: [
-      { slug: "parent-rubric", title: "Step-by-step guide to marking your child's writing" },
-      { slug: "narrative-criteria", title: "The 10 narrative writing assessment criteria explained" },
-      { slug: "persuasive-criteria", title: "The 10 persuasive writing assessment criteria explained" },
-    ],
-  },
-  {
-    id: "membership-billing",
-    title: "Membership and billing",
-    description: "Family plan places, updating billing card, invoices, and cancelling.",
+    id: "plan-payments",
+    title: "Plan and payments",
+    description: "Plans, places, invoices and cancelling.",
+    countLabel: "7 answers",
     articles: [
       { slug: "family-places", title: "How paid places work on the Family plan" },
-      { slug: "pausing-vs-cancelling", title: "Pausing a child's access versus cancelling your subscription" },
       { slug: "update-card", title: "Updating your payment card via the secure Stripe portal" },
+      { slug: "invoices-receipts", title: "Where to view past invoices and VAT/GST receipts" },
     ],
   },
   {
-    id: "privacy-data",
-    title: "Privacy and data",
-    description: "Student security, encrypted PIN storage, data retention, and erasure requests.",
+    id: "privacy-family-data",
+    title: "Privacy and your family’s data",
+    description: "What we store, who can see it, and how to ask for a copy.",
+    countLabel: "4 answers",
     articles: [
-      { slug: "student-security", title: "How we protect child student data and privacy" },
+      { slug: "what-we-store", title: "What information does MindMosaic store about my children?" },
       { slug: "data-erasure", title: "Requesting verified account and child data deletion (ADR-012)" },
-      { slug: "data-export", title: "Requesting a copy of your family's records" },
+      { slug: "data-export", title: "Downloading a copy of your family's records" },
+    ],
+  },
+  {
+    id: "something-wrong",
+    title: "Something is wrong",
+    description: "A question that looks incorrect, a page that will not load.",
+    countLabel: "3 answers",
+    articles: [
+      { slug: "something-wrong-question", title: "A question looks incorrect or has a typo" },
+      { slug: "page-not-loading", title: "A page will not load or shows an error" },
     ],
   },
 ];
@@ -591,14 +598,94 @@ export const PREVIEW_HELP_ARTICLES: Record<string, PreviewHelpArticle> = {
     category: "Getting your child signed in",
     lead: "You can generate a fresh 6-digit PIN at any time from your child's profile.",
     paragraphs: [
-      "Reset it from their profile. Go to Children, select your child, and press Reset PIN. You will see a new 6-digit PIN displayed once, so write it down before leaving the page.",
-      "Resetting signs them out on all active devices and nothing else changes — their 8-character login code stays the same and none of their completed papers or marks are affected.",
+      "Reset it from their profile. Go to Children, choose the child, and press Reset PIN. You will see a new 6-digit PIN once, so write it down before you close the page.",
+      "Resetting signs them out everywhere and nothing else changes — their login code stays the same and none of their work is affected.",
     ],
-    note: "We only keep a secure cryptographic hash of each PIN, which is why we cannot retrieve or read an existing PIN back to you.",
+    note: "We only keep a scrambled copy of a PIN, which is why we cannot read the old one back to you.",
     action: {
       label: "Go to Children",
       href: "/parent/children",
     },
+  },
+  "student-login-code": {
+    slug: "student-login-code",
+    title: "Where to find your child's 8-character login code",
+    category: "Getting your child signed in",
+    lead: "Each child has a permanent student code that never changes.",
+    paragraphs: [
+      "Your child's 8-character login code (formatted like ABCD-1234) is displayed under Children on their card.",
+      "Children enter this code followed by their 6-digit PIN to access their practice environment.",
+    ],
+    action: {
+      label: "Go to Children",
+      href: "/parent/children",
+    },
+  },
+  "sign-in-card": {
+    slug: "sign-in-card",
+    title: "Printing or saving a student sign-in card",
+    category: "Getting your child signed in",
+    lead: "Printable cards make independent login easy for younger students.",
+    paragraphs: [
+      "From your child's profile, choose Print sign-in card to generate a wallet-sized sign-in card with their login code and instructions.",
+      "The PIN is deliberately left blank on printed cards so you can write it in by hand for safety.",
+    ],
+    action: {
+      label: "Go to Children",
+      href: "/parent/children",
+    },
+  },
+  "multiple-devices": {
+    slug: "multiple-devices",
+    title: "Can a child sign in on multiple tablets or computers?",
+    category: "Getting your child signed in",
+    lead: "Students can practice from any device with a modern browser.",
+    paragraphs: [
+      "Children can sign in on an iPad, laptop, desktop, or mobile phone. Their progress syncs automatically.",
+      "Simultaneous active attempts on the exact same paper are prevented to maintain honest timing.",
+    ],
+    action: {
+      label: "Go to Children",
+      href: "/parent/children",
+    },
+  },
+  "timed-practice": {
+    slug: "timed-practice",
+    title: "How timed practice works and when to use it",
+    category: "Practice and papers",
+    lead: "Realistic exam timing without unnecessary anxiety.",
+    paragraphs: [
+      "Practice papers provide timed and untimed modes. In timed mode, an unobtrusive countdown runs matching the official exam duration.",
+      "We recommend beginning untimed so your child focuses on accuracy and reading technique, adding timed sessions once they are comfortable.",
+    ],
+    action: {
+      label: "View Family Overview",
+      href: "/parent",
+    },
+  },
+  "pausing-papers": {
+    slug: "pausing-papers",
+    title: "Can a child pause a practice sitting halfway through?",
+    category: "Practice and papers",
+    lead: "Practice is designed to accommodate everyday interruptions.",
+    paragraphs: [
+      "If your child needs a break, they can pause their paper or simply close the browser window. Their responses and timer are saved.",
+      "When they sign back in with their student code and PIN, they can resume directly.",
+    ],
+    action: {
+      label: "View Family Overview",
+      href: "/parent",
+    },
+  },
+  "question-types": {
+    slug: "question-types",
+    title: "Multiple choice, short answer, and inline question types",
+    category: "Practice and papers",
+    lead: "MindMosaic mirrors authentic exam item formats.",
+    paragraphs: [
+      "Practice items include single-choice options, multi-select, short text entry, number entry, and drag/reorder questions.",
+      "All objective item formats are marked automatically against the official scoring guide upon submission.",
+    ],
   },
   "marks-not-bands": {
     slug: "marks-not-bands",
@@ -615,20 +702,150 @@ export const PREVIEW_HELP_ARTICLES: Record<string, PreviewHelpArticle> = {
       href: "/parent",
     },
   },
+  "predicted-band": {
+    slug: "predicted-band",
+    title: "Why is there no predicted band?",
+    category: "Understanding results",
+    lead: "Official test bands require statewide cohort standardization.",
+    paragraphs: [
+      "We deliberately avoid inventing artificial 'predicted bands' or estimated percentiles. Official test bands depend on statewide cohort calibrations that cannot be duplicated from small practice samples.",
+      "Instead, we give you precise strand marks, worked answers, and historical trends so you know exactly which question types your child has mastered.",
+    ],
+    action: {
+      label: "View Family Overview",
+      href: "/parent",
+    },
+  },
+  "evidence-floor": {
+    slug: "evidence-floor",
+    title: "What the 2-paper and 8-mark evidence floor means",
+    category: "Understanding results",
+    lead: "Preventing early over-interpretation of minimal practice data.",
+    paragraphs: [
+      "Evaluative summaries are held back until a child completes at least 2 papers and 8 scored marks.",
+      "Before that threshold is reached, the dashboard honestly displays 'Not enough yet' rather than pretending to detect trends from one single sitting.",
+    ],
+    action: {
+      label: "View Family Overview",
+      href: "/parent",
+    },
+  },
+  "awaiting-marking": {
+    slug: "awaiting-marking",
+    title: "What does 'Awaiting marking' mean on written answers?",
+    category: "Understanding results",
+    lead: "Writing papers require human evaluation.",
+    paragraphs: [
+      "Objective multiple-choice and numeric questions are marked instantly. Written tasks remain in 'Awaiting marking' until marked using the official rubric.",
+      "Awaiting marking items do not count as incorrect — they are excluded from earned marks until evaluated.",
+    ],
+    action: {
+      label: "Go to Children",
+      href: "/parent/children",
+    },
+  },
+  "family-places": {
+    slug: "family-places",
+    title: "How paid places work on the Family plan",
+    category: "Plan and payments",
+    lead: "Manage multiple children under one plan.",
+    paragraphs: [
+      "A Family membership covers up to 3 active child profiles. Each child has their own independent login code, progress history, and practice recommendations.",
+      "If you pause a child profile, that seat becomes available for another learner.",
+    ],
+    action: {
+      label: "Go to Account",
+      href: "/parent/account",
+    },
+  },
+  "update-card": {
+    slug: "update-card",
+    title: "Updating your payment card via the secure Stripe portal",
+    category: "Plan and payments",
+    lead: "Payment details are stored securely by Stripe.",
+    paragraphs: [
+      "Go to Account → Plan & billing handoff, and click 'Payment methods'. This safely transfers you to the Stripe customer portal.",
+      "Once updated, you are returned directly back to your Parent Account page.",
+    ],
+    action: {
+      label: "Open Plan & billing",
+      href: "/parent/account/billing",
+    },
+  },
+  "invoices-receipts": {
+    slug: "invoices-receipts",
+    title: "Where to view past invoices and VAT/GST receipts",
+    category: "Plan and payments",
+    lead: "Download tax invoices and receipts at any time.",
+    paragraphs: [
+      "From Account → Plan & billing handoff, choose 'Invoices' to view and download past subscription receipts directly from the billing portal.",
+    ],
+    action: {
+      label: "Open Plan & billing",
+      href: "/parent/account/billing",
+    },
+  },
+  "what-we-store": {
+    slug: "what-we-store",
+    title: "What information does MindMosaic store about my children?",
+    category: "Privacy and your family’s data",
+    lead: "We collect only what is strictly required to support learning.",
+    paragraphs: [
+      "We store first names (or nicknames), current year level, question attempts, and scored marks. We never collect dates of birth, street addresses, school names, or government student IDs.",
+      "Child PINs are stored exclusively as one-way cryptographic hashes.",
+    ],
+    action: {
+      label: "Go to Account",
+      href: "/parent/account",
+    },
+  },
   "data-erasure": {
     slug: "data-erasure",
     title: "Requesting verified account and child data deletion (ADR-012)",
-    category: "Privacy and data",
+    category: "Privacy and your family’s data",
     lead: "MindMosaic supports verified guardian-authorized data erasure.",
     paragraphs: [
-      "Under our data privacy architecture (ADR-012), data deletion is handled via a verified administrative request. Because educational and financial records require verification, deletion is protected against accidental or unauthorized single-click actions.",
-      "Once requested and verified by guardian email confirmation, the processor systematically erases student profiles, sitting responses, and associated identifiers across our systems.",
+      "Under our data privacy architecture (ADR-012), data deletion is handled via a verified administrative request to hello@mindmosaic.app.",
+      "Because educational records cannot be recovered once purged, deletion requires out-of-band email confirmation from the primary guardian account.",
     ],
     note: "If you simply want to pause practice without losing work, use the pause toggle on the child's profile instead.",
     action: {
       label: "Go to Account",
       href: "/parent/account",
     },
+  },
+  "data-export": {
+    slug: "data-export",
+    title: "Downloading a copy of your family's records",
+    category: "Privacy and your family’s data",
+    lead: "Download your family's complete learning history.",
+    paragraphs: [
+      "You can export a machine-readable JSON copy of all student profiles, sitting attempts, and scores directly from your Account settings.",
+    ],
+    action: {
+      label: "Go to Account",
+      href: "/parent/account",
+    },
+  },
+  "something-wrong-question": {
+    slug: "something-wrong-question",
+    title: "A question looks incorrect or has a typo",
+    category: "Something is wrong",
+    lead: "Our curriculum editors review every flagged item.",
+    paragraphs: [
+      "If you notice an ambiguity, formatting glitch, or factual discrepancy in a question, send us a message selecting the relevant child and subject.",
+      "Every question item in MindMosaic has a tamper-evident revision ID, allowing our educational team to trace the exact question version.",
+    ],
+  },
+  "page-not-loading": {
+    slug: "page-not-loading",
+    title: "A page will not load or shows an error",
+    category: "Something is wrong",
+    lead: "Quick troubleshooting steps for browser and connectivity issues.",
+    paragraphs: [
+      "Try refreshing the page or checking your internet connection. MindMosaic caches active student question papers locally during sittings to guard against intermittent disconnects.",
+      "If a screen consistently fails to load, send us a message or email hello@mindmosaic.app with details of your device and browser.",
+    ],
   },
 };
 

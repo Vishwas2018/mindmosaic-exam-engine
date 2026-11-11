@@ -94,17 +94,19 @@ export default async function ParentAccountPage() {
     userMeta?.full_name ||
     "Parent";
 
-  const planName =
-    sub?.plan === "family_annual"
+  const planName = sub
+    ? sub.plan === "family_annual"
       ? "Family Annual"
-      : sub?.plan === "family_monthly"
+      : sub.plan === "family_monthly"
         ? "Family"
-        : "Starter";
+        : "Starter Plan"
+    : "Free Trial / Starter";
 
-  const planPrice =
-    sub?.plan === "family_annual"
+  const planPrice = sub
+    ? sub.plan === "family_annual"
       ? "A$199 a year"
-      : "A$19.90 a month";
+      : "A$19.90 a month"
+    : "No active paid plan";
 
   const nextPaymentDate = sub?.currentPeriodEnd
     ? new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
@@ -112,7 +114,7 @@ export default async function ParentAccountPage() {
         month: "long",
         year: "numeric",
       })
-    : "3 December 2026";
+    : "No upcoming renewal";
 
   const formattedPasswordDate = user.updated_at
     ? new Date(user.updated_at).toLocaleDateString("en-AU", {

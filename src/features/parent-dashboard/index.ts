@@ -110,6 +110,11 @@ export {
   type ParentBillingHandoffProps,
 } from "./components/ParentBillingHandoff";
 export {
+  ParentHelpCentre,
+  type ParentHelpCentreProps,
+  type HelpCategoryItem,
+} from "./components/ParentHelpCentre";
+export {
   type SubjectMarksProgress,
   type StrandMarksProgress,
   type ProgressRecommendation,
@@ -117,6 +122,7 @@ export {
   type ProgrammeAvailability,
   type PreviewSampleQuestion,
   type PreviewParentAccount,
+  type PreviewHelpArticle,
   PREVIEW_RESULTS_AISHA,
   PREVIEW_RESULTS_KABIR,
   PREVIEW_RESULTS_MAYA,
@@ -129,6 +135,8 @@ export {
   PREVIEW_SAMPLE_QUESTIONS_NUMERACY,
   PREVIEW_SAMPLE_QUESTIONS_READING,
   PREVIEW_PARENT_ACCOUNT,
+  PREVIEW_HELP_CATEGORIES,
+  PREVIEW_HELP_ARTICLES,
 } from "./fixtures";
 
 

@@ -56,14 +56,16 @@ export async function POST(request: Request): Promise<NextResponse> {
   // sends the browser back to.
   const { origin } = originCheck;
 
+  const ALLOWED_RETURN_PREFIXES = ["/parent/account", "/parent/account/billing", "/parent", "/billing"];
   let returnPath = "/parent/account";
   try {
     const body = (await request.json().catch(() => null)) as { returnPath?: string } | null;
     if (
       body?.returnPath &&
       typeof body.returnPath === "string" &&
-      body.returnPath.startsWith("/") &&
-      !body.returnPath.startsWith("//")
+      ALLOWED_RETURN_PREFIXES.some(
+        (prefix) => body.returnPath === prefix || body.returnPath?.startsWith(`${prefix}?`),
+      )
     ) {
       returnPath = body.returnPath;
     }

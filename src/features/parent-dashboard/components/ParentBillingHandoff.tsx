@@ -76,7 +76,7 @@ export function ParentBillingHandoff({
             Plan &amp; billing
           </h1>
           <p className="mt-1 text-sm font-medium text-muted sm:text-base">
-            This screen lives on the Plan &amp; billing canvas. It is shown here so the parent journey can be walked end to end.
+            Manage your MindMosaic membership, payment methods, and invoices.
           </p>
         </div>
 
@@ -95,8 +95,8 @@ export function ParentBillingHandoff({
       >
         <Info className="mt-0.5 h-5 w-5 shrink-0 text-royal" aria-hidden="true" />
         <div className="leading-relaxed">
-          <strong className="font-extrabold text-ink">Designed on the other canvas.</strong>{" "}
-          The 35 Plan &amp; billing artboards — checkout, plan changes, cards, failed payments, cancelling and invoices — are a separate piece of work. This board is the join between the two, not a second copy of them.
+          <strong className="font-extrabold text-ink">Secure Billing Management:</strong>{" "}
+          MindMosaic family memberships are securely handled with Stripe. You can update payment cards, review past invoices, or modify your subscription tier at any time.
         </div>
       </div>
 
@@ -136,7 +136,9 @@ export function ParentBillingHandoff({
             <div className="flex items-center justify-between py-3">
               <dt className="text-muted">Card</dt>
               <dd className="font-extrabold text-ink">
-                {membership.cardBrand} ending {membership.cardLast4}
+                {membership.cardLast4
+                  ? `${membership.cardBrand} ending ${membership.cardLast4}`
+                  : membership.cardBrand || "No card on file"}
               </dd>
             </div>
           </dl>
@@ -175,7 +177,7 @@ export function ParentBillingHandoff({
           </div>
 
           <p className="mt-4 text-xs leading-relaxed text-muted">
-            Each of these opens the matching screen on the Plan &amp; billing canvas.
+            Manage payment details and billing history directly with our payment processor.
           </p>
         </section>
 
@@ -189,7 +191,7 @@ export function ParentBillingHandoff({
           </h2>
 
           <p className="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
-            Every billing screen returns here, to Account, rather than to the parent home page. A parent who went in to change a card should land back where they were, not three screens away from it.
+            Every billing action returns here to your Account rather than the home page. When you finish updating cards or viewing invoices, you will return straight back to your profile.
           </p>
 
           <Link
@@ -198,15 +200,6 @@ export function ParentBillingHandoff({
           >
             &larr; Back to Account
           </Link>
-
-          <div className="mt-6 rounded-xl border border-royal/15 bg-surface-container-low/40 p-4 text-xs text-muted">
-            <span className="inline-block rounded bg-amber-500/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800 mb-1.5">
-              NEEDS A BUILD
-            </span>
-            <p className="leading-relaxed">
-              Both Stripe routes currently return to <code>/parent</code>. A per-flow return path is on the billing dependency list and is what makes this true.
-            </p>
-          </div>
         </section>
       </div>
     </div>

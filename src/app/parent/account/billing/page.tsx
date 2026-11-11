@@ -77,25 +77,27 @@ export default async function ParentAccountBillingPage() {
   const subResult = await getMySubscription();
   const sub = subResult.status === "ready" ? subResult.subscription : null;
 
-  const planName =
-    sub?.plan === "family_annual"
+  const planName = sub
+    ? sub.plan === "family_annual"
       ? "Family Annual"
-      : sub?.plan === "family_monthly"
+      : sub.plan === "family_monthly"
         ? "Family"
-        : "Starter";
+        : "Starter Plan"
+    : "Free Trial / Starter";
 
-  const planPrice =
-    sub?.plan === "family_annual"
+  const planPrice = sub
+    ? sub.plan === "family_annual"
       ? "A$199 per year"
-      : "A$19.90 per month";
+      : "A$19.90 per month"
+    : "No active paid plan";
 
-  const nextPaymentDate = sub?.currentPeriodEnd
-    ? new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
+  const nextPayment = sub?.currentPeriodEnd
+    ? `${planPrice.split(" ")[0]} on ${new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
         day: "numeric",
         month: "long",
         year: "numeric",
-      })
-    : "3 December 2026";
+      })}`
+    : "None scheduled";
 
   const seatsTotal = sub?.seats ?? 3;
 
@@ -106,9 +108,9 @@ export default async function ParentAccountBillingPage() {
           planName,
           planPrice,
           seatsCovered: `Up to ${seatsTotal} · ${placesUsed} in use`,
-          nextPayment: `${planPrice.split(" ")[0]} on ${nextPaymentDate}`,
-          cardBrand: "Visa",
-          cardLast4: "4242",
+          nextPayment,
+          cardBrand: sub ? "Card on file (via Stripe)" : "No card on file",
+          cardLast4: "",
         }}
         isLocalPreview={false}
       />
