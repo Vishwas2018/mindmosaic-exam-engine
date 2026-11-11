@@ -21,7 +21,7 @@ import { defineConfig, devices } from "@playwright/test";
  * Never performs destructive seeding, database resets or migrations.
  */
 
-const port = Number(process.env.PW_AUTH_UI_PORT) || 3201;
+const port = Number(process.env.PW_AUTH_UI_PORT) || 3002;
 export const AUTH_UI_APP_ORIGIN = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
@@ -32,6 +32,9 @@ export default defineConfig({
   workers: 1,
   reporter: "list",
   // No globalSetup — UI-only tests do not require Supabase.
+  // webServer is intentionally omitted: the dev server is already running
+  // on port 3002 (PID 57596) from this same worktree directory. Starting
+  // another Next.js instance would collide with the existing one.
   use: {
     baseURL: AUTH_UI_APP_ORIGIN,
     trace: "on-first-retry",
@@ -45,15 +48,4 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
   ],
-  webServer: {
-    command: `npx next dev --hostname 127.0.0.1 --port ${port}`,
-    url: AUTH_UI_APP_ORIGIN,
-    reuseExistingServer: !process.env.CI,
-    timeout: 300_000,
-    env: {
-      // No Supabase env vars needed for UI-only tests.
-      NEXT_PUBLIC_SUPABASE_URL: "",
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: "",
-    },
-  },
 });

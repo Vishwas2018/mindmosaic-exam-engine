@@ -57,7 +57,7 @@ test.describe("New auth screens — rendered and accessible", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/auth/signed-out");
-    await expect(page.getByRole("heading", { name: /signed out/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /^Signed out$/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /sign in again/i })).toBeVisible();
     await context.close();
   });
@@ -66,9 +66,9 @@ test.describe("New auth screens — rendered and accessible", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/student-help");
-    await expect(page.getByRole("heading", { name: /can't sign in/i })).toBeVisible();
-    await expect(page.getByText(/login code/i)).toBeVisible();
-    await expect(page.getByText(/PIN/i)).toBeVisible();
+    await expect(page.getByRole("heading", { name: /sign in/i })).toBeVisible();
+    await expect(page.getByText(/looked after by a grown-up/i)).toBeVisible();
+    await expect(page.getByText(/Can you reset my PIN/i)).toBeVisible();
     await context.close();
   });
 
