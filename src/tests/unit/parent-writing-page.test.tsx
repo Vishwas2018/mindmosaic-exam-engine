@@ -29,23 +29,32 @@ vi.mock("@/server/writing/queries", () => ({
   loadWritingHistory: mockLoadWritingHistory,
 }));
 
-vi.mock("@/lib/supabase/server", () => ({
-  createClient: vi.fn(async () => ({
-    auth: {
-      getUser: async () => ({ data: { user: { id: "parent-1" } } }),
-    },
-    from: vi.fn(() => ({
-      select: vi.fn(() => ({
-        eq: vi.fn(() => ({
-          single: async () => ({
-            data: { id: "child-1", display_name: "Aisha", year_level: 3 },
-            error: null,
-          }),
-        })),
+vi.mock("@/lib/supabase/server", () => {
+  const createChain = () => {
+    const chain: Record<string, unknown> = {};
+    chain.eq = vi.fn(() => chain);
+    chain.single = vi.fn(async () => ({
+      data: { id: "child-1", display_name: "Aisha", year_level: 3 },
+      error: null,
+    }));
+    chain.maybeSingle = vi.fn(async () => ({
+      data: { child_id: "child-1" },
+      error: null,
+    }));
+    return chain;
+  };
+
+  return {
+    createClient: vi.fn(async () => ({
+      auth: {
+        getUser: async () => ({ data: { user: { id: "parent-1" } } }),
+      },
+      from: vi.fn(() => ({
+        select: vi.fn(() => createChain()),
       })),
     })),
-  })),
-}));
+  };
+});
 
 import ParentWritingPage from "@/app/parent/writing/page";
 import ChildWritingPage from "@/app/parent/children/[childId]/writing/page";

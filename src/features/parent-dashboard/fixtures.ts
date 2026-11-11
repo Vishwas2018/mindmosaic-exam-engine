@@ -90,6 +90,23 @@ export interface ProgressRecommendation {
   actionHref: string;
 }
 
+export interface ProgrammeAvailability {
+  id: string;
+  title: string;
+  subject: string;
+  status: "ready" | "not_written" | "could_not_check";
+  questionCountEstimated?: number;
+  setSizesDescription?: string;
+  description?: string;
+}
+
+export interface PreviewSampleQuestion {
+  id: string;
+  prompt: string;
+  options: string[];
+  correctIndex: number;
+}
+
 export interface PreviewHelpArticle {
   slug: string;
   title: string;
@@ -764,6 +781,146 @@ export const PREVIEW_FAMILY_OVERVIEW_SUMMARIES: readonly ChildSummary[] = [
         description: "At least 2 papers and 8 marks are required before evaluative subject claims appear.",
       },
     ],
+  },
+];
+
+export const PREVIEW_PROGRAMMES_YEAR3: ProgrammeAvailability[] = [
+  {
+    id: "naplan-numeracy-y3",
+    title: "NAPLAN-style Numeracy",
+    subject: "numeracy",
+    status: "ready",
+    questionCountEstimated: 180,
+    setSizesDescription: "sets of 10, 20 or a full paper",
+  },
+  {
+    id: "naplan-reading-y3",
+    title: "NAPLAN-style Reading",
+    subject: "reading",
+    status: "ready",
+    questionCountEstimated: 95,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "naplan-conventions-y3",
+    title: "NAPLAN-style Language conventions",
+    subject: "language_conventions",
+    status: "ready",
+    questionCountEstimated: 82,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "icas-english-y3",
+    title: "ICAS-style English",
+    subject: "reading",
+    status: "ready",
+    questionCountEstimated: 140,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "icas-science-y3",
+    title: "ICAS-style Science",
+    subject: "science",
+    status: "not_written",
+    description: "There are no questions for this one at Year 3 yet. It is not hidden from you, and it is not coming this term.",
+  },
+  {
+    id: "icas-digital-tech-y3",
+    title: "ICAS-style Digital Technologies",
+    subject: "digital_technologies",
+    status: "could_not_check",
+    description: "We could not work out what is available here just now. There may be plenty or there may be none — we are not going to guess. Try again shortly.",
+  },
+];
+
+export const PREVIEW_PROGRAMMES_YEAR5: ProgrammeAvailability[] = [
+  {
+    id: "naplan-numeracy-y5",
+    title: "NAPLAN-style Numeracy",
+    subject: "numeracy",
+    status: "ready",
+    questionCountEstimated: 210,
+    setSizesDescription: "sets of 10, 20 or a full paper",
+  },
+  {
+    id: "naplan-reading-y5",
+    title: "NAPLAN-style Reading",
+    subject: "reading",
+    status: "ready",
+    questionCountEstimated: 120,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "naplan-conventions-y5",
+    title: "NAPLAN-style Language conventions",
+    subject: "language_conventions",
+    status: "ready",
+    questionCountEstimated: 95,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "icas-english-y5",
+    title: "ICAS-style English",
+    subject: "reading",
+    status: "ready",
+    questionCountEstimated: 160,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "icas-science-y5",
+    title: "ICAS-style Science",
+    subject: "science",
+    status: "ready",
+    questionCountEstimated: 110,
+    setSizesDescription: "sets of 10 or 20",
+  },
+  {
+    id: "icas-digital-tech-y5",
+    title: "ICAS-style Digital Technologies",
+    subject: "digital_technologies",
+    status: "could_not_check",
+    description: "We could not work out what is available here just now. There may be plenty or there may be none — we are not going to guess. Try again shortly.",
+  },
+];
+
+export const PREVIEW_SAMPLE_QUESTIONS_NUMERACY: PreviewSampleQuestion[] = [
+  {
+    id: "sq-num-01",
+    prompt: "A shop has 4 shelves. Each shelf holds 25 jars. How many jars are there altogether?",
+    options: ["29 jars", "100 jars", "104 jars", "254 jars"],
+    correctIndex: 1,
+  },
+  {
+    id: "sq-num-02",
+    prompt: "Liam has $12.50. He buys a notebook for $4.20 and a pen for $2.80. How much change does he get?",
+    options: ["$5.50", "$6.00", "$6.50", "$7.00"],
+    correctIndex: 0,
+  },
+  {
+    id: "sq-num-03",
+    prompt: "Which shape has exactly 5 vertices and 8 edges?",
+    options: ["Square prism", "Square-based pyramid", "Triangular prism", "Pentagonal pyramid"],
+    correctIndex: 1,
+  },
+];
+
+export const PREVIEW_SAMPLE_QUESTIONS_READING: PreviewSampleQuestion[] = [
+  {
+    id: "sq-read-01",
+    prompt: "What is the main thing the second paragraph tells you about the lighthouse?",
+    options: [
+      "That it was built to warn ships",
+      "That it was painted white and red",
+      "That the keeper lived there alone",
+      "That the light broke in the storm",
+    ],
+    correctIndex: 0,
+  },
+  {
+    id: "sq-read-02",
+    prompt: "Which word in the last sentence means the same as “enormous”?",
+    options: ["rocky", "vast", "ancient", "narrow"],
+    correctIndex: 1,
   },
 ];
 

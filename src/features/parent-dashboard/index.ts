@@ -88,10 +88,26 @@ export {
   type WorkedAnswerReviewProps,
 } from "./components/WorkedAnswerReview";
 export {
+  ChildLearningHub,
+  type ChildLearningHubProps,
+} from "./components/ChildLearningHub";
+export {
+  ParentPracticePreview,
+  type ParentPracticePreviewProps,
+} from "./components/ParentPracticePreview";
+export {
+  ChildWritingHistory,
+  type ChildWritingHistoryProps,
+  type WritingSubmissionItem,
+  type WritingPromptItem,
+} from "./components/ChildWritingHistory";
+export {
   type SubjectMarksProgress,
   type StrandMarksProgress,
   type ProgressRecommendation,
   type PreviewAnswerReviewItem,
+  type ProgrammeAvailability,
+  type PreviewSampleQuestion,
   PREVIEW_RESULTS_AISHA,
   PREVIEW_RESULTS_KABIR,
   PREVIEW_RESULTS_MAYA,
@@ -99,6 +115,10 @@ export {
   PREVIEW_STRANDS_AISHA,
   PREVIEW_RECOMMENDATION_AISHA,
   PREVIEW_ANSWER_REVIEW_READING,
+  PREVIEW_PROGRAMMES_YEAR3,
+  PREVIEW_PROGRAMMES_YEAR5,
+  PREVIEW_SAMPLE_QUESTIONS_NUMERACY,
+  PREVIEW_SAMPLE_QUESTIONS_READING,
 } from "./fixtures";
 
 
