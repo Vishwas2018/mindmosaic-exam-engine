@@ -63,7 +63,7 @@ export interface EmailConfirmResult extends AuthResult {
   readonly role?: ProfileRole | null;
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+export const AuthContext = createContext<AuthContextValue | null>(null);
 
 const notConfigured = (): AuthResult => ({
   ok: false,
