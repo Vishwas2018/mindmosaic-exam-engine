@@ -70,6 +70,7 @@ __pycache__/
 
 # generated test output & debug screenshots — never commit
 /docs/overnight/screenshots/
+/docs/audits/screenshots/
 
 # local scratch & cleanup staging — never project source
 /_to_delete/
