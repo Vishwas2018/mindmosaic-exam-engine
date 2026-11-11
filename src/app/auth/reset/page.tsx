@@ -9,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 import { useAuth } from "@/features/auth";
 import { CROSS_DEVICE_MESSAGE, friendlyLinkError, readLinkCredentials, stripLinkCredentials } from "@/features/auth/link-errors";
 import { useFocusOnShow } from "@/features/auth/components/use-focus-on-show";
+import { forgetRecovery } from "@/features/auth/recovery-marker";
 import {
   MmErrorPanel,
   MmField,
@@ -162,8 +163,10 @@ export default function ResetPasswordPage() {
     setSubmitting(false);
     if (result.ok) {
       setMessage({ tone: "success", text: "Password updated — taking you to sign in…" });
-      /* End the recovery session so the next step is a normal sign-in with the new password. */
+      /* End the recovery session so the next step is a normal sign-in with the new password.
+       * Also clear the recovery marker so it cannot be reused after a successful reset. */
       void signOut();
+      forgetRecovery();
       setTimeout(() => router.push("/sign-in"), 1500);
     } else if (result.message && /session/i.test(result.message)) {
       // No recovery session (e.g. the link was already used, or opened cold

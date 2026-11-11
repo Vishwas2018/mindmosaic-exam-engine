@@ -29,6 +29,8 @@ const mockOnAuthStateChange = vi.fn(() => ({
   data: { subscription: { unsubscribe: vi.fn() } },
 }));
 
+const mockRemoveItem = vi.hoisted(() => vi.spyOn(Storage.prototype, 'removeItem'));
+
 vi.mock("@/lib/supabase/client", () => ({
   createClient: () => ({
     auth: {
@@ -89,10 +91,12 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
     mockGetUser.mockReset();
     mockAssurance.mockReset();
     mockSignOut.mockClear();
+    mockRemoveItem.mockClear();
   });
 
   afterEach(() => {
     window.history.pushState({}, "", originalHref);
+    mockRemoveItem.mockRestore();
   });
 
   it("shows an expired-link screen instead of the form when Supabase reports otp_expired", () => {
@@ -343,6 +347,36 @@ describe("ResetPasswordPage — link shapes, cold access and focus", () => {
 
       expect(await screen.findByText(/password updated/i)).toBeInTheDocument();
       expect(mockSignOut).toHaveBeenCalled();
+    });
+
+    it("clears the recovery marker after successful password reset", async () => {
+      window.history.pushState({}, "", "/auth/reset");
+      signedInWith(recoveryNow());
+      mockUpdateUser.mockResolvedValue({ data: { user: { id: "u1" } }, error: null });
+      const user = userEvent.setup();
+      renderReset();
+
+      await user.type(await screen.findByLabelText("New password"), "Str0ng!pass");
+      await user.type(screen.getByLabelText(/confirm new password/i), "Str0ng!pass");
+      await user.click(screen.getByRole("button", { name: /update password/i }));
+
+      expect(await screen.findByText(/password updated/i)).toBeInTheDocument();
+      expect(mockRemoveItem).toHaveBeenCalledWith("mm-recovery-session");
+    });
+
+    it("does not clear the recovery marker when password reset fails", async () => {
+      window.history.pushState({}, "", "/auth/reset");
+      signedInWith(recoveryNow());
+      mockUpdateUser.mockResolvedValue({ error: { message: "Auth session missing!" } });
+      const user = userEvent.setup();
+      renderReset();
+
+      await user.type(await screen.findByLabelText("New password"), "Str0ng!pass");
+      await user.type(screen.getByLabelText(/confirm new password/i), "Str0ng!pass");
+      await user.click(screen.getByRole("button", { name: /update password/i }));
+
+      expect(await screen.findByText(/link expired or invalid/i)).toBeInTheDocument();
+      expect(mockRemoveItem).not.toHaveBeenCalledWith("mm-recovery-session");
     });
   });
 });

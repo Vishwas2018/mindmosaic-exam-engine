@@ -394,6 +394,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
            can never outlive it and sign the next user out on their first
            boot. */
         clearSessionPersistence();
+        /* Clear any recovery marker so it cannot outlive the sign-out. */
+        forgetRecovery();
         await supabase.auth.signOut();
       },
     };
