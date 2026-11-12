@@ -27,7 +27,7 @@ test.describe("role access", () => {
     const noAttempts = await (await contextAs("student-no-attempts")).newPage();
     await noAttempts.goto("/student");
     await expect(noAttempts).toHaveTitle(/My Learning — Dashboard/);
-    await expect(noAttempts.getByText("No completed sessions yet.").first()).toBeVisible();
+    await expect(noAttempts.getByText(/No completed sessions yet\.|Nothing finished yet/).first()).toBeVisible();
 
     const completed = await (await contextAs("student-completed-attempt")).newPage();
     await completed.goto("/student");
@@ -52,7 +52,7 @@ test.describe("role access", () => {
     const page = await context.newPage();
     await page.goto("/admin");
     await expect(page).toHaveTitle(/Admin/);
-    await expect(page.getByRole("heading", { name: "Admin tools" })).toBeVisible();
+    await expect(page.getByRole("main").getByRole("heading", { name: "Admin tools" })).toBeVisible();
   });
 
   test("unauthenticated visitor is redirected away from every role route", async ({

@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Sign in to MindMosaic — parent accounts and student profiles both sign in here.",
 };
 
+export const dynamic = "force-dynamic";
+
 /**
  * Log in — design handoff screen 6. Split layout at `1.05fr / 1fr`, plum
  * mosaic panel on the left, form on the right.

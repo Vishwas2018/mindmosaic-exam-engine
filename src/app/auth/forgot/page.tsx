@@ -22,7 +22,11 @@ export default function ForgotPasswordPage() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    if (!email.trim() || submitting) return;
+    if (!email.trim()) {
+      setError("Enter the email address on your account.");
+      return;
+    }
+    if (submitting) return;
     setSubmitting(true);
     setError(null);
     const result = await sendPasswordReset(email.trim());
@@ -103,8 +107,8 @@ export default function ForgotPasswordPage() {
             />
             <button
               type="submit"
-              disabled={submitting || !email.trim()}
-              className={mmAuthButton({ disabled: submitting || !email.trim(), className: "w-full" })}
+              disabled={submitting}
+              className={mmAuthButton({ disabled: submitting, className: "w-full" })}
             >
               {submitting && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
               {submitting ? "Sending…" : "Send reset link"}

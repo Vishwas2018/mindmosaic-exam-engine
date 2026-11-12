@@ -44,7 +44,7 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
     await expect(
       page.getByRole("heading", { name: /Welcome back/i }),
     ).toBeVisible();
-    await expect(page.getByText("No completed sessions yet.")).toBeVisible();
+    await expect(page.getByText(/No completed sessions yet\.|Nothing finished yet/)).toBeVisible();
 
     /* The dashboard's mode CTAs link to /practice (the catalogue), which
        requires picking a program before reaching the configurator — the

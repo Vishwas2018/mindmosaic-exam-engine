@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "Request a password reset link for your MindMosaic account.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function ForgotPasswordLayout({
   children,
 }: {

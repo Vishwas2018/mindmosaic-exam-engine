@@ -478,7 +478,7 @@ export function FamilyOverview({
               <div className="pt-2 border-t border-royal/8">
                 <Link
                   href="/parent/help"
-                  className="inline-flex items-center gap-1 text-xs font-bold text-royal hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 items-center gap-1 text-xs font-bold text-royal hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
                 >
                   How we work these out &rarr;
                 </Link>
@@ -495,10 +495,10 @@ export function FamilyOverview({
             <p className="mt-2 text-xs text-muted">
               Read our comprehensive parent guide or email education support directly.
             </p>
-            <div className="mt-3">
+            <div className="mt-1">
               <Link
                 href="/parent/help"
-                className="text-xs font-bold text-royal hover:underline"
+                className="inline-flex min-h-11 items-center text-xs font-bold text-royal hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
               >
                 Visit Help Centre &rarr;
               </Link>

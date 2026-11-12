@@ -1,5 +1,5 @@
 /**
- * Builds the report-only Content-Security-Policy value for a single request.
+ * Builds the Content-Security-Policy value for a single request.
  * `nonce` must be a fresh, per-request random value — see src/proxy.ts.
  *
  * Allowlist rationale:

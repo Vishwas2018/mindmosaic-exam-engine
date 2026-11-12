@@ -94,7 +94,7 @@
     "server-only": "^0.0.1",
     "stripe": "^22.3.2",
     "tailwind-merge": "^3.6.0",
-    "zod": "^4.4.3",
+    "zod": "^4.6.7",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
@@ -118,5 +118,9 @@
     "typescript": "^5",
     "vite": "6.4.3",
     "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "source-map-js": "1.2.2",
+    "baseline-browser-mapping": "2.11.36"
   }
 }

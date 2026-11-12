@@ -22,6 +22,8 @@ export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
       robots: { index: false, follow: false },
     };
 
+export const dynamic = "force-dynamic";
+
 /**
  * Sign up — design handoff screen 7.
  *

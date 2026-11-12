@@ -15,7 +15,7 @@ const STUDENT_PAGES = [
   // "Do you want to study today?" copy — the real h1 is the
   // DashboardWelcomeBanner greeting.
   { path: "/student", heading: /Welcome back/i },
-  { path: "/student/learn", heading: /Learning hub/i },
+  { path: "/student/learn", heading: /^Learning Hub$/i },
   { path: "/student/assignments", heading: null },
   { path: "/student/engagement", heading: null },
   // Added (2026-09 e2e repair, Step 3): previously zero coverage, old or

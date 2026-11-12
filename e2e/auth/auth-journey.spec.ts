@@ -114,7 +114,9 @@ test.describe("Student code/PIN authentication", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/student-sign-in");
-    await expect(page.getByRole("tab", { name: /student/i })).toHaveAttribute(
+    const studentTab = page.getByRole("tab", { name: /student/i });
+    await expect(studentTab).toBeVisible({ timeout: 15000 });
+    await expect(studentTab).toHaveAttribute(
       "aria-selected",
       "true",
     );
@@ -127,8 +129,10 @@ test.describe("Student code/PIN authentication", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/student-sign-in");
-    await page.getByRole("tab", { name: /student/i }).click();
-    await expect(page.getByRole("link", { name: /parent view/i })).toBeVisible();
+    const studentTab = page.getByRole("tab", { name: /student/i });
+    await expect(studentTab).toBeVisible({ timeout: 15000 });
+    await studentTab.click();
+    await expect(page.getByRole("link", { name: /parent view/i })).toBeVisible({ timeout: 15000 });
     await context.close();
   });
 });

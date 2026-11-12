@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Sign in with the login code and PIN your parent gave you.",
 };
 
+export const dynamic = "force-dynamic";
+
 /**
  * The student's own door into the same screen as /sign-in, opened on the
  * Student tab.
