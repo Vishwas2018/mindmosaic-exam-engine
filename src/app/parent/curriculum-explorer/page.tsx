@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "@/features/landing/components/Closing";
-import { SiteNav } from "@/features/landing/components/SiteNav";
+import { ParentShell } from "@/features/parent-dashboard";
 import { ParentCurriculumExplorer } from "@/features/curriculum/parent-explorer";
 import { PostgresCurriculumCatalogue, gatedPracticeCoverageResolver } from "@/server/curriculum";
 import type { CurriculumCatalogueItem } from "@/features/curriculum/contracts";
@@ -24,6 +23,9 @@ export const dynamic = "force-dynamic";
  *
  * Uses the gatedPracticeCoverageResolver to align parent practice-coverage badges
  * with the exact governed, published question universe.
+ *
+ * Preserves legacy route compatibility by rendering the full curriculum explorer
+ * rather than redirecting to an arbitrary child's account.
  */
 async function fetchAllVicCurriculumItems(): Promise<CurriculumCatalogueItem[]> {
   const catalogue = new PostgresCurriculumCatalogue({
@@ -50,9 +52,8 @@ async function fetchAllVicCurriculumItems(): Promise<CurriculumCatalogueItem[]> 
 export default async function ParentCurriculumExplorerPage() {
   if (!isSupabaseConfigured) {
     return (
-      <div className="lp-root min-h-screen bg-page text-ink flex flex-col justify-between">
-        <SiteNav />
-        <main id="main-content" className="site-width py-12">
+      <ParentShell active="/parent/children">
+        <div className="py-6 sm:py-10">
           <ErrorState
             title="Database not configured"
             description={SUPABASE_NOT_CONFIGURED_MESSAGE}
@@ -62,9 +63,8 @@ export default async function ParentCurriculumExplorerPage() {
               </Link>
             }
           />
-        </main>
-        <SiteFooter />
-      </div>
+        </div>
+      </ParentShell>
     );
   }
 
@@ -80,9 +80,17 @@ export default async function ParentCurriculumExplorerPage() {
   }
 
   return (
-    <div className="lp-root min-h-screen bg-page text-ink flex flex-col justify-between">
-      <SiteNav />
-      <main id="main-content" className="site-width py-6 sm:py-10 flex-1">
+    <ParentShell active="/parent/children">
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl">
+            Victorian Curriculum Explorer
+          </h1>
+          <p className="mt-1 text-sm text-muted">
+            Explore the Victorian Curriculum F–10 Version 2.0 (Mathematics and English) for Level 3 and Level 5 with verified worked examples.
+          </p>
+        </div>
+
         {fetchError ? (
           <ErrorState
             title="Unable to load curriculum"
@@ -94,10 +102,11 @@ export default async function ParentCurriculumExplorerPage() {
             }
           />
         ) : (
-          <ParentCurriculumExplorer initialItems={items} />
+          <div className="rounded-2xl border border-royal/10 bg-white p-4 shadow-sm sm:p-6">
+            <ParentCurriculumExplorer initialItems={items} />
+          </div>
         )}
-      </main>
-      <SiteFooter />
-    </div>
+      </div>
+    </ParentShell>
   );
 }
