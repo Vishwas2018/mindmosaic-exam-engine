@@ -116,6 +116,10 @@ describe("navigation graph", () => {
     "/student-sign-in",
     "/auth/confirm",
     "/auth/reset",
+    /* Auth exits whose links live inside their components (covered by
+       session-expired-screen.test.tsx and auth-shared-device.test.tsx). */
+    "/session-expired",
+    "/switch-account",
     "/dev/routes",
     "/dev/bar-model", // dev-only QA preview; 404 in production, never linked
     "/showcase",
