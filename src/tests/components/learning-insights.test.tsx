@@ -14,14 +14,15 @@ function makeChild(overrides: Partial<ChildSummary> = {}): ChildSummary {
     latestPercentage: 90,
     previousPercentage: 70,
     averagePercentage: 80,
+    averageHasEvidence: true,
     attemptsThisWeek: 2,
     timeThisWeekSeconds: 600,
     streakDays: 3,
     weekActivity: [],
     subjects: [],
     recentAttempts: [],
-    readinessScore: 85,
-    topicsMasteredCount: 2,
+    recentAveragePercentage: 85,
+    strongSubjectCount: 2,
     observations: ["Arjun is strongest in Numeracy (90%)."],
     recommendedActions: [
       { id: "focus-reading", title: "Practise reading", description: "Currently at 60%." },
@@ -41,8 +42,20 @@ describe("LearningInsights", () => {
     render(<LearningInsights child={makeChild()} hasAccess />);
     expect(screen.getByText(/is strongest in numeracy/i)).toBeInTheDocument();
     expect(screen.getByText("Practise reading")).toBeInTheDocument();
-    expect(screen.getByText("2 topics mastered")).toBeInTheDocument();
-    expect(screen.getByText("Readiness score: 85%")).toBeInTheDocument();
+    expect(screen.getByText(/2 subjects at 80% or above/i)).toBeInTheDocument();
+    expect(screen.getByText("Recent average: 85%")).toBeInTheDocument();
+  });
+
+  it("does not claim mastery or readiness, and says so when evidence is thin", () => {
+    render(
+      <LearningInsights
+        child={makeChild({ strongSubjectCount: 0, recentAveragePercentage: null, observations: [] })}
+        hasAccess
+      />,
+    );
+    expect(document.body).not.toHaveTextContent(/mastered|readiness/i);
+    expect(screen.queryByText(/subjects? at 80%/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/not enough finished papers yet for an average/i)).toBeInTheDocument();
   });
 
   it("shows a fallback message when there are no observations yet", () => {

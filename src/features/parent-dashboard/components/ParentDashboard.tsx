@@ -20,6 +20,7 @@ import {
 import type { MySubscriptionResult } from "@/lib/billing/subscription";
 
 import { pickDefaultChildIndex } from "../default-child";
+import { describeEvidence } from "../evidence";
 import type { ChildSummary, PerformanceBand } from "../summary";
 import { performanceBand } from "../summary";
 import { BillingPanel } from "./BillingPanel";
@@ -46,10 +47,9 @@ function scoreToneClass(percentage: number): string {
   return "text-royal";
 }
 
-function ringColor(percentage: number): string {
-  const band = performanceBand(percentage);
-  if (band === "strong") return "var(--success)";
-  if (band === "focus") return "var(--error)";
+/* One paper is a fact about that paper, not a verdict on the child, so the ring is not
+   traffic-light coloured. */
+function ringColor(): string {
   return "var(--royal-purple)";
 }
 
@@ -66,10 +66,10 @@ function ScoreRing({ percentage }: { percentage: number }) {
   return (
     <div
       role="img"
-      aria-label={`Latest objective score: ${clamped} percent`}
+      aria-label={`Latest paper: ${clamped} percent of objective marks`}
       className="grid h-28 w-28 flex-shrink-0 place-items-center rounded-full"
       style={{
-        background: `conic-gradient(${ringColor(clamped)} 0 ${clamped}%, color-mix(in srgb, var(--purple) 10%, transparent) ${clamped}% 100%)`,
+        background: `conic-gradient(${ringColor()} 0 ${clamped}%, color-mix(in srgb, var(--purple) 10%, transparent) ${clamped}% 100%)`,
       }}
     >
       <div className="grid h-[5.5rem] w-[5.5rem] place-items-center rounded-full bg-white shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--purple)_8%,transparent)]">
@@ -136,10 +136,7 @@ function ChildSelector({
 }
 
 function OverviewCards({ child }: { child: ChildSummary }) {
-  const delta =
-    child.latestPercentage !== null && child.previousPercentage !== null
-      ? child.latestPercentage - child.previousPercentage
-      : null;
+  const latest = child.recentAttempts[0] ?? null;
 
   return (
     <div className="grid gap-4 sm:grid-cols-3">
@@ -150,23 +147,21 @@ function OverviewCards({ child }: { child: ChildSummary }) {
           <>
             <ScoreRing percentage={child.latestPercentage} />
             <div>
-              <p className="text-sm font-extrabold text-ink">Latest score</p>
-              {delta !== null ? (
-                <p
-                  className={`mt-1 text-xs font-bold ${
-                    delta >= 0 ? "text-success" : "text-warning"
-                  }`}
-                >
-                  {delta >= 0 ? "Up" : "Down"} {Math.abs(delta)}% on the attempt before
+              <p className="text-sm font-extrabold text-ink">Latest paper</p>
+              {latest && (
+                <p className="mt-1 text-xs font-semibold text-muted">
+                  {latest.marksEarned} of {latest.marksAvailable} marks
                 </p>
-              ) : (
-                <p className="mt-1 text-xs font-semibold text-muted">First attempt</p>
               )}
-              {child.averagePercentage !== null && (
+              {child.averagePercentage !== null && child.averageHasEvidence ? (
                 <p className="mt-1 text-xs font-semibold text-muted">
                   Average across {child.attemptCount}{" "}
                   {child.attemptCount === 1 ? "attempt" : "attempts"}:{" "}
                   {child.averagePercentage}%
+                </p>
+              ) : (
+                <p className="mt-1 text-xs font-semibold text-muted">
+                  Too few finished papers for an average yet.
                 </p>
               )}
             </div>
@@ -235,6 +230,23 @@ function SubjectAreas({ child }: { child: ChildSummary }) {
               </div>
             );
           }
+          const evidenceText = describeEvidence({
+            papers: subject.paperCount,
+            marksEarned: subject.marksEarned,
+            marksAvailable: subject.marksAvailable,
+          });
+          if (!subject.sufficientEvidence) {
+            /* Not enough work to rate: show the real counts, no band, no percentage. */
+            return (
+              <div key={subject.subject} className="flex items-center justify-between gap-3">
+                <span className="text-sm font-bold text-ink">{subject.label}</span>
+                <span className="text-right text-xs font-semibold text-muted">
+                  {evidenceText}
+                  <span className="block">Not enough yet for a rating</span>
+                </span>
+              </div>
+            );
+          }
           const band = BAND_LABELS[performanceBand(subject.percentage)];
           return (
             <div key={subject.subject}>
@@ -255,6 +267,7 @@ function SubjectAreas({ child }: { child: ChildSummary }) {
                 tone={performanceBand(subject.percentage) === "strong" ? "success" : "purple"}
                 className="[&>div:first-child]:hidden"
               />
+              <p className="mt-1 text-xs font-semibold text-muted">{evidenceText}</p>
             </div>
           );
         })}
@@ -277,13 +290,7 @@ function RecentAttempts({ child }: { child: ChildSummary }) {
           {child.recentAttempts.map((attempt) => (
             <li key={attempt.id} className="flex items-center gap-4 px-6 py-4">
               <div
-                className={`grid h-9 w-9 flex-shrink-0 place-items-center rounded-xl ${
-                  performanceBand(attempt.percentage) === "strong"
-                    ? "bg-success/10 text-success"
-                    : performanceBand(attempt.percentage) === "focus"
-                      ? "bg-error/10 text-error"
-                      : "bg-royal/8 text-royal"
-                }`}
+                className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-xl bg-royal/8 text-royal"
               >
                 <BookOpen aria-hidden="true" className="h-4 w-4" />
               </div>
@@ -295,10 +302,11 @@ function RecentAttempts({ child }: { child: ChildSummary }) {
                   {attempt.pendingManualReview && " · writing awaiting marking"}
                 </p>
               </div>
-              <span
-                className={`text-sm font-extrabold tabular-nums ${scoreToneClass(attempt.percentage)}`}
-              >
+              <span className="text-right text-sm font-extrabold tabular-nums text-ink">
                 {attempt.percentage}%
+                <span className="block text-xs font-semibold text-muted">
+                  {attempt.marksEarned} of {attempt.marksAvailable} marks
+                </span>
               </span>
             </li>
           ))}
@@ -322,7 +330,10 @@ function AtAGlance({ child }: { child: ChildSummary }) {
     },
     {
       label: "Average score",
-      value: child.averagePercentage === null ? "—" : `${child.averagePercentage}%`,
+      value:
+        child.averagePercentage === null || !child.averageHasEvidence
+          ? "—"
+          : `${child.averagePercentage}%`,
       icon: TrendingUp,
     },
     {
