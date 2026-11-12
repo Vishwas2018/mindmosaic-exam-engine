@@ -293,7 +293,11 @@ export function SignUpWizard({
   if (confirmEmail) {
     return (
       <div className="grid gap-5">
-        <EmailConfirmationPending email={confirmEmail} onBack={() => router.push("/sign-in")} />
+        <EmailConfirmationPending
+          email={confirmEmail}
+          onBack={() => router.push("/sign-in")}
+          onChangeEmail={() => setConfirmEmail(null)}
+        />
         {!skippedStudent && studentFirstName.trim() && (
           <p className="rounded-xl border border-mm-tint-line bg-mm-tint p-4 text-sm leading-[1.55] text-mm-ink-soft">
             {studentFirstName.trim()} hasn&apos;t been added yet — a student profile can only be

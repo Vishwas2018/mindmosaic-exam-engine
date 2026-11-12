@@ -37,7 +37,8 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
     await page.goto("/student-sign-in");
     await expect(page.getByRole("heading", { name: "Sign in" })).toBeVisible();
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
-    await page.getByLabel("PIN").fill(e2eEnv.fixturePin);
+    await page.getByLabel(/^Your PIN, number 1 of 6/).click();
+    await page.keyboard.type(e2eEnv.fixturePin);
     await page.getByRole("button", { name: "Sign in and start learning" }).click();
 
     await expect(page).toHaveURL(/\/student$/);

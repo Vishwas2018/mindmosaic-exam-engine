@@ -46,6 +46,7 @@ import {
   type Clock,
 } from "./deadline";
 import { reconcileResumedSession } from "./resume";
+import { recordConfirmedSave, recordNoOpenWork } from "@/features/auth/session-work-status";
 
 export type ExamStatus = "not_started" | "in_progress" | "submitting" | "submitted";
 
@@ -344,7 +345,16 @@ function startAutosaveLoop(getState: () => ExamStore): void {
       /* Only a response the server actually accepted counts as saved — a
          4xx/5xx must never light up "saved a moment ago" on a paper the
          server has not recorded. */
-      if (response.ok) useExamStore.setState({ lastAutosavedAt: clock() });
+      if (response.ok) {
+        useExamStore.setState({ lastAutosavedAt: clock() });
+        /* Remember the time the SERVER returned, so a later sign-out can say
+           "saved at 4:02 pm" and mean it (see features/auth/session-work-status). */
+        void response
+          .clone()
+          .json()
+          .then((body: { savedAt?: unknown } | null) => recordConfirmedSave(body?.savedAt))
+          .catch(() => undefined);
+      }
     }).catch((error) => {
       /* Best-effort: the next change (or the next poll tick, once
          autosaveLastChangeAt is set again) retries. Nothing here can lose
@@ -764,7 +774,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     const scoringService: AssessmentScoringService = isServerSession
       ? new ServerAuthoritativeScoringService(state.sessionId!)
       : localPracticeScoringService;
-    const finalize = (submission: ScoredSubmission) =>
+    const finalize = (submission: ScoredSubmission) => {
+      /* The server accepted the submission: there is no open sitting left. */
+      if (isServerSession) recordNoOpenWork();
       set({
         status: "submitted",
         submittedAt: effectiveSubmittedAt,
@@ -773,6 +785,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         reviewQuestions: submission.reviewQuestions,
         remainingSeconds: state.durationSeconds === null ? null : 0,
       });
+    };
     const outcome = scoringService.score(authoringQuestions, state.responses, context);
     if (outcome instanceof Promise) {
       outcome.then(finalize).catch((error) => {

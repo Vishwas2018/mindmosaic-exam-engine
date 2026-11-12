@@ -12,7 +12,8 @@ import { AUTH_APP_ORIGIN } from "../../playwright.auth.config";
 async function childSignsIn(page: import("@playwright/test").Page, code: string, pin: string) {
   await page.goto("/student-sign-in");
   await page.locator("input").nth(0).fill(code);
-  await page.locator('input[type="password"]').fill(pin);
+  await page.getByLabel(/^Your PIN, number 1 of 6/).click();
+  await page.keyboard.type(pin);
   await page.locator("form button[type=submit]").first().click();
 }
 
@@ -48,7 +49,7 @@ test.describe("parent archive / restore lifecycle", () => {
 
       /* 2. The parent archives the child. */
       await parent.goto("/parent/children");
-      await parent.getByRole("button", { name: "Archive" }).click();
+      await parent.getByRole("button", { name: "Archive", exact: true }).click();
       await parent.getByRole("button", { name: "Yes, archive" }).click();
       const archivedSection = parent.getByRole("region", { name: "Archived children" });
       await expect(archivedSection).toContainText(childName);
@@ -62,12 +63,14 @@ test.describe("parent archive / restore lifecycle", () => {
 
       /* 4. The session the child already had no longer works. */
       await child.goto("/student");
-      await expect(child).toHaveURL(/sign-in/);
+      /* Turned away to the sign-in page, or to the session-ended screen that links back to it. */
+      await expect(child).toHaveURL(/sign-in|session-expired/);
+      await expect(child).not.toHaveURL(/\/student$/);
 
       /* 5. The same code and PIN no longer sign in, and the message is the generic one. */
       const fresh = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();
       await childSignsIn(fresh, body.loginCode, body.pin);
-      await expect(fresh.getByText(/That login code and PIN do not match/)).toBeVisible();
+      await expect(fresh.getByText(/That code and PIN didn’t match/)).toBeVisible();
       await expect(fresh).toHaveURL(/student-sign-in/);
 
       /* 6. The parent still sees the child on their dashboard, marked archived. */
@@ -77,7 +80,7 @@ test.describe("parent archive / restore lifecycle", () => {
       /* 7. Restore, and the same code and PIN work again. */
       await parent.goto("/parent/children");
       await parent.getByRole("button", { name: `Restore ${childName}` }).click();
-      await expect(parent.getByRole("button", { name: "Archive" })).toBeVisible();
+      await expect(parent.getByRole("button", { name: "Archive", exact: true })).toBeVisible();
       await expect(parent.getByRole("region", { name: "Archived children" })).toHaveCount(0);
 
       const back = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();

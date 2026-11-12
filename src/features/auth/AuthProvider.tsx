@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -27,6 +28,47 @@ export interface AuthResult {
   readonly message?: string;
   /** True when sign-up created a user that must confirm their email first. */
   readonly needsEmailConfirmation?: boolean;
+  /**
+   * Why a call failed, when the cause changes what the person should do.
+   * `network` = we never got an answer; `rate_limited` = the server asked us
+   * to slow down; `unavailable` = the auth server failed (5xx), which is not
+   * an account problem; `paused` = the auth server refused a banned user
+   * (an archived child, but also an erased or revoked account, so callers
+   * must not say anything about what is kept). Absent for an ordinary rejection.
+   */
+  readonly failure?: "network" | "rate_limited" | "unavailable" | "paused";
+  /** updatePassword only: true once the server confirmed other sessions were ended. */
+  readonly otherDevicesSignedOut?: boolean;
+}
+
+/** Classifies a Supabase auth error by what the person can do about it. */
+export function classifyAuthFailure(error: {
+  message?: string;
+  status?: number;
+  code?: string;
+  name?: string;
+}): AuthResult["failure"] | undefined {
+  /* `status` is 0 for a request that never got an answer. It is undefined
+     (not 0) for errors that simply carry no HTTP status; those are not
+     network failures. */
+  const status = error.status ?? -1;
+  if (
+    error.name === "AuthRetryableFetchError" ||
+    error.status === 0 ||
+    /failed to fetch|networkerror|network request failed/i.test(error.message ?? "")
+  ) {
+    return "network";
+  }
+  if (
+    status === 429 ||
+    error.code === "over_request_rate_limit" ||
+    error.code === "over_email_send_rate_limit"
+  ) {
+    return "rate_limited";
+  }
+  if (error.code === "user_banned") return "paused";
+  if (status >= 500) return "unavailable";
+  return undefined;
 }
 
 export interface AuthContextValue {
@@ -82,6 +124,13 @@ function deriveName(user: User | null): string | null {
   );
 }
 
+/** Pages where a sign-out is part of the flow, so it must not bounce to "session expired". */
+function isAuthRoute(pathname: string): boolean {
+  return /^\/(sign-in|sign-up|student-sign-in|session-expired|signed-out|switch-account|welcome|auth)(\/|$)/.test(
+    pathname,
+  );
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const configured = isSupabaseConfigured;
   // One stable client instance for the provider's lifetime (only when
@@ -97,6 +146,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRole] = useState<ProfileRole | null>(null);
+  /* Sign-out bookkeeping for "session expired". A SIGNED_OUT event that this
+     app did not cause, on a browser that had a session, is the session ending
+     on its own (expiry, revoked refresh token, signed out in another tab). */
+  const hadSession = useRef(false);
+  const endedByThisApp = useRef(false);
 
   useEffect(() => {
     if (!supabase) return;
@@ -113,17 +167,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
        */
       if (data.session && shouldDiscardStoredSession()) {
         clearSessionPersistence();
+        endedByThisApp.current = true;
         void supabase.auth.signOut();
         setStatus("anonymous");
         return;
       }
+      if (data.session) hadSession.current = true;
       setSession(data.session);
       setUser(data.session?.user ?? null);
       setStatus(data.session?.user ? "authenticated" : "anonymous");
       if (!data.session?.user) setRole(null);
     });
 
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event, nextSession) => {
+      if (nextSession) hadSession.current = true;
+      if (
+        event === "SIGNED_OUT" &&
+        hadSession.current &&
+        !endedByThisApp.current &&
+        typeof window !== "undefined" &&
+        !isAuthRoute(window.location.pathname)
+      ) {
+        const here = `${window.location.pathname}${window.location.search}`;
+        window.location.assign(`/session-expired?next=${encodeURIComponent(here)}`);
+      }
+      if (event === "SIGNED_OUT") {
+        hadSession.current = false;
+        endedByThisApp.current = false;
+      }
       setSession(nextSession);
       setUser(nextSession?.user ?? null);
       setStatus(nextSession?.user ? "authenticated" : "anonymous");
@@ -189,7 +260,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async signInWithPassword(email, password) {
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) return { ok: false, message: error.message };
+        if (error) {
+          return { ok: false, message: error.message, failure: classifyAuthFailure(error) };
+        }
         return { ok: true };
       },
 
@@ -205,7 +278,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           email: buildAliasEmail(loginCode),
           password: pin,
         });
-        if (error) return { ok: false, message: "That code and PIN don't match. Ask your parent to check them." };
+        if (error) {
+          /* One message whether the code is unknown or the PIN is wrong, so a
+             code cannot be fished for. Only a failure that is NOT about the
+             credentials (network, rate limit, our side) is told apart. */
+          return {
+            ok: false,
+            message: "That code and PIN didn't match. Check them with the grown-up who set them up, and try again.",
+            failure: classifyAuthFailure(error),
+          };
+        }
         return { ok: true };
       },
 
@@ -238,7 +320,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             emailRedirectTo: `${origin()}/auth/confirm`,
           },
         });
-        if (error) return { ok: false, message: error.message };
+        if (error) {
+          const failure = classifyAuthFailure(error);
+          if (failure === "network") {
+            return { ok: false, failure, message: "We couldn't reach MindMosaic. Check your connection and try again." };
+          }
+          if (failure === "rate_limited") {
+            return { ok: false, failure, message: "Too many attempts. Wait a little while and try again." };
+          }
+          /* An address that already has an account is never announced on the
+             form. It is treated like any other new sign-up: the same
+             "check your email" screen. The existing account holder is not
+             told anything here. */
+          if (error.code === "user_already_exists" || /already (been )?registered/i.test(error.message)) {
+            return { ok: true, needsEmailConfirmation: true };
+          }
+          /* The password rule is the one rejection the person can act on. */
+          if (error.code === "weak_password") {
+            return { ok: false, message: error.message };
+          }
+          return { ok: false, failure, message: "We couldn't create your account just now. Please try again." };
+        }
         // When email confirmation is on, no session is returned yet.
         const needsEmailConfirmation = !data.session;
         return {
@@ -267,7 +369,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: `${origin()}/auth/reset`,
         });
-        if (error) return { ok: false, message: error.message };
+        if (error) {
+          /* Supabase answers "ok" for an address with no account, so a real
+             error here is about delivery, never about existence. It is told
+             apart only by what the person can do: wait, or check the
+             connection. The provider's own wording is never shown. */
+          const failure = classifyAuthFailure(error);
+          return {
+            ok: false,
+            failure,
+            message:
+              failure === "network"
+                ? "We couldn't reach MindMosaic. Check your connection and try again."
+                : failure === "rate_limited"
+                  ? "Too many requests. Wait a little while before asking for another link."
+                  : "We couldn't send a reset link just now. Please try again in a few minutes.",
+          };
+        }
         return { ok: true, message: "If that email has an account, a reset link is on its way." };
       },
 
@@ -275,7 +393,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.updateUser({ password });
         if (error) return { ok: false, message: error.message };
-        return { ok: true, message: "Your password has been updated." };
+        /* "We signed out your other devices" is only true if the server says
+           so. A failure here does not undo the password change, so it is
+           reported as success with the flag false rather than as an error. */
+        const { error: othersError } = await supabase.auth.signOut({ scope: "others" });
+        return {
+          ok: true,
+          message: "Your password has been updated.",
+          otherDevicesSignedOut: !othersError,
+        };
       },
 
       async resendConfirmationEmail(email) {
@@ -285,14 +411,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           email,
           options: { emailRedirectTo: `${origin()}/auth/confirm` },
         });
-        if (error) return { ok: false, message: error.message };
+        if (error) {
+          const failure = classifyAuthFailure(error);
+          return {
+            ok: false,
+            failure,
+            message:
+              failure === "network"
+                ? "We couldn't reach MindMosaic. Check your connection and try again."
+                : "We couldn't send a new link just now. Please try again in a few minutes, or contact support.",
+          };
+        }
         return { ok: true, message: "Confirmation email resent — check your inbox." };
       },
 
       async confirmEmail(code) {
         if (!supabase) return notConfigured();
         const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-        if (error) return { ok: false, message: error.message };
+        if (error) {
+          /* The provider's wording ("Email link is invalid or has expired")
+             covers both cases at once, so only the error *code* is trusted to
+             say "expired"; the text is never passed on. */
+          return {
+            ok: false,
+            failure: classifyAuthFailure(error),
+            message: error.code === "otp_expired" ? "expired" : "invalid",
+          };
+        }
         const id = data.session?.user.id;
         if (!id) return { ok: true, role: null };
         const { data: profile } = await supabase
@@ -311,6 +456,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
            can never outlive it and sign the next user out on their first
            boot. */
         clearSessionPersistence();
+        endedByThisApp.current = true;
         await supabase.auth.signOut();
       },
     };

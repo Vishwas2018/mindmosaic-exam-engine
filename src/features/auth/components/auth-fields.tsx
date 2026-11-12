@@ -4,6 +4,10 @@ import { useCallback, useState, type InputHTMLAttributes, type ReactNode } from 
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import { mmAuthButton, mmFocus } from "./auth-styles";
+
+export { mmAuthButton, mmFocus };
+
 /**
  * Field furniture for the redesigned auth screens, in the design handoff's
  * own measurements: 52-54px tall inputs, 12-13px radius, 1.5px borders,
@@ -19,13 +23,6 @@ import { twMerge } from "tailwind-merge";
 
 /* ---------- Focus ---------- */
 
-/*
- * The handoff specifies `outline: 3px solid #5925A8; outline-offset: 3px`
- * on every interactive control, rather than the ring-based treatment the
- * marketing primitives use. Kept as one constant so the two cannot drift.
- */
-export const mmFocus =
-  "focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand";
 
 /* ---------- Text field ---------- */
 
@@ -38,6 +35,12 @@ export interface MmFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   hint?: string;
   /** Draws the coral error border. The message itself lives in <MmErrorPanel>. */
   invalid?: boolean;
+  /**
+   * The id of the <MmErrorPanel> (or inline message) that explains `invalid`.
+   * Wired into aria-describedby only while the field is invalid, so a screen
+   * reader reads the reason with the field rather than only the border colour.
+   */
+  errorId?: string;
   /** Extra room on the right for an inline button (e.g. Show/Hide). */
   trailingRoom?: boolean;
   trailing?: ReactNode;
@@ -51,6 +54,7 @@ export function MmField({
   labelAside,
   hint,
   invalid = false,
+  errorId,
   trailingRoom = false,
   trailing,
   tone = "white",
@@ -68,7 +72,11 @@ export function MmField({
         <input
           id={id}
           aria-invalid={invalid || undefined}
-          aria-describedby={hint ? `${id}-hint` : undefined}
+          aria-describedby={
+            [hint ? `${id}-hint` : null, invalid && errorId ? errorId : null]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
           className={twMerge(
             clsx(
               "h-[54px] w-full min-w-0 rounded-[13px] border-[1.5px] px-4 text-base text-mm-ink transition-colors",
@@ -181,9 +189,10 @@ export function MmCheckbox({
  * (what the previous AuthCard used) it interrupts, which is right for a
  * sign-in failure the user must act on.
  */
-export function MmErrorPanel({ children }: { children: ReactNode }) {
+export function MmErrorPanel({ children, id }: { children: ReactNode; id?: string }) {
   return (
     <p
+      id={id}
       role="alert"
       className="mm-rise-fast grid grid-cols-[20px_1fr] gap-[11px] rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep"
     >
@@ -197,31 +206,6 @@ export function MmErrorPanel({ children }: { children: ReactNode }) {
 
 /* ---------- Primary / secondary buttons ---------- */
 
-export function mmAuthButton({
-  variant = "primary",
-  disabled = false,
-  className,
-}: {
-  variant?: "primary" | "outline";
-  disabled?: boolean;
-  className?: string;
-} = {}) {
-  return twMerge(
-    clsx(
-      "inline-flex min-h-[52px] select-none items-center justify-center gap-2 rounded-xl px-6 text-[15.5px] font-bold leading-none transition-colors",
-      mmFocus,
-      variant === "primary"
-        ? disabled
-          ? /* The handoff's explicit disabled treatment: #EFEAF4 on #928C99,
-               not-allowed. Kept visible rather than dimmed to 50% so the
-               label stays readable while the control is unavailable. */
-            "cursor-not-allowed bg-mm-track text-mm-muted-2"
-          : "bg-mm-brand text-white shadow-[0_6px_18px_rgba(89,37,168,0.22)] hover:bg-mm-brand-deep"
-        : "border border-mm-line bg-white text-mm-ink hover:border-mm-brand hover:text-mm-brand",
-    ),
-    className,
-  );
-}
 
 /* ---------- Shake-on-invalid-submit ---------- */
 

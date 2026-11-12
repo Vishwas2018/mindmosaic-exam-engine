@@ -58,6 +58,8 @@ export function SiteNav({ overlay = false }: { overlay?: boolean } = {}) {
     await signOut();
     // signOut() only clears the browser client's session, so a
     // server-rendered tree still on screen needs an explicit re-render.
+    /* Land on the clean-exit screen, then re-render so no signed-in tree lingers. */
+    router.push("/signed-out");
     router.refresh();
   }
 

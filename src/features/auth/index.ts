@@ -1,4 +1,4 @@
-export { AuthProvider, useAuth } from "./AuthProvider";
+export { AuthProvider, classifyAuthFailure, useAuth } from "./AuthProvider";
 export type {
   AuthContextValue,
   AuthResult,
@@ -14,6 +14,7 @@ export { RoleHomeLink } from "./components/RoleHomeLink";
 export { EmailConfirmationPending } from "./components/EmailConfirmationPending";
 export { EmailVerificationScreen } from "./components/EmailVerificationScreen";
 export { evaluatePassword, PASSWORD_RULES } from "./password";
+export { safeNextPath } from "./safe-next";
 export {
   ROLE_HOME_LABELS,
   ROLE_HOME_PATHS,

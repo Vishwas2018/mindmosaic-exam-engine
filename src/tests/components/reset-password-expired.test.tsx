@@ -19,6 +19,7 @@ vi.mock("@/lib/supabase/config", () => ({
 }));
 
 const mockUpdateUser = vi.fn();
+const mockSignOut = vi.fn();
 const mockGetSession = vi.fn(async () => ({ data: { session: null } }));
 const mockOnAuthStateChange = vi.fn(() => ({
   data: { subscription: { unsubscribe: vi.fn() } },
@@ -30,6 +31,7 @@ vi.mock("@/lib/supabase/client", () => ({
       getSession: mockGetSession,
       onAuthStateChange: mockOnAuthStateChange,
       updateUser: mockUpdateUser,
+      signOut: mockSignOut,
     },
     from: () => ({
       select: () => ({ eq: () => ({ single: async () => ({ data: null }) }) }),
@@ -51,6 +53,7 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
   beforeEach(() => {
     push.mockClear();
     mockUpdateUser.mockReset();
+    mockSignOut.mockReset();
   });
 
   afterEach(() => {
@@ -66,9 +69,11 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
 
     renderReset();
 
-    expect(screen.getByText(/link expired or invalid/i)).toBeInTheDocument();
-    expect(screen.getByText(/this password reset link has expired/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /request a new reset link/i })).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: /reset link has expired/i })).toBeInTheDocument();
+    expect(screen.getByText(/ask for a new one/i)).toBeInTheDocument();
+    /* The provider's own wording is not shown. */
+    expect(screen.queryByText(/email link is invalid/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /start again/i })).toHaveAttribute(
       "href",
       "/sign-in?mode=forgot",
     );
@@ -79,7 +84,16 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
     window.history.pushState({}, "", "/auth/reset");
     renderReset();
     expect(screen.getByLabelText("New password")).toBeInTheDocument();
-    expect(screen.queryByText(/link expired or invalid/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /link/i })).not.toBeInTheDocument();
+  });
+
+  it("tells a spent link apart from an expired one, and points at sign-in", () => {
+    window.history.pushState({}, "", "/auth/reset?error=access_denied&error_code=access_denied");
+    renderReset();
+    expect(screen.getByText(/already been used or isn.t valid/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /^sign in$/i })).toHaveAttribute("href", "/sign-in");
+    expect(screen.getByRole("link", { name: /reset again/i })).toBeInTheDocument();
+    expect(screen.queryByText(/has expired/i)).not.toBeInTheDocument();
   });
 
   it("falls back to the expired-link screen when updatePassword fails with a missing session", async () => {
@@ -90,9 +104,55 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
 
     await user.type(screen.getByLabelText("New password"), "Str0ng!pass");
     await user.type(screen.getByLabelText(/confirm new password/i), "Str0ng!pass");
-    await user.click(screen.getByRole("button", { name: /update password/i }));
+    await user.click(screen.getByRole("button", { name: /save new password/i }));
 
-    expect(await screen.findByText(/link expired or invalid/i)).toBeInTheDocument();
-    expect(screen.getByText(/already been used/i)).toBeInTheDocument();
+    expect(await screen.findByText(/already been used or isn.t valid/i)).toBeInTheDocument();
+  });
+
+  it("only says other devices were signed out when the server confirmed it", async () => {
+    window.history.pushState({}, "", "/auth/reset");
+    mockUpdateUser.mockResolvedValue({ error: null });
+    mockSignOut.mockResolvedValueOnce({ error: null }); // scope: others
+    mockSignOut.mockResolvedValueOnce({ error: null }); // this device
+    const user = userEvent.setup();
+    renderReset();
+
+    await user.type(screen.getByLabelText("New password"), "Str0ng!pass");
+    await user.type(screen.getByLabelText(/confirm new password/i), "Str0ng!pass");
+    await user.click(screen.getByRole("button", { name: /save new password/i }));
+
+    expect(await screen.findByRole("heading", { name: /password changed/i })).toBeInTheDocument();
+    expect(screen.getByText(/we signed out your other devices/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /go to sign-in/i })).toHaveAttribute("href", "/sign-in");
+  });
+
+  it("does not claim other devices were signed out when that step failed", async () => {
+    window.history.pushState({}, "", "/auth/reset");
+    mockUpdateUser.mockResolvedValue({ error: null });
+    mockSignOut.mockResolvedValueOnce({ error: { message: "boom", status: 500 } });
+    mockSignOut.mockResolvedValueOnce({ error: null });
+    const user = userEvent.setup();
+    renderReset();
+
+    await user.type(screen.getByLabelText("New password"), "Str0ng!pass");
+    await user.type(screen.getByLabelText(/confirm new password/i), "Str0ng!pass");
+    await user.click(screen.getByRole("button", { name: /save new password/i }));
+
+    expect(await screen.findByRole("heading", { name: /password changed/i })).toBeInTheDocument();
+    expect(screen.queryByText(/we signed out your other devices/i)).not.toBeInTheDocument();
+  });
+
+  it("flags a mismatch next to the field and keeps save disabled", async () => {
+    window.history.pushState({}, "", "/auth/reset");
+    const user = userEvent.setup();
+    renderReset();
+    await user.type(screen.getByLabelText("New password"), "Str0ng!pass");
+    await user.type(screen.getByLabelText(/confirm new password/i), "Different1!");
+    expect(screen.getByText(/don.t match yet/i)).toHaveAttribute("id", "confirm-mismatch");
+    expect(screen.getByLabelText(/confirm new password/i)).toHaveAttribute(
+      "aria-describedby",
+      "confirm-mismatch",
+    );
+    expect(screen.getByRole("button", { name: /save new password/i })).toBeDisabled();
   });
 });

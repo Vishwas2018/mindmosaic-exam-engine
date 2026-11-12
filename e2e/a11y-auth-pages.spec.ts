@@ -60,7 +60,7 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const codeIndex = sequence.indexOf("auth-ident");
-    const pinIndex = sequence.indexOf("auth-secret");
+    const pinIndex = sequence.indexOf("Your PIN, number 1 of 6");
 
     expect(codeIndex).toBeGreaterThanOrEqual(0);
     expect(pinIndex).toBeGreaterThan(codeIndex);

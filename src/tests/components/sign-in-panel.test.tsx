@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -90,7 +90,18 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
     /* The real formatted shape from formatLoginCode(), not an invented
        username like the design file's "aisha.r5". */
     expect(code).toHaveAttribute("placeholder", "K7XJ-2P9R");
-    expect(screen.getByLabelText("PIN")).toBeInTheDocument();
+    /* Six masked, numeric, never-autofilled boxes in one labelled group. */
+    const group = screen.getByRole("group", { name: /your pin/i });
+    const boxes = within(group).getAllByLabelText(/your pin, number \d of 6/i);
+    expect(boxes).toHaveLength(6);
+    for (const box of boxes) {
+      expect(box).toHaveAttribute("type", "password");
+      expect(box).toHaveAttribute("inputmode", "numeric");
+      expect(box).toHaveAttribute("autocomplete", "off");
+    }
+    expect(code).toHaveAttribute("autocapitalize", "characters");
+    expect(code).toHaveAttribute("autocomplete", "off");
+    expect(code).toHaveAttribute("spellcheck", "false");
     expect(screen.queryByLabelText(/email address/i)).not.toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /sign in and start learning/i }),
@@ -107,7 +118,7 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
     renderPanel({ defaultKind: "student" });
 
     await user.type(screen.getByLabelText(/login code/i), "k7xj-2p9r");
-    await user.type(screen.getByLabelText("PIN"), "424242");
+    await user.type(screen.getByLabelText(/your pin, number 1 of 6/i), "424242");
     await user.click(screen.getByRole("button", { name: /sign in and start learning/i }));
 
     await waitFor(() =>
@@ -169,8 +180,12 @@ describe("SignInPanel — failure states", () => {
     await attempt(user);
 
     const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent(/could not find an account with that email and password/i);
+    expect(alert).toHaveTextContent(/that email and password didn.t match/i);
     expect(alert).not.toHaveTextContent(/invalid login credentials/i);
+    /* Never implies an account lookup: a wrong password and an unknown
+       address must read identically. */
+    expect(alert).not.toHaveTextContent(/no account|not find an account|not registered|doesn.t exist/i);
+    expect(within(alert).getByRole("button", { name: /reset password/i })).toBeInTheDocument();
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -198,7 +213,7 @@ describe("SignInPanel — failure states", () => {
 
     await attempt(user);
 
-    expect(await screen.findByRole("alert")).toHaveTextContent(/network error/i);
+    expect(await screen.findByRole("alert")).toHaveTextContent(/couldn.t reach mindmosaic/i);
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -215,7 +230,7 @@ describe("SignInPanel — failure states", () => {
       }
 
       expect(
-        await screen.findByText(/too many failed attempts/i),
+        await screen.findByText(/too many attempts\. for your account.s safety/i),
       ).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /try again in \d+s/i })).toBeDisabled();
     },

@@ -47,7 +47,8 @@ const norm = (text: string) => text.replace(/\s+/g, " ").trim();
 async function signIn(page: Page, student: (typeof STUDENTS)[number]) {
   await page.goto("/student-sign-in");
   await page.getByLabel("Login code").fill(student.loginCode);
-  await page.getByLabel("PIN").fill(e2eEnv.fixturePin);
+  await page.getByLabel(/^Your PIN, number 1 of 6/).click();
+  await page.keyboard.type(e2eEnv.fixturePin);
   await page.getByRole("button", { name: "Sign in and start learning" }).click();
   await expect(page).toHaveURL(/\/student$/, { timeout: 45_000 });
 }
