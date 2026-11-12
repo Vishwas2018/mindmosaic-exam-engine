@@ -50,3 +50,19 @@ describe("no invented progress on the student side", () => {
     expect(document.body).not.toHaveTextContent(/readiness|mastery/i);
   });
 });
+
+describe("error screens never claim work is saved without confirmation", () => {
+  it("exam and student route errors say what is unknown, not 'saved'", async () => {
+    const { default: ExamError } = await import("@/app/exam/error");
+    const { default: StudentError } = await import("@/app/student/error");
+    const boom = new Error("boom");
+
+    const first = render(<ExamError error={boom} reset={() => {}} />);
+    expect(document.body).toHaveTextContent(/can.t confirm the most recent ones/i);
+    expect(document.body).not.toHaveTextContent(/answers so far are saved|nothing has been submitted/i);
+    first.unmount();
+
+    render(<StudentError error={boom} reset={() => {}} />);
+    expect(document.body).not.toHaveTextContent(/progress is saved/i);
+  });
+});

@@ -30,7 +30,7 @@ export default function ExamError({
       reset={reset}
       segment="/exam"
       title="The exam hit a problem"
-      description="Your answers so far are saved. Picking up where you left off usually works — nothing has been submitted or marked yet."
+      description="Answers are saved to our server as you work, but we can’t confirm the most recent ones from this screen. Resume the exam to see exactly where it is."
       retryLabel="Resume the exam"
       escape={{ href: "/practice", label: "Back to practice" }}
     />
