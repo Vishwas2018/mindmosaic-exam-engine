@@ -32,7 +32,7 @@ describe("no invented progress on the student side", () => {
   });
 
   it("the progress hero does not state a NAPLAN testing window it cannot know", () => {
-    render(<MyProgressHero yearLevel={5} questionsAnswered={12} recommendedFocus={null} />);
+    render(<MyProgressHero questionsAnswered={12} recommendedFocus={null} />);
     expect(document.body).not.toHaveTextContent(/testing cycle|target window/i);
     expect(document.body).not.toHaveTextContent(/mastery/i);
   });

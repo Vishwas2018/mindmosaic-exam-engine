@@ -12,11 +12,9 @@ import type { SubjectMastery } from "@/features/student/attempt-summary";
  * exists (same class as the dashboard's term/goal pills).
  */
 export function MyProgressHero({
-  yearLevel,
   questionsAnswered,
   recommendedFocus,
 }: {
-  yearLevel: number | null;
   questionsAnswered: number;
   recommendedFocus: SubjectMastery | null;
 }) {
