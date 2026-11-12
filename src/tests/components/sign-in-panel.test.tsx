@@ -90,7 +90,18 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
     /* The real formatted shape from formatLoginCode(), not an invented
        username like the design file's "aisha.r5". */
     expect(code).toHaveAttribute("placeholder", "K7XJ-2P9R");
-    expect(screen.getByLabelText("PIN")).toBeInTheDocument();
+    /* Six masked, numeric, never-autofilled boxes in one labelled group. */
+    const group = screen.getByRole("group", { name: /your pin/i });
+    const boxes = within(group).getAllByLabelText(/your pin, number \d of 6/i);
+    expect(boxes).toHaveLength(6);
+    for (const box of boxes) {
+      expect(box).toHaveAttribute("type", "password");
+      expect(box).toHaveAttribute("inputmode", "numeric");
+      expect(box).toHaveAttribute("autocomplete", "off");
+    }
+    expect(code).toHaveAttribute("autocapitalize", "characters");
+    expect(code).toHaveAttribute("autocomplete", "off");
+    expect(code).toHaveAttribute("spellcheck", "false");
     expect(screen.queryByLabelText(/email address/i)).not.toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /sign in and start learning/i }),
@@ -107,7 +118,7 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
     renderPanel({ defaultKind: "student" });
 
     await user.type(screen.getByLabelText(/login code/i), "k7xj-2p9r");
-    await user.type(screen.getByLabelText("PIN"), "424242");
+    await user.type(screen.getByLabelText(/your pin, number 1 of 6/i), "424242");
     await user.click(screen.getByRole("button", { name: /sign in and start learning/i }));
 
     await waitFor(() =>

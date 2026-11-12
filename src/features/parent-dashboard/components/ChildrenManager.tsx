@@ -7,6 +7,8 @@ import { Pencil, Archive as ArchiveIcon, ArchiveRestore, UserRound } from "lucid
 import { Badge, Button, Card, ConfirmDialog, Input, Modal, Select } from "@/components/ui";
 import { isValidPin } from "@/features/auth/student-alias";
 
+import { ChildLoginCode } from "./ChildLoginCode";
+
 export interface ChildListItem {
   id: string;
   displayName: string;
@@ -195,7 +197,8 @@ export function ChildrenManager({
       )}
 
       {activeChildren.map((child) => (
-        <Card key={child.id} className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div key={child.id} className="space-y-1">
+        <Card className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <span
               aria-hidden="true"
@@ -224,6 +227,8 @@ export function ChildrenManager({
             </Button>
           </div>
         </Card>
+        <ChildLoginCode childId={child.id} childName={child.displayName} />
+        </div>
       ))}
 
       {children.length === 0 && (

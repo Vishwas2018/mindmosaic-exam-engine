@@ -4,7 +4,7 @@ import { z } from "zod";
 import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { checkOrigin } from "@/features/auth/require-origin";
-import { isValidPin } from "@/features/auth/student-alias";
+import { isValidPin, loginCodeFromAliasEmail } from "@/features/auth/student-alias";
 import { setChildArchived } from "@/features/parent-dashboard/child-access";
 import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
 import { SUPABASE_URL } from "@/lib/supabase/config";
@@ -82,6 +82,28 @@ async function requireLinkedChild(childId: string) {
   });
 
   return { ok: true as const, parentId: user.id, admin };
+}
+
+/**
+ * A linked guardian can read the child's login code (never the PIN, which is
+ * not stored anywhere readable). The code is not a secret on its own — it is
+ * printed on the child's card — but it is only ever returned to a parent
+ * linked to this child, after the same confirmation PATCH/DELETE use.
+ */
+export async function GET(_request: Request, context: RouteContext): Promise<NextResponse> {
+  const { childId } = await context.params;
+  const gate = await requireLinkedChild(childId);
+  if (!gate.ok) return gate.response;
+
+  const { data, error } = await gate.admin.auth.admin.getUserById(childId);
+  if (error || !data.user) {
+    return NextResponse.json({ ok: false, message: "Could not load this child's login code." }, { status: 500 });
+  }
+  const loginCode = loginCodeFromAliasEmail(data.user.email);
+  if (!loginCode) {
+    return NextResponse.json({ ok: false, message: "This profile does not use a login code." }, { status: 404 });
+  }
+  return NextResponse.json({ ok: true, loginCode }, { status: 200, headers: { "Cache-Control": "no-store" } });
 }
 
 export async function PATCH(request: Request, context: RouteContext): Promise<NextResponse> {

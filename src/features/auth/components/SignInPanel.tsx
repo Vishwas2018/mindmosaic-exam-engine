@@ -23,6 +23,7 @@ import {
   mmFocus,
   useShakeOnInvalidSubmit,
 } from "./auth-fields";
+import { PinInput } from "./PinInput";
 import { SocialButtons } from "./SocialButtons";
 
 /**
@@ -83,7 +84,7 @@ const COPY = {
     /* The real format, from formatLoginCode() — not an invented username. */
     idPlaceholder: formatLoginCode("K7XJ2P9R"),
     idAutoComplete: "off",
-    secretLabel: "PIN",
+    secretLabel: "Your PIN",
     secretPlaceholder: "6 digits",
     secretAutoComplete: "off",
     submit: "Sign in and start learning",
@@ -454,6 +455,11 @@ export function SignInPanel({
         <MmField
           id="auth-ident"
           label={copy.idLabel}
+          hint={
+            kind === "student"
+              ? "On the card your parent printed. Letters and numbers, like K7XJ-2P9R."
+              : undefined
+          }
           type="text"
           inputMode={kind === "student" ? "text" : "email"}
           autoComplete={copy.idAutoComplete}
@@ -473,11 +479,24 @@ export function SignInPanel({
           errorId="auth-error"
         />
 
+        {kind === "student" ? (
+          <PinInput
+            id="auth-secret"
+            label={copy.secretLabel}
+            hint="6 numbers. Nobody can see what you type."
+            value={secret}
+            onChange={(next) => {
+              setSecret(next);
+              setError(null);
+            }}
+            invalid={error !== null}
+            errorId="auth-error"
+          />
+        ) : (
         <MmField
           id="auth-secret"
           label={copy.secretLabel}
           type={showSecret ? "text" : "password"}
-          inputMode={kind === "student" ? "numeric" : undefined}
           autoComplete={copy.secretAutoComplete}
           placeholder={copy.secretPlaceholder}
           value={secret}
@@ -499,26 +518,25 @@ export function SignInPanel({
             />
           }
           labelAside={
-            /* A student's PIN is reset by their parent, so the link would
-               be a dead end on that tab. */
-            kind === "parent" ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setScreen("forgot");
-                  setResetEmail(ident);
-                  setError(null);
-                }}
-                className={twMerge(
-                  "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
-                  mmFocus,
-                )}
-              >
-                Forgot password?
-              </button>
-            ) : undefined
+            /* Parent tab only: a student's PIN is reset by their parent, so
+               the student branch above has no such link. */
+            <button
+              type="button"
+              onClick={() => {
+                setScreen("forgot");
+                setResetEmail(ident);
+                setError(null);
+              }}
+              className={twMerge(
+                "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
+                mmFocus,
+              )}
+            >
+              Forgot password?
+            </button>
           }
         />
+        )}
 
         {error && (
           <MmErrorPanel id="auth-error">
@@ -580,6 +598,17 @@ export function SignInPanel({
             className="rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep"
           >
             {copy.lockedMessage(lockSecondsRemaining)}
+            {kind === "student" && (
+              <>
+                {" "}
+                <Link
+                  href="/student-sign-in/help"
+                  className={twMerge("inline-flex min-h-11 items-center rounded font-bold underline", mmFocus)}
+                >
+                  Ask for help
+                </Link>
+              </>
+            )}
           </p>
         )}
 
@@ -620,14 +649,15 @@ export function SignInPanel({
       )}
 
       {kind === "student" && (
-        <p className="rounded-xl border border-mm-tint-line bg-mm-tint p-3.5 text-sm leading-[1.55] text-mm-ink-soft">
-          A student never needs an email address. If the code or PIN has been lost, a parent can
-          look both up from the{" "}
-          <Link href="/parent" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-            parent view
-          </Link>
-          .
-        </p>
+        <Link
+          href="/student-sign-in/help"
+          className={twMerge(
+            "inline-flex min-h-11 w-fit items-center rounded font-bold text-mm-brand hover:underline",
+            mmFocus,
+          )}
+        >
+          I can&apos;t sign in
+        </Link>
       )}
 
       <p className="text-[13px] leading-[1.6] text-mm-muted">
