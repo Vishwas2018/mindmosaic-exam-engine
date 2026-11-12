@@ -14,7 +14,13 @@ export const metadata: Metadata = {
  * Help and contact — Public/Help.dc.html. Replaces the old prose /help
  * page and absorbs the former /contact page (owner ruling, 1 Oct); /contact
  * now permanently redirects here (next.config.ts).
+ *
+ * Static prerendering of this page triggers a Next.js 16.4.6 invariant
+ * error ("Expected workStore to be initialized"). Render server-side
+ * instead; content is static and identical for all users.
  */
+export const dynamic = "force-dynamic";
+
 export default function HelpPage() {
   return (
     <div className="lp-root min-h-screen">

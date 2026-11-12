@@ -86,12 +86,9 @@ function isEnoent(error: unknown): boolean {
 }
 
 function isEexist(error: unknown): boolean {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error as { code?: unknown }).code === "EEXIST"
-  );
+  if (typeof error !== "object" || error === null || !("code" in error)) return false;
+  const code = (error as { code?: unknown }).code;
+  return code === "EEXIST" || code === "EPERM" || code === "EBUSY" || code === "EACCES";
 }
 
 interface LockPayload {

@@ -116,8 +116,8 @@ describe("route boundary coverage", () => {
   });
 
   /*
-   * /practice and /teacher deliberately have no loading.tsx of their own:
-   * both have notFound()-calling descendants, and a Suspense boundary above
+   * /practice, /teacher and /parent deliberately have no loading.tsx of their own:
+   * they have notFound()-calling descendants, and a Suspense boundary above
    * one streams a 200 before the 404 can be set. The teacher loaders live on
    * the two subsegments that have no such descendant. Enforced in
    * src/tests/unit/route-loading-boundaries.test.ts.
@@ -125,7 +125,6 @@ describe("route boundary coverage", () => {
   it.each([
     "src/app/exam/loading.tsx",
     "src/app/results/loading.tsx",
-    "src/app/parent/loading.tsx",
     "src/app/student/loading.tsx",
     "src/app/admin/loading.tsx",
     "src/app/billing/loading.tsx",

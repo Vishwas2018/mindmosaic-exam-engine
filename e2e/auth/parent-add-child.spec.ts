@@ -37,8 +37,9 @@ test.describe("parent add-child journey", () => {
     try {
       await page.goto("/parent");
       await expect(
-        page.getByRole("heading", { level: 2, name: "No children linked to your account yet" }),
+        page.getByRole("heading", { level: 1, name: "Family Overview" }),
       ).toBeVisible();
+      await expect(page.getByText("No children added to your account yet.")).toBeVisible();
 
       const childName = `E2E Add Child ${Date.now()}`;
       await page.getByLabel("Child's name").fill(childName);
@@ -87,22 +88,24 @@ test.describe("parent add-child journey", () => {
       /* "Done" calls router.refresh(); the new child now renders. */
       await page.getByRole("button", { name: "Done — show on dashboard" }).click();
       await expect(
-        page.getByRole("heading", { level: 1, name: `How ${childName} is doing` }),
+        page.getByRole("heading", { level: 1, name: "Family Overview" }),
       ).toBeVisible();
-      /* Plain "Grade 5" also matches the still-present <option> in the
-         AddChildCard form below (kept around for a second child), so match
-         the dashboard's specific "Grade {n} · Read-only view..." line. */
-      await expect(page.getByText(/Grade 5 · Read-only view/)).toBeVisible();
       await expect(
-        page.getByRole("heading", { level: 2, name: "No children linked to your account yet" }),
-      ).toHaveCount(0);
+        page.getByRole("heading", { level: 2, name: childName }),
+      ).toBeVisible();
+      await expect(page.getByText(/Year 5 · ready to start/)).toBeVisible();
+      await expect(page.getByText("No children added to your account yet.")).toHaveCount(0);
 
       /* A hard refresh re-fetches server-side (the page is force-dynamic)
          and still shows the child — this is real, persisted data. */
       await page.reload();
       await expect(
-        page.getByRole("heading", { level: 1, name: `How ${childName} is doing` }),
+        page.getByRole("heading", { level: 1, name: "Family Overview" }),
       ).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 2, name: childName }),
+      ).toBeVisible();
+      await expect(page.getByText(/Year 5 · ready to start/)).toBeVisible();
 
       /* The "Add a child" card is always still reachable for a second child. */
       await expect(page.getByRole("heading", { name: "Add a child" })).toBeVisible();

@@ -226,47 +226,48 @@ describe("RLS: exam_attempts / profiles impersonation (docs/RLS_TEST_PLAN.md)", 
    * fresh session created by the function itself, which also demonstrates
    * that student_id comes from auth.uid() rather than from any argument.
    */
-  it("MM-AUD-SEC-001: a student can still create a session and record an attempt through the definer RPCs", async () => {
-    await asAuthenticated(client, STUDENT_A);
-
+  it("MM-AUD-SEC-001: the server write path creates a session and records an attempt for a student, who then reads them", async () => {
+    // P1 lockdown (20261031090100): `authenticated` can no longer execute create_exam_session / record_exam_attempt,
+    // which took the question list and the result from the caller. The application writes through the _for functions
+    // as mindmosaic_exam_writer (run here as the unrestricted role standing in for it; the role's own privileges are
+    // asserted in exam-write-lockdown.test.ts). The student id is an argument, so this also shows that ownership
+    // comes from the server\'s verified identity, not from the database session.
     const created = await client.query(
-      `select public.create_exam_session(
-         '{}'::jsonb, 'seed-rpc', array['q1'], now() + interval '1 hour'
+      `select public.create_exam_session_for(
+         $1, '{}'::jsonb, 'seed-rpc', array['q1'], now() + interval '1 hour'
        ) as session_id`,
+      [STUDENT_A],
     );
     const sessionId = created.rows[0].session_id as string;
     expect(sessionId).toBeTruthy();
 
-    const owner = await client.query(
-      `select student_id from public.exam_sessions where id = $1`,
-      [sessionId],
-    );
-    expect(owner.rows).toEqual([{ student_id: STUDENT_A }]);
-
     const attempt = await client.query(
-      `select public.record_exam_attempt($1, '{}'::jsonb, '{}'::jsonb) as attempt_id`,
-      [sessionId],
+      `select public.record_exam_attempt_for($1, $2, '{}'::jsonb, '{}'::jsonb) as attempt_id`,
+      [STUDENT_A, sessionId],
     );
     expect(attempt.rows[0].attempt_id).toBeTruthy();
+
+    await asAuthenticated(client, STUDENT_A);
+    const owner = await client.query(`select student_id from public.exam_sessions where id = $1`, [sessionId]);
+    expect(owner.rows).toEqual([{ student_id: STUDENT_A }]);
+    const mine = await client.query(`select student_id from public.exam_attempts where session_id = $1`, [sessionId]);
+    expect(mine.rows).toEqual([{ student_id: STUDENT_A }]);
   });
 
-  it("MM-AUD-SEC-001: create_exam_session refuses a non-student caller (MM002)", async () => {
-    await asAuthenticated(client, TEACHER_D);
-
+  it("MM-AUD-SEC-001: create_exam_session_for refuses a non-student (MM002)", async () => {
     await expect(
       client.query(
-        `select public.create_exam_session(
-           '{}'::jsonb, 'seed-teacher-rpc', array['q1'], now() + interval '1 hour'
+        `select public.create_exam_session_for(
+           $1, '{}'::jsonb, 'seed-teacher-rpc', array['q1'], now() + interval '1 hour'
          )`,
+        [TEACHER_D],
       ),
     ).rejects.toMatchObject({ code: "MM002" });
   });
 
-  it("MM-AUD-SEC-001: record_exam_attempt refuses another student's session (MM003)", async () => {
-    await asAuthenticated(client, STUDENT_A);
-
+  it("MM-AUD-SEC-001: record_exam_attempt_for refuses another student's session (MM003)", async () => {
     await expect(
-      client.query(`select public.record_exam_attempt($1, '{}'::jsonb, '{}'::jsonb)`, [SESSION_B]),
+      client.query(`select public.record_exam_attempt_for($1, $2, '{}'::jsonb, '{}'::jsonb)`, [STUDENT_A, SESSION_B]),
     ).rejects.toMatchObject({ code: "MM003" });
   });
 

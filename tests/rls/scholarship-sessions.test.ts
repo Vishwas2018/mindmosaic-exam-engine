@@ -12,7 +12,7 @@ import type { Client } from "pg";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { connect } from "./db";
-import { asAuthenticated, PARENT_C, seed, SESSION_A, STUDENT_A, STUDENT_B, TEACHER_D } from "./fixtures";
+import { asAnon, asAuthenticated, PARENT_C, seed, SESSION_A, STUDENT_A, STUDENT_B, TEACHER_D } from "./fixtures";
 
 let client: Client;
 
@@ -38,12 +38,34 @@ const SCHOLARSHIP_CONFIG = {
 };
 const IDS = ["scholarship-y6-nr-001", "scholarship-y6-nr-002", "scholarship-y6-nr-003"];
 
-async function createSession(config: Record<string, unknown> = SCHOLARSHIP_CONFIG): Promise<string> {
+/*
+ * P1 lockdown (20261031090100): `authenticated` can no longer execute the legacy create/record functions, so a
+ * session and its attempt are written the way the application writes them, by the server through the _for functions
+ * (run here as the unrestricted role, standing in for mindmosaic_exam_writer, whose own privileges are asserted in
+ * exam-write-lockdown.test.ts). The student is then re-impersonated so everything the test goes on to read or try is
+ * still seen through RLS exactly as before.
+ */
+async function createSession(
+  config: Record<string, unknown> = SCHOLARSHIP_CONFIG,
+  studentId: string = STUDENT_A,
+): Promise<string> {
+  await client.query("reset role");
   const created = await client.query(
-    `select public.create_exam_session($1::jsonb, 'seed-scholarship', $2::text[], now() + interval '1 hour') as id`,
-    [JSON.stringify(config), IDS],
+    `select public.create_exam_session_for($1, $2::jsonb, 'seed-scholarship', $3::text[], now() + interval '1 hour') as id`,
+    [studentId, JSON.stringify(config), IDS],
   );
+  await asAuthenticated(client, studentId);
   return created.rows[0].id as string;
+}
+
+async function recordAttempt(studentId: string, sessionId: string, responses: string, result: string): Promise<string> {
+  await client.query("reset role");
+  const out = await client.query(
+    `select public.record_exam_attempt_for($1, $2, $3::jsonb, $4::jsonb) as id`,
+    [studentId, sessionId, responses, result],
+  );
+  await asAuthenticated(client, studentId);
+  return out.rows[0].id as string;
 }
 
 describe("scholarship sessions: isolation and roles", () => {
@@ -63,10 +85,12 @@ describe("scholarship sessions: isolation and roles", () => {
     const byFlag = await createSession({ ...SCHOLARSHIP_CONFIG, confidenceMode: true });
     const modes = await client.query(`select mode from public.exam_sessions where id = any($1::uuid[])`, [[byMode, byFlag]]);
     expect(modes.rows.map((r) => r.mode)).toEqual(["confidence", "confidence"]);
+    await client.query("reset role");
     await client.query("savepoint bad");
     await expect(
       client.query(
-        `select public.create_exam_session('{"mode":"preview"}'::jsonb, 's', array['x'], now() + interval '1 hour')`,
+        `select public.create_exam_session_for($1, '{"mode":"preview"}'::jsonb, 's', array['x'], now() + interval '1 hour')`,
+        [STUDENT_A],
       ),
     ).rejects.toThrow(/mode|check constraint/i);
     await client.query("rollback to savepoint bad");
@@ -75,7 +99,7 @@ describe("scholarship sessions: isolation and roles", () => {
   it("keeps another student's scholarship session and attempt invisible, and shows a linked parent their own child's", async () => {
     await asAuthenticated(client, STUDENT_A);
     const id = await createSession();
-    await client.query(`select public.record_exam_attempt($1, '{}'::jsonb, '{"correctCount":2}'::jsonb)`, [id]);
+    await recordAttempt(STUDENT_A, id, "{}", '{"correctCount":2}');
 
     await client.query("reset role");
     await asAuthenticated(client, STUDENT_B);
@@ -91,9 +115,9 @@ describe("scholarship sessions: isolation and roles", () => {
     for (const who of [TEACHER_D, PARENT_C]) {
       await client.query("reset role");
       await client.query("savepoint s");
-      await asAuthenticated(client, who);
       await expect(
-        client.query(`select public.create_exam_session($1::jsonb, 's', $2::text[], now() + interval '1 hour')`, [
+        client.query(`select public.create_exam_session_for($1, $2::jsonb, 's', $3::text[], now() + interval '1 hour')`, [
+          who,
           JSON.stringify(SCHOLARSHIP_CONFIG),
           IDS,
         ]),
@@ -102,14 +126,19 @@ describe("scholarship sessions: isolation and roles", () => {
     }
   });
 
-  it("refuses an anonymous caller", async () => {
-    await client.query("set local role anon");
-    await expect(
-      client.query(`select public.create_exam_session($1::jsonb, 's', $2::text[], now() + interval '1 hour')`, [
-        JSON.stringify(SCHOLARSHIP_CONFIG),
-        IDS,
-      ]),
-    ).rejects.toThrow(/permission denied/i);
+  it("refuses an anonymous caller, on both the legacy function and its replacement", async () => {
+    for (const call of [
+      "public.create_exam_session($1::jsonb, 's', $2::text[], now() + interval '1 hour')",
+      `public.create_exam_session_for('${STUDENT_A}', $1::jsonb, 's', $2::text[], now() + interval '1 hour')`,
+    ]) {
+      await client.query("reset role");
+      await client.query("savepoint anon_try");
+      await asAnon(client);
+      await expect(client.query(`select ${call}`, [JSON.stringify(SCHOLARSHIP_CONFIG), IDS])).rejects.toThrow(
+        /permission denied/i,
+      );
+      await client.query("rollback to savepoint anon_try");
+    }
   });
 });
 
@@ -117,30 +146,31 @@ describe("scholarship attempts: duplicate submission and history", () => {
   it("accepts one submission per session and refuses a second without changing the first", async () => {
     await asAuthenticated(client, STUDENT_A);
     const id = await createSession();
-    const first = await client.query(
-      `select public.record_exam_attempt($1, '{"a":"b"}'::jsonb, '{"correctCount":1}'::jsonb) as attempt_id`,
-      [id],
-    );
+    const firstId = await recordAttempt(STUDENT_A, id, '{"a":"b"}', '{"correctCount":1}');
+    await client.query("reset role");
     await client.query("savepoint dup");
     await expect(
-      client.query(`select public.record_exam_attempt($1, '{"a":"c"}'::jsonb, '{"correctCount":40}'::jsonb)`, [id]),
+      client.query(
+        `select public.record_exam_attempt_for($1, $2, '{"a":"c"}'::jsonb, '{"correctCount":40}'::jsonb)`,
+        [STUDENT_A, id],
+      ),
     ).rejects.toMatchObject({ code: "23505" });
     await client.query("rollback to savepoint dup");
+    await asAuthenticated(client, STUDENT_A);
     const stored = await client.query(`select id, result from public.exam_attempts where session_id = $1`, [id]);
-    expect(stored.rows).toEqual([{ id: first.rows[0].attempt_id, result: { correctCount: 1 } }]);
+    expect(stored.rows).toEqual([{ id: firstId, result: { correctCount: 1 } }]);
   });
 
   it("will not record an attempt against another student's session (MM003)", async () => {
-    await asAuthenticated(client, STUDENT_B);
     await expect(
-      client.query(`select public.record_exam_attempt($1, '{}'::jsonb, '{}'::jsonb)`, [SESSION_A]),
+      client.query(`select public.record_exam_attempt_for($1, $2, '{}'::jsonb, '{}'::jsonb)`, [STUDENT_B, SESSION_A]),
     ).rejects.toMatchObject({ code: "MM003" });
   });
 
   it("keeps a recorded scholarship result immutable for the student", async () => {
     await asAuthenticated(client, STUDENT_A);
     const id = await createSession();
-    await client.query(`select public.record_exam_attempt($1, '{}'::jsonb, '{"correctCount":1}'::jsonb)`, [id]);
+    await recordAttempt(STUDENT_A, id, "{}", '{"correctCount":1}');
     await client.query("savepoint upd");
     await expect(
       client.query(`update public.exam_attempts set result = '{"correctCount":40}'::jsonb where session_id = $1`, [id]),
@@ -207,14 +237,14 @@ describe("20261014090000_scholarship_programme_offerings.sql is safe to run agai
     expect(before).toEqual({ offerings: 5, blueprints: 5, profiles: 5, gates: 7 });
   });
 
-  it("leaves create_exam_session executable by authenticated users only", async () => {
+  it("leaves create_exam_session executable by no client role (re-running an unrelated migration does not re-open it)", async () => {
     const grants = await client.query(
       `select grantee from information_schema.routine_privileges
         where routine_schema = 'public' and routine_name = 'create_exam_session' and privilege_type = 'EXECUTE'
         order by grantee`,
     );
     const who = grants.rows.map((r) => r.grantee);
-    expect(who).toContain("authenticated");
+    expect(who).not.toContain("authenticated");
     expect(who).not.toContain("anon");
     expect(who).not.toContain("PUBLIC");
   });

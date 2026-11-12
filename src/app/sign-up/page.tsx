@@ -22,6 +22,8 @@ export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
       robots: { index: false, follow: false },
     };
 
+export const dynamic = "force-dynamic";
+
 /**
  * Sign up — design handoff screen 7.
  *
@@ -35,11 +37,27 @@ export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
  */
 export default function SignUpPage() {
   if (PUBLIC_SIGNUP_ENABLED) {
-    return <SignUpScreen availableYearLevels={yearLevelsWithGatedCoverage()} />;
+    return (
+      <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-white text-mm-ink px-4 py-2 border border-mm-line rounded-md"
+        >
+          Skip to main content
+        </a>
+        <SignUpScreen availableYearLevels={yearLevelsWithGatedCoverage()} />
+      </div>
+    );
   }
 
   return (
     <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-white text-mm-ink px-4 py-2 border border-mm-line rounded-md"
+      >
+        Skip to main content
+      </a>
       <AuthMosaicPanel
         columns={10}
         eyebrow="Invite only"

@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Sign in to MindMosaic — parent accounts and student profiles both sign in here.",
 };
 
+export const dynamic = "force-dynamic";
+
 /**
  * Log in — design handoff screen 6. Split layout at `1.05fr / 1fr`, plum
  * mosaic panel on the left, form on the right.
@@ -20,10 +22,33 @@ export const metadata: Metadata = {
  * so below `lg` the split collapses to the form alone with a compact brand
  * strip above it, rather than inventing a mobile treatment for a 216-tile
  * animated field.
+ *
+ * Entry behaviour (design artboards 01-03 "Welcome — who is signing in?"):
+ * the first visit to /sign-in shows the standalone role chooser
+ * (Parent vs Student cards) before the sign-in form. SignInPanel accepts
+ * `defaultEntry` to render the chooser screen initially instead of the form.
  */
-export default function SignInPage() {
+export default async function SignInPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ mode?: string; entry?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  const defaultEntry =
+    resolvedParams.entry === "signin" || resolvedParams.mode === "signin"
+      ? "signin"
+      : resolvedParams.mode === "forgot"
+      ? "forgot"
+      : "choose";
+
   return (
     <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-white text-mm-ink px-4 py-2 border border-mm-line rounded-md"
+      >
+        Skip to main content
+      </a>
       <AuthMosaicPanel
         eyebrow="Welcome back"
         heading="Every session picks up exactly where the last one stopped."
@@ -57,7 +82,7 @@ export default function SignInPage() {
             />
           }
         >
-          <SignInPanel />
+          <SignInPanel defaultEntry={defaultEntry} />
         </Suspense>
       </main>
     </div>

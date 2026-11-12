@@ -4,6 +4,7 @@ import { createClient as createAdminClient, type SupabaseClient } from "@supabas
 
 import { isArchivedUser } from "@/lib/supabase/archived-session";
 import { SUPABASE_URL } from "@/lib/supabase/config";
+import { extractLoginCodeFromAliasEmail } from "@/features/auth/student-alias";
 
 export { isArchivedUser };
 
@@ -110,3 +111,21 @@ export async function loadArchivedChildIds(childIds: readonly string[]): Promise
   );
   return archived;
 }
+
+/**
+ * Loads the formatted student login code (e.g. "K7XJ-2P9R") for a linked child account by reading
+ * the internal alias email from auth.users. The caller must already have confirmed that the
+ * requesting parent is authorized to access this childId.
+ */
+export async function loadChildLoginCode(childId: string): Promise<string | null> {
+  const admin = createServiceRoleClient();
+  if (!admin) return null;
+  try {
+    const { data, error } = await admin.auth.admin.getUserById(childId);
+    if (error || !data?.user?.email) return null;
+    return extractLoginCodeFromAliasEmail(data.user.email);
+  } catch {
+    return null;
+  }
+}
+

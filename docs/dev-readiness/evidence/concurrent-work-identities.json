@@ -1,0 +1,961 @@
+[
+  {
+    "worktree": "C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine",
+    "head": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "status": " M .env.local.example\n M .gitignore\n M .vscode/settings.json\n D brand/images/asset-map.json\n M docs/PRIVACY_AND_BILLING_GUARDRAILS.md\n M package.json\n D public/photos/product-intro-homework-desk.jpg\n M scripts/migrations/registry.ts\n M src/app/api/exam/guest-bank/route.ts\n M src/app/api/exam/session/route.ts\n M src/app/api/parent/children/route.ts\n M src/app/api/stripe/checkout/route.ts\n M src/app/assessments/page.tsx\n M src/app/billing/page.tsx\n M src/app/dev/routes/page.tsx\n M src/app/globals.css\n M src/app/layout.tsx\n M src/app/parent/children/page.tsx\n M src/app/parent/curriculum-explorer/page.tsx\n M src/app/parent/page.tsx\n M src/app/parent/writing/page.tsx\n M src/app/pricing/page.tsx\n M src/components/shell/AppHeader.tsx\n M src/features/auth/components/SignUpWizard.tsx\n M src/features/auth/provision-child.ts\nD  src/features/billing/components/FamilyPlanCard.tsx\n M src/features/billing/components/PlanComparisonTable.tsx\n M src/features/billing/components/SubscriptionOverviewCard.tsx\n M src/features/billing/index.ts\n M src/features/billing/require-active-subscription.ts\n M src/features/exam-engine/components/ExamConfigurator.tsx\n M src/features/exam-engine/exam-patterns/components/ExamPatternStarter.tsx\n M src/features/landing/components/Plans.tsx\n M src/features/landing/content.ts\n M src/features/parent-dashboard/components/AddChildCard.tsx\n M src/features/parent-dashboard/components/BillingPanel.tsx\n M src/features/parent-dashboard/components/ParentShell.tsx\n M src/lib/billing/prices.ts\n M src/lib/billing/subscription.ts\n M src/lib/stripe/config.ts\n M src/server/exam-bank.ts\n M src/tests/components/app-header.test.tsx\n M src/tests/components/exam-configurator-bank-default.test.tsx\n M src/tests/components/exam-pattern-starter-roles.test.tsx\nD  src/tests/components/family-plan-card.test.tsx\n M src/tests/components/landing-plans-faq.test.tsx\n M src/tests/components/parent-shell.test.tsx\n M src/tests/components/plan-comparison-table.test.tsx\n M src/tests/components/signup-policy.test.tsx\n M src/tests/pages/student-layout.test.tsx\n M src/tests/unit/parent-curriculum-explorer-page.test.tsx\n M src/tests/unit/provision-child.test.ts\n M src/tests/unit/require-active-subscription.test.ts\n M src/tests/unit/stop-serving-ungated-seeds.test.ts\n M src/tests/unit/stripe-checkout-route.test.ts\n?? .github/agents/impeccable-asset-producer.agent.md\n?? .github/agents/impeccable-documenter.agent.md\n?? .github/agents/impeccable-finish-reviewer.agent.md\n?? .github/agents/impeccable-manual-edit-applier.agent.md\n?? .github/hooks/impeccable.json\n?? .github/skills/impeccable/SKILL.md\n?? .github/skills/impeccable/reference/adapt.md\n?? .github/skills/impeccable/reference/adapt.native.md\n?? .github/skills/impeccable/reference/android.md\n?? .github/skills/impeccable/reference/animate.md\n?? .github/skills/impeccable/reference/audit.md\n?? .github/skills/impeccable/reference/audit.native.md\n?? .github/skills/impeccable/reference/bolder.md\n?? .github/skills/impeccable/reference/clarify.md\n?? .github/skills/impeccable/reference/colorize.md\n?? .github/skills/impeccable/reference/component-review.md\n?? .github/skills/impeccable/reference/craft-floor.md\n?? .github/skills/impeccable/reference/craft.md\n?? .github/skills/impeccable/reference/critique.md\n?? .github/skills/impeccable/reference/degraded/asset-producer.md\n?? .github/skills/impeccable/reference/degraded/documenter.md\n?? .github/skills/impeccable/reference/degraded/finish-reviewer.md\n?? .github/skills/impeccable/reference/degraded/manual-edit-applier.md\n?? .github/skills/impeccable/reference/delight.md\n?? .github/skills/impeccable/reference/distill.md\n?? .github/skills/impeccable/reference/doctor.md\n?? .github/skills/impeccable/reference/document.md\n?? .github/skills/impeccable/reference/extract.md\n?? .github/skills/impeccable/reference/generate.md\n?? .github/skills/impeccable/reference/harden.md\n?? .github/skills/impeccable/reference/hooks.md\n?? .github/skills/impeccable/reference/init.md\n?? .github/skills/impeccable/reference/ios.md\n?? .github/skills/impeccable/reference/layout.md\n?? .github/skills/impeccable/reference/live-setup.md\n?? .github/skills/impeccable/reference/live.md\n?? .github/skills/impeccable/reference/mode-operate.md\n?? .github/skills/impeccable/reference/mode-persuade.md\n?? .github/skills/impeccable/reference/mode-read.md\n?? .github/skills/impeccable/reference/new-work.md\n?? .github/skills/impeccable/reference/onboard.md\n?? .github/skills/impeccable/reference/operate.md\n?? .github/skills/impeccable/reference/optimize.md\n?? .github/skills/impeccable/reference/overdrive.md\n?? .github/skills/impeccable/reference/polish.md\n?? .github/skills/impeccable/reference/quieter.md\n?? .github/skills/impeccable/reference/region-map.md\n?? .github/skills/impeccable/reference/routing.md\n?? .github/skills/impeccable/reference/shape.md\n?? .github/skills/impeccable/reference/typeset.md\n?? .github/skills/impeccable/reference/visualize.md\n?? .github/skills/impeccable/scripts/VERSION\n?? .github/skills/impeccable/scripts/bin/windows-x64/impeccable.exe\n?? .github/skills/impeccable/scripts/command-metadata.json\n?? .github/skills/impeccable/scripts/data/font-index-failures.json\n?? .github/skills/impeccable/scripts/data/font-index.json\n?? .github/skills/impeccable/scripts/impeccable\n?? .github/skills/impeccable/scripts/impeccable.cmd\n?? .github/skills/impeccable/scripts/live-browser-dom.js\n?? .github/skills/impeccable/scripts/live-browser-ignores.js\n?? .github/skills/impeccable/scripts/live-browser-session.js\n?? .github/skills/impeccable/scripts/live-browser.js\n?? .github/skills/impeccable/scripts/modern-screenshot.umd.js\n?? MindMosaic_Final_Landing_Integration_Signoff.md\n?? REVIEWER-RESEARCH-2026-10-26.md\n?? clear\n?? docs/audits/landing-page-audit-2026-11-04.md\n?? docs/audits/landing-uiux-audit-2026-10-05.md\n?? docs/audits/screenshots/2026-11-04/browser-chromium-1440.png\n?? docs/audits/screenshots/2026-11-04/browser-firefox-1440.png\n?? docs/audits/screenshots/2026-11-04/browser-webkit-1440.png\n?? docs/audits/screenshots/2026-11-04/desktop-scroll-midway.png\n?? docs/audits/screenshots/2026-11-04/journey-1-programs.png\n?? docs/audits/screenshots/2026-11-04/journey-2-signin.png\n?? docs/audits/screenshots/2026-11-04/journey-3-howitworks-parentguide.png\n?? docs/audits/screenshots/2026-11-04/journey-4-chapter2-availability.png\n?? docs/audits/screenshots/2026-11-04/journey-5-help-page.png\n?? docs/audits/screenshots/2026-11-04/keyboard-focus-active.png\n?? docs/audits/screenshots/2026-11-04/local-desktop-1440-hero.png\n?? docs/audits/screenshots/2026-11-04/local-mobile-nav-open.png\n?? docs/audits/screenshots/2026-11-04/prod-desktop-1440-hero.png\n?? docs/audits/screenshots/2026-11-04/reduced-motion-desktop.png\n?? docs/audits/screenshots/2026-11-04/responsive-1024x576.png\n?? docs/audits/screenshots/2026-11-04/responsive-1024x768.png\n?? docs/audits/screenshots/2026-11-04/responsive-1280x633.png\n?? docs/audits/screenshots/2026-11-04/responsive-1280x800.png\n?? docs/audits/screenshots/2026-11-04/responsive-1440x900.png\n?? docs/audits/screenshots/2026-11-04/responsive-1920x1080.png\n?? docs/audits/screenshots/2026-11-04/responsive-320x568.png\n?? docs/audits/screenshots/2026-11-04/responsive-375x667.png\n?? docs/audits/screenshots/2026-11-04/responsive-390x844.png\n?? docs/audits/screenshots/2026-11-04/responsive-768x1024.png\n?? docs/audits/screenshots/2026-11-04/short-viewport-1024x576.png\n?? docs/audits/screenshots/2026-11-04/zoom-200pct-hero.png\n?? docs/audits/screenshots/fullpage-1024.png\n?? docs/audits/screenshots/fullpage-1440.png\n?? docs/audits/screenshots/fullpage-1920.png\n?? docs/audits/screenshots/fullpage-375.png\n?? docs/audits/screenshots/fullpage-768.png\n?? docs/audits/screenshots/hero-1024-slide-1.png\n?? docs/audits/screenshots/hero-1024-slide-2.png\n?? docs/audits/screenshots/hero-1024-slide-3.png\n?? docs/audits/screenshots/hero-1024-slide-4.png\n?? docs/audits/screenshots/hero-1024-slide-5.png\n?? docs/audits/screenshots/hero-1024-slide-6.png\n?? docs/audits/screenshots/hero-1440-slide-1.png\n?? docs/audits/screenshots/hero-1440-slide-2.png\n?? docs/audits/screenshots/hero-1440-slide-3.png\n?? docs/audits/screenshots/hero-1440-slide-4.png\n?? docs/audits/screenshots/hero-1440-slide-5.png\n?? docs/audits/screenshots/hero-1440-slide-6.png\n?? docs/audits/screenshots/hero-1920-slide-1.png\n?? docs/audits/screenshots/hero-1920-slide-2.png\n?? docs/audits/screenshots/hero-1920-slide-3.png\n?? docs/audits/screenshots/hero-1920-slide-4.png\n?? docs/audits/screenshots/hero-1920-slide-5.png\n?? docs/audits/screenshots/hero-1920-slide-6.png\n?? docs/audits/screenshots/hero-375-slide-1.png\n?? docs/audits/screenshots/hero-375-slide-2.png\n?? docs/audits/screenshots/hero-375-slide-3.png\n?? docs/audits/screenshots/hero-375-slide-4.png\n?? docs/audits/screenshots/hero-375-slide-5.png\n?? docs/audits/screenshots/hero-375-slide-6.png\n?? docs/audits/screenshots/hero-768-slide-1.png\n?? docs/audits/screenshots/hero-768-slide-2.png\n?? docs/audits/screenshots/hero-768-slide-3.png\n?? docs/audits/screenshots/hero-768-slide-4.png\n?? docs/audits/screenshots/hero-768-slide-5.png\n?? docs/audits/screenshots/hero-768-slide-6.png\n?? docs/content-status/practice-availability-2026-11.md\n?? docs/content-status/programme-tracking.xlsx\n?? docs/content-status/y5-depth-generation-plan.md\n?? docs/plans/checks/fingerprint.sql\n?? docs/plans/checks/m10.sql\n?? docs/plans/checks/m9.sql\n?? docs/plans/checks/snapshot.sql\n?? docs/plans/checks/year5-session.sql\n?? docs/plans/dev-to-main-release-plan-2026-10-14.md\n?? docs/plans/release-pr-body.md\n?? docs/plans/reset-child-onboarding.sql\n?? docs/plans/rollback/rollback-10.sql\n?? docs/plans/rollback/rollback-9.sql\n?? docs/plans/runbook/_common.ps1\n?? docs/plans/runbook/apply-migration.ps1\n?? docs/plans/runbook/dump-and-prove.ps1\n?? mindmosaic-exam-engine-bar-model-pilot/\n?? npx\n?? \"public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_35_29 PM-1.png\"\n?? \"public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_35_32 PM-2.png\"\n?? \"public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_36_31 PM-1.png\"\n?? \"public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_36_35 PM-2.png\"\n?? \"public/photos/Chapter 2/MindMosaic Study Session.png\"\n?? \"public/photos/Chapter 2/Sunlit MindMosaic Study Session.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_34_03 AM-1.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_34_04 AM-2.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_34_05 AM-3.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_34_07 AM-4.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_14 AM-1.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_16 AM-2.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_17 AM-3.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_19 AM-4.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_41 AM-1.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_43 AM-2.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_44 AM-3.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_36_45 AM-4.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_10 AM-1.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_11 AM-2.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_12 AM-3.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_13 AM-4.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_20 AM-1.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_21 AM-2.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_22 AM-3.png\"\n?? \"public/photos/ChatGPT Image Oct 5, 2026, 10_37_23 AM-4.png\"\n?? \"public/photos/ChatGPT Image Oct 6, 2026, 09_00_30 AM.png\"\n?? \"public/photos/Cozy Mother-Son Study Time.png\"\n?? public/photos/hero_2.png\n?? public/photos/hero_3.png\n?? public/photos/hero_4.png\n?? public/photos/hero_5.png\n?? public/photos/hero_6.png\n?? scratch/audit_metrics.json\n?? scratch/audit_responsive_a11y.js\n?? scratch/downloaded-hero-1.avif\n?? scratch/inspect_all_sections.js\n?? scratch/pr80-blind.txt\n?? scratch/pr80-independent-findings.md\n?? scratch/pr80-independent-script.ts\n?? scratch/pr80-keyed.txt\n?? scratch/pr80-review-matrix.md\n?? scratch/pr80-review-script.mts\n?? scratch/pr80-validate-script.mts\n?? scratch/recapture_fullpage.js\n?? scratch/run_full_audit.js\n?? scratch/run_motion_and_image_audit.js\n?? scratch/test_dimensions.js\n?? scratch/test_image_network.js\n?? scratch/test_interactions_detail.js\n?? scripts/stripe-setup.mts\n?? src/app/api/parent/children/pause/route.ts\n?? src/app/parent/settings/page.tsx\n?? src/features/auth/child-programmes.ts\n?? src/features/auth/components/ProgrammePicker.tsx\n?? src/features/billing/components/PricingPlans.tsx\n?? src/features/billing/student-access.ts\n?? src/features/parent-dashboard/components/DangerZone.tsx\n?? src/features/parent-dashboard/components/ParentAccountMenu.tsx\n?? src/features/parent-dashboard/components/ParentProfileForm.tsx\n?? src/lib/billing/free-sample.ts\n?? src/tests/components/exam-configurator-free-sample.test.tsx\n?? src/tests/components/pricing-plans.test.tsx\n?? src/tests/unit/billing-plans.test.ts\n?? src/tests/unit/free-sample.test.ts\n?? src/tests/unit/student-access.test.ts\n?? supabase/migrations/20261105090000_profile_programmes.sql\n?? supabase/migrations/20261106090000_individual_plans.sql\n",
+    "trackedDiffSHA256": "dba5054a938073c0f32881887460f803d2e2919e6aaf984fc2da2022ec082383",
+    "untrackedFiles": [
+      {
+        "path": ".github/agents/impeccable-asset-producer.agent.md",
+        "sha256": "50f3b5714ca3e2c1bcf070003733407935ee050609d3123c2c065489fbc9950b"
+      },
+      {
+        "path": ".github/agents/impeccable-documenter.agent.md",
+        "sha256": "4fb6d2fcc8afaf827a7377ddd604725264fd83be871e2d35062e9d1939144404"
+      },
+      {
+        "path": ".github/agents/impeccable-finish-reviewer.agent.md",
+        "sha256": "c6b3bc811eb23d90ff9add1e0e5b40999a0bbbab364f5e6d08061f36d30429a5"
+      },
+      {
+        "path": ".github/agents/impeccable-manual-edit-applier.agent.md",
+        "sha256": "a423108e7e31a54564e2e0794186394f842625fd9f7d7ce6e6615362511503a2"
+      },
+      {
+        "path": ".github/hooks/impeccable.json",
+        "sha256": "076a31941acbaa81013c8c511e146ed4138128eb5e9895dae3e9a27a25ac4f04"
+      },
+      {
+        "path": ".github/skills/impeccable/SKILL.md",
+        "sha256": "6528f2aebe4a425b724de293c8f6dc8a42ca80c7f1ed3039b8b9a813b004956a"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/adapt.md",
+        "sha256": "0648e4e06d01cabc91fa7dc19256ceedeeeea213b9265e9d36b0918370e16fb2"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/adapt.native.md",
+        "sha256": "17c583cf8ad41266ea1e787b666b9d91fe13469d3d0f6af57c08e0146f9b17ac"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/android.md",
+        "sha256": "058f81f256134841875fd3183e06b37a023de0c877fd2b9eecd97011640791fe"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/animate.md",
+        "sha256": "94b4ce6299fea93d9f256b2d25705961a76bc5ea940c56db4145686ebc99df1b"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/audit.md",
+        "sha256": "d9963fd73bf6129fe0c8ec25c5148f50617ec85683b8eeae7e411c9a42e2db33"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/audit.native.md",
+        "sha256": "fe91fcf28638f95577af481a50edaf339d6c9a3ad3b9fa477bc81c116b8bc392"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/bolder.md",
+        "sha256": "37565671b09d983ea1ad83a9e9190bc37255d93c68445958c6facecc7e0f7c4f"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/clarify.md",
+        "sha256": "6c382f8283756e8a693d832b750f7e4cbff1ca5bdcc3825b2b4ef4da9f21876a"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/colorize.md",
+        "sha256": "d1fbd55074abb2251bdaa03749d34acc42c38e46e47549f18f5848df57d43c42"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/component-review.md",
+        "sha256": "0dd1e6ccf053cb80e057caf7bf2fef30fd0197a41d907a1a8d2d2d02f6978674"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/craft-floor.md",
+        "sha256": "96e2e6bd4fcf9a2c6da65fb029f96d9176308fae2efd9d8653d3b8d838960e07"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/craft.md",
+        "sha256": "9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/critique.md",
+        "sha256": "8ff60b8b5369d364f732f8de10479a39294e65341b3e0b6497b21de5c8e34b2d"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/degraded/asset-producer.md",
+        "sha256": "3bed76a0d528e2d73da8acae4dc63702bdb5baca5ab11600d70e75fc9f2ba90b"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/degraded/documenter.md",
+        "sha256": "bcc05ea92faebb5c74037a9d4263a5ce9a56f5ab07c8ab3c59ee704d8cade745"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/degraded/finish-reviewer.md",
+        "sha256": "275dd1b6e63bbd30d2713227c4f79b880a8bc4e01cc48d392068bb86939d3afa"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/degraded/manual-edit-applier.md",
+        "sha256": "5fae7f8a2fc3ddd49ad0a413446dc44daedef5b6b7de5eb935bd2fbfad646d58"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/delight.md",
+        "sha256": "56500b1f9d2fcec8324d7f448d813048b5831a46d3feeb1055bd3eb17ec3660f"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/distill.md",
+        "sha256": "74e20b26c29242bbebf79760315f7f0788e001566695618cfc70805484c6f92a"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/doctor.md",
+        "sha256": "f9cbbad0cc08fb9bd69d4d3046067c6cf820b89cdaf7af8c81c671fb0a62b6ae"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/document.md",
+        "sha256": "7848f40e224cf520bd8554943c9816a1ff8c97b1db57af0844e3b1ebb223d91f"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/extract.md",
+        "sha256": "54e71283cbd5646021fcd8eaa28d85852ec5288109c306aca9db9e2e4832338e"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/generate.md",
+        "sha256": "9287af96048c58ed0e72493cf7eb90c3957d4ba8b19e70ecf5d1f54264e9e597"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/harden.md",
+        "sha256": "3898bd9b56a042e860a0db4fb4dd81ac81126fa218b604702e2ac0c2287ae09b"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/hooks.md",
+        "sha256": "41ef23c048ab739f48afdce26a2678d36ee40bcced34ef4b969d1d8ffafca64c"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/init.md",
+        "sha256": "ac695dd89d5f1261004cfa966526f5d5e913c92fa0640d4d71cb42493effad08"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/ios.md",
+        "sha256": "40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/layout.md",
+        "sha256": "3e3b6fdc6afbc2c2a734d08d6a18b393b7139c56f28f91f82e13e5555b98018a"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/live-setup.md",
+        "sha256": "5db17cd013c10dca0012bc18aee7276280941579aa50757682e9ce60c4f7a006"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/live.md",
+        "sha256": "571526fd5c60a586ff65bdb3f8333f26c36ae227f5f5ece826f4a43b4d4aee0f"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/mode-operate.md",
+        "sha256": "385a0efe833bd4afe4a257e7159590de0cf1b7fd8f7b213b732f1e537c62dab7"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/mode-persuade.md",
+        "sha256": "21e78c8a77badb3f83290cd4577ed3b24bd4dd3b57136d7da75733d4f3ee9ac0"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/mode-read.md",
+        "sha256": "a569989e6a3d6453b4c45e9474e162a15cc54e11732ac6baa7990a6e7cccc0b5"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/new-work.md",
+        "sha256": "529cb2ace696ec11a86f4b010c9b137acf282072e483932181be1871df2aa690"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/onboard.md",
+        "sha256": "9a2c08ee2516d2ee87129e7ebe6a0895f9990c9852d1f6fa7e70be9a6a88a659"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/operate.md",
+        "sha256": "a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/optimize.md",
+        "sha256": "6d368b679a0ed1815812815de65863b5840d419589dfbda06224c01149240287"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/overdrive.md",
+        "sha256": "96e508039c719c0815701c36b8418b18baee1967f915fa29b23b84861ae8ea94"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/polish.md",
+        "sha256": "402373ef95962ecb81dd3d7cf70ecb3bd3e22a2bd2aabb4c0d76f7f4f9447870"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/quieter.md",
+        "sha256": "494d6fcb4701c437597c2ed16a9595af92f3d9ad53c944c96a2fb563bd766af5"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/region-map.md",
+        "sha256": "cf3d3a296890ac1ee363fee930f252e20d0935cd575367ad017b3cdc2dc5a50d"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/routing.md",
+        "sha256": "19b439d7d16e139357459d3874f739ea94dbdffeb2a0e201df1620ed1e40574d"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/shape.md",
+        "sha256": "a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/typeset.md",
+        "sha256": "713cac92a71ef45e8b700180d881f830096cfe2b0615e79b276ccc4a12c051e0"
+      },
+      {
+        "path": ".github/skills/impeccable/reference/visualize.md",
+        "sha256": "7212014fb2477d1d54aedaa79cdb861071a58afb2ae6d4dc5a495fa4810c6f8a"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/VERSION",
+        "sha256": "66d60356172ccafdd334fca9bf33243c8409216a733dcde0d66a24fd70ee8132"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/bin/windows-x64/impeccable.exe",
+        "sha256": "605b5b442d2a65d270ef989de13371444849526249f511d397ca7424c184db49"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/command-metadata.json",
+        "sha256": "e8720f3aa41135211cc58cc299a39eeda86c75651f4279cc1ede8db10dcc0584"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/data/font-index-failures.json",
+        "sha256": "835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/data/font-index.json",
+        "sha256": "47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/impeccable",
+        "sha256": "39d9600489073e227e4f4d55c451ce4252a6632ed7ae37923efbbcbc91f16d07"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/impeccable.cmd",
+        "sha256": "69cad1ae7355825ef320ac9638a1c9675ba9fda01c9a0fa12244cc4a1973e550"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/live-browser-dom.js",
+        "sha256": "de1b7404f4cdfd7b515196afb17b74b1980f0bc88cb8681ae93a76ca48ec7bdb"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/live-browser-ignores.js",
+        "sha256": "c1cb6877ca99a0c1b38ba0c7d59f32702d3022f6821d8045f7133f7c40b6362f"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/live-browser-session.js",
+        "sha256": "42831c3cd874346d8e7f120808d91e6ed3cda5c3eca6eefd76b126659536bc87"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/live-browser.js",
+        "sha256": "f68a3d68ac92606e91aa8878e003d9432ddd09aa97ca01c6b3ce46c937dca316"
+      },
+      {
+        "path": ".github/skills/impeccable/scripts/modern-screenshot.umd.js",
+        "sha256": "bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b"
+      },
+      {
+        "path": "MindMosaic_Final_Landing_Integration_Signoff.md",
+        "sha256": "5577dffe5e71e51705e46e1d5f024a6b9fc250f8ca7a26311d7ebbfe94694a53"
+      },
+      {
+        "path": "REVIEWER-RESEARCH-2026-10-26.md",
+        "sha256": "0dff770e9f47ff6ddcda42f2e970bb039ee2d9649f6f97590d6e1c4461757a5e"
+      },
+      {
+        "path": "clear",
+        "sha256": "c39174f2d7b125efbecdb1974c4e160b29d15397d01e7347257bdfa43fce200f"
+      },
+      {
+        "path": "docs/audits/landing-page-audit-2026-11-04.md",
+        "sha256": "064644cc47ba9fd7b26a2a6937a3f65b9a061e05d04f7f6f7f62c2c2b5de3fa9"
+      },
+      {
+        "path": "docs/audits/landing-uiux-audit-2026-10-05.md",
+        "sha256": "522b2f90e56cce6cb2226524a1f494e851f6d4271cd18f4fbfb71c1cbcfae096"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/browser-chromium-1440.png",
+        "sha256": "629ac18b5237101dd540da70f4707897cf12f6e6d40c9e3d67bdfb0a4121233c"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/browser-firefox-1440.png",
+        "sha256": "28456be8be3d169bdb3163b5d0fb2afb36dcbd343ea07165cf371f99daeb2a5c"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/browser-webkit-1440.png",
+        "sha256": "026021c4edecc3fa19971055ea14dd197c3e6e798663fc92d47d392aad7c81f3"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/desktop-scroll-midway.png",
+        "sha256": "9cbb6d93001e0dd5a9156593b933ff4ebeab75ba23aff166d397d687b8e9001d"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/journey-1-programs.png",
+        "sha256": "99db2a93b06fa1bf617f5c495e02dcf6c0b76961108491217e2cf4fed8699d35"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/journey-2-signin.png",
+        "sha256": "bb857937dde78d8f7cf7293a230686a23890e4a56e41779adc5ed818cd7bbb4c"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/journey-3-howitworks-parentguide.png",
+        "sha256": "b1013591e9433c89f77d96306295131b00e693b5cc5ca08081b80cc8afee57b5"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/journey-4-chapter2-availability.png",
+        "sha256": "9298b1ec2623b461405fc0dfe5d5f6a574e046c77b3e6c48a15e04bffc8316f6"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/journey-5-help-page.png",
+        "sha256": "846bf3e7f9b0879233b1f633d18e27746c3113abd8a4a37c2767cc05b2f1e826"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/keyboard-focus-active.png",
+        "sha256": "629ac18b5237101dd540da70f4707897cf12f6e6d40c9e3d67bdfb0a4121233c"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/local-desktop-1440-hero.png",
+        "sha256": "dd57666d97c1a756da5e9b58d53bd37e091f380529d3688717486dc298d95e11"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/local-mobile-nav-open.png",
+        "sha256": "ca4e992b58ff24a051335b4fb79f4af09d5228e6e6d9e335a2dba93073e7005f"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/prod-desktop-1440-hero.png",
+        "sha256": "7b0e90788f98798b2dd1ce46613b312d7547955c07651fad6d2d0e5921cd5b26"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/reduced-motion-desktop.png",
+        "sha256": "0778abc6960f2cd2bad5f73f471cc296e22f1f406d3a4fac8c3206b0527158c1"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-1024x576.png",
+        "sha256": "4ddddf66417cbf7c1ef8e4cdcab03ceeb555dd238e6e7321c351712b4fea0b23"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-1024x768.png",
+        "sha256": "b221b96738278b0221abdda591db314e5d75cb3171869100a6a42c05cf32e342"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-1280x633.png",
+        "sha256": "c858913440f0fb6cb850d3e935a015e911f6f9ee9849ca9f93ac9e6e401ff4d4"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-1280x800.png",
+        "sha256": "6cc4c782fe808b351a4e518f3f355de21ad764749b6e3117b7876a52f0bb9334"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-1440x900.png",
+        "sha256": "629ac18b5237101dd540da70f4707897cf12f6e6d40c9e3d67bdfb0a4121233c"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-1920x1080.png",
+        "sha256": "cb3d9a3a8ca6ff73cc6868e7bf77621a47a818a418b18ea0321800d67cc79a65"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-320x568.png",
+        "sha256": "407d6b27db7f0f5f22c623f3572cd863bce25c6a954d44da68c11f17b6ed3993"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-375x667.png",
+        "sha256": "e2bf97c765693df019dd009cf133993b2081a0f73b45eb63cc1bd9a07e316ce6"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-390x844.png",
+        "sha256": "28dfc638d88ea168849f33869e3e77e1a688a149e143d257c026d3cd0731fdbd"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/responsive-768x1024.png",
+        "sha256": "cc5cb90d0abc7224639c4907f5945a26c0df7f17b9ceea1a09f005fa0caf51c1"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/short-viewport-1024x576.png",
+        "sha256": "8079dc10874cdba10316e3ccb963f7b1b3d4ba01504f5473eedf8f5ba77c47c5"
+      },
+      {
+        "path": "docs/audits/screenshots/2026-11-04/zoom-200pct-hero.png",
+        "sha256": "1e0ef2d17bc5bfe59a0626a8dc85c7df4bbcd0e397122b63f0f82c42f52f3874"
+      },
+      {
+        "path": "docs/audits/screenshots/fullpage-1024.png",
+        "sha256": "466b84d011a62943b2a4cee657542f46bc045fddb6e8729dd93e0dbfb76555a1"
+      },
+      {
+        "path": "docs/audits/screenshots/fullpage-1440.png",
+        "sha256": "47f2d99a1296d59d1afd333c556742a5d1c33123d0a065c3cc142f52440e1be9"
+      },
+      {
+        "path": "docs/audits/screenshots/fullpage-1920.png",
+        "sha256": "bef1db28655ad3fb0565288baa80a711a11f808eef0592e1a13d04a1774cbf53"
+      },
+      {
+        "path": "docs/audits/screenshots/fullpage-375.png",
+        "sha256": "9f6798a9c95c6dcd562e94f96960093c2e6921d70891ffb98b92bb2516b7a541"
+      },
+      {
+        "path": "docs/audits/screenshots/fullpage-768.png",
+        "sha256": "d8fe66eaa3cfc4eb762f1e0ebbe9e29efdbdac6b6e199ef08ae60c3cddf9f663"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1024-slide-1.png",
+        "sha256": "40fe73f377b60716dfb0eb53706d6d255d82d5300c9efa7e5ae9247b812f2f37"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1024-slide-2.png",
+        "sha256": "dc349366021592502f1e0ce71577f087c40d6f5f42b35cb19b46ccd1d651f4f2"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1024-slide-3.png",
+        "sha256": "05b889be67dbef7d63a7bf659eced6170209c78da4afa2fd8cb00c54f279653b"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1024-slide-4.png",
+        "sha256": "e75bf9b66d0fa4e7f05f24f686977ee504e7e45a74424de12e5e78ce1550087d"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1024-slide-5.png",
+        "sha256": "2f3fc0cd68898fb7c8d74e22a2b75d4acc242d5aa312adcd9ee538c5f3f77fdc"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1024-slide-6.png",
+        "sha256": "d5cb440619c13bee069b391055e41ce2c22e2a4c86f1a64430b92570db0c6f0f"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1440-slide-1.png",
+        "sha256": "688f3ac56db8521485f7d202fcbb6a51ce51cfdc6ca0590b42e145c61843656a"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1440-slide-2.png",
+        "sha256": "bdc8d12a4e2a1346d5d31447c2e06bb592df5fe250b1e85b85e1bb858c8d4ba9"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1440-slide-3.png",
+        "sha256": "2c3d8ea5dd218b9559e2eeea3ee848093cf50ca0e2ae970bde55144c961b6669"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1440-slide-4.png",
+        "sha256": "957b55e78929cac8d199bc1205ac1dc2fddd9b03e54e3041dcbc82eddbbadeec"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1440-slide-5.png",
+        "sha256": "9a414b6b636a8914389b88298f1fffe1fb2b9b8f1830e41a50a1caa38e4e92e5"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1440-slide-6.png",
+        "sha256": "c17a7ca8637a0038fdc3aab99ecedde6c767b27f18a541089c4608e6c40f48eb"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1920-slide-1.png",
+        "sha256": "81b8e6ec914a0081351a1a4a8636ab916abfcab5b07e3c47a402b7d0fb651547"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1920-slide-2.png",
+        "sha256": "b1febd913e96fcd58681cf550caded83d60a02e63460180b30c28965d9f96a8c"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1920-slide-3.png",
+        "sha256": "09f1f572fe0aa6fc3b42d7126d6b801a9af9b7f5a200226c7a75a99f2c65a076"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1920-slide-4.png",
+        "sha256": "8f84c20e67c86f8d67615cd943f8980963cb26e3212c05220bdc02f3b995a2c3"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1920-slide-5.png",
+        "sha256": "87eb3c6b67bb48107c31787c8d115b19f16b4370f693d067f6a8c30372034e3a"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-1920-slide-6.png",
+        "sha256": "6569b82959e52964b3eaeecf93223c33cb853bee8667ce4b73cea44aeab93a4e"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-375-slide-1.png",
+        "sha256": "96af8c6c0c3418f5cbc795615a75b19a9c6a5d57720f362b81efef0de25a2a58"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-375-slide-2.png",
+        "sha256": "7876885aaee641f70fd31228fddacf8a3370dcb85efbc6f0738c58843ba5de3d"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-375-slide-3.png",
+        "sha256": "833876721884ae98e892b353b23ecad798129171c1117ef65ec28901e78a52f6"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-375-slide-4.png",
+        "sha256": "2bc3e6d2b3a8caac6d65e7f3912b630274de31cf8cca2f708135460fe7efc2ca"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-375-slide-5.png",
+        "sha256": "3ed7c12a0ce9ca43e0bf5c68949a5932acb9165fcb2d28076baa999af891bac8"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-375-slide-6.png",
+        "sha256": "a9d387dec0212825c2c193acc00f118f99d3561db35d62a8871183037d9723d4"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-768-slide-1.png",
+        "sha256": "977793c0e986c0796f961ef12d3cbd9c2ee0e0096fcef037a5fffbc1eec03b96"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-768-slide-2.png",
+        "sha256": "f41669342270d857a615ad842c38adb0ef2fc5b195369ff23652d27fd6a38fc0"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-768-slide-3.png",
+        "sha256": "7fbb2b2a21fc29a04abb1517692dbfe0b2b050be1973b2575663fbe0a012070d"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-768-slide-4.png",
+        "sha256": "fdc68251d3cd63ca7aba07490000497a3b7649fb6482e649e3058ec93b58da77"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-768-slide-5.png",
+        "sha256": "70984edc4d80591e699e83e989f75df715778b9e8e353755d30cceec9c4e6ea7"
+      },
+      {
+        "path": "docs/audits/screenshots/hero-768-slide-6.png",
+        "sha256": "71062ab2951a397376c6fdf8363a92d906b8ae7ce99223bf4a1cc84c66326005"
+      },
+      {
+        "path": "docs/content-status/practice-availability-2026-11.md",
+        "sha256": "385e7e5ec05aedf268c97188ede0058e12fe86f49ccc491639a6a1820b871ac6"
+      },
+      {
+        "path": "docs/content-status/programme-tracking.xlsx",
+        "sha256": "4711d9f705a89444ed9c269ae114b10c4196d56f49024a75ff51c849ada77b34"
+      },
+      {
+        "path": "docs/content-status/y5-depth-generation-plan.md",
+        "sha256": "a028e5c4ae2c2807c38321696a74267f6ba50faeae87d15cb8b898d9d66dbe8f"
+      },
+      {
+        "path": "docs/plans/checks/fingerprint.sql",
+        "sha256": "770adece25d14563264c43a64bff3281a31010a05127df3f167f1400f9cb1050"
+      },
+      {
+        "path": "docs/plans/checks/m10.sql",
+        "sha256": "056124a2417d81799a964f3273fceff2d86fe443841ab313e062fa4bd45bf267"
+      },
+      {
+        "path": "docs/plans/checks/m9.sql",
+        "sha256": "620982c5409ad527877835bf35afcdf0c477adb9cc4e825cd144e3f72822c7aa"
+      },
+      {
+        "path": "docs/plans/checks/snapshot.sql",
+        "sha256": "531273f38ecb1824e0ea6450c0505e49c2520a085389ae5c34c3560c64b1b15e"
+      },
+      {
+        "path": "docs/plans/checks/year5-session.sql",
+        "sha256": "ff5aded2a2401052469c21d2aca87f16e80853b4133787b2cc754ccac89d57db"
+      },
+      {
+        "path": "docs/plans/dev-to-main-release-plan-2026-10-14.md",
+        "sha256": "ae257e69d2a335d485e2d28ff46324cf280fd66c5cb1d8beaef1314fc3f80093"
+      },
+      {
+        "path": "docs/plans/release-pr-body.md",
+        "sha256": "942ea28f609253f1bf53287c6df9b59b076d731439af51f1fb9912d557e02fc1"
+      },
+      {
+        "path": "docs/plans/reset-child-onboarding.sql",
+        "sha256": "2effe3bf45e67927789040ce42f0cf501f0ebcbcf993ece4a412f407fe18ebc1"
+      },
+      {
+        "path": "docs/plans/rollback/rollback-10.sql",
+        "sha256": "3e4859460f5ef05e3bfcf8eca98b352b69d3073742463898b911e744e64c5183"
+      },
+      {
+        "path": "docs/plans/rollback/rollback-9.sql",
+        "sha256": "fe989b130cc59e65f2c75f8edd8eb22543c519181be277f9096d38369b6e26ee"
+      },
+      {
+        "path": "docs/plans/runbook/_common.ps1",
+        "sha256": "571630a37b7e34bfd3fb2912052a207af49862e897e98c5693646993cad1b9d1"
+      },
+      {
+        "path": "docs/plans/runbook/apply-migration.ps1",
+        "sha256": "c1da609547d67d8a1d8ceb97f1cc9ec426152da7b8d5aaee73dceee3816c689a"
+      },
+      {
+        "path": "docs/plans/runbook/dump-and-prove.ps1",
+        "sha256": "85e07081c5dfb5f2cd7a3267e093737c057338d1e7901944c4257eb77545742a"
+      },
+      {
+        "path": "npx",
+        "sha256": "6641f68ba0afc2a175e4bdcfbaae4e15812f5dd52339af38b8190f67c9b34bc3"
+      },
+      {
+        "path": "public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_35_29 PM-1.png",
+        "sha256": "4f9b2c47dce33a9b272d8ca435828d5fc32597fc95d1dd536273b34541a873a8"
+      },
+      {
+        "path": "public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_35_32 PM-2.png",
+        "sha256": "7fa35353bcee0454cd33778505c297ffc13f164ed8d4a1f626e098d98912fd1b"
+      },
+      {
+        "path": "public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_36_31 PM-1.png",
+        "sha256": "c8f7933f2fafc7086b1debacd1454a36ce91fa276a926f46cfb3457da3b9c125"
+      },
+      {
+        "path": "public/photos/Chapter 2/ChatGPT Image Oct 7, 2026, 02_36_35 PM-2.png",
+        "sha256": "a420afbc527638fa8f3d71e1200515a0f56510ad3546ab9fe4cb5ea2e1166d61"
+      },
+      {
+        "path": "public/photos/Chapter 2/MindMosaic Study Session.png",
+        "sha256": "1c0aa095333a4f07b8ac354f5a79c30f891be6c38b00ad5b8ccf823207f145dc"
+      },
+      {
+        "path": "public/photos/Chapter 2/Sunlit MindMosaic Study Session.png",
+        "sha256": "39111a390b1f9d2fce8563f8f7e98ed977a80c8137b2572a7d25f48ba87660fa"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_34_03 AM-1.png",
+        "sha256": "028b312fb615056122e721590ec648dc6b9e9a661451f833b517ef84af15a2a5"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_34_04 AM-2.png",
+        "sha256": "9f210cc5cdf065f34f9352061f9e432eb7ee1d651f075cc35509be1859185d8b"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_34_05 AM-3.png",
+        "sha256": "ebfadefbd43f646c4fc7a745b434c626faacb232cca9d9981dc885527ca16702"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_34_07 AM-4.png",
+        "sha256": "acd60965c50066ac9eae5eb256fec25ee95943392f97f70b870960d3667810c1"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_14 AM-1.png",
+        "sha256": "4b02076051583ab7130d0c8e99dbd300dc4a038db0efca2bffa26dcd60e081df"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_16 AM-2.png",
+        "sha256": "8c1365de924353d81316571829ee6fab0f6b1a0f6fcfbafb07fc36014fb5dbeb"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_17 AM-3.png",
+        "sha256": "db3e50ba8364988e25f850e2d20fd8c2e131758083714d12d09accefd091f2d3"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_19 AM-4.png",
+        "sha256": "8660b7bb7b13c1601d4a6bb21cc103b9714d2d0226464b464f736f8e5a4d9465"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_41 AM-1.png",
+        "sha256": "4b02076051583ab7130d0c8e99dbd300dc4a038db0efca2bffa26dcd60e081df"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_43 AM-2.png",
+        "sha256": "8c1365de924353d81316571829ee6fab0f6b1a0f6fcfbafb07fc36014fb5dbeb"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_44 AM-3.png",
+        "sha256": "db3e50ba8364988e25f850e2d20fd8c2e131758083714d12d09accefd091f2d3"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_36_45 AM-4.png",
+        "sha256": "8660b7bb7b13c1601d4a6bb21cc103b9714d2d0226464b464f736f8e5a4d9465"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_10 AM-1.png",
+        "sha256": "4b02076051583ab7130d0c8e99dbd300dc4a038db0efca2bffa26dcd60e081df"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_11 AM-2.png",
+        "sha256": "8c1365de924353d81316571829ee6fab0f6b1a0f6fcfbafb07fc36014fb5dbeb"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_12 AM-3.png",
+        "sha256": "db3e50ba8364988e25f850e2d20fd8c2e131758083714d12d09accefd091f2d3"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_13 AM-4.png",
+        "sha256": "8660b7bb7b13c1601d4a6bb21cc103b9714d2d0226464b464f736f8e5a4d9465"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_20 AM-1.png",
+        "sha256": "028b312fb615056122e721590ec648dc6b9e9a661451f833b517ef84af15a2a5"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_21 AM-2.png",
+        "sha256": "9f210cc5cdf065f34f9352061f9e432eb7ee1d651f075cc35509be1859185d8b"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_22 AM-3.png",
+        "sha256": "ebfadefbd43f646c4fc7a745b434c626faacb232cca9d9981dc885527ca16702"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 5, 2026, 10_37_23 AM-4.png",
+        "sha256": "acd60965c50066ac9eae5eb256fec25ee95943392f97f70b870960d3667810c1"
+      },
+      {
+        "path": "public/photos/ChatGPT Image Oct 6, 2026, 09_00_30 AM.png",
+        "sha256": "2e091848ca5df703eee06c75cdd51e5e68cb5de6c2512c771d44c40e24be6467"
+      },
+      {
+        "path": "public/photos/Cozy Mother-Son Study Time.png",
+        "sha256": "f9c5920023ce59d71702147ecdddca44ec35acad1a19b9fb57a8bc411d503a07"
+      },
+      {
+        "path": "public/photos/hero_2.png",
+        "sha256": "26d3030d434cb3ccc1ce187c3c3a11ef04a9f52222a5d6601f96157c4b21142a"
+      },
+      {
+        "path": "public/photos/hero_3.png",
+        "sha256": "91c0e9e41d6b63d599faa4c9a65080f2fe56c3b448328fe849c8115d5952206e"
+      },
+      {
+        "path": "public/photos/hero_4.png",
+        "sha256": "20ffd601e94f89da3f0302bb30a61aaab58e50e60a344abccbc716bd57e0d423"
+      },
+      {
+        "path": "public/photos/hero_5.png",
+        "sha256": "249b8921c61663b024ebdbbe807be36013804454b1861f4a0677d60f74dee49b"
+      },
+      {
+        "path": "public/photos/hero_6.png",
+        "sha256": "83a73ca2a9dac11d20adcd10295ba09f12b002e4a6552561b77c43b7d94055d7"
+      },
+      {
+        "path": "scratch/audit_metrics.json",
+        "sha256": "61737c798b5c4d0cb3894c17ad4517d04211fe57e0e036d7b2413a6efb9c9ab1"
+      },
+      {
+        "path": "scratch/audit_responsive_a11y.js",
+        "sha256": "1b675025ac8dd80bb8a790829b6107cbe54c845518227698c25bf531ac2eadea"
+      },
+      {
+        "path": "scratch/downloaded-hero-1.avif",
+        "sha256": "048ec9461c1cbeaae3dd9dac9e5757c04ca720733fe5fc99a0269d2d47be54d3"
+      },
+      {
+        "path": "scratch/inspect_all_sections.js",
+        "sha256": "fddd3569258ab7b22e356ccb0c89d178cb1755a0c31ba436f1e12b91ca45c87f"
+      },
+      {
+        "path": "scratch/pr80-blind.txt",
+        "sha256": "df926e91665e9bb33cfb60257309b2a90a3c80933bcc1ac76d38051cace81088"
+      },
+      {
+        "path": "scratch/pr80-independent-findings.md",
+        "sha256": "90cf466e3f9891fea775117d0313eaa452f6ddca0f6e1979cc8fb035e31b1a2f"
+      },
+      {
+        "path": "scratch/pr80-independent-script.ts",
+        "sha256": "b7b752c323515e85850305cc1cc696d4bc6719fdaa049812045ef19ac06d1555"
+      },
+      {
+        "path": "scratch/pr80-keyed.txt",
+        "sha256": "77afd3a7486ac99bae077c01a310769bd2060b421a4eea2625530ef3e92cb03c"
+      },
+      {
+        "path": "scratch/pr80-review-matrix.md",
+        "sha256": "b725509a38ace7e1a3e41e94f83c2413dfd269db6901d4b8c1431a6485de1c2f"
+      },
+      {
+        "path": "scratch/pr80-review-script.mts",
+        "sha256": "d90d66ed5a50a4f2b2a819c38e5d8b8d1bd9f7a29de245085a8513da1fbd6112"
+      },
+      {
+        "path": "scratch/pr80-validate-script.mts",
+        "sha256": "3fd7d36710d530853e14e8e477ef1adda439baf7b892b37132b78a57dde66b38"
+      },
+      {
+        "path": "scratch/recapture_fullpage.js",
+        "sha256": "68159db199ac302fe58f2aef175fed7682da12a631a1b2ba197e5aba75278c00"
+      },
+      {
+        "path": "scratch/run_full_audit.js",
+        "sha256": "0f133c85b506575932b7fd14d3eb9c9cda1f8856f634e50432ff6dfb68e48c33"
+      },
+      {
+        "path": "scratch/run_motion_and_image_audit.js",
+        "sha256": "c4bb1bad9e098dad6888410471674436d1c557acd1c89eef4f1ddf5cb89c31b2"
+      },
+      {
+        "path": "scratch/test_dimensions.js",
+        "sha256": "f3a986b5c48f5209f273d713b4ef21cb4318fcabc5ea1cc4c6d3df0543b2550e"
+      },
+      {
+        "path": "scratch/test_image_network.js",
+        "sha256": "7640be70091dafc382651ab76698454236545b7965a8bd1796b45e14e1553847"
+      },
+      {
+        "path": "scratch/test_interactions_detail.js",
+        "sha256": "330c6b3183032133da81a4bd7a1a7d22f0d8c59649f2d3d50ec1d49872dfd1d4"
+      },
+      {
+        "path": "scripts/stripe-setup.mts",
+        "sha256": "b9fcce401c325f17c148b4bb17ee5a6ffed631e3e052064d059d2eb85ddd1fda"
+      },
+      {
+        "path": "src/app/api/parent/children/pause/route.ts",
+        "sha256": "94061187a4dc4ecdf6dee770f10ab8b524c96be33c5718d6e4b4ec468825b53a"
+      },
+      {
+        "path": "src/app/parent/settings/page.tsx",
+        "sha256": "0fdb648a64a8e8d4f042e9e9d94b860bad6c1b607a63d914ee2bf4a56c6ea03d"
+      },
+      {
+        "path": "src/features/auth/child-programmes.ts",
+        "sha256": "e176881b5c23a13ee9e07ede2bdc74c3e53710f11f13d2a8340c423fc986f55d"
+      },
+      {
+        "path": "src/features/auth/components/ProgrammePicker.tsx",
+        "sha256": "6d0e9f200b4cacc75de07b03e6136e82a2486e4cb91452948130a9f22920ed89"
+      },
+      {
+        "path": "src/features/billing/components/PricingPlans.tsx",
+        "sha256": "278bb9d0465946dbf5c3db8cdd9b74fb1a62c9d51b15c79d04e1ff59688cd240"
+      },
+      {
+        "path": "src/features/billing/student-access.ts",
+        "sha256": "a9b4f48440a090a84358c01a2df72210b9148a5380ddce0841dc108b42669c9f"
+      },
+      {
+        "path": "src/features/parent-dashboard/components/DangerZone.tsx",
+        "sha256": "7baa3760e8295169bec18f1e9e75a2b442771e5d5810d5a0720069a883669a67"
+      },
+      {
+        "path": "src/features/parent-dashboard/components/ParentAccountMenu.tsx",
+        "sha256": "7ba8e9f3acc765dd9884daae5f1b641d7a2469fe58709dfc3714e4154d2602d3"
+      },
+      {
+        "path": "src/features/parent-dashboard/components/ParentProfileForm.tsx",
+        "sha256": "17e60672b20d5ff17fa1470cf6e5c5229d4b19daffe1d4dcaed087cf5a890de4"
+      },
+      {
+        "path": "src/lib/billing/free-sample.ts",
+        "sha256": "0b164da1ab73e54ce83b82f0055716d96d3148608f7791c1f3060cdb1d32c56d"
+      },
+      {
+        "path": "src/tests/components/exam-configurator-free-sample.test.tsx",
+        "sha256": "c115c9de34d5da837ff93f01f95432e998917f1f4a10cfc5f2ae2c44f0f91bab"
+      },
+      {
+        "path": "src/tests/components/pricing-plans.test.tsx",
+        "sha256": "21a671789d24d3a8ee117e81311c7ad4a817bd1439bf63fa3fe4634643c9d413"
+      },
+      {
+        "path": "src/tests/unit/billing-plans.test.ts",
+        "sha256": "f5b94cb57117aa668f1abe7a212a70212cfe14c61d5ac3b086571e1debdbf5fd"
+      },
+      {
+        "path": "src/tests/unit/free-sample.test.ts",
+        "sha256": "c93a2f5550aa787bd6b358b771fa29ba6aa815f0dd549e6192ef1e4868c61b79"
+      },
+      {
+        "path": "src/tests/unit/student-access.test.ts",
+        "sha256": "98570ba12d5bcbbc12d6a4cd2c359a0e5b29b92ffa99717bf1e96b4ffea8e49f"
+      },
+      {
+        "path": "supabase/migrations/20261105090000_profile_programmes.sql",
+        "sha256": "39e356a864e3280a9ac0a2312d69936a186b10fb7a0fc0c6c9f611fa33ce8a19"
+      },
+      {
+        "path": "supabase/migrations/20261106090000_individual_plans.sql",
+        "sha256": "f3f2b31658ff184fb71cd6d3e406a548c666fbe95b69544b62f70e1efdd247cc"
+      }
+    ]
+  },
+  {
+    "worktree": "C:/tmp/wt-student-workspace-ui",
+    "head": "65d62eb9b49d62f26cb27d1487f6931e627f5897",
+    "status": " M .gitignore\n M next.config.ts\n M package.json\n M src/app/student/page.tsx\n M src/features/student/preview-mode.ts\n M src/tests/pages/student-preview-mode.test.tsx\n?? scripts/student-preview.mjs\n",
+    "trackedDiffSHA256": "7b2b0aaef4ac1652528317c2d3b609b61d10dc95cf65694e11e9d162efca28c6",
+    "untrackedFiles": [
+      {
+        "path": "scripts/student-preview.mjs",
+        "sha256": "9d7ab5f9ed1e308541ff15c80201d5ef4cc772a63949d8dfde8a2479beadf394"
+      }
+    ]
+  },
+  {
+    "worktree": "C:/tmp/wt-admin-preview",
+    "head": "aa17368a79cb2f908535d9d4fd72fcea82b12885",
+    "status": " M src/app/admin/page.tsx\n M src/features/admin/components/preview/AdminPreviewDashboard.tsx\n?? e2e/auth/admin-workspace.spec.ts\n?? src/features/admin/adapters/preview-adapter.ts\n?? src/features/admin/components/AdminWorkspace.tsx\n?? src/features/admin/types.ts\n?? src/server/admin-workspace-data.ts\n?? src/tests/pages/admin-workspace-dev-integration.test.tsx\n",
+    "trackedDiffSHA256": "5a776ee223d0fab271190f916de9caf920f471987a4b63f321c472448c798f88",
+    "untrackedFiles": [
+      {
+        "path": "e2e/auth/admin-workspace.spec.ts",
+        "sha256": "82b6a352ec9e31eb59e966902afe1d171e63cfb99839e34d194b801f110cad20"
+      },
+      {
+        "path": "src/features/admin/adapters/preview-adapter.ts",
+        "sha256": "2f6aecb79d0b925844a893cac1ea48175c5442b7844991698551ed581d83b061"
+      },
+      {
+        "path": "src/features/admin/components/AdminWorkspace.tsx",
+        "sha256": "97e7c57b8989329b86e3fd1da63423400806cde6042f1d84f0937ef323599f42"
+      },
+      {
+        "path": "src/features/admin/types.ts",
+        "sha256": "dfb0beb154f4761329cb2107022cb793ebebf8ed765fdc072102a602fafd15fc"
+      },
+      {
+        "path": "src/server/admin-workspace-data.ts",
+        "sha256": "7fe8b6f3572d8c72ad0b97312c963498ff0532855c3e66db0d2b74cf6651b5a8"
+      },
+      {
+        "path": "src/tests/pages/admin-workspace-dev-integration.test.tsx",
+        "sha256": "03da54445520726eb9e33b69a51220bb21aaf5824a5e9897c24cf7b2a523e6af"
+      }
+    ]
+  },
+  {
+    "worktree": "C:/tmp/wt-pj-p5",
+    "head": "5e798381198e2661d9888c03e1756da308d86ed7",
+    "status": " M src/app/parent/children/[childId]/writing/page.tsx\n M src/features/parent-dashboard/fixtures.ts\n M src/features/parent-dashboard/index.ts\n M src/tests/unit/parent-writing-page.test.tsx\n?? src/app/parent/children/[childId]/learning/page.tsx\n?? src/app/parent/children/[childId]/learning/preview/page.tsx\n?? src/features/parent-dashboard/components/ChildLearningHub.tsx\n?? src/features/parent-dashboard/components/ChildWritingHistory.tsx\n?? src/features/parent-dashboard/components/ParentPracticePreview.tsx\n?? src/tests/components/child-learning-hub.test.tsx\n?? src/tests/components/child-writing-history.test.tsx\n?? src/tests/components/parent-practice-preview.test.tsx\n?? src/tests/unit/parent-learning-authorization.test.ts\n",
+    "trackedDiffSHA256": "bac28b8beac5f714cbd6be5b84235e95b14b1ef7b406dc76ba75c32de198ee68",
+    "untrackedFiles": [
+      {
+        "path": "src/app/parent/children/[childId]/learning/page.tsx",
+        "sha256": "8bb8019286cce8875e7ba8b7102df1db05549c279d856cbabc87f529df547a47"
+      },
+      {
+        "path": "src/app/parent/children/[childId]/learning/preview/page.tsx",
+        "sha256": "62b020f1532912cbd0d73251a7484d7b9644eff64419dc900958c77307c4bcdf"
+      },
+      {
+        "path": "src/features/parent-dashboard/components/ChildLearningHub.tsx",
+        "sha256": "692e4f7656bff5d6d3ab371d11e8ccadc920f055eb3da5ad714dc7d89fc474f0"
+      },
+      {
+        "path": "src/features/parent-dashboard/components/ChildWritingHistory.tsx",
+        "sha256": "b8b85018f9fdc147f5bf5110808ccbc2b98c52dec7201c38b7e9ef5561b8f676"
+      },
+      {
+        "path": "src/features/parent-dashboard/components/ParentPracticePreview.tsx",
+        "sha256": "2dd836dee2ee8bb5a593102cbd2d80b61efb516268b3ce04b859750b51dc2a5a"
+      },
+      {
+        "path": "src/tests/components/child-learning-hub.test.tsx",
+        "sha256": "350bc9f388b3a72dbd41861022a4420ab8863100c53788b028965aab8ff4cf51"
+      },
+      {
+        "path": "src/tests/components/child-writing-history.test.tsx",
+        "sha256": "ca0fe576fcec49e0ab7c7fe8e5075df0d5d501fbe51b391f94aef6777927c863"
+      },
+      {
+        "path": "src/tests/components/parent-practice-preview.test.tsx",
+        "sha256": "17c9a1d62a26cbb3e9f7ff0605210cb904e70ff94a6a2e55e2fb9a657fa4aaa1"
+      },
+      {
+        "path": "src/tests/unit/parent-learning-authorization.test.ts",
+        "sha256": "944e42492ff595bcffc5aa3a0fb80ee2d6b302405beba5e1fd3a00185d655846"
+      }
+    ]
+  },
+  {
+    "worktree": "C:/tmp/wt-auth-journey-phase2",
+    "head": "a976567a41a5a7aa659fc16edc25594600d6d9cb",
+    "status": "",
+    "trackedDiffSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "untrackedFiles": []
+  }
+]
