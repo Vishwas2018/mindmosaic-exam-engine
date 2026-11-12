@@ -15,7 +15,7 @@ export function buildContentSecurityPolicy(nonce: string): string {
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
     `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
     `font-src 'self' https://fonts.gstatic.com data:`,
-    `connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://m.stripe.network`,
+    `connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://m.stripe.network http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*`,
     `frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com`,
     `img-src 'self' data: blob: https://*.supabase.co`,
     `object-src 'none'`,

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, GraduationCap, HelpCircle, Loader2, UserCircle2 } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -49,7 +49,7 @@ import { SocialButtons } from "./SocialButtons";
  */
 
 type AccountKind = "parent" | "student";
-type Screen = "signin" | "forgot";
+type Screen = "signin" | "forgot" | "choose" | "student-help";
 
 const FORGOT_COOLDOWN_SECONDS = 30;
 /** Soft, client-side-only guard; real lockout enforcement is Supabase's. */
@@ -99,17 +99,28 @@ export function SignInPanel({
    * them find it.
    */
   defaultKind = "parent",
+  /**
+   * Which screen opens first. When `"choose"`, the welcome "Who is signing
+   * in?" entry chooser (design artboards 01-03) is shown before the sign-in
+   * form. Overrides `?entry`/`?mode` search params when provided.
+   */
+  defaultEntry,
 }: {
   defaultKind?: AccountKind;
+  defaultEntry?: Screen;
 } = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const auth = useAuth();
 
   const explicitNext = searchParams.get("next");
-  const [screen, setScreen] = useState<Screen>(() =>
-    searchParams.get("mode") === "forgot" ? "forgot" : "signin",
-  );
+  const [screen, setScreen] = useState<Screen>(() => {
+    if (defaultEntry) return defaultEntry;
+    const mode = searchParams.get("mode");
+    if (mode === "forgot") return "forgot";
+    if (mode === "choose" || searchParams.get("entry") === "choose") return "choose";
+    return "signin";
+  });
   const [kind, setKind] = useState<AccountKind>(defaultKind);
 
   const [ident, setIdent] = useState("");
@@ -247,6 +258,150 @@ export function SignInPanel({
 
   /* ---------- Forgot password ---------- */
 
+  if (screen === "choose") {
+    return (
+      <div className="mm-rise grid w-full max-w-[520px] min-w-0 gap-6">
+        <div className="grid gap-2 text-center">
+          <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.15] text-mm-ink">
+            Welcome to MindMosaic
+          </h1>
+          <p className="text-base leading-[1.6] text-mm-muted">Who is signing in?</p>
+        </div>
+
+        <div className="grid gap-4 mt-2">
+          <button
+            type="button"
+            onClick={() => {
+              setKind("parent");
+              setScreen("signin");
+              setError(null);
+            }}
+            className="group block text-left p-6 sm:p-7 border-2 border-mm-line rounded-2xl bg-white hover:border-mm-brand transition shadow-sm"
+          >
+            <span className="grid place-items-center w-12 h-12 rounded-xl bg-mm-tint text-mm-brand mb-4">
+              <UserCircle2 className="w-6 h-6" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-bold text-mm-ink">I&apos;m a parent</h2>
+            <p className="mt-1.5 text-sm text-mm-ink-soft">
+              See how your children are doing, manage their accounts and your plan.
+            </p>
+            <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-mm-brand group-hover:underline">
+              Parent sign-in &rarr;
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setKind("student");
+              setScreen("signin");
+              setError(null);
+            }}
+            className="group block text-left p-6 sm:p-7 border-2 border-mm-line rounded-2xl bg-white hover:border-amber-600 transition shadow-sm"
+          >
+            <span className="grid place-items-center w-12 h-12 rounded-xl bg-amber-50 text-amber-700 mb-4">
+              <GraduationCap className="w-6 h-6" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-bold text-mm-ink">I&apos;m a student</h2>
+            <p className="mt-1.5 text-sm text-mm-ink-soft">
+              Sign in with the login code and PIN a parent gave you.
+            </p>
+            <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-amber-700 group-hover:underline">
+              Student sign-in &rarr;
+            </span>
+          </button>
+        </div>
+
+        <p className="text-center text-sm text-mm-muted">
+          New here?{" "}
+          <Link href="/sign-up" className="font-bold text-mm-brand hover:underline">
+            Create a family account
+          </Link>
+        </p>
+      </div>
+    );
+  }
+
+  if (screen === "student-help") {
+    return (
+      <div className="mm-rise grid w-full max-w-[480px] min-w-0 gap-6">
+        <button
+          type="button"
+          onClick={() => setScreen("signin")}
+          className={twMerge(
+            "inline-flex min-h-10 w-fit items-center gap-2 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
+            mmFocus,
+          )}
+        >
+          <ArrowLeft aria-hidden="true" className="h-4 w-4" />
+          Back to sign in
+        </button>
+
+        <div className="grid gap-2">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-700">
+            <HelpCircle className="h-6 w-6" aria-hidden="true" />
+          </div>
+          <h1 className="text-2xl font-bold text-mm-ink">Can&apos;t sign in?</h1>
+          <p className="text-sm leading-relaxed text-mm-muted">
+            Your login code and PIN are looked after by a grown-up. Here is what to ask them:
+          </p>
+        </div>
+
+        <ul className="grid gap-3.5 text-sm">
+          <li className="flex gap-3 items-start">
+            <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
+            <span>
+              <strong>&ldquo;What&apos;s my login code?&rdquo;</strong> It looks like{" "}
+              <code className="rounded bg-mm-tint px-1 py-0.5 font-mono font-bold text-mm-brand">
+                KXJD-2P9R
+              </code>{" "}
+              and never changes. It is on the card they printed, or on your profile in their account.
+            </span>
+          </li>
+          <li className="flex gap-3 items-start">
+            <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
+            <span>
+              <strong>&ldquo;Can you reset my PIN?&rdquo;</strong> A grown-up can make a new 6-number PIN for you in a few seconds from your profile.
+            </span>
+          </li>
+          <li className="flex gap-3 items-start">
+            <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
+            <span>
+              <strong>&ldquo;Is my account on?&rdquo;</strong> Sometimes a grown-up pauses an account. They can turn it back on.
+            </span>
+          </li>
+        </ul>
+
+        <div className="rounded-xl border border-mm-line bg-mm-tint-soft p-4 text-sm text-mm-ink-soft">
+          <p className="font-semibold text-mm-ink">For the grown-up</p>
+          <p className="mt-1 text-xs leading-relaxed text-mm-muted">
+            Open <strong>Children</strong> in your account, choose the child, and you can see their authentic login code and reset the PIN there.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => setScreen("signin")}
+            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-mm-brand px-5 text-sm font-semibold text-white hover:bg-mm-brand-deep"
+          >
+            Back to sign-in
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setKind("parent");
+              setScreen("signin");
+            }}
+            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-mm-line px-4 text-sm font-semibold text-mm-ink hover:border-mm-brand"
+          >
+            A grown-up signs in
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (screen === "forgot") {
     return (
       <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
@@ -290,7 +445,7 @@ export function SignInPanel({
             }}
             invalid={error !== null}
           />
-          {error && <MmErrorPanel>{error}</MmErrorPanel>}
+          {error && <MmErrorPanel focusOnMount>{error}</MmErrorPanel>}
           {notice && (
             <p
               role="status"
@@ -320,16 +475,17 @@ export function SignInPanel({
   return (
     <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
       <div className="flex items-center justify-between gap-3.5">
-        <Link
-          href="/"
+        <button
+          type="button"
+          onClick={() => setScreen("choose")}
           className={twMerge(
-            "inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
+            "inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
             mmFocus,
           )}
         >
           <ArrowLeft aria-hidden="true" className="h-4 w-4" />
-          Back to home
-        </Link>
+          Who is signing in?
+        </button>
         <p className="text-sm text-mm-muted">
           {PUBLIC_SIGNUP_ENABLED ? (
             <>
@@ -449,11 +605,7 @@ export function SignInPanel({
             kind === "parent" ? (
               <button
                 type="button"
-                onClick={() => {
-                  setScreen("forgot");
-                  setResetEmail(ident);
-                  setError(null);
-                }}
+                onClick={() => setScreen("forgot")}
                 className={twMerge(
                   "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
                   mmFocus,
@@ -461,12 +613,23 @@ export function SignInPanel({
               >
                 Forgot password?
               </button>
-            ) : undefined
+            ) : (
+              <button
+                type="button"
+                onClick={() => setScreen("student-help")}
+                className={twMerge(
+                  "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-amber-700 hover:underline",
+                  mmFocus,
+                )}
+              >
+                Can&apos;t sign in?
+              </button>
+            )
           }
         />
 
         {error && (
-          <MmErrorPanel>
+          <MmErrorPanel focusOnMount>
             <span>
               {error}
               {unconfirmed && (

@@ -1,0 +1,72 @@
+  base   100644 b60007a411658e18514385f0b9e43e5307ff502c src/features/auth/AuthProvider.tsx
+  our    100644 a3c253651fd67015f6711cf843bb2a82088cc837 src/features/auth/AuthProvider.tsx
+  their  100644 bcc445b1dc99825d1ee474d5bc526842b8d1950f src/features/auth/AuthProvider.tsx
+@@ -77,6 +77,7 @@
+   readonly role?: ProfileRole | null;
+ }
+ 
++<<<<<<< .our
+ /** A confirmation session found at page load must have been created by this very link, so only moments ago. */
+ const CONFIRMATION_WINDOW_SECONDS = 300;
+ 
+@@ -99,6 +100,9 @@
+ }
+ 
+ const AuthContext = createContext<AuthContextValue | null>(null);
++=======
++export const AuthContext = createContext<AuthContextValue | null>(null);
++>>>>>>> .their
+ 
+ const notConfigured = (): AuthResult => ({
+   ok: false,
+merged
+  result 100644 056d1aebe72db43a83c6767235164680edf73eb7 src/features/curriculum/parent-explorer/ParentCurriculumExplorer.tsx
+  our    100644 fc5d7cd8edfc71844dcd2e006495f08e57758201 src/features/curriculum/parent-explorer/ParentCurriculumExplorer.tsx
+@@ -18,11 +18,12 @@
+ 
+ export interface ParentCurriculumExplorerProps {
+   initialItems: CurriculumCatalogueItem[];
++  initialLevel?: YearLevelChoice;
+ }
+ 
+-export function ParentCurriculumExplorer({ initialItems }: ParentCurriculumExplorerProps) {
++export function ParentCurriculumExplorer({ initialItems, initialLevel = "3" }: ParentCurriculumExplorerProps) {
+   const [selectedJurisdiction] = useState<string>("VIC");
+-  const [selectedLevel, setSelectedLevel] = useState<YearLevelChoice>("3");
++  const [selectedLevel, setSelectedLevel] = useState<YearLevelChoice>(initialLevel);
+   const [selectedLearningArea, setSelectedLearningArea] = useState<LearningArea>("Mathematics");
+   const [selectedStrand, setSelectedStrand] = useState<string>("ALL");
+   const [searchQuery, setSearchQuery] = useState<string>("");
+added in remote
+  their  100644 e2909e39b1e9bd49e560d452a9528d139f4c57ac src/features/parent-dashboard/components/ChildProfileView.tsx
+@@ -0,0 +1,544 @@
++"use client";
++
++import { useState, type FormEvent } from "react";
++import Link from "next/link";
++import { useRouter } from "next/navigation";
++import {
++  AlertCircle,
++  Archive,
++  ArchiveRestore,
++  ArrowLeft,
++  Check,
++  ChevronRight,
++  Clock,
++  KeyRound,
++  Lock,
++  Pause,
++  Play,
++  Printer,
++  ShieldAlert,
++  Sparkles,
++  Trash2,
++  User,
++} from "lucide-react";
++
++import { Badge, Button, Card, ConfirmDialog } from "@/components/ui";
++import { PinResetDialog } from "./PinResetDialog";
++import { PrintSignInCardDialog } from "./PrintSignInCardDialog";
++
++export interface ChildProfileDetails {
++  id: string;

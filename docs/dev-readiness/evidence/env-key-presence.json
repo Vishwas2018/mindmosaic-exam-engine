@@ -1,0 +1,65 @@
+[
+  {
+    "file": "C:\\Users\\vishw\\Vish\\Vish\\mindmosaic-exam-engine\\.env.local",
+    "supabaseTargetClassification": "DEV",
+    "keyPresence": {
+      "NEXT_PUBLIC_SUPABASE_URL": true,
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY": true,
+      "SUPABASE_SERVICE_ROLE_KEY": true,
+      "SCORING_DB_URL": true,
+      "EXAM_WRITE_DB_URL": false,
+      "EXAM_WRITE_EXPECTED_PROJECT_REF": false,
+      "EXAM_WRITE_DB_CA": false,
+      "RECOVERY_GRANT_SECRET": false,
+      "SUPABASE_ACCESS_TOKEN": false,
+      "SUPABASE_DB_URL": false,
+      "BILLING_ENFORCEMENT_ENABLED": false,
+      "STUDENT_WORKSPACE_PREVIEW": false,
+      "PARENT_WORKSPACE_PREVIEW": false,
+      "ADMIN_WORKSPACE_PREVIEW": false,
+      "AUTH_PREVIEW": false
+    }
+  },
+  {
+    "file": "C:\\Users\\vishw\\Vish\\Vish\\mindmosaic-exam-engine\\.env.e2e.local",
+    "supabaseTargetClassification": "LOOPBACK",
+    "keyPresence": {
+      "NEXT_PUBLIC_SUPABASE_URL": true,
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY": true,
+      "SUPABASE_SERVICE_ROLE_KEY": true,
+      "SCORING_DB_URL": false,
+      "EXAM_WRITE_DB_URL": false,
+      "EXAM_WRITE_EXPECTED_PROJECT_REF": false,
+      "EXAM_WRITE_DB_CA": false,
+      "RECOVERY_GRANT_SECRET": false,
+      "SUPABASE_ACCESS_TOKEN": true,
+      "SUPABASE_DB_URL": false,
+      "BILLING_ENFORCEMENT_ENABLED": false,
+      "STUDENT_WORKSPACE_PREVIEW": false,
+      "PARENT_WORKSPACE_PREVIEW": false,
+      "ADMIN_WORKSPACE_PREVIEW": false,
+      "AUTH_PREVIEW": false
+    }
+  },
+  {
+    "file": "C:\\tmp\\wt-auth-journey-phase2\\.env.e2e.local",
+    "supabaseTargetClassification": "LOOPBACK",
+    "keyPresence": {
+      "NEXT_PUBLIC_SUPABASE_URL": true,
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY": true,
+      "SUPABASE_SERVICE_ROLE_KEY": true,
+      "SCORING_DB_URL": false,
+      "EXAM_WRITE_DB_URL": false,
+      "EXAM_WRITE_EXPECTED_PROJECT_REF": false,
+      "EXAM_WRITE_DB_CA": false,
+      "RECOVERY_GRANT_SECRET": false,
+      "SUPABASE_ACCESS_TOKEN": false,
+      "SUPABASE_DB_URL": false,
+      "BILLING_ENFORCEMENT_ENABLED": false,
+      "STUDENT_WORKSPACE_PREVIEW": false,
+      "PARENT_WORKSPACE_PREVIEW": false,
+      "ADMIN_WORKSPACE_PREVIEW": false,
+      "AUTH_PREVIEW": false
+    }
+  }
+]

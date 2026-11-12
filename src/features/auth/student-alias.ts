@@ -66,3 +66,16 @@ export function buildAliasEmail(rawCode: string): string {
   const normalized = normalizeLoginCode(rawCode);
   return `${ALIAS_LOCAL_PREFIX}${normalized.toLowerCase()}@${ALIAS_DOMAIN}`;
 }
+
+/** Extracts and formats the student login code from an internal alias email, or returns null if not an alias email. */
+export function extractLoginCodeFromAliasEmail(email: string): string | null {
+  const prefix = ALIAS_LOCAL_PREFIX.toLowerCase();
+  const domain = `@${ALIAS_DOMAIN.toLowerCase()}`;
+  const lower = email.trim().toLowerCase();
+  if (!lower.startsWith(prefix) || !lower.endsWith(domain)) {
+    return null;
+  }
+  const raw = lower.slice(prefix.length, -domain.length);
+  return formatLoginCode(raw);
+}
+

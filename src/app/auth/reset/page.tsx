@@ -7,6 +7,9 @@ import { Loader2, MailWarning } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { useAuth } from "@/features/auth";
+import { CROSS_DEVICE_MESSAGE, friendlyLinkError, readLinkCredentials, stripLinkCredentials } from "@/features/auth/link-errors";
+import { useFocusOnShow } from "@/features/auth/components/use-focus-on-show";
+import { forgetRecovery } from "@/features/auth/recovery-marker";
 import {
   MmErrorPanel,
   MmField,
@@ -17,17 +20,30 @@ import {
 import { PasswordStrength } from "@/features/auth/components/PasswordStrength";
 import { evaluatePassword } from "@/features/auth/password";
 
-function readLinkError(): string | null {
-  if (typeof window === "undefined") return null;
-  const url = new URL(window.location.href);
-  const hashParams = new URLSearchParams(url.hash.replace(/^#/, ""));
-  const errorCode = url.searchParams.get("error_code") ?? hashParams.get("error_code");
-  const errorDescription = url.searchParams.get("error_description") ?? hashParams.get("error_description");
-  if (!errorCode) return null;
-  return errorCode === "otp_expired"
-    ? "This password reset link has expired."
-    : (errorDescription?.replace(/\+/g, " ") ?? "This password reset link is invalid.");
+interface LinkProblem {
+  readonly heading: string;
+  readonly text: string;
 }
+
+const EXPIRED: LinkProblem = {
+  heading: "Link expired or invalid",
+  text: "This password reset link has expired or has already been used.",
+};
+
+/** Opened /auth/reset directly, with no link and no session: there is nothing to reset yet. */
+const NO_LINK: LinkProblem = {
+  heading: "Open your reset link",
+  text: "This page opens from the link in your password-reset email. Request a new link if you don't have it.",
+};
+
+/** A session exists but it was not created by a password-recovery link (password, signup, magic-link or OTP sign-in). */
+const NOT_RECOVERY: LinkProblem = {
+  heading: "Open your reset link",
+  text: "This page only opens from the link in a password-reset email, even if you are already signed in. Request a new link if you need one.",
+};
+
+/** How long a PKCE `code` link may take to turn into a session before it is treated as unusable here. */
+const CODE_EXCHANGE_MS = 6000;
 
 /**
  * Landing page for the password-reset email link (the second half of
@@ -43,24 +59,98 @@ function readLinkError(): string | null {
  */
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const { updatePassword, configured } = useAuth();
+  const { updatePassword, verifyRecoveryToken, verifyRecoverySession, adoptSessionTokens, signOut, session, configured, status } = useAuth();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<{ tone: "error" | "success"; text: string } | null>(null);
-  const [linkError, setLinkError] = useState<string | null>(null);
+  /* "checking" until the link has been classified; the server and first client render cannot read the URL's hash or
+     query, so deciding during render would diverge from the server HTML and break hydration. */
+  const [phase, setPhase] = useState<"checking" | "form" | "problem">("checking");
+  const [problem, setProblem] = useState<LinkProblem | null>(null);
+  /* "code" = a PKCE link the Supabase client exchanges by itself; "none" = no credentials in the URL. */
+  const [mode, setMode] = useState<"pending" | "code" | "none" | "settled">("pending");
   const shake = useShakeOnInvalidSubmit();
+  const headingRef = useFocusOnShow<HTMLHeadingElement>(phase === "problem");
+
+  const showProblem = (next: LinkProblem) => {
+    setProblem(next);
+    setPhase("problem");
+  };
 
   useEffect(() => {
-    /* Deliberately deferred to an effect rather than a lazy useState
-       initializer: reading window.location during render would make the
-       client's first hydration pass diverge from the server-rendered HTML
-       (which always shows the form, having no access to the URL's hash/query
-       error params at request time) — a hydration mismatch, not just an
-       unnecessary render. */
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLinkError(readLinkError());
+    /* Runs once. These setState calls respond to the URL, an external system, after hydration. */
+    const link = readLinkCredentials(new URL(window.location.href).searchParams, window.location.hash);
+    const settle = async (result: { ok: boolean; message?: string }) => {
+      /* A link that produced a session is still not proof of recovery: a signup or magic-link URL pasted here would
+         also yield one. Only a session the server accepts AND that was created by a recovery link opens the form. */
+      if (result.ok && (await verifyRecoverySession())) {
+        stripLinkCredentials();
+        setPhase("form");
+      } else if (result.ok) {
+        showProblem(NOT_RECOVERY);
+      } else {
+        showProblem({ heading: EXPIRED.heading, text: friendlyLinkError(result.message, EXPIRED.text) });
+      }
+      setMode("settled");
+    };
+    if (link.errorCode) {
+      const text =
+        link.errorCode === "otp_expired"
+          ? "This password reset link has expired."
+          : (link.errorDescription?.replace(/\+/g, " ") ?? "This password reset link is invalid.");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      showProblem({ heading: EXPIRED.heading, text });
+      setMode("settled");
+    } else if (link.tokenHash && link.type === "recovery") {
+      /* Verified by the token alone, so it works on whichever device the email was opened on. */
+      void verifyRecoveryToken(link.tokenHash).then(settle);
+    } else if (link.accessToken && link.refreshToken) {
+      void adoptSessionTokens(link.accessToken, link.refreshToken).then(settle);
+    } else {
+      setMode(link.code ? "code" : "none");
+    }
+    // Once, against the URL as it arrived.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /* The session's token changes when the SDK finishes exchanging a code, so it is a dependency: re-verify then. */
+  const accessToken = session?.access_token ?? null;
+  useEffect(() => {
+    if (mode !== "code" && mode !== "none") return;
+    if (status === "unconfigured") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPhase("form");
+      return;
+    }
+    if (status === "loading") return;
+    if (status === "anonymous") {
+      if (mode === "none") showProblem(NO_LINK);
+      return; // "code": the exchange may still be running; the timeout below decides.
+    }
+    let active = true;
+    void verifyRecoverySession().then((isRecovery) => {
+      if (!active) return;
+      if (isRecovery) {
+        setPhase("form");
+        if (mode === "code") stripLinkCredentials();
+      } else if (mode === "none") {
+        showProblem(NOT_RECOVERY);
+      }
+      // mode "code": an ordinary session may exist until the exchange replaces it; keep waiting for the timeout.
+    });
+    return () => {
+      active = false;
+    };
+  }, [mode, status, accessToken, verifyRecoverySession]);
+
+  useEffect(() => {
+    if (mode !== "code" || phase !== "checking") return;
+    /* A PKCE code is exchanged against a verifier held by the browser that requested the reset. Give that exchange a
+       moment, then explain rather than leave the user on a form that cannot work. */
+    const timer = setTimeout(() => showProblem({ heading: EXPIRED.heading, text: CROSS_DEVICE_MESSAGE }), CODE_EXCHANGE_MS);
+    return () => clearTimeout(timer);
+  }, [mode, phase]);
 
   const ready = evaluatePassword(password).allMet && confirm === password;
 
@@ -73,18 +163,37 @@ export default function ResetPasswordPage() {
     setSubmitting(false);
     if (result.ok) {
       setMessage({ tone: "success", text: "Password updated — taking you to sign in…" });
+      /* End the recovery session so the next step is a normal sign-in with the new password.
+       * Also clear the recovery marker so it cannot be reused after a successful reset. */
+      void signOut();
+      forgetRecovery();
       setTimeout(() => router.push("/sign-in"), 1500);
     } else if (result.message && /session/i.test(result.message)) {
       // No recovery session (e.g. the link was already used, or opened cold
       // without following it from the email) — same dead-end as an expired link.
-      setLinkError("This password reset link has expired or has already been used.");
+      showProblem(EXPIRED);
     } else {
       setMessage({ tone: "error", text: result.message ?? "Could not update your password." });
       shake.trigger();
     }
   }
 
-  if (linkError) {
+  if (phase === "checking") {
+    return (
+      <main
+        id="main-content"
+        className="mm-root flex min-h-screen items-center justify-center bg-mm-page px-4 py-10 text-mm-ink"
+      >
+        <div className="mm-rise w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-[0_20px_60px_rgba(89,37,168,0.1)] sm:p-10">
+          <Loader2 aria-hidden="true" className="mx-auto h-10 w-10 animate-spin text-mm-brand" />
+          <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">Checking your link…</h1>
+          <p role="status" className="mt-2 text-sm text-mm-muted">This only takes a moment.</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (phase === "problem" && problem) {
     return (
       <main
         id="main-content"
@@ -92,14 +201,18 @@ export default function ResetPasswordPage() {
       >
         <div className="mm-rise w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-[0_20px_60px_rgba(89,37,168,0.1)] sm:p-10">
           <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-mm-coral-deep" />
-          <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
-            Link expired or invalid
+          <h1
+            ref={headingRef}
+            tabIndex={-1}
+            className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink outline-none"
+          >
+            {problem.heading}
           </h1>
           <p role="alert" className="mt-2 text-sm leading-[1.5] text-mm-muted">
-            {linkError}
+            {problem.text}
           </p>
           <Link
-            href="/sign-in?mode=forgot"
+            href="/auth/forgot"
             className={mmAuthButton({ className: "mt-6 w-full" })}
           >
             Request a new reset link
