@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -257,7 +257,7 @@ describe("sign-in failure states that are not about the credentials", () => {
 });
 
 describe("a banned account never claims anything about what is kept", () => {
-  it("student tab: says sign-in is off and points at a grown-up, without 'safe', 'kept', 'closed' or 'deleted'", async () => {
+  it("student tab: gives the same sentence as a wrong PIN, so a paused account is not distinguishable (QA-003)", async () => {
     signInWithPassword.mockResolvedValue({
       error: { code: "user_banned", message: "User is banned", status: 403 },
     });
@@ -272,12 +272,8 @@ describe("a banned account never claims anything about what is kept", () => {
     await user.click(screen.getByRole("button", { name: /sign in and start learning/i }));
 
     const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent(/can.t sign in right now/i);
-    expect(alert).not.toHaveTextContent(/safe|kept|closed|deleted|removed|gone|erased/i);
-    expect(within(alert).getByRole("link", { name: /what do i ask/i })).toHaveAttribute(
-      "href",
-      "/student-sign-in/help",
-    );
+    expect(alert).toHaveTextContent(/That code and PIN didn.t match/i);
+    expect(alert).not.toHaveTextContent(/paused|banned|right now|safe|kept|closed|deleted|removed|gone|erased/i);
   });
 
   it("parent tab: stays generic, so a revoked account is not distinguishable", async () => {
