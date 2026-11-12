@@ -4,6 +4,7 @@ import type {
   SubjectFilter,
   TimingMode,
 } from "@/features/exam-engine/selection";
+import { hasEnoughEvidence } from "@/features/parent-dashboard/evidence";
 
 /**
  * Pure display-model derivations for the student home and learning hub.
@@ -53,16 +54,26 @@ export interface SubjectMastery {
   /** Question-bank subject key, e.g. "numeracy", "language_conventions". */
   subject: string;
   label: string;
-  /** Aggregate objective percentage across every attempt. */
+  /**
+   * Marks earned as a percentage of marks available on the questions answered across every
+   * finished set. It is NOT a measure of how much of the subject is covered or understood.
+   */
   percent: number;
   marksEarned: number;
   marksAvailable: number;
+  /** Finished sets or papers that contributed marks to this subject. */
+  sets: number;
+  /** True when this subject rests on enough work to be singled out (2 sets, 8 marks). */
+  sufficientEvidence: boolean;
 }
 
 export interface StudentAttemptOverview {
   attempts: readonly AttemptSummary[];
   mastery: readonly SubjectMastery[];
-  /** Weakest subject by aggregate percentage; null with no scored data. */
+  /**
+   * Lowest subject by marks percentage, chosen only among subjects with enough evidence;
+   * null when no subject has it (a thin subject is never singled out).
+   */
   recommendedFocus: SubjectMastery | null;
 }
 
@@ -178,7 +189,7 @@ export function summarizeAttempt(row: AttemptRow): AttemptSummary {
 export function aggregateMastery(
   rows: readonly AttemptRow[],
 ): SubjectMastery[] {
-  const totals = new Map<string, { earned: number; available: number }>();
+  const totals = new Map<string, { earned: number; available: number; sets: number }>();
 
   for (const row of rows) {
     const config = parseConfig(row.session?.config);
@@ -202,20 +213,23 @@ export function aggregateMastery(
           ? value.objectiveMarksAvailable
           : 0;
       if (available <= 0) continue;
-      const entry = totals.get(subject) ?? { earned: 0, available: 0 };
+      const entry = totals.get(subject) ?? { earned: 0, available: 0, sets: 0 };
       entry.earned += earned;
       entry.available += available;
+      entry.sets += 1;
       totals.set(subject, entry);
     }
   }
 
   return [...totals.entries()]
-    .map(([subject, { earned, available }]) => ({
+    .map(([subject, { earned, available, sets }]) => ({
       subject,
       label: subjectLabel(subject),
       percent: Math.round((earned / available) * 100),
       marksEarned: earned,
       marksAvailable: available,
+      sets,
+      sufficientEvidence: hasEnoughEvidence({ papers: sets, marksAvailable: available }),
     }))
     .sort((a, b) => b.percent - a.percent);
 }
@@ -223,10 +237,12 @@ export function aggregateMastery(
 export function buildOverview(rows: readonly AttemptRow[]): StudentAttemptOverview {
   const attempts = rows.map(summarizeAttempt);
   const mastery = aggregateMastery(rows);
+  const evidenced = mastery.filter((subject) => subject.sufficientEvidence);
   return {
     attempts,
     mastery,
-    recommendedFocus: mastery.length > 0 ? mastery[mastery.length - 1] : null,
+    /* `mastery` is sorted highest first, so the lowest evidenced subject is last. */
+    recommendedFocus: evidenced.length >= 2 ? evidenced[evidenced.length - 1] : null,
   };
 }
 

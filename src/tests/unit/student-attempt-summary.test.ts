@@ -133,10 +133,18 @@ describe("aggregateMastery", () => {
 });
 
 describe("buildOverview", () => {
-  it("recommends the weakest subject as focus", () => {
-    const overview = buildOverview([row()]);
-    // numeracy 10/12 ≈ 83%, reading 6/8 = 75% → reading is weakest.
+  it("recommends the weakest subject as focus once two sets back it up", () => {
+    const overview = buildOverview([row(), row()]);
+    // numeracy 20/24 ≈ 83%, reading 12/16 = 75% → reading is weakest.
     expect(overview.recommendedFocus?.subject).toBe("reading");
+    expect(overview.recommendedFocus).toMatchObject({ sets: 2, sufficientEvidence: true });
+    expect(overview.attempts).toHaveLength(2);
+  });
+
+  it("singles no subject out from a single set, and says how thin each one is", () => {
+    const overview = buildOverview([row()]);
+    expect(overview.recommendedFocus).toBeNull();
+    expect(overview.mastery.every((subject) => subject.sets === 1 && !subject.sufficientEvidence)).toBe(true);
     expect(overview.attempts).toHaveLength(1);
   });
 

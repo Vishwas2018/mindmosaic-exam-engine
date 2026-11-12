@@ -3,7 +3,6 @@ import { ArrowRight, BookOpen, Calculator, PieChart, Puzzle, SpellCheck2, Workfl
 
 interface DrillModule {
   icon: typeof Calculator;
-  masteryPercent: number;
   title: string;
   description: string;
   tags: readonly string[];
@@ -27,7 +26,6 @@ function buildDrillModules(effectiveYear: number): readonly DrillModule[] {
   return [
     {
       icon: Calculator,
-      masteryPercent: 88,
       title: "Arithmetic & Mental Maths",
       description: "Fast-paced integer computations, long division shortcuts, and order of operations.",
       tags: ["Rapid multiplication", "Remainders", "Percentage basics"],
@@ -36,7 +34,6 @@ function buildDrillModules(effectiveYear: number): readonly DrillModule[] {
     },
     {
       icon: PieChart,
-      masteryPercent: 74,
       title: "Fractions, Decimals & Percentages",
       description: "Equivalence models, improper conversions, decimal ordering, and discount calculations.",
       tags: ["Equivalence", "Decimal conversions", "Recurring fractions"],
@@ -45,7 +42,6 @@ function buildDrillModules(effectiveYear: number): readonly DrillModule[] {
     },
     {
       icon: Workflow,
-      masteryPercent: 79,
       title: "Problem Solving & Word Problems",
       description: "Multi-step word problems applying bar models, rate calculations, and proportional reasoning.",
       tags: ["Unitary method", "Ratio scenarios", "Speed-distance"],
@@ -54,7 +50,6 @@ function buildDrillModules(effectiveYear: number): readonly DrillModule[] {
     },
     {
       icon: SpellCheck2,
-      masteryPercent: 92,
       title: "Grammar, Punctuation & Cloze",
       description: "Complex sentence structures, relative clauses, active vs passive voice, and cloze passages.",
       tags: ["Relative clauses", "Apostrophes", "Selective cloze"],
@@ -63,7 +58,6 @@ function buildDrillModules(effectiveYear: number): readonly DrillModule[] {
     },
     {
       icon: BookOpen,
-      masteryPercent: 81,
       title: "Reading Comprehension Quick Drills",
       description: "Bite-sized literary excerpts focusing on character inference, nuance, and text evidence.",
       tags: ["Inference", "Author intent", "Tone identification"],
@@ -72,7 +66,6 @@ function buildDrillModules(effectiveYear: number): readonly DrillModule[] {
     },
     {
       icon: Puzzle,
-      masteryPercent: 79,
       title: "Thinking Skills & Logic",
       description: "Venn syllogisms, sequence reasoning, critical path analysis, and identifying logical fallacies.",
       tags: ["Syllogisms", "Deduction", "Grid logic"],
@@ -102,10 +95,6 @@ export function PracticeStudioDrillModules({ effectiveYear }: { effectiveYear: n
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-mm-tint text-primary">
                   <Icon aria-hidden="true" className="h-5 w-5" />
                 </div>
-                {/* Placeholder — no per-drill-category mastery tracking exists. */}
-                <span className="rounded-full bg-mm-page px-2 py-0.5 text-[11px] font-semibold text-mm-muted">
-                  Example mastery: {module.masteryPercent}%
-                </span>
               </div>
               <h3 className="mt-3 font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
                 {module.title}

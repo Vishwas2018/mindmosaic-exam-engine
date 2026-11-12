@@ -16,7 +16,7 @@ export default function SegmentError({
       reset={reset}
       segment="/student"
       title="Your dashboard didn't load"
-      description="We couldn't load your learning page. Your progress is saved — trying again usually fixes it."
+      description="We couldn't load your learning page. That is a problem loading the page, not something you did. Trying again usually fixes it."
       retryLabel="Try again"
       escape={{ href: "/practice", label: "Go to practice" }}
     />

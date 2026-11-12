@@ -539,7 +539,7 @@ export default function ExamPage() {
                 fallback={(retry) => (
                   <WidgetError
                     title="This question didn't display properly"
-                    description="Skip ahead and keep going — your other answers are saved, and this one won't be marked against you."
+                    description="Skip ahead and keep going — your other answers aren't affected by this. Tell a grown-up so the question can be looked at."
                     onRetry={retry}
                     retryLabel="Try loading it again"
                   />

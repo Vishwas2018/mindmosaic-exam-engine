@@ -103,18 +103,21 @@ export default async function StudentExamPreparationPage() {
   ).length;
   const answeredAttempts = overview.attempts.length - blankSessions;
 
-  const averageReadiness =
-    overview.mastery.length === 0
+  /* An average of marks, only over subjects with enough work behind them. It is not a
+     readiness or prediction figure. */
+  const evidencedSubjects = overview.mastery.filter((m) => m.sufficientEvidence);
+  const averageMarks =
+    evidencedSubjects.length === 0
       ? null
-      : Math.round(overview.mastery.reduce((sum, m) => sum + m.percent, 0) / overview.mastery.length);
+      : Math.round(evidencedSubjects.reduce((sum, m) => sum + m.percent, 0) / evidencedSubjects.length);
 
   return (
     <StudentPortalShell active="examCentre" breadcrumbLabel="Exam Centre" student={student} shellData={shellData}>
-      <ExamCentreHero averageReadiness={averageReadiness} />
+      <ExamCentreHero averageMarks={averageMarks} />
 
       {/* ---------- Readiness by subject ---------- */}
       <section className="grid gap-4 rounded-2xl border border-mm-line bg-white p-6">
-        <h2 className="text-lg font-bold text-mm-ink">Readiness by subject</h2>
+        <h2 className="text-lg font-bold text-mm-ink">Your marks by subject</h2>
         {/*
           A paper submitted without a single answer contributes its
           marks to `available` and nothing to `earned`, so readiness
@@ -141,7 +144,10 @@ export default async function StudentExamPreparationPage() {
               <div key={subject.subject} className="grid gap-1.5">
                 <div className="flex justify-between gap-3 text-sm">
                   <span className="font-semibold text-mm-ink">{subject.label}</span>
-                  <span className="text-mm-muted">{subject.percent}%</span>
+                  <span className="text-mm-muted">
+                    {subject.marksEarned} of {subject.marksAvailable} marks
+                    {!subject.sufficientEvidence && " · too few sets to read much into"}
+                  </span>
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-mm-line-soft">
                   <div

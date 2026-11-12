@@ -12,11 +12,9 @@ import type { SubjectMastery } from "@/features/student/attempt-summary";
  * exists (same class as the dashboard's term/goal pills).
  */
 export function MyProgressHero({
-  yearLevel,
   questionsAnswered,
   recommendedFocus,
 }: {
-  yearLevel: number | null;
   questionsAnswered: number;
   recommendedFocus: SubjectMastery | null;
 }) {
@@ -45,22 +43,9 @@ export function MyProgressHero({
             {recommendedFocus ? recommendedFocus.label : "Nothing measured yet"}
           </p>
           <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
-            {recommendedFocus ? `Current focus · ${recommendedFocus.percent}% mastery` : "Current focus"}
-          </p>
-        </div>
-      </div>
-
-      {/* Placeholder — no test-calendar/target-window model exists. */}
-      <div className="flex items-center gap-3 rounded-2xl border border-mm-line bg-white p-5 shadow-warm-sm">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-light text-amber-accent">
-          <Award aria-hidden="true" className="h-5 w-5" />
-        </div>
-        <div>
-          <p className="text-sm font-bold text-mm-ink">
-            {yearLevel !== null ? `NAPLAN Year ${yearLevel}` : "NAPLAN"}
-          </p>
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
-            Target window: May testing cycle
+            {recommendedFocus
+              ? `Lowest so far · ${recommendedFocus.percent}% of marks`
+              : "Not enough finished sets to single one out"}
           </p>
         </div>
       </div>

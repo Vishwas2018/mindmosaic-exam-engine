@@ -13,7 +13,7 @@ import { ClipboardCheck, ShieldCheck } from "lucide-react";
  * not the mock's fabricated "Cohort Preparedness" figure — there is no
  * cohort/class-comparison data in this codebase.
  */
-export function ExamCentreHero({ averageReadiness }: { averageReadiness: number | null }) {
+export function ExamCentreHero({ averageMarks }: { averageMarks: number | null }) {
   return (
     <section className="flex flex-col justify-between gap-6 rounded-3xl border border-mm-line bg-white p-6 shadow-warm-sm md:flex-row md:items-center md:p-8">
       <div className="flex max-w-2xl flex-col gap-2">
@@ -41,10 +41,10 @@ export function ExamCentreHero({ averageReadiness }: { averageReadiness: number 
         </div>
         <div>
           <div className="font-[family-name:var(--font-display)] text-2xl font-bold text-mm-ink">
-            {averageReadiness === null ? "—" : `${averageReadiness}%`}
+            {averageMarks === null ? "—" : `${averageMarks}%`}
           </div>
           <div className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
-            Your readiness (avg. mastery)
+            Your marks, averaged across subjects
           </div>
         </div>
       </div>
