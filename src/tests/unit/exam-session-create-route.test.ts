@@ -59,6 +59,18 @@ mockRpc.mockImplementation((fn: string, params?: unknown) =>
     ? Promise.resolve({ data: "legacy", error: null })
     : mockCreateRpc(fn, params),
 );
+/*
+ * P1 lockdown: the session is created by the dedicated exam-writer role through this module, not by an RPC through the
+ * student's own client (`authenticated` can no longer execute create_exam_session — 20261031090100). `mockCreateRpc` now
+ * stands in for that write, so every existing assertion keeps its shape; the user client's `rpc` still answers the routing
+ * call and forwards anything else to `mockCreateRpc` under the OLD name, which the happy-path test asserts never happens.
+ */
+vi.mock("@/server/exam-write/legacy-exam-writes", () => ({
+  createLegacyExamSession: async (input: Record<string, unknown>) => {
+    const { data, error } = await mockCreateRpc("create_exam_session_for", input);
+    return error ? { sessionId: null, error } : { sessionId: data, error: null };
+  },
+}));
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: mockGetUser },
@@ -180,17 +192,16 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
     expect(mockCreateRpc).toHaveBeenCalledTimes(1);
 
     const [fn, params] = mockCreateRpc.mock.calls[0];
-    expect(fn).toBe("create_exam_session");
+    expect(fn).toBe("create_exam_session_for");
     /* The paper is the server's own selection, passed through verbatim... */
     expect(params).toMatchObject({
-      p_seed: expect.any(String),
-      p_selected_question_ids: ["q1"],
+      seed: expect.any(String),
+      selectedQuestionIds: ["q1"],
+      /* ...for the student the route authenticated, never one named by the request. */
+      studentId: "student-1",
     });
-    /* ...and student_id is deliberately absent: the function reads it from
-       auth.uid(), so no argument this route could get wrong decides whose
-       session it is. */
-    expect(params).not.toHaveProperty("student_id");
-    expect(params).not.toHaveProperty("p_student_id");
+    /* Nothing went through the student's own client under the legacy, now-revoked name. */
+    expect(mockCreateRpc.mock.calls.filter(([name]) => name === "create_exam_session")).toHaveLength(0);
   });
 
   /*
@@ -206,6 +217,34 @@ describe("POST /api/exam/session — MM-AUTH-01 role gate + MM-SEC-03 origin gat
 
     expect(response.status).toBe(403);
     expect(await response.json()).toEqual({ error: "students_only" });
+  });
+
+  it("ignores a studentId, selection or config smuggled into the request body", async () => {
+    const response = await POST(
+      postRequest({
+        config: VALID_CONFIG,
+        studentId: "someone-else",
+        selectedQuestionIds: ["one-easy-question"],
+        selected_question_ids: ["one-easy-question"],
+        seed: "forged",
+      }),
+    );
+
+    expect(response.status).toBe(200);
+    const [, params] = mockCreateRpc.mock.calls[0];
+    expect(params).toMatchObject({ studentId: "student-1", selectedQuestionIds: ["q1"] });
+    expect(params.seed).not.toBe("forged");
+    expect(JSON.stringify(params)).not.toContain("one-easy-question");
+    expect(JSON.stringify(params)).not.toContain("someone-else");
+  });
+
+  it("fails closed with 503 when the exam write role is not configured", async () => {
+    mockCreateRpc.mockResolvedValue({ data: null, error: { code: "not_configured", message: "exam write role is not configured." } });
+
+    const response = await POST(postRequest());
+
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({ error: "not_configured" });
   });
 
   it("500s when the RPC fails for any other reason", async () => {
