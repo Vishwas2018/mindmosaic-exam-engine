@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -169,8 +169,12 @@ describe("SignInPanel — failure states", () => {
     await attempt(user);
 
     const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent(/could not find an account with that email and password/i);
+    expect(alert).toHaveTextContent(/that email and password didn.t match/i);
     expect(alert).not.toHaveTextContent(/invalid login credentials/i);
+    /* Never implies an account lookup: a wrong password and an unknown
+       address must read identically. */
+    expect(alert).not.toHaveTextContent(/no account|not find an account|not registered|doesn.t exist/i);
+    expect(within(alert).getByRole("button", { name: /reset password/i })).toBeInTheDocument();
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -198,7 +202,7 @@ describe("SignInPanel — failure states", () => {
 
     await attempt(user);
 
-    expect(await screen.findByRole("alert")).toHaveTextContent(/network error/i);
+    expect(await screen.findByRole("alert")).toHaveTextContent(/couldn.t reach mindmosaic/i);
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -215,7 +219,7 @@ describe("SignInPanel — failure states", () => {
       }
 
       expect(
-        await screen.findByText(/too many failed attempts/i),
+        await screen.findByText(/too many attempts\. for your account.s safety/i),
       ).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /try again in \d+s/i })).toBeDisabled();
     },

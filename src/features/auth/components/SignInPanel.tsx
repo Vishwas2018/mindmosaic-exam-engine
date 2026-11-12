@@ -8,7 +8,9 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 import { useAuth } from "../AuthProvider";
+import { configuredOAuthProviders } from "../oauth-providers";
 import { roleHomePath } from "../roles";
+import { safeNextPath } from "../safe-next";
 import { recordSessionPersistence } from "../session-persistence";
 import { PUBLIC_SIGNUP_ENABLED } from "../signup-policy";
 import { formatLoginCode } from "../student-alias";
@@ -68,8 +70,12 @@ const COPY = {
     submit: "Sign in to parent account",
     emptyError:
       "Enter your email address and password to sign in.",
+    /* One sentence for a wrong password and for an address with no account,
+       so the error cannot be used to test whether an address is registered. */
     failedError:
-      "We could not find an account with that email and password. Check both, or reset the password.",
+      "That email and password didn\u2019t match. Check them and try again, or reset your password.",
+    lockedMessage: (seconds: number) =>
+      `Too many attempts. For your account\u2019s safety, wait ${seconds}s and try again, or reset your password.`,
   },
   student: {
     tab: "Student",
@@ -82,10 +88,22 @@ const COPY = {
     secretAutoComplete: "off",
     submit: "Sign in and start learning",
     emptyError: "Enter the login code and PIN your parent gave you.",
+    /* Same sentence whether the code is unknown or the PIN is wrong. */
     failedError:
-      "That login code and PIN do not match. A parent can look up both from the parent view.",
+      "That code and PIN didn\u2019t match. Check them with the grown-up who set them up, and try again.",
+    lockedMessage: (seconds: number) =>
+      `Let\u2019s take a short break. Too many tries. You can sign in again in ${seconds}s, or ask a grown-up for help.`,
   },
-} as const satisfies Record<AccountKind, Record<string, string>>;
+} as const satisfies Record<
+  AccountKind,
+  Record<string, string | ((seconds: number) => string)>
+>;
+
+const NETWORK_MESSAGE = "We couldn\u2019t reach MindMosaic. Check your connection and try again.";
+/* A failure on the auth server is not an account problem, and must not be
+   dressed up as one. */
+const UNAVAILABLE_MESSAGE =
+  "We can\u2019t sign you in right now. This is a problem on our side, not with your account. Nothing has changed. Please try again in a few minutes.";
 
 function isNetworkError(error: unknown): boolean {
   return error instanceof TypeError || (error instanceof Error && /network|fetch/i.test(error.message));
@@ -106,7 +124,9 @@ export function SignInPanel({
   const searchParams = useSearchParams();
   const auth = useAuth();
 
-  const explicitNext = searchParams.get("next");
+  /* Same-origin paths only: see ../safe-next.ts. */
+  const explicitNext = safeNextPath(searchParams.get("next"));
+  const oauthProviders = configuredOAuthProviders();
   const [screen, setScreen] = useState<Screen>(() =>
     searchParams.get("mode") === "forgot" ? "forgot" : "signin",
   );
@@ -186,6 +206,28 @@ export function SignInPanel({
         return;
       }
 
+      /* A failure that is not about the credentials is told apart and does
+         not count toward the lockout: a dropped connection, a server-side
+         rate limit and an auth-server outage are three different facts. */
+      if (result.failure === "network") {
+        setError(NETWORK_MESSAGE);
+        shake.trigger();
+        setSubmitting(false);
+        return;
+      }
+      if (result.failure === "unavailable") {
+        setError(UNAVAILABLE_MESSAGE);
+        shake.trigger();
+        setSubmitting(false);
+        return;
+      }
+      if (result.failure === "rate_limited") {
+        setLockedUntil(Date.now() + LOCKOUT_SECONDS * 1000);
+        setNow(Date.now());
+        setSubmitting(false);
+        return;
+      }
+
       /* Supabase's own wording is not shown for a failed credential check:
          it leaks whether the account exists. The one case worth surfacing
          verbatim is an unconfirmed email, which is actionable. */
@@ -204,11 +246,7 @@ export function SignInPanel({
       setFailedAttempts(attempts);
       if (attempts >= LOCKOUT_AFTER_ATTEMPTS) setLockedUntil(Date.now() + LOCKOUT_SECONDS * 1000);
     } catch (caught) {
-      setError(
-        isNetworkError(caught)
-          ? "Network error — check your connection and try again."
-          : "Something went wrong. Please try again.",
-      );
+      setError(isNetworkError(caught) ? NETWORK_MESSAGE : UNAVAILABLE_MESSAGE);
       shake.trigger();
     }
 
@@ -226,7 +264,12 @@ export function SignInPanel({
     setSubmitting(true);
     setError(null);
     setNotice(null);
-    const result = await auth.sendPasswordReset(resetEmail.trim());
+    let result: Awaited<ReturnType<typeof auth.sendPasswordReset>>;
+    try {
+      result = await auth.sendPasswordReset(resetEmail.trim());
+    } catch {
+      result = { ok: false, message: NETWORK_MESSAGE };
+    }
     if (result.ok) {
       setNotice(
         result.message ??
@@ -234,7 +277,7 @@ export function SignInPanel({
       );
       setForgotCooldown(FORGOT_COOLDOWN_SECONDS);
     } else {
-      setError(result.message ?? "Could not send the reset link. Please try again.");
+      setError(result.message ?? "We couldn\u2019t send a reset link just now. Please try again in a few minutes.");
       shake.trigger();
     }
     setSubmitting(false);
@@ -289,8 +332,9 @@ export function SignInPanel({
               setError(null);
             }}
             invalid={error !== null}
+            errorId="auth-error"
           />
-          {error && <MmErrorPanel>{error}</MmErrorPanel>}
+          {error && <MmErrorPanel id="auth-error">{error}</MmErrorPanel>}
           {notice && (
             <p
               role="status"
@@ -413,6 +457,12 @@ export function SignInPanel({
           type="text"
           inputMode={kind === "student" ? "text" : "email"}
           autoComplete={copy.idAutoComplete}
+          /* A login code is not a word: no sentence-casing, no spellcheck
+             squiggles, capitals on the keyboard. An email is never
+             auto-capitalised. */
+          autoCapitalize={kind === "student" ? "characters" : "none"}
+          autoCorrect="off"
+          spellCheck={false}
           placeholder={copy.idPlaceholder}
           value={ident}
           onChange={(e) => {
@@ -420,6 +470,7 @@ export function SignInPanel({
             setError(null);
           }}
           invalid={error !== null}
+          errorId="auth-error"
         />
 
         <MmField
@@ -435,6 +486,10 @@ export function SignInPanel({
             setError(null);
           }}
           invalid={error !== null}
+          errorId="auth-error"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           trailingRoom
           trailing={
             <MmRevealButton
@@ -466,9 +521,25 @@ export function SignInPanel({
         />
 
         {error && (
-          <MmErrorPanel>
+          <MmErrorPanel id="auth-error">
             <span>
               {error}
+              {kind === "parent" && error === copy.failedError && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setScreen("forgot");
+                    setResetEmail(ident);
+                    setError(null);
+                  }}
+                  className={twMerge(
+                    "mt-1 block min-h-11 rounded font-bold underline underline-offset-2",
+                    mmFocus,
+                  )}
+                >
+                  Reset password
+                </button>
+              )}
               {unconfirmed && (
                 <button
                   type="button"
@@ -508,7 +579,7 @@ export function SignInPanel({
             role="alert"
             className="rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep"
           >
-            Too many failed attempts. Try again in {lockSecondsRemaining}s, or reset the password.
+            {copy.lockedMessage(lockSecondsRemaining)}
           </p>
         )}
 
@@ -535,7 +606,7 @@ export function SignInPanel({
 
       {/* Parent tab only: the OAuth providers create/attach a real email
           identity, which a student profile does not have. */}
-      {kind === "parent" && (
+      {kind === "parent" && oauthProviders.length > 0 && (
         <>
           <div className="flex items-center gap-3.5">
             <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
@@ -544,7 +615,7 @@ export function SignInPanel({
             </span>
             <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
           </div>
-          <SocialButtons nextPath={explicitNext ?? "/"} />
+          <SocialButtons nextPath={explicitNext ?? "/"} providers={oauthProviders} />
         </>
       )}
 
@@ -560,15 +631,15 @@ export function SignInPanel({
       )}
 
       <p className="text-[13px] leading-[1.6] text-mm-muted">
-        By signing in you accept the{" "}
+        Read the{" "}
         <Link href="/terms" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
           Terms and Conditions
         </Link>{" "}
-        and the{" "}
+        and{" "}
         <Link href="/privacy" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
           Privacy Policy
-        </Link>
-        .
+        </Link>{" "}
+        (both are drafts).
       </p>
     </div>
   );

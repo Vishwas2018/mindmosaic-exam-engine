@@ -38,6 +38,12 @@ export interface MmFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   hint?: string;
   /** Draws the coral error border. The message itself lives in <MmErrorPanel>. */
   invalid?: boolean;
+  /**
+   * The id of the <MmErrorPanel> (or inline message) that explains `invalid`.
+   * Wired into aria-describedby only while the field is invalid, so a screen
+   * reader reads the reason with the field rather than only the border colour.
+   */
+  errorId?: string;
   /** Extra room on the right for an inline button (e.g. Show/Hide). */
   trailingRoom?: boolean;
   trailing?: ReactNode;
@@ -51,6 +57,7 @@ export function MmField({
   labelAside,
   hint,
   invalid = false,
+  errorId,
   trailingRoom = false,
   trailing,
   tone = "white",
@@ -68,7 +75,11 @@ export function MmField({
         <input
           id={id}
           aria-invalid={invalid || undefined}
-          aria-describedby={hint ? `${id}-hint` : undefined}
+          aria-describedby={
+            [hint ? `${id}-hint` : null, invalid && errorId ? errorId : null]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
           className={twMerge(
             clsx(
               "h-[54px] w-full min-w-0 rounded-[13px] border-[1.5px] px-4 text-base text-mm-ink transition-colors",
@@ -181,9 +192,10 @@ export function MmCheckbox({
  * (what the previous AuthCard used) it interrupts, which is right for a
  * sign-in failure the user must act on.
  */
-export function MmErrorPanel({ children }: { children: ReactNode }) {
+export function MmErrorPanel({ children, id }: { children: ReactNode; id?: string }) {
   return (
     <p
+      id={id}
       role="alert"
       className="mm-rise-fast grid grid-cols-[20px_1fr] gap-[11px] rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep"
     >

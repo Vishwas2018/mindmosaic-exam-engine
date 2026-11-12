@@ -78,9 +78,19 @@ console.log(`Probe:   ${probeEmail} (password deliberately too short)\n`);
 const settingsResponse = await fetch(`${url}/auth/v1/settings`, {
   headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
 });
-const settings = (await settingsResponse.json()) as { disable_signup?: boolean };
+const settings = (await settingsResponse.json()) as {
+  disable_signup?: boolean;
+  external?: Record<string, boolean>;
+};
 console.log(`GET /auth/v1/settings -> ${settingsResponse.status}`);
-console.log(`  disable_signup: ${settings.disable_signup}\n`);
+console.log(`  disable_signup: ${settings.disable_signup}`);
+/* Social buttons must match this list. NEXT_PUBLIC_AUTH_OAUTH_PROVIDERS names
+   the providers the UI may offer; a provider listed there but absent here is a
+   dead button. */
+const enabledProviders = Object.entries(settings.external ?? {})
+  .filter(([name, on]) => on && name !== "email" && name !== "phone" && name !== "anonymous_users")
+  .map(([name]) => name);
+console.log(`  social providers enabled: ${enabledProviders.length ? enabledProviders.join(", ") : "none"}\n`);
 
 // --- 2. A real request to the real endpoint, with the public key ----------
 const signupResponse = await fetch(`${url}/auth/v1/signup`, {
