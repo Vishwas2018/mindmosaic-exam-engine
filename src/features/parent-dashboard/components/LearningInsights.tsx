@@ -78,11 +78,16 @@ export function LearningInsights({
         </div>
 
         <div className="flex flex-wrap items-center gap-2 border-t border-royal/8 pt-5">
-          <Badge variant="purple">{child.topicsMasteredCount} topics mastered</Badge>
-          {child.readinessScore !== null && (
-            <Badge variant={child.readinessScore >= 80 ? "success" : "neutral"}>
-              Readiness score: {child.readinessScore}%
+          {child.strongSubjectCount > 0 && (
+            <Badge variant="purple">
+              {child.strongSubjectCount} {child.strongSubjectCount === 1 ? "subject" : "subjects"} at 80%
+              or above
             </Badge>
+          )}
+          {child.recentAveragePercentage !== null ? (
+            <Badge variant="neutral">Recent average: {child.recentAveragePercentage}%</Badge>
+          ) : (
+            <Badge variant="neutral">Not enough finished papers yet for an average</Badge>
           )}
         </div>
       </CardContent>
