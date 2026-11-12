@@ -177,6 +177,8 @@ export function AppHeader() {
     /* Same reasoning as AuthNav's own sign-out: signOut() only clears the
        browser client's session, so a server-rendered tree still on screen
        needs an explicit re-render to pick up the signed-out state. */
+    /* Land on the clean-exit screen, then re-render so no signed-in tree lingers. */
+    router.push("/signed-out");
     router.refresh();
   }
 
