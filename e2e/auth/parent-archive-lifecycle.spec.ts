@@ -12,7 +12,8 @@ import { AUTH_APP_ORIGIN } from "../../playwright.auth.config";
 async function childSignsIn(page: import("@playwright/test").Page, code: string, pin: string) {
   await page.goto("/student-sign-in");
   await page.locator("input").nth(0).fill(code);
-  await page.locator('input[type="password"]').fill(pin);
+  await page.getByLabel(/^Your PIN, number 1 of 6/).click();
+  await page.keyboard.type(pin);
   await page.locator("form button[type=submit]").first().click();
 }
 
@@ -67,7 +68,7 @@ test.describe("parent archive / restore lifecycle", () => {
       /* 5. The same code and PIN no longer sign in, and the message is the generic one. */
       const fresh = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();
       await childSignsIn(fresh, body.loginCode, body.pin);
-      await expect(fresh.getByText(/That login code and PIN do not match/)).toBeVisible();
+      await expect(fresh.getByText(/That code and PIN didn’t match/)).toBeVisible();
       await expect(fresh).toHaveURL(/student-sign-in/);
 
       /* 6. The parent still sees the child on their dashboard, marked archived. */

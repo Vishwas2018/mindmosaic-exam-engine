@@ -74,7 +74,8 @@ test.describe("Authenticated Student Assessment Capability Journey", () => {
     await page.goto("/student-sign-in");
     await expect(page.getByLabel("Login code")).toBeVisible();
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
-    await page.getByLabel("PIN").fill(e2eEnv.fixturePin);
+    await page.getByLabel(/^Your PIN, number 1 of 6/).click();
+    await page.keyboard.type(e2eEnv.fixturePin);
     await page.getByRole("button", { name: "Sign in" }).click();
 
     await expect(page).toHaveURL(/\/student$/);
