@@ -63,7 +63,9 @@ test.describe("parent archive / restore lifecycle", () => {
 
       /* 4. The session the child already had no longer works. */
       await child.goto("/student");
-      await expect(child).toHaveURL(/sign-in/);
+      /* Turned away to the sign-in page, or to the session-ended screen that links back to it. */
+      await expect(child).toHaveURL(/sign-in|session-expired/);
+      await expect(child).not.toHaveURL(/\/student$/);
 
       /* 5. The same code and PIN no longer sign in, and the message is the generic one. */
       const fresh = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();
