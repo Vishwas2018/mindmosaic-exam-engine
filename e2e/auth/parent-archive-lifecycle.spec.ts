@@ -49,7 +49,7 @@ test.describe("parent archive / restore lifecycle", () => {
 
       /* 2. The parent archives the child. */
       await parent.goto("/parent/children");
-      await parent.getByRole("button", { name: "Archive" }).click();
+      await parent.getByRole("button", { name: "Archive", exact: true }).click();
       await parent.getByRole("button", { name: "Yes, archive" }).click();
       const archivedSection = parent.getByRole("region", { name: "Archived children" });
       await expect(archivedSection).toContainText(childName);
@@ -78,7 +78,7 @@ test.describe("parent archive / restore lifecycle", () => {
       /* 7. Restore, and the same code and PIN work again. */
       await parent.goto("/parent/children");
       await parent.getByRole("button", { name: `Restore ${childName}` }).click();
-      await expect(parent.getByRole("button", { name: "Archive" })).toBeVisible();
+      await expect(parent.getByRole("button", { name: "Archive", exact: true })).toBeVisible();
       await expect(parent.getByRole("region", { name: "Archived children" })).toHaveCount(0);
 
       const back = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();
