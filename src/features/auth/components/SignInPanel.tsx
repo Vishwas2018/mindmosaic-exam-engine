@@ -106,6 +106,13 @@ const NETWORK_MESSAGE = "We couldn\u2019t reach MindMosaic. Check your connectio
 const UNAVAILABLE_MESSAGE =
   "We can\u2019t sign you in right now. This is a problem on our side, not with your account. Nothing has changed. Please try again in a few minutes.";
 
+/* Shown on the Student tab only. It says what is true on every path that
+   produces a ban (a paused child, but also an erased or revoked account):
+   sign-in is switched off. It never says "kept", "safe", "closed" or
+   "deleted", because this screen cannot tell those apart. */
+const PAUSED_MESSAGE =
+  "This account can’t sign in right now. A grown-up can check on it from their account.";
+
 function isNetworkError(error: unknown): boolean {
   return error instanceof TypeError || (error instanceof Error && /network|fetch/i.test(error.message));
 }
@@ -144,6 +151,7 @@ export function SignInPanel({
   /* Set only when the failure was specifically an unconfirmed email, which
      is the one sign-in failure with an action attached. */
   const [unconfirmed, setUnconfirmed] = useState<string | null>(null);
+  const [paused, setPaused] = useState(false);
 
   const [failedAttempts, setFailedAttempts] = useState(0);
   const [lockedUntil, setLockedUntil] = useState<number | null>(null);
@@ -192,6 +200,7 @@ export function SignInPanel({
     setSubmitting(true);
     setError(null);
     setNotice(null);
+    setPaused(false);
 
     try {
       const result =
@@ -218,6 +227,13 @@ export function SignInPanel({
       }
       if (result.failure === "unavailable") {
         setError(UNAVAILABLE_MESSAGE);
+        shake.trigger();
+        setSubmitting(false);
+        return;
+      }
+      if (result.failure === "paused" && kind === "student") {
+        setPaused(true);
+        setError(PAUSED_MESSAGE);
         shake.trigger();
         setSubmitting(false);
         return;
@@ -542,6 +558,14 @@ export function SignInPanel({
           <MmErrorPanel id="auth-error">
             <span>
               {error}
+              {paused && (
+                <Link
+                  href="/student-sign-in/help"
+                  className={twMerge("mt-1 flex min-h-11 items-center rounded font-bold underline", mmFocus)}
+                >
+                  What do I ask?
+                </Link>
+              )}
               {kind === "parent" && error === copy.failedError && (
                 <button
                   type="button"

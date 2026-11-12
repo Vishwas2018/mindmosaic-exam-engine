@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -31,9 +32,11 @@ export interface AuthResult {
    * Why a call failed, when the cause changes what the person should do.
    * `network` = we never got an answer; `rate_limited` = the server asked us
    * to slow down; `unavailable` = the auth server failed (5xx), which is not
-   * an account problem. Absent for an ordinary rejection.
+   * an account problem; `paused` = the auth server refused a banned user
+   * (an archived child, but also an erased or revoked account, so callers
+   * must not say anything about what is kept). Absent for an ordinary rejection.
    */
-  readonly failure?: "network" | "rate_limited" | "unavailable";
+  readonly failure?: "network" | "rate_limited" | "unavailable" | "paused";
   /** updatePassword only: true once the server confirmed other sessions were ended. */
   readonly otherDevicesSignedOut?: boolean;
 }
@@ -63,6 +66,7 @@ export function classifyAuthFailure(error: {
   ) {
     return "rate_limited";
   }
+  if (error.code === "user_banned") return "paused";
   if (status >= 500) return "unavailable";
   return undefined;
 }
@@ -120,6 +124,13 @@ function deriveName(user: User | null): string | null {
   );
 }
 
+/** Pages where a sign-out is part of the flow, so it must not bounce to "session expired". */
+function isAuthRoute(pathname: string): boolean {
+  return /^\/(sign-in|sign-up|student-sign-in|session-expired|signed-out|switch-account|welcome|auth)(\/|$)/.test(
+    pathname,
+  );
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const configured = isSupabaseConfigured;
   // One stable client instance for the provider's lifetime (only when
@@ -135,6 +146,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [role, setRole] = useState<ProfileRole | null>(null);
+  /* Sign-out bookkeeping for "session expired". A SIGNED_OUT event that this
+     app did not cause, on a browser that had a session, is the session ending
+     on its own (expiry, revoked refresh token, signed out in another tab). */
+  const hadSession = useRef(false);
+  const endedByThisApp = useRef(false);
 
   useEffect(() => {
     if (!supabase) return;
@@ -151,17 +167,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
        */
       if (data.session && shouldDiscardStoredSession()) {
         clearSessionPersistence();
+        endedByThisApp.current = true;
         void supabase.auth.signOut();
         setStatus("anonymous");
         return;
       }
+      if (data.session) hadSession.current = true;
       setSession(data.session);
       setUser(data.session?.user ?? null);
       setStatus(data.session?.user ? "authenticated" : "anonymous");
       if (!data.session?.user) setRole(null);
     });
 
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event, nextSession) => {
+      if (nextSession) hadSession.current = true;
+      if (
+        event === "SIGNED_OUT" &&
+        hadSession.current &&
+        !endedByThisApp.current &&
+        typeof window !== "undefined" &&
+        !isAuthRoute(window.location.pathname)
+      ) {
+        const here = `${window.location.pathname}${window.location.search}`;
+        window.location.assign(`/session-expired?next=${encodeURIComponent(here)}`);
+      }
+      if (event === "SIGNED_OUT") {
+        hadSession.current = false;
+        endedByThisApp.current = false;
+      }
       setSession(nextSession);
       setUser(nextSession?.user ?? null);
       setStatus(nextSession?.user ? "authenticated" : "anonymous");
@@ -423,6 +456,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
            can never outlive it and sign the next user out on their first
            boot. */
         clearSessionPersistence();
+        endedByThisApp.current = true;
         await supabase.auth.signOut();
       },
     };

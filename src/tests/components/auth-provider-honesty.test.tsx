@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -253,5 +253,46 @@ describe("sign-in failure states that are not about the credentials", () => {
     expect(alert).toHaveAttribute("id", "auth-error");
     expect(screen.getByLabelText(/email address/i)).toHaveAttribute("aria-describedby", "auth-error");
     expect(screen.getByLabelText("Password")).toHaveAttribute("aria-describedby", "auth-error");
+  });
+});
+
+describe("a banned account never claims anything about what is kept", () => {
+  it("student tab: says sign-in is off and points at a grown-up, without 'safe', 'kept', 'closed' or 'deleted'", async () => {
+    signInWithPassword.mockResolvedValue({
+      error: { code: "user_banned", message: "User is banned", status: 403 },
+    });
+    const user = userEvent.setup();
+    render(
+      <AuthProvider>
+        <SignInPanel defaultKind="student" />
+      </AuthProvider>,
+    );
+    await user.type(screen.getByLabelText(/login code/i), "K7XJ-2P9R");
+    await user.type(screen.getByLabelText(/your pin, number 1 of 6/i), "424242");
+    await user.click(screen.getByRole("button", { name: /sign in and start learning/i }));
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent(/can.t sign in right now/i);
+    expect(alert).not.toHaveTextContent(/safe|kept|closed|deleted|removed|gone|erased/i);
+    expect(within(alert).getByRole("link", { name: /what do i ask/i })).toHaveAttribute(
+      "href",
+      "/student-sign-in/help",
+    );
+  });
+
+  it("parent tab: stays generic, so a revoked account is not distinguishable", async () => {
+    signInWithPassword.mockResolvedValue({
+      error: { code: "user_banned", message: "User is banned", status: 403 },
+    });
+    const user = userEvent.setup();
+    render(
+      <AuthProvider>
+        <SignInPanel />
+      </AuthProvider>,
+    );
+    await user.type(screen.getByLabelText(/email address/i), "p@example.com");
+    await user.type(screen.getByLabelText("Password"), "whatever1!");
+    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(/didn.t match/i);
   });
 });
