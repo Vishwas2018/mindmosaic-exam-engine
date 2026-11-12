@@ -5,23 +5,35 @@ import Link from "next/link";
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthMosaicPanel, AuthPanelPoints } from "@/features/auth/components/AuthMosaicPanel";
 import { SignInPanel } from "@/features/auth/components/SignInPanel";
+import { isAuthPreviewEnabled } from "@/features/auth/preview-mode";
+import {
+  AuthPreviewScreens,
+  type AuthArtboardView,
+} from "@/features/auth/components/preview/AuthPreviewScreens";
 
 export const metadata: Metadata = {
   title: "Sign in",
   description: "Sign in to MindMosaic — parent accounts and student profiles both sign in here.",
 };
 
+interface SignInPageProps {
+  searchParams?: Promise<{ view?: string }>;
+}
+
 /**
  * Log in — design handoff screen 6. Split layout at `1.05fr / 1fr`, plum
  * mosaic panel on the left, form on the right.
  *
- * The panel is `hidden lg:grid` (inside AuthMosaicPanel): the handoff was
- * designed at 1440px only and explicitly says mobile has not been reviewed,
- * so below `lg` the split collapses to the form alone with a compact brand
- * strip above it, rather than inventing a mobile treatment for a 216-tile
- * animated field.
+ * In visual preview mode (AUTH_PREVIEW=1 and loopback), renders the
+ * redesigned authentication artboards (b0–b19) with state switchers.
  */
-export default function SignInPage() {
+export default async function SignInPage({ searchParams }: SignInPageProps) {
+  if (await isAuthPreviewEnabled()) {
+    const params = await searchParams;
+    const initialView = (params?.view as AuthArtboardView) ?? "entry";
+    return <AuthPreviewScreens initialView={initialView} />;
+  }
+
   return (
     <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
       <AuthMosaicPanel

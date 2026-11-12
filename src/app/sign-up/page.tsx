@@ -8,6 +8,9 @@ import { SignupClosedCard } from "@/features/auth/components/SignupClosedCard";
 import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
+import { isAuthPreviewEnabled } from "@/features/auth/preview-mode";
+import { AuthPreviewScreens } from "@/features/auth/components/preview/AuthPreviewScreens";
+
 export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
   ? {
       title: "Sign up",
@@ -25,15 +28,14 @@ export const metadata: Metadata = PUBLIC_SIGNUP_ENABLED
 /**
  * Sign up — design handoff screen 7.
  *
- * The route keeps its policy switch. `PUBLIC_SIGNUP_ENABLED` is a real
- * control over whether this app offers a form at all, and the flag's own
- * docblock is explicit that the authoritative gate is Supabase Auth's
- * project-level setting — so this page can never be the only thing standing
- * between a stranger and an account. With the flag on, the three-step
- * wizard renders; with it off, the closed card explains why, inside the
- * same split shell so the route does not visually change shape.
+ * In visual preview mode (AUTH_PREVIEW=1 and loopback), renders the
+ * redesigned authentication artboards (b0–b19) with state switchers.
  */
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  if (await isAuthPreviewEnabled()) {
+    return <AuthPreviewScreens initialView="parent-signup" />;
+  }
+
   if (PUBLIC_SIGNUP_ENABLED) {
     return <SignUpScreen availableYearLevels={yearLevelsWithGatedCoverage()} />;
   }
