@@ -1,0 +1,21 @@
+{
+  "legacyEvidence": [
+    {
+      "path": "docs/reviews/scholarship-2026-10-18/external-review-google-gemini.json",
+      "sha256": "1b4e1e60b8eae3ae281af3f602da510a6221f5af67d62baf2103bdde570243a0",
+      "status": "unverified",
+      "reason": "No retained API request/response envelope, API-returned identity, request/response identifier or execution record found in tracked repository evidence. Self-declared fields do not establish execution."
+    },
+    {
+      "path": "docs/reviews/scholarship-2026-10-18/external-review/external-review-google-gemini.json",
+      "sha256": "1b4e1e60b8eae3ae281af3f602da510a6221f5af67d62baf2103bdde570243a0",
+      "status": "unverified",
+      "reason": "No retained API request/response envelope, API-returned identity, request/response identifier or execution record found in tracked repository evidence. Self-declared fields do not establish execution."
+    }
+  ],
+  "originalPacketMatchesReconstructedCurrent80Items": true,
+  "originalPacketSha256NormalisedLF": "5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198",
+  "declaredOriginalPacketSha256": "5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198",
+  "scope": "Only 12 sample items requested for new review; other 148 drafts outside this decision",
+  "reviewPolicy": "docs/REVIEW_INDEPENDENCE_POLICY.md; per-candidate different-provider review required for judgement content; no whole-batch review requirement"
+}

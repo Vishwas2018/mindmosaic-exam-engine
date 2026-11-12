@@ -1,0 +1,53 @@
+{
+  "evidenceType": "manual_user_attested",
+  "provider": "openai",
+  "model": "chatgpt-unversioned",
+  "transport": "Manual out-of-band submission via user prompt; missing authenticated server API envelope, HTTP headers, request ID, and cryptographic transport bindings",
+  "rawEvidenceFile": "external-review-chatgpt.json",
+  "rawEvidenceSha256": "331e7f8a54a9b9bf8ecf44e6cf9564ce143bcf8f537bdd455776dcf3d8701c15",
+  "targetPacket": "packet.json",
+  "targetPacketSha256": "c82c57d77f099f326b187b37f1943a46b1b87dc5f5fe3addb3af9dbba18cd2bf",
+  "status": "partial_review_remediation_pending",
+  "reviewCompletedForSample": false,
+  "itemCount": 12,
+  "agreeWithKey": 12,
+  "disagreements": [],
+  "unchangedItemsPassed": [
+    "scholarship-y6-vr-001",
+    "scholarship-y6-vr-016",
+    "scholarship-y6-vr-032",
+    "scholarship-y6-nr-001",
+    "scholarship-y6-nr-022",
+    "scholarship-y6-nr-023",
+    "scholarship-y6-rc-001",
+    "scholarship-y6-rc-002",
+    "scholarship-y6-rc-003",
+    "scholarship-y6-maths-004",
+    "scholarship-y6-maths-007"
+  ],
+  "flaggedItems": [
+    {
+      "id": "scholarship-y6-maths-014",
+      "verdict": "REVISE",
+      "singleDefensibleAnswer": false,
+      "issues": "Material underspecification: the 5:3 ratio determines 120 sprinters and distance runners combined, not necessarily the total number of athletes in the club. A club with 10 or 20 additional athletes in other disciplines would have 130 or 140 athletes, both offered as options. Thus options c, d and e are defensible under the stated information.",
+      "fix": "Change the question to 'How many sprinters and distance runners are there altogether?' Alternatively, state explicitly that every athlete in the club is either a sprinter or a distance runner. Keep 120 as the intended correct answer.",
+      "remediationStatus": "Prompt amended under Option 1 with explicit mutual exclusivity and exhaustiveness; pending fresh external review on amended packet-maths-014.json"
+    }
+  ],
+  "difficultyDisagreements": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "declared": "medium",
+      "reviewerEstimate": "easy",
+      "disposition": "Recorded advisory difference; declared classification medium preserved"
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "declared": "medium",
+      "reviewerEstimate": "challenging",
+      "disposition": "Recorded advisory difference; declared classification medium preserved"
+    }
+  ],
+  "governanceStatus": "Advisory manual external evidence only. Authenticated API envelope unavailable. Amended maths-014 requires external review before sample sign-off."
+}

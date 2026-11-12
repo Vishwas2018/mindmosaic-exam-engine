@@ -1,0 +1,1056 @@
+{
+  "schemaVersion": 1,
+  "investigatedHead": "9e5eb1eb6dd69aef8ff48b720683e9ee378e1e2a",
+  "manifestCommit": "16c5c1ddb22c30c325f8ef03f8845168a9b0fda8",
+  "manifestSha256": "4e754be7fd4df59a9208549c261e7f251abf5d6f1a6b2de55215ed11ad11eb40",
+  "scope": "Available local Git refs and inspected local execution records; not proof of exhaustive historical recovery or remote API authentication.",
+  "originalGenerationClassification": "UNVERIFIED for all 12",
+  "factoryRecordsCreated": false,
+  "items": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+        "rawQuestionHash": "28b31084ac63eb0b891ee852e48ddc9b6e0477ae6a0d988fc99ce30cbdc640fa",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+        "rawQuestionHash": "28b31084ac63eb0b891ee852e48ddc9b6e0477ae6a0d988fc99ce30cbdc640fa",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "currentPublicationContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
+      "currentRawQuestionHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+          "authoredAt": "2026-10-13T13:42:13+11:00",
+          "committedAt": "2026-10-13T13:42:13+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+          "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+          "rawQuestionHash": "28b31084ac63eb0b891ee852e48ddc9b6e0477ae6a0d988fc99ce30cbdc640fa",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "ff16020ca15f79f68676a0f0fd169f688e6980a6",
+          "rawQuestionHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+          "changedFields": [
+            "prompt",
+            "options",
+            "explanation"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+        "rawQuestionHash": "25763a976f0d3399a6655ab90897bba80736d35966097f55426c72626b07336b",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+        "rawQuestionHash": "25763a976f0d3399a6655ab90897bba80736d35966097f55426c72626b07336b",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "currentPublicationContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
+      "currentRawQuestionHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+          "authoredAt": "2026-10-13T13:42:13+11:00",
+          "committedAt": "2026-10-13T13:42:13+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+          "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+          "rawQuestionHash": "25763a976f0d3399a6655ab90897bba80736d35966097f55426c72626b07336b",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "ff16020ca15f79f68676a0f0fd169f688e6980a6",
+          "rawQuestionHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+          "changedFields": [
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+        "rawQuestionHash": "fa3442fdcec5de4c4b681fd7e1861e1703d721cc3272d3ef3558ca9e13270b20",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+        "rawQuestionHash": "fa3442fdcec5de4c4b681fd7e1861e1703d721cc3272d3ef3558ca9e13270b20",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+      "currentPublicationContentHash": "758d25fa7ee8c039f97a74432c50dd50f3d635fb7735d8dd892c3e322f7a3b22",
+      "currentRawQuestionHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+          "authoredAt": "2026-10-13T13:42:13+11:00",
+          "committedAt": "2026-10-13T13:42:13+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+          "packetGitBlob": "92d9e4a91d05bddd6a7c2b1b30c0aa869d247778",
+          "rawQuestionHash": "fa3442fdcec5de4c4b681fd7e1861e1703d721cc3272d3ef3558ca9e13270b20",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "4e905f5a40b147ebeedad9a01600f9b1b637b59b",
+          "authoredAt": "2026-10-19T16:42:08+11:00",
+          "committedAt": "2026-10-19T16:42:08+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate 14 VR/RC items from advisory review, ground passage claims, regenerate review package",
+          "packetGitBlob": "8a5ec20745742dd935dd4d2100a20bb6edc5654b",
+          "rawQuestionHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+          "changedFields": [
+            "prompt",
+            "options",
+            "explanation"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-nr-001",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+        "rawQuestionHash": "b40be11f959c090fd2493eecab404dc2abfdd2f4ec3b8382bf342ec538b3a225",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+        "rawQuestionHash": "b40be11f959c090fd2493eecab404dc2abfdd2f4ec3b8382bf342ec538b3a225",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+      "currentPublicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "currentRawQuestionHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+          "authoredAt": "2026-10-13T13:42:13+11:00",
+          "committedAt": "2026-10-13T13:42:13+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+          "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+          "rawQuestionHash": "b40be11f959c090fd2493eecab404dc2abfdd2f4ec3b8382bf342ec538b3a225",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+          "rawQuestionHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+          "changedFields": [
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-nr-022",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+        "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+        "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "currentPublicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "currentRawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+          "authoredAt": "2026-10-13T13:42:13+11:00",
+          "committedAt": "2026-10-13T13:42:13+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+          "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+          "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+        "rawQuestionHash": "b59156139d86a3b4109857c1f5dccb7c90f39a96c7ffd3a36e7b94445349408a",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+        "authoredAt": "2026-10-13T13:42:13+11:00",
+        "committedAt": "2026-10-13T13:42:13+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+        "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+        "rawQuestionHash": "b59156139d86a3b4109857c1f5dccb7c90f39a96c7ffd3a36e7b94445349408a",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "currentPublicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "currentRawQuestionHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "458c6f8690bf0408a152bdf146da3f3e82f1d603",
+          "authoredAt": "2026-10-13T13:42:13+11:00",
+          "committedAt": "2026-10-13T13:42:13+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): reasoning solvers library and Year 6 draft content batch 1",
+          "packetGitBlob": "54ac552e37a377ff555c2d33b65d6bed93abc378",
+          "rawQuestionHash": "b59156139d86a3b4109857c1f5dccb7c90f39a96c7ffd3a36e7b94445349408a",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+          "rawQuestionHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+          "changedFields": [
+            "options",
+            "explanation"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-rc-001",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+        "authoredAt": "2026-10-14T10:10:43+11:00",
+        "committedAt": "2026-10-14T13:13:59+11:00",
+        "onPrLineage": false,
+        "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+        "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+        "rawQuestionHash": "f9fbe2f6bd6519790c5f36bcdfba6f960f3b71c9dbe56f03aff95d0fe8b970b0",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+        "authoredAt": "2026-10-16T22:29:19+11:00",
+        "committedAt": "2026-10-16T22:29:19+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+        "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+        "rawQuestionHash": "71354e1f55d1fd6e9b0f9fdb7942860c2e6a804f64ac7d1f0889b03e374e7653",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "currentPublicationContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
+      "currentRawQuestionHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+          "authoredAt": "2026-10-14T10:10:43+11:00",
+          "committedAt": "2026-10-14T13:13:59+11:00",
+          "onPrLineage": false,
+          "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+          "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+          "rawQuestionHash": "f9fbe2f6bd6519790c5f36bcdfba6f960f3b71c9dbe56f03aff95d0fe8b970b0",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+          "authoredAt": "2026-10-14T11:49:25+11:00",
+          "committedAt": "2026-10-14T13:14:00+11:00",
+          "onPrLineage": false,
+          "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+          "packetGitBlob": "5ada544b041b61f57a1d9b0a568eff2b4bea26d1",
+          "rawQuestionHash": "71354e1f55d1fd6e9b0f9fdb7942860c2e6a804f64ac7d1f0889b03e374e7653",
+          "changedFields": [
+            "stimulus"
+          ],
+          "eventType": "repository_revision"
+        },
+        {
+          "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+          "authoredAt": "2026-10-16T22:29:19+11:00",
+          "committedAt": "2026-10-16T22:29:19+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+          "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+          "rawQuestionHash": "71354e1f55d1fd6e9b0f9fdb7942860c2e6a804f64ac7d1f0889b03e374e7653",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "8295e780caa9a3376545897305e688250ea73cba",
+          "rawQuestionHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+          "changedFields": [
+            "prompt",
+            "stimulus",
+            "options",
+            "explanation"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+        "authoredAt": "2026-10-14T10:10:43+11:00",
+        "committedAt": "2026-10-14T13:13:59+11:00",
+        "onPrLineage": false,
+        "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+        "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+        "rawQuestionHash": "ac312b435cf76798bc5f977a101070694c5af3faecaa99c7169996f9a5015f91",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+        "authoredAt": "2026-10-16T22:29:19+11:00",
+        "committedAt": "2026-10-16T22:29:19+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+        "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+        "rawQuestionHash": "9eb7665ba4181061eec00c7e87e0a26835dce27197c7c01b5bcdcbc317c4db3d",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "currentPublicationContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
+      "currentRawQuestionHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+          "authoredAt": "2026-10-14T10:10:43+11:00",
+          "committedAt": "2026-10-14T13:13:59+11:00",
+          "onPrLineage": false,
+          "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+          "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+          "rawQuestionHash": "ac312b435cf76798bc5f977a101070694c5af3faecaa99c7169996f9a5015f91",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+          "authoredAt": "2026-10-14T11:49:25+11:00",
+          "committedAt": "2026-10-14T13:14:00+11:00",
+          "onPrLineage": false,
+          "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+          "packetGitBlob": "5ada544b041b61f57a1d9b0a568eff2b4bea26d1",
+          "rawQuestionHash": "9eb7665ba4181061eec00c7e87e0a26835dce27197c7c01b5bcdcbc317c4db3d",
+          "changedFields": [
+            "stimulus",
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        },
+        {
+          "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+          "authoredAt": "2026-10-16T22:29:19+11:00",
+          "committedAt": "2026-10-16T22:29:19+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+          "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+          "rawQuestionHash": "9eb7665ba4181061eec00c7e87e0a26835dce27197c7c01b5bcdcbc317c4db3d",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "8295e780caa9a3376545897305e688250ea73cba",
+          "rawQuestionHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+          "changedFields": [
+            "prompt",
+            "stimulus",
+            "options",
+            "explanation",
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+        "authoredAt": "2026-10-14T10:10:43+11:00",
+        "committedAt": "2026-10-14T13:13:59+11:00",
+        "onPrLineage": false,
+        "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+        "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+        "rawQuestionHash": "61113319df7a4be30a9136fc583b537bced83c8071b0bc065785a80a7786e632",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+        "authoredAt": "2026-10-16T22:29:19+11:00",
+        "committedAt": "2026-10-16T22:29:19+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+        "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+        "rawQuestionHash": "3138638f2c0390db422b9bfd89dc93792eb7111ac876d0573994a43daa2f7845",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "currentPublicationContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
+      "currentRawQuestionHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+          "authoredAt": "2026-10-14T10:10:43+11:00",
+          "committedAt": "2026-10-14T13:13:59+11:00",
+          "onPrLineage": false,
+          "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+          "packetGitBlob": "46712431360e6598c76020f7c57abcbf88d8980e",
+          "rawQuestionHash": "61113319df7a4be30a9136fc583b537bced83c8071b0bc065785a80a7786e632",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+          "authoredAt": "2026-10-14T11:49:25+11:00",
+          "committedAt": "2026-10-14T13:14:00+11:00",
+          "onPrLineage": false,
+          "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+          "packetGitBlob": "5ada544b041b61f57a1d9b0a568eff2b4bea26d1",
+          "rawQuestionHash": "3138638f2c0390db422b9bfd89dc93792eb7111ac876d0573994a43daa2f7845",
+          "changedFields": [
+            "stimulus"
+          ],
+          "eventType": "repository_revision"
+        },
+        {
+          "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+          "authoredAt": "2026-10-16T22:29:19+11:00",
+          "committedAt": "2026-10-16T22:29:19+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+          "packetGitBlob": "c9d75ad120583b438bf2ebcd6f6140342400a5b7",
+          "rawQuestionHash": "3138638f2c0390db422b9bfd89dc93792eb7111ac876d0573994a43daa2f7845",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "71aa2cce4b36f2710071b37390ff8651e7571904",
+          "authoredAt": "2026-10-17T14:42:45+11:00",
+          "committedAt": "2026-10-17T14:42:45+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate Year 6 drafts after blind review",
+          "packetGitBlob": "8295e780caa9a3376545897305e688250ea73cba",
+          "rawQuestionHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+          "changedFields": [
+            "prompt",
+            "stimulus",
+            "options",
+            "explanation"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-maths-004",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+        "authoredAt": "2026-10-14T10:10:43+11:00",
+        "committedAt": "2026-10-14T13:13:59+11:00",
+        "onPrLineage": false,
+        "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+        "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+        "rawQuestionHash": "479a1d9c640bd153364e510ae2644d8b045476f760a2879428c0816789334eb5",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+        "authoredAt": "2026-10-16T22:29:19+11:00",
+        "committedAt": "2026-10-16T22:29:19+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+        "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+        "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "currentPublicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "currentRawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+          "authoredAt": "2026-10-14T10:10:43+11:00",
+          "committedAt": "2026-10-14T13:13:59+11:00",
+          "onPrLineage": false,
+          "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+          "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+          "rawQuestionHash": "479a1d9c640bd153364e510ae2644d8b045476f760a2879428c0816789334eb5",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+          "authoredAt": "2026-10-14T11:49:25+11:00",
+          "committedAt": "2026-10-14T13:14:00+11:00",
+          "onPrLineage": false,
+          "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+          "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+          "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+          "changedFields": [
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        },
+        {
+          "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+          "authoredAt": "2026-10-16T22:29:19+11:00",
+          "committedAt": "2026-10-16T22:29:19+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+          "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+          "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-maths-007",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+        "authoredAt": "2026-10-14T10:10:43+11:00",
+        "committedAt": "2026-10-14T13:13:59+11:00",
+        "onPrLineage": false,
+        "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+        "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+        "rawQuestionHash": "7123628db6612e9eb5cf523954d80c2e18a3b60dda2d5560e97da87b3be15d31",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+        "authoredAt": "2026-10-16T22:29:19+11:00",
+        "committedAt": "2026-10-16T22:29:19+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+        "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+        "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "currentPublicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "currentRawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+          "authoredAt": "2026-10-14T10:10:43+11:00",
+          "committedAt": "2026-10-14T13:13:59+11:00",
+          "onPrLineage": false,
+          "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+          "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+          "rawQuestionHash": "7123628db6612e9eb5cf523954d80c2e18a3b60dda2d5560e97da87b3be15d31",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+          "authoredAt": "2026-10-14T11:49:25+11:00",
+          "committedAt": "2026-10-14T13:14:00+11:00",
+          "onPrLineage": false,
+          "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+          "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+          "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+          "changedFields": [
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        },
+        {
+          "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+          "authoredAt": "2026-10-16T22:29:19+11:00",
+          "committedAt": "2026-10-16T22:29:19+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+          "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+          "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    },
+    {
+      "id": "scholarship-y6-maths-014",
+      "sourcePath": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+      "classification": "git_traceable_legacy_draft_original_generation_unverified",
+      "originalGeneration": {
+        "provider": null,
+        "model": null,
+        "prompt": null,
+        "promptHash": null,
+        "generatedAt": null,
+        "candidateGenerationEvent": null,
+        "status": "unverified"
+      },
+      "earliestAvailableGitAppearance": {
+        "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+        "authoredAt": "2026-10-14T10:10:43+11:00",
+        "committedAt": "2026-10-14T13:13:59+11:00",
+        "onPrLineage": false,
+        "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+        "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+        "rawQuestionHash": "bd5e9a7bb3429c78f5bce10808ac484e386e14135226ea8db8e53510aba94653",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "firstAppearanceOnPrLineage": {
+        "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+        "authoredAt": "2026-10-16T22:29:19+11:00",
+        "committedAt": "2026-10-16T22:29:19+11:00",
+        "onPrLineage": true,
+        "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+        "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+        "rawQuestionHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+        "changedFields": [
+          "introduced"
+        ],
+        "eventType": "first_appearance_on_this_lineage"
+      },
+      "currentCandidateHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+      "currentPublicationContentHash": "aeb211f7441a014aefc7cdf85b510e2df0175d615366b97f1d24c58a0372e03a",
+      "currentRawQuestionHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+      "knownRepositoryRevisions": [
+        {
+          "commit": "14b1d9220083a410b97b83869459fda46f30e74a",
+          "authoredAt": "2026-10-14T10:10:43+11:00",
+          "committedAt": "2026-10-14T13:13:59+11:00",
+          "onPrLineage": false,
+          "subject": "feat(scholarship): scholarship core platform, governance gate, solvers and batch 2 drafts",
+          "packetGitBlob": "98c67e160c6861f90f9f46ff6f8d961addd3213b",
+          "rawQuestionHash": "bd5e9a7bb3429c78f5bce10808ac484e386e14135226ea8db8e53510aba94653",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "471e46e8ebcda146073e2c3d4ce98ceca3ec00c2",
+          "authoredAt": "2026-10-14T11:49:25+11:00",
+          "committedAt": "2026-10-14T13:14:00+11:00",
+          "onPrLineage": false,
+          "subject": "fix(scholarship): schema difficulty enforcement, passage expansions, finer maths strands, and publish solver unit verification",
+          "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+          "rawQuestionHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+          "changedFields": [
+            "metadata"
+          ],
+          "eventType": "repository_revision"
+        },
+        {
+          "commit": "9ed5f3b486247f7feca80c663a2b48266ee30429",
+          "authoredAt": "2026-10-16T22:29:19+11:00",
+          "committedAt": "2026-10-16T22:29:19+11:00",
+          "onPrLineage": true,
+          "subject": "feat(scholarship): Phase 1b scholarship core platform, governance enforcement, solvers and batch 2 drafts",
+          "packetGitBlob": "05d16a4e29d3e32fc192099582e2c305ff5aafc6",
+          "rawQuestionHash": "bdc37a1c91a300bb560d7c16f32f0bee53832fb5003222896f98c2b7dc48cf6a",
+          "changedFields": [
+            "introduced"
+          ],
+          "eventType": "first_appearance_on_this_lineage"
+        },
+        {
+          "commit": "45b6cdab335723b2ef822f854ac7e15e556bb7d7",
+          "authoredAt": "2026-10-21T14:05:56+11:00",
+          "committedAt": "2026-10-21T14:05:56+11:00",
+          "onPrLineage": true,
+          "subject": "fix(scholarship): remediate maths-014 group exhaustiveness, retain user-attested ChatGPT review, and refresh sample manifest",
+          "packetGitBlob": "6828fde20d960150bbf4e8ec979d1147adc971c0",
+          "rawQuestionHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+          "changedFields": [
+            "prompt"
+          ],
+          "eventType": "repository_revision"
+        }
+      ],
+      "limitations": [
+        "Git author/committer and co-author trailers do not establish original question authorship.",
+        "Available agent records establish later editing/review/import activity only; no original candidate generation event or authenticated generation prompt was found.",
+        "Repository import declarations are not evidence of original generation. No factory provenance is created by this register."
+      ]
+    }
+  ]
+}

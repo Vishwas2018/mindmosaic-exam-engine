@@ -1,0 +1,811 @@
+{
+  "reviewer": {
+    "provider": "google",
+    "model": "gemini-3.8-flash",
+    "date": "2026-10-20",
+    "freshSession": true,
+    "packetSha256": "5a0c90b426af617468a3958b64aeca7e2c653f526951db76072209f2faf12198"
+  },
+  "items": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "myAnswer": "e",
+      "reasoning": "A thermometer measures temperature; an odometer measures distance travelled. (A speedometer, not an odometer, measures speed.)",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-002",
+      "myAnswer": "e",
+      "reasoning": "An author creates a novel, while a composer creates a symphony.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-003",
+      "myAnswer": "d",
+      "reasoning": "A scalpel is the specialized cutting tool of a surgeon; a chisel is the primary carving tool of a sculptor. While chisels are also used in carpentry, 'CARPENTRY' is an activity/trade rather than a practitioner, making SCULPTOR uniquely defensible.",
+      "singleDefensibleAnswer": true,
+      "issues": "CARPENTRY is a trade rather than a practitioner; SCULPTOR is the only person/practitioner offered, ensuring a single defensible answer.",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-004",
+      "myAnswer": "e",
+      "reasoning": "A drought is an acute scarcity of rainfall; a famine is an acute scarcity of food.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-005",
+      "myAnswer": "a",
+      "reasoning": "A petal is an individual part of a flower; a tine is an individual prong of a fork.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-006",
+      "myAnswer": "e",
+      "reasoning": "A pedal is a part of a bicycle that is used to drive it along; an oar is a part of a boat that is used to drive it along.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-007",
+      "myAnswer": "c",
+      "reasoning": "Arid and moist are antonyms; frail and sturdy are antonyms.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-008",
+      "myAnswer": "e",
+      "reasoning": "Triangle, hexagon, pentagon, and octagon are all two-dimensional polygons; cylinder is a three-dimensional curved solid.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-009",
+      "myAnswer": "a",
+      "reasoning": "Sprint, dash, hurry and rush all mean to move quickly; amble means to walk slowly and easily.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-010",
+      "myAnswer": "e",
+      "reasoning": "A sculpture, portrait, fresco and mosaic are all finished works of art. An easel is a stand that holds a canvas while an artist works; it is a tool, not a work of art.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-011",
+      "myAnswer": "a",
+      "reasoning": "Dwindle, recede, diminish, and decline all mean to reduce or decrease; prosper means to thrive or grow.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-012",
+      "myAnswer": "b",
+      "reasoning": "Bronze, brass, steel, and pewter are metal alloys (mixtures); copper is a pure elemental chemical metal.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "challenging",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-013",
+      "myAnswer": "b",
+      "reasoning": "Canberra, Wellington, Ottawa, and London are all national capital cities; Sydney is a state capital, not the national capital of Australia.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-014",
+      "myAnswer": "a",
+      "reasoning": "Cautious means acting with deliberate care and forethought, which matches prudent.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-015",
+      "myAnswer": "c",
+      "reasoning": "Conceal means to keep secret or hidden; disclose means to reveal or make known.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "myAnswer": "d",
+      "reasoning": "Vigorous means characterised by robust physical strength and effort, closest to energetic.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-017",
+      "myAnswer": "b",
+      "reasoning": "Scarcity denotes an inadequate supply or severe shortage; abundance denotes an ample, plentiful quantity.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-018",
+      "myAnswer": "a",
+      "reasoning": "Revered means regarded with profound respect and admiration, closest to esteemed.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-019",
+      "myAnswer": "e",
+      "reasoning": "Frugal means careful about spending money. Thrifty and stingy are similar in meaning, careful and modest are not opposites, and extravagant (wasteful with money) is the opposite.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-020",
+      "myAnswer": "a",
+      "reasoning": "Apprehensive describes feelings of unease or worry about what may happen, closest to anxious.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-021",
+      "myAnswer": "b",
+      "reasoning": "'Newspaper' and 'paperweight' are both valid compound words. None of the other options forms two valid compound words.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-022",
+      "myAnswer": "a",
+      "reasoning": "'Block' as a noun is a solid lump of a material; as a verb, 'to block' means to obstruct or stop movement.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-023",
+      "myAnswer": "e",
+      "reasoning": "A 'post' can be an upright pole set in the ground; 'the post' also means the mail service.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-024",
+      "myAnswer": "d",
+      "reasoning": "'Sound' can mean healthy and undamaged, as in 'a sound structure', and it is also a name for a narrow stretch of sea between two pieces of land.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-025",
+      "myAnswer": "b",
+      "reasoning": "'Pitch' is how high or low a note sounds, and a 'pitch' is also a marked playing field for sports such as soccer.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-026",
+      "myAnswer": "c",
+      "reasoning": "'Sunlight' and 'lighthouse' are both valid compound words. None of the other options forms two valid compound words.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-027",
+      "myAnswer": "a",
+      "reasoning": "By transitive implication: Whale -> Mammal, Mammal -> Breathes Air. Therefore, Whale -> Breathes Air.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-028",
+      "myAnswer": "d",
+      "reasoning": "By modus tollens: P -> Q. If !Q (not open early), then !P (did not snow overnight).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-029",
+      "myAnswer": "b",
+      "reasoning": "Chess Team -> Blue Badge. Anika is on the Chess Team, so Anika wears a blue badge.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-030",
+      "myAnswer": "d",
+      "reasoning": "If at least one of 'the bridge is closed' and 'the ferry is running' is true, and the ferry is not running, then the bridge must be closed.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-031",
+      "myAnswer": "b",
+      "reasoning": "Chain the statements: four equal sides -> rhombus -> parallel opposite sides. This shape does not have parallel opposite sides, so it cannot be a rhombus (and so cannot have four equal sides either).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "challenging",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "myAnswer": "c",
+      "reasoning": "Modus tollens contrapositive logic: Premise 1 states sprinkler running implies wet lawn. Premise 2 states lawn is not wet. Therefore, the sprinkler did not run this morning.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-033",
+      "myAnswer": "d",
+      "reasoning": "Each letter advances by +3 positions: B(2) -> E(5) -> H(8) -> K(11) -> N(14).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-034",
+      "myAnswer": "e",
+      "reasoning": "Each letter steps backward by -2 (or +24 mod 26): Z(26) -> X(24) -> V(22) -> T(20) -> R(18).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-035",
+      "myAnswer": "c",
+      "reasoning": "Steps increase as odd numbers: +3, +5, +7, next is +9: P(16) + 9 = Y(25).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "challenging",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-036",
+      "myAnswer": "b",
+      "reasoning": "First letter advances alphabetically (A, B, C, D, E); second letter steps backwards (Z, Y, X, W, V).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-037",
+      "myAnswer": "c",
+      "reasoning": "Each letter increases by +4 positions: C(3) -> G(7) -> K(11) -> O(15) -> S(19).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-038",
+      "myAnswer": "b",
+      "reasoning": "First letter advances by +4 (A, E, I, M -> Q); second letter advances by +4 (C, G, K, O -> S).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-039",
+      "myAnswer": "c",
+      "reasoning": "Advances by +3 positions mod 26: W(23) -> Z(26) -> C(3) -> F(6) -> I(9).",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-040",
+      "myAnswer": "d",
+      "reasoning": "Compare BARK with DCTM: every letter moves forward by 2 places (B->D, A->C, R->T, K->M). Applying the same shift to LEAF gives L->N, E->G, A->C, F->H: NGCH.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-041",
+      "myAnswer": "c",
+      "reasoning": "The code shifts forward by +2. To decode VJG, shift each letter backward by 2: V->T, J->H, G->E, giving THE.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-042",
+      "myAnswer": "a",
+      "reasoning": "From the examples: S=K, T=D, O=W, P=J. Therefore STOP is coded as KDWJ.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-043",
+      "myAnswer": "c",
+      "reasoning": "B=2, R=18, A=1, I=9, N=14. Thus 2-18-1-9-14.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-044",
+      "myAnswer": "d",
+      "reasoning": "The word is written completely in reverse order: B-R-I-G-H-T becomes T-H-G-I-R-B.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-vr-045",
+      "myAnswer": "d",
+      "reasoning": "7=G, 18=R, 15=O, 23=W. The word is GROW.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-001",
+      "myAnswer": "a",
+      "reasoning": "The opening paragraph uses sensory imagery ('wet slate', motionless grandfather, silent signal) to build a patient, hushed atmosphere as the watchers await dawn and the tide.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "myAnswer": "c",
+      "reasoning": "Mangrove stilt roots arching like the ribs of an upturned vessel visually conveys an arched, protective framework over the water where young fish find shelter.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "myAnswer": "e",
+      "reasoning": "Grandfather anticipates the raptor's arrival precisely at the tide turn ('She returns with the turn of the tide') and directs Maya's gaze, demonstrating intimate knowledge of its routine.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-004",
+      "myAnswer": "b",
+      "reasoning": "Paragraph 2 states that young bream and silver mullet 'sought sanctuary from the open bay' within the arching root network.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-005",
+      "myAnswer": "d",
+      "reasoning": "'Synchronous' means happening at the same time. The crabs wave their claws together, in the same rhythm.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-006",
+      "myAnswer": "b",
+      "reasoning": "The author builds suspense through stillness and silence: 'For twenty minutes neither person spoke' while the dinghy drifts and the perched osprey watches the shallows, stretching out the silent wait until the bird suddenly launches into its dive. There is no circling, warning, comparison to a stalking hunter, or rapid switching between viewpoints.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-007",
+      "myAnswer": "e",
+      "reasoning": "A clockwork has many parts that work together in a regular pattern. 'Driven by the moon' ties that pattern to the tides, so the metaphor shows the estuary's life following linked, regular rhythms. It is not dull repetition: the words 'intricate' and 'living' work against that reading.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-008",
+      "myAnswer": "a",
+      "reasoning": "The author describes the estuary and the watchers with quiet attention and respect, so the tone is thoughtful and admiring. There is some suspense during the osprey's hunt, but the passage is not fearful.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-009",
+      "myAnswer": "b",
+      "reasoning": "A signal 'shared' for years that Maya answers by holding the boat still shows long experience together and mutual trust. The passage says nothing about learning to row, fear, danger or arguments.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-010",
+      "myAnswer": "c",
+      "reasoning": "Paragraph 2 states that the twenty-six resin-producing Triodia species belong to a softer-leaved group that secretes resin from specialised cells in the outer leaf epidermis, whereas hard-leaved species have stiffer, needle-like blades and produce no resin. Spinifex leaves curl into cylinders with breathing pores sheltered in deep grooves, and roots anchor sandy dunes.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-011",
+      "myAnswer": "e",
+      "reasoning": "The sentence says spinifex survives 'where few other plants can endure', so tenacity means stubborn endurance.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-012",
+      "myAnswer": "b",
+      "reasoning": "Paragraph 3: 'When heated, the resin softens into a workable paste; when cooled, it hardens into an enduring, shatter-resistant cement.' Option a reverses the order.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-013",
+      "myAnswer": "d",
+      "reasoning": "Paragraph 4 states that microscopic spinifex nanofibres 'enhance tensile strength and flexibility without adding significant weight' when blended into materials like latex or concrete. The passage does not claim they speed up setting, make polymers waterproof, replace latex, or block heat and electrical conduction.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-014",
+      "myAnswer": "a",
+      "reasoning": "Paragraphs 1 and 2 describe the plant's adaptations, paragraph 3 describes traditional use of the pitch, and paragraph 4 describes modern research.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-015",
+      "myAnswer": "c",
+      "reasoning": "Paragraph 2 says the root networks 'lock down loose dunes, preventing severe wind erosion'. Without spinifex that protection would be lost. The other outcomes are not supported by the text.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-016",
+      "myAnswer": "d",
+      "reasoning": "The last sentence says a grass 'long dismissed by pastoralists as a spiky hindrance is now emerging as a pioneer of biodegradable green engineering'.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-017",
+      "myAnswer": "a",
+      "reasoning": "Paragraph 2 says the tight cylinders 'drastically reduce the surface area exposed to evaporating winds', which saves water.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-018",
+      "myAnswer": "c",
+      "reasoning": "In materials science and geometry, 'aspect ratio' is the ratio of an object's length to its width. Paragraph 4 confirms this immediately by glossing the fibres as 'long, thin, and extraordinarily strong', meaning their length is very large compared to their narrow width.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-019",
+      "myAnswer": "e",
+      "reasoning": "The author explains the cultural and ecological damage caused by artificial skyglow, rejects plunging communities into darkness, and argues that practical, well-engineered lighting reforms can restore dark skies while maintaining public safety. Options a, b, c, and d each focus too narrowly on a single detail or misstate the author's proposed solutions.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-020",
+      "myAnswer": "b",
+      "reasoning": "In paragraph 2, the author notes that bright streetscapes are 'reflexively equated with civic progress and public safety', but points out that evidence connecting unshielded floodlights to crime reduction is 'mixed, and weaker than most people assume'. This challenges the common assumption that brighter lighting automatically improves public safety.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-021",
+      "myAnswer": "c",
+      "reasoning": "'Smog' is polluted air that hides the view. Describing skyglow as a 'sickly' smog presents artificial light as a pollutant that spoils the sky.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-022",
+      "myAnswer": "d",
+      "reasoning": "Paragraph 3 says fledglings navigate by the moon and stars on their first flight, but coastal road lighting disorients them and they crash into traffic or walls. The feeding delays in the same paragraph describe sugar gliders and microbats, not shearwaters.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-023",
+      "myAnswer": "b",
+      "reasoning": "Paragraph 4 recommends replacing unshielded lamps with 'downward-facing hooded fixtures that direct illumination exclusively where pedestrians step'. The author advises against blue-white glare and unshielded floodlights, and explicitly rejects plunging communities into darkness.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-024",
+      "myAnswer": "a",
+      "reasoning": "'Diurnal' describes activities and conditions of daytime, placed in contrast with 'nocturnal darkness'.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-025",
+      "myAnswer": "e",
+      "reasoning": "Paragraph 4 addresses this concern directly: 'Reclaiming our night sky does not require plunging our communities into perilous darkness.' The author explains that downward-facing hooded fixtures direct light onto footpaths where pedestrians walk, maintaining safe visibility without casting blinding glare into the sky.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-026",
+      "myAnswer": "e",
+      "reasoning": "By noting that the Milky Way guided Aboriginal navigators for tens of thousands of years and still features in living songlines and star stories, the author shows that the loss of the night sky to skyglow is a profound cultural loss, not merely an ecological or scientific issue.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-027",
+      "myAnswer": "c",
+      "reasoning": "The author proposes practical, achievable engineering solutions (downward shielding, lower lumens) rather than despairing or merely expressing alarm; therefore 'Pragmatic' is the single defensible answer.",
+      "singleDefensibleAnswer": true,
+      "issues": "Passage discusses alarming rates of skyglow, but stem specifically restricts scope to author's attitude toward solving the problem.",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-028",
+      "myAnswer": "a",
+      "reasoning": "Paragraph 1 explains that vessels sailed into the Roaring Forties because 'driven by relentless westerly gales and giant, unobstructed swells circling Antarctica, vessels could achieve astonishing speeds, cutting weeks off the voyage'.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-029",
+      "myAnswer": "d",
+      "reasoning": "Paragraph 2: 'Every four minutes of time discrepancy corresponded to one degree of longitude.' The noon sun gives latitude, not longitude, and one hour would be fifteen degrees.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-030",
+      "myAnswer": "b",
+      "reasoning": "Paragraph 3 states that weeks of bitter cold altered the chronometers' daily rate of gain or loss, while damp, salt-laden air threatened to rust delicate steel balance springs and pivots if moisture penetrated their protective cases. Gimbals kept the instruments level rather than shifting their gears.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-031",
+      "myAnswer": "b",
+      "reasoning": "Paragraph 4: 'estimating current position based on compass heading, estimated leeway, and speed measured by casting a knotted log line'. The noon sun was used for latitude.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-032",
+      "myAnswer": "c",
+      "reasoning": "Paragraph 2 explains that a small timing error could put a ship onto an unseen reef, and paragraph 4 says cloud hid the sun and stars so captains could not check their position as they approached the entrance to Bass Strait, where reefs left little room. Together these made even a small mistake in position potentially disastrous.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-033",
+      "myAnswer": "c",
+      "reasoning": "'The tension on the quarterdeck was palpable' means so strong that people could almost feel it.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-034",
+      "myAnswer": "e",
+      "reasoning": "Paragraph 3 states that lunar distance calculations 'required a clear view of the moon and stars alongside painstaking spherical trigonometry that could take up to several hours of manual arithmetic'. Gimballed clocks and salt-air rusting relate to marine chronometers, and noon sun sights were used for latitude.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "easy",
+      "verdict": "PASS",
+      "fix": ""
+    },
+    {
+      "id": "scholarship-y6-rc-035",
+      "myAnswer": "a",
+      "reasoning": "The passage shows that mechanical chronometers could drift in extreme cold and overcast skies often blocked celestial sights, forcing captains to rely on dead reckoning. Reaching port safely—especially through Bass Strait—was 'a triumph of skill and nerve', showing that human judgement and seamanship were essential alongside instruments.",
+      "singleDefensibleAnswer": true,
+      "issues": "",
+      "difficulty": "medium",
+      "verdict": "PASS",
+      "fix": ""
+    }
+  ]
+}

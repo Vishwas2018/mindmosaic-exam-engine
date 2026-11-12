@@ -1,0 +1,8 @@
+{
+  "evidenceType": "manual_user_attested",
+  "attestedBy": "user",
+  "rawEvidenceSha256": "89a7db747f162f9eb2be9f372bc5f74158c55e3f325f0124a1bf2cd3347ecc83",
+  "packetSha256": "1538048ffb0b04bcd62d152895d7f0952eff94861d583d9c5dd76965aab3c30b",
+  "sourceConversation": "separate_fresh_conversation",
+  "modelLabel": "unknown"
+}

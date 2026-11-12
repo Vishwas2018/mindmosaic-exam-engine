@@ -1,0 +1,326 @@
+[
+  {
+    "id": "scholarship-y6-vr-001",
+    "prompt": "THERMOMETER is to TEMPERATURE as ODOMETER is to:",
+    "options": [
+      {
+        "id": "a",
+        "text": "SPEED"
+      },
+      {
+        "id": "b",
+        "text": "FUEL"
+      },
+      {
+        "id": "c",
+        "text": "ENGINE"
+      },
+      {
+        "id": "d",
+        "text": "TYRES"
+      },
+      {
+        "id": "e",
+        "text": "DISTANCE"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-vr-016",
+    "prompt": "Which word is closest in meaning to VIGOROUS?",
+    "options": [
+      {
+        "id": "a",
+        "text": "LETHARGIC"
+      },
+      {
+        "id": "b",
+        "text": "DELICATE"
+      },
+      {
+        "id": "c",
+        "text": "PENSIVE"
+      },
+      {
+        "id": "d",
+        "text": "ENERGETIC"
+      },
+      {
+        "id": "e",
+        "text": "MUNDANE"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-vr-032",
+    "prompt": "Read the statements:\n1. If the garden sprinkler ran this morning, the lawn is wet now.\n2. The lawn is NOT wet now.\nWhich conclusion must be TRUE?",
+    "options": [
+      {
+        "id": "a",
+        "text": "The garden sprinkler ran for hours this morning."
+      },
+      {
+        "id": "b",
+        "text": "It rained heavily while the sprinkler ran."
+      },
+      {
+        "id": "c",
+        "text": "The garden sprinkler did not run this morning."
+      },
+      {
+        "id": "d",
+        "text": "The lawn is soaking wet now."
+      },
+      {
+        "id": "e",
+        "text": "The sprinkler runs every morning."
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-nr-001",
+    "prompt": "What number comes next in the sequence?\n5, 11, 17, 23, 29, ?",
+    "options": [
+      {
+        "id": "a",
+        "text": "33"
+      },
+      {
+        "id": "b",
+        "text": "34"
+      },
+      {
+        "id": "c",
+        "text": "36"
+      },
+      {
+        "id": "d",
+        "text": "37"
+      },
+      {
+        "id": "e",
+        "text": "35"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-nr-022",
+    "prompt": "Marcus is currently three times as old as his sister Chloe. In 8 years, Marcus will be twice as old as Chloe will be then. How old is Chloe now?",
+    "options": [
+      {
+        "id": "a",
+        "text": "6"
+      },
+      {
+        "id": "b",
+        "text": "7"
+      },
+      {
+        "id": "c",
+        "text": "9"
+      },
+      {
+        "id": "d",
+        "text": "10"
+      },
+      {
+        "id": "e",
+        "text": "8"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-nr-023",
+    "prompt": "At a school stationery shop, 3 notebooks and 2 pens cost $19. Meanwhile, 2 notebooks and 4 pens cost $18. How much does 1 notebook cost?",
+    "options": [
+      {
+        "id": "a",
+        "text": "$3"
+      },
+      {
+        "id": "b",
+        "text": "$5"
+      },
+      {
+        "id": "c",
+        "text": "$4"
+      },
+      {
+        "id": "d",
+        "text": "$6"
+      },
+      {
+        "id": "e",
+        "text": "$7"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-rc-001",
+    "prompt": "What is the main purpose of the opening paragraph?",
+    "stimulus": {
+      "title": "The Estuary Watchers",
+      "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "To set a quiet, patient mood as the two characters wait"
+      },
+      {
+        "id": "b",
+        "text": "To show how skilfully Maya handles the boat in difficult water"
+      },
+      {
+        "id": "c",
+        "text": "To explain why Maya and her grandfather came to the estuary"
+      },
+      {
+        "id": "d",
+        "text": "To introduce the osprey that the characters have come to watch"
+      },
+      {
+        "id": "e",
+        "text": "To warn the reader that the estuary is a dangerous place"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-rc-002",
+    "prompt": "In paragraph 2, the stilt roots of the red mangroves are compared to 'the ribs of an upturned vessel'. This comparison mainly suggests that the roots:",
+    "stimulus": {
+      "title": "The Estuary Watchers",
+      "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "were old and rotting after many years in salt water"
+      },
+      {
+        "id": "b",
+        "text": "had been shaped by people to guide boats through the channel"
+      },
+      {
+        "id": "c",
+        "text": "formed a curved, sheltering frame above the water"
+      },
+      {
+        "id": "d",
+        "text": "grew in straight rows that made a path for the dinghy"
+      },
+      {
+        "id": "e",
+        "text": "were packed so tightly that no fish could swim between them"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-rc-003",
+    "prompt": "What does Grandfather's behaviour reveal about his knowledge of the estuary?",
+    "stimulus": {
+      "title": "The Estuary Watchers",
+      "body": "Before first light, the estuary was the colour of wet slate. Maya dipped her oars into the black water, pulling with steady, even strokes so the wooden dinghy slipped between the mangrove trees without a ripple. In the stern, her grandfather sat motionless with his brass binoculars resting across his knees. He raised one hand with fingers spread—the quiet signal they had shared since she was six years old to hold the boat drifting.\n\nThe tide had just turned and was nudging against the river mouth, pushing saltwater into the coastal channels. Along the mudflats, hundreds of fiddler crabs were still feeding in the last of the low-tide mud, their pale claws waving in synchronous rhythm as the morning mist dissolved. Further back, the stilt roots of the red mangroves arched above the silt like the ribs of an upturned vessel, and beyond them the grey mangroves sent up thousands of pencil-like pneumatophores, the breathing roots that poke out of the mud. The water swirled into amber eddies among them. Here, young bream and silver mullet sought sanctuary from the open bay. Schools of juvenile garfish darted beneath the surface, flashing like silver needles across the tea-coloured shallows where sea grasses swayed in the rising current.\n\n\"Watch the overhanging branch near the sandspit,\" Grandfather murmured, his voice scarcely louder than the rustling leaves. \"She returns with the turn of the tide.\"\n\nMaya lifted her field glasses. A thin rim of golden light broke over the distant headland, piercing the salt haze. Perched upon a dead ironbark limb was an osprey, feathers ruffled against the dawn chill. The raptor leaned forward, eyes fixed upon the shallows where schooling fish flashed against the sunlight. For twenty minutes neither person spoke. The dinghy turned lazily with the current until Maya felt the keel scrape gently against soft sand. When the osprey suddenly launched into the air, wings beating hard before diving in a clean arc, Maya let out a long, slow breath. The estuary was not merely water and mud; it was an intricate, living clockwork driven by the moon."
+    },
+    "options": [
+      {
+        "id": "a",
+        "text": "He has read scientific records of the osprey's nesting habits."
+      },
+      {
+        "id": "b",
+        "text": "He expects the fish to leave the roots as the tide rises."
+      },
+      {
+        "id": "c",
+        "text": "He knows exactly where the fiddler crabs bury themselves."
+      },
+      {
+        "id": "d",
+        "text": "He is unsure when the osprey will arrive but hopes it will."
+      },
+      {
+        "id": "e",
+        "text": "He knows the osprey's routine and how it follows the tide."
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-maths-004",
+    "prompt": "The summit of Mount Kosciuszko is 2228 metres above sea level. Lake Eyre is 15 metres below sea level (-15 m). What is the difference in elevation between the summit of Mount Kosciuszko and Lake Eyre?",
+    "options": [
+      {
+        "id": "a",
+        "text": "2213 m"
+      },
+      {
+        "id": "b",
+        "text": "2243 m"
+      },
+      {
+        "id": "c",
+        "text": "2233 m"
+      },
+      {
+        "id": "d",
+        "text": "2258 m"
+      },
+      {
+        "id": "e",
+        "text": "2200 m"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-maths-007",
+    "prompt": "A sports jacket originally priced at $160 is discounted by 25% during a mid-year sale. At the checkout, loyalty club members receive an additional 10% discount off the sale price. How much does a club member pay for the jacket?",
+    "options": [
+      {
+        "id": "a",
+        "text": "$108"
+      },
+      {
+        "id": "b",
+        "text": "$104"
+      },
+      {
+        "id": "c",
+        "text": "$112"
+      },
+      {
+        "id": "d",
+        "text": "$116"
+      },
+      {
+        "id": "e",
+        "text": "$100"
+      }
+    ]
+  },
+  {
+    "id": "scholarship-y6-maths-014",
+    "prompt": "An athletics club contains only two groups, sprinters and distance runners, and every athlete belongs to exactly one group. The ratio of sprinters to distance runners is 5 : 3. If there are 30 more sprinters than distance runners, how many athletes are in the club altogether?",
+    "options": [
+      {
+        "id": "a",
+        "text": "100"
+      },
+      {
+        "id": "b",
+        "text": "110"
+      },
+      {
+        "id": "c",
+        "text": "120"
+      },
+      {
+        "id": "d",
+        "text": "130"
+      },
+      {
+        "id": "e",
+        "text": "140"
+      }
+    ]
+  }
+]
