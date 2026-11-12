@@ -57,7 +57,7 @@ export default function StudentSignInPage() {
             />
           }
         >
-          <SignInPanel defaultKind="student" />
+          <SignInPanel defaultKind="student" defaultEntry="signin" />
         </Suspense>
       </main>
     </div>

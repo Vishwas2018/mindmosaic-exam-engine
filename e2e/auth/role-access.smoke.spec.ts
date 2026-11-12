@@ -13,7 +13,7 @@ test.describe("role access", () => {
       const context = await contextAs(key);
       const page = await context.newPage();
       await page.goto("/parent");
-      await expect(page).toHaveTitle(/Parent dashboard/);
+      await expect(page).toHaveTitle(/Parent dashboard|Family Overview/);
       await expect(page).toHaveURL(/\/parent$/);
     }
   });

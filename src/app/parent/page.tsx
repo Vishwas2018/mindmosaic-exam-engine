@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { EmptyState, ErrorState, buttonClasses } from "@/components/ui";
+import { ErrorState, buttonClasses } from "@/components/ui";
 import {
   AddChildCard,
-  BillingPanel,
   CheckoutStatusToast,
   FamilyOverview,
   ParentShell,
@@ -14,7 +13,6 @@ import {
 import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
 import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
-import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
@@ -85,10 +83,7 @@ export default async function ParentHomePage({
     );
   }
 
-  const [data, subscription] = await Promise.all([
-    loadParentDashboard(),
-    getMySubscription(),
-  ]);
+  const data = await loadParentDashboard();
 
   if (data.status === "error") {
     return (
@@ -97,22 +92,6 @@ export default async function ParentHomePage({
           title="We couldn't load your dashboard"
           description="Something went wrong fetching your children's progress. Please refresh to try again."
         />
-      </ParentShell>
-    );
-  }
-
-  if (data.children.length === 0) {
-    return (
-      <ParentShell active="/parent">
-        <div className="space-y-8">
-          <CheckoutStatusToast />
-          <BillingPanel subscription={subscription} />
-          <EmptyState
-            title="No children linked to your account yet"
-            description="Add your child below to create their login. Once they start practising, their progress and exam results will appear here."
-          />
-          <AddChildCard availableYearLevels={years} />
-        </div>
       </ParentShell>
     );
   }

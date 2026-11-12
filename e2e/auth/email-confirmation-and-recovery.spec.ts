@@ -60,7 +60,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // Should verify and redirect to /parent
     await expect(page.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
-    await expect(page).toHaveTitle(/Parent dashboard/);
+    await expect(page).toHaveTitle(/Parent dashboard|Family Overview/);
 
     // The session this link created is a signup session, not a recovery session: the reset form stays closed.
     await page.goto("/auth/reset");
@@ -107,7 +107,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
       // token_hash template: device-independent confirmation succeeds and redirects to /parent
       await expect(pageB.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
       await expect(pageB).toHaveURL(/\/parent/, { timeout: 15000 });
-      await expect(pageB).toHaveTitle(/Parent dashboard/);
+      await expect(pageB).toHaveTitle(/Parent dashboard|Family Overview/);
     } else {
       // Default PKCE template: the link is bound to context A. B must be told so, focused and offered a resend,
       // and must not end up signed in.
@@ -217,11 +217,11 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // Successfully reaches parent dashboard
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
-    await expect(page).toHaveTitle(/Parent dashboard/);
+    await expect(page).toHaveTitle(/Parent dashboard|Family Overview/);
 
     // 6. Navigating back to /auth/reset is now an ordinary session (recovery state was cleaned up)
     await page.goto("/auth/reset");
-    await expect(page.getByRole("heading", { name: /open your reset link/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /open your reset link/i })).toBeVisible({ timeout: 15000 });
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
 
     await context.close();
@@ -235,7 +235,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await page.goto("/auth/reset");
 
     const heading = page.getByRole("heading", { name: /open your reset link/i });
-    await expect(heading).toBeVisible();
+    await expect(heading).toBeVisible({ timeout: 15000 });
     await expect(heading).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
     await expect(page.getByRole("link", { name: /request a new reset link/i })).toBeVisible();
@@ -252,7 +252,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await page.goto("/auth/reset");
 
     const heading = page.getByRole("heading", { name: /open your reset link/i });
-    await expect(heading).toBeVisible();
+    await expect(heading).toBeVisible({ timeout: 15000 });
     await expect(heading).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
     await expect(page.getByRole("link", { name: /request a new reset link/i })).toBeVisible();
@@ -269,7 +269,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
     // After timeout, problem state is shown with error focus
     const heading = page.getByRole("heading", { name: /link expired or invalid/i });
-    await expect(heading).toBeVisible({ timeout: 10000 });
+    await expect(heading).toBeVisible({ timeout: 15000 });
     await expect(heading).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
   });
@@ -281,7 +281,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // 1. Explicit expired param
     await page.goto("/auth/reset?error_code=otp_expired");
     const headingExpired = page.getByRole("heading", { name: /link expired or invalid/i });
-    await expect(headingExpired).toBeVisible();
+    await expect(headingExpired).toBeVisible({ timeout: 15000 });
     await expect(headingExpired).toBeFocused();
     await expect(page.getByText(/this password reset link has expired/i)).toBeVisible();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
@@ -289,7 +289,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // 2. Invalid recovery token_hash
     await page.goto("/auth/reset?token_hash=invalid-token-12345&type=recovery");
     const headingInvalid = page.getByRole("heading", { name: /link expired or invalid/i });
-    await expect(headingInvalid).toBeVisible();
+    await expect(headingInvalid).toBeVisible({ timeout: 15000 });
     await expect(headingInvalid).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
 

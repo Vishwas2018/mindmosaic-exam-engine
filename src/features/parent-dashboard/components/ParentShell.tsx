@@ -47,14 +47,15 @@ export function ParentShell({ active, children }: ParentShellProps) {
   return (
     <div className="min-h-screen bg-page">
       <header className="sticky top-0 z-30 border-b border-royal/8 bg-white/95 backdrop-blur-md">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
-          <div className="flex items-center gap-8">
+        <div className="site-width flex min-h-20 items-center justify-between gap-2 sm:gap-4 py-3">
+          <div className="flex items-center gap-4 sm:gap-8 min-w-0">
             <Link
               href="/"
               aria-label="MindMosaic home"
-              className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              className="shrink-0 rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
             >
-              <MindMosaicLogo size="md" />
+              <MindMosaicLogo size="sm" className="sm:hidden" />
+              <MindMosaicLogo size="md" className="hidden sm:inline-flex" />
             </Link>
 
             {/* Desktop Navigation (>= lg) */}
@@ -88,13 +89,14 @@ export function ParentShell({ active, children }: ParentShellProps) {
           </div>
 
           {/* Right Header Cluster: Help, Parent Badge, Auth */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <Link
               href="/parent/help"
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              aria-label="Help"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-2.5 sm:px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
             >
               <HelpCircle aria-hidden="true" className="h-4 w-4" />
-              <span>Help</span>
+              <span className="hidden sm:inline">Help</span>
             </Link>
 
             <Badge variant="purple" className="hidden sm:inline-flex">

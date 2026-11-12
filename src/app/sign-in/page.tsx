@@ -26,7 +26,19 @@ export const metadata: Metadata = {
  * (Parent vs Student cards) before the sign-in form. SignInPanel accepts
  * `defaultEntry` to render the chooser screen initially instead of the form.
  */
-export default function SignInPage() {
+export default async function SignInPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ mode?: string; entry?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  const defaultEntry =
+    resolvedParams.entry === "signin" || resolvedParams.mode === "signin"
+      ? "signin"
+      : resolvedParams.mode === "forgot"
+      ? "forgot"
+      : "choose";
+
   return (
     <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
       <a
@@ -68,7 +80,7 @@ export default function SignInPage() {
             />
           }
         >
-          <SignInPanel defaultEntry="choose" />
+          <SignInPanel defaultEntry={defaultEntry} />
         </Suspense>
       </main>
     </div>

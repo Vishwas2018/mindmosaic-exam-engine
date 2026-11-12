@@ -115,10 +115,12 @@ export function SignInPanel({
 
   const explicitNext = searchParams.get("next");
   const [screen, setScreen] = useState<Screen>(() => {
+    const entryParam = searchParams.get("entry");
+    const modeParam = searchParams.get("mode");
+    if (entryParam === "signin" || modeParam === "signin") return "signin";
+    if (entryParam === "choose" || modeParam === "choose") return "choose";
+    if (modeParam === "forgot") return "forgot";
     if (defaultEntry) return defaultEntry;
-    const mode = searchParams.get("mode");
-    if (mode === "forgot") return "forgot";
-    if (mode === "choose" || searchParams.get("entry") === "choose") return "choose";
     return "signin";
   });
   const [kind, setKind] = useState<AccountKind>(defaultKind);
