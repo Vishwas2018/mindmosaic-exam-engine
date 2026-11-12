@@ -1,12 +1,8 @@
 import { GraduationCap } from "lucide-react";
 
 /**
- * Top banner for the Stitch-ported Learning Hub. The eyebrow curriculum tag
- * and "Term 2 Progress" chip have no backing calendar/version model (same
- * class as the dashboard's term/goal pills) — literal Stitch placeholder
- * text, flagged per this session's "pixel-match with placeholders" call.
- * Lesson/strand counts are the same real catalogue counts
- * CurriculumHubHeader used before this port.
+ * Top banner for the Learning Hub. Displays high-level subject lesson counts
+ * and active strands from the authored curriculum catalogue.
  */
 export function LearningHubHero({
   yearLevel,
@@ -25,8 +21,7 @@ export function LearningHubHero({
         <div className="flex max-w-2xl flex-col gap-1.5">
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary">
             <GraduationCap aria-hidden="true" className="h-4 w-4" />
-            {/* Placeholder — no curriculum-version/jurisdiction model beyond the sidebar's static chip. */}
-            NSW Syllabus Stage 3 · Australian Curriculum
+            Curriculum Lessons &amp; Worked Examples
           </span>
           <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-mm-ink">
             Learning Hub
