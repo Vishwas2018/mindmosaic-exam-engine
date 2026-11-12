@@ -67,8 +67,9 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
 
     renderScreen();
 
-    expect(screen.getByText(/verifying your email/i)).toBeInTheDocument();
-    expect(await screen.findByText(/email confirmed/i)).toBeInTheDocument();
+    expect(screen.getByText(/confirming your email/i)).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /email confirmed/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /continue/i })).toHaveAttribute("href", "/parent");
 
     await waitFor(() => expect(push).toHaveBeenCalledWith("/parent"), { timeout: 2000 });
     expect(refresh).toHaveBeenCalled();
@@ -79,16 +80,41 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
 
     renderScreen();
 
-    expect(await screen.findByText(/link expired or invalid/i)).toBeInTheDocument();
-    expect(screen.getByText(/this verification link has expired/i)).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /this link has expired/i })).toBeInTheDocument();
+    expect(screen.getByText(/we.ll send a fresh one/i)).toBeInTheDocument();
     expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
 
     const user = userEvent.setup();
     await user.type(screen.getByLabelText(/email address/i), "jamie@example.com");
-    await user.click(screen.getByRole("button", { name: /resend verification email/i }));
+    await user.click(screen.getByRole("button", { name: /send a new link/i }));
 
     expect(mockResend).toHaveBeenCalledTimes(1);
     expect(mockResend.mock.calls[0][0]).toMatchObject({ type: "signup", email: "jamie@example.com" });
+    /* "Sent" appears only once the send was accepted. */
+    expect(await screen.findByText(/a new link is on its way/i)).toBeInTheDocument();
+  });
+
+  it("does not claim a new link was sent when the resend fails", async () => {
+    currentParams = new URLSearchParams({ error_code: "otp_expired" });
+    mockResend.mockResolvedValue({ error: { message: "SMTP exploded", status: 500 } });
+    renderScreen();
+
+    const user = userEvent.setup();
+    await user.type(await screen.findByLabelText(/email address/i), "jamie@example.com");
+    await user.click(screen.getByRole("button", { name: /send a new link/i }));
+
+    expect(screen.queryByText(/a new link is on its way/i)).not.toBeInTheDocument();
+    expect(await screen.findByText(/couldn.t send a new link/i)).toBeInTheDocument();
+    expect(screen.queryByText(/smtp/i)).not.toBeInTheDocument();
+  });
+
+  it("tells a used or invalid link apart from an expired one, and points at sign-in", async () => {
+    currentParams = new URLSearchParams({ error_code: "access_denied" });
+    renderScreen();
+
+    expect(await screen.findByText(/invalid or has already been used/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /^sign in$/i })).toHaveAttribute("href", "/sign-in");
+    expect(screen.queryByText(/has expired/i)).not.toBeInTheDocument();
   });
 
   it("shows an error state when the code exchange itself fails", async () => {
@@ -100,7 +126,20 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
 
     renderScreen();
 
-    expect(await screen.findByText(/link expired or invalid/i)).toBeInTheDocument();
-    expect(screen.getByText(/token has expired or is invalid/i)).toBeInTheDocument();
+    expect(await screen.findByText(/invalid or has already been used/i)).toBeInTheDocument();
+    /* The provider's own wording is never shown. */
+    expect(screen.queryByText(/token has expired or is invalid/i)).not.toBeInTheDocument();
+  });
+
+  it("says it is our side, not the link, when the exchange cannot be completed", async () => {
+    currentParams = new URLSearchParams({ code: "any-code" });
+    mockExchangeCodeForSession.mockResolvedValue({
+      data: { session: null },
+      error: { message: "upstream", status: 503 },
+    });
+
+    renderScreen();
+
+    expect(await screen.findByText(/problem on our side, not with your link/i)).toBeInTheDocument();
   });
 });

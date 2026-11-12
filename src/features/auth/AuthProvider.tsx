@@ -395,7 +395,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async confirmEmail(code) {
         if (!supabase) return notConfigured();
         const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-        if (error) return { ok: false, message: error.message };
+        if (error) {
+          /* The provider's wording ("Email link is invalid or has expired")
+             covers both cases at once, so only the error *code* is trusted to
+             say "expired"; the text is never passed on. */
+          return {
+            ok: false,
+            failure: classifyAuthFailure(error),
+            message: error.code === "otp_expired" ? "expired" : "invalid",
+          };
+        }
         const id = data.session?.user.id;
         if (!id) return { ok: true, role: null };
         const { data: profile } = await supabase

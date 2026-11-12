@@ -11,6 +11,32 @@ import { roleHomePath } from "../roles";
 import { MmErrorPanel, MmField, mmAuthButton, mmFocus } from "./auth-fields";
 
 type Stage = "verifying" | "success" | "error";
+/**
+ * Why a link is dead. "Expired" is about time; "invalid" covers a link that
+ * was already used or never valid: the provider does not tell those two
+ * apart, and the screen does not pretend to. Neither echoes the provider's
+ * own wording.
+ */
+type LinkProblem = "expired" | "invalid" | "unconfigured" | "unavailable";
+
+const PROBLEM_COPY: Record<LinkProblem, { title: string; body: string }> = {
+  expired: {
+    title: "This link has expired",
+    body: "This link has expired. We’ll send a fresh one to the address below.",
+  },
+  invalid: {
+    title: "This link can’t be used",
+    body: "This link is invalid or has already been used. If you have already confirmed, just sign in.",
+  },
+  unconfigured: {
+    title: "Accounts aren’t connected",
+    body: "Accounts aren’t connected on this device yet.",
+  },
+  unavailable: {
+    title: "We couldn’t confirm your email",
+    body: "We couldn’t confirm your email just now. This is a problem on our side, not with your link. Please try the link again in a few minutes.",
+  },
+};
 
 /*
  * Read once at mount, via a lazy useState initializer rather than an effect:
@@ -22,37 +48,27 @@ type Stage = "verifying" | "success" | "error";
 function computeInitialStage(
   searchParams: URLSearchParams,
   configured: boolean,
-): { stage: Stage; message: string | null } {
+): { stage: Stage; problem: LinkProblem | null } {
   const code = searchParams.get("code");
   const errorCode = searchParams.get("error_code");
-  const errorDescription = searchParams.get("error_description");
 
   if (errorCode || !code) {
-    return {
-      stage: "error",
-      message:
-        errorCode === "otp_expired"
-          ? "This verification link has expired."
-          : (errorDescription?.replace(/\+/g, " ") ??
-              "This verification link is invalid or has already been used."),
-    };
+    return { stage: "error", problem: errorCode === "otp_expired" ? "expired" : "invalid" };
   }
-  if (!configured) {
-    return { stage: "error", message: "Accounts aren't connected on this device yet." };
-  }
-  return { stage: "verifying", message: null };
+  if (!configured) return { stage: "error", problem: "unconfigured" };
+  return { stage: "verifying", problem: null };
 }
 
 /**
- * Screen 6: lands from the confirmation-email link (see AuthProvider.signUp's
+ * Lands from the confirmation-email link (see AuthProvider.signUp's
  * emailRedirectTo and /auth/confirm). Exchanges the `code` for a session,
- * then redirects to the confirmed user's role home — matching the same
- * role-based routing AuthCard uses after sign-in. An expired/invalid link
- * (Supabase reports this via `error_code`/`error_description` query params
- * rather than a `code`) shows a resend form instead of spinning forever.
+ * then redirects to the confirmed user's role home. A dead link (Supabase
+ * reports it via `error_code` query params rather than a `code`) shows a
+ * resend form instead of spinning forever.
  *
- * Restyled onto the mm-* auth system (was the product's generic
- * `@/components/ui` kit) to match /sign-in and /sign-up.
+ * Honesty rules: "confirmed" is shown only after the exchange succeeded; a
+ * resend says "sent" only after the server accepted it; provider error text
+ * is never shown.
  */
 export function EmailVerificationScreen() {
   const router = useRouter();
@@ -61,10 +77,11 @@ export function EmailVerificationScreen() {
 
   const [initial] = useState(() => computeInitialStage(searchParams, configured));
   const [stage, setStage] = useState<Stage>(initial.stage);
-  const [message, setMessage] = useState<string | null>(initial.message);
+  const [problem, setProblem] = useState<LinkProblem | null>(initial.problem);
+  const [destination, setDestination] = useState("/");
   const [email, setEmail] = useState(searchParams.get("email") ?? "");
   const [resending, setResending] = useState(false);
-  const [resendFeedback, setResendFeedback] = useState<string | null>(null);
+  const [resend, setResend] = useState<{ ok: boolean; text: string } | null>(null);
 
   useEffect(() => {
     if (initial.stage !== "verifying") return;
@@ -76,14 +93,21 @@ export function EmailVerificationScreen() {
       if (!active) return;
       if (!result.ok) {
         setStage("error");
-        setMessage(result.message ?? "Could not verify your email.");
+        setProblem(
+          result.failure === "network" || result.failure === "unavailable"
+            ? "unavailable"
+            : /expired/i.test(result.message ?? "")
+              ? "expired"
+              : "invalid",
+        );
         return;
       }
+      const next = roleHomePath(result.role);
+      setDestination(next);
       setStage("success");
-      const destination = roleHomePath(result.role);
       setTimeout(() => {
         if (!active) return;
-        router.push(destination);
+        router.push(next);
         router.refresh();
       }, 1200);
     });
@@ -98,13 +122,28 @@ export function EmailVerificationScreen() {
     event.preventDefault();
     if (resending || email.trim().length === 0) return;
     setResending(true);
-    setResendFeedback(null);
-    const result = await resendConfirmationEmail(email.trim());
-    setResendFeedback(
-      result.message ?? (result.ok ? "Confirmation email resent." : "Could not resend the email."),
+    setResend(null);
+    let result: Awaited<ReturnType<typeof resendConfirmationEmail>>;
+    try {
+      result = await resendConfirmationEmail(email.trim());
+    } catch {
+      result = { ok: false, message: "We couldn’t reach MindMosaic. Check your connection and try again." };
+    }
+    setResend(
+      result.ok
+        ? {
+            ok: true,
+            text: `A new link is on its way. Check ${email.trim()}.`,
+          }
+        : {
+            ok: false,
+            text: `${result.message ?? "We couldn’t send a new link just now."} If it keeps happening, email hello@mindmosaic.app.`,
+          },
     );
     setResending(false);
   }
+
+  const copy = problem ? PROBLEM_COPY[problem] : null;
 
   return (
     <main
@@ -116,9 +155,9 @@ export function EmailVerificationScreen() {
           <>
             <Loader2 aria-hidden="true" className="mx-auto h-10 w-10 animate-spin text-mm-brand" />
             <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
-              Verifying your email…
+              Confirming your email…
             </h1>
-            <p className="mt-2 text-sm text-mm-muted">This only takes a moment.</p>
+            <p role="status" className="mt-2 text-sm text-mm-muted">This only takes a moment.</p>
           </>
         )}
 
@@ -126,50 +165,66 @@ export function EmailVerificationScreen() {
           <>
             <CheckCircle2 aria-hidden="true" className="mx-auto h-10 w-10 text-[#0B6B63]" />
             <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
-              Email confirmed!
+              Email confirmed
             </h1>
             <p role="status" className="mt-2 text-sm text-mm-muted">
-              Taking you to your dashboard…
+              Taking you to your account…
             </p>
+            <Link
+              href={destination}
+              className={mmAuthButton({ className: "mt-6 w-full" })}
+            >
+              Continue
+            </Link>
           </>
         )}
 
-        {stage === "error" && (
+        {stage === "error" && copy && (
           <>
             <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-mm-coral-deep" />
             <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
-              Link expired or invalid
+              {copy.title}
             </h1>
-            <MmErrorPanel>{message}</MmErrorPanel>
+            <MmErrorPanel>{copy.body}</MmErrorPanel>
 
-            <form onSubmit={handleResend} className="mt-6 grid gap-4 text-left">
-              <MmField
-                id="verify-resend-email"
-                label="Email address"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(event) => setEmail(event.currentTarget.value)}
-              />
-              <button
-                type="submit"
-                disabled={resending || email.trim().length === 0}
-                className={mmAuthButton({
-                  disabled: resending || email.trim().length === 0,
-                  className: "w-full",
-                })}
-              >
-                {resending && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
-                Resend verification email
-              </button>
-            </form>
+            {problem !== "unconfigured" && problem !== "unavailable" && (
+              <form onSubmit={handleResend} className="mt-6 grid gap-4 text-left">
+                <MmField
+                  id="verify-resend-email"
+                  label="Email address"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  autoCapitalize="none"
+                  spellCheck={false}
+                  value={email}
+                  onChange={(event) => setEmail(event.currentTarget.value)}
+                />
+                <button
+                  type="submit"
+                  disabled={resending || email.trim().length === 0}
+                  className={mmAuthButton({
+                    disabled: resending || email.trim().length === 0,
+                    className: "w-full",
+                  })}
+                >
+                  {resending && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
+                  Send a new link
+                </button>
+              </form>
+            )}
 
-            {resendFeedback && (
+            {resend && (
               <p
-                role="status"
-                className="mm-rise-fast mt-4 rounded-xl bg-mm-tint px-4 py-3 text-sm font-semibold text-mm-brand"
+                role={resend.ok ? "status" : "alert"}
+                className={twMerge(
+                  "mm-rise-fast mt-4 rounded-xl px-4 py-3 text-sm font-semibold",
+                  resend.ok
+                    ? "bg-mm-tint text-mm-brand"
+                    : "border border-mm-alert-line bg-mm-alert text-mm-coral-deep",
+                )}
               >
-                {resendFeedback}
+                {resend.text}
               </p>
             )}
 
@@ -180,7 +235,7 @@ export function EmailVerificationScreen() {
                 mmFocus,
               )}
             >
-              ← Back to sign in
+              Sign in
             </Link>
           </>
         )}
