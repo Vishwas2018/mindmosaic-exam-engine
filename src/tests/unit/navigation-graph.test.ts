@@ -136,8 +136,8 @@ describe("navigation graph", () => {
   const SHELLS = [
     "AppHeader",
     "StudentShell",
-    /* The dashboard-family sidebar shell (Dashboard, Learning Hub, Exam
-       Centre, My Progress) — StudentSidebar's five real nav destinations,
+    /* The dashboard-family sidebar shell (My Space, Learning Hub, Practice
+       Studio, Exam Centre, My Results) — StudentSidebar's five real nav destinations,
        not just the marketing site. */
     "StudentPortalShell",
     "ParentShell",
