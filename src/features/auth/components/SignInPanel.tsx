@@ -197,6 +197,14 @@ export function SignInPanel({
       return;
     }
 
+    /* Caught before anything is sent, and says what good looks like. It is a
+       format check only: it cannot say whether the address has an account. */
+    if (kind === "parent" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(ident.trim())) {
+      setError("That doesn’t look like a complete email address, like name@example.com.");
+      shake.trigger();
+      return;
+    }
+
     setSubmitting(true);
     setError(null);
     setNotice(null);

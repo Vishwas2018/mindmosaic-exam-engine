@@ -296,3 +296,23 @@ describe("a banned account never claims anything about what is kept", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(/didn.t match/i);
   });
 });
+
+describe("validation before anything is sent", () => {
+  it("rejects an incomplete email in the field and does not call the server", async () => {
+    const user = userEvent.setup();
+    render(
+      <AuthProvider>
+        <SignInPanel />
+      </AuthProvider>,
+    );
+    await user.type(screen.getByLabelText(/email address/i), "jamie@example");
+    await user.type(screen.getByLabelText("Password"), "whatever1!");
+    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent(/doesn.t look like a complete email address/i);
+    expect(screen.getByLabelText(/email address/i)).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByLabelText(/email address/i)).toHaveAttribute("aria-describedby", "auth-error");
+    expect(signInWithPassword).not.toHaveBeenCalled();
+  });
+});
