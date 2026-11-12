@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthMosaicPanel } from "@/features/auth/components/AuthMosaicPanel";
-import { mmFocus } from "@/features/auth/components/auth-fields";
+import { mmFocus } from "@/features/auth/components/auth-styles";
 import { PUBLIC_SIGNUP_ENABLED } from "@/features/auth/signup-policy";
 
 export const metadata: Metadata = {

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthMosaicPanel } from "@/features/auth/components/AuthMosaicPanel";
-import { mmAuthButton, mmFocus } from "@/features/auth/components/auth-fields";
+import { mmAuthButton, mmFocus } from "@/features/auth/components/auth-styles";
 import { twMerge } from "tailwind-merge";
 
 export const metadata: Metadata = {

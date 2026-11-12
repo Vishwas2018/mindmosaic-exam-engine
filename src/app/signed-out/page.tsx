@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
-import { mmAuthButton, mmFocus } from "@/features/auth/components/auth-fields";
+import { mmAuthButton, mmFocus } from "@/features/auth/components/auth-styles";
 
 export const metadata: Metadata = {
   title: "Signed out",
