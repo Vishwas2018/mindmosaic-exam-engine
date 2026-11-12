@@ -19,12 +19,12 @@ export function MyProgressInsightCard({ recommendedFocus }: { recommendedFocus: 
       </div>
       <div>
         <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
-          Focus recommendation
+          Worth practising
         </h3>
         <p className="mt-1 text-sm leading-relaxed text-mm-muted">
-          {recommendedFocus.label} is your lowest-scoring subject so far ({recommendedFocus.percent}%
-          , {recommendedFocus.marksEarned} of {recommendedFocus.marksAvailable} marks). Practising
-          here will move your overall readiness the most.
+          {recommendedFocus.label} has your lowest marks so far: {recommendedFocus.marksEarned} of{" "}
+          {recommendedFocus.marksAvailable} marks across {recommendedFocus.sets} sets. That is a
+          reason to try some more questions here, not a prediction of anything.
         </p>
       </div>
     </section>

@@ -8,7 +8,10 @@ function MasteryBar({ subject }: { subject: SubjectMastery }) {
     <div className="grid gap-1.5">
       <div className="flex justify-between text-sm">
         <span className="font-semibold text-mm-ink">{subject.label}</span>
-        <span className="text-mm-muted">{subject.percent}%</span>
+        <span className="text-mm-muted">
+          {subject.marksEarned} of {subject.marksAvailable} marks
+          {!subject.sufficientEvidence && " · too few sets to read much into"}
+        </span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-mm-line-soft">
         <div
@@ -52,7 +55,7 @@ export function MyProgressMasteryBoard({ mastery }: { mastery: readonly SubjectM
     return (
       <section className="rounded-2xl border border-dashed border-mm-line bg-white px-6 py-10 text-center">
         <p className="text-sm text-mm-muted">
-          Nothing measured yet. Mastery fills in from objective marks across every finished
+          Nothing measured yet. Marks fill in from objective marks across every finished
           session.
         </p>
       </section>

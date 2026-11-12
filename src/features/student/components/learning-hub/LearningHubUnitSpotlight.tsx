@@ -43,16 +43,8 @@ export function LearningHubUnitSpotlight({
               {node.learningIntention || "Master core concepts with step-by-step worked examples and checkpoint questions."}
             </p>
           </div>
-          {/* Placeholder — no per-lesson completion tracking exists (see CurriculumPathwaysPanel doc comment). */}
-          <div className="flex flex-col gap-1.5 pt-1">
-            <div className="flex items-center justify-between text-xs font-medium text-mm-muted">
-              <span className="font-semibold text-mm-ink">Mastery progress (3 of 5 topics completed)</span>
-              <span className="font-semibold text-primary">65%</span>
-            </div>
-            <div className="h-2 overflow-hidden rounded-full bg-mm-line-soft">
-              <div className="h-full w-[65%] rounded-full bg-primary" />
-            </div>
-          </div>
+          {/* No per-lesson completion is tracked, so no progress is shown: an invented "3 of 5
+              topics, 65%" was removed. Lessons are not marked. */}
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <Link
               href={`/student/learn/lessons/${node.curriculumCode}`}
