@@ -46,6 +46,34 @@ Rollback: step 1 is additive and may stay; step 4 is reversed by one `grant exec
 `rls` job on `d7914c21`: pass. It applies every migration in the repository, including both of the above, and runs
 `tests/rls/exam-write-lockdown.test.ts`.
 
+## Read-only probe of hosted DEV, 2026-11-13
+
+The owner authorised applying DEV migrations. No migration was applied, because no credential on this machine can:
+
+| Credential tried | Result |
+|------------------|--------|
+| `SUPABASE_ACCESS_TOKEN` in `.env.e2e.local` | Management API returns 401 |
+| Supabase CLI session | Logged in to a different account; it lists three unrelated projects and neither MindMosaic project |
+| `SCORING_DB_URL` (role `mindmosaic_scoring`) | Connects to DEV. Cannot create roles, grant, or run DDL |
+| Service-role key in `.env.local` | REST only; cannot run DDL |
+| Vercel connector / CLI | Connector lacks access to the `vishwas2018s-projects` scope; CLI not linked |
+
+What the probe did establish (project ref checked as `mfglzabnayacssgertat` before every call):
+
+- `POST /rest/v1/rpc/create_exam_session_for` returns `42501 permission denied for function`, not "function not
+  found". So **`20261031090000` is already applied on DEV**: the function exists and clients cannot execute it.
+- `npm run migrations:status` with the scoring role reports `20261031090100` as **not applied**: an overload of the
+  legacy `create_exam_session` / `record_exam_attempt` is still executable by a client role. That is the correct
+  state before the app is deployed.
+- The same run lists 24 migrations as "not applied". Most of those checks read tables the scoring role cannot
+  select, so that figure is not evidence of anything. Re-run with an owner connection before believing it.
+
+Still unknown: whether `EXAM_WRITE_DB_URL` exists in the Vercel Preview environment, and whether the writer role
+has a password.
+
+To let the agent finish the sequence, any one of: `supabase login` with the MindMosaic account in this shell; a DEV
+owner connection string exported as `SUPABASE_DB_URL` for the session; or do steps 3–5 of the runbook by hand.
+
 ## Not verified
 
 - Current migration state of hosted DEV.
