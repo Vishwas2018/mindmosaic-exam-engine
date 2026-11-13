@@ -7,9 +7,8 @@ Last updated 2026-11-13. No background process is running; nothing continues by 
 - Worktree `C:/tmp/wt-beta-rc`, branch `integration/beta-consolidation`, draft PR #123 into `dev`. Supersedes #119.
 - CI on `dc144775`: all five checks green. core 7,271 unit tests; e2e 386 passed, 1 flaky
   (`a11y-auth-pages.spec.ts:40`, a known flake); e2e-auth 84 passed, **9 skipped**; rls and scholarship-drafts pass.
-- Those 9 skips were every test that reads an email. `0670902e` switched them on (`E2E_MAILPIT_URL`,
-  `E2E_TOKEN_HASH_TEMPLATES`). First run: 88 passed, 5 failed. `cdfede1c` fixes those five. **Read its CI result
-  before trusting the email-confirmation and recovery paths.**
+- Those 9 skips were every test that reads an email. They now run. CI on `cdfede1c`: all five checks green;
+  e2e-auth 92 passed, 0 skipped, 1 flaky (D-018, two `start-exam` buttons, passed on retry).
 - Hosted DEV: `20261031090000` applied, `20261031090100` not. No migration was applied by the agent; no credential
   on the machine can. See DATABASE-READINESS.md.
 

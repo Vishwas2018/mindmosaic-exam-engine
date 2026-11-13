@@ -23,6 +23,15 @@ family, P2 should be fixed before a wider beta, P3 cosmetic.
 | D-016 | P1 | All 78 pinned family-beta items are `published` with no `approvedBy` (carried from the WP1 audit, not re-verified this session) | BLOCKED on a human | Owner review; no agent may sign |
 | D-017 | P1 | Hosted DEV has neither the exam-writer migrations nor `EXAM_WRITE_DB_URL` (carried from WP1 audit; `SUPABASE_ACCESS_TOKEN` returned 401 then, not re-tested) | BLOCKED on owner | DATABASE-READINESS.md |
 
+## D-018 (P1, OPEN): two `start-exam` buttons on `/practice/[program]` for a signed-in student
+
+Seen on `cdfede1c` in `e2e-auth`: `getByTestId('start-exam')` resolved to two buttons, one enabled and one disabled
+(the pre-hydration state). The test passed on retry, so the job was green with 1 flaky. This is the defect first
+reported on PR #95 and it predates this branch. It is not masked. `ExamConfigurator` declares the test id once, so
+two copies of the component are live at that moment. Artifacts upload only when the job fails; to capture this one,
+run the spec with retries off (`--retries=0`) so the first occurrence fails the job and uploads `error-context.md`.
+A child tapping the disabled copy would see a button that does nothing, which is why it stays P1.
+
 ## Notes on D-009
 
 What is known: the element appears twice with identical attributes; "Login code" on the same page resolved to one
