@@ -1,0 +1,307 @@
+{
+  "draftOnly": true,
+  "authoringNote": "New fictional passage and questions authored as AI drafts. No independent review, approval, taxonomy alignment or publication claimed.",
+  "questions": [
+    {
+      "id": "roadmap-naplan-y5-reading-06-q1",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Where was the final part of the story displayed?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "At the first window"
+        },
+        {
+          "id": "b",
+          "text": "At the library"
+        },
+        {
+          "id": "c",
+          "text": "At the bakery"
+        },
+        {
+          "id": "d",
+          "text": "At each shop"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The opening paragraph states that the story had its ending at the library. The reader must locate this detail and distinguish the final location from other places along the trail.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "easy",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-06-q2",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why might visitors have been able to follow the turns but still been unsure where the story finished?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The map showed the turns but did not name the stops."
+        },
+        {
+          "id": "b",
+          "text": "The bakery page was placed high to keep hands away."
+        },
+        {
+          "id": "c",
+          "text": "Several visitors had already reached the library."
+        },
+        {
+          "id": "d",
+          "text": "Leila walked the trail before the festival opened."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The first paragraph explains that the map showed turns without naming stops, while the third paragraph describes visitors asking where the story finished. The reader must connect these separated details to recognise the difference between following a route and identifying its destination.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-06-q3",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why could adding the same note at each shop be more helpful than changing only the first map?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "The baker had placed her page high to protect the paper."
+        },
+        {
+          "id": "b",
+          "text": "The first map already showed the turns along the trail."
+        },
+        {
+          "id": "c",
+          "text": "The story parts were in different windows, but the first map was at only one window."
+        },
+        {
+          "id": "d",
+          "text": "The streets were quieter when Leila received feedback."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The opening paragraph places the story across different shop windows but identifies only the first window as having the map. The reader must connect this arrangement with Leila's later decision to add notes at every shop and recognise that the information would then be available at more points along the trail.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-06-q4",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why did Leila most likely lower the bakery page even though it had been placed high for a reason?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To keep passing hands farther away from the paper"
+        },
+        {
+          "id": "b",
+          "text": "To show visitors that the library was the final stop"
+        },
+        {
+          "id": "c",
+          "text": "To make the turns on the route map easier to follow"
+        },
+        {
+          "id": "d",
+          "text": "To make the page easier for her grandfather to read"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "d"
+      },
+      "explanation": "Her grandfather pauses and looks up at the page above his eyes, after which Leila lowers it and checks whether the words can be read. The reader must infer Leila's concern from her response to his behaviour, rather than from an explicitly stated motive.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-06-q5",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why might Leila have decided to keep both versions of the map?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To record the position of the bakery page before and after it was lowered"
+        },
+        {
+          "id": "b",
+          "text": "To compare how many visitors reached the library before and after lunchtime"
+        },
+        {
+          "id": "c",
+          "text": "To keep a record of how she changed the map after visitors asked about the ending"
+        },
+        {
+          "id": "d",
+          "text": "To compare how quiet the streets were at different times during the festival"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "c"
+      },
+      "explanation": "The passage describes the first map without stop names, the replacement naming the library, and Leila keeping both versions. The reader must infer that retaining the maps preserves evidence of her revision; neither version records page height, visitor numbers or street noise.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "medium",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-06-q6",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Which conclusion about the new directions is most strongly supported by the evidence Leila collected?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "One visitor reported that the trail was easier, but this did not establish whether the changes helped other visitors."
+        },
+        {
+          "id": "b",
+          "text": "The new directions made the festival streets quieter."
+        },
+        {
+          "id": "c",
+          "text": "The new directions ensured that every visitor reached the library."
+        },
+        {
+          "id": "d",
+          "text": "The original map prevented visitors from reaching the library before lunchtime."
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "a"
+      },
+      "explanation": "The final paragraph provides one positive comment but also notes that the streets were quieter and Leila had heard from only one visitor. The reader must weigh this limited feedback against the earlier evidence that some visitors had already reached the library, and avoid claiming that the changes solved the problem for everyone.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    },
+    {
+      "id": "roadmap-naplan-y5-reading-06-q7",
+      "type": "reading_comprehension",
+      "yearLevel": 5,
+      "examStyle": "naplan_style",
+      "prompt": "Why does the writer include the baker's reason for placing her page high?",
+      "stimulus": {
+        "title": "The Story Trail",
+        "body": "At a spring festival in a Victorian town, Leila helped set up a story trail. Each part appeared in a different shop window, with the ending at the library. The baker had fixed her page high to keep passing hands off the paper. Leila drew a route map for the first window. It had arrows showing the turns, but she left off the names of the stops.\n\nBefore the festival opened, Leila walked the trail with her grandfather. He paused at the bakery, looking up at the page above his eyes. Leila moved it lower, then stepped back to check whether the words could be read.\n\nBy lunchtime, several visitors had reached the library. Others returned to the first window to ask where the story finished. Leila replaced the map with a new one that named 'Library' beside the last arrow. She asked each shop to add the same note near its page.\n\nLater, one visitor said the trail was easier to follow. Leila kept both maps, but did not write 'problem solved' on her report. By then the streets were quieter, and she had heard from only one visitor."
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": "To explain why Leila needed to replace the route map"
+        },
+        {
+          "id": "b",
+          "text": "To show that making the page easier to read involved reconsidering a way of protecting it"
+        },
+        {
+          "id": "c",
+          "text": "To explain why some visitors returned to the first window"
+        },
+        {
+          "id": "d",
+          "text": "To explain why Leila could not confirm that the new directions had helped other visitors"
+        }
+      ],
+      "visuals": [],
+      "answerKey": {
+        "kind": "single_option",
+        "optionId": "b"
+      },
+      "explanation": "The baker's reason establishes a benefit of the higher position, while the grandfather's difficulty and Leila's response reveal a competing need. The reader must recognise that the writer includes both perspectives to show a genuine trade-off, rather than simply presenting the original placement as a mistake.",
+      "metadata": {
+        "subject": "reading",
+        "strand": "Interpreting",
+        "difficulty": "challenging",
+        "marks": 1,
+        "estimatedTimeSeconds": 95,
+        "tags": []
+      }
+    }
+  ]
+}
