@@ -10,11 +10,12 @@ import {
   SubjectHubHeader,
   WorthRevisitingPanel,
 } from "@/features/curriculum/lessons/components";
-import { StudentShell } from "@/features/student/components/StudentShell";
+import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
+import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { fetchStudentOverview } from "@/features/student/data";
 import { requireStudent } from "@/features/student/require-student";
 
-export const metadata: Metadata = { title: "English" };
+export const metadata: Metadata = { title: "English | Learning Hub" };
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +25,7 @@ const ENGLISH_SUBJECT_KEYS = new Set(["reading", "language_conventions", "langua
 export default async function EnglishSubjectPage() {
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
+  const shellData = await fetchStudentPortalShellData(student);
 
   const yearPathways = getCurriculumPathwaysForYearLevel(student.yearLevel);
   const learningAreas = groupPathwaysByLearningArea(yearPathways);
@@ -38,23 +40,30 @@ export default async function EnglishSubjectPage() {
     .slice(0, 3);
 
   return (
-    <StudentShell active="learn">
-      <SubjectHubHeader
-        subjectName="English"
-        tagline="Reading, writing, grammar, vocabulary and literature."
-        lessonCount={lessonCount}
-        strandCount={strandCount}
-        accent="teal"
-        icon={BookOpen}
-      />
+    <StudentPortalShell
+      active="learn"
+      breadcrumbLabel="English"
+      student={student}
+      shellData={shellData}
+    >
+      <div className="space-y-8">
+        <SubjectHubHeader
+          subjectName="English"
+          tagline="Reading, writing, grammar, vocabulary and literature."
+          lessonCount={lessonCount}
+          strandCount={strandCount}
+          accent="teal"
+          icon={BookOpen}
+        />
 
-      <WorthRevisitingPanel
-        revisit={revisit}
-        yearLevel={student.yearLevel}
-        learningAreaFilter="English"
-      />
+        <WorthRevisitingPanel
+          revisit={revisit}
+          yearLevel={student.yearLevel}
+          learningAreaFilter="English"
+        />
 
-      <CurriculumPathwaysPanel yearLevel={student.yearLevel} learningAreas={englishArea ? [englishArea] : []} />
-    </StudentShell>
+        <CurriculumPathwaysPanel yearLevel={student.yearLevel} learningAreas={englishArea ? [englishArea] : []} />
+      </div>
+    </StudentPortalShell>
   );
 }

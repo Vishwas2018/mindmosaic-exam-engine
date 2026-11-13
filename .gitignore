@@ -48,6 +48,9 @@ next-env.d.ts
 
 # local agent / assistant tooling (worktrees, session state) — never project source
 /.claude/
+/docs/extracted-screens/
+/docs/clean-screens/
+/docs/NewUIScreens/
 /.agents/
 /.agent/
 /.codex/
@@ -70,6 +73,7 @@ __pycache__/
 
 # generated test output & debug screenshots — never commit
 /docs/overnight/screenshots/
+/docs/audits/screenshots/
 
 # local scratch & cleanup staging — never project source
 /_to_delete/

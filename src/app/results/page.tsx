@@ -193,12 +193,12 @@ export default function ResultsPage() {
   const resetExam = useExamStore((state) => state.resetExam);
 
   /*
-   * The design's three-way review filter (screen 10, view 4). It replaces
-   * the previous boolean "flagged only" toggle: "Incorrect only" is the
-   * filter a student actually reaches for after a paper, and a toggle
-   * cannot express three states.
+   * Question review filters matching 01_standalone_review.html ("Review every question").
+   * Supports: All, Wrong (incorrect), Not answered (unanswered), Flagged, Not yet marked.
    */
-  const [reviewFilter, setReviewFilter] = useState<"all" | "incorrect" | "flagged">("all");
+  const [reviewFilter, setReviewFilter] = useState<
+    "all" | "incorrect" | "unanswered" | "flagged" | "manual_review"
+  >("all");
 
   /*
    * Cold load: the in-memory store holds only the attempt just submitted,
@@ -264,18 +264,36 @@ export default function ResultsPage() {
       .filter((detail) => detail.status === "incorrect")
       .map((detail) => detail.questionId),
   );
+  const unansweredIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "unanswered")
+      .map((detail) => detail.questionId),
+  );
+  const manualReviewIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "manual_review" || detail.pendingManualReview)
+      .map((detail) => detail.questionId),
+  );
 
   const reviewQuestions =
     reviewFilter === "flagged"
       ? questions.filter((question) => flaggedQuestionIds.includes(question.id))
       : reviewFilter === "incorrect"
         ? questions.filter((question) => incorrectIds.has(question.id))
-        : questions;
+        : reviewFilter === "unanswered"
+          ? questions.filter((question) => unansweredIds.has(question.id))
+          : reviewFilter === "manual_review"
+            ? questions.filter((question) => manualReviewIds.has(question.id))
+            : questions;
 
   const reviewFilters = [
     { id: "all" as const, label: "All", count: questions.length },
-    { id: "incorrect" as const, label: "Incorrect only", count: incorrectIds.size },
+    { id: "incorrect" as const, label: "Wrong", count: incorrectIds.size },
+    { id: "unanswered" as const, label: "Not answered", count: unansweredIds.size },
     { id: "flagged" as const, label: "Flagged", count: flaggedQuestionIds.length },
+    ...(manualReviewIds.size > 0
+      ? [{ id: "manual_review" as const, label: "Not yet marked", count: manualReviewIds.size }]
+      : []),
   ];
 
   /* By-skill bars, from the same breakdown the table below reads. */
@@ -642,7 +660,11 @@ export default function ResultsPage() {
               <p className="mt-6 rounded-xl bg-surface-container-low px-4 py-6 text-center text-sm font-semibold text-plum-muted">
                 {reviewFilter === "flagged"
                   ? "You did not flag any questions in this exam."
-                  : "Nothing was marked incorrect in this exam."}
+                  : reviewFilter === "unanswered"
+                    ? "Every question was answered."
+                    : reviewFilter === "manual_review"
+                      ? "No questions are waiting for human marking."
+                      : "Nothing was marked incorrect in this exam."}
               </p>
             ) : (
               <ol className="mt-7 space-y-6">

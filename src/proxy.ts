@@ -16,9 +16,8 @@ export async function proxy(request: NextRequest) {
 
   const response = await updateSession(request, requestHeaders);
 
-  // Report-only until real-traffic verification confirms the allowlist is
-  // complete; switch this header name to "Content-Security-Policy" to enforce.
-  response.headers.set("Content-Security-Policy-Report-Only", csp);
+  // Enforce Content-Security-Policy on all proxied requests
+  response.headers.set("Content-Security-Policy", csp);
 
   return response;
 }

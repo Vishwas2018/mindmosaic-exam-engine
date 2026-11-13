@@ -54,7 +54,7 @@ import { SignInPanel } from "@/features/auth/components/SignInPanel";
  * — the login code is normalised and expanded into an internal alias email
  * that is never shown to anyone, and the PIN is the password.
  */
-function renderPanel(props?: { defaultKind?: "parent" | "student" }) {
+function renderPanel(props?: { defaultKind?: "parent" | "student"; defaultEntry?: "signin" | "forgot" | "choose" | "student-help" }) {
   return render(
     <AuthProvider>
       <SignInPanel {...props} />
@@ -283,5 +283,46 @@ describe("SignInPanel — keep me signed in", () => {
       expect(window.localStorage.getItem("mm.auth.ephemeral")).toBe("1"),
     );
     expect(window.sessionStorage.getItem("mm.auth.ephemeral")).toBe("1");
+  });
+});
+
+describe("SignInPanel — role chooser and student helper", () => {
+  it("can switch to the 'Who is signing in?' chooser and pick a role", async () => {
+    const user = userEvent.setup();
+    renderPanel();
+
+    await user.click(screen.getByRole("button", { name: /who is signing in/i }));
+    expect(screen.getByRole("heading", { name: /welcome to mindmosaic/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a parent/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a student/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /i'm a student/i }));
+    expect(screen.getByLabelText(/login code/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Your PIN, number 1 of 6/)).toBeInTheDocument();
+  });
+
+  it("offers the 'Can't sign in?' helper for students and can return to sign-in", async () => {
+    const user = userEvent.setup();
+    renderPanel({ defaultKind: "student" });
+
+    const helpBtn = screen.getByRole("button", { name: /can't sign in\?/i });
+    expect(helpBtn).toBeInTheDocument();
+    await user.click(helpBtn);
+
+    expect(screen.getByRole("heading", { name: /can't sign in\?/i })).toBeInTheDocument();
+    expect(screen.getByText(/what's my login code\?/i)).toBeInTheDocument();
+    expect(screen.getByText(/can you reset my pin\?/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /back to sign-in/i }));
+    expect(screen.getByLabelText(/login code/i)).toBeInTheDocument();
+  });
+
+  it("opens on the 'Who is signing in?' chooser when defaultEntry=choose", () => {
+    renderPanel({ defaultEntry: "choose" });
+    expect(screen.getByRole("heading", { name: /welcome to mindmosaic/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a parent/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a student/i })).toBeInTheDocument();
+    expect(screen.queryByLabelText(/email address/i)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/login code/i)).not.toBeInTheDocument();
   });
 });

@@ -1,0 +1,81 @@
+[
+  {
+    "left": 94,
+    "right": 114,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [
+      "src/features/auth/AuthProvider.tsx"
+    ],
+    "textConflicts": true
+  },
+  {
+    "left": 94,
+    "right": 109,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [],
+    "textConflicts": false
+  },
+  {
+    "left": 109,
+    "right": 114,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [],
+    "textConflicts": false
+  },
+  {
+    "left": 108,
+    "right": 114,
+    "base": "bdf0a752c5515e01ee82ed15de7b59a6916091a9",
+    "overlap": [
+      "src/app/parent/account/page.tsx",
+      "src/app/parent/children/[childId]/curriculum/page.tsx",
+      "src/app/parent/children/[childId]/page.tsx",
+      "src/app/parent/children/[childId]/progress/page.tsx",
+      "src/app/parent/children/[childId]/writing/page.tsx",
+      "src/app/parent/children/page.tsx",
+      "src/app/parent/page.tsx",
+      "src/features/parent-dashboard/fixtures.ts",
+      "src/features/parent-dashboard/index.ts",
+      "src/features/parent-dashboard/preview-mode.ts",
+      "src/tests/unit/parent-preview-mode.test.ts"
+    ],
+    "textConflicts": true
+  },
+  {
+    "left": 110,
+    "right": 94,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [],
+    "textConflicts": false
+  },
+  {
+    "left": 111,
+    "right": 109,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [],
+    "textConflicts": false
+  },
+  {
+    "left": 111,
+    "right": 114,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [],
+    "textConflicts": false
+  },
+  {
+    "left": 55,
+    "right": 111,
+    "base": "46c055316f52b9da1fd743336848966575553aae",
+    "overlap": [
+      "playwright.config.ts"
+    ],
+    "textConflicts": false
+  },
+  {
+    "left": 91,
+    "right": 109,
+    "base": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+    "overlap": [],
+    "textConflicts": false
+  }
+]

@@ -6,9 +6,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle2, Loader2, MailWarning } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-import { useAuth } from "../AuthProvider";
+import { useAuth, type EmailConfirmResult } from "../AuthProvider";
+import { CROSS_DEVICE_MESSAGE, readLinkCredentials, stripLinkCredentials } from "../link-errors";
 import { roleHomePath } from "../roles";
 import { MmErrorPanel, MmField, mmAuthButton, mmFocus } from "./auth-fields";
+import { useFocusOnShow } from "./use-focus-on-show";
 
 type Stage = "verifying" | "success" | "error";
 /**
@@ -17,7 +19,7 @@ type Stage = "verifying" | "success" | "error";
  * apart, and the screen does not pretend to. Neither echoes the provider's
  * own wording.
  */
-type LinkProblem = "expired" | "invalid" | "unconfigured" | "unavailable";
+type LinkProblem = "expired" | "invalid" | "other_device" | "unconfigured" | "unavailable";
 
 const PROBLEM_COPY: Record<LinkProblem, { title: string; body: string }> = {
   expired: {
@@ -27,6 +29,10 @@ const PROBLEM_COPY: Record<LinkProblem, { title: string; body: string }> = {
   invalid: {
     title: "This link can’t be used",
     body: "This link is invalid or has already been used. If you have already confirmed, just sign in.",
+  },
+  other_device: {
+    title: "Open this link on the same device",
+    body: CROSS_DEVICE_MESSAGE,
   },
   unconfigured: {
     title: "Accounts aren’t connected",
@@ -49,15 +55,15 @@ function computeInitialStage(
   searchParams: URLSearchParams,
   configured: boolean,
 ): { stage: Stage; problem: LinkProblem | null } {
-  const code = searchParams.get("code");
   const errorCode = searchParams.get("error_code");
 
-  if (errorCode || !code) {
-    return { stage: "error", problem: errorCode === "otp_expired" ? "expired" : "invalid" };
-  }
+  if (errorCode) return { stage: "error", problem: errorCode === "otp_expired" ? "expired" : "invalid" };
   if (!configured) return { stage: "error", problem: "unconfigured" };
+  /* A link with no query credentials may still carry them in the fragment (implicit flow), which neither the server
+     nor the first render can see, so every other case verifies first and decides in the effect. */
   return { stage: "verifying", problem: null };
 }
+
 
 /**
  * Lands from the confirmation-email link (see AuthProvider.signUp's
@@ -73,7 +79,7 @@ function computeInitialStage(
 export function EmailVerificationScreen() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { confirmEmail, resendConfirmationEmail, configured } = useAuth();
+  const { confirmEmail, verifyEmailToken, adoptSessionTokens, resendConfirmationEmail, configured } = useAuth();
 
   const [initial] = useState(() => computeInitialStage(searchParams, configured));
   const [stage, setStage] = useState<Stage>(initial.stage);
@@ -82,26 +88,42 @@ export function EmailVerificationScreen() {
   const [email, setEmail] = useState(searchParams.get("email") ?? "");
   const [resending, setResending] = useState(false);
   const [resend, setResend] = useState<{ ok: boolean; text: string } | null>(null);
+  const headingRef = useFocusOnShow<HTMLHeadingElement>(stage === "error");
 
   useEffect(() => {
     if (initial.stage !== "verifying") return;
-    // Guaranteed present: computeInitialStage only returns "verifying" when a `code` param exists.
-    const code = searchParams.get("code")!;
+    const link = readLinkCredentials(searchParams, window.location.hash);
 
     let active = true;
-    confirmEmail(code).then((result) => {
+    const verify = async (): Promise<EmailConfirmResult> => {
+      if (link.errorCode) return { ok: false, message: link.errorCode === "otp_expired" ? "expired" : "invalid" };
+      /* token_hash first: it verifies on any device. A PKCE `code` only works in the browser that requested it. */
+      if (link.tokenHash && (link.type === "signup" || link.type === "email")) {
+        return verifyEmailToken(link.tokenHash, link.type);
+      }
+      if (link.code) return confirmEmail(link.code);
+      if (link.accessToken && link.refreshToken) {
+        return adoptSessionTokens(link.accessToken, link.refreshToken);
+      }
+      return { ok: false, message: "invalid" };
+    };
+    verify().then((result) => {
       if (!active) return;
       if (!result.ok) {
         setStage("error");
         setProblem(
           result.failure === "network" || result.failure === "unavailable"
             ? "unavailable"
-            : /expired/i.test(result.message ?? "")
-              ? "expired"
-              : "invalid",
+            : result.message === "other_device"
+              ? "other_device"
+              : result.message === "expired"
+                ? "expired"
+                : "invalid",
         );
         return;
       }
+      /* Single-use credentials do not belong in the address bar, history or a shared screenshot. */
+      stripLinkCredentials();
       const next = roleHomePath(result.role);
       setDestination(next);
       setStage("success");
@@ -182,7 +204,11 @@ export function EmailVerificationScreen() {
         {stage === "error" && copy && (
           <>
             <MailWarning aria-hidden="true" className="mx-auto h-10 w-10 text-mm-coral-deep" />
-            <h1 className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink">
+            <h1
+              ref={headingRef}
+              tabIndex={-1}
+              className="mt-5 text-2xl font-[700] tracking-[-0.03em] text-mm-ink outline-none"
+            >
               {copy.title}
             </h1>
             <MmErrorPanel>{copy.body}</MmErrorPanel>

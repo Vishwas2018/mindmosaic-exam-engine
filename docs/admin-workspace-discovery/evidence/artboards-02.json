@@ -1,0 +1,309 @@
+[
+  {
+    "title": "Mobile · Approval",
+    "testid": "mega-artboard-title-ApproveMobile.dc.html",
+    "bounds": "1520,6310,390,570",
+    "file": "ApproveMobile.dc.html",
+    "viewport": [
+      390,
+      844
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-1c9ed583075a",
+    "text": "Human approval\ng5-num-chart-001\nrev 4 · a3f9c1e\nYour decision\n\nMaya Chen signing off rev 4 · a3f9c1e.\n\nApprove\nRequest changes\nReject\nApprove rev 4\n\nRecords Maya Chen · a3f9c1e. Does not publish.",
+    "links": [
+      {
+        "text": "",
+        "href": "ReviewMobile.dc.html"
+      }
+    ],
+    "buttons": [
+      "Approve rev 4"
+    ]
+  },
+  {
+    "title": "States · Approval",
+    "testid": "mega-artboard-title-ApproveStates.dc.html",
+    "bounds": "1990,6310,1440,1690",
+    "file": "ApproveStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-cfb4ff6bc5f3",
+    "text": "HUMAN APPROVAL\n\nConfirmed, stale, already-edited, and not allowed\n\nApproval binds to one immutable revision. Everything here protects that binding: you can never approve a revision that has changed under you, and the record always names a person and a hash.\n\n1 · Confirmed\n\nThe record is a person plus a hash plus a time. Nothing vaguer is ever written.\n\nApproved.\nMaya Chen approved g5-num-chart-001 rev 4 (a3f9c1e) at 2:14 pm, 8 November 2026.\nNext in queue\nThis does not publish — go to Publication\n\nThe approval sits in the activity log and the publication-approvals record, keyed to the hash. It is not a publish.\n\n2 · Stale revision — the content changed under you\nBUILT ALREADY\n\nYou opened rev 4; while you were reading, the author saved rev 5. Approving now would bind your name to content you did not see. It is blocked.\n\nThis question changed while you were reviewing.\nYou were looking at rev 4 · a3f9c1e. It is now rev 5 · 7c2e40a. Approval is disabled until you review the current revision.\nLoad rev 5 and review\nApprove rev 4\n\nGrounded in the data model: findings and approvals carry the revision and matchesCurrentRevision. When it is false, the approve action is refused, not just warned about.\n\n3 · Someone else is approving it right now\n\nTwo reviewers on the same item. The second to act is told, rather than silently overwriting.\n\nPriya Raman is reviewing this now.\nThey opened it 3 minutes ago. You can still review it, but only one approval is recorded — if they approve first, you’ll be shown their decision before yours is written.\nPick another\nReview anyway\n\nNEEDS A BUILD a soft lock needs a “who has this open” signal. Without it the stale-revision check above is still the hard guarantee — a second approval of an unchanged revision is idempotent, and of a changed one is blocked.\n\n4 · Not allowed\n\nApproval is a permission. A reviewer who can read but not approve sees why, not a dead button.\n\nYou can view this, but not approve it.\nApproving for the Scholarship programme needs the senior-reviewer role. Ask an administrator, or hand this to someone who has it.\n\nRoles are student, parent, teacher and admin today. NEEDS A BUILD a reviewer / senior-reviewer split, and per-programme approval rights, are a build. The screen states the boundary rather than hiding the control.",
+    "links": [
+      {
+        "text": "Next in queue",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "This does not publish — go to Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Load rev 5 and review",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Pick another",
+        "href": "Library.dc.html"
+      }
+    ],
+    "buttons": [
+      "Approve rev 4",
+      "Review anyway"
+    ]
+  },
+  {
+    "title": "Paper review",
+    "testid": "mega-artboard-title-Paper.dc.html",
+    "bounds": "0,8700,1440,1240",
+    "file": "Paper.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-98de7db2eccd",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nPaper review\nStates\nYear 5 NAPLAN-style Numeracy — Form A\nrev 2 · e91c07d\n\nA fixed paper: a set order of questions a child sits as one timed sitting.\n\nAgent review\nAwaiting human approval\nQuestions\n\n30\n\nall human-approved: 18 of 30\n\nTotal marks\n\n35\n\nsum of per-question marks\n\nDuration\n\n45 min\n\npublished time limit\n\nNot all questions in this paper are human-approved.\n12 of 30 have only an agent pass. In enforce mode this paper could not be published until every question is approved.\n#\tQUESTION\tSTRAND\tMARKS\tSTATUS\t\n1\tg5-num-001\tNumber\t1\t\nHuman approval\tOpen\n2\tg5-num-chart-001\tStatistics\t1\t\nAgent review \nAwaiting human approval\tOpen\n3\tg5-num-nl-04\tMeasurement\t2\t\nHuman approval\tOpen\n4\tg5-num-012\tNumber\t1\t\nAgent review \nAwaiting human approval\tOpen\n5\tg5-num-geo-08\tSpace\t2\t\nHuman approval\tOpen\n… 25 more questions\nAvailability\nDistinct forms the bank supports\n2 of 3\nReadiness\nShort — 12 questions not approved\nCurrently served to children\nNo\n\nReadiness is a property of the bank, computed from approved content — never a count threshold alone.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "States",
+        "href": "PaperStates.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "States · Paper",
+    "testid": "mega-artboard-title-PaperStates.dc.html",
+    "bounds": "1520,8700,1440,700",
+    "file": "PaperStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-e02a609d5e55",
+    "text": "PAPER REVIEW\n\nShort, blocked and loading\n\nA paper is only as publishable as its least-ready question.\n\n1 · Short of approved content\nBUILT ALREADY\nThis paper can’t be published yet.\n12 of 30 questions have only an agent pass. In enforce mode a paper needs every question human-approved.\n\nReadiness is computed from approved content, not a raw count.\n\n2 · A question changed after the paper was assembled\nQuestion 2 has a newer revision.\nThe paper pins rev 4; the library now has rev 5. Decide whether the paper adopts it — it does not change on its own.",
+    "links": [],
+    "buttons": []
+  },
+  {
+    "title": "Publication",
+    "testid": "mega-artboard-title-Publish.dc.html",
+    "bounds": "0,10640,1440,930",
+    "file": "Publish.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-f399d204ce78",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nPublication\nStates\nThree separate things:\nAgent review\nautomated checks and the AI reviewer\nHuman approval\na named person signs off a revision\nPublished\nthe approved revision is live to children\nPublish g5-num-chart-001\nrev 4 · a3f9c1e\n\nPublication makes one approved revision live to children. These checks must all pass.\n\nSchema valid · passes\nHuman approved · Maya Chen signed rev 4 (a3f9c1e)\nApproval matches the current revision · nothing changed since sign-off\nMachine & originality checks · pass\nPublish this revision\nSee a blocked one\n\nPublishing serves a3f9c1e to children. A later edit creates a new revision that is not published until it is approved and published in turn.\n\nPublication history\ng5-icas-math-07 rev 3 published\nby Maya Chen · from approval 4b1e · yesterday 4:40 pm\ng3-read-011 rev 2 unpublished\nby Priya Raman · family report of an error · 2 days ago\n42 Year 3 Numeracy questions published\nbatch · from manifest m-0914 · last week\nProgramme gates\n\nWhat each programme actually enforces at publish.\n\nNAPLAN, ICAS\nReport\nScholarship, Edutest\nEnforce\nReport mode publishes and serves without requiring approval; enforce mode refuses to serve an un-approved revision. NEEDS SIGN-OFF which programmes enforce.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "States",
+        "href": "PublishStates.dc.html"
+      },
+      {
+        "text": "See a blocked one",
+        "href": "PublishStates.dc.html"
+      }
+    ],
+    "buttons": [
+      "Publish this revision"
+    ]
+  },
+  {
+    "title": "States · Publication",
+    "testid": "mega-artboard-title-PublishStates.dc.html",
+    "bounds": "1520,10640,1440,1190",
+    "file": "PublishStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-8d703c3e0272",
+    "text": "PUBLICATION\n\nBlocked, confirmed and unpublish\n\nEvery block names the single failing check. Publication and un-publication are both recorded.\n\n1 · Blocked — not approved\nBUILT ALREADY\n\nThe commonest block, and the one this whole workspace exists to make visible: an agent pass is not an approval.\n\nCan’t publish: no human approval.\nThis revision passed every automated check, but no person has signed it off. An automated check never supplies human sign-off.\nSchema valid\nMachine & originality checks pass\nHuman approval — missing\nSend for human approval\n2 · Blocked — approval is for an older revision\nBUILT ALREADY\nCan’t publish: the approval is stale.\nMaya Chen approved rev 3 · b1774d2, but the current revision is rev 4 · a3f9c1e. The newer revision needs its own approval.\n\nPublication checks the approval hash against the current revision hash. They must match.\n\n3 · Published, and unpublishing\n\nPublished\n\nPublished.\ng5-num-chart-001 rev 4 is live to Year 5 children. Recorded: Maya Chen, from approval a3f9c1e, now.\n\nUnpublish (destructive)\n\nTake this question out of service?\nChildren will stop seeing it immediately. Results already recorded are kept. This is logged against your name.\nUnpublish\nKeep it live",
+    "links": [
+      {
+        "text": "Send for human approval",
+        "href": "Approve.dc.html"
+      }
+    ],
+    "buttons": [
+      "Unpublish",
+      "Keep it live"
+    ]
+  },
+  {
+    "title": "Writing review",
+    "testid": "mega-artboard-title-Writing.dc.html",
+    "bounds": "0,12530,1440,840",
+    "file": "Writing.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-738a3ed678c5",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nWriting review\nStates\nA child’s written response\n\nYear 5 · persuasive writing · awaiting a human mark\n\n9 waiting\n\nThe task the child saw\n\nShould children be allowed to have mobile phones at school? Write to persuade your principal.\n\nWhat the child wrote\n\nI think children should be allowed phones at school because they keep us safe. If something goes wrong we can call our parents straight away… (full response shown to the marker)\n\nIdentifying details are not shown to the marker beyond the year level. NEEDS A BUILD marker-facing redaction is a build.\n\nRubric\nAudience & purpose — 0 to 3\nIdeas & persuasive devices — 0 to 4\nStructure — 0 to 3\nSpelling, punctuation & grammar — 0 to 2\nMarks (of 12)\nFeedback for the child\nConfirm mark & feedback\n\nThe child’s result shows “not yet marked” until you confirm. Confirming records you as the marker.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "States",
+        "href": "WritingStates.dc.html"
+      }
+    ],
+    "buttons": [
+      "Confirm mark & feedback"
+    ]
+  },
+  {
+    "title": "Mobile · Writing",
+    "testid": "mega-artboard-title-WritingMobile.dc.html",
+    "bounds": "1520,12530,390,800",
+    "file": "WritingMobile.dc.html",
+    "viewport": [
+      390,
+      844
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-f09f9c19a0d9",
+    "text": "Writing review\n\nThe task\n\nShould children be allowed phones at school? Write to persuade your principal.\n\nWhat the child wrote\n\nI think children should be allowed phones at school because they keep us safe…\n\nMark\nMarks (of 12)\nFeedback\nConfirm mark & feedback\n\nShows “not yet marked” until you confirm.",
+    "links": [
+      {
+        "text": "",
+        "href": "Overview.dc.html"
+      }
+    ],
+    "buttons": [
+      "Confirm mark & feedback"
+    ]
+  },
+  {
+    "title": "States · Writing",
+    "testid": "mega-artboard-title-WritingStates.dc.html",
+    "bounds": "1990,12530,1440,710",
+    "file": "WritingStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-350a7c9e27fe",
+    "text": "WRITING REVIEW\n\nNothing waiting, confirmed, and failed to save\n\nA mark is claimed only once the server has it; until then the child’s result reads “not yet marked”.\n\n1 · Confirmed\nMark confirmed.\n9 of 12. The child’s result now shows this, with your feedback, marked by Maya Chen.\n2 · Nothing waiting, and a failed save\n\nQueue empty\n\nNo responses to mark\n\nChildren’s written work appears here as it is submitted.\n\nSave failed\n\nWe couldn’t save that mark.\nYour marks and feedback are still here. The child still sees “not yet marked”. Try again.",
+    "links": [],
+    "buttons": []
+  }
+]
