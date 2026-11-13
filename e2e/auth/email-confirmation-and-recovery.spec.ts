@@ -153,7 +153,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await clearMailbox();
     await page.getByRole("button", { name: /send a new link/i }).click();
 
-    await expect(page.getByText(/confirmation email resent/i)).toBeVisible({ timeout: 8000 });
+    await expect(page.getByText(/a new link is on its way/i)).toBeVisible({ timeout: 8000 });
 
     // Verify fresh email arrived in Mailpit
     const resentEmail = await getLatestEmail(email);
@@ -216,7 +216,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // 5. Sign in with the NEW password
     await page.getByLabel(/email address/i).fill(email);
-    await page.getByLabel(/password/i).fill(newPassword);
+    await page.getByLabel("Password", { exact: true }).fill(newPassword);
     await page.getByRole("button", { name: /sign in to parent account/i }).click();
 
     // Successfully reaches parent dashboard
@@ -329,7 +329,9 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const fresh = await browser.newContext();
     const freshPage = await fresh.newPage();
     await freshPage.goto(resetEmail.link);
-    const heading = freshPage.getByRole("heading", { name: /this link can.t be used|open this link on the same device/i });
+    const heading = freshPage.getByRole("heading", {
+      name: /this reset link has expired or was already used|this link can.t be used|open this link on the same device/i,
+    });
     await expect(heading).toBeVisible({ timeout: 10000 });
     await expect(heading).toBeFocused();
     await expect(freshPage.getByLabel("New password", { exact: true })).not.toBeVisible();
@@ -378,7 +380,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await phonePage.waitForURL(/\/sign-in/, { timeout: 10000 });
 
     await phonePage.getByLabel(/email address/i).fill(email);
-    await phonePage.getByLabel(/password/i).fill(newPassword);
+    await phonePage.getByLabel("Password", { exact: true }).fill(newPassword);
     await phonePage.getByRole("button", { name: /sign in to parent account/i }).click();
     await expect(phonePage).toHaveURL(/\/parent/, { timeout: 15000 });
     await phone.close();

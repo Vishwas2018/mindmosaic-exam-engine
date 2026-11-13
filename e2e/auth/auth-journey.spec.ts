@@ -92,13 +92,14 @@ test.describe("Parent sign-in and sign-out", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    await page.goto("/sign-in");
+    // /sign-in opens on the "who is signing in?" chooser; ?entry=signin opens the form directly.
+    await page.goto("/sign-in?entry=signin");
     await expect(page.getByRole("tab", { name: /parent/i })).toHaveAttribute(
       "aria-selected",
       "true",
     );
     await page.getByLabel(/email address/i).fill("parent-no-children@e2e.mindmosaic.local");
-    await page.getByLabel(/password/i).fill(e2eEnv.fixturePassword);
+    await page.getByLabel("Password", { exact: true }).fill(e2eEnv.fixturePassword);
     await page.getByRole("button", { name: /sign in to parent account/i }).click();
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
 

@@ -34,8 +34,10 @@ type LinkProblem = "expired" | "used" | "other_device" | "no_link" | "not_recove
 
 const LINK_COPY: Record<LinkProblem, { title: string; body: string; action: string }> = {
   expired: {
-    title: "This reset link has expired",
-    body: "This password reset link has expired. Ask for a new one and we’ll send it.",
+    /* The auth server gives a lapsed link, a link that was already used and a made-up one the same `otp_expired`
+       code, so this copy covers all three rather than asserting one of them. */
+    title: "This reset link has expired or was already used",
+    body: "This password reset link has expired or was already used. Reset links work once, for one hour. Ask for a new one and we’ll send it.",
     action: "Start again",
   },
   used: {
@@ -234,7 +236,8 @@ export default function ResetPasswordPage() {
             {saved.otherDevicesSignedOut &&
               " We signed out your other devices, so they will ask for the new one."}
           </p>
-          <Link href="/sign-in" className={mmAuthButton({ className: "mt-6 w-full" })}>
+          {/* Only a parent resets a password, so this opens the parent form, not the "who is signing in?" chooser. */}
+          <Link href="/sign-in?entry=signin" className={mmAuthButton({ className: "mt-6 w-full" })}>
             Go to sign-in
           </Link>
         </div>

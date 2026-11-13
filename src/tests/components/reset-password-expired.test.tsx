@@ -164,7 +164,7 @@ describe("ResetPasswordPage — expired/invalid link handling", () => {
 
     expect(await screen.findByRole("heading", { name: /password changed/i })).toBeInTheDocument();
     expect(screen.getByText(/we signed out your other devices/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /go to sign-in/i })).toHaveAttribute("href", "/sign-in");
+    expect(screen.getByRole("link", { name: /go to sign-in/i })).toHaveAttribute("href", "/sign-in?entry=signin");
   });
 
   it("does not claim other devices were signed out when that step failed", async () => {
