@@ -122,6 +122,7 @@ describe("navigation graph", () => {
     "/switch-account",
     "/dev/routes",
     "/dev/bar-model", // dev-only QA preview; 404 in production, never linked
+    "/dev/review-console", // dev-only review console; 404 in production, never linked
     "/showcase",
   ]);
 
