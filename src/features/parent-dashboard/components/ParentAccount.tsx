@@ -30,6 +30,8 @@ export interface ParentAccountProps {
     nextPaymentDate?: string;
     placesUsed?: number;
     placesTotal?: number;
+    /** False for a family on the free beta: payment, renewal, invoice and card copy is then not shown (D-015). */
+    hasPaidPlan?: boolean;
   };
   isLocalPreview?: boolean;
 }
@@ -39,6 +41,7 @@ export function ParentAccount({
   isLocalPreview = false,
 }: ParentAccountProps) {
   const { user, signOut } = useAuth();
+  const paying = initialAccount.hasPaidPlan !== false;
 
   const [name, setName] = useState(initialAccount.name);
   const [email] = useState(initialAccount.email);
@@ -452,7 +455,8 @@ export function ParentAccount({
                 </div>
               </div>
 
-              {/* Item 4: Billing (Always on) */}
+              {/* Item 4: Billing (Always on). Only a family that pays has payments that can fail. */}
+              {paying && (
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Billing</span>
@@ -470,11 +474,14 @@ export function ParentAccount({
                   />
                 </div>
               </div>
+              )}
             </div>
 
-            <p className="mt-4 text-xs leading-relaxed text-muted">
-              Billing email cannot be switched off — a failed payment has to reach you.
-            </p>
+            {paying && (
+              <p className="mt-4 text-xs leading-relaxed text-muted">
+                Billing email cannot be switched off — a failed payment has to reach you.
+              </p>
+            )}
           </section>
         </div>
 
@@ -523,7 +530,9 @@ export function ParentAccount({
             </Link>
 
             <p className="mt-2 text-center text-xs text-muted">
-              Plans, invoices, cards and cancelling all live there.
+              {paying
+                ? "Plans, invoices, cards and cancelling all live there."
+                : "The family beta is free. There is no card on file and nothing to cancel."}
             </p>
           </section>
 
@@ -557,7 +566,9 @@ export function ParentAccount({
                   className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
                 >
                   <Download className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
-                  <span>Download a copy of your family’s data</span>
+                  {/* The file holds the account details only; children's practice records are not in it yet (D-014),
+                      so the label says exactly that. */}
+                  <span>Download your account details</span>
                 </button>
               </li>
               <li>

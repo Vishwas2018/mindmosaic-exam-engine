@@ -157,4 +157,29 @@ describe("ParentAccount Component", () => {
     expect(screen.queryByText(/last changed/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/2026/)).not.toBeInTheDocument();
   });
+
+  /* D-015: a free-beta family has no payment that can fail and no card to manage. */
+  it("shows no failed-payment, invoice or card copy to a family without a paid plan", () => {
+    render(
+      <ParentAccount
+        initialAccount={{ name: "Sam Lee", email: "sam@example.com", planName: "Free family beta", hasPaidPlan: false }}
+      />,
+    );
+
+    expect(screen.queryByLabelText(/billing notifications/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/failed payment/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/invoices, cards/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/The family beta is free\. There is no card on file/)).toBeInTheDocument();
+  });
+
+  it("keeps the mandatory billing email for a family that pays", () => {
+    render(
+      <ParentAccount
+        initialAccount={{ name: "Sam Lee", email: "sam@example.com", planName: "Family", hasPaidPlan: true }}
+      />,
+    );
+
+    expect(screen.getByLabelText(/billing notifications \(mandatory\)/i)).toBeChecked();
+    expect(screen.getByText(/a failed payment has to reach you/i)).toBeInTheDocument();
+  });
 });

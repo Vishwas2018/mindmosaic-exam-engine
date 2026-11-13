@@ -34,6 +34,7 @@ import type {
   AdminView,
   AdminStateSubView,
   AdminQuestionSummary,
+  AdminApprovalItem,
 } from "../types";
 
 export interface AdminWorkspaceProps {
@@ -67,6 +68,16 @@ const LEGACY_TOOLS = [
     description: "Background jobs, retries and operational queues.",
   },
 ] as const;
+
+/** Joins only the details the approval actually records. */
+function approvalMeta(item: AdminApprovalItem): string {
+  const parts = [
+    item.subject,
+    item.yearLevel !== undefined ? `Year ${item.yearLevel}` : undefined,
+    item.draftedBy ? `Drafted by ${item.draftedBy}` : undefined,
+  ].filter(Boolean);
+  return parts.length ? parts.join(" · ") : "Year, subject and author not recorded";
+}
 
 export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspaceProps) {
   const [currentView, setCurrentView] = useState<AdminView>(initialView);
@@ -440,9 +451,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                       <div key={item.id} className="py-3 flex items-center justify-between">
                         <div>
                           <p className="text-xs font-bold text-[#1f1b24]">{item.title}</p>
-                          <p className="text-[11px] text-[#6e6779]">
-                            {item.subject} · Year {item.yearLevel} · Drafted by {item.draftedBy}
-                          </p>
+                          <p className="text-[11px] text-[#6e6779]">{approvalMeta(item)}</p>
                         </div>
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
                           item.isApproved
@@ -811,9 +820,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                         </span>
                       </div>
                       <h2 className="text-base font-bold text-[#1f1b24]">{item.title}</h2>
-                      <p className="text-xs text-[#6e6779]">
-                        {item.subject} · Year {item.yearLevel} · Drafted by {item.draftedBy}
-                      </p>
+                      <p className="text-xs text-[#6e6779]">{approvalMeta(item)}</p>
                       {item.approvedBy && (
                         <p className="text-[11px] text-teal-700 font-mono">
                           Approved by: {item.approvedBy} at {item.approvedAt}
@@ -828,10 +835,10 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                           const q = data.questions.find((qn) => qn.id === item.id) ?? {
                             id: item.id,
                             title: item.title,
-                            yearLevel: item.yearLevel,
-                            subject: item.subject,
+                            yearLevel: item.yearLevel ?? "Not recorded",
+                            subject: item.subject ?? "Not recorded",
                             status: "draft" as const,
-                            author: item.draftedBy,
+                            author: item.draftedBy ?? "Not recorded",
                             lastUpdated: "Draft",
                             hasVisual: false,
                           };
@@ -945,26 +952,30 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                   <div>
                     <h2 className="text-base font-bold text-[#1f1b24]">Active Manifest: {data.manifest.id}</h2>
                     <p className="text-xs text-[#6e6779]">
-                      Published at {data.manifest.publishedAt} · {data.manifest.liveQuestionsCount} questions live
+                      {data.manifest.publishedAt ? `Published at ${data.manifest.publishedAt} · ` : ""}
+                      {data.manifest.liveQuestionsCount} questions live
                     </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setNotice(
-                        `Integrity verification passed: All ${data.manifest.liveQuestionsCount} questions match published SHA-256 AST hashes. Fail-closed guarantee active.`
-                      )
-                    }
-                    className="rounded-xl bg-royal px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-royal-deep"
-                  >
-                    Validate Ledger Integrity
-                  </button>
+                  {/* The notice is canned text; nothing is recomputed. Shown only on the sample workspace. */}
+                  {data.source === "preview" && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setNotice(
+                          `Integrity verification passed: All ${data.manifest.liveQuestionsCount} questions match published SHA-256 AST hashes. Fail-closed guarantee active.`
+                        )
+                      }
+                      className="rounded-xl bg-royal px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-royal-deep"
+                    >
+                      Validate Ledger Integrity
+                    </button>
+                  )}
                 </div>
 
                 <div className="space-y-2 text-xs">
                   <p className="font-bold text-[#1f1b24]">Tamper-Evident Ledger Root Hash:</p>
                   <p className="font-mono text-royal bg-royal/[0.02] p-2.5 rounded-lg border border-royal/10 break-all">
-                    {data.manifest.rootHash}
+                    {data.manifest.rootHash ?? "Not computed for this environment"}
                   </p>
                 </div>
               </div>

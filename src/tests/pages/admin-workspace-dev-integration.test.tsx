@@ -110,10 +110,22 @@ describe("Phase C: Authenticated DEV Integration", () => {
       expect(data.approvals[0].id).toBe("Q-SCH-001");
       expect(data.approvals[0].isApproved).toBe(true);
       expect(data.approvals[0].approvedBy).toBe("reviewer-uuid-1");
+      // D-013: the approval row records none of these, so none is invented.
+      expect(data.approvals[0].yearLevel).toBeUndefined();
+      expect(data.approvals[0].subject).toBeUndefined();
+      expect(data.approvals[0].draftedBy).toBeUndefined();
+      expect(data.approvals[0].pedagogicalCheck).toBeUndefined();
+      expect(data.approvals[0].standingRuleCompliance).toBeUndefined();
 
-      // Verify publication manifest evidence
+      // Verify publication manifest evidence. No root hash or publication time is computed, so none is shown.
       expect(data.manifest.liveQuestionsCount).toBe(1);
-      expect(data.manifest.rootHash).toMatch(/^sha256-[a-f0-9]{64}$/);
+      expect(data.manifest.rootHash).toBeUndefined();
+      expect(data.manifest.publishedAt).toBeUndefined();
+
+      // D-013: papers come from the bank and the publication records only.
+      expect(data.papers.map((p) => p.code)).toEqual(["P-PUB-Y3-NUM", "P-PUB-Y5-NUM"]);
+      expect(data.papers[0]).toMatchObject({ items: 1, approvedItemsCount: 1, status: "ready" });
+      expect(data.papers[1]).toMatchObject({ items: 0, approvedItemsCount: 0, status: "in_review" });
 
       // Verify honest unavailable states for unbuilt writing & support services
       expect(data.writing.availability.isAvailable).toBe(false);
@@ -156,6 +168,22 @@ describe("Phase C: Authenticated DEV Integration", () => {
 
       expect(screen.getByText(/Support Reports Queue: Honest Unavailable State/i)).toBeInTheDocument();
       expect(screen.getByText(/Awaiting migration: student_question_reports/i)).toBeInTheDocument();
+    });
+
+    it("does not offer the canned ledger-integrity check or a made-up root hash", async () => {
+      const devData = await getAuthenticatedDevAdminData();
+      render(<AdminWorkspace data={devData} initialView="publication" />);
+
+      expect(screen.queryByRole("button", { name: /Validate Ledger Integrity/i })).not.toBeInTheDocument();
+      expect(screen.getByText("Not computed for this environment")).toBeInTheDocument();
+    });
+
+    it("shows that an approval's year, subject and author are not recorded", async () => {
+      const devData = await getAuthenticatedDevAdminData();
+      render(<AdminWorkspace data={devData} initialView="approval" />);
+
+      expect(screen.getByText("Year, subject and author not recorded")).toBeInTheDocument();
+      expect(screen.queryByText(/Editorial Pipeline/)).not.toBeInTheDocument();
     });
 
     it("disables mutations in read-only Phase C increment", async () => {

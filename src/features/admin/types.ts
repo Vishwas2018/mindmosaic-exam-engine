@@ -42,15 +42,17 @@ export interface AdminQuestionSummary {
   prompt?: string;
 }
 
+/* Year, subject, author and the two checks are optional because the approval table records none of them: the DEV
+   adapter leaves them out rather than assume them. Preview fixtures still set them. */
 export interface AdminApprovalItem {
   id: string;
   title: string;
-  yearLevel: number | string;
-  subject: string;
-  draftedBy: string;
-  pedagogicalCheck: boolean;
+  yearLevel?: number | string;
+  subject?: string;
+  draftedBy?: string;
+  pedagogicalCheck?: boolean;
   tamperEvidentHash: string;
-  standingRuleCompliance: boolean;
+  standingRuleCompliance?: boolean;
   isApproved: boolean;
   approvedBy?: string;
   approvedAt?: string;
@@ -124,8 +126,10 @@ export interface AdminWorkspaceData {
   activity: AdminActivityItem[];
   manifest: {
     id: string;
-    publishedAt: string;
+    /** Absent when no publication time is recorded (the DEV adapter has none). */
+    publishedAt?: string;
     liveQuestionsCount: number;
-    rootHash: string;
+    /** Absent until a root hash is actually computed over the manifest. */
+    rootHash?: string;
   };
 }

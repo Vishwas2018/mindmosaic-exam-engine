@@ -58,15 +58,12 @@ export async function getAuthenticatedDevAdminData(): Promise<AdminWorkspaceData
     if (approvals && Array.isArray(approvals)) {
       approvalsCount = approvals.length;
       for (const row of approvals) {
+        /* The row holds question id, content hash, approver, time and the three fixed review checks. Year, subject,
+           author and any other check are not recorded here, so they are left out rather than assumed (D-013). */
         approvalsList.push({
           id: row.question_id,
           title: `Draft Question ${row.question_id}`,
-          yearLevel: 6,
-          subject: "Reasoning",
-          draftedBy: "Editorial Pipeline",
-          pedagogicalCheck: true,
           tamperEvidentHash: row.content_hash,
-          standingRuleCompliance: true,
           isApproved: true,
           approvedBy: row.approved_by,
           approvedAt: row.approved_at,
@@ -89,14 +86,18 @@ export async function getAuthenticatedDevAdminData(): Promise<AdminWorkspaceData
   const pendingCount = publicationEligibility.pendingPublication.length;
 
   // Add system activity for publication manifest
+  /* Reports what was read, not a verification: nothing here recomputes a hash. */
+  const evidenceProblems = publicationEligibility.problems.length;
   activityList.push({
     id: "ACT-SYS-MANIFEST",
-    actor: "System Ledger",
-    action: "Tamper-evident manifest verified",
-    target: `Manifest ${publicationEligibility.questions.length} questions approved`,
-    timestamp: "Synchronised",
-    badgeTone: "info",
-    hash: "verified-in-manifest",
+    actor: "Publication evidence",
+    action: "Publication records read at page load",
+    target: `${publicationEligibility.questions.length} questions with publication records${
+      evidenceProblems ? `, ${evidenceProblems} problems` : ""
+    }`,
+    timestamp: "This page load",
+    badgeTone: evidenceProblems ? "warning" : "info",
+    hash: "not-computed",
   });
 
   // 4. Map Bank questions to question summaries
@@ -106,8 +107,8 @@ export async function getAuthenticatedDevAdminData(): Promise<AdminWorkspaceData
     yearLevel: q.yearLevel,
     subject: q.metadata.subject,
     status: "published",
-    author: "MindMosaic Curriculum Team",
-    lastUpdated: "Active Release",
+    author: "Not recorded",
+    lastUpdated: "Not recorded",
     hasVisual: !!(q.visuals && q.visuals.length > 0),
     prompt: q.prompt,
   }));
@@ -122,63 +123,46 @@ export async function getAuthenticatedDevAdminData(): Promise<AdminWorkspaceData
       detail: "Pending publication pipeline or in /admin/review",
     },
     {
-      label: "Awaiting human approval",
-      count: approvalsList.filter((a) => !a.isApproved).length,
-      change: "Human sign-off required",
-      trend: "warning",
+      /* Every row in the approvals table is a sign-off, so a count of "awaiting" items from it was always 0. */
+      label: "Recorded draft sign-offs",
+      count: approvalsCount,
+      change: "Rows in the draft review approvals table",
+      trend: "neutral",
       detail: "Rule #8 mandatory human gate before publication",
     },
     {
       label: "Active student attempts (DEV)",
       count: totalAttempts,
       change: `${activeStudents} active learners`,
-      trend: "up",
+      trend: "neutral",
       detail: "Aggregated platform totals view",
     },
     {
-      label: "Approved & verified items",
-      count: publicationEligibility.questions.length + approvalsCount,
-      change: "Tamper-evident verified",
-      trend: "up",
-      detail: "Manifest ledger and draft approvals",
+      label: "Questions with publication records",
+      count: publicationEligibility.questions.length,
+      change: evidenceProblems ? `${evidenceProblems} evidence problems` : "No evidence problems reported",
+      trend: evidenceProblems ? "warning" : "neutral",
+      detail: "Read from the publication manifests and approval records",
     },
   ];
 
   // 6. Paper readiness
-  const papers: AdminPaperSummary[] = [
-    {
-      code: "P-SCH-Y6-VR",
-      title: "Year 6 Scholarship Verbal Reasoning (Draft Paper)",
-      items: 40,
-      durationMinutes: 45,
-      status: "staged",
-      approvedItemsCount: approvalsList.filter((a) => a.yearLevel === 6 && a.isApproved).length,
-    },
-    {
-      code: "P-SCH-Y6-NR",
-      title: "Year 6 Scholarship Numerical Reasoning (Draft Paper)",
-      items: 40,
-      durationMinutes: 45,
-      status: "staged",
-      approvedItemsCount: approvalsList.filter((a) => a.yearLevel === 6 && a.isApproved).length,
-    },
-    {
-      code: "P-PUB-Y3-NUM",
-      title: "Year 3 Practice Bank Numeracy",
-      items: practiceBank.filter((q) => q.yearLevel === 3).length,
+  /* Only what the practice bank and the publication evidence say. The two scholarship "draft papers" that were here
+     (40 items, 45 minutes, "staged") existed nowhere else, and every practice item was counted as approved. */
+  const withPublicationRecord = new Set(publicationEligibility.questions.map((q) => (typeof q === "string" ? q : q.id)));
+  const practicePaper = (yearLevel: 3 | 5): AdminPaperSummary => {
+    const items = practiceBank.filter((q) => q.yearLevel === yearLevel);
+    const approved = items.filter((q) => withPublicationRecord.has(q.id)).length;
+    return {
+      code: `P-PUB-Y${yearLevel}-NUM`,
+      title: `Year ${yearLevel} Practice Bank Numeracy`,
+      items: items.length,
       durationMinutes: 40,
-      status: "ready",
-      approvedItemsCount: practiceBank.filter((q) => q.yearLevel === 3).length,
-    },
-    {
-      code: "P-PUB-Y5-NUM",
-      title: "Year 5 Practice Bank Numeracy",
-      items: practiceBank.filter((q) => q.yearLevel === 5).length,
-      durationMinutes: 40,
-      status: "ready",
-      approvedItemsCount: practiceBank.filter((q) => q.yearLevel === 5).length,
-    },
-  ];
+      status: items.length > 0 && approved === items.length ? "ready" : "in_review",
+      approvedItemsCount: approved,
+    };
+  };
+  const papers: AdminPaperSummary[] = [practicePaper(3), practicePaper(5)];
 
   return {
     source: "dev",
@@ -210,11 +194,11 @@ export async function getAuthenticatedDevAdminData(): Promise<AdminWorkspaceData
       },
     },
     activity: activityList,
+    /* No publication time or root hash is recorded for the live set, so neither is shown. The previous values were
+       the page-load time and a constant. */
     manifest: {
       id: "DEV-MANIFEST-CURRENT",
-      publishedAt: new Date().toISOString(),
       liveQuestionsCount: publicationEligibility.questions.length,
-      rootHash: "sha256-4f53c988a82e9b0b4685a21856e729a8831862efaa918e93235ffb0284067ac1",
     },
   };
 }

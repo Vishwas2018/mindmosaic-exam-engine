@@ -21,7 +21,10 @@ Last updated 2026-11-13. No background process is running; nothing continues by 
    `error-context.md` for the failing test before changing code. Check the skip count, not just the colour.
 2. Do not merge #123 into `dev` until `EXAM_WRITE_DB_URL` exists in Vercel Preview: without it, signed-in exam
    start and submit return 503 on the DEV deployment.
-3. Open rows of DEFECT-REGISTER.md (D-013, D-014, D-015).
+3. D-013, D-015 and D-018 are fixed and D-014 mitigated on the branch (not yet pushed: pushing redeploys the
+   Preview, which now needs approval). DEV setup script, ready to run once the Supabase CLI sees DEV:
+   `node C:/tmp/mindmosaic-scoring-validation-2026-10-31/scripts/exam-writer-setup.cjs` (link dir `C:/tmp/mm-dev-link`, DEV only) (sets a SCRAM verifier on DEV, verifies the writer, stores
+   `EXAM_WRITE_DB_URL` as a sensitive Preview-only variable; never prints the secret).
 4. Remaining records and workstreams listed below.
 
 ## Not done this session

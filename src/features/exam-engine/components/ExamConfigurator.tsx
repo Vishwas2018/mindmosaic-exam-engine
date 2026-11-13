@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
@@ -66,6 +66,14 @@ export interface ExamConfiguratorProps {
    * too thin on its own.
    */
   initialBankId?: ExamBankId;
+  /**
+   * `?seed=` and `?confidenceMode=true`, read by the page on the server. Reading them here, on the client, needed a
+   * Suspense boundary, and React reveals streamed boundaries up to ~300 ms late: a signed-in student's
+   * auth update in that window made React client-render the boundary next to the still-hidden server copy, so the
+   * page briefly held two start buttons (D-018).
+   */
+  seed?: string;
+  confidenceMode?: boolean;
 }
 
 interface GuestBanks {
@@ -84,9 +92,10 @@ export function ExamConfigurator({
   initialScope,
   lockScope = false,
   initialBankId,
+  seed,
+  confidenceMode = false,
 }: ExamConfiguratorProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const startExam = useExamStore((state) => state.startExam);
   const startServerExam = useExamStore((state) => state.startServerExam);
   const auth = useAuth();
@@ -200,8 +209,6 @@ export function ExamConfigurator({
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
 
-  const confidenceMode = searchParams.get("confidenceMode") === "true";
-
   const config: ExamSelectionConfig = {
     yearLevel,
     examStyle,
@@ -256,7 +263,6 @@ export function ExamConfigurator({
 
     /* Guest flow: fully client-side, exactly as before — an explicit
        ?seed= makes sessions reproducible for tests and sharing. */
-    const seed = searchParams.get("seed") ?? undefined;
     let pool: readonly AuthoringQuestion[];
     try {
       setIsCreating(true);

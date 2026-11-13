@@ -123,6 +123,7 @@ export default async function ParentAccountPage() {
           nextPaymentDate,
           placesUsed,
           placesTotal: paidPlan ? sub?.seats : undefined,
+          hasPaidPlan: paidPlan !== null,
         }}
         isLocalPreview={false}
       />
