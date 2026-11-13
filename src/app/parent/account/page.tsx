@@ -7,6 +7,7 @@ import {
   PREVIEW_PARENT_ACCOUNT,
 } from "@/features/parent-dashboard";
 import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
+import { FAMILY_PLAN } from "@/lib/billing/prices";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -94,35 +95,22 @@ export default async function ParentAccountPage() {
     userMeta?.full_name ||
     "Parent";
 
-  const planName = sub
-    ? sub.plan === "family_annual"
-      ? "Family Annual"
-      : sub.plan === "family_monthly"
-        ? "Family"
-        : "Starter Plan"
-    : "Free Trial / Starter";
+  /* Plan details come from the subscription row and the one price list (src/lib/billing/prices.ts). A family with no
+     paid plan is on the free beta: no price, no renewal date and no seat count are shown for it. */
+  const paidPlan = sub?.plan ? (sub.plan === "family_annual" ? FAMILY_PLAN.annual : FAMILY_PLAN.monthly) : null;
+  const planName = paidPlan ? (sub?.plan === "family_annual" ? "Family Annual" : "Family") : "Free family beta";
+  const planPrice = paidPlan
+    ? `${paidPlan.display} ${paidPlan.plan === "family_annual" ? "a year" : "a month"}`
+    : "no payment needed";
 
-  const planPrice = sub
-    ? sub.plan === "family_annual"
-      ? "A$199 a year"
-      : "A$19.90 a month"
-    : "No active paid plan";
-
-  const nextPaymentDate = sub?.currentPeriodEnd
-    ? new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    : "No upcoming renewal";
-
-  const formattedPasswordDate = user.updated_at
-    ? new Date(user.updated_at).toLocaleDateString("en-AU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
-    : "Recently";
+  const nextPaymentDate =
+    paidPlan && sub?.currentPeriodEnd
+      ? new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : undefined;
 
   return (
     <ParentShell active="/parent/account">
@@ -130,13 +118,11 @@ export default async function ParentAccountPage() {
         initialAccount={{
           name: parentName,
           email: user.email ?? "",
-          passwordLastChanged: formattedPasswordDate,
-          devicesCount: 1,
           planName,
           planPrice,
           nextPaymentDate,
           placesUsed,
-          placesTotal: sub?.seats ?? 3,
+          placesTotal: paidPlan ? sub?.seats : undefined,
         }}
         isLocalPreview={false}
       />

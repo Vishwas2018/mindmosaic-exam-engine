@@ -138,4 +138,23 @@ describe("ParentAccount Component", () => {
     expect(screen.getByRole("button", { name: "Sign out" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sign out everywhere" })).toBeInTheDocument();
   });
+
+  /* A real family's page is given only what the server could read. Nothing else may be filled in: these values
+     used to fall back to a sample family's (A$19.90 a month, 3 December 2026, 2 of 3 used, 1 device). */
+  it("shows no price, renewal date, seat count, device count or password date it was not given", () => {
+    render(
+      <ParentAccount
+        initialAccount={{ name: "Sam Lee", email: "sam@example.com", planName: "Free family beta", placesUsed: 2 }}
+      />,
+    );
+
+    expect(screen.getByText("Free family beta")).toBeInTheDocument();
+    expect(screen.getByText("2 linked")).toBeInTheDocument();
+    expect(screen.queryByText(/A\$/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/next payment/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/of \d+ used/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/signed in on/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/last changed/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/2026/)).not.toBeInTheDocument();
+  });
 });

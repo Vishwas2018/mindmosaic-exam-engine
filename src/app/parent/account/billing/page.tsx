@@ -7,6 +7,7 @@ import {
   PREVIEW_PARENT_ACCOUNT,
 } from "@/features/parent-dashboard";
 import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
+import { FAMILY_PLAN } from "@/lib/billing/prices";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -77,29 +78,24 @@ export default async function ParentAccountBillingPage() {
   const subResult = await getMySubscription();
   const sub = subResult.status === "ready" ? subResult.subscription : null;
 
-  const planName = sub
-    ? sub.plan === "family_annual"
-      ? "Family Annual"
-      : sub.plan === "family_monthly"
-        ? "Family"
-        : "Starter Plan"
-    : "Free Trial / Starter";
+  /* Same rule as /parent/account: figures come from the subscription row and the one price list, and a family with no
+     paid plan is shown as being on the free beta rather than given a price, a renewal or a seat allowance. */
+  const paidPlan = sub?.plan ? (sub.plan === "family_annual" ? FAMILY_PLAN.annual : FAMILY_PLAN.monthly) : null;
+  const planName = paidPlan ? (sub?.plan === "family_annual" ? "Family Annual" : "Family") : "Free family beta";
+  const planPrice = paidPlan
+    ? `${paidPlan.display} ${paidPlan.plan === "family_annual" ? "per year" : "per month"}`
+    : "no payment needed";
 
-  const planPrice = sub
-    ? sub.plan === "family_annual"
-      ? "A$199 per year"
-      : "A$19.90 per month"
-    : "No active paid plan";
+  const nextPayment =
+    paidPlan && sub?.currentPeriodEnd
+      ? `${paidPlan.display} on ${new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}`
+      : "None scheduled";
 
-  const nextPayment = sub?.currentPeriodEnd
-    ? `${planPrice.split(" ")[0]} on ${new Date(sub.currentPeriodEnd).toLocaleDateString("en-AU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })}`
-    : "None scheduled";
-
-  const seatsTotal = sub?.seats ?? 3;
+  const seatsCovered = paidPlan && sub ? `Up to ${sub.seats} · ${placesUsed} in use` : `${placesUsed} linked`;
 
   return (
     <ParentShell active="/parent/account">
@@ -107,9 +103,9 @@ export default async function ParentAccountBillingPage() {
         membership={{
           planName,
           planPrice,
-          seatsCovered: `Up to ${seatsTotal} · ${placesUsed} in use`,
+          seatsCovered,
           nextPayment,
-          cardBrand: sub ? "Card on file (via Stripe)" : "No card on file",
+          cardBrand: paidPlan ? "Managed in the Stripe billing portal" : "No card on file",
           cardLast4: "",
         }}
         isLocalPreview={false}

@@ -197,8 +197,8 @@ export function ParentAccount({
         name,
         email,
       },
-      plan: initialAccount.planName ?? "Family",
-      note: "MindMosaic Family Practice Export (ADR-012 compliant)",
+      plan: initialAccount.planName ?? null,
+      note: "Account details only. Children's practice records are not included in this file.",
     };
     const blob = new Blob([JSON.stringify(exportData, null, 2)], {
       type: "application/json",
@@ -330,18 +330,24 @@ export function ParentAccount({
             </div>
 
             <dl className="mt-4 divide-y divide-royal/10 text-xs sm:text-sm">
+              {/* Each row states only what the page was actually given: there is no stored "password last changed"
+                  date or device count to read, so neither is invented. */}
               <div className="flex items-center justify-between py-2.5">
                 <dt className="text-muted">Password</dt>
                 <dd className="font-semibold text-ink">
-                  Last changed {initialAccount.passwordLastChanged ?? "Recently"}
+                  {initialAccount.passwordLastChanged
+                    ? `Last changed ${initialAccount.passwordLastChanged}`
+                    : "You can change it at any time"}
                 </dd>
               </div>
-              <div className="flex items-center justify-between py-2.5">
-                <dt className="text-muted">Signed in on</dt>
-                <dd className="font-semibold text-ink">
-                  {initialAccount.devicesCount ?? 1} {initialAccount.devicesCount === 1 ? "device" : "devices"}
-                </dd>
-              </div>
+              {initialAccount.devicesCount !== undefined && (
+                <div className="flex items-center justify-between py-2.5">
+                  <dt className="text-muted">Signed in on</dt>
+                  <dd className="font-semibold text-ink">
+                    {initialAccount.devicesCount} {initialAccount.devicesCount === 1 ? "device" : "devices"}
+                  </dd>
+                </div>
+              )}
             </dl>
 
             <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -487,21 +493,26 @@ export function ParentAccount({
               <div className="flex items-center justify-between py-2.5">
                 <dt className="text-muted">Plan</dt>
                 <dd className="font-extrabold text-ink">
-                  {initialAccount.planName ?? "Family"} · {initialAccount.planPrice ?? "A$19.90 a month"}
+                  {initialAccount.planName ?? "Free family beta"}
+                  {initialAccount.planPrice ? ` · ${initialAccount.planPrice}` : ""}
                 </dd>
               </div>
-              <div className="flex items-center justify-between py-2.5">
-                <dt className="text-muted">Next payment</dt>
-                <dd className="font-extrabold text-ink">
-                  {initialAccount.nextPaymentDate ?? "3 December 2026"}
-                </dd>
-              </div>
-              <div className="flex items-center justify-between py-2.5">
-                <dt className="text-muted">Places</dt>
-                <dd className="font-extrabold text-ink">
-                  {initialAccount.placesUsed ?? 2} of {initialAccount.placesTotal ?? 3} used
-                </dd>
-              </div>
+              {initialAccount.nextPaymentDate && (
+                <div className="flex items-center justify-between py-2.5">
+                  <dt className="text-muted">Next payment</dt>
+                  <dd className="font-extrabold text-ink">{initialAccount.nextPaymentDate}</dd>
+                </div>
+              )}
+              {initialAccount.placesUsed !== undefined && (
+                <div className="flex items-center justify-between py-2.5">
+                  <dt className="text-muted">{initialAccount.placesTotal !== undefined ? "Places" : "Children"}</dt>
+                  <dd className="font-extrabold text-ink">
+                    {initialAccount.placesTotal !== undefined
+                      ? `${initialAccount.placesUsed} of ${initialAccount.placesTotal} used`
+                      : `${initialAccount.placesUsed} linked`}
+                  </dd>
+                </div>
+              )}
             </dl>
 
             <Link
