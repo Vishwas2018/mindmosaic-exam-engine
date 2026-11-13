@@ -58,9 +58,12 @@ function autosaveLabel(
 
 export function ExamConditionBar({
   description,
+  fullPaper = false,
   onExit,
 }: {
   description: string;
+  /** A full-length paper sat under real exam conditions. Quick practice sittings are not "exams" to a child. */
+  fullPaper?: boolean;
   onExit: () => void;
 }) {
   const timing = useExamStore((state) => state.config?.timing ?? null);
@@ -89,18 +92,24 @@ export function ExamConditionBar({
   const timed = timing === "timed";
 
   return (
-    <div className="flex flex-wrap items-center gap-[clamp(14px,2vw,28px)] rounded-2xl border border-mm-tint-line-strong bg-white p-4 px-[clamp(18px,2vw,24px)]">
+    <div className="flex flex-wrap items-center gap-x-[clamp(14px,2vw,28px)] gap-y-2 rounded-2xl border border-mm-tint-line-strong bg-white px-3.5 py-3 sm:p-4 sm:px-[clamp(18px,2vw,24px)]">
       <div className="grid gap-[3px]">
-        <p className="text-[11.5px] font-bold uppercase tracking-[0.1em] text-mm-coral-text">
-          {timed ? "Exam conditions · in progress" : "Untimed sitting · in progress"}
+        <p className="text-xs font-bold uppercase tracking-[0.1em] text-mm-coral-text">
+          {fullPaper && timed
+            ? "Exam conditions · in progress"
+            : timed
+              ? "Timed practice · in progress"
+              : "Untimed practice · in progress"}
         </p>
-        <p className="text-[15.5px] font-bold text-mm-ink">{description}</p>
+        <p className="hidden text-[15.5px] font-bold text-mm-ink sm:block">{description}</p>
       </div>
 
-      <div className="ml-auto flex flex-wrap items-center gap-[clamp(14px,2vw,26px)]">
+      <div className="flex w-full flex-wrap items-center justify-between gap-x-[clamp(14px,2vw,26px)] gap-y-2 sm:ml-auto sm:w-auto sm:justify-end">
+        {/* The big countdown is the desktop one. On a phone the sticky header already
+            carries the live countdown, so it is not repeated here. */}
         {timed && remainingSeconds !== null && (
-          <div className="grid gap-0.5 text-right">
-            <span className="text-[11.5px] uppercase tracking-[0.08em] text-mm-muted">
+          <div className="hidden gap-0.5 text-right sm:grid">
+            <span className="text-xs uppercase tracking-[0.08em] text-mm-muted">
               Time remaining
             </span>
             {/* aria-hidden: <ExamTimer> already owns the accessible,
@@ -115,8 +124,8 @@ export function ExamConditionBar({
           </div>
         )}
 
-        <div className="grid gap-0.5 text-right">
-          <span className="text-[11.5px] uppercase tracking-[0.08em] text-mm-muted">
+        <div className="grid min-w-0 flex-1 gap-0.5 text-left sm:flex-none sm:text-right">
+          <span className="text-xs uppercase tracking-[0.08em] text-mm-muted">
             {save.title}
           </span>
           <span
@@ -136,7 +145,7 @@ export function ExamConditionBar({
           type="button"
           onClick={onExit}
           data-testid="exit-exam"
-          className="inline-flex min-h-11 items-center rounded-[10px] border border-mm-line bg-white px-[18px] text-sm font-bold text-mm-ink-soft hover:border-mm-brand hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
+          className="inline-flex min-h-11 shrink-0 items-center rounded-[10px] border border-mm-line bg-white px-[18px] text-sm font-bold text-mm-ink-soft hover:border-mm-brand hover:text-mm-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mm-brand"
         >
           Pause and exit
         </button>

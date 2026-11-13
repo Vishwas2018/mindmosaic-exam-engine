@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AuthNav, AuthProvider } from "@/features/auth";
 
@@ -51,6 +51,18 @@ vi.mock("@/lib/supabase/client", () => ({
  * forces a router.refresh(), which is what makes requireRole()'s
  * redirect("/sign-in") in the layout actually run again.
  */
+/*
+ * A signed-in browser always carries the Supabase session cookie, and AuthProvider only loads the
+ * client at boot when there is one (src/features/auth/stored-session.ts). These tests sign a user in
+ * through the mocked client, so they give the browser the cookie a real signed-in session has.
+ */
+beforeEach(() => {
+  document.cookie = "sb-test-auth-token=stored; path=/";
+});
+afterEach(() => {
+  document.cookie = "sb-test-auth-token=; path=/; max-age=0";
+});
+
 describe("AuthNav sign-out", () => {
   beforeEach(() => {
     push.mockClear();

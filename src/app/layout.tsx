@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import { AuthProvider } from "@/features/auth";
+import { ThemeController, THEME_INIT_SCRIPT } from "@/features/theme";
 import { siteOrigin } from "@/lib/site-url";
 
 import "./globals.css";
+import "./theme-dark.css";
 /*
  * Product-wide typography: DM Sans is the body/UI typeface, DM Serif
  * Display is the display heading accent. Both are self-hosted via
@@ -23,6 +25,10 @@ const dmSerif = localFont({
   variable: "--font-dm-serif",
   weight: "400",
   style: "normal",
+  // No element sets this font any more (setup and instruction headings use the contract
+  // typeface), so it is declared for the CSS variable but not preloaded: 25 KB off the
+  // critical path of every page.
+  preload: false,
   display: "swap",
 });
 
@@ -73,10 +79,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-AU" data-scroll-behavior="smooth">
+    // suppressHydrationWarning on <html> and <body>: the pre-paint theme script sets data-theme on <html>
+    // before React hydrates, and browser extensions (e.g. Grammarly) add attributes to <body>. It silences
+    // the warning for those two elements' own attributes only; children still hydrate and are checked.
+    <html lang="en-AU" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        {/* Applies a saved Night mode choice before first paint (opt-in; light by default). A plain inline
+            script, not next/script: that component renders a nonce attribute on the server that the client
+            does not have, which is a hydration mismatch under this app's nonce-based CSP. */}
+        <script suppressHydrationWarning dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body
         className={`${dmSans.variable} ${dmSerif.variable} ${roboto.variable} ${instrumentSans.variable} ${geist.variable}`}
+        suppressHydrationWarning
       >
+        <ThemeController />
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>

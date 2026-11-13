@@ -42,7 +42,7 @@ export default async function NaplanHubPage({
       <main id="main-content" className="site-width py-12 sm:py-16">
         <Link
           href="/practice"
-          className="inline-flex min-h-10 items-center gap-1.5 rounded-xl text-sm font-bold text-royal transition hover:gap-2.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl text-sm font-bold text-royal transition hover:gap-2.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
         >
           <ChevronLeft aria-hidden="true" className="h-4 w-4" />
           All practice programs
@@ -77,7 +77,7 @@ export default async function NaplanHubPage({
                 <Link
                   key={year}
                   href={`/practice/naplan?year=${year}`}
-                  className={`rounded-xl px-5 py-2 font-jakarta text-sm font-bold transition-all ${
+                  className={`inline-flex min-h-11 items-center rounded-xl px-5 py-2 font-jakarta text-sm font-bold transition-all ${
                     year === activeYear ? "bg-white text-coral-accent shadow-sm" : "text-plum-muted hover:text-plum-dark"
                   }`}
                 >

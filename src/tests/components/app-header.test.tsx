@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { AppHeader } from "@/components/shell/AppHeader";
 import { AuthProvider } from "@/features/auth";
@@ -45,6 +45,18 @@ function renderHeader() {
     </AuthProvider>,
   );
 }
+
+/*
+ * A signed-in browser always carries the Supabase session cookie, and AuthProvider only loads the
+ * client at boot when there is one (src/features/auth/stored-session.ts). These tests sign a user in
+ * through the mocked client, so they give the browser the cookie a real signed-in session has.
+ */
+beforeEach(() => {
+  document.cookie = "sb-test-auth-token=stored; path=/";
+});
+afterEach(() => {
+  document.cookie = "sb-test-auth-token=; path=/; max-age=0";
+});
 
 describe("AppHeader", () => {
   beforeEach(() => {

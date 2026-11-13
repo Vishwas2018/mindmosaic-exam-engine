@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -11,12 +12,12 @@ import {
 } from "react";
 import type { Session, SupabaseClient, User } from "@supabase/supabase-js";
 
-import { createClient } from "@/lib/supabase/client";
 import { SUPABASE_NOT_CONFIGURED_MESSAGE, isSupabaseConfigured } from "@/lib/supabase/config";
 
 import { isProfileRole, type ProfileRole, type SignUpRole } from "./roles";
 import { clearSessionPersistence, shouldDiscardStoredSession } from "./session-persistence";
 import { PUBLIC_SIGNUP_ENABLED, SIGNUP_CLOSED_MESSAGE } from "./signup-policy";
+import { shouldLoadSupabaseAtBoot } from "./stored-session";
 import { buildAliasEmail } from "./student-alias";
 
 export type AuthStatus = "loading" | "authenticated" | "anonymous" | "unconfigured";
@@ -107,6 +108,17 @@ export interface EmailConfirmResult extends AuthResult {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+/*
+ * The browser client is code-split out of every page's first load: it is imported the first time
+ * something needs it (see stored-session.ts for when that is at boot). One shared promise, so the
+ * client is still created exactly once.
+ */
+let clientPromise: Promise<SupabaseClient> | null = null;
+function loadClient(): Promise<SupabaseClient> {
+  clientPromise ??= import("@/lib/supabase/client").then((module) => module.createClient());
+  return clientPromise;
+}
+
 const notConfigured = (): AuthResult => ({
   ok: false,
   message: SUPABASE_NOT_CONFIGURED_MESSAGE,
@@ -133,12 +145,17 @@ function isAuthRoute(pathname: string): boolean {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const configured = isSupabaseConfigured;
-  // One stable client instance for the provider's lifetime (only when
-  // configured). A useState initialiser runs exactly once and is safe to read
-  // during render, unlike a ref.
-  const [supabase] = useState<SupabaseClient | null>(() =>
-    configured ? createClient() : null,
-  );
+  // The one client instance (only when configured), set once it has loaded.
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null);
+
+  /* Loads the client on demand and resolves to it (null when not configured). Every auth
+     method below goes through this, so a call made before the boot load finished simply waits. */
+  const ensureClient = useCallback(async (): Promise<SupabaseClient | null> => {
+    if (!configured) return null;
+    const client = await loadClient();
+    setSupabase((current) => current ?? client);
+    return client;
+  }, [configured]);
 
   const [status, setStatus] = useState<AuthStatus>(
     configured ? "loading" : "unconfigured",
@@ -151,6 +168,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
      on its own (expiry, revoked refresh token, signed out in another tab). */
   const hadSession = useRef(false);
   const endedByThisApp = useRef(false);
+
+  /* Boot: load the client now only if this visit has something for it to do; otherwise the
+     visitor is simply anonymous and the ~70 KB never downloads. The state changes happen
+     inside a promise callback, never synchronously in the effect body. */
+  useEffect(() => {
+    if (!configured) return;
+    let active = true;
+    if (shouldLoadSupabaseAtBoot()) {
+      void Promise.resolve().then(() => ensureClient());
+    } else {
+      void Promise.resolve().then(() => {
+        if (active) setStatus((current) => (current === "loading" ? "anonymous" : current));
+      });
+    }
+    return () => {
+      active = false;
+    };
+  }, [configured, ensureClient]);
+
 
   useEffect(() => {
     if (!supabase) return;
@@ -243,6 +279,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       role,
 
       async fetchRole() {
+        const supabase = await ensureClient();
         if (!supabase) return null;
         const { data: userData } = await supabase.auth.getUser();
         const id = userData.user?.id;
@@ -258,6 +295,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async signInWithPassword(email, password) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
@@ -267,6 +305,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async signInWithStudentCode(loginCode, pin) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         /*
          * D1: students never have a real email. The alias is reconstructed
@@ -292,6 +331,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async signUp({ email, password, displayName, role: signUpRole = "parent" }) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         /*
          * Refuse before calling out. This is honesty, not security — the
@@ -353,6 +393,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async signInWithOAuth(provider, nextPath = "/") {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.signInWithOAuth({
           provider,
@@ -365,6 +406,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async sendPasswordReset(email) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: `${origin()}/auth/reset`,
@@ -390,6 +432,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async updatePassword(password) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.updateUser({ password });
         if (error) return { ok: false, message: error.message };
@@ -405,6 +448,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async resendConfirmationEmail(email) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         const { error } = await supabase.auth.resend({
           type: "signup",
@@ -426,6 +470,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async confirmEmail(code) {
+        const supabase = await ensureClient();
         if (!supabase) return notConfigured();
         const { data, error } = await supabase.auth.exchangeCodeForSession(code);
         if (error) {
@@ -451,6 +496,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async signOut() {
+        const supabase = await ensureClient();
         if (!supabase) return;
         /* Drop the persistence marker with the session it described, so it
            can never outlive it and sign the next user out on their first
@@ -460,7 +506,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await supabase.auth.signOut();
       },
     };
-  }, [supabase, configured, status, user, session, role]);
+  }, [ensureClient, configured, status, user, session, role]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
