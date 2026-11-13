@@ -1,4 +1,5 @@
 import { test, expect } from "../fixtures/auth.fixture";
+import { e2eEnv } from "../fixtures/env";
 
 /**
  * Authentication Journey E2E Tests
@@ -97,7 +98,7 @@ test.describe("Parent sign-in and sign-out", () => {
       "true",
     );
     await page.getByLabel(/email address/i).fill("parent-no-children@e2e.mindmosaic.local");
-    await page.getByLabel(/password/i).fill("fixture-password");
+    await page.getByLabel(/password/i).fill(e2eEnv.fixturePassword);
     await page.getByRole("button", { name: /sign in to parent account/i }).click();
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
 

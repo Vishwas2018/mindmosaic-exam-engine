@@ -151,7 +151,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // Submit resend
     await clearMailbox();
-    await page.getByRole("button", { name: /resend verification email/i }).click();
+    await page.getByRole("button", { name: /send a new link/i }).click();
 
     await expect(page.getByText(/confirmation email resent/i)).toBeVisible({ timeout: 8000 });
 
@@ -197,16 +197,20 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await page.goto(resetEmail.link);
 
     // Form appears
-    await expect(page.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole("heading", { name: "Set a new password" })).toBeVisible({ timeout: 10000 });
 
     // Reload the page: the recovery session remains verified and form stays available
     await page.reload();
-    await expect(page.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole("heading", { name: "Set a new password" })).toBeVisible({ timeout: 10000 });
 
     // 4. Submit new password
     await page.getByLabel("New password", { exact: true }).fill(newPassword);
     await page.getByLabel("Confirm new password").fill(newPassword);
-    await page.getByRole("button", { name: "Update password" }).click();
+    await page.getByRole("button", { name: "Save new password" }).click();
+
+    /* The change is confirmed on its own screen; nothing redirects by itself. */
+    await expect(page.getByRole("heading", { name: /password changed/i })).toBeVisible({ timeout: 15000 });
+    await page.getByRole("link", { name: /go to sign-in/i }).click();
 
     await page.waitForURL(/\/sign-in/, { timeout: 15000 });
 
@@ -318,7 +322,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // First use, same browser: succeeds and opens the form.
     await requesterPage.goto(resetEmail.link);
-    await expect(requesterPage.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 10000 });
+    await expect(requesterPage.getByRole("heading", { name: "Set a new password" })).toBeVisible({ timeout: 10000 });
     await requester.close();
 
     // Second use, fresh browser: the link is spent. The page must not offer a form.
@@ -360,13 +364,17 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const phone = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const phonePage = await phone.newPage();
     await phonePage.goto(resetEmail.link);
-    await expect(phonePage.getByRole("heading", { name: "Choose a new password" })).toBeVisible({ timeout: 15000 });
+    await expect(phonePage.getByRole("heading", { name: "Set a new password" })).toBeVisible({ timeout: 15000 });
     // The single-use credential is gone from the address bar.
     expect(phonePage.url()).not.toContain("token_hash");
 
     await phonePage.getByLabel("New password", { exact: true }).fill(newPassword);
     await phonePage.getByLabel("Confirm new password").fill(newPassword);
-    await phonePage.getByRole("button", { name: "Update password" }).click();
+    await phonePage.getByRole("button", { name: "Save new password" }).click();
+
+    /* The change is confirmed on its own screen; nothing redirects by itself. */
+    await expect(phonePage.getByRole("heading", { name: /password changed/i })).toBeVisible({ timeout: 15000 });
+    await phonePage.getByRole("link", { name: /go to sign-in/i }).click();
     await phonePage.waitForURL(/\/sign-in/, { timeout: 10000 });
 
     await phonePage.getByLabel(/email address/i).fill(email);

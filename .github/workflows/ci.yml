@@ -248,6 +248,12 @@ jobs:
       # The server-only exam write path (20261031090000). Local-only value, set by
       # exam-writer:bootstrap below; hosted environments take it from a secret store.
       EXAM_WRITE_DB_URL: postgresql://mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret@127.0.0.1:56322/postgres
+      # `supabase start` runs a mail catcher on this port ([inbucket] in supabase/config.toml). Without this variable
+      # every test that reads an email (sign-up confirmation, password recovery, parent sign-in/out: nine tests)
+      # skips, and the job is green without having exercised any of them.
+      E2E_MAILPIT_URL: http://127.0.0.1:56324
+      # supabase/templates/{confirm,recovery}.html link with token_hash, so the device-independent tests apply.
+      E2E_TOKEN_HASH_TEMPLATES: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
