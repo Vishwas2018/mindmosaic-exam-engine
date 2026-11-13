@@ -288,7 +288,9 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // 2. Invalid recovery token_hash
     await page.goto("/auth/reset?token_hash=invalid-token-12345&type=recovery");
-    const headingInvalid = page.getByRole("heading", { name: /this link can.t be used/i });
+    /* The auth server answers a made-up token with the same `otp_expired` code as a lapsed one, so the page cannot
+       tell them apart and either dead-link heading is correct here. What matters: no form, focus on the heading. */
+    const headingInvalid = page.getByRole("heading", { name: /this reset link has expired|this link can.t be used/i });
     await expect(headingInvalid).toBeVisible({ timeout: 15000 });
     await expect(headingInvalid).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
