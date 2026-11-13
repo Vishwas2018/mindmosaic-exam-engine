@@ -1,24 +1,26 @@
 # Handoff: restart checkpoint
 
-Session ended on a usage limit, mid-task. No background process is running; nothing continues by itself.
+Last updated 2026-11-13. No background process is running; nothing continues by itself.
 
 ## Where things are
 
-- Worktree `C:\tmp\wt-beta-rc`, branch `integration/beta-consolidation`, draft PR #123 into `dev`. Supersedes #119.
-- Local gates on the merge commit `11bb13e4`: typecheck 0 errors, eslint 0 errors, vitest 7,267 / 7,267, `next build`
-  ok, question / answer / ledger / lesson validators exit 0. Later commits were checked with typecheck, eslint and
-  the affected test files only, not the full suite.
-- CI on `d7914c21`: core, rls, scholarship-drafts pass. e2e 383 passed / 3 failed / 1 flaky. e2e-auth 74 passed /
-  9 failed.
-- Fixes for those failures are in `488998ad` and `4491b920`. **Their CI result has not been read.**
+- Worktree `C:/tmp/wt-beta-rc`, branch `integration/beta-consolidation`, draft PR #123 into `dev`. Supersedes #119.
+- CI on `dc144775`: all five checks green. core 7,271 unit tests; e2e 386 passed, 1 flaky
+  (`a11y-auth-pages.spec.ts:40`, a known flake); e2e-auth 84 passed, **9 skipped**; rls and scholarship-drafts pass.
+- Those 9 skips were every test that reads an email. `0670902e` switched them on (`E2E_MAILPIT_URL`,
+  `E2E_TOKEN_HASH_TEMPLATES`). First run: 88 passed, 5 failed. `cdfede1c` fixes those five. **Read its CI result
+  before trusting the email-confirmation and recovery paths.**
+- Hosted DEV: `20261031090000` applied, `20261031090100` not. No migration was applied by the agent; no credential
+  on the machine can. See DATABASE-READINESS.md.
 
 ## Resume here
 
-1. `gh pr checks 123`. If either E2E job is red, download the `e2e-test-results` / `e2e-auth-test-results` artifact
-   and read `error-context.md` for the failing test.
-2. D-009 (two "PIN 1 of 6" inputs in CI only) is expected to still fail. See DEFECT-REGISTER.md. Do not mask it.
-3. Run the full `npm test` on the branch head before asking for a merge.
-4. Then the open rows of DEFECT-REGISTER.md (D-013, D-014, D-015).
+1. `gh pr checks 123`. A red E2E job now uploads `e2e-test-results` / `e2e-auth-test-results`; read
+   `error-context.md` for the failing test before changing code. Check the skip count, not just the colour.
+2. Do not merge #123 into `dev` until `EXAM_WRITE_DB_URL` exists in Vercel Preview: without it, signed-in exam
+   start and submit return 503 on the DEV deployment.
+3. Open rows of DEFECT-REGISTER.md (D-013, D-014, D-015).
+4. Remaining records and workstreams listed below.
 
 ## Not done this session
 
