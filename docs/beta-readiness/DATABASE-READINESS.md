@@ -1,15 +1,16 @@
 # Database readiness (hosted DEV `mfglzabnayacssgertat`)
 
-Nothing in this document was executed against a hosted database in this session. Production
-(`uermhsptduikehuyceiz`) is out of scope and was not contacted.
+Only `select` statements were run against hosted DEV. No migration, grant, role or password was changed.
+Production (`uermhsptduikehuyceiz`) is out of scope and was not contacted. The current state is the section
+"Authoritative read of hosted DEV, 2026-11-13" below; the table that follows is the dependency list.
 
 ## What the integration branch needs from DEV
 
 | Need | Why | State on hosted DEV |
 |------|-----|---------------------|
-| Migration `20261031090000_exam_writer_role_and_server_write_functions` | Creates `mindmosaic_exam_writer` and the `*_for` functions | Not applied as of the 2026-11-04 audit. Not re-read this session |
-| `EXAM_WRITE_DB_URL` in the Vercel **Preview / DEV** environment | The app's only route to create a session or record an attempt | Absent as of 2026-11-04 |
-| Deploy of this branch | Uses the new path | Not deployed |
+| Migration `20261031090000_exam_writer_role_and_server_write_functions` | Creates `mindmosaic_exam_writer` and the `*_for` functions | **Applied** (ledger row and catalog, 2026-11-13) |
+| `EXAM_WRITE_DB_URL` in the Vercel **Preview / DEV** environment | The app's only route to create a session or record an attempt | **Absent** (Vercel env list, 2026-11-13). The role also has no password |
+| Deploy of this branch | Uses the new path | Vercel builds a Preview on every push; the one for `b859a41c` is READY but has no `EXAM_WRITE_DB_URL` |
 | Migration `20261031090100_revoke_legacy_exam_write_rpcs_from_clients` | Closes the hole (students could call the legacy RPCs directly) | Not applied. **Must follow the deploy, never precede it** |
 
 ## Which paths depend on it (from reading the callers of `legacy-exam-writes.ts`, not from a hosted run)
@@ -74,8 +75,70 @@ has a password.
 To let the agent finish the sequence, any one of: `supabase login` with the MindMosaic account in this shell; a DEV
 owner connection string exported as `SUPABASE_DB_URL` for the session; or do steps 3–5 of the runbook by hand.
 
+## Authoritative read of hosted DEV, 2026-11-13
+
+Method: `supabase db query --linked` from a scratch directory linked to `mfglzabnayacssgertat` only (the repository
+worktree is not linked, so no `db push` can reach DEV from it). The CLI was signed in to the MindMosaic account for a
+few minutes; `select current_database(), current_user` returned `postgres` / `postgres` on PostgreSQL 17.11. Side
+effect: the CLI creates its own short-lived login role to run a query ("Initialising login role..."). Nothing else
+was written.
+
+| Fact | Evidence |
+|------|----------|
+| Ledger has 52 rows; the repository has 53 migrations | `supabase_migrations.schema_migrations` |
+| The only repository migration missing from DEV is `20261031090100_revoke_legacy_exam_write_rpcs_from_clients` | set difference, both directions; nothing on DEV is missing from the repository |
+| `20261031090000 exam_writer_role_and_server_write_functions` is the newest ledger row | same query |
+| Role `mindmosaic_exam_writer`: login true; superuser, bypassrls, createrole, createdb, inherit all false; `statement_timeout=10s`; member of no role; no table privileges; cannot select `public.exam_sessions` | `pg_roles`, `pg_auth_members`, `role_table_grants`, `has_table_privilege` |
+| **The writer role has no password** (`rolpassword is null`); `mindmosaic_scoring` has a SCRAM-SHA-256 one | `pg_authid` (boolean and scheme prefix only; no hash was read out) |
+| `create_exam_session_for(uuid,jsonb,text,text[],timestamptz)` and `record_exam_attempt_for(uuid,uuid,jsonb,jsonb)`: security definer, `search_path=public, pg_temp`, ACL `{postgres=X, mindmosaic_exam_writer=X}` | `pg_proc` |
+| Legacy `create_exam_session(jsonb,text,text[],timestamptz)` and `record_exam_attempt(uuid,jsonb,jsonb)`: ACL still `{postgres=X, authenticated=X, service_role=X}` | `pg_proc`. This is runbook step 1: the hole is open, as expected before the deploy |
+
+So runbook steps 1 and 2 are complete on DEV. Step 3 (password and variable) is the next act.
+
+The CLI session then changed to a different account (it lists three unrelated projects again) and every further
+query returns 403. Not read because of that: whether the synthetic `mm-dev-*@example.com` accounts still exist.
+
+## Vercel, 2026-11-13 (names and targets only; no value was decrypted)
+
+Project `mindmosaic-exam-engine` (`prj_E3cvtuTiV0XMVdcfoDarUs2XFS1A`), production branch `main`.
+
+- Preview variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
+  `SCORING_DB_URL` (all sensitive), plus plain guards `PRODUCTION_SUPABASE_PROJECT_REF=uermhsptduikehuyceiz`,
+  `SCHOLARSHIP_SAMPLE_SUPABASE_REF=mfglzabnayacssgertat`, `SINGAPORE_MATHS_SAMPLE_SUPABASE_REF=mfglzabnayacssgertat`.
+- **`EXAM_WRITE_DB_URL` does not exist in any environment.**
+- The Preview for `b859a41c` (`mindmosaic-exam-engine-c1kfnffkr-...`) was opened in the owner's signed-in browser.
+  All 13 script bundles of `/sign-in` were searched for `*.supabase.co`: the only project ref present is
+  `mfglzabnayacssgertat`. The production ref does not appear. The CSP is report-only, no enforcing header.
+- Not verifiable without decrypting: that the server-only `SUPABASE_SERVICE_ROLE_KEY` and `SCORING_DB_URL` on
+  Preview belong to DEV. `SCORING_DB_URL` in the local `.env.local` has user `mindmosaic_scoring.mfglzabnayacssgertat`.
+- Previews are behind Vercel Authentication (`all_except_custom_domains`) and the project has no automation bypass.
+  A script cannot reach a Preview until the owner creates one.
+- Gap: `legacy-exam-writes.ts` does not check which project `EXAM_WRITE_DB_URL` points at. The pooler user name
+  carries the project ref, so a wrong value is visible to whoever sets it, but nothing in code refuses it.
+
+## Remaining owner actions for `EXAM_WRITE_DB_URL` (runbook step 3)
+
+Value shape, matching `SCORING_DB_URL`:
+`postgresql://mindmosaic_exam_writer.mfglzabnayacssgertat:<secret>@aws-1-eu-west-3.pooler.supabase.com:6543/postgres`
+
+1. Generate a 40-character letters-and-digits secret in a password manager (no symbols, so no percent-encoding).
+2. Supabase dashboard, project **mindmosaic-dev**, SQL editor:
+   `alter role mindmosaic_exam_writer password '<secret>';`
+3. Vercel, project settings, Environment Variables: add `EXAM_WRITE_DB_URL`, environment **Preview only**, marked
+   Sensitive, with the value above. Do not add it to Production.
+4. Redeploy the Preview of `integration/beta-consolidation` (a variable only reaches new builds).
+5. For scripted acceptance: Settings, Deployment Protection, "Protection Bypass for Automation", create a secret and
+   put it in the shell as `VERCEL_AUTOMATION_BYPASS_SECRET` for the test run. Not needed for a manual browser check.
+
+Acceptance run for runbook step 4 once the redeploy is READY:
+`APP_URL=https://<preview-host> node C:/tmp/mindmosaic-scoring-validation-2026-10-31/scripts/score-e2e-preview.cjs`
+It covers start, autosave and resume, submit, scoring against an independent oracle (188 questions), attempt
+history, cross-student isolation and RLS. Its `FORGE-RPC` check is expected to **fail** until `20261031090100` is
+applied, and to pass after.
+
 ## Not verified
 
-- Current migration state of hosted DEV.
-- Whether the `SUPABASE_ACCESS_TOKEN` in `.env.e2e.local` still returns 401.
+- Whether the synthetic DEV accounts used by the acceptance script still exist.
+- That the server-only Preview secrets point at DEV (see above).
 - RLS behaviour on hosted DEV (only the local stack was exercised).
+- Any exam start, autosave, submit or scoring on a deployed Preview.

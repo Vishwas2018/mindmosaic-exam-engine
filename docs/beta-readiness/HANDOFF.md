@@ -9,8 +9,11 @@ Last updated 2026-11-13. No background process is running; nothing continues by 
   (`a11y-auth-pages.spec.ts:40`, a known flake); e2e-auth 84 passed, **9 skipped**; rls and scholarship-drafts pass.
 - Those 9 skips were every test that reads an email. They now run. CI on `cdfede1c`: all five checks green;
   e2e-auth 92 passed, 0 skipped, 1 flaky (D-018, two `start-exam` buttons, passed on retry).
-- Hosted DEV: `20261031090000` applied, `20261031090100` not. No migration was applied by the agent; no credential
-  on the machine can. See DATABASE-READINESS.md.
+- CI on `b859a41c`: all five checks green.
+- Hosted DEV, read from the ledger and catalog on 2026-11-13: `20261031090000` applied, `20261031090100` is the only
+  migration not applied, the writer role has no password, `EXAM_WRITE_DB_URL` exists nowhere in Vercel. The agent
+  changed nothing on DEV. The Supabase CLI session has since reverted to an unrelated account.
+  See DATABASE-READINESS.md.
 
 ## Resume here
 
@@ -33,11 +36,13 @@ Last updated 2026-11-13. No background process is running; nothing continues by 
 
 ## Waiting on the owner
 
-- Hosted DEV: migrations `20261031090000` / `20261031090100` and `EXAM_WRITE_DB_URL` (DATABASE-READINESS.md).
+- Hosted DEV: writer role password, `EXAM_WRITE_DB_URL` on Preview, redeploy, then a separate approval for
+  `20261031090100` (DATABASE-READINESS.md, "Remaining owner actions").
+- A Vercel automation bypass secret if the acceptance script is to reach a Preview.
 - Human `approvedBy` on the content the family will sit.
 - Merge of #123 once CI is green.
 
 ## Decisions
 
-All readiness decisions are **NO-GO**: DEV integration (CI not green), DEV deployment, supervised family beta,
+All readiness decisions are **NO-GO**: DEV integration (CI green, held on `EXAM_WRITE_DB_URL`), DEV deployment, supervised family beta,
 expanded beta, production.

@@ -21,7 +21,7 @@ family, P2 should be fixed before a wider beta, P3 cosmetic.
 | D-014 | P2 | `/parent/account` "Download my data" produces a file with name and email only | OPEN (copy corrected, capability unchanged) | Either build the real export or relabel the button |
 | D-015 | P2 | `/parent/account` copy mentions failed-payment emails and card management to families with no paid plan | OPEN | Hide billing-only copy when there is no paid plan |
 | D-016 | P1 | All 78 pinned family-beta items are `published` with no `approvedBy` (carried from the WP1 audit, not re-verified this session) | BLOCKED on a human | Owner review; no agent may sign |
-| D-017 | P1 | Hosted DEV has neither the exam-writer migrations nor `EXAM_WRITE_DB_URL` (carried from WP1 audit; `SUPABASE_ACCESS_TOKEN` returned 401 then, not re-tested) | BLOCKED on owner | DATABASE-READINESS.md |
+| D-017 | P1 | Hosted DEV: `20261031090000` is applied (read from the ledger 2026-11-13), but `mindmosaic_exam_writer` has no password and `EXAM_WRITE_DB_URL` exists in no Vercel environment, so signed-in exam start and submit return 503 on any Preview of this branch | BLOCKED on owner | DATABASE-READINESS.md, "Remaining owner actions" |
 
 ## D-018 (P1, OPEN): two `start-exam` buttons on `/practice/[program]` for a signed-in student
 
