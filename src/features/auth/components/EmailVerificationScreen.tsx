@@ -56,11 +56,15 @@ function computeInitialStage(
   configured: boolean,
 ): { stage: Stage; problem: LinkProblem | null } {
   const errorCode = searchParams.get("error_code");
+  const hasQueryCredential = Boolean(searchParams.get("code") || searchParams.get("token_hash"));
 
-  if (errorCode) return { stage: "error", problem: errorCode === "otp_expired" ? "expired" : "invalid" };
+  /* A link with no usable credential in the query is shown as dead straight away, so the resend form is in the
+     server response and works before (or without) client JavaScript. An implicit-flow link carries its tokens in the
+     fragment, which only the browser can see: the effect below checks for that and switches to verifying. */
+  if (errorCode || !hasQueryCredential) {
+    return { stage: "error", problem: errorCode === "otp_expired" ? "expired" : "invalid" };
+  }
   if (!configured) return { stage: "error", problem: "unconfigured" };
-  /* A link with no query credentials may still carry them in the fragment (implicit flow), which neither the server
-     nor the first render can see, so every other case verifies first and decides in the effect. */
   return { stage: "verifying", problem: null };
 }
 
@@ -91,8 +95,15 @@ export function EmailVerificationScreen() {
   const headingRef = useFocusOnShow<HTMLHeadingElement>(stage === "error");
 
   useEffect(() => {
-    if (initial.stage !== "verifying") return;
     const link = readLinkCredentials(searchParams, window.location.hash);
+    if (initial.stage !== "verifying") {
+      /* The only thing the first render could not see is a session carried in the fragment. */
+      const fragmentSession = Boolean(link.accessToken && link.refreshToken);
+      if (!fragmentSession || link.errorCode || !configured) return;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStage("verifying");
+      setProblem(null);
+    }
 
     let active = true;
     const verify = async (): Promise<EmailConfirmResult> => {

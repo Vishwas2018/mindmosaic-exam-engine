@@ -107,11 +107,9 @@ export default async function ParentHomePage({
     <ParentShell active="/parent">
       <div className="space-y-8">
         <CheckoutStatusToast />
-        <FamilyOverview
-          summaries={summaries}
-          parentName={data.parentName}
-          forcedState={forcedState}
-        />
+        {/* `?state=` forces a loading/error/offline screen for design review. It is honoured only in the local
+            preview branch above: a real family's page shows the state it is actually in. */}
+        <FamilyOverview summaries={summaries} parentName={data.parentName} />
         <AddChildCard availableYearLevels={years} />
       </div>
     </ParentShell>

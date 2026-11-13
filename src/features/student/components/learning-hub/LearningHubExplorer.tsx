@@ -131,7 +131,7 @@ export function LearningHubExplorer({
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => setSelectedYear(year)}
-                    className={`inline-flex min-h-[38px] items-center gap-2 rounded-btn px-4 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                    className={`inline-flex min-h-11 items-center gap-2 rounded-btn px-4 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       isSelected
                         ? "bg-primary text-white shadow-xs"
                         : "border border-mm-line bg-white text-mm-ink hover:bg-slate-50"
@@ -170,7 +170,7 @@ export function LearningHubExplorer({
                 type="button"
                 aria-pressed={selectedArea === "all"}
                 onClick={() => setSelectedArea("all")}
-                className={`inline-flex min-h-[32px] items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedArea === "all"
                     ? "bg-white text-mm-ink shadow-2xs font-bold"
                     : "text-mm-muted hover:text-mm-ink"
@@ -186,7 +186,7 @@ export function LearningHubExplorer({
                 type="button"
                 aria-pressed={selectedArea === "Mathematics"}
                 onClick={() => setSelectedArea("Mathematics")}
-                className={`inline-flex min-h-[32px] items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedArea === "Mathematics"
                     ? "bg-white text-primary shadow-2xs font-bold"
                     : "text-mm-muted hover:text-mm-ink"
@@ -203,7 +203,7 @@ export function LearningHubExplorer({
                 type="button"
                 aria-pressed={selectedArea === "English"}
                 onClick={() => setSelectedArea("English")}
-                className={`inline-flex min-h-[32px] items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedArea === "English"
                     ? "bg-white text-teal-accent shadow-2xs font-bold"
                     : "text-mm-muted hover:text-mm-ink"
@@ -243,7 +243,7 @@ export function LearningHubExplorer({
                   key={year}
                   type="button"
                   onClick={() => setSelectedYear(year)}
-                  className="inline-flex min-h-[38px] items-center gap-2 rounded-btn bg-primary px-4 text-xs font-bold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-btn bg-primary px-4 text-xs font-bold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   Explore Year {year}
                 </button>
@@ -264,7 +264,7 @@ export function LearningHubExplorer({
           <button
             type="button"
             onClick={() => setSelectedArea("all")}
-            className="mt-4 inline-flex min-h-[38px] items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-bold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            className="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-bold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             Show All Areas
           </button>
@@ -409,7 +409,7 @@ export function LearningHubExplorer({
                                       <Link
                                         key={prereq}
                                         href={`/student/learn/lessons/${prereq}`}
-                                        className="font-mono font-semibold text-primary hover:underline"
+                                        className="inline-flex min-h-11 min-w-11 items-center font-mono font-semibold text-primary hover:underline"
                                       >
                                         {prereq}
                                       </Link>
@@ -422,7 +422,7 @@ export function LearningHubExplorer({
                               <div className="flex shrink-0 flex-wrap items-center gap-2 pt-2 md:pt-0">
                                 <Link
                                   href={lessonHref}
-                                  className="inline-flex min-h-[38px] items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-bold text-white shadow-2xs hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
+                                  className="inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-bold text-white shadow-2xs hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
                                 >
                                   <span>Start Lesson</span>
                                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -431,13 +431,13 @@ export function LearningHubExplorer({
                                 {hasPractice ? (
                                   <Link
                                     href={drillHref}
-                                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-btn border border-mm-line bg-white px-3 text-xs font-semibold text-mm-ink shadow-2xs hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
+                                    className="inline-flex min-h-11 items-center gap-1.5 rounded-btn border border-mm-line bg-white px-3 text-xs font-semibold text-mm-ink shadow-2xs hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
                                   >
                                     <PlayCircle className="h-3.5 w-3.5 text-teal-accent" aria-hidden="true" />
                                     <span>Practise drill</span>
                                   </Link>
                                 ) : (
-                                  <span className="inline-flex min-h-[38px] items-center px-2 text-xs font-semibold text-mm-muted">
+                                  <span className="inline-flex min-h-11 items-center px-2 text-xs font-semibold text-mm-muted">
                                     {node.isClassroomOnly ? "Practised in class" : "Practice coming soon"}
                                   </span>
                                 )}

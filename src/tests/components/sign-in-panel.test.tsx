@@ -54,7 +54,7 @@ import { SignInPanel } from "@/features/auth/components/SignInPanel";
  * — the login code is normalised and expanded into an internal alias email
  * that is never shown to anyone, and the PIN is the password.
  */
-function renderPanel(props?: { defaultKind?: "parent" | "student"; defaultEntry?: "signin" | "forgot" | "choose" | "student-help" }) {
+function renderPanel(props?: { defaultKind?: "parent" | "student"; defaultEntry?: "signin" | "forgot" | "choose" }) {
   return render(
     <AuthProvider>
       <SignInPanel {...props} />
@@ -301,20 +301,13 @@ describe("SignInPanel — role chooser and student helper", () => {
     expect(screen.getByLabelText(/^Your PIN, number 1 of 6/)).toBeInTheDocument();
   });
 
-  it("offers the 'Can't sign in?' helper for students and can return to sign-in", async () => {
-    const user = userEvent.setup();
+  it("sends a student who cannot sign in to the one help page, not a second copy of it", () => {
     renderPanel({ defaultKind: "student" });
 
-    const helpBtn = screen.getByRole("button", { name: /can't sign in\?/i });
-    expect(helpBtn).toBeInTheDocument();
-    await user.click(helpBtn);
-
-    expect(screen.getByRole("heading", { name: /can't sign in\?/i })).toBeInTheDocument();
-    expect(screen.getByText(/what's my login code\?/i)).toBeInTheDocument();
-    expect(screen.getByText(/can you reset my pin\?/i)).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: /back to sign-in/i }));
-    expect(screen.getByLabelText(/login code/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /i can.t sign in/i })).toHaveAttribute("href", "/student-sign-in/help");
+    /* Only the submit button may be called "Sign in": a second button whose name contains it makes the form
+       ambiguous to voice control and to tests alike. */
+    expect(screen.getAllByRole("button", { name: /sign in/i })).toHaveLength(1);
   });
 
   it("opens on the 'Who is signing in?' chooser when defaultEntry=choose", () => {

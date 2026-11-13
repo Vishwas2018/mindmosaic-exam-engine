@@ -153,7 +153,7 @@ export default function StudentPreviewPage() {
             {selectedScreen === "results" && "/student/results"}
             {selectedScreen === "result-review" && "/student/results/[id]/review"}
             {selectedScreen === "progress" && "/student/progress"}
-            {selectedScreen === "help" && "/student-help"}
+            {selectedScreen === "help" && "/student-sign-in/help"}
             {selectedScreen === "profile" && "/student/profile"}
           </span>
         </div>

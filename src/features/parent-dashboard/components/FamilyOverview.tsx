@@ -246,6 +246,17 @@ export function FamilyOverview({
                   </div>
                 </div>
 
+                {child.archived && (
+                  /* A paused login is said in words, with the way back, not left to a badge. */
+                  <p className="mt-3 text-sm font-semibold text-warning" role="status">
+                    {child.displayName}&apos;s login is archived, so they can&apos;t sign in. Their results are kept.{" "}
+                    <Link href="/parent/children" className="underline">
+                      Restore from Children
+                    </Link>
+                    .
+                  </p>
+                )}
+
                 {/* Seven-day activity display */}
                 {child.weekActivity && child.weekActivity.length > 0 && (
                   <div className="rounded-xl border border-royal/8 bg-royal/5 p-3.5">

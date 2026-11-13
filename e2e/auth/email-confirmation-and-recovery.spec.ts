@@ -111,7 +111,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     } else {
       // Default PKCE template: the link is bound to context A. B must be told so, focused and offered a resend,
       // and must not end up signed in.
-      const heading = pageB.getByRole("heading", { name: /link expired or invalid/i });
+      const heading = pageB.getByRole("heading", { name: /open this link on the same device/i });
       await expect(heading).toBeVisible({ timeout: 10000 });
       await expect(heading).toBeFocused();
       await expect(pageB.getByText(/opened on a different device or browser/i)).toBeVisible();
@@ -132,7 +132,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await page.goto(`/auth/confirm?code=foreign-unmatched-pkce-code&email=${encodeURIComponent(email)}`);
 
     // Must show clear cross-device problem message and focus the heading
-    const heading = page.getByRole("heading", { name: /link expired or invalid/i });
+    const heading = page.getByRole("heading", { name: /open this link on the same device/i });
     await expect(heading).toBeVisible({ timeout: 5000 });
     await expect(heading).toBeFocused();
     await expect(page.getByText(/opened on a different device or browser/i)).toBeVisible();
@@ -268,7 +268,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // The form is never shown
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
     // After timeout, problem state is shown with error focus
-    const heading = page.getByRole("heading", { name: /link expired or invalid/i });
+    const heading = page.getByRole("heading", { name: /open this link on the same device/i });
     await expect(heading).toBeVisible({ timeout: 15000 });
     await expect(heading).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
@@ -280,7 +280,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // 1. Explicit expired param
     await page.goto("/auth/reset?error_code=otp_expired");
-    const headingExpired = page.getByRole("heading", { name: /link expired or invalid/i });
+    const headingExpired = page.getByRole("heading", { name: /this reset link has expired/i });
     await expect(headingExpired).toBeVisible({ timeout: 15000 });
     await expect(headingExpired).toBeFocused();
     await expect(page.getByText(/this password reset link has expired/i)).toBeVisible();
@@ -288,7 +288,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // 2. Invalid recovery token_hash
     await page.goto("/auth/reset?token_hash=invalid-token-12345&type=recovery");
-    const headingInvalid = page.getByRole("heading", { name: /link expired or invalid/i });
+    const headingInvalid = page.getByRole("heading", { name: /this link can.t be used/i });
     await expect(headingInvalid).toBeVisible({ timeout: 15000 });
     await expect(headingInvalid).toBeFocused();
     await expect(page.getByLabel("New password", { exact: true })).not.toBeVisible();
@@ -323,7 +323,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const fresh = await browser.newContext();
     const freshPage = await fresh.newPage();
     await freshPage.goto(resetEmail.link);
-    const heading = freshPage.getByRole("heading", { name: /link expired or invalid/i });
+    const heading = freshPage.getByRole("heading", { name: /this link can.t be used|open this link on the same device/i });
     await expect(heading).toBeVisible({ timeout: 10000 });
     await expect(heading).toBeFocused();
     await expect(freshPage.getByLabel("New password", { exact: true })).not.toBeVisible();

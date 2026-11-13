@@ -210,6 +210,15 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run test:e2e
+      # A red run has to be diagnosable from the run itself: Playwright's per-test error context (an accessibility
+      # snapshot of the page at the moment of failure) and first-retry traces live here and were being thrown away.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-results
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
 
   # Infra-heavy (Docker + local Supabase + a real browser, both at once) —
   # its own job for the same reason as rls and e2e: this must never block
@@ -259,5 +268,12 @@ jobs:
       # context.
       - run: npm run e2e:seed
       - run: npm run test:e2e:auth
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-auth-test-results
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
       - if: always()
         run: supabase stop

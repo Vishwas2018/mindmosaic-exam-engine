@@ -629,7 +629,10 @@ export default function ResultsPage() {
                           ? "toggle-flagged-only"
                           : `review-filter-${filter.id}`
                       }
-                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
+                      /* No colour transition: a tab caught mid-fade between the selected and unselected
+                         palettes has neither one's contrast (3.9:1 was measured), and the state should
+                         change at once anyway. */
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                         selected
                           ? "border-primary bg-primary text-white"
                           : "border-parchment-border bg-white text-plum-muted hover:border-primary"

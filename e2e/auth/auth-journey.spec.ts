@@ -7,7 +7,7 @@ import { test, expect } from "../fixtures/auth.fixture";
  *   - /auth/forgot          (forgot password request)
  *   - /auth/session-expired (session expired)
  *   - /auth/signed-out      (signed out confirmation)
- *   - /student-help         (student login help)
+ *   - /student-sign-in/help (student login help)
  *
  * Plus regression coverage for existing auth flows:
  *   - Parent sign-in / sign-out
@@ -65,8 +65,8 @@ test.describe("New auth screens — rendered and accessible", () => {
   test("student help page renders with parent-directed guidance", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
-    await page.goto("/student-help");
-    await expect(page.getByRole("heading", { name: /sign in/i })).toBeVisible();
+    await page.goto("/student-sign-in/help");
+    await expect(page.getByRole("heading", { level: 1, name: /can.t sign in/i })).toBeVisible();
     await expect(page.getByText(/looked after by a grown-up/i)).toBeVisible();
     await expect(page.getByText(/Can you reset my PIN/i)).toBeVisible();
     await context.close();
@@ -121,7 +121,8 @@ test.describe("Student code/PIN authentication", () => {
       "true",
     );
     await expect(page.getByLabel(/login code/i)).toBeVisible();
-    await expect(page.getByLabel(/PIN/i)).toBeVisible();
+    await expect(page.getByRole("group", { name: "Your PIN" })).toBeVisible();
+    await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);
     await context.close();
   });
 
@@ -132,7 +133,11 @@ test.describe("Student code/PIN authentication", () => {
     const studentTab = page.getByRole("tab", { name: /student/i });
     await expect(studentTab).toBeVisible({ timeout: 15000 });
     await studentTab.click();
-    await expect(page.getByRole("link", { name: /parent view/i })).toBeVisible({ timeout: 15000 });
+    /* The student tab has one way to get help: the help page, which tells the child to ask a grown-up and gives
+       the grown-up their own way in. */
+    await page.getByRole("link", { name: /i can.t sign in/i }).click();
+    await expect(page).toHaveURL(/\/student-sign-in\/help$/, { timeout: 15000 });
+    await expect(page.getByRole("link", { name: /a grown-up signs in/i })).toHaveAttribute("href", "/sign-in");
     await context.close();
   });
 });
