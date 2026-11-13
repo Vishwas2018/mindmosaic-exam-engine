@@ -1,0 +1,65 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-30f6b506e9f643379eb704df",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "75a69f5cf3d89463d13e58693d209e9ca2d3293f750c0a5223bb80a5c35db48c",
+  "sourceManifestHash": "ae36c8b44200d2ddce3c8ef4c285d5dad68cb5178285cca8adf050a5c7ade671",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-30f6b506e9f643379eb704df",
+    "type": "multiple_select",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which of these numbers are less than 20? Select all that apply.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "8"
+      },
+      {
+        "id": "opt-b",
+        "text": "25"
+      },
+      {
+        "id": "opt-c",
+        "text": "19"
+      },
+      {
+        "id": "opt-d",
+        "text": "31"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "8 and 19 are both less than 20.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.number.odd-even",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ea214672781011e64ee66ad18e7c8bb93f49b69e16da1abe975c86b91263bae6"
+}

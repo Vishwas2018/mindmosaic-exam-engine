@@ -1,0 +1,49 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-db-014",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "6c27df0ed7f8fb235d25f172481670ec9057c5d1133a51efb7db303e10089003",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-db-014",
+    "type": "true_false",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In art class, a child writes the capital letter H. Is this statement true or false: the capital letter H has exactly one line of symmetry.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": false
+    },
+    "explanation": "A line of symmetry is a fold line where both halves match exactly. The capital H matches when folded down the middle from top to bottom, and it also matches when folded across the middle from left to right. That is two lines of symmetry, not one, so the statement is false.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Symmetry",
+      "skill": "Count lines of symmetry in a letter shape",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "symmetry",
+        "lines of symmetry",
+        "shapes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "3d5e33aef6fa2ff3874479a6f04147920dab67b3a247bd7573a0d3901769efb0"
+}

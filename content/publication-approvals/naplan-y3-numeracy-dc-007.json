@@ -1,0 +1,92 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-dc-007",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "bc6968eec3f969ce0cd4143f919cf1d8aaa437217ccc03eee0f2cf42de17ce5d",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-dc-007",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows the pets owned by children in a class. The circle is split into four equal parts, one for each kind of pet. What fraction of the children own a dog?",
+    "options": [
+      {
+        "id": "opt-half",
+        "text": "one half"
+      },
+      {
+        "id": "opt-third",
+        "text": "one third"
+      },
+      {
+        "id": "opt-eighth",
+        "text": "one eighth"
+      },
+      {
+        "id": "opt-quarter",
+        "text": "one quarter"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "visual-naplan-y3-numeracy-dc-007-1",
+        "altText": "A pie chart split into four equal parts labelled Dogs, Cats, Birds and Fish.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Dogs",
+              "value": 6
+            },
+            {
+              "label": "Cats",
+              "value": 6
+            },
+            {
+              "label": "Birds",
+              "value": 6
+            },
+            {
+              "label": "Fish",
+              "value": 6
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-quarter"
+    },
+    "explanation": "The circle is cut into four equal slices, one for each pet. The dog slice is one of those four equal parts, and one out of four equal parts is one quarter.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Fractions of a whole",
+      "skill": "Name the fraction shown by one equal part of a pie chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "fractions",
+        "pie chart",
+        "quarters"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "962375bf319d4c6c4b3a4099b5753f971a0295f49e725a2ac6ae51bc90dfff3e"
+}

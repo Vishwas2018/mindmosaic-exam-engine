@@ -1,0 +1,65 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-4fc5e33369f68d95c00b000a",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "f3506d33113b795b215d797a371ce860cfdcf11dc2f61f83858545342e0c0103",
+  "sourceManifestHash": "696800300ba159042853cc06569496b7cf1655adf5fb87a7b891b075596aaf27",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-4fc5e33369f68d95c00b000a",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Calculate: 7/8 - 1/4. Which answer represents the difference?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "6/4"
+      },
+      {
+        "id": "opt-b",
+        "text": "5/8"
+      },
+      {
+        "id": "opt-c",
+        "text": "6/8"
+      },
+      {
+        "id": "opt-d",
+        "text": "3/8"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "1/4 = 2/8. 7/8 - 2/8 = 5/8.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "math.number.g5.fraction-arithmetic",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "fractions",
+        "subtraction"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "107ab904e62057d0e07f781ce22d78215320312a0c89d275b1e485ee472af0f5"
+}

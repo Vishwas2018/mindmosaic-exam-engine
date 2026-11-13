@@ -1,0 +1,85 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-geo-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "812a9e0a0fe1057e925602f77bbb3dab626ef201935c4d4e8e6d9bd9e5d2aac5",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-geo-001",
+    "type": "true_false",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "True or false? This triangle is a right-angled triangle.",
+    "instructions": "Look carefully at the corner where the two short sides meet.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "g5-right-triangle",
+        "altText": "A triangle with corners at (0, 0), (4, 0) and (0, 3). The horizontal base and vertical side meet at a square corner.",
+        "title": "A triangle",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "triangle",
+          "measurements": [
+            {
+              "label": "Base",
+              "value": 4,
+              "unit": "cm"
+            },
+            {
+              "label": "Height",
+              "value": 3,
+              "unit": "cm"
+            }
+          ],
+          "vertices": [
+            {
+              "x": 0,
+              "y": 0
+            },
+            {
+              "x": 4,
+              "y": 0
+            },
+            {
+              "x": 0,
+              "y": 3
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "boolean",
+      "value": true
+    },
+    "explanation": "The base runs straight across and the height runs straight up, meeting at a square corner of 90 degrees. A triangle with a 90-degree angle is right-angled, so the statement is true.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Types of triangles",
+      "skill": "Identifying right angles in shapes",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "angles",
+        "triangles"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "421c65105077cae8026d26945b884497149820fb58c47ac206d546730800a792"
+}

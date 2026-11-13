@@ -1,0 +1,68 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-36f0cdbf782ea13346cef9c1",
+  "revision": 2,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "112baa85b2142343897d47c87e0ed884ba3413bdaa93700f857aeba057d0e1f4",
+  "sourceManifestHash": "6035d37e2e27c0d1ba71b99190662fd509f700b9d1de934d1577af4e8b602e67",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-36f0cdbf782ea13346cef9c1",
+    "type": "multiple_select",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A parking garage numbers every level so that each level number is a multiple of 7. Select every level number below that could be used in this garage.",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "14"
+      },
+      {
+        "id": "opt-b",
+        "text": "20"
+      },
+      {
+        "id": "opt-c",
+        "text": "21"
+      },
+      {
+        "id": "opt-d",
+        "text": "25"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "multiple_options",
+      "optionIds": [
+        "opt-a",
+        "opt-c"
+      ]
+    },
+    "explanation": "A level number can only be used if it divides evenly by 7, leaving no remainder. Checking each option, 14 and 21 both divide evenly by 7. The remaining options each leave a remainder when divided by 7. So only 14 and 21 are genuine multiples of 7.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Identifying common multiples",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "multiples"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ea2d5c058ad3d738db2f84742e16da66f387304e591ad2546a6f8fbbddc69e35"
+}
