@@ -165,7 +165,8 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
             ))}
           </div>
 
-          {/* Artboard switcher pills */}
+          {/* Artboard switcher pills: a design-review aid, shown only over the synthetic preview data. */}
+          {data.source === "preview" && (
           <div className="flex flex-wrap items-center gap-1 text-xs">
             <span className="font-bold text-royal mr-1">Artboards:</span>
             {[
@@ -198,6 +199,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
               </button>
             ))}
           </div>
+          )}
         </div>
       </header>
 
@@ -283,7 +285,8 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                 { id: "support", label: "Support inquiries", icon: LifeBuoy, count: data.support.items.length },
                 { id: "activity", label: "Activity history", icon: History },
                 { id: "governance", label: "Governance path", icon: ShieldCheck },
-                { id: "states", label: "State boards (b4-b22)", icon: Layers },
+                /* The state boards are a gallery of designed states, not an operational view. */
+                ...(data.source === "preview" ? [{ id: "states", label: "State boards (b4-b22)", icon: Layers }] : []),
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = currentView === item.id;

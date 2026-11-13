@@ -46,9 +46,9 @@ test.describe("Admin Workspace Authorization & Navigation", () => {
     await expect(page.getByRole("heading", { name: /Publication Status & Tamper-Evident Ledger/i })).toBeVisible();
     await expect(page.getByText(/Tamper-Evident Ledger Root Hash/i)).toBeVisible();
 
-    // Navigate to State Boards
-    await page.getByRole("button", { name: /State boards/i }).click();
-    await expect(page.getByRole("heading", { name: /Approved State Boards & Edge Cases/i })).toBeVisible();
+    // The design-review aids (artboard switcher, state-board gallery) belong to the synthetic preview only.
+    await expect(page.getByRole("button", { name: /State boards/i })).toHaveCount(0);
+    await expect(page.getByText(/^Artboards:$/)).toHaveCount(0);
 
     await page.close();
   });
