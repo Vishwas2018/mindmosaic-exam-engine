@@ -38,4 +38,12 @@ recorded in the last column as supporting evidence, never as the pass.
 
 ## Results
 
-None yet. No scenario has run against a Preview.
+### 2026-11-13, Preview `rg3yjc7he` (`ff775d2d`), before `20261031090100`
+
+`run-preview-acceptance.cjs`: 65/66 passed. Covered: B4-B7 at API level (NAPLAN 3 forms, ICAS 2 forms; create,
+no answer leak, autosave, resume, submit, forged client score ignored, totals and per-question status equal to the
+independent oracle, single persisted attempt, resubmit 409, post-submit autosave 409), C1-C3 (`HISTORY`), D5
+(`ISO-SUBMIT`, `ISO-AUTOSAVE`, `ISO-READ`, `ISO-RLS`) and anonymous read denied. Failed: `FORGE-RPC`, the
+known legacy-RPC hole that `20261031090100` closes.
+
+Not yet run on the Preview: A1-A6, B1-B3, B8, C4-C5, D1-D4, E (browser passes).

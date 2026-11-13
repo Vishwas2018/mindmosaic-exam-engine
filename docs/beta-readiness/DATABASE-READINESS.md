@@ -142,3 +142,21 @@ applied, and to pass after.
 - That the server-only Preview secrets point at DEV (see above).
 - RLS behaviour on hosted DEV (only the local stack was exercised).
 - Any exam start, autosave, submit or scoring on a deployed Preview.
+
+## Lockdown approval request: `20261031090100` (DEV only)
+
+Prepared 2026-11-13 after the new write path passed on Preview `rg3yjc7he` (`ff775d2d`), 65/66, the only failure
+being `FORGE-RPC`.
+
+- **What runs:** `supabase/migrations/20261031090100_revoke_legacy_exam_write_rpcs_from_clients.sql`, alone,
+  against `mfglzabnayacssgertat` through the linked dir `C:/tmp/mm-dev-link` (`supabase db query --linked -f`),
+  then its ledger row. Never `db push`. Production untouched.
+- **What it does:** revokes EXECUTE on `create_exam_session` and `record_exam_attempt` from `public`, `anon` and
+  `authenticated`, refuses to run if the `_for` replacements are missing, and asserts the result. No table, row or
+  function is dropped. `service_role` keeps its grant.
+- **Who breaks:** any deployment that still calls the legacy RPCs with a user JWT. That is every Preview built
+  from a branch without this branch's write path, **including `dev`**. Exam start and submit there fail with 42501
+  until #123 reaches `dev`.
+- **Verification after:** as the synthetic student over PostgREST both legacy RPCs return 42501; rerun
+  `run-preview-acceptance.cjs`: `FORGE-RPC` passes and the other 65 stay green; ledger shows no drift.
+- **Rollback:** see the runbook (re-grant to `authenticated`, which re-opens the hole; record who decided).
