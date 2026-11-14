@@ -44,7 +44,7 @@ async function dismissWelcome(page: Page) {
 
 /** Answers the visible question with whatever control it offers. Returns the kind used. */
 async function answerVisible(page: Page, text = "6"): Promise<string> {
-  const q = page.locator("main");
+  const q = page.getByRole("main");
   const radio = q.getByRole("radio").first();
   if (await radio.isVisible().catch(() => false)) {
     await radio.check({ force: true }).catch(async () => radio.click());
@@ -198,7 +198,7 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   const { objectiveMarksEarned: earned, objectiveMarksAvailable: total, objectivePercentage: pct, correctCount } =
     attempt.result;
   testInfo.annotations.push({ type: "stored-marks", description: `${earned}/${total} ${pct}% correct=${correctCount}` });
-  const main = page.locator("main");
+  const main = page.getByRole("main");
   await expect(main).toContainText(`${pct}%`);
   await expect(main).toContainText(new RegExp(`\\b${earned}\\s*(/|out of|of)\\s*${total}\\b`));
 
@@ -233,15 +233,15 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   await shot("c12-parent-home");
   await page.goto(`/parent/children/${user!.id}/progress`);
   // With fewer than 2 papers the page must say so rather than draw conclusions (evidence rule from PR #121)
-  await expect(page.locator("main")).toContainText(/finished 1 paper|One paper so far|Numeracy/i);
-  await expect(page.locator("main"), "no internal build notes shown to parents").not.toContainText(/NEEDS A BUILD|does not exist yet/i);
-  await expect(page.locator("main"), "no raw skill ids shown to parents").not.toContainText(/Num\.[a-z]+\./);
+  await expect(page.getByRole("main")).toContainText(/finished 1 paper|One paper so far|Numeracy/i);
+  await expect(page.getByRole("main"), "no internal build notes shown to parents").not.toContainText(/NEEDS A BUILD|does not exist yet/i);
+  await expect(page.getByRole("main"), "no raw skill ids shown to parents").not.toContainText(/Num\.[a-z]+\./);
   await shot("c12-parent-child-progress");
   // Follow the parent's own link to the paper, as a parent would
   await page.getByRole("link", { name: /Open/ }).first().click();
   await expect(page).toHaveURL(/\/parent\/results\//);
-  await expect(page.locator("main")).toContainText(new RegExp(`(?<!\\d)${earned}\\s*(of|/)\\s*${total}(?!\\d)`));
-  await expect(page.locator("main"), "no invented time limit").not.toContainText(/minutes of 40/);
+  await expect(page.getByRole("main")).toContainText(new RegExp(`(?<!\\d)${earned}\\s*(of|/)\\s*${total}(?!\\d)`));
+  await expect(page.getByRole("main"), "no invented time limit").not.toContainText(/minutes of 40/);
   await shot("c12-parent-result-detail");
 
   fs.writeFileSync(testInfo.outputPath("console-errors.json"), JSON.stringify(consoleErrors, null, 2));

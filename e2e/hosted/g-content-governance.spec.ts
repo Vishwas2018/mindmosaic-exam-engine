@@ -8,7 +8,7 @@ import { expect, test } from "./fixtures";
 test("G: only approved programmes are offered, with approved counts", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
   await page.goto("/practice");
-  const main = page.locator("main");
+  const main = page.getByRole("main");
   await expect(main.getByRole("heading", { level: 3, name: /NAPLAN-style Numeracy — Grade 3/ })).toBeVisible();
   await expect(main.getByRole("heading", { level: 3, name: /NAPLAN-style Numeracy — Grade 5/ })).toBeVisible();
   for (const withdrawn of [/Reading — Grade/, /Language Conventions — Grade/, /ICAS-style/]) {

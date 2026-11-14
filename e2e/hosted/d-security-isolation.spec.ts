@@ -173,7 +173,7 @@ ${sbGetBody.slice(0, 4000)}`,
   expect(after.data, "A's stored attempt is unchanged").toEqual(before.data);
   evidence.studentB_api = { get: sbGet.status(), save: sbSave.status(), submit: sbSubmit.status() };
   await pageSB.goto(`/results?attempt=${A.attemptId}`);
-  await expect(pageSB.locator("main")).not.toContainText(A.childName);
+  await expect(pageSB.getByRole("main")).not.toContainText(A.childName);
   const studentBToken = await accessToken(pageSB.context());
   const rest = await fetch(`${SB}/rest/v1/exam_attempts?select=id&id=eq.${A.attemptId}`, {
     headers: { apikey: anonKey, Authorization: `Bearer ${studentBToken}` },
@@ -214,7 +214,7 @@ ${sbGetBody.slice(0, 4000)}`,
   }
   // A child is never shown a plan, a price or a checkout
   await pageSB.goto("/billing");
-  await expect(pageSB.locator("main")).not.toContainText(/A\$|per month|Subscribe|Checkout|Choose the Family plan/i);
+  await expect(pageSB.getByRole("main")).not.toContainText(/A\$|per month|Subscribe|Checkout|Choose the Family plan/i);
   await pageSB.context().close();
 
   // Anonymous
@@ -225,8 +225,8 @@ ${sbGetBody.slice(0, 4000)}`,
   }
   // /results is open to guests (practice without an account) but holds no server data for them
   await anon.goto(`/results?attempt=${A.attemptId}`);
-  await expect(anon.locator("main")).not.toContainText(A.childName);
-  await expect(anon.locator("main")).toContainText(/No results to show yet|Finish an exam/i);
+  await expect(anon.getByRole("main")).not.toContainText(A.childName);
+  await expect(anon.getByRole("main")).toContainText(/No results to show yet|Finish an exam/i);
   const anonCreate = await api(anon).post("/api/exam/session", {});
   expect(anonCreate.status(), "anonymous exam session create").toBeGreaterThanOrEqual(400);
   const anonRest = await fetch(`${SB}/rest/v1/exam_attempts?select=id&limit=1`, {
