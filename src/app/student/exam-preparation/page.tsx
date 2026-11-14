@@ -5,7 +5,6 @@ import { GraduationCap, Medal, School, Sigma } from "lucide-react";
 
 import { JurisdictionPicker } from "@/features/student/components/JurisdictionPicker";
 import { ExamCentreAdviceCard } from "@/features/student/components/exam-centre/ExamCentreAdviceCard";
-import { ExamCentreBatterySpotlight } from "@/features/student/components/exam-centre/ExamCentreBatterySpotlight";
 import { ExamCentreHero } from "@/features/student/components/exam-centre/ExamCentreHero";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
@@ -31,9 +30,10 @@ export const dynamic = "force-dynamic";
  * Placeholder, clearly marked in their own files: the hero's readiness tile
  * uses real average mastery instead of the mock's fabricated "Cohort
  * Preparedness"/"Stage 3 Ready" framing (no cohort/class-comparison data
- * exists), and the "NAPLAN Year 5 Simulation Battery" is a fixed
- * illustrative preview — this codebase has no multi-domain "battery"
- * concept, only single-paper attempts (see ExamCentreBatterySpotlight).
+ * exists). The canvas's "NAPLAN Year 5 Simulation Battery" is not shown to
+ * students: it was a fixed illustration ("Example: 1 / 4 complete") of a
+ * multi-paper concept this codebase does not have, and a child cannot tell
+ * an illustration from their own progress.
  */
 
 interface FormatCard {
@@ -167,8 +167,6 @@ export default async function StudentExamPreparationPage() {
           </div>
         )}
       </section>
-
-      <ExamCentreBatterySpotlight />
 
       {/* ---------- Format cards ---------- */}
       <section aria-labelledby="formats-heading" className="grid gap-3.5">
