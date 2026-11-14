@@ -104,9 +104,7 @@ describe("ParentPracticePreview Component", () => {
     const setBtn = screen.getByRole("button", { name: "Set a 10-question set" });
     expect(setBtn).toBeDisabled();
     expect(
-      screen.getByText(
-        /Not built, and not obviously wanted\. It turns practice into homework a child did not choose/i,
-      ),
+      screen.getByText(/Practice on MindMosaic stays your child’s choice/i),
     ).toBeInTheDocument();
   });
 

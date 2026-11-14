@@ -68,9 +68,6 @@ export function ParentAccount({
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   // Notification toggles
-  const [notifyWeekly, setNotifyWeekly] = useState(true);
-  const [notifyMarked, setNotifyMarked] = useState(true);
-  const [notifyFortnight, setNotifyFortnight] = useState(false);
 
   const youHeadingId = useId();
   const secHeadingId = useId();
@@ -260,7 +257,7 @@ export function ParentAccount({
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3.5 py-2.5 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3.5 py-2.5 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
                 />
               </div>
 
@@ -274,7 +271,7 @@ export function ParentAccount({
                   value={email}
                   readOnly
                   aria-describedby="account-email-help"
-                  className="mt-1 block w-full rounded-xl border border-royal/10 bg-surface-container-low/40 px-3.5 py-2.5 text-sm font-semibold text-muted shadow-2xs cursor-not-allowed"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/10 bg-surface-container-low/40 px-3.5 py-2.5 text-sm font-semibold text-muted shadow-2xs cursor-not-allowed"
                 />
                 <p id="account-email-help" className="mt-1 text-xs leading-relaxed text-muted">
                   Changing this sends a link to the new address. The old one keeps working until you use the link.
@@ -389,72 +386,35 @@ export function ParentAccount({
             </p>
 
             <div className="mt-5 divide-y divide-royal/10">
-              {/* Item 1: Weekly summary */}
+              {/* Planned emails. They are not sent yet, so there is nothing to switch on or off: a toggle here would be a
+                  control that changes nothing. */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Weekly summary</span>
-                  <span className="mt-0.5 block text-xs text-muted">
-                    What both children did, every Sunday evening.
-                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">What your children did, every Sunday evening.</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-muted">
-                    Not built
-                  </span>
-                  <input
-                    type="checkbox"
-                    checked={notifyWeekly}
-                    onChange={(e) => setNotifyWeekly(e.target.checked)}
-                    aria-label="Weekly summary email notification"
-                    className="h-5 w-5 rounded accent-royal"
-                  />
-                </div>
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                  Not sent yet
+                </span>
               </div>
-
-              {/* Item 2: Written answers marked */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Written answers marked</span>
-                  <span className="mt-0.5 block text-xs text-muted">
-                    When a person has marked a written answer.
-                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">When a person has marked a written answer.</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-muted">
-                    Not built
-                  </span>
-                  <input
-                    type="checkbox"
-                    checked={notifyMarked}
-                    onChange={(e) => setNotifyMarked(e.target.checked)}
-                    aria-label="Written answers marked notification"
-                    className="h-5 w-5 rounded accent-royal"
-                  />
-                </div>
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                  Not sent yet
+                </span>
               </div>
-
-              {/* Item 3: Nothing for a fortnight */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Nothing for a fortnight</span>
-                  <span className="mt-0.5 block text-xs text-muted">
-                    A nudge if neither child has practised.
-                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">A nudge if none of your children has practised.</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-muted">
-                    Not built
-                  </span>
-                  <input
-                    type="checkbox"
-                    checked={notifyFortnight}
-                    onChange={(e) => setNotifyFortnight(e.target.checked)}
-                    aria-label="Fortnightly inactivity nudge notification"
-                    className="h-5 w-5 rounded accent-royal"
-                  />
-                </div>
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                  Not sent yet
+                </span>
               </div>
-
               {/* Item 4: Billing (Always on). Only a family that pays has payments that can fail. */}
               {paying && (
               <div className="flex items-start justify-between gap-4 py-3.5">
@@ -664,7 +624,7 @@ export function ParentAccount({
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
               />
             </div>
 
@@ -728,7 +688,7 @@ export function ParentAccount({
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
                 />
               </div>
 
@@ -741,7 +701,7 @@ export function ParentAccount({
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
                 />
               </div>
 

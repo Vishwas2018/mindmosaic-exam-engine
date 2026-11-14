@@ -231,7 +231,7 @@ export function ParentPracticePreview({
             </button>
 
             <p className="mt-3 text-[11px] leading-relaxed text-muted">
-              Not built, and not obviously wanted. It turns practice into homework a child did not choose, which is the opposite of how the student side is designed. Needs your approval before it is built, not after.
+              Not available. Practice on MindMosaic stays your child’s choice, so parents cannot set work for them.
             </p>
           </section>
 
