@@ -723,7 +723,7 @@ export function SignUpWizard({
 
         {error && (
           <div key={shake.key} className={shake.className}>
-            <MmErrorPanel>{error}</MmErrorPanel>
+            <MmErrorPanel focusOnMount>{error}</MmErrorPanel>
           </div>
         )}
 

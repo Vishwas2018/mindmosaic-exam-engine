@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-db-004",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "cfc92ad5de35efb4642da8338006b4352bfa086dc396d0e84357b775b13fe8ee",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-db-004",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A netball club has 8 teams and each team has 7 players. On game day, 5 players are away sick. How many players are present?",
+    "options": [
+      {
+        "id": "opt-56",
+        "text": "56"
+      },
+      {
+        "id": "opt-63",
+        "text": "63"
+      },
+      {
+        "id": "opt-51",
+        "text": "51"
+      },
+      {
+        "id": "opt-49",
+        "text": "49"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-51"
+    },
+    "explanation": "First find the total number of players: 8 groups of 7 is 8 x 7 = 56. Then take away the 5 who are sick: 56 - 5 = 51. The two steps are multiply, then subtract.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Multiplication facts and two-step problems",
+      "skill": "Solve a two-step problem using a multiplication fact then subtraction",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "multiplication",
+        "two-step",
+        "sport"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "81243854244549f6cd2dbe261d66513275c2c8d892f0541cbd91dbd04813729f"
+}

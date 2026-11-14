@@ -92,6 +92,15 @@ const GROUPS: Group[] = [
       { path: "/admin/operations", label: "Operations", flags: ["mock-data"], note: "mock background jobs" },
     ],
   },
+  {
+    title: "Dev & Design Previews",
+    access: "Dev environment only",
+    routes: [
+      { path: "/dev/student-preview", label: "Student Canvas Design Inspector (PR #109 catalog, 56 artboards)", flags: ["dev-tool"] },
+      { path: "/dev/writing", label: "Writing prompt workbench", flags: ["dev-tool"] },
+      { path: "/dev/bar-model", label: "Bar model renderer sandbox", flags: ["dev-tool"] },
+    ],
+  },
 ];
 
 const FLAG_LABEL: Record<Flag, string> = {

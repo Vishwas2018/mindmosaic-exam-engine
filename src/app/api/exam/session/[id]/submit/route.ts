@@ -14,6 +14,7 @@ import { createClient } from "@/lib/supabase/server";
 import { resolveSittingSource } from "@/server/assessment/read-dispatch";
 import { submitTargetSession } from "@/server/assessment/target-session-writes";
 import { getExamBank } from "@/server/exam-bank";
+import { recordLegacyExamAttempt } from "@/server/exam-write/legacy-exam-writes";
 import { withScholarshipSample } from "@/server/scholarship-sample-preview";
 
 /**
@@ -25,7 +26,10 @@ import { withScholarshipSample } from "@/server/scholarship-sample-preview";
  * client never receives an answer key before this response.
  *
  * MM-AUD-SEC-001: the attempt is written by the SECURITY DEFINER function
- * public.record_exam_attempt (see
+ * public.record_exam_attempt_for, executable only by the dedicated
+ * mindmosaic_exam_writer role (20261031090000; the client-callable
+ * record_exam_attempt that accepted a caller-chosen result was revoked in
+ * 20261031090100). Originally public.record_exam_attempt (see
  * supabase/migrations/20260811090000_exam_write_rpcs.sql), not by an insert
  * through the caller's own JWT. `authenticated` no longer holds INSERT on
  * exam_attempts (20260811091000): the old insert policy constrained only
@@ -170,13 +174,15 @@ export async function POST(
     return NextResponse.json({ error: "invalid_responses" }, { status: 400 });
   }
 
-  /* student_id is not passed: record_exam_attempt takes it from auth.uid()
-     and re-derives session ownership and expiry itself, so the checks above
-     are the clear-error path and the function is the boundary. */
-  const { error } = await supabase.rpc("record_exam_attempt", {
-    p_session_id: session.id,
-    p_responses: parsed.data.responses,
-    p_result: result,
+  /* The student id is the one this route just authenticated, and the session ownership and expiry checks are
+     repeated inside record_exam_attempt_for, so the clear-error path above and the function are both the boundary.
+     The write is made by the dedicated mindmosaic_exam_writer role: `authenticated` can no longer execute the
+     function that accepted a caller-chosen result, so `result` below is the only value this column can hold. */
+  const { error } = await recordLegacyExamAttempt({
+    studentId: user.id,
+    sessionId: session.id,
+    responses: parsed.data.responses,
+    result,
   });
   if (error) {
     /* MM-SEC-02: the maybeSingle() pre-check above is only a fast path —
@@ -199,6 +205,10 @@ export async function POST(
     }
     if (error.code === "MM004") {
       return NextResponse.json({ error: "session_expired" }, { status: 410 });
+    }
+    /* Fails closed when the write role is not configured; never falls back to the user's own client. */
+    if (error.code === "not_configured") {
+      return NextResponse.json({ error: "not_configured" }, { status: 503 });
     }
     return NextResponse.json({ error: "attempt_not_recorded" }, { status: 500 });
   }

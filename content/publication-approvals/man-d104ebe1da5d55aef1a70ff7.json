@@ -1,0 +1,97 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-d104ebe1da5d55aef1a70ff7",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "fcff039699f90612472a8e3f57a1ef1c12c70e4b69000b0b47312ba5b13506e4",
+  "sourceManifestHash": "d5d23110a4f3884d55e7f9a29603025f45a8145e75549da31a0b0024d780fc0b",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-d104ebe1da5d55aef1a70ff7",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The line graph below shows the number of birds counted at a wetland across four surveys. In which survey was the highest value recorded?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Survey 1"
+      },
+      {
+        "id": "opt-b",
+        "text": "Survey 2"
+      },
+      {
+        "id": "opt-c",
+        "text": "Survey 3"
+      },
+      {
+        "id": "opt-d",
+        "text": "Survey 4"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-lg2",
+        "altText": "Line graph showing the number of birds counted at a wetland across four surveys, with clearly varying values across four points.",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 1,
+              "y": 40,
+              "label": "Survey 1"
+            },
+            {
+              "x": 2,
+              "y": 22,
+              "label": "Survey 2"
+            },
+            {
+              "x": 3,
+              "y": 55,
+              "label": "Survey 3"
+            },
+            {
+              "x": 4,
+              "y": 33,
+              "label": "Survey 4"
+            }
+          ],
+          "yAxisLabel": "Number of birds",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Comparing all four plotted points shows Survey 3 has the highest recorded value at 55. Every other point sits lower than this one.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Finding the maximum on a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "tags": [
+        "statistics",
+        "line-graph"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "c6dd449880b0e82278175685541887143670fe3ac443e4964cee78457488deb9"
+}

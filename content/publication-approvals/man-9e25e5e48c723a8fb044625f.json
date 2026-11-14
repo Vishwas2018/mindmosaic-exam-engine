@@ -1,0 +1,51 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-9e25e5e48c723a8fb044625f",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "40c9a0a51d078b8d372b40eeb716146a552428f0a932c658a68fcb0c4382eca3",
+  "sourceManifestHash": "e6b6c300f5a48a54420ad773e1359cae6889e8bdfe32ab2d967eb8b1eae57df1",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-9e25e5e48c723a8fb044625f",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On a plant growth line graph, height was 12 cm at Week 2 and 27 cm at Week 5. How many centimetres did the plant grow in that 3-week period?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 15,
+      "tolerance": 0
+    },
+    "explanation": "Change in height = 27 cm - 12 cm = 15 cm.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Calculating rate of change from a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "line-graphs",
+        "growth",
+        "data-change",
+        "orig-id:g5-stat-line-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "f1930751e1b900d09329e3ed0a0dd830f3b550d7d19316eab7d83a7c295b8710"
+}

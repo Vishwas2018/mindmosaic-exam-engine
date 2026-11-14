@@ -1,0 +1,67 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-fb36f353f7800d150dd581dd",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "75ec1af1c41388d0ed9778c305d695edc518dd068092378351e36d0e6b729159",
+  "sourceManifestHash": "5c8e7902f636c151d55467a86055239cc062260be622f470d07ff5a3913a62a9",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-fb36f353f7800d150dd581dd",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A jug contained 1 1/2 litres of juice. After Sam drank 3/4 of a litre, how much juice remained in the jug?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "1/4 L"
+      },
+      {
+        "id": "opt-b",
+        "text": "3/4 L"
+      },
+      {
+        "id": "opt-c",
+        "text": "1/2 L"
+      },
+      {
+        "id": "opt-d",
+        "text": "1 L"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "1 1/2 = 6/4 L. 6/4 - 3/4 = 3/4 L.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Subtracting from mixed numerals",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "mixed-numerals",
+        "fractions",
+        "subtraction",
+        "orig-id:g5-num-fracadd-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "724bebc260340289fa08a987b61eebe6fb1a8baa97e631d674638f69cfac01cd"
+}

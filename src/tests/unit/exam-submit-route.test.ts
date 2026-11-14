@@ -95,12 +95,17 @@ function mockSupabaseClient({ existingAttempt, insertResult, user = { id: STUDEN
     }
     throw new Error(`unexpected table: ${table}`);
   });
+  /* P1 lockdown: the student's own client must never write an attempt. `authenticated` cannot execute the legacy
+     function any more (20261031090100), so any RPC through this client on the submit path is a regression. */
+  const userRpc = vi.fn(async () => {
+    throw new Error("the submit route must not call an RPC through the student's own client");
+  });
   const client = {
     auth: { getUser: async () => ({ data: { user } }) },
-    rpc: mockInsert,
+    rpc: userRpc,
     from,
   };
-  return { client, mockInsert, from };
+  return { client, mockInsert, from, userRpc };
 }
 
 function submitRequest(
@@ -120,10 +125,20 @@ function submitRequest(
 
 async function loadRoute(options: SupabaseMockOptions) {
   vi.resetModules();
-  const { client, mockInsert, from } = mockSupabaseClient(options);
+  const { client, mockInsert, from, userRpc } = mockSupabaseClient(options);
   vi.doMock("@/lib/supabase/server", () => ({ createClient: vi.fn(async () => client) }));
+  /* The attempt is written by the dedicated exam-writer role through this module (20261031090000). `mockInsert`
+     now stands in for that write, keeping the call shape these tests have always asserted on. */
+  vi.doMock("@/server/exam-write/legacy-exam-writes", () => ({
+    recordLegacyExamAttempt: async (input: Record<string, unknown>) => {
+      const outcome = await mockInsert("record_exam_attempt_for", input);
+      return outcome.error
+        ? { attemptId: null, error: outcome.error }
+        : { attemptId: "attempt-1", error: null };
+    },
+  }));
   const routeModule = await import("@/app/api/exam/session/[id]/submit/route");
-  return { POST: routeModule.POST, mockInsert, from };
+  return { POST: routeModule.POST, mockInsert, from, userRpc };
 }
 
 describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission", () => {
@@ -133,6 +148,7 @@ describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission
 
   afterEach(() => {
     vi.doUnmock("@/lib/supabase/server");
+    vi.doUnmock("@/server/exam-write/legacy-exam-writes");
   });
 
   it("stores exactly one attempt and returns the result on the happy path", async () => {
@@ -150,17 +166,16 @@ describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission
 
     expect(mockInsert).toHaveBeenCalledTimes(1);
     const [fn, params] = mockInsert.mock.calls[0];
-    expect(fn).toBe("record_exam_attempt");
+    expect(fn).toBe("record_exam_attempt_for");
     expect(params).toMatchObject({
-      p_session_id: SESSION_ID,
-      p_responses: { q1: "answer" },
+      sessionId: SESSION_ID,
+      responses: { q1: "answer" },
       /* The score the route computed — and, now that no other path can
          write the column, the only value it can ever hold. */
-      p_result: { status: "completed", score: 1, maxScore: 1 },
+      result: { status: "completed", score: 1, maxScore: 1 },
+      /* The student id is the one the route authenticated, never one from the request. */
+      studentId: STUDENT_ID,
     });
-    /* student_id comes from auth.uid() inside the function. */
-    expect(params).not.toHaveProperty("student_id");
-    expect(params).not.toHaveProperty("p_student_id");
   });
 
   it("returns the idempotent 409 (not a 500) when the insert loses the TOCTOU race with a 23505 unique violation", async () => {
@@ -241,11 +256,54 @@ describe("POST /api/exam/session/[id]/submit — MM-SEC-02 idempotent submission
     expect(response.status).toBe(410);
     expect(await response.json()).toEqual({ error: "session_expired" });
   });
+
+  /*
+   * P1 lockdown. The result stored is the one the route computed, the student is the one it authenticated, and
+   * nothing a client puts in the body can change either. The route never touches the student's own client for the
+   * write (it would be refused: `authenticated` cannot execute the legacy function any more).
+   */
+  it("records the server-computed result for the authenticated student even when the body carries a forged score and another student's id", async () => {
+    const { POST, mockInsert, userRpc } = await loadRoute({ existingAttempt: null, insertResult: { error: null } });
+
+    const response = await POST(
+      submitRequest({
+        responses: { q1: "answer" },
+        result: { status: "completed", score: 9999, maxScore: 9999 },
+        score: 9999,
+        studentId: "someone-else",
+        student_id: "someone-else",
+        p_result: { score: 9999 },
+      }),
+      { params: Promise.resolve({ id: SESSION_ID }) },
+    );
+
+    expect(response.status).toBe(200);
+    expect(mockInsert).toHaveBeenCalledTimes(1);
+    const [, params] = mockInsert.mock.calls[0];
+    expect(params).toMatchObject({ studentId: STUDENT_ID, result: { status: "completed", score: 1, maxScore: 1 } });
+    expect(JSON.stringify(params)).not.toContain("9999");
+    expect(JSON.stringify(params)).not.toContain("someone-else");
+    expect(userRpc).not.toHaveBeenCalled();
+  });
+
+  it("fails closed with 503 when the exam write role is not configured, writing nothing", async () => {
+    const { POST, mockInsert } = await loadRoute({
+      existingAttempt: null,
+      insertResult: { error: { code: "not_configured", message: "exam write role is not configured." } },
+    });
+
+    const response = await POST(submitRequest(), { params: Promise.resolve({ id: SESSION_ID }) });
+
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({ error: "not_configured" });
+    expect(mockInsert).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("POST /api/exam/session/[id]/submit — guard sweep (auth, origin, body)", () => {
   afterEach(() => {
     vi.doUnmock("@/lib/supabase/server");
+    vi.doUnmock("@/server/exam-write/legacy-exam-writes");
   });
 
   it("rejects an unauthenticated caller", async () => {

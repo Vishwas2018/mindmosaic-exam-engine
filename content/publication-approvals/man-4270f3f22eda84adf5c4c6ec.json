@@ -1,0 +1,62 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-4270f3f22eda84adf5c4c6ec",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "80e16065c3a27bf7b7c91c03b1d84dbca043b29e86ccf94e0147abb0e513c75b",
+  "sourceManifestHash": "0ce917b0687fc69eb1e7a6b05ef95b0caebc28375fa490a140fa7998e43d6e77",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-4270f3f22eda84adf5c4c6ec",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 45 + 38?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "83"
+      },
+      {
+        "id": "opt-b",
+        "text": "73"
+      },
+      {
+        "id": "opt-c",
+        "text": "93"
+      },
+      {
+        "id": "opt-d",
+        "text": "84"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "45 + 38 = 83.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.addition.two-digit",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "81064142a4feef93e3c86767ee5353afef8fd3f57b187335b9de60eb15739c9f"
+}

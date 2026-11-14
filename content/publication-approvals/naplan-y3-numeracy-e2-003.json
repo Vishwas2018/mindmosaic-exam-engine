@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e2-003",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "0d06b3241334a31381489d822d92c003e9ab8491f0563bf69b6a761b7eaf79d5",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e2-003",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A gardener plants 12 seedlings in a garden bed. One third of them are tomato plants. How many seedlings are tomato plants?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 4,
+      "tolerance": 0
+    },
+    "explanation": "One third means sharing the 12 seedlings into 3 equal groups. 12 divided by 3 is 4, so one third of 12 is 4 tomato plants.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Fractions of a group",
+      "skill": "Find a unit fraction (one third) of a whole group",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "fractions",
+        "thirds",
+        "garden context"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "485c8e4a13aaae0ae2b02d6a4475e202297c2c1d33b14908db454b907305cab3"
+}

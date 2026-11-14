@@ -1,0 +1,67 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-b50ac517bffe2953164921b7",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "ba5498246db5538796b75af257448104fb45d0b4671bc4efcf4165ada5d45ccd",
+  "sourceManifestHash": "047f9c0050152e7bb809976d11719eeb97f22c729d5418f086b72ce51f78ab04",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-b50ac517bffe2953164921b7",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The number line below highlights the values 4.5, 5, 5.5, 6, evenly spaced apart. Following the same pattern, what value would be highlighted next?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-numline",
+        "altText": "Number line from 4.5 to beyond 6, with four evenly spaced values highlighted.",
+        "type": "number_line",
+        "data": {
+          "min": 4,
+          "max": 8,
+          "step": 0.5,
+          "highlightedValues": [
+            4.5,
+            5,
+            5.5,
+            6
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 6.5,
+      "tolerance": 0
+    },
+    "explanation": "Each highlighted value is 0.5 more than the one before it, so the pattern increases by a steady step of 0.5 each time. Adding 0.5 to the last highlighted value of 6 gives 6.5, so 6.5 would be the next value highlighted.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Reading decimals on a number line",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "number",
+        "decimals",
+        "number-line"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "e6dfe8cc8655d7ce90947a7ceba6c0b291b2c081cc3420897b46b7d1a3120acb"
+}

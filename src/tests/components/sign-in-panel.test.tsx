@@ -54,7 +54,7 @@ import { SignInPanel } from "@/features/auth/components/SignInPanel";
  * — the login code is normalised and expanded into an internal alias email
  * that is never shown to anyone, and the PIN is the password.
  */
-function renderPanel(props?: { defaultKind?: "parent" | "student" }) {
+function renderPanel(props?: { defaultKind?: "parent" | "student"; defaultEntry?: "signin" | "forgot" | "choose" }) {
   return render(
     <AuthProvider>
       <SignInPanel {...props} />
@@ -283,5 +283,39 @@ describe("SignInPanel — keep me signed in", () => {
       expect(window.localStorage.getItem("mm.auth.ephemeral")).toBe("1"),
     );
     expect(window.sessionStorage.getItem("mm.auth.ephemeral")).toBe("1");
+  });
+});
+
+describe("SignInPanel — role chooser and student helper", () => {
+  it("can switch to the 'Who is signing in?' chooser and pick a role", async () => {
+    const user = userEvent.setup();
+    renderPanel();
+
+    await user.click(screen.getByRole("button", { name: /who is signing in/i }));
+    expect(screen.getByRole("heading", { name: /welcome to mindmosaic/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a parent/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a student/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /i'm a student/i }));
+    expect(screen.getByLabelText(/login code/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Your PIN, number 1 of 6/)).toBeInTheDocument();
+  });
+
+  it("sends a student who cannot sign in to the one help page, not a second copy of it", () => {
+    renderPanel({ defaultKind: "student" });
+
+    expect(screen.getByRole("link", { name: /i can.t sign in/i })).toHaveAttribute("href", "/student-sign-in/help");
+    /* Only the submit button may be called "Sign in": a second button whose name contains it makes the form
+       ambiguous to voice control and to tests alike. */
+    expect(screen.getAllByRole("button", { name: /sign in/i })).toHaveLength(1);
+  });
+
+  it("opens on the 'Who is signing in?' chooser when defaultEntry=choose", () => {
+    renderPanel({ defaultEntry: "choose" });
+    expect(screen.getByRole("heading", { name: /welcome to mindmosaic/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a parent/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a student/i })).toBeInTheDocument();
+    expect(screen.queryByLabelText(/email address/i)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/login code/i)).not.toBeInTheDocument();
   });
 });

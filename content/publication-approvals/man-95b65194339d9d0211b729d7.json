@@ -1,0 +1,78 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-95b65194339d9d0211b729d7",
+  "revision": 2,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "02846a64467da182e9c286f6f2cc8146ed38f173a5f6acc363f4df5a63d15deb",
+  "sourceManifestHash": "868ebd4a734ff7500d0ab5945c121954d97c338428f2aa7a9eddde1695bfa21e",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-95b65194339d9d0211b729d7",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Point A is located at (2, 5) and point B is located at (10, 5) on the grid shown below. What is the horizontal distance between point A and point B?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-grid",
+        "altText": "Coordinate grid showing point A and point B plotted on the same horizontal line.",
+        "type": "coordinate_grid",
+        "data": {
+          "xRange": [
+            -10,
+            10
+          ],
+          "yRange": [
+            -10,
+            10
+          ],
+          "points": [
+            {
+              "x": 2,
+              "y": 5,
+              "label": "A"
+            },
+            {
+              "x": 10,
+              "y": 5,
+              "label": "B"
+            }
+          ],
+          "gridStep": 1
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "Since both points share the same y-coordinate, the horizontal distance between them equals the difference between their x-coordinates. Subtracting 2 from 10 gives 8, so the horizontal distance between point A and point B is 8 units.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Geometry",
+      "topic": "Geometry",
+      "skill": "Finding horizontal distance between points",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "geometry",
+        "coordinates"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "d29429db2dea1f32364fcf4fe47e19bc5c574f1bcef9411b201655224cd9ae65"
+}

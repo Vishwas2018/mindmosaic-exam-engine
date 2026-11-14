@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
@@ -50,12 +49,19 @@ export async function generateMetadata({
   };
 }
 
+function firstParam(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
 export default async function ProgramPracticePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ program: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { program: slug } = await params;
+  const query = await searchParams;
   const program = resolveLiveProgram(slug);
   if (!program) notFound();
   /* Scholarship-style content is sat only as a whole named paper, so its program page points at that paper rather
@@ -117,20 +123,16 @@ export default async function ProgramPracticePage({
           </div>
         ) : (
         <div className="mt-9">
-          <Suspense
-            fallback={
-              <Card className="p-8" variant="default">
-                <p className="text-sm font-semibold text-muted">Loading exam setup…</p>
-              </Card>
-            }
-          >
-            <ExamConfigurator
-              bankEligibility={getBankEligibility()}
-              initialScope={program.scope}
-              lockScope={program.scope !== undefined}
-              initialBankId={program.scope?.initialBankId}
-            />
-          </Suspense>
+          {/* No Suspense boundary: the query is read here on the server, so nothing in the configurator suspends,
+              and a streamed boundary is what let the start button appear twice for a signed-in student (D-018). */}
+          <ExamConfigurator
+            bankEligibility={getBankEligibility()}
+            initialScope={program.scope}
+            lockScope={program.scope !== undefined}
+            initialBankId={program.scope?.initialBankId}
+            seed={firstParam(query.seed)}
+            confidenceMode={firstParam(query.confidenceMode) === "true"}
+          />
         </div>
         )}
       </main>

@@ -1,16 +1,15 @@
 import { scoreQuestion, type ScoreStatus } from "@/features/exam-engine/scoring";
-import type { CandidateAnswer } from "@/features/exam-engine/types";
+import type { CandidateAnswer, CandidateQuestion } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
 
 /**
  * Pure state machine for the immediate-feedback practice engine (screen 10,
  * design-explorations/ui-mockups/08-practice.html). Deliberately its own
  * reducer rather than a re-purposed exam-store: the exam store's whole
- * design is "withhold everything until submit"  (docs/
+ * design is "withhold everything until submit" (docs/
  * ASSESSMENT_SECURITY_MODEL.md server-authoritative scoring), while this
  * engine's entire point is per-question feedback the instant a student
- * checks an answer. Scoring itself is still the one shared source of truth
- * (scoreQuestion) — only the flow around it differs.
+ * checks an answer. Scoring itself is performed server-side (C15).
  */
 
 export type PracticeQuestionStatus = ScoreStatus | "skipped";
@@ -20,14 +19,21 @@ export interface PracticeQuestionResult {
   status: PracticeQuestionStatus;
 }
 
+export interface ServerQuestionFeedback {
+  explanation?: string | null;
+  correctAnswer?: string | null;
+  yourAnswer?: string | null;
+}
+
 export type PracticePhase = "answering" | "checked" | "summary";
 
 export interface PracticeState {
-  questions: readonly Question[];
+  questions: readonly (Question | CandidateQuestion)[];
   currentIndex: number;
   phase: PracticePhase;
   answers: Record<string, CandidateAnswer>;
   results: readonly PracticeQuestionResult[];
+  feedback: Record<string, ServerQuestionFeedback>;
   /** Question ids the student marked to come back to. */
   flagged: readonly string[];
   streak: number;
@@ -37,6 +43,13 @@ export interface PracticeState {
 export type PracticeAction =
   | { type: "set_answer"; answer: CandidateAnswer }
   | { type: "check_answer" }
+  | {
+      type: "check_answer_result";
+      status: PracticeQuestionStatus;
+      explanation?: string | null;
+      correctAnswer?: string | null;
+      yourAnswer?: string | null;
+    }
   | { type: "skip" }
   | { type: "next" }
   | { type: "toggle_flag" }
@@ -48,7 +61,7 @@ export type PracticeAction =
   | { type: "restart" };
 
 export function createInitialPracticeState(
-  questions: readonly Question[],
+  questions: readonly (Question | CandidateQuestion)[],
 ): PracticeState {
   return {
     questions,
@@ -56,6 +69,7 @@ export function createInitialPracticeState(
     phase: "answering",
     answers: {},
     results: [],
+    feedback: {},
     flagged: [],
     streak: 0,
     bestStreak: 0,
@@ -93,6 +107,7 @@ export function practiceReducer(
     case "set_answer": {
       if (state.phase !== "answering") return state;
       const question = state.questions[state.currentIndex];
+      if (!question) return state;
       return {
         ...state,
         answers: { ...state.answers, [question.id]: action.answer },
@@ -102,12 +117,44 @@ export function practiceReducer(
     case "check_answer": {
       if (state.phase !== "answering") return state;
       const question = state.questions[state.currentIndex];
-      const score = scoreQuestion(question, state.answers[question.id]);
-      const streak = score.status === "correct" ? state.streak + 1 : 0;
+      if (!question) return state;
+
+      // Local fallback scoring if answerKey is present on the question fixture
+      const questionWithKey = question as Question;
+      if (questionWithKey.answerKey) {
+        const score = scoreQuestion(questionWithKey, state.answers[question.id]);
+        const streak = score.status === "correct" ? state.streak + 1 : 0;
+        return {
+          ...state,
+          phase: "checked",
+          results: [...state.results, { questionId: question.id, status: score.status }],
+          streak,
+          bestStreak: Math.max(state.bestStreak, streak),
+        };
+      }
+
+      // If question has no local answerKey (answer-stripped), await check_answer_result action
+      return state;
+    }
+
+    case "check_answer_result": {
+      if (state.phase !== "answering") return state;
+      const question = state.questions[state.currentIndex];
+      if (!question) return state;
+
+      const streak = action.status === "correct" ? state.streak + 1 : 0;
       return {
         ...state,
         phase: "checked",
-        results: [...state.results, { questionId: question.id, status: score.status }],
+        results: [...state.results, { questionId: question.id, status: action.status }],
+        feedback: {
+          ...state.feedback,
+          [question.id]: {
+            explanation: action.explanation,
+            correctAnswer: action.correctAnswer,
+            yourAnswer: action.yourAnswer,
+          },
+        },
         streak,
         bestStreak: Math.max(state.bestStreak, streak),
       };
@@ -116,6 +163,7 @@ export function practiceReducer(
     case "skip": {
       if (state.phase !== "answering") return state;
       const question = state.questions[state.currentIndex];
+      if (!question) return state;
       return advance({
         ...state,
         results: [...state.results, { questionId: question.id, status: "skipped" }],

@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e1-008",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "529c2eaa539902b1f662de2c5cd9d32f459f2779b5a8d6596d1baab8154bdea3",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e1-008",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "At the school fair, Mia buys a cold drink for $3.65 and pays with a $10 note. How much change should she receive? Write just the number of dollars, without the unit.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6.35,
+      "tolerance": 0
+    },
+    "explanation": "Change is what is left after paying, so subtract the cost from the money given: $10.00 - $3.65. Counting up from $3.65 to $4.00 is 35 cents, then $4.00 to $10.00 is $6.00, which totals $6.35.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Money and change",
+      "skill": "Calculate change from a purchase under $20",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "money",
+        "change",
+        "fair"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "bab56698ad7615a57b147176eec1ea52e1aa42f4f5facb27ce6a4d039ff0102c"
+}

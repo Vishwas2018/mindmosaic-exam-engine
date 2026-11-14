@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 
-import { ActiveSessionBanner } from "@/features/exam-engine/components/ActiveSessionBanner";
-import { AccessCardsSection } from "@/features/student/components/dashboard/AccessCardsSection";
-import { DashboardHero } from "@/features/student/components/dashboard/DashboardHero";
-import { DashboardWelcomeBanner } from "@/features/student/components/dashboard/DashboardWelcomeBanner";
-import { ExploreGridSection } from "@/features/student/components/dashboard/ExploreGridSection";
-import { QuickActionsSection } from "@/features/student/components/dashboard/QuickActionsSection";
-import { RecentActivityCard } from "@/features/student/components/dashboard/RecentActivityCard";
-import { deriveStartHereItem } from "@/features/student/components/discovery";
+import { MySpaceHero } from "@/features/student/components/my-space/MySpaceHero";
+import { MySpacePathways } from "@/features/student/components/my-space/MySpacePathways";
+import { MySpaceProgress } from "@/features/student/components/my-space/MySpaceProgress";
+import { MySpaceRecent } from "@/features/student/components/my-space/MySpaceRecent";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import {
   StudentOnboardingModal,
@@ -16,6 +12,7 @@ import {
 import { fetchStudentOverview } from "@/features/student/data";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { requireStudent } from "@/features/student/require-student";
+import { getStudioAvailability } from "@/server/practice-studio-availability";
 
 export const metadata: Metadata = {
   title: "My Learning — Dashboard",
@@ -29,70 +26,39 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 /**
- * MindMosaic Student Dashboard — a port of the Stitch "Enriched Access &
- * Directory Visuals" mockup (project 13560346960841301670), on the shared
- * StudentPortalShell (sidebar + top bar) also used by Learning Hub, Exam
- * Centre, and My Progress — deliberately separate from
- * StudentShell/student-nav.ts, the older shell other student pages use.
- *
- * Data-integrity note: some mockup elements are still fake (XP/level badge,
- * term/week and goal pills, curriculum-sync badge, session/version chip,
- * "Edit interests & goals" — see each component's own "Placeholder" comment
- * for the specific field). The rest — attempt history, streak/week-dot
- * engagement, lesson/attempt counts, active-session state, and the Start
- * Here recommendation incl. its progress panel — are real. Grep
- * "Placeholder" across this page and `components/dashboard/`,
- * `components/StudentSidebar.tsx` for the current fake-vs-real inventory
- * before assuming any given field is live.
+ * My Space. Every figure is real or absent: Continue only for a confirmed open
+ * timed paper, pathways from the Practice Studio availability module, progress
+ * worked out from finished timed papers (and saying so), recent results. No XP,
+ * level, pace or difficulty chips, curriculum-sync badge or metric tiles.
  */
 export default async function StudentHomePage() {
   const student = await requireStudent();
   const overview = await fetchStudentOverview();
   const shellData = await fetchStudentPortalShellData(student);
+  const availability = getStudioAvailability();
 
   const firstName = student.displayName?.split(" ")[0] ?? null;
-
-  const recommendation = deriveStartHereItem({
-    studentName: firstName,
-    yearLevel: student.yearLevel,
-    attempts: overview.attempts,
-    hasActiveSession: shellData.hasActiveSession,
-  });
-
-  const mathematicsLessonCount = shellData.mathematicsPathways.reduce(
-    (sum, pathway) => sum + pathway.nodes.length,
-    0,
-  );
-
-  const naplanAttemptCount = overview.attempts.filter((attempt) => attempt.title.startsWith("NAPLAN")).length;
-  const icasAttemptCount = overview.attempts.filter((attempt) => attempt.title.startsWith("ICAS")).length;
-
-  const latestAttempt = overview.attempts[0] ?? null;
+  /* Only Years 3 and 5 are served; any other recorded year reads as 3, as elsewhere in the student app. */
+  const yearLevel = student.yearLevel === 5 ? 5 : 3;
 
   return (
-    <StudentPortalShell active="home" breadcrumbLabel="Dashboard" student={student} shellData={shellData}>
-      <ActiveSessionBanner />
+    <StudentPortalShell active="home" breadcrumbLabel="My Space" student={student} shellData={shellData}>
       <OnboardingResumeBanner
         onboardingCompleted={student.onboardingCompleted}
         yearLevel={student.yearLevel}
         interests={student.interests}
         weeklyGoalMinutes={student.weeklyGoalMinutes}
       />
-      <DashboardWelcomeBanner
-        firstName={firstName}
-        yearLevel={student.yearLevel}
-        interests={student.interests}
-        weeklyGoalMinutes={student.weeklyGoalMinutes}
-      />
-      <DashboardHero recommendation={recommendation} />
-      <QuickActionsSection />
-      <AccessCardsSection
-        mathematicsLessonCount={mathematicsLessonCount}
-        naplanAttemptCount={naplanAttemptCount}
-        icasAttemptCount={icasAttemptCount}
-      />
-      <ExploreGridSection />
-      <RecentActivityCard attempt={latestAttempt} />
+      <section className="space-y-1">
+        <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink lg:text-3xl">
+          {firstName ? `Welcome back, ${firstName}` : "Welcome back"}
+        </h1>
+        <p className="text-sm text-mm-muted">Year {yearLevel}</p>
+      </section>
+      <MySpaceHero hasActiveSession={shellData.hasActiveSession} hasFinishedPaper={overview.attempts.length > 0} />
+      <MySpacePathways availability={availability} yearLevel={yearLevel} />
+      <MySpaceProgress attempts={overview.attempts} mastery={overview.mastery} />
+      <MySpaceRecent attempts={overview.attempts} />
       <StudentOnboardingModal
         firstName={firstName}
         yearLevel={student.yearLevel}
