@@ -1,0 +1,462 @@
+BAR-MODEL PILOT (30 DRAFT ITEMS)
+Fixture source SHA-256: bf61bfde5a39945804b74b9fbbd1ac53f4af8c919aebc161d576b4fbb431776e
+Not published. No human approval or independent human review is asserted.
+
+Owner decision: this 30-item pilot is SAMPLE content and does not require independent human approval or a populated approvedBy. Production question banks and governed content retain the human-approval requirement.
+
+BLIND PACKET: givens-only diagrams and descriptions; no keys or explanations.
+
+ID: pilot-y3-part-whole-01
+Year: 3
+Skill: part-whole
+Difficulty: easy
+Unit: sticks
+Prompt: A tray has 36 sticks. 14 are red and the rest are blue. How many blue sticks are there?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Whole, left to right: segment 1, Known: 14; segment 2, Unknown: an unknown amount marked with a question mark.
+Total brace labelled All over segments 1 to 2 of Whole: 36.
+
+---
+
+ID: pilot-y3-comparison-01
+Year: 3
+Skill: comparison
+Difficulty: easy
+Unit: shells
+Prompt: Mia has 27 shells and Leo has 15 shells. How many more shells does Mia have?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Left, left to right: segment 1, 27.
+Bar Right, left to right: segment 1, 15.
+Difference brace labelled Difference showing how much longer Left is than Right: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-times-as-many-01
+Year: 3
+Skill: times-as-many
+Difficulty: medium
+Unit: tokens
+Prompt: A box has 3 times as many tokens as another box. Together they have 24 tokens. How many tokens are in the larger box?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each unit is the same size, and that size is not given.
+Bar Big, left to right: segment 1, 3 equal units.
+Bar Small, left to right: segment 1, 1 equal unit.
+Total brace labelled Together across the bars Big and Small: 24.
+Total brace labelled Big over segment 1 of Big: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-part-whole-02
+Year: 3
+Skill: part-whole
+Difficulty: easy
+Unit: apples
+Prompt: A basket has 42 apples. 19 are green and the rest are red. How many red apples are there?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Whole, left to right: segment 1, Known: 19; segment 2, Unknown: an unknown amount marked with a question mark.
+Total brace labelled All over segments 1 to 2 of Whole: 42.
+
+---
+
+ID: pilot-y3-comparison-02
+Year: 3
+Skill: comparison
+Difficulty: easy
+Unit: flowers
+Prompt: Ava planted 31 flowers and Ben planted 18. How many more flowers did Ava plant?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Left, left to right: segment 1, 31.
+Bar Right, left to right: segment 1, 18.
+Difference brace labelled Difference showing how much longer Left is than Right: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-times-as-many-02
+Year: 3
+Skill: times-as-many
+Difficulty: medium
+Unit: books
+Prompt: One shelf has 4 times as many books as the other shelf. Together they hold 35 books. How many books are on the larger shelf?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each unit is the same size, and that size is not given.
+Bar Big, left to right: segment 1, 4 equal units.
+Bar Small, left to right: segment 1, 1 equal unit.
+Total brace labelled Together across the bars Big and Small: 35.
+Total brace labelled Big over segment 1 of Big: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-part-whole-03
+Year: 3
+Skill: part-whole
+Difficulty: medium
+Unit: marbles
+Prompt: A jar contains 50 marbles. 17 are green and the rest are red. How many marbles are red?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Whole, left to right: segment 1, Known: 17; segment 2, Unknown: an unknown amount marked with a question mark.
+Total brace labelled All over segments 1 to 2 of Whole: 50.
+
+---
+
+ID: pilot-y3-comparison-03
+Year: 3
+Skill: comparison
+Difficulty: medium
+Unit: stickers
+Prompt: Noah has 44 stickers and Jay has 19. How many fewer stickers does Jay have?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Left, left to right: segment 1, 44.
+Bar Right, left to right: segment 1, 19.
+Difference brace labelled Difference showing how much longer Left is than Right: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-times-as-many-03
+Year: 3
+Skill: times-as-many
+Difficulty: hard
+Unit: cards
+Prompt: Brianna has 5 times as many cards as Eli. Together they have 54 cards. How many cards does Brianna have?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each unit is the same size, and that size is not given.
+Bar Big, left to right: segment 1, 5 equal units.
+Bar Small, left to right: segment 1, 1 equal unit.
+Total brace labelled Together across the bars Big and Small: 54.
+Total brace labelled Big over segment 1 of Big: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-part-whole-04
+Year: 3
+Skill: part-whole
+Difficulty: easy
+Unit: crayons
+Prompt: A box has 28 crayons. 9 are blue and the rest are yellow. How many yellow crayons are there?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Whole, left to right: segment 1, Known: 9; segment 2, Unknown: an unknown amount marked with a question mark.
+Total brace labelled All over segments 1 to 2 of Whole: 28.
+
+---
+
+ID: pilot-y3-comparison-04
+Year: 3
+Skill: comparison
+Difficulty: medium
+Unit: blocks
+Prompt: Ruby stacked 37 blocks and Sam stacked 22. How many more blocks did Ruby stack?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Left, left to right: segment 1, 37.
+Bar Right, left to right: segment 1, 22.
+Difference brace labelled Difference showing how much longer Left is than Right: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-times-as-many-04
+Year: 3
+Skill: times-as-many
+Difficulty: medium
+Unit: pencils
+Prompt: One pot has 2 times as many pencils as the other. Together there are 30 pencils. How many pencils are in the larger pot?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each unit is the same size, and that size is not given.
+Bar Big, left to right: segment 1, 2 equal units.
+Bar Small, left to right: segment 1, 1 equal unit.
+Total brace labelled Together across the bars Big and Small: 30.
+Total brace labelled Big over segment 1 of Big: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-part-whole-05
+Year: 3
+Skill: part-whole
+Difficulty: hard
+Unit: buttons
+Prompt: A jar has 63 buttons. 26 are red and the rest are gold. How many gold buttons are there?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Whole, left to right: segment 1, Known: 26; segment 2, Unknown: an unknown amount marked with a question mark.
+Total brace labelled All over segments 1 to 2 of Whole: 63.
+
+---
+
+ID: pilot-y3-comparison-05
+Year: 3
+Skill: comparison
+Difficulty: hard
+Unit: stick figures
+Prompt: Harper drew 52 stick figures and Zoe drew 29. How many more stick figures did Harper draw?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Left, left to right: segment 1, 52.
+Bar Right, left to right: segment 1, 29.
+Difference brace labelled Difference showing how much longer Left is than Right: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y3-times-as-many-05
+Year: 3
+Skill: times-as-many
+Difficulty: hard
+Unit: bears
+Prompt: One toy box has 3 times as many bears as the other toy box. Together they hold 48 bears. How many bears are in the larger box?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each unit is the same size, and that size is not given.
+Bar Big, left to right: segment 1, 3 equal units.
+Bar Small, left to right: segment 1, 1 equal unit.
+Total brace labelled Together across the bars Big and Small: 48.
+Total brace labelled Big over segment 1 of Big: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y5-equal-units-01
+Year: 5
+Skill: equal-units
+Difficulty: easy
+Unit: biscuits
+Prompt: Two packs contain the same number of biscuits in each bag. One pack has 3 bags and the other has 5 bags. Together they have 56 biscuits. How many biscuits are in the larger pack?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each group is the same size, and that size is not given.
+Bar A, left to right: segment 1, 3 equal groups.
+Bar B, left to right: segment 1, 5 equal groups.
+Total brace labelled Together across the bars A and B: 56.
+Total brace labelled B over segment 1 of B: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y5-before-after-01
+Year: 5
+Skill: before-after
+Difficulty: easy
+Unit: beans
+Prompt: A class had some beans at the start of the week. They used 14 beans and were left with 31. How many beans did they start with?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Before (before), left to right: segment 1, Start: an unknown amount marked with a question mark.
+Bar After (after), left to right: segment 1, Left: 31.
+After (after) is Before (before) with 14 taken away.
+
+---
+
+ID: pilot-y5-transfer-01
+Year: 5
+Skill: transfer
+Difficulty: easy
+Unit: stickers
+Prompt: Ari has 32 stickers and Tia has 18. Ari gives Tia some stickers so they end with the same number. How many stickers did Ari give to Tia?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
+Bar B (before), left to right: segment 1, 18.
+Bar A (after), left to right: segment 1, an amount with no number shown.
+Bar B (after), left to right: segment 1, an amount with no number shown.
+Total brace over segments 1 to 2 of A (before): 32.
+A (before) gives an unknown amount marked with a question mark to B (before). The combined total stays the same.
+The bars A (after) and B (after) have the same total.
+
+---
+
+ID: pilot-y5-equal-units-02
+Year: 5
+Skill: equal-units
+Difficulty: medium
+Unit: coins
+Prompt: Two bags hold bundles with the same number of coins in each bundle. One bag has 4 bundles and the other has 7 bundles. Together they hold 99 coins. How many coins are in the larger bag?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each group is the same size, and that size is not given.
+Bar A, left to right: segment 1, 4 equal groups.
+Bar B, left to right: segment 1, 7 equal groups.
+Total brace labelled Together across the bars A and B: 99.
+Total brace labelled B over segment 1 of B: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y5-before-after-02
+Year: 5
+Skill: before-after
+Difficulty: medium
+Unit: marbles
+Prompt: Mila had some marbles. She lost 23 marbles and then had 41 left. How many marbles did she begin with?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Before (before), left to right: segment 1, Start: an unknown amount marked with a question mark.
+Bar After (after), left to right: segment 1, Left: 41.
+After (after) is Before (before) with 23 taken away.
+
+---
+
+ID: pilot-y5-transfer-02
+Year: 5
+Skill: transfer
+Difficulty: medium
+Unit: tokens
+Prompt: Zoe has 46 tokens and Josh has 24. Zoe gives Josh some tokens so they end with the same total. How many tokens does Zoe give to Josh?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
+Bar B (before), left to right: segment 1, 24.
+Bar A (after), left to right: segment 1, an amount with no number shown.
+Bar B (after), left to right: segment 1, an amount with no number shown.
+Total brace over segments 1 to 2 of A (before): 46.
+A (before) gives an unknown amount marked with a question mark to B (before). The combined total stays the same.
+The bars A (after) and B (after) have the same total.
+
+---
+
+ID: pilot-y5-equal-units-03
+Year: 5
+Skill: equal-units
+Difficulty: easy
+Unit: sticks
+Prompt: Two teams collect sets with the same number of sticks in each set. One team has 2 sets and the other has 6 sets. Together they collect 48 sticks. How many sticks are in the larger team's sets?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each group is the same size, and that size is not given.
+Bar A, left to right: segment 1, 2 equal groups.
+Bar B, left to right: segment 1, 6 equal groups.
+Total brace labelled Together across the bars A and B: 48.
+Total brace labelled B over segment 1 of B: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y5-before-after-03
+Year: 5
+Skill: before-after
+Difficulty: hard
+Unit: pencils
+Prompt: A box started with some pencils. 27 were given away and 58 were left. How many pencils were in the box at the start?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Before (before), left to right: segment 1, Start: an unknown amount marked with a question mark.
+Bar After (after), left to right: segment 1, Left: 58.
+After (after) is Before (before) with 27 taken away.
+
+---
+
+ID: pilot-y5-transfer-03
+Year: 5
+Skill: transfer
+Difficulty: hard
+Unit: marbles
+Prompt: Luca has 51 marbles and Jina has 29. Luca gives Jina some marbles so they end up with the same amount. How many marbles does Luca give to Jina?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
+Bar B (before), left to right: segment 1, 29.
+Bar A (after), left to right: segment 1, an amount with no number shown.
+Bar B (after), left to right: segment 1, an amount with no number shown.
+Total brace over segments 1 to 2 of A (before): 51.
+A (before) gives an unknown amount marked with a question mark to B (before). The combined total stays the same.
+The bars A (after) and B (after) have the same total.
+
+---
+
+ID: pilot-y5-equal-units-04
+Year: 5
+Skill: equal-units
+Difficulty: medium
+Unit: cups
+Prompt: Two crates hold equal measures of juice, with the same amount in each measure. One crate holds 3 measures and the other holds 7 measures. Together there are 90 cups of juice. How many cups of juice are in the larger crate?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each group is the same size, and that size is not given.
+Bar A, left to right: segment 1, 3 equal groups.
+Bar B, left to right: segment 1, 7 equal groups.
+Total brace labelled Together across the bars A and B: 90.
+Total brace labelled B over segment 1 of B: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y5-before-after-04
+Year: 5
+Skill: before-after
+Difficulty: medium
+Unit: stickers
+Prompt: A student had some stickers. She gave away 18 stickers and then had 44 left. How many stickers did she have at the start?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Before (before), left to right: segment 1, Start: an unknown amount marked with a question mark.
+Bar After (after), left to right: segment 1, Left: 44.
+After (after) is Before (before) with 18 taken away.
+
+---
+
+ID: pilot-y5-transfer-04
+Year: 5
+Skill: transfer
+Difficulty: hard
+Unit: buttons
+Prompt: Eden has 58 buttons and Priya has 26. Eden gives Priya some buttons so they each finish with the same number. How many buttons does Eden give to Priya?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
+Bar B (before), left to right: segment 1, 26.
+Bar A (after), left to right: segment 1, an amount with no number shown.
+Bar B (after), left to right: segment 1, an amount with no number shown.
+Total brace over segments 1 to 2 of A (before): 58.
+A (before) gives an unknown amount marked with a question mark to B (before). The combined total stays the same.
+The bars A (after) and B (after) have the same total.
+
+---
+
+ID: pilot-y5-equal-units-05
+Year: 5
+Skill: equal-units
+Difficulty: hard
+Unit: sweets
+Prompt: Two jars each hold equal packs of sweets. One jar has 6 packs and the other has 9 packs. Together they hold 120 sweets. How many sweets are in the larger jar?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Each group is the same size, and that size is not given.
+Bar A, left to right: segment 1, 6 equal groups.
+Bar B, left to right: segment 1, 9 equal groups.
+Total brace labelled Together across the bars A and B: 120.
+Total brace labelled B over segment 1 of B: an unknown amount marked with a question mark.
+
+---
+
+ID: pilot-y5-before-after-05
+Year: 5
+Skill: before-after
+Difficulty: hard
+Unit: lollies
+Prompt: A tin started with some lollies. 34 were eaten and 47 were left. How many lollies were in the tin at the start?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar Before (before), left to right: segment 1, Start: an unknown amount marked with a question mark.
+Bar After (after), left to right: segment 1, Left: 47.
+After (after) is Before (before) with 34 taken away.
+
+---
+
+ID: pilot-y5-transfer-05
+Year: 5
+Skill: transfer
+Difficulty: hard
+Unit: cards
+Prompt: Mina has 64 cards and Omar has 28. Mina gives Omar some cards so they finish with the same number. How many cards does Mina give to Omar?
+Givens-only diagram description:
+Schematic bar model, not drawn to scale.
+Bar A (before), left to right: segment 1, Keeps: an amount with no number shown; segment 2, Gives: an unknown amount marked with a question mark.
+Bar B (before), left to right: segment 1, 28.
+Bar A (after), left to right: segment 1, an amount with no number shown.
+Bar B (after), left to right: segment 1, an amount with no number shown.
+Total brace over segments 1 to 2 of A (before): 64.
+A (before) gives an unknown amount marked with a question mark to B (before). The combined total stays the same.
+The bars A (after) and B (after) have the same total.
+
+---

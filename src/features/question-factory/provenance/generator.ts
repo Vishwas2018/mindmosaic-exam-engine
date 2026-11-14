@@ -13,12 +13,19 @@ export const GENERATOR_CLASSES = [
   "deterministic_fixture",
   "manual_external",
   "live_provider",
+  "legacy_import",
 ] as const;
 export type GeneratorClass = (typeof GENERATOR_CLASSES)[number];
 
-export const generatorAdapterSchema = z.object({
-  class: z.enum(GENERATOR_CLASSES),
+export const knownGeneratorAdapterSchema = z.object({
+  class: z.enum(["deterministic_fixture", "manual_external", "live_provider"]),
   identity: normalisedIdentitySchema,
 });
 
+export const generatorAdapterSchema = z.union([
+  knownGeneratorAdapterSchema,
+  z.object({ class: z.literal("legacy_import"), identity: z.null() }).strict(),
+]);
+
 export type GeneratorAdapter = z.infer<typeof generatorAdapterSchema>;
+export type KnownGeneratorAdapter = z.infer<typeof knownGeneratorAdapterSchema>;

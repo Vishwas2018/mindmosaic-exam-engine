@@ -1,0 +1,79 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-money-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "cd33ed630a7279dbccdc767385567c67239a1a1910276dfcd29a126f3c874e7a",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-money-001",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "An adult and two children go to the cinema and buy one snack combo. What is the total cost in dollars?",
+    "instructions": "Use the price table. Enter a number of dollars.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "g5-cinema-price-table",
+        "altText": "Table listing cinema prices: adult ticket 16 dollars, child ticket 9 dollars, snack combo 7 dollars.",
+        "title": "Cinema prices",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price in dollars"
+          ],
+          "rows": [
+            [
+              "Adult ticket",
+              16
+            ],
+            [
+              "Child ticket",
+              9
+            ],
+            [
+              "Snack combo",
+              7
+            ]
+          ],
+          "rowHeaders": true
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 41,
+      "tolerance": 0,
+      "unit": "dollars"
+    },
+    "explanation": "One adult ticket costs $16, two child tickets cost 2 × $9 = $18, and the snack combo costs $7. The total is 16 + 18 + 7 = $41.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Money problems",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "a150dd99bd7c2841f58b462325d5ec616996dfe6b443a33370c938715f51212c"
+}

@@ -16,4 +16,129 @@ export {
 export { LearningInsights } from "./components/LearningInsights";
 export { ChildrenManager, type ChildListItem } from "./components/ChildrenManager";
 export { CheckoutStatusToast } from "./components/CheckoutStatusToast";
-export { ParentShell } from "./components/ParentShell";
+export {
+  ParentShell,
+  PARENT_NAV_LINKS,
+  type ParentNavKey,
+  type ParentShellProps,
+} from "./components/ParentShell";
+export {
+  ChildSwitcher,
+  type ChildSwitcherItem,
+  type ChildSwitcherProps,
+} from "./components/ChildSwitcher";
+export {
+  MarksMeter,
+  type MarksMeterProps,
+} from "./components/MarksMeter";
+export {
+  ClaimWithEvidence,
+  type ClaimWithEvidenceProps,
+  MIN_CLAIM_PAPERS,
+  MIN_CLAIM_MARKS,
+  INSUFFICIENT_EVIDENCE_COPY,
+  INSUFFICIENT_SUBJECT_EVIDENCE_COPY,
+  insufficientEvidenceCopy,
+} from "./components/ClaimWithEvidence";
+export {
+  FamilyOverview,
+  type FamilyOverviewProps,
+} from "./components/FamilyOverview";
+export {
+  LoadingStateBlock,
+  NothingYetStateBlock,
+  NotEnoughYetStateBlock,
+  CouldNotLoadStateBlock,
+  type BaseStateBlockProps,
+  type NothingYetStateBlockProps,
+  type NotEnoughYetStateBlockProps,
+  type CouldNotLoadStateBlockProps,
+} from "./components/StateBlocks";
+export {
+  PREVIEW_FAMILY_OVERVIEW_SUMMARIES,
+  PREVIEW_CHILDREN,
+  PREVIEW_FAMILY_PLAN,
+  type PreviewChild,
+  type PreviewPaperResult,
+} from "./fixtures";
+export {
+  ChildProfileView,
+  type ChildProfileViewProps,
+  type ChildProfileDetails,
+  type SiblingLink,
+} from "./components/ChildProfileView";
+export {
+  PinResetDialog,
+  type PinResetDialogProps,
+} from "./components/PinResetDialog";
+export {
+  PrintSignInCardDialog,
+  type PrintSignInCardDialogProps,
+} from "./components/PrintSignInCardDialog";
+export {
+  ChildProgressDashboard,
+  type ChildProgressDashboardProps,
+} from "./components/ChildProgressDashboard";
+export {
+  PaperResultView,
+  type PaperResultViewProps,
+} from "./components/PaperResultView";
+export {
+  WorkedAnswerReview,
+  type WorkedAnswerReviewProps,
+} from "./components/WorkedAnswerReview";
+export {
+  ChildLearningHub,
+  type ChildLearningHubProps,
+} from "./components/ChildLearningHub";
+export {
+  ParentPracticePreview,
+  type ParentPracticePreviewProps,
+} from "./components/ParentPracticePreview";
+export {
+  ChildWritingHistory,
+  type ChildWritingHistoryProps,
+  type WritingSubmissionItem,
+  type WritingPromptItem,
+} from "./components/ChildWritingHistory";
+export {
+  ParentAccount,
+  type ParentAccountProps,
+} from "./components/ParentAccount";
+export {
+  ParentBillingHandoff,
+  type ParentBillingHandoffProps,
+} from "./components/ParentBillingHandoff";
+export {
+  ParentHelpCentre,
+  type ParentHelpCentreProps,
+  type HelpCategoryItem,
+} from "./components/ParentHelpCentre";
+export {
+  type SubjectMarksProgress,
+  type StrandMarksProgress,
+  type ProgressRecommendation,
+  type PreviewAnswerReviewItem,
+  type ProgrammeAvailability,
+  type PreviewSampleQuestion,
+  type PreviewParentAccount,
+  type PreviewHelpArticle,
+  PREVIEW_RESULTS_AISHA,
+  PREVIEW_RESULTS_KABIR,
+  PREVIEW_RESULTS_MAYA,
+  PREVIEW_SUBJECTS_AISHA,
+  PREVIEW_STRANDS_AISHA,
+  PREVIEW_RECOMMENDATION_AISHA,
+  PREVIEW_ANSWER_REVIEW_READING,
+  PREVIEW_PROGRAMMES_YEAR3,
+  PREVIEW_PROGRAMMES_YEAR5,
+  PREVIEW_SAMPLE_QUESTIONS_NUMERACY,
+  PREVIEW_SAMPLE_QUESTIONS_READING,
+  PREVIEW_PARENT_ACCOUNT,
+  PREVIEW_HELP_CATEGORIES,
+  PREVIEW_HELP_ARTICLES,
+} from "./fixtures";
+
+
+
+

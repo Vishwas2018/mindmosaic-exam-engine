@@ -1,0 +1,135 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-data-004",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "c45eee4d931db299d0d58b5c81a6bd324187f04d27fb0bf0d091ddacf15985dd",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-data-004",
+    "type": "dropdown",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Use the table of pool visitors to answer both parts.",
+    "instructions": "Pick one answer in each box.",
+    "options": [],
+    "interaction": {
+      "type": "dropdown",
+      "fields": [
+        {
+          "id": "busiest-day",
+          "label": "Which day had the most visitors?",
+          "options": [
+            {
+              "id": "busiest-mon",
+              "text": "Monday"
+            },
+            {
+              "id": "busiest-tue",
+              "text": "Tuesday"
+            },
+            {
+              "id": "busiest-wed",
+              "text": "Wednesday"
+            },
+            {
+              "id": "busiest-thu",
+              "text": "Thursday"
+            }
+          ]
+        },
+        {
+          "id": "difference",
+          "label": "How many more visitors came on Wednesday than on Tuesday?",
+          "options": [
+            {
+              "id": "diff-35",
+              "text": "35"
+            },
+            {
+              "id": "diff-45",
+              "text": "45"
+            },
+            {
+              "id": "diff-55",
+              "text": "55"
+            }
+          ]
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "g5-pool-visitors-table",
+        "altText": "Table showing pool visitors: 120 on Monday, 95 on Tuesday, 140 on Wednesday and 85 on Thursday.",
+        "title": "Visitors to the pool",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Day",
+            "Number of visitors"
+          ],
+          "rows": [
+            [
+              "Monday",
+              120
+            ],
+            [
+              "Tuesday",
+              95
+            ],
+            [
+              "Wednesday",
+              140
+            ],
+            [
+              "Thursday",
+              85
+            ]
+          ],
+          "rowHeaders": true
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "dropdown",
+      "fields": [
+        {
+          "id": "busiest-day",
+          "correctOptionId": "busiest-wed"
+        },
+        {
+          "id": "difference",
+          "correctOptionId": "diff-45"
+        }
+      ]
+    },
+    "explanation": "Wednesday's 140 visitors is the largest number in the table. The difference between Wednesday and Tuesday is 140 − 95 = 45 visitors.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics and probability",
+      "topic": "Interpreting tables",
+      "skill": "Comparing values in a table",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "table",
+        "subtraction"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "dbca7fbc3a05db86aa4e4c293bf59c2b9bbb965feab6445379880dd409169726"
+}

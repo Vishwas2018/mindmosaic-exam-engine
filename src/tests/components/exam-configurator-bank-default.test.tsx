@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import {renderToString} from "react-dom/server";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -43,6 +44,17 @@ const ICAS_G5_READING = {
 } as const;
 
 describe("ExamConfigurator — extended bank removed", () => {
+  it("prevents native selections before hydration can retain the chosen paper", () => {
+    const server = document.createElement("div");
+    server.innerHTML = renderToString(<ExamConfigurator bankEligibility={eligibility} />);
+    for (const id of ["select-year-level", "select-exam-style", "select-subject", "select-question-count", "select-timing"]) {
+      expect(within(server).getByTestId(id)).toBeDisabled();
+    }
+    expect(within(server).getByTestId("start-exam")).toBeDisabled();
+    render(<ExamConfigurator bankEligibility={eligibility} />);
+    expect(screen.getByTestId("select-year-level")).toBeEnabled();
+  });
+
   it("does not render the toggle-practice checkbox for any program", () => {
     render(
       <ExamConfigurator

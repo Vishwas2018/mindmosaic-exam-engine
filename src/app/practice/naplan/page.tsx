@@ -22,6 +22,10 @@ const DOMAIN_ICONS: Record<string, typeof Calculator> = {
   language: SpellCheck,
 };
 
+// Static prerendering triggers Next.js 16.4.6 invariant error
+// ("Expected workStore to be initialized"). Render server-side instead.
+export const dynamic = "force-dynamic";
+
 export default async function NaplanHubPage({
   searchParams,
 }: {

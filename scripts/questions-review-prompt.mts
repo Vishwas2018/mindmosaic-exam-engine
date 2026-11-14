@@ -171,6 +171,10 @@ async function main(): Promise<number> {
     return 2;
   }
 
+  if (provenanceOutcome.data.kind === "legacy_import") {
+    emit(args.json, { ok: false, errorCode: "review_prompt_candidate_invalid", message: "Unknown legacy generator: independent-review eligibility is unresolved; Phase 1 does not issue production review prompts." });
+    return 2;
+  }
   const blueprintRecord = await repository.read("blueprints", provenanceOutcome.data.blueprintId);
   if (blueprintRecord === undefined) {
     emit(args.json, {

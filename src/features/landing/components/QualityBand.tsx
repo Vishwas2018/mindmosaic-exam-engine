@@ -18,7 +18,7 @@ const FRAGMENTS: readonly Fragment[] = [
  */
 export function QualityBand() {
   return (
-    <section aria-labelledby="quality-heading" className="relative overflow-hidden bg-[#2A1257] py-[clamp(72px,10vw,144px)] text-white">
+    <section aria-labelledby="quality-heading" data-focus-surface="dark" className="relative overflow-hidden bg-[#2A1257] py-[clamp(72px,10vw,144px)] text-white">
       <div className="mm-width grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="flex flex-col gap-8 lg:col-span-6">
           <MosaicFragments fragments={FRAGMENTS} className="w-[64px]" />

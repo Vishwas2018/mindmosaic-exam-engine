@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
@@ -25,6 +25,7 @@ import {
 } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import {useHydrated} from "@/lib/use-hydrated";
 
 import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
 import { ExamInstructions } from "./ExamInstructions";
@@ -65,6 +66,14 @@ export interface ExamConfiguratorProps {
    * too thin on its own.
    */
   initialBankId?: ExamBankId;
+  /**
+   * `?seed=` and `?confidenceMode=true`, read by the page on the server. Reading them here, on the client, needed a
+   * Suspense boundary, and React reveals streamed boundaries up to ~300 ms late: a signed-in student's
+   * auth update in that window made React client-render the boundary next to the still-hidden server copy, so the
+   * page briefly held two start buttons (D-018).
+   */
+  seed?: string;
+  confidenceMode?: boolean;
 }
 
 interface GuestBanks {
@@ -83,12 +92,14 @@ export function ExamConfigurator({
   initialScope,
   lockScope = false,
   initialBankId,
+  seed,
+  confidenceMode = false,
 }: ExamConfiguratorProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const startExam = useExamStore((state) => state.startExam);
   const startServerExam = useExamStore((state) => state.startServerExam);
   const auth = useAuth();
+  const hydrated = useHydrated();
   /* Signed-in visitors go through the server session flow —
      the page payload carries no bank for them to practise from locally.
      Non-student roles (admin, parent, teacher) are prohibited from creating student sessions (MM-AUTH-01). */
@@ -198,8 +209,6 @@ export function ExamConfigurator({
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
 
-  const confidenceMode = searchParams.get("confidenceMode") === "true";
-
   const config: ExamSelectionConfig = {
     yearLevel,
     examStyle,
@@ -254,7 +263,6 @@ export function ExamConfigurator({
 
     /* Guest flow: fully client-side, exactly as before — an explicit
        ?seed= makes sessions reproducible for tests and sharing. */
-    const seed = searchParams.get("seed") ?? undefined;
     let pool: readonly AuthoringQuestion[];
     try {
       setIsCreating(true);
@@ -335,7 +343,7 @@ export function ExamConfigurator({
       </div>
 
       <div className="px-6 py-7 sm:px-8 sm:py-8">
-        <fieldset className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
+        <fieldset disabled={!hydrated} className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
           <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
             Paper
           </legend>
@@ -399,7 +407,7 @@ export function ExamConfigurator({
           </Select>
         </fieldset>
 
-        <fieldset className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
+        <fieldset disabled={!hydrated} className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
           <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
             Sitting
           </legend>
@@ -468,6 +476,7 @@ export function ExamConfigurator({
             setStage("instructions");
           }}
           disabled={
+            !hydrated ||
             insufficient ||
             isStarting ||
             isCreating ||

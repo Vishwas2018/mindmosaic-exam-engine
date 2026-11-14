@@ -8,7 +8,13 @@ import { ActiveSessionBanner } from "@/features/exam-engine/components/ActiveSes
 import { groupExamPatterns } from "@/features/exam-engine/exam-patterns";
 import { ExamPatternCard } from "@/features/exam-engine/exam-patterns/components/ExamPatternCard";
 import { EXAM_STYLE_NAMES } from "@/features/exam-engine/exam-patterns/pattern-presentation";
-import { getPatternReadiness } from "@/server/exam-bank";
+import {
+  getPatternReadinessFor,
+  getViewerIdForSamplePreview,
+  isScholarshipSampleAllowedFor,
+  SCHOLARSHIP_SAMPLE_NOTICE,
+  visibleExamPatterns,
+} from "@/server/scholarship-sample-preview";
 
 export const metadata: Metadata = {
   title: "Full-length practice papers",
@@ -34,9 +40,11 @@ export const metadata: Metadata = {
  * the top of the page, and every paper carries its own adaptations note one
  * click away on its own route.
  */
-export default function ExamPatternPickerPage() {
-  const readiness = getPatternReadiness();
-  const groups = groupExamPatterns();
+export default async function ExamPatternPickerPage() {
+  /* Both are no-ops (and read no cookies) unless the gated Scholarship sample preview is active. */
+  const viewerId = await getViewerIdForSamplePreview();
+  const readiness = await getPatternReadinessFor(viewerId);
+  const groups = groupExamPatterns(visibleExamPatterns(viewerId));
 
   return (
     <div className="mm-root flex min-h-screen flex-col bg-mm-page">
@@ -70,6 +78,18 @@ export default function ExamPatternPickerPage() {
             </p>
           </div>
         </section>
+
+        {isScholarshipSampleAllowedFor(viewerId) && (
+          <div className="site-width pt-6">
+            <p
+              role="note"
+              data-testid="scholarship-sample-notice"
+              className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900"
+            >
+              {SCHOLARSHIP_SAMPLE_NOTICE}: the Year 6 Scholarship comprehensive sample is shown to this account only.
+            </p>
+          </div>
+        )}
 
         <div className="site-width pt-6">
           <ActiveSessionBanner />

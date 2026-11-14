@@ -77,6 +77,7 @@ export const patternSourceSchema = z.object({
       /** Registered strand LABELS for the source's subject. */
       strandIn: z.array(z.string().min(1)).min(1).optional(),
       typeIn: z.array(z.string().min(1)).min(1).optional(),
+      questionIds: z.array(z.string().min(1)).min(1).optional(),
       marksIn: z.array(z.number().int().positive()).min(1).optional(),
       difficultyMix: z.record(z.string(), z.number()).optional(),
     })

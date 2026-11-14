@@ -1,0 +1,68 @@
+origin|4e1d80ae2c84d65c4201bccc9323a37af4a03775|2026-10-20T14:49:14+11:00|Merge pull request #72 from Vishwas2018/dev
+origin/audit/scholarship-y6-production-readiness|4ef598dff751dbf30174a973e5d2a53248a25fdb|2026-10-26T03:27:29+11:00|fix(scholarship): qualify repository revision pin counts and independence terminology in owner review packs
+origin/chore/family-beta-wp1-candidate-20261102|79441a12ba38b5e8fd35235c846428a1a50af485|2026-11-04T14:14:14+11:00|test(e2e): assert one VISIBLE start control, not one DOM node
+origin/chore/supabase-explicit-grants|f3bd4f5f362bf3dbe35c0962b5a40d7912826a90|2026-10-03T23:37:29+10:00|chore(supabase): explicit least-privilege grants for 2026-10-30 readiness
+origin/content/add-y5-icas-drafts-2026-10-16|de21b2952bd58a7459ac41a626fe018a3fa740d4|2026-10-16T00:07:48Z|content(drafts): add 4 validated Y5 draft packets (NAPLAN reading depth, ICAS spelling/language/reading)
+origin/content/depth-prep-and-reading-regroup|751304241d5fadebef96d5673bc68ecdea864862|2026-10-04T07:58:56+11:00|docs(content): add depth generation plan and reading paper claim verification
+origin/content/icas-y5-science-depth|83ffe0f5db97e9bbead8ca31535398e8c5ab83b8|2026-10-17T12:27:25+11:00|content: add ten draft-only ICAS Year 5 science depth items
+origin/content/icas-y5-science-salvage|d602d631443c1e851080cf53fcf36536a3687dfa|2026-10-04T12:16:14+11:00|feat(content): salvage 120 ICAS Y5 Science items with structured visuals (Track C)
+origin/dev|17d8be2fcf81ab456980b24a65d4da0bc38950b2|2026-10-31T21:54:37+11:00|fix(landing): restore Chapter 3/4 keyboard focus lost to pre-hydration tree swap (#92)
+origin/docs/monetisation-readiness|168092696424448e9ec529e2452de0c0e8201896|2026-10-03T23:45:57+10:00|docs(monetisation): add paywall enforcement spec, legal compliance requirements, and go-live checklist
+origin/docs/my-space-trace-2026-11|1476d1eaf3d5d18b69fa94cb16bd6b8b8a3c4f04|2026-11-06T17:26:15+11:00|docs: My Space + Practice Studio P0 trace and 6 Nov availability audit
+origin/docs/parent-journey-trace-2026-11|5c4f2fb2d130da3f770c1cbb9a2d82667b30b68c|2026-11-09T09:51:38+11:00|docs(parent): update implementation trace to reflect handoff 8 Nov
+origin/docs/programme-tracking|6d1412847038511018b4415e403827fda91be206|2026-10-16T09:24:49+11:00|docs(content-status): add programme tracking workbook; mark *.xlsx binary
+origin/docs/release-runbook-2026-10-15|a214c2c2047f74d470b2b1aa8eb0f85adf540eab|2026-10-15T19:20:21+11:00|﻿docs: pre-staged dev-to-main release plan, runbook, rollback and checks
+origin/docs/student-journey-trace-2026-11|14d6005aeed9f12069d18117de50758b2beb1eb3|2026-11-07T16:19:34+11:00|docs(student-journey): P0 trace and decisions on origin/dev 17d8be2f
+origin/evidence/landing-ch1-six-scene-scroll|a7b408f3f2f772657f8bbfb8da936b921a307f5f|2026-10-09T10:40:06+11:00|evidence: final cold-cache results
+origin/evidence/landing-ch2-previews-qa|40559073e55e2c28318d2c6227a0c54d6d6c3da4|2026-10-10T20:01:55+11:00|evidence: Chapter 2 preview windows final visual QA (PR #42)
+origin/feat/admin-workspace-preview|aa17368a79cb2f908535d9d4fd72fcea82b12885|2026-11-11T10:03:01+11:00|feat(admin): foundation navigation, responsive layout, state boards, and privacy boundaries
+origin/feat/amc-final-seven-intake-preflight|93db07974dabc80c202cbd5f8b48ff61acb7f427|2026-10-26T03:26:23+11:00|test(amc): prove y5-028 Option C needs a taxonomy change; correct preflight docs
+origin/feat/amc-final-seven-taxonomy-impl|234fb7a7952618f3886327c55ecb7cd6925d7769|2026-10-26T12:27:36+11:00|docs(amc): refresh y5-028 revision note; state blueprint status and what taxonomy readiness does not imply
+origin/feat/auth-journey-phase2|a976567a41a5a7aa659fc16edc25594600d6d9cb|2026-11-11T10:56:00+11:00|feat(auth): implement Claude Design auth journey screens (Phase 2)
+origin/feat/auth-workspace-preview|40a705a785a6ec829e1c4c845c468a9539cf22fa|2026-11-09T17:37:53+11:00|feat(auth): implement visual preview mode for authentication artboards (b0–b19)
+origin/feat/bar-modelling-30-question-pilot|d19591f38ec5bc549826aaaebfaa63a0ede6d6f1|2026-10-27T17:31:17+11:00|fix(e2e/bar-model-preview): assert 3 reviewer textareas per blind-packet question (90 total)
+origin/feat/billing-workspace-preview|d895d150d99794ae7758a56357f040bba5cb8f68|2026-11-09T22:29:23+11:00|feat(billing): implement visual preview mode for plan and billing artboards (01–07)
+origin/feat/landing-ch1-six-scene-scroll|52aeafa1b03d8e7503b423b9ff8f36f09e843f1c|2026-10-09T10:26:03+11:00|fix(landing): fewer simultaneous image requests; remove CI diagnostics
+origin/feat/landing-hero-refinement|e62c13399bead8af56dc9bd34034b30c7061bd20|2026-10-05T21:35:29+11:00|docs(landing): fix media guide relative link and remove unversioned duplicate assets
+origin/feat/learning-hub|322d3f7e96973a1f7026cb26252cac4825a58c72|2026-11-08T12:33:06+11:00|fix(learning-hub): scope claims to guaranteed schema fields
+origin/feat/my-space|128268dc9150aa7ebd3817437d78c7b8659855e5|2026-11-07T21:42:58+11:00|test(student): My Space states and shared finding threshold
+origin/feat/parent-child-profiles|4a472d65e4338f74678d833df84945aa7bd1346a|2026-11-11T09:24:04+11:00|fix(parent): reconcile P3 deletion copy, session revocation wording, and progress route
+origin/feat/parent-child-progress|5e798381198e2661d9888c03e1756da308d86ed7|2026-11-11T09:59:32+11:00|feat(parent): Child Progress, Results and Worked Answers (P4)
+origin/feat/parent-family-overview|bb0672378a7385bf7ecd4d7c479f5fabef847b6e|2026-11-10T22:06:04+11:00|feat(parent): Family Overview 'This week' dashboard and 7-day activity strip (P2)
+origin/feat/parent-nav-shell-primitives|dd00db1a16629462c9d7431377ac4c9de84ba500|2026-11-10T17:21:05+11:00|feat(parent): isolated preview gate, legacy route compatibility and curriculum year focus (P1)
+origin/feat/parent-workspace-ui|ff560a7bb1095147c6c6f7667dc370d0c3a35637|2026-11-09T16:53:52+11:00|feat(parent): align ChildCurriculumView with b20 programme grid and planned Singapore Maths
+origin/feat/practice-runner|2b3b5f690b97f34a497332e1acafe81c8f633a45|2026-11-08T13:23:12+11:00|feat(practice): implement Practice Runner with server check, intro and finish modal (P6)
+origin/feat/practice-studio|92a0a172f201200cdc6b72dc60ef70c28b648192|2026-11-07T23:10:54+11:00|fix(practice-studio): simplify unchecked notice copy for younger readers
+origin/feat/practice-studio-availability-logic|23d5d2129953f25c100fdff7aee412c7bd8cc396|2026-11-07T20:31:36+11:00|feat(practice-studio): split empty from unchecked, Y3/Y5 only, report duplicate metrics, AMC/scholarship tripwire
+origin/feat/programs-cinematic-ui|a4689ba6fed86737cff52af8c55b2ba97e32a7c1|2026-10-30T12:30:46+11:00|docs(audit): correct AMC findings and final CI status
+origin/feat/publish-gate-solver-verification|21b1cab55b100ecfaf3ca08db1a94fbf77d61ee0|2026-10-16T16:04:30+11:00|ci: separate advisory scholarship draft validation from core
+origin/feat/review-console|117c6fb40bdccc970a6244d1a27386ca3788c9af|2026-10-15T20:11:00+11:00|fix(review-console): provide governed batch fixture fallback for CI environments
+origin/feat/scholarship-dev-sample-isolated|2db7e444e9f00443825626a34b26ee7b638bad07|2026-10-29T20:58:17+11:00|fix(scholarship): require a declared production Supabase ref and refuse that project
+origin/feat/scholarship-nr-attestation|ec9718ebc6f150209fd021fcbeb5c57d8cfc231b|2026-10-16T22:58:19+11:00|docs(scholarship): blind review evidence and human review sheets for the four Y6 draft packets
+origin/feat/scholarship-track-core|aa3da4c15879e200a34b97fe4ee8060bef4cb4fd|2026-10-16T22:48:31+11:00|fix(scholarship): re-export DraftQuestion so dev's solver-gate regression test compiles
+origin/feat/scholarship-y6-sample|dcb60a80f3f6eabdb522b20202929d2e3f328a94|2026-10-22T12:03:48+11:00|docs: trace scholarship sample origins and propose truthful legacy provenance
+origin/feat/singapore-maths-foundation|1cdc6d229150f416a5e0755daab4ea53235c5194|2026-10-16T22:45:12+11:00|fix: keep bar model bank verification browser safe
+origin/feat/singapore-maths-student-sample-practice|8ee32d995efa4dcd2de4a9726231c18b0dec1994|2026-10-28T19:45:14+11:00|fix(singapore-maths): remove server-only from bar-model barrel to unblock validation script
+origin/feat/student-nav-shell|e4b8834d3fe370750c2a8c166536d8f1c28ea9ca|2026-11-07T21:37:24+11:00|fix(student): bottom nav accessible names contain the visible label (WCAG 2.5.3)
+origin/feat/student-workspace-preview|65d62eb9b49d62f26cb27d1487f6931e627f5897|2026-11-10T14:03:28+11:00|fix(student): prevent SSR viewport hydration mismatch on mobile/tablet
+origin/fix/amc-publication-clean|63dab5e45d3f27abeeb692cb1e099f4e2eef6d97|2026-10-17T15:39:21+11:00|docs(amc): export current difficulty review packet
+origin/fix/auth-device-independent-links|75549435a7c4070e53e69ca5f5c626e25468190c|2026-11-01T14:25:01+11:00|fix(auth): device-independent email confirmation, recovery guard, and a11y focus
+origin/fix/auth-recovery-verified|46592735540014e4dcbcf7c58433a3078930a5c3|2026-11-01T15:57:09+11:00|fix(auth): complete recovery provenance verification, invalid PKCE lockout, and e2e reload/cleanup coverage
+origin/fix/beta-hardening|c1e309955cdbb1e0aeabde34f1ee368499180c8d|2026-10-16T22:11:10+11:00|fix(auth): apply provisioned student role after GoTrue's post-insert app_metadata merge
+origin/fix/ci-font-build-reliability|a879e41922095a333c3122a189efba7a6c772517|2026-10-31T09:43:08+11:00|docs(fonts): record verified OpenType metadata, OFL 1.1 notices, and SHA-256 provenance
+origin/fix/exam-legacy-write-rpc-server-only|ed52ef990312f0ab4d0d48cdcc87fe1ef41d2ce5|2026-10-31T22:19:42+11:00|Merge dev into fix/exam-legacy-write-rpc-server-only
+origin/fix/landing-ch34-prehydration-focus|e10398741415f184ddfe84ccab9a1a95f5405ddc|2026-10-31T19:50:11+11:00|Merge dev (squashed #82) into fix/landing-ch34-prehydration-focus
+origin/fix/landing-keyboard-focus-targets|25e9dfc5595a15fcb02538f38ebea037e689d331|2026-10-31T16:11:17+11:00|Merge dev (c9da5767, incl. #90) into fix/landing-keyboard-focus-targets
+origin/fix/landing-uiux-audit-fixes|88458f5c7c678c11ba61b5b1846c9b320c8420fc|2026-11-05T21:36:53+11:00|fix(ux): audit fixes, Night mode, lazy Supabase client, student/parent polish
+origin/fix/metadatabase-production-url|350e439a0eb4052c8791c67d956736a314456418|2026-10-15T16:52:57+11:00|fix(content): anchor publication-approvals in the bundle; CI guard
+origin/fix/parent-child-archive-lifecycle|b2fa65ee0580748b282e8c92c6a52b07ef2de080|2026-10-30T12:34:21+11:00|test(e2e): assert the archived-child sign-in message by its exact text
+origin/fix/scholarship-remediation|65f9f2ebf7c2c35f7d75282f26abaf5f8489eec1|2026-10-17T15:39:22+11:00|docs(scholarship): export 87-item blind review packet
+origin/fix/singapore-sample-persistence|bb4a520b1d68be35778bf81c1d8acd9006e70236|2026-10-30T10:56:49+11:00|fix(singapore-maths): durable, immutable per-question submissions for the sample
+origin/fix/singapore-sample-preview-load|32636f7d6f32c17acea7cb7f78b144f255f8aa99|2026-10-29T12:34:13+11:00|fix(singapore-maths): gate the sample on deployment AND backend, fail closed
+origin/main|4e1d80ae2c84d65c4201bccc9323a37af4a03775|2026-10-20T14:49:14+11:00|Merge pull request #72 from Vishwas2018/dev
+origin/proposal/scholarship-difficulty-advisory|194e34fe89f6e52b45ce667f59e0189f93840de7|2026-10-17T23:31:53+11:00|proposal(not active): narrowly scoped advisory difficulty estimator for AMC + scholarship NR/maths
+origin/release/amc-complete|5e35d5cca70c3baf8bc87066211f5ac38bbd15f2|2026-10-17T20:58:00+11:00|docs(amc): record blind re-review of revised y3-005/y3-016
+origin/release/amc-incremental|05592364d1c192ddcc3409a9e764d8d04f6cfeaf|2026-10-18T00:45:06+11:00|docs: release bundle, scholarship exports, external review handoff
+origin/release/incremental|5b34ede31a0b820111b6ecdf1f503bb935c7f0fe|2026-10-18T00:45:01+11:00|docs: release bundle with final check results
+origin/release/integrated|4232ab1b7b6810a09bb0c0557269bf9980d3ae2a|2026-10-17T21:24:08+11:00|docs: release approval bundle; lint fixes; bias debt retired
+origin/release/scholarship-complete|4fec6c0a9659124f0e8ac98a4ba7d89d94d6b6a6|2026-10-17T20:57:56+11:00|feat(scholarship): governed ingest/pipeline/stage path with stable draft ids; taxonomy registration; first-party attestation in correctness derivation

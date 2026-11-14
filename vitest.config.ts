@@ -38,6 +38,7 @@ import { defineConfig } from "vitest/config";
  * it to this list.
  */
 const FS_FACTORY_REPOSITORY_TEST_FILES = [
+  "src/tests/unit/question-factory/legacy-import.test.ts",
   "src/tests/unit/question-factory/amc-governed-publication.test.ts",
   "src/tests/unit/question-factory/binding-hardening.test.ts",
   "src/tests/unit/question-factory/binding-readonly-preflight.test.ts",

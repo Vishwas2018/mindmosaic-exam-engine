@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e1-013",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "7c75fe732f40756e7f8fe7f69bdd171eb6a60fe1dcf4e5bb935427dce0d2e800",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e1-013",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "There are 5 rows of chairs set out in the hall for a concert. Each row has 9 chairs. How many chairs are there in total?",
+    "options": [
+      {
+        "id": "fourteen",
+        "text": "14"
+      },
+      {
+        "id": "forty",
+        "text": "40"
+      },
+      {
+        "id": "forty-five",
+        "text": "45"
+      },
+      {
+        "id": "fifty-four",
+        "text": "54"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "forty-five"
+    },
+    "explanation": "Rows of equal size mean multiply: 5 rows of 9 chairs is 5 x 9 = 45. Adding 5 and 9 instead gives 14, which is a common slip when the words 'in total' are read as 'add'.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Multiplication facts",
+      "skill": "Multiply within 10x10 in a word problem",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "multiplication",
+        "concert",
+        "arrays"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "5641d8b1edaa3a4856e20d9859f3c2c85876e9f34b33f1feb59b4920f174b9a7"
+}

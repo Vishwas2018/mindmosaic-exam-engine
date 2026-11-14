@@ -45,6 +45,7 @@ export const REVISION_ISSUE_CODES = [
   "revision_limit_exhausted",
   "revision_no_material_change",
   "unsupported_author_identity",
+  "revision_legacy_origin_unverified",
   "revision_request_conflict",
   "revision_parent_conflict",
   "repository_error",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
@@ -46,12 +46,14 @@ interface GuestBanks {
 export function ExamPatternStarter({
   pattern,
   readiness,
+  seed,
 }: {
   pattern: ExamPattern;
   readiness: PatternReadiness;
+  /** `?seed=`, read by the page on the server (see ExamConfigurator's `seed` for why: D-018). */
+  seed?: string;
 }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const auth = useAuth();
   const startPatternExam = useExamStore((state) => state.startPatternExam);
   const startServerPatternExam = useExamStore((state) => state.startServerPatternExam);
@@ -147,7 +149,6 @@ export function ExamPatternStarter({
 
     /* Guest flow, mirroring the configurator's: an explicit ?seed= makes a
        sitting reproducible for tests and for sharing. */
-    const seed = searchParams.get("seed") ?? undefined;
     let pool: readonly AuthoringQuestion[];
     try {
       setIsCreating(true);

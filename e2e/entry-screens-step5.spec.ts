@@ -172,6 +172,12 @@ if (PUBLIC_SIGNUP_ENABLED) {
 }
 
 test.describe("email verification (/auth/confirm)", () => {
+  test("includes the resend form in the initial response before client JavaScript", async ({request}) => {
+    const response = await request.get("/auth/confirm");
+    expect(response.ok()).toBe(true);
+    expect(await response.text()).toContain('id="verify-resend-email"');
+  });
+
   test("an invalid/expired link has no horizontal overflow at every viewport and offers resend", async ({
     page,
   }) => {
@@ -179,7 +185,7 @@ test.describe("email verification (/auth/confirm)", () => {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/auth/confirm", { readyLocator: "main" });
       await expect(
-        page.getByRole("heading", { level: 1, name: /link expired or invalid/i }),
+        page.getByRole("heading", { level: 1, name: /this link (has expired|can’t be used)/i }),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
     }
@@ -233,7 +239,7 @@ test.describe("account recovery", () => {
         readyLocator: "main",
       });
       await expect(
-        page.getByRole("heading", { level: 1, name: /link expired or invalid/i }),
+        page.getByRole("heading", { level: 1, name: /this reset link has expired/i }),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
     }
@@ -250,7 +256,7 @@ test.describe("account recovery", () => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/auth/reset", { readyLocator: "main" });
     await expect(
-      page.getByRole("heading", { level: 1, name: "Choose a new password" }),
+      page.getByRole("heading", { level: 1, name: "Set a new password" }),
     ).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await assertNoSeriousAccessibilityViolations(page, "account recovery (set new password)");

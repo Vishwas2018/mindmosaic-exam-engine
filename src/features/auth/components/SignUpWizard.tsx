@@ -8,6 +8,7 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 import { FAMILY_PLAN } from "@/lib/billing/prices";
+import {useHydrated} from "@/lib/use-hydrated";
 
 import { useAuth } from "../AuthProvider";
 import { evaluatePassword } from "../password";
@@ -166,6 +167,9 @@ export function SignUpWizard({
 }) {
   const router = useRouter();
   const auth = useAuth();
+  // Prevent typing into server HTML before React can retain the controlled
+  // values. Fast interaction otherwise loses the first field during hydration.
+  const hydrated = useHydrated();
 
   const [step, setStepState] = useState(1);
   const setStep = (next: number) => {
@@ -289,7 +293,11 @@ export function SignUpWizard({
   if (confirmEmail) {
     return (
       <div className="grid gap-5">
-        <EmailConfirmationPending email={confirmEmail} onBack={() => router.push("/sign-in")} />
+        <EmailConfirmationPending
+          email={confirmEmail}
+          onBack={() => router.push("/sign-in")}
+          onChangeEmail={() => setConfirmEmail(null)}
+        />
         {!skippedStudent && studentFirstName.trim() && (
           <p className="rounded-xl border border-mm-tint-line bg-mm-tint p-4 text-sm leading-[1.55] text-mm-ink-soft">
             {studentFirstName.trim()} hasn&apos;t been added yet — a student profile can only be
@@ -405,7 +413,7 @@ export function SignUpWizard({
         className="mm-rise grid gap-[18px] rounded-[20px] border border-mm-line bg-white p-[clamp(22px,2.4vw,32px)]"
       >
         {step === 1 && (
-          <div className="grid gap-4">
+          <fieldset disabled={!hydrated} className="grid min-w-0 gap-4">
             <div className="grid gap-3.5 sm:grid-cols-2">
               <MmField
                 id="su-first-name"
@@ -514,7 +522,7 @@ export function SignUpWizard({
               </Link>
               .
             </MmCheckbox>
-          </div>
+          </fieldset>
         )}
 
         {step === 2 && (
@@ -715,7 +723,7 @@ export function SignUpWizard({
 
         {error && (
           <div key={shake.key} className={shake.className}>
-            <MmErrorPanel>{error}</MmErrorPanel>
+            <MmErrorPanel focusOnMount>{error}</MmErrorPanel>
           </div>
         )}
 

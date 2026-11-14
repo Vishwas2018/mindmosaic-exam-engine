@@ -1,0 +1,51 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-2acd9511c6ba59d908f08f6a",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "f90433f331d5186547b4cf2c3d98bba378b3e6a539577d8c14623fc281549b42",
+  "sourceManifestHash": "c7d28c6c4bdc31bf8a03a7896a6bc9648a37ede9efafad8b8186abe100315a80",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-2acd9511c6ba59d908f08f6a",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Solve for x: 3 × (x + 5) = 36.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 7,
+      "tolerance": 0
+    },
+    "explanation": "Divide both sides by 3: x + 5 = 12. Subtract 5 from both sides: x = 7.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Solving equations with brackets",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "algebra",
+        "brackets",
+        "equations",
+        "orig-id:g5-alg-eq-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "f1b06a2faaa73d361a51246d7c88c17d3254a30192bbf6e9af6d8371058be3e0"
+}

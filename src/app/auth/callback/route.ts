@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { isProfileRole, roleHomePath } from "@/features/auth/roles";
+import { safeNextPath } from "@/features/auth/safe-next";
 
 /**
  * OAuth / email-confirmation callback. Supabase redirects here with a `code`
@@ -17,7 +18,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const next = searchParams.get("next");
   /* "/" is the historical default the OAuth buttons always send — treat it
      as "no explicit destination" so role routing can take over. */
-  const safeNext = next && next.startsWith("/") && next !== "/" ? next : null;
+  const safeNext = next !== "/" ? safeNextPath(next) : null;
 
   if (code && isSupabaseConfigured) {
     const supabase = await createClient();

@@ -23,7 +23,15 @@ const SCENE_TOTAL = 6;
 
 /** A scene is one stacked layer from `lg` up (and while motion is on); natural flow otherwise. */
 export const LAYER_CLASSES =
-  "lg:absolute lg:inset-0 lg:opacity-0 lg:pointer-events-none motion-reduce:lg:static motion-reduce:lg:opacity-100 motion-reduce:lg:pointer-events-auto";
+  "lg:absolute lg:inset-0 lg:opacity-0 lg:pointer-events-none motion-reduce:lg:static short:lg:static motion-reduce:lg:opacity-100 short:lg:opacity-100 motion-reduce:lg:pointer-events-auto short:lg:pointer-events-auto";
+
+/**
+ * What a scroll-driven layer's inline style is when the stage is NOT choreographed (natural flow). It must be explicit,
+ * not `undefined`: framer-motion leaves the last value it wrote inline when `style` is removed, so a layer that was
+ * at opacity 0 when the viewport crossed from pinned to natural flow (a resize, or a window dragged shorter than
+ * the pinned minimum) would stay invisible. Neutral values make the DOM match the CSS state on both sides.
+ */
+export const NATURAL_LAYER_STYLE = { opacity: 1, pointerEvents: "auto" } as const;
 
 const DIAMOND_TONES = ["bg-mm-brand", "bg-mm-coral", "bg-mm-lilac", "bg-mm-brand-mid"] as const;
 
@@ -94,7 +102,7 @@ function SceneCopy({ scene }: { scene: ProgramSceneData }) {
           <Link
             href={scene.cta.href}
             style={underlineTransition}
-            className={underlineLinkClasses({ tone: "brand", className: "text-[15px] font-semibold text-mm-brand" })}
+            className={underlineLinkClasses({ tone: "brand", standalone: true, className: "text-[15px] font-semibold text-mm-brand" })}
           >
             {scene.cta.label}
           </Link>
@@ -154,12 +162,12 @@ export function ProgramScene({
     <motion.section
       aria-labelledby={`chapter-two-${scene.id}-heading`}
       data-scene={scene.id}
-      style={choreographed ? { opacity: presence, pointerEvents } : undefined}
-      className={`${LAYER_CLASSES} border-t border-mm-line-soft py-[clamp(44px,7vw,88px)] first:border-t-0 lg:border-t-0 lg:py-0 motion-reduce:lg:border-t motion-reduce:lg:py-[clamp(44px,7vw,88px)]`}
+      style={choreographed ? { opacity: presence, pointerEvents } : NATURAL_LAYER_STYLE}
+      className={`${LAYER_CLASSES} border-t border-mm-line-soft py-[clamp(44px,7vw,88px)] first:border-t-0 lg:border-t-0 lg:py-0 motion-reduce:lg:border-t short:lg:border-t motion-reduce:lg:py-[clamp(44px,7vw,88px)] short:lg:py-[clamp(44px,7vw,88px)]`}
     >
-      <div className="mm-width grid gap-8 lg:h-full lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-0 motion-reduce:lg:pt-0">
+      <div className="mm-width grid gap-8 lg:h-full lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:pb-0 short:lg:pb-0 motion-reduce:lg:pt-0 short:lg:pt-0">
         <motion.div
-          style={choreographed ? { y: copyY, opacity: foreground } : undefined}
+          style={choreographed ? { y: copyY, opacity: foreground } : { y: 0, opacity: 1 }}
           className="lg:order-2 lg:col-span-5"
         >
           <SceneCopy scene={scene} />
@@ -167,7 +175,7 @@ export function ProgramScene({
 
         <motion.div
           data-preview={scene.id}
-          style={choreographed ? { opacity: windowOpacity } : undefined}
+          style={choreographed ? { opacity: windowOpacity } : { opacity: 1 }}
           className="relative min-w-0 lg:order-1 lg:col-span-7"
         >
           <ProgramPreview

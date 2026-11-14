@@ -224,13 +224,26 @@ export const underlineTransition = {
   transition: "color 150ms, background-size 350ms cubic-bezier(0.16,1,0.3,1)",
 } as const;
 
+/**
+ * Effective 44px target for a STANDALONE text link (a link that is a control on its own line, such as a scene
+ * CTA) without moving anything: an invisible `::after` extends the hit area 13px above and below the text box
+ * (about 19px tall, so about 45px). The box model is untouched, so spacing and the underline stay exactly where
+ * the design put them, and the focus outline still hugs the text. The neighbours above and below are not
+ * controls and sit at least 20px away, so the extended areas overlap no other target. Inline links inside
+ * a sentence must NOT use it: their extended area would cover the neighbouring lines of text.
+ */
+const STANDALONE_TARGET = "relative after:absolute after:inset-x-0 after:-inset-y-[13px] after:content-['']";
+
 export function underlineLinkClasses({
   active = false,
   tone = "coral",
+  standalone = false,
   className,
 }: {
   active?: boolean;
   tone?: "coral" | "brand";
+  /** True for a link that stands alone as a control (not inside a sentence): gives it a 44px hit area. */
+  standalone?: boolean;
   className?: string;
 } = {}) {
   /*
@@ -247,6 +260,9 @@ export function underlineLinkClasses({
       active
         ? "[background-size:100%_2px]"
         : "[background-size:0%_2px] hover:[background-size:100%_2px]",
+      // The soft halo every other control carries; the solid 2px outline comes from the `.lp-root` rule in globals.css.
+      "rounded-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30",
+      standalone && STANDALONE_TARGET,
     ),
     className,
   );

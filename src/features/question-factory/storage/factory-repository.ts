@@ -1,7 +1,7 @@
 import type { FactoryCompartment } from "./compartments";
 import type { GovernedWriteCapability } from "./governed-write-capability";
 
-export type CreateFailureReason = "duplicate_candidate" | "trusted_family_reserved";
+export type CreateFailureReason = "duplicate_candidate" | "trusted_family_reserved" | "lock_timeout";
 export type MoveFailureReason =
   | "source_missing"
   | "state_metadata_mismatch"

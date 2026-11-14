@@ -12,7 +12,8 @@ import {
 } from "./helpers/screen-helpers";
 
 const PAGES = [
-  { path: "/sign-in", heading: "Sign in" },
+  { path: "/sign-in", heading: "Welcome to MindMosaic" },
+  { path: "/sign-in?entry=signin", heading: "Sign in" },
   {
     path: "/sign-up",
     heading: PUBLIC_SIGNUP_ENABLED ? "Create the parent account" : "Sign-up is closed",
@@ -40,7 +41,7 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
+    await visitAndStabilize(page, "/sign-in?entry=signin", { readyLocator: "main" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const emailIndex = sequence.indexOf("auth-ident");
@@ -60,7 +61,7 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const codeIndex = sequence.indexOf("auth-ident");
-    const pinIndex = sequence.indexOf("auth-secret");
+    const pinIndex = sequence.indexOf("Your PIN, number 1 of 6");
 
     expect(codeIndex).toBeGreaterThanOrEqual(0);
     expect(pinIndex).toBeGreaterThan(codeIndex);
@@ -73,7 +74,7 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
+    await visitAndStabilize(page, "/sign-in?entry=signin", { readyLocator: "main" });
 
     await expect(page.getByRole("button", { name: "Create an account" })).toHaveCount(0);
 

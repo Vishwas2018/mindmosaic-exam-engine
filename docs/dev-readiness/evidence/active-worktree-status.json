@@ -1,0 +1,122 @@
+[
+  {
+    "path": "C:/tmp/wt-admin-discovery-20261111",
+    "head": "f3199bccab464638400f73f055dc4dcd62f35a46",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-admin-preview",
+    "head": "aa17368a79cb2f908535d9d4fd72fcea82b12885",
+    "status": " M src/app/admin/page.tsx\n M src/features/admin/components/preview/AdminPreviewDashboard.tsx\n?? src/features/admin/adapters/\n?? src/features/admin/components/AdminWorkspace.tsx\n?? src/features/admin/types.ts\n?? src/server/admin-workspace-data.ts\n?? src/tests/pages/admin-workspace-dev-integration.test.tsx\n"
+  },
+  {
+    "path": "C:/tmp/wt-auth-audit-20261104",
+    "head": "46592735540014e4dcbcf7c58433a3078930a5c3",
+    "status": "?? e2e/_probe/\n"
+  },
+  {
+    "path": "C:/tmp/wt-auth-final",
+    "head": "46592735540014e4dcbcf7c58433a3078930a5c3",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-auth-journey-phase2",
+    "head": "a976567a41a5a7aa659fc16edc25594600d6d9cb",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-auth-links",
+    "head": "75549435a7c4070e53e69ca5f5c626e25468190c",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-auth-preview",
+    "head": "40a705a785a6ec829e1c4c845c468a9539cf22fa",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-auth-recovery",
+    "head": "46592735540014e4dcbcf7c58433a3078930a5c3",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-parent-lifecycle",
+    "head": "b2fa65ee0580748b282e8c92c6a52b07ef2de080",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-parent-workspace-ui",
+    "head": "ff560a7bb1095147c6c6f7667dc370d0c3a35637",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-pj-p0",
+    "head": "5c4f2fb2d130da3f770c1cbb9a2d82667b30b68c",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-pj-p1",
+    "head": "dd00db1a16629462c9d7431377ac4c9de84ba500",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-pj-p2",
+    "head": "bb0672378a7385bf7ecd4d7c479f5fabef847b6e",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-pj-p3",
+    "head": "4a472d65e4338f74678d833df84945aa7bd1346a",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-pj-p4",
+    "head": "5e798381198e2661d9888c03e1756da308d86ed7",
+    "status": "?? docs/audits/screenshots/p4/\n"
+  },
+  {
+    "path": "C:/tmp/wt-pj-p5",
+    "head": "5e798381198e2661d9888c03e1756da308d86ed7",
+    "status": " M src/app/parent/children/[childId]/writing/page.tsx\n M src/features/parent-dashboard/fixtures.ts\n M src/features/parent-dashboard/index.ts\n M src/tests/unit/parent-writing-page.test.tsx\n?? src/app/parent/children/[childId]/learning/\n?? src/features/parent-dashboard/components/ChildLearningHub.tsx\n?? src/features/parent-dashboard/components/ChildWritingHistory.tsx\n?? src/features/parent-dashboard/components/ParentPracticePreview.tsx\n?? src/tests/components/child-learning-hub.test.tsx\n?? src/tests/components/child-writing-history.test.tsx\n?? src/tests/components/parent-practice-preview.test.tsx\n?? src/tests/unit/parent-learning-authorization.test.ts\n"
+  },
+  {
+    "path": "C:/tmp/wt-sj-p0",
+    "head": "14d6005aeed9f12069d18117de50758b2beb1eb3",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-sj-p1",
+    "head": "23d5d2129953f25c100fdff7aee412c7bd8cc396",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-sj-p2",
+    "head": "e4b8834d3fe370750c2a8c166536d8f1c28ea9ca",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-sj-p3",
+    "head": "128268dc9150aa7ebd3817437d78c7b8659855e5",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-sj-p4",
+    "head": "92a0a172f201200cdc6b72dc60ef70c28b648192",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-sj-p5",
+    "head": "322d3f7e96973a1f7026cb26252cac4825a58c72",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-sj-p6",
+    "head": "2b3b5f690b97f34a497332e1acafe81c8f633a45",
+    "status": ""
+  },
+  {
+    "path": "C:/tmp/wt-student-workspace-ui",
+    "head": "65d62eb9b49d62f26cb27d1487f6931e627f5897",
+    "status": " M .gitignore\n M next.config.ts\n M package.json\n M src/app/student/page.tsx\n M src/features/student/preview-mode.ts\n M src/tests/pages/student-preview-mode.test.tsx\n?? scripts/student-preview.mjs\n"
+  }
+]

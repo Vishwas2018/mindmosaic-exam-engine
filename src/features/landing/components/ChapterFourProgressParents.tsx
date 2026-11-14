@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, type CSSProperties } from "react";
+import { useCallback, useMemo, useState, type CSSProperties } from "react";
 import { motion, useTransform, type MotionValue } from "framer-motion";
 
 import {
@@ -8,7 +8,7 @@ import {
   chapterFour,
   type Chapter4SceneData,
 } from "../chapter4-progress";
-import { cinematicMotion } from "../cinematic/config";
+import { cinematicMotion, pinnedTravelFactor } from "../cinematic/config";
 import { between } from "../cinematic/math";
 import {
   chapter4LayerStarts,
@@ -18,6 +18,7 @@ import {
   layerLocal,
   spanForegroundOpacity,
 } from "../cinematic/sceneProgress";
+import { createFocusHandoff, FocusKeeper, makeAnchorFor } from "../cinematic/useFocusContinuity";
 import { useChapterScroll } from "../cinematic/useChapterScroll";
 import {
   AssembledParentMosaic,
@@ -208,15 +209,29 @@ export function ChapterFourProgressParents() {
   const { sectionRef, choreographed, q, active, scrollToLayer } = useChapterScroll({
     scrollHeightSvh: timing.desktopScrollHeightSvh,
     starts,
+    pinnedMinHeight: timing.pinnedMinHeight,
   });
 
   const onSceneFocus = useCallback(
     (layer: number) => {
       if (layerForegroundOpacity(q.get(), starts, layer, timing.crossfade) < 0.5) {
-        scrollToLayer(layer);
+        scrollToLayer(layer, { instant: true });
       }
     },
     [q, scrollToLayer],
+  );
+
+  // Focus survives the natural-flow <-> pinned tree swap (see useFocusContinuity).
+  const [handoff] = useState(createFocusHandoff);
+  const travel = pinnedTravelFactor(timing.desktopScrollHeightSvh);
+  const anchorFor = useMemo(
+    () => makeAnchorFor(starts, timing.crossfade, chapter4Scenes.map((scene) => scene.id), LAYER_OFFSET),
+    [],
+  );
+  // Distinct keys on purpose: both trees start with a keeper inside a <div>, so without them React would reuse one
+  // instance across the swap, it would never unmount, and nothing would be captured.
+  const keeper = (tree: "natural" | "pinned") => (
+    <FocusKeeper key={tree} sectionRef={sectionRef} handoff={handoff} anchorFor={anchorFor} travel={travel} />
   );
 
   const introOpacity = useTransform(q, (value) =>
@@ -242,6 +257,7 @@ export function ChapterFourProgressParents() {
     >
       {choreographed ? (
         <div className="sticky top-0 isolate h-svh overflow-hidden">
+          {keeper("pinned")}
           {/* Subtle background mosaic diamond accents */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-30">
             <div className="absolute right-[12%] top-[18%] h-48 w-48 rotate-45 rounded-3xl border border-mm-line/50 bg-mm-tint/20" />
@@ -295,6 +311,7 @@ export function ChapterFourProgressParents() {
         </div>
       ) : (
         <div className="relative">
+          {keeper("natural")}
           <IntroContent />
           <div className="mm-width">
             {chapter4Scenes.map((scene) => (

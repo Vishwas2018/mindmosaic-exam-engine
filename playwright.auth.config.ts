@@ -60,6 +60,15 @@ export default defineConfig({
       // preview gate (src/features/writing/preview-gate.ts): there is no
       // approved writing task yet, and this suite runs a production build.
       WRITING_PREVIEW_ENABLED: "1",
+      /*
+       * No Singapore Maths variable needed: this suite runs off-Vercel
+       * against the local Supabase instance above, which is the isolated
+       * backend the sample gate allows without an opt-in
+       * (src/features/flags/singapore-maths-sample.ts). A hosted Preview
+       * needs an explicit opt-in and a verified non-production project
+       * binding instead; e2e/singapore-maths-sample-gate.spec.ts covers that
+       * and every refusal.
+       */
     },
   },
 });

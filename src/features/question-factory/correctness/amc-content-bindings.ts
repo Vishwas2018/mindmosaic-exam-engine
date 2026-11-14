@@ -13,7 +13,7 @@ export const AMC_ATTESTED_CONTENT_HASHES: Readonly<Record<string, string>> = Obj
   "roadmap-amc-y3-011": "28a9a85f8a567680b0ddfed21fb0a890a7d63d8da89ee6dcb8237b0d7b604b1c",
   "roadmap-amc-y3-012": "efc188a70071a8ea701cd940ae49dbf98b8704876a973fd394f013850d4964c5",
   "roadmap-amc-y3-013": "304b4c203795a15bbce77435f0015f1136d262a4e16386ddcc46ab36e7e4eb7e",
-  "roadmap-amc-y3-014": "50b95ed14969f9d89fb0ef8b1f6ba08efce1340e71c20e78cd0f78f39fa14bd8",
+  "roadmap-amc-y3-014": "ee5695a9361d8e1b0c61c355315bcb61103830b35a20ea312b1b1a43d123d7c0",
   "roadmap-amc-y3-015": "57342f6a187fb8b3a0670471f3c358dcd3e3033929c14867a93bf226b9d78c72",
   "roadmap-amc-y3-016": "23f16ef863aaa054068723213ec378c34a9b442296b151c67059dbec8746e2a0",
   "roadmap-amc-y3-017": "032f05fe70c6e0ab67284b51688716772489e79bf7cdc63950afb870742b0a6b",
@@ -57,7 +57,7 @@ export const AMC_ATTESTED_CONTENT_HASHES: Readonly<Record<string, string>> = Obj
   "roadmap-amc-y5-025": "523c5bd35b0d12baaf1dc835f9870b8864ec6cd99050ee5bbe3ab04165b107fa",
   "roadmap-amc-y5-026": "67439e321c52a7b200578581b19c95c01712f2d8c140aeb4e5daa6c67046196b",
   "roadmap-amc-y5-027": "9306ed4a55fe5eaabea4e9759bfeed7198c1841d13779af3237b447409b719f3",
-  "roadmap-amc-y5-028": "a2bd5e3e6f3ca2ff907ebbd1e1807981b4a4a0c53e0e6a65c1e2bb4cb41a76e3",
+  "roadmap-amc-y5-028": "9211116d5f5fc502e48bdb7005bcb6a150ac5c2a017001245081b78e4f3b809b",
   "roadmap-amc-y5-029": "44ee91ed1d3beeaf49cb88152ceef26dc7752aef8d259930ca5e991cd49b027b",
   "roadmap-amc-y5-030": "18427ede5a6d19cae8c0e7f16deae9f3af0675b43b811e9504f55f4411126086"
 });

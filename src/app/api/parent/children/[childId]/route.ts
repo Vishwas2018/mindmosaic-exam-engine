@@ -4,13 +4,14 @@ import { z } from "zod";
 import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { checkOrigin } from "@/features/auth/require-origin";
-import { isValidPin } from "@/features/auth/student-alias";
+import { isValidPin, loginCodeFromAliasEmail } from "@/features/auth/student-alias";
+import { setChildArchived } from "@/features/parent-dashboard/child-access";
 import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
 import { SUPABASE_URL } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
 /**
- * Rename / year-level / PIN-reset (PATCH) and archive (DELETE) for one
+ * Rename / year-level / PIN-reset / archive-or-restore (PATCH) and archive (DELETE) for one
  * linked child. Mirrors provisionChild's privilege boundary
  * (src/features/auth/provision-child.ts): a parent has no RLS update policy
  * on a child's profiles row ("profiles: update own row" only matches
@@ -20,9 +21,11 @@ import { createClient } from "@/lib/supabase/server";
  * parent actually linked to this child. That confirmation step is what
  * stands in for a policy here.
  *
- * DELETE removes the parent_children link rather than deleting the child's
- * auth user or any exam history — an "archive", not a hard delete, and it
- * requires no schema change (there is no archived-flag column).
+ * Archive (DELETE, or PATCH { archived: true }) is a reversible DEACTIVATION of the child's login: the
+ * auth user is banned and marked archived (see features/parent-dashboard/child-access.ts). The
+ * parent_children link, the auth user and every attempt are kept, so every linked guardian still sees past
+ * results and can restore (PATCH { archived: false }). Nothing is deleted and no schema change is needed.
+ * It is shared across guardians: any linked guardian may archive or restore, and it applies to the child.
  */
 
 const patchRequestSchema = z.object({
@@ -30,10 +33,16 @@ const patchRequestSchema = z.object({
   yearLevel: yearLevelSchema.nullable().optional(),
   curriculumPreference: learnerCurriculumPreferenceSchema.nullable().optional(),
   pin: z.string().optional(),
+  /** true = archive (pause sign-in), false = restore. */
+  archived: z.boolean().optional(),
 }).strict().refine(
   (value) => Object.values(value).some((entry) => entry !== undefined),
   "at least one child field is required",
 );
+
+function accessFailureStatus(reason: "not_found" | "not_student" | "update_failed"): number {
+  return reason === "not_found" ? 404 : reason === "not_student" ? 400 : 500;
+}
 
 interface RouteContext {
   params: Promise<{ childId: string }>;
@@ -75,6 +84,28 @@ async function requireLinkedChild(childId: string) {
   return { ok: true as const, parentId: user.id, admin };
 }
 
+/**
+ * A linked guardian can read the child's login code (never the PIN, which is
+ * not stored anywhere readable). The code is not a secret on its own — it is
+ * printed on the child's card — but it is only ever returned to a parent
+ * linked to this child, after the same confirmation PATCH/DELETE use.
+ */
+export async function GET(_request: Request, context: RouteContext): Promise<NextResponse> {
+  const { childId } = await context.params;
+  const gate = await requireLinkedChild(childId);
+  if (!gate.ok) return gate.response;
+
+  const { data, error } = await gate.admin.auth.admin.getUserById(childId);
+  if (error || !data.user) {
+    return NextResponse.json({ ok: false, message: "Could not load this child's login code." }, { status: 500 });
+  }
+  const loginCode = loginCodeFromAliasEmail(data.user.email);
+  if (!loginCode) {
+    return NextResponse.json({ ok: false, message: "This profile does not use a login code." }, { status: 404 });
+  }
+  return NextResponse.json({ ok: true, loginCode }, { status: 200, headers: { "Cache-Control": "no-store" } });
+}
+
 export async function PATCH(request: Request, context: RouteContext): Promise<NextResponse> {
   const originCheck = checkOrigin(request);
   if (!originCheck.ok) {
@@ -99,6 +130,14 @@ export async function PATCH(request: Request, context: RouteContext): Promise<Ne
 
   const gate = await requireLinkedChild(childId);
   if (!gate.ok) return gate.response;
+
+  /* Archive state first, so "restore and set a new PIN" in one request ends with a working account. */
+  if (parsed.data.archived !== undefined) {
+    const state = await setChildArchived(gate.admin, childId, parsed.data.archived, gate.parentId);
+    if (!state.ok) {
+      return NextResponse.json({ ok: false, message: state.message }, { status: accessFailureStatus(state.reason) });
+    }
+  }
 
   const profileUpdate: Record<string, string | number | null> = {};
   if (displayName !== undefined) profileUpdate.display_name = displayName;
@@ -148,15 +187,11 @@ export async function DELETE(request: Request, context: RouteContext): Promise<N
   const gate = await requireLinkedChild(childId);
   if (!gate.ok) return gate.response;
 
-  const { error } = await gate.admin
-    .from("parent_children")
-    .delete()
-    .eq("parent_id", gate.parentId)
-    .eq("child_id", childId);
-  if (error) {
-    console.error("DELETE /api/parent/children/[childId]: unlink failed", error);
-    return NextResponse.json({ ok: false, message: "Could not archive this child. Please try again." }, { status: 500 });
+  const state = await setChildArchived(gate.admin, childId, true, gate.parentId);
+  if (!state.ok) {
+    console.error("DELETE /api/parent/children/[childId]: archive failed", state.message);
+    return NextResponse.json({ ok: false, message: state.message }, { status: accessFailureStatus(state.reason) });
   }
 
-  return NextResponse.json({ ok: true }, { status: 200 });
+  return NextResponse.json({ ok: true, archived: true }, { status: 200 });
 }

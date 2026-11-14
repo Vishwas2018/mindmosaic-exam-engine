@@ -124,6 +124,10 @@ export async function assemblePublishedQuestions(
       outOfScope += 1;
       continue;
     }
+    if (manifest.generatorAdapter?.class === "legacy_import") {
+      warnings.push(`Manifest '${candidateId}' has unverified legacy origin; Phase 1 assembly refused.`);
+      continue;
+    }
     const parsed = questionSchema.safeParse(manifest.question);
     if (!parsed.success) {
       warnings.push(

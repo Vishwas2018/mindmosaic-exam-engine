@@ -20,6 +20,18 @@ export function optionLetterClasses(selected: boolean): string {
   ].join(" ");
 }
 
+/**
+ * Line-break handling for a question prompt. AMC-style prompts may carry a
+ * list of clues on separate lines; without this the browser collapses them
+ * into one run-on paragraph with inline bullets. Scoped to `amc_style` on
+ * purpose: other exam styles already hold prompts with line breaks that are
+ * currently shown collapsed, and changing how those display is a separate,
+ * reviewed decision, not a side effect of this one.
+ */
+export function promptLayoutClass(examStyle: string): string {
+  return examStyle === "amc_style" ? "whitespace-pre-line" : "";
+}
+
 /** Count words in a free-text response. */
 export function countWords(value: string): number {
   const trimmed = value.trim();

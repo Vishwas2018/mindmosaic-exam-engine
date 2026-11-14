@@ -1,0 +1,77 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-9cd53ea0e267ec418a6ff3d3",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "83eff5cac4cf855b079bf07d1f7755696acb6c5e4a442fc4872823d01bb94e71",
+  "sourceManifestHash": "39233f761fdc02792fb7c58327f1b824ff08c6e7c525bdec6983f4686cd9b9e5",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-9cd53ea0e267ec418a6ff3d3",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Noah buys 2 cricket balls for sports day. How much does he spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-sports",
+        "altText": "A price table for sports equipment: Football $4.50, Cricket Ball $3.00, Skipping Rope $2.20, Frisbee $3.80.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Football",
+              "$4.50"
+            ],
+            [
+              "Cricket Ball",
+              "$3.00"
+            ],
+            [
+              "Skipping Rope",
+              "$2.20"
+            ],
+            [
+              "Frisbee",
+              "$3.80"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "2 cricket balls at 300 cents each cost 2 × 300 = 600 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "059c158ba3aea4e320e0377645c6cf12a85f959a9b5ad66b589ff08ef82f3bbb"
+}

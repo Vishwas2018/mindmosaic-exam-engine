@@ -181,6 +181,10 @@ async function attemptRevision(
     return { status: "rejected", issueCode: parentOutcome.issueCode, message: parentOutcome.message };
   }
   const { record: parentRecord, provenance } = parentOutcome.data;
+  if (provenance.kind === "legacy_import") return {
+    status: "rejected", issueCode: "revision_legacy_origin_unverified",
+    message: "Phase 1 cannot convert unknown legacy authorship into a known generator through revision. A separately governed re-authoring policy is required.",
+  };
 
   // --- Binding checks against the parent's *current* stored state --------
   if (input.parentContentHash !== provenance.contentHash || input.parentRevision !== provenance.revision) {

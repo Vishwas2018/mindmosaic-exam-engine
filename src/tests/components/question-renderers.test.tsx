@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import { showcaseQuestions } from "@/content/questions/showcase-fixtures";
+import { showcasePromptLayoutQuestions } from "@/content/questions/showcase-prompt-layout-fixtures";
 import {
   DragDropRenderer,
   DropdownRenderer,
@@ -87,6 +88,25 @@ describe("MultipleChoiceRenderer", () => {
   it("restores the current answer", () => {
     render(<MultipleChoiceRenderer question={q} answer="n48" />);
     expect(screen.getByRole("radio", { name: "48" })).toBeChecked();
+  });
+
+  describe("prompt line breaks", () => {
+    const layoutLegend = (id: string): HTMLElement => {
+      const fixture = showcasePromptLayoutQuestions.find((item) => item.id === id)!;
+      const { container } = render(<MultipleChoiceRenderer question={toCandidateQuestion(fixture)} />);
+      return container.querySelector("legend")!;
+    };
+
+    it("keeps authored line breaks for amc_style prompts", () => {
+      expect(layoutLegend("showcase-demo-amc-multiline")).toHaveClass("whitespace-pre-line");
+    });
+
+    it("does not change how any other exam style displays its prompt", () => {
+      expect(layoutLegend("showcase-demo-naplan-multiline")).not.toHaveClass("whitespace-pre-line");
+      expect(render(<MultipleChoiceRenderer question={q} />).container.querySelector("legend")).not.toHaveClass(
+        "whitespace-pre-line",
+      );
+    });
   });
 });
 

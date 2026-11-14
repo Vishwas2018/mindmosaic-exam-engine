@@ -1,7 +1,7 @@
 import type { CandidateQuestionInput } from "../ingestion/candidate-question";
 import type { Blueprint } from "../blueprints";
 import type { GenerationIssueCode } from "../config";
-import type { GeneratorAdapter, GeneratorClass } from "../provenance";
+import type { KnownGeneratorAdapter as GeneratorAdapter, GeneratorClass } from "../provenance";
 
 /**
  * Everything a `QuestionGenerator` needs to produce one candidate. Pure

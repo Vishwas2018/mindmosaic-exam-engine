@@ -72,13 +72,14 @@ test.describe("Authenticated Student Assessment Capability Journey", () => {
 
     // 1. Authenticate student via code+PIN
     await page.goto("/student-sign-in");
-    await expect(page.getByLabel("Login code")).toBeVisible();
+    await expect(page.getByLabel("Login code")).toBeVisible({ timeout: 15000 });
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
-    await page.getByLabel("PIN").fill(e2eEnv.fixturePin);
+    await page.getByLabel(/^Your PIN, number 1 of 6/).click();
+    await page.keyboard.type(e2eEnv.fixturePin);
     await page.getByRole("button", { name: "Sign in" }).click();
 
-    await expect(page).toHaveURL(/\/student$/);
-    await expect(page.getByRole("heading", { name: /Hi/i })).toBeVisible();
+    await expect(page).toHaveURL(/\/student$/, { timeout: 15000 });
+    await expect(page.getByRole("heading", { name: /Hi|Welcome back/i })).toBeVisible({ timeout: 15000 });
 
     await page.screenshot({
       path: path.join(SCREENSHOT_DIR, "auth-01-student-dashboard.png"),

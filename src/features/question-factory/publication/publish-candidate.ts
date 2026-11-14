@@ -82,6 +82,9 @@ export async function orchestratePublication(
 
   const stagedRaw = await repository.read("staged", candidateId);
   if (existingManifest !== undefined) {
+    if (existingManifest.generatorAdapter?.class === "legacy_import") return {
+      outcome: "ineligible", candidateId, issues: [issue("publication_upstream_evidence_invalid", "manifest.generatorAdapter", "Legacy publication replay is refused in Phase 1.")],
+    };
     const source = validatePublicationSource(existingManifest, existingManifest.question);
     const approval = source.ok ? validateHumanApproval(existingManifest.humanApproval,
       existingManifest.question, source.revision, source.sourceManifestHash) : undefined;

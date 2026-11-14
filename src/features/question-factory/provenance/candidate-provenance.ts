@@ -2,7 +2,8 @@ import { z } from "zod";
 
 import { FACTORY_LIMITS } from "../config";
 import { factoryIdentifierSchema } from "../shared/identifiers";
-import { generatorAdapterSchema } from "./generator";
+import { knownGeneratorAdapterSchema } from "./generator";
+import { originalGenerationUnverifiedSchema, repositoryImportSchema } from "./legacy-import";
 import { persistedReviewRecordSchema } from "./review-record";
 
 /**
@@ -25,14 +26,14 @@ export const supersessionClaimSchema = z.object({
 
 export type SupersessionClaim = z.infer<typeof supersessionClaimSchema>;
 
-export const candidateProvenanceSchema = z.object({
+export const knownCandidateProvenanceSchema = z.object({
   candidateId: factoryIdentifierSchema,
   blueprintId: factoryIdentifierSchema,
   batchId: factoryIdentifierSchema,
   pipelineRunId: factoryIdentifierSchema,
   revision: z.number().int().nonnegative(),
   generatedAt: z.iso.datetime(),
-  generatorAdapter: generatorAdapterSchema,
+  generatorAdapter: knownGeneratorAdapterSchema,
   generatorVersion: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_VERSION_LENGTH),
   promptVersion: z.string().trim().min(1).max(FACTORY_LIMITS.PROVENANCE_MAX_VERSION_LENGTH),
   /**
@@ -61,7 +62,38 @@ export const candidateProvenanceSchema = z.object({
    * (i.e. every pre-Mission-3C candidate) remains schema-valid without it.
    */
   supersededBy: supersessionClaimSchema.optional(),
+  // Reserved discriminators cannot be stripped and laundered into a v1 record.
+  provenanceVersion: z.literal(1).optional(),
+  kind: z.literal("generated").optional(),
+  originalGeneration: z.never().optional(),
+  repositoryImport: z.never().optional(),
 });
+
+export const legacyCandidateProvenanceSchema = knownCandidateProvenanceSchema.extend({
+  provenanceVersion: z.literal(2), kind: z.literal("legacy_import"),
+  revision: z.literal(0), generatedAt: z.null(), generatorVersion: z.null(),
+  promptVersion: z.null(), promptHash: z.null(),
+  generatorAdapter: z.object({ class: z.literal("legacy_import"), identity: z.null() }).strict(),
+  originalGeneration: originalGenerationUnverifiedSchema,
+  repositoryImport: repositoryImportSchema,
+  // Legacy authoring cannot be relabelled through the existing revision adapter.
+  parentCandidateId: z.never().optional(), supersededBy: z.never().optional(),
+}).strict().superRefine((value, ctx) => {
+  if (value.contentHash !== value.repositoryImport.candidateHash)
+    ctx.addIssue({ code: "custom", path: ["contentHash"], message: "Legacy content hash must equal the verified import candidate hash" });
+  if (value.blueprintId !== value.repositoryImport.blueprint.id)
+    ctx.addIssue({ code: "custom", path: ["blueprintId"], message: "Legacy blueprint identity mismatch" });
+  const entry = value.repositoryImport;
+  if (entry.transformations.length === 0 ? entry.candidateHash !== entry.sourceCandidateHash : entry.transformations[0].beforeCandidateHash !== entry.sourceCandidateHash || entry.transformations[0].afterCandidateHash !== entry.candidateHash)
+    ctx.addIssue({ code: "custom", path: ["repositoryImport", "transformations"], message: "Transformation must bind exact before/after candidate hashes" });
+});
+
+export const candidateProvenanceSchema = z.discriminatedUnion("kind", [legacyCandidateProvenanceSchema, knownCandidateProvenanceSchema]);
+
+export function isLegacyProvenance(value: CandidateProvenance): value is z.infer<typeof legacyCandidateProvenanceSchema> {
+  return value.kind === "legacy_import";
+}
 
 export type CandidateProvenance = z.infer<typeof candidateProvenanceSchema>;
 export type CandidateProvenanceInput = z.input<typeof candidateProvenanceSchema>;
+export type KnownCandidateProvenanceInput = z.input<typeof knownCandidateProvenanceSchema>;

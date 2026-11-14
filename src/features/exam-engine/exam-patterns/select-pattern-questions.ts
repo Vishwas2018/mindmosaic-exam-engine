@@ -55,6 +55,7 @@ export function sourcePool(
    */
   return bank.filter(
     (question) =>
+      (source.filters?.questionIds === undefined || source.filters.questionIds.includes(question.id)) &&
       question.yearLevel === scope.yearLevel &&
       question.examStyle === scope.examStyle &&
       question.metadata.subject === subjectId &&

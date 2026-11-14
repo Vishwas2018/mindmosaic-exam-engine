@@ -23,7 +23,16 @@ import {
   type YearLevelFilter,
 } from "@/features/exam-engine/selection";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
+import type { CandidateQuestion } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
+
+interface ServerPracticeSessionPayload {
+  ok: boolean;
+  questions: readonly CandidateQuestion[];
+  count: number;
+  title: string;
+  estimatedMinutes: number;
+}
 
 /**
  * Guest-bank payload — answer keys and explanations included (see
@@ -69,6 +78,8 @@ function PracticeSkillSessionContent() {
 
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [banks, setBanks] = useState<GuestBanks | null>(null);
+  const [candidateSession, setCandidateSession] =
+    useState<ServerPracticeSessionPayload | null>(null);
 
   useEffect(() => {
     // Do not request the answer-bearing bank if the session is invalid, expired, or missing
@@ -77,6 +88,32 @@ function PracticeSkillSessionContent() {
     }
 
     let cancelled = false;
+    const isStudioPractice =
+      parsedParams.ok &&
+      parsedParams.mode === "standard" &&
+      searchParams.has("strand");
+
+    if (isStudioPractice) {
+      fetch(`/api/practice/session/questions?${searchParams.toString()}`)
+        .then((response) =>
+          response.ok
+            ? (response.json() as Promise<ServerPracticeSessionPayload>)
+            : Promise.reject(),
+        )
+        .then((data) => {
+          if (!cancelled) {
+            setCandidateSession(data);
+            setStatus("ready");
+          }
+        })
+        .catch(() => {
+          if (!cancelled) setStatus("error");
+        });
+      return () => {
+        cancelled = true;
+      };
+    }
+
     fetch("/api/exam/guest-bank")
       .then((response) =>
         response.ok ? (response.json() as Promise<GuestBanks>) : Promise.reject(),
@@ -93,7 +130,7 @@ function PracticeSkillSessionContent() {
     return () => {
       cancelled = true;
     };
-  }, [isValidSession]);
+  }, [isValidSession, parsedParams, searchParams]);
 
   // 1. Handle invalid query parameters
   if (!parsedParams.ok) {
@@ -164,8 +201,10 @@ function PracticeSkillSessionContent() {
   }
 
   // 4. Network / fetch error
-  if (status === "error" || !banks) {
+  if (status === "error" || (!banks && !candidateSession)) {
     const isDrill = parsedParams.mode === "drill";
+    const isStudio =
+      parsedParams.mode === "standard" && searchParams.has("strand");
     return (
       <main id="main-content" className="site-width py-16" role="alert">
         <ErrorState
@@ -173,15 +212,63 @@ function PracticeSkillSessionContent() {
           description="Check your connection and try again."
           action={
             <Link
-              href={isDrill ? "/results" : "/student/learn"}
+              href={
+                isDrill
+                  ? "/results"
+                  : isStudio
+                  ? "/student/practice"
+                  : "/student/learn"
+              }
               className={buttonClasses({ variant: "secondary" })}
             >
-              {isDrill ? "Back to results" : "Back to Learning Hub"}
+              {isDrill
+                ? "Back to results"
+                : isStudio
+                ? "Back to Practice Studio"
+                : "Back to Learning Hub"}
             </Link>
           }
         />
       </main>
     );
+  }
+
+  // =========================================================================
+  // PRACTICE STUDIO SESSION: server-selected, answer-stripped questions (D13)
+  // =========================================================================
+  if (candidateSession) {
+    if (candidateSession.questions.length === 0) {
+      return (
+        <main id="main-content" className="site-width py-16" role="alert">
+          <ErrorState
+            title="No practice questions available for this strand yet"
+            description="We couldn't find enough practice questions for this selection. Try another strand from Practice Studio."
+            action={
+              <Link
+                href="/student/practice"
+                className={buttonClasses({ variant: "primary" })}
+              >
+                Back to Practice Studio
+              </Link>
+            }
+          />
+        </main>
+      );
+    }
+
+    return (
+      <PracticeSession
+        questions={candidateSession.questions}
+        title={candidateSession.title}
+        exitHref="/student/practice"
+        exitLabel="Back to Practice Studio"
+        showIntro={true}
+      />
+    );
+  }
+
+  if (!banks) {
+    return null;
   }
 
   // =========================================================================
@@ -338,6 +425,10 @@ function PracticeSkillSessionContent() {
   }
 
   const stdParams = parsedParams.params;
+  if (!banks) {
+    return null;
+  }
+
   const pool = banks.published;
 
   // Skill-scoped requests (curriculumCode set) must NEVER fall through to the

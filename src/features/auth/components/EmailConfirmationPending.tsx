@@ -23,9 +23,13 @@ const RESEND_COOLDOWN_SECONDS = 30;
 export function EmailConfirmationPending({
   email,
   onBack,
+  onChangeEmail,
 }: {
   email: string;
+  /** Kept for callers that only offer "back to sign in". */
   onBack: () => void;
+  /** When given, offers "Wrong address? Change your email" and returns to the form. */
+  onChangeEmail?: () => void;
 }) {
   const { resendConfirmationEmail } = useAuth();
   const [sending, setSending] = useState(false);
@@ -42,11 +46,22 @@ export function EmailConfirmationPending({
     if (sending || cooldown > 0) return;
     setSending(true);
     setFeedback(null);
-    const result = await resendConfirmationEmail(email);
-    setFeedback({
-      tone: result.ok ? "success" : "error",
-      text: result.message ?? (result.ok ? "Confirmation email resent." : "Could not resend the email."),
-    });
+    let result: Awaited<ReturnType<typeof resendConfirmationEmail>>;
+    try {
+      result = await resendConfirmationEmail(email);
+    } catch {
+      result = { ok: false, message: "We couldn’t reach MindMosaic. Check your connection and try again." };
+    }
+    /* "Sent" only once the send was accepted. A failure says so and offers a
+       human, rather than a silent success. */
+    setFeedback(
+      result.ok
+        ? { tone: "success", text: `A new link is on its way. Check ${email}.` }
+        : {
+            tone: "error",
+            text: `${result.message ?? "We couldn’t send a new link just now."} If it keeps happening, email hello@mindmosaic.app.`,
+          },
+    );
     setCooldown(RESEND_COOLDOWN_SECONDS);
     setSending(false);
   }
@@ -59,7 +74,11 @@ export function EmailConfirmationPending({
       <h1 className="mt-5 text-3xl font-[700] tracking-[-0.03em] text-mm-ink">Check your email</h1>
       <p className="mt-2 text-base leading-[1.6] text-mm-muted">
         We sent a confirmation link to <span className="font-bold text-mm-ink">{email}</span>.
-        Click it to activate your account, then sign in.
+        Use it and you are in.
+      </p>
+      <p className="mt-3 text-sm leading-[1.6] text-mm-muted">
+        Can&apos;t see it? Give it a minute, then check spam. The link only works for a limited
+        time.
       </p>
 
       {feedback && (
@@ -90,16 +109,32 @@ export function EmailConfirmationPending({
         {cooldown > 0 ? `Resend available in ${cooldown}s` : "Resend confirmation email"}
       </button>
 
-      <button
-        type="button"
-        onClick={onBack}
-        className={twMerge(
-          "mt-5 inline-flex min-h-11 items-center rounded font-bold text-mm-brand hover:underline",
-          mmFocus,
-        )}
-      >
-        ← Back to sign in
-      </button>
+      {onChangeEmail && (
+        <button
+          type="button"
+          onClick={onChangeEmail}
+          className={twMerge(
+            "mt-4 inline-flex min-h-11 items-center rounded font-bold text-mm-brand hover:underline",
+            mmFocus,
+          )}
+        >
+          Wrong address? Change your email
+        </button>
+      )}
+
+      <p className="mt-2 text-sm text-mm-muted">
+        Already confirmed on another device?{" "}
+        <button
+          type="button"
+          onClick={onBack}
+          className={twMerge(
+            "inline-flex min-h-11 items-center rounded font-bold text-mm-brand hover:underline",
+            mmFocus,
+          )}
+        >
+          Sign in
+        </button>
+      </p>
     </div>
   );
 }

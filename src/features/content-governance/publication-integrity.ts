@@ -2,7 +2,7 @@ import { z } from "zod";
 import { verifiedAmcApprovalSourceHash } from "./amc-review-source";
 
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
-import { validateManifestReviewEvidence } from "@/features/question-factory/publication/manifest-schema";
+import { manifestGeneratorAttributionIssue, validateManifestReviewEvidence } from "@/features/question-factory/publication/manifest-schema";
 import { writingTaskSchema, type WritingTask } from "@/features/writing/task";
 import { questionSchema, type Question } from "@/schemas/question.schema";
 
@@ -204,6 +204,8 @@ export function validatePublicationSource(raw: unknown, question: Question):
   if (manifest.manifestFingerprint !== hashJson(publicationManifestFacts(manifest))) {
     return { ok: false, reason: "manifest_fingerprint_mismatch" };
   }
+  // Unknown origin must not be admitted by omitting, mis-shaping or relabelling the attribution, even with a re-sealed fingerprint.
+  if (manifestGeneratorAttributionIssue(manifest.generatorAdapter)) return { ok: false, reason: "invalid_generator_attribution" };
   try {
     if (canonicalQuestionHash(manifest.question) !== canonicalQuestionHash(question)) {
       return { ok: false, reason: "manifest_content_mismatch" };

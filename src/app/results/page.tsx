@@ -25,6 +25,7 @@ import {
   Card,
   buttonClasses,
 } from "@/components/ui";
+import { promptLayoutClass } from "@/features/exam-engine/question-renderers/renderer-utils";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 import {
   formatCorrectAnswer,
@@ -192,12 +193,12 @@ export default function ResultsPage() {
   const resetExam = useExamStore((state) => state.resetExam);
 
   /*
-   * The design's three-way review filter (screen 10, view 4). It replaces
-   * the previous boolean "flagged only" toggle: "Incorrect only" is the
-   * filter a student actually reaches for after a paper, and a toggle
-   * cannot express three states.
+   * Question review filters matching 01_standalone_review.html ("Review every question").
+   * Supports: All, Wrong (incorrect), Not answered (unanswered), Flagged, Not yet marked.
    */
-  const [reviewFilter, setReviewFilter] = useState<"all" | "incorrect" | "flagged">("all");
+  const [reviewFilter, setReviewFilter] = useState<
+    "all" | "incorrect" | "unanswered" | "flagged" | "manual_review"
+  >("all");
 
   /*
    * Cold load: the in-memory store holds only the attempt just submitted,
@@ -263,18 +264,36 @@ export default function ResultsPage() {
       .filter((detail) => detail.status === "incorrect")
       .map((detail) => detail.questionId),
   );
+  const unansweredIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "unanswered")
+      .map((detail) => detail.questionId),
+  );
+  const manualReviewIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "manual_review" || detail.pendingManualReview)
+      .map((detail) => detail.questionId),
+  );
 
   const reviewQuestions =
     reviewFilter === "flagged"
       ? questions.filter((question) => flaggedQuestionIds.includes(question.id))
       : reviewFilter === "incorrect"
         ? questions.filter((question) => incorrectIds.has(question.id))
-        : questions;
+        : reviewFilter === "unanswered"
+          ? questions.filter((question) => unansweredIds.has(question.id))
+          : reviewFilter === "manual_review"
+            ? questions.filter((question) => manualReviewIds.has(question.id))
+            : questions;
 
   const reviewFilters = [
     { id: "all" as const, label: "All", count: questions.length },
-    { id: "incorrect" as const, label: "Incorrect only", count: incorrectIds.size },
+    { id: "incorrect" as const, label: "Wrong", count: incorrectIds.size },
+    { id: "unanswered" as const, label: "Not answered", count: unansweredIds.size },
     { id: "flagged" as const, label: "Flagged", count: flaggedQuestionIds.length },
+    ...(manualReviewIds.size > 0
+      ? [{ id: "manual_review" as const, label: "Not yet marked", count: manualReviewIds.size }]
+      : []),
   ];
 
   /* By-skill bars, from the same breakdown the table below reads. */
@@ -610,7 +629,10 @@ export default function ResultsPage() {
                           ? "toggle-flagged-only"
                           : `review-filter-${filter.id}`
                       }
-                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
+                      /* No colour transition: a tab caught mid-fade between the selected and unselected
+                         palettes has neither one's contrast (3.9:1 was measured), and the state should
+                         change at once anyway. */
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                         selected
                           ? "border-primary bg-primary text-white"
                           : "border-parchment-border bg-white text-plum-muted hover:border-primary"
@@ -641,7 +663,11 @@ export default function ResultsPage() {
               <p className="mt-6 rounded-xl bg-surface-container-low px-4 py-6 text-center text-sm font-semibold text-plum-muted">
                 {reviewFilter === "flagged"
                   ? "You did not flag any questions in this exam."
-                  : "Nothing was marked incorrect in this exam."}
+                  : reviewFilter === "unanswered"
+                    ? "Every question was answered."
+                    : reviewFilter === "manual_review"
+                      ? "No questions are waiting for human marking."
+                      : "Nothing was marked incorrect in this exam."}
               </p>
             ) : (
               <ol className="mt-7 space-y-6">
@@ -699,7 +725,10 @@ export default function ResultsPage() {
                         </span>
                       </div>
 
-                      <p className="mt-4 text-base font-bold leading-7 text-plum-dark">
+                      <p
+                        data-testid={`review-prompt-${question.id}`}
+                        className={`mt-4 text-base font-bold leading-7 text-plum-dark ${promptLayoutClass(question.examStyle)}`.trim()}
+                      >
                         {question.prompt}
                       </p>
 
