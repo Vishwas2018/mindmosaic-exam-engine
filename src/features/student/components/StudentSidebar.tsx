@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import { isVihaanScholarshipPrepEnabled } from "@/features/flags/vihaan-scholarship-prep";
 
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
@@ -32,6 +33,7 @@ export type StudentSidebarKey =
   | "examCentre"
   | "progress"
   | "singaporeMathsSample";
+| "vihaan";
 
 interface SidebarNavItem {
   key: StudentSidebarKey;
@@ -66,6 +68,16 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
           label: "Singapore Maths Sample",
           href: "/practice/singapore-maths/sample",
           icon: BarChart3,
+        },
+      ]
+    : []),
+  ...(isVihaanScholarshipPrepEnabled()
+    ? [
+        {
+          key: "vihaan" as const,
+          label: "Vihaan Scholarship Prep",
+          href: "/student/vihaan",
+          icon: GraduationCap,
         },
       ]
     : []),

@@ -1,0 +1,11 @@
+# Pilot authoring brief ? version 1
+
+Author: OpenAI Codex drafting session, 13 November 2026. Exact executing model identifier unavailable. This is a human-review draft authored in this session, not authenticated live-provider factory provenance. Qwen was unavailable: no connected Qwen tool, no Ollama executable found and localhost:11434/api/tags failed to connect.
+
+Create 20 new MindMosaic scholarship preparation items for an above-average Year 5 learner: Mathematics 6, Numerical Reasoning 5, Verbal Reasoning 4, Reading Comprehension 3, Written Expression 2. Use original invented situations and an original linked reading passage; do not copy or adapt official Edutest, NAPLAN, ICAS, textbook, commercial or web questions. No external source material was supplied or consulted during drafting. Do not claim global originality or official examination equivalence.
+
+Use the existing production Question schema with draft status, scholarship_style, en-AU, Year 6 stretch content (learner remains Year 5), registered skills where available, four distinct objective options, one defensible key, clear explanations and step-by-step working. Keep answers only in assessment/solution fields, never metadata, visuals, filenames or alt text. Use no visuals, HTML, URLs or unsupported interactions in this pilot. Use mixed, provisional difficulty labels, explicit constraints for sequences, plausible distractors and multi-step reasoning. Add a narrative and persuasive task with task-specific success criteria, planning guidance and existing scholarship-written-expression v1 human-assessment rubric; no single correct essay.
+
+Keep approvedBy null. Do not fabricate provenance, reviewer independence, published manifests, approvals or test results. Create a separate blind packet for the 12 reasoning/reading items, with no keys, explanations or sidecars. Review keys, uniqueness, distractors, difficulty, language and passage evidence. Record review limitations. Only after reviewing pilot quality decide whether to expand; do not generate the remaining 380 in this step.
+
+This brief records the operative instructions used for the session drafting. It is not an authenticated provider request transcript. The Git diff and validation report bind the current draft; advisory-review.md records subsequent editorial revisions and review limitations.
