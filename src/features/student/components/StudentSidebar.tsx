@@ -9,7 +9,6 @@ import {
   Dumbbell,
   Flag,
   Flame,
-  GraduationCap,
   HelpCircle,
   LayoutDashboard,
   Search,
@@ -18,9 +17,11 @@ import {
   Target,
   TrendingUp,
   BarChart3,
+  GraduationCap,
 } from "lucide-react";
 
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import { isVihaanScholarshipPrepEnabled } from "@/features/flags/vihaan-scholarship-prep";
 
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
@@ -32,7 +33,8 @@ export type StudentSidebarKey =
   | "practice"
   | "examCentre"
   | "progress"
-  | "singaporeMathsSample" | "vihaan";
+  | "singaporeMathsSample"
+  | "vihaan";
 
 interface SidebarNavItem {
   key: StudentSidebarKey;
@@ -64,6 +66,7 @@ const vihaanNavItem: SidebarNavItem = {
   href: "/student/vihaan",
   icon: GraduationCap,
 };
+
 export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
   ...baseSidebarItems,
   ...(isSingaporeMathsSampleAllowed()
@@ -76,6 +79,7 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
         },
       ]
     : []),
+  ...(isVihaanScholarshipPrepEnabled() ? [vihaanNavItem] : []),
 ];
 
 /**
