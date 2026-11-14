@@ -142,7 +142,7 @@ export function ParentHelpCentre({
               if (selectedArticleSlug) setSelectedArticleSlug(null);
             }}
             placeholder="Try “PIN” or “invoice”"
-            className="w-full rounded-xl border border-royal/20 bg-white py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-muted/60 shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+            className="min-h-11 w-full rounded-xl border border-royal/20 bg-white py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-muted/60 shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
           />
           <Search
             className="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-muted"
@@ -362,7 +362,7 @@ export function ParentHelpCentre({
               id={childSelectId}
               value={contactChildId}
               onChange={(e) => setContactChildId(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border border-royal/20 bg-white py-2.5 px-3.5 text-sm text-ink shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+              className="mt-1.5 min-h-11 w-full rounded-xl border border-royal/20 bg-white py-2.5 px-3.5 text-sm text-ink shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
             >
               <option value="">Not about a child</option>
               {childrenList.map((ch) => (

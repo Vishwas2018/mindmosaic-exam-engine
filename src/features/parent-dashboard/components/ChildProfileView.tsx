@@ -270,7 +270,7 @@ export function ChildProfileView({
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink placeholder:text-muted focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
+                  className="mt-2 min-h-11 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink placeholder:text-muted focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
                 />
                 <p className="mt-1.5 text-xs text-muted">
                   This is what {firstName || "your child"} sees when they sign in. It is never shown outside your family.
@@ -285,7 +285,7 @@ export function ChildProfileView({
                   id="child-yearlevel"
                   value={yearLevel}
                   onChange={(e) => setYearLevel(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
+                  className="mt-2 min-h-11 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
                 >
                   <option value="">No year level selected</option>
                   {availableYearLevels.map((year) => (
