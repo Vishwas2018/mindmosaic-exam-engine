@@ -15,13 +15,13 @@ import {
   Settings,
   SpellCheck2,
   Target,
+  GraduationCap,
   TrendingUp,
   BarChart3,
-  GraduationCap,
 } from "lucide-react";
 
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
-import { isVihaanScholarshipPrepEnabled } from "@/features/flags/vihaan-scholarship-prep";
+import { isVihaanScholarshipPrepEnabled } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
@@ -60,13 +60,6 @@ const baseSidebarItems: readonly SidebarNavItem[] = [
   { key: "progress", label: "My Progress", href: "/student/engagement", icon: TrendingUp },
 ];
 
-const vihaanNavItem: SidebarNavItem = {
-  key: "vihaan" as const,
-  label: "Vihaan Scholarship Prep",
-  href: "/student/vihaan",
-  icon: GraduationCap,
-};
-
 export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
   ...baseSidebarItems,
   ...(isSingaporeMathsSampleAllowed()
@@ -79,7 +72,6 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
         },
       ]
     : []),
-  ...(isVihaanScholarshipPrepEnabled() ? [vihaanNavItem] : []),
 ];
 
 /**
