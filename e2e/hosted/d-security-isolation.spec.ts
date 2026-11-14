@@ -103,7 +103,7 @@ test("D: two families are isolated; students, parents and anonymous visitors are
   await page.goto("/parent/results");
   await expect(page.getByText(A.childName)).toHaveCount(0);
   // D2 Parent B cannot open family A's child pages
-  for (const sub of ["", "/progress", "/learning", "/writing", "/curriculum"]) {
+  for (const sub of ["", "/progress", "/learning", "/writing", "/curriculum", "/learning/preview"]) {
     const res = await page.goto(`/parent/children/${A.childUserId}${sub}`);
     const body = await page.locator("body").innerText();
     expect(body, `parent B on A's child${sub}`).not.toContain(A.childName);
@@ -155,11 +155,22 @@ test("D: two families are isolated; students, parents and anonymous visitors are
 ${sbGetBody.slice(0, 4000)}`,
   );
   expect(sbGetBody, "student B is never handed A's paper").not.toContain(String(A.sessionId) + '"');
-  expect(sbGet.status(), `student B reading A's session: ${sbGetBody.slice(0, 200)}`).toBeGreaterThanOrEqual(400);
-  const sbSave = await api(pageSB).post(`/api/exam/session/${A.sessionId}/responses`, { responses: {} });
-  expect(sbSave.status(), "student B autosaving into A's session").toBeGreaterThanOrEqual(400);
-  const sbSubmit = await api(pageSB).post(`/api/exam/session/${A.sessionId}/submit`, {});
-  expect(sbSubmit.status(), "student B submitting A's session").toBeGreaterThanOrEqual(400);
+  expect(sbGet.status(), `student B reading A's session: ${sbGetBody.slice(0, 200)}`).toBe(404);
+  // Well-formed bodies, so a refusal can only come from ownership, not from validation
+  const before = await devAdmin().from("exam_attempts").select("id, result").eq("session_id", A.sessionId!).single();
+  const sbSave = await api(pageSB).post(`/api/exam/session/${A.sessionId}/responses`, {
+    responses: {},
+    currentQuestionIndex: 0,
+    flaggedQuestionIds: [],
+  });
+  expect(sbSave.status(), "student B autosaving into A's session").toBe(404);
+  const sbSubmit = await api(pageSB).post(`/api/exam/session/${A.sessionId}/submit`, {
+    responses: {},
+    submissionReason: "user_submitted",
+  });
+  expect(sbSubmit.status(), "student B submitting A's session").toBe(404);
+  const after = await devAdmin().from("exam_attempts").select("id, result").eq("session_id", A.sessionId!).single();
+  expect(after.data, "A's stored attempt is unchanged").toEqual(before.data);
   evidence.studentB_api = { get: sbGet.status(), save: sbSave.status(), submit: sbSubmit.status() };
   await pageSB.goto(`/results?attempt=${A.attemptId}`);
   await expect(pageSB.locator("main")).not.toContainText(A.childName);
@@ -168,18 +179,31 @@ ${sbGetBody.slice(0, 4000)}`,
     headers: { apikey: anonKey, Authorization: `Bearer ${studentBToken}` },
   });
   expect(((await rest.json()) as unknown[]).length, "student B reads A's attempt via RLS").toBe(0);
-  // Legacy forged-result RPCs stay closed to a signed-in student
-  for (const fn of ["record_exam_attempt", "create_exam_session"]) {
+  // Legacy forged-result RPCs stay closed to a signed-in student. Called with their real signatures, so the only
+  // acceptable answer is the database refusing EXECUTE (42501), not "no such function".
+  const forged = { objectiveMarksEarned: 99, objectiveMarksAvailable: 99, objectivePercentage: 100, FORGED_MARKER: true };
+  const calls: Array<[string, Record<string, unknown>]> = [
+    ["record_exam_attempt", { p_session_id: A.sessionId, p_responses: {}, p_result: forged }],
+    [
+      "create_exam_session",
+      { p_config: {}, p_seed: "forged", p_selected_question_ids: [], p_expires_at: new Date(Date.now() + 3.6e6).toISOString() },
+    ],
+  ];
+  for (const [fn, args] of calls) {
     const r = await fetch(`${SB}/rest/v1/rpc/${fn}`, {
       method: "POST",
       headers: { apikey: anonKey, Authorization: `Bearer ${studentBToken}`, "Content-Type": "application/json" },
-      body: "{}",
+      body: JSON.stringify(args),
     });
     const t = await r.text();
-    expect(r.status, `${fn} as a student: ${t.slice(0, 120)}`).not.toBe(200);
-    expect(r.status === 403 || /42501|permission denied|PGRST20[2-3]/.test(t), `${fn} denied, not merely mis-called`).toBe(true);
+    expect(r.status, `${fn} as a student: ${t.slice(0, 160)}`).toBe(403);
+    expect(t, `${fn} refused by permission`).toMatch(/42501/);
     evidence[`rpc_${fn}`] = `${r.status} ${t.slice(0, 80)}`;
   }
+  const stillA = await devAdmin().from("exam_attempts").select("id, result").eq("session_id", A.sessionId!);
+  expect(stillA.data!.length, "no forged second attempt").toBe(1);
+  expect(JSON.stringify(stillA.data![0]!.result)).not.toContain("FORGED_MARKER");
+
   // Students never start payments
   const pay = await api(pageSB).post("/api/stripe/checkout", {});
   expect(pay.status(), "student starting a checkout").toBeGreaterThanOrEqual(400);
@@ -195,10 +219,14 @@ ${sbGetBody.slice(0, 4000)}`,
 
   // Anonymous
   const anon = await newPage(context);
-  for (const r of ["/student", "/parent", "/admin", "/results"]) {
+  for (const r of ["/student", "/parent", "/admin"]) {
     await anon.goto(r);
     await expect(anon, `${r} anonymously`).not.toHaveURL(new RegExp(`${r}(/|\\?|$)`));
   }
+  // /results is open to guests (practice without an account) but holds no server data for them
+  await anon.goto(`/results?attempt=${A.attemptId}`);
+  await expect(anon.locator("main")).not.toContainText(A.childName);
+  await expect(anon.locator("main")).toContainText(/No results to show yet|Finish an exam/i);
   const anonCreate = await api(anon).post("/api/exam/session", {});
   expect(anonCreate.status(), "anonymous exam session create").toBeGreaterThanOrEqual(400);
   const anonRest = await fetch(`${SB}/rest/v1/exam_attempts?select=id&limit=1`, {

@@ -237,7 +237,9 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   await expect(page.locator("main"), "no internal build notes shown to parents").not.toContainText(/NEEDS A BUILD|does not exist yet/i);
   await expect(page.locator("main"), "no raw skill ids shown to parents").not.toContainText(/Num\.[a-z]+\./);
   await shot("c12-parent-child-progress");
-  await page.goto(`/parent/results/${attempt.id}`);
+  // Follow the parent's own link to the paper, as a parent would
+  await page.getByRole("link", { name: /Open/ }).first().click();
+  await expect(page).toHaveURL(/\/parent\/results\//);
   await expect(page.locator("main")).toContainText(new RegExp(`\\b${earned}\\s*(of|/)\\s*${total}\\b`));
   await expect(page.locator("main"), "no invented time limit").not.toContainText(/minutes of 40/);
   await shot("c12-parent-result-detail");

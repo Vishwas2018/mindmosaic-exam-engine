@@ -92,7 +92,8 @@ export default async function ResultPage({ params }: ResultPageProps) {
     limit: 500,
   });
 
-  const sitting = sittings.find((s) => s.row.id === id);
+  // Links use the sitting's row id; an attempt id (as in a support message) resolves to the same sitting.
+  const sitting = sittings.find((s) => s.row.id === id || s.attemptId === id);
   if (!sitting) {
     notFound();
   }
