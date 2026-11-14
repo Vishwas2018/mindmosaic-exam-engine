@@ -62,13 +62,13 @@ export function ParentPracticePreview({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted">
-            <Link href="/parent" className="hover:text-royal transition">
+            <Link href="/parent" className="inline-flex min-h-11 items-center hover:text-royal transition">
               Family Overview
             </Link>
             <span aria-hidden="true">/</span>
             <Link
               href={`/parent/children/${child.id}/learning`}
-              className="hover:text-royal transition"
+              className="inline-flex min-h-11 items-center hover:text-royal transition"
             >
               Learning for {child.displayName}
             </Link>

@@ -68,7 +68,7 @@ export function ChildWritingHistory({
             <span aria-hidden="true">/</span>
             <Link
               href={`/parent/children/${child.id}/learning`}
-              className="hover:text-royal transition"
+              className="inline-flex min-h-11 items-center hover:text-royal transition"
             >
               Learning for {child.displayName}
             </Link>

@@ -167,7 +167,7 @@ export function ChildProfileView({
         <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-bold text-muted">
           <Link
             href="/parent/children"
-            className="inline-flex items-center gap-1 hover:text-royal hover:underline"
+            className="inline-flex min-h-11 items-center gap-1 hover:text-royal hover:underline"
           >
             <ArrowLeft className="h-3 w-3" />
             Children
