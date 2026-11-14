@@ -1,0 +1,89 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e1-003",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "d496fae890799c26f9eba477b05ad06724a5f2a4abe6f577880e60a99a2db3f9",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e1-003",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows the sport each student in Class 3B chose to play at the carnival. Which sport was chosen by exactly 11 students?",
+    "options": [
+      {
+        "id": "soccer",
+        "text": "Soccer"
+      },
+      {
+        "id": "cricket",
+        "text": "Cricket"
+      },
+      {
+        "id": "netball",
+        "text": "Netball"
+      },
+      {
+        "id": "swimming",
+        "text": "Swimming"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "visual-naplan-y3-numeracy-e1-003-1",
+        "altText": "A bar chart of sports chosen at a carnival: Soccer 14, Netball 9, Cricket 11, Swimming 6.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Soccer",
+            "Netball",
+            "Cricket",
+            "Swimming"
+          ],
+          "values": [
+            14,
+            9,
+            11,
+            6
+          ],
+          "xAxisLabel": "Sport",
+          "yAxisLabel": "Number of students",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "cricket"
+    },
+    "explanation": "Find the bar whose height reaches the line for 11 on the side scale. Soccer reaches 14, Netball 9, Cricket 11 and Swimming 6, so the bar at exactly 11 is Cricket.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics and probability",
+      "topic": "Interpreting bar charts",
+      "skill": "Read a value from a bar chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "bar chart",
+        "data",
+        "sport"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "6eab58950098454846b7e645812be5d5f6c4f6a6b4b5bf18743c34542a9d1174"
+}

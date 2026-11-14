@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-45aa0b1c7c7257a10eaf633c",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "62e362a2074f69168f77ebc9b4b30a14b9be3a2cfb86fe795cbb01be27fa8b1f",
+  "sourceManifestHash": "0bbbd0bdbc581a89a13fd6974456a47a272292b2c7cc52cd1786edcd7ad2f7f7",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-45aa0b1c7c7257a10eaf633c",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A number was divided by 7 and then multiplied by 7, resulting in 98. What was the starting number?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 98,
+      "tolerance": 0
+    },
+    "explanation": "Dividing by 7 and multiplying by 7 are inverse operations that cancel each other out, returning to the starting number 98.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Inverse operations cancelling property",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "inverse",
+        "reasoning",
+        "orig-id:g5-alg-inv-005"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ecbb1855aead5100fd397eb1babfa9337146ce29a44c37f2e43aa620098768af"
+}

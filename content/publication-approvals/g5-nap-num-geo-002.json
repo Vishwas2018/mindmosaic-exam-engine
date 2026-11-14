@@ -1,0 +1,177 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-geo-002",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "ed905492f66b32429543cfc0846e990d97528065a30e8ce2a265a57d7fd8a581",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-geo-002",
+    "type": "label_diagram",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Label each angle in the picture with its correct type.",
+    "instructions": "A right angle is exactly 90 degrees. An acute angle is smaller than 90 degrees. An obtuse angle is larger than 90 degrees.",
+    "options": [],
+    "interaction": {
+      "type": "label_diagram",
+      "labels": [
+        {
+          "id": "label-right",
+          "text": "Right angle"
+        },
+        {
+          "id": "label-acute",
+          "text": "Acute angle"
+        },
+        {
+          "id": "label-obtuse",
+          "text": "Obtuse angle"
+        }
+      ],
+      "targets": [
+        {
+          "id": "target-left",
+          "label": "Left angle"
+        },
+        {
+          "id": "target-middle",
+          "label": "Middle angle"
+        },
+        {
+          "id": "target-right",
+          "label": "Right angle position"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "g5-angles-svg",
+        "altText": "A picture of three angles: on the left, two lines meet at a square 90-degree corner; in the middle, two lines meet at a narrow angle smaller than 90 degrees; on the right, two lines meet at a wide angle larger than 90 degrees.",
+        "title": "Three angles",
+        "type": "labelled_svg",
+        "data": {
+          "width": 400,
+          "height": 150,
+          "elements": [
+            {
+              "id": "left-angle-base",
+              "kind": "line",
+              "x1": 30,
+              "y1": 110,
+              "x2": 100,
+              "y2": 110,
+              "stroke": "#4B2E83"
+            },
+            {
+              "id": "left-angle-arm",
+              "kind": "line",
+              "x1": 30,
+              "y1": 110,
+              "x2": 30,
+              "y2": 40,
+              "stroke": "#4B2E83"
+            },
+            {
+              "id": "middle-angle-base",
+              "kind": "line",
+              "x1": 165,
+              "y1": 110,
+              "x2": 235,
+              "y2": 110,
+              "stroke": "#1E7A46"
+            },
+            {
+              "id": "middle-angle-arm",
+              "kind": "line",
+              "x1": 165,
+              "y1": 110,
+              "x2": 220,
+              "y2": 60,
+              "stroke": "#1E7A46"
+            },
+            {
+              "id": "right-angle-base",
+              "kind": "line",
+              "x1": 300,
+              "y1": 110,
+              "x2": 370,
+              "y2": 110,
+              "stroke": "#B25E00"
+            },
+            {
+              "id": "right-angle-arm",
+              "kind": "line",
+              "x1": 300,
+              "y1": 110,
+              "x2": 255,
+              "y2": 55,
+              "stroke": "#B25E00"
+            }
+          ],
+          "labels": [
+            {
+              "text": "Left",
+              "x": 65,
+              "y": 135
+            },
+            {
+              "text": "Middle",
+              "x": 200,
+              "y": 135
+            },
+            {
+              "text": "Right",
+              "x": 335,
+              "y": 135
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "label-right",
+          "targetId": "target-left"
+        },
+        {
+          "sourceId": "label-acute",
+          "targetId": "target-middle"
+        },
+        {
+          "sourceId": "label-obtuse",
+          "targetId": "target-right"
+        }
+      ]
+    },
+    "explanation": "The left angle is a square corner of exactly 90 degrees, so it is a right angle. The middle angle is narrower than 90 degrees, so it is acute. The angle on the right opens wider than 90 degrees, so it is obtuse.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Types of angles",
+      "skill": "Classifying angles",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 120,
+      "tags": [
+        "angles",
+        "labelling"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ce6767c5b4958ecc0279c13123dfe295a1fa2dc2d3c7b7d29a678854cd12fb14"
+}

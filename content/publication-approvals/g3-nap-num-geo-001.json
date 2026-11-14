@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g3-nap-num-geo-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "ebd5fa7cfdda348311b23e0a2b71213dfb45ca4ed99f4cd292c3a8ff26dd3ee5",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g3-nap-num-geo-001",
+    "type": "true_false",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "True or false? The perimeter of this square is 24 centimetres.",
+    "instructions": "Use the side length shown on the shape.",
+    "options": [],
+    "visuals": [
+      {
+        "id": "g3-square-perimeter",
+        "altText": "A square with each side labelled 6 centimetres.",
+        "title": "A square garden bed",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "square",
+          "measurements": [
+            {
+              "label": "Side",
+              "value": 6,
+              "unit": "cm"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "boolean",
+      "value": true
+    },
+    "explanation": "A square has four equal sides. The perimeter is 6 + 6 + 6 + 6 = 24 centimetres, so the statement is true.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Perimeter",
+      "skill": "Calculating the perimeter of a square",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "perimeter",
+        "shapes"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "fb22a6704a105600797ebbec307ea3bdfc692a5aaca5c56ebcf597bd99950fe4"
+}

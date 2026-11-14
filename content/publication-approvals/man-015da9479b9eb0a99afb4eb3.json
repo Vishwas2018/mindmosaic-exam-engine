@@ -1,0 +1,51 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-015da9479b9eb0a99afb4eb3",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "07654434a18ddecd0fb10472932185bbaa96f49a55e62cdd04e00dee06744316",
+  "sourceManifestHash": "3883f741ea141c80170d1b2e2e34c46c08f33601b07f40576f83bff1fccbbb27",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-015da9479b9eb0a99afb4eb3",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Convert 2,750 millilitres to litres.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 2.75,
+      "tolerance": 0
+    },
+    "explanation": "1,000 mL = 1 L. 2,750 ÷ 1,000 = 2.75 litres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement",
+      "topic": "Measurement",
+      "skill": "Millilitres to litres conversion",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "metric",
+        "capacity",
+        "decimals",
+        "orig-id:g5-meas-met-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "7b1067e9be0d8eaefc2e19eec647e8c2452550d0ec80f625c2e7388416d8ffab"
+}

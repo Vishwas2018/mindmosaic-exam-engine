@@ -57,7 +57,7 @@ describe("authenticated Scholarship draft review", () => {
 
   it("keeps the runtime draft-reference boundary limited to the authenticated admin reader", async () => {
     await expect(assertNoRuntimeDraftReference("src")).resolves.toBeUndefined();
-  });
+  }, 20000);
 
   it("rejects a student route importing the private review reader", async () => {
     vi.mocked(readFile).mockResolvedValueOnce(

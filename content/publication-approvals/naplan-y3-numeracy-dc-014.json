@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-dc-014",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "fdac6b2203e1988d88cf53e1277f4c44a86be8c3a5933861e4d6c72b2fdd740e",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-dc-014",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A swimming lesson starts at half past 3 in the afternoon. Which digital clock time is the same as half past 3?",
+    "options": [
+      {
+        "id": "opt-300",
+        "text": "3:00"
+      },
+      {
+        "id": "opt-630",
+        "text": "6:30"
+      },
+      {
+        "id": "opt-330",
+        "text": "3:30"
+      },
+      {
+        "id": "opt-230",
+        "text": "2:30"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-330"
+    },
+    "explanation": "Half past means 30 minutes after the hour. Half past 3 is 30 minutes after 3 o'clock, which a digital clock shows as 3:30.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Time",
+      "skill": "Match half past a time to its digital form",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "time",
+        "half past",
+        "digital clock"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "9343bfc5df9d9591be4372106c8e341636b3830e3bda87ce4f5cf31810fb4f97"
+}

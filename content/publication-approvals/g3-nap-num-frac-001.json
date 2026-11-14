@@ -1,0 +1,96 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g3-nap-num-frac-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "8da75fc6f4c622978ba1ad155cc2e9247b82865f8a6f7d92e6da781bb95b0831",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g3-nap-num-frac-001",
+    "type": "fill_blank",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence about the fraction model.",
+    "instructions": "Write a number in each box.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The model shows ",
+        " out of ",
+        " equal parts shaded."
+      ],
+      "blanks": [
+        {
+          "id": "shaded-parts",
+          "label": "Number of shaded parts"
+        },
+        {
+          "id": "total-parts",
+          "label": "Total number of equal parts"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "g3-three-quarters-bar",
+        "altText": "A bar divided into 4 equal parts with 3 parts shaded.",
+        "title": "A fraction bar",
+        "type": "fraction_model",
+        "data": {
+          "numerator": 3,
+          "denominator": 4,
+          "model": "bar",
+          "colour": "#FF8A00"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "shaded-parts",
+          "acceptedAnswers": [
+            "3",
+            "three"
+          ]
+        },
+        {
+          "id": "total-parts",
+          "acceptedAnswers": [
+            "4",
+            "four"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The bar is divided into 4 equal parts and 3 of them are shaded, so the model shows 3 out of 4 equal parts shaded.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Fractions",
+      "skill": "Naming fractions from a model",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "fractions"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "d7d35e88e85d62f062c01ee1e0f9f9a584f4aa54208ffc30fe7f2ac6aab441a2"
+}

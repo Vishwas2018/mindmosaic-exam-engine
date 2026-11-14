@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-depth-vc2m5m01-001",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "5c96a62732b4dc2b465a89f3deb0711edee9d4f736f10ca62518b86599033ddb",
+  "sourceManifestHash": "8675559a7ab16dac5d9f91debad659e32bb58f63889f790520f6fed1dd2f7923",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-depth-vc2m5m01-001",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A jug of lemonade contains 1.25 litres. How many millilitres of lemonade is in the jug?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 1250,
+      "tolerance": 0,
+      "unit": "mL"
+    },
+    "explanation": "There are 1,000 millilitres in 1 litre. Multiply 1.25 by 1,000: 1.25 × 1,000 = 1,250 mL.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "measurement",
+      "topic": "Metric Units",
+      "skill": "Converting litres to millilitres",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "maths",
+        "measurement"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "ab05aa10f971a50818a59025ff848edb42d3247872ddb8af12e6ce1bceda4248"
+}

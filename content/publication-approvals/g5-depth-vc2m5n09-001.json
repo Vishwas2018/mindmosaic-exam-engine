@@ -1,0 +1,78 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-depth-vc2m5n09-001",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "8f9379ea0d136a2f5a497905b2a0de2b3274f5965906926fa1373c2f6d3a8db7",
+  "sourceManifestHash": "21a355b3ba76525916b85d573790778cee7abfaca3828fab0db554b31eb93cb9",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-depth-vc2m5n09-001",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Liam is saving for a bicycle that costs $210. He already has $66 in his savings account. If he saves $12 each week from his pocket money, how many more weeks will it take to reach his target?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-table-savings",
+        "altText": "Savings plan table showing bicycle price of $210, current savings of $66, and weekly rate of $12.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Amount"
+          ],
+          "rows": [
+            [
+              "Bicycle Price",
+              "$210"
+            ],
+            [
+              "Current Savings",
+              "$66"
+            ],
+            [
+              "Weekly Savings Rate",
+              "$12"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 12,
+      "tolerance": 0,
+      "unit": "weeks"
+    },
+    "explanation": "Subtract current savings from the total price: 210 - 66 = $144. Then divide by the weekly amount: 144 ÷ 12 = 12 weeks.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Problem Solving",
+      "skill": "Multi-step practical problem solving",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "maths",
+        "money",
+        "problem-solving"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "e9713e5c2ac598b2847d3373f888ab2e6fce0dd0558187455406159a78386332"
+}

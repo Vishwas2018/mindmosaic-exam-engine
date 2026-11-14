@@ -1,0 +1,91 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-ba8de1a01ec0864b80a39d29",
+  "revision": 2,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "e5566327e4133090b7dc89b1e6c20c546c99cc721bd59401c4068c795810c7d3",
+  "sourceManifestHash": "be3c6a289a0bf84d4edac536d06c60d2a9ded4809b17bfa301aaa754a0f1e63a",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-ba8de1a01ec0864b80a39d29",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart below shows the favourite sports of 80 students surveyed at assembly. Which category has the largest share?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Netball"
+      },
+      {
+        "id": "opt-b",
+        "text": "Soccer"
+      },
+      {
+        "id": "opt-c",
+        "text": "Swimming"
+      },
+      {
+        "id": "opt-d",
+        "text": "Tennis"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "vis-pie",
+        "altText": "Pie chart showing the favourite sports of 80 students surveyed at assembly, split into four categories of clearly different sizes.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Netball",
+              "value": 28
+            },
+            {
+              "label": "Soccer",
+              "value": 24
+            },
+            {
+              "label": "Swimming",
+              "value": 16
+            },
+            {
+              "label": "Tennis",
+              "value": 12
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "Working out the largest segment of a pie chart means comparing every category's value, not just its visual size. The four recorded values are Netball 28, Soccer 24, Swimming 16, Tennis 12. Comparing all four shows Netball has the highest value of 28. So Netball is the largest share shown on the chart.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Reading and interpreting pie charts",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "statistics",
+        "pie-chart"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "05d65ebc0c8cfd41e90efaa229af6d81ffb95f976deaa256d0e98dd76294ca81"
+}

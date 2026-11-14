@@ -1,0 +1,88 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-139e3e1bfd42c0ee2df7fd96",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "84a7d1723f7aff01f66bd47dc01eb832ec3851131f2fd12471948b49824986ce",
+  "sourceManifestHash": "b1659fc70e58d2fb7a2bb20bbe89a2c41727224b1d963f023254c914c5def40f",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-139e3e1bfd42c0ee2df7fd96",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The pie chart shows the animal each class chose as their mascot. Which animal was the most popular mascot?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Lions"
+      },
+      {
+        "id": "opt-b",
+        "text": "Tigers"
+      },
+      {
+        "id": "opt-c",
+        "text": "Bears"
+      },
+      {
+        "id": "opt-d",
+        "text": "Wolves"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "pie-bears",
+        "altText": "Pie chart with 4 segments showing the animal each class chose as their mascot, with values 9, 6, 13, 8.",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Lions",
+              "value": 9
+            },
+            {
+              "label": "Tigers",
+              "value": 6
+            },
+            {
+              "label": "Bears",
+              "value": 13
+            },
+            {
+              "label": "Wolves",
+              "value": 8
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Bears has the largest slice of the pie chart, with 13 classes choosing it.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-pie-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "3d286920e1bae8088fdc56ce50c4333f29c601c12955b52a169a4d6ff6b65077"
+}

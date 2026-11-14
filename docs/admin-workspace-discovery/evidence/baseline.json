@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-11",
+  "timezone": "Australia/Sydney",
+  "worktree": "C:\\tmp\\wt-admin-discovery-20261111",
+  "branch": "docs/admin-workspace-discovery-20261111",
+  "head": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+  "origin_dev": "17d8be2fcf81ab456980b24a65d4da0bc38950b2",
+  "scope": "Phase A discovery only",
+  "applicationCodeChanged": false,
+  "databaseConnectionsOpened": false,
+  "testsRun": false,
+  "designArtboardCount": 27
+}

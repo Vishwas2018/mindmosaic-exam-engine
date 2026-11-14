@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-af2b6d5ba6f4ef6fcd9bfe71",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "cb3f15865204b0df0ca61aade5a0e00ae4bd0f1f67ed5762be1883e5ba46b1c8",
+  "sourceManifestHash": "25510fd83817aae7cb428c652ebbda03d15e93175e31785629403edd96bef25c",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-af2b6d5ba6f4ef6fcd9bfe71",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "If 18 × 15 = 270, what is 270 ÷ 18?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 15,
+      "tolerance": 0
+    },
+    "explanation": "Multiplication and division are inverse operations. Since 18 × 15 = 270, 270 ÷ 18 = 15.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Algebra",
+      "topic": "Algebra",
+      "skill": "Multiplication-division inverse relationship",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 30,
+      "tags": [
+        "inverse",
+        "fact-family",
+        "orig-id:g5-alg-inv-001"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "86260389ee44230ad36dcbe7fae64b2b101144cd4a7c97de59e3571f652d6f73"
+}

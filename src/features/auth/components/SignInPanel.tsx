@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, GraduationCap, Loader2, UserCircle2 } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -52,7 +52,7 @@ import { SocialButtons } from "./SocialButtons";
  */
 
 type AccountKind = "parent" | "student";
-type Screen = "signin" | "forgot";
+type Screen = "signin" | "forgot" | "choose";
 
 const FORGOT_COOLDOWN_SECONDS = 30;
 /** Soft, client-side-only guard; real lockout enforcement is Supabase's. */
@@ -118,8 +118,15 @@ export function SignInPanel({
    * them find it.
    */
   defaultKind = "parent",
+  /**
+   * Which screen opens first. When `"choose"`, the welcome "Who is signing
+   * in?" entry chooser (design artboards 01-03) is shown before the sign-in
+   * form. Overrides `?entry`/`?mode` search params when provided.
+   */
+  defaultEntry,
 }: {
   defaultKind?: AccountKind;
+  defaultEntry?: Screen;
 } = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -128,9 +135,15 @@ export function SignInPanel({
   /* Same-origin paths only: see ../safe-next.ts. */
   const explicitNext = safeNextPath(searchParams.get("next"));
   const oauthProviders = configuredOAuthProviders();
-  const [screen, setScreen] = useState<Screen>(() =>
-    searchParams.get("mode") === "forgot" ? "forgot" : "signin",
-  );
+  const [screen, setScreen] = useState<Screen>(() => {
+    const entryParam = searchParams.get("entry");
+    const modeParam = searchParams.get("mode");
+    if (entryParam === "signin" || modeParam === "signin") return "signin";
+    if (entryParam === "choose" || modeParam === "choose") return "choose";
+    if (modeParam === "forgot") return "forgot";
+    if (defaultEntry) return defaultEntry;
+    return "signin";
+  });
   const [kind, setKind] = useState<AccountKind>(defaultKind);
 
   const [ident, setIdent] = useState("");
@@ -304,6 +317,70 @@ export function SignInPanel({
 
   /* ---------- Forgot password ---------- */
 
+  if (screen === "choose") {
+    return (
+      <div className="mm-rise grid w-full max-w-[520px] min-w-0 gap-6">
+        <div className="grid gap-2 text-center">
+          <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.15] text-mm-ink">
+            Welcome to MindMosaic
+          </h1>
+          <p className="text-base leading-[1.6] text-mm-muted">Who is signing in?</p>
+        </div>
+
+        <div className="grid gap-4 mt-2">
+          <button
+            type="button"
+            onClick={() => {
+              setKind("parent");
+              setScreen("signin");
+              setError(null);
+            }}
+            className="group block text-left p-6 sm:p-7 border-2 border-mm-line rounded-2xl bg-white hover:border-mm-brand transition shadow-sm"
+          >
+            <span className="grid place-items-center w-12 h-12 rounded-xl bg-mm-tint text-mm-brand mb-4">
+              <UserCircle2 className="w-6 h-6" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-bold text-mm-ink">I&apos;m a parent</h2>
+            <p className="mt-1.5 text-sm text-mm-ink-soft">
+              See how your children are doing, manage their accounts and your plan.
+            </p>
+            <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-mm-brand group-hover:underline">
+              Parent sign-in &rarr;
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setKind("student");
+              setScreen("signin");
+              setError(null);
+            }}
+            className="group block text-left p-6 sm:p-7 border-2 border-mm-line rounded-2xl bg-white hover:border-amber-600 transition shadow-sm"
+          >
+            <span className="grid place-items-center w-12 h-12 rounded-xl bg-amber-50 text-amber-700 mb-4">
+              <GraduationCap className="w-6 h-6" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-bold text-mm-ink">I&apos;m a student</h2>
+            <p className="mt-1.5 text-sm text-mm-ink-soft">
+              Sign in with the login code and PIN a parent gave you.
+            </p>
+            <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-amber-700 group-hover:underline">
+              Student sign-in &rarr;
+            </span>
+          </button>
+        </div>
+
+        <p className="text-center text-sm text-mm-muted">
+          New here?{" "}
+          <Link href="/sign-up" className="font-bold text-mm-brand hover:underline">
+            Create a family account
+          </Link>
+        </p>
+      </div>
+    );
+  }
+
   if (screen === "forgot") {
     return (
       <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
@@ -348,7 +425,7 @@ export function SignInPanel({
             invalid={error !== null}
             errorId="auth-error"
           />
-          {error && <MmErrorPanel id="auth-error">{error}</MmErrorPanel>}
+          {error && <MmErrorPanel id="auth-error" focusOnMount>{error}</MmErrorPanel>}
           {notice && (
             <p
               role="status"
@@ -378,16 +455,17 @@ export function SignInPanel({
   return (
     <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
       <div className="flex items-center justify-between gap-3.5">
-        <Link
-          href="/"
+        <button
+          type="button"
+          onClick={() => setScreen("choose")}
           className={twMerge(
-            "inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
+            "inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
             mmFocus,
           )}
         >
           <ArrowLeft aria-hidden="true" className="h-4 w-4" />
-          Back to home
-        </Link>
+          Who is signing in?
+        </button>
         <p className="text-sm text-mm-muted">
           {PUBLIC_SIGNUP_ENABLED ? (
             <>
@@ -552,7 +630,7 @@ export function SignInPanel({
         )}
 
         {error && (
-          <MmErrorPanel id="auth-error">
+          <MmErrorPanel id="auth-error" focusOnMount>
             <span>
               {error}
               {kind === "parent" && error === copy.failedError && (

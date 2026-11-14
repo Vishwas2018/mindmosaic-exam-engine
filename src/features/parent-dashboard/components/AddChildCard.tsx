@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, Check, Copy, LoaderCircle, UserPlus } from "lucide-react";
+import { AlertTriangle, Check, Copy, LoaderCircle, Printer, UserPlus } from "lucide-react";
 
 import {
   Button,
@@ -166,6 +166,10 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
                   <Copy aria-hidden="true" className="h-4 w-4" />
                 )}
                 {copied ? "Copied" : "Copy"}
+              </Button>
+              <Button type="button" variant="secondary" size="sm" onClick={() => window.print()}>
+                <Printer aria-hidden="true" className="h-4 w-4" />
+                Print a sign-in card
               </Button>
               <Button
                 type="button"

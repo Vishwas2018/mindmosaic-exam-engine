@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
@@ -45,10 +44,14 @@ export async function generateMetadata({
 
 export default async function ExamPatternPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ patternId: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { patternId } = await params;
+  const seedParam = (await searchParams).seed;
+  const seed = Array.isArray(seedParam) ? seedParam[0] : seedParam;
   const pattern = getExamPattern(patternId);
   if (!pattern) notFound();
 
@@ -102,15 +105,8 @@ export default async function ExamPatternPage({
         <div className="mt-9 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
           <div>
             {startable ? (
-              <Suspense
-                fallback={
-                  <Card className="p-8" variant="default">
-                    <p className="text-sm font-semibold text-muted">Loading this paper…</p>
-                  </Card>
-                }
-              >
-                <ExamPatternStarter pattern={pattern} readiness={readiness} />
-              </Suspense>
+              /* No Suspense boundary: the seed is read on the server, so nothing here suspends (D-018). */
+              <ExamPatternStarter pattern={pattern} readiness={readiness} seed={seed} />
             ) : (
               <Card className="p-8" variant="default">
                 <h2 className="text-xl font-black text-ink">Coming soon</h2>

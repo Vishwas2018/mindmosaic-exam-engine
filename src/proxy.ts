@@ -16,8 +16,10 @@ export async function proxy(request: NextRequest) {
 
   const response = await updateSession(request, requestHeaders);
 
-  // Report-only until real-traffic verification confirms the allowlist is
-  // complete; switch this header name to "Content-Security-Policy" to enforce.
+  /* Report-only, deliberately. The policy is nonce-based ('strict-dynamic'), and a nonce only reaches pages rendered
+     per request. Most public and practice routes are statically prerendered, so their scripts carry no nonce: enforcing
+     this header blocks every script on them and the pages never hydrate. Enforce only after those routes are either
+     rendered dynamically or covered by hashes, and prove it with the E2E suite. */
   response.headers.set("Content-Security-Policy-Report-Only", csp);
 
   return response;

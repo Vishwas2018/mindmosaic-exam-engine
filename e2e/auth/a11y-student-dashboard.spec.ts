@@ -15,7 +15,7 @@ const STUDENT_PAGES = [
   // "Do you want to study today?" copy — the real h1 is the
   // DashboardWelcomeBanner greeting.
   { path: "/student", heading: /Welcome back/i },
-  { path: "/student/learn", heading: /Learning hub/i },
+  { path: "/student/learn", heading: /^Learning Hub$/i },
   { path: "/student/assignments", heading: null },
   { path: "/student/engagement", heading: null },
   // Added (2026-09 e2e repair, Step 3): previously zero coverage, old or
@@ -121,16 +121,16 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     await assertNoSeriousAccessibilityViolations(page, "student home, mobile nav open");
 
     // Real sequence (2026-09 e2e repair): StudentSidebar's 5 items —
-    // Dashboard, Learning Hub, Practice Studio, Exam Centre, My Progress.
+    // My Space, Learning Hub, Practice Studio, Exam Centre, My Results.
     // No "Assignments" item exists on this shell (that page still uses the
     // separate, unrelated StudentShell nav) — the old assertion's premise
     // of one shared nav across both pages no longer holds.
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
-    const dashboardIndex = sequence.findIndex((key) => key.includes("Dashboard"));
+    const dashboardIndex = sequence.findIndex((key) => key.includes("My Space"));
     const learnIndex = sequence.findIndex((key) => key.includes("Learning Hub"));
     const practiceIndex = sequence.findIndex((key) => key.includes("Practice Studio"));
     const examCentreIndex = sequence.findIndex((key) => key.includes("Exam Centre"));
-    const progressIndex = sequence.findIndex((key) => key.includes("My Progress"));
+    const progressIndex = sequence.findIndex((key) => key.includes("My Results"));
 
     expect(dashboardIndex).toBeGreaterThanOrEqual(0);
     expect(learnIndex).toBeGreaterThan(dashboardIndex);
@@ -149,11 +149,11 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
 
     // Same real StudentSidebar sequence as the mobile disclosure test above.
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
-    const dashboardIndex = sequence.findIndex((key) => key.includes("Dashboard"));
+    const dashboardIndex = sequence.findIndex((key) => key.includes("My Space"));
     const learnIndex = sequence.findIndex((key) => key.includes("Learning Hub"));
     const practiceIndex = sequence.findIndex((key) => key.includes("Practice Studio"));
     const examCentreIndex = sequence.findIndex((key) => key.includes("Exam Centre"));
-    const progressIndex = sequence.findIndex((key) => key.includes("My Progress"));
+    const progressIndex = sequence.findIndex((key) => key.includes("My Results"));
 
     expect(dashboardIndex).toBeGreaterThanOrEqual(0);
     expect(learnIndex).toBeGreaterThan(dashboardIndex);
