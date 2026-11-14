@@ -201,14 +201,14 @@ export function ParentHelpCentre({
             {activeArticle.action && (
               <Link
                 href={activeArticle.action.href}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl bg-royal px-4 text-xs font-bold text-white shadow-xs transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 text-xs font-bold text-white shadow-xs transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
               >
                 {activeArticle.action.label}
               </Link>
             )}
             <a
               href="#contact-form"
-              className="inline-flex min-h-10 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 text-xs font-bold text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 text-xs font-bold text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
             >
               This didn’t help
             </a>

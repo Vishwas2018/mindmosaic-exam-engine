@@ -24,7 +24,7 @@ import {
 
 export const STATE_FILE = path.join(process.env.HOSTED_OUTPUT ?? "test-results/hosted", "family-a.json");
 
-test.describe.configure({ mode: "serial" });
+// Not serial: A3–A11 must still run (and create the family) when A1–A2 is blocked by the mail rate limit.
 
 test("A1–A2: parent registers through the form and confirms with the mailed link", async ({
   page,

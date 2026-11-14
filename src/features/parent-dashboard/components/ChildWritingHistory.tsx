@@ -136,7 +136,7 @@ export function ChildWritingHistory({
                   </span>
                   <Link
                     href={`/writing/mark/${sub.id}`}
-                    className="inline-flex min-h-9 items-center gap-1.5 rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition"
                   >
                     Mark with rubric &rarr;
                   </Link>

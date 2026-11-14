@@ -114,7 +114,7 @@ export function ChildProgressDashboard({
           type="button"
           onClick={() => setFilter("30d")}
           aria-pressed={filter === "30d"}
-          className={`min-h-8 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "30d"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -126,7 +126,7 @@ export function ChildProgressDashboard({
           type="button"
           onClick={() => setFilter("3m")}
           aria-pressed={filter === "3m"}
-          className={`min-h-8 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "3m"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -138,7 +138,7 @@ export function ChildProgressDashboard({
           type="button"
           onClick={() => setFilter("all")}
           aria-pressed={filter === "all"}
-          className={`min-h-8 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "all"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -228,7 +228,7 @@ export function ChildProgressDashboard({
                     </span>
                     <Link
                       href={`/parent/results/${paper.id}`}
-                      className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3 py-1.5 text-xs font-bold text-royal hover:bg-royal/5 transition"
+                      className="inline-flex min-h-11 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3 py-1.5 text-xs font-bold text-royal hover:bg-royal/5 transition"
                     >
                       Open &rarr;
                     </Link>
@@ -435,7 +435,7 @@ export function ChildProgressDashboard({
 
                       <Link
                         href={`/parent/results/${paper.id}`}
-                        className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3.5 py-1.5 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                        className="inline-flex min-h-11 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3.5 py-1.5 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
                       >
                         Open &rarr;
                       </Link>

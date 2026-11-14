@@ -298,7 +298,7 @@ export function ParentAccount({
                   type="button"
                   onClick={handleSaveName}
                   disabled={nameBusy}
-                  className="inline-flex min-h-10 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
                 >
                   {nameBusy ? "Saving..." : "Save changes"}
                 </button>
@@ -306,7 +306,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setEmailModalOpen(true)}
-                  className="inline-flex min-h-10 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-bold text-royal hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-bold text-royal hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
                 >
                   Change email address
                 </button>
@@ -357,7 +357,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setPasswordModalOpen(true)}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
               >
                 Change password
               </button>
@@ -365,7 +365,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setDevicesModalOpen(true)}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
               >
                 See my devices
               </button>
@@ -553,7 +553,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setDataStoredModalOpen(true)}
-                  className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
                 >
                   <FileText className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
                   <span>What we store about your children</span>
@@ -563,7 +563,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={handleExportData}
-                  className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
                 >
                   <Download className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
                   {/* The file holds the account details only; children's practice records are not in it yet (D-014),
@@ -575,7 +575,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setDeleteModalOpen(true)}
-                  className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left text-coral-700 hover:bg-coral-500/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-500/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left text-coral-700 hover:bg-coral-500/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-500/20"
                 >
                   <Trash2 className="h-4 w-4 shrink-0 text-coral-600" aria-hidden="true" />
                   <span>Ask us to delete the account</span>
@@ -610,7 +610,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={handleSignOut}
-                className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-ink shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-ink shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
               >
                 <LogOut className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
                 Sign out
@@ -619,7 +619,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={handleSignOutEverywhere}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
               >
                 Sign out everywhere
               </button>

@@ -222,7 +222,7 @@ export function ChildProfileView({
                   key={sibling.id}
                   href={`/parent/children/${sibling.id}`}
                   aria-current={isCurrent ? "page" : undefined}
-                  className={`inline-flex min-h-9 items-center gap-1.5 rounded-full px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
                     isCurrent
                       ? "bg-royal text-white shadow-sm"
                       : "border border-royal/10 bg-white text-ink hover:border-royal/30 hover:bg-royal/5"

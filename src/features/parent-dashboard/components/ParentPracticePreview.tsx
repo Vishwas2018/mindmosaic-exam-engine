@@ -161,13 +161,13 @@ export function ParentPracticePreview({
             <button
               type="button"
               onClick={handleNextQuestion}
-              className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
             >
               Show the next one &rarr;
             </button>
             <Link
               href={`/parent/children/${child.id}/learning`}
-              className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition"
             >
               Back to the list
             </Link>
@@ -225,7 +225,7 @@ export function ParentPracticePreview({
               type="button"
               disabled
               aria-disabled="true"
-              className="mt-4 inline-flex min-h-10 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
+              className="mt-4 inline-flex min-h-11 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
             >
               Set a 10-question set
             </button>
@@ -256,7 +256,7 @@ export function ParentPracticePreview({
               type="button"
               disabled
               aria-disabled="true"
-              className="mt-4 inline-flex min-h-10 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
+              className="mt-4 inline-flex min-h-11 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
             >
               Open Year {stretchYear} for {child.displayName}
             </button>

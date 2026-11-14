@@ -96,7 +96,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("all")}
           aria-pressed={filter === "all"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "all"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -108,7 +108,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("incorrect")}
           aria-pressed={filter === "incorrect"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "incorrect"
               ? "bg-coral-600 text-white shadow-xs"
               : "border border-coral-500/20 bg-white text-ink hover:bg-coral-500/5"
@@ -120,7 +120,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("unanswered")}
           aria-pressed={filter === "unanswered"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "unanswered"
               ? "bg-ink text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -132,7 +132,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("pending")}
           aria-pressed={filter === "pending"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "pending"
               ? "bg-amber-600 text-white shadow-xs"
               : "border border-amber-500/20 bg-white text-ink hover:bg-amber-500/5"

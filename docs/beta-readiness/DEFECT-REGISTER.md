@@ -57,3 +57,41 @@ What was ruled out locally: the merged `SignInPanel` renders `PinInput` once; a 
 Supabase URL never produced two.
 What was not tried: a run against the real local Supabase stack (not available on the Windows host).
 Do not mask it with `.first()`.
+
+## Found by hosted browser acceptance, 2026-11-14 (PR #124)
+
+Every row below was observed on a deployed DEV Preview in a real browser, then fixed, then re-observed fixed on
+the Preview of the fix. State "FIXED" means the hosted check now passes (TEST-RESULTS.md).
+
+| ID | Sev | Defect | State | Fix |
+|----|-----|--------|-------|-----|
+| D-019 | P0 | DEV served all 1,601 bank items to signed-in children; 130 carry a verified human approval; Y5 Q20 (unapproved) was served | FIXED | Deployed builds enforce approved-only; unfillable programmes withdrawn (`6bdcd185`). CONTENT-GOVERNANCE.md |
+| D-020 | P1 | Help Centre "Send" waited 700 ms and showed a random `MM-####` "reference"; nothing was sent anywhere | FIXED | Opens the parent's email app with message, account and child prefilled; no receipt claimed (`d6acb46b`) |
+| D-021 | P1 | `NEEDS A BUILD` canvas notes and a "What the Help Centre needs before it works" section shown to parents | FIXED | Removed (`d6acb46b`) |
+| D-022 | P1 | Parent result showed "N minutes of 40": the 40 was hard-coded; "timed" inferred from time taken | FIXED | Limit not invented; timing read from the session (`d6acb46b`) |
+| D-023 | P1 | Printing a sign-in card printed the whole Children page under the modal; card named a fixed domain | FIXED | Print scoped to the card; card names this site's sign-in address (`d6acb46b`) |
+| D-024 | P1 | `/billing` offered "Choose the Family plan" whose checkout can only return 503 (no Stripe on DEV); a signed-in child could see prices | FIXED | Free-beta message; children see no plan or price (`d09d5006`) |
+| D-025 | P1 | **DEV Auth email rate limit**: the second sign-up email within about an hour is refused ("Too many attempts"); the account is not created | OPEN, owner | Configure custom SMTP (and its rate limit) in the DEV Supabase Auth settings. App already shows an honest message |
+| D-026 | P2 | Welcome dialog reopened on every visit to My Space until the warmup was done, blocking the page | FIXED | Dismissal remembered per child per browser (`36f8bf57`) |
+| D-027 | P2 | Help Centre child picker always empty (queried tables that do not exist); component defaulted to a sample family | FIXED | `parent_children` + `profiles`; no defaults (`d6acb46b`) |
+| D-028 | P2 | Raw skill ids (`Num.prod.measurement.perimeter`) shown to parents as strand names | FIXED | `skillLabel` (`d6acb46b`) |
+| D-029 | P2 | `/parent/children/<id>/curriculum` rendered for any child id (RLS hid the name; no data leaked) | FIXED | 404 unless the parent is linked (`6ac82c5b`) |
+| D-030 | P2 | Practice Studio "Resume" 78×32 px; muted 11 px text 4.15:1 | FIXED | 44 px; full-contrast muted (`cedb90f7`) |
+| D-031 | P3 | My Progress "Start practising" opened the marketing page; "1 marks"; copy assumed every child is a girl; sign-up said "try again" for an undeliverable address | FIXED | (`36f8bf57`, `d6acb46b`) |
+| D-032 | P3 | Runner buttons lift on hover (`hover:-translate-y`), which kept Playwright's stability check waiting; no child-visible effect observed | OPEN, cosmetic | Hosted tests use keyboard activation |
+| D-033 | P3 | Parent pages say "Grade 3", the add-child form says "Year 3" | OPEN, copy decision | "Grade N" is the product's deliberate programme wording (`describe-config.ts`) |
+
+### Harness defect found and fixed during the run
+
+Playwright's `page.request` does not pass through `context.route`, so the first API-level isolation checks were
+answered by Vercel's login wall (302, followed to a 200 page) instead of the app. One of those looked like a
+cross-student read. It was not: through the bypass, the app answers 404. All direct API checks now go through
+`api()` (bypass for the Preview host, no redirects followed, fails on the protection page, positive control).
+
+### Status updates to earlier rows
+
+- **D-016**: superseded by D-019 and CONTENT-GOVERNANCE.md. 77 approvals recorded (owner attestation, one timestamp);
+  Y5 Q20 unapproved and no longer served.
+- **D-017**: CLOSED. Writer password and Preview `EXAM_WRITE_DB_URL` set; `20261031090100` applied to DEV; hosted
+  exam start/submit work through the writer (scenario C on `3fc807b4`), legacy RPCs refuse a student with 42501 (D).
+- **D-009 / D-018**: no recurrence in the hosted runs or in PR #124's e2e-auth job.

@@ -152,7 +152,7 @@ export function ParentBillingHandoff({
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href="/pricing"
-              className="inline-flex min-h-10 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
             >
               Change plan
             </Link>
@@ -161,7 +161,7 @@ export function ParentBillingHandoff({
               type="button"
               onClick={handleOpenStripePortal}
               disabled={portalBusy}
-              className="inline-flex min-h-10 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
             >
               {portalBusy ? "Opening portal..." : "Payment methods"}
             </button>
@@ -170,7 +170,7 @@ export function ParentBillingHandoff({
               type="button"
               onClick={handleOpenStripePortal}
               disabled={portalBusy}
-              className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
             >
               Invoices
             </button>
