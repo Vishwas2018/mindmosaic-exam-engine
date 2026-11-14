@@ -95,6 +95,7 @@ await (async () => {
         SUPABASE_SERVICE_ROLE_KEY: env.SUPABASE_SERVICE_ROLE_KEY,
         VERCEL_AUTOMATION_BYPASS_SECRET: secret,
         HOSTED_MAIL_BASE: process.env.HOSTED_MAIL_BASE || "",
+        HOSTED_CONFIRM: process.env.HOSTED_CONFIRM || "",
       },
     },
   );

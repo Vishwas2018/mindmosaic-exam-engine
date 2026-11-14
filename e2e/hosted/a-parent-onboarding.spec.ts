@@ -19,6 +19,7 @@ import {
   syntheticEmail,
   test,
   waitForMailedLink,
+  confirmationPath,
 } from "./fixtures";
 
 export const STATE_FILE = path.join(process.env.HOSTED_OUTPUT ?? "test-results/hosted", "family-a.json");
@@ -59,7 +60,13 @@ test("A1–A2: parent registers through the form and confirms with the mailed li
   await shot("a1b-unconfirmed-signin");
 
   // A2 verify email with the link Supabase actually mailed, opened in this browser
-  const link = await waitForMailedLink("pa");
+  /* HOSTED_CONFIRM=admin: the inbox cannot be read in this run, so a device-independent link for this same account is
+     minted by the DEV service role. It proves registration and the app's confirmation handling; it does not prove
+     the email arrived. Default: wait for the operator to paste the mailed link. */
+  const link =
+    process.env.HOSTED_CONFIRM === "admin"
+      ? new URL(await confirmationPath(email), HOSTED_URL).toString()
+      : await waitForMailedLink("pa");
   expect(new URL(link).host, "mailed link points at Supabase or this Preview").toMatch(
     /mfglzabnayacssgertat\.supabase\.co|vercel\.app$/,
   );
