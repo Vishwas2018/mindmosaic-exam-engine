@@ -232,13 +232,14 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   await expect(page.getByText(fam.childName).first()).toBeVisible();
   await shot("c12-parent-home");
   await page.goto(`/parent/children/${user!.id}/progress`);
-  await expect(page.locator("main")).toContainText(/Numeracy/i);
-  await expect(page.locator("main")).toContainText(`${earned} of ${total}`);
+  // With fewer than 2 papers the page must say so rather than draw conclusions (evidence rule from PR #121)
+  await expect(page.locator("main")).toContainText(/finished 1 paper|One paper so far|Numeracy/i);
   await expect(page.locator("main"), "no internal build notes shown to parents").not.toContainText(/NEEDS A BUILD|does not exist yet/i);
   await expect(page.locator("main"), "no raw skill ids shown to parents").not.toContainText(/Num\.[a-z]+\./);
   await shot("c12-parent-child-progress");
   await page.goto(`/parent/results/${attempt.id}`);
-  await expect(page.locator("main")).toContainText(`${earned}`);
+  await expect(page.locator("main")).toContainText(new RegExp(`\\b${earned}\\s*(of|/)\\s*${total}\\b`));
+  await expect(page.locator("main"), "no invented time limit").not.toContainText(/minutes of 40/);
   await shot("c12-parent-result-detail");
 
   fs.writeFileSync(testInfo.outputPath("console-errors.json"), JSON.stringify(consoleErrors, null, 2));

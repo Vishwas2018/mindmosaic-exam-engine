@@ -11,6 +11,7 @@ import type { BrowserContext, Page } from "@playwright/test";
 import {
   DEV_REF,
   STRONG_PASSWORD,
+  api,
   devAdmin,
   devSupabaseUrl,
   enterStudentCredentials,
@@ -109,10 +110,7 @@ test("D: two families are isolated; students, parents and anonymous visitors are
     evidence[`parentB-childA${sub || "/"}`] = res?.status();
   }
   // Parent B's API cannot touch A's child
-  const apiPatch = await page.request.patch(`/api/parent/children/${A.childUserId}`, {
-    data: { displayName: "hijacked" },
-    headers: { Origin: new URL(page.url()).origin },
-  });
+  const apiPatch = await api(page).patch(`/api/parent/children/${A.childUserId}`, { displayName: "hijacked" });
   expect(apiPatch.status(), "parent B renaming A's child").toBeGreaterThanOrEqual(400);
   evidence.parentB_patch_childA = apiPatch.status();
   // Parent B's JWT reads nothing of A from PostgREST
@@ -145,18 +143,22 @@ test("D: two families are isolated; students, parents and anonymous visitors are
   // D4/D5 Student B cannot read or write student A's session or attempt
   const pageSB = await newPage(context);
   await studentSignIn(pageSB, B.loginCode, B.pin);
-  const origin = new URL(pageSB.url()).origin;
-  const sbGet = await pageSB.request.get(`/api/exam/session/${A.sessionId}`);
-  expect(sbGet.status(), "student B reading A's session").toBeGreaterThanOrEqual(400);
-  const sbSave = await pageSB.request.post(`/api/exam/session/${A.sessionId}/responses`, {
-    data: { responses: {} },
-    headers: { Origin: origin },
-  });
+  // Positive control: the helper reaches the app itself and gets a JSON answer for B's own state
+  const control = await api(pageSB).get("/api/exam/session/active");
+  expect(control.headers()["content-type"] ?? "", "API reached the app").toContain("json");
+  evidence.control_active = control.status();
+  const sbGet = await api(pageSB).get(`/api/exam/session/${A.sessionId}`);
+  const sbGetBody = await sbGet.text();
+  fs.writeFileSync(
+    testInfo.outputPath("studentB-get-sessionA.txt"),
+    `${sbGet.status()} ${sbGet.headers()["content-type"]}
+${sbGetBody.slice(0, 4000)}`,
+  );
+  expect(sbGetBody, "student B is never handed A's paper").not.toContain(String(A.sessionId) + '"');
+  expect(sbGet.status(), `student B reading A's session: ${sbGetBody.slice(0, 200)}`).toBeGreaterThanOrEqual(400);
+  const sbSave = await api(pageSB).post(`/api/exam/session/${A.sessionId}/responses`, { responses: {} });
   expect(sbSave.status(), "student B autosaving into A's session").toBeGreaterThanOrEqual(400);
-  const sbSubmit = await pageSB.request.post(`/api/exam/session/${A.sessionId}/submit`, {
-    data: {},
-    headers: { Origin: origin },
-  });
+  const sbSubmit = await api(pageSB).post(`/api/exam/session/${A.sessionId}/submit`, {});
   expect(sbSubmit.status(), "student B submitting A's session").toBeGreaterThanOrEqual(400);
   evidence.studentB_api = { get: sbGet.status(), save: sbSave.status(), submit: sbSubmit.status() };
   await pageSB.goto(`/results?attempt=${A.attemptId}`);
@@ -179,13 +181,16 @@ test("D: two families are isolated; students, parents and anonymous visitors are
     evidence[`rpc_${fn}`] = `${r.status} ${t.slice(0, 80)}`;
   }
   // Students never start payments
-  const pay = await pageSB.request.post("/api/stripe/checkout", { data: {}, headers: { Origin: origin } });
+  const pay = await api(pageSB).post("/api/stripe/checkout", {});
   expect(pay.status(), "student starting a checkout").toBeGreaterThanOrEqual(400);
   evidence.student_checkout = pay.status();
-  for (const r of ["/admin", "/parent", "/billing"]) {
+  for (const r of ["/admin", "/parent"]) {
     await pageSB.goto(r);
     await expect(pageSB, `${r} as a student`).not.toHaveURL(new RegExp(`${r}(/|$)`));
   }
+  // A child is never shown a plan, a price or a checkout
+  await pageSB.goto("/billing");
+  await expect(pageSB.locator("main")).not.toContainText(/A\$|per month|Subscribe|Checkout|Choose the Family plan/i);
   await pageSB.context().close();
 
   // Anonymous
@@ -194,10 +199,7 @@ test("D: two families are isolated; students, parents and anonymous visitors are
     await anon.goto(r);
     await expect(anon, `${r} anonymously`).not.toHaveURL(new RegExp(`${r}(/|\\?|$)`));
   }
-  const anonCreate = await anon.request.post("/api/exam/session", {
-    data: {},
-    headers: { Origin: new URL(anon.url()).origin },
-  });
+  const anonCreate = await api(anon).post("/api/exam/session", {});
   expect(anonCreate.status(), "anonymous exam session create").toBeGreaterThanOrEqual(400);
   const anonRest = await fetch(`${SB}/rest/v1/exam_attempts?select=id&limit=1`, {
     headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },

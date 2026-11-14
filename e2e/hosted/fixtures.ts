@@ -147,3 +147,25 @@ export async function parentSignIn(page: Page, email: string, password: string) 
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: /^sign in/i }).click();
 }
+
+/**
+ * Direct API calls from a page's browser context. page.request does not pass through context.route, so the
+ * bypass header is added here (Preview host only) and redirects are never followed: a 3xx from Vercel's login wall
+ * must fail a check, not turn into the 200 of a login page.
+ */
+export function api(page: Page) {
+  const secret = requireEnv("VERCEL_AUTOMATION_BYPASS_SECRET");
+  const origin = HOSTED_ORIGIN;
+  const headers = { "x-vercel-protection-bypass": secret, Origin: origin };
+  const req = page.request;
+  const guard = async (r: import("@playwright/test").APIResponse) => {
+    if (r.status() >= 300 && r.status() < 400) throw new Error(`unexpected redirect ${r.status()} from ${r.url()}`);
+    if (/Protected by Vercel Authentication/.test(await r.text())) throw new Error("hit Vercel protection, not the app");
+    return r;
+  };
+  return {
+    get: async (url: string) => guard(await req.get(url, { headers, maxRedirects: 0 })),
+    post: async (url: string, data: unknown) => guard(await req.post(url, { headers, data, maxRedirects: 0 })),
+    patch: async (url: string, data: unknown) => guard(await req.patch(url, { headers, data, maxRedirects: 0 })),
+  };
+}

@@ -153,7 +153,7 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
   fs.writeFileSync(testInfo.outputPath("a8-signin-card.pdf"), pdf);
   await page.screenshot({ path: testInfo.outputPath("a8-signin-card-print-media.png") });
   await page.emulateMedia({ media: "screen" });
-  await dialog.getByRole("button", { name: "Close" }).click();
+  await dialog.getByRole("button", { name: "Close" }).last().click();
   await expect(dialog).toBeHidden();
 
   // A9 sign out
