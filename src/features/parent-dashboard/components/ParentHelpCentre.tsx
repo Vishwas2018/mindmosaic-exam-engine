@@ -3,9 +3,7 @@
 import { useId, useState } from "react";
 import Link from "next/link";
 import {
-  AlertCircle,
   ArrowLeft,
-  CheckCircle2,
   ChevronRight,
   HelpCircle,
   Info,
@@ -30,19 +28,17 @@ export interface HelpCategoryItem {
 export interface ParentHelpCentreProps {
   categories?: HelpCategoryItem[];
   articles?: Record<string, PreviewHelpArticle>;
-  childrenList?: Array<{ id: string; name: string; yearLevel: number }>;
-  userEmail?: string;
+  /** The signed-in parent's own children. No sample family default: a real page must pass real data. */
+  childrenList: Array<{ id: string; name: string; yearLevel: number | null }>;
+  userEmail: string;
   isLocalPreview?: boolean;
 }
 
 export function ParentHelpCentre({
   categories = PREVIEW_HELP_CATEGORIES,
   articles = PREVIEW_HELP_ARTICLES,
-  childrenList = [
-    { id: "child-aisha", name: "Aisha", yearLevel: 3 },
-    { id: "child-kiran", name: "Kiran", yearLevel: 5 },
-  ],
-  userEmail = "priya.raman@example.com",
+  childrenList,
+  userEmail,
   isLocalPreview = false,
 }: ParentHelpCentreProps) {
   const searchInputId = useId();
@@ -57,10 +53,9 @@ export function ParentHelpCentre({
   // Contact form state
   const [contactChildId, setContactChildId] = useState<string>("");
   const [contactMessage, setContactMessage] = useState<string>("");
-  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success" | "error">(
-    "idle"
-  );
-  const [ticketReference, setTicketReference] = useState<string | null>(null);
+  /* "opened" only means the parent's email app was asked to open with the message: nothing is sent from here, so
+     nothing claims it was received. */
+  const [contactStatus, setContactStatus] = useState<"idle" | "opened">("idle");
 
   // Search filtering logic across all articles
   const trimmedQuery = searchQuery.trim().toLowerCase();
@@ -81,23 +76,22 @@ export function ParentHelpCentre({
 
   const activeArticle = selectedArticleSlug ? articles[selectedArticleSlug] : null;
 
-  const handleSendMessage = async (e: React.FormEvent) => {
+  const contactChild = childrenList.find((ch) => ch.id === contactChildId);
+  const mailtoHref = buildSupportMailto({
+    accountEmail: userEmail,
+    childLabel: contactChild
+      ? contactChild.yearLevel
+        ? `${contactChild.name}, Year ${contactChild.yearLevel}`
+        : contactChild.name
+      : null,
+    message: contactMessage,
+  });
+
+  const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactMessage.trim()) return;
-
-    setContactStatus("sending");
-
-    // In preview or authenticated client without backend support ticketing endpoint
-    // Simulate honest realistic in-flight transmission (600ms)
-    setTimeout(() => {
-      // In isolated preview mode, mint the documented reference from Artboard #b28: MM-4821
-      // In authenticated mode, format reference with honest date/time hash
-      const ref = isLocalPreview
-        ? "MM-4821"
-        : `MM-${Math.floor(1000 + Math.random() * 9000)}`;
-      setTicketReference(ref);
-      setContactStatus("success");
-    }, 700);
+    window.location.href = mailtoHref;
+    setContactStatus("opened");
   };
 
   const resetToOverview = () => {
@@ -155,12 +149,6 @@ export function ParentHelpCentre({
             aria-hidden="true"
           />
         </div>
-        <p className="mt-1.5 text-xs text-muted flex items-center gap-1.5">
-          <span className="inline-flex rounded-md bg-royal/10 px-1.5 py-0.5 text-[10px] font-bold text-royal uppercase">
-            NEEDS A BUILD
-          </span>
-          search needs the articles to exist as records first. Browsing by topic below works without it.
-        </p>
       </div>
 
       {/* Main Content Area: Article View vs Search Results vs Topic Tiles */}
@@ -360,185 +348,104 @@ export function ParentHelpCentre({
             Can’t find it?
           </h2>
           <p className="mt-1 text-xs text-muted sm:text-sm">
-            Send us a message. Tell us which child it is about and we will have their details in front of us.
+            Write to us. Tell us which child it is about and we will look at their details. A person reads every
+            message and replies to <span className="font-semibold">{userEmail}</span>.
           </p>
         </div>
 
-        {/* Automatic Attachment Notice */}
-        <div className="rounded-xl border border-royal/10 bg-royal/5 p-3.5 text-xs text-ink/80">
-          <strong className="font-extrabold text-ink">Attached automatically:</strong> your account (
-          <span className="font-mono text-royal">{userEmail}</span>), your plan, and — if you pick one — the child it is about.
-        </div>
-
-        {/* Contact Form States */}
-        {contactStatus === "success" ? (
-          /* Received State */
-          <div
-            data-testid="contact-success-banner"
-            role="status"
-            className="rounded-xl border border-emerald-300 bg-emerald-50/70 p-4 text-xs text-emerald-950 space-y-2"
-          >
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0" aria-hidden="true" />
-              <strong className="text-sm font-extrabold text-emerald-950">We have your message.</strong>
-            </div>
-            <p className="leading-relaxed">
-              Your reference is{" "}
-              <strong className="font-mono font-extrabold text-emerald-900">{ticketReference}</strong>.
-              We reply to <span className="font-semibold">{userEmail}</span>, usually within one working day.
-            </p>
-            <p className="text-[11px] text-emerald-800/80 pt-1">
-              The reference appears here and nowhere earlier, because it is the proof the message exists.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setContactStatus("idle");
-                setContactMessage("");
-                setTicketReference(null);
-              }}
-              className="mt-2 text-xs font-bold text-emerald-800 underline hover:text-emerald-950"
+        <form onSubmit={handleSendMessage} className="space-y-4">
+          <div>
+            <label htmlFor={childSelectId} className="block text-xs font-bold uppercase tracking-wider text-muted">
+              Which child is this about?
+            </label>
+            <select
+              id={childSelectId}
+              value={contactChildId}
+              onChange={(e) => setContactChildId(e.target.value)}
+              className="mt-1.5 w-full rounded-xl border border-royal/20 bg-white py-2.5 px-3.5 text-sm text-ink shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
             >
-              Send another message
+              <option value="">Not about a child</option>
+              {childrenList.map((ch) => (
+                <option key={ch.id} value={ch.id}>
+                  {ch.yearLevel ? `${ch.name}, Year ${ch.yearLevel}` : ch.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor={messageInputId} className="block text-xs font-bold uppercase tracking-wider text-muted">
+              What is happening?
+            </label>
+            <textarea
+              id={messageInputId}
+              rows={4}
+              required
+              value={contactMessage}
+              onChange={(e) => {
+                setContactMessage(e.target.value);
+                setContactStatus("idle");
+              }}
+              placeholder="Tell us what you expected and what happened instead."
+              className="mt-1.5 w-full rounded-xl border border-royal/20 bg-white p-3.5 text-sm text-ink placeholder:text-muted/60 shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <button
+              type="submit"
+              disabled={!contactMessage.trim()}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-royal px-5 text-xs font-extrabold text-white shadow-xs transition hover:bg-royal/90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Email this to {SUPPORT_EMAIL}
             </button>
+            <p className="text-[11px] text-muted">
+              This opens your email app with the message, your account and the child filled in. It is sent when you
+              press send there.
+            </p>
           </div>
-        ) : contactStatus === "error" ? (
-          /* Did Not Send / Error State */
+        </form>
+
+        {contactStatus === "opened" && (
           <div
-            data-testid="contact-error-banner"
-            role="alert"
-            className="rounded-xl border border-rose-300 bg-rose-50/80 p-4 text-xs text-rose-950 space-y-2"
+            data-testid="contact-opened-note"
+            role="status"
+            className="rounded-xl border border-royal/15 bg-royal/5 p-4 text-xs text-ink space-y-1"
           >
-            <div className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-rose-600 shrink-0" aria-hidden="true" />
-              <strong className="text-sm font-extrabold text-rose-950">We couldn’t send that.</strong>
-            </div>
-            <p className="leading-relaxed">
-              Your message is still in the box, so nothing is lost. Try again, or email us directly at{" "}
-              <a href="mailto:hello@mindmosaic.app" className="font-bold underline">
-                hello@mindmosaic.app
-              </a>
-              .
-            </p>
-            <p className="text-[11px] text-rose-800/80 pt-1">
-              No reference, and the typed message is kept. A support form that loses what someone wrote is worse than no form.
+            <p>
+              <strong className="font-extrabold">Your email app should now be open.</strong> If nothing opened, write to{" "}
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="font-bold text-royal underline">
+                {SUPPORT_EMAIL}
+              </a>{" "}
+              and paste your message — it is still in the box above.
             </p>
           </div>
-        ) : null}
-
-        {contactStatus !== "success" && (
-          <form onSubmit={handleSendMessage} className="space-y-4">
-            <div>
-              <label
-                htmlFor={childSelectId}
-                className="block text-xs font-bold uppercase tracking-wider text-muted"
-              >
-                Which child is this about?
-              </label>
-              <select
-                id={childSelectId}
-                value={contactChildId}
-                onChange={(e) => setContactChildId(e.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-royal/20 bg-white py-2.5 px-3.5 text-sm text-ink shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
-              >
-                <option value="">Not about a child</option>
-                {childrenList.map((ch) => (
-                  <option key={ch.id} value={ch.id}>
-                    {ch.name}, Year {ch.yearLevel}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor={messageInputId}
-                className="block text-xs font-bold uppercase tracking-wider text-muted"
-              >
-                What is happening?
-              </label>
-              <textarea
-                id={messageInputId}
-                rows={4}
-                required
-                value={contactMessage}
-                onChange={(e) => setContactMessage(e.target.value)}
-                placeholder="Tell us what you expected and what happened instead."
-                className="mt-1.5 w-full rounded-xl border border-royal/20 bg-white p-3.5 text-sm text-ink placeholder:text-muted/60 shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
-              />
-            </div>
-
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <button
-                type="submit"
-                disabled={contactStatus === "sending" || !contactMessage.trim()}
-                aria-busy={contactStatus === "sending"}
-                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-royal px-5 text-xs font-extrabold text-white shadow-xs transition hover:bg-royal/90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
-              >
-                {contactStatus === "sending" ? (
-                  "Sending…"
-                ) : (
-                  <>
-                    <Mail className="h-4 w-4" aria-hidden="true" />
-                    Send
-                  </>
-                )}
-              </button>
-
-              {contactStatus === "sending" && (
-                <p className="text-[11px] text-muted">
-                  No reference yet. Nothing is promised while this is in flight.
-                </p>
-              )}
-            </div>
-          </form>
         )}
-      </section>
-
-      {/* Section 3: "What the Help Centre needs before it works" (Artboard #b28 Section 3) */}
-      <section
-        aria-labelledby="build-requirements-heading"
-        className="rounded-2xl border border-royal/10 bg-white p-6 shadow-sm md:p-8 max-w-3xl space-y-4"
-      >
-        <div className="flex items-center gap-2.5">
-          <h2
-            id="build-requirements-heading"
-            className="text-base font-extrabold tracking-tight text-ink"
-          >
-            What the Help Centre needs before it works
-          </h2>
-          <span className="inline-flex rounded-md bg-royal/10 px-2 py-0.5 text-[10px] font-extrabold text-royal uppercase tracking-wider">
-            NEEDS A BUILD
-          </span>
-        </div>
-
-        <ul className="space-y-3 text-xs leading-relaxed text-ink/80">
-          <li className="flex items-start gap-2.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <strong className="font-bold text-ink">Articles as records.</strong> Browsing by topic works from a fixed list. Search does not work until the answers are stored and indexed.
-            </div>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <strong className="font-bold text-ink">Somewhere for messages to arrive</strong>, and a person reading them. Without that the form is a shape, not a service.
-            </div>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <strong className="font-bold text-ink">A reference number that means something</strong> — issued by whatever receives the message, not made up in the browser.
-            </div>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <strong className="font-bold text-ink">A reply path.</strong> The screen promises a reply to the parent’s email; something has to send it.
-            </div>
-          </li>
-        </ul>
       </section>
     </div>
   );
+}
+
+const SUPPORT_EMAIL = "hello@mindmosaic.app";
+
+/** A prefilled email to support. Exported for tests. Nothing is sent until the parent sends it themselves. */
+export function buildSupportMailto({
+  accountEmail,
+  childLabel,
+  message,
+}: {
+  accountEmail: string;
+  childLabel: string | null;
+  message: string;
+}): string {
+  const subject = childLabel ? `Help with ${childLabel}` : "Help with my MindMosaic account";
+  const body = [
+    message.trim(),
+    "",
+    "—",
+    `Account: ${accountEmail}`,
+    `Child: ${childLabel ?? "not about a child"}`,
+  ].join("\n");
+  return `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

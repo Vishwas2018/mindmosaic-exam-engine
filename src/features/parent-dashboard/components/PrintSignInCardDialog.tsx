@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Printer, ShieldCheck } from "lucide-react";
 
 import { Button, Modal } from "@/components/ui";
@@ -22,6 +22,8 @@ export interface PrintSignInCardDialogProps {
  *
  * Designed to look clean on screen and format cleanly when printed via window.print().
  */
+const noopSubscribe = () => () => {};
+
 export function PrintSignInCardDialog({
   open,
   onClose,
@@ -30,10 +32,30 @@ export function PrintSignInCardDialog({
   yearLevel,
 }: PrintSignInCardDialogProps) {
   const printButtonRef = useRef<HTMLButtonElement>(null);
+  /* The address the child actually types: this deployment's own sign-in page, never a hard-coded domain that a
+     beta or preview family is not using. The server snapshot is null, so server and client markup agree. */
+  const signInAddress = useSyncExternalStore(
+    noopSubscribe,
+    () => `${window.location.host}/sign-in`,
+    () => null,
+  );
+
+  /* Print only the card. The class scopes the @media print rules in globals.css, so printing anywhere else in the
+     app is unaffected; it is removed when the print dialog closes. */
+  useEffect(() => {
+    const root = document.documentElement;
+    const clear = () => root.classList.remove("printing-signin-card");
+    window.addEventListener("afterprint", clear);
+    return () => {
+      window.removeEventListener("afterprint", clear);
+      clear();
+    };
+  }, []);
 
   if (!open) return null;
 
   function handlePrint() {
+    document.documentElement.classList.add("printing-signin-card");
     window.print();
   }
 
@@ -72,7 +94,11 @@ export function PrintSignInCardDialog({
               {loginCode}
             </div>
             <p className="mt-2 text-xs text-muted">
-              Signs in at <strong className="text-ink">mindmosaic.com.au/sign-in</strong> &rarr; Select &ldquo;I&rsquo;m a student&rdquo;
+              Sign in at{" "}
+              <strong className="text-ink" data-testid="signin-card-address">
+                {signInAddress ?? "the MindMosaic sign-in page"}
+              </strong>{" "}
+              &rarr; choose &ldquo;I&rsquo;m a student&rdquo;, then enter this code and the PIN.
             </p>
           </div>
 

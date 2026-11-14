@@ -63,37 +63,18 @@ export default async function ParentHelpPage() {
     redirect("/sign-in?next=/parent/help");
   }
 
-  // Fetch guardian's authorized children for context attachment in support messages
-  const { data: parentChildren } = await supabase
-    .from("parent_children")
-    .select(`
-      child_id,
-      children (
-        id,
-        first_name,
-        year_level
-      )
-    `)
-    .eq("parent_id", user.id);
-
-  type SupabaseChildJoin = {
-    id: string;
-    first_name: string;
-    year_level: number;
-  };
-
-  const childrenList = (parentChildren || [])
-    .map((pc: unknown) => {
-      const row = pc as { child_id: string; children: SupabaseChildJoin | SupabaseChildJoin[] | null };
-      const child = Array.isArray(row.children) ? row.children[0] : row.children;
-      if (!child) return null;
-      return {
-        id: child.id,
-        name: child.first_name,
-        yearLevel: child.year_level,
-      };
-    })
-    .filter((ch): ch is { id: string; name: string; yearLevel: number } => Boolean(ch));
+  /* The signed-in parent's linked children, through the same parent_children link and profiles RLS as the
+     dashboard, so the support message can name the child it is about. */
+  const { data: links } = await supabase.from("parent_children").select("child_id").eq("parent_id", user.id);
+  const childIds = (links ?? []).map((link) => link.child_id as string);
+  const { data: profiles } = childIds.length
+    ? await supabase.from("profiles").select("id, display_name, year_level").in("id", childIds)
+    : { data: [] as { id: string; display_name: string | null; year_level: number | null }[] };
+  const childrenList = (profiles ?? []).map((profile) => ({
+    id: profile.id as string,
+    name: (profile.display_name as string | null) ?? "Your child",
+    yearLevel: (profile.year_level as number | null) ?? null,
+  }));
 
   return (
     <ParentShell active="/parent/account">

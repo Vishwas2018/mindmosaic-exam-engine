@@ -146,13 +146,6 @@ export function ChildProgressDashboard({
         >
           All time
         </button>
-
-        <span className="ml-1 inline-flex items-center gap-1.5 text-xs text-muted">
-          <span>A custom date range needs a server query that does not exist yet.</span>
-          <span className="rounded bg-royal/10 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-royal">
-            NEEDS A BUILD
-          </span>
-        </span>
       </div>
 
       {/* Partial Failure Notice (State 3: Partly unreadable) */}
@@ -353,7 +346,7 @@ export function ChildProgressDashboard({
                           </div>
                           <p className="flex items-center gap-1.5 text-xs font-medium text-muted">
                             <Info className="h-3 w-3 shrink-0 text-muted/70" aria-hidden="true" />
-                            {strand.papersCount} {strand.papersCount === 1 ? "paper" : "papers"} · {strand.marksAvailable} marks so far. A strand needs 2 papers and 8 marks before we say anything.
+                            {strand.papersCount} {strand.papersCount === 1 ? "paper" : "papers"} · {strand.marksAvailable} {strand.marksAvailable === 1 ? "mark" : "marks"} so far. A strand needs 2 papers and 8 marks before we say anything.
                           </p>
                         </div>
                       )}

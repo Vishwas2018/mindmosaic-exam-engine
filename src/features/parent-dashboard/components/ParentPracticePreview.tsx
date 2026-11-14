@@ -262,8 +262,7 @@ export function ParentPracticePreview({
             </button>
 
             <p className="mt-3 text-[11px] leading-relaxed text-muted">
-              Needs a rule for what happens to her results: a Year {stretchYear} paper sat by a Year {year} child should not quietly land in her Year {year} figures.{" "}
-              <span className="font-extrabold text-coral-700">NEEDS SIGN-OFF</span>
+              Not available yet: a Year {stretchYear} paper sat by a Year {year} child must not quietly land in their Year {year} figures, and that rule is still being decided.
             </p>
           </section>
         </div>

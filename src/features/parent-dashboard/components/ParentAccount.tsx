@@ -588,7 +588,7 @@ export function ParentAccount({
               <div className="leading-relaxed">
                 The published privacy and retention policy is still being written, so none of these screens states how long anything is kept or how quickly a request is handled.{" "}
                 <span className="rounded bg-coral-500/15 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-coral-800">
-                  NEEDS SIGN-OFF
+                  Not published yet
                 </span>
               </div>
             </div>

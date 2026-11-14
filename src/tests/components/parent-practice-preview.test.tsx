@@ -124,11 +124,9 @@ describe("ParentPracticePreview Component", () => {
     ).toBeInTheDocument();
     const stretchBtn = screen.getByRole("button", { name: "Open Year 5 for Aisha" });
     expect(stretchBtn).toBeDisabled();
-    expect(screen.getByText("NEEDS SIGN-OFF")).toBeInTheDocument();
+    expect(screen.queryByText("NEEDS SIGN-OFF")).not.toBeInTheDocument();
     expect(
-      screen.getByText(
-        /a Year 5 paper sat by a Year 3 child should not quietly land in her Year 3 figures\./i,
-      ),
+      screen.getByText(/a Year 5 paper sat by a Year 3 child must not quietly land in their Year 3 figures/i),
     ).toBeInTheDocument();
   });
 });

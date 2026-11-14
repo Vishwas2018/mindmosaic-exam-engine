@@ -35,7 +35,8 @@ export interface PreviewPaperResult {
   date: string;
   timed: boolean;
   durationMinutes: number;
-  allowedMinutes: number;
+  /** The sitting's time limit, when it was recorded; null rather than a guess. */
+  allowedMinutes: number | null;
   marksEarned: number;
   marksAvailable: number;
   questionsAnswered?: number;

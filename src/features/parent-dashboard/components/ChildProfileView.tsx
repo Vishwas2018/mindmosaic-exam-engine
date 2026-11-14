@@ -459,7 +459,7 @@ export function ChildProfileView({
 
             <p className="mt-3 text-xs leading-relaxed text-error/90">
               <strong className="block font-bold">Delete {firstName}&rsquo;s profile and everything in it</strong>
-              This asks us to erase her profile, her {child.finishedPapersCount} papers and every answer.
+              This asks us to erase {child.displayName}’s profile, their {child.finishedPapersCount} papers and every answer.
               It cannot be undone once carried out.
             </p>
 

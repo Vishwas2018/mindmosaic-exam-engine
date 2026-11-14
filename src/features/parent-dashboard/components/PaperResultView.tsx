@@ -142,7 +142,8 @@ export function PaperResultView({
                 Time taken
               </dt>
               <dd className="mt-1 font-display text-2xl font-black text-ink tabular-nums">
-                {result.durationMinutes} minutes of {result.allowedMinutes}
+                {result.durationMinutes} {result.durationMinutes === 1 ? "minute" : "minutes"}
+                {result.allowedMinutes !== null ? ` of ${result.allowedMinutes}` : ""}
               </dd>
             </div>
           </dl>
