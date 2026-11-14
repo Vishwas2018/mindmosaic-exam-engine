@@ -174,7 +174,7 @@ export function EngagementView({
           description="Streaks, badges and milestones all grow from practice sessions. Finish your first one while signed in and this page comes to life."
           icon={<Sparkles aria-hidden="true" className="h-6 w-6" />}
           action={
-            <Link href="/" className={buttonClasses({ variant: "orange" })}>
+            <Link href="/student/practice" className={buttonClasses({ variant: "orange" })}>
               Start practising
             </Link>
           }
