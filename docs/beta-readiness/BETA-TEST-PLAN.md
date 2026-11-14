@@ -47,3 +47,9 @@ independent oracle, single persisted attempt, resubmit 409, post-submit autosave
 known legacy-RPC hole that `20261031090100` closes.
 
 Not yet run on the Preview: A1-A6, B1-B3, B8, C4-C5, D1-D4, E (browser passes).
+
+### 2026-11-14, release candidate `5c69c65f` (PR #124)
+
+All scenarios automated in `e2e/hosted/` and run in real browsers on the Preview: **14 passed, 0 failed, 1 skipped**
+(A1–A2, blocked by the DEV email rate limit D-025; it passed on `3fc807b4`). API oracle 21/21. Full detail in
+TEST-RESULTS.md. The B3 "blocked on D-016" row is resolved by serving approved content only (CONTENT-GOVERNANCE.md).

@@ -80,6 +80,9 @@ the Preview of the fix. State "FIXED" means the hosted check now passes (TEST-RE
 | D-031 | P3 | My Progress "Start practising" opened the marketing page; "1 marks"; copy assumed every child is a girl; sign-up said "try again" for an undeliverable address | FIXED | (`36f8bf57`, `d6acb46b`) |
 | D-032 | P3 | Runner buttons lift on hover (`hover:-translate-y`), which kept Playwright's stability check waiting; no child-visible effect observed | OPEN, cosmetic | Hosted tests use keyboard activation |
 | D-033 | P3 | Parent pages say "Grade 3", the add-child form says "Year 3" | OPEN, copy decision | "Grade N" is the product's deliberate programme wording (`describe-config.ts`) |
+| D-034 | P3 | (a) `landing-keyboard-focus` short-viewport test flaked once in CI (heading mid-fade); (b) a streamed `loading.tsx` boundary briefly holds a hidden server copy of a page's `<main>` (same class as D-018) | OPEN, monitored | Landing untouched by PR #124. Not visible to users; hosted specs use `getByRole("main")` |
+| D-035 | P1 | Exam Centre showed a real child a fixed "NAPLAN Year 5 Simulation Battery — Example: 1 / 4 complete" with disabled Start/Review/Resume | FIXED | Removed from the real page (`5c69c65f`) |
+| D-036 | P1 | `/parent/account` email preferences: three "Not built" toggles that saved nothing; practice preview showed notes to the product owner ("Needs your approval before it is built", "PROPOSED POLICY") | FIXED | "Not sent yet" without a control; parent-facing wording (`14cf7b21`, `387f6338`) |
 
 ### Harness defect found and fixed during the run
 

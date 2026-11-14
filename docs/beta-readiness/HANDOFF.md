@@ -1,59 +1,44 @@
 # Handoff: restart checkpoint
 
-Last updated 2026-11-13 (evening). No background process is running; nothing continues by itself.
+Last updated 2026-11-14 (evening). No background process is running; nothing continues by itself.
 
 ## Where things are
 
-- Worktree `C:/tmp/wt-beta-rc`, branch `integration/beta-consolidation`, draft PR #123 into `dev`. Supersedes #119.
-- Remote head `ff775d2d` (pushed by the owner). CI on that head: see TEST-RESULTS below / `gh pr checks 123`.
-- Hosted DEV `mfglzabnayacssgertat`, 2026-11-13:
-  - `20261031090000` applied; `20261031090100` is the only migration not applied.
-  - `mindmosaic_exam_writer` has a password (SCRAM verifier set by `exam-writer-setup.cjs`; plaintext never
-    printed or stored). Verified as the writer: executes `create_exam_session_for` / `record_exam_attempt_for`,
-    not the legacy `create_exam_session`; SELECT on `exam_sessions`, `exam_attempts`, `profiles`, `auth.users`
-    and INSERT on `exam_sessions` all return 42501.
-  - `EXAM_WRITE_DB_URL`: sensitive, Preview target, value set by the setup script.
-  - A second `EXAM_WRITE_DB_URL` with target **development** (created 06:27 UTC by the owner) holds the old,
-    now-invalid password. Deleting it needs an interactive confirmation the agent will not skip; owner to delete
-    in the Vercel dashboard. It affects only `vercel dev` / `vercel env pull`.
-- Preview `mindmosaic-exam-engine-rg3yjc7he-vishwas2018s-projects.vercel.app` (`ff775d2d`):
-  - Client bundles: 42 files from `/sign-in`, `/student`, `/parent` name only `mfglzabnayacssgertat`.
-  - Server side: the Preview accepted DEV-issued student JWTs and every attempt it wrote was read back from DEV
-    PostgREST identical to the Preview's response, so its server writes land on DEV.
-  - Hosted acceptance (`run-preview-acceptance.cjs`): **65/66**. The single failure is `FORGE-RPC` (a student can
-    still call the legacy `record_exam_attempt` directly), the expected pre-lockdown finding that `090100` closes.
-- Content: 77 of the 78 family-beta items carry the owner's approval (Vishwas Joshi, `ff775d2d`). Y5 Q20
-  (`man-eb2d2e6d5ddfebf6c5085c6e`) was corrected after review and awaits the owner's separate approval.
+- `dev` = `100287e7` (PR #123). DEV Supabase `mfglzabnayacssgertat`: 53/53 migrations, legacy write RPCs revoked.
+- **PR #124** (draft) `integration/dev-beta-completion` → `dev`, worktree `C:/tmp/wt-dev-beta`. Head = release
+  candidate. It contains every fix from hosted acceptance (DEFECT-REGISTER D-019..D-034) and the hosted test suite.
+- Evidence: TEST-RESULTS.md. Content: CONTENT-GOVERNANCE.md. Security: SECURITY-REVIEW.md.
+- The main checkout (`C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine`, on `dev`) holds someone's **uncommitted
+  billing rewrite**. Untouched. PR #124 changes `src/app/billing/page.tsx` (free-beta message, no plan for children),
+  so expect a conflict there; keep #124's two rules when reconciling.
 
-## Resume here
+## How to re-run acceptance
 
-1. `gh pr checks 123`. Check skip counts, not only colours.
-2. Owner decision on `20261031090100` (DATABASE-READINESS.md, "Lockdown approval request"). **It breaks exam
-   start and submit on every Preview built from a branch without the new write path, `dev` included** (`dev` does
-   not contain `20261031090000`'s app changes). Either merge #123 into `dev` first, or accept that window.
-3. After approval: apply that file alone through the linked dir `C:/tmp/mm-dev-link` (never `db push`), record it
-   in the ledger, rerun `run-preview-acceptance.cjs <host>`; `FORGE-RPC` must pass and the other 65 stay green.
-4. Browser passes of scenarios A–E (BETA-TEST-PLAN.md).
-
-## Not done
-
-- Records still to write: TASK-LEDGER, REPOSITORY-AUDIT, FEATURE-MATRIX, DESIGN-TRACEABILITY, SECURITY-REVIEW.
-- Browser runs of scenarios A–E on the Preview. No design-fidelity comparison. No dependency audit.
-- The 40-odd other open PRs were listed but not triaged.
-- The main checkout's uncommitted billing rewrite was not touched. It will conflict with this branch in
-  `ParentShell`, `parent/page.tsx` and `parent/children/page.tsx`.
+```
+node scripts/hosted-acceptance/run.mjs <preview-url> --env <path to .env.local bound to DEV> -- <specs>
+node scripts/hosted-acceptance/cleanup.mjs --env <same>            # dry run; add --apply to delete
+```
+`run.mjs` reads the Vercel automation-bypass secret from the project API (logged-in `vercel` CLI) into memory.
+Real sign-up (A1–A2) needs `HOSTED_MAIL_BASE=<inbox you can read>` and is limited by D-025;
+`HOSTED_CONFIRM=admin` confirms that same account with a service-role link when the inbox cannot be read.
+On Git Bash set `MSYS_NO_PATHCONV=1` and pass Windows paths; do not put `|` in a `-g` filter (cmd eats it).
 
 ## Waiting on the owner
 
-- Approval of `20261031090100`, and the order relative to merging #123 into `dev`.
-- Approval of corrected Y5 Q20.
-- Delete the stale development-target `EXAM_WRITE_DB_URL` in Vercel.
-- Merge of #123 into `dev`.
+1. **D-025: custom SMTP for DEV Supabase Auth.** The project refuses the second confirmation email within about an
+   hour, so families signing up close together are blocked. This is the remaining hard blocker for inviting families.
+2. **Content (CONTENT-GOVERNANCE.md):** confirm the attestation behind the 77 NAPLAN numeracy approvals; approve or
+   keep excluding Y5 Q20. Nothing else is servable until a human reviews it.
+3. **Review and merge PR #124 into `dev`.** After the merge the `dev` Preview must be re-run with the suite (it is the
+   deployment families will use).
+4. Delete the stale development-target `EXAM_WRITE_DB_URL` in Vercel (carried over).
+5. Optional: error monitoring (none configured); re-authorise the Gmail connector so A2 can use the real email.
 
-## Decisions
+## Decisions taken in this session
 
-- Hosted exam path on the DEV Preview (start, autosave, resume, submit, scoring, history, isolation, RLS): **GO**
-  (65/66, the one failure is the known pre-lockdown hole).
-- Supervised family beta: **NO-GO** until `090100` is applied and `FORGE-RPC` passes, Y5 Q20 is approved or
-  removed from the paper, and scenarios A–E pass in the browser.
-- Expanded beta, production: **NO-GO**.
+- Deployed builds serve approved content only; local and CI keep report mode (`MM_PUBLICATION_GATE` overrides).
+- No feature is shown to families that does nothing: fake support receipt, dead email toggles, illustrative exam
+  battery and canvas notes removed rather than "finished".
+- Billing stays off for the beta; `/billing` says so.
+- Synthetic data: suite-created families removed with `cleanup.mjs`; `mm-dev-*` fixtures (used by the API
+  acceptance script) and every account not created by the suite kept.
