@@ -49,7 +49,7 @@ export function ChildLearningHub({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted">
-            <Link href="/parent" className="hover:text-royal transition">
+            <Link href="/parent" className="inline-flex min-h-11 items-center hover:text-royal transition">
               Family Overview
             </Link>
             <span aria-hidden="true">/</span>
@@ -257,7 +257,7 @@ export function ChildLearningHub({
           </div>
           <Link
             href={`/parent/children/${child.id}/writing`}
-            className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 shrink-0"
+            className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 shrink-0"
           >
             View Writing &rarr;
           </Link>

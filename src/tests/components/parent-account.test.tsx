@@ -64,7 +64,7 @@ describe("ParentAccount Component", () => {
     expect(changePwBtn).toBeInTheDocument();
   });
 
-  it("renders notification preferences with honest 'Not built' badges and mandatory billing email", () => {
+  it("lists planned emails as not sent yet, with no toggle that does nothing, and the mandatory billing email", () => {
     render(
       <ParentAccount
         initialAccount={PREVIEW_PARENT_ACCOUNT}
@@ -76,8 +76,9 @@ describe("ParentAccount Component", () => {
     expect(screen.getByText("Written answers marked")).toBeInTheDocument();
     expect(screen.getByText("Nothing for a fortnight")).toBeInTheDocument();
 
-    const notBuiltBadges = screen.getAllByText("Not built");
-    expect(notBuiltBadges.length).toBe(3);
+    expect(screen.getAllByText("Not sent yet")).toHaveLength(3);
+    expect(screen.queryByText("Not built")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Weekly summary email notification")).not.toBeInTheDocument();
 
     const billingToggle = screen.getByLabelText("Billing notifications (mandatory)");
     expect(billingToggle).toBeDisabled();

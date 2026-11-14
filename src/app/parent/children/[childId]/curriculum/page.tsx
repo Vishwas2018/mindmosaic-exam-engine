@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 import { ParentShell } from "@/features/parent-dashboard";
@@ -63,8 +64,21 @@ export default async function ChildCurriculumPage({
     );
   }
 
-  // Load child profile for context header
+  // Only a parent linked to this child may open it; anyone else gets the same 404 as a missing child.
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) notFound();
+  const { data: link } = await supabase
+    .from("parent_children")
+    .select("child_id")
+    .eq("parent_id", user.id)
+    .eq("child_id", childId)
+    .maybeSingle();
+  if (!link) notFound();
+
+  // Load child profile for context header
   const { data: childProfile } = await supabase
     .from("profiles")
     .select("display_name, year_level")

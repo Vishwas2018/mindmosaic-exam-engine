@@ -76,7 +76,7 @@ export function ChildProgressDashboard({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted">
-            <Link href="/parent" className="hover:text-royal transition">
+            <Link href="/parent" className="inline-flex min-h-11 items-center hover:text-royal transition">
               Family Overview
             </Link>
             <span aria-hidden="true">/</span>
@@ -114,7 +114,7 @@ export function ChildProgressDashboard({
           type="button"
           onClick={() => setFilter("30d")}
           aria-pressed={filter === "30d"}
-          className={`min-h-8 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "30d"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -126,7 +126,7 @@ export function ChildProgressDashboard({
           type="button"
           onClick={() => setFilter("3m")}
           aria-pressed={filter === "3m"}
-          className={`min-h-8 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "3m"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -138,7 +138,7 @@ export function ChildProgressDashboard({
           type="button"
           onClick={() => setFilter("all")}
           aria-pressed={filter === "all"}
-          className={`min-h-8 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "all"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -146,13 +146,6 @@ export function ChildProgressDashboard({
         >
           All time
         </button>
-
-        <span className="ml-1 inline-flex items-center gap-1.5 text-xs text-muted">
-          <span>A custom date range needs a server query that does not exist yet.</span>
-          <span className="rounded bg-royal/10 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-royal">
-            NEEDS A BUILD
-          </span>
-        </span>
       </div>
 
       {/* Partial Failure Notice (State 3: Partly unreadable) */}
@@ -235,7 +228,7 @@ export function ChildProgressDashboard({
                     </span>
                     <Link
                       href={`/parent/results/${paper.id}`}
-                      className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3 py-1.5 text-xs font-bold text-royal hover:bg-royal/5 transition"
+                      className="inline-flex min-h-11 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3 py-1.5 text-xs font-bold text-royal hover:bg-royal/5 transition"
                     >
                       Open &rarr;
                     </Link>
@@ -353,7 +346,7 @@ export function ChildProgressDashboard({
                           </div>
                           <p className="flex items-center gap-1.5 text-xs font-medium text-muted">
                             <Info className="h-3 w-3 shrink-0 text-muted/70" aria-hidden="true" />
-                            {strand.papersCount} {strand.papersCount === 1 ? "paper" : "papers"} · {strand.marksAvailable} marks so far. A strand needs 2 papers and 8 marks before we say anything.
+                            {strand.papersCount} {strand.papersCount === 1 ? "paper" : "papers"} · {strand.marksAvailable} {strand.marksAvailable === 1 ? "mark" : "marks"} so far. A strand needs 2 papers and 8 marks before we say anything.
                           </p>
                         </div>
                       )}
@@ -442,7 +435,7 @@ export function ChildProgressDashboard({
 
                       <Link
                         href={`/parent/results/${paper.id}`}
-                        className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3.5 py-1.5 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                        className="inline-flex min-h-11 items-center gap-1 rounded-lg border border-royal/20 bg-white px-3.5 py-1.5 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
                       >
                         Open &rarr;
                       </Link>

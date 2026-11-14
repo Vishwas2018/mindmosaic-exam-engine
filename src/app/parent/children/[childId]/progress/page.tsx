@@ -1,3 +1,4 @@
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -212,9 +213,9 @@ export default async function ChildProgressPage({ params }: ChildProgressPagePro
       title,
       subject: subject as "numeracy" | "reading" | "language" | "writing",
       date: submittedDate,
-      timed: (result.timeTakenSeconds ?? 0) > 0,
+      timed: (row.session?.config as { timing?: string } | null)?.timing === "timed",
       durationMinutes: Math.round((result.timeTakenSeconds ?? 0) / 60),
-      allowedMinutes: 40,
+      allowedMinutes: null,
       marksEarned: result.objectiveMarksEarned ?? 0,
       marksAvailable: result.objectiveMarksAvailable ?? 0,
       questionsAnswered: result.attemptedQuestions ?? 0,
@@ -230,7 +231,7 @@ export default async function ChildProgressPage({ params }: ChildProgressPagePro
     if (result.breakdowns?.bySubject) {
       for (const [subKey, rowStats] of Object.entries(result.breakdowns.bySubject)) {
         const cur = subjectTotals.get(subKey) ?? {
-          label: subKey.charAt(0).toUpperCase() + subKey.slice(1).replace("_", " "),
+          label: skillLabel(subKey),
           marksEarned: 0,
           marksAvailable: 0,
           papersCount: 0,
@@ -246,7 +247,7 @@ export default async function ChildProgressPage({ params }: ChildProgressPagePro
     if (result.breakdowns?.bySkill) {
       for (const [skillKey, rowStats] of Object.entries(result.breakdowns.bySkill)) {
         const cur = strandTotals.get(skillKey) ?? {
-          label: skillKey.charAt(0).toUpperCase() + skillKey.slice(1).replace("_", " "),
+          label: skillLabel(skillKey),
           subject,
           marksEarned: 0,
           marksAvailable: 0,

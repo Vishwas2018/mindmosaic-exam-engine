@@ -15,7 +15,9 @@ import {
   SubscriptionOverviewCard,
 } from "@/features/billing";
 import { getMySubscription } from "@/lib/billing/subscription";
+import { isStripeConfigured } from "@/lib/stripe/config";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Billing",
@@ -83,8 +85,60 @@ function Shell({ children }: { children: React.ReactNode }) {
  * this page's behaviour before this batch.
  */
 export default async function BillingPage() {
+  /* Billing is a parent's business: a signed-in child is never shown a plan or a price. Not a redirect, because
+     requireActiveSubscription's (dormant) gate sends students here and a redirect back would loop. */
+  if (isSupabaseConfigured) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+      if (profile?.role === "student") {
+        return (
+          <Shell>
+            <div className="mx-auto max-w-xl text-center" data-testid="billing-student">
+              <h1 className="text-3xl font-black tracking-[-0.03em] text-ink">This page is for grown-ups</h1>
+              <p className="mt-3 text-base leading-7 text-muted">
+                Plans are looked after by the parent who set up your account. You can keep practising.
+              </p>
+              <Link
+                href="/student"
+                className="mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-5 text-sm font-bold text-white transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              >
+                Back to My Space
+              </Link>
+            </div>
+          </Shell>
+        );
+      }
+    }
+  }
+
   const result = isSupabaseConfigured ? await getMySubscription() : { status: "error" as const };
   const subscription = result.status === "ready" ? result.subscription : null;
+
+  /* Where payments are not switched on (the DEV family beta), nothing is offered for sale: a plan card here would
+     lead to a checkout that can only fail. */
+  if (!subscription && !isStripeConfigured) {
+    return (
+      <Shell>
+        <div className="mx-auto max-w-2xl text-center" data-testid="billing-free-beta">
+          <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">The family beta is free</h1>
+          <p className="mt-3 text-base leading-7 text-muted">
+            There is nothing to pay during the beta, no card on file and nothing to cancel. Every feature open to
+            beta families is included. We will tell you well before anything changes.
+          </p>
+          <Link
+            href="/parent"
+            className="mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-5 text-sm font-bold text-white transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+          >
+            Back to your family
+          </Link>
+        </div>
+      </Shell>
+    );
+  }
 
   if (!subscription) {
     return (

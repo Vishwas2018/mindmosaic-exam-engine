@@ -14,6 +14,7 @@ const state = vi.hoisted(() => ({
 
 vi.mock("@/server/exam-bank", () => ({
   getPatternReadiness: () => ({}),
+  isPublicationGateEnforced: () => false,
   getExamBank: () => {
     if (state.throwFrom === "bank") throw new Error("boom");
     return state.bank;

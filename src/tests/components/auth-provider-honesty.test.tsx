@@ -173,6 +173,18 @@ describe("signup never announces that an address already has an account", () => 
     expect(result.ok).toBe(false);
     expect(result.message).toMatch(/password/i);
   });
+
+  it("says an undeliverable address must change, instead of 'try again'", async () => {
+    signUp.mockResolvedValue({
+      data: { session: null },
+      error: { code: "email_address_invalid", message: 'Email address "a@example.com" is invalid', status: 400 },
+    });
+    mountProvider();
+    const result = await api().signUp({ email: "a@example.com", password: "Str0ng!pass", displayName: "A B" });
+    expect(result.ok).toBe(false);
+    expect(result.message).toMatch(/can't receive mail/i);
+    expect(result.message).not.toMatch(/try again/i);
+  });
 });
 
 describe("a failed resend never says it was sent", () => {

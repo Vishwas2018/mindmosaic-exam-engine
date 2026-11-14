@@ -245,7 +245,7 @@ export function ChildrenManager({
           </div>
           <a
             href="#add-child"
-            className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-royal px-4 text-xs font-bold text-white shadow-sm transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-royal px-4 text-xs font-bold text-white shadow-sm transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
           >
             <Plus className="h-4 w-4" />
             Add a child
@@ -271,7 +271,7 @@ export function ChildrenManager({
                     <div className="flex flex-wrap items-center gap-2">
                       <Link
                         href={`/parent/children/${child.id}`}
-                        className="text-base font-black text-ink hover:text-royal hover:underline"
+                        className="inline-flex min-h-11 items-center text-base font-black text-ink hover:text-royal hover:underline"
                       >
                         {child.displayName}
                       </Link>
@@ -304,13 +304,13 @@ export function ChildrenManager({
                 <div className="flex flex-wrap items-center gap-2">
                   <Link
                     href={`/parent/children/${child.id}`}
-                    className="inline-flex min-h-9 items-center justify-center rounded-full border border-royal/20 bg-white px-3.5 text-xs font-bold text-ink shadow-sm transition hover:border-royal hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+                    className="inline-flex min-h-11 items-center justify-center rounded-full border border-royal/20 bg-white px-3.5 text-xs font-bold text-ink shadow-sm transition hover:border-royal hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
                   >
                     Manage
                   </Link>
                   <Link
                     href={`/parent/children/${child.id}/progress`}
-                    className="inline-flex min-h-9 items-center justify-center rounded-full border border-royal/10 bg-canvas px-3.5 text-xs font-bold text-ink transition hover:bg-royal/10 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+                    className="inline-flex min-h-11 items-center justify-center rounded-full border border-royal/10 bg-canvas px-3.5 text-xs font-bold text-ink transition hover:bg-royal/10 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
                   >
                     Progress
                   </Link>

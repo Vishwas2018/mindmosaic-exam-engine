@@ -167,7 +167,7 @@ export function ChildProfileView({
         <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-bold text-muted">
           <Link
             href="/parent/children"
-            className="inline-flex items-center gap-1 hover:text-royal hover:underline"
+            className="inline-flex min-h-11 items-center gap-1 hover:text-royal hover:underline"
           >
             <ArrowLeft className="h-3 w-3" />
             Children
@@ -222,7 +222,7 @@ export function ChildProfileView({
                   key={sibling.id}
                   href={`/parent/children/${sibling.id}`}
                   aria-current={isCurrent ? "page" : undefined}
-                  className={`inline-flex min-h-9 items-center gap-1.5 rounded-full px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
                     isCurrent
                       ? "bg-royal text-white shadow-sm"
                       : "border border-royal/10 bg-white text-ink hover:border-royal/30 hover:bg-royal/5"
@@ -270,7 +270,7 @@ export function ChildProfileView({
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink placeholder:text-muted focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
+                  className="mt-2 min-h-11 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink placeholder:text-muted focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
                 />
                 <p className="mt-1.5 text-xs text-muted">
                   This is what {firstName || "your child"} sees when they sign in. It is never shown outside your family.
@@ -285,7 +285,7 @@ export function ChildProfileView({
                   id="child-yearlevel"
                   value={yearLevel}
                   onChange={(e) => setYearLevel(e.target.value)}
-                  className="mt-2 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
+                  className="mt-2 min-h-11 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
                 >
                   <option value="">No year level selected</option>
                   {availableYearLevels.map((year) => (
@@ -459,7 +459,7 @@ export function ChildProfileView({
 
             <p className="mt-3 text-xs leading-relaxed text-error/90">
               <strong className="block font-bold">Delete {firstName}&rsquo;s profile and everything in it</strong>
-              This asks us to erase her profile, her {child.finishedPapersCount} papers and every answer.
+              This asks us to erase {child.displayName}’s profile, their {child.finishedPapersCount} papers and every answer.
               It cannot be undone once carried out.
             </p>
 

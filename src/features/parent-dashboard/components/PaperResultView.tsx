@@ -45,13 +45,13 @@ export function PaperResultView({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted">
-            <Link href="/parent" className="hover:text-royal transition">
+            <Link href="/parent" className="inline-flex min-h-11 items-center hover:text-royal transition">
               Family Overview
             </Link>
             <span aria-hidden="true">/</span>
             <Link
               href={`/parent/children/${child.id}/progress`}
-              className="hover:text-royal transition"
+              className="inline-flex min-h-11 items-center hover:text-royal transition"
             >
               {child.displayName}’s progress
             </Link>
@@ -142,7 +142,8 @@ export function PaperResultView({
                 Time taken
               </dt>
               <dd className="mt-1 font-display text-2xl font-black text-ink tabular-nums">
-                {result.durationMinutes} minutes of {result.allowedMinutes}
+                {result.durationMinutes} {result.durationMinutes === 1 ? "minute" : "minutes"}
+                {result.allowedMinutes !== null ? ` of ${result.allowedMinutes}` : ""}
               </dd>
             </div>
           </dl>
