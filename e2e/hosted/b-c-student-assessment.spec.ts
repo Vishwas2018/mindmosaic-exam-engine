@@ -240,7 +240,7 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   // Follow the parent's own link to the paper, as a parent would
   await page.getByRole("link", { name: /Open/ }).first().click();
   await expect(page).toHaveURL(/\/parent\/results\//);
-  await expect(page.locator("main")).toContainText(new RegExp(`\\b${earned}\\s*(of|/)\\s*${total}\\b`));
+  await expect(page.locator("main")).toContainText(new RegExp(`(?<!\\d)${earned}\\s*(of|/)\\s*${total}(?!\\d)`));
   await expect(page.locator("main"), "no invented time limit").not.toContainText(/minutes of 40/);
   await shot("c12-parent-result-detail");
 
