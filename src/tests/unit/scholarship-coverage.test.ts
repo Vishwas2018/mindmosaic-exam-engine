@@ -8,6 +8,7 @@ vi.mock("@/server/exam-bank", async () => {
   const { buildAllPatternReadiness } = await import("@/features/exam-engine/exam-patterns");
   return {
     getExamBank: () => fixture.bank,
+    isPublicationGateEnforced: () => false,
     getPatternReadiness: () => buildAllPatternReadiness(fixture.bank as never),
   };
 });
