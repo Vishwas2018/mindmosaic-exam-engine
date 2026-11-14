@@ -214,7 +214,7 @@ export function ParentPracticePreview({
                 Set this for {child.displayName}
               </h2>
               <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800">
-                PROPOSED POLICY
+                Not available
               </span>
             </div>
             <p className="mt-2 text-xs font-medium text-muted">
@@ -245,7 +245,7 @@ export function ParentPracticePreview({
                 Let {child.displayName} try Year {stretchYear}
               </h2>
               <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800">
-                PROPOSED POLICY
+                Not available
               </span>
             </div>
             <p className="mt-2 text-xs font-medium text-muted">
