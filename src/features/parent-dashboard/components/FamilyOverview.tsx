@@ -419,7 +419,7 @@ export function FamilyOverview({
                       <span className="text-muted">
                         a 10-question {lowestSubject ? lowestSubject.label.toLowerCase() : "mixed"} set.
                       </span>
-                      <span className="block text-[11px] text-muted/75 mt-0.5">
+                      <span className="block text-[11px] text-muted mt-0.5">
                         A suggestion from us, not something {child.displayName} has done.
                       </span>
                     </div>

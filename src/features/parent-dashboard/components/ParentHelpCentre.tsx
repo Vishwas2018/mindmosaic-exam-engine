@@ -325,7 +325,7 @@ export function ParentHelpCentre({
                   {cat.description}
                 </p>
               </div>
-              <p className="mt-4 text-[11px] font-semibold text-muted/80">
+              <p className="mt-4 text-[11px] font-semibold text-muted">
                 {cat.countLabel}
               </p>
             </button>

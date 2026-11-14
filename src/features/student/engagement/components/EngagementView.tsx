@@ -59,7 +59,7 @@ function WeekDotsRow({ dots }: { dots: WeekDot[] }) {
     today_done: "bg-royal text-white ring-2 ring-royal-orange",
     today_pending: "border-2 border-royal bg-soft-purple text-royal",
     missed: "bg-royal/5 text-muted",
-    future: "bg-page text-muted/60",
+    future: "bg-page text-muted",
   };
   const stateLabels: Record<WeekDot["state"], string> = {
     done: "practised",
