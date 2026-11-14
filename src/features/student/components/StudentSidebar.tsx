@@ -60,6 +60,13 @@ const baseSidebarItems: readonly SidebarNavItem[] = [
   { key: "progress", label: "My Progress", href: "/student/engagement", icon: TrendingUp },
 ];
 
+const vihaanNavItem: SidebarNavItem = {
+  key: "vihaan" as const,
+  label: "Vihaan Scholarship Prep",
+  href: "/student/vihaan",
+  icon: GraduationCap,
+};
+
 export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
   ...baseSidebarItems,
   ...(isSingaporeMathsSampleAllowed()
@@ -72,6 +79,7 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
         },
       ]
     : []),
+  ...(isVihaanScholarshipPrepEnabled() ? [vihaanNavItem] : []),
 ];
 
 /**
