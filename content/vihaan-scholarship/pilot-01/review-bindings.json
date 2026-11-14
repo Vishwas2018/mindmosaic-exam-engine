@@ -1,0 +1,13 @@
+{
+  "classification": "local_advisory_hashes_not_factory_attestations",
+  "reviewer": "separate same-provider OpenAI agent",
+  "productionGradeIndependentReview": false,
+  "humanApproval": false,
+  "files": {
+    "draft.json": "3b1485a70c2cc114712c2551e4e0b20bea7105ce4d6cdf4e1abe7d73011bcd69",
+    "authoring-brief.md": "76de4fb84ff9026a3a3a6859add0dbd9e7af88491051a6c3d8f4819f5c54ec2d",
+    "blind-review-packet.json": "59f9fb14aec3bd469e37e488e4689a4ce0522a784cbe762d192bfb2eb72b9e24",
+    "blind-review-packet-v2.json": "33dd8c162bf9553fd537f62d6a74623508812c4caa06988fc8e816892020e006",
+    "advisory-review.md": "82c292b1b28927c5ba8e97fdd2943a2ac2d678efdec5d8513258050ce412d74d"
+  }
+}

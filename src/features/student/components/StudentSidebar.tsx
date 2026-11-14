@@ -11,14 +11,17 @@ import {
   Flame,
   HelpCircle,
   LayoutDashboard,
+  Search,
   Settings,
   SpellCheck2,
   Target,
-  ListChecks,
+  GraduationCap,
+  TrendingUp,
   BarChart3,
 } from "lucide-react";
 
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import { isVihaanScholarshipPrepEnabled } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
@@ -30,16 +33,16 @@ export type StudentSidebarKey =
   | "practice"
   | "examCentre"
   | "progress"
-  | "results"
-  | "singaporeMathsSample";
+  | "singaporeMathsSample"
+  | "vihaan";
 
 interface SidebarNavItem {
   key: StudentSidebarKey;
   label: string;
   href: string;
   icon: typeof LayoutDashboard;
-  /** Bottom-nav label below 1024px. The full `label` is the accessible name. Absent = not in the bottom nav. */
-  shortLabel?: string;
+  /** Placeholder badge text to match the Stitch mock — not wired to real state yet. */
+  badge?: string;
 }
 
 /**
@@ -50,13 +53,19 @@ interface SidebarNavItem {
  * for this sidebar.
  */
 const baseSidebarItems: readonly SidebarNavItem[] = [
-  { key: "home", label: "My Space", shortLabel: "My Space", href: "/student", icon: LayoutDashboard },
-  { key: "learn", label: "Learning Hub", shortLabel: "Learning", href: "/student/learn", icon: BookOpen },
-  { key: "practice", label: "Practice Studio", shortLabel: "Practice", href: "/student/practice", icon: Target },
-  { key: "examCentre", label: "Exam Centre", shortLabel: "Exams", href: "/student/exam-preparation", icon: ClipboardCheck },
-  /* My Progress leaves the nav (D5); My Results takes the slot. /student/engagement is reached from My Space. */
-  { key: "results", label: "My Results", shortLabel: "Results", href: "/results", icon: ListChecks },
+  { key: "home", label: "Dashboard", href: "/student", icon: LayoutDashboard },
+  { key: "learn", label: "Learning Hub", href: "/student/learn", icon: BookOpen, badge: "Stage 3" },
+  { key: "practice", label: "Practice Studio", href: "/student/practice", icon: Target },
+  { key: "examCentre", label: "Exam Centre", href: "/student/exam-preparation", icon: ClipboardCheck, badge: "NAPLAN" },
+  { key: "progress", label: "My Progress", href: "/student/engagement", icon: TrendingUp },
 ];
+
+const vihaanNavItem: SidebarNavItem = {
+  key: "vihaan" as const,
+  label: "Vihaan Scholarship Prep",
+  href: "/student/vihaan",
+  icon: GraduationCap,
+};
 
 export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
   ...baseSidebarItems,
@@ -70,6 +79,7 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
         },
       ]
     : []),
+  ...(isVihaanScholarshipPrepEnabled() ? [vihaanNavItem] : []),
 ];
 
 /**
@@ -128,7 +138,7 @@ export function StudentSidebar({
         <div className="flex items-center justify-between border-b border-mm-line/60 px-5 pb-4 pt-5">
           <Link
             href="/student"
-            aria-label="MindMosaic — My Space"
+            aria-label="MindMosaic — Dashboard"
             className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             <MindMosaicLogo size="md" />
@@ -152,10 +162,28 @@ export function StudentSidebar({
             <span className="truncate text-[13px] font-semibold leading-tight text-mm-ink">
               {displayName ?? "Your profile"}
             </span>
+            {/* Placeholder gamification line to match the Stitch mock — no XP/level model exists yet. */}
+            <span className="truncate text-[11px] leading-tight text-mm-muted">
+              Scholar · Lvl 12 · <span className="font-semibold text-amber-accent">★ 840xp</span>
+            </span>
           </div>
           <ChevronsUpDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-stitch-outline" />
         </div>
 
+        <div className="mx-3">
+          {/* Placeholder — no search index exists yet, so ⌘K has no listener behind it (audit D-10). */}
+          <div
+            title="Search (coming soon)"
+            aria-disabled="true"
+            className="flex items-center gap-2 rounded-lg border border-mm-line bg-white px-2.5 py-2 text-mm-muted"
+          >
+            <Search aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+            <span className="flex-1 truncate text-[11.5px]">Search topics, units...</span>
+            <kbd className="rounded border border-mm-line bg-mm-page px-1 py-0.5 font-mono text-[9px] font-semibold text-stitch-outline">
+              ⌘K
+            </kbd>
+          </div>
+        </div>
 
         <div className="px-3">
           <p className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-stitch-outline">
@@ -178,6 +206,17 @@ export function StudentSidebar({
                 >
                   <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
                   <span className="flex-1">{item.label}</span>
+                  {item.badge && (
+                    <span
+                      className={`rounded-full px-1.5 py-0.5 text-[9px] font-semibold ${
+                        item.badge === "NAPLAN"
+                          ? "border border-amber-border bg-amber-light text-amber-accent"
+                          : "border border-mm-line bg-mm-page text-mm-muted"
+                      }`}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}
@@ -365,13 +404,18 @@ export function StudentSidebar({
       </div>
 
       <div className="flex flex-col gap-2 border-t border-mm-line bg-white p-3">
+        {/* Placeholder session/curriculum-version chip to match the Stitch mock. */}
+        <div className="flex items-center justify-between rounded-lg border border-mm-line/60 bg-mm-page/60 px-2.5 py-1.5 text-[10px] font-medium text-mm-muted">
+          <span>Session 2025-26</span>
+          <span className="font-mono text-[9px] text-stitch-outline">NSW NESA v9.0</span>
+        </div>
         <div className="flex items-center justify-between">
           <Link
             href="/help"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 py-1 text-[11.5px] text-mm-muted transition-colors hover:text-primary"
           >
             <HelpCircle aria-hidden="true" className="h-4 w-4" />
-            Help Centre
+            Help &amp; Support
           </Link>
           {/* No /student/settings route yet — placeholder, not a dead Link. */}
           <button
