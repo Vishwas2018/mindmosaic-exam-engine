@@ -37,7 +37,13 @@ Later commits on the branch change docs only.
 
 ## CI (GitHub Actions)
 
-`4be46f87` (last fully finished run before the RC; RC CI recorded in the PR): core 442 files / **7,308 passed**;
+**RC `5c69c65f` (pull_request run): success.** core 442 files / **7,308 passed**; rls 38 files / **607 passed** +
+2 expected-fail; e2e **386 passed, 1 flaky**; e2e-auth **92 passed, 1 flaky, 0 skipped**; scholarship-drafts passed.
+Flaky (failed first attempt, passed on retry; specs untouched by this branch; both asserted while loading skeletons
+were still on screen): `e2e/a11y-auth-pages.spec.ts:40` sign-in keyboard walk, `e2e/auth/admin-draft-review.spec.ts:27`
+(five "Loading…" status regions). Logged under D-034; not fixed here.
+
+Earlier: `4be46f87` (last fully finished run before the RC; RC CI recorded in the PR): core 442 files / **7,308 passed**;
 rls 38 files / **607 passed** + 2 expected-fail; e2e-auth **93 passed, 0 skipped**; e2e **386 passed, 1 flaky**
 (`landing-keyboard-focus.spec.ts` short-viewport chapter heading caught mid-fade; landing page untouched by this
 branch; passes on `dev`'s run; D-034). scholarship-drafts passed.
