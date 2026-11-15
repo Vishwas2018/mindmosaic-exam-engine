@@ -87,12 +87,12 @@ test("D: two families are isolated; students, parents and anonymous visitors are
   expect(error).toBeNull();
   await parentSignIn(page, bEmail, STRONG_PASSWORD);
   await expect(page).toHaveURL(/\/parent/, { timeout: 30_000 });
-  await page.goto("/parent/children");
+  await page.goto("/parent/setup");
   const childB = `Ben ${Date.now().toString(36).slice(-4)}`;
-  await page.getByLabel("Child's name").fill(childB);
-  await page.getByLabel("Year level (optional)").selectOption({ label: "Year 5" });
+  await page.getByLabel("First name").fill(childB);
+  await page.getByLabel("Year level").selectOption({ label: "Year 5" });
   const created = page.waitForResponse((r) => r.url().endsWith("/api/parent/children") && r.request().method() === "POST");
-  await page.getByRole("button", { name: "Create login" }).click();
+  await page.getByRole("button", { name: /^Create .*profile$/ }).click();
   const B = (await (await created).json()) as { loginCode: string; pin: string; childId?: string };
   expect(B.loginCode).toBeTruthy();
 

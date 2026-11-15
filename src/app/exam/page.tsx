@@ -476,7 +476,7 @@ export default function ExamPage() {
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </h2>
                 <p className="mt-1 text-sm font-semibold text-plum-muted">
-                  Grade {currentQuestion.yearLevel} ·{" "}
+                  Year {currentQuestion.yearLevel} ·{" "}
                   <span className="capitalize">
                     {currentQuestion.metadata.subject.replace("_", " ")}
                   </span>{" "}

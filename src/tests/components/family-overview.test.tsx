@@ -159,9 +159,14 @@ describe("FamilyOverview", () => {
     expect(screen.getByText("NAPLAN-style Numeracy")).toBeInTheDocument();
     expect(screen.getByText(/14 of 20 marks/i)).toBeInTheDocument();
 
-    // MarksMeter subject marks
-    expect(screen.getByText("28 of 40 marks")).toBeInTheDocument();
-    expect(screen.getByText("18 of 30 marks")).toBeInTheDocument();
+    /* Artboard 06: the card carries the latest paper and two evidence-backed claims, never a percentage. */
+    expect(screen.getByText("Going well")).toBeInTheDocument();
+    expect(screen.getByText("Numeracy")).toBeInTheDocument();
+    expect(screen.getByText(/3 papers · 40 marks counted/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "View progress" })).toHaveAttribute(
+      "href",
+      `/parent/children/${sampleChildren[0].childId}/progress`,
+    );
 
     // Honesty rule: No performance band label rendered
     expect(screen.queryByText("Strong")).not.toBeInTheDocument();
@@ -223,12 +228,16 @@ describe("FamilyOverview", () => {
 
     render(<FamilyOverview summaries={[asymmetricChild]} />);
 
-    // Top subject (Numeracy) has 9 papers, 50 marks -> Claim unlocked
-    expect(screen.getByText("Going well: Numeracy")).toBeInTheDocument();
+    // Top subject (Numeracy) has 9 papers, 50 marks -> claim shown with its evidence
+    expect(screen.getByText("Numeracy")).toBeInTheDocument();
+    expect(screen.getByText(/9 papers · 50 marks counted/)).toBeInTheDocument();
 
-    // Lowest subject (Reading) has only 1 paper -> Suppressed with below-floor notice
+    // Lowest subject (Reading) has only 1 paper -> withheld; the real-counts sentence instead
     expect(screen.getByText("To practise")).toBeInTheDocument();
-    expect(screen.queryByText("To practise: Reading")).not.toBeInTheDocument();
+    expect(screen.queryByText("Reading")).not.toBeInTheDocument();
+    expect(
+      screen.getByText("Not enough yet to say anything about a single subject. It needs 2 finished papers and 8 marks."),
+    ).toBeInTheDocument();
   });
 
   it("renders first visit state (b6) when no papers have been finished", () => {
@@ -304,7 +313,7 @@ describe("FamilyOverview", () => {
     // Must show honest unreadable block
     expect(screen.getByText("We couldn't read Dev's activity.")).toBeInTheDocument();
     expect(
-      screen.getByText("2 records were excluded from these totals because the stored format could not be verified."),
+      screen.getByText("2 records were excluded because the stored format could not be verified."),
     ).toBeInTheDocument();
 
     // Side rail must NOT be "Three things worth knowing" (which is reserved for genuine first visits)
@@ -320,14 +329,12 @@ describe("FamilyOverview", () => {
     ];
 
     render(<FamilyOverview summaries={partiallyFailingChildren} />);
-    expect(
-      screen.getByRole("heading", { name: "Some of this week's activity couldn't be read" }),
-    ).toBeInTheDocument();
-
+    const callout = screen
+      .getAllByRole("status")
+      .find((el) => /couldn.t be read/.test(el.textContent ?? ""));
+    expect(callout).toBeDefined();
     // Neutral wording matching source count noun
-    expect(
-      screen.getByText("2 records were excluded from these totals."),
-    ).toBeInTheDocument();
+    expect(callout).toHaveTextContent("2 records were excluded from these totals.");
 
     // Confirms "Your child's raw answers are safe" is NOT rendered
     expect(screen.queryByText(/raw answers are safe/i)).not.toBeInTheDocument();
@@ -364,21 +371,13 @@ describe("FamilyOverview", () => {
     expect(textContent).not.toMatch(/performanceBand/i);
     expect(textContent).not.toMatch(/\b(Strong|Developing|Focus)\b(?!\s*learning)/);
 
-    // No % glyphs in subject marks
-    const subjectSections = screen.getAllByText("Subject marks");
-    expect(subjectSections.length).toBeGreaterThan(0);
-    subjectSections.forEach((section) => {
-      expect(section.closest("div")?.textContent).not.toContain("%");
-    });
+    // No percentage anywhere on the overview: marks are "N of M marks" and evidence counts only
+    expect(textContent).not.toContain("%");
   });
 
-  it("renders the seven-day activity display with day labels and status", () => {
+  it("states days practised this week in words on the card (the seven-day strip is not in the design)", () => {
     render(<FamilyOverview summaries={sampleChildren} />);
-    expect(
-      screen.getByRole("group", { name: /Aisha's practice activity this week: 3 of 7 days/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("group", { name: /Kiran's practice activity this week: 1 of 7 days/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByText("3 days practised this week")).toBeInTheDocument();
+    expect(screen.getByText("1 day practised this week")).toBeInTheDocument();
   });
 });

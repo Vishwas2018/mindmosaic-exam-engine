@@ -14,7 +14,7 @@ const STUDENT_PAGES = [
   // portal rewrite's own StudentPortalShell page, not StudentShell's old
   // "Do you want to study today?" copy — the real h1 is the
   // DashboardWelcomeBanner greeting.
-  { path: "/student", heading: /Welcome back/i },
+  { path: "/student", heading: /^Welcome/i },
   { path: "/student/learn", heading: /^Learning Hub$/i },
   { path: "/student/assignments", heading: null },
   { path: "/student/engagement", heading: null },
@@ -75,7 +75,7 @@ test.describe("student dashboard: accessibility and responsive layout", () => {
     // old StudentShell dashboard.
     // .first(): see student-portal-content.spec.ts's note on this exact
     // check — observed intermittently rendering twice on first navigation.
-    await expect(page.getByText("Recent activity").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Recent results" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 

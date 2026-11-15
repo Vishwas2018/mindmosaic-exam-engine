@@ -154,7 +154,7 @@ test.describe("Scholarship sample: allowlisted student journey", () => {
 
     // Attempt history on the student dashboard.
     await page.goto("/student");
-    await expect(page.getByText(/No completed sessions yet\.|Nothing finished yet/)).toHaveCount(0);
+    await expect(page.getByText(/No results yet/)).toHaveCount(0);
   });
 
   test("a second sitting scores a partial paper correctly (server-authoritative)", async ({ page }, testInfo) => {

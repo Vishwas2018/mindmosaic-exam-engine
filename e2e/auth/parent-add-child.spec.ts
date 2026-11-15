@@ -35,21 +35,20 @@ test.describe("parent add-child journey", () => {
     let createdChildEmail: string | null = null;
 
     try {
+      /* A parent with no child lands on setup (Claude Design parent artboard 01). */
       await page.goto("/parent");
-      await expect(
-        page.getByRole("heading", { level: 1, name: "Family Overview" }),
-      ).toBeVisible();
-      await expect(page.getByText("No children added to your account yet.")).toBeVisible();
+      await expect(page).toHaveURL(/\/parent\/setup$/);
+      await expect(page.getByRole("heading", { level: 1, name: /^Welcome/ })).toBeVisible();
 
       const childName = `E2E Add Child ${Date.now()}`;
-      await page.getByLabel("Child's name").fill(childName);
-      await page.getByLabel("Year level (optional)").selectOption("5");
+      await page.getByLabel("First name").fill(childName);
+      await page.getByLabel("Year level").selectOption("5");
 
       const createResponse = page.waitForResponse(
         (response) =>
           response.url().endsWith("/api/parent/children") && response.request().method() === "POST",
       );
-      await page.getByRole("button", { name: "Create login" }).click();
+      await page.getByRole("button", { name: `Create ${childName}’s profile` }).click();
       const response = await createResponse;
       expect(response.ok()).toBe(true);
       const body = (await response.json()) as { ok: boolean; loginCode?: string; pin?: string };
@@ -58,57 +57,24 @@ test.describe("parent add-child journey", () => {
       expect(body.pin).toMatch(/^\d{6}$/);
       createdChildEmail = aliasEmailForDisplayedCode(body.loginCode!);
 
-      /* Code+PIN reveal panel: shown once, never persisted client-side. */
-      const revealPanel = page.getByRole("status");
-      await expect(revealPanel).toContainText(
-        "Account created. These are shown once — save them now and give them to your child.",
-      );
-      await expect(revealPanel.getByText("Login code")).toBeVisible();
-      await expect(revealPanel.getByText(body.loginCode!)).toBeVisible();
-      await expect(revealPanel.getByText("PIN")).toBeVisible();
-      await expect(revealPanel.getByText(body.pin!)).toBeVisible();
+      /* "{name} is ready" (artboard 02): the code and the PIN, shown once. */
+      await expect(page.getByRole("status")).toContainText(`${childName}’s profile is created.`);
+      await expect(page.getByText(body.loginCode!)).toBeVisible();
+      await expect(page.getByText(body.pin!)).toBeVisible();
+      await expect(page.getByRole("button", { name: "Print a sign-in card" })).toBeVisible();
 
-      /* Copy button copies the formatted code+PIN and reports success. */
-      const copyButton = page.getByRole("button", { name: "Copy" });
-      await copyButton.click();
-      await expect(page.getByRole("button", { name: "Copied" })).toBeVisible();
-      const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
-      /* Chromium's clipboard round-trip in this automated context pads a
-         couple of lines with trailing whitespace; trim per line rather than
-         asserting exact bytes, since the correctness that matters here is
-         the code+PIN content, not incidental trailing spaces. */
-      const normalized = clipboardText
-        .split("\n")
-        .map((line) => line.trimEnd())
-        .join("\n");
-      expect(normalized).toBe(
-        `MindMosaic login\nLogin code: ${body.loginCode}\nPIN: ${body.pin}`,
-      );
-
-      /* "Done" calls router.refresh(); the new child now renders. */
-      await page.getByRole("button", { name: "Done — show on dashboard" }).click();
-      await expect(
-        page.getByRole("heading", { level: 1, name: "Family Overview" }),
-      ).toBeVisible();
-      await expect(
-        page.getByRole("heading", { level: 2, name: childName }),
-      ).toBeVisible();
+      /* "Go to Family Overview": the new child is there, from real persisted data. */
+      await page.getByRole("link", { name: "Go to Family Overview" }).click();
+      await expect(page.getByRole("heading", { level: 1, name: "Family Overview" })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 2, name: childName })).toBeVisible();
       await expect(page.getByText(/Year 5 · ready to start/)).toBeVisible();
-      await expect(page.getByText("No children added to your account yet.")).toHaveCount(0);
 
-      /* A hard refresh re-fetches server-side (the page is force-dynamic)
-         and still shows the child — this is real, persisted data. */
       await page.reload();
-      await expect(
-        page.getByRole("heading", { level: 1, name: "Family Overview" }),
-      ).toBeVisible();
-      await expect(
-        page.getByRole("heading", { level: 2, name: childName }),
-      ).toBeVisible();
-      await expect(page.getByText(/Year 5 · ready to start/)).toBeVisible();
+      await expect(page.getByRole("heading", { level: 2, name: childName })).toBeVisible();
 
-      /* The "Add a child" card is always still reachable for a second child. */
-      await expect(page.getByRole("heading", { name: "Add a child" })).toBeVisible();
+      /* Adding another child stays one click away, from Children. */
+      await page.goto("/parent/children");
+      await expect(page.getByRole("link", { name: "Add a child" })).toHaveAttribute("href", "/parent/setup");
     } finally {
       if (createdChildEmail) {
         const { data } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });

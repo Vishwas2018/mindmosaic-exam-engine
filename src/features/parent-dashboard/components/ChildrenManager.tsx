@@ -257,11 +257,11 @@ export function ChildrenManager({
               </Link>
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-[#d9efec] px-2.5 py-1 text-[13px] font-semibold text-[#0b6b63]">Can sign in</span>
-                <Link href={`/parent/children/${child.id}`} className={pButtonSecondary}>
-                  Manage<span className="sr-only"> {child.displayName}</span>
+                <Link href={`/parent/children/${child.id}`} aria-label={`Manage ${child.displayName}`} className={pButtonSecondary}>
+                  Manage
                 </Link>
-                <Link href={`/parent/children/${child.id}/progress`} className={pButtonQuiet}>
-                  Progress<span className="sr-only"> for {child.displayName}</span>
+                <Link href={`/parent/children/${child.id}/progress`} aria-label={`Progress for ${child.displayName}`} className={pButtonQuiet}>
+                  Progress
                 </Link>
               </div>
             </li>
@@ -300,8 +300,8 @@ export function ChildrenManager({
                   </span>
                 </span>
                 <span className="flex flex-wrap gap-2">
-                  <button type="button" className={pButtonQuiet} onClick={() => openRename(child)}>
-                    Edit<span className="sr-only"> {child.displayName}</span>
+                  <button type="button" aria-label={`Edit ${child.displayName}`} className={pButtonQuiet} onClick={() => openRename(child)}>
+                    Edit
                   </button>
                   <button
                     type="button"
@@ -395,7 +395,7 @@ export function ChildrenManager({
               <option value="">No year level</option>
               {yearOptions.map((year) => (
                 <option key={year} value={year}>
-                  Grade {year}
+                  Year {year}
                 </option>
               ))}
             </Select>

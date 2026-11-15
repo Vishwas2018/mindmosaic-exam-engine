@@ -712,7 +712,7 @@ export default function ResultsPage() {
                           )}
                         </div>
                         <span className="text-xs font-semibold text-plum-muted">
-                          Grade {question.yearLevel} ·{" "}
+                          Year {question.yearLevel} ·{" "}
                           <span className="capitalize">
                             {question.metadata.subject.replace("_", " ")}
                           </span>{" "}

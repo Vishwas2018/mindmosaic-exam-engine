@@ -27,14 +27,14 @@ test.describe("role access", () => {
     const noAttempts = await (await contextAs("student-no-attempts")).newPage();
     await noAttempts.goto("/student");
     await expect(noAttempts).toHaveTitle(/My Learning — Dashboard/);
-    await expect(noAttempts.getByText(/No completed sessions yet\.|Nothing finished yet/).first()).toBeVisible();
+    await expect(noAttempts.getByText(/No results yet/).first()).toBeVisible();
 
     const completed = await (await contextAs("student-completed-attempt")).newPage();
     await completed.goto("/student");
     await expect(completed).toHaveTitle(/My Learning — Dashboard/);
     // .first(): see student-portal-content.spec.ts's note on this exact
     // check — observed intermittently rendering twice on first navigation.
-    await expect(completed.getByText("Recent activity").first()).toBeVisible();
+    await expect(completed.getByRole("heading", { name: "Recent results" })).toBeVisible();
   });
 
   test("teacher fixture reaches the teacher dashboard", async ({ contextAs }) => {

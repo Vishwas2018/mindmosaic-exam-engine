@@ -90,15 +90,15 @@ describe("PracticeStudioHero", () => {
   it("renders first-visit welcome message for students without past attempts", () => {
     render(<PracticeStudioHero yearLevel={5} isFirstVisit={true} />);
     expect(screen.getByRole("heading", { name: "Practice Studio" })).toBeInTheDocument();
-    expect(screen.getByText(/Choose a topic below to start your first set/)).toBeInTheDocument();
-    expect(screen.getByText("Year 5 practice")).toBeInTheDocument();
+    expect(screen.getByText(/Choose what to practise..*Your Year 5 options are below./)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "My Space" })).toHaveAttribute("href", "/student");
     // Does not render fake chips
     expect(screen.queryByText(/Adaptive pacing active/i)).toBeNull();
   });
 
   it("renders returning student subtitle when student has previous attempts", () => {
     render(<PracticeStudioHero yearLevel={5} isFirstVisit={false} />);
-    expect(screen.getByText(/answers are not saved as you go/)).toBeInTheDocument();
+    expect(screen.getByText(/you can stop any time.$/)).toBeInTheDocument();
   });
 });
 

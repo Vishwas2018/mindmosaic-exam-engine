@@ -40,7 +40,7 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
       await visitAndStabilize(page, "/parent", { readyLocator: "main" });
       await expect(page.getByRole("heading", { level: 1, name: "Family Overview" })).toBeVisible();
       // Single child: ChildSwitcher only renders when there are 2 or more children.
-      await expect(page.locator('[aria-label="Filter by child"]')).toHaveCount(0);
+      await expect(page.locator('[aria-label="Choose a child"]')).toHaveCount(0);
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(page, "main button, main a[href], main input, main select");
       await assertNoSeriousAccessibilityViolations(page, `parent dashboard, one child (${viewport.name})`);
@@ -56,40 +56,40 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      const switcher = page.locator('[aria-label="Filter by child"]');
+      const switcher = page.locator('[aria-label="Choose a child"]');
       await expect(switcher).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(
         page,
-        'main [aria-label="Filter by child"] button, main button, main a[href], main input, main select',
+        'main [aria-label="Choose a child"] button, main button, main a[href], main input, main select',
       );
       await assertNoSeriousAccessibilityViolations(page, `parent dashboard, multi child (${viewport.name})`);
     }
 
     // Switching the active child must not introduce new violations.
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    const secondChildButton = page.locator('[aria-label="Filter by child"] button').nth(1);
+    const secondChildButton = page.locator('[aria-label="Choose a child"] button').nth(1);
     await secondChildButton.click();
     await expect(secondChildButton).toHaveAttribute("aria-pressed", "true");
     await expectNoHorizontalOverflow(page);
     await assertNoSeriousAccessibilityViolations(page, "parent dashboard, after switching child");
   });
 
-  test("keyboard walkthrough reaches the child switcher and add-child form in order, with visible focus", async ({
+  test("keyboard walkthrough reaches the child switcher and then each child card, with visible focus", async ({
     contextAs,
   }) => {
     const context = await contextAs("parent-multi-children");
     const page = await context.newPage();
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-    await expect(page.locator('[aria-label="Filter by child"]')).toBeVisible();
+    await expect(page.locator('[aria-label="Choose a child"]')).toBeVisible();
 
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
     const firstSwitcherIndex = sequence.findIndex((key) => key.includes("BUTTON"));
-    const nameFieldIndex = sequence.indexOf("add-child-name");
+    const firstCardActionIndex = sequence.findIndex((key) => /^A:(View progress|Help .* get started)/.test(key));
 
     expect(firstSwitcherIndex).toBeGreaterThanOrEqual(0);
-    expect(nameFieldIndex).toBeGreaterThan(firstSwitcherIndex);
+    expect(firstCardActionIndex).toBeGreaterThan(firstSwitcherIndex);
   });
 
   test("add-child form is accessible at every viewport", async ({ contextAs }) => {
@@ -98,9 +98,9 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
 
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
-      await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      await expect(page.getByRole("heading", { name: "Add a child" })).toBeVisible();
-      await expect(page.getByLabel("Child's name")).toBeVisible();
+      await visitAndStabilize(page, "/parent/setup", { readyLocator: "main" });
+      await expect(page.getByRole("heading", { name: "Add a child" }).first()).toBeVisible();
+      await expect(page.getByLabel("First name")).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(page, "main button, main a[href], main input, main select");
     }

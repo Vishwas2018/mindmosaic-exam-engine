@@ -93,7 +93,7 @@ test("B1–B2: wrong code and wrong PIN get one generic message; correct ones re
   await studentSignIn(page, fam.loginCode, fam.pin);
   await expect(page).toHaveURL(/\/student$/, { timeout: 30_000 });
   await dismissWelcome(page);
-  await expect(page.getByRole("heading", { level: 1, name: new RegExp(`Welcome back, ${fam.childName.split(" ")[0]}`) })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: new RegExp(`^Welcome(?: back)?, ${fam.childName.split(" ")[0]}`) })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("b2-my-space.png"), fullPage: true });
 
   // Unauthorised routes for a student

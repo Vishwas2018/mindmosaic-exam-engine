@@ -40,7 +40,7 @@ test.describe("student portal: real data, not placeholders", () => {
     // double-mount (RecentActivityCard is only ever referenced once in
     // src/app/student/page.tsx). Worth a follow-up if it recurs; .first()
     // still verifies the heading is genuinely present either way.
-    await expect(page.getByText("Recent activity").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Recent results" })).toBeVisible();
     // RecentActivityCard renders the attempt title as an <h3> — the only
     // one on this page, so this is unambiguous.
     await expect(page.getByRole("heading", { level: 3, name: REAL_ATTEMPT_TITLE })).toBeVisible();

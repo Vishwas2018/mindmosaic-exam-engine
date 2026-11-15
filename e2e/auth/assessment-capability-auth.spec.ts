@@ -81,7 +81,7 @@ test.describe("Authenticated Student Assessment Capability Journey", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
 
     await expect(page).toHaveURL(/\/student$/, { timeout: 15000 });
-    await expect(page.getByRole("heading", { name: /Hi|Welcome back/i })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("heading", { level: 1, name: /^Welcome/i })).toBeVisible({ timeout: 15000 });
 
     await page.screenshot({
       path: path.join(SCREENSHOT_DIR, "auth-01-student-dashboard.png"),

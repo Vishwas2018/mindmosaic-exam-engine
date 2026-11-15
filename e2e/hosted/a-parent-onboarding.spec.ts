@@ -104,17 +104,18 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
 
   // A4 add a child
   const childName = `Ava ${testInfo.workerIndex}${Date.now().toString(36).slice(-4)}`;
-  await page.goto("/parent/children");
+  await page.goto("/parent/setup");
   await shot("a4-children-before");
   // A5: the parent sets the PIN themselves (the optional field), rather than taking a generated one
   const chosenPin = "482917";
-  await page.getByLabel("Child's name").fill(childName);
-  await page.getByLabel("Year level (optional)").selectOption({ label: "Year 3" });
-  await page.getByLabel("PIN (optional)").fill(chosenPin);
+  await page.getByLabel("First name").fill(childName);
+  await page.getByLabel("Year level").selectOption({ label: "Year 3" });
+  await page.getByLabel("I’ll choose it").check();
+  await page.getByLabel("PIN", { exact: true }).fill(chosenPin);
   const created = page.waitForResponse(
     (r) => r.url().endsWith("/api/parent/children") && r.request().method() === "POST",
   );
-  await page.getByRole("button", { name: "Create login" }).click();
+  await page.getByRole("button", { name: /^Create .*profile$/ }).click();
   const res = await created;
   expect(res.ok(), `create child ${res.status()}`).toBe(true);
   const body = (await res.json()) as { ok: boolean; loginCode?: string; pin?: string; childId?: string };

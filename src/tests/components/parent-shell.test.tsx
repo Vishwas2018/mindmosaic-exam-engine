@@ -96,9 +96,11 @@ describe("ParentShell", () => {
     );
   });
 
-  it("offers a labelled way back to the public site in the desktop nav", () => {
+  it("keeps the header to the design: logo home is the parent home, no marketing link or role badge", () => {
     renderShell("/parent");
-    expect(nav("Parent").getByRole("link", { name: /back to site/i })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: "MindMosaic parent home" })).toHaveAttribute("href", "/parent");
+    expect(screen.queryByRole("link", { name: /back to site/i })).not.toBeInTheDocument();
+    expect(screen.queryByText("Parent", { selector: "span" })).not.toBeInTheDocument();
   });
 
   it("makes Help reachable from the header on every screen", () => {
@@ -107,8 +109,9 @@ describe("ParentShell", () => {
     expect(helpLink).toHaveAttribute("href", "/parent/help");
   });
 
-  it("includes the Parent role badge", () => {
-    renderShell("/parent");
-    expect(screen.getByText("Parent")).toBeInTheDocument();
+  it("highlights Help, not Account, on the Help Centre", () => {
+    renderShell("/parent/help");
+    expect(screen.getByRole("link", { name: /help/i })).toHaveAttribute("aria-current", "page");
+    expect(nav("Parent").getByRole("link", { name: /account/i })).not.toHaveAttribute("aria-current");
   });
 });
