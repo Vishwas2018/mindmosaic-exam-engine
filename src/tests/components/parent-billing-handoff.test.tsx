@@ -36,12 +36,7 @@ describe("ParentBillingHandoff Component", () => {
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Plan & billing" })).toBeInTheDocument();
-    expect(screen.getByText("Secure Billing Management:")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /MindMosaic family memberships are securely handled with Stripe\./i
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText("Payments are handled by Stripe.")).toBeInTheDocument();
     expect(screen.getByText("Illustrative sample family")).toBeInTheDocument();
   });
 
