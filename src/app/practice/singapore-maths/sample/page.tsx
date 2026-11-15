@@ -35,11 +35,16 @@ export default async function SingaporeMathsSamplePage({
     if (singaporeMathsSampleAvailability().reason === "local_isolated_backend") {
       allowed = true;
     } else {
-      const supabase = await createClient();
-      const {
-        data: {user},
-      } = await supabase.auth.getUser();
-      allowed = isSingaporeMathsSampleAllowedFor(user?.id);
+      try {
+        const supabase = await createClient();
+        const {
+          data: {user},
+        } = await supabase.auth.getUser();
+        allowed = isSingaporeMathsSampleAllowedFor(user?.id);
+      } catch {
+        /* An unreachable or unconfigured auth backend is an unknown account: fail closed to Coming Soon. */
+        allowed = false;
+      }
     }
   }
 
