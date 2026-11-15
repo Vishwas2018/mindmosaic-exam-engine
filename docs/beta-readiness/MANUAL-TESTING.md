@@ -4,6 +4,8 @@
 build. It is protected by Vercel SSO: open it in a browser signed in to the Vercel account that owns the project.
 External families need a Vercel shareable link instead (see "Inviting a family" below).
 
+Design references and screen-by-screen status: DESIGN-VERIFICATION.md.
+
 Backend: DEV Supabase `mfglzabnayacssgertat` only. PROD is never touched.
 
 ## Accounts
