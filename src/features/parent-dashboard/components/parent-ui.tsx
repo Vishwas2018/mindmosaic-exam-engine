@@ -184,7 +184,7 @@ export function ChildPills({
     <div
       role="group"
       aria-label="Choose a child"
-      className="flex max-w-full gap-2 overflow-x-auto rounded-full border border-mm-line bg-white p-1.5 [scrollbar-width:none] sm:w-fit"
+      className="flex w-full min-w-0 max-w-full gap-2 overflow-x-auto rounded-full border border-mm-line bg-white p-1.5 [scrollbar-width:none] sm:w-fit"
     >
       {entries.map((e) => {
         const active = e.id === selectedId;

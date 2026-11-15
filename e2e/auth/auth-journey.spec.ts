@@ -103,7 +103,9 @@ test.describe("Parent sign-in and sign-out", () => {
     await page.getByRole("button", { name: /^sign in$/i }).click();
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
 
-    await page.getByRole("button", { name: /sign out/i }).click();
+    /* Sign-out lives in the account menu behind the parent's initial (Claude Design parent header). */
+    await page.getByRole("button", { name: /account menu/i }).click();
+    await page.getByRole("menuitem", { name: "Sign out" }).click();
     await expect(page.getByRole("heading", { name: /signed out/i })).toBeVisible({
       timeout: 10000,
     });

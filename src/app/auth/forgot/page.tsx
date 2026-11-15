@@ -84,7 +84,7 @@ export default function ForgotPasswordPage() {
           <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
             <MmField
               id="forgot-email"
-              label="Email address"
+              label="Email"
               type="email"
               autoComplete="email"
               value={email}

@@ -216,7 +216,8 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   // C9–C11 sign out, sign back in, the result is in history
   await page.goto("/student");
   await dismissWelcome(page);
-  await page.getByRole("button", { name: /sign out/i }).first().click();
+  await page.getByRole("button", { name: /account menu/i }).first().click();
+  await page.getByRole("menuitem", { name: "Sign out" }).click();
   await expect(page).not.toHaveURL(/\/student/, { timeout: 20_000 });
   await studentSignIn(page, fam.loginCode, fam.pin);
   await expect(page).toHaveURL(/\/student$/, { timeout: 30_000 });

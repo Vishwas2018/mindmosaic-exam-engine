@@ -132,7 +132,7 @@ export function MySpaceView({
               <ul className="mt-4 divide-y divide-mm-line">
                 {attempts.slice(0, 3).map((a) => (
                   <li key={a.id} className="py-3 first:pt-0">
-                    <p className="text-[15px] font-semibold text-mm-ink">{a.title}</p>
+                    <h3 className="text-[15px] font-semibold text-mm-ink">{a.title}</h3>
                     <p className="text-sm text-mm-ink-soft">
                       {a.scorePercent !== null ? `${a.scorePercent}% of the marks that could be marked` : "No marks to show yet"}
                       {a.pendingManualReview ? " · some answers not yet marked" : ""} · {formatSubmittedAt(a.submittedAt)}

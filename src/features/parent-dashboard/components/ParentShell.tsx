@@ -100,7 +100,7 @@ export function ParentShell({ active, children }: ParentShellProps) {
       </header>
 
       {/* pb-28 below lg keeps the last card clear of the bottom navigation. */}
-      <main id="main-content" className="mx-auto max-w-[1200px] px-4 pt-6 pb-28 sm:px-8 sm:pt-8 lg:pb-16">
+      <main id="main-content" className="mx-auto min-w-0 max-w-[1200px] px-4 pt-6 pb-28 sm:px-8 sm:pt-8 lg:pb-16">
         {children}
       </main>
 

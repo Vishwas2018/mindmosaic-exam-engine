@@ -10,7 +10,7 @@ import {
 } from "../helpers/screen-helpers";
 
 test.describe("parent dashboard: accessibility and responsive layout", () => {
-  test("empty state (parent with no children) has no violations at every viewport", async ({
+  test("a parent with no children lands on setup, which has no violations at every viewport", async ({
     contextAs,
   }) => {
     const context = await contextAs("parent-no-children");
@@ -19,12 +19,9 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      await expect(
-        page.getByRole("heading", { level: 1, name: "Family Overview" }),
-      ).toBeVisible();
-      await expect(
-        page.getByText("No children added to your account yet."),
-      ).toBeVisible();
+      await expect(page).toHaveURL(/\/parent\/setup$/);
+      await expect(page.getByRole("heading", { level: 1, name: /^Welcome/ })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Add your first child" })).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(page, "main button, main a[href], main input, main select");
       await assertNoSeriousAccessibilityViolations(page, `parent dashboard, no children (${viewport.name})`);
@@ -86,10 +83,10 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
 
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
     const firstSwitcherIndex = sequence.findIndex((key) => key.includes("BUTTON"));
-    const firstCardActionIndex = sequence.findIndex((key) => /^A:(View progress|Help .* get started)/.test(key));
+    const firstCardActionIndex = sequence.findIndex((key) => /View progress|get started|Sign-in details/.test(key));
 
     expect(firstSwitcherIndex).toBeGreaterThanOrEqual(0);
-    expect(firstCardActionIndex).toBeGreaterThan(firstSwitcherIndex);
+    expect(firstCardActionIndex, sequence.join(" > ")).toBeGreaterThan(firstSwitcherIndex);
   });
 
   test("add-child form is accessible at every viewport", async ({ contextAs }) => {

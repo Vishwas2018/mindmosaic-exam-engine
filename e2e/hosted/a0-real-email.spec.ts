@@ -169,7 +169,7 @@ async function journey(page: Page, testInfo: TestInfo, label: string) {
   // Password recovery, delivered
   await signOut(page);
   await page.goto("/sign-in?mode=forgot");
-  await page.getByLabel("Email address").fill(inbox.address);
+  await page.getByLabel("Email", { exact: true }).fill(inbox.address);
   await page.getByRole("button", { name: "Send reset link" }).click();
   await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
   const t1 = Date.now();

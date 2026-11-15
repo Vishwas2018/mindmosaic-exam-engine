@@ -80,7 +80,7 @@ export function FamilyOverview({ summaries, forcedState, isOffline }: FamilyOver
         : `${displayed.length === 1 ? names : summaries.length === 2 ? "Both children" : "Your children"}, what they have done this week, and what the marks actually support.`;
 
   return (
-    <div className="grid gap-5">
+    <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-5">
       <PageHeader title="Family Overview" lead={lead} />
 
       {summaries.length > 1 && (
@@ -114,7 +114,7 @@ export function FamilyOverview({ summaries, forcedState, isOffline }: FamilyOver
         </InfoNote>
       )}
 
-      <div className="mt-1 grid items-start gap-5 md:grid-cols-2">
+      <div className="mt-1 grid grid-cols-[minmax(0,1fr)] items-start gap-5 md:grid-cols-[repeat(2,minmax(0,1fr))]">
         {displayed.map((child) => (
           <ChildCard key={child.childId} child={child} index={summaries.findIndex((s) => s.childId === child.childId)} />
         ))}
@@ -180,7 +180,7 @@ function ChildCard({ child, index }: { child: ChildSummary; index: number }) {
   return (
     <Card aria-labelledby={`child-${child.childId}`}>
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-3 rounded-2xl border border-mm-line bg-white px-[18px] py-4">
+        <div className="flex min-w-0 max-w-full items-center gap-3 rounded-2xl border border-mm-line bg-white px-[18px] py-4">
           <ChildInitial name={name} index={index} />
           <div className="min-w-0">
             <h2 id={`child-${child.childId}`} className="truncate text-[19px] font-semibold leading-[1.4] tracking-[-0.01em] text-mm-ink">

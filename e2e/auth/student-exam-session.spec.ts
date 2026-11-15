@@ -35,7 +35,7 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
 
   try {
     await page.goto("/student-sign-in");
-    await expect(page.getByRole("heading", { name: "Sign in" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Student sign-in" })).toBeVisible();
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
     // Wait for one settled form: during hydration the streamed panel can briefly appear twice.
     await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);

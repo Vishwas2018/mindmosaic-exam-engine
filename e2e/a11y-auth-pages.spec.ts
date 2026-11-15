@@ -13,12 +13,12 @@ import {
 
 const PAGES = [
   { path: "/sign-in", heading: "Welcome to MindMosaic" },
-  { path: "/sign-in?entry=signin", heading: "Sign in" },
+  { path: "/sign-in?entry=signin", heading: "Parent sign-in" },
   {
     path: "/sign-up",
-    heading: PUBLIC_SIGNUP_ENABLED ? "Create the parent account" : "Sign-up is closed",
+    heading: PUBLIC_SIGNUP_ENABLED ? "Create a family account" : "Sign-up is closed",
   },
-  { path: "/student-sign-in", heading: "Sign in" },
+  { path: "/student-sign-in", heading: "Student sign-in" },
 ] as const;
 
 test.describe("auth pages: accessibility and responsive layout", () => {

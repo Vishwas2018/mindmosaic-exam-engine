@@ -445,7 +445,7 @@ export function SignInPanel({
         <form key={shake.key} onSubmit={handleForgot} className={twMerge("grid gap-4", shake.className)}>
           <MmField
             id="reset-email"
-            label="Email address"
+            label="Email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"

@@ -90,7 +90,9 @@ test.describe("student portal: real data, not placeholders", () => {
     );
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
-    await expect(page.getByTitle("No notifications")).toHaveAttribute("aria-disabled", "true");
+    /* The design top bar has no placeholder controls at all: no inert bell, no "coming soon" goal editor. */
+    await expect(page.getByTitle("No notifications")).toHaveCount(0);
+    await expect(page.getByText(/Term \d · Week \d|Edit interests/)).toHaveCount(0);
   });
 
   test("Practice Studio's five-step selector configures and links to real practice sessions", async ({

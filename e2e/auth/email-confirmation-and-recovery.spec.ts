@@ -49,7 +49,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     // Should verify and redirect to /parent
     await expect(page.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
-    await expect(page).toHaveTitle(/Parent dashboard|Family Overview/);
+    await expect(page).toHaveTitle(/Family Overview|Welcome \| MindMosaic Parents/);
 
     // The session this link created is a signup session, not a recovery session: the reset form stays closed.
     await page.goto("/auth/reset");
@@ -88,7 +88,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
       // token_hash template: device-independent confirmation succeeds and redirects to /parent
       await expect(pageB.getByText(/email confirmed/i)).toBeVisible({ timeout: 10000 });
       await expect(pageB).toHaveURL(/\/parent/, { timeout: 15000 });
-      await expect(pageB).toHaveTitle(/Parent dashboard|Family Overview/);
+      await expect(pageB).toHaveTitle(/Family Overview|Welcome \| MindMosaic Parents/);
     } else {
       // Default PKCE template: the link is bound to context A. B must be told so, focused and offered a resend,
       // and must not end up signed in.
@@ -119,7 +119,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await expect(page.getByText(/opened on a different device or browser/i)).toBeVisible();
 
     // Resend form is prefilled with email
-    const emailInput = page.getByLabel(/^email$/i);
+    const emailInput = page.getByLabel(/^email address$/i);
     await expect(emailInput).toHaveValue(email);
 
     // First ensure the user exists so resend can trigger
@@ -165,7 +165,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // 1. Visit forgot password screen and request reset
     await page.goto("/sign-in?mode=forgot");
-    await page.getByLabel("Email address").fill(email);
+    await page.getByLabel("Email", { exact: true }).fill(email);
     await page.getByRole("button", { name: "Send reset link" }).click();
     await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
 
@@ -202,7 +202,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // Successfully reaches parent dashboard
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
-    await expect(page).toHaveTitle(/Parent dashboard|Family Overview/);
+    await expect(page).toHaveTitle(/Family Overview|Welcome \| MindMosaic Parents/);
 
     // 6. Navigating back to /auth/reset is now an ordinary session (recovery state was cleaned up)
     await page.goto("/auth/reset");
@@ -296,7 +296,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const requester = await browser.newContext();
     const requesterPage = await requester.newPage();
     await requesterPage.goto("/sign-in?mode=forgot");
-    await requesterPage.getByLabel("Email address").fill(email);
+    await requesterPage.getByLabel("Email", { exact: true }).fill(email);
     await requesterPage.getByRole("button", { name: "Send reset link" }).click();
     await expect(requesterPage.getByText(/reset link is on its way/i)).toBeVisible();
     const resetEmail = await getLatestEmail(email);
@@ -336,7 +336,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const laptop = await browser.newContext();
     const laptopPage = await laptop.newPage();
     await laptopPage.goto("/sign-in?mode=forgot");
-    await laptopPage.getByLabel("Email address").fill(email);
+    await laptopPage.getByLabel("Email", { exact: true }).fill(email);
     await laptopPage.getByRole("button", { name: "Send reset link" }).click();
     await expect(laptopPage.getByText(/reset link is on its way/i)).toBeVisible();
     const resetEmail = await getLatestEmail(email);

@@ -15,7 +15,7 @@ export function PracticeStudioHero({
   return (
     <section aria-labelledby="practice-studio-title">
       <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[13px] text-mm-muted">
-        <Link href="/student" className="inline-flex min-h-8 items-center hover:text-mm-brand hover:underline">
+        <Link href="/student" className="inline-flex min-h-11 items-center hover:text-mm-brand hover:underline">
           My Space
         </Link>
         <ChevronRight aria-hidden="true" className="h-3.5 w-3.5" />
