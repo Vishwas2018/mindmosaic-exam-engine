@@ -122,12 +122,12 @@ export function JurisdictionPicker() {
               )}
             >
               <span className="flex flex-wrap items-center gap-2">
-                <span className="font-[family-name:var(--font-display)] text-[17px] font-bold text-mm-ink">
+                <span className="font-[family-name:var(--font-display)] text-[17px] font-semibold text-mm-ink">
                   {item.code}
                 </span>
                 <span
                   className={clsx(
-                    "rounded-md px-2 py-1 text-[11px] font-bold uppercase tracking-[0.04em]",
+                    "rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.04em]",
                     item.confirmed
                       ? "bg-mm-tint text-mm-brand"
                       : "bg-mm-alert text-mm-coral-text",
@@ -147,7 +147,7 @@ export function JurisdictionPicker() {
         aria-live="polite"
         className="grid gap-3.5 rounded-2xl border border-mm-line bg-white p-5 xl:sticky xl:top-[96px]"
       >
-        <h3 className="text-[17.5px] font-bold text-mm-ink">{selected.name}</h3>
+        <h3 className="text-[17.5px] font-semibold text-mm-ink">{selected.name}</h3>
         <p className="text-[14.5px] leading-[1.55] text-mm-muted">{selected.detail}</p>
         <dl className="grid gap-2.5 border-t border-mm-line-soft pt-3.5">
           {[
@@ -161,7 +161,7 @@ export function JurisdictionPicker() {
           ].map((row) => (
             <div key={row.label} className="flex justify-between gap-3 text-[14.5px]">
               <dt className="text-mm-muted">{row.label}</dt>
-              <dd className="text-right font-bold text-mm-ink">{row.value}</dd>
+              <dd className="text-right font-semibold text-mm-ink">{row.value}</dd>
             </div>
           ))}
         </dl>

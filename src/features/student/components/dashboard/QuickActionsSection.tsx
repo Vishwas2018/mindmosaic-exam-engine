@@ -59,7 +59,7 @@ export function QuickActionsSection() {
   return (
     <section className="space-y-4">
       <div className="flex items-baseline justify-between">
-        <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink tracking-tight">
+        <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink tracking-tight">
           Quick actions for you
         </h2>
       </div>
@@ -77,7 +77,7 @@ export function QuickActionsSection() {
                 className={`relative mb-3.5 flex h-24 w-full items-center justify-between overflow-hidden rounded-xl border bg-gradient-to-r p-2.5 ${card.gradientClassName}`}
               >
                 <div className="relative z-10 flex flex-col">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">
                     {card.eyebrow}
                   </span>
                   <span className="mt-0.5 text-xs font-semibold text-mm-ink">{card.eyebrowSub}</span>
@@ -89,7 +89,7 @@ export function QuickActionsSection() {
                   <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${card.iconBoxClassName}`}>
                     <Icon aria-hidden="true" className="h-[18px] w-[18px]" />
                   </div>
-                  <span className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+                  <span className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                     {card.title}
                   </span>
                 </div>

@@ -17,12 +17,12 @@ export function StudentDiscoveryHero({
     <section aria-labelledby="welcome-heading" className="flex flex-col gap-4 pb-4">
       {/* 1. Greeting header */}
       <div className="pt-2">
-        <span className="font-vietnam font-bold text-[11px] uppercase tracking-wider text-primary block mb-1">
+        <span className="font-vietnam font-semibold text-[11px] uppercase tracking-wider text-primary block mb-1">
           MY LEARNING
         </span>
         <h1
           id="welcome-heading"
-          className="font-jakarta font-extrabold text-2xl md:text-3xl lg:text-[34px] text-plum-dark tracking-tight"
+          className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-2xl md:text-3xl lg:text-[34px] text-plum-dark tracking-tight"
         >
           Hi, {greetingName}. What would you like to work on today?
         </h1>
@@ -38,7 +38,7 @@ export function StudentDiscoveryHero({
 
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-primary-tint text-primary font-jakarta font-bold text-xs tracking-wider uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-primary-tint text-primary font-jakarta font-semibold text-xs tracking-wider uppercase mb-4">
               <span className="relative flex h-2 w-2" aria-hidden="true">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
@@ -46,7 +46,7 @@ export function StudentDiscoveryHero({
               <span>{recommendation.tag}</span>
             </div>
 
-            <h2 className="font-jakarta font-extrabold text-3xl md:text-4xl text-plum-dark leading-tight tracking-tight">
+            <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-3xl md:text-4xl text-plum-dark leading-tight tracking-tight">
               {recommendation.title}
             </h2>
 
@@ -72,7 +72,7 @@ export function StudentDiscoveryHero({
             <div className="flex flex-wrap items-center gap-3.5 mt-8">
               <Link
                 href={recommendation.href}
-                className="h-12 px-7 rounded-xl bg-coral-accent hover:bg-coral-hover text-white font-jakarta font-bold text-base flex items-center justify-center gap-2 shadow-coral-glow hover:translate-y-[-1px] active:translate-y-[0px] transition-all"
+                className="h-12 px-7 rounded-xl bg-coral-accent hover:bg-coral-hover text-white font-jakarta font-semibold text-base flex items-center justify-center gap-2 shadow-coral-glow hover:translate-y-[-1px] active:translate-y-[0px] transition-all"
               >
                 <span>{recommendation.actionLabel}</span>
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -93,7 +93,7 @@ export function StudentDiscoveryHero({
                 <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block" />
                 Fraction &amp; Decimal Equivalence
               </span>
-              <span className="text-primary font-bold bg-primary-tint px-2 py-0.5 rounded-md border border-primary/20">2/5 = 0.40 = 4/10</span>
+              <span className="text-primary font-semibold bg-primary-tint px-2 py-0.5 rounded-md border border-primary/20">2/5 = 0.40 = 4/10</span>
             </div>
 
             <svg
@@ -177,7 +177,7 @@ export function StudentDiscoveryHero({
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-sm bg-coral-accent inline-block" /> 1 target slice
               </span>
-              <span className="font-bold text-plum-dark">Equivalent: 4/10 = 0.4</span>
+              <span className="font-semibold text-plum-dark">Equivalent: 4/10 = 0.4</span>
             </div>
           </div>
         </div>

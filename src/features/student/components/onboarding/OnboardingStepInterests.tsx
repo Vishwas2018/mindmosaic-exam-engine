@@ -60,7 +60,7 @@ export function OnboardingStepInterests({
           <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
           Step 2 of 3 · Focus Areas
         </div>
-        <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink sm:text-3xl">
+        <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-mm-ink sm:text-3xl">
           What would you like to focus on?
         </h2>
         <p className="text-sm leading-relaxed text-mm-muted">
@@ -82,7 +82,7 @@ export function OnboardingStepInterests({
               className={`flex w-full min-h-14 items-center justify-between rounded-2xl border-2 p-3.5 text-left transition-all ${
                 isSelected
                   ? "border-primary bg-primary/5 text-mm-ink"
-                  : "border-royal/15 bg-white text-mm-ink hover:border-royal/30"
+                  : "border-mm-brand/15 bg-white text-mm-ink hover:border-mm-brand/30"
               }`}
             >
               <div className="flex items-center gap-3.5">
@@ -90,13 +90,13 @@ export function OnboardingStepInterests({
                   className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
                     isSelected
                       ? "bg-primary text-white"
-                      : "bg-royal/5 text-royal"
+                      : "bg-mm-brand/5 text-mm-brand"
                   }`}
                 >
                   <Icon aria-hidden="true" className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-mm-ink">{option.label}</p>
+                  <p className="text-sm font-semibold text-mm-ink">{option.label}</p>
                   <p className="text-xs text-mm-muted">{option.description}</p>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export function OnboardingStepInterests({
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 ${
                   isSelected
                     ? "border-primary bg-primary text-white"
-                    : "border-royal/25 bg-white"
+                    : "border-mm-brand/25 bg-white"
                 }`}
               >
                 {isSelected && <Check aria-hidden="true" className="h-4 w-4 stroke-[3]" />}

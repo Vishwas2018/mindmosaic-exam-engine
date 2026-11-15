@@ -29,7 +29,7 @@ export function PracticeStudioAccuracyCard({ mastery }: { mastery: readonly Subj
           <TrendingUp aria-hidden="true" className="h-5 w-5" />
         </div>
         <div>
-          <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-mm-ink">{average === null ? "—" : `${average}%`}</p>
+          <p className="font-[family-name:var(--font-display)] text-2xl font-semibold text-mm-ink">{average === null ? "—" : `${average}%`}</p>
           <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
             {average === null ? "Not enough finished sets for an average yet" : "Average of your marks across subjects"}
           </p>
@@ -38,7 +38,7 @@ export function PracticeStudioAccuracyCard({ mastery }: { mastery: readonly Subj
       <div className="grid gap-3 sm:grid-cols-3">
         {top.map((subject) => (
           <div key={subject.subject} className="rounded-xl bg-mm-page/60 p-3">
-            <p className="text-sm font-bold text-mm-ink">
+            <p className="text-sm font-semibold text-mm-ink">
               {subject.marksEarned} of {subject.marksAvailable} marks
             </p>
             <p className="text-xs text-mm-muted">{subject.label}</p>

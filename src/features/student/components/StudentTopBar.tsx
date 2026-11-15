@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Bell, ChevronDown, Flag, Menu } from "lucide-react";
+import { HelpCircle, Menu } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
-import { AuthNav } from "@/features/auth";
+import { useAuth } from "@/features/auth/AuthProvider";
 
+import { StudentAccountMenu } from "./StudentAccountMenu";
 import { studentNavItems } from "./StudentSidebar";
 
 /**
@@ -39,10 +40,14 @@ export function StudentTopBar({
   showVihaan?: boolean;
 }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { displayName } = useAuth();
+  const name = displayName?.trim() || "Your account";
 
+  /* Claude Design student artboards: a quiet 64px bar on the page tint — where you are on the left; Help and your
+     initial on the right. Below lg the sidebar folds into the menu button. */
   return (
-    <header className="sticky top-0 z-40 relative flex h-16 items-center justify-between border-b border-mm-line bg-white/90 px-4 backdrop-blur-md sm:px-6 lg:px-8">
-      <div className="flex min-w-0 items-center gap-3">
+    <header className="sticky top-0 z-40 flex h-16 items-center justify-between gap-3 bg-mm-tint-soft/90 px-4 backdrop-blur-md sm:px-8">
+      <div className="flex min-w-0 items-center gap-2">
         <div className="lg:hidden">
           <button
             type="button"
@@ -50,24 +55,24 @@ export function StudentTopBar({
             aria-expanded={mobileNavOpen}
             aria-controls="student-mobile-nav"
             onClick={() => setMobileNavOpen((open) => !open)}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-mm-ink-soft hover:bg-mm-page"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] text-mm-ink-soft hover:bg-white"
           >
             <Menu aria-hidden="true" className="h-5 w-5" />
           </button>
           {mobileNavOpen && (
             <div
               id="student-mobile-nav"
-              className="absolute inset-x-0 top-16 z-40 border-b border-mm-line bg-white p-3 shadow-warm-card"
+              className="absolute inset-x-0 top-16 z-40 border-b border-mm-line bg-white p-3 shadow-[0_24px_60px_rgba(24,21,31,0.12)]"
             >
-              <nav aria-label="Student navigation" className="space-y-1">
+              <nav aria-label="Student navigation" className="grid gap-0.5">
                 {studentNavItems(showVihaan).map((item) => (
                   <Link
                     key={item.key}
                     href={item.href}
                     onClick={() => setMobileNavOpen(false)}
-                    className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-mm-ink-soft hover:bg-mm-page hover:text-primary"
+                    className="flex min-h-11 items-center gap-3 rounded-[10px] px-3 text-[15px] font-medium text-mm-ink-soft hover:bg-mm-tint-soft hover:text-mm-ink"
                   >
-                    <item.icon aria-hidden="true" className="h-4 w-4 shrink-0" />
+                    <item.icon aria-hidden="true" className="h-[19px] w-[19px] shrink-0 text-mm-muted" />
                     {item.label}
                   </Link>
                 ))}
@@ -75,56 +80,31 @@ export function StudentTopBar({
             </div>
           )}
         </div>
-        <Link href="/" aria-label="MindMosaic home" className="flex min-h-11 items-center lg:hidden">
+        <Link href="/student" aria-label="MindMosaic — My Space" className="flex min-h-11 items-center lg:hidden">
           <MindMosaicLogo size="sm" />
         </Link>
-        <div className="hidden min-w-0 items-center gap-1.5 text-xs font-medium text-mm-muted lg:flex">
-          <span className="shrink-0 font-semibold text-mm-ink">Student Portal</span>
-          <ChevronDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 -rotate-90" />
-          <span className="shrink-0 font-semibold text-primary">{breadcrumbLabel}</span>
-          {/*
-            Placeholder term/goal pills to match the Stitch mock — no
-            term-calendar model yet. Pushed to `xl`: at exactly 1024px
-            (the sidebar's own breakpoint), the sidebar plus this bar's
-            full content plus AuthNav measurably overflowed on Linux CI
-            (2026-09-21) — the two pills are the least essential content
-            here (decorative placeholders, not real data), so they're what
-            gives way first rather than hiding real nav or account info.
-          */}
-          <span aria-hidden="true" className="hidden shrink-0 xl:inline">
-            •
-          </span>
-          <span className="hidden shrink-0 rounded-full border border-mm-line bg-mm-page px-2 py-0.5 text-mm-muted xl:inline-block">
-            Term 3 · Week 4
-          </span>
-          <span className="hidden shrink-0 items-center gap-1 rounded-full border border-mm-line bg-mm-page px-2 py-0.5 text-mm-muted xl:inline-flex">
-            <Flag aria-hidden="true" className="h-3 w-3" />
-            Goal: NAPLAN preparation
-          </span>
-        </div>
+        <p className="hidden truncate text-sm text-mm-muted lg:block">
+          {breadcrumbLabel}
+          {hasActiveSession ? <span className="sr-only"> (you have a paper in progress)</span> : null}
+        </p>
       </div>
       <div className="flex shrink-0 items-center gap-2">
-        <button
-          type="button"
-          title={hasActiveSession ? "You have an active session to resume" : "No notifications"}
-          aria-disabled="true"
-          className="relative flex h-11 w-11 shrink-0 cursor-default items-center justify-center rounded-lg text-mm-ink-soft hover:bg-mm-page"
+        <Link
+          href="/help"
+          aria-label="Help Centre"
+          className="grid h-11 w-11 place-items-center rounded-[10px] text-mm-ink-soft hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
         >
-          <Bell aria-hidden="true" className="h-[18px] w-[18px]" />
-          {hasActiveSession && (
-            <span className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-mm-coral-text" />
-          )}
-        </button>
-        {/* Placeholder — editing interests/goals needs new profile columns; see audit D-04/D-08. Pushed to `xl` for the same header-width reason as the pills above. */}
-        <button
-          type="button"
-          title="Edit interests & goals (coming soon)"
-          aria-disabled="true"
-          className="hidden min-h-11 shrink-0 cursor-default items-center gap-1.5 rounded-btn border border-mm-line bg-white px-3 text-xs font-semibold text-mm-ink-soft xl:inline-flex"
-        >
-          Edit interests &amp; goals
-        </button>
-        <AuthNav showRoleHome={false} />
+          <HelpCircle aria-hidden="true" className="h-[18px] w-[18px]" />
+        </Link>
+        <StudentAccountMenu
+          label={`${name}: account menu`}
+          className="grid h-11 w-11 place-items-center rounded-xl"
+          trigger={
+            <span aria-hidden="true" className="grid h-9 w-9 place-items-center rounded-[10px] bg-mm-tint text-[15px] font-semibold text-mm-brand">
+              {name.charAt(0).toUpperCase()}
+            </span>
+          }
+        />
       </div>
     </header>
   );

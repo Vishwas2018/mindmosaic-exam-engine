@@ -21,7 +21,7 @@ export function ExamCentreHero({ averageMarks }: { averageMarks: number | null }
           <ClipboardCheck aria-hidden="true" className="h-4 w-4" />
           Assessment environment
         </span>
-        <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-mm-ink">
+        <h1 className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight text-mm-ink">
           Exam Centre
         </h1>
         <p className="text-sm leading-relaxed text-mm-muted">
@@ -40,7 +40,7 @@ export function ExamCentreHero({ averageMarks }: { averageMarks: number | null }
           <ShieldCheck aria-hidden="true" className="h-7 w-7 text-primary" />
         </div>
         <div>
-          <div className="font-[family-name:var(--font-display)] text-2xl font-bold text-mm-ink">
+          <div className="font-[family-name:var(--font-display)] text-2xl font-semibold text-mm-ink">
             {averageMarks === null ? "—" : `${averageMarks}%`}
           </div>
           <div className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">

@@ -22,7 +22,7 @@ export function OnboardingStepWelcome({
           <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
           Step 1 of 3 · Year Level
         </div>
-        <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink sm:text-3xl">
+        <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-mm-ink sm:text-3xl">
           {greeting}
         </h2>
         <p className="text-sm leading-relaxed text-mm-muted">
@@ -40,11 +40,11 @@ export function OnboardingStepWelcome({
             className={`relative flex min-h-16 flex-col justify-center rounded-2xl border-2 p-4 text-left transition-all ${
               yearLevel === 3
                 ? "border-primary bg-primary/5 text-primary shadow-sm"
-                : "border-royal/15 bg-white text-mm-ink hover:border-royal/30"
+                : "border-mm-brand/15 bg-white text-mm-ink hover:border-mm-brand/30"
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="font-[family-name:var(--font-display)] text-lg font-bold">
+              <span className="font-[family-name:var(--font-display)] text-lg font-semibold">
                 Year 3
               </span>
               {yearLevel === 3 && (
@@ -65,11 +65,11 @@ export function OnboardingStepWelcome({
             className={`relative flex min-h-16 flex-col justify-center rounded-2xl border-2 p-4 text-left transition-all ${
               yearLevel === 5
                 ? "border-primary bg-primary/5 text-primary shadow-sm"
-                : "border-royal/15 bg-white text-mm-ink hover:border-royal/30"
+                : "border-mm-brand/15 bg-white text-mm-ink hover:border-mm-brand/30"
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="font-[family-name:var(--font-display)] text-lg font-bold">
+              <span className="font-[family-name:var(--font-display)] text-lg font-semibold">
                 Year 5
               </span>
               {yearLevel === 5 && (

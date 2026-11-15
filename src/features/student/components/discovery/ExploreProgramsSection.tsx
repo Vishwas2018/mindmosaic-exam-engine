@@ -7,7 +7,7 @@ export function ExploreProgramsSection() {
       <div>
         <h2
           id="explore-programs-heading"
-          className="font-jakarta font-extrabold text-xl md:text-2xl text-plum-dark tracking-tight"
+          className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-xl md:text-2xl text-plum-dark tracking-tight"
         >
           Explore MindMosaic
         </h2>
@@ -45,13 +45,13 @@ export function ExploreProgramsSection() {
                 <polygon fill="#1E152A" points="147,33.5 144,35 147,36.5" />
               </g>
             </svg>
-            <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-primary font-jakarta font-bold text-xs border border-primary/20 shadow-sm">
+            <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-primary font-jakarta font-semibold text-xs border border-primary/20 shadow-sm">
               Core Syllabus
             </span>
           </div>
           <div className="p-6 flex flex-col justify-between flex-1">
             <div>
-              <h3 className="font-jakarta font-bold text-lg md:text-xl text-plum-dark leading-snug">
+              <h3 className="font-jakarta font-semibold text-lg md:text-xl text-plum-dark leading-snug">
                 Curriculum Learning
               </h3>
               <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-2.5 leading-relaxed">
@@ -60,7 +60,7 @@ export function ExploreProgramsSection() {
             </div>
             <div className="mt-6 pt-4 border-t border-parchment-border/70">
               <Link
-                className="h-11 px-4 rounded-xl bg-parchment-subtle group-hover:bg-primary group-hover:text-white border border-parchment-border text-primary font-jakarta font-bold text-sm flex items-center justify-between transition-colors"
+                className="h-11 px-4 rounded-xl bg-parchment-subtle group-hover:bg-primary group-hover:text-white border border-parchment-border text-primary font-jakarta font-semibold text-sm flex items-center justify-between transition-colors"
                 href="/student/learn"
               >
                 <span>Explore Curriculum</span>
@@ -108,13 +108,13 @@ export function ExploreProgramsSection() {
               <line stroke="#1E152A" strokeLinecap="round" strokeWidth="2" x1="178" x2="178" y1="40" y2="28" />
               <line stroke="#FF555A" strokeLinecap="round" strokeWidth="2" x1="178" x2="188" y1="40" y2="40" />
             </svg>
-            <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-coral-accent font-jakarta font-bold text-xs border border-coral-border shadow-sm">
+            <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-coral-accent font-jakarta font-semibold text-xs border border-coral-border shadow-sm">
               Years 3 &amp; 5
             </span>
           </div>
           <div className="p-6 flex flex-col justify-between flex-1">
             <div>
-              <h3 className="font-jakarta font-bold text-lg md:text-xl text-plum-dark leading-snug">
+              <h3 className="font-jakarta font-semibold text-lg md:text-xl text-plum-dark leading-snug">
                 NAPLAN
               </h3>
               <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-2.5 leading-relaxed">
@@ -123,7 +123,7 @@ export function ExploreProgramsSection() {
             </div>
             <div className="mt-6 pt-4 border-t border-parchment-border/70">
               <Link
-                className="h-11 px-4 rounded-xl bg-coral-light/50 group-hover:bg-coral-accent group-hover:text-white border border-coral-border text-coral-accent font-jakarta font-bold text-sm flex items-center justify-between transition-colors"
+                className="h-11 px-4 rounded-xl bg-coral-light/50 group-hover:bg-coral-accent group-hover:text-white border border-coral-border text-coral-accent font-jakarta font-semibold text-sm flex items-center justify-between transition-colors"
                 href="/practice/naplan"
               >
                 <span>Practise NAPLAN</span>
@@ -159,13 +159,13 @@ export function ExploreProgramsSection() {
               <line stroke="#7B7484" strokeWidth="1.5" x1="198" x2="218" y1="38" y2="62" />
               <line stroke="#7B7484" strokeWidth="1.5" x1="218" x2="204" y1="62" y2="86" />
             </svg>
-            <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-teal-accent font-jakarta font-bold text-xs border border-teal-border shadow-sm">
+            <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-teal-accent font-jakarta font-semibold text-xs border border-teal-border shadow-sm">
               Competitions
             </span>
           </div>
           <div className="p-6 flex flex-col justify-between flex-1">
             <div>
-              <h3 className="font-jakarta font-bold text-lg md:text-xl text-plum-dark leading-snug">
+              <h3 className="font-jakarta font-semibold text-lg md:text-xl text-plum-dark leading-snug">
                 ICAS
               </h3>
               <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-2.5 leading-relaxed">
@@ -174,7 +174,7 @@ export function ExploreProgramsSection() {
             </div>
             <div className="mt-6 pt-4 border-t border-parchment-border/70">
               <Link
-                className="h-11 px-4 rounded-xl bg-teal-light/50 group-hover:bg-teal-accent group-hover:text-white border border-teal-border text-teal-accent font-jakarta font-bold text-sm flex items-center justify-between transition-colors"
+                className="h-11 px-4 rounded-xl bg-teal-light/50 group-hover:bg-teal-accent group-hover:text-white border border-teal-border text-teal-accent font-jakarta font-semibold text-sm flex items-center justify-between transition-colors"
                 href="/practice/icas"
               >
                 <span>Explore ICAS</span>

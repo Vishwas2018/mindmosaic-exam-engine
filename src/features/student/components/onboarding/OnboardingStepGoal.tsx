@@ -51,7 +51,7 @@ export function OnboardingStepGoal({
           <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
           Step 3 of 3 · Weekly Target
         </div>
-        <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink sm:text-3xl">
+        <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-mm-ink sm:text-3xl">
           Set your weekly practice goal
         </h2>
         <p className="text-sm leading-relaxed text-mm-muted">
@@ -74,18 +74,18 @@ export function OnboardingStepGoal({
                 className={`relative flex min-h-20 flex-col justify-center rounded-2xl border-2 p-4 text-left transition-all ${
                   isSelected
                     ? "border-primary bg-primary/5 text-primary shadow-sm"
-                    : "border-royal/15 bg-white text-mm-ink hover:border-royal/30"
+                    : "border-mm-brand/15 bg-white text-mm-ink hover:border-mm-brand/30"
                 }`}
               >
                 {option.badge && (
-                  <span className="absolute -top-2.5 right-3 rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white">
+                  <span className="absolute -top-2.5 right-3 rounded-full bg-amber-500 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
                     {option.badge}
                   </span>
                 )}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Target aria-hidden="true" className="h-4 w-4 text-primary" />
-                    <span className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+                    <span className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
                       {option.title}
                     </span>
                   </div>
@@ -106,7 +106,7 @@ export function OnboardingStepGoal({
         <div className="flex items-start gap-3">
           <Flame aria-hidden="true" className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
           <div className="text-xs text-amber-950">
-            <span className="font-bold">Next: 5-Question Diagnostic Warmup</span>
+            <span className="font-semibold">Next: 5-Question Diagnostic Warmup</span>
             <p className="mt-0.5 text-amber-900/90 leading-relaxed">
               We&apos;ll now run a quick, untimed 5-question warmup across your chosen curriculum to discover your initial baseline.
             </p>

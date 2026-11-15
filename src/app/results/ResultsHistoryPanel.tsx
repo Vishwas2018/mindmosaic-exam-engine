@@ -56,7 +56,7 @@ export function ResultsHistoryPanel({
   if (outcome === "loading") {
     return (
       <Card className="mt-6 p-6 sm:p-8" variant="default" data-testid="results-history-panel">
-        <p className="text-sm font-semibold text-muted" data-testid="history-loading">
+        <p className="text-sm font-semibold text-mm-ink-soft" data-testid="history-loading">
           Loading your progress…
         </p>
       </Card>
@@ -75,10 +75,10 @@ export function ResultsHistoryPanel({
               <History aria-hidden="true" className="h-3.5 w-3.5" />
               Progress history
             </Badge>
-            <h2 className="mt-3 text-xl font-black text-ink">
+            <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-3 text-xl font-semibold text-mm-ink">
               Sign in to track your progress
             </h2>
-            <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
+            <p className="mt-2 max-w-xl text-sm leading-6 text-mm-ink-soft">
               Create a free account to see your personal best, compare this
               attempt against your past ones, and build a practice streak.
             </p>
@@ -101,7 +101,7 @@ export function ResultsHistoryPanel({
           <History aria-hidden="true" className="h-3.5 w-3.5" />
           Progress history
         </Badge>
-        <p className="mt-3 text-sm font-semibold text-ink" data-testid="history-first-attempt">
+        <p className="mt-3 text-sm font-semibold text-mm-ink" data-testid="history-first-attempt">
           This was your first {subjectLabel} attempt — nice work getting
           started. Practise again to start tracking your progress over time.
         </p>
@@ -124,15 +124,15 @@ export function ResultsHistoryPanel({
         <History aria-hidden="true" className="h-3.5 w-3.5" />
         Progress history
       </Badge>
-      <h2 className="mt-3 text-xl font-black text-ink">{subjectLabel} progress</h2>
+      <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-3 text-xl font-semibold text-mm-ink">{subjectLabel} progress</h2>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="history-comparison">
-        <div className="rounded-2xl border border-royal/8 p-4">
-          <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-muted">
-            <Award aria-hidden="true" className="h-4 w-4 text-royal-orange" />
+        <div className="rounded-2xl border border-mm-brand/8 p-4">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-mm-ink-soft">
+            <Award aria-hidden="true" className="h-4 w-4 text-mm-brand-orange" />
             Personal best
           </div>
-          <p className="mt-2 text-2xl font-black text-ink" data-testid="history-personal-best">
+          <p className="mt-2 text-2xl font-semibold text-mm-ink" data-testid="history-personal-best">
             {best !== null ? `${best}%` : "—"}
           </p>
           {isNewBest && (
@@ -142,8 +142,8 @@ export function ResultsHistoryPanel({
           )}
         </div>
 
-        <div className="rounded-2xl border border-royal/8 p-4">
-          <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-muted">
+        <div className="rounded-2xl border border-mm-brand/8 p-4">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-mm-ink-soft">
             {delta === null ? (
               <Minus aria-hidden="true" className="h-4 w-4" />
             ) : delta >= 0 ? (
@@ -153,11 +153,11 @@ export function ResultsHistoryPanel({
             )}
             Compared to last attempt
           </div>
-          <p className="mt-2 text-2xl font-black text-ink" data-testid="history-delta">
+          <p className="mt-2 text-2xl font-semibold text-mm-ink" data-testid="history-delta">
             {delta === null ? "No prior score to compare" : `${delta > 0 ? "+" : ""}${delta} points`}
           </p>
           {previous && (
-            <p className="mt-1 text-xs font-semibold text-muted">
+            <p className="mt-1 text-xs font-semibold text-mm-ink-soft">
               Previous: {previous.scorePercent !== null ? `${previous.scorePercent}%` : "Pending review"}
             </p>
           )}

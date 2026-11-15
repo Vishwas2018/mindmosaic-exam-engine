@@ -18,7 +18,7 @@ export function MyProgressInsightCard({ recommendedFocus }: { recommendedFocus: 
         <Lightbulb aria-hidden="true" className="h-5 w-5" />
       </div>
       <div>
-        <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+        <h3 className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
           Worth practising
         </h3>
         <p className="mt-1 text-sm leading-relaxed text-mm-muted">

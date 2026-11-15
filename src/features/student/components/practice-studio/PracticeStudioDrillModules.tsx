@@ -81,7 +81,7 @@ export function PracticeStudioDrillModules({ effectiveYear }: { effectiveYear: n
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between">
-        <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink tracking-tight">
+        <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink tracking-tight">
           Curriculum drill modules
         </h2>
         <span className="text-xs font-semibold text-mm-muted">{modules.length} modules</span>
@@ -96,7 +96,7 @@ export function PracticeStudioDrillModules({ effectiveYear }: { effectiveYear: n
                   <Icon aria-hidden="true" className="h-5 w-5" />
                 </div>
               </div>
-              <h3 className="mt-3 font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+              <h3 className="mt-3 font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                 {module.title}
               </h3>
               <p className="mt-1 text-xs leading-relaxed text-mm-muted">{module.description}</p>

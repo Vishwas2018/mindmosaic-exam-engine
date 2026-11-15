@@ -1,9 +1,9 @@
-import { Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 /**
- * Top hero for Practice Studio (/student/practice).
- * Honest, uninflated greeting: first visit vs returning student.
- * No fake "Adaptive pacing active" or difficulty tier chips.
+ * Practice Studio heading (Claude Design student artboard 10): breadcrumb, 36px title and one plain sentence.
+ * No adaptive-pacing or difficulty claims; practice sets are not recorded.
  */
 export function PracticeStudioHero({
   yearLevel,
@@ -13,23 +13,25 @@ export function PracticeStudioHero({
   isFirstVisit: boolean;
 }) {
   return (
-    <section className="flex flex-col gap-3 rounded-3xl border border-mm-line bg-white p-6 shadow-xs md:p-8">
-      <div className="flex flex-col gap-2">
-        <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-mm-tint-line bg-mm-tint px-2.5 py-0.5 text-xs font-semibold text-primary">
-            <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
-            Year {yearLevel} practice
-          </span>
-        </div>
-        <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink md:text-3xl">
-          Practice Studio
-        </h1>
-        <p className="max-w-2xl text-sm leading-relaxed text-mm-muted">
-          {isFirstVisit
-            ? "Welcome to Practice Studio. Targeted skill drills across Mathematics and English. Choose a topic below to start your first set."
-            : "Targeted skill drills across Mathematics and English. Practice sets are untimed drills — answers are not saved as you go."}
-        </p>
-      </div>
+    <section aria-labelledby="practice-studio-title">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-[13px] text-mm-muted">
+        <Link href="/student" className="inline-flex min-h-8 items-center hover:text-mm-brand hover:underline">
+          My Space
+        </Link>
+        <ChevronRight aria-hidden="true" className="h-3.5 w-3.5" />
+        <span aria-current="page">Practice Studio</span>
+      </nav>
+      <h1
+        id="practice-studio-title"
+        className="mt-2 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl"
+      >
+        Practice Studio
+      </h1>
+      <p className="mt-2 max-w-[760px] text-[17px] leading-[1.6] text-mm-ink-soft">
+        Choose what to practise. Every question shows you how it was worked out after you answer, and you can stop any
+        time.
+        {isFirstVisit ? ` Your Year ${yearLevel} options are below.` : ""}
+      </p>
     </section>
   );
 }

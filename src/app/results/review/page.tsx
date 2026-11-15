@@ -88,14 +88,14 @@ export default function ResultsReviewPage() {
   };
 
   return (
-    <div className="min-h-screen bg-page">
+    <div className="min-h-screen bg-mm-tint-soft">
       <AppHeader />
       <main id="main-content" className="site-width py-10 sm:py-16">
         <div className="mx-auto max-w-3xl">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end mb-8">
             <div>
               <Badge variant="orange">Question review</Badge>
-              <h1 className="mt-3 font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">
+              <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-3 font-jakarta text-2xl font-semibold tracking-[-0.03em] text-plum-dark">
                 Every question, explained
               </h1>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-plum-muted">
@@ -119,7 +119,7 @@ export default function ResultsReviewPage() {
                     })}
                   >
                     {filter.label}
-                    <span className="ml-2 text-xs font-bold text-muted">
+                    <span className="ml-2 text-xs font-semibold text-mm-ink-soft">
                       {filter.count}
                     </span>
                   </button>
@@ -146,25 +146,25 @@ export default function ResultsReviewPage() {
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-extrabold uppercase tracking-wide text-primary">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-primary">
                             Q{reviewQuestions.indexOf(question) + 1}
                           </span>
                           <span className="text-xs font-semibold text-plum-muted">
                             {question.metadata.topic ?? "Question"}
                           </span>
-                          <span className="ml-auto text-xs font-bold tabular-nums text-plum-muted">
+                          <span className="ml-auto text-xs font-semibold tabular-nums text-plum-muted">
                             {detail?.awardedMarks ?? 0}/{detail?.availableMarks ?? 0} marks
                           </span>
                         </div>
                         <p
                           data-testid={`review-prompt-${question.id}`}
-                          className={`mt-4 text-base font-bold leading-7 text-plum-dark ${promptLayoutClass(question.examStyle)}`}
+                          className={`mt-4 text-base font-semibold leading-7 text-plum-dark ${promptLayoutClass(question.examStyle)}`}
                         >
                           {question.prompt}
                         </p>
                         {question.stimulus && (
                           <details className="mt-3 rounded-xl bg-surface-container-low p-4 text-sm leading-6 text-plum-muted">
-                            <summary className="cursor-pointer font-bold text-plum-dark">
+                            <summary className="cursor-pointer font-semibold text-plum-dark">
                               {question.stimulus.title ?? "Reading passage"}
                             </summary>
                             <p className="mt-2 whitespace-pre-wrap">{question.stimulus.body}</p>
@@ -182,7 +182,7 @@ export default function ResultsReviewPage() {
 
                     <dl className="mt-4 grid gap-3 sm:grid-cols-2">
                       <div className="rounded-xl bg-surface-container-low p-4">
-                        <dt className="text-xs font-extrabold uppercase tracking-wide text-plum-muted">
+                        <dt className="text-xs font-semibold uppercase tracking-wide text-plum-muted">
                           Your answer
                         </dt>
                         <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
@@ -191,7 +191,7 @@ export default function ResultsReviewPage() {
                       </div>
                       {detail?.requiresManualMarking ? (
                         <div className="rounded-xl bg-amber-light/60 p-4">
-                          <dt className="text-xs font-extrabold uppercase tracking-wide text-amber-accent">
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-amber-accent">
                             Marked by a person
                           </dt>
                           <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
@@ -201,7 +201,7 @@ export default function ResultsReviewPage() {
                         </div>
                       ) : (
                         <div className="rounded-xl bg-teal-light/60 p-4">
-                          <dt className="text-xs font-extrabold uppercase tracking-wide text-teal-accent">
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-teal-accent">
                             Correct answer
                           </dt>
                           <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
@@ -212,7 +212,7 @@ export default function ResultsReviewPage() {
                     </dl>
 
                     <div className="mt-4 rounded-xl border border-primary/8 bg-surface-container-low p-4">
-                      <h3 className="font-jakarta text-xs font-extrabold uppercase tracking-wide text-primary">
+                      <h3 className="font-jakarta text-xs font-semibold uppercase tracking-wide text-primary">
                         Explanation
                       </h3>
                       <p className="mt-1.5 text-sm leading-6 text-plum-muted">

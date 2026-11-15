@@ -15,7 +15,7 @@ export function MySpaceRecent({ attempts }: { attempts: readonly AttemptSummary[
   return (
     <section aria-labelledby="my-space-recent" className="space-y-3 pb-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 id="my-space-recent" className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+        <h2 id="my-space-recent" className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
           Recent activity
         </h2>
         <Link href="/results" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-primary hover:underline">
@@ -32,7 +32,7 @@ export function MySpaceRecent({ attempts }: { attempts: readonly AttemptSummary[
           {attempts.slice(0, SHOWN).map((attempt) => (
             <li key={attempt.id} className="rounded-2xl border border-mm-line bg-white p-5 shadow-xs">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">{attempt.title}</h3>
+                <h3 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">{attempt.title}</h3>
                 <span className="rounded border border-mm-line bg-mm-tint-soft px-2 py-0.5 text-[11px] font-semibold text-mm-muted">
                   {attempt.timing === "timed" ? "Timed" : "Untimed"}
                 </span>

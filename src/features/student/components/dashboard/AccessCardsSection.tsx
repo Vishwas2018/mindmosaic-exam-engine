@@ -75,7 +75,7 @@ export function AccessCardsSection({
     <section className="space-y-3">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
-          <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink tracking-tight">
+          <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink tracking-tight">
             Your MindMosaic access
           </h2>
           <p className="text-xs text-mm-muted">Included in your current learning pathway</p>
@@ -104,7 +104,7 @@ export function AccessCardsSection({
                     <Icon aria-hidden="true" className="h-[22px] w-[22px]" />
                   </div>
                   <div>
-                    <h3 className="font-[family-name:var(--font-display)] text-base font-bold leading-snug text-mm-ink">
+                    <h3 className="font-[family-name:var(--font-display)] text-base font-semibold leading-snug text-mm-ink">
                       {card.title}
                     </h3>
                     <p className="mt-0.5 text-xs text-mm-muted">{card.description}</p>

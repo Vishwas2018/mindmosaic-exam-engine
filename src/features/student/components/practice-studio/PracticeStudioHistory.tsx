@@ -32,7 +32,7 @@ export function PracticeStudioHistory({
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between">
-        <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink tracking-tight">
+        <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink tracking-tight">
           Recent practice history
         </h2>
         <Link
@@ -57,7 +57,7 @@ export function PracticeStudioHistory({
                     <PlayCircle aria-hidden="true" className="h-4 w-4" />
                   </span>
                   <div>
-                    <p className="text-sm font-bold text-mm-ink">In progress</p>
+                    <p className="text-sm font-semibold text-mm-ink">In progress</p>
                     <p className="text-xs text-mm-muted">You have an active session waiting to be finished.</p>
                   </div>
                 </div>
@@ -77,12 +77,12 @@ export function PracticeStudioHistory({
                 }`}
               >
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-bold text-mm-ink">{attempt.title}</p>
+                  <p className="truncate text-sm font-semibold text-mm-ink">{attempt.title}</p>
                   <p className="mt-0.5 text-xs text-mm-muted">
                     {attempt.timing === "timed" ? "Timed" : "Untimed"} · {formatDate(attempt.submittedAt)}
                   </p>
                 </div>
-                <span className="font-mono text-sm font-bold text-mm-ink">
+                <span className="font-mono text-sm font-semibold text-mm-ink">
                   {attempt.scorePercent === null
                     ? "Pending"
                     : `${attempt.attemptedQuestions} of ${attempt.totalQuestions ?? attempt.attemptedQuestions} · ${attempt.scorePercent}%`}

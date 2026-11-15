@@ -36,7 +36,7 @@ export function LearningHubUnitSpotlight({
             </span>
           </div>
           <div className="flex flex-col gap-1.5">
-            <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink">
+            <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-mm-ink">
               {node.title}
             </h2>
             <p className="text-sm leading-relaxed text-mm-muted">

@@ -9,7 +9,7 @@ export function RecentActivityCard({ attempt }: { attempt: AttemptSummary | null
   return (
     <section className="space-y-3 pb-8">
       <div className="flex items-center justify-between">
-        <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink tracking-tight">
+        <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink tracking-tight">
           Recent activity
         </h2>
         <Link
@@ -27,14 +27,14 @@ export function RecentActivityCard({ attempt }: { attempt: AttemptSummary | null
             <div className="relative flex h-14 w-14 shrink-0 items-center justify-center">
               <RadialProgressRing percent={attempt.scorePercent ?? 0} />
               <div className="absolute flex flex-col items-center justify-center">
-                <span className="font-[family-name:var(--font-display)] text-xs font-bold text-primary">
+                <span className="font-[family-name:var(--font-display)] text-xs font-semibold text-primary">
                   {attempt.scorePercent !== null ? `${attempt.scorePercent}%` : "—"}
                 </span>
               </div>
             </div>
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+                <h3 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
                   {attempt.title}
                 </h3>
                 <span className="rounded border border-mm-line bg-mm-tint-soft px-2 py-0.5 text-[10px] font-semibold text-mm-muted">

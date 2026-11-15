@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
 
-import { MySpaceHero } from "@/features/student/components/my-space/MySpaceHero";
-import { MySpacePathways } from "@/features/student/components/my-space/MySpacePathways";
-import { MySpaceProgress } from "@/features/student/components/my-space/MySpaceProgress";
-import { MySpaceRecent } from "@/features/student/components/my-space/MySpaceRecent";
+import { MySpaceView } from "@/features/student/components/my-space/MySpaceView";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
-import {
-  StudentOnboardingModal,
-  OnboardingResumeBanner,
-} from "@/features/student/components/onboarding";
 import { fetchStudentOverview } from "@/features/student/data";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { requireStudent } from "@/features/student/require-student";
 import { getStudioAvailability } from "@/server/practice-studio-availability";
 
 export const metadata: Metadata = {
-  title: "My Learning — Dashboard",
+  title: "My Space",
   description: "Personalised dashboard for curriculum learning, NAPLAN, and ICAS preparation.",
 };
 
@@ -43,29 +36,13 @@ export default async function StudentHomePage() {
 
   return (
     <StudentPortalShell active="home" breadcrumbLabel="My Space" student={student} shellData={shellData}>
-      <OnboardingResumeBanner
-        onboardingCompleted={student.onboardingCompleted}
-        yearLevel={student.yearLevel}
-        interests={student.interests}
-        weeklyGoalMinutes={student.weeklyGoalMinutes}
-      />
-      <section className="space-y-1">
-        <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink lg:text-3xl">
-          {firstName ? `Welcome back, ${firstName}` : "Welcome back"}
-        </h1>
-        <p className="text-sm text-mm-muted">Year {yearLevel}</p>
-      </section>
-      <MySpaceHero hasActiveSession={shellData.hasActiveSession} hasFinishedPaper={overview.attempts.length > 0} />
-      <MySpacePathways availability={availability} yearLevel={yearLevel} />
-      <MySpaceProgress attempts={overview.attempts} mastery={overview.mastery} />
-      <MySpaceRecent attempts={overview.attempts} />
-      <StudentOnboardingModal
+      <MySpaceView
         firstName={firstName}
-        yearLevel={student.yearLevel}
-        onboardingCompleted={student.onboardingCompleted}
-        interests={student.interests}
-        weeklyGoalMinutes={student.weeklyGoalMinutes}
-        studentId={student.userId}
+        yearLevel={yearLevel}
+        attempts={overview.attempts}
+        mastery={overview.mastery}
+        availability={availability}
+        hasActiveSession={shellData.hasActiveSession}
       />
     </StudentPortalShell>
   );

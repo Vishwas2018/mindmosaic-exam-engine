@@ -26,7 +26,7 @@ export function MySpaceHero({
     <section aria-labelledby="my-space-next" className="space-y-3">
       {hasActiveSession && <ActiveSessionBanner />}
       <div className="rounded-2xl border border-mm-line bg-white p-5 shadow-xs sm:p-6">
-        <h2 id="my-space-next" className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+        <h2 id="my-space-next" className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
           {heading}
         </h2>
         <p className="mt-1.5 max-w-prose text-sm text-mm-muted">
