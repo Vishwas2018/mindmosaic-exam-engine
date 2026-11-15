@@ -170,3 +170,39 @@ export function isSingaporeMathsSampleAllowed(
 ): boolean {
   return singaporeMathsSampleAvailability(env).allowed;
 }
+
+/**
+ * Parses `SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS`: the comma-separated auth
+ * user IDs of the accounts that may see the Singapore Maths sample on a hosted
+ * deployment. Singapore Maths content is not yet approved, so general beta
+ * users must never reach it; this is the controlled-preview list.
+ */
+export function getSingaporeMathsSampleAllowedUserIds(
+  env: Readonly<Record<string, string | undefined>> = process.env,
+): ReadonlySet<string> {
+  return new Set(
+    (env.SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS ?? "")
+      .split(",")
+      .map((entry) => entry.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
+
+/**
+ * Account-level gate: the deployment gate above AND, on any hosted deployment,
+ * membership of the controlled-preview allowlist. Fails closed when the list is
+ * missing or empty, or the user is absent. An isolated local backend
+ * (`supabase start`, e2e) is a throwaway database with only fixture accounts,
+ * so it needs no allowlist.
+ */
+export function isSingaporeMathsSampleAllowedFor(
+  userId: string | null | undefined,
+  env: Readonly<Record<string, string | undefined>> = process.env,
+): boolean {
+  const availability = singaporeMathsSampleAvailability(env);
+  if (!availability.allowed) return false;
+  if (availability.reason === "local_isolated_backend") return true;
+  const normalized = userId?.trim().toLowerCase();
+  if (!normalized) return false;
+  return getSingaporeMathsSampleAllowedUserIds(env).has(normalized);
+}

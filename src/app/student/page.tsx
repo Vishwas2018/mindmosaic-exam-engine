@@ -43,6 +43,7 @@ export default async function StudentHomePage() {
         mastery={overview.mastery}
         availability={availability}
         hasActiveSession={shellData.hasActiveSession}
+        warmupCompleted={student.diagnosticCompleted}
       />
     </StudentPortalShell>
   );

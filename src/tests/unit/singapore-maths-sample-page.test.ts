@@ -1,5 +1,12 @@
 import type {ReactElement} from "react";
-import {afterEach, describe, expect, it} from "vitest";
+import {afterEach, describe, expect, it, vi} from "vitest";
+
+/* The page asks who is signed in on a hosted deployment; this user is on the preview list (see AVAILABLE). */
+vi.mock("@/lib/supabase/server", () => ({
+  createClient: async () => ({
+    auth: {getUser: async () => ({data: {user: {id: "preview-user-1"}}})},
+  }),
+}));
 
 import SingaporeMathsSamplePage from "@/app/practice/singapore-maths/sample/page";
 
@@ -58,6 +65,7 @@ const SAVED_KEYS = [
   "PRODUCTION_SUPABASE_PROJECT_REF",
   "NEXT_PUBLIC_SUPABASE_URL",
   "VERCEL_ENV",
+  "SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS",
 ] as const;
 
 const saved = new Map(SAVED_KEYS.map((key) => [key, process.env[key]]));
@@ -87,6 +95,7 @@ const AVAILABLE = {
   SINGAPORE_MATHS_SAMPLE_ENABLED: "1",
   SINGAPORE_MATHS_SAMPLE_SUPABASE_REF: PREVIEW_PROJECT,
   PRODUCTION_SUPABASE_PROJECT_REF: "liveprodproject",
+  SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS: "preview-user-1",
 } as const;
 
 describe("Singapore Maths sample page — server/client boundary", () => {

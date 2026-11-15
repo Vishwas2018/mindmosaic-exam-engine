@@ -37,6 +37,7 @@ export function MySpaceView({
   mastery,
   availability,
   hasActiveSession,
+  warmupCompleted = false,
 }: {
   firstName: string | null;
   yearLevel: 3 | 5;
@@ -44,6 +45,8 @@ export function MySpaceView({
   mastery: readonly SubjectMastery[];
   availability: StudioAvailability;
   hasActiveSession: boolean;
+  /** The child has finished the optional five-question warm-up before. */
+  warmupCompleted?: boolean;
 }) {
   const firstVisit = attempts.length === 0;
   const forYear = availability.subjects.filter((s) => s.yearLevel === yearLevel && s.state === "ready");
@@ -96,6 +99,23 @@ export function MySpaceView({
           </p>
         </div>
         <ExerciseBookSketch />
+      </section>
+
+      <section aria-labelledby="warmup-offer" className={`${card} flex flex-wrap items-center justify-between gap-4 px-6 py-5`}>
+        <div className="min-w-0 max-w-[620px]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-mm-brand">Optional</p>
+          <h2 id="warmup-offer" className={`${h2} mt-1`}>
+            Five-question warm-up
+          </h2>
+          <p className="mt-1.5 text-[15px] leading-[1.55] text-mm-ink-soft">
+            {warmupCompleted
+              ? "You have done the warm-up before. Take it again for fresh suggestions on what to practise."
+              : "Five untimed questions, then suggestions for what to practise first. Skip it if you would rather start straight away."}
+          </p>
+        </div>
+        <Link href="/student/diagnostic" className={btnSecondary}>
+          {warmupCompleted ? "Take the warm-up again" : "Try the warm-up"}
+        </Link>
       </section>
 
       {firstVisit && (

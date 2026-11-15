@@ -82,6 +82,8 @@ beforeEach(() => {
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://qawbnonprodproject.supabase.co");
   vi.stubEnv("SINGAPORE_MATHS_SAMPLE_SUPABASE_REF", "qawbnonprodproject");
   vi.stubEnv("PRODUCTION_SUPABASE_PROJECT_REF", "liveprodproject");
+  /* Content is unapproved: the sample is reachable only by allowlisted accounts. Alice and Bob are the preview group. */
+  vi.stubEnv("SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS", `${ALICE},${BOB}`);
 });
 afterEach(() => vi.unstubAllEnvs());
 
@@ -92,6 +94,21 @@ describe("Singapore Maths sample routes: gate and authentication", () => {
     expect((await reveal(post("reveal", {questionId: Q.name}))).status).toBe(404);
     expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(404);
     expect((await reset(new Request(`${BASE}/session`, {method: "DELETE"}))).status).toBe(404);
+  });
+
+  it("an account that is not on the preview list gets 404 everywhere, as if the sample did not exist", async () => {
+    state.userId = "33333333-3333-4333-8333-333333333333";
+    expect((await send(Q.name, 1)).status).toBe(404);
+    expect((await reveal(post("reveal", {questionId: Q.name}))).status).toBe(404);
+    expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(404);
+    expect((await reset(new Request(`${BASE}/session`, {method: "DELETE"}))).status).toBe(404);
+    expect(state.rows.size).toBe(0);
+  });
+
+  it("with no preview list configured every signed-in account gets 404", async () => {
+    vi.stubEnv("SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS", "");
+    expect((await send(Q.name, 1)).status).toBe(404);
+    expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(404);
   });
 
   it("guests get 401 everywhere", async () => {

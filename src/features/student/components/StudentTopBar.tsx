@@ -34,10 +34,12 @@ export function StudentTopBar({
   breadcrumbLabel,
   hasActiveSession,
   showVihaan = false,
+  showSingapore = false,
 }: {
   breadcrumbLabel: string;
   hasActiveSession: boolean;
   showVihaan?: boolean;
+  showSingapore?: boolean;
 }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { displayName } = useAuth();
@@ -65,7 +67,7 @@ export function StudentTopBar({
               className="absolute inset-x-0 top-16 z-40 border-b border-mm-line bg-white p-3 shadow-[0_24px_60px_rgba(24,21,31,0.12)]"
             >
               <nav aria-label="Student navigation" className="grid gap-0.5">
-                {studentNavItems(showVihaan).map((item) => (
+                {studentNavItems(showVihaan, showSingapore).map((item) => (
                   <Link
                     key={item.key}
                     href={item.href}

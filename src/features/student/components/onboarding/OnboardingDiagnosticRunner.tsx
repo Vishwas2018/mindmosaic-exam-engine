@@ -7,7 +7,14 @@ import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import type { CandidateQuestion } from "@/features/exam-engine/types";
 import { useOnboardingStore } from "@/features/student/onboarding/onboarding-store";
 
-export function OnboardingDiagnosticRunner() {
+export function OnboardingDiagnosticRunner({
+  preferences = true,
+  heading = "Diagnostic Warmup",
+}: {
+  /** `false` for the optional warm-up from My Space: record the warm-up only, leave interests/goal/year untouched. */
+  preferences?: boolean;
+  heading?: string;
+} = {}) {
   const {
     yearLevel,
     interests,
@@ -116,8 +123,8 @@ export function OnboardingDiagnosticRunner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           yearLevel,
-          interests,
-          weeklyGoalMinutes,
+          ...(preferences ? { interests, weeklyGoalMinutes } : {}),
+          preferences,
           responses,
           startedAt: startedAtRef.current ?? Date.now(),
         }),
@@ -128,7 +135,7 @@ export function OnboardingDiagnosticRunner() {
         throw new Error(data.message ?? data.error ?? "Failed to save diagnostic warmup.");
       }
 
-      setDiagnosticOutcome(data.result, data.baseline);
+      setDiagnosticOutcome(data.result, data.baseline, data.recommendations ?? null);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Submission failed.";
       setError(message);
@@ -142,7 +149,7 @@ export function OnboardingDiagnosticRunner() {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs font-semibold text-mm-muted">
           <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
-          <span className="text-primary font-semibold">Diagnostic Warmup · Untimed</span>
+          <span className="text-primary font-semibold">{heading} · Untimed</span>
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-mm-brand/10">
           <div
