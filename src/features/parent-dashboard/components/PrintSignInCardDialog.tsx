@@ -71,38 +71,38 @@ export function PrintSignInCardDialog({
         {/* Printable Card Area */}
         <div
           id="student-signin-card"
-          className="relative overflow-hidden rounded-2xl border-2 border-royal/20 bg-gradient-to-br from-royal/5 via-white to-royal/10 p-6 shadow-sm"
+          className="relative overflow-hidden rounded-2xl border-2 border-mm-brand/20 bg-gradient-to-br from-royal/5 via-white to-royal/10 p-6 shadow-sm"
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-royal">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-mm-brand">
                 MindMosaic Student Card
               </span>
-              <h3 className="mt-0.5 text-xl font-black text-ink">{childName}</h3>
+              <h3 className="mt-0.5 text-xl font-semibold text-mm-ink">{childName}</h3>
               {yearLevel !== null && (
-                <p className="text-xs font-bold text-muted">Grade {yearLevel}</p>
+                <p className="text-xs font-semibold text-mm-ink-soft">Year {yearLevel}</p>
               )}
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-royal text-base font-black text-white shadow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-mm-brand text-base font-semibold text-white shadow-sm">
               {childName.trim().charAt(0).toUpperCase() || "S"}
             </div>
           </div>
 
-          <div className="mt-6 rounded-xl border border-royal/15 bg-white p-4 shadow-sm">
-            <span className="text-xs font-bold text-muted">Login code</span>
-            <div className="mt-1 font-mono text-2xl font-black tracking-widest text-royal">
+          <div className="mt-6 rounded-xl border border-mm-brand/15 bg-white p-4 shadow-sm">
+            <span className="text-xs font-semibold text-mm-ink-soft">Login code</span>
+            <div className="mt-1 font-mono text-2xl font-semibold tracking-widest text-mm-brand">
               {loginCode}
             </div>
-            <p className="mt-2 text-xs text-muted">
+            <p className="mt-2 text-xs text-mm-ink-soft">
               Sign in at{" "}
-              <strong className="text-ink" data-testid="signin-card-address">
+              <strong className="text-mm-ink" data-testid="signin-card-address">
                 {signInAddress ?? "the MindMosaic sign-in page"}
               </strong>{" "}
               &rarr; choose &ldquo;I&rsquo;m a student&rdquo;, then enter this code and the PIN.
             </p>
           </div>
 
-          <div className="mt-4 flex items-center gap-2 text-xs text-muted">
+          <div className="mt-4 flex items-center gap-2 text-xs text-mm-ink-soft">
             <ShieldCheck className="h-4 w-4 flex-shrink-0 text-emerald-600" />
             <span>PIN is set by parent. Reset anytime in your Parent account.</span>
           </div>

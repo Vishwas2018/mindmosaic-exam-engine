@@ -73,7 +73,7 @@ describe("results page: question prompt line breaks", () => {
     renderResults();
     const prompt = screen.getByTestId(`review-prompt-${naplanQuestion.id}`);
     expect(prompt).not.toHaveClass("whitespace-pre-line");
-    expect(prompt.className).toBe("mt-4 text-base font-bold leading-7 text-plum-dark");
+    expect(prompt.className).toBe("mt-4 text-base font-semibold leading-7 text-plum-dark");
     expect(prompt.textContent).toBe(naplanQuestion.prompt);
   });
 

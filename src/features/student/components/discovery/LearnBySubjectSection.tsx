@@ -7,7 +7,7 @@ export function LearnBySubjectSection() {
       <div>
         <h2
           id="learn-by-subject-heading"
-          className="font-jakarta font-extrabold text-xl md:text-2xl text-plum-dark tracking-tight"
+          className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-xl md:text-2xl text-plum-dark tracking-tight"
         >
           Learn by subject
         </h2>
@@ -26,7 +26,7 @@ export function LearnBySubjectSection() {
                   <Ruler className="h-[30px] w-[30px]" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-jakarta font-bold text-2xl text-plum-dark">Mathematics</h3>
+                  <h3 className="font-jakarta font-semibold text-2xl text-plum-dark">Mathematics</h3>
                   <p className="font-vietnam text-xs text-plum-muted mt-0.5">
                     Numbers, fractions, measurement, geometry, statistics and problem solving.
                   </p>
@@ -68,7 +68,7 @@ export function LearnBySubjectSection() {
 
           <div className="mt-8 pt-5 border-t border-parchment-border/70">
             <Link
-              className="h-11 px-5 rounded-xl bg-parchment-subtle hover:bg-primary hover:text-white border border-parchment-border text-primary font-jakarta font-bold text-sm flex items-center justify-between transition-all group"
+              className="h-11 px-5 rounded-xl bg-parchment-subtle hover:bg-primary hover:text-white border border-parchment-border text-primary font-jakarta font-semibold text-sm flex items-center justify-between transition-all group"
               href="/student/learn/mathematics"
             >
               <span>Explore Mathematics</span>
@@ -86,7 +86,7 @@ export function LearnBySubjectSection() {
                   <BookOpen className="h-[30px] w-[30px]" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-jakarta font-bold text-2xl text-plum-dark">English</h3>
+                  <h3 className="font-jakarta font-semibold text-2xl text-plum-dark">English</h3>
                   <p className="font-vietnam text-xs text-plum-muted mt-0.5">
                     Reading, writing, grammar, vocabulary and literature.
                   </p>
@@ -128,7 +128,7 @@ export function LearnBySubjectSection() {
 
           <div className="mt-8 pt-5 border-t border-parchment-border/70">
             <Link
-              className="h-11 px-5 rounded-xl bg-parchment-subtle hover:bg-teal-accent hover:text-white border border-parchment-border text-teal-accent font-jakarta font-bold text-sm flex items-center justify-between transition-all group"
+              className="h-11 px-5 rounded-xl bg-parchment-subtle hover:bg-teal-accent hover:text-white border border-parchment-border text-teal-accent font-jakarta font-semibold text-sm flex items-center justify-between transition-all group"
               href="/student/learn/english"
             >
               <span>Explore English</span>

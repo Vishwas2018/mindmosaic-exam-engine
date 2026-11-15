@@ -88,7 +88,7 @@ export function LearningHubExplorer({
               <GraduationCap className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
-              <h2 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+              <h2 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
                 {hasPriorAttempts ? "Welcome back to your lessons" : "Welcome to the Learning Hub"}
               </h2>
               <p className="mt-0.5 text-xs text-mm-muted sm:text-sm">
@@ -114,7 +114,7 @@ export function LearningHubExplorer({
           <div>
             <span
               id={yearHeadingId}
-              className="block text-[11px] font-bold uppercase tracking-wider text-mm-muted mb-2"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-mm-muted mb-2"
             >
               Curriculum Year Level
             </span>
@@ -131,7 +131,7 @@ export function LearningHubExplorer({
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => setSelectedYear(year)}
-                    className={`inline-flex min-h-11 items-center gap-2 rounded-btn px-4 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
+                    className={`inline-flex min-h-11 items-center gap-2 rounded-btn px-4 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       isSelected
                         ? "bg-primary text-white shadow-xs"
                         : "border border-mm-line bg-white text-mm-ink hover:bg-slate-50"
@@ -157,7 +157,7 @@ export function LearningHubExplorer({
           <div>
             <span
               id={areaHeadingId}
-              className="block text-[11px] font-bold uppercase tracking-wider text-mm-muted mb-2"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-mm-muted mb-2"
             >
               Learning Area
             </span>
@@ -172,7 +172,7 @@ export function LearningHubExplorer({
                 onClick={() => setSelectedArea("all")}
                 className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedArea === "all"
-                    ? "bg-white text-mm-ink shadow-2xs font-bold"
+                    ? "bg-white text-mm-ink shadow-2xs font-semibold"
                     : "text-mm-muted hover:text-mm-ink"
                 }`}
               >
@@ -188,7 +188,7 @@ export function LearningHubExplorer({
                 onClick={() => setSelectedArea("Mathematics")}
                 className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedArea === "Mathematics"
-                    ? "bg-white text-primary shadow-2xs font-bold"
+                    ? "bg-white text-primary shadow-2xs font-semibold"
                     : "text-mm-muted hover:text-mm-ink"
                 }`}
               >
@@ -205,7 +205,7 @@ export function LearningHubExplorer({
                 onClick={() => setSelectedArea("English")}
                 className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedArea === "English"
-                    ? "bg-white text-teal-accent shadow-2xs font-bold"
+                    ? "bg-white text-teal-accent shadow-2xs font-semibold"
                     : "text-mm-muted hover:text-mm-ink"
                 }`}
               >
@@ -229,7 +229,7 @@ export function LearningHubExplorer({
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-mm-tint text-primary">
             <Compass className="h-6 w-6" aria-hidden="true" />
           </div>
-          <h3 className="mt-4 font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+          <h3 className="mt-4 font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
             Year {selectedYear} lessons haven&rsquo;t been published yet
           </h3>
           <p className="mt-2 max-w-md mx-auto text-sm leading-relaxed text-mm-muted">
@@ -243,7 +243,7 @@ export function LearningHubExplorer({
                   key={year}
                   type="button"
                   onClick={() => setSelectedYear(year)}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-btn bg-primary px-4 text-xs font-bold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-btn bg-primary px-4 text-xs font-semibold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   Explore Year {year}
                 </button>
@@ -264,7 +264,7 @@ export function LearningHubExplorer({
           <button
             type="button"
             onClick={() => setSelectedArea("all")}
-            className="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-bold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            className="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-semibold text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             Show All Areas
           </button>
@@ -275,7 +275,7 @@ export function LearningHubExplorer({
       {displayedPathways.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-mm-muted">
+            <span className="text-xs font-semibold uppercase tracking-wider text-mm-muted">
               {displayedPathways.length} Strand{displayedPathways.length === 1 ? "" : "s"} &middot; {displayedPathways.reduce((s, p) => s + p.nodes.length, 0)} Structured Lessons
             </span>
             <span className="text-xs text-mm-muted">
@@ -306,7 +306,7 @@ export function LearningHubExplorer({
                     <div className="space-y-1.5 text-left">
                       <div className="flex flex-wrap items-center gap-2">
                         <span
-                          className={`rounded-md px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider ${
+                          className={`rounded-md px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${
                             isMaths
                               ? "bg-primary-tint text-primary"
                               : "bg-teal-light text-teal-accent"
@@ -314,7 +314,7 @@ export function LearningHubExplorer({
                         >
                           {isMaths ? "Mathematics" : "English"}
                         </span>
-                        <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+                        <h3 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
                           {strandLabel}
                         </h3>
                         <span className="text-mm-line">&bull;</span>
@@ -361,11 +361,11 @@ export function LearningHubExplorer({
                               <div className="space-y-1.5 min-w-0">
                                 {/* Metadata Row */}
                                 <div className="flex flex-wrap items-center gap-2 text-xs">
-                                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary font-mono text-[10px] font-bold text-white">
+                                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary font-mono text-[10px] font-semibold text-white">
                                     {index + 1}
                                   </span>
                                   {/* Curriculum code shown as recorded with NO alignment claim */}
-                                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-primary">
+                                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-primary">
                                     {node.curriculumCode}
                                   </span>
                                   <span className="text-mm-line">&bull;</span>
@@ -392,7 +392,7 @@ export function LearningHubExplorer({
                                 <div>
                                   <Link
                                     href={lessonHref}
-                                    className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink hover:text-primary transition-colors focus-visible:outline-none focus-visible:underline"
+                                    className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink hover:text-primary transition-colors focus-visible:outline-none focus-visible:underline"
                                   >
                                     {node.title}
                                   </Link>
@@ -422,7 +422,7 @@ export function LearningHubExplorer({
                               <div className="flex shrink-0 flex-wrap items-center gap-2 pt-2 md:pt-0">
                                 <Link
                                   href={lessonHref}
-                                  className="inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-bold text-white shadow-2xs hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
+                                  className="inline-flex min-h-11 items-center gap-1.5 rounded-btn bg-primary px-4 text-xs font-semibold text-white shadow-2xs hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
                                 >
                                   <span>Start Lesson</span>
                                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

@@ -37,20 +37,20 @@ export function StreakWeeklyGoalWidget({
         <div className="flex items-center gap-3">
           <span
             aria-hidden="true"
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-royal-orange/20 bg-royal-orange/10"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-mm-brand-orange/20 bg-mm-brand-orange/10"
           >
-            <Flame className="h-5 w-5 text-royal-orange" />
+            <Flame className="h-5 w-5 text-mm-brand-orange" />
           </span>
           <div>
-            <p className="text-2xl font-black tabular-nums leading-none text-ink">
+            <p className="text-2xl font-semibold tabular-nums leading-none text-mm-ink">
               {summary.currentStreak}
             </p>
-            <p className="mt-1 text-xs font-semibold text-muted">day streak</p>
+            <p className="mt-1 text-xs font-semibold text-mm-ink-soft">day streak</p>
           </div>
         </div>
         <Link
           href="/student/engagement"
-          className="inline-flex min-h-11 items-center gap-1 rounded-xl text-xs font-bold text-royal transition hover:gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+          className="inline-flex min-h-11 items-center gap-1 rounded-xl text-xs font-semibold text-mm-brand transition hover:gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20"
         >
           View progress
           <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -65,7 +65,7 @@ export function StreakWeeklyGoalWidget({
           showValue
           tone="orange"
         />
-        <p className="mt-1.5 text-xs font-semibold text-muted">
+        <p className="mt-1.5 text-xs font-semibold text-mm-ink-soft">
           {thisWeek} of {WEEKLY_SESSION_TARGET} sessions this week
           {summary.totalSessions === 0 && " — finish one to start your streak"}
         </p>

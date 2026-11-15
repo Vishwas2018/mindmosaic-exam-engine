@@ -105,10 +105,10 @@ export function ParentHelpCentre({
       {/* Header & Context Greet */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl">
+          <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">
             Help Centre
           </h1>
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-sm text-mm-ink-soft">
             Answers to the things parents ask most, and a way to reach a person.
           </p>
         </div>
@@ -116,9 +116,9 @@ export function ParentHelpCentre({
         {isLocalPreview && (
           <span
             data-testid="illustrative-badge"
-            className="inline-flex items-center gap-1.5 rounded-full border border-royal/15 bg-white px-3 py-1 text-xs font-semibold text-muted shadow-xs self-start"
+            className="inline-flex items-center gap-1.5 rounded-full border border-mm-brand/15 bg-white px-3 py-1 text-xs font-semibold text-mm-ink-soft shadow-xs self-start"
           >
-            <HelpCircle className="h-3.5 w-3.5 text-royal" aria-hidden="true" />
+            <HelpCircle className="h-3.5 w-3.5 text-mm-brand" aria-hidden="true" />
             Illustrative sample family
           </span>
         )}
@@ -128,7 +128,7 @@ export function ParentHelpCentre({
       <div className="max-w-xl">
         <label
           htmlFor={searchInputId}
-          className="block text-xs font-bold uppercase tracking-wider text-muted"
+          className="block text-xs font-semibold uppercase tracking-wider text-mm-ink-soft"
         >
           Search help
         </label>
@@ -142,10 +142,10 @@ export function ParentHelpCentre({
               if (selectedArticleSlug) setSelectedArticleSlug(null);
             }}
             placeholder="Try “PIN” or “invoice”"
-            className="min-h-11 w-full rounded-xl border border-royal/20 bg-white py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-muted/60 shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+            className="min-h-11 w-full rounded-xl border border-mm-brand/20 bg-white py-2.5 pl-10 pr-4 text-sm text-mm-ink placeholder:text-mm-ink-soft/60 shadow-xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
           />
           <Search
-            className="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-muted"
+            className="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-mm-ink-soft"
             aria-hidden="true"
           />
         </div>
@@ -157,42 +157,42 @@ export function ParentHelpCentre({
         <section
           data-testid="article-detail-view"
           aria-labelledby="article-heading"
-          className="rounded-2xl border border-royal/15 bg-white p-6 shadow-sm md:p-8 max-w-3xl space-y-6"
+          className="rounded-2xl border border-mm-brand/15 bg-white p-6 shadow-sm md:p-8 max-w-3xl space-y-6"
         >
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setSelectedArticleSlug(null)}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-royal hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-mm-brand hover:underline"
             >
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
               Back to topics
             </button>
-            <span className="text-muted/40">/</span>
-            <span className="text-xs font-semibold text-muted">{activeArticle.category}</span>
+            <span className="text-mm-ink-soft/40">/</span>
+            <span className="text-xs font-semibold text-mm-ink-soft">{activeArticle.category}</span>
           </div>
 
           <div>
-            <p className="text-xs font-extrabold uppercase tracking-wider text-royal">
+            <p className="text-xs font-semibold uppercase tracking-wider text-mm-brand">
               {activeArticle.category}
             </p>
             <h2
               id="article-heading"
-              className="mt-1 text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl"
+              className="mt-1 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl"
             >
               {activeArticle.title}
             </h2>
           </div>
 
-          <div className="space-y-4 text-sm leading-relaxed text-ink/90">
+          <div className="space-y-4 text-sm leading-relaxed text-mm-ink/90">
             {activeArticle.paragraphs.map((p, idx) => (
               <p key={idx}>{p}</p>
             ))}
           </div>
 
           {activeArticle.note && (
-            <div className="rounded-xl border border-royal/15 bg-royal/5 p-4 text-xs leading-relaxed text-ink/80 flex items-start gap-3">
-              <Info className="h-4 w-4 text-royal shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="rounded-xl border border-mm-brand/15 bg-mm-brand/5 p-4 text-xs leading-relaxed text-mm-ink/80 flex items-start gap-3">
+              <Info className="h-4 w-4 text-mm-brand shrink-0 mt-0.5" aria-hidden="true" />
               <div>{activeArticle.note}</div>
             </div>
           )}
@@ -201,14 +201,14 @@ export function ParentHelpCentre({
             {activeArticle.action && (
               <Link
                 href={activeArticle.action.href}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 text-xs font-bold text-white shadow-xs transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-mm-brand px-4 text-xs font-semibold text-white shadow-xs transition hover:bg-mm-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
               >
                 {activeArticle.action.label}
               </Link>
             )}
             <a
               href="#contact-form"
-              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 text-xs font-bold text-ink transition hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-mm-brand/20 bg-white px-4 text-xs font-semibold text-mm-ink transition hover:bg-mm-brand/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
             >
               This didn’t help
             </a>
@@ -218,20 +218,20 @@ export function ParentHelpCentre({
         /* Search Results View */
         <section aria-label="Search results" className="space-y-4 max-w-3xl">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-extrabold text-ink">
+            <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-base font-semibold text-mm-ink">
               Search results for “{searchQuery}” ({matchedArticles.length})
             </h2>
             <button
               type="button"
               onClick={resetToOverview}
-              className="text-xs font-bold text-royal hover:underline"
+              className="text-xs font-semibold text-mm-brand hover:underline"
             >
               Clear search
             </button>
           </div>
 
           {matchedArticles.length === 0 ? (
-            <div className="rounded-2xl border border-royal/10 bg-white p-6 text-center text-sm text-muted">
+            <div className="rounded-2xl border border-mm-brand/10 bg-white p-6 text-center text-sm text-mm-ink-soft">
               No matching articles found. Try another term, or send us a message below.
             </div>
           ) : (
@@ -241,16 +241,16 @@ export function ParentHelpCentre({
                   key={art.slug}
                   type="button"
                   onClick={() => setSelectedArticleSlug(art.slug)}
-                  className="w-full text-left rounded-xl border border-royal/10 bg-white p-4 shadow-xs transition hover:border-royal/30 hover:bg-royal/5 flex items-center justify-between"
+                  className="w-full text-left rounded-xl border border-mm-brand/10 bg-white p-4 shadow-xs transition hover:border-mm-brand/30 hover:bg-mm-brand/5 flex items-center justify-between"
                 >
                   <div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-royal">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-mm-brand">
                       {art.category}
                     </span>
-                    <h3 className="mt-0.5 text-sm font-extrabold text-ink">{art.title}</h3>
-                    <p className="mt-1 text-xs text-muted line-clamp-1">{art.lead}</p>
+                    <h3 className="mt-0.5 text-sm font-semibold text-mm-ink">{art.title}</h3>
+                    <p className="mt-1 text-xs text-mm-ink-soft line-clamp-1">{art.lead}</p>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-muted/50 ml-4 shrink-0" aria-hidden="true" />
+                  <ChevronRight className="h-4 w-4 text-mm-ink-soft/50 ml-4 shrink-0" aria-hidden="true" />
                 </button>
               ))}
             </div>
@@ -266,7 +266,7 @@ export function ParentHelpCentre({
             <button
               type="button"
               onClick={() => setSelectedCategory(null)}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-royal hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-mm-brand hover:underline"
             >
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
               All topics
@@ -276,11 +276,11 @@ export function ParentHelpCentre({
           <div>
             <h2
               id="category-heading"
-              className="text-xl font-extrabold tracking-tight text-ink sm:text-2xl"
+              className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold tracking-tight text-mm-ink sm:text-2xl"
             >
               {activeCategoryObj.title}
             </h2>
-            <p className="mt-1 text-sm text-muted">{activeCategoryObj.description}</p>
+            <p className="mt-1 text-sm text-mm-ink-soft">{activeCategoryObj.description}</p>
           </div>
 
           <div className="grid gap-3 pt-2">
@@ -289,10 +289,10 @@ export function ParentHelpCentre({
                 key={item.slug}
                 type="button"
                 onClick={() => setSelectedArticleSlug(item.slug)}
-                className="w-full text-left rounded-xl border border-royal/10 bg-white p-4 shadow-xs transition hover:border-royal/30 hover:bg-royal/5 flex items-center justify-between"
+                className="w-full text-left rounded-xl border border-mm-brand/10 bg-white p-4 shadow-xs transition hover:border-mm-brand/30 hover:bg-mm-brand/5 flex items-center justify-between"
               >
-                <span className="text-sm font-extrabold text-ink">{item.title}</span>
-                <ChevronRight className="h-4 w-4 text-muted/50 ml-4 shrink-0" aria-hidden="true" />
+                <span className="text-sm font-semibold text-mm-ink">{item.title}</span>
+                <ChevronRight className="h-4 w-4 text-mm-ink-soft/50 ml-4 shrink-0" aria-hidden="true" />
               </button>
             ))}
           </div>
@@ -315,17 +315,17 @@ export function ParentHelpCentre({
                   setSelectedCategory(cat.id);
                 }
               }}
-              className="group text-left rounded-2xl border border-royal/10 bg-white p-5 shadow-xs transition hover:border-royal/30 hover:shadow-sm flex flex-col justify-between min-h-[140px]"
+              className="group text-left rounded-2xl border border-mm-brand/10 bg-white p-5 shadow-xs transition hover:border-mm-brand/30 hover:shadow-sm flex flex-col justify-between min-h-[140px]"
             >
               <div>
-                <h2 className="text-base font-extrabold text-ink group-hover:text-royal transition">
+                <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-base font-semibold text-mm-ink group-hover:text-mm-brand transition">
                   {cat.title}
                 </h2>
-                <p className="mt-1.5 text-xs leading-relaxed text-muted">
+                <p className="mt-1.5 text-xs leading-relaxed text-mm-ink-soft">
                   {cat.description}
                 </p>
               </div>
-              <p className="mt-4 text-[11px] font-semibold text-muted">
+              <p className="mt-4 text-[11px] font-semibold text-mm-ink-soft">
                 {cat.countLabel}
               </p>
             </button>
@@ -338,16 +338,16 @@ export function ParentHelpCentre({
         id="contact-form"
         data-testid="contact-support-section"
         aria-labelledby="contact-heading"
-        className="rounded-2xl border border-royal/15 bg-white p-6 shadow-sm md:p-8 max-w-3xl space-y-6"
+        className="rounded-2xl border border-mm-brand/15 bg-white p-6 shadow-sm md:p-8 max-w-3xl space-y-6"
       >
         <div>
           <h2
             id="contact-heading"
-            className="text-lg font-extrabold tracking-[-0.015em] text-ink sm:text-xl"
+            className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold tracking-[-0.015em] text-mm-ink sm:text-xl"
           >
             Can’t find it?
           </h2>
-          <p className="mt-1 text-xs text-muted sm:text-sm">
+          <p className="mt-1 text-xs text-mm-ink-soft sm:text-sm">
             Write to us. Tell us which child it is about and we will look at their details. A person reads every
             message and replies to <span className="font-semibold">{userEmail}</span>.
           </p>
@@ -355,14 +355,14 @@ export function ParentHelpCentre({
 
         <form onSubmit={handleSendMessage} className="space-y-4">
           <div>
-            <label htmlFor={childSelectId} className="block text-xs font-bold uppercase tracking-wider text-muted">
+            <label htmlFor={childSelectId} className="block text-xs font-semibold uppercase tracking-wider text-mm-ink-soft">
               Which child is this about?
             </label>
             <select
               id={childSelectId}
               value={contactChildId}
               onChange={(e) => setContactChildId(e.target.value)}
-              className="mt-1.5 min-h-11 w-full rounded-xl border border-royal/20 bg-white py-2.5 px-3.5 text-sm text-ink shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+              className="mt-1.5 min-h-11 w-full rounded-xl border border-mm-brand/20 bg-white py-2.5 px-3.5 text-sm text-mm-ink shadow-xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
             >
               <option value="">Not about a child</option>
               {childrenList.map((ch) => (
@@ -374,7 +374,7 @@ export function ParentHelpCentre({
           </div>
 
           <div>
-            <label htmlFor={messageInputId} className="block text-xs font-bold uppercase tracking-wider text-muted">
+            <label htmlFor={messageInputId} className="block text-xs font-semibold uppercase tracking-wider text-mm-ink-soft">
               What is happening?
             </label>
             <textarea
@@ -387,7 +387,7 @@ export function ParentHelpCentre({
                 setContactStatus("idle");
               }}
               placeholder="Tell us what you expected and what happened instead."
-              className="mt-1.5 w-full rounded-xl border border-royal/20 bg-white p-3.5 text-sm text-ink placeholder:text-muted/60 shadow-xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+              className="mt-1.5 w-full rounded-xl border border-mm-brand/20 bg-white p-3.5 text-sm text-mm-ink placeholder:text-mm-ink-soft/60 shadow-xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
             />
           </div>
 
@@ -395,12 +395,12 @@ export function ParentHelpCentre({
             <button
               type="submit"
               disabled={!contactMessage.trim()}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-royal px-5 text-xs font-extrabold text-white shadow-xs transition hover:bg-royal/90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-mm-brand px-5 text-xs font-semibold text-white shadow-xs transition hover:bg-mm-brand/90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               Email this to {SUPPORT_EMAIL}
             </button>
-            <p className="text-[11px] text-muted">
+            <p className="text-[11px] text-mm-ink-soft">
               This opens your email app with the message, your account and the child filled in. It is sent when you
               press send there.
             </p>
@@ -411,11 +411,11 @@ export function ParentHelpCentre({
           <div
             data-testid="contact-opened-note"
             role="status"
-            className="rounded-xl border border-royal/15 bg-royal/5 p-4 text-xs text-ink space-y-1"
+            className="rounded-xl border border-mm-brand/15 bg-mm-brand/5 p-4 text-xs text-mm-ink space-y-1"
           >
             <p>
-              <strong className="font-extrabold">Your email app should now be open.</strong> If nothing opened, write to{" "}
-              <a href={`mailto:${SUPPORT_EMAIL}`} className="font-bold text-royal underline">
+              <strong className="font-semibold">Your email app should now be open.</strong> If nothing opened, write to{" "}
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="font-semibold text-mm-brand underline">
                 {SUPPORT_EMAIL}
               </a>{" "}
               and paste your message — it is still in the box above.

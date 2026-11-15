@@ -45,41 +45,41 @@ export default async function ParentWritingPage() {
     <ParentShell active="/parent/children">
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl">Writing practice</h1>
-          <p className="mt-2 text-muted">
+          <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">Writing practice</h1>
+          <p className="mt-2 text-mm-ink-soft">
             You mark your child&apos;s writing against a simple rubric. MindMosaic does not mark or comment on children&apos;s
             writing.
           </p>
         </div>
 
         {children.length === 0 ? (
-          <p className="mt-6 rounded-2xl border border-dashed border-royal/20 p-5 text-muted">
+          <p className="mt-6 rounded-2xl border border-dashed border-mm-brand/20 p-5 text-mm-ink-soft">
             Link a child to your account to see their writing here.
           </p>
         ) : (
           <div className="space-y-8">
-            <div className="rounded-2xl border border-royal/10 bg-white p-5 shadow-sm">
-              <h2 className="text-lg font-extrabold text-ink">Sat it on paper?</h2>
-              <p className="mt-1 text-sm text-muted">
+            <div className="rounded-3xl border border-mm-brand/10 bg-white p-5 shadow-[0_18px_50px_rgba(49,32,86,0.09)]">
+              <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">Sat it on paper?</h2>
+              <p className="mt-1 text-sm text-mm-ink-soft">
                 Score the sheet straight away. You do not need to type the writing in.
               </p>
               <Link
                 href="/writing/mark/new"
                 data-testid="mark-paper-link"
-                className="mt-3 inline-block rounded-xl bg-royal px-4 py-2 text-sm font-extrabold text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/30"
+                className="mt-3 inline-block rounded-xl bg-mm-brand px-4 py-2 text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30"
               >
                 Mark a paper response
               </Link>
             </div>
             {children.map((child) => (
-              <section key={child.id} aria-labelledby={`child-${child.id}`} className="rounded-2xl border border-royal/10 bg-white p-5 shadow-sm">
-                <div className="flex items-center justify-between pb-3 border-b border-royal/10">
-                  <h2 id={`child-${child.id}`} className="text-lg font-extrabold text-ink">
+              <section key={child.id} aria-labelledby={`child-${child.id}`} className="rounded-3xl border border-mm-brand/10 bg-white p-5 shadow-[0_18px_50px_rgba(49,32,86,0.09)]">
+                <div className="flex items-center justify-between pb-3 border-b border-mm-brand/10">
+                  <h2 id={`child-${child.id}`} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                     {child.name}
                   </h2>
                   <Link
                     href={`/parent/children/${child.id}/writing`}
-                    className="text-xs font-bold text-royal hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20 rounded"
+                    className="text-xs font-semibold text-mm-brand hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20 rounded"
                   >
                     View {child.name}&apos;s dedicated page &rarr;
                   </Link>

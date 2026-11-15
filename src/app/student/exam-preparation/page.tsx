@@ -117,7 +117,7 @@ export default async function StudentExamPreparationPage() {
 
       {/* ---------- Readiness by subject ---------- */}
       <section className="grid gap-4 rounded-2xl border border-mm-line bg-white p-6">
-        <h2 className="text-lg font-bold text-mm-ink">Your marks by subject</h2>
+        <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">Your marks by subject</h2>
         {/*
           A paper submitted without a single answer contributes its
           marks to `available` and nothing to `earned`, so readiness
@@ -170,7 +170,7 @@ export default async function StudentExamPreparationPage() {
 
       {/* ---------- Format cards ---------- */}
       <section aria-labelledby="formats-heading" className="grid gap-3.5">
-        <h2 id="formats-heading" className="text-xl font-bold text-mm-ink">
+        <h2 id="formats-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
           Assessment formats
         </h2>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -199,7 +199,7 @@ export default async function StudentExamPreparationPage() {
                   >
                     {format.tag}
                   </p>
-                  <h3 className="text-[15px] font-bold text-mm-ink">{format.title}</h3>
+                  <h3 className="text-[15px] font-semibold text-mm-ink">{format.title}</h3>
                   <p className="text-[13px] leading-relaxed text-mm-muted">{format.body}</p>
                   <p
                     className={clsx(
@@ -219,7 +219,7 @@ export default async function StudentExamPreparationPage() {
       {/* ---------- Jurisdiction picker ---------- */}
       <section id="jurisdiction" aria-labelledby="jurisdiction-heading" className="grid gap-3.5">
         <div>
-          <h2 id="jurisdiction-heading" className="text-xl font-bold text-mm-ink">
+          <h2 id="jurisdiction-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
             Selective entry, by state and territory
           </h2>
           <p className="mt-2 max-w-[70ch] text-sm leading-relaxed text-mm-muted">
@@ -232,7 +232,7 @@ export default async function StudentExamPreparationPage() {
 
       {/* ---------- Recent papers ---------- */}
       <section aria-labelledby="recent-papers-heading" className="grid gap-3.5">
-        <h2 id="recent-papers-heading" className="text-xl font-bold text-mm-ink">
+        <h2 id="recent-papers-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
           Recent papers
         </h2>
         {recent.length === 0 ? (
@@ -254,7 +254,7 @@ export default async function StudentExamPreparationPage() {
                   )}
                 >
                   <div className="min-w-0">
-                    <p className="truncate text-[15px] font-bold text-mm-ink">{attempt.title}</p>
+                    <p className="truncate text-[15px] font-semibold text-mm-ink">{attempt.title}</p>
                     <p className="mt-0.5 text-[13px] text-mm-muted">
                       {attempt.timing === "timed" ? "Timed" : "Untimed"}
                       {attempt.totalQuestions !== null ? ` · ${attempt.totalQuestions} questions` : ""}
@@ -264,7 +264,7 @@ export default async function StudentExamPreparationPage() {
                   <p className="text-[13px] text-mm-muted">{formatDate(attempt.submittedAt)}</p>
                   <p
                     className={clsx(
-                      "font-mono text-[15px] font-bold",
+                      "font-mono text-[15px] font-semibold",
                       attempt.scorePercent === null
                         ? "text-mm-muted"
                         : attempt.scorePercent >= 55

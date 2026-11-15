@@ -93,7 +93,7 @@ test("B1–B2: wrong code and wrong PIN get one generic message; correct ones re
   await studentSignIn(page, fam.loginCode, fam.pin);
   await expect(page).toHaveURL(/\/student$/, { timeout: 30_000 });
   await dismissWelcome(page);
-  await expect(page.getByRole("heading", { level: 1, name: new RegExp(`Welcome back, ${fam.childName.split(" ")[0]}`) })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: new RegExp(`^Welcome(?: back)?, ${fam.childName.split(" ")[0]}`) })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("b2-my-space.png"), fullPage: true });
 
   // Unauthorised routes for a student
@@ -216,7 +216,8 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   // C9–C11 sign out, sign back in, the result is in history
   await page.goto("/student");
   await dismissWelcome(page);
-  await page.getByRole("button", { name: /sign out/i }).first().click();
+  await page.getByRole("button", { name: /account menu/i }).first().click();
+  await page.getByRole("menuitem", { name: "Sign out" }).click();
   await expect(page).not.toHaveURL(/\/student/, { timeout: 20_000 });
   await studentSignIn(page, fam.loginCode, fam.pin);
   await expect(page).toHaveURL(/\/student$/, { timeout: 30_000 });

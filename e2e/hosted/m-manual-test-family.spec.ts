@@ -47,17 +47,21 @@ test("seed the owner's manual-testing family", async ({ page }, testInfo) => {
   for (const child of CHILDREN) {
     await page.goto("/parent/children");
     await page.waitForLoadState("networkidle");
-    if (await page.getByText(child.name, { exact: true }).first().isVisible().catch(() => false)) {
+    if (await page.getByRole("link", { name: `Manage ${child.name}` }).isVisible().catch(() => false)) {
       issued.push({ name: child.name, year: child.year, loginCode: "(already existed: see Children page)", pin: "(reset from Children page)" });
       continue;
     }
-    await page.getByLabel("Child's name").fill(child.name);
-    await page.getByLabel("Year level (optional)").selectOption({ label: child.year });
-    if (child.pin) await page.getByLabel("PIN (optional)").fill(child.pin);
+    await page.goto("/parent/setup");
+    await page.getByLabel("First name").fill(child.name);
+    await page.getByLabel("Year level").selectOption({ label: child.year });
+    if (child.pin) {
+      await page.getByLabel("I’ll choose it").check();
+      await page.getByLabel("PIN", { exact: true }).fill(child.pin);
+    }
     const created = page.waitForResponse(
       (r) => r.url().endsWith("/api/parent/children") && r.request().method() === "POST",
     );
-    await page.getByRole("button", { name: "Create login" }).click();
+    await page.getByRole("button", { name: /^Create .*profile$/ }).click();
     const res = await created;
     expect(res.ok(), `create ${child.name}: ${res.status()}`).toBe(true);
     const body = (await res.json()) as { loginCode?: string; pin?: string };

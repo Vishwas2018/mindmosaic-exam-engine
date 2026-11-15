@@ -12,6 +12,7 @@ import {
 import { loadArchivedChildIds, loadChildLoginCode } from "@/features/parent-dashboard/child-access";
 import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
+import { PageHeader } from "@/features/parent-dashboard/components/parent-ui";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
@@ -52,14 +53,14 @@ export default async function ParentChildrenPage() {
         <ParentShell active="/parent/children">
           <div className="space-y-8">
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-xs font-medium text-amber-900">
-              <strong className="font-bold">Preview Demonstration:</strong> Showing sample family children and credentials. No live database connection is active.
+              <strong className="font-semibold">Preview Demonstration:</strong> Showing sample family children and credentials. No live database connection is active.
             </div>
 
             <div>
-              <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
+              <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">
                 Children
               </h1>
-              <p className="mt-1 text-sm font-semibold text-muted">
+              <p className="mt-1 text-sm font-semibold text-mm-ink-soft">
                 Profiles, sign-in details and paid places.
               </p>
             </div>
@@ -138,25 +139,10 @@ export default async function ParentChildrenPage() {
 
   return (
     <ParentShell active="/parent/children">
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-            Children
-          </h1>
-          <p className="mt-1 text-sm font-semibold text-muted">
-            Profiles and sign-in details.
-          </p>
-        </div>
+      <div className="grid gap-6">
+        <PageHeader title="Children" lead={planProps.planName ? "Profiles, sign-in details and paid places." : "Profiles and sign-in details."} />
 
-        <ChildrenManager
-          initialChildren={children}
-          availableYearLevels={years}
-          {...planProps}
-        />
-
-        <div id="add-child">
-          <AddChildCard availableYearLevels={years} />
-        </div>
+        <ChildrenManager initialChildren={children} availableYearLevels={years} {...planProps} />
       </div>
     </ParentShell>
   );

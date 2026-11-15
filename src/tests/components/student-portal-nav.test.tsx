@@ -1,5 +1,10 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }) }));
+vi.mock("@/features/auth/AuthProvider", () => ({
+  useAuth: () => ({ status: "authenticated", displayName: "Sam Lee", role: "student", signOut: vi.fn() }),
+}));
 
 import { StudentBottomNav } from "@/features/student/components/StudentBottomNav";
 import { StudentSidebar } from "@/features/student/components/StudentSidebar";

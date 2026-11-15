@@ -3,20 +3,13 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  Archive as ArchiveIcon,
-  ArchiveRestore,
-  Pencil,
-  Plus,
-  Printer,
-  ShieldCheck,
-} from "lucide-react";
+import { Check } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 import { Button, ConfirmDialog, Input, Modal, Select } from "@/components/ui";
 import { isValidPin } from "@/features/auth/student-alias";
 import { PrintSignInCardDialog } from "./PrintSignInCardDialog";
-
-import { ChildLoginCode } from "./ChildLoginCode";
+import { Card, ChildInitial, SectionTitle, pButtonPrimary, pButtonQuiet, pButtonSecondary, pFocus } from "./parent-ui";
 
 export interface ChildListItem {
   id: string;
@@ -204,266 +197,166 @@ export function ChildrenManager({
       : null;
 
   return (
-    <div className="space-y-8">
+    <div className="grid gap-5">
       {formError && !renameTarget && (
-        <p role="alert" className="rounded-xl bg-error/10 px-4 py-3 text-sm font-semibold text-error">
+        <p role="alert" className="rounded-xl bg-[#fdecec] px-4 py-3 text-sm font-medium text-[#b91c1c]">
           {formError}
         </p>
       )}
 
-      {/* 1. Paid Places Section (Artboards b11–b13, Decision P5) */}
+      {/* Paid places (artboard 11, decision P5): only when the page passed real plan figures. */}
       {places && (
-      <section aria-labelledby="paid-places-heading" className="rounded-2xl border border-royal/10 bg-white p-6 shadow-sm">
-        <h2 id="paid-places-heading" className="text-xs font-black uppercase tracking-wider text-royal">
-          Paid places
-        </h2>
-        <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-          <p className="text-2xl font-black text-ink">
-            {places.used} of {places.total} used on your {places.planName}.
+        <Card as="section" aria-labelledby="paid-places-heading">
+          <SectionTitle id="paid-places-heading">Paid places</SectionTitle>
+          <p className="mt-2 text-[15px] leading-[1.6] text-mm-ink-soft">
+            {places.used} of {places.total} used on your {places.planName}. A place is what lets a child sign in and
+            practise. A profile is the record of who they are &mdash; you can keep more profiles than you have places.
           </p>
-          <div className="text-xs font-bold text-muted">
+          <span aria-hidden="true" className="mt-4 block h-2 max-w-[340px] overflow-hidden rounded-full bg-mm-track">
+            <span className="block h-full rounded-full bg-mm-brand" style={{ width: `${Math.min(100, (places.used / Math.max(1, places.total)) * 100)}%` }} />
+          </span>
+          <p className="mt-4 text-[13px] text-mm-muted">
             {places.free} {places.free === 1 ? "place" : "places"} free ·{" "}
-            <Link href="/parent/account" className="text-royal underline hover:text-royal/80">
+            <Link href="/parent/account/billing" className="text-[15px] font-semibold text-mm-brand hover:underline">
               Change plan
             </Link>
-          </div>
-        </div>
-        <p className="mt-2 text-xs leading-relaxed text-muted">
-          A place is what lets a child sign in and practise. A profile is the record of who they are — you can keep more profiles than you have places.
-        </p>
-      </section>
+          </p>
+        </Card>
       )}
 
-      {/* 2. Your Children List */}
-      <section aria-labelledby="your-children-heading" className="rounded-2xl border border-royal/10 bg-white p-6 shadow-sm">
-        <div className="flex items-center justify-between border-b border-royal/10 pb-4">
-          <div>
-            <h2 id="your-children-heading" className="text-xl font-black text-ink">
-              Your children
-            </h2>
-            <p className="text-xs text-muted">Profiles and login credentials</p>
-          </div>
-          <a
-            href="#add-child"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-royal px-4 text-xs font-bold text-white shadow-sm transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-          >
-            <Plus className="h-4 w-4" />
+      <Card as="section" aria-labelledby="your-children-heading">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <SectionTitle id="your-children-heading">Your children</SectionTitle>
+          <Link href="/parent/setup" className={pButtonPrimary}>
             Add a child
-          </a>
+          </Link>
         </div>
 
-        <div className="mt-6 divide-y divide-royal/10">
-          {activeChildren.map((child) => {
-            const initial = child.displayName.trim().charAt(0).toUpperCase() || "C";
-            return (
-              <div key={child.id} className="py-5 first:pt-0 last:pb-0">
-              <div
-                className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-3xl"
+        <ul className="mt-5 divide-y divide-mm-line">
+          {activeChildren.map((child, index) => (
+            <li key={child.id} className="flex flex-wrap items-center justify-between gap-3 py-[18px] first:pt-0">
+              <Link
+                href={`/parent/children/${child.id}`}
+                className={twMerge(
+                  "flex min-w-0 items-center gap-3 rounded-2xl border border-mm-line bg-white px-[18px] py-3.5 hover:border-mm-brand/40",
+                  pFocus,
+                )}
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    aria-hidden="true"
-                    className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-royal/10 text-lg font-black text-royal shadow-sm"
-                  >
-                    {initial}
-                  </div>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Link
-                        href={`/parent/children/${child.id}`}
-                        className="inline-flex min-h-11 items-center text-base font-black text-ink hover:text-royal hover:underline"
-                      >
-                        {child.displayName}
-                      </Link>
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                        Can sign in
-                      </span>
-                    </div>
-                    <div className="mt-1 flex flex-wrap items-center gap-2">
-                      {child.yearLevel !== null && (
-                        <span className="inline-flex items-center rounded-full bg-royal/10 px-2.5 py-0.5 text-xs font-bold text-royal">
-                          Grade {child.yearLevel}
-                        </span>
-                      )}
-                      <span className="inline-flex items-center rounded-full bg-canvas px-2.5 py-0.5 text-xs font-bold text-muted">
-                        {child.sessionCount} {child.sessionCount === 1 ? "session" : "sessions"}
-                      </span>
-                      {child.loginCode && (
-                        <span className="text-xs text-muted">
-                          · signs in with{" "}
-                          <span className="font-mono font-bold tracking-wider text-royal">
-                            {child.loginCode}
-                          </span>
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <Link
-                    href={`/parent/children/${child.id}`}
-                    className="inline-flex min-h-11 items-center justify-center rounded-full border border-royal/20 bg-white px-3.5 text-xs font-bold text-ink shadow-sm transition hover:border-royal hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-                  >
-                    Manage
-                  </Link>
-                  <Link
-                    href={`/parent/children/${child.id}/progress`}
-                    className="inline-flex min-h-11 items-center justify-center rounded-full border border-royal/10 bg-canvas px-3.5 text-xs font-bold text-ink transition hover:bg-royal/10 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-                  >
-                    Progress
-                  </Link>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => openRename(child)}
-                  >
-                    <Pencil aria-hidden="true" className="h-3.5 w-3.5 mr-1" />
-                    Edit
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setArchiveTarget(child)}
-                  >
-                    <ArchiveIcon aria-hidden="true" className="h-3.5 w-3.5 mr-1" />
-                    Archive
-                  </Button>
-                </div>
+                <ChildInitial name={child.displayName} index={index} />
+                <span className="min-w-0">
+                  <span className="block truncate text-[17px] font-semibold text-mm-ink">{child.displayName}</span>
+                  <span className="block text-[13.5px] text-mm-muted">
+                    {child.yearLevel !== null ? `Year ${child.yearLevel}` : "Year not set"}
+                    {child.loginCode ? (
+                      <>
+                        {" "}· signs in with <span className="font-mono tracking-wide">{child.loginCode}</span>
+                      </>
+                    ) : null}
+                  </span>
+                </span>
+              </Link>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-[#d9efec] px-2.5 py-1 text-[13px] font-semibold text-[#0b6b63]">Can sign in</span>
+                <Link href={`/parent/children/${child.id}`} aria-label={`Manage ${child.displayName}`} className={pButtonSecondary}>
+                  Manage
+                </Link>
+                <Link href={`/parent/children/${child.id}/progress`} aria-label={`Progress for ${child.displayName}`} className={pButtonQuiet}>
+                  Progress
+                </Link>
               </div>
-              <ChildLoginCode childId={child.id} childName={child.displayName} />
-              </div>
-            );
-          })}
-
+            </li>
+          ))}
           {activeChildren.length === 0 && (
-            <div className="py-8 text-center">
-              <p className="text-sm font-semibold text-muted">
-                {children.length === 0
-                  ? "No linked children yet."
-                  : "No active children. Restore an archived child below."}
-              </p>
-            </div>
+            <li className="py-6 text-[15px] text-mm-ink-soft">
+              {children.length === 0 ? "No children yet. Add one to create their sign-in." : "No active children. Restore one below."}
+            </li>
           )}
-        </div>
-      </section>
+        </ul>
+        <p className="mt-2 border-t border-mm-line pt-5 text-sm text-mm-ink-soft">
+          Archived profiles are kept and can be restored.{" "}
+          <Link href="/parent/help" className="font-semibold text-mm-brand hover:underline">
+            See what archiving does
+          </Link>
+          .
+        </p>
+      </Card>
 
-      {/* 3. Archived Profiles (Reversible Pause, Decision P6) */}
       {archivedChildren.length > 0 && (
-        <section
-          aria-labelledby="archived-children-heading"
-          role="region"
-          aria-label="Archived children"
-          className="rounded-2xl border border-royal/10 bg-canvas/40 p-6"
-        >
-          <div>
-            <h2 id="archived-children-heading" className="text-lg font-black text-ink">
-              Archived children
-            </h2>
-            <p className="mt-1 text-xs text-muted">
-              These children can&apos;t sign in. Their results are kept and you can restore them at any time.
-            </p>
-          </div>
-
-          <div className="mt-4 divide-y divide-royal/10">
-            {archivedChildren.map((child) => (
-              <div
-                key={child.id}
-                className="flex flex-col gap-3 py-4 first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-extrabold text-ink">{child.displayName}</span>
-                    <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-bold text-amber-800">
-                      Archived
+        <Card as="section" role="region" aria-label="Archived children" className="shadow-none">
+          <SectionTitle>Archived children</SectionTitle>
+          <p className="mt-1.5 text-sm text-mm-ink-soft">
+            These children can&rsquo;t sign in. Their results are kept and you can restore them at any time.
+          </p>
+          <ul className="mt-4 divide-y divide-mm-line">
+            {archivedChildren.map((child, index) => (
+              <li key={child.id} className="flex flex-wrap items-center justify-between gap-3 py-4 first:pt-0">
+                <span className="flex items-center gap-3">
+                  <ChildInitial name={child.displayName} index={activeChildren.length + index} />
+                  <span>
+                    <span className="block text-[17px] font-semibold text-mm-ink">{child.displayName}</span>
+                    <span className="block text-[13.5px] text-mm-muted">
+                      {child.yearLevel !== null ? `Year ${child.yearLevel} · ` : ""}archived
                     </span>
-                  </div>
-                  <div className="mt-1 flex flex-wrap items-center gap-2">
-                    {child.yearLevel !== null && (
-                      <span className="inline-flex items-center rounded-full bg-royal/10 px-2 py-0.5 text-xs font-bold text-royal">
-                        Grade {child.yearLevel}
-                      </span>
-                    )}
-                    <span className="inline-flex items-center rounded-full bg-canvas px-2 py-0.5 text-xs font-bold text-muted">
-                      {child.sessionCount} {child.sessionCount === 1 ? "session" : "sessions"}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => openRename(child)}
-                  >
-                    <Pencil aria-hidden="true" className="h-3.5 w-3.5 mr-1" />
+                  </span>
+                </span>
+                <span className="flex flex-wrap gap-2">
+                  <button type="button" aria-label={`Edit ${child.displayName}`} className={pButtonQuiet} onClick={() => openRename(child)}>
                     Edit
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     type="button"
-                    variant="secondary"
-                    size="sm"
+                    className={pButtonSecondary}
                     onClick={() => handleRestore(child)}
                     disabled={restoringId === child.id}
                     aria-label={`Restore ${child.displayName}`}
                   >
-                    <ArchiveRestore aria-hidden="true" className="mr-1.5 h-3.5 w-3.5" />
-                    {restoringId === child.id ? "Restoring..." : `Restore ${child.displayName}`}
-                  </Button>
-                </div>
-              </div>
+                    {restoringId === child.id ? "Restoring…" : `Restore ${child.displayName}`}
+                  </button>
+                </span>
+              </li>
             ))}
-          </div>
-        </section>
+          </ul>
+        </Card>
       )}
 
-      {/* 4. How Your Children Sign In (Educational panel) */}
-      <section
-        aria-labelledby="how-signin-heading"
-        className="rounded-2xl border border-royal/10 bg-white p-6 shadow-sm"
-      >
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="h-5 w-5 text-royal" />
-          <h2 id="how-signin-heading" className="text-xl font-black text-ink">
-            How your children sign in
-          </h2>
-        </div>
-
-        <p className="mt-3 text-xs leading-relaxed text-muted">
-          Children do not use an email address. Each one has a login code that never changes and a 6-digit PIN you can reset at any time. They go to the same sign-in page you use and choose &ldquo;I&rsquo;m a student&rdquo;.
-        </p>
-
-        {activeChildren.some((child) => child.loginCode) && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {activeChildren
-              .filter((child) => child.loginCode)
-              .map((child) => (
-                <Button
-                  key={child.id}
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => setPrintTarget(child)}
-                >
-                  <Printer aria-hidden="true" className="mr-1.5 h-4 w-4" />
-                  Print {child.displayName}&rsquo;s sign-in card
-                </Button>
-              ))}
+      <Card as="section" aria-labelledby="how-signin-heading">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,530px)]">
+          <div>
+            <SectionTitle id="how-signin-heading">How your children sign in</SectionTitle>
+            <p className="mt-3 text-[15px] leading-[1.6] text-mm-ink-soft">
+              Children do not use an email address. Each one has a <b className="font-semibold text-mm-ink">login code</b>{" "}
+              that never changes and a <b className="font-semibold text-mm-ink">6-digit PIN</b> you can reset at any time.
+              They go to the same sign-in page you use and choose &ldquo;I&rsquo;m a student&rdquo;.
+            </p>
+            {activeChildren.some((child) => child.loginCode) && (
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                {activeChildren
+                  .filter((child) => child.loginCode)
+                  .map((child) => (
+                    <button key={child.id} type="button" className={pButtonSecondary} onClick={() => setPrintTarget(child)}>
+                      Print {child.displayName}&rsquo;s sign-in card
+                    </button>
+                  ))}
+              </div>
+            )}
           </div>
-        )}
-
-        {/* Shared Computer Tip */}
-        <div className="mt-6 rounded-xl border border-royal/10 bg-royal/5 p-4 text-xs text-ink">
-          <strong className="block font-bold text-royal">On a shared computer:</strong>
-          <p className="mt-1 text-muted">
-            Each child signs out when they finish, so the next one does not land in their work. Your parent account and a child&rsquo;s account cannot be open at the same time in one browser. A PIN is not a secret from you — you can always reset it.
-          </p>
+          <div className="rounded-2xl border border-mm-line bg-mm-tint-soft px-5 py-5">
+            <p className="text-sm font-semibold text-mm-ink-soft">On a shared computer</p>
+            <ul className="mt-2.5 grid gap-2.5 text-[15px] leading-[1.5] text-mm-ink-soft">
+              {[
+                "Each child signs out when they finish, so the next one does not land in their work.",
+                "Your parent account and a child’s account cannot be open at the same time in one browser.",
+                "A PIN is not a secret from you — you can always reset it.",
+              ].map((t) => (
+                <li key={t} className="flex gap-2.5">
+                  <Check aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-[#0f6b32]" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </section>
+      </Card>
 
       {/* Modals & Dialogs */}
       {/* 1. Edit Child Dialog */}
@@ -502,7 +395,7 @@ export function ChildrenManager({
               <option value="">No year level</option>
               {yearOptions.map((year) => (
                 <option key={year} value={year}>
-                  Grade {year}
+                  Year {year}
                 </option>
               ))}
             </Select>

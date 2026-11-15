@@ -28,7 +28,7 @@ export function OnboardingDiagnosticSummary({
           <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5" />
           Diagnostic Completed · Year {yearLevel}
         </div>
-        <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink sm:text-3xl">
+        <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-mm-ink sm:text-3xl">
           Your starting baseline is ready!
         </h2>
         <p className="text-sm leading-relaxed text-mm-muted max-w-md mx-auto">
@@ -37,9 +37,9 @@ export function OnboardingDiagnosticSummary({
       </div>
 
       {/* Score card */}
-      <div className="grid grid-cols-2 gap-3 rounded-2xl border border-royal/15 bg-white p-4 shadow-sm">
-        <div className="border-r border-royal/10 pr-2">
-          <p className="font-[family-name:var(--font-display)] text-3xl font-extrabold text-primary">
+      <div className="grid grid-cols-2 gap-3 rounded-2xl border border-mm-brand/15 bg-white p-4 shadow-sm">
+        <div className="border-r border-mm-brand/10 pr-2">
+          <p className="font-[family-name:var(--font-display)] text-3xl font-semibold text-primary">
             {accuracy}%
           </p>
           <p className="text-xs font-semibold uppercase tracking-wider text-mm-muted">
@@ -47,7 +47,7 @@ export function OnboardingDiagnosticSummary({
           </p>
         </div>
         <div className="pl-2">
-          <p className="font-[family-name:var(--font-display)] text-3xl font-extrabold text-mm-ink">
+          <p className="font-[family-name:var(--font-display)] text-3xl font-semibold text-mm-ink">
             {correctCount} / {totalQuestions}
           </p>
           <p className="text-xs font-semibold uppercase tracking-wider text-mm-muted">
@@ -59,7 +59,7 @@ export function OnboardingDiagnosticSummary({
       {/* Key insights / strengths */}
       {strengths.length > 0 && (
         <div className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 text-left">
-          <div className="flex items-center gap-2 text-xs font-bold text-emerald-900">
+          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-900">
             <Sparkles aria-hidden="true" className="h-4 w-4 text-emerald-600" />
             <span>Identified Strengths</span>
           </div>

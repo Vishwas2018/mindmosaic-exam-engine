@@ -112,7 +112,7 @@ export function PracticeStudioSelector({
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-mm-tint text-primary">
           <AlertCircle className="h-6 w-6" aria-hidden="true" />
         </div>
-        <p className="mt-3 font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+        <p className="mt-3 font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
           We couldn&rsquo;t check what practice is available right now.
         </p>
         <p className="mt-1 text-mm-muted">
@@ -125,7 +125,7 @@ export function PracticeStudioSelector({
   if (!hasAnyContentForYear) {
     return (
       <div className="rounded-2xl border border-dashed border-mm-line bg-white p-8 text-center text-sm text-mm-muted">
-        <h2 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+        <h2 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
           No practice available
         </h2>
         <p className="mt-1">There is no practice available for Year {selectedYear} yet.</p>
@@ -140,7 +140,7 @@ export function PracticeStudioSelector({
         {/* Step 1: Year Level */}
         <section aria-labelledby="step-year-heading" className="rounded-2xl border border-mm-line bg-white p-6 shadow-xs">
           <div className="flex items-center justify-between">
-            <h2 id="step-year-heading" className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+            <h2 id="step-year-heading" className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
               1. Year level
             </h2>
             <span className="text-xs font-semibold text-mm-muted">Step 1 of 5</span>
@@ -182,7 +182,7 @@ export function PracticeStudioSelector({
         {/* Step 2: Programme */}
         <section aria-labelledby="step-programme-heading" className="rounded-2xl border border-mm-line bg-white p-6 shadow-xs">
           <div className="flex items-center justify-between">
-            <h2 id="step-programme-heading" className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+            <h2 id="step-programme-heading" className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
               2. Programme
             </h2>
             <span className="text-xs font-semibold text-mm-muted">Step 2 of 5</span>
@@ -210,7 +210,7 @@ export function PracticeStudioSelector({
                   }`}
                 >
                   <div className="flex w-full items-center justify-between">
-                    <span className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+                    <span className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
                       {label}
                     </span>
                     {isStyleReady ? (
@@ -234,7 +234,7 @@ export function PracticeStudioSelector({
         {selectedStyle && (
           <section aria-labelledby="step-subject-heading" className="rounded-2xl border border-mm-line bg-white p-6 shadow-xs">
             <div className="flex items-center justify-between">
-              <h2 id="step-subject-heading" className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+              <h2 id="step-subject-heading" className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
                 3. Subject
               </h2>
               <span className="text-xs font-semibold text-mm-muted">Step 3 of 5</span>
@@ -264,7 +264,7 @@ export function PracticeStudioSelector({
                       }`}
                     >
                       <div className="flex w-full items-center justify-between">
-                        <span className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+                        <span className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                           {label}
                         </span>
                         {isSelected && <CheckCircle2 className="h-4 w-4 text-primary" aria-hidden="true" />}
@@ -287,7 +287,7 @@ export function PracticeStudioSelector({
         {selectedStyle && selectedSubject && currentSubjectObj && (
           <section aria-labelledby="step-strand-heading" className="rounded-2xl border border-mm-line bg-white p-6 shadow-xs">
             <div className="flex items-center justify-between">
-              <h2 id="step-strand-heading" className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+              <h2 id="step-strand-heading" className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
                 4. Strand
               </h2>
               <span className="text-xs font-semibold text-mm-muted">Step 4 of 5</span>
@@ -317,7 +317,7 @@ export function PracticeStudioSelector({
                       }`}
                     >
                       <div className="flex w-full items-center justify-between">
-                        <span className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+                        <span className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                           {strand.strand}
                         </span>
                         {isSelected && <CheckCircle2 className="h-4 w-4 text-primary" aria-hidden="true" />}
@@ -339,7 +339,7 @@ export function PracticeStudioSelector({
         {currentStrandObj && (
           <section aria-labelledby="step-options-heading" className="rounded-2xl border border-mm-line bg-white p-6 shadow-xs">
             <div className="flex items-center justify-between">
-              <h2 id="step-options-heading" className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+              <h2 id="step-options-heading" className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
                 5. Set options
               </h2>
               <span className="text-xs font-semibold text-mm-muted">Step 5 of 5</span>
@@ -347,7 +347,7 @@ export function PracticeStudioSelector({
 
             {/* Set Size */}
             <div className="mt-5 space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-mm-muted">Set size</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-mm-muted">Set size</h3>
               {offeredSizes.length === 0 ? (
                 <p className="text-sm text-mm-muted">No set sizes fit this strand.</p>
               ) : (
@@ -376,7 +376,7 @@ export function PracticeStudioSelector({
 
             {/* Timer mode */}
             <div className="mt-6 space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-mm-muted">Pacing</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-mm-muted">Pacing</h3>
               <div className="grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
@@ -388,7 +388,7 @@ export function PracticeStudioSelector({
                       : "border border-mm-line bg-white hover:border-primary/40"
                   }`}
                 >
-                  <span className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+                  <span className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                     Untimed (recommended)
                   </span>
                   <p className="mt-1 text-xs text-mm-muted">
@@ -406,7 +406,7 @@ export function PracticeStudioSelector({
                       : "border border-mm-line bg-white hover:border-primary/40"
                   }`}
                 >
-                  <span className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+                  <span className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                     Timed practice
                   </span>
                   <p className="mt-1 text-xs text-mm-muted">
@@ -422,7 +422,7 @@ export function PracticeStudioSelector({
       {/* Summary Rail */}
       <aside aria-label="Practice set summary" className="h-fit space-y-4 lg:sticky lg:top-8">
         <div className="rounded-2xl border border-mm-line bg-white p-6 shadow-xs">
-          <h2 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+          <h2 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
             Your practice set
           </h2>
 

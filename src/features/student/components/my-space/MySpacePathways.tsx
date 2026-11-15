@@ -32,7 +32,7 @@ export function MySpacePathways({
 
   return (
     <section aria-labelledby="my-space-pathways" className="space-y-3">
-      <h2 id="my-space-pathways" className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+      <h2 id="my-space-pathways" className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
         Year {yearLevel} practice you can start
       </h2>
       {unchecked ? (
@@ -47,7 +47,7 @@ export function MySpacePathways({
         <div className="grid gap-3 sm:grid-cols-2">
           {groups.map((group) => (
             <div key={group.style} className="rounded-2xl border border-mm-line bg-white p-5 shadow-xs">
-              <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">{group.label}</h3>
+              <h3 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">{group.label}</h3>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {group.subjects.map((s) => (
                   <li key={s.subject}>

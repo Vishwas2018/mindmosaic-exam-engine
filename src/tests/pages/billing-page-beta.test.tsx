@@ -34,13 +34,10 @@ describe("/billing during the free family beta", () => {
     expect(screen.getByRole("link", { name: "Back to My Space" })).toHaveAttribute("href", "/student");
   });
 
-  it("offers nothing for sale to a parent when payments are not switched on", async () => {
+  it("sends a parent to Account > Plan & billing when payments are not switched on, whatever row is stored", async () => {
     state.user = { id: "p" };
     state.role = "parent";
-    render(await BillingPage());
-    expect(screen.getByTestId("billing-free-beta")).toHaveTextContent(/family beta is free/i);
-    expect(screen.queryByText(/Choose the Family plan/i)).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /subscribe|checkout|start/i })).not.toBeInTheDocument();
+    await expect(BillingPage()).rejects.toThrow(/NEXT_REDIRECT/);
   });
 
   it("tells a guest the same, with no checkout", async () => {

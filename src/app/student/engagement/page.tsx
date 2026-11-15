@@ -85,7 +85,7 @@ export default async function StudentEngagementPage() {
       )}
 
       <div>
-        <h2 className="mb-3 text-xl font-bold text-mm-ink">Recent completed sessions</h2>
+        <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mb-3 text-xl font-semibold text-mm-ink">Recent completed sessions</h2>
         <MyProgressSessionsTable attempts={overview.attempts} />
       </div>
     </StudentPortalShell>

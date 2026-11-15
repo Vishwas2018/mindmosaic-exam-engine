@@ -40,7 +40,7 @@ test.describe("student portal: real data, not placeholders", () => {
     // double-mount (RecentActivityCard is only ever referenced once in
     // src/app/student/page.tsx). Worth a follow-up if it recurs; .first()
     // still verifies the heading is genuinely present either way.
-    await expect(page.getByText("Recent activity").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Recent results" })).toBeVisible();
     // RecentActivityCard renders the attempt title as an <h3> — the only
     // one on this page, so this is unambiguous.
     await expect(page.getByRole("heading", { level: 3, name: REAL_ATTEMPT_TITLE })).toBeVisible();
@@ -90,7 +90,9 @@ test.describe("student portal: real data, not placeholders", () => {
     );
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
-    await expect(page.getByTitle("No notifications")).toHaveAttribute("aria-disabled", "true");
+    /* The design top bar has no placeholder controls at all: no inert bell, no "coming soon" goal editor. */
+    await expect(page.getByTitle("No notifications")).toHaveCount(0);
+    await expect(page.getByText(/Term \d · Week \d|Edit interests/)).toHaveCount(0);
   });
 
   test("Practice Studio's five-step selector configures and links to real practice sessions", async ({

@@ -69,7 +69,7 @@ export function DashboardHero({ recommendation }: { recommendation: StartHereRec
                 </span>
               )}
             </div>
-            <h2 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink lg:text-2xl">
+            <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink lg:text-2xl">
               {recommendation.title}
             </h2>
             <p className="max-w-2xl text-sm leading-relaxed text-mm-muted">{recommendation.description}</p>
@@ -97,7 +97,7 @@ export function DashboardHero({ recommendation }: { recommendation: StartHereRec
                 <div className="flex items-center gap-3 sm:border-l sm:border-mm-line sm:pl-4">
                   <div className="relative flex h-12 w-12 shrink-0 items-center justify-center">
                     <RadialProgressRing percent={progress.percent} size={48} />
-                    <span className="absolute font-[family-name:var(--font-display)] text-xs font-bold text-primary">
+                    <span className="absolute font-[family-name:var(--font-display)] text-xs font-semibold text-primary">
                       {progress.percent}%
                     </span>
                   </div>

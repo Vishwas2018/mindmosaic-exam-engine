@@ -121,7 +121,7 @@ function ChildSelector({
               </span>
               {child.yearLevel !== null && (
                 <span className="block text-xs font-semibold text-muted">
-                  Grade {child.yearLevel}
+                  Year {child.yearLevel}
                 </span>
               )}
               {child.archived && (
@@ -412,7 +412,7 @@ export function ParentDashboard({
             How {child.displayName} is doing
           </h1>
           <p className="mt-2 text-sm font-semibold text-muted">
-            {child.yearLevel !== null && <>Grade {child.yearLevel} · </>}
+            {child.yearLevel !== null && <>Year {child.yearLevel} · </>}
             Read-only view — results are scored and stored on our servers.
           </p>
           {child.archived && (

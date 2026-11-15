@@ -33,12 +33,13 @@ test.describe("parent archive / restore lifecycle", () => {
 
     try {
       /* 1. The parent creates a child and the child signs in. */
-      await parent.goto("/parent");
-      await parent.getByLabel("Child's name").fill(childName);
+      await parent.goto("/parent/setup");
+      await parent.getByLabel("First name").fill(childName);
+      await parent.getByLabel("Year level").selectOption("3");
       const created = parent.waitForResponse(
         (response) => response.url().endsWith("/api/parent/children") && response.request().method() === "POST",
       );
-      await parent.getByRole("button", { name: "Create login" }).click();
+      await parent.getByRole("button", { name: `Create ${childName}’s profile` }).click();
       const body = (await (await created).json()) as { ok: boolean; loginCode: string; pin: string };
       expect(body.ok).toBe(true);
 
@@ -49,10 +50,12 @@ test.describe("parent archive / restore lifecycle", () => {
       await childSignsIn(child, body.loginCode, body.pin);
       await expect(child).toHaveURL(/\/student(\/|$)/);
 
-      /* 2. The parent archives the child. */
+      /* 2. The parent pauses (archives) the child from the child's own page (artboard 12). */
+      await parent.goto(`/parent/children/${childId}`);
+      await parent.getByRole("button", { name: `Pause ${childName}` }).click();
+      await parent.getByRole("button", { name: "Pause profile" }).click();
+      await expect(parent.getByRole("button", { name: `Let ${childName} back in` })).toBeVisible();
       await parent.goto("/parent/children");
-      await parent.getByRole("button", { name: "Archive", exact: true }).click();
-      await parent.getByRole("button", { name: "Yes, archive" }).click();
       const archivedSection = parent.getByRole("region", { name: "Archived children" });
       await expect(archivedSection).toContainText(childName);
       await expect(archivedSection.getByRole("button", { name: `Restore ${childName}` })).toBeVisible();
@@ -77,12 +80,12 @@ test.describe("parent archive / restore lifecycle", () => {
 
       /* 6. The parent still sees the child on their dashboard, marked archived. */
       await parent.goto("/parent");
-      await expect(parent.getByRole("status")).toContainText(/login is archived/i);
+      await expect(parent.getByRole("status")).toContainText(/login is paused/i);
 
       /* 7. Restore, and the same code and PIN work again. */
       await parent.goto("/parent/children");
       await parent.getByRole("button", { name: `Restore ${childName}` }).click();
-      await expect(parent.getByRole("button", { name: "Archive", exact: true })).toBeVisible();
+      await expect(parent.getByRole("link", { name: `Manage ${childName}` })).toBeVisible();
       await expect(parent.getByRole("region", { name: "Archived children" })).toHaveCount(0);
 
       const back = await (await browser.newContext({ baseURL: AUTH_APP_ORIGIN })).newPage();

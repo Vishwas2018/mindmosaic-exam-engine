@@ -114,6 +114,7 @@ describe("navigation graph", () => {
     "/sign-in",
     "/sign-up",
     "/student-sign-in",
+    "/welcome", // a server redirect to /sign-in, not a screen
     "/auth/confirm",
     "/auth/reset",
     /* Auth exits whose links live inside their components (covered by

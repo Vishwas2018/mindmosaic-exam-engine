@@ -145,7 +145,7 @@ export async function enterStudentCredentials(page: Page, loginCode: string, pin
 export async function parentSignIn(page: Page, email: string, password: string) {
   await page.goto("/sign-in");
   await page.getByRole("button", { name: /I'm a parent/i }).click();
-  await page.getByLabel(/email address/i).fill(email);
+  await page.getByLabel(/^email$/i).fill(email);
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: /^sign in/i }).click();
 }

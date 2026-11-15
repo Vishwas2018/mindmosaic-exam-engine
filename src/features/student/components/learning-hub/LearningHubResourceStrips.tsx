@@ -43,7 +43,7 @@ export function LearningHubResourceStrips() {
               <Icon aria-hidden="true" className="h-6 w-6" />
             </div>
             <div className="flex flex-col gap-1">
-              <h4 className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">{strip.title}</h4>
+              <h4 className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">{strip.title}</h4>
               <p className="text-xs text-mm-muted">{strip.description}</p>
               <button
                 type="button"

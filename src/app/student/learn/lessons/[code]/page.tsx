@@ -43,7 +43,7 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
           <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-slate-100 text-slate-500">
             <BookX className="h-8 w-8" aria-hidden="true" />
           </div>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-2xl font-bold text-mm-ink">
+          <h1 className="mt-4 font-[family-name:var(--font-display)] text-2xl font-semibold text-mm-ink">
             Lesson Not Found
           </h1>
           <p className="mt-2 text-sm text-mm-muted">
@@ -52,7 +52,7 @@ export default async function StudentLessonDetailPage({ params }: LessonPageProp
           <div className="mt-6">
             <Link
               href="/student/learn"
-              className="inline-flex min-h-[42px] items-center gap-2 rounded-btn bg-primary px-5 text-sm font-bold text-white hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
+              className="inline-flex min-h-[42px] items-center gap-2 rounded-btn bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
             >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               <span>Back to Learning Hub</span>

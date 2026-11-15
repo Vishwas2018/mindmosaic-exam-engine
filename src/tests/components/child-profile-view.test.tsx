@@ -46,14 +46,13 @@ describe("ChildProfileView", () => {
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Aisha" })).toBeInTheDocument();
-    expect(screen.getByText(/Year 3/)).toBeInTheDocument();
-    expect(screen.getByText(/Can sign in/)).toBeInTheDocument();
-    expect(screen.getByText(/4 finished papers/)).toBeInTheDocument();
+    /* One status line under the name (artboard 12). */
+    expect(screen.getByText(/Year 3 · can sign in · 4 finished papers/i)).toBeInTheDocument();
     expect(screen.getByText("K7XJ-2P9R")).toBeInTheDocument();
     expect(screen.getByText("Tuesday, 4:14 pm")).toBeInTheDocument();
   });
 
-  it("renders sibling switcher tabs when multiple children exist", () => {
+  it("leads back to Children through the breadcrumb (artboard 12), not a second child switcher", () => {
     render(
       <ChildProfileView
         child={SAMPLE_CHILD}
@@ -62,12 +61,10 @@ describe("ChildProfileView", () => {
       />,
     );
 
-    const aishaLink = screen.getByRole("link", { name: /Aisha/i });
-    const kabirLink = screen.getByRole("link", { name: /Kabir/i });
-
-    expect(aishaLink).toHaveAttribute("aria-current", "page");
-    expect(kabirLink).not.toHaveAttribute("aria-current");
-    expect(kabirLink).toHaveAttribute("href", "/parent/children/child-kabir");
+    const crumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
+    expect(within(crumbs).getByRole("link", { name: "Children" })).toHaveAttribute("href", "/parent/children");
+    expect(within(crumbs).getByText("Aisha")).toHaveAttribute("aria-current", "page");
+    expect(screen.queryByRole("link", { name: /Kabir/i })).not.toBeInTheDocument();
   });
 
   it("allows selecting avatar colour options with aria-pressed", async () => {
@@ -143,7 +140,7 @@ describe("ChildProfileView", () => {
       />,
     );
 
-    await user.click(screen.getByRole("button", { name: "Sign-in card" }));
+    await user.click(screen.getByRole("button", { name: /Print sign-in card/i }));
     expect(screen.getByRole("heading", { name: "Student sign-in card" })).toBeInTheDocument();
     expect(screen.getAllByText("K7XJ-2P9R")).toHaveLength(2);
   });

@@ -36,17 +36,12 @@ test("A1–A2: parent registers through the form and confirms with the mailed li
 
   // A1 register
   await page.goto("/sign-up");
-  await page.getByLabel(/first name/i).fill("Accept");
-  await page.getByLabel(/last name/i).fill("ParentA");
-  await page.getByLabel(/email address/i).fill(email);
+  await page.getByLabel("Your name").fill(`Accept ParentA`);
+  await page.getByLabel(/^email$/i).fill(email);
   await page.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
   await page.getByRole("checkbox").first().check();
   await shot("a1-signup-step1");
-  await page.getByRole("button", { name: "Continue" }).click();
-  await expect(page.getByText(/step 2 of 3/i)).toBeVisible();
-  await page.getByRole("button", { name: /skip for now/i }).click();
-  await expect(page.getByText(/step 3 of 3/i)).toBeVisible();
-  await page.getByRole("button", { name: "Create the account" }).click();
+  await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible();
   await shot("a1-check-email");
 
@@ -109,17 +104,18 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
 
   // A4 add a child
   const childName = `Ava ${testInfo.workerIndex}${Date.now().toString(36).slice(-4)}`;
-  await page.goto("/parent/children");
+  await page.goto("/parent/setup");
   await shot("a4-children-before");
   // A5: the parent sets the PIN themselves (the optional field), rather than taking a generated one
   const chosenPin = "482917";
-  await page.getByLabel("Child's name").fill(childName);
-  await page.getByLabel("Year level (optional)").selectOption({ label: "Year 3" });
-  await page.getByLabel("PIN (optional)").fill(chosenPin);
+  await page.getByLabel("First name").fill(childName);
+  await page.getByLabel("Year level").selectOption({ label: "Year 3" });
+  await page.getByLabel("I’ll choose it").check();
+  await page.getByLabel("PIN", { exact: true }).fill(chosenPin);
   const created = page.waitForResponse(
     (r) => r.url().endsWith("/api/parent/children") && r.request().method() === "POST",
   );
-  await page.getByRole("button", { name: "Create login" }).click();
+  await page.getByRole("button", { name: /^Create .*profile$/ }).click();
   const res = await created;
   expect(res.ok(), `create child ${res.status()}`).toBe(true);
   const body = (await res.json()) as { ok: boolean; loginCode?: string; pin?: string; childId?: string };

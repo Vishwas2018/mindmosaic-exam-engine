@@ -91,7 +91,7 @@ export function PinInput({
         role="group"
         aria-labelledby={`${id}-label`}
         aria-describedby={describedBy}
-        className="grid grid-cols-6 gap-2"
+        className="grid grid-cols-6 gap-1 min-[360px]:gap-2"
       >
         {Array.from({ length }, (_, index) => (
           <input

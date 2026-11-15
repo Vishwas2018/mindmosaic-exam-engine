@@ -17,7 +17,7 @@ export default function PracticeStudioError({
       <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-mm-tint text-primary">
         <AlertCircle className="h-6 w-6" aria-hidden="true" />
       </div>
-      <h2 className="mt-4 font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+      <h2 className="mt-4 font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
         We couldn&rsquo;t load Practice Studio
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-mm-muted">

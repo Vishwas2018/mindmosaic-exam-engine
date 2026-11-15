@@ -13,6 +13,20 @@ const mockMembership = {
 };
 
 describe("ParentBillingHandoff Component", () => {
+  it("offers no payment controls and says the beta is free when payments are off", () => {
+    render(
+      <ParentBillingHandoff
+        membership={{ ...mockMembership, planName: "Free family beta", planPrice: "no payment needed" }}
+        paymentsEnabled={false}
+      />,
+    );
+    expect(screen.getByText("The family beta is free.")).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Change plan" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Payment methods" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Invoices" })).not.toBeInTheDocument();
+    expect(screen.queryByText(/Stripe/)).not.toBeInTheDocument();
+  });
+
   it("renders breadcrumbs and boundary notice for plan & billing", () => {
     render(
       <ParentBillingHandoff
@@ -22,12 +36,7 @@ describe("ParentBillingHandoff Component", () => {
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Plan & billing" })).toBeInTheDocument();
-    expect(screen.getByText("Secure Billing Management:")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /MindMosaic family memberships are securely handled with Stripe\./i
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText("Payments are handled by Stripe.")).toBeInTheDocument();
     expect(screen.getByText("Illustrative sample family")).toBeInTheDocument();
   });
 

@@ -63,7 +63,7 @@ export function OnboardingDiagnosticRunner() {
     return (
       <div className="flex min-h-64 flex-col items-center justify-center space-y-3 py-12 text-center">
         <LoaderCircle aria-hidden="true" className="h-8 w-8 animate-spin text-primary" />
-        <p className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
           Preparing your warmup questions…
         </p>
         <p className="text-xs text-mm-muted">
@@ -142,9 +142,9 @@ export function OnboardingDiagnosticRunner() {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs font-semibold text-mm-muted">
           <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
-          <span className="text-primary font-bold">Diagnostic Warmup · Untimed</span>
+          <span className="text-primary font-semibold">Diagnostic Warmup · Untimed</span>
         </div>
-        <div className="h-2 w-full overflow-hidden rounded-full bg-royal/10">
+        <div className="h-2 w-full overflow-hidden rounded-full bg-mm-brand/10">
           <div
             className="h-full rounded-full bg-primary transition-all duration-300"
             style={{
@@ -155,7 +155,7 @@ export function OnboardingDiagnosticRunner() {
       </div>
 
       {/* Question container */}
-      <div className="rounded-2xl border border-royal/15 bg-white p-4 sm:p-6 shadow-sm">
+      <div className="rounded-2xl border border-mm-brand/15 bg-white p-4 sm:p-6 shadow-sm">
         <ExamQuestion
           question={currentQuestion}
           answer={currentAnswer}

@@ -27,7 +27,7 @@ function MasteryColumn({ title, subjects }: { title: string; subjects: readonly 
   if (subjects.length === 0) return null;
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-mm-line bg-white p-6 shadow-warm-sm">
-      <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">{title}</h3>
+      <h3 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">{title}</h3>
       <div className="grid gap-4">
         {subjects.map((subject) => (
           <MasteryBar key={subject.subject} subject={subject} />

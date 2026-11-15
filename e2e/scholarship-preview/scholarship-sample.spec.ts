@@ -51,7 +51,7 @@ async function signIn(page: Page, student: (typeof STUDENTS)[number]) {
   await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);
   await page.getByLabel(/^Your PIN, number 1 of 6/).click();
   await page.keyboard.type(e2eEnv.fixturePin);
-  await page.getByRole("button", { name: "Sign in and start learning" }).click();
+  await page.getByRole("button", { name: /^sign in$/i }).click();
   await expect(page).toHaveURL(/\/student$/, { timeout: 45_000 });
 }
 
@@ -154,7 +154,7 @@ test.describe("Scholarship sample: allowlisted student journey", () => {
 
     // Attempt history on the student dashboard.
     await page.goto("/student");
-    await expect(page.getByText(/No completed sessions yet\.|Nothing finished yet/)).toHaveCount(0);
+    await expect(page.getByText(/No results yet/)).toHaveCount(0);
   });
 
   test("a second sitting scores a partial paper correctly (server-authoritative)", async ({ page }, testInfo) => {

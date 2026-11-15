@@ -32,10 +32,10 @@ export default async function StudentAssignmentsPage() {
   return (
     <StudentShell active="assignments">
       <div className="mb-8">
-        <h1 className="text-3xl font-black tracking-[-0.03em] text-ink">
+        <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-3xl font-semibold tracking-[-0.03em] text-mm-ink">
           My assignments
         </h1>
-        <p className="mt-2 text-base leading-7 text-muted">
+        <p className="mt-2 text-base leading-7 text-mm-ink-soft">
           Work set by your teacher. Complete each one before its due date.
         </p>
       </div>

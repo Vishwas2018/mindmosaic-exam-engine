@@ -4,9 +4,16 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const push = vi.fn();
 const refresh = vi.fn();
+const redirectMock = vi.hoisted(() =>
+  vi.fn((path: string) => {
+    throw new Error(`NEXT_REDIRECT ${path}`);
+  }),
+);
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push, refresh }),
   useSearchParams: () => new URLSearchParams(),
+  usePathname: () => "/sign-in",
+  redirect: redirectMock,
 }));
 
 const authState = {
@@ -107,10 +114,8 @@ describe("signed-out and welcome screens", () => {
     expect(screen.getByRole("link", { name: /switch to another account/i })).toHaveAttribute("href", "/switch-account");
   });
 
-  it("welcome offers both doors and the create-account link while sign-up is open", () => {
-    render(<WelcomePage />);
-    expect(screen.getByRole("link", { name: /i.m a parent/i })).toHaveAttribute("href", "/sign-in");
-    expect(screen.getByRole("link", { name: /i.m a student/i })).toHaveAttribute("href", "/student-sign-in");
-    expect(screen.getByRole("link", { name: /create a family account/i })).toHaveAttribute("href", "/sign-up");
+  it("/welcome is not a second chooser: it sends people to the one at /sign-in", () => {
+    expect(() => WelcomePage()).toThrow();
+    expect(redirectMock).toHaveBeenCalledWith("/sign-in");
   });
 });

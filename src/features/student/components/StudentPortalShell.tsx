@@ -32,7 +32,7 @@ export function StudentPortalShell({
 }) {
   const showVihaan = isVihaanScholarshipPrepEnabledFor(student.userId);
   return (
-    <div className="mm-root min-h-screen bg-canvas">
+    <div className="mm-root min-h-screen bg-mm-tint-soft text-mm-ink">
       <div className="lg:flex">
         <StudentSidebar
           active={active}
@@ -49,7 +49,7 @@ export function StudentPortalShell({
         <div className="min-w-0 flex-1">
           <StudentTopBar breadcrumbLabel={breadcrumbLabel} hasActiveSession={shellData.hasActiveSession} showVihaan={showVihaan} />
 
-          <main id="main-content" className="mx-auto w-full max-w-[1240px] space-y-8 px-4 py-7 pb-24 sm:px-6 lg:px-8 lg:pb-7">
+          <main id="main-content" className="mx-auto w-full max-w-[1192px] space-y-7 px-4 pt-6 pb-24 sm:px-8 sm:pt-8 lg:pb-16">
             {children}
           </main>
         </div>

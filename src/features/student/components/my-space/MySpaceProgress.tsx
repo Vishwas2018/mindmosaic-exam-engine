@@ -24,7 +24,7 @@ export function MySpaceProgress({
   return (
     <section aria-labelledby="my-space-progress" className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 id="my-space-progress" className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+        <h2 id="my-space-progress" className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
           My Progress
         </h2>
         <Link href="/student/engagement" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-primary hover:underline">

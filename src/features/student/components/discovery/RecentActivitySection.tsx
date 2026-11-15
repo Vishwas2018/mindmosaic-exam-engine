@@ -27,7 +27,7 @@ export function RecentActivitySection({
         <div>
           <h2
             id="recent-activity-heading"
-            className="font-jakarta font-extrabold text-xl md:text-2xl text-plum-dark tracking-tight"
+            className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-xl md:text-2xl text-plum-dark tracking-tight"
           >
             Recent activity
           </h2>
@@ -38,7 +38,7 @@ export function RecentActivitySection({
         {attempts.length > 0 && (
           <Link
             href="/results"
-            className="font-jakarta font-bold text-xs md:text-sm text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-1"
+            className="font-jakarta font-semibold text-xs md:text-sm text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-1"
           >
             <span>View all results</span>
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -51,7 +51,7 @@ export function RecentActivitySection({
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-tint text-primary border border-primary/20 mb-4">
             <BookOpenCheck className="h-7 w-7" aria-hidden="true" />
           </div>
-          <h3 className="font-jakarta font-extrabold text-lg text-plum-dark">
+          <h3 className="font-jakarta font-semibold text-lg text-plum-dark">
             No completed sessions yet
           </h3>
           <p className="mx-auto mt-2 max-w-md font-vietnam text-xs md:text-sm text-plum-muted">
@@ -60,7 +60,7 @@ export function RecentActivitySection({
           <div className="mt-6">
             <Link
               href="/practice"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-jakarta text-sm font-bold text-white shadow-warm-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-jakarta text-sm font-semibold text-white shadow-warm-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               <span>Start your first session</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -95,7 +95,7 @@ export function RecentActivitySection({
                       {getSubjectIcon(attempt.subjectLabel)}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-jakarta font-bold text-sm md:text-base text-plum-dark truncate">
+                      <h3 className="font-jakarta font-semibold text-sm md:text-base text-plum-dark truncate">
                         {attempt.title}
                       </h3>
                       <div className="flex flex-wrap items-center gap-1.5 text-xs text-plum-muted mt-0.5">
@@ -123,7 +123,7 @@ export function RecentActivitySection({
 
                     <Link
                       href="/results"
-                      className="font-jakarta font-bold text-xs text-primary hover:text-coral-accent transition-colors inline-flex items-center gap-1"
+                      className="font-jakarta font-semibold text-xs text-primary hover:text-coral-accent transition-colors inline-flex items-center gap-1"
                     >
                       <span>View result</span>
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -137,7 +137,7 @@ export function RecentActivitySection({
           <div className="bg-surface-container-low px-5 py-3 border-t border-parchment-border flex items-center justify-end">
             <Link
               href="/results"
-              className="inline-flex items-center gap-1.5 font-jakarta font-bold text-xs md:text-sm text-primary hover:text-primary-dark transition-colors"
+              className="inline-flex items-center gap-1.5 font-jakarta font-semibold text-xs md:text-sm text-primary hover:text-primary-dark transition-colors"
             >
               <span>View all results</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />

@@ -13,8 +13,9 @@ test.describe("role access", () => {
       const context = await contextAs(key);
       const page = await context.newPage();
       await page.goto("/parent");
-      await expect(page).toHaveTitle(/Parent dashboard|Family Overview/);
-      await expect(page).toHaveURL(/\/parent$/);
+      await expect(page).toHaveTitle(/Family Overview|Welcome \| MindMosaic Parents/);
+      /* A parent with no child yet starts at setup (Claude Design parent artboard 01). */
+      await expect(page).toHaveURL(key === "parent-no-children" ? /\/parent\/setup$/ : /\/parent$/);
     }
   });
 
@@ -26,15 +27,15 @@ test.describe("role access", () => {
     // StudentShell dashboard.
     const noAttempts = await (await contextAs("student-no-attempts")).newPage();
     await noAttempts.goto("/student");
-    await expect(noAttempts).toHaveTitle(/My Learning — Dashboard/);
-    await expect(noAttempts.getByText(/No completed sessions yet\.|Nothing finished yet/).first()).toBeVisible();
+    await expect(noAttempts).toHaveTitle(/^My Space/);
+    await expect(noAttempts.getByText(/No results yet/).first()).toBeVisible();
 
     const completed = await (await contextAs("student-completed-attempt")).newPage();
     await completed.goto("/student");
-    await expect(completed).toHaveTitle(/My Learning — Dashboard/);
+    await expect(completed).toHaveTitle(/^My Space/);
     // .first(): see student-portal-content.spec.ts's note on this exact
     // check — observed intermittently rendering twice on first navigation.
-    await expect(completed.getByText("Recent activity").first()).toBeVisible();
+    await expect(completed.getByRole("heading", { name: "Recent results" })).toBeVisible();
   });
 
   test("teacher fixture reaches the teacher dashboard", async ({ contextAs }) => {

@@ -24,7 +24,7 @@ export function PracticeStudioSprintSpotlight() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h2 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+        <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
           Daily Speed Sprint — Rapid Recall 60s
         </h2>
         <p className="max-w-2xl text-sm leading-relaxed text-mm-muted">
@@ -41,7 +41,7 @@ export function PracticeStudioSprintSpotlight() {
           { label: "Streak (example)", value: "2 of 3 sprints" },
         ].map((stat) => (
           <div key={stat.label} className="rounded-xl bg-mm-page/70 p-3">
-            <p className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">{stat.value}</p>
+            <p className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">{stat.value}</p>
             <p className="text-[10px] font-semibold uppercase tracking-wider text-mm-muted">{stat.label}</p>
           </div>
         ))}

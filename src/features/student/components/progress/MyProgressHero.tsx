@@ -25,7 +25,7 @@ export function MyProgressHero({
           <Award aria-hidden="true" className="h-5 w-5" />
         </div>
         <div>
-          <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-mm-ink">
+          <p className="font-[family-name:var(--font-display)] text-2xl font-semibold text-mm-ink">
             {questionsAnswered}
           </p>
           <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
@@ -39,7 +39,7 @@ export function MyProgressHero({
           <Target aria-hidden="true" className="h-5 w-5" />
         </div>
         <div className="min-w-0">
-          <p className="truncate text-sm font-bold text-mm-ink">
+          <p className="truncate text-sm font-semibold text-mm-ink">
             {recommendedFocus ? recommendedFocus.label : "Nothing measured yet"}
           </p>
           <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">

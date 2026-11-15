@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { ErrorState, buttonClasses } from "@/components/ui";
 import {
-  AddChildCard,
   CheckoutStatusToast,
   FamilyOverview,
   ParentShell,
@@ -14,7 +14,6 @@ import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode
 import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
-import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
 export const metadata: Metadata = {
   title: "Family Overview | MindMosaic Parents",
@@ -49,7 +48,6 @@ export default async function ParentHomePage({
       ? resolvedParams.state
       : undefined;
 
-  const years = yearLevelsWithGatedCoverage();
   if (!isSupabaseConfigured) {
     if (await isParentPreviewEnabled()) {
       return (
@@ -96,6 +94,9 @@ export default async function ParentHomePage({
     );
   }
 
+  /* A family with no child yet starts at the setup screen ("Welcome — add your first child"). */
+  if (data.children.length === 0) redirect("/parent/setup");
+
   const now = new Date();
   const archivedIds = await loadArchivedChildIds(data.children.map((child) => child.profile.id));
   const summaries = data.children.map((child) => ({
@@ -105,12 +106,11 @@ export default async function ParentHomePage({
 
   return (
     <ParentShell active="/parent">
-      <div className="space-y-8">
+      <div className="grid gap-8">
         <CheckoutStatusToast />
         {/* `?state=` forces a loading/error/offline screen for design review. It is honoured only in the local
             preview branch above: a real family's page shows the state it is actually in. */}
         <FamilyOverview summaries={summaries} parentName={data.parentName} />
-        <AddChildCard availableYearLevels={years} />
       </div>
     </ParentShell>
   );

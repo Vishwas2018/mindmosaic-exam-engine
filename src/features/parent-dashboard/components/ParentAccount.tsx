@@ -218,16 +218,16 @@ export function ParentAccount({
       {/* Header & Greet (Artboard #23 & #26) */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-ink sm:text-3xl">
+          <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-2xl font-semibold tracking-tight text-mm-ink sm:text-3xl">
             Account
           </h1>
-          <p className="mt-1 text-sm font-medium text-muted sm:text-base">
+          <p className="mt-1 text-sm font-medium text-mm-ink-soft sm:text-base">
             Your details, what we email you, your plan and your data.
           </p>
         </div>
 
         {isLocalPreview && (
-          <span className="inline-flex min-h-8 items-center gap-1.5 self-start rounded-full border border-royal/10 bg-royal/5 px-3 py-1 text-xs font-semibold text-royal shadow-xs">
+          <span className="inline-flex min-h-8 items-center gap-1.5 self-start rounded-full border border-mm-brand/10 bg-mm-brand/5 px-3 py-1 text-xs font-semibold text-mm-brand shadow-xs">
             <Info className="h-3.5 w-3.5" aria-hidden="true" />
             Illustrative sample family
           </span>
@@ -241,15 +241,15 @@ export function ParentAccount({
           {/* 1. Your Details Card */}
           <section
             aria-labelledby={youHeadingId}
-            className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs"
+            className="rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xs"
           >
-            <h2 id={youHeadingId} className="text-lg font-black text-ink">
+            <h2 id={youHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
               Your details
             </h2>
 
             <div className="mt-5 space-y-4">
               <div>
-                <label htmlFor="account-name" className="block text-xs font-bold text-ink">
+                <label htmlFor="account-name" className="block text-xs font-semibold text-mm-ink">
                   Name
                 </label>
                 <input
@@ -257,12 +257,12 @@ export function ParentAccount({
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3.5 py-2.5 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-mm-brand/15 bg-white px-3.5 py-2.5 text-sm font-semibold text-mm-ink shadow-2xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
                 />
               </div>
 
               <div>
-                <label htmlFor="account-email" className="block text-xs font-bold text-ink">
+                <label htmlFor="account-email" className="block text-xs font-semibold text-mm-ink">
                   Email
                 </label>
                 <input
@@ -271,9 +271,9 @@ export function ParentAccount({
                   value={email}
                   readOnly
                   aria-describedby="account-email-help"
-                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/10 bg-surface-container-low/40 px-3.5 py-2.5 text-sm font-semibold text-muted shadow-2xs cursor-not-allowed"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-mm-brand/10 bg-surface-container-low/40 px-3.5 py-2.5 text-sm font-semibold text-mm-ink-soft shadow-2xs cursor-not-allowed"
                 />
-                <p id="account-email-help" className="mt-1 text-xs leading-relaxed text-muted">
+                <p id="account-email-help" className="mt-1 text-xs leading-relaxed text-mm-ink-soft">
                   Changing this sends a link to the new address. The old one keeps working until you use the link.
                 </p>
               </div>
@@ -281,11 +281,11 @@ export function ParentAccount({
               {emailRequested && (
                 <div
                   role="status"
-                  className="rounded-xl border border-sky-500/25 bg-sky-500/5 p-3.5 text-xs text-ink"
+                  className="rounded-xl border border-sky-500/25 bg-sky-500/5 p-3.5 text-xs text-mm-ink"
                 >
-                  <p className="font-extrabold text-sky-950">Check your new address.</p>
-                  <p className="mt-0.5 text-muted">
-                    We sent a confirmation link to <strong className="font-bold text-ink">{emailRequested}</strong>. Until you use it, keep signing in with {email}.
+                  <p className="font-semibold text-sky-950">Check your new address.</p>
+                  <p className="mt-0.5 text-mm-ink-soft">
+                    We sent a confirmation link to <strong className="font-semibold text-mm-ink">{emailRequested}</strong>. Until you use it, keep signing in with {email}.
                   </p>
                 </div>
               )}
@@ -295,7 +295,7 @@ export function ParentAccount({
                   type="button"
                   onClick={handleSaveName}
                   disabled={nameBusy}
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-mm-brand px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-mm-brand/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
                 >
                   {nameBusy ? "Saving..." : "Save changes"}
                 </button>
@@ -303,13 +303,13 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setEmailModalOpen(true)}
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-bold text-royal hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-mm-brand/20 bg-white px-4 py-2 text-xs font-semibold text-mm-brand hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
                 >
                   Change email address
                 </button>
 
                 {nameSuccess && (
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-teal-800">
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-teal-800">
                     <Check className="h-4 w-4 text-teal-600" /> Saved
                   </span>
                 )}
@@ -320,21 +320,21 @@ export function ParentAccount({
           {/* 2. Password and Devices Card */}
           <section
             aria-labelledby={secHeadingId}
-            className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs"
+            className="rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xs"
           >
             <div className="flex items-center gap-2">
-              <Lock className="h-4 w-4 text-royal" aria-hidden="true" />
-              <h2 id={secHeadingId} className="text-lg font-black text-ink">
+              <Lock className="h-4 w-4 text-mm-brand" aria-hidden="true" />
+              <h2 id={secHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                 Password and devices
               </h2>
             </div>
 
-            <dl className="mt-4 divide-y divide-royal/10 text-xs sm:text-sm">
+            <dl className="mt-4 divide-y divide-mm-brand/10 text-xs sm:text-sm">
               {/* Each row states only what the page was actually given: there is no stored "password last changed"
                   date or device count to read, so neither is invented. */}
               <div className="flex items-center justify-between py-2.5">
-                <dt className="text-muted">Password</dt>
-                <dd className="font-semibold text-ink">
+                <dt className="text-mm-ink-soft">Password</dt>
+                <dd className="font-semibold text-mm-ink">
                   {initialAccount.passwordLastChanged
                     ? `Last changed ${initialAccount.passwordLastChanged}`
                     : "You can change it at any time"}
@@ -342,8 +342,8 @@ export function ParentAccount({
               </div>
               {initialAccount.devicesCount !== undefined && (
                 <div className="flex items-center justify-between py-2.5">
-                  <dt className="text-muted">Signed in on</dt>
-                  <dd className="font-semibold text-ink">
+                  <dt className="text-mm-ink-soft">Signed in on</dt>
+                  <dd className="font-semibold text-mm-ink">
                     {initialAccount.devicesCount} {initialAccount.devicesCount === 1 ? "device" : "devices"}
                   </dd>
                 </div>
@@ -354,7 +354,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setPasswordModalOpen(true)}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-mm-brand/20 bg-white px-4 py-2 text-xs font-semibold text-mm-brand shadow-2xs hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
               >
                 Change password
               </button>
@@ -362,13 +362,13 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setDevicesModalOpen(true)}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
               >
                 See my devices
               </button>
             </div>
 
-            <p className="mt-3 text-xs leading-relaxed text-muted">
+            <p className="mt-3 text-xs leading-relaxed text-mm-ink-soft">
               Changing your password does not touch your children’s PINs.
             </p>
           </section>
@@ -376,42 +376,42 @@ export function ParentAccount({
           {/* 3. What We Email You Card */}
           <section
             aria-labelledby={mailHeadingId}
-            className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs"
+            className="rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xs"
           >
-            <h2 id={mailHeadingId} className="text-lg font-black text-ink">
+            <h2 id={mailHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
               What we email you
             </h2>
-            <p className="mt-1 text-xs leading-relaxed text-muted">
+            <p className="mt-1 text-xs leading-relaxed text-mm-ink-soft">
               We do not send marketing. Everything here is either about practice or about your account.
             </p>
 
-            <div className="mt-5 divide-y divide-royal/10">
+            <div className="mt-5 divide-y divide-mm-brand/10">
               {/* Planned emails. They are not sent yet, so there is nothing to switch on or off: a toggle here would be a
                   control that changes nothing. */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
-                  <span className="block text-sm font-bold text-ink">Weekly summary</span>
-                  <span className="mt-0.5 block text-xs text-muted">What your children did, every Sunday evening.</span>
+                  <span className="block text-sm font-semibold text-mm-ink">Weekly summary</span>
+                  <span className="mt-0.5 block text-xs text-mm-ink-soft">What your children did, every Sunday evening.</span>
                 </div>
-                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-semibold text-mm-ink-soft">
                   Not sent yet
                 </span>
               </div>
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
-                  <span className="block text-sm font-bold text-ink">Written answers marked</span>
-                  <span className="mt-0.5 block text-xs text-muted">When a person has marked a written answer.</span>
+                  <span className="block text-sm font-semibold text-mm-ink">Written answers marked</span>
+                  <span className="mt-0.5 block text-xs text-mm-ink-soft">When a person has marked a written answer.</span>
                 </div>
-                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-semibold text-mm-ink-soft">
                   Not sent yet
                 </span>
               </div>
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
-                  <span className="block text-sm font-bold text-ink">Nothing for a fortnight</span>
-                  <span className="mt-0.5 block text-xs text-muted">A nudge if none of your children has practised.</span>
+                  <span className="block text-sm font-semibold text-mm-ink">Nothing for a fortnight</span>
+                  <span className="mt-0.5 block text-xs text-mm-ink-soft">A nudge if none of your children has practised.</span>
                 </div>
-                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-semibold text-mm-ink-soft">
                   Not sent yet
                 </span>
               </div>
@@ -419,8 +419,8 @@ export function ParentAccount({
               {paying && (
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
-                  <span className="block text-sm font-bold text-ink">Billing</span>
-                  <span className="mt-0.5 block text-xs text-muted">
+                  <span className="block text-sm font-semibold text-mm-ink">Billing</span>
+                  <span className="mt-0.5 block text-xs text-mm-ink-soft">
                     Payments, renewals and anything that fails. Always on.
                   </span>
                 </div>
@@ -438,7 +438,7 @@ export function ParentAccount({
             </div>
 
             {paying && (
-              <p className="mt-4 text-xs leading-relaxed text-muted">
+              <p className="mt-4 text-xs leading-relaxed text-mm-ink-soft">
                 Billing email cannot be switched off — a failed payment has to reach you.
               </p>
             )}
@@ -450,30 +450,30 @@ export function ParentAccount({
           {/* 4. Plan & Billing Card */}
           <section
             aria-labelledby={planHeadingId}
-            className="rounded-2xl border border-royal/15 bg-royal/5 p-6 shadow-xs"
+            className="rounded-2xl border border-mm-brand/15 bg-mm-brand/5 p-6 shadow-xs"
           >
-            <h2 id={planHeadingId} className="text-lg font-black text-ink">
+            <h2 id={planHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
               Plan &amp; billing
             </h2>
 
-            <dl className="mt-4 divide-y divide-royal/10 text-xs sm:text-sm">
+            <dl className="mt-4 divide-y divide-mm-brand/10 text-xs sm:text-sm">
               <div className="flex items-center justify-between py-2.5">
-                <dt className="text-muted">Plan</dt>
-                <dd className="font-extrabold text-ink">
+                <dt className="text-mm-ink-soft">Plan</dt>
+                <dd className="font-semibold text-mm-ink">
                   {initialAccount.planName ?? "Free family beta"}
                   {initialAccount.planPrice ? ` · ${initialAccount.planPrice}` : ""}
                 </dd>
               </div>
               {initialAccount.nextPaymentDate && (
                 <div className="flex items-center justify-between py-2.5">
-                  <dt className="text-muted">Next payment</dt>
-                  <dd className="font-extrabold text-ink">{initialAccount.nextPaymentDate}</dd>
+                  <dt className="text-mm-ink-soft">Next payment</dt>
+                  <dd className="font-semibold text-mm-ink">{initialAccount.nextPaymentDate}</dd>
                 </div>
               )}
               {initialAccount.placesUsed !== undefined && (
                 <div className="flex items-center justify-between py-2.5">
-                  <dt className="text-muted">{initialAccount.placesTotal !== undefined ? "Places" : "Children"}</dt>
-                  <dd className="font-extrabold text-ink">
+                  <dt className="text-mm-ink-soft">{initialAccount.placesTotal !== undefined ? "Places" : "Children"}</dt>
+                  <dd className="font-semibold text-mm-ink">
                     {initialAccount.placesTotal !== undefined
                       ? `${initialAccount.placesUsed} of ${initialAccount.placesTotal} used`
                       : `${initialAccount.placesUsed} linked`}
@@ -484,12 +484,12 @@ export function ParentAccount({
 
             <Link
               href="/parent/account/billing"
-              className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+              className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-mm-brand px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-mm-brand/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
             >
               Open Plan &amp; billing &rarr;
             </Link>
 
-            <p className="mt-2 text-center text-xs text-muted">
+            <p className="mt-2 text-center text-xs text-mm-ink-soft">
               {paying
                 ? "Plans, invoices, cards and cancelling all live there."
                 : "The family beta is free. There is no card on file and nothing to cancel."}
@@ -499,23 +499,23 @@ export function ParentAccount({
           {/* 5. Your Data and Deletion Card (Artboard #23 & #24) */}
           <section
             aria-labelledby={dataHeadingId}
-            className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs"
+            className="rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xs"
           >
-            <h2 id={dataHeadingId} className="text-lg font-black text-ink">
+            <h2 id={dataHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
               Your data and deletion
             </h2>
-            <p className="mt-1 text-xs leading-relaxed text-muted">
+            <p className="mt-1 text-xs leading-relaxed text-mm-ink-soft">
               You own the work your children do here. We do not sell it, show it to schools, or use it to train models.
             </p>
 
-            <ul className="mt-4 space-y-2 text-xs font-semibold text-royal">
+            <ul className="mt-4 space-y-2 text-xs font-semibold text-mm-brand">
               <li>
                 <button
                   type="button"
                   onClick={() => setDataStoredModalOpen(true)}
-                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
                 >
-                  <FileText className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
+                  <FileText className="h-4 w-4 shrink-0 text-mm-ink-soft" aria-hidden="true" />
                   <span>What we store about your children</span>
                 </button>
               </li>
@@ -523,9 +523,9 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={handleExportData}
-                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
                 >
-                  <Download className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
+                  <Download className="h-4 w-4 shrink-0 text-mm-ink-soft" aria-hidden="true" />
                   {/* The file holds the account details only; children's practice records are not in it yet (D-014),
                       so the label says exactly that. */}
                   <span>Download your account details</span>
@@ -543,11 +543,11 @@ export function ParentAccount({
               </li>
             </ul>
 
-            <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-royal/15 bg-surface-container-low/40 p-3.5 text-xs text-muted">
-              <Info className="mt-0.5 h-4 w-4 shrink-0 text-royal" aria-hidden="true" />
+            <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-mm-brand/15 bg-surface-container-low/40 p-3.5 text-xs text-mm-ink-soft">
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-mm-brand" aria-hidden="true" />
               <div className="leading-relaxed">
                 The published privacy and retention policy is still being written, so none of these screens states how long anything is kept or how quickly a request is handled.{" "}
-                <span className="rounded bg-coral-500/15 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-coral-800">
+                <span className="rounded bg-coral-500/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-coral-800">
                   Not published yet
                 </span>
               </div>
@@ -557,12 +557,12 @@ export function ParentAccount({
           {/* 6. Signing Out Card */}
           <section
             aria-labelledby={outHeadingId}
-            className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs"
+            className="rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xs"
           >
-            <h2 id={outHeadingId} className="text-lg font-black text-ink">
+            <h2 id={outHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
               Signing out
             </h2>
-            <p className="mt-1 text-xs leading-relaxed text-muted">
+            <p className="mt-1 text-xs leading-relaxed text-mm-ink-soft">
               On a shared computer, sign out when you finish. Your children sign out separately — signing yourself out does not sign them out.
             </p>
 
@@ -570,16 +570,16 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={handleSignOut}
-                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-ink shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-mm-brand/20 bg-white px-4 py-2 text-xs font-semibold text-mm-ink shadow-2xs hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
               >
-                <LogOut className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
+                <LogOut className="h-3.5 w-3.5 text-mm-ink-soft" aria-hidden="true" />
                 Sign out
               </button>
 
               <button
                 type="button"
                 onClick={handleSignOutEverywhere}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
               >
                 Sign out everywhere
               </button>
@@ -596,26 +596,26 @@ export function ParentAccount({
           aria-labelledby="change-email-title"
           className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-xs"
         >
-          <div className="w-full max-w-md rounded-2xl border border-royal/10 bg-white p-6 shadow-xl">
+          <div className="w-full max-w-md rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
-              <h2 id="change-email-title" className="text-lg font-black text-ink">
+              <h2 id="change-email-title" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                 Change email address
               </h2>
               <button
                 type="button"
                 onClick={() => setEmailModalOpen(false)}
-                className="rounded-lg p-1 text-muted hover:text-ink"
+                className="rounded-lg p-1 text-mm-ink-soft hover:text-mm-ink"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <p className="mt-2 text-xs text-muted">
+            <p className="mt-2 text-xs text-mm-ink-soft">
               Enter your new email address. We will send a confirmation link to that inbox. Your current address ({email}) continues working until the new address is verified.
             </p>
 
             <div className="mt-4">
-              <label htmlFor="new-email-input" className="block text-xs font-bold text-ink">
+              <label htmlFor="new-email-input" className="block text-xs font-semibold text-mm-ink">
                 New email address
               </label>
               <input
@@ -624,7 +624,7 @@ export function ParentAccount({
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                className="mt-1 block min-h-11 w-full rounded-xl border border-mm-brand/15 bg-white px-3 py-2 text-sm font-semibold text-mm-ink shadow-2xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
               />
             </div>
 
@@ -632,7 +632,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setEmailModalOpen(false)}
-                className="rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink"
+                className="rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink"
               >
                 Cancel
               </button>
@@ -643,7 +643,7 @@ export function ParentAccount({
                   setEmailModalOpen(false);
                 }}
                 disabled={emailBusy || !newEmail.trim()}
-                className="rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 disabled:opacity-50"
+                className="rounded-xl bg-mm-brand px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-mm-brand/90 disabled:opacity-50"
               >
                 Send confirmation link
               </button>
@@ -660,27 +660,27 @@ export function ParentAccount({
           aria-labelledby="change-pw-title"
           className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-xs"
         >
-          <div className="w-full max-w-md rounded-2xl border border-royal/10 bg-white p-6 shadow-xl">
+          <div className="w-full max-w-md rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
-              <h2 id="change-pw-title" className="text-lg font-black text-ink">
+              <h2 id="change-pw-title" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                 Change password
               </h2>
               <button
                 type="button"
                 onClick={() => setPasswordModalOpen(false)}
-                className="rounded-lg p-1 text-muted hover:text-ink"
+                className="rounded-lg p-1 text-mm-ink-soft hover:text-mm-ink"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <p className="mt-2 text-xs text-muted">
+            <p className="mt-2 text-xs text-mm-ink-soft">
               Choose a strong password with at least 8 characters. Changing your guardian password does not change or reset your children’s login PINs.
             </p>
 
             <div className="mt-4 space-y-3">
               <div>
-                <label htmlFor="new-pw-input" className="block text-xs font-bold text-ink">
+                <label htmlFor="new-pw-input" className="block text-xs font-semibold text-mm-ink">
                   New password
                 </label>
                 <input
@@ -688,12 +688,12 @@ export function ParentAccount({
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-mm-brand/15 bg-white px-3 py-2 text-sm font-semibold text-mm-ink shadow-2xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
                 />
               </div>
 
               <div>
-                <label htmlFor="confirm-pw-input" className="block text-xs font-bold text-ink">
+                <label htmlFor="confirm-pw-input" className="block text-xs font-semibold text-mm-ink">
                   Confirm new password
                 </label>
                 <input
@@ -701,18 +701,18 @@ export function ParentAccount({
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-mm-brand/15 bg-white px-3 py-2 text-sm font-semibold text-mm-ink shadow-2xs focus:border-mm-brand focus:outline-none focus:ring-2 focus:ring-mm-brand/20"
                 />
               </div>
 
               {passwordError && (
-                <p role="alert" className="text-xs font-bold text-coral-700">
+                <p role="alert" className="text-xs font-semibold text-coral-700">
                   {passwordError}
                 </p>
               )}
 
               {passwordSuccess && (
-                <p role="status" className="text-xs font-bold text-teal-800">
+                <p role="status" className="text-xs font-semibold text-teal-800">
                   Password updated successfully.
                 </p>
               )}
@@ -722,7 +722,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setPasswordModalOpen(false)}
-                className="rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink"
+                className="rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink"
               >
                 Cancel
               </button>
@@ -730,7 +730,7 @@ export function ParentAccount({
                 type="button"
                 onClick={handleChangePassword}
                 disabled={passwordBusy || !newPassword || !confirmPassword}
-                className="rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 disabled:opacity-50"
+                className="rounded-xl bg-mm-brand px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-mm-brand/90 disabled:opacity-50"
               >
                 {passwordBusy ? "Updating..." : "Update password"}
               </button>
@@ -747,44 +747,44 @@ export function ParentAccount({
           aria-labelledby="devices-title"
           className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-xs"
         >
-          <div className="w-full max-w-md rounded-2xl border border-royal/10 bg-white p-6 shadow-xl">
+          <div className="w-full max-w-md rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
-              <h2 id="devices-title" className="text-lg font-black text-ink">
+              <h2 id="devices-title" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                 Active sign-ins
               </h2>
               <button
                 type="button"
                 onClick={() => setDevicesModalOpen(false)}
-                className="rounded-lg p-1 text-muted hover:text-ink"
+                className="rounded-lg p-1 text-mm-ink-soft hover:text-mm-ink"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <p className="mt-2 text-xs text-muted">
+            <p className="mt-2 text-xs text-mm-ink-soft">
               These devices currently hold an active parent session for this account.
             </p>
 
-            <div className="mt-4 divide-y divide-royal/10 text-xs">
+            <div className="mt-4 divide-y divide-mm-brand/10 text-xs">
               <div className="flex items-center justify-between py-3">
                 <div className="flex items-center gap-2.5">
-                  <Laptop className="h-4 w-4 text-royal" />
+                  <Laptop className="h-4 w-4 text-mm-brand" />
                   <div>
-                    <span className="font-bold text-ink">Current browser session</span>
-                    <span className="block text-muted">Active right now · Australia</span>
+                    <span className="font-semibold text-mm-ink">Current browser session</span>
+                    <span className="block text-mm-ink-soft">Active right now · Australia</span>
                   </div>
                 </div>
-                <span className="rounded-full bg-teal-500/15 px-2 py-0.5 text-[10px] font-bold text-teal-800">
+                <span className="rounded-full bg-teal-500/15 px-2 py-0.5 text-[10px] font-semibold text-teal-800">
                   This device
                 </span>
               </div>
 
               <div className="flex items-center justify-between py-3">
                 <div className="flex items-center gap-2.5">
-                  <Laptop className="h-4 w-4 text-muted" />
+                  <Laptop className="h-4 w-4 text-mm-ink-soft" />
                   <div>
-                    <span className="font-bold text-ink">Safari on macOS</span>
-                    <span className="block text-muted">Last active 2 days ago</span>
+                    <span className="font-semibold text-mm-ink">Safari on macOS</span>
+                    <span className="block text-mm-ink-soft">Last active 2 days ago</span>
                   </div>
                 </div>
               </div>
@@ -794,7 +794,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setDevicesModalOpen(false)}
-                className="rounded-xl bg-surface-container-low px-4 py-2 text-xs font-bold text-ink hover:bg-surface-container-low/80"
+                className="rounded-xl bg-surface-container-low px-4 py-2 text-xs font-semibold text-mm-ink hover:bg-surface-container-low/80"
               >
                 Close
               </button>
@@ -811,29 +811,29 @@ export function ParentAccount({
           aria-labelledby="data-store-title"
           className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-xs"
         >
-          <div className="w-full max-w-lg rounded-2xl border border-royal/10 bg-white p-6 shadow-xl">
+          <div className="w-full max-w-lg rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
-              <h2 id="data-store-title" className="text-lg font-black text-ink">
+              <h2 id="data-store-title" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                 What we store about your children
               </h2>
               <button
                 type="button"
                 onClick={() => setDataStoredModalOpen(false)}
-                className="rounded-lg p-1 text-muted hover:text-ink"
+                className="rounded-lg p-1 text-mm-ink-soft hover:text-mm-ink"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="mt-4 space-y-3 text-xs leading-relaxed text-muted">
+            <div className="mt-4 space-y-3 text-xs leading-relaxed text-mm-ink-soft">
               <p>
-                <strong className="font-bold text-ink">Profile information:</strong> We store the child’s chosen display first name, academic year level, student login code, and a securely hashed PIN.
+                <strong className="font-semibold text-mm-ink">Profile information:</strong> We store the child’s chosen display first name, academic year level, student login code, and a securely hashed PIN.
               </p>
               <p>
-                <strong className="font-bold text-ink">Educational activity:</strong> We store timestamps of started and finished practice papers, chosen answers, scored marks, and parent marking rubric entries.
+                <strong className="font-semibold text-mm-ink">Educational activity:</strong> We store timestamps of started and finished practice papers, chosen answers, scored marks, and parent marking rubric entries.
               </p>
               <p>
-                <strong className="font-bold text-ink">What we never store:</strong> We do not collect dates of birth, school names, residential addresses, phone numbers, or biometric data.
+                <strong className="font-semibold text-mm-ink">What we never store:</strong> We do not collect dates of birth, school names, residential addresses, phone numbers, or biometric data.
               </p>
               <p>
                 Student data is never shared with advertising networks, third-party trackers, or public LLM training datasets.
@@ -844,7 +844,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setDataStoredModalOpen(false)}
-                className="rounded-xl bg-surface-container-low px-4 py-2 text-xs font-bold text-ink hover:bg-surface-container-low/80"
+                className="rounded-xl bg-surface-container-low px-4 py-2 text-xs font-semibold text-mm-ink hover:bg-surface-container-low/80"
               >
                 Done
               </button>
@@ -861,32 +861,32 @@ export function ParentAccount({
           aria-labelledby="delete-account-title"
           className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-xs"
         >
-          <div className="w-full max-w-lg rounded-2xl border border-royal/10 bg-white p-6 shadow-xl">
+          <div className="w-full max-w-lg rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-coral-600" />
-                <h2 id="delete-account-title" className="text-lg font-black text-ink">
+                <h2 id="delete-account-title" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
                   Ask us to delete the account
                 </h2>
               </div>
               <button
                 type="button"
                 onClick={() => setDeleteModalOpen(false)}
-                className="rounded-lg p-1 text-muted hover:text-ink"
+                className="rounded-lg p-1 text-mm-ink-soft hover:text-mm-ink"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="mt-4 space-y-3 text-xs leading-relaxed text-muted">
+            <div className="mt-4 space-y-3 text-xs leading-relaxed text-mm-ink-soft">
               <p>
-                Per <strong className="font-bold text-ink">ADR-012 §4</strong>, permanent erasure of children’s educational data and guardian accounts is handled via a verified administrative request.
+                Per <strong className="font-semibold text-mm-ink">ADR-012 §4</strong>, permanent erasure of children’s educational data and guardian accounts is handled via a verified administrative request.
               </p>
               <p>
                 Because deletion irrevocably destroys all completed papers, writing marks, and student learning history, our team performs an out-of-band confirmation with the account owner before running the cryptographic purge.
               </p>
               <p className="rounded-xl border border-coral-500/20 bg-coral-500/5 p-3 font-medium text-coral-900">
-                To initiate erasure, email our support desk at <code className="font-bold">hello@mindmosaic.app</code> from your registered guardian address ({email}).
+                To initiate erasure, email our support desk at <code className="font-semibold">hello@mindmosaic.app</code> from your registered guardian address ({email}).
               </p>
             </div>
 
@@ -894,7 +894,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setDeleteModalOpen(false)}
-                className="rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink"
+                className="rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink"
               >
                 Close
               </button>
@@ -904,7 +904,7 @@ export function ParentAccount({
                 )}&body=${encodeURIComponent(
                   `Hello,\n\nI would like to request deletion of my MindMosaic parent account and my children's data.\n\nAccount email: ${email}\nName: ${name}\n\nThank you.`,
                 )}`}
-                className="inline-flex items-center rounded-xl bg-coral-600 px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-coral-700"
+                className="inline-flex items-center rounded-xl bg-coral-600 px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-coral-700"
               >
                 Open email draft &rarr;
               </a>
