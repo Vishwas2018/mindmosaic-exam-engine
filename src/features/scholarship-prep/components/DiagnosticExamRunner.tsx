@@ -1,200 +1,402 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Clock } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, CheckCircle2, Clock } from "lucide-react";
 
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
+import type { SubjectFilter, YearLevelFilter } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
-import type { ExamResult } from "@/features/exam-engine/scoring";
-import type { ReviewQuestion } from "@/features/exam-engine/types";
-import type { SubjectFilter } from "@/features/exam-engine/selection";
 import type { Question } from "@/schemas/question.schema";
+
+export interface DiagnosticCompletionResult {
+  score: number;
+  total: number;
+  accuracy: number;
+  timeTakenSeconds: number;
+  responses: Record<string, unknown>;
+}
+
+const VALID_SUBJECT_FILTERS = new Set<string>([
+  "numeracy",
+  "reading",
+  "language",
+  "science",
+  "digital_technologies",
+  "spelling",
+  "amc_mathematics",
+  "verbal_reasoning",
+  "numerical_reasoning",
+  "mixed",
+]);
+
+function normalizeSubjectFilter(
+  questions: readonly Question[],
+  requestedSubject: string,
+): SubjectFilter {
+  const distinctSubjects = new Set(questions.map((q) => q.metadata.subject));
+  if (distinctSubjects.size > 1 || distinctSubjects.has("writing")) {
+    return "mixed";
+  }
+  const single =
+    distinctSubjects.size === 1 ? questions[0]?.metadata.subject : requestedSubject;
+  const mapped =
+    single === "mathematics"
+      ? "numeracy"
+      : single === "reading_comprehension"
+        ? "reading"
+        : single === "language_conventions"
+          ? "language"
+          : single === "written_expression" || single === "writing"
+            ? "mixed"
+            : single;
+  return VALID_SUBJECT_FILTERS.has(mapped) ? (mapped as SubjectFilter) : "mixed";
+}
+
+function normalizeYearLevel(questions: readonly Question[]): YearLevelFilter {
+  const distinctYears = new Set(questions.map((q) => q.yearLevel));
+  if (distinctYears.size === 1) {
+    return questions[0]!.yearLevel;
+  }
+  return questions.length > 0 ? "mixed" : 6;
+}
+
+function formatSubjectLabel(subject: string): string {
+  const cleaned = subject === "numeracy" ? "Mathematics" : subject.replace(/_/g, " ");
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+}
 
 export function VihaanDiagnosticExamRunner({
   questions,
   subject,
+  mode = "local",
   onComplete,
 }: {
   questions: readonly Question[];
   subject: string;
-  onComplete: (result: {
-    score: number;
-    total: number;
-    accuracy: number;
-    timeTakenSeconds: number;
-    responses: Record<string, unknown>;
-  }) => void;
+  mode?: "local" | "server";
+  onComplete?: (result: DiagnosticCompletionResult) => void;
 }) {
+  const status = useExamStore((state) => state.status);
   const sessionId = useExamStore((state) => state.sessionId);
   const questionsState = useExamStore((state) => state.questions);
   const currentQuestionIndex = useExamStore((state) => state.currentQuestionIndex);
   const responses = useExamStore((state) => state.responses);
+  const examResult = useExamStore((state) => state.result);
+  const reviewQuestions = useExamStore((state) => state.reviewQuestions);
   const setResponse = useExamStore((state) => state.setResponse);
   const goToNextQuestion = useExamStore((state) => state.goToNextQuestion);
   const goToPreviousQuestion = useExamStore((state) => state.goToPreviousQuestion);
+  const startExam = useExamStore((state) => state.startExam);
   const startServerExam = useExamStore((state) => state.startServerExam);
   const submitExam = useExamStore((state) => state.submitExam);
 
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [result, setResult] = useState<{ result: ExamResult; reviewQuestions: ReviewQuestion[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const completedRef = useRef(false);
+
+  // Clean up store state when navigating away so stale attempts do not linger.
+  useEffect(() => {
+    return () => {
+      useExamStore.getState().resetExam();
+    };
+  }, []);
 
   useEffect(() => {
-    if (!sessionId) {
-      const startDiagnostic = async () => {
-        try {
-          await startServerExam({
-            yearLevel: 7,
-            examStyle: "scholarship_style",
-            subject: subject as SubjectFilter,
-            questionCount: questionsState?.length ?? 0,
-            timing: "timed",
-          },
-          { bankId: "curated" });
-        } catch (err) {
-          setError(err instanceof Error ? err.message : "Failed to start diagnostic session");
-        }
-      };
-      void startDiagnostic();
+    if (questions.length === 0 || status !== "not_started") {
+      return;
     }
-  }, [sessionId]);
 
-  const handleSubmit = async () => {
-    setSubmitting(true);
-    try {
-      submitExam();
-      const r = useExamStore.getState().result;
-      const reviewQuestions = useExamStore.getState().reviewQuestions;
-      setResult({ result: r as ExamResult, reviewQuestions: Array.from(reviewQuestions ?? []) });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to submit exam");
-      setSubmitting(false);
+    const yearLevel = normalizeYearLevel(questions);
+    const examSubject = normalizeSubjectFilter(questions, subject);
+    const config = {
+      yearLevel,
+      examStyle: "scholarship_style" as const,
+      subject: examSubject,
+      questionCount: questions.length,
+      timing: "timed" as const,
+    };
+
+    let cancelled = false;
+    const startSession = async () => {
+      if (mode === "server") {
+        try {
+          const ok = await startServerExam(config, { bankId: "published" });
+          if (!cancelled && !ok) {
+            setError(
+              useExamStore.getState().lastServerError ?? "Failed to start diagnostic session",
+            );
+          }
+        } catch (err) {
+          if (!cancelled) {
+            setError(err instanceof Error ? err.message : "Failed to start diagnostic session");
+          }
+        }
+        return;
+      }
+
+      const ok = startExam(questions, config, {
+        bankId: "published",
+        seed: "vihaan-diagnostic",
+      });
+      if (!ok) {
+        await Promise.resolve();
+        if (!cancelled) {
+          setError("Failed to start diagnostic session");
+        }
+      }
+    };
+
+    void startSession();
+    return () => {
+      cancelled = true;
+    };
+  }, [questions, subject, mode, status, startExam, startServerExam]);
+
+  useEffect(() => {
+    if (status === "submitted" && examResult && !completedRef.current) {
+      completedRef.current = true;
+      onComplete?.({
+        score: examResult.correctCount,
+        total: examResult.totalQuestions,
+        accuracy: examResult.objectivePercentage,
+        timeTakenSeconds: examResult.timeTakenSeconds,
+        responses: useExamStore.getState().responses,
+      });
+    } else if (status === "not_started") {
+      completedRef.current = false;
     }
+  }, [status, examResult, onComplete]);
+
+  const handleSubmit = () => {
+    submitExam("user_submitted");
   };
 
   if (error) {
     return (
-      <div className="rounded-lg border border-mm-coral/40 bg-mm-tint/40 p-6 text-mm-coral">
-        <h2 className="text-xl font-bold text-mm-coral">Error</h2>
-        <p>{error}</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="mt-4 rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
-        >
-          Restart
-        </button>
+      <div className="rounded-2xl border border-mm-coral/40 bg-mm-tint/40 p-6 text-mm-coral">
+        <h2 className="text-xl font-bold text-mm-coral">Unable to start diagnostic</h2>
+        <p className="mt-2 text-sm text-ink">{error}</p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              setError(null);
+              useExamStore.getState().resetExam();
+            }}
+            className="rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
+          >
+            Restart
+          </button>
+          <Link
+            href="/student/vihaan"
+            className="inline-flex items-center gap-1.5 rounded-btn border border-mm-line bg-white px-3 py-1.5 text-xs font-semibold text-ink hover:bg-mm-page"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+            Back to Vihaan Scholarship Prep
+          </Link>
+        </div>
       </div>
     );
   }
 
-  if (!sessionId || !questionsState) {
+  if (questions.length === 0 && !sessionId && status === "not_started") {
     return (
-      <div className="flex flex-col items-center justify-center h-64 text-mm-muted">
+      <section
+        data-testid="diagnostic-empty-state"
+        className="rounded-2xl border border-mm-line bg-white p-6 shadow-sm space-y-4"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h1 className="text-2xl font-black tracking-tight text-ink">Diagnostic Assessment</h1>
+            <p className="mt-1 text-sm font-semibold text-mm-muted">
+              No approved diagnostic questions available yet
+            </p>
+          </div>
+          <span className="rounded border border-mm-line bg-mm-tint/40 px-2.5 py-1 text-[11px] font-semibold text-mm-muted">
+            Draft — awaiting human approval
+          </span>
+        </div>
+        <p className="text-sm text-mm-muted">
+          The diagnostic bank is currently in draft review pending human sign-off (
+          <code>approvedBy</code>). Unapproved draft questions are never served to students.
+        </p>
+        <div>
+          <Link
+            href="/student/vihaan"
+            className="inline-flex items-center gap-2 rounded-btn border border-primary/30 bg-white px-3.5 py-2 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+            Back to Vihaan Scholarship Prep
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
+  if (status === "submitted" && examResult) {
+    const reviewList = reviewQuestions ?? [];
+    const detailById = new Map(examResult.questionDetails.map((d) => [d.questionId, d]));
+
+    return (
+      <div
+        data-testid="diagnostic-results"
+        className="rounded-2xl border border-mm-line bg-white p-6 shadow-sm space-y-6"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-emerald-600" aria-hidden="true" />
+            <h2 className="text-xl font-bold text-ink">Diagnostic Results</h2>
+          </div>
+          <span className="rounded border border-mm-line bg-mm-tint/40 px-2.5 py-0.5 text-xs font-semibold text-mm-muted">
+            {examResult.objectivePercentage}% accuracy
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
+            <p className="text-xs font-semibold text-mm-muted uppercase tracking-wider">Score</p>
+            <p className="text-2xl font-bold text-ink">{examResult.objectivePercentage}%</p>
+          </div>
+          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
+            <p className="text-xs font-semibold text-mm-muted uppercase tracking-wider">Correct</p>
+            <p className="text-2xl font-bold text-ink">{examResult.correctCount}</p>
+          </div>
+          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
+            <p className="text-xs font-semibold text-mm-muted uppercase tracking-wider">Total</p>
+            <p className="text-2xl font-bold text-ink">{examResult.totalQuestions}</p>
+          </div>
+          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
+            <p className="text-xs font-semibold text-mm-muted uppercase tracking-wider">Time</p>
+            <p className="text-2xl font-bold text-ink">{examResult.timeTakenSeconds}s</p>
+          </div>
+        </div>
+
+        {examResult.manualReviewQuestions > 0 && (
+          <p className="text-xs text-mm-muted">
+            {examResult.manualReviewQuestions} response
+            {examResult.manualReviewQuestions === 1 ? " is" : "s are"} pending manual review and
+            excluded from objective accuracy.
+          </p>
+        )}
+
+        <div className="space-y-3">
+          {reviewList.map((q) => {
+            const detail = detailById.get(q.id);
+            const badgeLabel = detail?.pendingManualReview
+              ? "Pending review"
+              : detail?.status === "correct"
+                ? "Correct"
+                : detail?.status === "incorrect"
+                  ? "Incorrect"
+                  : "Unanswered";
+            return (
+              <div key={q.id} className="rounded-xl border border-mm-line bg-mm-page/50 p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-sm font-bold text-ink">{q.prompt || q.id}</h3>
+                  <span className="rounded border border-mm-line bg-white px-2 py-0.5 text-[10px] font-semibold text-mm-muted">
+                    {badgeLabel}
+                  </span>
+                </div>
+                <p className="mt-1.5 text-xs text-mm-muted">
+                  {q.explanation || "No explanation available."}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="flex justify-end">
+          <Link
+            href="/student/vihaan"
+            className="inline-flex items-center gap-2 rounded-btn border border-primary/30 bg-white px-3.5 py-2 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
+          >
+            Back to dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (!sessionId || questionsState.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 rounded-2xl border border-mm-line bg-white p-6 text-mm-muted">
         <Clock className="h-8 w-8" aria-hidden="true" />
         <p className="mt-2 text-sm">Starting diagnostic session...</p>
       </div>
     );
   }
 
-  if (submitted && result) {
-    const { result: examResult, reviewQuestions } = result;
-    const correctCount = examResult.correctCount ?? 0;
-    const totalQuestions = examResult.totalQuestions ?? questionsState?.length ?? 0;
-    const accuracy = totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0;
-    const timeTakenSeconds = examResult.timeTakenSeconds ?? 0;
-
-    return (
-      <div className="rounded-2xl border border-mm-line bg-white p-6 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-ink">Diagnostic Results</h2>
-          <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
-            {Math.round(accuracy)}% accuracy
-          </span>
-        </div>
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
-            <p className="text-xs font-semibold text-mm-muted uppercase tracking-wider">Score</p>
-            <p className="text-2xl font-bold text-ink">{Math.round(accuracy)}%</p>
-          </div>
-          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
-            <p className="text-xs font-semibold text-muted uppercase tracking-wider">Correct</p>
-            <p className="text-2xl font-bold text-ink">{correctCount}</p>
-          </div>
-          <div className="rounded-xl border border-mm-line bg-mm-page/50 p-4 text-center">
-            <p className="text-xs font-semibold text-muted uppercase tracking-wider">Total</p>
-            <p className="text-2xl font-bold text-ink">{totalQuestions}</p>
-          </div>
-        </div>
-        <div className="space-y-3">
-          {reviewQuestions.map((q) => (
-            <div key={q.id} className="rounded-xl border border-mm-line bg-mm-page/50 p-4">
-              <h3 className="text-sm font-bold text-ink">{q.prompt || q.id}</h3>
-              <p className="mt-1 text-[11px] text-mm-muted">
-                {q.explanation || "No explanation available."}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 flex justify-end">
-          <a
-            href="/student/vihaan"
-            className="inline-flex items-center gap-2 rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
-          >
-            Back to dashboard
-          </a>
-        </div>
-      </div>
-    );
+  const currentQuestion = questionsState[currentQuestionIndex];
+  if (!currentQuestion) {
+    return null;
   }
 
-  const currentQuestion = questionsState[currentQuestionIndex];
+  const isSubmitting = status === "submitting";
+  const isLastQuestion = currentQuestionIndex === questionsState.length - 1;
 
   return (
     <div className="rounded-2xl border border-mm-line bg-white p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <h2 className="text-xl font-bold text-ink">{subject}</h2>
-          <p className="text-xs text-mm-muted">Question {currentQuestionIndex + 1} of {questionsState.length}</p>
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div className="flex items-center gap-3">
+          <h2 className="text-xl font-bold text-ink">{formatSubjectLabel(subject)}</h2>
+          <p className="text-xs text-mm-muted">
+            Question {currentQuestionIndex + 1} of {questionsState.length}
+          </p>
         </div>
-        <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
-          Question {currentQuestionIndex + 1} of {questionsState.length}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
+            Question {currentQuestionIndex + 1} of {questionsState.length}
+          </span>
+          <Link
+            href="/student/vihaan"
+            className="inline-flex items-center gap-1 rounded-btn border border-mm-line bg-white px-2.5 py-1 text-[11px] font-semibold text-mm-muted hover:text-ink"
+          >
+            Exit
+          </Link>
+        </div>
       </div>
+
       <div className="mb-4">
         <ExamQuestion
           question={currentQuestion}
           answer={responses[currentQuestion.id]}
           onAnswerChange={(answer) => setResponse(currentQuestion.id, answer)}
+          disabled={isSubmitting}
         />
       </div>
+
       <div className="flex items-center justify-between">
         <button
+          type="button"
           onClick={goToPreviousQuestion}
-          disabled={currentQuestionIndex === 0}
+          disabled={currentQuestionIndex === 0 || isSubmitting}
           className="rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint disabled:bg-mm-page/50 disabled:text-mm-muted disabled:border-mm-line"
         >
           Previous
         </button>
-        <button
-          onClick={goToNextQuestion}
-          disabled={currentQuestionIndex === questionsState.length - 1}
-          className="rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint disabled:bg-mm-page/50 disabled:text-mm-muted disabled:border-mm-line"
-        >
-          Next
-        </button>
-      </div>
-      {currentQuestionIndex === questionsState.length - 1 && (
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={handleSubmit}
-            disabled={submitting}
-            className="rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint disabled:bg-mm-page/50 disabled:text-mm-muted disabled:border-mm-line"
-          >
-            {submitting ? "Submitting..." : "Submit Exam"}
-          </button>
+        <div className="flex items-center gap-2">
+          {!isLastQuestion && (
+            <button
+              type="button"
+              onClick={goToNextQuestion}
+              disabled={isSubmitting}
+              className="rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint disabled:bg-mm-page/50 disabled:text-mm-muted disabled:border-mm-line"
+            >
+              Next
+            </button>
+          )}
+          {isLastQuestion && (
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="rounded-btn border border-primary bg-primary px-4 py-1.5 text-xs font-semibold text-white shadow-xs hover:opacity-95 disabled:opacity-50"
+            >
+              {isSubmitting ? "Submitting..." : "Submit Exam"}
+            </button>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

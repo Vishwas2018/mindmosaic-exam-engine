@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
+import { VihaanDiagnosticExamRunner } from "@/features/scholarship-prep/components/DiagnosticExamRunner";
 import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
-import { requireStudent } from "@/features/student/require-student";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
-import { VihaanDiagnosticExamRunner } from "@/features/scholarship-prep/components/DiagnosticExamRunner";
+import { requireStudent } from "@/features/student/require-student";
+import { getVihaanPracticePlan } from "@/server/vihaan-practice";
 
 export const metadata: Metadata = {
   title: "Diagnostic Assessment — Vihaan Scholarship Prep",
@@ -23,6 +24,8 @@ export default async function DiagnosticPage() {
     return redirect("/student");
   }
 
+  const approvedQuestions = getVihaanPracticePlan(20, { subject: "numeracy" });
+
   return (
     <StudentPortalShell
       active="vihaan"
@@ -30,11 +33,7 @@ export default async function DiagnosticPage() {
       student={student}
       shellData={shellData}
     >
-      <VihaanDiagnosticExamRunner
-        questions={[]}
-        subject="mathematics"
-        onComplete={(result) => { console.log("Diagnostic result:", result); }}
-      />
+      <VihaanDiagnosticExamRunner questions={approvedQuestions} subject="numeracy" />
     </StudentPortalShell>
   );
 }

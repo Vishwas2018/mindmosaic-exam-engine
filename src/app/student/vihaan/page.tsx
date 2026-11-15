@@ -1,1 +1,36 @@
-import type { Metadata } from "next";import { redirect } from "next/navigation";import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";import { requireStudent } from "@/features/student/require-student";import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";import { VihaanFeatureUnavailable } from "@/features/scholarship-prep/components/VihaanFeatureUnavailable";import { VihaanDashboard } from "@/features/scholarship-prep/components/VihaanDashboard";export const metadata: Metadata = { title: "Vihaan Scholarship Prep", description: "Year 7 Academic Scholarship preparation \u2014 Edutest-style practice for Huntingtower 2028.", robots: { index: false, follow: false } };export const dynamic = "force-dynamic";export default async function VihaanScholarshipPrepPage() { const student = await requireStudent(); const shellData = await fetchStudentPortalShellData(student); if (!isVihaanScholarshipPrepEnabledFor(student.userId)) { return redirect("/student"); } return (<StudentPortalShell active="vihaan" breadcrumbLabel="Vihaan Scholarship Prep" student={student} shellData={shellData}><VihaanDashboard student={student} shellData={shellData} /></StudentPortalShell>);}
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+
+import { VihaanDashboard } from "@/features/scholarship-prep/components/VihaanDashboard";
+import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
+import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
+import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
+import { requireStudent } from "@/features/student/require-student";
+
+export const metadata: Metadata = {
+  title: "Vihaan Scholarship Prep",
+  description: "Year 7 Academic Scholarship preparation — Edutest-style practice for Huntingtower 2028.",
+  robots: { index: false, follow: false },
+};
+
+export const dynamic = "force-dynamic";
+
+export default async function VihaanScholarshipPrepPage() {
+  const student = await requireStudent();
+  const shellData = await fetchStudentPortalShellData(student);
+
+  if (!isVihaanScholarshipPrepEnabledFor(student.userId)) {
+    return redirect("/student");
+  }
+
+  return (
+    <StudentPortalShell
+      active="vihaan"
+      breadcrumbLabel="Vihaan Scholarship Prep"
+      student={student}
+      shellData={shellData}
+    >
+      <VihaanDashboard student={student} shellData={shellData} />
+    </StudentPortalShell>
+  );
+}
