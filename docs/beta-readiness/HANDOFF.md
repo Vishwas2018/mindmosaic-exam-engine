@@ -2,7 +2,13 @@
 
 Last updated 2026-11-15. No background process is running; nothing continues by itself.
 
-## Where things are
+## Where things are (final, 2026-11-15)
+
+- **PR #124 merged into `dev` as `7c3eef71`** (owner approval). Full CI, hosted suite and oracle green on the `dev`
+  deployment; see TEST-RESULTS.md "final". Remaining: SMTP (owner), real-email registrations (after SMTP), signed
+  77-item attestation (owner). Everything below this section is history.
+
+## Where things were
 
 - `dev` = `100287e7` (PR #123). DEV Supabase `mfglzabnayacssgertat`: 53/53 migrations, legacy write RPCs revoked.
 - **PR #124** (draft) `integration/dev-beta-completion` → `dev`, worktree `C:/tmp/wt-dev-beta`. Head = release

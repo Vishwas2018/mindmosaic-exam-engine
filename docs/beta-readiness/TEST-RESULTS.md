@@ -3,6 +3,18 @@
 Release candidate: **`5c69c65f`** on `integration/dev-beta-completion` (PR #124), based on `dev` `100287e7`.
 Later commits on the branch change docs, CI and operator scripts only (no application code).
 
+## 2026-11-15 final: `dev` after merging PR #124 (`7c3eef71`)
+
+- Merged by the owner's explicit approval (squash, head `808b943f`).
+- **CI on `dev`** (push run 43676002283): all jobs green. core 7,308 passed; rls 607 passed + 2 expected-fail;
+  e2e 387 passed; e2e-auth 92 passed + 1 flaky (passed on retry); **0 skipped**.
+- **Deployment** `mindmosaic-exam-engine-hydzx5187-…` (`dpl_BJ3Dm59Mn5T9y7ABhWPJQdeCLAbB`), target preview, branch
+  `dev`, READY. Client bundle (42 files from `/sign-in`, `/student`, `/parent`) references only DEV `mfglzabnayacssgertat`.
+- **Hosted browser suite**, run `rmwhbxbxf`: **14 passed, 0 failed, 1 skipped** (A1–A2 real sign-up: D-025) at
+  1440 / 834 / 390, scenarios A3–A11, B, C, D (incl. legacy RPCs 42501, no forged attempt), E, G.
+- **Scoring oracle**: **21/21**, FORGE-RPC 403 `42501`, stored forged: false.
+- **Cleanup**: run `rmwhbxbxf` removed (2 parents, 2 children); DEV 15 auth users, 0 from the suite.
+
 ## 2026-11-15 re-run on PR head `7167078f` (CI port fix)
 
 - **CI**, both the push run (43660929918) and the pull_request run (43660933799): all six jobs green. core 442

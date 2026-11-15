@@ -3,6 +3,22 @@
 Each row is either checked with the evidence that checks it, or open with who it waits on. Nothing is ticked from a
 local fixture when the row is about hosted DEV.
 
+## 2026-11-15 final: `dev` = `7c3eef71` (PR #124 merged with owner approval)
+
+| # | Item | State | Evidence / waiting on |
+|---|------|-------|-----------------------|
+| F1 | PR #124 merged into `dev` | **Done** | Owner approved; squash `7c3eef71` |
+| F2 | Required CI on `dev` | **Done** | core, rls, e2e, e2e-auth green; 0 skipped |
+| F3 | `dev` deployment DEV-only | **Done** | Preview target; bundle refs only `mfglzabnayacssgertat`; no Stripe/billing-enforcement vars |
+| F4 | Hosted A–E + G on the `dev` deployment | **Done except A1–A2** | 14/0/1-skip; A1–A2 need SMTP (F7) |
+| F5 | Scoring + score-forging closed | **Done** | Oracle 21/21; FORGE-RPC 403 `42501` |
+| F6 | Approved-only content; Y5 Q20 excluded | **Done** | Scenario G; no approval record changed |
+| F7 | **Resend SMTP on DEV Auth (D-025)** | **Open, owner** | SMTP-RUNBOOK.md: verified domain, sending key, Supabase token |
+| F8 | **Two real email registrations + recovery** | **Open, after F7** | Needs a readable inbox (Gmail connector re-auth) |
+| F9 | **Signed attestation of the 77 items** | **Open, owner** | OWNER-ATTESTATION-77.md, unsigned |
+| F10 | Open P0/P1 defects | **None** besides D-025 | DEFECT-REGISTER.md |
+| F11 | Synthetic data | **Done** | DEV 15 users |
+
 ## 2026-11-15: PR head `7167078f` (application code = `5c69c65f`)
 
 | # | Item | State | Evidence / waiting on |
