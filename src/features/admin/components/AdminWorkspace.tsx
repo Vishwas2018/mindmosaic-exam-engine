@@ -159,23 +159,6 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
             </Link>
           </div>
 
-          {/* Legacy Tools Quick Links */}
-          <div className="hidden sm:flex items-center gap-2 border-r border-royal/10 pr-3 mr-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#6e6779]">
-              Tools:
-            </span>
-            {LEGACY_TOOLS.map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="inline-flex items-center gap-1 rounded-lg border border-royal/10 bg-royal/[0.03] px-2 py-0.5 text-xs font-medium text-royal hover:bg-royal/10"
-              >
-                <span>{tool.label}</span>
-                <ExternalLink className="h-3 w-3 opacity-60" />
-              </Link>
-            ))}
-          </div>
-
           {/* Artboard switcher pills: a design-review aid, shown only over the synthetic preview data. */}
           {data.source === "preview" && (
           <div className="flex flex-wrap items-center gap-1 text-xs">
@@ -581,7 +564,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                   </div>
 
                   {/* Year filter */}
-                  <div className="flex items-center gap-1.5 text-xs">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
                     <span className="font-semibold text-[#6e6779]">Year:</span>
                     {(["all", 3, 5, 6] as const).map((y) => (
                       <button
@@ -600,7 +583,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                   </div>
 
                   {/* Subject filter */}
-                  <div className="flex items-center gap-1.5 text-xs">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
                     <span className="font-semibold text-[#6e6779]">Subject:</span>
                     {["all", "Numeracy", "Reading", "Language Conventions", "Reasoning"].map((s) => (
                       <button
@@ -1154,9 +1137,9 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
               <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
                 <div className="divide-y divide-royal/5">
                   {data.activity.map((act) => (
-                    <div key={act.id} className="py-3 flex items-center justify-between">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
+                    <div key={act.id} className="py-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="min-w-0 space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
                           <span className="text-xs font-bold text-[#1f1b24]">{act.actor}</span>
                           <span
                             className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
@@ -1172,7 +1155,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                         </div>
                         <p className="text-xs text-[#6e6779]">{act.target}</p>
                         {act.hash && (
-                          <p className="font-mono text-[10px] text-royal">{act.hash}</p>
+                          <p className="break-all font-mono text-[10px] text-royal">{act.hash}</p>
                         )}
                       </div>
                       <span className="text-xs text-[#6e6779]">{act.timestamp}</span>

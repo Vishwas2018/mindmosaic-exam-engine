@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 
 import {createClient} from "@/lib/supabase/server";
-import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import {isSingaporeMathsSampleAllowed, isSingaporeMathsSampleAllowedFor} from "@/features/flags/singapore-maths-sample";
 import {sampleExplanation, sampleYearOf} from "@/content/visual-fixtures/bar-model/sample-practice.server";
 import {getSampleStore, SampleStoreUnavailableError} from "@/features/singapore-maths-sample/attempt-store";
 
@@ -33,6 +33,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   } = await supabase.auth.getUser();
   if (!user) {
     return NextResponse.json({error: "unauthorized"}, {status: 401});
+  }
+  if (!isSingaporeMathsSampleAllowedFor(user.id)) {
+    return new NextResponse(null, {status: 404});
   }
 
   let body: unknown;

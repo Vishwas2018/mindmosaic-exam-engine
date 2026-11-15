@@ -8,6 +8,8 @@ import { buildDiagnosticBaseline } from "@/features/student/onboarding/baseline-
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { getExamBank } from "@/server/exam-bank";
+import { getStudioAvailability } from "@/server/practice-studio-availability";
+import { recommendFromWarmup } from "@/features/student/onboarding/recommendations";
 import { createLegacyExamSession, recordLegacyExamAttempt } from "@/server/exam-write/legacy-exam-writes";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +20,11 @@ const completeOnboardingSchema = z.object({
   weeklyGoalMinutes: z.number().int().min(15).max(600).optional().default(60),
   responses: z.record(z.string(), z.unknown()).default({}),
   startedAt: z.number().int().positive().optional(),
+  /**
+   * `false` for the optional warm-up taken from My Space: it records the warm-up only and never rewrites the
+   * child's year level, interests or weekly goal. The first-run onboarding flow keeps the default (`true`).
+   */
+  preferences: z.boolean().optional().default(true),
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -47,7 +54,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  const { yearLevel, interests, weeklyGoalMinutes, responses, startedAt: clientStartedAt } =
+  const { yearLevel, interests, weeklyGoalMinutes, responses, startedAt: clientStartedAt, preferences } =
     parsed.data;
 
   // Verify student role
@@ -137,13 +144,17 @@ export async function POST(request: Request): Promise<NextResponse> {
   const nowIso = new Date().toISOString();
   const { error: profileError } = await supabase
     .from("profiles")
-    .update({
-      year_level: yearLevel,
-      interests,
-      weekly_goal_minutes: weeklyGoalMinutes,
-      onboarding_completed_at: nowIso,
-      diagnostic_completed_at: nowIso,
-    })
+    .update(
+      preferences
+        ? {
+            year_level: yearLevel,
+            interests,
+            weekly_goal_minutes: weeklyGoalMinutes,
+            onboarding_completed_at: nowIso,
+            diagnostic_completed_at: nowIso,
+          }
+        : { diagnostic_completed_at: nowIso },
+    )
     .eq("id", user.id);
 
   if (profileError) {
@@ -157,5 +168,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     ok: true,
     result,
     baseline: baselineReport,
+    /* Server-authoritative: worked out from this sitting's own marks and what Practice Studio can serve today. */
+    recommendations: recommendFromWarmup(baselineReport, getStudioAvailability()),
   });
 }

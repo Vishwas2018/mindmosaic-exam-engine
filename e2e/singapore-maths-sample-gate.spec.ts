@@ -166,18 +166,11 @@ test.describe("where the gate opens", () => {
     });
   });
 
-  test("a Preview opted in and bound to its own non-production project serves both years", async ({}, testInfo) => {
+  test("a Preview opted in and bound to its own project still holds back anyone not on the preview list", async ({}, testInfo) => {
     testInfo.setTimeout(180_000);
-    await withServer(47, OPTED_IN_PREVIEW, async (origin) => {
-      for (const year of [3, 5] as const) {
-        const { status, body } = await fetchPage(origin, `${SAMPLE_URL}?year=${year}`);
-        expect(status, `year ${year}`).toBe(200);
-        expect(body, `year ${year}`).toContain(`Year ${year} · Question 1 of 15`);
-        expect(body, `year ${year}`).toContain("15 sample questions");
-        expect(body, `year ${year}`).not.toContain(COMING_SOON_TEXT);
-        expect(body, `year ${year}`).not.toContain(BOUNDARY_TEXT);
-      }
-    });
+    /* Content is not yet approved: the deployment gate alone is not enough, a visitor must also be an allowlisted
+       account. An anonymous visitor (and, by the same check, any general beta user) sees Coming Soon. */
+    await withServer(47, OPTED_IN_PREVIEW, (origin) => expectComingSoon(origin, "opted-in Preview, not on the list"));
   });
 });
 
