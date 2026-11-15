@@ -57,7 +57,7 @@ export default async function StudentEngagementPage() {
   const questionsAnswered = overview.attempts.reduce((sum, a) => sum + a.attemptedQuestions, 0);
 
   return (
-    <StudentPortalShell active="progress" breadcrumbLabel="My Progress" student={student} shellData={shellData}>
+    <StudentPortalShell active="results" breadcrumbLabel="My Progress" student={student} shellData={shellData}>
       <MyProgressHero
         questionsAnswered={questionsAnswered}
         recommendedFocus={overview.recommendedFocus}

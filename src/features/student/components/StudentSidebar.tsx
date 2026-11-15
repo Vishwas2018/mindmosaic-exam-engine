@@ -14,11 +14,13 @@ import {
   Settings,
   SpellCheck2,
   Target,
+  GraduationCap,
   ListChecks,
   BarChart3,
 } from "lucide-react";
 
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import { isVihaanScholarshipPrepEnabled } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
@@ -29,9 +31,9 @@ export type StudentSidebarKey =
   | "learn"
   | "practice"
   | "examCentre"
-  | "progress"
   | "results"
-  | "singaporeMathsSample";
+  | "singaporeMathsSample"
+  | "vihaan";
 
 interface SidebarNavItem {
   key: StudentSidebarKey;
@@ -58,6 +60,14 @@ const baseSidebarItems: readonly SidebarNavItem[] = [
   { key: "results", label: "My Results", shortLabel: "Results", href: "/results", icon: ListChecks },
 ];
 
+const vihaanNavItem: SidebarNavItem = {
+  key: "vihaan" as const,
+  label: "Vihaan Scholarship Prep",
+  href: "/student/vihaan",
+  icon: GraduationCap,
+  shortLabel: "Vihaan",
+};
+
 export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
   ...baseSidebarItems,
   ...(isSingaporeMathsSampleAllowed()
@@ -67,9 +77,11 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
           label: "Singapore Maths Sample",
           href: "/practice/singapore-maths/sample",
           icon: BarChart3,
+          shortLabel: "Singapore",
         },
       ]
     : []),
+  ...(isVihaanScholarshipPrepEnabled() ? [vihaanNavItem] : []),
 ];
 
 /**
@@ -152,10 +164,10 @@ export function StudentSidebar({
             <span className="truncate text-[13px] font-semibold leading-tight text-mm-ink">
               {displayName ?? "Your profile"}
             </span>
+
           </div>
           <ChevronsUpDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-stitch-outline" />
         </div>
-
 
         <div className="px-3">
           <p className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-stitch-outline">
