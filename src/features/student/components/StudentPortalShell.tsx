@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 import type { StudentContext } from "@/features/student/require-student";
 
 import { StudentBottomNav } from "./StudentBottomNav";
@@ -29,6 +30,7 @@ export function StudentPortalShell({
   shellData: StudentPortalShellData;
   children: ReactNode;
 }) {
+  const showVihaan = isVihaanScholarshipPrepEnabledFor(student.userId);
   return (
     <div className="mm-root min-h-screen bg-canvas">
       <div className="lg:flex">
@@ -41,17 +43,18 @@ export function StudentPortalShell({
           currentStreak={shellData.currentStreak}
           sessionsThisWeek={shellData.sessionsThisWeek}
           weeklyTarget={shellData.weeklyTarget}
+          showVihaan={showVihaan}
         />
 
         <div className="min-w-0 flex-1">
-          <StudentTopBar breadcrumbLabel={breadcrumbLabel} hasActiveSession={shellData.hasActiveSession} />
+          <StudentTopBar breadcrumbLabel={breadcrumbLabel} hasActiveSession={shellData.hasActiveSession} showVihaan={showVihaan} />
 
           <main id="main-content" className="mx-auto w-full max-w-[1240px] space-y-8 px-4 py-7 pb-24 sm:px-6 lg:px-8 lg:pb-7">
             {children}
           </main>
         </div>
       </div>
-      <StudentBottomNav active={active} />
+      <StudentBottomNav active={active} showVihaan={showVihaan} />
     </div>
   );
 }

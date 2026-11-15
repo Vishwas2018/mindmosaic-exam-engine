@@ -7,7 +7,7 @@ import { Bell, ChevronDown, Flag, Menu } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
 import { AuthNav } from "@/features/auth";
 
-import { SIDEBAR_NAV_ITEMS } from "./StudentSidebar";
+import { studentNavItems } from "./StudentSidebar";
 
 /**
  * Sticky top bar shared by every Stitch-ported student portal screen
@@ -32,9 +32,11 @@ import { SIDEBAR_NAV_ITEMS } from "./StudentSidebar";
 export function StudentTopBar({
   breadcrumbLabel,
   hasActiveSession,
+  showVihaan = false,
 }: {
   breadcrumbLabel: string;
   hasActiveSession: boolean;
+  showVihaan?: boolean;
 }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -58,7 +60,7 @@ export function StudentTopBar({
               className="absolute inset-x-0 top-16 z-40 border-b border-mm-line bg-white p-3 shadow-warm-card"
             >
               <nav aria-label="Student navigation" className="space-y-1">
-                {SIDEBAR_NAV_ITEMS.map((item) => (
+                {studentNavItems(showVihaan).map((item) => (
                   <Link
                     key={item.key}
                     href={item.href}

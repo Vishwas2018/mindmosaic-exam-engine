@@ -6,8 +6,8 @@ import { buttonClasses } from "@/components/ui";
 
 /**
  * Vihaan Parent Dashboard — displays weekly progress, subject performance,
- * time spent, weak areas and recommended next steps. All data comes from
- * real attempt history — nothing is fabricated.
+ * time spent, weak areas and recommended next steps. Not yet wired to attempt
+ * history: every figure is an empty state (0 / —), never an invented number.
  */
 export function VihaanParentDashboard() {
   return (

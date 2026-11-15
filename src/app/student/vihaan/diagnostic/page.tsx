@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { isVihaanScholarshipPrepEnabled } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
+import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 import { requireStudent } from "@/features/student/require-student";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
@@ -19,7 +19,7 @@ export default async function DiagnosticPage() {
   const student = await requireStudent();
   const shellData = await fetchStudentPortalShellData(student);
 
-  if (!isVihaanScholarshipPrepEnabled()) {
+  if (!isVihaanScholarshipPrepEnabledFor(student.userId)) {
     return redirect("/student");
   }
 

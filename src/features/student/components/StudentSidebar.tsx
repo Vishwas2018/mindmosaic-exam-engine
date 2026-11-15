@@ -20,7 +20,6 @@ import {
 } from "lucide-react";
 
 import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
-import { isVihaanScholarshipPrepEnabled } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
@@ -81,8 +80,12 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
         },
       ]
     : []),
-  ...(isVihaanScholarshipPrepEnabled() ? [vihaanNavItem] : []),
 ];
+
+/** The nav for one student: the Vihaan pilot item only when the server decided this student may see it. */
+export function studentNavItems(showVihaan = false): readonly SidebarNavItem[] {
+  return showVihaan ? [...SIDEBAR_NAV_ITEMS, vihaanNavItem] : SIDEBAR_NAV_ITEMS;
+}
 
 /**
  * Blanket default, not a queried entitlement — there is no billing/
@@ -120,6 +123,7 @@ export function StudentSidebar({
   currentStreak,
   sessionsThisWeek,
   weeklyTarget,
+  showVihaan = false,
 }: {
   active: StudentSidebarKey;
   displayName: string | null;
@@ -129,6 +133,8 @@ export function StudentSidebar({
   currentStreak: number;
   sessionsThisWeek: number;
   weeklyTarget: number;
+  /** Server-decided: whether this student is in the Vihaan pilot. */
+  showVihaan?: boolean;
 }) {
   const goalProgress = weeklyTarget > 0 ? Math.min(100, Math.round((sessionsThisWeek / weeklyTarget) * 100)) : 0;
   // Same Year-3/5 collapse convention as deriveStartHereItem() — only those two levels are authored.
@@ -174,7 +180,7 @@ export function StudentSidebar({
             Portal main
           </p>
           <nav aria-label="Student navigation" className="space-y-1">
-            {SIDEBAR_NAV_ITEMS.map((item) => {
+            {studentNavItems(showVihaan).map((item) => {
               const isActive = item.key === active;
               const Icon = item.icon;
               return (
