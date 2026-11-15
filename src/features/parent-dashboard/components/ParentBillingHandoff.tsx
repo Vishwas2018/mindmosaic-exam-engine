@@ -14,11 +14,14 @@ export interface ParentBillingHandoffProps {
     cardLast4: string;
   };
   isLocalPreview?: boolean;
+  /** True only for a paid plan with payments switched on. Otherwise no card, plan or invoice control is offered. */
+  paymentsEnabled?: boolean;
 }
 
 export function ParentBillingHandoff({
   membership,
   isLocalPreview = false,
+  paymentsEnabled = true,
 }: ParentBillingHandoffProps) {
   const [portalBusy, setPortalBusy] = useState(false);
   const [portalError, setPortalError] = useState<string | null>(null);
@@ -28,7 +31,9 @@ export function ParentBillingHandoff({
 
   const handleOpenStripePortal = async () => {
     if (isLocalPreview) {
-      setPortalError("Stripe billing actions are illustrative and disabled in isolated preview mode.");
+      setPortalError(
+        "Stripe billing actions are illustrative and disabled in isolated preview mode.",
+      );
       return;
     }
 
@@ -51,7 +56,9 @@ export function ParentBillingHandoff({
         );
       }
     } catch {
-      setPortalError("Unable to connect to billing service. Please try again later.");
+      setPortalError(
+        "Unable to connect to billing service. Please try again later.",
+      );
     } finally {
       setPortalBusy(false);
     }
@@ -62,12 +69,20 @@ export function ParentBillingHandoff({
       {/* Header & Greet (Artboard #25) */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-mm-ink-soft">
-            <Link href="/parent/account" className="inline-flex min-h-11 items-center hover:text-mm-brand transition">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-mm-ink-soft"
+          >
+            <Link
+              href="/parent/account"
+              className="inline-flex min-h-11 items-center hover:text-mm-brand transition"
+            >
               Account
             </Link>
             <span aria-hidden="true">/</span>
-            <span className="text-mm-ink font-semibold">Plan &amp; billing</span>
+            <span className="text-mm-ink font-semibold">
+              Plan &amp; billing
+            </span>
           </nav>
           <p className="text-xs font-semibold uppercase tracking-wider text-mm-brand">
             Account
@@ -93,10 +108,28 @@ export function ParentBillingHandoff({
         role="status"
         className="flex items-start gap-3 rounded-2xl border border-mm-brand/15 bg-mm-brand/5 p-4 text-xs sm:text-sm text-mm-ink"
       >
-        <Info className="mt-0.5 h-5 w-5 shrink-0 text-mm-brand" aria-hidden="true" />
+        <Info
+          className="mt-0.5 h-5 w-5 shrink-0 text-mm-brand"
+          aria-hidden="true"
+        />
         <div className="leading-relaxed">
-          <strong className="font-semibold text-mm-ink">Secure Billing Management:</strong>{" "}
-          MindMosaic family memberships are securely handled with Stripe. You can update payment cards, review past invoices, or modify your subscription tier at any time.
+          {paymentsEnabled ? (
+            <>
+              <strong className="font-semibold text-mm-ink">
+                Payments are handled by Stripe.
+              </strong>{" "}
+              Cards, invoices and plan changes open in Stripe’s billing portal
+              and bring you back here.
+            </>
+          ) : (
+            <>
+              <strong className="font-semibold text-mm-ink">
+                The family beta is free.
+              </strong>{" "}
+              There is nothing to pay, no card on file and nothing to cancel. We
+              will tell you well before anything changes.
+            </>
+          )}
         </div>
       </div>
 
@@ -109,7 +142,10 @@ export function ParentBillingHandoff({
         >
           <div className="flex items-center gap-2 border-b border-mm-brand/10 pb-4">
             <CreditCard className="h-5 w-5 text-mm-brand" aria-hidden="true" />
-            <h2 id={bhHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
+            <h2
+              id={bhHeadingId}
+              className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink"
+            >
               Current membership
             </h2>
           </div>
@@ -144,41 +180,49 @@ export function ParentBillingHandoff({
           </dl>
 
           {portalError && (
-            <div role="alert" className="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-xs font-semibold text-amber-900">
+            <div
+              role="alert"
+              className="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-3 text-xs font-semibold text-amber-900"
+            >
               {portalError}
             </div>
           )}
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link
-              href="/pricing"
-              className="inline-flex min-h-11 items-center justify-center rounded-xl bg-mm-brand px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-mm-brand/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
-            >
-              Change plan
-            </Link>
+          {paymentsEnabled ? (
+            <>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/pricing"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-mm-brand px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-mm-brand/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
+                >
+                  Change plan
+                </Link>
 
-            <button
-              type="button"
-              onClick={handleOpenStripePortal}
-              disabled={portalBusy}
-              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-mm-brand/20 bg-white px-4 py-2 text-xs font-semibold text-mm-brand shadow-2xs hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
-            >
-              {portalBusy ? "Opening portal..." : "Payment methods"}
-            </button>
+                <button
+                  type="button"
+                  onClick={handleOpenStripePortal}
+                  disabled={portalBusy}
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-mm-brand/20 bg-white px-4 py-2 text-xs font-semibold text-mm-brand shadow-2xs hover:bg-mm-brand/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/30"
+                >
+                  {portalBusy ? "Opening portal..." : "Payment methods"}
+                </button>
 
-            <button
-              type="button"
-              onClick={handleOpenStripePortal}
-              disabled={portalBusy}
-              className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
-            >
-              Invoices
-            </button>
-          </div>
+                <button
+                  type="button"
+                  onClick={handleOpenStripePortal}
+                  disabled={portalBusy}
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold text-mm-ink-soft hover:text-mm-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
+                >
+                  Invoices
+                </button>
+              </div>
 
-          <p className="mt-4 text-xs leading-relaxed text-mm-ink-soft">
-            Manage payment details and billing history directly with our payment processor.
-          </p>
+              <p className="mt-4 text-xs leading-relaxed text-mm-ink-soft">
+                Manage payment details and billing history directly with our
+                payment processor.
+              </p>
+            </>
+          ) : null}
         </section>
 
         {/* Right Column: Coming Back Card (5 cols) */}
@@ -186,12 +230,17 @@ export function ParentBillingHandoff({
           aria-labelledby={backHeadingId}
           className="rounded-2xl border border-mm-brand/10 bg-white p-6 shadow-xs lg:col-span-5 xl:col-span-4"
         >
-          <h2 id={backHeadingId} className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
+          <h2
+            id={backHeadingId}
+            className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink"
+          >
             Coming back
           </h2>
 
           <p className="mt-2 text-xs leading-relaxed text-mm-ink-soft sm:text-sm">
-            Every billing action returns here to your Account rather than the home page. When you finish updating cards or viewing invoices, you will return straight back to your profile.
+            Every billing action returns here to your Account rather than the
+            home page. When you finish updating cards or viewing invoices, you
+            will return straight back to your profile.
           </p>
 
           <Link

@@ -9,6 +9,7 @@ import {
 import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
 import { FAMILY_PLAN } from "@/lib/billing/prices";
 import { getMySubscription } from "@/lib/billing/subscription";
+import { isStripeConfigured } from "@/lib/stripe/config";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -109,6 +110,7 @@ export default async function ParentAccountBillingPage() {
           cardLast4: "",
         }}
         isLocalPreview={false}
+        paymentsEnabled={Boolean(paidPlan) && isStripeConfigured}
       />
     </ParentShell>
   );
