@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PauseCircle } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-import { AuthMosaicPanel } from "@/features/auth/components/AuthMosaicPanel";
+import { AuthShell } from "@/features/auth/components/AuthMosaicPanel";
 import { mmFocus } from "@/features/auth/components/auth-fields";
 
 export const metadata: Metadata = {
@@ -13,17 +13,7 @@ export const metadata: Metadata = {
 
 export default function AccountPausedPage() {
   return (
-    <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-      <AuthMosaicPanel
-        eyebrow="Account status"
-        heading="When an account can’t be used right now."
-        intro="Pausing is deliberate and reversible. If a parent paused this profile, they can turn it back on from their account in seconds."
-        footnote="Independent learning platform. Assessment-style practice contains original questions and is not official examination material."
-      />
-      <main
-        id="main-content"
-        className="grid content-center justify-items-center px-[clamp(20px,4vw,64px)] py-[clamp(28px,3vw,56px)]"
-      >
+    <AuthShell panel={{ heading: "When an account can’t be used right now.", intro: "Pausing is deliberate and reversible. If a parent paused this profile, they can turn it back on from their account in seconds." }}>
         <div className="w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-[0_20px_60px_rgba(89,37,168,0.1)] sm:p-10 lg:p-12">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 text-amber-700">
             <PauseCircle className="h-8 w-8" aria-hidden="true" />
@@ -63,7 +53,6 @@ export default function AccountPausedPage() {
             </Link>
           </div>
         </div>
-      </main>
-    </div>
+      </AuthShell>
   );
 }

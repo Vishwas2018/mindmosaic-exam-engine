@@ -6,9 +6,9 @@ export type {
   EmailConfirmResult,
   OAuthProvider,
 } from "./AuthProvider";
-export { AuthMosaicPanel, AuthPanelPoints } from "./components/AuthMosaicPanel";
+export { AuthMosaicPanel } from "./components/AuthMosaicPanel";
 export { SignInPanel } from "./components/SignInPanel";
-export { SignUpScreen } from "./components/SignUpScreen";
+export { SignUpForm } from "./components/SignUpForm";
 export { AuthNav } from "./components/AuthNav";
 export { RoleHomeLink } from "./components/RoleHomeLink";
 export { EmailConfirmationPending } from "./components/EmailConfirmationPending";

@@ -27,24 +27,13 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const page = await context.newPage();
     const email = randomEmail("parent-confirm");
 
-    // 1. Visit sign-up and complete parent registration wizard
+    // 1. Visit sign-up and create the parent account (one step)
     await page.goto("/sign-up");
-    await page.getByLabel(/first name/i).fill("Same");
-    await page.getByLabel(/last name/i).fill("BrowserParent");
-    await page.getByLabel(/email address/i).fill(email);
+    await page.getByLabel("Your name").fill(`Same BrowserParent`);
+    await page.getByLabel(/^email$/i).fill(email);
     await page.getByLabel(/create a password/i).fill("Str0ng!ParentPass1");
     await page.getByRole("checkbox").click();
-
-    // Step 1 -> Step 2
-    await page.getByRole("button", { name: "Continue" }).click();
-    await expect(page.getByText(/step 2 of 3/i)).toBeVisible();
-
-    // Step 2 -> Step 3: Skip student for now
-    await page.getByRole("button", { name: /skip for now/i }).click();
-    await expect(page.getByText(/step 3 of 3/i)).toBeVisible();
-
-    // Step 3: Create parent account
-    await page.getByRole("button", { name: "Create the account" }).click();
+    await page.getByRole("button", { name: "Create account" }).click();
 
     // Lands on confirmation pending screen
     await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 10000 });
@@ -78,19 +67,11 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
 
     // Sign up in Context A
     await pageA.goto("/sign-up");
-    await pageA.getByLabel(/first name/i).fill("Cross");
-    await pageA.getByLabel(/last name/i).fill("DeviceParent");
-    await pageA.getByLabel(/email address/i).fill(email);
+    await pageA.getByLabel("Your name").fill(`Cross DeviceParent`);
+    await pageA.getByLabel(/^email$/i).fill(email);
     await pageA.getByLabel(/create a password/i).fill("Str0ng!ParentPass1");
     await pageA.getByRole("checkbox").click();
-
-    await pageA.getByRole("button", { name: "Continue" }).click();
-    await expect(pageA.getByText(/step 2 of 3/i)).toBeVisible();
-
-    await pageA.getByRole("button", { name: /skip for now/i }).click();
-    await expect(pageA.getByText(/step 3 of 3/i)).toBeVisible();
-
-    await pageA.getByRole("button", { name: "Create the account" }).click();
+    await pageA.getByRole("button", { name: "Create account" }).click();
 
     await expect(pageA.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 10000 });
 
@@ -138,7 +119,7 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await expect(page.getByText(/opened on a different device or browser/i)).toBeVisible();
 
     // Resend form is prefilled with email
-    const emailInput = page.getByLabel(/email address/i);
+    const emailInput = page.getByLabel(/^email$/i);
     await expect(emailInput).toHaveValue(email);
 
     // First ensure the user exists so resend can trigger
@@ -215,9 +196,9 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await page.waitForURL(/\/sign-in/, { timeout: 15000 });
 
     // 5. Sign in with the NEW password
-    await page.getByLabel(/email address/i).fill(email);
+    await page.getByLabel(/^email$/i).fill(email);
     await page.getByLabel("Password", { exact: true }).fill(newPassword);
-    await page.getByRole("button", { name: /sign in to parent account/i }).click();
+    await page.getByRole("button", { name: /^sign in$/i }).click();
 
     // Successfully reaches parent dashboard
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
@@ -379,9 +360,9 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     await phonePage.getByRole("link", { name: /go to sign-in/i }).click();
     await phonePage.waitForURL(/\/sign-in/, { timeout: 10000 });
 
-    await phonePage.getByLabel(/email address/i).fill(email);
+    await phonePage.getByLabel(/^email$/i).fill(email);
     await phonePage.getByLabel("Password", { exact: true }).fill(newPassword);
-    await phonePage.getByRole("button", { name: /sign in to parent account/i }).click();
+    await phonePage.getByRole("button", { name: /^sign in$/i }).click();
     await expect(phonePage).toHaveURL(/\/parent/, { timeout: 15000 });
     await phone.close();
   });
@@ -393,14 +374,11 @@ test.describe("Authentication resilience: confirmation, recovery, and access gua
     const laptop = await browser.newContext();
     const laptopPage = await laptop.newPage();
     await laptopPage.goto("/sign-up");
-    await laptopPage.getByLabel(/first name/i).fill("Cross");
-    await laptopPage.getByLabel(/last name/i).fill("Device");
-    await laptopPage.getByLabel(/email address/i).fill(email);
+    await laptopPage.getByLabel("Your name").fill(`Cross Device`);
+    await laptopPage.getByLabel(/^email$/i).fill(email);
     await laptopPage.getByLabel(/create a password/i).fill("Str0ng!ParentPass1");
     await laptopPage.getByRole("checkbox").click();
-    await laptopPage.getByRole("button", { name: "Continue" }).click();
-    await laptopPage.getByRole("button", { name: /skip for now/i }).click();
-    await laptopPage.getByRole("button", { name: "Create the account" }).click();
+    await laptopPage.getByRole("button", { name: "Create account" }).click();
     await expect(laptopPage.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 10000 });
     const mail = await getLatestEmail(email);
     expect(mail.link).toContain("token_hash=");

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { MindMosaicLogo } from "@/components/branding";
-import { AuthMosaicPanel } from "@/features/auth/components/AuthMosaicPanel";
+import { AuthShell } from "@/features/auth/components/AuthMosaicPanel";
 import { mmAuthButton, mmFocus } from "@/features/auth/components/auth-styles";
 import { twMerge } from "tailwind-merge";
 
@@ -20,22 +19,8 @@ export const metadata: Metadata = {
  */
 export default function StudentSignInHelpPage() {
   return (
-    <div className="mm-root min-h-screen bg-mm-page text-mm-ink lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-      <AuthMosaicPanel
-        eyebrow="Student sign in"
-        heading="A grown-up can fix this fast."
-        intro="Login codes and PINs are set up by a parent, so the quickest way back in is to ask them."
-        footnote="Independent learning platform. Assessment-style practice contains original questions and is not official examination material."
-      />
-
-      <main
-        id="main-content"
-        className="grid content-center justify-items-center px-[clamp(20px,4vw,64px)] py-[clamp(28px,3vw,56px)]"
-      >
+    <AuthShell panel={{ heading: "A grown-up can fix this fast.", intro: "Login codes and PINs are set up by a parent, so the quickest way back in is to ask them." }}>
         <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
-          <Link href="/" aria-label="MindMosaic home" className="inline-flex min-h-11 items-center lg:hidden">
-            <MindMosaicLogo size="md" />
-          </Link>
 
           <div className="grid gap-2.5">
             <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.1] text-mm-ink">
@@ -92,7 +77,6 @@ export default function StudentSignInHelpPage() {
             </Link>
           </div>
         </div>
-      </main>
-    </div>
+      </AuthShell>
   );
 }

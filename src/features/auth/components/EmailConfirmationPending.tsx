@@ -18,7 +18,7 @@ const RESEND_COOLDOWN_SECONDS = 30;
  *
  * Restyled onto the mm-* auth system (was the product's generic
  * `@/components/ui` kit) to match the card it renders inside —
- * SignUpWizard's terminal "confirm your email" state.
+ * SignUpForm's terminal "confirm your email" state.
  */
 export function EmailConfirmationPending({
   email,

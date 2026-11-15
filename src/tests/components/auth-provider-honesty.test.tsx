@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }),
   useSearchParams: () => new URLSearchParams(),
+  usePathname: () => "/sign-in",
 }));
 
 vi.mock("@/lib/supabase/config", () => ({
@@ -236,9 +237,9 @@ describe("sign-in failure states that are not about the credentials", () => {
         <SignInPanel />
       </AuthProvider>,
     );
-    await user.type(screen.getByLabelText(/email address/i), "jamie@example.com");
+    await user.type(screen.getByLabelText(/^email$/i), "jamie@example.com");
     await user.type(screen.getByLabelText("Password"), "whatever1!");
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
   }
 
   it("calls an auth-server outage our problem, not the account's", async () => {
@@ -263,7 +264,7 @@ describe("sign-in failure states that are not about the credentials", () => {
     await attempt();
     const alert = await screen.findByRole("alert");
     expect(alert).toHaveAttribute("id", "auth-error");
-    expect(screen.getByLabelText(/email address/i)).toHaveAttribute("aria-describedby", "auth-error");
+    expect(screen.getByLabelText(/^email$/i)).toHaveAttribute("aria-describedby", "auth-error");
     expect(screen.getByLabelText("Password")).toHaveAttribute("aria-describedby", "auth-error");
   });
 });
@@ -281,7 +282,7 @@ describe("a banned account never claims anything about what is kept", () => {
     );
     await user.type(screen.getByLabelText(/login code/i), "K7XJ-2P9R");
     await user.type(screen.getByLabelText(/your pin, number 1 of 6/i), "424242");
-    await user.click(screen.getByRole("button", { name: /sign in and start learning/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
 
     const alert = await screen.findByRole("alert");
     expect(alert).toHaveTextContent(/That code and PIN didn.t match/i);
@@ -298,9 +299,9 @@ describe("a banned account never claims anything about what is kept", () => {
         <SignInPanel />
       </AuthProvider>,
     );
-    await user.type(screen.getByLabelText(/email address/i), "p@example.com");
+    await user.type(screen.getByLabelText(/^email$/i), "p@example.com");
     await user.type(screen.getByLabelText("Password"), "whatever1!");
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
     expect(await screen.findByRole("alert")).toHaveTextContent(/didn.t match/i);
   });
 });
@@ -313,14 +314,14 @@ describe("validation before anything is sent", () => {
         <SignInPanel />
       </AuthProvider>,
     );
-    await user.type(screen.getByLabelText(/email address/i), "jamie@example");
+    await user.type(screen.getByLabelText(/^email$/i), "jamie@example");
     await user.type(screen.getByLabelText("Password"), "whatever1!");
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
 
     const alert = await screen.findByRole("alert");
     expect(alert).toHaveTextContent(/doesn.t look like a complete email address/i);
-    expect(screen.getByLabelText(/email address/i)).toHaveAttribute("aria-invalid", "true");
-    expect(screen.getByLabelText(/email address/i)).toHaveAttribute("aria-describedby", "auth-error");
+    expect(screen.getByLabelText(/^email$/i)).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByLabelText(/^email$/i)).toHaveAttribute("aria-describedby", "auth-error");
     expect(signInWithPassword).not.toHaveBeenCalled();
   });
 });

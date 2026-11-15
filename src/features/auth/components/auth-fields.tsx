@@ -239,5 +239,7 @@ export function MmErrorPanel({
 export function useShakeOnInvalidSubmit() {
   const [shakeKey, setShakeKey] = useState(0);
   const trigger = useCallback(() => setShakeKey((key) => key + 1), []);
-  return { key: shakeKey, className: "mm-shake", trigger };
+  /* Only after a failed submit: on first mount there is nothing to shake, and a form that remounts (or a role
+     switch) must not slide sideways. */
+  return { key: shakeKey, className: shakeKey > 0 ? "mm-shake" : "", trigger };
 }

@@ -126,16 +126,11 @@ async function journey(page: Page, testInfo: TestInfo, label: string) {
   // Register through the form
   const t0 = Date.now();
   await page.goto("/sign-up");
-  await page.getByLabel(/first name/i).fill("Accept");
-  await page.getByLabel(/last name/i).fill(`Parent${label.toUpperCase()}`);
-  await page.getByLabel(/email address/i).fill(inbox.address);
+  await page.getByLabel("Your name").fill(`Accept Parent${label.toUpperCase()}`);
+  await page.getByLabel(/^email$/i).fill(inbox.address);
   await page.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
   await page.getByRole("checkbox").first().check();
-  await page.getByRole("button", { name: "Continue" }).click();
-  await expect(page.getByText(/step 2 of 3/i)).toBeVisible();
-  await page.getByRole("button", { name: /skip for now/i }).click();
-  await expect(page.getByText(/step 3 of 3/i)).toBeVisible();
-  await page.getByRole("button", { name: "Create the account" }).click();
+  await page.getByRole("button", { name: "Create account" }).click();
   await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible();
   await shot("1-check-email");
 

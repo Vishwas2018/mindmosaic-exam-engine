@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, GraduationCap, Loader2, UserCircle2 } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ArrowLeft, ChevronRight, GraduationCap, Loader2, UserRound } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -23,6 +23,7 @@ import {
   mmFocus,
   useShakeOnInvalidSubmit,
 } from "./auth-fields";
+import { AuthCard, AuthCardHeading } from "./AuthMosaicPanel";
 import { PinInput } from "./PinInput";
 import { SocialButtons } from "./SocialButtons";
 
@@ -62,13 +63,15 @@ const LOCKOUT_SECONDS = 30;
 const COPY = {
   parent: {
     tab: "Parent",
-    idLabel: "Email address",
+    title: "Parent sign-in",
+    lead: "Welcome back. Your children\u2019s accounts are reached from here.",
+    idLabel: "Email",
     idPlaceholder: "you@example.com",
     idAutoComplete: "email",
     secretLabel: "Password",
     secretPlaceholder: "Your password",
     secretAutoComplete: "current-password",
-    submit: "Sign in to parent account",
+    submit: "Sign in",
     emptyError:
       "Enter your email address and password to sign in.",
     /* One sentence for a wrong password and for an address with no account,
@@ -80,6 +83,8 @@ const COPY = {
   },
   student: {
     tab: "Student",
+    title: "Student sign-in",
+    lead: "Use the login code and PIN a grown-up set up for you.",
     idLabel: "Login code",
     /* The real format, from formatLoginCode() — not an invented username. */
     idPlaceholder: formatLoginCode("K7XJ2P9R"),
@@ -87,7 +92,7 @@ const COPY = {
     secretLabel: "Your PIN",
     secretPlaceholder: "6 digits",
     secretAutoComplete: "off",
-    submit: "Sign in and start learning",
+    submit: "Sign in",
     emptyError: "Enter the login code and PIN your parent gave you.",
     /* Same sentence whether the code is unknown or the PIN is wrong. */
     failedError:
@@ -135,16 +140,40 @@ export function SignInPanel({
   /* Same-origin paths only: see ../safe-next.ts. */
   const explicitNext = safeNextPath(searchParams.get("next"));
   const oauthProviders = configuredOAuthProviders();
+  const pathname = usePathname();
+  const roleParam = searchParams.get("role");
   const [screen, setScreen] = useState<Screen>(() => {
     const entryParam = searchParams.get("entry");
     const modeParam = searchParams.get("mode");
+    if (modeParam === "forgot") return "forgot";
+    if (roleParam === "parent" || roleParam === "student") return "signin";
     if (entryParam === "signin" || modeParam === "signin") return "signin";
     if (entryParam === "choose" || modeParam === "choose") return "choose";
     if (modeParam === "forgot") return "forgot";
     if (defaultEntry) return defaultEntry;
     return "signin";
   });
-  const [kind, setKind] = useState<AccountKind>(defaultKind);
+  const [kind, setKind] = useState<AccountKind>(() =>
+    roleParam === "parent" || roleParam === "student" ? roleParam : defaultKind,
+  );
+
+  /* The chosen role and screen live in the URL (replaceState, no navigation), so Back, a refresh, or a trip to
+     another page and back returns to the same form rather than to the chooser. */
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("entry");
+    if (screen === "choose") {
+      params.delete("role");
+      params.delete("mode");
+    } else {
+      if (pathname !== "/student-sign-in") params.set("role", kind);
+      if (screen === "forgot") params.set("mode", "forgot");
+      else params.delete("mode");
+    }
+    const qs = params.toString();
+    const next = qs ? `${pathname}?${qs}` : pathname;
+    if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
+  }, [screen, kind, pathname]);
 
   const [ident, setIdent] = useState("");
   const [secret, setSecret] = useState("");
@@ -182,6 +211,8 @@ export function SignInPanel({
 
   const switchKind = (next: AccountKind) => {
     setKind(next);
+    /* A half-typed email must not carry into the login-code field (the form is no longer remounted per role). */
+    setIdent("");
     setError(null);
     setNotice(null);
     setUnconfirmed(null);
@@ -318,72 +349,78 @@ export function SignInPanel({
   /* ---------- Forgot password ---------- */
 
   if (screen === "choose") {
+    const chooserCard =
+      "group block w-full rounded-[18px] border border-mm-line bg-white p-7 text-left shadow-[0_1px_2px_rgba(24,21,31,0.04)] transition-[border-color,box-shadow] hover:border-mm-brand/40 hover:shadow-[0_18px_50px_rgba(49,32,86,0.09)]";
     return (
-      <div className="mm-rise grid w-full max-w-[520px] min-w-0 gap-6">
-        <div className="grid gap-2 text-center">
-          <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.15] text-mm-ink">
+      <div className="mm-rise grid w-full min-w-0 gap-4">
+        <div className="mb-2 text-center">
+          <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.3] tracking-[-0.028em] text-mm-ink">
             Welcome to MindMosaic
           </h1>
-          <p className="text-base leading-[1.6] text-mm-muted">Who is signing in?</p>
+          <p className="mt-2 text-[15px] text-mm-ink-soft">Who is signing in?</p>
         </div>
 
-        <div className="grid gap-4 mt-2">
-          <button
-            type="button"
-            onClick={() => {
-              setKind("parent");
-              setScreen("signin");
-              setError(null);
-            }}
-            className="group block text-left p-6 sm:p-7 border-2 border-mm-line rounded-2xl bg-white hover:border-mm-brand transition shadow-sm"
-          >
-            <span className="grid place-items-center w-12 h-12 rounded-xl bg-mm-tint text-mm-brand mb-4">
-              <UserCircle2 className="w-6 h-6" aria-hidden="true" />
-            </span>
-            <h2 className="text-xl font-bold text-mm-ink">I&apos;m a parent</h2>
-            <p className="mt-1.5 text-sm text-mm-ink-soft">
-              See how your children are doing, manage their accounts and your plan.
-            </p>
-            <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-mm-brand group-hover:underline">
-              Parent sign-in &rarr;
-            </span>
-          </button>
+        <button
+          type="button"
+          onClick={() => {
+            setKind("parent");
+            setScreen("signin");
+            setError(null);
+          }}
+          className={twMerge(chooserCard, mmFocus)}
+        >
+          <span className="grid h-[52px] w-[52px] place-items-center rounded-[14px] bg-mm-tint text-mm-brand">
+            <UserRound className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span className="mt-5 block font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink">
+            I&apos;m a parent
+          </span>
+          <span className="mt-2 block text-sm leading-[1.55] text-mm-ink-soft">
+            See how your children are doing, manage their accounts and your plan.
+          </span>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-mm-brand">
+            Parent sign-in <ChevronRight aria-hidden="true" className="h-4 w-4" />
+          </span>
+        </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setKind("student");
-              setScreen("signin");
-              setError(null);
-            }}
-            className="group block text-left p-6 sm:p-7 border-2 border-mm-line rounded-2xl bg-white hover:border-amber-600 transition shadow-sm"
-          >
-            <span className="grid place-items-center w-12 h-12 rounded-xl bg-amber-50 text-amber-700 mb-4">
-              <GraduationCap className="w-6 h-6" aria-hidden="true" />
-            </span>
-            <h2 className="text-xl font-bold text-mm-ink">I&apos;m a student</h2>
-            <p className="mt-1.5 text-sm text-mm-ink-soft">
-              Sign in with the login code and PIN a parent gave you.
-            </p>
-            <span className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-amber-700 group-hover:underline">
-              Student sign-in &rarr;
-            </span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => {
+            setKind("student");
+            setScreen("signin");
+            setError(null);
+          }}
+          className={twMerge(chooserCard, mmFocus)}
+        >
+          <span className="grid h-[52px] w-[52px] place-items-center rounded-[14px] bg-mm-ember-tint text-mm-ember-ink">
+            <GraduationCap className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span className="mt-5 block font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink">
+            I&apos;m a student
+          </span>
+          <span className="mt-2 block text-sm leading-[1.55] text-mm-ink-soft">
+            Sign in with the login code and PIN a parent gave you.
+          </span>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-mm-brand">
+            Student sign-in <ChevronRight aria-hidden="true" className="h-4 w-4" />
+          </span>
+        </button>
 
-        <p className="text-center text-sm text-mm-muted">
-          New here?{" "}
-          <Link href="/sign-up" className="font-bold text-mm-brand hover:underline">
-            Create a family account
-          </Link>
-        </p>
+        {PUBLIC_SIGNUP_ENABLED && (
+          <p className="mt-4 text-center text-sm text-mm-muted">
+            New here?{" "}
+            <Link href="/sign-up" className={twMerge("rounded font-semibold text-mm-brand hover:underline", mmFocus)}>
+              Create a family account
+            </Link>
+          </p>
+        )}
       </div>
     );
   }
 
   if (screen === "forgot") {
     return (
-      <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
+      <AuthCard className="grid gap-6">
         <button
           type="button"
           onClick={() => {
@@ -400,15 +437,10 @@ export function SignInPanel({
           Back to sign in
         </button>
 
-        <div className="grid gap-2.5">
-          <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.1] text-mm-ink">
-            Reset your password
-          </h1>
-          <p className="text-base leading-[1.6] text-mm-muted">
-            We&apos;ll email a secure link to set a new one. Student PINs are reset by a
-            parent from the parent view, not from here.
-          </p>
-        </div>
+        <AuthCardHeading
+          title="Reset your password"
+          lead="We’ll email a secure link to set a new one. Student PINs are reset by a parent from the parent view, not from here."
+        />
 
         <form key={shake.key} onSubmit={handleForgot} className={twMerge("grid gap-4", shake.className)}>
           <MmField
@@ -446,60 +478,23 @@ export function SignInPanel({
             {forgotCooldown > 0 ? `Resend available in ${forgotCooldown}s` : "Send reset link"}
           </button>
         </form>
-      </div>
+      </AuthCard>
     );
   }
 
   /* ---------- Sign in ---------- */
 
   return (
-    <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
-      <div className="flex items-center justify-between gap-3.5">
-        <button
-          type="button"
-          onClick={() => setScreen("choose")}
-          className={twMerge(
-            "inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
-            mmFocus,
-          )}
-        >
-          <ArrowLeft aria-hidden="true" className="h-4 w-4" />
-          Who is signing in?
-        </button>
-        <p className="text-sm text-mm-muted">
-          {PUBLIC_SIGNUP_ENABLED ? (
-            <>
-              New here?{" "}
-              <Link href="/sign-up" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-                Start free
-              </Link>
-            </>
-          ) : (
-            /* No "start free" prompt when there is no account to create. */
-            <>
-              No account?{" "}
-              <Link
-                href="/practice"
-                className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}
-              >
-                Practise as a guest
-              </Link>
-            </>
-          )}
-        </p>
-      </div>
-
-      <div className="grid gap-2.5">
-        <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.1] text-mm-ink">Sign in</h1>
-        <p className="text-base leading-[1.6] text-mm-muted">
-          Parent accounts and student profiles both sign in here.
-        </p>
+    <AuthCard className="grid gap-[22px]">
+      {/* Fixed-height heading block: both roles' lead fits two lines, so switching role never moves the form. */}
+      <div className="min-h-[104px]">
+        <AuthCardHeading title={copy.title} lead={copy.lead} />
       </div>
 
       <div
         role="tablist"
-        aria-label="Account type"
-        className="grid grid-cols-2 gap-1.5 rounded-[13px] bg-mm-tint p-[5px]"
+        aria-label="Sign in as"
+        className="grid grid-cols-2 gap-2 rounded-full border border-mm-line bg-mm-tint-soft p-1.5"
       >
         {tabs.map((tab) => {
           const selected = tab.value === kind;
@@ -512,10 +507,10 @@ export function SignInPanel({
               onClick={() => switchKind(tab.value)}
               className={twMerge(
                 clsx(
-                  "min-h-11 rounded-[10px] text-[14.5px] font-bold transition-colors",
+                  "min-h-[46px] rounded-full text-[14.5px] font-semibold transition-[color,background-color,box-shadow]",
                   selected
-                    ? "bg-white text-mm-brand shadow-[0_2px_8px_rgba(89,37,168,0.12)]"
-                    : "bg-transparent text-mm-muted hover:text-mm-ink",
+                    ? "bg-white text-mm-brand shadow-[0_1px_2px_rgba(24,21,31,0.06),0_12px_32px_rgba(49,32,86,0.08)]"
+                    : "bg-transparent text-mm-ink-soft hover:text-mm-ink",
                 ),
                 mmFocus,
               )}
@@ -525,6 +520,19 @@ export function SignInPanel({
           );
         })}
       </div>
+
+      {/* Parent only: the OAuth providers attach a real email identity, which a student profile does not have.
+          Shown only for providers actually configured, so no button does nothing. */}
+      {kind === "parent" && oauthProviders.length > 0 && (
+        <>
+          <SocialButtons nextPath={explicitNext ?? "/"} providers={oauthProviders} />
+          <div className="flex items-center gap-3 text-[13px] text-mm-muted">
+            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
+            or with your email
+            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
+          </div>
+        </>
+      )}
 
       {!auth.configured && (
         <p
@@ -536,12 +544,12 @@ export function SignInPanel({
         </p>
       )}
 
-      {/* Keyed by `kind` so switching tabs resets field state rather than
-          carrying a half-typed email into the login-code field. */}
       <form
-        key={`${kind}-${shake.key}`}
+        key={shake.key}
         onSubmit={handleSignIn}
-        className={twMerge("grid gap-4", shake.className)}
+        /* Reserved height = the student form (code + hint, six PIN boxes + hint). The parent form is shorter, so its
+           remember row and button are pushed to the bottom (mt-auto below): switching role moves nothing. */
+        className={twMerge("flex min-h-[385px] flex-col gap-4", shake.className)}
       >
         <MmField
           id="auth-ident"
@@ -607,24 +615,6 @@ export function SignInPanel({
               visible={showSecret}
               onToggle={() => setShowSecret((v) => !v)}
             />
-          }
-          labelAside={
-            /* Parent tab only: a student's PIN is reset by their parent, so
-               the student branch above has no such link. */
-            <button
-              type="button"
-              onClick={() => {
-                setScreen("forgot");
-                setResetEmail(ident);
-                setError(null);
-              }}
-              className={twMerge(
-                "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
-                mmFocus,
-              )}
-            >
-              Forgot password?
-            </button>
           }
         />
         )}
@@ -703,20 +693,34 @@ export function SignInPanel({
           </p>
         )}
 
-        <MmCheckbox
-          id="auth-remember"
-          checked={remember}
-          onToggle={() => setRemember((v) => !v)}
-        >
-          Keep me signed in on this device
-        </MmCheckbox>
+        <div className="mt-auto flex min-h-11 items-center justify-between gap-3">
+          <MmCheckbox id="auth-remember" checked={remember} onToggle={() => setRemember((v) => !v)}>
+            Keep me signed in
+          </MmCheckbox>
+          {kind === "parent" && (
+            <button
+              type="button"
+              onClick={() => {
+                setScreen("forgot");
+                setResetEmail(ident);
+                setError(null);
+              }}
+              className={twMerge(
+                "inline-flex min-h-11 shrink-0 items-center rounded text-sm font-semibold text-mm-brand hover:underline",
+                mmFocus,
+              )}
+            >
+              Forgot password?
+            </button>
+          )}
+        </div>
 
         <button
           type="submit"
           disabled={submitting || isLocked}
           className={mmAuthButton({
             disabled: submitting || isLocked,
-            className: "min-h-[54px] w-full rounded-[13px] text-base",
+            className: "mt-1 min-h-[50px] w-full rounded-xl text-[15px]",
           })}
         >
           {submitting && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
@@ -724,44 +728,31 @@ export function SignInPanel({
         </button>
       </form>
 
-      {/* Parent tab only: the OAuth providers create/attach a real email
-          identity, which a student profile does not have. */}
-      {kind === "parent" && oauthProviders.length > 0 && (
-        <>
-          <div className="flex items-center gap-3.5">
-            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
-            <span className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-mm-muted-2">
-              or
-            </span>
-            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
-          </div>
-          <SocialButtons nextPath={explicitNext ?? "/"} providers={oauthProviders} />
-        </>
-      )}
-
-      {kind === "student" && (
-        <Link
-          href="/student-sign-in/help"
-          className={twMerge(
-            "inline-flex min-h-11 w-fit items-center rounded font-bold text-mm-brand hover:underline",
-            mmFocus,
-          )}
-        >
-          I can&apos;t sign in
-        </Link>
-      )}
-
-      <p className="text-[13px] leading-[1.6] text-mm-muted">
-        Read the{" "}
-        <Link href="/terms" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-          Terms and Conditions
-        </Link>{" "}
-        and{" "}
-        <Link href="/privacy" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-          Privacy Policy
-        </Link>{" "}
-        (both are drafts).
+      <p className="flex min-h-11 items-center justify-center text-center text-sm text-mm-muted">
+        {kind === "student" ? (
+          <Link
+            href="/student-sign-in/help"
+            className={twMerge("inline-flex min-h-11 items-center rounded font-semibold text-mm-brand hover:underline", mmFocus)}
+          >
+            I can&apos;t sign in
+          </Link>
+        ) : PUBLIC_SIGNUP_ENABLED ? (
+          <span>
+            New here?{" "}
+            <Link href="/sign-up" className={twMerge("rounded font-semibold text-mm-brand hover:underline", mmFocus)}>
+              Create a family account
+            </Link>
+          </span>
+        ) : (
+          /* No "create an account" prompt when there is no account to create. */
+          <span>
+            No account?{" "}
+            <Link href="/practice" className={twMerge("rounded font-semibold text-mm-brand hover:underline", mmFocus)}>
+              Practise as a guest
+            </Link>
+          </span>
+        )}
       </p>
-    </div>
+    </AuthCard>
   );
 }

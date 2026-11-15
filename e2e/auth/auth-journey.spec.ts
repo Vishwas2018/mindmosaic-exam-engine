@@ -31,7 +31,7 @@ test.describe("New auth screens — rendered and accessible", () => {
     const page = await context.newPage();
     await page.goto("/auth/forgot");
     await expect(page.getByRole("heading", { name: /forgot your password/i })).toBeVisible();
-    await expect(page.getByLabel(/email address/i)).toBeVisible();
+    await expect(page.getByLabel(/^email$/i)).toBeVisible();
     await expect(page.getByRole("button", { name: /send reset link/i })).toBeVisible();
     await context.close();
   });
@@ -41,7 +41,7 @@ test.describe("New auth screens — rendered and accessible", () => {
     const page = await context.newPage();
     await page.goto("/auth/forgot");
     await expect(page.getByRole("heading", { name: /forgot your password/i })).toBeVisible();
-    await expect(page.getByLabel(/email address/i)).toBeVisible();
+    await expect(page.getByLabel(/^email$/i)).toBeVisible();
     await context.close();
   });
 
@@ -77,7 +77,7 @@ test.describe("New auth screens — rendered and accessible", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/auth/forgot");
-    await page.getByLabel(/email address/i).fill("nonexistent@example.com");
+    await page.getByLabel(/^email$/i).fill("nonexistent@example.com");
     await page.getByRole("button", { name: /send reset link/i }).click();
     await expect(
       page.getByText(/if that email has an account/i),
@@ -98,9 +98,9 @@ test.describe("Parent sign-in and sign-out", () => {
       "aria-selected",
       "true",
     );
-    await page.getByLabel(/email address/i).fill("parent-no-children@e2e.mindmosaic.local");
+    await page.getByLabel(/^email$/i).fill("parent-no-children@e2e.mindmosaic.local");
     await page.getByLabel("Password", { exact: true }).fill(e2eEnv.fixturePassword);
-    await page.getByRole("button", { name: /sign in to parent account/i }).click();
+    await page.getByRole("button", { name: /^sign in$/i }).click();
     await expect(page).toHaveURL(/\/parent/, { timeout: 15000 });
 
     await page.getByRole("button", { name: /sign out/i }).click();
@@ -168,7 +168,7 @@ test.describe("Forgot password request flow", () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("/auth/forgot");
-    await page.getByLabel(/email address/i).fill("parent-no-children@e2e.mindmosaic.local");
+    await page.getByLabel(/^email$/i).fill("parent-no-children@e2e.mindmosaic.local");
     await page.getByRole("button", { name: /send reset link/i }).click();
     await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible({
       timeout: 10000,
