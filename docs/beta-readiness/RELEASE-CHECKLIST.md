@@ -3,6 +3,20 @@
 Each row is either checked with the evidence that checks it, or open with who it waits on. Nothing is ticked from a
 local fixture when the row is about hosted DEV.
 
+## 2026-11-15: PR head `7167078f` (application code = `5c69c65f`)
+
+| # | Item | State | Evidence / waiting on |
+|---|------|-------|-----------------------|
+| R4 | CI green with skip counts read | **Done for `7167078f`** | Both runs, 6/6 jobs, 0 skipped; port collision fixed (D-037). TEST-RESULTS.md |
+| R2/R3 | Hosted A–E + G and scoring oracle on the PR Preview | **Done for `7167078f`** | 14/0/1-skip (A1–A2); oracle 21/21 |
+| R7 | Synthetic data | Done | Run `rmwh4u70b` cleaned; DEV 15 users |
+| R8 | Custom SMTP for DEV Auth (D-025) | **Open, owner** — prepared | SMTP-RUNBOOK.md, `scripts/dev-auth/configure-smtp.mjs`; needs provider account, verified domain, SMTP key, Supabase token for the DEV account |
+| R8b | Two real email registrations (delivery, confirm link, sign-in, recovery) | Open, after R8 | Also needs a readable inbox (Gmail connector needs re-auth, or `HOSTED_MAIL_BASE`) |
+| R9 | Content attestation for the 77; Y5 Q20 | **Open, owner** — packet ready | OWNER-ATTESTATION-77.md (unsigned); Y5 Q20 still excluded |
+| R10 | Merge PR #124 into `dev`, re-run the suite on the `dev` Preview | **Open, owner** | PR mergeable, still draft; branch protection applies |
+| R12 | Reconcile the uncommitted billing rewrite after merge | Open, whoever owns it | BILLING-RECONCILIATION.md |
+| R11 | Error monitoring | Open, owner decision | None configured |
+
 ## 2026-11-14: PR #124 release candidate (`5c69c65f`)
 
 | # | Item | State | Evidence / waiting on |

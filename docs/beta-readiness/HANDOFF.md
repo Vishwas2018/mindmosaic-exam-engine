@@ -1,12 +1,16 @@
 # Handoff: restart checkpoint
 
-Last updated 2026-11-14 (evening). No background process is running; nothing continues by itself.
+Last updated 2026-11-15. No background process is running; nothing continues by itself.
 
 ## Where things are
 
 - `dev` = `100287e7` (PR #123). DEV Supabase `mfglzabnayacssgertat`: 53/53 migrations, legacy write RPCs revoked.
 - **PR #124** (draft) `integration/dev-beta-completion` → `dev`, worktree `C:/tmp/wt-dev-beta`. Head = release
   candidate. It contains every fix from hosted acceptance (DEFECT-REGISTER D-019..D-034) and the hosted test suite.
+- 2026-11-15: head `7167078f` fixes the intermittent CI port collision (D-037). CI green on both runs, 0 skipped;
+  hosted suite 14/0/1-skip and oracle 21/21 on its Preview; synthetic data cleaned (DEV 15 users).
+- Prepared for the owner: SMTP-RUNBOOK.md + `scripts/dev-auth/configure-smtp.mjs` (D-025), OWNER-ATTESTATION-77.md
+  (`scripts/beta/build-attestation-packet.mjs`), BILLING-RECONCILIATION.md (trial merge of the uncommitted rewrite).
 - Evidence: TEST-RESULTS.md. Content: CONTENT-GOVERNANCE.md. Security: SECURITY-REVIEW.md.
 - The main checkout (`C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine`, on `dev`) holds someone's **uncommitted
   billing rewrite**. Untouched. PR #124 changes `src/app/billing/page.tsx` (free-beta message, no plan for children),
@@ -27,8 +31,10 @@ On Git Bash set `MSYS_NO_PATHCONV=1` and pass Windows paths; do not put `|` in a
 
 1. **D-025: custom SMTP for DEV Supabase Auth.** The project refuses the second confirmation email within about an
    hour, so families signing up close together are blocked. This is the remaining hard blocker for inviting families.
-2. **Content (CONTENT-GOVERNANCE.md):** confirm the attestation behind the 77 NAPLAN numeracy approvals; approve or
-   keep excluding Y5 Q20. Nothing else is servable until a human reviews it.
+   Follow SMTP-RUNBOOK.md (provider account, domain DNS, SMTP key, Supabase token for the DEV-owning account). Then
+   engineering runs two real registrations end to end (needs a readable inbox: re-authorise the Gmail connector).
+2. **Content (CONTENT-GOVERNANCE.md):** work through and sign OWNER-ATTESTATION-77.md; approve or keep excluding
+   Y5 Q20. Nothing else is servable until a human reviews it.
 3. **Review and merge PR #124 into `dev`.** After the merge the `dev` Preview must be re-run with the suite (it is the
    deployment families will use).
 4. Delete the stale development-target `EXAM_WRITE_DB_URL` in Vercel (carried over).

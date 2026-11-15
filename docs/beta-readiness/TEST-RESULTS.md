@@ -1,7 +1,23 @@
 # Test results: DEV family beta release candidate
 
 Release candidate: **`5c69c65f`** on `integration/dev-beta-completion` (PR #124), based on `dev` `100287e7`.
-Later commits on the branch change docs only.
+Later commits on the branch change docs, CI and operator scripts only (no application code).
+
+## 2026-11-15 re-run on PR head `7167078f` (CI port fix)
+
+- **CI**, both the push run (43660929918) and the pull_request run (43660933799): all six jobs green. core 442
+  files / 7,308 passed; rls 38 files / 607 passed + 2 expected-fail; e2e 387 passed (push) and 386 passed + 1
+  flaky (pull_request: `landing-keyboard-focus` short viewport, D-034); e2e-auth 93 passed (pull_request) and
+  92 passed + 1 flaky (push: `student-onboarding` first-run diagnostic, passed on retry); **0 skipped** everywhere.
+  Both `rls` jobs logged `Reserved ports: 56320-56329` and started Supabase on the first attempt (D-037).
+- **Hosted browser suite**, Preview `mindmosaic-exam-engine-ij9thdigj-…` (`dpl_BLFiVrFTsfZapbzai6tSewsGFqMB`,
+  `7167078f`, DEV-bound), run `rmwh4u70b`: **14 passed, 0 failed, 1 skipped** (A1–A2, real sign-up: no readable
+  inbox and D-025), at 1440 / 834 / 390. Scenario D includes both legacy RPCs refused with `42501` and no forged
+  attempt stored.
+- **Scoring oracle** (`score-e2e-preview-approved.cjs`) on the same Preview: **21/21**, including FORGE-RPC 403
+  `42501` / stored forged: false, ISO-RLS 0 rows, ANON-RLS 401, forged client score ignored.
+- **Cleanup:** `cleanup.mjs --apply --run rmwh4u70b` removed 2 parents + 2 children; a further dry run selects
+  nothing; DEV has 15 auth users, none from the suite.
 
 ## Hosted browser acceptance (real Chromium against the deployed Preview)
 
