@@ -47,6 +47,7 @@ async function readConfig() {
 function summary(c) {
   return {
     site_url: c.site_url,
+    uri_allow_list: c.uri_allow_list,
     mailer_autoconfirm: c.mailer_autoconfirm,
     smtp_host: c.smtp_host ?? null,
     smtp_port: c.smtp_port ?? null,

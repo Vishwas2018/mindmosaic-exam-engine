@@ -14,7 +14,7 @@ local fixture when the row is about hosted DEV.
 | R8b | Two real email registrations (delivery, confirm link, sign-in, recovery) | Open, after R8 | Also needs a readable inbox (Gmail connector needs re-auth, or `HOSTED_MAIL_BASE`) |
 | R9 | Content attestation for the 77; Y5 Q20 | **Open, owner** — packet ready | OWNER-ATTESTATION-77.md (unsigned); Y5 Q20 still excluded |
 | R10 | Merge PR #124 into `dev`, re-run the suite on the `dev` Preview | **Open, owner** | PR mergeable, still draft; branch protection applies |
-| R12 | Reconcile the uncommitted billing rewrite after merge | Open, whoever owns it | BILLING-RECONCILIATION.md |
+| R12 | Reconcile the uncommitted billing rewrite | Not a beta blocker; owner of that work | It predates #123 (conflicts with `dev` in 8 files) and adds 2 DB migrations; BILLING-RECONCILIATION.md |
 | R11 | Error monitoring | Open, owner decision | None configured |
 
 ## 2026-11-14: PR #124 release candidate (`5c69c65f`)

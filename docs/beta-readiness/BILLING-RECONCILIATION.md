@@ -4,10 +4,28 @@ Last updated 2026-11-15. The main checkout (`dev`) holds someone's uncommitted b
 comparison, `purchasablePlans()`, ParentShell header on `/billing`, Family plan card removal). PR #124 was not
 changed to accommodate it and the main checkout was not touched.
 
-**PR #124 itself merges cleanly into `dev`** (GitHub: MERGEABLE; `dev` is still `100287e7`). The conflict appears
+**PR #124 itself merges cleanly into `dev`** (GitHub: MERGEABLE/CLEAN; `dev` is still `100287e7`). The conflict appears
 only when that rewrite is later committed on top of the merged `dev`.
 
-## Trial merge (scratch copy, 2026-11-15)
+## Full replay (scratch worktree, 2026-11-15, since removed)
+
+The rewrite sits on the main checkout's local `dev` at **`17d8be2f`, which predates #123 (`100287e7`)**. Replaying
+its 60 tracked changes (`git apply --3way`) onto PR #124's head conflicts in 9 files:
+
+| Conflicts with | Files |
+|----------------|-------|
+| `dev` already (#123, merged) | `scripts/migrations/registry.ts`, `src/app/parent/{page,children/page,curriculum-explorer/page,writing/page}.tsx`, `ParentShell.tsx`, `parent-shell.test.tsx`, `parent-curriculum-explorer-page.test.tsx` (partly) |
+| PR #124 | `src/app/billing/page.tsx`, `parent-curriculum-explorer-page.test.tsx` (partly) |
+
+The rewrite also adds **two untracked database migrations**, `20261105090000_profile_programmes.sql` and
+`20261106090000_individual_plans.sql` (new `profiles.programmes` column; `subscriptions.plan` gains `individual_*`).
+Resolving it is therefore not a mechanical merge: it re-applies a pre-redesign parent shell over #119's workspace,
+and it carries schema changes that need their own review and DEV approval. **Not done here**, on purpose: the rewrite
+is someone else's unfinished work and not part of the beta (the beta deploys PR #124 → `dev`; billing is off).
+Whoever owns it should rebase it onto `dev` after #124 merges, keep the two PR #124 rules below, and take the
+migrations through the normal approval path. Nothing in the main checkout was modified.
+
+## Trial merge of the overlapping files (base `100287e7`)
 
 Four files are changed by both. `git merge-file` against base `100287e7`:
 

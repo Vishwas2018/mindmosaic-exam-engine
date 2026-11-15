@@ -9,18 +9,33 @@ an hour and is not meant for real users. In hosted acceptance the second sign-up
 ("Too many attempts") and the account was not created. Families registering close together would hit the same wall.
 Email confirmation must stay on; the fix is our own SMTP sender, not switching confirmation off.
 
-## Provider
+## Provider: Resend (owner's choice, 2026-11-15)
 
-No provider is recorded as approved in the repository. Any transactional provider with SMTP and domain
-verification works. Recommendation: **Resend** (SMTP relay, free tier 100/day and 3,000/month, simple DKIM/SPF
-setup, region choice). Postmark and Amazon SES are equally suitable. Owner decision: which provider, and which
-sending domain (it must be a domain the owner controls, e.g. `mail.<your domain>`).
+Settings DEV will use:
+
+| Field | Value |
+|-------|-------|
+| Host / port | `smtp.resend.com` / `465` (implicit TLS) |
+| Username | `resend` |
+| Password | a Resend API key with **Sending access** only, restricted to the sending domain |
+| Sender email | e.g. `beta@mail.<your domain>` (must be on the verified domain) |
+| Sender name | `MindMosaic (beta)` |
+| Auth "emails sent per hour" | 30 |
+
+**A verified domain is required.** Without one, Resend only sends from `onboarding@resend.dev` and only to the
+Resend account owner's own address, so two separate families cannot both receive mail. No custom domain is
+attached to the Vercel team (checked 2026-11-15), so the owner must use a domain they control. A subdomain such as
+`mail.<domain>` keeps the root domain's mail reputation separate. Resend asks for (exact values shown in its
+dashboard): an MX and a TXT (SPF) record on `send.mail.<domain>`, and a TXT DKIM record `resend._domainkey.mail.<domain>`.
+Adding a DMARC record (`_dmarc.<domain>`, `v=DMARC1; p=none;`) improves delivery to Gmail.
+
+Checked 2026-11-15 from DEV's public settings: sign-up open, email provider on, **`mailer_autoconfirm: false`
+(confirmation required)**.
 
 ## Owner steps (the only parts that need a human)
 
-1. Create the provider account; verify the sending domain (add the DKIM/SPF/return-path DNS records it lists).
-2. Create an SMTP credential (Resend: an API key with *sending access* only; SMTP user `resend`,
-   host `smtp.resend.com`, port `465`).
+1. Create the Resend account; add the sending domain and the DNS records it lists; wait for "Verified".
+2. Create an API key: permission *Sending access*, domain = the verified domain.
 3. Create a Supabase personal access token for the account that owns DEV `mfglzabnayacssgertat`
    (the Supabase CLI on this machine is currently signed in to a different account and cannot see DEV).
 4. Either paste the values into the Supabase dashboard (DEV → Authentication → Emails → SMTP Settings, and
@@ -56,3 +71,7 @@ Two separate family registrations through the real form on the `dev` Preview, ea
 
 Run with `HOSTED_MAIL_BASE=<inbox you can read>` so the suite reads the real messages (A1–A2), never
 `HOSTED_CONFIRM=admin`, which confirms by service-role link and therefore proves nothing about delivery.
+
+The dry run also prints `site_url` and `uri_allow_list`. Confirmation and recovery links must be allowed to land on
+the `dev` Preview (A1–A2 passed on a branch Preview on `3fc807b4`, so the current list admits Preview hosts); if the
+list does not cover the `dev` branch Preview host, the owner adds it in Authentication → URL Configuration.
