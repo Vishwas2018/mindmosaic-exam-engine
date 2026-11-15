@@ -3,6 +3,34 @@
  * All questions are original MindMosaic content.
  * Status: draft — requires human approval (approvedBy) per ADR-017.
  */
+type Provenance = {
+  creator: string;
+  licence: "original";
+  copyright: string;
+};
+
+type SingleOptionAnswerKey = { kind: "single_option"; optionId: string };
+type ManualAnswerKey = {
+  kind: "manual";
+  rubric: string;
+  sampleResponse?: string;
+  minWords: number;
+  maxWords: number;
+};
+type AnswerKey = SingleOptionAnswerKey | ManualAnswerKey;
+
+type MultipleChoiceInteraction = {
+  type: "multiple_choice";
+  options: { id: string; text: string }[];
+};
+type EssayInteraction = {
+  type: "essay";
+  minWords: number;
+  maxWords: number;
+  timeLimitMinutes: number;
+};
+type Interaction = MultipleChoiceInteraction | EssayInteraction;
+
 type Question = {
   id: string;
   title: string;
@@ -16,11 +44,11 @@ type Question = {
   marks: number;
   estimatedTimeSeconds: number;
   questionType: string;
-  interaction: any;
-  answerKey: any;
+  interaction: Interaction;
+  answerKey: AnswerKey;
   explanation: string;
   status: string;
-  provenance: any;
+  provenance: Provenance;
 };
 
 export const MATH_QUESTIONS: Question[] = [

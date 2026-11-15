@@ -42,7 +42,7 @@ export function VihaanSamplePapers() {
             </div>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="/student/vihaan"
                 className="rounded-btn border border-mm-line bg-mm-page/50 px-3.5 py-2 text-xs font-semibold text-mm-muted"
                 aria-disabled="true"
                 onClick={(e) => e.preventDefault()}
@@ -50,7 +50,7 @@ export function VihaanSamplePapers() {
                 View paper
               </a>
               <a
-                href="#"
+                href="/student/vihaan"
                 className="rounded-btn border border-mm-line bg-mm-page/50 px-3.5 py-2 text-xs font-semibold text-mm-muted"
                 aria-disabled="true"
                 onClick={(e) => e.preventDefault()}

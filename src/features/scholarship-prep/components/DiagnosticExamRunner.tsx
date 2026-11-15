@@ -5,6 +5,9 @@ import { Clock } from "lucide-react";
 
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import { useExamStore } from "@/features/exam-engine/state";
+import type { ExamResult } from "@/features/exam-engine/scoring";
+import type { ReviewQuestion } from "@/features/exam-engine/types";
+import type { SubjectFilter } from "@/features/exam-engine/selection";
 import type { Question } from "@/schemas/question.schema";
 
 export function VihaanDiagnosticExamRunner({
@@ -34,30 +37,28 @@ export function VihaanDiagnosticExamRunner({
 
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [result, setResult] = useState<{ result: any; reviewQuestions: any[] } | null>(null);
+  const [result, setResult] = useState<{ result: ExamResult; reviewQuestions: ReviewQuestion[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  const startExam = async () => {
-    try {
-      await startServerExam({
-        yearLevel: 7,
-        examStyle: "scholarship_style",
-        subject: subject as any,
-        questionCount: questionsState?.length ?? 0,
-        timing: "timed",
-      },
-      { bankId: "curated" }
-      );
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to start diagnostic session");
-    }
-  };
 
   useEffect(() => {
     if (!sessionId) {
-      startExam();
+      const startDiagnostic = async () => {
+        try {
+          await startServerExam({
+            yearLevel: 7,
+            examStyle: "scholarship_style",
+            subject: subject as SubjectFilter,
+            questionCount: questionsState?.length ?? 0,
+            timing: "timed",
+          },
+          { bankId: "curated" });
+        } catch (err) {
+          setError(err instanceof Error ? err.message : "Failed to start diagnostic session");
+        }
+      };
+      void startDiagnostic();
     }
-  }, []);
+  }, [sessionId]);
 
   const handleSubmit = async () => {
     setSubmitting(true);
@@ -65,7 +66,7 @@ export function VihaanDiagnosticExamRunner({
       submitExam();
       const r = useExamStore.getState().result;
       const reviewQuestions = useExamStore.getState().reviewQuestions;
-      setResult({ result: r, reviewQuestions: (reviewQuestions ?? []) as any[] });
+      setResult({ result: r as ExamResult, reviewQuestions: Array.from(reviewQuestions ?? []) });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to submit exam");
       setSubmitting(false);
@@ -126,9 +127,9 @@ export function VihaanDiagnosticExamRunner({
           </div>
         </div>
         <div className="space-y-3">
-          {reviewQuestions.map((q: any) => (
-            <div key={q.itemId || q.id} className="rounded-xl border border-mm-line bg-mm-page/50 p-4">
-              <h3 className="text-sm font-bold text-ink">{q.title || q.itemId}</h3>
+          {reviewQuestions.map((q) => (
+            <div key={q.id} className="rounded-xl border border-mm-line bg-mm-page/50 p-4">
+              <h3 className="text-sm font-bold text-ink">{q.prompt || q.id}</h3>
               <p className="mt-1 text-[11px] text-mm-muted">
                 {q.explanation || "No explanation available."}
               </p>
@@ -162,7 +163,7 @@ export function VihaanDiagnosticExamRunner({
       </div>
       <div className="mb-4">
         <ExamQuestion
-          question={currentQuestion as any}
+          question={currentQuestion}
           answer={responses[currentQuestion.id]}
           onAnswerChange={(answer) => setResponse(currentQuestion.id, answer)}
         />

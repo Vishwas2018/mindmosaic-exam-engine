@@ -40,7 +40,7 @@ export function VihaanMockExams() {
               <p className="mt-1 text-[11px] text-mm-muted">{section.minutes}-minute timed section</p>
             </div>
             <a
-              href="#"
+              href="/student/vihaan"
               className="rounded-btn border border-mm-line bg-mm-page/50 px-3.5 py-2 text-xs font-semibold text-mm-muted"
               aria-disabled="true"
               onClick={(e) => e.preventDefault()}

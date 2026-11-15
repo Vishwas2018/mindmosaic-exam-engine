@@ -38,7 +38,7 @@ export function VihaanWritingPractice() {
               </p>
             </div>
             <a
-              href="#"
+              href="/student/vihaan"
               className="rounded-btn border border-primary/30 bg-white px-3.5 py-2 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
               aria-disabled="true"
               onClick={(e) => e.preventDefault()}

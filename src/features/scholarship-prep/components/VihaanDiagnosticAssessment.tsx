@@ -49,7 +49,7 @@ export function VihaanDiagnosticAssessment({ student }: { student: { displayName
               {section.questions} question{section.questions !== 1 ? "s" : ""} · {section.minutes} min
             </p>
             <a
-              href="#"
+              href="/student/vihaan"
               className="mt-4 inline-flex items-center gap-1 rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-[11px] font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
               aria-disabled="true"
               onClick={(e) => e.preventDefault()}
