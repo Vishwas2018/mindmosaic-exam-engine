@@ -11,7 +11,6 @@ import {
   Flame,
   HelpCircle,
   LayoutDashboard,
-  Search,
   Settings,
   SpellCheck2,
   Target,
@@ -33,6 +32,7 @@ export type StudentSidebarKey =
   | "practice"
   | "examCentre"
   | "progress"
+  | "results"
   | "singaporeMathsSample"
   | "vihaan";
 
@@ -41,6 +41,7 @@ interface SidebarNavItem {
   label: string;
   href: string;
   icon: typeof LayoutDashboard;
+  shortLabel: string;
   /** Placeholder badge text to match the Stitch mock — not wired to real state yet. */
   badge?: string;
 }
@@ -53,11 +54,11 @@ interface SidebarNavItem {
  * for this sidebar.
  */
 const baseSidebarItems: readonly SidebarNavItem[] = [
-  { key: "home", label: "Dashboard", href: "/student", icon: LayoutDashboard },
-  { key: "learn", label: "Learning Hub", href: "/student/learn", icon: BookOpen, badge: "Stage 3" },
-  { key: "practice", label: "Practice Studio", href: "/student/practice", icon: Target },
-  { key: "examCentre", label: "Exam Centre", href: "/student/exam-preparation", icon: ClipboardCheck, badge: "NAPLAN" },
-  { key: "progress", label: "My Progress", href: "/student/engagement", icon: TrendingUp },
+  { key: "home", label: "Dashboard", shortLabel: "My Space", href: "/student", icon: LayoutDashboard },
+  { key: "learn", label: "Learning Hub", shortLabel: "Learning", href: "/student/learn", icon: BookOpen },
+  { key: "practice", label: "Practice Studio", shortLabel: "Practice", href: "/student/practice", icon: Target },
+  { key: "examCentre", label: "Exam Centre", shortLabel: "Exams", href: "/student/exam-preparation", icon: ClipboardCheck },
+  { key: "progress", label: "My Progress", shortLabel: "Results", href: "/student/engagement", icon: TrendingUp },
 ];
 
 const vihaanNavItem: SidebarNavItem = {
@@ -65,6 +66,7 @@ const vihaanNavItem: SidebarNavItem = {
   label: "Vihaan Scholarship Prep",
   href: "/student/vihaan",
   icon: GraduationCap,
+  shortLabel: "Vihaan",
 };
 
 export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
@@ -76,6 +78,7 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
           label: "Singapore Maths Sample",
           href: "/practice/singapore-maths/sample",
           icon: BarChart3,
+          shortLabel: "Singapore",
         },
       ]
     : []),
@@ -162,27 +165,13 @@ export function StudentSidebar({
             <span className="truncate text-[13px] font-semibold leading-tight text-mm-ink">
               {displayName ?? "Your profile"}
             </span>
-            {/* Placeholder gamification line to match the Stitch mock — no XP/level model exists yet. */}
-            <span className="truncate text-[11px] leading-tight text-mm-muted">
-              Scholar · Lvl 12 · <span className="font-semibold text-amber-accent">★ 840xp</span>
-            </span>
+
           </div>
           <ChevronsUpDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-stitch-outline" />
         </div>
 
         <div className="mx-3">
-          {/* Placeholder — no search index exists yet, so ⌘K has no listener behind it (audit D-10). */}
-          <div
-            title="Search (coming soon)"
-            aria-disabled="true"
-            className="flex items-center gap-2 rounded-lg border border-mm-line bg-white px-2.5 py-2 text-mm-muted"
-          >
-            <Search aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
-            <span className="flex-1 truncate text-[11.5px]">Search topics, units...</span>
-            <kbd className="rounded border border-mm-line bg-mm-page px-1 py-0.5 font-mono text-[9px] font-semibold text-stitch-outline">
-              ⌘K
-            </kbd>
-          </div>
+
         </div>
 
         <div className="px-3">
@@ -208,6 +197,7 @@ export function StudentSidebar({
                   <span className="flex-1">{item.label}</span>
                   {item.badge && (
                     <span
+                      aria-hidden="true"
                       className={`rounded-full px-1.5 py-0.5 text-[9px] font-semibold ${
                         item.badge === "NAPLAN"
                           ? "border border-amber-border bg-amber-light text-amber-accent"
@@ -404,18 +394,13 @@ export function StudentSidebar({
       </div>
 
       <div className="flex flex-col gap-2 border-t border-mm-line bg-white p-3">
-        {/* Placeholder session/curriculum-version chip to match the Stitch mock. */}
-        <div className="flex items-center justify-between rounded-lg border border-mm-line/60 bg-mm-page/60 px-2.5 py-1.5 text-[10px] font-medium text-mm-muted">
-          <span>Session 2025-26</span>
-          <span className="font-mono text-[9px] text-stitch-outline">NSW NESA v9.0</span>
-        </div>
         <div className="flex items-center justify-between">
           <Link
             href="/help"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 py-1 text-[11.5px] text-mm-muted transition-colors hover:text-primary"
           >
             <HelpCircle aria-hidden="true" className="h-4 w-4" />
-            Help &amp; Support
+            Help Centre
           </Link>
           {/* No /student/settings route yet — placeholder, not a dead Link. */}
           <button
