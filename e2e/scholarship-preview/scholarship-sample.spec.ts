@@ -47,6 +47,8 @@ const norm = (text: string) => text.replace(/\s+/g, " ").trim();
 async function signIn(page: Page, student: (typeof STUDENTS)[number]) {
   await page.goto("/student-sign-in");
   await page.getByLabel("Login code").fill(student.loginCode);
+  // Wait for one settled form: during hydration the streamed panel can briefly appear twice.
+  await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);
   await page.getByLabel(/^Your PIN, number 1 of 6/).click();
   await page.keyboard.type(e2eEnv.fixturePin);
   await page.getByRole("button", { name: "Sign in and start learning" }).click();
