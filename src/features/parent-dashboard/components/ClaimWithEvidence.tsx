@@ -75,18 +75,18 @@ export function ClaimWithEvidence({
   if (!meetsFloor) {
     return (
       <div
-        className={`rounded-2xl border border-royal/10 bg-white p-4 shadow-sm ${className}`}
+        className={`rounded-2xl border border-mm-brand/10 bg-white p-4 shadow-sm ${className}`}
       >
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-muted">
+          <span className="text-xs font-semibold uppercase tracking-wider text-mm-ink-soft">
             {derivedLabel}
           </span>
-          <span className="text-xs font-semibold text-muted">
+          <span className="text-xs font-semibold text-mm-ink-soft">
             {safePapers} {safePapers === 1 ? "paper" : "papers"} · {safeMarks}{" "}
             {safeMarks === 1 ? "mark" : "marks"}
           </span>
         </div>
-        <p className="mt-2 text-sm font-medium text-muted">
+        <p className="mt-2 text-sm font-medium text-mm-ink-soft">
           {copy}
         </p>
       </div>
@@ -95,10 +95,10 @@ export function ClaimWithEvidence({
 
   return (
     <div
-      className={`rounded-2xl border border-royal/10 bg-white p-4 shadow-sm ${className}`}
+      className={`rounded-2xl border border-mm-brand/10 bg-white p-4 shadow-sm ${className}`}
     >
-      <div className="text-sm font-extrabold text-ink">{headline}</div>
-      <p className="mt-1 text-xs font-medium text-muted">
+      <div className="text-sm font-semibold text-mm-ink">{headline}</div>
+      <p className="mt-1 text-xs font-medium text-mm-ink-soft">
         {safePapers} {safePapers === 1 ? "paper" : "papers"} · {safeMarks} marks
         counted
       </p>

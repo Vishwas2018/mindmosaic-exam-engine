@@ -66,7 +66,7 @@ export default async function PracticePreviewPage({
         <ParentShell active="/parent/children">
           <div className="space-y-6">
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-xs font-medium text-amber-900">
-              <strong className="font-bold">Preview Demonstration:</strong> Showing sample question preview for {programme.title}. No live database connection is active.
+              <strong className="font-semibold">Preview Demonstration:</strong> Showing sample question preview for {programme.title}. No live database connection is active.
             </div>
             <ParentPracticePreview
               child={{
@@ -85,8 +85,8 @@ export default async function PracticePreviewPage({
 
     return (
       <ParentShell active="/parent/children">
-        <div className="p-8 text-center text-muted">
-          <p className="font-bold text-ink">Database Not Configured</p>
+        <div className="p-8 text-center text-mm-ink-soft">
+          <p className="font-semibold text-mm-ink">Database Not Configured</p>
           <p className="mt-2 text-sm">{SUPABASE_NOT_CONFIGURED_MESSAGE}</p>
         </div>
       </ParentShell>

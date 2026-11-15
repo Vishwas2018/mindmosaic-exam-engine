@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { Home } from "lucide-react";
 
@@ -61,7 +62,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             <Badge variant="purple" className="hidden sm:inline-flex">
               Billing
             </Badge>
-            <AuthNav />
+            <AuthNav showRoleHome={false} />
           </div>
         </div>
       </header>
@@ -94,6 +95,9 @@ export default async function BillingPage() {
     } = await supabase.auth.getUser();
     if (user) {
       const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+      /* Billing lives inside Account for a parent (Claude Design parent artboard 26). While payments are off
+         (the DEV family beta) a stored trial row must not surface card or invoice controls that can only fail. */
+      if (profile?.role === "parent" && !isStripeConfigured) redirect("/parent/account/billing");
       if (profile?.role === "student") {
         return (
           <Shell>
@@ -120,7 +124,7 @@ export default async function BillingPage() {
 
   /* Where payments are not switched on (the DEV family beta), nothing is offered for sale: a plan card here would
      lead to a checkout that can only fail. */
-  if (!subscription && !isStripeConfigured) {
+  if (!isStripeConfigured) {
     return (
       <Shell>
         <div className="mx-auto max-w-2xl text-center" data-testid="billing-free-beta">

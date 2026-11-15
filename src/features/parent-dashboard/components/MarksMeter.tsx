@@ -41,8 +41,8 @@ export function MarksMeter({
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
       <div className="flex items-baseline justify-between gap-3 text-sm">
-        <span className="font-extrabold text-ink">{label}</span>
-        <span className="font-extrabold text-ink tabular-nums">
+        <span className="font-semibold text-mm-ink">{label}</span>
+        <span className="font-semibold text-mm-ink tabular-nums">
           {safeEarned} of {safeAvailable} marks
         </span>
       </div>
@@ -50,16 +50,16 @@ export function MarksMeter({
       {/* Decorative visual bar — aria-hidden so screen readers hear only the exact marks */}
       <div
         aria-hidden="true"
-        className="h-2 w-full overflow-hidden rounded-full bg-royal/10"
+        className="h-2 w-full overflow-hidden rounded-full bg-mm-brand/10"
       >
         <div
-          className="h-full rounded-full bg-royal transition-[width] duration-300"
+          className="h-full rounded-full bg-mm-brand transition-[width] duration-300"
           style={{ width: `${fillWidthPercent}%` }}
         />
       </div>
 
       {papersCount !== undefined && (
-        <p className="text-xs font-medium text-muted">
+        <p className="text-xs font-medium text-mm-ink-soft">
           {papersCount} {papersCount === 1 ? "paper" : "papers"} ·{" "}
           {safeAvailable} marks counted
         </p>

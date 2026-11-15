@@ -83,10 +83,10 @@ export default async function ParentCurriculumExplorerPage() {
     <ParentShell active="/parent/children">
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl">
+          <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">
             Victorian Curriculum Explorer
           </h1>
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-sm text-mm-ink-soft">
             Explore the Victorian Curriculum F–10 Version 2.0 (Mathematics and English) for Level 3 and Level 5 with verified worked examples.
           </p>
         </div>
@@ -102,7 +102,7 @@ export default async function ParentCurriculumExplorerPage() {
             }
           />
         ) : (
-          <div className="rounded-2xl border border-royal/10 bg-white p-4 shadow-sm sm:p-6">
+          <div className="rounded-2xl border border-mm-brand/10 bg-white p-4 shadow-sm sm:p-6">
             <ParentCurriculumExplorer initialItems={items} />
           </div>
         )}

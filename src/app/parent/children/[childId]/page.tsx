@@ -63,7 +63,7 @@ export default async function ChildProfilePage({ params }: ChildProfilePageProps
         <ParentShell active="/parent/children">
           <div className="space-y-6">
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-xs font-medium text-amber-900">
-              <strong className="font-bold">Preview Demonstration:</strong> Showing sample child profile data for {previewChild.firstName}. No live database connection is active.
+              <strong className="font-semibold">Preview Demonstration:</strong> Showing sample child profile data for {previewChild.firstName}. No live database connection is active.
             </div>
             <ChildProfileView
               child={childDetails}

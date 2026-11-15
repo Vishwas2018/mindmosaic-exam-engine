@@ -51,7 +51,7 @@ export interface ChildProfileViewProps {
 }
 
 const AVATAR_COLORS = [
-  { id: "purple", label: "Royal", bgClass: "bg-royal/10 text-royal border-royal" },
+  { id: "purple", label: "Royal", bgClass: "bg-mm-brand/10 text-mm-brand border-mm-brand" },
   { id: "ember", label: "Amber", bgClass: "bg-amber-100 text-amber-800 border-amber-500" },
   { id: "teal", label: "Emerald", bgClass: "bg-emerald-100 text-emerald-800 border-emerald-500" },
   { id: "coral", label: "Violet", bgClass: "bg-violet-100 text-violet-800 border-violet-500" },
@@ -162,81 +162,23 @@ export function ChildProfileView({
 
   return (
     <div className="space-y-8">
-      {/* Breadcrumb & Title */}
+      {/* Header (artboard 12): eyebrow, name, one status line, breadcrumb. */}
       <div>
-        <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-bold text-muted">
-          <Link
-            href="/parent/children"
-            className="inline-flex min-h-11 items-center gap-1 hover:text-royal hover:underline"
-          >
-            <ArrowLeft className="h-3 w-3" />
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-mm-brand">Children</p>
+        <h1 className="mt-2 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">
+          {child.displayName}
+        </h1>
+        <p className="mt-2 text-base text-mm-ink-soft sm:text-lg">
+          {yearLevel ? `Year ${yearLevel}` : "No year level"} · {isArchived ? "paused" : "can sign in"} ·{" "}
+          {child.finishedPapersCount} {child.finishedPapersCount === 1 ? "finished paper" : "finished papers"}
+        </p>
+        <nav aria-label="Breadcrumb" className="mt-2 flex items-center gap-1.5 text-sm text-mm-ink-soft">
+          <Link href="/parent/children" className="inline-flex min-h-11 items-center hover:text-mm-brand hover:underline">
             Children
           </Link>
-          <ChevronRight className="h-3 w-3" />
-          <span className="text-ink">{firstName}</span>
+          <ChevronRight aria-hidden="true" className="h-3.5 w-3.5" />
+          <span aria-current="page">{child.displayName.split(" ")[0]}</span>
         </nav>
-
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-              {firstName}
-            </h1>
-            <p className="mt-1 text-sm font-semibold text-muted">
-              {yearLevel ? `Year ${yearLevel}` : "No year level"} ·{" "}
-              {isArchived ? (
-                <span className="text-amber-800">Paused</span>
-              ) : (
-                <span className="text-emerald-700">Can sign in</span>
-              )}{" "}
-              · {child.finishedPapersCount} {child.finishedPapersCount === 1 ? "finished paper" : "finished papers"}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => setPrintCardOpen(true)}
-            >
-              <Printer className="mr-1.5 h-4 w-4" />
-              Sign-in card
-            </Button>
-            <Link
-              href={`/parent/children/${child.id}/progress`}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-royal/20 bg-white px-4 text-xs font-bold text-ink shadow-sm transition hover:border-royal hover:bg-royal/5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
-            >
-              Practice progress &rarr;
-            </Link>
-          </div>
-        </div>
-
-        {/* Sibling Switcher Tabs */}
-        {siblings.length > 1 && (
-          <div className="mt-6 flex flex-wrap items-center gap-2 border-b border-royal/10 pb-4">
-            <span className="text-xs font-bold text-muted">Your children:</span>
-            {siblings.map((sibling) => {
-              const isCurrent = sibling.id === child.id;
-              return (
-                <Link
-                  key={sibling.id}
-                  href={`/parent/children/${sibling.id}`}
-                  aria-current={isCurrent ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
-                    isCurrent
-                      ? "bg-royal text-white shadow-sm"
-                      : "border border-royal/10 bg-white text-ink hover:border-royal/30 hover:bg-royal/5"
-                  }`}
-                >
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white/20 text-[10px] font-black">
-                    {sibling.displayName.trim().charAt(0).toUpperCase() || "C"}
-                  </span>
-                  <span>{sibling.displayName}</span>
-                </Link>
-              );
-            })}
-          </div>
-        )}
       </div>
 
       {/* Global Alerts */}
@@ -248,21 +190,21 @@ export function ChildProfileView({
       )}
 
       {saveSuccess && (
-        <div role="status" className="flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-xs font-bold text-emerald-900">
+        <div role="status" className="flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-xs font-semibold text-emerald-900">
           <Check className="h-4 w-4 text-emerald-600" />
           <span>Changes saved successfully.</span>
         </div>
       )}
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        {/* Left Column: Details & Student Access */}
+      <div className="grid items-start gap-5 lg:grid-cols-2">
+        {/* Left: Details */}
         <div className="space-y-8">
           {/* Card 1: Details */}
           <Card className="p-6">
-            <h2 className="text-xl font-black text-ink">Details</h2>
+            <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">Details</h2>
             <form onSubmit={handleSaveChanges} className="mt-6 space-y-6">
               <div>
-                <label htmlFor="child-firstname" className="block text-xs font-bold text-ink">
+                <label htmlFor="child-firstname" className="block text-xs font-semibold text-mm-ink">
                   First name
                 </label>
                 <input
@@ -270,39 +212,39 @@ export function ChildProfileView({
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="mt-2 min-h-11 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink placeholder:text-muted focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
+                  className="mt-2 min-h-11 w-full rounded-xl border border-mm-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-mm-ink placeholder:text-mm-ink-soft focus:border-mm-brand focus:outline-none focus:ring-4 focus:ring-mm-brand/20"
                 />
-                <p className="mt-1.5 text-xs text-muted">
+                <p className="mt-1.5 text-xs text-mm-ink-soft">
                   This is what {firstName || "your child"} sees when they sign in. It is never shown outside your family.
                 </p>
               </div>
 
               <div>
-                <label htmlFor="child-yearlevel" className="block text-xs font-bold text-ink">
+                <label htmlFor="child-yearlevel" className="block text-xs font-semibold text-mm-ink">
                   Year level
                 </label>
                 <select
                   id="child-yearlevel"
                   value={yearLevel}
                   onChange={(e) => setYearLevel(e.target.value)}
-                  className="mt-2 min-h-11 w-full rounded-xl border border-royal/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink focus:border-royal focus:outline-none focus:ring-4 focus:ring-royal/20"
+                  className="mt-2 min-h-11 w-full rounded-xl border border-mm-brand/20 bg-white px-4 py-2.5 text-sm font-semibold text-mm-ink focus:border-mm-brand focus:outline-none focus:ring-4 focus:ring-mm-brand/20"
                 >
                   <option value="">No year level selected</option>
                   {availableYearLevels.map((year) => (
                     <option key={year} value={year}>
-                      Grade {year}
+                      Year {year}
                     </option>
                   ))}
                 </select>
-                <p className="mt-1.5 text-xs text-muted">
+                <p className="mt-1.5 text-xs text-mm-ink-soft">
                   Changing the year changes what practice is offered. Past results keep the year they were sat at.
                 </p>
               </div>
 
               {/* Avatar Colour Picker */}
               <fieldset>
-                <legend className="text-xs font-bold text-ink">Avatar</legend>
-                <p className="mt-1 text-xs text-muted">
+                <legend className="text-xs font-semibold text-mm-ink">Avatar</legend>
+                <p className="mt-1 text-xs text-mm-ink-soft">
                   Initials in a colour. Photo upload is intentionally not offered to protect children&rsquo;s privacy.
                 </p>
                 <div className="mt-3 flex items-center gap-3">
@@ -315,11 +257,11 @@ export function ChildProfileView({
                         aria-label={`Avatar colour: ${col.label}`}
                         aria-pressed={isSelected}
                         onClick={() => setSelectedColor(col.id)}
-                        className={`flex h-11 w-11 items-center justify-center rounded-2xl text-base font-black transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                        className={`flex h-11 w-11 items-center justify-center rounded-2xl text-base font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20 ${
                           col.bgClass
                         } ${
                           isSelected
-                            ? "scale-105 border-2 shadow-sm ring-2 ring-royal/30"
+                            ? "scale-105 border-2 shadow-sm ring-2 ring-mm-brand/30"
                             : "border opacity-70 hover:opacity-100"
                         }`}
                       >
@@ -347,39 +289,43 @@ export function ChildProfileView({
                   Cancel
                 </Button>
               </div>
-              <p className="text-[11px] text-muted">
+              <p className="text-[11px] text-mm-ink-soft">
                 Nothing is saved until you press Save and we confirm it.
               </p>
             </form>
           </Card>
 
+        </div>
+
+        {/* Right: Student access, pausing, deletion request */}
+        <div className="space-y-8">
           {/* Card 2: Student Access */}
           <Card className="p-6">
             <div className="flex items-center gap-2">
-              <Lock className="h-5 w-5 text-royal" />
-              <h2 className="text-xl font-black text-ink">Student access</h2>
+              <Lock className="h-5 w-5 text-mm-brand" />
+              <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">Student access</h2>
             </div>
 
-            <dl className="mt-6 divide-y divide-royal/10 text-sm">
+            <dl className="mt-6 divide-y divide-mm-brand/10 text-sm">
               <div className="flex items-center justify-between py-3">
-                <dt className="font-bold text-muted">Login code</dt>
-                <dd className="font-mono text-base font-black tracking-widest text-royal">
+                <dt className="font-semibold text-mm-ink-soft">Login code</dt>
+                <dd className="font-mono text-base font-semibold tracking-widest text-mm-brand">
                   {child.loginCode}
                 </dd>
               </div>
               <div className="flex items-center justify-between py-3">
-                <dt className="font-bold text-muted">PIN</dt>
-                <dd className="font-semibold text-ink">Set · 6 digits</dd>
+                <dt className="font-semibold text-mm-ink-soft">PIN</dt>
+                <dd className="font-semibold text-mm-ink">Set · 6 digits</dd>
               </div>
               <div className="flex items-center justify-between py-3">
-                <dt className="font-bold text-muted">Last signed in</dt>
-                <dd className="font-semibold text-muted">
+                <dt className="font-semibold text-mm-ink-soft">Last signed in</dt>
+                <dd className="font-semibold text-mm-ink-soft">
                   {child.lastSignedIn || "Never recorded"}
                 </dd>
               </div>
             </dl>
 
-            <p className="mt-4 text-xs text-muted">
+            <p className="mt-4 text-xs text-mm-ink-soft">
               The login code never changes. The PIN is the only thing you can reset. Any new sign-in will require this new PIN.
             </p>
 
@@ -404,27 +350,24 @@ export function ChildProfileView({
               </Button>
             </div>
           </Card>
-        </div>
 
-        {/* Right Column: Pausing & Deletion Proposal */}
-        <div className="space-y-8">
           {/* Card 3: Pausing (Archive) */}
-          <Card className="border-royal/15 bg-canvas/40 p-6">
+          <Card className="border-mm-brand/15 bg-mm-tint-soft/40 p-6">
             <div className="flex items-center gap-2">
-              <Pause className="h-5 w-5 text-royal" />
-              <h2 className="text-xl font-black text-ink">
+              <Pause className="h-5 w-5 text-mm-brand" />
+              <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
                 {isArchived ? "Resume this profile" : "Pause this profile"}
               </h2>
             </div>
 
-            <p className="mt-3 text-xs leading-relaxed text-ink/80">
+            <p className="mt-3 text-xs leading-relaxed text-mm-ink/80">
               Pausing stops {firstName} signing in. Everything is kept — the profile, all{" "}
               {child.finishedPapersCount} papers, every answer — and you can restore it whenever you like.
               It does not change your plan or what you pay.
             </p>
 
-            <div className="mt-4 rounded-xl border border-royal/10 bg-white p-3.5 text-xs text-muted">
-              <strong className="font-bold text-ink">Shared family access:</strong> If another parent
+            <div className="mt-4 rounded-xl border border-mm-brand/10 bg-white p-3.5 text-xs text-mm-ink-soft">
+              <strong className="font-semibold text-mm-ink">Shared family access:</strong> If another parent
               is linked to {firstName}, pausing applies for them too, and either guardian can undo it.
             </div>
 
@@ -451,14 +394,14 @@ export function ChildProfileView({
           </Card>
 
           {/* Card 4: Deleting a profile (Proposal ADR-012, Decision P11) */}
-          <Card className="border-error/20 bg-error/5 p-6">
+          <details className="group rounded-3xl border border-mm-line bg-white px-5 py-4 sm:px-[26px]"><summary className="flex min-h-11 cursor-pointer list-none items-center text-[15px] font-semibold text-mm-brand hover:underline">Deleting a profile</summary><div className="pt-2">
             <div className="flex items-center gap-2 text-error">
               <ShieldAlert className="h-5 w-5" />
-              <h2 className="text-xl font-black">Deleting a profile</h2>
+              <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold">Deleting a profile</h2>
             </div>
 
             <p className="mt-3 text-xs leading-relaxed text-error/90">
-              <strong className="block font-bold">Delete {firstName}&rsquo;s profile and everything in it</strong>
+              <strong className="block font-semibold">Delete {firstName}&rsquo;s profile and everything in it</strong>
               This asks us to erase {child.displayName}’s profile, their {child.finishedPapersCount} papers and every answer.
               It cannot be undone once carried out.
             </p>
@@ -471,7 +414,7 @@ export function ChildProfileView({
 
             {deletionRequested ? (
               <div className="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs font-semibold text-amber-950">
-                <strong className="block font-bold text-amber-900">Deletion requested.</strong>
+                <strong className="block font-semibold text-amber-900">Deletion requested.</strong>
                 Check your email to confirm your identity. We will verify your request before anything is erased, and you can stop it at any point until then.
               </div>
             ) : (
@@ -485,12 +428,12 @@ export function ChildProfileView({
                   <Trash2 className="mr-1.5 h-4 w-4" />
                   Request deletion
                 </Button>
-                <span className="text-[11px] font-medium text-muted">
+                <span className="text-[11px] font-medium text-mm-ink-soft">
                   Pausing instead keeps everything and is undone in one press.
                 </span>
               </div>
             )}
-          </Card>
+          </div></details>
         </div>
       </div>
 

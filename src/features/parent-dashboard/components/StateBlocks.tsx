@@ -22,16 +22,16 @@ export function LoadingStateBlock({ className = "" }: BaseStateBlockProps): Reac
     <div
       role="status"
       aria-live="polite"
-      className={`flex flex-col items-center justify-center rounded-2xl border border-royal/10 bg-white p-8 text-center shadow-sm sm:p-12 ${className}`}
+      className={`flex flex-col items-center justify-center rounded-2xl border border-mm-brand/10 bg-white p-8 text-center shadow-sm sm:p-12 ${className}`}
     >
       <LoaderCircle
         aria-hidden="true"
-        className="h-8 w-8 animate-spin text-royal"
+        className="h-8 w-8 animate-spin text-mm-brand"
       />
-      <h3 className="mt-4 text-base font-extrabold text-ink">
+      <h3 className="mt-4 text-base font-semibold text-mm-ink">
         Checking this week&apos;s practice...
       </h3>
-      <p className="mt-1 max-w-sm text-sm text-muted">
+      <p className="mt-1 max-w-sm text-sm text-mm-ink-soft">
         Loading your family&apos;s recent activity.
       </p>
     </div>
@@ -52,18 +52,18 @@ export function NothingYetStateBlock({
 }: NothingYetStateBlockProps): ReactNode {
   return (
     <div
-      className={`flex flex-col items-center justify-center rounded-2xl border border-royal/10 bg-white p-8 text-center shadow-sm sm:p-12 ${className}`}
+      className={`flex flex-col items-center justify-center rounded-2xl border border-mm-brand/10 bg-white p-8 text-center shadow-sm sm:p-12 ${className}`}
     >
       <div
         aria-hidden="true"
-        className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal/8 text-royal"
+        className="flex h-12 w-12 items-center justify-center rounded-2xl bg-mm-brand/8 text-mm-brand"
       >
         <BookOpen className="h-6 w-6" />
       </div>
-      <h3 className="mt-4 text-base font-extrabold text-ink">
+      <h3 className="mt-4 text-base font-semibold text-mm-ink">
         Nothing finished yet
       </h3>
-      <p className="mt-1 max-w-sm text-sm text-muted">
+      <p className="mt-1 max-w-sm text-sm text-mm-ink-soft">
         {description ??
           (childName
             ? `Once ${childName} completes a practice session or exam, their work will appear here.`
@@ -96,15 +96,15 @@ export function NotEnoughYetStateBlock({
       >
         <Info className="h-6 w-6" />
       </div>
-      <h3 className="mt-4 text-base font-extrabold text-ink">
+      <h3 className="mt-4 text-base font-semibold text-mm-ink">
         Not enough yet to show trends
       </h3>
-      <p className="mt-1 max-w-sm text-sm text-muted">
+      <p className="mt-1 max-w-sm text-sm text-mm-ink-soft">
         {description ??
           "Needs at least 2 finished papers and 8 marks to establish reliable evidence."}
       </p>
       {papersCount !== undefined && marksCount !== undefined && (
-        <p className="mt-2 text-xs font-semibold text-muted">
+        <p className="mt-2 text-xs font-semibold text-mm-ink-soft">
           Current recorded work: {papersCount}{" "}
           {papersCount === 1 ? "paper" : "papers"} · {marksCount}{" "}
           {marksCount === 1 ? "mark" : "marks"}
@@ -137,13 +137,13 @@ export function CouldNotLoadStateBlock({
       >
         <AlertCircle className="h-6 w-6" />
       </div>
-      <h3 className="mt-4 text-base font-extrabold text-ink">{title}</h3>
-      <p className="mt-1 max-w-sm text-sm text-muted">{description}</p>
+      <h3 className="mt-4 text-base font-semibold text-mm-ink">{title}</h3>
+      <p className="mt-1 max-w-sm text-sm text-mm-ink-soft">{description}</p>
       {onRetry && (
         <button
           type="button"
           onClick={onRetry}
-          className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-5 text-sm font-extrabold text-white shadow-sm transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/30"
+          className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-mm-brand px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-mm-brand/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/30"
         >
           Try again
         </button>

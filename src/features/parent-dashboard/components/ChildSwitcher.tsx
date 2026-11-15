@@ -42,10 +42,10 @@ export function ChildSwitcher({
     initial?: string,
   ) => {
     const isActive = selectedId === id;
-    const baseClasses = `group inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+    const baseClasses = `group inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20 ${
       isActive
-        ? "bg-royal font-extrabold text-white shadow-sm"
-        : "border border-royal/10 bg-white font-bold text-ink hover:border-royal/30 hover:bg-royal/5"
+        ? "bg-mm-brand font-semibold text-white shadow-sm"
+        : "border border-mm-brand/10 bg-white font-semibold text-mm-ink hover:border-mm-brand/30 hover:bg-mm-brand/5"
     }`;
 
     const content = (
@@ -53,10 +53,10 @@ export function ChildSwitcher({
         {initial && (
           <span
             aria-hidden="true"
-            className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-black transition-colors ${
+            className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold transition-colors ${
               isActive
                 ? "bg-white/20 text-white"
-                : "bg-royal/10 text-royal"
+                : "bg-mm-brand/10 text-mm-brand"
             }`}
           >
             {initial}

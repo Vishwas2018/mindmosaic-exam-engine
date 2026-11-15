@@ -104,22 +104,22 @@ export default async function ChildCurriculumPage({
         <div>
           <Link
             href="/parent/children"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-muted transition hover:text-royal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-mm-ink-soft transition hover:text-mm-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mm-brand/20"
           >
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
             Back to Children
           </Link>
           <div className="mt-2 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
             <div>
-              <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink sm:text-3xl">
+              <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">
                 {childName}&apos;s Curriculum Alignment
               </h1>
-              <p className="mt-1 text-sm text-muted">
+              <p className="mt-1 text-sm text-mm-ink-soft">
                 Victorian Curriculum F–10 Version 2.0 (Mathematics and English) with verified worked examples.
               </p>
             </div>
             {childProfile?.year_level && (
-              <span className="inline-flex items-center rounded-full bg-royal/10 px-3 py-1 text-xs font-extrabold text-royal">
+              <span className="inline-flex items-center rounded-full bg-mm-brand/10 px-3 py-1 text-xs font-semibold text-mm-brand">
                 Year {childProfile.year_level} Focus
               </span>
             )}
@@ -137,7 +137,7 @@ export default async function ChildCurriculumPage({
             }
           />
         ) : (
-          <div className="rounded-2xl border border-royal/10 bg-white p-4 shadow-sm sm:p-6">
+          <div className="rounded-2xl border border-mm-brand/10 bg-white p-4 shadow-sm sm:p-6">
             <ParentCurriculumExplorer
               initialItems={items}
               initialLevel={childProfile?.year_level === 5 ? "5" : "3"}

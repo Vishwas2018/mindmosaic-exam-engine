@@ -58,7 +58,7 @@ export default async function ChildLearningPage({ params }: ChildLearningPagePro
         <ParentShell active="/parent/children">
           <div className="space-y-6">
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-xs font-medium text-amber-900">
-              <strong className="font-bold">Preview Demonstration:</strong> Showing sample learning programmes for {previewChild.firstName}. No live database connection is active.
+              <strong className="font-semibold">Preview Demonstration:</strong> Showing sample learning programmes for {previewChild.firstName}. No live database connection is active.
             </div>
             <ChildLearningHub
               child={{
@@ -78,8 +78,8 @@ export default async function ChildLearningPage({ params }: ChildLearningPagePro
 
     return (
       <ParentShell active="/parent/children">
-        <div className="p-8 text-center text-muted">
-          <p className="font-bold text-ink">Database Not Configured</p>
+        <div className="p-8 text-center text-mm-ink-soft">
+          <p className="font-semibold text-mm-ink">Database Not Configured</p>
           <p className="mt-2 text-sm">{SUPABASE_NOT_CONFIGURED_MESSAGE}</p>
         </div>
       </ParentShell>
@@ -111,7 +111,7 @@ export default async function ChildLearningPage({ params }: ChildLearningPagePro
   // Load child profile
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .select("id, display_name, year_level, student_login_code")
+    .select("id, display_name, year_level")
     .eq("id", childId)
     .single();
 
@@ -146,6 +146,8 @@ export default async function ChildLearningPage({ params }: ChildLearningPagePro
   const numeracyCount = yearQuestions.filter((q) => q.metadata.subject === "numeracy").length;
   const readingCount = yearQuestions.filter((q) => q.metadata.subject === "reading").length;
   const conventionsCount = yearQuestions.filter((q) => q.metadata.subject === "language_conventions").length;
+  const scienceCount = yearQuestions.filter((q) => q.metadata.subject === "science").length;
+  const digitalCount = yearQuestions.filter((q) => q.metadata.subject === "digital_technologies").length;
 
   const programmes: ProgrammeAvailability[] = [
     {
@@ -176,15 +178,18 @@ export default async function ChildLearningPage({ params }: ChildLearningPagePro
       id: `icas-science-y${year}`,
       title: "ICAS-style Science",
       subject: "science",
-      status: "not_written",
-      description: `There are no questions for this one at Year ${year} yet. It is not hidden from you, and it is not coming this term.`,
+      /* Counted from the same gated bank as the rows above; never a fixed answer. */
+      status: scienceCount > 0 ? "ready" : "not_written",
+      questionCountEstimated: scienceCount > 0 ? scienceCount : undefined,
+      setSizesDescription: "sets of 10 or 20",
     },
     {
       id: `icas-digital-tech-y${year}`,
       title: "ICAS-style Digital Technologies",
       subject: "digital_technologies",
-      status: "could_not_check",
-      description: "We could not work out what is available here just now. There may be plenty or there may be none — we are not going to guess. Try again shortly.",
+      status: digitalCount > 0 ? "ready" : "not_written",
+      questionCountEstimated: digitalCount > 0 ? digitalCount : undefined,
+      setSizesDescription: "sets of 10 or 20",
     },
   ];
 
@@ -197,7 +202,7 @@ export default async function ChildLearningPage({ params }: ChildLearningPagePro
           id: profile.id as string,
           displayName: (profile.display_name as string) ?? "Child",
           yearLevel: profile.year_level as number | null,
-          loginCode: realLoginCode ?? (profile.student_login_code as string) ?? "—",
+          loginCode: realLoginCode ?? "—",
         }}
         siblings={siblings}
         programmes={programmes}

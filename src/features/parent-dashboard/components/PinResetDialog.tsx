@@ -103,18 +103,18 @@ export function PinResetDialog({
     >
       <div className="space-y-6">
         {step === "confirm" && (
-          <div className="rounded-xl border border-royal/10 bg-royal/5 p-4 text-xs font-medium text-ink">
+          <div className="rounded-xl border border-mm-brand/10 bg-mm-brand/5 p-4 text-xs font-medium text-mm-ink">
             <p>
               Only a scrambled copy is stored on our servers. The new PIN will be shown
-              <strong className="font-bold"> once</strong> on the next screen.
+              <strong className="font-semibold"> once</strong> on the next screen.
             </p>
           </div>
         )}
 
         {step === "resetting" && (
           <div className="flex flex-col items-center justify-center py-6 text-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-royal/20 border-t-royal" />
-            <p className="mt-4 text-sm font-semibold text-muted">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-mm-brand/20 border-t-royal" />
+            <p className="mt-4 text-sm font-semibold text-mm-ink-soft">
               Updating student credentials...
             </p>
           </div>
@@ -122,7 +122,7 @@ export function PinResetDialog({
 
         {step === "done" && newPin && (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-emerald-800">
+            <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800">
               <CheckCircle2 className="h-5 w-5 text-emerald-600" />
               <span>{childName}’s new PIN</span>
             </div>
@@ -135,7 +135,7 @@ export function PinResetDialog({
               {newPin.split("").map((digit, idx) => (
                 <div
                   key={idx}
-                  className="flex h-12 w-10 items-center justify-center rounded-xl border-2 border-royal/30 bg-royal/5 font-mono text-2xl font-black text-royal shadow-sm sm:h-14 sm:w-12 sm:text-3xl"
+                  className="flex h-12 w-10 items-center justify-center rounded-xl border-2 border-mm-brand/30 bg-mm-brand/5 font-mono text-2xl font-semibold text-mm-brand shadow-sm sm:h-14 sm:w-12 sm:text-3xl"
                 >
                   {digit}
                 </div>
@@ -143,7 +143,7 @@ export function PinResetDialog({
             </div>
 
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs font-semibold text-amber-950">
-              <p className="font-black text-amber-900">Write this down now.</p>
+              <p className="font-semibold text-amber-900">Write this down now.</p>
               <p className="mt-1">We cannot show it again — we only keep a scrambled copy, so the next step is another reset.</p>
             </div>
           </div>
@@ -154,10 +154,10 @@ export function PinResetDialog({
             <div className="flex items-start gap-3 rounded-xl border border-error/20 bg-error/5 p-4 text-xs font-semibold text-error">
               <AlertTriangle className="h-5 w-5 flex-shrink-0" />
               <div>
-                <p className="font-bold">
+                <p className="font-semibold">
                   {errorMessage || "We couldn’t reset the PIN."}
                 </p>
-                <p className="mt-1 text-ink">
+                <p className="mt-1 text-mm-ink">
                   {childName}’s old PIN still works and nothing has changed. Try again, or contact support if it keeps happening.
                 </p>
               </div>

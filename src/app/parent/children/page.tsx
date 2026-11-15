@@ -53,14 +53,14 @@ export default async function ParentChildrenPage() {
         <ParentShell active="/parent/children">
           <div className="space-y-8">
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-xs font-medium text-amber-900">
-              <strong className="font-bold">Preview Demonstration:</strong> Showing sample family children and credentials. No live database connection is active.
+              <strong className="font-semibold">Preview Demonstration:</strong> Showing sample family children and credentials. No live database connection is active.
             </div>
 
             <div>
-              <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
+              <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.15] tracking-[-0.028em] text-mm-ink sm:text-4xl">
                 Children
               </h1>
-              <p className="mt-1 text-sm font-semibold text-muted">
+              <p className="mt-1 text-sm font-semibold text-mm-ink-soft">
                 Profiles, sign-in details and paid places.
               </p>
             </div>
