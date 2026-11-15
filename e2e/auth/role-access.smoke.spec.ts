@@ -14,7 +14,8 @@ test.describe("role access", () => {
       const page = await context.newPage();
       await page.goto("/parent");
       await expect(page).toHaveTitle(/Family Overview|Welcome \| MindMosaic Parents/);
-      await expect(page).toHaveURL(/\/parent$/);
+      /* A parent with no child yet starts at setup (Claude Design parent artboard 01). */
+      await expect(page).toHaveURL(key === "parent-no-children" ? /\/parent\/setup$/ : /\/parent$/);
     }
   });
 
