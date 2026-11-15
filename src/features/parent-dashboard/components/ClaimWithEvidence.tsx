@@ -81,7 +81,7 @@ export function ClaimWithEvidence({
           <span className="text-xs font-bold uppercase tracking-wider text-muted">
             {derivedLabel}
           </span>
-          <span className="text-xs font-semibold text-muted/75">
+          <span className="text-xs font-semibold text-muted">
             {safePapers} {safePapers === 1 ? "paper" : "papers"} · {safeMarks}{" "}
             {safeMarks === 1 ? "mark" : "marks"}
           </span>

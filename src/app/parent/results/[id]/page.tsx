@@ -1,3 +1,4 @@
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -91,7 +92,8 @@ export default async function ResultPage({ params }: ResultPageProps) {
     limit: 500,
   });
 
-  const sitting = sittings.find((s) => s.row.id === id);
+  // Links use the sitting's row id; an attempt id (as in a support message) resolves to the same sitting.
+  const sitting = sittings.find((s) => s.row.id === id || s.attemptId === id);
   if (!sitting) {
     notFound();
   }
@@ -137,7 +139,7 @@ export default async function ResultPage({ params }: ResultPageProps) {
   if (examResult.breakdowns?.bySkill) {
     for (const [skillKey, rowStats] of Object.entries(examResult.breakdowns.bySkill)) {
       strands.push({
-        name: skillKey.charAt(0).toUpperCase() + skillKey.slice(1).replace("_", " "),
+        name: skillLabel(skillKey),
         marksEarned: rowStats.objectiveMarksEarned,
         marksAvailable: rowStats.objectiveMarksAvailable,
         papersCount: 1,
@@ -151,9 +153,9 @@ export default async function ResultPage({ params }: ResultPageProps) {
     title,
     subject: subject as "numeracy" | "reading" | "language" | "writing",
     date: submittedDate,
-    timed: (examResult.timeTakenSeconds ?? 0) > 0,
+    timed: (row.session?.config as { timing?: string } | null)?.timing === "timed",
     durationMinutes: Math.round((examResult.timeTakenSeconds ?? 0) / 60),
-    allowedMinutes: 40,
+    allowedMinutes: null,
     marksEarned: examResult.objectiveMarksEarned ?? 0,
     marksAvailable: examResult.objectiveMarksAvailable ?? 0,
     questionsAnswered: examResult.attemptedQuestions ?? 0,

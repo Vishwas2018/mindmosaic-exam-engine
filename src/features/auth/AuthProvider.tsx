@@ -403,6 +403,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (error.code === "weak_password") {
             return { ok: false, message: error.message };
           }
+          /* So is an address the mail provider will not accept (no mail server, a reserved domain, a typo).
+             "Try again" would send the parent round the same loop with the same address. */
+          if (error.code === "email_address_invalid") {
+            return {
+              ok: false,
+              message: "That email address can't receive mail. Check it for typos, or use a different address.",
+            };
+          }
           return { ok: false, failure, message: "We couldn't create your account just now. Please try again." };
         }
         // When email confirmation is on, no session is returned yet.

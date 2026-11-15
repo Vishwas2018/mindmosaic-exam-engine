@@ -39,15 +39,20 @@ const mockSingleProfile = vi.hoisted(() => ({
   error: null as unknown,
 }));
 
+const mockParentLinked = vi.hoisted(() => ({ value: true }));
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
     auth: {
       getUser: async () => ({ data: { user: { id: "parent-1" } } }),
     },
-    from: vi.fn(() => ({
+    from: vi.fn((table: string) => ({
       select: vi.fn(() => ({
         eq: vi.fn(() => ({
           single: async () => mockSingleProfile,
+          // parent_children: the page checks the signed-in parent is linked to this child
+          eq: vi.fn(() => ({
+            maybeSingle: async () => ({ data: mockParentLinked.value && table === "parent_children" ? { child_id: "c" } : null }),
+          })),
         })),
       })),
     })),
@@ -237,5 +242,15 @@ describe("ChildCurriculumPage & ParentCurriculumExplorerPage", () => {
 
       expect(screen.getByText("Database not configured")).toBeVisible();
     });
+  });
+
+  it("404s a child the signed-in parent is not linked to", async () => {
+    mockIsSupabaseConfigured.value = true;
+    mockParentLinked.value = false;
+    try {
+      await expect(ChildCurriculumPage({ params: Promise.resolve({ childId: "someone-else" }) })).rejects.toThrow();
+    } finally {
+      mockParentLinked.value = true;
+    }
   });
 });

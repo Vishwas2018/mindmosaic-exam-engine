@@ -65,6 +65,7 @@ export default async function StudentHomePage() {
         onboardingCompleted={student.onboardingCompleted}
         interests={student.interests}
         weeklyGoalMinutes={student.weeklyGoalMinutes}
+        studentId={student.userId}
       />
     </StudentPortalShell>
   );

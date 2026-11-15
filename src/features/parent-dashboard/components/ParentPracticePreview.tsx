@@ -62,13 +62,13 @@ export function ParentPracticePreview({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted">
-            <Link href="/parent" className="hover:text-royal transition">
+            <Link href="/parent" className="inline-flex min-h-11 items-center hover:text-royal transition">
               Family Overview
             </Link>
             <span aria-hidden="true">/</span>
             <Link
               href={`/parent/children/${child.id}/learning`}
-              className="hover:text-royal transition"
+              className="inline-flex min-h-11 items-center hover:text-royal transition"
             >
               Learning for {child.displayName}
             </Link>
@@ -161,13 +161,13 @@ export function ParentPracticePreview({
             <button
               type="button"
               onClick={handleNextQuestion}
-              className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
             >
               Show the next one &rarr;
             </button>
             <Link
               href={`/parent/children/${child.id}/learning`}
-              className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition"
             >
               Back to the list
             </Link>
@@ -214,7 +214,7 @@ export function ParentPracticePreview({
                 Set this for {child.displayName}
               </h2>
               <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800">
-                PROPOSED POLICY
+                Not available
               </span>
             </div>
             <p className="mt-2 text-xs font-medium text-muted">
@@ -225,13 +225,13 @@ export function ParentPracticePreview({
               type="button"
               disabled
               aria-disabled="true"
-              className="mt-4 inline-flex min-h-10 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
+              className="mt-4 inline-flex min-h-11 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
             >
               Set a 10-question set
             </button>
 
             <p className="mt-3 text-[11px] leading-relaxed text-muted">
-              Not built, and not obviously wanted. It turns practice into homework a child did not choose, which is the opposite of how the student side is designed. Needs your approval before it is built, not after.
+              Not available. Practice on MindMosaic stays your child’s choice, so parents cannot set work for them.
             </p>
           </section>
 
@@ -245,7 +245,7 @@ export function ParentPracticePreview({
                 Let {child.displayName} try Year {stretchYear}
               </h2>
               <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800">
-                PROPOSED POLICY
+                Not available
               </span>
             </div>
             <p className="mt-2 text-xs font-medium text-muted">
@@ -256,14 +256,13 @@ export function ParentPracticePreview({
               type="button"
               disabled
               aria-disabled="true"
-              className="mt-4 inline-flex min-h-10 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
+              className="mt-4 inline-flex min-h-11 w-full cursor-not-allowed items-center justify-center rounded-xl border border-royal/20 bg-white/70 px-4 py-2 text-xs font-extrabold text-muted shadow-2xs"
             >
               Open Year {stretchYear} for {child.displayName}
             </button>
 
             <p className="mt-3 text-[11px] leading-relaxed text-muted">
-              Needs a rule for what happens to her results: a Year {stretchYear} paper sat by a Year {year} child should not quietly land in her Year {year} figures.{" "}
-              <span className="font-extrabold text-coral-700">NEEDS SIGN-OFF</span>
+              Not available yet: a Year {stretchYear} paper sat by a Year {year} child must not quietly land in their Year {year} figures, and that rule is still being decided.
             </p>
           </section>
         </div>

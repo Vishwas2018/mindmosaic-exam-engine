@@ -16,6 +16,20 @@ export interface StudentOnboardingModalProps {
   onboardingCompleted: boolean;
   interests?: readonly string[];
   weeklyGoalMinutes?: number;
+  /** The signed-in student's id. Scopes "closed the welcome" to this child on this browser. */
+  studentId?: string;
+}
+
+const DISMISSED_KEY = (studentId: string) => `mm.onboarding.welcome-dismissed.${studentId}`;
+
+/** Whether this child already closed the welcome on this browser. Storage can be unavailable; then it shows. */
+function wasDismissed(studentId: string | undefined): boolean {
+  if (!studentId) return false;
+  try {
+    return window.localStorage.getItem(DISMISSED_KEY(studentId)) === "1";
+  } catch {
+    return false;
+  }
 }
 
 export function StudentOnboardingModal({
@@ -24,14 +38,16 @@ export function StudentOnboardingModal({
   onboardingCompleted,
   interests,
   weeklyGoalMinutes,
+  studentId,
 }: StudentOnboardingModalProps) {
   const router = useRouter();
   const { isOpen, step, setStep, open, close, reset } = useOnboardingStore();
   const initialisedRef = useRef(false);
 
-  // Auto-open on first render if onboarding is not completed
+  /* Auto-open once for a child who has not onboarded. A child who closes it is not asked again on every return to
+     My Space: the warmup banner stays on the page as the way back in. */
   useEffect(() => {
-    if (!initialisedRef.current && !onboardingCompleted) {
+    if (!initialisedRef.current && !onboardingCompleted && !wasDismissed(studentId)) {
       initialisedRef.current = true;
       open({
         initialYearLevel: yearLevel,
@@ -39,7 +55,18 @@ export function StudentOnboardingModal({
         initialWeeklyGoal: weeklyGoalMinutes,
       });
     }
-  }, [onboardingCompleted, yearLevel, interests, weeklyGoalMinutes, open]);
+  }, [onboardingCompleted, yearLevel, interests, weeklyGoalMinutes, open, studentId]);
+
+  const handleClose = () => {
+    if (studentId) {
+      try {
+        window.localStorage.setItem(DISMISSED_KEY(studentId), "1");
+      } catch {
+        /* Storage blocked: the welcome may show again next time, which is harmless. */
+      }
+    }
+    close();
+  };
 
   const handleFinish = () => {
     reset();
@@ -66,7 +93,7 @@ export function StudentOnboardingModal({
   return (
     <Modal
       open={isOpen}
-      onClose={close}
+      onClose={handleClose}
       title={getStepTitle()}
       className="max-w-xl"
       hideCloseButton={step === "warmup_summary"}

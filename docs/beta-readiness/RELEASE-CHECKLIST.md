@@ -3,6 +3,38 @@
 Each row is either checked with the evidence that checks it, or open with who it waits on. Nothing is ticked from a
 local fixture when the row is about hosted DEV.
 
+## 2026-11-15: PR head `7167078f` (application code = `5c69c65f`)
+
+| # | Item | State | Evidence / waiting on |
+|---|------|-------|-----------------------|
+| R4 | CI green with skip counts read | **Done for `7167078f`** | Both runs, 6/6 jobs, 0 skipped; port collision fixed (D-037). TEST-RESULTS.md |
+| R2/R3 | Hosted A–E + G and scoring oracle on the PR Preview | **Done for `7167078f`** | 14/0/1-skip (A1–A2); oracle 21/21 |
+| R7 | Synthetic data | Done | Run `rmwh4u70b` cleaned; DEV 15 users |
+| R8 | Custom SMTP for DEV Auth (D-025) | **Open, owner** — prepared | SMTP-RUNBOOK.md, `scripts/dev-auth/configure-smtp.mjs`; needs provider account, verified domain, SMTP key, Supabase token for the DEV account |
+| R8b | Two real email registrations (delivery, confirm link, sign-in, recovery) | Open, after R8 | Also needs a readable inbox (Gmail connector needs re-auth, or `HOSTED_MAIL_BASE`) |
+| R9 | Content attestation for the 77; Y5 Q20 | **Open, owner** — packet ready | OWNER-ATTESTATION-77.md (unsigned); Y5 Q20 still excluded |
+| R10 | Merge PR #124 into `dev`, re-run the suite on the `dev` Preview | **Open, owner** | PR mergeable, still draft; branch protection applies |
+| R12 | Reconcile the uncommitted billing rewrite | Not a beta blocker; owner of that work | It predates #123 (conflicts with `dev` in 8 files) and adds 2 DB migrations; BILLING-RECONCILIATION.md |
+| R11 | Error monitoring | Open, owner decision | None configured |
+
+## 2026-11-14: PR #124 release candidate (`5c69c65f`)
+
+| # | Item | State | Evidence / waiting on |
+|---|------|-------|-----------------------|
+| R1 | All DEV migrations applied; legacy RPC lockdown in force | Done | 53/53; scenario D: 403 `42501` on both legacy RPCs |
+| R2 | Browser scenarios A–E on a deployed Preview | Done, except A1–A2 on the RC | TEST-RESULTS.md: 14/14 run, A1–A2 passed on `3fc807b4`, skipped on the RC by D-025 |
+| R3 | Independent scoring oracle on the Preview | Done | 21/21 (`8f68b771`) |
+| R4 | CI green with skip counts read | Done for `4be46f87`; RC run in the PR | e2e-auth 0 skipped; 1 flaky landing test (D-034) |
+| R5 | Only approved content served | Done | Scenario G; CONTENT-GOVERNANCE.md |
+| R6 | No fabricated progress, fake receipts, dead controls or internal notes on family screens | Done for screens covered by A–E | D-020..D-024, D-035, D-036 |
+| R7 | Test data controlled | Done | `cleanup.mjs` removed 27 suite parents + 24 children; DEV back to 15 users; `mm-dev-*` fixtures kept |
+| R8 | **Custom SMTP for DEV Auth (D-025)** | **Open, owner** | Blocks families registering close together |
+| R9 | **Content attestation for the 77; Y5 Q20 decision** | **Open, owner** | CONTENT-GOVERNANCE.md |
+| R10 | **Merge PR #124 into `dev`, then re-run the suite on the `dev` Preview** | **Open, owner** | Branch protection applies |
+| R11 | Error monitoring | Open, owner decision | None configured; Vercel runtime logs only |
+
+## Earlier record (PR #123)
+
 ## A. Integration branch (`integration/beta-consolidation`, PR #123)
 
 | # | Item | State | Evidence / waiting on |

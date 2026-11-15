@@ -68,9 +68,6 @@ export function ParentAccount({
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   // Notification toggles
-  const [notifyWeekly, setNotifyWeekly] = useState(true);
-  const [notifyMarked, setNotifyMarked] = useState(true);
-  const [notifyFortnight, setNotifyFortnight] = useState(false);
 
   const youHeadingId = useId();
   const secHeadingId = useId();
@@ -260,7 +257,7 @@ export function ParentAccount({
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3.5 py-2.5 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3.5 py-2.5 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
                 />
               </div>
 
@@ -274,7 +271,7 @@ export function ParentAccount({
                   value={email}
                   readOnly
                   aria-describedby="account-email-help"
-                  className="mt-1 block w-full rounded-xl border border-royal/10 bg-surface-container-low/40 px-3.5 py-2.5 text-sm font-semibold text-muted shadow-2xs cursor-not-allowed"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/10 bg-surface-container-low/40 px-3.5 py-2.5 text-sm font-semibold text-muted shadow-2xs cursor-not-allowed"
                 />
                 <p id="account-email-help" className="mt-1 text-xs leading-relaxed text-muted">
                   Changing this sends a link to the new address. The old one keeps working until you use the link.
@@ -298,7 +295,7 @@ export function ParentAccount({
                   type="button"
                   onClick={handleSaveName}
                   disabled={nameBusy}
-                  className="inline-flex min-h-10 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-4 py-2 text-xs font-extrabold text-white shadow-xs hover:bg-royal/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
                 >
                   {nameBusy ? "Saving..." : "Save changes"}
                 </button>
@@ -306,7 +303,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setEmailModalOpen(true)}
-                  className="inline-flex min-h-10 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-bold text-royal hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-bold text-royal hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
                 >
                   Change email address
                 </button>
@@ -357,7 +354,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setPasswordModalOpen(true)}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-royal shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
               >
                 Change password
               </button>
@@ -365,7 +362,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={() => setDevicesModalOpen(true)}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
               >
                 See my devices
               </button>
@@ -389,72 +386,35 @@ export function ParentAccount({
             </p>
 
             <div className="mt-5 divide-y divide-royal/10">
-              {/* Item 1: Weekly summary */}
+              {/* Planned emails. They are not sent yet, so there is nothing to switch on or off: a toggle here would be a
+                  control that changes nothing. */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Weekly summary</span>
-                  <span className="mt-0.5 block text-xs text-muted">
-                    What both children did, every Sunday evening.
-                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">What your children did, every Sunday evening.</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-muted">
-                    Not built
-                  </span>
-                  <input
-                    type="checkbox"
-                    checked={notifyWeekly}
-                    onChange={(e) => setNotifyWeekly(e.target.checked)}
-                    aria-label="Weekly summary email notification"
-                    className="h-5 w-5 rounded accent-royal"
-                  />
-                </div>
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                  Not sent yet
+                </span>
               </div>
-
-              {/* Item 2: Written answers marked */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Written answers marked</span>
-                  <span className="mt-0.5 block text-xs text-muted">
-                    When a person has marked a written answer.
-                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">When a person has marked a written answer.</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-muted">
-                    Not built
-                  </span>
-                  <input
-                    type="checkbox"
-                    checked={notifyMarked}
-                    onChange={(e) => setNotifyMarked(e.target.checked)}
-                    aria-label="Written answers marked notification"
-                    className="h-5 w-5 rounded accent-royal"
-                  />
-                </div>
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                  Not sent yet
+                </span>
               </div>
-
-              {/* Item 3: Nothing for a fortnight */}
               <div className="flex items-start justify-between gap-4 py-3.5">
                 <div>
                   <span className="block text-sm font-bold text-ink">Nothing for a fortnight</span>
-                  <span className="mt-0.5 block text-xs text-muted">
-                    A nudge if neither child has practised.
-                  </span>
+                  <span className="mt-0.5 block text-xs text-muted">A nudge if none of your children has practised.</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="rounded-full bg-surface-container-low px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-muted">
-                    Not built
-                  </span>
-                  <input
-                    type="checkbox"
-                    checked={notifyFortnight}
-                    onChange={(e) => setNotifyFortnight(e.target.checked)}
-                    aria-label="Fortnightly inactivity nudge notification"
-                    className="h-5 w-5 rounded accent-royal"
-                  />
-                </div>
+                <span className="shrink-0 rounded-full bg-surface-container-low px-2.5 py-1 text-[11px] font-bold text-muted">
+                  Not sent yet
+                </span>
               </div>
-
               {/* Item 4: Billing (Always on). Only a family that pays has payments that can fail. */}
               {paying && (
               <div className="flex items-start justify-between gap-4 py-3.5">
@@ -553,7 +513,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setDataStoredModalOpen(true)}
-                  className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
                 >
                   <FileText className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
                   <span>What we store about your children</span>
@@ -563,7 +523,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={handleExportData}
-                  className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
                 >
                   <Download className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
                   {/* The file holds the account details only; children's practice records are not in it yet (D-014),
@@ -575,7 +535,7 @@ export function ParentAccount({
                 <button
                   type="button"
                   onClick={() => setDeleteModalOpen(true)}
-                  className="inline-flex min-h-10 w-full items-center gap-2 rounded-lg px-2 text-left text-coral-700 hover:bg-coral-500/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-500/20"
+                  className="inline-flex min-h-11 w-full items-center gap-2 rounded-lg px-2 text-left text-coral-700 hover:bg-coral-500/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral-500/20"
                 >
                   <Trash2 className="h-4 w-4 shrink-0 text-coral-600" aria-hidden="true" />
                   <span>Ask us to delete the account</span>
@@ -588,7 +548,7 @@ export function ParentAccount({
               <div className="leading-relaxed">
                 The published privacy and retention policy is still being written, so none of these screens states how long anything is kept or how quickly a request is handled.{" "}
                 <span className="rounded bg-coral-500/15 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-coral-800">
-                  NEEDS SIGN-OFF
+                  Not published yet
                 </span>
               </div>
             </div>
@@ -610,7 +570,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={handleSignOut}
-                className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-ink shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-royal/20 bg-white px-4 py-2 text-xs font-extrabold text-ink shadow-2xs hover:bg-royal/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
               >
                 <LogOut className="h-3.5 w-3.5 text-muted" aria-hidden="true" />
                 Sign out
@@ -619,7 +579,7 @@ export function ParentAccount({
               <button
                 type="button"
                 onClick={handleSignOutEverywhere}
-                className="inline-flex min-h-10 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 text-xs font-bold text-muted hover:text-ink transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/20"
               >
                 Sign out everywhere
               </button>
@@ -664,7 +624,7 @@ export function ParentAccount({
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
               />
             </div>
 
@@ -728,7 +688,7 @@ export function ParentAccount({
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
                 />
               </div>
 
@@ -741,7 +701,7 @@ export function ParentAccount({
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="mt-1 block w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
+                  className="mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 py-2 text-sm font-semibold text-ink shadow-2xs focus:border-royal focus:outline-none focus:ring-2 focus:ring-royal/20"
                 />
               </div>
 

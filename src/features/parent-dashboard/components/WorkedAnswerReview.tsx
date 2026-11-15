@@ -54,18 +54,18 @@ export function WorkedAnswerReview({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-muted">
-            <Link href="/parent" className="hover:text-royal transition">
+            <Link href="/parent" className="inline-flex min-h-11 items-center hover:text-royal transition">
               Family Overview
             </Link>
             <span aria-hidden="true">/</span>
             <Link
               href={`/parent/children/${child.id}/progress`}
-              className="hover:text-royal transition"
+              className="inline-flex min-h-11 items-center hover:text-royal transition"
             >
               {child.displayName}
             </Link>
             <span aria-hidden="true">/</span>
-            <Link href={`/parent/results/${resultId}`} className="hover:text-royal transition">
+            <Link href={`/parent/results/${resultId}`} className="inline-flex min-h-11 items-center hover:text-royal transition">
               This paper
             </Link>
             <span aria-hidden="true">/</span>
@@ -96,7 +96,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("all")}
           aria-pressed={filter === "all"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "all"
               ? "bg-royal text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -108,7 +108,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("incorrect")}
           aria-pressed={filter === "incorrect"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "incorrect"
               ? "bg-coral-600 text-white shadow-xs"
               : "border border-coral-500/20 bg-white text-ink hover:bg-coral-500/5"
@@ -120,7 +120,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("unanswered")}
           aria-pressed={filter === "unanswered"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "unanswered"
               ? "bg-ink text-white shadow-xs"
               : "border border-royal/10 bg-white text-ink hover:bg-royal/5"
@@ -132,7 +132,7 @@ export function WorkedAnswerReview({
           type="button"
           onClick={() => setFilter("pending")}
           aria-pressed={filter === "pending"}
-          className={`min-h-8 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
+          className={`min-h-11 rounded-lg px-3.5 py-1.5 text-xs font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 ${
             filter === "pending"
               ? "bg-amber-600 text-white shadow-xs"
               : "border border-amber-500/20 bg-white text-ink hover:bg-amber-500/5"

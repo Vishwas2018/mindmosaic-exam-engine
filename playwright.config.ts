@@ -20,7 +20,7 @@ export default defineConfig({
    * guest-only, unconfigured-Supabase webServer, where their storageState
    * cookies authenticate against nothing.
    */
-  testIgnore: ["auth/**", "fixtures/**", "setup/**", "scholarship-preview/**"],
+  testIgnore: ["auth/**", "fixtures/**", "setup/**", "scholarship-preview/**", "hosted/**"],
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,

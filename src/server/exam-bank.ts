@@ -2,7 +2,11 @@ import "server-only";
 
 import { questionBank } from "@/content/questions/question-bank";
 import { publishedExamBank } from "@/content/questions/practice-bank";
-import { selectServedQuestions } from "@/features/content-governance/gate-config";
+import {
+  PROGRAMME_PUBLICATION_MODES,
+  selectServedQuestions,
+  type PublicationGateMode,
+} from "@/features/content-governance/gate-config";
 import {
   buildAllPatternReadiness,
   type PatternReadinessMap,
@@ -32,13 +36,31 @@ const curatedIds = new Set(questionBank.map((question) => question.id));
 let servedBankCache: readonly AuthoringQuestion[] | undefined;
 let curatedBankCache: readonly AuthoringQuestion[] | undefined;
 
+/**
+ * The publication gate's mode for programmes with no explicit switch.
+ *
+ * A deployed build (Vercel preview — the DEV family beta — or production) serves only content with a verified
+ * human approval record: real children never see unreviewed items. Local runs and CI keep "report" so the
+ * authored bank stays exercisable by the test suites. MM_PUBLICATION_GATE=enforce|report overrides either way.
+ */
+export function deployedGateFallback(env: NodeJS.ProcessEnv = process.env): PublicationGateMode {
+  const explicit = env.MM_PUBLICATION_GATE;
+  if (explicit === "enforce" || explicit === "report") return explicit;
+  return env.VERCEL_ENV === "preview" || env.VERCEL_ENV === "production" ? "enforce" : "report";
+}
+
+/** True when every programme without an explicit switch serves approved items only. */
+export function isPublicationGateEnforced(): boolean {
+  return deployedGateFallback() === "enforce";
+}
+
 function servedBank(): readonly AuthoringQuestion[] {
   if (servedBankCache) return servedBankCache;
   const report = getPublicationEligibility();
   // Integrity failures must never be treated as successful publication.
   if (report.problems.length) return Object.freeze([]);
   const served = selectServedQuestions(
-    publishedExamBank, new Set(report.approvals.keys()),
+    publishedExamBank, new Set(report.approvals.keys()), PROGRAMME_PUBLICATION_MODES, deployedGateFallback(),
   );
   servedBankCache = served === publishedExamBank ? publishedExamBank : Object.freeze(served);
   return servedBankCache;

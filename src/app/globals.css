@@ -1125,3 +1125,28 @@
 .legal-prose strong {
   color: var(--primary-text);
 }
+
+/*
+ * Student sign-in card (PrintSignInCardDialog). While the parent is printing it, only the card is printed: the
+ * page, the modal chrome and the dialog buttons are hidden, and the card sits at the top-left of the sheet at a
+ * size that fits a wallet or a pencil case. Scoped by a class the dialog adds just before window.print().
+ */
+@media print {
+  html.printing-signin-card body * {
+    visibility: hidden !important;
+  }
+  html.printing-signin-card #student-signin-card,
+  html.printing-signin-card #student-signin-card * {
+    visibility: visible !important;
+  }
+  html.printing-signin-card #student-signin-card {
+    position: fixed !important;
+    top: 12mm;
+    left: 12mm;
+    width: 110mm;
+    margin: 0;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

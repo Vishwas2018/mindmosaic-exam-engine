@@ -63,7 +63,7 @@ export function PracticeStudioHistory({
                 </div>
                 <Link
                   href="/exam"
-                  className="rounded-btn bg-primary px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary-hover"
+                  className="inline-flex min-h-11 items-center rounded-btn bg-primary px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary-hover"
                 >
                   Resume
                 </Link>
