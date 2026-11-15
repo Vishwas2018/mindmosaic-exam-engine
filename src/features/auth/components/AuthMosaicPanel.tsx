@@ -109,7 +109,7 @@ export function AuthShell({
 }) {
   return (
     <div className="mm-root flex min-h-screen bg-mm-tint-soft text-mm-ink">
-      <AuthMosaicPanel {...panel} className="w-[46vw] max-w-[620px] shrink-0" />
+      <AuthMosaicPanel {...panel} className="w-[38vw] max-w-[620px] shrink-0 lg:w-[46vw]" />
       <main
         id="main-content"
         className="flex min-w-0 flex-1 flex-col items-center px-4 pt-7 pb-12 sm:px-8 md:pt-10 lg:pt-14"
@@ -132,7 +132,7 @@ export function AuthCard({ children, className }: { children: ReactNode; classNa
   return (
     <div
       className={twMerge(
-        "mm-rise w-full min-w-0 rounded-3xl bg-white px-0 py-2 sm:border sm:border-mm-line sm:px-9 sm:pt-9 sm:pb-8 sm:shadow-[0_18px_50px_rgba(49,32,86,0.09)]",
+        "mm-rise w-full min-w-0 rounded-3xl bg-white px-0 py-2 sm:border sm:border-mm-line sm:px-6 sm:pt-8 sm:pb-7 lg:px-9 lg:pt-9 lg:pb-8 sm:shadow-[0_18px_50px_rgba(49,32,86,0.09)]",
         className,
       )}
     >
