@@ -15,7 +15,7 @@ import {
   SpellCheck2,
   Target,
   GraduationCap,
-  TrendingUp,
+  ListChecks,
   BarChart3,
 } from "lucide-react";
 
@@ -31,7 +31,6 @@ export type StudentSidebarKey =
   | "learn"
   | "practice"
   | "examCentre"
-  | "progress"
   | "results"
   | "singaporeMathsSample"
   | "vihaan";
@@ -41,9 +40,8 @@ interface SidebarNavItem {
   label: string;
   href: string;
   icon: typeof LayoutDashboard;
-  shortLabel: string;
-  /** Placeholder badge text to match the Stitch mock — not wired to real state yet. */
-  badge?: string;
+  /** Bottom-nav label below 1024px. The full `label` is the accessible name. Absent = not in the bottom nav. */
+  shortLabel?: string;
 }
 
 /**
@@ -54,11 +52,12 @@ interface SidebarNavItem {
  * for this sidebar.
  */
 const baseSidebarItems: readonly SidebarNavItem[] = [
-  { key: "home", label: "Dashboard", shortLabel: "My Space", href: "/student", icon: LayoutDashboard },
+  { key: "home", label: "My Space", shortLabel: "My Space", href: "/student", icon: LayoutDashboard },
   { key: "learn", label: "Learning Hub", shortLabel: "Learning", href: "/student/learn", icon: BookOpen },
   { key: "practice", label: "Practice Studio", shortLabel: "Practice", href: "/student/practice", icon: Target },
   { key: "examCentre", label: "Exam Centre", shortLabel: "Exams", href: "/student/exam-preparation", icon: ClipboardCheck },
-  { key: "progress", label: "My Progress", shortLabel: "Results", href: "/student/engagement", icon: TrendingUp },
+  /* My Progress leaves the nav (D5); My Results takes the slot. /student/engagement is reached from My Space. */
+  { key: "results", label: "My Results", shortLabel: "Results", href: "/results", icon: ListChecks },
 ];
 
 const vihaanNavItem: SidebarNavItem = {
@@ -141,7 +140,7 @@ export function StudentSidebar({
         <div className="flex items-center justify-between border-b border-mm-line/60 px-5 pb-4 pt-5">
           <Link
             href="/student"
-            aria-label="MindMosaic — Dashboard"
+            aria-label="MindMosaic — My Space"
             className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             <MindMosaicLogo size="md" />
@@ -170,10 +169,6 @@ export function StudentSidebar({
           <ChevronsUpDown aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-stitch-outline" />
         </div>
 
-        <div className="mx-3">
-
-        </div>
-
         <div className="px-3">
           <p className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-stitch-outline">
             Portal main
@@ -195,18 +190,6 @@ export function StudentSidebar({
                 >
                   <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
                   <span className="flex-1">{item.label}</span>
-                  {item.badge && (
-                    <span
-                      aria-hidden="true"
-                      className={`rounded-full px-1.5 py-0.5 text-[9px] font-semibold ${
-                        item.badge === "NAPLAN"
-                          ? "border border-amber-border bg-amber-light text-amber-accent"
-                          : "border border-mm-line bg-mm-page text-mm-muted"
-                      }`}
-                    >
-                      {item.badge}
-                    </span>
-                  )}
                 </Link>
               );
             })}

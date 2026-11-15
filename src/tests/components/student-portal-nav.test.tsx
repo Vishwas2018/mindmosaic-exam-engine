@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { StudentBottomNav } from "@/features/student/components/StudentBottomNav";
 import { StudentSidebar } from "@/features/student/components/StudentSidebar";
 
-const sidebar = (active: "home" | "progress" | "results" = "home") =>
+const sidebar = (active: "home" | "results" = "home") =>
   render(
     <StudentSidebar
       active={active}
@@ -23,19 +23,19 @@ describe("student sidebar", () => {
     sidebar();
     const nav = screen.getByRole("navigation", { name: "Student navigation" });
     expect(within(nav).getAllByRole("link").map((l) => l.textContent)).toEqual([
-      "Dashboard",
+      "My Space",
       "Learning Hub",
       "Practice Studio",
       "Exam Centre",
-      "My Progress",
+      "My Results",
     ]);
     expect(within(nav).queryByRole("link", { name: "Help Centre" })).toBeNull();
     expect(screen.getByRole("link", { name: "Help Centre" })).toBeInTheDocument();
   });
 
   it("marks the active destination", () => {
-    sidebar("progress");
-    expect(screen.getByRole("link", { name: "My Progress" })).toHaveAttribute("aria-current", "page");
+    sidebar("results");
+    expect(screen.getByRole("link", { name: "My Results" })).toHaveAttribute("aria-current", "page");
   });
 
   it("carries none of the removed placeholders", () => {
@@ -54,7 +54,7 @@ describe("student bottom nav", () => {
     const links = within(nav).getAllByRole("link");
     expect(links.map((l) => l.textContent)).toEqual(["My Space", "Learning", "Practice", "Exams", "Results"]);
     expect(links.map((l) => l.getAttribute("aria-label"))).toEqual([
-      "My Space — Dashboard", "Learning — Learning Hub", "Practice — Practice Studio", "Exams — Exam Centre", "Results — My Progress",
+      "My Space", "Learning — Learning Hub", "Practice — Practice Studio", "Exams — Exam Centre", "Results — My Results",
     ]);
     expect(screen.getByRole("link", { name: /Learning Hub/ })).toHaveAttribute("aria-current", "page");
   });
