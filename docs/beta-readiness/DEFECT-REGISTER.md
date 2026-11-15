@@ -84,6 +84,7 @@ the Preview of the fix. State "FIXED" means the hosted check now passes (TEST-RE
 | D-035 | P1 | Exam Centre showed a real child a fixed "NAPLAN Year 5 Simulation Battery — Example: 1 / 4 complete" with disabled Start/Review/Resume | FIXED | Removed from the real page (`5c69c65f`) |
 | D-036 | P1 | `/parent/account` email preferences: three "Not built" toggles that saved nothing; practice preview showed notes to the product owner ("Needs your approval before it is built", "PROPOSED POLICY") | FIXED | "Not sent yet" without a control; parent-facing wording (`14cf7b21`, `387f6338`) |
 | D-037 | P1 (CI) | `rls` and `e2e-auth` failed intermittently: Docker "failed to bind host port 0.0.0.0:56322/tcp: address already in use" (pull_request run 43595025208 on `4ed954d3`, both jobs). Local Supabase ports 56320–56329 lie inside Linux's ephemeral range (32768–60999), so an outbound socket opened earlier in the job could hold one | FIXED | `scripts/ci/supabase-start.sh`: `net.ipv4.ip_local_reserved_ports=56320-56329` as the first step after checkout; start retried with port-holder diagnostics (`7167078f`) |
+| D-038 | P3 (test) | `a11y-auth-pages` sign-in keyboard walkthrough failed its first attempt in both CI runs on `1f211563` (passed on retry): it waited for `<main>`, which first holds the Suspense placeholder, so the walk found no fields. Not a product defect | FIXED | Waits for `#auth-ident` |
 
 ### Harness defect found and fixed during the run
 

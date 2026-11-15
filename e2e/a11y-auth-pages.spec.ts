@@ -41,7 +41,10 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/sign-in?entry=signin", { readyLocator: "main" });
+    /* Wait for the sign-in form itself, not just <main>: the panel sits in a <Suspense> (it reads useSearchParams),
+       so <main> first holds an aria-hidden placeholder. A walk started then finds no fields (failed first try in both
+       CI runs on 1f211563, D-038). */
+    await visitAndStabilize(page, "/sign-in?entry=signin", { readyLocator: "#auth-ident" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const emailIndex = sequence.indexOf("auth-ident");
