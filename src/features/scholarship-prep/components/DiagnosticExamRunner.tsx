@@ -7,6 +7,7 @@ import { ArrowLeft, CheckCircle2, Clock } from "lucide-react";
 import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import type { SubjectFilter, YearLevelFilter } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
+import type { VihaanSolutionDetail } from "@/features/scholarship-prep/lib/practice";
 import type { Question } from "@/schemas/question.schema";
 
 export interface DiagnosticCompletionResult {
@@ -70,12 +71,18 @@ export function VihaanDiagnosticExamRunner({
   questions,
   subject,
   mode = "local",
+  solutionsById,
+  persistToServer = false,
   onComplete,
+  onExit,
 }: {
   questions: readonly Question[];
   subject: string;
   mode?: "local" | "server";
+  solutionsById?: Readonly<Record<string, VihaanSolutionDetail>>;
+  persistToServer?: boolean;
   onComplete?: (result: DiagnosticCompletionResult) => void;
+  onExit?: () => void;
 }) {
   const status = useExamStore((state) => state.status);
   const sessionId = useExamStore((state) => state.sessionId);
@@ -92,6 +99,7 @@ export function VihaanDiagnosticExamRunner({
   const submitExam = useExamStore((state) => state.submitExam);
 
   const [error, setError] = useState<string | null>(null);
+  const [persistedStatus, setPersistedStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const completedRef = useRef(false);
 
   // Clean up store state when navigating away so stale attempts do not linger.
@@ -155,19 +163,49 @@ export function VihaanDiagnosticExamRunner({
   useEffect(() => {
     if (status === "submitted" && examResult && !completedRef.current) {
       completedRef.current = true;
+      const storeState = useExamStore.getState();
       onComplete?.({
         score: examResult.correctCount,
         total: examResult.totalQuestions,
         accuracy: examResult.objectivePercentage,
         timeTakenSeconds: examResult.timeTakenSeconds,
-        responses: useExamStore.getState().responses,
+        responses: storeState.responses,
       });
+
+      if (persistToServer) {
+        const questionIds = questions.map((q) => q.id);
+        void (async () => {
+          try {
+            const response = await fetch("/api/student/vihaan/attempt", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                questionIds,
+                subject,
+                mode: questions.length >= 20 ? "diagnostic" : "practice",
+                startedAt: storeState.startedAt ?? undefined,
+                submittedAt: storeState.submittedAt ?? undefined,
+                responses: storeState.responses,
+              }),
+            });
+            const data = (await response.json().catch(() => null)) as {
+              persisted?: boolean;
+            } | null;
+            setPersistedStatus(response.ok && data?.persisted ? "saved" : "error");
+          } catch {
+            setPersistedStatus("error");
+          }
+        })();
+      }
     } else if (status === "not_started") {
       completedRef.current = false;
     }
-  }, [status, examResult, onComplete]);
+  }, [status, examResult, onComplete, persistToServer, questions, subject]);
 
   const handleSubmit = () => {
+    if (persistToServer) {
+      setPersistedStatus("saving");
+    }
     submitExam("user_submitted");
   };
 
@@ -247,9 +285,35 @@ export function VihaanDiagnosticExamRunner({
             <CheckCircle2 className="h-5 w-5 text-emerald-600" aria-hidden="true" />
             <h2 className="text-xl font-bold text-ink">Diagnostic Results</h2>
           </div>
-          <span className="rounded border border-mm-line bg-mm-tint/40 px-2.5 py-0.5 text-xs font-semibold text-mm-muted">
-            {examResult.objectivePercentage}% accuracy
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            {persistedStatus === "saved" && (
+              <span
+                data-testid="vihaan-attempt-persisted"
+                className="rounded border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700"
+              >
+                Saved to progress
+              </span>
+            )}
+            {persistedStatus === "saving" && (
+              <span
+                data-testid="vihaan-attempt-saving"
+                className="rounded border border-mm-line bg-mm-page/60 px-2.5 py-0.5 text-xs font-semibold text-mm-muted"
+              >
+                Saving progress...
+              </span>
+            )}
+            {persistedStatus === "error" && (
+              <span
+                data-testid="vihaan-attempt-save-error"
+                className="rounded border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-semibold text-amber-800"
+              >
+                Could not sync to server
+              </span>
+            )}
+            <span className="rounded border border-mm-line bg-mm-tint/40 px-2.5 py-0.5 text-xs font-semibold text-mm-muted">
+              {examResult.objectivePercentage}% accuracy
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -282,6 +346,7 @@ export function VihaanDiagnosticExamRunner({
         <div className="space-y-3">
           {reviewList.map((q) => {
             const detail = detailById.get(q.id);
+            const solution = solutionsById?.[q.id];
             const badgeLabel = detail?.pendingManualReview
               ? "Pending review"
               : detail?.status === "correct"
@@ -290,7 +355,7 @@ export function VihaanDiagnosticExamRunner({
                   ? "Incorrect"
                   : "Unanswered";
             return (
-              <div key={q.id} className="rounded-xl border border-mm-line bg-mm-page/50 p-4">
+              <div key={q.id} className="rounded-xl border border-mm-line bg-mm-page/50 p-4 space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h3 className="text-sm font-bold text-ink">{q.prompt || q.id}</h3>
                   <span className="rounded border border-mm-line bg-white px-2 py-0.5 text-[10px] font-semibold text-mm-muted">
@@ -300,18 +365,68 @@ export function VihaanDiagnosticExamRunner({
                 <p className="mt-1.5 text-xs text-mm-muted">
                   {q.explanation || "No explanation available."}
                 </p>
+                {solution && solution.workedSolution.length > 0 && (
+                  <div
+                    data-testid={`vihaan-worked-solution-${q.id}`}
+                    className="rounded-lg border border-mm-line/80 bg-white p-3"
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
+                      Worked solution
+                    </p>
+                    <ol className="mt-1 list-decimal space-y-1 pl-4 text-xs text-ink">
+                      {solution.workedSolution.map((step, index) => (
+                        <li key={index}>{step}</li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+                {solution?.rubric && (
+                  <div
+                    data-testid={`vihaan-writing-rubric-${q.id}`}
+                    className="rounded-lg border border-mm-line/80 bg-white p-3"
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
+                      Writing rubric (1–5 scale)
+                    </p>
+                    <p className="mt-1 text-xs text-ink">{solution.rubric}</p>
+                  </div>
+                )}
+                {solution?.sampleResponse && (
+                  <div
+                    data-testid={`vihaan-sample-response-${q.id}`}
+                    className="rounded-lg border border-mm-line/80 bg-white p-3"
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-mm-muted">
+                      Sample planning response
+                    </p>
+                    <p className="mt-1 text-xs text-ink">{solution.sampleResponse}</p>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
 
         <div className="flex justify-end">
-          <Link
-            href="/student/vihaan"
-            className="inline-flex items-center gap-2 rounded-btn border border-primary/30 bg-white px-3.5 py-2 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
-          >
-            Back to dashboard
-          </Link>
+          {onExit ? (
+            <button
+              type="button"
+              onClick={() => {
+                useExamStore.getState().resetExam();
+                onExit();
+              }}
+              className="inline-flex items-center gap-2 rounded-btn border border-primary/30 bg-white px-3.5 py-2 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
+            >
+              Back to dashboard
+            </button>
+          ) : (
+            <Link
+              href="/student/vihaan"
+              className="inline-flex items-center gap-2 rounded-btn border border-primary/30 bg-white px-3.5 py-2 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
+            >
+              Back to dashboard
+            </Link>
+          )}
         </div>
       </div>
     );
@@ -347,12 +462,25 @@ export function VihaanDiagnosticExamRunner({
           <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
             Question {currentQuestionIndex + 1} of {questionsState.length}
           </span>
-          <Link
-            href="/student/vihaan"
-            className="inline-flex items-center gap-1 rounded-btn border border-mm-line bg-white px-2.5 py-1 text-[11px] font-semibold text-mm-muted hover:text-ink"
-          >
-            Exit
-          </Link>
+          {onExit ? (
+            <button
+              type="button"
+              onClick={() => {
+                useExamStore.getState().resetExam();
+                onExit();
+              }}
+              className="inline-flex items-center gap-1 rounded-btn border border-mm-line bg-white px-2.5 py-1 text-[11px] font-semibold text-mm-muted hover:text-ink"
+            >
+              Exit
+            </button>
+          ) : (
+            <Link
+              href="/student/vihaan"
+              className="inline-flex items-center gap-1 rounded-btn border border-mm-line bg-white px-2.5 py-1 text-[11px] font-semibold text-mm-muted hover:text-ink"
+            >
+              Exit
+            </Link>
+          )}
         </div>
       </div>
 

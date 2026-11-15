@@ -1,0 +1,1498 @@
+{
+  "kind": "vihaan_pilot_publication_manifest",
+  "schemaVersion": 1,
+  "batchId": "vihaan-pilot-01",
+  "revision": 1,
+  "draftBatchHash": "50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b",
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-15T22:40:54.436Z",
+  "publishedAt": "2026-11-15T22:40:54.436Z",
+  "adr017Evidence": [
+    {
+      "questionId": "vihaan-p01-m01",
+      "draftItemHash": "e0bd7ac9e4f8580fef513d564b791eff2e1c47407e6b57abd5dc738dda1e9a84",
+      "draftQuestionHash": "32062be03541239cf9baa5596978d6f65da375384886be9fc4be601ae279640f",
+      "publishedQuestionHash": "a2e2c233db7c677d85ae959f1b9915b5d9ad13e5ce5a866f3ceab351dec85cb9",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-m02",
+      "draftItemHash": "b4d66bde462de64db23aa18bcc98f65d636891176487fe62288cd8411a2b8824",
+      "draftQuestionHash": "9870b81177838c6b473f8ae13948eb4bf1ab23f135063c4a619aa25bdbc6227c",
+      "publishedQuestionHash": "faf3658f8d54681263a3cb7f27c64bc37e97ccaefdfcf40069e105d5f8f2e8b7",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-m03",
+      "draftItemHash": "930f7452418fb28dfef0c1c26755572f2f6611e51840fc185a6e595a19d160ce",
+      "draftQuestionHash": "2e3d6705ce801e2f46645ab651aa0b98644139d750aeb11a46bb5a294e82b8df",
+      "publishedQuestionHash": "eb9b1e53c4f57a00a89e1d615cdfb769f9f9bffc6f76c87c78cca3ed290b62c8",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-m04",
+      "draftItemHash": "f604f78c07abe48411d54a881502f6f587d207e5997ea78a2552328754ff15bf",
+      "draftQuestionHash": "14e2b7d08b4cec09ee9e7dddd8961cc13f339751209362dd74e33bb42fef0e10",
+      "publishedQuestionHash": "750e7e3bf518a86332d0f165425edddafb6a05f536b8fb54ad3c5a4561922090",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-m05",
+      "draftItemHash": "f53b2a340a7d6f885fb7aba81fe6627b2cb84be1a661d7d56d948f267f95202f",
+      "draftQuestionHash": "854a0c2e82f3a5824865b76e358187bb37913094c88fd1ba2f95fb4473f33eef",
+      "publishedQuestionHash": "247da5db2b7063e4bff8fb1f9ff4bd9c21ba371b3d12c207fee04385d72a17e8",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-m06",
+      "draftItemHash": "50d51489651dc839a55970e87b2236f2785a815c373046e3aaa25512b76ed7a6",
+      "draftQuestionHash": "50e7b82b2d4d060b5f70da15feb29c16bd4307dc8f61b9ca181ceb06dafd4568",
+      "publishedQuestionHash": "d3e1cb165aa86c35ce10f7fb739ce47e3aac719cdb6910028b6c9cae5857f89b",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-n01",
+      "draftItemHash": "4bbda3069acb1d12d92fe4d36ea22eb94d2548a55edd3f6d0c6ad9d5a22d9679",
+      "draftQuestionHash": "ebd62cc62ce430393dd5bf996cabad2178b2dc749ce797f0854722f540c1984e",
+      "publishedQuestionHash": "b9a8a3cc394fc2c8193bfde3705b1f7590d016e08072c1880bfea21e9dae7c89",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-n02",
+      "draftItemHash": "e719f175549215ec06ed50e432079f2fd6d96bbf200718dbf85a8a52d9abd18e",
+      "draftQuestionHash": "5473d09270d0ffc65de832bd5b0cf4760d002fcbd0627204da5c56a0ebbd2fe8",
+      "publishedQuestionHash": "df0251aec05e59c4c28c84ffceaace8bfa595baeee681284524995d72d459ab9",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-n03",
+      "draftItemHash": "3bfba34b86db1fb602b50c4cf229cf8695ec732e1f1e44119984833b80a9cca4",
+      "draftQuestionHash": "8c7ea88878d539ad98b5d48234acf5a21ec51bfdc6282469740ffca1ffc96d3f",
+      "publishedQuestionHash": "22c9b7e71f2ae899cd1a221838e3b6666af6f461e12d9884cade0f352ba8beb8",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-n04",
+      "draftItemHash": "af9c16ee8adae9acb6b73d289dae2f55eb18415daabfdc96d6f2062b453fc631",
+      "draftQuestionHash": "bde0ef5fb8888909ff2c93b8299ae0816eb30b01dc4f13fd8f63046ea6e1deb1",
+      "publishedQuestionHash": "82dacd5bc0ed5c7b23f94a1ffed8e6ee5b9f7b004a8dc4345f3effc3a0bf298a",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-n05",
+      "draftItemHash": "04da351d5d1aca1e3e6e56236e13f23946d14207d68cc9695c64ad6fdf9d4de6",
+      "draftQuestionHash": "96b2f143f1a0b06bcee765705d441e3ba0bfbea1ed453cbfe9e727510ba62c21",
+      "publishedQuestionHash": "a5f515a0fbdb92abbef859db8dfb2bc7ede11e3f4e3ab26cf7d6e79d9bef844d",
+      "recomputePassed": true,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-v01",
+      "draftItemHash": "604dd3e4d35f58bd0c42bcf732b505f53e718b570c4d4346ceae40988cb473ed",
+      "draftQuestionHash": "8c7196e0447fb5e9f6538821230e07b5fe8b356083f96b88f208000fa3d25e87",
+      "publishedQuestionHash": "987bbcfb793d354e63e07a862e0df8b75391565ca5c31bed8393b2a34e266d72",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-v02",
+      "draftItemHash": "1d95f5ec441fc243429a4f96efaa9e7846d81293e339e79250491be4ec489273",
+      "draftQuestionHash": "c3e512aa07f56fff5fb61ddbe840c15a5c14883640966db94477d7a2107a22ed",
+      "publishedQuestionHash": "2ba149717130edf4528178adde682f1bfd89ac6efce19a28a2af419a3ff27539",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-v03",
+      "draftItemHash": "c79396f1efa3c7b7696925de36fc50767138c44c3fce52ece7912ef4ebc4f543",
+      "draftQuestionHash": "28124f738a1586cea7c84be6b5e99a102752af42f4a7ebf84db67985f6421482",
+      "publishedQuestionHash": "282f11df2465795325783aca891f8d44be86b6542720219f2ee7c355e64afa36",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-v04",
+      "draftItemHash": "de49144a6d7cf498ec8e95619b70ccb2798a3f255dab67f319c72e7f2bbafafb",
+      "draftQuestionHash": "5491805659bdaa2cb57a5fddc9b886ba536fd4d0c8b843e7fd7d3a3e9e91bb63",
+      "publishedQuestionHash": "9c47694ea21ae951d6861ea77e1b750b2b081d200113d531989ea13d4995c013",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-r01",
+      "draftItemHash": "b6c0f9a7e39330c677acf55a476a30040a44889eded49401818cc63e664df858",
+      "draftQuestionHash": "303d5898859aa104a06b141123e5be2a3b1f5d50ca350eeb9a84a7a23502b678",
+      "publishedQuestionHash": "122d2b8acc290334a335ba7e18501ab6df86965defda9e36f934d68aa5e9bd06",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-r02",
+      "draftItemHash": "a2117a5410d908c455a1b8e7301617339720b5dea7b72762abb21615c61bb71a",
+      "draftQuestionHash": "1d4e7b2ce3f7ee70874acf93c69fda0b6824c4f9efc831f5766fd3ff4fc771cf",
+      "publishedQuestionHash": "9cec1bed4a14bab5f10c9bce11b2767586d58c3887ac1ad8991abcd5a8e5c8b3",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-r03",
+      "draftItemHash": "7db45b215e3a90abd7eed18efbbdccdd30d1c970f1d77ad7d928a73dd9d50771",
+      "draftQuestionHash": "e374ecb546bae934df6b74564ea3b28c74637e12d178a5a96987111c27ee3cb0",
+      "publishedQuestionHash": "144ced57dd635b90e6e813740143ad7e8d4a51477d0063a6b4b8ecb303a57fb3",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-w01",
+      "draftItemHash": "b29ff3ecb485c49fde66ae7042ea39b18b96ba9c65a41b335f77337b1202b4f5",
+      "draftQuestionHash": "280c93071f83305c0a6334178dc569ad9e841025fd3420d438357e06530b36e1",
+      "publishedQuestionHash": "e9ca3e6bec20365479fb6b7ab54d68072e823439111cf0fe5657aa364ad501b4",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    },
+    {
+      "questionId": "vihaan-p01-w02",
+      "draftItemHash": "5b09b256d6ef5371cbd431028ab492c559a7d225cecb57045a25eb9263566509",
+      "draftQuestionHash": "58b4c7eb95e9d4ac16635a03f8b51823d0de9808cbb62a3cf188f4a8c4a163a5",
+      "publishedQuestionHash": "2b2035191a8364b2173c3d09c790afd40adcb065e60cd01114e558486d363acc",
+      "recomputePassed": null,
+      "editorialInterpretationVerified": true,
+      "originalityVerified": true,
+      "ageSuitabilityVerified": true
+    }
+  ],
+  "approvals": [
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-m01",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "a2e2c233db7c677d85ae959f1b9915b5d9ad13e5ce5a866f3ceab351dec85cb9",
+      "sourceManifestHash": "e0bd7ac9e4f8580fef513d564b791eff2e1c47407e6b57abd5dc738dda1e9a84",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-m01",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A club has 84 badges. It gives away one quarter of them, then gives away two sevenths of the remaining badges. How many badges are left?",
+        "options": [
+          {
+            "id": "a",
+            "text": "39"
+          },
+          {
+            "id": "b",
+            "text": "45"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "63"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "One quarter of 84 is 21, leaving 63. Two sevenths of 63 is 18. Subtract 18 from 63 to leave 45 badges.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "Fraction of a remainder",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "8660ce830e39d50163b8462e773733444c19e2a3dd6d4b51f0154ab4e72eae74"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-m02",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "faf3658f8d54681263a3cb7f27c64bc37e97ccaefdfcf40069e105d5f8f2e8b7",
+      "sourceManifestHash": "b4d66bde462de64db23aa18bcc98f65d636891176487fe62288cd8411a2b8824",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-m02",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Red and blue tiles are in the ratio 3:5. There are 24 more blue tiles than red tiles. How many tiles are there altogether?",
+        "options": [
+          {
+            "id": "a",
+            "text": "64"
+          },
+          {
+            "id": "b",
+            "text": "72"
+          },
+          {
+            "id": "c",
+            "text": "96"
+          },
+          {
+            "id": "d",
+            "text": "120"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The difference of two ratio parts represents 24 tiles, so one part is 12 tiles. There are eight parts altogether: 8 times 12 is 96.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "Scaling a ratio",
+          "skill": "scholarship.maths-ratios-rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "0b7079e644c9a596c23b830cc4c3d3320ef5d624e580f718481b0d62ddbb39ac"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-m03",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "eb9b1e53c4f57a00a89e1d615cdfb769f9f9bffc6f76c87c78cca3ed290b62c8",
+      "sourceManifestHash": "930f7452418fb28dfef0c1c26755572f2f6611e51840fc185a6e595a19d160ce",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-m03",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A rectangular garden is 3 metres longer than it is wide. Its perimeter is 34 metres. What is its area in square metres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "55"
+          },
+          {
+            "id": "b",
+            "text": "60"
+          },
+          {
+            "id": "c",
+            "text": "70"
+          },
+          {
+            "id": "d",
+            "text": "100"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Half the perimeter is 17 metres, the sum of length and width. Remove the extra 3 metres: twice the width is 14 metres. Width is 7 metres and length is 10 metres. Area is 7 times 10, or 70 square metres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "Perimeter and area",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "72f79dcf5bd2c7c1a2f4b09a13e37ecb3cc5a66cf4b5784d945db4ed88cfec68"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-m04",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "750e7e3bf518a86332d0f165425edddafb6a05f536b8fb54ad3c5a4561922090",
+      "sourceManifestHash": "f604f78c07abe48411d54a881502f6f587d207e5997ea78a2552328754ff15bf",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-m04",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A science kit costs $48 before a discount of 25%. Delivery costs $6 and is not discounted. What is the total cost after the discount, including delivery?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$30"
+          },
+          {
+            "id": "b",
+            "text": "$36"
+          },
+          {
+            "id": "c",
+            "text": "$40.50"
+          },
+          {
+            "id": "d",
+            "text": "$42"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "A quarter of $48 is $12, so the discounted kit costs $36. Add the full $6 delivery charge to obtain $42.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "Discount then fixed cost",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "27b8233cd54bb05780a8f0807ca1e7ce05b44885aba9241ad621e5f377a66582"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-m05",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "247da5db2b7063e4bff8fb1f9ff4bd9c21ba371b3d12c207fee04385d72a17e8",
+      "sourceManifestHash": "f53b2a340a7d6f885fb7aba81fe6627b2cb84be1a661d7d56d948f267f95202f",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-m05",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A bag contains 3 green counters and 2 yellow counters. Two counters are drawn at random without replacement. What is the probability that both are yellow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/10"
+          },
+          {
+            "id": "b",
+            "text": "1/5"
+          },
+          {
+            "id": "c",
+            "text": "2/5"
+          },
+          {
+            "id": "d",
+            "text": "4/25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The first counter is yellow with probability 2/5. If it is yellow, one yellow remains among four counters. Multiply 2/5 by 1/4 to get 1/10.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "Two draws without replacement",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "6b2236f23b4978d5338d57cab3c5362bfa69e10f582da0bb78e06c38ae7e6eda"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-m06",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "d3e1cb165aa86c35ce10f7fb739ce47e3aac719cdb6910028b6c9cae5857f89b",
+      "sourceManifestHash": "50d51489651dc839a55970e87b2236f2785a815c373046e3aaa25512b76ed7a6",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-m06",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Three identical notebooks and a $4 pen cost $25 altogether. What is the cost of one notebook?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$6"
+          },
+          {
+            "id": "b",
+            "text": "$7"
+          },
+          {
+            "id": "c",
+            "text": "$8"
+          },
+          {
+            "id": "d",
+            "text": "$9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Remove the $4 pen cost from $25, leaving $21 for three notebooks. Divide $21 equally among three notebooks: each costs $7.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "Equal groups with a fixed amount",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "85659a22a476da4aaa35886680e668d544a1604e0e83649a79d10710a66f2dc4"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-n01",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "b9a8a3cc394fc2c8193bfde3705b1f7590d016e08072c1880bfea21e9dae7c89",
+      "sourceManifestHash": "4bbda3069acb1d12d92fe4d36ea22eb94d2548a55edd3f6d0c6ad9d5a22d9679",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-n01",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A sequence begins 6, 11, 18, 27. The differences between consecutive terms are consecutive odd numbers, beginning with 5. What is the next term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "37"
+          },
+          {
+            "id": "c",
+            "text": "38"
+          },
+          {
+            "id": "d",
+            "text": "40"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The differences are 5, 7 and 9. The stated rule makes the next difference 11. Add 11 to 27 to obtain 38.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "Increasing differences",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "5d80fca9c38aa035964cbd731784c03b6518d4faf39abae9ee1d4c4ad0136d93"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-n02",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "df0251aec05e59c4c28c84ffceaace8bfa595baeee681284524995d72d459ab9",
+      "sourceManifestHash": "e719f175549215ec06ed50e432079f2fd6d96bbf200718dbf85a8a52d9abd18e",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-n02",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Each row follows the same rule: multiply the first number by the second, then subtract the first number. The rows are (4, 6, 20), (7, 3, 14) and (9, 5, ?). What replaces the question mark?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "40"
+          },
+          {
+            "id": "c",
+            "text": "41"
+          },
+          {
+            "id": "d",
+            "text": "45"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Check the rule: 4 times 6 minus 4 is 20, and 7 times 3 minus 7 is 14. For the last row, 9 times 5 minus 9 is 36.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "Infer and apply a row rule",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "6f05f848522bd68753480e0f2ce9206d67ac8bd9b322cf2d7cec337bf27d4952"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-n03",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "22c9b7e71f2ae899cd1a221838e3b6666af6f461e12d9884cade0f352ba8beb8",
+      "sourceManifestHash": "3bfba34b86db1fb602b50c4cf229cf8695ec732e1f1e44119984833b80a9cca4",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-n03",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A two-digit number has digits whose sum is 11. Reversing its digits produces a number 27 smaller than the original. What is the original number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "47"
+          },
+          {
+            "id": "b",
+            "text": "56"
+          },
+          {
+            "id": "c",
+            "text": "74"
+          },
+          {
+            "id": "d",
+            "text": "83"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "A reversal difference of 27 means the tens digit exceeds the units digit by 3, because each digit-place difference is multiplied by 9. The digits sum to 11 and differ by 3, so they are 7 and 4. The original is 74; 74 minus 47 is 27.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "Digit constraints",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "2a92df9933bc50bcdcd820817d8c1607a7365c3aa2a41983170a7092ad4a6f6d"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-n04",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "82dacd5bc0ed5c7b23f94a1ffed8e6ee5b9f7b004a8dc4345f3effc3a0bf298a",
+      "sourceManifestHash": "af9c16ee8adae9acb6b73d289dae2f55eb18415daabfdc96d6f2062b453fc631",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-n04",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Two identical sealed boxes and 3 loose blocks weigh the same as 19 loose blocks. Each loose block weighs 50 grams. What is the weight of one sealed box in grams?",
+        "options": [
+          {
+            "id": "a",
+            "text": "350"
+          },
+          {
+            "id": "b",
+            "text": "400"
+          },
+          {
+            "id": "c",
+            "text": "475"
+          },
+          {
+            "id": "d",
+            "text": "800"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Remove the weight of 3 blocks from both sides. Two boxes weigh as much as 16 blocks. One box weighs as much as 8 blocks: 8 times 50 grams is 400 grams.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "Balance equations",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "af7a211b71fe11f44770820d40fd31090680d31f5e0f9b870e9e73a7a781a83b"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-n05",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "a5f515a0fbdb92abbef859db8dfb2bc7ede11e3f4e3ab26cf7d6e79d9bef844d",
+      "sourceManifestHash": "04da351d5d1aca1e3e6e56236e13f23946d14207d68cc9695c64ad6fdf9d4de6",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-n05",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A bead pattern repeats red, blue, blue, green from position 1 onwards. What colour is the bead at position 78?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red"
+          },
+          {
+            "id": "b",
+            "text": "Blue"
+          },
+          {
+            "id": "c",
+            "text": "Green"
+          },
+          {
+            "id": "d",
+            "text": "Cannot be determined"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Each cycle contains four beads. Seventy-eight divided by four leaves remainder 2. The second position in every cycle is blue.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "Repeated cycle",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "cdffb21ae587964e1d0076d78250ef3b13413088557af1dc3902ee1b2fb6634d"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-v01",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "987bbcfb793d354e63e07a862e0df8b75391565ca5c31bed8393b2a34e266d72",
+      "sourceManifestHash": "604dd3e4d35f58bd0c42bcf732b505f53e718b570c4d4346ceae40988cb473ed",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-v01",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "A sieve separates particles by size. A filter separates particles from a liquid. Complete the analogy using the tool-to-material relationship: sieve is to flour as filter is to _____.",
+        "options": [
+          {
+            "id": "a",
+            "text": "water"
+          },
+          {
+            "id": "b",
+            "text": "paper"
+          },
+          {
+            "id": "c",
+            "text": "bucket"
+          },
+          {
+            "id": "d",
+            "text": "mesh"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The relationship is between a separating tool and the material it processes. A sieve can process flour; a filter can process water. Paper and mesh can be parts of tools, and a bucket is a container.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "Tool and material relationship",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "9b465cf2a1a4e7555ba1228015818aae1538589b4666329693c55547c8fca905"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-v02",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "2ba149717130edf4528178adde682f1bfd89ac6efce19a28a2af419a3ff27539",
+      "sourceManifestHash": "1d95f5ec441fc243429a4f96efaa9e7846d81293e339e79250491be4ec489273",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-v02",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Every member of the astronomy group keeps a logbook. No person who keeps a logbook leaves it in the rain. Mira is a member of the astronomy group. Which statement must be true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Mira never goes outside in the rain."
+          },
+          {
+            "id": "b",
+            "text": "Everyone who keeps a logbook belongs to the astronomy group."
+          },
+          {
+            "id": "c",
+            "text": "Mira does not leave her logbook in the rain."
+          },
+          {
+            "id": "d",
+            "text": "Mira writes in her logbook every day."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Membership implies that Mira keeps a logbook. The second rule applies to all people who keep one. Therefore Mira does not leave her logbook in the rain. The rules say nothing about going outside or writing daily, and the converse of the first rule does not follow.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "Necessary conclusion",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "2d6ede71bd36a5dfc644a41222702b90daa9583b18f7e012fe1106405c8418b1"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-v03",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "282f11df2465795325783aca891f8d44be86b6542720219f2ee7c355e64afa36",
+      "sourceManifestHash": "c79396f1efa3c7b7696925de36fc50767138c44c3fce52ece7912ef4ebc4f543",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-v03",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "In the sentence, \"Although she disagreed, Asha gave a measured reply rather than shouting\", which word is closest in meaning to measured?",
+        "options": [
+          {
+            "id": "a",
+            "text": "lengthy"
+          },
+          {
+            "id": "b",
+            "text": "calm"
+          },
+          {
+            "id": "c",
+            "text": "counted"
+          },
+          {
+            "id": "d",
+            "text": "uncertain"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The contrast with shouting shows that measured describes a controlled manner of replying. Calm is the closest choice here; measured does not describe physical measurement or reply length.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "Meaning in context",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "5c7e79f16b0fbe9c4168637353efb658044ebaeda612f02d7f9669328c8aa347"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-v04",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "9c47694ea21ae951d6861ea77e1b750b2b081d200113d531989ea13d4995c013",
+      "sourceManifestHash": "de49144a6d7cf498ec8e95619b70ccb2798a3f255dab67f319c72e7f2bbafafb",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-v04",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Four books, Atlas, Birch, Coral and Drift, stand in a row. Atlas is somewhere to the left of Coral. Birch is immediately to the right of Atlas. Drift is not at either end. Which order, from left to right, satisfies all the clues?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Atlas, Birch, Drift, Coral"
+          },
+          {
+            "id": "b",
+            "text": "Atlas, Drift, Birch, Coral"
+          },
+          {
+            "id": "c",
+            "text": "Drift, Atlas, Birch, Coral"
+          },
+          {
+            "id": "d",
+            "text": "Coral, Atlas, Birch, Drift"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Atlas and Birch must be adjacent in that order. This removes the second choice. Drift cannot be at an end, which removes the third and fourth choices. The first also puts Atlas left of Coral.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "Order from constraints",
+          "skill": "scholarship.vr-word-relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "552fc19cd7b765b42285b3612f22c14d6d994c4146db2d83df92b2571a292d46"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-r01",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "122d2b8acc290334a335ba7e18501ab6df86965defda9e36f934d68aa5e9bd06",
+      "sourceManifestHash": "b6c0f9a7e39330c677acf55a476a30040a44889eded49401818cc63e664df858",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-r01",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "According to the passage, what actually stopped the stool wobbling after the card was removed?",
+        "stimulus": {
+          "title": "The repair table",
+          "body": "On Saturday, Leila carried a wobbling stool to the neighbourhood repair table. She expected Arun, the volunteer, to replace its shortest leg. Instead, he set the stool on a flat board and slid a folded card beneath one foot. The wobble stopped. He checked the legs against one another, then pointed to a loose joint. \"The legs match, but this one shifts when you sit,\" he said.\n\nLeila reached for the glue, but Arun asked her to hold the joint while he checked it. After tightening a screw, he removed the card. The stool stood firm. At the next table, someone cheered as an old radio crackled into life.\n\n\"I nearly bought a new stool,\" Leila said. Arun placed the unused glue back on the shelf. \"Sometimes the useful part is the pause before choosing a tool.\"\n\nThat afternoon, Leila found her brother pulling at a stuck zip on his bag. She started to tell him to pull harder, then stopped. A corner of fabric was caught between the teeth. She eased it free, and the zip moved. The stool had stayed at home, but she felt she had brought something from the repair table. For once, she was pleased that her first idea had been wrong.",
+          "attribution": "MindMosaic original"
+        },
+        "options": [
+          {
+            "id": "a",
+            "text": "Replacing its shortest leg"
+          },
+          {
+            "id": "b",
+            "text": "Adding glue to all four legs"
+          },
+          {
+            "id": "c",
+            "text": "Putting it on the flat board"
+          },
+          {
+            "id": "d",
+            "text": "Tightening a screw at the loose joint"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Arun identifies a shifting loose joint, then tightens a screw before removing the card. The stool stands firm afterwards. No leg is replaced and the glue is unused.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "Locate decisive evidence",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "a6c66b6fa2d28088842bb22965e009ad42d59ab49f755a90dad1d8422472dc35"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-r02",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "9cec1bed4a14bab5f10c9bce11b2767586d58c3887ac1ad8991abcd5a8e5c8b3",
+      "sourceManifestHash": "a2117a5410d908c455a1b8e7301617339720b5dea7b72762abb21615c61bb71a",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-r02",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "What has Leila most likely brought from the repair table in the final paragraph?",
+        "stimulus": {
+          "title": "The repair table",
+          "body": "On Saturday, Leila carried a wobbling stool to the neighbourhood repair table. She expected Arun, the volunteer, to replace its shortest leg. Instead, he set the stool on a flat board and slid a folded card beneath one foot. The wobble stopped. He checked the legs against one another, then pointed to a loose joint. \"The legs match, but this one shifts when you sit,\" he said.\n\nLeila reached for the glue, but Arun asked her to hold the joint while he checked it. After tightening a screw, he removed the card. The stool stood firm. At the next table, someone cheered as an old radio crackled into life.\n\n\"I nearly bought a new stool,\" Leila said. Arun placed the unused glue back on the shelf. \"Sometimes the useful part is the pause before choosing a tool.\"\n\nThat afternoon, Leila found her brother pulling at a stuck zip on his bag. She started to tell him to pull harder, then stopped. A corner of fabric was caught between the teeth. She eased it free, and the zip moved. The stool had stayed at home, but she felt she had brought something from the repair table. For once, she was pleased that her first idea had been wrong.",
+          "attribution": "MindMosaic original"
+        },
+        "options": [
+          {
+            "id": "a",
+            "text": "A spare piece of folded card"
+          },
+          {
+            "id": "b",
+            "text": "A habit of examining a problem before acting"
+          },
+          {
+            "id": "c",
+            "text": "A belief that new furniture is always wasteful"
+          },
+          {
+            "id": "d",
+            "text": "A rule that glue should never be used"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "She pauses before advising her brother and checks the zip, just as Arun paused to inspect the stool. The final phrase refers to this learned approach, not an object or an absolute rule about glue or buying things.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "Transfer of learning",
+          "skill": "scholarship.rc-character-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "6c23480e2b60303afff05146354e58dc15fc7f377efeca60d06995f30419f8ee"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-r03",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "144ced57dd635b90e6e813740143ad7e8d4a51477d0063a6b4b8ecb303a57fb3",
+      "sourceManifestHash": "7db45b215e3a90abd7eed18efbbdccdd30d1c970f1d77ad7d928a73dd9d50771",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-r03",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Why does the writer mention that Arun puts the unused glue back on the shelf?",
+        "stimulus": {
+          "title": "The repair table",
+          "body": "On Saturday, Leila carried a wobbling stool to the neighbourhood repair table. She expected Arun, the volunteer, to replace its shortest leg. Instead, he set the stool on a flat board and slid a folded card beneath one foot. The wobble stopped. He checked the legs against one another, then pointed to a loose joint. \"The legs match, but this one shifts when you sit,\" he said.\n\nLeila reached for the glue, but Arun asked her to hold the joint while he checked it. After tightening a screw, he removed the card. The stool stood firm. At the next table, someone cheered as an old radio crackled into life.\n\n\"I nearly bought a new stool,\" Leila said. Arun placed the unused glue back on the shelf. \"Sometimes the useful part is the pause before choosing a tool.\"\n\nThat afternoon, Leila found her brother pulling at a stuck zip on his bag. She started to tell him to pull harder, then stopped. A corner of fabric was caught between the teeth. She eased it free, and the zip moved. The stool had stayed at home, but she felt she had brought something from the repair table. For once, she was pleased that her first idea had been wrong.",
+          "attribution": "MindMosaic original"
+        },
+        "options": [
+          {
+            "id": "a",
+            "text": "To show that the repair has failed"
+          },
+          {
+            "id": "b",
+            "text": "To suggest that Arun dislikes sharing tools"
+          },
+          {
+            "id": "c",
+            "text": "To reinforce that inspection avoided an unnecessary action"
+          },
+          {
+            "id": "d",
+            "text": "To explain why the radio starts working"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Leila had reached for glue before Arun checked the joint. Returning it unused highlights that the repair needed a tightened screw instead. This detail supports the value of inspecting first; it does not connect the glue to the radio or suggest failure.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "Purpose of a repeated detail",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-pilot",
+            "year-5-stretch"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "ae07464066d355a567da2e995173eaea6db3fac18a753e124a5fec9bd75b5b03"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-w01",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "e9ca3e6bec20365479fb6b7ab54d68072e823439111cf0fe5657aa364ad501b4",
+      "sourceManifestHash": "b29ff3ecb485c49fde66ae7042ea39b18b96ba9c65a41b335f77337b1202b4f5",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-w01",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Write a story in which a character decides not to take a shortcut. Show what makes the decision difficult and how it changes what happens. You may use a real or imaginary setting.",
+        "instructions": "Allow 20 minutes: 3 to plan, 14 to write and 3 to edit. These are practice timings, not official examination timings.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression version 1: assess punctuation, creativity, construction, grammar, spelling and relevance independently on the 1–5 scale. Use its 1, 3 and 5 anchors; 2 and 4 indicate intermediate performance. This practice rubric is not an official examination score.",
+          "sampleResponse": "Possible opening, not a required answer: The gate to the oval was open, and Niko could already hear the starting whistle. He stopped when he saw the newly planted seedlings along the track."
+        },
+        "explanation": "Plan a character, a tempting shortcut and a meaningful consequence. Use specific actions and dialogue to reveal the choice rather than merely stating a lesson. Check that the ending follows from the choice; revise sentence boundaries, tense and spelling.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Narrative choices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 1200,
+          "tags": [
+            "vihaan-pilot",
+            "manual-assessment"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "23f2407adb985b643d4b85c88f179e99235fc24283adfbeaf43f1c6c91f6a0b1"
+    },
+    {
+      "kind": "human_publication_approval",
+      "schemaVersion": 1,
+      "questionId": "vihaan-p01-w02",
+      "revision": 1,
+      "approvedBy": "Vishwas Joshi",
+      "approvedAt": "2026-11-15T22:40:54.436Z",
+      "contentHash": "2b2035191a8364b2173c3d09c790afd40adcb065e60cd01114e558486d363acc",
+      "sourceManifestHash": "5b09b256d6ef5371cbd431028ab492c559a7d225cecb57045a25eb9263566509",
+      "checks": {
+        "correctness": true,
+        "originality": true,
+        "ageAppropriateness": true
+      },
+      "question": {
+        "id": "vihaan-p01-w02",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "published",
+        "origin": "original_seed",
+        "prompt": "Your school can turn one unused room into either a quiet reading room or a space for group projects. Write a letter to the principal recommending one option. Explain two developed reasons, acknowledge a reasonable advantage of the other option, and respond to it.",
+        "instructions": "Allow 20 minutes: 3 to plan, 14 to write and 3 to edit. These are practice timings, not official examination timings.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression version 1: assess punctuation, creativity, construction, grammar, spelling and relevance independently on the 1–5 scale. Use its 1, 3 and 5 anchors; 2 and 4 indicate intermediate performance. This practice rubric is not an official examination score.",
+          "sampleResponse": "Possible planning note, not a required answer: A reading room offers a calm place during wet-weather lunch. Group projects also need room, so suggest booking a classroom after lessons for that purpose."
+        },
+        "explanation": "Choose an option and a clear purpose for the letter. Develop two reasons with plausible examples; do not invent survey results as evidence. Acknowledge a benefit of the other option and explain why your recommendation still serves the school. End with a practical request and edit for clear paragraphs, persuasive tone and accurate language.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Persuasive trade-offs",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 1200,
+          "tags": [
+            "vihaan-pilot",
+            "manual-assessment"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "fingerprint": "645e2b4a7a4fa9dd61a0ee0bc7285729b9b2ff2d7e813ea7a651d4ffc9eed387"
+    }
+  ],
+  "manifestFingerprint": "500450ff83c669060d3ba4551190b0f74e7da6f3c030334d1dad76ba6b0937c6"
+}

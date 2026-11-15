@@ -50,8 +50,8 @@ export function VihaanParentDashboard({
             Parent dashboard — progress and recommendations
           </p>
         </div>
-        <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
-          Draft — pending content approval
+        <span className="px-2 py-0.5 rounded border border-emerald-200 bg-emerald-50 text-[10px] font-semibold text-emerald-700">
+          Approved for DEV — pilot-01 (20 items)
         </span>
       </div>
 

@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { VihaanDiagnosticExamRunner } from "@/features/scholarship-prep/components/DiagnosticExamRunner";
+import { getVihaanSolutionsRecord } from "@/features/scholarship-prep/content/questions/vihaan-pilot-questions";
 import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { requireStudent } from "@/features/student/require-student";
-import { getVihaanPracticePlan } from "@/server/vihaan-practice";
+import { getVihaanDiagnosticQuestions } from "@/server/vihaan-practice";
 
 export const metadata: Metadata = {
   title: "Diagnostic Assessment — Vihaan Scholarship Prep",
@@ -24,7 +25,8 @@ export default async function DiagnosticPage() {
     return redirect("/student");
   }
 
-  const approvedQuestions = getVihaanPracticePlan(20, { subject: "numeracy" });
+  const approvedQuestions = getVihaanDiagnosticQuestions(student.userId);
+  const solutionsById = getVihaanSolutionsRecord(approvedQuestions);
 
   return (
     <StudentPortalShell
@@ -33,7 +35,12 @@ export default async function DiagnosticPage() {
       student={student}
       shellData={shellData}
     >
-      <VihaanDiagnosticExamRunner questions={approvedQuestions} subject="numeracy" />
+      <VihaanDiagnosticExamRunner
+        questions={approvedQuestions}
+        subject="mixed"
+        solutionsById={solutionsById}
+        persistToServer
+      />
     </StudentPortalShell>
   );
 }

@@ -20,6 +20,13 @@ export function selectPractice(
   return unique.slice(0,count);
 }
 
+/** Worked solution and optional human-only rubric/sample response for UI review. */
+export interface VihaanSolutionDetail {
+  readonly workedSolution: readonly string[];
+  readonly rubric?: string;
+  readonly sampleResponse?: string;
+}
+
 /** An adapter contract for server-verified persisted attempts, never browser input. */
 export interface RecordedOutcome {
   responseId: string;

@@ -1,11 +1,12 @@
 # Vihaan Scholarship Prep — Canonical Pilot Content Review (`vihaan-pilot-01`)
 
 **Document purpose:** Consolidated human review package for the single canonical Vihaan Scholarship Prep pilot question bank.  
-**Canonical source:** `content/vihaan-scholarship/pilot-01/draft.json` (`batchId: "vihaan-pilot-01"`, version `1`, `approvedBy: null`)  
+**Canonical source:** `content/vihaan-scholarship/pilot-01/draft.json` (`batchId: "vihaan-pilot-01"`, version `1`, post-typo-fix `batchHash: 50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b`)  
+**Published DEV manifest:** `content/vihaan-scholarship/pilot-01/published-manifest.json` (`approvedBy: "Vishwas Joshi"`)  
 **Server-only TypeScript binding:** `src/features/scholarship-prep/content/questions/vihaan-pilot-questions.ts`  
 **Examination target:** Huntingtower Year 7 Academic Scholarship (stretch level `yearLevel: 6` for Year 5 learner Vihaan)  
 **Total questions:** 20 (6 Mathematics / `numeracy`, 5 Numerical Reasoning / `numerical_reasoning`, 4 Verbal Reasoning / `verbal_reasoning`, 3 Reading Comprehension / `reading`, 2 Written Expression / `writing`)  
-**Governance status:** Every item has `status: "draft"` and `approvedBy: null` per ADR-017. **Zero items are published or servable to students.**
+**Governance status:** Source `draft.json` remains `status: "draft"` / `approvedBy: null` for authoring schema checks, while all 20 items have explicit owner approval (`approvedBy: "Vishwas Joshi"`, `correctness: true`, `originality: true`, `ageAppropriateness: true`) recorded in `content/vihaan-scholarship/pilot-01/published-manifest.json` and verified at runtime for allowlisted DEV learners.
 
 > **Reconciliation note:** The earlier non-canonical TypeScript draft bank (`vish-sp-m7-*`, `yearLevel: 7`, legacy subject IDs) has been retired so `content/vihaan-scholarship/pilot-01/draft.json` and `src/features/scholarship-prep/content/questions/vihaan-pilot-questions.ts` share a single schema-validated source of truth.
 
@@ -13,10 +14,10 @@
 
 ## Automated Validation & Governance Summary
 
-- **Schema Validation (`scripts/validate-vihaan-pilot.mts`):** `20/20` automated PASS (`schemaPassed: true`, `0` rejected, `approvedBy: null`).
+- **Schema Validation (`scripts/validate-vihaan-pilot.mts`):** `20/20` automated PASS (`schemaPassed: true`, `0` rejected, `batchHash: 50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b`).
 - **Numeric Recomputation (`m01`–`m06`, `n01`–`n05`):** `11/11` stems recomputed directly from problem wording with unique matching options.
 - **Internal Corpus Duplication Check:** `0` exact or near-duplicate flags across 1,761 comparison records (Jaccard threshold `0.82`).
-- **Pending Human Gate:** Owner sign-off (`approvedBy`) required before any item may advance from `draft` to `approved` / `published`.
+- **Owner Sign-Off & DEV Publication (`published-manifest.json`):** Approved by `"Vishwas Joshi"` across all 20 items (`w01` draft itemHash `b29ff3ecb485c49fde66ae7042ea39b18b96ba9c65a41b335f77337b1202b4f5`, `w02` draft itemHash `5b09b256d6ef5371cbd431028ab492c559a7d225cecb57045a25eb9263566509`; `1–5 scale` rubric typo corrected).
 
 ---
 
@@ -615,11 +616,11 @@
 
 ## Summary Ledger
 
-| Subject | Count | IDs | Status | Approved By |
-|---------|-------|-----|--------|-------------|
-| Numeracy (`numeracy`) | 6 | `vihaan-p01-m01` .. `m06` | `draft` | `null` |
-| Numerical Reasoning (`numerical_reasoning`) | 5 | `vihaan-p01-n01` .. `n05` | `draft` | `null` |
-| Verbal Reasoning (`verbal_reasoning`) | 4 | `vihaan-p01-v01` .. `v04` | `draft` | `null` |
-| Reading Comprehension (`reading`) | 3 | `vihaan-p01-r01` .. `r03` | `draft` | `null` |
-| Written Expression (`writing`) | 2 | `vihaan-p01-w01` .. `w02` | `draft` | `null` |
-| **Total** | **20** | `vihaan-pilot-01` | **`draft`** | **`null`** |
+| Subject | Count | IDs | Draft Status | DEV Published Approval |
+|---------|-------|-----|--------------|------------------------|
+| Numeracy (`numeracy`) | 6 | `vihaan-p01-m01` .. `m06` | `draft` | `Vishwas Joshi` |
+| Numerical Reasoning (`numerical_reasoning`) | 5 | `vihaan-p01-n01` .. `n05` | `draft` | `Vishwas Joshi` |
+| Verbal Reasoning (`verbal_reasoning`) | 4 | `vihaan-p01-v01` .. `v04` | `draft` | `Vishwas Joshi` |
+| Reading Comprehension (`reading`) | 3 | `vihaan-p01-r01` .. `r03` | `draft` | `Vishwas Joshi` |
+| Written Expression (`writing`) | 2 | `vihaan-p01-w01` .. `w02` | `draft` | `Vishwas Joshi` |
+| **Total** | **20** | `vihaan-pilot-01` | **`draft`** | **`Vishwas Joshi` (`20/20`)** |
