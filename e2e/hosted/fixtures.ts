@@ -135,6 +135,8 @@ export async function findUserByEmail(email: string) {
 /** PIN pad entry used by /student-sign-in. */
 export async function enterStudentCredentials(page: Page, loginCode: string, pin: string) {
   await page.getByLabel("Login code").fill(loginCode);
+  // Wait for one settled form: during hydration the streamed panel can briefly appear twice.
+  await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);
   await page.getByLabel(/^Your PIN, number 1 of 6/).click();
   await page.keyboard.type(pin);
 }

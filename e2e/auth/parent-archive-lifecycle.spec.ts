@@ -12,6 +12,8 @@ import { AUTH_APP_ORIGIN } from "../../playwright.auth.config";
 async function childSignsIn(page: import("@playwright/test").Page, code: string, pin: string) {
   await page.goto("/student-sign-in");
   await page.locator("input").nth(0).fill(code);
+  // Wait for one settled form: during hydration the streamed panel can briefly appear twice.
+  await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);
   await page.getByLabel(/^Your PIN, number 1 of 6/).click();
   await page.keyboard.type(pin);
   await page.locator("form button[type=submit]").first().click();

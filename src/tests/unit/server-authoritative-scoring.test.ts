@@ -100,7 +100,8 @@ describe("startServerExam and server-session submission", () => {
     expect(state.questions).toHaveLength(10);
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe("/api/exam/session");
-    expect(JSON.parse(init.body)).toEqual({ config, bankId: "curated" });
+    /* One stable idempotency key per start attempt lets the route dedupe a double submit (#95 3512fb8c). */
+    expect(JSON.parse(init.body)).toEqual({ config, bankId: "curated", idempotencyKey: expect.any(String) });
     expect(JSON.parse(init.body)).not.toHaveProperty("seed");
   });
 

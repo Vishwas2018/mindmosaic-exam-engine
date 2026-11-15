@@ -37,6 +37,8 @@ test("student code+PIN sign-in reaches the dashboard, starts a timed exam, autos
     await page.goto("/student-sign-in");
     await expect(page.getByRole("heading", { name: "Sign in" })).toBeVisible();
     await page.getByLabel("Login code").fill(STUDENT.loginCode);
+    // Wait for one settled form: during hydration the streamed panel can briefly appear twice.
+    await expect(page.getByLabel(/^Your PIN, number \d of 6$/)).toHaveCount(6);
     await page.getByLabel(/^Your PIN, number 1 of 6/).click();
     await page.keyboard.type(e2eEnv.fixturePin);
     await page.getByRole("button", { name: "Sign in and start learning" }).click();

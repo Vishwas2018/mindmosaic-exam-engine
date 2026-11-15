@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { SIDEBAR_NAV_ITEMS, type StudentSidebarKey } from "./StudentSidebar";
+import { studentNavItems, type StudentSidebarKey } from "./StudentSidebar";
 
 /**
  * Bottom navigation for the signed-in student app below 1024px (docs/design.md
@@ -13,8 +13,8 @@ import { SIDEBAR_NAV_ITEMS, type StudentSidebarKey } from "./StudentSidebar";
  * Every target is at least 44px tall and wide. The landmark name differs from
  * the sidebar's "Student navigation" so a screen reader can tell them apart.
  */
-export function StudentBottomNav({ active }: { active: StudentSidebarKey }) {
-  const items = SIDEBAR_NAV_ITEMS.filter((item) => item.shortLabel);
+export function StudentBottomNav({ active, showVihaan = false }: { active: StudentSidebarKey; showVihaan?: boolean }) {
+  const items = studentNavItems(showVihaan).filter((item) => item.shortLabel);
   return (
     <nav
       aria-label="Main sections"
