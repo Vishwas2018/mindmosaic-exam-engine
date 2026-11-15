@@ -104,6 +104,32 @@ export interface AdminSectionAvailability {
   requiredDependency?: string;
 }
 
+/** One programme group's publication gate, as the running deployment resolves it. */
+export interface AdminProgrammeGate {
+  label: string;
+  /** "mixed" when the group has some programmes enforced and some reporting. */
+  mode: "report" | "enforce" | "mixed";
+  /** Authored questions in the group. */
+  authored: number;
+  /** Questions with a verified human approval record. */
+  approved: number;
+  /** Questions a child can actually be served today. */
+  served: number;
+}
+
+/** What the Overview shows. Every figure is read from the bank, the approval records or the gate; none is estimated. */
+export interface AdminOverviewData {
+  /** Authored questions with no verified human approval record. */
+  awaitingPerson: number;
+  authored: number;
+  approved: number;
+  programmes: AdminProgrammeGate[];
+  /** Queues with no backing data yet say so, with what they are waiting for. */
+  flagged: AdminSectionAvailability & { count?: number };
+  writing: AdminSectionAvailability & { count?: number };
+  reports: AdminSectionAvailability;
+}
+
 export interface AdminWorkspaceData {
   source: "dev" | "preview";
   reviewer: {
@@ -112,6 +138,7 @@ export interface AdminWorkspaceData {
     email?: string;
   };
   metrics: AdminMetric[];
+  overview: AdminOverviewData;
   questions: AdminQuestionSummary[];
   approvals: AdminApprovalItem[];
   papers: AdminPaperSummary[];

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { isAdminPreviewEnabled } from "@/features/admin/preview-mode";
 import { getPreviewAdminData } from "@/features/admin/adapters/preview-adapter";
@@ -37,6 +38,9 @@ export default async function AdminHomePage({ searchParams }: AdminHomePageProps
     const previewData = getPreviewAdminData();
     return <AdminWorkspace data={previewData} initialView={initialView} />;
   }
+
+  /* The library is a real page with its own URL; the old in-page view only exists for the design preview. */
+  if (initialView === "library") redirect("/admin/questions");
 
   const devData = await getAuthenticatedDevAdminData();
   return <AdminWorkspace data={devData} initialView={initialView} />;

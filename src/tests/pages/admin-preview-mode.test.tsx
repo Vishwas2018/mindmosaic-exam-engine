@@ -52,12 +52,14 @@ describe("Admin Workspace Preview Gate & Component", () => {
   });
 
   describe("AdminPreviewDashboard component", () => {
-    it("renders the overview artboard by default with metrics and queues", () => {
+    it("renders the overview artboard by default with the three queues and publication status", () => {
       render(<AdminPreviewDashboard initialView="overview" />);
 
-      expect(screen.getByRole("heading", { name: "Editorial & Governance Overview" })).toBeInTheDocument();
-      expect(screen.getByText("Draft questions in review")).toBeInTheDocument();
-      expect(screen.getByText("Awaiting human approval")).toBeInTheDocument();
+      expect(screen.getByRole("heading", { level: 1, name: "Overview" })).toBeInTheDocument();
+      expect(screen.getByRole("region", { name: "Three separate things" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Review queues" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Reported by families" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Publication status" })).toBeInTheDocument();
       expect(screen.getByText("Maya Chen")).toBeInTheDocument();
     });
 
