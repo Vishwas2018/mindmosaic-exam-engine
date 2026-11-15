@@ -8,7 +8,8 @@
  *
  * Scope, by stable identifiers only:
  * - parents whose email is `mm-accept-<runId>-<label>@example.com` (seeded by the suite), or a plus-address
- *   containing `+mmaccept-<runId>-` (registered through the form by the suite);
+ *   containing `+mmaccept-<runId>-`, or a disposable inbox whose local part starts `mmaccept-<runId>-` (both
+ *   registered through the form by the suite);
  * - children linked to those parents through parent_children (their auth users are `childcode+…`).
  * Deleting an auth user cascades to its profile, sessions and attempts. Anything else — mm-dev-* fixtures, other
  * parents' children, accounts that may be real — is never selected. Refuses any project but DEV.
@@ -43,7 +44,7 @@ const H = { apikey: env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${env.
 
 const runPart = run ?? "r[a-z0-9]+";
 const SEEDED = new RegExp(`^mm-accept-${runPart}-[a-z0-9]+@example\\.com$`);
-const REGISTERED = new RegExp(`^[^@+]+\\+mmaccept-${runPart}-[a-z0-9]+@[^@]+$`);
+const REGISTERED = new RegExp(`^([^@+]+\\+)?mmaccept-${runPart}-[a-z0-9]+@[^@]+$`);
 
 async function allUsers() {
   const users = [];

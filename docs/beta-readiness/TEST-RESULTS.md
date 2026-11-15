@@ -3,6 +3,16 @@
 Release candidate: **`5c69c65f`** on `integration/dev-beta-completion` (PR #124), based on `dev` `100287e7`.
 Later commits on the branch change docs, CI and operator scripts only (no application code).
 
+## 2026-11-15 real-email check on `dev` (`7c3eef71`): custom SMTP NOT active
+
+- Spec `e2e/hosted/a0-real-email.spec.ts` (HOSTED_MAILBOX=mailtm: one disposable mail.tm inbox per parent; every
+  link is taken from a delivered email, none minted by the service role). Run `rmwhey4an`.
+- Parent A registered through the form; account created unconfirmed; sign-in before confirming refused; the
+  confirmation email **was delivered**, but **from `noreply@mail.app.supabase.io`**, Supabase's built-in sender.
+  The test stops there by design: with the built-in sender the hourly limit (D-025) still applies.
+- Conclusion: DEV `mfglzabnayacssgertat` is not sending through Resend. Parent B, sign-in after confirmation,
+  recovery and password change were therefore not run. Parent A removed (`cleanup.mjs --run rmwhey4an`); DEV 15 users.
+
 ## 2026-11-15 final: `dev` after merging PR #124 (`7c3eef71`)
 
 - Merged by the owner's explicit approval (squash, head `808b943f`).

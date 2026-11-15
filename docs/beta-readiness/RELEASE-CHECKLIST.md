@@ -13,8 +13,8 @@ local fixture when the row is about hosted DEV.
 | F4 | Hosted A–E + G on the `dev` deployment | **Done except A1–A2** | 14/0/1-skip; A1–A2 need SMTP (F7) |
 | F5 | Scoring + score-forging closed | **Done** | Oracle 21/21; FORGE-RPC 403 `42501` |
 | F6 | Approved-only content; Y5 Q20 excluded | **Done** | Scenario G; no approval record changed |
-| F7 | **Resend SMTP on DEV Auth (D-025)** | **Open, owner** | SMTP-RUNBOOK.md: verified domain, sending key, Supabase token |
-| F8 | **Two real email registrations + recovery** | **Open, after F7** | Needs a readable inbox (Gmail connector re-auth) |
+| F7 | **Resend SMTP on DEV Auth (D-025)** | **Open, owner — not active on DEV** | Run `rmwhey4an`: confirmation mail came from `noreply@mail.app.supabase.io`. SMTP-RUNBOOK.md |
+| F8 | **Two real email registrations + recovery** | **Open, after F7** | `a0-real-email.spec.ts` ready (disposable inboxes) |
 | F9 | **Signed attestation of the 77 items** | **Open, owner** | OWNER-ATTESTATION-77.md, unsigned |
 | F10 | Open P0/P1 defects | **None** besides D-025 | DEFECT-REGISTER.md |
 | F11 | Synthetic data | **Done** | DEV 15 users |
