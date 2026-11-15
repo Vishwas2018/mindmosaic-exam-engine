@@ -1,32 +1,187 @@
 [
-  {"id":"auth-01-welcome","path":"/sign-in","as":"anon"},
-  {"id":"auth-04-parent-sign-in","path":"/sign-in?role=parent","as":"anon"},
-  {"id":"auth-05-signup","path":"/sign-up","as":"anon"},
-  {"id":"auth-welcome-page","path":"/welcome","as":"anon"},
-  {"id":"auth-12-forgot","path":"/auth/forgot","as":"anon"},
-  {"id":"auth-15-student-sign-in","path":"/student-sign-in","as":"anon"},
-  {"id":"auth-18-cant-sign-in","path":"/student-sign-in/help","as":"anon"},
-  {"id":"auth-19-session-expired","path":"/auth/session-expired","as":"anon"},
-  {"id":"auth-20-account-paused","path":"/auth/account-paused","as":"anon"},
-  {"id":"auth-21-switch-account","path":"/switch-account","as":"anon"},
-  {"id":"auth-22-signed-out","path":"/auth/signed-out","as":"anon"},
-  {"id":"parent-06-overview","path":"/parent","as":"parent"},
-  {"id":"parent-11-children","path":"/parent/children","as":"parent"},
-  {"id":"parent-24-account","path":"/parent/account","as":"parent"},
-  {"id":"parent-26-billing-handoff","path":"/parent/account/billing","as":"parent"},
-  {"id":"parent-28-help","path":"/parent/help","as":"parent"},
-  {"id":"parent-settings","path":"/parent/settings","as":"parent"},
-  {"id":"parent-writing","path":"/parent/writing","as":"parent"},
-  {"id":"parent-curriculum-explorer","path":"/parent/curriculum-explorer","as":"parent"},
-  {"id":"billing-05-free","path":"/billing","as":"parent"},
-  {"id":"student-01-my-space","path":"/student","as":"student"},
-  {"id":"student-10-practice-studio","path":"/student/practice","as":"student"},
-  {"id":"student-learn","path":"/student/learn","as":"student"},
-  {"id":"student-exam-centre","path":"/student/exam-preparation","as":"student"},
-  {"id":"student-results","path":"/results","as":"student"},
-  {"id":"student-engagement","path":"/student/engagement","as":"student"},
-  {"id":"student-assignments","path":"/student/assignments","as":"student"},
-  {"id":"student-writing","path":"/student/writing","as":"student"},
-  {"id":"student-learn-maths","path":"/student/learn/mathematics","as":"student"},
-  {"id":"student-tips","path":"/student-tips","as":"student"}
+ {
+  "id": "auth-01-welcome",
+  "path": "/sign-in",
+  "as": "anon"
+ },
+ {
+  "id": "auth-04-parent-sign-in",
+  "path": "/sign-in?role=parent",
+  "as": "anon"
+ },
+ {
+  "id": "auth-05-signup",
+  "path": "/sign-up",
+  "as": "anon"
+ },
+ {
+  "id": "auth-welcome-page",
+  "path": "/welcome",
+  "as": "anon"
+ },
+ {
+  "id": "auth-12-forgot",
+  "path": "/auth/forgot",
+  "as": "anon"
+ },
+ {
+  "id": "auth-15-student-sign-in",
+  "path": "/student-sign-in",
+  "as": "anon"
+ },
+ {
+  "id": "auth-18-cant-sign-in",
+  "path": "/student-sign-in/help",
+  "as": "anon"
+ },
+ {
+  "id": "auth-19-session-expired",
+  "path": "/auth/session-expired",
+  "as": "anon"
+ },
+ {
+  "id": "auth-20-account-paused",
+  "path": "/auth/account-paused",
+  "as": "anon"
+ },
+ {
+  "id": "auth-21-switch-account",
+  "path": "/switch-account",
+  "as": "anon"
+ },
+ {
+  "id": "auth-22-signed-out",
+  "path": "/auth/signed-out",
+  "as": "anon"
+ },
+ {
+  "id": "parent-06-overview",
+  "path": "/parent",
+  "as": "parent"
+ },
+ {
+  "id": "parent-11-children",
+  "path": "/parent/children",
+  "as": "parent"
+ },
+ {
+  "id": "parent-24-account",
+  "path": "/parent/account",
+  "as": "parent"
+ },
+ {
+  "id": "parent-26-billing-handoff",
+  "path": "/parent/account/billing",
+  "as": "parent"
+ },
+ {
+  "id": "parent-28-help",
+  "path": "/parent/help",
+  "as": "parent"
+ },
+ {
+  "id": "parent-settings",
+  "path": "/parent/settings",
+  "as": "parent"
+ },
+ {
+  "id": "parent-writing",
+  "path": "/parent/writing",
+  "as": "parent"
+ },
+ {
+  "id": "parent-curriculum-explorer",
+  "path": "/parent/curriculum-explorer",
+  "as": "parent"
+ },
+ {
+  "id": "billing-05-free",
+  "path": "/billing",
+  "as": "parent"
+ },
+ {
+  "id": "student-01-my-space",
+  "path": "/student",
+  "as": "student"
+ },
+ {
+  "id": "student-10-practice-studio",
+  "path": "/student/practice",
+  "as": "student"
+ },
+ {
+  "id": "student-learn",
+  "path": "/student/learn",
+  "as": "student"
+ },
+ {
+  "id": "student-exam-centre",
+  "path": "/student/exam-preparation",
+  "as": "student"
+ },
+ {
+  "id": "student-results",
+  "path": "/results",
+  "as": "student"
+ },
+ {
+  "id": "student-engagement",
+  "path": "/student/engagement",
+  "as": "student"
+ },
+ {
+  "id": "student-assignments",
+  "path": "/student/assignments",
+  "as": "student"
+ },
+ {
+  "id": "student-writing",
+  "path": "/student/writing",
+  "as": "student"
+ },
+ {
+  "id": "student-learn-maths",
+  "path": "/student/learn/mathematics",
+  "as": "student"
+ },
+ {
+  "id": "student-tips",
+  "path": "/student-tips",
+  "as": "student"
+ },
+ {
+  "id": "parent-12-child-profile",
+  "path": "/parent/children/8b076890-8b01-4850-b333-a0677f0b7b64",
+  "as": "parent"
+ },
+ {
+  "id": "parent-16-child-progress",
+  "path": "/parent/children/8b076890-8b01-4850-b333-a0677f0b7b64/progress",
+  "as": "parent"
+ },
+ {
+  "id": "parent-21-child-learning",
+  "path": "/parent/children/8b076890-8b01-4850-b333-a0677f0b7b64/learning",
+  "as": "parent"
+ },
+ {
+  "id": "parent-22-learning-preview",
+  "path": "/parent/children/8b076890-8b01-4850-b333-a0677f0b7b64/learning/preview",
+  "as": "parent"
+ },
+ {
+  "id": "parent-child-curriculum",
+  "path": "/parent/children/8b076890-8b01-4850-b333-a0677f0b7b64/curriculum",
+  "as": "parent"
+ },
+ {
+  "id": "parent-child-writing",
+  "path": "/parent/children/8b076890-8b01-4850-b333-a0677f0b7b64/writing",
+  "as": "parent"
+ },
+ {
+  "id": "parent-01-setup",
+  "path": "/parent/setup",
+  "as": "parent"
+ }
 ]

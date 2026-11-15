@@ -12,6 +12,7 @@ import {
 import { loadArchivedChildIds, loadChildLoginCode } from "@/features/parent-dashboard/child-access";
 import { isParentPreviewEnabled } from "@/features/parent-dashboard/preview-mode";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
+import { PageHeader } from "@/features/parent-dashboard/components/parent-ui";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
@@ -138,25 +139,10 @@ export default async function ParentChildrenPage() {
 
   return (
     <ParentShell active="/parent/children">
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-            Children
-          </h1>
-          <p className="mt-1 text-sm font-semibold text-muted">
-            Profiles and sign-in details.
-          </p>
-        </div>
+      <div className="grid gap-6">
+        <PageHeader title="Children" lead={planProps.planName ? "Profiles, sign-in details and paid places." : "Profiles and sign-in details."} />
 
-        <ChildrenManager
-          initialChildren={children}
-          availableYearLevels={years}
-          {...planProps}
-        />
-
-        <div id="add-child">
-          <AddChildCard availableYearLevels={years} />
-        </div>
+        <ChildrenManager initialChildren={children} availableYearLevels={years} {...planProps} />
       </div>
     </ParentShell>
   );
