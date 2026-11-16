@@ -2,6 +2,13 @@ import Link from "next/link";
 
 import type { AdminOverviewData, AdminSectionAvailability, AdminView, AdminProgrammeGate } from "../types";
 
+const TOOLS = [
+  { href: "/admin/review", label: "Draft review", text: "Try unpublished questions and inspect declared answers." },
+  { href: "/admin/analytics", label: "Analytics", text: "Platform attempt, score and time aggregates." },
+  { href: "/admin/intelligence", label: "Intelligence", text: "Per-question accuracy, discrimination and coverage." },
+  { href: "/admin/operations", label: "Operations", text: "Background jobs, retries and operational queues." },
+] as const;
+
 const card = "rounded-2xl border border-royal/10 bg-white shadow-xs";
 
 const MODE_LABEL: Record<AdminProgrammeGate["mode"], string> = {
@@ -187,6 +194,22 @@ export function AdminOverviewView({
           </p>
         </section>
       </div>
+
+      <section className={`${card} p-6`} aria-labelledby="ov-tools">
+        <h2 id="ov-tools" className="text-lg font-semibold text-[#1f1b24]">
+          Admin tools
+        </h2>
+        <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {TOOLS.map((tool) => (
+            <li key={tool.href}>
+              <Link href={tool.href} className="block min-h-11 rounded-xl border border-royal/10 p-4 hover:bg-royal/[0.04]">
+                <span className="text-sm font-semibold text-royal">{tool.label}</span>
+                <span className="mt-1 block text-xs text-[#6e6779]">{tool.text}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }

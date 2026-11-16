@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import Link from "next/link";
 
 import { getPreviewAdminData } from "@/features/admin/adapters/preview-adapter";
 import { AdminQuestionDetailView } from "@/features/admin/components/AdminQuestionDetailView";
@@ -14,7 +14,18 @@ export const dynamic = "force-dynamic";
 export default async function AdminQuestionDetailPage({ params }: { params: Promise<{ questionId: string }> }) {
   const { questionId } = await params;
   const detail = getAdminQuestionDetail(decodeURIComponent(questionId));
-  if (!detail) notFound();
   const data = (await isAdminPreviewEnabled()) ? getPreviewAdminData() : await getAuthenticatedDevAdminData();
-  return <AdminWorkspace data={data} libraryContent={<AdminQuestionDetailView detail={detail} />} />;
+  /* An in-page state rather than notFound(): a loading boundary above this segment would stream a 200 for it anyway. */
+  const content = detail ? (
+    <AdminQuestionDetailView detail={detail} />
+  ) : (
+    <div className="space-y-3">
+      <h1 className="text-xl font-semibold text-[#1f1b24]">Question not found</h1>
+      <p className="text-sm text-[#6e6779]">No authored question has that id.</p>
+      <Link href="/admin/questions" className="inline-flex min-h-11 items-center text-sm font-semibold text-royal hover:underline">
+        Back to the question library
+      </Link>
+    </div>
+  );
+  return <AdminWorkspace data={data} libraryContent={content} />;
 }
