@@ -115,7 +115,10 @@ test.describe("Admin Workspace Authorization & Navigation", () => {
 
     // Navigate via mobile drawer
     await page.getByRole("button", { name: /Paper review/i }).click();
-    await expect(page.getByRole("heading", { name: /Paper Review & Staging/i })).toBeVisible();
+    await expect(page).toHaveURL(/\/admin\/papers$/);
+    await expect(page.getByRole("heading", { level: 1, name: "Paper review" })).toBeVisible();
+    // The page itself must not scroll sideways at 390px.
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
     await page.close();
   });
