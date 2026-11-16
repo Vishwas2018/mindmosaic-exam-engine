@@ -26,7 +26,7 @@ export default async function ParentVihaanDashboardPage({
   searchParams,
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
-} = {}) {
+}) {
   if (!isSupabaseConfigured) redirect("/parent");
   const supabase = await createClient();
   const {

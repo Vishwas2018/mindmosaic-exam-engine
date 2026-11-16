@@ -28,7 +28,7 @@ export default async function VihaanScholarshipPrepPage({
   searchParams,
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
-} = {}) {
+}) {
   const student = await requireStudent();
   const shellData = await fetchStudentPortalShellData(student);
 
