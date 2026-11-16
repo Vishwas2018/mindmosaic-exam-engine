@@ -24,27 +24,38 @@ test.describe("Admin Workspace Authorization & Navigation", () => {
     const page = await (await contextAs("admin")).newPage();
     await page.goto("/admin");
 
-    // Overview renders with heading and governance metrics
-    await expect(page.getByRole("heading", { name: /Editorial & Governance Overview/i })).toBeVisible();
+    // Overview (export artboard 01): the three queues, families' reports and publication status per programme.
+    await expect(page.getByRole("heading", { level: 1, name: "Overview" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Review queues" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Reported by families" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Publication status" })).toBeVisible();
 
-    // Verify sections in sidebar
-    await expect(page.getByRole("button", { name: /Question library/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Human approval/i })).toBeVisible();
+    // Sidebar: the library is its own page; the rest are in-page views.
+    await expect(page.getByRole("link", { name: /Question library/i }).first()).toHaveAttribute("href", "/admin/questions");
     await expect(page.getByRole("button", { name: /Paper review/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Publication status/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Publication/ }).first()).toBeVisible();
 
     // Verify specialized legacy tools are accessible
     await expect(page.getByRole("link", { name: /Draft review/i }).first()).toHaveAttribute("href", "/admin/review");
     await expect(page.getByRole("link", { name: /Analytics/i }).first()).toHaveAttribute("href", "/admin/analytics");
 
-    // Navigate to Question Library
-    await page.getByRole("button", { name: /Question library/i }).click();
-    await expect(page.getByRole("heading", { name: /Question Library/i })).toBeVisible();
+    // Question library: real bank, filterable through the URL.
+    await page.getByRole("link", { name: /Question library/i }).first().click();
+    await expect(page).toHaveURL(/\/admin\/questions$/);
+    await expect(page.getByRole("heading", { level: 1, name: "Question library" })).toBeVisible();
+    await expect(page.getByRole("status")).toContainText(/questions/);
+    await page.getByLabel("Review status").selectOption("awaiting");
+    await page.getByRole("button", { name: "Apply" }).click();
+    await expect(page).toHaveURL(/status=awaiting/);
+    await expect(page.getByRole("link", { name: "Remove filter Awaiting human approval" })).toBeVisible();
+    await page.getByRole("link", { name: /^Open g?[a-z0-9-]+/i }).first().click();
+    await expect(page.getByRole("heading", { name: "What a child sees" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Answer key and explanation" })).toBeVisible();
 
-    // Navigate to Publication Status & verify ledger hash
-    await page.getByRole("button", { name: /Publication status/i }).click();
+    // Publication: the existing ledger view.
+    await page.goto("/admin");
+    await page.getByRole("button", { name: /^Publication/ }).first().click();
     await expect(page.getByRole("heading", { name: /Publication Status & Tamper-Evident Ledger/i })).toBeVisible();
-    await expect(page.getByText(/Tamper-Evident Ledger Root Hash/i)).toBeVisible();
 
     // The design-review aids (artboard switcher, state-board gallery) belong to the synthetic preview only.
     await expect(page.getByRole("button", { name: /State boards/i })).toHaveCount(0);
