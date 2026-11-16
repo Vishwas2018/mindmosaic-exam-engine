@@ -227,23 +227,35 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent,
               { id: "review", label: "Question review", icon: FileSearch },
               { id: "approval", label: "Human approval", icon: CheckCircle2 },
               { id: "paper", label: "Paper review", icon: FileText },
-              { id: "publication", label: "Publication", icon: UploadCloud, href: "/admin/publication" },
+              { id: "publication", label: "Publication", icon: UploadCloud },
               { id: "writing", label: "Writing review", icon: PenTool },
               { id: "support", label: "Support inquiries", icon: LifeBuoy },
               { id: "activity", label: "Activity log", icon: History },
               { id: "governance", label: "Governance map", icon: ShieldCheck },
               { id: "states", label: "State Boards", icon: Layers },
-            ].map((item) => {
+            ]
+              /* Review, approval, the governance map and the state boards are design-preview views only. */
+              .filter((item) => data.source === "preview" || !["review", "approval", "governance", "states"].includes(item.id))
+              .map((item) => {
               const Icon = item.icon;
-              const isActive = currentView === item.id;
+              const isActive = libraryContent ? item.id === activeKey : currentView === item.id;
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => {
-                    setCurrentView(item.id as AdminView);
                     setMobileMenuOpen(false);
                     setNotice(null);
+                    const route = DEV_ROUTES[item.id as AdminView];
+                    if (data.source === "dev" && route) {
+                      router.push(route);
+                      return;
+                    }
+                    if (libraryContent) {
+                      router.push(item.id === "overview" ? "/admin" : `/admin?view=${item.id}`);
+                      return;
+                    }
+                    setCurrentView(item.id as AdminView);
                   }}
                   className={`flex items-center gap-2 rounded-xl p-2.5 text-xs font-semibold text-left transition ${
                     isActive ? "bg-royal text-white" : "text-[#1f1b24] bg-royal/5 hover:bg-royal/10"
@@ -296,7 +308,7 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent,
                     ]
                   : []),
                 { id: "paper", label: "Paper review", icon: FileText, count: data.source === "preview" ? data.papers.length : undefined, href: "/admin/papers" },
-                { id: "publication", label: "Publication", icon: UploadCloud },
+                { id: "publication", label: "Publication", icon: UploadCloud, href: "/admin/publication" },
                 { id: "writing", label: "Writing review", icon: PenTool, count: data.source === "preview" ? data.writing.items.length : undefined, href: "/admin/writing" },
                 { id: "support", label: "Support", icon: LifeBuoy, count: data.source === "preview" ? data.support.items.length : undefined, href: "/admin/support" },
                 { id: "activity", label: "Activity history", icon: History, href: "/admin/activity" },
