@@ -9,19 +9,24 @@ import {
 } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
-import { loadVihaanParentOutcomes } from "@/server/vihaan-practice";
+import { getVihaanApprovedBank, loadVihaanParentOutcomes } from "@/server/vihaan-practice";
+import { loadWritingHistory } from "@/server/writing/queries";
 
 export const metadata: Metadata = {
   title: "Vihaan Scholarship Prep — Parent Dashboard",
   description:
-    "View Vihaan's scholarship preparation progress, subject performance, and weekly recommendations.",
+    "View Vihaan's scholarship preparation progress, subject performance, writing marking, and weekly recommendations.",
   robots: { index: false, follow: false },
 };
 
 export const dynamic = "force-dynamic";
 
 /** Same gate as the student pilot pages: the flag must be on AND this linked parent account allowed. */
-export default async function ParentVihaanDashboardPage() {
+export default async function ParentVihaanDashboardPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+} = {}) {
   if (!isSupabaseConfigured) redirect("/parent");
   const supabase = await createClient();
   const {
@@ -43,12 +48,36 @@ export default async function ParentVihaanDashboardPage() {
     redirect("/parent");
   }
 
+  const resolvedParams = searchParams ? await searchParams : {};
+  const includeSyntheticE2e = resolvedParams.e2e === "1";
+
   const vihaanChildId = resolveAllowlistedVihaanChildId(linkedChildIds) ?? linkedChildIds[0] ?? null;
-  const outcomes = vihaanChildId ? await loadVihaanParentOutcomes(supabase, vihaanChildId) : [];
+  const outcomes = vihaanChildId
+    ? await loadVihaanParentOutcomes(supabase, vihaanChildId, 200, { includeSyntheticE2e })
+    : [];
+  const rawWritingHistory = vihaanChildId
+    ? await loadWritingHistory(supabase, { studentIds: [vihaanChildId], submittedOnly: true })
+    : [];
+  const writingHistory = rawWritingHistory.filter((item) => {
+    const isSyntheticTask = item.attempt.taskId.startsWith("e2e-");
+    return includeSyntheticE2e ? true : !isSyntheticTask;
+  });
+
+  const approvedBank = getVihaanApprovedBank(vihaanChildId);
+  const writingPromptsById = Object.fromEntries(
+    approvedBank
+      .filter((q) => q.metadata.subject === "writing")
+      .map((q) => [q.id, q.prompt]),
+  );
 
   return (
     <ParentShell active="/parent">
-      <VihaanParentDashboard outcomes={outcomes} />
+      <VihaanParentDashboard
+        outcomes={outcomes}
+        writingHistory={writingHistory}
+        writingPromptsById={writingPromptsById}
+        approvedBankCount={approvedBank.length}
+      />
     </ParentShell>
   );
 }

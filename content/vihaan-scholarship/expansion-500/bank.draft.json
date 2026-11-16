@@ -1,0 +1,61 @@
+{
+  "bankId": "vihaan-scholarship-500",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "targets": {
+    "numeracy": 120,
+    "numerical_reasoning": 120,
+    "verbal_reasoning": 120,
+    "reading": 100,
+    "writing": 40
+  },
+  "difficultyTargets": {
+    "easy": 75,
+    "medium": 225,
+    "challenging": 200
+  },
+  "retainedPilot": "content/vihaan-scholarship/pilot-01/draft.json",
+  "batches": [
+    {
+      "batchId": "vihaan-expansion-01",
+      "file": "batch-01.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-02",
+      "file": "batch-02.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-03",
+      "file": "batch-03.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-04",
+      "file": "batch-04.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-05",
+      "file": "batch-05.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-06",
+      "file": "batch-06.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-07",
+      "file": "batch-07.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-08",
+      "file": "batch-08.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-09",
+      "file": "batch-09.draft.json"
+    },
+    {
+      "batchId": "vihaan-expansion-10",
+      "file": "batch-10.draft.json"
+    }
+  ]
+}

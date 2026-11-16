@@ -1,0 +1,582 @@
+{
+  "reportVersion": 1,
+  "generatedOn": "2026-11-16",
+  "bankId": "vihaan-scholarship-500",
+  "status": "draft",
+  "approvedBy": null,
+  "passed": true,
+  "errors": [],
+  "total": 500,
+  "newItems": 480,
+  "retainedItems": 20,
+  "approved": 0,
+  "published": 0,
+  "publicationEligible": false,
+  "subjectCounts": {
+    "numeracy": 120,
+    "numerical_reasoning": 120,
+    "reading": 100,
+    "verbal_reasoning": 120,
+    "writing": 40
+  },
+  "difficultyCounts": {
+    "challenging": 200,
+    "easy": 75,
+    "medium": 225
+  },
+  "coverage": {
+    "numeracy": {
+      "count": 120,
+      "difficulty": {
+        "challenging": 46,
+        "easy": 15,
+        "medium": 59
+      },
+      "skills": {
+        "scholarship.maths-algebra": 24,
+        "scholarship.maths-directed-numbers": 9,
+        "scholarship.maths-fractions-decimals": 17,
+        "scholarship.maths-geometry": 23,
+        "scholarship.maths-percentages": 15,
+        "scholarship.maths-probability": 13,
+        "scholarship.maths-ratios-rates": 19
+      }
+    },
+    "numerical_reasoning": {
+      "count": 120,
+      "difficulty": {
+        "challenging": 49,
+        "easy": 10,
+        "medium": 61
+      },
+      "skills": {
+        "scholarship.nr-arithmetical-reasoning": 27,
+        "scholarship.nr-logic-deduction-numbers": 26,
+        "scholarship.nr-number-matrices": 26,
+        "scholarship.nr-number-series": 41
+      }
+    },
+    "verbal_reasoning": {
+      "count": 120,
+      "difficulty": {
+        "challenging": 49,
+        "easy": 25,
+        "medium": 46
+      },
+      "skills": {
+        "scholarship.vr-analogies": 17,
+        "scholarship.vr-classification": 12,
+        "scholarship.vr-coded-words": 6,
+        "scholarship.vr-letter-series": 4,
+        "scholarship.vr-sentence-logic": 17,
+        "scholarship.vr-synonyms-antonyms": 61,
+        "scholarship.vr-word-relationships": 3
+      }
+    },
+    "reading": {
+      "count": 100,
+      "difficulty": {
+        "challenging": 39,
+        "easy": 20,
+        "medium": 41
+      },
+      "skills": {
+        "scholarship.rc-argument-evaluation": 14,
+        "scholarship.rc-authorial-craft": 10,
+        "scholarship.rc-cause-effect": 12,
+        "scholarship.rc-character-inference": 7,
+        "scholarship.rc-factual-inference": 13,
+        "scholarship.rc-factual-retrieval": 20,
+        "scholarship.rc-figurative-language": 3,
+        "scholarship.rc-main-idea": 8,
+        "scholarship.rc-text-structure": 6,
+        "scholarship.rc-tone-analysis": 4,
+        "scholarship.rc-vocabulary-context": 3
+      }
+    },
+    "writing": {
+      "count": 40,
+      "difficulty": {
+        "challenging": 17,
+        "easy": 5,
+        "medium": 18
+      },
+      "skills": {
+        "Creative composition": 6,
+        "Descriptive composition": 6,
+        "Expository composition": 6,
+        "Informative composition": 6,
+        "Narrative choices": 1,
+        "Narrative composition": 7,
+        "Persuasive composition": 7,
+        "Persuasive trade-offs": 1
+      }
+    }
+  },
+  "answerPositions": {
+    "a": 120,
+    "b": 104,
+    "c": 116,
+    "d": 120
+  },
+  "timeRanges": {
+    "numeracy": {
+      "minimumSeconds": 60,
+      "maximumSeconds": 150
+    },
+    "numerical_reasoning": {
+      "minimumSeconds": 60,
+      "maximumSeconds": 150
+    },
+    "verbal_reasoning": {
+      "minimumSeconds": 60,
+      "maximumSeconds": 150
+    },
+    "reading": {
+      "minimumSeconds": 90,
+      "maximumSeconds": 210
+    },
+    "writing": {
+      "minimumSeconds": 900,
+      "maximumSeconds": 1200
+    }
+  },
+  "passages": [
+    {
+      "title": "The repair table",
+      "wordCount": 207,
+      "questionCount": 3
+    },
+    {
+      "title": "The spare seat",
+      "wordCount": 178,
+      "questionCount": 5
+    },
+    {
+      "title": "A cooler courtyard",
+      "wordCount": 164,
+      "questionCount": 5
+    },
+    {
+      "title": "Letter about the vacant block",
+      "wordCount": 175,
+      "questionCount": 5
+    },
+    {
+      "title": "Night at the jetty",
+      "wordCount": 117,
+      "questionCount": 5
+    },
+    {
+      "title": "The missing label",
+      "wordCount": 161,
+      "questionCount": 5
+    },
+    {
+      "title": "Two accounts of the same race",
+      "wordCount": 164,
+      "questionCount": 5
+    },
+    {
+      "title": "An advertisement with small print",
+      "wordCount": 173,
+      "questionCount": 5
+    },
+    {
+      "title": "The museum drawer",
+      "wordCount": 172,
+      "questionCount": 5
+    },
+    {
+      "title": "Who uses the oval?",
+      "wordCount": 156,
+      "questionCount": 5
+    },
+    {
+      "title": "An open window",
+      "wordCount": 162,
+      "questionCount": 5
+    },
+    {
+      "title": "A fictional sound experiment",
+      "wordCount": 162,
+      "questionCount": 5
+    },
+    {
+      "title": "Water-meter message",
+      "wordCount": 175,
+      "questionCount": 5
+    },
+    {
+      "title": "Two library slogans",
+      "wordCount": 128,
+      "questionCount": 2
+    },
+    {
+      "title": "The bridge notebook",
+      "wordCount": 151,
+      "questionCount": 5
+    },
+    {
+      "title": "The seed library notice",
+      "wordCount": 152,
+      "questionCount": 5
+    },
+    {
+      "title": "A clock that gained a story",
+      "wordCount": 156,
+      "questionCount": 5
+    },
+    {
+      "title": "The floating garden model",
+      "wordCount": 170,
+      "questionCount": 5
+    },
+    {
+      "title": "The case for a slower lunch",
+      "wordCount": 163,
+      "questionCount": 5
+    },
+    {
+      "title": "Interview with a sign painter",
+      "wordCount": 159,
+      "questionCount": 5
+    },
+    {
+      "title": "Instructions for a paper tower test",
+      "wordCount": 158,
+      "questionCount": 5
+    }
+  ],
+  "duplicateMatches": [],
+  "corpus": {
+    "comparedRecords": 1761,
+    "curatedBankHash": "8474b93e81cfe6d7a9ed481d23d2fc594fd85ce9a4ac43bc674b898fd86150cc",
+    "files": [
+      {
+        "path": "content\\scholarship-drafts\\compound-words-allowlist.json",
+        "sha256": "884f97a559a3097ed16b7143b53d0dd82b2de1644f706e1d0cda3c9a6877b22d"
+      },
+      {
+        "path": "content\\scholarship-drafts\\scholarship-y6-mathematics-draft.json",
+        "sha256": "eddba17aff1c584d1d52171d791feb42e4ab61d9986278445aa58dbe23e78dd8"
+      },
+      {
+        "path": "content\\scholarship-drafts\\scholarship-y6-numerical-reasoning-draft.json",
+        "sha256": "fb43b9af7bf02608fcc050f4ab14a6cf56a83a07c1ef3cc0fd1ee7e4f10234a5"
+      },
+      {
+        "path": "content\\scholarship-drafts\\scholarship-y6-reading-draft.json",
+        "sha256": "714a3de6060adb1d6264e6654cb369bbcbcacfc1343dd225707827cfd43c1986"
+      },
+      {
+        "path": "content\\scholarship-drafts\\scholarship-y6-verbal-reasoning-draft.json",
+        "sha256": "fbc208625d0086bc62e981706ae68a95a85942c50e92b38577aee09fc399cce0"
+      },
+      {
+        "path": "src\\content\\questions\\generated\\batch-amc-published.json",
+        "sha256": "7177721c1a4d664795096797002d7613ecd5e59e9a8c9db1da72e6774aa1fa0a"
+      },
+      {
+        "path": "src\\content\\questions\\generated\\batch-published.json",
+        "sha256": "b0f78d2ed822f07387b6bfc4173d87df3e0809a55a2ddf13a17265d8aa59363f"
+      },
+      {
+        "path": "src\\content\\questions\\generated\\batch-scholarship-published.json",
+        "sha256": "616ae847f3114f35c18598965cd28c66682a72d3050308cd4d57cd178535e803"
+      }
+    ],
+    "scope": "Curated questionBank stems, generated JSON banks, scholarship draft JSON, retained pilot and all expansion batches (earlier batches only in --batch mode). No external question corpus or copyright clearance.",
+    "nearDuplicateThreshold": 0.82,
+    "methods": [
+      "normalised exact stems",
+      "existing pilot token Jaccard similarity >= 0.82",
+      "identical wording after replacing numeric literals"
+    ]
+  },
+  "validation": {
+    "canonicalSchema": 500,
+    "taxonomyCheckedNonWriting": 460,
+    "manualWritingRubric": 40,
+    "independentPilotWholeStemNumericalSolvers": 11,
+    "expansionArithmeticConsistency": 229,
+    "semanticAndNumericStemGrounding": "Pending blind human solutions. Arithmetic evidence is authored alongside content, not an independent semantic proof.",
+    "difficultyAndTiming": "Authored estimates, not psychometrically calibrated or official test timings.",
+    "originality": "Session-authored; no external question material used. Bounded internal similarity screening does not establish worldwide uniqueness."
+  },
+  "requiredHumanReview": [
+    "Solve every MCQ without its key; justify rejection of each distractor.",
+    "Check each reading key against passage evidence, including alternative interpretations.",
+    "Check age suitability, difficulty and time estimates.",
+    "Review originality and numerical stem-to-solution grounding.",
+    "Onboard writing skills through the governed taxonomy before any publication.",
+    "Record human approval through the existing governed lifecycle; this package cannot publish."
+  ],
+  "batches": [
+    {
+      "batchId": "vihaan-expansion-01",
+      "sourceFile": "batch-01.draft.json",
+      "sourceHash": "bc524e34f1cd3eb75c096117db4692e9fd438a1412a8a0909ae4ebf758ead606",
+      "itemCount": 50,
+      "newItems": 30,
+      "retainedPilotItems": 20,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 15,
+        "numerical_reasoning": 12,
+        "reading": 9,
+        "verbal_reasoning": 10,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 10,
+        "easy": 21,
+        "medium": 19
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-02",
+      "sourceFile": "batch-02.draft.json",
+      "sourceHash": "a347f2da1a09a434ade08b7308ff1879c744450668dd32b5e457ccef5b654eff",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 11,
+        "numerical_reasoning": 11,
+        "reading": 12,
+        "verbal_reasoning": 12,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 16,
+        "easy": 11,
+        "medium": 23
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-03",
+      "sourceFile": "batch-03.draft.json",
+      "sourceHash": "387d694543c71edd5c66b289456758fe4846fc87fec9c8020d9f319770e3b8b5",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 10,
+        "numerical_reasoning": 12,
+        "reading": 12,
+        "verbal_reasoning": 12,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 26,
+        "easy": 6,
+        "medium": 18
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-04",
+      "sourceFile": "batch-04.draft.json",
+      "sourceHash": "9e7f4668e98987dea61968a02cebcfa4f5090aaefbd2a2b69b32b1d20411cb4e",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "reading": 11,
+        "verbal_reasoning": 12,
+        "writing": 3
+      },
+      "difficultyCounts": {
+        "challenging": 26,
+        "easy": 6,
+        "medium": 18
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-05",
+      "sourceFile": "batch-05.draft.json",
+      "sourceHash": "d286cc581bd66bbb81ca4ef2a47e762c9fcfbbfde39bbd37c14b742f93d71e2f",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "reading": 10,
+        "verbal_reasoning": 12,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 17,
+        "easy": 8,
+        "medium": 25
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-06",
+      "sourceFile": "batch-06.draft.json",
+      "sourceHash": "7ab094f150fe1add2ec6bc057dab6457c3b97449c528a6b306cd84de4357c1eb",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "reading": 12,
+        "verbal_reasoning": 10,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 22,
+        "easy": 6,
+        "medium": 22
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-07",
+      "sourceFile": "batch-07.draft.json",
+      "sourceHash": "48ed4dd88cbe68ec3ab5e2799eb4c28ae0e0dd8ecec580fcf248799b90b82737",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 11,
+        "reading": 12,
+        "verbal_reasoning": 11,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 19,
+        "easy": 4,
+        "medium": 27
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-08",
+      "sourceFile": "batch-08.draft.json",
+      "sourceHash": "94469adfd4fd4909c896285a297e793ddb999eb9290f26daa73c30c916723b51",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 10,
+        "reading": 12,
+        "verbal_reasoning": 12,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 24,
+        "easy": 5,
+        "medium": 21
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-09",
+      "sourceFile": "batch-09.draft.json",
+      "sourceHash": "16d3b8d027afea393d70357591982fed291279bd38fc3a5b51ca902c954ebe62",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "reading": 10,
+        "verbal_reasoning": 12,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "challenging": 16,
+        "easy": 7,
+        "medium": 27
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-10",
+      "sourceFile": "batch-10.draft.json",
+      "sourceHash": "574f47815372460fa514a5e6a1990efac3c03e24eeb9bb50c640fdd9363cadfd",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 16,
+        "verbal_reasoning": 17,
+        "writing": 5
+      },
+      "difficultyCounts": {
+        "challenging": 24,
+        "easy": 1,
+        "medium": 25
+      }
+    }
+  ],
+  "sources": {
+    "manifestHash": "56fe68cb440917a37272df3ecf7b01c0216434c12e1932e275d732bfbd3fbe53",
+    "pilotHash": "50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b",
+    "batchHashes": [
+      {
+        "file": "batch-01.draft.json",
+        "hash": "bc524e34f1cd3eb75c096117db4692e9fd438a1412a8a0909ae4ebf758ead606"
+      },
+      {
+        "file": "batch-02.draft.json",
+        "hash": "a347f2da1a09a434ade08b7308ff1879c744450668dd32b5e457ccef5b654eff"
+      },
+      {
+        "file": "batch-03.draft.json",
+        "hash": "387d694543c71edd5c66b289456758fe4846fc87fec9c8020d9f319770e3b8b5"
+      },
+      {
+        "file": "batch-04.draft.json",
+        "hash": "9e7f4668e98987dea61968a02cebcfa4f5090aaefbd2a2b69b32b1d20411cb4e"
+      },
+      {
+        "file": "batch-05.draft.json",
+        "hash": "d286cc581bd66bbb81ca4ef2a47e762c9fcfbbfde39bbd37c14b742f93d71e2f"
+      },
+      {
+        "file": "batch-06.draft.json",
+        "hash": "7ab094f150fe1add2ec6bc057dab6457c3b97449c528a6b306cd84de4357c1eb"
+      },
+      {
+        "file": "batch-07.draft.json",
+        "hash": "48ed4dd88cbe68ec3ab5e2799eb4c28ae0e0dd8ecec580fcf248799b90b82737"
+      },
+      {
+        "file": "batch-08.draft.json",
+        "hash": "94469adfd4fd4909c896285a297e793ddb999eb9290f26daa73c30c916723b51"
+      },
+      {
+        "file": "batch-09.draft.json",
+        "hash": "16d3b8d027afea393d70357591982fed291279bd38fc3a5b51ca902c954ebe62"
+      },
+      {
+        "file": "batch-10.draft.json",
+        "hash": "574f47815372460fa514a5e6a1990efac3c03e24eeb9bb50c640fdd9363cadfd"
+      }
+    ]
+  }
+}

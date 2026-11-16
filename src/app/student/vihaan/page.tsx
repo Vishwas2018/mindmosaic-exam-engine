@@ -9,9 +9,12 @@ import { fetchStudentPortalShellData } from "@/features/student/components/stude
 import { requireStudent } from "@/features/student/require-student";
 import { createClient } from "@/lib/supabase/server";
 import {
-  getVihaanDiagnosticQuestions,
+  getVihaanApprovedBank,
+  getVihaanMockPool,
+  getVihaanPracticePool,
   loadVihaanParentOutcomes,
 } from "@/server/vihaan-practice";
+import { loadWritingHistory } from "@/server/writing/queries";
 
 export const metadata: Metadata = {
   title: "Vihaan Scholarship Prep",
@@ -21,7 +24,11 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function VihaanScholarshipPrepPage() {
+export default async function VihaanScholarshipPrepPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+} = {}) {
   const student = await requireStudent();
   const shellData = await fetchStudentPortalShellData(student);
 
@@ -29,10 +36,25 @@ export default async function VihaanScholarshipPrepPage() {
     return redirect("/student");
   }
 
-  const questions = getVihaanDiagnosticQuestions(student.userId);
-  const solutionsById = getVihaanSolutionsRecord(questions);
+  const resolvedParams = searchParams ? await searchParams : {};
+  const includeSyntheticE2e = resolvedParams.e2e === "1";
+
+  const practiceQuestions = getVihaanPracticePool(student.userId);
+  const mockQuestions = getVihaanMockPool(student.userId);
+  const allApproved = getVihaanApprovedBank(student.userId);
+  const solutionsById = getVihaanSolutionsRecord(allApproved);
   const supabase = await createClient();
-  const outcomes = await loadVihaanParentOutcomes(supabase, student.userId);
+  const outcomes = await loadVihaanParentOutcomes(supabase, student.userId, 200, {
+    includeSyntheticE2e,
+  });
+  const rawWritingHistory = await loadWritingHistory(supabase, {
+    studentIds: [student.userId],
+    submittedOnly: true,
+  });
+  const writingHistory = rawWritingHistory.filter((item) => {
+    const isSyntheticTask = item.attempt.taskId.startsWith("e2e-");
+    return includeSyntheticE2e ? true : !isSyntheticTask;
+  });
 
   return (
     <StudentPortalShell
@@ -44,9 +66,12 @@ export default async function VihaanScholarshipPrepPage() {
       <VihaanDashboard
         student={student}
         shellData={shellData}
-        questions={questions}
+        questions={practiceQuestions}
+        mockQuestions={mockQuestions}
         solutionsById={solutionsById}
         outcomes={outcomes}
+        writingHistory={writingHistory}
+        isSyntheticE2e={includeSyntheticE2e}
       />
     </StudentPortalShell>
   );
