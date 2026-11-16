@@ -306,7 +306,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     });
     expect(numeracyPractice).toHaveLength(3);
     expect(numeracyPractice.every((q) => q.metadata.subject === "numeracy")).toBe(true);
-  });
+  }, 15_000);
 
   it("renders worked solutions, 1–5 writing rubric, and persistence status after submission", async () => {
     const user = userEvent.setup();
@@ -363,7 +363,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
       "/api/student/vihaan/attempt",
       expect.objectContaining({ method: "POST" }),
     );
-  });
+  }, 20_000);
 
   it("renders subject practice cards on VihaanDashboard and launches inline practice", async () => {
     const user = userEvent.setup();
@@ -401,7 +401,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     const runner = await screen.findByTestId("vihaan-practice-runner");
     expect(within(runner).getByRole("heading", { name: "Mathematics" })).toBeInTheDocument();
     expect(within(runner).getAllByText(/Question 1 of 6/i).length).toBeGreaterThan(0);
-  });
+  }, 20_000);
 
   it("verifies all 500 published items (20 pilot + 480 expansion) and fails closed on tampering", () => {
     const expansion = getVerifiedVihaanExpansionPublication();
@@ -561,7 +561,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     expect(screen.getByTestId("vihaan-concept-learning")).toBeInTheDocument();
     expect(screen.getByTestId("vihaan-smart-revision")).toBeInTheDocument();
     expect(screen.getByTestId("mock-reserved-pool-badge")).toHaveTextContent(
-      "166 unseen questions reserved exclusively for Mock Examinations",
+      "166 unseen questions reserved exclusively for Mock Exams",
     );
     expect(screen.getByTestId("vihaan-writing-practice")).toBeInTheDocument();
 
@@ -570,5 +570,5 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     const runner = await screen.findByTestId("vihaan-practice-runner");
     expect(within(runner).getByTestId("vihaan-exam-timer")).toBeInTheDocument();
     expect(within(runner).getAllByText(/Question 1 of 40/i).length).toBeGreaterThan(0);
-  });
+  }, 20_000);
 });

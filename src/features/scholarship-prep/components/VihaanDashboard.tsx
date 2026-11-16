@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 import type { StudentContext } from "@/features/student/require-student";
@@ -87,6 +87,12 @@ export function VihaanDashboard({
   const totalBankCount = questions.length + mockQuestions.length;
   const unseenPracticeCount = questions.filter((q) => !attemptedQuestionIds.has(q.id)).length;
 
+  const sessionSeqRef = useRef(0);
+  function nextSessionKey(prefix: string) {
+    sessionSeqRef.current += 1;
+    return `${prefix}-${sessionSeqRef.current}`;
+  }
+
   function startAdaptiveSubjectPractice(subjectKey: string, subjectLabel: string) {
     const picked = selectAdaptivePractice(questions, 10, {
       subject: subjectKey,
@@ -94,7 +100,7 @@ export function VihaanDashboard({
     });
     if (picked.length === 0) return;
     setActiveSession({
-      key: `practice-${subjectKey}-${Date.now()}`,
+      key: nextSessionKey(`practice-${subjectKey}`),
       title: subjectLabel,
       subject: subjectKey,
       attemptMode: subjectKey === "writing" ? "writing" : "practice",
@@ -108,7 +114,7 @@ export function VihaanDashboard({
       const picked = selectAdaptivePractice(questions, 1, { subject: "writing", outcomes });
       if (picked.length === 0) return;
       setActiveSession({
-        key: `plan-day-${day.day}-${Date.now()}`,
+        key: nextSessionKey(`plan-day-${day.day}`),
         title: `Day ${day.day} — Written Expression (60-min Study Block)`,
         subject: "writing",
         attemptMode: "writing",
@@ -133,7 +139,7 @@ export function VihaanDashboard({
           });
     if (fallbackPicked.length === 0) return;
     setActiveSession({
-      key: `plan-day-${day.day}-${Date.now()}`,
+      key: nextSessionKey(`plan-day-${day.day}`),
       title: `Day ${day.day}: ${day.focus.replace(/_/g, " ")} (Daily Plan)`,
       subject: day.canonicalSubject,
       attemptMode: "practice",
@@ -156,7 +162,7 @@ export function VihaanDashboard({
     }
     if (picked.length === 0) return;
     setActiveSession({
-      key: `concept-${lesson.id}-${Date.now()}`,
+      key: nextSessionKey(`concept-${lesson.id}`),
       title: `Concept Practice: ${lesson.title}`,
       subject: lesson.subject,
       attemptMode: lesson.subject === "writing" ? "writing" : "practice",
@@ -179,7 +185,7 @@ export function VihaanDashboard({
     }
     if (picked.length === 0) return;
     setActiveSession({
-      key: `revision-${topicInfo.topic}-${Date.now()}`,
+      key: nextSessionKey(`revision-${topicInfo.topic}`),
       title: `Weak-Topic Revision: ${topicInfo.topic}`,
       subject: topicInfo.subject,
       attemptMode: "practice",
@@ -194,7 +200,7 @@ export function VihaanDashboard({
     });
     if (picked.length === 0) return;
     setActiveSession({
-      key: `sectional-${subjectKey}-${Date.now()}`,
+      key: nextSessionKey(`sectional-${subjectKey}`),
       title: `Timed Sectional Test — ${subjectKey.replace(/_/g, " ")}`,
       subject: subjectKey,
       attemptMode: "sectional",
@@ -207,7 +213,7 @@ export function VihaanDashboard({
     const picked = selectMockExamQuestions(mockQuestions, section, outcomes);
     if (picked.length === 0) return;
     setActiveSession({
-      key: `mock-${section}-${Date.now()}`,
+      key: nextSessionKey(`mock-${section}`),
       title: label,
       subject: section === "full_mock" ? "mixed" : section,
       attemptMode: "mock",
@@ -218,7 +224,7 @@ export function VihaanDashboard({
 
   function handleStartWritingPrompt(prompt: Question, minutes: number) {
     setActiveSession({
-      key: `writing-${prompt.id}-${Date.now()}`,
+      key: nextSessionKey(`writing-${prompt.id}`),
       title: "Timed Writing Practice",
       subject: "writing",
       attemptMode: "writing",

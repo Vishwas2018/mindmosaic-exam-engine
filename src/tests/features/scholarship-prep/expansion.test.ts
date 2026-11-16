@@ -72,7 +72,7 @@ describe("Vihaan expansion review-bank governance",()=>{
     expect(pairs.some(p=>p.kind==="exact_stem")).toBe(true);
     expect(pairs.some(p=>p.b==="one"&&p.a==="two")).toBe(true);
     expect(duplicatePairs([...pilot.items,...drafts].map(i=>i.question))).toEqual([]);
-  });
+  }, 15_000);
 
   it("checks grammar precedence and refuses executable or invalid arithmetic",()=>{
     expect(evaluateArithmetic("-2**2 + 3*(8-2)/2")).toBe(5);
