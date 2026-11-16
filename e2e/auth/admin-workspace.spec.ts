@@ -32,8 +32,15 @@ test.describe("Admin Workspace Authorization & Navigation", () => {
 
     // Sidebar: the library is its own page; the rest are in-page views.
     await expect(page.getByRole("link", { name: /Question library/i }).first()).toHaveAttribute("href", "/admin/questions");
-    await expect(page.getByRole("button", { name: /Paper review/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /^Publication/ }).first()).toBeVisible();
+    for (const [name, href] of [
+      ["Paper review", "/admin/papers"],
+      ["Publication", "/admin/publication"],
+      ["Writing review", "/admin/writing"],
+      ["Support", "/admin/support"],
+      ["Activity history", "/admin/activity"],
+    ] as const) {
+      await expect(page.getByRole("navigation", { name: "Admin sections" }).getByRole("link", { name })).toHaveAttribute("href", href);
+    }
 
     // Verify specialized legacy tools are accessible
     await expect(page.getByRole("link", { name: /Draft review/i }).first()).toHaveAttribute("href", "/admin/review");
@@ -52,10 +59,35 @@ test.describe("Admin Workspace Authorization & Navigation", () => {
     await expect(page.getByRole("heading", { name: "What a child sees" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Answer key and explanation" })).toBeVisible();
 
-    // Publication: the existing ledger view.
-    await page.goto("/admin");
-    await page.getByRole("button", { name: /^Publication/ }).first().click();
-    await expect(page.getByRole("heading", { name: /Publication Status & Tamper-Evident Ledger/i })).toBeVisible();
+    // The remaining screens are real pages with their own URLs.
+    await page.goto("/admin/papers");
+    await expect(page.getByRole("heading", { level: 1, name: "Paper review" })).toBeVisible();
+    await page.getByRole("link", { name: /^Open NAPLAN-style Year 3 Numeracy/ }).first().click();
+    await expect(page.getByRole("heading", { name: "What each part draws on" })).toBeVisible();
+
+    await page.goto("/admin/publication");
+    await expect(page.getByRole("heading", { level: 1, name: "Publication" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Programme gates" })).toBeVisible();
+    await page.getByLabel("Question id").fill("no-such-question");
+    await page.getByRole("button", { name: "Check" }).click();
+    await expect(page.getByRole("status").filter({ hasText: "No authored question has the id" })).toBeVisible();
+
+    await page.goto("/admin/writing");
+    await expect(page.getByRole("heading", { level: 1, name: "Writing review" })).toBeVisible();
+    await expect(page.getByText(/Awaiting migration: admin_redacted_writing_queue/)).toBeVisible();
+
+    await page.goto("/admin/support");
+    await expect(page.getByRole("heading", { level: 1, name: "Support" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Privacy boundary" })).toBeVisible();
+
+    await page.goto("/admin/activity");
+    await expect(page.getByRole("heading", { level: 1, name: "Activity history" })).toBeVisible();
+    await page.getByLabel("Action").selectOption("published");
+    await page.getByRole("button", { name: "Apply" }).click();
+    await expect(page).toHaveURL(/action=published/);
+
+    await page.goto("/admin/questions/no-such-question/approval");
+    await expect(page.getByRole("heading", { name: "Question not found" })).toBeVisible();
 
     // The design-review aids (artboard switcher, state-board gallery) belong to the synthetic preview only.
     await expect(page.getByRole("button", { name: /State boards/i })).toHaveCount(0);
