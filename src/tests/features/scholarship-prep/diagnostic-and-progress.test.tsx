@@ -5,11 +5,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { buildExamResult } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 import { VihaanDiagnosticExamRunner } from "@/features/scholarship-prep/components/DiagnosticExamRunner";
+import { VihaanDashboard } from "@/features/scholarship-prep/components/VihaanDashboard";
 import { VihaanParentDashboard } from "@/features/scholarship-prep/components/VihaanParentDashboard";
 import {
+  getVerifiedVihaanPilotPublication,
+  getVihaanSolutionsRecord,
   MATH_QUESTIONS,
   NR_QUESTIONS,
   RC_QUESTIONS,
+  verifyVihaanPilotPublication,
   VIHAAN_PILOT_BATCH,
   VIHAAN_PILOT_COUNTS,
   VIHAAN_PILOT_QUESTIONS,
@@ -21,6 +25,7 @@ import {
   extractVihaanOutcomesFromSittings,
   summariseProgress,
 } from "@/features/scholarship-prep/lib/practice";
+import { getVihaanDiagnosticQuestions, getVihaanPracticePlan } from "@/server/vihaan-practice";
 import type { Question } from "@/schemas/question.schema";
 
 function asPublishedFixture(questions: readonly Question[]): Question[] {
@@ -36,6 +41,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     useExamStore.getState().resetExam();
   });
 
@@ -236,5 +242,150 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     expect(screen.getByTestId("parent-overall-accuracy")).toHaveTextContent("40%");
     expect(screen.getByTestId("parent-weak-areas")).toHaveTextContent("Fraction of a remainder");
     expect(screen.getByText("Focus next on Mathematics")).toBeInTheDocument();
+  });
+
+  it("verifies governed pilot-01 DEV publication integrity and fails closed on tampering", () => {
+    const verified = getVerifiedVihaanPilotPublication();
+    expect(verified.ok).toBe(true);
+    if (!verified.ok) return;
+
+    expect(verified.batchId).toBe("vihaan-pilot-01");
+    expect(verified.approvedBy).toBe("Vishwas Joshi");
+    expect(verified.draftBatchHash).toBe(
+      "50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b",
+    );
+    expect(verified.questions).toHaveLength(20);
+    expect(verified.questions.every((q) => q.status === "published")).toBe(true);
+
+    const tampered = verifyVihaanPilotPublication({
+      kind: "vihaan_pilot_publication_manifest",
+      schemaVersion: 1,
+      batchId: "wrong-batch",
+    });
+    expect(tampered.ok).toBe(false);
+    expect(tampered.questions).toEqual([]);
+  });
+
+  it("serves approved pilot-01 questions only to allowlisted DEV users and never in production", () => {
+    const devEnv = {
+      VERCEL_ENV: "preview",
+      VISHAAN_SCHOLARSHIP_PREP_ENABLED: "1",
+      NEXT_PUBLIC_SUPABASE_URL: "https://mfglzabnayacssgertat.supabase.co",
+      PRODUCTION_SUPABASE_PROJECT_REF: "uermhsptduikehuyceiz",
+      VISHAAN_SCHOLARSHIP_PREP_SUPABASE_REF: "mfglzabnayacssgertat",
+      VISHAAN_SCHOLARSHIP_PREP_ALLOWED_USER_IDS: "vihaan-student-1",
+    };
+
+    const allowedDiagnostic = getVihaanDiagnosticQuestions("vihaan-student-1", devEnv);
+    expect(allowedDiagnostic).toHaveLength(20);
+    expect(allowedDiagnostic.every((q) => q.status === "published")).toBe(true);
+
+    expect(getVihaanDiagnosticQuestions("other-student", devEnv)).toEqual([]);
+    expect(
+      getVihaanDiagnosticQuestions("vihaan-student-1", { ...devEnv, VERCEL_ENV: "production" }),
+    ).toEqual([]);
+
+    const numeracyPractice = getVihaanPracticePlan(3, {
+      subject: "numeracy",
+      userId: "vihaan-student-1",
+      env: devEnv,
+    });
+    expect(numeracyPractice).toHaveLength(3);
+    expect(numeracyPractice.every((q) => q.metadata.subject === "numeracy")).toBe(true);
+  });
+
+  it("renders worked solutions, 1–5 writing rubric, and persistence status after submission", async () => {
+    const user = userEvent.setup();
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ persisted: true, sessionId: "sess-1", attemptId: "att-1" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    const mixedFixture = asPublishedFixture([MATH_QUESTIONS[0]!, WE_QUESTIONS[0]!]);
+    const solutionsById = getVihaanSolutionsRecord(mixedFixture);
+
+    render(
+      <VihaanDiagnosticExamRunner
+        questions={mixedFixture}
+        subject="mixed"
+        solutionsById={solutionsById}
+        persistToServer
+      />,
+    );
+
+    const answerCurrentQuestion = async () => {
+      const textbox = screen.queryByRole("textbox");
+      if (textbox) {
+        await user.type(textbox, "Niko stopped beside the oval seedlings.");
+      } else {
+        await user.click(await screen.findByRole("radio", { name: /45/ }));
+      }
+    };
+
+    await screen.findByRole("button", { name: "Next" });
+    await answerCurrentQuestion();
+    await user.click(screen.getByRole("button", { name: "Next" }));
+
+    await screen.findByRole("button", { name: "Submit Exam" });
+    await answerCurrentQuestion();
+    await user.click(screen.getByRole("button", { name: "Submit Exam" }));
+
+    const results = await screen.findByTestId("diagnostic-results");
+    expect(within(results).getByTestId("vihaan-attempt-persisted")).toHaveTextContent(
+      "Saved to progress",
+    );
+    expect(within(results).getByTestId("vihaan-worked-solution-vihaan-p01-m01")).toHaveTextContent(
+      /One quarter of 84 is 21/i,
+    );
+    expect(within(results).getByTestId("vihaan-writing-rubric-vihaan-p01-w01")).toHaveTextContent(
+      "on the 1–5 scale",
+    );
+    expect(
+      within(results).getByTestId("vihaan-sample-response-vihaan-p01-w01"),
+    ).toHaveTextContent(/Niko could already hear/i);
+    expect(fetchSpy).toHaveBeenCalledWith(
+      "/api/student/vihaan/attempt",
+      expect.objectContaining({ method: "POST" }),
+    );
+  });
+
+  it("renders subject practice cards on VihaanDashboard and launches inline practice", async () => {
+    const user = userEvent.setup();
+    const verified = getVerifiedVihaanPilotPublication();
+    expect(verified.ok).toBe(true);
+    if (!verified.ok) return;
+
+    render(
+      <VihaanDashboard
+        student={{
+          userId: "vihaan-student-1",
+          displayName: "Vihaan",
+          yearLevel: 5,
+          onboardingCompleted: true,
+          diagnosticCompleted: false,
+          interests: [],
+          weeklyGoalMinutes: 360,
+        }}
+        questions={verified.questions}
+        solutionsById={getVihaanSolutionsRecord(verified.questions)}
+        outcomes={[]}
+      />,
+    );
+
+    const practiceSection = screen.getByTestId("vihaan-practice-section");
+    expect(within(practiceSection).getByTestId("vihaan-practice-numeracy")).toHaveTextContent(
+      "6 questions",
+    );
+    expect(within(practiceSection).getByTestId("vihaan-practice-writing")).toHaveTextContent(
+      "2 questions",
+    );
+
+    await user.click(within(practiceSection).getByTestId("vihaan-practice-numeracy"));
+
+    const runner = await screen.findByTestId("vihaan-practice-runner");
+    expect(within(runner).getByRole("heading", { name: "Mathematics" })).toBeInTheDocument();
+    expect(within(runner).getAllByText(/Question 1 of 6/i).length).toBeGreaterThan(0);
   });
 });

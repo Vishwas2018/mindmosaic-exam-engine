@@ -1,6 +1,6 @@
 # Pilot 01 — private human review worksheet
 
-Local draft batch hash: 0fc6dccf17efb1acd9f75ca8684f97f4e3778b3d4841179f431f2dfdf2ec3ffb
+Local draft batch hash: 50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b
 
 All 20 items are DRAFT / PENDING. This sheet is an editorial aid; filling it does not approve, ingest or publish content. Record any eventual approval through the existing authorised governance workflow against the final exact revision.
 
@@ -437,7 +437,7 @@ Review status: PENDING; no named human reviewer or approval recorded.
 
 Subject: writing. Topic: Narrative choices. Difficulty: medium. Estimated time: 1200 seconds.
 
-Local draft item hash: 0418a3a330eb6984a42ad69b513a078dc62529ecd039bc03b241169ab59dd8d7
+Local draft item hash: b29ff3ecb485c49fde66ae7042ea39b18b96ba9c65a41b335f77337b1202b4f5
 
 Write a story in which a character decides not to take a shortcut. Show what makes the decision difficult and how it changes what happens. You may use a real or imaginary setting.
 
@@ -448,7 +448,7 @@ Reviewer-only assessment
 
 No single correct response. Human rubric assessment only.
 
-Use scholarship-written-expression version 1: assess punctuation, creativity, construction, grammar, spelling and relevance independently on the 1?5 scale. Use its 1, 3 and 5 anchors; 2 and 4 indicate intermediate performance. This practice rubric is not an official examination score.
+Use scholarship-written-expression version 1: assess punctuation, creativity, construction, grammar, spelling and relevance independently on the 1–5 scale. Use its 1, 3 and 5 anchors; 2 and 4 indicate intermediate performance. This practice rubric is not an official examination score.
 
 Possible opening, not a required answer: The gate to the oval was open, and Niko could already hear the starting whistle. He stopped when he saw the newly planted seedlings along the track.
 
@@ -469,7 +469,7 @@ Review status: PENDING; no named human reviewer or approval recorded.
 
 Subject: writing. Topic: Persuasive trade-offs. Difficulty: challenging. Estimated time: 1200 seconds.
 
-Local draft item hash: 3b746e974fd364a097836ec9c9337240bb6a2137dad8d80c5d6767a3c0cabe5f
+Local draft item hash: 5b09b256d6ef5371cbd431028ab492c559a7d225cecb57045a25eb9263566509
 
 Your school can turn one unused room into either a quiet reading room or a space for group projects. Write a letter to the principal recommending one option. Explain two developed reasons, acknowledge a reasonable advantage of the other option, and respond to it.
 
@@ -480,7 +480,7 @@ Reviewer-only assessment
 
 No single correct response. Human rubric assessment only.
 
-Use scholarship-written-expression version 1: assess punctuation, creativity, construction, grammar, spelling and relevance independently on the 1?5 scale. Use its 1, 3 and 5 anchors; 2 and 4 indicate intermediate performance. This practice rubric is not an official examination score.
+Use scholarship-written-expression version 1: assess punctuation, creativity, construction, grammar, spelling and relevance independently on the 1–5 scale. Use its 1, 3 and 5 anchors; 2 and 4 indicate intermediate performance. This practice rubric is not an official examination score.
 
 Possible planning note, not a required answer: A reading room offers a calm place during wet-weather lunch. Group projects also need room, so suggest booking a classroom after lessons for that purpose.
 
