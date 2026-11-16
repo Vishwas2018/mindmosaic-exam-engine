@@ -67,10 +67,25 @@ function formatSubjectLabel(subject: string): string {
   return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
 }
 
+function formatCountdown(totalSeconds: number): string {
+  const clamped = Math.max(0, Math.floor(totalSeconds));
+  const hours = Math.floor(clamped / 3600);
+  const mins = Math.floor((clamped % 3600) / 60);
+  const secs = clamped % 60;
+  if (hours > 0) {
+    return `${hours}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  }
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
 export function VihaanDiagnosticExamRunner({
   questions,
   subject,
   mode = "local",
+  sessionTitle,
+  attemptMode,
+  durationMinutes,
+  isSyntheticE2e = false,
   solutionsById,
   persistToServer = false,
   onComplete,
@@ -79,6 +94,10 @@ export function VihaanDiagnosticExamRunner({
   questions: readonly Question[];
   subject: string;
   mode?: "local" | "server";
+  sessionTitle?: string;
+  attemptMode?: "diagnostic" | "practice" | "sectional" | "mock" | "writing";
+  durationMinutes?: number;
+  isSyntheticE2e?: boolean;
   solutionsById?: Readonly<Record<string, VihaanSolutionDetail>>;
   persistToServer?: boolean;
   onComplete?: (result: DiagnosticCompletionResult) => void;
@@ -91,6 +110,7 @@ export function VihaanDiagnosticExamRunner({
   const responses = useExamStore((state) => state.responses);
   const examResult = useExamStore((state) => state.result);
   const reviewQuestions = useExamStore((state) => state.reviewQuestions);
+  const remainingSeconds = useExamStore((state) => state.remainingSeconds);
   const setResponse = useExamStore((state) => state.setResponse);
   const goToNextQuestion = useExamStore((state) => state.goToNextQuestion);
   const goToPreviousQuestion = useExamStore((state) => state.goToPreviousQuestion);
@@ -100,6 +120,7 @@ export function VihaanDiagnosticExamRunner({
 
   const [error, setError] = useState<string | null>(null);
   const [persistedStatus, setPersistedStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [customRemainingSeconds, setCustomRemainingSeconds] = useState<number | null>(null);
   const completedRef = useRef(false);
 
   // Clean up store state when navigating away so stale attempts do not linger.
@@ -108,6 +129,23 @@ export function VihaanDiagnosticExamRunner({
       useExamStore.getState().resetExam();
     };
   }, []);
+
+  useEffect(() => {
+    if (status !== "in_progress") return;
+    const timer = setInterval(() => {
+      const store = useExamStore.getState();
+      store.tick();
+      if (durationMinutes && store.startedAt !== null) {
+        const elapsed = Math.floor((Date.now() - store.startedAt) / 1000);
+        const nextRemaining = Math.max(0, durationMinutes * 60 - elapsed);
+        setCustomRemainingSeconds(nextRemaining);
+        if (nextRemaining === 0) {
+          store.submitExam("timer_expired");
+        }
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [status, durationMinutes]);
 
   useEffect(() => {
     if (questions.length === 0 || status !== "not_started") {
@@ -174,6 +212,8 @@ export function VihaanDiagnosticExamRunner({
 
       if (persistToServer) {
         const questionIds = questions.map((q) => q.id);
+        const resolvedMode =
+          attemptMode ?? (questions.length >= 20 ? "diagnostic" : "practice");
         void (async () => {
           try {
             const response = await fetch("/api/student/vihaan/attempt", {
@@ -182,7 +222,9 @@ export function VihaanDiagnosticExamRunner({
               body: JSON.stringify({
                 questionIds,
                 subject,
-                mode: questions.length >= 20 ? "diagnostic" : "practice",
+                mode: resolvedMode,
+                title: sessionTitle,
+                isSyntheticE2e: isSyntheticE2e || undefined,
                 startedAt: storeState.startedAt ?? undefined,
                 submittedAt: storeState.submittedAt ?? undefined,
                 responses: storeState.responses,
@@ -200,7 +242,17 @@ export function VihaanDiagnosticExamRunner({
     } else if (status === "not_started") {
       completedRef.current = false;
     }
-  }, [status, examResult, onComplete, persistToServer, questions, subject]);
+  }, [
+    status,
+    examResult,
+    onComplete,
+    persistToServer,
+    questions,
+    subject,
+    attemptMode,
+    sessionTitle,
+    isSyntheticE2e,
+  ]);
 
   const handleSubmit = () => {
     if (persistToServer) {
@@ -448,17 +500,32 @@ export function VihaanDiagnosticExamRunner({
 
   const isSubmitting = status === "submitting";
   const isLastQuestion = currentQuestionIndex === questionsState.length - 1;
+  const shownSeconds =
+    durationMinutes !== undefined
+      ? (customRemainingSeconds ?? durationMinutes * 60)
+      : remainingSeconds;
 
   return (
     <div className="rounded-2xl border border-mm-line bg-white p-6 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
         <div className="flex items-center gap-3">
-          <h2 className="text-xl font-bold text-ink">{formatSubjectLabel(subject)}</h2>
+          <h2 className="text-xl font-bold text-ink">
+            {sessionTitle ?? formatSubjectLabel(subject)}
+          </h2>
           <p className="text-xs text-mm-muted">
             Question {currentQuestionIndex + 1} of {questionsState.length}
           </p>
         </div>
         <div className="flex items-center gap-2">
+          {shownSeconds !== null && (
+            <span
+              data-testid="vihaan-exam-timer"
+              className="inline-flex items-center gap-1 rounded border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-mono font-semibold text-amber-900"
+            >
+              <Clock className="h-3 w-3" aria-hidden="true" />
+              {formatCountdown(shownSeconds)}
+            </span>
+          )}
           <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
             Question {currentQuestionIndex + 1} of {questionsState.length}
           </span>

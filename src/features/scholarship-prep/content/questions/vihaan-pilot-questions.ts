@@ -15,6 +15,12 @@ import {
 import { hashJson } from "@/features/question-factory/provenance/content-hash";
 import type { VihaanSolutionDetail } from "@/features/scholarship-prep/lib/practice";
 import { questionBaseSchema, questionSchema, type Question } from "@/schemas/question.schema";
+import {
+  EXPANSION_BANK_MANIFEST_RAW,
+  EXPANSION_BATCHES_RAW,
+  EXPANSION_COVERAGE_REPORT_RAW,
+  EXPANSION_PUBLISHED_MANIFEST_RAW,
+} from "./expansion-raw";
 
 /**
  * Vihaan Scholarship Prep — canonical 20-question pilot bank (`vihaan-pilot-01`).
@@ -101,15 +107,24 @@ export const VIHAAN_PILOT_COUNTS = {
   total: VIHAAN_PILOT_QUESTIONS.length,
 } as const;
 
+type ExpansionBatchRawShape = {
+  readonly items: readonly VihaanPilotDraftItem[];
+};
+
+const VIHAAN_ALL_DRAFT_ITEMS: readonly VihaanPilotDraftItem[] = [
+  ...VIHAAN_PILOT_ITEMS,
+  ...EXPANSION_BATCHES_RAW.flatMap((batch) => (batch as ExpansionBatchRawShape).items),
+];
+
 export const VIHAAN_QUESTION_METADATA_BY_ID: ReadonlyMap<
   string,
   { readonly subject: string; readonly topic: string }
 > = new Map(
-  VIHAAN_PILOT_QUESTIONS.map((question) => [
-    question.id,
+  VIHAAN_ALL_DRAFT_ITEMS.map((item) => [
+    item.question.id,
     {
-      subject: question.metadata.subject,
-      topic: question.metadata.topic,
+      subject: item.question.metadata.subject,
+      topic: item.question.metadata.topic,
     },
   ]),
 );
@@ -117,7 +132,7 @@ export const VIHAAN_QUESTION_METADATA_BY_ID: ReadonlyMap<
 export type { VihaanSolutionDetail };
 
 export const VIHAAN_SOLUTIONS_BY_ID: ReadonlyMap<string, VihaanSolutionDetail> = new Map(
-  VIHAAN_PILOT_ITEMS.map((item) => {
+  VIHAAN_ALL_DRAFT_ITEMS.map((item) => {
     const manualKey =
       item.question.answerKey.kind === "manual" ? item.question.answerKey : undefined;
     const detail: VihaanSolutionDetail = {
@@ -423,4 +438,329 @@ let cachedVerification: VihaanPilotVerificationResult | undefined;
 export function getVerifiedVihaanPilotPublication(): VihaanPilotVerificationResult {
   cachedVerification ??= verifyVihaanPilotPublication(rawPublishedManifest);
   return cachedVerification;
+}
+
+const pilotItemSchema = canonicalPilotSchema.shape.items.element;
+
+const canonicalExpansionQuestionSchema = questionBaseSchema
+  .strict()
+  .extend({
+    status: z.literal("draft"),
+    yearLevel: z.literal(6),
+    examStyle: z.literal("scholarship_style"),
+    id: z.string().regex(/^vihaan-e500-[mnvrw]\d{3}$/),
+    visuals: z.array(z.never()).length(0),
+    media: z.never().optional(),
+    interaction: z.never().optional(),
+    metadata: questionBaseSchema.shape.metadata.strict(),
+  })
+  .superRefine((q, ctx) => {
+    const canonical = questionSchema.safeParse(q);
+    if (!canonical.success) {
+      for (const issue of canonical.error.issues) {
+        ctx.addIssue({ code: "custom", message: issue.message, path: issue.path });
+      }
+    }
+  });
+
+const canonicalExpansionItemSchema = pilotItemSchema
+  .omit({ question: true })
+  .extend({
+    question: canonicalExpansionQuestionSchema,
+    arithmeticCheck: z
+      .object({
+        expression: z.string().min(1).max(500),
+        expected: z.string().min(1),
+      })
+      .strict()
+      .optional(),
+  })
+  .strict();
+
+const canonicalExpansionBatchSchema = z
+  .object({
+    batchId: z.string().regex(/^vihaan-expansion-(?:0[1-9]|10)$/),
+    version: z.literal(1),
+    status: z.literal("draft"),
+    approvedBy: z.null(),
+    provenance: z
+      .object({
+        adapter: z.literal("manual_external"),
+        author: z.string().min(1),
+        model: z.null(),
+        generatedOn: z.literal("2026-11-16"),
+        originalGenerationEvidence: z.string().min(20),
+        externalQuestionMaterialUsed: z.literal(false),
+        formatReference: z.literal("https://www.edutest.com.au/tests_parents.html"),
+        formatReferenceUse: z.string().min(20),
+        promptFile: z.literal("authoring-brief.md"),
+      })
+      .strict(),
+    retainedPilotIds: z.array(z.string()),
+    items: z.array(canonicalExpansionItemSchema),
+  })
+  .strict();
+
+const expansionManifestDraftSchema = z
+  .object({
+    bankId: z.literal("vihaan-scholarship-500"),
+    version: z.literal(1),
+    status: z.literal("draft"),
+    approvedBy: z.null(),
+    targets: z
+      .object({
+        numeracy: z.literal(120),
+        numerical_reasoning: z.literal(120),
+        verbal_reasoning: z.literal(120),
+        reading: z.literal(100),
+        writing: z.literal(40),
+      })
+      .strict(),
+    difficultyTargets: z
+      .object({
+        easy: z.literal(75),
+        medium: z.literal(225),
+        challenging: z.literal(200),
+      })
+      .strict(),
+    retainedPilot: z.literal("content/vihaan-scholarship/pilot-01/draft.json"),
+    batches: z
+      .array(
+        z
+          .object({
+            batchId: z.string(),
+            file: z.string().regex(/^batch-(?:0[1-9]|10)\.draft\.json$/),
+          })
+          .strict(),
+      )
+      .length(10),
+  })
+  .strict();
+
+const expansionAdr017EvidenceSchema = z
+  .object({
+    questionId: z.string().min(1),
+    batchId: z.string().min(1),
+    draftItemHash: hexDigest,
+    draftQuestionHash: hexDigest,
+    publishedQuestionHash: hexDigest,
+    arithmeticMethod: z.string().nullable(),
+    arithmeticPassed: z.boolean().nullable(),
+    editorialInterpretationVerified: z.literal(true),
+    originalityVerified: z.literal(true),
+    ageSuitabilityVerified: z.literal(true),
+  })
+  .strict();
+
+export const vihaanExpansionPublishedManifestSchema = z
+  .object({
+    kind: z.literal("vihaan_expansion_publication_manifest"),
+    schemaVersion: z.literal(1),
+    bankId: z.literal("vihaan-scholarship-500"),
+    revision: z.number().int().positive(),
+    manifestHash: hexDigest,
+    pilotBatchHash: hexDigest,
+    approvedBy: z.string().trim().min(1),
+    approvedAt: z.iso.datetime({ offset: true }),
+    publishedAt: z.iso.datetime({ offset: true }),
+    batches: z
+      .array(
+        z
+          .object({
+            batchId: z.string(),
+            file: z.string(),
+            sourceHash: hexDigest,
+            itemCount: z.number().int().positive(),
+          })
+          .strict(),
+      )
+      .length(10),
+    adr017Evidence: z.array(expansionAdr017EvidenceSchema),
+    approvals: z.array(humanPublicationApprovalSchema),
+    manifestFingerprint: hexDigest,
+  })
+  .strict();
+
+export type VihaanExpansionVerificationResult =
+  | {
+      readonly ok: true;
+      readonly bankId: string;
+      readonly approvedBy: string;
+      readonly approvedAt: string;
+      readonly manifestHash: string;
+      readonly pilotBatchHash: string;
+      readonly manifestFingerprint: string;
+      readonly questions: readonly Question[];
+    }
+  | {
+      readonly ok: false;
+      readonly reason: string;
+      readonly questions: readonly [];
+    };
+
+/**
+ * Cryptographically verifies all 480 new items across `vihaan-expansion-01..10`
+ * against the human approval manifest, automated quality report, and existing
+ * 20-item pilot publication. Fails closed on any mismatch or tampering.
+ */
+export function verifyVihaanExpansionPublication(
+  manifestInput: unknown = EXPANSION_PUBLISHED_MANIFEST_RAW,
+): VihaanExpansionVerificationResult {
+  const parsedManifest = vihaanExpansionPublishedManifestSchema.safeParse(manifestInput);
+  if (!parsedManifest.success) {
+    return { ok: false, reason: "invalid_expansion_published_manifest", questions: [] };
+  }
+  const manifest = parsedManifest.data;
+  if (!isValidHumanApproverName(manifest.approvedBy)) {
+    return { ok: false, reason: "invalid_expansion_human_approver", questions: [] };
+  }
+  if (Number.isNaN(Date.parse(manifest.approvedAt)) || Number.isNaN(Date.parse(manifest.publishedAt))) {
+    return { ok: false, reason: "invalid_expansion_approval_timestamp", questions: [] };
+  }
+
+  const { manifestFingerprint, ...manifestFacts } = manifest;
+  if (manifestFingerprint !== hashJson(manifestFacts)) {
+    return { ok: false, reason: "expansion_manifest_fingerprint_mismatch", questions: [] };
+  }
+
+  const pilotVerification = getVerifiedVihaanPilotPublication();
+  if (!pilotVerification.ok || manifest.pilotBatchHash !== pilotVerification.draftBatchHash) {
+    return { ok: false, reason: "pilot_publication_mismatch", questions: [] };
+  }
+
+  const parsedBankManifest = expansionManifestDraftSchema.safeParse(EXPANSION_BANK_MANIFEST_RAW);
+  if (!parsedBankManifest.success) {
+    return { ok: false, reason: "invalid_expansion_bank_draft_manifest", questions: [] };
+  }
+  if (sha256JsonStringify(parsedBankManifest.data) !== manifest.manifestHash) {
+    return { ok: false, reason: "expansion_manifest_hash_mismatch", questions: [] };
+  }
+
+  const coverage = EXPANSION_COVERAGE_REPORT_RAW as {
+    passed?: boolean;
+    errors?: unknown[];
+    total?: number;
+    sources?: { manifestHash?: string; pilotHash?: string };
+  };
+  if (
+    coverage?.passed !== true ||
+    !Array.isArray(coverage.errors) ||
+    coverage.errors.length > 0 ||
+    coverage.total !== 500 ||
+    coverage.sources?.manifestHash !== manifest.manifestHash ||
+    coverage.sources?.pilotHash !== manifest.pilotBatchHash
+  ) {
+    return { ok: false, reason: "expansion_coverage_report_mismatch", questions: [] };
+  }
+
+  const pilotIds = new Set(pilotVerification.questions.map((q) => q.id));
+  const approvalById = new Map<string, HumanPublicationApproval>();
+  for (const approval of manifest.approvals) {
+    if (pilotIds.has(approval.questionId) || approvalById.has(approval.questionId)) {
+      return { ok: false, reason: `duplicate_or_pilot_overlap_${approval.questionId}`, questions: [] };
+    }
+    approvalById.set(approval.questionId, approval);
+  }
+
+  const evidenceById = new Map<string, (typeof manifest.adr017Evidence)[number]>();
+  for (const evidence of manifest.adr017Evidence) {
+    if (evidenceById.has(evidence.questionId)) {
+      return { ok: false, reason: `duplicate_expansion_evidence_${evidence.questionId}`, questions: [] };
+    }
+    evidenceById.set(evidence.questionId, evidence);
+  }
+
+  const verifiedQuestions: Question[] = [];
+  if (EXPANSION_BATCHES_RAW.length !== manifest.batches.length) {
+    return { ok: false, reason: "expansion_batch_count_mismatch", questions: [] };
+  }
+
+  for (let i = 0; i < EXPANSION_BATCHES_RAW.length; i += 1) {
+    const parsedBatch = canonicalExpansionBatchSchema.safeParse(EXPANSION_BATCHES_RAW[i]);
+    const expectedBatchMeta = manifest.batches[i];
+    if (!parsedBatch.success || !expectedBatchMeta) {
+      return { ok: false, reason: `invalid_expansion_batch_${i + 1}`, questions: [] };
+    }
+    if (
+      parsedBatch.data.batchId !== expectedBatchMeta.batchId ||
+      sha256JsonStringify(parsedBatch.data) !== expectedBatchMeta.sourceHash
+    ) {
+      return { ok: false, reason: `expansion_batch_hash_mismatch_${expectedBatchMeta.batchId}`, questions: [] };
+    }
+
+    for (const draftItem of parsedBatch.data.items) {
+      const questionId = draftItem.question.id;
+      const approval = approvalById.get(questionId);
+      const evidence = evidenceById.get(questionId);
+      if (!approval || !evidence) {
+        return { ok: false, reason: `missing_expansion_approval_${questionId}`, questions: [] };
+      }
+      if (approval.approvedBy !== manifest.approvedBy || approval.question.status !== "published") {
+        return { ok: false, reason: `invalid_expansion_approval_status_${questionId}`, questions: [] };
+      }
+
+      const expectedDraftItemHash = sha256JsonStringify(draftItem);
+      const approvalResult = validateHumanApproval(
+        approval,
+        approval.question,
+        manifest.revision,
+        expectedDraftItemHash,
+      );
+      if (!approvalResult.ok) {
+        return { ok: false, reason: `${questionId}_${approvalResult.reason}`, questions: [] };
+      }
+
+      const expectedPublishedHash = canonicalQuestionHash({
+        ...draftItem.question,
+        status: "published",
+      });
+      if (approval.contentHash !== expectedPublishedHash) {
+        return { ok: false, reason: `expansion_draft_drift_${questionId}`, questions: [] };
+      }
+
+      const requiresNumericCheck =
+        draftItem.question.metadata.subject === "numeracy" ||
+        draftItem.question.metadata.subject === "numerical_reasoning";
+      if (
+        evidence.draftItemHash !== expectedDraftItemHash ||
+        evidence.publishedQuestionHash !== approval.contentHash ||
+        evidence.batchId !== parsedBatch.data.batchId ||
+        (requiresNumericCheck && evidence.arithmeticPassed !== true)
+      ) {
+        return { ok: false, reason: `expansion_adr017_evidence_mismatch_${questionId}`, questions: [] };
+      }
+
+      verifiedQuestions.push(Object.freeze(approval.question));
+    }
+  }
+
+  if (verifiedQuestions.length !== 480 || manifest.approvals.length !== 480) {
+    return { ok: false, reason: "expansion_total_count_mismatch", questions: [] };
+  }
+
+  return {
+    ok: true,
+    bankId: manifest.bankId,
+    approvedBy: manifest.approvedBy,
+    approvedAt: manifest.approvedAt,
+    manifestHash: manifest.manifestHash,
+    pilotBatchHash: manifest.pilotBatchHash,
+    manifestFingerprint: manifest.manifestFingerprint,
+    questions: Object.freeze(verifiedQuestions),
+  };
+}
+
+let cachedExpansionVerification: VihaanExpansionVerificationResult | undefined;
+
+export function getVerifiedVihaanExpansionPublication(): VihaanExpansionVerificationResult {
+  cachedExpansionVerification ??= verifyVihaanExpansionPublication(EXPANSION_PUBLISHED_MANIFEST_RAW);
+  return cachedExpansionVerification;
+}
+
+export function getVerifiedVihaanAllPublishedQuestions(): readonly Question[] {
+  const pilot = getVerifiedVihaanPilotPublication();
+  if (!pilot.ok) return [];
+  const expansion = getVerifiedVihaanExpansionPublication();
+  if (!expansion.ok) return pilot.questions;
+  return Object.freeze([...pilot.questions, ...expansion.questions]);
 }

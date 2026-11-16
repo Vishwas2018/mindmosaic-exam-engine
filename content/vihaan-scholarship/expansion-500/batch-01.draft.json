@@ -1,0 +1,1959 @@
+{
+  "batchId": "vihaan-expansion-01",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "OpenAI Codex session",
+    "model": null,
+    "generatedOn": "2026-11-16",
+    "originalGenerationEvidence": "Session-authored problems, passages and prompts; deterministic assembly from checked-in authoring rows.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no sample test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "retainedPilotIds": [
+    "vihaan-p01-m01",
+    "vihaan-p01-m02",
+    "vihaan-p01-m03",
+    "vihaan-p01-m04",
+    "vihaan-p01-m05",
+    "vihaan-p01-m06",
+    "vihaan-p01-n01",
+    "vihaan-p01-n02",
+    "vihaan-p01-n03",
+    "vihaan-p01-n04",
+    "vihaan-p01-n05",
+    "vihaan-p01-v01",
+    "vihaan-p01-v02",
+    "vihaan-p01-v03",
+    "vihaan-p01-v04",
+    "vihaan-p01-r01",
+    "vihaan-p01-r02",
+    "vihaan-p01-r03",
+    "vihaan-p01-w01",
+    "vihaan-p01-w02"
+  ],
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-e500-m001",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A ribbon is 3.6 m long. Eva cuts off 0.85 m and then 1.25 m. How many metres remain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2.1"
+          },
+          {
+            "id": "b",
+            "text": "1.5"
+          },
+          {
+            "id": "c",
+            "text": "1.4"
+          },
+          {
+            "id": "d",
+            "text": "1.6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The two cuts total 0.85 + 1.25 = 2.10 metres. Subtract 2.10 from 3.60 to leave 1.50 metres; align the decimal places.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The two cuts total 0.85 + 1.25 = 2.10 metres.",
+        "Subtract 2.10 from 3.60 to leave 1.50 metres; align the decimal places."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3.6-0.85-1.25",
+        "expected": "1.5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m002",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Five identical bottles each hold 0.45 litres. How many litres do they hold altogether?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2.5"
+          },
+          {
+            "id": "b",
+            "text": "2.25"
+          },
+          {
+            "id": "c",
+            "text": "0.9"
+          },
+          {
+            "id": "d",
+            "text": "2.05"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Multiply the capacity of one bottle by five. Five lots of 0.45 litres give 2.25 litres, not 0.90 litres from adding the two numbers.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Multiply the capacity of one bottle by five.",
+        "Five lots of 0.45 litres give 2.25 litres, not 0.90 litres from adding the two numbers."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5*0.45",
+        "expected": "2.25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m003",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A recipe uses 3/4 cup of oats for 6 biscuits. How many cups are needed for 10 biscuits at the same rate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "1.5"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "1.25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "One biscuit uses (3/4) divided by 6, which is 1/8 cup. Ten biscuits require 10/8 = 1.25 cups; scaling by four extra biscuits is different from adding four cups.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "One biscuit uses (3/4) divided by 6, which is 1/8 cup.",
+        "Ten biscuits require 10/8 = 1.25 cups; scaling by four extra biscuits is different from adding four cups."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3/4/6*10",
+        "expected": "1.25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n001",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The numbers 6, 11, 16, 21 increase by an equal amount. What is the sixth number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "31"
+          },
+          {
+            "id": "d",
+            "text": "26"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Each increase is five, so the fifth number is 26. The question asks for the sixth, which is 31 after one more increase.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Each increase is five, so the fifth number is 26.",
+        "The question asks for the sixth, which is 31 after one more increase."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6+5*5",
+        "expected": "31"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n002",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shrinking pattern is 96, 48, 24, 12. Each term is half the previous term. What comes next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Check that halving connects each adjacent pair. Half of twelve is six; subtracting a fixed amount would not match all the earlier changes.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Check that halving connects each adjacent pair.",
+        "Half of twelve is six; subtracting a fixed amount would not match all the earlier changes."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "12/2",
+        "expected": "6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n003",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A series is 4, 9, 19, 39, 79. Each step doubles the previous term and adds the same whole number. What is the next term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "159"
+          },
+          {
+            "id": "b",
+            "text": "158"
+          },
+          {
+            "id": "c",
+            "text": "160"
+          },
+          {
+            "id": "d",
+            "text": "169"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Twice four plus one is nine, and the same extra one works for every displayed step. Twice 79 plus one is 159.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Twice four plus one is nine, and the same extra one works for every displayed step.",
+        "Twice 79 plus one is 159."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "79*2+1",
+        "expected": "159"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v001",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The path was narrow, so the walkers continued in single file. Which word best replaces narrow here?",
+        "options": [
+          {
+            "id": "a",
+            "text": "lengthy"
+          },
+          {
+            "id": "b",
+            "text": "crowded"
+          },
+          {
+            "id": "c",
+            "text": "slender"
+          },
+          {
+            "id": "d",
+            "text": "crooked"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Walking single file suggests little width. Slender is the closest width word; crooked concerns direction and crowded concerns how many people are present.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Walking single file suggests little width.",
+        "Slender is the closest width word; crooked concerns direction and crowded concerns how many people are present."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v002",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "When the rain stopped, the children resumed their game. What does resumed mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "started again"
+          },
+          {
+            "id": "b",
+            "text": "finished early"
+          },
+          {
+            "id": "c",
+            "text": "changed entirely"
+          },
+          {
+            "id": "d",
+            "text": "watched quietly"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The rain interrupted the game and the children continued it afterwards. Started again preserves that meaning; finishing or changing it does not.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The rain interrupted the game and the children continued it afterwards.",
+        "Started again preserves that meaning; finishing or changing it does not."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v003",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The caretaker inspected the gate before allowing the crowd through. Inspected most nearly means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "replaced"
+          },
+          {
+            "id": "b",
+            "text": "unlocked"
+          },
+          {
+            "id": "c",
+            "text": "decorated"
+          },
+          {
+            "id": "d",
+            "text": "examined"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Inspection means looking carefully to check a condition. Unlocking might happen later, but the sentence does not say it is the inspection itself.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Inspection means looking carefully to check a condition.",
+        "Unlocking might happen later, but the sentence does not say it is the inspection itself."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r001",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In 'The spare seat', why does the new player ask Anika to play slowly?",
+        "options": [
+          {
+            "id": "a",
+            "text": "so the conductor can leave"
+          },
+          {
+            "id": "b",
+            "text": "because her violin is damaged"
+          },
+          {
+            "id": "c",
+            "text": "because the rehearsal is over"
+          },
+          {
+            "id": "d",
+            "text": "so he can follow the opening"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "He explicitly asks her to play the opening slowly so he can follow. The request is for help learning the music, rather than a judgement about her instrument.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The spare seat",
+          "body": "At the first rehearsal, Anika chose a chair in the back row. From there she could watch the violin bows without anyone watching hers. When the conductor asked for a volunteer to play the opening phrase, she bent to retie a perfectly secure shoelace.\n\nOn Thursday a new player arrived carrying a battered case. The only empty chair stood beside Anika. He opened his music upside down, noticed, and laughed. 'I hoped nobody would see that,' he said. Anika showed him where to begin.\n\nDuring the break he asked her to play the opening slowly so he could follow. She played it twice, stumbling once. He thanked her anyway. After the break, the conductor asked again for a volunteer. Anika's hand moved before she had time to study her shoelace.\n\nHer first note trembled. From the chair beside her came a small, steady tap of a shoe keeping time. The rest of the phrase followed. Afterwards, she left her music on the chair while she fetched water. She was saving the seat, but no longer hiding in it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "He explicitly asks her to play the opening slowly so he can follow.",
+        "The request is for help learning the music, rather than a judgement about her instrument."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r002",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does Anika's shoelace action at the first rehearsal suggest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "she cannot see the conductor"
+          },
+          {
+            "id": "b",
+            "text": "she is preparing to leave"
+          },
+          {
+            "id": "c",
+            "text": "she has forgotten her music"
+          },
+          {
+            "id": "d",
+            "text": "She wants to avoid volunteering"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The shoelace is described as perfectly secure and she bends when a volunteer is requested. The unnecessary action provides a way to avoid being selected.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc character inference",
+          "skill": "scholarship.rc-character-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-character-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The spare seat",
+          "body": "At the first rehearsal, Anika chose a chair in the back row. From there she could watch the violin bows without anyone watching hers. When the conductor asked for a volunteer to play the opening phrase, she bent to retie a perfectly secure shoelace.\n\nOn Thursday a new player arrived carrying a battered case. The only empty chair stood beside Anika. He opened his music upside down, noticed, and laughed. 'I hoped nobody would see that,' he said. Anika showed him where to begin.\n\nDuring the break he asked her to play the opening slowly so he could follow. She played it twice, stumbling once. He thanked her anyway. After the break, the conductor asked again for a volunteer. Anika's hand moved before she had time to study her shoelace.\n\nHer first note trembled. From the chair beside her came a small, steady tap of a shoe keeping time. The rest of the phrase followed. Afterwards, she left her music on the chair while she fetched water. She was saving the seat, but no longer hiding in it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The shoelace is described as perfectly secure and she bends when a volunteer is requested.",
+        "The unnecessary action provides a way to avoid being selected."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r003",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which experience most directly prepares Anika to volunteer on Thursday?",
+        "options": [
+          {
+            "id": "a",
+            "text": "helping the new player with the phrase"
+          },
+          {
+            "id": "b",
+            "text": "being given a different violin"
+          },
+          {
+            "id": "c",
+            "text": "hearing the conductor praise her publicly"
+          },
+          {
+            "id": "d",
+            "text": "moving to the front row"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "She has just played for the new player, including a stumble, and still receives thanks. That safe experience plausibly builds confidence; the other events do not occur in the text.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The spare seat",
+          "body": "At the first rehearsal, Anika chose a chair in the back row. From there she could watch the violin bows without anyone watching hers. When the conductor asked for a volunteer to play the opening phrase, she bent to retie a perfectly secure shoelace.\n\nOn Thursday a new player arrived carrying a battered case. The only empty chair stood beside Anika. He opened his music upside down, noticed, and laughed. 'I hoped nobody would see that,' he said. Anika showed him where to begin.\n\nDuring the break he asked her to play the opening slowly so he could follow. She played it twice, stumbling once. He thanked her anyway. After the break, the conductor asked again for a volunteer. Anika's hand moved before she had time to study her shoelace.\n\nHer first note trembled. From the chair beside her came a small, steady tap of a shoe keeping time. The rest of the phrase followed. Afterwards, she left her music on the chair while she fetched water. She was saving the seat, but no longer hiding in it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She has just played for the new player, including a stumble, and still receives thanks.",
+        "That safe experience plausibly builds confidence; the other events do not occur in the text."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w001",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a story about a character who finds a note in a borrowed library book. Make the note change one decision the character makes. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Establish what the character wants before the note appears, so its effect is visible. Connect the discovery to a choice and a consequence; a sequence of unrelated adventures will not develop the task. End with a detail that shows how the character's understanding has changed.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Narrative composition",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "narrative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Establish what the character wants before the note appears, so its effect is visible.",
+        "Connect the discovery to a choice and a consequence; a sequence of unrelated adventures will not develop the task.",
+        "End with a detail that shows how the character's understanding has changed."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Establish what the character wants before the note appears, so its effect is visible.",
+          "Connect the discovery to a choice and a consequence; a sequence of unrelated adventures will not develop the task.",
+          "End with a detail that shows how the character's understanding has changed.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m004",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "One third of a tank is full. After 18 litres are added it is five sixths full. What is its total capacity in litres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "54"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "27"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The added fraction is 5/6 minus 1/3 = 1/2 of the tank. If half the tank holds 18 litres, its full capacity is 36 litres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The added fraction is 5/6 minus 1/3 = 1/2 of the tank.",
+        "If half the tank holds 18 litres, its full capacity is 36 litres."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "18/(5/6-1/3)",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m005",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Tari walks 2/5 of a 15 km trail before lunch and another 1/3 of the whole trail afterwards. How many kilometres remain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5"
+          },
+          {
+            "id": "b",
+            "text": "6"
+          },
+          {
+            "id": "c",
+            "text": "4"
+          },
+          {
+            "id": "d",
+            "text": "3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Both fractions refer to the whole trail: 2/5 + 1/3 = 11/15. Eleven kilometres have been walked, leaving 4 kilometres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Both fractions refer to the whole trail: 2/5 + 1/3 = 11/15.",
+        "Eleven kilometres have been walked, leaving 4 kilometres."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "15*(1-2/5-1/3)",
+        "expected": "4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m006",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A school orders 7.5 kg of clay. Each sculpture uses 3/8 kg. Two sculptures break after being made and cannot be reused. How many completed sculptures remain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "18.75"
+          },
+          {
+            "id": "d",
+            "text": "20"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Divide 7.5 by 3/8, or multiply 7.5 by 8/3, to get 20 sculptures made. The two broken sculptures still used clay, so 20 minus 2 gives 18 completed sculptures.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Divide 7.5 by 3/8, or multiply 7.5 by 8/3, to get 20 sculptures made.",
+        "The two broken sculptures still used clay, so 20 minus 2 gives 18 completed sculptures."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7.5/(3/8)-2",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n004",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The gaps in 2, 7, 14, 23, 34 increase by 2 each time. What is the next term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "46"
+          },
+          {
+            "id": "b",
+            "text": "49"
+          },
+          {
+            "id": "c",
+            "text": "47"
+          },
+          {
+            "id": "d",
+            "text": "45"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The gaps are 5, 7, 9 and 11. The next gap is 13, so add it to 34 to obtain 47.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The gaps are 5, 7, 9 and 11.",
+        "The next gap is 13, so add it to 34 to obtain 47."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "34+13",
+        "expected": "47"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n005",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In 3, 12, 10, 40, 38, 152, the operations alternate between multiplying by 4 and subtracting 2. What is the eighth term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "148"
+          },
+          {
+            "id": "b",
+            "text": "150"
+          },
+          {
+            "id": "c",
+            "text": "608"
+          },
+          {
+            "id": "d",
+            "text": "600"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The seventh term follows a subtraction: 152 minus 2 = 150. The eighth follows multiplication: 150 times 4 = 600. Applying only the next operation stops one term too soon.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The seventh term follows a subtraction: 152 minus 2 = 150.",
+        "The eighth follows multiplication: 150 times 4 = 600. Applying only the next operation stops one term too soon."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(152-2)*4",
+        "expected": "600"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n006",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two interleaved sequences form 2, 30, 5, 26, 8, 22, 11, ?. What replaces the question mark?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "14"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The odd positions rise 2, 5, 8, 11 by three. The even positions fall 30, 26, 22 by four, so the missing even term is 18.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The odd positions rise 2, 5, 8, 11 by three.",
+        "The even positions fall 30, 26, 22 by four, so the missing even term is 18."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "22-4",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v004",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Hana was reluctant to lend her new sketchbook because its pages tore easily. Which word describes reluctant?",
+        "options": [
+          {
+            "id": "a",
+            "text": "eager"
+          },
+          {
+            "id": "b",
+            "text": "unable"
+          },
+          {
+            "id": "c",
+            "text": "forgetful"
+          },
+          {
+            "id": "d",
+            "text": "unwilling"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The concern about torn pages explains hesitation about lending. Unwilling matches that attitude; unable would mean she could not lend it at all.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The concern about torn pages explains hesitation about lending.",
+        "Unwilling matches that attitude; unable would mean she could not lend it at all."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v005",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A temporary bridge carried pedestrians while the old bridge was repaired. Temporary means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "not permanent"
+          },
+          {
+            "id": "b",
+            "text": "unsafe by design"
+          },
+          {
+            "id": "c",
+            "text": "very narrow"
+          },
+          {
+            "id": "d",
+            "text": "recently damaged"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The bridge serves during a limited period of repair. Not permanent describes its intended duration; neither safety nor width follows from the word.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The bridge serves during a limited period of repair.",
+        "Not permanent describes its intended duration; neither safety nor width follows from the word."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v006",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The coach praised the team's cooperation rather than any single player's skill. What is cooperation?",
+        "options": [
+          {
+            "id": "a",
+            "text": "following silently"
+          },
+          {
+            "id": "b",
+            "text": "working together"
+          },
+          {
+            "id": "c",
+            "text": "winning easily"
+          },
+          {
+            "id": "d",
+            "text": "training alone"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The contrast with one player points to shared effort. Working together captures cooperation; a team can cooperate without winning.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The contrast with one player points to shared effort.",
+        "Working together captures cooperation; a team can cooperate without winning."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r004",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the final sentence distinguish saving the seat from hiding in it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It reinterprets the same location as companionship rather than avoidance"
+          },
+          {
+            "id": "b",
+            "text": "it proves she will always play solos"
+          },
+          {
+            "id": "c",
+            "text": "it explains why the chair is empty"
+          },
+          {
+            "id": "d",
+            "text": "it suggests the conductor should move the chairs"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The opening uses the back chair as protection from notice, while the ending connects it to the new player. The physical seat stays the same but its emotional function changes.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc authorial craft",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-authorial-craft"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The spare seat",
+          "body": "At the first rehearsal, Anika chose a chair in the back row. From there she could watch the violin bows without anyone watching hers. When the conductor asked for a volunteer to play the opening phrase, she bent to retie a perfectly secure shoelace.\n\nOn Thursday a new player arrived carrying a battered case. The only empty chair stood beside Anika. He opened his music upside down, noticed, and laughed. 'I hoped nobody would see that,' he said. Anika showed him where to begin.\n\nDuring the break he asked her to play the opening slowly so he could follow. She played it twice, stumbling once. He thanked her anyway. After the break, the conductor asked again for a volunteer. Anika's hand moved before she had time to study her shoelace.\n\nHer first note trembled. From the chair beside her came a small, steady tap of a shoe keeping time. The rest of the phrase followed. Afterwards, she left her music on the chair while she fetched water. She was saving the seat, but no longer hiding in it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The opening uses the back chair as protection from notice, while the ending connects it to the new player.",
+        "The physical seat stays the same but its emotional function changes."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r005",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which statement best respects both Anika's trembling note and her completed phrase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "she finds the music technically easy"
+          },
+          {
+            "id": "b",
+            "text": "She acts despite remaining nervous"
+          },
+          {
+            "id": "c",
+            "text": "she has entirely lost her fear"
+          },
+          {
+            "id": "d",
+            "text": "she relies on the new player to play her notes"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The first note still trembles, showing nerves have not disappeared. She nevertheless finishes the phrase, so progress means acting through anxiety rather than eliminating it.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The spare seat",
+          "body": "At the first rehearsal, Anika chose a chair in the back row. From there she could watch the violin bows without anyone watching hers. When the conductor asked for a volunteer to play the opening phrase, she bent to retie a perfectly secure shoelace.\n\nOn Thursday a new player arrived carrying a battered case. The only empty chair stood beside Anika. He opened his music upside down, noticed, and laughed. 'I hoped nobody would see that,' he said. Anika showed him where to begin.\n\nDuring the break he asked her to play the opening slowly so he could follow. She played it twice, stumbling once. He thanked her anyway. After the break, the conductor asked again for a volunteer. Anika's hand moved before she had time to study her shoelace.\n\nHer first note trembled. From the chair beside her came a small, steady tap of a shoe keeping time. The rest of the phrase followed. Afterwards, she left her music on the chair while she fetched water. She was saving the seat, but no longer hiding in it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The first note still trembles, showing nerves have not disappeared.",
+        "She nevertheless finishes the phrase, so progress means acting through anxiety rather than eliminating it."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r006",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At noon in 'A cooler courtyard', what was the temperature difference between the surfaces in degrees?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "34"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The mat read 34 degrees and the paving 28 degrees at noon. Subtract 28 from 34 to obtain six degrees; the starting reading is not used for this comparison.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A cooler courtyard",
+          "body": "The following account describes a fictional school investigation. Students wanted to know whether two courtyard surfaces warmed differently in sunlight. They placed identical thermometers on a dark rubber mat and pale paving at 10 am. Both surfaces began at 19 degrees. At noon the mat read 34 degrees and the paving 28 degrees. At 2 pm a cloud covered the courtyard; both readings fell.\n\nOne pupil proposed replacing every dark surface immediately. The teacher asked whether one afternoon could settle the decision. The mat lay near a warm wall, while the paving was exposed to a light breeze. The students had measured temperature on the surfaces, not the air where people walked.\n\nFor a second trial they planned to exchange the thermometers, measure several days and choose locations equally sheltered from wind. They would also compare the cost and durability of possible replacements. Their first results were useful: they provided a reason to investigate further. They did not yet provide a complete purchasing plan.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The mat read 34 degrees and the paving 28 degrees at noon.",
+        "Subtract 28 from 34 to obtain six degrees; the starting reading is not used for this comparison."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w002",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a story in which a team loses an important object just before a performance. Show how two different responses to the problem affect the outcome. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Choose the object and its practical importance before planning the crisis. Give two characters contrasting actions, such as searching methodically and improvising, and let those actions cause later events. Resolve the immediate problem while showing what the team learns about working together.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Narrative composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "narrative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Choose the object and its practical importance before planning the crisis.",
+        "Give two characters contrasting actions, such as searching methodically and improvising, and let those actions cause later events.",
+        "Resolve the immediate problem while showing what the team learns about working together."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Choose the object and its practical importance before planning the crisis.",
+          "Give two characters contrasting actions, such as searching methodically and improvising, and let those actions cause later events.",
+          "Resolve the immediate problem while showing what the team learns about working together.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m007",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A runner covers 1.75 km in the morning and 2.6 km in the evening on each of four days. What is the total distance in kilometres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18.4"
+          },
+          {
+            "id": "b",
+            "text": "17.4"
+          },
+          {
+            "id": "c",
+            "text": "8.7"
+          },
+          {
+            "id": "d",
+            "text": "14.4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Add the two daily distances to get 4.35 km. Multiply by four days to get 17.4 km; both runs occur on every day.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Add the two daily distances to get 4.35 km.",
+        "Multiply by four days to get 17.4 km; both runs occur on every day."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "4*(1.75+2.6)",
+        "expected": "17.4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m008",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A class uses 5/12 of a paper roll on Monday and 3/7 of the remainder on Tuesday. What fraction of the original roll is still unused? Give a decimal to six places if necessary.",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.333333"
+          },
+          {
+            "id": "b",
+            "text": "0.25"
+          },
+          {
+            "id": "c",
+            "text": "0.416667"
+          },
+          {
+            "id": "d",
+            "text": "0.571429"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "After Monday, 7/12 of the roll remains. Tuesday leaves 4/7 of that amount: (7/12) times (4/7) = 1/3, or 0.333333 to six decimal places.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "After Monday, 7/12 of the roll remains.",
+        "Tuesday leaves 4/7 of that amount: (7/12) times (4/7) = 1/3, or 0.333333 to six decimal places."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(1-5/12)*(1-3/7)",
+        "expected": "0.333333"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m009",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which decimal is exactly halfway between 0.38 and 0.64?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.5"
+          },
+          {
+            "id": "b",
+            "text": "0.52"
+          },
+          {
+            "id": "c",
+            "text": "0.51"
+          },
+          {
+            "id": "d",
+            "text": "0.13"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The gap is 0.64 minus 0.38 = 0.26. Half the gap is 0.13; add it to 0.38 to obtain 0.51.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The gap is 0.64 minus 0.38 = 0.26.",
+        "Half the gap is 0.13; add it to 0.38 to obtain 0.51."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(0.38+0.64)/2",
+        "expected": "0.51"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n007",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The sequence 2, 5, 11, 23, 47 follows a rule. Its gaps double each time. What is the difference between its next two terms?",
+        "options": [
+          {
+            "id": "a",
+            "text": "96"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "95"
+          },
+          {
+            "id": "d",
+            "text": "192"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The gaps are 3, 6, 12 and 24; the next gap is 48, giving a next term of 95. The gap after that is 96, which is the requested difference between the next two terms.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The gaps are 3, 6, 12 and 24; the next gap is 48, giving a next term of 95.",
+        "The gap after that is 96, which is the requested difference between the next two terms."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(47*2+1)*2+1-(47*2+1)",
+        "expected": "96"
+      }
+    }
+  ]
+}
