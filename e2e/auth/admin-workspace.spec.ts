@@ -74,7 +74,8 @@ test.describe("Admin Workspace Authorization & Navigation", () => {
 
     await page.goto("/admin/writing");
     await expect(page.getByRole("heading", { level: 1, name: "Writing review" })).toBeVisible();
-    await expect(page.getByText(/Awaiting migration: admin_redacted_writing_queue/)).toBeVisible();
+    /* The note renders twice on this page (queue card and status region): assert the status region, not "some text" (strict mode). */
+    await expect(page.getByRole("status").getByText(/Awaiting migration: admin_redacted_writing_queue/)).toBeVisible();
 
     await page.goto("/admin/support");
     await expect(page.getByRole("heading", { level: 1, name: "Support" })).toBeVisible();
