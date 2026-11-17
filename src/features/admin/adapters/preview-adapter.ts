@@ -16,6 +16,19 @@ export function getPreviewAdminData(): AdminWorkspaceData {
       email: "maya.chen@example.internal",
     },
     metrics: PREVIEW_ADMIN_METRICS,
+    /* Illustrative sample figures from the design export, shown only in local preview mode. */
+    overview: {
+      authored: 142,
+      approved: 46,
+      awaitingPerson: 96,
+      programmes: [
+        { label: "NAPLAN & ICAS", mode: "report", authored: 1548, approved: 53, served: 1548 },
+        { label: "Scholarship & Edutest", mode: "enforce", authored: 40, approved: 40, served: 40 },
+      ],
+      flagged: { isAvailable: true, count: 18 },
+      writing: { isAvailable: true, count: 9 },
+      reports: { isAvailable: true },
+    },
     questions: PREVIEW_ADMIN_QUESTIONS.map((q) => ({
       ...q,
       prompt: q.title,

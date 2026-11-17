@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 
 import {createClient} from "@/lib/supabase/server";
-import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import {isSingaporeMathsSampleAllowed, isSingaporeMathsSampleAllowedFor} from "@/features/flags/singapore-maths-sample";
 import {sampleExplanation} from "@/content/visual-fixtures/bar-model/sample-practice.server";
 import {
   getSampleStore,
@@ -42,6 +42,9 @@ export async function GET(request: Request): Promise<NextResponse> {
   if (!userId) {
     return NextResponse.json({error: "unauthorized"}, {status: 401});
   }
+  if (!isSingaporeMathsSampleAllowedFor(userId)) {
+    return new NextResponse(null, {status: 404});
+  }
   try {
     const submissions = await getSampleStore().listSubmissions(userId, year);
     return NextResponse.json({
@@ -74,6 +77,9 @@ export async function DELETE(request: Request): Promise<NextResponse> {
   const userId = await signedInUserId();
   if (!userId) {
     return NextResponse.json({error: "unauthorized"}, {status: 401});
+  }
+  if (!isSingaporeMathsSampleAllowedFor(userId)) {
+    return new NextResponse(null, {status: 404});
   }
   try {
     const store = getSampleStore();

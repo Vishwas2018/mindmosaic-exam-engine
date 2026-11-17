@@ -2,6 +2,7 @@ import {describe, expect, it} from "vitest";
 
 import {
   isSingaporeMathsSampleAllowed,
+  isSingaporeMathsSampleAllowedFor,
   singaporeMathsSampleAvailability,
 } from "@/features/flags/singapore-maths-sample";
 
@@ -274,5 +275,48 @@ describe("isSingaporeMathsSampleAllowed", () => {
     expect(isSingaporeMathsSampleAllowed({NEXT_PUBLIC_SUPABASE_URL: LOCAL})).toBe(true);
     expect(isSingaporeMathsSampleAllowed({})).toBe(false);
     expect(isSingaporeMathsSampleAllowed({VERCEL_ENV: "production"})).toBe(false);
+  });
+});
+
+describe("isSingaporeMathsSampleAllowedFor — controlled preview allowlist", () => {
+  const hosted = {
+    VERCEL_ENV: "preview",
+    NODE_ENV: "production",
+    NEXT_PUBLIC_SUPABASE_URL: "https://qawbnonprodproject.supabase.co",
+    SINGAPORE_MATHS_SAMPLE_ENABLED: "1",
+    SINGAPORE_MATHS_SAMPLE_SUPABASE_REF: "qawbnonprodproject",
+    PRODUCTION_SUPABASE_PROJECT_REF: "liveprodproject",
+  };
+
+  it("hides the sample from every account when no allowlist is configured", () => {
+    expect(isSingaporeMathsSampleAllowedFor("user-1", hosted)).toBe(false);
+  });
+
+  it("hides the sample from a general beta user who is not on the list", () => {
+    const env = {...hosted, SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS: "user-1"};
+    expect(isSingaporeMathsSampleAllowedFor("user-2", env)).toBe(false);
+    expect(isSingaporeMathsSampleAllowedFor(null, env)).toBe(false);
+    expect(isSingaporeMathsSampleAllowedFor(undefined, env)).toBe(false);
+  });
+
+  it("shows the sample to an allowlisted account, case- and whitespace-insensitively", () => {
+    const env = {...hosted, SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS: " USER-1 , user-9"};
+    expect(isSingaporeMathsSampleAllowedFor("user-1", env)).toBe(true);
+    expect(isSingaporeMathsSampleAllowedFor("User-9", env)).toBe(true);
+  });
+
+  it("never lets the allowlist override a closed deployment gate", () => {
+    const env = {
+      ...hosted,
+      VERCEL_ENV: "production",
+      SINGAPORE_MATHS_SAMPLE_ALLOWED_USER_IDS: "user-1",
+    };
+    expect(isSingaporeMathsSampleAllowedFor("user-1", env)).toBe(false);
+  });
+
+  it("needs no list on an isolated local backend (fixture accounts only)", () => {
+    expect(
+      isSingaporeMathsSampleAllowedFor("anyone", {NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:54321"}),
+    ).toBe(true);
   });
 });

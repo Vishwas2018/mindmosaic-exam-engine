@@ -1,6 +1,6 @@
 {
   "schemaPassed": true,
-  "batchHash": "0fc6dccf17efb1acd9f75ca8684f97f4e3778b3d4841179f431f2dfdf2ec3ffb",
+  "batchHash": "50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b",
   "errors": [],
   "items": [
     {
@@ -266,7 +266,7 @@
     },
     {
       "id": "vihaan-p01-w01",
-      "contentHash": "0418a3a330eb6984a42ad69b513a078dc62529ecd039bc03b241169ab59dd8d7",
+      "contentHash": "b29ff3ecb485c49fde66ae7042ea39b18b96ba9c65a41b335f77337b1202b4f5",
       "automated": "PASS",
       "computation": null,
       "failures": [],
@@ -280,7 +280,7 @@
     },
     {
       "id": "vihaan-p01-w02",
-      "contentHash": "3b746e974fd364a097836ec9c9337240bb6a2137dad8d80c5d6767a3c0cabe5f",
+      "contentHash": "5b09b256d6ef5371cbd431028ab492c559a7d225cecb57045a25eb9263566509",
       "automated": "PASS",
       "computation": null,
       "failures": [],
@@ -331,7 +331,7 @@
       },
       {
         "path": "src\\content\\questions\\generated\\batch-published.json",
-        "sha256": "ee845a0bf9767e24cf550eccb6f6b063d4c5d485198240d0f83c3c8a29268a0f"
+        "sha256": "b0f78d2ed822f07387b6bfc4173d87df3e0809a55a2ddf13a17265d8aa59363f"
       },
       {
         "path": "src\\content\\questions\\generated\\batch-scholarship-published.json",

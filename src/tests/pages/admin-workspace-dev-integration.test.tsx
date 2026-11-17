@@ -26,6 +26,7 @@ vi.mock("@/features/auth/require-role", () => ({
 }));
 
 vi.mock("@/server/exam-bank", () => ({
+  deployedGateFallback: () => "report",
   getExamBank: vi.fn(() => [
     {
       id: "Q-PRAC-001",
@@ -42,6 +43,7 @@ vi.mock("@/server/publication-evidence", () => ({
     questions: ["Q-PRAC-001"],
     problems: [],
     pendingPublication: ["Q-AMC-001"],
+    approvals: new Map(),
   })),
 }));
 

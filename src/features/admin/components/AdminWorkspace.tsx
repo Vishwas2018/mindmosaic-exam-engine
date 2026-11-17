@@ -29,6 +29,7 @@ import {
   Cog,
 } from "lucide-react";
 import { MindMosaicLogo } from "@/components/branding";
+import { AdminOverviewView } from "./AdminOverviewView";
 import type {
   AdminWorkspaceData,
   AdminView,
@@ -40,6 +41,8 @@ import type {
 export interface AdminWorkspaceProps {
   data: AdminWorkspaceData;
   initialView?: AdminView;
+  /** Server-rendered content for the library pages (/admin/questions...). When set it fills the content pane. */
+  libraryContent?: React.ReactNode;
 }
 
 const LEGACY_TOOLS = [
@@ -79,7 +82,7 @@ function approvalMeta(item: AdminApprovalItem): string {
   return parts.length ? parts.join(" · ") : "Year, subject and author not recorded";
 }
 
-export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspaceProps) {
+export function AdminWorkspace({ data, initialView = "overview", libraryContent }: AdminWorkspaceProps) {
   const [currentView, setCurrentView] = useState<AdminView>(initialView);
   const [selectedYear, setSelectedYear] = useState<"all" | 3 | 5 | 6>("all");
   const [selectedSubject, setSelectedSubject] = useState<string>("all");
@@ -157,23 +160,6 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
             <Link href="/" className="inline-flex items-center gap-2">
               <MindMosaicLogo size="sm" />
             </Link>
-          </div>
-
-          {/* Legacy Tools Quick Links */}
-          <div className="hidden sm:flex items-center gap-2 border-r border-royal/10 pr-3 mr-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#6e6779]">
-              Tools:
-            </span>
-            {LEGACY_TOOLS.map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="inline-flex items-center gap-1 rounded-lg border border-royal/10 bg-royal/[0.03] px-2 py-0.5 text-xs font-medium text-royal hover:bg-royal/10"
-              >
-                <span>{tool.label}</span>
-                <ExternalLink className="h-3 w-3 opacity-60" />
-              </Link>
-            ))}
           </div>
 
           {/* Artboard switcher pills: a design-review aid, shown only over the synthetic preview data. */}
@@ -287,20 +273,59 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
               </p>
               {[
                 { id: "overview", label: "Overview", icon: LayoutDashboard },
-                { id: "library", label: "Question library", icon: BookOpen, count: data.questions.length },
-                { id: "review", label: "Question review", icon: FileSearch },
-                { id: "approval", label: "Human approval", icon: CheckCircle2, count: data.approvals.filter((a) => !a.isApproved).length },
+                { id: "library", label: "Question library", icon: BookOpen, count: data.overview.authored, href: "/admin/questions" },
+                /* The per-question review and approval artboards are reached from a library row in DEV. */
+                ...(data.source === "preview"
+                  ? [
+                      { id: "review", label: "Question review", icon: FileSearch },
+                      { id: "approval", label: "Human approval", icon: CheckCircle2, count: data.approvals.filter((a) => !a.isApproved).length },
+                    ]
+                  : []),
                 { id: "paper", label: "Paper review", icon: FileText, count: data.papers.length },
-                { id: "publication", label: "Publication status", icon: UploadCloud },
+                { id: "publication", label: "Publication", icon: UploadCloud },
                 { id: "writing", label: "Writing review", icon: PenTool, count: data.writing.items.length },
-                { id: "support", label: "Support inquiries", icon: LifeBuoy, count: data.support.items.length },
+                { id: "support", label: "Support", icon: LifeBuoy, count: data.support.items.length },
                 { id: "activity", label: "Activity history", icon: History },
-                { id: "governance", label: "Governance path", icon: ShieldCheck },
-                /* The state boards are a gallery of designed states, not an operational view. */
-                ...(data.source === "preview" ? [{ id: "states", label: "State boards (b4-b22)", icon: Layers }] : []),
+                ...(data.source === "preview"
+                  ? [
+                      { id: "governance", label: "Governance path", icon: ShieldCheck },
+                      /* The state boards are a gallery of designed states, not an operational view. */
+                      { id: "states", label: "State boards (b4-b22)", icon: Layers },
+                    ]
+                  : []),
               ].map((item) => {
                 const Icon = item.icon;
-                const isActive = currentView === item.id;
+                const isActive = libraryContent ? item.id === "library" : currentView === item.id;
+                const itemClass = `w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold transition ${
+                  isActive ? "bg-royal text-white" : "text-[#1f1b24] hover:bg-royal/5"
+                }`;
+                const inner = (
+                  <>
+                    <div className="flex items-center gap-2.5">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                      <span>{item.label}</span>
+                    </div>
+                    {item.count !== undefined && item.count > 0 && (
+                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${isActive ? "bg-white/20 text-white" : "bg-royal/10 text-royal"}`}>
+                        {item.count}
+                      </span>
+                    )}
+                  </>
+                );
+                if ((data.source === "dev" || libraryContent) && "href" in item && item.href) {
+                  return (
+                    <Link key={item.id} href={item.href} aria-current={isActive ? "page" : undefined} className={itemClass}>
+                      {inner}
+                    </Link>
+                  );
+                }
+                if (libraryContent) {
+                  return (
+                    <Link key={item.id} href={item.id === "overview" ? "/admin" : `/admin?view=${item.id}`} className={itemClass}>
+                      {inner}
+                    </Link>
+                  );
+                }
                 return (
                   <button
                     key={item.id}
@@ -389,168 +414,19 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
             </div>
           )}
 
-          {/* VIEW: OVERVIEW (b0, b1) */}
-          {currentView === "overview" && (
-            <div className="space-y-6">
-              <div>
-                <h1 className="text-2xl font-extrabold tracking-tight text-[#1f1b24]">
-                  Editorial & Governance Overview
-                </h1>
-                <p className="mt-1 text-xs text-[#6e6779]">
-                  {data.source === "dev"
-                    ? "Live operational queues and verified publication metrics."
-                    : "Operational queues and publication status across all programmes."}
-                </p>
-              </div>
-
-              {/* Metrics Grid */}
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {data.metrics.map((m) => (
-                  <div
-                    key={m.label}
-                    className="rounded-2xl border border-royal/10 bg-white p-5 shadow-xs space-y-2"
-                  >
-                    <p className="text-xs font-semibold text-[#6e6779]">{m.label}</p>
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-3xl font-extrabold text-[#1f1b24]">{m.count}</span>
-                      <span
-                        className={`text-xs font-bold ${
-                          m.trend === "warning"
-                            ? "text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full"
-                            : "text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full"
-                        }`}
-                      >
-                        {m.change}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#6e6779]">{m.detail}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Primary Queues */}
-              <div className="grid gap-6 lg:grid-cols-2">
-                {/* Sign-off Queue */}
-                <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="text-base font-bold text-[#1f1b24]">Awaiting Human Approval</h2>
-                      <p className="text-xs text-[#6e6779]">Rule #8: Mandatory human sign-off before publication</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setCurrentView("approval")}
-                      className="rounded-xl bg-royal/10 px-3 py-1 text-xs font-bold text-royal hover:bg-royal/20"
-                    >
-                      View queue
-                    </button>
-                  </div>
-
-                  <div className="divide-y divide-royal/5">
-                    {data.approvals.slice(0, 3).map((item) => (
-                      <div key={item.id} className="py-3 flex items-center justify-between">
-                        <div>
-                          <p className="text-xs font-bold text-[#1f1b24]">{item.title}</p>
-                          <p className="text-[11px] text-[#6e6779]">{approvalMeta(item)}</p>
-                        </div>
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                          item.isApproved
-                            ? "bg-teal-50 text-teal-800 border-teal-200"
-                            : "bg-amber-50 text-amber-800 border-amber-200"
-                        }`}>
-                          {item.isApproved ? "Approved" : "Awaiting Sign-off"}
-                        </span>
-                      </div>
-                    ))}
-                    {data.approvals.length === 0 && (
-                      <p className="py-4 text-xs text-[#6e6779] text-center">
-                        No draft items awaiting approval.
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Staged Exam Papers */}
-                <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="text-base font-bold text-[#1f1b24]">Exam Papers Staging</h2>
-                      <p className="text-xs text-[#6e6779]">Fixed-form sets assembled from approved questions</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setCurrentView("paper")}
-                      className="rounded-xl bg-royal/10 px-3 py-1 text-xs font-bold text-royal hover:bg-royal/20"
-                    >
-                      Inspect papers
-                    </button>
-                  </div>
-
-                  <div className="space-y-3">
-                    {data.papers.map((paper) => (
-                      <div
-                        key={paper.code}
-                        className="rounded-xl border border-royal/10 bg-[#fcfbf8] p-3 flex items-center justify-between text-xs"
-                      >
-                        <div>
-                          <p className="font-bold text-[#1f1b24]">{paper.title}</p>
-                          <p className="text-[11px] text-[#6e6779]">
-                            {paper.items} items · {paper.durationMinutes} mins · {paper.approvedItemsCount}/{paper.items} approved
-                          </p>
-                        </div>
-                        <span
-                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
-                            paper.status === "ready"
-                              ? "bg-teal-50 text-teal-800 border border-teal-200"
-                              : "bg-amber-50 text-amber-800 border border-amber-200"
-                          }`}
-                        >
-                          {paper.status.toUpperCase()}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Legacy Admin Tools Quick Navigation */}
-              <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
-                <div>
-                  <h2 className="text-base font-bold text-[#1f1b24]">Admin tools</h2>
-                  <p className="text-xs text-[#6e6779]">
-                    Review draft content and explore aggregate product analytics. Access specialized legacy administration consoles.
-                  </p>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  {LEGACY_TOOLS.map((tool) => {
-                    const Icon = tool.icon;
-                    return (
-                      <Link
-                        key={tool.href}
-                        href={tool.href}
-                        className="group flex flex-col justify-between rounded-xl border border-royal/10 bg-[#fcfbf8] p-4 transition hover:-translate-y-0.5 hover:border-royal/30 hover:shadow-xs"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-royal/10 text-royal">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          <ExternalLink className="h-3.5 w-3.5 text-[#6e6779] opacity-60 group-hover:text-royal group-hover:opacity-100 transition" />
-                        </div>
-                        <div className="mt-3">
-                          <p className="text-xs font-bold text-[#1f1b24] group-hover:text-royal transition">
-                            {tool.label}
-                          </p>
-                          <p className="mt-1 text-[11px] text-[#6e6779] line-clamp-2">
-                            {tool.description}
-                          </p>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          )}
+          {/* VIEW: OVERVIEW (export artboards 01-02) */}
+          {libraryContent ? (
+            libraryContent
+          ) : currentView === "overview" ? (
+            <AdminOverviewView
+              overview={data.overview}
+              source={data.source}
+              onOpen={(view) => {
+                setCurrentView(view);
+                setNotice(null);
+              }}
+            />
+          ) : null}
 
           {/* VIEW: LIBRARY (b2, b3) */}
           {currentView === "library" && (
@@ -581,7 +457,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                   </div>
 
                   {/* Year filter */}
-                  <div className="flex items-center gap-1.5 text-xs">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
                     <span className="font-semibold text-[#6e6779]">Year:</span>
                     {(["all", 3, 5, 6] as const).map((y) => (
                       <button
@@ -600,7 +476,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                   </div>
 
                   {/* Subject filter */}
-                  <div className="flex items-center gap-1.5 text-xs">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
                     <span className="font-semibold text-[#6e6779]">Subject:</span>
                     {["all", "Numeracy", "Reading", "Language Conventions", "Reasoning"].map((s) => (
                       <button
@@ -1154,9 +1030,9 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
               <div className="rounded-2xl border border-royal/10 bg-white p-6 shadow-xs space-y-4">
                 <div className="divide-y divide-royal/5">
                   {data.activity.map((act) => (
-                    <div key={act.id} className="py-3 flex items-center justify-between">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
+                    <div key={act.id} className="py-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="min-w-0 space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
                           <span className="text-xs font-bold text-[#1f1b24]">{act.actor}</span>
                           <span
                             className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
@@ -1172,7 +1048,7 @@ export function AdminWorkspace({ data, initialView = "overview" }: AdminWorkspac
                         </div>
                         <p className="text-xs text-[#6e6779]">{act.target}</p>
                         {act.hash && (
-                          <p className="font-mono text-[10px] text-royal">{act.hash}</p>
+                          <p className="break-all font-mono text-[10px] text-royal">{act.hash}</p>
                         )}
                       </div>
                       <span className="text-xs text-[#6e6779]">{act.timestamp}</span>

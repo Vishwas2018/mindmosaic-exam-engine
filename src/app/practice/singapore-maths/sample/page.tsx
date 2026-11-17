@@ -3,7 +3,12 @@ import Link from "next/link";
 
 import {getComingSoonProgramme} from "@/features/student/components/programmes/programme-catalog";
 import {ProgrammeComingSoon} from "@/features/student/components/programmes/ProgrammeComingSoon";
-import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
+import {
+  isSingaporeMathsSampleAllowed,
+  isSingaporeMathsSampleAllowedFor,
+  singaporeMathsSampleAvailability,
+} from "@/features/flags/singapore-maths-sample";
+import {createClient} from "@/lib/supabase/server";
 import {samplePracticeFixtures} from "@/content/visual-fixtures/bar-model/sample-practice.server";
 import {SampleSession} from "./SampleSession";
 
@@ -23,7 +28,27 @@ export default async function SingaporeMathsSamplePage({
   const year: 3 | 5 | undefined =
     params.year === "3" ? 3 : params.year === "5" ? 5 : undefined;
 
-  if (!isSingaporeMathsSampleAllowed()) {
+  /* The deployment gate is cheap and needs no network; only a deployment that passes it asks who is signed in.
+     An isolated local backend carries fixture accounts only, so it needs no per-account list. */
+  let allowed = false;
+  if (isSingaporeMathsSampleAllowed()) {
+    if (singaporeMathsSampleAvailability().reason === "local_isolated_backend") {
+      allowed = true;
+    } else {
+      try {
+        const supabase = await createClient();
+        const {
+          data: {user},
+        } = await supabase.auth.getUser();
+        allowed = isSingaporeMathsSampleAllowedFor(user?.id);
+      } catch {
+        /* An unreachable or unconfigured auth backend is an unknown account: fail closed to Coming Soon. */
+        allowed = false;
+      }
+    }
+  }
+
+  if (!allowed) {
     return (
       <div className="min-h-screen overflow-hidden bg-page">
         {/* `programmeSlug`, not the resolved `programme` object: this is a

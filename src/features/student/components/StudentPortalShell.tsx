@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { isSingaporeMathsSampleAllowedFor } from "@/features/flags/singapore-maths-sample";
 import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/lib/vihaan-scholarship-prep";
 import type { StudentContext } from "@/features/student/require-student";
 
@@ -31,6 +32,7 @@ export function StudentPortalShell({
   children: ReactNode;
 }) {
   const showVihaan = isVihaanScholarshipPrepEnabledFor(student.userId);
+  const showSingapore = isSingaporeMathsSampleAllowedFor(student.userId);
   return (
     <div className="mm-root min-h-screen bg-mm-tint-soft text-mm-ink">
       <div className="lg:flex">
@@ -44,17 +46,20 @@ export function StudentPortalShell({
           sessionsThisWeek={shellData.sessionsThisWeek}
           weeklyTarget={shellData.weeklyTarget}
           showVihaan={showVihaan}
+          showSingapore={showSingapore}
         />
 
         <div className="min-w-0 flex-1">
-          <StudentTopBar breadcrumbLabel={breadcrumbLabel} hasActiveSession={shellData.hasActiveSession} showVihaan={showVihaan} />
+          <StudentTopBar breadcrumbLabel={breadcrumbLabel} hasActiveSession={shellData.hasActiveSession} showVihaan={showVihaan}
+          showSingapore={showSingapore} />
 
           <main id="main-content" className="mx-auto w-full max-w-[1192px] space-y-7 px-4 pt-6 pb-24 sm:px-8 sm:pt-8 lg:pb-16">
             {children}
           </main>
         </div>
       </div>
-      <StudentBottomNav active={active} showVihaan={showVihaan} />
+      <StudentBottomNav active={active} showVihaan={showVihaan}
+          showSingapore={showSingapore} />
     </div>
   );
 }

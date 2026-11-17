@@ -40,4 +40,31 @@ test.describe("student first visit", () => {
     await expect(page.getByText("First visit")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Recent results" })).toBeVisible();
   });
+
+  test("the five-question warm-up is optional: offered on My Space, opened only by choice, with no pop-up", async ({ contextAs }) => {
+    const context = await contextAs("student-second-child");
+    const page = await context.newPage();
+    await setViewport(page, A11Y_VIEWPORTS[0]);
+    await visitAndStabilize(page, "/student", { readyLocator: "main" });
+    await expect(page.locator("dialog[open]")).toHaveCount(0);
+    const offer = page.getByRole("link", { name: "Try the warm-up" });
+    await expect(offer).toHaveAttribute("href", "/student/diagnostic");
+
+    await offer.click();
+    await expect(page.getByRole("heading", { level: 1, name: "Five-question warm-up" })).toBeVisible();
+    await expect(page.getByText("Optional", { exact: true })).toBeVisible();
+    await expect(page.locator("dialog[open]")).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Not now" })).toHaveAttribute("href", "/student");
+    await page.getByRole("button", { name: /Start the warm-up|Take it again/ }).click();
+    await expect(page.getByText(/Question 1 of 5/)).toBeVisible();
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test("a student's navigation never offers Singapore Maths while its content is unapproved", async ({ contextAs }) => {
+    const context = await contextAs("student-second-child");
+    const page = await context.newPage();
+    await setViewport(page, A11Y_VIEWPORTS[0]);
+    await visitAndStabilize(page, "/student", { readyLocator: "main" });
+    await expect(page.getByRole("navigation", { name: "Student navigation" }).getByRole("link", { name: /Singapore/ })).toHaveCount(0);
+  });
 });

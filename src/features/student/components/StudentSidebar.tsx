@@ -12,8 +12,6 @@ import {
   Target,
 } from "lucide-react";
 
-import {isSingaporeMathsSampleAllowed} from "@/features/flags/singapore-maths-sample";
-
 import { MindMosaicLogo } from "@/components/branding";
 import type { LessonPathway } from "@/features/curriculum/lessons";
 import type { WeekDot } from "@/features/student/engagement/streaks";
@@ -62,24 +60,27 @@ const vihaanNavItem: SidebarNavItem = {
   shortLabel: "Vihaan",
 };
 
-export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
-  ...baseSidebarItems,
-  ...(isSingaporeMathsSampleAllowed()
-    ? [
-        {
-          key: "singaporeMathsSample" as const,
-          label: "Singapore Maths Sample",
-          href: "/practice/singapore-maths/sample",
-          icon: BarChart3,
-          shortLabel: "Singapore",
-        },
-      ]
-    : []),
-];
+const singaporeNavItem: SidebarNavItem = {
+  key: "singaporeMathsSample" as const,
+  label: "Singapore Maths Sample",
+  href: "/practice/singapore-maths/sample",
+  icon: BarChart3,
+  shortLabel: "Singapore",
+};
 
-/** The nav for one student: the Vihaan pilot item only when the server decided this student may see it. */
-export function studentNavItems(showVihaan = false): readonly SidebarNavItem[] {
-  return showVihaan ? [...SIDEBAR_NAV_ITEMS, vihaanNavItem] : SIDEBAR_NAV_ITEMS;
+export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = baseSidebarItems;
+
+/**
+ * The nav for one student. The Vihaan pilot and the Singapore Maths sample
+ * (content not yet approved) appear only when the server decided this
+ * account may see them; general beta users never get either item.
+ */
+export function studentNavItems(showVihaan = false, showSingapore = false): readonly SidebarNavItem[] {
+  return [
+    ...SIDEBAR_NAV_ITEMS,
+    ...(showSingapore ? [singaporeNavItem] : []),
+    ...(showVihaan ? [vihaanNavItem] : []),
+  ];
 }
 
 export function StudentSidebar({
@@ -87,6 +88,7 @@ export function StudentSidebar({
   displayName,
   yearLevel,
   showVihaan = false,
+  showSingapore = false,
 }: {
   active: StudentSidebarKey;
   displayName: string | null;
@@ -99,6 +101,8 @@ export function StudentSidebar({
   weeklyTarget?: number;
   /** Server-decided: whether this student is in the Vihaan pilot. */
   showVihaan?: boolean;
+  /** Server-decided: whether this account is on the Singapore Maths sample preview list. */
+  showSingapore?: boolean;
 }) {
   const name = displayName?.trim() || "Your account";
   const shortName = shortDisplayName(name);
@@ -122,7 +126,7 @@ export function StudentSidebar({
       </Link>
 
       <nav aria-label="Student navigation" className="grid gap-0.5">
-        {studentNavItems(showVihaan).map((item) => {
+        {studentNavItems(showVihaan, showSingapore).map((item) => {
           const isActive = item.key === active;
           const Icon = item.icon;
           return (

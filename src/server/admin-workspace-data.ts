@@ -4,6 +4,7 @@ import { requireRole } from "@/features/auth/require-role";
 import { requireAdminAccess } from "@/server/admin-access";
 import { getExamBank } from "@/server/exam-bank";
 import { getPublicationEligibility } from "@/server/publication-evidence";
+import { getAdminOverviewData } from "@/server/admin-library-data";
 import type {
   AdminWorkspaceData,
   AdminMetric,
@@ -172,6 +173,7 @@ export async function getAuthenticatedDevAdminData(): Promise<AdminWorkspaceData
       email: reviewerEmail,
     },
     metrics,
+    overview: getAdminOverviewData(),
     questions,
     approvals: approvalsList,
     papers,

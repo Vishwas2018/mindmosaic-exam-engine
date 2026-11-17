@@ -144,6 +144,8 @@ describe("navigation graph", () => {
     "ParentShell",
     "TeacherShell",
     "AdminShell",
+    /* The redesigned Admin workspace: sidebar navigation on every admin page. */
+    "AdminWorkspace",
     "LegalPageShell",
     /* The marketing pages behind the header nav (/learn, /assessments,
        /exam-preparation, /methodology, /pricing) — it mounts SiteNav and

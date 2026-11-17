@@ -5,11 +5,18 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { buildExamResult } from "@/features/exam-engine/scoring";
 import { useExamStore } from "@/features/exam-engine/state";
 import { VihaanDiagnosticExamRunner } from "@/features/scholarship-prep/components/DiagnosticExamRunner";
+import { VihaanDashboard } from "@/features/scholarship-prep/components/VihaanDashboard";
 import { VihaanParentDashboard } from "@/features/scholarship-prep/components/VihaanParentDashboard";
 import {
+  getVerifiedVihaanAllPublishedQuestions,
+  getVerifiedVihaanExpansionPublication,
+  getVerifiedVihaanPilotPublication,
+  getVihaanSolutionsRecord,
   MATH_QUESTIONS,
   NR_QUESTIONS,
   RC_QUESTIONS,
+  verifyVihaanExpansionPublication,
+  verifyVihaanPilotPublication,
   VIHAAN_PILOT_BATCH,
   VIHAAN_PILOT_COUNTS,
   VIHAAN_PILOT_QUESTIONS,
@@ -19,8 +26,20 @@ import {
 } from "@/features/scholarship-prep/content/questions/vihaan-pilot-questions";
 import {
   extractVihaanOutcomesFromSittings,
+  isReservedMockExamQuestion,
+  selectAdaptivePractice,
+  selectMockExamQuestions,
+  selectPractice,
   summariseProgress,
+  SYNTHETIC_E2E_SITTING_IDS,
 } from "@/features/scholarship-prep/lib/practice";
+import {
+  getVihaanApprovedBank,
+  getVihaanDiagnosticQuestions,
+  getVihaanMockPool,
+  getVihaanPracticePlan,
+  getVihaanPracticePool,
+} from "@/server/vihaan-practice";
 import type { Question } from "@/schemas/question.schema";
 
 function asPublishedFixture(questions: readonly Question[]): Question[] {
@@ -36,6 +55,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     useExamStore.getState().resetExam();
   });
 
@@ -237,4 +257,318 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     expect(screen.getByTestId("parent-weak-areas")).toHaveTextContent("Fraction of a remainder");
     expect(screen.getByText("Focus next on Mathematics")).toBeInTheDocument();
   });
+
+  it("verifies governed pilot-01 DEV publication integrity and fails closed on tampering", () => {
+    const verified = getVerifiedVihaanPilotPublication();
+    expect(verified.ok).toBe(true);
+    if (!verified.ok) return;
+
+    expect(verified.batchId).toBe("vihaan-pilot-01");
+    expect(verified.approvedBy).toBe("Vishwas Joshi");
+    expect(verified.draftBatchHash).toBe(
+      "50242f6ba1ce001ce145441958771cc01a8cd848de2013b0d129cb4fe70ea49b",
+    );
+    expect(verified.questions).toHaveLength(20);
+    expect(verified.questions.every((q) => q.status === "published")).toBe(true);
+
+    const tampered = verifyVihaanPilotPublication({
+      kind: "vihaan_pilot_publication_manifest",
+      schemaVersion: 1,
+      batchId: "wrong-batch",
+    });
+    expect(tampered.ok).toBe(false);
+    expect(tampered.questions).toEqual([]);
+  });
+
+  it("serves approved pilot-01 questions only to allowlisted DEV users and never in production", () => {
+    const devEnv = {
+      VERCEL_ENV: "preview",
+      VISHAAN_SCHOLARSHIP_PREP_ENABLED: "1",
+      NEXT_PUBLIC_SUPABASE_URL: "https://mfglzabnayacssgertat.supabase.co",
+      PRODUCTION_SUPABASE_PROJECT_REF: "uermhsptduikehuyceiz",
+      VISHAAN_SCHOLARSHIP_PREP_SUPABASE_REF: "mfglzabnayacssgertat",
+      VISHAAN_SCHOLARSHIP_PREP_ALLOWED_USER_IDS: "vihaan-student-1",
+    };
+
+    const allowedDiagnostic = getVihaanDiagnosticQuestions("vihaan-student-1", devEnv);
+    expect(allowedDiagnostic).toHaveLength(20);
+    expect(allowedDiagnostic.every((q) => q.status === "published")).toBe(true);
+
+    expect(getVihaanDiagnosticQuestions("other-student", devEnv)).toEqual([]);
+    expect(
+      getVihaanDiagnosticQuestions("vihaan-student-1", { ...devEnv, VERCEL_ENV: "production" }),
+    ).toEqual([]);
+
+    const numeracyPractice = getVihaanPracticePlan(3, {
+      subject: "numeracy",
+      userId: "vihaan-student-1",
+      env: devEnv,
+    });
+    expect(numeracyPractice).toHaveLength(3);
+    expect(numeracyPractice.every((q) => q.metadata.subject === "numeracy")).toBe(true);
+  }, 15_000);
+
+  it("renders worked solutions, 1–5 writing rubric, and persistence status after submission", async () => {
+    const user = userEvent.setup();
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ persisted: true, sessionId: "sess-1", attemptId: "att-1" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    const mixedFixture = asPublishedFixture([MATH_QUESTIONS[0]!, WE_QUESTIONS[0]!]);
+    const solutionsById = getVihaanSolutionsRecord(mixedFixture);
+
+    render(
+      <VihaanDiagnosticExamRunner
+        questions={mixedFixture}
+        subject="mixed"
+        solutionsById={solutionsById}
+        persistToServer
+      />,
+    );
+
+    const answerCurrentQuestion = async () => {
+      const textbox = screen.queryByRole("textbox");
+      if (textbox) {
+        await user.type(textbox, "Niko stopped beside the oval seedlings.");
+      } else {
+        await user.click(await screen.findByRole("radio", { name: /45/ }));
+      }
+    };
+
+    await screen.findByRole("button", { name: "Next" });
+    await answerCurrentQuestion();
+    await user.click(screen.getByRole("button", { name: "Next" }));
+
+    await screen.findByRole("button", { name: "Submit Exam" });
+    await answerCurrentQuestion();
+    await user.click(screen.getByRole("button", { name: "Submit Exam" }));
+
+    const results = await screen.findByTestId("diagnostic-results");
+    expect(within(results).getByTestId("vihaan-attempt-persisted")).toHaveTextContent(
+      "Saved to progress",
+    );
+    expect(within(results).getByTestId("vihaan-worked-solution-vihaan-p01-m01")).toHaveTextContent(
+      /One quarter of 84 is 21/i,
+    );
+    expect(within(results).getByTestId("vihaan-writing-rubric-vihaan-p01-w01")).toHaveTextContent(
+      "on the 1–5 scale",
+    );
+    expect(
+      within(results).getByTestId("vihaan-sample-response-vihaan-p01-w01"),
+    ).toHaveTextContent(/Niko could already hear/i);
+    expect(fetchSpy).toHaveBeenCalledWith(
+      "/api/student/vihaan/attempt",
+      expect.objectContaining({ method: "POST" }),
+    );
+  }, 20_000);
+
+  it("renders subject practice cards on VihaanDashboard and launches inline practice", async () => {
+    const user = userEvent.setup();
+    const verified = getVerifiedVihaanPilotPublication();
+    expect(verified.ok).toBe(true);
+    if (!verified.ok) return;
+
+    render(
+      <VihaanDashboard
+        student={{
+          userId: "vihaan-student-1",
+          displayName: "Vihaan",
+          yearLevel: 5,
+          onboardingCompleted: true,
+          diagnosticCompleted: false,
+          interests: [],
+          weeklyGoalMinutes: 360,
+        }}
+        questions={verified.questions}
+        solutionsById={getVihaanSolutionsRecord(verified.questions)}
+        outcomes={[]}
+      />,
+    );
+
+    const practiceSection = screen.getByTestId("vihaan-practice-section");
+    expect(within(practiceSection).getByTestId("vihaan-practice-numeracy")).toHaveTextContent(
+      "6 questions",
+    );
+    expect(within(practiceSection).getByTestId("vihaan-practice-writing")).toHaveTextContent(
+      "2 questions",
+    );
+
+    await user.click(within(practiceSection).getByTestId("vihaan-practice-numeracy"));
+
+    const runner = await screen.findByTestId("vihaan-practice-runner");
+    expect(within(runner).getByRole("heading", { name: "Mathematics" })).toBeInTheDocument();
+    expect(within(runner).getAllByText(/Question 1 of 6/i).length).toBeGreaterThan(0);
+  }, 20_000);
+
+  it("verifies all 500 published items (20 pilot + 480 expansion) and fails closed on tampering", () => {
+    const expansion = getVerifiedVihaanExpansionPublication();
+    expect(expansion.ok).toBe(true);
+    if (!expansion.ok) return;
+
+    expect(expansion.approvedBy).toBe("Vishwas Joshi");
+    expect(expansion.questions).toHaveLength(480);
+    expect(expansion.questions.every((q) => q.status === "published")).toBe(true);
+
+    const all500 = getVerifiedVihaanAllPublishedQuestions();
+    expect(all500).toHaveLength(500);
+    expect(new Set(all500.map((q) => q.id)).size).toBe(500);
+    expect(VIHAAN_QUESTION_METADATA_BY_ID.size).toBe(500);
+    expect(Object.keys(getVihaanSolutionsRecord(all500))).toHaveLength(500);
+
+    const tampered = verifyVihaanExpansionPublication({
+      kind: "vihaan_expansion_publication_manifest",
+      schemaVersion: 1,
+      bankId: "wrong",
+    });
+    expect(tampered.ok).toBe(false);
+    expect(tampered.questions).toEqual([]);
+  });
+
+  it("excludes synthetic E2E sittings by default while keeping DB records extractable when requested", () => {
+    const syntheticId = [...SYNTHETIC_E2E_SITTING_IDS][0]!;
+    const genuineId = "genuine-sitting-1";
+    const sittings = [
+      {
+        id: syntheticId,
+        submitted_at: "2026-11-16T00:15:33.004Z",
+        result: {
+          timeTakenSeconds: 10,
+          questionDetails: [
+            { questionId: "vihaan-p01-m01", status: "correct", attempted: true },
+          ],
+        },
+      },
+      {
+        id: "flagged-synthetic-2",
+        submitted_at: "2026-11-16T01:00:00.000Z",
+        session: { config: { isSyntheticE2e: true } },
+        result: {
+          timeTakenSeconds: 15,
+          questionDetails: [
+            { questionId: "vihaan-p01-m02", status: "correct", attempted: true },
+          ],
+        },
+      },
+      {
+        id: genuineId,
+        submitted_at: "2026-11-16T02:00:00.000Z",
+        result: {
+          timeTakenSeconds: 120,
+          questionDetails: [
+            { questionId: "vihaan-p01-m03", status: "incorrect", attempted: true },
+          ],
+        },
+      },
+    ];
+
+    const genuineOnly = extractVihaanOutcomesFromSittings(sittings, VIHAAN_QUESTION_METADATA_BY_ID);
+    expect(genuineOnly).toHaveLength(1);
+    expect(genuineOnly[0]!.responseId).toBe(`${genuineId}:vihaan-p01-m03`);
+
+    const withSynthetic = extractVihaanOutcomesFromSittings(
+      sittings,
+      VIHAAN_QUESTION_METADATA_BY_ID,
+      { includeSyntheticE2e: true },
+    );
+    expect(withSynthetic).toHaveLength(3);
+  });
+
+  it("reserves 166 unseen mock items strictly out of daily practice and supports adaptive + mock selection", () => {
+    const devEnv = {
+      VERCEL_ENV: "preview",
+      VISHAAN_SCHOLARSHIP_PREP_ENABLED: "1",
+      NEXT_PUBLIC_SUPABASE_URL: "https://mfglzabnayacssgertat.supabase.co",
+      PRODUCTION_SUPABASE_PROJECT_REF: "uermhsptduikehuyceiz",
+      VISHAAN_SCHOLARSHIP_PREP_SUPABASE_REF: "mfglzabnayacssgertat",
+      VISHAAN_SCHOLARSHIP_PREP_ALLOWED_USER_IDS: "vihaan-student-1",
+    };
+
+    const fullBank = getVihaanApprovedBank("vihaan-student-1", devEnv);
+    const practicePool = getVihaanPracticePool("vihaan-student-1", devEnv);
+    const mockPool = getVihaanMockPool("vihaan-student-1", devEnv);
+
+    expect(fullBank).toHaveLength(500);
+    expect(practicePool).toHaveLength(334);
+    expect(mockPool).toHaveLength(166);
+    expect(practicePool.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
+    expect(mockPool.every((q) => isReservedMockExamQuestion(q.id))).toBe(true);
+
+    // Normal selectPractice / getVihaanPracticePlan never leaks reserved mock items.
+    const randomPractice = selectPractice(fullBank, 334, { random: () => 0.25 });
+    expect(randomPractice).toHaveLength(334);
+    expect(randomPractice.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
+
+    // Adaptive practice puts unseen items ahead of already attempted items.
+    const seenOutcomes = practicePool
+      .filter((q) => q.metadata.subject === "numeracy")
+      .slice(0, 75)
+      .map((q) => ({
+        responseId: `s1:${q.id}`,
+        questionId: q.id,
+        subject: q.metadata.subject,
+        topic: q.metadata.topic,
+        submittedAt: "2026-11-16T03:00:00.000Z",
+        elapsedSeconds: 30,
+        status: "correct" as const,
+      }));
+    const unseenExpected = practicePool
+      .filter((q) => q.metadata.subject === "numeracy")
+      .slice(75)
+      .map((q) => q.id);
+    const adaptivePick = selectAdaptivePractice(fullBank, 5, {
+      subject: "numeracy",
+      outcomes: seenOutcomes,
+      random: () => 0.1,
+    });
+    expect(adaptivePick).toHaveLength(5);
+    expect(adaptivePick.every((q) => unseenExpected.includes(q.id))).toBe(true);
+
+    // Mock selector pulls strictly from reserved mock pool (45 VR + 40 NR + 35 Reading + 40 Math + 1 Writing = 161).
+    const fullMock = selectMockExamQuestions(fullBank, "full_mock");
+    expect(fullMock).toHaveLength(161);
+    expect(fullMock.every((q) => isReservedMockExamQuestion(q.id))).toBe(true);
+  });
+
+  it("renders full 500-bank learning sections and interactive parent rubric marking UI", async () => {
+    const user = userEvent.setup();
+    const fullBank = getVerifiedVihaanAllPublishedQuestions();
+    const practicePool = fullBank.filter((q) => !isReservedMockExamQuestion(q.id));
+    const mockPool = fullBank.filter((q) => isReservedMockExamQuestion(q.id));
+
+    render(
+      <VihaanDashboard
+        student={{
+          userId: "vihaan-student-1",
+          displayName: "Vihaan",
+          yearLevel: 5,
+          onboardingCompleted: true,
+          diagnosticCompleted: false,
+          interests: [],
+          weeklyGoalMinutes: 360,
+        }}
+        questions={practicePool}
+        mockQuestions={mockPool}
+        solutionsById={getVihaanSolutionsRecord(fullBank)}
+        outcomes={[]}
+        writingHistory={[]}
+      />,
+    );
+
+    expect(screen.getByTestId("vihaan-study-plan")).toBeInTheDocument();
+    expect(screen.getByTestId("vihaan-concept-learning")).toBeInTheDocument();
+    expect(screen.getByTestId("vihaan-smart-revision")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-reserved-pool-badge")).toHaveTextContent(
+      "166 unseen questions reserved exclusively for Mock Exams",
+    );
+    expect(screen.getByTestId("vihaan-writing-practice")).toBeInTheDocument();
+
+    // Launching an official mock section renders countdown timer and uses reserved pool.
+    await user.click(screen.getByTestId("mock-start-numeracy"));
+    const runner = await screen.findByTestId("vihaan-practice-runner");
+    expect(within(runner).getByTestId("vihaan-exam-timer")).toBeInTheDocument();
+    expect(within(runner).getAllByText(/Question 1 of 40/i).length).toBeGreaterThan(0);
+  }, 20_000);
 });

@@ -1,0 +1,3206 @@
+{
+  "batchId": "vihaan-expansion-08",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "OpenAI Codex session",
+    "model": null,
+    "generatedOn": "2026-11-16",
+    "originalGenerationEvidence": "Session-authored problems, passages and prompts; deterministic assembly from checked-in authoring rows.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no sample test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "retainedPilotIds": [],
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-e500-n078",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three balance clues are A + B = 17, B + C = 23 and A + C = 20. What is C?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "13"
+          },
+          {
+            "id": "d",
+            "text": "10"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Adding the last two sums and subtracting the first cancels A and B, leaving 2C. Thus 2C = 23 + 20 - 17 = 26, so C = 13.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Adding the last two sums and subtracting the first cancels A and B, leaving 2C.",
+        "Thus 2C = 23 + 20 - 17 = 26, so C = 13."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(23+20-17)/2",
+        "expected": "13"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v076",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Scaffolding supports a building while it is being constructed. Which pair has the closest temporary-support relationship?",
+        "options": [
+          {
+            "id": "a",
+            "text": "signpost : road"
+          },
+          {
+            "id": "b",
+            "text": "engine : vehicle"
+          },
+          {
+            "id": "c",
+            "text": "training wheels : learning cyclist"
+          },
+          {
+            "id": "d",
+            "text": "helmet : cyclist"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The defining relation is support used during development and later removed. Training wheels help a learning cyclist and can later be removed; helmets remain protective equipment after learning.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The defining relation is support used during development and later removed.",
+        "Training wheels help a learning cyclist and can later be removed; helmets remain protective equipment after learning."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v077",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word does not belong with cedar, willow and birch when the group is defined as kinds of tree?",
+        "options": [
+          {
+            "id": "a",
+            "text": "fern"
+          },
+          {
+            "id": "b",
+            "text": "oak"
+          },
+          {
+            "id": "c",
+            "text": "maple"
+          },
+          {
+            "id": "d",
+            "text": "elm"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Cedar, willow and birch are trees. Fern is a different plant group; oak, maple and elm would all fit the stated tree category.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Cedar, willow and birch are trees.",
+        "Fern is a different plant group; oak, maple and elm would all fit the stated tree category."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v078",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which item cannot join a group of instruments that measure a physical quantity: barometer, odometer, thermometer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "speedometer"
+          },
+          {
+            "id": "b",
+            "text": "hygrometer"
+          },
+          {
+            "id": "c",
+            "text": "ammeter"
+          },
+          {
+            "id": "d",
+            "text": "telescope"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Each listed instrument gives a measurement such as pressure, distance or temperature. A telescope primarily magnifies distant objects; the other choices measure speed, humidity and electric current.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Each listed instrument gives a measurement such as pressure, distance or temperature.",
+        "A telescope primarily magnifies distant objects; the other choices measure speed, humidity and electric current."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r076",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What effect comes from saying the clock was trying to make commuters punctual?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It humorously gives the clock a human intention"
+          },
+          {
+            "id": "b",
+            "text": "it proves the clock has a hidden alarm"
+          },
+          {
+            "id": "c",
+            "text": "it accuses the technician of dishonesty"
+          },
+          {
+            "id": "d",
+            "text": "it explains how the mechanism works"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A clock cannot intend to influence behaviour, so the phrase personifies it. The joke links its fast time with commuters' punctuality without explaining a mechanism.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc figurative language",
+          "skill": "scholarship.rc-figurative-language",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-figurative-language"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A clock that gained a story",
+          "body": "For years the station clock had been five minutes fast. Commuters joked that it was trying to make them punctual. Then a technician reset it. The next morning, people gathered under its newly accurate hands and compared watches.\n\n'It used to be reliable,' one traveller complained.\n\n'It is reliable now,' the technician said.\n\nBoth were using the word differently. The traveller had known exactly how far wrong the clock was and had adjusted mentally. The repair removed that familiar error. For a few days, old habits made accurate time feel surprising.\n\nThe station manager put up a notice: 'Clock corrected on Monday. Please check your usual adjustment.' By Friday, the jokes had changed. People said the clock had finally decided to catch the train itself. The technician kept the old maintenance note, not as an instruction for the next repair, but as a reminder that changing a machine can also require changing the habits around it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "A clock cannot intend to influence behaviour, so the phrase personifies it.",
+        "The joke links its fast time with commuters' punctuality without explaining a mechanism."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r077",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which idea is central to the final maintenance-note detail?",
+        "options": [
+          {
+            "id": "a",
+            "text": "old errors should always be restored"
+          },
+          {
+            "id": "b",
+            "text": "accurate clocks are less useful than fast clocks"
+          },
+          {
+            "id": "c",
+            "text": "repairs should be delayed until Friday"
+          },
+          {
+            "id": "d",
+            "text": "Technical improvements may need accompanying changes in human habits"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The technician keeps the note to remember the habits surrounding the machine. The story supports managing an adjustment, not preserving errors or rejecting accuracy.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc main idea",
+          "skill": "scholarship.rc-main-idea",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-main-idea"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A clock that gained a story",
+          "body": "For years the station clock had been five minutes fast. Commuters joked that it was trying to make them punctual. Then a technician reset it. The next morning, people gathered under its newly accurate hands and compared watches.\n\n'It used to be reliable,' one traveller complained.\n\n'It is reliable now,' the technician said.\n\nBoth were using the word differently. The traveller had known exactly how far wrong the clock was and had adjusted mentally. The repair removed that familiar error. For a few days, old habits made accurate time feel surprising.\n\nThe station manager put up a notice: 'Clock corrected on Monday. Please check your usual adjustment.' By Friday, the jokes had changed. People said the clock had finally decided to catch the train itself. The technician kept the old maintenance note, not as an instruction for the next repair, but as a reminder that changing a machine can also require changing the habits around it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The technician keeps the note to remember the habits surrounding the machine.",
+        "The story supports managing an adjustment, not preserving errors or rejecting accuracy."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r078",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What happens to both models before the tub is rocked?",
+        "options": [
+          {
+            "id": "a",
+            "text": "they sink immediately"
+          },
+          {
+            "id": "b",
+            "text": "they lose all their clay"
+          },
+          {
+            "id": "c",
+            "text": "They float on still water"
+          },
+          {
+            "id": "d",
+            "text": "they both take in water"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The passage says both float on still water. Their different performance appears under disturbance, so still-water success alone does not compare stability.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The floating garden model",
+          "body": "In this fictional design challenge, pupils built model gardens that could float in a tub. Team Pine used a wide shallow tray and arranged equal masses of clay evenly around its edge. Team Reed used a narrow tray and piled its clay in the centre. Both models floated on still water.\n\nWhen a volunteer rocked the tub, Pine's tray remained level longer. Reed's tray tipped and took in water. Reed's team wanted to replace all its clay with lighter material. Pine's team suggested first moving some of the existing clay lower and spreading it more evenly.\n\nThe teams agreed to change only the clay arrangement on Reed's tray for the next test. They kept the total clay mass and the tray unchanged. The second test would investigate distribution, not establish the best possible garden design. To compare tray widths fairly later, they would need another test with equal loads and similar arrangements. No model would be placed in a real creek; the challenge was a classroom investigation of design choices.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage says both float on still water.",
+        "Their different performance appears under disturbance, so still-water success alone does not compare stability."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w026",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Explain how a rule can be applied consistently yet still produce an unfair result. Give a balanced example and suggest a reasoned revision. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Separate consistency in applying a rule from fairness of its effects. Construct a specific example in which different starting conditions matter, acknowledging what the original rule was trying to achieve. Suggest a revision that addresses the problem while considering a new trade-off it might create.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Expository composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "expository",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Separate consistency in applying a rule from fairness of its effects.",
+        "Construct a specific example in which different starting conditions matter, acknowledging what the original rule was trying to achieve.",
+        "Suggest a revision that addresses the problem while considering a new trade-off it might create."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Separate consistency in applying a rule from fairness of its effects.",
+          "Construct a specific example in which different starting conditions matter, acknowledging what the original rule was trying to achieve.",
+          "Suggest a revision that addresses the problem while considering a new trade-off it might create.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m079",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At midnight it is -6 degrees. It rises 2 degrees per hour for 5 hours, then falls 3 degrees per hour for 4 hours. What is the final temperature in degrees Celsius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-8"
+          },
+          {
+            "id": "b",
+            "text": "-2"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "16"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The first change is +10, taking the temperature to 4 degrees. The next change is -12, so the final temperature is -8 degrees Celsius.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first change is +10, taking the temperature to 4 degrees.",
+        "The next change is -12, so the final temperature is -8 degrees Celsius."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "-6+2*5-3*4",
+        "expected": "-8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m080",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bank balance is -$18. A deposit of $45 arrives, then a $32 bill is paid. What is the final balance in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-5"
+          },
+          {
+            "id": "b",
+            "text": "-95"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "59"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "After the deposit, the balance is -18 + 45 = $27. Paying $32 takes the balance to -$5.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "After the deposit, the balance is -18 + 45 = $27.",
+        "Paying $32 takes the balance to -$5."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "-18+45-32",
+        "expected": "-5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m081",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Numbers -9, -2, 4 and 11 are on a number line. What is the distance between the midpoint of the first pair and the midpoint of the second pair?",
+        "options": [
+          {
+            "id": "a",
+            "text": "11"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "13"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The first midpoint is (-9 - 2)/2 = -5.5 and the second is (4 + 11)/2 = 7.5. Their distance is 7.5 minus -5.5 = 13 units.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first midpoint is (-9 - 2)/2 = -5.5 and the second is (4 + 11)/2 = 7.5.",
+        "Their distance is 7.5 minus -5.5 = 13 units."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(4+11)/2-(-9-2)/2",
+        "expected": "13"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n079",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number is odd, greater than 40 and less than 50. It is not prime and is divisible by 3. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "43"
+          },
+          {
+            "id": "b",
+            "text": "47"
+          },
+          {
+            "id": "c",
+            "text": "49"
+          },
+          {
+            "id": "d",
+            "text": "45"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The odd numbers in the interval are 41, 43, 45, 47 and 49. Only 45 is divisible by three, and it is composite, so it meets all clues.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The odd numbers in the interval are 41, 43, 45, 47 and 49.",
+        "Only 45 is divisible by three, and it is composite, so it meets all clues."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "45",
+        "expected": "45"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n080",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four consecutive whole numbers total 74. What is the product of the two middle numbers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "306"
+          },
+          {
+            "id": "b",
+            "text": "324"
+          },
+          {
+            "id": "c",
+            "text": "380"
+          },
+          {
+            "id": "d",
+            "text": "342"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The average is 18.5, putting the four numbers at 17, 18, 19 and 20. The middle pair is 18 and 19; their product is 342.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The average is 18.5, putting the four numbers at 17, 18, 19 and 20.",
+        "The middle pair is 18 and 19; their product is 342."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "18*19",
+        "expected": "342"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n081",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The digits 2, 5 and 8 are each used once to make the largest possible even three-digit number. What is that number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "825"
+          },
+          {
+            "id": "b",
+            "text": "528"
+          },
+          {
+            "id": "c",
+            "text": "582"
+          },
+          {
+            "id": "d",
+            "text": "852"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "An even number must end with 2 or 8. Using 2 last allows the largest hundreds digit 8 and then 5, giving 852, larger than any arrangement ending in 8.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "An even number must end with 2 or 8.",
+        "Using 2 last allows the largest hundreds digit 8 and then 5, giving 852, larger than any arrangement ending in 8."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "852",
+        "expected": "852"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v079",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The words whisper, murmur and mutter describe quiet vocal actions. Which choice does not fit that defined group?",
+        "options": [
+          {
+            "id": "a",
+            "text": "mumble"
+          },
+          {
+            "id": "b",
+            "text": "speak softly"
+          },
+          {
+            "id": "c",
+            "text": "speak under one's breath"
+          },
+          {
+            "id": "d",
+            "text": "bellow"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The defining quality is low-volume vocal expression. Bellow means shout loudly and breaks that volume pattern; the other choices are quiet actions.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The defining quality is low-volume vocal expression.",
+        "Bellow means shout loudly and breaks that volume pattern; the other choices are quiet actions."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v080",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A set contains prediction, forecast and projection in their future-estimate senses. Which word is least suitable for that set?",
+        "options": [
+          {
+            "id": "a",
+            "text": "recollection"
+          },
+          {
+            "id": "b",
+            "text": "expectation"
+          },
+          {
+            "id": "c",
+            "text": "anticipation"
+          },
+          {
+            "id": "d",
+            "text": "outlook"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The members concern what may happen later. Recollection concerns the past, while the other choices can all concern future expectations.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The members concern what may happen later.",
+        "Recollection concerns the past, while the other choices can all concern future expectations."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v081",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word names a process rather than the product in this list: sculpture, engraving, portrait, statue? Treat engraving as the action of cutting a design.",
+        "options": [
+          {
+            "id": "a",
+            "text": "portrait"
+          },
+          {
+            "id": "b",
+            "text": "statue"
+          },
+          {
+            "id": "c",
+            "text": "engraving"
+          },
+          {
+            "id": "d",
+            "text": "sculpture"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The instruction fixes the otherwise ambiguous sense of engraving. In that sense it is an action; the remaining words name finished works or objects.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The instruction fixes the otherwise ambiguous sense of engraving.",
+        "In that sense it is an action; the remaining words name finished works or objects."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r079",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why do the teams retain Reed's total clay mass in the second test?",
+        "options": [
+          {
+            "id": "a",
+            "text": "to prove lighter clay never helps"
+          },
+          {
+            "id": "b",
+            "text": "to make the tray wider"
+          },
+          {
+            "id": "c",
+            "text": "to avoid using the same tub"
+          },
+          {
+            "id": "d",
+            "text": "to focus on the effect of clay arrangement"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Changing the distribution while keeping mass and tray constant isolates that proposed change. It does not prove that mass or tray width can never matter.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The floating garden model",
+          "body": "In this fictional design challenge, pupils built model gardens that could float in a tub. Team Pine used a wide shallow tray and arranged equal masses of clay evenly around its edge. Team Reed used a narrow tray and piled its clay in the centre. Both models floated on still water.\n\nWhen a volunteer rocked the tub, Pine's tray remained level longer. Reed's tray tipped and took in water. Reed's team wanted to replace all its clay with lighter material. Pine's team suggested first moving some of the existing clay lower and spreading it more evenly.\n\nThe teams agreed to change only the clay arrangement on Reed's tray for the next test. They kept the total clay mass and the tray unchanged. The second test would investigate distribution, not establish the best possible garden design. To compare tray widths fairly later, they would need another test with equal loads and similar arrangements. No model would be placed in a real creek; the challenge was a classroom investigation of design choices.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Changing the distribution while keeping mass and tray constant isolates that proposed change.",
+        "It does not prove that mass or tray width can never matter."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r080",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which claim would the proposed second test be least able to establish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "whether the revised model tips under the same disturbance"
+          },
+          {
+            "id": "b",
+            "text": "the best tray width for every garden"
+          },
+          {
+            "id": "c",
+            "text": "whether redistribution helps this tray"
+          },
+          {
+            "id": "d",
+            "text": "how this load behaves after rearrangement"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Tray width is unchanged in the second test. Its results can compare arrangements for that model but cannot rank all widths or garden designs.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The floating garden model",
+          "body": "In this fictional design challenge, pupils built model gardens that could float in a tub. Team Pine used a wide shallow tray and arranged equal masses of clay evenly around its edge. Team Reed used a narrow tray and piled its clay in the centre. Both models floated on still water.\n\nWhen a volunteer rocked the tub, Pine's tray remained level longer. Reed's tray tipped and took in water. Reed's team wanted to replace all its clay with lighter material. Pine's team suggested first moving some of the existing clay lower and spreading it more evenly.\n\nThe teams agreed to change only the clay arrangement on Reed's tray for the next test. They kept the total clay mass and the tray unchanged. The second test would investigate distribution, not establish the best possible garden design. To compare tray widths fairly later, they would need another test with equal loads and similar arrangements. No model would be placed in a real creek; the challenge was a classroom investigation of design choices.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Tray width is unchanged in the second test.",
+        "Its results can compare arrangements for that model but cannot rank all widths or garden designs."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r081",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does Reed's initial still-water success show?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the model cannot take in water"
+          },
+          {
+            "id": "b",
+            "text": "the clay arrangement is irrelevant"
+          },
+          {
+            "id": "c",
+            "text": "the narrow tray is superior to every wide tray"
+          },
+          {
+            "id": "d",
+            "text": "Floating once does not guarantee stability when water moves"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Reed floats at first but later tips when the tub is rocked. The change in conditions reveals a limit of the initial success.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The floating garden model",
+          "body": "In this fictional design challenge, pupils built model gardens that could float in a tub. Team Pine used a wide shallow tray and arranged equal masses of clay evenly around its edge. Team Reed used a narrow tray and piled its clay in the centre. Both models floated on still water.\n\nWhen a volunteer rocked the tub, Pine's tray remained level longer. Reed's tray tipped and took in water. Reed's team wanted to replace all its clay with lighter material. Pine's team suggested first moving some of the existing clay lower and spreading it more evenly.\n\nThe teams agreed to change only the clay arrangement on Reed's tray for the next test. They kept the total clay mass and the tray unchanged. The second test would investigate distribution, not establish the best possible garden design. To compare tray widths fairly later, they would need another test with equal loads and similar arrangements. No model would be placed in a real creek; the challenge was a classroom investigation of design choices.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Reed floats at first but later tips when the tub is rocked.",
+        "The change in conditions reveals a limit of the initial success."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w027",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a welcome guide for a new pupil joining your classroom. Explain three routines and how to seek help when unsure. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Choose routines a newcomer needs immediately, such as arrival, materials and asking questions. Use headings or clear paragraphs and give specific, invented classroom procedures consistently. Include a supportive route to help rather than assuming every newcomer already understands school terms.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Informative composition",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "informative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Choose routines a newcomer needs immediately, such as arrival, materials and asking questions.",
+        "Use headings or clear paragraphs and give specific, invented classroom procedures consistently.",
+        "Include a supportive route to help rather than assuming every newcomer already understands school terms."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Choose routines a newcomer needs immediately, such as arrival, materials and asking questions.",
+          "Use headings or clear paragraphs and give specific, invented classroom procedures consistently.",
+          "Include a supportive route to help rather than assuming every newcomer already understands school terms.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m082",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A hiker begins at an elevation of -12 m and finishes at 31 m. She climbs 58 m in total. How many metres does she descend?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "27"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The net rise is 31 minus -12 = 43 m. If she climbs 58 m, the excess 58 - 43 = 15 m must be cancelled by descent.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The net rise is 31 minus -12 = 43 m.",
+        "If she climbs 58 m, the excess 58 - 43 = 15 m must be cancelled by descent."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "58-(31-(-12))",
+        "expected": "15"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m083",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four temperatures have mean -1 degree. Three of them are -7, -3 and 6 degrees. What is the fourth temperature in degrees Celsius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0"
+          },
+          {
+            "id": "b",
+            "text": "-8"
+          },
+          {
+            "id": "c",
+            "text": "-2"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The total of all four temperatures must be -4. The three known values total -4 already, so the missing temperature is 0 degrees.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The total of all four temperatures must be -4.",
+        "The three known values total -4 already, so the missing temperature is 0 degrees."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "4*(-1)-(-7-3+6)",
+        "expected": "0"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m084",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A fair six-sided die is rolled once. How many of its six outcomes are greater than 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "1"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The outcomes greater than four are five and six. There are two favourable outcomes; the question asks for a count rather than the probability 2/6.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The outcomes greater than four are five and six.",
+        "There are two favourable outcomes; the question asks for a count rather than the probability 2/6."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6-4",
+        "expected": "2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n082",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number from 100 to 150 has digit sum 9 and is divisible by 5. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "145"
+          },
+          {
+            "id": "b",
+            "text": "135"
+          },
+          {
+            "id": "c",
+            "text": "105"
+          },
+          {
+            "id": "d",
+            "text": "120"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Divisibility by five requires a last digit of zero or five. Checking the range with digit sum nine leaves 135; numbers ending in zero in the range have digit sums at most five.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Divisibility by five requires a last digit of zero or five.",
+        "Checking the range with digit sum nine leaves 135; numbers ending in zero in the range have digit sums at most five."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "135",
+        "expected": "135"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n083",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A square number lies between 30 and 60. Dividing it by 7 gives a whole number. What is the square number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "56"
+          },
+          {
+            "id": "c",
+            "text": "49"
+          },
+          {
+            "id": "d",
+            "text": "35"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The squares in the interval are 36 and 49. Only 49 is divisible by seven, so the required number is 49.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The squares in the interval are 36 and 49.",
+        "Only 49 is divisible by seven, so the required number is 49."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "49",
+        "expected": "49"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n084",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A store has between 40 and 60 eggs. Packing them in groups of 6 leaves 3 eggs, while groups of 5 leave none. How many eggs are there?",
+        "options": [
+          {
+            "id": "a",
+            "text": "45"
+          },
+          {
+            "id": "b",
+            "text": "50"
+          },
+          {
+            "id": "c",
+            "text": "51"
+          },
+          {
+            "id": "d",
+            "text": "55"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The multiples of five strictly in the interval are 45, 50 and 55. Only 45 leaves remainder three on division by six: 45 = 7 times 6 + 3.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The multiples of five strictly in the interval are 45, 50 and 55.",
+        "Only 45 leaves remainder three on division by six: 45 = 7 times 6 + 3."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "45",
+        "expected": "45"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v082",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Choose the word that is not a degree of certainty: possible, probable, certain, chronological.",
+        "options": [
+          {
+            "id": "a",
+            "text": "possible"
+          },
+          {
+            "id": "b",
+            "text": "probable"
+          },
+          {
+            "id": "c",
+            "text": "certain"
+          },
+          {
+            "id": "d",
+            "text": "chronological"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Possible, probable and certain indicate different confidence levels. Chronological describes time order rather than confidence, even if a chronological account is reliable.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Possible, probable and certain indicate different confidence levels.",
+        "Chronological describes time order rather than confidence, even if a chronological account is reliable."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v083",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which is not a means of preserving food: drying, freezing, canning, garnishing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "canning"
+          },
+          {
+            "id": "b",
+            "text": "garnishing"
+          },
+          {
+            "id": "c",
+            "text": "drying"
+          },
+          {
+            "id": "d",
+            "text": "freezing"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The first three listed methods aim to extend storage life. Garnishing decorates food for presentation and does not serve that preservation function.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first three listed methods aim to extend storage life.",
+        "Garnishing decorates food for presentation and does not serve that preservation function."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v084",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "When classifying argument moves, which differs from the other three: providing a counterexample, disproving a premise, exposing a contradiction, restating the conclusion?",
+        "options": [
+          {
+            "id": "a",
+            "text": "disproving a premise"
+          },
+          {
+            "id": "b",
+            "text": "exposing a contradiction"
+          },
+          {
+            "id": "c",
+            "text": "restating the conclusion"
+          },
+          {
+            "id": "d",
+            "text": "providing a counterexample"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Three moves can challenge the support for an argument. Merely restating its conclusion does not test its support and is therefore the different move.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Three moves can challenge the support for an argument.",
+        "Merely restating its conclusion does not test its support and is therefore the different move."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r082",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the final paragraph distinguish a classroom tub from a real creek?",
+        "options": [
+          {
+            "id": "a",
+            "text": "to limit the setting in which the model findings apply"
+          },
+          {
+            "id": "b",
+            "text": "to suggest the pupils will test secretly outdoors"
+          },
+          {
+            "id": "c",
+            "text": "to prove creeks never disturb floating objects"
+          },
+          {
+            "id": "d",
+            "text": "to claim the tub contains no water"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The final sentence explicitly limits the challenge to a model investigation. It prevents treating a classroom result as permission or proof of suitability for a real waterway.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc text structure",
+          "skill": "scholarship.rc-text-structure",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-text-structure"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The floating garden model",
+          "body": "In this fictional design challenge, pupils built model gardens that could float in a tub. Team Pine used a wide shallow tray and arranged equal masses of clay evenly around its edge. Team Reed used a narrow tray and piled its clay in the centre. Both models floated on still water.\n\nWhen a volunteer rocked the tub, Pine's tray remained level longer. Reed's tray tipped and took in water. Reed's team wanted to replace all its clay with lighter material. Pine's team suggested first moving some of the existing clay lower and spreading it more evenly.\n\nThe teams agreed to change only the clay arrangement on Reed's tray for the next test. They kept the total clay mass and the tray unchanged. The second test would investigate distribution, not establish the best possible garden design. To compare tray widths fairly later, they would need another test with equal loads and similar arrangements. No model would be placed in a real creek; the challenge was a classroom investigation of design choices.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The final sentence explicitly limits the challenge to a model investigation.",
+        "It prevents treating a classroom result as permission or proof of suitability for a real waterway."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r083",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What action does the lunch article recommend trying first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "making all pupils bring food"
+          },
+          {
+            "id": "b",
+            "text": "two serving points"
+          },
+          {
+            "id": "c",
+            "text": "shortening every afternoon lesson"
+          },
+          {
+            "id": "d",
+            "text": "removing lunch queues entirely"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The recommendation explicitly prioritises trying two serving points. Extra lunch minutes remain an option if the first trial fails, so they are not the initial change.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc main idea",
+          "skill": "scholarship.rc-main-idea",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-main-idea"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The case for a slower lunch",
+          "body": "Our student council proposes adding five minutes to lunch, taking those minutes from the transition period before afternoon lessons. A recent student survey found that many pupils felt hurried while eating. However, a feeling of hurry does not by itself tell us how the timetable should change.\n\nFor two weeks, volunteers recorded when the queue opened, when the last meal was served and when tables were cleared. On busy days, the last pupils had only eight minutes before the bell. On quiet days, most pupils finished comfortably. The queue seemed to be the main difficulty, not the length of lunch for everyone.\n\nWe therefore recommend trying two serving points before changing lesson transitions. This requires a staffing check, and it may not solve the problem. If the late-served pupils still have too little time, the extra minutes should be reconsidered. The survey raised the question; observation helped us choose the first change to test. Neither should be ignored, but they do different jobs.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The recommendation explicitly prioritises trying two serving points.",
+        "Extra lunch minutes remain an option if the first trial fails, so they are not the initial change."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r084",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "On busy days, how long did the last-served pupils have before the bell?",
+        "options": [
+          {
+            "id": "a",
+            "text": "two weeks"
+          },
+          {
+            "id": "b",
+            "text": "thirty minutes"
+          },
+          {
+            "id": "c",
+            "text": "eight minutes"
+          },
+          {
+            "id": "d",
+            "text": "five minutes"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The observations identify eight minutes for the last pupils on busy days. Five minutes is the proposed timetable addition, not the measured eating time.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The case for a slower lunch",
+          "body": "Our student council proposes adding five minutes to lunch, taking those minutes from the transition period before afternoon lessons. A recent student survey found that many pupils felt hurried while eating. However, a feeling of hurry does not by itself tell us how the timetable should change.\n\nFor two weeks, volunteers recorded when the queue opened, when the last meal was served and when tables were cleared. On busy days, the last pupils had only eight minutes before the bell. On quiet days, most pupils finished comfortably. The queue seemed to be the main difficulty, not the length of lunch for everyone.\n\nWe therefore recommend trying two serving points before changing lesson transitions. This requires a staffing check, and it may not solve the problem. If the late-served pupils still have too little time, the extra minutes should be reconsidered. The survey raised the question; observation helped us choose the first change to test. Neither should be ignored, but they do different jobs.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The observations identify eight minutes for the last pupils on busy days.",
+        "Five minutes is the proposed timetable addition, not the measured eating time."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w028",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write an information page about a fictional community repair afternoon. Include what visitors may bring, what volunteers can and cannot promise, and how to book. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Define an internally consistent event with time, location and booking method. Give useful examples of acceptable items and clear limits without making unsupported safety guarantees. Organise practical details for quick reading and ensure no booking instruction contradicts the event information.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Informative composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "informative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Define an internally consistent event with time, location and booking method.",
+        "Give useful examples of acceptable items and clear limits without making unsupported safety guarantees.",
+        "Organise practical details for quick reading and ensure no booking instruction contradicts the event information."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Define an internally consistent event with time, location and booking method.",
+          "Give useful examples of acceptable items and clear limits without making unsupported safety guarantees.",
+          "Organise practical details for quick reading and ensure no booking instruction contradicts the event information.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m085",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bag holds 5 red, 3 blue and 2 white tokens. One token is selected at random. What is the probability that it is not blue? Give a decimal.",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.7"
+          },
+          {
+            "id": "b",
+            "text": "0.3"
+          },
+          {
+            "id": "c",
+            "text": "0.5"
+          },
+          {
+            "id": "d",
+            "text": "0.8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "There are ten equally likely tokens, of which seven are red or white. The probability of not blue is 7/10 = 0.7, the complement of 0.3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are ten equally likely tokens, of which seven are red or white.",
+        "The probability of not blue is 7/10 = 0.7, the complement of 0.3."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(5+2)/(5+3+2)",
+        "expected": "0.7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m086",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A fair coin and a fair six-sided die are used. What is the probability of a tail and an even number? Give a decimal.",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.125"
+          },
+          {
+            "id": "b",
+            "text": "0.5"
+          },
+          {
+            "id": "c",
+            "text": "0.75"
+          },
+          {
+            "id": "d",
+            "text": "0.25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The probability of a tail is 1/2 and of an even die result is 3/6. The independent events both occur with probability (1/2)(3/6) = 1/4 = 0.25.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The probability of a tail is 1/2 and of an even die result is 3/6.",
+        "The independent events both occur with probability (1/2)(3/6) = 1/4 = 0.25."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "1/2*3/6",
+        "expected": "0.25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m087",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Cards numbered 1 to 20 are shuffled. How many cards show a multiple of 3 or a multiple of 5, counting each card once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "9"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "There are six multiples of three and four multiples of five. The number 15 is in both lists, so subtract one duplicate to get nine cards.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are six multiples of three and four multiples of five.",
+        "The number 15 is in both lists, so subtract one duplicate to get nine cards."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6+4-1",
+        "expected": "9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n085",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The sum of two numbers is 36 and one is 8 greater than the other. What is the smaller number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "22"
+          },
+          {
+            "id": "c",
+            "text": "14"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Remove the extra eight from the total to obtain two equal smaller numbers totalling 28. Divide by two to get 14; the larger number is 22.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Remove the extra eight from the total to obtain two equal smaller numbers totalling 28.",
+        "Divide by two to get 14; the larger number is 22."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(36-8)/2",
+        "expected": "14"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n086",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A three-digit number is a multiple of 9. Its hundreds and units digits are 6 and 4. What is its tens digit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "A multiple of nine has a digit sum divisible by nine. The known digits total ten, so the tens digit must add eight to reach eighteen. The number is 684.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A multiple of nine has a digit sum divisible by nine.",
+        "The known digits total ten, so the tens digit must add eight to reach eighteen. The number is 684."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n087",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shelf has fewer than 40 and more than 20 books. Grouping them in fours leaves 1 book. Grouping them in sevens leaves none. How many books are there?",
+        "options": [
+          {
+            "id": "a",
+            "text": "21"
+          },
+          {
+            "id": "b",
+            "text": "25"
+          },
+          {
+            "id": "c",
+            "text": "28"
+          },
+          {
+            "id": "d",
+            "text": "35"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The multiples of seven in the range are 21, 28 and 35. Only 21 has remainder one when divided by four, so it satisfies both grouping clues.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The multiples of seven in the range are 21, 28 and 35.",
+        "Only 21 has remainder one when divided by four, so it satisfies both grouping clues."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "21",
+        "expected": "21"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v085",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which term refers to a person who receives a message rather than creates or carries it: author, sender, courier, recipient?",
+        "options": [
+          {
+            "id": "a",
+            "text": "author"
+          },
+          {
+            "id": "b",
+            "text": "sender"
+          },
+          {
+            "id": "c",
+            "text": "courier"
+          },
+          {
+            "id": "d",
+            "text": "recipient"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Author and sender originate a message; courier carries it. Recipient names the person at the receiving end, distinguishing role rather than job importance.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Author and sender originate a message; courier carries it.",
+        "Recipient names the person at the receiving end, distinguishing role rather than job importance."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v086",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word describes a relationship between two things rather than a property one thing can have alone: heavier, fragile, porous, brittle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "heavier"
+          },
+          {
+            "id": "b",
+            "text": "fragile"
+          },
+          {
+            "id": "c",
+            "text": "porous"
+          },
+          {
+            "id": "d",
+            "text": "brittle"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Heavier makes a comparison, even if the compared object is left unstated. The other properties can be described without a second object, so they belong to a different logical category.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Heavier makes a comparison, even if the compared object is left unstated.",
+        "The other properties can be described without a second object, so they belong to a different logical category."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v087",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Choose the non-renewable resource from sunlight, wind, coal and flowing water.",
+        "options": [
+          {
+            "id": "a",
+            "text": "coal"
+          },
+          {
+            "id": "b",
+            "text": "sunlight"
+          },
+          {
+            "id": "c",
+            "text": "wind"
+          },
+          {
+            "id": "d",
+            "text": "flowing water"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Sunlight, wind and flowing water are replenished by continuing natural processes on human timescales. Coal forms over geological timescales and is depleted by use, making it non-renewable.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Sunlight, wind and flowing water are replenished by continuing natural processes on human timescales.",
+        "Coal forms over geological timescales and is depleted by use, making it non-renewable."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r085",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the article distinguish the survey from observation?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One identifies concern and the other helps locate a possible cause"
+          },
+          {
+            "id": "b",
+            "text": "the survey must be false because feelings are involved"
+          },
+          {
+            "id": "c",
+            "text": "observation guarantees the proposed solution works"
+          },
+          {
+            "id": "d",
+            "text": "the two sources cover unrelated topics"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The survey shows pupils feel hurried, while queue timing indicates where the pressure arises. Both contribute evidence of different kinds without proving the serving-point solution in advance.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The case for a slower lunch",
+          "body": "Our student council proposes adding five minutes to lunch, taking those minutes from the transition period before afternoon lessons. A recent student survey found that many pupils felt hurried while eating. However, a feeling of hurry does not by itself tell us how the timetable should change.\n\nFor two weeks, volunteers recorded when the queue opened, when the last meal was served and when tables were cleared. On busy days, the last pupils had only eight minutes before the bell. On quiet days, most pupils finished comfortably. The queue seemed to be the main difficulty, not the length of lunch for everyone.\n\nWe therefore recommend trying two serving points before changing lesson transitions. This requires a staffing check, and it may not solve the problem. If the late-served pupils still have too little time, the extra minutes should be reconsidered. The survey raised the question; observation helped us choose the first change to test. Neither should be ignored, but they do different jobs.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The survey shows pupils feel hurried, while queue timing indicates where the pressure arises.",
+        "Both contribute evidence of different kinds without proving the serving-point solution in advance."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r086",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What would make the council reconsider extra lunch minutes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the survey being printed again"
+          },
+          {
+            "id": "b",
+            "text": "late-served pupils still having insufficient eating time after the trial"
+          },
+          {
+            "id": "c",
+            "text": "every pupil wanting longer holidays"
+          },
+          {
+            "id": "d",
+            "text": "a reduction in the number of tables"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The recommendation says extra minutes should return for consideration if the queue change does not fix the remaining time problem. This is a stated conditional next step rather than an unconditional rejection of timetable change.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The case for a slower lunch",
+          "body": "Our student council proposes adding five minutes to lunch, taking those minutes from the transition period before afternoon lessons. A recent student survey found that many pupils felt hurried while eating. However, a feeling of hurry does not by itself tell us how the timetable should change.\n\nFor two weeks, volunteers recorded when the queue opened, when the last meal was served and when tables were cleared. On busy days, the last pupils had only eight minutes before the bell. On quiet days, most pupils finished comfortably. The queue seemed to be the main difficulty, not the length of lunch for everyone.\n\nWe therefore recommend trying two serving points before changing lesson transitions. This requires a staffing check, and it may not solve the problem. If the late-served pupils still have too little time, the extra minutes should be reconsidered. The survey raised the question; observation helped us choose the first change to test. Neither should be ignored, but they do different jobs.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The recommendation says extra minutes should return for consideration if the queue change does not fix the remaining time problem.",
+        "This is a stated conditional next step rather than an unconditional rejection of timetable change."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r087",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which description best fits the article's position?",
+        "options": [
+          {
+            "id": "a",
+            "text": "certain that staffing is irrelevant"
+          },
+          {
+            "id": "b",
+            "text": "opposed to all timetable changes"
+          },
+          {
+            "id": "c",
+            "text": "provisional and evidence-seeking"
+          },
+          {
+            "id": "d",
+            "text": "dismissive of pupil experiences"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "It proposes a trial, asks for a staffing check and allows reconsideration. That language expresses a testable initial judgement rather than certainty or dismissal.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc tone analysis",
+          "skill": "scholarship.rc-tone-analysis",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-tone-analysis"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The case for a slower lunch",
+          "body": "Our student council proposes adding five minutes to lunch, taking those minutes from the transition period before afternoon lessons. A recent student survey found that many pupils felt hurried while eating. However, a feeling of hurry does not by itself tell us how the timetable should change.\n\nFor two weeks, volunteers recorded when the queue opened, when the last meal was served and when tables were cleared. On busy days, the last pupils had only eight minutes before the bell. On quiet days, most pupils finished comfortably. The queue seemed to be the main difficulty, not the length of lunch for everyone.\n\nWe therefore recommend trying two serving points before changing lesson transitions. This requires a staffing check, and it may not solve the problem. If the late-served pupils still have too little time, the extra minutes should be reconsidered. The survey raised the question; observation helped us choose the first change to test. Neither should be ignored, but they do different jobs.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "It proposes a trial, asks for a staffing check and allows reconsideration.",
+        "That language expresses a testable initial judgement rather than certainty or dismissal."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w029",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a report on a fictional class trial comparing two reading corners. Invent a small, clearly labelled set of observations and distinguish findings from recommendations. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "State the trial setting and label all invented observations as fictional. Report consistent observations about use or comfort without claiming they prove every pupil's preference. Separate what was observed from a cautious recommendation and name one limitation of the trial.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Informative composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "informative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "State the trial setting and label all invented observations as fictional.",
+        "Report consistent observations about use or comfort without claiming they prove every pupil's preference.",
+        "Separate what was observed from a cautious recommendation and name one limitation of the trial."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "State the trial setting and label all invented observations as fictional.",
+          "Report consistent observations about use or comfort without claiming they prove every pupil's preference.",
+          "Separate what was observed from a cautious recommendation and name one limitation of the trial.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m088",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two fair four-sided dice each show numbers 1 to 4. How many of the 16 ordered outcomes have sum 6?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "List the possible pairs: (2,4), (3,3) and (4,2). These are three ordered outcomes; (4,2) and (2,4) count separately because the dice are distinguishable.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "List the possible pairs: (2,4), (3,3) and (4,2).",
+        "These are three ordered outcomes; (4,2) and (2,4) count separately because the dice are distinguishable."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m089",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A box contains 4 purple and 2 orange balls. One orange ball is removed without replacing it. A new ball is then drawn randomly. What is the probability of purple on the new draw? Give a decimal.",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.8"
+          },
+          {
+            "id": "b",
+            "text": "0.5"
+          },
+          {
+            "id": "c",
+            "text": "0.666667"
+          },
+          {
+            "id": "d",
+            "text": "0.75"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Removing an orange leaves four purple and one orange ball. Four of the five remaining balls are purple, so the probability is 4/5 = 0.8.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Removing an orange leaves four purple and one orange ball.",
+        "Four of the five remaining balls are purple, so the probability is 4/5 = 0.8."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "4/(4+2-1)",
+        "expected": "0.8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m090",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A spinner has 8 equal sectors: 3 yellow, 2 green and 3 violet. In 80 spins, how many green results would you expect on average?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "40"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Each spin has green probability 2/8 = 1/4. One quarter of 80 is 20. This is an expectation, not a guarantee about actual spins.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Each spin has green probability 2/8 = 1/4.",
+        "One quarter of 80 is 20. This is an expectation, not a guarantee about actual spins."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "80*2/8",
+        "expected": "20"
+      }
+    }
+  ]
+}
