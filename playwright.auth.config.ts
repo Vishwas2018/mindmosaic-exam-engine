@@ -53,6 +53,8 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_URL: e2eEnv.supabaseUrl,
       NEXT_PUBLIC_SUPABASE_ANON_KEY: e2eEnv.supabaseAnonKey,
       SUPABASE_SERVICE_ROLE_KEY: e2eEnv.supabaseServiceRoleKey,
+      // The exam writer refuses a loopback target unless opted in (src/server/exam-write/target.ts). Local only.
+      EXAM_WRITE_ALLOW_LOOPBACK: process.env.EXAM_WRITE_ALLOW_LOOPBACK ?? "1",
       // Billing enforcement stays off (default) for this mission's scope —
       // see docs/testing/playwright-auth-test-data-guide.md.
       BILLING_ENFORCEMENT_ENABLED: "",
