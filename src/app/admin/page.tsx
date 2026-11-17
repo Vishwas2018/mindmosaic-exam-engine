@@ -40,7 +40,16 @@ export default async function AdminHomePage({ searchParams }: AdminHomePageProps
   }
 
   /* The library is a real page with its own URL; the old in-page view only exists for the design preview. */
-  if (initialView === "library") redirect("/admin/questions");
+  const ROUTES: Partial<Record<AdminView, string>> = {
+    library: "/admin/questions",
+    paper: "/admin/papers",
+    publication: "/admin/publication",
+    writing: "/admin/writing",
+    support: "/admin/support",
+    activity: "/admin/activity",
+  };
+  const target = ROUTES[initialView];
+  if (target) redirect(target);
 
   const devData = await getAuthenticatedDevAdminData();
   return <AdminWorkspace data={devData} initialView={initialView} />;

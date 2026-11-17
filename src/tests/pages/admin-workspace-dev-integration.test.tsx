@@ -1,7 +1,8 @@
 import { describe, expect, it, beforeEach, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import React from "react";
 
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn(), refresh: vi.fn() }), redirect: vi.fn() }));
 vi.mock("server-only", () => ({}));
 
 const mockGetUser = vi.fn();
@@ -153,6 +154,25 @@ describe("Phase C: Authenticated DEV Integration", () => {
       expect(screen.getAllByRole("link", { name: /Analytics/i })[0]).toHaveAttribute("href", "/admin/analytics");
       expect(screen.getAllByRole("link", { name: /Intelligence/i })[0]).toHaveAttribute("href", "/admin/intelligence");
       expect(screen.getAllByRole("link", { name: /Operations/i })[0]).toHaveAttribute("href", "/admin/operations");
+    });
+
+    it("links every operational section in the DEV sidebar to its own page", async () => {
+      const devData = await getAuthenticatedDevAdminData();
+      render(<AdminWorkspace data={devData} initialView="overview" />);
+      const nav = screen.getByRole("navigation", { name: "Admin sections" });
+      for (const [name, href] of [
+        ["Question library", "/admin/questions"],
+        ["Paper review", "/admin/papers"],
+        ["Publication", "/admin/publication"],
+        ["Writing review", "/admin/writing"],
+        ["Support", "/admin/support"],
+        ["Activity history", "/admin/activity"],
+      ] as const) {
+        expect(within(nav).getByRole("link", { name: new RegExp(`^${name}`) })).toHaveAttribute("href", href);
+      }
+      /* Design-preview views are not offered over real DEV data. */
+      expect(within(nav).queryByRole("button", { name: /State boards/i })).not.toBeInTheDocument();
+      expect(within(nav).queryByRole("button", { name: /Question review/i })).not.toBeInTheDocument();
     });
 
     it("displays honest unavailable state for Writing Review in DEV mode", async () => {

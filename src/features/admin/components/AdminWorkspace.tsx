@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   BookOpen,
@@ -43,7 +44,19 @@ export interface AdminWorkspaceProps {
   initialView?: AdminView;
   /** Server-rendered content for the library pages (/admin/questions...). When set it fills the content pane. */
   libraryContent?: React.ReactNode;
+  /** Which sidebar entry is current when `libraryContent` is set. Defaults to the library. */
+  activeKey?: AdminView;
 }
+
+/** The pages that replace the in-page views when the workspace shows real DEV data. */
+const DEV_ROUTES: Partial<Record<AdminView, string>> = {
+  library: "/admin/questions",
+  paper: "/admin/papers",
+  publication: "/admin/publication",
+  writing: "/admin/writing",
+  support: "/admin/support",
+  activity: "/admin/activity",
+};
 
 const LEGACY_TOOLS = [
   {
@@ -82,7 +95,8 @@ function approvalMeta(item: AdminApprovalItem): string {
   return parts.length ? parts.join(" · ") : "Year, subject and author not recorded";
 }
 
-export function AdminWorkspace({ data, initialView = "overview", libraryContent }: AdminWorkspaceProps) {
+export function AdminWorkspace({ data, initialView = "overview", libraryContent, activeKey = "library" }: AdminWorkspaceProps) {
+  const router = useRouter();
   const [currentView, setCurrentView] = useState<AdminView>(initialView);
   const [selectedYear, setSelectedYear] = useState<"all" | 3 | 5 | 6>("all");
   const [selectedSubject, setSelectedSubject] = useState<string>("all");
@@ -163,7 +177,7 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent 
           </div>
 
           {/* Artboard switcher pills: a design-review aid, shown only over the synthetic preview data. */}
-          {data.source === "preview" && (
+          {data.source === "preview" && !libraryContent && (
           <div className="flex flex-wrap items-center gap-1 text-xs">
             <span className="font-bold text-royal mr-1">Artboards:</span>
             {[
@@ -219,17 +233,29 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent 
               { id: "activity", label: "Activity log", icon: History },
               { id: "governance", label: "Governance map", icon: ShieldCheck },
               { id: "states", label: "State Boards", icon: Layers },
-            ].map((item) => {
+            ]
+              /* Review, approval, the governance map and the state boards are design-preview views only. */
+              .filter((item) => data.source === "preview" || !["review", "approval", "governance", "states"].includes(item.id))
+              .map((item) => {
               const Icon = item.icon;
-              const isActive = currentView === item.id;
+              const isActive = libraryContent ? item.id === activeKey : currentView === item.id;
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => {
-                    setCurrentView(item.id as AdminView);
                     setMobileMenuOpen(false);
                     setNotice(null);
+                    const route = DEV_ROUTES[item.id as AdminView];
+                    if (data.source === "dev" && route) {
+                      router.push(route);
+                      return;
+                    }
+                    if (libraryContent) {
+                      router.push(item.id === "overview" ? "/admin" : `/admin?view=${item.id}`);
+                      return;
+                    }
+                    setCurrentView(item.id as AdminView);
                   }}
                   className={`flex items-center gap-2 rounded-xl p-2.5 text-xs font-semibold text-left transition ${
                     isActive ? "bg-royal text-white" : "text-[#1f1b24] bg-royal/5 hover:bg-royal/10"
@@ -281,11 +307,11 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent 
                       { id: "approval", label: "Human approval", icon: CheckCircle2, count: data.approvals.filter((a) => !a.isApproved).length },
                     ]
                   : []),
-                { id: "paper", label: "Paper review", icon: FileText, count: data.papers.length },
-                { id: "publication", label: "Publication", icon: UploadCloud },
-                { id: "writing", label: "Writing review", icon: PenTool, count: data.writing.items.length },
-                { id: "support", label: "Support", icon: LifeBuoy, count: data.support.items.length },
-                { id: "activity", label: "Activity history", icon: History },
+                { id: "paper", label: "Paper review", icon: FileText, count: data.source === "preview" ? data.papers.length : undefined, href: "/admin/papers" },
+                { id: "publication", label: "Publication", icon: UploadCloud, href: "/admin/publication" },
+                { id: "writing", label: "Writing review", icon: PenTool, count: data.source === "preview" ? data.writing.items.length : undefined, href: "/admin/writing" },
+                { id: "support", label: "Support", icon: LifeBuoy, count: data.source === "preview" ? data.support.items.length : undefined, href: "/admin/support" },
+                { id: "activity", label: "Activity history", icon: History, href: "/admin/activity" },
                 ...(data.source === "preview"
                   ? [
                       { id: "governance", label: "Governance path", icon: ShieldCheck },
@@ -295,7 +321,7 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent 
                   : []),
               ].map((item) => {
                 const Icon = item.icon;
-                const isActive = libraryContent ? item.id === "library" : currentView === item.id;
+                const isActive = libraryContent ? item.id === activeKey : currentView === item.id;
                 const itemClass = `w-full flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold transition ${
                   isActive ? "bg-royal text-white" : "text-[#1f1b24] hover:bg-royal/5"
                 }`;
@@ -422,6 +448,11 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent 
               overview={data.overview}
               source={data.source}
               onOpen={(view) => {
+                const route = DEV_ROUTES[view];
+                if (data.source === "dev" && route) {
+                  router.push(route);
+                  return;
+                }
                 setCurrentView(view);
                 setNotice(null);
               }}
