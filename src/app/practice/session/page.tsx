@@ -30,6 +30,8 @@ interface ServerPracticeSessionPayload {
   ok: boolean;
   questions: readonly CandidateQuestion[];
   count: number;
+  /** Signed token binding the delivered question ids; required by /api/practice/check (A-01). */
+  practiceToken: string;
   title: string;
   estimatedMinutes: number;
 }
@@ -260,6 +262,7 @@ function PracticeSkillSessionContent() {
       <PracticeSession
         questions={candidateSession.questions}
         title={candidateSession.title}
+        practiceToken={candidateSession.practiceToken}
         exitHref="/student/practice"
         exitLabel="Back to Practice Studio"
         showIntro={true}

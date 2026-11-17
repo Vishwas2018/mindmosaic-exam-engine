@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 
 import { getExamBank } from "@/server/exam-bank";
+import {
+  PRACTICE_TOKEN_MAX_QUESTIONS,
+  issuePracticeToken,
+} from "@/server/practice-session-token";
+import { getSignedInUserId } from "@/server/practice-session-user";
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
 import {
   filterEligibleQuestions,
@@ -32,10 +37,16 @@ export async function GET(request: Request): Promise<NextResponse> {
   const strand = searchParams.get("strand") ?? null;
   const curriculumCode = searchParams.get("curriculumCode") ?? null;
   const countParam = searchParams.get("count");
-  const count = countParam ? Math.max(1, parseInt(countParam, 10)) : 10;
+  const parsedCount = countParam ? parseInt(countParam, 10) : 10;
+  const count = Number.isFinite(parsedCount)
+    ? Math.min(PRACTICE_TOKEN_MAX_QUESTIONS, Math.max(1, parsedCount))
+    : 10;
   const seedParam = searchParams.get("seed");
 
-  const bank = getExamBank("practice");
+  // Scholarship-style content is signed-in only (see getGuestExamBank); a guest never receives it here either.
+  const userId = await getSignedInUserId();
+  const fullBank = getExamBank("practice");
+  const bank = userId ? fullBank : fullBank.filter((q) => q.examStyle !== "scholarship_style");
 
   const candidateSource: Question[] = [];
   let title = SUBJECT_LABELS[subject] ?? "Practice Set";
@@ -89,6 +100,16 @@ export async function GET(request: Request): Promise<NextResponse> {
   // Strip answer keys and explanations before delivering to browser (C10, C15)
   const candidateQuestions = toCandidateQuestions(selectedQuestions);
 
+  // A-01: /api/practice/check only scores ids carried in this signed token. Bind signed-in-only content to the user.
+  const containsSignedInOnly = selectedQuestions.some((q) => q.examStyle === "scholarship_style");
+  const practiceToken = issuePracticeToken({
+    ids: selectedQuestions.map((q) => q.id),
+    ...(containsSignedInOnly && userId ? { sub: userId } : {}),
+  });
+  if (practiceToken === null) {
+    return NextResponse.json({ ok: false, error: "practice_unavailable" }, { status: 503 });
+  }
+
   // Median estimated time in minutes (default ~1.5 min per question, rounded to nearest 5 mins)
   const estimatedMinutes = Math.max(5, Math.round((candidateQuestions.length * 1.5) / 5) * 5);
 
@@ -96,6 +117,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     ok: true,
     questions: candidateQuestions,
     count: candidateQuestions.length,
+    practiceToken,
     title,
     estimatedMinutes,
     subject,

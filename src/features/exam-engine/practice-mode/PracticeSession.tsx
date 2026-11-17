@@ -40,6 +40,11 @@ export interface PracticeSessionProps {
   exitLabel?: string;
   /** Whether to show the Set Introduction screen before question 1. Default false for test compatibility. */
   showIntro?: boolean;
+  /**
+   * Signed token from /api/practice/session/questions. Sent with every /api/practice/check call: the server only
+   * scores questions it delivered in this set (A-01).
+   */
+  practiceToken?: string;
   /** Optional custom check answer handler. Defaults to calling /api/practice/check. */
   onCheckAnswer?: (
     questionId: string,
@@ -341,6 +346,7 @@ export function PracticeSession({
   exitHref,
   exitLabel = "Back to Practice Studio",
   showIntro = false,
+  practiceToken,
   onCheckAnswer,
 }: PracticeSessionProps) {
   const [hasStarted, setHasStarted] = useState(!showIntro);
@@ -566,7 +572,7 @@ export function PracticeSession({
         const response = await fetch("/api/practice/check", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ questionId: question.id, answer }),
+          body: JSON.stringify({ questionId: question.id, answer, practiceToken }),
         });
 
         if (!response.ok) {
