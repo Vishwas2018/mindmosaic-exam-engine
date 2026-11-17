@@ -8,7 +8,8 @@ import { isVihaanScholarshipPrepEnabledFor } from "@/features/scholarship-prep/l
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { createLegacyExamSession, recordLegacyExamAttempt } from "@/server/exam-write/legacy-exam-writes";
-import { getVihaanDiagnosticQuestions } from "@/server/vihaan-practice";
+import { getVihaanApprovedBank } from "@/server/vihaan-practice";
+import { startWritingAttempt, submitWritingAttempt } from "@/server/writing/service";
 
 export const dynamic = "force-dynamic";
 
@@ -26,9 +27,14 @@ const ALLOWED_SESSION_SUBJECTS = new Set([
 ]);
 
 const attemptRequestSchema = z.object({
-  questionIds: z.array(z.string().min(1)).min(1).max(20).optional(),
+  questionIds: z.array(z.string().min(1)).min(1).max(200).optional(),
   subject: z.string().trim().min(1).max(60).optional().default("mixed"),
-  mode: z.enum(["diagnostic", "practice", "local", "server"]).optional().default("diagnostic"),
+  mode: z
+    .enum(["diagnostic", "practice", "sectional", "mock", "writing", "local", "server"])
+    .optional()
+    .default("diagnostic"),
+  title: z.string().trim().min(1).max(120).optional(),
+  isSyntheticE2e: z.boolean().optional().default(false),
   responses: z.record(z.string(), z.unknown()).default({}),
   startedAt: z.number().int().positive().optional(),
   submittedAt: z.number().int().positive().optional(),
@@ -79,7 +85,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  const approvedBank = getVihaanDiagnosticQuestions(user.id);
+  const approvedBank = getVihaanApprovedBank(user.id);
   if (approvedBank.length === 0) {
     return NextResponse.json({ error: "no_approved_questions" }, { status: 403 });
   }
@@ -134,16 +140,18 @@ export async function POST(request: Request): Promise<NextResponse> {
     questionCount: selectedQuestions.length,
     timing: "timed" as const,
     bankId: "published" as const,
-    exam_package_id: "vihaan-scholarship-pilot-01",
+    exam_package_id: "vihaan-scholarship-500",
     vihaanMode: parsed.data.mode,
     requestedSubject: parsed.data.subject,
+    isSyntheticE2e: parsed.data.isSyntheticE2e,
     title:
-      parsed.data.subject === "mixed"
+      parsed.data.title ??
+      (parsed.data.subject === "mixed"
         ? "Vihaan Scholarship Diagnostic"
-        : `Vihaan Practice — ${parsed.data.subject}`,
+        : `Vihaan ${parsed.data.mode} — ${parsed.data.subject}`),
   };
 
-  const seed = `vihaan-pilot-01-${user.id}-${now}`;
+  const seed = `vihaan-500-${user.id}-${now}`;
   const expiresAt = new Date(now + 24 * 60 * 60 * 1000).toISOString();
 
   const { sessionId, error: sessionError } = await createLegacyExamSession({
@@ -178,10 +186,36 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
+  // Persist non-empty writing responses into writing_attempts so linked parents
+  // can mark every criterion on the 1–5 scholarship rubric without duplicate tables.
+  const writingAttemptIds: string[] = [];
+  for (const question of selectedQuestions) {
+    if (question.metadata.subject !== "writing") continue;
+    const rawResponse = parsed.data.responses[question.id];
+    const responseText = typeof rawResponse === "string" ? rawResponse.trim() : "";
+    if (!responseText) continue;
+    const taskId = parsed.data.isSyntheticE2e ? `e2e-${question.id}` : question.id;
+    const started = await startWritingAttempt(supabase, {
+      taskId,
+      mode: "untimed",
+      durationSeconds: null,
+    });
+    if (started.ok) {
+      const submitted = await submitWritingAttempt(supabase, started.value.id, {
+        text: responseText,
+        reason: "user_submitted",
+      });
+      if (submitted.ok) {
+        writingAttemptIds.push(submitted.value.id);
+      }
+    }
+  }
+
   return NextResponse.json({
     persisted: true,
     sessionId,
     attemptId,
+    writingAttemptIds,
     result,
   });
 }

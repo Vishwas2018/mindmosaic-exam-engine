@@ -1,12 +1,19 @@
 "use client";
 
-import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { AlertCircle, CheckCircle2, Edit3 } from "lucide-react";
 
 import {
   buildVihaanParentSummary,
   type RecordedOutcome,
 } from "@/features/scholarship-prep/lib/practice";
 import { recommendNextFocus } from "@/features/scholarship-prep/lib/study-plan";
+import {
+  RubricMarkForm,
+  type MarkPayload,
+} from "@/features/writing/components/RubricMarkForm";
+import { scholarshipWrittenExpressionRubric } from "@/features/writing/rubrics/scholarship-written-expression";
+import type { WritingHistoryItem } from "@/server/writing/queries";
 
 const FOCUS_LABELS: Readonly<Record<string, string>> = {
   mathematics: "Mathematics",
@@ -25,19 +32,37 @@ function formatFocusLabel(focus: string): string {
 
 /**
  * Vihaan Parent Dashboard — displays weekly progress, subject performance,
- * time spent, weak areas and recommended next steps derived from real
- * recorded `vihaan-*` sitting outcomes (honest empty state when none exist).
+ * time spent, weak areas, parent 1–5 writing rubric marking, and recommended
+ * next steps derived from genuine recorded `vihaan-*` sitting outcomes.
  */
 export function VihaanParentDashboard({
   outcomes = [],
+  writingHistory = [],
+  writingPromptsById = {},
+  approvedBankCount = 500,
   childName = "Vihaan",
 }: {
   outcomes?: readonly RecordedOutcome[];
+  writingHistory?: readonly WritingHistoryItem[];
+  writingPromptsById?: Readonly<Record<string, string>>;
+  approvedBankCount?: number;
   childName?: string;
 }) {
+  const [markingAttemptId, setMarkingAttemptId] = useState<string | null>(null);
   const summary = buildVihaanParentSummary(outcomes);
   const nextFocusLabel = formatFocusLabel(recommendNextFocus(summary.weakSubjects));
   const hasAnyRecordedData = summary.recordedItemsCount > 0;
+
+  async function saveRubricMarks(attemptId: string, marks: MarkPayload): Promise<void> {
+    const response = await fetch(`/api/writing/attempts/${attemptId}/mark`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(marks),
+    });
+    if (!response.ok) {
+      throw new Error(`request_failed_${response.status}`);
+    }
+  }
 
   return (
     <div className="space-y-8" data-testid="vihaan-parent-dashboard">
@@ -47,11 +72,11 @@ export function VihaanParentDashboard({
             Vihaan Scholarship Prep
           </h1>
           <p className="mt-1 text-sm font-semibold text-muted">
-            Parent dashboard — progress and recommendations
+            Parent dashboard — progress, rubric marking and recommendations
           </p>
         </div>
-        <span className="px-2 py-0.5 rounded border border-emerald-200 bg-emerald-50 text-[10px] font-semibold text-emerald-700">
-          Approved for DEV — pilot-01 (20 items)
+        <span className="px-2.5 py-1 rounded border border-emerald-200 bg-emerald-50 text-[11px] font-semibold text-emerald-700">
+          Approved for DEV — {approvedBankCount}-item bank (166 reserved for mock exams)
         </span>
       </div>
 
@@ -200,6 +225,115 @@ export function VihaanParentDashboard({
                 </p>
               </div>
             </div>
+          </div>
+        )}
+      </section>
+
+      <section
+        data-testid="parent-writing-marking"
+        className="rounded-2xl border border-mm-line bg-white p-6 shadow-sm space-y-4"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Edit3 className="h-5 w-5 text-primary" aria-hidden="true" />
+            <h2 className="text-xl font-bold text-ink">
+              Writing submissions & parent rubric marking
+            </h2>
+          </div>
+          <span className="px-2 py-0.5 rounded border border-mm-line bg-mm-tint/40 text-[10px] font-semibold text-mm-muted">
+            6 criteria · 1–5 scale (/30)
+          </span>
+        </div>
+
+        {writingHistory.length === 0 ? (
+          <p className="text-sm text-mm-muted">
+            No submitted writing responses yet. When {childName} submits a writing prompt in daily
+            practice, the diagnostic, or a mock exam, it appears here for parent rubric marking.
+          </p>
+        ) : (
+          <div className="space-y-4">
+            {writingHistory.map((item) => {
+              const normalizedTaskId = item.attempt.taskId.replace(/^e2e-/, "");
+              const promptText = writingPromptsById[normalizedTaskId] ?? normalizedTaskId;
+              const isMarking = markingAttemptId === item.attempt.id;
+              const initialMarks = item.mark
+                ? {
+                    scores: Object.fromEntries(
+                      item.mark.criteria.map((c) => [c.criterionId, c.score]),
+                    ),
+                    comments: Object.fromEntries(
+                      item.mark.criteria
+                        .filter((c) => c.comment)
+                        .map((c) => [c.criterionId, c.comment!]),
+                    ),
+                    feedback: item.mark.feedback,
+                  }
+                : null;
+
+              return (
+                <div
+                  key={item.attempt.id}
+                  data-testid={`parent-writing-item-${item.attempt.id}`}
+                  className="rounded-xl border border-mm-line bg-mm-page/40 p-4 space-y-3"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-mm-muted">
+                        Task {normalizedTaskId}
+                      </p>
+                      <p className="text-sm font-bold text-ink">{promptText}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {item.mark ? (
+                        <span
+                          data-testid={`parent-writing-mark-${item.attempt.id}`}
+                          className="rounded border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700"
+                        >
+                          Marked: {item.mark.awardedMarks} / {item.mark.maxMarks}
+                        </span>
+                      ) : (
+                        <span
+                          data-testid={`parent-writing-pending-${item.attempt.id}`}
+                          className="rounded border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-semibold text-amber-800"
+                        >
+                          Pending rubric review
+                        </span>
+                      )}
+                      <button
+                        type="button"
+                        data-testid={`parent-writing-toggle-mark-${item.attempt.id}`}
+                        onClick={() =>
+                          setMarkingAttemptId(isMarking ? null : item.attempt.id)
+                        }
+                        className="rounded-btn border border-primary/30 bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-xs hover:border-primary hover:bg-mm-tint"
+                      >
+                        {isMarking ? "Close" : item.mark ? "Edit marks" : "Mark with 1–5 rubric"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {item.attempt.responseText && (
+                    <div className="rounded-lg border border-mm-line bg-white p-3 text-xs text-ink whitespace-pre-wrap">
+                      {item.attempt.responseText}
+                    </div>
+                  )}
+
+                  {isMarking && (
+                    <div
+                      data-testid={`parent-writing-form-${item.attempt.id}`}
+                      className="rounded-xl border border-primary/20 bg-white p-4"
+                    >
+                      <RubricMarkForm
+                        rubric={scholarshipWrittenExpressionRubric}
+                        initial={initialMarks}
+                        backHref="/parent/vihaan"
+                        save={(marks) => saveRubricMarks(item.attempt.id, marks)}
+                      />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </section>

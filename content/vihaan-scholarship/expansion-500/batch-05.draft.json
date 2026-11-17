@@ -1,0 +1,3204 @@
+{
+  "batchId": "vihaan-expansion-05",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "OpenAI Codex session",
+    "model": null,
+    "generatedOn": "2026-11-16",
+    "originalGenerationEvidence": "Session-authored problems, passages and prompts; deterministic assembly from checked-in authoring rows.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no sample test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "retainedPilotIds": [],
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-e500-r042",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why might the proposed walking loop need adjustment?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the council has banned walking"
+          },
+          {
+            "id": "b",
+            "text": "the football goals are already permanent"
+          },
+          {
+            "id": "c",
+            "text": "people waiting for friends sometimes stand in its path"
+          },
+          {
+            "id": "d",
+            "text": "the oval has no edge"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The observers record standing pupils in the proposed route. That observation suggests a practical conflict to test rather than proof that walking is impossible.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Who uses the oval?",
+          "body": "Two suggestions reached the school council about the oval. One group wanted permanent football goals. Another wanted a marked walking loop. The council asked pupils to observe how the oval was used at three different times each day for a week.\n\nAt lunch, football players occupied most of the centre. Before school, smaller groups walked around the edge. After school, the oval was often empty, though on two afternoons a sports club trained there. The observers noted that pupils waiting for friends sometimes stood where a proposed walking loop would run.\n\nThe council rejected the idea that the most visible activity must be the only important one. It recommended movable goals and a trial walking route marked with cones. This would preserve options while revealing whether the activities interfered with each other. The recommendation did not give every group everything it wanted. It gave the school a way to learn before fixing equipment permanently in place.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The observers record standing pupils in the proposed route.",
+        "That observation suggests a practical conflict to test rather than proof that walking is impossible."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w014",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write an editorial on whether a prize should reward the best final product or the greatest improvement. Explain a fair method of judging your preferred approach. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Define best product and improvement so the comparison is clear. Develop the value and limitation of each approach, recognising that judging improvement needs a starting point. Propose evidence and criteria that support your preference, then address a credible fairness objection.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Persuasive composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "persuasive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Define best product and improvement so the comparison is clear.",
+        "Develop the value and limitation of each approach, recognising that judging improvement needs a starting point.",
+        "Propose evidence and criteria that support your preference, then address a credible fairness objection."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Define best product and improvement so the comparison is clear.",
+          "Develop the value and limitation of each approach, recognising that judging improvement needs a starting point.",
+          "Propose evidence and criteria that support your preference, then address a credible fairness objection.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m043",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangle is 9 cm long and 4 cm wide. How many centimetres of edging are needed to go around it once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "13"
+          },
+          {
+            "id": "b",
+            "text": "26.5"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "26"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Edging follows the perimeter, which has two lengths and two widths. Add 9 + 4 + 9 + 4 to get 26 cm, rather than multiplying to get area.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Edging follows the perimeter, which has two lengths and two widths.",
+        "Add 9 + 4 + 9 + 4 to get 26 cm, rather than multiplying to get area."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2*(9+4)",
+        "expected": "26"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m044",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangular box measures 8 cm by 5 cm by 3 cm internally. What is its capacity in cubic centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "120"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "40"
+          },
+          {
+            "id": "d",
+            "text": "80"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Find the base area: 8 times 5 = 40 square centimetres. Multiply by the 3 cm height to get 120 cubic centimetres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Find the base area: 8 times 5 = 40 square centimetres.",
+        "Multiply by the 3 cm height to get 120 cubic centimetres."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8*5*3",
+        "expected": "120"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m045",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangular floor is 6 m by 4 m. Square tiles have side length 0.5 m. Ignoring gaps, how many tiles cover the floor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "192"
+          },
+          {
+            "id": "b",
+            "text": "96"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "72"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The floor area is 24 square metres; each tile has area 0.25 square metre. 24 divided by 0.25 gives 96 tiles; dividing by the side length would confuse length with area.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The floor area is 24 square metres; each tile has area 0.25 square metre.",
+        "24 divided by 0.25 gives 96 tiles; dividing by the side length would confuse length with area."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6*4/(0.5*0.5)",
+        "expected": "96"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n043",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A ribbon is cut into equal pieces using 7 straight cuts, cutting only one unstacked piece at a time. How many more cuts are needed to make 15 pieces in total?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Starting with one piece, each cut adds exactly one piece. Fifteen pieces therefore need fourteen cuts. Seven cuts have already been made, leaving seven more.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Starting with one piece, each cut adds exactly one piece. Fifteen pieces therefore need fourteen cuts.",
+        "Seven cuts have already been made, leaving seven more."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(15-1)-7",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n044",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A staircase has 24 steps. Nia climbs 3 steps with each stride and descends 2 steps with each stride. How many strides does a full up-and-down trip take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "20"
+          },
+          {
+            "id": "d",
+            "text": "10"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Climbing takes eight strides and descending takes twelve. Add the two different stride counts to obtain twenty for the round trip.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Climbing takes eight strides and descending takes twelve.",
+        "Add the two different stride counts to obtain twenty for the round trip."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "24/3+24/2",
+        "expected": "20"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n045",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A hall has tables seating 6. Joining two tables along an end removes 2 available seats; every join does the same. How many seats are available when 9 tables form one straight line?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40"
+          },
+          {
+            "id": "b",
+            "text": "52"
+          },
+          {
+            "id": "c",
+            "text": "38"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Nine separate tables provide 54 seats. A line of nine tables has eight joins, removing sixteen seats, so 38 remain.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Nine separate tables provide 54 seats.",
+        "A line of nine tables has eight joins, removing sixteen seats, so 38 remain."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "9*6-8*2",
+        "expected": "38"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v043",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The room was vacant until the class arrived. Which word is opposite to vacant here?",
+        "options": [
+          {
+            "id": "a",
+            "text": "occupied"
+          },
+          {
+            "id": "b",
+            "text": "crowded"
+          },
+          {
+            "id": "c",
+            "text": "enclosed"
+          },
+          {
+            "id": "d",
+            "text": "private"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Vacant means no one occupies the room. Occupied is the exact opposite; crowded is a stronger condition and is not required to reverse vacancy.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Vacant means no one occupies the room.",
+        "Occupied is the exact opposite; crowded is a stronger condition and is not required to reverse vacancy."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v044",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The teacher gave an explicit instruction. Which word would describe the opposite kind of instruction?",
+        "options": [
+          {
+            "id": "a",
+            "text": "implied"
+          },
+          {
+            "id": "b",
+            "text": "detailed"
+          },
+          {
+            "id": "c",
+            "text": "helpful"
+          },
+          {
+            "id": "d",
+            "text": "unusual"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Explicit means stated directly. Implied means left to be inferred, reversing directness rather than clarity of layout or helpfulness.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Explicit means stated directly.",
+        "Implied means left to be inferred, reversing directness rather than clarity of layout or helpfulness."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v045",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The plants were abundant beside the creek but ____ on the rocky ridge. Which word completes the strongest contrast?",
+        "options": [
+          {
+            "id": "a",
+            "text": "dormant"
+          },
+          {
+            "id": "b",
+            "text": "similar"
+          },
+          {
+            "id": "c",
+            "text": "scarce"
+          },
+          {
+            "id": "d",
+            "text": "fragile"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Abundant refers to plentiful numbers. Scarce reverses that quantity; fragile concerns strength and dormant concerns activity.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Abundant refers to plentiful numbers.",
+        "Scarce reverses that quantity; fragile concerns strength and dormant concerns activity."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r043",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which assumption does the council explicitly reject?",
+        "options": [
+          {
+            "id": "a",
+            "text": "observation can help a decision"
+          },
+          {
+            "id": "b",
+            "text": "equipment can be movable"
+          },
+          {
+            "id": "c",
+            "text": "The most visible activity is the only important one"
+          },
+          {
+            "id": "d",
+            "text": "activities can sometimes share space"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The passage directly states its rejection of visibility as the sole measure of importance. The recommended trial depends on the possible value of shared space and observation.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Who uses the oval?",
+          "body": "Two suggestions reached the school council about the oval. One group wanted permanent football goals. Another wanted a marked walking loop. The council asked pupils to observe how the oval was used at three different times each day for a week.\n\nAt lunch, football players occupied most of the centre. Before school, smaller groups walked around the edge. After school, the oval was often empty, though on two afternoons a sports club trained there. The observers noted that pupils waiting for friends sometimes stood where a proposed walking loop would run.\n\nThe council rejected the idea that the most visible activity must be the only important one. It recommended movable goals and a trial walking route marked with cones. This would preserve options while revealing whether the activities interfered with each other. The recommendation did not give every group everything it wanted. It gave the school a way to learn before fixing equipment permanently in place.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage directly states its rejection of visibility as the sole measure of importance.",
+        "The recommended trial depends on the possible value of shared space and observation."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r044",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why are movable goals and cones recommended?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They allow a trial without fixing the layout permanently"
+          },
+          {
+            "id": "b",
+            "text": "they guarantee there will be no conflicts"
+          },
+          {
+            "id": "c",
+            "text": "they remove the need for further observation"
+          },
+          {
+            "id": "d",
+            "text": "they prevent all after-school use"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Movable equipment preserves options while the school learns how uses interact. It reduces commitment but does not guarantee success or eliminate observation.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Who uses the oval?",
+          "body": "Two suggestions reached the school council about the oval. One group wanted permanent football goals. Another wanted a marked walking loop. The council asked pupils to observe how the oval was used at three different times each day for a week.\n\nAt lunch, football players occupied most of the centre. Before school, smaller groups walked around the edge. After school, the oval was often empty, though on two afternoons a sports club trained there. The observers noted that pupils waiting for friends sometimes stood where a proposed walking loop would run.\n\nThe council rejected the idea that the most visible activity must be the only important one. It recommended movable goals and a trial walking route marked with cones. This would preserve options while revealing whether the activities interfered with each other. The recommendation did not give every group everything it wanted. It gave the school a way to learn before fixing equipment permanently in place.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Movable equipment preserves options while the school learns how uses interact.",
+        "It reduces commitment but does not guarantee success or eliminate observation."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r045",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the final paragraph present the compromise?",
+        "options": [
+          {
+            "id": "a",
+            "text": "as complete satisfaction for every group"
+          },
+          {
+            "id": "b",
+            "text": "as proof that sport is unimportant"
+          },
+          {
+            "id": "c",
+            "text": "as a decision that cannot be changed"
+          },
+          {
+            "id": "d",
+            "text": "as a useful learning step with limits"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "It acknowledges that no group gets everything while describing a way to learn. That framing recognises limits and reversibility rather than complete resolution.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc tone analysis",
+          "skill": "scholarship.rc-tone-analysis",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-tone-analysis"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Who uses the oval?",
+          "body": "Two suggestions reached the school council about the oval. One group wanted permanent football goals. Another wanted a marked walking loop. The council asked pupils to observe how the oval was used at three different times each day for a week.\n\nAt lunch, football players occupied most of the centre. Before school, smaller groups walked around the edge. After school, the oval was often empty, though on two afternoons a sports club trained there. The observers noted that pupils waiting for friends sometimes stood where a proposed walking loop would run.\n\nThe council rejected the idea that the most visible activity must be the only important one. It recommended movable goals and a trial walking route marked with cones. This would preserve options while revealing whether the activities interfered with each other. The recommendation did not give every group everything it wanted. It gave the school a way to learn before fixing equipment permanently in place.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "It acknowledges that no group gets everything while describing a way to learn.",
+        "That framing recognises limits and reversibility rather than complete resolution."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w015",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Describe a familiar playground before anyone arrives in the morning. Use details from at least three senses and keep a consistent viewpoint. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Choose a position from which the whole description can unfold, such as beside the gate. Select sensory details that suit an empty morning setting rather than listing unrelated adjectives. Arrange details spatially or from arrival to departure, and finish with one change that suggests the day beginning.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Descriptive composition",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "descriptive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Choose a position from which the whole description can unfold, such as beside the gate.",
+        "Select sensory details that suit an empty morning setting rather than listing unrelated adjectives.",
+        "Arrange details spatially or from arrival to departure, and finish with one change that suggests the day beginning."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Choose a position from which the whole description can unfold, such as beside the gate.",
+          "Select sensory details that suit an empty morning setting rather than listing unrelated adjectives.",
+          "Arrange details spatially or from arrival to departure, and finish with one change that suggests the day beginning.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m046",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An L-shaped garden is made by removing a 3 m by 2 m corner from an 8 m by 5 m rectangle. What is the garden area in square metres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "46"
+          },
+          {
+            "id": "c",
+            "text": "34"
+          },
+          {
+            "id": "d",
+            "text": "25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The enclosing rectangle has area 40 square metres. The removed corner has area 6 square metres, leaving 34 square metres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The enclosing rectangle has area 40 square metres.",
+        "The removed corner has area 6 square metres, leaving 34 square metres."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8*5-3*2",
+        "expected": "34"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m047",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two angles in a triangle are 48 degrees and 67 degrees. What is the third angle in degrees?",
+        "options": [
+          {
+            "id": "a",
+            "text": "75"
+          },
+          {
+            "id": "b",
+            "text": "115"
+          },
+          {
+            "id": "c",
+            "text": "65"
+          },
+          {
+            "id": "d",
+            "text": "55"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Angles in a triangle total 180 degrees. Subtract 48 + 67 = 115 from 180 to obtain 65 degrees.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Angles in a triangle total 180 degrees.",
+        "Subtract 48 + 67 = 115 from 180 to obtain 65 degrees."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "180-48-67",
+        "expected": "65"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m048",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangular pond is 10 m by 6 m. A 1 m wide path surrounds it on the outside. What is the area of the path in square metres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "32"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The outer dimensions are 12 m by 8 m because the path adds a metre on both sides. Subtract the pond area 60 from the outer area 96 to get 36 square metres of path.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The outer dimensions are 12 m by 8 m because the path adds a metre on both sides.",
+        "Subtract the pond area 60 from the outer area 96 to get 36 square metres of path."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(10+2)*(6+2)-10*6",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n046",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Six people each send one card to each of the other five people. How many cards are sent?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "25"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Every one of six senders writes five cards. Six times five is thirty; unlike a handshake, a card from A to B differs from a card from B to A.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Every one of six senders writes five cards.",
+        "Six times five is thirty; unlike a handshake, a card from A to B differs from a card from B to A."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6*5",
+        "expected": "30"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n047",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At a reunion each of 8 people shakes hands once with each other person. How many handshakes occur?",
+        "options": [
+          {
+            "id": "a",
+            "text": "21"
+          },
+          {
+            "id": "b",
+            "text": "32"
+          },
+          {
+            "id": "c",
+            "text": "56"
+          },
+          {
+            "id": "d",
+            "text": "28"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Counting seven partners for each person gives 56 person-pairs. Each handshake is counted twice that way, so divide by two to get 28.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Counting seven partners for each person gives 56 person-pairs.",
+        "Each handshake is counted twice that way, so divide by two to get 28."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8*7/2",
+        "expected": "28"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n048",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A queue has 26 people. Ravi is ninth from the front. What is his position from the back?",
+        "options": [
+          {
+            "id": "a",
+            "text": "19"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "17"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "There are seventeen people behind Ravi. He is therefore eighteenth from the back; include Ravi himself when numbering positions.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are seventeen people behind Ravi.",
+        "He is therefore eighteenth from the back; include Ravi himself when numbering positions."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "26-9+1",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v046",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An impartial judge must avoid being ____. Choose the word that reverses impartial.",
+        "options": [
+          {
+            "id": "a",
+            "text": "experienced"
+          },
+          {
+            "id": "b",
+            "text": "biased"
+          },
+          {
+            "id": "c",
+            "text": "strict"
+          },
+          {
+            "id": "d",
+            "text": "patient"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Impartial means free from favouritism. Biased is its opposite; a strict or experienced judge may still be fair.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Impartial means free from favouritism.",
+        "Biased is its opposite; a strict or experienced judge may still be fair."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v047",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The guide called the shortcut hazardous. Which description gives the opposite meaning?",
+        "options": [
+          {
+            "id": "a",
+            "text": "safe to use"
+          },
+          {
+            "id": "b",
+            "text": "easy to find"
+          },
+          {
+            "id": "c",
+            "text": "quick to follow"
+          },
+          {
+            "id": "d",
+            "text": "rarely visited"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Hazardous refers to danger, not distance or popularity. Safe to use reverses the risk meaning; an easy-to-find route can still be dangerous.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Hazardous refers to danger, not distance or popularity.",
+        "Safe to use reverses the risk meaning; an easy-to-find route can still be dangerous."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v048",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The first signal was intermittent; the second was ____. Which word creates the clearest opposite?",
+        "options": [
+          {
+            "id": "a",
+            "text": "electrical"
+          },
+          {
+            "id": "b",
+            "text": "continuous"
+          },
+          {
+            "id": "c",
+            "text": "powerful"
+          },
+          {
+            "id": "d",
+            "text": "distant"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Intermittent means stopping and starting. Continuous means unbroken, reversing the timing property without making a claim about strength.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Intermittent means stopping and starting.",
+        "Continuous means unbroken, reversing the timing property without making a claim about strength."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r046",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does Daniel first open the window?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the room is hot and stuffy"
+          },
+          {
+            "id": "b",
+            "text": "he wants a public concert"
+          },
+          {
+            "id": "c",
+            "text": "the neighbour asks for music"
+          },
+          {
+            "id": "d",
+            "text": "the clarinet needs repairing"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The first paragraph describes the hottest day and a stuffy room. His initial opening is for comfort, not a deliberate attempt to perform publicly.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "An open window",
+          "body": "Every afternoon, Daniel practised his clarinet with the window closed. He imagined the whole street waiting for his mistakes. On the hottest day of term, the room grew so stuffy that he pushed the window open before beginning.\n\nHalfway through a scale, he missed a note and stopped. From the garden next door came a voice: 'Was that the end?'\n\nDaniel lowered the instrument. 'It was supposed to keep going.'\n\n'Then I shall wait,' said the neighbour.\n\nHe began again, more quietly. This time he reached the top of the scale. The neighbour did not clap or offer a lesson. She simply resumed watering her tomatoes.\n\nThe next afternoon the weather was cooler. Daniel closed the window out of habit, then opened it a little. He still chose a time when few people were outside, and he still disliked the squeak near the end of the piece. But when it came, he played the next note instead of putting the clarinet away.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The first paragraph describes the hottest day and a stuffy room.",
+        "His initial opening is for comfort, not a deliberate attempt to perform publicly."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r047",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does the neighbour's 'Then I shall wait' most likely communicate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "an instruction to stop permanently"
+          },
+          {
+            "id": "b",
+            "text": "anger about the wrong note"
+          },
+          {
+            "id": "c",
+            "text": "a promise to teach the scale"
+          },
+          {
+            "id": "d",
+            "text": "a willingness to let him continue"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "She accepts that the music is unfinished and waits for more. The surrounding actions support patient attention rather than anger or a teaching offer.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc character inference",
+          "skill": "scholarship.rc-character-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-character-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "An open window",
+          "body": "Every afternoon, Daniel practised his clarinet with the window closed. He imagined the whole street waiting for his mistakes. On the hottest day of term, the room grew so stuffy that he pushed the window open before beginning.\n\nHalfway through a scale, he missed a note and stopped. From the garden next door came a voice: 'Was that the end?'\n\nDaniel lowered the instrument. 'It was supposed to keep going.'\n\n'Then I shall wait,' said the neighbour.\n\nHe began again, more quietly. This time he reached the top of the scale. The neighbour did not clap or offer a lesson. She simply resumed watering her tomatoes.\n\nThe next afternoon the weather was cooler. Daniel closed the window out of habit, then opened it a little. He still chose a time when few people were outside, and he still disliked the squeak near the end of the piece. But when it came, he played the next note instead of putting the clarinet away.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She accepts that the music is unfinished and waits for more.",
+        "The surrounding actions support patient attention rather than anger or a teaching offer."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r048",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which change best shows Daniel's progress?",
+        "options": [
+          {
+            "id": "a",
+            "text": "he opens all the windows"
+          },
+          {
+            "id": "b",
+            "text": "he chooses the busiest time outdoors"
+          },
+          {
+            "id": "c",
+            "text": "He continues after a squeak"
+          },
+          {
+            "id": "d",
+            "text": "he eliminates every wrong note"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The ending explicitly retains his dislike of the squeak but has him play the next note. The progress is persistence despite discomfort, not perfect technique or complete fearlessness.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "An open window",
+          "body": "Every afternoon, Daniel practised his clarinet with the window closed. He imagined the whole street waiting for his mistakes. On the hottest day of term, the room grew so stuffy that he pushed the window open before beginning.\n\nHalfway through a scale, he missed a note and stopped. From the garden next door came a voice: 'Was that the end?'\n\nDaniel lowered the instrument. 'It was supposed to keep going.'\n\n'Then I shall wait,' said the neighbour.\n\nHe began again, more quietly. This time he reached the top of the scale. The neighbour did not clap or offer a lesson. She simply resumed watering her tomatoes.\n\nThe next afternoon the weather was cooler. Daniel closed the window out of habit, then opened it a little. He still chose a time when few people were outside, and he still disliked the squeak near the end of the piece. But when it came, he played the next note instead of putting the clarinet away.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The ending explicitly retains his dislike of the squeak but has him play the next note.",
+        "The progress is persistence despite discomfort, not perfect technique or complete fearlessness."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w016",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Describe a busy kitchen from the viewpoint of someone waiting for an important announcement. Let the ordinary details reflect the waiting person's mood. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Decide what the person hopes or fears without turning the piece into a complete explanation of the announcement. Choose sounds, movements and objects that the waiting person would notice more intensely. Use sentence rhythm and selective detail to sustain anticipation while keeping the kitchen physically clear.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Descriptive composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "descriptive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Decide what the person hopes or fears without turning the piece into a complete explanation of the announcement.",
+        "Choose sounds, movements and objects that the waiting person would notice more intensely.",
+        "Use sentence rhythm and selective detail to sustain anticipation while keeping the kitchen physically clear."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Decide what the person hopes or fears without turning the piece into a complete explanation of the announcement.",
+          "Choose sounds, movements and objects that the waiting person would notice more intensely.",
+          "Use sentence rhythm and selective detail to sustain anticipation while keeping the kitchen physically clear.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m049",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A square and a rectangle both have perimeter 32 cm. The rectangle is 10 cm long. How much larger is the square's area in square centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The square has side 8 cm and area 64 square centimetres. The rectangle has width 6 cm and area 60, so the difference is 4 square centimetres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The square has side 8 cm and area 64 square centimetres.",
+        "The rectangle has width 6 cm and area 60, so the difference is 4 square centimetres."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(32/4)**2-10*(32/2-10)",
+        "expected": "4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m050",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cuboid has a square base of side 6 cm and volume 252 cubic centimetres. What is its total surface area in square centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "180"
+          },
+          {
+            "id": "b",
+            "text": "216"
+          },
+          {
+            "id": "c",
+            "text": "252"
+          },
+          {
+            "id": "d",
+            "text": "240"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The base area is 36, so the height is 252/36 = 7 cm. Two bases contribute 72 and four side faces contribute 4 times 6 times 7 = 168, giving 240 square centimetres.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The base area is 36, so the height is 252/36 = 7 cm.",
+        "Two bases contribute 72 and four side faces contribute 4 times 6 times 7 = 168, giving 240 square centimetres."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2*36+4*6*(252/36)",
+        "expected": "240"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m051",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A straight angle is split into three angles in the ratio 2:3:4. How many degrees are in the largest angle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40"
+          },
+          {
+            "id": "b",
+            "text": "60"
+          },
+          {
+            "id": "c",
+            "text": "90"
+          },
+          {
+            "id": "d",
+            "text": "80"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The nine ratio parts total 180 degrees, so each part is 20 degrees. The largest angle is four parts, or 80 degrees.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The nine ratio parts total 180 degrees, so each part is 20 degrees.",
+        "The largest angle is four parts, or 80 degrees."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "180/9*4",
+        "expected": "80"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n049",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A printer numbers pages 1 to 35. How many individual digits does it print for those page numbers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "61"
+          },
+          {
+            "id": "b",
+            "text": "35"
+          },
+          {
+            "id": "c",
+            "text": "60"
+          },
+          {
+            "id": "d",
+            "text": "70"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Pages one to nine use nine digits. The other 26 pages use two digits each, so the total is 9 + 52 = 61 digits.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Pages one to nine use nine digits.",
+        "The other 26 pages use two digits each, so the total is 9 + 52 = 61 digits."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "9+(35-9)*2",
+        "expected": "61"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n050",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A clock chimes once at 1 o'clock, twice at 2 o'clock and so on up to 6 o'clock. How many chimes sound from 1 through 6 inclusive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "21"
+          },
+          {
+            "id": "c",
+            "text": "15"
+          },
+          {
+            "id": "d",
+            "text": "18"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Add the chimes for each hour: 1 + 2 + 3 + 4 + 5 + 6. The sum is 21, including the single chime at one and six chimes at six.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Add the chimes for each hour: 1 + 2 + 3 + 4 + 5 + 6.",
+        "The sum is 21, including the single chime at one and six chimes at six."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "1+2+3+4+5+6",
+        "expected": "21"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n051",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A snail climbs 5 m each day and slips 2 m each night. It starts at the bottom of a 17 m pole. On which day does it first reach the top?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "7"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "After four full day-night cycles the snail is at 12 m. On day five it climbs to 17 m and finishes before another slip. Dividing by the net daily gain overlooks the final day.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "After four full day-night cycles the snail is at 12 m.",
+        "On day five it climbs to 17 m and finishes before another slip. Dividing by the net daily gain overlooks the final day."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v049",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A flexible rule can be adjusted. Which word describes its opposite?",
+        "options": [
+          {
+            "id": "a",
+            "text": "rigid"
+          },
+          {
+            "id": "b",
+            "text": "simple"
+          },
+          {
+            "id": "c",
+            "text": "public"
+          },
+          {
+            "id": "d",
+            "text": "recent"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The defining feature is adaptability. Rigid means not readily adjusted; a simple rule may still be flexible.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The defining feature is adaptability.",
+        "Rigid means not readily adjusted; a simple rule may still be flexible."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v050",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The reply was courteous despite the complaint. Which word would reverse courteous?",
+        "options": [
+          {
+            "id": "a",
+            "text": "rude"
+          },
+          {
+            "id": "b",
+            "text": "brief"
+          },
+          {
+            "id": "c",
+            "text": "firm"
+          },
+          {
+            "id": "d",
+            "text": "honest"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Courtesy concerns politeness. Rude reverses it, while firmness, brevity and honesty can all coexist with politeness.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Courtesy concerns politeness.",
+        "Rude reverses it, while firmness, brevity and honesty can all coexist with politeness."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v051",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The team will expand the project this year. Which action is the opposite of expand?",
+        "options": [
+          {
+            "id": "a",
+            "text": "reduce its scope"
+          },
+          {
+            "id": "b",
+            "text": "delay its start"
+          },
+          {
+            "id": "c",
+            "text": "change its leader"
+          },
+          {
+            "id": "d",
+            "text": "review its purpose"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Expansion increases size or scope. Reducing scope reverses that growth; delay changes timing rather than size.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Expansion increases size or scope.",
+        "Reducing scope reverses that growth; delay changes timing rather than size."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r049",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the writer mention that the neighbour resumes watering tomatoes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "to make listening seem ordinary rather than a high-pressure judgement"
+          },
+          {
+            "id": "b",
+            "text": "to suggest she disliked all the music"
+          },
+          {
+            "id": "c",
+            "text": "to prove she did not hear any notes"
+          },
+          {
+            "id": "d",
+            "text": "to explain why the room was hot"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "She neither claps nor criticises, then returns to a normal task. That understated response counters Daniel's image of a whole street judging his mistakes.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc authorial craft",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-authorial-craft"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "An open window",
+          "body": "Every afternoon, Daniel practised his clarinet with the window closed. He imagined the whole street waiting for his mistakes. On the hottest day of term, the room grew so stuffy that he pushed the window open before beginning.\n\nHalfway through a scale, he missed a note and stopped. From the garden next door came a voice: 'Was that the end?'\n\nDaniel lowered the instrument. 'It was supposed to keep going.'\n\n'Then I shall wait,' said the neighbour.\n\nHe began again, more quietly. This time he reached the top of the scale. The neighbour did not clap or offer a lesson. She simply resumed watering her tomatoes.\n\nThe next afternoon the weather was cooler. Daniel closed the window out of habit, then opened it a little. He still chose a time when few people were outside, and he still disliked the squeak near the end of the piece. But when it came, he played the next note instead of putting the clarinet away.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She neither claps nor criticises, then returns to a normal task.",
+        "That understated response counters Daniel's image of a whole street judging his mistakes."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r050",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which description best captures Daniel's state at the end?",
+        "options": [
+          {
+            "id": "a",
+            "text": "entirely indifferent to listeners"
+          },
+          {
+            "id": "b",
+            "text": "certain of becoming a professional"
+          },
+          {
+            "id": "c",
+            "text": "determined never to close the window again"
+          },
+          {
+            "id": "d",
+            "text": "more willing to be heard while still somewhat self-conscious"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "He chooses a quieter time and still dislikes errors, showing lingering self-consciousness. Opening the window and continuing nevertheless show a measured increase in willingness.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "An open window",
+          "body": "Every afternoon, Daniel practised his clarinet with the window closed. He imagined the whole street waiting for his mistakes. On the hottest day of term, the room grew so stuffy that he pushed the window open before beginning.\n\nHalfway through a scale, he missed a note and stopped. From the garden next door came a voice: 'Was that the end?'\n\nDaniel lowered the instrument. 'It was supposed to keep going.'\n\n'Then I shall wait,' said the neighbour.\n\nHe began again, more quietly. This time he reached the top of the scale. The neighbour did not clap or offer a lesson. She simply resumed watering her tomatoes.\n\nThe next afternoon the weather was cooler. Daniel closed the window out of habit, then opened it a little. He still chose a time when few people were outside, and he still disliked the squeak near the end of the piece. But when it came, he played the next note instead of putting the clarinet away.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "He chooses a quieter time and still dislikes errors, showing lingering self-consciousness.",
+        "Opening the window and continuing nevertheless show a measured increase in willingness."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r051",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What did all three groups report about shorter band lengths?",
+        "options": [
+          {
+            "id": "a",
+            "text": "they measured equal tension"
+          },
+          {
+            "id": "b",
+            "text": "they heard higher pitches"
+          },
+          {
+            "id": "c",
+            "text": "they heard no sound"
+          },
+          {
+            "id": "d",
+            "text": "they saw larger boxes"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The second paragraph directly reports higher pitches at shorter lengths. Tension was not measured, so that cannot be part of the established observation.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A fictional sound experiment",
+          "body": "In a classroom model, three groups investigated how the length of a stretched elastic band related to its sound. They used bands of the same kind and plucked them over identical empty boxes. Each group shortened its band gradually and described the pitch it heard.\n\nAll three groups reported higher pitches at shorter lengths. However, the bands were stretched by hand. One group pulled much harder than another, and none measured tension. Their descriptions of pitch were also based on listening rather than a recording device.\n\nThe class wrote a cautious conclusion: 'Under our test conditions, shorter lengths were associated with higher perceived pitch.' They did not write that length alone had been proved to cause every change. For a new trial, they planned a frame that could hold tension more consistently. They would keep the boxes and band material the same. Their aim was to reduce one uncertainty at a time, not to pretend the first trial had taught them nothing.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The second paragraph directly reports higher pitches at shorter lengths.",
+        "Tension was not measured, so that cannot be part of the established observation."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w017",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Describe the same market stall twice: once through the eyes of an excited visitor and once through the eyes of the tired stallholder. Keep the physical objects consistent. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "List a few fixed objects, then decide which each observer would value or resent. Change focus, comparisons and rhythm to express viewpoint while preserving those shared objects. Make the contrast perceptible through description rather than simply labelling one person excited and the other tired.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Descriptive composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "descriptive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "List a few fixed objects, then decide which each observer would value or resent.",
+        "Change focus, comparisons and rhythm to express viewpoint while preserving those shared objects.",
+        "Make the contrast perceptible through description rather than simply labelling one person excited and the other tired."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "List a few fixed objects, then decide which each observer would value or resent.",
+          "Change focus, comparisons and rhythm to express viewpoint while preserving those shared objects.",
+          "Make the contrast perceptible through description rather than simply labelling one person excited and the other tired.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m052",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cube of side 4 cm is painted on all faces and cut into 1 cm cubes. How many small cubes have paint on exactly one face?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "32"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "On each face, only the inner 2 by 2 array has exactly one painted face. There are four such cubes on each of six faces, giving 24; edge and corner cubes have more paint.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "On each face, only the inner 2 by 2 array has exactly one painted face.",
+        "There are four such cubes on each of six faces, giving 24; edge and corner cubes have more paint."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6*(4-2)**2",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m053",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangle has area 96 square centimetres and width 8 cm. What is its perimeter in centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "32"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "40"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Divide area by width to obtain the length, 12 cm. The perimeter is 2 times (12 + 8) = 40 cm.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Divide area by width to obtain the length, 12 cm.",
+        "The perimeter is 2 times (12 + 8) = 40 cm."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2*(96/8+8)",
+        "expected": "40"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m054",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A right-angled path goes 8 m east, 5 m north, 3 m west and 2 m south. What is the shortest distance back to the start using only east-west and north-south paths, in metres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "6"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "18"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The final position is 5 m east and 3 m north of the start. A shortest route restricted to the two directions covers 5 + 3 = 8 m; a diagonal is not allowed.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The final position is 5 m east and 3 m north of the start.",
+        "A shortest route restricted to the two directions covers 5 + 3 = 8 m; a diagonal is not allowed."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(8-3)+(5-2)",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n052",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three children share 42 tokens. Each receives the same number, then each gives 2 tokens to a class jar. How many tokens do the children keep altogether?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "36.5"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Each child first receives fourteen tokens and then keeps twelve. Three lots of twelve total 36, equivalent to subtracting six donated tokens from forty-two.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Each child first receives fourteen tokens and then keeps twelve.",
+        "Three lots of twelve total 36, equivalent to subtracting six donated tokens from forty-two."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "42-3*2",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n053",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An event uses ticket numbers 125 through 180 inclusive. Each ticket has a unique number. How many tickets are there?",
+        "options": [
+          {
+            "id": "a",
+            "text": "55"
+          },
+          {
+            "id": "b",
+            "text": "57"
+          },
+          {
+            "id": "c",
+            "text": "56"
+          },
+          {
+            "id": "d",
+            "text": "54"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The difference between the endpoint numbers is 55. Both endpoints count, so the number of tickets is 56.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The difference between the endpoint numbers is 55.",
+        "Both endpoints count, so the number of tickets is 56."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "180-125+1",
+        "expected": "56"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n054",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A robot repeats forward 4 squares, then backward 1 square. After 6 complete repetitions, how far forward is it from the start in squares?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "24"
+          },
+          {
+            "id": "d",
+            "text": "30"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A complete repetition gains 4 - 1 = 3 squares. Six repetitions gain 18 squares, rather than the 24 squares travelled forward alone.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr arithmetical reasoning",
+          "skill": "scholarship.nr-arithmetical-reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-arithmetical-reasoning"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A complete repetition gains 4 - 1 = 3 squares.",
+        "Six repetitions gain 18 squares, rather than the 24 squares travelled forward alone."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6*(4-1)",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v052",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The water was transparent before mud entered it. Which word best gives the opposite of transparent?",
+        "options": [
+          {
+            "id": "a",
+            "text": "opaque"
+          },
+          {
+            "id": "b",
+            "text": "shallow"
+          },
+          {
+            "id": "c",
+            "text": "cold"
+          },
+          {
+            "id": "d",
+            "text": "still"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Transparent means light passes through so objects can be seen. Opaque blocks that view; the other choices describe unrelated water properties.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Transparent means light passes through so objects can be seen.",
+        "Opaque blocks that view; the other choices describe unrelated water properties."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v053",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An optimistic forecast expects good results. Which word reverses optimistic?",
+        "options": [
+          {
+            "id": "a",
+            "text": "precise"
+          },
+          {
+            "id": "b",
+            "text": "detailed"
+          },
+          {
+            "id": "c",
+            "text": "pessimistic"
+          },
+          {
+            "id": "d",
+            "text": "realistic"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Optimism concerns expecting favourable outcomes. Pessimistic reverses that expectation; a realistic forecast could be either favourable or unfavourable.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Optimism concerns expecting favourable outcomes.",
+        "Pessimistic reverses that expectation; a realistic forecast could be either favourable or unfavourable."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v054",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The speech united the group. Which word describes the opposite effect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "silenced"
+          },
+          {
+            "id": "b",
+            "text": "divided"
+          },
+          {
+            "id": "c",
+            "text": "surprised"
+          },
+          {
+            "id": "d",
+            "text": "informed"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Uniting brings people together. Dividing separates them into opposing groups; silence or surprise does not necessarily undo unity.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Uniting brings people together.",
+        "Dividing separates them into opposing groups; silence or surprise does not necessarily undo unity."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    }
+  ]
+}

@@ -1,0 +1,3206 @@
+{
+  "batchId": "vihaan-expansion-03",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "OpenAI Codex session",
+    "model": null,
+    "generatedOn": "2026-11-16",
+    "originalGenerationEvidence": "Session-authored problems, passages and prompts; deterministic assembly from checked-in authoring rows.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no sample test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "retainedPilotIds": [],
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-e500-m021",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A pupil answers 34 of 40 questions correctly. What percentage are incorrect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "85"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "17.5"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "There are 6 incorrect responses out of 40. Calculate 6/40 times 100 = 15%; 85% is the proportion correct.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are 6 incorrect responses out of 40.",
+        "Calculate 6/40 times 100 = 15%; 85% is the proportion correct."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "100*(40-34)/40",
+        "expected": "15"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n019",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A pattern has three-term blocks: 2, 4, 8; 3, 6, 12; 4, 8, 16. Each block doubles twice. What is the last number of the next block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The starting numbers rise from 2 to 3 to 4, so the next block starts at 5. Doubling twice gives 5, 10, 20, with final number 20.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The starting numbers rise from 2 to 3 to 4, so the next block starts at 5.",
+        "Doubling twice gives 5, 10, 20, with final number 20."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5*4",
+        "expected": "20"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n020",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A series decreases by successive prime numbers: 50, 48, 45, 40, 33. Using primes in order from 2, what is the next term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "22"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "23"
+          },
+          {
+            "id": "d",
+            "text": "26"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The subtractions are 2, 3, 5 and 7, the first four primes. The next prime is 11, giving 33 minus 11 = 22. Nine is not prime.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The subtractions are 2, 3, 5 and 7, the first four primes.",
+        "The next prime is 11, giving 33 minus 11 = 22. Nine is not prime."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "33-11",
+        "expected": "22"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n021",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The list 3, 6, 5, 10, 9, 18 alternates doubling and subtracting 1. What number follows 18?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "19"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "17"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The moves are times two, minus one, repeated. After 9 is doubled to 18, subtract one to obtain 17.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The moves are times two, minus one, repeated.",
+        "After 9 is doubled to 18, subtract one to obtain 17."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "18-1",
+        "expected": "17"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v019",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The shop stocked a diverse range of seeds, from herbs to tall trees. Diverse means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "unusual"
+          },
+          {
+            "id": "b",
+            "text": "costly"
+          },
+          {
+            "id": "c",
+            "text": "local"
+          },
+          {
+            "id": "d",
+            "text": "varied"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Herbs and tall trees illustrate different kinds within the range. Varied means containing different types; local describes origin and does not express variety.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Herbs and tall trees illustrate different kinds within the range.",
+        "Varied means containing different types; local describes origin and does not express variety."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v020",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A resilient sapling bent in the storm and grew upright again. Resilient most nearly means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "easily broken"
+          },
+          {
+            "id": "b",
+            "text": "fully grown"
+          },
+          {
+            "id": "c",
+            "text": "slow to change"
+          },
+          {
+            "id": "d",
+            "text": "able to recover"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Bending followed by renewed growth demonstrates recovery after stress. Able to recover is the defining feature, rather than never bending at all.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Bending followed by renewed growth demonstrates recovery after stress.",
+        "Able to recover is the defining feature, rather than never bending at all."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v021",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The review was critical of the design but critical to its improvement. In the second use, critical means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "uncertain"
+          },
+          {
+            "id": "b",
+            "text": "essential"
+          },
+          {
+            "id": "c",
+            "text": "disapproving"
+          },
+          {
+            "id": "d",
+            "text": "dangerous"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The two uses have different meanings: first disapproving, then necessary. Essential fits the second use because the review helps improvement; transferring the first meaning would misread the contrast.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The two uses have different meanings: first disapproving, then necessary.",
+        "Essential fits the second use because the review helps improvement; transferring the first meaning would misread the contrast."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r019",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the poem repeatedly draw attention to sounds such as rope knocks, engines and a bell?",
+        "options": [
+          {
+            "id": "a",
+            "text": "they show the bay is crowded with people"
+          },
+          {
+            "id": "b",
+            "text": "they provide exact instructions for fishing"
+          },
+          {
+            "id": "c",
+            "text": "they establish that the boats are damaged"
+          },
+          {
+            "id": "d",
+            "text": "They connect the speaker's listening with the grandfather's knowledge"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The grandfather's knowledge is auditory, and the speaker counts knocks while listening. Repeated sounds make that comparison central to the speaker's developing understanding.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc authorial craft",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-authorial-craft"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Night at the jetty",
+          "body": "The jetty combs the dark with wooden teeth.\nA rope knocks twice against a sleeping boat.\nAcross the bay, a window holds its breath;\nthen someone draws a curtain on its light.\n\nI came to see the boats return like stars,\neach yellow lamp a promise moving home.\nBut now the tide has folded up the sand,\nand all the fishing boats are tied and still.\n\nMy grandfather once knew them by their sounds:\nthe gruff old engine, and the bell that skipped.\nI cannot name a single boat by ear.\nI count the knocks until the rope falls quiet.\n\nAt last I turn. Behind me, in the dark,\nthe water keeps a language I am learning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The grandfather's knowledge is auditory, and the speaker counts knocks while listening.",
+        "Repeated sounds make that comparison central to the speaker's developing understanding."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r020",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which pair best describes the mood at the end of 'Night at the jetty'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "frantic and fearful"
+          },
+          {
+            "id": "b",
+            "text": "quiet and curious"
+          },
+          {
+            "id": "c",
+            "text": "triumphant and boastful"
+          },
+          {
+            "id": "d",
+            "text": "angry and impatient"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The speaker turns away after a quiet visit and calls the water's sounds a language being learned. That ending conveys attentive curiosity rather than victory, anger or danger.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc tone analysis",
+          "skill": "scholarship.rc-tone-analysis",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-tone-analysis"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Night at the jetty",
+          "body": "The jetty combs the dark with wooden teeth.\nA rope knocks twice against a sleeping boat.\nAcross the bay, a window holds its breath;\nthen someone draws a curtain on its light.\n\nI came to see the boats return like stars,\neach yellow lamp a promise moving home.\nBut now the tide has folded up the sand,\nand all the fishing boats are tied and still.\n\nMy grandfather once knew them by their sounds:\nthe gruff old engine, and the bell that skipped.\nI cannot name a single boat by ear.\nI count the knocks until the rope falls quiet.\n\nAt last I turn. Behind me, in the dark,\nthe water keeps a language I am learning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The speaker turns away after a quiet visit and calls the water's sounds a language being learned.",
+        "That ending conveys attentive curiosity rather than victory, anger or danger."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r021",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is missing at the start of 'The missing label'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the exhibition table"
+          },
+          {
+            "id": "b",
+            "text": "all the class stones"
+          },
+          {
+            "id": "c",
+            "text": "the packing tray"
+          },
+          {
+            "id": "d",
+            "text": "the stone's identifying label"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The stone is present, but Mina says it had a label yesterday. The problem is its missing identification, not the loss of the object or the whole display.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The missing label",
+          "body": "'We cannot display it without a name,' said Otis, holding a smooth grey stone above the exhibition table.\n\n'It had a label yesterday,' Mina replied. She checked the floor, then the empty packing tray. Their class collection opened in ten minutes.\n\nOtis looked at the other stones. 'This one looks like the basalt. We can write basalt again.'\n\nMina shook her head. 'Looking similar is not the same as knowing. Put it beside the others with a question mark.'\n\n'Visitors will think we forgot to finish.'\n\n'We could tell them what we know: where it was found, how heavy it is, and which tests we still need.'\n\nWhen the doors opened, a visitor stopped at their handwritten card: 'Unidentified stone. Found near the oval. Help us decide what to test next.' She spent longer there than at the neatly named samples. Otis fetched another sheet of paper. This time he wrote down her questions instead of reaching for a new label.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The stone is present, but Mina says it had a label yesterday.",
+        "The problem is its missing identification, not the loss of the object or the whole display."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w007",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a story in which the same sound is comforting at the beginning and unsettling near the end. Make the change arise from what the character discovers. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Select a sound that can plausibly fit both moods, and establish its first meaning in context. Use discovery to alter the character's interpretation while keeping the sound recognisably the same. Finish with a consequence of that changed understanding rather than merely declaring the mood different.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Narrative composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "narrative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Select a sound that can plausibly fit both moods, and establish its first meaning in context.",
+        "Use discovery to alter the character's interpretation while keeping the sound recognisably the same.",
+        "Finish with a consequence of that changed understanding rather than merely declaring the mood different."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Select a sound that can plausibly fit both moods, and establish its first meaning in context.",
+          "Use discovery to alter the character's interpretation while keeping the sound recognisably the same.",
+          "Finish with a consequence of that changed understanding rather than merely declaring the mood different.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m022",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A fundraiser reaches 65% of its target. Another $210 takes it to 95%. What is the target in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "735"
+          },
+          {
+            "id": "b",
+            "text": "700.0"
+          },
+          {
+            "id": "c",
+            "text": "600"
+          },
+          {
+            "id": "d",
+            "text": "650"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The extra $210 is 30% of the target. Divide by 0.30 to find $700; the target is the whole amount, not the money already raised.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The extra $210 is 30% of the target.",
+        "Divide by 0.30 to find $700; the target is the whole amount, not the money already raised."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "210/(0.95-0.65)",
+        "expected": "700.0"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m023",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A water bill of $120 includes a fixed fee of $20. Usage charges alone rise by 10%. What is the new total bill in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "142"
+          },
+          {
+            "id": "b",
+            "text": "130"
+          },
+          {
+            "id": "c",
+            "text": "122"
+          },
+          {
+            "id": "d",
+            "text": "132"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Only the $100 usage part rises, by $10. Add the unchanged $20 fee to $110 to obtain a $130 bill.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Only the $100 usage part rises, by $10.",
+        "Add the unchanged $20 fee to $110 to obtain a $130 bill."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "20+(120-20)*1.1",
+        "expected": "130"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m024",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A library has 600 books, 40% of them fiction. It receives 100 new fiction books and no others. What percentage of its books are now fiction? Round to the nearest whole per cent.",
+        "options": [
+          {
+            "id": "a",
+            "text": "49"
+          },
+          {
+            "id": "b",
+            "text": "40"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "57"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "There were 240 fiction books; now there are 340 out of 700 books. 340 divided by 700 is about 48.57%, which rounds to 49%. The denominator also grows.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There were 240 fiction books; now there are 340 out of 700 books.",
+        "340 divided by 700 is about 48.57%, which rounds to 49%. The denominator also grows."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "49",
+        "expected": "49"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n022",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The list 9, 14, 12, 17, 15, 20 repeats changes of +5 and -2. What is the sum of its seventh and eighth terms?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "39"
+          },
+          {
+            "id": "c",
+            "text": "43"
+          },
+          {
+            "id": "d",
+            "text": "41"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "After 20, the seventh term is 18 and the eighth is 23. Their sum is 41; the alternating changes must both be applied before adding.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "After 20, the seventh term is 18 and the eighth is 23.",
+        "Their sum is 41; the alternating changes must both be applied before adding."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(20-2)+(20-2+5)",
+        "expected": "41"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n023",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A sequence uses successive cubes plus 1: 2, 9, 28, 65. What comes next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "125"
+          },
+          {
+            "id": "b",
+            "text": "216"
+          },
+          {
+            "id": "c",
+            "text": "126"
+          },
+          {
+            "id": "d",
+            "text": "101"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Subtracting one gives 1, 8, 27 and 64, which are cubes of 1 through 4. The next cube is 125; restoring the extra one gives 126.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Subtracting one gives 1, 8, 27 and 64, which are cubes of 1 through 4.",
+        "The next cube is 125; restoring the extra one gives 126."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5**3+1",
+        "expected": "126"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n024",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the sequence 7, 10, 16, 28, 52, each gap is twice the previous gap. What is the seventh term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "200"
+          },
+          {
+            "id": "b",
+            "text": "196"
+          },
+          {
+            "id": "c",
+            "text": "100"
+          },
+          {
+            "id": "d",
+            "text": "148"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The gaps are 3, 6, 12 and 24, followed by 48 and 96. The sixth term is 100 and the seventh is 196.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The gaps are 3, 6, 12 and 24, followed by 48 and 96.",
+        "The sixth term is 100 and the seventh is 196."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "52+48+96",
+        "expected": "196"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v022",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The speaker qualified her claim by adding, 'only in dry weather'. Qualified here means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "earned permission to make it"
+          },
+          {
+            "id": "b",
+            "text": "limited its scope"
+          },
+          {
+            "id": "c",
+            "text": "proved it completely"
+          },
+          {
+            "id": "d",
+            "text": "made it more impressive"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The extra condition restricts when the claim applies. Limited its scope fits; the sporting or credential meaning of qualified is irrelevant here.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The extra condition restricts when the claim applies.",
+        "Limited its scope fits; the sporting or credential meaning of qualified is irrelevant here."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v023",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The proposal was sound, although the hall's sound system failed during its presentation. The first sound means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "loud"
+          },
+          {
+            "id": "b",
+            "text": "musical"
+          },
+          {
+            "id": "c",
+            "text": "well founded"
+          },
+          {
+            "id": "d",
+            "text": "audible"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The first use evaluates the quality of the proposal rather than noise. Well founded is the appropriate sense; the later sound system creates a tempting but unrelated auditory meaning.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first use evaluates the quality of the proposal rather than noise.",
+        "Well founded is the appropriate sense; the later sound system creates a tempting but unrelated auditory meaning."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v024",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Nora remained reserved at the gathering, but nobody had reserved a seat for her. The first reserved means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "kept for later"
+          },
+          {
+            "id": "b",
+            "text": "already booked"
+          },
+          {
+            "id": "c",
+            "text": "excluded from the event"
+          },
+          {
+            "id": "d",
+            "text": "restrained in manner"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The first word describes Nora's behaviour. Restrained in manner fits her social manner; the second use means booked and should not determine the first.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first word describes Nora's behaviour.",
+        "Restrained in manner fits her social manner; the second use means booked and should not determine the first."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r022",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What initially matters most to Otis when he suggests writing basalt again?",
+        "options": [
+          {
+            "id": "a",
+            "text": "testing the stone's composition"
+          },
+          {
+            "id": "b",
+            "text": "learning the visitor's occupation"
+          },
+          {
+            "id": "c",
+            "text": "weighing the packing tray"
+          },
+          {
+            "id": "d",
+            "text": "making the display appear complete"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "He worries visitors will think the display unfinished and suggests a name based on appearance. That response prioritises a finished presentation over confirmed identification.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc character inference",
+          "skill": "scholarship.rc-character-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-character-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The missing label",
+          "body": "'We cannot display it without a name,' said Otis, holding a smooth grey stone above the exhibition table.\n\n'It had a label yesterday,' Mina replied. She checked the floor, then the empty packing tray. Their class collection opened in ten minutes.\n\nOtis looked at the other stones. 'This one looks like the basalt. We can write basalt again.'\n\nMina shook her head. 'Looking similar is not the same as knowing. Put it beside the others with a question mark.'\n\n'Visitors will think we forgot to finish.'\n\n'We could tell them what we know: where it was found, how heavy it is, and which tests we still need.'\n\nWhen the doors opened, a visitor stopped at their handwritten card: 'Unidentified stone. Found near the oval. Help us decide what to test next.' She spent longer there than at the neatly named samples. Otis fetched another sheet of paper. This time he wrote down her questions instead of reaching for a new label.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "He worries visitors will think the display unfinished and suggests a name based on appearance.",
+        "That response prioritises a finished presentation over confirmed identification."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r023",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is Mina's strongest reason for rejecting Otis's suggested label?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Similarity alone does not establish identity"
+          },
+          {
+            "id": "b",
+            "text": "basalt cannot be grey"
+          },
+          {
+            "id": "c",
+            "text": "the stone must be valuable"
+          },
+          {
+            "id": "d",
+            "text": "visitors prefer all labels to be blank"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Mina explicitly separates looking similar from knowing. The text supplies no facts that rule out basalt; her objection concerns the evidence needed to name the stone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The missing label",
+          "body": "'We cannot display it without a name,' said Otis, holding a smooth grey stone above the exhibition table.\n\n'It had a label yesterday,' Mina replied. She checked the floor, then the empty packing tray. Their class collection opened in ten minutes.\n\nOtis looked at the other stones. 'This one looks like the basalt. We can write basalt again.'\n\nMina shook her head. 'Looking similar is not the same as knowing. Put it beside the others with a question mark.'\n\n'Visitors will think we forgot to finish.'\n\n'We could tell them what we know: where it was found, how heavy it is, and which tests we still need.'\n\nWhen the doors opened, a visitor stopped at their handwritten card: 'Unidentified stone. Found near the oval. Help us decide what to test next.' She spent longer there than at the neatly named samples. Otis fetched another sheet of paper. This time he wrote down her questions instead of reaching for a new label.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Mina explicitly separates looking similar from knowing.",
+        "The text supplies no facts that rule out basalt; her objection concerns the evidence needed to name the stone."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r024",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the visitor stop at the unidentified stone?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The card invites questions and participation"
+          },
+          {
+            "id": "b",
+            "text": "the stone has been proved rare"
+          },
+          {
+            "id": "c",
+            "text": "Otis announces a prize"
+          },
+          {
+            "id": "d",
+            "text": "the other stones have no labels"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The handwritten card asks visitors to help decide what to test. That invitation explains the exchange; rarity and a prize are never established.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The missing label",
+          "body": "'We cannot display it without a name,' said Otis, holding a smooth grey stone above the exhibition table.\n\n'It had a label yesterday,' Mina replied. She checked the floor, then the empty packing tray. Their class collection opened in ten minutes.\n\nOtis looked at the other stones. 'This one looks like the basalt. We can write basalt again.'\n\nMina shook her head. 'Looking similar is not the same as knowing. Put it beside the others with a question mark.'\n\n'Visitors will think we forgot to finish.'\n\n'We could tell them what we know: where it was found, how heavy it is, and which tests we still need.'\n\nWhen the doors opened, a visitor stopped at their handwritten card: 'Unidentified stone. Found near the oval. Help us decide what to test next.' She spent longer there than at the neatly named samples. Otis fetched another sheet of paper. This time he wrote down her questions instead of reaching for a new label.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The handwritten card asks visitors to help decide what to test.",
+        "That invitation explains the exchange; rarity and a prize are never established."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w008",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a letter asking your school to provide a sheltered outdoor reading area. Give two reasons and one practical suggestion. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Address the principal and state the request clearly before developing reasons. Explain how shelter would affect reading or access, using plausible examples rather than invented survey results. Suggest a workable location or trial and finish with a specific request for consideration.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Persuasive composition",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "persuasive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Address the principal and state the request clearly before developing reasons.",
+        "Explain how shelter would affect reading or access, using plausible examples rather than invented survey results.",
+        "Suggest a workable location or trial and finish with a specific request for consideration."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Address the principal and state the request clearly before developing reasons.",
+          "Explain how shelter would affect reading or access, using plausible examples rather than invented survey results.",
+          "Suggest a workable location or trial and finish with a specific request for consideration.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m025",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A team won 60% of its first 15 matches. It then won the next 5 matches. How many matches has it won altogether?",
+        "options": [
+          {
+            "id": "a",
+            "text": "14"
+          },
+          {
+            "id": "b",
+            "text": "9"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "15"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Sixty per cent of 15 is 9 wins. Add the five later wins to get 14; do not take 60% of all 20 matches.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Sixty per cent of 15 is 9 wins.",
+        "Add the five later wins to get 14; do not take 60% of all 20 matches."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "0.6*15+5",
+        "expected": "14"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m026",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A $150 order attracts a 12% discount, then a $9 delivery fee. A voucher pays $20 of the final bill. How much does the buyer pay in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "139"
+          },
+          {
+            "id": "b",
+            "text": "121"
+          },
+          {
+            "id": "c",
+            "text": "112"
+          },
+          {
+            "id": "d",
+            "text": "123"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The discounted goods cost 150 times 0.88 = $132. Add delivery to get $141, then subtract the $20 voucher to get $121.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The discounted goods cost 150 times 0.88 = $132.",
+        "Add delivery to get $141, then subtract the $20 voucher to get $121."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "150*0.88+9-20",
+        "expected": "121"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m027",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A seed tray has 120 seeds. Ten per cent fail to sprout and one sixth of the sprouts wilt. How many healthy seedlings remain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "88"
+          },
+          {
+            "id": "b",
+            "text": "92"
+          },
+          {
+            "id": "c",
+            "text": "100"
+          },
+          {
+            "id": "d",
+            "text": "90"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "After sprouting, 90% of 120 = 108 seedlings remain. One sixth of 108 is 18; subtracting leaves 90 healthy seedlings.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "skill": "scholarship.maths-percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-percentages"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "After sprouting, 90% of 120 = 108 seedlings remain.",
+        "One sixth of 108 is 18; subtracting leaves 90 healthy seedlings."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "120*0.9*(1-1/6)",
+        "expected": "90"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n025",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number line starts at 17 and marks every third integer after that. What is the fifth marked number, counting 17 first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "32"
+          },
+          {
+            "id": "b",
+            "text": "29"
+          },
+          {
+            "id": "c",
+            "text": "26"
+          },
+          {
+            "id": "d",
+            "text": "31"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "There are four equal jumps between the first and fifth marks. Add four threes to seventeen to get 29.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are four equal jumps between the first and fifth marks.",
+        "Add four threes to seventeen to get 29."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "17+4*3",
+        "expected": "29"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n026",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The repeating unit is 4, 1, 7, 9, 2. What number occupies position 38, counting the first 4 as position 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "9"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "1"
+          },
+          {
+            "id": "d",
+            "text": "2"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Divide 38 by the cycle length five: the remainder is three. Position 38 is the third position in a cycle, containing 7.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Divide 38 by the cycle length five: the remainder is three.",
+        "Position 38 is the third position in a cycle, containing 7."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n027",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A row alternates two patterns: 1, 3, 4, 6, 9, 12, 16, 24, ?. Odd positions are consecutive squares and even positions double. What is missing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "32"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Odd positions read 1, 4, 9, 16, which are the squares of 1 through 4. The ninth position is odd, so it contains 5 squared = 25, not the next doubled even-position term.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Odd positions read 1, 4, 9, 16, which are the squares of 1 through 4.",
+        "The ninth position is odd, so it contains 5 squared = 25, not the next doubled even-position term."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5**2",
+        "expected": "25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v025",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The historian questioned the account, not because it was impossible, but because it lacked corroboration. Corroboration means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "a clear sequence of events"
+          },
+          {
+            "id": "b",
+            "text": "an interesting viewpoint"
+          },
+          {
+            "id": "c",
+            "text": "formal publication"
+          },
+          {
+            "id": "d",
+            "text": "independent supporting evidence"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The issue is whether another source supports the account. Independent supporting evidence provides corroboration; publication alone does not verify a claim.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The issue is whether another source supports the account.",
+        "Independent supporting evidence provides corroboration; publication alone does not verify a claim."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v026",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The solution was elegant: one small change solved several connected problems. Elegant here most nearly means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "simple and effective"
+          },
+          {
+            "id": "b",
+            "text": "fashionably decorated"
+          },
+          {
+            "id": "c",
+            "text": "carefully concealed"
+          },
+          {
+            "id": "d",
+            "text": "expensive to produce"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "One change achieving several results indicates economy and effectiveness. Simple and effective captures this technical sense; decorative elegance is a different meaning.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "One change achieving several results indicates economy and effectiveness.",
+        "Simple and effective captures this technical sense; decorative elegance is a different meaning."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v027",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The witness gave a plausible explanation, but the investigator still sought proof. Plausible means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "certainly true"
+          },
+          {
+            "id": "b",
+            "text": "deliberately misleading"
+          },
+          {
+            "id": "c",
+            "text": "completely original"
+          },
+          {
+            "id": "d",
+            "text": "seemingly reasonable"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The explanation could reasonably be true, but proof remains missing. Seemingly reasonable preserves that uncertainty; certainly true would contradict the investigator's need for proof.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The explanation could reasonably be true, but proof remains missing.",
+        "Seemingly reasonable preserves that uncertainty; certainly true would contradict the investigator's need for proof."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r025",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does Otis's final action show?",
+        "options": [
+          {
+            "id": "a",
+            "text": "he abandons the exhibition"
+          },
+          {
+            "id": "b",
+            "text": "he thinks Mina should stop asking questions"
+          },
+          {
+            "id": "c",
+            "text": "He begins recording uncertainty instead of concealing it"
+          },
+          {
+            "id": "d",
+            "text": "he has identified the stone as basalt"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "He records the visitor's questions rather than supplying a replacement name. This reverses his earlier urge to fill the gap quickly and shows a change in what he values.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc authorial craft",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-authorial-craft"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The missing label",
+          "body": "'We cannot display it without a name,' said Otis, holding a smooth grey stone above the exhibition table.\n\n'It had a label yesterday,' Mina replied. She checked the floor, then the empty packing tray. Their class collection opened in ten minutes.\n\nOtis looked at the other stones. 'This one looks like the basalt. We can write basalt again.'\n\nMina shook her head. 'Looking similar is not the same as knowing. Put it beside the others with a question mark.'\n\n'Visitors will think we forgot to finish.'\n\n'We could tell them what we know: where it was found, how heavy it is, and which tests we still need.'\n\nWhen the doors opened, a visitor stopped at their handwritten card: 'Unidentified stone. Found near the oval. Help us decide what to test next.' She spent longer there than at the neatly named samples. Otis fetched another sheet of paper. This time he wrote down her questions instead of reaching for a new label.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "He records the visitor's questions rather than supplying a replacement name.",
+        "This reverses his earlier urge to fill the gap quickly and shows a change in what he values."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r026",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "According to Account A, who officially wins the race?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the writer of Account B"
+          },
+          {
+            "id": "b",
+            "text": "the official"
+          },
+          {
+            "id": "c",
+            "text": "Mara"
+          },
+          {
+            "id": "d",
+            "text": "Jules"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Account A explicitly gives the official order as Mara first and Jules second. Account B adds background but does not contradict that result.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Two accounts of the same race",
+          "body": "Account A: I watched from the finish line. The runners appeared around the bend together, and Mara crossed first by less than a shoe length. She lifted both hands, then turned immediately towards Jules. From where I stood I could not hear their words. They walked back along the track side by side. The official result gave Mara first place and Jules second.\n\nAccount B: I ran beside Jules until the final bend. Earlier she had slowed when I dropped my number and helped me pick it up. After that I fell behind, so I did not see the finish clearly. When I caught up, Mara was thanking Jules for showing her how to pace the middle lap during training. Jules laughed and said, 'Next time I shall keep that trick to myself.' Then both offered to help me pin my number on more securely.\n\nThese accounts were written by different students after the fictional race. Neither writer saw and heard everything that happened.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Account A explicitly gives the official order as Mara first and Jules second.",
+        "Account B adds background but does not contradict that result."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r027",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why can the writer of Account A describe the finish more directly than the writer of Account B?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The first writer is at the finish line"
+          },
+          {
+            "id": "b",
+            "text": "the first writer runs faster"
+          },
+          {
+            "id": "c",
+            "text": "the second writer forgets the result"
+          },
+          {
+            "id": "d",
+            "text": "the first writer trains Mara"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Account A places the observer at the finish, while Account B says the runner fell behind and could not see it clearly. The difference is viewpoint, not a claim about memory or training.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Two accounts of the same race",
+          "body": "Account A: I watched from the finish line. The runners appeared around the bend together, and Mara crossed first by less than a shoe length. She lifted both hands, then turned immediately towards Jules. From where I stood I could not hear their words. They walked back along the track side by side. The official result gave Mara first place and Jules second.\n\nAccount B: I ran beside Jules until the final bend. Earlier she had slowed when I dropped my number and helped me pick it up. After that I fell behind, so I did not see the finish clearly. When I caught up, Mara was thanking Jules for showing her how to pace the middle lap during training. Jules laughed and said, 'Next time I shall keep that trick to myself.' Then both offered to help me pin my number on more securely.\n\nThese accounts were written by different students after the fictional race. Neither writer saw and heard everything that happened.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Account A places the observer at the finish, while Account B says the runner fell behind and could not see it clearly.",
+        "The difference is viewpoint, not a claim about memory or training."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w009",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Your class can spend its excursion budget on a local field study or one large city exhibition. Recommend one option in a speech and respond fairly to a benefit of the other. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Identify the audience's goals, such as depth of learning, accessibility or cost, before choosing. Develop distinct reasons with examples and acknowledge an actual strength of the alternative. Explain why your chosen priorities still favour your recommendation; do not dismiss the other option as worthless.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Persuasive composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "persuasive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Identify the audience's goals, such as depth of learning, accessibility or cost, before choosing.",
+        "Develop distinct reasons with examples and acknowledge an actual strength of the alternative.",
+        "Explain why your chosen priorities still favour your recommendation; do not dismiss the other option as worthless."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Identify the audience's goals, such as depth of learning, accessibility or cost, before choosing.",
+          "Develop distinct reasons with examples and acknowledge an actual strength of the alternative.",
+          "Explain why your chosen priorities still favour your recommendation; do not dismiss the other option as worthless.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m028",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four exercise books cost $14 at a constant unit price. What do six cost in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17.5"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "24"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Divide $14 by four to get $3.50 per book. Six books cost 6 times $3.50 = $21; adding two dollars would not preserve the rate.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "skill": "scholarship.maths-ratios-rates",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-ratios-rates"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Divide $14 by four to get $3.50 per book.",
+        "Six books cost 6 times $3.50 = $21; adding two dollars would not preserve the rate."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "14/4*6",
+        "expected": "21"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m029",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cordial mix uses 2 parts concentrate to 7 parts water. How many millilitres of concentrate are in 1350 mL of the mix?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1050"
+          },
+          {
+            "id": "b",
+            "text": "300"
+          },
+          {
+            "id": "c",
+            "text": "270"
+          },
+          {
+            "id": "d",
+            "text": "350"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "There are nine equal parts in the whole mixture. Each part is 150 mL, so two parts of concentrate total 300 mL.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "skill": "scholarship.maths-ratios-rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-ratios-rates"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are nine equal parts in the whole mixture.",
+        "Each part is 150 mL, so two parts of concentrate total 300 mL."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "1350*2/9",
+        "expected": "300"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m030",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three taps together fill 72 litres in 4 minutes. All taps have equal flow. How many minutes will two taps take to fill 90 litres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10"
+          },
+          {
+            "id": "b",
+            "text": "7.5"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Together the taps deliver 18 litres per minute, so each delivers 6. Two taps deliver 12 litres per minute; 90 divided by 12 = 7.5 minutes.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "skill": "scholarship.maths-ratios-rates",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-ratios-rates"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Together the taps deliver 18 litres per minute, so each delivers 6.",
+        "Two taps deliver 12 litres per minute; 90 divided by 12 = 7.5 minutes."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "90/(72/4/3*2)",
+        "expected": "7.5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n028",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Starting with 100, subtract 4, then 8, then 12, then 16. What value is reached after all four subtractions?",
+        "options": [
+          {
+            "id": "a",
+            "text": "84"
+          },
+          {
+            "id": "b",
+            "text": "60"
+          },
+          {
+            "id": "c",
+            "text": "56"
+          },
+          {
+            "id": "d",
+            "text": "64"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The four subtractions total 4 + 8 + 12 + 16 = 40. Subtract 40 from 100 to get 60; stopping before the last subtraction gives 76.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The four subtractions total 4 + 8 + 12 + 16 = 40.",
+        "Subtract 40 from 100 to get 60; stopping before the last subtraction gives 76."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "100-4-8-12-16",
+        "expected": "60"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n029",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A pattern begins 2, 3, 6, 11, 18. Its successive gaps are odd numbers from 1. What is the sum of the sixth and seventh terms?",
+        "options": [
+          {
+            "id": "a",
+            "text": "76"
+          },
+          {
+            "id": "b",
+            "text": "65"
+          },
+          {
+            "id": "c",
+            "text": "47"
+          },
+          {
+            "id": "d",
+            "text": "54"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The gaps used are 1, 3, 5 and 7, so the next terms are 27 and 38. Their sum is 65. Both new terms are required rather than just the next gap.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The gaps used are 1, 3, 5 and 7, so the next terms are 27 and 38.",
+        "Their sum is 65. Both new terms are required rather than just the next gap."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(18+9)+(18+9+11)",
+        "expected": "65"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n030",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a sequence of fractions, the numerators are 1, 3, 5, 7 and denominators are all 8. What is the decimal value of the next term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "1.25"
+          },
+          {
+            "id": "c",
+            "text": "1.125"
+          },
+          {
+            "id": "d",
+            "text": "0.875"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Numerators increase by two, so the next fraction is 9/8. Nine divided by eight is 1.125; a numerator larger than the denominator gives a value above one.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number series",
+          "skill": "scholarship.nr-number-series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-series"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Numerators increase by two, so the next fraction is 9/8.",
+        "Nine divided by eight is 1.125; a numerator larger than the denominator gives a value above one."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "9/8",
+        "expected": "1.125"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v028",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The article's title was deliberately understated: 'A small delay' described a journey postponed for a year. Understated means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "expressed as less significant than it was"
+          },
+          {
+            "id": "b",
+            "text": "explained without any evidence"
+          },
+          {
+            "id": "c",
+            "text": "described in precise technical terms"
+          },
+          {
+            "id": "d",
+            "text": "repeated more often than needed"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Calling a year-long postponement small reduces its apparent scale. The first choice captures that deliberate mismatch, rather than implying the title is technical or repetitive.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Calling a year-long postponement small reduces its apparent scale.",
+        "The first choice captures that deliberate mismatch, rather than implying the title is technical or repetitive."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v029",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The mayor's response was evasive: she described the weather instead of answering the budget question. Evasive means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "admitting an error openly"
+          },
+          {
+            "id": "b",
+            "text": "rejecting the question as false"
+          },
+          {
+            "id": "c",
+            "text": "avoiding a direct answer"
+          },
+          {
+            "id": "d",
+            "text": "offering a careful estimate"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The change of subject leaves the budget issue unanswered. Avoiding a direct answer matches evasive; there is no estimate, admission or explicit rejection.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The change of subject leaves the budget issue unanswered.",
+        "Avoiding a direct answer matches evasive; there is no estimate, admission or explicit rejection."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v030",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The prediction was conservative, allowing for delays rather than assuming everything would go well. Conservative here means what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "cautious in its estimate"
+          },
+          {
+            "id": "b",
+            "text": "opposed to all change"
+          },
+          {
+            "id": "c",
+            "text": "based on old equipment"
+          },
+          {
+            "id": "d",
+            "text": "lower than every earlier result"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The description concerns a forecast that accounts for setbacks. Cautious in its estimate fits this use; the sentence does not establish political views or a comparison with all earlier results.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr synonyms antonyms",
+          "skill": "scholarship.vr-synonyms-antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-synonyms-antonyms"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The description concerns a forecast that accounts for setbacks.",
+        "Cautious in its estimate fits this use; the sentence does not establish political views or a comparison with all earlier results."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r028",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which statement about Jules is supported by both her actions and her final comment in Account B?",
+        "options": [
+          {
+            "id": "a",
+            "text": "she refuses to share any training advice"
+          },
+          {
+            "id": "b",
+            "text": "She helps others and can joke about competition"
+          },
+          {
+            "id": "c",
+            "text": "she regrets helping the fallen runner"
+          },
+          {
+            "id": "d",
+            "text": "she is certain the official result is wrong"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "She helps with the dropped number and later offers to secure it, while joking about withholding a pacing trick. The combination supports generosity and humour rather than resentment or refusal.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc character inference",
+          "skill": "scholarship.rc-character-inference",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-character-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Two accounts of the same race",
+          "body": "Account A: I watched from the finish line. The runners appeared around the bend together, and Mara crossed first by less than a shoe length. She lifted both hands, then turned immediately towards Jules. From where I stood I could not hear their words. They walked back along the track side by side. The official result gave Mara first place and Jules second.\n\nAccount B: I ran beside Jules until the final bend. Earlier she had slowed when I dropped my number and helped me pick it up. After that I fell behind, so I did not see the finish clearly. When I caught up, Mara was thanking Jules for showing her how to pace the middle lap during training. Jules laughed and said, 'Next time I shall keep that trick to myself.' Then both offered to help me pin my number on more securely.\n\nThese accounts were written by different students after the fictional race. Neither writer saw and heard everything that happened.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She helps with the dropped number and later offers to secure it, while joking about withholding a pacing trick.",
+        "The combination supports generosity and humour rather than resentment or refusal."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r029",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is gained by presenting both race accounts?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the two guarantee that every detail is known"
+          },
+          {
+            "id": "b",
+            "text": "the first makes the second unnecessary"
+          },
+          {
+            "id": "c",
+            "text": "The second adds context beyond the first observer's reach"
+          },
+          {
+            "id": "d",
+            "text": "the second proves the first observer dishonest"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The first observes the result, while the second hears comments and describes earlier help. Together they broaden understanding, but the final note explicitly limits both accounts.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc text structure",
+          "skill": "scholarship.rc-text-structure",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-text-structure"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Two accounts of the same race",
+          "body": "Account A: I watched from the finish line. The runners appeared around the bend together, and Mara crossed first by less than a shoe length. She lifted both hands, then turned immediately towards Jules. From where I stood I could not hear their words. They walked back along the track side by side. The official result gave Mara first place and Jules second.\n\nAccount B: I ran beside Jules until the final bend. Earlier she had slowed when I dropped my number and helped me pick it up. After that I fell behind, so I did not see the finish clearly. When I caught up, Mara was thanking Jules for showing her how to pace the middle lap during training. Jules laughed and said, 'Next time I shall keep that trick to myself.' Then both offered to help me pin my number on more securely.\n\nThese accounts were written by different students after the fictional race. Neither writer saw and heard everything that happened.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The first observes the result, while the second hears comments and describes earlier help.",
+        "Together they broaden understanding, but the final note explicitly limits both accounts."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r030",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which claim would go beyond the evidence in the two accounts?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Jules deliberately let Mara win"
+          },
+          {
+            "id": "b",
+            "text": "Mara finished first"
+          },
+          {
+            "id": "c",
+            "text": "Jules helped with a dropped number"
+          },
+          {
+            "id": "d",
+            "text": "the runners knew each other from training"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Neither account says Jules intentionally lost; assistance and training advice do not prove that. The other claims are directly stated or clearly supported by the dialogue.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Two accounts of the same race",
+          "body": "Account A: I watched from the finish line. The runners appeared around the bend together, and Mara crossed first by less than a shoe length. She lifted both hands, then turned immediately towards Jules. From where I stood I could not hear their words. They walked back along the track side by side. The official result gave Mara first place and Jules second.\n\nAccount B: I ran beside Jules until the final bend. Earlier she had slowed when I dropped my number and helped me pick it up. After that I fell behind, so I did not see the finish clearly. When I caught up, Mara was thanking Jules for showing her how to pace the middle lap during training. Jules laughed and said, 'Next time I shall keep that trick to myself.' Then both offered to help me pin my number on more securely.\n\nThese accounts were written by different students after the fictional race. Neither writer saw and heard everything that happened.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Neither account says Jules intentionally lost; assistance and training advice do not prove that.",
+        "The other claims are directly stated or clearly supported by the dialogue."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w010",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A council proposes charging a small fee for reserving public tennis courts while leaving unreserved use free. Write an opinion article supporting or opposing the policy, including a fair response to the strongest objection. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Distinguish reserved access from unreserved access so the argument addresses the actual policy. Weigh fairness, upkeep or availability with concrete hypothetical examples rather than fabricated statistics. Present a substantial opposing case and answer it with a safeguard, trade-off or reasoned priority.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Persuasive composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "persuasive",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Distinguish reserved access from unreserved access so the argument addresses the actual policy.",
+        "Weigh fairness, upkeep or availability with concrete hypothetical examples rather than fabricated statistics.",
+        "Present a substantial opposing case and answer it with a safeguard, trade-off or reasoned priority."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Distinguish reserved access from unreserved access so the argument addresses the actual policy.",
+          "Weigh fairness, upkeep or availability with concrete hypothetical examples rather than fabricated statistics.",
+          "Present a substantial opposing case and answer it with a safeguard, trade-off or reasoned priority.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    }
+  ]
+}
