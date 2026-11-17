@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
 import { redirectTo } from "@/lib/browser-redirect";
+import { PLAN_LABELS } from "@/lib/billing/prices";
 import type { MySubscriptionResult, SubscriptionStatus } from "@/lib/billing/subscription";
 
 /**
@@ -25,10 +26,6 @@ const STATUS_LABELS: Record<SubscriptionStatus, { label: string; variant: "succe
   trial_expired: { label: "Trial expired", variant: "error" },
 };
 
-const PLAN_LABELS: Record<"family_monthly" | "family_annual", string> = {
-  family_monthly: "Family (monthly)",
-  family_annual: "Family (annual)",
-};
 
 function daysRemaining(target: string): number {
   const diffMs = new Date(target).getTime() - Date.now();

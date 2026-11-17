@@ -22,12 +22,13 @@ vi.mock("@/server/curriculum", () => ({
   gatedPracticeCoverageResolver: vi.fn(),
 }));
 
-vi.mock("@/features/landing/components/SiteNav", () => ({
-  SiteNav: () => <nav data-testid="site-nav">SiteNav</nav>,
-}));
-
-vi.mock("@/features/landing/components/Closing", () => ({
-  SiteFooter: () => <footer data-testid="site-footer">SiteFooter</footer>,
+// The shell needs AuthProvider; its own behaviour is covered by parent-shell.test.tsx.
+vi.mock("@/features/parent-dashboard", () => ({
+  ParentShell: ({ active, children }: { active: string; children: React.ReactNode }) => (
+    <div data-testid="parent-shell" data-active={active}>
+      {children}
+    </div>
+  ),
 }));
 
 import ParentCurriculumExplorerPage, {
@@ -156,8 +157,10 @@ describe("ParentCurriculumExplorerPage (Server Component)", () => {
     const pageElement = await ParentCurriculumExplorerPage();
     render(pageElement);
 
-    expect(screen.getByTestId("site-nav")).toBeVisible();
-    expect(screen.getByTestId("site-footer")).toBeVisible();
+    expect(screen.getByTestId("parent-shell")).toHaveAttribute(
+      "data-active",
+      "/parent/curriculum-explorer",
+    );
     expect(screen.getByText("Odd and even numbers")).toBeVisible();
     expect(mockCatalogueQuery).toHaveBeenCalledTimes(2);
   });

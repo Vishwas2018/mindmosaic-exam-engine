@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 
+import { selectFreeSample } from "@/lib/billing/free-sample";
 import { getGuestExamBank } from "@/server/exam-bank";
 
 /**
- * The guest practice bank, answer keys and explanations included.
+ * The guest practice bank, answer keys and explanations included — but only
+ * the Free plan's sample of it (a handful of questions per programme, see
+ * src/lib/billing/free-sample.ts). Guests never receive the full bank, so
+ * the limit is a property of the data served, not a client-side check.
  *
  * Guest mode is deliberately fully client-side (no account, no server
  * round-trip to score) and therefore needs the authoring bank in the
@@ -20,7 +24,7 @@ export const dynamic = "force-static";
 
 export function GET(): NextResponse {
   return NextResponse.json({
-    curated: getGuestExamBank("curated"),
-    published: getGuestExamBank("published"),
+    curated: selectFreeSample(getGuestExamBank("curated")),
+    published: selectFreeSample(getGuestExamBank("published")),
   });
 }

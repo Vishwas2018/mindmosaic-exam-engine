@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { WRITING_BACK_LINK_CLASS, WritingPageShell } from "@/features/writing/components/WritingPageShell";
+import { ParentShell } from "@/features/parent-dashboard";
 import { WritingResultsList } from "@/features/writing/components/WritingResultsList";
 import { listWritingTasks } from "@/server/writing/tasks";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -33,7 +33,7 @@ export default async function ParentWritingPage() {
   const history = await loadWritingHistory(supabase, { studentIds: children.map((child) => child.id), submittedOnly: true });
 
   return (
-    <WritingPageShell back={<Link href="/parent" className={WRITING_BACK_LINK_CLASS}>Back to dashboard</Link>}>
+    <ParentShell active="/parent/writing">
       <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink">Writing practice</h1>
       <p className="mt-2 text-muted">
         You mark your child&apos;s writing against a simple rubric. MindMosaic does not mark or comment on children&apos;s
@@ -76,6 +76,6 @@ export default async function ParentWritingPage() {
           ))}
         </div>
       )}
-    </WritingPageShell>
+    </ParentShell>
   );
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "@/features/landing/components/Closing";
-import { SiteNav } from "@/features/landing/components/SiteNav";
+import { ParentShell } from "@/features/parent-dashboard";
 import { ParentCurriculumExplorer } from "@/features/curriculum/parent-explorer";
 import { PostgresCurriculumCatalogue, gatedPracticeCoverageResolver } from "@/server/curriculum";
 import type { CurriculumCatalogueItem } from "@/features/curriculum/contracts";
@@ -50,9 +49,7 @@ async function fetchAllVicCurriculumItems(): Promise<CurriculumCatalogueItem[]> 
 export default async function ParentCurriculumExplorerPage() {
   if (!isSupabaseConfigured) {
     return (
-      <div className="lp-root min-h-screen bg-page text-ink flex flex-col justify-between">
-        <SiteNav />
-        <main id="main-content" className="site-width py-12">
+      <ParentShell active="/parent/curriculum-explorer">
           <ErrorState
             title="Database not configured"
             description={SUPABASE_NOT_CONFIGURED_MESSAGE}
@@ -62,9 +59,7 @@ export default async function ParentCurriculumExplorerPage() {
               </Link>
             }
           />
-        </main>
-        <SiteFooter />
-      </div>
+      </ParentShell>
     );
   }
 
@@ -80,9 +75,7 @@ export default async function ParentCurriculumExplorerPage() {
   }
 
   return (
-    <div className="lp-root min-h-screen bg-page text-ink flex flex-col justify-between">
-      <SiteNav />
-      <main id="main-content" className="site-width py-6 sm:py-10 flex-1">
+    <ParentShell active="/parent/curriculum-explorer">
         {fetchError ? (
           <ErrorState
             title="Unable to load curriculum"
@@ -96,8 +89,6 @@ export default async function ParentCurriculumExplorerPage() {
         ) : (
           <ParentCurriculumExplorer initialItems={items} />
         )}
-      </main>
-      <SiteFooter />
-    </div>
+    </ParentShell>
   );
 }

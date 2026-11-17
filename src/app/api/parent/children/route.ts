@@ -3,6 +3,7 @@ import { z } from "zod";
 import { yearLevelSchema } from "@/schemas/question.schema";
 
 import { provisionChild } from "@/features/auth/provision-child";
+import { CHILD_PROGRAMME_IDS } from "@/features/auth/child-programmes";
 import { checkOrigin } from "@/features/auth/require-origin";
 import { learnerCurriculumPreferenceSchema } from "@/features/curriculum/contracts";
 
@@ -20,6 +21,7 @@ const requestSchema = z.object({
   yearLevel: yearLevelSchema.optional(),
   curriculumPreference: learnerCurriculumPreferenceSchema.optional(),
   pin: z.string().optional(),
+  programmes: z.array(z.enum(CHILD_PROGRAMME_IDS)).max(CHILD_PROGRAMME_IDS.length).optional(),
   /** Sent only on the retry after the parent confirms the duplicate-name prompt. */
   allowDuplicate: z.boolean().optional(),
 }).strict();

@@ -4,7 +4,7 @@ import { Home } from "lucide-react";
 
 import { MindMosaicLogo } from "@/components/branding";
 import { Badge } from "@/components/ui";
-import { AuthNav } from "@/features/auth/components/AuthNav";
+import { ParentAccountMenu } from "./ParentAccountMenu";
 
 /*
  * Every route a parent owns. /billing was the gap: it is a core parent
@@ -22,6 +22,8 @@ import { AuthNav } from "@/features/auth/components/AuthNav";
 const NAV_LINKS = [
   { href: "/parent", label: "Dashboard" },
   { href: "/parent/children", label: "Children" },
+  { href: "/parent/curriculum-explorer", label: "Curriculum" },
+  { href: "/parent/writing", label: "Writing" },
   { href: "/billing", label: "Billing" },
 ] as const;
 
@@ -34,7 +36,8 @@ export function ParentShell({
   active,
   children,
 }: {
-  active: (typeof NAV_LINKS)[number]["href"];
+  /** "/parent/settings" is reached from the account menu, not the nav, so it highlights no link. */
+  active: (typeof NAV_LINKS)[number]["href"] | "/parent/settings";
   children: ReactNode;
 }) {
   return (
@@ -86,8 +89,7 @@ export function ParentShell({
             <Badge variant="purple" className="hidden sm:inline-flex">
               Parent
             </Badge>
-            {/* The parent nav above already links the parent dashboard. */}
-            <AuthNav showRoleHome={false} />
+            <ParentAccountMenu />
           </div>
         </div>
         {/*

@@ -8,6 +8,7 @@ import "server-only";
 
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 
+import { maxChildrenForPlan, type BillingPlan } from "@/lib/billing/prices";
 import { SUPABASE_URL } from "@/lib/supabase/config";
 import { createClient as createRequestClient } from "@/lib/supabase/server";
 
@@ -29,6 +30,8 @@ export interface ProvisionChildInput {
   readonly curriculumPreference?: LearnerCurriculumPreference;
   /** Parent-chosen PIN; a random 6-digit PIN is generated when omitted. */
   readonly pin?: string;
+  /** Programme ids from child-programmes.ts; validated at the route, de-duplicated here. */
+  readonly programmes?: readonly string[];
   /**
    * Set once the parent has seen the duplicate-name warning and confirmed
    * they meant it — two children really can share a first name. Absent or
@@ -142,13 +145,34 @@ export async function provisionChild(
    * (parent_children "own links", profiles "parent reads linked children"),
    * so this needs no privilege the caller doesn't have.
    */
-  if (!input.allowDuplicate) {
-    const { data: links } = await requesterClient
-      .from("parent_children")
-      .select("child_id")
-      .eq("parent_id", requester.id);
+  const { data: links } = await requesterClient
+    .from("parent_children")
+    .select("child_id")
+    .eq("parent_id", requester.id);
+  const childIds = (links ?? []).map((link) => link.child_id as string);
 
-    const childIds = (links ?? []).map((link) => link.child_id as string);
+  /*
+   * Family limit. Archived children still hold a link (they can be restored),
+   * so they count: otherwise archive-then-add would exceed the cap on restore.
+   * Enforced here, not just in the UI, and regardless of allowDuplicate.
+   */
+  const { data: subscriptionRow } = await requesterClient
+    .from("subscriptions")
+    .select("plan")
+    .eq("parent_id", requester.id)
+    .maybeSingle();
+  const maxChildren = maxChildrenForPlan((subscriptionRow?.plan ?? null) as BillingPlan | null);
+  if (childIds.length >= maxChildren) {
+    return {
+      ok: false,
+      message:
+        maxChildren === 1
+          ? "The Individual plan covers one child. Upgrade to Family from the Billing page to add more."
+          : `A family account can have up to ${maxChildren} children. You've reached that limit.`,
+    };
+  }
+
+  if (!input.allowDuplicate) {
     if (childIds.length > 0) {
       const { data: existing } = await requesterClient
         .from("profiles")
@@ -223,11 +247,15 @@ export async function provisionChild(
       return { ok: false, message: "Could not create the student account. Please try again." };
     }
 
-    const profileUpdate: Record<string, string | number | null> = {};
+    const profileUpdate: Record<string, string | number | string[] | null> = {};
     if (input.yearLevel !== undefined) profileUpdate.year_level = input.yearLevel;
     if (input.curriculumPreference !== undefined) {
       profileUpdate.curriculum_jurisdiction_code = input.curriculumPreference.jurisdictionCode;
       profileUpdate.curriculum_school_sector = input.curriculumPreference.schoolSector;
+    }
+
+    if (input.programmes && input.programmes.length > 0) {
+      profileUpdate.programmes = [...new Set(input.programmes)];
     }
 
     // One privileged statement makes year and the paired curriculum preference

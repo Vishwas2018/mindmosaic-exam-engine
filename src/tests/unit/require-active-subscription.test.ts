@@ -71,45 +71,12 @@ describe("requireActiveSubscription", () => {
       expect(redirectPath(error)).toBe("/billing");
     });
 
-    it("passes a student whose linked parent has active access", async () => {
-      mockParentChildrenEq.mockResolvedValue({ data: [{ parent_id: "parent-1" }] });
-      mockRpc.mockResolvedValue({ data: true });
-
-      await requireActiveSubscription("student-1", "student");
-
-      expect(mockRpc).toHaveBeenCalledWith("has_active_access", { p: "parent-1" });
-    });
-
-    it("passes a student when any linked parent has active access", async () => {
-      mockParentChildrenEq.mockResolvedValue({
-        data: [{ parent_id: "parent-1" }, { parent_id: "parent-2" }],
-      });
-      mockRpc.mockResolvedValueOnce({ data: false }).mockResolvedValueOnce({ data: true });
-
-      await requireActiveSubscription("student-1", "student");
-
-      expect(mockRpc).toHaveBeenCalledTimes(2);
-    });
-
-    it("redirects a student whose linked parent has no access to /billing", async () => {
+    it("never redirects a student: a child cannot buy, and Free promises them a sample", async () => {
       mockParentChildrenEq.mockResolvedValue({ data: [{ parent_id: "parent-1" }] });
       mockRpc.mockResolvedValue({ data: false });
 
-      const error = await requireActiveSubscription("student-1", "student").catch(
-        (e: unknown) => e,
-      );
+      await expect(requireActiveSubscription("student-1", "student")).resolves.toBeUndefined();
 
-      expect(redirectPath(error)).toBe("/billing");
-    });
-
-    it("redirects a student with no linked parent to /billing", async () => {
-      mockParentChildrenEq.mockResolvedValue({ data: [] });
-
-      const error = await requireActiveSubscription("student-1", "student").catch(
-        (e: unknown) => e,
-      );
-
-      expect(redirectPath(error)).toBe("/billing");
       expect(mockRpc).not.toHaveBeenCalled();
     });
   });

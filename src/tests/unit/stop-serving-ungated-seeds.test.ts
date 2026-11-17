@@ -6,6 +6,7 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 import { publishedExamBank } from "@/content/questions/practice-bank";
+import { selectFreeSample } from "@/lib/billing/free-sample";
 import { GET as getGuestBank } from "@/app/api/exam/guest-bank/route";
 import { POST as postExamSession } from "@/app/api/exam/session/route";
 
@@ -45,7 +46,12 @@ describe("Stop serving ungated seed questions", () => {
       const publishedIdsInPayload = new Set((json.published as Array<{ id: string }>).map((q) => q.id));
       const officialPublishedIds = new Set(publishedExamBank.map((q) => q.id));
 
-      expect(publishedIdsInPayload.size).toBe(officialPublishedIds.size);
+      /* Guests get the Free plan's sample of the published bank, never all of it. */
+      const expectedSample = selectFreeSample(
+        publishedExamBank.filter((q) => q.examStyle !== "scholarship_style"),
+      );
+      expect(publishedIdsInPayload.size).toBe(expectedSample.length);
+      expect(publishedIdsInPayload.size).toBeLessThan(officialPublishedIds.size);
       for (const id of publishedIdsInPayload) {
         expect(officialPublishedIds.has(id)).toBe(true);
       }

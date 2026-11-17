@@ -12,6 +12,7 @@ import {
 } from "@/features/parent-dashboard";
 import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
+import { maxChildrenForPlan } from "@/lib/billing/prices";
 import { getMySubscription } from "@/lib/billing/subscription";
 import { isSupabaseConfigured, SUPABASE_NOT_CONFIGURED_MESSAGE } from "@/lib/supabase/config";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
@@ -89,6 +90,9 @@ export default async function ParentHomePage() {
     ...buildChildSummary(child.profile, child.attempts, now),
     archived: archivedIds.has(child.profile.id),
   }));
+  const maxChildren = maxChildrenForPlan(
+    subscription.status === "ready" ? subscription.subscription?.plan : null,
+  );
   const hasAccess = subscription.status === "ready" && (subscription.subscription?.hasAccess ?? false);
 
   return (
@@ -96,7 +100,11 @@ export default async function ParentHomePage() {
       <div className="space-y-8">
         <CheckoutStatusToast />
         <ParentDashboard summaries={summaries} subscription={subscription} hasAccess={hasAccess} />
-        <AddChildCard availableYearLevels={years} />
+        <AddChildCard
+          availableYearLevels={years}
+          atLimit={data.children.length >= maxChildren}
+          maxChildren={maxChildren}
+        />
       </div>
     </ParentShell>
   );

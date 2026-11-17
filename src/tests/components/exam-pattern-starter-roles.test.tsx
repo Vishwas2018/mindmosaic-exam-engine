@@ -112,13 +112,15 @@ describe("ExamPatternStarter role authorization & notices", () => {
     expect(screen.getByTestId("start-pattern")).toBeEnabled();
   });
 
-  it("permits guest on AMC practice module without non-student notice", () => {
+  it("asks a guest to choose a plan for a full-length paper, with no role notice", () => {
     authMock.status = "anonymous";
     authMock.role = null;
 
     render(<ExamPatternStarter pattern={y3ModulePattern} readiness={y3Readiness} />);
 
     expect(screen.queryByTestId("non-student-role-notice")).not.toBeInTheDocument();
-    expect(screen.getByTestId("start-pattern")).toBeEnabled();
+    expect(screen.getByTestId("paid-plan-required-notice")).toHaveTextContent(/individual and family/i);
+    expect(screen.getByRole("link", { name: "See plans" })).toHaveAttribute("href", "/billing");
+    expect(screen.getByTestId("start-pattern")).toBeDisabled();
   });
 });

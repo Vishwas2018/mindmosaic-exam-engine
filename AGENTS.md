@@ -69,3 +69,61 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## AI Development Environment
+
+### Session Startup Behaviour (Applies to All Agents)
+
+At the beginning of every new development task, the agent must:
+
+1. **Confirm the repository and active Git branch/worktree.** Verify you are in the correct repository and know the current branch or detached worktree state.
+2. **Check relevant uncommitted changes and existing work.** Run `git status --short` before making any edits. Preserve concurrent agents' work and unrelated changes.
+3. **Identify the permitted development environment.** DEV Supabase is `mfglzabnayacssgertat`. PROD Supabase `uermhsptduikehuyceiz` is strictly off-limits. Never modify production databases, deployments, or credentials.
+4. **Apply MindMosaic coding, architecture, and security standards.** Follow AGENTS.md standing rules, TypeScript strict mode, the design system in `docs/design.md`, and the pre-commit verification gate.
+5. **Review only the relevant context.** Do not scan the entire repository. Inspect only the files, features, and tests related to the current task.
+6. **Select the appropriate implementation and testing workflow.** Use existing components and patterns before creating new ones. Apply the right skill on demand.
+7. **Check for concurrent work before modifying shared files.** Coordinate with other agents editing the same files.
+
+Startup is lightweight. No expensive tests, package installs, or modifications run automatically on session start.
+
+### Available Skills (Load On Demand)
+
+Skills are stored in `.claude/skills/` and load only when explicitly invoked. They do not consume context during every session.
+
+| Skill | Purpose |
+|-------|---------|
+| `architecture-review` | Technical decisions, Next.js architecture, Supabase design |
+| `feature-development` | Implement approved features using existing components and patterns |
+| `qa-automation` | Unit, integration, Playwright, accessibility, and regression testing |
+| `security-review` | Authentication, authorisation, RLS, secret exposure |
+| `database-review` | Schema validation, migration impact assessment |
+| `release-readiness` | CI evidence, deployment dependencies, GO/NO-GO recommendations |
+| `impeccable` | UI design, critique, audit, polish, adapt, animate, harden |
+| `playwright-cli` | Browser automation, Playwright test interaction |
+| `ui-ux-pro-max` | UI/UX design, prototypes, design systems |
+| `web-design-guidelines` | Web design best practices |
+
+To invoke a skill, reference it by name (e.g., "use the architecture-review skill"). Skills are discoverable by both Claude Code and Cline.
+
+### Specialist Capabilities
+
+Configure specialist subagents where supported:
+
+| Subagent | Focus |
+|----------|-------|
+| `architecture-review` | Next.js App Router, TypeScript strict, Supabase RLS, API routes |
+| `feature-development` | Component implementation, feature flags, page composition |
+| `qa-automation` | Vitest, React Testing Library, Playwright E2E, accessibility |
+| `security-review` | Auth, RBAC, RLS policies, credential handling, secret scanning |
+| `database-review` | Migration impact, schema validation, query performance |
+| `release-readiness` | Pre-commit gate, CI evidence, GO/NO-GO decisions |
+
+### Production Safety Controls (Mandatory)
+
+- **Production is strictly off-limits.** DEV Supabase: `mfglzabnayacssgertat`. PROD Supabase: `uermhsptduikehuyceiz` — never access.
+- **Never merge into `main` or push to production automatically.** Releases go through `dev` → `main` PRs merged by the repository owner.
+- **Never deploy, push, or apply database migrations without explicit approval.**
+- **Preserve unrelated changes and concurrent agents' work.**
+- **Use an isolated development branch/worktree for implementation.**
+- **Do not expose secrets in prompts, logs, or configuration files.**
+- **Do not commit `.env*`, secrets, generated test output, screenshots, or build directories.**

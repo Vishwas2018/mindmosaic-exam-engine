@@ -21,7 +21,9 @@ import {
   mmFocus,
   useShakeOnInvalidSubmit,
 } from "./auth-fields";
+import type { ChildProgrammeId } from "../child-programmes";
 import { EmailConfirmationPending } from "./EmailConfirmationPending";
+import { ProgrammePicker } from "./ProgrammePicker";
 
 /**
  * Sign up — design handoff screen 7. Three steps in one card, with the step
@@ -194,6 +196,7 @@ export function SignUpWizard({
 
   // Step 3
   const [programme, setProgramme] = useState<string>(PROGRAMMES[0].id);
+  const [programmes, setProgrammes] = useState<ChildProgrammeId[]>([]);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -251,7 +254,11 @@ export function SignUpWizard({
         const response = await fetch("/api/parent/children", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ displayName, yearLevel: year }),
+          body: JSON.stringify({
+            displayName,
+            yearLevel: year,
+            programmes: programmes.length > 0 ? programmes : undefined,
+          }),
         });
         child = ((await response.json().catch(() => null)) as ChildResponse | null) ?? { ok: false };
       } catch {
@@ -696,6 +703,15 @@ export function SignUpWizard({
                 More than one programme can run at once. This only sets the first session.
               </p>
             </fieldset>
+
+            {!skippedStudent && studentFirstName.trim() && (
+              <ProgrammePicker
+                value={programmes}
+                onChange={setProgrammes}
+                legend={`Which programmes is ${studentFirstName.trim()} enrolled in or interested in? (optional)`}
+                idPrefix="signup-programme"
+              />
+            )}
 
             <div className="grid gap-2.5 rounded-[14px] border border-mm-tint-line-strong bg-mm-wash p-[18px]">
               <p className="text-[15.5px] font-bold text-mm-ink">What happens next</p>

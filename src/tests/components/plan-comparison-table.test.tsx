@@ -5,10 +5,11 @@ import { PlanComparisonTable } from "@/features/billing/components/PlanCompariso
 import { FAMILY_PLAN, FAMILY_PLAN_AVAILABILITY } from "@/lib/billing/prices";
 
 describe("PlanComparisonTable", () => {
-  it("shows both plan columns with the configured Family plan prices", () => {
+  it("shows all plan columns with the configured Family plan prices", () => {
     render(<PlanComparisonTable />);
     expect(screen.getByRole("columnheader", { name: /free/i })).toBeInTheDocument();
-    expect(screen.getByText(FAMILY_PLAN.name, { exact: false })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: /individual/i })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: /family/i })).toBeInTheDocument();
     expect(screen.getByText(new RegExp(FAMILY_PLAN.monthly.display.replace("$", "\\$")))).toBeInTheDocument();
   });
 
@@ -22,7 +23,7 @@ describe("PlanComparisonTable", () => {
   it("labels the Family column from FAMILY_PLAN_AVAILABILITY, matching what the landing pricing preview shows", () => {
     render(<PlanComparisonTable />);
     if (FAMILY_PLAN_AVAILABILITY === "purchasable") {
-      expect(screen.getByText("Most families")).toBeInTheDocument();
+      expect(screen.getByText("Best value")).toBeInTheDocument();
       expect(screen.queryByText("Coming soon")).not.toBeInTheDocument();
     } else {
       expect(screen.getByText("Coming soon")).toBeInTheDocument();

@@ -9,6 +9,8 @@ import {
 } from "@/features/parent-dashboard";
 import { loadArchivedChildIds } from "@/features/parent-dashboard/child-access";
 import { loadParentDashboard } from "@/features/parent-dashboard/queries";
+import { maxChildrenForPlan } from "@/lib/billing/prices";
+import { getMySubscription } from "@/lib/billing/subscription";
 import { yearLevelsWithGatedCoverage } from "@/features/taxonomy/coverage";
 
 export const metadata: Metadata = {
@@ -31,6 +33,10 @@ export const dynamic = "force-dynamic";
 export default async function ParentChildrenPage() {
   const years = yearLevelsWithGatedCoverage();
   const data = await loadParentDashboard();
+  const subscriptionResult = await getMySubscription();
+  const maxChildren = maxChildrenForPlan(
+    subscriptionResult.status === "ready" ? subscriptionResult.subscription?.plan : null,
+  );
 
   if (data.status === "error") {
     return (
@@ -64,7 +70,11 @@ export default async function ParentChildrenPage() {
           </p>
         </div>
         <ChildrenManager initialChildren={children} availableYearLevels={years} />
-        <AddChildCard availableYearLevels={years} />
+        <AddChildCard
+          availableYearLevels={years}
+          atLimit={children.length >= maxChildren}
+          maxChildren={maxChildren}
+        />
       </div>
     </ParentShell>
   );

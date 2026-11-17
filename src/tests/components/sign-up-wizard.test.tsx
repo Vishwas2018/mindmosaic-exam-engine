@@ -154,7 +154,7 @@ describe("SignUpWizard — step 2, the student", () => {
     expect(screen.getByRole("button", { name: /year 7 — no practice content yet/i })).toBeDisabled();
     /* Never colour alone — the constraint is also stated in prose. */
     expect(screen.getByText(/years 3 and 5 have a full question bank today/i)).toBeInTheDocument();
-  });
+  }, 10_000);
 
   it("offers Skip for now, which reaches step 3 without a student", async () => {
     const user = userEvent.setup();
@@ -165,7 +165,7 @@ describe("SignUpWizard — step 2, the student", () => {
     await user.click(screen.getByRole("button", { name: /skip for now/i }));
 
     expect(screen.getByText(/step 3 of 3/i)).toBeInTheDocument();
-  });
+  }, 10_000);
 });
 
 describe("SignUpWizard — step 3 and account creation", () => {

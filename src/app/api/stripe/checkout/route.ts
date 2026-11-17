@@ -3,13 +3,13 @@ import { z } from "zod";
 
 import { checkOrigin } from "@/features/auth/require-origin";
 import { getStripeClient } from "@/lib/stripe/client";
-import { isStripeConfigured, priceIdForPlan } from "@/lib/stripe/config";
+import { BILLING_PLANS, isStripeConfigured, priceIdForPlan } from "@/lib/stripe/config";
 import { createSubscriptionsAdminClient } from "@/lib/stripe/subscriptions-admin";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
 const checkoutRequestSchema = z.object({
-  plan: z.enum(["family_monthly", "family_annual"]),
+  plan: z.enum(BILLING_PLANS),
 });
 
 /**

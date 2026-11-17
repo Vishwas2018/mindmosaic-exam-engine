@@ -27,7 +27,12 @@ vi.mock("@/lib/supabase/client", () => ({
   }),
 }));
 
-type Active = "/parent" | "/parent/children" | "/billing";
+type Active =
+  | "/parent"
+  | "/parent/children"
+  | "/parent/curriculum-explorer"
+  | "/parent/writing"
+  | "/billing";
 
 function renderShell(active: Active) {
   return render(
@@ -71,6 +76,14 @@ describe("ParentShell", () => {
       expect(nav(navName).getByRole("link", { name: "Children" })).toHaveAttribute(
         "href",
         "/parent/children",
+      );
+      expect(nav(navName).getByRole("link", { name: "Curriculum" })).toHaveAttribute(
+        "href",
+        "/parent/curriculum-explorer",
+      );
+      expect(nav(navName).getByRole("link", { name: "Writing" })).toHaveAttribute(
+        "href",
+        "/parent/writing",
       );
       expect(nav(navName).getByRole("link", { name: "Billing" })).toHaveAttribute(
         "href",
@@ -120,6 +133,6 @@ describe("ParentShell", () => {
     renderShell("/parent");
     const compact = screen.getByRole("navigation", { name: "Parent, compact" });
     expect(compact).not.toHaveClass("hidden");
-    expect(within(compact).getAllByRole("link")).toHaveLength(4);
+    expect(within(compact).getAllByRole("link")).toHaveLength(6);
   });
 });
