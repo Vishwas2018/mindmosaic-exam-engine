@@ -32,6 +32,14 @@ export function AdminQuestionDetailView({ detail }: { detail: AdminQuestionDetai
         </div>
         <StatusPill status={row.status} served={row.served} />
       </div>
+      <p>
+        <Link
+          href={`/admin/questions/${encodeURIComponent(question.id)}/approval`}
+          className="inline-flex min-h-11 items-center rounded-xl border border-royal/15 px-4 text-sm font-semibold text-royal hover:bg-royal/5"
+        >
+          Human approval
+        </Link>
+      </p>
 
       <section className={card} aria-labelledby="qd-child">
         <h2 id="qd-child" className={h2}>
