@@ -19,7 +19,8 @@ test("G: only approved programmes are offered, with approved counts", async ({ p
   await page.goto("/practice/naplan-g3-numeracy");
   await expect(main).toContainText(/36 matching questions available/);
   await page.goto("/practice/naplan-g5-numeracy");
-  await expect(main).toContainText(/41 matching questions available/);
+  // 41 approved, 40 served: man-544d2533ffb571a742b0c691 is withdrawn (A-11, WITHDRAWN_QUESTION_IDS in exam-bank.ts).
+  await expect(main).toContainText(/40 matching questions available/);
 
   const withdrawn = await page.goto("/practice/naplan-g3-reading");
   expect(withdrawn?.status(), "a withdrawn programme is not served").toBe(404);
