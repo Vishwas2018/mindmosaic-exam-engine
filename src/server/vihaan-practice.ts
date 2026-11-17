@@ -62,7 +62,7 @@ export function getVihaanApprovedBank(
 }
 
 /**
- * Returns the 334 verified published questions eligible for daily adaptive
+ * Returns the verified published questions (334 less any withdrawn) eligible for daily adaptive
  * practice, concept drills, diagnostic, writing practice, and timed sectional
  * drills (excluding the 166 questions reserved for unseen Mock Examinations).
  */

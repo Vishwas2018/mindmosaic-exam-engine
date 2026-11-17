@@ -21,6 +21,7 @@ import {
   VIHAAN_PILOT_COUNTS,
   VIHAAN_PILOT_QUESTIONS,
   VIHAAN_QUESTION_METADATA_BY_ID,
+  VIHAAN_WITHDRAWN_QUESTION_IDS,
   VR_QUESTIONS,
   WE_QUESTIONS,
 } from "@/features/scholarship-prep/content/questions/vihaan-pilot-questions";
@@ -412,11 +413,13 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     expect(expansion.questions).toHaveLength(480);
     expect(expansion.questions.every((q) => q.status === "published")).toBe(true);
 
+    // All 500 verify; withdrawn items (A-06: vihaan-e500-m069) are not served.
     const all500 = getVerifiedVihaanAllPublishedQuestions();
-    expect(all500).toHaveLength(500);
-    expect(new Set(all500.map((q) => q.id)).size).toBe(500);
+    expect(all500).toHaveLength(500 - VIHAAN_WITHDRAWN_QUESTION_IDS.size);
+    expect(all500.some((q) => VIHAAN_WITHDRAWN_QUESTION_IDS.has(q.id))).toBe(false);
+    expect(new Set(all500.map((q) => q.id)).size).toBe(all500.length);
     expect(VIHAAN_QUESTION_METADATA_BY_ID.size).toBe(500);
-    expect(Object.keys(getVihaanSolutionsRecord(all500))).toHaveLength(500);
+    expect(Object.keys(getVihaanSolutionsRecord(all500))).toHaveLength(all500.length);
 
     const tampered = verifyVihaanExpansionPublication({
       kind: "vihaan_expansion_publication_manifest",
@@ -490,21 +493,22 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     const practicePool = getVihaanPracticePool("vihaan-student-1", devEnv);
     const mockPool = getVihaanMockPool("vihaan-student-1", devEnv);
 
-    expect(fullBank).toHaveLength(500);
-    expect(practicePool).toHaveLength(334);
+    expect(fullBank).toHaveLength(499); // vihaan-e500-m069 withdrawn (A-06)
+    expect(practicePool).toHaveLength(333);
+    expect(practicePool.some((q) => q.id === "vihaan-e500-m069")).toBe(false);
     expect(mockPool).toHaveLength(166);
     expect(practicePool.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
     expect(mockPool.every((q) => isReservedMockExamQuestion(q.id))).toBe(true);
 
     // Normal selectPractice / getVihaanPracticePlan never leaks reserved mock items.
-    const randomPractice = selectPractice(fullBank, 334, { random: () => 0.25 });
-    expect(randomPractice).toHaveLength(334);
+    const randomPractice = selectPractice(fullBank, 333, { random: () => 0.25 });
+    expect(randomPractice).toHaveLength(333);
     expect(randomPractice.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
 
     // Adaptive practice puts unseen items ahead of already attempted items.
     const seenOutcomes = practicePool
       .filter((q) => q.metadata.subject === "numeracy")
-      .slice(0, 75)
+      .slice(0, 74) // leaves 5 unseen (m069 withdrawn, A-06)
       .map((q) => ({
         responseId: `s1:${q.id}`,
         questionId: q.id,
@@ -516,7 +520,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
       }));
     const unseenExpected = practicePool
       .filter((q) => q.metadata.subject === "numeracy")
-      .slice(75)
+      .slice(74)
       .map((q) => q.id);
     const adaptivePick = selectAdaptivePractice(fullBank, 5, {
       subject: "numeracy",

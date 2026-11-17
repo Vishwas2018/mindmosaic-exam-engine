@@ -11,6 +11,7 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 vi.mock("@/server/exam-bank", () => ({
   getExamBank: vi.fn(() => []),
+  getResolutionExamBank: vi.fn(() => []),
   getPatternReadiness: vi.fn(() => ({})),
 }));
 

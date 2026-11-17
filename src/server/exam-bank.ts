@@ -54,6 +54,19 @@ export function isPublicationGateEnforced(): boolean {
   return deployedGateFallback() === "enforce";
 }
 
+/**
+ * Items withdrawn from NEW allocation and disclosure after a defect was found post-approval (A-06/A-11). Withdrawal
+ * only removes: it never serves an unapproved item and never alters an approved one, so revision-bound approval
+ * evidence stays intact. It applies by gate POLICY (every deployed build enforces), not by whether filtering happened
+ * to remove anything. Sittings that already contain a withdrawn item still resolve through getResolutionExamBank(),
+ * so they can be resumed, submitted and reviewed. An item returns only as a corrected revision with a fresh human
+ * approval (then delete its entry here).
+ *
+ * - man-544d2533ffb571a742b0c691: the stem states the answer ("has 6 equal parts … ___ parts altogether"), and so
+ *   does the alt text. Defect A-11, audit 2026-11-17.
+ */
+export const WITHDRAWN_QUESTION_IDS: ReadonlySet<string> = new Set(["man-544d2533ffb571a742b0c691"]);
+
 function servedBank(): readonly AuthoringQuestion[] {
   if (servedBankCache) return servedBankCache;
   const report = getPublicationEligibility();
@@ -66,10 +79,9 @@ function servedBank(): readonly AuthoringQuestion[] {
   return servedBankCache;
 }
 
-export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
+function resolutionBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
   switch (bankId) {
     case "practice":
-      return servedBank();
     case "published":
       return servedBank();
     case "curated":
@@ -77,6 +89,32 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
       curatedBankCache ??= Object.freeze(servedBank().filter((question) => curatedIds.has(question.id)));
       return curatedBankCache;
   }
+}
+
+const allocatableCache = new Map<ExamBankId, readonly AuthoringQuestion[]>();
+
+/**
+ * The bank for NEW allocation and any disclosure: practice sets, new exam sessions, guest payloads, readiness and
+ * coverage. Withdrawn items are excluded whenever the publication gate is enforced (every deployed build).
+ */
+export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
+  const bank = resolutionBank(bankId);
+  if (!isPublicationGateEnforced() || !bank.some((question) => WITHDRAWN_QUESTION_IDS.has(question.id))) return bank;
+  let cached = allocatableCache.get(bankId);
+  if (!cached) {
+    cached = Object.freeze(bank.filter((question) => !WITHDRAWN_QUESTION_IDS.has(question.id)));
+    allocatableCache.set(bankId, cached);
+  }
+  return cached;
+}
+
+/**
+ * The bank for RESOLVING an existing sitting's stored question ids (resume, submit, review). Same publication gate as
+ * getExamBank, but withdrawals do not apply, so a sitting allocated before a withdrawal can still be completed.
+ * Never use it to allocate or to disclose to a client that has not already been served the item.
+ */
+export function getResolutionExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
+  return resolutionBank(bankId);
 }
 
 /**

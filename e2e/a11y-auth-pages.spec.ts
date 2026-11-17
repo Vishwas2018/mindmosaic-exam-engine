@@ -60,7 +60,9 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/student-sign-in", { readyLocator: "main" });
+    /* Same Suspense placeholder as /sign-in (D-038): <main> first holds an aria-hidden skeleton, so waiting on
+       <main> let the walk start before the login-code field existed (A-30: failed in 440 ms, flaky in CI). */
+    await visitAndStabilize(page, "/student-sign-in", { readyLocator: "#auth-ident" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const codeIndex = sequence.indexOf("auth-ident");
