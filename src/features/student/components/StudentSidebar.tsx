@@ -67,26 +67,6 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
           href: "/practice/singapore-maths/sample",
           icon: BarChart3,
         },
-n  ...(isVihaanScholarshipPrepEnabled()
-    ? [
-        {
-n  ...(isVihaanScholarshipPrepEnabled()
-    ? [
-        {
-          key: "vihaan" as const,
-          label: "Vihaan Scholarship Prep",
-          href: "/student/vihaan",
-          icon: GraduationCap,
-        },
-      ]
-    : []),
-          key: "vihaan" as const,
-          label: "Vihaan Scholarship Prep",
-          href: "/student/vihaan",
-          icon: GraduationCap,
-        },
-      ]
-    : []),
       ]
     : []),
 ];
