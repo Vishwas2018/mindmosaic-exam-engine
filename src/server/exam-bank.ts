@@ -57,7 +57,7 @@ export function isPublicationGateEnforced(): boolean {
 }
 
 /**
- * Items withdrawn from serving after a defect was found post-approval. Withdrawal only removes: it never serves an
+ * Items withdrawn from serving (wherever the gate filters, i.e. every deployed build) after a defect was found post-approval. Withdrawal only removes: it never serves an
  * unapproved item and never alters an approved one, so revision-bound approval evidence stays intact. An item returns
  * only as a corrected revision with a fresh human approval (then delete its entry here).
  *
@@ -75,7 +75,11 @@ function servedBank(): readonly AuthoringQuestion[] {
     publishedExamBank, new Set(report.approvals.keys()), PROGRAMME_PUBLICATION_MODES, deployedGateFallback(),
   );
   servedWholeBank = selected === publishedExamBank;
-  servedBankCache = Object.freeze(selected.filter((question) => !WITHDRAWN_QUESTION_IDS.has(question.id)));
+  /* Report mode (local runs and CI) serves the authored bank unchanged, by identity, so test suites keep exercising
+     every item; withdrawal applies wherever the gate filters — every deployed build. */
+  servedBankCache = servedWholeBank
+    ? publishedExamBank
+    : Object.freeze(selected.filter((question) => !WITHDRAWN_QUESTION_IDS.has(question.id)));
   return servedBankCache;
 }
 
@@ -86,10 +90,7 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
     case "published":
       return servedBank();
     case "curated":
-      if (servedBank() && servedWholeBank) {
-        curatedBankCache ??= Object.freeze(questionBank.filter((question) => !WITHDRAWN_QUESTION_IDS.has(question.id)));
-        return curatedBankCache;
-      }
+      if (servedBank() && servedWholeBank) return questionBank;
       curatedBankCache ??= Object.freeze(servedBank().filter((question) => curatedIds.has(question.id)));
       return curatedBankCache;
   }
