@@ -35,6 +35,8 @@ import { getPublicationEligibility } from "./publication-evidence";
 const curatedIds = new Set(questionBank.map((question) => question.id));
 let servedBankCache: readonly AuthoringQuestion[] | undefined;
 let curatedBankCache: readonly AuthoringQuestion[] | undefined;
+/** True when the gate served the whole authored bank (report mode), so the curated bank keeps its own order. */
+let servedWholeBank = false;
 
 /**
  * The publication gate's mode for programmes with no explicit switch.
@@ -54,15 +56,26 @@ export function isPublicationGateEnforced(): boolean {
   return deployedGateFallback() === "enforce";
 }
 
+/**
+ * Items withdrawn from serving after a defect was found post-approval. Withdrawal only removes: it never serves an
+ * unapproved item and never alters an approved one, so revision-bound approval evidence stays intact. An item returns
+ * only as a corrected revision with a fresh human approval (then delete its entry here).
+ *
+ * - man-544d2533ffb571a742b0c691: the stem states the answer ("has 6 equal parts … ___ parts altogether"), and so
+ *   does the alt text. Defect A-11, audit 2026-11-17.
+ */
+export const WITHDRAWN_QUESTION_IDS: ReadonlySet<string> = new Set(["man-544d2533ffb571a742b0c691"]);
+
 function servedBank(): readonly AuthoringQuestion[] {
   if (servedBankCache) return servedBankCache;
   const report = getPublicationEligibility();
   // Integrity failures must never be treated as successful publication.
   if (report.problems.length) return Object.freeze([]);
-  const served = selectServedQuestions(
+  const selected = selectServedQuestions(
     publishedExamBank, new Set(report.approvals.keys()), PROGRAMME_PUBLICATION_MODES, deployedGateFallback(),
   );
-  servedBankCache = served === publishedExamBank ? publishedExamBank : Object.freeze(served);
+  servedWholeBank = selected === publishedExamBank;
+  servedBankCache = Object.freeze(selected.filter((question) => !WITHDRAWN_QUESTION_IDS.has(question.id)));
   return servedBankCache;
 }
 
@@ -73,7 +86,10 @@ export function getExamBank(bankId: ExamBankId): readonly AuthoringQuestion[] {
     case "published":
       return servedBank();
     case "curated":
-      if (servedBank() === publishedExamBank) return questionBank;
+      if (servedBank() && servedWholeBank) {
+        curatedBankCache ??= Object.freeze(questionBank.filter((question) => !WITHDRAWN_QUESTION_IDS.has(question.id)));
+        return curatedBankCache;
+      }
       curatedBankCache ??= Object.freeze(servedBank().filter((question) => curatedIds.has(question.id)));
       return curatedBankCache;
   }

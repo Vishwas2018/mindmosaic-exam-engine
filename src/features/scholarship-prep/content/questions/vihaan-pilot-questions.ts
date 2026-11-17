@@ -757,10 +757,20 @@ export function getVerifiedVihaanExpansionPublication(): VihaanExpansionVerifica
   return cachedExpansionVerification;
 }
 
+/**
+ * Approved items withdrawn from serving because a defect was found after approval. Withdrawal only ever removes
+ * items: it cannot add or alter one, so it never weakens the cryptographic verification above. An item returns
+ * only through a corrected revision with a new human approval (the manifest is regenerated, not edited here).
+ *
+ * - vihaan-e500-m069: no option satisfies the stem. The squares between 60 and 90 are 64 (digit sum 10) and
+ *   81 (digit sum 9); neither sums to 13, yet the key marks 64. Defect A-06, audit 2026-11-17.
+ */
+export const VIHAAN_WITHDRAWN_QUESTION_IDS: ReadonlySet<string> = new Set(["vihaan-e500-m069"]);
+
 export function getVerifiedVihaanAllPublishedQuestions(): readonly Question[] {
   const pilot = getVerifiedVihaanPilotPublication();
   if (!pilot.ok) return [];
   const expansion = getVerifiedVihaanExpansionPublication();
-  if (!expansion.ok) return pilot.questions;
-  return Object.freeze([...pilot.questions, ...expansion.questions]);
+  const verified = expansion.ok ? [...pilot.questions, ...expansion.questions] : [...pilot.questions];
+  return Object.freeze(verified.filter((q) => !VIHAAN_WITHDRAWN_QUESTION_IDS.has(q.id)));
 }
