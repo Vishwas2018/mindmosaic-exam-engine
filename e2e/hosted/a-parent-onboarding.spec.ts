@@ -133,8 +133,12 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
     JSON.stringify({ email, password: STRONG_PASSWORD, childName, loginCode: body.loginCode, pin: body.pin }, null, 2),
   );
 
-  await page.getByRole("button", { name: /done/i }).first().click().catch(() => {});
-  await page.reload();
+  /* Since the #130 redesign the reveal screen ends with "Go to Family Overview" (there is no "Done"), and /parent/setup
+     is a blank add-child form, so a reload there can never show the child. Follow the real flow instead. */
+  await page.getByRole("link", { name: "Go to Family Overview" }).click();
+  await expect(page).toHaveURL(/\/parent\/?$/, { timeout: 30_000 });
+  await expect(page.getByText(childName).first()).toBeVisible();
+  await page.goto("/parent/children");
   await expect(page.getByText(childName).first()).toBeVisible();
 
   // A7/A8 sign-in card: real code, real address, and printing produces the card alone
@@ -161,11 +165,9 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
 
   // A9 sign out
   await page.goto("/parent");
-  const signOut = page.getByRole("button", { name: /sign out|log out/i }).first();
-  if (!(await signOut.isVisible().catch(() => false))) {
-    await page.getByRole("button", { name: /account|menu|profile/i }).first().click();
-  }
-  await page.getByRole("button", { name: /sign out|log out/i }).first().click();
+  // Sign out lives in the avatar's account menu as a menuitem (ParentAccountMenu, #130 redesign).
+  await page.getByRole("button", { name: /account menu/i }).first().click();
+  await page.getByRole("menuitem", { name: /sign out/i }).click();
   await expect(page).not.toHaveURL(/\/parent/, { timeout: 20_000 });
   await page.goto("/parent");
   await expect(page).toHaveURL(/sign-in/, { timeout: 20_000 });
