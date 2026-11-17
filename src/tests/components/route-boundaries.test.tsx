@@ -146,3 +146,18 @@ describe("route boundary coverage", () => {
     expect(fs.readFileSync(path, "utf8").startsWith('"use client"')).toBe(true);
   });
 });
+
+/** A-30: a fixed-width skeleton bar wider than a phone (w-96 = 384px) made the loading screen scroll sideways at 375px. */
+describe("loading skeletons fit a phone viewport", () => {
+  it.each([
+    ["DashboardLoading", () => <DashboardLoading />],
+    ["PageLoading", () => <PageLoading />],
+    ["ExamLoading", () => <ExamLoading />],
+  ])("%s caps every fixed-width bar at its container", (_name, renderLoading) => {
+    const { container } = render(renderLoading());
+    const wide = [...container.querySelectorAll<HTMLElement>("[class]")].filter((el) =>
+      /(^|\s)w-(7[2-9]|[89]\d|\d{3,})(\s|$)/.test(el.className),
+    );
+    for (const el of wide) expect(el.className).toMatch(/(^|\s)max-w-/);
+  });
+});
