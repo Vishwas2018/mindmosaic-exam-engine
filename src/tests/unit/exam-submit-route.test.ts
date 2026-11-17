@@ -18,6 +18,7 @@ vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 vi.mock("@/server/exam-bank", () => ({
   getExamBank: vi.fn(() => [{ id: "q1" }]),
+  getResolutionExamBank: vi.fn(() => [{ id: "q1" }]),
 }));
 
 const mockBuildExamResult = vi.fn(() => ({

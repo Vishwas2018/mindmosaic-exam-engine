@@ -29,6 +29,19 @@ describe("withdrawn approved questions", () => {
     vi.unstubAllEnvs();
   });
 
+  it("still resolves a withdrawn item for sittings that already contain it (Codex P2 on #137)", async () => {
+    vi.stubEnv("MM_PUBLICATION_GATE", "enforce");
+    vi.resetModules();
+    const { getExamBank, getResolutionExamBank } = await import("@/server/exam-bank");
+    const id = "man-544d2533ffb571a742b0c691";
+    expect(getExamBank("published").some((q) => q.id === id)).toBe(false);
+    expect(getResolutionExamBank("published").some((q) => q.id === id)).toBe(true);
+    // Resolution never widens the gate: it is the same approved set plus withdrawn items only.
+    const allocatable = new Set(getExamBank("published").map((q) => q.id));
+    expect(getResolutionExamBank("published").filter((q) => !allocatable.has(q.id)).map((q) => q.id)).toEqual([id]);
+    vi.unstubAllEnvs();
+  });
+
   it("never serves vihaan-e500-m069 (no correct option)", async () => {
     const { getVerifiedVihaanAllPublishedQuestions, getVerifiedVihaanExpansionPublication } = await import(
       "@/features/scholarship-prep/content/questions/vihaan-pilot-questions"
