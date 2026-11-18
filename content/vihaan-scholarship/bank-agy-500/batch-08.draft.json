@@ -1,0 +1,3068 @@
+{
+  "batchId": "vihaan-agy-08",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m085",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A recipe uses flour and sugar in the ratio 5 : 2. If 350 g of flour is used, how many grams of sugar are needed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "70"
+          },
+          {
+            "id": "b",
+            "text": "140"
+          },
+          {
+            "id": "c",
+            "text": "100"
+          },
+          {
+            "id": "d",
+            "text": "175"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "5 parts = 350 g, so 1 part = 70 g. 2 parts of sugar = 2 * 70 = 140 g.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "5 parts = 350 g, so 1 part = 70 g.",
+        "2 parts of sugar = 2 * 70 = 140 g."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(350 / 5) * 2",
+        "expected": "140"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m086",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A car travels 210 km in 3 hours at a constant speed. How far will it travel in 5 hours at the same speed in kilometres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "280"
+          },
+          {
+            "id": "b",
+            "text": "315"
+          },
+          {
+            "id": "c",
+            "text": "350"
+          },
+          {
+            "id": "d",
+            "text": "420"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Speed = 210 / 3 = 70 km/h. Distance in 5 hours = 70 * 5 = 350 km.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Speed = 210 / 3 = 70 km/h.",
+        "Distance in 5 hours = 70 * 5 = 350 km."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(210 / 3) * 5",
+        "expected": "350"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m087",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Pocket money of $96 is shared between Aria and Ben in the ratio 5 : 3. How many more dollars does Aria receive than Ben?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "60"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Total parts = 5 + 3 = 8, so 1 part = 96 / 8 = $12. Difference = 5 - 3 = 2 parts = 2 * 12 = $24.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Total parts = 5 + 3 = 8, so 1 part = 96 / 8 = $12.",
+        "Difference = 5 - 3 = 2 parts = 2 * 12 = $24."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(96 / (5 + 3)) * (5 - 3)",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m088",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A map has a scale of 1 : 25000. Two parks are 6 cm apart on the map. What is the actual distance between them in kilometres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1.5"
+          },
+          {
+            "id": "b",
+            "text": "0.15"
+          },
+          {
+            "id": "c",
+            "text": "15"
+          },
+          {
+            "id": "d",
+            "text": "150"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Actual distance in cm = 6 * 25000 = 150000 cm. Divide by 100000 cm/km: 150000 / 100000 = 1.5 km.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Actual distance in cm = 6 * 25000 = 150000 cm.",
+        "Divide by 100000 cm/km: 150000 / 100000 = 1.5 km."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(6 * 25000) / 100000",
+        "expected": "1.5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m089",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Tap A fills a 60 L tub in 4 minutes, and Tap B fills it in 6 minutes. How many litres do both taps deliver together in 1 minute?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "25"
+          },
+          {
+            "id": "c",
+            "text": "20"
+          },
+          {
+            "id": "d",
+            "text": "30"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Tap A rate = 60 / 4 = 15 L/min; Tap B rate = 60 / 6 = 10 L/min. Combined rate = 15 + 10 = 25 L/min.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Tap A rate = 60 / 4 = 15 L/min; Tap B rate = 60 / 6 = 10 L/min.",
+        "Combined rate = 15 + 10 = 25 L/min."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "60 / 4 + 60 / 6",
+        "expected": "25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m090",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The ratio of dogs to cats at a shelter is 7 : 4. When 6 more cats arrive, the ratio becomes 7 : 6. How many dogs are at the shelter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "21"
+          },
+          {
+            "id": "d",
+            "text": "28"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The number of dogs (7 parts) stays unchanged, while cats increase from 4 parts to 6 parts (+2 parts). 2 parts = 6, so 1 part = 3, and dogs = 7 * 3 = 21.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "The number of dogs (7 parts) stays unchanged, while cats increase from 4 parts to 6 parts (+2 parts).",
+        "2 parts = 6, so 1 part = 3, and dogs = 7 * 3 = 21."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(6 / (6 - 4)) * 7",
+        "expected": "21"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m091",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cyclist rides 18 km in 45 minutes. What is her speed in kilometres per hour?",
+        "options": [
+          {
+            "id": "a",
+            "text": "13.5"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "27"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "45 minutes is 0.75 hours. Speed = 18 / 0.75 = 24 km/h.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "45 minutes is 0.75 hours.",
+        "Speed = 18 / 0.75 = 24 km/h."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "18 / 0.75",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m092",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Paint A and Paint B are mixed in the ratio 3 : 5 to make 40 L of green paint. How many litres of Paint B are in the mixture?",
+        "options": [
+          {
+            "id": "a",
+            "text": "25"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "20"
+          },
+          {
+            "id": "d",
+            "text": "30"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Total parts = 3 + 5 = 8, so 1 part = 40 / 8 = 5 L. Paint B = 5 * 5 = 25 L.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Total parts = 3 + 5 = 8, so 1 part = 40 / 8 = 5 L.",
+        "Paint B = 5 * 5 = 25 L."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(40 / (3 + 5)) * 5",
+        "expected": "25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m093",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 6 workers can build a wall in 10 days, how many days will 4 workers take at the same rate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6.7"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "16"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Total work = 6 * 10 = 60 worker-days. With 4 workers, time = 60 / 4 = 15 days.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Total work = 6 * 10 = 60 worker-days.",
+        "With 4 workers, time = 60 / 4 = 15 days."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(6 * 10) / 4",
+        "expected": "15"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m094",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A table shows train departure times: Station A 08:15, Station B 08:42, Station C 09:18. How many minutes longer is the journey from B to C than from A to B?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "11"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "27"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "tbl_m091",
+            "type": "table",
+            "altText": "Timetable showing departures at Station A 08:15, Station B 08:42, and Station C 09:18.",
+            "title": "Morning Train Timetable",
+            "data": {
+              "headers": [
+                "Station",
+                "Departure"
+              ],
+              "rows": [
+                [
+                  "Station A",
+                  "08:15"
+                ],
+                [
+                  "Station B",
+                  "08:42"
+                ],
+                [
+                  "Station C",
+                  "09:18"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "A to B: 08:15 to 08:42 = 27 minutes. B to C: 08:42 to 09:18 = 36 minutes. Difference = 36 - 27 = 9 minutes.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "A to B: 08:15 to 08:42 = 27 minutes. B to C: 08:42 to 09:18 = 36 minutes.",
+        "Difference = 36 - 27 = 9 minutes."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(36) - (27)",
+        "expected": "9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m095",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a fruit basket, the ratio of apples to oranges is 2 : 3, and the ratio of oranges to pears is 4 : 5. If there are 45 pears, how many apples are in the basket?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "30"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Align the common term (oranges) to LCM(3, 4) = 12: apples : oranges : pears = 8 : 12 : 15. 15 parts = 45, so 1 part = 3, and apples = 8 * 3 = 24.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Align the common term (oranges) to LCM(3, 4) = 12: apples : oranges : pears = 8 : 12 : 15.",
+        "15 parts = 45, so 1 part = 3, and apples = 8 * 3 = 24."
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(45 / 15) * 8",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m096",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A car travels the first 120 km of a trip at 60 km/h and the next 120 km at 40 km/h. What is the car's average speed for the whole 240 km trip in km/h?",
+        "options": [
+          {
+            "id": "a",
+            "text": "48"
+          },
+          {
+            "id": "b",
+            "text": "45"
+          },
+          {
+            "id": "c",
+            "text": "50"
+          },
+          {
+            "id": "d",
+            "text": "52"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Time for first half = 120 / 60 = 2 h; second half = 120 / 40 = 3 h (total 5 h). Average speed = 240 / 5 = 48 km/h. Trap alert: do not simply average 60 and 40!",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Time for first half = 120 / 60 = 2 h; second half = 120 / 40 = 3 h (total 5 h).",
+        "Average speed = 240 / 5 = 48 km/h. Trap alert: do not simply average 60 and 40!"
+      ],
+      "reviewFocus": [
+        "Check ratio alignment and rate unit conversions."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "240 / (120 / 60 + 120 / 40)",
+        "expected": "48"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n085",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A machine stamps 15 labels every 20 seconds. How many labels does it stamp in 8 minutes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "240"
+          },
+          {
+            "id": "b",
+            "text": "300"
+          },
+          {
+            "id": "c",
+            "text": "360"
+          },
+          {
+            "id": "d",
+            "text": "450"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "In 1 minute (60 s) it stamps 15 * 3 = 45 labels. In 8 minutes: 45 * 8 = 360 labels.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "In 1 minute (60 s) it stamps 15 * 3 = 45 labels.",
+        "In 8 minutes: 45 * 8 = 360 labels."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "15 * 3 * 8",
+        "expected": "360"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n086",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A class of 28 students takes a survey: 16 like cricket, 15 like swimming, and 5 like both. How many students like NEITHER sport?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "4"
+          },
+          {
+            "id": "d",
+            "text": "2"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Students liking at least one = 16 + 15 - 5 = 26. Neither = 28 - 26 = 2 students.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Students liking at least one = 16 + 15 - 5 = 26.",
+        "Neither = 28 - 26 = 2 students."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "28 - (16 + 15 - 5)",
+        "expected": "2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n087",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A book costs $3 more than a magazine. Together, 2 books and 3 magazines cost $31. How much does one book cost in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "5"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Replace 2 books with 2 magazines + $6: 5 magazines + $6 = $31, so 5 magazines = $25 and 1 magazine = $5. One book costs 5 + 3 = $8.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Replace 2 books with 2 magazines + $6: 5 magazines + $6 = $31, so 5 magazines = $25 and 1 magazine = $5.",
+        "One book costs 5 + 3 = $8."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(31 - 2 * 3) / 5 + 3",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n088",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangular paddock 80 m by 50 m has fence posts placed every 10 m around its entire perimeter, including all four corners. How many posts are needed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "26"
+          },
+          {
+            "id": "c",
+            "text": "28"
+          },
+          {
+            "id": "d",
+            "text": "30"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Perimeter = 2 * (80 + 50) = 260 m. For a closed loop, number of posts equals number of 10 m intervals: 260 / 10 = 26 posts.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Perimeter = 2 * (80 + 50) = 260 m.",
+        "For a closed loop, number of posts equals number of 10 m intervals: 260 / 10 = 26 posts."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(2 * (80 + 50)) / 10",
+        "expected": "26"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n089",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Maya reads 18 pages a day and finishes a novel in 10 days. If she had read 15 pages a day instead, how many days would she have taken?",
+        "options": [
+          {
+            "id": "a",
+            "text": "11"
+          },
+          {
+            "id": "b",
+            "text": "13"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "15"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Total pages = 18 * 10 = 180 pages. At 15 pages/day: 180 / 15 = 12 days.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Total pages = 18 * 10 = 180 pages.",
+        "At 15 pages/day: 180 / 15 = 12 days."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(18 * 10) / 15",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n090",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An empty crate weighs 2.5 kg. When 16 identical cans are placed inside, the total mass is 10.5 kg. How many grams does one can weigh?",
+        "options": [
+          {
+            "id": "a",
+            "text": "400"
+          },
+          {
+            "id": "b",
+            "text": "450"
+          },
+          {
+            "id": "c",
+            "text": "650"
+          },
+          {
+            "id": "d",
+            "text": "500"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Mass of 16 cans = 10.5 - 2.5 = 8 kg = 8000 g. One can = 8000 / 16 = 500 g.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Mass of 16 cans = 10.5 - 2.5 = 8 kg = 8000 g.",
+        "One can = 8000 / 16 = 500 g."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "((10.5 - 2.5) / 16) * 1000",
+        "expected": "500"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n091",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two runners start from the same point on a 400 m circular track and run in opposite directions at 6 m/s and 4 m/s. After how many seconds do they meet for the first time?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "45"
+          },
+          {
+            "id": "d",
+            "text": "50"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Running in opposite directions, their combined closing speed is 6 + 4 = 10 m/s. Time to cover 400 m = 400 / 10 = 40 seconds.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Running in opposite directions, their combined closing speed is 6 + 4 = 10 m/s.",
+        "Time to cover 400 m = 400 / 10 = 40 seconds."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "400 / (6 + 4)",
+        "expected": "40"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n092",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A ferry travels 24 km downstream with a 2 km/h current in 2 hours. How many hours will the return trip upstream take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2.5"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "3.5"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Downstream speed = 24 / 2 = 12 km/h, so the ferry's still-water speed is 12 - 2 = 10 km/h. Upstream speed = 10 - 2 = 8 km/h, so return time = 24 / 8 = 3 hours.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Downstream speed = 24 / 2 = 12 km/h, so the ferry's still-water speed is 12 - 2 = 10 km/h.",
+        "Upstream speed = 10 - 2 = 8 km/h, so return time = 24 / 8 = 3 hours."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "24 / ((24 / 2 - 2) - 2)",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n093",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At a sale, buying 3 shirts gets you a 4th shirt for half price. If each shirt is normally $28, how much do 8 shirts cost altogether in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "182"
+          },
+          {
+            "id": "b",
+            "text": "210"
+          },
+          {
+            "id": "c",
+            "text": "196"
+          },
+          {
+            "id": "d",
+            "text": "224"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Each bundle of 4 shirts costs 3 * 28 + 14 = 84 + 14 = $98. 8 shirts = 2 bundles = 2 * 98 = $196.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Each bundle of 4 shirts costs 3 * 28 + 14 = 84 + 14 = $98.",
+        "8 shirts = 2 bundles = 2 * 98 = $196."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 * (3 * 28 + 14)",
+        "expected": "196"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n094",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A tank is emptied by Pump A in 10 minutes or by Pump B in 15 minutes. If both pumps run together for 4 minutes, what fraction of the tank remains full?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/5"
+          },
+          {
+            "id": "b",
+            "text": "2/5"
+          },
+          {
+            "id": "c",
+            "text": "1/2"
+          },
+          {
+            "id": "d",
+            "text": "1/3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Combined rate = 1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6 per minute. In 4 minutes they empty 4/6 = 2/3, leaving 1/3 of the tank.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Combined rate = 1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6 per minute.",
+        "In 4 minutes they empty 4/6 = 2/3, leaving 1/3 of the tank."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "1 - 4 * (1/10 + 1/15)",
+        "expected": "1/3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n095",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A watch gains 4 minutes every 12 hours. If it is set correctly at 8:00 am on Monday, how many minutes fast will it be at 2:00 pm on Wednesday?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "14"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "20"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "From Mon 8:00 am to Wed 8:00 am is 48 hours, plus 6 hours to 2:00 pm = 54 hours. 54 / 12 = 4.5 intervals; 4.5 * 4 = 18 minutes fast.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "From Mon 8:00 am to Wed 8:00 am is 48 hours, plus 6 hours to 2:00 pm = 54 hours.",
+        "54 / 12 = 4.5 intervals; 4.5 * 4 = 18 minutes fast."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(54 / 12) * 4",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n096",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a 200 m race, at the exact moment Zara crosses the finish line, Liam is 12 m behind Zara and Noah is 15 m behind Liam. How many metres has Noah run so far?",
+        "options": [
+          {
+            "id": "a",
+            "text": "170"
+          },
+          {
+            "id": "b",
+            "text": "173"
+          },
+          {
+            "id": "c",
+            "text": "175"
+          },
+          {
+            "id": "d",
+            "text": "185"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Liam is at 200 - 12 = 188 m. Noah is 15 m behind Liam: 188 - 15 = 173 m.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Liam is at 200 - 12 = 188 m.",
+        "Noah is 15 m behind Liam: 188 - 15 = 173 m."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "200 - 12 - 15",
+        "expected": "173"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v085",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which single word can follow SUN and precede POT to form two compound words: SUN___ and ___POT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LIGHT"
+          },
+          {
+            "id": "b",
+            "text": "FLOWER"
+          },
+          {
+            "id": "c",
+            "text": "BURN"
+          },
+          {
+            "id": "d",
+            "text": "DAY"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "SUN + FLOWER = SUNFLOWER. FLOWER + POT = FLOWERPOT.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "SUN + FLOWER = SUNFLOWER.",
+        "FLOWER + POT = FLOWERPOT."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v086",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Choose the word that best completes the pair: (COLD, FREEZING) → (WARM, [ ? ]).",
+        "options": [
+          {
+            "id": "a",
+            "text": "COOL"
+          },
+          {
+            "id": "b",
+            "text": "MILD"
+          },
+          {
+            "id": "c",
+            "text": "SCORCHING"
+          },
+          {
+            "id": "d",
+            "text": "TEPID"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Freezing is an extreme degree of cold. Scorching is an extreme degree of warm/hot.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 50,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Freezing is an extreme degree of cold.",
+        "Scorching is an extreme degree of warm/hot."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v087",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which single word can follow LIGHT and precede KEEPER to form two standard compound words: LIGHT___ and ___KEEPER?",
+        "options": [
+          {
+            "id": "a",
+            "text": "WEIGHT"
+          },
+          {
+            "id": "b",
+            "text": "BULB"
+          },
+          {
+            "id": "c",
+            "text": "TIME"
+          },
+          {
+            "id": "d",
+            "text": "HOUSE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "LIGHT + HOUSE = LIGHTHOUSE. HOUSE + KEEPER = HOUSEKEEPER.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "LIGHT + HOUSE = LIGHTHOUSE.",
+        "HOUSE + KEEPER = HOUSEKEEPER."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v088",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Rearrange all five letters of 'EARTH' to form another common English word.",
+        "options": [
+          {
+            "id": "a",
+            "text": "HEART"
+          },
+          {
+            "id": "b",
+            "text": "HEARD"
+          },
+          {
+            "id": "c",
+            "text": "THREAD"
+          },
+          {
+            "id": "d",
+            "text": "REACH"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "EARTH has letters E, A, R, T, H. Only HEART uses those exact five letters.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "EARTH has letters E, A, R, T, H.",
+        "Only HEART uses those exact five letters."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v089",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each pair, the second word is formed by removing one letter from the first: (PLATE, LATE), (SMART, MART), (CHAIR, ?).",
+        "options": [
+          {
+            "id": "a",
+            "text": "CARE"
+          },
+          {
+            "id": "b",
+            "text": "HAIR"
+          },
+          {
+            "id": "c",
+            "text": "CHAR"
+          },
+          {
+            "id": "d",
+            "text": "CHAI"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Removing the first letter of PLATE gives LATE; removing S from SMART gives MART. Removing C from CHAIR gives HAIR.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Removing the first letter of PLATE gives LATE; removing S from SMART gives MART.",
+        "Removing C from CHAIR gives HAIR."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v090",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which single word can follow KEY, SKATE and SURF to form three compound words?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LOCK"
+          },
+          {
+            "id": "b",
+            "text": "PARK"
+          },
+          {
+            "id": "c",
+            "text": "BOARD"
+          },
+          {
+            "id": "d",
+            "text": "WAVE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "KEY + BOARD = KEYBOARD, SKATE + BOARD = SKATEBOARD, SURF + BOARD = SURFBOARD. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "KEY + BOARD = KEYBOARD, SKATE + BOARD = SKATEBOARD, SURF + BOARD = SURFBOARD.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v091",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A 4-letter colour is hidden across consecutive letters of two adjacent words in: 'The big old oak tree stood tall.' Which colour is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "BLUE"
+          },
+          {
+            "id": "b",
+            "text": "GREY"
+          },
+          {
+            "id": "c",
+            "text": "PINK"
+          },
+          {
+            "id": "d",
+            "text": "GOLD"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Take the last letter of 'big' and the three letters of 'old': bi[g old] → GOLD. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Take the last letter of 'big' and the three letters of 'old': bi[g old] → GOLD.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v092",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word can be added to the FRONT of BOTH 'LINE' and 'LAND' to form two compound words?",
+        "options": [
+          {
+            "id": "a",
+            "text": "MAIN"
+          },
+          {
+            "id": "b",
+            "text": "SIDE"
+          },
+          {
+            "id": "c",
+            "text": "HIGH"
+          },
+          {
+            "id": "d",
+            "text": "BACK"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "MAIN + LINE = MAINLINE and MAIN + LAND = MAINLAND. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "MAIN + LINE = MAINLINE and MAIN + LAND = MAINLAND.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v093",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the relationship between 'BRAKE' and 'BREAK'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Antonyms"
+          },
+          {
+            "id": "b",
+            "text": "Homophones (same sound, different spelling and meaning)"
+          },
+          {
+            "id": "c",
+            "text": "Synonyms"
+          },
+          {
+            "id": "d",
+            "text": "Palindromes"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Brake and break sound identical when spoken aloud. They have different spellings and meanings, making them homophones.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Brake and break sound identical when spoken aloud.",
+        "They have different spellings and meanings, making them homophones."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v094",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Move one letter from 'BREAD' to the front of 'EAT' so that BOTH become new valid English words. Which letter moves?",
+        "options": [
+          {
+            "id": "a",
+            "text": "R"
+          },
+          {
+            "id": "b",
+            "text": "E"
+          },
+          {
+            "id": "c",
+            "text": "B"
+          },
+          {
+            "id": "d",
+            "text": "D"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Removing B from BREAD leaves READ. Placing B in front of EAT forms BEAT.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Removing B from BREAD leaves READ.",
+        "Placing B in front of EAT forms BEAT."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v095",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which single word can precede WORK, BOOK and ROOM to form three standard compound words?",
+        "options": [
+          {
+            "id": "a",
+            "text": "HOME"
+          },
+          {
+            "id": "b",
+            "text": "BED"
+          },
+          {
+            "id": "c",
+            "text": "TIME"
+          },
+          {
+            "id": "d",
+            "text": "SCHOOL"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "SCHOOL + WORK = SCHOOLWORK, SCHOOL + BOOK = SCHOOLBOOK, and SCHOOL + ROOM = SCHOOLROOM. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "SCHOOL + WORK = SCHOOLWORK, SCHOOL + BOOK = SCHOOLBOOK, and SCHOOL + ROOM = SCHOOLROOM.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v096",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a word-ladder, change one letter at a time to turn COLD into WARM: COLD → CORD → CARD → WARD → WARM. How many single-letter changes (steps) does this take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "4"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Count the arrows: (1) COLD→CORD, (2) CORD→CARD, (3) CARD→WARD, (4) WARD→WARM. Four single-letter changes are required.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Count the arrows: (1) COLD→CORD, (2) CORD→CARD, (3) CARD→WARD, (4) WARD→WARM.",
+        "Four single-letter changes are required."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r071",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How did Year 6 students help fund or support the observatory project?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They built the rotating dome from brick."
+          },
+          {
+            "id": "b",
+            "text": "They wrote software for space probes."
+          },
+          {
+            "id": "c",
+            "text": "They sold hundreds of trays of seedlings."
+          },
+          {
+            "id": "d",
+            "text": "They cleared the disused water tank alone."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The speaker thanks 'Year 6 students who sold hundreds of trays of seedlings.' Exam technique: verify 'They sold hundreds of trays of seedlings.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Opening Remarks: The Elmwood Community Observatory",
+          "body": "Students, parents and neighbours, welcome to the opening night of our community observatory. Five years ago, this hilltop held nothing more than a disused water tank and a patch of kikuyu grass. Today, thanks to local bricklayers, retired engineers, and Year 6 students who sold hundreds of trays of seedlings, a rotating dome stands ready to welcome every curious mind in our postcode. Some asked why a suburban school should invest in a telescope when dazzling images from space probes are freely available online. My answer is simple: seeing Saturn's rings on a screen is impressive, but seeing that pale golden ring-system live through an eyepiece—knowing that the light striking your eye left Saturn more than an hour ago—changes how you feel about your place in the universe. Tonight, as the dome opens to the southern sky, I invite every student here to ask a question that has no easy answer.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The speaker thanks 'Year 6 students who sold hundreds of trays of seedlings.'",
+        "Exam technique: verify 'They sold hundreds of trays of seedlings.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r072",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the speaker respond to people who say space images are already available online?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Online space images are usually fake or blurry."
+          },
+          {
+            "id": "b",
+            "text": "Telescopes are cheaper than home computers."
+          },
+          {
+            "id": "c",
+            "text": "The observatory will also broadcast television shows."
+          },
+          {
+            "id": "d",
+            "text": "Viewing a planet live through an eyepiece creates a personal connection that a screen cannot match."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The speaker contrasts seeing Saturn on a screen with seeing live light that left Saturn over an hour ago. Exam technique: verify 'Viewing a planet live through an eyepiece creates a personal connection that a screen cannot match.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-argument-evaluation"
+        },
+        "stimulus": {
+          "title": "Opening Remarks: The Elmwood Community Observatory",
+          "body": "Students, parents and neighbours, welcome to the opening night of our community observatory. Five years ago, this hilltop held nothing more than a disused water tank and a patch of kikuyu grass. Today, thanks to local bricklayers, retired engineers, and Year 6 students who sold hundreds of trays of seedlings, a rotating dome stands ready to welcome every curious mind in our postcode. Some asked why a suburban school should invest in a telescope when dazzling images from space probes are freely available online. My answer is simple: seeing Saturn's rings on a screen is impressive, but seeing that pale golden ring-system live through an eyepiece—knowing that the light striking your eye left Saturn more than an hour ago—changes how you feel about your place in the universe. Tonight, as the dome opens to the southern sky, I invite every student here to ask a question that has no easy answer.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The speaker contrasts seeing Saturn on a screen with seeing live light that left Saturn over an hour ago.",
+        "Exam technique: verify 'Viewing a planet live through an eyepiece creates a personal connection that a screen cannot match.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r073",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does 'disused' mean in 'a disused water tank'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No longer in use"
+          },
+          {
+            "id": "b",
+            "text": "Recently painted"
+          },
+          {
+            "id": "c",
+            "text": "Overflowing with rainwater"
+          },
+          {
+            "id": "d",
+            "text": "Protected as a monument"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "'Disused' means no longer used. Exam technique: verify 'No longer in use' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "Opening Remarks: The Elmwood Community Observatory",
+          "body": "Students, parents and neighbours, welcome to the opening night of our community observatory. Five years ago, this hilltop held nothing more than a disused water tank and a patch of kikuyu grass. Today, thanks to local bricklayers, retired engineers, and Year 6 students who sold hundreds of trays of seedlings, a rotating dome stands ready to welcome every curious mind in our postcode. Some asked why a suburban school should invest in a telescope when dazzling images from space probes are freely available online. My answer is simple: seeing Saturn's rings on a screen is impressive, but seeing that pale golden ring-system live through an eyepiece—knowing that the light striking your eye left Saturn more than an hour ago—changes how you feel about your place in the universe. Tonight, as the dome opens to the southern sky, I invite every student here to ask a question that has no easy answer.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Disused' means no longer used.",
+        "Exam technique: verify 'No longer in use' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r074",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the speaker mention 'local bricklayers, retired engineers, and Year 6 students' together?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To list the only three jobs available in Elmwood."
+          },
+          {
+            "id": "b",
+            "text": "To emphasise that the observatory was a shared achievement across the whole community."
+          },
+          {
+            "id": "c",
+            "text": "To argue that students did less work than engineers."
+          },
+          {
+            "id": "d",
+            "text": "To explain how telescopes are manufactured."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Grouping tradespeople, retirees and students highlights collective community effort. Exam technique: verify 'To emphasise that the observatory was a shared achievement across the whole community.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "Opening Remarks: The Elmwood Community Observatory",
+          "body": "Students, parents and neighbours, welcome to the opening night of our community observatory. Five years ago, this hilltop held nothing more than a disused water tank and a patch of kikuyu grass. Today, thanks to local bricklayers, retired engineers, and Year 6 students who sold hundreds of trays of seedlings, a rotating dome stands ready to welcome every curious mind in our postcode. Some asked why a suburban school should invest in a telescope when dazzling images from space probes are freely available online. My answer is simple: seeing Saturn's rings on a screen is impressive, but seeing that pale golden ring-system live through an eyepiece—knowing that the light striking your eye left Saturn more than an hour ago—changes how you feel about your place in the universe. Tonight, as the dome opens to the southern sky, I invite every student here to ask a question that has no easy answer.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Grouping tradespeople, retirees and students highlights collective community effort.",
+        "Exam technique: verify 'To emphasise that the observatory was a shared achievement across the whole community.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r075",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the effect of the speaker's final invitation to 'ask a question that has no easy answer'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It warns students that astronomy exams will be very difficult."
+          },
+          {
+            "id": "b",
+            "text": "It admits the telescope is broken."
+          },
+          {
+            "id": "c",
+            "text": "It encourages wonder, curiosity and deeper scientific thinking."
+          },
+          {
+            "id": "d",
+            "text": "It asks the audience to remain silent during the opening."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "It frames the observatory as a launchpad for curiosity and lifelong inquiry. Exam technique: verify 'It encourages wonder, curiosity and deeper scientific thinking.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-tone-analysis"
+        },
+        "stimulus": {
+          "title": "Opening Remarks: The Elmwood Community Observatory",
+          "body": "Students, parents and neighbours, welcome to the opening night of our community observatory. Five years ago, this hilltop held nothing more than a disused water tank and a patch of kikuyu grass. Today, thanks to local bricklayers, retired engineers, and Year 6 students who sold hundreds of trays of seedlings, a rotating dome stands ready to welcome every curious mind in our postcode. Some asked why a suburban school should invest in a telescope when dazzling images from space probes are freely available online. My answer is simple: seeing Saturn's rings on a screen is impressive, but seeing that pale golden ring-system live through an eyepiece—knowing that the light striking your eye left Saturn more than an hour ago—changes how you feel about your place in the universe. Tonight, as the dome opens to the southern sky, I invite every student here to ask a question that has no easy answer.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "It frames the observatory as a launchpad for curiosity and lifelong inquiry.",
+        "Exam technique: verify 'It encourages wonder, curiosity and deeper scientific thinking.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r076",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What unintended harm did levee banks cause to billabongs and river red gums?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They filled the billabongs with saltwater."
+          },
+          {
+            "id": "b",
+            "text": "They caused native fish to grow too large."
+          },
+          {
+            "id": "c",
+            "text": "They destroyed all irrigation farms upstream."
+          },
+          {
+            "id": "d",
+            "text": "They starved them of the periodic flooding they depended on."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Levee banks 'unintentionally starved hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on.' Exam technique: verify 'They starved them of the periodic flooding they depended on.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 135,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Bringing Back the Billabong: Restoring the Murray Wetlands",
+          "body": "For decades, engineers treated river floodplains mainly as channels to move irrigation water quickly downstream. Levee banks kept seasonal floods off low-lying paddocks, unintentionally starving hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on. Over the past ten years, however, ecologists and local landholders along the Murray River have tested a quieter partnership. By installing small, adjustable regulator gates in old earthen banks, environmental water managers can mimic natural spring floods, guiding water into dried-out wetlands for a few weeks before letting it drain slowly back to the main river. The response has been swift. Within months of a single managed watering, dormant frog species emerge from cracked clay, waterbirds return to nest in inundated lignum bushes, and young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Levee banks 'unintentionally starved hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on.'",
+        "Exam technique: verify 'They starved them of the periodic flooding they depended on.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r077",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How do adjustable regulator gates help restore the wetlands?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They let managers mimic natural spring floods and then drain the water slowly back."
+          },
+          {
+            "id": "b",
+            "text": "They block all water from ever reaching the Murray River."
+          },
+          {
+            "id": "c",
+            "text": "They pump underground water permanently onto roads."
+          },
+          {
+            "id": "d",
+            "text": "They filter mud out of irrigation channels."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The gates 'mimic natural spring floods, guiding water into dried-out wetlands ... before letting it drain slowly back.' Exam technique: verify 'They let managers mimic natural spring floods and then drain the water slowly back.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-cause-effect"
+        },
+        "stimulus": {
+          "title": "Bringing Back the Billabong: Restoring the Murray Wetlands",
+          "body": "For decades, engineers treated river floodplains mainly as channels to move irrigation water quickly downstream. Levee banks kept seasonal floods off low-lying paddocks, unintentionally starving hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on. Over the past ten years, however, ecologists and local landholders along the Murray River have tested a quieter partnership. By installing small, adjustable regulator gates in old earthen banks, environmental water managers can mimic natural spring floods, guiding water into dried-out wetlands for a few weeks before letting it drain slowly back to the main river. The response has been swift. Within months of a single managed watering, dormant frog species emerge from cracked clay, waterbirds return to nest in inundated lignum bushes, and young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The gates 'mimic natural spring floods, guiding water into dried-out wetlands ... before letting it drain slowly back.'",
+        "Exam technique: verify 'They let managers mimic natural spring floods and then drain the water slowly back.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r078",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the final sentence, what does 'dormant' mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Extinct across the entire continent"
+          },
+          {
+            "id": "b",
+            "text": "Temporarily inactive or asleep until conditions improve"
+          },
+          {
+            "id": "c",
+            "text": "Noisy during winter nights"
+          },
+          {
+            "id": "d",
+            "text": "Migrating thousands of kilometres"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Dormant frogs survive dry periods in cracked clay and emerge once water returns. Exam technique: verify 'Temporarily inactive or asleep until conditions improve' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "Bringing Back the Billabong: Restoring the Murray Wetlands",
+          "body": "For decades, engineers treated river floodplains mainly as channels to move irrigation water quickly downstream. Levee banks kept seasonal floods off low-lying paddocks, unintentionally starving hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on. Over the past ten years, however, ecologists and local landholders along the Murray River have tested a quieter partnership. By installing small, adjustable regulator gates in old earthen banks, environmental water managers can mimic natural spring floods, guiding water into dried-out wetlands for a few weeks before letting it drain slowly back to the main river. The response has been swift. Within months of a single managed watering, dormant frog species emerge from cracked clay, waterbirds return to nest in inundated lignum bushes, and young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Dormant frogs survive dry periods in cracked clay and emerge once water returns.",
+        "Exam technique: verify 'Temporarily inactive or asleep until conditions improve' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r079",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What shift in thinking does the article describe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Replacing all farming along the Murray with frog sanctuaries"
+          },
+          {
+            "id": "b",
+            "text": "Abandoning all dams and gates in Australia"
+          },
+          {
+            "id": "c",
+            "text": "Moving from strictly controlling rivers for fast water transport to working with natural flood cycles."
+          },
+          {
+            "id": "d",
+            "text": "Proving that waterbirds no longer need wetlands to nest"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The article contrasts older engineering focused only on moving water downstream with modern managed environmental watering. Exam technique: verify 'Moving from strictly controlling rivers for fast water transport to working with natural flood cycles.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "Bringing Back the Billabong: Restoring the Murray Wetlands",
+          "body": "For decades, engineers treated river floodplains mainly as channels to move irrigation water quickly downstream. Levee banks kept seasonal floods off low-lying paddocks, unintentionally starving hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on. Over the past ten years, however, ecologists and local landholders along the Murray River have tested a quieter partnership. By installing small, adjustable regulator gates in old earthen banks, environmental water managers can mimic natural spring floods, guiding water into dried-out wetlands for a few weeks before letting it drain slowly back to the main river. The response has been swift. Within months of a single managed watering, dormant frog species emerge from cracked clay, waterbirds return to nest in inundated lignum bushes, and young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The article contrasts older engineering focused only on moving water downstream with modern managed environmental watering.",
+        "Exam technique: verify 'Moving from strictly controlling rivers for fast water transport to working with natural flood cycles.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r080",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why are the watered backwaters especially valuable for young native fish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Predatory birds cannot see into shallow wetlands."
+          },
+          {
+            "id": "b",
+            "text": "The water in backwaters is completely frozen in spring."
+          },
+          {
+            "id": "c",
+            "text": "Young fish cannot swim in freshwater rivers."
+          },
+          {
+            "id": "d",
+            "text": "They offer warm, food-rich shelter away from the faster main channel."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The text notes 'young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.' Exam technique: verify 'They offer warm, food-rich shelter away from the faster main channel.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "Bringing Back the Billabong: Restoring the Murray Wetlands",
+          "body": "For decades, engineers treated river floodplains mainly as channels to move irrigation water quickly downstream. Levee banks kept seasonal floods off low-lying paddocks, unintentionally starving hundreds of billabongs and river red gum forests of the periodic soaking they evolved to depend on. Over the past ten years, however, ecologists and local landholders along the Murray River have tested a quieter partnership. By installing small, adjustable regulator gates in old earthen banks, environmental water managers can mimic natural spring floods, guiding water into dried-out wetlands for a few weeks before letting it drain slowly back to the main river. The response has been swift. Within months of a single managed watering, dormant frog species emerge from cracked clay, waterbirds return to nest in inundated lignum bushes, and young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The text notes 'young native fish shelter in the warm, food-rich backwaters before rejoining the main channel.'",
+        "Exam technique: verify 'They offer warm, food-rich shelter away from the faster main channel.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w029",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How Bridges Carry Weight: Write a clear, engaging explanation for upper-primary readers comparing how beam, arch and suspension bridges distribute heavy loads.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: informative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Explain tension and compression in accessible Australian English. Use everyday analogies to clarify engineering ideas.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing informative",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "informative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: informative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Explain tension and compression in accessible Australian English.",
+        "Use everyday analogies to clarify engineering ideas."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained informative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w030",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Is Competition Helpful or Harmful in Primary School?: Debate whether academic and sporting rankings motivate primary students or create unnecessary pressure. Take a clear stance and defend it rigorously.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Distinguish healthy personal challenge from destructive comparison. Support claims with reasoned analysis.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Distinguish healthy personal challenge from destructive comparison.",
+        "Support claims with reasoned analysis."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w031",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Keeper of Lost Sounds: In a quiet alley stands a workshop that bottles vanishing sounds—the clack of old train tickets, the hum of a streetcar bell. Write a story about a visitor who brings a sound to be saved.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Focus on emotional resonance behind the chosen sound. Keep prose crisp and evocative.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing creative",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "creative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Focus on emotional resonance behind the chosen sound.",
+        "Keep prose crisp and evocative."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained creative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w032",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why Privacy Matters in a Digital Age: When apps and websites offer free services in exchange for personal data, why should young citizens care about digital privacy? Write a structured expository essay.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Explain data trails, targeted influence and long-term reputation clearly. Maintain an objective, analytical tone.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Explain data trails, targeted influence and long-term reputation clearly.",
+        "Maintain an objective, analytical tone."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    }
+  ]
+}

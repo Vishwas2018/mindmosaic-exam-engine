@@ -1,0 +1,758 @@
+{
+  "batchId": "vihaan-agy-03",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "publicationEligible": false,
+  "sourceFile": "batch-03.draft.json",
+  "sourceHash": "a128d50f8bd5bc9c8d7190486ad24eaa272a179305a168b836da2e06332d462f",
+  "itemCount": 50,
+  "reservedForMockCount": 0,
+  "visualItemCount": 13,
+  "automatedPassed": 50,
+  "duplicates": [],
+  "passed": true,
+  "subjectCounts": {
+    "numeracy": 12,
+    "numerical_reasoning": 12,
+    "reading": 10,
+    "verbal_reasoning": 12,
+    "writing": 4
+  },
+  "difficultyCounts": {
+    "challenging": 11,
+    "easy": 11,
+    "medium": 28
+  },
+  "corpusSnapshotHash": "e7cc782bcec756a3718cbce5fc8bfc0600d0712a4319bf8aa774ebde002f75d6",
+  "checks": [
+    {
+      "id": "vihaan-agy-m025",
+      "contentHash": "9668db8faa1b8913b6d0dbafe87c73bcd629b6ab13925092a79d58ff47e425ad",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 27,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m026",
+      "contentHash": "4dcab71e3e42783c5a61a2f18c9352ba2edc5469ff9cd44fe9f56ebb50e81da8",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 3,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m027",
+      "contentHash": "31b4551e9f08a54f69a2bad4f28e5ab4577c2b87a82040454c693ac358decff7",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 50,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m028",
+      "contentHash": "84bfbbad5458bb77540142c40927fb2fc92e2cb0275be5676b26ba168249180e",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 10,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m029",
+      "contentHash": "58e50196d82c581527fe308c81492626b3d60948cadeed561a7a46935963e32f",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 19,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m030",
+      "contentHash": "28ea16540f553a63c7da2063a592c3922953fe2b68a59cc67d03ec87395f3e82",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 11,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m031",
+      "contentHash": "ac601eaf527f1a9b92b75e3072f5fb4e09ada48ef8d9ac60124bc2f9bdf9fe04",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 28,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m032",
+      "contentHash": "a2fcdf1b8584e41aba4dea1ff17e60f55e95aa8638e60641e5ab2b50f729b3b8",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 9,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m033",
+      "contentHash": "c01fdda03cc116bda28b0c0686b81b3e214b77045347953357bc806c675e18de",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 3,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m034",
+      "contentHash": "5d096a2118bc0456b21245c140ecde3ed0fcb3df2c709c5c67da0527b463f7c3",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 720,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m035",
+      "contentHash": "21fa0c5fb19876629e1306fefda057517b48d7069c8fe1697a7e56668a53b5e0",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 7,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-m036",
+      "contentHash": "b8ffdd441e964287a53927f502c0c65901916129bf7a2882dfc9714465b5a636",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": -3,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n025",
+      "contentHash": "ed9b49388589c27471fd34094ea3bfc4cca48aea33c5dcd00542c43d792bfb8e",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 13,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n026",
+      "contentHash": "0c009acbd7196d5c749f6aaa912544621cfe82ed330621af56c40375f0d0927d",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 56,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n027",
+      "contentHash": "4dbd3e96987a1d34ae8a9614122bb2253dd67cf2f6b7fdb97e637b6f926c7247",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 17,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n028",
+      "contentHash": "a7a94cd86053d1889109c57a448fe078bb1d216a649491647c9e8ee13db50581",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 29,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n029",
+      "contentHash": "a773c2b11513a26024f2a52f6dec43046b4db15ddcf02924337ebaa72a8d8160",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 54,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n030",
+      "contentHash": "faf67fd0487d8f07783ec53dd2aee0e845feb19407919b0f9f839ee4c8685d84",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 28,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n031",
+      "contentHash": "09f3dfdeed86a6e782ac5dd2a602f3cc4a9af5e4f204848d9f5cdde4a0b1fd0a",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 9,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n032",
+      "contentHash": "510381e28a70dc6235d4e53f07b70125d4c6bcced3f208018206969b118deb5e",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 32,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n033",
+      "contentHash": "f885803a166fb64bb8c8c0dd32d2e3248db32bac7f7e6d662dc8b08ab70c6ec4",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 22,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n034",
+      "contentHash": "22fff77bef95e3d2f05b11917ccbbe05d00c25e025abd78a7804f2b47897527b",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 7,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n035",
+      "contentHash": "97f1b7d72b1eb2e221f0e8ea94d045e9baeed424a0c117d16cef8f6bfa8a2521",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 12,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-n036",
+      "contentHash": "c56c50513f821f15c1c7077ca98a464c174074365b14f5ed16f50a89ce07f398",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "numeric_stem_grounding_requires_blind_human_solution"
+      ],
+      "arithmetic": {
+        "method": "independent_arithmetic_consistency",
+        "value": 18,
+        "passed": true
+      },
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v025",
+      "contentHash": "e8c9cfecb171a32b4147eb58e8c4d255e344b060b4b4823dedb8a766de08ce34",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v026",
+      "contentHash": "e3e965a65fdec0d9a9e7f48987cca272f261a4923ddd0a99f8e7dfac0bccf942",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v027",
+      "contentHash": "ac5b1deaa252189a69eda7e946e7726cadae31532456426d170d93908dc27019",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v028",
+      "contentHash": "4b743547bc597bc9a9c86639dba50273f873c3494f4e4a7869b84663c334ce19",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v029",
+      "contentHash": "30c4d41944ce9c730b8a3763ccf08539fbc81c99c7635a0580923c9065d1bb58",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v030",
+      "contentHash": "7f95a8ac068aa4f7116555c8b23fb5475e9a2e63e984be302253b354d35d95f4",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v031",
+      "contentHash": "0c7dd19e7c1778dea942dad2224b92e535a188335788c2c535d6cce167c902ea",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v032",
+      "contentHash": "c378bacc5ce3458d168c282cfe8059d212af71228074f6b1e833557fe3b43e10",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v033",
+      "contentHash": "f1e1bcfb63755aa11951c17c781296e1cacaa2ac7ec82c1890d797ef793d7662",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v034",
+      "contentHash": "bde9f00c3082a3cf1bb539b673fe7cc4e3e68b15cfa481d1e8bdc54c4feb7836",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v035",
+      "contentHash": "902b9ad6a618797235adaa809c0ff696bf448a1cb0b575adb87740a41cf9f456",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-v036",
+      "contentHash": "535692d16a9fc04a89ffd1ffd6ad45aa906f6ec6d73b1e35e6facc18a0387331",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r021",
+      "contentHash": "49ffa7214f57d00712b40c3406807f091a952f1db888487c25304e017efe691c",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r022",
+      "contentHash": "95c3ccd94582e54e419e76a8779623e558b785718fb7ed2a17aff03870e138c8",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r023",
+      "contentHash": "19d24b745cdcaf59c8b37c848f0a2ad2fa865c556e134079fb739357e38e1b53",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r024",
+      "contentHash": "f182a0875eeada03f8d604da7e66d3df16458fb036b1eb2d57da204980cb7491",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r025",
+      "contentHash": "7c5cd5d84c8870bdb39775f240fbbe7001b38e5f245041e519d4a3747f441a49",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r026",
+      "contentHash": "ff302dd4ae505ebe652f40cd4fe32de532ca6762e2a543d868c3dd3cc64e60c5",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r027",
+      "contentHash": "b8fda67c44ff0b0edbfd022849419d99b36c15626e105c50ec737341f3c1c5c1",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r028",
+      "contentHash": "ad523eb10b2536ec50bcbd3d9e34643902a91d75f138f6d56b65c7a5bdf83528",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r029",
+      "contentHash": "8ef84b971b0658664f28c96be22d47a2ec02d2c5ded34f79c504fd72e304f9c7",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-r030",
+      "contentHash": "9c6997ba9ecec77c74ebdd6ea34677fa6a29bf44a74377b3943cfd10a92ae836",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-w009",
+      "contentHash": "746a9822024859fed39fc3fe4ad4449f23cc984c0afdc93ebc0d34acb36255a1",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "human_rubric_assessment_required",
+        "writing_taxonomy_onboarding_required_before_publication"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-w010",
+      "contentHash": "879c09850c5b048fb3ca17dbbab176259873879582326dc31b0db7bb3068e8cb",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "human_rubric_assessment_required",
+        "writing_taxonomy_onboarding_required_before_publication"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-w011",
+      "contentHash": "c829781c3d6ca1e3ef8bc120ff04a7074216afd16f77dd71dfb31721e5f54c73",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "human_rubric_assessment_required",
+        "writing_taxonomy_onboarding_required_before_publication"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    },
+    {
+      "id": "vihaan-agy-w012",
+      "contentHash": "bf4e22501b8539ad1e2813d1205191b83d68dbd2fa1b994692de0faec5476238",
+      "automated": "PASS",
+      "failures": [],
+      "flags": [
+        "human_approval_required",
+        "human_originality_age_difficulty_and_semantic_review_required",
+        "human_rubric_assessment_required",
+        "writing_taxonomy_onboarding_required_before_publication"
+      ],
+      "arithmetic": null,
+      "publicationEligible": false
+    }
+  ]
+}

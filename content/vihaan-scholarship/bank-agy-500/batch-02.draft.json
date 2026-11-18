@@ -1,0 +1,3076 @@
+{
+  "batchId": "vihaan-agy-02",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m013",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cuboid has a square base of side 6 cm and a total surface area of 192 cm². What is its height in centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The two square bases have combined area 2 * 36 = 72 cm². The four rectangular side faces share 192 - 72 = 120 cm², so each face has area 30 cm². Height = 30 / 6 = 5 cm.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "The two square bases have combined area 2 * 36 = 72 cm².",
+        "The four rectangular side faces share 192 - 72 = 120 cm², so each face has area 30 cm². Height = 30 / 6 = 5 cm."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(192 - 2 * 6 * 6) / (4 * 6)",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m014",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An isosceles triangle has a perimeter of 46 cm. Its unequal base is 8 cm shorter than each of the two equal sides. What is the length of the base in centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "14"
+          },
+          {
+            "id": "d",
+            "text": "18"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Let each equal side be s, so the base is s - 8. Then s + s + (s - 8) = 46. 3s = 54, so s = 18 cm, and the base is 18 - 8 = 10 cm.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "Let each equal side be s, so the base is s - 8. Then s + s + (s - 8) = 46.",
+        "3s = 54, so s = 18 cm, and the base is 18 - 8 = 10 cm."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(46 + 8) / 3 - 8",
+        "expected": "10"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m015",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A 4 cm by 4 cm by 4 cm cube is painted blue on all six faces and then cut into 64 unit cubes of side 1 cm. How many of the small cubes have exactly two painted faces?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "24"
+          },
+          {
+            "id": "d",
+            "text": "32"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Cubes with exactly two painted faces lie along the 12 edges, excluding the 8 corners. Each edge has 4 - 2 = 2 such cubes, giving 12 * 2 = 24 cubes.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "Cubes with exactly two painted faces lie along the 12 edges, excluding the 8 corners.",
+        "Each edge has 4 - 2 = 2 such cubes, giving 12 * 2 = 24 cubes."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "12 * (4 - 2)",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m016",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangular sheet of paper measuring 24 cm by 18 cm has a 3 cm square cut out from each of its four corners. The sides are folded up to make an open box. What is the volume of the box in cubic centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "432"
+          },
+          {
+            "id": "b",
+            "text": "540"
+          },
+          {
+            "id": "c",
+            "text": "720"
+          },
+          {
+            "id": "d",
+            "text": "648"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Removing 3 cm from both ends reduces the length to 24 - 6 = 18 cm and width to 18 - 6 = 12 cm. The height is 3 cm, so volume = 18 * 12 * 3 = 648 cm³.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "Removing 3 cm from both ends reduces the length to 24 - 6 = 18 cm and width to 18 - 6 = 12 cm.",
+        "The height is 3 cm, so volume = 18 * 12 * 3 = 648 cm³."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(24 - 6) * (18 - 6) * 3",
+        "expected": "648"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m017",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A parallelogram has a base of 16 cm and a height of 9 cm. A triangle with the same area has a base of 12 cm. What is the height of the triangle in centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Area of parallelogram = 16 * 9 = 144 cm². For the triangle, (12 * h) / 2 = 144, so 6h = 144 and h = 24 cm.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "Area of parallelogram = 16 * 9 = 144 cm².",
+        "For the triangle, (12 * h) / 2 = 144, so 6h = 144 and h = 24 cm."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(16 * 9 * 2) / 12",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m018",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A square lawn of side 12 m is surrounded by a paved path of uniform width. The area of the path alone is 112 m². What is the width of the path in metres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "2"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Total area of lawn plus path = 12 * 12 + 112 = 144 + 112 = 256 m². Since 16 * 16 = 256, the outer square has side 16 m, so the path width is (16 - 12) / 2 = 2 m.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 140,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "Total area of lawn plus path = 12 * 12 + 112 = 144 + 112 = 256 m².",
+        "Since 16 * 16 = 256, the outer square has side 16 m, so the path width is (16 - 12) / 2 = 2 m."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(16 - 12) / 2",
+        "expected": "2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m019",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a coordinate rectangle PQRS, P is at (1, 2), Q is at (9, 2) and R is at (9, 7). What is the area in square units of the triangle formed by P, R and the midpoint of QR?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "20"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "coord_m019",
+            "type": "coordinate_grid",
+            "altText": "Coordinate grid showing vertices P(1,2), Q(9,2), and R(9,7).",
+            "title": "Coordinate Grid PQR",
+            "data": {
+              "xRange": [
+                0,
+                10
+              ],
+              "yRange": [
+                0,
+                8
+              ],
+              "gridStep": 1,
+              "points": [
+                {
+                  "x": 1,
+                  "y": 2,
+                  "label": "P"
+                },
+                {
+                  "x": 9,
+                  "y": 2,
+                  "label": "Q"
+                },
+                {
+                  "x": 9,
+                  "y": 7,
+                  "label": "R"
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "QR runs vertically from (9, 2) to (9, 7), so its midpoint M is at (9, 4.5) and MR has length 2.5 units. Using MR as base (2.5) and horizontal distance from P to x = 9 as height (8), area = (2.5 * 8) / 2 = 10 square units.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "QR runs vertically from (9, 2) to (9, 7), so its midpoint M is at (9, 4.5) and MR has length 2.5 units.",
+        "Using MR as base (2.5) and horizontal distance from P to x = 9 as height (8), area = (2.5 * 8) / 2 = 10 square units."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "((9 - 1) * ((7 - 2) / 2)) / 2",
+        "expected": "10"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m020",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A regular polygon has exterior angles of 30 degrees each. How many sides does the polygon have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10"
+          },
+          {
+            "id": "b",
+            "text": "14"
+          },
+          {
+            "id": "c",
+            "text": "15"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The sum of exterior angles of any convex polygon is always 360 degrees. Number of sides = 360 / 30 = 12.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "The sum of exterior angles of any convex polygon is always 360 degrees.",
+        "Number of sides = 360 / 30 = 12."
+      ],
+      "reviewFocus": [
+        "Verify geometric formula, units, and diagram labels independently."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "360 / 30",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m021",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 4x + 7 = 31, what is the value of x?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Subtract 7 from both sides: 4x = 24. Divide by 4: x = 6.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Subtract 7 from both sides: 4x = 24.",
+        "Divide by 4: x = 6."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(31 - 7) / 4",
+        "expected": "6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m022",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number is tripled and then 5 is subtracted, giving 28. What is the original number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "9"
+          },
+          {
+            "id": "b",
+            "text": "11"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "13"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Work backwards: add 5 to 28 to get 33. Divide 33 by 3 to find the original number, 11.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Work backwards: add 5 to 28 to get 33.",
+        "Divide 33 by 3 to find the original number, 11."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(28 + 5) / 3",
+        "expected": "11"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m023",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three consecutive whole numbers add up to 54. What is the largest of the three numbers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "20"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The middle number is the average: 54 / 3 = 18. The three numbers are 17, 18 and 19, so the largest is 19.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "The middle number is the average: 54 / 3 = 18.",
+        "The three numbers are 17, 18 and 19, so the largest is 19."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "54 / 3 + 1",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m024",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four identical folders and a $9 ruler cost $37 altogether. How much does one folder cost in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "7"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Subtract the ruler's cost: 37 - 9 = $28. Divide by 4 folders: 28 / 4 = $7.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Subtract the ruler's cost: 37 - 9 = $28.",
+        "Divide by 4 folders: 28 / 4 = $7."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(37 - 9) / 4",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n013",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the pattern 81, 27, 36, 12, 21, 7, ?, which number comes next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "14"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The operations alternate divide by 3 and add 9: 81/3=27, 27+9=36, 36/3=12, 12+9=21, 21/3=7. Next add 9: 7 + 9 = 16.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "The operations alternate divide by 3 and add 9: 81/3=27, 27+9=36, 36/3=12, 12+9=21, 21/3=7.",
+        "Next add 9: 7 + 9 = 16."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "7 + 9",
+        "expected": "16"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n014",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each term is formed by a consistent two-step rule: 4, 13, 40, 121, ?. What is the fifth term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "242"
+          },
+          {
+            "id": "b",
+            "text": "364"
+          },
+          {
+            "id": "c",
+            "text": "362"
+          },
+          {
+            "id": "d",
+            "text": "366"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Multiply the previous term by 3 and add 1: 4*3+1=13, 13*3+1=40, 40*3+1=121. 121 * 3 + 1 = 364.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Multiply the previous term by 3 and add 1: 4*3+1=13, 13*3+1=40, 40*3+1=121.",
+        "121 * 3 + 1 = 364."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "121 * 3 + 1",
+        "expected": "364"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n015",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Look at the fraction-free ratio steps: 1000, 200, 40, 8, ?. What is the next number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.8"
+          },
+          {
+            "id": "b",
+            "text": "1.2"
+          },
+          {
+            "id": "c",
+            "text": "1.6"
+          },
+          {
+            "id": "d",
+            "text": "2"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Each term is divided by 5: 1000/5=200, 200/5=40, 40/5=8. 8 / 5 = 1.6.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Each term is divided by 5: 1000/5=200, 200/5=40, 40/5=8.",
+        "8 / 5 = 1.6."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "8 / 5",
+        "expected": "1.6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n016",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a dual-track sequence, odd positions double while even positions drop by three: 3, 20, 6, 17, 12, 14, 24, ?. Which number belongs at the end?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "48"
+          },
+          {
+            "id": "d",
+            "text": "11"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Odd positions double (3, 6, 12, 24); even positions decrease by 3 (20, 17, 14, ...). The 8th term is 14 - 3 = 11.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Odd positions double (3, 6, 12, 24); even positions decrease by 3 (20, 17, 14, ...).",
+        "The 8th term is 14 - 3 = 11."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "14 - 3",
+        "expected": "11"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n017",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the next number in 1, 3, 7, 15, 31, 63, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "127"
+          },
+          {
+            "id": "b",
+            "text": "95"
+          },
+          {
+            "id": "c",
+            "text": "125"
+          },
+          {
+            "id": "d",
+            "text": "129"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Differences double each time: +2, +4, +8, +16, +32. Next difference is +64: 63 + 64 = 127 (also 2^7 - 1).",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Differences double each time: +2, +4, +8, +16, +32.",
+        "Next difference is +64: 63 + 64 = 127 (also 2^7 - 1)."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "63 * 2 + 1",
+        "expected": "127"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n018",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find the missing number in 11, 14, 19, 26, 35, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "44"
+          },
+          {
+            "id": "b",
+            "text": "46"
+          },
+          {
+            "id": "c",
+            "text": "45"
+          },
+          {
+            "id": "d",
+            "text": "48"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Differences are consecutive odd numbers: +3, +5, +7, +9. Next difference is +11: 35 + 11 = 46.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Differences are consecutive odd numbers: +3, +5, +7, +9.",
+        "Next difference is +11: 35 + 11 = 46."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "35 + 11",
+        "expected": "46"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n019",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the sequence 2, 6, 12, 20, 30, 42, ?, what is the seventh term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "52"
+          },
+          {
+            "id": "b",
+            "text": "54"
+          },
+          {
+            "id": "c",
+            "text": "56"
+          },
+          {
+            "id": "d",
+            "text": "58"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Terms are n*(n+1): 1*2=2, 2*3=6, 3*4=12, 4*5=20, 5*6=30, 6*7=42. The 7th term is 7 * 8 = 56.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Terms are n*(n+1): 1*2=2, 2*3=6, 3*4=12, 4*5=20, 5*6=30, 6*7=42.",
+        "The 7th term is 7 * 8 = 56."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "7 * 8",
+        "expected": "56"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n020",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Examine the second-order difference sequence: 1, 4, 10, 20, 35, ?. What comes next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50"
+          },
+          {
+            "id": "b",
+            "text": "55"
+          },
+          {
+            "id": "c",
+            "text": "60"
+          },
+          {
+            "id": "d",
+            "text": "56"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "First differences are 3, 6, 10, 15 (triangular numbers). Next triangular difference is 21: 35 + 21 = 56.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "First differences are 3, 6, 10, 15 (triangular numbers).",
+        "Next triangular difference is 21: 35 + 21 = 56."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "35 + 21",
+        "expected": "56"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n021",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What number replaces the question mark in 3, 5, 9, 17, 33, 65, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "129"
+          },
+          {
+            "id": "b",
+            "text": "97"
+          },
+          {
+            "id": "c",
+            "text": "127"
+          },
+          {
+            "id": "d",
+            "text": "131"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Each term is 2 * previous - 1: 3*2-1=5, 5*2-1=9, ..., 33*2-1=65. 65 * 2 - 1 = 129.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Each term is 2 * previous - 1: 3*2-1=5, 5*2-1=9, ..., 33*2-1=65.",
+        "65 * 2 - 1 = 129."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "65 * 2 - 1",
+        "expected": "129"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n022",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A sequence follows T(n) = n² + 2n. What is the difference between T(9) and T(7)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "32"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "34"
+          },
+          {
+            "id": "d",
+            "text": "40"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "T(9) = 81 + 18 = 99 and T(7) = 49 + 14 = 63. 99 - 63 = 36.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "T(9) = 81 + 18 = 99 and T(7) = 49 + 14 = 63.",
+        "99 - 63 = 36."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(9*9 + 2*9) - (7*7 + 2*7)",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n023",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Determine the next value in 2, 3, 6, 18, 108, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "648"
+          },
+          {
+            "id": "b",
+            "text": "1296"
+          },
+          {
+            "id": "c",
+            "text": "1944"
+          },
+          {
+            "id": "d",
+            "text": "2160"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Each term from the third onward is the product of the two previous terms: 2*3=6, 3*6=18, 6*18=108. 18 * 108 = 1944.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Each term from the third onward is the product of the two previous terms: 2*3=6, 3*6=18, 6*18=108.",
+        "18 * 108 = 1944."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "18 * 108",
+        "expected": "1944"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n024",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find the missing term in 7, 10, 16, 28, 52, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "76"
+          },
+          {
+            "id": "b",
+            "text": "96"
+          },
+          {
+            "id": "c",
+            "text": "104"
+          },
+          {
+            "id": "d",
+            "text": "100"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Differences double each step: +3, +6, +12, +24. Next difference is +48: 52 + 48 = 100.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Differences double each step: +3, +6, +12, +24.",
+        "Next difference is +48: 52 + 48 = 100."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "52 + 48",
+        "expected": "100"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v013",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "CARTOGRAPHER is to MAP as LEXICOGRAPHER is to ___",
+        "options": [
+          {
+            "id": "a",
+            "text": "DICTIONARY"
+          },
+          {
+            "id": "b",
+            "text": "ENCYCLOPEDIA"
+          },
+          {
+            "id": "c",
+            "text": "ATLAS"
+          },
+          {
+            "id": "d",
+            "text": "MANUSCRIPT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A cartographer compiles maps. A lexicographer compiles dictionaries.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-analogies"
+        }
+      },
+      "workedSolution": [
+        "A cartographer compiles maps.",
+        "A lexicographer compiles dictionaries."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v014",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "ALLEVIATE is to PAIN as MITIGATE is to ___",
+        "options": [
+          {
+            "id": "a",
+            "text": "CURE"
+          },
+          {
+            "id": "b",
+            "text": "RISK"
+          },
+          {
+            "id": "c",
+            "text": "CAUSE"
+          },
+          {
+            "id": "d",
+            "text": "REWARD"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "To alleviate is to make pain less severe. To mitigate is to make risk or harm less severe.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-analogies"
+        }
+      },
+      "workedSolution": [
+        "To alleviate is to make pain less severe.",
+        "To mitigate is to make risk or harm less severe."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v015",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word does NOT belong with the other three: COPPER, IRON, SILVER, GRANITE?",
+        "options": [
+          {
+            "id": "a",
+            "text": "COPPER"
+          },
+          {
+            "id": "b",
+            "text": "IRON"
+          },
+          {
+            "id": "c",
+            "text": "GRANITE"
+          },
+          {
+            "id": "d",
+            "text": "SILVER"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Copper, iron and silver are all metallic elements. Granite is an igneous rock, not a metal.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 45,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Copper, iron and silver are all metallic elements.",
+        "Granite is an igneous rock, not a metal."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v016",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of these words are musical instruments played by blowing air. Which one is the odd one out?",
+        "options": [
+          {
+            "id": "a",
+            "text": "FLUTE"
+          },
+          {
+            "id": "b",
+            "text": "CLARINET"
+          },
+          {
+            "id": "c",
+            "text": "TRUMPET"
+          },
+          {
+            "id": "d",
+            "text": "CELLO"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Flute, clarinet and trumpet are wind/brass instruments. A cello is a bowed string instrument.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 45,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Flute, clarinet and trumpet are wind/brass instruments.",
+        "A cello is a bowed string instrument."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v017",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which of these words is NOT a unit of mass?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LITRE"
+          },
+          {
+            "id": "b",
+            "text": "GRAM"
+          },
+          {
+            "id": "c",
+            "text": "KILOGRAM"
+          },
+          {
+            "id": "d",
+            "text": "TONNE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Gram, kilogram and tonne measure mass. Litre measures liquid capacity/volume.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 45,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Gram, kilogram and tonne measure mass.",
+        "Litre measures liquid capacity/volume."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v018",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of the following words describe ways of speaking quietly. Which word does NOT belong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "WHISPER"
+          },
+          {
+            "id": "b",
+            "text": "BELLOW"
+          },
+          {
+            "id": "c",
+            "text": "MURMUR"
+          },
+          {
+            "id": "d",
+            "text": "MUTTER"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Whisper, murmur and mutter all describe quiet speech. Bellow means to shout loudly.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Whisper, murmur and mutter all describe quiet speech.",
+        "Bellow means to shout loudly."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v019",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is the odd one out in terms of its prefix meaning: BICYCLE, BINOCULARS, BIANNUAL, BIOLOGY?",
+        "options": [
+          {
+            "id": "a",
+            "text": "BICYCLE"
+          },
+          {
+            "id": "b",
+            "text": "BINOCULARS"
+          },
+          {
+            "id": "c",
+            "text": "BIOLOGY"
+          },
+          {
+            "id": "d",
+            "text": "BIANNUAL"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "In bicycle, binoculars and biannual, 'bi-' means two. In biology, 'bio-' means life.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "In bicycle, binoculars and biannual, 'bi-' means two.",
+        "In biology, 'bio-' means life."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v020",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of the following four words are anagrams of each other. Which word is NOT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LISTEN"
+          },
+          {
+            "id": "b",
+            "text": "SILENT"
+          },
+          {
+            "id": "c",
+            "text": "ENLIST"
+          },
+          {
+            "id": "d",
+            "text": "INSECT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "LISTEN, SILENT and ENLIST use the exact same six letters (E, I, L, N, S, T). INSECT contains C instead of L.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "LISTEN, SILENT and ENLIST use the exact same six letters (E, I, L, N, S, T).",
+        "INSECT contains C instead of L."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v021",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word does NOT belong with the others: ARID, PARCHED, BARREN, LUSH?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LUSH"
+          },
+          {
+            "id": "b",
+            "text": "ARID"
+          },
+          {
+            "id": "c",
+            "text": "PARCHED"
+          },
+          {
+            "id": "d",
+            "text": "BARREN"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Arid, parched and barren all describe dry, infertile conditions. Lush means rich, green and abundant with moisture.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Arid, parched and barren all describe dry, infertile conditions.",
+        "Lush means rich, green and abundant with moisture."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v022",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Identify the odd one out: PENTAGON, HEXAGON, OCTAGON, CUBE.",
+        "options": [
+          {
+            "id": "a",
+            "text": "PENTAGON"
+          },
+          {
+            "id": "b",
+            "text": "CUBE"
+          },
+          {
+            "id": "c",
+            "text": "HEXAGON"
+          },
+          {
+            "id": "d",
+            "text": "OCTAGON"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Pentagon, hexagon and octagon are 2D polygons. A cube is a 3D solid.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 50,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Pentagon, hexagon and octagon are 2D polygons.",
+        "A cube is a 3D solid."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v023",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of these words mean 'to praise'. Which one does NOT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "COMMEND"
+          },
+          {
+            "id": "b",
+            "text": "EXTOL"
+          },
+          {
+            "id": "c",
+            "text": "REBUKE"
+          },
+          {
+            "id": "d",
+            "text": "APPLAUD"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Commend, extol and applaud all mean to praise. Rebuke means to reprimand or criticise sharply.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Commend, extol and applaud all mean to praise.",
+        "Rebuke means to reprimand or criticise sharply."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v024",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word does NOT belong: MERCURY, VENUS, MARS, POLARIS?",
+        "options": [
+          {
+            "id": "a",
+            "text": "MERCURY"
+          },
+          {
+            "id": "b",
+            "text": "VENUS"
+          },
+          {
+            "id": "c",
+            "text": "MARS"
+          },
+          {
+            "id": "d",
+            "text": "POLARIS"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Mercury, Venus and Mars are planets in our solar system. Polaris is a star (the North Star).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Mercury, Venus and Mars are planets in our solar system.",
+        "Polaris is a star (the North Star)."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r011",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What powered the steel cable beneath Melbourne's streets?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Teams of horses harnessed underground"
+          },
+          {
+            "id": "b",
+            "text": "Overhead electric wires above the rails"
+          },
+          {
+            "id": "c",
+            "text": "Massive steam engines inside brick power stations"
+          },
+          {
+            "id": "d",
+            "text": "Small petrol motors inside each wooden carriage"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The passage states the steel rope was 'pulled continuously ... by massive steam engines housed in brick power stations.' Exam technique: verify 'Massive steam engines inside brick power stations' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 140,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Underground Cables of 1885",
+          "body": "When Melbourne's first cable tram glided along Flinders Street in November 1885, onlookers marvelled that a wooden carriage could climb steep hills without horses, steam boilers, or overhead wires. The secret lay hidden beneath the cobblestones. Inside a narrow brick-lined slot between the rails ran an endless steel rope, pulled continuously at a steady sixteen kilometres per hour by massive steam engines housed in brick power stations across the city. Each tramcar carried a 'gripman' who operated a long iron lever extending through the floor. By pulling the lever back, steel jaws clamped onto the moving cable beneath the street, drawing the tram smoothly forward; releasing the lever and applying the handbrake brought the carriage to a halt at intersections. Though the system was remarkably quiet and clean compared with smoky locomotives, it demanded constant vigilance. If a single strand on the wire rope frayed, a bell rang in the engine house so mechanics could inspect the loop overnight before a snapped cable stranded commuters across an entire suburb.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage states the steel rope was 'pulled continuously ... by massive steam engines housed in brick power stations.'",
+        "Exam technique: verify 'Massive steam engines inside brick power stations' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r012",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How did a gripman stop the cable tram at an intersection?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By signalling the power station to stop the steam engine"
+          },
+          {
+            "id": "b",
+            "text": "By reversing the direction of the steel rope"
+          },
+          {
+            "id": "c",
+            "text": "By lifting the tramcar off the rails"
+          },
+          {
+            "id": "d",
+            "text": "By releasing the grip lever and applying the handbrake"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The text explains: 'releasing the lever and applying the handbrake brought the carriage to a halt.' Exam technique: verify 'By releasing the grip lever and applying the handbrake' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-cause-effect"
+        },
+        "stimulus": {
+          "title": "The Underground Cables of 1885",
+          "body": "When Melbourne's first cable tram glided along Flinders Street in November 1885, onlookers marvelled that a wooden carriage could climb steep hills without horses, steam boilers, or overhead wires. The secret lay hidden beneath the cobblestones. Inside a narrow brick-lined slot between the rails ran an endless steel rope, pulled continuously at a steady sixteen kilometres per hour by massive steam engines housed in brick power stations across the city. Each tramcar carried a 'gripman' who operated a long iron lever extending through the floor. By pulling the lever back, steel jaws clamped onto the moving cable beneath the street, drawing the tram smoothly forward; releasing the lever and applying the handbrake brought the carriage to a halt at intersections. Though the system was remarkably quiet and clean compared with smoky locomotives, it demanded constant vigilance. If a single strand on the wire rope frayed, a bell rang in the engine house so mechanics could inspect the loop overnight before a snapped cable stranded commuters across an entire suburb.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The text explains: 'releasing the lever and applying the handbrake brought the carriage to a halt.'",
+        "Exam technique: verify 'By releasing the grip lever and applying the handbrake' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r013",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why was a single frayed strand on the cable treated as an urgent problem?",
+        "options": [
+          {
+            "id": "a",
+            "text": "If the cable snapped completely, all trams along that loop would be stranded."
+          },
+          {
+            "id": "b",
+            "text": "The frayed wire could electrocute passengers on the roof."
+          },
+          {
+            "id": "c",
+            "text": "Frayed cables caused the steam engines to speed up dangerously."
+          },
+          {
+            "id": "d",
+            "text": "The cobblestones would melt from friction."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Mechanics inspected the loop overnight 'before a snapped cable stranded commuters across an entire suburb.' Exam technique: verify 'If the cable snapped completely, all trams along that loop would be stranded.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "The Underground Cables of 1885",
+          "body": "When Melbourne's first cable tram glided along Flinders Street in November 1885, onlookers marvelled that a wooden carriage could climb steep hills without horses, steam boilers, or overhead wires. The secret lay hidden beneath the cobblestones. Inside a narrow brick-lined slot between the rails ran an endless steel rope, pulled continuously at a steady sixteen kilometres per hour by massive steam engines housed in brick power stations across the city. Each tramcar carried a 'gripman' who operated a long iron lever extending through the floor. By pulling the lever back, steel jaws clamped onto the moving cable beneath the street, drawing the tram smoothly forward; releasing the lever and applying the handbrake brought the carriage to a halt at intersections. Though the system was remarkably quiet and clean compared with smoky locomotives, it demanded constant vigilance. If a single strand on the wire rope frayed, a bell rang in the engine house so mechanics could inspect the loop overnight before a snapped cable stranded commuters across an entire suburb.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Mechanics inspected the loop overnight 'before a snapped cable stranded commuters across an entire suburb.'",
+        "Exam technique: verify 'If the cable snapped completely, all trams along that loop would be stranded.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r014",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the central idea of the passage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cable trams were slower and noisier than steam locomotives."
+          },
+          {
+            "id": "b",
+            "text": "Melbourne's 1885 cable trams achieved quiet, horse-free transport through clever underground engineering and careful maintenance."
+          },
+          {
+            "id": "c",
+            "text": "Gripmen disliked working in brick power stations."
+          },
+          {
+            "id": "d",
+            "text": "Horses were banned from Flinders Street in 1885."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The passage explains how the hidden cable system worked, its advantages, and the maintenance it required. Exam technique: verify 'Melbourne's 1885 cable trams achieved quiet, horse-free transport through clever underground engineering and careful maintenance.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "The Underground Cables of 1885",
+          "body": "When Melbourne's first cable tram glided along Flinders Street in November 1885, onlookers marvelled that a wooden carriage could climb steep hills without horses, steam boilers, or overhead wires. The secret lay hidden beneath the cobblestones. Inside a narrow brick-lined slot between the rails ran an endless steel rope, pulled continuously at a steady sixteen kilometres per hour by massive steam engines housed in brick power stations across the city. Each tramcar carried a 'gripman' who operated a long iron lever extending through the floor. By pulling the lever back, steel jaws clamped onto the moving cable beneath the street, drawing the tram smoothly forward; releasing the lever and applying the handbrake brought the carriage to a halt at intersections. Though the system was remarkably quiet and clean compared with smoky locomotives, it demanded constant vigilance. If a single strand on the wire rope frayed, a bell rang in the engine house so mechanics could inspect the loop overnight before a snapped cable stranded commuters across an entire suburb.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage explains how the hidden cable system worked, its advantages, and the maintenance it required.",
+        "Exam technique: verify 'Melbourne's 1885 cable trams achieved quiet, horse-free transport through clever underground engineering and careful maintenance.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r015",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the sentence 'it demanded constant vigilance', what does 'vigilance' mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Physical strength"
+          },
+          {
+            "id": "b",
+            "text": "Public popularity"
+          },
+          {
+            "id": "c",
+            "text": "Careful, continuous watchfulness"
+          },
+          {
+            "id": "d",
+            "text": "Financial investment"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Watching for frayed strands and inspecting loops overnight demonstrates careful watchfulness. Exam technique: verify 'Careful, continuous watchfulness' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "The Underground Cables of 1885",
+          "body": "When Melbourne's first cable tram glided along Flinders Street in November 1885, onlookers marvelled that a wooden carriage could climb steep hills without horses, steam boilers, or overhead wires. The secret lay hidden beneath the cobblestones. Inside a narrow brick-lined slot between the rails ran an endless steel rope, pulled continuously at a steady sixteen kilometres per hour by massive steam engines housed in brick power stations across the city. Each tramcar carried a 'gripman' who operated a long iron lever extending through the floor. By pulling the lever back, steel jaws clamped onto the moving cable beneath the street, drawing the tram smoothly forward; releasing the lever and applying the handbrake brought the carriage to a halt at intersections. Though the system was remarkably quiet and clean compared with smoky locomotives, it demanded constant vigilance. If a single strand on the wire rope frayed, a bell rang in the engine house so mechanics could inspect the loop overnight before a snapped cable stranded commuters across an entire suburb.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Watching for frayed strands and inspecting loops overnight demonstrates careful watchfulness.",
+        "Exam technique: verify 'Careful, continuous watchfulness' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r016",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the writer's main argument in this editorial?",
+        "options": [
+          {
+            "id": "a",
+            "text": "School gardens should replace all mathematics worksheets."
+          },
+          {
+            "id": "b",
+            "text": "Students should spend their school holidays weeding gardens."
+          },
+          {
+            "id": "c",
+            "text": "Growing radishes is faster than downloading files."
+          },
+          {
+            "id": "d",
+            "text": "School kitchen gardens build practical academic skills, patience and confidence when integrated into learning."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The writer argues gardens make maths practical, teach patience, and help students emerge as confident problem-solvers. Exam technique: verify 'School kitchen gardens build practical academic skills, patience and confidence when integrated into learning.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 140,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "More Than Mud: Why Every School Needs a Kitchen Garden",
+          "body": "Critics who dismiss school vegetable gardens as a pleasant distraction from 'serious' subjects overlook what actually happens beside the raised beds. When Year 5 students calculate how much compost is needed for a three-metre plot, or measure daily rainfall in millimetres to graph germination rates, mathematics ceases to be an abstract worksheet and becomes a tool with immediate consequences. Equally important is the patience a garden teaches. In an era of instant downloads and same-day deliveries, waiting six weeks for radishes to swell beneath the soil reminds young people that worthwhile results often require steady care rather than speed. Of course, a garden demands planning: without a roster for holiday watering or clear links to science and health lessons, a patch can quickly turn to weeds. Yet when schools integrate the garden into weekly learning, students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The writer argues gardens make maths practical, teach patience, and help students emerge as confident problem-solvers.",
+        "Exam technique: verify 'School kitchen gardens build practical academic skills, patience and confidence when integrated into learning.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r017",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the writer mention 'waiting six weeks for radishes to swell'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To contrast slow, steady natural growth with modern expectations of instant results."
+          },
+          {
+            "id": "b",
+            "text": "To complain that radishes take too long to cook."
+          },
+          {
+            "id": "c",
+            "text": "To prove that radishes are the easiest vegetable to grow."
+          },
+          {
+            "id": "d",
+            "text": "To argue that school terms should be six weeks long."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "It illustrates how gardening teaches patience 'in an era of instant downloads and same-day deliveries.' Exam technique: verify 'To contrast slow, steady natural growth with modern expectations of instant results.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-argument-evaluation"
+        },
+        "stimulus": {
+          "title": "More Than Mud: Why Every School Needs a Kitchen Garden",
+          "body": "Critics who dismiss school vegetable gardens as a pleasant distraction from 'serious' subjects overlook what actually happens beside the raised beds. When Year 5 students calculate how much compost is needed for a three-metre plot, or measure daily rainfall in millimetres to graph germination rates, mathematics ceases to be an abstract worksheet and becomes a tool with immediate consequences. Equally important is the patience a garden teaches. In an era of instant downloads and same-day deliveries, waiting six weeks for radishes to swell beneath the soil reminds young people that worthwhile results often require steady care rather than speed. Of course, a garden demands planning: without a roster for holiday watering or clear links to science and health lessons, a patch can quickly turn to weeds. Yet when schools integrate the garden into weekly learning, students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "It illustrates how gardening teaches patience 'in an era of instant downloads and same-day deliveries.'",
+        "Exam technique: verify 'To contrast slow, steady natural growth with modern expectations of instant results.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r018",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the writer acknowledge that 'without a roster for holiday watering ... a patch can quickly turn to weeds'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To persuade readers not to build school gardens after all."
+          },
+          {
+            "id": "b",
+            "text": "To make the argument more balanced and credible by addressing a practical challenge."
+          },
+          {
+            "id": "c",
+            "text": "To blame students for forgetting to water plants."
+          },
+          {
+            "id": "d",
+            "text": "To show that weeds are more useful than vegetables."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Addressing a counterargument or limitation strengthens persuasive credibility. Exam technique: verify 'To make the argument more balanced and credible by addressing a practical challenge.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "More Than Mud: Why Every School Needs a Kitchen Garden",
+          "body": "Critics who dismiss school vegetable gardens as a pleasant distraction from 'serious' subjects overlook what actually happens beside the raised beds. When Year 5 students calculate how much compost is needed for a three-metre plot, or measure daily rainfall in millimetres to graph germination rates, mathematics ceases to be an abstract worksheet and becomes a tool with immediate consequences. Equally important is the patience a garden teaches. In an era of instant downloads and same-day deliveries, waiting six weeks for radishes to swell beneath the soil reminds young people that worthwhile results often require steady care rather than speed. Of course, a garden demands planning: without a roster for holiday watering or clear links to science and health lessons, a patch can quickly turn to weeds. Yet when schools integrate the garden into weekly learning, students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Addressing a counterargument or limitation strengthens persuasive credibility.",
+        "Exam technique: verify 'To make the argument more balanced and credible by addressing a practical challenge.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r019",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which pair of words best describes the tone of the editorial?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sarcastic and dismissive"
+          },
+          {
+            "id": "b",
+            "text": "Panicked and urgent"
+          },
+          {
+            "id": "c",
+            "text": "Measured and persuasive"
+          },
+          {
+            "id": "d",
+            "text": "Detached and indifferent"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The writer calmly counters critics with concrete examples while acknowledging practical planning needs. Exam technique: verify 'Measured and persuasive' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-tone-analysis"
+        },
+        "stimulus": {
+          "title": "More Than Mud: Why Every School Needs a Kitchen Garden",
+          "body": "Critics who dismiss school vegetable gardens as a pleasant distraction from 'serious' subjects overlook what actually happens beside the raised beds. When Year 5 students calculate how much compost is needed for a three-metre plot, or measure daily rainfall in millimetres to graph germination rates, mathematics ceases to be an abstract worksheet and becomes a tool with immediate consequences. Equally important is the patience a garden teaches. In an era of instant downloads and same-day deliveries, waiting six weeks for radishes to swell beneath the soil reminds young people that worthwhile results often require steady care rather than speed. Of course, a garden demands planning: without a roster for holiday watering or clear links to science and health lessons, a patch can quickly turn to weeds. Yet when schools integrate the garden into weekly learning, students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The writer calmly counters critics with concrete examples while acknowledging practical planning needs.",
+        "Exam technique: verify 'Measured and persuasive' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r020",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "According to the writer, which group of students may particularly benefit from outdoor garden lessons?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only students who already live on farms"
+          },
+          {
+            "id": "b",
+            "text": "Students who dislike all forms of mathematics"
+          },
+          {
+            "id": "c",
+            "text": "Students who prefer instant digital games"
+          },
+          {
+            "id": "d",
+            "text": "Quiet students who are less vocal in traditional classroom settings"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The final sentence notes 'students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.' Exam technique: verify 'Quiet students who are less vocal in traditional classroom settings' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "More Than Mud: Why Every School Needs a Kitchen Garden",
+          "body": "Critics who dismiss school vegetable gardens as a pleasant distraction from 'serious' subjects overlook what actually happens beside the raised beds. When Year 5 students calculate how much compost is needed for a three-metre plot, or measure daily rainfall in millimetres to graph germination rates, mathematics ceases to be an abstract worksheet and becomes a tool with immediate consequences. Equally important is the patience a garden teaches. In an era of instant downloads and same-day deliveries, waiting six weeks for radishes to swell beneath the soil reminds young people that worthwhile results often require steady care rather than speed. Of course, a garden demands planning: without a roster for holiday watering or clear links to science and health lessons, a patch can quickly turn to weeds. Yet when schools integrate the garden into weekly learning, students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The final sentence notes 'students who rarely speak up in a quiet classroom often emerge as confident observers and problem-solvers outdoors.'",
+        "Exam technique: verify 'Quiet students who are less vocal in traditional classroom settings' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w005",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Day the Clocks Ran Backwards: Imagine waking up one Saturday to discover every clock in your town is ticking backwards. Write an imaginative story exploring what happens over the next few hours.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Establish a clear rule for how backwards time affects your character. Maintain consistent tense and a satisfying final twist.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing creative",
+          "difficulty": "easy",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "creative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Establish a clear rule for how backwards time affects your character.",
+        "Maintain consistent tense and a satisfying final twist."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained creative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w006",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Homework-Free Weekends: Write a persuasive argument on whether Year 6 students should have homework-free weekends. Support your position with logical reasoning, concrete examples and a rebuttal.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Dedicate 4 minutes to planning thesis, 3 supporting points and rebuttal. Avoid vague generalisations; use specific school-life examples.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Dedicate 4 minutes to planning thesis, 3 supporting points and rebuttal.",
+        "Avoid vague generalisations; use specific school-life examples."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w007",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Storm Signal: Write a story set at a coastal surf club where two young cadets notice a sudden change in the weather before anyone else. Build tension toward a decisive choice.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Plan the inciting incident, escalation and rescue or warning decision. Keep dialogue concise and purposeful.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing narrative",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "narrative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Plan the inciting incident, escalation and rescue or warning decision.",
+        "Keep dialogue concise and purposeful."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained narrative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w008",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Teamwork Versus Solo Effort: Some challenges are best solved alone, while others demand a team. Explain when individual focus is stronger and when collaboration produces better results.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Balance both sides with clear criteria and real-world examples. Link paragraphs with transitional phrases such as 'Conversely' and 'In practice'.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Balance both sides with clear criteria and real-world examples.",
+        "Link paragraphs with transitional phrases such as 'Conversely' and 'In practice'."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    }
+  ]
+}

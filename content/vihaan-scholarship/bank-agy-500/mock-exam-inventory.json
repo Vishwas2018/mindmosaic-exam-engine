@@ -1,0 +1,187 @@
+{
+  "inventoryVersion": 1,
+  "bankId": "vihaan-scholarship-agy-500",
+  "status": "draft",
+  "approvedBy": null,
+  "totalReserved": 100,
+  "mockPapers": [
+    {
+      "paperId": "vihaan-agy-mock-A",
+      "title": "Huntingtower Year 7 Unseen Mock Examination A",
+      "sourceBatch": "batch-09.draft.json",
+      "totalItems": 50,
+      "sections": {
+        "numeracy": {
+          "count": 12,
+          "ids": [
+            "vihaan-agy-m097",
+            "vihaan-agy-m098",
+            "vihaan-agy-m099",
+            "vihaan-agy-m100",
+            "vihaan-agy-m101",
+            "vihaan-agy-m102",
+            "vihaan-agy-m103",
+            "vihaan-agy-m104",
+            "vihaan-agy-m105",
+            "vihaan-agy-m106",
+            "vihaan-agy-m107",
+            "vihaan-agy-m108"
+          ],
+          "recommendedMinutes": 18
+        },
+        "numerical_reasoning": {
+          "count": 12,
+          "ids": [
+            "vihaan-agy-n097",
+            "vihaan-agy-n098",
+            "vihaan-agy-n099",
+            "vihaan-agy-n100",
+            "vihaan-agy-n101",
+            "vihaan-agy-n102",
+            "vihaan-agy-n103",
+            "vihaan-agy-n104",
+            "vihaan-agy-n105",
+            "vihaan-agy-n106",
+            "vihaan-agy-n107",
+            "vihaan-agy-n108"
+          ],
+          "recommendedMinutes": 16
+        },
+        "verbal_reasoning": {
+          "count": 12,
+          "ids": [
+            "vihaan-agy-v097",
+            "vihaan-agy-v098",
+            "vihaan-agy-v099",
+            "vihaan-agy-v100",
+            "vihaan-agy-v101",
+            "vihaan-agy-v102",
+            "vihaan-agy-v103",
+            "vihaan-agy-v104",
+            "vihaan-agy-v105",
+            "vihaan-agy-v106",
+            "vihaan-agy-v107",
+            "vihaan-agy-v108"
+          ],
+          "recommendedMinutes": 14
+        },
+        "reading": {
+          "count": 10,
+          "ids": [
+            "vihaan-agy-r081",
+            "vihaan-agy-r082",
+            "vihaan-agy-r083",
+            "vihaan-agy-r084",
+            "vihaan-agy-r085",
+            "vihaan-agy-r086",
+            "vihaan-agy-r087",
+            "vihaan-agy-r088",
+            "vihaan-agy-r089",
+            "vihaan-agy-r090"
+          ],
+          "recommendedMinutes": 18
+        },
+        "writing": {
+          "count": 4,
+          "ids": [
+            "vihaan-agy-w033",
+            "vihaan-agy-w034",
+            "vihaan-agy-w035",
+            "vihaan-agy-w036"
+          ],
+          "recommendedMinutes": 60,
+          "note": "Select 1 or 2 prompts for a timed sitting"
+        }
+      }
+    },
+    {
+      "paperId": "vihaan-agy-mock-B",
+      "title": "Huntingtower Year 7 Unseen Mock Examination B",
+      "sourceBatch": "batch-10.draft.json",
+      "totalItems": 50,
+      "sections": {
+        "numeracy": {
+          "count": 12,
+          "ids": [
+            "vihaan-agy-m109",
+            "vihaan-agy-m110",
+            "vihaan-agy-m111",
+            "vihaan-agy-m112",
+            "vihaan-agy-m113",
+            "vihaan-agy-m114",
+            "vihaan-agy-m115",
+            "vihaan-agy-m116",
+            "vihaan-agy-m117",
+            "vihaan-agy-m118",
+            "vihaan-agy-m119",
+            "vihaan-agy-m120"
+          ],
+          "recommendedMinutes": 18
+        },
+        "numerical_reasoning": {
+          "count": 12,
+          "ids": [
+            "vihaan-agy-n109",
+            "vihaan-agy-n110",
+            "vihaan-agy-n111",
+            "vihaan-agy-n112",
+            "vihaan-agy-n113",
+            "vihaan-agy-n114",
+            "vihaan-agy-n115",
+            "vihaan-agy-n116",
+            "vihaan-agy-n117",
+            "vihaan-agy-n118",
+            "vihaan-agy-n119",
+            "vihaan-agy-n120"
+          ],
+          "recommendedMinutes": 16
+        },
+        "verbal_reasoning": {
+          "count": 12,
+          "ids": [
+            "vihaan-agy-v109",
+            "vihaan-agy-v110",
+            "vihaan-agy-v111",
+            "vihaan-agy-v112",
+            "vihaan-agy-v113",
+            "vihaan-agy-v114",
+            "vihaan-agy-v115",
+            "vihaan-agy-v116",
+            "vihaan-agy-v117",
+            "vihaan-agy-v118",
+            "vihaan-agy-v119",
+            "vihaan-agy-v120"
+          ],
+          "recommendedMinutes": 14
+        },
+        "reading": {
+          "count": 10,
+          "ids": [
+            "vihaan-agy-r091",
+            "vihaan-agy-r092",
+            "vihaan-agy-r093",
+            "vihaan-agy-r094",
+            "vihaan-agy-r095",
+            "vihaan-agy-r096",
+            "vihaan-agy-r097",
+            "vihaan-agy-r098",
+            "vihaan-agy-r099",
+            "vihaan-agy-r100"
+          ],
+          "recommendedMinutes": 18
+        },
+        "writing": {
+          "count": 4,
+          "ids": [
+            "vihaan-agy-w037",
+            "vihaan-agy-w038",
+            "vihaan-agy-w039",
+            "vihaan-agy-w040"
+          ],
+          "recommendedMinutes": 60,
+          "note": "Select 1 or 2 prompts for a timed sitting"
+        }
+      }
+    }
+  ]
+}
