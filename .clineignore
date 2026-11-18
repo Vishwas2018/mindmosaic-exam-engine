@@ -1,0 +1,19 @@
+# Files Cline must never read or index. Cline's native hooks are not verified on
+# Windows (see docs/AI_ENVIRONMENT_SAFETY.md), so this file is a supplementary
+# restriction, not the primary control.
+.env
+.env.local
+.env.*.local
+.env.production
+.env.production.*
+.env.e2e.local
+secrets.json
+*.pem
+*.key
+*.pfx
+*.p12
+.npmrc
+.netrc
+.vercel/
+supabase/.temp/
+supabase/.env*

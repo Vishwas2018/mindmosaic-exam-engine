@@ -1,0 +1,17 @@
+{
+  "mindmosaic-safety-gate": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command|write_to_file|replace_file_content|multi_replace_file_content|view_file|grep_search",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/scripts/safety-gate.mjs",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
