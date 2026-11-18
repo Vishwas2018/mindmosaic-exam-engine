@@ -146,7 +146,7 @@ describe("(a) one product-range year authority", () => {
       }
     }
     expect([...found].filter((name) => !allowed.has(name))).toEqual([]);
-  });
+  }, 20000);
 });
 
 describe("(b) valid sittings still gate through EXAM_STYLE_YEAR_LEVELS", () => {

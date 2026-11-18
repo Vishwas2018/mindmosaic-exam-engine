@@ -1,10 +1,21 @@
 import "server-only";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { isProfileRole, roleHomePath, type ProfileRole } from "@/features/auth/roles";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+
+async function hadAuthCookie(): Promise<boolean> {
+  try {
+    const jar = await cookies();
+    return jar.getAll().some((cookie) => /^sb-.+-auth-token(\.\d+)?$/.test(cookie.name));
+  } catch {
+    /* No request scope (e.g. unit tests): fall back to the ordinary sign-in redirect. */
+    return false;
+  }
+}
 
 export type RoleGateResult =
   | { configured: false }
@@ -51,7 +62,16 @@ export async function requireRole(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
+  if (!user) {
+    /* A browser that still carries Supabase auth cookies, but whose session
+       no longer resolves, was signed in and has been signed out: say so,
+       rather than greeting it like a stranger. The cookie is the browser's
+       own, so this reveals nothing to anyone else. */
+    if (await hadAuthCookie()) {
+      redirect(`/session-expired?next=${encodeURIComponent(nextPath)}`);
+    }
+    redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
+  }
 
   const { data: profile } = await supabase
     .from("profiles")

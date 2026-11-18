@@ -1,0 +1,122 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-data-005",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "434a9a52359a326ecb2c1b7e952919624bca904982fdfc08babeace9e4aa85f4",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-data-005",
+    "type": "matching",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Match each time of day to the temperature shown on the graph.",
+    "instructions": "Read the height of the line at each time.",
+    "options": [],
+    "interaction": {
+      "type": "matching",
+      "sources": [
+        {
+          "id": "time-9am",
+          "text": "9 am"
+        },
+        {
+          "id": "time-12pm",
+          "text": "12 pm"
+        },
+        {
+          "id": "time-3pm",
+          "text": "3 pm"
+        }
+      ],
+      "targets": [
+        {
+          "id": "temp-15",
+          "text": "15 °C"
+        },
+        {
+          "id": "temp-24",
+          "text": "24 °C"
+        },
+        {
+          "id": "temp-21",
+          "text": "21 °C"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "g5-temps-line",
+        "altText": "Line graph showing 15 degrees at 9 am, 24 degrees at 12 pm and 21 degrees at 3 pm.",
+        "title": "Temperature through the day",
+        "type": "line_graph",
+        "data": {
+          "points": [
+            {
+              "x": 9,
+              "y": 15,
+              "label": "9 am"
+            },
+            {
+              "x": 12,
+              "y": 24,
+              "label": "12 pm"
+            },
+            {
+              "x": 15,
+              "y": 21,
+              "label": "3 pm"
+            }
+          ],
+          "xAxisLabel": "Time of day",
+          "yAxisLabel": "Temperature in degrees Celsius",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "time-9am",
+          "targetId": "temp-15"
+        },
+        {
+          "sourceId": "time-12pm",
+          "targetId": "temp-24"
+        },
+        {
+          "sourceId": "time-3pm",
+          "targetId": "temp-21"
+        }
+      ]
+    },
+    "explanation": "The graph shows 15 °C at 9 am, rises to 24 °C at 12 pm, then falls to 21 °C at 3 pm.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics and probability",
+      "topic": "Reading a line graph",
+      "skill": "Matching values on a line graph",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "line-graph",
+        "temperature"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "b1ae4081d5cebb0ae3d683c1b76fe0e1edd03960fb079d71c68606eef95b8ab4"
+}

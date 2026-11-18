@@ -1,0 +1,409 @@
+{
+  "version": 1,
+  "batchId": "legacy-scholarship-sample-phase1",
+  "sourceRegister": {
+    "repository": "Vishwas2018/mindmosaic-exam-engine",
+    "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+    "path": "docs/reviews/scholarship-sample-2026-10-22/provenance/source-register.json",
+    "blob": "18cf8b2c383bd73da4938bc8df7509bb99476aad",
+    "sha256": "90839ec8d0ecaeeb45df60805af729409e6382f18c76e0a85f6aa77127cb5c22"
+  },
+  "limitations": [
+    "Original generator, model, generation prompt and execution event are unverified. Git and repository import are not original authorship evidence."
+  ],
+  "evidenceReferences": [
+    "git:dcb60a80f3f6eabdb522b20202929d2e3f328a94:docs/reviews/scholarship-sample-2026-10-22/provenance/source-register.json"
+  ],
+  "items": [
+    {
+      "id": "scholarship-y6-vr-001",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+        "blob": "8a5ec20745742dd935dd4d2100a20bb6edc5654b",
+        "sha256": "ccc681bc9edb5f59482d3d4313bbd3d46d2958965e5b9f74fc15bc93edbd9f1e"
+      },
+      "rawQuestionHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "sourceCandidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "candidateHash": "a66d7ab60d61007d5564a05ede8db156d96137de9db317467ce79d9119e3f86d",
+      "publicationContentHash": "b8623bd98bd4a1042785b285188c4a29f8606ff1837aabbf01517019e7e848e8",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-vr-001-seed-001.json",
+        "blob": "7204cbb287b5b37d122c51be444fbeff2dd5c129",
+        "sha256": "b34d55b22f0c4e76edeba321317751c1cff2af56b83eb646cffed3770a693361",
+        "id": "scholarship-y6-vr-001-seed-001",
+        "contentHash": "033c7ed468ce1fcfb0501c509b44866e0470387e524d93c0078071abeb5d5b58"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "a72f28ae305b2fa62f5d3d0c1c61d5e6cb2f54f28baba00707af75d2da1fe8a9"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-vr-016",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+        "blob": "8a5ec20745742dd935dd4d2100a20bb6edc5654b",
+        "sha256": "ccc681bc9edb5f59482d3d4313bbd3d46d2958965e5b9f74fc15bc93edbd9f1e"
+      },
+      "rawQuestionHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "sourceCandidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "candidateHash": "3bc02a9b45da0f72701ce75501215e9d461218e39db2f5df65617e6a7fceb22a",
+      "publicationContentHash": "c8d34424ad5a878a0eac45680220dbb0b2ca3693e2f452280a419da9814c01a6",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-vr-016-seed-001.json",
+        "blob": "4e5ea0dd95ed2c0c3a3f433f5b5b85cc08e71fea",
+        "sha256": "37cb3dc79edb4dfa0c8542ca85bd813e1f9f2ffd5926154cc6d8bf1da57cd1be",
+        "id": "scholarship-y6-vr-016-seed-001",
+        "contentHash": "025e78e7f2d9f25030f9eeca35dc006d6ec14ed011af4f767107d1dfcc59fe86"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "0f15590b807611273667d5de48f3dd3535db23f215321a83f67d36d5bcfecce7"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-vr-032",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-verbal-reasoning-draft.json",
+        "blob": "8a5ec20745742dd935dd4d2100a20bb6edc5654b",
+        "sha256": "ccc681bc9edb5f59482d3d4313bbd3d46d2958965e5b9f74fc15bc93edbd9f1e"
+      },
+      "rawQuestionHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+      "sourceCandidateHash": "743f6164cdd5d000956615d2ab8674e8e75bb4b832cc6e53e454fdb14a6ef1aa",
+      "candidateHash": "583b895df7740bb2e9a2903e40125c827be2b05e49899ba4584c353f3b5fc94c",
+      "publicationContentHash": "758d25fa7ee8c039f97a74432c50dd50f3d635fb7735d8dd892c3e322f7a3b22",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-vr-032-seed-001.json",
+        "blob": "90e04f7e31771bba91f3efe7595f4bbbf54a8b67",
+        "sha256": "c784f04f23f83c9e2e367f61bfd9ee9c9528a8261c1b3c43778d2c0c5c422dae",
+        "id": "scholarship-y6-vr-032-seed-001",
+        "contentHash": "d9c4602ea7676938dfee01d16a997824565031ee4193b2161b30b78bef041dd0"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "61cd7a8799debde19ea8ecc5d9060509b6f65f657fb6875c4ee5eff84ab77cd0"
+      },
+      "transformation": {
+        "kind": "solver_sidecar",
+        "sidecarHash": "d4ed3d82570305ba248bb79e0969aa9e643d7a734e9710582afbc909feef4b3d"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-001",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+        "blob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+        "sha256": "6367f3bfc90a62b39250beec8245cd37d810ba4c27a96ff6fe076f07b746205d"
+      },
+      "rawQuestionHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+      "sourceCandidateHash": "e18ddd9625b44b4eedb5951cbc18c03c8de216e61930b0936a7276cb0f43cc81",
+      "candidateHash": "926a14bedf8c0e0a510437674d42ebdd16233269b30d0fab1154cb049800aecc",
+      "publicationContentHash": "8bf3c2012084099d8bf82df4677d86309330b84d2774e1e6bd1ccafcdadfb361",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-nr-001-seed-001.json",
+        "blob": "0b3b0ca2474396d74e65924ffebabbdad5fca97c",
+        "sha256": "fe8936b0b5495ce13dce1ae75198568115c5c2158eb22cbe53f1b8b6154b2d35",
+        "id": "scholarship-y6-nr-001-seed-001",
+        "contentHash": "1bdc10e4a60459e8e3245ddbc0d9a903ea412b2a6e7eb042f544fee4be9f4b72"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "8252c96b0a918c1661823669848514ef92638d58e82a4a82adf89f279f4f3c90"
+      },
+      "transformation": {
+        "kind": "solver_sidecar",
+        "sidecarHash": "1b8d8b269aef3a8d53388f72de3b69b301a6e6c32da3cf636c145d18ef5dcb50"
+      }
+    },
+    {
+      "id": "scholarship-y6-nr-022",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+        "blob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+        "sha256": "6367f3bfc90a62b39250beec8245cd37d810ba4c27a96ff6fe076f07b746205d"
+      },
+      "rawQuestionHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "sourceCandidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "candidateHash": "8758ac61587d966b235e83cd18564b1e0fa577485306054052487189bc4fa7c2",
+      "publicationContentHash": "a0c486d79ec7026022d01ac6ad5ee7cd3881f63557435af74aca4133ee1c1f85",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-nr-022-seed-001.json",
+        "blob": "c1e53faf2ff0610d6eb7c56b6cf6f5a2ca3b74e5",
+        "sha256": "7e0ccd88c980354ca05c2ecfc18c79031ebc7264663f207e0be4b902c94b40ac",
+        "id": "scholarship-y6-nr-022-seed-001",
+        "contentHash": "81fd4d5dc40d7d8839e11193d484355ffa26d82fca926e2b19d32a76af351580"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "48c1cdd405dad33e6968948973e212e285252a11a4c4bdbc37d1e392c004346c"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-nr-023",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-numerical-reasoning-draft.json",
+        "blob": "6e046c5ab1b1536d17af3fb6be563edbff499ab8",
+        "sha256": "6367f3bfc90a62b39250beec8245cd37d810ba4c27a96ff6fe076f07b746205d"
+      },
+      "rawQuestionHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "sourceCandidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "candidateHash": "52d196a6d5d1829e7695bc8833a19c87bf7cfec3a65117138d83de3bf1473b03",
+      "publicationContentHash": "7b80d6a14c2af6e957b20fafa2053687edadf8171fcceff913e623a9eddc4f2c",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-nr-023-seed-001.json",
+        "blob": "88d788920c6fe60cb16a558c7108e1b82116be0e",
+        "sha256": "21ccf9fb888f8f4c4a961c2a7378ef24f3667bf30b7edb43dffe0986cfad1715",
+        "id": "scholarship-y6-nr-023-seed-001",
+        "contentHash": "412c6b9eca08d6756ae985e70540137a7da815c88488fe8b887436bfff0525a0"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "0d41c1de24c80c26b6a3e9a14b28289006e6550ad1f573e25286d8260a89663b"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-rc-001",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+        "blob": "da353d6688a158560748b990e43ffd5f7058abbc",
+        "sha256": "55b77bbd3548c9df0dd602d3fc56fabba98c9a52730608a82a9dea5d17dc96f7"
+      },
+      "rawQuestionHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "sourceCandidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "candidateHash": "8d09cf53874fc518060835d50b55025d19d2808c11e72d64bee7a9c2e4a02c0c",
+      "publicationContentHash": "013845c94fc3b5a3ba8ae13a69bd8b2bd0efcedd2559cc393c1e020e01bedb0d",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-rc-001-seed-001.json",
+        "blob": "c45840600927e54b7a79f6ffd3789e2504b66b71",
+        "sha256": "2c66f1fe4a2e4dfc999a0c4b5c11f7cb8c2183ff707aa02d24d1c314f2631b68",
+        "id": "scholarship-y6-rc-001-seed-001",
+        "contentHash": "a9eba5169c20596f50b4fee9ae1aebd421550354b25714a6f8bdbee778ae6c10"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "acd860629c201e5edd9e4066203b32ca58b59353d32eaae96c8ae1546f8fcaa2"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-rc-002",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+        "blob": "da353d6688a158560748b990e43ffd5f7058abbc",
+        "sha256": "55b77bbd3548c9df0dd602d3fc56fabba98c9a52730608a82a9dea5d17dc96f7"
+      },
+      "rawQuestionHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "sourceCandidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "candidateHash": "88ae673686bc79d65cb76c76bb52aa5145d089f5e8b727ad7f776f34d9e2be67",
+      "publicationContentHash": "855026023be215294d83f64395f9502dab502677cbbb9d0bcc1ed90c3fb59ca8",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-rc-002-seed-001.json",
+        "blob": "95f271adf771f8950b0a2a67ed527572a5edef99",
+        "sha256": "ecb62ddc43678886474651f3db783cff994a7a8fd885fd340822ee28002b53bf",
+        "id": "scholarship-y6-rc-002-seed-001",
+        "contentHash": "1ad58cb7b99e64d7a07da9ca78b6ccedc76e4bfa44a8bc43d3097d892b09bcbc"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "6768f775421119becb388a35eeb1c96657fcdd4fd825c6d9963cf6155105e8bc"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-rc-003",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-reading-draft.json",
+        "blob": "da353d6688a158560748b990e43ffd5f7058abbc",
+        "sha256": "55b77bbd3548c9df0dd602d3fc56fabba98c9a52730608a82a9dea5d17dc96f7"
+      },
+      "rawQuestionHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "sourceCandidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "candidateHash": "39ae557efa78dfdd1425b3ee60677dbb04c928579dc9b7591176509192cf6680",
+      "publicationContentHash": "d377c208e0c255743d9299cd8b9e4f4874591928ff72f4c751c951e2ba26d078",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-rc-003-seed-001.json",
+        "blob": "faacc6801e0fcd2a4b7a87cc45bb8b0b3a012d36",
+        "sha256": "dbda81c850ca3c8fcddbd4cf75490203a46b944adc097d003db904026eb508b5",
+        "id": "scholarship-y6-rc-003-seed-001",
+        "contentHash": "d0dfc556441eea8054b230d2e237a7d43fb8fad7d8148f30e21331af65e0bd98"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "90ab6d91bb9f452df1ef1a6927e661ad143902b03fa91cfc7be7d14149d62a3a"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-maths-004",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+        "blob": "6828fde20d960150bbf4e8ec979d1147adc971c0",
+        "sha256": "547ba51713d1cb79f1ac3f881d39d5ccd34947a189144fb49e5e32e26b0f5051"
+      },
+      "rawQuestionHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "sourceCandidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "candidateHash": "8aeef3fbabe39264200fbff733fc111ccb56f8761a003492374e611184d797d2",
+      "publicationContentHash": "2038c2ac1123bb31d38da319a253789df86262c78e45635607ff96f54fee2c44",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-maths-004-seed-001.json",
+        "blob": "8ac35655e5be36bedfb4d5d9aef6dd961c69e359",
+        "sha256": "7b8065261a361239289689555a3ca6ddd383986b50387f8ea80c22f6aff405f0",
+        "id": "scholarship-y6-maths-004-seed-001",
+        "contentHash": "a12df2e7b53ebf7e86ef0be48de7e2f64baf27eaef61d2d5a55bac5f6813e452"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "139619a650e831f9c0cf3d5163a6009054ea38333749fcd6cf12be4df10325ba"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-maths-007",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+        "blob": "6828fde20d960150bbf4e8ec979d1147adc971c0",
+        "sha256": "547ba51713d1cb79f1ac3f881d39d5ccd34947a189144fb49e5e32e26b0f5051"
+      },
+      "rawQuestionHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "sourceCandidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "candidateHash": "93bfea7f835eaf40d2b37b34f8c63977d22fb51fec67dc421ba46fc8b8c97808",
+      "publicationContentHash": "938bf96f5c97c8059908514305b6c0d8c52ce95659699aa9f366ec3280e931ae",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-maths-007-seed-001.json",
+        "blob": "6cd61287c7813edbdab1709aa16940b4c36ad134",
+        "sha256": "d11c152d60813a43b917699934ee1db0de04ea059c488e2e4d7bcc3cbc4c186f",
+        "id": "scholarship-y6-maths-007-seed-001",
+        "contentHash": "c4d9913b4035144dbc62997ce6ebc90d78397151c356f69ed4dea786272b0905"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "0f10aa5cffac3d30689c878d5b7ed9bc3184938460e0bcc4ee1d0cd83131ecb1"
+      },
+      "transformation": null
+    },
+    {
+      "id": "scholarship-y6-maths-014",
+      "source": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/scholarship-drafts/scholarship-y6-mathematics-draft.json",
+        "blob": "6828fde20d960150bbf4e8ec979d1147adc971c0",
+        "sha256": "547ba51713d1cb79f1ac3f881d39d5ccd34947a189144fb49e5e32e26b0f5051"
+      },
+      "rawQuestionHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+      "sourceCandidateHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+      "candidateHash": "71d11fa2c35f6551f230f3d018eaa0c7ef06932f1a60ccb1a4734d6867c2995c",
+      "publicationContentHash": "aeb211f7441a014aefc7cdf85b510e2df0175d615366b97f1d24c58a0372e03a",
+      "blueprint": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "content/question-factory/blueprints/scholarship-y6-maths-014-seed-001.json",
+        "blob": "a31444243c221d510b159c924ea2e8970627cd75",
+        "sha256": "0391419251a43bc78c0f7514ca1189ae4a43d75a917fbb6d2bb0f1231a3a4752",
+        "id": "scholarship-y6-maths-014-seed-001",
+        "contentHash": "070dad32c26ea51dcc51e0c354483d736fe10f47b461544f87912b8bb5f2d7db"
+      },
+      "reviewPacket": {
+        "repository": "Vishwas2018/mindmosaic-exam-engine",
+        "commit": "dcb60a80f3f6eabdb522b20202929d2e3f328a94",
+        "path": "docs/reviews/scholarship-sample-2026-10-21/packet.json",
+        "blob": "e7a3237fc3f9e7fce74d01c9d9c91fb3483e0bb0",
+        "sha256": "5bb764471c1d2aa5521b68aaa43e0c3d6821959b0eeacd2347a4f2c3b8281849",
+        "projectionHash": "d692f39a2472639b71409f4c639a64f7472ba1d58dff02e1cda44b92dc80b779"
+      },
+      "transformation": null
+    }
+  ]
+}

@@ -59,7 +59,7 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
         <div>
           <h2
             id="more-challenges-heading"
-            className="font-jakarta font-extrabold text-xl md:text-2xl text-plum-dark tracking-tight"
+            className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-xl md:text-2xl text-plum-dark tracking-tight"
           >
             More challenges
           </h2>
@@ -67,7 +67,7 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
             Enrichment, selective school entry, and contest mathematics
           </p>
         </div>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-light border border-amber-border text-amber-accent font-jakarta font-bold text-xs">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-light border border-amber-border text-amber-accent font-jakarta font-semibold text-xs">
           <Clock className="h-4 w-4" aria-hidden="true" />
           Coming in Term 1 &middot; Register for early access
         </span>
@@ -93,7 +93,7 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
                     Coming Soon
                   </span>
                 </div>
-                <h4 className="font-jakarta font-bold text-sm text-plum-dark leading-snug">
+                <h4 className="font-jakarta font-semibold text-sm text-plum-dark leading-snug">
                   {track.cardTitle}
                 </h4>
                 <p className="font-vietnam text-xs text-plum-muted mt-2 leading-relaxed">
@@ -101,7 +101,7 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-parchment-border/60 flex items-center justify-between text-xs">
-                <span className={`font-jakarta font-bold inline-flex items-center gap-1 group-hover:gap-1.5 transition-all ${accent.action} ${accent.actionHover}`}>
+                <span className={`font-jakarta font-semibold inline-flex items-center gap-1 group-hover:gap-1.5 transition-all ${accent.action} ${accent.actionHover}`}>
                   <span>Preview track</span>
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
@@ -141,10 +141,10 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
           <div className="w-12 h-12 rounded-2xl bg-amber-light text-amber-accent flex items-center justify-center border border-amber-border mb-4">
             <Sparkles className="h-6.5 w-6.5" aria-hidden="true" />
           </div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-light text-amber-accent font-jakarta font-bold text-xs mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-light text-amber-accent font-jakarta font-semibold text-xs mb-2">
             <span>Releasing Term 1</span>
           </div>
-          <h3 className="font-jakarta font-bold text-xl md:text-2xl text-plum-dark">
+          <h3 className="font-jakarta font-semibold text-xl md:text-2xl text-plum-dark">
             {active?.fullTitle ?? "Track Preview"}
           </h3>
           <p className="font-vietnam text-sm text-plum-muted mt-2 leading-relaxed">
@@ -155,7 +155,7 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
             <button
               type="button"
               onClick={notify}
-              className={`h-11 w-full rounded-xl text-white font-jakarta font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors ${
+              className={`h-11 w-full rounded-xl text-white font-jakarta font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors ${
                 notified ? "bg-teal-accent" : "bg-primary hover:bg-primary-hover"
               }`}
             >
@@ -174,7 +174,7 @@ export function MoreChallengesSection({ firstName }: { firstName?: string | null
             {active && (
               <Link
                 href={`/practice/${active.slug}`}
-                className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-parchment-border font-jakarta text-xs font-bold text-plum-dark transition-colors hover:border-primary/40 hover:text-primary"
+                className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-parchment-border font-jakarta text-xs font-semibold text-plum-dark transition-colors hover:border-primary/40 hover:text-primary"
               >
                 <span>View full programme page</span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

@@ -4,6 +4,7 @@ import { create } from "zustand";
 import type { CandidateAnswer } from "@/features/exam-engine/types";
 import type { ExamResult } from "@/features/exam-engine/scoring/exam-report";
 import type { DiagnosticBaselineRecord } from "./baseline-contract";
+import type { WarmupRecommendations } from "./recommendations";
 
 export type OnboardingStep =
   | "welcome"
@@ -25,6 +26,7 @@ export interface OnboardingStoreState {
   error: string | null;
   diagnosticResult: ExamResult | null;
   baselineRecord: DiagnosticBaselineRecord | null;
+  recommendations: WarmupRecommendations | null;
 
   // Actions
   open: (config?: {
@@ -44,6 +46,7 @@ export interface OnboardingStoreState {
   setDiagnosticOutcome: (
     result: ExamResult,
     baseline: DiagnosticBaselineRecord,
+    recommendations?: WarmupRecommendations | null,
   ) => void;
   reset: () => void;
 }
@@ -63,6 +66,7 @@ export const useOnboardingStore = create<OnboardingStoreState>((set) => ({
   error: null,
   diagnosticResult: null,
   baselineRecord: null,
+  recommendations: null,
 
   open: (config) =>
     set((state) => ({
@@ -113,10 +117,11 @@ export const useOnboardingStore = create<OnboardingStoreState>((set) => ({
 
   setError: (error) => set({ error }),
 
-  setDiagnosticOutcome: (result, baseline) =>
+  setDiagnosticOutcome: (result, baseline, recommendations = null) =>
     set({
       diagnosticResult: result,
       baselineRecord: baseline,
+      recommendations,
       step: "warmup_summary",
       isSubmitting: false,
       error: null,
@@ -135,5 +140,6 @@ export const useOnboardingStore = create<OnboardingStoreState>((set) => ({
       error: null,
       diagnosticResult: null,
       baselineRecord: null,
+      recommendations: null,
     }),
 }));

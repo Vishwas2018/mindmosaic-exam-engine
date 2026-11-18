@@ -1,7 +1,7 @@
 {
   "candidateId": "man-2e619aada91e92bdcdc527b8",
   "questionId": "man-2e619aada91e92bdcdc527b8",
-  "contentHash": "7c9bf86e7bd3c1cbf46515dbe4082827ce55c238d4675167c48892a29224df60",
+  "contentHash": "fcab80c23826d1a40af77e5f1105ca80f3c665b091f1ed5a4795ab52eb860938",
   "revision": 2,
   "blueprintId": "g5-numeracy-money-1-seed-001",
   "batchId": "g5-numeracy-seed-batch-01",
@@ -24,7 +24,7 @@
     "examStyle": "naplan_style",
     "status": "published",
     "origin": "original_seed",
-    "prompt": "A school canteen sells each juice box for $3.00, and a student buys 8 of them, paying with a $30.00 note. How much change, in dollars, should the student receive?",
+    "prompt": "A school canteen sells each juice box for $3.00, and a student buys 8 of them and pays $30. How much change, in dollars, should the student receive?",
     "options": [],
     "visuals": [],
     "answerKey": {
@@ -33,7 +33,7 @@
       "tolerance": 0,
       "unit": "$"
     },
-    "explanation": "The total cost is found by multiplying the price of one juice box by the number bought. Multiplying $3.00 by 8 gives a total cost of $24.00. Subtracting this total cost from the $30.00 note gives the change owed. So the student should receive $6.00 in change.",
+    "explanation": "The total cost is found by multiplying the price of one juice box by the number bought. Multiplying $3.00 by 8 gives a total cost of $24.00. Subtracting this total cost from the $30 paid gives the change owed. So the student should receive $6.00 in change.",
     "metadata": {
       "subject": "numeracy",
       "strand": "Number",
@@ -52,7 +52,7 @@
       "schemaVersion": 1
     }
   },
-  "manifestFingerprint": "d1d823283a9aa12ef86e286b9b22cd2b9375f3017823d9f512e0c49b98b48d16",
+  "manifestFingerprint": "cf93eb08046244ad9079a9fb7924b391d9366ce5e7a6693532d1a5d7c8c1783e",
   "manifestSchemaVersion": 1,
   "noChainRecovered": true
 }

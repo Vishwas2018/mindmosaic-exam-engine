@@ -39,7 +39,7 @@ export function DashboardWelcomeBanner({
           Curriculum Synchronised: NSW NESA Stage 3
         </span>
       </div>
-      <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight text-mm-ink lg:text-3xl">
+      <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-mm-ink lg:text-3xl">
         {firstName ? `Welcome back, ${firstName}` : "Welcome back"}
       </h1>
       <p className="text-sm text-mm-muted">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Lock } from "lucide-react";
 
 import type { Program } from "../catalogue";
@@ -67,7 +68,7 @@ export function ComingSoonPrograms({ programs }: { programs: readonly Program[] 
         </h2>
       </div>
       <p className="mt-2.5 max-w-[60ch] text-[15px] leading-[1.6] text-mm-muted">
-        Not available to sit yet. These are what we are building next.
+        Full programs not available to sit yet. These are what we are building next; where practice modules are already open, the card says so.
       </p>
 
       {named.length > 0 && (
@@ -82,10 +83,18 @@ export function ComingSoonPrograms({ programs }: { programs: readonly Program[] 
                   {program.name}
                 </h3>
                 <span className="rounded-full bg-mm-surface-quiet px-2.5 py-1 text-[10.5px] font-bold uppercase leading-none tracking-[0.09em] text-mm-quiet">
-                  Planned
+                  {program.modules ? "Practice modules open" : "Planned"}
                 </span>
               </div>
               <p className="mt-2 text-[14px] leading-[1.55] text-mm-muted">{program.blurb}</p>
+              {program.modules && (
+                <Link
+                  href={program.modules.href}
+                  className="mt-2 inline-flex min-h-11 items-center text-[14px] font-bold text-mm-brand underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
+                >
+                  {program.modules.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

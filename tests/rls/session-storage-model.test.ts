@@ -422,10 +422,14 @@ describe("rollback routes new sessions back and strands nobody (§12.7)", () => 
     /* §12.7: active legacy sessions continue on the legacy path. The step 6
        change must not have altered what create_exam_session does for anyone. */
     await setFlag(client, { enabled: true, cohortMode: "all" });
-    await asAuthenticated(client, STUDENT_A);
+    /* P1 lockdown (20261031090100): the legacy session is now created by the server through create_exam_session_for
+       (as mindmosaic_exam_writer; run here as the unrestricted role standing in for it) because `authenticated` can no
+       longer execute the client-callable function. The property this test protects is unchanged: the routing flag has
+       no effect on the legacy create path. */
     const legacy = await client.query<{ id: string }>(
-      `select public.create_exam_session('{}'::jsonb, 's', array['q1'],
+      `select public.create_exam_session_for($1, '{}'::jsonb, 's', array['q1'],
               now() + interval '1 hour') as id`,
+      [STUDENT_A],
     );
     expect(legacy.rows[0]!.id).toBeTruthy();
   });

@@ -1,0 +1,3210 @@
+{
+  "batchId": "vihaan-expansion-07",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "OpenAI Codex session",
+    "model": null,
+    "generatedOn": "2026-11-16",
+    "originalGenerationEvidence": "Session-authored problems, passages and prompts; deterministic assembly from checked-in authoring rows.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no sample test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "retainedPilotIds": [],
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-e500-v065",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A curator selects works for an exhibition. A compiler selects entries for an ____.",
+        "options": [
+          {
+            "id": "a",
+            "text": "anthology"
+          },
+          {
+            "id": "b",
+            "text": "auditorium"
+          },
+          {
+            "id": "c",
+            "text": "easel"
+          },
+          {
+            "id": "d",
+            "text": "applause"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The relationship is selector to assembled collection. A compiler gathers entries into an anthology; an auditorium is a venue rather than a collection.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The relationship is selector to assembled collection.",
+        "A compiler gathers entries into an anthology; an auditorium is a venue rather than a collection."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v066",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A map simplifies a landscape; a summary simplifies an ____. Preserve the representation-to-source relationship.",
+        "options": [
+          {
+            "id": "a",
+            "text": "account"
+          },
+          {
+            "id": "b",
+            "text": "opinion"
+          },
+          {
+            "id": "c",
+            "text": "author"
+          },
+          {
+            "id": "d",
+            "text": "alphabet"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A map is a reduced representation of the landscape. A summary is a reduced representation of a longer account; an author creates a source rather than being the source content.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A map is a reduced representation of the landscape.",
+        "A summary is a reduced representation of a longer account; an author creates a source rather than being the source content."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r064",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why can Sam not answer the engineer's first question?",
+        "options": [
+          {
+            "id": "a",
+            "text": "he cannot read the map"
+          },
+          {
+            "id": "b",
+            "text": "he has never visited the creek"
+          },
+          {
+            "id": "c",
+            "text": "He has only observed sunny afternoons"
+          },
+          {
+            "id": "d",
+            "text": "he has lost his notebook"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The engineer asks about conditions after rain, outside Sam's observation period. The gap concerns the range of evidence rather than Sam's ability to map it.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The bridge notebook",
+          "body": "When the old footbridge closed, Sam began recording how people crossed the creek. A cyclist pushed her bicycle through the shallow ford. A man with a walking frame turned back. Three children took the long road past the shops. Sam drew each route in a notebook.\n\nAt the planning meeting, he expected the adults to admire his neat map. Instead, the engineer asked which routes people could use after rain. Sam had no answer. His observations all came from sunny afternoons.\n\nThe next wet morning he returned with his father. The ford had vanished beneath brown water. On his map, Sam drew a dotted line around it and added the date. He did not erase the earlier routes. At the second meeting, his map was untidier, with notes squeezed into the margins. This time he could explain why the shortest route on paper was not always an available route in practice.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The engineer asks about conditions after rain, outside Sam's observation period.",
+        "The gap concerns the range of evidence rather than Sam's ability to map it."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r065",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why is the later map described as untidier?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sam has stopped caring about accuracy"
+          },
+          {
+            "id": "b",
+            "text": "the engineer has damaged it"
+          },
+          {
+            "id": "c",
+            "text": "the earlier map has become useless in every way"
+          },
+          {
+            "id": "d",
+            "text": "Its added qualifications make it more informative despite its appearance"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The margins now contain wet-weather notes and dates. The description contrasts visual neatness with evidential usefulness, without dismissing the earlier observations altogether.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc authorial craft",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-authorial-craft"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The bridge notebook",
+          "body": "When the old footbridge closed, Sam began recording how people crossed the creek. A cyclist pushed her bicycle through the shallow ford. A man with a walking frame turned back. Three children took the long road past the shops. Sam drew each route in a notebook.\n\nAt the planning meeting, he expected the adults to admire his neat map. Instead, the engineer asked which routes people could use after rain. Sam had no answer. His observations all came from sunny afternoons.\n\nThe next wet morning he returned with his father. The ford had vanished beneath brown water. On his map, Sam drew a dotted line around it and added the date. He did not erase the earlier routes. At the second meeting, his map was untidier, with notes squeezed into the margins. This time he could explain why the shortest route on paper was not always an available route in practice.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The margins now contain wet-weather notes and dates.",
+        "The description contrasts visual neatness with evidential usefulness, without dismissing the earlier observations altogether."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r066",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does Sam keep the original routes on his map?",
+        "options": [
+          {
+            "id": "a",
+            "text": "all routes are safe after rain"
+          },
+          {
+            "id": "b",
+            "text": "the council prohibits erasing maps"
+          },
+          {
+            "id": "c",
+            "text": "They remain records of routes used in dry conditions"
+          },
+          {
+            "id": "d",
+            "text": "he wants to hide his new finding"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "He adds dates and markings rather than erasing sunny-day routes. Keeping both records allows a comparison of conditions rather than pretending the dry observations were false.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The bridge notebook",
+          "body": "When the old footbridge closed, Sam began recording how people crossed the creek. A cyclist pushed her bicycle through the shallow ford. A man with a walking frame turned back. Three children took the long road past the shops. Sam drew each route in a notebook.\n\nAt the planning meeting, he expected the adults to admire his neat map. Instead, the engineer asked which routes people could use after rain. Sam had no answer. His observations all came from sunny afternoons.\n\nThe next wet morning he returned with his father. The ford had vanished beneath brown water. On his map, Sam drew a dotted line around it and added the date. He did not erase the earlier routes. At the second meeting, his map was untidier, with notes squeezed into the margins. This time he could explain why the shortest route on paper was not always an available route in practice.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "He adds dates and markings rather than erasing sunny-day routes.",
+        "Keeping both records allows a comparison of conditions rather than pretending the dry observations were false."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w022",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Explain why two people can remember the same event differently without either deliberately lying. Use an invented everyday example and acknowledge a limit to memory. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Distinguish deliberate deception from differences in attention or viewpoint. Develop a concrete example showing which details each observer notices and why. Explain that confidence does not by itself settle accuracy, and suggest checking another source where useful.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Expository composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "expository",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Distinguish deliberate deception from differences in attention or viewpoint.",
+        "Develop a concrete example showing which details each observer notices and why.",
+        "Explain that confidence does not by itself settle accuracy, and suggest checking another source where useful."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Distinguish deliberate deception from differences in attention or viewpoint.",
+          "Develop a concrete example showing which details each observer notices and why.",
+          "Explain that confidence does not by itself settle accuracy, and suggest checking another source where useful.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m067",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The sum of three equally spaced numbers is 72. The smallest is 19. What is the largest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "34"
+          },
+          {
+            "id": "b",
+            "text": "29"
+          },
+          {
+            "id": "c",
+            "text": "24"
+          },
+          {
+            "id": "d",
+            "text": "27"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "For three equally spaced numbers, the middle equals their average, 24. The gap from 19 to 24 is five, so the largest is 29.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "For three equally spaced numbers, the middle equals their average, 24.",
+        "The gap from 19 to 24 is five, so the largest is 29."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2*(72/3)-19",
+        "expected": "29"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m068",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shop sells pens for $3 and notebooks for $5. Twelve items cost $46. How many notebooks were bought?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "7"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "If all twelve items were pens, they would cost $36. The extra $10 is $2 for each notebook replacing a pen, so there are five notebooks.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "If all twelve items were pens, they would cost $36.",
+        "The extra $10 is $2 for each notebook replacing a pen, so there are five notebooks."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(46-12*3)/(5-3)",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m069",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A square number is greater than 60 and less than 90. Its digits add to 13. What is the number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "86"
+          },
+          {
+            "id": "b",
+            "text": "64"
+          },
+          {
+            "id": "c",
+            "text": "72"
+          },
+          {
+            "id": "d",
+            "text": "81"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The square numbers in the interval are 64 and 81. Only 64 has digits summing to 13, so it meets both conditions.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The square numbers in the interval are 64 and 81.",
+        "Only 64 has digits summing to 13, so it meets both conditions."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8**2",
+        "expected": "64"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n067",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three consecutive integers total 87. What is their smallest value?",
+        "options": [
+          {
+            "id": "a",
+            "text": "27"
+          },
+          {
+            "id": "b",
+            "text": "29"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "28"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The middle of three consecutive integers equals their average, 29. The smallest is one less, 28; the numbers 28, 29 and 30 sum to 87.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The middle of three consecutive integers equals their average, 29.",
+        "The smallest is one less, 28; the numbers 28, 29 and 30 sum to 87."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "87/3-1",
+        "expected": "28"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n068",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A two-digit number is four times the sum of its digits. Its tens digit is 3. What is the number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "32"
+          },
+          {
+            "id": "b",
+            "text": "34"
+          },
+          {
+            "id": "c",
+            "text": "39"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Write the number as 30 + u. The clue gives 30 + u = 4(3 + u). Thus 18 = 3u and u = 6, so the number is 36.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Write the number as 30 + u. The clue gives 30 + u = 4(3 + u).",
+        "Thus 18 = 3u and u = 6, so the number is 36."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "36",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n069",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A whole number leaves remainder 2 when divided by 5. It lies between 30 and 40 and is even. What is the number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "34"
+          },
+          {
+            "id": "b",
+            "text": "37"
+          },
+          {
+            "id": "c",
+            "text": "42"
+          },
+          {
+            "id": "d",
+            "text": "32"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Numbers in the interval with remainder two are 32 and 37. Only 32 is even, so it satisfies both the interval and remainder conditions.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Numbers in the interval with remainder two are 32 and 37.",
+        "Only 32 is even, so it satisfies both the interval and remainder conditions."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "32",
+        "expected": "32"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v067",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Seed is to germination as egg is to ____. Choose the matching developmental event.",
+        "options": [
+          {
+            "id": "a",
+            "text": "laying"
+          },
+          {
+            "id": "b",
+            "text": "flying"
+          },
+          {
+            "id": "c",
+            "text": "hatching"
+          },
+          {
+            "id": "d",
+            "text": "nesting"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Germination is the event in which the young plant emerges from a seed. Hatching similarly releases the young animal from an egg; laying precedes the egg's development.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Germination is the event in which the young plant emerges from a seed.",
+        "Hatching similarly releases the young animal from an egg; laying precedes the egg's development."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v068",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A hypothesis is tested by evidence as an accusation is tested by ____. Choose the best parallel rather than a guaranteed outcome.",
+        "options": [
+          {
+            "id": "a",
+            "text": "punishment"
+          },
+          {
+            "id": "b",
+            "text": "disagreement"
+          },
+          {
+            "id": "c",
+            "text": "suspicion"
+          },
+          {
+            "id": "d",
+            "text": "investigation"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "A hypothesis needs examination against evidence before acceptance. An accusation similarly needs investigation. Punishment assumes a conclusion and suspicion does not test it.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A hypothesis needs examination against evidence before acceptance.",
+        "An accusation similarly needs investigation. Punishment assumes a conclusion and suspicion does not test it."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v069",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Editor is to manuscript as restorer is to ____. Match the object improved by the specialist.",
+        "options": [
+          {
+            "id": "a",
+            "text": "gallery"
+          },
+          {
+            "id": "b",
+            "text": "brush"
+          },
+          {
+            "id": "c",
+            "text": "visitor"
+          },
+          {
+            "id": "d",
+            "text": "painting"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "An editor works on a manuscript to improve its condition or quality. A restorer works on a painting; a brush is a tool and a gallery is a location.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "An editor works on a manuscript to improve its condition or quality.",
+        "A restorer works on a painting; a brush is a tool and a gallery is a location."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r067",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which lesson is most closely developed by 'The bridge notebook'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "neat maps prevent good decisions"
+          },
+          {
+            "id": "b",
+            "text": "adults should make every observation themselves"
+          },
+          {
+            "id": "c",
+            "text": "Useful plans must consider conditions that change people's choices"
+          },
+          {
+            "id": "d",
+            "text": "the shortest route is always unsafe"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The sunny routes and flooded ford lead Sam to qualify route availability. The lesson concerns considering changing conditions, not rejecting short routes, maps or student observation entirely.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc main idea",
+          "skill": "scholarship.rc-main-idea",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-main-idea"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The bridge notebook",
+          "body": "When the old footbridge closed, Sam began recording how people crossed the creek. A cyclist pushed her bicycle through the shallow ford. A man with a walking frame turned back. Three children took the long road past the shops. Sam drew each route in a notebook.\n\nAt the planning meeting, he expected the adults to admire his neat map. Instead, the engineer asked which routes people could use after rain. Sam had no answer. His observations all came from sunny afternoons.\n\nThe next wet morning he returned with his father. The ford had vanished beneath brown water. On his map, Sam drew a dotted line around it and added the date. He did not erase the earlier routes. At the second meeting, his map was untidier, with notes squeezed into the margins. This time he could explain why the shortest route on paper was not always an available route in practice.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The sunny routes and flooded ford lead Sam to qualify route availability.",
+        "The lesson concerns considering changing conditions, not rejecting short routes, maps or student observation entirely."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r068",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How many packets may a visitor take at one visit to the seed library?",
+        "options": [
+          {
+            "id": "a",
+            "text": "up to three"
+          },
+          {
+            "id": "b",
+            "text": "exactly one"
+          },
+          {
+            "id": "c",
+            "text": "up to thirty"
+          },
+          {
+            "id": "d",
+            "text": "as many as they donate"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The notice explicitly sets a limit of three packets per visit. Donating is encouraged but is not a condition of borrowing.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The seed library notice",
+          "body": "Borrow a packet, grow a possibility.\n\nOur neighbourhood seed library opens on Saturday. Anyone may take up to three packets at a visit. You do not need to return seeds to borrow, but successful growers are invited to donate fresh, dry seeds from clearly identified plants. Please label donations with the plant name and harvest month. We cannot accept unidentified seeds or seeds from invasive plants.\n\nPackets are sorted by planting season, not alphabetically. A blue dot means the plant needs a container at least thirty centimetres deep; it does not mean the plant needs extra water. Ask a volunteer if the planting directions are unclear.\n\nThe first collection is small, so a packet is an invitation to experiment, not a promise of a full harvest. Keep a record of what grows and share it on the noticeboard. Even an unsuccessful attempt can tell the next gardener something useful about local conditions.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The notice explicitly sets a limit of three packets per visit.",
+        "Donating is encouraged but is not a condition of borrowing."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r069",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does a blue dot on a seed packet tell a grower?",
+        "options": [
+          {
+            "id": "a",
+            "text": "that the seeds are unidentified"
+          },
+          {
+            "id": "b",
+            "text": "that the plant is invasive"
+          },
+          {
+            "id": "c",
+            "text": "the required minimum container depth"
+          },
+          {
+            "id": "d",
+            "text": "that the plant needs extra water"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The notice defines the blue dot as requiring a container at least thirty centimetres deep. It explicitly warns against interpreting the dot as a watering instruction.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The seed library notice",
+          "body": "Borrow a packet, grow a possibility.\n\nOur neighbourhood seed library opens on Saturday. Anyone may take up to three packets at a visit. You do not need to return seeds to borrow, but successful growers are invited to donate fresh, dry seeds from clearly identified plants. Please label donations with the plant name and harvest month. We cannot accept unidentified seeds or seeds from invasive plants.\n\nPackets are sorted by planting season, not alphabetically. A blue dot means the plant needs a container at least thirty centimetres deep; it does not mean the plant needs extra water. Ask a volunteer if the planting directions are unclear.\n\nThe first collection is small, so a packet is an invitation to experiment, not a promise of a full harvest. Keep a record of what grows and share it on the noticeboard. Even an unsuccessful attempt can tell the next gardener something useful about local conditions.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The notice defines the blue dot as requiring a container at least thirty centimetres deep.",
+        "It explicitly warns against interpreting the dot as a watering instruction."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w023",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Explain the difference between a result being possible, likely and certain. Use one connected example and show how new information can change the judgement. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Define the three terms with care, avoiding the claim that likely means guaranteed. Keep one scenario, such as choosing a coloured token, and vary the available evidence or conditions. Show what additional information changes the conclusion, using internally consistent examples rather than unsupported percentages.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Expository composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "expository",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Define the three terms with care, avoiding the claim that likely means guaranteed.",
+        "Keep one scenario, such as choosing a coloured token, and vary the available evidence or conditions.",
+        "Show what additional information changes the conclusion, using internally consistent examples rather than unsupported percentages."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Define the three terms with care, avoiding the claim that likely means guaranteed.",
+          "Keep one scenario, such as choosing a coloured token, and vary the available evidence or conditions.",
+          "Show what additional information changes the conclusion, using internally consistent examples rather than unsupported percentages.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m070",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three boxes contain 100 marbles in total. The second has 8 more than the first, and the third has twice the first. How many are in the third box?",
+        "options": [
+          {
+            "id": "a",
+            "text": "44"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "46"
+          },
+          {
+            "id": "d",
+            "text": "40"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "If the first has x, the total is x + (x + 8) + 2x = 4x + 8. Thus x = 23 and the third box has 46 marbles; the other two boxes have 23 and 31.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "If the first has x, the total is x + (x + 8) + 2x = 4x + 8.",
+        "Thus x = 23 and the third box has 46 marbles; the other two boxes have 23 and 31."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(100-8)/4*2",
+        "expected": "46"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m071",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number machine subtracts 9, divides by 4 and gives 7.5. What number entered the machine?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "34"
+          },
+          {
+            "id": "c",
+            "text": "39"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Work backwards by multiplying 7.5 by 4 to get 30. Then restore the subtracted 9 to get 39.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Work backwards by multiplying 7.5 by 4 to get 30.",
+        "Then restore the subtracted 9 to get 39."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7.5*4+9",
+        "expected": "39"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m072",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The mean of four test scores is 17. A fifth score raises the mean to 18. What is the fifth score?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "22"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Four scores total 4 times 17 = 68. Five scores must total 5 times 18 = 90, so the new score is 22.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Four scores total 4 times 17 = 68.",
+        "Five scores must total 5 times 18 = 90, so the new score is 22."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5*18-4*17",
+        "expected": "22"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n070",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An integer from 1 to 50 is divisible by 6, but not by 4. Its digits total 9. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The multiples of six with digit sum nine are 18 and 36. Thirty-six is divisible by four, leaving 18 as the sole value satisfying every condition.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The multiples of six with digit sum nine are 18 and 36.",
+        "Thirty-six is divisible by four, leaving 18 as the sole value satisfying every condition."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "18",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n071",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number has hundreds digit 4 and units digit 7. Its digits sum to 16. What is its tens digit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "9"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The known digits total eleven. The remaining digit must be 16 minus 11 = 5, making the number 457.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The known digits total eleven.",
+        "The remaining digit must be 16 minus 11 = 5, making the number 457."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "16-4-7",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n072",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Ages of three siblings are consecutive even numbers. Their sum is 42. What will the oldest sibling's age be in 5 years?",
+        "options": [
+          {
+            "id": "a",
+            "text": "21"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "23"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The middle age is 42/3 = 14, so the ages are 12, 14 and 16. The oldest will be 16 + 5 = 21 in five years.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The middle age is 42/3 = 14, so the ages are 12, 14 and 16.",
+        "The oldest will be 16 + 5 = 21 in five years."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "42/3+2+5",
+        "expected": "21"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v070",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A blueprint precedes construction as an outline precedes ____. Choose the planned product or process.",
+        "options": [
+          {
+            "id": "a",
+            "text": "composition"
+          },
+          {
+            "id": "b",
+            "text": "revision"
+          },
+          {
+            "id": "c",
+            "text": "publication"
+          },
+          {
+            "id": "d",
+            "text": "quotation"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A blueprint guides the creation process. An outline guides composition. Revision comes after an initial composition and publication is a later distribution step.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A blueprint guides the creation process.",
+        "An outline guides composition. Revision comes after an initial composition and publication is a later distribution step."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v071",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Evaporation changes liquid to gas. Freezing changes liquid to ____.",
+        "options": [
+          {
+            "id": "a",
+            "text": "mist"
+          },
+          {
+            "id": "b",
+            "text": "solid"
+          },
+          {
+            "id": "c",
+            "text": "vapour"
+          },
+          {
+            "id": "d",
+            "text": "heat"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Both words describe a change in physical state. Freezing produces a solid; mist consists of liquid droplets and is not the frozen state.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Both words describe a change in physical state.",
+        "Freezing produces a solid; mist consists of liquid droplets and is not the frozen state."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v072",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rebuttal responds to an argument as an antidote responds to a ____. Match the counteracting function.",
+        "options": [
+          {
+            "id": "a",
+            "text": "poison"
+          },
+          {
+            "id": "b",
+            "text": "doctor"
+          },
+          {
+            "id": "c",
+            "text": "symptom"
+          },
+          {
+            "id": "d",
+            "text": "diagnosis"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A rebuttal attempts to counter an argument's force. An antidote counteracts poison; diagnosis identifies a problem and a symptom is an effect rather than the target substance.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A rebuttal attempts to counter an argument's force.",
+        "An antidote counteracts poison; diagnosis identifies a problem and a symptom is an effect rather than the target substance."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r070",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why are the packets sorted by planting season?",
+        "options": [
+          {
+            "id": "a",
+            "text": "to separate successful from failed harvests"
+          },
+          {
+            "id": "b",
+            "text": "to help visitors find seeds suitable for when they intend to plant"
+          },
+          {
+            "id": "c",
+            "text": "to rank the plants by value"
+          },
+          {
+            "id": "d",
+            "text": "to identify the donors alphabetically"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Season-based sorting groups packets by planting time. This arrangement serves a gardening decision rather than naming order, price or a guarantee of success.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc text structure",
+          "skill": "scholarship.rc-text-structure",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-text-structure"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The seed library notice",
+          "body": "Borrow a packet, grow a possibility.\n\nOur neighbourhood seed library opens on Saturday. Anyone may take up to three packets at a visit. You do not need to return seeds to borrow, but successful growers are invited to donate fresh, dry seeds from clearly identified plants. Please label donations with the plant name and harvest month. We cannot accept unidentified seeds or seeds from invasive plants.\n\nPackets are sorted by planting season, not alphabetically. A blue dot means the plant needs a container at least thirty centimetres deep; it does not mean the plant needs extra water. Ask a volunteer if the planting directions are unclear.\n\nThe first collection is small, so a packet is an invitation to experiment, not a promise of a full harvest. Keep a record of what grows and share it on the noticeboard. Even an unsuccessful attempt can tell the next gardener something useful about local conditions.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Season-based sorting groups packets by planting time.",
+        "This arrangement serves a gardening decision rather than naming order, price or a guarantee of success."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r071",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which donation would satisfy all stated conditions?",
+        "options": [
+          {
+            "id": "a",
+            "text": "seeds from an invasive plant with a complete label"
+          },
+          {
+            "id": "b",
+            "text": "damp seeds labelled only with a donor's name"
+          },
+          {
+            "id": "c",
+            "text": "dry seeds from a named non-invasive plant labelled with harvest month"
+          },
+          {
+            "id": "d",
+            "text": "fresh unidentified seeds in a large bag"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The conditions jointly require dry seeds, known plant identity, non-invasive origin and plant-name and harvest-month labels. Each other choice omits or violates at least one requirement.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The seed library notice",
+          "body": "Borrow a packet, grow a possibility.\n\nOur neighbourhood seed library opens on Saturday. Anyone may take up to three packets at a visit. You do not need to return seeds to borrow, but successful growers are invited to donate fresh, dry seeds from clearly identified plants. Please label donations with the plant name and harvest month. We cannot accept unidentified seeds or seeds from invasive plants.\n\nPackets are sorted by planting season, not alphabetically. A blue dot means the plant needs a container at least thirty centimetres deep; it does not mean the plant needs extra water. Ask a volunteer if the planting directions are unclear.\n\nThe first collection is small, so a packet is an invitation to experiment, not a promise of a full harvest. Keep a record of what grows and share it on the noticeboard. Even an unsuccessful attempt can tell the next gardener something useful about local conditions.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The conditions jointly require dry seeds, known plant identity, non-invasive origin and plant-name and harvest-month labels.",
+        "Each other choice omits or violates at least one requirement."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r072",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the notice describe a packet as an invitation rather than a promise?",
+        "options": [
+          {
+            "id": "a",
+            "text": "it guarantees that failed seeds will be replaced"
+          },
+          {
+            "id": "b",
+            "text": "it says the library sells complete harvests"
+          },
+          {
+            "id": "c",
+            "text": "It encourages participation while limiting expectations of success"
+          },
+          {
+            "id": "d",
+            "text": "it discourages beginners from borrowing"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The notice welcomes experiments but says the small collection cannot guarantee a harvest. The wording balances encouragement with realistic uncertainty.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc authorial craft",
+          "skill": "scholarship.rc-authorial-craft",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-authorial-craft"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "The seed library notice",
+          "body": "Borrow a packet, grow a possibility.\n\nOur neighbourhood seed library opens on Saturday. Anyone may take up to three packets at a visit. You do not need to return seeds to borrow, but successful growers are invited to donate fresh, dry seeds from clearly identified plants. Please label donations with the plant name and harvest month. We cannot accept unidentified seeds or seeds from invasive plants.\n\nPackets are sorted by planting season, not alphabetically. A blue dot means the plant needs a container at least thirty centimetres deep; it does not mean the plant needs extra water. Ask a volunteer if the planting directions are unclear.\n\nThe first collection is small, so a packet is an invitation to experiment, not a promise of a full harvest. Keep a record of what grows and share it on the noticeboard. Even an unsuccessful attempt can tell the next gardener something useful about local conditions.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The notice welcomes experiments but says the small collection cannot guarantee a harvest.",
+        "The wording balances encouragement with realistic uncertainty."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w024",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Explain how a class could choose between two fundraising ideas fairly. Your explanation must include criteria, evidence and a decision process. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Name decision criteria such as cost, likely effort and who can participate. Describe how to collect usable evidence without treating guesses as facts. Explain how the group will compare the evidence and resolve disagreement using the chosen criteria.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Expository composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "expository",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Name decision criteria such as cost, likely effort and who can participate.",
+        "Describe how to collect usable evidence without treating guesses as facts.",
+        "Explain how the group will compare the evidence and resolve disagreement using the chosen criteria."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Name decision criteria such as cost, likely effort and who can participate.",
+          "Describe how to collect usable evidence without treating guesses as facts.",
+          "Explain how the group will compare the evidence and resolve disagreement using the chosen criteria.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m073",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A sequence starts at 7 and adds 4 each time. What is its twentieth term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "79"
+          },
+          {
+            "id": "b",
+            "text": "87"
+          },
+          {
+            "id": "c",
+            "text": "83"
+          },
+          {
+            "id": "d",
+            "text": "76"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "There are nineteen jumps from the first to the twentieth term. Add nineteen lots of four to seven to get 83; counting twenty jumps goes one term too far.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are nineteen jumps from the first to the twentieth term.",
+        "Add nineteen lots of four to seven to get 83; counting twenty jumps goes one term too far."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7+19*4",
+        "expected": "83"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m074",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cinema has 18 rows. Each row has 2 more seats than the row before. The first row has 12 seats. How many seats are there altogether?",
+        "options": [
+          {
+            "id": "a",
+            "text": "522"
+          },
+          {
+            "id": "b",
+            "text": "504"
+          },
+          {
+            "id": "c",
+            "text": "510"
+          },
+          {
+            "id": "d",
+            "text": "540"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The last row has 12 + 17 times 2 = 46 seats. Pair first with last: each pair totals 58. Nine pairs give 522 seats.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The last row has 12 + 17 times 2 = 46 seats.",
+        "Pair first with last: each pair totals 58. Nine pairs give 522 seats."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "18*(12+(12+17*2))/2",
+        "expected": "522"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m075",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The temperature is -4 degrees Celsius at dawn and rises by 11 degrees. What is the new temperature in degrees Celsius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-15"
+          },
+          {
+            "id": "b",
+            "text": "-7"
+          },
+          {
+            "id": "c",
+            "text": "15"
+          },
+          {
+            "id": "d",
+            "text": "7"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "From -4, a rise of four degrees reaches zero. The remaining seven-degree rise reaches 7 degrees Celsius.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "From -4, a rise of four degrees reaches zero.",
+        "The remaining seven-degree rise reaches 7 degrees Celsius."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "-4+11",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n073",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A secret number is a factor of 72 and a multiple of 8. It is greater than 10 but less than 30. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "28"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Multiples of eight in the interval are 16 and 24. Only 24 divides 72 exactly, giving a single match.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Multiples of eight in the interval are 16 and 24.",
+        "Only 24 divides 72 exactly, giving a single match."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "24",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n074",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two whole numbers have product 84 and differ by 5. What is their sum?",
+        "options": [
+          {
+            "id": "a",
+            "text": "21"
+          },
+          {
+            "id": "b",
+            "text": "25"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "17"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Factor pairs of 84 include (1,84), (2,42), (3,28), (4,21), (6,14) and (7,12). Only 7 and 12 differ by five; their sum is 19.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Factor pairs of 84 include (1,84), (2,42), (3,28), (4,21), (6,14) and (7,12).",
+        "Only 7 and 12 differ by five; their sum is 19."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7+12",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n075",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A four-digit lock code has digits that increase by 2 from left to right. Its first digit is 1. What is the sum of all four digits?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "14"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "16"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Starting at one and increasing by two gives digits 1, 3, 5 and 7. Their sum is 16; the code itself would be 1357.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Starting at one and increasing by two gives digits 1, 3, 5 and 7.",
+        "Their sum is 16; the code itself would be 1357."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "1+3+5+7",
+        "expected": "16"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v073",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A milestone marks progress through a journey. Which item most closely marks progress through a project?",
+        "options": [
+          {
+            "id": "a",
+            "text": "deadline"
+          },
+          {
+            "id": "b",
+            "text": "budget"
+          },
+          {
+            "id": "c",
+            "text": "proposal"
+          },
+          {
+            "id": "d",
+            "text": "checkpoint"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "A milestone is a point at which progress can be judged. A checkpoint performs that function in a project. A deadline marks a required completion time rather than necessarily measuring progress along the way.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "A milestone is a point at which progress can be judged.",
+        "A checkpoint performs that function in a project. A deadline marks a required completion time rather than necessarily measuring progress along the way."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v074",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A password restricts access to an account. Which pair most closely shares that function-to-target relationship?",
+        "options": [
+          {
+            "id": "a",
+            "text": "label : parcel"
+          },
+          {
+            "id": "b",
+            "text": "stamp : envelope"
+          },
+          {
+            "id": "c",
+            "text": "handle : door"
+          },
+          {
+            "id": "d",
+            "text": "key : locked cabinet"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The first item is needed to gain permitted access to the second. A key controls access to a locked cabinet; a handle operates a door but does not itself restrict access.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first item is needed to gain permitted access to the second.",
+        "A key controls access to a locked cabinet; a handle operates a door but does not itself restrict access."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v075",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A glossary explains specialised words as a legend explains symbols on a ____.",
+        "options": [
+          {
+            "id": "a",
+            "text": "map"
+          },
+          {
+            "id": "b",
+            "text": "dictionary"
+          },
+          {
+            "id": "c",
+            "text": "speech"
+          },
+          {
+            "id": "d",
+            "text": "calendar date"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Both aids explain compact forms used in a larger work. A legend explains a map's symbols; a dictionary explains words and would duplicate the first side instead.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr analogies",
+          "skill": "scholarship.vr-analogies",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-analogies"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Both aids explain compact forms used in a larger work.",
+        "A legend explains a map's symbols; a dictionary explains words and would duplicate the first side instead."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r073",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What was wrong with the station clock before the repair?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It was five minutes fast"
+          },
+          {
+            "id": "b",
+            "text": "it was five minutes slow"
+          },
+          {
+            "id": "c",
+            "text": "its hands were missing"
+          },
+          {
+            "id": "d",
+            "text": "it stopped every Monday"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The opening sentence gives its consistent five-minute lead. The later surprise follows correction of that error, not a slow or stopped clock.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A clock that gained a story",
+          "body": "For years the station clock had been five minutes fast. Commuters joked that it was trying to make them punctual. Then a technician reset it. The next morning, people gathered under its newly accurate hands and compared watches.\n\n'It used to be reliable,' one traveller complained.\n\n'It is reliable now,' the technician said.\n\nBoth were using the word differently. The traveller had known exactly how far wrong the clock was and had adjusted mentally. The repair removed that familiar error. For a few days, old habits made accurate time feel surprising.\n\nThe station manager put up a notice: 'Clock corrected on Monday. Please check your usual adjustment.' By Friday, the jokes had changed. People said the clock had finally decided to catch the train itself. The technician kept the old maintenance note, not as an instruction for the next repair, but as a reminder that changing a machine can also require changing the habits around it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The opening sentence gives its consistent five-minute lead.",
+        "The later surprise follows correction of that error, not a slow or stopped clock."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r074",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does reliable mean in the traveller's complaint?",
+        "options": [
+          {
+            "id": "a",
+            "text": "easy to see from the platform"
+          },
+          {
+            "id": "b",
+            "text": "predictably wrong in a familiar way"
+          },
+          {
+            "id": "c",
+            "text": "showing the true time"
+          },
+          {
+            "id": "d",
+            "text": "newly repaired"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The traveller knew the amount of the error and adjusted for it. In this context reliability means predictability, unlike the technician's emphasis on accuracy.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc vocabulary context",
+          "skill": "scholarship.rc-vocabulary-context",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-vocabulary-context"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A clock that gained a story",
+          "body": "For years the station clock had been five minutes fast. Commuters joked that it was trying to make them punctual. Then a technician reset it. The next morning, people gathered under its newly accurate hands and compared watches.\n\n'It used to be reliable,' one traveller complained.\n\n'It is reliable now,' the technician said.\n\nBoth were using the word differently. The traveller had known exactly how far wrong the clock was and had adjusted mentally. The repair removed that familiar error. For a few days, old habits made accurate time feel surprising.\n\nThe station manager put up a notice: 'Clock corrected on Monday. Please check your usual adjustment.' By Friday, the jokes had changed. People said the clock had finally decided to catch the train itself. The technician kept the old maintenance note, not as an instruction for the next repair, but as a reminder that changing a machine can also require changing the habits around it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The traveller knew the amount of the error and adjusted for it.",
+        "In this context reliability means predictability, unlike the technician's emphasis on accuracy."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r075",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the manager put up a notice?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Passengers may still apply the old adjustment"
+          },
+          {
+            "id": "b",
+            "text": "the clock will soon be removed"
+          },
+          {
+            "id": "c",
+            "text": "all watches must be changed by five minutes"
+          },
+          {
+            "id": "d",
+            "text": "the technician has reversed the hands"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The correction changes what passengers should do mentally. The notice warns them to reconsider a learned habit rather than treating every watch as wrong.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "A clock that gained a story",
+          "body": "For years the station clock had been five minutes fast. Commuters joked that it was trying to make them punctual. Then a technician reset it. The next morning, people gathered under its newly accurate hands and compared watches.\n\n'It used to be reliable,' one traveller complained.\n\n'It is reliable now,' the technician said.\n\nBoth were using the word differently. The traveller had known exactly how far wrong the clock was and had adjusted mentally. The repair removed that familiar error. For a few days, old habits made accurate time feel surprising.\n\nThe station manager put up a notice: 'Clock corrected on Monday. Please check your usual adjustment.' By Friday, the jokes had changed. People said the clock had finally decided to catch the train itself. The technician kept the old maintenance note, not as an instruction for the next repair, but as a reminder that changing a machine can also require changing the habits around it.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The correction changes what passengers should do mentally.",
+        "The notice warns them to reconsider a learned habit rather than treating every watch as wrong."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w025",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Explain why a fair comparison changes one important factor at a time. Use a classroom design example and discuss one uncertainty that may remain. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Choose two versions of a design and identify the single factor being compared. Explain which conditions must stay similar so a difference is easier to interpret. Name a remaining uncertainty, such as inconsistent measurement, and explain why one trial may not settle the question.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Expository composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "expository",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Choose two versions of a design and identify the single factor being compared.",
+        "Explain which conditions must stay similar so a difference is easier to interpret.",
+        "Name a remaining uncertainty, such as inconsistent measurement, and explain why one trial may not settle the question."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Choose two versions of a design and identify the single factor being compared.",
+          "Explain which conditions must stay similar so a difference is easier to interpret.",
+          "Name a remaining uncertainty, such as inconsistent measurement, and explain why one trial may not settle the question.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m076",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A lift starts on level 3, descends 7 levels and then rises 2. What level does it reach?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-4"
+          },
+          {
+            "id": "b",
+            "text": "2"
+          },
+          {
+            "id": "c",
+            "text": "-2"
+          },
+          {
+            "id": "d",
+            "text": "-6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Descending seven from level 3 reaches level -4. Rising two levels then reaches level -2; count zero as a level on the number line.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Descending seven from level 3 reaches level -4.",
+        "Rising two levels then reaches level -2; count zero as a level on the number line."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3-7+2",
+        "expected": "-2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m077",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A submarine is 35 m below sea level and a drone is 48 m above it. What is the vertical distance between them in metres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "13"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "73"
+          },
+          {
+            "id": "d",
+            "text": "83"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Treat the positions as -35 m and +48 m. Their separation crosses sea level: 35 + 48 = 83 m.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Treat the positions as -35 m and +48 m.",
+        "Their separation crosses sea level: 35 + 48 = 83 m."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "48-(-35)",
+        "expected": "83"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m078",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A game gives 8 points for a win and subtracts 3 for a loss. Bea wins 5 rounds and loses 7. What is her score?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "21"
+          },
+          {
+            "id": "c",
+            "text": "61"
+          },
+          {
+            "id": "d",
+            "text": "19"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The five wins give 40 points and the seven losses remove 21. Subtract 21 from 40 to obtain 19 points; losses are not added.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "skill": "scholarship.maths-directed-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-directed-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The five wins give 40 points and the seven losses remove 21.",
+        "Subtract 21 from 40 to obtain 19 points; losses are not added."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5*8-7*3",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n076",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bag contains only red and blue beads. There are twice as many red as blue. Removing 6 red beads leaves equal numbers of both colours. How many beads were there originally?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "If blue beads number b, red beads number 2b. Equality after removal gives 2b - 6 = b. Thus b = 6 and the original total is 12 + 6 = 18.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "If blue beads number b, red beads number 2b. Equality after removal gives 2b - 6 = b.",
+        "Thus b = 6 and the original total is 12 + 6 = 18."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6*3",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n077",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A number rounded to the nearest ten is 70. Its units digit is 3. What is the number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "63"
+          },
+          {
+            "id": "b",
+            "text": "67"
+          },
+          {
+            "id": "c",
+            "text": "83"
+          },
+          {
+            "id": "d",
+            "text": "73"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Numbers rounding to seventy lie from 65 through 74. Only 73 in that interval has units digit three.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Numbers rounding to seventy lie from 65 through 74.",
+        "Only 73 in that interval has units digit three."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "73",
+        "expected": "73"
+      }
+    }
+  ]
+}

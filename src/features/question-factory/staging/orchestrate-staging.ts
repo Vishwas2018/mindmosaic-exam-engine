@@ -66,6 +66,14 @@ export async function orchestrateStaging(
   if (typeof alreadyStagedRaw === "object" && alreadyStagedRaw !== null) {
     const record = alreadyStagedRaw as Record<string, unknown>;
     const provenanceOutcome = parseCandidateProvenance(record.provenance);
+    if (!provenanceOutcome.ok) return {
+      outcome: "upstream_evidence_invalid", candidateId,
+      issues: [issue("staging_evidence_missing", "provenance", "Staged replay has malformed provenance; refused.")],
+    };
+    if (provenanceOutcome.ok && provenanceOutcome.data.kind === "legacy_import") return {
+      outcome: "upstream_evidence_invalid", candidateId,
+      issues: [issue("staging_upstream_evidence_invalid", "provenance.originalGeneration", "Legacy origin remains unverified; Phase 1 staging is refused.")],
+    };
     return {
       outcome: "staged",
       candidateId,

@@ -6,7 +6,7 @@ import type { ExamResult, QuestionResultDetail, BreakdownRow } from "@/features/
 import type { ExamSelectionConfig } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion, CandidateQuestion, ReviewQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestionFromItem } from "@/server/assessment/read-dispatch";
-import { getExamBank } from "@/server/exam-bank";
+import { getResolutionExamBank } from "@/server/exam-bank";
 import {
   scoreAssessmentSession,
   ScoringRefused,
@@ -262,7 +262,7 @@ export type TargetSubmitOutcome =
  */
 function buildReviewQuestions(items: readonly ServedItem[]): readonly AuthoringQuestion[] | null {
   const byCode = new Map(
-    [...getExamBank("published")].map((question) => [question.id, question] as const),
+    [...getResolutionExamBank("published")].map((question) => [question.id, question] as const),
   );
   const questions: AuthoringQuestion[] = [];
   for (const item of items) {

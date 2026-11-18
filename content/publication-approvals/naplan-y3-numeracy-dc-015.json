@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-dc-015",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "07ee784159d9022a1d0f3a9f6d9cc75ae92a08641b199640e8af9a6302331c07",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-dc-015",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A garden bed has 4 straight sides. Two of the sides are long and two of the sides are short. All 4 corners are square corners. What is the name of this shape?",
+    "options": [
+      {
+        "id": "opt-square",
+        "text": "square"
+      },
+      {
+        "id": "opt-triangle",
+        "text": "triangle"
+      },
+      {
+        "id": "opt-pentagon",
+        "text": "pentagon"
+      },
+      {
+        "id": "opt-rectangle",
+        "text": "rectangle"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-rectangle"
+    },
+    "explanation": "A shape with 4 straight sides and 4 square corners, where the sides are two long and two short, is a rectangle. A square also has square corners but all four of its sides are the same length, so it does not fit here.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Two-dimensional shapes",
+      "skill": "Name a 2D shape from its sides and corners",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "2D shapes",
+        "rectangle",
+        "properties"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "4d5cd394696e248b953bcf99586663b0b6dcae70b31c3066cd68e8f4430c8224"
+}

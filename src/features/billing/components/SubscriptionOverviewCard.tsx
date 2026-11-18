@@ -134,23 +134,65 @@ export function SubscriptionOverviewCard({ subscription }: { subscription: MySub
       </CardHeader>
       <CardContent className="space-y-4">
         {subscription.status === "past_due" && (
-          <p
+          <div
             role="alert"
-            className="flex items-start gap-2 rounded-xl bg-warning/10 px-4 py-3 text-sm font-semibold text-warning"
+            className="rounded-2xl border border-amber-500/30 bg-amber-50 p-4 text-amber-900"
           >
-            <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 flex-shrink-0" />
-            Your last payment didn&apos;t go through. Update your payment method to keep access.
-          </p>
+            <div className="flex items-start gap-2.5">
+              <AlertTriangle aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
+              <div>
+                <strong className="block text-sm font-bold">Payment failed</strong>
+                <p className="mt-1 text-xs leading-relaxed text-amber-800">
+                  Your last payment didn&apos;t go through. Your bank may have declined it.
+                  Please update your payment method to keep uninterrupted access for your family.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="primary"
+                    isLoading={isSubmitting}
+                    onClick={handleManageBilling}
+                  >
+                    Update payment method
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {live?.cancelAtPeriodEnd && (
-          <p className="rounded-xl bg-page px-4 py-3 text-sm font-semibold text-ink">
-            Your plan will end
-            {live.currentPeriodEnd ? ` on ${DATE_FORMAT.format(new Date(live.currentPeriodEnd))}` : " at the end of this billing period"}
-            . <button type="button" onClick={handleUndoCancel} className="font-extrabold text-royal underline underline-offset-4">
-              Undo cancellation
-            </button>
-          </p>
+          <div
+            role="status"
+            className="rounded-2xl border border-purple-200 bg-purple-50/70 p-4 text-purple-950"
+          >
+            <div className="flex items-start gap-2.5">
+              <AlertTriangle aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-purple-700" />
+              <div>
+                <strong className="block text-sm font-bold">Cancellation scheduled</strong>
+                <p className="mt-1 text-xs leading-relaxed text-purple-800">
+                  Your Family plan stays active until{" "}
+                  <strong>
+                    {live.currentPeriodEnd ? DATE_FORMAT.format(new Date(live.currentPeriodEnd)) : "the end of this billing period"}
+                  </strong>
+                  . After that, your account moves to the Free plan. No questions or past progress will be lost.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="primary"
+                    isLoading={isSubmitting}
+                    onClick={handleUndoCancel}
+                    aria-label="Undo cancellation"
+                  >
+                    Keep my Family plan (Undo cancellation)
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {actionError && (

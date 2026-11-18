@@ -1,0 +1,83 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-ba3787f651dcdda9bf4756ba",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "e503f2e1cd7dac972dd25bce6dd0d1533aac86a2d229540013d18a613756db30",
+  "sourceManifestHash": "f7662243bcc38fd40573ee041b34d34edeef21d3f906437d1ec0b27758231733",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-ba3787f651dcdda9bf4756ba",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows the results of a class survey about favourite pets. Which pet was the least popular?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Cats"
+      },
+      {
+        "id": "opt-b",
+        "text": "Dogs"
+      },
+      {
+        "id": "opt-c",
+        "text": "Birds"
+      },
+      {
+        "id": "opt-d",
+        "text": "Fish"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "bar-birds",
+        "altText": "Bar chart with 4 bars showing how many students chose each pet in a class survey, with values 14, 20, 6, 11.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Cats",
+            "Dogs",
+            "Birds",
+            "Fish"
+          ],
+          "values": [
+            14,
+            20,
+            6,
+            11
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Birds were the least popular pet, with only 6 votes.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "748b8d30a42083b36dbcd940ab116a1e6eb2e8a0a30290237fcc3413b3a410bc"
+}

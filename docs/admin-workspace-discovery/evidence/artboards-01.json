@@ -1,0 +1,493 @@
+[
+  {
+    "title": "Overview",
+    "testid": "mega-artboard-title-Overview.dc.html",
+    "bounds": "0,0,1440,910",
+    "file": "Overview.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-67f37a4bab57",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nOverview\nIllustrative sample data\nThree separate things:\nAgent review\nautomated checks and the AI reviewer\nHuman approval\na named person signs off a revision\nPublished\nthe approved revision is live to children\nReview queues\nAgent-reviewed, awaiting a person\n\n96\n\nAI reviewer has run; no human has signed off\n\nFlagged by the AI reviewer\n\n18\n\nNeeds a person to look before anything else\n\nWriting responses to mark\n\n9\n\nChildren waiting on a human mark\n\nReported by families\nAll reports\n“The answer looks wrong”\ng5-num-chart-001 · Year 5 Numeracy · 2 reports\nOpen\n“Something looks broken”\ng3-read-018 · Year 3 Reading · 1 report\nOpen\nAccount issue\nA parent can’t reset a PIN · 1 report\nOpen\nPublication status\nPublication\n\nWhat children can actually be served today, by programme gate.\n\nNAPLAN & ICAS\n1,548 served · 53 with a human approval\nReport mode\nScholarship & Edutest\nServes only human-approved revisions\nEnforce mode\nReport mode means the automated gate records what it would block but still serves the question. Only enforce mode requires a human approval before a child sees it. NEEDS SIGN-OFF which programmes move to enforce, and when.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "\n        \n          Agent-reviewed, awaiting a person\n          \n        \n        96\n        AI reviewer has run; no human has signed off\n      ",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "\n        \n          Flagged by the AI reviewer\n          \n        \n        18\n        Needs a person to look before anything else\n      ",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "\n        \n          Writing responses to mark\n          \n        \n        9\n        Children waiting on a human mark\n      ",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "All reports",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "Tablet · Overview",
+    "testid": "mega-artboard-title-OverviewTablet.dc.html",
+    "bounds": "1520,0,834,1470",
+    "file": "OverviewTablet.dc.html",
+    "viewport": [
+      834,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-084701718bad",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nOverview\nSample data\nThree separate things:\nAgent review\nautomated checks and the AI reviewer\nHuman approval\na named person signs off a revision\nPublished\nthe approved revision is live to children\nReview queues\nAgent-reviewed, awaiting a person\n\n96\n\nAI reviewer has run; no human has signed off\n\nFlagged by the AI reviewer\n\n18\n\nNeeds a person to look before anything else\n\nWriting responses to mark\n\n9\n\nChildren waiting on a human mark\n\nReported by families\nAll reports\n“The answer looks wrong”\ng5-num-chart-001 · Year 5 Numeracy · 2 reports\nOpen\n“Something looks broken”\ng3-read-018 · Year 3 Reading · 1 report\nOpen\nAccount issue\nA parent can’t reset a PIN · 1 report\nOpen\nPublication status\nPublication\n\nWhat children can actually be served today, by programme gate.\n\nNAPLAN & ICAS\n1,548 served · 53 with a human approval\nReport mode\nScholarship & Edutest\nServes only human-approved revisions\nEnforce mode\nReport mode means the automated gate records what it would block but still serves the question. Only enforce mode requires a human approval before a child sees it. NEEDS SIGN-OFF which programmes move to enforce, and when.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "\n        \n          Agent-reviewed, awaiting a person\n          \n        \n        96\n        AI reviewer has run; no human has signed off\n      ",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "\n        \n          Flagged by the AI reviewer\n          \n        \n        18\n        Needs a person to look before anything else\n      ",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "\n        \n          Writing responses to mark\n          \n        \n        9\n        Children waiting on a human mark\n      ",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "All reports",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "Question library",
+    "testid": "mega-artboard-title-Library.dc.html",
+    "bounds": "0,2170,1440,1000",
+    "file": "Library.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-35a03d2f740f",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nQuestion library\nStates\nSearch questions\nProgramme\nAll programmes\nNAPLAN-style\nICAS-style\nScholarship\nYear\nAll years\nYear 3\nYear 5\nYear 6\nSubject\nAll subjects\nNumeracy\nReading\nLanguage\nMathematics\nStrand\nAll strands\nStatistics\nNumber\nMeasurement and space\nReview status\nAny status\nAwaiting human approval\nFlagged by AI reviewer\nHuman approved\nPublished\nRejected\nYear 5 ×\nNumeracy ×\nClear all\n\n142 questions · showing 1–6\n\nSort\nOldest in queue\nNewest\nQUESTION\tPROGRAMME\tYEAR\tSUBJECT · STRAND\tSTATUS\tREV\t\ng5-num-chart-001\tNAPLAN\t5\tNumeracy · Statistics\t\nAgent review \nAwaiting human approval\trev 4\tOpen\ng5-num-chart-014\tNAPLAN\t5\tNumeracy · Number\t\nHuman approval\trev 2\tOpen\ng3-read-018\tNAPLAN\t3\tReading · Finding information\t\nFlagged by AI reviewer\trev 1\tOpen\ng5-icas-math-07\tICAS\t5\tMathematics · Working mathematically\t\nPublished\trev 3\tOpen\ng3-num-nl-22\tNAPLAN\t3\tNumeracy · Measurement and space\t\nAgent review \nAwaiting human approval\trev 1\tOpen\ng6-schol-vr-03\tScholarship\t6\tVerbal reasoning · Reasoning\t\nRejected\trev 5\tOpen\n\nStatus shows the three layers separately. “Awaiting human approval” after an agent pass is the common case — the AI reviewer running is not an approval.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "States",
+        "href": "LibraryStates.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      }
+    ],
+    "buttons": [
+      "Clear all"
+    ]
+  },
+  {
+    "title": "Tablet · Library",
+    "testid": "mega-artboard-title-LibraryTablet.dc.html",
+    "bounds": "1520,2170,834,1140",
+    "file": "LibraryTablet.dc.html",
+    "viewport": [
+      834,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-56e40d885d32",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nQuestion library\nSearch questions\nProgramme\nAll programmes\nNAPLAN-style\nICAS-style\nScholarship\nYear\nAll years\nYear 3\nYear 5\nYear 6\nSubject\nAll subjects\nNumeracy\nReading\nLanguage\nMathematics\nStrand\nAll strands\nStatistics\nNumber\nMeasurement and space\nReview status\nAny status\nAwaiting human approval\nFlagged by AI reviewer\nHuman approved\nPublished\nRejected\nYear 5 ×\nNumeracy ×\nClear all\n\n142 questions · showing 1–6\n\nSort\nOldest in queue\nNewest\nQUESTION\tPROGRAMME\tYEAR\tSUBJECT · STRAND\tSTATUS\tREV\t\ng5-num-chart-001\tNAPLAN\t5\tNumeracy · Statistics\t\nAgent review \nAwaiting human approval\trev 4\tOpen\ng5-num-chart-014\tNAPLAN\t5\tNumeracy · Number\t\nHuman approval\trev 2\tOpen\ng3-read-018\tNAPLAN\t3\tReading · Finding information\t\nFlagged by AI reviewer\trev 1\tOpen\ng5-icas-math-07\tICAS\t5\tMathematics · Working mathematically\t\nPublished\trev 3\tOpen\ng3-num-nl-22\tNAPLAN\t3\tNumeracy · Measurement and space\t\nAgent review \nAwaiting human approval\trev 1\tOpen\ng6-schol-vr-03\tScholarship\t6\tVerbal reasoning · Reasoning\t\nRejected\trev 5\tOpen\n\nStatus shows the three layers separately. “Awaiting human approval” after an agent pass is the common case — the AI reviewer running is not an approval.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Open",
+        "href": "Review.dc.html"
+      }
+    ],
+    "buttons": [
+      "Clear all"
+    ]
+  },
+  {
+    "title": "States · Overview & library",
+    "testid": "mega-artboard-title-LibraryStates.dc.html",
+    "bounds": "2434,2170,1440,1030",
+    "file": "LibraryStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-896d7a160fcc",
+    "text": "OVERVIEW AND QUESTION LIBRARY\n\nLoading, empty, error and not allowed\n\nThe states the dashboard and the list have to carry before a single question is reviewed.\n\n1 · Loading\n\nQueue cards\n\nTable\n\nLoading questions\n\n2 · Empty — nothing waiting vs no match\n\nAn empty queue is good news; an empty filter is a dead end. They never share wording.\n\nQueue cleared\n\nNothing waiting\n\nEvery agent-reviewed question has a human decision. Come back when the generator runs again.\n\nNo match for the filter\n\nNo questions match these filters\n\nNothing is wrong — try widening the year or clearing a filter. This is not “no content”.\n\n3 · Error, and not allowed\n\nCould not load\n\nWe couldn’t load the queue.\nNothing has changed. No question was approved or published. Try again.\nTry again\n\nSigned in, wrong role\n\nThis area is for reviewers.\nYour account doesn’t have review access. If this is wrong, ask an administrator.\n\nA non-admin who reaches /admin is told, and offered their own home, rather than shown an empty shell.",
+    "links": [],
+    "buttons": [
+      "Try again"
+    ]
+  },
+  {
+    "title": "Question review",
+    "testid": "mega-artboard-title-Review.dc.html",
+    "bounds": "0,4010,1440,1600",
+    "file": "Review.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-fb0bbd551a59",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nQuestion review\nBack to library\nPrev\nNext\nThree separate things:\nAgent review\nautomated checks and the AI reviewer\nHuman approval\na named person signs off a revision\nPublished\nthe approved revision is live to children\ng5-num-chart-001\nrev 4 · a3f9c1e\nAgent review\nAwaiting human approval\nNot published\n\nExactly what a child sees\n\nYear 5 · NAPLAN-style Numeracy\n\nLook at the chart. Which fruit was chosen by the greatest number of students?\n\nFavourite Fruits\n0\n3\n6\n9\n12\nApple\nBanana\nOrange\nGrapes\nApple\nBanana\nOrange\nGrapes\nAnswer key & worked explanation\nCorrect answer: B · Banana\n\nWhy: Banana has the tallest bar with 12 students, which is more than Apple (8), Orange (6) and Grapes (4).\n\nMachine check passed. The option with the highest chart value (Banana, 12) equals the declared answer. An automated check, not a human sign-off.\nAgent review findings\nAgent review\n\nThe AI reviewer’s pass, recorded against rev 4 · a3f9c1e. These are findings, not an approval.\n\nRecommendation\nApprove\nReviewer’s own answer\nB · Banana · matches\nDifficulty estimate\nMedium · verdict: as authored\nOriginality\nNo close match found\nSemantic flags\nNone\n\n These findings were computed for this exact revision. If the content changes, they are marked stale and must be re-run.\n\nMetadata\nProgramme\nNAPLAN-style\nYear\n5\nSubject\nNumeracy\nStrand\nStatistics\nSkill\ninterpret-bar-chart\nType\nmultiple_choice\nVisual\nbar_chart\nOrigin\nai_generated\nContent hash\na3f9c1e\nRevision history\nrev 4 · a3f9c1e\nCurrent · alt text reworded · 2 days ago\nrev 3 · b1774d2\nGrapes value corrected 5 → 4 · 4 days ago\nrev 1–2\nGenerated & schema-validated · 5 days ago\n\nEach revision is immutable once written. Approval binds to one revision’s hash, never to “the question” in general.\n\nReview for approval\n\nYou are signed in as Maya Chen. Approving records your name against a3f9c1e.",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "Back to library",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Prev",
+        "href": "ReviewStates.dc.html"
+      },
+      {
+        "text": "Next",
+        "href": "ReviewStates.dc.html"
+      },
+      {
+        "text": "Review for approval",
+        "href": "Approve.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "Mobile · Review",
+    "testid": "mega-artboard-title-ReviewMobile.dc.html",
+    "bounds": "1520,4010,390,1240",
+    "file": "ReviewMobile.dc.html",
+    "viewport": [
+      390,
+      844
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-0e81d3910f18",
+    "text": "Question review\ng5-num-chart-001\nrev 4 · a3f9c1e\nAgent review\nAwaiting human approval\nNot published\n\nExactly what a child sees\n\nYear 5 · NAPLAN-style Numeracy\n\nLook at the chart. Which fruit was chosen by the greatest number of students?\n\nFavourite Fruits\n0\n3\n6\n9\n12\nApple\nBanana\nOrange\nGrapes\nApple\nBanana\nOrange\nGrapes\nAnswer: B · Banana\n\nBanana has the tallest bar with 12, more than Apple 8, Orange 6, Grapes 4.\n\nAgent findings\nAgent review\n\nApprove · reviewer’s answer matches · no flags. Recorded against a3f9c1e.\n\nReview for approval\n\nApproving records Maya Chen against a3f9c1e.",
+    "links": [
+      {
+        "text": "",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Review for approval",
+        "href": "ApproveMobile.dc.html"
+      }
+    ],
+    "buttons": []
+  },
+  {
+    "title": "States · Review",
+    "testid": "mega-artboard-title-ReviewStates.dc.html",
+    "bounds": "1990,4010,1440,1170",
+    "file": "ReviewStates.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-35d689cc2b44",
+    "text": "QUESTION REVIEW\n\nFlagged, stale and being edited\n\nWhat the review screen shows when the agents disagree, when the content has moved, or when someone else is in it.\n\n1 · The AI reviewer flagged it\nBUILT ALREADY\n\nA flag is a reason to look, never a verdict. The finding is shown in full, attributed to the agent, against the revision it ran on.\n\nAgent review\nFlagged\nAI reviewer: two options could be defended as correct.\nRecommendation: needs a person. Recorded against rev 1 · 9d3c110.\n\nThe screen never auto-rejects on a flag, and never lets the flag stand in for a human decision. A person approves, requests changes, or rejects.\n\n2 · Findings are stale\nBUILT ALREADY\n\nThe content was edited after the agent ran. The old findings are shown greyed, labelled stale, with a re-run offered. They cannot be mistaken for current.\n\nThese agent findings are out of date.\nThey were computed for rev 3 · b1774d2. The question is now rev 4 · a3f9c1e. Re-run before relying on them.\nRe-run agent review on rev 4\n\nGrounded: findings carry sourceContentHash and matchesCurrentRevision. When it is false, they render as stale, never as the current pass.\n\n3 · Being edited elsewhere\nAn author is editing this question.\nA new revision is in progress. You can read rev 4, but approval is paused until the edit is saved and you review what results.\n\nNEEDS A BUILD an edit-in-progress signal is a build; the hard guarantee is the stale-revision block, which does not depend on it.",
+    "links": [],
+    "buttons": [
+      "Re-run agent review on rev 4"
+    ]
+  },
+  {
+    "title": "Human approval",
+    "testid": "mega-artboard-title-Approve.dc.html",
+    "bounds": "0,6310,1440,1080",
+    "file": "Approve.dc.html",
+    "viewport": [
+      1440,
+      1000
+    ],
+    "url": "https://claude.ai/artifact/RmoM5xtuZoj4dHNLzRqbg1#play-a3c5e725f8fb",
+    "text": "Mind\nMosaic\n®\n\nREVIEW\n\nOverview\nQuestion library\n142\nPaper review\n6\nPublication\nWriting review\n9\nSupport\n3\nActivity history\nM\nMaya Chen\nContent reviewer\nHuman approval\nFull review\ng5-num-chart-001\nrev 4 · a3f9c1e\nAgent review\nBack to full review\nYour decision\n\nYou are Maya Chen, signing off rev 4 — content hash a3f9c1e. Your name and this exact hash are recorded together.\n\nDecision\nApprove\nThis revision is correct and age-appropriate. It becomes eligible to publish.\nRequest changes\nSend back to the author with a note. A new revision will need its own approval.\nReject\nNot suitable. It will not be served and is kept for the record.\nNote (required for changes or rejection)\nApprove rev 4\nCancel\n\nApproving records Maya Chen · a3f9c1e · now. It does not publish — publication is a separate, later step.\n\nWhat the agents found\nAgent review\n\nFor your information. None of this is a sign-off — a passing check never approves on your behalf.\n\nMachine check: chart max (Banana, 12) equals the declared answer.\nAI reviewer: recommends approve; own answer matches; no semantic flags.\nSchema & originality: valid; no close match found.\nWhat you are signing\nReviewer\nMaya Chen\nRevision\nrev 4\nContent hash\na3f9c1e\nProgramme gate\nNAPLAN · report\nIn report mode this approval is recorded but the programme still serves un-approved revisions. In enforce mode, only approved revisions are served. NEEDS SIGN-OFF\nSee confirmation & blocked states",
+    "links": [
+      {
+        "text": "\n        \n        MindMosaic®\n      ",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Overview",
+        "href": "Overview.dc.html"
+      },
+      {
+        "text": "Question library142",
+        "href": "Library.dc.html"
+      },
+      {
+        "text": "Paper review6",
+        "href": "Paper.dc.html"
+      },
+      {
+        "text": "Publication",
+        "href": "Publish.dc.html"
+      },
+      {
+        "text": "Writing review9",
+        "href": "Writing.dc.html"
+      },
+      {
+        "text": "Support3",
+        "href": "Support.dc.html"
+      },
+      {
+        "text": "Activity history",
+        "href": "Activity.dc.html"
+      },
+      {
+        "text": "Full review",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": " Back to full review",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "Cancel",
+        "href": "Review.dc.html"
+      },
+      {
+        "text": "See confirmation & blocked states",
+        "href": "ApproveStates.dc.html"
+      }
+    ],
+    "buttons": [
+      "Approve rev 4"
+    ]
+  }
+]

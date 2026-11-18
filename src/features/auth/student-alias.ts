@@ -66,3 +66,14 @@ export function buildAliasEmail(rawCode: string): string {
   const normalized = normalizeLoginCode(rawCode);
   return `${ALIAS_LOCAL_PREFIX}${normalized.toLowerCase()}@${ALIAS_DOMAIN}`;
 }
+
+/**
+ * The inverse of buildAliasEmail: recovers the formatted login code from a
+ * student's alias email, or null when the email is not an alias (so a real
+ * address can never be mistaken for, or returned as, a login code).
+ */
+export function loginCodeFromAliasEmail(email: string | null | undefined): string | null {
+  if (!email) return null;
+  const match = /^childcode\+([a-z0-9]{8})@students\.mindmosaic\.internal$/i.exec(email.trim());
+  return match ? formatLoginCode(match[1]) : null;
+}

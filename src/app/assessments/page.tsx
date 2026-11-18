@@ -11,6 +11,10 @@ export const metadata: Metadata = {
     "Focused practice by year, subject or single skill, with a worked explanation after every question. Guest practice is free and needs no account.",
 };
 
+// Static prerendering triggers Next.js 16.4.6 invariant error
+// ("Expected workStore to be initialized"). Render server-side instead.
+export const dynamic = "force-dynamic";
+
 export default function AssessmentsPage() {
   return (
     <MarketingPage

@@ -1,0 +1,65 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-dc-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "2ceda8b90acce3cc249a2b29e277c6d5bd18b02a546440ff5de03746b0acf05e",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-dc-001",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "At a bird sanctuary, a sign shows a number made from 4 hundreds, 0 tens and 7 ones. What number is on the sign?",
+    "options": [
+      {
+        "id": "opt-407",
+        "text": "407"
+      },
+      {
+        "id": "opt-470",
+        "text": "470"
+      },
+      {
+        "id": "opt-47",
+        "text": "47"
+      },
+      {
+        "id": "opt-4007",
+        "text": "4007"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-407"
+    },
+    "explanation": "Put each part in its place: 4 hundreds is 400, 0 tens is 0, and 7 ones is 7. Add them to get 400 + 0 + 7 = 407. The zero holds the tens place so the 7 stays in the ones place.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Place value",
+      "skill": "Build a three-digit number from hundreds, tens and ones",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "place value",
+        "three-digit numbers"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "bb577ccdf13fc6db7baf6357f777606483c0af776b302636ca1f4c0420b6cabb"
+}

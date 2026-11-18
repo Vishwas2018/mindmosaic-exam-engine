@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, Check, Copy, LoaderCircle, UserPlus } from "lucide-react";
+import { AlertTriangle, Check, Copy, LoaderCircle, Printer, UserPlus } from "lucide-react";
 
 import {
   Button,
@@ -130,7 +130,7 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <UserPlus aria-hidden="true" className="h-5 w-5 text-royal" />
+          <UserPlus aria-hidden="true" className="h-5 w-5 text-mm-brand" />
           Add a child
         </CardTitle>
         <CardDescription>
@@ -144,17 +144,17 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
             role="status"
             className="rounded-xl border border-success/30 bg-success/10 p-5"
           >
-            <p className="text-sm font-bold text-ink">
+            <p className="text-sm font-semibold text-mm-ink">
               Account created. These are shown once &mdash; save them now and give
               them to your child.
             </p>
             <dl className="mt-4 grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 text-base">
-              <dt className="font-semibold text-muted">Login code</dt>
-              <dd className="font-black tracking-wide text-ink">
+              <dt className="font-semibold text-mm-ink-soft">Login code</dt>
+              <dd className="font-semibold tracking-wide text-mm-ink">
                 {credentials.loginCode}
               </dd>
-              <dt className="font-semibold text-muted">PIN</dt>
-              <dd className="font-black tracking-wide text-ink">
+              <dt className="font-semibold text-mm-ink-soft">PIN</dt>
+              <dd className="font-semibold tracking-wide text-mm-ink">
                 {credentials.pin}
               </dd>
             </dl>
@@ -166,6 +166,10 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
                   <Copy aria-hidden="true" className="h-4 w-4" />
                 )}
                 {copied ? "Copied" : "Copy"}
+              </Button>
+              <Button type="button" variant="secondary" size="sm" onClick={() => window.print()}>
+                <Printer aria-hidden="true" className="h-4 w-4" />
+                Print a sign-in card
               </Button>
               <Button
                 type="button"
@@ -198,11 +202,11 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
                 role="alert"
                 className="rounded-xl border border-warning/30 bg-warning/10 px-4 py-3"
               >
-                <p className="flex items-start gap-2 text-sm font-semibold text-ink">
+                <p className="flex items-start gap-2 text-sm font-semibold text-mm-ink">
                   <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
                   {duplicatePrompt}
                 </p>
-                <p className="mt-1 pl-6 text-sm text-muted">
+                <p className="mt-1 pl-6 text-sm text-mm-ink-soft">
                   This creates a second, separate account with its own login code
                   and PIN.
                 </p>

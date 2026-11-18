@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   buildAliasEmail,
+  loginCodeFromAliasEmail,
   formatLoginCode,
   generateLoginCode,
   generatePin,
@@ -66,6 +67,18 @@ describe("buildAliasEmail", () => {
 
   it("produces distinct aliases for distinct codes", () => {
     expect(buildAliasEmail("AAAAAAAA")).not.toBe(buildAliasEmail("BBBBBBBB"));
+  });
+
+  it("extracts and formats login code from alias email round-trip", () => {
+    const code = "M3TL8R4Q";
+    const email = buildAliasEmail(code);
+    expect(loginCodeFromAliasEmail(email)).toBe("M3TL-8R4Q");
+  });
+
+  it("returns null for non-alias or malformed emails", () => {
+    expect(loginCodeFromAliasEmail("user@example.com")).toBeNull();
+    expect(loginCodeFromAliasEmail("childcode+123@otherdomain.com")).toBeNull();
+    expect(loginCodeFromAliasEmail("")).toBeNull();
   });
 });
 

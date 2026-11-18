@@ -5,15 +5,21 @@ import { AppFooter } from "@/components/shell/AppFooter";
 import { AppHeader } from "@/components/shell/AppHeader";
 import { EYEBROW_CLASSES } from "@/features/catalogue/components/controls";
 import { ActiveSessionBanner } from "@/features/exam-engine/components/ActiveSessionBanner";
-import { groupExamPatterns } from "@/features/exam-engine/exam-patterns";
+import { groupExamPatterns, listPatternsForPicker } from "@/features/exam-engine/exam-patterns";
 import { ExamPatternCard } from "@/features/exam-engine/exam-patterns/components/ExamPatternCard";
 import { EXAM_STYLE_NAMES } from "@/features/exam-engine/exam-patterns/pattern-presentation";
-import { getPatternReadiness } from "@/server/exam-bank";
+import {
+  getPatternReadinessFor,
+  getViewerIdForSamplePreview,
+  isScholarshipSampleAllowedFor,
+  SCHOLARSHIP_SAMPLE_NOTICE,
+  visibleExamPatterns,
+} from "@/server/scholarship-sample-preview";
 
 export const metadata: Metadata = {
   title: "Full-length practice papers",
   description:
-    "Sit a full-length NAPLAN-style or ICAS-style practice paper for Year 3 or Year 5 — the same number of questions and the same time limit as the real assessment. Practice written by MindMosaic, not official papers.",
+    "Sit a practice paper or a shorter practice module for Year 3 or Year 5. Each one says how many questions it has and how it differs from the real assessment. Practice only, not official papers.",
 };
 
 /**
@@ -34,9 +40,16 @@ export const metadata: Metadata = {
  * the top of the page, and every paper carries its own adaptations note one
  * click away on its own route.
  */
-export default function ExamPatternPickerPage() {
-  const readiness = getPatternReadiness();
-  const groups = groupExamPatterns();
+export default async function ExamPatternPickerPage() {
+  /* Both are no-ops (and read no cookies) unless the gated Scholarship sample preview is active. */
+  const viewerId = await getViewerIdForSamplePreview();
+  const readiness = await getPatternReadinessFor(viewerId);
+  const listing = listPatternsForPicker(visibleExamPatterns(viewerId), readiness);
+  const groups = groupExamPatterns(listing.shown);
+  const withheldFor = (yearLevel: number, examStyle: string) =>
+    listing.withheldFull.filter(
+      (paper) => paper.pattern.yearLevel === yearLevel && paper.pattern.examStyle === examStyle,
+    );
 
   return (
     <div className="mm-root flex min-h-screen flex-col bg-mm-page">
@@ -59,7 +72,7 @@ export default function ExamPatternPickerPage() {
               Each paper has the same number of questions and the same time limit as
               the real assessment it is modelled on. Every question is written by
               MindMosaic — these are practice papers, not real NAPLAN or ICAS papers,
-              and each one says exactly how it differs.{" "}
+              and each one says exactly how it differs. Where we do not have enough reviewed questions for a full paper yet, you will see a clearly labelled practice module instead.{" "}
               <Link
                 href="/assessment-disclaimer"
                 className="font-bold text-mm-brand underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
@@ -70,6 +83,18 @@ export default function ExamPatternPickerPage() {
             </p>
           </div>
         </section>
+
+        {isScholarshipSampleAllowedFor(viewerId) && (
+          <div className="site-width pt-6">
+            <p
+              role="note"
+              data-testid="scholarship-sample-notice"
+              className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900"
+            >
+              {SCHOLARSHIP_SAMPLE_NOTICE}: the Year 6 Scholarship comprehensive sample is shown to this account only.
+            </p>
+          </div>
+        )}
 
         <div className="site-width pt-6">
           <ActiveSessionBanner />
@@ -109,6 +134,16 @@ export default function ExamPatternPickerPage() {
                     </li>
                   ))}
                 </ul>
+                {withheldFor(yearGroup.yearLevel, styleGroup.examStyle).map((paper) => (
+                  <p
+                    key={paper.pattern.id}
+                    data-testid={`pattern-full-withheld-${paper.pattern.id}`}
+                    className="mt-3 text-[14px] leading-[1.55] text-mm-muted"
+                  >
+                    The full-length paper ({paper.requestedCount} questions) is not open yet: {paper.availableCount} of{" "}
+                    {paper.requestedCount} questions have been reviewed. Use the practice module above in the meantime.
+                  </p>
+                ))}
               </div>
             ))}
           </section>

@@ -61,7 +61,7 @@ export function ExploreGridSection() {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink tracking-tight">
+        <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink tracking-tight">
           Explore everything MindMosaic offers
         </h2>
         <p className="text-xs text-mm-muted">A directory of curriculum learning and assessment preparation</p>
@@ -79,7 +79,7 @@ export function ExploreGridSection() {
                 <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-mm-tint text-primary">
                   <Icon aria-hidden="true" className="h-4 w-4" />
                 </div>
-                <span className="font-[family-name:var(--font-display)] text-xs font-bold text-mm-ink">
+                <span className="font-[family-name:var(--font-display)] text-xs font-semibold text-mm-ink">
                   {card.title}
                 </span>
                 <p className="mt-1.5 text-[11px] leading-relaxed text-mm-muted">{card.description}</p>
@@ -111,7 +111,7 @@ export function ExploreGridSection() {
                     Coming Soon
                   </span>
                 </div>
-                <span className="font-[family-name:var(--font-display)] text-xs font-bold text-mm-ink">
+                <span className="font-[family-name:var(--font-display)] text-xs font-semibold text-mm-ink">
                   {track.cardTitle}
                 </span>
                 <p className="mt-1.5 text-[11px] leading-relaxed text-mm-muted">{track.cardDescription}</p>
@@ -160,10 +160,10 @@ export function ExploreGridSection() {
           <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-border bg-amber-light text-amber-accent">
             <Sparkles aria-hidden="true" className="h-6 w-6" />
           </div>
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-amber-light px-2.5 py-0.5 text-xs font-bold text-amber-accent">
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-amber-light px-2.5 py-0.5 text-xs font-semibold text-amber-accent">
             Not yet available
           </div>
-          <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-mm-ink md:text-2xl">
+          <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink md:text-2xl">
             {active?.fullTitle ?? "Track preview"}
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-mm-muted">{active?.about ?? ""}</p>
@@ -176,7 +176,7 @@ export function ExploreGridSection() {
             {active && (
               <Link
                 href={`/practice/${active.slug}`}
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-bold text-white shadow-sm transition-colors hover:bg-primary-hover"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-hover"
               >
                 View full programme page
                 <ArrowRight aria-hidden="true" className="h-4 w-4" />

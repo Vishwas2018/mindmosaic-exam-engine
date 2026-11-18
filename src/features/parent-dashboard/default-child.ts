@@ -72,8 +72,15 @@ export function hasResults(summary: Pick<ChildSummary, "attemptCount" | "unreada
  * already clamp against `summaries.length - 1`.
  */
 export function pickDefaultChildIndex(
-  summaries: readonly Pick<ChildSummary, "attemptCount" | "unreadableAttemptCount">[],
+  summaries: readonly Pick<ChildSummary, "attemptCount" | "unreadableAttemptCount" | "archived">[],
 ): number {
+  /* Archived children stay in the switcher and keep their results, but the dashboard never opens on one
+     while an active sibling exists. With no archived child this is exactly the earlier rule. */
+  const isActive = (summary: { archived?: boolean }) => summary.archived !== true;
+  const activeWithResults = summaries.findIndex((s) => isActive(s) && hasResults(s));
+  if (activeWithResults !== -1) return activeWithResults;
+  const firstActive = summaries.findIndex(isActive);
+  if (firstActive !== -1) return firstActive;
   const withResults = summaries.findIndex(hasResults);
   return withResults === -1 ? 0 : withResults;
 }

@@ -1,0 +1,3204 @@
+{
+  "batchId": "vihaan-expansion-09",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "OpenAI Codex session",
+    "model": null,
+    "generatedOn": "2026-11-16",
+    "originalGenerationEvidence": "Session-authored problems, passages and prompts; deterministic assembly from checked-in authoring rows.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no sample test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "retainedPilotIds": [],
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-e500-n088",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A two-digit number's tens digit is twice its units digit. The number is 27 greater than its reverse. What is the number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "42"
+          },
+          {
+            "id": "b",
+            "text": "64"
+          },
+          {
+            "id": "c",
+            "text": "84"
+          },
+          {
+            "id": "d",
+            "text": "63"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "If the units digit is u, the tens digit is 2u and the reversal difference is 9u. Thus 9u = 27, so u = 3, tens digit 6, and the number is 63.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "If the units digit is u, the tens digit is 2u and the reversal difference is 9u.",
+        "Thus 9u = 27, so u = 3, tens digit 6, and the number is 63."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "63",
+        "expected": "63"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n089",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three different positive integers have sum 14. The smallest is 2 and the largest is twice the middle one. What is the largest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "If the middle is m, then 2 + m + 2m = 14. Thus m = 4 and the largest is 8; the three integers 2, 4 and 8 meet all conditions.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "If the middle is m, then 2 + m + 2m = 14.",
+        "Thus m = 4 and the largest is 8; the three integers 2, 4 and 8 meet all conditions."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n090",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A box number is between 70 and 100, is divisible by 8 and has a units digit no larger than its tens digit. Its digits sum to 16. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "72"
+          },
+          {
+            "id": "b",
+            "text": "80"
+          },
+          {
+            "id": "c",
+            "text": "96"
+          },
+          {
+            "id": "d",
+            "text": "88"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The multiples of eight in the interval are 72, 80, 88 and 96. Only 88 has digit sum sixteen; its equal digits also satisfy the condition that the units digit is no larger than the tens digit.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr logic deduction numbers",
+          "skill": "scholarship.nr-logic-deduction-numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-logic-deduction-numbers"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The multiples of eight in the interval are 72, 80, 88 and 96.",
+        "Only 88 has digit sum sixteen; its equal digits also satisfy the condition that the units digit is no larger than the tens digit."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "88",
+        "expected": "88"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v088",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which term concerns the arrangement of events rather than the narrator's attitude: chronology, scepticism, admiration, nostalgia?",
+        "options": [
+          {
+            "id": "a",
+            "text": "nostalgia"
+          },
+          {
+            "id": "b",
+            "text": "chronology"
+          },
+          {
+            "id": "c",
+            "text": "scepticism"
+          },
+          {
+            "id": "d",
+            "text": "admiration"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Scepticism, admiration and nostalgia describe attitudes or feelings. Chronology concerns event order; it can be used with any of those attitudes.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr classification",
+          "skill": "scholarship.vr-classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-classification"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Scepticism, admiration and nostalgia describe attitudes or feelings.",
+        "Chronology concerns event order; it can be used with any of those attitudes."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v089",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Every lantern in the display uses a battery. The small red object is a lantern in the display. What must it use?",
+        "options": [
+          {
+            "id": "a",
+            "text": "two batteries"
+          },
+          {
+            "id": "b",
+            "text": "a battery"
+          },
+          {
+            "id": "c",
+            "text": "a candle"
+          },
+          {
+            "id": "d",
+            "text": "a red battery"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The rule applies to every lantern in this display, including the identified object. A battery necessarily follows; colour and number of batteries are not stated.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The rule applies to every lantern in this display, including the identified object.",
+        "A battery necessarily follows; colour and number of batteries are not stated."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v090",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Only ticket holders may enter the balcony. Suri entered the balcony with permission. Which conclusion follows?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Suri sat in the front row"
+          },
+          {
+            "id": "b",
+            "text": "Suri held a ticket"
+          },
+          {
+            "id": "c",
+            "text": "all ticket holders entered"
+          },
+          {
+            "id": "d",
+            "text": "Suri bought the ticket"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Only ticket holders may enter makes holding a ticket necessary for permitted entry. Suri's permitted entry therefore implies a ticket, without specifying how it was acquired or where she sat.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Only ticket holders may enter makes holding a ticket necessary for permitted entry.",
+        "Suri's permitted entry therefore implies a ticket, without specifying how it was acquired or where she sat."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r088",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "For which customer need does Mara recommend printing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "every hand-painted commission"
+          },
+          {
+            "id": "b",
+            "text": "signs with no letters"
+          },
+          {
+            "id": "c",
+            "text": "orders requiring no draft"
+          },
+          {
+            "id": "d",
+            "text": "inexpensive temporary signs"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Mara explicitly recommends printing for inexpensive temporary signs. Her preference depends on the purpose rather than a universal opposition to one technique.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Interview with a sign painter",
+          "body": "Interviewer: You still paint shop signs by hand. Is that because you dislike computers?\n\nMara: No. I use a computer to send drafts and manage orders. A brush gives a different edge to a letter, and some customers want that. Others need inexpensive temporary signs, so I recommend printing.\n\nInterviewer: Did you always have such steady hands?\n\nMara: My first letters leaned like tired fence posts. My teacher made me paint straight lines for a week. I thought I was being punished. Later I realised she was giving me control of the brush before asking me to control a whole word.\n\nInterviewer: What is the hardest part now?\n\nMara: Listening before drawing. A bakery once asked for an old-fashioned sign. I pictured dark green and gold. The owner meant the bright red lettering her grandmother used. We would have agreed on the words 'old-fashioned' and disagreed completely about the picture. Now I ask for examples before choosing a colour.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Mara explicitly recommends printing for inexpensive temporary signs.",
+        "Her preference depends on the purpose rather than a universal opposition to one technique."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r089",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What mistaken assumption is built into the interviewer's first question?",
+        "options": [
+          {
+            "id": "a",
+            "text": "hand painting implies dislike of computers"
+          },
+          {
+            "id": "b",
+            "text": "computer drafts are always free"
+          },
+          {
+            "id": "c",
+            "text": "all customers own bakeries"
+          },
+          {
+            "id": "d",
+            "text": "sign painters cannot send orders"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The question suggests hand painting results from disliking computers. Mara's examples of using a computer directly reject that assumed connection.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Interview with a sign painter",
+          "body": "Interviewer: You still paint shop signs by hand. Is that because you dislike computers?\n\nMara: No. I use a computer to send drafts and manage orders. A brush gives a different edge to a letter, and some customers want that. Others need inexpensive temporary signs, so I recommend printing.\n\nInterviewer: Did you always have such steady hands?\n\nMara: My first letters leaned like tired fence posts. My teacher made me paint straight lines for a week. I thought I was being punished. Later I realised she was giving me control of the brush before asking me to control a whole word.\n\nInterviewer: What is the hardest part now?\n\nMara: Listening before drawing. A bakery once asked for an old-fashioned sign. I pictured dark green and gold. The owner meant the bright red lettering her grandmother used. We would have agreed on the words 'old-fashioned' and disagreed completely about the picture. Now I ask for examples before choosing a colour.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The question suggests hand painting results from disliking computers.",
+        "Mara's examples of using a computer directly reject that assumed connection."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r090",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does 'letters leaned like tired fence posts' convey?",
+        "options": [
+          {
+            "id": "a",
+            "text": "that the letters were made of timber"
+          },
+          {
+            "id": "b",
+            "text": "that her teacher painted fences"
+          },
+          {
+            "id": "c",
+            "text": "the price of her first sign"
+          },
+          {
+            "id": "d",
+            "text": "the uneven slant of Mara's early lettering"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The simile compares the appearance of leaning letters with leaning posts. It describes imperfect shape, not literal material or the teacher's employment.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc figurative language",
+          "skill": "scholarship.rc-figurative-language",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-figurative-language"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Interview with a sign painter",
+          "body": "Interviewer: You still paint shop signs by hand. Is that because you dislike computers?\n\nMara: No. I use a computer to send drafts and manage orders. A brush gives a different edge to a letter, and some customers want that. Others need inexpensive temporary signs, so I recommend printing.\n\nInterviewer: Did you always have such steady hands?\n\nMara: My first letters leaned like tired fence posts. My teacher made me paint straight lines for a week. I thought I was being punished. Later I realised she was giving me control of the brush before asking me to control a whole word.\n\nInterviewer: What is the hardest part now?\n\nMara: Listening before drawing. A bakery once asked for an old-fashioned sign. I pictured dark green and gold. The owner meant the bright red lettering her grandmother used. We would have agreed on the words 'old-fashioned' and disagreed completely about the picture. Now I ask for examples before choosing a colour.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The simile compares the appearance of leaning letters with leaning posts.",
+        "It describes imperfect shape, not literal material or the teacher's employment."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w030",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a visitor guide to an imagined small museum. Describe three exhibits, a useful route and one accessibility arrangement. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Choose a theme that connects the exhibits and makes their descriptions coherent. Give a route readers can follow without contradictory directions. Describe a specific accessibility feature and how a visitor can request help, avoiding vague promises that every need is already met.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Informative composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "informative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Choose a theme that connects the exhibits and makes their descriptions coherent.",
+        "Give a route readers can follow without contradictory directions.",
+        "Describe a specific accessibility feature and how a visitor can request help, avoiding vague promises that every need is already met."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Choose a theme that connects the exhibits and makes their descriptions coherent.",
+          "Give a route readers can follow without contradictory directions.",
+          "Describe a specific accessibility feature and how a visitor can request help, avoiding vague promises that every need is already met.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m091",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bag contains 3 black and 2 white counters. Two counters are drawn without replacement. What is the probability of one of each colour in either order? Give a decimal.",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.3"
+          },
+          {
+            "id": "b",
+            "text": "0.4"
+          },
+          {
+            "id": "c",
+            "text": "0.5"
+          },
+          {
+            "id": "d",
+            "text": "0.6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Black then white has probability (3/5)(2/4) = 0.3. White then black also has probability 0.3. The disjoint orders sum to 0.6.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Black then white has probability (3/5)(2/4) = 0.3.",
+        "White then black also has probability 0.3. The disjoint orders sum to 0.6."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3/5*2/4+2/5*3/4",
+        "expected": "0.6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m092",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three meal choices and four drink choices are available. One particular meal cannot be paired with one particular drink. How many allowed meal-and-drink pairs exist?",
+        "options": [
+          {
+            "id": "a",
+            "text": "7"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "11"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Without restrictions there are 3 times 4 = 12 pairs. Exactly one pair is forbidden, leaving 11 allowed combinations.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Without restrictions there are 3 times 4 = 12 pairs.",
+        "Exactly one pair is forbidden, leaving 11 allowed combinations."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3*4-1",
+        "expected": "11"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m093",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A code uses two different digits from 1, 2, 3, 4 and 5. The first digit must be even. How many codes are possible?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "10"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The first digit has two choices, 2 or 4. After either choice, four different digits remain for the second position. Two times four gives eight codes.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "skill": "scholarship.maths-probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-probability"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first digit has two choices, 2 or 4.",
+        "After either choice, four different digits remain for the second position. Two times four gives eight codes."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2*4",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n091",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each row, the third entry is the sum of the first two: (4, 9, 13), (7, 8, 15), (12, 6, ?). Find the missing entry.",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "6"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "72"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The example rows confirm addition: 4 + 9 = 13 and 7 + 8 = 15. Use the same stated rule in the final row: 12 + 6 = 18.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The example rows confirm addition: 4 + 9 = 13 and 7 + 8 = 15.",
+        "Use the same stated rule in the final row: 12 + 6 = 18."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "12+6",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n092",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "For the triples (3, 5, 16) and (6, 4, 25), the last number is one more than the product of the first two. What finishes (7, 8, ?)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "57"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "55"
+          },
+          {
+            "id": "d",
+            "text": "56"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The rule gives 3 times 5 plus 1 = 16 and 6 times 4 plus 1 = 25. It gives 7 times 8 plus 1 = 57 in the final row.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The rule gives 3 times 5 plus 1 = 16 and 6 times 4 plus 1 = 25.",
+        "It gives 7 times 8 plus 1 = 57 in the final row."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7*8+1",
+        "expected": "57"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n093",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A grid uses rows (2, 5, 21), (4, 7, 33), (6, 9, ?). The last entry is the square of the second minus the square of the first. What is missing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "117"
+          },
+          {
+            "id": "b",
+            "text": "45"
+          },
+          {
+            "id": "c",
+            "text": "15"
+          },
+          {
+            "id": "d",
+            "text": "27"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The rule fits 25 - 4 = 21 and 49 - 16 = 33. The final result is 81 - 36 = 45, not the square of the difference.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The rule fits 25 - 4 = 21 and 49 - 16 = 33.",
+        "The final result is 81 - 36 = 45, not the square of the difference."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "9**2-6**2",
+        "expected": "45"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v091",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "All flints are stones. Some stones are polished. Which statement must follow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "no polished object is a flint"
+          },
+          {
+            "id": "b",
+            "text": "No flint is outside the stone group"
+          },
+          {
+            "id": "c",
+            "text": "some flints are polished"
+          },
+          {
+            "id": "d",
+            "text": "all stones are flints"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The first rule includes every flint among stones. The polished stones might or might not be flints. Only the inclusion of all flints in the stone group is guaranteed.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The first rule includes every flint among stones.",
+        "The polished stones might or might not be flints. Only the inclusion of all flints in the stone group is guaranteed."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v092",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If the archive is open, the green light is on. The green light is off. What follows from these rules?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the archive is not open"
+          },
+          {
+            "id": "b",
+            "text": "the archive has no power"
+          },
+          {
+            "id": "c",
+            "text": "the archive opens tomorrow"
+          },
+          {
+            "id": "d",
+            "text": "the green light is broken"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "An open archive would require the light to be on. Because the light is off, the archive cannot be open under the rule. The cause and future opening are unknown.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "An open archive would require the light to be on.",
+        "Because the light is off, the archive cannot be open under the rule. The cause and future opening are unknown."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v093",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Whenever Ivo paints, he wears an apron. Today he wears an apron. Which statement is justified?",
+        "options": [
+          {
+            "id": "a",
+            "text": "he paints only today"
+          },
+          {
+            "id": "b",
+            "text": "He may be painting, but need not be"
+          },
+          {
+            "id": "c",
+            "text": "he must be painting"
+          },
+          {
+            "id": "d",
+            "text": "he cannot be painting"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The rule gives painting implies apron, not apron implies painting. He could wear the apron for another reason, so painting remains possible but unproved.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The rule gives painting implies apron, not apron implies painting.",
+        "He could wear the apron for another reason, so painting remains possible but unproved."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r091",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why did Mara's teacher initially require straight-line practice?",
+        "options": [
+          {
+            "id": "a",
+            "text": "to make Mara abandon painting"
+          },
+          {
+            "id": "b",
+            "text": "to copy the bakery's red sign"
+          },
+          {
+            "id": "c",
+            "text": "to avoid teaching any letters later"
+          },
+          {
+            "id": "d",
+            "text": "to build brush control before complex lettering"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Mara later understands that the simple task developed control needed for whole words. Her early sense of punishment is presented as an interpretation she revises.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc cause effect",
+          "skill": "scholarship.rc-cause-effect",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-cause-effect"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Interview with a sign painter",
+          "body": "Interviewer: You still paint shop signs by hand. Is that because you dislike computers?\n\nMara: No. I use a computer to send drafts and manage orders. A brush gives a different edge to a letter, and some customers want that. Others need inexpensive temporary signs, so I recommend printing.\n\nInterviewer: Did you always have such steady hands?\n\nMara: My first letters leaned like tired fence posts. My teacher made me paint straight lines for a week. I thought I was being punished. Later I realised she was giving me control of the brush before asking me to control a whole word.\n\nInterviewer: What is the hardest part now?\n\nMara: Listening before drawing. A bakery once asked for an old-fashioned sign. I pictured dark green and gold. The owner meant the bright red lettering her grandmother used. We would have agreed on the words 'old-fashioned' and disagreed completely about the picture. Now I ask for examples before choosing a colour.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Mara later understands that the simple task developed control needed for whole words.",
+        "Her early sense of punishment is presented as an interpretation she revises."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r092",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What broader communication problem does the bakery example illustrate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Shared words can conceal different intended images"
+          },
+          {
+            "id": "b",
+            "text": "customers always describe colours accurately"
+          },
+          {
+            "id": "c",
+            "text": "traditional signs must use gold"
+          },
+          {
+            "id": "d",
+            "text": "examples prevent every possible mistake"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Both parties used old-fashioned but imagined different designs. The example supports asking for concrete references without claiming examples make misunderstanding impossible.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc main idea",
+          "skill": "scholarship.rc-main-idea",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-main-idea"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Interview with a sign painter",
+          "body": "Interviewer: You still paint shop signs by hand. Is that because you dislike computers?\n\nMara: No. I use a computer to send drafts and manage orders. A brush gives a different edge to a letter, and some customers want that. Others need inexpensive temporary signs, so I recommend printing.\n\nInterviewer: Did you always have such steady hands?\n\nMara: My first letters leaned like tired fence posts. My teacher made me paint straight lines for a week. I thought I was being punished. Later I realised she was giving me control of the brush before asking me to control a whole word.\n\nInterviewer: What is the hardest part now?\n\nMara: Listening before drawing. A bakery once asked for an old-fashioned sign. I pictured dark green and gold. The owner meant the bright red lettering her grandmother used. We would have agreed on the words 'old-fashioned' and disagreed completely about the picture. Now I ask for examples before choosing a colour.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Both parties used old-fashioned but imagined different designs.",
+        "The example supports asking for concrete references without claiming examples make misunderstanding impossible."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r093",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What must the tower do before its height is measured?",
+        "options": [
+          {
+            "id": "a",
+            "text": "fall after three seconds"
+          },
+          {
+            "id": "b",
+            "text": "use exactly six rolls"
+          },
+          {
+            "id": "c",
+            "text": "stand unsupported for ten seconds"
+          },
+          {
+            "id": "d",
+            "text": "be taped to the table"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The instructions condition measurement on ten seconds of unsupported standing. Taping the tower to the table is explicitly disallowed rather than required.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual retrieval",
+          "skill": "scholarship.rc-factual-retrieval",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-retrieval"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Instructions for a paper tower test",
+          "body": "Your group has six sheets of paper and fifty centimetres of tape. Build a tower that stands without support for ten seconds. Before building, record your planned base width. You may fold or roll paper, but you may not attach the tower to the table.\n\nMeasure height only after the tower has stood for ten seconds. If it falls earlier, record the attempt as unstable, not as a height of zero. Zero suggests no height was built, whereas unstable describes a different problem. You may then rebuild with the same materials, recording any changes.\n\nWhen comparing attempts, look at both height and stability. A very tall tower that falls after three seconds does not meet the task. A lower tower that stands may provide a useful starting point for another design. Do not conclude from one successful attempt that a design will always work. Repeat the test and note whether a slight change in placement affects the result.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The instructions condition measurement on ten seconds of unsupported standing.",
+        "Taping the tower to the table is explicitly disallowed rather than required."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w031",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a fact sheet about an invented animal adapted to a cold, windy island. Clearly label it fictional and explain how three features help it survive. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Define the island conditions and explicitly identify the animal as invented. Connect each physical or behavioural feature to a particular environmental challenge rather than listing unrelated abilities. Keep the biology internally plausible and distinguish habitat, diet and adaptations using clear sections.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Informative composition",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "informative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Define the island conditions and explicitly identify the animal as invented.",
+        "Connect each physical or behavioural feature to a particular environmental challenge rather than listing unrelated abilities.",
+        "Keep the biology internally plausible and distinguish habitat, diet and adaptations using clear sections."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Define the island conditions and explicitly identify the animal as invented.",
+          "Connect each physical or behavioural feature to a particular environmental challenge rather than listing unrelated abilities.",
+          "Keep the biology internally plausible and distinguish habitat, diet and adaptations using clear sections.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m094",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The scores in a quiz are 6, 8, 8, 9 and 14. What is the median score?",
+        "options": [
+          {
+            "id": "a",
+            "text": "9.5"
+          },
+          {
+            "id": "b",
+            "text": "14"
+          },
+          {
+            "id": "c",
+            "text": "8"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Put the five scores in order; they are already sorted. The third score has two scores on either side, so the median is 8, regardless of the high score of 14.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Put the five scores in order; they are already sorted.",
+        "The third score has two scores on either side, so the median is 8, regardless of the high score of 14."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "8",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m095",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A chart records 12 walkers, 9 cyclists and 15 bus travellers. How many more travel by bus than by bicycle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Compare only the bus and bicycle groups. Subtract nine cyclists from fifteen bus travellers to get a difference of six.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Compare only the bus and bicycle groups.",
+        "Subtract nine cyclists from fifteen bus travellers to get a difference of six."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "15-9",
+        "expected": "6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m096",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bottle contains 1.2 litres of water. How many millilitres is this?",
+        "options": [
+          {
+            "id": "a",
+            "text": "120"
+          },
+          {
+            "id": "b",
+            "text": "12000"
+          },
+          {
+            "id": "c",
+            "text": "1200"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "One litre is 1000 millilitres. Multiply 1.2 by 1000 to get 1200 millilitres; changing units does not change the amount of water.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "One litre is 1000 millilitres.",
+        "Multiply 1.2 by 1000 to get 1200 millilitres; changing units does not change the amount of water."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "1.2*1000",
+        "expected": "1200"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n094",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A table shows input pairs and their absolute difference: (18, 7, 11), (4, 15, 11), (23, 9, ?). What is the final value?",
+        "options": [
+          {
+            "id": "a",
+            "text": "32"
+          },
+          {
+            "id": "b",
+            "text": "14"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "14.5"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The absolute difference is the non-negative distance between the input values. For 23 and 9, subtract the smaller from the larger to obtain 14.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The absolute difference is the non-negative distance between the input values.",
+        "For 23 and 9, subtract the smaller from the larger to obtain 14."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "23-9",
+        "expected": "14"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n095",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Read these rows as first value, second value, output: (3, 2, 11), (5, 4, 29), (7, 6, ?). Output equals first value squared plus second value. What is missing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "55"
+          },
+          {
+            "id": "b",
+            "text": "43"
+          },
+          {
+            "id": "c",
+            "text": "49"
+          },
+          {
+            "id": "d",
+            "text": "85"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Check 3 squared plus 2 = 11 and 5 squared plus 4 = 29. Seven squared plus six is 55. Squaring the sum instead would apply a different rule.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Check 3 squared plus 2 = 11 and 5 squared plus 4 = 29.",
+        "Seven squared plus six is 55. Squaring the sum instead would apply a different rule."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "7**2+6",
+        "expected": "55"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n096",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Across every row of a grid, the middle number is the mean of the outer numbers. The rows are (8, 13, 18), (6, 15, 24), (14, ?, 36). Find the missing middle.",
+        "options": [
+          {
+            "id": "a",
+            "text": "26"
+          },
+          {
+            "id": "b",
+            "text": "25"
+          },
+          {
+            "id": "c",
+            "text": "22"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The mean of two numbers is their sum divided by two. The outer values sum to fifty, so the missing middle number is 25.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The mean of two numbers is their sum divided by two.",
+        "The outer values sum to fifty, so the missing middle number is 25."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "(14+36)/2",
+        "expected": "25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v094",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "No reptiles in the rescue centre have feathers. Kito is a reptile there. Which conclusion is certain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Kito cannot swim"
+          },
+          {
+            "id": "b",
+            "text": "all featherless animals are reptiles"
+          },
+          {
+            "id": "c",
+            "text": "Kito lives outside"
+          },
+          {
+            "id": "d",
+            "text": "Kito has no feathers"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Kito belongs to the group covered by the no-feathers rule. Nothing is stated about swimming or housing, and reversing the rule would be invalid.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Kito belongs to the group covered by the no-feathers rule.",
+        "Nothing is stated about swimming or housing, and reversing the rule would be invalid."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v095",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Some sculptors are gardeners. Every gardener in this town owns gloves. Which statement must be true about those people?",
+        "options": [
+          {
+            "id": "a",
+            "text": "every glove owner is a gardener"
+          },
+          {
+            "id": "b",
+            "text": "no sculptor lacks gloves"
+          },
+          {
+            "id": "c",
+            "text": "Some sculptors own gloves"
+          },
+          {
+            "id": "d",
+            "text": "all sculptors own gloves"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The sculptors who are also gardeners fall under the glove rule. At least those sculptors own gloves; the rule says nothing about the remaining sculptors or non-gardener glove owners.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The sculptors who are also gardeners fall under the glove rule.",
+        "At least those sculptors own gloves; the rule says nothing about the remaining sculptors or non-gardener glove owners."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v096",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A library loans an atlas only if the borrower leaves a deposit. Tessa borrowed an atlas. What must have happened?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tessa owns an atlas"
+          },
+          {
+            "id": "b",
+            "text": "Tessa left a deposit"
+          },
+          {
+            "id": "c",
+            "text": "Tessa paid a fee"
+          },
+          {
+            "id": "d",
+            "text": "Tessa borrowed no other book"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Only if makes the deposit a required condition. Borrowing the atlas therefore entails a deposit, but not a fee or a restriction on other loans.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Only if makes the deposit a required condition.",
+        "Borrowing the atlas therefore entails a deposit, but not a fee or a restriction on other loans."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r094",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the tower instructions, what does unstable describe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "absence of any built height"
+          },
+          {
+            "id": "b",
+            "text": "use of too few paper sheets"
+          },
+          {
+            "id": "c",
+            "text": "an inaccurate ruler"
+          },
+          {
+            "id": "d",
+            "text": "failure to remain standing for the required time"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The text distinguishes falling early from building no height. Unstable records the standing problem without misrepresenting the physical tower as having zero height.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc vocabulary context",
+          "skill": "scholarship.rc-vocabulary-context",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-vocabulary-context"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Instructions for a paper tower test",
+          "body": "Your group has six sheets of paper and fifty centimetres of tape. Build a tower that stands without support for ten seconds. Before building, record your planned base width. You may fold or roll paper, but you may not attach the tower to the table.\n\nMeasure height only after the tower has stood for ten seconds. If it falls earlier, record the attempt as unstable, not as a height of zero. Zero suggests no height was built, whereas unstable describes a different problem. You may then rebuild with the same materials, recording any changes.\n\nWhen comparing attempts, look at both height and stability. A very tall tower that falls after three seconds does not meet the task. A lower tower that stands may provide a useful starting point for another design. Do not conclude from one successful attempt that a design will always work. Repeat the test and note whether a slight change in placement affects the result.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The text distinguishes falling early from building no height.",
+        "Unstable records the standing problem without misrepresenting the physical tower as having zero height."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r095",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "May a group fold the paper before testing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "yes, folding is explicitly allowed"
+          },
+          {
+            "id": "b",
+            "text": "no, all sheets must remain flat"
+          },
+          {
+            "id": "c",
+            "text": "only after taping it to the table"
+          },
+          {
+            "id": "d",
+            "text": "only if it gives up measuring height"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The first paragraph permits folding or rolling. That permission does not override the separate restriction against attaching the tower to the table.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc factual inference",
+          "skill": "scholarship.rc-factual-inference",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-factual-inference"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Instructions for a paper tower test",
+          "body": "Your group has six sheets of paper and fifty centimetres of tape. Build a tower that stands without support for ten seconds. Before building, record your planned base width. You may fold or roll paper, but you may not attach the tower to the table.\n\nMeasure height only after the tower has stood for ten seconds. If it falls earlier, record the attempt as unstable, not as a height of zero. Zero suggests no height was built, whereas unstable describes a different problem. You may then rebuild with the same materials, recording any changes.\n\nWhen comparing attempts, look at both height and stability. A very tall tower that falls after three seconds does not meet the task. A lower tower that stands may provide a useful starting point for another design. Do not conclude from one successful attempt that a design will always work. Repeat the test and note whether a slight change in placement affects the result.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The first paragraph permits folding or rolling.",
+        "That permission does not override the separate restriction against attaching the tower to the table."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r096",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which comparison follows the stated assessment method?",
+        "options": [
+          {
+            "id": "a",
+            "text": "assign zero height to every early fall"
+          },
+          {
+            "id": "b",
+            "text": "ignore stability after the first attempt"
+          },
+          {
+            "id": "c",
+            "text": "compare heights among towers that pass the standing requirement"
+          },
+          {
+            "id": "d",
+            "text": "declare the tallest falling tower best"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Standing for ten seconds is a requirement for a valid height measurement. The instructions also ask for stability records, so the other methods either bypass or misrepresent the requirement.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc argument evaluation",
+          "skill": "scholarship.rc-argument-evaluation",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-argument-evaluation"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Instructions for a paper tower test",
+          "body": "Your group has six sheets of paper and fifty centimetres of tape. Build a tower that stands without support for ten seconds. Before building, record your planned base width. You may fold or roll paper, but you may not attach the tower to the table.\n\nMeasure height only after the tower has stood for ten seconds. If it falls earlier, record the attempt as unstable, not as a height of zero. Zero suggests no height was built, whereas unstable describes a different problem. You may then rebuild with the same materials, recording any changes.\n\nWhen comparing attempts, look at both height and stability. A very tall tower that falls after three seconds does not meet the task. A lower tower that stands may provide a useful starting point for another design. Do not conclude from one successful attempt that a design will always work. Repeat the test and note whether a slight change in placement affects the result.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Standing for ten seconds is a requirement for a valid height measurement.",
+        "The instructions also ask for stability records, so the other methods either bypass or misrepresent the requirement."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w032",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write instructions for a fictional book-swap day. Include eligibility, a step-by-step exchange process and what happens to leftover books. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Set clear entry conditions such as book condition and suitable categories. Describe the exchange sequence from arrival to selection so participants know what to do. Explain leftover handling and make sure it is compatible with your earlier ownership and donation rules.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Informative composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "informative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Set clear entry conditions such as book condition and suitable categories.",
+        "Describe the exchange sequence from arrival to selection so participants know what to do.",
+        "Explain leftover handling and make sure it is compatible with your earlier ownership and donation rules."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Set clear entry conditions such as book condition and suitable categories.",
+          "Describe the exchange sequence from arrival to selection so participants know what to do.",
+          "Explain leftover handling and make sure it is compatible with your earlier ownership and donation rules.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m097",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Five books have mean mass 320 g. Four weigh 280 g, 310 g, 340 g and 360 g. What is the fifth book's mass in grams?",
+        "options": [
+          {
+            "id": "a",
+            "text": "310"
+          },
+          {
+            "id": "b",
+            "text": "290"
+          },
+          {
+            "id": "c",
+            "text": "300"
+          },
+          {
+            "id": "d",
+            "text": "330"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The five books together weigh 1600 g. The known four weigh 1290 g, so the fifth weighs 310 g.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The five books together weigh 1600 g.",
+        "The known four weigh 1290 g, so the fifth weighs 310 g."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "5*320-(280+310+340+360)",
+        "expected": "310"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m098",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A 90-minute lesson uses 2/5 of its time for investigation and 20 minutes for discussion. How many minutes remain for independent work?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "54"
+          },
+          {
+            "id": "c",
+            "text": "34"
+          },
+          {
+            "id": "d",
+            "text": "26"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Investigation uses 36 minutes, leaving 54. Discussion uses another twenty, leaving 34 minutes for independent work.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "skill": "scholarship.maths-ratios-rates",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-ratios-rates"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Investigation uses 36 minutes, leaving 54.",
+        "Discussion uses another twenty, leaving 34 minutes for independent work."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "90*(1-2/5)-20",
+        "expected": "34"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m099",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A container holds 2.4 litres. A cup holds 150 mL. How many full cups can be poured from a full container?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Convert 2.4 litres to 2400 millilitres. 2400 divided by 150 is 16 full cups, with no water left over.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Convert 2.4 litres to 2400 millilitres.",
+        "2400 divided by 150 is 16 full cups, with no water left over."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2400/150",
+        "expected": "16"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n097",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a three-row array, each column totals 40. Two rows are (9, 12, 15) and (14, 8, 6). What is the sum of all entries in the third row?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40"
+          },
+          {
+            "id": "b",
+            "text": "60"
+          },
+          {
+            "id": "c",
+            "text": "56"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The whole grid totals three columns times forty = 120. The two known rows total 64, so the third row totals 56.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The whole grid totals three columns times forty = 120.",
+        "The two known rows total 64, so the third row totals 56."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "3*40-(9+12+15+14+8+6)",
+        "expected": "56"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n098",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row is a number, its double and its triple. Two rows are (4, 8, 12) and (7, 14, 21). A third row has middle entry 18. What is its last entry?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "27"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The middle entry is twice the first, so the first entry is nine. The last entry is three times nine = 27, which is also 1.5 times the middle entry.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The middle entry is twice the first, so the first entry is nine.",
+        "The last entry is three times nine = 27, which is also 1.5 times the middle entry."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "18/2*3",
+        "expected": "27"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-n099",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each triple has output equal to the first number times the sum of the first and second: (2, 5, 14), (3, 4, 21), (6, 7, ?). What is missing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "49"
+          },
+          {
+            "id": "b",
+            "text": "91"
+          },
+          {
+            "id": "c",
+            "text": "78"
+          },
+          {
+            "id": "d",
+            "text": "42"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The examples give 2 times 7 = 14 and 3 times 7 = 21. For the final row, 6 times (6 + 7) gives 78. Add inside the bracket first.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "nr number matrices",
+          "skill": "scholarship.nr-number-matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "nr-number-matrices"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The examples give 2 times 7 = 14 and 3 times 7 = 21.",
+        "For the final row, 6 times (6 + 7) gives 78. Add inside the bracket first."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "6*(6+7)",
+        "expected": "78"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v097",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "No amber boxes are heavy. All boxes on the bottom shelf are heavy. Which conclusion follows?",
+        "options": [
+          {
+            "id": "a",
+            "text": "all amber boxes are on the top shelf"
+          },
+          {
+            "id": "b",
+            "text": "some bottom-shelf boxes are amber"
+          },
+          {
+            "id": "c",
+            "text": "No amber box is on the bottom shelf"
+          },
+          {
+            "id": "d",
+            "text": "all heavy boxes are on the bottom shelf"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "An amber box cannot be heavy, while any bottom-shelf box must be heavy. Those groups cannot overlap. Exclusion from the bottom shelf does not identify a particular other shelf.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "An amber box cannot be heavy, while any bottom-shelf box must be heavy.",
+        "Those groups cannot overlap. Exclusion from the bottom shelf does not identify a particular other shelf."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v098",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The badges go to either the science group or the art group, but not both. The science group receives them. What follows?",
+        "options": [
+          {
+            "id": "a",
+            "text": "the science group made them"
+          },
+          {
+            "id": "b",
+            "text": "neither group receives them"
+          },
+          {
+            "id": "c",
+            "text": "The art group does not receive them"
+          },
+          {
+            "id": "d",
+            "text": "the art group receives different badges"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The rule explicitly excludes joint receipt. Once the science group receives these badges, the art group cannot receive the same allocation; no other allocation is described.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The rule explicitly excludes joint receipt.",
+        "Once the science group receives these badges, the art group cannot receive the same allocation; no other allocation is described."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-v099",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At least one runner is a violinist. No violinist in the group is a swimmer. What must be true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "all swimmers are runners"
+          },
+          {
+            "id": "b",
+            "text": "some violinists are swimmers"
+          },
+          {
+            "id": "c",
+            "text": "At least one runner is not a swimmer"
+          },
+          {
+            "id": "d",
+            "text": "no runner is a swimmer"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Take the runner who is also a violinist. The exclusion rule prevents that person from being a swimmer, but other runners could swim.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "vr sentence logic",
+          "skill": "scholarship.vr-sentence-logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 150,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "vr-sentence-logic"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Take the runner who is also a violinist.",
+        "The exclusion rule prevents that person from being a swimmer, but other runners could swim."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-r097",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why do the instructions end with repeat tests and placement changes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "to guarantee the next tower will be taller"
+          },
+          {
+            "id": "b",
+            "text": "to cancel the original ten-second rule"
+          },
+          {
+            "id": "c",
+            "text": "to check how dependable a successful result is"
+          },
+          {
+            "id": "d",
+            "text": "to make every group use more tape"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The ending warns against generalising from one success. Repetition and small placement changes investigate reliability while retaining the same task requirement.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "rc text structure",
+          "skill": "scholarship.rc-text-structure",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 210,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "rc-text-structure"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        },
+        "stimulus": {
+          "title": "Instructions for a paper tower test",
+          "body": "Your group has six sheets of paper and fifty centimetres of tape. Build a tower that stands without support for ten seconds. Before building, record your planned base width. You may fold or roll paper, but you may not attach the tower to the table.\n\nMeasure height only after the tower has stood for ten seconds. If it falls earlier, record the attempt as unstable, not as a height of zero. Zero suggests no height was built, whereas unstable describes a different problem. You may then rebuild with the same materials, recording any changes.\n\nWhen comparing attempts, look at both height and stability. A very tall tower that falls after three seconds does not meet the task. A lower tower that stands may provide a useful starting point for another design. Do not conclude from one successful attempt that a design will always work. Repeat the test and note whether a slight change in placement affects the result.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The ending warns against generalising from one success.",
+        "Repetition and small placement changes investigate reliability while retaining the same task requirement."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-w033",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Write a short piece narrated by a lost glove in a school office. Give the glove a distinctive voice and reveal something about its owner through remembered details. Allow 15 minutes in total, including any planning and editing you choose to do.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Use scholarship-written-expression v1: assess punctuation, creativity, construction, grammar, spelling and relevance separately on the 1 to 5 scale. No single model response is required."
+        },
+        "explanation": "Choose a voice consistent with the glove's imagined personality and limited viewpoint. Reveal the owner through specific remembered actions rather than a list of traits. Give the piece a small development or discovery so the object voice serves a purpose beyond the initial joke.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "Creative composition",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 900,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "manual-assessment",
+            "creative",
+            "planning",
+            "cohesion",
+            "editing"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "Choose a voice consistent with the glove's imagined personality and limited viewpoint.",
+        "Reveal the owner through specific remembered actions rather than a list of traits.",
+        "Give the piece a small development or discovery so the object voice serves a purpose beyond the initial joke."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Choose a voice consistent with the glove's imagined personality and limited viewpoint.",
+          "Reveal the owner through specific remembered actions rather than a list of traits.",
+          "Give the piece a small development or discovery so the object voice serves a purpose beyond the initial joke.",
+          "Edit sentence boundaries, punctuation and Australian spelling."
+        ],
+        "assessmentMode": "human_only"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m100",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A school's four house scores are 37, 42, 35 and 50. How many points must the lowest-scoring house gain to equal the mean of the other three?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "15"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The lowest score is 35; the other scores total 129 and have mean 43. The lowest house therefore needs 43 minus 35 = 8 points.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "skill": "scholarship.maths-algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-algebra"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The lowest score is 35; the other scores total 129 and have mean 43.",
+        "The lowest house therefore needs 43 minus 35 = 8 points."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "((37+42+50)/3)-35",
+        "expected": "8"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m101",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A board is marked at 0.2 m intervals from 0 to 2.4 m inclusive. How many marks are there?",
+        "options": [
+          {
+            "id": "a",
+            "text": "14"
+          },
+          {
+            "id": "b",
+            "text": "13.0"
+          },
+          {
+            "id": "c",
+            "text": "11"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "There are twelve intervals of 0.2 m in 2.4 m. Including both endpoints gives thirteen marks, one more than the number of intervals.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "skill": "scholarship.maths-fractions-decimals",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-fractions-decimals"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "There are twelve intervals of 0.2 m in 2.4 m.",
+        "Including both endpoints gives thirteen marks, one more than the number of intervals."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "2.4/0.2+1",
+        "expected": "13.0"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-e500-m102",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A film begins at 6:45 pm and lasts 1 hour 48 minutes. A 12-minute discussion follows. At what minute after 8:00 pm does the discussion end?",
+        "options": [
+          {
+            "id": "a",
+            "text": "45"
+          },
+          {
+            "id": "b",
+            "text": "21"
+          },
+          {
+            "id": "c",
+            "text": "33"
+          },
+          {
+            "id": "d",
+            "text": "57"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The film ends at 8:33 pm, since 6:45 plus 1 hour 48 minutes gives that time. The discussion ends at 8:45, which is 45 minutes after 8:00.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "skill": "scholarship.maths-geometry",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "tags": [
+            "vihaan-expansion",
+            "year-5-6-stretch",
+            "maths-geometry"
+          ],
+          "locale": "en-AU",
+          "source": "original",
+          "schemaVersion": 1
+        }
+      },
+      "workedSolution": [
+        "The film ends at 8:33 pm, since 6:45 plus 1 hour 48 minutes gives that time.",
+        "The discussion ends at 8:45, which is 45 minutes after 8:00."
+      ],
+      "reviewFocus": [
+        "Independently solve without the key; check each alternative and the stated conditions.",
+        "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
+      ],
+      "writingGuidance": null,
+      "arithmeticCheck": {
+        "expression": "45+108+12-120",
+        "expected": "45"
+      }
+    }
+  ]
+}

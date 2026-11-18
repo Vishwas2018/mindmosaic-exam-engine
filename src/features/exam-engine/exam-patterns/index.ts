@@ -32,6 +32,8 @@ export {
   groupExamPatterns,
 } from "./exam-pattern-registry";
 export type { ExamPatternGroup, ExamPatternYearGroup } from "./exam-pattern-registry";
+export { listPatternsForPicker } from "./pattern-listing";
+export type { PatternListing, WithheldFullPaper } from "./pattern-listing";
 export { MAX_FORMS, formIndexes, formOfUnit, unitsInForm } from "./form-partition";
 export { packBestEffort, packExact } from "./pack-units";
 export type { PackBounds } from "./pack-units";

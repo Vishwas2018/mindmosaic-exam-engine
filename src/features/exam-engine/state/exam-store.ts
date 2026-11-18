@@ -46,6 +46,7 @@ import {
   type Clock,
 } from "./deadline";
 import { reconcileResumedSession } from "./resume";
+import { recordConfirmedSave, recordNoOpenWork } from "@/features/auth/session-work-status";
 
 export type ExamStatus = "not_started" | "in_progress" | "submitting" | "submitted";
 
@@ -303,6 +304,26 @@ function recomputeAuthoringQuestions(
 const AUTOSAVE_DEBOUNCE_MS = 2_000;
 const AUTOSAVE_POLL_MS = 1_000;
 
+/**
+ * The single in-flight server-session creation, if any.
+ *
+ * POST /api/exam/session already dedupes on `idempotencyKey` and answers 409
+ * `idempotency_key_reused` — but no caller ever sent one, so the route fell
+ * back to `idempotencyKey ?? crypto.randomUUID()` and minted a fresh key per
+ * request. The dedupe was therefore unreachable from the application, and two
+ * concurrent POSTs (a double submit that outruns the React state guard in
+ * ExamConfigurator, or a request the browser retries on a flaky connection)
+ * would each create a real session, leaving an orphan attached to the student.
+ *
+ * Two things close that. One stable key per start attempt, so the server can
+ * recognise a duplicate; and coalescing, so a second concurrent call reuses
+ * the in-flight promise rather than issuing a request at all. The key must be
+ * fresh per *user-initiated* attempt — reusing it after a genuine failure
+ * would 409 and lock the student out of retrying — which is exactly what
+ * clearing this on settle gives.
+ */
+let pendingServerStart: Promise<boolean> | null = null;
+
 let autosaveLastChangeAt: number | null = null;
 let autosaveLastFlushedAt: number | null = null;
 let autosaveTimer: ReturnType<typeof setInterval> | null = null;
@@ -344,7 +365,16 @@ function startAutosaveLoop(getState: () => ExamStore): void {
       /* Only a response the server actually accepted counts as saved — a
          4xx/5xx must never light up "saved a moment ago" on a paper the
          server has not recorded. */
-      if (response.ok) useExamStore.setState({ lastAutosavedAt: clock() });
+      if (response.ok) {
+        useExamStore.setState({ lastAutosavedAt: clock() });
+        /* Remember the time the SERVER returned, so a later sign-out can say
+           "saved at 4:02 pm" and mean it (see features/auth/session-work-status). */
+        void response
+          .clone()
+          .json()
+          .then((body: { savedAt?: unknown } | null) => recordConfirmedSave(body?.savedAt))
+          .catch(() => undefined);
+      }
     }).catch((error) => {
       /* Best-effort: the next change (or the next poll tick, once
          autosaveLastChangeAt is set again) retries. Nothing here can lose
@@ -512,12 +542,19 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   },
 
   startServerExam: async (config, options) => {
+    /* Coalesce: a concurrent second call joins the request already in flight
+       instead of creating a second session. See pendingServerStart. */
+    if (pendingServerStart) return pendingServerStart;
+    const run = (async (): Promise<boolean> => {
     const bankId = options?.bankId ?? "curated";
+    /* One stable key for this attempt, so if this single request is
+       duplicated in transit the server recognises the second one. */
+    const idempotencyKey = crypto.randomUUID();
     try {
       const response = await fetch("/api/exam/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ config, bankId }),
+        body: JSON.stringify({ config, bankId, idempotencyKey }),
       });
       if (!response.ok) {
         const errorMsg = await parseSessionCreationError(
@@ -569,6 +606,15 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           "We couldn't connect to the server. Check your internet connection and try again.",
       });
       return false;
+    }
+    })();
+    pendingServerStart = run;
+    try {
+      return await run;
+    } finally {
+      /* Cleared however it settled, so a genuine retry after a failure mints
+         a fresh key rather than replaying a spent one into a 409. */
+      pendingServerStart = null;
     }
   },
 
@@ -764,7 +810,9 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     const scoringService: AssessmentScoringService = isServerSession
       ? new ServerAuthoritativeScoringService(state.sessionId!)
       : localPracticeScoringService;
-    const finalize = (submission: ScoredSubmission) =>
+    const finalize = (submission: ScoredSubmission) => {
+      /* The server accepted the submission: there is no open sitting left. */
+      if (isServerSession) recordNoOpenWork();
       set({
         status: "submitted",
         submittedAt: effectiveSubmittedAt,
@@ -773,6 +821,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         reviewQuestions: submission.reviewQuestions,
         remainingSeconds: state.durationSeconds === null ? null : 0,
       });
+    };
     const outcome = scoringService.score(authoringQuestions, state.responses, context);
     if (outcome instanceof Promise) {
       outcome.then(finalize).catch((error) => {

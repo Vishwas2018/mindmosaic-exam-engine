@@ -5,151 +5,150 @@ import { twMerge } from "tailwind-merge";
 import { MindMosaicLogo } from "@/components/branding";
 
 /**
- * The plum panel that fills the left column of Log in and Sign up
- * (design_handoff_mindmosaic, screens 6 and 7).
+ * The brand panel on every authentication screen, matched to the Claude Design auth artboards
+ * (docs/reviews/workspace-r1, "Parent sign-in", "Create a family account", "Student sign-in"):
  *
- * Three stacked layers, in this order and for these reasons:
+ *  - a 160° brand → brand-deep gradient,
+ *  - a 1px white grid at 14% opacity,
+ *  - a six-column field of white rounded tiles whose opacity steps 25 / 40 / 60 / 85 / 100 %, at 18%,
+ *  - logo top-left, one 34px heading with a short line under it, vertically centred, and a 14px footnote.
  *
- *  1. An animated mosaic field of `aspect-ratio: 1` tiles at 32-34%
- *     container opacity. Purely decorative, so `aria-hidden`.
- *  2. A fixed vertical scrim, rgba(42,17,69,0.55) -> 0.94. This is NOT
- *     decoration: the tiles animate between 0.22 and 0.9 opacity, and
- *     without the scrim the panel's white body copy drops below AA against
- *     a bright tile mid-cycle. The handoff calls this out explicitly. If
- *     the animation stays, the scrim stays.
- *  3. The content — logo, value copy, disclaimer — spaced by
- *     `align-content: space-between`.
- *
- * The tile pattern is deterministic (index arithmetic, no Math.random) so
- * the server-rendered markup and the client's first hydration pass agree.
- * A random field would mismatch on every load.
+ * The tiles are static (the design does not animate them) and deterministic, so server and client markup agree.
+ * Width comes from AuthShell: 46vw up to 620px from the `md` breakpoint; below it the panel is not shown.
  */
 
-const TILE_COLOURS = [
-  "var(--mm-brand)",
-  "var(--mm-lilac)",
-  "var(--mm-coral)",
-  "rgba(255,255,255,0.10)",
-  "rgba(201,182,228,0.35)",
-] as const;
-
-interface Tile {
-  readonly background: string;
-  readonly duration: string;
-  readonly delay: string;
-}
-
-/**
- * `step` and `spread` differ between the two screens in the handoff (Log in
- * uses `i * 7 + i % 5` over 12 columns, Sign up `i * 5 + i % 4` over 10), so
- * the two fields do not read as the same wallpaper twice.
- */
-function buildTiles(count: number, step: number, spread: number, delayStep: number): Tile[] {
-  return Array.from({ length: count }, (_, i) => ({
-    background: TILE_COLOURS[(i * step + (i % spread)) % TILE_COLOURS.length],
-    duration: `${5 + ((i * 3) % 7)}s`,
-    delay: `${((i * delayStep) % 40) / 10}s`,
-  }));
-}
+const TILE_OPACITY = [0.25, 0.4, 0.6, 0.85, 1] as const;
+const TILE_COUNT = 54;
 
 export interface AuthMosaicPanelProps {
-  /** Uppercase kicker above the heading, with the coral rule. */
-  eyebrow: string;
   heading: string;
-  /** Optional lead paragraph under the heading. */
+  /** One or two sentences under the heading. */
   intro?: string;
-  /** The panel body — a points list, a step tracker, whatever the screen needs. */
+  /** Kept for callers written against the previous panel; not shown (the design has no kicker). */
+  eyebrow?: string;
+  /** Optional extra content under the intro. */
   children?: ReactNode;
-  /** Small print pinned to the bottom of the panel. */
-  footnote: string;
-  /** 12 columns on Log in, 10 on Sign up. */
+  footnote?: string;
+  /** Ignored: kept so older call sites compile. */
   columns?: 10 | 12;
   className?: string;
 }
 
+export const AUTH_PANEL_FOOTNOTE = "Original assessment-style practice for Years 3 and 5.";
+
 export function AuthMosaicPanel({
-  eyebrow,
   heading,
   intro,
   children,
-  footnote,
-  columns = 12,
+  footnote = AUTH_PANEL_FOOTNOTE,
   className,
 }: AuthMosaicPanelProps) {
-  const tiles =
-    columns === 12
-      ? buildTiles(216, 7, 5, 13)
-      : buildTiles(160, 5, 4, 11);
-
   return (
     <aside
       className={twMerge(
-        "relative isolate hidden overflow-hidden bg-mm-plum p-[clamp(28px,3vw,48px)] text-white lg:grid lg:content-between",
+        "relative isolate hidden flex-col overflow-hidden bg-[linear-gradient(160deg,var(--mm-brand)_0%,var(--mm-brand-deep)_100%)] px-[clamp(28px,3.6vw,52px)] py-12 text-white md:flex",
         className,
       )}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 grid auto-rows-auto gap-1.5 p-[clamp(28px,3vw,48px)] opacity-[0.33]"
-        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+        className="pointer-events-none absolute inset-0 opacity-[0.14]"
+        style={{
+          backgroundImage:
+            "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 grid grid-cols-6 content-start gap-2.5 p-7 opacity-[0.18]"
       >
-        {tiles.map((tile, index) => (
-          <span
-            key={index}
-            className="mm-tile aspect-square rounded-[3px]"
-            style={
-              {
-                background: tile.background,
-                "--mm-tile-duration": tile.duration,
-                "--mm-tile-delay": tile.delay,
-              } as React.CSSProperties
-            }
+        {Array.from({ length: TILE_COUNT }, (_, i) => (
+          <i
+            key={i}
+            className="block aspect-square rounded-[10px] bg-white"
+            style={{ opacity: TILE_OPACITY[i % TILE_OPACITY.length] }}
           />
         ))}
       </div>
 
-      {/* See the note above: legibility layer, not decoration. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(42,17,69,0.55)_0%,rgba(42,17,69,0.86)_42%,rgba(42,17,69,0.94)_100%)]"
-      />
-
       <Link
         href="/"
         aria-label="MindMosaic home"
-        className="relative w-fit rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-lilac/50"
+        className="relative inline-flex min-h-11 w-fit items-center rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50"
       >
-        <MindMosaicLogo variant="inverse" inverseTone="lilac" size="md" />
+        <MindMosaicLogo variant="inverse" inverseTone="white" size="md" />
       </Link>
 
-      <div className="relative grid max-w-[470px] gap-[22px]">
-        <p className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.14em] text-mm-lilac">
-          <span aria-hidden="true" className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
-          {eyebrow}
-        </p>
-        <h2 className="text-[clamp(28px,3.4vw,46px)] font-[700] leading-[1.08]">{heading}</h2>
-        {intro && <p className="text-[16.5px] leading-[1.65] text-white/86">{intro}</p>}
+      <div className="relative my-auto max-w-[516px] py-10">
+        <h2 className="font-[family-name:var(--font-display)] text-[34px] font-semibold leading-[1.15] tracking-[-0.02em]">
+          {heading}
+        </h2>
+        {intro && <p className="mt-3 max-w-[420px] text-base leading-[1.6] text-white/86">{intro}</p>}
         {children}
       </div>
 
-      <p className="relative max-w-[440px] text-[13px] leading-[1.6] text-white/72">{footnote}</p>
+      <p className="relative text-sm leading-[1.5] text-white/70">{footnote}</p>
     </aside>
   );
 }
 
-/** The three-bullet value list Log in shows inside the panel. */
-export function AuthPanelPoints({ points }: { points: readonly string[] }) {
+/**
+ * The whole auth page: panel on the left (md and up), the screen's card on the right, top-aligned so a taller or
+ * shorter form only grows downwards and nothing above it moves when the role or step changes.
+ * On phones the panel is replaced by a centred logo and the card goes flat, as in the mobile artboards.
+ */
+export function AuthShell({
+  panel,
+  children,
+}: {
+  panel: AuthMosaicPanelProps;
+  children: ReactNode;
+  /** Accepted for older call sites; every auth screen now shares one 420px column so nothing moves sideways. */
+  wide?: boolean;
+}) {
   return (
-    <ul className="mt-1.5 grid gap-3">
-      {points.map((point) => (
-        <li
-          key={point}
-          className="grid grid-cols-[20px_1fr] gap-3 text-[15px] leading-[1.55] text-white/90"
+    <div className="mm-root flex min-h-screen bg-mm-tint-soft text-mm-ink">
+      <AuthMosaicPanel {...panel} className="w-[38vw] max-w-[620px] shrink-0 lg:w-[46vw]" />
+      <main
+        id="main-content"
+        className="flex min-w-0 flex-1 flex-col items-center px-4 pt-7 pb-12 sm:px-8 md:pt-10 lg:pt-14"
+      >
+        <Link
+          href="/"
+          aria-label="MindMosaic home"
+          className="mb-4 inline-flex min-h-11 items-center rounded-xl md:hidden"
         >
-          <span aria-hidden="true" className="mt-[7px] h-[9px] w-[9px] bg-mm-coral" />
-          {point}
-        </li>
-      ))}
-    </ul>
+          <MindMosaicLogo size="sm" />
+        </Link>
+        <div className="w-full min-w-0 max-w-[420px]">{children}</div>
+      </main>
+    </div>
+  );
+}
+
+/** The white form card from the artboards (flat on phones). */
+export function AuthCard({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div
+      className={twMerge(
+        "mm-rise w-full min-w-0 rounded-3xl bg-white px-0 py-2 sm:border sm:border-mm-line sm:px-6 sm:pt-8 sm:pb-7 lg:px-9 lg:pt-9 lg:pb-8 sm:shadow-[0_18px_50px_rgba(49,32,86,0.09)]",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Card heading + one-line lead, 28px Instrument Sans as in the artboards. */
+export function AuthCardHeading({ title, lead }: { title: string; lead?: ReactNode }) {
+  return (
+    <div>
+      <h1 className="font-[family-name:var(--font-display)] text-[26px] font-semibold leading-[1.3] tracking-[-0.028em] text-mm-ink sm:text-[28px]">
+        {title}
+      </h1>
+      {lead && <p className="mt-2 text-[15px] leading-[1.55] text-mm-ink-soft">{lead}</p>}
+    </div>
   );
 }

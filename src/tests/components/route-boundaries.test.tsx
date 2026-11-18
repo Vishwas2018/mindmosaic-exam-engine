@@ -116,8 +116,8 @@ describe("route boundary coverage", () => {
   });
 
   /*
-   * /practice and /teacher deliberately have no loading.tsx of their own:
-   * both have notFound()-calling descendants, and a Suspense boundary above
+   * /practice, /teacher and /parent deliberately have no loading.tsx of their own:
+   * they have notFound()-calling descendants, and a Suspense boundary above
    * one streams a 200 before the 404 can be set. The teacher loaders live on
    * the two subsegments that have no such descendant. Enforced in
    * src/tests/unit/route-loading-boundaries.test.ts.
@@ -125,7 +125,6 @@ describe("route boundary coverage", () => {
   it.each([
     "src/app/exam/loading.tsx",
     "src/app/results/loading.tsx",
-    "src/app/parent/loading.tsx",
     "src/app/student/loading.tsx",
     "src/app/admin/loading.tsx",
     "src/app/billing/loading.tsx",
@@ -145,5 +144,20 @@ describe("route boundary coverage", () => {
       .map((entry) => `src/app/${entry.replace(/\\/g, "/")}`),
   )('%s is a Client Component', (path) => {
     expect(fs.readFileSync(path, "utf8").startsWith('"use client"')).toBe(true);
+  });
+});
+
+/** A-30: a fixed-width skeleton bar wider than a phone (w-96 = 384px) made the loading screen scroll sideways at 375px. */
+describe("loading skeletons fit a phone viewport", () => {
+  it.each([
+    ["DashboardLoading", () => <DashboardLoading />],
+    ["PageLoading", () => <PageLoading />],
+    ["ExamLoading", () => <ExamLoading />],
+  ])("%s caps every fixed-width bar at its container", (_name, renderLoading) => {
+    const { container } = render(renderLoading());
+    const wide = [...container.querySelectorAll<HTMLElement>("[class]")].filter((el) =>
+      /(^|\s)w-(7[2-9]|[89]\d|\d{3,})(\s|$)/.test(el.className),
+    );
+    for (const el of wide) expect(el.className).toMatch(/(^|\s)max-w-/);
   });
 });

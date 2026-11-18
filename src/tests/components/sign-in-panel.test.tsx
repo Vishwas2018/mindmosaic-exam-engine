@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -7,6 +7,7 @@ const refresh = vi.fn();
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push, refresh }),
   useSearchParams: () => new URLSearchParams(),
+  usePathname: () => "/sign-in",
 }));
 
 vi.mock("@/lib/supabase/config", () => ({
@@ -54,7 +55,7 @@ import { SignInPanel } from "@/features/auth/components/SignInPanel";
  * — the login code is normalised and expanded into an internal alias email
  * that is never shown to anyone, and the PIN is the password.
  */
-function renderPanel(props?: { defaultKind?: "parent" | "student" }) {
+function renderPanel(props?: { defaultKind?: "parent" | "student"; defaultEntry?: "signin" | "forgot" | "choose" }) {
   return render(
     <AuthProvider>
       <SignInPanel {...props} />
@@ -75,7 +76,7 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
   it("opens on Parent and asks for an email address", () => {
     renderPanel();
     expect(screen.getByRole("tab", { name: "Parent" })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^email$/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/login code/i)).not.toBeInTheDocument();
   });
 
@@ -90,10 +91,21 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
     /* The real formatted shape from formatLoginCode(), not an invented
        username like the design file's "aisha.r5". */
     expect(code).toHaveAttribute("placeholder", "K7XJ-2P9R");
-    expect(screen.getByLabelText("PIN")).toBeInTheDocument();
-    expect(screen.queryByLabelText(/email address/i)).not.toBeInTheDocument();
+    /* Six masked, numeric, never-autofilled boxes in one labelled group. */
+    const group = screen.getByRole("group", { name: /your pin/i });
+    const boxes = within(group).getAllByLabelText(/your pin, number \d of 6/i);
+    expect(boxes).toHaveLength(6);
+    for (const box of boxes) {
+      expect(box).toHaveAttribute("type", "password");
+      expect(box).toHaveAttribute("inputmode", "numeric");
+      expect(box).toHaveAttribute("autocomplete", "off");
+    }
+    expect(code).toHaveAttribute("autocapitalize", "characters");
+    expect(code).toHaveAttribute("autocomplete", "off");
+    expect(code).toHaveAttribute("spellcheck", "false");
+    expect(screen.queryByLabelText(/^email$/i)).not.toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /sign in and start learning/i }),
+      screen.getByRole("button", { name: /^sign in$/i }),
     ).toBeInTheDocument();
   });
 
@@ -107,8 +119,8 @@ describe("SignInPanel — the Parent/Student segmented control", () => {
     renderPanel({ defaultKind: "student" });
 
     await user.type(screen.getByLabelText(/login code/i), "k7xj-2p9r");
-    await user.type(screen.getByLabelText("PIN"), "424242");
-    await user.click(screen.getByRole("button", { name: /sign in and start learning/i }));
+    await user.type(screen.getByLabelText(/your pin, number 1 of 6/i), "424242");
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
 
     await waitFor(() =>
       expect(mockSignInWithPassword).toHaveBeenCalledWith({
@@ -139,11 +151,11 @@ describe("SignInPanel — failure states", () => {
   });
 
   async function attempt(user: ReturnType<typeof userEvent.setup>) {
-    await user.clear(screen.getByLabelText(/email address/i));
-    await user.type(screen.getByLabelText(/email address/i), "jamie@example.com");
+    await user.clear(screen.getByLabelText(/^email$/i));
+    await user.type(screen.getByLabelText(/^email$/i), "jamie@example.com");
     await user.clear(screen.getByLabelText("Password"));
     await user.type(screen.getByLabelText("Password"), "wrongpass1!");
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
   }
 
   /*
@@ -155,7 +167,7 @@ describe("SignInPanel — failure states", () => {
     const user = userEvent.setup();
     renderPanel();
 
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/enter your email address/i);
     expect(mockSignInWithPassword).not.toHaveBeenCalled();
@@ -169,8 +181,12 @@ describe("SignInPanel — failure states", () => {
     await attempt(user);
 
     const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent(/could not find an account with that email and password/i);
+    expect(alert).toHaveTextContent(/that email and password didn.t match/i);
     expect(alert).not.toHaveTextContent(/invalid login credentials/i);
+    /* Never implies an account lookup: a wrong password and an unknown
+       address must read identically. */
+    expect(alert).not.toHaveTextContent(/no account|not find an account|not registered|doesn.t exist/i);
+    expect(within(alert).getByRole("button", { name: /reset password/i })).toBeInTheDocument();
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -198,7 +214,7 @@ describe("SignInPanel — failure states", () => {
 
     await attempt(user);
 
-    expect(await screen.findByRole("alert")).toHaveTextContent(/network error/i);
+    expect(await screen.findByRole("alert")).toHaveTextContent(/couldn.t reach mindmosaic/i);
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -215,7 +231,7 @@ describe("SignInPanel — failure states", () => {
       }
 
       expect(
-        await screen.findByText(/too many failed attempts/i),
+        await screen.findByText(/too many attempts\. for your account.s safety/i),
       ).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /try again in \d+s/i })).toBeDisabled();
     },
@@ -239,9 +255,9 @@ describe("SignInPanel — keep me signed in", () => {
 
     expect(screen.getByRole("checkbox")).toHaveAttribute("aria-checked", "true");
 
-    await user.type(screen.getByLabelText(/email address/i), "jamie@example.com");
+    await user.type(screen.getByLabelText(/^email$/i), "jamie@example.com");
     await user.type(screen.getByLabelText("Password"), "Str0ng!pass");
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
 
     await waitFor(() => expect(mockSignInWithPassword).toHaveBeenCalled());
     expect(window.localStorage.getItem("mm.auth.ephemeral")).toBeNull();
@@ -260,13 +276,46 @@ describe("SignInPanel — keep me signed in", () => {
     await user.click(screen.getByRole("checkbox"));
     expect(screen.getByRole("checkbox")).toHaveAttribute("aria-checked", "false");
 
-    await user.type(screen.getByLabelText(/email address/i), "jamie@example.com");
+    await user.type(screen.getByLabelText(/^email$/i), "jamie@example.com");
     await user.type(screen.getByLabelText("Password"), "Str0ng!pass");
-    await user.click(screen.getByRole("button", { name: /sign in to parent account/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
 
     await waitFor(() =>
       expect(window.localStorage.getItem("mm.auth.ephemeral")).toBe("1"),
     );
     expect(window.sessionStorage.getItem("mm.auth.ephemeral")).toBe("1");
+  });
+});
+
+describe("SignInPanel — role chooser and student helper", () => {
+  it("picks a role from the 'Who is signing in?' chooser and opens that form", async () => {
+    const user = userEvent.setup();
+    renderPanel({ defaultEntry: "choose" });
+
+    expect(screen.getByRole("heading", { name: /welcome to mindmosaic/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a parent/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a student/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /i'm a student/i }));
+    expect(screen.getByLabelText(/login code/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Your PIN, number 1 of 6/)).toBeInTheDocument();
+  });
+
+  it("sends a student who cannot sign in to the one help page, not a second copy of it", () => {
+    renderPanel({ defaultKind: "student" });
+
+    expect(screen.getByRole("link", { name: /i can.t sign in/i })).toHaveAttribute("href", "/student-sign-in/help");
+    /* Only the submit button may be called "Sign in": a second button whose name contains it makes the form
+       ambiguous to voice control and to tests alike. */
+    expect(screen.getAllByRole("button", { name: /sign in/i })).toHaveLength(1);
+  });
+
+  it("opens on the 'Who is signing in?' chooser when defaultEntry=choose", () => {
+    renderPanel({ defaultEntry: "choose" });
+    expect(screen.getByRole("heading", { name: /welcome to mindmosaic/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a parent/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /i'm a student/i })).toBeInTheDocument();
+    expect(screen.queryByLabelText(/^email$/i)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText(/login code/i)).not.toBeInTheDocument();
   });
 });

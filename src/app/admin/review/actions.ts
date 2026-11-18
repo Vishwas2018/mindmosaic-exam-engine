@@ -58,3 +58,28 @@ export async function approveDraft(
     };
   return { approvedAt: data.approved_at, approvedBy: data.approved_by };
 }
+
+/**
+ * One draft's identity and independent-review findings for the approval screen. Lives here, beside the approval
+ * action, so the private catalogue reader keeps exactly the two importers the draft boundary check allows.
+ * Admin only; returns no question content, only what the decision panel shows.
+ */
+export async function getDraftForApproval(questionId: string): Promise<{
+  contentHash: string;
+  sourceRevision?: string;
+  findings?: NonNullable<Awaited<ReturnType<typeof loadAdminReviewCatalogue>>["entries"][number]["findings"]>;
+  approval?: { approvedBy: string; approvedAt: string };
+} | null> {
+  const access = await requireRole("admin", "/admin/review");
+  if (!access.configured) return null;
+  if (typeof questionId !== "string" || questionId.length === 0 || questionId.length > 100) return null;
+  const catalogue = await loadAdminReviewCatalogue();
+  const entry = catalogue.entries.find((e) => e.question.id === questionId);
+  if (!entry) return null;
+  return {
+    contentHash: entry.contentHash,
+    sourceRevision: entry.sourceRevision,
+    findings: entry.findings,
+    approval: entry.approval,
+  };
+}

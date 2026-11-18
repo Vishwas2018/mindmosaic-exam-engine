@@ -1,0 +1,97 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e2-013",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "66761de4f57ff2838f0502595b5414e7225ddd3699198bf508b9e7fa14cbce7b",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e2-013",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The table shows how long each bus takes to travel its route. Which bus takes the longest time?",
+    "options": [
+      {
+        "id": "red",
+        "text": "Red"
+      },
+      {
+        "id": "blue",
+        "text": "Blue"
+      },
+      {
+        "id": "green",
+        "text": "Green"
+      },
+      {
+        "id": "gold",
+        "text": "Gold"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "visual-naplan-y3-numeracy-e2-013-1",
+        "altText": "A table with columns Bus and Trip time in minutes. Red 25, Green 30, Blue 40, Gold 20.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Bus",
+            "Trip time (min)"
+          ],
+          "rows": [
+            [
+              "Red",
+              "25"
+            ],
+            [
+              "Green",
+              "30"
+            ],
+            [
+              "Blue",
+              "40"
+            ],
+            [
+              "Gold",
+              "20"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "blue"
+    },
+    "explanation": "Compare the trip times: 25, 30, 40 and 20 minutes. The largest is 40 minutes, which belongs to the Blue bus, so it takes the longest.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics and probability",
+      "topic": "Reading a table",
+      "skill": "Read a table to find the largest value",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "table",
+        "data",
+        "transport context"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "7e0892812f2eb1cace3c20b875211827fcc0d412f37074c1736c6665057381ce"
+}

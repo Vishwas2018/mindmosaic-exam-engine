@@ -68,10 +68,10 @@ export function DashboardLoading({
       <main className="site-width py-10 sm:py-12">
         <div className="mx-auto max-w-5xl space-y-8">
           <div role="status" aria-label={label}>
-            <Skeleton className="h-10 w-72" />
+            <Skeleton className="h-10 w-72 max-w-full" />
             <span className="sr-only">{label}</span>
           </div>
-          <Skeleton className="h-4 w-96" />
+          <Skeleton className="h-4 w-96 max-w-full" />
           {Array.from({ length: cards }, (_, index) => (
             <CardSkeleton key={index} lines={index === 0 ? 2 : 3} />
           ))}
@@ -87,7 +87,7 @@ export function PageLoading({ label = "Loading" }: { label?: string }) {
     <main id="main-content" className="min-h-screen bg-page">
       <div className="site-width py-10 sm:py-14">
         <div role="status" aria-label={label}>
-          <Skeleton className="h-10 w-80" />
+          <Skeleton className="h-10 w-80 max-w-full" />
           <span className="sr-only">{label}</span>
         </div>
         <Skeleton className="mt-4 h-4 w-full max-w-xl" />

@@ -1,4 +1,4 @@
-export { AuthProvider, useAuth } from "./AuthProvider";
+export { AuthProvider, classifyAuthFailure, useAuth } from "./AuthProvider";
 export type {
   AuthContextValue,
   AuthResult,
@@ -6,14 +6,15 @@ export type {
   EmailConfirmResult,
   OAuthProvider,
 } from "./AuthProvider";
-export { AuthMosaicPanel, AuthPanelPoints } from "./components/AuthMosaicPanel";
+export { AuthMosaicPanel } from "./components/AuthMosaicPanel";
 export { SignInPanel } from "./components/SignInPanel";
-export { SignUpScreen } from "./components/SignUpScreen";
+export { SignUpForm } from "./components/SignUpForm";
 export { AuthNav } from "./components/AuthNav";
 export { RoleHomeLink } from "./components/RoleHomeLink";
 export { EmailConfirmationPending } from "./components/EmailConfirmationPending";
 export { EmailVerificationScreen } from "./components/EmailVerificationScreen";
 export { evaluatePassword, PASSWORD_RULES } from "./password";
+export { safeNextPath } from "./safe-next";
 export {
   ROLE_HOME_LABELS,
   ROLE_HOME_PATHS,

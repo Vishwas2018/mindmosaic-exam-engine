@@ -1,0 +1,162 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g3-nap-num-geo-002",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "c5c975da6c4a3e4f0d7c7d1b975a20a756c7bfb0414b5a9e545ba99ecc39be4b",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g3-nap-num-geo-002",
+    "type": "label_diagram",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Label each shape in the picture with its correct name.",
+    "instructions": "Match every shape name to one position in the picture.",
+    "options": [],
+    "interaction": {
+      "type": "label_diagram",
+      "labels": [
+        {
+          "id": "label-triangle",
+          "text": "Triangle"
+        },
+        {
+          "id": "label-square",
+          "text": "Square"
+        },
+        {
+          "id": "label-circle",
+          "text": "Circle"
+        }
+      ],
+      "targets": [
+        {
+          "id": "target-left",
+          "label": "Left shape"
+        },
+        {
+          "id": "target-middle",
+          "label": "Middle shape"
+        },
+        {
+          "id": "target-right",
+          "label": "Right shape"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "g3-three-shapes-svg",
+        "altText": "A picture of three shapes in a row: a triangle on the left, a square in the middle and a circle on the right.",
+        "title": "Three shapes",
+        "type": "labelled_svg",
+        "data": {
+          "width": 360,
+          "height": 140,
+          "elements": [
+            {
+              "id": "shape-triangle",
+              "kind": "polygon",
+              "points": [
+                {
+                  "x": 60,
+                  "y": 30
+                },
+                {
+                  "x": 20,
+                  "y": 110
+                },
+                {
+                  "x": 100,
+                  "y": 110
+                }
+              ],
+              "fill": "#D8CCEE",
+              "stroke": "#4B2E83"
+            },
+            {
+              "id": "shape-square",
+              "kind": "rectangle",
+              "x": 145,
+              "y": 35,
+              "width": 75,
+              "height": 75,
+              "fill": "#FFE1BF",
+              "stroke": "#B25E00"
+            },
+            {
+              "id": "shape-circle",
+              "kind": "circle",
+              "cx": 300,
+              "cy": 72,
+              "r": 40,
+              "fill": "#CBE7D6",
+              "stroke": "#1E7A46"
+            }
+          ],
+          "labels": [
+            {
+              "text": "Left",
+              "x": 60,
+              "y": 130
+            },
+            {
+              "text": "Middle",
+              "x": 182,
+              "y": 130
+            },
+            {
+              "text": "Right",
+              "x": 300,
+              "y": 130
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "label-triangle",
+          "targetId": "target-left"
+        },
+        {
+          "sourceId": "label-square",
+          "targetId": "target-middle"
+        },
+        {
+          "sourceId": "label-circle",
+          "targetId": "target-right"
+        }
+      ]
+    },
+    "explanation": "The left shape has 3 straight sides, so it is a triangle. The middle shape has 4 equal sides, so it is a square. The right shape is round, so it is a circle.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "2D shapes",
+      "skill": "Naming 2D shapes",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "shapes",
+        "labelling"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "64141cf2473f46e635a01734c51d7d16588ee1c22099f376224f7ecc074e2cb0"
+}

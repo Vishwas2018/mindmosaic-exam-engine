@@ -32,7 +32,7 @@ export function OnboardingResumeBanner({
             <Sparkles aria-hidden="true" className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-mm-ink">
+            <h3 className="font-[family-name:var(--font-display)] text-base font-semibold text-mm-ink">
               Discover your starting point with a quick 5-question warmup
             </h3>
             <p className="mt-0.5 text-xs text-mm-muted">

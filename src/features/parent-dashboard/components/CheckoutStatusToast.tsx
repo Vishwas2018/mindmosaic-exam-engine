@@ -54,7 +54,7 @@ export function CheckoutStatusToast() {
         className="flex items-center gap-3 rounded-2xl border border-success/25 bg-success/10 px-5 py-4"
       >
         <CheckCircle2 aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-success" />
-        <p className="text-sm font-semibold text-ink">
+        <p className="text-sm font-semibold text-mm-ink">
           Payment received — your plan is updating now.
         </p>
       </div>
@@ -64,10 +64,10 @@ export function CheckoutStatusToast() {
   return (
     <div
       role="status"
-      className="flex items-center gap-3 rounded-2xl border border-royal/10 bg-white px-5 py-4"
+      className="flex items-center gap-3 rounded-2xl border border-mm-brand/10 bg-white px-5 py-4"
     >
-      <XCircle aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-muted" />
-      <p className="text-sm font-semibold text-ink">
+      <XCircle aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-mm-ink-soft" />
+      <p className="text-sm font-semibold text-mm-ink">
         Checkout was cancelled — no changes were made.
       </p>
     </div>

@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 
 import { useAuth, type OAuthProvider } from "../AuthProvider";
+import { configuredOAuthProviders } from "../oauth-providers";
 
 interface ProviderDef {
   readonly id: OAuthProvider;
@@ -32,30 +33,20 @@ const PROVIDERS: readonly ProviderDef[] = [
       </svg>
     ),
   },
-  {
-    id: "azure",
-    label: "Microsoft",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-        <path fill="#F25022" d="M3 3h8.5v8.5H3z" />
-        <path fill="#7FBA00" d="M12.5 3H21v8.5h-8.5z" />
-        <path fill="#00A4EF" d="M3 12.5h8.5V21H3z" />
-        <path fill="#FFB900" d="M12.5 12.5H21V21h-8.5z" />
-      </svg>
-    ),
-  },
-  {
-    id: "facebook",
-    label: "Facebook",
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#1877F2" aria-hidden="true">
-        <path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.6 4.5-4.6 1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.4 0-1.9.9-1.9 1.8V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12Z" />
-      </svg>
-    ),
-  },
 ];
 
-export function SocialButtons({ nextPath = "/" }: { nextPath?: string }) {
+/**
+ * Renders a button only for each provider the deployment has declared as
+ * configured (see ../oauth-providers.ts). With none configured it renders
+ * nothing: a social button that cannot complete is worse than no button.
+ */
+export function SocialButtons({
+  nextPath = "/",
+  providers = configuredOAuthProviders(),
+}: {
+  nextPath?: string;
+  providers?: readonly OAuthProvider[];
+}) {
   const { signInWithOAuth } = useAuth();
   const [pending, setPending] = useState<OAuthProvider | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -71,10 +62,13 @@ export function SocialButtons({ nextPath = "/" }: { nextPath?: string }) {
     // On success the browser redirects to the provider; no need to reset.
   };
 
+  const visible = PROVIDERS.filter((provider) => providers.includes(provider.id));
+  if (visible.length === 0) return null;
+
   return (
     <div>
       <div className="grid grid-cols-2 gap-3">
-        {PROVIDERS.map((provider) => (
+        {visible.map((provider) => (
           <button
             key={provider.id}
             type="button"

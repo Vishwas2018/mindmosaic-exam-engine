@@ -1,0 +1,90 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-db-011",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "f7e6712f6c83a96f4b83f3ce30892c7b84f260251ca5ee65244b445f89eb2431",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-db-011",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar graph shows how many litres of juice are in four jugs at a party. Which jug holds the most juice?",
+    "options": [
+      {
+        "id": "opt-juga",
+        "text": "Jug A"
+      },
+      {
+        "id": "opt-jugc",
+        "text": "Jug C"
+      },
+      {
+        "id": "opt-jugd",
+        "text": "Jug D"
+      },
+      {
+        "id": "opt-jugb",
+        "text": "Jug B"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "visual-naplan-y3-numeracy-db-011-1",
+        "altText": "A bar graph of juice in litres: Jug A 2, Jug B 5, Jug C 3, Jug D 4.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Jug A",
+            "Jug B",
+            "Jug C",
+            "Jug D"
+          ],
+          "values": [
+            2,
+            5,
+            3,
+            4
+          ],
+          "xAxisLabel": "Jug",
+          "yAxisLabel": "Litres",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-jugb"
+    },
+    "explanation": "The jug with the most juice has the tallest bar. Jug B reaches 5 litres, which is higher than Jug A (2), Jug C (3) and Jug D (4). So Jug B holds the most.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Capacity",
+      "skill": "Read a bar graph to find the greatest capacity",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 50,
+      "tags": [
+        "capacity",
+        "litres",
+        "bar chart",
+        "cooking"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "8ce8e26a9ad9179d5f85abd4831cde92e61d64845f812f617a6bf5c869c59826"
+}

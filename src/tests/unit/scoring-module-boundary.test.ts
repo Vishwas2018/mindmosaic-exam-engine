@@ -39,9 +39,14 @@ const SCORING_MODULE = "src/server/scoring/answer-access.ts";
 const SCORING_CREDENTIAL_ENV = "SCORING_DB_URL";
 const WRITER_MODULE = "src/server/scoring/answer-version-writer.ts";
 const WRITER_CREDENTIAL_ENV = "CONTENT_ANSWER_WRITER_DB_URL";
+/* 20261031090000: the only holder of mindmosaic_exam_writer, the role that alone may create a legacy exam session
+   and record its attempt (the P1 assessment-integrity fix). Same rule as the other two: one module, one credential. */
+const EXAM_WRITE_MODULE = "src/server/exam-write/legacy-exam-writes.ts";
+const EXAM_WRITE_CREDENTIAL_ENV = "EXAM_WRITE_DB_URL";
 const BOUNDARY_MODULES = [
   { module: SCORING_MODULE, credentialEnv: SCORING_CREDENTIAL_ENV },
   { module: WRITER_MODULE, credentialEnv: WRITER_CREDENTIAL_ENV },
+  { module: EXAM_WRITE_MODULE, credentialEnv: EXAM_WRITE_CREDENTIAL_ENV },
 ];
 const SANCTIONED_TABLE_MODULES = new Set([SCORING_MODULE, WRITER_MODULE]);
 
@@ -63,6 +68,7 @@ const CREDENTIAL_EXCEPTIONS = new Set([
   /* The modules themselves. */
   SCORING_MODULE,
   WRITER_MODULE,
+  EXAM_WRITE_MODULE,
   /* This file, which names them in order to look for them. */
   "src/tests/unit/scoring-module-boundary.test.ts",
 ]);
@@ -206,6 +212,28 @@ describe("each boundary module logs nothing (§17.4)", () => {
       source,
       `${WRITER_MODULE} must export an answer-insert function returning Promise<void>`,
     ).toMatch(/export\s+async\s+function\s+\w+\([^)]*\)\s*:\s*Promise<void>\s*\{/);
+  });
+});
+
+describe("the revoked legacy exam write RPCs are not called from application code", () => {
+  it("no src file outside tests calls create_exam_session or record_exam_attempt (only the _for functions, via the writer module)", () => {
+    /* 20261031090100 revokes both from every client role, so a call through the user's own Supabase client would
+       fail at runtime with permission denied. This catches it at review time instead, and catches the worse case:
+       someone 'fixing' that failure by granting them back. The _for functions are matched separately so the
+       sanctioned module is not flagged. */
+    const LEGACY_CALL = /["'`](create_exam_session|record_exam_attempt)["'`]/;
+    const offenders = listSourceFiles("src")
+      .filter((path) => !path.startsWith("src/tests/"))
+      .filter((path) => LEGACY_CALL.test(readCode(path)));
+    expect(offenders).toEqual([]);
+  });
+
+  it("the exam write module exposes no function that takes a caller-supplied result or question list from a request", () => {
+    /* Its inputs are the verified student id plus server-computed values; the routes (not this module) own that. The
+       assertion is structural: no parameter is named request/body/formData, so the module cannot be handed a raw
+       request and told to persist it. */
+    const source = readCode(EXAM_WRITE_MODULE);
+    expect(source).not.toMatch(/(request|formData|searchParams)/);
   });
 });
 

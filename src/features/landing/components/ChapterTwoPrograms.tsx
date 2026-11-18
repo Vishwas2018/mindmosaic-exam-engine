@@ -16,10 +16,11 @@ import {
   layerForegroundOpacity,
   layerOpacity,
 } from "../cinematic/sceneProgress";
-import { useMinWidth } from "../cinematic/useMinWidth";
+import { focusScrollBehavior, type ScrollToLayerOptions } from "../cinematic/useChapterScroll";
+import { usePinnedViewport } from "../cinematic/useMinWidth";
 import { chapterTwo } from "../content";
 import { useMotionLevel } from "../motion/useMotionLevel";
-import { LAYER_CLASSES, ProgramScene } from "./ProgramScene";
+import { LAYER_CLASSES, NATURAL_LAYER_STYLE, ProgramScene } from "./ProgramScene";
 import { ProgramSceneProgress } from "./ProgramSceneProgress";
 import { mmButton } from "./primitives";
 
@@ -45,7 +46,7 @@ const SCENE_LAYER_OFFSET = 1;
  */
 export function ChapterTwoPrograms() {
   const animated = useMotionLevel() !== "off";
-  const pinned = useMinWidth(cinematicMotion.pinnedMinWidth);
+  const pinned = usePinnedViewport(cinematicMotion.pinnedMinWidth, cinematicMotion.pinnedMinHeight);
   const choreographed = pinned && animated;
 
   // Scroll transforms read pinned state through a motion value so a resize across the breakpoint re-evaluates them.
@@ -107,26 +108,70 @@ export function ChapterTwoPrograms() {
   }, [applySeam, choreographed, seam]);
 
   const scrollToLayer = useCallback(
-    (layer: number) => {
+    (layer: number, options?: ScrollToLayerOptions) => {
       const section = sectionRef.current;
       if (!section) return;
       const top = section.getBoundingClientRect().top + window.scrollY;
       const target = top + (layerAnchor(chapter2LayerStarts, layer) / travel) * section.offsetHeight;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: target, behavior: reduced ? "auto" : "smooth" });
+      window.scrollTo({ top: target, behavior: focusScrollBehavior(options, reduced) });
     },
     [travel],
   );
 
-  // A keyboard user tabbing into a scene that is not on screen brings it on screen: plain scrolling.
+  // A keyboard user tabbing into a layer that is not on screen (a scene, or the hand-off card) brings it on
+  // screen. The jump is instant so the focused control and its focus ring are visible at once, instead of
+  // sitting at opacity 0 for the length of a smooth scroll. Progress-rail clicks still scroll smoothly.
   const onSceneFocus = useCallback(
     (layer: number) => {
-      if (choreographed && layerOpacity(q.get(), chapter2LayerStarts, layer, timing.crossfade) < 0.5) scrollToLayer(layer);
+      if (choreographed && layerOpacity(q.get(), chapter2LayerStarts, layer, timing.crossfade) < 0.5) {
+        scrollToLayer(layer, { instant: true });
+      }
     },
     [choreographed, q, scrollToLayer],
   );
 
   const handoffLayer = chapter2LayerStarts.length - 1;
+
+  // Focus that landed here BEFORE hydration (a slow connection) never fired `onSceneFocus`: the browser scrolled to
+  // the still-natural-flow control on its own, then the pinned layout faded that scene to opacity 0 with focus left
+  // on it. Once, when the stage first becomes choreographed, recover exactly as a focus event would. Nothing runs if
+  // focus is elsewhere or the layer is already on screen, and it never moves focus.
+  useEffect(() => {
+    const section = sectionRef.current;
+    const focused = document.activeElement;
+    if (!choreographed || !section || !focused || !section.contains(focused)) return;
+    const sceneIndex = chapter2Scenes.findIndex((scene) =>
+      section.querySelector(`[data-scene="${scene.id}"]`)?.contains(focused),
+    );
+    const layer = sceneIndex >= 0 ? sceneIndex + SCENE_LAYER_OFFSET : section.querySelector('[data-handoff="chapter-3"]')?.contains(focused) ? handoffLayer : -1;
+    // Fully presented, not merely "above half": the browser's own scroll can finish mid-crossfade, leaving the
+    // focused control on a scene that is still fading in.
+    if (layer < 0 || layerOpacity(q.get(), chapter2LayerStarts, layer, timing.crossfade) >= 0.99) return;
+
+    // The browser's own smooth scroll to the still-natural-flow control may be mid-flight, and an instant scrollTo
+    // does not stop it: it resumes from the new layout and carries the page past the layer (measured: 59-281px
+    // past the anchor, into the crossfade). So hold the layer's anchor for a few frames, re-asserting only while the
+    // page has drifted from it, and let go the moment the user scrolls or presses a key.
+    let frames = 0;
+    let raf = 0;
+    const release = () => {
+      cancelAnimationFrame(raf);
+      for (const type of ["wheel", "touchstart", "keydown", "pointerdown"]) window.removeEventListener(type, release);
+    };
+    const hold = () => {
+      const stage = section.getBoundingClientRect().top + window.scrollY;
+      // The hand-off's anchor sits inside its own fade-in (0.972 opaque), so it settles on the end of the travel.
+      const progress = layer === handoffLayer ? 1 : layerAnchor(chapter2LayerStarts, layer);
+      const target = stage + (progress / travel) * section.offsetHeight;
+      if (Math.abs(window.scrollY - target) > 1) window.scrollTo({ top: target, behavior: "instant" });
+      if (++frames < 45) raf = requestAnimationFrame(hold);
+      else release();
+    };
+    for (const type of ["wheel", "touchstart", "keydown", "pointerdown"]) window.addEventListener(type, release, { passive: true });
+    raf = requestAnimationFrame(hold);
+    return release;
+  }, [choreographed, handoffLayer, travel, q]);
   const introOpacity = useTransform(q, (value) => layerOpacity(value, chapter2LayerStarts, 0, timing.crossfade));
   const handoffOpacity = useTransform(q, (value) => layerOpacity(value, chapter2LayerStarts, handoffLayer, timing.crossfade));
   const introForeground = useTransform(q, (value) =>
@@ -149,18 +194,18 @@ export function ChapterTwoPrograms() {
           "--seam-height": cinematicMotion.chapter1.seamSvh,
         } as CSSProperties
       }
-      className="relative bg-mm-page lg:-mt-[calc(var(--seam-height)*1svh)] lg:h-[var(--chapter-height)] lg:scroll-mt-[calc(var(--seam-height)*-1svh)] lg:bg-transparent motion-reduce:lg:mt-0 motion-reduce:lg:h-auto motion-reduce:lg:scroll-mt-0 motion-reduce:lg:bg-mm-page"
+      className="relative bg-mm-page lg:-mt-[calc(var(--seam-height)*1svh)] lg:h-[var(--chapter-height)] lg:scroll-mt-[calc(var(--seam-height)*-1svh)] lg:bg-transparent motion-reduce:lg:mt-0 short:lg:mt-0 motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:scroll-mt-0 short:lg:scroll-mt-0 motion-reduce:lg:bg-mm-page short:lg:bg-mm-page"
     >
       <div
         ref={stageRef}
-        className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:bg-mm-page motion-reduce:lg:static motion-reduce:lg:h-auto motion-reduce:lg:overflow-visible"
+        className="relative isolate overflow-hidden lg:sticky lg:top-0 lg:h-svh lg:bg-mm-page motion-reduce:lg:static short:lg:static motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:overflow-visible short:lg:overflow-visible"
       >
         <motion.div
           data-layer="intro"
-          style={choreographed ? { opacity: introForeground, pointerEvents: introPointer } : undefined}
+          style={choreographed ? { opacity: introForeground, pointerEvents: introPointer } : NATURAL_LAYER_STYLE}
           className={`${LAYER_CLASSES} lg:opacity-100 lg:pointer-events-auto`}
         >
-          <div className="mm-width grid gap-8 pb-6 pt-[clamp(56px,10vw,120px)] lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:pb-6 motion-reduce:lg:pt-[clamp(56px,10vw,120px)]">
+          <div className="mm-width grid gap-8 pb-6 pt-[clamp(56px,10vw,120px)] lg:h-full lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:pb-6 short:lg:pb-6 motion-reduce:lg:pt-[clamp(56px,10vw,120px)] short:lg:pt-[clamp(56px,10vw,120px)]">
             <div className="flex flex-col gap-4 lg:order-2 lg:col-span-7">
               <p className="m-0 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-mm-brand">
                 <span aria-hidden="true" className="h-[3px] w-[26px] shrink-0 rounded-sm bg-mm-coral" />
@@ -227,10 +272,11 @@ export function ChapterTwoPrograms() {
 
         <motion.div
           data-handoff="chapter-3"
-          style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : undefined}
-          className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t`}
+          onFocusCapture={() => onSceneFocus(handoffLayer)}
+          style={choreographed ? { opacity: handoffForeground, pointerEvents: handoffPointer } : NATURAL_LAYER_STYLE}
+          className={`${LAYER_CLASSES} border-t border-mm-line-soft lg:border-t-0 motion-reduce:lg:border-t short:lg:border-t`}
         >
-          <div className="mm-width flex flex-col justify-center py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)]">
+          <div className="mm-width flex flex-col justify-center py-[clamp(48px,8vw,96px)] lg:h-full lg:pb-24 lg:pt-[calc(var(--mm-header-h)+16px)] motion-reduce:lg:h-auto short:lg:h-auto motion-reduce:lg:py-[clamp(48px,8vw,96px)] short:lg:py-[clamp(48px,8vw,96px)]">
             <div className="relative max-w-3xl overflow-hidden rounded-3xl border border-mm-line/80 bg-gradient-to-br from-white/95 via-mm-wash/50 to-white/90 p-8 shadow-[0_20px_60px_-20px_rgba(24,21,31,0.14)] backdrop-blur-md sm:p-12">
               <div
                 aria-hidden="true"

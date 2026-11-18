@@ -39,6 +39,8 @@ export function AuthNav({ showRoleHome = true }: { showRoleHome?: boolean } = {}
      * user on a protected page is redirected to /sign-in — and the stale
      * "Parent"/role badge and dashboard content never linger in the DOM.
      */
+    /* Land on the clean-exit screen, then re-render so no signed-in tree lingers. */
+    router.push("/signed-out");
     router.refresh();
   }
 

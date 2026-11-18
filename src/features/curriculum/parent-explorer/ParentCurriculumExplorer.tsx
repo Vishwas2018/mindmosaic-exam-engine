@@ -18,11 +18,12 @@ import {
 
 export interface ParentCurriculumExplorerProps {
   initialItems: CurriculumCatalogueItem[];
+  initialLevel?: YearLevelChoice;
 }
 
-export function ParentCurriculumExplorer({ initialItems }: ParentCurriculumExplorerProps) {
+export function ParentCurriculumExplorer({ initialItems, initialLevel = "3" }: ParentCurriculumExplorerProps) {
   const [selectedJurisdiction] = useState<string>("VIC");
-  const [selectedLevel, setSelectedLevel] = useState<YearLevelChoice>("3");
+  const [selectedLevel, setSelectedLevel] = useState<YearLevelChoice>(initialLevel);
   const [selectedLearningArea, setSelectedLearningArea] = useState<LearningArea>("Mathematics");
   const [selectedStrand, setSelectedStrand] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");

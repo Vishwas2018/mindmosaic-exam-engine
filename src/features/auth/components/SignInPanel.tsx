@@ -2,13 +2,15 @@
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ArrowLeft, ChevronRight, GraduationCap, Loader2, UserRound } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 import { useAuth } from "../AuthProvider";
+import { configuredOAuthProviders } from "../oauth-providers";
 import { roleHomePath } from "../roles";
+import { safeNextPath } from "../safe-next";
 import { recordSessionPersistence } from "../session-persistence";
 import { PUBLIC_SIGNUP_ENABLED } from "../signup-policy";
 import { formatLoginCode } from "../student-alias";
@@ -21,6 +23,8 @@ import {
   mmFocus,
   useShakeOnInvalidSubmit,
 } from "./auth-fields";
+import { AuthCard, AuthCardHeading } from "./AuthMosaicPanel";
+import { PinInput } from "./PinInput";
 import { SocialButtons } from "./SocialButtons";
 
 /**
@@ -49,7 +53,7 @@ import { SocialButtons } from "./SocialButtons";
  */
 
 type AccountKind = "parent" | "student";
-type Screen = "signin" | "forgot";
+type Screen = "signin" | "forgot" | "choose";
 
 const FORGOT_COOLDOWN_SECONDS = 30;
 /** Soft, client-side-only guard; real lockout enforcement is Supabase's. */
@@ -59,33 +63,53 @@ const LOCKOUT_SECONDS = 30;
 const COPY = {
   parent: {
     tab: "Parent",
-    idLabel: "Email address",
+    title: "Parent sign-in",
+    lead: "Welcome back. Your children\u2019s accounts are reached from here.",
+    idLabel: "Email",
     idPlaceholder: "you@example.com",
     idAutoComplete: "email",
     secretLabel: "Password",
     secretPlaceholder: "Your password",
     secretAutoComplete: "current-password",
-    submit: "Sign in to parent account",
+    submit: "Sign in",
     emptyError:
       "Enter your email address and password to sign in.",
+    /* One sentence for a wrong password and for an address with no account,
+       so the error cannot be used to test whether an address is registered. */
     failedError:
-      "We could not find an account with that email and password. Check both, or reset the password.",
+      "That email and password didn\u2019t match. Check them and try again, or reset your password.",
+    lockedMessage: (seconds: number) =>
+      `Too many attempts. For your account\u2019s safety, wait ${seconds}s and try again, or reset your password.`,
   },
   student: {
     tab: "Student",
+    title: "Student sign-in",
+    lead: "Use the login code and PIN a grown-up set up for you.",
     idLabel: "Login code",
     /* The real format, from formatLoginCode() — not an invented username. */
     idPlaceholder: formatLoginCode("K7XJ2P9R"),
     idAutoComplete: "off",
-    secretLabel: "PIN",
+    secretLabel: "Your PIN",
     secretPlaceholder: "6 digits",
     secretAutoComplete: "off",
-    submit: "Sign in and start learning",
+    submit: "Sign in",
     emptyError: "Enter the login code and PIN your parent gave you.",
+    /* Same sentence whether the code is unknown or the PIN is wrong. */
     failedError:
-      "That login code and PIN do not match. A parent can look up both from the parent view.",
+      "That code and PIN didn\u2019t match. Check them with the grown-up who set them up, and try again.",
+    lockedMessage: (seconds: number) =>
+      `Let\u2019s take a short break. Too many tries. You can sign in again in ${seconds}s, or ask a grown-up for help.`,
   },
-} as const satisfies Record<AccountKind, Record<string, string>>;
+} as const satisfies Record<
+  AccountKind,
+  Record<string, string | ((seconds: number) => string)>
+>;
+
+const NETWORK_MESSAGE = "We couldn\u2019t reach MindMosaic. Check your connection and try again.";
+/* A failure on the auth server is not an account problem, and must not be
+   dressed up as one. */
+const UNAVAILABLE_MESSAGE =
+  "We can\u2019t sign you in right now. This is a problem on our side, not with your account. Nothing has changed. Please try again in a few minutes.";
 
 function isNetworkError(error: unknown): boolean {
   return error instanceof TypeError || (error instanceof Error && /network|fetch/i.test(error.message));
@@ -99,18 +123,57 @@ export function SignInPanel({
    * them find it.
    */
   defaultKind = "parent",
+  /**
+   * Which screen opens first. When `"choose"`, the welcome "Who is signing
+   * in?" entry chooser (design artboards 01-03) is shown before the sign-in
+   * form. Overrides `?entry`/`?mode` search params when provided.
+   */
+  defaultEntry,
 }: {
   defaultKind?: AccountKind;
+  defaultEntry?: Screen;
 } = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const auth = useAuth();
 
-  const explicitNext = searchParams.get("next");
-  const [screen, setScreen] = useState<Screen>(() =>
-    searchParams.get("mode") === "forgot" ? "forgot" : "signin",
+  /* Same-origin paths only: see ../safe-next.ts. */
+  const explicitNext = safeNextPath(searchParams.get("next"));
+  const oauthProviders = configuredOAuthProviders();
+  const pathname = usePathname();
+  const roleParam = searchParams.get("role");
+  const [screen, setScreen] = useState<Screen>(() => {
+    const entryParam = searchParams.get("entry");
+    const modeParam = searchParams.get("mode");
+    if (modeParam === "forgot") return "forgot";
+    if (roleParam === "parent" || roleParam === "student") return "signin";
+    if (entryParam === "signin" || modeParam === "signin") return "signin";
+    if (entryParam === "choose" || modeParam === "choose") return "choose";
+    if (modeParam === "forgot") return "forgot";
+    if (defaultEntry) return defaultEntry;
+    return "signin";
+  });
+  const [kind, setKind] = useState<AccountKind>(() =>
+    roleParam === "parent" || roleParam === "student" ? roleParam : defaultKind,
   );
-  const [kind, setKind] = useState<AccountKind>(defaultKind);
+
+  /* The chosen role and screen live in the URL (replaceState, no navigation), so Back, a refresh, or a trip to
+     another page and back returns to the same form rather than to the chooser. */
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("entry");
+    if (screen === "choose") {
+      params.delete("role");
+      params.delete("mode");
+    } else {
+      if (pathname !== "/student-sign-in") params.set("role", kind);
+      if (screen === "forgot") params.set("mode", "forgot");
+      else params.delete("mode");
+    }
+    const qs = params.toString();
+    const next = qs ? `${pathname}?${qs}` : pathname;
+    if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
+  }, [screen, kind, pathname]);
 
   const [ident, setIdent] = useState("");
   const [secret, setSecret] = useState("");
@@ -148,6 +211,8 @@ export function SignInPanel({
 
   const switchKind = (next: AccountKind) => {
     setKind(next);
+    /* A half-typed email must not carry into the login-code field (the form is no longer remounted per role). */
+    setIdent("");
     setError(null);
     setNotice(null);
     setUnconfirmed(null);
@@ -164,6 +229,14 @@ export function SignInPanel({
        keyboard user nothing to act on and no reason why. */
     if (!ident.trim() || !secret.trim()) {
       setError(copy.emptyError);
+      shake.trigger();
+      return;
+    }
+
+    /* Caught before anything is sent, and says what good looks like. It is a
+       format check only: it cannot say whether the address has an account. */
+    if (kind === "parent" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(ident.trim())) {
+      setError("That doesn’t look like a complete email address, like name@example.com.");
       shake.trigger();
       return;
     }
@@ -186,6 +259,33 @@ export function SignInPanel({
         return;
       }
 
+      /* A failure that is not about the credentials is told apart and does
+         not count toward the lockout: a dropped connection, a server-side
+         rate limit and an auth-server outage are three different facts. */
+      if (result.failure === "network") {
+        setError(NETWORK_MESSAGE);
+        shake.trigger();
+        setSubmitting(false);
+        return;
+      }
+      if (result.failure === "unavailable") {
+        setError(UNAVAILABLE_MESSAGE);
+        shake.trigger();
+        setSubmitting(false);
+        return;
+      }
+      /* A banned account (a paused child, but also an erased or revoked one) is
+         deliberately NOT told apart here: the archive contract (QA-003) is one
+         generic sentence, and whether the auth server reports a ban before or
+         after it checks the PIN is unverified, so a distinct message could
+         reveal that a guessed login code exists. */
+      if (result.failure === "rate_limited") {
+        setLockedUntil(Date.now() + LOCKOUT_SECONDS * 1000);
+        setNow(Date.now());
+        setSubmitting(false);
+        return;
+      }
+
       /* Supabase's own wording is not shown for a failed credential check:
          it leaks whether the account exists. The one case worth surfacing
          verbatim is an unconfirmed email, which is actionable. */
@@ -204,11 +304,7 @@ export function SignInPanel({
       setFailedAttempts(attempts);
       if (attempts >= LOCKOUT_AFTER_ATTEMPTS) setLockedUntil(Date.now() + LOCKOUT_SECONDS * 1000);
     } catch (caught) {
-      setError(
-        isNetworkError(caught)
-          ? "Network error — check your connection and try again."
-          : "Something went wrong. Please try again.",
-      );
+      setError(isNetworkError(caught) ? NETWORK_MESSAGE : UNAVAILABLE_MESSAGE);
       shake.trigger();
     }
 
@@ -226,7 +322,12 @@ export function SignInPanel({
     setSubmitting(true);
     setError(null);
     setNotice(null);
-    const result = await auth.sendPasswordReset(resetEmail.trim());
+    let result: Awaited<ReturnType<typeof auth.sendPasswordReset>>;
+    try {
+      result = await auth.sendPasswordReset(resetEmail.trim());
+    } catch {
+      result = { ok: false, message: NETWORK_MESSAGE };
+    }
     if (result.ok) {
       setNotice(
         result.message ??
@@ -234,7 +335,7 @@ export function SignInPanel({
       );
       setForgotCooldown(FORGOT_COOLDOWN_SECONDS);
     } else {
-      setError(result.message ?? "Could not send the reset link. Please try again.");
+      setError(result.message ?? "We couldn\u2019t send a reset link just now. Please try again in a few minutes.");
       shake.trigger();
     }
     setSubmitting(false);
@@ -247,9 +348,79 @@ export function SignInPanel({
 
   /* ---------- Forgot password ---------- */
 
+  if (screen === "choose") {
+    const chooserCard =
+      "group block w-full rounded-[18px] border border-mm-line bg-white p-7 text-left shadow-[0_1px_2px_rgba(24,21,31,0.04)] transition-[border-color,box-shadow] hover:border-mm-brand/40 hover:shadow-[0_18px_50px_rgba(49,32,86,0.09)]";
+    return (
+      <div className="mm-rise grid w-full min-w-0 gap-4">
+        <div className="mb-2 text-center">
+          <h1 className="font-[family-name:var(--font-display)] text-[28px] font-semibold leading-[1.3] tracking-[-0.028em] text-mm-ink">
+            Welcome to MindMosaic
+          </h1>
+          <p className="mt-2 text-[15px] text-mm-ink-soft">Who is signing in?</p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => {
+            setKind("parent");
+            setScreen("signin");
+            setError(null);
+          }}
+          className={twMerge(chooserCard, mmFocus)}
+        >
+          <span className="grid h-[52px] w-[52px] place-items-center rounded-[14px] bg-mm-tint text-mm-brand">
+            <UserRound className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span className="mt-5 block font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink">
+            I&apos;m a parent
+          </span>
+          <span className="mt-2 block text-sm leading-[1.55] text-mm-ink-soft">
+            See how your children are doing, manage their accounts and your plan.
+          </span>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-mm-brand">
+            Parent sign-in <ChevronRight aria-hidden="true" className="h-4 w-4" />
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setKind("student");
+            setScreen("signin");
+            setError(null);
+          }}
+          className={twMerge(chooserCard, mmFocus)}
+        >
+          <span className="grid h-[52px] w-[52px] place-items-center rounded-[14px] bg-mm-ember-tint text-mm-ember-ink">
+            <GraduationCap className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <span className="mt-5 block font-[family-name:var(--font-display)] text-xl font-semibold text-mm-ink">
+            I&apos;m a student
+          </span>
+          <span className="mt-2 block text-sm leading-[1.55] text-mm-ink-soft">
+            Sign in with the login code and PIN a parent gave you.
+          </span>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-mm-brand">
+            Student sign-in <ChevronRight aria-hidden="true" className="h-4 w-4" />
+          </span>
+        </button>
+
+        {PUBLIC_SIGNUP_ENABLED && (
+          <p className="mt-4 text-center text-sm text-mm-muted">
+            New here?{" "}
+            <Link href="/sign-up" className={twMerge("rounded font-semibold text-mm-brand hover:underline", mmFocus)}>
+              Create a family account
+            </Link>
+          </p>
+        )}
+      </div>
+    );
+  }
+
   if (screen === "forgot") {
     return (
-      <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
+      <AuthCard className="grid gap-6">
         <button
           type="button"
           onClick={() => {
@@ -266,20 +437,15 @@ export function SignInPanel({
           Back to sign in
         </button>
 
-        <div className="grid gap-2.5">
-          <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.1] text-mm-ink">
-            Reset your password
-          </h1>
-          <p className="text-base leading-[1.6] text-mm-muted">
-            We&apos;ll email a secure link to set a new one. Student PINs are reset by a
-            parent from the parent view, not from here.
-          </p>
-        </div>
+        <AuthCardHeading
+          title="Reset your password"
+          lead="We’ll email a secure link to set a new one. Student PINs are reset by a parent from the parent view, not from here."
+        />
 
         <form key={shake.key} onSubmit={handleForgot} className={twMerge("grid gap-4", shake.className)}>
           <MmField
             id="reset-email"
-            label="Email address"
+            label="Email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
@@ -289,8 +455,9 @@ export function SignInPanel({
               setError(null);
             }}
             invalid={error !== null}
+            errorId="auth-error"
           />
-          {error && <MmErrorPanel>{error}</MmErrorPanel>}
+          {error && <MmErrorPanel id="auth-error" focusOnMount>{error}</MmErrorPanel>}
           {notice && (
             <p
               role="status"
@@ -311,59 +478,23 @@ export function SignInPanel({
             {forgotCooldown > 0 ? `Resend available in ${forgotCooldown}s` : "Send reset link"}
           </button>
         </form>
-      </div>
+      </AuthCard>
     );
   }
 
   /* ---------- Sign in ---------- */
 
   return (
-    <div className="mm-rise grid w-full max-w-[440px] min-w-0 gap-6">
-      <div className="flex items-center justify-between gap-3.5">
-        <Link
-          href="/"
-          className={twMerge(
-            "inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-mm-muted transition-colors hover:text-mm-brand",
-            mmFocus,
-          )}
-        >
-          <ArrowLeft aria-hidden="true" className="h-4 w-4" />
-          Back to home
-        </Link>
-        <p className="text-sm text-mm-muted">
-          {PUBLIC_SIGNUP_ENABLED ? (
-            <>
-              New here?{" "}
-              <Link href="/sign-up" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-                Start free
-              </Link>
-            </>
-          ) : (
-            /* No "start free" prompt when there is no account to create. */
-            <>
-              No account?{" "}
-              <Link
-                href="/practice"
-                className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}
-              >
-                Practise as a guest
-              </Link>
-            </>
-          )}
-        </p>
-      </div>
-
-      <div className="grid gap-2.5">
-        <h1 className="text-[clamp(28px,3vw,38px)] font-[700] leading-[1.1] text-mm-ink">Sign in</h1>
-        <p className="text-base leading-[1.6] text-mm-muted">
-          Parent accounts and student profiles both sign in here.
-        </p>
+    <AuthCard className="grid gap-[22px]">
+      {/* Fixed-height heading block: both roles' lead fits two lines, so switching role never moves the form. */}
+      <div className="min-h-[104px]">
+        <AuthCardHeading title={copy.title} lead={copy.lead} />
       </div>
 
       <div
         role="tablist"
-        aria-label="Account type"
-        className="grid grid-cols-2 gap-1.5 rounded-[13px] bg-mm-tint p-[5px]"
+        aria-label="Sign in as"
+        className="grid grid-cols-2 gap-2 rounded-full border border-mm-line bg-mm-tint-soft p-1.5"
       >
         {tabs.map((tab) => {
           const selected = tab.value === kind;
@@ -376,10 +507,10 @@ export function SignInPanel({
               onClick={() => switchKind(tab.value)}
               className={twMerge(
                 clsx(
-                  "min-h-11 rounded-[10px] text-[14.5px] font-bold transition-colors",
+                  "min-h-[46px] rounded-full text-[14.5px] font-semibold transition-[color,background-color,box-shadow]",
                   selected
-                    ? "bg-white text-mm-brand shadow-[0_2px_8px_rgba(89,37,168,0.12)]"
-                    : "bg-transparent text-mm-muted hover:text-mm-ink",
+                    ? "bg-white text-mm-brand shadow-[0_1px_2px_rgba(24,21,31,0.06),0_12px_32px_rgba(49,32,86,0.08)]"
+                    : "bg-transparent text-mm-ink-soft hover:text-mm-ink",
                 ),
                 mmFocus,
               )}
@@ -389,6 +520,19 @@ export function SignInPanel({
           );
         })}
       </div>
+
+      {/* Parent only: the OAuth providers attach a real email identity, which a student profile does not have.
+          Shown only for providers actually configured, so no button does nothing. */}
+      {kind === "parent" && oauthProviders.length > 0 && (
+        <>
+          <SocialButtons nextPath={explicitNext ?? "/"} providers={oauthProviders} />
+          <div className="flex items-center gap-3 text-[13px] text-mm-muted">
+            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
+            or with your email
+            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
+          </div>
+        </>
+      )}
 
       {!auth.configured && (
         <p
@@ -400,19 +544,30 @@ export function SignInPanel({
         </p>
       )}
 
-      {/* Keyed by `kind` so switching tabs resets field state rather than
-          carrying a half-typed email into the login-code field. */}
       <form
-        key={`${kind}-${shake.key}`}
+        key={shake.key}
         onSubmit={handleSignIn}
-        className={twMerge("grid gap-4", shake.className)}
+        /* Reserved height = the student form (code + hint, six PIN boxes + hint). The parent form is shorter, so its
+           remember row and button are pushed to the bottom (mt-auto below): switching role moves nothing. */
+        className={twMerge("flex min-h-[385px] flex-col gap-4", shake.className)}
       >
         <MmField
           id="auth-ident"
           label={copy.idLabel}
+          hint={
+            kind === "student"
+              ? "On the card your parent printed. Letters and numbers, like K7XJ-2P9R."
+              : undefined
+          }
           type="text"
           inputMode={kind === "student" ? "text" : "email"}
           autoComplete={copy.idAutoComplete}
+          /* A login code is not a word: no sentence-casing, no spellcheck
+             squiggles, capitals on the keyboard. An email is never
+             auto-capitalised. */
+          autoCapitalize={kind === "student" ? "characters" : "none"}
+          autoCorrect="off"
+          spellCheck={false}
           placeholder={copy.idPlaceholder}
           value={ident}
           onChange={(e) => {
@@ -420,13 +575,27 @@ export function SignInPanel({
             setError(null);
           }}
           invalid={error !== null}
+          errorId="auth-error"
         />
 
+        {kind === "student" ? (
+          <PinInput
+            id="auth-secret"
+            label={copy.secretLabel}
+            hint="6 numbers. Nobody can see what you type."
+            value={secret}
+            onChange={(next) => {
+              setSecret(next);
+              setError(null);
+            }}
+            invalid={error !== null}
+            errorId="auth-error"
+          />
+        ) : (
         <MmField
           id="auth-secret"
           label={copy.secretLabel}
           type={showSecret ? "text" : "password"}
-          inputMode={kind === "student" ? "numeric" : undefined}
           autoComplete={copy.secretAutoComplete}
           placeholder={copy.secretPlaceholder}
           value={secret}
@@ -435,6 +604,10 @@ export function SignInPanel({
             setError(null);
           }}
           invalid={error !== null}
+          errorId="auth-error"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           trailingRoom
           trailing={
             <MmRevealButton
@@ -443,32 +616,29 @@ export function SignInPanel({
               onToggle={() => setShowSecret((v) => !v)}
             />
           }
-          labelAside={
-            /* A student's PIN is reset by their parent, so the link would
-               be a dead end on that tab. */
-            kind === "parent" ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setScreen("forgot");
-                  setResetEmail(ident);
-                  setError(null);
-                }}
-                className={twMerge(
-                  "inline-flex min-h-11 items-center rounded text-[13px] font-semibold text-mm-brand hover:underline",
-                  mmFocus,
-                )}
-              >
-                Forgot password?
-              </button>
-            ) : undefined
-          }
         />
+        )}
 
         {error && (
-          <MmErrorPanel>
+          <MmErrorPanel id="auth-error" focusOnMount>
             <span>
               {error}
+              {kind === "parent" && error === copy.failedError && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setScreen("forgot");
+                    setResetEmail(ident);
+                    setError(null);
+                  }}
+                  className={twMerge(
+                    "mt-1 block min-h-11 rounded font-bold underline underline-offset-2",
+                    mmFocus,
+                  )}
+                >
+                  Reset password
+                </button>
+              )}
               {unconfirmed && (
                 <button
                   type="button"
@@ -508,24 +678,49 @@ export function SignInPanel({
             role="alert"
             className="rounded-xl border border-mm-alert-line bg-mm-alert p-3.5 text-sm leading-[1.5] text-mm-coral-deep"
           >
-            Too many failed attempts. Try again in {lockSecondsRemaining}s, or reset the password.
+            {copy.lockedMessage(lockSecondsRemaining)}
+            {kind === "student" && (
+              <>
+                {" "}
+                <Link
+                  href="/student-sign-in/help"
+                  className={twMerge("inline-flex min-h-11 items-center rounded font-bold underline", mmFocus)}
+                >
+                  Ask for help
+                </Link>
+              </>
+            )}
           </p>
         )}
 
-        <MmCheckbox
-          id="auth-remember"
-          checked={remember}
-          onToggle={() => setRemember((v) => !v)}
-        >
-          Keep me signed in on this device
-        </MmCheckbox>
+        <div className="mt-auto flex min-h-11 items-center justify-between gap-3">
+          <MmCheckbox id="auth-remember" checked={remember} onToggle={() => setRemember((v) => !v)}>
+            Keep me signed in
+          </MmCheckbox>
+          {kind === "parent" && (
+            <button
+              type="button"
+              onClick={() => {
+                setScreen("forgot");
+                setResetEmail(ident);
+                setError(null);
+              }}
+              className={twMerge(
+                "inline-flex min-h-11 shrink-0 items-center rounded text-sm font-semibold text-mm-brand hover:underline",
+                mmFocus,
+              )}
+            >
+              Forgot password?
+            </button>
+          )}
+        </div>
 
         <button
           type="submit"
           disabled={submitting || isLocked}
           className={mmAuthButton({
             disabled: submitting || isLocked,
-            className: "min-h-[54px] w-full rounded-[13px] text-base",
+            className: "mt-1 min-h-[50px] w-full rounded-xl text-[15px]",
           })}
         >
           {submitting && <Loader2 aria-hidden="true" className="h-5 w-5 animate-spin" />}
@@ -533,43 +728,31 @@ export function SignInPanel({
         </button>
       </form>
 
-      {/* Parent tab only: the OAuth providers create/attach a real email
-          identity, which a student profile does not have. */}
-      {kind === "parent" && (
-        <>
-          <div className="flex items-center gap-3.5">
-            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
-            <span className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-mm-muted-2">
-              or
-            </span>
-            <span aria-hidden="true" className="h-px flex-1 bg-mm-line" />
-          </div>
-          <SocialButtons nextPath={explicitNext ?? "/"} />
-        </>
-      )}
-
-      {kind === "student" && (
-        <p className="rounded-xl border border-mm-tint-line bg-mm-tint p-3.5 text-sm leading-[1.55] text-mm-ink-soft">
-          A student never needs an email address. If the code or PIN has been lost, a parent can
-          look both up from the{" "}
-          <Link href="/parent" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-            parent view
+      <p className="flex min-h-11 items-center justify-center text-center text-sm text-mm-muted">
+        {kind === "student" ? (
+          <Link
+            href="/student-sign-in/help"
+            className={twMerge("inline-flex min-h-11 items-center rounded font-semibold text-mm-brand hover:underline", mmFocus)}
+          >
+            I can&apos;t sign in
           </Link>
-          .
-        </p>
-      )}
-
-      <p className="text-[13px] leading-[1.6] text-mm-muted">
-        By signing in you accept the{" "}
-        <Link href="/terms" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-          Terms and Conditions
-        </Link>{" "}
-        and the{" "}
-        <Link href="/privacy" className={twMerge("rounded font-bold text-mm-brand hover:underline", mmFocus)}>
-          Privacy Policy
-        </Link>
-        .
+        ) : PUBLIC_SIGNUP_ENABLED ? (
+          <span>
+            New here?{" "}
+            <Link href="/sign-up" className={twMerge("rounded font-semibold text-mm-brand hover:underline", mmFocus)}>
+              Create a family account
+            </Link>
+          </span>
+        ) : (
+          /* No "create an account" prompt when there is no account to create. */
+          <span>
+            No account?{" "}
+            <Link href="/practice" className={twMerge("rounded font-semibold text-mm-brand hover:underline", mmFocus)}>
+              Practise as a guest
+            </Link>
+          </span>
+        )}
       </p>
-    </div>
+    </AuthCard>
   );
 }

@@ -1,0 +1,51 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-2e619aada91e92bdcdc527b8",
+  "revision": 2,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "fcab80c23826d1a40af77e5f1105ca80f3c665b091f1ed5a4795ab52eb860938",
+  "sourceManifestHash": "90b0fa3616c6370b8eaad9096e140d700a7195c58e18c65215d584d4ec79dae4",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-2e619aada91e92bdcdc527b8",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school canteen sells each juice box for $3.00, and a student buys 8 of them and pays $30. How much change, in dollars, should the student receive?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0,
+      "unit": "$"
+    },
+    "explanation": "The total cost is found by multiplying the price of one juice box by the number bought. Multiplying $3.00 by 8 gives a total cost of $24.00. Subtracting this total cost from the $30 paid gives the change owed. So the student should receive $6.00 in change.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Solving multi-step money problems",
+      "difficulty": "medium",
+      "marks": 2,
+      "estimatedTimeSeconds": 100,
+      "tags": [
+        "number",
+        "money",
+        "multi-step"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "7d3c490cd698174f3aebfb476d7cf98f2990d2ab3903a2a961151849178d8822"
+}

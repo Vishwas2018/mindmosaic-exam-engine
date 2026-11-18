@@ -44,7 +44,7 @@ test.describe("home page", () => {
     await expect(hero).toContainText("Learn with purpose.");
     await expect(hero).toContainText("Practise with confidence.");
     await expect(page.getByRole("link", { name: "Explore programs" }).first()).toBeVisible();
-    await expect(page.getByText(/Available now: NAPLAN-style and ICAS-style/)).toBeVisible();
+    await expect(page.getByText(/Available now: NAPLAN-style Numeracy practice and AMC-style practice modules/)).toBeVisible();
   });
 
   test("Chapter 1 is a six-scene scroll story: scene copy and photographs, no slideshow, timers or pause control", async ({ page }) => {
@@ -194,10 +194,10 @@ test.describe("home page", () => {
     await expect(page.getByRole("heading", { name: "Find the right program." })).toHaveCount(0);
     const chapter = page.locator('section[data-chapter="2"]');
     for (const [scene, status] of [
-      ["naplan", "Available now · Years 3 & 5"],
-      ["icas", "Available now · Years 3 & 5"],
+      ["naplan", "Limited · Years 3 & 5"],
+      ["icas", "In development"],
       ["curriculum", "Limited · Years 3 & 5"],
-      ["amc", "In development"],
+      ["amc", "Limited · Years 3 & 5"],
       ["singapore", "In development"],
       ["selective", "In development"],
     ] as const) {

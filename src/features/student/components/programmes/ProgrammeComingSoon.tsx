@@ -78,7 +78,7 @@ export function ProgrammeComingSoon({
             <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 font-vietnam text-xs font-semibold uppercase tracking-wide ${accent.tint} ${accent.text}`}>
               <span>{programme.scopeLabel}</span>
             </div>
-            <h1 className="font-jakarta text-2xl font-extrabold tracking-tight text-plum-dark md:text-4xl">
+            <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta text-2xl font-semibold tracking-tight text-plum-dark md:text-4xl">
               {programme.fullTitle}
             </h1>
             <p className="mt-4 font-vietnam text-base leading-relaxed text-plum-muted">{programme.about}</p>
@@ -86,7 +86,7 @@ export function ProgrammeComingSoon({
             <div className="mt-6 flex items-start gap-3 rounded-2xl bg-surface-container-low p-4">
               <Hourglass className={`mt-0.5 h-5 w-5 shrink-0 ${accent.text}`} aria-hidden="true" />
               <div>
-                <p className="font-jakarta text-sm font-bold text-plum-dark">In development</p>
+                <p className="font-jakarta text-sm font-semibold text-plum-dark">In development</p>
                 <p className="mt-0.5 font-vietnam text-sm text-plum-muted">
                   This track has no live practice questions yet. Nothing here can be started today &mdash;
                   when it launches, it will arrive with full worked solutions, the same as every other
@@ -100,7 +100,7 @@ export function ProgrammeComingSoon({
                 type="button"
                 onClick={() => setNotified(true)}
                 disabled={notified}
-                className={`inline-flex h-12 items-center gap-2 rounded-xl px-6 font-jakarta text-sm font-bold text-white shadow-sm transition-all disabled:cursor-default ${
+                className={`inline-flex h-12 items-center gap-2 rounded-xl px-6 font-jakarta text-sm font-semibold text-white shadow-sm transition-all disabled:cursor-default ${
                   notified ? "bg-teal-accent" : `${accent.button} ${accent.buttonHover}`
                 }`}
               >
@@ -138,7 +138,7 @@ export function ProgrammeComingSoon({
           <span className="font-vietnam text-xs font-semibold uppercase tracking-wider text-plum-muted">
             Planned focus areas
           </span>
-          <h2 className="mt-1 font-jakarta text-xl font-extrabold text-plum-dark md:text-2xl">
+          <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-1 font-jakarta text-xl font-semibold text-plum-dark md:text-2xl">
             What this track will cover
           </h2>
         </div>
@@ -148,7 +148,7 @@ export function ProgrammeComingSoon({
               key={area.title}
               className="rounded-2xl border border-parchment-border bg-white p-5 shadow-warm-sm"
             >
-              <h3 className="font-jakarta text-sm font-bold text-plum-dark">{area.title}</h3>
+              <h3 className="font-jakarta text-sm font-semibold text-plum-dark">{area.title}</h3>
               <p className="mt-2 font-vietnam text-xs leading-relaxed text-plum-muted">{area.description}</p>
             </div>
           ))}
@@ -162,7 +162,7 @@ export function ProgrammeComingSoon({
             <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
           </div>
           <p className="font-vietnam text-sm leading-relaxed text-plum-muted">
-            <strong className="font-jakarta font-bold text-plum-dark">
+            <strong className="font-jakarta font-semibold text-plum-dark">
               MindMosaic doesn&rsquo;t launch incomplete question banks.
             </strong>{" "}
             We&rsquo;d rather show you an honest &ldquo;coming soon&rdquo; page than a thin set of
@@ -174,8 +174,8 @@ export function ProgrammeComingSoon({
       {/* What's live now */}
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-jakarta text-lg font-bold text-plum-dark">You can explore right now</h2>
-          <Link href="/practice" className="font-jakarta text-sm font-bold text-primary hover:text-primary-hover">
+          <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta text-lg font-semibold text-plum-dark">You can explore right now</h2>
+          <Link href="/practice" className="font-jakarta text-sm font-semibold text-primary hover:text-primary-hover">
             View all
           </Link>
         </div>
@@ -192,7 +192,7 @@ export function ProgrammeComingSoon({
                   Live now
                 </span>
               </div>
-              <h3 className="font-jakarta text-sm font-bold text-plum-dark">{live.label}</h3>
+              <h3 className="font-jakarta text-sm font-semibold text-plum-dark">{live.label}</h3>
               <p className="mt-0.5 font-vietnam text-xs text-plum-muted">{live.detail}</p>
             </Link>
           ))}

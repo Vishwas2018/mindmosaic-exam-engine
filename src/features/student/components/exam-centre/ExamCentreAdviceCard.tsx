@@ -13,7 +13,7 @@ const TIPS = [
 export function ExamCentreAdviceCard() {
   return (
     <section className="flex flex-col gap-4 rounded-2xl border border-mm-line bg-mm-page/60 p-6">
-      <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+      <h3 className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
         Calm assessment readiness
       </h3>
       <p className="text-sm text-mm-muted">

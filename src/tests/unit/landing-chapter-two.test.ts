@@ -34,20 +34,21 @@ describe("Chapter 2 scene data", () => {
     expect(chapter2Scenes.map((scene) => scene.number)).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
-  it("shows NAPLAN and ICAS as Available, Curriculum as Limited, and the rest as In development", () => {
+  it("shows NAPLAN, Curriculum and AMC as Limited, and ICAS, Singapore and Selective as In development", () => {
     const status = Object.fromEntries(chapter2Scenes.map((scene) => [scene.id, scene.status]));
     expect(status).toEqual({
-      naplan: "Available",
-      icas: "Available",
+      naplan: "Limited",
+      icas: "In development",
       curriculum: "Limited",
-      amc: "In development",
+      amc: "Limited",
       singapore: "In development",
       selective: "In development",
     });
-    expect(chapter2Scenes[0]!.statusLine).toBe("Available now · Years 3 & 5");
-    expect(chapter2Scenes[1]!.statusLine).toBe("Available now · Years 3 & 5");
+    expect(chapter2Scenes[0]!.statusLine).toBe("Limited · Years 3 & 5");
+    expect(chapter2Scenes[1]!.statusLine).toBe("In development");
     expect(chapter2Scenes[2]!.statusLine).toBe("Limited · Years 3 & 5");
-    for (const scene of chapter2Scenes.slice(3)) expect(scene.statusLine).toBe("In development");
+    expect(chapter2Scenes[3]!.statusLine).toBe("Limited · Years 3 & 5");
+    for (const scene of chapter2Scenes.slice(4)) expect(scene.statusLine).toBe("In development");
   });
 
   it("describes Curriculum as live lessons with incomplete coverage, never as a complete programme", () => {

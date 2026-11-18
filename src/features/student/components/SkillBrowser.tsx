@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import type { SkillSummary } from "@/features/exam-engine/selection";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 import {
   ISOLABLE_SUBJECT_FILTERS,
   type SubjectFilter,
@@ -69,10 +70,10 @@ export function SkillBrowser({ skills }: { skills: readonly SkillSummary[] }) {
                 aria-pressed={isActive}
                 data-testid={`skill-subject-filter-${chip}`}
                 className={cn(
-                  "inline-flex min-h-11 items-center rounded-xl px-3.5 text-xs font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20",
+                  "inline-flex min-h-11 items-center rounded-xl px-3.5 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20",
                   isActive
-                    ? "bg-royal text-white"
-                    : "bg-white text-muted ring-1 ring-royal/12 hover:text-royal",
+                    ? "bg-mm-brand text-white"
+                    : "bg-white text-mm-ink-soft ring-1 ring-mm-brand/12 hover:text-mm-brand",
                 )}
               >
                 {SUBJECT_CHIP_LABELS[chip]}
@@ -87,22 +88,22 @@ export function SkillBrowser({ skills }: { skills: readonly SkillSummary[] }) {
           <Link
             key={`${entry.subject}-${entry.skill}`}
             href={`/practice/session?subject=${entry.subject}&skill=${encodeURIComponent(entry.skill)}`}
-            className="group rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+            className="group rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20"
           >
             <Card
               variant="outlined"
-              className="flex h-full items-center justify-between gap-3 p-4 transition group-hover:border-royal/25"
+              className="flex h-full items-center justify-between gap-3 p-4 transition group-hover:border-mm-brand/25"
             >
               <div className="min-w-0">
-                <p className="truncate text-sm font-extrabold text-ink">{entry.skill}</p>
-                <p className="mt-0.5 text-xs font-semibold text-muted">
+                <p className="truncate text-sm font-semibold text-mm-ink">{skillLabel(entry.skill)}</p>
+                <p className="mt-0.5 text-xs font-semibold text-mm-ink-soft">
                   {SUBJECT_CHIP_LABELS[entry.subject]} · {entry.questionCount} question
                   {entry.questionCount === 1 ? "" : "s"}
                 </p>
               </div>
               <ArrowRight
                 aria-hidden="true"
-                className="h-4 w-4 shrink-0 text-royal transition group-hover:translate-x-0.5"
+                className="h-4 w-4 shrink-0 text-mm-brand transition group-hover:translate-x-0.5"
               />
             </Card>
           </Link>

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { fetchSittingRowsWithIdentity } from "@/server/assessment/read-dispatch";
 
-import { compareChildren } from "./default-child";
+import { compareChildren, pickDefaultChildIndex } from "./default-child";
 import type { ChildProfile, ParentAttemptRow } from "./summary";
 
 /**
@@ -128,3 +128,23 @@ export async function loadParentDashboard(): Promise<ParentDashboardData> {
 
   return { status: "ready", parentName, children };
 }
+
+/**
+ * Resolves the primary or default active child ID for redirects and child-scoped navigation.
+ * Returns null if the parent has no linked children or the session fails to load.
+ */
+export async function resolveDefaultChildId(): Promise<string | null> {
+  const data = await loadParentDashboard();
+  if (data.status !== "ready" || data.children.length === 0) {
+    return null;
+  }
+  const summaries = data.children.map((c) => ({
+    attemptCount: c.attempts.length,
+    unreadableAttemptCount: 0,
+    archived: false,
+  }));
+  const defaultIdx = pickDefaultChildIndex(summaries);
+  const child = data.children[defaultIdx] ?? data.children[0];
+  return child?.profile.id ?? null;
+}
+

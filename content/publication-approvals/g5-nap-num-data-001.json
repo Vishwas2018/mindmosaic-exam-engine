@@ -1,0 +1,93 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-data-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "f1acd256b3bae2f06567a446411c5a49ea349d6fdc5ec489fad8e7bfbeb97ab4",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-data-001",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which lunchtime activity was chosen by exactly one quarter of the students?",
+    "instructions": "There are 24 students in total. Use the pie chart.",
+    "options": [
+      {
+        "id": "sport",
+        "text": "Sport"
+      },
+      {
+        "id": "art",
+        "text": "Art"
+      },
+      {
+        "id": "music",
+        "text": "Music"
+      },
+      {
+        "id": "chess",
+        "text": "Chess"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "g5-lunch-activities-pie",
+        "altText": "Pie chart of 24 students showing sport chosen by 12, art by 6, music by 3 and chess by 3.",
+        "title": "Lunchtime activities of 24 students",
+        "type": "pie_chart",
+        "data": {
+          "segments": [
+            {
+              "label": "Sport",
+              "value": 12
+            },
+            {
+              "label": "Art",
+              "value": 6
+            },
+            {
+              "label": "Music",
+              "value": 3
+            },
+            {
+              "label": "Chess",
+              "value": 3
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "art"
+    },
+    "explanation": "One quarter of 24 is 24 ÷ 4 = 6. Art was chosen by 6 students, so art is one quarter. Sport, with 12 students, is one half.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics and probability",
+      "topic": "Fractions in a pie chart",
+      "skill": "Relating fractions to data",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 90,
+      "tags": [
+        "pie-chart",
+        "fractions"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "62dc7c3bedb3d1a5b962bc764dae018514b5b2f50bb19faccace3a08d6425b63"
+}

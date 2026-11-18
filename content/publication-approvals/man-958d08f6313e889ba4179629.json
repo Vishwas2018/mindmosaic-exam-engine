@@ -1,0 +1,67 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-958d08f6313e889ba4179629",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "8dad118bfe6ffd962b063295ad9c3e51f3447fa42c94d3bb4fadd43ba1a3cc11",
+  "sourceManifestHash": "8ff0e898ed9352e086c8d080f270471e712bde02a6ec92d1ffe3a947fa9970ab",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-958d08f6313e889ba4179629",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A fair spinner has a theoretical probability of 1/4 for landing on Red. If the spinner is spun 200 times, how many times would you EXPECT it to land on Red?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "25"
+      },
+      {
+        "id": "opt-b",
+        "text": "50"
+      },
+      {
+        "id": "opt-c",
+        "text": "75"
+      },
+      {
+        "id": "opt-d",
+        "text": "100"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Expected frequency = 1/4 × 200 = 50 times.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Expected frequency in large trials",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "expected-frequency",
+        "trials",
+        "probability",
+        "orig-id:g5-prob-exp-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "f509075a4d0c82584bffff852033223d8373566b80bd0489bfbd140e105e795b"
+}

@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "Confirming your MindMosaic account.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function EmailConfirmLayout({
   children,
 }: {

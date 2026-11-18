@@ -266,10 +266,10 @@ describe("buildChildSummary", () => {
     expect(summary.displayName).toBe("Your child");
   });
 
-  it("has a null readiness score and a single-topics-mastered-count of zero with no attempts", () => {
+  it("has no recent average and no strong subjects with no attempts", () => {
     const summary = buildChildSummary(CHILD, [], NOW);
-    expect(summary.readinessScore).toBeNull();
-    expect(summary.topicsMasteredCount).toBe(0);
+    expect(summary.recentAveragePercentage).toBeNull();
+    expect(summary.strongSubjectCount).toBe(0);
     expect(summary.recommendedActions).toEqual([
       {
         id: "first-exam",
@@ -279,7 +279,7 @@ describe("buildChildSummary", () => {
     ]);
   });
 
-  it("averages only the most recent attempts for the readiness score, unlike the lifetime average", () => {
+  it("averages only the most recent attempts for the recent average, unlike the lifetime average", () => {
     const attempts = [
       // Oldest, well outside the readiness window (last 5 attempts).
       makeAttempt("old-1", isoDaysAgo(21), makeResult({ objectivePercentage: 20 })),
@@ -292,46 +292,76 @@ describe("buildChildSummary", () => {
       makeAttempt("recent-5", isoDaysAgo(0), makeResult({ objectivePercentage: 90 })),
     ];
     const summary = buildChildSummary(CHILD, attempts, NOW);
-    expect(summary.readinessScore).toBe(90);
-    expect(summary.averagePercentage).not.toBe(summary.readinessScore);
+    expect(summary.recentAveragePercentage).toBe(90);
+    expect(summary.averagePercentage).not.toBe(summary.recentAveragePercentage);
   });
 
-  it("counts topics mastered as subjects at or above the strong-band threshold", () => {
-    const summary = buildChildSummary(
+  it("withholds the recent average until there are 2 papers and 8 marks", () => {
+    const one = buildChildSummary(CHILD, [makeAttempt("only", isoDaysAgo(0))], NOW);
+    expect(one.recentAveragePercentage).toBeNull();
+    expect(one.averageHasEvidence).toBe(false);
+
+    const two = buildChildSummary(
+      CHILD,
+      [makeAttempt("a", isoDaysAgo(1)), makeAttempt("b", isoDaysAgo(0))],
+      NOW,
+    );
+    expect(two.recentAveragePercentage).toBe(80);
+    expect(two.averageHasEvidence).toBe(true);
+
+    /* Two papers but only 6 marks between them is still too thin. */
+    const thin = buildChildSummary(
       CHILD,
       [
-        makeAttempt(
-          "a",
-          isoDaysAgo(0),
-          makeResult({
-            breakdowns: {
-              bySubject: {
-                numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
-                reading: { total: 10, correct: 5, objectiveMarksEarned: 5, objectiveMarksAvailable: 10 },
-              },
-            },
-          }),
-        ),
+        makeAttempt("a", isoDaysAgo(1), makeResult({ objectiveMarksAvailable: 3, objectiveMarksEarned: 2 })),
+        makeAttempt("b", isoDaysAgo(0), makeResult({ objectiveMarksAvailable: 3, objectiveMarksEarned: 2 })),
       ],
       NOW,
     );
-    expect(summary.topicsMasteredCount).toBe(1);
+    expect(thin.recentAveragePercentage).toBeNull();
+  });
+
+  const TWO_SUBJECTS = makeResult({
+    breakdowns: {
+      bySubject: {
+        numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+        reading: { total: 10, correct: 5, objectiveMarksEarned: 5, objectiveMarksAvailable: 10 },
+      },
+    },
+  });
+
+  it("counts strong subjects only when each rests on at least 2 papers and 8 marks", () => {
+    const summary = buildChildSummary(
+      CHILD,
+      [makeAttempt("a", isoDaysAgo(1), TWO_SUBJECTS), makeAttempt("b", isoDaysAgo(0), TWO_SUBJECTS)],
+      NOW,
+    );
+    expect(summary.strongSubjectCount).toBe(1);
+    expect(summary.subjects.every((subject) => subject.sufficientEvidence)).toBe(true);
+  });
+
+  it("never calls a subject strong from a single paper", () => {
+    const summary = buildChildSummary(CHILD, [makeAttempt("a", isoDaysAgo(0), TWO_SUBJECTS)], NOW);
+    expect(summary.strongSubjectCount).toBe(0);
+    const numeracy = summary.subjects.find((subject) => subject.subject === "numeracy");
+    expect(numeracy).toMatchObject({ paperCount: 1, sufficientEvidence: false });
   });
 
   it("observes the strongest and weakest subjects and a practice streak", () => {
+    const both = makeResult({
+      breakdowns: {
+        bySubject: {
+          numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+          reading: { total: 10, correct: 4, objectiveMarksEarned: 4, objectiveMarksAvailable: 10 },
+        },
+      },
+    });
     const summary = buildChildSummary(
       CHILD,
       [
-        makeAttempt("today", isoDaysAgo(0), makeResult({
-          breakdowns: {
-            bySubject: {
-              numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
-              reading: { total: 10, correct: 4, objectiveMarksEarned: 4, objectiveMarksAvailable: 10 },
-            },
-          },
-        })),
-        makeAttempt("yesterday", isoDaysAgo(1)),
-        makeAttempt("two-days", isoDaysAgo(2)),
+        makeAttempt("today", isoDaysAgo(0), both),
+        makeAttempt("yesterday", isoDaysAgo(1), both),
+        makeAttempt("two-days", isoDaysAgo(2), both),
       ],
       NOW,
     );
@@ -341,6 +371,23 @@ describe("buildChildSummary", () => {
   });
 
   it("recommends practising the weakest (focus-band) subject when one exists", () => {
+    const both = makeResult({
+      breakdowns: {
+        bySubject: {
+          numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+          reading: { total: 10, correct: 3, objectiveMarksEarned: 3, objectiveMarksAvailable: 10 },
+        },
+      },
+    });
+    const summary = buildChildSummary(
+      CHILD,
+      [makeAttempt("a", isoDaysAgo(1), both), makeAttempt("b", isoDaysAgo(0), both)],
+      NOW,
+    );
+    expect(summary.recommendedActions[0]).toMatchObject({ id: "focus-reading" });
+  });
+
+  it("makes no comparison, ranking or focus claim from a single paper, and shows the real counts", () => {
     const summary = buildChildSummary(
       CHILD,
       [
@@ -355,7 +402,38 @@ describe("buildChildSummary", () => {
       ],
       NOW,
     );
-    expect(summary.recommendedActions[0]).toMatchObject({ id: "focus-reading" });
+    expect(summary.observations.join(" ")).not.toMatch(/strongest|could use more practice/i);
+    expect(summary.observations.join(" ")).toMatch(/1 paper \u00b7 9 of 10 marks/);
+    expect(summary.recommendedActions[0]).toMatchObject({ id: "more-evidence" });
+    expect(JSON.stringify(summary.recommendedActions)).not.toMatch(/solid across the board/i);
+  });
+
+  it("tracks paperCount per subject accurately across distinct papers", () => {
+    const summary = buildChildSummary(
+      CHILD,
+      [
+        makeAttempt("a", isoDaysAgo(0), makeResult({
+          breakdowns: {
+            bySubject: {
+              numeracy: { total: 10, correct: 9, objectiveMarksEarned: 9, objectiveMarksAvailable: 10 },
+            },
+          },
+        })),
+        makeAttempt("b", isoDaysAgo(1), makeResult({
+          breakdowns: {
+            bySubject: {
+              numeracy: { total: 10, correct: 8, objectiveMarksEarned: 8, objectiveMarksAvailable: 10 },
+              reading: { total: 10, correct: 7, objectiveMarksEarned: 7, objectiveMarksAvailable: 10 },
+            },
+          },
+        })),
+      ],
+      NOW,
+    );
+    const numeracy = summary.subjects.find((s) => s.subject === "numeracy");
+    const reading = summary.subjects.find((s) => s.subject === "reading");
+    expect(numeracy?.paperCount).toBe(2);
+    expect(reading?.paperCount).toBe(1);
   });
 });
 

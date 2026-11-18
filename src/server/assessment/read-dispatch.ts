@@ -19,7 +19,8 @@ import {
   type AttemptRow,
   type AttemptSummary,
 } from "@/features/student/attempt-summary";
-import { getExamBank } from "@/server/exam-bank";
+import { getResolutionExamBank } from "@/server/exam-bank";
+import { withScholarshipSample } from "@/server/scholarship-sample-preview";
 
 /**
  * Read dispatch by session identity (spec §12.7 step 7, ADR-005 Amendment A).
@@ -636,7 +637,7 @@ async function readLegacySitting(
   );
   if (!config.success || !bankId.success) return { kind: "corrupt" };
 
-  const bank = getExamBank(bankId.data);
+  const bank = await withScholarshipSample(getResolutionExamBank(bankId.data), studentId);
   const byId = new Map(bank.map((question) => [question.id, question]));
   const selected = Array.isArray(session.selected_question_ids)
     ? (session.selected_question_ids as string[])

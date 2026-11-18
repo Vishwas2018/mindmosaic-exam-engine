@@ -25,6 +25,7 @@ import {
   Card,
   buttonClasses,
 } from "@/components/ui";
+import { promptLayoutClass } from "@/features/exam-engine/question-renderers/renderer-utils";
 import { VisualRenderer } from "@/features/exam-engine/visual-renderers";
 import {
   formatCorrectAnswer,
@@ -44,6 +45,7 @@ import { PractiseMissedSkills } from "@/features/exam-engine/recommendation/Prac
 
 import { ResultsColdLoad } from "./ResultsColdLoad";
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 const STATUS_LABELS: Record<
   string,
@@ -110,7 +112,7 @@ const DIMENSION_LABELS: Record<string, string> = {
 };
 
 function dimensionLabel(key: string): string {
-  return DIMENSION_LABELS[key] ?? key;
+  return DIMENSION_LABELS[key] ?? skillLabel(key);
 }
 
 function BreakdownTable({
@@ -124,7 +126,7 @@ function BreakdownTable({
   if (entries.length === 0) return null;
   return (
     <div>
-      <h3 className="font-jakarta text-lg font-extrabold text-plum-dark">{title}</h3>
+      <h3 className="font-jakarta text-lg font-semibold text-plum-dark">{title}</h3>
       <div
         className="mt-3 overflow-x-auto rounded-2xl border border-primary/8"
         tabIndex={0}
@@ -132,7 +134,7 @@ function BreakdownTable({
         aria-label={`${title} table, scroll right to see every column`}
       >
         <table className="w-full min-w-[640px] text-left text-sm">
-          <thead className="bg-surface-container-low text-xs font-extrabold uppercase tracking-wide text-plum-muted">
+          <thead className="bg-surface-container-low text-xs font-semibold uppercase tracking-wide text-plum-muted">
             <tr>
               <th scope="col" className="px-4 py-3">Group</th>
               <th scope="col" className="px-3 py-3 text-right">Total</th>
@@ -147,7 +149,7 @@ function BreakdownTable({
           <tbody>
             {entries.map(([key, row]) => (
               <tr key={key} className="border-t border-primary/8">
-                <th scope="row" className="px-4 py-3 font-bold text-plum-dark">
+                <th scope="row" className="px-4 py-3 font-semibold text-plum-dark">
                   {dimensionLabel(key)}
                 </th>
                 <td className="px-3 py-3 text-right tabular-nums">{row.total}</td>
@@ -160,7 +162,7 @@ function BreakdownTable({
                 </td>
                 <td className="px-3 py-3 text-right tabular-nums">{row.unanswered}</td>
                 <td className="px-3 py-3 text-right tabular-nums">{row.manualReview}</td>
-                <td className="px-4 py-3 text-right tabular-nums font-bold">
+                <td className="px-4 py-3 text-right tabular-nums font-semibold">
                   {row.objectiveMarksEarned}/{row.objectiveMarksAvailable}
                 </td>
               </tr>
@@ -192,12 +194,12 @@ export default function ResultsPage() {
   const resetExam = useExamStore((state) => state.resetExam);
 
   /*
-   * The design's three-way review filter (screen 10, view 4). It replaces
-   * the previous boolean "flagged only" toggle: "Incorrect only" is the
-   * filter a student actually reaches for after a paper, and a toggle
-   * cannot express three states.
+   * Question review filters matching 01_standalone_review.html ("Review every question").
+   * Supports: All, Wrong (incorrect), Not answered (unanswered), Flagged, Not yet marked.
    */
-  const [reviewFilter, setReviewFilter] = useState<"all" | "incorrect" | "flagged">("all");
+  const [reviewFilter, setReviewFilter] = useState<
+    "all" | "incorrect" | "unanswered" | "flagged" | "manual_review"
+  >("all");
 
   /*
    * Cold load: the in-memory store holds only the attempt just submitted,
@@ -233,9 +235,11 @@ export default function ResultsPage() {
       label: "Time used",
       value: formatDuration(result.timeTakenSeconds),
       note:
-        result.submissionReason === "timer_expired"
-          ? "Time ran out — submitted automatically"
-          : "Submitted before time was up",
+        config.timing === "untimed"
+          ? "No time limit — your time is recorded"
+          : result.submissionReason === "timer_expired"
+            ? "Time ran out — submitted automatically"
+            : "Submitted before time was up",
       tone: "outline" as const,
     },
     {
@@ -263,18 +267,36 @@ export default function ResultsPage() {
       .filter((detail) => detail.status === "incorrect")
       .map((detail) => detail.questionId),
   );
+  const unansweredIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "unanswered")
+      .map((detail) => detail.questionId),
+  );
+  const manualReviewIds = new Set(
+    result.questionDetails
+      .filter((detail) => detail.status === "manual_review" || detail.pendingManualReview)
+      .map((detail) => detail.questionId),
+  );
 
   const reviewQuestions =
     reviewFilter === "flagged"
       ? questions.filter((question) => flaggedQuestionIds.includes(question.id))
       : reviewFilter === "incorrect"
         ? questions.filter((question) => incorrectIds.has(question.id))
-        : questions;
+        : reviewFilter === "unanswered"
+          ? questions.filter((question) => unansweredIds.has(question.id))
+          : reviewFilter === "manual_review"
+            ? questions.filter((question) => manualReviewIds.has(question.id))
+            : questions;
 
   const reviewFilters = [
     { id: "all" as const, label: "All", count: questions.length },
-    { id: "incorrect" as const, label: "Incorrect only", count: incorrectIds.size },
+    { id: "incorrect" as const, label: "Wrong", count: incorrectIds.size },
+    { id: "unanswered" as const, label: "Not answered", count: unansweredIds.size },
     { id: "flagged" as const, label: "Flagged", count: flaggedQuestionIds.length },
+    ...(manualReviewIds.size > 0
+      ? [{ id: "manual_review" as const, label: "Not yet marked", count: manualReviewIds.size }]
+      : []),
   ];
 
   /* By-skill bars, from the same breakdown the table below reads. */
@@ -318,7 +340,7 @@ export default function ResultsPage() {
   const verdict = verdictHeadline(result.objectivePercentage);
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen bg-mm-tint-soft">
       {/*
         The shared product header, not a bare logo strip.
 
@@ -343,10 +365,10 @@ export default function ResultsPage() {
       <main id="main-content" className="site-width py-10 sm:py-14">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">
               {verdict.headline}
             </p>
-            <h1 className="mt-2 font-jakarta text-4xl font-black tracking-[-0.045em] text-plum-dark sm:text-5xl">
+            <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-2 font-jakarta text-4xl font-semibold tracking-[-0.045em] text-plum-dark sm:text-5xl">
               Your results
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-plum-muted">
@@ -360,11 +382,13 @@ export default function ResultsPage() {
                  both are deliberately out of scope. */
               <p
                 data-testid="paper-fidelity"
-                className="mx-auto mt-2 max-w-2xl text-sm font-bold leading-6 text-primary"
+                className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-primary"
               >
                 {config.shortened
                   ? `Practice module — ${result.totalQuestions} questions, not the full-length paper.`
-                  : "Full-length practice paper — the same number of questions and time limit as the real assessment."}
+                  : config.timing === "untimed"
+                    ? "Full-length practice paper — the same number of questions as the real assessment, sat without a time limit."
+                    : "Full-length practice paper — the same number of questions and time limit as the real assessment."}
               </p>
             )}
             <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-plum-muted">{verdict.sub}</p>
@@ -381,17 +405,17 @@ export default function ResultsPage() {
                 >
                   <div className="score-ring-content">
                     <span
-                      className="block text-4xl font-black tracking-[-0.04em] text-primary"
+                      className="block text-4xl font-semibold tracking-[-0.04em] text-primary"
                       data-testid="objective-percentage"
                     >
                       {result.objectivePercentage}%
                     </span>
-                    <span className="mt-1 block text-sm font-bold text-plum-muted">
+                    <span className="mt-1 block text-sm font-semibold text-plum-muted">
                       {result.objectiveMarksEarned} of {result.objectiveMarksAvailable} marks
                     </span>
                   </div>
                 </div>
-                <h2 className="mt-7 font-jakarta text-2xl font-black">Objective score</h2>
+                <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-7 font-jakarta text-2xl font-semibold">Objective score</h2>
                 <p className="mt-2 max-w-sm text-center text-sm leading-6 text-white/80">
                   {result.manualReviewQuestions > 0
                     ? `Writing tasks (${result.manualReviewQuestions}) are marked by a person and are not counted in this percentage.`
@@ -401,10 +425,10 @@ export default function ResultsPage() {
 
               <section className="p-6 sm:p-9" aria-labelledby="summary-heading">
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                  <h2 id="summary-heading" className="font-jakarta text-2xl font-black text-plum-dark">
+                  <h2 id="summary-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta text-2xl font-semibold text-plum-dark">
                     Performance summary
                   </h2>
-                  <div className="inline-flex items-center gap-2 self-start rounded-xl bg-surface-container-low px-4 py-3 text-sm font-bold text-plum-muted">
+                  <div className="inline-flex items-center gap-2 self-start rounded-xl bg-surface-container-low px-4 py-3 text-sm font-semibold text-plum-muted">
                     <Clock3 aria-hidden="true" className="h-4 w-4 text-primary" />
                     <span data-testid="time-taken">
                       Time taken: {formatDuration(result.timeTakenSeconds)}
@@ -449,7 +473,7 @@ export default function ResultsPage() {
                         >
                           {tile.label}
                         </dt>
-                        <dd className="font-jakarta text-[26px] font-extrabold tracking-[-0.03em] tabular-nums">
+                        <dd className="font-jakarta text-[26px] font-semibold tracking-[-0.03em] tabular-nums">
                           {tile.value}
                         </dd>
                       </dl>
@@ -471,27 +495,27 @@ export default function ResultsPage() {
                 <dl className="mt-5 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
                   <div className="flex justify-between gap-3">
                     <dt className="font-semibold text-plum-muted">Total questions</dt>
-                    <dd className="font-black tabular-nums" data-testid="result-total">
+                    <dd className="font-semibold tabular-nums" data-testid="result-total">
                       {result.totalQuestions}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="font-semibold text-plum-muted">Attempted</dt>
-                    <dd className="font-black tabular-nums" data-testid="result-attempted">
+                    <dd className="font-semibold tabular-nums" data-testid="result-attempted">
                       {result.attemptedQuestions}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="font-semibold text-plum-muted">Marked automatically</dt>
-                    <dd className="font-black tabular-nums">{result.autoMarkedQuestions}</dd>
+                    <dd className="font-semibold tabular-nums">{result.autoMarkedQuestions}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="font-semibold text-plum-muted">Pending manual marks</dt>
-                    <dd className="font-black tabular-nums">{result.pendingManualMarks}</dd>
+                    <dd className="font-semibold tabular-nums">{result.pendingManualMarks}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="font-semibold text-plum-muted">How it ended</dt>
-                    <dd className="font-black" data-testid="submission-reason">
+                    <dd className="font-semibold" data-testid="submission-reason">
                       {result.submissionReason === "timer_expired"
                         ? "Time ran out (auto-submitted)"
                         : "Submitted by you"}
@@ -515,7 +539,7 @@ export default function ResultsPage() {
               them. Weakest first — the order a student acts on. */}
           {skillRows.length > 0 && (
             <Card className="mt-6 p-6 sm:p-8" variant="default">
-              <h2 className="font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">By skill</h2>
+              <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta text-2xl font-semibold tracking-[-0.03em] text-plum-dark">By skill</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-plum-muted">
                 Objective marks earned against marks available, weakest first. Writing tasks a
                 person marks are excluded.
@@ -561,7 +585,7 @@ export default function ResultsPage() {
           <Card className="mt-6 space-y-8 p-6 sm:p-8" variant="default">
             <div>
               <Badge variant="purple">Breakdowns</Badge>
-              <h2 className="mt-3 font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">
+              <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-3 font-jakarta text-2xl font-semibold tracking-[-0.03em] text-plum-dark">
                 Where your marks came from
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-plum-muted">
@@ -585,7 +609,7 @@ export default function ResultsPage() {
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <Badge variant="orange">Question review</Badge>
-                <h2 className="mt-3 font-jakarta text-2xl font-black tracking-[-0.03em] text-plum-dark">
+                <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-3 font-jakarta text-2xl font-semibold tracking-[-0.03em] text-plum-dark">
                   Every question, explained
                 </h2>
               </div>
@@ -610,7 +634,10 @@ export default function ResultsPage() {
                           ? "toggle-flagged-only"
                           : `review-filter-${filter.id}`
                       }
-                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-bold transition focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
+                      /* No colour transition: a tab caught mid-fade between the selected and unselected
+                         palettes has neither one's contrast (3.9:1 was measured), and the state should
+                         change at once anyway. */
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-[10px] border px-4 text-sm font-semibold focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary ${
                         selected
                           ? "border-primary bg-primary text-white"
                           : "border-parchment-border bg-white text-plum-muted hover:border-primary"
@@ -625,7 +652,7 @@ export default function ResultsPage() {
                       )}
                       {filter.label}
                       <span
-                        className={`tabular-nums text-xs font-bold ${
+                        className={`tabular-nums text-xs font-semibold ${
                           selected ? "text-white" : "text-plum-muted"
                         }`}
                       >
@@ -641,7 +668,11 @@ export default function ResultsPage() {
               <p className="mt-6 rounded-xl bg-surface-container-low px-4 py-6 text-center text-sm font-semibold text-plum-muted">
                 {reviewFilter === "flagged"
                   ? "You did not flag any questions in this exam."
-                  : "Nothing was marked incorrect in this exam."}
+                  : reviewFilter === "unanswered"
+                    ? "Every question was answered."
+                    : reviewFilter === "manual_review"
+                      ? "No questions are waiting for human marking."
+                      : "Nothing was marked incorrect in this exam."}
               </p>
             ) : (
               <ol className="mt-7 space-y-6">
@@ -668,29 +699,29 @@ export default function ResultsPage() {
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-sm font-extrabold uppercase tracking-[0.08em] text-primary">
+                          <span className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
                             Question {index + 1}
                           </span>
                           <span
-                            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-extrabold ${statusInfo.tone}`}
+                            className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-semibold ${statusInfo.tone}`}
                             data-testid={`review-status-${index + 1}`}
                           >
                             <statusInfo.icon aria-hidden="true" className="h-3.5 w-3.5" />
                             {statusInfo.label}
                           </span>
                           {wasFlagged && (
-                            <span className="inline-flex items-center gap-1 rounded-lg bg-amber-light px-2.5 py-1 text-xs font-extrabold text-amber-accent">
+                            <span className="inline-flex items-center gap-1 rounded-lg bg-amber-light px-2.5 py-1 text-xs font-semibold text-amber-accent">
                               <Flag aria-hidden="true" className="h-3 w-3" fill="currentColor" />
                               Flagged
                             </span>
                           )}
                         </div>
-                        <span className="text-xs font-bold text-plum-muted">
-                          Grade {question.yearLevel} ·{" "}
+                        <span className="text-xs font-semibold text-plum-muted">
+                          Year {question.yearLevel} ·{" "}
                           <span className="capitalize">
                             {question.metadata.subject.replace("_", " ")}
                           </span>{" "}
-                          · {question.metadata.skill ?? question.metadata.topic} ·{" "}
+                          · {skillLabel(question.metadata.skill ?? question.metadata.topic)} ·{" "}
                           <span className="capitalize">{question.metadata.difficulty}</span>
                           {" · "}
                           {detail.pendingManualReview
@@ -699,13 +730,16 @@ export default function ResultsPage() {
                         </span>
                       </div>
 
-                      <p className="mt-4 text-base font-bold leading-7 text-plum-dark">
+                      <p
+                        data-testid={`review-prompt-${question.id}`}
+                        className={`mt-4 text-base font-semibold leading-7 text-plum-dark ${promptLayoutClass(question.examStyle)}`.trim()}
+                      >
                         {question.prompt}
                       </p>
 
                       {question.stimulus && (
                         <details className="mt-3 rounded-xl bg-surface-container-low p-4 text-sm leading-6 text-plum-muted">
-                          <summary className="cursor-pointer font-bold text-plum-dark">
+                          <summary className="cursor-pointer font-semibold text-plum-dark">
                             {question.stimulus.title ?? "Reading passage"}
                           </summary>
                           <p className="mt-2 whitespace-pre-wrap">{question.stimulus.body}</p>
@@ -722,7 +756,7 @@ export default function ResultsPage() {
 
                       <dl className="mt-4 grid gap-3 sm:grid-cols-2">
                         <div className="rounded-xl bg-surface-container-low p-4">
-                          <dt className="text-xs font-extrabold uppercase tracking-wide text-plum-muted">
+                          <dt className="text-xs font-semibold uppercase tracking-wide text-plum-muted">
                             Your answer
                           </dt>
                           <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
@@ -731,7 +765,7 @@ export default function ResultsPage() {
                         </div>
                         {detail.requiresManualMarking ? (
                           <div className="rounded-xl bg-amber-light/60 p-4">
-                            <dt className="text-xs font-extrabold uppercase tracking-wide text-amber-accent">
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-amber-accent">
                               Marked by a person
                             </dt>
                             <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
@@ -741,7 +775,7 @@ export default function ResultsPage() {
                           </div>
                         ) : (
                           <div className="rounded-xl bg-teal-light/60 p-4">
-                            <dt className="text-xs font-extrabold uppercase tracking-wide text-teal-accent">
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-teal-accent">
                               Correct answer
                             </dt>
                             <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
@@ -752,7 +786,7 @@ export default function ResultsPage() {
                       </dl>
 
                       <div className="mt-4 rounded-xl border border-primary/8 bg-surface-container-low p-4">
-                        <h3 className="font-jakarta text-xs font-extrabold uppercase tracking-wide text-primary">
+                        <h3 className="font-jakarta text-xs font-semibold uppercase tracking-wide text-primary">
                           Explanation
                         </h3>
                         <p className="mt-1.5 text-sm leading-6 text-plum-muted">

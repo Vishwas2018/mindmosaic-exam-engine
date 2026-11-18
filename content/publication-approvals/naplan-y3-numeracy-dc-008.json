@@ -1,0 +1,91 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-dc-008",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "1868f25bdac10d0d2047452ff36a98cc8a02f94109960f4587aa5f24397242ec",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-dc-008",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar graph shows how many books were borrowed from the school library each day. On which day were the most books borrowed?",
+    "options": [
+      {
+        "id": "opt-wednesday",
+        "text": "Wednesday"
+      },
+      {
+        "id": "opt-monday",
+        "text": "Monday"
+      },
+      {
+        "id": "opt-thursday",
+        "text": "Thursday"
+      },
+      {
+        "id": "opt-friday",
+        "text": "Friday"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "visual-naplan-y3-numeracy-dc-008-1",
+        "altText": "A bar graph of books borrowed: Monday 12, Tuesday 18, Wednesday 24, Thursday 9, Friday 15.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "values": [
+            12,
+            18,
+            24,
+            9,
+            15
+          ],
+          "xAxisLabel": "Day",
+          "yAxisLabel": "Books borrowed",
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-wednesday"
+    },
+    "explanation": "The tallest bar shows the most books. Wednesday reaches 24, which is higher than Monday 12, Tuesday 18, Thursday 9 and Friday 15. So the most books were borrowed on Wednesday.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics and probability",
+      "topic": "Column graphs",
+      "skill": "Find the largest value on a bar graph",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "bar graph",
+        "data",
+        "reading graphs"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "3fcad39a09b6cb04ac4dbc79923e8aaed12f9c29fcf2e326a787ecede7c1d945"
+}

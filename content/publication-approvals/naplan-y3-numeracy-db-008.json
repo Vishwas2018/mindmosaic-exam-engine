@@ -1,0 +1,53 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-db-008",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "448e95de8b5debe36fc42b0f76741294ae4b93fe7208a8ae46fdec662a9627b0",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-db-008",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "At a school market stall, a pencil costs 65c and a rubber costs 40c. How much do they cost altogether?",
+    "instructions": "Write just the number of cents, without the unit.",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 105,
+      "tolerance": 0,
+      "unit": "cents"
+    },
+    "explanation": "Add the two prices in cents: 65 + 40. 65 + 40 = 105. So the pencil and rubber cost 105 cents together, which is the same as one dollar and five cents.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Money",
+      "skill": "Add two amounts of money in cents",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 70,
+      "tags": [
+        "money",
+        "cents",
+        "addition",
+        "school fair"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "92ba3de28da5d7836e641c05e5a9efb0583de2ed5b6ec7bef396f030a483ac32"
+}

@@ -201,6 +201,9 @@ export async function verifyUpstreamGateChain(
 ): Promise<GateChainVerificationResult> {
   const { candidateId, provenance } = context;
   const failures: GateChainFailure[] = [];
+  if (provenance.kind === "legacy_import") return {
+    ok: false, failures: [failure("semantic", "provenance.originalGeneration", "Legacy origin is unverified. Phase 1 does not authorise staging or publication, including deterministically correct content.")],
+  };
 
   const structural = (await repository.read("reports", buildStructuralValidationReportId(candidateId))) as
     | StoredStructuralValidationReport

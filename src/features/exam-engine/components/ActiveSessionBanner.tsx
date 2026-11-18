@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/features/auth";
+import { recordNoOpenWork, recordOpenWorkUnconfirmed } from "@/features/auth/session-work-status";
 import { SessionRecoveryBanner } from "@/features/session-recovery";
 
 import { toActiveSession } from "../state/active-session-view";
@@ -41,7 +42,13 @@ export function ActiveSessionBanner({ className }: ActiveSessionBannerProps) {
     if (auth.status !== "authenticated") return;
     let cancelled = false;
     fetch("/api/exam/session/active")
-      .then((response) => (response.ok ? (response.json() as Promise<ActiveSessionResponse>) : null))
+      .then((response) => {
+        /* Only a definite "none open" from the server counts as empty; an
+           error response says nothing either way. */
+        if (response.status === 404) recordNoOpenWork();
+        if (response.ok) recordOpenWorkUnconfirmed();
+        return response.ok ? (response.json() as Promise<ActiveSessionResponse>) : null;
+      })
       .then((data) => {
         if (!cancelled) setActive(data);
       })

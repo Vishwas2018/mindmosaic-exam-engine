@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 import {
   ArrowLeft,
   ArrowRight,
@@ -476,11 +477,11 @@ export default function ExamPage() {
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </h2>
                 <p className="mt-1 text-sm font-semibold text-plum-muted">
-                  Grade {currentQuestion.yearLevel} ·{" "}
+                  Year {currentQuestion.yearLevel} ·{" "}
                   <span className="capitalize">
                     {currentQuestion.metadata.subject.replace("_", " ")}
                   </span>{" "}
-                  · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
+                  · {skillLabel(currentQuestion.metadata.skill ?? currentQuestion.metadata.topic)} ·{" "}
                   <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
                 </p>
                 {/* A concise, independent announcement of the question
@@ -539,7 +540,7 @@ export default function ExamPage() {
                 fallback={(retry) => (
                   <WidgetError
                     title="This question didn't display properly"
-                    description="Skip ahead and keep going — your other answers are saved, and this one won't be marked against you."
+                    description="Skip ahead and keep going — your other answers aren't affected by this. Tell a grown-up so the question can be looked at."
                     onRetry={retry}
                     retryLabel="Try loading it again"
                   />

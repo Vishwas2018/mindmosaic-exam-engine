@@ -1,0 +1,77 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-04393717e49e3e95c32be851",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "9fa3add0afa7d34a0a0ae26ffa5400fe466562b83ba090f4445261c81aab0b70",
+  "sourceManifestHash": "3737a07cc33199d586485e7ca9ee5b32f2c5d2a34a9c8dabd87245571fd44cd5",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-04393717e49e3e95c32be851",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Priya buys 5 balloons for the class party. How much does she spend, in dollars?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "money-table-party",
+        "altText": "A price table for party supplies: Sticker $0.20, Balloon $0.35, Badge $0.90, Ribbon $0.55.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Item",
+            "Price ($)"
+          ],
+          "rows": [
+            [
+              "Sticker",
+              "$0.20"
+            ],
+            [
+              "Balloon",
+              "$0.35"
+            ],
+            [
+              "Badge",
+              "$0.90"
+            ],
+            [
+              "Ribbon",
+              "$0.55"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 1.75,
+      "tolerance": 0
+    },
+    "explanation": "5 balloons at 35 cents each cost 5 × 35 = 175 cents in total.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.money",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "409dab82fd641b4bacdb7b46b56a50db0a0a06c9bf6de85e7e222674bdeee6c8"
+}

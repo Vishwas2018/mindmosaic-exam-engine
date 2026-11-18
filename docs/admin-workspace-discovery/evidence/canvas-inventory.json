@@ -1,0 +1,137 @@
+[
+  {
+    "title": "Overview",
+    "testid": "mega-artboard-title-Overview.dc.html",
+    "bounds": "0,0,1440,910"
+  },
+  {
+    "title": "Tablet · Overview",
+    "testid": "mega-artboard-title-OverviewTablet.dc.html",
+    "bounds": "1520,0,834,1470"
+  },
+  {
+    "title": "Question library",
+    "testid": "mega-artboard-title-Library.dc.html",
+    "bounds": "0,2170,1440,1000"
+  },
+  {
+    "title": "Tablet · Library",
+    "testid": "mega-artboard-title-LibraryTablet.dc.html",
+    "bounds": "1520,2170,834,1140"
+  },
+  {
+    "title": "States · Overview & library",
+    "testid": "mega-artboard-title-LibraryStates.dc.html",
+    "bounds": "2434,2170,1440,1030"
+  },
+  {
+    "title": "Question review",
+    "testid": "mega-artboard-title-Review.dc.html",
+    "bounds": "0,4010,1440,1600"
+  },
+  {
+    "title": "Mobile · Review",
+    "testid": "mega-artboard-title-ReviewMobile.dc.html",
+    "bounds": "1520,4010,390,1240"
+  },
+  {
+    "title": "States · Review",
+    "testid": "mega-artboard-title-ReviewStates.dc.html",
+    "bounds": "1990,4010,1440,1170"
+  },
+  {
+    "title": "Human approval",
+    "testid": "mega-artboard-title-Approve.dc.html",
+    "bounds": "0,6310,1440,1080"
+  },
+  {
+    "title": "Mobile · Approval",
+    "testid": "mega-artboard-title-ApproveMobile.dc.html",
+    "bounds": "1520,6310,390,570"
+  },
+  {
+    "title": "States · Approval",
+    "testid": "mega-artboard-title-ApproveStates.dc.html",
+    "bounds": "1990,6310,1440,1690"
+  },
+  {
+    "title": "Paper review",
+    "testid": "mega-artboard-title-Paper.dc.html",
+    "bounds": "0,8700,1440,1240"
+  },
+  {
+    "title": "States · Paper",
+    "testid": "mega-artboard-title-PaperStates.dc.html",
+    "bounds": "1520,8700,1440,700"
+  },
+  {
+    "title": "Publication",
+    "testid": "mega-artboard-title-Publish.dc.html",
+    "bounds": "0,10640,1440,930"
+  },
+  {
+    "title": "States · Publication",
+    "testid": "mega-artboard-title-PublishStates.dc.html",
+    "bounds": "1520,10640,1440,1190"
+  },
+  {
+    "title": "Writing review",
+    "testid": "mega-artboard-title-Writing.dc.html",
+    "bounds": "0,12530,1440,840"
+  },
+  {
+    "title": "Mobile · Writing",
+    "testid": "mega-artboard-title-WritingMobile.dc.html",
+    "bounds": "1520,12530,390,800"
+  },
+  {
+    "title": "States · Writing",
+    "testid": "mega-artboard-title-WritingStates.dc.html",
+    "bounds": "1990,12530,1440,710"
+  },
+  {
+    "title": "Support",
+    "testid": "mega-artboard-title-Support.dc.html",
+    "bounds": "0,14070,1440,750"
+  },
+  {
+    "title": "Mobile · Support",
+    "testid": "mega-artboard-title-SupportMobile.dc.html",
+    "bounds": "1520,14070,390,550"
+  },
+  {
+    "title": "States · Support",
+    "testid": "mega-artboard-title-SupportStates.dc.html",
+    "bounds": "1990,14070,1440,790"
+  },
+  {
+    "title": "Activity history",
+    "testid": "mega-artboard-title-Activity.dc.html",
+    "bounds": "0,15560,1440,690"
+  },
+  {
+    "title": "States · Activity",
+    "testid": "mega-artboard-title-ActivityStates.dc.html",
+    "bounds": "1520,15560,1440,730"
+  },
+  {
+    "title": "Map · Governance path",
+    "testid": "mega-artboard-title-AdminMap.dc.html",
+    "bounds": "0,16990,1480,1260"
+  },
+  {
+    "title": "Reference · Inventory",
+    "testid": "mega-artboard-title-AdminInventory.dc.html",
+    "bounds": "1560,16990,1440,2260"
+  },
+  {
+    "title": "Reference · Decisions",
+    "testid": "mega-artboard-title-AdminDecisions.dc.html",
+    "bounds": "3080,16990,1440,1410"
+  },
+  {
+    "title": "Reference · Dependencies",
+    "testid": "mega-artboard-title-AdminDeps.dc.html",
+    "bounds": "4600,16990,1440,1510"
+  }
+]

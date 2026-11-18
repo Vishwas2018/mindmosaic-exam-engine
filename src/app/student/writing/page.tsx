@@ -25,14 +25,14 @@ export default async function StudentWritingPage() {
 
   return (
     <WritingPageShell back={<Link href="/student" className={WRITING_BACK_LINK_CLASS}>Back to my dashboard</Link>}>
-      <h1 className="text-2xl font-extrabold tracking-[-0.025em] text-ink">Writing practice</h1>
+      <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-2xl font-semibold tracking-[-0.025em] text-mm-ink">Writing practice</h1>
 
       <section aria-labelledby="writing-tasks" className="mt-6">
-        <h2 id="writing-tasks" className="text-lg font-extrabold text-ink">
+        <h2 id="writing-tasks" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
           Tasks
         </h2>
         {tasks.length === 0 ? (
-          <p className="mt-3 rounded-2xl border border-dashed border-royal/20 p-5 text-muted">
+          <p className="mt-3 rounded-2xl border border-dashed border-mm-brand/20 p-5 text-mm-ink-soft">
             No writing tasks are ready yet.
           </p>
         ) : (
@@ -41,10 +41,10 @@ export default async function StudentWritingPage() {
               <li key={task.id}>
                 <Link
                   href={`/writing/sit/${task.id}`}
-                  className="flex items-center justify-between gap-3 rounded-2xl border border-royal/10 bg-white p-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+                  className="flex items-center justify-between gap-3 rounded-2xl border border-mm-brand/10 bg-white p-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20"
                 >
-                  <span className="font-extrabold text-ink">{task.title}</span>
-                  <span className="text-sm text-muted">{task.timeLimitMinutes} minutes</span>
+                  <span className="font-semibold text-mm-ink">{task.title}</span>
+                  <span className="text-sm text-mm-ink-soft">{task.timeLimitMinutes} minutes</span>
                 </Link>
               </li>
             ))}
@@ -53,7 +53,7 @@ export default async function StudentWritingPage() {
       </section>
 
       <section aria-labelledby="writing-results" className="mt-8">
-        <h2 id="writing-results" className="text-lg font-extrabold text-ink">
+        <h2 id="writing-results" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">
           My writing and marks
         </h2>
         <div className="mt-3">

@@ -1,0 +1,67 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-bdd996eef2aca936e03b0bb8",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "449108c6af4b9c56018ec41d68c12e5106823b766aa439648fdb02451599c5d1",
+  "sourceManifestHash": "8bd97fc48a2c7470cd02d8b09ddbc683b1d89f2497f07b70ca3f2e2709d3992f",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-bdd996eef2aca936e03b0bb8",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which estimate is most reasonable for the product 392 × 48?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "2,000"
+      },
+      {
+        "id": "opt-b",
+        "text": "20,000"
+      },
+      {
+        "id": "opt-c",
+        "text": "200,000"
+      },
+      {
+        "id": "opt-d",
+        "text": "12,000"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "Round 392 to 400 and 48 to 50. 400 × 50 = 20,000.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "Estimating products and reasonableness",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "estimation",
+        "rounding",
+        "multiplication",
+        "orig-id:g5-num-mult-002"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "92ea97dc904565c42867c151b64562d4024def17ee4e50cc085953c4a5405e35"
+}

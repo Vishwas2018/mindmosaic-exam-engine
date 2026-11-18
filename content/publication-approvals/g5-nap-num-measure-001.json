@@ -1,0 +1,104 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-measure-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "a721e98ef69ca920453b2bda22acd8590753b997e23c3817d65338abdece255e",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-measure-001",
+    "type": "fill_blank",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Complete the sentence about this rectangle.",
+    "instructions": "Use the measurements on the shape. Write a number in each box.",
+    "options": [],
+    "interaction": {
+      "type": "fill_blank",
+      "segments": [
+        "The perimeter of the rectangle is ",
+        " centimetres and its area is ",
+        " square centimetres."
+      ],
+      "blanks": [
+        {
+          "id": "perimeter",
+          "label": "Perimeter in centimetres"
+        },
+        {
+          "id": "area",
+          "label": "Area in square centimetres"
+        }
+      ]
+    },
+    "visuals": [
+      {
+        "id": "g5-rectangle-measure",
+        "altText": "A rectangle with a length of 8 centimetres and a width of 5 centimetres.",
+        "title": "A rectangle",
+        "type": "geometry_shape",
+        "data": {
+          "shape": "rectangle",
+          "measurements": [
+            {
+              "label": "Length",
+              "value": 8,
+              "unit": "cm"
+            },
+            {
+              "label": "Width",
+              "value": 5,
+              "unit": "cm"
+            }
+          ]
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "fill_blank",
+      "blanks": [
+        {
+          "id": "perimeter",
+          "acceptedAnswers": [
+            "26"
+          ]
+        },
+        {
+          "id": "area",
+          "acceptedAnswers": [
+            "40"
+          ]
+        }
+      ],
+      "caseSensitive": false,
+      "trimWhitespace": true
+    },
+    "explanation": "The perimeter is 8 + 5 + 8 + 5 = 26 centimetres. The area is 8 × 5 = 40 square centimetres.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Perimeter and area",
+      "skill": "Calculating perimeter and area of a rectangle",
+      "difficulty": "challenging",
+      "marks": 2,
+      "estimatedTimeSeconds": 150,
+      "tags": [
+        "perimeter",
+        "area"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "444f4dcbde81d8575b21336769f573412198c5f8cc6edd323e549d487d914664"
+}
