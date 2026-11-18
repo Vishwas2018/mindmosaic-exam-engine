@@ -1,0 +1,123 @@
+{
+    "$schema":  "https://json.schemastore.org/claude-code-settings.json",
+    "disableAllHooks":  false,
+    "enabledPlugins":  {
+                           "code-simplifier@claude-plugins-official":  true,
+                           "superpowers@claude-plugins-official":  true,
+                           "typescript-lsp@claude-plugins-official":  true,
+                           "playwright@claude-plugins-official":  false,
+                           "context7@claude-plugins-official":  false,
+                           "codex@openai-codex":  false,
+                           "claude-mem@thedotmack":  false,
+                           "claude-security@claude-plugins-official":  false,
+                           "vercel@claude-plugins-official":  false
+                       },
+    "hooks":  {
+                  "PreToolUse":  [
+                                     {
+                                         "matcher":  "Bash|PowerShell|Read|Grep|Glob|Edit|Write|MultiEdit|NotebookEdit|Skill|WebFetch|mcp__.*",
+                                         "hooks":  [
+                                                       {
+                                                           "type":  "command",
+                                                           "command":  "node",
+                                                           "args":  [
+                                                                        "${CLAUDE_PROJECT_DIR}/.agents/scripts/safety-gate.mjs"
+                                                                    ],
+                                                           "timeout":  10,
+                                                           "onFailure":  "block"
+                                                       }
+                                                   ]
+                                     }
+                                 ]
+              },
+    "permissions":  {
+                        "disableBypassPermissionsMode":  "disable",
+                        "allow":  [
+                                      "Bash(git status)",
+                                      "Bash(git status --short)",
+                                      "PowerShell(git status)",
+                                      "PowerShell(git status --short)",
+                                      "mcp__mindmosaic-context7__resolve-library-id",
+                                      "mcp__mindmosaic-context7__query-docs"
+                                  ],
+                        "deny":  [
+                                     "Read(./.env)",
+                                     "Read(./**/.env)",
+                                     "Read(./**/.env.local)",
+                                     "Read(./**/.env.*.local)",
+                                     "Read(./**/.env.production)",
+                                     "Read(./**/.env.production.*)",
+                                     "Read(./**/secrets.json)",
+                                     "Read(./**/*.pem)",
+                                     "Read(./**/*.pfx)",
+                                     "Read(./**/*.key)",
+                                     "Read(~/.config/gh/hosts.yml)",
+                                     "Read(~/.claude/.credentials.json)",
+                                     "Read(~/.claude/backups/**)",
+                                     "Read(~/.codex/auth.json)",
+                                     "Read(~/.claude.json)",
+                                     "Read(~/.npmrc)",
+                                     "Read(~/.git-credentials)",
+                                     "Read(~/.ssh/**)",
+                                     "Read(~/.aws/**)",
+                                     "Edit(./.env)",
+                                     "Edit(./**/.env)",
+                                     "Edit(./**/.env.local)",
+                                     "Edit(./**/.env.*.local)",
+                                     "Edit(./**/.env.production)",
+                                     "Edit(./**/.env.production.*)",
+                                     "Edit(./**/secrets.json)",
+                                     "Edit(./**/*.pem)",
+                                     "Edit(./**/*.pfx)",
+                                     "Edit(./**/*.key)",
+                                     "Edit(~/.config/gh/hosts.yml)",
+                                     "Edit(~/.claude/.credentials.json)",
+                                     "Edit(~/.claude/backups/**)",
+                                     "Edit(~/.codex/auth.json)",
+                                     "Edit(~/.claude.json)",
+                                     "Edit(~/.npmrc)",
+                                     "Edit(~/.git-credentials)",
+                                     "Edit(~/.ssh/**)",
+                                     "Edit(~/.aws/**)",
+                                     "Bash(git push origin main)",
+                                     "Bash(git push*--no-verify*)",
+                                     "Bash(git reset --hard*)",
+                                     "Bash(gh auth token*)",
+                                     "Bash(gh pr merge*)",
+                                     "Bash(vercel deploy*)",
+                                     "Bash(supabase login*)",
+                                     "Bash(stripe *--live*)",
+                                     "Bash(printenv)",
+                                     "Bash(printenv *)",
+                                     "PowerShell(git push origin main)",
+                                     "PowerShell(git push*--no-verify*)",
+                                     "PowerShell(git reset --hard*)",
+                                     "PowerShell(gh auth token*)",
+                                     "PowerShell(gh pr merge*)",
+                                     "PowerShell(vercel deploy*)",
+                                     "PowerShell(supabase login*)",
+                                     "PowerShell(stripe *--live*)",
+                                     "PowerShell(printenv)",
+                                     "PowerShell(printenv *)",
+                                     "mcp__claude_ai_Stripe",
+                                     "mcp__stripe",
+                                     "mcp__supabase"
+                                 ],
+                        "ask":  [
+                                    "mcp__mindmosaic-playwright",
+                                    "mcp__claude_ai_Vercel",
+                                    "Bash(git push *)",
+                                    "Bash(gh pr create *)",
+                                    "Bash(supabase db push *)",
+                                    "Bash(supabase db push)",
+                                    "Bash(npm publish *)",
+                                    "Bash(npm publish)",
+                                    "PowerShell(git push *)",
+                                    "PowerShell(gh pr create *)",
+                                    "PowerShell(supabase db push *)",
+                                    "PowerShell(supabase db push)",
+                                    "PowerShell(npm publish *)",
+                                    "PowerShell(npm publish)"
+                                ]
+                    }
+}

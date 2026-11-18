@@ -117,6 +117,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: "unit",
+          sequence: { groupOrder: 1 },
           include: ["src/tests/**/*.test.{ts,tsx}"],
           exclude: FS_FACTORY_REPOSITORY_TEST_FILES,
         },
@@ -125,6 +126,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: "question-factory-fs",
+          sequence: { groupOrder: 2 },
           include: FS_FACTORY_REPOSITORY_TEST_FILES,
           // Serialise only this project's files (see comment above) —
           // sibling projects are unaffected and keep running in parallel.

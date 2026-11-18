@@ -43,6 +43,15 @@ MindMosaic is a premium educational practice portal for Grade 3 and Grade 5 NAPL
 - Do not commit `.env*`, secrets, generated test output, screenshots, or build directories.
 - Keep commits small, focused, verified, and intentional.
 
+## AI Environment and Production Safety
+
+- Start in a dedicated worktree from fresh `origin/dev`. Check Git status and keep existing worktrees and changes intact.
+- Supabase hosted DEV is `mfglzabnayacssgertat`. Use loopback Supabase for RLS and authenticated E2E. Production `uermhsptduikehuyceiz` is off-limits.
+- Confirm the exact target and obtain explicit approval before pushing, opening a PR, applying a hosted migration, or changing deployments. Owners merge through GitHub after the full CI gate.
+- Keep production credentials outside assistant sessions. Vercel is inspection-only. Use Stripe test mode with synthetic data. Stripe and Supabase MCP are disabled for project use.
+- Use a screened configuration or code snapshot for external Codex review. Keep secrets, credentials and student or parent personal data out of review inputs.
+- See [AI environment safety](docs/AI_ENVIRONMENT_SAFETY.md) for hook verification and rollback.
+
 ## Pre-Commit Verification Gate
 
 Before submitting a PR, verify:
