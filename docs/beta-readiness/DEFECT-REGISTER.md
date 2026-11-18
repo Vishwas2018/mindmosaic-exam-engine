@@ -100,3 +100,25 @@ cross-student read. It was not: through the bypass, the app answers 404. All dir
 - **D-017**: CLOSED. Writer password and Preview `EXAM_WRITE_DB_URL` set; `20261031090100` applied to DEV; hosted
   exam start/submit work through the writer (scenario C on `3fc807b4`), legacy RPCs refuse a student with 42501 (D).
 - **D-009 / D-018**: no recurrence in the hosted runs or in PR #124's e2e-auth job.
+
+## Found by manual testing on DEV `dcf81714`, 2026-11-18 (MT-001 … MT-005)
+
+Observed by the owner in a browser on the deployed DEV alias, then traced to code and reproduced under the approved-only
+gate (`MM_PUBLICATION_GATE=enforce`, which is what every Vercel Preview serves). Regression tests are named per row.
+
+| ID | Sev | Defect | State | Cause and fix |
+|----|-----|--------|-------|---------------|
+| MT-001 | P1 | ICAS availability messaging contradicted the practice catalogue: landing, the Exam Centre and the page descriptions said "NAPLAN-style and ICAS-style practice … available now / coverage confirmed" while `/practice` listed every ICAS programme as coming soon | FIXED, tested | Approved content holds **0** ICAS items, so no ICAS pattern can be started. Landing statuses were typed by hand and only checked by year. ICAS is now "in development" on landing and Programmes; the Exam Centre reads `getStyleAvailability()` (pattern readiness). `programme-availability-alignment.test.ts` holds landing status to the enforced readiness per style |
+| MT-002 | P1 | AMC availability differed between landing, practice and the paper picker: landing "in development, no year level live", `/practice` "Planned / not available to sit yet", `/exams` offering two Year 3 and two Year 5 AMC sittings | FIXED, tested | Y3 has 26 and Y5 has 27 approved AMC items against 30 for a full paper, so only shorter practice **modules** can run. Landing, Programmes, Chapter 2, `/practice` and the Exam Centre now all say: Years 3 and 5 practice modules open, full-length papers not open yet |
+| MT-003 | P2 | Internal skill ids (`num.prod.measurement.perimeter`) shown to children in the runner header, results by-skill bars, "Practise missed skills", the breakdown table, answer review and practice session titles | FIXED, tested | These sites printed `metadata.skill` raw. All now go through `skillLabel` ("Measurement: perimeter"); the raw key is still used for launching drills. `results-timing-and-skill-labels.test.tsx` renders the real runner and results |
+| MT-004 | P2 | Untimed results said "Submitted before time was up" and, for named papers, "the same number of questions and time limit as the real assessment" | FIXED, tested | Wording ignored `config.timing`. Untimed now reads "No time limit — your time is recorded"; time taken is still shown. Timed wording is unchanged (tested both ways) |
+| MT-005 | P2 | AMC listed twice with inconsistent question counts: a hand-written "Australian Maths Competition" entry plus generated `amc-y3 … amc-y12` coming-soon cells; the picker showed a "full-length" and a "practice module" card per year with the same shortened count | FIXED, tested | The generated AMC cells are no longer created (one catalogue entry, which links to the modules). When a full paper is short and a module draws on the same programme, the picker lists the module only (badged "Practice module — not a full-length paper") and says the full paper is not open yet and how many of its questions are reviewed. `listPatternsForPicker` is pure and tested |
+
+Notes: the withheld full-length AMC paper keeps its route (`/exams/<patternId>`); it is only no longer listed on the picker.
+The generated `amc-yN` catalogue cells stay in `PROGRAMS` (the exam-pattern registry resolves programme ids against them, and
+`practice-studio-no-live-amc-scholarship.test.ts` guards them), and are hidden from the listing by `isListedInCatalogue`.
+Tests whose premise changed with the approved-content facts were updated, not weakened: landing status lists and copy in
+`landing-programme-availability`, `landing-chapter-two`, `landing-programmes` and `e2e/landing.spec.ts`; the fixed
+"NAPLAN and ICAS are the two available styles" assertion was replaced by per-style checks against the enforced readiness
+(`programme-availability-alignment.test.ts`). Nothing here changes content approvals, the publication gate or any security
+control.

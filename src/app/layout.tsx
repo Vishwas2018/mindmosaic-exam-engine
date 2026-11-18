@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     template: "%s | MindMosaic",
   },
   description:
-    "Premium, original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice built for confident learners.",
+    "Premium, original Grade 3 and Grade 5 practice in NAPLAN-style and other assessment formats, built for confident learners.",
   applicationName: "MindMosaic",
 };
 export default function RootLayout({

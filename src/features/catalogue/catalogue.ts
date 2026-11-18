@@ -65,6 +65,12 @@ export interface Program {
    */
   scope?: ProgramScope;
   planTier?: PlanTier;
+  /**
+   * A programme whose full papers are not available but whose shorter practice modules are. The planned-programs
+   * list shows "Practice modules open" with this link instead of "Planned", so it never reads as wholly unavailable
+   * while /exams offers modules.
+   */
+  modules?: { readonly href: string; readonly label: string };
 }
 
 const NAPLAN_STYLE = "naplan_style" as const;
@@ -257,8 +263,10 @@ const COMING_SOON_PROGRAMS: readonly Program[] = [
     id: "australian-maths-competition",
     slug: "australian-maths-competition",
     name: "Australian Maths Competition",
-    blurb: "Competition-style problem solving practice.",
+    blurb:
+      "Competition-style problem solving. Year 3 and Year 5 practice modules are open; full-length papers are not available yet.",
     status: "coming_soon",
+    modules: { href: "/exams", label: "See the Year 3 and Year 5 practice modules" },
   },
   {
     id: "maths-olympiad",
@@ -420,6 +428,18 @@ export const PROGRAMS: readonly Program[] = [
   ...COMING_SOON_PROGRAMS,
   ...EXPANSION_PROGRAMS,
 ];
+
+/**
+ * Whether a program is shown in the browsable practice catalogue.
+ *
+ * AMC-style keeps its generated per-year cells in PROGRAMS: they are the cells the exam-pattern registry's programme
+ * ids resolve against, and the tripwire that stops AMC going live by a content-count side effect. They are not listed,
+ * because "australian-maths-competition" is the one AMC entry and it points at the practice modules on /exams; a
+ * second Year 3-12 listing for the same programme contradicted it (MT-005).
+ */
+export function isListedInCatalogue(program: Program): boolean {
+  return program.scope?.examStyle !== "amc_style";
+}
 
 export function getProgramBySlug(slug: string): Program | undefined {
   return PROGRAMS.find((program) => program.slug === slug);

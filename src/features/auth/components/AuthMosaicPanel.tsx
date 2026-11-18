@@ -34,7 +34,7 @@ export interface AuthMosaicPanelProps {
   className?: string;
 }
 
-export const AUTH_PANEL_FOOTNOTE = "Original NAPLAN-style and ICAS-style practice for Years 3 and 5.";
+export const AUTH_PANEL_FOOTNOTE = "Original assessment-style practice for Years 3 and 5.";
 
 export function AuthMosaicPanel({
   heading,

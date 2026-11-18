@@ -4,6 +4,7 @@ import { clsx } from "clsx";
 import { GraduationCap, Medal, School, Sigma } from "lucide-react";
 
 import { JurisdictionPicker } from "@/features/student/components/JurisdictionPicker";
+import { getStyleAvailability } from "@/features/catalogue/style-availability";
 import { ExamCentreAdviceCard } from "@/features/student/components/exam-centre/ExamCentreAdviceCard";
 import { ExamCentreHero } from "@/features/student/components/exam-centre/ExamCentreHero";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
@@ -46,13 +47,18 @@ interface FormatCard {
   readonly icon: typeof GraduationCap;
 }
 
-const FORMATS: readonly FormatCard[] = [
+function buildFormats(): readonly FormatCard[] {
+  const naplan = getStyleAvailability("naplan_style");
+  const icas = getStyleAvailability("icas_style");
+  const amc = getStyleAvailability("amc_style");
+  const yearsText = (years: readonly number[]) => (years.length === 0 ? "" : `Year${years.length > 1 ? "s" : ""} ${years.join(" and ")}`);
+  return [
   {
     tag: "NAPLAN-style",
     title: "Numeracy and literacy",
     body: "Sections in the NAPLAN test areas, sat either as a short set or a full-length simulation.",
-    meta: "Years 3 and 5 · Coverage confirmed",
-    confirmed: true,
+    meta: naplan.state === "in_development" ? "Not open yet" : `${yearsText(naplan.years)} · ${naplan.subjects.length === 0 ? "" : "Open: " + naplan.subjects.join(", ")}`,
+    confirmed: naplan.state !== "in_development",
     href: "/practice?style=naplan_style",
     icon: GraduationCap,
   },
@@ -60,8 +66,8 @@ const FORMATS: readonly FormatCard[] = [
     tag: "ICAS-style",
     title: "Reasoning and problem solving",
     body: "Extension-style questions rewarding close reading and unfamiliar problems, in ICAS response formats.",
-    meta: "Years 3 and 5 · Coverage confirmed",
-    confirmed: true,
+    meta: icas.state === "in_development" ? "Not open yet · questions are still being reviewed" : `${yearsText(icas.years)} · Open: ${icas.subjects.join(", ")}`,
+    confirmed: icas.state !== "in_development",
     href: "/practice?style=icas_style",
     icon: Medal,
   },
@@ -69,9 +75,9 @@ const FORMATS: readonly FormatCard[] = [
     tag: "AMC-style",
     title: "Mathematics competition style",
     body: "Multi-step reasoning and pattern problems designed to be worked rather than recalled.",
-    meta: "Coverage being confirmed",
-    confirmed: false,
-    href: "/exam-preparation",
+    meta: amc.state === "in_development" ? "Not open yet" : `${yearsText(amc.years)} · Practice modules open, full-length papers not open yet`,
+    confirmed: amc.state !== "in_development",
+    href: amc.state === "in_development" ? "/exam-preparation" : "/exams",
     icon: Sigma,
   },
   {
@@ -83,7 +89,8 @@ const FORMATS: readonly FormatCard[] = [
     href: "#jurisdiction",
     icon: School,
   },
-];
+  ];
+}
 
 function formatDate(iso: string): string {
   const date = new Date(iso);
@@ -174,7 +181,7 @@ export default async function StudentExamPreparationPage() {
           Assessment formats
         </h2>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {FORMATS.map((format) => {
+          {buildFormats().map((format) => {
             const Icon = format.icon;
             return (
               <Link

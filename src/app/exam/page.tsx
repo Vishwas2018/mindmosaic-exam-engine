@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 import {
   ArrowLeft,
   ArrowRight,
@@ -480,7 +481,7 @@ export default function ExamPage() {
                   <span className="capitalize">
                     {currentQuestion.metadata.subject.replace("_", " ")}
                   </span>{" "}
-                  · {currentQuestion.metadata.skill ?? currentQuestion.metadata.topic} ·{" "}
+                  · {skillLabel(currentQuestion.metadata.skill ?? currentQuestion.metadata.topic)} ·{" "}
                   <span className="capitalize">{currentQuestion.metadata.difficulty}</span>
                 </p>
                 {/* A concise, independent announcement of the question

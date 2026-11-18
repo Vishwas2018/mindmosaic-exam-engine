@@ -29,6 +29,7 @@ import {
   type PracticeState,
 } from "./practice-reducer";
 import { usePracticeSession } from "./use-practice-session";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 export interface PracticeSessionProps {
   questions: readonly (Question | CandidateQuestion)[];
@@ -703,7 +704,7 @@ export function PracticeSession({
                 Question {state.currentIndex + 1} · {typeLabel(question)}
               </p>
               <span className="text-[13px] text-plum-muted">
-                Skill: {question.metadata.skill ?? question.metadata.topic}
+                Skill: {skillLabel(question.metadata.skill ?? question.metadata.topic)}
               </span>
               <button
                 type="button"

@@ -40,6 +40,30 @@ is on, see SMTP-RUNBOOK.md).
 Only approved questions are served on deployed builds. If a programme shows "coming soon" or has few papers, that
 is the content gate working, not a defect.
 
+## What is open on DEV (as of `dcf81714`, approved content only)
+
+Every public, parent and student screen must agree with this table. A surface that says more or less is a defect
+(MT-001, MT-002, MT-005). The table comes from `getPatternReadiness()` and the practice catalogue under the enforced
+gate; it changes only when human-approved content changes, so re-check it before a test round.
+
+| Programme | Open to start | Not open |
+|-----------|---------------|----------|
+| NAPLAN-style | Numeracy, Year 3 (full paper, 36 questions) and Year 5 (shortened paper, 40 of 42) | Reading and Language Conventions, both years (0 approved); Writing |
+| ICAS-style | nothing (0 approved items in every subject) | everything: it must read "in development" or "coming soon" everywhere, never "available" |
+| AMC-style | Year 3 and Year 5 **practice modules** only (26 and 27 approved questions) | Full-length 30-question papers, other years |
+| Scholarship-style | Vihaan pilot account only | everyone else |
+
+Checks for the five manual-testing findings:
+
+1. **ICAS (MT-001):** landing, Programs, Practice, Exam papers and a child's Exam Centre all say ICAS-style is not open yet.
+2. **AMC (MT-002):** the same five places say AMC-style has Year 3 and 5 practice modules and no full-length papers yet.
+3. **Skill names (MT-003):** in a practice or exam sitting and on the results page (by-skill bars, "Practise missed skills",
+   breakdown table, answer review) skills read "Measurement: perimeter", never `num.prod.measurement.perimeter`.
+4. **Untimed results (MT-004):** an untimed sitting says "No time limit — your time is recorded". It never says time
+   "ran out" or "was up", and never mentions the real assessment's time limit. A timed sitting still does.
+5. **AMC listings (MT-005):** Exam papers shows one AMC-style card per year, badged "Practice module — not a full-length
+   paper", with a line saying the full paper is not open yet. Practice lists "Australian Maths Competition" once.
+
 ## Reporting a problem
 
 Note the URL, the account (parent / which child), what you expected and what happened, plus a screenshot.

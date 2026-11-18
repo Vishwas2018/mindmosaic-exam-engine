@@ -18,6 +18,7 @@ import { formatCorrectAnswer, formatResponse } from "@/features/exam-engine/comp
 import { useExamStore } from "@/features/exam-engine/state";
 
 import { ResultsColdLoad } from "../ResultsColdLoad";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 export default function ResultsReviewPage() {
   const router = useRouter();
@@ -150,7 +151,7 @@ export default function ResultsReviewPage() {
                             Q{reviewQuestions.indexOf(question) + 1}
                           </span>
                           <span className="text-xs font-semibold text-plum-muted">
-                            {question.metadata.topic ?? "Question"}
+                            {question.metadata.topic ? skillLabel(question.metadata.topic) : "Question"}
                           </span>
                           <span className="ml-auto text-xs font-semibold tabular-nums text-plum-muted">
                             {detail?.awardedMarks ?? 0}/{detail?.availableMarks ?? 0} marks

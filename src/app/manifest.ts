@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "MindMosaic — thoughtful practice, real progress",
     short_name: "MindMosaic",
     description:
-      "Premium, original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice built for confident learners.",
+      "Premium, original Grade 3 and Grade 5 practice in NAPLAN-style and other assessment formats, built for confident learners.",
     start_url: "/",
     display: "standalone",
     theme_color: "#5925a8",
