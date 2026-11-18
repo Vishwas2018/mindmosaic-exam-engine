@@ -25,6 +25,7 @@ import {
 import { getMappedQuestionIdsForNode } from "@/features/curriculum/lessons/alignments";
 import type { CandidateQuestion } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 interface ServerPracticeSessionPayload {
   ok: boolean;
@@ -314,7 +315,7 @@ function PracticeSkillSessionContent() {
               title="There aren't enough published questions for this skill yet"
               description={`Only ${drillResult.eligibleCount} eligible published question${
                 drillResult.eligibleCount === 1 ? "" : "s"
-              } found for ${launchRequest.skillOrTopic}; 5 are needed for a full practice drill.`}
+              } found for ${skillLabel(launchRequest.skillOrTopic)}; 5 are needed for a full practice drill.`}
               action={
                 <div className="flex flex-wrap gap-2.5">
                   <Link
@@ -413,7 +414,7 @@ function PracticeSkillSessionContent() {
     return (
       <PracticeSession
         questions={resolvedQuestions}
-        title={`Practise: ${launchRequest.skillOrTopic}`}
+        title={`Practise: ${skillLabel(launchRequest.skillOrTopic)}`}
         exitHref="/results"
         exitLabel="Back to results"
       />
@@ -510,7 +511,7 @@ function PracticeSkillSessionContent() {
   return (
     <PracticeSession
       questions={questions}
-      title={stdParams.skill ?? SUBJECT_LABELS[stdParams.subject]}
+      title={stdParams.skill ? skillLabel(stdParams.skill) : SUBJECT_LABELS[stdParams.subject]}
       exitHref="/student/learn"
       exitLabel="Back to Learn"
     />

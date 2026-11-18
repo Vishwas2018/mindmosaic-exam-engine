@@ -77,7 +77,9 @@ describe("Programmes", () => {
   it("shows the selected programme's confirmed coverage and its unconfirmed remainder", async () => {
     render(<Programmes />);
     await userEvent.click(within(tablist()).getByRole("tab", { name: /NAPLAN-style/ }));
-    expect(screen.getByText(/Years 3 and 5 \(Years 7 and 9 to be confirmed\)/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Years 3 and 5 \(Reading, Language Conventions and Years 7 and 9 to be confirmed\)/),
+    ).toBeInTheDocument();
   });
 
   /*
@@ -102,7 +104,7 @@ describe("Programmes", () => {
         await userEvent.click(screen.getByRole("button", { name: year }));
         expect(screen.queryByText(/In development — not available yet/)).not.toBeInTheDocument();
         expect(screen.queryByText(/Not available for/)).not.toBeInTheDocument();
-        expect(screen.getByText(/Some learning content is live for Years 3 and 5/)).toBeInTheDocument();
+        expect(screen.getByText(/Some content is open for Years 3 and 5/)).toBeInTheDocument();
       }
     });
 
@@ -126,17 +128,17 @@ describe("Programmes", () => {
   describe("a programme that is still in development", () => {
     it("says so in the tab instead of showing a category or coverage", async () => {
       render(<Programmes />);
-      const amcTab = within(tablist()).getByRole("tab", { name: /AMC-style/ });
-      expect(amcTab).toHaveTextContent("In development");
-      expect(amcTab).toHaveTextContent(/Planned: Years 3–12/);
-      expect(amcTab).not.toHaveTextContent("Competitions");
+      const icasTab = within(tablist()).getByRole("tab", { name: /ICAS-style/ });
+      expect(icasTab).toHaveTextContent("In development");
+      expect(icasTab).toHaveTextContent(/Planned: Years 3–5/);
+      expect(icasTab).not.toHaveTextContent("Assessments");
     });
 
     it("says it is unavailable at every year in its planned scope", async () => {
       render(<Programmes />);
-      await userEvent.click(within(tablist()).getByRole("tab", { name: /AMC-style/ }));
+      await userEvent.click(within(tablist()).getByRole("tab", { name: /ICAS-style/ }));
 
-      /* Year 5 is the default and sits inside AMC-style's planned 3-12. */
+      /* Year 5 is the default and sits inside ICAS-style's planned 3-5. */
       expect(screen.getByText(/In development — not available yet/)).toBeInTheDocument();
 
       await userEvent.click(screen.getByRole("button", { name: "Year 3" }));
@@ -165,14 +167,14 @@ describe("Programmes", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("still offers the practice entry point for a programme that is available", async () => {
+    it("offers no generic practice entry for a limited assessment programme (NAPLAN-style, AMC-style), only its own link", async () => {
       render(<Programmes />);
-      await userEvent.click(within(tablist()).getByRole("tab", { name: /NAPLAN-style/ }));
-
-      const panel = screen.getByRole("tabpanel");
-      expect(
-        within(panel).getByRole("link", { name: programmes.primaryCta.label }),
-      ).toBeInTheDocument();
+      for (const name of [/NAPLAN-style/, /AMC-style/]) {
+        await userEvent.click(within(tablist()).getByRole("tab", { name }));
+        const panel = screen.getByRole("tabpanel");
+        expect(within(panel).queryByRole("link", { name: programmes.primaryCta.label })).not.toBeInTheDocument();
+        expect(within(panel).getByRole("link", { name: /Explore exam preparation/ })).toBeInTheDocument();
+      }
     });
   });
 });

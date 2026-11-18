@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import type { SkillSummary } from "@/features/exam-engine/selection";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 import {
   ISOLABLE_SUBJECT_FILTERS,
   type SubjectFilter,
@@ -94,7 +95,7 @@ export function SkillBrowser({ skills }: { skills: readonly SkillSummary[] }) {
               className="flex h-full items-center justify-between gap-3 p-4 transition group-hover:border-mm-brand/25"
             >
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-mm-ink">{entry.skill}</p>
+                <p className="truncate text-sm font-semibold text-mm-ink">{skillLabel(entry.skill)}</p>
                 <p className="mt-0.5 text-xs font-semibold text-mm-ink-soft">
                   {SUBJECT_CHIP_LABELS[entry.subject]} · {entry.questionCount} question
                   {entry.questionCount === 1 ? "" : "s"}

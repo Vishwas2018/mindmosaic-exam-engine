@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { AppFooter } from "@/components/shell/AppFooter";
 import { AppHeader } from "@/components/shell/AppHeader";
-import { PROGRAMS } from "@/features/catalogue/catalogue";
+import { PROGRAMS, isListedInCatalogue } from "@/features/catalogue/catalogue";
 import { resolveProgramStatuses } from "@/features/taxonomy/coverage";
 import { ComingSoonPrograms } from "@/features/catalogue/components/ComingSoonPrograms";
 import { SubjectPlate } from "@/features/catalogue/components/SubjectPlate";
@@ -24,7 +24,7 @@ import { getBankEligibility } from "@/server/exam-bank";
 export const metadata: Metadata = {
   title: "Practice programs",
   description:
-    "Browse and start original Grade 3 and Grade 5 NAPLAN-style and ICAS-style practice without signing in. Sign in to save your progress and results.",
+    "Browse and start original Grade 3 and Grade 5 practice without signing in. Programs open as their reviewed questions are added. Sign in to save your progress and results.",
 };
 
 /*
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
  * page is a server component, so it resolves the real status first: a cell
  * goes live once its gated pool clears GATED_COVERAGE_THRESHOLD.
  */
-const RESOLVED_PROGRAMS = resolveProgramStatuses(PROGRAMS);
+const RESOLVED_PROGRAMS = resolveProgramStatuses(PROGRAMS.filter(isListedInCatalogue));
 
 const liveScopedPrograms = RESOLVED_PROGRAMS.filter(
   (program) => program.status === "live" && program.scope !== undefined,

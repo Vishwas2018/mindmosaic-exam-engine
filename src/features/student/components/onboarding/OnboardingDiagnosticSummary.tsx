@@ -3,6 +3,7 @@
 import { CheckCircle2, Sparkles, Trophy, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useOnboardingStore } from "@/features/student/onboarding/onboarding-store";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 export function OnboardingDiagnosticSummary({
   onFinish,
@@ -67,7 +68,7 @@ export function OnboardingDiagnosticSummary({
             {strengths.map((skill) => (
               <li key={skill.skill} className="flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span>{skill.strand}: <strong className="font-semibold">{skill.skill}</strong></span>
+                <span>{skill.strand}: <strong className="font-semibold">{skillLabel(skill.skill)}</strong></span>
               </li>
             ))}
           </ul>

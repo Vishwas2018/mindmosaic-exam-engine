@@ -45,6 +45,7 @@ import { PractiseMissedSkills } from "@/features/exam-engine/recommendation/Prac
 
 import { ResultsColdLoad } from "./ResultsColdLoad";
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 const STATUS_LABELS: Record<
   string,
@@ -111,7 +112,7 @@ const DIMENSION_LABELS: Record<string, string> = {
 };
 
 function dimensionLabel(key: string): string {
-  return DIMENSION_LABELS[key] ?? key;
+  return DIMENSION_LABELS[key] ?? skillLabel(key);
 }
 
 function BreakdownTable({
@@ -234,9 +235,11 @@ export default function ResultsPage() {
       label: "Time used",
       value: formatDuration(result.timeTakenSeconds),
       note:
-        result.submissionReason === "timer_expired"
-          ? "Time ran out — submitted automatically"
-          : "Submitted before time was up",
+        config.timing === "untimed"
+          ? "No time limit — your time is recorded"
+          : result.submissionReason === "timer_expired"
+            ? "Time ran out — submitted automatically"
+            : "Submitted before time was up",
       tone: "outline" as const,
     },
     {
@@ -383,7 +386,9 @@ export default function ResultsPage() {
               >
                 {config.shortened
                   ? `Practice module — ${result.totalQuestions} questions, not the full-length paper.`
-                  : "Full-length practice paper — the same number of questions and time limit as the real assessment."}
+                  : config.timing === "untimed"
+                    ? "Full-length practice paper — the same number of questions as the real assessment, sat without a time limit."
+                    : "Full-length practice paper — the same number of questions and time limit as the real assessment."}
               </p>
             )}
             <p className="mx-auto mt-1 max-w-2xl text-sm leading-6 text-plum-muted">{verdict.sub}</p>
@@ -716,7 +721,7 @@ export default function ResultsPage() {
                           <span className="capitalize">
                             {question.metadata.subject.replace("_", " ")}
                           </span>{" "}
-                          · {question.metadata.skill ?? question.metadata.topic} ·{" "}
+                          · {skillLabel(question.metadata.skill ?? question.metadata.topic)} ·{" "}
                           <span className="capitalize">{question.metadata.difficulty}</span>
                           {" · "}
                           {detail.pendingManualReview

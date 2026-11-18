@@ -91,7 +91,7 @@ describe("landing programme availability matches real coverage", () => {
   it("keeps the programmes with no content behind them marked in development", () => {
     const expectedInDevelopment = [
       "singapore-maths",
-      "amc-style",
+      "icas-style",
       "selective-entry-style",
       "learning-hub",
     ];
@@ -161,21 +161,18 @@ describe("landing programme availability matches real coverage", () => {
   it("holds the canonical status of all six Chapter 2 programmes", () => {
     const status = Object.fromEntries(programmes.items.map((item) => [item.id, item.status]));
     expect(status).toMatchObject({
-      "naplan-style": "available",
-      "icas-style": "available",
+      "naplan-style": "limited",
+      "icas-style": "in_development",
       "australian-curriculum": "limited",
-      "amc-style": "in_development",
+      "amc-style": "limited",
       "singapore-maths": "in_development",
       "selective-entry-style": "in_development",
     });
   });
 
-  it("keeps only the two assessment styles with a real bank marked available", () => {
-    const available = programmes.items
-      .filter((item) => item.status === "available")
-      .map((item) => item.id)
-      .sort();
-
-    expect(available).toEqual(["icas-style", "naplan-style"]);
-  });
+  /*
+   * Replaced: this used to pin NAPLAN-style and ICAS-style as the two "available" styles. Deployed builds serve
+   * approved content only, and under that gate no style has every subject open, so the statuses are held to the
+   * enforced readiness by programme-availability-alignment.test.ts instead of to a fixed list here.
+   */
 });
