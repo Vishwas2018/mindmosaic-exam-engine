@@ -6,6 +6,7 @@ import { SiteFooter } from "@/features/landing/components/Closing";
 import { mmButton } from "@/features/landing/components/primitives";
 import { SiteNav } from "@/features/landing/components/SiteNav";
 import { routes } from "@/features/landing/content";
+import { openBadge } from "@/features/landing/programme-badge";
 import { getProgrammeAvailability } from "@/features/landing/programme-status";
 
 import { ProgramYearToggle } from "./components/ProgramYearToggle";
@@ -82,7 +83,7 @@ export default async function ProgramDetailPage({
               <span aria-current="page">{family.short}</span>
             </nav>
             <span className="inline-flex w-fit items-center gap-1.5 rounded-lg bg-[#D9EFEC] px-2.5 py-1 text-[13px] font-semibold text-[#0B6B63]">
-              Available for Years 3 and 5
+              {openBadge(years)}
             </span>
             <h1 className="text-[clamp(38px,4.6vw,68px)] font-bold leading-[1.02] tracking-[-0.04em] text-mm-ink">
               {family.name}
