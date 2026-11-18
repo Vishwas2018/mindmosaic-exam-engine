@@ -1,0 +1,3068 @@
+{
+  "batchId": "vihaan-agy-06",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m061",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a class of 30 students, 18 walk to school. What percentage of the class walks to school?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40%"
+          },
+          {
+            "id": "b",
+            "text": "54%"
+          },
+          {
+            "id": "c",
+            "text": "65%"
+          },
+          {
+            "id": "d",
+            "text": "60%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Write as a fraction: 18/30 = 3/5. Convert to percentage: 3/5 * 100% = 60%.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Write as a fraction: 18/30 = 3/5.",
+        "Convert to percentage: 3/5 * 100% = 60%."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(18 / 30) * 100",
+        "expected": "60%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m062",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "After a 15% price increase, a bicycle costs $276. What was its original price in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "240"
+          },
+          {
+            "id": "b",
+            "text": "234.6"
+          },
+          {
+            "id": "c",
+            "text": "250"
+          },
+          {
+            "id": "d",
+            "text": "261"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The new price represents 115% of the original price. Divide by 1.15: 276 / 1.15 = $240.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "The new price represents 115% of the original price.",
+        "Divide by 1.15: 276 / 1.15 = $240."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "276 / 1.15",
+        "expected": "240"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m063",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The pie chart shows how 200 students travel to school: Bus 35%, Walk 25%, Car 20%, Bike 20%. How many more students take the bus than ride a bike?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "30"
+          },
+          {
+            "id": "c",
+            "text": "25"
+          },
+          {
+            "id": "d",
+            "text": "40"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "pie_m057",
+            "type": "pie_chart",
+            "altText": "Pie chart showing student travel modes: Bus 35, Walk 25, Car 20, Bike 20.",
+            "title": "School Travel Survey",
+            "data": {
+              "segments": [
+                {
+                  "label": "Bus",
+                  "value": 35
+                },
+                {
+                  "label": "Walk",
+                  "value": 25
+                },
+                {
+                  "label": "Car",
+                  "value": 20
+                },
+                {
+                  "label": "Bike",
+                  "value": 20
+                }
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Bus minus Bike = 35% - 20% = 15%. 15% of 200 = 0.15 * 200 = 30 students.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Bus minus Bike = 35% - 20% = 15%.",
+        "15% of 200 = 0.15 * 200 = 30 students."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "200 * (0.35 - 0.20)",
+        "expected": "30"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m064",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A town's population grew from 4000 to 4600 over five years. What was the percentage increase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12%"
+          },
+          {
+            "id": "b",
+            "text": "13%"
+          },
+          {
+            "id": "c",
+            "text": "15%"
+          },
+          {
+            "id": "d",
+            "text": "16%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Increase = 4600 - 4000 = 600. Percentage increase = (600 / 4000) * 100% = 15%.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Increase = 4600 - 4000 = 600.",
+        "Percentage increase = (600 / 4000) * 100% = 15%."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "((4600 - 4000) / 4000) * 100",
+        "expected": "15%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m065",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shopkeeper buys a lamp for $64 and sells it for $80. What is the percentage profit based on the cost price?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16%"
+          },
+          {
+            "id": "b",
+            "text": "20%"
+          },
+          {
+            "id": "c",
+            "text": "30%"
+          },
+          {
+            "id": "d",
+            "text": "25%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Profit = 80 - 64 = $16. Percentage profit = (16 / 64) * 100% = 25%.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Profit = 80 - 64 = $16.",
+        "Percentage profit = (16 / 64) * 100% = 25%."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "((80 - 64) / 64) * 100",
+        "expected": "25%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m066",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A school library holds 160 science books, and 12.5% of them are astronomy titles. How many astronomy titles are in the library?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "16"
+          },
+          {
+            "id": "c",
+            "text": "24"
+          },
+          {
+            "id": "d",
+            "text": "25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Recognise 12.5% = 1/8. 160 / 8 = 20.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Recognise 12.5% = 1/8.",
+        "160 / 8 = 20."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "0.125 * 160",
+        "expected": "20"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m067",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 30% of a number is 54, what is 45% of that same number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "72"
+          },
+          {
+            "id": "b",
+            "text": "81"
+          },
+          {
+            "id": "c",
+            "text": "90"
+          },
+          {
+            "id": "d",
+            "text": "108"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "10% of the number is 54 / 3 = 18, so the number is 180. 45% is 1.5 times 30%: 54 * 1.5 = 81.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "10% of the number is 54 / 3 = 18, so the number is 180.",
+        "45% is 1.5 times 30%: 54 * 1.5 = 81."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(54 / 0.30) * 0.45",
+        "expected": "81"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m068",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A 400 mL bottle of cordial is 15% pure juice and the rest is water. How many millilitres of water are in the bottle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "60"
+          },
+          {
+            "id": "b",
+            "text": "320"
+          },
+          {
+            "id": "c",
+            "text": "340"
+          },
+          {
+            "id": "d",
+            "text": "360"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Water makes up 100% - 15% = 85%. 85% of 400 = 0.85 * 400 = 340 mL.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Water makes up 100% - 15% = 85%.",
+        "85% of 400 = 0.85 * 400 = 340 mL."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "400 * (1 - 0.15)",
+        "expected": "340"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m069",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A laptop is discounted by 20%, and then a further 10% is taken off the sale price at checkout. What single percentage discount is this equivalent to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "25%"
+          },
+          {
+            "id": "b",
+            "text": "30%"
+          },
+          {
+            "id": "c",
+            "text": "32%"
+          },
+          {
+            "id": "d",
+            "text": "28%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Start at 100%: after 20% off, 80% remains. After a further 10% off 80%, 0.9 * 80% = 72% remains. Total discount = 100% - 72% = 28%.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Start at 100%: after 20% off, 80% remains. After a further 10% off 80%, 0.9 * 80% = 72% remains.",
+        "Total discount = 100% - 72% = 28%."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(1 - 0.8 * 0.9) * 100",
+        "expected": "28%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m070",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a science test, 60% of the 50 questions were biology and the rest were chemistry. Zara answered 80% of the biology questions correctly and 50% of the chemistry questions correctly. What percentage of the whole test did she answer correctly?",
+        "options": [
+          {
+            "id": "a",
+            "text": "68%"
+          },
+          {
+            "id": "b",
+            "text": "65%"
+          },
+          {
+            "id": "c",
+            "text": "70%"
+          },
+          {
+            "id": "d",
+            "text": "72%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Biology: 60% of 50 = 30 questions; correct = 0.8 * 30 = 24. Chemistry: 20 questions; correct = 0.5 * 20 = 10. Total correct = 34 out of 50, which is 68%.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Biology: 60% of 50 = 30 questions; correct = 0.8 * 30 = 24. Chemistry: 20 questions; correct = 0.5 * 20 = 10.",
+        "Total correct = 34 out of 50, which is 68%."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "((30 * 0.8 + 20 * 0.5) / 50) * 100",
+        "expected": "68%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m071",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rectangle's length is increased by 20% and its width is decreased by 20%. What is the percentage change in its area?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0%"
+          },
+          {
+            "id": "b",
+            "text": "-4%"
+          },
+          {
+            "id": "c",
+            "text": "-2%"
+          },
+          {
+            "id": "d",
+            "text": "4%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "New area factor = 1.20 * 0.80 = 0.96. 0.96 - 1 = -0.04, which is a 4% decrease (-4%).",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "New area factor = 1.20 * 0.80 = 0.96.",
+        "0.96 - 1 = -0.04, which is a 4% decrease (-4%)."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(1.2 * 0.8 - 1) * 100",
+        "expected": "-4%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m072",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "An investor's shares rose by 25% in Year 1 and fell by 20% in Year 2. If the final value is $6000, what was the initial investment in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5760"
+          },
+          {
+            "id": "b",
+            "text": "6240"
+          },
+          {
+            "id": "c",
+            "text": "6000"
+          },
+          {
+            "id": "d",
+            "text": "6500"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Combined factor = 1.25 * 0.80 = 1.00. The value returned to 100% of the original, so the initial investment was $6000.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Combined factor = 1.25 * 0.80 = 1.00.",
+        "The value returned to 100% of the original, so the initial investment was $6000."
+      ],
+      "reviewFocus": [
+        "Check percentage base (original vs new) carefully."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "6000 / (1.25 * 0.80)",
+        "expected": "6000"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n061",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four consecutive odd numbers have a sum of 80. What is the smallest of the four numbers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The average is 80 / 4 = 20, so the four odd numbers are 17, 19, 21 and 23. The smallest is 17.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "The average is 80 / 4 = 20, so the four odd numbers are 17, 19, 21 and 23.",
+        "The smallest is 17."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "80 / 4 - 3",
+        "expected": "17"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n062",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a 31-day month, there are five Fridays, five Saturdays and five Sundays. On what date of the month does the first Saturday fall?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "2"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Days 1, 2 and 3 repeat 5 times in a 31-day month (1, 8, 15, 22, 29; 2, 9, 16, 23, 30; 3, 10, 17, 24, 31). Those three consecutive days must be Friday (1st), Saturday (2nd) and Sunday (3rd), so the first Saturday is the 2nd.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Days 1, 2 and 3 repeat 5 times in a 31-day month (1, 8, 15, 22, 29; 2, 9, 16, 23, 30; 3, 10, 17, 24, 31).",
+        "Those three consecutive days must be Friday (1st), Saturday (2nd) and Sunday (3rd), so the first Saturday is the 2nd."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2",
+        "expected": "2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n063",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How many 2-digit numbers have the tens digit strictly greater than the units digit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "40"
+          },
+          {
+            "id": "c",
+            "text": "45"
+          },
+          {
+            "id": "d",
+            "text": "50"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "For tens digit k (1 to 9), there are k choices for the units digit (0 to k-1). Sum 1 + 2 + ... + 9 = 45.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "For tens digit k (1 to 9), there are k choices for the units digit (0 to k-1).",
+        "Sum 1 + 2 + ... + 9 = 45."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1",
+        "expected": "45"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n064",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bag of lollies can be shared equally among 4 children with 3 left over, or among 5 children with 3 left over. What is the smallest number of lollies greater than 10?",
+        "options": [
+          {
+            "id": "a",
+            "text": "19"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "43"
+          },
+          {
+            "id": "d",
+            "text": "23"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The count minus 3 is divisible by both 4 and 5, so it is a multiple of LCM(4, 5) = 20. 20 + 3 = 23.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "The count minus 3 is divisible by both 4 and 5, so it is a multiple of LCM(4, 5) = 20.",
+        "20 + 3 = 23."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "20 + 3",
+        "expected": "23"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n065",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the units (ones) digit of 7 ** 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "7¹=7, 7²=49 (ends in 9), 7³=343 (ends in 3), 7⁴=2401 (ends in 1). The units digit is 1.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "7¹=7, 7²=49 (ends in 9), 7³=343 (ends in 3), 7⁴=2401 (ends in 1).",
+        "The units digit is 1."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(7 ** 4) % 10",
+        "expected": "1"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n066",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A balance scale holds 3 identical cubes on the left, and 1 cube plus a 140 g weight on the right. The scale is level. What is the mass of one cube in grams?",
+        "options": [
+          {
+            "id": "a",
+            "text": "35"
+          },
+          {
+            "id": "b",
+            "text": "70"
+          },
+          {
+            "id": "c",
+            "text": "45"
+          },
+          {
+            "id": "d",
+            "text": "140"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Remove 1 cube from each side: 2 cubes balance 140 g. One cube weighs 140 / 2 = 70 g.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Remove 1 cube from each side: 2 cubes balance 140 g.",
+        "One cube weighs 140 / 2 = 70 g."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "140 / (3 - 1)",
+        "expected": "70"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n067",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a 4-digit number ABCD, A is 3 times D, B is A - 2, and C is D + 1. If the sum of all four digits is 15, what is the 4-digit number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3121"
+          },
+          {
+            "id": "b",
+            "text": "6342"
+          },
+          {
+            "id": "c",
+            "text": "6432"
+          },
+          {
+            "id": "d",
+            "text": "9743"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Write digits in terms of D: 3D + (3D - 2) + (D + 1) + D = 8D - 1 = 15. 8D = 16 gives D = 2, so A = 6, B = 4, C = 3, forming 6432.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Write digits in terms of D: 3D + (3D - 2) + (D + 1) + D = 8D - 1 = 15.",
+        "8D = 16 gives D = 2, so A = 6, B = 4, C = 3, forming 6432."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "6432",
+        "expected": "6432"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n068",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How many integers from 1 to 100 inclusive contain the digit 7 at least once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "21"
+          },
+          {
+            "id": "d",
+            "text": "19"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Ten numbers end in 7 (7, 17, ..., 97) and ten numbers start with 7 (70..79). Subtract 77 once because it was counted twice: 10 + 10 - 1 = 19.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Ten numbers end in 7 (7, 17, ..., 97) and ten numbers start with 7 (70..79).",
+        "Subtract 77 once because it was counted twice: 10 + 10 - 1 = 19."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "10 + 10 - 1",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n069",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A palindrome reads the same forwards and backwards, such as 242. How many 3-digit palindromes are divisible by 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10"
+          },
+          {
+            "id": "b",
+            "text": "9"
+          },
+          {
+            "id": "c",
+            "text": "18"
+          },
+          {
+            "id": "d",
+            "text": "20"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "A 3-digit palindrome has the form ABA. To be divisible by 5 (with A nonzero), the outer digit A must be 5. The middle digit B can be any digit from 0 to 9, giving 10 palindromes (505, 515, ..., 595).",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "A 3-digit palindrome has the form ABA. To be divisible by 5 (with A nonzero), the outer digit A must be 5.",
+        "The middle digit B can be any digit from 0 to 9, giving 10 palindromes (505, 515, ..., 595)."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "10",
+        "expected": "10"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n070",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "When a positive integer is divided by 7, the remainder is 4. What is the remainder when 3 times that integer is divided by 7?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "5"
+          },
+          {
+            "id": "c",
+            "text": "4"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Let the number be 7k + 4. Then 3(7k + 4) = 21k + 12. 21k is divisible by 7, and 12 = 7 + 5 leaves a remainder of 5.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Let the number be 7k + 4. Then 3(7k + 4) = 21k + 12.",
+        "21k is divisible by 7, and 12 = 7 + 5 leaves a remainder of 5."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(3 * 4) % 7",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n071",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Five people in a room each shake hands with every other person exactly once. How many handshakes occur in total?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Each of the 5 people shakes hands with 4 others, counting each handshake twice. (5 * 4) / 2 = 10 handshakes.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Each of the 5 people shakes hands with 4 others, counting each handshake twice.",
+        "(5 * 4) / 2 = 10 handshakes."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "5 * 4 / 2",
+        "expected": "10"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n072",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the units digit of 3 ** 21?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Units digits of powers of 3 cycle every 4: 3, 9, 7, 1. 21 = 4 * 5 + 1, so the units digit matches 3¹ = 3.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Units digits of powers of 3 cycle every 4: 3, 9, 7, 1.",
+        "21 = 4 * 5 + 1, so the units digit matches 3¹ = 3."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(3 ** 21) % 10",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v061",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "All members of the Robotics Club know Python. Some Year 6 students are members of the Robotics Club. Which conclusion MUST follow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "All Year 6 students know Python."
+          },
+          {
+            "id": "b",
+            "text": "All Python programmers are in the Robotics Club."
+          },
+          {
+            "id": "c",
+            "text": "No Year 5 students know Python."
+          },
+          {
+            "id": "d",
+            "text": "Some Year 6 students know Python."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The Year 6 students who are in the Robotics Club must satisfy the club rule. Therefore, at least some Year 6 students know Python.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "The Year 6 students who are in the Robotics Club must satisfy the club rule.",
+        "Therefore, at least some Year 6 students know Python."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v062",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four runners finished a race. Ava beat Ben. Chloe finished behind Ben but ahead of Dan. Who finished last?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Dan"
+          },
+          {
+            "id": "b",
+            "text": "Ava"
+          },
+          {
+            "id": "c",
+            "text": "Ben"
+          },
+          {
+            "id": "d",
+            "text": "Chloe"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Order from 1st to 4th: Ava, Ben, Chloe, Dan. Dan finished 4th (last).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Order from 1st to 4th: Ava, Ben, Chloe, Dan.",
+        "Dan finished 4th (last)."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v063",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "No reptiles have fur. Every gecko is a reptile. Which statement MUST be true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Some geckos have fur."
+          },
+          {
+            "id": "b",
+            "text": "No gecko has fur."
+          },
+          {
+            "id": "c",
+            "text": "All animals without fur are reptiles."
+          },
+          {
+            "id": "d",
+            "text": "Every reptile is a gecko."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "If all geckos are reptiles and no reptiles have fur, then no gecko can have fur. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "If all geckos are reptiles and no reptiles have fur, then no gecko can have fur.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v064",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Either the library is open or the study room is unlocked. The library is closed today. What must be true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both rooms are closed."
+          },
+          {
+            "id": "b",
+            "text": "The study room is locked."
+          },
+          {
+            "id": "c",
+            "text": "The study room is unlocked."
+          },
+          {
+            "id": "d",
+            "text": "The library will open tomorrow."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "In an 'either A or B' statement, if A is false, B must be true. Since the library is closed, the study room is unlocked.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "In an 'either A or B' statement, if A is false, B must be true.",
+        "Since the library is closed, the study room is unlocked."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v065",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Five houses stand in a row from left to right. The blue house is next to the green house. The red house is at the far right. The yellow house is to the immediate left of the red house, and the white house is at the far left. Which house is in the exact middle (3rd)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The yellow house"
+          },
+          {
+            "id": "b",
+            "text": "The white house"
+          },
+          {
+            "id": "c",
+            "text": "The red house"
+          },
+          {
+            "id": "d",
+            "text": "Either the blue or the green house"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Positions: 1=White, 4=Yellow, 5=Red. Positions 2 and 3 hold Blue and Green. So the 3rd (middle) house must be either the blue or the green house.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Positions: 1=White, 4=Yellow, 5=Red. Positions 2 and 3 hold Blue and Green.",
+        "So the 3rd (middle) house must be either the blue or the green house."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v066",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "All musicians in the orchestra read sheet music. Leo does not read sheet music. What can be concluded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leo is not a musician in the orchestra."
+          },
+          {
+            "id": "b",
+            "text": "Leo plays a percussion instrument."
+          },
+          {
+            "id": "c",
+            "text": "Leo is learning to read music."
+          },
+          {
+            "id": "d",
+            "text": "No one in the orchestra sings."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Contrapositive: if Orchestra Musician → Reads Sheet Music, then Does Not Read Sheet Music → Not an Orchestra Musician. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Contrapositive: if Orchestra Musician → Reads Sheet Music, then Does Not Read Sheet Music → Not an Orchestra Musician.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v067",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A sign on a gate reads: 'Entry is permitted only to badge holders.' Which situation violates this rule?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A badge holder decides not to enter."
+          },
+          {
+            "id": "b",
+            "text": "A person without a badge enters through the gate."
+          },
+          {
+            "id": "c",
+            "text": "A badge holder enters through the gate."
+          },
+          {
+            "id": "d",
+            "text": "A person without a badge stays outside."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "'Only to badge holders' means no one without a badge may enter. If a non-badge-holder enters, the rule is broken.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "'Only to badge holders' means no one without a badge may enter.",
+        "If a non-badge-holder enters, the rule is broken."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v068",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a logic puzzle, three boxes are labelled 'Apples', 'Oranges', and 'Mixed'. Every single label is WRONG. You may pick one fruit from one box without looking inside. Which box should you pick from to identify all three boxes with certainty?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The box labelled 'Apples'"
+          },
+          {
+            "id": "b",
+            "text": "The box labelled 'Oranges'"
+          },
+          {
+            "id": "c",
+            "text": "The box labelled 'Mixed'"
+          },
+          {
+            "id": "d",
+            "text": "It is impossible with only one pick"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Because 'Mixed' is wrong, that box contains either all Apples or all Oranges. If you draw an Apple from 'Mixed', it must be Apples; then 'Oranges' (cannot be Oranges or Apples) must be Mixed, and 'Apples' must be Oranges.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Because 'Mixed' is wrong, that box contains either all Apples or all Oranges.",
+        "If you draw an Apple from 'Mixed', it must be Apples; then 'Oranges' (cannot be Oranges or Apples) must be Mixed, and 'Apples' must be Oranges."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v069",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three siblings — Priya, Quinn and Rohan — each ate one different snack: apple, banana or muffin. Quinn ate neither the apple nor the banana, and Rohan did not eat the apple. What did Priya eat?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Banana"
+          },
+          {
+            "id": "b",
+            "text": "Muffin"
+          },
+          {
+            "id": "c",
+            "text": "Cannot be determined"
+          },
+          {
+            "id": "d",
+            "text": "Apple"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Since Quinn ate neither apple nor banana, Quinn ate the muffin. Since Rohan did not eat the apple (and muffin is taken), Rohan ate the banana, leaving the apple for Priya.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Since Quinn ate neither apple nor banana, Quinn ate the muffin.",
+        "Since Rohan did not eat the apple (and muffin is taken), Rohan ate the banana, leaving the apple for Priya."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v070",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Statement: 'Every student who submits the project early receives bonus marks.' Which observation would DISPROVE this statement?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A student submits the project early and receives no bonus marks."
+          },
+          {
+            "id": "b",
+            "text": "A student submits on time and receives bonus marks."
+          },
+          {
+            "id": "c",
+            "text": "A student submits late and receives no bonus marks."
+          },
+          {
+            "id": "d",
+            "text": "Two students submit early and both receive bonus marks."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "An 'Every A is B' claim is disproved by a single counterexample of A without B. Submitting early (A) without receiving bonus marks (not B) disproves it.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "An 'Every A is B' claim is disproved by a single counterexample of A without B.",
+        "Submitting early (A) without receiving bonus marks (not B) disproves it."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v071",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "On an island, Knights always tell the truth and Knaves always lie. You meet two islanders, X and Y. X says: 'At least one of us is a Knave.' What are X and Y?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both X and Y are Knights."
+          },
+          {
+            "id": "b",
+            "text": "X is a Knight and Y is a Knave."
+          },
+          {
+            "id": "c",
+            "text": "Both X and Y are Knaves."
+          },
+          {
+            "id": "d",
+            "text": "X is a Knave and Y is a Knight."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "If X were a Knave, X's statement 'at least one is a Knave' would be true — impossible for a Knave. So X is a Knight (telling the truth), which forces Y to be the Knave.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "If X were a Knave, X's statement 'at least one is a Knave' would be true — impossible for a Knave.",
+        "So X is a Knight (telling the truth), which forces Y to be the Knave."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v072",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If the alarm sounds, either the front sensor or the back sensor was triggered. The alarm sounded, and the front sensor was NOT triggered. What must be true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both sensors were triggered."
+          },
+          {
+            "id": "b",
+            "text": "The alarm malfunctioned."
+          },
+          {
+            "id": "c",
+            "text": "The back sensor was triggered."
+          },
+          {
+            "id": "d",
+            "text": "Neither sensor was triggered."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Since the alarm sounded, at least one sensor was triggered. Ruling out the front sensor leaves only the back sensor.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Since the alarm sounded, at least one sensor was triggered.",
+        "Ruling out the front sensor leaves only the back sensor."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r051",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What was the narrator allowed to practise during the first month?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fast folk dances for a school concert"
+          },
+          {
+            "id": "b",
+            "text": "Popular film themes with the school band"
+          },
+          {
+            "id": "c",
+            "text": "Long, slow open strings while watching the bow in a mirror"
+          },
+          {
+            "id": "d",
+            "text": "Memorising three concertos without sheet music"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The narrator says: 'For the first month, I was not allowed to play a single tune—only long, slow open strings.' Exam technique: verify 'Long, slow open strings while watching the bow in a mirror' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 135,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Scratchy C-String",
+          "body": "On the Tuesday I brought home my rented three-quarter violin, I imagined I would sound like a concert soloist by Friday. Instead, my first draw of the bow produced a sound somewhere between a rusty gate and an indignant magpie. My teacher, Mrs Kovács, did not wince. She simply tapped the music stand with her pencil and said, 'Good. You made a sound. Now let us teach your right elbow to breathe.' For the first month, I was not allowed to play a single tune—only long, slow open strings while watching my bow hair track parallel to the bridge in a full-length mirror. It felt absurdly slow when my friends in band were already marching through film themes. Yet six months later, when we finally tackled a crisp folk dance, my bow stayed steady while faster learners skidded across the strings. Looking back, Mrs Kovács's stubbornness taught me something larger than music: rushing past the foundations only borrows speed you will have to pay back later.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The narrator says: 'For the first month, I was not allowed to play a single tune—only long, slow open strings.'",
+        "Exam technique: verify 'Long, slow open strings while watching the bow in a mirror' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r052",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What did Mrs Kovács mean by 'teach your right elbow to breathe'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hold the violin close to the mouth while playing."
+          },
+          {
+            "id": "b",
+            "text": "Play as loudly as possible on every stroke."
+          },
+          {
+            "id": "c",
+            "text": "Stop practising whenever you feel out of breath."
+          },
+          {
+            "id": "d",
+            "text": "Move the bowing arm smoothly and without stiff tension."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "'Breathe' is a metaphor for relaxed, fluid arm movement rather than stiff sawing. Exam technique: verify 'Move the bowing arm smoothly and without stiff tension.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "The Scratchy C-String",
+          "body": "On the Tuesday I brought home my rented three-quarter violin, I imagined I would sound like a concert soloist by Friday. Instead, my first draw of the bow produced a sound somewhere between a rusty gate and an indignant magpie. My teacher, Mrs Kovács, did not wince. She simply tapped the music stand with her pencil and said, 'Good. You made a sound. Now let us teach your right elbow to breathe.' For the first month, I was not allowed to play a single tune—only long, slow open strings while watching my bow hair track parallel to the bridge in a full-length mirror. It felt absurdly slow when my friends in band were already marching through film themes. Yet six months later, when we finally tackled a crisp folk dance, my bow stayed steady while faster learners skidded across the strings. Looking back, Mrs Kovács's stubbornness taught me something larger than music: rushing past the foundations only borrows speed you will have to pay back later.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Breathe' is a metaphor for relaxed, fluid arm movement rather than stiff sawing.",
+        "Exam technique: verify 'Move the bowing arm smoothly and without stiff tension.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r053",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why didn't Mrs Kovács wince at the narrator's scratchy first note?",
+        "options": [
+          {
+            "id": "a",
+            "text": "She expected a beginner's rough sound and focused on building steady technique first."
+          },
+          {
+            "id": "b",
+            "text": "She could not hear the violin clearly."
+          },
+          {
+            "id": "c",
+            "text": "She wanted the narrator to quit before Friday."
+          },
+          {
+            "id": "d",
+            "text": "She thought the sound was already concert quality."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Her calm 'Good. You made a sound' shows experienced patience with beginners. Exam technique: verify 'She expected a beginner's rough sound and focused on building steady technique first.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-character-inference"
+        },
+        "stimulus": {
+          "title": "The Scratchy C-String",
+          "body": "On the Tuesday I brought home my rented three-quarter violin, I imagined I would sound like a concert soloist by Friday. Instead, my first draw of the bow produced a sound somewhere between a rusty gate and an indignant magpie. My teacher, Mrs Kovács, did not wince. She simply tapped the music stand with her pencil and said, 'Good. You made a sound. Now let us teach your right elbow to breathe.' For the first month, I was not allowed to play a single tune—only long, slow open strings while watching my bow hair track parallel to the bridge in a full-length mirror. It felt absurdly slow when my friends in band were already marching through film themes. Yet six months later, when we finally tackled a crisp folk dance, my bow stayed steady while faster learners skidded across the strings. Looking back, Mrs Kovács's stubbornness taught me something larger than music: rushing past the foundations only borrows speed you will have to pay back later.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Her calm 'Good. You made a sound' shows experienced patience with beginners.",
+        "Exam technique: verify 'She expected a beginner's rough sound and focused on building steady technique first.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r054",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the meaning of the final sentence: 'rushing past the foundations only borrows speed you will have to pay back later'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Borrowing a rented violin is more expensive than buying one."
+          },
+          {
+            "id": "b",
+            "text": "Skipping basic skills may seem faster at first, but weak habits eventually slow you down."
+          },
+          {
+            "id": "c",
+            "text": "Practising slowly makes you forget how to read music."
+          },
+          {
+            "id": "d",
+            "text": "Fast music should never be played by beginners."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The narrator's steady bow six months later proved that patient fundamentals pay off. Exam technique: verify 'Skipping basic skills may seem faster at first, but weak habits eventually slow you down.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "The Scratchy C-String",
+          "body": "On the Tuesday I brought home my rented three-quarter violin, I imagined I would sound like a concert soloist by Friday. Instead, my first draw of the bow produced a sound somewhere between a rusty gate and an indignant magpie. My teacher, Mrs Kovács, did not wince. She simply tapped the music stand with her pencil and said, 'Good. You made a sound. Now let us teach your right elbow to breathe.' For the first month, I was not allowed to play a single tune—only long, slow open strings while watching my bow hair track parallel to the bridge in a full-length mirror. It felt absurdly slow when my friends in band were already marching through film themes. Yet six months later, when we finally tackled a crisp folk dance, my bow stayed steady while faster learners skidded across the strings. Looking back, Mrs Kovács's stubbornness taught me something larger than music: rushing past the foundations only borrows speed you will have to pay back later.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The narrator's steady bow six months later proved that patient fundamentals pay off.",
+        "Exam technique: verify 'Skipping basic skills may seem faster at first, but weak habits eventually slow you down.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r055",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the narrator's attitude change from the beginning to the end of the passage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "From terrified to bored"
+          },
+          {
+            "id": "b",
+            "text": "From confident to resentful toward Mrs Kovács"
+          },
+          {
+            "id": "c",
+            "text": "From impatient and frustrated to appreciative and reflective"
+          },
+          {
+            "id": "d",
+            "text": "From uninterested to competitive"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Early impatience ('felt absurdly slow') transforms into retrospective gratitude ('Looking back, Mrs Kovács's stubbornness taught me...'). Exam technique: verify 'From impatient and frustrated to appreciative and reflective' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-tone-analysis"
+        },
+        "stimulus": {
+          "title": "The Scratchy C-String",
+          "body": "On the Tuesday I brought home my rented three-quarter violin, I imagined I would sound like a concert soloist by Friday. Instead, my first draw of the bow produced a sound somewhere between a rusty gate and an indignant magpie. My teacher, Mrs Kovács, did not wince. She simply tapped the music stand with her pencil and said, 'Good. You made a sound. Now let us teach your right elbow to breathe.' For the first month, I was not allowed to play a single tune—only long, slow open strings while watching my bow hair track parallel to the bridge in a full-length mirror. It felt absurdly slow when my friends in band were already marching through film themes. Yet six months later, when we finally tackled a crisp folk dance, my bow stayed steady while faster learners skidded across the strings. Looking back, Mrs Kovács's stubbornness taught me something larger than music: rushing past the foundations only borrows speed you will have to pay back later.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Early impatience ('felt absurdly slow') transforms into retrospective gratitude ('Looking back, Mrs Kovács's stubbornness taught me...').",
+        "Exam technique: verify 'From impatient and frustrated to appreciative and reflective' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r056",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What item was missing from the sports shed on Monday morning?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A set of new mountain bikes"
+          },
+          {
+            "id": "b",
+            "text": "Mr Henderson's whistle lanyard"
+          },
+          {
+            "id": "c",
+            "text": "Several digital stopwatches"
+          },
+          {
+            "id": "d",
+            "text": "An antique brass compass"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The passage states 'the antique brass compass ... was gone from its velvet box.' Exam technique: verify 'An antique brass compass' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Missing Brass Compass",
+          "body": "When the Year 6 orienteering trophies were packed into the sports shed on Friday afternoon, Mr Henderson locked the padlock and slipped the key into his whistle lanyard. By Monday morning, the padlock hung open, and the antique brass compass donated by the local bushwalking club was gone from its velvet box. Yet nothing else had been touched—not the new mountain bikes, not the cricket kits, not even the digital stopwatches. Sienna, who was helping Mr Henderson sweep the gravel path outside, noticed two faint, muddy footprints leading away from the shed door toward the oval. Beside the second print lay a small, torn corner of blue-lined graph paper with the numbers '045° — 32 paces' scribbled in pencil. Sienna frowned. No burglar chasing valuable equipment would leave behind mountain bikes and stopwatches just to take a compass—and then pace out bearings across the school oval.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage states 'the antique brass compass ... was gone from its velvet box.'",
+        "Exam technique: verify 'An antique brass compass' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r057",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why did Sienna doubt that an ordinary thief broke into the shed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Valuable bikes and stopwatches were left untouched, and someone was using bearings on the oval."
+          },
+          {
+            "id": "b",
+            "text": "The padlock had been broken with a heavy hammer."
+          },
+          {
+            "id": "c",
+            "text": "There were no footprints anywhere near the shed."
+          },
+          {
+            "id": "d",
+            "text": "Mr Henderson admitted he had lost the compass at home."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Sienna reasoned no burglar would ignore bikes and stopwatches just to take a compass and pace bearings. Exam technique: verify 'Valuable bikes and stopwatches were left untouched, and someone was using bearings on the oval.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "The Missing Brass Compass",
+          "body": "When the Year 6 orienteering trophies were packed into the sports shed on Friday afternoon, Mr Henderson locked the padlock and slipped the key into his whistle lanyard. By Monday morning, the padlock hung open, and the antique brass compass donated by the local bushwalking club was gone from its velvet box. Yet nothing else had been touched—not the new mountain bikes, not the cricket kits, not even the digital stopwatches. Sienna, who was helping Mr Henderson sweep the gravel path outside, noticed two faint, muddy footprints leading away from the shed door toward the oval. Beside the second print lay a small, torn corner of blue-lined graph paper with the numbers '045° — 32 paces' scribbled in pencil. Sienna frowned. No burglar chasing valuable equipment would leave behind mountain bikes and stopwatches just to take a compass—and then pace out bearings across the school oval.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Sienna reasoned no burglar would ignore bikes and stopwatches just to take a compass and pace bearings.",
+        "Exam technique: verify 'Valuable bikes and stopwatches were left untouched, and someone was using bearings on the oval.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r058",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does the note '045° — 32 paces' suggest the person was doing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Calculating the price of the brass compass"
+          },
+          {
+            "id": "b",
+            "text": "Following a compass bearing (northeast) for a set distance across the oval"
+          },
+          {
+            "id": "c",
+            "text": "Writing down a locker combination"
+          },
+          {
+            "id": "d",
+            "text": "Measuring the height of the sports shed"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "'045°' is a compass bearing in degrees, and '32 paces' is a measured walking distance. Exam technique: verify 'Following a compass bearing (northeast) for a set distance across the oval' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "The Missing Brass Compass",
+          "body": "When the Year 6 orienteering trophies were packed into the sports shed on Friday afternoon, Mr Henderson locked the padlock and slipped the key into his whistle lanyard. By Monday morning, the padlock hung open, and the antique brass compass donated by the local bushwalking club was gone from its velvet box. Yet nothing else had been touched—not the new mountain bikes, not the cricket kits, not even the digital stopwatches. Sienna, who was helping Mr Henderson sweep the gravel path outside, noticed two faint, muddy footprints leading away from the shed door toward the oval. Beside the second print lay a small, torn corner of blue-lined graph paper with the numbers '045° — 32 paces' scribbled in pencil. Sienna frowned. No burglar chasing valuable equipment would leave behind mountain bikes and stopwatches just to take a compass—and then pace out bearings across the school oval.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'045°' is a compass bearing in degrees, and '32 paces' is a measured walking distance.",
+        "Exam technique: verify 'Following a compass bearing (northeast) for a set distance across the oval' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r059",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the author create curiosity at the end of the passage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By listing every piece of cricket equipment in the shed."
+          },
+          {
+            "id": "b",
+            "text": "By describing the weather on Friday afternoon."
+          },
+          {
+            "id": "c",
+            "text": "By ending on Sienna's puzzling deduction rather than immediately revealing who took the compass."
+          },
+          {
+            "id": "d",
+            "text": "By explaining how padlocks are manufactured."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Ending on an unexplained clue ('pace out bearings across the school oval') hooks the reader into the mystery. Exam technique: verify 'By ending on Sienna's puzzling deduction rather than immediately revealing who took the compass.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "The Missing Brass Compass",
+          "body": "When the Year 6 orienteering trophies were packed into the sports shed on Friday afternoon, Mr Henderson locked the padlock and slipped the key into his whistle lanyard. By Monday morning, the padlock hung open, and the antique brass compass donated by the local bushwalking club was gone from its velvet box. Yet nothing else had been touched—not the new mountain bikes, not the cricket kits, not even the digital stopwatches. Sienna, who was helping Mr Henderson sweep the gravel path outside, noticed two faint, muddy footprints leading away from the shed door toward the oval. Beside the second print lay a small, torn corner of blue-lined graph paper with the numbers '045° — 32 paces' scribbled in pencil. Sienna frowned. No burglar chasing valuable equipment would leave behind mountain bikes and stopwatches just to take a compass—and then pace out bearings across the school oval.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Ending on an unexplained clue ('pace out bearings across the school oval') hooks the reader into the mystery.",
+        "Exam technique: verify 'By ending on Sienna's puzzling deduction rather than immediately revealing who took the compass.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r060",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does 'antique' tell the reader about the brass compass?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It is broken and unable to point north."
+          },
+          {
+            "id": "b",
+            "text": "It was bought at a supermarket last week."
+          },
+          {
+            "id": "c",
+            "text": "It is made of painted plastic."
+          },
+          {
+            "id": "d",
+            "text": "It is old and valued for its age or history."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "'Antique' means old and collectible/historical. Exam technique: verify 'It is old and valued for its age or history.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "The Missing Brass Compass",
+          "body": "When the Year 6 orienteering trophies were packed into the sports shed on Friday afternoon, Mr Henderson locked the padlock and slipped the key into his whistle lanyard. By Monday morning, the padlock hung open, and the antique brass compass donated by the local bushwalking club was gone from its velvet box. Yet nothing else had been touched—not the new mountain bikes, not the cricket kits, not even the digital stopwatches. Sienna, who was helping Mr Henderson sweep the gravel path outside, noticed two faint, muddy footprints leading away from the shed door toward the oval. Beside the second print lay a small, torn corner of blue-lined graph paper with the numbers '045° — 32 paces' scribbled in pencil. Sienna frowned. No burglar chasing valuable equipment would leave behind mountain bikes and stopwatches just to take a compass—and then pace out bearings across the school oval.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Antique' means old and collectible/historical.",
+        "Exam technique: verify 'It is old and valued for its age or history.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w021",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Paradox of Choice: Having more options is usually seen as a good thing, yet too many choices can leave people anxious or indecisive. Explain this idea using examples from daily life and study.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Define the paradox clearly in your introduction. Develop two contrasting examples and offer a practical takeaway.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Define the paradox clearly in your introduction.",
+        "Develop two contrasting examples and offer a practical takeaway."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w022",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Unsent Telegram: Write a story centred on an unopened telegram discovered inside a second-hand piano bench, and the decision of whether to deliver it fifty years later.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Balance present-day curiosity with respect for the past. Use subtle detail rather than melodrama.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing narrative",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "narrative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Balance present-day curiosity with respect for the past.",
+        "Use subtle detail rather than melodrama."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained narrative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w023",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Compulsory Volunteering in Year 7: Should secondary schools require every student to complete twenty hours of community volunteering each year? Argue your case with precision and depth.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Explore whether compulsory service builds civic habit or undermines genuine altruism. Conclude with a constructive policy recommendation.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Explore whether compulsory service builds civic habit or undermines genuine altruism.",
+        "Conclude with a constructive policy recommendation."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w024",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The City Built on Bridges: Imagine a city suspended across a misty gorge where every street is a bridge and no building touches the ground. Write a narrative set during a festival night there.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Weave world-building details naturally into character action. Ensure the plot has a clear conflict and resolution.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing creative",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "creative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Weave world-building details naturally into character action.",
+        "Ensure the plot has a clear conflict and resolution."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained creative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    }
+  ]
+}

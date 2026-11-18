@@ -1,0 +1,3425 @@
+{
+  "batchId": "vihaan-agy-04",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m037",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Calculate the value of (-6) * 4 - (-10), applying the order of operations.",
+        "options": [
+          {
+            "id": "a",
+            "text": "-14"
+          },
+          {
+            "id": "b",
+            "text": "-34"
+          },
+          {
+            "id": "c",
+            "text": "-16"
+          },
+          {
+            "id": "d",
+            "text": "14"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Multiply first: (-6) * 4 = -24. Subtracting -10 is adding 10: -24 + 10 = -14.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Multiply first: (-6) * 4 = -24.",
+        "Subtracting -10 is adding 10: -24 + 10 = -14."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(-6) * 4 - (-10)",
+        "expected": "-14"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m038",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A submarine is at -145 m relative to sea level. It rises 68 m and then dives 43 m. What is its new depth in metres relative to sea level?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-256"
+          },
+          {
+            "id": "b",
+            "text": "-120"
+          },
+          {
+            "id": "c",
+            "text": "-170"
+          },
+          {
+            "id": "d",
+            "text": "-34"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Rising adds 68: -145 + 68 = -77 m. Diving subtracts 43: -77 - 43 = -120 m.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Rising adds 68: -145 + 68 = -77 m.",
+        "Diving subtracts 43: -77 - 43 = -120 m."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "-145 + 68 - 43",
+        "expected": "-120"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m039",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What number must be added to -17 to give 25?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-42"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "42"
+          },
+          {
+            "id": "d",
+            "text": "32"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Find 25 - (-17) = 25 + 17. 25 + 17 = 42.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Find 25 - (-17) = 25 + 17.",
+        "25 + 17 = 42."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "25 - (-17)",
+        "expected": "42"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m040",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The daily minimum temperatures for four days were -5, -2, 1 and -6 degrees Celsius. What was the mean minimum temperature in degrees Celsius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-4"
+          },
+          {
+            "id": "b",
+            "text": "-2"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "-3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Sum the four temperatures: -5 + (-2) + 1 + (-6) = -12. Divide by 4 days: -12 / 4 = -3 degrees Celsius.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Sum the four temperatures: -5 + (-2) + 1 + (-6) = -12.",
+        "Divide by 4 days: -12 / 4 = -3 degrees Celsius."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(-5 + -2 + 1 + -6) / 4",
+        "expected": "-3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m041",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Evaluate: (-48) / (-6) + (-3) * 5",
+        "options": [
+          {
+            "id": "a",
+            "text": "-7"
+          },
+          {
+            "id": "b",
+            "text": "-23"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "23"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Dividing two negatives gives a positive: (-48) / (-6) = 8. Multiply: (-3) * 5 = -15. Then 8 + (-15) = -7.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Dividing two negatives gives a positive: (-48) / (-6) = 8.",
+        "Multiply: (-3) * 5 = -15. Then 8 + (-15) = -7."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(-48) / (-6) + (-3) * 5",
+        "expected": "-7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m042",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "On a number line, point X is at -11 and point Y is at 17. What coordinate is halfway between X and Y?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-3"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "14"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The midpoint is the average of the two coordinates. (-11 + 17) / 2 = 6 / 2 = 3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "The midpoint is the average of the two coordinates.",
+        "(-11 + 17) / 2 = 6 / 2 = 3."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(-11 + 17) / 2",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m043",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a trivia game, a correct answer scores +5, a wrong answer scores -3, and a pass scores -1. Chloe had 12 correct, 5 wrong and 3 passes. What was her total score?",
+        "options": [
+          {
+            "id": "a",
+            "text": "39"
+          },
+          {
+            "id": "b",
+            "text": "45"
+          },
+          {
+            "id": "c",
+            "text": "42"
+          },
+          {
+            "id": "d",
+            "text": "48"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Points from correct answers: 12 * 5 = 60. Deductions: 5 * (-3) + 3 * (-1) = -15 - 3 = -18. Total = 60 - 18 = 42.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Points from correct answers: 12 * 5 = 60.",
+        "Deductions: 5 * (-3) + 3 * (-1) = -15 - 3 = -18. Total = 60 - 18 = 42."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "12 * 5 + 5 * (-3) + 3 * (-1)",
+        "expected": "42"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m044",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If x = -4 and y = 3, what is the value of x² - 2xy + y?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-5"
+          },
+          {
+            "id": "b",
+            "text": "19"
+          },
+          {
+            "id": "c",
+            "text": "37"
+          },
+          {
+            "id": "d",
+            "text": "43"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Compute x² = (-4)² = 16 and -2xy = -2(-4)(3) = +24. Add y = 3: 16 + 24 + 3 = 43.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Compute x² = (-4)² = 16 and -2xy = -2(-4)(3) = +24.",
+        "Add y = 3: 16 + 24 + 3 = 43."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(-4) * (-4) - 2 * (-4) * 3 + 3",
+        "expected": "43"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m045",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Evaluate: (-2)**4 - (-3)**3",
+        "options": [
+          {
+            "id": "a",
+            "text": "43"
+          },
+          {
+            "id": "b",
+            "text": "-43"
+          },
+          {
+            "id": "c",
+            "text": "-11"
+          },
+          {
+            "id": "d",
+            "text": "11"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "(-2)⁴ = +16 and (-3)³ = -27. 16 - (-27) = 16 + 27 = 43.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "(-2)⁴ = +16 and (-3)³ = -27.",
+        "16 - (-27) = 16 + 27 = 43."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(-2)**4 - (-3)**3",
+        "expected": "43"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m046",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is 3/4 + 2/5 as a fraction?",
+        "options": [
+          {
+            "id": "a",
+            "text": "23/20"
+          },
+          {
+            "id": "b",
+            "text": "5/9"
+          },
+          {
+            "id": "c",
+            "text": "6/20"
+          },
+          {
+            "id": "d",
+            "text": "19/20"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "fm_f1",
+            "type": "fraction_model",
+            "altText": "Fraction bar model showing 3 out of 4 equal parts shaded.",
+            "title": "Three Quarters",
+            "data": {
+              "numerator": 3,
+              "denominator": 4,
+              "model": "bar"
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Common denominator is 20: 3/4 = 15/20 and 2/5 = 8/20. Add numerators: 15/20 + 8/20 = 23/20.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "Common denominator is 20: 3/4 = 15/20 and 2/5 = 8/20.",
+        "Add numerators: 15/20 + 8/20 = 23/20."
+      ],
+      "reviewFocus": [
+        "Verify fraction simplification and decimal alignment."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "3/4 + 2/5",
+        "expected": "23/20"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m047",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Calculate 4.85 - 1.97.",
+        "options": [
+          {
+            "id": "a",
+            "text": "2.78"
+          },
+          {
+            "id": "b",
+            "text": "2.88"
+          },
+          {
+            "id": "c",
+            "text": "2.98"
+          },
+          {
+            "id": "d",
+            "text": "3.12"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Subtract 2.00 from 4.85 to get 2.85. Add back 0.03: 2.85 + 0.03 = 2.88.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "Subtract 2.00 from 4.85 to get 2.85.",
+        "Add back 0.03: 2.85 + 0.03 = 2.88."
+      ],
+      "reviewFocus": [
+        "Verify fraction simplification and decimal alignment."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "4.85 - 1.97",
+        "expected": "2.88"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m048",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is 0.35 * 40?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1.4"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "14"
+          },
+          {
+            "id": "d",
+            "text": "16"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "0.35 = 7/20. 7/20 * 40 = 7 * 2 = 14.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "0.35 = 7/20.",
+        "7/20 * 40 = 7 * 2 = 14."
+      ],
+      "reviewFocus": [
+        "Verify fraction simplification and decimal alignment."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "0.35 * 40",
+        "expected": "14"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n037",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each row, multiply the first two numbers and subtract a fixed constant to get the third. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "33"
+          },
+          {
+            "id": "c",
+            "text": "32"
+          },
+          {
+            "id": "d",
+            "text": "35"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n043",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "5",
+                  "4",
+                  "17"
+                ],
+                [
+                  "6",
+                  "3",
+                  "15"
+                ],
+                [
+                  "7",
+                  "5",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Third = (First * Second) - 3: 5*4-3=17 and 6*3-3=15. 7 * 5 - 3 = 32.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = (First * Second) - 3: 5*4-3=17 and 6*3-3=15.",
+        "7 * 5 - 3 = 32."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "7 * 5 - 3",
+        "expected": "32"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n038",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row follows the same division-and-addition rule. What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "7"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "14"
+          },
+          {
+            "id": "d",
+            "text": "12"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n044",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "16",
+                  "4",
+                  "8"
+                ],
+                [
+                  "24",
+                  "6",
+                  "10"
+                ],
+                [
+                  "35",
+                  "5",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Wait: 16/4=4, +4=8; 24/6=4, +6=10! Third = (First / Second) + Second: 16/4+4=8, 24/6+6=10. 35 / 5 + 5 = 7 + 5 = 12.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Wait: 16/4=4, +4=8; 24/6=4, +6=10! Third = (First / Second) + Second: 16/4+4=8, 24/6+6=10.",
+        "35 / 5 + 5 = 7 + 5 = 12."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "35 / 5 + 5",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n039",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In this table, each row's third number is the average of the first two. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "37"
+          },
+          {
+            "id": "b",
+            "text": "35"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "38"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n045",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "14",
+                  "22",
+                  "18"
+                ],
+                [
+                  "19",
+                  "31",
+                  "25"
+                ],
+                [
+                  "23",
+                  "?",
+                  "30"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Average = (First + Second) / 2, so First + Second = 2 * Third. 23 + ? = 2 * 30 = 60, so ? = 37.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Average = (First + Second) / 2, so First + Second = 2 * Third.",
+        "23 + ? = 2 * 30 = 60, so ? = 37."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 * 30 - 23",
+        "expected": "37"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n040",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each column follows the same rule: multiply the top two, then halve the result. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "35"
+          },
+          {
+            "id": "c",
+            "text": "34"
+          },
+          {
+            "id": "d",
+            "text": "70"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n046",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "6",
+                  "8",
+                  "10"
+                ],
+                [
+                  "4",
+                  "5",
+                  "7"
+                ],
+                [
+                  "12",
+                  "20",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Check: (6*4)/2 = 12 and (8*5)/2 = 20. (10 * 7) / 2 = 35.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check: (6*4)/2 = 12 and (8*5)/2 = 20.",
+        "(10 * 7) / 2 = 35."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(10 * 7) / 2",
+        "expected": "35"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n041",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row uses the difference of squares? No: First² - Second = Third. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "43"
+          },
+          {
+            "id": "b",
+            "text": "47"
+          },
+          {
+            "id": "c",
+            "text": "45"
+          },
+          {
+            "id": "d",
+            "text": "49"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n047",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "6",
+                  "11",
+                  "25"
+                ],
+                [
+                  "7",
+                  "14",
+                  "35"
+                ],
+                [
+                  "8",
+                  "19",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Check: 6² - 11 = 36 - 11 = 25; 7² - 14 = 49 - 14 = 35. 8² - 19 = 64 - 19 = 45.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check: 6² - 11 = 36 - 11 = 25; 7² - 14 = 49 - 14 = 35.",
+        "8² - 19 = 64 - 19 = 45."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "8 * 8 - 19",
+        "expected": "45"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n042",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the 3x3 grid, the product of the first and third numbers in each row equals the middle number squared. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "40"
+          },
+          {
+            "id": "d",
+            "text": "25"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n048",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "2",
+                  "6",
+                  "18"
+                ],
+                [
+                  "3",
+                  "12",
+                  "48"
+                ],
+                [
+                  "4",
+                  "10",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Check: 2*18 = 36 = 6²; 3*48 = 144 = 12². 4 * ? = 10² = 100, so ? = 25.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check: 2*18 = 36 = 6²; 3*48 = 144 = 12².",
+        "4 * ? = 10² = 100, so ? = 25."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(10 * 10) / 4",
+        "expected": "25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n043",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the 3x3 matrix, each row obeys the same rule connecting all three cells. What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "47"
+          },
+          {
+            "id": "b",
+            "text": "35"
+          },
+          {
+            "id": "c",
+            "text": "43"
+          },
+          {
+            "id": "d",
+            "text": "49"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n049",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "4",
+                  "9",
+                  "25"
+                ],
+                [
+                  "5",
+                  "12",
+                  "37"
+                ],
+                [
+                  "6",
+                  "11",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Third = First² + Second: 4²+9=25 and 5²+12=37. 6² + 11 = 36 + 11 = 47.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = First² + Second: 4²+9=25 and 5²+12=37.",
+        "6² + 11 = 36 + 11 = 47."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "6 * 6 + 11",
+        "expected": "47"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n044",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row in the matrix combines the first two numbers to form the third. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "35"
+          },
+          {
+            "id": "b",
+            "text": "39"
+          },
+          {
+            "id": "c",
+            "text": "41"
+          },
+          {
+            "id": "d",
+            "text": "44"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n050",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "7",
+                  "3",
+                  "40"
+                ],
+                [
+                  "9",
+                  "4",
+                  "65"
+                ],
+                [
+                  "8",
+                  "5",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Third = First² - Second²: 7²-3² = 49-9 = 40; 9²-4² = 81-16 = 65. 8² - 5² = 64 - 25 = 39.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = First² - Second²: 7²-3² = 49-9 = 40; 9²-4² = 81-16 = 65.",
+        "8² - 5² = 64 - 25 = 39."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "8 * 8 - 5 * 5",
+        "expected": "39"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n045",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each column of the table, the bottom number is computed from the top two numbers. What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "100"
+          },
+          {
+            "id": "b",
+            "text": "115"
+          },
+          {
+            "id": "c",
+            "text": "125"
+          },
+          {
+            "id": "d",
+            "text": "135"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n051",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "12",
+                  "15",
+                  "20"
+                ],
+                [
+                  "4",
+                  "3",
+                  "5"
+                ],
+                [
+                  "64",
+                  "54",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Bottom = (Top + Middle) * Middle: (12+4)*4=64 and (15+3)*3=54. (20 + 5) * 5 = 25 * 5 = 125.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Bottom = (Top + Middle) * Middle: (12+4)*4=64 and (15+3)*3=54.",
+        "(20 + 5) * 5 = 25 * 5 = 125."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(20 + 5) * 5",
+        "expected": "125"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n046",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In this matrix, each row follows the same rule from left to right. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "27"
+          },
+          {
+            "id": "b",
+            "text": "29"
+          },
+          {
+            "id": "c",
+            "text": "32"
+          },
+          {
+            "id": "d",
+            "text": "30"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n052",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "11",
+                  "5",
+                  "17"
+                ],
+                [
+                  "14",
+                  "7",
+                  "21"
+                ],
+                [
+                  "19",
+                  "8",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Third = 2 * First - Second: 2(11)-5=17 and 2(14)-7=21. 2(19) - 8 = 38 - 8 = 30.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = 2 * First - Second: 2(11)-5=17 and 2(14)-7=21.",
+        "2(19) - 8 = 38 - 8 = 30."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "19 * 2 - 8",
+        "expected": "30"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n047",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In this 3x3 magic-product grid, every row has the same product of 240. What is '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n053",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "4",
+                  "10",
+                  "6"
+                ],
+                [
+                  "5",
+                  "12",
+                  "4"
+                ],
+                [
+                  "8",
+                  "?",
+                  "5"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Check Row 1: 4*10*6 = 240; Row 2: 5*12*4 = 240. Row 3: 8 * ? * 5 = 240, so 40 * ? = 240 and ? = 6.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check Row 1: 4*10*6 = 240; Row 2: 5*12*4 = 240.",
+        "Row 3: 8 * ? * 5 = 240, so 40 * ? = 240 and ? = 6."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "240 / (8 * 5)",
+        "expected": "6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n048",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row's third number is the sum of the digits of the product of the first two numbers. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "9"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "11"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n054",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "12",
+                  "4",
+                  "12"
+                ],
+                [
+                  "15",
+                  "5",
+                  "12"
+                ],
+                [
+                  "18",
+                  "6",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Row 1: 12*4 = 48 → 4+8 = 12. Row 2: 15*5 = 75 → 7+5 = 12. Row 3: 18*6 = 108 → 1+0+8 = 9.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Row 1: 12*4 = 48 → 4+8 = 12. Row 2: 15*5 = 75 → 7+5 = 12.",
+        "Row 3: 18*6 = 108 → 1+0+8 = 9."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "1 + 0 + 8",
+        "expected": "9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v037",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If MINT is coded as NJOU and LEAF is coded as MFBG, how is HERB coded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "IFSC"
+          },
+          {
+            "id": "b",
+            "text": "GDQA"
+          },
+          {
+            "id": "c",
+            "text": "IGSC"
+          },
+          {
+            "id": "d",
+            "text": "JFSD"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Each letter shifts +1 in the alphabet. H→I, E→F, R→S, B→C gives IFSC.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Each letter shifts +1 in the alphabet.",
+        "H→I, E→F, R→S, B→C gives IFSC."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v038",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a number-letter code, A=26, B=25, C=24, ..., Z=1 (reverse alphabet). What word is 23-22-12-22? No, 23=D, 22=E, 12=O, 22=E → DEOE! Let's pick a real word: C(24)-A(26)-T(7) or H(19)-O(12)-M(14)-E(22)!",
+        "options": [
+          {
+            "id": "a",
+            "text": "HOPE"
+          },
+          {
+            "id": "b",
+            "text": "HOME"
+          },
+          {
+            "id": "c",
+            "text": "COME"
+          },
+          {
+            "id": "d",
+            "text": "DOME"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Use position = 27 - code: 27-19=8(H), 27-12=15(O), 27-14=13(M), 27-22=5(E). The word is HOME.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Use position = 27 - code: 27-19=8(H), 27-12=15(O), 27-14=13(M), 27-22=5(E).",
+        "The word is HOME."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v039",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a code, 'green tall tree' = 'ka mo zi', 'tall pine' = 'mo ru', and 'green leaf' = 'ka pe'. What does 'zi' mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "green"
+          },
+          {
+            "id": "b",
+            "text": "tall"
+          },
+          {
+            "id": "c",
+            "text": "tree"
+          },
+          {
+            "id": "d",
+            "text": "pine"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "'tall' appears in the first two phrases (common code 'mo'); 'green' appears in the first and third (common code 'ka'). The remaining word in the first phrase is 'tree', so 'zi' = tree.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "'tall' appears in the first two phrases (common code 'mo'); 'green' appears in the first and third (common code 'ka').",
+        "The remaining word in the first phrase is 'tree', so 'zi' = tree."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v040",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In an alternating-shift code, the 1st letter shifts +1, the 2nd shifts +2, the 3rd shifts +3, and the 4th shifts +4. How is PARK coded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "QCVO"
+          },
+          {
+            "id": "b",
+            "text": "QDUO"
+          },
+          {
+            "id": "c",
+            "text": "RCTO"
+          },
+          {
+            "id": "d",
+            "text": "QCUO"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "P(+1)→Q, A(+2)→C, R(+3)→U, K(+4)→O. Combining gives QCUO.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "P(+1)→Q, A(+2)→C, R(+3)→U, K(+4)→O.",
+        "Combining gives QCUO."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v041",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a two-step cipher, a word is first reversed and then every vowel is replaced by *. If PLANET becomes T*N*LP, how is GARDEN coded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "N*DR*G"
+          },
+          {
+            "id": "b",
+            "text": "N*RD*G"
+          },
+          {
+            "id": "c",
+            "text": "G*RD*N"
+          },
+          {
+            "id": "d",
+            "text": "N*DR*H"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Reverse GARDEN → NEDRAG. Replace vowels (E, A) with * → N*DR*G.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Reverse GARDEN → NEDRAG.",
+        "Replace vowels (E, A) with * → N*DR*G."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v042",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a code, 'bright sun shines' = '4 7 2', 'sun sets early' = '7 9 5', and 'early bird sings' = '9 1 6'. Which digit stands for 'sets'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "7"
+          },
+          {
+            "id": "b",
+            "text": "5"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "'sun' is in phrases 1 and 2, so 'sun' = 7. 'early' is in phrases 2 and 3, so 'early' = 9. In phrase 2 ('sun sets early' = '7 9 5'), the remaining digit 5 must mean 'sets'.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "'sun' is in phrases 1 and 2, so 'sun' = 7. 'early' is in phrases 2 and 3, so 'early' = 9.",
+        "In phrase 2 ('sun sets early' = '7 9 5'), the remaining digit 5 must mean 'sets'."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v043",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the next letter in the sequence: B, D, F, H, J, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "K"
+          },
+          {
+            "id": "b",
+            "text": "M"
+          },
+          {
+            "id": "c",
+            "text": "L"
+          },
+          {
+            "id": "d",
+            "text": "N"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Each letter skips one letter (+2 in alphabet): B(2), D(4), F(6), H(8), J(10). Next is 12th letter: L.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 45,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "Each letter skips one letter (+2 in alphabet): B(2), D(4), F(6), H(8), J(10).",
+        "Next is 12th letter: L."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v044",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find the missing letter: Z, X, V, T, R, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "O"
+          },
+          {
+            "id": "b",
+            "text": "Q"
+          },
+          {
+            "id": "c",
+            "text": "S"
+          },
+          {
+            "id": "d",
+            "text": "P"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The sequence moves backward by 2 each step: Z(26), X(24), V(22), T(20), R(18). 18 - 2 = 16, which is P.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 50,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "The sequence moves backward by 2 each step: Z(26), X(24), V(22), T(20), R(18).",
+        "18 - 2 = 16, which is P."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v045",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which letter completes the pattern: A, D, G, J, M, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "P"
+          },
+          {
+            "id": "b",
+            "text": "N"
+          },
+          {
+            "id": "c",
+            "text": "O"
+          },
+          {
+            "id": "d",
+            "text": "Q"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Each step adds 3 positions: 1, 4, 7, 10, 13. 13 + 3 = 16, which is P.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 50,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "Each step adds 3 positions: 1, 4, 7, 10, 13.",
+        "13 + 3 = 16, which is P."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v046",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the next letter in the growing-gap series: A, B, D, G, K, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "N"
+          },
+          {
+            "id": "b",
+            "text": "P"
+          },
+          {
+            "id": "c",
+            "text": "O"
+          },
+          {
+            "id": "d",
+            "text": "Q"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Gaps increase by 1 each time: +1, +2, +3, +4. Next gap is +5 from K(11): 11 + 5 = 16, which is P.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "Gaps increase by 1 each time: +1, +2, +3, +4.",
+        "Next gap is +5 from K(11): 11 + 5 = 16, which is P."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v047",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a mirrored-alphabet sequence, each two-letter term pairs a forward step with a backward step: BY, DW, FU, HS, ?. Which pair comes next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "JP"
+          },
+          {
+            "id": "b",
+            "text": "KQ"
+          },
+          {
+            "id": "c",
+            "text": "JQ"
+          },
+          {
+            "id": "d",
+            "text": "IR"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "First letter advances by +2 (B, D, F, H, J); second letter moves back by -2 (Y, W, U, S, Q). The next pair is JQ.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "First letter advances by +2 (B, D, F, H, J); second letter moves back by -2 (Y, W, U, S, Q).",
+        "The next pair is JQ."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v048",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which letter replaces '?' in: C, F, E, H, G, J, I, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "K"
+          },
+          {
+            "id": "b",
+            "text": "M"
+          },
+          {
+            "id": "c",
+            "text": "N"
+          },
+          {
+            "id": "d",
+            "text": "L"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The pattern alternates +3 and -1: C(+3)→F(-1)→E(+3)→H(-1)→G(+3)→J(-1)→I. Next apply +3 to I(9): 9 + 3 = 12, which is L.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "The pattern alternates +3 and -1: C(+3)→F(-1)→E(+3)→H(-1)→G(+3)→J(-1)→I.",
+        "Next apply +3 to I(9): 9 + 3 = 12, which is L."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r031",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does paper made after 1850 often become brittle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It was painted with wheat-starch paste."
+          },
+          {
+            "id": "b",
+            "text": "It was stored in Japanese mulberry folders."
+          },
+          {
+            "id": "c",
+            "text": "It frequently contains wood pulp, which turns acidic over time."
+          },
+          {
+            "id": "d",
+            "text": "It was exposed to ultraviolet light in museums."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Dr. Lin explains that 'Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle.' Exam technique: verify 'It frequently contains wood pulp, which turns acidic over time.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 140,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Behind the Glass: A Conversation with Paper Conservator Dr. Lin",
+          "body": "Interviewer: When visitors admire a nineteenth-century watercolour in a gallery, they rarely think about what keeps the paper from yellowing or tearing. What does your work involve?\nDr. Lin: Mostly patience and detective work. Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle. Before we touch a brush or repair a tear, we test the paper's pH, examine the pigments under ultraviolet light, and document every crease.\nInterviewer: What is the biggest misconception people have about conservation?\nDr. Lin: That we try to make old artworks look brand new. In fact, our golden rule is reversibility. Any adhesive we use—such as wheat-starch paste—or any Japanese mulberry paper we attach as a backing must be removable in the future without harming the original sheet. If a future conservator has a better technique, they should be able to undo our repair cleanly.\nInterviewer: And what can families do at home to protect treasured letters or drawings?\nDr. Lin: Keep them out of direct sunlight, store them flat in acid-free folders rather than sticky photo albums, and never use ordinary household sticky tape—its glue stains paper permanently within a few years.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Dr. Lin explains that 'Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle.'",
+        "Exam technique: verify 'It frequently contains wood pulp, which turns acidic over time.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r032",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does Dr. Lin mean by the 'golden rule' of reversibility?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Old paintings should be flipped over and painted on the back."
+          },
+          {
+            "id": "b",
+            "text": "Conservators must restore faded colours until they look brand new."
+          },
+          {
+            "id": "c",
+            "text": "Any torn paper should be replaced with a modern photocopy."
+          },
+          {
+            "id": "d",
+            "text": "Repairs must be safely removable later without damaging the original artwork."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "She defines reversibility as ensuring any paste or backing 'must be removable in the future without harming the original sheet.' Exam technique: verify 'Repairs must be safely removable later without damaging the original artwork.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "Behind the Glass: A Conversation with Paper Conservator Dr. Lin",
+          "body": "Interviewer: When visitors admire a nineteenth-century watercolour in a gallery, they rarely think about what keeps the paper from yellowing or tearing. What does your work involve?\nDr. Lin: Mostly patience and detective work. Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle. Before we touch a brush or repair a tear, we test the paper's pH, examine the pigments under ultraviolet light, and document every crease.\nInterviewer: What is the biggest misconception people have about conservation?\nDr. Lin: That we try to make old artworks look brand new. In fact, our golden rule is reversibility. Any adhesive we use—such as wheat-starch paste—or any Japanese mulberry paper we attach as a backing must be removable in the future without harming the original sheet. If a future conservator has a better technique, they should be able to undo our repair cleanly.\nInterviewer: And what can families do at home to protect treasured letters or drawings?\nDr. Lin: Keep them out of direct sunlight, store them flat in acid-free folders rather than sticky photo albums, and never use ordinary household sticky tape—its glue stains paper permanently within a few years.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She defines reversibility as ensuring any paste or backing 'must be removable in the future without harming the original sheet.'",
+        "Exam technique: verify 'Repairs must be safely removable later without damaging the original artwork.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r033",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does Dr. Lin warn against using ordinary household sticky tape on treasured letters?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its adhesive causes permanent staining within a few years."
+          },
+          {
+            "id": "b",
+            "text": "It peels off too easily in humid weather."
+          },
+          {
+            "id": "c",
+            "text": "It makes the paper too heavy to store flat."
+          },
+          {
+            "id": "d",
+            "text": "It turns ultraviolet light into heat."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "She states: 'its glue stains paper permanently within a few years.' Exam technique: verify 'Its adhesive causes permanent staining within a few years.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-cause-effect"
+        },
+        "stimulus": {
+          "title": "Behind the Glass: A Conversation with Paper Conservator Dr. Lin",
+          "body": "Interviewer: When visitors admire a nineteenth-century watercolour in a gallery, they rarely think about what keeps the paper from yellowing or tearing. What does your work involve?\nDr. Lin: Mostly patience and detective work. Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle. Before we touch a brush or repair a tear, we test the paper's pH, examine the pigments under ultraviolet light, and document every crease.\nInterviewer: What is the biggest misconception people have about conservation?\nDr. Lin: That we try to make old artworks look brand new. In fact, our golden rule is reversibility. Any adhesive we use—such as wheat-starch paste—or any Japanese mulberry paper we attach as a backing must be removable in the future without harming the original sheet. If a future conservator has a better technique, they should be able to undo our repair cleanly.\nInterviewer: And what can families do at home to protect treasured letters or drawings?\nDr. Lin: Keep them out of direct sunlight, store them flat in acid-free folders rather than sticky photo albums, and never use ordinary household sticky tape—its glue stains paper permanently within a few years.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She states: 'its glue stains paper permanently within a few years.'",
+        "Exam technique: verify 'Its adhesive causes permanent staining within a few years.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r034",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does Dr. Lin view future generations of conservators?",
+        "options": [
+          {
+            "id": "a",
+            "text": "With suspicion, believing future workers will damage historical art."
+          },
+          {
+            "id": "b",
+            "text": "With humility, expecting they may develop superior techniques that require undoing current repairs."
+          },
+          {
+            "id": "c",
+            "text": "With indifference, since she expects all paper to crumble eventually."
+          },
+          {
+            "id": "d",
+            "text": "With pride, assuming her own methods can never be improved."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "She says if a future conservator has a better technique, 'they should be able to undo our repair cleanly.' Exam technique: verify 'With humility, expecting they may develop superior techniques that require undoing current repairs.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-character-inference"
+        },
+        "stimulus": {
+          "title": "Behind the Glass: A Conversation with Paper Conservator Dr. Lin",
+          "body": "Interviewer: When visitors admire a nineteenth-century watercolour in a gallery, they rarely think about what keeps the paper from yellowing or tearing. What does your work involve?\nDr. Lin: Mostly patience and detective work. Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle. Before we touch a brush or repair a tear, we test the paper's pH, examine the pigments under ultraviolet light, and document every crease.\nInterviewer: What is the biggest misconception people have about conservation?\nDr. Lin: That we try to make old artworks look brand new. In fact, our golden rule is reversibility. Any adhesive we use—such as wheat-starch paste—or any Japanese mulberry paper we attach as a backing must be removable in the future without harming the original sheet. If a future conservator has a better technique, they should be able to undo our repair cleanly.\nInterviewer: And what can families do at home to protect treasured letters or drawings?\nDr. Lin: Keep them out of direct sunlight, store them flat in acid-free folders rather than sticky photo albums, and never use ordinary household sticky tape—its glue stains paper permanently within a few years.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "She says if a future conservator has a better technique, 'they should be able to undo our repair cleanly.'",
+        "Exam technique: verify 'With humility, expecting they may develop superior techniques that require undoing current repairs.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r035",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why is the interview format effective for this topic?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It proves that interviewers know more than scientists."
+          },
+          {
+            "id": "b",
+            "text": "It avoids explaining any scientific terms like pH or acidity."
+          },
+          {
+            "id": "c",
+            "text": "It moves naturally from technical museum work to practical advice readers can apply at home."
+          },
+          {
+            "id": "d",
+            "text": "It creates suspense about a stolen watercolour."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The three questions progress smoothly from daily lab work to core philosophy to household tips. Exam technique: verify 'It moves naturally from technical museum work to practical advice readers can apply at home.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "Behind the Glass: A Conversation with Paper Conservator Dr. Lin",
+          "body": "Interviewer: When visitors admire a nineteenth-century watercolour in a gallery, they rarely think about what keeps the paper from yellowing or tearing. What does your work involve?\nDr. Lin: Mostly patience and detective work. Paper made after 1850 often contains wood pulp, which turns acidic over decades and becomes brittle. Before we touch a brush or repair a tear, we test the paper's pH, examine the pigments under ultraviolet light, and document every crease.\nInterviewer: What is the biggest misconception people have about conservation?\nDr. Lin: That we try to make old artworks look brand new. In fact, our golden rule is reversibility. Any adhesive we use—such as wheat-starch paste—or any Japanese mulberry paper we attach as a backing must be removable in the future without harming the original sheet. If a future conservator has a better technique, they should be able to undo our repair cleanly.\nInterviewer: And what can families do at home to protect treasured letters or drawings?\nDr. Lin: Keep them out of direct sunlight, store them flat in acid-free folders rather than sticky photo albums, and never use ordinary household sticky tape—its glue stains paper permanently within a few years.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The three questions progress smoothly from daily lab work to core philosophy to household tips.",
+        "Exam technique: verify 'It moves naturally from technical museum work to practical advice readers can apply at home.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r036",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "According to Councillor Patel, why can't most disposable coffee cups be recycled as ordinary paper?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They are too small for recycling machines."
+          },
+          {
+            "id": "b",
+            "text": "Coffee stains destroy all cardboard fibres."
+          },
+          {
+            "id": "c",
+            "text": "Cafes refuse to place them in yellow bins."
+          },
+          {
+            "id": "d",
+            "text": "They are lined with a thin plastic film."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Viewpoint A notes they are 'lined with a thin plastic film that prevents standard paper recycling.' Exam technique: verify 'They are lined with a thin plastic film.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 140,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Two Views: Should Councils Ban Single-Use Coffee Cups?",
+          "body": "Viewpoint A (Councillor Patel): Every year, Australians discard more than a billion disposable coffee cups. Although many look like plain cardboard, almost all are lined with a thin plastic film that prevents standard paper recycling. A council-wide ban on non-compostable takeaway cups would push cafes and customers to adopt reusable mugs or cup-library schemes, cutting landfill waste immediately. Cities that have introduced small charges or bans have seen reusable cup use triple within six months.\n\nViewpoint B (Cafe Owner Samira): We all want less litter, but an outright council ban overlooks practical realities. Independent cafes already operate on tight margins, and switching to certified compostable cups costs nearly twice as much per unit—costs that small businesses must pass on to customers. Furthermore, compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street. Incentives for bringing a clean reusable mug—such as a fifty-cent discount—change habits without penalising small shops.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Viewpoint A notes they are 'lined with a thin plastic film that prevents standard paper recycling.'",
+        "Exam technique: verify 'They are lined with a thin plastic film.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r037",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What key infrastructure gap does Samira point out regarding compostable cups?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Without commercial composting bins on streets, compostable cups still go to landfill."
+          },
+          {
+            "id": "b",
+            "text": "Compostable cups cannot hold hot liquids."
+          },
+          {
+            "id": "c",
+            "text": "Customers refuse to drink from compostable lids."
+          },
+          {
+            "id": "d",
+            "text": "Commercial composting bins are illegal in city centres."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Samira argues 'compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street.' Exam technique: verify 'Without commercial composting bins on streets, compostable cups still go to landfill.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-argument-evaluation"
+        },
+        "stimulus": {
+          "title": "Two Views: Should Councils Ban Single-Use Coffee Cups?",
+          "body": "Viewpoint A (Councillor Patel): Every year, Australians discard more than a billion disposable coffee cups. Although many look like plain cardboard, almost all are lined with a thin plastic film that prevents standard paper recycling. A council-wide ban on non-compostable takeaway cups would push cafes and customers to adopt reusable mugs or cup-library schemes, cutting landfill waste immediately. Cities that have introduced small charges or bans have seen reusable cup use triple within six months.\n\nViewpoint B (Cafe Owner Samira): We all want less litter, but an outright council ban overlooks practical realities. Independent cafes already operate on tight margins, and switching to certified compostable cups costs nearly twice as much per unit—costs that small businesses must pass on to customers. Furthermore, compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street. Incentives for bringing a clean reusable mug—such as a fifty-cent discount—change habits without penalising small shops.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Samira argues 'compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street.'",
+        "Exam technique: verify 'Without commercial composting bins on streets, compostable cups still go to landfill.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r038",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "On which point do Councillor Patel and Samira agree?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Councils should immediately ban all takeaway coffee."
+          },
+          {
+            "id": "b",
+            "text": "Reducing disposable cup waste and litter is a worthwhile goal."
+          },
+          {
+            "id": "c",
+            "text": "Compostable cups cost less than plastic-lined cups."
+          },
+          {
+            "id": "d",
+            "text": "Discounts are ineffective at changing customer behaviour."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Samira opens with 'We all want less litter', showing shared concern about waste despite disagreeing on a ban. Exam technique: verify 'Reducing disposable cup waste and litter is a worthwhile goal.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "Two Views: Should Councils Ban Single-Use Coffee Cups?",
+          "body": "Viewpoint A (Councillor Patel): Every year, Australians discard more than a billion disposable coffee cups. Although many look like plain cardboard, almost all are lined with a thin plastic film that prevents standard paper recycling. A council-wide ban on non-compostable takeaway cups would push cafes and customers to adopt reusable mugs or cup-library schemes, cutting landfill waste immediately. Cities that have introduced small charges or bans have seen reusable cup use triple within six months.\n\nViewpoint B (Cafe Owner Samira): We all want less litter, but an outright council ban overlooks practical realities. Independent cafes already operate on tight margins, and switching to certified compostable cups costs nearly twice as much per unit—costs that small businesses must pass on to customers. Furthermore, compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street. Incentives for bringing a clean reusable mug—such as a fifty-cent discount—change habits without penalising small shops.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Samira opens with 'We all want less litter', showing shared concern about waste despite disagreeing on a ban.",
+        "Exam technique: verify 'Reducing disposable cup waste and litter is a worthwhile goal.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r039",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which strategy would best address Samira's objection while still advancing Patel's goal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Doubling the price of coffee for customers who sit inside cafes."
+          },
+          {
+            "id": "b",
+            "text": "Removing all rubbish bins from public parks."
+          },
+          {
+            "id": "c",
+            "text": "Combining reusable-cup discounts with council-funded street composting infrastructure before any ban."
+          },
+          {
+            "id": "d",
+            "text": "Allowing plastic-lined cups to be burned for energy."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Addressing both cost/incentives and composting infrastructure bridges the two viewpoints. Exam technique: verify 'Combining reusable-cup discounts with council-funded street composting infrastructure before any ban.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-argument-evaluation"
+        },
+        "stimulus": {
+          "title": "Two Views: Should Councils Ban Single-Use Coffee Cups?",
+          "body": "Viewpoint A (Councillor Patel): Every year, Australians discard more than a billion disposable coffee cups. Although many look like plain cardboard, almost all are lined with a thin plastic film that prevents standard paper recycling. A council-wide ban on non-compostable takeaway cups would push cafes and customers to adopt reusable mugs or cup-library schemes, cutting landfill waste immediately. Cities that have introduced small charges or bans have seen reusable cup use triple within six months.\n\nViewpoint B (Cafe Owner Samira): We all want less litter, but an outright council ban overlooks practical realities. Independent cafes already operate on tight margins, and switching to certified compostable cups costs nearly twice as much per unit—costs that small businesses must pass on to customers. Furthermore, compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street. Incentives for bringing a clean reusable mug—such as a fifty-cent discount—change habits without penalising small shops.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Addressing both cost/incentives and composting infrastructure bridges the two viewpoints.",
+        "Exam technique: verify 'Combining reusable-cup discounts with council-funded street composting infrastructure before any ban.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r040",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does Samira's tone compare with Councillor Patel's tone?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Patel is humorous while Samira is furious."
+          },
+          {
+            "id": "b",
+            "text": "Both writers use aggressive personal insults."
+          },
+          {
+            "id": "c",
+            "text": "Samira is entirely unconcerned about the environment."
+          },
+          {
+            "id": "d",
+            "text": "Patel sounds brisk and policy-focused, whereas Samira sounds pragmatic and concerned with day-to-day business costs."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Patel cites national figures and policy results; Samira focuses on margins, unit costs and street bins. Exam technique: verify 'Patel sounds brisk and policy-focused, whereas Samira sounds pragmatic and concerned with day-to-day business costs.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-tone-analysis"
+        },
+        "stimulus": {
+          "title": "Two Views: Should Councils Ban Single-Use Coffee Cups?",
+          "body": "Viewpoint A (Councillor Patel): Every year, Australians discard more than a billion disposable coffee cups. Although many look like plain cardboard, almost all are lined with a thin plastic film that prevents standard paper recycling. A council-wide ban on non-compostable takeaway cups would push cafes and customers to adopt reusable mugs or cup-library schemes, cutting landfill waste immediately. Cities that have introduced small charges or bans have seen reusable cup use triple within six months.\n\nViewpoint B (Cafe Owner Samira): We all want less litter, but an outright council ban overlooks practical realities. Independent cafes already operate on tight margins, and switching to certified compostable cups costs nearly twice as much per unit—costs that small businesses must pass on to customers. Furthermore, compostable cups still end up in landfill unless the council also invests in commercial composting bins on every street. Incentives for bringing a clean reusable mug—such as a fifty-cent discount—change habits without penalising small shops.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Patel cites national figures and policy results; Samira focuses on margins, unit costs and street bins.",
+        "Exam technique: verify 'Patel sounds brisk and policy-focused, whereas Samira sounds pragmatic and concerned with day-to-day business costs.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w013",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Compulsory Musical Instruments: Should every primary student be required to learn a musical instrument for at least two years? Write a persuasive piece defending your viewpoint.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Address cognitive/team benefits as well as cost and student choice. Use persuasive devices sparingly and effectively.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Address cognitive/team benefits as well as cost and student choice.",
+        "Use persuasive devices sparingly and effectively."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w014",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Wrong Platform: Running late for an interschool debating final, Priya steps onto the wrong suburban train. Write a narrative showing how she adapts under pressure.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Focus on problem-solving and emotional composure under time pressure. Resolve the conflict believably without relying on coincidence.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing narrative",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "narrative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Focus on problem-solving and emotional composure under time pressure.",
+        "Resolve the conflict believably without relying on coincidence."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained narrative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w015",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What Makes a Great Mentor?: Think of a teacher, coach or older student who helps others learn. Explain the qualities that separate an effective mentor from someone who merely gives orders.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Define three key qualities with brief illustrative scenarios. Conclude by reflecting on how mentorship builds independence.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Define three key qualities with brief illustrative scenarios.",
+        "Conclude by reflecting on how mentorship builds independence."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w016",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Midnight at the Train Depot: Describe an empty country railway station late at night as an express train approaches, rushes past, and disappears into the dark.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: descriptive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Build sensory intensity as the train approaches, then drop back into quietness. Check spelling and punctuation carefully.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing descriptive",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "descriptive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: descriptive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Build sensory intensity as the train approaches, then drop back into quietness.",
+        "Check spelling and punctuation carefully."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained descriptive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    }
+  ]
+}
