@@ -18,7 +18,7 @@
   "items": [
     {
       "question": {
-        "id": "vihaan-e500-n088",
+        "id": "vihaan-agy-n088",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -79,11 +79,12 @@
       "arithmeticCheck": {
         "expression": "63",
         "expected": "63"
-      }
+      },
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-n089",
+        "id": "vihaan-agy-n089",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -144,11 +145,12 @@
       "arithmeticCheck": {
         "expression": "8",
         "expected": "8"
-      }
+      },
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-n090",
+        "id": "vihaan-agy-n090",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -209,11 +211,12 @@
       "arithmeticCheck": {
         "expression": "88",
         "expected": "88"
-      }
+      },
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-v088",
+        "id": "vihaan-agy-v088",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -270,11 +273,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-v089",
+        "id": "vihaan-agy-v089",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -331,11 +335,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-v090",
+        "id": "vihaan-agy-v090",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -392,11 +397,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-r088",
+        "id": "vihaan-agy-r088",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -458,11 +464,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r089",
+        "id": "vihaan-agy-r089",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -524,11 +531,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r090",
+        "id": "vihaan-agy-r090",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -590,11 +598,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-w030",
+        "id": "vihaan-agy-w030",
         "type": "essay",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -648,11 +657,12 @@
           "Edit sentence boundaries, punctuation and Australian spelling."
         ],
         "assessmentMode": "human_only"
-      }
+      },
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-m091",
+        "id": "vihaan-agy-m091",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -713,11 +723,12 @@
       "arithmeticCheck": {
         "expression": "3/5*2/4+2/5*3/4",
         "expected": "0.6"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m092",
+        "id": "vihaan-agy-m092",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -778,11 +789,12 @@
       "arithmeticCheck": {
         "expression": "3*4-1",
         "expected": "11"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m093",
+        "id": "vihaan-agy-m093",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -843,11 +855,12 @@
       "arithmeticCheck": {
         "expression": "2*4",
         "expected": "8"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n091",
+        "id": "vihaan-agy-n091",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -908,11 +921,12 @@
       "arithmeticCheck": {
         "expression": "12+6",
         "expected": "18"
-      }
+      },
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-n092",
+        "id": "vihaan-agy-n092",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -973,11 +987,12 @@
       "arithmeticCheck": {
         "expression": "7*8+1",
         "expected": "57"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n093",
+        "id": "vihaan-agy-n093",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1038,11 +1053,12 @@
       "arithmeticCheck": {
         "expression": "9**2-6**2",
         "expected": "45"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v091",
+        "id": "vihaan-agy-v091",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1099,11 +1115,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-v092",
+        "id": "vihaan-agy-v092",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1160,11 +1177,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": false
     },
     {
       "question": {
-        "id": "vihaan-e500-v093",
+        "id": "vihaan-agy-v093",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1221,11 +1239,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r091",
+        "id": "vihaan-agy-r091",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1287,11 +1306,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r092",
+        "id": "vihaan-agy-r092",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1353,11 +1373,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r093",
+        "id": "vihaan-agy-r093",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1419,11 +1440,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-w031",
+        "id": "vihaan-agy-w031",
         "type": "essay",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1477,11 +1499,12 @@
           "Edit sentence boundaries, punctuation and Australian spelling."
         ],
         "assessmentMode": "human_only"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m094",
+        "id": "vihaan-agy-m094",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1542,11 +1565,12 @@
       "arithmeticCheck": {
         "expression": "8",
         "expected": "8"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m095",
+        "id": "vihaan-agy-m095",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1607,11 +1631,12 @@
       "arithmeticCheck": {
         "expression": "15-9",
         "expected": "6"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m096",
+        "id": "vihaan-agy-m096",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1672,11 +1697,12 @@
       "arithmeticCheck": {
         "expression": "1.2*1000",
         "expected": "1200"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n094",
+        "id": "vihaan-agy-n094",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1737,11 +1763,12 @@
       "arithmeticCheck": {
         "expression": "23-9",
         "expected": "14"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n095",
+        "id": "vihaan-agy-n095",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1802,11 +1829,12 @@
       "arithmeticCheck": {
         "expression": "7**2+6",
         "expected": "55"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n096",
+        "id": "vihaan-agy-n096",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1867,11 +1895,12 @@
       "arithmeticCheck": {
         "expression": "(14+36)/2",
         "expected": "25"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v094",
+        "id": "vihaan-agy-v094",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1928,11 +1957,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v095",
+        "id": "vihaan-agy-v095",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -1989,11 +2019,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v096",
+        "id": "vihaan-agy-v096",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2050,11 +2081,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r094",
+        "id": "vihaan-agy-r094",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2116,11 +2148,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r095",
+        "id": "vihaan-agy-r095",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2182,11 +2215,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r096",
+        "id": "vihaan-agy-r096",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2248,11 +2282,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-w032",
+        "id": "vihaan-agy-w032",
         "type": "essay",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2306,11 +2341,12 @@
           "Edit sentence boundaries, punctuation and Australian spelling."
         ],
         "assessmentMode": "human_only"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m097",
+        "id": "vihaan-agy-m097",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2371,11 +2407,12 @@
       "arithmeticCheck": {
         "expression": "5*320-(280+310+340+360)",
         "expected": "310"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m098",
+        "id": "vihaan-agy-m098",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2436,11 +2473,12 @@
       "arithmeticCheck": {
         "expression": "90*(1-2/5)-20",
         "expected": "34"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m099",
+        "id": "vihaan-agy-m099",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2501,11 +2539,12 @@
       "arithmeticCheck": {
         "expression": "2400/150",
         "expected": "16"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n097",
+        "id": "vihaan-agy-n097",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2566,11 +2605,12 @@
       "arithmeticCheck": {
         "expression": "3*40-(9+12+15+14+8+6)",
         "expected": "56"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n098",
+        "id": "vihaan-agy-n098",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2631,11 +2671,12 @@
       "arithmeticCheck": {
         "expression": "18/2*3",
         "expected": "27"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-n099",
+        "id": "vihaan-agy-n099",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2696,11 +2737,12 @@
       "arithmeticCheck": {
         "expression": "6*(6+7)",
         "expected": "78"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v097",
+        "id": "vihaan-agy-v097",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2757,11 +2799,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v098",
+        "id": "vihaan-agy-v098",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2818,11 +2861,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-v099",
+        "id": "vihaan-agy-v099",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2879,11 +2923,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-r097",
+        "id": "vihaan-agy-r097",
         "type": "reading_comprehension",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -2945,11 +2990,12 @@
         "Independently solve without the key; check each alternative and the stated conditions.",
         "Review originality, vocabulary, difficulty and time for an above-average Year 5/6 learner."
       ],
-      "writingGuidance": null
+      "writingGuidance": null,
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-w033",
+        "id": "vihaan-agy-w033",
         "type": "essay",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -3003,11 +3049,12 @@
           "Edit sentence boundaries, punctuation and Australian spelling."
         ],
         "assessmentMode": "human_only"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m100",
+        "id": "vihaan-agy-m100",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -3068,11 +3115,12 @@
       "arithmeticCheck": {
         "expression": "((37+42+50)/3)-35",
         "expected": "8"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m101",
+        "id": "vihaan-agy-m101",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -3133,11 +3181,12 @@
       "arithmeticCheck": {
         "expression": "2.4/0.2+1",
         "expected": "13.0"
-      }
+      },
+      "reservedForMock": true
     },
     {
       "question": {
-        "id": "vihaan-e500-m102",
+        "id": "vihaan-agy-m102",
         "type": "multiple_choice",
         "yearLevel": 6,
         "examStyle": "scholarship_style",
@@ -3198,7 +3247,8 @@
       "arithmeticCheck": {
         "expression": "45+108+12-120",
         "expected": "45"
-      }
+      },
+      "reservedForMock": true
     }
   ]
 }
