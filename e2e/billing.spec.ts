@@ -15,49 +15,23 @@ import { expect, test } from "@playwright/test";
 /** The two paid calls to action `content.ts`'s `paidCta` produces. */
 const PAID_CTA_LABELS = ["Subscribe to Family", "Choose the yearly plan"];
 
-test.describe("billing page (Family plan on roadmap)", () => {
-  test("shows the coming-soon card with no price and no checkout button", async ({ page }) => {
-    await page.goto("/billing");
-    await expect(
-      page.getByRole("heading", { level: 1, name: "Choose the Family plan" }),
-    ).toBeVisible();
-
-    /* The roadmap card replaces FamilyPlanCard's price block, billing-cycle
-       toggle and Subscribe button outright. Matched as a regex because the
-       plan name is a separate JSX expression, so the sentence spans two
-       text nodes and an exact string match resolves to nothing. */
-    await expect(page.getByText(/isn't open for subscriptions yet/)).toBeVisible();
+test.describe("billing page with payments disabled", () => {
+  test("shows the free beta and offers no plan, card entry or checkout", async ({ page }) => {
+    await page.goto("/billing", { waitUntil: "domcontentloaded" });
+    const notice = page.getByTestId("billing-free-beta");
+    await expect(notice.getByRole("heading", { level: 1, name: "The family beta is free" })).toBeVisible();
+    await expect(notice).toContainText("There is nothing to pay during the beta");
+    await expect(notice.getByRole("link", { name: "Back to your family" })).toHaveAttribute("href", "/parent");
+    await expect(page.getByRole("heading", { name: "Choose the Family plan" })).toHaveCount(0);
     await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Subscribe to Family" })).toHaveCount(0);
-
-    /* The one action offered instead goes somewhere real. */
-    const registerInterest = page.getByRole("link", { name: "Register interest" });
-    await expect(registerInterest).toBeVisible();
-    await expect(registerInterest).toHaveAttribute("href", "/help#contact");
-  });
-
-  test("the comparison table labels Family as coming soon and keeps the placeholder disclaimer", async ({
-    page,
-  }) => {
-    await page.goto("/billing");
-    /* PlanComparisonTable still quotes an indicative price — that is fine
-       without a purchase path, but it must say so and must keep carrying
-       the "not yet linked to a live Stripe price" disclaimer. */
-    await expect(page.getByText("Coming soon").first()).toBeVisible();
-    await expect(
-      page
-        .getByText(
-          "GST-inclusive AUD — pricing subject to change. Placeholder amounts, not yet linked to a live Stripe price.",
-        )
-        .first(),
-    ).toBeVisible();
   });
 });
 
 test.describe("no paid checkout is reachable from any public surface", () => {
   for (const path of ["/", "/pricing", "/billing"]) {
     test(`${path} offers no checkout call to action`, async ({ page }) => {
-      await page.goto(path);
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       for (const label of PAID_CTA_LABELS) {
         await expect(page.getByRole("button", { name: label })).toHaveCount(0);
