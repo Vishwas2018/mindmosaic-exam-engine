@@ -7,6 +7,7 @@ import { ArrowRight, Info } from "lucide-react";
 import { MarksMeter } from "./MarksMeter";
 import { type PreviewPaperResult } from "../fixtures";
 
+import { countLabel } from "@/lib/format-count";
 export interface PaperResultViewProps {
   result: PreviewPaperResult;
   child: {
@@ -123,7 +124,7 @@ export function PaperResultView({
               </dt>
               <dd className="mt-1 font-display text-2xl font-semibold text-amber-950 tabular-nums">
                 {isAwaiting
-                  ? `${pendingQuestionsCount} questions · ${pendingMarksCount} marks`
+                  ? `${countLabel(pendingQuestionsCount, "question")} · ${pendingMarksCount} marks`
                   : "None · all marked"}
               </dd>
             </div>

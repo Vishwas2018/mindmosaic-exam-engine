@@ -9,6 +9,7 @@ import type {
 } from "@/features/exam-engine/selection";
 import { YEAR_LEVELS } from "@/features/taxonomy/year-registry";
 
+import { countLabel } from "@/lib/format-count";
 /*
  * Pure, side-effect-free formatting — deliberately its own module rather
  * than living inside ExamConfigurator.tsx. /exam and /results only need
@@ -52,7 +53,7 @@ export const SUBJECT_LABELS: Record<SubjectFilter, string> = {
 
 export function describeConfig(config: ExamSelectionConfig): string {
   const count =
-    config.questionCount === "full" ? "Full set" : `${config.questionCount} questions`;
+    config.questionCount === "full" ? "Full set" : `${countLabel(config.questionCount, "question")}`;
   const timing = config.timing === "timed" ? "Timed" : "Untimed";
   return `${YEAR_LABELS[String(config.yearLevel)]} · ${STYLE_LABELS[config.examStyle]} · ${SUBJECT_LABELS[config.subject]} · ${count} · ${timing}`;
 }

@@ -9,6 +9,7 @@ import { formatSubmittedAt, type AttemptSummary } from "@/features/student/attem
 
 import { fetchAttemptHistory } from "./history-fetch";
 
+import { countLabel } from "@/lib/format-count";
 /**
  * What /results shows when the in-memory exam store is empty.
  *
@@ -50,7 +51,7 @@ function AttemptRow({ attempt }: { attempt: AttemptSummary }) {
         <p className="truncate text-sm font-semibold text-plum-dark">{attempt.title}</p>
         <p className="mt-0.5 text-xs font-semibold text-plum-muted">
           {formatSubmittedAt(attempt.submittedAt)}
-          {attempt.totalQuestions !== null ? ` · ${attempt.totalQuestions} questions` : ""}
+          {attempt.totalQuestions !== null ? ` · ${countLabel(attempt.totalQuestions, "question")}` : ""}
           {attempt.timing ? ` · ${attempt.timing === "timed" ? "Timed" : "Untimed"}` : ""}
           {attempt.pendingManualReview ? " · some marks pending" : ""}
         </p>

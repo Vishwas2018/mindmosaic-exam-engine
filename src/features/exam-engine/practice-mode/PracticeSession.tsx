@@ -31,6 +31,7 @@ import {
 import { usePracticeSession } from "./use-practice-session";
 import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
+import { countLabel } from "@/lib/format-count";
 export interface PracticeSessionProps {
   questions: readonly (Question | CandidateQuestion)[];
   /** Skill or subject name shown in the header, e.g. "Fractions". */
@@ -863,7 +864,7 @@ export function PracticeSession({
                   value:
                     state.flagged.length === 1
                       ? "1 question"
-                      : `${state.flagged.length} questions`,
+                      : `${countLabel(state.flagged.length, "question")}`,
                 },
               ].map((stat) => (
                 <div key={stat.label} className="flex justify-between gap-3 text-[14.5px]">

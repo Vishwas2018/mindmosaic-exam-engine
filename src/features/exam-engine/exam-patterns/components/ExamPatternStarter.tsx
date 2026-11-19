@@ -22,6 +22,7 @@ import {
   reducedModuleMinutes,
 } from "../pattern-session";
 
+import { countLabel } from "@/lib/format-count";
 interface GuestBanks {
   curated: readonly AuthoringQuestion[];
   published: readonly AuthoringQuestion[];
@@ -213,7 +214,7 @@ export function ExamPatternStarter({
           data-testid="pattern-sitting-shape"
         >
           {confidenceMode
-            ? `${servedCount} questions · Untimed (Confidence Mode)`
+            ? `${countLabel(servedCount, "question")} · Untimed (Confidence Mode)`
             : describePaperShape(servedCount, minutes)}
         </p>
       </div>
