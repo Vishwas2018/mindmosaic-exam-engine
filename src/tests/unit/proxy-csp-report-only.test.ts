@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("@/lib/supabase/middleware", () => ({
-  updateSession: vi.fn(async () => NextResponse.next()),
+  updateSession: vi.fn(async (_request: NextRequest, headers: Headers) => NextResponse.next({ request: { headers } })),
 }));
 
 import { buildContentSecurityPolicy } from "@/lib/security/csp";
@@ -34,5 +34,41 @@ describe("proxy CSP", () => {
     const csp = buildContentSecurityPolicy("n");
 
     expect(csp).not.toMatch(/localhost|127\.0\.0\.1/);
+  });
+});
+
+
+describe("DEV-only auth CSP enforcement", () => {
+  it("forwards the exact enforced policy to Next for dynamic auth routes", async () => {
+    vi.stubEnv("VERCEL_ENV", "preview");
+    vi.stubEnv("MM_DEV_AUTH_CSP_ENFORCE", "1");
+    try {
+      for (const path of ["/sign-in", "/auth/confirm", "/auth/forgot", "/auth/reset"]) {
+        const response = await proxy(new NextRequest("https://preview.example.test" + path));
+        const policy = response.headers.get("Content-Security-Policy");
+        expect(policy).toContain("'strict-dynamic'");
+        expect(response.headers.get("x-middleware-request-content-security-policy")).toBe(policy);
+        expect(response.headers.has("Content-Security-Policy-Report-Only")).toBe(false);
+      }
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("retains report mode for static preview routes and outside DEV", async () => {
+    vi.stubEnv("MM_DEV_AUTH_CSP_ENFORCE", "1");
+    try {
+      vi.stubEnv("VERCEL_ENV", "preview");
+      const preview = await proxy(new NextRequest("https://preview.example.test/practice"));
+      expect(preview.headers.has("Content-Security-Policy")).toBe(false);
+      expect(preview.headers.has("Content-Security-Policy-Report-Only")).toBe(true);
+
+      vi.stubEnv("VERCEL_ENV", "production");
+      const simulated = await proxy(new NextRequest("https://example.test/sign-in"));
+      expect(simulated.headers.has("Content-Security-Policy")).toBe(false);
+      expect(simulated.headers.has("Content-Security-Policy-Report-Only")).toBe(true);
+    } finally {
+      vi.unstubAllEnvs();
+    }
   });
 });
