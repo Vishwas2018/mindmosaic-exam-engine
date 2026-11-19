@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, within, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
@@ -181,9 +181,9 @@ describe("Programs page", () => {
     expect(screen.getByRole("heading", { name: /icas-style/i })).toBeInTheDocument();
   });
 
-  it("lists the six Planned pathways, none of them dated", () => {
+  it("lists the six Planned pathways under an accessible heading, none of them dated", () => {
     render(<ProgramsPage />);
-    const heading = screen.getByRole("heading", { name: "Planned pathways" });
+    const heading = screen.getByRole("heading", { name: "Pathways in development" });
     const section = heading.closest("div")?.parentElement;
     if (!section) throw new Error("Planned pathways section not found");
     for (const name of [
@@ -197,6 +197,118 @@ describe("Programs page", () => {
       expect(within(section).getByText(name)).toBeInTheDocument();
     }
     expect(within(section).queryByText(/\b20\d{2}\b/)).not.toBeInTheDocument();
+  });
+
+  it("describes availability accurately without promising a full set", () => {
+    render(<ProgramsPage />);
+    // Available means enough checked questions to run a set; some sets may be shortened.
+    expect(screen.getByText(/run a set/i)).toBeInTheDocument();
+    expect(screen.queryByText(/fill a full set/i)).not.toBeInTheDocument();
+    expect(programsMetadata.description).not.toContain("full set");
+  });
+
+  it("exposes only the checked year radio in the tab order", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year3 = within(radiogroup).getByRole("radio", { name: /^Year 3/ });
+    const year4 = within(radiogroup).getByRole("radio", { name: /^Year 4/ });
+
+    expect(year3).toHaveAttribute("aria-checked", "true");
+    expect(year3).toHaveAttribute("tabIndex", "0");
+    expect(year4).toHaveAttribute("aria-checked", "false");
+    expect(year4).toHaveAttribute("tabIndex", "-1");
+  });
+
+  it("moves focus and selects the next year with ArrowRight", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year3 = within(radiogroup).getByRole("radio", { name: /^Year 3/ });
+    const year4 = within(radiogroup).getByRole("radio", { name: /^Year 4/ });
+
+    year3.focus();
+    expect(document.activeElement).toBe(year3);
+    expect(year3).toHaveAttribute("aria-checked", "true");
+
+    fireEvent.keyDown(year3, { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(year4);
+    expect(year4).toHaveAttribute("aria-checked", "true");
+    expect(year4).toHaveAttribute("tabIndex", "0");
+    expect(year3).toHaveAttribute("aria-checked", "false");
+    expect(year3).toHaveAttribute("tabIndex", "-1");
+    expect(screen.getByRole("heading", { name: "Nothing open for Year 4 yet" })).toBeInTheDocument();
+  });
+
+  it("wraps from the last year back to the first on ArrowDown", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year12 = within(radiogroup).getByRole("radio", { name: /^Year 12/ });
+    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1\b/ });
+
+    year12.focus();
+    fireEvent.keyDown(year12, { key: "ArrowDown" });
+
+    expect(document.activeElement).toBe(year1);
+    expect(year1).toHaveAttribute("aria-checked", "true");
+    expect(year12).toHaveAttribute("aria-checked", "false");
+  });
+
+  it("selects the first year on Home and the last year on End", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year1 = within(radiogroup).getByRole("radio", { name: /^Year 1\b/ });
+    const year12 = within(radiogroup).getByRole("radio", { name: /^Year 12/ });
+
+    year1.focus();
+    fireEvent.keyDown(year1, { key: "Home" });
+
+    expect(document.activeElement).toBe(year1);
+    expect(year1).toHaveAttribute("aria-checked", "true");
+
+    year12.focus();
+    fireEvent.keyDown(year12, { key: "End" });
+
+    expect(document.activeElement).toBe(year12);
+    expect(year12).toHaveAttribute("aria-checked", "true");
+    expect(screen.queryByRole("heading", { name: "Open for Year 12" })).not.toBeInTheDocument();
+  });
+
+  it("selects an unavailable year and shows its explanatory content", () => {
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year4 = within(radiogroup).getByRole("radio", { name: /^Year 4/ });
+
+    year4.focus();
+    fireEvent.keyDown(year4, { key: "ArrowRight" }); // Year 4 -> Year 5 (live)
+    fireEvent.keyDown(document.activeElement as HTMLElement, { key: "ArrowLeft" }); // Year 5 -> Year 4 (unavailable)
+
+    expect(year4).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("heading", { name: "Nothing open for Year 4 yet" })).toBeInTheDocument();
+  });
+
+  it("selects a year by mouse click", async () => {
+    const user = userEvent.setup();
+    render(<ProgramsPage />);
+    const radiogroup = screen.getByRole("radiogroup", { name: "Choose a year level" });
+    const year5 = within(radiogroup).getByRole("radio", { name: /^Year 5/ });
+
+    await user.click(year5);
+
+    expect(year5).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("heading", { name: "Open for Year 5" })).toBeInTheDocument();
+  });
+
+  it("exposes anchor navigation to the discovery and planned sections", () => {
+    render(<ProgramsPage />);
+    expect(
+      screen.getByRole("link", { name: "Explore available programmes" }),
+    ).toHaveAttribute("href", "#open-now");
+    expect(screen.getByRole("link", { name: "See upcoming pathways" })).toHaveAttribute(
+      "href",
+      "#coming-next",
+    );
+    expect(screen.getByRole("heading", { name: "Choose a year level" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Pathways in development" })).toBeInTheDocument();
   });
 });
 
