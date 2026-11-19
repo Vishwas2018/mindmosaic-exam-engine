@@ -28,7 +28,9 @@ export default function ResultsReviewPage() {
 
   const status = useExamStore((state) => state.status);
   const config = useExamStore((state) => state.config);
-  const questions = useExamStore((state) => state.reviewQuestions);
+  const submittedQuestions = useExamStore((state) => state.reviewQuestions);
+  const candidateQuestions = useExamStore((state) => state.questions);
+  const isGuest = useExamStore((state) => state.sessionMode === "guest");
   const responses = useExamStore((state) => state.responses);
   const flaggedQuestionIds = useExamStore((state) => state.flaggedQuestionIds);
   const result = useExamStore((state) => state.result);
@@ -38,10 +40,14 @@ export default function ResultsReviewPage() {
     "all" | "incorrect" | "unanswered" | "flagged" | "manual_review"
   >("all");
 
-  if (status !== "submitted" || !result || !config || !questions) {
+  if (status !== "submitted" || !result || !config || !submittedQuestions) {
     return <ResultsColdLoad />;
   }
 
+  const revealed = new Map(submittedQuestions.map((question) => [question.id, question]));
+  const questions = isGuest
+    ? candidateQuestions.map((question) => revealed.get(question.id) ?? question)
+    : submittedQuestions;
   const detailById = new Map(
     result.questionDetails.map((detail) => [detail.questionId, detail]),
   );
@@ -134,10 +140,10 @@ export default function ResultsReviewPage() {
                 const detail = detailById.get(question.id);
                 const submitted = responses[question.id];
 
-                const correctAnswer =
-                  detail !== undefined && !detail.requiresManualMarking
-                    ? formatCorrectAnswer(question)
-                    : null;
+                const authored = "answerKey" in question ? question : null;
+                const correctAnswer = authored && !detail?.requiresManualMarking
+                  ? formatCorrectAnswer(authored)
+                  : null;
 
                 return (
                   <li
@@ -148,7 +154,7 @@ export default function ResultsReviewPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-xs font-semibold uppercase tracking-wide text-primary">
-                            Q{reviewQuestions.indexOf(question) + 1}
+                            Q{reviewQuestions.findIndex(({ id }) => id === question.id) + 1}
                           </span>
                           <span className="text-xs font-semibold text-plum-muted">
                             {question.metadata.topic ? skillLabel(question.metadata.topic) : "Question"}
@@ -187,7 +193,7 @@ export default function ResultsReviewPage() {
                           Your answer
                         </dt>
                         <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
-                          {formatResponse(question, submitted) ?? "Not answered"}
+                          {(authored && formatResponse(authored, submitted)) ?? "Not answered"}
                         </dd>
                       </div>
                       {detail?.requiresManualMarking ? (
@@ -206,7 +212,7 @@ export default function ResultsReviewPage() {
                             Correct answer
                           </dt>
                           <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
-                            {correctAnswer}
+                            {correctAnswer ?? "Available for questions you answered."}
                           </dd>
                         </div>
                       )}
@@ -217,7 +223,7 @@ export default function ResultsReviewPage() {
                         Explanation
                       </h3>
                       <p className="mt-1.5 text-sm leading-6 text-plum-muted">
-                        {question.explanation}
+                        {question.explanation ?? "No explanation was released for this question."}
                       </p>
                     </div>
                   </li>
