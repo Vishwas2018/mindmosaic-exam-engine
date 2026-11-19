@@ -3,25 +3,30 @@ import type { NextRequest } from "next/server";
 import { buildContentSecurityPolicy } from "@/lib/security/csp";
 import { updateSession } from "@/lib/supabase/middleware";
 
+// These auth pages already render per request, so Next can nonce their scripts.
+const dynamicAuthRoutes = new Set(["/sign-in", "/auth/confirm", "/auth/forgot", "/auth/reset"]);
+
+function shouldEnforceAuthCsp(request: NextRequest): boolean {
+  if (process.env.MM_DEV_AUTH_CSP_ENFORCE !== "1") return false;
+  const { hostname, pathname } = request.nextUrl;
+  const target = process.env.VERCEL_ENV;
+  const loopback = !target && (hostname === "localhost" || hostname === "127.0.0.1");
+  return (target === "preview" || loopback) && dynamicAuthRoutes.has(pathname);
+}
+
 export async function proxy(request: NextRequest) {
-  // Per-request nonce for the CSP script-src allowlist. Forwarded as a
-  // request header so Server Components can read it via `headers()` if a
-  // future inline <script> needs it explicitly; Next's own injected scripts
-  // pick it up automatically from the CSP header below.
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const csp = buildContentSecurityPolicy(nonce);
-
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
 
+  const enforce = shouldEnforceAuthCsp(request);
+  // Next reads the request policy during dynamic rendering to nonce its scripts.
+  requestHeaders.delete("Content-Security-Policy");
+  if (enforce) requestHeaders.set("Content-Security-Policy", csp);
+
   const response = await updateSession(request, requestHeaders);
-
-  /* Report-only, deliberately. The policy is nonce-based ('strict-dynamic'), and a nonce only reaches pages rendered
-     per request. Most public and practice routes are statically prerendered, so their scripts carry no nonce: enforcing
-     this header blocks every script on them and the pages never hydrate. Enforce only after those routes are either
-     rendered dynamically or covered by hashes, and prove it with the E2E suite. */
-  response.headers.set("Content-Security-Policy-Report-Only", csp);
-
+  response.headers.set(enforce ? "Content-Security-Policy" : "Content-Security-Policy-Report-Only", csp);
   return response;
 }
 
