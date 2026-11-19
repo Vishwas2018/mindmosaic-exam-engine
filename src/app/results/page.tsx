@@ -186,7 +186,9 @@ export default function ResultsPage() {
   /* The full authoring questions — answer keys and explanations included
      — are only ever populated once the exam is submitted, which is
      exactly when this page is allowed to reveal them. */
-  const questions = useExamStore((state) => state.reviewQuestions);
+  const submittedQuestions = useExamStore((state) => state.reviewQuestions);
+  const candidateQuestions = useExamStore((state) => state.questions);
+  const isGuest = useExamStore((state) => state.sessionMode === "guest");
   const responses = useExamStore((state) => state.responses);
   const flaggedQuestionIds = useExamStore((state) => state.flaggedQuestionIds);
   const result = useExamStore((state) => state.result);
@@ -211,10 +213,14 @@ export default function ResultsPage() {
    * original empty state for guests and for anyone with nothing finished.
    * The post-submit path below is unchanged.
    */
-  if (status !== "submitted" || !result || !config || !questions) {
+  if (status !== "submitted" || !result || !config || !submittedQuestions) {
     return <ResultsColdLoad />;
   }
 
+  const revealed = new Map(submittedQuestions.map((question) => [question.id, question]));
+  const questions = isGuest
+    ? candidateQuestions.map((question) => revealed.get(question.id) ?? question)
+    : submittedQuestions;
   const detailById = new Map(
     result.questionDetails.map((detail) => [detail.questionId, detail]),
   );
@@ -677,12 +683,13 @@ export default function ResultsPage() {
             ) : (
               <ol className="mt-7 space-y-6">
                 {reviewQuestions.map((question) => {
-                  const index = questions.indexOf(question);
+                  const index = questions.findIndex(({ id }) => id === question.id);
                   const detail = detailById.get(question.id);
                   if (!detail) return null;
                   const statusInfo = STATUS_LABELS[detail.status];
-                  const submitted = formatResponse(question, responses[question.id]);
-                  const correctAnswer = formatCorrectAnswer(question);
+                  const authored = "answerKey" in question ? question : null;
+                  const submitted = authored && formatResponse(authored, responses[question.id]);
+                  const correctAnswer = authored && formatCorrectAnswer(authored);
                   const wasFlagged = flaggedQuestionIds.includes(question.id);
 
                   return (
@@ -779,7 +786,7 @@ export default function ResultsPage() {
                               Correct answer
                             </dt>
                             <dd className="mt-1.5 text-sm font-semibold text-plum-dark">
-                              {correctAnswer}
+                              {correctAnswer ?? "Available for questions you answered."}
                             </dd>
                           </div>
                         )}
@@ -790,7 +797,7 @@ export default function ResultsPage() {
                           Explanation
                         </h3>
                         <p className="mt-1.5 text-sm leading-6 text-plum-muted">
-                          {question.explanation}
+                          {question.explanation ?? "No explanation was released for this question."}
                         </p>
                       </div>
                     </li>

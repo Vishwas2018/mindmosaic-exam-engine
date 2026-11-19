@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { stubGuestSession } from "./helpers/guest-session-stub";
 import { ALL_TEST_SCHOLARSHIP_QUESTIONS } from "./fixtures/scholarship-fixtures";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { buildExamResult } from "@/features/exam-engine/scoring/exam-report";
@@ -6,17 +7,7 @@ import { buildExamResult } from "@/features/exam-engine/scoring/exam-report";
 async function setupScholarshipRouteMocks(page: Page, options?: { confidenceMode?: boolean }) {
   const confidenceMode = options?.confidenceMode ?? false;
 
-  await page.route("**/api/exam/guest-bank", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({
-        curated: ALL_TEST_SCHOLARSHIP_QUESTIONS,
-        published: ALL_TEST_SCHOLARSHIP_QUESTIONS,
-        practice: ALL_TEST_SCHOLARSHIP_QUESTIONS,
-      }),
-    });
-  });
+  await stubGuestSession(page, ALL_TEST_SCHOLARSHIP_QUESTIONS);
 
   await page.route("**/api/exam/session", async (route) => {
     if (route.request().method() === "POST") {

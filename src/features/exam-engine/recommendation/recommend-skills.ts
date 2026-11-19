@@ -97,7 +97,7 @@ function groupKey(subject: string, skillOrTopic: string): string {
  */
 export function recommendSkills(
   result: ExamResult,
-  questions: readonly Question[],
+  questions: readonly Pick<Question, "id" | "metadata">[],
 ): RecommendationResult {
   const questionById = new Map(questions.map((q) => [q.id, q]));
   const groups = new Map<string, SkillGroup>();
