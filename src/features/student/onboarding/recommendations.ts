@@ -16,6 +16,7 @@ import { REGISTRY_SUBJECT_BY_FILTER } from "@/features/exam-engine/selection/sel
 import { strandKey, type StudioAvailability, type SubjectAvailability } from "@/features/practice-studio/availability";
 import type { DiagnosticBaselineRecord, SkillBaselineEntry } from "./baseline-contract";
 
+import { countLabel } from "@/lib/format-count";
 export interface WarmupRecommendation {
   /** Why this is recommended, in terms of the child's own answers. */
   readonly reason: string;
@@ -123,7 +124,7 @@ export function recommendFromWarmup(
         subjectLabel,
         kind,
         href: `/practice/session?year=${baseline.yearLevel}&style=${subject.examStyle}&subject=${subject.subject}&count=${size}&strand=${encodeURIComponent(strand.strandKey)}&untimed=1`,
-        cta: `Practise ${size} questions`,
+        cta: `Practise ${countLabel(size, "question")}`,
         direct: true,
       });
     } else {

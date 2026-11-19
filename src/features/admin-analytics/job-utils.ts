@@ -52,7 +52,10 @@ export function formatJobTimestamp(iso: string | null): string {
   if (!iso) return "—";
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return "—";
+  // Pin the zone: SSR (UTC) and the browser (local) must render identical
+  // text or React throws hydration error #418 (MT-006).
   return date.toLocaleString("en-AU", {
+    timeZone: "Australia/Sydney",
     day: "numeric",
     month: "short",
     hour: "2-digit",

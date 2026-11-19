@@ -7,6 +7,7 @@ import { Check, Info, Lock } from "lucide-react";
 import { ChildSwitcher, type ChildSwitcherItem } from "./ChildSwitcher";
 import { type ProgrammeAvailability } from "../fixtures";
 
+import { countLabel } from "@/lib/format-count";
 export interface ChildLearningHubProps {
   child: {
     id: string;
@@ -122,7 +123,7 @@ export function ChildLearningHub({
                       </span>
                     </div>
                     <p className="mt-2 text-xs font-medium text-mm-ink-soft">
-                      {p.questionCountEstimated ? `about ${p.questionCountEstimated} questions · ` : ""}
+                      {p.questionCountEstimated ? `about ${countLabel(p.questionCountEstimated, "question")} · ` : ""}
                       {p.setSizesDescription ?? "sets of 10 or 20"}
                     </p>
                   </div>

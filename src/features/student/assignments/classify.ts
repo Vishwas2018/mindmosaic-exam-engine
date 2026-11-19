@@ -6,6 +6,7 @@ import {
 
 import type { StudentAssignment } from "./types";
 
+import { countLabel } from "@/lib/format-count";
 /**
  * Pure presentation logic for the assignments list: due-date urgency,
  * human labels, and tab grouping. No React, no Supabase — unit tested
@@ -75,7 +76,7 @@ export function describeAssignmentConfig(
     parts.push(
       config.questionCount === "full"
         ? "Full set"
-        : `${config.questionCount} questions`,
+        : `${countLabel(config.questionCount, "question")}`,
     );
   }
   if (config.timing) parts.push(config.timing === "timed" ? "Timed" : "Untimed");
