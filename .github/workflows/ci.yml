@@ -257,6 +257,8 @@ jobs:
       E2E_MAILPIT_URL: http://127.0.0.1:56324
       # supabase/templates/{confirm,recovery}.html link with token_hash, so the device-independent tests apply.
       E2E_TOKEN_HASH_TEMPLATES: "1"
+      # A loopback writer target is refused unless this is set explicitly (src/server/exam-write/target.ts).
+      EXAM_WRITE_ALLOW_LOOPBACK: "1"
     steps:
       - uses: actions/checkout@v4
       # Before npm ci / apt / docker pulls open outbound sockets: see scripts/ci/supabase-start.sh.
