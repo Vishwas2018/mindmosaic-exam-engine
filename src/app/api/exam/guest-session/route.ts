@@ -15,6 +15,8 @@ import { consumeRateLimit, type RateLimitRule } from "@/lib/security/rate-limit"
 import { practiceTokenKey } from "@/server/practice-session-token";
 
 const cookieName = "mm-guest-exam";
+const spentCookieName = "mm-guest-spent";
+const spentLimit = 12;
 const ttlSeconds = 4 * 60 * 60;
 const startSchema = z.object({
   selection: createSessionRequestSchema,
@@ -160,6 +162,45 @@ async function resolve(ticket: string) {
     : null;
 }
 
+
+/**
+ * First-submit record. A ticket may be submitted once with a given set of answers; re-sending the same answers
+ * is idempotent, but changing them after answers were revealed is refused, so a candidate (or script) cannot
+ * probe the key by submitting partial answers repeatedly mid-exam. The record is a signed, HttpOnly cookie
+ * because guest sittings are stateless; it stops in-browser probing but not a client that discards cookies,
+ * which is bounded by the rate limiter and needs shared state to close (docs/GUEST_ABUSE_PROTECTION.md).
+ */
+type Spent = { id: string; h: string };
+
+function spentSignature(payload: string, key: Buffer) {
+  return createHmac("sha256", key).update("guest-spent/v1\0").update(payload).digest();
+}
+
+function readSpent(raw: string | undefined, key: Buffer): Spent[] {
+  if (!raw) return [];
+  const [payload, encoded] = raw.split(".");
+  if (!payload || !encoded) return [];
+  const received = Buffer.from(encoded, "base64url");
+  const expected = spentSignature(payload, key);
+  if (received.length !== expected.length || !timingSafeEqual(received, expected)) return [];
+  try {
+    const parsed = z.array(z.object({ id: z.string(), h: z.string() })).safeParse(JSON.parse(Buffer.from(payload, "base64url").toString("utf8")));
+    return parsed.success ? parsed.data : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeSpent(entries: Spent[], key: Buffer) {
+  const payload = Buffer.from(JSON.stringify(entries.slice(-spentLimit))).toString("base64url");
+  return payload + "." + spentSignature(payload, key).toString("base64url");
+}
+
+function responsesHash(responses: ExamResponses) {
+  const ordered = Object.keys(responses).sort().map((id) => [id, responses[id]]);
+  return createHash("sha256").update(JSON.stringify(ordered)).digest("hex").slice(0, 32);
+}
+
 export async function PUT(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
@@ -174,6 +215,13 @@ export async function PUT(request: Request) {
   const ids = new Set(allocation.questions.map(({ id }) => id));
   const responses = input.data.responses as ExamResponses;
   if (Object.keys(responses).some((id) => !ids.has(id))) return json({ error: "invalid_request" }, 400);
+  const key = practiceTokenKey();
+  if (!key) return json({ error: "guest_session_unavailable" }, 503);
+  const cookieStore = await cookies();
+  const spent = readSpent(cookieStore.get(spentCookieName)?.value, key);
+  const digest = responsesHash(responses);
+  const previous = spent.find((entry) => entry.id === claims.id);
+  if (previous && previous.h !== digest) return json({ error: "already_submitted" }, 409);
   const duration = sessionDurationSeconds(allocation.config, allocation.questions);
   const deadline = duration === null ? null : claims.startedAt + duration * 1000;
   const now = Date.now();
@@ -192,10 +240,16 @@ export async function PUT(request: Request) {
     startedAt: claims.startedAt, submittedAt, submissionReason,
   });
   const attempted = new Set(result.questionDetails.filter((detail) => detail.attempted).map((detail) => detail.questionId));
-  return json({
+  const response = json({
     result,
     reviewQuestions: allocation.questions.filter(({ id }) => attempted.has(id)),
   });
+  if (!previous) {
+    response.cookies.set(spentCookieName, writeSpent([...spent, { id: claims.id, h: digest }], key), {
+      httpOnly: true, sameSite: "strict", secure: new URL(request.url).protocol === "https:", path: "/api/exam/guest-session", maxAge: ttlSeconds,
+    });
+  }
+  return response;
 }
 
 export async function PATCH(request: Request) {
