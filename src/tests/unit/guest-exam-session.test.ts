@@ -4,9 +4,14 @@ import { bankQuestion } from "@/tests/fixtures/exam-pattern-bank";
 import { PATCH, POST, PUT } from "@/app/api/exam/guest-session/route";
 import { resetRateLimitsForTests } from "@/lib/security/rate-limit";
 
-const state = vi.hoisted(() => ({ browser: undefined as string | undefined }));
+const state = vi.hoisted(() => ({ browser: undefined as string | undefined, spent: undefined as string | undefined }));
 vi.mock("next/headers", () => ({
-  cookies: async () => ({ get: () => state.browser ? { value: state.browser } : undefined }),
+  cookies: async () => ({
+    get: (name: string) => {
+      const value = name === "mm-guest-spent" ? state.spent : state.browser;
+      return value ? { value } : undefined;
+    },
+  }),
 }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/server/exam-bank", () => ({
@@ -27,12 +32,17 @@ function request(method: string, data: unknown, origin = "http://localhost", cli
 }
 
 beforeEach(() => {
+  vi.stubEnv("VERCEL", "1");
   resetRateLimitsForTests();
   state.browser = undefined;
+  state.spent = undefined;
   vi.useFakeTimers({ toFake: ["Date"] });
   vi.setSystemTime(new Date("2026-11-20T00:00:00Z"));
 });
-afterEach(() => vi.useRealTimers());
+afterEach(() => {
+  vi.useRealTimers();
+  vi.unstubAllEnvs();
+});
 
 async function start(config = selection.config) {
   const response = await POST(request("POST", { selection: { config } }));
@@ -133,5 +143,26 @@ describe("guest exam disclosure boundary", () => {
       }
     }
     expect(throttledSubmit).toBe(1);
+  });
+
+  it("refuses to re-submit a ticket with different answers once answers were revealed", async () => {
+    const started = await start();
+    const id = started.questions[0].id;
+    const first = await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }));
+    expect(first.status).toBe(200);
+    const spent = first.cookies.get("mm-guest-spent");
+    expect(spent?.httpOnly).toBe(true);
+    state.spent = spent?.value;
+
+    const probe = await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "b" } }));
+    expect(probe.status).toBe(409);
+    expect(await probe.json()).toEqual({ error: "already_submitted" });
+
+    const retry = await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }));
+    expect(retry.status).toBe(200);
+    expect((await retry.json()).reviewQuestions).toHaveLength(1);
+
+    state.spent = "forged.AAAA";
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "b" } }))).status).toBe(200);
   });
 });
