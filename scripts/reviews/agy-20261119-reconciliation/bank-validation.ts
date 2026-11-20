@@ -241,10 +241,31 @@ export function parseOptionNumericValue(text: string): number | null {
   return null;
 }
 
+/*
+ * Operators decide what a mathematics question asks, so they are kept as words
+ * instead of being stripped with the other punctuation. A hyphen is subtraction
+ * only between numbers or directly before one, so hyphenated words are unaffected.
+ */
+const OPERATOR_WORDS: readonly [RegExp, string][] = [
+  [/(?<=\d)\s*[-−–]\s*(?=\d)/g, " minus "],
+  [/(?<![\w)])[-−]\s*(?=\d)/g, " negative "],
+  [/\+/g, " plus "],
+  [/×|\*/g, " times "],
+  [/÷/g, " divided by "],
+  [/(?<=\d)\s*\/\s*(?=\d)/g, " over "],
+  [/%/g, " percent "],
+  [/≤/g, " at most "],
+  [/≥/g, " at least "],
+  [/</g, " less than "],
+  [/>/g, " greater than "],
+  [/=/g, " equals "],
+  [/\^/g, " power "],
+  [/√/g, " root "],
+];
+
 export const normaliseStem = (s: string) =>
-  s
+  OPERATOR_WORDS.reduce((text, [pattern, word]) => text.replace(pattern, word), s.normalize("NFKC"))
     .toLowerCase()
-    .normalize("NFKC")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 
@@ -408,7 +429,7 @@ export function duplicatePairs(stems: readonly Stem[], corpus: readonly Stem[] =
     const cached = stemCache.get(prompt);
     if (cached) return cached;
     const normalised = normaliseStem(prompt);
-    const masked = normaliseStem(prompt.replace(/\b\d+(?:\.\d+)?\b/g, "number"));
+    const masked = normalised.replace(/\b\d+\b/g, "number");
     const result = { normalised, masked, tokens: new Set(normalised.split(" ")) };
     stemCache.set(prompt, result);
     return result;
