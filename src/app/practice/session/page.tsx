@@ -60,7 +60,7 @@ function PracticeSkillSessionContent() {
     } : options).then(async (response) => {
       const data = await response.json();
       if (controller.signal.aborted) return;
-      if (!response.ok) {
+      if (!response.ok || data.ok === false) {
         setDrillShortfall(data.error === "insufficient_questions" ? data.eligibleCount : null);
         setStatus("error");
         return;
