@@ -21,3 +21,12 @@ The published source files and runtime stay outside the write scope.
 Independent solving and internal duplicate checks supply advisory
 evidence. A qualified human must approve any proposed expansion revision
 against its draft hash before publication.
+
+Each reply in `solved-NN.json` must carry the question `id` and a `packetHash`
+(SHA-256 of the key-free question exactly as the reviewer saw it, computed by
+`packet_hash` in `prepare-review.py`). Replies are matched by both, never by
+position, so a reordered, edited or misattributed packet is rejected.
+
+Both the evidence directory and the output must sit outside this checkout and
+outside every other Git checkout or linked worktree. Guard regression tests:
+`python -m unittest scripts/reviews/codex-20261118-scholarship/test_guards.py`.
