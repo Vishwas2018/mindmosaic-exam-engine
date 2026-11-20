@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { bankQuestion } from "@/tests/fixtures/exam-pattern-bank";
 import { PATCH, POST, PUT } from "@/app/api/exam/guest-session/route";
+import { resetRateLimitsForTests } from "@/lib/security/rate-limit";
 
 const state = vi.hoisted(() => ({ browser: undefined as string | undefined }));
 vi.mock("next/headers", () => ({
@@ -19,11 +20,14 @@ const selection = {
   config: { yearLevel: 3, examStyle: "naplan_style", subject: "numeracy", questionCount: 1, timing: "timed" },
 };
 const url = "http://localhost/api/exam/guest-session";
-function request(method: string, data: unknown, origin = "http://localhost") {
-  return new Request(url, { method, headers: { origin, host: "localhost" }, body: JSON.stringify(data) });
+function request(method: string, data: unknown, origin = "http://localhost", client?: string) {
+  const headers: Record<string, string> = { origin, host: "localhost" };
+  if (client) headers["x-forwarded-for"] = client;
+  return new Request(url, { method, headers, body: JSON.stringify(data) });
 }
 
 beforeEach(() => {
+  resetRateLimitsForTests();
   state.browser = undefined;
   vi.useFakeTimers({ toFake: ["Date"] });
   vi.setSystemTime(new Date("2026-11-20T00:00:00Z"));
@@ -100,5 +104,34 @@ describe("guest exam disclosure boundary", () => {
     const scholarship = { ...selection.config, yearLevel: 6, examStyle: "scholarship_style" };
     expect((await POST(request("POST", { selection: { config: scholarship } }))).status).toBe(404);
     expect((await POST(request("POST", { selection }, "http://other.test"))).status).toBe(403);
+  });
+
+  it("throttles a client that keeps starting and submitting sessions to harvest answers", async () => {
+    const attacker = "203.0.113.7";
+    let blocked = 0;
+    for (let i = 0; i < 31; i += 1) {
+      const response = await POST(request("POST", { selection }, "http://localhost", attacker));
+      if (response.status === 429) {
+        blocked += 1;
+        expect(response.headers.get("retry-after")).toMatch(/^\d+$/);
+        expect(await response.json()).toEqual({ error: "rate_limited" });
+      }
+    }
+    expect(blocked).toBe(1);
+
+    const other = await POST(request("POST", { selection }, "http://localhost", "203.0.113.8"));
+    expect(other.status).toBe(201);
+    const { ticket } = await other.json();
+    state.browser = other.cookies.get("mm-guest-exam")?.value;
+    let throttledSubmit = 0;
+    for (let i = 0; i < 21; i += 1) {
+      const response = await PUT(request("PUT", { ticket, responses: {} }, "http://localhost", "203.0.113.8"));
+      if (response.status === 429) {
+        throttledSubmit += 1;
+        const body = await response.json();
+        expect(body).not.toHaveProperty("reviewQuestions");
+      }
+    }
+    expect(throttledSubmit).toBe(1);
   });
 });

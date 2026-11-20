@@ -11,6 +11,7 @@ import { selectExamQuestions } from "@/features/exam-engine/selection";
 import { toCandidateQuestions, type CandidateAnswer, type ExamResponses } from "@/features/exam-engine/types";
 import { getEffectiveSubmissionReason, getEffectiveSubmittedAt } from "@/features/exam-engine/state/deadline";
 import { getGuestExamBank } from "@/server/exam-bank";
+import { consumeRateLimit, type RateLimitRule } from "@/lib/security/rate-limit";
 import { practiceTokenKey } from "@/server/practice-session-token";
 
 const cookieName = "mm-guest-exam";
@@ -37,6 +38,19 @@ type Selection = z.infer<typeof startSchema> & { seed: string };
 
 function json(body: unknown, status = 200) {
   return NextResponse.json(body, { status, headers: { "Cache-Control": "private, no-store" } });
+}
+
+/* Per client address, per 10 minutes. A family sitting several papers stays far below these. */
+const startRule: RateLimitRule = { name: "guest-start", limit: 30, windowMs: 10 * 60 * 1000 };
+const submitRule: RateLimitRule = { name: "guest-submit", limit: 20, windowMs: 10 * 60 * 1000 };
+const feedbackRule: RateLimitRule = { name: "guest-feedback", limit: 120, windowMs: 10 * 60 * 1000 };
+
+function limited(request: Request, rule: RateLimitRule) {
+  const decision = consumeRateLimit(request, rule);
+  if (decision.allowed) return null;
+  const response = json({ error: "rate_limited" }, 429);
+  response.headers.set("Retry-After", String(decision.retryAfterSeconds));
+  return response;
 }
 
 function unavailable() {
@@ -103,6 +117,8 @@ async function readJson(request: Request) {
 export async function POST(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
+  const throttled = limited(request, startRule);
+  if (throttled) return throttled;
   const key = practiceTokenKey();
   if (!key) return json({ error: "guest_session_unavailable" }, 503);
   const input = startSchema.safeParse(await readJson(request));
@@ -147,6 +163,8 @@ async function resolve(ticket: string) {
 export async function PUT(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
+  const throttled = limited(request, submitRule);
+  if (throttled) return throttled;
   const input = submitSchema.safeParse(await readJson(request));
   if (!input.success) return json({ error: "invalid_request" }, 400);
   const session = await resolve(input.data.ticket);
@@ -183,6 +201,8 @@ export async function PUT(request: Request) {
 export async function PATCH(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
+  const throttled = limited(request, feedbackRule);
+  if (throttled) return throttled;
   const input = feedbackSchema.safeParse(await readJson(request));
   if (!input.success || isUnanswered(input.data.answer as CandidateAnswer)) return json({ error: "answer_required" }, 400);
   const session = await resolve(input.data.ticket);
