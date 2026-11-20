@@ -47,6 +47,7 @@ import { ResultsColdLoad } from "./ResultsColdLoad";
 import { ResultsHistoryPanel } from "./ResultsHistoryPanel";
 import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
+import { countLabel } from "@/lib/format-count";
 const STATUS_LABELS: Record<
   string,
   { label: string; tone: string; icon: typeof Check }
@@ -391,7 +392,7 @@ export default function ResultsPage() {
                 className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-primary"
               >
                 {config.shortened
-                  ? `Practice module — ${result.totalQuestions} questions, not the full-length paper.`
+                  ? `Practice module — ${countLabel(result.totalQuestions, "question")}, not the full-length paper.`
                   : config.timing === "untimed"
                     ? "Full-length practice paper — the same number of questions as the real assessment, sat without a time limit."
                     : "Full-length practice paper — the same number of questions and time limit as the real assessment."}

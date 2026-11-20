@@ -4,6 +4,7 @@ import { ClipboardList, Clock, ShieldCheck } from "lucide-react";
 
 import type { MockExamSectionKey } from "../lib/practice";
 
+import { countLabel } from "@/lib/format-count";
 const OFFICIAL_MOCK_SECTIONS: readonly {
   readonly key: Exclude<MockExamSectionKey, "full_mock">;
   readonly title: string;
@@ -66,7 +67,7 @@ export function VihaanMockExams({
                 <div>
                   <h3 className="text-sm font-bold text-ink">{test.title}</h3>
                   <p className="mt-1 text-xs text-mm-muted">
-                    {actualCount} questions · {test.minutes}-minute countdown
+                    {countLabel(actualCount, "question")} · {test.minutes}-minute countdown
                   </p>
                 </div>
                 <button

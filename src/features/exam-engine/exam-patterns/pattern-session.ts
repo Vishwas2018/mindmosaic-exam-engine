@@ -9,6 +9,7 @@ import type { Adaptation, ExamPattern } from "./exam-pattern";
 import { getExamPattern } from "./exam-pattern-registry";
 import { parseProgrammeId } from "./programme-id";
 
+import { countLabel } from "@/lib/format-count";
 /**
  * The join between a pattern and the exam session that sits it. A pattern
  * sitting is an ordinary session — same store, same timer, same submit path —
@@ -104,7 +105,7 @@ export function sessionDurationSeconds(
 
 /** "36 questions · 45 minutes" — the plain-language line the picker shows. */
 export function describePaperShape(questionCount: number, timeMinutes: number): string {
-  return `${questionCount} questions · ${timeMinutes} minutes`;
+  return `${countLabel(questionCount, "question")} · ${timeMinutes} minutes`;
 }
 
 /**
@@ -123,7 +124,7 @@ export function patternSittingLabel(
 ): string {
   if (!reduced) return pattern.label;
   const base = pattern.label.replace(/ — full-length practice$/, "");
-  return `${base} — practice module (${servedQuestionCount} of ${pattern.questionCount} questions)`;
+  return `${base} — practice module (${servedQuestionCount} of ${countLabel(pattern.questionCount, "question")})`;
 }
 
 /**

@@ -21,6 +21,8 @@ import {
   reducedModuleMinutes,
 } from "../pattern-session";
 
+import { countLabel } from "@/lib/format-count";
+
 /**
  * The start screen for one full-length practice paper.
  *
@@ -170,7 +172,7 @@ export function ExamPatternStarter({
           data-testid="pattern-sitting-shape"
         >
           {confidenceMode
-            ? `${servedCount} questions · Untimed (Confidence Mode)`
+            ? `${countLabel(servedCount, "question")} · Untimed (Confidence Mode)`
             : describePaperShape(servedCount, minutes)}
         </p>
       </div>

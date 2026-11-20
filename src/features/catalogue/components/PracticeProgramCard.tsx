@@ -12,6 +12,7 @@ import {
 } from "../presentation";
 import { SubjectPlate } from "./SubjectPlate";
 
+import { countLabel } from "@/lib/format-count";
 export interface PracticeProgramCardProps {
   program: Program;
   /**
@@ -98,7 +99,7 @@ export function PracticeProgramCard({ program, questionCount }: PracticeProgramC
               {questionCount !== undefined && (
                 <div>
                   <dt className="sr-only">Questions available</dt>
-                  <dd>{questionCount} questions available</dd>
+                  <dd>{countLabel(questionCount, "question")} available</dd>
                 </div>
               )}
               {questionCount !== undefined && duration && (

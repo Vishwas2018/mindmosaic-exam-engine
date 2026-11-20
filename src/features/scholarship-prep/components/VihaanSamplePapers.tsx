@@ -3,6 +3,7 @@
 import { FileText } from "lucide-react";
 import { buttonClasses } from "@/components/ui";
 
+import { countLabel } from "@/lib/format-count";
 const SAMPLE_PAPERS = [
   { title: "Mathematics — Sample Paper 1", questions: 40, minutes: 40, subject: "Mathematics" },
   { title: "Numerical Reasoning — Sample Paper 1", questions: 30, minutes: 30, subject: "Numerical Reasoning" },
@@ -37,7 +38,7 @@ export function VihaanSamplePapers() {
             <div>
               <h3 className="text-sm font-bold text-ink">{paper.title}</h3>
               <p className="mt-1 text-[11px] text-mm-muted">
-                {paper.questions} questions · {paper.minutes} min · {paper.subject}
+                {countLabel(paper.questions, "question")} · {paper.minutes} min · {paper.subject}
               </p>
             </div>
             <div className="flex items-center gap-3">
