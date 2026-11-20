@@ -15,16 +15,45 @@ import { expect, test } from "@playwright/test";
 /** The two paid calls to action `content.ts`'s `paidCta` produces. */
 const PAID_CTA_LABELS = ["Subscribe to Family", "Choose the yearly plan"];
 
-test.describe("billing page with payments disabled", () => {
-  test("shows the free beta and offers no plan, card entry or checkout", async ({ page }) => {
+/*
+ * /billing renders one of two views depending on whether the server process was
+ * started with a Stripe secret key (src/lib/stripe/config.ts: isStripeConfigured).
+ * CI supplies placeholder Stripe values, a bare local checkout supplies none, and
+ * the Playwright webServer inherits this process's environment, so the spec
+ * derives the expected view from the same rule instead of assuming one.
+ * Both views are covered at component level in src/tests/pages/billing-page-beta.test.tsx.
+ */
+const stripeConfigured = (process.env.STRIPE_SECRET_KEY ?? "").trim().length > 0;
+
+test.describe(stripeConfigured ? "billing page (Stripe configured, Family plan on roadmap)" : "billing page with payments disabled", () => {
+  test("offers no plan, card entry or checkout", async ({ page }) => {
     await page.goto("/billing", { waitUntil: "domcontentloaded" });
-    const notice = page.getByTestId("billing-free-beta");
-    await expect(notice.getByRole("heading", { level: 1, name: "The family beta is free" })).toBeVisible();
-    await expect(notice).toContainText("There is nothing to pay during the beta");
-    await expect(notice.getByRole("link", { name: "Back to your family" })).toHaveAttribute("href", "/parent");
-    await expect(page.getByRole("heading", { name: "Choose the Family plan" })).toHaveCount(0);
     await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Subscribe to Family" })).toHaveCount(0);
+
+    if (stripeConfigured) {
+      await expect(page.getByRole("heading", { level: 1, name: "Choose the Family plan" })).toBeVisible();
+      /* Matched as a regex because the plan name is a separate JSX expression, so the
+         sentence spans two text nodes and an exact string match resolves to nothing. */
+      await expect(page.getByText(/isn't open for subscriptions yet/)).toBeVisible();
+      const registerInterest = page.getByRole("link", { name: "Register interest" });
+      await expect(registerInterest).toBeVisible();
+      await expect(registerInterest).toHaveAttribute("href", "/help#contact");
+      await expect(page.getByText("Coming soon").first()).toBeVisible();
+      await expect(
+        page
+          .getByText(
+            "GST-inclusive AUD — pricing subject to change. Placeholder amounts, not yet linked to a live Stripe price.",
+          )
+          .first(),
+      ).toBeVisible();
+    } else {
+      const notice = page.getByTestId("billing-free-beta");
+      await expect(notice.getByRole("heading", { level: 1, name: "The family beta is free" })).toBeVisible();
+      await expect(notice).toContainText("There is nothing to pay during the beta");
+      await expect(notice.getByRole("link", { name: "Back to your family" })).toHaveAttribute("href", "/parent");
+      await expect(page.getByRole("heading", { name: "Choose the Family plan" })).toHaveCount(0);
+    }
   });
 });
 
