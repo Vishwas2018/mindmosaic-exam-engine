@@ -29,7 +29,7 @@ Credentials are given to the owner outside the repo and are never committed. The
 sign up with a real address you can read (the built-in sender is limited to a few emails an hour until custom SMTP
 is on, see SMTP-RUNBOOK.md).
 
-Billing is off for the free beta — no card is ever requested.
+No card is ever requested during the free beta. What `/billing` shows depends on whether Stripe is configured on the deployment: with Stripe unset it says "The family beta is free"; with Stripe keys set (as in CI) it shows the Family plan roadmap ("isn't open for subscriptions yet", "Register interest"). Both are correct; neither takes payment. Record which one you see.
 
 ## What to try (about 45 minutes)
 
@@ -41,7 +41,7 @@ Billing is off for the free beta — no card is ever requested.
 3. **Back as parent:** the finished paper shows under that child only. A verdict appears only after 2 papers and
    8 marks of evidence.
 4. **Scholarship:** as Vihaan, `/student/vihaan` and the diagnostic. As any other student it must not appear.
-5. **Billing:** `/billing` and Account → Billing say billing is off for the free beta. No card is asked for.
+5. **Billing:** `/billing` and Account → Billing show either the free-beta notice or the Family plan roadmap (see top of this page). No card is asked for.
 6. **Security spot checks:** a wrong PIN is refused. `/admin` as a parent or student is denied. Another family's
    child is never visible.
 
@@ -91,7 +91,7 @@ the family registers with their own email (needs custom SMTP).
 | P2 | Children → add a child (Year 3) | Profile created; sign-in card shows a login code + PIN; print view shows only that child |
 | P3 | Reset a PIN; archive then restore the new child | New PIN shown once; archived child cannot sign in; restored child can |
 | P4 | Open a child → Progress / Learning / Writing | Pages load; a verdict appears only after 2 papers and 8 marks of evidence |
-| P5 | Account → Billing, `/billing` | "Billing is off for the free beta"; no card form |
+| P5 | Account → Billing, `/billing` | Free-beta notice **or** Family plan roadmap with "Register interest"; never a card form or checkout |
 | P6 | Visit `/admin`, `/parent/vihaan` | Redirected away (not admin; not the pilot family) |
 | P7 | Sign out | Returned to public site; `/parent` asks to sign in |
 
@@ -122,7 +122,7 @@ the family registers with their own email (needs custom SMTP).
 | AD2 | Papers, Questions, Review, Publication | Lists load; **do not approve, publish or withdraw anything** — content approvals are out of scope for this round |
 | AD3 | Writing, Support, Activity, Analytics, Operations, Intelligence | Pages load without errors |
 
-## Already verified automatically on `003b102b`
+## Already verified automatically on `003b102b` (engineering-run, reproducible)
 
 Hosted suite run `rmwm14v7l` on the DEV alias: **20 passed, 3 skipped** (A1–A2 and A0 need a real inbox; manual-family
 seed is opt-in). Covers parent onboarding A3–A11, student sign-in B1–B2, timed paper scoring/autosave/resume/review
@@ -130,7 +130,9 @@ B3–B8 + C, family isolation and role restrictions D, responsive + accessibilit
 MT-001…005 H1–H3, and Vihaan restriction V (anonymous → `/sign-in` + API 401; non-pilot parent → `/parent`; non-pilot
 student → `/student` for hub and diagnostic, API 403 `forbidden`). Synthetic accounts removed afterwards.
 
-## Owner-assisted manual verification on `003b102b` (2026-11-19)
+## Owner-reported manual verification on `003b102b` (2026-11-19) — NOT independently verified by engineering
+
+> These results were reported by the owner-assisted session. Engineering has not reproduced them and they are not evidence for a readiness decision until re-run (see HOSTED verification in the audit follow-up).
 
 Verified on DEV (`https://mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app`) across Desktop (`1440x900`) and iPad (`834x1194`):
 
