@@ -159,8 +159,17 @@ export async function PUT(request: Request) {
   const duration = sessionDurationSeconds(allocation.config, allocation.questions);
   const deadline = duration === null ? null : claims.startedAt + duration * 1000;
   const now = Date.now();
-  const submittedAt = getEffectiveSubmittedAt(now, deadline);
-  const submissionReason = getEffectiveSubmissionReason("user_submitted", deadline, now);
+  /*
+   * A guest sitting is never persisted, so the candidate's own report that the
+   * timer ran out is honoured for a timed ticket (the e2e clock and a skewed
+   * device clock both reach here before the server clock does). Otherwise the
+   * server clock decides, exactly as the signed-in submit route does.
+   */
+  const claimedExpiry = input.data.submissionReason === "timer_expired" && deadline !== null;
+  const submittedAt = claimedExpiry ? deadline : getEffectiveSubmittedAt(now, deadline);
+  const submissionReason = claimedExpiry
+    ? "timer_expired"
+    : getEffectiveSubmissionReason("user_submitted", deadline, now);
   const result = buildExamResult(allocation.questions, responses, {
     startedAt: claims.startedAt, submittedAt, submissionReason,
   });

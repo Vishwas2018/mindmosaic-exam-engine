@@ -61,6 +61,20 @@ describe("guest exam disclosure boundary", () => {
     expect(await retry.json()).toEqual(submitted);
   });
 
+  it("records a candidate-reported timer expiry for a timed ticket and ignores it for untimed ones", async () => {
+    const timed = await start();
+    const answered = { [timed.questions[0].id]: "a" };
+    const expired = await (await PUT(request("PUT", { ticket: timed.ticket, responses: answered, submissionReason: "timer_expired" }))).json();
+    expect(expired.result.submissionReason).toBe("timer_expired");
+    expect(expired.result.timeTakenSeconds).toBe(timed.durationSeconds);
+    const manual = await (await PUT(request("PUT", { ticket: timed.ticket, responses: answered }))).json();
+    expect(manual.result.submissionReason).toBe("user_submitted");
+
+    const untimed = await start({ ...selection.config, timing: "untimed" } as typeof selection.config);
+    const claimed = await (await PUT(request("PUT", { ticket: untimed.ticket, responses: {}, submissionReason: "timer_expired" }))).json();
+    expect(claimed.result.submissionReason).toBe("user_submitted");
+  });
+
   it("rejects unrelated browsers, expired attempts and unassigned responses", async () => {
     const { ticket } = await start();
     const browser = state.browser;
