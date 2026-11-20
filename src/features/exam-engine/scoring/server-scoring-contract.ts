@@ -93,6 +93,18 @@ export const createSessionRequestSchema = z
 
 export type CreateSessionRequest = z.infer<typeof createSessionRequestSchema>;
 
+export type GuestSessionSelection = z.input<typeof createSessionRequestSchema>;
+
+export interface GuestSessionStartResponse {
+  ticket: string;
+  sessionId: string;
+  startedAt: number;
+  bankId: "curated" | "published";
+  config: z.infer<typeof examSelectionConfigSchema>;
+  durationSeconds: number | null;
+  questions: CandidateQuestion[];
+}
+
 export interface CreateSessionResponse {
   sessionId: string;
   questions: CandidateQuestion[];

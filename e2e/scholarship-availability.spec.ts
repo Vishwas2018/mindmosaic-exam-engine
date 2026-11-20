@@ -42,8 +42,8 @@ test.describe("scholarship papers while nothing is approved", () => {
 
   test("the public guest bank carries no scholarship question, and the program route is not a builder", async ({ request, page }) => {
     const response = await request.get("/api/exam/guest-bank");
-    expect(response.ok()).toBe(true);
-    expect(await response.text()).not.toContain("scholarship-y6-");
+    expect(response.status()).toBe(410);
+    expect(await response.json()).toEqual({ error: "guest_bank_retired" });
     for (const slug of ["scholarship-y6-numerical-reasoning", "scholarship-y6-numeracy", "scholarship-y6-reading", "scholarship-y6-verbal-reasoning"]) {
       const result = await page.goto(`/practice/${slug}`);
       expect(result?.status()).toBe(404);

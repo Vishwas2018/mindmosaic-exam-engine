@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { stubGuestSession } from "./helpers/guest-session-stub";
 import path from "node:path";
 import fs from "node:fs";
 
@@ -34,17 +35,7 @@ const BREAKPOINTS = [
  * questions into the guest and server exam APIs seamlessly.
  */
 async function setupAssessmentRouteMocks(page: Page) {
-  await page.route("**/api/exam/guest-bank", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({
-        curated: ALL_TEST_ASSESSMENT_QUESTIONS,
-        published: ALL_TEST_ASSESSMENT_QUESTIONS,
-        practice: ALL_TEST_ASSESSMENT_QUESTIONS,
-      }),
-    });
-  });
+  await stubGuestSession(page, ALL_TEST_ASSESSMENT_QUESTIONS);
 
   await page.route("**/api/exam/session", async (route) => {
     if (route.request().method() === "POST") {
