@@ -71,6 +71,43 @@ def fingerprint(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def packet_hash(question):
+    """Hash of the key-free question exactly as a blind reviewer was shown it."""
+    shown = {k: v for k, v in question.items() if k not in ("answerKey", "explanation")}
+    canonical = json.dumps(shown, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def bind_replies(unit, replies, number):
+    """Pair blind replies with questions by ID and packet hash, never by position alone."""
+    if [r.get("n") for r in replies] != list(range(1, len(unit) + 1)):
+        raise ValueError(f"Review unit {number} is incomplete")
+    seen = set()
+    for item, reply in zip(unit, replies, strict=True):
+        q = item["question"]
+        if reply.get("id") != q["id"] or q["id"] in seen:
+            raise ValueError(f"Review unit {number} reply {reply.get('n')} is not bound to question {q['id']}")
+        if reply.get("packetHash") != packet_hash(q):
+            raise ValueError(f"Review unit {number} reply for {q['id']} was not made against this exact question")
+        seen.add(q["id"])
+    return {item["question"]["id"]: reply for item, reply in zip(unit, replies, strict=True)}
+
+
+def inside_repository(path, root=ROOT):
+    """True when path is in any Git checkout, including a linked worktree of this repository."""
+    path = path.resolve()
+    for folder in (path, *path.parents):
+        if (folder / ".git").exists():
+            return True
+    try:
+        listing = subprocess.run(["git", "-C", str(root), "worktree", "list", "--porcelain"],
+                                 check=True, capture_output=True, text=True, encoding="utf-8").stdout
+    except (OSError, subprocess.CalledProcessError):
+        return True
+    worktrees = [Path(line[9:]).resolve() for line in listing.splitlines() if line.startswith("worktree ")]
+    return any(path == tree or tree in path.parents for tree in worktrees)
+
+
 def choice(q):
     key = q["answerKey"]
     if key["kind"] != "single_option":
@@ -287,12 +324,12 @@ def build(evidence, output):
     original_positions = {}
     for number, unit in enumerate(units, 1):
         replies = read(evidence / "verification" / f"solved-{number:02}.json")["items"]
-        if [r["n"] for r in replies] != list(range(1, 51)):
-            raise ValueError(f"Review unit {number} is incomplete")
+        if len(unit) != 50:
+            raise ValueError(f"Review unit {number} must hold 50 questions")
+        blind.update(bind_replies(unit, replies, number))
         for item, reply in zip(unit, replies, strict=True):
             q = item["question"]
             id_ = q["id"]
-            blind[id_] = reply
             original_positions[id_] = choice(q)
             apply_findings(item, reply, findings.get(id_), id_ in pilots)
             if id_ in samples and id_ not in pilots:
@@ -468,8 +505,8 @@ def main():
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
     evidence, output = args.evidence.resolve(), args.output.resolve()
-    if output.is_relative_to(ROOT) or output.exists() or output.parent != evidence:
-        parser.error("Output must be a new directory directly inside the private evidence directory outside the checkout.")
+    if inside_repository(evidence) or inside_repository(output) or output.exists() or output.parent != evidence:
+        parser.error("Evidence and output must be private directories outside this checkout and every other Git worktree, with the output a new directory directly inside the evidence directory.")
     build(evidence, output)
     print(f"Created private draft review package: {output}")
 
