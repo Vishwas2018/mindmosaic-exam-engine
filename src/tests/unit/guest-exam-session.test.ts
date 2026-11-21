@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { bankQuestion } from "@/tests/fixtures/exam-pattern-bank";
 import { PATCH, POST, PUT } from "@/app/api/exam/guest-session/route";
-import { resetRateLimitsForTests } from "@/lib/security/rate-limit";
+import { setGuardStoreForTests } from "@/lib/security/guard-store";
 
 const state = vi.hoisted(() => ({ browser: undefined as string | undefined, spent: undefined as string | undefined }));
 vi.mock("next/headers", () => ({
@@ -33,7 +33,7 @@ function request(method: string, data: unknown, origin = "http://localhost", cli
 
 beforeEach(() => {
   vi.stubEnv("VERCEL", "1");
-  resetRateLimitsForTests();
+  setGuardStoreForTests(undefined);
   state.browser = undefined;
   state.spent = undefined;
   vi.useFakeTimers({ toFake: ["Date"] });
@@ -51,7 +51,7 @@ async function start(config = selection.config) {
   const cookie = response.cookies.get("mm-guest-exam");
   expect(cookie?.httpOnly).toBe(true);
   state.browser = cookie?.value;
-  return await response.json();
+  return { ...(await response.json()), cookie: cookie?.value };
 }
 
 describe("guest exam disclosure boundary", () => {
@@ -62,8 +62,10 @@ describe("guest exam disclosure boundary", () => {
     expect(started.questions[0]).not.toHaveProperty("explanation");
     expect(started.questions[0]).not.toHaveProperty("sampleResponse");
 
-    const blank = await PUT(request("PUT", { ticket: started.ticket, responses: {} }));
+    const other = await start();
+    const blank = await PUT(request("PUT", { ticket: other.ticket, responses: {} }));
     expect((await blank.json()).reviewQuestions).toEqual([]);
+    state.browser = started.cookie;
 
     const responses = { [started.questions[0].id]: "a" };
     const response = await PUT(request("PUT", { ticket: started.ticket, responses }));
@@ -116,33 +118,42 @@ describe("guest exam disclosure boundary", () => {
     expect((await POST(request("POST", { selection }, "http://other.test"))).status).toBe(403);
   });
 
-  it("throttles a client that keeps starting and submitting sessions to harvest answers", async () => {
-    const attacker = "203.0.113.7";
-    let blocked = 0;
-    for (let i = 0; i < 31; i += 1) {
-      const response = await POST(request("POST", { selection }, "http://localhost", attacker));
-      if (response.status === 429) {
-        blocked += 1;
-        expect(response.headers.get("retry-after")).toMatch(/^\d+$/);
-        expect(await response.json()).toEqual({ error: "rate_limited" });
-      }
-    }
-    expect(blocked).toBe(1);
+  it("throttles a browser that keeps starting and submitting sessions to harvest answers", async () => {
+    const client = "203.0.113.7";
+    state.browser = "browser-harvester";
+    const starts: number[] = [];
+    for (let i = 0; i < 21; i += 1) starts.push((await POST(request("POST", { selection }, "http://localhost", client))).status);
+    expect(starts.filter((status) => status === 429)).toHaveLength(1);
+    const blocked = await POST(request("POST", { selection }, "http://localhost", client));
+    expect(blocked.status).toBe(429);
+    expect(blocked.headers.get("retry-after")).toMatch(/^\d+$/);
+    expect(await blocked.json()).toEqual({ error: "rate_limited" });
 
-    const other = await POST(request("POST", { selection }, "http://localhost", "203.0.113.8"));
-    expect(other.status).toBe(201);
-    const { ticket } = await other.json();
-    state.browser = other.cookies.get("mm-guest-exam")?.value;
-    let throttledSubmit = 0;
+    // A different browser behind the same address (shared NAT) is unaffected.
+    state.browser = "browser-neighbour";
+    expect((await POST(request("POST", { selection }, "http://localhost", client))).status).toBe(201);
+  });
+
+  it("still throttles by address when the client discards its cookie, with a ceiling high enough for a classroom", async () => {
+    state.browser = undefined;
+    const statuses: number[] = [];
+    for (let i = 0; i < 121; i += 1) statuses.push((await POST(request("POST", { selection }, "http://localhost", "198.51.100.9"))).status);
+    expect(statuses.slice(0, 120).every((status) => status === 201)).toBe(true);
+    expect(statuses[120]).toBe(429);
+  });
+
+  it("does not return review material to a throttled submit", async () => {
+    const started = await start();
+    const { ticket } = started;
+    let throttled = 0;
     for (let i = 0; i < 21; i += 1) {
       const response = await PUT(request("PUT", { ticket, responses: {} }, "http://localhost", "203.0.113.8"));
       if (response.status === 429) {
-        throttledSubmit += 1;
-        const body = await response.json();
-        expect(body).not.toHaveProperty("reviewQuestions");
+        throttled += 1;
+        expect(await response.json()).not.toHaveProperty("reviewQuestions");
       }
     }
-    expect(throttledSubmit).toBe(1);
+    expect(throttled).toBe(1);
   });
 
   it("refuses to re-submit a ticket with different answers once answers were revealed", async () => {
@@ -162,7 +173,9 @@ describe("guest exam disclosure boundary", () => {
     expect(retry.status).toBe(200);
     expect((await retry.json()).reviewQuestions).toHaveLength(1);
 
-    state.spent = "forged.AAAA";
-    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "b" } }))).status).toBe(200);
+    // Discarding the cookie record does not help: the shared atomic claim still refuses changed answers.
+    state.spent = undefined;
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "b" } }))).status).toBe(409);
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }))).status).toBe(200);
   });
 });

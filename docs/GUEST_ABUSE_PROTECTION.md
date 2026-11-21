@@ -2,33 +2,44 @@
 
 `/api/exam/guest-session` serves unauthenticated candidates. Questions are delivered without answer keys; keys and
 explanations are returned only for attempted items after a submit. A client that repeatedly starts sessions and
-submits junk answers could therefore harvest keys. Controls:
+submits answers could harvest keys. The controls below stack; none stores question content.
 
-1. **Per-instance limiter** (`src/lib/security/rate-limit.ts`): per client address per 10 minutes — 30 starts,
-   20 submits, 120 feedback calls; HTTP 429 with `Retry-After`. Client = first hop of `x-forwarded-for`/`x-real-ip`
-   and is trusted only when `VERCEL=1` (the Vercel edge overwrites it); elsewhere the header is ignored, so a spoofed value cannot rotate buckets. IPv6 is keyed by /64. Not on Vercel (local, CI) = not limited. `MM_GUEST_RATE_LIMIT=off` disables it.
-   Limit: counters are per warm serverless instance, so this is a speed bump, not a global quota.
-2. **Platform rule (owner action, not applied):** add a Vercel Firewall rate-limit rule for
-   `POST|PUT|PATCH /api/exam/guest-session`, e.g. 30 requests / 10 min per IP, action "Rate limit"/429.
-3. Scholarship-style content is never available to guests; tickets are cookie-bound, HMAC-signed, 4h TTL.
+## 1. Shared guard store (`src/lib/security/guard-store.ts`)
+- **Redis (production design):** Upstash Redis over its REST API (serverless-safe, no TCP). Enabled when
+  `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` (or the Vercel Marketplace names `KV_REST_API_URL` /
+  `KV_REST_API_TOKEN`) are set; the URL must be `https://`. Counters and submit claims are global across instances.
+- **Memory fallback:** per-instance, used locally, in CI, and until Redis is provisioned.
+- **Fail open:** a Redis error or timeout (800 ms) never blocks an exam; the limiter and claim then act as absent and
+  the cookie record (below) still applies.
+- **Provisioning is not done.** It needs the owner's approval (new infrastructure, Vercel env vars, cost).
 
-Residual risk: a determined client rotating IPs can still enumerate the non-scholarship guest bank. That bank is
-already the public practice pool; the scholarship and unseen-mock content is excluded by design.
+## 2. Rate limits (`src/lib/security/rate-limit.ts`), per 10 minutes
+| Endpoint | Per address (ceiling) | Per browser (tight) |
+|----------|----------------------|---------------------|
+| start (POST) | 120 | 20 |
+| submit (PUT) | 120 | 20 |
+| feedback (PATCH) | 600 | 120 |
+- **Shared NAT (school, household):** the address ceiling is sized for a classroom (30 children, a few papers each);
+  the per-browser limit means one noisy device cannot spend the shared ceiling. A script that discards its cookie is
+  still stopped by the address ceiling. Tests cover both.
+- **Address source:** first hop of `x-forwarded-for` / `x-real-ip`, trusted only when `VERCEL=1` (the edge overwrites
+  it). Elsewhere it is ignored, so a spoofed header cannot rotate buckets. IPv6 is keyed by /64. Addresses and browser
+  ids are hashed in Redis keys.
+- Over the limit: HTTP 429 with `Retry-After`, no payload. `MM_GUEST_RATE_LIMIT=off` disables limiting.
 
-## Mid-exam answer disclosure
-A ticket's first submit sets a signed HttpOnly `mm-guest-spent` cookie. Re-sending the same answers is idempotent;
-sending different answers for that ticket returns 409 `already_submitted`, so in-browser probing (submit partial
-answers, read keys, edit, resubmit) stops. A client that discards cookies avoids this and is bounded only by the
-limiter. Closing it fully needs shared state, e.g. a Vercel KV / Upstash Redis key per ticket id (SETNX on submit)
-which also gives the globally consistent rate limit. That adds infrastructure and needs owner approval; not applied.
+## 3. One-time submit (replay prevention, atomic)
+Each ticket id gets `SET guest:spent:<ticket> <answers-digest> EX 14400 NX`. First submit wins; an identical replay is
+idempotent; changed answers after disclosure return 409 `already_submitted`. This stops submit-partial-read-edit
+probing and holds across parallel requests and cookie loss (with Redis). A signed HttpOnly `mm-guest-spent` cookie
+is kept as a fallback for when the shared store is unavailable or not provisioned.
 
-## Distributed limiter proposal
-Upstash Redis via the Vercel Marketplace, `@upstash/ratelimit` sliding window keyed by client /64 or IPv4, plus
-`SET guest:spent:<ticket-id> NX EX 14400`. Fails open if Redis is unreachable (logged), keeping exams usable.
+## 4. Remaining limits
+- Without Redis the claim and counters are per instance (cookie fallback only stops in-browser probing).
+- A determined attacker with many IPs can still start many sessions and read keys for the guest bank, which is already
+  the public practice pool; scholarship and unseen-mock content is excluded from guests by design.
+- Platform Firewall rule (owner action, optional second layer): rate limit `POST|PUT|PATCH /api/exam/guest-session`,
+  ~240 requests / 10 min / IP, to match the app ceilings.
 
-## Firewall rule vs legitimate use
-Per IP per 10 minutes a family needs about 1 start + 1 submit per paper; a school or shared NAT of 30 children
-each starting a paper is 30 starts / 30 submits. The app limits (30 start, 20 submit) would already throttle a
-classroom behind one NAT. Recommend the platform rule at 120 requests / 10 min / IP on this path with the app limits
-raised to 60 start / 60 submit before any classroom rollout; for the family beta (one household) current values
-are ample.
+## Owner approvals needed
+1. Provision Upstash Redis (Vercel Marketplace) for DEV and set the two env vars for the DEV preview.
+2. (Optional) add the Firewall rule.

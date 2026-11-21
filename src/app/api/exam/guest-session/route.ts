@@ -11,7 +11,7 @@ import { selectExamQuestions } from "@/features/exam-engine/selection";
 import { toCandidateQuestions, type CandidateAnswer, type ExamResponses } from "@/features/exam-engine/types";
 import { getEffectiveSubmissionReason, getEffectiveSubmittedAt } from "@/features/exam-engine/state/deadline";
 import { getGuestExamBank } from "@/server/exam-bank";
-import { consumeRateLimit, type RateLimitRule } from "@/lib/security/rate-limit";
+import { claimSubmission, consumeRateLimit, type RateLimitRule } from "@/lib/security/rate-limit";
 import { practiceTokenKey } from "@/server/practice-session-token";
 
 const cookieName = "mm-guest-exam";
@@ -42,13 +42,18 @@ function json(body: unknown, status = 200) {
   return NextResponse.json(body, { status, headers: { "Cache-Control": "private, no-store" } });
 }
 
-/* Per client address, per 10 minutes. A family sitting several papers stays far below these. */
-const startRule: RateLimitRule = { name: "guest-start", limit: 30, windowMs: 10 * 60 * 1000 };
-const submitRule: RateLimitRule = { name: "guest-submit", limit: 20, windowMs: 10 * 60 * 1000 };
-const feedbackRule: RateLimitRule = { name: "guest-feedback", limit: 120, windowMs: 10 * 60 * 1000 };
+/*
+ * Limits per 10 minutes. The address ceiling is generous so a classroom or household behind one NAT is not
+ * throttled; the per-browser limit is the tight one. A paper needs one start and one submit.
+ */
+const windowMs = 10 * 60 * 1000;
+const startRules = { address: { name: "gs-start", limit: 120, windowMs }, browser: { name: "gs-start", limit: 20, windowMs } };
+const submitRules = { address: { name: "gs-submit", limit: 120, windowMs }, browser: { name: "gs-submit", limit: 20, windowMs } };
+const feedbackRules = { address: { name: "gs-fb", limit: 600, windowMs }, browser: { name: "gs-fb", limit: 120, windowMs } };
 
-function limited(request: Request, rule: RateLimitRule) {
-  const decision = consumeRateLimit(request, rule);
+async function limited(request: Request, rules: { address: RateLimitRule; browser: RateLimitRule }) {
+  const browserId = (await cookies()).get(cookieName)?.value;
+  const decision = await consumeRateLimit(request, rules, browserId);
   if (decision.allowed) return null;
   const response = json({ error: "rate_limited" }, 429);
   response.headers.set("Retry-After", String(decision.retryAfterSeconds));
@@ -119,7 +124,7 @@ async function readJson(request: Request) {
 export async function POST(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
-  const throttled = limited(request, startRule);
+  const throttled = await limited(request, startRules);
   if (throttled) return throttled;
   const key = practiceTokenKey();
   if (!key) return json({ error: "guest_session_unavailable" }, 503);
@@ -204,7 +209,7 @@ function responsesHash(responses: ExamResponses) {
 export async function PUT(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
-  const throttled = limited(request, submitRule);
+  const throttled = await limited(request, submitRules);
   if (throttled) return throttled;
   const input = submitSchema.safeParse(await readJson(request));
   if (!input.success) return json({ error: "invalid_request" }, 400);
@@ -222,6 +227,9 @@ export async function PUT(request: Request) {
   const digest = responsesHash(responses);
   const previous = spent.find((entry) => entry.id === claims.id);
   if (previous && previous.h !== digest) return json({ error: "already_submitted" }, 409);
+  // Shared, atomic record (Redis when configured): holds across cookie loss and parallel requests.
+  const claim = await claimSubmission(claims.id, digest, ttlSeconds);
+  if (claim === "different") return json({ error: "already_submitted" }, 409);
   const duration = sessionDurationSeconds(allocation.config, allocation.questions);
   const deadline = duration === null ? null : claims.startedAt + duration * 1000;
   const now = Date.now();
@@ -255,7 +263,7 @@ export async function PUT(request: Request) {
 export async function PATCH(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
-  const throttled = limited(request, feedbackRule);
+  const throttled = await limited(request, feedbackRules);
   if (throttled) return throttled;
   const input = feedbackSchema.safeParse(await readJson(request));
   if (!input.success || isUnanswered(input.data.answer as CandidateAnswer)) return json({ error: "answer_required" }, 400);
