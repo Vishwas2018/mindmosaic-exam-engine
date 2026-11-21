@@ -80,7 +80,7 @@ await (async () => {
   console.log(`hosted acceptance ${runId}: ${meta.ref} ${String(meta.sha).slice(0, 8)} ${dep.id}`);
   const res = spawnSync(
     process.platform === "win32" ? "npx.cmd" : "npx",
-    ["playwright", "test", "-c", "playwright.hosted.config.ts", ...pwArgs],
+    ["playwright", "test", "-c", process.env.HOSTED_CONFIG ?? "playwright.hosted.config.ts", ...pwArgs],
     {
       stdio: "inherit",
       shell: process.platform === "win32",

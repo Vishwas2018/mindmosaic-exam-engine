@@ -25,9 +25,8 @@ describe("guest bank", () => {
     expect(getGuestExamBank("published").filter((q) => q.examStyle === "scholarship_style")).toEqual([]);
     expect(getGuestExamBank("curated").filter((q) => q.examStyle === "scholarship_style")).toEqual([]);
 
-    const body = (await GET().json()) as { curated: { examStyle: string }[]; published: { examStyle: string; answerKey?: unknown }[] };
-    expect(body.published.length).toBeGreaterThan(0);
-    expect([...body.curated, ...body.published].some((q) => q.examStyle === "scholarship_style")).toBe(false);
-    expect(JSON.stringify(body)).not.toContain("scholarship-y6-");
+    const response = GET();
+    expect(response.status).toBe(410);
+    expect(await response.json()).toEqual({ error: "guest_bank_retired" });
   });
 });

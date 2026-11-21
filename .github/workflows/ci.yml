@@ -1,8 +1,16 @@
 name: CI
 
 on:
+  # Branch pushes run only for the long-lived branches; every other branch is tested through its pull request.
+  # Running both on a PR branch doubled the cost (each run is ~30 job-minutes) and double-queued every check.
   push:
+    branches: [main, dev]
   pull_request:
+
+# A newer push to the same ref supersedes the run still in flight for it.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 # Test-only, obviously-fake placeholder values — never real secrets. These
 # exist solely so src/tests/unit/stripe-webhook-route.test.ts (part of the

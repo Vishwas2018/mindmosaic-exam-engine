@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 
-import { getExamBank } from "@/server/exam-bank";
+import { getExamBank, getGuestExamBank } from "@/server/exam-bank";
 import {
   PRACTICE_TOKEN_MAX_QUESTIONS,
   issuePracticeToken,
@@ -19,6 +19,13 @@ import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { SUBJECT_LABELS } from "@/features/exam-engine/components/describe-config";
 import { strandKey } from "@/features/practice-studio/availability";
 import type { Question } from "@/schemas/question.schema";
+import { checkOrigin } from "@/features/auth/require-origin";
+import { parsePracticeSessionParams } from "@/features/exam-engine/practice-mode/practice-params.schema";
+import { buildDrill } from "@/features/exam-engine/recommendation/build-drill";
+import { drillLaunchRequestSchema } from "@/features/exam-engine/recommendation/drill-handoff";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
+
+const privateHeaders = { "Cache-Control": "private, no-store" };
 
 /**
  * Server-selected, answer-stripped question delivery for practice sets (D13, C10).
@@ -29,6 +36,28 @@ import type { Question } from "@/schemas/question.schema";
  */
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
+  if (searchParams.get("source") === "learning") {
+    const parsed = parsePracticeSessionParams(searchParams);
+    if (!parsed.ok || parsed.mode !== "standard") {
+      return NextResponse.json({ ok: false, error: "invalid_request" }, { status: 400, headers: privateHeaders });
+    }
+    const { subject, year, style, curriculumCode, skill, count, seed } = parsed.params;
+    const bank = getGuestExamBank("published");
+    let candidates: readonly Question[];
+    if (curriculumCode) {
+      const mapped = new Set(getMappedQuestionIdsForNode(curriculumCode));
+      candidates = bank.filter((item) => mapped.has(item.id));
+    } else {
+      const eligible = filterEligibleQuestions(bank, { subject, yearLevel: year, examStyle: style });
+      candidates = skill
+        ? eligible.filter((item) => (item.metadata.skill ?? item.metadata.topic) === skill)
+        : eligible;
+    }
+    const selected = seededShuffle(candidates, seed ?? ["practice", subject, year, style, skill ?? "any"].join("-")).slice(0, count);
+    const title = curriculumCode ? "Practice: " + curriculumCode
+      : skill ? skillLabel(skill) : (SUBJECT_LABELS[subject] ?? "Practice");
+    return deliver(selected, title, { subject, yearLevel: year });
+  }
 
   const subject = (searchParams.get("subject") ?? "numeracy") as SubjectFilter;
   const yearParam = searchParams.get("year");
@@ -97,30 +126,63 @@ export async function GET(request: Request): Promise<NextResponse> {
     `practice-${subject}-${yearLevel}-${examStyle}-${strand ?? curriculumCode ?? "all"}`;
   const selectedQuestions = seededShuffle(candidateSource, seed).slice(0, count);
 
-  // Strip answer keys and explanations before delivering to browser (C10, C15)
-  const candidateQuestions = toCandidateQuestions(selectedQuestions);
+  return deliver(selectedQuestions, title, { subject, yearLevel }, userId);
+}
 
-  // A-01: /api/practice/check only scores ids carried in this signed token. Bind signed-in-only content to the user.
-  const containsSignedInOnly = selectedQuestions.some((q) => q.examStyle === "scholarship_style");
+/** A validated drill request selects a set on the server. It cannot select answer-bearing fields. */
+export async function POST(request: Request): Promise<NextResponse> {
+  const origin = checkOrigin(request);
+  if (!origin.ok) return origin.response;
+  const body: unknown = await request.json().catch(() => null);
+  const parsed = drillLaunchRequestSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ ok: false, error: "invalid_request" }, { status: 400, headers: privateHeaders });
+  }
+  const { subject, yearLevel, examStyle, previousQuestionIds, skillOrTopic, source, seed } = parsed.data;
+  const bank = getGuestExamBank("published");
+  const bankById = new Map(bank.map((item) => [item.id, item]));
+  const result = buildDrill(bank, {
+    recommendation: { subject, skillOrTopic, source, reason: "low_accuracy", lostMarks: 0, accuracy: 0, attemptedCount: 0, totalCount: 0 },
+    yearLevel,
+    examStyle,
+    previousQuestionIds: previousQuestionIds.filter((id) => bankById.has(id)),
+    seed,
+  });
+  if (!result.ok) {
+    /* Too few eligible questions is an expected outcome, not a failed request: 200 keeps it out of the console. */
+    return NextResponse.json({
+      ok: false, error: result.reason,
+      ...(result.reason === "insufficient_questions" ? { eligibleCount: result.eligibleCount } : {}),
+    }, { status: result.reason === "insufficient_questions" ? 200 : 422, headers: privateHeaders });
+  }
+  const selected = result.questionIds.flatMap((id) => {
+    const question = bankById.get(id);
+    return question ? [question] : [];
+  });
+  if (selected.length !== 5 || new Set(selected.map(({ id }) => id)).size !== 5) {
+    return NextResponse.json({ ok: false, error: "invalid_drill" }, { status: 422, headers: privateHeaders });
+  }
+  return deliver(selected, 'Practise: ' + skillLabel(skillOrTopic), { subject, yearLevel });
+}
+
+function deliver(
+  selected: readonly Question[],
+  title: string,
+  context: { subject: string; yearLevel: YearLevelFilter },
+  userId?: string | null,
+) {
+  const questions = toCandidateQuestions(selected);
+  const signedInOnly = selected.some((q) => q.examStyle === "scholarship_style");
   const practiceToken = issuePracticeToken({
-    ids: selectedQuestions.map((q) => q.id),
-    ...(containsSignedInOnly && userId ? { sub: userId } : {}),
+    ids: selected.map((q) => q.id),
+    ...(signedInOnly && userId ? { sub: userId } : {}),
   });
   if (practiceToken === null) {
-    return NextResponse.json({ ok: false, error: "practice_unavailable" }, { status: 503 });
+    return NextResponse.json({ ok: false, error: "practice_unavailable" }, { status: 503, headers: privateHeaders });
   }
-
-  // Median estimated time in minutes (default ~1.5 min per question, rounded to nearest 5 mins)
-  const estimatedMinutes = Math.max(5, Math.round((candidateQuestions.length * 1.5) / 5) * 5);
-
   return NextResponse.json({
-    ok: true,
-    questions: candidateQuestions,
-    count: candidateQuestions.length,
-    practiceToken,
-    title,
-    estimatedMinutes,
-    subject,
-    yearLevel,
-  });
+    ok: true, questions, count: questions.length, practiceToken, title,
+    estimatedMinutes: Math.max(5, Math.round((questions.length * 1.5) / 5) * 5),
+    ...context,
+  }, { headers: privateHeaders });
 }

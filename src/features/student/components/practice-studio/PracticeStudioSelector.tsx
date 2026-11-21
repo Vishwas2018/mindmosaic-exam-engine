@@ -14,6 +14,7 @@ import {
   type StudioAvailability,
 } from "@/features/practice-studio/availability";
 
+import { countLabel } from "@/lib/format-count";
 const STYLES = [
   { style: "naplan_style", label: "NAPLAN-style", desc: "Curriculum assessment format" },
   { style: "icas_style", label: "ICAS-style", desc: "Competition & extension format" },
@@ -271,7 +272,7 @@ export function PracticeStudioSelector({
                       </div>
                       <p className="mt-1 text-xs text-mm-muted">
                         {isSubjectReady
-                          ? `${subj.uniqueQuestions} questions · ${subj.strands.filter((s) => s.eligible).length} strands ready`
+                          ? `${countLabel(subj.uniqueQuestions ?? 0, "question")} · ${subj.strands.filter((s) => s.eligible).length} strands ready`
                           : subj.reason === "coming_soon"
                           ? "Coming soon"
                           : "No practice available"}
@@ -325,7 +326,7 @@ export function PracticeStudioSelector({
                       <p className="mt-1 text-xs text-mm-muted">
                         {isEligible
                           ? `${strand.uniqueQuestions} unique questions available`
-                          : `${strand.uniqueQuestions ?? 0} questions (needs ${STRAND_FLOOR} to start)`}
+                          : `${countLabel(strand.uniqueQuestions ?? 0, "question")} (needs ${STRAND_FLOOR} to start)`}
                       </p>
                     </button>
                   );
@@ -366,7 +367,7 @@ export function PracticeStudioSelector({
                             : "border border-mm-line bg-white text-mm-ink hover:border-primary/40 hover:bg-mm-tint-soft/50"
                         }`}
                       >
-                        {size} questions
+                        {countLabel(size, "question")}
                       </button>
                     );
                   })}
@@ -458,7 +459,7 @@ export function PracticeStudioSelector({
             <div className="flex items-center justify-between pt-3">
               <span className="text-mm-muted">Questions</span>
               <span className="font-semibold text-mm-ink">
-                {selectedSetSize ? `${selectedSetSize} questions` : "—"}
+                {selectedSetSize ? `${countLabel(selectedSetSize, "question")}` : "—"}
               </span>
             </div>
 

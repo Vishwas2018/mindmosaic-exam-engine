@@ -27,6 +27,8 @@ import {
 } from "@/features/scholarship-prep/content/questions/vihaan-pilot-questions";
 import {
   extractVihaanOutcomesFromSittings,
+  EXPOSED_MOCK_ITEMS_PRACTICE_ONLY,
+  isExposedMockQuestion,
   isReservedMockExamQuestion,
   selectAdaptivePractice,
   selectMockExamQuestions,
@@ -494,16 +496,19 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     const mockPool = getVihaanMockPool("vihaan-student-1", devEnv);
 
     expect(fullBank).toHaveLength(499); // vihaan-e500-m069 withdrawn (A-06)
-    expect(practicePool).toHaveLength(333);
+    // The 166 former mock items were published in the public repository, so they are practice-only.
+    expect(EXPOSED_MOCK_ITEMS_PRACTICE_ONLY).toBe(true);
+    expect(practicePool).toHaveLength(499);
     expect(practicePool.some((q) => q.id === "vihaan-e500-m069")).toBe(false);
-    expect(mockPool).toHaveLength(166);
-    expect(practicePool.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
-    expect(mockPool.every((q) => isReservedMockExamQuestion(q.id))).toBe(true);
+    expect(mockPool).toHaveLength(0);
+    expect(fullBank.filter((q) => isExposedMockQuestion(q.id))).toHaveLength(166);
+    expect(practicePool.filter((q) => isExposedMockQuestion(q.id))).toHaveLength(166);
+    expect(fullBank.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
 
-    // Normal selectPractice / getVihaanPracticePlan never leaks reserved mock items.
-    const randomPractice = selectPractice(fullBank, 333, { random: () => 0.25 });
-    expect(randomPractice).toHaveLength(333);
-    expect(randomPractice.some((q) => isReservedMockExamQuestion(q.id))).toBe(false);
+    // Practice selection may use every approved item, exposed ones included.
+    const randomPractice = selectPractice(fullBank, 499, { random: () => 0.25 });
+    expect(randomPractice).toHaveLength(499);
+    expect(randomPractice.some((q) => isExposedMockQuestion(q.id))).toBe(true);
 
     // Adaptive practice puts unseen items ahead of already attempted items.
     const seenOutcomes = practicePool
@@ -530,10 +535,9 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     expect(adaptivePick).toHaveLength(5);
     expect(adaptivePick.every((q) => unseenExpected.includes(q.id))).toBe(true);
 
-    // Mock selector pulls strictly from reserved mock pool (45 VR + 40 NR + 35 Reading + 40 Math + 1 Writing = 161).
-    const fullMock = selectMockExamQuestions(fullBank, "full_mock");
-    expect(fullMock).toHaveLength(161);
-    expect(fullMock.every((q) => isReservedMockExamQuestion(q.id))).toBe(true);
+    // No unseen mock paper can be built while the exposed set is practice-only.
+    expect(selectMockExamQuestions(fullBank, "full_mock")).toHaveLength(0);
+    expect(selectMockExamQuestions(fullBank, "numeracy")).toHaveLength(0);
   });
 
   it("renders full 500-bank learning sections and interactive parent rubric marking UI", async () => {
@@ -541,6 +545,7 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     const fullBank = getVerifiedVihaanAllPublishedQuestions();
     const practicePool = fullBank.filter((q) => !isReservedMockExamQuestion(q.id));
     const mockPool = fullBank.filter((q) => isReservedMockExamQuestion(q.id));
+    expect(mockPool).toHaveLength(0);
 
     render(
       <VihaanDashboard
@@ -564,15 +569,13 @@ describe("Reconciled canonical pilot bank + diagnostic + parent progress reporti
     expect(screen.getByTestId("vihaan-study-plan")).toBeInTheDocument();
     expect(screen.getByTestId("vihaan-concept-learning")).toBeInTheDocument();
     expect(screen.getByTestId("vihaan-smart-revision")).toBeInTheDocument();
-    expect(screen.getByTestId("mock-reserved-pool-badge")).toHaveTextContent(
-      "166 unseen questions reserved exclusively for Mock Exams",
-    );
+    expect(screen.getByTestId("mock-reserved-pool-badge")).toHaveTextContent("Unseen mock papers: not available yet");
+    expect(screen.getByTestId("mock-unseen-unavailable")).toHaveTextContent(/not ready yet/i);
     expect(screen.getByTestId("vihaan-writing-practice")).toBeInTheDocument();
 
-    // Launching an official mock section renders countdown timer and uses reserved pool.
-    await user.click(screen.getByTestId("mock-start-numeracy"));
-    const runner = await screen.findByTestId("vihaan-practice-runner");
-    expect(within(runner).getByTestId("vihaan-exam-timer")).toBeInTheDocument();
-    expect(within(runner).getAllByText(/Question 1 of 40/i).length).toBeGreaterThan(0);
+    // No unseen mock paper exists while the exposed set is practice-only: every mock start is disabled.
+    expect(screen.getByTestId("mock-start-full")).toBeDisabled();
+    expect(screen.getByTestId("mock-start-numeracy")).toBeDisabled();
+    void user;
   }, 20_000);
 });

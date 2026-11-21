@@ -21,7 +21,7 @@ export const SYNTHETIC_E2E_SITTING_IDS: ReadonlySet<string> = new Set([
  * - Reading Comprehension (`r063`–`r097`, 7 complete passages): 35
  * - Written Expression (`w033`–`w038`): 6
  */
-export function isReservedMockExamQuestion(questionId: string): boolean {
+export function isExposedMockQuestion(questionId: string): boolean {
   const match = /^vihaan-e500-([mnvrw])(\d{3})$/.exec(questionId);
   if (!match) return false;
   const kind = match[1];
@@ -40,6 +40,21 @@ export function isReservedMockExamQuestion(questionId: string): boolean {
     default:
       return false;
   }
+}
+
+/**
+ * The 166 items above were published, with stems and answer keys, in the public repository (since 2026-11-16),
+ * so they can no longer be offered as UNSEEN mock material. While this flag is true they are ordinary practice
+ * items: they join the practice pool, the unseen mock pool is empty, and no mock paper can be sat. Historical
+ * attempts that used them stay readable (they resolve by question id). Flip it only when a privately held,
+ * independently reviewed replacement set is released through a hash-bound source (docs: private content
+ * migration), never to re-reserve the exposed ids.
+ */
+export const EXPOSED_MOCK_ITEMS_PRACTICE_ONLY = true;
+
+/** Items reserved exclusively for unseen Mock Examinations. Empty while the exposed set is practice-only. */
+export function isReservedMockExamQuestion(questionId: string): boolean {
+  return !EXPOSED_MOCK_ITEMS_PRACTICE_ONLY && isExposedMockQuestion(questionId);
 }
 
 function shuffleWithRandom<T>(items: T[], random: () => number): T[] {

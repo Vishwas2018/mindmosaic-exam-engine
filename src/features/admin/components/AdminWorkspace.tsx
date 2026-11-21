@@ -39,6 +39,7 @@ import type {
   AdminApprovalItem,
 } from "../types";
 
+import { countLabel } from "@/lib/format-count";
 export interface AdminWorkspaceProps {
   data: AdminWorkspaceData;
   initialView?: AdminView;
@@ -860,7 +861,7 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent,
                     <h2 className="text-base font-bold text-[#1f1b24]">Active Manifest: {data.manifest.id}</h2>
                     <p className="text-xs text-[#6e6779]">
                       {data.manifest.publishedAt ? `Published at ${data.manifest.publishedAt} · ` : ""}
-                      {data.manifest.liveQuestionsCount} questions live
+                      {countLabel(data.manifest.liveQuestionsCount, "question")} live
                     </p>
                   </div>
                   {/* The notice is canned text; nothing is recomputed. Shown only on the sample workspace. */}
@@ -869,7 +870,7 @@ export function AdminWorkspace({ data, initialView = "overview", libraryContent,
                       type="button"
                       onClick={() =>
                         setNotice(
-                          `Integrity verification passed: All ${data.manifest.liveQuestionsCount} questions match published SHA-256 AST hashes. Fail-closed guarantee active.`
+                          `Integrity verification passed: All ${countLabel(data.manifest.liveQuestionsCount, "question")} match published SHA-256 AST hashes. Fail-closed guarantee active.`
                         )
                       }
                       className="rounded-xl bg-royal px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-royal-deep"

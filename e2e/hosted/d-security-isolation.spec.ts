@@ -87,6 +87,7 @@ test("D: two families are isolated; students, parents and anonymous visitors are
   expect(error).toBeNull();
   await parentSignIn(page, bEmail, STRONG_PASSWORD);
   await expect(page).toHaveURL(/\/parent/, { timeout: 30_000 });
+  await page.waitForLoadState("networkidle"); // Firefox aborts a goto issued mid-navigation
   await page.goto("/parent/setup");
   const childB = `Ben ${Date.now().toString(36).slice(-4)}`;
   await page.getByLabel("First name").fill(childB);
@@ -97,6 +98,7 @@ test("D: two families are isolated; students, parents and anonymous visitors are
   expect(B.loginCode).toBeTruthy();
 
   // D1 Parent B sees only family B
+  await page.waitForLoadState("networkidle");
   await page.goto("/parent");
   await expect(page.getByText(childB).first()).toBeVisible();
   await expect(page.getByText(A.childName)).toHaveCount(0);

@@ -6,7 +6,8 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-describe("withdrawn approved questions", () => {
+/* Loads the whole question bank; the 5s default is not enough on a saturated host (reproduced under CPU load). */
+describe("withdrawn approved questions", { timeout: 30_000 }, () => {
   it("never serves man-544d2533ffb571a742b0c691 (answer stated in its stem) in enforce mode", async () => {
     vi.stubEnv("MM_PUBLICATION_GATE", "enforce");
     vi.resetModules();
