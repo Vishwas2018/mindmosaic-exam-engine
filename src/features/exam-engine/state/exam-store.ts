@@ -897,7 +897,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       ? fetch("/api/exam/guest-session", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ticket: state.guestTicket, responses: state.responses }),
+          body: JSON.stringify({ ticket: state.guestTicket, responses: state.responses, submissionReason: effectiveReason }),
         }).then(async (response) => {
           if (!response.ok) throw new Error("Guest exam submission was not accepted.");
           return await response.json() as ScoredSubmission;

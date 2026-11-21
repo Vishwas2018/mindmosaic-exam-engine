@@ -149,10 +149,11 @@ export async function POST(request: Request): Promise<NextResponse> {
     seed,
   });
   if (!result.ok) {
+    /* Too few eligible questions is an expected outcome, not a failed request: 200 keeps it out of the console. */
     return NextResponse.json({
       ok: false, error: result.reason,
       ...(result.reason === "insufficient_questions" ? { eligibleCount: result.eligibleCount } : {}),
-    }, { status: 422, headers: privateHeaders });
+    }, { status: result.reason === "insufficient_questions" ? 200 : 422, headers: privateHeaders });
   }
   const selected = result.questionIds.flatMap((id) => {
     const question = bankById.get(id);

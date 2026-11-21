@@ -11,9 +11,13 @@ import { selectExamQuestions } from "@/features/exam-engine/selection";
 import { toCandidateQuestions, type CandidateAnswer, type ExamResponses } from "@/features/exam-engine/types";
 import { getEffectiveSubmissionReason, getEffectiveSubmittedAt } from "@/features/exam-engine/state/deadline";
 import { getGuestExamBank } from "@/server/exam-bank";
+import { guardRequired } from "@/lib/security/guard-store";
+import { claimSubmission, consumeRateLimit, type RateLimitRule } from "@/lib/security/rate-limit";
 import { practiceTokenKey } from "@/server/practice-session-token";
 
 const cookieName = "mm-guest-exam";
+const spentCookieName = "mm-guest-spent";
+const spentLimit = 12;
 const ttlSeconds = 4 * 60 * 60;
 const startSchema = z.object({
   selection: createSessionRequestSchema,
@@ -37,6 +41,26 @@ type Selection = z.infer<typeof startSchema> & { seed: string };
 
 function json(body: unknown, status = 200) {
   return NextResponse.json(body, { status, headers: { "Cache-Control": "private, no-store" } });
+}
+
+/*
+ * Limits per 10 minutes. The address ceiling is generous so a classroom or household behind one NAT is not
+ * throttled; the per-browser limit is the tight one. A paper needs one start and one submit.
+ */
+const windowMs = 10 * 60 * 1000;
+const startRules = { address: { name: "gs-start", limit: 120, windowMs }, browser: { name: "gs-start", limit: 20, windowMs } };
+const submitRules = { address: { name: "gs-submit", limit: 120, windowMs }, browser: { name: "gs-submit", limit: 20, windowMs } };
+const feedbackRules = { address: { name: "gs-fb", limit: 600, windowMs }, browser: { name: "gs-fb", limit: 120, windowMs } };
+
+async function limited(request: Request, rules: { address: RateLimitRule; browser: RateLimitRule }) {
+  const browserId = (await cookies()).get(cookieName)?.value;
+  const decision = await consumeRateLimit(request, rules, browserId);
+  if (decision.allowed) return null;
+  const response = decision.reason === "unavailable"
+    ? json({ error: "guard_unavailable" }, 503)
+    : json({ error: "rate_limited" }, 429);
+  response.headers.set("Retry-After", String(decision.retryAfterSeconds));
+  return response;
 }
 
 function unavailable() {
@@ -103,6 +127,8 @@ async function readJson(request: Request) {
 export async function POST(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
+  const throttled = await limited(request, startRules);
+  if (throttled) return throttled;
   const key = practiceTokenKey();
   if (!key) return json({ error: "guest_session_unavailable" }, 503);
   const input = startSchema.safeParse(await readJson(request));
@@ -144,9 +170,50 @@ async function resolve(ticket: string) {
     : null;
 }
 
+
+/**
+ * First-submit record. A ticket may be submitted once with a given set of answers; re-sending the same answers
+ * is idempotent, but changing them after answers were revealed is refused, so a candidate (or script) cannot
+ * probe the key by submitting partial answers repeatedly mid-exam. The record is a signed, HttpOnly cookie
+ * because guest sittings are stateless; it stops in-browser probing but not a client that discards cookies,
+ * which is bounded by the rate limiter and needs shared state to close (docs/GUEST_ABUSE_PROTECTION.md).
+ */
+type Spent = { id: string; h: string };
+
+function spentSignature(payload: string, key: Buffer) {
+  return createHmac("sha256", key).update("guest-spent/v1\0").update(payload).digest();
+}
+
+function readSpent(raw: string | undefined, key: Buffer): Spent[] {
+  if (!raw) return [];
+  const [payload, encoded] = raw.split(".");
+  if (!payload || !encoded) return [];
+  const received = Buffer.from(encoded, "base64url");
+  const expected = spentSignature(payload, key);
+  if (received.length !== expected.length || !timingSafeEqual(received, expected)) return [];
+  try {
+    const parsed = z.array(z.object({ id: z.string(), h: z.string() })).safeParse(JSON.parse(Buffer.from(payload, "base64url").toString("utf8")));
+    return parsed.success ? parsed.data : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeSpent(entries: Spent[], key: Buffer) {
+  const payload = Buffer.from(JSON.stringify(entries.slice(-spentLimit))).toString("base64url");
+  return payload + "." + spentSignature(payload, key).toString("base64url");
+}
+
+function responsesHash(responses: ExamResponses) {
+  const ordered = Object.keys(responses).sort().map((id) => [id, responses[id]]);
+  return createHash("sha256").update(JSON.stringify(ordered)).digest("hex").slice(0, 32);
+}
+
 export async function PUT(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
+  const throttled = await limited(request, submitRules);
+  if (throttled) return throttled;
   const input = submitSchema.safeParse(await readJson(request));
   if (!input.success) return json({ error: "invalid_request" }, 400);
   const session = await resolve(input.data.ticket);
@@ -156,24 +223,57 @@ export async function PUT(request: Request) {
   const ids = new Set(allocation.questions.map(({ id }) => id));
   const responses = input.data.responses as ExamResponses;
   if (Object.keys(responses).some((id) => !ids.has(id))) return json({ error: "invalid_request" }, 400);
+  const key = practiceTokenKey();
+  if (!key) return json({ error: "guest_session_unavailable" }, 503);
+  const cookieStore = await cookies();
+  const spent = readSpent(cookieStore.get(spentCookieName)?.value, key);
+  const digest = responsesHash(responses);
+  const previous = spent.find((entry) => entry.id === claims.id);
+  if (previous && previous.h !== digest) return json({ error: "already_submitted" }, 409);
+  // Shared, atomic record (Redis when configured): holds across cookie loss and parallel requests.
+  const claim = await claimSubmission(claims.id, digest, ttlSeconds);
+  if (claim === "different") return json({ error: "already_submitted" }, 409);
+  if (claim === "unknown" && guardRequired()) {
+    // Fail closed: without the shared record the answer key could be probed by replay. The client keeps its answers and retries.
+    const refused = json({ error: "guard_unavailable" }, 503);
+    refused.headers.set("Retry-After", "15");
+    return refused;
+  }
   const duration = sessionDurationSeconds(allocation.config, allocation.questions);
   const deadline = duration === null ? null : claims.startedAt + duration * 1000;
   const now = Date.now();
-  const submittedAt = getEffectiveSubmittedAt(now, deadline);
-  const submissionReason = getEffectiveSubmissionReason("user_submitted", deadline, now);
+  /*
+   * A guest sitting is never persisted, so the candidate's own report that the
+   * timer ran out is honoured for a timed ticket (the e2e clock and a skewed
+   * device clock both reach here before the server clock does). Otherwise the
+   * server clock decides, exactly as the signed-in submit route does.
+   */
+  const claimedExpiry = input.data.submissionReason === "timer_expired" && deadline !== null;
+  const submittedAt = claimedExpiry ? deadline : getEffectiveSubmittedAt(now, deadline);
+  const submissionReason = claimedExpiry
+    ? "timer_expired"
+    : getEffectiveSubmissionReason("user_submitted", deadline, now);
   const result = buildExamResult(allocation.questions, responses, {
     startedAt: claims.startedAt, submittedAt, submissionReason,
   });
   const attempted = new Set(result.questionDetails.filter((detail) => detail.attempted).map((detail) => detail.questionId));
-  return json({
+  const response = json({
     result,
     reviewQuestions: allocation.questions.filter(({ id }) => attempted.has(id)),
   });
+  if (!previous) {
+    response.cookies.set(spentCookieName, writeSpent([...spent, { id: claims.id, h: digest }], key), {
+      httpOnly: true, sameSite: "strict", secure: new URL(request.url).protocol === "https:", path: "/api/exam/guest-session", maxAge: ttlSeconds,
+    });
+  }
+  return response;
 }
 
 export async function PATCH(request: Request) {
   const origin = checkOrigin(request);
   if (!origin.ok) return origin.response;
+  const throttled = await limited(request, feedbackRules);
+  if (throttled) return throttled;
   const input = feedbackSchema.safeParse(await readJson(request));
   if (!input.success || isUnanswered(input.data.answer as CandidateAnswer)) return json({ error: "answer_required" }, 400);
   const session = await resolve(input.data.ticket);
