@@ -1,4 +1,5 @@
 /** Shared mail.tm throwaway-inbox helpers for hosted real-email specs. */
+import { randomBytes } from "node:crypto";
 import { expect, HOSTED_URL, RUN_ID } from "./fixtures";
 
 const MAILTM = "https://api.mail.tm";
@@ -30,7 +31,7 @@ export async function createInbox(label: string): Promise<Inbox> {
   const domains = await mailtm("/domains");
   const domain = domains["hydra:member"].find((d: { isActive: boolean }) => d.isActive).domain;
   const address = `mmaccept-${RUN_ID}-${label}@${domain}`;
-  const password = `Inbox-${RUN_ID}-${label}-pw`;
+  const password = `Inbox-${randomBytes(16).toString("base64url")}`;
   await mailtm("/accounts", { method: "POST", body: JSON.stringify({ address, password }) });
   const { token } = await mailtm("/token", { method: "POST", body: JSON.stringify({ address, password }) });
   return { address, token };

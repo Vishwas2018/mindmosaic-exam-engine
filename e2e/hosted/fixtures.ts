@@ -63,9 +63,18 @@ export async function protectContext(context: BrowserContext): Promise<void> {
   await context.route(
     (url) => url.origin === HOSTED_ORIGIN,
     async (route) => {
-      await route.continue({
-        headers: { ...route.request().headers(), "x-vercel-protection-bypass": secret },
-      });
+      // fetch + fulfill with maxRedirects: 0 so the secret is sent to this origin only; a redirect (even off-origin)
+      // is handed back to the browser, which follows it without the header.
+      try {
+        const response = await route.fetch({
+          headers: { ...route.request().headers(), "x-vercel-protection-bypass": secret },
+          maxRedirects: 0,
+        });
+        await route.fulfill({ response });
+      } catch {
+        // The page navigated away or the context closed while this request was in flight: nothing to deliver.
+        await route.abort().catch(() => undefined);
+      }
     },
   );
 }
@@ -186,5 +195,6 @@ export function api(page: Page) {
     get: async (url: string) => guard(await req.get(url, { headers, maxRedirects: 0 })),
     post: async (url: string, data: unknown) => guard(await req.post(url, { headers, data, maxRedirects: 0 })),
     patch: async (url: string, data: unknown) => guard(await req.patch(url, { headers, data, maxRedirects: 0 })),
+    put: async (url: string, data: unknown) => guard(await req.put(url, { headers, data, maxRedirects: 0 })),
   };
 }

@@ -2,7 +2,8 @@
  * N — negative authentication paths on real delivered mail (mail.tm inboxes, HOSTED_MAILBOX=mailtm).
  *
  * Every link opened here arrived in a real inbox. Covered: a spent confirmation link, a tampered confirmation link,
- * a spent recovery link, a tampered recovery link, a weak new password, sign-in with a wrong password versus an
+ * a spent recovery link, a tampered recovery link, a weak new password (the client keeps Save disabled; the provider
+ * owns the server-side policy, which is not asserted here), sign-in with a wrong password versus an
  * unknown address (the same message, so accounts cannot be enumerated), recovery for an unknown address (the same
  * "on its way" answer, and no mail), and reset/confirm pages opened with no link at all.
  */
@@ -18,7 +19,12 @@ import {
   seedBypassCookie,
   test,
 } from "./fixtures";
-import { actionLink, checkLinkTarget, createInbox, waitForMail } from "./mailtm";
+import {
+  actionLink,
+  checkLinkTarget,
+  createInbox,
+  waitForMail,
+} from "./mailtm";
 
 const NEW_PASSWORD = "Accept!Beta-2026-neg";
 
@@ -53,7 +59,10 @@ function tamper(link: string): string {
 test.describe("N: negative authentication", () => {
   test.beforeEach(({ page: _page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-1440", "runs once");
-    test.skip(process.env.HOSTED_MAILBOX !== "mailtm", "needs HOSTED_MAILBOX=mailtm");
+    test.skip(
+      process.env.HOSTED_MAILBOX !== "mailtm",
+      "needs HOSTED_MAILBOX=mailtm",
+    );
   });
 
   test("N1-N4: confirmation link is single-use and tamper-proof; sign-in stays blocked until confirmed", async ({
@@ -71,7 +80,9 @@ test.describe("N: negative authentication", () => {
     await page.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
     await page.getByRole("checkbox").first().check();
     await page.getByRole("button", { name: "Create account" }).click();
-    await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /check your email/i }),
+    ).toBeVisible();
 
     const mail = await waitForMail(inbox, /confirm/i, seen);
     const link = actionLink(mail);
@@ -79,20 +90,34 @@ test.describe("N: negative authentication", () => {
 
     // N1: tampered credential never confirms the account.
     await page.goto(tamper(link));
-    await expect(page).not.toHaveURL(/\/parent/, { timeout: 30_000 });
-    expect((await findUserByEmail(inbox.address))!.email_confirmed_at ?? null, "still unconfirmed after tamper").toBeNull();
+    await expect(
+      page.getByRole("heading", { name: /can.t be used|expired|same device/i }),
+    ).toBeVisible({ timeout: 30_000 });
+    await expect(page).not.toHaveURL(/\/parent/);
+    expect(
+      (await findUserByEmail(inbox.address))!.email_confirmed_at ?? null,
+      "still unconfirmed after tamper",
+    ).toBeNull();
 
     // N2: the genuine link works once (same browser that registered: the PKCE verifier lives there).
     await page.goto(link);
     await expect(page).toHaveURL(/\/parent/, { timeout: 45_000 });
-    expect((await findUserByEmail(inbox.address))!.email_confirmed_at, "confirmed by the genuine link").toBeTruthy();
+    expect(
+      (await findUserByEmail(inbox.address))!.email_confirmed_at,
+      "confirmed by the genuine link",
+    ).toBeTruthy();
 
     // N3: the same link, opened again in a fresh browser session, does not sign anyone in and does not 500.
     await freshSession(page);
     const response = await page.goto(link);
-    expect(response?.status() ?? 0, "spent link answered without a server error").toBeLessThan(500);
-    await expect(page).not.toHaveURL(/\/parent(\/|$)/, { timeout: 30_000 });
-    await expect(page.getByRole("link", { name: /sign[- ]?in|request|resend|new/i }).first()).toBeVisible();
+    expect(
+      response?.status() ?? 0,
+      "spent link answered without a server error",
+    ).toBeLessThan(500);
+    await expect(
+      page.getByRole("heading", { name: /can.t be used|expired|same device/i }),
+    ).toBeVisible({ timeout: 30_000 });
+    await expect(page).not.toHaveURL(/\/parent(\/|$)/);
   });
 
   test("N5-N9: recovery link is single-use and tamper-proof; weak passwords refused; no account enumeration", async ({
@@ -111,7 +136,9 @@ test.describe("N: negative authentication", () => {
     await page.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
     await page.getByRole("checkbox").first().check();
     await page.getByRole("button", { name: "Create account" }).click();
-    await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /check your email/i }),
+    ).toBeVisible();
     await page.goto(actionLink(await waitForMail(inbox, /confirm/i, seen)));
     await expect(page).toHaveURL(/\/parent/, { timeout: 45_000 });
 
@@ -121,53 +148,91 @@ test.describe("N: negative authentication", () => {
     await page.getByLabel("Email", { exact: true }).fill(inbox.address);
     await page.getByRole("button", { name: "Send reset link" }).click();
     await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
-    const recoveryLink = actionLink(await waitForMail(inbox, /reset|password|recover/i, seen));
+    const recoveryLink = actionLink(
+      await waitForMail(inbox, /reset|password|recover/i, seen),
+    );
     checkLinkTarget(recoveryLink);
 
     await page.goto(tamper(recoveryLink));
-    await expect(page.getByRole("heading", { name: "Set a new password" })).toHaveCount(0, { timeout: 30_000 });
-    await expect(page.getByText(/expired|already used|can.t be used|isn.t valid/i).first()).toBeVisible();
+    await expect(
+      page
+        .getByText(
+          /expired|already used|can.t be used|isn.t valid|same device/i,
+        )
+        .first(),
+    ).toBeVisible({ timeout: 30_000 });
+    await expect(
+      page.getByRole("heading", { name: "Set a new password" }),
+    ).toHaveCount(0);
 
     // N6: a weak new password is refused and nothing changes.
     await page.goto(recoveryLink);
-    await expect(page.getByRole("heading", { name: "Set a new password" })).toBeVisible({ timeout: 45_000 });
+    await expect(
+      page.getByRole("heading", { name: "Set a new password" }),
+    ).toBeVisible({ timeout: 45_000 });
     await page.getByLabel("New password", { exact: true }).fill("short");
     await page.getByLabel("Confirm new password").fill("short");
-    await expect(page.getByRole("button", { name: "Save new password" })).toBeDisabled();
-    await expect(page.getByRole("heading", { name: /password changed/i })).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "Save new password" }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("heading", { name: /password changed/i }),
+    ).toHaveCount(0);
 
     // N7: mismatched confirmation is refused.
     await page.getByLabel("New password", { exact: true }).fill(NEW_PASSWORD);
     await page.getByLabel("Confirm new password").fill(NEW_PASSWORD + "x");
-    await expect(page.getByRole("button", { name: "Save new password" })).toBeDisabled();
-    await expect(page.getByRole("heading", { name: /password changed/i })).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "Save new password" }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("heading", { name: /password changed/i }),
+    ).toHaveCount(0);
 
     // Genuine change succeeds.
     await page.getByLabel("Confirm new password").fill(NEW_PASSWORD);
     await page.getByRole("button", { name: "Save new password" }).click();
-    await expect(page.getByRole("heading", { name: /password changed/i })).toBeVisible({ timeout: 30_000 });
+    await expect(
+      page.getByRole("heading", { name: /password changed/i }),
+    ).toBeVisible({ timeout: 30_000 });
 
     // N8: the recovery link is spent.
     await freshSession(page);
     const again = await page.goto(recoveryLink);
     expect(again?.status() ?? 0).toBeLessThan(500);
-    await expect(page.getByRole("heading", { name: "Set a new password" })).toHaveCount(0, { timeout: 30_000 });
-    await expect(page.getByText(/expired|already used|can.t be used|isn.t valid/i).first()).toBeVisible();
+    await expect(
+      page
+        .getByText(
+          /expired|already used|can.t be used|isn.t valid|same device/i,
+        )
+        .first(),
+    ).toBeVisible({ timeout: 30_000 });
+    await expect(
+      page.getByRole("heading", { name: "Set a new password" }),
+    ).toHaveCount(0);
 
     // N9: wrong password for a real account and a made-up address give the same message (no enumeration).
     await parentSignIn(page, inbox.address, "Wrong!Password-2026-x");
     await expect(page.locator("#auth-error")).toBeVisible({ timeout: 20_000 });
     const realMsg = (await page.locator("#auth-error").innerText()).trim();
     await freshSession(page);
-    await parentSignIn(page, `nobody-${RUN_ID}@example.org`, "Wrong!Password-2026-x");
+    await parentSignIn(
+      page,
+      `nobody-${RUN_ID}@example.org`,
+      "Wrong!Password-2026-x",
+    );
     await expect(page.locator("#auth-error")).toBeVisible({ timeout: 20_000 });
     const ghostMsg = (await page.locator("#auth-error").innerText()).trim();
-    expect(ghostMsg, "same refusal for unknown and known addresses").toBe(realMsg);
+    expect(ghostMsg, "same refusal for unknown and known addresses").toBe(
+      realMsg,
+    );
 
     // N10: recovery for an unknown address gives the same answer as for a real one.
     await freshSession(page);
     await page.goto("/sign-in?mode=forgot");
-    await page.getByLabel("Email", { exact: true }).fill(`nobody-${RUN_ID}@example.org`);
+    await page
+      .getByLabel("Email", { exact: true })
+      .fill(`nobody-${RUN_ID}@example.org`);
     await page.getByRole("button", { name: "Send reset link" }).click();
     await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
   });
@@ -186,21 +251,34 @@ test.describe("N: negative authentication", () => {
     await page.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
     await page.getByRole("checkbox").first().check();
     await page.getByRole("button", { name: "Create account" }).click();
-    await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /check your email/i }),
+    ).toBeVisible();
     const link = actionLink(await waitForMail(inbox, /confirm/i, new Set()));
 
     const other = await browser.newContext();
-    await protectContext(other);
-    const p2 = await other.newPage();
-    await p2.goto(link);
-    await expect(p2.getByRole("heading", { name: /same device/i })).toBeVisible({ timeout: 45_000 });
-    await p2.screenshot({ path: testInfo.outputPath("n12-cross-device.png"), fullPage: true });
-    await expect(p2.getByText(/may already be confirmed/i)).toBeVisible();
-    // The provider confirmed the address when the link was followed, so the family can simply sign in.
-    expect((await findUserByEmail(inbox.address))!.email_confirmed_at, "confirmed server-side by the link").toBeTruthy();
-    await parentSignIn(p2, inbox.address, STRONG_PASSWORD);
-    await expect(p2).toHaveURL(/\/parent/, { timeout: 45_000 });
-    await other.close();
+    try {
+      await protectContext(other);
+      const p2 = await other.newPage();
+      await p2.goto(link);
+      await expect(
+        p2.getByRole("heading", { name: /same device/i }),
+      ).toBeVisible({ timeout: 45_000 });
+      await p2.screenshot({
+        path: testInfo.outputPath("n12-cross-device.png"),
+        fullPage: true,
+      });
+      await expect(p2.getByText(/may already be confirmed/i)).toBeVisible();
+      // The provider confirmed the address when the link was followed, so the family can simply sign in.
+      expect(
+        (await findUserByEmail(inbox.address))!.email_confirmed_at,
+        "confirmed server-side by the link",
+      ).toBeTruthy();
+      await parentSignIn(p2, inbox.address, STRONG_PASSWORD);
+      await expect(p2).toHaveURL(/\/parent/, { timeout: 45_000 });
+    } finally {
+      await other.close();
+    }
   });
 
   test("N11: reset and confirm pages opened with no link give guidance, not a form or an error page", async ({
@@ -209,10 +287,15 @@ test.describe("N: negative authentication", () => {
   }) => {
     await protectContext(context);
     await page.goto("/auth/reset");
-    await expect(page.getByRole("heading", { name: "Set a new password" })).toHaveCount(0);
-    await expect(page.getByText(/open your reset link|request a new/i).first()).toBeVisible();
+    await expect(
+      page.getByText(/open your reset link|request a new/i).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Set a new password" }),
+    ).toHaveCount(0);
     const r = await page.goto("/auth/confirm");
     expect(r?.status() ?? 0).toBeLessThan(500);
+    await expect(page.getByRole("heading").first()).toBeVisible();
     await expect(page).not.toHaveURL(/\/parent(\/|$)/);
   });
 });
