@@ -146,7 +146,8 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   // B6 navigate back with the palette: Q1 keeps its answer
   await page.getByTestId("nav-question-1").click();
   await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
-  await expect(page.getByTestId("nav-question-1")).toHaveAttribute("aria-label", /, answered/);
+  // Questions are drawn at random; a Q1 with a control this helper cannot drive (kinds[0] === "unsupported") was never answered.
+  if (kinds[0] !== "unsupported") await expect(page.getByTestId("nav-question-1")).toHaveAttribute("aria-label", /, answered/);
 
   // C2–C6 autosave then reload resumes with answers kept
   const saved = page.waitForResponse(
