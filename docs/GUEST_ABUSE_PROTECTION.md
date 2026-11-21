@@ -8,9 +8,16 @@ submits answers could harvest keys. The controls below stack; none stores questi
 - **Redis (production design):** Upstash Redis over its REST API (serverless-safe, no TCP). Enabled when
   `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` (or the Vercel Marketplace names `KV_REST_API_URL` /
   `KV_REST_API_TOKEN`) are set; the URL must be `https://`. Counters and submit claims are global across instances.
-- **Memory fallback:** per-instance, used locally, in CI, and until Redis is provisioned.
-- **Fail open:** a Redis error or timeout (800 ms) never blocks an exam; the limiter and claim then act as absent and
-  the cookie record (below) still applies.
+- **Memory store:** per-instance, used only off-host (local runs and CI, where `VERCEL` is not `1`).
+- **Hosted deployments fail closed.** When `VERCEL=1`, the shared store is mandatory. If Redis is not configured, times
+  out (800 ms), or returns an error, start, submit and feedback return `503 {"error":"guard_unavailable"}` with
+  `Retry-After: 15`. No answer, explanation or review material is returned without the atomic submit claim, so an outage
+  cannot be used to probe the key. The client keeps its answers and the sitting is recoverable; the same ticket submits
+  normally once Redis returns (the claim is only written on a successful submit). Cost of this choice: during a Redis
+  outage (or on a hosted environment that has no Redis yet) guests cannot start or finish a paper. Signed-in sittings
+  are unaffected (they do not use this store).
+- **Explicit degraded mode:** `MM_GUEST_GUARD=memory` lets a hosted environment run on the per-instance memory store
+  (no cross-instance replay protection). Owner-set only, never the default; use it for a throwaway preview, not family beta.
 - **Provisioning is not done.** It needs the owner's approval (new infrastructure, Vercel env vars, cost).
 
 ## 2. Rate limits (`src/lib/security/rate-limit.ts`), per 10 minutes

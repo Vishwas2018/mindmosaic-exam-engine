@@ -11,6 +11,7 @@ import { selectExamQuestions } from "@/features/exam-engine/selection";
 import { toCandidateQuestions, type CandidateAnswer, type ExamResponses } from "@/features/exam-engine/types";
 import { getEffectiveSubmissionReason, getEffectiveSubmittedAt } from "@/features/exam-engine/state/deadline";
 import { getGuestExamBank } from "@/server/exam-bank";
+import { guardRequired } from "@/lib/security/guard-store";
 import { claimSubmission, consumeRateLimit, type RateLimitRule } from "@/lib/security/rate-limit";
 import { practiceTokenKey } from "@/server/practice-session-token";
 
@@ -55,7 +56,9 @@ async function limited(request: Request, rules: { address: RateLimitRule; browse
   const browserId = (await cookies()).get(cookieName)?.value;
   const decision = await consumeRateLimit(request, rules, browserId);
   if (decision.allowed) return null;
-  const response = json({ error: "rate_limited" }, 429);
+  const response = decision.reason === "unavailable"
+    ? json({ error: "guard_unavailable" }, 503)
+    : json({ error: "rate_limited" }, 429);
   response.headers.set("Retry-After", String(decision.retryAfterSeconds));
   return response;
 }
@@ -230,6 +233,12 @@ export async function PUT(request: Request) {
   // Shared, atomic record (Redis when configured): holds across cookie loss and parallel requests.
   const claim = await claimSubmission(claims.id, digest, ttlSeconds);
   if (claim === "different") return json({ error: "already_submitted" }, 409);
+  if (claim === "unknown" && guardRequired()) {
+    // Fail closed: without the shared record the answer key could be probed by replay. The client keeps its answers and retries.
+    const refused = json({ error: "guard_unavailable" }, 503);
+    refused.headers.set("Retry-After", "15");
+    return refused;
+  }
   const duration = sessionDurationSeconds(allocation.config, allocation.questions);
   const deadline = duration === null ? null : claims.startedAt + duration * 1000;
   const now = Date.now();
