@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { bankQuestion } from "@/tests/fixtures/exam-pattern-bank";
 import { PATCH, POST, PUT } from "@/app/api/exam/guest-session/route";
 import { setGuardStoreForTests } from "@/lib/security/guard-store";
+import { downStore, sharedMemoryStore } from "@/tests/fixtures/guard-store";
 
 const state = vi.hoisted(() => ({ browser: undefined as string | undefined, spent: undefined as string | undefined }));
 vi.mock("next/headers", () => ({
@@ -33,7 +34,7 @@ function request(method: string, data: unknown, origin = "http://localhost", cli
 
 beforeEach(() => {
   vi.stubEnv("VERCEL", "1");
-  setGuardStoreForTests(undefined);
+  setGuardStoreForTests(sharedMemoryStore());
   state.browser = undefined;
   state.spent = undefined;
   vi.useFakeTimers({ toFake: ["Date"] });
@@ -42,6 +43,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllEnvs();
+  setGuardStoreForTests(undefined);
 });
 
 async function start(config = selection.config) {
@@ -177,5 +179,77 @@ describe("guest exam disclosure boundary", () => {
     state.spent = undefined;
     expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "b" } }))).status).toBe(409);
     expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }))).status).toBe(200);
+  });
+});
+
+describe("hosted guest guard fails closed", () => {
+  it("refuses to start, submit or reveal feedback while Redis is down, without disclosing answers", async () => {
+    const started = await start();
+    const id = started.questions[0].id;
+    setGuardStoreForTests(downStore());
+    const client = "192.0.2.10";
+    for (const response of [
+      await POST(request("POST", { selection }, "http://localhost", client)),
+      await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }, "http://localhost", client)),
+      await PATCH(request("PATCH", { ticket: started.ticket, questionId: id, answer: "a" }, "http://localhost", client)),
+    ]) {
+      expect(response.status).toBe(503);
+      expect(response.headers.get("retry-after")).toBe("15");
+      const body = await response.json();
+      expect(body).toEqual({ error: "guard_unavailable" });
+    }
+  });
+
+  it("refuses a submit when only the claim step fails, even from a client with no address header", async () => {
+    const started = await start();
+    const id = started.questions[0].id;
+    // Rate limiting passes (hit works) but the claim cannot be recorded.
+    const shared = sharedMemoryStore();
+    setGuardStoreForTests({ kind: "redis", hit: shared.hit.bind(shared), get: async () => { throw new Error("down"); }, claim: async () => { throw new Error("down"); } });
+    const response = await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }));
+    expect(response.status).toBe(503);
+    expect(await response.json()).not.toHaveProperty("reviewQuestions");
+  });
+
+  it("refuses when hosted with no Redis configured, and works again once it is provisioned", async () => {
+    const started = await start();
+    const id = started.questions[0].id;
+    setGuardStoreForTests(undefined);
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }))).status).toBe(503);
+    setGuardStoreForTests(sharedMemoryStore());
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }))).status).toBe(200);
+  });
+
+  it("keeps the sitting recoverable: the same ticket submits normally after the outage ends", async () => {
+    const started = await start();
+    const id = started.questions[0].id;
+    setGuardStoreForTests(downStore());
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }))).status).toBe(503);
+    setGuardStoreForTests(sharedMemoryStore());
+    const ok = await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }));
+    expect(ok.status).toBe(200);
+    expect((await ok.json()).reviewQuestions).toHaveLength(1);
+  });
+
+  it("admits only one of many concurrent submissions with different answers, and rejects replay and expiry", async () => {
+    const started = await start();
+    const id = started.questions[0].id;
+    const answers = ["a", "b", "c", "d"];
+    const results = await Promise.all(
+      Array.from({ length: 12 }, (_, i) => PUT(request("PUT", { ticket: started.ticket, responses: { [id]: answers[i % 4] } }))),
+    );
+    const statuses = results.map((r) => r.status);
+    expect(statuses.filter((s) => s === 200).length).toBeGreaterThanOrEqual(3);
+    expect(new Set(await Promise.all(results.filter((r) => r.status === 200).map(async (r) => JSON.stringify((await r.json()).result.score ?? null)))).size).toBe(1);
+    expect(statuses.every((s) => s === 200 || s === 409)).toBe(true);
+    vi.setSystemTime(Date.now() + 4 * 60 * 60 * 1000);
+    expect((await PUT(request("PUT", { ticket: started.ticket, responses: { [id]: "a" } }))).status).toBe(404);
+  });
+
+  it("does not throttle two browsers sharing one address through the guard", async () => {
+    for (const browser of ["nat-a", "nat-b", "nat-c"]) {
+      state.browser = browser;
+      expect((await POST(request("POST", { selection }, "http://localhost", "192.0.2.77"))).status).toBe(201);
+    }
   });
 });

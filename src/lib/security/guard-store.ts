@@ -7,8 +7,10 @@
  *    KV_REST_API_TOKEN) are set. Counters and markers are global across instances.
  *  - MemoryGuardStore: per-instance fallback (local, CI, or when Redis is not provisioned).
  *
- * Redis errors never break an exam: callers treat a thrown store error as "unknown" and fall back (see
- * guestGuard). Nothing stored here contains question content; keys carry hashed client and ticket identifiers.
+ * Hosted deployments (VERCEL=1) FAIL CLOSED: the guard is mandatory there, so a missing or failing Redis refuses
+ * the request instead of disclosing answers without replay protection. Local runs and CI use the memory store.
+ * MM_GUEST_GUARD=memory is an explicit, owner-set degraded mode for a hosted environment without Redis.
+ * Nothing stored here contains question content; keys carry hashed client and ticket identifiers.
  */
 export interface GuardStore {
   readonly kind: "redis" | "memory";
@@ -127,6 +129,11 @@ export function guardStore(env: NodeJS.ProcessEnv = process.env): GuardStore {
   const url = env.UPSTASH_REDIS_REST_URL || env.KV_REST_API_URL;
   const token = env.UPSTASH_REDIS_REST_TOKEN || env.KV_REST_API_TOKEN;
   return url && token && url.startsWith("https://") ? new UpstashGuardStore(url, token) : memoryStore;
+}
+
+/** True when a hosted deployment must have a healthy shared store before it may serve guest answers. */
+export function guardRequired(env: NodeJS.ProcessEnv = process.env): boolean {
+  return env.VERCEL === "1" && env.MM_GUEST_GUARD !== "memory";
 }
 
 export function setGuardStoreForTests(store: GuardStore | undefined) {

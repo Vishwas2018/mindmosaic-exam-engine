@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-import { guardStore } from "./guard-store";
+import { guardRequired, guardStore } from "./guard-store";
 
 /**
  * Fixed-window rate limiting for unauthenticated endpoints, backed by the shared guard store (Redis when
@@ -13,10 +13,15 @@ import { guardStore } from "./guard-store";
  *
  * The address is the first hop of x-forwarded-for / x-real-ip, trusted only on Vercel (the edge overwrites it);
  * elsewhere (local runs, CI) address-based limiting is off so the e2e suites, which share one loopback client,
- * are unaffected. A store error fails open: an unavailable limiter must not stop a child sitting an exam.
+ * are unaffected. Hosted, the store is mandatory and an error or missing Redis FAILS CLOSED (reason "unavailable");
+ * off-host, a store error fails open.
  */
 export type RateLimitRule = { name: string; limit: number; windowMs: number };
-export type RateLimitDecision = { allowed: true } | { allowed: false; retryAfterSeconds: number };
+export type RateLimitDecision =
+  | { allowed: true }
+  | { allowed: false; reason: "limited" | "unavailable"; retryAfterSeconds: number };
+
+const UNAVAILABLE_RETRY_SECONDS = 15;
 
 export function clientAddress(request: Request, env: NodeJS.ProcessEnv = process.env): string | null {
   if (env.VERCEL !== "1") return null;
@@ -43,30 +48,36 @@ export async function consumeRateLimit(
   const address = clientAddress(request);
   if (address && rules.address) checks.push({ key: `rl:${rules.address.name}:ip:${digest(address)}`, rule: rules.address });
   if (browserId && rules.browser) checks.push({ key: `rl:${rules.browser.name}:b:${digest(browserId)}`, rule: rules.browser });
+  const store = guardStore();
+  const required = guardRequired();
+  if (required && store.kind !== "redis") return { allowed: false, reason: "unavailable", retryAfterSeconds: UNAVAILABLE_RETRY_SECONDS };
   if (!checks.length) return { allowed: true };
 
-  const store = guardStore();
   let retryAfterMs = 0;
   for (const { key, rule } of checks) {
     try {
       const { count, resetInMs } = await store.hit(key, rule.windowMs);
       if (count > rule.limit) retryAfterMs = Math.max(retryAfterMs, resetInMs);
     } catch {
-      // Fail open: see the module comment.
+      if (required) return { allowed: false, reason: "unavailable", retryAfterSeconds: UNAVAILABLE_RETRY_SECONDS };
+      // Off-host: fail open, see the module comment.
     }
   }
-  return retryAfterMs > 0 ? { allowed: false, retryAfterSeconds: Math.max(1, Math.ceil(retryAfterMs / 1000)) } : { allowed: true };
+  return retryAfterMs > 0
+    ? { allowed: false, reason: "limited", retryAfterSeconds: Math.max(1, Math.ceil(retryAfterMs / 1000)) }
+    : { allowed: true };
 }
 
 export type SubmissionClaim = "first" | "same" | "different" | "unknown";
 
 /**
  * Atomic first-submit marker for a guest ticket. "first": this call recorded it. "same": a replay with identical
- * answers (idempotent). "different": answers changed after disclosure (refuse). "unknown": store unavailable, so
- * the caller relies on its cookie record.
+ * answers (idempotent). "different": answers changed after disclosure (refuse). "unknown": store unavailable; the
+ * caller must refuse when guardRequired() (hosted) and may rely on its cookie record otherwise.
  */
 export async function claimSubmission(ticketId: string, answersDigest: string, ttlSeconds: number): Promise<SubmissionClaim> {
   const store = guardStore();
+  if (guardRequired() && store.kind !== "redis") return "unknown";
   const key = `guest:spent:${ticketId}`;
   try {
     if (await store.claim(key, answersDigest, ttlSeconds)) return "first";

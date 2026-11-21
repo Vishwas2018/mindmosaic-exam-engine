@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { MemoryGuardStore, UpstashGuardStore, setGuardStoreForTests } from "@/lib/security/guard-store";
+import { UpstashGuardStore, guardRequired, setGuardStoreForTests } from "@/lib/security/guard-store";
+import { downStore, sharedMemoryStore } from "@/tests/fixtures/guard-store";
 import { claimSubmission, clientAddress, consumeRateLimit } from "@/lib/security/rate-limit";
 
 const rule = { name: "t", limit: 3, windowMs: 1000 };
@@ -8,11 +9,11 @@ const rules = { address: rule, browser: { name: "t", limit: 2, windowMs: 1000 } 
 const from = (ip?: string) => new Request("http://localhost/x", { headers: ip ? { "x-forwarded-for": ip } : {} });
 
 let clock = 0;
-let store: MemoryGuardStore;
+let store: ReturnType<typeof sharedMemoryStore>;
 
 beforeEach(() => {
   clock = 0;
-  store = new MemoryGuardStore(() => clock);
+  store = sharedMemoryStore(() => clock);
   setGuardStoreForTests(store);
   vi.stubEnv("VERCEL", "1");
 });
@@ -25,7 +26,7 @@ describe("rate limiter", () => {
   it("allows up to the address limit then blocks with a retry hint", async () => {
     for (let i = 0; i < 3; i += 1) expect((await consumeRateLimit(from("1.1.1.1"), { address: rule })).allowed).toBe(true);
     clock = 400;
-    expect(await consumeRateLimit(from("1.1.1.1"), { address: rule })).toEqual({ allowed: false, retryAfterSeconds: 1 });
+    expect(await consumeRateLimit(from("1.1.1.1"), { address: rule })).toEqual({ allowed: false, reason: "limited", retryAfterSeconds: 1 });
   });
 
   it("tracks clients independently and resets after the window", async () => {
@@ -63,15 +64,39 @@ describe("rate limiter", () => {
     expect(clientAddress(from("2001:db8:1:3::1"))).not.toBe(clientAddress(from("2001:db8:1:2::1")));
   });
 
-  it("fails open when the shared store is down", async () => {
-    setGuardStoreForTests({
-      kind: "redis",
-      hit: async () => { throw new Error("down"); },
-      claim: async () => { throw new Error("down"); },
-      get: async () => { throw new Error("down"); },
-    });
-    for (let i = 0; i < 10; i += 1) expect((await consumeRateLimit(from("3.3.3.3"), { address: rule })).allowed).toBe(true);
+  it("fails closed on a hosted deployment when the shared store is down", async () => {
+    setGuardStoreForTests(downStore());
+    for (let i = 0; i < 3; i += 1) {
+      expect(await consumeRateLimit(from("3.3.3.3"), { address: rule })).toEqual({ allowed: false, reason: "unavailable", retryAfterSeconds: 15 });
+    }
+    expect(await consumeRateLimit(from(), { browser: rule }, "browser-1")).toMatchObject({ allowed: false, reason: "unavailable" });
     expect(await claimSubmission("t1", "d1", 60)).toBe("unknown");
+  });
+
+  it("fails closed on a hosted deployment with no Redis configured, unless the owner opts into memory mode", async () => {
+    setGuardStoreForTests(undefined);
+    expect(guardRequired()).toBe(true);
+    expect(await consumeRateLimit(from("4.4.4.4"), { address: rule })).toMatchObject({ allowed: false, reason: "unavailable" });
+    expect(await claimSubmission("t2", "d", 60)).toBe("unknown");
+    vi.stubEnv("MM_GUEST_GUARD", "memory");
+    expect(guardRequired()).toBe(false);
+    expect((await consumeRateLimit(from("4.4.4.4"), { address: rule })).allowed).toBe(true);
+    expect(await claimSubmission("t2", "d", 60)).toBe("first");
+  });
+
+  it("fails open off-host (local runs and CI) when the store errors", async () => {
+    vi.stubEnv("VERCEL", "");
+    setGuardStoreForTests(downStore());
+    expect(guardRequired()).toBe(false);
+    expect((await consumeRateLimit(from("3.3.3.3"), { browser: rule }, "b")).allowed).toBe(true);
+    expect(await claimSubmission("t3", "d1", 60)).toBe("unknown");
+  });
+
+  it("recovers as soon as the store returns", async () => {
+    setGuardStoreForTests(downStore());
+    expect((await consumeRateLimit(from("5.5.5.5"), { address: rule })).allowed).toBe(false);
+    setGuardStoreForTests(sharedMemoryStore(() => clock));
+    expect((await consumeRateLimit(from("5.5.5.5"), { address: rule })).allowed).toBe(true);
   });
 });
 
