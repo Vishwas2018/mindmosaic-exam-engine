@@ -40,9 +40,26 @@ export function devAdmin(): SupabaseClient {
   return adminSingleton;
 }
 
+/**
+ * Header injection (protectContext) does not reach redirect hops (an emailed link goes Supabase /auth/v1/verify →
+ * Preview), so Vercel answers those with its SSO wall. Seeds Vercel's bypass cookie on the context; it is scoped to the
+ * Preview host and the secret is sent only to that host. Call again after anything that clears cookies.
+ */
+export async function seedBypassCookie(context: BrowserContext): Promise<void> {
+  await context.request.get(`${HOSTED_ORIGIN}/`, {
+    headers: {
+      "x-vercel-protection-bypass": requireEnv("VERCEL_AUTOMATION_BYPASS_SECRET"),
+      "x-vercel-set-bypass-cookie": "true",
+    },
+    maxRedirects: 0,
+    failOnStatusCode: false,
+  });
+}
+
 /** Adds the bypass header to requests for the Preview host only. */
 export async function protectContext(context: BrowserContext): Promise<void> {
   const secret = requireEnv("VERCEL_AUTOMATION_BYPASS_SECRET");
+  await seedBypassCookie(context);
   await context.route(
     (url) => url.origin === HOSTED_ORIGIN,
     async (route) => {

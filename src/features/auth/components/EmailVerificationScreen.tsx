@@ -32,7 +32,9 @@ const PROBLEM_COPY: Record<LinkProblem, { title: string; body: string }> = {
   },
   other_device: {
     title: "Open this link on the same device",
-    body: CROSS_DEVICE_MESSAGE,
+    // The provider has already confirmed the address by the time this device-bound link reaches the app, so a new
+    // account can usually sign in straight away; say so instead of only asking for another link.
+    body: `${CROSS_DEVICE_MESSAGE} If you were confirming a new account, your email may already be confirmed, so try signing in first.`,
   },
   unconfigured: {
     title: "Accounts aren’t connected",
