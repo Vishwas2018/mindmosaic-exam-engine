@@ -65,6 +65,30 @@ async function answerVisible(page: Page, text = "6"): Promise<string> {
     await tb.fill(text);
     return "text";
   }
+  // Hot text: toggle buttons inside the "Selectable text" group.
+  const hot = q.getByRole("group", { name: "Selectable text" }).getByRole("button").first();
+  if (await hot.isVisible().catch(() => false)) {
+    await hot.click();
+    await expect(hot).toHaveAttribute("aria-pressed", "true");
+    return "hot-text";
+  }
+  // Ordering: the shown order is a deterministic scramble, so one move is a real change by the learner.
+  const move = q.getByRole("button", { name: /^Move .+ (up|down)$/ }).and(q.locator(":enabled")).first();
+  if (await move.isVisible().catch(() => false)) {
+    await move.click();
+    return "ordering";
+  }
+  // Dropdown, matching, label-diagram and drag-drop keyboard placement all use native selects: choose a real option in each.
+  const selects = q.locator("select");
+  const n = await selects.count();
+  if (n > 0) {
+    for (let i = 0; i < n; i++) {
+      const sel = selects.nth(i);
+      const value = await sel.locator("option:not([value=''])").first().getAttribute("value");
+      if (value) await sel.selectOption(value);
+    }
+    return "select";
+  }
   return "unsupported";
 }
 
@@ -141,13 +165,13 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
     await press(page, "next-question");
   }
   testInfo.annotations.push({ type: "answer-kinds", description: kinds.join(",") });
-  expect(kinds.filter((k) => k !== "unsupported").length, `answered with: ${kinds}`).toBeGreaterThanOrEqual(4);
+  // Every question must be answerable by the helper: an unsupported control is a harness gap to fix, not to skip.
+  expect(kinds, `controls the helper could not drive: ${kinds}`).not.toContain("unsupported");
 
   // B6 navigate back with the palette: Q1 keeps its answer
   await page.getByTestId("nav-question-1").click();
   await expect(page.getByRole("heading", { name: "Question 1 of 10" })).toBeVisible();
-  // Questions are drawn at random; a Q1 with a control this helper cannot drive (kinds[0] === "unsupported") was never answered.
-  if (kinds[0] !== "unsupported") await expect(page.getByTestId("nav-question-1")).toHaveAttribute("aria-label", /, answered/);
+  await expect(page.getByTestId("nav-question-1")).toHaveAttribute("aria-label", /, answered/);
 
   // C2–C6 autosave then reload resumes with answers kept
   const saved = page.waitForResponse(
@@ -160,7 +184,6 @@ test("B3–B8 + C: timed paper — answer, navigate, autosave, resume, submit, m
   await page.reload();
   await expect(page.getByRole("heading", { name: /Question \d+ of 10/ })).toBeVisible({ timeout: 30_000 });
   for (let i = 1; i <= 5; i++) {
-    if (kinds[i - 1] === "unsupported") continue;
     await expect(page.getByTestId(`nav-question-${i}`), `Q${i} still answered after reload`).toHaveAttribute(
       "aria-label",
       /, answered/,
