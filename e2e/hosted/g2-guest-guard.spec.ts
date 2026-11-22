@@ -155,4 +155,25 @@ test.describe("G2: guest guard", () => {
       await stranger.close();
     }
   });
+  test("G2c: a browser that keeps starting sittings is rate limited (429 with Retry-After)", async ({ page, context }) => {
+    await protectContext(context);
+    const http = api(page);
+    const first = await http.post("/api/exam/guest-session", START);
+    test.skip(first.status() !== 201, "needs the shared guard (Redis) to be live");
+    // Per-browser limit is 20 starts per 10 minutes; the first start above was number 1.
+    let limited: number | null = null;
+    let retryAfter: string | undefined;
+    for (let n = 2; n <= 25 && limited === null; n++) {
+      const r = await http.post("/api/exam/guest-session", START);
+      if (r.status() === 429) {
+        limited = n;
+        retryAfter = r.headers()["retry-after"];
+      } else {
+        expect(r.status()).toBe(201);
+      }
+    }
+    expect(limited, "429 reached within 25 starts").not.toBeNull();
+    expect(limited!, "limit is the documented 20 per window").toBeLessThanOrEqual(22);
+    expect(Number(retryAfter)).toBeGreaterThan(0);
+  });
 });

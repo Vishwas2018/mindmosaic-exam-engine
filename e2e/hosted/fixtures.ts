@@ -99,6 +99,11 @@ export function seededEmail(label: string): string {
  * Nothing is minted: this is the link Supabase actually mailed.
  */
 export async function waitForMailedLink(label: string, timeoutMs = 15 * 60_000): Promise<string> {
+  // Unattended mode: HOSTED_MAILTM_ADDRESS/HOSTED_MAILTM_PASSWORD name a mail.tm inbox that HOSTED_MAIL_BASE points at
+  // (plus-addressed per run and label). The link is read from the message that actually arrived.
+  if (process.env.HOSTED_MAILTM_ADDRESS && process.env.HOSTED_MAILTM_PASSWORD) {
+    return waitForMailtmLink(label, timeoutMs);
+  }
   const fs = await import("node:fs");
   const path = await import("node:path");
   const file = path.join(process.env.HOSTED_OUTPUT ?? "test-results/hosted", `confirm-${label}.txt`);
@@ -110,6 +115,43 @@ export async function waitForMailedLink(label: string, timeoutMs = 15 * 60_000):
   }
   throw new Error(`no mailed link for ${label} within ${timeoutMs / 1000}s`);
 }
+async function waitForMailtmLink(label: string, timeoutMs: number): Promise<string> {
+  const api = "https://api.mail.tm";
+  const tag = `mmaccept-${RUN_ID}-${label}`;
+  const call = async (path: string, init: RequestInit = {}, token?: string) => {
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const r = await fetch(api + path, {
+        ...init,
+        headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      });
+      if (r.status === 429) {
+        await new Promise((res) => setTimeout(res, 2000 * (attempt + 1)));
+        continue;
+      }
+      if (!r.ok) throw new Error(`mail.tm ${path} -> ${r.status}`);
+      return r.json();
+    }
+    throw new Error(`mail.tm ${path} rate-limited`);
+  };
+  const { token } = await call("/token", {
+    method: "POST",
+    body: JSON.stringify({ address: process.env.HOSTED_MAILTM_ADDRESS, password: process.env.HOSTED_MAILTM_PASSWORD }),
+  });
+  const until = Date.now() + timeoutMs;
+  while (Date.now() < until) {
+    const list = await call("/messages", {}, token);
+    for (const m of list["hydra:member"] as { id: string; to: { address: string }[]; subject: string }[]) {
+      if (!/confirm/i.test(m.subject) || !m.to.some((t) => t.address.includes(tag))) continue;
+      const full = await call(`/messages/${m.id}`, {}, token);
+      const text = [...(full.html ?? []), full.text ?? ""].join(" ").replace(/&amp;/g, "&");
+      const link = [...text.matchAll(/https?:\/\/[^\s"'<>)]+/g)].map((x) => x[0]).find((h) => /\/auth\/v1\/verify|token_hash=|[?&]token=/.test(h));
+      if (link) return link;
+    }
+    await new Promise((res) => setTimeout(res, 4000));
+  }
+  throw new Error(`no mailed link for ${label} within ${timeoutMs / 1000}s`);
+}
+
 export const STRONG_PASSWORD = "Accept!Beta-2026-pass";
 
 type Fixtures = { consoleErrors: string[] };
