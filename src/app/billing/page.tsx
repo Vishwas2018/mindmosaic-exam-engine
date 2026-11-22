@@ -9,14 +9,14 @@ import { Badge } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
 import { RoleHomeLink } from "@/features/auth/components/RoleHomeLink";
 import {
-  FamilyPlanCard,
   InvoiceHistoryCard,
   PaymentMethodCard,
   PlanComparisonTable,
+  PricingPlans,
   SubscriptionOverviewCard,
 } from "@/features/billing";
 import { getMySubscription } from "@/lib/billing/subscription";
-import { isStripeConfigured } from "@/lib/stripe/config";
+import { isStripeConfigured, purchasablePlans } from "@/lib/stripe/config";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -122,6 +122,23 @@ export default async function BillingPage() {
   const result = isSupabaseConfigured ? await getMySubscription() : { status: "error" as const };
   const subscription = result.status === "ready" ? result.subscription : null;
 
+  /* Whether a tier can take a payment in THIS deployment (Stripe configured and both cadence prices set) is a
+     server-side runtime fact; the client picker only renders what it is told. */
+  const purchasable = purchasablePlans();
+  const availability = {
+    individual: purchasable.individual ? ("purchasable" as const) : ("roadmap" as const),
+    family: purchasable.family ? ("purchasable" as const) : ("roadmap" as const),
+  };
+
+  /* Someone on a trial, an expired or cancelled plan, or with no paid plan yet can still choose one; an active
+     paid subscriber manages theirs below. */
+  const showPlans =
+    subscription !== null &&
+    (subscription.plan === null ||
+      subscription.status === "trialing" ||
+      subscription.status === "trial_expired" ||
+      subscription.status === "canceled");
+
   /* Where payments are not switched on (the DEV family beta), nothing is offered for sale: a plan card here would
      lead to a checkout that can only fail. */
   if (!isStripeConfigured) {
@@ -149,16 +166,16 @@ export default async function BillingPage() {
       <Shell>
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-            Choose the Family plan
+            Pick the plan that fits your family
           </h1>
           <p className="mt-3 text-base leading-7 text-muted">
-            One plan for the whole family — up to 3 children, full question bank, full
-            skill-level breakdowns. Guests can keep practising for free, any time.
+            Start free with sample questions in every programme, then upgrade for the full question bank,
+            full-length exam papers and progress tracking.
           </p>
         </div>
-        <div className="mx-auto mt-10 max-w-3xl space-y-8">
+        <div className="mx-auto mt-10 max-w-5xl space-y-8">
+          <PricingPlans availability={availability} />
           <PlanComparisonTable />
-          <FamilyPlanCard />
         </div>
       </Shell>
     );
@@ -172,9 +189,10 @@ export default async function BillingPage() {
             Billing &amp; subscription
           </h1>
           <p className="mt-2 text-sm font-semibold text-muted">
-            Manage your Family plan, payment method, and invoice history.
+            Manage your plan, payment method, and invoice history.
           </p>
         </div>
+        {showPlans && <PricingPlans availability={availability} />}
         <SubscriptionOverviewCard subscription={subscription} />
         <PaymentMethodCard />
         <InvoiceHistoryCard />

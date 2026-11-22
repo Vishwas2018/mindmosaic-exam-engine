@@ -104,8 +104,21 @@ describe("AppHeader", () => {
   it("hides the student-only Learn link from a parent", async () => {
     profileRole = "parent";
     renderHeader();
-    await screen.findAllByRole("link", { name: "Practice" });
+    await screen.findAllByRole("link", { name: "Parent dashboard" });
     expect(screen.queryByRole("link", { name: "Learn" })).not.toBeInTheDocument();
+  });
+
+  it("gives a parent parent-appropriate nav instead of Practice and Exam papers", async () => {
+    profileRole = "parent";
+    renderHeader();
+    const children = await screen.findAllByRole("link", { name: "Children" });
+    expect(children[0]).toHaveAttribute("href", "/parent/children");
+    expect(screen.getAllByRole("link", { name: "Curriculum" })[0]).toHaveAttribute(
+      "href",
+      "/parent/curriculum-explorer",
+    );
+    expect(screen.queryByRole("link", { name: "Practice" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Exam papers" })).not.toBeInTheDocument();
   });
 
   it("shows Learn to a student", async () => {

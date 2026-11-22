@@ -44,9 +44,16 @@ retrofitted after a mistake.
   driven by verified webhook events from the provider, not by trusting a
   client-side "payment succeeded" callback — a client can lie about whether
   it paid; a signed webhook cannot be forged without the signing secret.
-- Billing status determines feature access (e.g. which roles/seats are
-  active) but must never gate whether a **guest** can practise — the
-  guests-allowed decision applies regardless of billing state.
+- Billing status determines feature access (which roles/seats are active and
+  how much of the question bank is served). A **guest** can always try
+  MindMosaic without an account or card, but the Free plan is a **sample**,
+  not open-ended practice: a fixed `FREE_PLAN.sampleQuestionsPerProgramme`
+  (5) questions per programme (exam style × year level × subject; see
+  `src/lib/billing/free-sample.ts`). The limit is applied to the data served —
+  the guest bank endpoint returns only the sample, and the signed-in session
+  route narrows to it for a student whose parent has no active access — never
+  to a client-side counter. Full-length exam papers are part of the paid
+  plans. This replaces the earlier rule that guest practice was ungated.
 
 ## Content and account safety
 

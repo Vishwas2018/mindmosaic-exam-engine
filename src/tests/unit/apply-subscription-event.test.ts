@@ -92,8 +92,8 @@ describe("applySubscriptionEvent", () => {
     expect(admin.rpc).not.toHaveBeenCalled();
   });
 
-  it("customer.subscription.updated: maps status/plan/period directly from the event payload, no Stripe API call", async () => {
-    const retrieve = vi.fn();
+  it("customer.subscription.updated: writes the CURRENT Stripe state, not the possibly stale payload", async () => {
+    const retrieve = vi.fn(async () => stripeSubscriptionFixture({ status: "past_due" }));
     const stripe = { subscriptions: { retrieve } } as never;
 
     const event = {
@@ -104,7 +104,7 @@ describe("applySubscriptionEvent", () => {
 
     await applySubscriptionEvent(admin as never, stripe, event);
 
-    expect(retrieve).not.toHaveBeenCalled();
+    expect(retrieve).toHaveBeenCalledWith("sub_123");
     expect(admin.rpc).toHaveBeenCalledWith("apply_stripe_subscription_event", {
       p_stripe_event_id: "evt_3",
       p_type: "customer.subscription.updated",
@@ -121,7 +121,9 @@ describe("applySubscriptionEvent", () => {
   });
 
   it("customer.subscription.deleted: maps Stripe's 'canceled' status onto our 'canceled' status", async () => {
-    const stripe = { subscriptions: { retrieve: vi.fn() } } as never;
+    const stripe = {
+      subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture({ status: "canceled" })) },
+    } as never;
 
     const event = {
       id: "evt_4",
@@ -138,7 +140,9 @@ describe("applySubscriptionEvent", () => {
   });
 
   it("customer.subscription.updated: maps Stripe's 'unpaid' status onto our 'past_due' (no 'unpaid' value in our check constraint)", async () => {
-    const stripe = { subscriptions: { retrieve: vi.fn() } } as never;
+    const stripe = {
+      subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture({ status: "unpaid" })) },
+    } as never;
 
     const event = {
       id: "evt_5",
@@ -154,8 +158,10 @@ describe("applySubscriptionEvent", () => {
     );
   });
 
-  it("invoice.payment_failed: sets status to past_due only, resolved via invoice.parent.subscription_details", async () => {
-    const stripe = { subscriptions: { retrieve: vi.fn() } } as never;
+  it("invoice.payment_failed: resolves the subscription via invoice.parent.subscription_details and writes its current status", async () => {
+    const stripe = {
+      subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture({ status: "past_due" })) },
+    } as never;
 
     const event = {
       id: "evt_6",
@@ -176,7 +182,12 @@ describe("applySubscriptionEvent", () => {
       p_payload: event,
       p_customer_id: "cus_123",
       p_subscription_id: "sub_123",
-      p_patch: { status: "past_due" },
+      p_patch: {
+        status: "past_due",
+        plan: "family_monthly",
+        stripe_subscription_id: "sub_123",
+        current_period_end: new Date(1_800_000_000 * 1000).toISOString(),
+      },
     });
   });
 
@@ -201,7 +212,7 @@ describe("applySubscriptionEvent", () => {
       data: null,
       error: { message: "duplicate key value violates unique constraint" },
     });
-    const stripe = { subscriptions: { retrieve: vi.fn() } } as never;
+    const stripe = { subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture()) } } as never;
     const event = {
       id: "evt_8",
       type: "customer.subscription.updated",
@@ -218,7 +229,7 @@ describe("applySubscriptionEvent", () => {
       data: { duplicate: true, subscription_row_id: null },
       error: null,
     });
-    const stripe = { subscriptions: { retrieve: vi.fn() } } as never;
+    const stripe = { subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture()) } } as never;
     const event = {
       id: "evt_9",
       type: "customer.subscription.updated",
@@ -228,5 +239,123 @@ describe("applySubscriptionEvent", () => {
     const outcome = await applySubscriptionEvent(admin as never, stripe, event);
 
     expect(outcome).toBe("duplicate");
+  });
+
+  describe("out-of-order and delayed delivery", () => {
+    it("a delayed customer.subscription.updated(active) after cancellation cannot resurrect the entitlement", async () => {
+      const stripe = {
+        subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture({ status: "canceled" })) },
+      } as never;
+      const stale = {
+        id: "evt_late_active",
+        type: "customer.subscription.updated",
+        data: { object: stripeSubscriptionFixture({ status: "active" }) },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, stale);
+
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({ p_patch: expect.objectContaining({ status: "canceled" }) }),
+      );
+    });
+
+    it("a delayed invoice.payment_failed after a successful retry cannot flip an active subscription to past_due", async () => {
+      const stripe = {
+        subscriptions: { retrieve: vi.fn(async () => stripeSubscriptionFixture({ status: "active" })) },
+      } as never;
+      const stale = {
+        id: "evt_late_failed",
+        type: "invoice.payment_failed",
+        data: {
+          object: { customer: "cus_123", parent: { subscription_details: { subscription: "sub_123" } } },
+        },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, stale);
+
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({ p_patch: expect.objectContaining({ status: "active" }) }),
+      );
+    });
+
+    it("falls back to the payload only when Stripe reports the subscription no longer exists", async () => {
+      const stripe = {
+        subscriptions: {
+          retrieve: vi.fn(async () => {
+            throw Object.assign(new Error("No such subscription"), { code: "resource_missing", statusCode: 404 });
+          }),
+        },
+      } as never;
+      const deleted = {
+        id: "evt_gone",
+        type: "customer.subscription.deleted",
+        data: { object: stripeSubscriptionFixture({ status: "canceled" }) },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, deleted);
+
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({ p_patch: expect.objectContaining({ status: "canceled" }) }),
+      );
+    });
+
+    it("a Stripe outage while re-syncing fails the delivery so Stripe retries, and never calls the RPC", async () => {
+      const stripe = {
+        subscriptions: {
+          retrieve: vi.fn(async () => {
+            throw Object.assign(new Error("connection reset"), { statusCode: 503 });
+          }),
+        },
+      } as never;
+      const event = {
+        id: "evt_outage",
+        type: "customer.subscription.updated",
+        data: { object: stripeSubscriptionFixture() },
+      } as never;
+
+      await expect(applySubscriptionEvent(admin as never, stripe, event)).rejects.toThrow("connection reset");
+      expect(admin.rpc).not.toHaveBeenCalled();
+    });
+
+    it("an unmapped price leaves the stored plan untouched instead of clearing it", async () => {
+      const stripe = {
+        subscriptions: {
+          retrieve: vi.fn(async () =>
+            stripeSubscriptionFixture({
+              items: { data: [{ price: { id: "price_unknown" }, current_period_end: 1_800_000_000 }] },
+            }),
+          ),
+        },
+      } as never;
+      const event = {
+        id: "evt_unmapped",
+        type: "customer.subscription.updated",
+        data: { object: stripeSubscriptionFixture() },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, event);
+
+      const patch = admin.rpc.mock.calls[0]![1].p_patch as Record<string, unknown>;
+      expect("plan" in patch).toBe(false);
+    });
+
+    it("a payment_failed for an invoice with no subscription writes nothing to subscriptions", async () => {
+      const stripe = { subscriptions: { retrieve: vi.fn() } } as never;
+      const event = {
+        id: "evt_oneoff",
+        type: "invoice.payment_failed",
+        data: { object: { customer: "cus_123", parent: null } },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, event);
+
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({ p_patch: null }),
+      );
+    });
   });
 });

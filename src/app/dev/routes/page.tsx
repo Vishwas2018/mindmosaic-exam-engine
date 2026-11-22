@@ -65,6 +65,7 @@ const GROUPS: Group[] = [
     routes: [
       { path: "/parent", label: "Dashboard" },
       { path: "/parent/children", label: "Manage children" },
+      { path: "/parent/settings", label: "Account settings" },
       { path: "/billing", label: "Billing & subscription" },
     ],
   },

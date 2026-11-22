@@ -83,28 +83,16 @@ describe("student layout auth gate", () => {
       expect(mockParentChildrenEq).not.toHaveBeenCalled();
     });
 
-    it("flag on: a student whose linked parent has access passes through", async () => {
+    it("flag on: a student is never redirected to /billing; their access only narrows what they are served", async () => {
       process.env.BILLING_ENFORCEMENT_ENABLED = "true";
       setSession({ id: "u1" }, "student");
       mockParentChildrenEq.mockResolvedValue({ data: [{ parent_id: "parent-1" }] });
-      mockRpc.mockResolvedValue({ data: true });
+      mockRpc.mockResolvedValue({ data: false });
       const children = <div data-testid="child" />;
 
       const result = await StudentLayout({ children });
 
       expect(result).toBe(children);
-      expect(mockRpc).toHaveBeenCalledWith("has_active_access", { p: "parent-1" });
-    });
-
-    it("flag on: a student whose linked parent has no access redirects to /billing", async () => {
-      process.env.BILLING_ENFORCEMENT_ENABLED = "true";
-      setSession({ id: "u1" }, "student");
-      mockParentChildrenEq.mockResolvedValue({ data: [{ parent_id: "parent-1" }] });
-      mockRpc.mockResolvedValue({ data: false });
-
-      const error = await StudentLayout({ children: <div /> }).catch((e: unknown) => e);
-
-      expect(redirectPath(error)).toBe("/billing");
     });
   });
 });

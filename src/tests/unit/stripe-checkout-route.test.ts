@@ -21,9 +21,12 @@ vi.mock("@/lib/supabase/server", () => ({
 
 vi.mock("@/lib/stripe/config", () => ({
   isStripeConfigured: true,
+  BILLING_PLANS: ["family_monthly", "family_annual", "individual_monthly", "individual_annual"],
   priceIdForPlan: (plan: string) => {
     if (plan === "family_monthly") return "price_test_monthly";
     if (plan === "family_annual") return "price_test_annual";
+    if (plan === "individual_monthly") return "price_test_ind_monthly";
+    if (plan === "individual_annual") return "price_test_ind_annual";
     return null;
   },
 }));
@@ -152,6 +155,20 @@ describe("POST /api/stripe/checkout", () => {
     const sessionArgs = mockCheckoutSessionsCreate.mock.calls[0][0];
     expect(sessionArgs.customer).toBe("cus_existing_456");
     expect(sessionArgs.line_items).toEqual([{ price: "price_test_annual", quantity: 1 }]);
+  });
+
+  it.each([
+    ["individual_monthly", "price_test_ind_monthly"],
+    ["individual_annual", "price_test_ind_annual"],
+  ])("builds a checkout session for %s at its own price", async (plan, price) => {
+    mockMaybeSingle.mockResolvedValue({ data: { id: "sub-1", stripe_customer_id: "cus_existing" }, error: null });
+
+    const response = await POST(postRequest({ plan }));
+
+    expect(response.status).toBe(200);
+    const args = mockCheckoutSessionsCreate.mock.calls[0][0];
+    expect(args.line_items).toEqual([{ price, quantity: 1 }]);
+    expect(args.metadata).toMatchObject({ plan });
   });
 
   it("404s when the caller has no subscriptions row at all", async () => {

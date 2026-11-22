@@ -23,7 +23,12 @@ export const STRIPE_NOT_CONFIGURED_MESSAGE =
   "Billing isn't set up on this server yet.";
 
 /** Mirrors the `plan` check constraint on public.subscriptions. */
-export const BILLING_PLANS = ["family_monthly", "family_annual"] as const;
+export const BILLING_PLANS = [
+  "family_monthly",
+  "family_annual",
+  "individual_monthly",
+  "individual_annual",
+] as const;
 export type BillingPlan = (typeof BILLING_PLANS)[number];
 
 export function isBillingPlan(value: unknown): value is BillingPlan {
@@ -48,6 +53,8 @@ export function isBillingPlan(value: unknown): value is BillingPlan {
 const PRICE_ID_BY_PLAN: Record<BillingPlan, string> = {
   family_monthly: process.env.STRIPE_PRICE_FAMILY_MONTHLY ?? "",
   family_annual: process.env.STRIPE_PRICE_FAMILY_ANNUAL ?? "",
+  individual_monthly: process.env.STRIPE_PRICE_INDIVIDUAL_MONTHLY ?? "",
+  individual_annual: process.env.STRIPE_PRICE_INDIVIDUAL_ANNUAL ?? "",
 };
 
 export function priceIdForPlan(plan: BillingPlan): string | null {
@@ -62,4 +69,19 @@ export function planForPriceId(priceId: string | null | undefined): BillingPlan 
     if (PRICE_ID_BY_PLAN[plan] && PRICE_ID_BY_PLAN[plan] === priceId) return plan;
   }
   return null;
+}
+
+/**
+ * Which paid tiers can actually take a payment in THIS deployment: Stripe is
+ * configured and both of the tier's cadence prices are set. /billing passes
+ * this to the client so an unconfigured deployment degrades to "Register
+ * interest" rather than offering a Subscribe button that would 503.
+ */
+export function purchasablePlans(): { individual: boolean; family: boolean } {
+  const both = (a: BillingPlan, b: BillingPlan) =>
+    isStripeConfigured && priceIdForPlan(a) !== null && priceIdForPlan(b) !== null;
+  return {
+    individual: both("individual_monthly", "individual_annual"),
+    family: both("family_monthly", "family_annual"),
+  };
 }

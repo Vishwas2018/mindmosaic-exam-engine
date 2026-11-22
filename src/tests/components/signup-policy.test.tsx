@@ -60,6 +60,6 @@ describe("the marketing surface's account CTAs", () => {
     expect(routes.guestPractice).toBe("/practice");
     const free = plans.items.find((item) => item.id === "free");
     expect(free?.cta.href).toBe(routes.guestPractice);
-    expect(free?.note).toMatch(/no account required/i);
+    expect(free?.note).toMatch(/no account/i);
   });
 });

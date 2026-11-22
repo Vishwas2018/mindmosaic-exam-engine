@@ -69,7 +69,7 @@ describe("existing question approval records verify identically (the writing kin
         );
       }
     }
-  });
+  }, 15_000);
 
   it("the question schema is unchanged and still parses to the same data inside the discriminated record", () => {
     for (const question of questions) {

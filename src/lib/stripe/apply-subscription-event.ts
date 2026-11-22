@@ -66,12 +66,40 @@ function customerIdOf(customer: string | { id: string } | null): string | null {
 function patchFromStripeSubscription(subscription: Stripe.Subscription): SubscriptionPatch {
   const item = subscription.items.data[0];
   const priceId = item?.price?.id ?? null;
+  const plan = planForPriceId(priceId);
   return {
     status: mapStatus(subscription.status),
-    plan: planForPriceId(priceId),
+    // An unmapped price must not blank an existing plan: omit the key so the
+    // RPC leaves the column untouched (an explicit null would clear it).
+    ...(plan ? { plan } : {}),
     stripe_subscription_id: subscription.id,
     current_period_end: isoFromUnixSeconds(item?.current_period_end ?? null),
   };
+}
+
+/**
+ * Stripe does not guarantee event order, and retries deliver old events late.
+ * Writing a stale payload (an `updated` that arrives after `deleted`, or a
+ * `payment_failed` after the retry succeeded) would resurrect or downgrade an
+ * entitlement. So the event only tells us WHICH subscription changed; the
+ * state we write is always the subscription as Stripe holds it right now,
+ * which makes every delivery an idempotent re-sync regardless of order.
+ * If Stripe says the subscription no longer exists we fall back to the
+ * payload, which for a deleted subscription is the canceled state anyway.
+ */
+async function currentSubscription(
+  stripe: Stripe,
+  subscriptionId: string,
+  fallback: Stripe.Subscription | null,
+): Promise<Stripe.Subscription | null> {
+  try {
+    return await stripe.subscriptions.retrieve(subscriptionId);
+  } catch (error) {
+    const code = (error as { code?: string; statusCode?: number } | null)?.code;
+    const status = (error as { statusCode?: number } | null)?.statusCode;
+    if (code === "resource_missing" || status === 404) return fallback;
+    throw error;
+  }
 }
 
 type ResolvedPatch = {
@@ -111,12 +139,13 @@ async function resolveSubscriptionPatch(
 
     case "customer.subscription.updated":
     case "customer.subscription.deleted": {
-      const subscription = event.data.object as Stripe.Subscription;
-      const customerId = customerIdOf(subscription.customer);
+      const payload = event.data.object as Stripe.Subscription;
+      const customerId = customerIdOf(payload.customer);
+      const current = await currentSubscription(stripe, payload.id, payload);
       return {
         customerId,
-        subscriptionId: subscription.id,
-        patch: patchFromStripeSubscription(subscription),
+        subscriptionId: payload.id,
+        patch: patchFromStripeSubscription(current ?? payload),
       };
     }
 
@@ -125,7 +154,18 @@ async function resolveSubscriptionPatch(
       const customerId = customerIdOf(invoice.customer);
       const subscriptionRef = invoice.parent?.subscription_details?.subscription ?? null;
       const subscriptionId = typeof subscriptionRef === "string" ? subscriptionRef : (subscriptionRef?.id ?? null);
-      return { customerId, subscriptionId, patch: { status: "past_due" } };
+      if (!subscriptionId) {
+        // A one-off invoice with no subscription says nothing about entitlement.
+        return null;
+      }
+      // Late delivery after a successful retry must not flip an active
+      // subscription back to past_due: trust Stripe's current status.
+      const current = await currentSubscription(stripe, subscriptionId, null);
+      return {
+        customerId,
+        subscriptionId,
+        patch: current ? patchFromStripeSubscription(current) : { status: "past_due" },
+      };
     }
 
     default:

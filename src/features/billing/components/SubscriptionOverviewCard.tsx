@@ -5,6 +5,7 @@ import { AlertTriangle } from "lucide-react";
 
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, ConfirmDialog } from "@/components/ui";
 import { redirectTo } from "@/lib/browser-redirect";
+import { PLAN_LABELS } from "@/lib/billing/prices";
 import type { MySubscriptionDetails, SubscriptionStatus } from "@/lib/billing/subscription";
 
 interface LiveStatus {
@@ -22,10 +23,6 @@ const STATUS_LABELS: Record<SubscriptionStatus, { label: string; variant: "succe
   trial_expired: { label: "Trial expired", variant: "error" },
 };
 
-const PLAN_LABELS: Record<"family_monthly" | "family_annual", string> = {
-  family_monthly: "Family (monthly)",
-  family_annual: "Family (annual)",
-};
 
 const DATE_FORMAT = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric" });
 
