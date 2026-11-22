@@ -105,7 +105,7 @@ async function currentSubscription(
 type ResolvedPatch = {
   customerId: string | null;
   subscriptionId: string | null;
-  patch: SubscriptionPatch;
+  patch: SubscriptionPatch | null;
 };
 
 /**
