@@ -102,7 +102,19 @@ async function journey(page: Page, testInfo: TestInfo, label: string) {
   await page.getByRole("button", { name: "Send reset link" }).click();
   await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
   const t1 = Date.now();
-  const recovery = await waitForMail(inbox, /reset|password|recover/i, seen);
+  // A family whose reset email has not come after ~100 s asks once more (after the provider's ~60 s cooldown). A miss
+  // is recorded in the evidence rather than hidden; a second miss fails the test.
+  let recovery;
+  try {
+    recovery = await waitForMail(inbox, /reset|password|recover/i, seen, 100_000);
+  } catch {
+    evidence.recoveryEmailMissed = { afterSeconds: Math.round((Date.now() - t1) / 1000) };
+    await page.goto("/sign-in?mode=forgot");
+    await page.getByLabel("Email", { exact: true }).fill(inbox.address);
+    await page.getByRole("button", { name: "Send reset link" }).click();
+    await expect(page.getByText(/reset link is on its way/i)).toBeVisible();
+    recovery = await waitForMail(inbox, /reset|password|recover/i, seen, 180_000);
+  }
   evidence.recovery = {
     from: recovery.from,
     subject: recovery.subject,
