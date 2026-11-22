@@ -11,7 +11,6 @@ import {
   buildAllPatternReadiness,
   type PatternReadinessMap,
 } from "@/features/exam-engine/exam-patterns";
-import { selectFreeSample } from "@/lib/billing/free-sample";
 import {
   buildBankEligibilitySummary,
   type BankEligibilitySummary,
@@ -138,11 +137,6 @@ export function getQuestionById(questionId: string): AuthoringQuestion | undefin
   return publishedExamBank.find((question) => question.id === questionId);
 }
 
-export type BankEligibility = Record<ExamBankId, BankEligibilitySummary> & {
-  /** The same summaries over the Free plan's sample of each bank. */
-  free: Record<ExamBankId, BankEligibilitySummary>;
-};
-
 /**
  * Eligibility summaries for both banks — counts and full-exam durations
  * per filter combination, no question content. This is all the exam setup
@@ -150,21 +144,15 @@ export type BankEligibility = Record<ExamBankId, BankEligibilitySummary> & {
  * (guests fetch theirs from /api/exam/guest-bank, signed-in sessions get
  * server-selected CandidateQuestions from /api/exam/session).
  */
-export function getBankEligibility(): BankEligibility {
+export function getBankEligibility(): Record<ExamBankId, BankEligibilitySummary> {
   /* The generic builder never offers scholarship-style content: it is sat only as a whole named paper. */
   const generic = (bankId: "curated" | "published") =>
     getExamBank(bankId).filter((question) => question.examStyle !== "scholarship_style");
   const publishedSummary = buildBankEligibilitySummary(generic("published"));
-  /* What a guest (or a free signed-in student) can actually reach: the same
-     summaries over the Free plan's sample, so the setup screen's counts match
-     the questions that will really be served. */
-  const freeCurated = buildBankEligibilitySummary(selectFreeSample(generic("curated")));
-  const freePublished = buildBankEligibilitySummary(selectFreeSample(generic("published")));
   return {
     curated: buildBankEligibilitySummary(generic("curated")),
     published: publishedSummary,
     practice: publishedSummary,
-    free: { curated: freeCurated, published: freePublished, practice: freePublished },
   };
 }
 

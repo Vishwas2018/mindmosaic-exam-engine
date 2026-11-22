@@ -8,11 +8,8 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
-/* A paying viewer: the full-bank counts these tests assert are what a student
-   with access sees. A guest sees the Free sample instead — see
-   exam-configurator-free-sample.test.tsx. */
 vi.mock("@/features/auth", () => ({
-  useAuth: () => ({ status: "authenticated", role: "student" }),
+  useAuth: () => ({ status: "anonymous", role: null }),
 }));
 
 vi.mock("server-only", () => ({}));

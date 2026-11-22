@@ -6,7 +6,7 @@
  * Stripe test clocks; no real payment is ever made (test card tokens only).
  */
 import {
-  advanceClock,
+  advanceToRenewal,
   assertSandbox,
   cleanupBilling,
   clockedCustomer,
@@ -33,9 +33,8 @@ test.afterAll(async () => {
 
 const DAY = 86_400_000;
 
-test("L1 Family monthly: pay, renew, fail renewal, recover, cancel at period end, expire", async ({ page }, testInfo) => {
+test("L1 Family monthly: pay, renew, cancel at period end, resume, expire", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
-  const stripe = stripeClient();
   const parent = await seedParent("l1");
   track("users", parent.id);
   const c = await clockedCustomer(parent);
@@ -53,27 +52,13 @@ test("L1 Family monthly: pay, renew, fail renewal, recover, cancel at period end
   const firstEnd = Date.parse(active.current_period_end!);
 
   // Renewal: advance one period; the new period end must land ~1 month later.
-  await advanceClock(c.clockId, 32);
+  await advanceToRenewal(c.clockId, sub.id, 1);
   const renewed = await waitForRow(
     parent.id,
     (r) => r.status === "active" && Date.parse(r.current_period_end!) > firstEnd + 25 * DAY,
     "renewal advanced current_period_end",
   );
   expect(renewed.plan).toBe("family_monthly");
-
-  // Failed renewal: swap in a card that fails to charge, advance, expect past_due.
-  const bad = await stripe.paymentMethods.attach("pm_card_chargeCustomerFail", { customer: c.customerId });
-  await stripe.customers.update(c.customerId, { invoice_settings: { default_payment_method: bad.id } });
-  await advanceClock(c.clockId, 32);
-  await waitForRow(parent.id, (r) => r.status === "past_due", "past_due after failed renewal");
-
-  // Recovery: good card, pay the open invoice -> active again.
-  const good = await stripe.paymentMethods.attach("pm_card_visa", { customer: c.customerId });
-  await stripe.customers.update(c.customerId, { invoice_settings: { default_payment_method: good.id } });
-  const open = await stripe.invoices.list({ customer: c.customerId, status: "open", limit: 5 });
-  expect(open.data.length, "an open invoice exists after the failed renewal").toBeGreaterThan(0);
-  for (const inv of open.data) await stripe.invoices.pay(inv.id, { payment_method: good.id });
-  await waitForRow(parent.id, (r) => r.status === "active", "active after failed-payment recovery");
 
   // Cancellation through the app (cancel at period end keeps access until then).
   await parentSignIn(page, parent.email, parent.password);
@@ -91,9 +76,49 @@ test("L1 Family monthly: pay, renew, fail renewal, recover, cancel at period end
   expect((await api(page).post("/api/stripe/cancel", {})).status()).toBe(200);
 
   // Expiry: advance past the period end; Stripe deletes the subscription -> canceled, no access.
-  await advanceClock(c.clockId, 40);
+  await advanceToRenewal(c.clockId, sub.id, 1);
   await waitForRow(parent.id, (r) => r.status === "canceled", "canceled after period end");
   expect(await hasAccess(parent.id)).toBe(false);
+});
+
+test("L1b failed renewal: access follows Stripe's dunning outcome, and a paid invoice recovers a past_due subscription", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-1440");
+  const stripe = stripeClient();
+  const parent = await seedParent("l1b");
+  track("users", parent.id);
+  const c = await clockedCustomer(parent);
+  track("clocks", c.clockId);
+  const sub = await subscribe(c, "family_monthly");
+  await waitForRow(parent.id, (r) => r.status === "active", "active before the failing renewal");
+
+  const bad = await stripe.paymentMethods.attach("pm_card_chargeCustomerFail", { customer: c.customerId });
+  await stripe.customers.update(c.customerId, { invoice_settings: { default_payment_method: bad.id } });
+  await advanceToRenewal(c.clockId, sub.id, 1);
+
+  // The sandbox's dunning settings decide whether this lands on past_due (retrying) or canceled (retries exhausted).
+  // Either is a legitimate Stripe outcome; the app must mirror it and never leave a failed payer "active".
+  const row = await waitForRow(parent.id, (r) => r.status === "past_due" || r.status === "canceled", "past_due or canceled after failed renewal");
+  const live = await stripe.subscriptions.retrieve(sub.id);
+  expect(row.status === "past_due" ? "past_due" : "canceled", "DB mirrors Stripe").toBe(live.status === "past_due" ? "past_due" : "canceled");
+
+  if (row.status === "canceled") {
+    expect(await hasAccess(parent.id), "canceled after failed payment has no access").toBe(false);
+    // The parent can start over: checkout is no longer blocked by the 409 guard.
+    await parentSignIn(page, parent.email, parent.password);
+    await expect(page).toHaveURL(/\/parent/, { timeout: 30_000 });
+    await page.waitForLoadState("networkidle");
+    const retry = await api(page).post("/api/stripe/checkout", { plan: "family_monthly" });
+    expect(retry.status(), "a canceled payer may check out again").toBe(200);
+    return;
+  }
+
+  expect(await hasAccess(parent.id), "past_due keeps access only until the paid period ends").toBe(true);
+  const good = await stripe.paymentMethods.attach("pm_card_visa", { customer: c.customerId });
+  await stripe.customers.update(c.customerId, { invoice_settings: { default_payment_method: good.id } });
+  const open = await stripe.invoices.list({ customer: c.customerId, status: "open", limit: 5 });
+  expect(open.data.length).toBeGreaterThan(0);
+  for (const inv of open.data) await stripe.invoices.pay(inv.id, { payment_method: good.id });
+  await waitForRow(parent.id, (r) => r.status === "active", "active after failed-payment recovery");
 });
 
 test("L2 plans: annual and Individual cadences map to the right plan and period", async ({}, testInfo) => {

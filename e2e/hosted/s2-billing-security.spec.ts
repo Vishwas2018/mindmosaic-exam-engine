@@ -315,13 +315,14 @@ test("S5 entitlement: a student of a parent without access is held to the free s
 
   // A custom draw is clamped to the sample: never more than 5 questions per programme.
   const draw = await api(sp).post("/api/exam/session", {
-    config: { examStyle: "naplan_style", yearLevel: 5, subject: "numeracy", questionCount: 40 },
+    config: { examStyle: "naplan_style", yearLevel: 5, subject: "numeracy", questionCount: 40, timing: "untimed" },
   });
   if (draw.status() === 200) {
     const body = (await draw.json()) as { questions: unknown[] };
     expect(body.questions.length, "free student served more than the sample").toBeLessThanOrEqual(5);
   } else {
     expect([402, 422], `custom draw status ${draw.status()}`).toContain(draw.status());
+    expect(draw.status(), "a refused draw must not be a server error").toBeLessThan(500);
   }
   await studentCtx.close();
 

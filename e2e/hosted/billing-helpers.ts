@@ -62,14 +62,26 @@ export interface SeededParent {
 
 export async function seedParent(label: string): Promise<SeededParent> {
   const email = seededEmail(`bill-${label}`);
-  const { data, error } = await devAdmin().auth.admin.createUser({
-    email,
-    password: STRONG_PASSWORD,
-    email_confirm: true,
-    user_metadata: { display_name: `Billing ${label}`, role: "parent" },
-  });
-  expect(error, `seed parent ${label}`).toBeNull();
-  const id = data.user!.id;
+  let id = "";
+  let lastError: unknown = null;
+  for (let attempt = 0; attempt < 4 && !id; attempt++) {
+    const { data, error } = await devAdmin().auth.admin.createUser({
+      email,
+      password: STRONG_PASSWORD,
+      email_confirm: true,
+      user_metadata: { display_name: `Billing ${label}`, role: "parent" },
+    });
+    if (data?.user) id = data.user.id;
+    else {
+      lastError = error;
+      // A reset mid-request may still have created the user; look before retrying.
+      const { findUserByEmail } = await import("./fixtures");
+      const existing = await findUserByEmail(email);
+      if (existing) id = existing.id;
+      else await new Promise((r) => setTimeout(r, 2000 * (attempt + 1)));
+    }
+  }
+  expect(id, `seed parent ${label}: ${String(lastError)}`).not.toBe("");
   // The signup trigger creates the trial row; wait for it rather than assuming.
   await expect.poll(async () => (await subRow(id)) !== null, { timeout: 20_000 }).toBe(true);
   return { id, email, password: STRONG_PASSWORD };
@@ -155,6 +167,15 @@ export async function subscribe(c: Clocked, plan: PlanKey): Promise<Stripe.Subsc
     items: [{ price: await priceId(plan) }],
     metadata: { plan },
   });
+}
+
+/** Advances the clock to just past the subscription's current period end (the next renewal attempt). */
+export async function advanceToRenewal(clockId: string, subscriptionId: string, extraDays = 1): Promise<void> {
+  const stripe = stripeClient();
+  const sub = await stripe.subscriptions.retrieve(subscriptionId);
+  const end = sub.items.data[0]!.current_period_end;
+  const clock = await stripe.testHelpers.testClocks.retrieve(clockId);
+  await advanceClock(clockId, Math.max(1, Math.ceil((end - clock.frozen_time) / 86_400) + extraDays));
 }
 
 export async function advanceClock(clockId: string, days: number): Promise<void> {

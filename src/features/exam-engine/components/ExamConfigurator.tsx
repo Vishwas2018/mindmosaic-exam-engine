@@ -7,7 +7,6 @@ import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
 import { useAuth } from "@/features/auth";
-import { FREE_SAMPLE_PER_PROGRAMME } from "@/lib/billing/free-sample";
 import {
   EXAM_STYLE_OPTIONS,
   QUESTION_COUNT_OPTIONS,
@@ -40,13 +39,7 @@ export interface ExamConfiguratorProps {
    * docs/ASSESSMENT_SECURITY_MODEL.md. Both guests and signed-in students
    * receive server-selected candidate questions when they start.
    */
-  bankEligibility: Record<ExamBankId, BankEligibilitySummary> & {
-    /**
-     * The same summaries over the Free plan's sample of each bank. A guest is
-     * only ever served that sample, so their counts must come from here.
-     */
-    free?: Record<ExamBankId, BankEligibilitySummary>;
-  };
+  bankEligibility: Record<ExamBankId, BankEligibilitySummary>;
   /**
    * Pre-select year level / exam style / subject away from this
    * component's own defaults (Grade 3, NAPLAN-style, Numeracy). Used by a
@@ -161,37 +154,28 @@ export function ExamConfigurator({
    *
    * "mixed" is always offered: it is not a year.
    */
-  /* A guest is only ever served the Free plan's sample, so the counts they see
-     (and the years they are offered) come from the sample's summaries. */
-  const freeLimited =
-    (auth.status === "anonymous" || auth.status === "unconfigured") &&
-    bankEligibility.free !== undefined;
-  const counts = freeLimited && bankEligibility.free ? bankEligibility.free : bankEligibility;
-
   const offeredYearLevels = YEAR_LEVEL_OPTIONS.filter((option) => {
     if (option === "mixed") return true;
     if (option === yearLevel) return true;
     return (
-      (counts.published[eligibilityKey({ yearLevel: option, examStyle, subject })]
+      (bankEligibility.published[eligibilityKey({ yearLevel: option, examStyle, subject })]
         ?.count ?? 0) > 0
     );
   });
 
   const bankId: ExamBankId = initialBankId === undefined ? "curated" : "published";
-  const summary = counts[bankId][eligibilityKey({ yearLevel, examStyle, subject })];
+  const summary =
+    bankEligibility[bankId][eligibilityKey({ yearLevel, examStyle, subject })];
   const eligibleCount = summary?.count ?? 0;
 
-  /* The sample is smaller than any fixed paper length, so on Free the sitting
-     is "all of the sample" rather than a length that can never be met. */
-  const effectiveQuestionCount: QuestionCountOption = freeLimited ? "full" : questionCount;
-  const requestedCount = effectiveQuestionCount === "full" ? eligibleCount : effectiveQuestionCount;
+  const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
 
   const config: ExamSelectionConfig = {
     yearLevel,
     examStyle,
     subject,
-    questionCount: effectiveQuestionCount,
+    questionCount,
     timing,
     confidenceMode: confidenceMode || undefined,
   };
@@ -202,9 +186,9 @@ export function ExamConfigurator({
    * filters match (every eligible question is selected in "full" mode).
    */
   const durationMinutes = Math.round(
-    (effectiveQuestionCount === "full"
+    (questionCount === "full"
       ? (summary?.fullDurationSeconds ?? 0)
-      : durationSecondsFor(effectiveQuestionCount)) / 60,
+      : durationSecondsFor(questionCount)) / 60,
   );
 
   const handleStart = async () => {
@@ -499,20 +483,6 @@ export function ExamConfigurator({
             </Link>
           </div>
         </div>
-      )}
-
-      {freeLimited && (
-        <p
-          data-testid="free-sample-note"
-          className="mx-6 mb-6 rounded-xl bg-royal/6 px-4 py-3 text-sm font-semibold text-ink sm:mx-8"
-        >
-          Free plan: {FREE_SAMPLE_PER_PROGRAMME} sample questions per programme, so this sitting is
-          the whole sample.{" "}
-          <Link href="/billing" className="font-extrabold text-royal underline-offset-2 hover:underline">
-            See plans
-          </Link>{" "}
-          for the full question bank.
-        </p>
       )}
 
       {(insufficient || startError) && (

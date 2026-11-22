@@ -57,11 +57,6 @@ export function ExamPatternStarter({
   /* A signed-in-only paper is never put in the public guest bank, so a guest cannot start it at all. */
   const signInRequired = pattern.guestAccess === "signed_in_only" && !serverMode && auth.status !== "loading";
 
-  /* Full-length papers are part of the paid plans. A guest is only ever served
-     the Free plan's sample of each programme, which cannot fill a paper. */
-  const paidPlanRequired =
-    (auth.status === "anonymous" || auth.status === "unconfigured") && !signInRequired;
-
   const asPracticeModule = readiness.state === "short";
   const servedCount = asPracticeModule ? readiness.availableCount : pattern.questionCount;
   const minutes = asPracticeModule
@@ -205,21 +200,6 @@ export function ExamPatternStarter({
             This paper is for signed-in students, so the questions stay on our server until you sit them.{" "}
             <Link href="/sign-in" className="font-bold underline">
               Sign in to start
-            </Link>
-            .
-          </p>
-        )}
-
-        {paidPlanRequired && (
-          <p
-            data-testid="paid-plan-required-notice"
-            role="status"
-            className="mb-6 rounded-xl bg-royal/10 px-4 py-3 text-sm font-semibold leading-6 text-royal"
-          >
-            Full-length papers are part of the Individual and Family plans. The Free plan has a few
-            sample questions in every programme.{" "}
-            <Link href="/billing" className="font-bold underline">
-              See plans
             </Link>
             .
           </p>
@@ -382,7 +362,6 @@ export function ExamPatternStarter({
             isCreating ||
             auth.status === "loading" ||
             signInRequired ||
-            paidPlanRequired ||
             isNonStudentRole
           }
         >
