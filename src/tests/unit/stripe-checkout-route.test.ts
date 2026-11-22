@@ -99,6 +99,65 @@ describe("POST /api/stripe/checkout", () => {
     expect(mockCheckoutSessionsCreate).not.toHaveBeenCalled();
   });
 
+  describe("duplicate checkout prevention (409 already_subscribed)", () => {
+    const future = () => new Date(Date.now() + 10 * 24 * 3600 * 1000).toISOString();
+    const past = () => new Date(Date.now() - 24 * 3600 * 1000).toISOString();
+
+    it.each(["active", "past_due"])("refuses a second checkout while a %s paid subscription is in period", async (status) => {
+      mockMaybeSingle.mockResolvedValue({
+        data: {
+          id: "row-1",
+          stripe_customer_id: "cus_1",
+          stripe_subscription_id: "sub_1",
+          status,
+          current_period_end: future(),
+        },
+        error: null,
+      });
+
+      const response = await POST(postRequest({ plan: "family_annual" }));
+
+      expect(response.status).toBe(409);
+      expect(await response.json()).toEqual({ error: "already_subscribed" });
+      expect(mockCheckoutSessionsCreate).not.toHaveBeenCalled();
+      expect(mockCustomersCreate).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ["canceled", future()],
+      ["trialing", future()],
+      ["active", past()],
+    ])("still allows checkout for a %s row (period end %s)", async (status, periodEnd) => {
+      mockMaybeSingle.mockResolvedValue({
+        data: {
+          id: "row-1",
+          stripe_customer_id: "cus_1",
+          stripe_subscription_id: "sub_1",
+          status,
+          current_period_end: periodEnd,
+        },
+        error: null,
+      });
+
+      const response = await POST(postRequest({ plan: "family_monthly" }));
+
+      expect(response.status).toBe(200);
+      expect(mockCheckoutSessionsCreate).toHaveBeenCalledTimes(1);
+    });
+
+    it("allows a first checkout for a trial row that has no Stripe subscription yet", async () => {
+      mockMaybeSingle.mockResolvedValue({
+        data: { id: "row-1", stripe_customer_id: null, stripe_subscription_id: null, status: "trialing", current_period_end: null },
+        error: null,
+      });
+      mockCustomersCreate.mockResolvedValue({ id: "cus_new" });
+
+      const response = await POST(postRequest({ plan: "individual_monthly" }));
+
+      expect(response.status).toBe(200);
+    });
+  });
+
   it("rejects a malformed body", async () => {
     const response = await POST(postRequest({ plan: "not_a_real_plan" }));
 

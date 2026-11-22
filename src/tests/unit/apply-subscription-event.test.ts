@@ -358,4 +358,77 @@ describe("applySubscriptionEvent", () => {
       );
     });
   });
+
+  describe("subscriptions created outside Checkout, and renewals", () => {
+    it("customer.subscription.created re-syncs the current Stripe state", async () => {
+      const retrieve = vi.fn(async () => stripeSubscriptionFixture({ status: "active" }));
+      const stripe = { subscriptions: { retrieve } } as never;
+      const event = {
+        id: "evt_created",
+        type: "customer.subscription.created",
+        data: { object: stripeSubscriptionFixture({ status: "incomplete" }) },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, event);
+
+      expect(retrieve).toHaveBeenCalledWith("sub_123");
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({ p_patch: expect.objectContaining({ status: "active", plan: "family_monthly" }) }),
+      );
+    });
+
+    it("invoice.paid carries a renewal's new period end and clears past_due", async () => {
+      const retrieve = vi.fn(async () =>
+        stripeSubscriptionFixture({
+          status: "active",
+          items: { data: [{ price: { id: "price_test_monthly" }, current_period_end: 1_900_000_000 }] },
+        }),
+      );
+      const stripe = { subscriptions: { retrieve } } as never;
+      const event = {
+        id: "evt_paid",
+        type: "invoice.paid",
+        data: {
+          object: { customer: "cus_123", parent: { subscription_details: { subscription: "sub_123" } } },
+        },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, event);
+
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({
+          p_patch: expect.objectContaining({
+            status: "active",
+            current_period_end: new Date(1_900_000_000 * 1000).toISOString(),
+          }),
+        }),
+      );
+    });
+
+    it("invoice.paid never invents a past_due state when Stripe no longer has the subscription", async () => {
+      const stripe = {
+        subscriptions: {
+          retrieve: vi.fn(async () => {
+            throw Object.assign(new Error("gone"), { code: "resource_missing", statusCode: 404 });
+          }),
+        },
+      } as never;
+      const event = {
+        id: "evt_paid_gone",
+        type: "invoice.paid",
+        data: {
+          object: { customer: "cus_123", parent: { subscription_details: { subscription: "sub_123" } } },
+        },
+      } as never;
+
+      await applySubscriptionEvent(admin as never, stripe, event);
+
+      expect(admin.rpc).toHaveBeenCalledWith(
+        "apply_stripe_subscription_event",
+        expect.objectContaining({ p_patch: null }),
+      );
+    });
+  });
 });

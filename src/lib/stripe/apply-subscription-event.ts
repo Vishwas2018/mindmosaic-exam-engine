@@ -137,6 +137,7 @@ async function resolveSubscriptionPatch(
       return { customerId, subscriptionId, patch: patchFromStripeSubscription(subscription) };
     }
 
+    case "customer.subscription.created":
     case "customer.subscription.updated":
     case "customer.subscription.deleted": {
       const payload = event.data.object as Stripe.Subscription;
@@ -149,6 +150,7 @@ async function resolveSubscriptionPatch(
       };
     }
 
+    case "invoice.paid":
     case "invoice.payment_failed": {
       const invoice = event.data.object as Stripe.Invoice;
       const customerId = customerIdOf(invoice.customer);
@@ -159,12 +161,15 @@ async function resolveSubscriptionPatch(
         return null;
       }
       // Late delivery after a successful retry must not flip an active
-      // subscription back to past_due: trust Stripe's current status.
+      // subscription back to past_due: trust Stripe's current status. A paid
+      // invoice is a renewal or a recovery; the re-sync picks up the new
+      // period end and status.
       const current = await currentSubscription(stripe, subscriptionId, null);
+      if (current) return { customerId, subscriptionId, patch: patchFromStripeSubscription(current) };
       return {
         customerId,
         subscriptionId,
-        patch: current ? patchFromStripeSubscription(current) : { status: "past_due" },
+        patch: event.type === "invoice.payment_failed" ? { status: "past_due" } : null,
       };
     }
 
