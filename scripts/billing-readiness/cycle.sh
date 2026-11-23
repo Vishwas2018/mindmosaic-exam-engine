@@ -12,9 +12,10 @@ run() { # name config-env spec-args...
   node scripts/billing-readiness/run.mjs "$A" "$ENVF" "$@" > "$L/cycle$N-$name.log" 2>&1
   echo "$name exit=$?" >> $L/cycle$N.summary
 }
-run chromium-lifecycle -- e2e/hosted/s1-billing-lifecycle.spec.ts
-run chromium-security -- e2e/hosted/s2-billing-security.spec.ts
-run chromium-ui -- e2e/hosted/s3-billing-ui.spec.ts
-XBROWSER=firefox run firefox-ui --config playwright.hosted.xbrowser.config.ts -- e2e/hosted/s3-billing-ui.spec.ts
-XBROWSER=webkit run webkit-ui --config playwright.hosted.xbrowser.config.ts -- e2e/hosted/s3-billing-ui.spec.ts
+run chromium-lifecycle -- e2e/hosted/s1-billing-lifecycle.spec.ts --workers=1
+run chromium-security -- e2e/hosted/s2-billing-security.spec.ts --workers=1
+run chromium-extended -- e2e/hosted/s4-billing-extended.spec.ts --workers=1
+run chromium-ui -- e2e/hosted/s3-billing-ui.spec.ts --workers=1
+XBROWSER=firefox run firefox-ui --config playwright.hosted.xbrowser.config.ts -- e2e/hosted/s3-billing-ui.spec.ts --workers=1
+XBROWSER=webkit run webkit-ui --config playwright.hosted.xbrowser.config.ts -- e2e/hosted/s3-billing-ui.spec.ts --workers=1
 echo "end $(date -Is)" >> $L/cycle$N.summary

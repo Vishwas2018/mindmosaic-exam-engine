@@ -38,7 +38,7 @@ export const dynamic = "force-dynamic";
 export default async function ParentHomePage({
   searchParams,
 }: {
-  searchParams?: Promise<{ state?: string }>;
+  searchParams?: Promise<{ state?: string; checkout?: string }>;
 }) {
   const resolvedParams = searchParams ? await searchParams : {};
   const forcedState =
@@ -95,7 +95,12 @@ export default async function ParentHomePage({
   }
 
   /* A family with no child yet starts at the setup screen ("Welcome — add your first child"). */
-  if (data.children.length === 0) redirect("/parent/setup");
+  if (data.children.length === 0) {
+    /* Stripe returns here with ?checkout=success|cancelled. A parent who pays before adding a child lands on setup,
+       so carry the one-shot flag across or they would never see the payment confirmation. */
+    const checkout = resolvedParams.checkout;
+    redirect(checkout === "success" || checkout === "cancelled" ? `/parent/setup?checkout=${checkout}` : "/parent/setup");
+  }
 
   const now = new Date();
   const archivedIds = await loadArchivedChildIds(data.children.map((child) => child.profile.id));

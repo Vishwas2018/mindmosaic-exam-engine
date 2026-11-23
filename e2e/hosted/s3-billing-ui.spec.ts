@@ -11,7 +11,7 @@ import {
   track,
   waitForRow,
 } from "./billing-helpers";
-import { expect, parentSignIn, test } from "./fixtures";
+import { HOSTED_URL, expect, parentSignIn, test } from "./fixtures";
 
 test.setTimeout(420_000);
 // Checkout is a third-party page reached over the public internet; one retry absorbs a dropped connection.
@@ -105,14 +105,16 @@ test("U2 Subscribe sends the parent to Stripe-hosted Checkout (no card field on 
   expect(page.url()).toMatch(/^https:\/\/checkout\.stripe\.com\//);
 });
 
-test.fixme("U3 sandbox card payment succeeds, activates the plan via webhook, then a second checkout is refused", async ({ page }, testInfo) => {
+test("U3 sandbox card payment succeeds, activates the plan via webhook, then a second checkout is refused", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440" || (process.env.XBROWSER ?? "") !== "", "payment path runs once, on Chromium");
   const parent = await signedInParent(page, "u3");
   await gotoStable(page, "/billing");
   await page.getByRole("button", { name: "Subscribe to Individual" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 60_000 });
   await fillCard(page, "4242424242424242");
-  await page.waitForURL(/\/parent\?checkout=success/, { timeout: 120_000 });
+  // Back on our origin: a parent with no child yet is sent on to /parent/setup, and must still be told the payment worked.
+  await page.waitForURL((u) => u.origin === new URL(HOSTED_URL).origin, { timeout: 120_000 });
+  await expect(page.getByText(/payment|subscription|thank/i).first()).toBeVisible({ timeout: 30_000 });
   const row = await waitForRow(parent.id, (r) => r.status === "active" && r.plan === "individual_monthly", "active after Checkout");
   track("customers", row.stripe_customer_id!);
 
@@ -124,14 +126,14 @@ test.fixme("U3 sandbox card payment succeeds, activates the plan via webhook, th
   expect(again.status()).toBe(409);
 });
 
-test.fixme("U4 sandbox declined card shows the issuer's refusal and never activates the plan", async ({ page }, testInfo) => {
+test("U4 sandbox declined card shows the issuer's refusal and never activates the plan", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440" || (process.env.XBROWSER ?? "") !== "", "payment path runs once, on Chromium");
   const parent = await signedInParent(page, "u4");
   await gotoStable(page, "/billing");
   await page.getByRole("button", { name: "Subscribe to Family" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 60_000 });
-  await fillCard(page, "4000000000000002");
-  await expect(page.getByText(/declined/i).first()).toBeVisible({ timeout: 60_000 });
+  const frame = await fillCard(page, "4000000000000002");
+  await expect(frame.getByText(/declined/i).first()).toBeVisible({ timeout: 60_000 });
   expect(page.url()).toContain("checkout.stripe.com");
   const row = await subRow(parent.id);
   track("customers", row!.stripe_customer_id!);
@@ -141,23 +143,46 @@ test.fixme("U4 sandbox declined card shows the issuer's refusal and never activa
   expect(sessions.data[0]?.payment_status).not.toBe("paid");
 });
 
-async function fillCard(page: import("@playwright/test").Page, number: string) {
-  // Current Checkout lists payment methods as radios; the card fields appear once "Card" is chosen.
-  const cardField = page.locator("#cardNumber");
-  if (!(await cardField.isVisible().catch(() => false))) {
-    const option = page
-      .locator('[data-testid="card-accordion-item-button"], [data-testid="card-accordion-item"], label:has-text("Card"), button:has-text("Card")')
-      .first();
-    await option.waitFor({ state: "visible", timeout: 45_000 });
-    await option.click({ timeout: 45_000 });
+/**
+ * Stripe's hosted Checkout renders its payment form inside an Elements iframe (`elements-inner-*`), so the card
+ * fields are reached through that frame, not the top-level document. Reload if the page does not hydrate (one of
+ * Stripe's CDN requests is occasionally reset from this test machine); that does not change what is asserted.
+ */
+async function checkoutFrame(page: import("@playwright/test").Page) {
+  for (let i = 0; i < 40; i++) {
+    const frame = page.frames().find((f) => f.url().includes("elements-inner-habanero") || f.url().includes("elements-inner-payment"));
+    if (frame && (await frame.locator('[data-testid="payment-accordion-wrapper"]').count().catch(() => 0)) > 0) return frame;
+    await page.waitForTimeout(1000);
   }
-  await cardField.waitFor({ state: "visible", timeout: 30_000 });
-  await page.locator("#cardNumber").fill(number);
-  await page.locator("#cardExpiry").fill("12 / 34");
-  await page.locator("#cardCvc").fill("123");
-  const name = page.locator("#billingName");
+  return null;
+}
+
+async function waitForCheckoutReady(page: import("@playwright/test").Page) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const frame = await checkoutFrame(page);
+    if (frame) {
+      await frame.getByText("Card", { exact: true }).first().click({ timeout: 15_000 }).catch(() => undefined);
+      if (await frame.locator("#payment-numberInput").waitFor({ state: "visible", timeout: 15_000 }).then(() => true, () => false)) {
+        return frame;
+      }
+    }
+    await page.reload({ waitUntil: "load" }).catch(() => undefined);
+  }
+  throw new Error("Stripe Checkout payment form never became interactive after 4 loads");
+}
+
+async function fillCard(page: import("@playwright/test").Page, number: string) {
+  const frame = await waitForCheckoutReady(page);
+  await frame.locator("#payment-numberInput").fill(number);
+  await frame.locator("#payment-expiryInput").fill("1234");
+  await frame.locator("#payment-cvcInput").fill("123");
+  const name = frame.locator("#payment-nameInput");
   if (await name.count()) await name.fill("Sandbox Tester");
-  const postal = page.locator("#billingPostalCode");
-  if (await postal.count()) await postal.fill("2000");
-  await page.locator("button.SubmitButton, button[type='submit']").first().click();
+  // "Save my information" (Link) is pre-ticked and then demands a mobile number; a one-off test purchase opts out.
+  const linkOptIn = frame.locator("#payment-linkOptInInput");
+  if ((await linkOptIn.count()) > 0 && (await linkOptIn.isChecked().catch(() => false))) {
+    await frame.getByText("Save my information for faster checkout").click();
+  }
+  await frame.locator('[data-testid="payment-form-submit-button"]').click();
+  return frame;
 }

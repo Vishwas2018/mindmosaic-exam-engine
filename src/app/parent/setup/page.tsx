@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { ParentShell } from "@/features/parent-dashboard";
+import { CheckoutStatusToast, ParentShell } from "@/features/parent-dashboard";
 import { AddChildFlow } from "@/features/parent-dashboard/components/AddChildFlow";
 import {
   Card,
@@ -36,6 +36,7 @@ export default async function ParentSetupPage() {
 
   return (
     <ParentShell active="/parent/children">
+      <CheckoutStatusToast />
       <div className="grid gap-6">
         <PageHeader
           title={hasChildren ? "Add a child" : `Welcome, ${firstName}`}
