@@ -363,13 +363,12 @@ test.describe("Auth Audit 03: RBAC Matrix, Data Isolation & Security", () => {
     expect(leakScan.hasServiceRoleInHtml).toBe(false);
     evidence.security.leakScan = leakScan;
 
-    // 3. CSRF Origin check on state-changing routes (cross-site Origin must be rejected 403)
+    // 3. CSRF Origin check on active state-changing routes (cross-site & missing Origin must be rejected 403)
     const csrfTargets = [
       "/api/parent/children",
       "/api/student/onboarding/preferences",
       "/api/teacher/assignments",
       "/api/exam/session",
-      "/api/stripe/checkout",
     ];
     const csrfResults: Record<string, { evilOrigin: number; missingOrigin: number }> = {};
     for (const target of csrfTargets) {

@@ -343,10 +343,20 @@ test.describe("Auth Audit 01: Registration & Email Verification", () => {
 
   test("REG-04: Simultaneous registrations in two parallel browser contexts", async ({ browser }) => {
     test.setTimeout(10 * 60_000);
-    // Create the two throwaway mail.tm inboxes sequentially (mail.tm rate-limits parallel /accounts+/token)
-    const inboxA = await createInbox("simA");
-    await new Promise((r) => setTimeout(r, 1200));
-    const inboxB = await createInbox("simB");
+    const createWithRetry = async (lbl: string): Promise<Inbox> => {
+      for (let attempt = 1; attempt <= 4; attempt++) {
+        try {
+          return await createInbox(`${lbl}${attempt}`);
+        } catch (err) {
+          if (attempt === 4) throw err;
+          await new Promise((r) => setTimeout(r, 2000 * attempt));
+        }
+      }
+      throw new Error("unreachable");
+    };
+    const inboxA = await createWithRetry("sima");
+    await new Promise((r) => setTimeout(r, 1500));
+    const inboxB = await createWithRetry("simb");
     createdEmails.push(inboxA.address, inboxB.address);
 
     const [ctxA, ctxB] = await Promise.all([

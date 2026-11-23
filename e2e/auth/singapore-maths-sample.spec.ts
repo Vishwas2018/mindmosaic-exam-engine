@@ -20,7 +20,10 @@ type ContextAs = (key: string) => Promise<BrowserContext>;
  * "new attempt" the product offers) so it does not inherit another test's answers.
  */
 async function startFreshAttempt(context: BrowserContext, year: 3 | 5) {
-  const response = await context.request.delete(`/api/practice/singapore-maths/sample/session?year=${year}`);
+  const origin = `http://127.0.0.1:${Number(process.env.PW_AUTH_PORT) || 3101}`;
+  const response = await context.request.delete(`/api/practice/singapore-maths/sample/session?year=${year}`, {
+    headers: {Origin: origin},
+  });
   expect(response.ok()).toBe(true);
 }
 
