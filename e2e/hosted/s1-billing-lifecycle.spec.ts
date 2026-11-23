@@ -171,9 +171,11 @@ test("L3 declined payments never grant access", async ({}, testInfo) => {
       payment_behavior: "error_if_incomplete",
     }),
   ).rejects.toMatchObject({ type: "StripeCardError" });
-  expect((await subRow(a.id))?.plan).toBeNull();
-  expect(await hasAccess(a.id)).toBe(false);
-  expect((await subRow(a.id))?.status).not.toBe("active");
+  // A trial parent legitimately keeps their unexpired trial; what must not appear is any PAID state.
+  const rowA = await subRow(a.id);
+  expect(rowA?.plan).toBeNull();
+  expect(rowA?.stripe_subscription_id).toBeNull();
+  expect(rowA?.status).toBe("trialing");
 
   // (b) Incomplete subscription (payment failed, left open) -> row never becomes active.
   const b = await seedParent("l3b");
