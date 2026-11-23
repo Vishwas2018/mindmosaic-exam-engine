@@ -105,16 +105,26 @@ test("U2 Subscribe sends the parent to Stripe-hosted Checkout (no card field on 
   expect(page.url()).toMatch(/^https:\/\/checkout\.stripe\.com\//);
 });
 
-test("U3 sandbox card payment succeeds, activates the plan via webhook, then a second checkout is refused", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-1440" || (process.env.XBROWSER ?? "") !== "", "payment path runs once, on Chromium");
+test("U3 sandbox card payment succeeds, activates the plan via webhook, then a second checkout is refused", async ({ page, browserName }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-1440", "payment path runs on the desktop project of each engine");
   const parent = await signedInParent(page, "u3");
   await gotoStable(page, "/billing");
   await page.getByRole("button", { name: "Subscribe to Individual" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 60_000 });
   await fillCard(page, "4242424242424242");
   // Back on our origin: a parent with no child yet is sent on to /parent/setup, and must still be told the payment worked.
-  await page.waitForURL((u) => u.origin === new URL(HOSTED_URL).origin, { timeout: 120_000 });
-  await expect(page.getByText(/payment|subscription|thank/i).first()).toBeVisible({ timeout: 30_000 });
+  // Headless WebKit completes the payment but does not follow Stripe's post-payment redirect, so there the outcome is
+  // verified through the real webhook below and the engine difference is recorded rather than hidden.
+  const returned = await page
+    .waitForURL((u) => u.origin === new URL(HOSTED_URL).origin, { timeout: browserName === "webkit" ? 45_000 : 120_000 })
+    .then(() => true, () => false);
+  if (returned) {
+    await expect(page.getByText(/payment received/i).first()).toBeVisible({ timeout: 30_000 });
+  } else {
+    expect(browserName, "only WebKit may skip the redirect check").toBe("webkit");
+    testInfo.annotations.push({ type: "webkit-redirect", description: "payment completed; headless WebKit did not follow Stripe's redirect" });
+    await page.goto("/parent");
+  }
   const row = await waitForRow(parent.id, (r) => r.status === "active" && r.plan === "individual_monthly", "active after Checkout");
   track("customers", row.stripe_customer_id!);
 
@@ -127,7 +137,7 @@ test("U3 sandbox card payment succeeds, activates the plan via webhook, then a s
 });
 
 test("U4 sandbox declined card shows the issuer's refusal and never activates the plan", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-1440" || (process.env.XBROWSER ?? "") !== "", "payment path runs once, on Chromium");
+  test.skip(testInfo.project.name !== "desktop-1440", "payment path runs on the desktop project of each engine");
   const parent = await signedInParent(page, "u4");
   await gotoStable(page, "/billing");
   await page.getByRole("button", { name: "Subscribe to Family" }).click();
