@@ -16,6 +16,7 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./config";
  */
 export async function createClient() {
   const cookieStore = await cookies();
+  const forceSecure = process.env.VERCEL === "1";
 
   const client = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
@@ -25,7 +26,11 @@ export async function createClient() {
       setAll(cookiesToSet) {
         try {
           for (const { name, value, options } of cookiesToSet) {
-            cookieStore.set(name, value, options);
+            cookieStore.set(name, value, {
+              ...options,
+              sameSite: options?.sameSite ?? "lax",
+              secure: forceSecure ? true : options?.secure,
+            });
           }
         } catch {
           // Called from a Server Component — ignore; middleware handles refresh.

@@ -41,6 +41,7 @@ export interface ProvisionChildInput {
 export interface ProvisionChildResult {
   readonly ok: boolean;
   readonly message?: string;
+  readonly errorCode?: "unauthenticated" | "forbidden" | "not_configured";
   /**
    * True when the only thing wrong was that this parent already has a child
    * with this name. The caller is expected to show `message` as a
@@ -102,6 +103,7 @@ export async function provisionChild(
     // Fail clean, not crash: this is a server configuration gap, not a bug.
     return {
       ok: false,
+      errorCode: "not_configured",
       message: "Student provisioning isn't configured on this server yet.",
     };
   }
@@ -113,7 +115,7 @@ export async function provisionChild(
     data: { user: requester },
   } = await requesterClient.auth.getUser();
   if (!requester) {
-    return { ok: false, message: "Sign in as a parent to add a child." };
+    return { ok: false, errorCode: "unauthenticated", message: "Sign in as a parent to add a child." };
   }
 
   const { data: requesterProfile } = await requesterClient
@@ -122,7 +124,7 @@ export async function provisionChild(
     .eq("id", requester.id)
     .single();
   if (requesterProfile?.role !== "parent") {
-    return { ok: false, message: "Only a parent account can add a child." };
+    return { ok: false, errorCode: "forbidden", message: "Only a parent account can add a child." };
   }
 
   /*

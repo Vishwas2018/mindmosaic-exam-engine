@@ -68,8 +68,15 @@ const Q = Y3[0]!;
 const Q2 = Y3[1]!;
 const BASE = "http://localhost/api/practice/singapore-maths/sample";
 
+const SAME_ORIGIN = {Origin: "http://localhost", Host: "localhost"};
 const post = (path: string, body: unknown) =>
-  new Request(`${BASE}/${path}`, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+  new Request(`${BASE}/${path}`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json", ...SAME_ORIGIN},
+    body: JSON.stringify(body),
+  });
+const del = (query = "") =>
+  new Request(`${BASE}/session${query}`, {method: "DELETE", headers: SAME_ORIGIN});
 const send = (name: string, answer: unknown) => submit(post("submit", {questionId: name, answer}));
 const json = async (r: Response) => (await r.json()) as Record<string, unknown>;
 
@@ -93,7 +100,7 @@ describe("Singapore Maths sample routes: gate and authentication", () => {
     expect((await send(Q.name, 1)).status).toBe(404);
     expect((await reveal(post("reveal", {questionId: Q.name}))).status).toBe(404);
     expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(404);
-    expect((await reset(new Request(`${BASE}/session`, {method: "DELETE"}))).status).toBe(404);
+    expect((await reset(del())).status).toBe(404);
   });
 
   it("an account that is not on the preview list gets 404 everywhere, as if the sample did not exist", async () => {
@@ -101,7 +108,7 @@ describe("Singapore Maths sample routes: gate and authentication", () => {
     expect((await send(Q.name, 1)).status).toBe(404);
     expect((await reveal(post("reveal", {questionId: Q.name}))).status).toBe(404);
     expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(404);
-    expect((await reset(new Request(`${BASE}/session`, {method: "DELETE"}))).status).toBe(404);
+    expect((await reset(del())).status).toBe(404);
     expect(state.rows.size).toBe(0);
   });
 
@@ -111,23 +118,35 @@ describe("Singapore Maths sample routes: gate and authentication", () => {
     expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(404);
   });
 
+  it("rejects cross-origin and missing-Origin state-changing requests (DEF-AUTH-002 / MM-SEC-03)", async () => {
+    const evilHeaders = {"Content-Type": "application/json", Origin: "https://evil.example", Host: "localhost"};
+    expect(
+      (await submit(new Request(`${BASE}/submit`, {method: "POST", headers: evilHeaders, body: JSON.stringify({questionId: Q.name, answer: 1})}))).status,
+    ).toBe(403);
+    expect(
+      (await reveal(new Request(`${BASE}/reveal`, {method: "POST", headers: evilHeaders, body: JSON.stringify({questionId: Q.name})}))).status,
+    ).toBe(403);
+    expect((await reset(new Request(`${BASE}/session`, {method: "DELETE", headers: evilHeaders}))).status).toBe(403);
+    expect((await reset(new Request(`${BASE}/session`, {method: "DELETE"}))).status).toBe(403);
+  });
+
   it("guests get 401 everywhere", async () => {
     state.userId = null;
     expect((await send(Q.name, 1)).status).toBe(401);
     expect((await reveal(post("reveal", {questionId: Q.name}))).status).toBe(401);
     expect((await restore(new Request(`${BASE}/session?year=3`))).status).toBe(401);
-    expect((await reset(new Request(`${BASE}/session`, {method: "DELETE"}))).status).toBe(401);
+    expect((await reset(del())).status).toBe(401);
   });
 
   it("rejects malformed input without touching storage", async () => {
-    expect((await submit(new Request(`${BASE}/submit`, {method: "POST", body: "{nope"}))).status).toBe(400);
+    expect((await submit(new Request(`${BASE}/submit`, {method: "POST", headers: SAME_ORIGIN, body: "{nope"}))).status).toBe(400);
     expect((await send(Q.name, "22")).status).toBe(400);
     expect((await send(Q.name, null)).status).toBe(400);
     expect((await send(Q.name, -1)).status).toBe(400);
     expect((await send(Q.name, 22.5)).status).toBe(400);
     expect((await send("no-such-question", 1)).status).toBe(404);
     expect((await restore(new Request(`${BASE}/session?year=4`))).status).toBe(400);
-    expect((await reset(new Request(`${BASE}/session?year=9`, {method: "DELETE"}))).status).toBe(400);
+    expect((await reset(del("?year=9"))).status).toBe(400);
     expect(state.rows.size).toBe(0);
   });
 
@@ -137,7 +156,7 @@ describe("Singapore Maths sample routes: gate and authentication", () => {
       await send(Q.name, Q.privateAnswerKey),
       await reveal(post("reveal", {questionId: Q.name})),
       await restore(new Request(`${BASE}/session?year=3`)),
-      await reset(new Request(`${BASE}/session`, {method: "DELETE"})),
+      await reset(del()),
     ]) {
       expect(response.status).toBe(503);
       expect(await json(response)).toEqual({error: "store_unavailable"});
@@ -225,7 +244,7 @@ describe("Singapore Maths sample routes: reload, reset, isolation", () => {
     await send(Q.name, Q.privateAnswerKey);
     state.userId = ALICE;
 
-    expect((await reset(new Request(`${BASE}/session?year=3`, {method: "DELETE"}))).status).toBe(200);
+    expect((await reset(del("?year=3"))).status).toBe(200);
 
     expect(((await json(await restore(new Request(`${BASE}/session?year=3`)))).submissions as unknown[])).toEqual([]);
     expect(await json(await send(Q.name, Q.privateAnswerKey))).toMatchObject({correct: true, alreadyAnswered: false});
@@ -239,7 +258,7 @@ describe("Singapore Maths sample routes: reload, reset, isolation", () => {
     await send(y5.name, y5.privateAnswerKey);
     const before = state.rows.size;
 
-    await reset(new Request(`${BASE}/session`, {method: "DELETE"}));
+    await reset(del());
 
     expect(state.rows.size).toBeGreaterThan(before); // only appended
     expect(((await json(await restore(new Request(`${BASE}/session?year=3`)))).submissions as unknown[])).toEqual([]);
