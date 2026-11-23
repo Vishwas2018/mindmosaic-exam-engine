@@ -41,3 +41,27 @@ Both consecutive regression cycles executed against the exact same final deploye
 | `rls` (Postgres RLS & privilege-hardening suite) | **PASS** | 1m55s | `actions/runs/45125832249/job/137529829831` |
 | `scholarship-drafts` | **PASS** | 28s | `actions/runs/45125832249/job/137529830307` |
 | `Vercel` Preview Deployment | **PASS** | Ready | `dpl_CyLHacwwUYPfjdT63F523W3iL4Jp` |
+
+---
+
+## 3. Final Closure Verification (2026-11-24, SHA `500fe9be`, `DEF-AUTH-005` & `DEF-AUTH-006` Resolved)
+
+- **Code SHA:** `500fe9bef737b735cfaec55a2574162ec466c0a8`
+- **Vercel Deployment ID:** `dpl_438WSkkrpNcrF54rNMLQjuD8SLuh`
+- **CI Run (`45160150872`):** **7 / 7 GREEN** (`core` 5m12s, `e2e` 13m19s, `e2e-auth` 6m38s, `rls` 2m24s, `scholarship-drafts` 24s, `Vercel`, `Vercel Preview Comments`)
+- **DEV Supabase `generateLink` Allow-List Probe (`mfglzabnayacssgertat`):** **4 / 4 PR #160 paths `MATCH`** (`/auth/confirm`, `/auth/reset`, `/auth/callback`, `/auth/confirm?next=%2Fparent`), `git-dev` & `git-integra-6b98ba` `MATCH`, unrelated wildcard host `FALLBACK`.
+
+| Test ID | Description | Closure Run ID | Status | Duration |
+|---|---|---|---|---|
+| `REG-01` | Sign-up validation, password boundaries, draft restore (no password stored) | `rmwtniozh` | **PASS** | 10.1s |
+| `REG-02` | Real registration, double-click guard, unverified enum check, tampered link, duplicate unverified/verified, `/auth/confirm` -> `/parent`, spent replay | `rmwtnqfj1` | **PASS** | 29.5s |
+| `REG-03` | Cross-device confirmation while signed in as another user (`3s` mail) | `rmwtniozh` | **PASS** | 20.3s |
+| `REG-04` | Simultaneous registrations in two parallel contexts (`2s`/`2s` mail, both `/auth/confirm` -> `/parent`) | `rmwtniozh` | **PASS** | 23.8s |
+| `AUTH-01` | Empty inputs, malformed email, enumeration parity, 5-attempt lockout | `rmwtniozh` | **PASS** | 7.8s |
+| `AUTH-02` | Parent/Student/Teacher/Admin routing, logout+Back, multi-tab, archive/restore, ephemeral, revoked | `rmwtniozh` | **PASS** | 1.3m |
+| `REC-01` | `/auth/forgot` validation & 30s cooldown (`DEF-AUTH-006`), `1s` reset mail, `/auth/reset` preserved, cross-device invalidation to `/session-expired` | `rmwtniozh` | **PASS** | 30.7s |
+| `RBAC-01` | 6-role × 19-route UI (114 cells) + 6-role × 10-API (60 cells) + cross-family isolation | `rmwtnrbae` | **PASS** | 2.5m |
+| `SEC-01` | `Secure` cookies, CSP, open redirects, CSRF `Origin`, tampered JWT, privilege escalation, leak scan | `rmwtnrbae` | **PASS** | 50.9s |
+| `XBR-01` (`desktop-1440` / `tablet-834` / `mobile-390`) | Responsive sign-in, offline recovery, refresh, logout + back navigation | `rmwtnrbae` | **PASS (3/3)** | 17.2s / 17.0s / 16.3s |
+
+- **Synthetic DEV Data Cleanup:** `cleanup.mjs --apply` verified `0 parent(s), 0 child(ren)` remaining after `rmwtniozh`, `rmwtnqfj1`, and `rmwtnrbae`.

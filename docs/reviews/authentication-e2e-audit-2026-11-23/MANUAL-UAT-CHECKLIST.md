@@ -1,16 +1,12 @@
-# MindMosaic Authentication Manual UAT Checklist (2026-11-23 — Final)
+# MindMosaic Authentication Manual UAT Checklist (2026-11-24 — Ready for Sign-Off)
 
-This checklist is designed for rapid (~15-minute), high-confidence owner sign-off after our automated E2E audit and independent security review.
+This checklist is designed for rapid (~15-minute), high-confidence owner sign-off after our automated E2E audit, live closure verification, and independent security review.
 
 ---
 
-## Pre-UAT Gate (Required Before Testing Feature-Branch Previews)
+## Pre-UAT Gate
 
-- [ ] **Resolve `DEF-AUTH-005` in DEV Supabase (`mfglzabnayacssgertat`):**
-  - Confirm the selected project is **`mfglzabnayacssgertat`** (DEV).
-  - Open **Authentication -> URL Configuration -> Redirect URLs**.
-  - Add `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/**` (exact PR #160 branch alias with `/**`) and/or `https://**-vishwas2018s-projects.vercel.app/**`, then click **Save changes**.
-  - *(Note: As of 21:50 AEDT, direct `generateLink` probe confirmed DEV Supabase still only matches `git-dev` and `git-integra-6b98ba` — `git-audit-a-f35ca9` was still falling back to `git-dev`.)*
+- [x] **Resolved `DEF-AUTH-005` in DEV Supabase (`mfglzabnayacssgertat`):** Verified `MATCH` on 2026-11-24 via `generateLink` probe (`/auth/confirm`, `/auth/reset`, `/auth/callback`, `/auth/confirm?next=%2Fparent`) and live `REG-02` (`rmwtnqfj1`), `REG-03`/`REG-04`/`REC-01` (`rmwtniozh`).
 - [ ] **CSP Enforcement Flag (Optional Pre-Beta Check):** Confirm whether `MM_DEV_AUTH_CSP_ENFORCE=1` should be enabled on Preview/Production.
 - [ ] **Confirm Environment:** Target DEV Preview only (never production `uermhsptduikehuyceiz`).
 

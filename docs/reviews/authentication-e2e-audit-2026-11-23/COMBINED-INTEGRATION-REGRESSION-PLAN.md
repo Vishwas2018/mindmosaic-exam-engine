@@ -1,21 +1,21 @@
 # MindMosaic Combined Integration Regression Plan (PR #156 + PR #159 + PR #160)
 
-- **Date:** 2026-11-23
+- **Date:** 2026-11-24
 - **Scope:** Combined integration of:
-  - **PR #156 (`integration/beta-readiness-claude-20261120` @ `3253ab1e`)** — component PRs (`#147`, `#148`, `#149`+`#151`, `#150`+`#152`, `#146`, `#145`+`#155`, `#143`+`#153`, `#144`+`#154`, `#157`, `#158`, Redis guest guard)
-  - **PR #160 (`audit/auth-e2e-20261123`)** — Authentication hardening (`DEF-AUTH-001`..`004`, `DEF-AUTH-006`) + hosted auth audit suite (`01`–`04`)
-  - **PR #159 (`feat/stripe-billing-readiness` @ `d7a9c72d`)** — Stripe sandbox billing (Individual + Family plans, Free-sample entitlement, webhook idempotency & hardening, `20261106090000_individual_plans.sql`)
+  - **PR #156 (`integration/beta-readiness-claude-20261120` @ `3253ab1e`, 7/7 CI PASS)** — component PRs (`#147`, `#148`, `#149`+`#151`, `#150`+`#152`, `#146`, `#145`+`#155`, `#143`+`#153`, `#144`+`#154`, `#157`, `#158`, Redis guest guard)
+  - **PR #160 (`audit/auth-e2e-20261123` @ `500fe9be`, 7/7 CI PASS)** — Authentication hardening (`DEF-AUTH-001`..`004`, `DEF-AUTH-006`) + hosted auth audit suite (`01`–`04`)
+  - **PR #159 (`feat/stripe-billing-readiness` @ `e10ba2fa`, 7/7 CI PASS)** — Stripe sandbox billing (Individual + Family plans, Free-sample entitlement, webhook idempotency & hardening, `20261106090000_individual_plans.sql`)
 - **Environment:** DEV Supabase (`mfglzabnayacssgertat`), Stripe Sandbox (`acct_1StznKDtPH5dvWkm`), Vercel DEV Preview exclusively. Never Production (`uermhsptduikehuyceiz`).
 
 ---
 
 ## 1. Pre-Integration Gates
 
-1. **DEV Supabase Redirect URL (`DEF-AUTH-005`):** Confirm DEV Supabase (`mfglzabnayacssgertat`) -> Authentication -> URL Configuration -> Redirect URLs accepts `https://<preview-host>/auth/confirm` and `https://<preview-host>/auth/reset` (verified via direct `generateLink` probe + live `REG-02`, `REG-04`, `REC-01` returning `MATCH`, zero fallback to `git-dev`).
+1. **DEV Supabase Redirect URL (`DEF-AUTH-005`) — VERIFIED (2026-11-24):** Confirmed via `generateLink` probe (4/4 `MATCH`) and live `REG-02` (`rmwtnqfj1`), `REG-03`/`REG-04`/`REC-01` (`rmwtniozh`) returning exact origin + `/auth/confirm` and `/auth/reset` paths with zero fallback to `git-dev`.
 2. **Safe Merge Order (No Merges Until Approved):**
    - Step A: Merge PR #156's component PRs into `dev` in documented order; verify `dev` CI green.
    - Step B: Rebase & merge PR #160 into `dev` (zero DB migrations, 0 conflicts); verify `dev` CI green and run hosted auth smoke on `git-dev` (already allowlisted in DEV Supabase).
-   - Step C: Rebase PR #159 onto updated `dev` (verified 0 textual conflicts on `src/features/auth/provision-child.ts` via `git merge-tree`); apply `supabase/migrations/20261106090000_individual_plans.sql` to DEV Supabase with owner approval; merge PR #159 into `dev`.
+   - Step C: Rebase PR #159 onto updated `dev` (verified 0 textual conflicts on `src/features/auth/provision-child.ts` via `git merge-tree`, tree `3fbb8e3b`); apply `supabase/migrations/20261106090000_individual_plans.sql` to DEV Supabase with owner approval; merge PR #159 into `dev`.
 3. **Preview Environment Parity:** Verify Vercel Preview env vars (`STRIPE_SECRET_KEY` sandbox, `STRIPE_WEBHOOK_SECRET`, Individual + Family price IDs, Redis guest guard store, `NEXT_PUBLIC_SUPABASE_URL` = DEV `mfglzabnayacssgertat`, optionally `MM_DEV_AUTH_CSP_ENFORCE=1`).
 
 ---

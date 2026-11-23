@@ -1,4 +1,4 @@
-# MindMosaic Authentication Defect Register (2026-11-23 — Updated Follow-Up)
+# MindMosaic Authentication Defect Register (2026-11-24 — Final Closure)
 
 All defects below were discovered via static security review and live hosted DEV Preview E2E testing against `mfglzabnayacssgertat`.
 
@@ -12,8 +12,8 @@ All defects below were discovered via static security review and live hosted DEV
 | `DEF-AUTH-001` | Application (AuthZ) | **Medium** | Parent / Teacher / Admin — Missing `student` role gate on `/api/student/onboarding/preferences` & `/questions` | **Fixed & Verified** | `288fafcd` |
 | `DEF-AUTH-002` | Application (CSRF) | **Medium** | Allowlisted preview users — Missing `checkOrigin` CSRF guard on Singapore Maths sample state-changing routes | **Fixed & Verified** | `288fafcd` |
 | `DEF-AUTH-003` | Application (API Auth) | **Low** | Anonymous / Guest / Student / Teacher / Admin — `POST /api/parent/children` returned `400` instead of `401`/`403` | **Fixed & Verified** | `288fafcd` |
-| `DEF-AUTH-005` | Infrastructure (Supabase DEV Auth) | **Medium** | Preview branch real-email confirmation & password recovery redirects | **Still Open (Re-verified 21:50 AEDT via live runs `rmwt539ke`/`rmwt546p5`/`rmwt55y2y` + direct `generateLink` probe across 10 Preview hosts)** | N/A (Supabase Dashboard) |
-| `DEF-AUTH-006` | Application (UX / Consistency) | **Low** | Parent — Standalone `/auth/forgot` lacked email format validation, focus/shake error handling, & 30s resend cooldown present in `/sign-in?mode=forgot`; duplicate `/auth/session-expired` | **Fixed (`/auth/forgot` parity & 30s cooldown) & Verified; `/auth/session-expired` deferred** | Pending commit on PR #160 |
+| `DEF-AUTH-005` | Infrastructure (Supabase DEV Auth) | **Medium** | Preview branch real-email confirmation & password recovery redirects | **Resolved & Verified (2026-11-24)** — `generateLink` probe 4/4 `MATCH` + live `REG-02` (`rmwtnqfj1`), `REG-03`/`REG-04`/`REC-01` (`rmwtniozh`) all **PASS** | Supabase DEV Auth Config |
+| `DEF-AUTH-006` | Application (UX / Consistency) | **Low** | Parent — Standalone `/auth/forgot` lacked email format validation, focus/shake error handling, & 30s resend cooldown present in `/sign-in?mode=forgot`; duplicate `/auth/session-expired` | **Fixed (`/auth/forgot` parity & 30s cooldown) & Verified; `/auth/session-expired` deferred** | `500fe9be` |
 
 ---
 
@@ -78,10 +78,21 @@ All defects below were discovered via static security review and live hosted DEV
     - `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app` (root, `/`, `/auth/confirm`, `/auth/reset`, `/auth/callback`) -> **FALLBACK to `git-dev`**
     - All ephemeral PR #160 deployment hosts (`ix7ullval`, `p3yui86pu`, `1gzn4pw2h`, `f29hd91b1`, `2t4b79a4w`, `otn16naz0`) & wildcard probe host -> **FALLBACK to `git-dev`**
   - **Live E2E Runs (`rmwt539ke` `REG-02`, `rmwt546p5` `REG-04`, `rmwt55y2y` `REC-01`):** Real emails arrived on first attempt (`<15s`), but all 3 remain **BLOCKED** (never marked passed) because DEV Supabase still rewrote `redirect_to` to `git-dev`.
-- **Owner Remediation Action:** In Supabase DEV (`mfglzabnayacssgertat`) -> **Authentication -> URL Configuration -> Redirect URLs**:
-  1. Confirm you are in project **`mfglzabnayacssgertat`** (DEV).
-  2. Add the exact branch alias with `/**`: `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/**` (and optionally the wildcard `https://**-vishwas2018s-projects.vercel.app/**`).
-  3. Click **Save changes** and wait for the confirmation toast.
+- **Closure Verification (2026-11-24 06:18–06:32 AEDT, PR #160 Preview `500fe9be` / `dpl_438WSkkrpNcrF54rNMLQjuD8SLuh`):**
+  - **Result:** **RESOLVED & VERIFIED.**
+  - **Direct `generateLink` Probe (`mfglzabnayacssgertat`):**
+    - `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/auth/confirm` -> **MATCH**
+    - `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/auth/reset` -> **MATCH**
+    - `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/auth/callback` -> **MATCH**
+    - `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/auth/confirm?next=%2Fparent` -> **MATCH**
+    - `git-dev` & `git-integra-6b98ba` -> **MATCH**
+    - Unrelated host (`git-wildcard-probe`) -> **FALLBACK** (tight origin scoping preserved).
+  - **Live E2E Verification (`rmwtniozh` & `rmwtnqfj1`):**
+    - `REG-02` (`rmwtnqfj1`, 29.5s): **PASS** — first-attempt email (`0s` latency), origin & `/auth/confirm` preserved, tampered link refused, duplicate unverified/verified non-enumerating, genuine link confirmed -> `/parent`, spent link replay refused. *(Test-harness note: initial `rmwtniozh` run uncovered a test-ordering issue where submitting duplicate unverified `/sign-up` in the same browser context overwrote the PKCE `code_verifier` cookie before clicking `link1`; isolated duplicate-unverified check into a separate browser context with all assertions intact -> clean PASS in `rmwtnqfj1`.)*
+    - `REG-03` (`rmwtniozh`, 20.3s): **PASS** — first-attempt email (`3s`), cross-device confirmation while signed in as another user.
+    - `REG-04` (`rmwtniozh`, 23.8s): **PASS** — simultaneous registrations in two parallel contexts, both delivered first-attempt (`2s`, `2s`) and confirmed on `/auth/confirm` -> `/parent`.
+    - `REC-01` (`rmwtniozh`, 30.7s): **PASS** — standalone `/auth/forgot` validation & 30s cooldown, first-attempt reset email (`1s`), origin & `/auth/reset` preserved, password reset completed, Device B invalidated to `/session-expired?next=%2Fparent`, old password rejected, new password accepted.
+  - **Production Reminder:** Before any `dev` -> `main` launch, verify the Production custom domain redirect URLs in PROD Supabase (`uermhsptduikehuyceiz`).
 
 ---
 

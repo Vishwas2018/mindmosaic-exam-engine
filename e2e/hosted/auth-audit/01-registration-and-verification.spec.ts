@@ -200,6 +200,7 @@ test.describe("Auth Audit 01: Registration & Email Verification", () => {
 
   test("REG-02: Real registration, double-click guard, unverified sign-in & enumeration check, duplicate unverified/verified, resend & confirm", async ({
     page,
+    browser,
   }) => {
     test.setTimeout(10 * 60_000);
     const inbox = await createInbox("reg02");
@@ -253,19 +254,28 @@ test.describe("Auth Audit 01: Registration & Email Verification", () => {
     });
     expect((await findUserByEmail(inbox.address))!.email_confirmed_at ?? null).toBeNull();
 
-    // Duplicate registration of UNVERIFIED account: shows "Check your email" OR rate-limit message (never leaks account existence)
-    await page.goto("/sign-up");
-    await page.getByLabel("Your name").fill("Audit Parent Reg02 Dup");
-    await page.getByLabel(/^email$/i).fill(inbox.address);
-    await page.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
-    await page.getByRole("checkbox").first().check();
-    await page.getByRole("button", { name: "Create account" }).click();
-    await expect(
-      page.getByRole("heading", { name: /check your email/i }).or(page.locator("#su-error")),
-    ).toBeVisible({ timeout: 30_000 });
-    const dupUnverifiedErr = await page.locator("#su-error").textContent().catch(() => null);
-    if (dupUnverifiedErr) {
-      expect(dupUnverifiedErr).not.toMatch(/already|exists|registered/i);
+    // Duplicate registration of UNVERIFIED account in a separate browser context so it does not overwrite
+    // the original browser's PKCE code_verifier cookie before genuine link1 is tested.
+    // Must show "Check your email" OR generic rate-limit message (never leak account existence).
+    const dupCtx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    try {
+      await protectContext(dupCtx);
+      const dupPage = await dupCtx.newPage();
+      await dupPage.goto("/sign-up");
+      await dupPage.getByLabel("Your name").fill("Audit Parent Reg02 Dup");
+      await dupPage.getByLabel(/^email$/i).fill(inbox.address);
+      await dupPage.getByLabel(/create a password/i).fill(STRONG_PASSWORD);
+      await dupPage.getByRole("checkbox").first().check();
+      await dupPage.getByRole("button", { name: "Create account" }).click();
+      await expect(
+        dupPage.getByRole("heading", { name: /check your email/i }).or(dupPage.locator("#su-error")),
+      ).toBeVisible({ timeout: 30_000 });
+      const dupUnverifiedErr = await dupPage.locator("#su-error").textContent().catch(() => null);
+      if (dupUnverifiedErr) {
+        expect(dupUnverifiedErr).not.toMatch(/already|exists|registered/i);
+      }
+    } finally {
+      await dupCtx.close();
     }
 
     // Confirm with genuine link1 (same browser context)

@@ -1,7 +1,7 @@
-# MindMosaic Authentication Test Execution Results (2026-11-23 — Updated Follow-Up)
+# MindMosaic Authentication Test Execution Results (2026-11-24 — Final Closure)
 
 - **Audit Branch:** `audit/auth-e2e-20261123` (Draft PR #160 -> `integration/beta-readiness-claude-20261120`)
-- **Final Code SHA:** `db65f78c62d96ee7a9c7774a31d5b2accd47a12e` (docs-only follow-up `f835691f`, `dpl_F652QyS4L38d6nUeV7xFNrwetiC2`)
+- **Final Verified Code SHA:** `500fe9bef737b735cfaec55a2574162ec466c0a8` (`dpl_438WSkkrpNcrF54rNMLQjuD8SLuh`)
 - **Hosted DEV Preview Alias:** `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app`
 - **Baseline PR #156 Preview Alias (Rounds 1–4):** `https://mindmosaic-exam-engine-git-integra-6b98ba-vishwas2018s-projects.vercel.app` (`3253ab1e`, `dpl_CH7zqNPMji2Hfvmb7FMMBM1joH83`)
 - **Supabase Project:** DEV `mfglzabnayacssgertat`
@@ -12,14 +12,12 @@
 
 | Suite / Layer | Executed | Passed | Failed | Blocked (Infra) | Not Tested | Notes |
 |---|---:|---:|---:|---:|---:|---|
-| **Local Auth & Hardening Unit Tests** (`vitest`) | 61 | 61 | 0 | 0 | 0 | `singapore-maths-sample-routes` (19), `provision-child` (32), `auth-audit-hardening` (10) |
-| **CI Full Verification Suite** (PR #160, `db65f78c`) | 7 jobs | 7 | 0 | 0 | 0 | `core` (8m02s), `e2e` (12m44s), `e2e-auth` (7m12s), `rls` (1m55s), `scholarship-drafts` (28s), `Vercel` |
-| **Hosted Audit Cycle 1 (Round 6)** on `db65f78c` | 14 | 11 | 0 (app) | 3 (`DEF-AUTH-005`) | 0 | All 11 non-allowlist-blocked tests passed (`REG-01`, `REG-03`, `AUTH-01`, `AUTH-02`, `RBAC-01`, `SEC-01`, `XBR-01` ×5) |
-| **Hosted Audit Cycle 2 (Round 7)** on `db65f78c` | 12 | 11 | 0 (app) | 1 (`DEF-AUTH-005`) | 2 (`REG-02`, `REG-04` already blocked by `DEF-AUTH-005`) | 100% pass on all 11 executable tests (`REG-01`, `REG-03`, `AUTH-01`, `AUTH-02`, `RBAC-01`, `SEC-01`, `XBR-01` ×5) |
-| **Follow-Up Real-Email Re-Check #1 (18:16–18:19 AEDT)** on `f835691f` (`rmwsxnemo`, `rmwsxqd66`) | 5 | 2 (`REG-01`, `REG-03`) | 0 (app) | 3 (`REG-02`, `REG-04`, `REC-01` — `DEF-AUTH-005`) | 0 | Confirmed `DEF-AUTH-005` still open in DEV Supabase; Gmail SMTP 100% first-attempt |
-| **Follow-Up Real-Email Re-Check #2 (21:45–21:50 AEDT)** on `2cafbab3` (`rmwt539ke`, `rmwt546p5`, `rmwt55y2y`) + `generateLink` probe | 3 E2E + 20 probe checks | 0 E2E (3 blocked) / 2 probe matches (`git-dev`, `git-integra-6b98ba`) | 0 (app) | 3 (`REG-02`, `REG-04`, `REC-01` — `DEF-AUTH-005`) | 0 | All 4 real emails delivered first-attempt (`<15s`); DEV Supabase still fell back to `git-dev` for `git-audit-a-f35ca9` and all PR #160 deployment URLs |
-| **DEF-AUTH-006 Unit Regression (`vitest`)** | 28 | 28 | 0 | 0 | 0 | `forgot-password-page.test.tsx` (3), `sign-in-panel.test.tsx` (15), `auth-audit-hardening.test.ts` (10) |
-| **Baseline Real-Email Recovery** (PR #156 allowlisted alias `rmwsuwdnl`) | 7 | 4 | 0 (app) | 0 | 0 | `REC-01` (full recovery + cross-device session invalidation) & `REG-03` passed on allowlisted alias |
+| **Local Auth & Hardening Unit Tests** (`vitest`) | 64 | 64 | 0 | 0 | 0 | `singapore-maths-sample-routes` (19), `provision-child` (32), `auth-audit-hardening` (10), `forgot-password-page` (3); also `sign-in-panel` (15/15) |
+| **CI Full Verification Suite** (PR #160, `500fe9be`, Run `45160150872`) | 7 jobs | 7 | 0 | 0 | 0 | `core` (5m12s), `e2e` (13m19s), `e2e-auth` (6m38s), `rls` (2m24s), `scholarship-drafts` (24s), `Vercel`, `Vercel Preview Comments` |
+| **Final Closure Verification (2026-11-24, 06:18–06:32 AEDT)** on `500fe9be` (`rmwtniozh`, `rmwtnqfj1`, `rmwtnrbae`) + `generateLink` probe | 12 E2E + 7 probe checks | **12 E2E** + 4/4 PR #160 probe matches | 0 | **0** | 0 | **100% PASS, 0 blocked:** `REG-01`, `REG-02`, `REG-03`, `REG-04`, `AUTH-01`, `AUTH-02`, `REC-01`, `RBAC-01`, `SEC-01`, `XBR-01` (`1440`/`834`/`390`) |
+| **Hosted Audit Cycle 1 & 2 (Rounds 6 & 7)** on `db65f78c` | 22 (non-blocked) | 22 | 0 | 0 (non-email) | 0 | Full cross-browser matrix incl. Firefox & WebKit (`10 / 10` across 2 consecutive cycles) |
+| **Historical Follow-Up Re-Checks #1 & #2 (2026-11-23)** (`rmwsxnemo`, `rmwsxqd66`, `rmwt539ke`..`55y2y`) | 8 | 2 | 0 (app) | 6 (`DEF-AUTH-005` prior to fix) | 0 | Historical pre-fix evidence confirming `DEF-AUTH-005` before DEV Supabase Redirect URLs were saved; all real emails delivered first-attempt |
+| **Baseline Real-Email Recovery** (PR #156 allowlisted alias `rmwsuwdnl`) | 4 | 4 | 0 | 0 | 0 | `REC-01` & `REG-03` passed on allowlisted PR #156 alias |
 
 ---
 
@@ -38,17 +36,22 @@ Every real-email test recorded first-attempt delivery, latency, misses, resends,
 | `rmwsxnemo` | `git-audit-a-f35ca9` (`f835691f`) | `REG-02`, `REG-03`, `REG-04` (×2) | Confirmation (4 emails) | **YES (4/4)** | **<15s** | 0 | No | Custom Gmail SMTP |
 | `rmwsxqd66` | `git-audit-a-f35ca9` (`f835691f`) | `REC-01` | Password Reset | **YES** | **<15s** | 0 | No | Custom Gmail SMTP |
 | `rmwt539ke`, `rmwt546p5`, `rmwt55y2y` | `git-audit-a-f35ca9` (`2cafbab3`) | `REG-02`, `REG-04` (×2), `REC-01` | Confirmation (3) & Reset (1) | **YES (4/4)** | **<15s** | 0 | No | Custom Gmail SMTP |
+| `rmwtniozh` | `git-audit-a-f35ca9` (`500fe9be`) | `REG-03` | Confirmation | **YES** | **3s** | 0 | No | `vishwas.joshi01@gmail.com` |
+| `rmwtniozh` | `git-audit-a-f35ca9` (`500fe9be`) | `REG-04` (simA & simB) | Confirmation (2) | **YES (2/2)** | **2s / 2s** | 0 | No | `vishwas.joshi01@gmail.com` |
+| `rmwtniozh` | `git-audit-a-f35ca9` (`500fe9be`) | `REC-01` | Password Reset | **YES** | **1s** | 0 | No | `vishwas.joshi01@gmail.com` |
+| `rmwtnqfj1` | `git-audit-a-f35ca9` (`500fe9be`) | `REG-02` | Confirmation | **YES** | **0s** (<1s) | 0 | No | `vishwas.joshi01@gmail.com` |
 
-**Key Email Finding:** **19 / 19 first-attempt email deliveries succeeded (0 missing emails, 0 retry-assisted recoveries)** across the entire audit and both follow-up checks, all arriving in 0–20 seconds via custom Gmail SMTP. The sole remaining blocker on PR #160's Preview alias is `DEF-AUTH-005` (DEV Supabase `uri_allow_list` redirecting `redirect_to` to `git-dev`; blocked tests are explicitly reported as **BLOCKED**, never passed).
+**Key Email Finding:** **24 / 24 (100%) first-attempt email deliveries succeeded (0 missing emails, 0 retry-assisted recoveries)** across the entire audit and closure verification. All 5 closure emails on `500fe9be` arrived in **0–3 seconds** from `vishwas.joshi01@gmail.com` with verified same-origin `/auth/confirm` and `/auth/reset` callback paths (`DEF-AUTH-005` resolved).
 
 ---
 
 ## 3. Pre-Remediation vs Post-Remediation Defect Verification
 
-| Defect | Pre-Fix Run & Result | Post-Fix Run & Result (SHA `288fafcd` / `db65f78c`) |
+| Defect | Pre-Fix Run & Result | Post-Fix Run & Result (`288fafcd` / `db65f78c` / `500fe9be`) |
 |---|---|---|
-| `DEF-AUTH-004` (Cookie `Secure` flag) | `rmwsv4lml`: **FAIL** (`secure: false`) | `rmwsvvayc`, `rmwswgel9`, `rmwsx4d6n`: **PASS** (`secure: true`) |
-| `DEF-AUTH-001` (Student onboarding role gate) | `rmwsudgko`: **FAIL** (Parent got `200`) | `rmwsvvayc`, `rmwswsc1h`, `rmwsx4d6n`: **PASS** (Parent/Teacher/Admin got `403`, Student `200`) |
+| `DEF-AUTH-004` (Cookie `Secure` flag) | `rmwsv4lml`: **FAIL** (`secure: false`) | `rmwsvvayc`, `rmwswgel9`, `rmwsx4d6n`, `rmwtnrbae`: **PASS** (`secure: true`) |
+| `DEF-AUTH-001` (Student onboarding role gate) | `rmwsudgko`: **FAIL** (Parent got `200`) | `rmwsvvayc`, `rmwswsc1h`, `rmwsx4d6n`, `rmwtnrbae`: **PASS** (Parent/Teacher/Admin got `403`, Student `200`) |
 | `DEF-AUTH-002` (Singapore Maths sample CSRF) | Static audit: missing `checkOrigin` | `singapore-maths-sample-routes.test.ts` (19/19) + CI `e2e-auth` (PASS) |
-| `DEF-AUTH-003` (`POST /api/parent/children` status) | `rmwsudgko`: **FAIL** (Anon/Guest/Student got `400`) | `rmwsvvayc`, `rmwswsc1h`, `rmwsx4d6n`: **PASS** (Anon/Guest `401`, Student/Teacher/Admin `403`) |
-| `DEF-AUTH-005` (DEV Supabase `uri_allow_list`) | `rmwsvvayc`, `rmwswgel9`: **BLOCKED** | `rmwsxnemo`, `rmwsxqd66` (18:19 AEDT): **STILL BLOCKED** — owner Dashboard action pending |
+| `DEF-AUTH-003` (`POST /api/parent/children` status) | `rmwsudgko`: **FAIL** (Anon/Guest/Student got `400`) | `rmwsvvayc`, `rmwswsc1h`, `rmwsx4d6n`, `rmwtnrbae`: **PASS** (Anon/Guest `401`, Student/Teacher/Admin `403`) |
+| `DEF-AUTH-005` (DEV Supabase `uri_allow_list`) | `rmwsvvayc`, `rmwswgel9`, `rmwt539ke`..`55y2y`: **BLOCKED** | 2026-11-24 `generateLink` probe (4/4 `MATCH`) + `rmwtniozh` (`REG-03`, `REG-04`, `REC-01`) + `rmwtnqfj1` (`REG-02`): **PASS** |
+| `DEF-AUTH-006` (`/auth/forgot` parity & 30s cooldown) | Static audit: missing validation/cooldown | `forgot-password-page.test.tsx` (3/3) + live `REC-01` (`rmwtniozh`): **PASS** |
