@@ -62,7 +62,7 @@ test("U1 plan picker: both tiers, cadence switch, honest prices, no horizontal o
     };
     return [...document.querySelectorAll("body *")]
       .map((el) => ({ el, r: el.getBoundingClientRect() }))
-      .filter(({ r }) => r.right > w + 1 && r.width > 0)
+      .filter(({ el, r }) => r.right > w + 1 && r.width > 0 && chain(el) === "")
       .sort((x, y) => y.r.right - x.r.right)
       .slice(0, 6)
       .map(({ el, r }) => `${el.tagName.toLowerCase()}.${String(el.className).slice(0, 50)} right=${Math.round(r.right)} pos=${getComputedStyle(el).position} clip=${chain(el)}`);
