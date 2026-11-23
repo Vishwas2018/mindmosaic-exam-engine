@@ -67,7 +67,14 @@ test("U1 plan picker: both tiers, cadence switch, honest prices, no horizontal o
       .slice(0, 6)
       .map(({ el, r }) => `${el.tagName.toLowerCase()}.${String(el.className).slice(0, 50)} right=${Math.round(r.right)} pos=${getComputedStyle(el).position} clip=${chain(el)}`);
   });
-  expect(overflow, `horizontal overflow px; offenders: ${offenders.join(" | ")}`).toBeLessThanOrEqual(1);
+  // User-visible criterion: the page itself must not scroll sideways. (documentElement.scrollWidth can over-report under
+  // mobile emulation even when every wide element is clipped by its own scroll container, as the offenders list proves.)
+  const sidewaysScroll = await page.evaluate(() => {
+    window.scrollTo(1000, 0);
+    return window.scrollX;
+  });
+  expect(sidewaysScroll, `page scrolls sideways by ${sidewaysScroll}px (scrollWidth excess ${overflow}); unclipped offenders: ${offenders.join(" | ")}`).toBeLessThanOrEqual(1);
+  expect(offenders, "no unclipped element extends past the viewport").toEqual([]);
   // Touch targets: every subscribe button is at least 44px tall.
   for (const name of ["Subscribe to Individual", "Subscribe to Family"]) {
     const box = await page.getByRole("button", { name }).boundingBox();
