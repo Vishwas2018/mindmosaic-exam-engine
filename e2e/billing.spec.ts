@@ -20,56 +20,45 @@ const PAID_CTA_LABELS = ["Subscribe to Individual", "Subscribe to Family", "Choo
  * Both views are covered at component level in src/tests/pages/billing-page-beta.test.tsx.
  */
 const stripeConfigured = (process.env.STRIPE_SECRET_KEY ?? "").trim().length > 0;
-const priceVars = [
-  "STRIPE_PRICE_INDIVIDUAL_MONTHLY",
-  "STRIPE_PRICE_INDIVIDUAL_ANNUAL",
-  "STRIPE_PRICE_FAMILY_MONTHLY",
-  "STRIPE_PRICE_FAMILY_ANNUAL",
-];
-const purchasable = stripeConfigured && priceVars.every((name) => (process.env[name] ?? "").trim().length > 0);
+const has = (name: string) => (process.env[name] ?? "").trim().length > 0;
+/* Mirrors purchasablePlans(): a tier is for sale only when Stripe is configured and BOTH its cadence prices are set. */
+const tier = {
+  individual: stripeConfigured && has("STRIPE_PRICE_INDIVIDUAL_MONTHLY") && has("STRIPE_PRICE_INDIVIDUAL_ANNUAL"),
+  family: stripeConfigured && has("STRIPE_PRICE_FAMILY_MONTHLY") && has("STRIPE_PRICE_FAMILY_ANNUAL"),
+};
+const anyPurchasable = tier.individual || tier.family;
 
-test.describe(
-  !stripeConfigured
-    ? "billing page with payments disabled"
-    : purchasable
-      ? "billing page (Stripe and prices configured)"
-      : "billing page (Stripe configured, no prices: nothing for sale)",
-  () => {
-    test("offers exactly what this deployment can sell", async ({ page }) => {
-      await page.goto("/billing", { waitUntil: "domcontentloaded" });
+test.describe(stripeConfigured ? "billing page (Stripe configured)" : "billing page with payments disabled", () => {
+  test("offers exactly the tiers this deployment can sell", async ({ page }) => {
+    await page.goto("/billing", { waitUntil: "domcontentloaded" });
 
-      if (!stripeConfigured) {
-        const notice = page.getByTestId("billing-free-beta");
-        await expect(notice.getByRole("heading", { level: 1, name: "The family beta is free" })).toBeVisible();
-        await expect(notice).toContainText("There is nothing to pay during the beta");
-        await expect(notice.getByRole("link", { name: "Back to your family" })).toHaveAttribute("href", "/parent");
-        await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
-        return;
-      }
+    if (!stripeConfigured) {
+      const notice = page.getByTestId("billing-free-beta");
+      await expect(notice.getByRole("heading", { level: 1, name: "The family beta is free" })).toBeVisible();
+      await expect(notice).toContainText("There is nothing to pay during the beta");
+      await expect(notice.getByRole("link", { name: "Back to your family" })).toHaveAttribute("href", "/parent");
+      await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
+      return;
+    }
 
-      await expect(page.getByRole("heading", { level: 1, name: "Pick the plan that fits your family" })).toBeVisible();
-      await expect(page.locator("input[autocomplete='cc-number']")).toHaveCount(0);
-      if (purchasable) {
-        await expect(page.getByRole("button", { name: "Subscribe to Individual" })).toBeVisible();
-        await expect(page.getByRole("button", { name: "Subscribe to Family" })).toBeVisible();
-      } else {
-        for (const label of PAID_CTA_LABELS) {
-          await expect(page.getByRole("button", { name: label })).toHaveCount(0);
-        }
-        const registerInterest = page.getByRole("link", { name: "Register interest" });
-        await expect(registerInterest.first()).toBeVisible();
-        await expect(registerInterest.first()).toHaveAttribute("href", "/help#contact");
-      }
-    });
-  },
-);
+    await expect(page.getByRole("heading", { level: 1, name: "Pick the plan that fits your family" })).toBeVisible();
+    await expect(page.locator("input[autocomplete='cc-number']")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Subscribe to Individual" })).toHaveCount(tier.individual ? 1 : 0);
+    await expect(page.getByRole("button", { name: "Subscribe to Family" })).toHaveCount(tier.family ? 1 : 0);
+    if (!tier.individual || !tier.family) {
+      const registerInterest = page.getByRole("link", { name: "Register interest" });
+      await expect(registerInterest.first()).toBeVisible();
+      await expect(registerInterest.first()).toHaveAttribute("href", "/help#contact");
+    }
+  });
+});
 
 test.describe("no unconfigured checkout is reachable from any public surface", () => {
   for (const path of ["/", "/pricing", "/billing"]) {
     test(`${path} offers no checkout call to action unless prices are configured`, async ({ page }) => {
       await page.goto(path, { waitUntil: "domcontentloaded" });
       await expect(page.locator("input[autocomplete='cc-number']")).toHaveCount(0);
-      if (purchasable) return;
+      if (anyPurchasable) return;
 
       for (const label of PAID_CTA_LABELS) {
         await expect(page.getByRole("button", { name: label })).toHaveCount(0);
