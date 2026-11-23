@@ -125,7 +125,7 @@ test("U3 sandbox card payment succeeds, activates the plan via webhook, then a s
     testInfo.annotations.push({ type: "webkit-redirect", description: "payment completed; headless WebKit did not follow Stripe's redirect" });
     await page.goto("/parent");
   }
-  const row = await waitForRow(parent.id, (r) => r.status === "active" && r.plan === "individual_monthly", "active after Checkout");
+  const row = await waitForRow(parent.id, (r) => r.status === "active" && r.plan === "individual_annual", "active individual_annual after Checkout (the page defaults to the annual cadence)");
   track("customers", row.stripe_customer_id!);
 
   const again = await page.request.post("/api/stripe/checkout", {
