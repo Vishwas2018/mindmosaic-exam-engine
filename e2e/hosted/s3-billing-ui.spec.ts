@@ -52,10 +52,20 @@ test("U1 plan picker: both tiers, cadence switch, honest prices, no horizontal o
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   const offenders = await page.evaluate(() => {
     const w = document.documentElement.clientWidth;
+    const clipped = (el: Element) => {
+      for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) {
+        const ox = getComputedStyle(p).overflowX;
+        if (ox === "hidden" || ox === "auto" || ox === "scroll" || ox === "clip") return true;
+      }
+      return false;
+    };
     return [...document.querySelectorAll("body *")]
-      .filter((el) => el.getBoundingClientRect().right > w + 1 && el.getBoundingClientRect().width > 0)
+      .filter((el) => {
+        const r = el.getBoundingClientRect();
+        return r.right > w + 1 && r.width > 0 && !clipped(el);
+      })
       .slice(0, 6)
-      .map((el) => `${el.tagName.toLowerCase()}.${String(el.className).slice(0, 60)} right=${Math.round(el.getBoundingClientRect().right)}`);
+      .map((el) => `${el.tagName.toLowerCase()}.${String(el.className).slice(0, 70)} right=${Math.round(el.getBoundingClientRect().right)}`);
   });
   expect(overflow, `horizontal overflow px; offenders: ${offenders.join(" | ")}`).toBeLessThanOrEqual(1);
   // Touch targets: every subscribe button is at least 44px tall.
@@ -114,7 +124,11 @@ async function fillCard(page: import("@playwright/test").Page, number: string) {
   // Current Checkout lists payment methods as radios; the card fields appear once "Card" is chosen.
   const cardField = page.locator("#cardNumber");
   if (!(await cardField.isVisible().catch(() => false))) {
-    await page.getByText("Card", { exact: true }).first().click();
+    const option = page
+      .locator('[data-testid="card-accordion-item-button"], [data-testid="card-accordion-item"], label:has-text("Card"), button:has-text("Card")')
+      .first();
+    await option.waitFor({ state: "visible", timeout: 45_000 });
+    await option.click({ timeout: 45_000 });
   }
   await cardField.waitFor({ state: "visible", timeout: 30_000 });
   await page.locator("#cardNumber").fill(number);
