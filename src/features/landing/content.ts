@@ -61,7 +61,6 @@
 import {
   annualSavingsPercent,
   FAMILY_PLAN,
-  FREE_PLAN,
   INDIVIDUAL_PLAN,
 } from "@/lib/billing/prices";
 
@@ -1213,22 +1212,21 @@ export const audiences = {
  * Three plans, all priced from src/lib/billing/prices.ts so this page, the
  * billing page and Stripe cannot disagree:
  *
- *  - Free: a fixed sample (FREE_PLAN.sampleQuestionsPerProgramme questions in
- *    every programme). It is a taste, not open-ended practice: the guest
- *    bank endpoint serves only that sample and the signed-in session route
- *    narrows to it for students without paid access.
+ *  - Free: guest practice with no account or card. Copy must not promise a
+ *    question count: the guest-session endpoint is not limited by billing
+ *    (docs/PRIVACY_AND_BILLING_GUARDRAILS.md). Only signed-in students of a
+ *    parent without access are held to FREE_PLAN's sample, and only while
+ *    BILLING_ENFORCEMENT_ENABLED is on. Do not describe that as the Free plan.
  *  - Individual: one learner.
  *  - Family: up to FAMILY_PLAN.maxChildren learners.
  *
  * There is no trial mechanism advertised here.
  */
 
-const freeSample = FREE_PLAN.sampleQuestionsPerProgramme;
-
 export const plans = {
   eyebrow: "Plans",
   heading: "Three ways to access MindMosaic.",
-  intro: `Try ${freeSample} sample questions in every programme for free, no account needed. Subscribe for the full question bank, full-length exam papers and progress tracking.`,
+  intro: "Try practice as a guest, free, with no account or card. Subscribe for child profiles, saved progress, full-length exam papers and a parent dashboard.",
   /** Sits on the top edge of the featured card. */
   featuredTab: "Best value",
   items: [
@@ -1236,13 +1234,13 @@ export const plans = {
       id: "free",
       eyebrow: "Free access",
       name: "Free",
-      body: "A taste of every programme, scored, with a worked explanation after every question.",
+      body: "Try practice as a guest, scored, with a worked explanation after every question.",
       price: "A$0" as string | null,
       cadence: "forever" as string | null,
-      note: `${freeSample} sample questions per programme. No account or card needed.`,
+      note: "Guest practice. No account or card needed.",
       pending: false,
       features: [
-        `${freeSample} sample questions in every programme`,
+        "Practise as a guest, no account needed",
         "A worked explanation after every question",
         "All 14 question types",
         "No account needed to try",
@@ -1305,7 +1303,7 @@ export const plans = {
     rows: [
       {
         label: "Practice questions",
-        values: [`${freeSample} per programme`, "Full bank", "Full bank"],
+        values: ["Guest practice", "Full bank", "Full bank"],
       },
       { label: "Worked explanation after every question", values: ["Yes", "Yes", "Yes"] },
       { label: "All 14 question types", values: ["Yes", "Yes", "Yes"] },
@@ -1333,11 +1331,11 @@ export const plans = {
     items: [
       {
         question: "Do I need a card to try MindMosaic?",
-        answer: `No. The Free plan needs no card and no account: ${freeSample} sample questions in every programme, scored and explained.`,
+        answer: "No. You can practise as a guest with no card and no account, with every answer scored and explained.",
       },
       {
         question: "What does the Free plan include?",
-        answer: `${freeSample} sample questions in each programme (for example NAPLAN Year 5 Numeracy), with a worked explanation after every question. It is a sample to try, not unlimited practice.`,
+        answer: "Guest practice with no account or card, with a worked explanation after every question. A subscription adds child profiles, saved progress, full-length exam papers and the parent dashboard.",
       },
       {
         question: "Can I switch between monthly and yearly?",
@@ -1514,7 +1512,7 @@ export const about = {
   },
   closing: {
     heading: "See it with your own child's year level.",
-    body: "The Free plan gives you 5 sample questions in every programme, with no account or card. A subscription unlocks the full bank and saves progress across sessions.",
+    body: "You can try practice as a guest, with no account or card. A subscription adds child profiles and saves progress across sessions.",
     primaryCta: { label: "Start free", href: routes.startFree },
     secondaryCta: { label: "See plans", href: routes.pricing },
   },
@@ -1703,7 +1701,7 @@ export const faqAndStart = {
     {
       question: "Can I try MindMosaic before paying?",
       answer:
-        "Yes. The Free plan gives you 5 sample questions in every programme, with no account or card. Individual (one child) and Family (up to three children) unlock the full question bank — see Plans for prices.",
+        "Yes. You can practise as a guest with no account or card. Individual (one child) and Family (up to three children) add child profiles, saved progress and the parent dashboard — see Plans for prices.",
     },
   ],
   card: {

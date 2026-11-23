@@ -9,7 +9,7 @@ import { routes } from "@/features/landing/content";
 export const metadata: Metadata = {
   title: "Plans",
   description:
-    "Try 5 sample questions in every programme for free, then choose Individual (A$14.99/month) or Family (A$19.99/month) for the full question bank.",
+    "Try practice free as a guest, then choose Individual (A$14.99/month) or Family (A$19.99/month) for child profiles, saved progress and the parent dashboard.",
 };
 
 /** Plans — design handoff screen 3. */
@@ -18,7 +18,7 @@ export default function PricingPage() {
     <MarketingPage
       eyebrow="Plans"
       title="Free to practise."
-      intro="Try 5 sample questions in every programme for free, no account needed. Subscribe for the full question bank, full-length exam papers and progress tracking."
+      intro="Try practice as a guest, free, with no account or card. Subscribe for child profiles, saved progress, full-length exam papers and a parent dashboard."
       primaryCta={{ label: "Start free", href: routes.startFree }}
       secondaryCta={{ label: "Practise as a guest", href: routes.guestPractice }}
     >

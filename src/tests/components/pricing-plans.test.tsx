@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { FAMILY_PLAN, FREE_PLAN, INDIVIDUAL_PLAN } from "@/lib/billing/prices";
+import { FAMILY_PLAN, INDIVIDUAL_PLAN } from "@/lib/billing/prices";
 
 const mockRedirectTo = vi.fn();
 vi.mock("@/lib/browser-redirect", () => ({
@@ -30,7 +30,8 @@ describe("PricingPlans pricing", () => {
 
   it("shows all three tiers with the free tier limited to sample questions", async () => {
     await renderWithAvailability("roadmap");
-    expect(screen.getByText(`${FREE_PLAN.sampleQuestionsPerProgramme} sample questions in every programme`)).toBeInTheDocument();
+    expect(screen.getByText("Practise as a guest, no account needed")).toBeInTheDocument();
+    expect(screen.queryByText(/sample questions in every programme/i)).not.toBeInTheDocument();
     expect(screen.getByText("Individual")).toBeInTheDocument();
     expect(screen.getByText("Family")).toBeInTheDocument();
   });

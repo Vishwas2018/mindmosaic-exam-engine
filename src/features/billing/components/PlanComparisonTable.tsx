@@ -24,7 +24,7 @@ interface FeatureRow {
 const FEATURE_ROWS: FeatureRow[] = [
   {
     label: "Practice questions",
-    free: `${FREE_PLAN.sampleQuestionsPerProgramme} per programme`,
+    free: "Guest practice",
     individual: "Full bank",
     family: "Full bank",
   },

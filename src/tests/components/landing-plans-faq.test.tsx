@@ -25,7 +25,8 @@ describe("Plans", () => {
 
   it("describes the free tier as a sample, not unlimited practice", () => {
     render(<Plans />);
-    expect(screen.getAllByText(/5 sample questions/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/guest practice/i).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/5 sample questions/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/unlimited/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/free trial/i)).not.toBeInTheDocument();
 

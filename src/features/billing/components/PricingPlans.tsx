@@ -28,7 +28,7 @@ const CYCLE_OPTIONS: { cycle: BillingCycle; label: string }[] = [
 ];
 
 const FREE_FEATURES = [
-  `${FREE_PLAN.sampleQuestionsPerProgramme} sample questions in every programme`,
+  "Practise as a guest, no account needed",
   "A worked explanation after each question",
   "No credit card required",
 ] as const;
@@ -289,7 +289,7 @@ export function PricingPlans({
               <span className="text-base font-bold text-mm-muted">forever</span>
             </p>
             <p className="mt-1.5 min-h-5 text-sm font-semibold text-mm-muted">
-              {FREE_PLAN.sampleQuestionsPerProgramme} questions per programme
+              Guest practice
             </p>
           </div>
           <div className="my-6 h-px bg-mm-line-soft" />

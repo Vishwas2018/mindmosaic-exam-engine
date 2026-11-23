@@ -169,8 +169,8 @@ export default async function BillingPage() {
             Pick the plan that fits your family
           </h1>
           <p className="mt-3 text-base leading-7 text-muted">
-            Start free with sample questions in every programme, then upgrade for the full question bank,
-            full-length exam papers and progress tracking.
+            Try practice free as a guest, then subscribe for child profiles, saved progress, full-length exam
+            papers and a parent dashboard.
           </p>
         </div>
         <div className="mx-auto mt-10 max-w-5xl space-y-8">
