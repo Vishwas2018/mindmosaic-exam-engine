@@ -123,17 +123,13 @@ test("U3 sandbox card payment succeeds, activates the plan via webhook, then a s
   } else {
     expect(browserName, "only WebKit may skip the redirect check").toBe("webkit");
     testInfo.annotations.push({ type: "webkit-redirect", description: "payment completed; headless WebKit did not follow Stripe's redirect" });
-    // The Stripe page is stuck in this engine; continue in a fresh page of the same signed-in context.
-    const fresh = await page.context().newPage();
-    await fresh.goto("/parent", { waitUntil: "commit", timeout: 60_000 });
-    await fresh.close();
   }
   const row = await waitForRow(parent.id, (r) => r.status === "active" && r.plan === "individual_annual", "active individual_annual after Checkout (the page defaults to the annual cadence)");
   track("customers", row.stripe_customer_id!);
 
   const again = await page.request.post("/api/stripe/checkout", {
     data: { plan: "family_annual" },
-    headers: { "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET ?? "", Origin: new URL(page.url()).origin },
+    headers: { "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET ?? "", Origin: new URL(HOSTED_URL).origin },
     maxRedirects: 0,
   });
   expect(again.status()).toBe(409);
