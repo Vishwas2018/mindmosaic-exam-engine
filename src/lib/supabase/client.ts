@@ -9,5 +9,11 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./config";
  * the AuthProvider guards it. Created per call; Supabase dedupes internally.
  */
 export function createClient() {
-  return createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
+  return createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    cookieOptions: {
+      secure: isHttps,
+      sameSite: "lax",
+    },
+  });
 }

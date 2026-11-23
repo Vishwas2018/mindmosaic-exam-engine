@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 
+import {checkOrigin} from "@/features/auth/require-origin";
 import {createClient} from "@/lib/supabase/server";
 import {isSingaporeMathsSampleAllowed, isSingaporeMathsSampleAllowedFor} from "@/features/flags/singapore-maths-sample";
 import {sampleExplanation} from "@/content/visual-fixtures/bar-model/sample-practice.server";
@@ -68,6 +69,10 @@ export async function GET(request: Request): Promise<NextResponse> {
 export async function DELETE(request: Request): Promise<NextResponse> {
   if (!isSingaporeMathsSampleAllowed()) {
     return new NextResponse(null, {status: 404});
+  }
+  const originCheck = checkOrigin(request);
+  if (!originCheck.ok) {
+    return originCheck.response;
   }
   const rawYear = new URL(request.url).searchParams.get("year");
   const year = parseYear(rawYear);

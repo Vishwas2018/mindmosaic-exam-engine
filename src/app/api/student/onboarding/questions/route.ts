@@ -20,6 +20,15 @@ export async function GET(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+  if (profile?.role !== "student") {
+    return NextResponse.json({ error: "students_only" }, { status: 403 });
+  }
+
   const { searchParams } = new URL(request.url);
   const yearParam = searchParams.get("year");
   const yearLevel = yearParam ? parseInt(yearParam, 10) : 3;
