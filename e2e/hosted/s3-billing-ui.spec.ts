@@ -24,6 +24,20 @@ test.afterAll(async () => {
   await cleanupBilling();
 });
 
+/** WebKit/Firefox abort a goto issued while the post-sign-in redirect is still settling; retry that specific race. */
+async function gotoStable(page: import("@playwright/test").Page, path: string) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      await page.goto(path, { waitUntil: "domcontentloaded" });
+      await page.waitForLoadState("load");
+      return;
+    } catch (error) {
+      if (attempt >= 3 || !/interrupted by another navigation|net::ERR_ABORTED/.test(String(error))) throw error;
+      await page.waitForTimeout(1500);
+    }
+  }
+}
+
 async function signedInParent(page: import("@playwright/test").Page, label: string) {
   const parent = await seedParent(label);
   track("users", parent.id);
@@ -35,7 +49,7 @@ async function signedInParent(page: import("@playwright/test").Page, label: stri
 
 test("U1 plan picker: both tiers, cadence switch, honest prices, no horizontal overflow @responsive", async ({ page }, testInfo) => {
   await signedInParent(page, `u1${testInfo.project.name.replace(/\W/g, "").slice(0, 6)}`);
-  await page.goto("/billing");
+  await gotoStable(page, "/billing");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   const cycle = page.getByRole("radiogroup", { name: "Billing cycle" });
   await expect(cycle).toBeVisible();
@@ -84,7 +98,7 @@ test("U1 plan picker: both tiers, cadence switch, honest prices, no horizontal o
 
 test("U2 Subscribe sends the parent to Stripe-hosted Checkout (no card field on our origin)", async ({ page }, testInfo) => {
   await signedInParent(page, `u2${testInfo.project.name.replace(/\W/g, "").slice(0, 6)}`);
-  await page.goto("/billing");
+  await gotoStable(page, "/billing");
   await expect(page.locator("input[autocomplete='cc-number'], input[name='cardnumber']")).toHaveCount(0);
   await page.getByRole("button", { name: "Subscribe to Family" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 60_000 });
@@ -94,7 +108,7 @@ test("U2 Subscribe sends the parent to Stripe-hosted Checkout (no card field on 
 test.fixme("U3 sandbox card payment succeeds, activates the plan via webhook, then a second checkout is refused", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440" || (process.env.XBROWSER ?? "") !== "", "payment path runs once, on Chromium");
   const parent = await signedInParent(page, "u3");
-  await page.goto("/billing");
+  await gotoStable(page, "/billing");
   await page.getByRole("button", { name: "Subscribe to Individual" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 60_000 });
   await fillCard(page, "4242424242424242");
@@ -113,7 +127,7 @@ test.fixme("U3 sandbox card payment succeeds, activates the plan via webhook, th
 test.fixme("U4 sandbox declined card shows the issuer's refusal and never activates the plan", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440" || (process.env.XBROWSER ?? "") !== "", "payment path runs once, on Chromium");
   const parent = await signedInParent(page, "u4");
-  await page.goto("/billing");
+  await gotoStable(page, "/billing");
   await page.getByRole("button", { name: "Subscribe to Family" }).click();
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 60_000 });
   await fillCard(page, "4000000000000002");
