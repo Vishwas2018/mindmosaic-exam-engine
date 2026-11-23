@@ -35,7 +35,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-page">
       <header className="border-b border-royal/8 bg-white">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
+        <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-x-4 gap-y-2 py-3">
           <Link
             href="/"
             aria-label="MindMosaic home"
@@ -50,7 +50,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             which goes to the marketing site instead. RoleHomeLink supplies
             the right destination per role and renders nothing for guests.
           */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex min-w-0 flex-wrap items-center justify-end gap-2 sm:gap-3">
             <Link
               href="/"
               className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"

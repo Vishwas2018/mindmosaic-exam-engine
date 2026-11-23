@@ -292,8 +292,9 @@ test("S5 entitlement: a student of a parent without access is held to the free s
   expect(await hasAccess(free.id)).toBe(false);
 
   await parentSignIn(page, free.email, free.password);
-  await expect(page).toHaveURL(/\/parent/, { timeout: 30_000 });
-  await page.waitForLoadState("networkidle");
+  // A parent with no access is sent to /billing by the gate (BILLING_ENFORCEMENT_ENABLED): that redirect is the point.
+  await expect(page).toHaveURL(/\/(parent|billing)/, { timeout: 30_000 });
+  await page.waitForLoadState("domcontentloaded");
   const made = await api(page).post("/api/parent/children", { displayName: "Fiona", yearLevel: 5 });
   expect(made.status(), "create child").toBeLessThan(300);
   const child = (await made.json()) as { loginCode: string; pin: string };

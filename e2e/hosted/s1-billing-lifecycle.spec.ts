@@ -94,6 +94,21 @@ test("L1b failed renewal: access follows Stripe's dunning outcome, and a paid in
   const bad = await stripe.paymentMethods.attach("pm_card_chargeCustomerFail", { customer: c.customerId });
   await stripe.customers.update(c.customerId, { invoice_settings: { default_payment_method: bad.id } });
   await advanceToRenewal(c.clockId, sub.id, 1);
+  // Stripe finalises a renewal invoice about an hour after creating it and then attempts the charge; in the
+  // sandbox that step can lag the clock. Doing it explicitly is the same operation: the failing card is declined.
+  await expect
+    .poll(
+      async () => {
+        const drafts = await stripe.invoices.list({ customer: c.customerId, status: "draft", limit: 3 });
+        for (const d of drafts.data) {
+          await stripe.invoices.finalizeInvoice(d.id);
+          await stripe.invoices.pay(d.id).catch(() => undefined);
+        }
+        return (await stripe.subscriptions.retrieve(sub.id)).status;
+      },
+      { message: "renewal invoice charged and declined", timeout: 120_000, intervals: [3000, 5000] },
+    )
+    .not.toBe("active");
 
   // The sandbox's dunning settings decide whether this lands on past_due (retrying) or canceled (retries exhausted).
   // Either is a legitimate Stripe outcome; the app must mirror it and never leave a failed payer "active".

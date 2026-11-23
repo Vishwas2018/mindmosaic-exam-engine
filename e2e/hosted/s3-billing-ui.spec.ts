@@ -102,6 +102,9 @@ test("U4 sandbox declined card shows the issuer's refusal and never activates th
 });
 
 async function fillCard(page: import("@playwright/test").Page, number: string) {
+  // Current Checkout lists payment methods as radios; the card fields appear once "Card" is chosen.
+  const cardOption = page.getByRole("radio", { name: /^Card/ });
+  if (await cardOption.count()) await cardOption.first().check({ force: true });
   await page.locator("#cardNumber").fill(number);
   await page.locator("#cardExpiry").fill("12 / 34");
   await page.locator("#cardCvc").fill("123");
