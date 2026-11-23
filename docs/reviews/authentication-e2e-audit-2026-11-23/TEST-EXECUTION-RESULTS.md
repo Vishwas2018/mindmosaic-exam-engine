@@ -16,7 +16,9 @@
 | **CI Full Verification Suite** (PR #160, `db65f78c`) | 7 jobs | 7 | 0 | 0 | 0 | `core` (8m02s), `e2e` (12m44s), `e2e-auth` (7m12s), `rls` (1m55s), `scholarship-drafts` (28s), `Vercel` |
 | **Hosted Audit Cycle 1 (Round 6)** on `db65f78c` | 14 | 11 | 0 (app) | 3 (`DEF-AUTH-005`) | 0 | All 11 non-allowlist-blocked tests passed (`REG-01`, `REG-03`, `AUTH-01`, `AUTH-02`, `RBAC-01`, `SEC-01`, `XBR-01` ×5) |
 | **Hosted Audit Cycle 2 (Round 7)** on `db65f78c` | 12 | 11 | 0 (app) | 1 (`DEF-AUTH-005`) | 2 (`REG-02`, `REG-04` already blocked by `DEF-AUTH-005`) | 100% pass on all 11 executable tests (`REG-01`, `REG-03`, `AUTH-01`, `AUTH-02`, `RBAC-01`, `SEC-01`, `XBR-01` ×5) |
-| **Follow-Up Real-Email Re-Check (18:16–18:19 AEDT)** on `f835691f` (`rmwsxnemo`, `rmwsxqd66`) | 5 | 2 (`REG-01`, `REG-03`) | 0 (app) | 3 (`REG-02`, `REG-04`, `REC-01` — `DEF-AUTH-005`) | 0 | Confirmed `DEF-AUTH-005` is **still open** in DEV Supabase (`redirect_to` still rewrites to `git-dev`); Gmail SMTP delivery 100% first-attempt |
+| **Follow-Up Real-Email Re-Check #1 (18:16–18:19 AEDT)** on `f835691f` (`rmwsxnemo`, `rmwsxqd66`) | 5 | 2 (`REG-01`, `REG-03`) | 0 (app) | 3 (`REG-02`, `REG-04`, `REC-01` — `DEF-AUTH-005`) | 0 | Confirmed `DEF-AUTH-005` still open in DEV Supabase; Gmail SMTP 100% first-attempt |
+| **Follow-Up Real-Email Re-Check #2 (21:45–21:50 AEDT)** on `2cafbab3` (`rmwt539ke`, `rmwt546p5`, `rmwt55y2y`) + `generateLink` probe | 3 E2E + 20 probe checks | 0 E2E (3 blocked) / 2 probe matches (`git-dev`, `git-integra-6b98ba`) | 0 (app) | 3 (`REG-02`, `REG-04`, `REC-01` — `DEF-AUTH-005`) | 0 | All 4 real emails delivered first-attempt (`<15s`); DEV Supabase still fell back to `git-dev` for `git-audit-a-f35ca9` and all PR #160 deployment URLs |
+| **DEF-AUTH-006 Unit Regression (`vitest`)** | 28 | 28 | 0 | 0 | 0 | `forgot-password-page.test.tsx` (3), `sign-in-panel.test.tsx` (15), `auth-audit-hardening.test.ts` (10) |
 | **Baseline Real-Email Recovery** (PR #156 allowlisted alias `rmwsuwdnl`) | 7 | 4 | 0 (app) | 0 | 0 | `REC-01` (full recovery + cross-device session invalidation) & `REG-03` passed on allowlisted alias |
 
 ---
@@ -35,8 +37,9 @@ Every real-email test recorded first-attempt delivery, latency, misses, resends,
 | `rmwsx0oq1` | `git-audit-a-f35ca9` (`db65f78c`) | `REC-01` | Password Reset | **YES** | **<15s** | 0 | No | Custom Gmail SMTP |
 | `rmwsxnemo` | `git-audit-a-f35ca9` (`f835691f`) | `REG-02`, `REG-03`, `REG-04` (×2) | Confirmation (4 emails) | **YES (4/4)** | **<15s** | 0 | No | Custom Gmail SMTP |
 | `rmwsxqd66` | `git-audit-a-f35ca9` (`f835691f`) | `REC-01` | Password Reset | **YES** | **<15s** | 0 | No | Custom Gmail SMTP |
+| `rmwt539ke`, `rmwt546p5`, `rmwt55y2y` | `git-audit-a-f35ca9` (`2cafbab3`) | `REG-02`, `REG-04` (×2), `REC-01` | Confirmation (3) & Reset (1) | **YES (4/4)** | **<15s** | 0 | No | Custom Gmail SMTP |
 
-**Key Email Finding:** **15 / 15 first-attempt email deliveries succeeded (0 missing emails, 0 retry-assisted recoveries)** across the entire audit and follow-up re-check, all arriving in 0–20 seconds via custom Gmail SMTP. The sole remaining blocker on PR #160's Preview alias is `DEF-AUTH-005` (DEV Supabase `uri_allow_list` redirecting `redirect_to` to `git-dev`).
+**Key Email Finding:** **19 / 19 first-attempt email deliveries succeeded (0 missing emails, 0 retry-assisted recoveries)** across the entire audit and both follow-up checks, all arriving in 0–20 seconds via custom Gmail SMTP. The sole remaining blocker on PR #160's Preview alias is `DEF-AUTH-005` (DEV Supabase `uri_allow_list` redirecting `redirect_to` to `git-dev`; blocked tests are explicitly reported as **BLOCKED**, never passed).
 
 ---
 

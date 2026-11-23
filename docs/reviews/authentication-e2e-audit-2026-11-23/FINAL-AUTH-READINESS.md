@@ -2,7 +2,11 @@
 
 ## Recommendation: **CONDITIONAL GO for Manual UAT**
 
-*(Status remains **CONDITIONAL GO** — live re-verification at 18:19 AEDT on `rmwsxnemo`/`rmwsxqd66` confirmed `DEF-AUTH-005` has not yet been updated in DEV Supabase Auth Redirect URLs. Application code, RBAC, isolation, session security, CSRF protection, cross-browser resilience, and CI are all **GREEN**.)*
+*(Status remains **CONDITIONAL GO** — NOT unconditional GO yet. Live re-verification at 21:45–21:50 AEDT via `rmwt539ke`/`rmwt546p5`/`rmwt55y2y` and a direct 20-URL `generateLink` probe proved DEV Supabase `mfglzabnayacssgertat` is **still** falling back to `git-dev` for `git-audit-a-f35ca9` and all PR #160 deployment hosts, leaving `REG-02`, `REG-04`, and `REC-01` **BLOCKED** on PR #160's Preview. All application defects `DEF-AUTH-001`..`004` and `DEF-AUTH-006` are now fixed and verified.)*
+
+- **Ready for UAT on `git-dev` / PR #156 allowlisted Preview immediately:** **GO** (both origins confirmed `MATCH` in DEV Supabase).
+- **Ready for UAT on PR #160's Preview (`git-audit-a-f35ca9`) for email confirmation/recovery:** **NO-GO until `DEF-AUTH-005` rule is saved in DEV Supabase `mfglzabnayacssgertat` and `generateLink` returns `MATCH`.**
+- **Combined Integration Plan:** See [COMBINED-INTEGRATION-REGRESSION-PLAN.md](./COMBINED-INTEGRATION-REGRESSION-PLAN.md).
 
 ---
 
@@ -67,6 +71,6 @@
 |---|---|---|
 | `DEF-AUTH-005` DEV Supabase `uri_allow_list` missing wildcard Preview pattern | **Medium** | Owner adds wildcard redirect URL in DEV Supabase Dashboard before UAT on feature-branch Previews (Production custom domain must also be verified in PROD Supabase before launch). |
 | `httpOnly: false` on `sb-*-auth-token` (`@supabase/ssr` architecture) | **Low (Accepted)** | Mitigated by `Secure` (`DEF-AUTH-004`), `SameSite=Lax`, and nonce-based CSP; enable `MM_DEV_AUTH_CSP_ENFORCE=1` on Preview & Prod. |
-| `DEF-AUTH-006` standalone `/auth/forgot` lacks 30s cooldown & validation parity | **Low** | Recommend fixing before public family beta; non-blocking for DEV manual UAT. |
+| `DEF-AUTH-006` standalone `/auth/forgot` validation & 30s resend cooldown | **Resolved** | Fixed in PR #160 via shared `src/features/auth/forgot-password.ts` + 3 component regression tests (`forgot-password-page.test.tsx`). Duplicate `/auth/session-expired` (zero prod refs) deferred post-beta. |
 | `SEC-REV-01` `server.ts` checks `process.env.VERCEL === "1"` for `Secure` | **Low** | Fully protects Vercel Preview & Production; add `x-forwarded-proto` fallback only if ever deployed off Vercel. |
 | OAuth providers disabled in DEV (`configuredOAuthProviders() === []`) | **Informational** | Re-test `/auth/callback` live before enabling any social OAuth provider. |

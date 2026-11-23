@@ -241,6 +241,10 @@ test.describe("Auth Audit 01: Registration & Email Verification", () => {
     const mail1 = await waitForMailWithMetrics(inbox, /confirm/i, seen, "REG-02-initial-confirm", t0);
     const link1 = actionLink(mail1);
     checkLinkTarget(link1);
+    const redirect1 = new URL(link1).searchParams.get("redirect_to");
+    if (redirect1) {
+      expect(new URL(redirect1).pathname, "confirmation callback path preserved").toBe("/auth/confirm");
+    }
 
     // Tampered link fails and leaves account unconfirmed
     await page.goto(tamperLink(link1));

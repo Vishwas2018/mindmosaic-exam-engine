@@ -313,13 +313,18 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
     });
     await expect(pageOther.getByRole("heading", { name: "Set a new password" })).toHaveCount(0);
 
-    // Request password reset via /auth/forgot (testing the standalone forgot route too!)
+    // Verify DEF-AUTH-006 validation & 30s resend cooldown on standalone /auth/forgot
     const seen = new Set<string>();
     await page.goto("/auth/forgot");
+    await page.getByLabel(/^email$/i).fill("not-an-email");
+    await page.getByRole("button", { name: /send reset link/i }).click();
+    await expect(page.locator("#auth-error")).toContainText(/complete email address/i);
+
     await page.getByLabel(/^email$/i).fill(inbox.address);
     const t0 = Date.now();
     await page.getByRole("button", { name: /send reset link/i }).click();
     await expect(page.getByRole("heading", { name: /check your email/i })).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByRole("button", { name: /resend available in \d+s/i })).toBeDisabled();
 
     let firstAttempt = true;
     let mail;
@@ -342,6 +347,10 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
 
     const link = actionLink(mail);
     checkLinkTarget(link);
+    const redirectTo = new URL(link).searchParams.get("redirect_to");
+    if (redirectTo) {
+      expect(new URL(redirectTo).pathname, "recovery callback path preserved").toBe("/auth/reset");
+    }
 
     // Follow recovery link in the requesting browser -> set new password
     await page.goto(link);

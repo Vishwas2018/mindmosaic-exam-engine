@@ -8,6 +8,13 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 import { useAuth } from "../AuthProvider";
+import {
+  FORGOT_COOLDOWN_SECONDS,
+  FORGOT_FALLBACK_ERROR,
+  FORGOT_NETWORK_ERROR,
+  FORGOT_SUCCESS_NOTICE,
+  validateForgotEmail,
+} from "../forgot-password";
 import { configuredOAuthProviders } from "../oauth-providers";
 import { roleHomePath } from "../roles";
 import { safeNextPath } from "../safe-next";
@@ -55,7 +62,6 @@ import { SocialButtons } from "./SocialButtons";
 type AccountKind = "parent" | "student";
 type Screen = "signin" | "forgot" | "choose";
 
-const FORGOT_COOLDOWN_SECONDS = 30;
 /** Soft, client-side-only guard; real lockout enforcement is Supabase's. */
 const LOCKOUT_AFTER_ATTEMPTS = 5;
 const LOCKOUT_SECONDS = 30;
@@ -314,8 +320,9 @@ export function SignInPanel({
   async function handleForgot(event: FormEvent) {
     event.preventDefault();
     if (submitting || forgotCooldown > 0) return;
-    if (!resetEmail.trim()) {
-      setError("Enter the email address on the account.");
+    const validationError = validateForgotEmail(resetEmail);
+    if (validationError) {
+      setError(validationError);
       shake.trigger();
       return;
     }
@@ -326,16 +333,16 @@ export function SignInPanel({
     try {
       result = await auth.sendPasswordReset(resetEmail.trim());
     } catch {
-      result = { ok: false, message: NETWORK_MESSAGE };
+      result = { ok: false, failure: "network", message: FORGOT_NETWORK_ERROR };
     }
     if (result.ok) {
-      setNotice(
-        result.message ??
-          "If that email has an account, a reset link is on its way. It expires in one hour.",
-      );
+      setNotice(result.message ?? FORGOT_SUCCESS_NOTICE);
       setForgotCooldown(FORGOT_COOLDOWN_SECONDS);
     } else {
-      setError(result.message ?? "We couldn\u2019t send a reset link just now. Please try again in a few minutes.");
+      setError(result.message ?? FORGOT_FALLBACK_ERROR);
+      if (result.failure === "rate_limited") {
+        setForgotCooldown(FORGOT_COOLDOWN_SECONDS);
+      }
       shake.trigger();
     }
     setSubmitting(false);
@@ -442,7 +449,7 @@ export function SignInPanel({
           lead="We’ll email a secure link to set a new one. Student PINs are reset by a parent from the parent view, not from here."
         />
 
-        <form key={shake.key} onSubmit={handleForgot} className={twMerge("grid gap-4", shake.className)}>
+        <form key={shake.key} onSubmit={handleForgot} noValidate className={twMerge("grid gap-4", shake.className)}>
           <MmField
             id="reset-email"
             label="Email"

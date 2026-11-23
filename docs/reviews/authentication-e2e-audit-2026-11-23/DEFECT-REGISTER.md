@@ -12,8 +12,8 @@ All defects below were discovered via static security review and live hosted DEV
 | `DEF-AUTH-001` | Application (AuthZ) | **Medium** | Parent / Teacher / Admin — Missing `student` role gate on `/api/student/onboarding/preferences` & `/questions` | **Fixed & Verified** | `288fafcd` |
 | `DEF-AUTH-002` | Application (CSRF) | **Medium** | Allowlisted preview users — Missing `checkOrigin` CSRF guard on Singapore Maths sample state-changing routes | **Fixed & Verified** | `288fafcd` |
 | `DEF-AUTH-003` | Application (API Auth) | **Low** | Anonymous / Guest / Student / Teacher / Admin — `POST /api/parent/children` returned `400` instead of `401`/`403` | **Fixed & Verified** | `288fafcd` |
-| `DEF-AUTH-005` | Infrastructure (Supabase DEV Auth) | **Medium** | Preview branch real-email confirmation & password recovery redirects | **Still Open (Re-verified 18:19 AEDT on `rmwsxnemo`/`rmwsxqd66` — Owner Dashboard Action Required)** | N/A (Supabase Dashboard) |
-| `DEF-AUTH-006` | Application (UX / Consistency) | **Low** | Parent — Standalone `/auth/forgot` lacks client email validation & 30s resend cooldown present in `/sign-in?mode=forgot`; duplicate `/auth/session-expired` vs `/session-expired` | **Assessed (Fix `/auth/forgot` before family beta; defer `/auth/session-expired`)** | Deferred |
+| `DEF-AUTH-005` | Infrastructure (Supabase DEV Auth) | **Medium** | Preview branch real-email confirmation & password recovery redirects | **Still Open (Re-verified 21:50 AEDT via live runs `rmwt539ke`/`rmwt546p5`/`rmwt55y2y` + direct `generateLink` probe across 10 Preview hosts)** | N/A (Supabase Dashboard) |
+| `DEF-AUTH-006` | Application (UX / Consistency) | **Low** | Parent — Standalone `/auth/forgot` lacked email format validation, focus/shake error handling, & 30s resend cooldown present in `/sign-in?mode=forgot`; duplicate `/auth/session-expired` | **Fixed (`/auth/forgot` parity & 30s cooldown) & Verified; `/auth/session-expired` deferred** | Pending commit on PR #160 |
 
 ---
 
@@ -70,17 +70,26 @@ All defects below were discovered via static security review and live hosted DEV
   - `REG-02`, `REG-04`, and `REC-01` all delivered real emails on the first attempt (`<15s`), confirming Gmail SMTP is healthy.
   - However, Supabase GoTrue still rewrote `redirect_to` from `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/auth/confirm` (and `/auth/reset`) to `https://mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app`.
   - In `REG-04`, following the emailed link landed on `https://mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app/?code=...` (dropping `/auth/confirm`, switching hosts, losing the PKCE verifier, and hitting the Vercel SSO wall for `git-dev`).
-- **Owner Remediation Action:** In Supabase DEV (`mfglzabnayacssgertat`) -> **Authentication -> URL Configuration -> Redirect URLs**, add:
-  `https://mindmosaic-exam-engine-*-vishwas2018s-projects.vercel.app/**`
-  Then re-run `01-registration-and-verification.spec.ts` and `02-login-logout-recovery.spec.ts -g REC-01` against PR #160's Preview URL.
+- **Follow-Up Live Re-Check #2 (2026-11-23 21:45–21:50 AEDT, runs `rmwt539ke`, `rmwt546p5`, `rmwt55y2y` on PR #160 Preview `2cafbab3` + direct `devAdmin().auth.admin.generateLink` probe):**
+  - **Result:** **STILL NOT MATCHING IN DEV SUPABASE (`mfglzabnayacssgertat`).**
+  - Direct `generateLink` probe confirmed:
+    - `https://mindmosaic-exam-engine-git-integra-6b98ba-vishwas2018s-projects.vercel.app/auth/confirm` -> **MATCH**
+    - `https://mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app/auth/confirm` -> **MATCH**
+    - `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app` (root, `/`, `/auth/confirm`, `/auth/reset`, `/auth/callback`) -> **FALLBACK to `git-dev`**
+    - All ephemeral PR #160 deployment hosts (`ix7ullval`, `p3yui86pu`, `1gzn4pw2h`, `f29hd91b1`, `2t4b79a4w`, `otn16naz0`) & wildcard probe host -> **FALLBACK to `git-dev`**
+  - **Live E2E Runs (`rmwt539ke` `REG-02`, `rmwt546p5` `REG-04`, `rmwt55y2y` `REC-01`):** Real emails arrived on first attempt (`<15s`), but all 3 remain **BLOCKED** (never marked passed) because DEV Supabase still rewrote `redirect_to` to `git-dev`.
+- **Owner Remediation Action:** In Supabase DEV (`mfglzabnayacssgertat`) -> **Authentication -> URL Configuration -> Redirect URLs**:
+  1. Confirm you are in project **`mfglzabnayacssgertat`** (DEV).
+  2. Add the exact branch alias with `/**`: `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/**` (and optionally the wildcard `https://**-vishwas2018s-projects.vercel.app/**`).
+  3. Click **Save changes** and wait for the confirmation toast.
 
 ---
 
 ### `DEF-AUTH-006` — UX Divergence Between `/auth/forgot` and `/sign-in?mode=forgot` & Duplicate `/auth/session-expired`
 - **Severity:** Low (UX Consistency — No Security Impact)
-- **Category:** Application Observation
-- **Follow-Up Code Trace & Recommendation:**
-  1. **`/auth/forgot` (`src/app/auth/forgot/page.tsx`):** Actively linked from `src/app/auth/reset/page.tsx:267` whenever a reset link is expired, used, opened on another device, or opened cold. Unlike `/sign-in?mode=forgot`, `/auth/forgot` lacks client-side email format validation, `#auth-error` focus/shake polish, and a 30s resend cooldown with an in-place resend button.
-     - **Recommendation:** **Fix before public family beta** (low risk, ~30 min: redirect `/auth/forgot` to `/sign-in?mode=forgot` or reuse the shared forgot-password card), **not a blocker for DEV manual UAT** since `/auth/forgot` functions reliably end-to-end (verified in `REC-01` on `rmwsuwdnl`).
-  2. **`/auth/session-expired` (`src/app/auth/session-expired/page.tsx`):** `git grep` confirmed **zero** production links or redirects point here (all live redirects in `AuthProvider.tsx:244` and `require-role.ts:71` go to `/session-expired?next=...`); only legacy `e2e/auth/auth-journey.spec.ts` visits it.
-     - **Recommendation:** **Defer post-beta** (no user impact; retire alongside test cleanup in a follow-up PR).
+- **Category:** Application Defect (Fixed before family beta)
+- **Fix Summary:**
+  1. Extracted shared password-recovery validation, copy, and 30-second cooldown constants into `src/features/auth/forgot-password.ts`.
+  2. Updated `src/app/auth/forgot/page.tsx` and `src/features/auth/components/SignInPanel.tsx` to share identical empty/malformed email validation (`noValidate` + `#auth-error` focus/shake), network/rate-limit handling, student PIN guidance, and a 30-second resend cooldown (`Resend available in Xs` -> `Resend reset link` + `Use a different email`).
+  3. Added component regression suite `src/tests/components/forgot-password-page.test.tsx` (3 tests — PASS alongside `sign-in-panel.test.tsx` 15/15 and `auth-audit-hardening.test.ts` 10/10) and E2E assertions in `REC-01`.
+  4. Duplicate `/auth/session-expired`: verified zero production references (`AuthProvider.tsx` and `require-role.ts` route exclusively to `/session-expired?next=...`); deferred for post-beta route cleanup alongside `e2e/auth/auth-journey.spec.ts`.

@@ -7,9 +7,10 @@ This checklist is designed for rapid (~15-minute), high-confidence owner sign-of
 ## Pre-UAT Gate (Required Before Testing Feature-Branch Previews)
 
 - [ ] **Resolve `DEF-AUTH-005` in DEV Supabase (`mfglzabnayacssgertat`):**
+  - Confirm the selected project is **`mfglzabnayacssgertat`** (DEV).
   - Open **Authentication -> URL Configuration -> Redirect URLs**.
-  - Add `https://mindmosaic-exam-engine-*-vishwas2018s-projects.vercel.app/**` and click **Save**.
-  - *(Verify live: trigger one sign-up or forgot-password request on PR #160's Preview URL `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app` and inspect the emailed link's `redirect_to` parameter — it MUST stay on `git-audit-a-f35ca9`, NOT `git-dev`.)*
+  - Add `https://mindmosaic-exam-engine-git-audit-a-f35ca9-vishwas2018s-projects.vercel.app/**` (exact PR #160 branch alias with `/**`) and/or `https://**-vishwas2018s-projects.vercel.app/**`, then click **Save changes**.
+  - *(Note: As of 21:50 AEDT, direct `generateLink` probe confirmed DEV Supabase still only matches `git-dev` and `git-integra-6b98ba` — `git-audit-a-f35ca9` was still falling back to `git-dev`.)*
 - [ ] **CSP Enforcement Flag (Optional Pre-Beta Check):** Confirm whether `MM_DEV_AUTH_CSP_ENFORCE=1` should be enabled on Preview/Production.
 - [ ] **Confirm Environment:** Target DEV Preview only (never production `uermhsptduikehuyceiz`).
 
