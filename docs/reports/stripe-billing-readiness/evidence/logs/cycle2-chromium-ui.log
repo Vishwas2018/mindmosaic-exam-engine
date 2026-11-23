@@ -1,0 +1,12 @@
+hosted acceptance rmwt67zgs: feat/stripe-billing-readiness 08352f8a dpl_ExKZyrTDd8Fn5gWbECNTXTsDP4G4
+
+Running 6 tests using 1 worker
+
+  ✓  1 [desktop-1440] › e2e\hosted\s3-billing-ui.spec.ts:50:5 › U1 plan picker: both tiers, cadence switch, honest prices, no horizontal overflow @responsive (13.4s)
+  ✓  2 [desktop-1440] › e2e\hosted\s3-billing-ui.spec.ts:99:5 › U2 Subscribe sends the parent to Stripe-hosted Checkout (no card field on our origin) (16.7s)
+  ✓  3 [desktop-1440] › e2e\hosted\s3-billing-ui.spec.ts:108:5 › U3 sandbox card payment succeeds, activates the plan via webhook, then a second checkout is refused (29.6s)
+  ✓  4 [desktop-1440] › e2e\hosted\s3-billing-ui.spec.ts:138:5 › U4 sandbox declined card shows the issuer's refusal and never activates the plan (24.1s)
+  ✓  5 [tablet-834] › e2e\hosted\s3-billing-ui.spec.ts:50:5 › U1 plan picker: both tiers, cadence switch, honest prices, no horizontal overflow @responsive (12.1s)
+  ✓  6 [mobile-390] › e2e\hosted\s3-billing-ui.spec.ts:50:5 › U1 plan picker: both tiers, cadence switch, honest prices, no horizontal overflow @responsive (12.1s)
+
+  6 passed (1.9m)

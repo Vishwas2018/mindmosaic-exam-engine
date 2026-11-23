@@ -1,0 +1,15 @@
+hosted acceptance rmwt5jyl3: feat/stripe-billing-readiness 08352f8a dpl_ExKZyrTDd8Fn5gWbECNTXTsDP4G4
+
+Running 9 tests using 1 worker
+
+  ✓  1 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:51:5 › W1 webhook signature: missing, malformed, wrong secret, tampered body and replayed timestamp are all rejected (4.2s)
+  ✓  2 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:73:5 › W2 duplicate delivery is acknowledged once and applied once (9.6s)
+  ✓  3 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:93:5 › W3 out-of-order and delayed events cannot resurrect a cancelled subscription (12.9s)
+  ✓  4 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:127:5 › S1 unauthenticated and cross-site callers are refused on every billing route (24.2s)
+  ✓  5 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:169:5 › S2 checkout is refused with 409 while a paid subscription is in period (23.2s)
+  ✓  6 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:190:5 › S3 a trial parent gets a real Stripe Checkout session bound to their own customer and plan price (14.4s)
+  ✓  7 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:215:5 › S4 RLS: a parent token cannot read, forge or call the billing write paths, and sees only its own row (24.5s)
+  ✓  8 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:286:5 › S5 entitlement: a student of a parent without access is held to the free sample, a paid family is not (59.6s)
+  ✓  9 [desktop-1440] › e2e\hosted\s2-billing-security.spec.ts:360:5 › S6 Individual plan caps the account at one child; Family allows three and refuses a fourth (46.8s)
+
+  9 passed (3.8m)
