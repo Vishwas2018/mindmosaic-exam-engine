@@ -13,9 +13,9 @@
 
 **Why GO for UAT.** The billing implementation behaves correctly end to end against the real Stripe sandbox and the real DEV database. Two consecutive complete hosted cycles on the tested commit passed (31 of 31 tests each, no flaky, no skipped), CI is green on the same commit, and there are no unresolved critical or high-severity billing code defects.
 
-**Why NO-GO for production.** Four things are not engineering defects but must be settled first:
+**Why NO-GO for production.** These things are not engineering defects but must be settled first:
 
-1. **Free-plan claim does not match behaviour (O-01).** See below. Customer-facing claims must be true.
+1. ~~Free-plan claim does not match behaviour (O-01).~~ **Copy corrected in `d96a282c`** to describe guest practice; entitlement rules unchanged. Whether to enforce a guest limit is still an owner policy question (below).
 2. **Prices are placeholders for testing (O-02).** Individual A$14.99/month, A$149/year; Family A$19.99/month, A$169/year are the retained sandbox amounts. They are not approved production pricing.
 3. **Legal pages are drafts (O-04).** Privacy, terms and billing and refund wording await sign-off.
 4. **A live Stripe account has not been set up.** Business details, tax settings, live products and prices, a live webhook endpoint on an unprotected domain, and live-mode keys are all out of scope and untouched.
@@ -95,3 +95,9 @@ Note: because the local key files are gone, re-running the hosted billing suite 
 ## Delivery
 
 All code and these reports are on `feat/stripe-billing-readiness` and in draft PR #159. The PR is not merged and was not marked ready.
+
+## Update 2026-11-24
+
+- O-01 copy corrected (`d96a282c`); PR #159 CI green on it.
+- Integration with #156 and #160 assessed: see `INTEGRATION-ASSESSMENT.md`. No integration defects; combined unit suite and CI green; combined hosted regression still to run once a sandbox key is re-issued.
+- Sandbox prices remain provisional.
