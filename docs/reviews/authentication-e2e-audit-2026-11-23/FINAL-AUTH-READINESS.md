@@ -1,45 +1,72 @@
-# MindMosaic Final Authentication Readiness Assessment (2026-11-23)
+# MindMosaic Final Authentication Readiness Assessment (2026-11-23 — Follow-Up Update)
 
 ## Recommendation: **CONDITIONAL GO for Manual UAT**
 
-MindMosaic's authentication application code, role-based access control, cross-family data isolation, session security, and cross-browser resilience are **READY** for owner manual UAT once the single DEV Supabase configuration item (`DEF-AUTH-005`) is updated (or when testing on the already-allowlisted `git-dev` / PR #156 Preview URLs).
+*(Status remains **CONDITIONAL GO** — live re-verification at 18:19 AEDT on `rmwsxnemo`/`rmwsxqd66` confirmed `DEF-AUTH-005` has not yet been updated in DEV Supabase Auth Redirect URLs. Application code, RBAC, isolation, session security, CSRF protection, cross-browser resilience, and CI are all **GREEN**.)*
 
 ---
 
-## Release Acceptance Criteria Verification
+## 1. Release Acceptance Criteria Verification
 
 | Acceptance Criterion | Status | Evidence |
 |---|---|---|
-| All implemented authentication features inventoried & classified | **MET** | `AUTH-COVERAGE-MATRIX.md` (supported vs intentionally unsupported vs unconfigured) |
-| All Critical and High-severity defects resolved | **MET** | 0 Critical open; 1 High (`DEF-AUTH-004` missing `Secure` cookie flag) fixed in `288fafcd` and verified live |
+| All implemented authentication features inventoried & classified | **MET** | `AUTH-COVERAGE-MATRIX.md` |
+| All Critical and High-severity defects resolved | **MET** | 0 Critical; 1 High (`DEF-AUTH-004` `Secure` cookie) fixed in `288fafcd` and independently verified |
 | Every supported role's access permissions verified (6 roles) | **MET** | `RBAC-01`: 114/114 UI routes + 60/60 API endpoints verified across Anonymous, Guest, Student, Parent, Teacher, Admin |
-| Registration, email verification, login, logout, and recovery verified | **MET (with `DEF-AUTH-005` note)** | Real Gmail SMTP delivery 100% first-attempt (0–20s); full recovery + cross-device session invalidation passed on allowlisted alias (`rmwsuwdnl`); branch-preview redirect requires `DEF-AUTH-005` wildcard |
+| Registration, email verification, login, logout, and recovery verified | **CONDITIONAL (`DEF-AUTH-005`)** | 15/15 real Gmail SMTP emails arrived on first attempt (0–20s); full recovery + cross-device invalidation passed on allowlisted PR #156 alias (`rmwsuwdnl`); PR #160 branch alias still falls back to `git-dev` until DEV Supabase Redirect URLs include wildcard Preview aliases |
 | Cross-device & cross-browser scenarios passed | **MET** | Chromium (`1440`, `834`, `390`), Firefox (`1440`), and WebKit (`1440`) passed **10 / 10** across 2 consecutive cycles (`CROSS-BROWSER-RESULTS.md`) |
-| Session security & RLS checks passed | **MET** | `SEC-01` (2 consecutive cycles) + CI `rls` (1m55s PASS) + unit hardening tests (61/61 PASS) |
+| Session security & RLS checks passed | **MET** | `SEC-01` (2 consecutive cycles) + independent 33-route CSRF/role audit + `@supabase/ssr` cookie inspection + CI `rls` PASS |
 | Two complete consecutive hosted regression cycles on final SHA | **MET** | Cycles 1 & 2 passed on SHA `db65f78c` (`dpl_CyLHacwwUYPfjdT63F523W3iL4Jp`) for all 11 non-allowlist-blocked tests (`REGRESSION-EVIDENCE.md`) |
-| All CI checks green | **MET** | PR #160: **7 / 7 checks GREEN** (`core`, `e2e`, `e2e-auth`, `rls`, `scholarship-drafts`, `Vercel`) |
-| Remaining gaps & risks explicitly documented | **MET** | See Section below |
+| All CI checks green | **MET** | PR #160 (`db65f78c`), PR #156 (`3253ab1e`), and PR #159 (`d7a9c72d`) all **7 / 7 GREEN** |
 
 ---
 
-## Summary of Remediated Defects (PR #160, SHA `288fafcd` / `db65f78c`)
+## 2. Cross-PR Comparison: PR #160 vs PR #156 vs PR #159 (Stripe Billing)
 
-1. **`DEF-AUTH-004` (High — Fixed & Verified):** Enforced `Secure` and `SameSite=Lax` attributes on Supabase auth cookies (`sb-*-auth-token`) across browser, server, and middleware clients on HTTPS deployments.
-2. **`DEF-AUTH-001` (Medium — Fixed & Verified):** Added missing `profiles.role === "student"` gate (`403 students_only`) to `POST /api/student/onboarding/preferences` and `GET /api/student/onboarding/questions`.
-3. **`DEF-AUTH-002` (Medium — Fixed & Verified):** Added missing `checkOrigin(request)` CSRF protection to Singapore Maths sample state-changing routes (`submit`, `reveal`, `DELETE session`).
-4. **`DEF-AUTH-003` (Low — Fixed & Verified):** Fixed `POST /api/parent/children` to return proper HTTP `401` (unauthenticated), `403` (non-parent), and `503` (unconfigured) status codes instead of `400`.
+| Dimension | PR #156 (`integration/beta-readiness`) | PR #159 (`feat/stripe-billing-readiness`) | PR #160 (`audit/auth-e2e-20261123`) |
+|---|---|---|---|
+| **Base Branch** | `dev` (verification-only aggregation of 13+ PRs) | `integration/beta-readiness-claude-20261120` (#156) | `integration/beta-readiness-claude-20261120` (#156) |
+| **Head SHA / CI** | `3253ab1e` — **7/7 PASS** | `d7a9c72d` — **7/7 PASS** | `db65f78c` (code) / `f835691f` (docs) — **7/7 PASS** |
+| **DB Migrations** | None new beyond `dev` | 1 (`20261106090000_individual_plans.sql`) | **None** |
+| **Dry-Run 3-Way Merge (`git merge-tree`)** | Common base for #159 and #160 | Merges cleanly with #160 (**0 textual conflicts**, tree `34123b2d`) | Merges cleanly with #159 (**0 textual conflicts**) |
+
+### Shared Authentication File & Semantic Risk Analysis
+- **Sole overlapping file between PR #159 and PR #160:** `src/features/auth/provision-child.ts`
+  - **PR #160** adds `errorCode?: "unauthenticated" | "forbidden" | "not_configured"` so `POST /api/parent/children` returns proper `401`/`403`/`503` instead of `400`.
+  - **PR #159** adds plan-based child cap (`maxChildrenForPlan`: `1` for Individual, `3` for Family/Trial/null) right before duplicate-name checking.
+  - **Conflict/Regression verdict:** **0 textual conflicts, 0 functional regressions.** Because `maxChildrenForPlan(null)` returns `3`, existing trial/free-beta flows and single-child audit tests continue working unchanged.
+- **Cross-PR Regression Risks When Combining PR #159 + PR #160:**
+  1. **Billing Gate on `/parent` (`requireActiveSubscription`):** Once PR #159 enables Stripe Preview env vars, `ParentLayout` redirects parents without an active trial/subscription to `/billing` (while PR #159 explicitly exempts students from `/billing` redirects, narrowing them to the Free sample in `/api/exam/session`). Seeded synthetic parents created via `devAdmin().auth.admin.createUser()` must continue receiving a trial `subscriptions` row from the DB trigger so `RBAC-01` / `AUTH-02` / `XBR-01` remain green.
+  2. **CSRF on `/api/stripe/checkout` once Stripe is configured:** When Stripe is off (PR #160 alone), `/api/stripe/checkout` returns `503` before `checkOrigin`; once PR #159 turns Stripe on, `/api/stripe/checkout` executes `checkOrigin` and returns `403` on evil/missing `Origin`. Re-verify `/api/stripe/checkout` CSRF in the combined integration pass.
+  3. **`Secure` Auth Cookies (`DEF-AUTH-004`) × PR #159 Hosted Billing Specs (`s1`–`s3`):** `s1`–`s3` run over HTTPS Vercel Preview and will cleanly adopt `Secure` cookies; local HTTP CI (`e2e-auth`) stays unaffected because `isHttps` is `false` on HTTP loopback.
 
 ---
 
-## Remaining Open Item & Documented Gaps
+## 3. Recommended Safe Integration Sequence (No Merges Performed)
 
-1. **`DEF-AUTH-005` (Medium — Owner Supabase DEV Config Action, ~1 minute):**
-   - Add `https://mindmosaic-exam-engine-*-vishwas2018s-projects.vercel.app/**` to Supabase DEV (`mfglzabnayacssgertat`) -> **Authentication -> URL Configuration -> Redirect URLs** so email confirmation and password recovery work seamlessly on any Vercel Preview branch without falling back to `git-dev`.
-2. **Not Independently Tested / Explicitly Scoped Out:**
-   - **OAuth / Social Sign-In (`google`, `apple`, `azure`, `facebook`):** Currently disabled in DEV (`configuredOAuthProviders() === []`); `/auth/callback` was audited statically.
-   - **Older-vs-Latest Verification Link Race:** Not independently re-tested due to GoTrue's 60s `smtp_max_frequency` cooldown and `DEF-AUTH-005` on the new branch alias.
-   - **Non-blocking UX polish (`DEF-AUTH-006`):** Standalone `/auth/forgot` lacks the 30s client resend cooldown present in `/sign-in?mode=forgot`; duplicate `/auth/session-expired` route exists alongside `/session-expired`.
-3. **Recommended Next Steps for Owner:**
-   - Add the wildcard Redirect URL in Supabase DEV (`DEF-AUTH-005`).
-   - Review Draft PR #160 (`audit/auth-e2e-20261123`).
-   - Run the ~15-minute `MANUAL-UAT-CHECKLIST.md` on DEV Preview.
+1. **Step 1 — DEV Supabase Redirect URL Configuration (`DEF-AUTH-005`, Owner Action):**
+   - Add `https://mindmosaic-exam-engine-*-vishwas2018s-projects.vercel.app/**` in DEV Supabase (`mfglzabnayacssgertat`) -> Authentication -> URL Configuration -> Redirect URLs.
+   - Re-run `e2e/hosted/auth-audit/01-registration-and-verification.spec.ts` and `02-login-logout-recovery.spec.ts -g REC-01` on PR #160's Preview to confirm 100% pass and upgrade verdict to **UNCONDITIONAL GO**.
+2. **Step 2 — Land PR #156's Component PRs into `dev` (in PR #156's documented order):**
+   - Do **not** merge PR #156 directly (verification-only branch); merge its component PRs (`#147`, `#148`, `#149`+`#151`, `#150`+`#152`, `#146`, `#145`+`#155`, `#143`+`#153`, `#144`+`#154`, `#157`, `#158`, Redis guest guard) into `dev` and confirm `dev` CI is green.
+3. **Step 3 — Rebase & Merge PR #160 (`audit/auth-e2e-20261123`) into `dev` BEFORE PR #159:**
+   - PR #160 has zero DB migrations, small surgical surface (10 app files), and closes `DEF-AUTH-001`..`004` (`Secure` cookies, student onboarding role gate, sample CSRF, 401/403 status codes) before paid billing is enabled.
+   - Optionally include the small `/auth/forgot` UX polish (`DEF-AUTH-006`) before public family beta.
+4. **Step 4 — Rebase & Merge PR #159 (`feat/stripe-billing-readiness`) onto updated `dev`:**
+   - Automatic clean merge on `src/features/auth/provision-child.ts`.
+   - Apply `supabase/migrations/20261106090000_individual_plans.sql` to DEV Supabase (with explicit owner approval).
+   - Run full CI + combined hosted regression (`s1`–`s3` billing + `01`–`04` auth audit with Stripe Preview env vars active).
+5. **Step 5 — Owner Manual UAT & Production Release Gate:**
+   - Owner executes `MANUAL-UAT-CHECKLIST.md` on `dev` Preview before any `dev` -> `main` release PR.
+
+---
+
+## 4. Residual Risks Summary
+
+| Risk | Severity | Mitigation / Owner Action |
+|---|---|---|
+| `DEF-AUTH-005` DEV Supabase `uri_allow_list` missing wildcard Preview pattern | **Medium** | Owner adds wildcard redirect URL in DEV Supabase Dashboard before UAT on feature-branch Previews (Production custom domain must also be verified in PROD Supabase before launch). |
+| `httpOnly: false` on `sb-*-auth-token` (`@supabase/ssr` architecture) | **Low (Accepted)** | Mitigated by `Secure` (`DEF-AUTH-004`), `SameSite=Lax`, and nonce-based CSP; enable `MM_DEV_AUTH_CSP_ENFORCE=1` on Preview & Prod. |
+| `DEF-AUTH-006` standalone `/auth/forgot` lacks 30s cooldown & validation parity | **Low** | Recommend fixing before public family beta; non-blocking for DEV manual UAT. |
+| `SEC-REV-01` `server.ts` checks `process.env.VERCEL === "1"` for `Secure` | **Low** | Fully protects Vercel Preview & Production; add `x-forwarded-proto` fallback only if ever deployed off Vercel. |
+| OAuth providers disabled in DEV (`configuredOAuthProviders() === []`) | **Informational** | Re-test `/auth/callback` live before enabling any social OAuth provider. |
