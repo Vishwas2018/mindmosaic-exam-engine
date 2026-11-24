@@ -25,6 +25,7 @@ import {
   devAdmin,
   enterStudentCredentials,
   expect,
+  gotoSettled,
   parentSignIn,
   protectContext,
   seedBypassCookie,
@@ -167,10 +168,15 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
       await p1.getByRole("button", { name: /account menu/i }).click();
       await p1.getByRole("menuitem", { name: /sign out/i }).click();
       await expect(p1).not.toHaveURL(/\/parent(\/|$)/, { timeout: 20_000 });
+      // Firefox aborts a goto issued while sign-out's client navigation is still in flight (NS_BINDING_ABORTED);
+      // let it settle first, as 04-cross-browser-resilience does.
+      await expect(p1).toHaveURL(/\/signed-out/, { timeout: 20_000 });
+      await p1.waitForLoadState("load").catch(() => undefined);
 
       // Navigating Back on p1 must NOT expose /parent
       await p1.goBack().catch(() => undefined);
-      await p1.goto("/parent");
+      await p1.waitForLoadState("load").catch(() => undefined);
+      await gotoSettled(p1, "/parent");
       await expect(p1).toHaveURL(/\/(sign-in|session-expired)/, { timeout: 20_000 });
 
       // Reloading p2 must redirect to sign-in / session-expired
@@ -198,7 +204,7 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
       expect(archRes.status()).toBe(200);
 
       // Existing student session must be denied on next server navigation (denyArchivedSessions)
-      await pS.goto("/student");
+      await gotoSettled(pS, "/student");
       await expect(pS).toHaveURL(/\/(sign-in|session-expired)/, { timeout: 20_000 });
 
       // Fresh student login while archived must return generic message (same as wrong PIN)
@@ -254,7 +260,7 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
       await pE.evaluate(() => sessionStorage.clear());
       await pE.reload();
       await pE.waitForTimeout(2000);
-      await pE.goto("/parent");
+      await gotoSettled(pE, "/parent");
       await expect(pE).toHaveURL(/\/(sign-in|session-expired)/, { timeout: 20_000 });
       evidence.checks.auth02_ephemeral_session = "passed";
     } finally {
@@ -274,7 +280,7 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
         .update({ access_revoked_at: new Date().toISOString() })
         .eq("id", revoked.id);
       expect(revErr).toBeNull();
-      await pR.goto("/parent/children");
+      await gotoSettled(pR, "/parent/children");
       await expect(pR).toHaveURL(/\/sign-in/, { timeout: 20_000 });
       evidence.checks.auth02_revoked_account = "passed";
     } finally {

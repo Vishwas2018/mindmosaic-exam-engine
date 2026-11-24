@@ -34,6 +34,7 @@ import {
   devSupabaseUrl,
   enterStudentCredentials,
   expect,
+  gotoSettled,
   parentSignIn,
   protectContext,
   seededEmail,
@@ -342,7 +343,11 @@ test.describe("Auth Audit 03: RBAC Matrix, Data Isolation & Security", () => {
     }));
     for (const c of authCookies) {
       expect(c.secure, `cookie ${c.name} must be Secure on HTTPS`).toBe(true);
-      expect(c.sameSite, `cookie ${c.name} must have SameSite`).toMatch(/Lax|Strict/i);
+      // Playwright's Windows WebKit reports sameSite "None" even for a cookie set with SameSite=Lax/Strict
+      // (probed 2026-11-24), so the attribute is asserted on Chromium and Firefox, which report it faithfully.
+      if (context.browser()?.browserType().name() !== "webkit") {
+        expect(c.sameSite, `cookie ${c.name} must have SameSite`).toMatch(/Lax|Strict/i);
+      }
     }
 
     // Check browser storage & DOM for service-role key or password leakage
@@ -399,7 +404,7 @@ test.describe("Auth Audit 03: RBAC Matrix, Data Isolation & Security", () => {
     const redirectResults: Record<string, string> = {};
     for (const payload of payloads) {
       await context.clearCookies();
-      await page.goto("/");
+      await gotoSettled(page, "/");
       // Re-seed bypass cookie and sign in with malicious ?next=
       await page.context().request.get(`${HOSTED_URL}/`, {
         headers: { "x-vercel-protection-bypass": bypassSecret, "x-vercel-set-bypass-cookie": "true" },
@@ -412,6 +417,9 @@ test.describe("Auth Audit 03: RBAC Matrix, Data Isolation & Security", () => {
       await expect(page).toHaveURL(/\/parent/, { timeout: 30_000 });
       redirectResults[payload] = page.url();
       expect(new URL(page.url()).origin).toBe(new URL(HOSTED_URL).origin);
+      // Let /parent's client-side routing finish before the next iteration navigates, or Firefox aborts
+      // that goto with NS_BINDING_ABORTED.
+      await page.waitForLoadState("load").catch(() => undefined);
     }
     evidence.security.openRedirects = redirectResults;
 
