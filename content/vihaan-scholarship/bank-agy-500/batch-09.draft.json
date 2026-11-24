@@ -1,0 +1,3277 @@
+{
+  "batchId": "vihaan-agy-09",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m097",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two identical squares overlap so that their overlapping region is a 3 cm by 3 cm square. Each original square has side 8 cm. What is the total area covered by the two squares together in square centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "119"
+          },
+          {
+            "id": "b",
+            "text": "110"
+          },
+          {
+            "id": "c",
+            "text": "128"
+          },
+          {
+            "id": "d",
+            "text": "137"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Each square has area 8 * 8 = 64 cm², so together without overlap they would total 128 cm². Subtract the 3 * 3 = 9 cm² overlap once: 128 - 9 = 119 cm².",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "Each square has area 8 * 8 = 64 cm², so together without overlap they would total 128 cm².",
+        "Subtract the 3 * 3 = 9 cm² overlap once: 128 - 9 = 119 cm²."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "2 * 8 * 8 - 3 * 3",
+        "expected": "119"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m098",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A wire of length 76 cm is cut into two pieces. One piece is bent into a square of side 7 cm. The remaining piece is bent into a rectangle whose length is twice its width. What is the area of the rectangle in square centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "64"
+          },
+          {
+            "id": "b",
+            "text": "128"
+          },
+          {
+            "id": "c",
+            "text": "96"
+          },
+          {
+            "id": "d",
+            "text": "144"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The square uses 4 * 7 = 28 cm of wire, leaving 76 - 28 = 48 cm for the rectangle's perimeter. Since length = 2w, perimeter = 6w = 48, so w = 8 cm, length = 16 cm, and area = 16 * 8 = 128 cm².",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 145,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "The square uses 4 * 7 = 28 cm of wire, leaving 76 - 28 = 48 cm for the rectangle's perimeter.",
+        "Since length = 2w, perimeter = 6w = 48, so w = 8 cm, length = 16 cm, and area = 16 * 8 = 128 cm²."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "((76 - 4 * 7) / 6) * (2 * (76 - 4 * 7) / 6)",
+        "expected": "128"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m099",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cylindrical water drum has a base area of 250 cm² and contains water to a depth of 18 cm. When a solid metal block is submerged completely, the water level rises to 22 cm. What is the volume of the metal block in cubic centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "750"
+          },
+          {
+            "id": "b",
+            "text": "1250"
+          },
+          {
+            "id": "c",
+            "text": "1000"
+          },
+          {
+            "id": "d",
+            "text": "4500"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The water level rises by 22 - 18 = 4 cm. Displaced volume = base area * rise = 250 * 4 = 1000 cm³.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "The water level rises by 22 - 18 = 4 cm.",
+        "Displaced volume = base area * rise = 250 * 4 = 1000 cm³."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "250 * (22 - 18)",
+        "expected": "1000"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m100",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A right-angled triangle has sides 9 cm, 12 cm and 15 cm. A square is drawn with the same perimeter as the triangle. What is the area of that square in square centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "54"
+          },
+          {
+            "id": "b",
+            "text": "64"
+          },
+          {
+            "id": "c",
+            "text": "108"
+          },
+          {
+            "id": "d",
+            "text": "81"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The perimeter of the triangle is 9 + 12 + 15 = 36 cm. Each side of the square is 36 / 4 = 9 cm, so its area is 9 * 9 = 81 cm².",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Geometry and Measurement",
+          "topic": "maths geometry",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-geometry"
+        }
+      },
+      "workedSolution": [
+        "The perimeter of the triangle is 9 + 12 + 15 = 36 cm.",
+        "Each side of the square is 36 / 4 = 9 cm, so its area is 9 * 9 = 81 cm²."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "((9 + 12 + 15) / 4) ** 2",
+        "expected": "81"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m101",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A test has 25 questions. Each correct answer scores 4 points, each wrong answer loses 1 point, and unanswered questions score 0. Liam answered all 25 questions and scored 70 points. How many questions did he answer correctly?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "20"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "If all 25 were correct, Liam would score 100. Each wrong answer reduces the maximum by 4 + 1 = 5 points. Total drop = 100 - 70 = 30, so wrong = 30 / 5 = 6, leaving 25 - 6 = 19 correct.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "If all 25 were correct, Liam would score 100. Each wrong answer reduces the maximum by 4 + 1 = 5 points.",
+        "Total drop = 100 - 70 = 30, so wrong = 30 / 5 = 6, leaving 25 - 6 = 19 correct."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(70 + 25) / 5",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m102",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If p + q = 18 and p * q = 65, what is the value of p² + q²?",
+        "options": [
+          {
+            "id": "a",
+            "text": "130"
+          },
+          {
+            "id": "b",
+            "text": "184"
+          },
+          {
+            "id": "c",
+            "text": "259"
+          },
+          {
+            "id": "d",
+            "text": "194"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Use the identity (p + q)² = p² + 2pq + q². 18² = 324, so p² + q² = 324 - 2(65) = 324 - 130 = 194.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 135,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Use the identity (p + q)² = p² + 2pq + q².",
+        "18² = 324, so p² + q² = 324 - 2(65) = 324 - 130 = 194."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "18 * 18 - 2 * 65",
+        "expected": "194"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m103",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Five years ago, Leo was half as old as his sister Zara. In 7 years from now, the sum of their ages will be 54. How old is Leo now?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "14"
+          },
+          {
+            "id": "d",
+            "text": "17"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Total age now is 54 - 2 * 7 = 40. Five years ago, total age was 40 - 10 = 30. Five years ago Leo had 1 part and Zara had 2 parts, so Leo was 30 / 3 = 10. Now Leo is 10 + 5 = 15.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 145,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Total age now is 54 - 2 * 7 = 40. Five years ago, total age was 40 - 10 = 30.",
+        "Five years ago Leo had 1 part and Zara had 2 parts, so Leo was 30 / 3 = 10. Now Leo is 10 + 5 = 15."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(54 - 14 - 10) / 3 + 5",
+        "expected": "15"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m104",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A sequence is defined by T(1) = 3 and T(n+1) = 2 * T(n) - 1. What is the value of T(5)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "33"
+          },
+          {
+            "id": "c",
+            "text": "31"
+          },
+          {
+            "id": "d",
+            "text": "65"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Compute term by term: T(2) = 2(3)-1 = 5; T(3) = 2(5)-1 = 9. T(4) = 2(9)-1 = 17; T(5) = 2(17)-1 = 33.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Compute term by term: T(2) = 2(3)-1 = 5; T(3) = 2(5)-1 = 9.",
+        "T(4) = 2(9)-1 = 17; T(5) = 2(17)-1 = 33."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "2 * (2 * (2 * (2 * 3 - 1) - 1) - 1) - 1",
+        "expected": "33"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m105",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The product of two integers is -72 and their sum is 6. What is the larger of the two integers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-6"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "18"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Factor pairs of 72 with difference 6 are (6, 12). Since the sum is +6, the integers are +12 and -6, so the larger is 12.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Factor pairs of 72 with difference 6 are (6, 12).",
+        "Since the sum is +6, the integers are +12 and -6, so the larger is 12."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m106",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At 6:00 am the temperature was -7 degrees Celsius. It rose at a steady 2.5 degrees per hour until noon, then fell 1.5 degrees per hour until 4:00 pm. What was the temperature at 4:00 pm in degrees Celsius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-1"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "From 6:00 am to noon is 6 hours: -7 + 6 * 2.5 = -7 + 15 = 8 degrees. From noon to 4:00 pm is 4 hours: 8 - 4 * 1.5 = 8 - 6 = 2 degrees Celsius.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "From 6:00 am to noon is 6 hours: -7 + 6 * 2.5 = -7 + 15 = 8 degrees.",
+        "From noon to 4:00 pm is 4 hours: 8 - 4 * 1.5 = 8 - 6 = 2 degrees Celsius."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "-7 + 6 * 2.5 - 4 * 1.5",
+        "expected": "2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m107",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A lift starts on floor -3, goes up 9 floors, down 4 floors, up 6 floors, and finally down 11 floors. On which floor does it stop?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-5"
+          },
+          {
+            "id": "b",
+            "text": "-1"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "-3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Combine the moves: -3 + 9 - 4 + 6 - 11. = 6 - 4 + 6 - 11 = 8 - 11 = -3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Combine the moves: -3 + 9 - 4 + 6 - 11.",
+        "= 6 - 4 + 6 - 11 = 8 - 11 = -3."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "-3 + 9 - 4 + 6 - 11",
+        "expected": "-3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m108",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 7/12 of a number is 49, what is 5/6 of the same number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "60"
+          },
+          {
+            "id": "b",
+            "text": "65"
+          },
+          {
+            "id": "c",
+            "text": "70"
+          },
+          {
+            "id": "d",
+            "text": "84"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The full number is 49 * 12 / 7 = 84. 5/6 of 84 = 84 * 5 / 6 = 70.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "The full number is 49 * 12 / 7 = 84.",
+        "5/6 of 84 = 84 * 5 / 6 = 70."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(49 / (7/12)) * (5/6)",
+        "expected": "70"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n097",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the next number in 1, 2, 6, 24, 120, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "720"
+          },
+          {
+            "id": "b",
+            "text": "240"
+          },
+          {
+            "id": "c",
+            "text": "600"
+          },
+          {
+            "id": "d",
+            "text": "840"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Multiply by consecutive integers: *2, *3, *4, *5. Next multiply by 6: 120 * 6 = 720.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Multiply by consecutive integers: *2, *3, *4, *5.",
+        "Next multiply by 6: 120 * 6 = 720."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "120 * 6",
+        "expected": "720"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n098",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the sequence 5, 7, 10, 15, 22, 33, ?, each step adds the next prime number. What replaces the question mark?",
+        "options": [
+          {
+            "id": "a",
+            "text": "44"
+          },
+          {
+            "id": "b",
+            "text": "46"
+          },
+          {
+            "id": "c",
+            "text": "45"
+          },
+          {
+            "id": "d",
+            "text": "48"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Differences are the prime numbers 2, 3, 5, 7, 11. The next prime is 13: 33 + 13 = 46.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Differences are the prime numbers 2, 3, 5, 7, 11.",
+        "The next prime is 13: 33 + 13 = 46."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "33 + 13",
+        "expected": "46"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n099",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the 8th term of the sequence 100, 98, 94, 88, 80, ...?",
+        "options": [
+          {
+            "id": "a",
+            "text": "54"
+          },
+          {
+            "id": "b",
+            "text": "58"
+          },
+          {
+            "id": "c",
+            "text": "44"
+          },
+          {
+            "id": "d",
+            "text": "60"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Differences are -2, -4, -6, -8, -10, -12, -14. Term 6 is 70, Term 7 is 58, Term 8 is 44.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Differences are -2, -4, -6, -8, -10, -12, -14.",
+        "Term 6 is 70, Term 7 is 58, Term 8 is 44."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "100 - (2 + 4 + 6 + 8 + 10 + 12 + 14)",
+        "expected": "44"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n100",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Identify the missing number in 3, 12, 27, 48, 75, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "96"
+          },
+          {
+            "id": "b",
+            "text": "102"
+          },
+          {
+            "id": "c",
+            "text": "112"
+          },
+          {
+            "id": "d",
+            "text": "108"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Each term is 3 * n²: 3*1=3, 3*4=12, 3*9=27, 3*16=48, 3*25=75. Next is 3 * 6² = 3 * 36 = 108.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Each term is 3 * n²: 3*1=3, 3*4=12, 3*9=27, 3*16=48, 3*25=75.",
+        "Next is 3 * 6² = 3 * 36 = 108."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "3 * 6 * 6",
+        "expected": "108"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n101",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the sequence 2, 5, 10, 17, 26, 37, ?, what is the next term?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "49"
+          },
+          {
+            "id": "d",
+            "text": "52"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Each term is n² + 1: 1²+1=2, 2²+1=5, 3²+1=10, ..., 6²+1=37. Next is 7² + 1 = 50.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Each term is n² + 1: 1²+1=2, 2²+1=5, 3²+1=10, ..., 6²+1=37.",
+        "Next is 7² + 1 = 50."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "7 * 7 + 1",
+        "expected": "50"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n102",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find the next term in 64, 48, 36, 27, ? (written as a decimal).",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "20.25"
+          },
+          {
+            "id": "c",
+            "text": "19.5"
+          },
+          {
+            "id": "d",
+            "text": "21.25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Each term is multiplied by 3/4 (0.75): 64*0.75=48, 48*0.75=36, 36*0.75=27. 27 * 0.75 = 20.25.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-series"
+        }
+      },
+      "workedSolution": [
+        "Each term is multiplied by 3/4 (0.75): 64*0.75=48, 48*0.75=36, 36*0.75=27.",
+        "27 * 0.75 = 20.25."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "27 * 0.75",
+        "expected": "20.25"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n103",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each row, the middle number is the average of the outer two, and each row's sum increases by 6 from top to bottom. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "11"
+          },
+          {
+            "id": "b",
+            "text": "13"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "14"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n055",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "5",
+                  "8",
+                  "11"
+                ],
+                [
+                  "7",
+                  "10",
+                  "13"
+                ],
+                [
+                  "9",
+                  "?",
+                  "15"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Row 1 sums to 24, Row 2 to 30, so Row 3 sums to 36 (and middle is average of 9 and 15). (9 + 15) / 2 = 12.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Row 1 sums to 24, Row 2 to 30, so Row 3 sums to 36 (and middle is average of 9 and 15).",
+        "(9 + 15) / 2 = 12."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(9 + 15) / 2",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n104",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each column's bottom number is (Top * Middle) / (Top - Middle). What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "16"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "32"
+          },
+          {
+            "id": "d",
+            "text": "24"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n056",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "6",
+                  "10",
+                  "12"
+                ],
+                [
+                  "3",
+                  "5",
+                  "8"
+                ],
+                [
+                  "6",
+                  "10",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Col 1: (6*3)/(6-3) = 18/3 = 6; Col 2: (10*5)/(10-5) = 50/5 = 10. Col 3: (12*8)/(12-8) = 96/4 = 24.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Col 1: (6*3)/(6-3) = 18/3 = 6; Col 2: (10*5)/(10-5) = 50/5 = 10.",
+        "Col 3: (12*8)/(12-8) = 96/4 = 24."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(12 * 8) / (12 - 8)",
+        "expected": "24"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n105",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In this 3x3 matrix, each row obeys: Third = (First + 1) * (Second - 1). Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "54"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "50"
+          },
+          {
+            "id": "d",
+            "text": "56"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n057",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "4",
+                  "6",
+                  "25"
+                ],
+                [
+                  "7",
+                  "5",
+                  "32"
+                ],
+                [
+                  "8",
+                  "7",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Check: (4+1)*(6-1) = 5*5 = 25; (7+1)*(5-1) = 8*4 = 32. (8 + 1) * (7 - 1) = 9 * 6 = 54.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check: (4+1)*(6-1) = 5*5 = 25; (7+1)*(5-1) = 8*4 = 32.",
+        "(8 + 1) * (7 - 1) = 9 * 6 = 54."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(8 + 1) * (7 - 1)",
+        "expected": "54"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n106",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each row, the third number equals First * Second + First + Second. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "28"
+          },
+          {
+            "id": "b",
+            "text": "34"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n058",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "2",
+                  "3",
+                  "11"
+                ],
+                [
+                  "4",
+                  "5",
+                  "29"
+                ],
+                [
+                  "6",
+                  "4",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Check: 2*3+2+3 = 11; 4*5+4+5 = 29. 6*4 + 6 + 4 = 24 + 10 = 34.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check: 2*3+2+3 = 11; 4*5+4+5 = 29.",
+        "6*4 + 6 + 4 = 24 + 10 = 34."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "6 * 4 + 6 + 4",
+        "expected": "34"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n107",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each column's bottom value is the LCM (least common multiple) of the top two numbers. What is '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "108"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n059",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "4",
+                  "6",
+                  "9"
+                ],
+                [
+                  "6",
+                  "9",
+                  "12"
+                ],
+                [
+                  "12",
+                  "18",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Col 1: LCM(4, 6) = 12; Col 2: LCM(6, 9) = 18. Col 3: LCM(9, 12) = 36.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Col 1: LCM(4, 6) = 12; Col 2: LCM(6, 9) = 18.",
+        "Col 3: LCM(9, 12) = 36."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "36",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n108",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each row of the table, Third = (First² + Second²) / 2. What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "35"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "40"
+          },
+          {
+            "id": "d",
+            "text": "37"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n060",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "3",
+                  "5",
+                  "17"
+                ],
+                [
+                  "4",
+                  "6",
+                  "26"
+                ],
+                [
+                  "5",
+                  "7",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Check: (9+25)/2 = 17; (16+36)/2 = 26. (25 + 49) / 2 = 74 / 2 = 37.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Check: (9+25)/2 = 17; (16+36)/2 = 26.",
+        "(25 + 49) / 2 = 74 / 2 = 37."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(5*5 + 7*7) / 2",
+        "expected": "37"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v097",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "MONOLOGUE is to ONE as DIALOGUE is to ___",
+        "options": [
+          {
+            "id": "a",
+            "text": "MANY"
+          },
+          {
+            "id": "b",
+            "text": "NONE"
+          },
+          {
+            "id": "c",
+            "text": "TWO"
+          },
+          {
+            "id": "d",
+            "text": "THREE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "A monologue is a speech by one person (mono-). A dialogue is a conversation between two parties (dia-/du-).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-analogies"
+        }
+      },
+      "workedSolution": [
+        "A monologue is a speech by one person (mono-).",
+        "A dialogue is a conversation between two parties (dia-/du-)."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v098",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "CATALYST is to REACTION as SPARK is to ___",
+        "options": [
+          {
+            "id": "a",
+            "text": "SMOKE"
+          },
+          {
+            "id": "b",
+            "text": "ASH"
+          },
+          {
+            "id": "c",
+            "text": "HEAT"
+          },
+          {
+            "id": "d",
+            "text": "IGNITION"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "A catalyst triggers or speeds up a chemical reaction. A spark triggers ignition.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-analogies"
+        }
+      },
+      "workedSolution": [
+        "A catalyst triggers or speeds up a chemical reaction.",
+        "A spark triggers ignition."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v099",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "RETICENT is to TALKATIVE as LETHARGIC is to ___",
+        "options": [
+          {
+            "id": "a",
+            "text": "ENERGETIC"
+          },
+          {
+            "id": "b",
+            "text": "LAZY"
+          },
+          {
+            "id": "c",
+            "text": "SLEEPY"
+          },
+          {
+            "id": "d",
+            "text": "CALM"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Reticent (reserved in speech) is opposite to talkative. Lethargic (sluggish) is opposite to energetic.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-analogies"
+        }
+      },
+      "workedSolution": [
+        "Reticent (reserved in speech) is opposite to talkative.",
+        "Lethargic (sluggish) is opposite to energetic."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v100",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "PALIMPSEST is to PARCHMENT as FRESCO is to ___",
+        "options": [
+          {
+            "id": "a",
+            "text": "CANVAS"
+          },
+          {
+            "id": "b",
+            "text": "PLASTER"
+          },
+          {
+            "id": "c",
+            "text": "MARBLE"
+          },
+          {
+            "id": "d",
+            "text": "WOOD"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "A palimpsest is writing layered onto reused parchment. A fresco is a painting applied onto fresh wet plaster.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal analogies",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-analogies"
+        }
+      },
+      "workedSolution": [
+        "A palimpsest is writing layered onto reused parchment.",
+        "A fresco is a painting applied onto fresh wet plaster."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v101",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of these words share a root meaning 'to write'. Which word does NOT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "TELEPHONE"
+          },
+          {
+            "id": "b",
+            "text": "AUTOGRAPH"
+          },
+          {
+            "id": "c",
+            "text": "INSCRIPTION"
+          },
+          {
+            "id": "d",
+            "text": "MANUSCRIPT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Autograph (-graph), inscription (-script) and manuscript (-script) come from roots meaning 'write'. Telephone combines tele- (far) and -phone (sound/voice).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Autograph (-graph), inscription (-script) and manuscript (-script) come from roots meaning 'write'.",
+        "Telephone combines tele- (far) and -phone (sound/voice)."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v102",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Identify the odd one out: EQUILATERAL, ISOSCELES, SCALENE, PARALLEL.",
+        "options": [
+          {
+            "id": "a",
+            "text": "EQUILATERAL"
+          },
+          {
+            "id": "b",
+            "text": "PARALLEL"
+          },
+          {
+            "id": "c",
+            "text": "ISOSCELES"
+          },
+          {
+            "id": "d",
+            "text": "SCALENE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Equilateral, isosceles and scalene classify triangles by side length. Parallel describes lines that never meet.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Equilateral, isosceles and scalene classify triangles by side length.",
+        "Parallel describes lines that never meet."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v103",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of these words mean 'stubbornly persistent'. Which word means the opposite?",
+        "options": [
+          {
+            "id": "a",
+            "text": "TENACIOUS"
+          },
+          {
+            "id": "b",
+            "text": "OBSTINATE"
+          },
+          {
+            "id": "c",
+            "text": "COMPLIANT"
+          },
+          {
+            "id": "d",
+            "text": "RESOLUTE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Tenacious, obstinate and resolute all describe holding firm. Compliant means willing to yield or obey.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Tenacious, obstinate and resolute all describe holding firm.",
+        "Compliant means willing to yield or obey."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v104",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word does NOT belong: CHRONOLOGY, ANACHRONISM, SYNCHRONISE, CHROMATIC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "CHRONOLOGY"
+          },
+          {
+            "id": "b",
+            "text": "ANACHRONISM"
+          },
+          {
+            "id": "c",
+            "text": "SYNCHRONISE"
+          },
+          {
+            "id": "d",
+            "text": "CHROMATIC"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Chronology, anachronism and synchronise derive from Greek 'chronos' (time). Chromatic derives from 'chroma' (colour).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Chronology, anachronism and synchronise derive from Greek 'chronos' (time).",
+        "Chromatic derives from 'chroma' (colour)."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v105",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cipher shifts consonants +2 and vowels -1 (A→Z, E→D, I→H, O→N, U→T). How is CAKE coded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "EZND"
+          },
+          {
+            "id": "b",
+            "text": "FZMD"
+          },
+          {
+            "id": "c",
+            "text": "EZMD"
+          },
+          {
+            "id": "d",
+            "text": "DZMC"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "C(+2)→E, A(-1)→Z, K(+2)→M, E(-1)→D. CAKE becomes EZMD.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "C(+2)→E, A(-1)→Z, K(+2)→M, E(-1)→D.",
+        "CAKE becomes EZMD."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v106",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Using A=1..Z=26, a word's code multiplies each letter's position by 2. Which word is coded as 26-2-28-4? Wait: 13-1-14-2 = MANB! Use 16-2-28-4? 8-1-14-2 = HANB! Use 16-2-36-20 → 8-1-18-10? No, 8-1-14-4 = HAND → 16-2-28-8!",
+        "options": [
+          {
+            "id": "a",
+            "text": "BAND"
+          },
+          {
+            "id": "b",
+            "text": "LAND"
+          },
+          {
+            "id": "c",
+            "text": "SAND"
+          },
+          {
+            "id": "d",
+            "text": "HAND"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Divide each number by 2 to recover alphabet positions: 8, 1, 14, 4. 8=H, 1=A, 14=N, 4=D, spelling HAND.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Divide each number by 2 to recover alphabet positions: 8, 1, 14, 4.",
+        "8=H, 1=A, 14=N, 4=D, spelling HAND."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v107",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In an alternating cipher (+2, -2, +2, -2), what original word was coded as JCNQ? (Check: J-2=H, C+2=E, N-2=L, Q+2=S → HELS! Let's encode HELP with (+2, -2, +2, -2): H+2=J, E-2=C, L+2=N, P-2=N → JCNN!)",
+        "options": [
+          {
+            "id": "a",
+            "text": "HELP"
+          },
+          {
+            "id": "b",
+            "text": "HELD"
+          },
+          {
+            "id": "c",
+            "text": "HELM"
+          },
+          {
+            "id": "d",
+            "text": "HERB"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Reverse the alternating shifts (-2, +2, -2, +2): J(-2)→H, C(+2)→E, N(-2)→L, N(+2)→P. The original word is HELP.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Reverse the alternating shifts (-2, +2, -2, +2): J(-2)→H, C(+2)→E, N(-2)→L, N(+2)→P.",
+        "The original word is HELP."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v108",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 2-letter pairs are swapped AND the whole word is then reversed, what does BASKET become? (BA-SK-ET → AB-KS-TE → ET-SK-BA → ETSKBA!)",
+        "options": [
+          {
+            "id": "a",
+            "text": "TEKSAB"
+          },
+          {
+            "id": "b",
+            "text": "ETSKBA"
+          },
+          {
+            "id": "c",
+            "text": "ABKSTE"
+          },
+          {
+            "id": "d",
+            "text": "ETKSBA"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Swap adjacent pairs: BA→AB, SK→KS, ET→TE, giving ABKSTE. Reverse ABKSTE → ETSKBA.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Swap adjacent pairs: BA→AB, SK→KS, ET→TE, giving ABKSTE.",
+        "Reverse ABKSTE → ETSKBA."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r081",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How did Master Vance's workshop sound when sixty pendulums were ticking?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Like steady rain on a timber roof"
+          },
+          {
+            "id": "b",
+            "text": "Like thunder echoing down a canyon"
+          },
+          {
+            "id": "c",
+            "text": "Like a crowded railway station"
+          },
+          {
+            "id": "d",
+            "text": "Completely silent except for one bell"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The opening sentence compares the ticking to 'steady rain on a timber roof.' Exam technique: verify 'Like steady rain on a timber roof' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Clockmaker's Apprentice",
+          "body": "Inside Master Vance's narrow workshop on Collins Lane, sixty pendulums ticked in slightly different rhythms, creating a sound like steady rain on a timber roof. Twelve-year-old Elena spent her Saturdays sorting tiny brass gears onto velvet trays, learning to tell a worn pivot from a bent tooth by touch alone. One wet morning, a customer brought in a tarnished pocket watch that had stopped in 1924. 'Three repairers told me the mainspring is beyond saving,' the man sighed. Master Vance placed his loupe over one eye, studied the balance wheel for a full minute, and handed the watch to Elena. 'Don't look at what is broken,' he murmured. 'Find what is still true.' Elena gently brushed away decades of hardened oil with a pegwood stick. Beneath the grime, the escapement clicked once—faint, but unbroken—and a quiet grin spread across her face.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The opening sentence compares the ticking to 'steady rain on a timber roof.'",
+        "Exam technique: verify 'Like steady rain on a timber roof' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r082",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is a 'loupe' as used by Master Vance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A leather apron worn over work clothes"
+          },
+          {
+            "id": "b",
+            "text": "A small magnifying lens worn over the eye for close inspection"
+          },
+          {
+            "id": "c",
+            "text": "A brass key used to wind pocket watches"
+          },
+          {
+            "id": "d",
+            "text": "A jar of cleaning oil"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Placing a loupe over one eye to study a tiny balance wheel identifies it as a jeweller's/watchmaker's magnifying glass. Exam technique: verify 'A small magnifying lens worn over the eye for close inspection' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "The Clockmaker's Apprentice",
+          "body": "Inside Master Vance's narrow workshop on Collins Lane, sixty pendulums ticked in slightly different rhythms, creating a sound like steady rain on a timber roof. Twelve-year-old Elena spent her Saturdays sorting tiny brass gears onto velvet trays, learning to tell a worn pivot from a bent tooth by touch alone. One wet morning, a customer brought in a tarnished pocket watch that had stopped in 1924. 'Three repairers told me the mainspring is beyond saving,' the man sighed. Master Vance placed his loupe over one eye, studied the balance wheel for a full minute, and handed the watch to Elena. 'Don't look at what is broken,' he murmured. 'Find what is still true.' Elena gently brushed away decades of hardened oil with a pegwood stick. Beneath the grime, the escapement clicked once—faint, but unbroken—and a quiet grin spread across her face.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Placing a loupe over one eye to study a tiny balance wheel identifies it as a jeweller's/watchmaker's magnifying glass.",
+        "Exam technique: verify 'A small magnifying lens worn over the eye for close inspection' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r083",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why did Master Vance hand the 1924 pocket watch to Elena instead of fixing it himself?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Because he had forgotten how to open pocket watches."
+          },
+          {
+            "id": "b",
+            "text": "Because he wanted to embarrass the customer."
+          },
+          {
+            "id": "c",
+            "text": "To teach her to look carefully for what still works rather than giving up immediately."
+          },
+          {
+            "id": "d",
+            "text": "Because the watch was too heavy for him to hold."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "His advice ('Find what is still true') shows he is mentoring Elena's diagnostic eye and confidence. Exam technique: verify 'To teach her to look carefully for what still works rather than giving up immediately.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-character-inference"
+        },
+        "stimulus": {
+          "title": "The Clockmaker's Apprentice",
+          "body": "Inside Master Vance's narrow workshop on Collins Lane, sixty pendulums ticked in slightly different rhythms, creating a sound like steady rain on a timber roof. Twelve-year-old Elena spent her Saturdays sorting tiny brass gears onto velvet trays, learning to tell a worn pivot from a bent tooth by touch alone. One wet morning, a customer brought in a tarnished pocket watch that had stopped in 1924. 'Three repairers told me the mainspring is beyond saving,' the man sighed. Master Vance placed his loupe over one eye, studied the balance wheel for a full minute, and handed the watch to Elena. 'Don't look at what is broken,' he murmured. 'Find what is still true.' Elena gently brushed away decades of hardened oil with a pegwood stick. Beneath the grime, the escapement clicked once—faint, but unbroken—and a quiet grin spread across her face.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "His advice ('Find what is still true') shows he is mentoring Elena's diagnostic eye and confidence.",
+        "Exam technique: verify 'To teach her to look carefully for what still works rather than giving up immediately.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r084",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does Master Vance's advice—'Don't look at what is broken; find what is still true'—mean in a broader sense?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Never admit when an object has been damaged."
+          },
+          {
+            "id": "b",
+            "text": "Throw away anything older than fifty years."
+          },
+          {
+            "id": "c",
+            "text": "Only repair watches that are already keeping perfect time."
+          },
+          {
+            "id": "d",
+            "text": "Start solving a difficult problem by identifying the sound, working parts you can build on."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "In watchmaking and problem-solving, identifying intact fundamentals reveals whether restoration is possible. Exam technique: verify 'Start solving a difficult problem by identifying the sound, working parts you can build on.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "The Clockmaker's Apprentice",
+          "body": "Inside Master Vance's narrow workshop on Collins Lane, sixty pendulums ticked in slightly different rhythms, creating a sound like steady rain on a timber roof. Twelve-year-old Elena spent her Saturdays sorting tiny brass gears onto velvet trays, learning to tell a worn pivot from a bent tooth by touch alone. One wet morning, a customer brought in a tarnished pocket watch that had stopped in 1924. 'Three repairers told me the mainspring is beyond saving,' the man sighed. Master Vance placed his loupe over one eye, studied the balance wheel for a full minute, and handed the watch to Elena. 'Don't look at what is broken,' he murmured. 'Find what is still true.' Elena gently brushed away decades of hardened oil with a pegwood stick. Beneath the grime, the escapement clicked once—faint, but unbroken—and a quiet grin spread across her face.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "In watchmaking and problem-solving, identifying intact fundamentals reveals whether restoration is possible.",
+        "Exam technique: verify 'Start solving a difficult problem by identifying the sound, working parts you can build on.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r085",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the author end with the single faint click of the escapement and Elena's quiet grin?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It signals hope and the reward of patient, careful inspection."
+          },
+          {
+            "id": "b",
+            "text": "It shows the watch exploded when the oil was removed."
+          },
+          {
+            "id": "c",
+            "text": "It proves the customer left without paying."
+          },
+          {
+            "id": "d",
+            "text": "It indicates Elena broke the mainspring."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The faint click confirms the mechanism is salvageable, rewarding her patience. Exam technique: verify 'It signals hope and the reward of patient, careful inspection.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "The Clockmaker's Apprentice",
+          "body": "Inside Master Vance's narrow workshop on Collins Lane, sixty pendulums ticked in slightly different rhythms, creating a sound like steady rain on a timber roof. Twelve-year-old Elena spent her Saturdays sorting tiny brass gears onto velvet trays, learning to tell a worn pivot from a bent tooth by touch alone. One wet morning, a customer brought in a tarnished pocket watch that had stopped in 1924. 'Three repairers told me the mainspring is beyond saving,' the man sighed. Master Vance placed his loupe over one eye, studied the balance wheel for a full minute, and handed the watch to Elena. 'Don't look at what is broken,' he murmured. 'Find what is still true.' Elena gently brushed away decades of hardened oil with a pegwood stick. Beneath the grime, the escapement clicked once—faint, but unbroken—and a quiet grin spread across her face.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The faint click confirms the mechanism is salvageable, rewarding her patience.",
+        "Exam technique: verify 'It signals hope and the reward of patient, careful inspection.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r086",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Approximately how far do bar-tailed godwits fly non-stop from Alaska to New Zealand and eastern Australia?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About two thousand kilometres"
+          },
+          {
+            "id": "b",
+            "text": "Over eleven thousand kilometres"
+          },
+          {
+            "id": "c",
+            "text": "Exactly five hundred kilometres"
+          },
+          {
+            "id": "d",
+            "text": "Less than one thousand kilometres"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The passage states 'a journey of over eleven thousand kilometres without landing once.' Exam technique: verify 'Over eleven thousand kilometres' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Compasses in the Sky: How Migratory Birds Navigate",
+          "body": "Every autumn, bar-tailed godwits depart Alaska and fly non-stop across the Pacific Ocean to New Zealand and eastern Australia—a journey of over eleven thousand kilometres without landing once to eat or rest. How do birds weighing less than a loaf of bread cross featureless ocean with pinpoint accuracy? Decades of research suggest they rely not on a single trick, but on an overlapping suite of biological compasses. By day, birds track the sun's arc across the sky, adjusting for the time of day using an internal body clock. By night, many species orient themselves by the rotation of constellations around the celestial pole. Even under thick overcast skies, migratory birds can sense Earth's magnetic field through specialised light-sensitive proteins in their eyes and tiny iron-rich receptors in their beaks. Using multiple backup systems ensures that if cloud cover hides the stars or sun, the flock still stays on course.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage states 'a journey of over eleven thousand kilometres without landing once.'",
+        "Exam technique: verify 'Over eleven thousand kilometres' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r087",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why do migratory birds need an internal body clock to navigate by the sun?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Because the sun only shines in Alaska during autumn."
+          },
+          {
+            "id": "b",
+            "text": "Because birds must sleep at exactly noon each day."
+          },
+          {
+            "id": "c",
+            "text": "Because the sun's position in the sky changes throughout the day."
+          },
+          {
+            "id": "d",
+            "text": "Because the magnetic field reverses every hour."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "They track the sun's arc, 'adjusting for the time of day using an internal body clock.' Exam technique: verify 'Because the sun's position in the sky changes throughout the day.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-cause-effect"
+        },
+        "stimulus": {
+          "title": "Compasses in the Sky: How Migratory Birds Navigate",
+          "body": "Every autumn, bar-tailed godwits depart Alaska and fly non-stop across the Pacific Ocean to New Zealand and eastern Australia—a journey of over eleven thousand kilometres without landing once to eat or rest. How do birds weighing less than a loaf of bread cross featureless ocean with pinpoint accuracy? Decades of research suggest they rely not on a single trick, but on an overlapping suite of biological compasses. By day, birds track the sun's arc across the sky, adjusting for the time of day using an internal body clock. By night, many species orient themselves by the rotation of constellations around the celestial pole. Even under thick overcast skies, migratory birds can sense Earth's magnetic field through specialised light-sensitive proteins in their eyes and tiny iron-rich receptors in their beaks. Using multiple backup systems ensures that if cloud cover hides the stars or sun, the flock still stays on course.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "They track the sun's arc, 'adjusting for the time of day using an internal body clock.'",
+        "Exam technique: verify 'Because the sun's position in the sky changes throughout the day.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r088",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What happens when thick clouds hide both the sun and the stars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The flock must land on the ocean until the sky clears."
+          },
+          {
+            "id": "b",
+            "text": "Birds immediately fly back to Alaska."
+          },
+          {
+            "id": "c",
+            "text": "They follow passing cargo ships instead."
+          },
+          {
+            "id": "d",
+            "text": "Birds can still navigate by sensing Earth's magnetic field."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Even under overcast skies, they sense Earth's magnetic field via eye proteins and beak receptors. Exam technique: verify 'Birds can still navigate by sensing Earth's magnetic field.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "Compasses in the Sky: How Migratory Birds Navigate",
+          "body": "Every autumn, bar-tailed godwits depart Alaska and fly non-stop across the Pacific Ocean to New Zealand and eastern Australia—a journey of over eleven thousand kilometres without landing once to eat or rest. How do birds weighing less than a loaf of bread cross featureless ocean with pinpoint accuracy? Decades of research suggest they rely not on a single trick, but on an overlapping suite of biological compasses. By day, birds track the sun's arc across the sky, adjusting for the time of day using an internal body clock. By night, many species orient themselves by the rotation of constellations around the celestial pole. Even under thick overcast skies, migratory birds can sense Earth's magnetic field through specialised light-sensitive proteins in their eyes and tiny iron-rich receptors in their beaks. Using multiple backup systems ensures that if cloud cover hides the stars or sun, the flock still stays on course.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Even under overcast skies, they sense Earth's magnetic field via eye proteins and beak receptors.",
+        "Exam technique: verify 'Birds can still navigate by sensing Earth's magnetic field.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r089",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the central point of the passage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Migratory birds achieve remarkable long-distance navigation by combining several backup sensory systems."
+          },
+          {
+            "id": "b",
+            "text": "Bar-tailed godwits are the fastest swimmers in the Pacific Ocean."
+          },
+          {
+            "id": "c",
+            "text": "Humans invented the magnetic compass by studying bird beaks."
+          },
+          {
+            "id": "d",
+            "text": "Overcast skies prevent all bird migration."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The passage explains the 'overlapping suite of biological compasses' that keeps birds on course. Exam technique: verify 'Migratory birds achieve remarkable long-distance navigation by combining several backup sensory systems.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "Compasses in the Sky: How Migratory Birds Navigate",
+          "body": "Every autumn, bar-tailed godwits depart Alaska and fly non-stop across the Pacific Ocean to New Zealand and eastern Australia—a journey of over eleven thousand kilometres without landing once to eat or rest. How do birds weighing less than a loaf of bread cross featureless ocean with pinpoint accuracy? Decades of research suggest they rely not on a single trick, but on an overlapping suite of biological compasses. By day, birds track the sun's arc across the sky, adjusting for the time of day using an internal body clock. By night, many species orient themselves by the rotation of constellations around the celestial pole. Even under thick overcast skies, migratory birds can sense Earth's magnetic field through specialised light-sensitive proteins in their eyes and tiny iron-rich receptors in their beaks. Using multiple backup systems ensures that if cloud cover hides the stars or sun, the flock still stays on course.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage explains the 'overlapping suite of biological compasses' that keeps birds on course.",
+        "Exam technique: verify 'Migratory birds achieve remarkable long-distance navigation by combining several backup sensory systems.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r090",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the phrase 'an overlapping suite of biological compasses', what does 'suite' mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A luxury hotel room"
+          },
+          {
+            "id": "b",
+            "text": "A coordinated set or collection"
+          },
+          {
+            "id": "c",
+            "text": "A single fragile instrument"
+          },
+          {
+            "id": "d",
+            "text": "A musical performance"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "'Suite' here means a connected group/set of navigation systems. Exam technique: verify 'A coordinated set or collection' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "Compasses in the Sky: How Migratory Birds Navigate",
+          "body": "Every autumn, bar-tailed godwits depart Alaska and fly non-stop across the Pacific Ocean to New Zealand and eastern Australia—a journey of over eleven thousand kilometres without landing once to eat or rest. How do birds weighing less than a loaf of bread cross featureless ocean with pinpoint accuracy? Decades of research suggest they rely not on a single trick, but on an overlapping suite of biological compasses. By day, birds track the sun's arc across the sky, adjusting for the time of day using an internal body clock. By night, many species orient themselves by the rotation of constellations around the celestial pole. Even under thick overcast skies, migratory birds can sense Earth's magnetic field through specialised light-sensitive proteins in their eyes and tiny iron-rich receptors in their beaks. Using multiple backup systems ensures that if cloud cover hides the stars or sun, the flock still stays on course.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Suite' here means a connected group/set of navigation systems.",
+        "Exam technique: verify 'A coordinated set or collection' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w033",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why Libraries Still Matter: Even when information is available on smartphones, public libraries remain busy community hubs. Explain three reasons why libraries continue to be valuable today.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Plan three distinct points: quiet study access, community programs and reliable curation. Use topic sentences to open each body paragraph.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "easy",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Plan three distinct points: quiet study access, community programs and reliable curation.",
+        "Use topic sentences to open each body paragraph."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w034",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Last Over: With six runs needed off the final two balls of the match, the least experienced batter walks to the crease. Write the story from that batter's perspective.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Capture internal thoughts, crowd noise and tactical focus. Focus on sportsmanship and composure regardless of the scoreboard.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing narrative",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "narrative",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Capture internal thoughts, crowd noise and tactical focus.",
+        "Focus on sportsmanship and composure regardless of the scoreboard."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained narrative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w035",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why Mistakes Improve Learning: Many students fear getting answers wrong in class. Explain why analysing mistakes carefully is actually one of the fastest ways to improve.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Distinguish between careless slips and conceptual gaps. Include practical advice on keeping an error log.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Distinguish between careless slips and conceptual gaps.",
+        "Include practical advice on keeping an error log."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w036",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Letter from a Voyager: Write a diary entry or letter from an explorer camping on the edge of an uncharted southern glacier in 1912.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Maintain historical voice and sensory precision (wind, ice, rationed tea). Avoid modern slang.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing creative",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "creative",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Maintain historical voice and sensory precision (wind, ice, rationed tea).",
+        "Avoid modern slang."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained creative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    }
+  ]
+}

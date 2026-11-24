@@ -1,0 +1,3426 @@
+{
+  "batchId": "vihaan-agy-03",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m025",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 3(n - 4) = 27, what is the value of 2n + 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "27"
+          },
+          {
+            "id": "b",
+            "text": "13"
+          },
+          {
+            "id": "c",
+            "text": "19"
+          },
+          {
+            "id": "d",
+            "text": "25"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Divide both sides by 3: n - 4 = 9, so n = 13. Substitute n = 13 into 2n + 1: 2(13) + 1 = 27. Exam tip: always re-read what the question asks for (2n + 1, not n).",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Divide both sides by 3: n - 4 = 9, so n = 13.",
+        "Substitute n = 13 into 2n + 1: 2(13) + 1 = 27. Exam tip: always re-read what the question asks for (2n + 1, not n)."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 * (27 / 3 + 4) + 1",
+        "expected": "27"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m026",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Maya is 11 years old and her mother is 39 years old. In how many years will Maya's mother be exactly three times as old as Maya?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "4"
+          },
+          {
+            "id": "d",
+            "text": "5"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Let y be the years: 39 + y = 3(11 + y) = 33 + 3y. Subtract y and 33 from both sides: 6 = 2y, so y = 3 years (ages 14 and 42).",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Let y be the years: 39 + y = 3(11 + y) = 33 + 3y.",
+        "Subtract y and 33 from both sides: 6 = 2y, so y = 3 years (ages 14 and 42)."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(39 - 3 * 11) / 2",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m027",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cinema sold 120 tickets. Adult tickets cost $15 and child tickets cost $10. Total takings were $1450. How many adult tickets were sold?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40"
+          },
+          {
+            "id": "b",
+            "text": "60"
+          },
+          {
+            "id": "c",
+            "text": "50"
+          },
+          {
+            "id": "d",
+            "text": "70"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "If all 120 tickets were child tickets, takings would be 120 * 10 = $1200. The extra $250 divided by the $5 difference per ticket gives 250 / 5 = 50 adult tickets.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "If all 120 tickets were child tickets, takings would be 120 * 10 = $1200.",
+        "The extra $250 divided by the $5 difference per ticket gives 250 / 5 = 50 adult tickets."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(1450 - 120 * 10) / (15 - 10)",
+        "expected": "50"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m028",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If a @ b means 2a + 3b, what is the value of (4 @ 5) - (2 @ 3)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "13"
+          },
+          {
+            "id": "d",
+            "text": "10"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Compute 4 @ 5 = 2(4) + 3(5) = 8 + 15 = 23. Compute 2 @ 3 = 2(2) + 3(3) = 4 + 9 = 13. Subtract: 23 - 13 = 10.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Compute 4 @ 5 = 2(4) + 3(5) = 8 + 15 = 23.",
+        "Compute 2 @ 3 = 2(2) + 3(3) = 4 + 9 = 13. Subtract: 23 - 13 = 10."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(2 * 4 + 3 * 5) - (2 * 2 + 3 * 3)",
+        "expected": "10"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m029",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two numbers have a sum of 52 and a difference of 14. What is the smaller number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "19"
+          },
+          {
+            "id": "b",
+            "text": "17"
+          },
+          {
+            "id": "c",
+            "text": "21"
+          },
+          {
+            "id": "d",
+            "text": "33"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Subtract the difference from the sum: 52 - 14 = 38. Halve 38 to get the smaller number: 38 / 2 = 19 (and the larger is 33).",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Subtract the difference from the sum: 52 - 14 = 38.",
+        "Halve 38 to get the smaller number: 38 / 2 = 19 (and the larger is 33)."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(52 - 14) / 2",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m030",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A staircase has n steps. Going up 2 steps at a time leaves 1 step over; going up 3 steps at a time leaves 2 steps over. What is the smallest number of steps greater than 10?",
+        "options": [
+          {
+            "id": "a",
+            "text": "13"
+          },
+          {
+            "id": "b",
+            "text": "11"
+          },
+          {
+            "id": "c",
+            "text": "15"
+          },
+          {
+            "id": "d",
+            "text": "17"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Notice that n + 1 is divisible by both 2 and 3, so n + 1 is a multiple of 6. The smallest multiple of 6 greater than 11 is 12, so n = 12 - 1 = 11.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Notice that n + 1 is divisible by both 2 and 3, so n + 1 is a multiple of 6.",
+        "The smallest multiple of 6 greater than 11 is 12, so n = 12 - 1 = 11."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "12 - 1",
+        "expected": "11"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m031",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If x/4 + 5 = 12, what is the value of x?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "28"
+          },
+          {
+            "id": "d",
+            "text": "32"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Subtract 5 from both sides: x/4 = 7. Multiply both sides by 4: x = 28.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Subtract 5 from both sides: x/4 = 7.",
+        "Multiply both sides by 4: x = 28."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(12 - 5) * 4",
+        "expected": "28"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m032",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At a school fete, 3 pies and 2 drinks cost $23, while 2 pies and 3 drinks cost $22. What is the cost of 1 pie and 1 drink together in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "7"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Add both equations together: 5 pies + 5 drinks = $45. Divide by 5: 1 pie + 1 drink = $9. Time-saving trick: no need to solve individually!",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Add both equations together: 5 pies + 5 drinks = $45.",
+        "Divide by 5: 1 pie + 1 drink = $9. Time-saving trick: no need to solve individually!"
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(23 + 22) / 5",
+        "expected": "9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m033",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bucket filled with sand weighs 14 kg. When half of the sand is emptied out, the bucket and remaining sand weigh 8.5 kg. What is the weight of the empty bucket in kilograms?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3"
+          },
+          {
+            "id": "b",
+            "text": "2"
+          },
+          {
+            "id": "c",
+            "text": "2.5"
+          },
+          {
+            "id": "d",
+            "text": "3.5"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Half of the sand weighs 14 - 8.5 = 5.5 kg, so all the sand weighs 11 kg. Subtract the sand from the full weight: 14 - 11 = 3 kg.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "Half of the sand weighs 14 - 8.5 = 5.5 kg, so all the sand weighs 11 kg.",
+        "Subtract the sand from the full weight: 14 - 11 = 3 kg."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "14 - 2 * (14 - 8.5)",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m034",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four consecutive even numbers have a sum of 108. What is the product of the smallest and largest of these four numbers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "648"
+          },
+          {
+            "id": "b",
+            "text": "720"
+          },
+          {
+            "id": "c",
+            "text": "700"
+          },
+          {
+            "id": "d",
+            "text": "756"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The average of the four numbers is 108 / 4 = 27, so the numbers are 24, 26, 28, 30. Smallest * largest = 24 * 30 = 720.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Algebra",
+          "topic": "maths algebra",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-algebra"
+        }
+      },
+      "workedSolution": [
+        "The average of the four numbers is 108 / 4 = 27, so the numbers are 24, 26, 28, 30.",
+        "Smallest * largest = 24 * 30 = 720."
+      ],
+      "reviewFocus": [
+        "Check algebraic equation setup and substitution."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(108 / 4 - 3) * (108 / 4 + 3)",
+        "expected": "720"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m035",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The temperature in Hobart at dawn was -4 degrees Celsius. By midday it rose by 11 degrees Celsius. What was the midday temperature in degrees Celsius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "-7"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "-15"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "nl_dir1",
+            "type": "number_line",
+            "altText": "Number line from -10 to 10 highlighting -4.",
+            "title": "Temperature Scale",
+            "data": {
+              "min": -10,
+              "max": 10,
+              "step": 2,
+              "highlightedValues": [
+                -4
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Start at -4 on the number line and move 11 units right. -4 + 11 = 7 degrees Celsius.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "Start at -4 on the number line and move 11 units right.",
+        "-4 + 11 = 7 degrees Celsius."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "-4 + 11",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m036",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Evaluate: -9 + 14 - 8",
+        "options": [
+          {
+            "id": "a",
+            "text": "-15"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "13"
+          },
+          {
+            "id": "d",
+            "text": "-3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "First add: -9 + 14 = 5. Then subtract: 5 - 8 = -3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Directed Numbers",
+          "topic": "maths directed numbers",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-directed-numbers"
+        }
+      },
+      "workedSolution": [
+        "First add: -9 + 14 = 5.",
+        "Then subtract: 5 - 8 = -3."
+      ],
+      "reviewFocus": [
+        "Check sign rules for negative arithmetic."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "-9 + 14 - 8",
+        "expected": "-3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n025",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the 3x3 number matrix, each row follows the same addition rule. What number replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "11"
+          },
+          {
+            "id": "b",
+            "text": "12"
+          },
+          {
+            "id": "c",
+            "text": "13"
+          },
+          {
+            "id": "d",
+            "text": "14"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n031",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "4",
+                  "7",
+                  "11"
+                ],
+                [
+                  "6",
+                  "9",
+                  "15"
+                ],
+                [
+                  "8",
+                  "5",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "In each row, the third number equals the sum of the first two: 4+7=11 and 6+9=15. 8 + 5 = 13.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "In each row, the third number equals the sum of the first two: 4+7=11 and 6+9=15.",
+        "8 + 5 = 13."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "8 + 5",
+        "expected": "13"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n026",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the grid below, each column follows the same multiplication rule. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "42"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "64"
+          },
+          {
+            "id": "d",
+            "text": "56"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n032",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "3",
+                  "5",
+                  "7"
+                ],
+                [
+                  "4",
+                  "6",
+                  "8"
+                ],
+                [
+                  "12",
+                  "30",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "In each column, the bottom number is the product of the top two: 3*4=12 and 5*6=30. 7 * 8 = 56.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "In each column, the bottom number is the product of the top two: 3*4=12 and 5*6=30.",
+        "7 * 8 = 56."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "7 * 8",
+        "expected": "56"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n027",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Every row in the table has the same total. What number replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "17"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "18"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n033",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "10",
+                  "15",
+                  "25"
+                ],
+                [
+                  "18",
+                  "12",
+                  "20"
+                ],
+                [
+                  "14",
+                  "?",
+                  "19"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Row 1 sums to 10+15+25 = 50; Row 2 sums to 18+12+20 = 50. Row 3: 50 - 14 - 19 = 17.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Row 1 sums to 10+15+25 = 50; Row 2 sums to 18+12+20 = 50.",
+        "Row 3: 50 - 14 - 19 = 17."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "50 - 14 - 19",
+        "expected": "17"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n028",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each number in the bottom row is formed from the number above it using the same rule. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "26"
+          },
+          {
+            "id": "b",
+            "text": "29"
+          },
+          {
+            "id": "c",
+            "text": "28"
+          },
+          {
+            "id": "d",
+            "text": "31"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n034",
+            "type": "table",
+            "altText": "Number matrix table with 2 rows and 4 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3",
+                "Col 4"
+              ],
+              "rows": [
+                [
+                  "5",
+                  "8",
+                  "11",
+                  "14"
+                ],
+                [
+                  "11",
+                  "17",
+                  "23",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Bottom = 2 * Top + 1: 5*2+1=11, 8*2+1=17, 11*2+1=23. 14 * 2 + 1 = 29.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Bottom = 2 * Top + 1: 5*2+1=11, 8*2+1=17, 11*2+1=23.",
+        "14 * 2 + 1 = 29."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "14 * 2 + 1",
+        "expected": "29"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n029",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In each row of the matrix, the middle number is derived from the outer two numbers. What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "45"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "54"
+          },
+          {
+            "id": "d",
+            "text": "56"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n035",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "3",
+                  "15",
+                  "5"
+                ],
+                [
+                  "4",
+                  "28",
+                  "7"
+                ],
+                [
+                  "6",
+                  "?",
+                  "9"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Middle = Left * Right: 3*5=15 and 4*7=28. 6 * 9 = 54.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Middle = Left * Right: 3*5=15 and 4*7=28.",
+        "6 * 9 = 54."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "6 * 9",
+        "expected": "54"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n030",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row follows the same two-step rule from left to right. Find the missing value '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "26"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "28"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n036",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "2",
+                  "5",
+                  "12"
+                ],
+                [
+                  "3",
+                  "7",
+                  "24"
+                ],
+                [
+                  "4",
+                  "6",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Rule: (First * Second) + First = Third: 2*5+2=12 and 3*7+3=24. 4 * 6 + 4 = 28.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Rule: (First * Second) + First = Third: 2*5+2=12 and 3*7+3=24.",
+        "4 * 6 + 4 = 28."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "4 * 6 + 4",
+        "expected": "28"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n031",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In this 3x3 grid, each column obeys the same rule. What number replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "9"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "11"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n037",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "9",
+                  "12",
+                  "15"
+                ],
+                [
+                  "4",
+                  "5",
+                  "6"
+                ],
+                [
+                  "5",
+                  "7",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Bottom = Top - Middle: 9-4=5 and 12-5=7. 15 - 6 = 9.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Bottom = Top - Middle: 9-4=5 and 12-5=7.",
+        "15 - 6 = 9."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "15 - 6",
+        "expected": "9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n032",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find '?' using the consistent row relationship in the table.",
+        "options": [
+          {
+            "id": "a",
+            "text": "28"
+          },
+          {
+            "id": "b",
+            "text": "32"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "34"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n038",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "6",
+                  "4",
+                  "20"
+                ],
+                [
+                  "8",
+                  "5",
+                  "26"
+                ],
+                [
+                  "9",
+                  "7",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Third = 2 * (First + Second): 2*(6+4)=20 and 2*(8+5)=26. 2 * (9 + 7) = 32.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = 2 * (First + Second): 2*(6+4)=20 and 2*(8+5)=26.",
+        "2 * (9 + 7) = 32."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 * (9 + 7)",
+        "expected": "32"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n033",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each row in the matrix uses squares to produce the third number. What replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "22"
+          },
+          {
+            "id": "d",
+            "text": "52"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n039",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "3",
+                  "4",
+                  "13"
+                ],
+                [
+                  "5",
+                  "2",
+                  "27"
+                ],
+                [
+                  "4",
+                  "6",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Third = First² + Second: 3²+4=13 and 5²+2=27. 4² + 6 = 16 + 6 = 22.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = First² + Second: 3²+4=13 and 5²+2=27.",
+        "4² + 6 = 16 + 6 = 22."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "4 * 4 + 6",
+        "expected": "22"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n034",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the 3x3 matrix, the sum of every row AND every column is 30. What is '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "9"
+          },
+          {
+            "id": "d",
+            "text": "7"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n040",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "12",
+                  "7",
+                  "11"
+                ],
+                [
+                  "8",
+                  "10",
+                  "12"
+                ],
+                [
+                  "10",
+                  "13",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Row 3 must sum to 30: 10 + 13 + ? = 30. 30 - 23 = 7 (and Column 3: 11 + 12 + 7 = 30 confirms it).",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Row 3 must sum to 30: 10 + 13 + ? = 30.",
+        "30 - 23 = 7 (and Column 3: 11 + 12 + 7 = 30 confirms it)."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "30 - 10 - 13",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n035",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Each column follows the same arithmetic rule from top to bottom. Find '?'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "6"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "15"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n041",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "18",
+                  "24",
+                  "30"
+                ],
+                [
+                  "3",
+                  "4",
+                  "5"
+                ],
+                [
+                  "12",
+                  "12",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Bottom = (Top / Middle) * 2: (18/3)*2=12 and (24/4)*2=12. (30 / 5) * 2 = 12.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Bottom = (Top / Middle) * 2: (18/3)*2=12 and (24/4)*2=12.",
+        "(30 / 5) * 2 = 12."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(30 / 5) * 2",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n036",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Look at the pairs in the table. What number replaces '?'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "16"
+          },
+          {
+            "id": "d",
+            "text": "21"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "mat_n042",
+            "type": "table",
+            "altText": "Number matrix table with 3 rows and 3 columns containing a missing value.",
+            "title": "Number Matrix",
+            "data": {
+              "headers": [
+                "Col 1",
+                "Col 2",
+                "Col 3"
+              ],
+              "rows": [
+                [
+                  "12",
+                  "18",
+                  "6"
+                ],
+                [
+                  "20",
+                  "35",
+                  "15"
+                ],
+                [
+                  "27",
+                  "45",
+                  "?"
+                ]
+              ]
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Third = Second - First: 18-12=6 and 35-20=15. 45 - 27 = 18.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "number matrices",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-number-matrices"
+        }
+      },
+      "workedSolution": [
+        "Third = Second - First: 18-12=6 and 35-20=15.",
+        "45 - 27 = 18."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "45 - 27",
+        "expected": "18"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v025",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of the following are collective nouns for animals. Which word is NOT a collective noun?",
+        "options": [
+          {
+            "id": "a",
+            "text": "BURROW"
+          },
+          {
+            "id": "b",
+            "text": "FLOCK"
+          },
+          {
+            "id": "c",
+            "text": "POD"
+          },
+          {
+            "id": "d",
+            "text": "COLONY"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Flock, pod and colony are collective nouns for groups of animals. A burrow is a tunnel or shelter dug by an animal.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Flock, pod and colony are collective nouns for groups of animals.",
+        "A burrow is a tunnel or shelter dug by an animal."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v026",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word does NOT belong with the other three: EPHEMERAL, TRANSIENT, FLEETING, PERPETUAL?",
+        "options": [
+          {
+            "id": "a",
+            "text": "EPHEMERAL"
+          },
+          {
+            "id": "b",
+            "text": "PERPETUAL"
+          },
+          {
+            "id": "c",
+            "text": "TRANSIENT"
+          },
+          {
+            "id": "d",
+            "text": "FLEETING"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Ephemeral, transient and fleeting all mean short-lived or temporary. Perpetual means lasting forever.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Ephemeral, transient and fleeting all mean short-lived or temporary.",
+        "Perpetual means lasting forever."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v027",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three of these words contain a silent letter when pronounced in standard Australian English. Which word has NO silent letter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "KNIGHT"
+          },
+          {
+            "id": "b",
+            "text": "PSALM"
+          },
+          {
+            "id": "c",
+            "text": "CRISP"
+          },
+          {
+            "id": "d",
+            "text": "WRECK"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Knight (k), psalm (p) and wreck (w) each begin with a silent letter. Every letter in crisp is sounded.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Knight (k), psalm (p) and wreck (w) each begin with a silent letter.",
+        "Every letter in crisp is sounded."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v028",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is the odd one out: SONNET, HAIKU, LIMERICK, BIOGRAPHY?",
+        "options": [
+          {
+            "id": "a",
+            "text": "SONNET"
+          },
+          {
+            "id": "b",
+            "text": "HAIKU"
+          },
+          {
+            "id": "c",
+            "text": "LIMERICK"
+          },
+          {
+            "id": "d",
+            "text": "BIOGRAPHY"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Sonnet, haiku and limerick are poetic forms. A biography is a prose account of a person's life.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "verbal classification",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-classification"
+        }
+      },
+      "workedSolution": [
+        "Sonnet, haiku and limerick are poetic forms.",
+        "A biography is a prose account of a person's life."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v029",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a simple Caesar code, every letter is shifted forward by 1 in the alphabet (A→B, B→C, ..., Z→A). How is CAMP written in this code?",
+        "options": [
+          {
+            "id": "a",
+            "text": "DBNQ"
+          },
+          {
+            "id": "b",
+            "text": "BBLO"
+          },
+          {
+            "id": "c",
+            "text": "DBMP"
+          },
+          {
+            "id": "d",
+            "text": "ECOR"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Shift each letter +1: C→D, A→B, M→N, P→Q. Combining gives DBNQ.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Shift each letter +1: C→D, A→B, M→N, P→Q.",
+        "Combining gives DBNQ."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v030",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 1=A, 2=B, 3=C, ..., 26=Z, what word is represented by 19-20-1-18?",
+        "options": [
+          {
+            "id": "a",
+            "text": "SPAR"
+          },
+          {
+            "id": "b",
+            "text": "STAR"
+          },
+          {
+            "id": "c",
+            "text": "STAY"
+          },
+          {
+            "id": "d",
+            "text": "TRAP"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "19=S, 20=T, 1=A, 18=R. Together they spell STAR.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "19=S, 20=T, 1=A, 18=R.",
+        "Together they spell STAR."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v031",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a secret code, BOOK is written as KOOB and LAMP is written as PMAL. How is TABLE written in the same code?",
+        "options": [
+          {
+            "id": "a",
+            "text": "ELABT"
+          },
+          {
+            "id": "b",
+            "text": "LEBAT"
+          },
+          {
+            "id": "c",
+            "text": "ELBAT"
+          },
+          {
+            "id": "d",
+            "text": "TABEL"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The code simply reverses the order of the letters. Reversing T-A-B-L-E gives E-L-B-A-T.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 45,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "The code simply reverses the order of the letters.",
+        "Reversing T-A-B-L-E gives E-L-B-A-T."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v032",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a certain cipher, every letter is shifted backward by 2 places (C→A, D→B, ..., A→Y, B→Z). What is the coded form of FROG?",
+        "options": [
+          {
+            "id": "a",
+            "text": "HQPI"
+          },
+          {
+            "id": "b",
+            "text": "EPNF"
+          },
+          {
+            "id": "c",
+            "text": "DQME"
+          },
+          {
+            "id": "d",
+            "text": "DPME"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Shift each letter -2: F(6)→D(4), R(18)→P(16), O(15)→M(13), G(7)→E(5). The coded word is DPME.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Shift each letter -2: F(6)→D(4), R(18)→P(16), O(15)→M(13), G(7)→E(5).",
+        "The coded word is DPME."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v033",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If CAT = 24 and DOG = 26 (using A=1, B=2, ..., Z=26 and adding letter values), what is the value of FOX?",
+        "options": [
+          {
+            "id": "a",
+            "text": "45"
+          },
+          {
+            "id": "b",
+            "text": "42"
+          },
+          {
+            "id": "c",
+            "text": "44"
+          },
+          {
+            "id": "d",
+            "text": "48"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Check: C(3)+A(1)+T(20)=24; D(4)+O(15)+G(7)=26. FOX = F(6) + O(15) + X(24) = 45.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Check: C(3)+A(1)+T(20)=24; D(4)+O(15)+G(7)=26.",
+        "FOX = F(6) + O(15) + X(24) = 45."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v034",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a code, RAIN is written as SBJO and WIND is written as XJOE. Which English word was coded as DMPVE?",
+        "options": [
+          {
+            "id": "a",
+            "text": "BLNTC"
+          },
+          {
+            "id": "b",
+            "text": "CLOUD"
+          },
+          {
+            "id": "c",
+            "text": "EMQWF"
+          },
+          {
+            "id": "d",
+            "text": "CROWD"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Encoding shifts each letter +1, so decoding shifts each letter -1. D→C, M→L, P→O, V→U, E→D gives CLOUD.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Encoding shifts each letter +1, so decoding shifts each letter -1.",
+        "D→C, M→L, P→O, V→U, E→D gives CLOUD."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v035",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a substitution code, 3-4-1-2 means swapping pairs of letters in a 4-letter word? No: if WORD is coded as RDWO, how is PLAN coded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "NALP"
+          },
+          {
+            "id": "b",
+            "text": "LPNA"
+          },
+          {
+            "id": "c",
+            "text": "ANPL"
+          },
+          {
+            "id": "d",
+            "text": "ANLP"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "WORD (1-2-3-4) becomes RDWO (3-4-1-2): the last two letters move to the front. Applying 3-4-1-2 to PLAN gives ANPL.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "WORD (1-2-3-4) becomes RDWO (3-4-1-2): the last two letters move to the front.",
+        "Applying 3-4-1-2 to PLAN gives ANPL."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v036",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a cipher, vowels are shifted +1 (A→B, E→F, I→J, O→P, U→V) while consonants stay unchanged. How is STONE coded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "SUPNF"
+          },
+          {
+            "id": "b",
+            "text": "STPMF"
+          },
+          {
+            "id": "c",
+            "text": "RUPNF"
+          },
+          {
+            "id": "d",
+            "text": "STPNF"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Consonants S, T, N stay unchanged; O→P and E→F. STONE becomes STPNF.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "coded words",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-coded-words"
+        }
+      },
+      "workedSolution": [
+        "Consonants S, T, N stay unchanged; O→P and E→F.",
+        "STONE becomes STPNF."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r021",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which bird is heard singing in the second stanza?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A magpie"
+          },
+          {
+            "id": "b",
+            "text": "A kookaburra"
+          },
+          {
+            "id": "c",
+            "text": "A sparrow"
+          },
+          {
+            "id": "d",
+            "text": "A swan"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Line 5 states: 'A magpie tunes a flute-note from the willow's trailing hem.' Exam technique: verify 'A magpie' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Stone Bridge at Dawn",
+          "body": "Before the waking baker lights his oven in the lane,\nThe grey-backed bridge remembers every footstep in the rain.\nIts mossy arches cradle mist above the silent creek,\nWhere silver minnows dart between the pebbles, swift and sleek.\n\nA magpie tunes a flute-note from the willow's trailing hem,\nAnd sunlight threads the water with a momentary gem.\nThough motorcars will thunder past before the clock strikes nine,\nAt dawn the bridge belongs to stillness, stone, and silver line.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Line 5 states: 'A magpie tunes a flute-note from the willow's trailing hem.'",
+        "Exam technique: verify 'A magpie' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r022",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What poetic device is used in 'The grey-backed bridge remembers every footstep'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Simile"
+          },
+          {
+            "id": "b",
+            "text": "Personification"
+          },
+          {
+            "id": "c",
+            "text": "Onomatopoeia"
+          },
+          {
+            "id": "d",
+            "text": "Hyperbole"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Giving the stone bridge the human ability to 'remember' is personification. Exam technique: verify 'Personification' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "The Stone Bridge at Dawn",
+          "body": "Before the waking baker lights his oven in the lane,\nThe grey-backed bridge remembers every footstep in the rain.\nIts mossy arches cradle mist above the silent creek,\nWhere silver minnows dart between the pebbles, swift and sleek.\n\nA magpie tunes a flute-note from the willow's trailing hem,\nAnd sunlight threads the water with a momentary gem.\nThough motorcars will thunder past before the clock strikes nine,\nAt dawn the bridge belongs to stillness, stone, and silver line.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Giving the stone bridge the human ability to 'remember' is personification.",
+        "Exam technique: verify 'Personification' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r023",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does the phrase 'a momentary gem' most likely refer to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A diamond ring dropped from the bridge"
+          },
+          {
+            "id": "b",
+            "text": "A coloured stone embedded in the baker's wall"
+          },
+          {
+            "id": "c",
+            "text": "A brief sparkle of early sunlight reflecting on the water"
+          },
+          {
+            "id": "d",
+            "text": "A glowing streetlamp beside the lane"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "'Sunlight threads the water with a momentary gem' describes a fleeting gleam of sunlight on the creek. Exam technique: verify 'A brief sparkle of early sunlight reflecting on the water' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "The Stone Bridge at Dawn",
+          "body": "Before the waking baker lights his oven in the lane,\nThe grey-backed bridge remembers every footstep in the rain.\nIts mossy arches cradle mist above the silent creek,\nWhere silver minnows dart between the pebbles, swift and sleek.\n\nA magpie tunes a flute-note from the willow's trailing hem,\nAnd sunlight threads the water with a momentary gem.\nThough motorcars will thunder past before the clock strikes nine,\nAt dawn the bridge belongs to stillness, stone, and silver line.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Sunlight threads the water with a momentary gem' describes a fleeting gleam of sunlight on the creek.",
+        "Exam technique: verify 'A brief sparkle of early sunlight reflecting on the water' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r024",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the mood shift in the final two lines of the poem?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It celebrates the arrival of loud motorcars as an improvement."
+          },
+          {
+            "id": "b",
+            "text": "It warns that the bridge is about to collapse under traffic."
+          },
+          {
+            "id": "c",
+            "text": "It expresses anger toward the baker for waking early."
+          },
+          {
+            "id": "d",
+            "text": "It briefly contrasts the coming busy daytime traffic with the peacefulness of dawn."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "'Though motorcars will thunder past ... At dawn the bridge belongs to stillness' contrasts future noise with present calm. Exam technique: verify 'It briefly contrasts the coming busy daytime traffic with the peacefulness of dawn.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-tone-analysis"
+        },
+        "stimulus": {
+          "title": "The Stone Bridge at Dawn",
+          "body": "Before the waking baker lights his oven in the lane,\nThe grey-backed bridge remembers every footstep in the rain.\nIts mossy arches cradle mist above the silent creek,\nWhere silver minnows dart between the pebbles, swift and sleek.\n\nA magpie tunes a flute-note from the willow's trailing hem,\nAnd sunlight threads the water with a momentary gem.\nThough motorcars will thunder past before the clock strikes nine,\nAt dawn the bridge belongs to stillness, stone, and silver line.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Though motorcars will thunder past ... At dawn the bridge belongs to stillness' contrasts future noise with present calm.",
+        "Exam technique: verify 'It briefly contrasts the coming busy daytime traffic with the peacefulness of dawn.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r025",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the rhyme scheme of the poem?",
+        "options": [
+          {
+            "id": "a",
+            "text": "AABB CCDD (rhyming couplets)"
+          },
+          {
+            "id": "b",
+            "text": "ABAB CDCD"
+          },
+          {
+            "id": "c",
+            "text": "ABBA CDDC"
+          },
+          {
+            "id": "d",
+            "text": "Free verse with no rhyme"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "lane/rain (AA), creek/sleek (BB), hem/gem (CC), nine/line (DD). Exam technique: verify 'AABB CCDD (rhyming couplets)' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "The Stone Bridge at Dawn",
+          "body": "Before the waking baker lights his oven in the lane,\nThe grey-backed bridge remembers every footstep in the rain.\nIts mossy arches cradle mist above the silent creek,\nWhere silver minnows dart between the pebbles, swift and sleek.\n\nA magpie tunes a flute-note from the willow's trailing hem,\nAnd sunlight threads the water with a momentary gem.\nThough motorcars will thunder past before the clock strikes nine,\nAt dawn the bridge belongs to stillness, stone, and silver line.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "lane/rain (AA), creek/sleek (BB), hem/gem (CC), nine/line (DD).",
+        "Exam technique: verify 'AABB CCDD (rhyming couplets)' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r026",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What two substances react with oxygen to create bioluminescence?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Saltwater and cobalt"
+          },
+          {
+            "id": "b",
+            "text": "Luciferin and the enzyme luciferase"
+          },
+          {
+            "id": "c",
+            "text": "Sunlight and seawater"
+          },
+          {
+            "id": "d",
+            "text": "Nitrogen and carbon"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The passage states: 'a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase.' Exam technique: verify 'Luciferin and the enzyme luciferase' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 140,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Living Lanterns of the Twilight Zone",
+          "body": "Two hundred metres below the ocean's surface, sunlight fades to a faint cobalt dusk, and by one thousand metres it vanishes altogether. Yet this dark expanse—known to marine scientists as the mesopelagic or twilight zone—is far from lifeless. More than three-quarters of the creatures living there produce their own light through a chemical reaction called bioluminescence. Inside specialised cells, a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase, releasing energy almost entirely as cool blue-green light rather than heat. Deep-sea animals put this glow to remarkably varied uses. The hatchetfish, for example, lines its belly with light-producing organs tuned to match the faint downwelling sunlight above, erasing its own silhouette so predators swimming underneath cannot spot it. Other species flash sudden bursts of glowing mucus to startle attackers, while the anglerfish dangles a luminous lure in front of its jaws to attract curious prey. Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue—making red light nearly invisible in the deep.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage states: 'a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase.'",
+        "Exam technique: verify 'Luciferin and the enzyme luciferase' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r027",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the hatchetfish's glowing belly help it survive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It blinds predators with a sudden flash of red light."
+          },
+          {
+            "id": "b",
+            "text": "It heats the surrounding water to drive away sharks."
+          },
+          {
+            "id": "c",
+            "text": "It camouflages the fish's shadow against the faint light coming from above."
+          },
+          {
+            "id": "d",
+            "text": "It lures smaller fish directly into its mouth."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Matching the faint downwelling sunlight 'erases its own silhouette so predators swimming underneath cannot spot it.' Exam technique: verify 'It camouflages the fish's shadow against the faint light coming from above.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-cause-effect"
+        },
+        "stimulus": {
+          "title": "Living Lanterns of the Twilight Zone",
+          "body": "Two hundred metres below the ocean's surface, sunlight fades to a faint cobalt dusk, and by one thousand metres it vanishes altogether. Yet this dark expanse—known to marine scientists as the mesopelagic or twilight zone—is far from lifeless. More than three-quarters of the creatures living there produce their own light through a chemical reaction called bioluminescence. Inside specialised cells, a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase, releasing energy almost entirely as cool blue-green light rather than heat. Deep-sea animals put this glow to remarkably varied uses. The hatchetfish, for example, lines its belly with light-producing organs tuned to match the faint downwelling sunlight above, erasing its own silhouette so predators swimming underneath cannot spot it. Other species flash sudden bursts of glowing mucus to startle attackers, while the anglerfish dangles a luminous lure in front of its jaws to attract curious prey. Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue—making red light nearly invisible in the deep.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Matching the faint downwelling sunlight 'erases its own silhouette so predators swimming underneath cannot spot it.'",
+        "Exam technique: verify 'It camouflages the fish's shadow against the faint light coming from above.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r028",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why do most bioluminescent ocean creatures glow blue rather than red?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red light produces too much heat and burns the fish."
+          },
+          {
+            "id": "b",
+            "text": "Blue light is easier for predators to ignore."
+          },
+          {
+            "id": "c",
+            "text": "Oxygen only reacts with luciferin to make blue light near the surface."
+          },
+          {
+            "id": "d",
+            "text": "Blue light travels much further through seawater than red light."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The final sentence explains: 'Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue.' Exam technique: verify 'Blue light travels much further through seawater than red light.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "Living Lanterns of the Twilight Zone",
+          "body": "Two hundred metres below the ocean's surface, sunlight fades to a faint cobalt dusk, and by one thousand metres it vanishes altogether. Yet this dark expanse—known to marine scientists as the mesopelagic or twilight zone—is far from lifeless. More than three-quarters of the creatures living there produce their own light through a chemical reaction called bioluminescence. Inside specialised cells, a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase, releasing energy almost entirely as cool blue-green light rather than heat. Deep-sea animals put this glow to remarkably varied uses. The hatchetfish, for example, lines its belly with light-producing organs tuned to match the faint downwelling sunlight above, erasing its own silhouette so predators swimming underneath cannot spot it. Other species flash sudden bursts of glowing mucus to startle attackers, while the anglerfish dangles a luminous lure in front of its jaws to attract curious prey. Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue—making red light nearly invisible in the deep.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The final sentence explains: 'Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue.'",
+        "Exam technique: verify 'Blue light travels much further through seawater than red light.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r029",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does the word 'silhouette' mean in the context of the hatchetfish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A dark outline or shadow seen against a lighter background"
+          },
+          {
+            "id": "b",
+            "text": "A bright reflection on the ocean surface"
+          },
+          {
+            "id": "c",
+            "text": "A protective shell covering the gills"
+          },
+          {
+            "id": "d",
+            "text": "A chemical trail left behind in water"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Seen from below against faint sunlight, a fish normally casts a dark outline (silhouette). Exam technique: verify 'A dark outline or shadow seen against a lighter background' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "Living Lanterns of the Twilight Zone",
+          "body": "Two hundred metres below the ocean's surface, sunlight fades to a faint cobalt dusk, and by one thousand metres it vanishes altogether. Yet this dark expanse—known to marine scientists as the mesopelagic or twilight zone—is far from lifeless. More than three-quarters of the creatures living there produce their own light through a chemical reaction called bioluminescence. Inside specialised cells, a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase, releasing energy almost entirely as cool blue-green light rather than heat. Deep-sea animals put this glow to remarkably varied uses. The hatchetfish, for example, lines its belly with light-producing organs tuned to match the faint downwelling sunlight above, erasing its own silhouette so predators swimming underneath cannot spot it. Other species flash sudden bursts of glowing mucus to startle attackers, while the anglerfish dangles a luminous lure in front of its jaws to attract curious prey. Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue—making red light nearly invisible in the deep.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Seen from below against faint sunlight, a fish normally casts a dark outline (silhouette).",
+        "Exam technique: verify 'A dark outline or shadow seen against a lighter background' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r030",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which statement best summarises the passage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sunlight reaches one thousand metres deep in clear tropical oceans."
+          },
+          {
+            "id": "b",
+            "text": "Deep-sea organisms use efficient chemical light in diverse ways to hide, defend themselves, and hunt."
+          },
+          {
+            "id": "c",
+            "text": "Anglerfish are the only predators in the mesopelagic zone."
+          },
+          {
+            "id": "d",
+            "text": "Bioluminescence wastes energy by producing large amounts of heat."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The passage explains how bioluminescence works chemically and surveys its three main survival uses. Exam technique: verify 'Deep-sea organisms use efficient chemical light in diverse ways to hide, defend themselves, and hunt.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "Living Lanterns of the Twilight Zone",
+          "body": "Two hundred metres below the ocean's surface, sunlight fades to a faint cobalt dusk, and by one thousand metres it vanishes altogether. Yet this dark expanse—known to marine scientists as the mesopelagic or twilight zone—is far from lifeless. More than three-quarters of the creatures living there produce their own light through a chemical reaction called bioluminescence. Inside specialised cells, a molecule named luciferin reacts with oxygen in the presence of an enzyme called luciferase, releasing energy almost entirely as cool blue-green light rather than heat. Deep-sea animals put this glow to remarkably varied uses. The hatchetfish, for example, lines its belly with light-producing organs tuned to match the faint downwelling sunlight above, erasing its own silhouette so predators swimming underneath cannot spot it. Other species flash sudden bursts of glowing mucus to startle attackers, while the anglerfish dangles a luminous lure in front of its jaws to attract curious prey. Because blue wavelengths travel furthest through seawater, most marine bioluminescence glows blue—making red light nearly invisible in the deep.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage explains how bioluminescence works chemically and surveys its three main survival uses.",
+        "Exam technique: verify 'Deep-sea organisms use efficient chemical light in diverse ways to hide, defend themselves, and hunt.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w009",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "After the Bushfire Rain: Describe a eucalyptus gully a month after rain returns following a long dry summer. Capture the contrast between charred bark and bright new shoots.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: descriptive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Use colour, sound and texture contrasts to convey renewal. Vary sentence length for rhythmic control.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing descriptive",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "descriptive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: descriptive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Use colour, sound and texture contrasts to convey renewal.",
+        "Vary sentence length for rhythmic control."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained descriptive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w010",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Should Smartphones Wait Until High School?: Argue for or against the view that children should wait until Year 8 before owning a personal smartphone. Address both safety benefits and social pressures.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Structure: Hook + Thesis → Argument 1 → Argument 2 → Counterargument & Rebuttal → Conclusion. Maintain a respectful, reasoned tone throughout.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Structure: Hook + Thesis → Argument 1 → Argument 2 → Counterargument & Rebuttal → Conclusion.",
+        "Maintain a respectful, reasoned tone throughout."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w011",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Map Without Names: A hiker finds a hand-drawn map in a hollow log showing landmarks—'Split Boulder', 'Echo Creek', 'Three Pines'—but no town names. Write the story of following it.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Plan each landmark as a stepping stone in the plot. Use vivid verbs and tight pacing.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing creative",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "creative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: creative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Plan each landmark as a stepping stone in the plot.",
+        "Use vivid verbs and tight pacing."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained creative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w012",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Designing a Fair School Timetable: Explain how a school principal should balance core academic subjects, sport, arts and rest breaks when designing a weekly Year 6 timetable.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: informative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Consider energy levels across the day, variety and teacher availability. Present ideas in a logical, structured sequence.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing informative",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "informative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: informative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Consider energy levels across the day, variety and teacher availability.",
+        "Present ideas in a logical, structured sequence."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained informative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    }
+  ]
+}

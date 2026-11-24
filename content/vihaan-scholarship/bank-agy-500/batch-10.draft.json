@@ -1,0 +1,3091 @@
+{
+  "batchId": "vihaan-agy-10",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m109",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A decimal number is multiplied by 100 and then 4.5 is subtracted, giving 37.5. What was the original decimal number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.33"
+          },
+          {
+            "id": "b",
+            "text": "0.45"
+          },
+          {
+            "id": "c",
+            "text": "4.2"
+          },
+          {
+            "id": "d",
+            "text": "0.42"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Add 4.5 to 37.5 to get 42. Divide by 100: 42 / 100 = 0.42.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "Add 4.5 to 37.5 to get 42.",
+        "Divide by 100: 42 / 100 = 0.42."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(37.5 + 4.5) / 100",
+        "expected": "0.42"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m110",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two pipes fill a pool. Pipe A fills 1/6 of the pool per hour and Pipe B fills 1/12 of the pool per hour. Working together, how many hours do they take to fill the whole pool?",
+        "options": [
+          {
+            "id": "a",
+            "text": "4"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "4.5"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Combined rate = 1/6 + 1/12 = 2/12 + 1/12 = 3/12 = 1/4 of the pool per hour. At 1/4 per hour, it takes 4 hours to fill the pool.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "Combined rate = 1/6 + 1/12 = 2/12 + 1/12 = 3/12 = 1/4 of the pool per hour.",
+        "At 1/4 per hour, it takes 4 hours to fill the pool."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "1 / (1/6 + 1/12)",
+        "expected": "4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m111",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the reciprocal of (3/4 + 1/8)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "7/8"
+          },
+          {
+            "id": "b",
+            "text": "8/7"
+          },
+          {
+            "id": "c",
+            "text": "4/12"
+          },
+          {
+            "id": "d",
+            "text": "7/4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Add inside the brackets: 3/4 + 1/8 = 6/8 + 1/8 = 7/8. The reciprocal of 7/8 is 8/7.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Fractions and Decimals",
+          "topic": "maths fractions decimals",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-fractions-decimals"
+        }
+      },
+      "workedSolution": [
+        "Add inside the brackets: 3/4 + 1/8 = 6/8 + 1/8 = 7/8.",
+        "The reciprocal of 7/8 is 8/7."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "1 / (3/4 + 1/8)",
+        "expected": "8/7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m112",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A 200 g salt solution is 10% salt. How many grams of pure water must evaporate so that the remaining solution becomes 25% salt?",
+        "options": [
+          {
+            "id": "a",
+            "text": "80"
+          },
+          {
+            "id": "b",
+            "text": "100"
+          },
+          {
+            "id": "c",
+            "text": "150"
+          },
+          {
+            "id": "d",
+            "text": "120"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The mass of salt stays constant at 10% of 200 g = 20 g. For 20 g to be 25% of the new total, the new total mass is 20 / 0.25 = 80 g, so 200 - 80 = 120 g of water evaporates.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 145,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "The mass of salt stays constant at 10% of 200 g = 20 g.",
+        "For 20 g to be 25% of the new total, the new total mass is 20 / 0.25 = 80 g, so 200 - 80 = 120 g of water evaporates."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "200 - (200 * 0.10) / 0.25",
+        "expected": "120"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m113",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bookstore marks up its books by 40% above cost price, then offers a 15% discount to members. What percentage profit does the bookstore make on a member's purchase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "19%"
+          },
+          {
+            "id": "b",
+            "text": "21%"
+          },
+          {
+            "id": "c",
+            "text": "25%"
+          },
+          {
+            "id": "d",
+            "text": "29%"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Member price factor = 1.40 * 0.85 = 1.19. 1.19 represents a 19% profit over cost price.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Member price factor = 1.40 * 0.85 = 1.19.",
+        "1.19 represents a 19% profit over cost price."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(1.40 * 0.85 - 1) * 100",
+        "expected": "19%"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m114",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a school election, Candidate A received 45% of the votes, Candidate B received 35%, and the remaining 64 votes were invalid. How many valid votes did Candidate A receive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "112"
+          },
+          {
+            "id": "b",
+            "text": "144"
+          },
+          {
+            "id": "c",
+            "text": "128"
+          },
+          {
+            "id": "d",
+            "text": "160"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Invalid votes = 100% - 45% - 35% = 20% = 64 votes, so total votes = 64 * 5 = 320. Candidate A received 45% of 320 = 144 votes.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Percentages",
+          "topic": "maths percentages",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-percentages"
+        }
+      },
+      "workedSolution": [
+        "Invalid votes = 100% - 45% - 35% = 20% = 64 votes, so total votes = 64 * 5 = 320.",
+        "Candidate A received 45% of 320 = 144 votes."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(64 / 0.20) * 0.45",
+        "expected": "144"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m115",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A biased die is twice as likely to land on an even number as on an odd number. All even numbers are equally likely, and all odd numbers are equally likely. What is the probability of rolling a 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/6"
+          },
+          {
+            "id": "b",
+            "text": "1/9"
+          },
+          {
+            "id": "c",
+            "text": "2/9"
+          },
+          {
+            "id": "d",
+            "text": "1/3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Assign weight 1 to each odd face (1, 3, 5) and weight 2 to each even face (2, 4, 6). Total weight = 3(1) + 3(2) = 9, so P(4) = 2/9.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 135,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Assign weight 1 to each odd face (1, 3, 5) and weight 2 to each even face (2, 4, 6).",
+        "Total weight = 3(1) + 3(2) = 9, so P(4) = 2/9."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "2 / (3 * 1 + 3 * 2)",
+        "expected": "2/9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m116",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "From the digits 2, 4, 5, 7, a two-digit number is formed without repeating digits. What is the probability that the number is divisible by 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/5"
+          },
+          {
+            "id": "b",
+            "text": "1/3"
+          },
+          {
+            "id": "c",
+            "text": "3/10"
+          },
+          {
+            "id": "d",
+            "text": "1/4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "There are 4 * 3 = 12 possible two-digit numbers. To be divisible by 5, the units digit must be 5, leaving 3 choices for the tens digit: 3/12 = 1/4.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "There are 4 * 3 = 12 possible two-digit numbers.",
+        "To be divisible by 5, the units digit must be 5, leaving 3 choices for the tens digit: 3/12 = 1/4."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "3 / 12",
+        "expected": "1/4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m117",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A spinner has sectors coloured red, blue and yellow. P(red) = 2/5 and P(blue) = 1/3. If the spinner is spun 75 times, how many times would you expect it to land on yellow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "25"
+          },
+          {
+            "id": "d",
+            "text": "30"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "P(yellow) = 1 - 2/5 - 1/3 = 1 - 11/15 = 4/15. Expected yellow spins = 75 * (4/15) = 20.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "P(yellow) = 1 - 2/5 - 1/3 = 1 - 11/15 = 4/15.",
+        "Expected yellow spins = 75 * (4/15) = 20."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "75 * (1 - 2/5 - 1/3)",
+        "expected": "20"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m118",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two gears are meshed together. Gear X has 24 teeth and Gear Y has 36 teeth. When Gear X makes 15 full turns, how many full turns does Gear Y make?",
+        "options": [
+          {
+            "id": "a",
+            "text": "9"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "22.5"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Total teeth passing the contact point = 24 * 15 = 360. Gear Y turns = 360 / 36 = 10 turns.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "Total teeth passing the contact point = 24 * 15 = 360.",
+        "Gear Y turns = 360 / 36 = 10 turns."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(24 * 15) / 36",
+        "expected": "10"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m119",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A leaking tap loses 15 mL of water every 20 seconds. How many litres of water are wasted in 2 hours?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2.7"
+          },
+          {
+            "id": "b",
+            "text": "4.5"
+          },
+          {
+            "id": "c",
+            "text": "5.4"
+          },
+          {
+            "id": "d",
+            "text": "10.8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "In 1 minute (60 s) it loses 15 * 3 = 45 mL. In 2 hours (120 min) it loses 45 * 120 = 5400 mL = 5.4 L.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "In 1 minute (60 s) it loses 15 * 3 = 45 mL.",
+        "In 2 hours (120 min) it loses 45 * 120 = 5400 mL = 5.4 L."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(15 * 3 * 120) / 1000",
+        "expected": "5.4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m120",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Sam and Tahlia share prize money in the ratio 4 : 7. If Tahlia gives $18 to Sam, they will have equal amounts. How much prize money did they share in total in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "66"
+          },
+          {
+            "id": "b",
+            "text": "108"
+          },
+          {
+            "id": "c",
+            "text": "144"
+          },
+          {
+            "id": "d",
+            "text": "132"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "To equalise, Tahlia's lead of 3 parts must be twice $18 = $36. 3 parts = $36, so 1 part = $12, and total = 11 * 12 = $132.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Ratios and Rates",
+          "topic": "maths ratios rates",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.maths-ratios-rates"
+        }
+      },
+      "workedSolution": [
+        "To equalise, Tahlia's lead of 3 parts must be twice $18 = $36.",
+        "3 parts = $36, so 1 part = $12, and total = 11 * 12 = $132."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution, distractor quality, and pacing."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(18 * 2 / (7 - 4)) * (4 + 7)",
+        "expected": "132"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n109",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A digital clock shows 24-hour time from 00:00 to 23:59. How many times during a full day does the clock display 11:11? No—how many times in a single hour from 03:00 to 03:59 does the sum of the four digits equal 10?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "5"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "With hour 03, the two minute digits must sum to 10 - 3 = 7. Valid minute pairs (m1, m2) with m1 in 0..5 and m2 in 0..9 summing to 7: 07, 16, 25, 34, 43, 52 — 6 times.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "With hour 03, the two minute digits must sum to 10 - 3 = 7.",
+        "Valid minute pairs (m1, m2) with m1 in 0..5 and m2 in 0..9 summing to 7: 07, 16, 25, 34, 43, 52 — 6 times."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "6",
+        "expected": "6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n110",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a tournament, 16 teams play a single-elimination knockout (each match eliminates 1 team). How many matches are played to crown the champion?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "15"
+          },
+          {
+            "id": "c",
+            "text": "14"
+          },
+          {
+            "id": "d",
+            "text": "16"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Every match eliminates exactly 1 team, and 15 teams must be eliminated to leave 1 champion. Therefore, 15 matches are needed.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Every match eliminates exactly 1 team, and 15 teams must be eliminated to leave 1 champion.",
+        "Therefore, 15 matches are needed."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "16 - 1",
+        "expected": "15"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n111",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The product of two whole numbers is 144 and their greatest common factor (HCF) is 4. What is their least common multiple (LCM)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "18"
+          },
+          {
+            "id": "b",
+            "text": "24"
+          },
+          {
+            "id": "c",
+            "text": "36"
+          },
+          {
+            "id": "d",
+            "text": "48"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "For any two positive integers, HCF * LCM = Product. LCM = 144 / 4 = 36.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "For any two positive integers, HCF * LCM = Product.",
+        "LCM = 144 / 4 = 36."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "144 / 4",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n112",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A book has 180 pages numbered 1 to 180. How many times is the digit 2 printed in the page numbers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "36"
+          },
+          {
+            "id": "b",
+            "text": "37"
+          },
+          {
+            "id": "c",
+            "text": "39"
+          },
+          {
+            "id": "d",
+            "text": "38"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Units place: 18 times (2, 12, ..., 172). Tens place: 20 times (20..29 and 120..129). Hundreds place: 0 times (max page 180). Total = 18 + 20 = 38.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "Units place: 18 times (2, 12, ..., 172). Tens place: 20 times (20..29 and 120..129).",
+        "Hundreds place: 0 times (max page 180). Total = 18 + 20 = 38."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "18 + 20",
+        "expected": "38"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n113",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a non-leap year, 1st January is a Tuesday. What is the date of the first Sunday in March of that same year?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3"
+          },
+          {
+            "id": "b",
+            "text": "1"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "From 1st Jan to 1st Mar is 31 + 28 = 59 days = 8 weeks + 3 days, so 1st March is a Friday. Saturday is 2nd March and the first Sunday is 3rd March.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "From 1st Jan to 1st Mar is 31 + 28 = 59 days = 8 weeks + 3 days, so 1st March is a Friday.",
+        "Saturday is 2nd March and the first Sunday is 3rd March."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "3",
+        "expected": "3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n114",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A 2-digit number is equal to 7 times the sum of its digits. What is the smallest such 2-digit number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "14"
+          },
+          {
+            "id": "b",
+            "text": "21"
+          },
+          {
+            "id": "c",
+            "text": "28"
+          },
+          {
+            "id": "d",
+            "text": "42"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "10a + b = 7(a + b) simplifies to 3a = 6b, so a = 2b. With b = 1, a = 2 gives the smallest such number, 21.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "logical deduction numbers",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 120,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-logic-deduction-numbers"
+        }
+      },
+      "workedSolution": [
+        "10a + b = 7(a + b) simplifies to 3a = 6b, so a = 2b.",
+        "With b = 1, a = 2 gives the smallest such number, 21."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "21",
+        "expected": "21"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n115",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shop mixes tea costing $18/kg with tea costing $24/kg in the ratio 2 : 1 by mass. What is the cost of 1 kg of the blend in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "19"
+          },
+          {
+            "id": "b",
+            "text": "21"
+          },
+          {
+            "id": "c",
+            "text": "20"
+          },
+          {
+            "id": "d",
+            "text": "22"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "3 kg of blend costs 2 * 18 + 24 = 36 + 24 = $60. 1 kg costs 60 / 3 = $20.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "3 kg of blend costs 2 * 18 + 24 = 36 + 24 = $60.",
+        "1 kg costs 60 / 3 = $20."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(2 * 18 + 1 * 24) / 3",
+        "expected": "20"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n116",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A student scored an average of 76 across 4 tests. What score must she get on the 5th test to raise her overall average to 80?",
+        "options": [
+          {
+            "id": "a",
+            "text": "88"
+          },
+          {
+            "id": "b",
+            "text": "92"
+          },
+          {
+            "id": "c",
+            "text": "98"
+          },
+          {
+            "id": "d",
+            "text": "96"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Total needed across 5 tests = 5 * 80 = 400. Current total = 4 * 76 = 304. 5th test score = 400 - 304 = 96.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Total needed across 5 tests = 5 * 80 = 400. Current total = 4 * 76 = 304.",
+        "5th test score = 400 - 304 = 96."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "5 * 80 - 4 * 76",
+        "expected": "96"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n117",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A car uses 7.5 L of fuel per 100 km. Fuel costs $2.00 per litre. How much does fuel cost in dollars for a 360 km trip?",
+        "options": [
+          {
+            "id": "a",
+            "text": "54"
+          },
+          {
+            "id": "b",
+            "text": "48"
+          },
+          {
+            "id": "c",
+            "text": "51"
+          },
+          {
+            "id": "d",
+            "text": "60"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Fuel used = 3.6 * 7.5 = 27 L. Cost = 27 * $2.00 = $54.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Fuel used = 3.6 * 7.5 = 27 L.",
+        "Cost = 27 * $2.00 = $54."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "(360 / 100) * 7.5 * 2",
+        "expected": "54"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n118",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three bells ring at intervals of 12 s, 15 s and 20 s. If they all ring together at 9:00:00 am, how many times will they ring together again between 9:00:01 am and 9:05:00 am?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3"
+          },
+          {
+            "id": "b",
+            "text": "5"
+          },
+          {
+            "id": "c",
+            "text": "4"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "LCM(12, 15, 20) = 60 seconds (1 minute). From 9:00:01 to 9:05:00 is 5 minutes, so they ring together at 9:01, 9:02, 9:03, 9:04 and 9:05 (5 times).",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 115,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "LCM(12, 15, 20) = 60 seconds (1 minute).",
+        "From 9:00:01 to 9:05:00 is 5 minutes, so they ring together at 9:01, 9:02, 9:03, 9:04 and 9:05 (5 times)."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "300 / 60",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n119",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A rope 9.6 m long is cut into two pieces such that one piece is 3 times as long as the other. How many centimetres longer is the longer piece than the shorter piece?",
+        "options": [
+          {
+            "id": "a",
+            "text": "240"
+          },
+          {
+            "id": "b",
+            "text": "360"
+          },
+          {
+            "id": "c",
+            "text": "480"
+          },
+          {
+            "id": "d",
+            "text": "720"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Total parts = 3 + 1 = 4, so the shorter piece is 9.6 / 4 = 2.4 m and the longer is 7.2 m. Difference = 7.2 - 2.4 = 4.8 m = 480 cm.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Total parts = 3 + 1 = 4, so the shorter piece is 9.6 / 4 = 2.4 m and the longer is 7.2 m.",
+        "Difference = 7.2 - 2.4 = 4.8 m = 480 cm."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "((9.6 / 4) * (3 - 1)) * 100",
+        "expected": "480"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n120",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A staircase has 10 steps. Each step is 18 cm high and 25 cm deep. A carpet runner is laid tightly over all 10 risers and all 10 treads from the bottom to the top. What is the total length of carpet needed in centimetres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "250"
+          },
+          {
+            "id": "b",
+            "text": "360"
+          },
+          {
+            "id": "c",
+            "text": "450"
+          },
+          {
+            "id": "d",
+            "text": "430"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Each step contributes one 18 cm riser and one 25 cm tread: 18 + 25 = 43 cm. Across 10 steps: 10 * 43 = 430 cm.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Each step contributes one 18 cm riser and one 25 cm tread: 18 + 25 = 43 cm.",
+        "Across 10 steps: 10 * 43 = 430 cm."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify blind solution and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true,
+      "arithmeticCheck": {
+        "expression": "10 * (18 + 25)",
+        "expected": "430"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v109",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find the missing group: A1Z, C3X, E5V, G7T, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "H8S"
+          },
+          {
+            "id": "b",
+            "text": "I9R"
+          },
+          {
+            "id": "c",
+            "text": "I9S"
+          },
+          {
+            "id": "d",
+            "text": "J10R"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "1st letter +2 (A,C,E,G,I); middle number +2 (1,3,5,7,9); last letter -2 (Z,X,V,T,R). Result: I9R.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "1st letter +2 (A,C,E,G,I); middle number +2 (1,3,5,7,9); last letter -2 (Z,X,V,T,R).",
+        "Result: I9R."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v110",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which letter completes the alternating series: D, H, F, J, H, L, J, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "K"
+          },
+          {
+            "id": "b",
+            "text": "L"
+          },
+          {
+            "id": "c",
+            "text": "N"
+          },
+          {
+            "id": "d",
+            "text": "M"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Odd positions: D, F, H, J (+2). Even positions: H, J, L (+2). The 8th term is L + 2 = N.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "Odd positions: D, F, H, J (+2). Even positions: H, J, L (+2).",
+        "The 8th term is L + 2 = N."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v111",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What comes next in: B, E, J, Q, ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "X"
+          },
+          {
+            "id": "b",
+            "text": "Y"
+          },
+          {
+            "id": "c",
+            "text": "A"
+          },
+          {
+            "id": "d",
+            "text": "Z"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Positions are 2, 5, 10, 17 (which are n² + 1 for n = 1, 2, 3, 4). For n = 5, 5² + 1 = 26, which is Z.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "letter series",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-letter-series"
+        }
+      },
+      "workedSolution": [
+        "Positions are 2, 5, 10, 17 (which are n² + 1 for n = 1, 2, 3, 4).",
+        "For n = 5, 5² + 1 = 26, which is Z."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v112",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Four students sit in a row of 4 seats numbered 1 to 4. Maya is not next to Leo. Sam is in seat 1. Leo is in seat 4. Where must Maya sit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Seat 3"
+          },
+          {
+            "id": "b",
+            "text": "Seat 1"
+          },
+          {
+            "id": "c",
+            "text": "Seat 4"
+          },
+          {
+            "id": "d",
+            "text": "Seat 2"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Seats 1 and 4 are taken by Sam and Leo, leaving seats 2 and 3. Since Maya cannot sit next to Leo (seat 4), Maya cannot sit in seat 3, so Maya must sit in seat 2.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Seats 1 and 4 are taken by Sam and Leo, leaving seats 2 and 3.",
+        "Since Maya cannot sit next to Leo (seat 4), Maya cannot sit in seat 3, so Maya must sit in seat 2."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v113",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a debate, Mia argues: 'Our town should build a new bike path because cycling reduces traffic congestion.' Which assumption is Mia's argument relying on?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Some residents will choose cycling over driving if a safe bike path is built."
+          },
+          {
+            "id": "b",
+            "text": "Everyone in the town owns a bicycle."
+          },
+          {
+            "id": "c",
+            "text": "Cars are banned from the town centre."
+          },
+          {
+            "id": "d",
+            "text": "Building a bike path costs nothing."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "For a bike path to reduce traffic congestion, drivers must switch some trips to cycling. The other options are extreme and unnecessary.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "For a bike path to reduce traffic congestion, drivers must switch some trips to cycling.",
+        "The other options are extreme and unnecessary."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v114",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shop offers a discount ONLY if you spend over $50 AND present a member card. Which customer is definitely NOT eligible for the discount?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A member who spends $60"
+          },
+          {
+            "id": "b",
+            "text": "A member who spends $45"
+          },
+          {
+            "id": "c",
+            "text": "A member who spends $55"
+          },
+          {
+            "id": "d",
+            "text": "Someone whose receipt is $80 (if they have a card)"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Both conditions must be met: over $50 AND member card. Spending $45 fails the over-$50 condition regardless of membership.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "sentence logic",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-sentence-logic"
+        }
+      },
+      "workedSolution": [
+        "Both conditions must be met: over $50 AND member card.",
+        "Spending $45 fails the over-$50 condition regardless of membership."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v115",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is most opposite in meaning to VERBOSE?",
+        "options": [
+          {
+            "id": "a",
+            "text": "WORDY"
+          },
+          {
+            "id": "b",
+            "text": "ELOQUENT"
+          },
+          {
+            "id": "c",
+            "text": "CONCISE"
+          },
+          {
+            "id": "d",
+            "text": "FLUENT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Verbose means using more words than needed. Concise means brief and clear.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Verbose means using more words than needed.",
+        "Concise means brief and clear."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v116",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest synonym for INADVERTENT.",
+        "options": [
+          {
+            "id": "a",
+            "text": "DELIBERATE"
+          },
+          {
+            "id": "b",
+            "text": "CARELESS"
+          },
+          {
+            "id": "c",
+            "text": "FREQUENT"
+          },
+          {
+            "id": "d",
+            "text": "UNINTENTIONAL"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Inadvertent means not resulting from deliberate planning. Unintentional is the exact synonym.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Inadvertent means not resulting from deliberate planning.",
+        "Unintentional is the exact synonym."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v117",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest antonym for BENEVOLENT.",
+        "options": [
+          {
+            "id": "a",
+            "text": "MALEVOLENT"
+          },
+          {
+            "id": "b",
+            "text": "GENEROUS"
+          },
+          {
+            "id": "c",
+            "text": "INDIFFERENT"
+          },
+          {
+            "id": "d",
+            "text": "STRICT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Benevolent means well-meaning and kindly (bene = good). Malevolent means wishing harm to others (male = evil).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Benevolent means well-meaning and kindly (bene = good).",
+        "Malevolent means wishing harm to others (male = evil)."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v118",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which pair of words has the same relationship as (AUTHOR, COPYRIGHT)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "(PAINTER, GALLERY)"
+          },
+          {
+            "id": "b",
+            "text": "(INVENTOR, PATENT)"
+          },
+          {
+            "id": "c",
+            "text": "(TEACHER, SYLLABUS)"
+          },
+          {
+            "id": "d",
+            "text": "(ATHLETE, TROPHY)"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Copyright legally protects an author's original work. A patent legally protects an inventor's original invention.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Copyright legally protects an author's original work.",
+        "A patent legally protects an inventor's original invention."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v119",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Find the 5-letter word that fits the pattern: _ A _ E _ , meaning 'a person who bakes bread'.",
+        "options": [
+          {
+            "id": "a",
+            "text": "MAKER"
+          },
+          {
+            "id": "b",
+            "text": "TAKER"
+          },
+          {
+            "id": "c",
+            "text": "BAKER"
+          },
+          {
+            "id": "d",
+            "text": "WAKER"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Pattern _ A _ E _ with meaning 'person who bakes bread' uniquely identifies BAKER. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "Pattern _ A _ E _ with meaning 'person who bakes bread' uniquely identifies BAKER.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v120",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is BOTH a noun meaning 'a sharp blow' and a verb meaning 'to hit' AND an anagram of 'BATS'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "SLAP"
+          },
+          {
+            "id": "b",
+            "text": "BASH"
+          },
+          {
+            "id": "c",
+            "text": "TABS"
+          },
+          {
+            "id": "d",
+            "text": "STAB"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "STAB uses the letters of BATS (S-T-A-B), and functions as both a noun and a verb meaning a sharp thrust/hit. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "word relationships",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.vr-word-relationships"
+        }
+      },
+      "workedSolution": [
+        "STAB uses the letters of BATS (S-T-A-B), and functions as both a noun and a verb meaning a sharp thrust/hit.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Mock-reserved item: verify unambiguous key and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r091",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "When does the writer say skimming is genuinely useful?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When analysing a complex poem in an exam"
+          },
+          {
+            "id": "b",
+            "text": "When reading a long historical essay"
+          },
+          {
+            "id": "c",
+            "text": "When checking something practical like a train timetable"
+          },
+          {
+            "id": "d",
+            "text": "When studying a writer's hidden attitude"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The writer notes skimming 'is useful when checking a train timetable.' Exam technique: verify 'When checking something practical like a train timetable' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 125,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Case for Slow Reading in a Skimming World",
+          "body": "When we scroll through headlines on a phone, our eyes dart in an F-shaped pattern, hunting for keywords and skipping whole paragraphs in seconds. That habit is useful when checking a train timetable, yet dangerous when we carry it into novels, history essays, or exam passages. Complex writing rarely places its richest meaning in the first sentence of a paragraph. An author's real attitude often hides in a qualifying word like 'although', a sudden shift in tense, or a quiet image tucked near the end. Slow reading—pausing to question why a writer chose one word over another—trains the mind to notice nuance rather than merely harvesting facts. In a timed exam, reading a passage once with full concentration actually saves time compared with skimming it twice in a panic and missing the point.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The writer notes skimming 'is useful when checking a train timetable.'",
+        "Exam technique: verify 'When checking something practical like a train timetable' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r092",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the writer warn against skimming exam passages?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Exam passages never contain any facts."
+          },
+          {
+            "id": "b",
+            "text": "Skimming causes eye strain on paper tests."
+          },
+          {
+            "id": "c",
+            "text": "Graders deduct marks if you read quickly."
+          },
+          {
+            "id": "d",
+            "text": "Rushed skimming misses subtle clues like qualifying words and often forces a panicked second read."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The writer explains subtle meaning hides in words like 'although', and skimming twice in a panic wastes time. Exam technique: verify 'Rushed skimming misses subtle clues like qualifying words and often forces a panicked second read.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-argument-evaluation"
+        },
+        "stimulus": {
+          "title": "The Case for Slow Reading in a Skimming World",
+          "body": "When we scroll through headlines on a phone, our eyes dart in an F-shaped pattern, hunting for keywords and skipping whole paragraphs in seconds. That habit is useful when checking a train timetable, yet dangerous when we carry it into novels, history essays, or exam passages. Complex writing rarely places its richest meaning in the first sentence of a paragraph. An author's real attitude often hides in a qualifying word like 'although', a sudden shift in tense, or a quiet image tucked near the end. Slow reading—pausing to question why a writer chose one word over another—trains the mind to notice nuance rather than merely harvesting facts. In a timed exam, reading a passage once with full concentration actually saves time compared with skimming it twice in a panic and missing the point.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The writer explains subtle meaning hides in words like 'although', and skimming twice in a panic wastes time.",
+        "Exam technique: verify 'Rushed skimming misses subtle clues like qualifying words and often forces a panicked second read.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r093",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does 'nuance' mean in the context of the passage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Subtle shades of meaning or expression"
+          },
+          {
+            "id": "b",
+            "text": "Loud, obvious slogans"
+          },
+          {
+            "id": "c",
+            "text": "Spelling mistakes"
+          },
+          {
+            "id": "d",
+            "text": "Page numbers"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Slow reading notices subtle shifts in tone and word choice ('nuance') rather than just headline facts. Exam technique: verify 'Subtle shades of meaning or expression' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "The Case for Slow Reading in a Skimming World",
+          "body": "When we scroll through headlines on a phone, our eyes dart in an F-shaped pattern, hunting for keywords and skipping whole paragraphs in seconds. That habit is useful when checking a train timetable, yet dangerous when we carry it into novels, history essays, or exam passages. Complex writing rarely places its richest meaning in the first sentence of a paragraph. An author's real attitude often hides in a qualifying word like 'although', a sudden shift in tense, or a quiet image tucked near the end. Slow reading—pausing to question why a writer chose one word over another—trains the mind to notice nuance rather than merely harvesting facts. In a timed exam, reading a passage once with full concentration actually saves time compared with skimming it twice in a panic and missing the point.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Slow reading notices subtle shifts in tone and word choice ('nuance') rather than just headline facts.",
+        "Exam technique: verify 'Subtle shades of meaning or expression' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r094",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the writer's final sentence support the title 'The Case for Slow Reading'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It advises students to leave half the exam blank."
+          },
+          {
+            "id": "b",
+            "text": "It argues that careful initial reading is paradoxically faster and more accurate under time pressure."
+          },
+          {
+            "id": "c",
+            "text": "It claims slow readers never finish train journeys."
+          },
+          {
+            "id": "d",
+            "text": "It suggests banning phones in libraries."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Showing that slow reading 'actually saves time' counters the objection that slow reading is impractical in exams. Exam technique: verify 'It argues that careful initial reading is paradoxically faster and more accurate under time pressure.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "The Case for Slow Reading in a Skimming World",
+          "body": "When we scroll through headlines on a phone, our eyes dart in an F-shaped pattern, hunting for keywords and skipping whole paragraphs in seconds. That habit is useful when checking a train timetable, yet dangerous when we carry it into novels, history essays, or exam passages. Complex writing rarely places its richest meaning in the first sentence of a paragraph. An author's real attitude often hides in a qualifying word like 'although', a sudden shift in tense, or a quiet image tucked near the end. Slow reading—pausing to question why a writer chose one word over another—trains the mind to notice nuance rather than merely harvesting facts. In a timed exam, reading a passage once with full concentration actually saves time compared with skimming it twice in a panic and missing the point.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Showing that slow reading 'actually saves time' counters the objection that slow reading is impractical in exams.",
+        "Exam technique: verify 'It argues that careful initial reading is paradoxically faster and more accurate under time pressure.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r095",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which best describes the writer's approach to technology and reading?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hostile—demanding that all phones be destroyed."
+          },
+          {
+            "id": "b",
+            "text": "Careless—advising readers to ignore timetables."
+          },
+          {
+            "id": "c",
+            "text": "Discriminating—recognising that fast skimming fits quick tasks while deep reading fits complex texts."
+          },
+          {
+            "id": "d",
+            "text": "Indifferent—claiming all reading styles produce identical results."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The writer distinguishes where skimming works from where slow reading is essential. Exam technique: verify 'Discriminating—recognising that fast skimming fits quick tasks while deep reading fits complex texts.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-tone-analysis"
+        },
+        "stimulus": {
+          "title": "The Case for Slow Reading in a Skimming World",
+          "body": "When we scroll through headlines on a phone, our eyes dart in an F-shaped pattern, hunting for keywords and skipping whole paragraphs in seconds. That habit is useful when checking a train timetable, yet dangerous when we carry it into novels, history essays, or exam passages. Complex writing rarely places its richest meaning in the first sentence of a paragraph. An author's real attitude often hides in a qualifying word like 'although', a sudden shift in tense, or a quiet image tucked near the end. Slow reading—pausing to question why a writer chose one word over another—trains the mind to notice nuance rather than merely harvesting facts. In a timed exam, reading a passage once with full concentration actually saves time compared with skimming it twice in a panic and missing the point.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The writer distinguishes where skimming works from where slow reading is essential.",
+        "Exam technique: verify 'Discriminating—recognising that fast skimming fits quick tasks while deep reading fits complex texts.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r096",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What poetic device is used in 'the tin roof drums its silver code' and 'A steady tap-dance'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Simile using 'like' or 'as'"
+          },
+          {
+            "id": "b",
+            "text": "Rhetorical question"
+          },
+          {
+            "id": "c",
+            "text": "Oxymoron"
+          },
+          {
+            "id": "d",
+            "text": "Metaphor (comparing rain on iron to drumming and dancing)"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Directly calling the rain's sound a 'silver code' and 'tap-dance' is metaphor (also auditory imagery). Exam technique: verify 'Metaphor (comparing rain on iron to drumming and dancing)' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "Winter Rain on Corrugated Iron",
+          "body": "All night the tin roof drums its silver code,\nA steady tap-dance marching down the eaves,\nWhile gutters gurgle down the gravel road\nAnd puddle-mirrors catch the falling leaves.\n\nInside, the kettle hums a softer tune,\nAnd shadows stretch beside the cedar door;\nOutside, the paddock drinks the gift of June\nAnd stores the sky beneath its thirsty floor.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Directly calling the rain's sound a 'silver code' and 'tap-dance' is metaphor (also auditory imagery).",
+        "Exam technique: verify 'Metaphor (comparing rain on iron to drumming and dancing)' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r097",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In the line 'And puddle-mirrors catch the falling leaves', why are puddles called 'mirrors'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Their still, flat water surfaces reflect the sky and leaves above."
+          },
+          {
+            "id": "b",
+            "text": "They are made of broken glass."
+          },
+          {
+            "id": "c",
+            "text": "They freeze into solid ice sheets."
+          },
+          {
+            "id": "d",
+            "text": "They shine like car headlights."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Water surfaces act like mirrors by reflecting falling leaves. Exam technique: verify 'Their still, flat water surfaces reflect the sky and leaves above.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "Winter Rain on Corrugated Iron",
+          "body": "All night the tin roof drums its silver code,\nA steady tap-dance marching down the eaves,\nWhile gutters gurgle down the gravel road\nAnd puddle-mirrors catch the falling leaves.\n\nInside, the kettle hums a softer tune,\nAnd shadows stretch beside the cedar door;\nOutside, the paddock drinks the gift of June\nAnd stores the sky beneath its thirsty floor.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Water surfaces act like mirrors by reflecting falling leaves.",
+        "Exam technique: verify 'Their still, flat water surfaces reflect the sky and leaves above.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r098",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What season is described in the poem?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Mid-summer"
+          },
+          {
+            "id": "b",
+            "text": "Winter (in the Southern Hemisphere, indicated by June)"
+          },
+          {
+            "id": "c",
+            "text": "Early autumn"
+          },
+          {
+            "id": "d",
+            "text": "Late spring"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The title mentions 'Winter Rain' and line 7 refers to 'the gift of June'. Exam technique: verify 'Winter (in the Southern Hemisphere, indicated by June)' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "Winter Rain on Corrugated Iron",
+          "body": "All night the tin roof drums its silver code,\nA steady tap-dance marching down the eaves,\nWhile gutters gurgle down the gravel road\nAnd puddle-mirrors catch the falling leaves.\n\nInside, the kettle hums a softer tune,\nAnd shadows stretch beside the cedar door;\nOutside, the paddock drinks the gift of June\nAnd stores the sky beneath its thirsty floor.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The title mentions 'Winter Rain' and line 7 refers to 'the gift of June'.",
+        "Exam technique: verify 'Winter (in the Southern Hemisphere, indicated by June)' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r099",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What does the final line—'And stores the sky beneath its thirsty floor'—mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Clouds are trapped inside a wooden barn."
+          },
+          {
+            "id": "b",
+            "text": "The sky falls down onto the gravel road."
+          },
+          {
+            "id": "c",
+            "text": "The dry paddock soil absorbs the rainwater deep underground."
+          },
+          {
+            "id": "d",
+            "text": "The paddock floods permanently into a lake."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "'Stores the sky' metaphorically describes soil soaking up rainwater from the sky. Exam technique: verify 'The dry paddock soil absorbs the rainwater deep underground.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "Winter Rain on Corrugated Iron",
+          "body": "All night the tin roof drums its silver code,\nA steady tap-dance marching down the eaves,\nWhile gutters gurgle down the gravel road\nAnd puddle-mirrors catch the falling leaves.\n\nInside, the kettle hums a softer tune,\nAnd shadows stretch beside the cedar door;\nOutside, the paddock drinks the gift of June\nAnd stores the sky beneath its thirsty floor.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "'Stores the sky' metaphorically describes soil soaking up rainwater from the sky.",
+        "Exam technique: verify 'The dry paddock soil absorbs the rainwater deep underground.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r100",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the second stanza contrast with the first stanza?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It switches from winter to a hot summer afternoon."
+          },
+          {
+            "id": "b",
+            "text": "It introduces a storm that damages the cedar door."
+          },
+          {
+            "id": "c",
+            "text": "It changes from rhyming lines to unrhymed prose."
+          },
+          {
+            "id": "d",
+            "text": "It moves from the noisy, brisk energy of rain outside to cosy warmth indoors and quiet absorption in the paddock."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Stanza 1 focuses on loud drumming/gurgling; Stanza 2 shifts to the kettle's softer hum and the paddock drinking quietly. Exam technique: verify 'It moves from the noisy, brisk energy of rain outside to cosy warmth indoors and quiet absorption in the paddock.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "mock-reserved"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "Winter Rain on Corrugated Iron",
+          "body": "All night the tin roof drums its silver code,\nA steady tap-dance marching down the eaves,\nWhile gutters gurgle down the gravel road\nAnd puddle-mirrors catch the falling leaves.\n\nInside, the kettle hums a softer tune,\nAnd shadows stretch beside the cedar door;\nOutside, the paddock drinks the gift of June\nAnd stores the sky beneath its thirsty floor.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Stanza 1 focuses on loud drumming/gurgling; Stanza 2 shifts to the kettle's softer hum and the paddock drinking quietly.",
+        "Exam technique: verify 'It moves from the noisy, brisk energy of rain outside to cosy warmth indoors and quiet absorption in the paddock.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w037",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Zoos: Conservation or Captivity?: Modern zoos argue they protect endangered species, while critics say wild animals belong in natural habitats. Write a persuasive essay taking a clear, nuanced position.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Weigh breeding programs and education against habitat space. Synthesise your strongest reasons in a memorable conclusion.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "medium",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Weigh breeding programs and education against habitat space.",
+        "Synthesise your strongest reasons in a memorable conclusion."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w038",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Should Daylight Saving Be Abolished or Extended?: Write a persuasive essay arguing whether Australian states should keep, extend or abolish daylight saving time, weighing energy, health, agriculture and lifestyle.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Address regional differences (e.g. rural vs urban) in your rebuttal. Keep paragraphs focused on one central claim each.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Address regional differences (e.g. rural vs urban) in your rebuttal.",
+        "Keep paragraphs focused on one central claim each."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w039",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Tide Table Mistake: Two friends exploring sea caves misread the afternoon tide chart by one hour. Write a tense, realistic story about how they notice the danger and reach safety.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Use accurate coastal detail and calm decision-making. Avoid exaggerated melodrama; keep action credible.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing narrative",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "narrative",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Use accurate coastal detail and calm decision-making.",
+        "Avoid exaggerated melodrama; keep action credible."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained narrative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w040",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Value of Learning a Second Language: Beyond ordering food on holiday, how does learning another language reshape the way we think, listen and understand other cultures? Write a well-structured essay.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Organise around cognitive, cultural and practical dimensions. Reserve 3 minutes to proofread spelling and sentence boundaries.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository",
+            "mock-reserved"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Organise around cognitive, cultural and practical dimensions.",
+        "Reserve 3 minutes to proofread spelling and sentence boundaries."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": true
+    }
+  ]
+}

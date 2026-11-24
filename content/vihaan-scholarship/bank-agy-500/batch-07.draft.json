@@ -1,0 +1,3097 @@
+{
+  "batchId": "vihaan-agy-07",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "provenance": {
+    "adapter": "manual_external",
+    "author": "Antigravity session",
+    "model": null,
+    "generatedOn": "2026-11-18",
+    "originalGenerationEvidence": "Session-authored original problems, diagrams, passages and writing prompts; deterministic assembly from checked-in authoring modules.",
+    "externalQuestionMaterialUsed": false,
+    "formatReference": "https://www.edutest.com.au/tests_parents.html",
+    "formatReferenceUse": "Public assessment areas and writing modes only; no external or copyrighted test questions used.",
+    "promptFile": "authoring-brief.md"
+  },
+  "items": [
+    {
+      "question": {
+        "id": "vihaan-agy-m073",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A fair six-sided die is rolled once. What is the probability of rolling a number greater than 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/6"
+          },
+          {
+            "id": "b",
+            "text": "1/2"
+          },
+          {
+            "id": "c",
+            "text": "1/3"
+          },
+          {
+            "id": "d",
+            "text": "2/3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Numbers greater than 4 are 5 and 6 (2 outcomes out of 6). 2/6 simplifies to 1/3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Numbers greater than 4 are 5 and 6 (2 outcomes out of 6).",
+        "2/6 simplifies to 1/3."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 / 6",
+        "expected": "1/3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m074",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The bar chart shows the number of books read by four students in Term 2: Mia 8, Leo 12, Ava 10, Sam 6. How many books did they read in total?",
+        "options": [
+          {
+            "id": "a",
+            "text": "32"
+          },
+          {
+            "id": "b",
+            "text": "34"
+          },
+          {
+            "id": "c",
+            "text": "38"
+          },
+          {
+            "id": "d",
+            "text": "36"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "bar_m072",
+            "type": "bar_chart",
+            "altText": "Bar chart of books read by Mia (8), Leo (12), Ava (10), and Sam (6).",
+            "title": "Term 2 Reading",
+            "data": {
+              "labels": [
+                "Mia",
+                "Leo",
+                "Ava",
+                "Sam"
+              ],
+              "values": [
+                8,
+                12,
+                10,
+                6
+              ],
+              "xAxisLabel": "Student",
+              "yAxisLabel": "Books"
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Add the four bar heights: 8 + 12 + 10 + 6 = 36 books. Verification tip: test the remaining options against the rule to confirm only one choice fits.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Add the four bar heights: 8 + 12 + 10 + 6 = 36 books.",
+        "Verification tip: test the remaining options against the rule to confirm only one choice fits."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "8 + 12 + 10 + 6",
+        "expected": "36"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m075",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bag holds 5 red, 4 blue and 3 green marbles. One marble is drawn at random. What is the probability that it is NOT blue?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2/3"
+          },
+          {
+            "id": "b",
+            "text": "1/3"
+          },
+          {
+            "id": "c",
+            "text": "5/12"
+          },
+          {
+            "id": "d",
+            "text": "3/4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Total marbles = 5 + 4 + 3 = 12. Non-blue marbles = 5 + 3 = 8. 8/12 simplifies to 2/3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Total marbles = 5 + 4 + 3 = 12. Non-blue marbles = 5 + 3 = 8.",
+        "8/12 simplifies to 2/3."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(5 + 3) / (5 + 4 + 3)",
+        "expected": "2/3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m076",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two fair coins are tossed together. What is the probability of getting at least one head?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/4"
+          },
+          {
+            "id": "b",
+            "text": "3/4"
+          },
+          {
+            "id": "c",
+            "text": "1/2"
+          },
+          {
+            "id": "d",
+            "text": "2/3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The four equally likely outcomes are HH, HT, TH, TT. Three of them (HH, HT, TH) have at least one head, giving 3/4.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "The four equally likely outcomes are HH, HT, TH, TT.",
+        "Three of them (HH, HT, TH) have at least one head, giving 3/4."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "3 / 4",
+        "expected": "3/4"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m077",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A spinner has 8 equal sectors numbered 1 to 8. What is the probability of landing on a prime number?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3/8"
+          },
+          {
+            "id": "b",
+            "text": "5/8"
+          },
+          {
+            "id": "c",
+            "text": "1/2"
+          },
+          {
+            "id": "d",
+            "text": "3/4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Prime numbers between 1 and 8 are 2, 3, 5 and 7 (remember 1 is not prime). 4 out of 8 simplifies to 1/2.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Prime numbers between 1 and 8 are 2, 3, 5 and 7 (remember 1 is not prime).",
+        "4 out of 8 simplifies to 1/2."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "4 / 8",
+        "expected": "1/2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m078",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The line graph tracks a cyclist's distance from home: (0, 0), (1, 12), (2, 24), (3, 24), (4, 36). What was the cyclist's average speed in km/h over the 4-hour trip?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "9"
+          }
+        ],
+        "visuals": [
+          {
+            "id": "lg_m076",
+            "type": "line_graph",
+            "altText": "Line graph of cyclist distance over 4 hours reaching 36 km.",
+            "title": "Cyclist Journey",
+            "data": {
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 1,
+                  "y": 12
+                },
+                {
+                  "x": 2,
+                  "y": 24
+                },
+                {
+                  "x": 3,
+                  "y": 24
+                },
+                {
+                  "x": 4,
+                  "y": 36
+                }
+              ],
+              "xAxisLabel": "Time (h)",
+              "yAxisLabel": "Distance (km)"
+            }
+          }
+        ],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Total distance covered in 4 hours is 36 km. Average speed = 36 / 4 = 9 km/h.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Total distance covered in 4 hours is 36 km.",
+        "Average speed = 36 / 4 = 9 km/h."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "36 / 4",
+        "expected": "9"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m079",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A box contains 6 black socks and 4 white socks. Two socks are drawn without replacement. What is the probability that both are black?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/3"
+          },
+          {
+            "id": "b",
+            "text": "9/25"
+          },
+          {
+            "id": "c",
+            "text": "2/5"
+          },
+          {
+            "id": "d",
+            "text": "3/10"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "First black: 6/10. Second black without replacement: 5/9. Multiply: (6/10) * (5/9) = 30/90 = 1/3.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "First black: 6/10. Second black without replacement: 5/9.",
+        "Multiply: (6/10) * (5/9) = 30/90 = 1/3."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(6 / 10) * (5 / 9)",
+        "expected": "1/3"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m080",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A letter is chosen at random from the word HUNTINGTOWER. What is the probability that it is the letter T?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/12"
+          },
+          {
+            "id": "b",
+            "text": "1/6"
+          },
+          {
+            "id": "c",
+            "text": "1/4"
+          },
+          {
+            "id": "d",
+            "text": "1/3"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "HUNTINGTOWER has 12 letters in total, and T appears twice. 2/12 simplifies to 1/6.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "HUNTINGTOWER has 12 letters in total, and T appears twice.",
+        "2/12 simplifies to 1/6."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 / 12",
+        "expected": "1/6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m081",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Two fair six-sided dice are rolled and their scores are added. What is the probability of getting a sum of 7?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1/12"
+          },
+          {
+            "id": "b",
+            "text": "5/36"
+          },
+          {
+            "id": "c",
+            "text": "1/6"
+          },
+          {
+            "id": "d",
+            "text": "7/36"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "There are 6 * 6 = 36 equally likely pairs. Six pairs sum to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), giving 6/36 = 1/6.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "There are 6 * 6 = 36 equally likely pairs.",
+        "Six pairs sum to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), giving 6/36 = 1/6."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "6 / 36",
+        "expected": "1/6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m082",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A jar contains 3 gold tokens and 5 silver tokens. Two tokens are drawn at random without replacement. What is the probability that they are DIFFERENT colours?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15/32"
+          },
+          {
+            "id": "b",
+            "text": "3/8"
+          },
+          {
+            "id": "c",
+            "text": "13/28"
+          },
+          {
+            "id": "d",
+            "text": "15/28"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "P(Gold then Silver) = (3/8)*(5/7) = 15/56. P(Silver then Gold) = (5/8)*(3/7) = 15/56. Add both orders: 30/56 = 15/28.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "P(Gold then Silver) = (3/8)*(5/7) = 15/56. P(Silver then Gold) = (5/8)*(3/7) = 15/56.",
+        "Add both orders: 30/56 = 15/28."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 * (3 / 8) * (5 / 7)",
+        "expected": "15/28"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m083",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a class of 32 students, 18 play soccer, 14 play tennis, and 6 play neither sport. If a student is chosen at random, what is the probability that the student plays BOTH sports?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3/16"
+          },
+          {
+            "id": "b",
+            "text": "1/8"
+          },
+          {
+            "id": "c",
+            "text": "1/4"
+          },
+          {
+            "id": "d",
+            "text": "5/16"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Students playing at least one sport = 32 - 6 = 26. Both sports = 18 + 14 - 26 = 6, so probability = 6/32 = 3/16.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "Students playing at least one sport = 32 - 6 = 26.",
+        "Both sports = 18 + 14 - 26 = 6, so probability = 6/32 = 3/16."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(18 + 14 - (32 - 6)) / 32",
+        "expected": "3/16"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-m084",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three fair coins are flipped. What is the probability of obtaining at most one tail?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3/8"
+          },
+          {
+            "id": "b",
+            "text": "1/2"
+          },
+          {
+            "id": "c",
+            "text": "5/8"
+          },
+          {
+            "id": "d",
+            "text": "3/4"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "At most one tail means 0 tails (HHH) or 1 tail (HHT, HTH, THH) — 4 outcomes out of 8. 4/8 = 1/2.",
+        "metadata": {
+          "subject": "numeracy",
+          "strand": "Probability",
+          "topic": "maths probability",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 110,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.maths-probability"
+        }
+      },
+      "workedSolution": [
+        "At most one tail means 0 tails (HHH) or 1 tail (HHT, HTH, THH) — 4 outcomes out of 8.",
+        "4/8 = 1/2."
+      ],
+      "reviewFocus": [
+        "Check sample space, replacement condition, and fraction simplification."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "4 / 8",
+        "expected": "1/2"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n073",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bus seats 44 passengers. How many buses are needed to carry 200 students on an excursion?",
+        "options": [
+          {
+            "id": "a",
+            "text": "4"
+          },
+          {
+            "id": "b",
+            "text": "4.5"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "200 / 44 = 4 remainder 24. An extra bus is required for the remaining 24 students, so 5 buses are needed.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "200 / 44 = 4 remainder 24.",
+        "An extra bus is required for the remaining 24 students, so 5 buses are needed."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "5",
+        "expected": "5"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n074",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A bakery packs muffins in boxes of 6. If 85 muffins are baked, how many muffins are left over after filling as many full boxes as possible?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "4"
+          },
+          {
+            "id": "d",
+            "text": "1"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "85 = 6 * 14 + 1. 14 boxes are filled with 1 muffin left over.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "85 = 6 * 14 + 1.",
+        "14 boxes are filled with 1 muffin left over."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "85 % 6",
+        "expected": "1"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n075",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Tickets to a museum cost $12 for adults and $7 for children. How much does it cost for 2 adults and 3 children in dollars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "45"
+          },
+          {
+            "id": "b",
+            "text": "38"
+          },
+          {
+            "id": "c",
+            "text": "42"
+          },
+          {
+            "id": "d",
+            "text": "50"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Adults: 2 * 12 = $24. Children: 3 * 7 = $21. Total = 24 + 21 = $45.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Adults: 2 * 12 = $24. Children: 3 * 7 = $21.",
+        "Total = 24 + 21 = $45."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "2 * 12 + 3 * 7",
+        "expected": "45"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n076",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A train leaves at 10:45 am and arrives at 1:20 pm. How many minutes does the journey take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "135"
+          },
+          {
+            "id": "b",
+            "text": "155"
+          },
+          {
+            "id": "c",
+            "text": "145"
+          },
+          {
+            "id": "d",
+            "text": "165"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "From 10:45 am to 11:00 am is 15 min; 11:00 am to 1:00 pm is 120 min; plus 20 min. 15 + 120 + 20 = 155 minutes.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 65,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "From 10:45 am to 11:00 am is 15 min; 11:00 am to 1:00 pm is 120 min; plus 20 min.",
+        "15 + 120 + 20 = 155 minutes."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "15 + 120 + 20",
+        "expected": "155"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n077",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "If 8 identical pens cost $20, how many dollars do 12 of the same pens cost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24"
+          },
+          {
+            "id": "b",
+            "text": "28"
+          },
+          {
+            "id": "c",
+            "text": "30"
+          },
+          {
+            "id": "d",
+            "text": "32"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "One pen costs 20 / 8 = $2.50. 12 pens cost 12 * 2.50 = $30.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "One pen costs 20 / 8 = $2.50.",
+        "12 pens cost 12 * 2.50 = $30."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(20 / 8) * 12",
+        "expected": "30"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n078",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A snail climbs 4 m up a well each day and slips back 2 m each night. How many days does it take to reach the top of a 14 m well?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5"
+          },
+          {
+            "id": "b",
+            "text": "7"
+          },
+          {
+            "id": "c",
+            "text": "8"
+          },
+          {
+            "id": "d",
+            "text": "6"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Net gain per full day-and-night is 4 - 2 = 2 m. After 5 days and nights it is at 10 m. On Day 6 it climbs 4 m to reach 14 m and exits before slipping back.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Net gain per full day-and-night is 4 - 2 = 2 m. After 5 days and nights it is at 10 m.",
+        "On Day 6 it climbs 4 m to reach 14 m and exits before slipping back."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(14 - 4) / (4 - 2) + 1",
+        "expected": "6"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n079",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "At a party, 240 mL cups are filled from a 3 L bottle of lemonade. How many full cups can be poured?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12"
+          },
+          {
+            "id": "b",
+            "text": "10"
+          },
+          {
+            "id": "c",
+            "text": "11"
+          },
+          {
+            "id": "d",
+            "text": "13"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "3 L = 3000 mL. 3000 / 240 = 12.5, so 12 full cups can be poured.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 80,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "3 L = 3000 mL.",
+        "3000 / 240 = 12.5, so 12 full cups can be poured."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "12",
+        "expected": "12"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n080",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "In a queue, Eli is 14th from the front and 19th from the back. How many people are in the queue?",
+        "options": [
+          {
+            "id": "a",
+            "text": "31"
+          },
+          {
+            "id": "b",
+            "text": "32"
+          },
+          {
+            "id": "c",
+            "text": "33"
+          },
+          {
+            "id": "d",
+            "text": "34"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Adding 14 + 19 counts Eli twice. 14 + 19 - 1 = 32 people.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Adding 14 + 19 counts Eli twice.",
+        "14 + 19 - 1 = 32 people."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "14 + 19 - 1",
+        "expected": "32"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n081",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A farmer has chickens and goats. Together they have 20 heads and 54 legs. How many goats does the farmer have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "7"
+          },
+          {
+            "id": "d",
+            "text": "13"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "If all 20 were chickens, there would be 40 legs. The extra 54 - 40 = 14 legs belong to goats (2 extra legs each), so 14 / 2 = 7 goats.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "If all 20 were chickens, there would be 40 legs.",
+        "The extra 54 - 40 = 14 legs belong to goats (2 extra legs each), so 14 / 2 = 7 goats."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(54 - 20 * 2) / 2",
+        "expected": "7"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n082",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A cyclist averages 24 km/h for 2.5 hours and then 18 km/h for 1.5 hours. What is the total distance travelled in kilometres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "81"
+          },
+          {
+            "id": "b",
+            "text": "84"
+          },
+          {
+            "id": "c",
+            "text": "90"
+          },
+          {
+            "id": "d",
+            "text": "87"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "First leg: 24 * 2.5 = 60 km. Second leg: 18 * 1.5 = 27 km. Total = 60 + 27 = 87 km.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "First leg: 24 * 2.5 = 60 km. Second leg: 18 * 1.5 = 27 km.",
+        "Total = 60 + 27 = 87 km."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "24 * 2.5 + 18 * 1.5",
+        "expected": "87"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n083",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "A shop sells oranges in bags of 5 for $4, or individually for $1 each. What is the minimum cost in dollars to buy exactly 23 oranges?",
+        "options": [
+          {
+            "id": "a",
+            "text": "19"
+          },
+          {
+            "id": "b",
+            "text": "18"
+          },
+          {
+            "id": "c",
+            "text": "20"
+          },
+          {
+            "id": "d",
+            "text": "23"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Buy 4 bags of 5 (20 oranges) for 4 * $4 = $16. Buy the remaining 3 oranges individually for $3: total $19.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 85,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Buy 4 bags of 5 (20 oranges) for 4 * $4 = $16.",
+        "Buy the remaining 3 oranges individually for $3: total $19."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "4 * 4 + 3 * 1",
+        "expected": "19"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-n084",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Three boxes A, B and C weigh 42 kg in total. Box A weighs 6 kg more than Box B, and Box C weighs 3 kg less than Box B. How many kilograms does Box B weigh?",
+        "options": [
+          {
+            "id": "a",
+            "text": "11"
+          },
+          {
+            "id": "b",
+            "text": "13"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "15"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Write in terms of B: (B + 6) + B + (B - 3) = 42, so 3B + 3 = 42. 3B = 39, giving B = 13 kg.",
+        "metadata": {
+          "subject": "numerical_reasoning",
+          "strand": "Numerical Reasoning",
+          "topic": "arithmetical reasoning",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.nr-arithmetical-reasoning"
+        }
+      },
+      "workedSolution": [
+        "Write in terms of B: (B + 6) + B + (B - 3) = 42, so 3B + 3 = 42.",
+        "3B = 39, giving B = 13 kg."
+      ],
+      "reviewFocus": [
+        "Verify numerical pattern uniqueness and distractor plausibility."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false,
+      "arithmeticCheck": {
+        "expression": "(42 - 6 + 3) / 3",
+        "expected": "13"
+      }
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v073",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is closest in meaning (synonym) to GENEROUS?",
+        "options": [
+          {
+            "id": "a",
+            "text": "SELFISH"
+          },
+          {
+            "id": "b",
+            "text": "CAUTIOUS"
+          },
+          {
+            "id": "c",
+            "text": "CHARITABLE"
+          },
+          {
+            "id": "d",
+            "text": "GREEDY"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Generous means willing to give freely. Charitable is the closest synonym.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 40,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Generous means willing to give freely.",
+        "Charitable is the closest synonym."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v074",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is most opposite in meaning (antonym) to ANCIENT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "HISTORIC"
+          },
+          {
+            "id": "b",
+            "text": "FRAGILE"
+          },
+          {
+            "id": "c",
+            "text": "DISTANT"
+          },
+          {
+            "id": "d",
+            "text": "MODERN"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Ancient means belonging to the very distant past. Modern is its direct antonym.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 40,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Ancient means belonging to the very distant past.",
+        "Modern is its direct antonym."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v075",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest synonym for RELUCTANT.",
+        "options": [
+          {
+            "id": "a",
+            "text": "HESITANT"
+          },
+          {
+            "id": "b",
+            "text": "EAGER"
+          },
+          {
+            "id": "c",
+            "text": "RECKLESS"
+          },
+          {
+            "id": "d",
+            "text": "CONFIDENT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Reluctant means unwilling or hesitant to act. Hesitant is the closest match.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Reluctant means unwilling or hesitant to act.",
+        "Hesitant is the closest match."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v076",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest antonym for SCARCE.",
+        "options": [
+          {
+            "id": "a",
+            "text": "RARE"
+          },
+          {
+            "id": "b",
+            "text": "ABUNDANT"
+          },
+          {
+            "id": "c",
+            "text": "PRECIOUS"
+          },
+          {
+            "id": "d",
+            "text": "LIMITED"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Scarce means in short supply. Abundant means existing in large quantities.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Scarce means in short supply.",
+        "Abundant means existing in large quantities."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v077",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is closest in meaning to METICULOUS?",
+        "options": [
+          {
+            "id": "a",
+            "text": "CARELESS"
+          },
+          {
+            "id": "b",
+            "text": "HASTY"
+          },
+          {
+            "id": "c",
+            "text": "THOROUGH"
+          },
+          {
+            "id": "d",
+            "text": "STUBBORN"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Meticulous means showing great attention to detail. Thorough is the closest synonym.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Meticulous means showing great attention to detail.",
+        "Thorough is the closest synonym."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v078",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is most opposite in meaning to TRANSPARENT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "FRAGILE"
+          },
+          {
+            "id": "b",
+            "text": "CLEAR"
+          },
+          {
+            "id": "c",
+            "text": "POLISHED"
+          },
+          {
+            "id": "d",
+            "text": "OPAQUE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Transparent lets light pass through clearly. Opaque blocks light completely.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 55,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Transparent lets light pass through clearly.",
+        "Opaque blocks light completely."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v079",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest synonym for RESILIENT.",
+        "options": [
+          {
+            "id": "a",
+            "text": "ADAPTABLE"
+          },
+          {
+            "id": "b",
+            "text": "BRITTLE"
+          },
+          {
+            "id": "c",
+            "text": "TIMID"
+          },
+          {
+            "id": "d",
+            "text": "FORGETFUL"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Resilient means able to recover quickly from difficulties. Adaptable is the closest positive match among the choices.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Resilient means able to recover quickly from difficulties.",
+        "Adaptable is the closest positive match among the choices."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v080",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest antonym for CONCEAL.",
+        "options": [
+          {
+            "id": "a",
+            "text": "GUARD"
+          },
+          {
+            "id": "b",
+            "text": "REVEAL"
+          },
+          {
+            "id": "c",
+            "text": "IGNORE"
+          },
+          {
+            "id": "d",
+            "text": "DISGUISE"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Conceal means to hide. Reveal means to make visible or known.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 50,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Conceal means to hide.",
+        "Reveal means to make visible or known."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v081",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is closest in meaning to PRUDENT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "FOOLISH"
+          },
+          {
+            "id": "b",
+            "text": "IMPULSIVE"
+          },
+          {
+            "id": "c",
+            "text": "WISE"
+          },
+          {
+            "id": "d",
+            "text": "ARROGANT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "Prudent means acting with care and thought for the future. Wise is the closest synonym.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 60,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Prudent means acting with care and thought for the future.",
+        "Wise is the closest synonym."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v082",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest synonym for UBIQUITOUS.",
+        "options": [
+          {
+            "id": "a",
+            "text": "UNUSUAL"
+          },
+          {
+            "id": "b",
+            "text": "OBSOLETE"
+          },
+          {
+            "id": "c",
+            "text": "SCATTERED"
+          },
+          {
+            "id": "d",
+            "text": "OMNIPRESENT"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Ubiquitous means seeming to be everywhere at once. Omnipresent has the exact same meaning.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 70,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Ubiquitous means seeming to be everywhere at once.",
+        "Omnipresent has the exact same meaning."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v083",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Select the closest antonym for CACOPHONY.",
+        "options": [
+          {
+            "id": "a",
+            "text": "HARMONY"
+          },
+          {
+            "id": "b",
+            "text": "DISCORD"
+          },
+          {
+            "id": "c",
+            "text": "SILENCE"
+          },
+          {
+            "id": "d",
+            "text": "CLAMOUR"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Cacophony is a harsh, jarring mixture of sounds. Harmony is a pleasing combination of sounds (whereas silence is the absence of sound).",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Cacophony is a harsh, jarring mixture of sounds.",
+        "Harmony is a pleasing combination of sounds (whereas silence is the absence of sound)."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-v084",
+        "type": "multiple_choice",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which word is closest in meaning to MAGNANIMOUS?",
+        "options": [
+          {
+            "id": "a",
+            "text": "PETTY"
+          },
+          {
+            "id": "b",
+            "text": "NOBLE"
+          },
+          {
+            "id": "c",
+            "text": "VINDICTIVE"
+          },
+          {
+            "id": "d",
+            "text": "SUSPICIOUS"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Magnanimous means generous and forgiving, especially toward a rival. Noble (of high moral character) is the closest match.",
+        "metadata": {
+          "subject": "verbal_reasoning",
+          "strand": "Verbal Reasoning",
+          "topic": "synonyms and antonyms",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 75,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.vr-synonyms-antonyms"
+        }
+      },
+      "workedSolution": [
+        "Magnanimous means generous and forgiving, especially toward a rival.",
+        "Noble (of high moral character) is the closest match."
+      ],
+      "reviewFocus": [
+        "Verify unambiguous semantic/logical relationship and distractor separation."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r061",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What two materials are mentioned as trapping warmth in an Urban Heat Island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Concrete, bitumen (asphalt) and dark rooftops"
+          },
+          {
+            "id": "b",
+            "text": "Wet grass and eucalyptus leaves"
+          },
+          {
+            "id": "c",
+            "text": "Glass windows and ocean water"
+          },
+          {
+            "id": "d",
+            "text": "White sand and timber fences"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The passage names 'dense clusters of concrete, bitumen and dark rooftops.' Exam technique: verify 'Concrete, bitumen (asphalt) and dark rooftops' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 135,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "Cooling the Streets: Urban Heat Islands and Tree Canopies",
+          "body": "On a cloudless February afternoon, a dark asphalt car park in the outer suburbs can absorb so much solar radiation that its surface temperature climbs above fifty-five degrees Celsius—twenty degrees hotter than a shaded grassy park just two streets away. Scientists call this effect the Urban Heat Island: dense clusters of concrete, bitumen and dark rooftops trap warmth during the day and release it slowly after sunset, keeping night-time temperatures elevated. Expanding urban tree canopies offers one of the most cost-effective ways to cool neighbourhoods. Mature street trees act like natural umbrellas, intercepting sunlight before it strikes pavement, while also cooling the surrounding air through evapotranspiration—the release of water vapour from leaves. Field measurements across several Australian cities show that streets with at least thirty per cent canopy cover can be three to five degrees cooler at street level during heatwaves, reducing both heat stress for pedestrians and household electricity demand for air conditioning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage names 'dense clusters of concrete, bitumen and dark rooftops.'",
+        "Exam technique: verify 'Concrete, bitumen (asphalt) and dark rooftops' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r062",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "How does the passage define 'evapotranspiration'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The melting of asphalt during February heatwaves"
+          },
+          {
+            "id": "b",
+            "text": "The release of water vapour from tree leaves, which cools the surrounding air"
+          },
+          {
+            "id": "c",
+            "text": "The reflection of sunlight off concrete pavements"
+          },
+          {
+            "id": "d",
+            "text": "The storage of rainwater inside underground pipes"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "It explicitly defines it as 'the release of water vapour from leaves.' Exam technique: verify 'The release of water vapour from tree leaves, which cools the surrounding air' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 90,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-vocabulary-context"
+        },
+        "stimulus": {
+          "title": "Cooling the Streets: Urban Heat Islands and Tree Canopies",
+          "body": "On a cloudless February afternoon, a dark asphalt car park in the outer suburbs can absorb so much solar radiation that its surface temperature climbs above fifty-five degrees Celsius—twenty degrees hotter than a shaded grassy park just two streets away. Scientists call this effect the Urban Heat Island: dense clusters of concrete, bitumen and dark rooftops trap warmth during the day and release it slowly after sunset, keeping night-time temperatures elevated. Expanding urban tree canopies offers one of the most cost-effective ways to cool neighbourhoods. Mature street trees act like natural umbrellas, intercepting sunlight before it strikes pavement, while also cooling the surrounding air through evapotranspiration—the release of water vapour from leaves. Field measurements across several Australian cities show that streets with at least thirty per cent canopy cover can be three to five degrees cooler at street level during heatwaves, reducing both heat stress for pedestrians and household electricity demand for air conditioning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "It explicitly defines it as 'the release of water vapour from leaves.'",
+        "Exam technique: verify 'The release of water vapour from tree leaves, which cools the surrounding air' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r063",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Besides keeping pedestrians more comfortable, what practical benefit do cooler, tree-lined streets provide?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They increase night-time temperatures in winter."
+          },
+          {
+            "id": "b",
+            "text": "They eliminate the need for street lighting."
+          },
+          {
+            "id": "c",
+            "text": "They lower household electricity demand for air conditioning."
+          },
+          {
+            "id": "d",
+            "text": "They prevent clouds from forming over cities."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The final sentence notes cooler streets reduce 'household electricity demand for air conditioning.' Exam technique: verify 'They lower household electricity demand for air conditioning.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-cause-effect"
+        },
+        "stimulus": {
+          "title": "Cooling the Streets: Urban Heat Islands and Tree Canopies",
+          "body": "On a cloudless February afternoon, a dark asphalt car park in the outer suburbs can absorb so much solar radiation that its surface temperature climbs above fifty-five degrees Celsius—twenty degrees hotter than a shaded grassy park just two streets away. Scientists call this effect the Urban Heat Island: dense clusters of concrete, bitumen and dark rooftops trap warmth during the day and release it slowly after sunset, keeping night-time temperatures elevated. Expanding urban tree canopies offers one of the most cost-effective ways to cool neighbourhoods. Mature street trees act like natural umbrellas, intercepting sunlight before it strikes pavement, while also cooling the surrounding air through evapotranspiration—the release of water vapour from leaves. Field measurements across several Australian cities show that streets with at least thirty per cent canopy cover can be three to five degrees cooler at street level during heatwaves, reducing both heat stress for pedestrians and household electricity demand for air conditioning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The final sentence notes cooler streets reduce 'household electricity demand for air conditioning.'",
+        "Exam technique: verify 'They lower household electricity demand for air conditioning.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r064",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why do Urban Heat Islands remain warm even after the sun goes down?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Street trees trap warm air beneath their branches after sunset."
+          },
+          {
+            "id": "b",
+            "text": "Cars only drive on asphalt roads at night."
+          },
+          {
+            "id": "c",
+            "text": "Solar radiation is stronger after sunset in February."
+          },
+          {
+            "id": "d",
+            "text": "Materials like concrete and bitumen release their stored daytime heat slowly at night."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "The passage states they 'trap warmth during the day and release it slowly after sunset.' Exam technique: verify 'Materials like concrete and bitumen release their stored daytime heat slowly at night.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-inference"
+        },
+        "stimulus": {
+          "title": "Cooling the Streets: Urban Heat Islands and Tree Canopies",
+          "body": "On a cloudless February afternoon, a dark asphalt car park in the outer suburbs can absorb so much solar radiation that its surface temperature climbs above fifty-five degrees Celsius—twenty degrees hotter than a shaded grassy park just two streets away. Scientists call this effect the Urban Heat Island: dense clusters of concrete, bitumen and dark rooftops trap warmth during the day and release it slowly after sunset, keeping night-time temperatures elevated. Expanding urban tree canopies offers one of the most cost-effective ways to cool neighbourhoods. Mature street trees act like natural umbrellas, intercepting sunlight before it strikes pavement, while also cooling the surrounding air through evapotranspiration—the release of water vapour from leaves. Field measurements across several Australian cities show that streets with at least thirty per cent canopy cover can be three to five degrees cooler at street level during heatwaves, reducing both heat stress for pedestrians and household electricity demand for air conditioning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The passage states they 'trap warmth during the day and release it slowly after sunset.'",
+        "Exam technique: verify 'Materials like concrete and bitumen release their stored daytime heat slowly at night.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r065",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Which title best captures the focus of this report?",
+        "options": [
+          {
+            "id": "a",
+            "text": "How Urban Tree Canopies Counteract City Heat"
+          },
+          {
+            "id": "b",
+            "text": "Why Asphalt Car Parks Are Unsafe for Drivers"
+          },
+          {
+            "id": "c",
+            "text": "Measuring Winter Rainfall in Australian Parks"
+          },
+          {
+            "id": "d",
+            "text": "The History of Air Conditioning in Suburbs"
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "The report explains the Urban Heat Island problem and how street tree canopies mitigate it. Exam technique: verify 'How Urban Tree Canopies Counteract City Heat' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "Cooling the Streets: Urban Heat Islands and Tree Canopies",
+          "body": "On a cloudless February afternoon, a dark asphalt car park in the outer suburbs can absorb so much solar radiation that its surface temperature climbs above fifty-five degrees Celsius—twenty degrees hotter than a shaded grassy park just two streets away. Scientists call this effect the Urban Heat Island: dense clusters of concrete, bitumen and dark rooftops trap warmth during the day and release it slowly after sunset, keeping night-time temperatures elevated. Expanding urban tree canopies offers one of the most cost-effective ways to cool neighbourhoods. Mature street trees act like natural umbrellas, intercepting sunlight before it strikes pavement, while also cooling the surrounding air through evapotranspiration—the release of water vapour from leaves. Field measurements across several Australian cities show that streets with at least thirty per cent canopy cover can be three to five degrees cooler at street level during heatwaves, reducing both heat stress for pedestrians and household electricity demand for air conditioning.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The report explains the Urban Heat Island problem and how street tree canopies mitigate it.",
+        "Exam technique: verify 'How Urban Tree Canopies Counteract City Heat' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r066",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why did the merchant want his cloak finished in a single night?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He wanted to test Kael's eyesight in the dark."
+          },
+          {
+            "id": "b",
+            "text": "His ship was sailing at dawn."
+          },
+          {
+            "id": "c",
+            "text": "He planned to sell it to the apprentice."
+          },
+          {
+            "id": "d",
+            "text": "Winter snow was blocking the valley road."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "The merchant said: 'My ship sails at dawn, and I pay double for haste.' Exam technique: verify 'His ship was sailing at dawn.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "easy",
+          "marks": 1,
+          "estimatedTimeSeconds": 130,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-factual-retrieval"
+        },
+        "stimulus": {
+          "title": "The Weaver and the Mountain Stream",
+          "body": "In a valley above the snowline lived a weaver named Kael, renowned for woollen cloaks so tightly spun that no wind could pierce them. One spring, a proud merchant arrived with a chest of silver and demanded a cloak woven in a single night. 'My ship sails at dawn,' the merchant boasted, 'and I pay double for haste.' Kael shook his head and pointed toward the mountain stream beside his cottage. 'Look at the stones in the water,' he said. 'The stream polishes them round not by rushing in a single flood, but by flowing steadily for a thousand years. If I pull the loom too fast, the threads snap or gap, and the mountain wind will find every flaw.' The merchant scoffed and rode away to hire a careless apprentice. Three weeks later, caught in a gale at sea, the merchant shivered inside his thin, uneven cloak and remembered the quiet sound of the loom.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The merchant said: 'My ship sails at dawn, and I pay double for haste.'",
+        "Exam technique: verify 'His ship was sailing at dawn.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r067",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why did Kael compare his weaving to the mountain stream polishing stones?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To suggest his loom was powered by a waterwheel."
+          },
+          {
+            "id": "b",
+            "text": "To warn that spring floods would wash away the merchant's ship."
+          },
+          {
+            "id": "c",
+            "text": "To show that true quality comes from patient, steady work rather than rushing."
+          },
+          {
+            "id": "d",
+            "text": "To explain why wool must be washed in cold water."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "c"
+        },
+        "explanation": "The stream's steady flow over time mirrors careful, unhurried craftsmanship. Exam technique: verify 'To show that true quality comes from patient, steady work rather than rushing.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-figurative-language"
+        },
+        "stimulus": {
+          "title": "The Weaver and the Mountain Stream",
+          "body": "In a valley above the snowline lived a weaver named Kael, renowned for woollen cloaks so tightly spun that no wind could pierce them. One spring, a proud merchant arrived with a chest of silver and demanded a cloak woven in a single night. 'My ship sails at dawn,' the merchant boasted, 'and I pay double for haste.' Kael shook his head and pointed toward the mountain stream beside his cottage. 'Look at the stones in the water,' he said. 'The stream polishes them round not by rushing in a single flood, but by flowing steadily for a thousand years. If I pull the loom too fast, the threads snap or gap, and the mountain wind will find every flaw.' The merchant scoffed and rode away to hire a careless apprentice. Three weeks later, caught in a gale at sea, the merchant shivered inside his thin, uneven cloak and remembered the quiet sound of the loom.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "The stream's steady flow over time mirrors careful, unhurried craftsmanship.",
+        "Exam technique: verify 'To show that true quality comes from patient, steady work rather than rushing.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r068",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What flaw in the merchant's character led to his discomfort at sea?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Generosity toward apprentices"
+          },
+          {
+            "id": "b",
+            "text": "Fear of sailing on calm water"
+          },
+          {
+            "id": "c",
+            "text": "Lack of silver to afford a warm coat"
+          },
+          {
+            "id": "d",
+            "text": "Impatience and pride in thinking money could replace proper craft."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "d"
+        },
+        "explanation": "Offering double for haste and scoffing at Kael's advice shows impatience and misplaced pride. Exam technique: verify 'Impatience and pride in thinking money could replace proper craft.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "medium",
+          "marks": 1,
+          "estimatedTimeSeconds": 100,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-character-inference"
+        },
+        "stimulus": {
+          "title": "The Weaver and the Mountain Stream",
+          "body": "In a valley above the snowline lived a weaver named Kael, renowned for woollen cloaks so tightly spun that no wind could pierce them. One spring, a proud merchant arrived with a chest of silver and demanded a cloak woven in a single night. 'My ship sails at dawn,' the merchant boasted, 'and I pay double for haste.' Kael shook his head and pointed toward the mountain stream beside his cottage. 'Look at the stones in the water,' he said. 'The stream polishes them round not by rushing in a single flood, but by flowing steadily for a thousand years. If I pull the loom too fast, the threads snap or gap, and the mountain wind will find every flaw.' The merchant scoffed and rode away to hire a careless apprentice. Three weeks later, caught in a gale at sea, the merchant shivered inside his thin, uneven cloak and remembered the quiet sound of the loom.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Offering double for haste and scoffing at Kael's advice shows impatience and misplaced pride.",
+        "Exam technique: verify 'Impatience and pride in thinking money could replace proper craft.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r069",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "What is the moral of this fable?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Quality work cannot be rushed without sacrificing strength and reliability."
+          },
+          {
+            "id": "b",
+            "text": "Apprentices should never accept silver from merchants."
+          },
+          {
+            "id": "c",
+            "text": "Sailors should always carry spare wool on ships."
+          },
+          {
+            "id": "d",
+            "text": "Slow workers always earn less money than fast workers."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "a"
+        },
+        "explanation": "Both Kael's warning and the merchant's shivering at sea reinforce the cost of rushing quality. Exam technique: verify 'Quality work cannot be rushed without sacrificing strength and reliability.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 95,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-main-idea"
+        },
+        "stimulus": {
+          "title": "The Weaver and the Mountain Stream",
+          "body": "In a valley above the snowline lived a weaver named Kael, renowned for woollen cloaks so tightly spun that no wind could pierce them. One spring, a proud merchant arrived with a chest of silver and demanded a cloak woven in a single night. 'My ship sails at dawn,' the merchant boasted, 'and I pay double for haste.' Kael shook his head and pointed toward the mountain stream beside his cottage. 'Look at the stones in the water,' he said. 'The stream polishes them round not by rushing in a single flood, but by flowing steadily for a thousand years. If I pull the loom too fast, the threads snap or gap, and the mountain wind will find every flaw.' The merchant scoffed and rode away to hire a careless apprentice. Three weeks later, caught in a gale at sea, the merchant shivered inside his thin, uneven cloak and remembered the quiet sound of the loom.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Both Kael's warning and the merchant's shivering at sea reinforce the cost of rushing quality.",
+        "Exam technique: verify 'Quality work cannot be rushed without sacrificing strength and reliability.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-r070",
+        "type": "reading_comprehension",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Why does the author end the story with the merchant remembering 'the quiet sound of the loom'?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It implies Kael sailed on the same ship."
+          },
+          {
+            "id": "b",
+            "text": "It shows he finally understands the value of Kael's unhurried craft too late."
+          },
+          {
+            "id": "c",
+            "text": "It proves the merchant fell asleep during the gale."
+          },
+          {
+            "id": "d",
+            "text": "It suggests the apprentice's loom was louder than the ocean."
+          }
+        ],
+        "visuals": [],
+        "answerKey": {
+          "kind": "single_option",
+          "optionId": "b"
+        },
+        "explanation": "Recalling the quiet loom during the gale underlines his belated regret. Exam technique: verify 'It shows he finally understands the value of Kael's unhurried craft too late.' directly against the passage and rule out distractors that distort scope or tone.",
+        "metadata": {
+          "subject": "reading",
+          "strand": "Reading Comprehension",
+          "topic": "reading comprehension",
+          "difficulty": "challenging",
+          "marks": 1,
+          "estimatedTimeSeconds": 105,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style"
+          ],
+          "skill": "scholarship.rc-authorial-craft"
+        },
+        "stimulus": {
+          "title": "The Weaver and the Mountain Stream",
+          "body": "In a valley above the snowline lived a weaver named Kael, renowned for woollen cloaks so tightly spun that no wind could pierce them. One spring, a proud merchant arrived with a chest of silver and demanded a cloak woven in a single night. 'My ship sails at dawn,' the merchant boasted, 'and I pay double for haste.' Kael shook his head and pointed toward the mountain stream beside his cottage. 'Look at the stones in the water,' he said. 'The stream polishes them round not by rushing in a single flood, but by flowing steadily for a thousand years. If I pull the loom too fast, the threads snap or gap, and the mountain wind will find every flaw.' The merchant scoffed and rode away to hire a careless apprentice. Three weeks later, caught in a gale at sea, the merchant shivered inside his thin, uneven cloak and remembered the quiet sound of the loom.",
+          "attribution": "MindMosaic original"
+        }
+      },
+      "workedSolution": [
+        "Recalling the quiet loom during the gale underlines his belated regret.",
+        "Exam technique: verify 'It shows he finally understands the value of Kael's unhurried craft too late.' directly against the passage and rule out distractors that distort scope or tone."
+      ],
+      "reviewFocus": [
+        "Verify passage evidence, Australian English, and absence of defensible distractor readings."
+      ],
+      "writingGuidance": null,
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w025",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Speed Versus Accuracy: In scholarship examinations, sport and engineering, speed without accuracy fails—yet perfectionism without pace leaves work unfinished. Analyse how to strike the right balance.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Use structured comparison across two domains (e.g. timed exams and another field). Offer a concrete framework for pacing.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing expository",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "expository"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: expository. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Use structured comparison across two domains (e.g. timed exams and another field).",
+        "Offer a concrete framework for pacing."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained expository purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w026",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Anatomy of a Thunderstorm: Describe the full arc of a late-afternoon summer storm: the heavy stillness beforehand, the sudden squall, the downpour, and the cool clarity after it passes.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: descriptive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Use four distinct paragraphs matching the four stages of the storm. Control pace through sentence rhythm and precise verbs.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing descriptive",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "descriptive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: descriptive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Use four distinct paragraphs matching the four stages of the storm.",
+        "Control pace through sentence rhythm and precise verbs."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained descriptive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w027",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "Should Cities Prioritise Bike Lanes Over Street Parking?: Many suburban shopping strips face a choice between keeping kerbside car parking or building protected bike lanes. Write a persuasive essay defending one priority.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Consider local traders, safety, congestion and accessibility for elderly shoppers. Rebut the strongest counter-claim fairly.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing persuasive",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "persuasive"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: persuasive. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Consider local traders, safety, congestion and accessibility for elderly shoppers.",
+        "Rebut the strongest counter-claim fairly."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained persuasive purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    },
+    {
+      "question": {
+        "id": "vihaan-agy-w028",
+        "type": "essay",
+        "yearLevel": 6,
+        "examStyle": "scholarship_style",
+        "status": "draft",
+        "origin": "original_seed",
+        "prompt": "The Second-Place Trophy: Write a story about an athlete or musician who has always come first, and how placing second at a regional final changes their understanding of effort.",
+        "options": [],
+        "visuals": [],
+        "answerKey": {
+          "kind": "manual",
+          "rubric": "Assessed by a human marker against the 6-criterion Scholarship Written Expression Rubric: Ideas & Content, Structure & Cohesion, Vocabulary & Expression, Sentence Craft, Mechanics & Australian Spelling, and Task Responsiveness."
+        },
+        "explanation": "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min). Show internal shift convincingly without sounding preachy. Anchor the turning point in a specific moment.",
+        "metadata": {
+          "subject": "writing",
+          "strand": "Written Expression",
+          "topic": "writing narrative",
+          "difficulty": "challenging",
+          "marks": 10,
+          "estimatedTimeSeconds": 900,
+          "locale": "en-AU",
+          "tags": [
+            "vihaan-agy-500",
+            "edutest-style",
+            "narrative"
+          ]
+        }
+      },
+      "workedSolution": [
+        "Task form: narrative. Target total time: 15 minutes (plan 3-4 min, draft 8-9 min, proofread 2-3 min).",
+        "Show internal shift convincingly without sounding preachy.",
+        "Anchor the turning point in a specific moment."
+      ],
+      "reviewFocus": [
+        "Human marker assessment required using scholarship-written-expression rubric v1.",
+        "Verify prompt clarity, age suitability, and Australian English."
+      ],
+      "writingGuidance": {
+        "rubricId": "scholarship-written-expression",
+        "rubricVersion": 1,
+        "successCriteria": [
+          "Sustained narrative purpose with clear opening, developed middle, and deliberate conclusion.",
+          "Controlled paragraphing, varied sentence structures, and precise Australian English vocabulary.",
+          "Evidence of planning and final proofreading for punctuation, spelling, and tense consistency."
+        ],
+        "assessmentMode": "human_only"
+      },
+      "reservedForMock": false
+    }
+  ]
+}

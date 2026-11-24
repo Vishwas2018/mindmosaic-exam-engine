@@ -1,0 +1,61 @@
+{
+  "bankId": "vihaan-scholarship-agy-500",
+  "version": 1,
+  "status": "draft",
+  "approvedBy": null,
+  "targets": {
+    "numeracy": 120,
+    "numerical_reasoning": 120,
+    "verbal_reasoning": 120,
+    "reading": 100,
+    "writing": 40
+  },
+  "difficultyTargets": {
+    "easy": 75,
+    "medium": 225,
+    "challenging": 200
+  },
+  "mockReservationTotal": 100,
+  "batches": [
+    {
+      "batchId": "vihaan-agy-01",
+      "file": "batch-01.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-02",
+      "file": "batch-02.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-03",
+      "file": "batch-03.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-04",
+      "file": "batch-04.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-05",
+      "file": "batch-05.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-06",
+      "file": "batch-06.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-07",
+      "file": "batch-07.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-08",
+      "file": "batch-08.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-09",
+      "file": "batch-09.draft.json"
+    },
+    {
+      "batchId": "vihaan-agy-10",
+      "file": "batch-10.draft.json"
+    }
+  ]
+}

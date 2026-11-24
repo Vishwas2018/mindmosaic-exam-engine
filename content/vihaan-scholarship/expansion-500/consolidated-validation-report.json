@@ -1,0 +1,280 @@
+{
+  "reportVersion": 2,
+  "generatedOn": "2026-11-18",
+  "bankId": "vihaan-scholarship-500",
+  "status": "draft",
+  "approvedBy": null,
+  "passed": true,
+  "errors": [],
+  "total": 500,
+  "newItems": 480,
+  "retainedItems": 20,
+  "approved": 0,
+  "published": 0,
+  "publicationEligible": false,
+  "subjectCounts": {
+    "numeracy": 120,
+    "numerical_reasoning": 120,
+    "verbal_reasoning": 120,
+    "reading": 100,
+    "writing": 40
+  },
+  "difficultyCounts": {
+    "easy": 75,
+    "medium": 225,
+    "challenging": 200
+  },
+  "mockReserved": 100,
+  "mockReservedBySubject": {
+    "reading": 20,
+    "numeracy": 24,
+    "numerical_reasoning": 24,
+    "verbal_reasoning": 24,
+    "writing": 8
+  },
+  "answerPositions": {
+    "b": 104,
+    "d": 120,
+    "c": 116,
+    "a": 120
+  },
+  "independentVerification": {
+    "arithmeticItemsReverified": 229,
+    "arithmeticPassed": 229,
+    "arithmeticFailures": [],
+    "note": "Reading, verbal and writing items have no single computable key; they carry human semantic review flags requiring blind human solution before approval."
+  },
+  "requiredHumanReview": [
+    "Solve every MCQ blind to its key; justify rejection of each distractor.",
+    "Check each reading key against passage evidence, including alternative interpretations.",
+    "Check age suitability, Australian English, difficulty and time estimates.",
+    "Review originality, visual diagram clarity, and numerical stem-to-solution grounding.",
+    "Assess writing using the existing six-criterion human-assessed rubric.",
+    "Record human approval through the existing governed lifecycle; this package cannot publish."
+  ],
+  "batches": [
+    {
+      "batchId": "vihaan-expansion-01",
+      "sourceFile": "batch-01.draft.json",
+      "itemCount": 30,
+      "newItems": 30,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 30,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 9,
+        "numerical_reasoning": 7,
+        "verbal_reasoning": 6,
+        "reading": 6,
+        "writing": 2
+      },
+      "difficultyCounts": {
+        "easy": 13,
+        "medium": 10,
+        "challenging": 7
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-02",
+      "sourceFile": "batch-02.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numerical_reasoning": 11,
+        "verbal_reasoning": 12,
+        "reading": 12,
+        "writing": 4,
+        "numeracy": 11
+      },
+      "difficultyCounts": {
+        "medium": 23,
+        "challenging": 16,
+        "easy": 11
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-03",
+      "sourceFile": "batch-03.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 10,
+        "numerical_reasoning": 12,
+        "verbal_reasoning": 12,
+        "reading": 12,
+        "writing": 4
+      },
+      "difficultyCounts": {
+        "medium": 18,
+        "challenging": 26,
+        "easy": 6
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-04",
+      "sourceFile": "batch-04.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "verbal_reasoning": 12,
+        "reading": 11,
+        "writing": 3
+      },
+      "difficultyCounts": {
+        "medium": 18,
+        "challenging": 26,
+        "easy": 6
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-05",
+      "sourceFile": "batch-05.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "reading": 10,
+        "writing": 4,
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "verbal_reasoning": 12
+      },
+      "difficultyCounts": {
+        "medium": 25,
+        "challenging": 17,
+        "easy": 8
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-06",
+      "sourceFile": "batch-06.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "reading": 12,
+        "writing": 4,
+        "numeracy": 12,
+        "numerical_reasoning": 12,
+        "verbal_reasoning": 10
+      },
+      "difficultyCounts": {
+        "medium": 22,
+        "challenging": 22,
+        "easy": 6
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-07",
+      "sourceFile": "batch-07.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 0,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "verbal_reasoning": 11,
+        "reading": 12,
+        "writing": 4,
+        "numeracy": 12,
+        "numerical_reasoning": 11
+      },
+      "difficultyCounts": {
+        "medium": 27,
+        "challenging": 19,
+        "easy": 4
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-08",
+      "sourceFile": "batch-08.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 10,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numerical_reasoning": 10,
+        "verbal_reasoning": 12,
+        "reading": 12,
+        "writing": 4,
+        "numeracy": 12
+      },
+      "difficultyCounts": {
+        "challenging": 24,
+        "easy": 5,
+        "medium": 21
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-09",
+      "sourceFile": "batch-09.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 40,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numerical_reasoning": 12,
+        "verbal_reasoning": 12,
+        "reading": 10,
+        "writing": 4,
+        "numeracy": 12
+      },
+      "difficultyCounts": {
+        "challenging": 16,
+        "medium": 27,
+        "easy": 7
+      }
+    },
+    {
+      "batchId": "vihaan-expansion-10",
+      "sourceFile": "batch-10.draft.json",
+      "itemCount": 50,
+      "newItems": 50,
+      "retainedPilotItems": 0,
+      "reservedForMockCount": 50,
+      "automatedPassed": 50,
+      "passed": true,
+      "subjectCounts": {
+        "numerical_reasoning": 16,
+        "verbal_reasoning": 17,
+        "writing": 5,
+        "numeracy": 12
+      },
+      "difficultyCounts": {
+        "medium": 25,
+        "challenging": 24,
+        "easy": 1
+      }
+    }
+  ],
+  "sources": {
+    "bankManifest": "content/vihaan-scholarship/expansion-500/bank.draft.json",
+    "pilot": "content/vihaan-scholarship/pilot-01/draft.json"
+  }
+}
