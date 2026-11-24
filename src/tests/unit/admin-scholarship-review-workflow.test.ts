@@ -174,16 +174,24 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
       return content;
     });
 
-    const catalogue = await loadAdminReviewCatalogue({
-      bankId: "vihaan-scholarship-500",
-    });
-    expect(catalogue.entries).toHaveLength(450);
-    expect(
-      catalogue.issues.some(
-        (issue) =>
-          issue.includes("batch-02.draft.json") && issue.includes("batch withheld"),
-      ),
-    ).toBe(true);
+    try {
+      const catalogue = await loadAdminReviewCatalogue({
+        bankId: "vihaan-scholarship-500",
+      });
+      expect(catalogue.entries).toHaveLength(450);
+      expect(
+        catalogue.issues.some(
+          (issue) =>
+            issue.includes("batch-02.draft.json") && issue.includes("batch withheld"),
+        ),
+      ).toBe(true);
+      // Export CLI loader must also fail closed on the tampered batch hash (P2-4).
+      await expect(loadSourceTruthMap("vihaan-scholarship-500")).rejects.toThrow(
+        /source batch hash differs from quality-coverage-report\.json/i,
+      );
+    } finally {
+      vi.mocked(readFile).mockImplementation(original);
+    }
   });
 
   it("rejects AI, bot, service and single-word reviewer names and accepts accountable human full names", () => {
@@ -207,6 +215,8 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
       "Vishwas Joshi",
       "Dr. Priya Nair",
       "Mary-Jane O'Connor",
+      "Sarah Abbott",
+      "James Talbot",
     ]) {
       expect(validateHumanReviewerName(valid).ok, valid).toBe(true);
     }

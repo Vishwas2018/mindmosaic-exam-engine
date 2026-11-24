@@ -288,6 +288,20 @@ function hashVihaanObject(value: unknown): string {
   return createHash("sha256").update(JSON.stringify(value)).digest("hex");
 }
 
+/**
+ * Parses a Vihaan pilot or expansion batch with the exact strict schema used by
+ * `quality-coverage-report.json` and returns its canonical SHA-256 hash.
+ */
+export function hashVerifiedVihaanBatch(
+  rawJson: unknown,
+  isPilot: boolean,
+): string {
+  const parsed = isPilot
+    ? vihaanPilotFileSchema.parse(rawJson)
+    : vihaanExpansionBatchSchema.parse(rawJson);
+  return hashVihaanObject(parsed);
+}
+
 export function computeReviewEvidenceFingerprint(payload: {
   readonly bankId: ReviewBankId;
   readonly batchId: string;

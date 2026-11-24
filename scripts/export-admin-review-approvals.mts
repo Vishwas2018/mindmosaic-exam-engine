@@ -48,6 +48,7 @@ import { questionSchema } from "../src/schemas/question.schema";
 import {
   computeReviewEvidenceFingerprint,
   hashDraftRevision,
+  hashVerifiedVihaanBatch,
 } from "../src/server/admin-review";
 
 const PROD_SUPABASE_REF = "uermhsptduikehuyceiz";
@@ -100,6 +101,12 @@ export function assertNonProductionDatabaseUrl(
 
   if (parsed.protocol !== "postgres:" && parsed.protocol !== "postgresql:") {
     throw new Error(`Unsupported database protocol '${parsed.protocol}'.`);
+  }
+
+  if (parsed.searchParams.has("host") || parsed.searchParams.has("hostaddr")) {
+    throw new Error(
+      "Database URL query parameters 'host'/'hostaddr' are forbidden (cannot override allowlisted hostname).",
+    );
   }
 
   const host = safeDecode(parsed.hostname).toLowerCase();
@@ -240,18 +247,24 @@ export async function loadSourceTruthMap(
     report.sources.batchHashes.map((entry) => [entry.file, entry.hash]),
   );
 
-  const files: Array<{ filePath: string; expectedHash?: string }> = [
+  const files: Array<{
+    filePath: string;
+    isPilot: boolean;
+    expectedHash?: string;
+  }> = [
     {
       filePath: path.join(baseDir, "pilot-01/draft.json"),
+      isPilot: true,
       expectedHash: report.sources.pilotHash,
     },
     ...manifestRaw.batches.map((b) => ({
       filePath: path.join(baseDir, "expansion-500", b.file),
+      isPilot: false,
       expectedHash: batchHashByFile.get(b.file),
     })),
   ];
 
-  for (const { filePath, expectedHash } of files) {
+  for (const { filePath, isPilot, expectedHash } of files) {
     const batch = JSON.parse(await readFile(filePath, "utf8")) as {
       batchId: string;
       version: number;
@@ -266,6 +279,12 @@ export async function loadSourceTruthMap(
     }
     if (!expectedHash) {
       throw new Error(`${filePath}: missing expected source hash in quality-coverage-report.json.`);
+    }
+    const actualBatchHash = hashVerifiedVihaanBatch(batch, isPilot);
+    if (actualBatchHash !== expectedHash) {
+      throw new Error(
+        `${filePath}: source batch hash differs from quality-coverage-report.json; refusing export.`,
+      );
     }
     for (const wrapper of batch.items) {
       const raw = wrapper.question;

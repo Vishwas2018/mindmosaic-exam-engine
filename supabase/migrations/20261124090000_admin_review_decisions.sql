@@ -32,7 +32,7 @@ create table public.admin_draft_review_decisions (
     and reviewer_name ~ '^[[:alpha:]][[:alpha:]'' .-]+$'
     and reviewer_name !~* '(^|\s)[[:alpha:]](\s|$)'
     and reviewer_name !~* '\y(claude|anthropic|opus|sonnet|haiku|gpt|chatgpt|openai|gemini|copilot|codex|qwen|llama|mistral|deepseek|grok|llm|bot|automated?|ai|antigravity|agent|script|cron|system|service)\y'
-    and reviewer_name !~* '(claude|anthropic|openai|chatgpt|copilot|codex|antigravity|automated|bot)'
+    and reviewer_name !~* '(claude|anthropic|openai|chatgpt|copilot|codex|antigravity|automated|(ai|auto|test|chat|code|gpt|llm|review)bot)'
   ),
   reviewer_email text not null check (
     length(trim(reviewer_email)) between 5 and 254

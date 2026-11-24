@@ -150,7 +150,7 @@ export function classifyReviewPool(
  * Shared across UI validation, Server Action, DB CHECK constraint and export CLI.
  */
 export const NON_HUMAN_REVIEWER_PATTERN =
-  /\b(?:claude|anthropic|opus|sonnet|haiku|gpt|chatgpt|openai|gemini|copilot|codex|qwen|llama|mistral|deepseek|grok|llm|bot|automated?|ai|antigravity|agent|script|cron|system|service|test\s+bot)\b|(?:claude|anthropic|openai|chatgpt|copilot|codex|antigravity|automated|bot)/i;
+  /\b(?:claude|anthropic|opus|sonnet|haiku|gpt|chatgpt|openai|gemini|copilot|codex|qwen|llama|mistral|deepseek|grok|llm|bot|automated?|ai|antigravity|agent|script|cron|system|service|test\s+bot)\b|(?:claude|anthropic|openai|chatgpt|copilot|codex|antigravity|automated|(?:ai|auto|test|chat|code|gpt|llm|review)bot)/i;
 
 export function validateHumanReviewerName(
   rawName: string | null | undefined,
