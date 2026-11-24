@@ -23,12 +23,9 @@ export type SubscriptionGateRole = "parent" | "student";
  * flips the flag.
  *
  * A parent's own entitlement is current_parent_has_access() (an unexpired
- * trial or a paid subscription in good standing). A student has no
- * subscription of their own — they inherit access from whichever linked
- * parent(s) currently have it, via parent_children (a student may in
- * principle have more than one linked parent; any one with access is
- * enough). A student with no linked parent has nothing to inherit and is
- * treated as no access.
+ * trial or a paid subscription in good standing). A student's entitlement is
+ * inherited from their linked parent(s) and decides how much of the bank they
+ * are served (student-access.ts), not whether they can sign in.
  */
 export async function requireActiveSubscription(
   userId: string,
@@ -36,23 +33,16 @@ export async function requireActiveSubscription(
 ): Promise<void> {
   if (!isBillingEnforcementEnabled()) return;
 
+  /*
+   * Only parents are redirected. A student without access is NOT sent to
+   * /billing: a child cannot buy anything, and the Free plan promises them a
+   * sample of every programme. They keep reaching practice; the exam session
+   * route narrows what they are served to the free sample
+   * (see ./student-access.ts and src/lib/billing/free-sample.ts).
+   */
+  if (role === "student") return;
+
   const supabase = await createClient();
-
-  if (role === "parent") {
-    const { data: hasAccess } = await supabase.rpc("current_parent_has_access");
-    if (!hasAccess) redirect("/billing");
-    return;
-  }
-
-  const { data: links } = await supabase
-    .from("parent_children")
-    .select("parent_id")
-    .eq("child_id", userId);
-
-  for (const link of (links ?? []) as { parent_id: string }[]) {
-    const { data: hasAccess } = await supabase.rpc("has_active_access", { p: link.parent_id });
-    if (hasAccess) return;
-  }
-
-  redirect("/billing");
+  const { data: hasAccess } = await supabase.rpc("current_parent_has_access");
+  if (!hasAccess) redirect("/billing");
 }

@@ -393,7 +393,7 @@
    * directly here would make the `font-display` utility resolve to
    * Roboto Slab on every route, including auth/dashboards/billing/admin/
    * the exam runner — exactly the leak this token must not cause (a real
-   * instance existed: src/features/billing/components/FamilyPlanCard.tsx
+   * instance existed: src/features/billing/components/PricingPlans.tsx
    * used `font-display` for its price and was silently rendering in
    * Roboto Slab before this fix). The actual Roboto Slab value is scoped
    * below, via `.lp-root`/`.legal-page`'s plain (unlayered) CSS override

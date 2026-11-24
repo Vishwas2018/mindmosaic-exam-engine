@@ -1,19 +1,15 @@
 import { expect, test } from "@playwright/test";
 
 /*
- * FAMILY_PLAN_AVAILABILITY is "roadmap" (src/lib/billing/prices.ts, audit
- * finding C-02), so no surface may offer a paid checkout: the displayed
- * amounts are still placeholders not linked to a live Stripe price, and the
- * legal pages are unsigned drafts.
- *
- * These specs assert the CONTAINMENT, not the flag — they check what a
- * visitor can actually do. If the flag is flipped back to "purchasable"
- * they should fail, which is the point: re-enabling checkout is a decision
- * that has to come with new copy and new expectations, not a silent revert.
+ * Whether a paid tier can take a payment is decided at RUNTIME by purchasablePlans()
+ * (src/lib/stripe/config.ts): Stripe configured AND both cadence price ids set. These specs
+ * assert what a visitor can actually do in whichever state the server process was started in,
+ * so they hold in CI (placeholder Stripe key, no price ids: nothing for sale) and against a
+ * fully configured sandbox (both tiers purchasable).
  */
 
-/** The two paid calls to action `content.ts`'s `paidCta` produces. */
-const PAID_CTA_LABELS = ["Subscribe to Family", "Choose the yearly plan"];
+/** The paid calls to action. */
+const PAID_CTA_LABELS = ["Subscribe to Individual", "Subscribe to Family", "Choose the yearly plan"];
 
 /*
  * /billing renders one of two views depending on whether the server process was
@@ -24,52 +20,50 @@ const PAID_CTA_LABELS = ["Subscribe to Family", "Choose the yearly plan"];
  * Both views are covered at component level in src/tests/pages/billing-page-beta.test.tsx.
  */
 const stripeConfigured = (process.env.STRIPE_SECRET_KEY ?? "").trim().length > 0;
+const has = (name: string) => (process.env[name] ?? "").trim().length > 0;
+/* Mirrors purchasablePlans(): a tier is for sale only when Stripe is configured and BOTH its cadence prices are set. */
+const tier = {
+  individual: stripeConfigured && has("STRIPE_PRICE_INDIVIDUAL_MONTHLY") && has("STRIPE_PRICE_INDIVIDUAL_ANNUAL"),
+  family: stripeConfigured && has("STRIPE_PRICE_FAMILY_MONTHLY") && has("STRIPE_PRICE_FAMILY_ANNUAL"),
+};
+const anyPurchasable = tier.individual || tier.family;
 
-test.describe(stripeConfigured ? "billing page (Stripe configured, Family plan on roadmap)" : "billing page with payments disabled", () => {
-  test("offers no plan, card entry or checkout", async ({ page }) => {
+test.describe(stripeConfigured ? "billing page (Stripe configured)" : "billing page with payments disabled", () => {
+  test("offers exactly the tiers this deployment can sell", async ({ page }) => {
     await page.goto("/billing", { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: "Subscribe to Family" })).toHaveCount(0);
 
-    if (stripeConfigured) {
-      await expect(page.getByRole("heading", { level: 1, name: "Choose the Family plan" })).toBeVisible();
-      /* Matched as a regex because the plan name is a separate JSX expression, so the
-         sentence spans two text nodes and an exact string match resolves to nothing. */
-      await expect(page.getByText(/isn't open for subscriptions yet/)).toBeVisible();
-      const registerInterest = page.getByRole("link", { name: "Register interest" });
-      await expect(registerInterest).toBeVisible();
-      await expect(registerInterest).toHaveAttribute("href", "/help#contact");
-      await expect(page.getByText("Coming soon").first()).toBeVisible();
-      await expect(
-        page
-          .getByText(
-            "GST-inclusive AUD — pricing subject to change. Placeholder amounts, not yet linked to a live Stripe price.",
-          )
-          .first(),
-      ).toBeVisible();
-    } else {
+    if (!stripeConfigured) {
       const notice = page.getByTestId("billing-free-beta");
       await expect(notice.getByRole("heading", { level: 1, name: "The family beta is free" })).toBeVisible();
       await expect(notice).toContainText("There is nothing to pay during the beta");
       await expect(notice.getByRole("link", { name: "Back to your family" })).toHaveAttribute("href", "/parent");
-      await expect(page.getByRole("heading", { name: "Choose the Family plan" })).toHaveCount(0);
+      await expect(page.getByRole("radiogroup", { name: "Billing cycle" })).toHaveCount(0);
+      return;
+    }
+
+    await expect(page.getByRole("heading", { level: 1, name: "Pick the plan that fits your family" })).toBeVisible();
+    await expect(page.locator("input[autocomplete='cc-number']")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Subscribe to Individual" })).toHaveCount(tier.individual ? 1 : 0);
+    await expect(page.getByRole("button", { name: "Subscribe to Family" })).toHaveCount(tier.family ? 1 : 0);
+    if (!tier.individual || !tier.family) {
+      const registerInterest = page.getByRole("link", { name: "Register interest" });
+      await expect(registerInterest.first()).toBeVisible();
+      await expect(registerInterest.first()).toHaveAttribute("href", "/help#contact");
     }
   });
 });
 
-test.describe("no paid checkout is reachable from any public surface", () => {
+test.describe("no unconfigured checkout is reachable from any public surface", () => {
   for (const path of ["/", "/pricing", "/billing"]) {
-    test(`${path} offers no checkout call to action`, async ({ page }) => {
+    test(`${path} offers no checkout call to action unless prices are configured`, async ({ page }) => {
       await page.goto(path, { waitUntil: "domcontentloaded" });
+      await expect(page.locator("input[autocomplete='cc-number']")).toHaveCount(0);
+      if (anyPurchasable) return;
 
       for (const label of PAID_CTA_LABELS) {
         await expect(page.getByRole("button", { name: label })).toHaveCount(0);
         await expect(page.getByRole("link", { name: label })).toHaveCount(0);
       }
-
-      /* Whatever a paid plan card does offer must lead to /help#contact,
-         never to the checkout page. `paidCta` renders "Register interest"
-         for both cards while availability is "roadmap". */
       const registerInterest = page.getByRole("link", { name: "Register interest" });
       for (let i = 0; i < (await registerInterest.count()); i += 1) {
         await expect(registerInterest.nth(i)).toHaveAttribute("href", "/help#contact");

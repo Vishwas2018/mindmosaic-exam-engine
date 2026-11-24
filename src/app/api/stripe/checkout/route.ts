@@ -3,13 +3,13 @@ import { z } from "zod";
 
 import { checkOrigin } from "@/features/auth/require-origin";
 import { getStripeClient } from "@/lib/stripe/client";
-import { isStripeConfigured, priceIdForPlan } from "@/lib/stripe/config";
+import { BILLING_PLANS, isStripeConfigured, priceIdForPlan } from "@/lib/stripe/config";
 import { createSubscriptionsAdminClient } from "@/lib/stripe/subscriptions-admin";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
 const checkoutRequestSchema = z.object({
-  plan: z.enum(["family_monthly", "family_annual"]),
+  plan: z.enum(BILLING_PLANS),
 });
 
 /**
@@ -68,11 +68,25 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   const { data: subscriptionRow, error: fetchError } = await admin
     .from("subscriptions")
-    .select("id, stripe_customer_id")
+    .select("id, stripe_customer_id, stripe_subscription_id, status, current_period_end")
     .eq("parent_id", user.id)
     .maybeSingle();
   if (fetchError || !subscriptionRow) {
     return NextResponse.json({ error: "subscription_not_found" }, { status: 404 });
+  }
+
+  // A second Checkout for someone who already pays would create a second
+  // concurrent subscription on the same customer and bill twice. Plan changes
+  // and cancellations go through the customer portal instead.
+  const periodEnd = subscriptionRow.current_period_end
+    ? Date.parse(subscriptionRow.current_period_end as string)
+    : 0;
+  if (
+    subscriptionRow.stripe_subscription_id &&
+    (subscriptionRow.status === "active" || subscriptionRow.status === "past_due") &&
+    periodEnd > Date.now()
+  ) {
+    return NextResponse.json({ error: "already_subscribed" }, { status: 409 });
   }
 
   const stripe = getStripeClient();

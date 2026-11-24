@@ -8,7 +8,7 @@ import { routes } from "@/features/landing/content";
 export const metadata: Metadata = {
   title: "Practice",
   description:
-    "Focused practice by year, subject or single skill, with a worked explanation after every question. Guest practice is free and needs no account.",
+    "Focused practice by year, subject or single skill, with a worked explanation after every question. Try practice as a guest for free, with no account or card.",
 };
 
 // Static prerendering triggers Next.js 16.4.6 invariant error

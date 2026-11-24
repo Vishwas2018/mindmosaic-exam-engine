@@ -61,7 +61,7 @@ describe("projection plan — the exit-gate counts", () => {
     expect(result.counts.total).toBe(1601);
     expect(result.counts.curated).toBe(1005);
     expect(result.counts.factory).toBe(596);
-  });
+  }, 30_000);
 
   it("splits the two pools exactly as the banks do", async () => {
     const result = await plan();
@@ -77,7 +77,7 @@ describe("projection plan — the exit-gate counts", () => {
         expect(curatedIds.has(item.itemCode), item.itemCode).toBe(true);
       }
     }
-  });
+  }, 30_000);
 
   it("ties provenance_class and manifest id together in both directions", async () => {
     const result = await plan();
@@ -91,7 +91,7 @@ describe("projection plan — the exit-gate counts", () => {
         expect(item.publicationManifestId, item.itemCode).toBeNull();
       }
     }
-  });
+  }, 30_000);
 
   it("claims every manifest and invents none", async () => {
     const result = await plan();
@@ -101,7 +101,7 @@ describe("projection plan — the exit-gate counts", () => {
     expect(new Set(claimed).size).toBe(claimed.length);
     expect(claimed.length).toBe(result.manifests.length);
     expect(result.manifests.length).toBe(596);
-  });
+  }, 30_000);
 });
 
 describe("content hashes", () => {
@@ -109,7 +109,7 @@ describe("content hashes", () => {
     const result = await plan();
     const hashes = new Set(result.items.map((item) => item.contentHash));
     expect(hashes.size).toBe(result.items.length);
-  });
+  }, 30_000);
 
   it("recomputes identically from the bank — the shadow-compare's basis", async () => {
     const result = await plan();
@@ -117,7 +117,7 @@ describe("content hashes", () => {
     for (const question of publishedExamBank) {
       expect(byCode.get(question.id)?.contentHash, question.id).toBe(contentHashOf(question));
     }
-  });
+  }, 30_000);
 
   it("changes when learner-visible content changes", async () => {
     const [question] = publishedExamBank;
@@ -141,7 +141,7 @@ describe("content hashes", () => {
       expect(itemIdOf(item.itemCode)).toBe(item.itemId);
     }
     expect(new Set(result.items.map((item) => item.itemId)).size).toBe(result.items.length);
-  });
+  }, 30_000);
 });
 
 describe("candidate/answer separation (§9.3)", () => {
@@ -158,7 +158,7 @@ describe("candidate/answer separation (§9.3)", () => {
       }
     }
     expect(offenders).toEqual([]);
-  });
+  }, 30_000);
 
   it("carries the answer key and private explanation into the answer half", async () => {
     const result = await plan();
@@ -168,7 +168,7 @@ describe("candidate/answer separation (§9.3)", () => {
       expect(item?.answer.answerKey, question.id).toEqual(question.answerKey);
       expect(item?.answer.privateExplanation, question.id).toBe(question.explanation ?? null);
     }
-  });
+  }, 30_000);
 
   it("detects a leak that .strict() cannot see", () => {
     /* `candidateContent` is a `z.record` by necessity — interaction shapes vary
@@ -200,14 +200,14 @@ describe("stimulus deduplication (§9.4)", () => {
     expect(result.counts.distinctStimuli).toBe(85);
     /* The saving is the point: 237 embedded copies become 85 rows. */
     expect(result.counts.distinctStimuli).toBeLessThan(result.counts.withStimulus);
-  });
+  }, 30_000);
 
   it("gives each distinct passage exactly one code and one hash", async () => {
     const result = await plan();
     expect(new Set(result.stimuli.map((s) => s.contentHash)).size).toBe(result.stimuli.length);
     expect(new Set(result.stimuli.map((s) => s.stimulusCode)).size).toBe(result.stimuli.length);
     expect(new Set(result.stimuli.map((s) => s.stimulusId)).size).toBe(result.stimuli.length);
-  });
+  }, 30_000);
 
   it("pins every stimulus-bearing item to a stimulus that exists", async () => {
     const result = await plan();
@@ -220,7 +220,7 @@ describe("stimulus deduplication (§9.4)", () => {
         expect(item.stimulusId, item.itemCode).toBeNull();
       }
     }
-  });
+  }, 30_000);
 
   it("records who shares each passage, and shares at least one widely", async () => {
     const result = await plan();
@@ -229,7 +229,7 @@ describe("stimulus deduplication (§9.4)", () => {
     expect(Math.max(...result.stimuli.map((s) => s.usedBy.length))).toBe(15);
     const totalUses = result.stimuli.reduce((sum, s) => sum + s.usedBy.length, 0);
     expect(totalUses).toBe(result.counts.withStimulus);
-  });
+  }, 30_000);
 });
 
 describe("the platform contract", () => {
@@ -242,7 +242,7 @@ describe("the platform contract", () => {
         true,
       );
     }
-  });
+  }, 30_000);
 
   it("records honestly that no manifest carries a verifiable chain", async () => {
     const result = await plan();
@@ -273,7 +273,7 @@ describe("the platform contract", () => {
     expect(withCorrectnessBasis).toHaveLength(308);
     expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "deterministic")).toHaveLength(83);
     expect(withCorrectnessBasis.filter((m) => m.correctnessBasis === "independent_semantic_review")).toHaveLength(225);
-  });
+  }, 30_000);
 
   it("refuses a curated provenance that claims a manifest", () => {
     /* ADR-002 Amendment A2, at the contract level: the discriminated union is

@@ -9,7 +9,7 @@ import { routes } from "@/features/landing/content";
 export const metadata: Metadata = {
   title: "Plans",
   description:
-    "Guest practice is free and never gated behind a subscription. The Family plan's price is still to be confirmed — see what each plan includes and register interest.",
+    "Try practice free as a guest, then choose Individual (A$14.99/month) or Family (A$19.99/month) for child profiles, saved progress and the parent dashboard.",
 };
 
 /** Plans — design handoff screen 3. */
@@ -18,7 +18,7 @@ export default function PricingPage() {
     <MarketingPage
       eyebrow="Plans"
       title="Free to practise."
-      intro="Guest practice needs no account and is never gated behind a subscription. The Family plan is still being finalised, so it can't be bought yet."
+      intro="Try practice as a guest, free, with no account or card. Subscribe for child profiles, saved progress, full-length exam papers and a parent dashboard."
       primaryCta={{ label: "Start free", href: routes.startFree }}
       secondaryCta={{ label: "Practise as a guest", href: routes.guestPractice }}
     >

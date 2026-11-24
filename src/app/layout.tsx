@@ -76,6 +76,10 @@ export default function RootLayout({
     <html lang="en-AU" data-scroll-behavior="smooth">
       <body
         className={`${dmSans.variable} ${dmSerif.variable} ${roboto.variable} ${instrumentSans.variable} ${geist.variable}`}
+        // Browser extensions (e.g. Grammarly) add attributes such as
+        // data-gr-ext-installed to <body> before React hydrates. Suppress the
+        // warning for this element's attributes only; children still hydrate.
+        suppressHydrationWarning
       >
         <a className="skip-link" href="#main-content">
           Skip to main content

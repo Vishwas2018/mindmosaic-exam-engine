@@ -11,6 +11,9 @@ import { createSessionRequestSchema } from "@/features/exam-engine/scoring/serve
 import { selectExamQuestions, type ExamSelectionConfig } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
+import { studentHasFullAccess } from "@/features/billing/student-access";
+import { selectFreeSample } from "@/lib/billing/free-sample";
+import { FREE_PLAN } from "@/lib/billing/prices";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { createTargetSession } from "@/server/assessment/target-session-writes";
@@ -102,6 +105,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "students_only" }, { status: 403 });
   }
 
+  /* Free plan entitlement, resolved before either storage path so neither can
+     serve a free student more than the sample. */
+  const fullAccess = await studentHasFullAccess(supabase, user.id);
+
   /* Spec §12.7 step 6: a server-side flag chooses the storage model for a NEWLY
      created session, and only for a new one. The answer comes from the database
      (ADR-006 Amendment C) so this route and `create_assessment_session` cannot
@@ -117,6 +124,14 @@ export async function POST(request: Request): Promise<NextResponse> {
      depends on it. */
   const storageModel = await resolveSessionStorageModel(supabase);
   if (storageModel === "version_pinned") {
+    /* The target model draws its own paper and has no free-sample path yet, so
+       a free student is refused rather than handed more than the sample. */
+    if (!fullAccess) {
+      return NextResponse.json(
+        { error: "upgrade_required", message: "This practice isn't part of the Free plan." },
+        { status: 402 },
+      );
+    }
     /* THE STEP 7 SEAM, closed (Gate A item A9). Read dispatch (steps 7/8) and
        the target write RPCs (A1-A3, A10-A13) are done and tested, so a
        target-cohort caller now gets a real, server-selected paper on the
@@ -161,7 +176,22 @@ export async function POST(request: Request): Promise<NextResponse> {
      predict its own question selection for a signed-in session. */
   const seed = crypto.randomUUID();
   /* Preview-only second source for the Scholarship sample: a no-op unless the gated, allowlisted preview is active. */
-  const bank = await withScholarshipSample(getExamBank(bankId), user.id);
+  const fullBank = await withScholarshipSample(getExamBank(bankId), user.id);
+
+  /* Free plan: a student whose linked parent has no active access is served a
+     fixed sample of each programme, not the bank. Full-length papers are part
+     of the paid plans and are refused outright. (A no-op unless billing
+     enforcement is on — see student-access.ts.) */
+  if (!fullAccess && patternId !== undefined) {
+    return NextResponse.json(
+      {
+        error: "upgrade_required",
+        message: "Full-length exam papers are part of the Individual and Family plans.",
+      },
+      { status: 402 },
+    );
+  }
+  const bank = fullAccess ? fullBank : selectFreeSample(fullBank);
 
   let config: ExamSelectionConfig;
   let selectedQuestions: readonly AuthoringQuestion[];
@@ -199,6 +229,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   } else {
     /* parsed.data guarantees exactly one of config/patternId is present. */
     config = parsed.data.config!;
+    /* The free sample is smaller than any fixed paper length, so a limited
+       student sits "all of it" rather than being told it does not fit. */
+    if (!fullAccess) config = { ...config, questionCount: "full" };
     /* Scholarship-style content is sat only as a whole named paper, never as a custom-length or mixed draw. */
     if (config.examStyle === "scholarship_style") {
       return NextResponse.json({ error: "scholarship_requires_paper" }, { status: 422 });
@@ -209,6 +242,15 @@ export async function POST(request: Request): Promise<NextResponse> {
       seed,
     );
     if (!selection.ok) {
+      if (!fullAccess) {
+        return NextResponse.json(
+          {
+            error: "free_sample_empty",
+            message: `The Free plan includes ${FREE_PLAN.sampleQuestionsPerProgramme} sample questions per programme, and none match this selection.`,
+          },
+          { status: 422 },
+        );
+      }
       return NextResponse.json(
         {
           error: "insufficient_questions",

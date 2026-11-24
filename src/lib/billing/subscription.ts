@@ -2,6 +2,8 @@ import "server-only";
 
 import { createClient } from "@/lib/supabase/server";
 
+import type { BillingPlan } from "./prices";
+
 /**
  * Read-only lookup of the signed-in parent's subscription row, for display
  * in the parent dashboard billing panel. Mirrors the read-only pattern in
@@ -28,7 +30,7 @@ export type SubscriptionStatus =
 
 export interface MySubscriptionDetails {
   status: SubscriptionStatus;
-  plan: "family_monthly" | "family_annual" | null;
+  plan: BillingPlan | null;
   trialEnd: string | null;
   currentPeriodEnd: string | null;
   seats: number;
@@ -42,7 +44,7 @@ export type MySubscriptionResult =
 
 interface SubscriptionRow {
   status: SubscriptionStatus;
-  plan: "family_monthly" | "family_annual" | null;
+  plan: BillingPlan | null;
   trial_end: string | null;
   current_period_end: string | null;
   seats: number;

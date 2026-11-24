@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AlertTriangle, Check, Copy, LoaderCircle, Printer, UserPlus } from "lucide-react";
 
+import { FAMILY_PLAN } from "@/lib/billing/prices";
 import {
   Button,
   Card,
@@ -42,7 +44,17 @@ interface ProvisionChildResponse {
  * action returns the login code and PIN exactly once; we surface them here
  * with a clear "save these now" warning and never persist them client-side.
  */
-export function AddChildCard({ availableYearLevels }: { availableYearLevels: readonly number[] }) {
+export function AddChildCard({
+  availableYearLevels,
+  atLimit = false,
+  maxChildren = FAMILY_PLAN.maxChildren,
+}: {
+  availableYearLevels: readonly number[];
+  /** True when the family already has the maximum number of children. */
+  atLimit?: boolean;
+  /** The plan's child-profile cap, for the at-limit message. */
+  maxChildren?: number;
+}) {
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
   const [yearLevel, setYearLevel] = useState<string>("");
@@ -182,11 +194,33 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
               >
                 Add another child
               </Button>
-              <Button type="button" variant="primary" size="sm" onClick={() => router.refresh()}>
+              <Button type="button" variant="primary" size="sm" onClick={() => {
+                  // On /parent a refresh is enough, but on /parent/children it
+                  // re-renders the same page and looks like a dead button.
+                  if (window.location.pathname === "/parent") {
+                    router.refresh();
+                  } else {
+                    router.push("/parent");
+                  }
+                }}>
                 Done &mdash; show on dashboard
               </Button>
             </div>
           </div>
+        ) : atLimit ? (
+          <p className="text-sm font-semibold text-muted">
+            {maxChildren === 1 ? (
+              <>
+                The Individual plan covers one child.{" "}
+                <Link href="/billing" className="font-extrabold text-royal underline-offset-2 hover:underline">
+                  Upgrade to Family
+                </Link>{" "}
+                to add up to {FAMILY_PLAN.maxChildren}.
+              </>
+            ) : (
+              <>Your family account is at its limit of {maxChildren} children.</>
+            )}
+          </p>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {error && (

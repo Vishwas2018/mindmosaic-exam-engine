@@ -8,6 +8,10 @@ const mockSingle = vi.fn();
 const mockChildLinks = vi.fn<() => Promise<{ data: { child_id: string }[] | null }>>();
 /** The linked children's profiles, looked up by the same check. */
 const mockChildProfiles = vi.fn<() => Promise<{ data: { display_name: string | null }[] | null }>>();
+/** The requester's subscriptions.plan, read for the per-plan child limit. */
+const mockSubscriptionPlan = vi.fn<() => Promise<{ data: { plan: string | null } | null }>>(async () => ({
+  data: { plan: null },
+}));
 
 /*
  * Table-aware so the duplicate-name check is genuinely exercised: it reads
@@ -20,6 +24,9 @@ vi.mock("@/lib/supabase/server", () => ({
     from: (table: string) => {
       if (table === "parent_children") {
         return { select: () => ({ eq: mockChildLinks }) };
+      }
+      if (table === "subscriptions") {
+        return { select: () => ({ eq: () => ({ maybeSingle: mockSubscriptionPlan }) }) };
       }
       if (table === "profiles") {
         return {
@@ -209,6 +216,48 @@ describe("provisionChild", () => {
     expect(result.ok).toBe(true);
     expect(result.duplicate).toBeUndefined();
     expect(mockCreateUser).toHaveBeenCalledTimes(1);
+  });
+
+  it("refuses a fourth child, even with allowDuplicate, and creates nothing", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["A", "B", "C"]);
+
+    const result = await provisionChild({ displayName: "D", allowDuplicate: true });
+
+    expect(result.ok).toBe(false);
+    expect(result.message).toMatch(/up to 3 children/i);
+    expect(mockCreateUser).not.toHaveBeenCalled();
+  });
+
+  it("limits an Individual plan to one child, with an upgrade message", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["A"]);
+    mockSubscriptionPlan.mockResolvedValueOnce({ data: { plan: "individual_annual" } });
+
+    const result = await provisionChild({ displayName: "B", allowDuplicate: true });
+
+    expect(result.ok).toBe(false);
+    expect(result.message).toMatch(/individual plan covers one child/i);
+    expect(mockCreateUser).not.toHaveBeenCalled();
+  });
+
+  it("allows the first child on an Individual plan", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren([]);
+    mockSubscriptionPlan.mockResolvedValueOnce({ data: { plan: "individual_monthly" } });
+
+    const result = await provisionChild({ displayName: "A" });
+
+    expect(result.ok).toBe(true);
+  });
+
+  it("still allows the third child", async () => {
+    setRequester({ id: "parent-1" }, "parent");
+    setExistingChildren(["A", "B"]);
+
+    const result = await provisionChild({ displayName: "C" });
+
+    expect(result.ok).toBe(true);
   });
 
   it("lets a different name through without a prompt", async () => {

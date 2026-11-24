@@ -2920,6 +2920,22 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261106090000",
+    name: "individual_plans",
+    checks: [
+      {
+        describes: "subscriptions.plan accepts the individual_* plan values",
+        sql: `select exists (
+          select 1 from pg_constraint
+          where conrelid = 'public.subscriptions'::regclass
+            and conname = 'subscriptions_plan_check'
+            and pg_get_constraintdef(oid) like '%individual_monthly%'
+            and pg_get_constraintdef(oid) like '%individual_annual%'
+        ) as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
