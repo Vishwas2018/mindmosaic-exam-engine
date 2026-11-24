@@ -21,7 +21,15 @@ const nextConfig: NextConfig = {
   // has been verified in a standalone build; omitting one would silently drop
   // publication evidence from that route's deployment bundle.
   outputFileTracingIncludes: {
-    "/admin/review": ["./content/scholarship-drafts/*-draft.json", "./docs/content-status/scholarship-review-2026-10-16/blind-review-*.json", "./docs/reviews/scholarship-2026-10-18/status.json"],
+    "/admin/review": [
+      "./content/scholarship-drafts/*-draft.json",
+      "./docs/content-status/scholarship-review-2026-10-16/blind-review-*.json",
+      "./docs/reviews/scholarship-2026-10-18/status.json",
+      "./content/vihaan-scholarship/pilot-01/draft.json",
+      "./content/vihaan-scholarship/expansion-500/bank.draft.json",
+      "./content/vihaan-scholarship/expansion-500/batch-*.draft.json",
+      "./content/vihaan-scholarship/expansion-500/quality-coverage-report.json",
+    ],
     "/*": ["./content/question-factory/published-manifests/*.json", "./content/publication-approvals/*", "./content/publication-approvals/writing-prompts/*.json"],
   },
   // Landing photographs are served as AVIF where supported, WebP otherwise. 85 is the Chapter 1 hero quality.

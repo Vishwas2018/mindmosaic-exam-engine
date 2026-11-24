@@ -2936,6 +2936,43 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261124090000",
+    name: "admin_review_decisions",
+    checks: [
+      tableExists("admin_draft_review_decisions"),
+      functionExists("deny_admin_review_decision_mutation"),
+      triggerExists(
+        "public",
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_immutable",
+      ),
+      policyExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_read",
+      ),
+      policyExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_insert",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_checks_valid",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_notes_required",
+      ),
+      {
+        describes:
+          "admin_draft_review_decisions is RLS-enabled, admin-only, and append-only",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.admin_draft_review_decisions')), false)
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'select,insert')
+          and not has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'update,delete,truncate')
+          and not has_table_privilege('anon', 'public.admin_draft_review_decisions', 'select,insert,update,delete') as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */

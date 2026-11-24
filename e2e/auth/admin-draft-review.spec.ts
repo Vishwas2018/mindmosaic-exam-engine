@@ -177,3 +177,81 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   ).toBeDisabled();
   expect(studentWrites).toEqual([]);
 });
+
+test("admin can review the provisional canonical 500-item Codex Scholarship bank with blind-first solving, pool isolation and human-only guards", async ({
+  contextAs,
+}) => {
+  test.setTimeout(120_000);
+  const page = await (await contextAs("admin")).newPage();
+  const studentWrites: string[] = [];
+  page.on("request", (request) => {
+    if (
+      request.method() !== "GET" &&
+      /\/api\/(exam|assessment|student)\//.test(request.url())
+    )
+      studentWrites.push(request.url());
+  });
+
+  await page.goto("/admin/review?bank=vihaan-scholarship-500");
+  await expect(page.getByRole("status")).toHaveText(
+    "500 drafts match your filters",
+  );
+
+  // Verify strict practice vs mock pool filtering (400 practice / 100 mock reserve).
+  await page.getByLabel("Pool", { exact: true }).selectOption("practice");
+  await expect(page.getByRole("status")).toHaveText(
+    "400 drafts match your filters",
+  );
+  await page.getByLabel("Pool", { exact: true }).selectOption("mock");
+  await expect(page.getByRole("status")).toHaveText(
+    "100 drafts match your filters",
+  );
+  await page.getByLabel("Pool", { exact: true }).selectOption("mock-a");
+  await expect(page.getByRole("status")).toHaveText(
+    "50 drafts match your filters",
+  );
+  await page.getByLabel("Pool", { exact: true }).selectOption("");
+
+  // Verify Written Expression prompts render through the existing governed rubric.
+  await page.getByLabel("Section", { exact: true }).selectOption("writing");
+  await expect(page.getByRole("status")).toHaveText(
+    "40 drafts match your filters",
+  );
+  await expect(
+    page.getByText("Written Expression — Human Rubric Only"),
+  ).toBeVisible();
+
+  // Switch back to Mathematics MCQ and verify blind-first solving hides key until solved.
+  await page.getByLabel("Section", { exact: true }).selectOption("numeracy");
+  await expect(page.getByText("Blind solve mode")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Declared answer" }),
+  ).toHaveCount(0);
+
+  await page.getByRole("radio").first().check();
+  await page.getByRole("button", { name: "Submit preview answer" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Declared answer" }),
+  ).toBeVisible();
+
+  // Verify AI reviewer identity is refused when extended decisions are active.
+  const nameInput = page.getByLabel(/Accountable human reviewer full name/i);
+  if ((await nameInput.count()) > 0) {
+    await nameInput.fill("Claude Sonnet");
+    await expect(
+      page.getByText(/AI, automated tools and service identities/i),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Record my explicit approval" }),
+    ).toBeDisabled();
+  }
+
+  // Verify Batch progress & export view renders all 11 batches (pilot + 10 expansion).
+  await page.getByRole("button", { name: "Batch progress & export" }).click();
+  await expect(
+    page.getByText(/Batch progress & publication readiness/i),
+  ).toBeVisible();
+  await expect(page.getByText("vihaan-pilot-01")).toBeVisible();
+  await expect(page.getByText("vihaan-expansion-10")).toBeVisible();
+  expect(studentWrites).toEqual([]);
+});
