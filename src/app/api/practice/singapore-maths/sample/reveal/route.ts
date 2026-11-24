@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 
+import {checkOrigin} from "@/features/auth/require-origin";
 import {createClient} from "@/lib/supabase/server";
 import {isSingaporeMathsSampleAllowed, isSingaporeMathsSampleAllowedFor} from "@/features/flags/singapore-maths-sample";
 import {sampleExplanation, sampleYearOf} from "@/content/visual-fixtures/bar-model/sample-practice.server";
@@ -24,6 +25,11 @@ function parseRevealBody(body: unknown): RevealBody | null {
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isSingaporeMathsSampleAllowed()) {
     return new NextResponse(null, {status: 404});
+  }
+
+  const originCheck = checkOrigin(request);
+  if (!originCheck.ok) {
+    return originCheck.response;
   }
 
   const supabase = await createClient();

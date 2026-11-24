@@ -25,6 +25,11 @@ export async function updateSession(
     return response;
   }
 
+  const isHttps =
+    request.nextUrl.protocol === "https:" ||
+    request.headers.get("x-forwarded-proto") === "https" ||
+    process.env.VERCEL === "1";
+
   const supabase = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
@@ -36,7 +41,11 @@ export async function updateSession(
         }
         response = NextResponse.next({ request: { headers: requestHeaders } });
         for (const { name, value, options } of cookiesToSet) {
-          response.cookies.set(name, value, options);
+          response.cookies.set(name, value, {
+            ...options,
+            sameSite: options?.sameSite ?? "lax",
+            secure: isHttps ? true : options?.secure,
+          });
         }
       },
     },
