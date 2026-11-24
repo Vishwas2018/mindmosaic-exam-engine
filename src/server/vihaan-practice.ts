@@ -64,7 +64,7 @@ export function getVihaanApprovedBank(
 /**
  * Returns the verified published questions (334 less any withdrawn) eligible for daily adaptive
  * practice, concept drills, diagnostic, writing practice, and timed sectional
- * drills (excluding the 166 questions reserved for unseen Mock Examinations).
+ * drills. Includes the 166 publicly exposed former mock items (practice-only, see EXPOSED_MOCK_ITEMS_PRACTICE_ONLY).
  */
 export function getVihaanPracticePool(
   userId?: string | null,
@@ -74,8 +74,8 @@ export function getVihaanPracticePool(
 }
 
 /**
- * Returns the 166 verified published questions reserved exclusively for unseen
- * timed Mock Examinations.
+ * Returns the questions reserved exclusively for unseen timed Mock Examinations.
+ * Empty while the exposed set is practice-only: no unseen mock paper exists yet.
  */
 export function getVihaanMockPool(
   userId?: string | null,

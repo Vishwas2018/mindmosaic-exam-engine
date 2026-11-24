@@ -103,6 +103,13 @@ describe("formatJobTimestamp", () => {
     expect(formatJobTimestamp("2026-07-28T02:10:00Z")).not.toBe("—");
   });
 
+  it("is timezone-independent (hydration-safe, MT-006)", () => {
+    const out = formatJobTimestamp("2026-07-28T02:10:00Z");
+    // 02:10Z is 12:10 in Australia/Sydney (AEST, UTC+10) regardless of host TZ.
+    expect(out).toMatch(/28 Jul/);
+    expect(out).toMatch(/12:10/);
+  });
+
   it("is an em dash for null", () => {
     expect(formatJobTimestamp(null)).toBe("—");
   });

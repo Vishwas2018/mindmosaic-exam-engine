@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { libraryHref, type LibraryQuery, type LibraryResult } from "../library-query";
 
+import { plural } from "@/lib/format-count";
 const card = "rounded-2xl border border-royal/10 bg-white shadow-xs";
 const select =
   "mt-1 block min-h-11 w-full rounded-xl border border-royal/15 bg-white px-3 text-sm text-[#1f1b24] focus-visible:outline-2 focus-visible:outline-royal";
@@ -183,8 +184,8 @@ export function AdminLibraryView({ query, result }: { query: LibraryQuery; resul
 
       <p className="text-sm text-[#4a4454]" role="status">
         {result.total === result.overall
-          ? `${result.total.toLocaleString("en-AU")} questions`
-          : `${result.total.toLocaleString("en-AU")} of ${result.overall.toLocaleString("en-AU")} questions`}
+          ? `${result.total.toLocaleString("en-AU")} ${plural(result.total, "question")}`
+          : `${result.total.toLocaleString("en-AU")} of ${result.overall.toLocaleString("en-AU")} ${plural(result.overall, "question")}`}
         {result.total > 0 ? ` · showing ${result.from}–${result.to}` : ""}
       </p>
 

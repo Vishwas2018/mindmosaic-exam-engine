@@ -16,6 +16,7 @@ import {
   visibleExamPatterns,
 } from "@/server/scholarship-sample-preview";
 
+import { countLabel } from "@/lib/format-count";
 export const metadata: Metadata = {
   title: "Full-length practice papers",
   description:
@@ -140,8 +141,8 @@ export default async function ExamPatternPickerPage() {
                     data-testid={`pattern-full-withheld-${paper.pattern.id}`}
                     className="mt-3 text-[14px] leading-[1.55] text-mm-muted"
                   >
-                    The full-length paper ({paper.requestedCount} questions) is not open yet: {paper.availableCount} of{" "}
-                    {paper.requestedCount} questions have been reviewed. Use the practice module above in the meantime.
+                    The full-length paper ({countLabel(paper.requestedCount, "question")}) is not open yet: {paper.availableCount} of{" "}
+                    {countLabel(paper.requestedCount, "question")} have been reviewed. Use the practice module above in the meantime.
                   </p>
                 ))}
               </div>

@@ -23,7 +23,8 @@ vi.mock("@/server/publication-evidence", () => ({
   getPublicationEligibility: () => ({ problems: [], approvals: new Map(pool.questions.map((q) => [q.id, {}])) }),
 }));
 
-describe("withdrawal follows gate policy", () => {
+/* Loads the whole question bank; the 5s default is not enough on a saturated host (reproduced under CPU load). */
+describe("withdrawal follows gate policy", { timeout: 30_000 }, () => {
   it("excludes a withdrawn item under enforce even when every item is approved", async () => {
     vi.stubEnv("MM_PUBLICATION_GATE", "enforce");
     const { getExamBank, getGuestExamBank, getResolutionExamBank } = await import("@/server/exam-bank");

@@ -2,7 +2,12 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import PracticeSkillSessionPage from "@/app/practice/session/page";
-import * as recommendationModule from "@/features/exam-engine/recommendation";
+import * as drillModule from "@/features/exam-engine/recommendation/build-drill";
+import { GET, POST } from "@/app/api/practice/session/questions/route";
+
+vi.mock("server-only", () => ({}));
+vi.mock("@/server/practice-session-user", () => ({ getSignedInUserId: async () => null }));
+vi.mock("@/server/exam-bank", () => ({ getGuestExamBank: () => PUBLISHED_BANK, getExamBank: () => EXTENDED_PRACTICE_BANK }));
 import {
   DRILL_STORAGE_PREFIX,
   saveDrillLaunchRequest,
@@ -122,17 +127,16 @@ const EXTENDED_PRACTICE_BANK: Question[] = [
   ),
 ];
 
-function stubGuestBankFetch(published = PUBLISHED_BANK, practice = EXTENDED_PRACTICE_BANK) {
-  fetchSpy = vi.fn().mockResolvedValue(
-    new Response(
-      JSON.stringify({
-        curated: published,
-        published,
-        practice,
-      }),
-      { status: 200, headers: { "Content-Type": "application/json" } },
-    ),
-  );
+function stubPracticeEndpoint() {
+  fetchSpy = vi.fn(async (path: string, init?: RequestInit) => {
+    const headers = new Headers(init?.headers);
+    headers.set("origin", "http://localhost");
+    headers.set("host", "localhost");
+    const request = new Request(new URL(path, "http://localhost"), {
+      method: init?.method, headers, body: init?.body,
+    });
+    return request.method === "POST" ? POST(request) : GET(request);
+  });
   vi.stubGlobal("fetch", fetchSpy);
 }
 
@@ -140,11 +144,11 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
   beforeEach(() => {
     window.sessionStorage.clear();
     vi.restoreAllMocks();
-    stubGuestBankFetch();
+    stubPracticeEndpoint();
   });
 
   it("conclusively proves live route invokes buildDrill with banks.published, reconstructs stored target, and passes only 5 fresh question IDs into PracticeSession", async () => {
-    const buildDrillSpy = vi.spyOn(recommendationModule, "buildDrill");
+    const buildDrillSpy = vi.spyOn(drillModule, "buildDrill");
 
     const previousIds = [
       "prev-frac-1",
@@ -236,7 +240,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
 
     // Bank fetch was called exactly once for valid drill
     expect(fetchSpy).toHaveBeenCalledTimes(1);
-    expect(fetchSpy).toHaveBeenCalledWith("/api/exam/guest-bank");
+    expect(fetchSpy).toHaveBeenCalledWith("/api/practice/session/questions", expect.objectContaining({ method: "POST" }));
   });
 
   it("proves extra/tampered query parameters cannot alter stored target configuration", async () => {
@@ -276,7 +280,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
     expect(screen.queryByTestId("practice-nav-6")).not.toBeInTheDocument();
   });
 
-  it("does not fetch guest bank when launch record is missing from sessionStorage", async () => {
+  it("does not fetch practice delivery when launch record is missing from sessionStorage", async () => {
     mockSearchParams = new URLSearchParams(
       "mode=drill&launchId=non-existent-launch-id",
     );
@@ -289,7 +293,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
       ).toBeInTheDocument();
     });
 
-    // Must NOT fetch guest bank when handoff is missing/invalid
+    // Must NOT fetch practice delivery when handoff is missing/invalid
     expect(fetchSpy).not.toHaveBeenCalled();
 
     expect(screen.getByRole("link", { name: "Back to results" })).toHaveAttribute(
@@ -298,7 +302,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
     );
   });
 
-  it("does not fetch guest bank when launch record is expired (> 2 hours)", async () => {
+  it("does not fetch practice delivery when launch record is expired (> 2 hours)", async () => {
     const key = `${DRILL_STORAGE_PREFIX}expired-drill-id`;
     window.sessionStorage.setItem(
       key,
@@ -332,7 +336,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("does not fetch guest bank when launch record is future-dated", async () => {
+  it("does not fetch practice delivery when launch record is future-dated", async () => {
     const key = `${DRILL_STORAGE_PREFIX}future-drill-id`;
     window.sessionStorage.setItem(
       key,
@@ -366,7 +370,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("does not fetch guest bank when storage access throws SecurityError", async () => {
+  it("does not fetch practice delivery when storage access throws SecurityError", async () => {
     vi.spyOn(window, "sessionStorage", "get").mockImplementation(() => {
       throw new DOMException("The operation is insecure.", "SecurityError");
     });
@@ -387,7 +391,7 @@ describe("PracticeSkillSessionPage live route architecture & regression tests", 
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("does not fetch guest bank when mode=drill has empty launchId", async () => {
+  it("does not fetch practice delivery when mode=drill has empty launchId", async () => {
     mockSearchParams = new URLSearchParams("mode=drill");
 
     render(<PracticeSkillSessionPage />);

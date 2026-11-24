@@ -12,6 +12,7 @@ import { fetchStudentPortalShellData } from "@/features/student/components/stude
 import { fetchStudentOverview } from "@/features/student/data";
 import { requireStudent } from "@/features/student/require-student";
 
+import { countLabel } from "@/lib/format-count";
 export const metadata: Metadata = { title: "Exam Centre" };
 
 /* Per-user page — always render at request time (see /student/page.tsx). */
@@ -264,7 +265,7 @@ export default async function StudentExamPreparationPage() {
                     <p className="truncate text-[15px] font-semibold text-mm-ink">{attempt.title}</p>
                     <p className="mt-0.5 text-[13px] text-mm-muted">
                       {attempt.timing === "timed" ? "Timed" : "Untimed"}
-                      {attempt.totalQuestions !== null ? ` · ${attempt.totalQuestions} questions` : ""}
+                      {attempt.totalQuestions !== null ? ` · ${countLabel(attempt.totalQuestions, "question")}` : ""}
                       {attempt.pendingManualReview ? " · some marks pending" : ""}
                     </p>
                   </div>

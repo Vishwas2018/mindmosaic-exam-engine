@@ -100,6 +100,7 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
   // A3 sign in
   await parentSignIn(page, email, STRONG_PASSWORD);
   await expect(page).toHaveURL(/\/parent/, { timeout: 30_000 });
+  await page.waitForLoadState("networkidle"); // Firefox aborts a goto issued while the post-sign-in navigation settles
   await shot("a3-parent-home");
 
   // A4 add a child
@@ -156,8 +157,11 @@ test("A3–A11: confirmed parent signs in, adds a child, prints a card, signs ou
   await expect(card).toBeVisible();
   await expect(page.getByRole("heading", { level: 1, name: "Children" }), "page behind the card is not printed").toBeHidden();
   await expect(dialog.getByRole("button", { name: /print card/i }), "dialog buttons are not printed").toBeHidden();
-  const pdf = await page.pdf({ format: "A4", printBackground: true });
-  fs.writeFileSync(testInfo.outputPath("a8-signin-card.pdf"), pdf);
+  if ((testInfo.project.use.defaultBrowserType ?? "chromium") === "chromium") {
+    // page.pdf exists only in headless Chromium
+    const pdf = await page.pdf({ format: "A4", printBackground: true });
+    fs.writeFileSync(testInfo.outputPath("a8-signin-card.pdf"), pdf);
+  }
   await page.screenshot({ path: testInfo.outputPath("a8-signin-card-print-media.png") });
   await page.emulateMedia({ media: "screen" });
   await dialog.getByRole("button", { name: "Close" }).last().click();

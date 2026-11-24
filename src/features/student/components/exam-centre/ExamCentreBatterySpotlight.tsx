@@ -1,5 +1,6 @@
 import { CheckCircle2, Hourglass, PlayCircle, RotateCw } from "lucide-react";
 
+import { countLabel } from "@/lib/format-count";
 interface DomainCard {
   index: string;
   subject: string;
@@ -112,7 +113,7 @@ export function ExamCentreBatterySpotlight() {
               </h3>
               <p className="text-xs leading-relaxed text-mm-muted">{domain.description}</p>
               <div className="mt-1 flex items-center justify-between">
-                <span className="text-[11px] font-medium text-mm-muted">{domain.questionCount} questions</span>
+                <span className="text-[11px] font-medium text-mm-muted">{countLabel(domain.questionCount, "question")}</span>
                 <button
                   type="button"
                   title={`${domain.actionLabel} (illustrative example)`}

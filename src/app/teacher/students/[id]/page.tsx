@@ -40,6 +40,7 @@ import {
 import { loadTeacherPageContext } from "@/features/teacher/load-context";
 import { getInterventionFlag, listTeacherNotes } from "@/features/teacher/mock-notes";
 
+import { plural } from "@/lib/format-count";
 export const metadata: Metadata = { title: "Student detail" };
 
 const STATUS_PRESENTATION = {
@@ -186,7 +187,7 @@ export default async function TeacherStudentDetailPage({
               >
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-ink">
-                    {entry.result.attemptedQuestions}/{entry.result.totalQuestions} questions
+                    {entry.result.attemptedQuestions}/{entry.result.totalQuestions} {plural(entry.result.totalQuestions, "question")}
                   </p>
                   <p className="text-xs text-muted">{formatShortDate(entry.submittedAt)}</p>
                 </div>

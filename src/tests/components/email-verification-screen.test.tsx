@@ -194,8 +194,10 @@ describe("EmailVerificationScreen (screen 6 gap)", () => {
     renderScreen();
 
     expect(await screen.findByText(/different device or browser/i)).toBeInTheDocument();
+    expect(screen.getByText(/may already be confirmed, so try signing in first/i)).toBeInTheDocument();
     expect(screen.queryByText(/verifier/i)).not.toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /open this link on the same device/i })).toHaveFocus();
+    // Focus is applied in a passive effect after the heading mounts, so wait for it rather than racing it.
+    await waitFor(() => expect(screen.getByRole("heading", { name: /open this link on the same device/i })).toHaveFocus());
   });
 
   it("explains a link with no credentials at all rather than spinning", async () => {

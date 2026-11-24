@@ -14,6 +14,8 @@ import {
 import type {
   ActiveSessionResponse,
   CreateSessionResponse,
+  GuestSessionSelection,
+  GuestSessionStartResponse,
 } from "@/features/exam-engine/scoring/server-scoring-contract";
 import {
   patternExamConfig,
@@ -62,7 +64,8 @@ export interface ExamState {
    * scores locally. Decided at start, not at submit — auth state changing
    * mid-attempt cannot re-route a session to a scorer it wasn't built for.
    */
-  sessionMode: "local" | "server";
+  sessionMode: "local" | "guest" | "server";
+  guestTicket: string | null;
   sessionId: string | null;
   /**
    * When the last autosave flush was accepted by the server, as an epoch
@@ -137,6 +140,10 @@ export interface StartPatternExamOptions extends StartExamOptions {
 }
 
 export interface ExamActions {
+  startGuestExam: (
+    selection: GuestSessionSelection,
+    options?: { seed?: string; confidenceMode?: boolean },
+  ) => Promise<boolean>;
   startExam: (
     bank: readonly AuthoringQuestion[],
     config: ExamSelectionConfig,
@@ -203,6 +210,7 @@ function createInitialExamState(): ExamState {
   return {
     status: "not_started",
     sessionMode: "local",
+    guestTicket: null,
     sessionId: null,
     lastAutosavedAt: null,
     lastServerError: null,
@@ -387,6 +395,50 @@ function startAutosaveLoop(getState: () => ExamStore): void {
 
 export const useExamStore = create<ExamStore>((set, get) => ({
   ...createInitialExamState(),
+
+  startGuestExam: async (selection, options) => {
+    set({ lastServerError: null });
+    try {
+      const response = await fetch("/api/exam/guest-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ selection, ...options }),
+      });
+      if (!response.ok) {
+        set({
+          lastServerError: response.status === 404
+            ? "There aren't enough available questions for this selection."
+            : "We couldn't start your exam just now. Check your connection and try again.",
+        });
+        return false;
+      }
+      const { ticket, sessionId, startedAt, bankId, config, durationSeconds, questions } =
+        (await response.json()) as GuestSessionStartResponse;
+      stopAutosaveLoop();
+      activeBank = [];
+      activePattern = null;
+      activePatternOptions = {};
+      const deadlineAt = durationSeconds === null ? null : startedAt + durationSeconds * 1000;
+      set({
+        ...createInitialExamState(),
+        status: "in_progress",
+        sessionMode: "guest",
+        guestTicket: ticket,
+        sessionId,
+        startedAt,
+        bankId,
+        config,
+        durationSeconds,
+        questions,
+        deadlineAt,
+        remainingSeconds: getEffectiveRemainingSeconds(deadlineAt, clock()),
+      });
+      return true;
+    } catch {
+      set({ lastServerError: "We couldn't connect to start this exam. Please try again." });
+      return false;
+    }
+  },
 
   startExam: (bank, config, options) => {
     const seed = options?.seed ?? generateSeed();
@@ -697,6 +749,24 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     }
     set({ responses: { ...state.responses, [questionId]: answer } });
     noteAutosaveChange(get());
+    if (!state.guestTicket || !state.config?.confidenceMode || isUnanswered(answer)) return;
+    const question = state.questions.find(({ id }) => id === questionId);
+    if (!question || question.explanation !== undefined) return;
+    const ticket = state.guestTicket;
+    void fetch("/api/exam/guest-session", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ticket, questionId, answer }),
+    }).then(async (response) => {
+      if (!response.ok) return;
+      const { explanation } = await response.json() as { explanation: string | null };
+      if (!explanation) return;
+      const latest = get();
+      if (latest.status !== "in_progress" || latest.guestTicket !== ticket) return;
+      set({ questions: latest.questions.map((item) => item.id === questionId ? { ...item, explanation } : item) });
+    }).catch(() => {
+      // A connection failure affects feedback only. The candidate response stays in the sitting.
+    });
   },
 
   goToQuestion: (index) => {
@@ -799,7 +869,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
      * review questions arrive in the submit response instead.
      */
     const isServerSession = state.sessionMode === "server";
-    const authoringQuestions = isServerSession
+    const authoringQuestions = isServerSession || state.guestTicket
       ? []
       : recomputeAuthoringQuestions(state.config!, state.seed!);
     const context = {
@@ -811,6 +881,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       ? new ServerAuthoritativeScoringService(state.sessionId!)
       : localPracticeScoringService;
     const finalize = (submission: ScoredSubmission) => {
+      if (get().sessionId !== state.sessionId) return;
       /* The server accepted the submission: there is no open sitting left. */
       if (isServerSession) recordNoOpenWork();
       set({
@@ -822,9 +893,19 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         remainingSeconds: state.durationSeconds === null ? null : 0,
       });
     };
-    const outcome = scoringService.score(authoringQuestions, state.responses, context);
+    const outcome = state.guestTicket
+      ? fetch("/api/exam/guest-session", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ticket: state.guestTicket, responses: state.responses, submissionReason: effectiveReason }),
+        }).then(async (response) => {
+          if (!response.ok) throw new Error("Guest exam submission was not accepted.");
+          return await response.json() as ScoredSubmission;
+        })
+      : scoringService.score(authoringQuestions, state.responses, context);
     if (outcome instanceof Promise) {
       outcome.then(finalize).catch((error) => {
+        if (get().sessionId !== state.sessionId) return;
         /*
          * A server session cannot be scored locally — the client holds no
          * answer keys — so the only honest recovery is to return to

@@ -76,7 +76,7 @@ export function VihaanParentDashboard({
           </p>
         </div>
         <span className="px-2.5 py-1 rounded border border-emerald-200 bg-emerald-50 text-[11px] font-semibold text-emerald-700">
-          Approved for DEV — {approvedBankCount}-item bank (166 reserved for mock exams)
+          Approved for DEV — {approvedBankCount}-item bank (all practice; unseen mock papers not yet available)
         </span>
       </div>
 

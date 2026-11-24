@@ -4,6 +4,7 @@ import { ClipboardList, Clock, ShieldCheck } from "lucide-react";
 
 import type { MockExamSectionKey } from "../lib/practice";
 
+import { countLabel } from "@/lib/format-count";
 const OFFICIAL_MOCK_SECTIONS: readonly {
   readonly key: Exclude<MockExamSectionKey, "full_mock">;
   readonly title: string;
@@ -51,8 +52,8 @@ export function VihaanMockExams({
           </span>
         </div>
         <p className="text-sm text-mm-muted">
-          Build examination speed using timed practice drills drawn strictly from your 334-item
-          practice pool, leaving reserved mock questions completely unseen.
+          Build examination speed using timed practice drills drawn strictly from your
+          practice pool.
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {TIMED_SECTIONAL_TESTS.map((test) => {
@@ -66,7 +67,7 @@ export function VihaanMockExams({
                 <div>
                   <h3 className="text-sm font-bold text-ink">{test.title}</h3>
                   <p className="mt-1 text-xs text-mm-muted">
-                    {actualCount} questions · {test.minutes}-minute countdown
+                    {countLabel(actualCount, "question")} · {test.minutes}-minute countdown
                   </p>
                 </div>
                 <button
@@ -98,9 +99,20 @@ export function VihaanMockExams({
             className="inline-flex items-center gap-1.5 rounded border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700"
           >
             <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
-            {reservedCount} unseen questions reserved exclusively for Mock Exams
+            {reservedCount === 0 ? "Unseen mock papers: not available yet" : `${reservedCount} unseen questions reserved exclusively for Mock Exams`}
           </span>
         </div>
+
+        {reservedCount === 0 && (
+          <p
+            data-testid="mock-unseen-unavailable"
+            role="note"
+            className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
+          >
+            New unseen mock papers are being prepared and are not ready yet. The earlier mock-style questions are now
+            part of your normal practice, so use Practice and the timed sectional tests above in the meantime.
+          </p>
+        )}
 
         <p className="text-sm text-mm-muted">
           Four 30-minute objective sections plus a 15-minute written expression task drawn only

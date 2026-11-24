@@ -260,7 +260,7 @@ export function VihaanDashboard({
           <p className="mt-2 text-sm text-mm-muted">
             Welcome, {student.displayName ?? "Vihaan"}.{" "}
             {hasApprovedQuestions
-              ? `${totalBankCount} verified Year 6 scholarship questions published in DEV (${questions.length} daily practice items, ${mockQuestions.length} unseen mock exam items).`
+              ? `${totalBankCount} verified Year 6 scholarship questions published in DEV (${questions.length} daily practice items${mockQuestions.length > 0 ? `, ${mockQuestions.length} unseen mock exam items` : "; unseen mock papers are not available yet"}).`
               : "Your scholarship preparation workspace is awaiting content approval."}
           </p>
         </div>

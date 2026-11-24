@@ -6,6 +6,9 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 import { publishedExamBank } from "@/content/questions/practice-bank";
+import { GET as getPracticeQuestions } from "@/app/api/practice/session/questions/route";
+import { getGuestExamBank } from "@/server/exam-bank";
+vi.mock("@/server/practice-session-user", () => ({ getSignedInUserId: async () => null }));
 import { GET as getGuestBank } from "@/app/api/exam/guest-bank/route";
 import { POST as postExamSession } from "@/app/api/exam/session/route";
 
@@ -31,33 +34,18 @@ vi.mock("@/lib/supabase/server", () => ({
 }));
 
 describe("Stop serving ungated seed questions", () => {
-  describe("1. Guest-bank payload contains only published items", () => {
-    it("returns only curated and published banks, with no practice property", async () => {
+  describe("1. Guest allocation only uses published items", () => {
+    it("retires bulk delivery and keeps ungated seeds out of the guest source pool", async () => {
       const response = getGuestBank();
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(410);
+      expect(await response.json()).toEqual({ error: "guest_bank_retired" });
 
-      const json = await response.json();
-      expect(json).toHaveProperty("curated");
-      expect(json).toHaveProperty("published");
-      expect(json).not.toHaveProperty("practice");
-
-      // Verify that all published questions in the payload are members of publishedExamBank
-      const publishedIdsInPayload = new Set((json.published as Array<{ id: string }>).map((q) => q.id));
       const officialPublishedIds = new Set(publishedExamBank.map((q) => q.id));
-
-      expect(publishedIdsInPayload.size).toBe(officialPublishedIds.size);
-      for (const id of publishedIdsInPayload) {
-        expect(officialPublishedIds.has(id)).toBe(true);
-      }
-
-      // Assert the ungated seed bank file no longer exists on disk
+      const pool = getGuestExamBank("published");
+      expect(pool.length).toBeGreaterThan(0);
+      expect(pool.every(({ id }) => officialPublishedIds.has(id) && !id.startsWith("gen-"))).toBe(true);
       const seedFile = resolve(process.cwd(), "src/content/questions/generated/generated-questions.ts");
       expect(existsSync(seedFile)).toBe(false);
-
-      // Assert zero retired seed questions leak into guest-bank payload
-      for (const id of publishedIdsInPayload) {
-        expect(id.startsWith("gen-")).toBe(false);
-      }
     });
   });
 
@@ -98,18 +86,17 @@ describe("Stop serving ungated seed questions", () => {
   });
 
   describe("3. ?extended=true has no effect", () => {
-    it("practice session page component pools exclusively from published, never practiceExamBank", () => {
-      // In practice/session/page.tsx:
-      // const pool = banks.published;
-      // Even if stdParams.extended is true, the pool remains banks.published.
-      const pageFile = readFileSync(
-        resolve(process.cwd(), "src/app/practice/session/page.tsx"),
-        "utf8",
-      );
-
-      // Verify that banks.practice is not referenced anywhere in practice/session/page.tsx
-      expect(pageFile).not.toMatch(/banks\.practice/);
-      expect(pageFile).toMatch(/const pool = banks\.published;/);
+    it("keeps the same published practice selection when extended is requested", async () => {
+      const url = "http://localhost/api/practice/session/questions?source=learning&subject=numeracy&year=3&count=5&seed=fixture";
+      const base = await (await getPracticeQuestions(new Request(url))).json();
+      const extended = await (await getPracticeQuestions(new Request(url + "&extended=1"))).json();
+      expect(base.questions).toHaveLength(5);
+      expect(extended.questions).toEqual(base.questions);
+      for (const question of extended.questions) {
+        expect(question.id).not.toMatch(/^gen-/);
+        expect(question).not.toHaveProperty("answerKey");
+        expect(question).not.toHaveProperty("explanation");
+      }
     });
   });
 

@@ -160,17 +160,20 @@ test.describe("Practise Missed Skills Release-Readiness Acceptance", () => {
       await page.getByTestId(`practice-nav-${q}`).click();
       const firstOption = page.locator('button[id*="-opt-"]').first();
       const textbox = page.getByRole("textbox").first();
+      let answered = false;
       if (await firstOption.isVisible()) {
         await firstOption.click();
         const checkBtn = page.getByRole("button", { name: "Submit answer" });
         if (await checkBtn.isVisible()) {
           await checkBtn.click();
+          answered = true;
         }
       } else if (await textbox.isVisible()) {
         await textbox.fill("children's");
         const checkBtn = page.getByRole("button", { name: "Submit answer" });
         if (await checkBtn.isVisible()) {
           await checkBtn.click();
+          answered = true;
         }
       } else {
         const skipBtn = page.getByRole("button", { name: "Skip for now" });
@@ -179,10 +182,15 @@ test.describe("Practise Missed Skills Release-Readiness Acceptance", () => {
         }
       }
 
+      /* Feedback now arrives from the server's check call rather than being scored in the browser,
+         so wait for the continue control instead of sampling it once (a skipped question has none). */
       const nextOrSummary = page.getByRole("button", {
         name: /View results|Next question/i,
       });
-      if (await nextOrSummary.isVisible()) {
+      if (answered) {
+        await expect(nextOrSummary).toBeVisible();
+        await nextOrSummary.click();
+      } else if (await nextOrSummary.isVisible()) {
         await nextOrSummary.click();
       }
     }

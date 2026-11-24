@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { stubGuestSession } from "./helpers/guest-session-stub";
 
 import { showcasePromptLayoutQuestions } from "@/content/questions/showcase-prompt-layout-fixtures";
 import type { Question } from "@/schemas/question.schema";
@@ -12,7 +13,7 @@ import { expectNoHorizontalOverflow, startExamSession } from "./helpers/screen-h
  * results page rendered the prompt in a plain paragraph, so a multi-line AMC
  * prompt collapsed to one run-on line (`white-space: normal`).
  *
- * The guest bank route is mocked and serves ONLY the synthetic demonstration
+ * The guest session route is mocked and serves only the synthetic demonstration
  * questions from the showcase prompt-layout fixtures, which carry the same text
  * under `amc_style` and `naplan_style`. No real or unpublished question is
  * involved. The NAPLAN card is the control: it must stay exactly as before.
@@ -30,25 +31,14 @@ const DEMO_LINES = [
   "• Third line of the demonstration list.",
 ];
 
-/**
- * A guest picks questions from the guest bank in the browser and is scored
- * locally, so the bank route is the only one that needs serving. It returns
- * twelve copies of ONE synthetic demonstration question (distinct ids), so the
- * setup screen has enough to build a ten-question paper for that exam style.
- */
+/** Provide enough synthetic candidate questions for the ten-item sitting. */
 function demonstrationBank(source: Question) {
   return Array.from({ length: 12 }, (_, index) => ({ ...source, id: `${source.id}-${index + 1}` }));
 }
 
 async function reachResults(page: Page, source: Question, examStyle: string, subject: string): Promise<void> {
   const bank = demonstrationBank(source);
-  await page.route("**/api/exam/guest-bank", async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: "application/json",
-      body: JSON.stringify({ curated: bank, published: bank, practice: bank }),
-    });
-  });
+  await stubGuestSession(page, bank);
   await startExamSession(page, {
     path: "/practice/mixed-practice?seed=results-multiline",
     yearLevel: "5",

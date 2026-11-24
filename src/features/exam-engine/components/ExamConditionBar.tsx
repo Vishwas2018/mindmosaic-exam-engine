@@ -85,7 +85,7 @@ export function ExamConditionBar({
     };
   }, []);
 
-  const save = autosaveLabel(sessionMode, lastAutosavedAt, now ?? 0);
+  const save = autosaveLabel(sessionMode === "server" ? "server" : "local", lastAutosavedAt, now ?? 0);
   const timed = timing === "timed";
 
   return (
