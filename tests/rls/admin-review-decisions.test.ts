@@ -57,9 +57,10 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
       );
     }
     await seed(client);
-    await client.query("update public.profiles set role='admin' where id=$1", [
-      STUDENT_B,
-    ]);
+    await client.query(
+      "update public.profiles set role='admin', display_name='Vishwas Joshi' where id=$1",
+      [STUDENT_B],
+    );
   });
 
   afterEach(async () => {
@@ -151,13 +152,17 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
     },
   );
 
-  it("denies impersonating another reviewer_id or reviewer_email and denies revoked admins", async () => {
+  it("denies impersonating reviewer_id, reviewer_email or reviewer_name and denies revoked admins", async () => {
     await asAuthenticated(client, STUDENT_B);
     await expectPgError("42501", () =>
       insertDecision({ reviewerId: STUDENT_A }),
     );
     await expectPgError("42501", () =>
       insertDecision({ reviewerEmail: "other-admin@mindmosaic.dev" }),
+    );
+    // Direct PostgREST impersonation of another human reviewer's display name is blocked by RLS.
+    await expectPgError("42501", () =>
+      insertDecision({ reviewerName: "Jane Doe" }),
     );
 
     await client.query("reset role");
@@ -204,14 +209,34 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
   });
 
   it("enforces human-only reviewer names, full approval checks, and mandatory revise/reject rationale at the DB boundary", async () => {
-    await asAuthenticated(client, STUDENT_B);
-
-    // AI / automated / single-word names rejected by CHECK constraint (23514).
-    for (const badName of ["Admin", "Claude Sonnet", "OpenAI Codex", "AI Bot"]) {
+    // AI / automated / single-word / numeric names rejected by CHECK constraint (23514),
+    // even if an admin sets their profile display_name to that invalid string.
+    for (const badName of [
+      "Admin",
+      "Claude Sonnet",
+      "OpenAI Codex",
+      "ClaudeBot Reviewer",
+      "Qwen Reviewer",
+      "A B",
+      "123 456",
+    ]) {
+      await client.query("reset role");
+      await client.query(
+        "update public.profiles set display_name = $1 where id = $2",
+        [badName, STUDENT_B],
+      );
+      await asAuthenticated(client, STUDENT_B);
       await expectPgError("23514", () =>
         insertDecision({ reviewerName: badName }),
       );
     }
+
+    await client.query("reset role");
+    await client.query(
+      "update public.profiles set display_name = 'Vishwas Joshi' where id = $1",
+      [STUDENT_B],
+    );
+    await asAuthenticated(client, STUDENT_B);
 
     // Approve without all 5 checks rejected.
     await expectPgError("23514", () =>
@@ -271,7 +296,7 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
       client.query("delete from public.admin_draft_review_decisions"),
     );
 
-    // Even privileged owner cannot mutate or delete due to immutability trigger (MM106).
+    // Even privileged owner cannot UPDATE, DELETE or TRUNCATE due to immutability triggers (MM106).
     await client.query("reset role");
     await expectPgError("MM106", () =>
       client.query(
@@ -280,6 +305,9 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
     );
     await expectPgError("MM106", () =>
       client.query("delete from public.admin_draft_review_decisions"),
+    );
+    await expectPgError("MM106", () =>
+      client.query("truncate table public.admin_draft_review_decisions"),
     );
 
     // Student attempts table untouched.
@@ -305,6 +333,8 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
       // Execute inside our outer test transaction without nested BEGIN/COMMIT.
       .replace(/^\s*begin;\s*$/gim, "")
       .replace(/^\s*commit;\s*$/gim, "");
+    await client.query(rollbackSql);
+    // Rollback must be idempotent if executed twice.
     await client.query(rollbackSql);
 
     const dropped = await client.query(

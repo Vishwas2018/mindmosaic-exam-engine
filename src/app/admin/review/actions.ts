@@ -43,7 +43,7 @@ const decisionInputSchema = z
     checks: reviewChecksSchema,
     blindSolved: z.boolean(),
     notes: z.string().max(4000).default(""),
-    reviewerName: z.string().trim().min(1).max(120),
+    reviewerName: z.string().trim().max(120).optional(),
   })
   .strict();
 
@@ -59,6 +59,16 @@ export async function approveDraft(
     return { error: "Confirm every approval check before recording approval." };
   const { questionId, contentHash, checks } = parsed.data;
   const catalogue = await loadAdminReviewCatalogue();
+  const supabase = await createClient();
+  if (
+    catalogue.extendedDecisionsAvailable &&
+    typeof supabase.auth?.getUser === "function"
+  ) {
+    return {
+      error:
+        "Extended human review decisions are active. Use the full 5-check decision workflow in /admin/review.",
+    };
+  }
   const current = catalogue.entries.find(
     (entry) => entry.question.id === questionId,
   );
@@ -73,7 +83,6 @@ export async function approveDraft(
       error: `Approval is blocked for known defective revision (${knownDefect.defectId}): ${knownDefect.reason}`,
     };
   }
-  const supabase = await createClient();
   const { data, error } = await supabase
     .from("admin_draft_review_approvals")
     .insert({
@@ -133,9 +142,11 @@ export async function recordReviewDecision(input: unknown): Promise<{
   } = parsed.data;
 
   const trimmedNotes = notes.trim();
-  const nameCheck = validateHumanReviewerName(rawReviewerName);
-  if (!nameCheck.ok) {
-    return { error: nameCheck.error };
+  if (rawReviewerName !== undefined && rawReviewerName.length > 0) {
+    const clientNameCheck = validateHumanReviewerName(rawReviewerName);
+    if (!clientNameCheck.ok) {
+      return { error: clientNameCheck.error };
+    }
   }
 
   if (decision === "approve") {
@@ -190,35 +201,45 @@ export async function recordReviewDecision(input: unknown): Promise<{
     };
   }
 
-  // Authoritative server-side reviewer identity: reviewer_id and reviewer_email
-  // always come from the verified Supabase Auth session. When the authenticated
-  // admin's profile already holds a valid human full name, refuse any client
-  // attempt to impersonate another reviewer by passing a different display name.
-  let effectiveReviewerName = nameCheck.normalized;
+  // Authoritative server-side reviewer identity (fail closed):
+  // reviewer_id and reviewer_email come exclusively from supabase.auth.getUser(),
+  // and reviewer_name comes exclusively from public.profiles.display_name (also
+  // enforced in Postgres RLS). Clients can NEVER supply or impersonate another name.
   const profileResult = await supabase
     .from("profiles")
     .select("display_name")
     .eq("id", access.userId)
     .single();
+  if (profileResult.error || !profileResult.data) {
+    return {
+      error:
+        "Authenticated reviewer profile could not be verified. Reload or sign in again before recording a decision.",
+    };
+  }
   const serverDisplayName =
-    typeof profileResult.data?.display_name === "string"
+    typeof profileResult.data.display_name === "string"
       ? profileResult.data.display_name
       : null;
-  if (serverDisplayName) {
-    const serverNameCheck = validateHumanReviewerName(serverDisplayName);
-    if (serverNameCheck.ok) {
-      if (
-        serverNameCheck.normalized.toLowerCase() !==
-        nameCheck.normalized.toLowerCase()
-      ) {
-        return {
-          error:
-            "Reviewer name must match your authenticated admin profile name. Reviewer identity is bound server-side and cannot be impersonated.",
-        };
-      }
-      effectiveReviewerName = serverNameCheck.normalized;
+  const serverNameCheck = validateHumanReviewerName(serverDisplayName);
+  if (!serverNameCheck.ok) {
+    return {
+      error:
+        "Your authenticated admin profile must have a verified full human name (first and last name) before recording review decisions. Update your profile display name; AI, automated or single-word names are refused.",
+    };
+  }
+  if (rawReviewerName && rawReviewerName.trim().length > 0) {
+    const normalizedClient = rawReviewerName.trim().replace(/\s+/g, " ");
+    if (
+      normalizedClient.toLowerCase() !==
+      serverNameCheck.normalized.toLowerCase()
+    ) {
+      return {
+        error:
+          "Reviewer name must match your authenticated admin profile name. Reviewer identity is bound server-side and cannot be impersonated.",
+      };
     }
   }
+  const effectiveReviewerName = serverNameCheck.normalized;
 
   const resolvedBatchId = current.batchId ?? current.source;
   const resolvedItemKind = current.itemKind ?? "question";

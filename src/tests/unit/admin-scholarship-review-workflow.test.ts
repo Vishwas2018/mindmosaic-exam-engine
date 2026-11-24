@@ -290,8 +290,7 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
     });
     expect(staleRes.error).toMatch(/revision has changed/i);
 
-    // 6. Impersonating another reviewer by changing display name input is refused
-    // when the authenticated admin profile already holds a valid human full name.
+    // 6. Impersonating another reviewer by changing display name input is refused.
     const spoofRes = await recordReviewDecision({
       bankId: "vihaan-scholarship-500",
       questionId: entry.question.id,
@@ -304,6 +303,48 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
       reviewerName: "Jane Doe",
     });
     expect(spoofRes.error).toMatch(/must match your authenticated admin profile/i);
+
+    // 6b. Profile query error fails closed (never falls back to client-supplied name).
+    mocks.profileSingle.mockResolvedValue({
+      data: null,
+      error: { message: "db error" },
+    });
+    const profileErrRes = await recordReviewDecision({
+      bankId: "vihaan-scholarship-500",
+      questionId: entry.question.id,
+      contentHash: entry.contentHash,
+      publishedContentHash: entry.publishedContentHash,
+      decision: "approve",
+      checks: ALL_CHECKS,
+      blindSolved: true,
+      notes: "",
+      reviewerName: "Vishwas Joshi",
+    });
+    expect(profileErrRes.error).toMatch(/profile could not be verified/i);
+
+    // 6c. Missing or single-word profile display_name fails closed.
+    mocks.profileSingle.mockResolvedValue({
+      data: { display_name: "Admin" },
+      error: null,
+    });
+    const singleWordProfileRes = await recordReviewDecision({
+      bankId: "vihaan-scholarship-500",
+      questionId: entry.question.id,
+      contentHash: entry.contentHash,
+      publishedContentHash: entry.publishedContentHash,
+      decision: "approve",
+      checks: ALL_CHECKS,
+      blindSolved: true,
+      notes: "",
+      reviewerName: "Vishwas Joshi",
+    });
+    expect(singleWordProfileRes.error).toMatch(/verified full human name/i);
+
+    // Restore valid profile for subsequent assertions.
+    mocks.profileSingle.mockResolvedValue({
+      data: { display_name: "Vishwas Joshi" },
+      error: null,
+    });
 
     // 7. Known defective question vihaan-e500-m069 cannot be approved at its defective revision.
     const defective = catalogue.entries.find(
@@ -448,6 +489,35 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
         "postgresql://postgres:x@db.uermhsptduikehuyceiz.supabase.co:5432/postgres",
       ),
     ).toThrow(/production Supabase ref/i);
+    // Percent-encoded PROD ref bypass is rejected.
+    expect(() =>
+      assertNonProductionDatabaseUrl(
+        "postgresql://postgres.%75ermhsptduikehuyceiz:x@aws-0-ap-southeast-2.pooler.supabase.com:6543/postgres",
+      ),
+    ).toThrow(/production Supabase ref/i);
+    // Empty-authority URL with PGHOST pointing to PROD is rejected.
+    expect(() =>
+      assertNonProductionDatabaseUrl("postgresql://", {
+        PGHOST: "db.uermhsptduikehuyceiz.supabase.co",
+      }),
+    ).toThrow(/production Supabase ref/i);
+    // Unknown non-allowlisted host is rejected fail-closed.
+    expect(() =>
+      assertNonProductionDatabaseUrl(
+        "postgresql://postgres:x@evil-proxy.example.com:5432/postgres",
+      ),
+    ).toThrow(/non-allowlisted database host/i);
+    // Localhost and DEV ref are explicitly permitted.
+    expect(() =>
+      assertNonProductionDatabaseUrl(
+        "postgresql://postgres:postgres@127.0.0.1:56322/postgres",
+      ),
+    ).not.toThrow();
+    expect(() =>
+      assertNonProductionDatabaseUrl(
+        "postgresql://postgres.mfglzabnayacssgertat:x@aws-0-ap-southeast-2.pooler.supabase.com:6543/postgres",
+      ),
+    ).not.toThrow();
 
     const truthMap = await loadSourceTruthMap("vihaan-scholarship-500");
     expect(truthMap.size).toBe(500);
@@ -547,6 +617,23 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
     );
     expect(defectExport.questionCount).toBe(0);
     expect(defectExport.rejectedReasons[0]).toMatch(/Defect A-06/i);
+
+    // Stale historical approval (valid fingerprint, older content_hash) is skipped cleanly
+    // without blocking export of other current-revision approvals.
+    const staleBase = {
+      ...practiceTruth,
+      contentHash: "9".repeat(64),
+    };
+    const staleRow = buildRow(staleBase);
+    const mixedExport = verifyAndPartitionExportRows(
+      [staleRow, allRows[2]!],
+      truthMap,
+      "practice",
+    );
+    expect(mixedExport.rejectedReasons).toEqual([]);
+    expect(mixedExport.skippedStale).toBe(1);
+    expect(mixedExport.questionCount).toBe(0);
+    expect(mixedExport.writingCount).toBe(1);
 
     // UI CSV helper also enforces strict practice/mock split.
     const catalogue = await loadAdminReviewCatalogue({

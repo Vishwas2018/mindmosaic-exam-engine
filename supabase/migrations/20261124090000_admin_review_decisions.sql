@@ -29,7 +29,10 @@ create table public.admin_draft_review_decisions (
   reviewer_name text not null check (
     length(trim(reviewer_name)) between 3 and 120
     and array_length(regexp_split_to_array(trim(reviewer_name), '\s+'), 1) >= 2
-    and reviewer_name !~* '\y(claude|anthropic|opus|sonnet|haiku|gpt|chatgpt|openai|gemini|copilot|codex|llm|bot|automated?|ai|antigravity|system|service)\y'
+    and reviewer_name ~ '^[[:alpha:]][[:alpha:]'' .-]+$'
+    and reviewer_name !~* '(^|\s)[[:alpha:]](\s|$)'
+    and reviewer_name !~* '\y(claude|anthropic|opus|sonnet|haiku|gpt|chatgpt|openai|gemini|copilot|codex|qwen|llama|mistral|deepseek|grok|llm|bot|automated?|ai|antigravity|agent|script|cron|system|service)\y'
+    and reviewer_name !~* '(claude|anthropic|openai|chatgpt|copilot|codex|antigravity|automated|bot)'
   ),
   reviewer_email text not null check (
     length(trim(reviewer_email)) between 5 and 254
@@ -89,6 +92,10 @@ create trigger admin_draft_review_decisions_immutable
   before update or delete on public.admin_draft_review_decisions
   for each row execute function public.deny_admin_review_decision_mutation();
 
+create trigger admin_draft_review_decisions_no_truncate
+  before truncate on public.admin_draft_review_decisions
+  for each statement execute function public.deny_admin_review_decision_mutation();
+
 alter table public.admin_draft_review_decisions enable row level security;
 
 revoke all on public.admin_draft_review_decisions from public, anon, authenticated;
@@ -130,6 +137,8 @@ for insert to authenticated with check (
     where p.id = auth.uid()
       and p.role = 'admin'
       and p.access_revoked_at is null
+      and lower(regexp_replace(trim(coalesce(p.display_name, '')), '\s+', ' ', 'g'))
+        = lower(regexp_replace(trim(reviewer_name), '\s+', ' ', 'g'))
   )
 );
 

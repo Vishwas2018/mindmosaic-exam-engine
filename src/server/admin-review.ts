@@ -833,6 +833,9 @@ export async function loadAdminReviewCatalogue(
     for (const row of extendedRows) {
       if (row.question_id !== entry.question.id) continue;
       if (row.bank_id && row.bank_id !== entry.bankId) continue;
+      const isDefectiveApproval =
+        row.decision === "approve" &&
+        Boolean(getKnownDefectiveRevision(entry.question.id, row.content_hash));
       history.push({
         id: row.id,
         decision: row.decision,
@@ -849,6 +852,7 @@ export async function loadAdminReviewCatalogue(
         checks: normalizeChecks(row.checks, row.decision === "approve"),
         evidenceFingerprint: row.evidence_fingerprint,
         matchesCurrentRevision:
+          !isDefectiveApproval &&
           row.content_hash === entry.contentHash &&
           row.published_content_hash === entry.publishedContentHash,
         isLegacyApproval: false,
@@ -865,6 +869,9 @@ export async function loadAdminReviewCatalogue(
           item.approvedBy === row.approved_by,
       );
       if (alreadyCovered) continue;
+      const isDefectiveLegacy = Boolean(
+        getKnownDefectiveRevision(entry.question.id, row.content_hash),
+      );
       history.push({
         decision: "approve",
         approvedBy: row.approved_by,
@@ -875,7 +882,8 @@ export async function loadAdminReviewCatalogue(
         notes: "",
         blindSolved: false,
         checks: normalizeChecks(null, true),
-        matchesCurrentRevision: row.content_hash === entry.contentHash,
+        matchesCurrentRevision:
+          !isDefectiveLegacy && row.content_hash === entry.contentHash,
         isLegacyApproval: true,
       });
     }

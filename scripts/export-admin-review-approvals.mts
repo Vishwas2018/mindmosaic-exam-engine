@@ -22,6 +22,7 @@
  */
 import "./lib/allow-server-only.mts";
 
+import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { Client } from "pg";
@@ -32,6 +33,7 @@ import {
   type ReviewChecks,
   type ReviewDecisionKind,
 } from "../src/features/admin-review/contracts";
+import releaseIdentities from "../src/features/admin-review/release-identities.json";
 import {
   classifyReviewPool,
   getKnownDefectiveRevision,
@@ -49,6 +51,8 @@ import {
 } from "../src/server/admin-review";
 
 const PROD_SUPABASE_REF = "uermhsptduikehuyceiz";
+const DEV_SUPABASE_REF = "mfglzabnayacssgertat";
+const LOCAL_HOSTS = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
 const REVIEW_SHEET_HEADER =
   "questionId,contentHash,revision,sourceManifestHash,correctness,originality,ageAppropriateness,decision,notes";
 
@@ -63,10 +67,58 @@ function escapeCsvCell(value: string | number | null | undefined): string {
   return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
-export function assertNonProductionDatabaseUrl(dbUrl: string): void {
-  if (dbUrl.toLowerCase().includes(PROD_SUPABASE_REF)) {
+function safeDecode(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+/**
+ * Enforces an explicit DEV/local database allowlist (never a bypassable denylist).
+ * Rejects production ref (raw or percent-encoded), empty-authority URLs that
+ * fall back to PGHOST/PGUSER, and any host outside localhost or DEV Supabase.
+ */
+export function assertNonProductionDatabaseUrl(
+  dbUrl: string,
+  env: Readonly<Record<string, string | undefined>> = process.env,
+): void {
+  const rawAndDecoded = `${dbUrl} ${safeDecode(dbUrl)} ${env.PGHOST ?? ""} ${env.PGUSER ?? ""} ${env.PGDATABASE ?? ""}`.toLowerCase();
+  if (rawAndDecoded.includes(PROD_SUPABASE_REF)) {
     throw new Error(
       `Refusing to connect to production Supabase ref (${PROD_SUPABASE_REF}). Only local or DEV databases are permitted.`,
+    );
+  }
+
+  let parsed: URL;
+  try {
+    parsed = new URL(dbUrl);
+  } catch {
+    throw new Error("Invalid database URL; refusing to connect.");
+  }
+
+  if (parsed.protocol !== "postgres:" && parsed.protocol !== "postgresql:") {
+    throw new Error(`Unsupported database protocol '${parsed.protocol}'.`);
+  }
+
+  const host = safeDecode(parsed.hostname).toLowerCase();
+  const user = safeDecode(parsed.username).toLowerCase();
+  if (!host) {
+    throw new Error(
+      "Database URL must specify an explicit hostname (empty-authority PGHOST fallback is forbidden).",
+    );
+  }
+
+  const isLocalHost = LOCAL_HOSTS.has(host);
+  const isDevDirectHost = host === `db.${DEV_SUPABASE_REF}.supabase.co`;
+  const isDevPooler =
+    host.endsWith(".pooler.supabase.com") &&
+    user.endsWith(`.${DEV_SUPABASE_REF}`);
+
+  if (!isLocalHost && !isDevDirectHost && !isDevPooler) {
+    throw new Error(
+      `Refusing connection to non-allowlisted database host '${host}'. Only localhost or DEV Supabase (${DEV_SUPABASE_REF}) is permitted.`,
     );
   }
 }
@@ -97,11 +149,28 @@ export async function loadSourceTruthMap(
       ["scholarship-y6-maths", "scholarship-y6-mathematics-draft.json"],
     ] as const;
     for (const [batchId, file] of files) {
-      const packet = JSON.parse(
-        await readFile(path.join(process.cwd(), "content/scholarship-drafts", file), "utf8"),
-      ) as { questions: Array<Record<string, unknown>> };
+      const filePath = path.join(process.cwd(), "content/scholarship-drafts", file);
+      const rawBytes = await readFile(filePath);
+      const expectedPacketHash = (
+        releaseIdentities.packets as Record<string, string | undefined>
+      )[file];
+      const actualPacketHash = createHash("sha256").update(rawBytes).digest("hex");
+      if (!expectedPacketHash || actualPacketHash !== expectedPacketHash) {
+        throw new Error(
+          `${file}: packet hash differs from pinned release-identities.json; refusing export.`,
+        );
+      }
+      const packet = JSON.parse(rawBytes.toString("utf8")) as {
+        questions: Array<Record<string, unknown>>;
+      };
       for (const raw of packet.questions) {
         const id = String(raw.id);
+        if (raw.status !== "draft") {
+          throw new Error(`${id}: expected draft status in ${file}; refusing export.`);
+        }
+        if (map.has(id)) {
+          throw new Error(`${id}: duplicate question ID in ${file}; refusing export.`);
+        }
         const candidate = candidateQuestionSchema.parse(raw);
         const published = questionSchema.parse({ ...raw, status: "published" });
         map.set(id, {
@@ -123,27 +192,90 @@ export async function loadSourceTruthMap(
   }
 
   const baseDir = path.join(process.cwd(), "content/vihaan-scholarship");
-  const manifest = JSON.parse(
+  const report = JSON.parse(
+    await readFile(path.join(baseDir, "expansion-500/quality-coverage-report.json"), "utf8"),
+  ) as {
+    passed?: boolean;
+    errors?: unknown[];
+    total?: number;
+    sources?: {
+      manifestHash?: string;
+      pilotHash?: string;
+      batchHashes?: Array<{ file: string; hash: string }>;
+    };
+  };
+  if (
+    report.passed !== true ||
+    !Array.isArray(report.errors) ||
+    report.errors.length > 0 ||
+    report.total !== 500 ||
+    !report.sources?.manifestHash ||
+    !report.sources?.pilotHash ||
+    !Array.isArray(report.sources?.batchHashes)
+  ) {
+    throw new Error(
+      "quality-coverage-report.json did not pass validation; refusing export.",
+    );
+  }
+  const manifestRaw = JSON.parse(
     await readFile(path.join(baseDir, "expansion-500/bank.draft.json"), "utf8"),
-  ) as { batches: Array<{ batchId: string; file: string }> };
+  ) as {
+    approvedBy: unknown;
+    status: string;
+    batches: Array<{ batchId: string; file: string }>;
+  };
+  if (manifestRaw.status !== "draft" || manifestRaw.approvedBy !== null) {
+    throw new Error("bank.draft.json must remain unapproved draft; refusing export.");
+  }
+  const actualManifestHash = createHash("sha256")
+    .update(JSON.stringify(manifestRaw))
+    .digest("hex");
+  if (actualManifestHash !== report.sources.manifestHash) {
+    throw new Error(
+      "bank.draft.json hash differs from quality-coverage-report.json; refusing export.",
+    );
+  }
 
-  const files = [
-    path.join(baseDir, "pilot-01/draft.json"),
-    ...manifest.batches.map((b) => path.join(baseDir, "expansion-500", b.file)),
+  const batchHashByFile = new Map(
+    report.sources.batchHashes.map((entry) => [entry.file, entry.hash]),
+  );
+
+  const files: Array<{ filePath: string; expectedHash?: string }> = [
+    {
+      filePath: path.join(baseDir, "pilot-01/draft.json"),
+      expectedHash: report.sources.pilotHash,
+    },
+    ...manifestRaw.batches.map((b) => ({
+      filePath: path.join(baseDir, "expansion-500", b.file),
+      expectedHash: batchHashByFile.get(b.file),
+    })),
   ];
 
-  for (const filePath of files) {
+  for (const { filePath, expectedHash } of files) {
     const batch = JSON.parse(await readFile(filePath, "utf8")) as {
       batchId: string;
       version: number;
+      approvedBy: unknown;
       items: Array<{
         question: Record<string, unknown>;
         reservedForMock?: boolean;
       }>;
     };
+    if (batch.approvedBy !== null) {
+      throw new Error(`${filePath}: draft batch must have approvedBy: null.`);
+    }
+    if (!expectedHash) {
+      throw new Error(`${filePath}: missing expected source hash in quality-coverage-report.json.`);
+    }
     for (const wrapper of batch.items) {
       const raw = wrapper.question;
       const id = String(raw.id);
+      if (raw.status !== "draft") {
+        throw new Error(`${id}: expected draft status in ${filePath}; refusing export.`);
+      }
+      if (map.has(id)) {
+        throw new Error(`${id}: duplicate question ID in ${filePath}; refusing export.`);
+      }
       const metadata = raw.metadata as {
         subject: string;
         topic: string;
@@ -236,6 +368,7 @@ export function verifyAndPartitionExportRows(
   readonly writingCount: number;
   readonly rejectedReasons: string[];
   readonly skippedOtherPool: number;
+  readonly skippedStale: number;
 } {
   const questionRows = [REVIEW_SHEET_HEADER];
   const writingRows = [REVIEW_SHEET_HEADER];
@@ -243,6 +376,7 @@ export function verifyAndPartitionExportRows(
   let questionCount = 0;
   let writingCount = 0;
   let skippedOtherPool = 0;
+  let skippedStale = 0;
   const seen = new Set<string>();
 
   for (const row of rows) {
@@ -270,34 +404,8 @@ export function verifyAndPartitionExportRows(
       continue;
     }
 
-    const knownDefect = getKnownDefectiveRevision(
-      row.question_id,
-      truth.contentHash,
-    );
-    if (knownDefect) {
-      rejectedReasons.push(
-        `${row.question_id}: blocked by known Defect ${knownDefect.defectId} at current revision hash — correct and re-review before export.`,
-      );
-      continue;
-    }
-
-    const nameCheck = validateHumanReviewerName(row.reviewer_name);
-    if (!nameCheck.ok) {
-      rejectedReasons.push(`${row.question_id}: invalid reviewer name '${row.reviewer_name}'.`);
-      continue;
-    }
-
-    if (
-      row.content_hash !== truth.contentHash ||
-      row.published_content_hash !== truth.publishedContentHash ||
-      (truth.candidateHash !== null && row.candidate_hash !== truth.candidateHash)
-    ) {
-      rejectedReasons.push(
-        `${row.question_id}: stale or mismatched content hash against current Git draft.`,
-      );
-      continue;
-    }
-
+    // Verify cryptographic evidence fingerprint FIRST so tampering always fails closed,
+    // even if a row is stale.
     const expectedFingerprint = computeReviewEvidenceFingerprint({
       bankId: row.bank_id,
       batchId: row.batch_id,
@@ -318,7 +426,64 @@ export function verifyAndPartitionExportRows(
       reviewerEmail: row.reviewer_email,
     });
     if (row.evidence_fingerprint !== expectedFingerprint) {
-      rejectedReasons.push(`${row.question_id}: evidence_fingerprint mismatch (tampered or corrupt record).`);
+      rejectedReasons.push(
+        `${row.question_id}: evidence_fingerprint mismatch (tampered or corrupt record).`,
+      );
+      continue;
+    }
+
+    // Stale historical approvals (recorded against an earlier Git draft revision)
+    // are skipped cleanly rather than aborting export of other valid approvals,
+    // because the decisions table is append-only and immutable.
+    if (
+      row.content_hash !== truth.contentHash ||
+      row.published_content_hash !== truth.publishedContentHash ||
+      (truth.candidateHash !== null && row.candidate_hash !== truth.candidateHash)
+    ) {
+      skippedStale += 1;
+      continue;
+    }
+
+    const knownDefect = getKnownDefectiveRevision(
+      row.question_id,
+      truth.contentHash,
+    );
+    if (knownDefect) {
+      rejectedReasons.push(
+        `${row.question_id}: blocked by known Defect ${knownDefect.defectId} at current revision hash — correct and re-review before export.`,
+      );
+      continue;
+    }
+
+    const nameCheck = validateHumanReviewerName(row.reviewer_name);
+    if (!nameCheck.ok) {
+      rejectedReasons.push(
+        `${row.question_id}: invalid reviewer name '${row.reviewer_name}'.`,
+      );
+      continue;
+    }
+
+    const allChecksPassed =
+      row.checks.correctness === true &&
+      row.checks.originality === true &&
+      row.checks.ageAppropriateness === true &&
+      row.checks.editorialInterpretation === true &&
+      row.checks.difficultyCalibrated === true;
+    if (!allChecksPassed) {
+      rejectedReasons.push(
+        `${row.question_id}: approval missing one or more required governance checks.`,
+      );
+      continue;
+    }
+
+    if (
+      row.item_kind !== truth.itemKind ||
+      row.batch_id !== truth.batchId ||
+      row.pool !== truth.pool
+    ) {
+      rejectedReasons.push(
+        `${row.question_id}: decision metadata (item_kind/batch_id/pool) disagrees with Git source truth.`,
+      );
       continue;
     }
 
@@ -352,6 +517,7 @@ export function verifyAndPartitionExportRows(
     writingCount,
     rejectedReasons,
     skippedOtherPool,
+    skippedStale,
   };
 }
 
@@ -384,8 +550,8 @@ async function main(): Promise<void> {
   await client.connect();
   try {
     const query = batchArg
-      ? `select * from public.admin_draft_review_decisions where bank_id = $1 and batch_id = $2 order by decided_at desc`
-      : `select * from public.admin_draft_review_decisions where bank_id = $1 order by decided_at desc`;
+      ? `select * from public.admin_draft_review_decisions where bank_id = $1 and batch_id = $2 order by decided_at desc, id desc`
+      : `select * from public.admin_draft_review_decisions where bank_id = $1 order by decided_at desc, id desc`;
     const params = batchArg ? [bankParsed.data, batchArg] : [bankParsed.data];
     const { rows } = await client.query<DbDecisionRow>(query, params);
 
@@ -411,6 +577,7 @@ async function main(): Promise<void> {
           questionApprovalsExported: exported.questionCount,
           writingPromptApprovalsExported: exported.writingCount,
           skippedOtherPool: exported.skippedOtherPool,
+          skippedStaleRevisions: exported.skippedStale,
           questionCsv: questionPath,
           writingCsv: writingPath,
           publicationStateChanged: false,

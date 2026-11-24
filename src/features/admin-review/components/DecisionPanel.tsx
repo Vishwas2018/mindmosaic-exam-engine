@@ -59,16 +59,12 @@ export function DecisionPanel({
   );
   const [checks, setChecks] = useState<ReviewChecks>(INITIAL_CHECKS);
   const [notes, setNotes] = useState("");
-  const verifiedProfileName =
-    reviewer?.displayName && validateHumanReviewerName(reviewer.displayName).ok
-      ? validateHumanReviewerName(reviewer.displayName)
-      : null;
-  const profileNameLocked = Boolean(verifiedProfileName?.ok);
-  const defaultReviewerName =
-    verifiedProfileName && verifiedProfileName.ok
-      ? verifiedProfileName.normalized
-      : "";
-  const [reviewerName, setReviewerName] = useState(defaultReviewerName);
+  const profileNameValidation = validateHumanReviewerName(
+    reviewer?.displayName,
+  );
+  const verifiedReviewerName = profileNameValidation.ok
+    ? profileNameValidation.normalized
+    : "";
   const [recordedDecision, setRecordedDecision] = useState<
     ReviewDecisionRecord | undefined
   >(entry.latestDecision);
@@ -80,16 +76,28 @@ export function DecisionPanel({
 
   const currentDecision = recordedDecision ?? entry.latestDecision;
   const approval = recordedLegacyApproval ?? entry.approval;
-  const isApprovedCurrent =
-    Boolean(approval) ||
-    (currentDecision?.matchesCurrentRevision &&
-      currentDecision.decision === "approve");
   const useExtendedFlow = extendedAvailable;
+  // When extended decisions are active, a historical legacy-only approval is
+  // preserved in the audit trail, while still allowing a reviewer to record a
+  // full 5-check extended decision (or Request revision / Reject).
+  const isApprovedCurrent = useExtendedFlow
+    ? Boolean(
+        currentDecision &&
+          !currentDecision.isLegacyApproval &&
+          currentDecision.matchesCurrentRevision &&
+          currentDecision.decision === "approve",
+      )
+    : Boolean(approval) ||
+      Boolean(
+        currentDecision?.matchesCurrentRevision &&
+          currentDecision.decision === "approve",
+      );
+  const legacyBlockedForVihaan =
+    !useExtendedFlow && entry.bankId === "vihaan-scholarship-500";
 
   const history = entry.decisionHistory ?? [];
   const staleDecisions = history.filter((item) => !item.matchesCurrentRevision);
 
-  const nameValidation = validateHumanReviewerName(reviewerName);
   const allApproveChecks = useExtendedFlow
     ? Object.values(checks).every(Boolean)
     : checks.correctness && checks.originality && checks.ageAppropriateness;
@@ -99,10 +107,11 @@ export function DecisionPanel({
   const canSubmit = useExtendedFlow
     ? available &&
       !pending &&
-      nameValidation.ok &&
+      profileNameValidation.ok &&
       !(decisionKind === "approve" && approvalBlocked) &&
       (decisionKind === "approve" ? allApproveChecks : notesSatisfied)
     : available &&
+      !legacyBlockedForVihaan &&
       !pending &&
       !approvalBlocked &&
       allApproveChecks &&
@@ -123,7 +132,7 @@ export function DecisionPanel({
             checks,
             blindSolved,
             notes: notes.trim(),
-            reviewerName: reviewerName.trim(),
+            reviewerName: verifiedReviewerName,
           });
           if (result.error) {
             setMessage(result.error);
@@ -365,45 +374,34 @@ export function DecisionPanel({
                     htmlFor={`reviewer-name-${entry.question.id}`}
                     className="block text-xs font-bold uppercase tracking-wider text-muted"
                   >
-                    Accountable human reviewer full name
+                    Verified human reviewer identity
                   </label>
                   <Input
                     id={`reviewer-name-${entry.question.id}`}
-                    value={reviewerName}
-                    readOnly={profileNameLocked}
-                    onChange={(event) => {
-                      if (!profileNameLocked) setReviewerName(event.target.value);
-                    }}
-                    placeholder="e.g. Vishwas Joshi"
-                    className="mt-1.5"
+                    value={reviewer?.displayName ?? ""}
+                    readOnly
+                    className="mt-1.5 bg-white"
                     aria-describedby={`reviewer-hint-${entry.question.id}`}
                   />
                   <p
                     id={`reviewer-hint-${entry.question.id}`}
                     className="mt-1 text-xs text-muted"
                   >
-                    {profileNameLocked ? (
-                      <>
-                        Locked to authenticated admin profile (
-                        <span className="font-mono">
-                          {reviewer?.email || "authenticated admin"}
-                        </span>
-                        ). Reviewer identity is verified server-side and cannot
-                        be impersonated.
-                      </>
-                    ) : (
-                      <>
-                        Bound server-side to signed-in account{" "}
-                        <span className="font-mono">
-                          {reviewer?.email || "authenticated admin"}
-                        </span>{" "}
-                        (ID verified via RLS). AI/service names are refused.
-                      </>
-                    )}
+                    Locked server-side to authenticated admin profile (
+                    <span className="font-mono">
+                      {reviewer?.email || "authenticated admin"}
+                    </span>
+                    ). Reviewer identity is verified via Supabase Auth + RLS and
+                    cannot be impersonated by changing a display name.
                   </p>
-                  {reviewerName.trim().length > 0 && !nameValidation.ok && (
-                    <p className="mt-1 text-xs font-semibold text-error">
-                      {nameValidation.error}
+                  {!profileNameValidation.ok && (
+                    <p
+                      role="alert"
+                      className="mt-1.5 text-xs font-semibold text-error"
+                    >
+                      {profileNameValidation.error} Update your admin profile
+                      display name to your real full name before recording
+                      decisions.
                     </p>
                   )}
                 </div>
@@ -545,9 +543,9 @@ export function DecisionPanel({
             </Button>
             {!useExtendedFlow && available && (
               <span className="text-xs text-muted">
-                Extended decisions (Request revision / Reject) activate once the
-                DEV migration{" "}
-                <code className="font-mono">20261124090000</code> is applied.
+                {legacyBlockedForVihaan
+                  ? "Apply DEV migration 20261124090000_admin_review_decisions.sql before recording decisions for the Codex 500 bank."
+                  : "Extended decisions (Request revision / Reject) activate once DEV migration 20261124090000 is applied."}
               </span>
             )}
           </div>

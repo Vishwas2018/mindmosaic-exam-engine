@@ -234,19 +234,13 @@ test("admin can review the provisional canonical 500-item Codex Scholarship bank
     page.getByRole("heading", { name: "Declared answer" }),
   ).toBeVisible();
 
-  // Verify AI reviewer identity is refused when extended decisions are active.
-  const nameInput = page.getByLabel(/Accountable human reviewer full name/i);
+  // Verify server-locked human reviewer identity (read-only from profiles.display_name)
+  // and exercise real human approval + reload persistence + Defect A-06 block.
+  const nameInput = page.getByLabel(/Verified human reviewer identity/i);
   if ((await nameInput.count()) > 0) {
-    await nameInput.fill("Claude Sonnet");
-    await expect(
-      page.getByText(/AI, automated tools and service identities/i),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: "Record my explicit approval" }),
-    ).toBeDisabled();
+    await expect(nameInput).toHaveAttribute("readonly", "");
+    await expect(nameInput).toHaveValue("Avery Patel");
 
-    // Exercise real human approval persistence on the first Mathematics item.
-    await nameInput.fill("Vishwas Joshi");
     const checkboxes = page.getByRole("checkbox");
     const boxCount = await checkboxes.count();
     for (let i = 0; i < boxCount; i += 1) {
@@ -272,9 +266,6 @@ test("admin can review the provisional canonical 500-item Codex Scholarship bank
     await expect(
       page.getByRole("button", { name: "Approve", exact: true }),
     ).toBeDisabled();
-    await page
-      .getByLabel(/Accountable human reviewer full name/i)
-      .fill("Vishwas Joshi");
     await page
       .getByLabel(/Required rationale/i)
       .fill("Verified Defect A-06 in E2E: squares 64 and 81 do not sum to 13.");

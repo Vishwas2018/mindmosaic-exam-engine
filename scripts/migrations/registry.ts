@@ -2948,6 +2948,11 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
         "admin_draft_review_decisions",
         "admin_draft_review_decisions_immutable",
       ),
+      triggerExists(
+        "public",
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_no_truncate",
+      ),
       policyExists(
         "admin_draft_review_decisions",
         "admin_draft_review_decisions_read",
@@ -2970,11 +2975,24 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       ),
       {
         describes:
-          "admin_draft_review_decisions is RLS-enabled, admin-only, and append-only",
+          "admin_draft_review_decisions has unique same-revision approval index",
+        sql: `select exists (
+          select 1 from pg_indexes
+          where schemaname = 'public'
+            and tablename = 'admin_draft_review_decisions'
+            and indexname = 'admin_draft_review_decisions_unique_approval_idx'
+        ) as present`,
+      },
+      {
+        describes:
+          "admin_draft_review_decisions is RLS-enabled, admin-only, append-only, and email helper is authenticated-only",
         sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.admin_draft_review_decisions')), false)
-          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'select,insert')
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'select')
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'insert')
           and not has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'update,delete,truncate')
-          and not has_table_privilege('anon', 'public.admin_draft_review_decisions', 'select,insert,update,delete') as present`,
+          and not has_table_privilege('anon', 'public.admin_draft_review_decisions', 'select,insert,update,delete,truncate')
+          and has_function_privilege('authenticated', 'public.authenticated_admin_email()', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.authenticated_admin_email()', 'EXECUTE') as present`,
       },
     ],
   },

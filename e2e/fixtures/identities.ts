@@ -114,7 +114,7 @@ export const ADMIN: AdminIdentity = {
   kind: "admin",
   key: "admin",
   email: parentEmail("admin"),
-  displayName: "Admin",
+  displayName: "Avery Patel",
 };
 
 export const ALL_IDENTITIES: readonly Identity[] = [...PARENTS, ...STUDENTS, ...TEACHERS, ADMIN];

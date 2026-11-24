@@ -157,17 +157,9 @@ describe("Admin Portal Scholarship 500 DraftReview UI", () => {
     );
   });
 
-  it("enforces blind-first solving, rejects AI reviewer names, and records human approval with blindSolved=true", async () => {
+  it("enforces blind-first solving, locks server-verified reviewer identity, and records human approval with blindSolved=true", async () => {
     const user = userEvent.setup();
-    const catalogue: ReviewCatalogue = {
-      ...buildVihaanTestCatalogue(),
-      reviewer: {
-        userId: "11111111-1111-4111-8111-111111111111",
-        email: "vishwas@mindmosaic.dev",
-        // Single-word profile display name requires entering real full name in UI.
-        displayName: "Admin",
-      },
-    };
+    const catalogue = buildVihaanTestCatalogue();
     render(<DraftReview catalogue={catalogue} />);
 
     // Blind solve mode hides the declared answer and worked explanation initially.
@@ -187,22 +179,13 @@ describe("Admin Portal Scholarship 500 DraftReview UI", () => {
     expect(checkboxes).toHaveLength(5);
     for (const box of checkboxes) await user.click(box);
 
-    // Reject AI reviewer name client-side.
+    // Verified human reviewer identity is locked read-only to the server profile.
     const nameInput = screen.getByLabelText(
-      /Accountable human reviewer full name/i,
+      /Verified human reviewer identity/i,
     );
-    await user.clear(nameInput);
-    await user.type(nameInput, "Claude Sonnet");
-    expect(
-      screen.getByText(/AI, automated tools and service identities/i),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Record my explicit approval" }),
-    ).toBeDisabled();
+    expect(nameInput).toHaveAttribute("readonly");
+    expect(nameInput).toHaveValue("Vishwas Joshi");
 
-    // Enter genuine human name and submit approval.
-    await user.clear(nameInput);
-    await user.type(nameInput, "Vishwas Joshi");
     const approveBtn = screen.getByRole("button", {
       name: "Record my explicit approval",
     });
@@ -218,6 +201,24 @@ describe("Admin Portal Scholarship 500 DraftReview UI", () => {
         reviewerName: "Vishwas Joshi",
       }),
     );
+  });
+
+  it("blocks approval submission when the authenticated profile has an AI or single-word display name", () => {
+    const catalogue: ReviewCatalogue = {
+      ...buildVihaanTestCatalogue(),
+      reviewer: {
+        userId: "11111111-1111-4111-8111-111111111111",
+        email: "vishwas@mindmosaic.dev",
+        displayName: "Claude Sonnet",
+      },
+    };
+    render(<DraftReview catalogue={catalogue} />);
+    expect(
+      screen.getByText(/AI, automated tools and service identities/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Record my explicit approval" }),
+    ).toBeDisabled();
   });
 
   it("renders Written Expression prompts via the existing governed rubric and supports Request revision with mandatory notes", async () => {
@@ -310,7 +311,7 @@ describe("Admin Portal Scholarship 500 DraftReview UI", () => {
 
     // Verified human full name from server profile is readOnly so UI cannot impersonate another person.
     const nameInput = screen.getByLabelText(
-      /Accountable human reviewer full name/i,
+      /Verified human reviewer identity/i,
     );
     expect(nameInput).toHaveAttribute("readonly");
     expect(nameInput).toHaveValue("Vishwas Joshi");

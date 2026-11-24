@@ -742,9 +742,15 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
         <BatchReadinessPanel bankId={activeBankId} entries={mergedEntries} />
       ) : mode === "paper" ? (
         <>
-          <label className="block space-y-2 text-sm font-medium text-ink">
-            Draft section paper
+          <div className="space-y-2">
+            <label
+              htmlFor="draft-select-paper"
+              className="block text-sm font-medium text-ink"
+            >
+              Draft section paper
+            </label>
             <select
+              id="draft-select-paper"
               value={chosenSource}
               onChange={(event) => setPaperSource(event.target.value)}
               className={selectClass}
@@ -760,7 +766,7 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                 </option>
               ))}
             </select>
-          </label>
+          </div>
           <p className="text-sm text-muted">
             Complete source packet: {paperEntries.length} questions. Includes
             all shared passages and visuals; browse freely without a time limit.
@@ -782,9 +788,15 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
         <>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-6">
             {batchIds.length > 1 && (
-              <label className="space-y-1.5 text-sm font-medium text-ink">
-                Batch
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="draft-filter-batch"
+                  className="block text-sm font-medium text-ink"
+                >
+                  Batch
+                </label>
                 <select
+                  id="draft-filter-batch"
                   value={batchFilter}
                   onChange={(event) => setBatchFilter(event.target.value)}
                   className={selectClass}
@@ -796,11 +808,17 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                     </option>
                   ))}
                 </select>
-              </label>
+              </div>
             )}
-            <label className="space-y-1.5 text-sm font-medium text-ink">
-              Section
+            <div className="space-y-1.5">
+              <label
+                htmlFor="draft-filter-section"
+                className="block text-sm font-medium text-ink"
+              >
+                Section
+              </label>
               <select
+                id="draft-filter-section"
                 value={section}
                 onChange={(event) => setSection(event.target.value)}
                 className={selectClass}
@@ -818,10 +836,16 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                     </option>
                   ))}
               </select>
-            </label>
-            <label className="space-y-1.5 text-sm font-medium text-ink">
-              Difficulty
+            </div>
+            <div className="space-y-1.5">
+              <label
+                htmlFor="draft-filter-difficulty"
+                className="block text-sm font-medium text-ink"
+              >
+                Difficulty
+              </label>
               <select
+                id="draft-filter-difficulty"
                 value={difficulty}
                 onChange={(event) => setDifficulty(event.target.value)}
                 className={selectClass}
@@ -841,11 +865,17 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                     </option>
                   ))}
               </select>
-            </label>
+            </div>
             {activeBankId === "vihaan-scholarship-500" && (
-              <label className="space-y-1.5 text-sm font-medium text-ink">
-                Pool
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="draft-filter-pool"
+                  className="block text-sm font-medium text-ink"
+                >
+                  Pool
+                </label>
                 <select
+                  id="draft-filter-pool"
                   value={poolFilter}
                   onChange={(event) => setPoolFilter(event.target.value)}
                   className={selectClass}
@@ -856,11 +886,17 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                   <option value="mock-a">Mock Paper A (50)</option>
                   <option value="mock-b">Mock Paper B (50)</option>
                 </select>
-              </label>
+              </div>
             )}
-            <label className="space-y-1.5 text-sm font-medium text-ink">
-              Review status
+            <div className="space-y-1.5">
+              <label
+                htmlFor="draft-filter-status"
+                className="block text-sm font-medium text-ink"
+              >
+                Review status
+              </label>
               <select
+                id="draft-filter-status"
                 value={reviewStatus}
                 onChange={(event) => setReviewStatus(event.target.value)}
                 className={selectClass}
@@ -893,17 +929,23 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                   </>
                 )}
               </select>
-            </label>
-            <label className="space-y-1.5 text-sm font-medium text-ink">
-              Question ID or prompt
+            </div>
+            <div className="space-y-1.5">
+              <label
+                htmlFor="draft-filter-search"
+                className="block text-sm font-medium text-ink"
+              >
+                Question ID or prompt
+              </label>
               <input
+                id="draft-filter-search"
                 type="search"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder="Search ID or stem…"
                 className={selectClass}
               />
-            </label>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -944,9 +986,15 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
           {active ? (
             <div className="grid gap-5 lg:grid-cols-[290px_minmax(0,1fr)]">
               <aside className="space-y-3">
-                <label className="block space-y-1.5 text-sm font-medium text-ink">
-                  Question
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="draft-select-question"
+                    className="block text-sm font-medium text-ink"
+                  >
+                    Question
+                  </label>
                   <select
+                    id="draft-select-question"
                     value={active.question.id}
                     onChange={(event) => setSelected(event.target.value)}
                     className={selectClass}
@@ -957,7 +1005,7 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                       </option>
                     ))}
                   </select>
-                </label>
+                </div>
 
                 <Card className="hidden max-h-[70vh] overflow-y-auto p-2 lg:block">
                   <ul className="space-y-1" aria-label="Filtered review queue">
@@ -1003,8 +1051,10 @@ export function DraftReview({ catalogue }: { readonly catalogue: ReviewCatalogue
                                 {statusLabel}
                               </Badge>
                             </div>
-                            <p className="mt-1 line-clamp-2 text-xs text-muted">
-                              {item.question.prompt}
+                            <p className="mt-1 truncate text-xs text-muted">
+                              {label(item.question.metadata.subject)} ·{" "}
+                              {item.question.metadata.difficulty}
+                              {item.designatedForMock ? " · Mock reserve" : ""}
                             </p>
                           </button>
                         </li>
