@@ -60,6 +60,17 @@ export async function seedBypassCookie(context: BrowserContext): Promise<void> {
 export async function protectContext(context: BrowserContext): Promise<void> {
   const secret = requireEnv("VERCEL_AUTOMATION_BYPASS_SECRET");
   await seedBypassCookie(context);
+  // Playwright's Windows WebKit hangs a navigation when route.fulfill hands it a 3xx (every protected-route
+  // redirect). WebKit therefore relies on the bypass cookie alone; the secret still only reaches this origin.
+  if (context.browser()?.browserType().name() === "webkit") {
+    // Specs clear cookies to sign out; put the bypass cookie straight back so the next page is not Vercel SSO.
+    const clear = context.clearCookies.bind(context);
+    context.clearCookies = async (options?: Parameters<BrowserContext["clearCookies"]>[0]) => {
+      await clear(options);
+      await seedBypassCookie(context);
+    };
+    return;
+  }
   await context.route(
     (url) => url.origin === HOSTED_ORIGIN,
     async (route) => {
@@ -174,6 +185,20 @@ export const test = base.extend<Fixtures>({
 export { expect };
 
 /** A fresh, protected context + page (for second identities in the same test). */
+/**
+ * page.goto that tolerates the app's own navigation winning the race: Firefox reports NS_BINDING_ABORTED and
+ * WebKit "interrupted by another navigation" when a client redirect (sign-out, auth guard) is in flight. The page
+ * is left settled wherever the app sent it; callers keep asserting the final URL.
+ */
+export async function gotoSettled(page: Page, path: string): Promise<void> {
+  try {
+    await page.goto(path);
+  } catch (error) {
+    if (!/NS_BINDING_ABORTED|interrupted by another navigation|net::ERR_ABORTED/.test(String(error))) throw error;
+  }
+  await page.waitForLoadState("load").catch(() => undefined);
+}
+
 export async function newProtectedPage(context: BrowserContext): Promise<Page> {
   const browser = context.browser();
   if (!browser) throw new Error("no browser");
