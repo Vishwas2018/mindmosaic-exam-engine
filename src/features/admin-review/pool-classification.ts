@@ -185,3 +185,43 @@ export function validateHumanReviewerName(
   }
   return { ok: true, normalized };
 }
+
+export interface KnownDefectiveRevision {
+  readonly defectId: string;
+  readonly defectiveContentHash: string;
+  readonly reason: string;
+}
+
+/**
+ * Known defective draft revisions that are explicitly blocked from human
+ * approval and export until corrected in a new revision (which changes the
+ * canonical D1 `contentHash`, automatically re-enabling fresh blind review).
+ *
+ * Mirrors `VIHAAN_WITHDRAWN_QUESTION_IDS` in
+ * `src/features/scholarship-prep/content/questions/vihaan-pilot-questions.ts`.
+ */
+export const KNOWN_DEFECTIVE_DRAFT_REVISIONS: Readonly<
+  Record<string, KnownDefectiveRevision>
+> = Object.freeze({
+  "vihaan-e500-m069": {
+    defectId: "A-06",
+    defectiveContentHash:
+      "d23176dea41737d3b0ed8833b67f8edb2532fe046c609b7538d9227d0c28fb05",
+    reason:
+      "No option satisfies the stem: squares between 60 and 90 are 64 (digit sum 10) and 81 (digit sum 9); neither sums to 13, yet the key marks 64 (Audit 2026-11-17). Correct the source question and re-review the new revision before approval.",
+  },
+});
+
+/**
+ * Returns the defect record when `(questionId, contentHash)` matches a known
+ * defective draft revision. Once the item is corrected in Git, its D1 hash
+ * changes and this returns `null`, re-allowing fresh human review & approval.
+ */
+export function getKnownDefectiveRevision(
+  questionId: string,
+  contentHash: string,
+): KnownDefectiveRevision | null {
+  const entry = KNOWN_DEFECTIVE_DRAFT_REVISIONS[questionId];
+  if (!entry) return null;
+  return entry.defectiveContentHash === contentHash ? entry : null;
+}

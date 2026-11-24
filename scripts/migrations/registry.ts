@@ -2942,6 +2942,7 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     checks: [
       tableExists("admin_draft_review_decisions"),
       functionExists("deny_admin_review_decision_mutation"),
+      functionExists("authenticated_admin_email"),
       triggerExists(
         "public",
         "admin_draft_review_decisions",
@@ -2962,6 +2963,10 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       constraintExists(
         "admin_draft_review_decisions",
         "admin_draft_review_decisions_notes_required",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_known_defect_blocked",
       ),
       {
         describes:

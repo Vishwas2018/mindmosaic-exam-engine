@@ -17,6 +17,8 @@ let client: Client;
 
 const HASH_V1 = "a".repeat(64);
 const HASH_V2 = "b".repeat(64);
+const DEFECTIVE_M069_HASH =
+  "d23176dea41737d3b0ed8833b67f8edb2532fe046c609b7538d9227d0c28fb05";
 const PUB_HASH = "c".repeat(64);
 const FINGERPRINT = "d".repeat(64);
 const ALL_CHECKS = {
@@ -107,7 +109,7 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
         overrides.notes ?? "",
         overrides.reviewerId ?? STUDENT_B,
         overrides.reviewerName ?? "Vishwas Joshi",
-        overrides.reviewerEmail ?? "vishwas@mindmosaic.dev",
+        overrides.reviewerEmail ?? "student-b@test.local",
         FINGERPRINT,
       ],
     );
@@ -149,10 +151,13 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
     },
   );
 
-  it("denies impersonating another reviewer_id and denies revoked admins", async () => {
+  it("denies impersonating another reviewer_id or reviewer_email and denies revoked admins", async () => {
     await asAuthenticated(client, STUDENT_B);
     await expectPgError("42501", () =>
       insertDecision({ reviewerId: STUDENT_A }),
+    );
+    await expectPgError("42501", () =>
+      insertDecision({ reviewerEmail: "other-admin@mindmosaic.dev" }),
     );
 
     await client.query("reset role");
@@ -162,6 +167,40 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
     );
     await asAuthenticated(client, STUDENT_B);
     await expectPgError("42501", () => insertDecision());
+  });
+
+  it("blocks approving known defective vihaan-e500-m069 until corrected to a new revision hash", async () => {
+    await asAuthenticated(client, STUDENT_B);
+
+    // Approving the known defective revision is blocked by CHECK constraint (23514).
+    await expectPgError("23514", () =>
+      insertDecision({
+        questionId: "vihaan-e500-m069",
+        batchId: "vihaan-expansion-07",
+        contentHash: DEFECTIVE_M069_HASH,
+        decision: "approve",
+      }),
+    );
+
+    // Recording Request revision against the defective revision succeeds.
+    const rev = await insertDecision({
+      questionId: "vihaan-e500-m069",
+      batchId: "vihaan-expansion-07",
+      contentHash: DEFECTIVE_M069_HASH,
+      decision: "revise",
+      notes: "Defect A-06: no square between 60 and 90 has digit sum 13.",
+    });
+    expect(rev.rows[0].decision).toBe("revise");
+
+    // Once corrected (new contentHash), fresh approval succeeds.
+    const corrected = await insertDecision({
+      questionId: "vihaan-e500-m069",
+      batchId: "vihaan-expansion-07",
+      contentHash: HASH_V2,
+      decision: "approve",
+    });
+    expect(corrected.rows[0].decision).toBe("approve");
+    expect(corrected.rows[0].content_hash).toBe(HASH_V2);
   });
 
   it("enforces human-only reviewer names, full approval checks, and mandatory revise/reject rationale at the DB boundary", async () => {
@@ -272,6 +311,11 @@ describe("admin draft review decisions RLS, immutability, human-only guards and 
       "select to_regclass('public.admin_draft_review_decisions') as rel",
     );
     expect(dropped.rows[0].rel).toBeNull();
+
+    const droppedFn = await client.query(
+      "select count(*)::int as n from pg_proc p join pg_namespace n on n.oid = p.pronamespace where n.nspname = 'public' and p.proname in ('deny_admin_review_decision_mutation', 'authenticated_admin_email')",
+    );
+    expect(droppedFn.rows[0].n).toBe(0);
 
     const preserved = await client.query(
       "select count(*)::int as n from public.admin_draft_review_approvals where question_id = 'scholarship-y6-vr-001'",

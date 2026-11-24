@@ -47,6 +47,16 @@ create table public.admin_draft_review_decisions (
   ),
   constraint admin_draft_review_decisions_notes_required check (
     decision = 'approve' or length(trim(notes)) >= 10
+  ),
+  -- Known defective draft revisions cannot be approved at their defective hash;
+  -- reviewers may still record 'revise' or 'reject', and a corrected revision
+  -- (with a new content_hash) becomes eligible for fresh human review.
+  constraint admin_draft_review_decisions_known_defect_blocked check (
+    not (
+      question_id = 'vihaan-e500-m069'
+      and content_hash = 'd23176dea41737d3b0ed8833b67f8edb2532fe046c609b7538d9227d0c28fb05'
+      and decision = 'approve'
+    )
   )
 );
 
@@ -95,9 +105,25 @@ for select to authenticated using (
   )
 );
 
+create or replace function public.authenticated_admin_email()
+returns text
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select u.email
+  from auth.users u
+  where u.id = auth.uid()
+$$;
+
+revoke all on function public.authenticated_admin_email() from public, anon, authenticated;
+grant execute on function public.authenticated_admin_email() to authenticated;
+
 create policy admin_draft_review_decisions_insert on public.admin_draft_review_decisions
 for insert to authenticated with check (
   reviewer_id = auth.uid()
+  and lower(trim(reviewer_email)) = lower(trim(coalesce(public.authenticated_admin_email(), '')))
   and exists (
     select 1
     from public.profiles p

@@ -244,6 +244,46 @@ test("admin can review the provisional canonical 500-item Codex Scholarship bank
     await expect(
       page.getByRole("button", { name: "Record my explicit approval" }),
     ).toBeDisabled();
+
+    // Exercise real human approval persistence on the first Mathematics item.
+    await nameInput.fill("Vishwas Joshi");
+    const checkboxes = page.getByRole("checkbox");
+    const boxCount = await checkboxes.count();
+    for (let i = 0; i < boxCount; i += 1) {
+      await checkboxes.nth(i).check();
+    }
+    const approveSubmit = page.getByRole("button", {
+      name: "Record my explicit approval",
+    });
+    await expect(approveSubmit).toBeEnabled();
+    await approveSubmit.click();
+    await expect(
+      page.getByText(/Your human approval was recorded for this revision|already recorded an approval/i),
+    ).toBeVisible();
+
+    // Confirm known defective vihaan-e500-m069 cannot be approved and supports Request revision.
+    await page.getByLabel("Section", { exact: true }).selectOption("");
+    await page
+      .getByRole("combobox", { name: "Question", exact: true })
+      .selectOption("vihaan-e500-m069");
+    await expect(
+      page.getByText(/Approval blocked — Known Defect A-06/i),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Approve", exact: true }),
+    ).toBeDisabled();
+    await page
+      .getByLabel(/Accountable human reviewer full name/i)
+      .fill("Vishwas Joshi");
+    await page
+      .getByLabel(/Required rationale/i)
+      .fill("Verified Defect A-06 in E2E: squares 64 and 81 do not sum to 13.");
+    await page
+      .getByRole("button", { name: "Record revision request" })
+      .click();
+    await expect(
+      page.getByText(/Revision request recorded for this content hash/i),
+    ).toBeVisible();
   }
 
   // Verify Batch progress & export view renders all 11 batches (pilot + 10 expansion).

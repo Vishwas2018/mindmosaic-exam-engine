@@ -159,7 +159,15 @@ describe("Admin Portal Scholarship 500 DraftReview UI", () => {
 
   it("enforces blind-first solving, rejects AI reviewer names, and records human approval with blindSolved=true", async () => {
     const user = userEvent.setup();
-    const catalogue = buildVihaanTestCatalogue();
+    const catalogue: ReviewCatalogue = {
+      ...buildVihaanTestCatalogue(),
+      reviewer: {
+        userId: "11111111-1111-4111-8111-111111111111",
+        email: "vishwas@mindmosaic.dev",
+        // Single-word profile display name requires entering real full name in UI.
+        displayName: "Admin",
+      },
+    };
     render(<DraftReview catalogue={catalogue} />);
 
     // Blind solve mode hides the declared answer and worked explanation initially.
@@ -273,5 +281,59 @@ describe("Admin Portal Scholarship 500 DraftReview UI", () => {
     expect(
       screen.getByRole("button", { name: /Export Mock Reserve MCQ CSV/i }),
     ).toBeDisabled();
+  });
+
+  it("locks verified admin profile name against UI impersonation and blocks approval of known defective vihaan-e500-m069", async () => {
+    const user = userEvent.setup();
+    const base = buildVihaanTestCatalogue();
+    const defectiveEntry: ReviewEntry = {
+      ...base.entries[0]!,
+      question: {
+        ...base.entries[0]!.question,
+        id: "vihaan-e500-m069",
+      },
+      contentHash:
+        "d23176dea41737d3b0ed8833b67f8edb2532fe046c609b7538d9227d0c28fb05",
+      approvalBlocked: {
+        defectId: "A-06",
+        reason: "No option satisfies the stem (Audit 2026-11-17).",
+      },
+    };
+    render(
+      <DraftReview
+        catalogue={{
+          ...base,
+          entries: [defectiveEntry],
+        }}
+      />,
+    );
+
+    // Verified human full name from server profile is readOnly so UI cannot impersonate another person.
+    const nameInput = screen.getByLabelText(
+      /Accountable human reviewer full name/i,
+    );
+    expect(nameInput).toHaveAttribute("readonly");
+    expect(nameInput).toHaveValue("Vishwas Joshi");
+
+    // Known defect banner shown; Approve button disabled; defaults to Request revision.
+    expect(screen.getByText(/Approval blocked — Known Defect A-06/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Approve" })).toBeDisabled();
+
+    // Reviewer can still record Request revision with clear rationale.
+    await user.type(
+      screen.getByLabelText(/Required rationale/i),
+      "Confirmed defect A-06: replace target digit sum before re-review.",
+    );
+    const submitBtn = screen.getByRole("button", {
+      name: "Record revision request",
+    });
+    expect(submitBtn).toBeEnabled();
+    await user.click(submitBtn);
+    expect(mocks.recordReviewDecision).toHaveBeenCalledWith(
+      expect.objectContaining({
+        questionId: "vihaan-e500-m069",
+        decision: "revise",
+      }),
+    );
   });
 });

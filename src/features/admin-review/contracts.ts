@@ -197,6 +197,10 @@ export type ReviewEntry = {
     readonly assessmentMode: string;
   };
   writingTask?: WritingTask;
+  approvalBlocked?: {
+    readonly defectId: string;
+    readonly reason: string;
+  };
   publicationStatus?: PublicationStatus;
   /** Legacy-compatible field populated when the current revision has a human approval. */
   approval?: {

@@ -290,7 +290,55 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
     });
     expect(staleRes.error).toMatch(/revision has changed/i);
 
+    // 6. Impersonating another reviewer by changing display name input is refused
+    // when the authenticated admin profile already holds a valid human full name.
+    const spoofRes = await recordReviewDecision({
+      bankId: "vihaan-scholarship-500",
+      questionId: entry.question.id,
+      contentHash: entry.contentHash,
+      publishedContentHash: entry.publishedContentHash,
+      decision: "approve",
+      checks: ALL_CHECKS,
+      blindSolved: true,
+      notes: "",
+      reviewerName: "Jane Doe",
+    });
+    expect(spoofRes.error).toMatch(/must match your authenticated admin profile/i);
+
+    // 7. Known defective question vihaan-e500-m069 cannot be approved at its defective revision.
+    const defective = catalogue.entries.find(
+      (item) => item.question.id === "vihaan-e500-m069",
+    )!;
+    expect(defective.approvalBlocked?.defectId).toBe("A-06");
+    const defectApproveRes = await recordReviewDecision({
+      bankId: "vihaan-scholarship-500",
+      questionId: defective.question.id,
+      contentHash: defective.contentHash,
+      publishedContentHash: defective.publishedContentHash,
+      decision: "approve",
+      checks: ALL_CHECKS,
+      blindSolved: true,
+      notes: "",
+      reviewerName: "Vishwas Joshi",
+    });
+    expect(defectApproveRes.error).toMatch(/Defect A-06/i);
+
     expect(mocks.extendedInsert).not.toHaveBeenCalled();
+
+    // Recording Request revision against defective vihaan-e500-m069 IS allowed.
+    const defectReviseRes = await recordReviewDecision({
+      bankId: "vihaan-scholarship-500",
+      questionId: defective.question.id,
+      contentHash: defective.contentHash,
+      publishedContentHash: defective.publishedContentHash,
+      decision: "revise",
+      checks: ALL_CHECKS,
+      blindSolved: true,
+      notes: "Defect A-06: squares between 60 and 90 are 64 and 81; neither digit sum is 13.",
+      reviewerName: "Vishwas Joshi",
+    });
+    expect(defectReviseRes.error).toBeUndefined();
+    expect(defectReviseRes.decision?.decision).toBe("revise");
   });
 
   it("records verified human approval, revision request and rejection with verifiable evidence fingerprint and detects stale revisions", async () => {
@@ -489,6 +537,16 @@ describe("MindMosaic Admin Portal Scholarship 500 review workflow", () => {
       "practice",
     );
     expect(tampered.rejectedReasons[0]).toMatch(/evidence_fingerprint mismatch/i);
+
+    // Known defective vihaan-e500-m069 fails closed in export CLI even with valid fingerprint.
+    const defectTruth = truthMap.get("vihaan-e500-m069")!;
+    const defectExport = verifyAndPartitionExportRows(
+      [buildRow(defectTruth)],
+      truthMap,
+      "practice",
+    );
+    expect(defectExport.questionCount).toBe(0);
+    expect(defectExport.rejectedReasons[0]).toMatch(/Defect A-06/i);
 
     // UI CSV helper also enforces strict practice/mock split.
     const catalogue = await loadAdminReviewCatalogue({

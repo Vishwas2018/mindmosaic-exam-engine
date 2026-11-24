@@ -9,7 +9,10 @@ import {
   reviewChecksSchema,
   type ReviewDecisionRecord,
 } from "@/features/admin-review/contracts";
-import { validateHumanReviewerName } from "@/features/admin-review/pool-classification";
+import {
+  getKnownDefectiveRevision,
+  validateHumanReviewerName,
+} from "@/features/admin-review/pool-classification";
 import { createClient } from "@/lib/supabase/server";
 import {
   computeReviewEvidenceFingerprint,
@@ -64,6 +67,12 @@ export async function approveDraft(
       error:
         "This draft revision has changed or is unavailable. Reload and review it again.",
     };
+  const knownDefect = getKnownDefectiveRevision(questionId, contentHash);
+  if (knownDefect) {
+    return {
+      error: `Approval is blocked for known defective revision (${knownDefect.defectId}): ${knownDefect.reason}`,
+    };
+  }
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("admin_draft_review_approvals")
@@ -130,6 +139,12 @@ export async function recordReviewDecision(input: unknown): Promise<{
   }
 
   if (decision === "approve") {
+    const knownDefect = getKnownDefectiveRevision(questionId, contentHash);
+    if (knownDefect) {
+      return {
+        error: `Approval is blocked for known defective revision (Defect ${knownDefect.defectId}): ${knownDefect.reason} Record 'Request revision' or 'Reject' instead.`,
+      };
+    }
     const allChecked =
       checks.correctness &&
       checks.originality &&
@@ -175,6 +190,36 @@ export async function recordReviewDecision(input: unknown): Promise<{
     };
   }
 
+  // Authoritative server-side reviewer identity: reviewer_id and reviewer_email
+  // always come from the verified Supabase Auth session. When the authenticated
+  // admin's profile already holds a valid human full name, refuse any client
+  // attempt to impersonate another reviewer by passing a different display name.
+  let effectiveReviewerName = nameCheck.normalized;
+  const profileResult = await supabase
+    .from("profiles")
+    .select("display_name")
+    .eq("id", access.userId)
+    .single();
+  const serverDisplayName =
+    typeof profileResult.data?.display_name === "string"
+      ? profileResult.data.display_name
+      : null;
+  if (serverDisplayName) {
+    const serverNameCheck = validateHumanReviewerName(serverDisplayName);
+    if (serverNameCheck.ok) {
+      if (
+        serverNameCheck.normalized.toLowerCase() !==
+        nameCheck.normalized.toLowerCase()
+      ) {
+        return {
+          error:
+            "Reviewer name must match your authenticated admin profile name. Reviewer identity is bound server-side and cannot be impersonated.",
+        };
+      }
+      effectiveReviewerName = serverNameCheck.normalized;
+    }
+  }
+
   const resolvedBatchId = current.batchId ?? current.source;
   const resolvedItemKind = current.itemKind ?? "question";
   const resolvedPool = current.pool ?? "practice";
@@ -197,7 +242,7 @@ export async function recordReviewDecision(input: unknown): Promise<{
     blindSolved,
     notes: trimmedNotes,
     reviewerId: access.userId,
-    reviewerName: nameCheck.normalized,
+    reviewerName: effectiveReviewerName,
     reviewerEmail,
   });
 
@@ -219,7 +264,7 @@ export async function recordReviewDecision(input: unknown): Promise<{
       blind_solved: blindSolved,
       notes: trimmedNotes,
       reviewer_id: access.userId,
-      reviewer_name: nameCheck.normalized,
+      reviewer_name: effectiveReviewerName,
       reviewer_email: reviewerEmail,
       question_snapshot:
         resolvedItemKind === "writing_prompt" && current.writingTask

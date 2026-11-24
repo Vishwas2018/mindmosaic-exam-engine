@@ -1,5 +1,8 @@
 import type { ReviewEntry } from "./contracts";
-import { validateHumanReviewerName } from "./pool-classification";
+import {
+  getKnownDefectiveRevision,
+  validateHumanReviewerName,
+} from "./pool-classification";
 
 const REVIEW_SHEET_HEADER =
   "questionId,contentHash,revision,sourceManifestHash,correctness,originality,ageAppropriateness,decision,notes";
@@ -69,6 +72,10 @@ export function buildGovernedExportCsv(
     }
 
     if (decision.decision === "approve") {
+      if (getKnownDefectiveRevision(entry.question.id, entry.contentHash)) {
+        skippedUnapprovedCount += 1;
+        continue;
+      }
       const checkedName = validateHumanReviewerName(decision.reviewerName);
       if (!checkedName.ok) {
         skippedUnapprovedCount += 1;
@@ -81,7 +88,8 @@ export function buildGovernedExportCsv(
     const poolTag = isMockSlot
       ? `[mock:${entry.mockPaper ?? "reserved"}]`
       : "[practice]";
-    const noteText = [poolTag, decision.notes.trim()]
+    const reviewerTag = `[reviewer:${decision.reviewerName}|${decision.reviewerEmail}|${decision.approvedBy}]`;
+    const noteText = [poolTag, reviewerTag, decision.notes.trim()]
       .filter(Boolean)
       .join(" ");
 

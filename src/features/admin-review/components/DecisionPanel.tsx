@@ -53,13 +53,20 @@ export function DecisionPanel({
   ) => void;
 }) {
   const router = useRouter();
-  const [decisionKind, setDecisionKind] =
-    useState<ReviewDecisionKind>("approve");
+  const approvalBlocked = entry.approvalBlocked;
+  const [decisionKind, setDecisionKind] = useState<ReviewDecisionKind>(
+    approvalBlocked ? "revise" : "approve",
+  );
   const [checks, setChecks] = useState<ReviewChecks>(INITIAL_CHECKS);
   const [notes, setNotes] = useState("");
-  const defaultReviewerName =
+  const verifiedProfileName =
     reviewer?.displayName && validateHumanReviewerName(reviewer.displayName).ok
-      ? reviewer.displayName
+      ? validateHumanReviewerName(reviewer.displayName)
+      : null;
+  const profileNameLocked = Boolean(verifiedProfileName?.ok);
+  const defaultReviewerName =
+    verifiedProfileName && verifiedProfileName.ok
+      ? verifiedProfileName.normalized
       : "";
   const [reviewerName, setReviewerName] = useState(defaultReviewerName);
   const [recordedDecision, setRecordedDecision] = useState<
@@ -93,8 +100,13 @@ export function DecisionPanel({
     ? available &&
       !pending &&
       nameValidation.ok &&
+      !(decisionKind === "approve" && approvalBlocked) &&
       (decisionKind === "approve" ? allApproveChecks : notesSatisfied)
-    : available && !pending && allApproveChecks && decisionKind === "approve";
+    : available &&
+      !pending &&
+      !approvalBlocked &&
+      allApproveChecks &&
+      decisionKind === "approve";
 
   const handleSubmit = () => {
     startTransition(async () => {
@@ -224,6 +236,20 @@ export function DecisionPanel({
         )}
       </p>
 
+      {approvalBlocked && (
+        <div
+          role="alert"
+          className="rounded-xl border border-error/30 bg-error/8 p-3.5 text-sm text-ink"
+        >
+          <strong className="text-error">
+            Approval blocked — Known Defect {approvalBlocked.defectId}:
+          </strong>{" "}
+          {approvalBlocked.reason} You may still record{" "}
+          <strong>Request revision</strong> or <strong>Reject</strong> for this
+          revision.
+        </div>
+      )}
+
       {staleDecisions.length > 0 && (
         <div className="rounded-xl border border-warning/25 bg-warning/8 p-3 text-sm text-ink">
           <strong className="text-warning">
@@ -344,7 +370,10 @@ export function DecisionPanel({
                   <Input
                     id={`reviewer-name-${entry.question.id}`}
                     value={reviewerName}
-                    onChange={(event) => setReviewerName(event.target.value)}
+                    readOnly={profileNameLocked}
+                    onChange={(event) => {
+                      if (!profileNameLocked) setReviewerName(event.target.value);
+                    }}
                     placeholder="e.g. Vishwas Joshi"
                     className="mt-1.5"
                     aria-describedby={`reviewer-hint-${entry.question.id}`}
@@ -353,11 +382,24 @@ export function DecisionPanel({
                     id={`reviewer-hint-${entry.question.id}`}
                     className="mt-1 text-xs text-muted"
                   >
-                    Bound to signed-in account{" "}
-                    <span className="font-mono">
-                      {reviewer?.email || "authenticated admin"}
-                    </span>
-                    . AI/service names are refused.
+                    {profileNameLocked ? (
+                      <>
+                        Locked to authenticated admin profile (
+                        <span className="font-mono">
+                          {reviewer?.email || "authenticated admin"}
+                        </span>
+                        ). Reviewer identity is verified server-side and cannot
+                        be impersonated.
+                      </>
+                    ) : (
+                      <>
+                        Bound server-side to signed-in account{" "}
+                        <span className="font-mono">
+                          {reviewer?.email || "authenticated admin"}
+                        </span>{" "}
+                        (ID verified via RLS). AI/service names are refused.
+                      </>
+                    )}
                   </p>
                   {reviewerName.trim().length > 0 && !nameValidation.ok && (
                     <p className="mt-1 text-xs font-semibold text-error">
@@ -389,6 +431,7 @@ export function DecisionPanel({
                         variant={
                           decisionKind === kind ? "primary" : "secondary"
                         }
+                        disabled={kind === "approve" && Boolean(approvalBlocked)}
                         aria-pressed={decisionKind === kind}
                         onClick={() => setDecisionKind(kind)}
                       >

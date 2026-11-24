@@ -34,6 +34,7 @@ import {
 } from "../src/features/admin-review/contracts";
 import {
   classifyReviewPool,
+  getKnownDefectiveRevision,
   isDesignatedMockCandidate,
   validateHumanReviewerName,
 } from "../src/features/admin-review/pool-classification";
@@ -269,6 +270,17 @@ export function verifyAndPartitionExportRows(
       continue;
     }
 
+    const knownDefect = getKnownDefectiveRevision(
+      row.question_id,
+      truth.contentHash,
+    );
+    if (knownDefect) {
+      rejectedReasons.push(
+        `${row.question_id}: blocked by known Defect ${knownDefect.defectId} at current revision hash — correct and re-review before export.`,
+      );
+      continue;
+    }
+
     const nameCheck = validateHumanReviewerName(row.reviewer_name);
     if (!nameCheck.ok) {
       rejectedReasons.push(`${row.question_id}: invalid reviewer name '${row.reviewer_name}'.`);
@@ -320,7 +332,7 @@ export function verifyAndPartitionExportRows(
       row.checks.ageAppropriateness ? "yes" : "",
       "approve",
       escapeCsvCell(
-        `[reviewer:${row.reviewer_name}|${row.reviewer_id}|pool:${poolFilter}] ${row.notes}`.trim(),
+        `[reviewer:${row.reviewer_name}|${row.reviewer_email}|${row.reviewer_id}|pool:${poolFilter}] ${row.notes}`.trim(),
       ),
     ].join(",");
 

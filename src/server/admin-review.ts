@@ -21,6 +21,7 @@ import {
 } from "@/features/admin-review/contracts";
 import {
   classifyReviewPool,
+  getKnownDefectiveRevision,
   isDesignatedMockCandidate,
 } from "@/features/admin-review/pool-classification";
 import { scholarshipWritingItemToTask } from "@/features/admin-review/writing-adapter";
@@ -674,6 +675,8 @@ async function loadVihaanCanonicalBank(
           publicRepoExposed: true,
         });
 
+        const knownDefect = getKnownDefectiveRevision(question.id, contentHash);
+
         catalogue.entries.push({
           kind: "scholarship",
           bankId: "vihaan-scholarship-500",
@@ -695,6 +698,9 @@ async function loadVihaanCanonicalBank(
             "arithmeticCheck" in wrapper ? wrapper.arithmeticCheck : undefined,
           writingGuidance: wrapper.writingGuidance ?? undefined,
           writingTask,
+          approvalBlocked: knownDefect
+            ? { defectId: knownDefect.defectId, reason: knownDefect.reason }
+            : undefined,
           publicationStatus: "unpublished_draft",
           decisionHistory: [],
           question,
