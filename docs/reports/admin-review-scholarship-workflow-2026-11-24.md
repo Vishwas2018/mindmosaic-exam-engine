@@ -1,9 +1,9 @@
 # MindMosaic Admin Portal — Scholarship Content Review & Approval Audit and Implementation Report
 
-**Date:** 24 November 2026  
-**Branch:** `feat/admin-scholarship-review-workflow` (isolated worktree off `origin/dev` `50eb8f9a`)  
+**Date:** 25 November 2026  
+**Branch / Draft PR:** `feat/admin-scholarship-review-workflow` → `dev` — Draft PR [#162](https://github.com/Vishwas2018/mindmosaic-exam-engine/pull/162) (verified green CI commit `c2f0d39f`)  
 **Environment Scope:** Local & DEV (`mfglzabnayacssgertat`) only — PROD (`uermhsptduikehuyceiz`) untouched  
-**Status:** Implementation complete on isolated DEV branch — **DEV database migration awaiting explicit owner approval before application; 0 questions auto-approved, 0 questions auto-published, PR #142 not merged.**
+**Status:** **ALL GITHUB CI CHECKS GREEN + INDEPENDENT AUDIT 7/7 PASS (11/11 FINDINGS CLOSED)** — **Awaiting explicit owner approval to apply `20261124090000_admin_review_decisions.sql` to DEV Supabase (`mfglzabnayacssgertat`) before executing hosted DEV desktop/mobile UAT. 0 questions auto-approved, 0 questions auto-published, PR #142 not merged.**
 
 ---
 
@@ -91,45 +91,82 @@ Both original datasets were audited quantitatively and structurally without modi
 
 ---
 
-## 4. Verification Evidence
+## 4. Verification Evidence (Local + Complete GitHub CI Pipeline)
 
-All verification runs below were executed directly on isolated worktree branch `feat/admin-scholarship-review-workflow` (`C:/tmp/wt-admin-scholarship-review`). Unrun suites blocked by local Docker service state are reported transparently — nothing is fabricated or skipped as passed.
+All checks below were executed on branch `feat/admin-scholarship-review-workflow` (Draft PR [#162](https://github.com/Vishwas2018/mindmosaic-exam-engine/pull/162), GitHub Actions Run [`45505491249`](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/45505491249), code commit `c2f0d39f`).
 
-| Check | Command | Outcome | Verified Evidence |
+| Check / CI Job | Command / Workflow Job | Outcome | Verified Evidence |
 |---|---|---|---|
-| TypeScript strict check | `npm run typecheck` | **PASS** | `0` errors across `src/`, `scripts/`, `tests/rls/`, and `e2e/` |
-| ESLint | `npm run lint` | **PASS** | `0` errors (`0` warnings in all added/modified files) |
-| Full unit & component suite | `npm test` | **PASS** | **471 / 471 test files passed, 7,537 / 7,537 tests passed** (includes 16 legacy `admin-draft-review.test.ts`, 6 new `admin-scholarship-review-workflow.test.ts`, 2 legacy `admin-draft-review.test.tsx`, 3 new `admin-scholarship-review-ui.test.tsx`, 3 `admin-layout.test.tsx`, and `migration-registry.test.ts`) |
-| Production build (Turbopack) | `npm run build` | **PASS** | Compiled in `13.8s`; `71 / 71` static pages generated; `/admin/review` dynamic route built |
-| Production build (Webpack) + Playwright E2E | `PW_PORT=3123 npx playwright test e2e/admin-review-workflow.spec.ts` | **PASS** | Webpack build passed (`export-csv.ts` client/server boundary verified); **2 / 2 Chromium specs passed** (fail-closed across both banks + path-traversal query with visible fail-closed alert and zero draft leakage; 390px mobile layout with zero horizontal overflow) |
-| Question bank validation | `npm run validate:questions` | **PASS** | `1,005` production questions (`167` with visuals, `4` manual-review), `0` errors |
-| Independent answer checker | `npm run check:answers -- --include-published` | **PASS** | `1,601` total questions (`1,597` objective, `4` manual-review), **`0` failures** |
-| Ledger consistency | `npm run questions:validate-ledger` | **PASS** | `98` ledger rows parsed, `20` files in scope, `PASS` |
-| Publication evidence verification | `npm run content:verify-publication` | **PASS** | `1,601` authored, `130` eligible, `1,471` awaiting approval, **`0` problems**, `0` items newly published |
-| Legacy 160 Scholarship draft validator | `npm run content:validate-scholarship-drafts` | **PASS** | `160 / 160` drafts valid; runtime isolation intact |
-| Codex 500 Scholarship validator | `node --import tsx scripts/validate-vihaan-expansion.mts` | **PASS** | `500 / 500` items valid, `0` errors, `0` duplicate IDs |
-| RLS suite (local Postgres) | `npm run test:rls` | **BLOCKED LOCALLY (Docker stopped)** | `com.docker.service` is stopped on this Windows host (no local Postgres on `127.0.0.1:56322`). [`tests/rls/admin-review-decisions.test.ts`](../../tests/rls/admin-review-decisions.test.ts) (with `SAVEPOINT` error isolation, role isolation, human-only CHECKs, immutability `MM106`, revision change, and rollback verification) passes strict `typecheck` and `eslint` and is ready to execute in CI or locally once Docker Desktop + `npx supabase start` are running. |
-| Authenticated Playwright E2E (local Supabase) | `npm run test:e2e:auth` | **BLOCKED LOCALLY (Docker stopped)** | Requires local Supabase Auth (`127.0.0.1:56321`). [`e2e/auth/admin-draft-review.spec.ts`](../../e2e/auth/admin-draft-review.spec.ts) (preserving all 3 legacy tests and adding the 500-item Codex bank E2E test) passes strict `typecheck` and `eslint` and is ready for CI / local Supabase execution. |
+| **GitHub CI — `core`** | Job `138839642780` (`7m40s`) | **PASS** | `safety-gate`, `typecheck`, `lint`, `build`, `validate:questions`, `content:validate-roadmap-drafts`, `content:verify-roadmap-amc-answers`, `visuals:validate-bar-models`, `check:answers -- --include-published`, `questions:gate`, `projection:verify`, `content:verify-publication`, `audit:bank`, and `test:ci` (**471 / 471 test files passed**) |
+| **GitHub CI — `scholarship-drafts`** | Job `138839642739` (`16s`) | **PASS** | `content:validate-scholarship-drafts` (`160 / 160` drafts valid, runtime isolation intact) |
+| **GitHub CI — `rls`** | Job `138839642265` (`1m59s`) | **PASS** | Fresh Supabase Postgres applied `20261124090000_admin_review_decisions.sql`; `migrations:record` & `migrations:status` verified **`12 / 12` object checks (`ok`)**; `tests/rls/admin-review-decisions.test.ts` (**`9 / 9` passed**), `tests/rls/admin-draft-review.test.ts` (**`8 / 8` passed**), full RLS suite (**`39 / 39` test files passed**); `projection:apply`, `projection:verify -- --live`, and `cutover:verify -- --fixture` passed |
+| **GitHub CI — `e2e`** | Job `138839642838` (`11m31s`) | **PASS** | **`389 / 389` Playwright Chromium specs passed** (production webpack build verified; includes `e2e/admin-review-workflow.spec.ts` fail-closed zero-leakage & 390px mobile zero-overflow tests) |
+| **GitHub CI — `e2e-auth`** | Job `138839642824` (`6m03s`) | **PASS** | **`95 / 95` authenticated Playwright Chromium specs passed** against local Supabase — all 3 legacy `/admin/review` specs (`5:5`, `27:5`, `105:5`) + new 500-item Codex Scholarship spec (`181:5`, `2.9s`: blind-first solve, 400/100/50 pool filters, Written Expression rubric, read-only server-locked reviewer identity, approval write, and Defect `A-06` block + `Request revision` on `vihaan-e500-m069`) |
+| **Vercel Preview Deployment** | `Dqq8uzpuozE9E9aQG1F81SbFKfsP` | **PASS** | Preview build and deployment completed cleanly |
+| **Local Codex 500 Validator** | `node --import tsx scripts/validate-vihaan-expansion.mts` | **PASS** | `500 / 500` items valid, `0` errors, `0` duplicate IDs |
+| **Independent Security & Migration Audit** | Read-only adversarial review + re-verification on `d7010484` | **7 / 7 PASS** | All 11 audit findings (`P1-1..P3-3`) remediated and independently verified **CLOSED** with zero regressions |
 
 ---
 
-## 5. Manual UAT & Migration Approval Checklist (Owner Action Required)
+## 5. Independent Security, Migration & Readiness Defect Register
 
-### Step 1: Approve & Apply DEV Migration (Requires Owner Sign-Off)
-1. Review [`supabase/migrations/20261124090000_admin_review_decisions.sql`](../../supabase/migrations/20261124090000_admin_review_decisions.sql) and rollback [`supabase/migrations/rollbacks/20261124090000_admin_review_decisions.down.sql`](../../supabase/migrations/rollbacks/20261124090000_admin_review_decisions.down.sql).
-2. Apply **only** to DEV Supabase (`mfglzabnayacssgertat`), never PROD (`uermhsptduikehuyceiz`).
-3. Verify with `npm run migrations:status` against DEV.
+Every defect discovered during independent adversarial review and GitHub CI runs was logged, fixed at root cause (components/SQL/CLI — never weakening tests), and independently re-verified **CLOSED**.
 
-### Step 2: Manual UAT on DEV `/admin/review`
+| ID | Severity | Component | Defect / Risk Identified | Root-Cause Fix & Verification | Status |
+|---|---|---|---|---|---|
+| **P1-1** | **P1 — High** | `20261124090000_admin_review_decisions.sql` | Direct PostgREST `INSERT` bound `reviewer_id` & `reviewer_email` but did not bind `reviewer_name` to `public.profiles.display_name`, permitting display-name impersonation via raw API calls. | Enforced normalized `p.display_name = reviewer_name` directly inside `admin_draft_review_decisions_insert` RLS `WITH CHECK` alongside `reviewer_id = auth.uid()` and `reviewer_email = public.authenticated_admin_email()`. Verified in `tests/rls/admin-review-decisions.test.ts` (`42501` on `Jane Doe`). | **CLOSED** |
+| **P1-2** | **P1 — High** | `actions.ts`, `DecisionPanel.tsx` | Server Action did not fail closed on `profiles` query errors and allowed client-supplied `reviewerName` when `profiles.display_name` was `NULL`/single-word. | `recordReviewDecision` now fails closed on `profileResult.error` or invalid `profiles.display_name`, derives `effectiveReviewerName` exclusively server-side, and refuses client mismatches. `DecisionPanel` locks the identity field `readOnly` and blocks submission if profile name is invalid. Verified by unit + UI + E2E tests. | **CLOSED** |
+| **P1-3** | **P1 — High** | `scripts/export-admin-review-approvals.mts` | PROD DB guard relied on a substring denylist (`uermhsptduikehuyceiz`), bypassable via percent-encoding, empty-authority `PGHOST`/`PGUSER` fallback, or `?host=`/`?hostaddr=` query overrides. | Replaced with strict **allowlist** (`localhost`/`127.0.0.1`/`::1`, `db.mfglzabnayacssgertat.supabase.co`, or `*.pooler.supabase.com` with `*.mfglzabnayacssgertat` user), raw + percent-decoded URL + `PG*` checks, and rejection of `?host=`/`?hostaddr=`. Verified in unit tests. | **CLOSED** |
+| **P2-1** | **P2 — Medium** | `src/server/admin-review.ts` | Direct SQL insert into untouched legacy `admin_draft_review_approvals` for defective `vihaan-e500-m069` could hydrate as `"Human approved"` in UI (even though exports blocked it). | Quarantined any legacy or extended approval row matching `getKnownDefectiveRevision(id, hash)` (`matchesCurrentRevision = false`) during catalogue hydration. | **CLOSED** |
+| **P2-2** | **P2 — Medium** | `actions.ts`, `DecisionPanel.tsx` | Legacy `approveDraft` remained callable after extended migration; legacy-only approvals hid the extended 5-check form; pre-migration UI enabled legacy approve on `vihaan-scholarship-500`. | `approveDraft` now refuses writes once `extendedDecisionsAvailable` is active; `DecisionPanel` allows upgrading legacy-only approvals via the extended form and disables pre-migration approval for `vihaan-scholarship-500`. | **CLOSED** |
+| **P2-3** | **P2 — Medium** | `scripts/export-admin-review-approvals.mts` | Append-only stale historical approvals aborted exporting all other valid current-revision approvals in the same bank/batch. | Verified `evidence_fingerprint` first (tampered rows still hard-abort), then cleanly skipped stale historical rows (`skippedStale`) without blocking valid current-revision exports. Verified in unit tests. | **CLOSED** |
+| **P2-4** | **P2 — Medium** | `scripts/export-admin-review-approvals.mts`, `src/server/admin-review.ts` | Export CLI `loadSourceTruthMap` initially skipped packet/manifest/batch hash checks, `status === "draft"`, and duplicate-ID checks. | Added full `release-identities.json` packet SHA-256 verification, `quality-coverage-report.json` + `manifestHash` verification, shared `hashVerifiedVihaanBatch` verification for `pilot-01` and all 10 `batch-01..10` files, `approvedBy === null`, `status === "draft"`, and duplicate-ID checks. Verified fail-closed in unit test. | **CLOSED** |
+| **P2-5** | **P2 — Medium** | `20261124090000_admin_review_decisions.sql` | Immutability trigger blocked `UPDATE` and `DELETE` (`MM106`) but not privileged `TRUNCATE`. | Added statement-level `BEFORE TRUNCATE` trigger `admin_draft_review_decisions_no_truncate` (`MM106`), registered in `registry.ts`, verified in CI RLS test. | **CLOSED** |
+| **P3-1** | **P3 — Low** | `20261124090000_admin_review_decisions.sql`, `pool-classification.ts` | Denylist gaps (`qwen`/`llama`/`mistral`/`deepseek`/`grok`/`agent`/`script`/`cron`), SQL/TS character-whitelist drift, and transient false-positive on surnames containing `bot` (`Abbott`/`Talbot`). | Aligned SQL CHECK and TS validator character whitelists, expanded model/tool terms, and replaced unanchored `bot` with explicit compound prefixes `(ai\|auto\|test\|chat\|code\|gpt\|llm\|review)bot` — blocking `ClaudeBot Reviewer` while accepting `Sarah Abbott` and `James Talbot`. | **CLOSED** |
+| **P3-2** | **P3 — Low** | `scripts/export-admin-review-approvals.mts` | Missing deterministic tie-breaker on `ORDER BY decided_at DESC` and missing JS cross-checks on `checks` booleans and `item_kind`/`batch_id`/`pool`. | Added `ORDER BY decided_at DESC, id DESC`, JS-side verification of all 5 approval checks, and source-truth cross-checks for `item_kind`, `batch_id`, and `pool`. | **CLOSED** |
+| **P3-3** | **P3 — Low** | `registry.ts`, `20261124090000_admin_review_decisions.down.sql` | PostgreSQL `has_table_privilege(..., 'select,insert')` uses OR-semantics; rollback raised `42P01` if run twice. | Split `select` and `insert` privilege checks + added index & email-helper checks in `registry.ts` (`12/12` verified in CI); updated rollback to drop table first so double execution is cleanly idempotent (verified in CI RLS test). | **CLOSED** |
+| **CI-1** | **Defect (Webpack E2E)** | `BatchReadinessPanel.tsx`, `writing-adapter.ts` | Client component imported `buildGovernedExportCsv` from `writing-adapter.ts`, pulling `node:crypto`/`node:path` into webpack client bundle. | Split pure client-safe `src/features/admin-review/export-csv.ts`. Verified in full `e2e` CI job (`389/389` passed). | **CLOSED** |
+| **CI-2** | **Defect (`e2e-auth`)** | `DraftReview.tsx`, `DecisionPanel.tsx` | Queue rail duplicated full stem text; wrapping `<label>` broke `getByLabel("Pool", { exact: true })`; identical D1/D2 hashes printed twice for `scholarship-y6-rc-025`. | Replaced queue-rail stem with subject/difficulty metadata, switched filter labels to explicit `htmlFor`/`id`, and deduplicated identical D1/D2 hash display. Verified in full `e2e-auth` CI job (`95/95` passed). | **CLOSED** |
+| **CONTENT-A06** | **Known Content Defect (Pre-Existing)** | `content/vihaan-scholarship/expansion-500/batch-07.draft.json` (`vihaan-e500-m069`) | Squares between 60 and 90 are 64 (digit sum 10) and 81 (digit sum 9); neither sums to 13, yet key marks 64 (Audit 2026-11-17). | **Hard-blocked from approval** at defective hash `d23176dea41737d3b0ed8833b67f8edb2532fe046c609b7538d9227d0c28fb05` across UI, Server Actions, Export CLI, and Postgres CHECK constraint (`admin_draft_review_decisions_known_defect_blocked`). `Request revision` / `Reject` remain enabled; fixing the source question automatically unblocks fresh review on the new hash. | **PROTECTED (Awaiting Content Fix)** |
+
+---
+
+## 6. GO / NO-GO Readiness Assessment
+
+### Verdict: **GO — Ready for Owner-Approved DEV Migration (`mfglzabnayacssgertat`)**
+
+| Readiness Gate | Requirement | Status | Evidence |
+|---|---|---|---|
+| **1. Complete GitHub CI Pipeline** | `core`, `scholarship-drafts`, `rls`, `e2e`, `e2e-auth`, `Vercel` all green | **GO** | Run [`45505491249`](https://github.com/Vishwas2018/mindmosaic-exam-engine/actions/runs/45505491249) on `c2f0d39f`: **6/6 checks PASS** (`471` unit files, `39` RLS files, `389` guest E2E, `95` auth E2E) |
+| **2. Migration Security & Backward Compatibility** | Forward & rollback SQL safe, idempotent, preserves `admin_draft_review_approvals` | **GO** | Independent audit **PASS**; CI `rls` verified `12/12` registry checks + double-rollback idempotency + legacy row preservation |
+| **3. Server-Side Reviewer Identity & Anti-Impersonation** | Authenticated server identity; cannot be impersonated by changing display name | **GO** | Enforced across UI (`readOnly`), Server Action (fail-closed `profiles.display_name` + `auth.getUser()`), and Postgres RLS (`reviewer_id = auth.uid()`, `authenticated_admin_email()`, `p.display_name = reviewer_name`) |
+| **4. Decision Lifecycle & Audit Immutability** | Approve, Revise, Reject, stale revisions, duplicate approvals, unauthorized access, immutability | **GO** | Proven in unit (`admin-scholarship-review-workflow.test.ts`), RLS (`9/9` including `UPDATE`/`DELETE`/`TRUNCATE` `MM106`), and `e2e-auth` (`95/95`) |
+| **5. Zero Automated Human Approvals** | No script, seed, validator, or AI identity can create human approval records | **GO** | Independent audit **PASS**; SQL + TS + UI + CLI reject AI/bot/automated/single-word identities |
+| **6. Strict Practice vs Mock Separation** | 400 Practice items strictly isolated from 100 designated Mock Reserve slots (50 Mock A / 50 Mock B) | **GO** | Enforced from Git source truth across `pool-classification.ts`, UI filters, `export-csv.ts`, and `export-admin-review-approvals.mts` |
+| **7. Known Defective Item `vihaan-e500-m069`** | Cannot be approved without correction and re-review | **GO** | Blocked at all 4 layers (UI, Server Actions, Export CLI, Postgres CHECK) for defective hash `d23176...fb05`; automatically unblocks upon new revision hash |
+| **8. Publication Gate Integrity** | Export cannot bypass `questions:publish`, `content:record-approvals`, or `content:verify-publication` | **GO** | Read-only DEV/local-allowlisted export CLI (`publicationStateChanged: false`); `content:verify-publication` confirms `0` problems and `0` newly published items |
+| **9. Hosted DEV Testing (Desktop + Mobile)** | Post-migration hosted DEV verification of `/admin/review` | **PENDING MIGRATION APPROVAL** | Blocked on explicit owner approval to apply `20261124090000_admin_review_decisions.sql` to DEV Supabase (`mfglzabnayacssgertat`) |
+
+- **DEV Migration (`20261124090000_admin_review_decisions.sql` on `mfglzabnayacssgertat`):** **GO** (awaiting explicit owner approval).
+- **Production (`main` / `uermhsptduikehuyceiz`) & Content Publication:** **NO-GO (Out of Scope)** — strictly deferred until hosted DEV UAT completes, real human review finishes, and the repository owner merges `dev` → `main`.
+
+---
+
+## 7. Next Step — Owner Migration Approval & Post-Migration Hosted DEV UAT Plan
+
+### Step 1: Approve & Apply DEV Migration (Requires Explicit Owner Sign-Off)
+1. Review [`supabase/migrations/20261124090000_admin_review_decisions.sql`](../../supabase/migrations/20261124090000_admin_review_decisions.sql) and idempotent rollback [`supabase/migrations/rollbacks/20261124090000_admin_review_decisions.down.sql`](../../supabase/migrations/rollbacks/20261124090000_admin_review_decisions.down.sql).
+2. Confirm explicit approval to apply **only** to DEV Supabase (`mfglzabnayacssgertat`), never PROD (`uermhsptduikehuyceiz`).
+3. Verify `npm run migrations:record` and `npm run migrations:status` (`12/12` checks `ok`) on DEV.
+
+### Step 2: Hosted DEV Verification & Manual UAT on `/admin/review` (Desktop + Mobile)
 1. **Access Control:** Confirm guest, student, parent, and teacher accounts are redirected away from `/admin/review` and `/admin/review?bank=vihaan-scholarship-500`.
 2. **Legacy Preservation:** Open `/admin/review` (default `Y6 Core (160)`); confirm all 160 items load and any prior `admin_draft_review_approvals` rows remain visible.
 3. **Provisional Canonical 500-Item Bank:** Switch to **Codex 500 (Provisional)** (`/admin/review?bank=vihaan-scholarship-500`); verify 500 items across 11 batches (`vihaan-pilot-01` + `vihaan-expansion-01..10`).
 4. **Practice vs Mock Pool Separation:** Filter `Pool` → `Practice pool (400)`, `Mock exam reserve (100)`, `Mock Paper A (50)`, `Mock Paper B (50)` and verify mock badges and policy notices.
 5. **Blind-First Solving:** Open an MCQ item; verify the declared answer key, worked solution, and arithmetic check are hidden until you submit a blind preview answer or click *Reveal answer key*.
-6. **Human-Only Identity Guard:** Attempt to enter `"Claude Sonnet"` or `"Admin"` as reviewer full name; confirm the UI blocks submission and displays an error.
-7. **Three Decision Types:**
-   - Record an **Approve** decision with your real full name and all 5 checks ticked; reload and verify it persists in the Decision audit trail with D1/D2/D3 hashes and evidence fingerprint.
-   - Record a **Request revision** decision (verify notes < 10 chars are refused, notes >= 10 chars persist).
-   - Record a **Reject** decision with rationale; verify it persists and is excluded from approved exports.
+6. **Server-Locked Human Identity:** Confirm the reviewer identity input is `readOnly`, displays your verified `profiles.display_name`, and binds server-side to your authenticated admin account & email (non-human or single-word profile names are blocked).
+7. **Defect `A-06` Guard (`vihaan-e500-m069`):** Open `vihaan-e500-m069`; confirm the **Approval blocked — Known Defect A-06** alert is visible and `Approve` is disabled while `Request revision` / `Reject` remain available.
 8. **Written Expression Governed Flow:** Filter `Section` → `Written Expression` (40 items); confirm child-facing `WritingTask` preview, 6-criterion rubric, and `human_writing_prompt_approval` routing.
-9. **Batch Progress & Export:** Open **Batch progress & export**; verify per-batch progress bars, separate Practice vs Mock CSV export buttons, and confirm **no item becomes published** in the student exam bank automatically.
+9. **Responsive Desktop & Mobile Check:** Verify `/admin/review` at desktop (`1440px`) and mobile (`390px`) viewports with zero horizontal overflow, legible cards, and working controls.
+10. **Batch Progress & Export:** Open **Batch progress & export**; verify per-batch progress bars, separate Practice vs Mock CSV export buttons, and confirm **no item becomes published** automatically.
