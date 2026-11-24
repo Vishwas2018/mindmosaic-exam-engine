@@ -276,12 +276,14 @@ export function DecisionPanel({
         </summary>
         <div className="mt-2 space-y-1.5 text-xs">
           <p>
-            D1 draft hash:{" "}
+            {entry.candidateHash && entry.candidateHash === entry.contentHash
+              ? "D1/D2 draft & candidate hash: "
+              : "D1 draft hash: "}
             <span className="break-all font-mono text-ink">
               {entry.contentHash}
             </span>
           </p>
-          {entry.candidateHash && (
+          {entry.candidateHash && entry.candidateHash !== entry.contentHash && (
             <p>
               D2 candidate hash:{" "}
               <span className="break-all font-mono text-ink">
@@ -289,14 +291,19 @@ export function DecisionPanel({
               </span>
             </p>
           )}
-          {entry.publishedContentHash && (
-            <p>
-              D3 published {entry.itemKind === "writing_prompt" ? "WritingTask" : "Question"} hash:{" "}
-              <span className="break-all font-mono text-ink">
-                {entry.publishedContentHash}
-              </span>
-            </p>
-          )}
+          {entry.publishedContentHash &&
+            entry.publishedContentHash !== entry.contentHash && (
+              <p>
+                D3 published{" "}
+                {entry.itemKind === "writing_prompt"
+                  ? "WritingTask"
+                  : "Question"}{" "}
+                hash:{" "}
+                <span className="break-all font-mono text-ink">
+                  {entry.publishedContentHash}
+                </span>
+              </p>
+            )}
           {entry.sourceRevision && (
             <p>
               Source release:{" "}
