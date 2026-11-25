@@ -341,6 +341,80 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
     };
   });
 
+  test("AR-06 smoke: both Scholarship banks load for an admin, CSP is enforced, nothing is approved or published", async ({
+    page,
+  }) => {
+    test.skip(test.info().project.name !== "desktop-1440", "desktop only");
+    test.setTimeout(240_000);
+    const admin = await makeUser("ar6", "admin", FIXTURE_NAME);
+    await adminSignIn(page, admin.email);
+    const countStatus = (n: number) =>
+      expect(
+        page
+          .getByRole("status")
+          .filter({ hasText: /drafts match your filters/ }),
+      ).toHaveText(`${n} drafts match your filters`, { timeout: 60_000 });
+
+    // Bank 1: Y6 Core (default)
+    const res = await page.goto("/admin/review");
+    await countStatus(160);
+    const headers = res?.headers() ?? {};
+    // First run (kept under merge-evidence/*FIRST-RUN-AR06-failed*) asserted an enforced policy while src/proxy.ts
+    // still sent /admin as Report-Only, so it failed correctly. Admin CSP enforcement now ships in the same stack:
+    // on Preview /admin/* must carry an ENFORCED nonce policy and no report-only twin, and /sign-in stays enforced.
+    expect(headers["content-security-policy"] ?? "").toMatch(
+      /script-src 'self' 'nonce-[^']+' 'strict-dynamic'/,
+    );
+    expect(headers["content-security-policy-report-only"]).toBeUndefined();
+    const signIn = await page.request.get("/sign-in", {
+      headers: {
+        "x-vercel-protection-bypass":
+          process.env.VERCEL_AUTOMATION_BYPASS_SECRET ?? "",
+      },
+      maxRedirects: 0,
+    });
+    expect(signIn.headers()["content-security-policy"] ?? "").toContain(
+      "default-src",
+    );
+    // Bank 2: Codex 500
+    await page.goto(BANK);
+    await countStatus(500);
+    // Pool separation still holds
+    await page.getByLabel("Pool", { exact: true }).selectOption("practice");
+    await countStatus(400);
+    await page.getByLabel("Pool", { exact: true }).selectOption("mock");
+    await countStatus(100);
+    // Decision panel exposes the review workflow but writes nothing on view
+    await page.getByLabel("Pool", { exact: true }).selectOption("");
+    await expect(
+      page.getByLabel(/Verified human reviewer identity/i),
+    ).toHaveValue(FIXTURE_NAME);
+    await expect(
+      page.getByText(/Publication status: unpublished draft/i).first(),
+    ).toBeVisible();
+
+    // No approval or decision anywhere, and the legacy table is unchanged
+    expect(await approveRowCount()).toBe(0);
+    const dec = await devAdmin()
+      .from("admin_draft_review_decisions")
+      .select("id", { count: "exact", head: true });
+    expect(dec.count).toBe(0);
+    const leg = await devAdmin()
+      .from("admin_draft_review_approvals")
+      .select("id", { count: "exact", head: true });
+    expect(leg.count).toBe(0);
+    evidence["AR-06"] = {
+      csp: "present",
+      y6core: 160,
+      codex500: 500,
+      practice: 400,
+      mock: 100,
+      approveRows: 0,
+      decisionRows: 0,
+      legacyRows: 0,
+    };
+  });
+
   test("AR-05 @responsive review workspace has no horizontal overflow and decision controls are reachable", async ({
     page,
   }) => {
