@@ -115,10 +115,9 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
     const admin = await makeUser("ara", "admin", FIXTURE_NAME);
     await adminSignIn(page, admin.email);
     await page.goto(BANK);
-    await expect(page.getByRole("status")).toHaveText(
-      "500 drafts match your filters",
-      { timeout: 60_000 },
-    );
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toHaveText("500 drafts match your filters", { timeout: 60_000 });
 
     // Practice / mock separation
     for (const [pool, n] of [
@@ -128,17 +127,19 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
       ["mock-b", 50],
     ] as const) {
       await page.getByLabel("Pool", { exact: true }).selectOption(pool);
-      await expect(page.getByRole("status")).toHaveText(
-        `${n} drafts match your filters`,
-      );
+      await expect(
+        page
+          .getByRole("status")
+          .filter({ hasText: /drafts match your filters/ }),
+      ).toHaveText(`${n} drafts match your filters`);
     }
     await page.getByLabel("Pool", { exact: true }).selectOption("");
 
     // Writing prompts use the rubric
     await page.getByLabel("Section", { exact: true }).selectOption("writing");
-    await expect(page.getByRole("status")).toHaveText(
-      "40 drafts match your filters",
-    );
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toHaveText("40 drafts match your filters");
     await expect(
       page.getByText("Written Expression — Human Rubric Only"),
     ).toBeVisible();
@@ -202,10 +203,9 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
     const admin = await makeUser("arw", "admin", FIXTURE_NAME);
     await adminSignIn(page, admin.email);
     await page.goto(BANK);
-    await expect(page.getByRole("status")).toHaveText(
-      "500 drafts match your filters",
-      { timeout: 60_000 },
-    );
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toHaveText("500 drafts match your filters", { timeout: 60_000 });
     await page
       .getByRole("combobox", { name: "Question", exact: true })
       .selectOption(DEFECT_ID);
@@ -354,9 +354,9 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
     await expect(
       page.getByRole("heading", { name: "Draft review" }),
     ).toBeVisible({ timeout: 60_000 });
-    await expect(page.getByRole("status")).toHaveText(
-      "500 drafts match your filters",
-    );
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toHaveText("500 drafts match your filters");
     const fits = () =>
       page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,

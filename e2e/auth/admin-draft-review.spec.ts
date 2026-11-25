@@ -18,7 +18,9 @@ test("Scholarship review is denied to guests and non-admin roles", async ({
       0,
     );
     await expect(
-      page.getByText("THERMOMETER is to TEMPERATURE as ODOMETER is to:", { exact: true }),
+      page.getByText("THERMOMETER is to TEMPERATURE as ODOMETER is to:", {
+        exact: true,
+      }),
     ).toHaveCount(0);
     await page.close();
   }
@@ -33,7 +35,9 @@ test("admin renders every corrected release item with current governance and his
   // Next streaming can retain a hidden server copy outside the active main.
   // Role locators keep assertions on the accessible review without ignoring duplicates.
   await expect(page.getByRole("status")).toBeVisible();
-  await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
+  await expect(page.getByRole("status")).toHaveText(
+    "160 drafts match your filters",
+  );
   for (const [bucket, count] of [
     ["ready_for_review", 45],
     ["requires_revision_or_decision", 35],
@@ -87,18 +91,27 @@ test("admin renders every corrected release item with current governance and his
     .getByRole("combobox", { name: "Question", exact: true })
     .selectOption("scholarship-y6-rc-025");
   await expect(
-    page.getByRole("main").getByText(
-      /Superseded content: these findings do not describe the current revision/,
-    ),
+    page
+      .getByRole("main")
+      .getByText(
+        /Superseded content: these findings do not describe the current revision/,
+      ),
   ).toBeVisible();
-  await page.getByRole("main").getByText("Content revision", { exact: true }).click();
+  await page
+    .getByRole("main")
+    .getByText("Content revision", { exact: true })
+    .click();
   await expect(
-    page.getByRole("main").getByText(identities.sourceRevision, { exact: true }),
+    page
+      .getByRole("main")
+      .getByText(identities.sourceRevision, { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("main").getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
-      exact: true,
-    }),
+    page
+      .getByRole("main")
+      .getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
+        exact: true,
+      }),
   ).toBeVisible();
 });
 
@@ -116,10 +129,14 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   });
   await page.goto("/admin/review");
   await expect(
-    page.getByRole("main").getByText("Scholarship: 160 draft questions across four sections."),
+    page
+      .getByRole("main")
+      .getByText("Scholarship: 160 draft questions across four sections."),
   ).toBeVisible();
   await expect(page.getByRole("status")).toBeVisible();
-  await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
+  await expect(page.getByRole("status")).toHaveText(
+    "160 drafts match your filters",
+  );
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.screenshot({
     path: testInfo.outputPath("review-desktop.png"),
@@ -165,12 +182,16 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   await page.getByRole("button", { name: "Previous", exact: true }).click();
   await expect(page.getByRole("radio").first()).toBeChecked();
   await page.getByRole("button", { name: "Submit draft paper" }).click();
-  await expect(page.getByRole("main").getByText(/Preview total: 1 \/ 35 marks/)).toBeVisible();
+  await expect(
+    page.getByRole("main").getByText(/Preview total: 1 \/ 35 marks/),
+  ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Worked explanation" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("main").getByText(/Preview responses|No student progress was recorded/),
+    page
+      .getByRole("main")
+      .getByText(/Preview responses|No student progress was recorded/),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Record my explicit approval" }),
@@ -193,30 +214,30 @@ test("admin can review the provisional canonical 500-item Codex Scholarship bank
   });
 
   await page.goto("/admin/review?bank=vihaan-scholarship-500");
-  await expect(page.getByRole("status")).toHaveText(
-    "500 drafts match your filters",
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("500 drafts match your filters");
 
   // Verify strict practice vs mock pool filtering (400 practice / 100 mock reserve).
   await page.getByLabel("Pool", { exact: true }).selectOption("practice");
-  await expect(page.getByRole("status")).toHaveText(
-    "400 drafts match your filters",
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("400 drafts match your filters");
   await page.getByLabel("Pool", { exact: true }).selectOption("mock");
-  await expect(page.getByRole("status")).toHaveText(
-    "100 drafts match your filters",
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("100 drafts match your filters");
   await page.getByLabel("Pool", { exact: true }).selectOption("mock-a");
-  await expect(page.getByRole("status")).toHaveText(
-    "50 drafts match your filters",
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("50 drafts match your filters");
   await page.getByLabel("Pool", { exact: true }).selectOption("");
 
   // Verify Written Expression prompts render through the existing governed rubric.
   await page.getByLabel("Section", { exact: true }).selectOption("writing");
-  await expect(page.getByRole("status")).toHaveText(
-    "40 drafts match your filters",
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("40 drafts match your filters");
   await expect(
     page.getByText("Written Expression — Human Rubric Only"),
   ).toBeVisible();
@@ -252,7 +273,9 @@ test("admin can review the provisional canonical 500-item Codex Scholarship bank
     await expect(approveSubmit).toBeEnabled();
     await approveSubmit.click();
     await expect(
-      page.getByText(/Your human approval was recorded for this revision|already recorded an approval/i),
+      page.getByText(
+        /Your human approval was recorded for this revision|already recorded an approval/i,
+      ),
     ).toBeVisible();
 
     // Confirm known defective vihaan-e500-m069 cannot be approved and supports Request revision.
@@ -269,9 +292,7 @@ test("admin can review the provisional canonical 500-item Codex Scholarship bank
     await page
       .getByLabel(/Required rationale/i)
       .fill("Verified Defect A-06 in E2E: squares 64 and 81 do not sum to 13.");
-    await page
-      .getByRole("button", { name: "Record revision request" })
-      .click();
+    await page.getByRole("button", { name: "Record revision request" }).click();
     await expect(
       page.getByText(/Revision request recorded for this content hash/i),
     ).toBeVisible();

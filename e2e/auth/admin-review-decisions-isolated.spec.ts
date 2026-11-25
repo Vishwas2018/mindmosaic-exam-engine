@@ -43,10 +43,9 @@ test("isolated: Approve, Request revision and Reject persist with locked reviewe
   const beforeIds = new Set((beforeRows ?? []).map((r) => r.id));
 
   await page.goto(BANK);
-  await expect(page.getByRole("status")).toHaveText(
-    "500 drafts match your filters",
-    { timeout: 60_000 },
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("500 drafts match your filters", { timeout: 60_000 });
 
   // --- Approve a normal numeracy item after blind-first solving ---
   await page.getByLabel("Section", { exact: true }).selectOption("numeracy");
@@ -169,10 +168,9 @@ test("isolated: Approve, Request revision and Reject persist with locked reviewe
   // --- Mobile (390px): same write path, no overflow ---
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(BANK);
-  await expect(page.getByRole("status")).toHaveText(
-    "500 drafts match your filters",
-    { timeout: 60_000 },
-  );
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("500 drafts match your filters", { timeout: 60_000 });
   expect(await fits()).toBe(true);
   await page.getByLabel("Section", { exact: true }).selectOption({ index: 2 });
   await page
