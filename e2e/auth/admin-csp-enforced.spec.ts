@@ -65,13 +65,14 @@ test.describe("Admin CSP is enforced", () => {
     }
 
     // Hydration proof: a client-side control must respond (a blocked bundle would leave it inert).
-    await page.goto("/admin/review");
+    // The Pool filter is rendered only for the Codex 500 bank (DraftReview.tsx), not the default Y6 Core bank.
+    await page.goto("/admin/review?bank=vihaan-scholarship-500");
     const pool = page.getByLabel("Pool", { exact: true });
     await expect(pool).toBeVisible();
     await pool.selectOption("practice");
     await expect(
       page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
-    ).toBeVisible();
+    ).toHaveText("400 drafts match your filters", { timeout: 60_000 });
 
     expect(violations, violations.join("\n")).toEqual([]);
   });
