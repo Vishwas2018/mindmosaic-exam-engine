@@ -131,3 +131,37 @@ describe("DEV-only admin CSP enforcement", () => {
     }
   });
 });
+
+describe("loopback Supabase connect-src", () => {
+  it("allows only the configured loopback Supabase origin, and only on loopback", async () => {
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "http://127.0.0.1:56321");
+    try {
+      vi.stubEnv("VERCEL_ENV", "");
+      const local = await proxy(new NextRequest("http://127.0.0.1:3101/admin"));
+      const connect = (local.headers.get("Content-Security-Policy") ?? "").split("; ").find((d) => d.startsWith("connect-src"));
+      expect(connect).toContain("http://127.0.0.1:56321");
+      expect(connect).toContain("ws://127.0.0.1:56321");
+      expect(connect).not.toContain("unsafe");
+
+      vi.stubEnv("VERCEL_ENV", "preview");
+      const preview = await proxy(new NextRequest("https://preview.example.test/admin"));
+      expect(preview.headers.get("Content-Security-Policy")).not.toMatch(/127\.0\.0\.1|localhost/);
+      vi.stubEnv("VERCEL_ENV", "production");
+      const prod = await proxy(new NextRequest("https://example.test/admin"));
+      expect(prod.headers.get("Content-Security-Policy-Report-Only")).not.toMatch(/127\.0\.0\.1|localhost/);
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("ignores a non-loopback NEXT_PUBLIC_SUPABASE_URL even on loopback", async () => {
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://evil.example");
+    vi.stubEnv("VERCEL_ENV", "");
+    try {
+      const r = await proxy(new NextRequest("http://localhost:3000/admin"));
+      expect(r.headers.get("Content-Security-Policy")).not.toContain("evil.example");
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+});

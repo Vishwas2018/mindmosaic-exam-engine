@@ -28,9 +28,23 @@ function shouldEnforceAdminCsp(request: NextRequest): boolean {
   return isNonProductionTarget(request);
 }
 
+// Local e2e/dev talks to a Supabase on loopback (e.g. 127.0.0.1:56321). Allow exactly that origin, and only when
+// the app itself is on loopback with no Vercel target. Hosted policy keeps just *.supabase.co.
+function localSupabaseConnectSrc(request: NextRequest): string[] {
+  const { hostname } = request.nextUrl;
+  if (process.env.VERCEL_ENV || (hostname !== "localhost" && hostname !== "127.0.0.1")) return [];
+  try {
+    const url = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "");
+    if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") return [];
+    return [url.origin, `${url.protocol === "https:" ? "wss" : "ws"}://${url.host}`];
+  } catch {
+    return [];
+  }
+}
+
 export async function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
-  const csp = buildContentSecurityPolicy(nonce);
+  const csp = buildContentSecurityPolicy(nonce, localSupabaseConnectSrc(request));
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
 
