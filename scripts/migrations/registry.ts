@@ -2936,6 +2936,66 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261124090000",
+    name: "admin_review_decisions",
+    checks: [
+      tableExists("admin_draft_review_decisions"),
+      functionExists("deny_admin_review_decision_mutation"),
+      functionExists("authenticated_admin_email"),
+      triggerExists(
+        "public",
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_immutable",
+      ),
+      triggerExists(
+        "public",
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_no_truncate",
+      ),
+      policyExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_read",
+      ),
+      policyExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_insert",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_checks_valid",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_notes_required",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_known_defect_blocked",
+      ),
+      {
+        describes:
+          "admin_draft_review_decisions has unique same-revision approval index",
+        sql: `select exists (
+          select 1 from pg_indexes
+          where schemaname = 'public'
+            and tablename = 'admin_draft_review_decisions'
+            and indexname = 'admin_draft_review_decisions_unique_approval_idx'
+        ) as present`,
+      },
+      {
+        describes:
+          "admin_draft_review_decisions is RLS-enabled, admin-only, append-only, and email helper is authenticated-only",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.admin_draft_review_decisions')), false)
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'select')
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'insert')
+          and not has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'update,delete,truncate')
+          and not has_table_privilege('anon', 'public.admin_draft_review_decisions', 'select,insert,update,delete,truncate')
+          and has_function_privilege('authenticated', 'public.authenticated_admin_email()', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.authenticated_admin_email()', 'EXECUTE') as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
