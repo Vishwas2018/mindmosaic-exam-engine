@@ -373,9 +373,15 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
       },
       maxRedirects: 0,
     });
-    expect(signIn.headers()["content-security-policy"] ?? "").toContain(
-      "default-src",
-    );
+    // /sign-in enforcement is a separate, env-gated switch (MM_DEV_AUTH_CSP_ENFORCE=1), not part of the admin change.
+    // Require a policy either way and record which mode this Preview served; admin assertions above stay strict.
+    const signInEnforced = signIn.headers()["content-security-policy"] ?? "";
+    const signInReport =
+      signIn.headers()["content-security-policy-report-only"] ?? "";
+    expect(signInEnforced + signInReport).toContain("default-src");
+    evidence["AR-06-signin-csp-mode"] = signInEnforced
+      ? "enforced"
+      : "report-only";
     // Bank 2: Codex 500
     await page.goto(BANK);
     await countStatus(500);
