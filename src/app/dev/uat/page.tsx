@@ -32,7 +32,20 @@ export default async function DevUatDashboardPage() {
         </main>
       );
     }
-    if (access.reason === "admin_mfa_required") redirect("/staff/mfa?next=%2Fdev%2Fuat");
+    if (access.reason === "admin_mfa_required") {
+      // No link here on purpose: the MFA step-up route belongs to the multi-role change (PR #165) and may not exist yet.
+      return (
+        <main id="main-content" className="min-h-dvh bg-mm-page px-4 py-8 font-[family-name:var(--font-geist)] text-mm-ink sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[720px] rounded-2xl border border-mm-line bg-mm-surface p-6">
+            <h1 className="text-lg font-semibold tracking-[-0.02em]">Admin MFA required</h1>
+            <p className="mt-1.5 text-sm leading-6 text-mm-muted">
+              Admin MFA is switched on for this environment and this session has not passed it. The UAT Assistant never
+              bypasses Admin MFA. Complete the MFA verification for your admin account, then reload this page.
+            </p>
+          </div>
+        </main>
+      );
+    }
     redirect("/sign-in?next=%2Fdev%2Fuat");
   }
 

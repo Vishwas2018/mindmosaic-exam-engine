@@ -66,6 +66,17 @@ export function ScreenshotAnnotator({
   const baseUrlRef = useRef<string | null>(null);
   /** Marks already flattened into baseUrlRef (a restored draft), so they are not drawn twice. */
   const bakedRef = useRef<readonly UatAnnotationShape[]>([]);
+  /**
+   * Single source of truth for edits. Every edit (mark, undo, redaction) runs through one serial queue and reads/writes
+   * this record, never a stale render closure, so a slow mark render can never overwrite a later redaction with an
+   * image that still contains the unredacted pixels.
+   */
+  const workRef = useRef<{
+    marks: readonly UatAnnotationShape[];
+    redactions: number;
+    shot: UatScreenshotCapture;
+  } | null>(null);
+  const queueRef = useRef<Promise<void>>(Promise.resolve());
   const [baseVersion, setBaseVersion] = useState(0);
 
   const [activeTool, setActiveTool] = useState<UatAnnotationKind>("rect");
@@ -93,12 +104,14 @@ export function ScreenshotAnnotator({
       baseImageRef.current = null;
       baseUrlRef.current = null;
       bakedRef.current = [];
+      workRef.current = null;
       return;
     }
     if (!baseUrlRef.current) {
       // Restored from a saved draft: the stored image is already flattened (and already redacted).
       baseUrlRef.current = screenshot.annotatedDataUrl;
       bakedRef.current = screenshot.annotations;
+      workRef.current = { marks: [], redactions: screenshot.redactionCount, shot: screenshot };
     }
     let cancelled = false;
     const img = new Image();
@@ -114,59 +127,71 @@ export function ScreenshotAnnotator({
     // baseVersion: reload the working image after a redaction replaced it.
   }, [screenshot, redrawCanvas, baseVersion]);
 
+  const emit = useCallback(
+    (mergedUrl: string) => {
+      const work = workRef.current;
+      if (!work) return;
+      onChange({
+        ...work.shot,
+        annotations: [...bakedRef.current, ...work.marks],
+        annotatedDataUrl: mergedUrl,
+        redactionCount: work.redactions,
+      });
+    },
+    [onChange],
+  );
+
+  const enqueue = useCallback((job: () => Promise<void>, failure: string) => {
+    queueRef.current = queueRef.current
+      .then(job)
+      .catch(() => setErrorMessage(failure));
+  }, []);
+
   /** Starts a fresh in-memory working copy for a newly captured or uploaded frame. */
   const adoptFrame = useCallback(
     (frame: CapturedFrame) => {
       baseUrlRef.current = frame.baseDataUrl;
       bakedRef.current = [];
+      workRef.current = { marks: frame.capture.annotations, redactions: 0, shot: frame.capture };
+      queueRef.current = Promise.resolve();
       setBaseVersion((v) => v + 1);
       onChange(frame.capture);
     },
     [onChange],
   );
 
+  /** Applies a change to the editable (non-redaction) marks. */
   const commitMarks = useCallback(
-    async (nextMarks: UatAnnotationShape[]) => {
-      if (!screenshot || !baseUrlRef.current) return;
-      try {
-        const mergedUrl = await renderAnnotatedScreenshot(
-          baseUrlRef.current,
-          screenshot.width,
-          screenshot.height,
-          nextMarks,
-        );
-        onChange({
-          ...screenshot,
-          annotations: [...bakedRef.current, ...nextMarks],
-          annotatedDataUrl: mergedUrl,
-        });
-      } catch {
-        setErrorMessage("Could not apply annotation to screenshot.");
-      }
+    (change: (current: readonly UatAnnotationShape[]) => UatAnnotationShape[]) => {
+      enqueue(async () => {
+        const work = workRef.current;
+        const base = baseUrlRef.current;
+        if (!work || !base) return;
+        const marks = change(work.marks);
+        const mergedUrl = await renderAnnotatedScreenshot(base, work.shot.width, work.shot.height, marks);
+        work.marks = marks;
+        emit(mergedUrl);
+      }, "Could not apply annotation to screenshot.");
     },
-    [screenshot, onChange],
+    [enqueue, emit],
   );
 
   /** Redaction is destructive on purpose: pixels are overwritten now and the previous frame is discarded. */
   const commitRedaction = useCallback(
-    async (shape: UatAnnotationShape) => {
-      if (!screenshot || !baseUrlRef.current) return;
-      try {
-        const burned = await burnRedaction(baseUrlRef.current, screenshot.width, screenshot.height, shape);
+    (shape: UatAnnotationShape) => {
+      enqueue(async () => {
+        const work = workRef.current;
+        const base = baseUrlRef.current;
+        if (!work || !base) return;
+        const burned = await burnRedaction(base, work.shot.width, work.shot.height, shape);
         baseUrlRef.current = burned;
+        work.redactions += 1;
         setBaseVersion((v) => v + 1);
-        const marks = screenshot.annotations.slice(bakedRef.current.length);
-        const mergedUrl = await renderAnnotatedScreenshot(burned, screenshot.width, screenshot.height, marks);
-        onChange({
-          ...screenshot,
-          annotatedDataUrl: mergedUrl,
-          redactionCount: screenshot.redactionCount + 1,
-        });
-      } catch {
-        setErrorMessage("Redaction could not be applied, so the screenshot was not changed. Remove it or try again.");
-      }
+        const mergedUrl = await renderAnnotatedScreenshot(burned, work.shot.width, work.shot.height, work.marks);
+        emit(mergedUrl);
+      }, "Redaction could not be applied, so the screenshot was not changed. Remove it or try again.");
     },
-    [screenshot, onChange],
+    [enqueue, emit],
   );
 
   const toNormalizedPoint = (event: React.PointerEvent<HTMLCanvasElement>): UatAnnotationPoint => {
@@ -326,8 +351,7 @@ export function ScreenshotAnnotator({
                 data-testid="uat-annotation-undo"
                 disabled={screenshot.annotations.length === 0}
                 onClick={() => {
-                  const next = screenshot.annotations.slice(bakedRef.current.length, -1);
-                  void commitMarks(next);
+                  commitMarks((current) => current.slice(0, -1));
                 }}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-mm-line bg-mm-surface px-3 py-1.5 text-xs font-semibold text-mm-ink-soft transition hover:border-mm-brand/40 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
               >
@@ -338,7 +362,7 @@ export function ScreenshotAnnotator({
                 type="button"
                 data-testid="uat-annotation-clear"
                 disabled={screenshot.annotations.length === 0}
-                onClick={() => void commitMarks([])}
+                onClick={() => commitMarks(() => [])}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-mm-line bg-mm-surface px-3 py-1.5 text-xs font-semibold text-mm-ink-soft transition hover:border-mm-brand/40 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
               >
                 <Eraser aria-hidden="true" className="h-3.5 w-3.5" />
@@ -392,9 +416,9 @@ export function ScreenshotAnnotator({
                 const finalized = draftShape;
                 setDraftShape(null);
                 if (finalized.kind === "redact") {
-                  void commitRedaction(finalized);
+                  commitRedaction(finalized);
                 } else {
-                  void commitMarks([...screenshot.annotations.slice(bakedRef.current.length), finalized]);
+                  commitMarks((current) => [...current, finalized]);
                 }
               }}
               onPointerCancel={() => {

@@ -387,8 +387,16 @@ test.describe("MindMosaic AI UAT Assistant — redaction is irreversible and ses
       });
       const canvas = page.getByTestId("uat-annotation-canvas");
       await expect(canvas).toBeVisible();
-      await page.getByTestId("uat-tool-redact").click();
+      // Regression: a highlight mark immediately followed by a redaction must never let the slower mark render overwrite
+      // the redacted image (the two edits are serialised, and the final image must keep the redaction).
+      await canvas.scrollIntoViewIfNeeded();
       const box = (await canvas.boundingBox())!;
+      await page.getByTestId("uat-tool-rect").click();
+      await page.mouse.move(box.x + box.width * 0.02, box.y + box.height * 0.02);
+      await page.mouse.down();
+      await page.mouse.move(box.x + box.width * 0.15, box.y + box.height * 0.15, { steps: 2 });
+      await page.mouse.up();
+      await page.getByTestId("uat-tool-redact").click();
       await page.mouse.move(box.x + box.width * 0.05, box.y + box.height * 0.05);
       await page.mouse.down();
       await page.mouse.move(box.x + box.width * 0.95, box.y + box.height * 0.95, { steps: 6 });
