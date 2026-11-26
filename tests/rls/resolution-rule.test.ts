@@ -802,6 +802,8 @@ describe("5. erasure — the whole graph, not just the two exam models (Gate A i
       "manual_marks.marked_by",
       "parent_children.parent_id",
       "subscriptions.parent_id",
+      /* Elevated-role holder (parent/teacher/admin; grant_admin_role refuses student profiles, MM108). */
+      "user_roles.user_id",
       "writing_attempts.created_by",
       "writing_marks.marked_by",
     ]);

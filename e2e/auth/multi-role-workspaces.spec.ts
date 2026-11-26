@@ -47,7 +47,8 @@ test.describe("multi-role workspaces", () => {
     await expect(adminSwitcher.getByRole("link", { name: "Admin" })).toHaveAttribute("aria-current", "page");
 
     await adminSwitcher.getByRole("link", { name: "Parent" }).click();
-    await expect(page).toHaveURL(/\/parent$/);
+    // A parent with no children is sent to onboarding (/parent/setup): same parent journey as before the extra role.
+    await expect(page).toHaveURL(/\/parent(\/setup)?$/);
     // Parent workspace is unchanged by the extra role: no billing wall, same dashboard.
     await expect(page).not.toHaveURL(/billing|pricing|sign-in/);
   });
@@ -169,7 +170,7 @@ test.describe("multi-role workspaces", () => {
       const page = await context.newPage();
       // Parent workspace is NOT subject to step-up.
       await page.goto("/parent");
-      await expect(page).toHaveURL(/\/parent$/);
+      await expect(page).toHaveURL(/\/parent(\/setup)?$/);
 
       await page.goto("/admin/review");
       await expect(page).toHaveURL(/\/staff\/mfa\?next=%2Fadmin%2Freview/);

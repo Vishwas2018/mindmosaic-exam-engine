@@ -104,10 +104,13 @@ describe("multi-role workspaces (entitlements, MFA step-up, revocation, audit)",
 
   it("students can never be granted an elevated role", async () => {
     await client.query("savepoint s");
+    await client.query("set local role service_role");
     await expect(
-      asService(async () => client.query("select public.grant_admin_role($1,'rls-test','child must not')", [STUDENT_A])),
+      client.query("select public.grant_admin_role($1,'rls-test','child must not')", [STUDENT_A]),
     ).rejects.toMatchObject({ code: "MM108" });
     await client.query("rollback to savepoint s");
+    await reset();
+    expect((await client.query("select count(*)::int c from public.user_roles where user_id=$1", [STUDENT_A])).rows[0].c).toBe(0);
   });
 
   it("MFA switch: aal1 is refused, aal2 allowed, entitlement stays visible so step-up can happen", async () => {
