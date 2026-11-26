@@ -72,3 +72,96 @@ describe("DEV-only auth CSP enforcement", () => {
     }
   });
 });
+
+describe("DEV-only admin CSP enforcement", () => {
+  const adminPaths = ["/admin", "/admin/review", "/admin/questions/q-1/approval"];
+
+  it("enforces the nonce policy on every /admin route in Preview and forwards it to Next", async () => {
+    vi.stubEnv("VERCEL_ENV", "preview");
+    try {
+      for (const path of adminPaths) {
+        const response = await proxy(new NextRequest("https://preview.example.test" + path));
+        const policy = response.headers.get("Content-Security-Policy");
+        expect(policy).toContain("script-src 'self' 'nonce-");
+        expect(policy).toContain("frame-ancestors 'none'");
+        expect(response.headers.get("x-middleware-request-content-security-policy")).toBe(policy);
+        expect(response.headers.has("Content-Security-Policy-Report-Only")).toBe(false);
+      }
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("enforces on loopback when no Vercel target is set", async () => {
+    vi.stubEnv("VERCEL_ENV", "");
+    try {
+      const response = await proxy(new NextRequest("http://localhost:3000/admin/review"));
+      expect(response.headers.has("Content-Security-Policy")).toBe(true);
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("stays report-only in production and on non-admin or look-alike paths", async () => {
+    try {
+      vi.stubEnv("VERCEL_ENV", "production");
+      const prod = await proxy(new NextRequest("https://example.test/admin/review"));
+      expect(prod.headers.has("Content-Security-Policy")).toBe(false);
+      expect(prod.headers.has("Content-Security-Policy-Report-Only")).toBe(true);
+
+      vi.stubEnv("VERCEL_ENV", "preview");
+      for (const path of ["/", "/parent", "/administrator", "/admin-tools", "/api/admin"]) {
+        const response = await proxy(new NextRequest("https://preview.example.test" + path));
+        expect(response.headers.has("Content-Security-Policy"), path).toBe(false);
+      }
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("honours the MM_ADMIN_CSP_ENFORCE=0 kill switch", async () => {
+    vi.stubEnv("VERCEL_ENV", "preview");
+    vi.stubEnv("MM_ADMIN_CSP_ENFORCE", "0");
+    try {
+      const response = await proxy(new NextRequest("https://preview.example.test/admin/review"));
+      expect(response.headers.has("Content-Security-Policy")).toBe(false);
+      expect(response.headers.has("Content-Security-Policy-Report-Only")).toBe(true);
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+});
+
+describe("loopback Supabase connect-src", () => {
+  it("allows only the configured loopback Supabase origin, and only on loopback", async () => {
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "http://127.0.0.1:56321");
+    try {
+      vi.stubEnv("VERCEL_ENV", "");
+      const local = await proxy(new NextRequest("http://127.0.0.1:3101/admin"));
+      const connect = (local.headers.get("Content-Security-Policy") ?? "").split("; ").find((d) => d.startsWith("connect-src"));
+      expect(connect).toContain("http://127.0.0.1:56321");
+      expect(connect).toContain("ws://127.0.0.1:56321");
+      expect(connect).not.toContain("unsafe");
+
+      vi.stubEnv("VERCEL_ENV", "preview");
+      const preview = await proxy(new NextRequest("https://preview.example.test/admin"));
+      expect(preview.headers.get("Content-Security-Policy")).not.toMatch(/127\.0\.0\.1|localhost/);
+      vi.stubEnv("VERCEL_ENV", "production");
+      const prod = await proxy(new NextRequest("https://example.test/admin"));
+      expect(prod.headers.get("Content-Security-Policy-Report-Only")).not.toMatch(/127\.0\.0\.1|localhost/);
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("ignores a non-loopback NEXT_PUBLIC_SUPABASE_URL even on loopback", async () => {
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://evil.example");
+    vi.stubEnv("VERCEL_ENV", "");
+    try {
+      const r = await proxy(new NextRequest("http://localhost:3000/admin"));
+      expect(r.headers.get("Content-Security-Policy")).not.toContain("evil.example");
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+});
