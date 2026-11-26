@@ -71,7 +71,15 @@ The content-factory `owner_approve_content` / `owner_approve_batch` functions an
 | Migration + rollback against a stubbed Postgres (PGlite, applying the real 20261019 + 20261124 admin-review migrations first) | **53/53 pass** (backfill, history preserved, legacy manual admin, parent-only no power, 7 self-promotion/escalation attempts refused, student refused, dual-role grant, impersonation refused, MFA aal1/aal2, revocation, account revocation, regrant, audit append-only, decisions immutable, rollback keeps history). Script: `C:\tmp\multirole-pglite\t1.mjs`. |
 | `tsc --noEmit`, eslint | clean |
 | Unit/component (`multi-role-entitlements.test.tsx`, proxy CSP tests) | pass |
-| Real-Postgres RLS test (`tests/rls/multi-role-workspaces.test.ts`) and browser E2E (`e2e/auth/multi-role-workspaces.spec.ts`: switcher, single-role, direct URL, staff sign-in, escalation, MFA step-up with real TOTP, revocation) | **run in CI only** (needs the local Supabase stack; Docker is not available on the authoring machine). See the PR for the CI result. |
+| Real-Postgres RLS test `tests/rls/multi-role-workspaces.test.ts` (CI `rls`) | **pass** (legacy admin, grant keeps parent role + child link, no self-promotion, student refused, MFA aal1/aal2, revocation beats legacy fallback, audit append-only, account revocation). Also forced the erasure-graph test (`resolution-rule`) to classify `user_roles.user_id` as an actor column. |
+| Browser E2E `e2e/auth/multi-role-workspaces.spec.ts` (CI `e2e-auth`, **7/7, first attempt on the final head, 0 retries; suite 106 passed**) | switcher Parent <-> Admin on one session; no switcher for single-role and legacy admin; direct URL denial for parent/student/teacher/guest and admin-only login not made a parent; staff sign-in (no sign-up/role picker, generic failure, off-site `next` ignored, un-entitled login lands in its own workspace); privilege-escalation attempts by a signed-in parent (insert/update `user_roles`, grant/revoke RPCs, `profiles.role`, settings, audit) all refused and nothing changed; MFA step-up with a real TOTP (aal1 redirected to `/staff/mfa` with the deep link preserved, wrong code refused, right code unlocks, DB refuses an aal1 session); revocation closes Admin on the next request without re-login and leaves parent role intact, audit trail recorded and immutable. |
+| Full local unit suite | **474 files / 7562 tests pass** |
+| CI on final head `cd490b5a` | core, e2e, e2e-auth, rls, scholarship-drafts, Vercel: all pass |
+
+### Defects found by CI while building this (all fixed, assertions not weakened)
+1. `resolution-rule` erasure guard: the new FK `user_roles.user_id -> profiles` had to be classified as an actor column.
+2. A parent with no children is sent to `/parent/setup`; the E2E expectation was corrected (product behaviour unchanged).
+3. Real UX gap: the step-up redirect lost the requested deep link (`/admin/review` became `/admin`). The proxy now passes the requested admin path to the layout (client value discarded, re-validated by `safeNextPath`, limited to `/admin*`).
 
 ## 6. Findings and residual risks
 
