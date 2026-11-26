@@ -451,6 +451,11 @@ test.describe("MindMosaic AI UAT Assistant — redaction is irreversible and ses
     try {
       await page.goto(`${srv.origin}/dev/uat`);
       await expect(page.getByRole("heading", { level: 1, name: "MindMosaic UAT defect dashboard" })).toBeVisible();
+      // Never create the database ourselves (that would make an empty v1 without the app's stores): wait for the app.
+      await expect(page.getByTestId("uat-floating-launcher")).toBeVisible();
+      await expect
+        .poll(() => page.evaluate(async () => (await indexedDB.databases()).some((d) => d.name === "mindmosaic_uat_assistant_v1")))
+        .toBe(true);
       await page.evaluate(async () => {
         const db = await new Promise<IDBDatabase>((resolve, reject) => {
           const r = indexedDB.open("mindmosaic_uat_assistant_v1");
