@@ -33,8 +33,62 @@ export type ImproveDefectOutcome =
 
 type EnvMap = Readonly<Record<string, string | undefined>>;
 
+/** Hard ceiling for one provider call so a stalled upstream can never hang the route. */
+export const UAT_AI_TIMEOUT_MS = 30_000;
+
+export const NVIDIA_DEFAULT_BASE_URL = "https://integrate.api.nvidia.com/v1";
+
+async function fetchWithTimeout(url: string, init: RequestInit): Promise<Response> {
+  return fetch(url, { ...init, signal: AbortSignal.timeout(UAT_AI_TIMEOUT_MS) });
+}
+
+function describeFetchFailure(error: unknown, label: string): string {
+  const name = typeof (error as { name?: unknown } | null)?.name === "string" ? (error as { name: string }).name : "";
+  if (name === "TimeoutError" || name === "AbortError") {
+    return `The ${label} endpoint did not respond within ${UAT_AI_TIMEOUT_MS / 1000} seconds.`;
+  }
+  return `Could not reach the configured ${label} endpoint.`;
+}
+
+function describeHttpFailure(label: string, status: number): string {
+  if (status === 401 || status === 403) {
+    return `${label} API rejected the configured credentials (${status}). Check the server API key.`;
+  }
+  if (status === 429) return `${label} API rate limit reached (429). Try again shortly.`;
+  return `${label} API returned ${status}.`;
+}
+
+/**
+ * The NVIDIA endpoint is server-only configuration, but the API key is sent to it, so it is pinned to HTTPS on an
+ * nvidia.com host. A mis-set variable therefore cannot redirect the key to an arbitrary server.
+ */
+export function resolveNvidiaChatCompletionsUrl(
+  env: EnvMap,
+): { ok: true; url: string } | { ok: false; message: string } {
+  const raw = env.NVIDIA_API_BASE_URL?.trim() || NVIDIA_DEFAULT_BASE_URL;
+  let parsed: URL;
+  try {
+    parsed = new URL(raw);
+  } catch {
+    return { ok: false, message: "NVIDIA_API_BASE_URL is not a valid URL." };
+  }
+  const host = parsed.hostname.toLowerCase();
+  if (
+    parsed.protocol !== "https:" ||
+    parsed.username ||
+    parsed.password ||
+    parsed.search ||
+    parsed.hash ||
+    !(host === "nvidia.com" || host.endsWith(".nvidia.com"))
+  ) {
+    return { ok: false, message: "NVIDIA_API_BASE_URL must be an https URL on an nvidia.com host." };
+  }
+  const base = parsed.origin + parsed.pathname.replace(/\/+$/, "");
+  return { ok: true, url: `${base}/chat/completions` };
+}
+
 interface ResolvedUatAiProvider {
-  readonly providerId: "anthropic" | "openai" | "gemini";
+  readonly providerId: "anthropic" | "openai" | "gemini" | "nvidia";
   readonly modelId: string;
   callText(prompt: string): Promise<{ ok: true; text: string } | { ok: false; message: string }>;
 }
@@ -42,8 +96,9 @@ interface ResolvedUatAiProvider {
 /**
  * Reuses MindMosaic's approved server-side AI provider environment contract
  * (`QF_AI_PROVIDER=anthropic|openai|gemini` and matching server-only API keys,
- * with optional `MM_UAT_AI_PROVIDER` override among those same three approved
- * providers). Never introduces an unapproved provider or client-side key.
+ * with optional `MM_UAT_AI_PROVIDER` override) plus `nvidia` (NVIDIA Nemotron via the documented
+ * OpenAI-compatible NIM API: `NVIDIA_API_KEY`, `QF_AI_NVIDIA_MODEL`, optional `NVIDIA_API_BASE_URL`).
+ * Never introduces a client-side key.
  */
 export function resolveApprovedUatAiProvider(
   env: EnvMap = process.env,
@@ -63,7 +118,7 @@ export function resolveApprovedUatAiProvider(
         modelId,
         async callText(prompt) {
           try {
-            const response = await fetch("https://api.anthropic.com/v1/messages", {
+            const response = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -77,7 +132,7 @@ export function resolveApprovedUatAiProvider(
               }),
             });
             if (!response.ok) {
-              return { ok: false, message: `Anthropic API returned ${response.status}.` };
+              return { ok: false, message: describeHttpFailure("Anthropic", response.status) };
             }
             const body = (await response.json()) as {
               content?: readonly { type?: string; text?: string }[];
@@ -85,8 +140,8 @@ export function resolveApprovedUatAiProvider(
             const text = body.content?.find((b) => b.type === "text" && typeof b.text === "string")?.text;
             if (!text) return { ok: false, message: "Anthropic response contained no text block." };
             return { ok: true, text };
-          } catch {
-            return { ok: false, message: "Could not reach the configured Anthropic endpoint." };
+          } catch (error) {
+            return { ok: false, message: describeFetchFailure(error, "Anthropic") };
           }
         },
       },
@@ -106,7 +161,7 @@ export function resolveApprovedUatAiProvider(
         modelId,
         async callText(prompt) {
           try {
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            const response = await fetchWithTimeout("https://api.openai.com/v1/chat/completions", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -119,7 +174,7 @@ export function resolveApprovedUatAiProvider(
               }),
             });
             if (!response.ok) {
-              return { ok: false, message: `OpenAI API returned ${response.status}.` };
+              return { ok: false, message: describeHttpFailure("OpenAI", response.status) };
             }
             const body = (await response.json()) as {
               choices?: readonly { message?: { content?: string } }[];
@@ -129,8 +184,8 @@ export function resolveApprovedUatAiProvider(
               return { ok: false, message: "OpenAI response contained no message content." };
             }
             return { ok: true, text };
-          } catch {
-            return { ok: false, message: "Could not reach the configured OpenAI endpoint." };
+          } catch (error) {
+            return { ok: false, message: describeFetchFailure(error, "OpenAI") };
           }
         },
       },
@@ -153,7 +208,7 @@ export function resolveApprovedUatAiProvider(
         modelId,
         async callText(prompt) {
           try {
-            const response = await fetch(
+            const response = await fetchWithTimeout(
               `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modelId)}:generateContent`,
               {
                 method: "POST",
@@ -168,7 +223,7 @@ export function resolveApprovedUatAiProvider(
               },
             );
             if (!response.ok) {
-              return { ok: false, message: `Gemini API returned ${response.status}.` };
+              return { ok: false, message: describeHttpFailure("Gemini", response.status) };
             }
             const body = (await response.json()) as {
               candidates?: readonly { content?: { parts?: readonly { text?: string }[] } }[];
@@ -176,8 +231,60 @@ export function resolveApprovedUatAiProvider(
             const text = body.candidates?.[0]?.content?.parts?.find((p) => typeof p.text === "string")?.text;
             if (!text) return { ok: false, message: "Gemini response contained no text part." };
             return { ok: true, text };
-          } catch {
-            return { ok: false, message: "Could not reach the configured Gemini endpoint." };
+          } catch (error) {
+            return { ok: false, message: describeFetchFailure(error, "Gemini") };
+          }
+        },
+      },
+    };
+  }
+
+  if (providerId === "nvidia") {
+    const apiKey = env.NVIDIA_API_KEY?.trim();
+    const modelId = env.QF_AI_NVIDIA_MODEL?.trim();
+    if (!apiKey || !modelId) {
+      return {
+        ok: false,
+        message: "QF_AI_PROVIDER=nvidia requires NVIDIA_API_KEY and QF_AI_NVIDIA_MODEL on the server.",
+      };
+    }
+    const endpoint = resolveNvidiaChatCompletionsUrl(env);
+    if (!endpoint.ok) return { ok: false, message: endpoint.message };
+    return {
+      ok: true,
+      provider: {
+        providerId: "nvidia",
+        modelId,
+        async callText(prompt) {
+          try {
+            const response = await fetchWithTimeout(endpoint.url, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+                accept: "application/json",
+                authorization: `Bearer ${apiKey}`,
+              },
+              body: JSON.stringify({
+                model: modelId,
+                temperature: 0.1,
+                max_tokens: 2048,
+                stream: false,
+                messages: [{ role: "user", content: prompt }],
+              }),
+            });
+            if (!response.ok) {
+              return { ok: false, message: describeHttpFailure("NVIDIA", response.status) };
+            }
+            const body = (await response.json()) as {
+              choices?: readonly { message?: { content?: string | null } }[];
+            };
+            const text = body.choices?.[0]?.message?.content;
+            if (typeof text !== "string" || !text.trim()) {
+              return { ok: false, message: "NVIDIA response contained no message content." };
+            }
+            return { ok: true, text };
+          } catch (error) {
+            return { ok: false, message: describeFetchFailure(error, "NVIDIA") };
           }
         },
       },
@@ -244,7 +351,7 @@ export function buildDefectImprovementPrompt(request: UatImproveRequest): string
 }
 
 export function extractJsonObjectFromText(raw: string): unknown {
-  const trimmed = raw.trim();
+  const trimmed = raw.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
   const stripped = trimmed
     .replace(/^```(?:json)?\s*/i, "")
     .replace(/\s*```$/i, "")

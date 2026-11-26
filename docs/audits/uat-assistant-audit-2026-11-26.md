@@ -99,3 +99,35 @@ The **MindMosaic AI UAT Assistant** was reviewed against MindMosaic's standing a
 
 The hosted runs created 2 fixture accounts per run (an admin and a parent, `mm-accept-<run>-uat-admin|parent@example.com`), five runs in total. No record was deleted; the fixture admins were demoted to the parent role and any temporary access revocation was lifted. They belong in the existing synthetic-account cleanup plan.
 
+---
+
+## 6. NVIDIA Nemotron provider (PR #166 addition)
+
+### 6.1 What was added
+
+`nvidia` is a fourth selectable server-side provider (`QF_AI_PROVIDER=nvidia` or `MM_UAT_AI_PROVIDER=nvidia`). It calls NVIDIA's documented OpenAI-compatible NIM endpoint (`POST {base}/chat/completions`, bearer auth, default base `https://integrate.api.nvidia.com/v1`). Anthropic, OpenAI, Gemini and the deterministic local fallback are unchanged in behaviour.
+
+| Variable | Scope | Notes |
+|---|---|---|
+| `NVIDIA_API_KEY` | server-only, **Sensitive** | Never sent to the browser, never in responses or logs |
+| `QF_AI_NVIDIA_MODEL` | server-only | Required; no hard-coded default because the catalogue changes |
+| `NVIDIA_API_BASE_URL` | server-only, optional | Must be `https` on an `nvidia.com` host |
+
+### 6.2 Security properties
+
+- **Key cannot be redirected.** The endpoint is validated (https only, `nvidia.com`/`*.nvidia.com` host, no userinfo, query or fragment; look-alike suffixes such as `nvidia.com.evil.example` are rejected). An invalid value makes the provider "not configured" and **no request is made**.
+- **Redaction and verbatim notes unchanged.** The same prompt builder redacts secrets/URLs before the call and the same output pass re-redacts model output. The tester's original notes are never mutated or overwritten by a rewrite.
+- **No invented evidence.** Same strict non-hallucination prompt and zod schema; anything off-schema becomes `malformed_output`.
+- **Failure handling.** 401/403 → credential message (status only, never the key); 429 → rate-limit message; other non-2xx → status; network error → unreachable; empty/null content → `provider_failed`; unreadable or off-schema content → `malformed_output` ("Your original notes are safe"). Nemotron `<think>…</think>` reasoning blocks are stripped before JSON parsing.
+- **Timeouts (all providers).** Every provider call now carries a 30 s `AbortSignal.timeout`. Previously none had a ceiling, so a stalled upstream could hold a route open. This is a behaviour change for Anthropic/OpenAI/Gemini (strictly safer) and is covered by tests.
+- **Reporting.** The response draft carries `providerId: "nvidia"`, the configured `modelId` and `mode: "ai"`.
+
+### 6.3 Evidence
+
+- `src/tests/unit/uat-assistant-nvidia-provider.test.ts` (35 tests, mocked HTTP; **no live NVIDIA call was made**): configuration matrix, unsafe-endpoint refusal, real-rewrite request shape (URL, bearer header, model, redaction, original input unmutated), echoed-secret re-redaction, `<think>`/fence stripping, 401/403/429/503, timeout (both a TimeoutError and the armed 30 s signal), network error, prose/truncated/off-schema/missing-field output, null/empty/no-choice content, non-JSON body, and unchanged behaviour of the other three providers.
+- Typecheck and ESLint clean; related UAT unit and component suites pass (88/88).
+
+### 6.4 Not verified (honest gaps)
+
+- **No live NVIDIA call.** There is no NVIDIA key in any environment I can use, and I will not request one. Real rewriting quality, the exact current model id and NVIDIA-side latency remain unverified until the owner sets the Preview variables below and the hosted spec is rerun.
+- The Nemotron reasoning-block handling is based on documented model behaviour and tested with synthetic output, not captured live output.

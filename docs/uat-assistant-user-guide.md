@@ -48,7 +48,7 @@ End your session when you hand the device to someone else or finish a testing sh
 ## 4. Using "Improve with AI"
 
 1. After recording your notes (and optionally selecting an element), select **Improve with AI**.
-2. The server calls MindMosaic's configured AI provider (`QF_AI_PROVIDER=anthropic|openai|gemini`, or `MM_UAT_AI_PROVIDER`) using server-side credentials only.
+2. The server calls MindMosaic's configured AI provider (`QF_AI_PROVIDER=anthropic|openai|gemini|nvidia`, or `MM_UAT_AI_PROVIDER`) using server-side credentials only. The draft records which provider and model produced it, and your original notes are never overwritten. If the provider is missing, rejects its credentials, times out (30 seconds) or returns something unreadable, the report is structured locally from your verbatim notes instead, with a message saying so, and you can edit every field by hand.
 3. AI populates editable fields:
    - **Defect title**
    - **Severity** (`Critical`, `High`, `Medium`, `Low`) & **Category** (`UI & visual`, `Functional`, `Accessibility`, `Question / content`, `Performance`, `Responsive / mobile`, `Auth & permissions`, `Other`)
@@ -103,6 +103,9 @@ Open the dashboard from the floating count button on any page, or visit **`/dev/
 | `MM_UAT_TESTER_EMAILS` | Optional comma-separated tester emails allowed in addition to `role='admin'` | Empty |
 | `MM_UAT_SESSION_EPOCH` | Rotate (e.g. `1` → `2`) to invalidate every outstanding tester cookie at once | `0` |
 | `MM_UAT_SESSION_SECRET` | Optional dedicated signing secret for the tester cookie (min 16 chars); otherwise derived from the service-role key | Derived |
-| `MM_UAT_AI_PROVIDER` | Optional AI provider override (`anthropic`, `openai`, `gemini`) | Falls back to `QF_AI_PROVIDER` |
+| `MM_UAT_AI_PROVIDER` | Optional AI provider override (`anthropic`, `openai`, `gemini`, `nvidia`) | Falls back to `QF_AI_PROVIDER` |
+| `NVIDIA_API_KEY` | Server-only NVIDIA API key (build.nvidia.com), used when the provider is `nvidia` | Unset |
+| `QF_AI_NVIDIA_MODEL` | Nemotron model id, required for `nvidia` (for example `nvidia/nemotron-3-super-120b-a12b`; confirm the current id in the NVIDIA API catalogue) | Unset |
+| `NVIDIA_API_BASE_URL` | Optional OpenAI-compatible base URL. Must be `https` on an `nvidia.com` host, otherwise the provider is treated as not configured | `https://integrate.api.nvidia.com/v1` |
 | `MM_UAT_GITHUB_TOKEN` | Optional server-only GitHub PAT for confirmed issue creation | Unset |
 | `MM_UAT_GITHUB_REPO` | Target `owner/repo` for confirmed GitHub issues | `Vishwas2018/mindmosaic-exam-engine` |

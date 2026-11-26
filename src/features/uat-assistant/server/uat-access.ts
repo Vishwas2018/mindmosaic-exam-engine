@@ -9,6 +9,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
 import { isUatAssistantEnvironmentAllowed, uatAssistantAvailability } from "../flags";
+import { resolveNvidiaChatCompletionsUrl } from "./ai-improver";
 import {
   checkUatAdminMfa,
   createUatServiceClient,
@@ -157,6 +158,13 @@ export function isAiProviderConfiguredForUat(env: EnvMap = process.env): boolean
   if (provider === "openai") return Boolean(env.OPENAI_API_KEY?.trim());
   if (provider === "gemini") {
     return Boolean((env.GEMINI_API_KEY || env.GOOGLE_API_KEY)?.trim() && env.QF_AI_GEMINI_MODEL?.trim());
+  }
+  if (provider === "nvidia") {
+    return Boolean(
+      env.NVIDIA_API_KEY?.trim() &&
+        env.QF_AI_NVIDIA_MODEL?.trim() &&
+        resolveNvidiaChatCompletionsUrl(env).ok,
+    );
   }
   return false;
 }
