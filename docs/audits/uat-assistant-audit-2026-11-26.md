@@ -72,3 +72,30 @@ The **MindMosaic AI UAT Assistant** was reviewed against MindMosaic's standing a
 - **Follow-up after PR #165 merges:** swap `uat-entitlement.ts` for the shared `loadAdminGrants`/`resolveEntitledRoles` helpers (semantics identical; covered by the same cases).
 - Clearing the browser's IndexedDB remains the only way to remove saved defects; End deliberately does not.
 
+### 5.3 Defects found while verifying (all fixed)
+
+| Defect | Found by | Fix |
+|---|---|---|
+| Edits to a screenshot (marks, undo, redaction) each rendered from a stale render closure, so a slow mark render could in principle overwrite a later redaction with an image that still held the unredacted pixels. | Code review of the redaction path while diagnosing the first hosted failure. | All edits now run through one serial queue over a single in-memory work record (`ScreenshotAnnotator`). Regression: Playwright draws a highlight and immediately a redaction, then asserts the stored and exported pixels are black. |
+| `/dev/uat` linked to `/staff/mfa`, a route that only exists once PR #165 lands (dead link; failed the navigation-graph test in CI `core`). | CI `core` on `2d3ae466`. | Replaced with a plain "Admin MFA required" notice. |
+| Hosted/local tests drew on a canvas below the fold and seeded IndexedDB before the app created it. | Hosted run 1, local run 5. | Tests scroll the canvas into view and wait for the app-created database. (Test-only; no product change.) |
+
+### 5.4 Execution evidence (head `63a8ee49`)
+
+| Check | Result |
+|---|---|
+| Typecheck, ESLint (changed areas), `check:bundle` | clean; all routes within budget |
+| Unit: new `uat-assistant-session-security.test.ts` | 26/26 |
+| Unit: UAT core/routes/UI + security-headers + app-header + navigation-graph | all pass |
+| CI `core` (full vitest suite), `rls`, `scholarship-drafts`, `e2e-auth` (incl. revocation + End-session specs), Vercel | pass on `63a8ee49` |
+| CI `e2e` | first attempt failed in 20 s at `npx playwright install` (runner infrastructure, before any test ran); re-run recorded in the PR |
+| Local Playwright `e2e/uat-assistant.spec.ts` (6 tests: production hard-block, full workflow with axe + 375 px overflow, **pixel-level redaction**, legacy scrub, End session) | pass (one earlier run flaked on the IndexedDB seeding race, fixed) |
+| Hosted DEV Preview `mindmosaic-exam-engine-8r93up6d3-…vercel.app` (`e2e/hosted/uat-assistant-hosted.spec.ts`, 4 tests) | 4/4 pass: admin access + enforced Admin CSP with zero app violations; element selection, voice dictation (stubbed engine), screenshot + permanent redaction (stored and exported pixels black, 0 recoverable blue pixels), annotation, reload persistence, Markdown/JSON export, GitHub confirmation gate (no issue created), cross-portal cookie, **revocation clears the cookie on the next load**, **End session off until explicit restart (API 403)**, axe on report dialog, dashboard and end dialog |
+| Real AI rewriting on the Preview | **BLOCKED.** The Vercel project has no `QF_AI_PROVIDER` or provider key; `/api/uat/session` reports `aiConfigured:false`. The route is verified with mocked provider responses (unit) and the documented local fallback was exercised on the Preview, but a real provider round trip has not been observed. Needs owner approval to add Preview-scoped variables. |
+| GitHub issue creation | Not exercised against GitHub (no `MM_UAT_GITHUB_TOKEN` on the Preview, and creating issues was out of scope). The confirmation gate and Markdown fallback were verified. |
+| Vercel Preview toolbar | One `frame-src https://vercel.live` CSP report per admin page on Preview deployments only; injected by Vercel, not by the app. Excluded from the zero-violation assertion and counted in the evidence. |
+
+### 5.5 Test accounts left on DEV (nothing deleted)
+
+The hosted runs created 2 fixture accounts per run (an admin and a parent, `mm-accept-<run>-uat-admin|parent@example.com`), five runs in total. No record was deleted; the fixture admins were demoted to the parent role and any temporary access revocation was lifted. They belong in the existing synthetic-account cleanup plan.
+
