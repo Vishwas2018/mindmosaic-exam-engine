@@ -1,3 +1,4 @@
+import { sanitizeIssueRecord } from "../utils/screenshot-sanitize";
 import {
   mergeImportedIssues,
   type UatDraftState,
@@ -109,6 +110,29 @@ function runTx<T>(
   );
 }
 
+/**
+ * One-time upgrade of records saved by older builds: removes any retained UNREDACTED source frame (rawDataUrl) and
+ * writes the cleaned record back, so nothing recoverable stays in IndexedDB after the first read.
+ */
+async function scrubStoredIssues(items: UatIssue[]): Promise<UatIssue[]> {
+  const cleaned: UatIssue[] = [];
+  const toRewrite: UatIssue[] = [];
+  for (const item of items) {
+    const result = sanitizeIssueRecord(item);
+    cleaned.push(result.value);
+    if (result.changed) toRewrite.push(result.value);
+  }
+  for (const item of toRewrite) {
+    memoryIssues.set(item.id, item);
+    try {
+      await runTx(STORE_ISSUES, "readwrite", (store) => store.put(item));
+    } catch {
+      // Best effort: the sanitized copy is what callers receive either way.
+    }
+  }
+  return cleaned;
+}
+
 export async function listUatIssues(): Promise<UatIssue[]> {
   if (!isIndexedDbSupported()) {
     return Array.from(memoryIssues.values()).sort(
@@ -116,7 +140,8 @@ export async function listUatIssues(): Promise<UatIssue[]> {
     );
   }
   try {
-    const items = await runTx<UatIssue[]>(STORE_ISSUES, "readonly", (store) => store.getAll());
+    const stored = await runTx<UatIssue[]>(STORE_ISSUES, "readonly", (store) => store.getAll());
+    const items = await scrubStoredIssues(stored);
     return [...items].sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
   } catch {
     return Array.from(memoryIssues.values()).sort(
@@ -131,7 +156,7 @@ export async function getUatIssue(id: string): Promise<UatIssue | null> {
   }
   try {
     const found = await runTx<UatIssue | undefined>(STORE_ISSUES, "readonly", (store) => store.get(id));
-    return found ?? null;
+    return found ? sanitizeIssueRecord(found).value : null;
   } catch {
     return memoryIssues.get(id) ?? null;
   }
@@ -199,7 +224,17 @@ export async function getUatDraft(): Promise<UatDraftState | null> {
     const draft = await runTx<UatDraftState | undefined>(STORE_DRAFTS, "readonly", (store) =>
       store.get("active-draft"),
     );
-    return draft ?? null;
+    if (!draft) return null;
+    const result = sanitizeIssueRecord(draft);
+    if (result.changed) {
+      memoryDraft = result.value;
+      try {
+        await runTx(STORE_DRAFTS, "readwrite", (store) => store.put(result.value));
+      } catch {
+        // Best effort.
+      }
+    }
+    return result.value;
   } catch {
     return memoryDraft;
   }

@@ -9,6 +9,58 @@ import { isSensitiveDomElement, redactSensitiveText } from "../utils/redaction";
 
 const MAX_DIMENSION = 1440;
 
+/**
+ * A captured frame. `capture` is the ONLY thing that may be persisted/exported/sent anywhere. `baseDataUrl` is the
+ * in-memory working image (redactions already burned in, non-redaction marks NOT yet drawn) used so marks can be
+ * undone during the current editing session; the caller must keep it in component memory only.
+ */
+export interface CapturedFrame {
+  readonly capture: UatScreenshotCapture;
+  readonly baseDataUrl: string;
+}
+
+function loadImage(dataUrl: string): Promise<HTMLImageElement> {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const element = new Image();
+    element.onload = () => resolve(element);
+    element.onerror = () => reject(new Error("Could not load screenshot image."));
+    element.src = dataUrl;
+  });
+}
+
+/**
+ * Irreversibly burns one redaction mask into the pixels of `baseDataUrl` and returns the new opaque PNG. The mask is
+ * fully opaque, grown by 2px on every side to cover anti-aliased glyph edges, and the result is re-encoded, so the
+ * covered pixels cannot be recovered from the returned data (the previous image is not kept by this module).
+ */
+export async function burnRedaction(
+  baseDataUrl: string,
+  width: number,
+  height: number,
+  shape: UatAnnotationShape,
+): Promise<string> {
+  const img = await loadImage(baseDataUrl);
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas unavailable: redaction was not applied.");
+  ctx.drawImage(img, 0, 0, width, height);
+
+  const start = shape.points[0]!;
+  const end = shape.points[shape.points.length - 1]!;
+  const pad = 2;
+  const x = Math.max(0, Math.min(start.x, end.x) * width - pad);
+  const y = Math.max(0, Math.min(start.y, end.y) * height - pad);
+  const w = Math.min(width - x, Math.abs(end.x - start.x) * width + pad * 2);
+  const h = Math.min(height - y, Math.abs(end.y - start.y) * height + pad * 2);
+  ctx.globalCompositeOperation = "source-over";
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(x, y, Math.max(6, w), Math.max(6, h));
+  return canvas.toDataURL("image/png");
+}
+
 function clampDimensions(width: number, height: number): { width: number; height: number } {
   if (width <= MAX_DIMENSION && height <= MAX_DIMENSION) {
     return { width: Math.max(1, Math.round(width)), height: Math.max(1, Math.round(height)) };
@@ -24,19 +76,15 @@ function clampDimensions(width: number, height: number): { width: number; height
  * Draws annotations onto a base screenshot data URL and produces the merged PNG data URL.
  */
 export async function renderAnnotatedScreenshot(
-  rawDataUrl: string,
+  rawDataUrl: string, // the in-memory base image (redactions already burned in); never persisted
+
   width: number,
   height: number,
   annotations: readonly UatAnnotationShape[],
 ): Promise<string> {
   if (annotations.length === 0) return rawDataUrl;
 
-  const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-    const element = new Image();
-    element.onload = () => resolve(element);
-    element.onerror = () => reject(new Error("Could not load base screenshot image."));
-    element.src = rawDataUrl;
-  });
+  const img = await loadImage(rawDataUrl);
 
   const canvas = document.createElement("canvas");
   canvas.width = width;
@@ -124,7 +172,7 @@ export function drawAnnotationsOnContext(
  */
 export function captureDomLayoutSnapshot(
   highlightBox?: UatBoundingBox,
-): UatScreenshotCapture {
+): CapturedFrame {
   const vw = Math.max(320, window.innerWidth || 1280);
   const vh = Math.max(240, window.innerHeight || 800);
   const { width, height } = clampDimensions(vw, vh);
@@ -241,13 +289,16 @@ export function captureDomLayoutSnapshot(
   const annotatedDataUrl = initialAnnotations.length > 0 ? canvas.toDataURL("image/png") : rawDataUrl;
 
   return {
-    rawDataUrl,
-    annotatedDataUrl,
-    width,
-    height,
-    capturedAt: new Date().toISOString(),
-    source: "snapshot",
-    annotations: initialAnnotations,
+    baseDataUrl: rawDataUrl,
+    capture: {
+      annotatedDataUrl,
+      width,
+      height,
+      capturedAt: new Date().toISOString(),
+      source: "snapshot",
+      annotations: initialAnnotations,
+      redactionCount: 0,
+    },
   };
 }
 
@@ -255,7 +306,7 @@ export function captureDomLayoutSnapshot(
  * Captures a real pixel frame of the current browser tab via Screen Capture API
  * (`getDisplayMedia`), temporarily hiding UAT modals during the single frame grab.
  */
-export async function captureBrowserTabScreenshot(): Promise<UatScreenshotCapture> {
+export async function captureBrowserTabScreenshot(): Promise<CapturedFrame> {
   if (
     typeof navigator === "undefined" ||
     !navigator.mediaDevices ||
@@ -294,13 +345,16 @@ export async function captureBrowserTabScreenshot(): Promise<UatScreenshotCaptur
 
     const rawDataUrl = canvas.toDataURL("image/png");
     return {
-      rawDataUrl,
-      annotatedDataUrl: rawDataUrl,
-      width,
-      height,
-      capturedAt: new Date().toISOString(),
-      source: "tab",
-      annotations: [],
+      baseDataUrl: rawDataUrl,
+      capture: {
+        annotatedDataUrl: rawDataUrl,
+        width,
+        height,
+        capturedAt: new Date().toISOString(),
+        source: "tab",
+        annotations: [],
+        redactionCount: 0,
+      },
     };
   } finally {
     stream?.getTracks().forEach((track) => track.stop());
@@ -316,7 +370,7 @@ export async function captureBrowserTabScreenshot(): Promise<UatScreenshotCaptur
 export async function readImageFileAsScreenshot(
   file: File,
   source: "upload" | "clipboard" = "upload",
-): Promise<UatScreenshotCapture> {
+): Promise<CapturedFrame> {
   if (!/^image\/(png|jpeg|webp)$/i.test(file.type)) {
     throw new Error("Choose a PNG, JPEG, or WebP image.");
   }
@@ -348,12 +402,15 @@ export async function readImageFileAsScreenshot(
 
   const rawDataUrl = canvas.toDataURL("image/png");
   return {
-    rawDataUrl,
-    annotatedDataUrl: rawDataUrl,
-    width,
-    height,
-    capturedAt: new Date().toISOString(),
-    source,
-    annotations: [],
+    baseDataUrl: rawDataUrl,
+    capture: {
+      annotatedDataUrl: rawDataUrl,
+      width,
+      height,
+      capturedAt: new Date().toISOString(),
+      source,
+      annotations: [],
+      redactionCount: 0,
+    },
   };
 }

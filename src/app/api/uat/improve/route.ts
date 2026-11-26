@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { checkOrigin } from "@/features/auth/require-origin";
 import { improveDefectWithAi } from "@/features/uat-assistant/server/ai-improver";
-import { verifyUatTesterAccess } from "@/features/uat-assistant/server/uat-access";
+import { clearTesterBadgeCookie, verifyUatTesterAccess } from "@/features/uat-assistant/server/uat-access";
 import { uatImproveRequestSchema } from "@/features/uat-assistant/types";
 import { consumeRateLimit } from "@/lib/security/rate-limit";
 
@@ -14,7 +14,9 @@ export async function POST(request: Request) {
 
   const access = await verifyUatTesterAccess(request);
   if (!access.enabled) {
-    return NextResponse.json({ error: "uat_unavailable" }, { status: access.status, headers: NO_STORE });
+    const denied = NextResponse.json({ error: "uat_unavailable" }, { status: access.status, headers: NO_STORE });
+    if (access.clearCredentials) clearTesterBadgeCookie(denied);
+    return denied;
   }
 
   const rate = await consumeRateLimit(

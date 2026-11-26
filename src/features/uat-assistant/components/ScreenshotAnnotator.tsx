@@ -24,9 +24,11 @@ import type {
   UatScreenshotCapture,
 } from "../types";
 import {
+  burnRedaction,
   captureBrowserTabScreenshot,
   captureDomLayoutSnapshot,
   drawAnnotationsOnContext,
+  type CapturedFrame,
   readImageFileAsScreenshot,
   renderAnnotatedScreenshot,
 } from "./snapshot-capture";
@@ -46,7 +48,7 @@ const TOOL_CONFIG: readonly {
   { kind: "rect", label: "Highlight box", icon: Square, color: "#cc2429" },
   { kind: "arrow", label: "Arrow", icon: ArrowUpRight, color: "#5925a8" },
   { kind: "pen", label: "Freehand", icon: PenTool, color: "#cc2429" },
-  { kind: "redact", label: "Redact mask", icon: EyeOff, color: "#18151f" },
+  { kind: "redact", label: "Redact mask (permanent)", icon: EyeOff, color: "#000000" },
 ];
 
 export function ScreenshotAnnotator({
@@ -57,6 +59,14 @@ export function ScreenshotAnnotator({
   const fileInputId = useId();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const baseImageRef = useRef<HTMLImageElement | null>(null);
+  /**
+   * In-memory working image: redactions are burned into these pixels the moment a redact box is drawn. It lives only
+   * in this component (never in props/state that is persisted), so the unredacted frame is dropped on every redaction.
+   */
+  const baseUrlRef = useRef<string | null>(null);
+  /** Marks already flattened into baseUrlRef (a restored draft), so they are not drawn twice. */
+  const bakedRef = useRef<readonly UatAnnotationShape[]>([]);
+  const [baseVersion, setBaseVersion] = useState(0);
 
   const [activeTool, setActiveTool] = useState<UatAnnotationKind>("rect");
   const [draftShape, setDraftShape] = useState<UatAnnotationShape | null>(null);
@@ -71,7 +81,8 @@ export function ScreenshotAnnotator({
       if (!ctx) return;
       ctx.clearRect(0, 0, screenshot.width, screenshot.height);
       ctx.drawImage(img, 0, 0, screenshot.width, screenshot.height);
-      const all = current ? [...shapes, current] : shapes;
+      const live = shapes.slice(bakedRef.current.length);
+      const all = current ? [...live, current] : live;
       drawAnnotationsOnContext(ctx, screenshot.width, screenshot.height, all);
     },
     [screenshot],
@@ -80,7 +91,14 @@ export function ScreenshotAnnotator({
   useEffect(() => {
     if (!screenshot) {
       baseImageRef.current = null;
+      baseUrlRef.current = null;
+      bakedRef.current = [];
       return;
+    }
+    if (!baseUrlRef.current) {
+      // Restored from a saved draft: the stored image is already flattened (and already redacted).
+      baseUrlRef.current = screenshot.annotatedDataUrl;
+      bakedRef.current = screenshot.annotations;
     }
     let cancelled = false;
     const img = new Image();
@@ -89,29 +107,63 @@ export function ScreenshotAnnotator({
       baseImageRef.current = img;
       redrawCanvas(img, screenshot.annotations, null);
     };
-    img.src = screenshot.rawDataUrl;
+    img.src = baseUrlRef.current;
     return () => {
       cancelled = true;
     };
-  }, [screenshot, redrawCanvas]);
+    // baseVersion: reload the working image after a redaction replaced it.
+  }, [screenshot, redrawCanvas, baseVersion]);
 
-  const commitAnnotations = useCallback(
-    async (nextAnnotations: UatAnnotationShape[]) => {
-      if (!screenshot) return;
+  /** Starts a fresh in-memory working copy for a newly captured or uploaded frame. */
+  const adoptFrame = useCallback(
+    (frame: CapturedFrame) => {
+      baseUrlRef.current = frame.baseDataUrl;
+      bakedRef.current = [];
+      setBaseVersion((v) => v + 1);
+      onChange(frame.capture);
+    },
+    [onChange],
+  );
+
+  const commitMarks = useCallback(
+    async (nextMarks: UatAnnotationShape[]) => {
+      if (!screenshot || !baseUrlRef.current) return;
       try {
         const mergedUrl = await renderAnnotatedScreenshot(
-          screenshot.rawDataUrl,
+          baseUrlRef.current,
           screenshot.width,
           screenshot.height,
-          nextAnnotations,
+          nextMarks,
         );
         onChange({
           ...screenshot,
-          annotations: nextAnnotations,
+          annotations: [...bakedRef.current, ...nextMarks],
           annotatedDataUrl: mergedUrl,
         });
       } catch {
         setErrorMessage("Could not apply annotation to screenshot.");
+      }
+    },
+    [screenshot, onChange],
+  );
+
+  /** Redaction is destructive on purpose: pixels are overwritten now and the previous frame is discarded. */
+  const commitRedaction = useCallback(
+    async (shape: UatAnnotationShape) => {
+      if (!screenshot || !baseUrlRef.current) return;
+      try {
+        const burned = await burnRedaction(baseUrlRef.current, screenshot.width, screenshot.height, shape);
+        baseUrlRef.current = burned;
+        setBaseVersion((v) => v + 1);
+        const marks = screenshot.annotations.slice(bakedRef.current.length);
+        const mergedUrl = await renderAnnotatedScreenshot(burned, screenshot.width, screenshot.height, marks);
+        onChange({
+          ...screenshot,
+          annotatedDataUrl: mergedUrl,
+          redactionCount: screenshot.redactionCount + 1,
+        });
+      } catch {
+        setErrorMessage("Redaction could not be applied, so the screenshot was not changed. Remove it or try again.");
       }
     },
     [screenshot, onChange],
@@ -130,8 +182,7 @@ export function ScreenshotAnnotator({
   const handleCaptureSnapshot = () => {
     setErrorMessage(null);
     try {
-      const snap = captureDomLayoutSnapshot(selectedElementBox);
-      onChange(snap);
+      adoptFrame(captureDomLayoutSnapshot(selectedElementBox));
     } catch {
       setErrorMessage("Could not capture layout snapshot.");
     }
@@ -141,8 +192,7 @@ export function ScreenshotAnnotator({
     setErrorMessage(null);
     setIsCapturing(true);
     try {
-      const captured = await captureBrowserTabScreenshot();
-      onChange(captured);
+      adoptFrame(await captureBrowserTabScreenshot());
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Screen capture was cancelled or blocked.";
       setErrorMessage(`${msg} You can also use Layout snapshot or upload an image.`);
@@ -155,8 +205,7 @@ export function ScreenshotAnnotator({
     if (!file) return;
     setErrorMessage(null);
     try {
-      const loaded = await readImageFileAsScreenshot(file, source);
-      onChange(loaded);
+      adoptFrame(await readImageFileAsScreenshot(file, source));
     } catch (err) {
       setErrorMessage(err instanceof Error ? err.message : "Could not load screenshot file.");
     }
@@ -277,8 +326,8 @@ export function ScreenshotAnnotator({
                 data-testid="uat-annotation-undo"
                 disabled={screenshot.annotations.length === 0}
                 onClick={() => {
-                  const next = screenshot.annotations.slice(0, -1);
-                  void commitAnnotations(next);
+                  const next = screenshot.annotations.slice(bakedRef.current.length, -1);
+                  void commitMarks(next);
                 }}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-mm-line bg-mm-surface px-3 py-1.5 text-xs font-semibold text-mm-ink-soft transition hover:border-mm-brand/40 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
               >
@@ -289,7 +338,7 @@ export function ScreenshotAnnotator({
                 type="button"
                 data-testid="uat-annotation-clear"
                 disabled={screenshot.annotations.length === 0}
-                onClick={() => void commitAnnotations([])}
+                onClick={() => void commitMarks([])}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-mm-line bg-mm-surface px-3 py-1.5 text-xs font-semibold text-mm-ink-soft transition hover:border-mm-brand/40 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mm-brand"
               >
                 <Eraser aria-hidden="true" className="h-3.5 w-3.5" />
@@ -342,7 +391,11 @@ export function ScreenshotAnnotator({
                 if (!draftShape) return;
                 const finalized = draftShape;
                 setDraftShape(null);
-                void commitAnnotations([...screenshot.annotations, finalized]);
+                if (finalized.kind === "redact") {
+                  void commitRedaction(finalized);
+                } else {
+                  void commitMarks([...screenshot.annotations.slice(bakedRef.current.length), finalized]);
+                }
               }}
               onPointerCancel={() => {
                 setDraftShape(null);
@@ -351,8 +404,11 @@ export function ScreenshotAnnotator({
             />
           </div>
           <p className="text-xs text-mm-muted tabular-nums">
-            {screenshot.width}×{screenshot.height}px · {screenshot.annotations.length} annotation(s) · Use{" "}
-            <strong className="font-semibold text-mm-ink-soft">Redact mask</strong> to cover any sensitive on-screen text.
+            {screenshot.width}×{screenshot.height}px · {screenshot.annotations.length} annotation(s) ·{" "}
+            {screenshot.redactionCount} redaction(s) · Use{" "}
+            <strong className="font-semibold text-mm-ink-soft">Redact mask</strong> to cover sensitive on-screen text.{" "}
+            Redaction is permanent: the covered pixels are overwritten and cannot be undone or recovered from saved
+            exports.
           </p>
         </div>
       )}

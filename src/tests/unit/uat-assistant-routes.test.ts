@@ -31,8 +31,8 @@ describe("UAT Assistant — HMAC tester badge token", () => {
     // Tampered signature
     expect(verifyTesterBadgeToken(`${token}x`, baseEnv, now)).toBeNull();
 
-    // Expired after 12h + 1s
-    expect(verifyTesterBadgeToken(token, baseEnv, now + 12 * 3600 * 1000 + 2000)).toBeNull();
+    // Expired after the 4h TTL
+    expect(verifyTesterBadgeToken(token, baseEnv, now + 4 * 3600 * 1000 + 2000)).toBeNull();
 
     // Different Supabase project binding
     expect(

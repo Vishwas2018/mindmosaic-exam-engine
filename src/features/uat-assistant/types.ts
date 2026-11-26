@@ -70,12 +70,11 @@ export const uatAnnotationShapeSchema = z.object({
 export type UatAnnotationShape = z.infer<typeof uatAnnotationShapeSchema>;
 
 export const uatScreenshotSchema = z.object({
-  rawDataUrl: z
-    .string()
-    .max(6_000_000)
-    .refine((val) => /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(val), {
-      message: "Screenshot must be a valid base64 PNG, JPEG, or WebP data URL.",
-    }),
+  /**
+   * The ONLY retained image: already flattened, with every redaction burned into the pixels. The unredacted source frame
+   * is never part of this object, so it cannot reach IndexedDB, JSON exports, drafts or GitHub. (A legacy `rawDataUrl`
+   * key in old exports/records is dropped by this schema and by the storage scrubber.)
+   */
   annotatedDataUrl: z
     .string()
     .max(6_000_000)
@@ -87,6 +86,8 @@ export const uatScreenshotSchema = z.object({
   capturedAt: z.string().max(64),
   source: z.enum(["tab", "snapshot", "upload", "clipboard"]),
   annotations: z.array(uatAnnotationShapeSchema).max(200),
+  /** How many redaction masks were burned into the image (the masks themselves are not kept as editable shapes). */
+  redactionCount: z.number().int().min(0).max(200).default(0),
 });
 export type UatScreenshotCapture = z.infer<typeof uatScreenshotSchema>;
 

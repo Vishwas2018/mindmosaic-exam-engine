@@ -11,6 +11,7 @@ import {
   type UatIssueCategory,
   type UatIssueSeverity,
 } from "../types";
+import { sanitizeIssueRecord } from "./screenshot-sanitize";
 import { redactSensitiveText, sanitizeUrlForReport } from "./redaction";
 
 /**
@@ -212,7 +213,9 @@ export function serializeExportBundle(
   options: { includeScreenshots?: boolean } = {},
 ): string {
   const includeScreenshots = options.includeScreenshots ?? true;
-  const sanitizedIssues: UatIssue[] = issues.map((issue) => ({
+  const sanitizedIssues: UatIssue[] = issues.map((rawIssue) => {
+    const issue = sanitizeIssueRecord(rawIssue).value;
+    return {
     ...issue,
     title: redactSensitiveText(issue.title),
     originalNotes: redactSensitiveText(issue.originalNotes),
@@ -232,7 +235,8 @@ export function serializeExportBundle(
         }
       : null,
     screenshot: includeScreenshots ? issue.screenshot : null,
-  }));
+    };
+  });
 
   const bundle: UatExportBundle = {
     schemaVersion: 1,
@@ -261,6 +265,12 @@ export function parseImportBundle(rawJson: string): ParseImportOutcome {
       ok: false,
       message: "The selected file is not valid JSON. Choose a MindMosaic UAT export (.json) file and try again.",
     };
+  }
+
+  // Older exports carried the unredacted source frame (rawDataUrl): drop it before validation, never import it.
+  if (parsed && typeof parsed === "object" && Array.isArray((parsed as { issues?: unknown }).issues)) {
+    const bundle = parsed as { issues: unknown[] };
+    parsed = { ...bundle, issues: bundle.issues.map((item) => sanitizeIssueRecord(item).value) };
   }
 
   const validation = uatExportBundleSchema.safeParse(parsed);

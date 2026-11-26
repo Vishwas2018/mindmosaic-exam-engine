@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 import { Badge } from "@/components/ui/Badge";
+import { StartUatSessionPanel } from "@/features/uat-assistant/components/StartUatSessionPanel";
 import { DefectDashboard } from "@/features/uat-assistant/components/DefectDashboard";
 import { isUatAssistantEnvironmentAllowed } from "@/features/uat-assistant/flags";
 import { verifyUatTesterAccess } from "@/features/uat-assistant/server/uat-access";
@@ -22,6 +23,16 @@ export default async function DevUatDashboardPage() {
   const access = await verifyUatTesterAccess();
   if (!access.enabled) {
     if (access.status === 404) notFound();
+    if (access.reason === "session_ended") {
+      return (
+        <main id="main-content" className="min-h-dvh bg-mm-page px-4 py-8 font-[family-name:var(--font-geist)] text-mm-ink sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[720px]">
+            <StartUatSessionPanel />
+          </div>
+        </main>
+      );
+    }
+    if (access.reason === "admin_mfa_required") redirect("/staff/mfa?next=%2Fdev%2Fuat");
     redirect("/sign-in?next=%2Fdev%2Fuat");
   }
 

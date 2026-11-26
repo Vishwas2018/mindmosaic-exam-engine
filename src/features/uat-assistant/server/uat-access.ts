@@ -1,6 +1,6 @@
 import "server-only";
 
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 import { cookies, headers } from "next/headers";
 import type { NextResponse } from "next/server";
 
@@ -9,10 +9,19 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
 import { isUatAssistantEnvironmentAllowed, uatAssistantAvailability } from "../flags";
+import {
+  checkUatAdminMfa,
+  createUatServiceClient,
+  loadUatGrants,
+  resolveUatAdminStanding,
+  revalidateTesterSubject,
+} from "./uat-entitlement";
 
 export const UAT_TESTER_COOKIE_NAME = "mm_uat_tester";
 export const UAT_TESTER_HINT_COOKIE_NAME = "mm_uat_hint";
-const COOKIE_TTL_SECONDS = 12 * 60 * 60; // 12 hours
+/** Set by "End UAT session": the assistant stays off in this browser until the tester explicitly starts a new session. */
+export const UAT_SESSION_ENDED_COOKIE_NAME = "mm_uat_ended";
+export const COOKIE_TTL_SECONDS = 4 * 60 * 60; // 4 hours (was 12): a tester session is a working shift, not a day.
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -33,6 +42,8 @@ export type UatAccessDecision =
       readonly enabled: false;
       readonly status: 403 | 404;
       readonly reason: string;
+      /** True when the browser's tester credential must be discarded (revoked, MFA lapsed, ...). */
+      readonly clearCredentials?: boolean;
     };
 
 type EnvMap = Readonly<Record<string, string | undefined>>;
@@ -79,6 +90,14 @@ interface TesterBadgePayload {
   readonly sub: string;
   readonly bind: string;
   readonly exp: number;
+  /** Random per-session id (audit/traceability; also makes every minted cookie distinct). */
+  readonly sid: string;
+  /** Rotating MM_UAT_SESSION_EPOCH lets an owner invalidate every outstanding tester cookie at once. */
+  readonly epoch: string;
+}
+
+function currentEpoch(env: EnvMap): string {
+  return env.MM_UAT_SESSION_EPOCH?.trim() || "0";
 }
 
 export function signTesterBadgeToken(
@@ -92,6 +111,8 @@ export function signTesterBadgeToken(
     sub: subject,
     bind: resolveSupabaseBinding(env),
     exp: Math.floor(nowMs / 1000) + COOKIE_TTL_SECONDS,
+    sid: randomUUID(),
+    epoch: currentEpoch(env),
   };
   const encoded = Buffer.from(JSON.stringify(payload), "utf8").toString("base64url");
   const sig = createHmac("sha256", secret).update(encoded).digest("base64url");
@@ -122,7 +143,9 @@ export function verifyTesterBadgeToken(
     if (typeof parsed.sub !== "string" || !parsed.sub) return null;
     if (typeof parsed.bind !== "string" || parsed.bind !== resolveSupabaseBinding(env)) return null;
     if (typeof parsed.exp !== "number" || parsed.exp <= Math.floor(nowMs / 1000)) return null;
-    return { sub: parsed.sub, bind: parsed.bind, exp: parsed.exp };
+    if (typeof parsed.sid !== "string" || !parsed.sid) return null;
+    if (parsed.epoch !== currentEpoch(env)) return null;
+    return { sub: parsed.sub, bind: parsed.bind, exp: parsed.exp, sid: parsed.sid, epoch: parsed.epoch };
   } catch {
     return null;
   }
@@ -156,16 +179,23 @@ async function isLoopbackRequest(request?: Request): Promise<boolean> {
   }
 }
 
+export interface VerifyOptions {
+  /** Used only by the explicit "Start UAT session" action, which must work while the ended marker is present. */
+  readonly ignoreEnded?: boolean;
+}
+
 /**
- * Verifies both that the deployment environment allows the UAT assistant and
- * that the current requester is an authorised admin or allowlisted tester (or
- * holds a valid server-signed tester session cookie minted after signing in as
- * an admin/tester in this browser, enabling seamless cross-portal testing across
- * Admin, Parent, and Student accounts).
+ * Verifies both that the deployment environment allows the UAT assistant and that the requester may use it:
+ *   1. an administrator by the multi-role entitlement model (active admin grant; MFA honoured), or
+ *   2. an explicitly allowlisted tester, or
+ *   3. holder of a server-signed tester cookie whose minting subject is RE-VALIDATED on every request.
+ * It never bypasses Admin MFA: an account with an admin entitlement that lacks the required aal2 level is refused
+ * outright, even if it is also allowlisted or holds a cookie. Lookup failures fail closed.
  */
 export async function verifyUatTesterAccess(
   request?: Request,
   env: EnvMap = process.env,
+  options: VerifyOptions = {},
 ): Promise<UatAccessDecision> {
   const availability = uatAssistantAvailability(env);
   if (!availability.allowed) {
@@ -175,6 +205,16 @@ export async function verifyUatTesterAccess(
   const githubConfigured = Boolean(env.MM_UAT_GITHUB_TOKEN?.trim());
   const githubRepo = resolveConfiguredGitHubRepo(env);
   const aiConfigured = isAiProviderConfiguredForUat(env);
+
+  let jar: Awaited<ReturnType<typeof cookies>> | null = null;
+  try {
+    jar = await cookies();
+  } catch {
+    jar = null;
+  }
+  if (!options.ignoreEnded && jar?.get(UAT_SESSION_ENDED_COOKIE_NAME)?.value === "1") {
+    return { enabled: false, status: 403, reason: "session_ended" };
+  }
 
   // Unconfigured-Supabase local preview harness on loopback only.
   if (!isSupabaseConfigured) {
@@ -197,6 +237,8 @@ export async function verifyUatTesterAccess(
   let userId: string | null = null;
   let userEmail: string | null = null;
   let accessRevoked = false;
+  let standing: ReturnType<typeof resolveUatAdminStanding> = { kind: "not_admin" };
+  let mfaOutcome: "ok" | "step_up" | "deny" = "ok";
 
   try {
     const supabase = await createClient();
@@ -217,17 +259,31 @@ export async function verifyUatTesterAccess(
       if (!accessRevoked && isProfileRole(profile?.role)) {
         activeRole = profile.role;
       }
+      const grants = await loadUatGrants(supabase, user.id);
+      standing = resolveUatAdminStanding(profile?.role, grants, accessRevoked);
+      if (standing.kind === "admin" && standing.mfaApplies) {
+        mfaOutcome = await checkUatAdminMfa(supabase);
+      }
     }
   } catch {
-    // Continue to check signed tester cookie if transient auth lookup fails.
+    // Could not establish who this is: nothing below grants admin from an unknown state.
+    if (userId) standing = { kind: "unknown" };
   }
 
   if (accessRevoked) {
-    return { enabled: false, status: 403, reason: "access_revoked" };
+    return { enabled: false, status: 403, reason: "access_revoked", clearCredentials: true };
+  }
+  // Fail closed: a signed-in account whose entitlement could not be read gets nothing, not even via allowlist/cookie.
+  if (userId && standing.kind === "unknown") {
+    return { enabled: false, status: 403, reason: "entitlement_lookup_failed" };
+  }
+  // Admin MFA is never bypassed: an admin without aal2 gets no UAT access by any path (and any old cookie is dropped).
+  if (userId && standing.kind === "admin" && mfaOutcome !== "ok") {
+    return { enabled: false, status: 403, reason: "admin_mfa_required", clearCredentials: true };
   }
 
-  // 1. Direct admin role verification.
-  if (userId && activeRole === "admin") {
+  // 1. Active administrator (entitlement + MFA already enforced above).
+  if (userId && standing.kind === "admin") {
     return {
       enabled: true,
       activeRole,
@@ -241,7 +297,9 @@ export async function verifyUatTesterAccess(
   }
 
   // 2. Explicit tester allowlist (user ID or email).
-  if (userId && (parseAllowlistIds(env).has(userId) || (userEmail && parseAllowlistEmails(env).has(userEmail)))) {
+  const allowIds = parseAllowlistIds(env);
+  const allowEmails = parseAllowlistEmails(env);
+  if (userId && (allowIds.has(userId) || (userEmail && allowEmails.has(userEmail)))) {
     return {
       enabled: true,
       activeRole,
@@ -254,17 +312,26 @@ export async function verifyUatTesterAccess(
     };
   }
 
-  // 3. Cross-portal signed tester cookie (minted when an admin/tester signed in earlier in this browser).
-  let badgeCookie: string | undefined;
-  try {
-    const jar = await cookies();
-    badgeCookie = jar.get(UAT_TESTER_COOKIE_NAME)?.value;
-  } catch {
-    badgeCookie = undefined;
-  }
-
-  const verifiedBadge = verifyTesterBadgeToken(badgeCookie, env);
+  // 3. Cross-portal signed tester cookie (lets an admin/tester switch into Student/Parent test accounts).
+  const verifiedBadge = verifyTesterBadgeToken(jar?.get(UAT_TESTER_COOKIE_NAME)?.value, env);
   if (verifiedBadge) {
+    // The cookie alone is never enough: its minting subject must still be entitled right now.
+    const service = createUatServiceClient(env);
+    if (!service) {
+      return { enabled: false, status: 403, reason: "revalidation_unavailable" };
+    }
+    const outcome = await revalidateTesterSubject(service, verifiedBadge.sub, {
+      ids: allowIds,
+      emails: allowEmails,
+    });
+    if (!outcome.ok) {
+      return {
+        enabled: false,
+        status: 403,
+        reason: outcome.reason === "lookup_failed" ? "entitlement_lookup_failed" : "tester_revoked",
+        clearCredentials: outcome.reason !== "lookup_failed",
+      };
+    }
     return {
       enabled: true,
       activeRole,
@@ -280,19 +347,23 @@ export async function verifyUatTesterAccess(
   return { enabled: false, status: 403, reason: "tester_role_required" };
 }
 
+function cookieSecurity(env: EnvMap): { secure: boolean } {
+  return { secure: Boolean(env.VERCEL_ENV) };
+}
+
 export function attachTesterBadgeCookie(
   response: NextResponse,
   subject: string,
   env: EnvMap = process.env,
 ): void {
   if (!isUatAssistantEnvironmentAllowed(env)) return;
-  const isHostedHttps = Boolean(env.VERCEL_ENV);
+  const { secure } = cookieSecurity(env);
   const token = signTesterBadgeToken(subject, env);
   if (token) {
     response.cookies.set(UAT_TESTER_COOKIE_NAME, token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: isHostedHttps,
+      secure,
       path: "/",
       maxAge: COOKIE_TTL_SECONDS,
     });
@@ -301,23 +372,41 @@ export function attachTesterBadgeCookie(
   response.cookies.set(UAT_TESTER_HINT_COOKIE_NAME, "1", {
     httpOnly: false,
     sameSite: "lax",
-    secure: isHostedHttps,
+    secure,
     path: "/",
     maxAge: COOKIE_TTL_SECONDS,
   });
-}
-
-export function clearTesterBadgeCookie(response: NextResponse): void {
-  response.cookies.set(UAT_TESTER_COOKIE_NAME, "", {
+  // A fresh, explicit start supersedes an earlier "ended" marker.
+  response.cookies.set(UAT_SESSION_ENDED_COOKIE_NAME, "", {
     httpOnly: true,
     sameSite: "lax",
+    secure,
     path: "/",
     maxAge: 0,
   });
+}
+
+/** Drops the tester credential. With `ended`, also leaves a marker so the assistant stays off until explicitly restarted. */
+export function clearTesterBadgeCookie(
+  response: NextResponse,
+  options: { ended?: boolean; env?: EnvMap } = {},
+): void {
+  const { secure } = cookieSecurity(options.env ?? process.env);
+  response.cookies.set(UAT_TESTER_COOKIE_NAME, "", { httpOnly: true, sameSite: "lax", secure, path: "/", maxAge: 0 });
   response.cookies.set(UAT_TESTER_HINT_COOKIE_NAME, "", {
     httpOnly: false,
     sameSite: "lax",
+    secure,
     path: "/",
     maxAge: 0,
   });
+  if (options.ended) {
+    response.cookies.set(UAT_SESSION_ENDED_COOKIE_NAME, "1", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure,
+      path: "/",
+      maxAge: COOKIE_TTL_SECONDS,
+    });
+  }
 }

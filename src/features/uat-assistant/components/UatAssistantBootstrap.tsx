@@ -17,7 +17,7 @@ import type { UatSessionConfig } from "./UatAssistantShell";
 export function UatAssistantBootstrap() {
   const { user, status } = useAuth();
   const [sessionConfig, setSessionConfig] = useState<UatSessionConfig | null>(null);
-  const [ShellComponent, setShellComponent] = useState<ComponentType<{ config: UatSessionConfig }> | null>(
+  const [ShellComponent, setShellComponent] = useState<ComponentType<{ config: UatSessionConfig; onSessionEnded?: () => void }> | null>(
     null,
   );
 
@@ -76,5 +76,5 @@ export function UatAssistantBootstrap() {
   }, [userId, status]);
 
   if (!sessionConfig || !ShellComponent) return null;
-  return <ShellComponent config={sessionConfig} />;
+  return <ShellComponent config={sessionConfig} onSessionEnded={() => setSessionConfig(null)} />;
 }
