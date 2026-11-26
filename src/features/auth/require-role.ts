@@ -3,7 +3,13 @@ import "server-only";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { isProfileRole, roleHomePath, type ProfileRole } from "@/features/auth/roles";
+import {
+  isProfileRole,
+  landingForEntitled,
+  resolveEntitledRoles,
+  type AdminGrantRow,
+  type ProfileRole,
+} from "@/features/auth/roles";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -19,13 +25,48 @@ async function hadAuthCookie(): Promise<boolean> {
 
 export type RoleGateResult =
   | { configured: false }
-  | { configured: true; userId: string };
+  | {
+      configured: true;
+      userId: string;
+      /** Every workspace this login may enter (primary role plus any active admin entitlement). */
+      roles: ProfileRole[];
+    };
+
+/** Loads the signed-in user's own entitlement rows. Null = table unavailable (pre-migration database). */
+async function loadAdminGrants(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  userId: string,
+): Promise<AdminGrantRow[] | null> {
+  const { data, error } = await supabase
+    .from("user_roles")
+    .select("role, revoked_at")
+    .eq("user_id", userId);
+  if (error) return null;
+  return (data ?? []) as AdminGrantRow[];
+}
+
+/**
+ * Step-up for privileged work. When the platform switch (security_settings.require_admin_mfa) is on, an admin session
+ * must be MFA-verified (aal2). Unauthenticated-MFA sessions are sent to /staff/mfa, then back. The same switch is
+ * enforced again inside the database (is_admin()), so a stale page or a direct API call cannot bypass this.
+ */
+async function mfaStepUpPath(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  nextPath: string,
+): Promise<string | null> {
+  const { data: required, error } = await supabase.rpc("admin_mfa_required");
+  if (error || required !== true) return null;
+  const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (aal?.currentLevel === "aal2") return null;
+  return `/staff/mfa?next=${encodeURIComponent(nextPath)}`;
+}
 
 /**
  * Central auth+role gate for every /{role} route tree, run once per request
  * from each role's layout.tsx (src/app/{student,parent,teacher,admin}/layout.tsx).
- * Guests are sent to sign-in, wrong roles to their own home; a matching
- * profile role passes through untouched. RLS is the real enforcement
+ * Guests are sent to sign-in, un-entitled roles to an entitled home; an entitled
+ * role passes through untouched. Entitlement = primary profile role, plus admin
+ * only through an active user_roles grant (see resolveEntitledRoles). RLS is the real enforcement
  * (docs/DATA_MODEL_AND_ROLES.md) — this exists to route each visitor
  * somewhere sensible instead of rendering a page they can't use.
  *
@@ -84,8 +125,14 @@ export async function requireRole(
     redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
   }
 
-  const profileRole = isProfileRole(profile?.role) ? profile.role : null;
-  if (profileRole !== role) redirect(roleHomePath(profileRole));
+  const primary = isProfileRole(profile?.role) ? profile.role : null;
+  const roles = resolveEntitledRoles(primary, await loadAdminGrants(supabase, user.id));
+  if (!roles.includes(role)) redirect(landingForEntitled(roles, primary));
 
-  return { configured: true, userId: user.id };
+  if (role === "admin") {
+    const stepUp = await mfaStepUpPath(supabase, nextPath);
+    if (stepUp) redirect(stepUp);
+  }
+
+  return { configured: true, userId: user.id, roles };
 }

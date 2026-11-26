@@ -4,7 +4,7 @@ import { buildContentSecurityPolicy } from "@/lib/security/csp";
 import { updateSession } from "@/lib/supabase/middleware";
 
 // These auth pages already render per request, so Next can nonce their scripts.
-const dynamicAuthRoutes = new Set(["/sign-in", "/auth/confirm", "/auth/forgot", "/auth/reset"]);
+const dynamicAuthRoutes = new Set(["/sign-in", "/auth/confirm", "/auth/forgot", "/auth/reset", "/staff/sign-in", "/staff/mfa"]);
 
 function isNonProductionTarget(request: NextRequest): boolean {
   const { hostname } = request.nextUrl;

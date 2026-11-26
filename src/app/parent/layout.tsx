@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import { requireActiveSubscription } from "@/features/billing/require-active-subscription";
 import { requireRole } from "@/features/auth/require-role";
+import { WorkspaceSwitcher } from "@/features/auth/components/WorkspaceSwitcher";
 
 /*
  * requireRole() only calls cookies() once Supabase is configured, so a build
@@ -22,6 +23,15 @@ export default async function ParentLayout({ children }: { children: ReactNode }
   const gate = await requireRole("parent", "/parent");
   if (gate.configured) {
     await requireActiveSubscription(gate.userId, "parent");
+    // Single-role logins get exactly the children they always did; the bar only exists for dual-role logins.
+    if (gate.roles.length > 1) {
+      return (
+        <>
+          <WorkspaceSwitcher roles={gate.roles} current="parent" />
+          {children}
+        </>
+      );
+    }
   }
   return children;
 }

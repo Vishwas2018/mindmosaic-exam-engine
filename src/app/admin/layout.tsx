@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import { requireRole } from "@/features/auth/require-role";
+import { WorkspaceSwitcher } from "@/features/auth/components/WorkspaceSwitcher";
 import { isAdminPreviewEnabled } from "@/features/admin/preview-mode";
 
 /*
@@ -21,7 +22,15 @@ export const metadata: Metadata = {
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const isPreview = await isAdminPreviewEnabled();
   if (!isPreview) {
-    await requireRole("admin", "/admin");
+    const gate = await requireRole("admin", "/admin");
+    if (gate.configured && gate.roles.length > 1) {
+      return (
+        <>
+          <WorkspaceSwitcher roles={gate.roles} current="admin" />
+          {children}
+        </>
+      );
+    }
   }
   return children;
 }

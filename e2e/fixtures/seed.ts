@@ -183,6 +183,14 @@ export async function seed(): Promise<SeedResult> {
       "parent",
     );
   }
+  // The dual-role fixture gets its admin entitlement the supported way (service-role RPC, audited), not by editing
+  // profiles.role. Idempotent: re-seeding returns "already-granted".
+  const grant = await admin.rpc("grant_admin_role", {
+    p_user: parentIds["parent-admin-dual"],
+    p_actor: "e2e:seed",
+    p_reason: "e2e dual-role fixture",
+  });
+  if (grant.error) throw new Error(`Failed to grant dual-role fixture admin: ${grant.error.message}`);
 
   const studentIds = {} as Record<StudentKey, string>;
   for (const student of STUDENTS) {

@@ -5,9 +5,11 @@ vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 const mockGetUser = vi.fn();
 const mockSingle = vi.fn();
+const mockRpc = vi.fn();
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
-    auth: { getUser: mockGetUser },
+    auth: { getUser: mockGetUser, mfa: { getAuthenticatorAssuranceLevel: vi.fn(async () => ({ data: { currentLevel: "aal1" } })) } },
+    rpc: mockRpc,
     from: () => ({
       select: () => ({
         eq: () => ({
@@ -35,6 +37,8 @@ describe("admin layout auth gate", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
     mockSingle.mockReset();
+    mockRpc.mockReset();
+    mockRpc.mockResolvedValue({ data: false, error: null });
   });
 
   /*
