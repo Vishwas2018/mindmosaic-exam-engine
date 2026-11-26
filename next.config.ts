@@ -1,5 +1,14 @@
 import type { NextConfig } from "next";
 
+import { isUatAssistantEnvironmentAllowed } from "./src/features/uat-assistant/flags";
+
+// Microphone access stays `microphone=()` in production and unflagged builds;
+// same-origin `microphone=(self)` is enabled only when the DEV UAT Assistant
+// is active so voice-to-text dictation can request permission cleanly.
+const microphonePolicy = isUatAssistantEnvironmentAllowed(process.env)
+  ? "microphone=(self)"
+  : "microphone=()";
+
 // CSP is handled per-request in src/proxy.ts (needs a per-request nonce);
 // everything else that's static lives here.
 const securityHeaders = [
@@ -9,7 +18,7 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=(), usb=(), payment=(self)",
+    value: `camera=(), ${microphonePolicy}, geolocation=(), browsing-topics=(), interest-cohort=(), usb=(), payment=(self)`,
   },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];

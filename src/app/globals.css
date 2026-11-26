@@ -1150,3 +1150,12 @@
     print-color-adjust: exact;
   }
 }
+
+/* Native modal <dialog> scroll containment (prevents scroll chaining to the inert page without mutating html/body overflow). */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
