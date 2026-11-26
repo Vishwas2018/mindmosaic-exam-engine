@@ -69,7 +69,7 @@ function WeekDotsRow({ dots }: { dots: WeekDot[] }) {
     future: "upcoming",
   };
   return (
-    <ul className="flex gap-1.5" aria-label="This week's practice days">
+    <ul className="flex shrink-0 gap-1.5" aria-label="This week's practice days">
       {dots.map((dot) => (
         <li
           key={dot.dayKey}
@@ -206,10 +206,10 @@ export function EngagementView({
               </div>
               <Badge variant="orange">Best: {summary.bestStreak} days</Badge>
             </div>
-            <div className="mt-5 flex items-center justify-between gap-4">
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
               <WeekDotsRow dots={dots} />
               {!summary.practisedToday && summary.currentStreak > 0 && (
-                <p className="text-xs font-bold text-warning">
+                <p className="min-w-0 text-xs font-bold text-warning">
                   Practise today to keep your streak alive.
                 </p>
               )}

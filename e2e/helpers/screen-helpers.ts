@@ -136,14 +136,25 @@ export function createQualityMonitor(
 }
 
 export async function expectNoHorizontalOverflow(page: Page): Promise<void> {
-  const overflow = await page.evaluate(() => {
+  const result = await page.evaluate(() => {
     const htmlScrollWidth = document.documentElement.scrollWidth;
     const bodyScrollWidth = document.body ? document.body.scrollWidth : 0;
     const viewportWidth = window.innerWidth;
-    return Math.max(htmlScrollWidth, bodyScrollWidth) - viewportWidth > 1;
+    const overflow = Math.max(htmlScrollWidth, bodyScrollWidth) - viewportWidth > 1;
+    // Same pass/fail rule as before; the offenders are only collected so a failure names the element and viewport.
+    const offenders = overflow
+      ? Array.from(document.querySelectorAll("body *"))
+          .filter((el) => el.getBoundingClientRect().right - viewportWidth > 1)
+          .slice(0, 5)
+          .map((el) => `${el.tagName.toLowerCase()}.${String(el.className).slice(0, 60)} right=${Math.round(el.getBoundingClientRect().right)}`)
+      : [];
+    return { overflow, viewportWidth, scrollWidth: Math.max(htmlScrollWidth, bodyScrollWidth), offenders };
   });
 
-  expect(overflow).toBe(false);
+  expect(
+    result.overflow,
+    `horizontal overflow at ${result.viewportWidth}px (scrollWidth ${result.scrollWidth}) on ${page.url()}: ${result.offenders.join(" | ")}`,
+  ).toBe(false);
 }
 
 export async function expectWithinViewport(
