@@ -17,15 +17,24 @@ describe("resolveEntitledRoles", () => {
     expect(resolveEntitledRoles("parent", [revoked])).toEqual(["parent"]);
   });
 
-  it("keeps legacy admins working: no grant rows at all, or a database without the table", () => {
-    expect(resolveEntitledRoles("admin", [])).toEqual(["admin"]);
-    expect(resolveEntitledRoles("admin", null)).toEqual(["admin"]);
+  it("is strict once the migration is applied: a profile that merely says admin, with no grant, is not admin", () => {
+    expect(resolveEntitledRoles("admin", [])).toEqual([]);
+  });
+
+  it("keeps legacy admins working ONLY on a database that predates the entitlement table", () => {
+    expect(resolveEntitledRoles("admin", "missing")).toEqual(["admin"]);
+    expect(resolveEntitledRoles("parent", "missing")).toEqual(["parent"]);
+  });
+
+  it("fails closed on an unexpected lookup error: no admin even for a profile-admin or a granted login", () => {
+    expect(resolveEntitledRoles("admin", "error")).toEqual([]);
+    expect(resolveEntitledRoles("parent", "error")).toEqual(["parent"]);
   });
 
   it("does not turn a non-admin into an admin without a grant, and ignores unknown roles", () => {
     expect(resolveEntitledRoles("parent", [])).toEqual(["parent"]);
-    expect(resolveEntitledRoles("parent", null)).toEqual(["parent"]);
     expect(resolveEntitledRoles("student", [{ role: "superuser", revoked_at: null }])).toEqual(["student"]);
+    expect(resolveEntitledRoles("student", "missing")).toEqual(["student"]);
     expect(resolveEntitledRoles(null, [])).toEqual([]);
   });
 });

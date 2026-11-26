@@ -7,9 +7,9 @@ import {
   isProfileRole,
   landingForEntitled,
   resolveEntitledRoles,
-  type AdminGrantRow,
   type ProfileRole,
 } from "@/features/auth/roles";
+import { loadAdminGrants } from "@/features/auth/admin-grants";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -32,33 +32,37 @@ export type RoleGateResult =
       roles: ProfileRole[];
     };
 
-/** Loads the signed-in user's own entitlement rows. Null = table unavailable (pre-migration database). */
-async function loadAdminGrants(
-  supabase: Awaited<ReturnType<typeof createClient>>,
-  userId: string,
-): Promise<AdminGrantRow[] | null> {
-  const { data, error } = await supabase
-    .from("user_roles")
-    .select("role, revoked_at")
-    .eq("user_id", userId);
-  if (error) return null;
-  return (data ?? []) as AdminGrantRow[];
-}
-
 /**
  * Step-up for privileged work. When the platform switch (security_settings.require_admin_mfa) is on, an admin session
- * must be MFA-verified (aal2). Unauthenticated-MFA sessions are sent to /staff/mfa, then back. The same switch is
- * enforced again inside the database (is_admin()), so a stale page or a direct API call cannot bypass this.
+ * must be MFA-verified (aal2): others are sent to /staff/mfa, then back. The same switch is enforced again inside the
+ * database (is_admin()), so a stale page or a direct API call cannot bypass this.
+ *
+ * Fails CLOSED: if the switch cannot be read (unexpected database error) the admin workspace is refused rather than
+ * opened without MFA. "deny" is only returned for a database that HAS the entitlement table, so a pre-migration
+ * database (no switch at all) is never affected; the caller passes skipMissingSwitch for that case.
  */
-async function mfaStepUpPath(
+type StepUp = { kind: "ok" } | { kind: "redirect"; path: string } | { kind: "deny" };
+
+async function mfaStepUp(
   supabase: Awaited<ReturnType<typeof createClient>>,
   nextPath: string,
-): Promise<string | null> {
-  const { data: required, error } = await supabase.rpc("admin_mfa_required");
-  if (error || required !== true) return null;
-  const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-  if (aal?.currentLevel === "aal2") return null;
-  return `/staff/mfa?next=${encodeURIComponent(nextPath)}`;
+): Promise<StepUp> {
+  let required: unknown;
+  try {
+    const result = await supabase.rpc("admin_mfa_required");
+    if (result.error) return { kind: "deny" };
+    required = result.data;
+  } catch {
+    return { kind: "deny" };
+  }
+  if (required !== true) return { kind: "ok" };
+  try {
+    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal?.currentLevel === "aal2") return { kind: "ok" };
+  } catch {
+    /* Cannot prove aal2: treat as not verified and step up. */
+  }
+  return { kind: "redirect", path: `/staff/mfa?next=${encodeURIComponent(nextPath)}` };
 }
 
 /**
@@ -126,12 +130,15 @@ export async function requireRole(
   }
 
   const primary = isProfileRole(profile?.role) ? profile.role : null;
-  const roles = resolveEntitledRoles(primary, await loadAdminGrants(supabase, user.id));
+  const grants = await loadAdminGrants(supabase, user.id);
+  const roles = resolveEntitledRoles(primary, grants);
   if (!roles.includes(role)) redirect(landingForEntitled(roles, primary));
 
-  if (role === "admin") {
-    const stepUp = await mfaStepUpPath(supabase, nextPath);
-    if (stepUp) redirect(stepUp);
+  /* "missing" = database predates the multi-role migration: there is no MFA switch to read either. */
+  if (role === "admin" && grants !== "missing") {
+    const stepUp = await mfaStepUp(supabase, nextPath);
+    if (stepUp.kind === "redirect") redirect(stepUp.path);
+    if (stepUp.kind === "deny") redirect(landingForEntitled(roles.filter((r) => r !== "admin"), primary));
   }
 
   return { configured: true, userId: user.id, roles };

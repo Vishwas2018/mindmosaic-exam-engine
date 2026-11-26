@@ -11,6 +11,8 @@ const state = {
   mfaRequired: { data: false, error: null } as Result,
   aal: "aal1",
   signedOut: false,
+  throwGrants: false,
+  aalThrows: false,
 };
 
 vi.mock("@/lib/supabase/server", () => ({
@@ -20,14 +22,21 @@ vi.mock("@/lib/supabase/server", () => ({
       signOut: async () => {
         state.signedOut = true;
       },
-      mfa: { getAuthenticatorAssuranceLevel: async () => ({ data: { currentLevel: state.aal } }) },
+      mfa: {
+        getAuthenticatorAssuranceLevel: async () => {
+          if (state.aalThrows) throw new Error("network");
+          return { data: { currentLevel: state.aal } };
+        },
+      },
     },
     rpc: async () => state.mfaRequired,
     from: (table: string) => ({
       select: () => ({
         eq: () =>
           table === "user_roles"
-            ? Promise.resolve(state.grants)
+            ? state.throwGrants
+              ? Promise.reject(new Error("network"))
+              : Promise.resolve(state.grants)
             : { single: async () => ({ data: state.profile }) },
       }),
     }),
@@ -53,6 +62,8 @@ beforeEach(() => {
   state.mfaRequired = { data: false, error: null };
   state.aal = "aal1";
   state.signedOut = false;
+  state.throwGrants = false;
+  state.aalThrows = false;
 });
 
 describe("requireRole with multi-role entitlements", () => {
@@ -74,15 +85,43 @@ describe("requireRole with multi-role entitlements", () => {
     expect(await attempt("admin", "/admin")).toEqual({ ok: false, path: "/" });
   });
 
-  it("keeps a legacy admin working when no grant row exists or the table is unavailable", async () => {
+  it("is strict after migration: a profile that merely says admin with no grant row is refused", async () => {
     state.profile = { role: "admin", access_revoked_at: null };
-    expect(await attempt("admin", "/admin")).toMatchObject({ ok: true, value: { roles: ["admin"] } });
-    state.grants = { data: null, error: { code: "42P01" } };
-    expect(await attempt("admin", "/admin")).toMatchObject({ ok: true });
+    expect(await attempt("admin", "/admin")).toEqual({ ok: false, path: "/" });
+  });
+
+  it("keeps a legacy admin working only when the entitlement table does not exist (pre-migration)", async () => {
+    state.profile = { role: "admin", access_revoked_at: null };
+    for (const code of ["42P01", "PGRST205"]) {
+      state.grants = { data: null, error: { code } };
+      expect(await attempt("admin", "/admin")).toMatchObject({ ok: true, value: { roles: ["admin"] } });
+    }
+  });
+
+  it("FAILS CLOSED on any other lookup error: no admin for a profile-admin or a granted parent", async () => {
+    for (const code of ["57014", "42501", "PGRST301", undefined]) {
+      state.profile = { role: "admin", access_revoked_at: null };
+      state.grants = { data: null, error: { code } };
+      expect(await attempt("admin", "/admin")).toEqual({ ok: false, path: "/" });
+      state.profile = { role: "parent", access_revoked_at: null };
+      expect(await attempt("admin", "/admin")).toEqual({ ok: false, path: "/parent" });
+    }
+  });
+
+  it("an entitlement-lookup outage does not lock parents out of the parent workspace", async () => {
+    state.grants = { data: null, error: { code: "57014" } };
+    expect(await attempt("parent", "/parent")).toMatchObject({ ok: true, value: { roles: ["parent"] } });
+  });
+
+  it("a thrown lookup (network failure) also fails closed", async () => {
+    state.grants = { data: null, error: null };
+    state.throwGrants = true;
+    expect(await attempt("admin", "/admin")).toEqual({ ok: false, path: "/parent" });
   });
 
   it("an admin-only login is not made a parent", async () => {
     state.profile = { role: "admin", access_revoked_at: null };
+    state.grants = { data: [{ role: "admin", revoked_at: null }], error: null };
     expect(await attempt("parent", "/parent")).toEqual({ ok: false, path: "/admin" });
   });
 
@@ -113,9 +152,28 @@ describe("requireRole with multi-role entitlements", () => {
       expect(await attempt("parent", "/parent")).toMatchObject({ ok: true });
     });
 
-    it("does not step up when the platform switch is off or unavailable", async () => {
+    it("does not step up when the platform switch is off", async () => {
       state.mfaRequired = { data: false, error: null };
       expect(await attempt("admin", "/admin")).toMatchObject({ ok: true });
+    });
+
+    it("FAILS CLOSED when the switch cannot be read on a migrated database: admin refused, parent unaffected", async () => {
+      state.mfaRequired = { data: null, error: { code: "57014" } };
+      expect(await attempt("admin", "/admin")).toEqual({ ok: false, path: "/parent" });
+      expect(await attempt("parent", "/parent")).toMatchObject({ ok: true });
+    });
+
+    it("an unverifiable assurance level is treated as not MFA-verified", async () => {
+      state.aalThrows = true;
+      expect(await attempt("admin", "/admin/review")).toEqual({
+        ok: false,
+        path: "/staff/mfa?next=%2Fadmin%2Freview",
+      });
+    });
+
+    it("pre-migration database (no entitlement table) is never stepped up, so nobody is locked out", async () => {
+      state.profile = { role: "admin", access_revoked_at: null };
+      state.grants = { data: null, error: { code: "42P01" } };
       state.mfaRequired = { data: null, error: { code: "42883" } };
       expect(await attempt("admin", "/admin")).toMatchObject({ ok: true });
     });

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
+import { loadAdminGrants } from "@/features/auth/admin-grants";
 import { AuthShell } from "@/features/auth/components/AuthMosaicPanel";
 import { StaffMfaPanel } from "@/features/auth/components/StaffMfaPanel";
 import {
   isProfileRole,
   landingForEntitled,
   resolveEntitledRoles,
-  type AdminGrantRow,
 } from "@/features/auth/roles";
 import { safeNextPath } from "@/features/auth/safe-next";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -47,8 +47,7 @@ export default async function StaffMfaPage({
     .single();
   if (profile?.access_revoked_at) redirect("/sign-in");
   const primary = isProfileRole(profile?.role) ? profile.role : null;
-  const { data: grants, error } = await supabase.from("user_roles").select("role, revoked_at").eq("user_id", user.id);
-  const roles = resolveEntitledRoles(primary, error ? null : ((grants ?? []) as AdminGrantRow[]));
+  const roles = resolveEntitledRoles(primary, await loadAdminGrants(supabase, user.id));
   if (!roles.includes("admin")) redirect(landingForEntitled(roles, primary));
 
   return (

@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import type { Client } from "pg";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
@@ -6,7 +9,9 @@ import { asAnon, asAuthenticated, PARENT_C, seed, STUDENT_A, STUDENT_B } from ".
 
 /*
  * Multi-role workspaces: one login holds Parent + Admin. Everything runs in a rolled-back transaction.
- * PARENT_C is the dual-role subject; STUDENT_B is promoted the legacy way (profiles.role = 'admin', no grant row).
+ * PARENT_C is the dual-role subject. STUDENT_B is promoted by editing profiles.role (the service-role path), which the
+ * sync trigger must turn into an audited grant: admin power is entitlement-only, so a profile that merely says
+ * "admin" has none.
  */
 let client: Client;
 
@@ -46,22 +51,57 @@ describe("multi-role workspaces (entitlements, MFA step-up, revocation, audit)",
     await client.end();
   });
 
-  it("legacy admins keep working (backfill or manual promotion); a parent has no admin power", async () => {
+  it("promotion by profile edit becomes an audited grant; a parent has no admin power", async () => {
     await asAal(STUDENT_B, "aal1");
     expect(await isAdmin()).toBe(true);
     await reset();
+    const grant = await client.query(
+      "select granted_by from public.user_roles where user_id=$1 and revoked_at is null",
+      [STUDENT_B],
+    );
+    expect(grant.rows).toHaveLength(1);
+    expect(grant.rows[0].granted_by).toMatch(/^trigger:profiles\.role:/);
+    const audit = await client.query("select action from public.role_audit_events where user_id=$1", [STUDENT_B]);
+    expect(audit.rows.map((r) => r.action)).toEqual(["grant"]);
     await asAal(PARENT_C, "aal1");
     expect(await isAdmin()).toBe(false);
   });
 
+  it("STRICT: a profile that merely says admin, with no entitlement row, has no admin power", async () => {
+    await client.query("delete from public.user_roles where user_id=$1", [STUDENT_B]);
+    await asAal(STUDENT_B, "aal2");
+    expect(await isAdmin()).toBe(false);
+    expect((await client.query("select public.has_active_admin_role() as a")).rows[0].a).toBe(false);
+  });
+
+  it("demoting the profile away from admin revokes the entitlement; re-promotion is an audited regrant", async () => {
+    await client.query("update public.profiles set role='parent' where id=$1", [STUDENT_B]);
+    await asAal(STUDENT_B, "aal2");
+    expect(await isAdmin()).toBe(false);
+    await reset();
+    await client.query("update public.profiles set role='admin' where id=$1", [STUDENT_B]);
+    const actions = (
+      await client.query("select action from public.role_audit_events where user_id=$1 order by id", [STUDENT_B])
+    ).rows.map((r) => r.action);
+    expect(actions).toEqual(["grant", "revoke", "regrant"]);
+  });
+
   it("grant makes a parent a dual-role admin without touching the parent role or child links", async () => {
-    const before = (await client.query("select count(*)::int c from public.parent_children where parent_id=$1", [PARENT_C])).rows[0].c;
-    const result = await asService(async () =>
-      (await client.query("select public.grant_admin_role($1,'rls-test','dual role test') r", [PARENT_C])).rows[0].r,
+    const before = (
+      await client.query("select count(*)::int c from public.parent_children where parent_id=$1", [PARENT_C])
+    ).rows[0].c;
+    const result = await asService(
+      async () =>
+        (await client.query("select public.grant_admin_role($1,'rls-test','dual role test') r", [PARENT_C])).rows[0].r,
     );
     expect(result).toBe("granted");
-    expect((await client.query("select role from public.profiles where id=$1", [PARENT_C])).rows[0].role).toBe("parent");
-    expect((await client.query("select count(*)::int c from public.parent_children where parent_id=$1", [PARENT_C])).rows[0].c).toBe(before);
+    expect((await client.query("select role from public.profiles where id=$1", [PARENT_C])).rows[0].role).toBe(
+      "parent",
+    );
+    expect(
+      (await client.query("select count(*)::int c from public.parent_children where parent_id=$1", [PARENT_C])).rows[0]
+        .c,
+    ).toBe(before);
     await asAal(PARENT_C, "aal1");
     expect(await isAdmin()).toBe(true);
     expect((await client.query("select count(*)::int c from public.user_roles")).rows[0].c).toBe(1);
@@ -79,14 +119,21 @@ describe("multi-role workspaces (entitlements, MFA step-up, revocation, audit)",
       await client.query("rollback to savepoint s");
       await reset();
     }
-    expect((await client.query("select role from public.profiles where id=$1", [PARENT_C])).rows[0].role).toBe("parent");
+    expect((await client.query("select role from public.profiles where id=$1", [PARENT_C])).rows[0].role).toBe(
+      "parent",
+    );
   });
 
-  it("authenticated cannot call grant/revoke or read audit and settings (each in its own transaction)", async () => {
+  it("authenticated cannot call grant/revoke/trigger function or read/write audit and settings", async () => {
     for (const statement of [
       ["select public.grant_admin_role($1,'me','self promote try')", [PARENT_C]],
       ["select public.revoke_admin_role($1,'me','sabotage try')", [STUDENT_B]],
+      ["select public.sync_admin_entitlement_from_profile()", []],
       ["select * from public.role_audit_events", []],
+      [
+        "insert into public.role_audit_events(user_id, role, action, actor, reason) values ($1,'admin','grant','me','forged entry')",
+        [PARENT_C],
+      ],
       ["select * from public.security_settings", []],
       ["update public.security_settings set bool_value = false", []],
     ] as const) {
@@ -110,7 +157,9 @@ describe("multi-role workspaces (entitlements, MFA step-up, revocation, audit)",
     ).rejects.toMatchObject({ code: "MM108" });
     await client.query("rollback to savepoint s");
     await reset();
-    expect((await client.query("select count(*)::int c from public.user_roles where user_id=$1", [STUDENT_A])).rows[0].c).toBe(0);
+    expect(
+      (await client.query("select count(*)::int c from public.user_roles where user_id=$1", [STUDENT_A])).rows[0].c,
+    ).toBe(0);
   });
 
   it("MFA switch: aal1 is refused, aal2 allowed, entitlement stays visible so step-up can happen", async () => {
@@ -129,29 +178,39 @@ describe("multi-role workspaces (entitlements, MFA step-up, revocation, audit)",
     expect(await isAdmin()).toBe(false); // aal2 alone confers nothing
   });
 
-  it("revocation closes admin at once, is audited append-only, and survives regrant", async () => {
+  it("revocation closes admin at once (even for an admin-only profile), is audited append-only, and survives regrant", async () => {
     await asService(async () => {
       await client.query("select public.grant_admin_role($1,'rls-test','revocation test')", [PARENT_C]);
-      expect((await client.query("select public.revoke_admin_role($1,'rls-test','offboarding') r", [PARENT_C])).rows[0].r).toBe("revoked");
+      expect(
+        (await client.query("select public.revoke_admin_role($1,'rls-test','offboarding') r", [PARENT_C])).rows[0].r,
+      ).toBe("revoked");
     });
     await asAal(PARENT_C, "aal2");
     expect(await isAdmin()).toBe(false);
     await reset();
-    // A revoked row beats the legacy profile fallback.
+    // An admin-only profile (role still 'admin') loses everything on revoke: the profile column confers nothing.
     await asService(async () => {
-      await client.query("select public.grant_admin_role($1,'rls-test','legacy then revoke')", [STUDENT_B]);
-      await client.query("select public.revoke_admin_role($1,'rls-test','legacy revoke')", [STUDENT_B]);
+      expect(
+        (await client.query("select public.revoke_admin_role($1,'rls-test','admin only revoke') r", [STUDENT_B]))
+          .rows[0].r,
+      ).toBe("revoked");
     });
     await asAal(STUDENT_B, "aal2");
     expect(await isAdmin()).toBe(false);
     await reset();
     await asService(async () => {
-      expect((await client.query("select public.grant_admin_role($1,'rls-test','restore') r", [PARENT_C])).rows[0].r).toBe("regranted");
+      expect(
+        (await client.query("select public.grant_admin_role($1,'rls-test','restore') r", [PARENT_C])).rows[0].r,
+      ).toBe("regranted");
     });
-    const actions = (await client.query("select action from public.role_audit_events where user_id=$1 order by id", [PARENT_C])).rows.map((r) => r.action);
+    const actions = (
+      await client.query("select action from public.role_audit_events where user_id=$1 order by id", [PARENT_C])
+    ).rows.map((r) => r.action);
     expect(actions).toEqual(["grant", "revoke", "regrant"]);
     await client.query("savepoint s");
-    await expect(client.query("update public.role_audit_events set reason='tampered text'")).rejects.toMatchObject({ code: "MM107" });
+    await expect(client.query("update public.role_audit_events set reason='tampered text'")).rejects.toMatchObject({
+      code: "MM107",
+    });
     await client.query("rollback to savepoint s");
   });
 
@@ -162,5 +221,87 @@ describe("multi-role workspaces (entitlements, MFA step-up, revocation, audit)",
     await client.query("update public.profiles set access_revoked_at = now() where id=$1", [PARENT_C]);
     await asAal(PARENT_C, "aal2");
     expect(await isAdmin()).toBe(false);
+  });
+
+  describe("content-factory owner approvals use the same entitlement and MFA level", () => {
+    const REVISION = "91000000-0000-4000-8000-000000000003";
+    /* Reaching the eligibility check (MM102 for an unknown revision) means the admin gate was passed; 42501 = refused. */
+    async function gate(): Promise<string> {
+      await client.query("savepoint g");
+      try {
+        await client.query("select public.owner_approve_content($1,'{}'::jsonb)", [REVISION]);
+        return "approved";
+      } catch (error) {
+        return (error as { code: string }).code;
+      } finally {
+        await client.query("rollback to savepoint g");
+      }
+    }
+
+    it("dual-role passes; a plain parent, aal1 under MFA, and a revoked grant are refused", async () => {
+      await asAal(PARENT_C, "aal2");
+      expect(await gate()).toBe("42501");
+      await reset();
+      await asService(async () => {
+        await client.query("select public.grant_admin_role($1,'rls-test','content factory test')", [PARENT_C]);
+      });
+      await asAal(PARENT_C, "aal1");
+      expect(await gate()).toBe("MM102");
+      await reset();
+      await asService(async () => {
+        await client.query("update public.security_settings set bool_value = true where key = 'require_admin_mfa'");
+      });
+      await asAal(PARENT_C, "aal1");
+      expect(await gate()).toBe("42501");
+      await reset();
+      await asAal(PARENT_C, "aal2");
+      expect(await gate()).toBe("MM102");
+      await reset();
+      await asService(async () => {
+        await client.query("select public.revoke_admin_role($1,'rls-test','offboarding')", [PARENT_C]);
+      });
+      await asAal(PARENT_C, "aal2");
+      expect(await gate()).toBe("42501");
+    });
+
+    it("a revoked admin-only profile (role still admin) is refused", async () => {
+      await asAal(STUDENT_B, "aal1");
+      expect(await gate()).toBe("MM102");
+      await reset();
+      await asService(async () => {
+        await client.query("select public.revoke_admin_role($1,'rls-test','offboarding')", [STUDENT_B]);
+      });
+      await asAal(STUDENT_B, "aal2");
+      expect(await gate()).toBe("42501");
+    });
+  });
+
+  describe("rollback", () => {
+    it("keeps the audit trail, snapshots entitlements, and does not resurrect a revoked admin", async () => {
+      await asService(async () => {
+        await client.query("select public.grant_admin_role($1,'rls-test','dual before rollback')", [PARENT_C]);
+        await client.query("select public.revoke_admin_role($1,'rls-test','revoked before rollback')", [STUDENT_B]);
+      });
+      const before = (await client.query("select id, action from public.role_audit_events order by id")).rows;
+      const down = readFileSync(
+        join(process.cwd(), "supabase/migrations/rollbacks/20261126090000_multi_role_workspaces.down.sql"),
+        "utf8",
+      )
+        .replace(/^begin;$/m, "")
+        .replace(/^commit;$/m, "");
+      await client.query(down);
+      const after = (await client.query("select id, action from public.role_audit_events order by id")).rows;
+      expect(after.slice(0, before.length)).toEqual(before);
+      expect(after.filter((r) => r.action === "rollback").length).toBeGreaterThanOrEqual(2);
+      expect((await client.query("select to_regclass('public.user_roles') as t")).rows[0].t).toBeNull();
+      expect((await client.query("select role from public.profiles where id=$1", [STUDENT_B])).rows[0].role).toBe(
+        "parent",
+      );
+      await client.query("savepoint s");
+      await expect(client.query("update public.role_audit_events set reason='tampered text'")).rejects.toMatchObject({
+        code: "MM107",
+      });
+      await client.query("rollback to savepoint s");
+    });
   });
 });

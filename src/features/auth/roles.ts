@@ -55,29 +55,35 @@ export function roleHomeLabel(role: ProfileRole | null | undefined): string {
 }
 
 /**
- * Roles a signed-in user may ENTER. `profiles.role` is the primary role and is never an elevated one by itself:
- * admin is only entitled through an active `user_roles` row (service-role-granted, audited, revocable). That is what
- * lets one login hold Parent + Admin without touching billing, child links or any parent policy.
+ * Roles a signed-in user may ENTER. `profiles.role` is the primary role. Admin is entitled only through an active
+ * `user_roles` row (service-role-granted, audited, revocable): that is what lets one login hold Parent + Admin without
+ * touching billing, child links or any parent policy.
  *
- * `adminGrants` is null when the entitlement table is not available (a database that predates the multi-role
- * migration), so deploy order cannot lock existing admins out. With the table present, a revoked grant always wins.
+ * `adminGrants` states what the lookup returned:
+ *   - an array: the multi-role migration is applied. Strict: only an unrevoked grant confers admin; a profile that
+ *     merely says admin does not (the database makes the same decision, see has_active_admin_role()).
+ *   - "missing": the entitlement table does not exist (a database that predates the migration). Only then does the legacy
+ *     profile-role rule apply, so deploy order cannot lock existing admins out.
+ *   - "error": any other failure. Fail CLOSED: no admin, regardless of profile role. Parent/teacher/student are unaffected.
  */
 export interface AdminGrantRow {
   readonly role: string;
   readonly revoked_at: string | null;
 }
 
+export type AdminGrantLookup = readonly AdminGrantRow[] | "missing" | "error";
+
 export function resolveEntitledRoles(
   primary: ProfileRole | null,
-  adminGrants: readonly AdminGrantRow[] | null,
+  adminGrants: AdminGrantLookup,
 ): ProfileRole[] {
   const roles: ProfileRole[] = [];
   if (primary && primary !== "admin") roles.push(primary);
-  /* Mirrors public.has_active_admin_role(): an unrevoked grant, or (legacy path) profile role admin with no grant row
-     ever written. A revoked grant row always wins. A null table (pre-migration database) also uses the legacy path. */
-  const adminRows = (adminGrants ?? []).filter((grant) => grant.role === "admin");
-  const adminEntitled =
-    adminRows.some((grant) => grant.revoked_at === null) || (primary === "admin" && adminRows.length === 0);
+  let adminEntitled = false;
+  if (adminGrants === "missing") adminEntitled = primary === "admin";
+  else if (adminGrants !== "error") {
+    adminEntitled = adminGrants.some((grant) => grant.role === "admin" && grant.revoked_at === null);
+  }
   if (adminEntitled) roles.push("admin");
   return roles;
 }
