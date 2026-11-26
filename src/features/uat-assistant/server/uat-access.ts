@@ -11,6 +11,7 @@ import { createClient } from "@/lib/supabase/server";
 import { isUatAssistantEnvironmentAllowed, uatAssistantAvailability } from "../flags";
 
 export const UAT_TESTER_COOKIE_NAME = "mm_uat_tester";
+export const UAT_TESTER_HINT_COOKIE_NAME = "mm_uat_hint";
 const COOKIE_TTL_SECONDS = 12 * 60 * 60; // 12 hours
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -285,11 +286,20 @@ export function attachTesterBadgeCookie(
   env: EnvMap = process.env,
 ): void {
   if (!isUatAssistantEnvironmentAllowed(env)) return;
-  const token = signTesterBadgeToken(subject, env);
-  if (!token) return;
   const isHostedHttps = Boolean(env.VERCEL_ENV);
-  response.cookies.set(UAT_TESTER_COOKIE_NAME, token, {
-    httpOnly: true,
+  const token = signTesterBadgeToken(subject, env);
+  if (token) {
+    response.cookies.set(UAT_TESTER_COOKIE_NAME, token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: isHostedHttps,
+      path: "/",
+      maxAge: COOKIE_TTL_SECONDS,
+    });
+  }
+  // Non-sensitive presence hint so client bootstrap skips `/api/uat/session` on ordinary anonymous visitors.
+  response.cookies.set(UAT_TESTER_HINT_COOKIE_NAME, "1", {
+    httpOnly: false,
     sameSite: "lax",
     secure: isHostedHttps,
     path: "/",
@@ -300,6 +310,12 @@ export function attachTesterBadgeCookie(
 export function clearTesterBadgeCookie(response: NextResponse): void {
   response.cookies.set(UAT_TESTER_COOKIE_NAME, "", {
     httpOnly: true,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+  response.cookies.set(UAT_TESTER_HINT_COOKIE_NAME, "", {
+    httpOnly: false,
     sameSite: "lax",
     path: "/",
     maxAge: 0,

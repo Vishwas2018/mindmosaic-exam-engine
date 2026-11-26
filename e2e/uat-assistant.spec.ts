@@ -62,8 +62,19 @@ test.describe("MindMosaic AI UAT Assistant — production & feature-flag safety"
       expect(pageRes.status).toBe(404);
 
       const apiRes = await fetch(`${srv.origin}/api/uat/session`);
-      expect(apiRes.status).toBe(404);
+      expect(apiRes.status).toBe(200);
       expect(await apiRes.json()).toEqual({ enabled: false });
+
+      const improveRes = await fetch(`${srv.origin}/api/uat/improve`, {
+        method: "POST",
+        headers: {
+          origin: srv.origin,
+          host: new URL(srv.origin).host,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({}),
+      });
+      expect(improveRes.status).toBe(404);
     } finally {
       srv.stop();
     }
@@ -151,6 +162,12 @@ test.describe("MindMosaic AI UAT Assistant — full DEV workflow, IndexedDB pers
     });
 
     try {
+      // Activate local preview UAT session on /dev/uat first (mints `mm_uat_hint=1` cookie for static routes)
+      await page.goto(`${srv.origin}/dev/uat`);
+      await expect(
+        page.getByRole("heading", { level: 1, name: "MindMosaic UAT defect dashboard" }),
+      ).toBeVisible();
+
       // 1. Start a real guest exam session to prove UAT element selection NEVER triggers exam submission!
       await page.goto(`${srv.origin}/practice/mixed-practice?seed=uat-e2e`);
       await page.getByTestId("select-year-level").selectOption("3");

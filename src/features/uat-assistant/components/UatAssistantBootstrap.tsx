@@ -27,6 +27,17 @@ export function UatAssistantBootstrap() {
     // Wait until initial auth state resolves when Supabase is configured so we don't fire twice on boot.
     if (status === "loading") return;
 
+    const hasTesterHintCookie =
+      typeof document !== "undefined" && /(?:^|;\s*)mm_uat_hint=1(?:;|$)/.test(document.cookie);
+    const isDevUatRoute =
+      typeof window !== "undefined" && window.location.pathname.startsWith("/dev/uat");
+    const isDevServer = process.env.NODE_ENV === "development";
+
+    // Zero network requests, zero dynamic imports, and zero state churn for ordinary anonymous visitors.
+    if (!userId && !hasTesterHintCookie && !isDevUatRoute && !isDevServer) {
+      return;
+    }
+
     let cancelled = false;
     fetch("/api/uat/session", {
       method: "GET",
