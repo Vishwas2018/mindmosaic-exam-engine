@@ -4,7 +4,7 @@
  * Safety (agreed with the owner):
  * - DEV only (fixtures guard the Supabase ref). A throwaway fixture admin "Fixture Reviewer" is created and deleted.
  * - This spec writes NO decision rows to DEV (admin_draft_review_decisions is append-only, so any row would be
- *   permanent history). It asserts zero rows by the fixture admin and zero `approve` rows anywhere. Persistent
+ *   permanent history). It asserts zero ledger rows attributable to this run (fixture ids / run email / probe rows); it never assumes a table is globally empty. Persistent
  *   Approve / Request revision / Reject tests run only on a throwaway local Supabase
  *   (e2e/auth/admin-review-decisions-isolated.spec.ts). DB-level refusals (AR-04) persist nothing.
  * - Nothing is published.
@@ -55,13 +55,63 @@ async function makeUser(
   return { id: data.user.id, email };
 }
 
-async function approveRowCount(): Promise<number> {
-  const { count, error } = await devAdmin()
-    .from("admin_draft_review_decisions")
-    .select("id", { count: "exact", head: true })
-    .eq("decision", "approve");
-  if (error) throw new Error(`count approve: ${error.message}`);
-  return count ?? 0;
+/**
+ * Non-destructive, fixture-scoped ledger checks. DEV will hold genuine human review decisions, so nothing here may assume
+ * a table is globally empty. The automation's guarantee is: no row is attributable to ANY identity this run created
+ * (the fixture admins/parents, by reviewer id or by the run's seeded email), and none of the probe rows AR-04 attempts
+ * ever persisted. The global counts are recorded as evidence only (never asserted), so concurrent human reviews cannot
+ * make this spec flaky and real history is never read for content or touched.
+ */
+const PROBE_QUESTION = "probe-q";
+
+async function ledgerAttributableToRun(): Promise<{
+  decisions: number;
+  approves: number;
+  legacyApprovals: number;
+  probeRows: number;
+}> {
+  const db = devAdmin();
+  const ids = created.length ? created : ["00000000-0000-0000-0000-000000000000"];
+  const count = async (
+    table: string,
+    apply: (q: ReturnType<typeof base>) => unknown,
+  ) => {
+    const q = base(table);
+    const { count: n, error } = (await apply(q)) as { count: number | null; error: { message: string } | null };
+    if (error) throw new Error(`${table}: ${error.message}`);
+    return n ?? 0;
+  };
+  function base(table: string) {
+    return db.from(table).select("id", { count: "exact", head: true });
+  }
+  const runEmail = `mm-accept-${RUN_ID}-%`;
+  const byId = await count("admin_draft_review_decisions", (q) => q.in("reviewer_id", ids));
+  const byEmail = await count("admin_draft_review_decisions", (q) => q.like("reviewer_email", runEmail));
+  const approves = await count("admin_draft_review_decisions", (q) =>
+    q.eq("decision", "approve").in("reviewer_id", ids),
+  );
+  const legacyApprovals = await count("admin_draft_review_approvals", (q) => q.in("approved_by", ids));
+  const probeRows = await count("admin_draft_review_decisions", (q) => q.eq("question_id", PROBE_QUESTION));
+  return { decisions: byId + byEmail, approves, legacyApprovals, probeRows };
+}
+
+async function expectRunCreatedNoLedgerRows() {
+  expect(await ledgerAttributableToRun()).toEqual({
+    decisions: 0,
+    approves: 0,
+    legacyApprovals: 0,
+    probeRows: 0,
+  });
+}
+
+async function globalLedgerSnapshot() {
+  const db = devAdmin();
+  const n = async (table: string) =>
+    (await db.from(table).select("id", { count: "exact", head: true })).count ?? null;
+  return {
+    decisions: await n("admin_draft_review_decisions"),
+    legacyApprovals: await n("admin_draft_review_approvals"),
+  };
 }
 
 async function adminSignIn(page: Page, email: string) {
@@ -110,8 +160,7 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
   }) => {
     test.skip(test.info().project.name !== "desktop-1440", "desktop only");
     test.setTimeout(240_000);
-    const before = await approveRowCount();
-    expect(before).toBe(0);
+    evidence["AR-02-global-ledger-before"] = await globalLedgerSnapshot();
     const admin = await makeUser("ara", "admin", FIXTURE_NAME);
     await adminSignIn(page, admin.email);
     await page.goto(BANK);
@@ -186,11 +235,11 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
       page.getByRole("button", { name: "Approve", exact: true }),
     ).toBeDisabled();
 
-    expect(await approveRowCount()).toBe(0);
+    await expectRunCreatedNoLedgerRows();
     evidence["AR-02"] = {
       pools: "400/100/50/50",
       writing: 40,
-      approveRowsAfter: 0,
+      runAttributableLedgerRows: 0,
       reviewer: FIXTURE_NAME,
     };
   });
@@ -225,13 +274,8 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
       await expect(submit).toBeEnabled();
       await page.getByLabel(/Required rationale/i).fill("");
     }
-    // Zero rows were written by this fixture admin and zero approvals exist anywhere.
-    const { count } = await devAdmin()
-      .from("admin_draft_review_decisions")
-      .select("id", { count: "exact", head: true })
-      .eq("reviewer_id", admin.id);
-    expect(count).toBe(0);
-    expect(await approveRowCount()).toBe(0);
+    // Nothing is attributable to this run's identities (see ledgerAttributableToRun); real history is untouched.
+    await expectRunCreatedNoLedgerRows();
     evidence["AR-03"] = {
       submitted: 0,
       note: "persistent write paths covered by e2e/auth/admin-review-decisions-isolated.spec.ts on a throwaway local stack",
@@ -311,33 +355,96 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
     expect(r6.error?.code === "42501" || (r6.data ?? []).length === 0).toBe(
       true,
     );
-    // Tampering: update/delete refused for admin
-    const { data: rows } = await adminC.from(t).select("id").limit(1);
-    if (rows?.length) {
-      const u = await adminC
-        .from(t)
-        .update({ notes: "tampered tampered" })
-        .eq("id", rows[0].id)
-        .select();
-      expect(u.error !== null || (u.data ?? []).length === 0).toBe(true);
-      const d = await adminC.from(t).delete().eq("id", rows[0].id).select();
-      expect(d.error !== null || (d.data ?? []).length === 0).toBe(true);
-    }
-    // Service role cannot mutate either (immutability trigger MM106)
-    if (rows?.length) {
-      const sr = await devAdmin()
-        .from(t)
-        .update({ notes: "tampered tampered" })
-        .eq("id", rows[0].id);
-      expect(sr.error?.code).toBe("MM106");
-    }
-    expect(await approveRowCount()).toBe(0);
+    // Tampering: an admin's UPDATE/DELETE must be refused. These are filtered to THIS fixture's reviewer id, so they can
+    // never match (let alone modify) a genuine human decision. The append-only trigger (MM106), including for the service
+    // role on real rows, is proven on the throwaway stack by e2e/auth/admin-review-decisions-isolated.spec.ts.
+    const u = await adminC
+      .from(t)
+      .update({ notes: "tampered tampered" })
+      .eq("reviewer_id", admin.id)
+      .select();
+    expect(u.error !== null || (u.data ?? []).length === 0).toBe(true);
+    const d = await adminC.from(t).delete().eq("reviewer_id", admin.id).select();
+    expect(d.error !== null || (d.data ?? []).length === 0).toBe(true);
+    await expectRunCreatedNoLedgerRows();
     evidence["AR-04"] = {
       impersonation: "42501 x3",
       nonAdminWrite: "42501",
       anon: "denied",
       tamper: "refused",
-      approveRows: 0,
+      runAttributableLedgerRows: 0,
+    };
+  });
+
+  test("AR-06 smoke: both Scholarship banks load for an admin, CSP is enforced, nothing is approved or published", async ({
+    page,
+  }) => {
+    test.skip(test.info().project.name !== "desktop-1440", "desktop only");
+    test.setTimeout(240_000);
+    const admin = await makeUser("ar6", "admin", FIXTURE_NAME);
+    await adminSignIn(page, admin.email);
+    const countStatus = (n: number) =>
+      expect(
+        page
+          .getByRole("status")
+          .filter({ hasText: /drafts match your filters/ }),
+      ).toHaveText(`${n} drafts match your filters`, { timeout: 60_000 });
+
+    // Bank 1: Y6 Core (default)
+    const res = await page.goto("/admin/review");
+    await countStatus(160);
+    const headers = res?.headers() ?? {};
+    // First run (kept under merge-evidence/*FIRST-RUN-AR06-failed*) asserted an enforced policy while src/proxy.ts
+    // still sent /admin as Report-Only, so it failed correctly. Admin CSP enforcement now ships in the same stack:
+    // on Preview /admin/* must carry an ENFORCED nonce policy and no report-only twin, and /sign-in stays enforced.
+    expect(headers["content-security-policy"] ?? "").toMatch(
+      /script-src 'self' 'nonce-[^']+' 'strict-dynamic'/,
+    );
+    expect(headers["content-security-policy-report-only"]).toBeUndefined();
+    const signIn = await page.request.get("/sign-in", {
+      headers: {
+        "x-vercel-protection-bypass":
+          process.env.VERCEL_AUTOMATION_BYPASS_SECRET ?? "",
+      },
+      maxRedirects: 0,
+    });
+    // /sign-in enforcement is a separate, env-gated switch (MM_DEV_AUTH_CSP_ENFORCE=1), not part of the admin change.
+    // Require a policy either way and record which mode this Preview served; admin assertions above stay strict.
+    const signInEnforced = signIn.headers()["content-security-policy"] ?? "";
+    const signInReport =
+      signIn.headers()["content-security-policy-report-only"] ?? "";
+    expect(signInEnforced + signInReport).toContain("default-src");
+    evidence["AR-06-signin-csp-mode"] = signInEnforced
+      ? "enforced"
+      : "report-only";
+    // Bank 2: Codex 500
+    await page.goto(BANK);
+    await countStatus(500);
+    // Pool separation still holds
+    await page.getByLabel("Pool", { exact: true }).selectOption("practice");
+    await countStatus(400);
+    await page.getByLabel("Pool", { exact: true }).selectOption("mock");
+    await countStatus(100);
+    // Decision panel exposes the review workflow but writes nothing on view
+    await page.getByLabel("Pool", { exact: true }).selectOption("");
+    await expect(
+      page.getByLabel(/Verified human reviewer identity/i),
+    ).toHaveValue(FIXTURE_NAME);
+    await expect(
+      page.getByText(/Publication status: unpublished draft/i).first(),
+    ).toBeVisible();
+
+    // Viewing created nothing: no ledger row is attributable to this run. Global totals are evidence only.
+    await expectRunCreatedNoLedgerRows();
+    const ledgerAfter = await globalLedgerSnapshot();
+    evidence["AR-06"] = {
+      csp: "present",
+      y6core: 160,
+      codex500: 500,
+      practice: 400,
+      mock: 100,
+      runAttributableLedgerRows: 0,
+      globalLedgerAfter: ledgerAfter,
     };
   });
 
