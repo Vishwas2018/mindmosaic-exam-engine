@@ -134,18 +134,38 @@ The hosted runs created 2 fixture accounts per run (an admin and a parent, `mm-a
 
 ## 7. Live Nemotron acceptance (2026-11-27)
 
-**Verdict: NO-GO — live AI call reaches NVIDIA but is rejected with HTTP 410. Not yet accepted.**
+**Verdict: GO for PR #166 on DEV Preview (live AI accepted). PR #165 hosted MFA step-up remains unexercised (see 7.4). Not merged; production untouched.**
 
-| Step | Result |
-|------|--------|
-| 1. NVIDIA env vars on Preview | **PASS** (after owner edit). `NVIDIA_API_KEY`, `MM_UAT_AI_PROVIDER`, `QF_AI_NVIDIA_MODEL` now target production + preview + development (all Sensitive, values not readable). Production scope should be confirmed intentional. |
-| 2. Redeploy head | **PASS.** `dpl_9TMkAHbBeA8gKtSRhJpedShkMrpW`, commit `d2353ee8`, READY, alias `...-git-feat-ai-9d0675-...`. |
-| 3. Hosted UAT-H2 against real API | **FAIL.** `/api/uat/session` reports `aiConfigured: true`. `POST /api/uat/improve` → **502** `{"ok":false,"code":"provider_failed","message":"NVIDIA API returned 410."}`. |
-| 4. providerId=nvidia, mode=ai, model ID, JSON, notes preserved | **Not verifiable** — no draft returned. |
-| 5. Timing / error handling | Failure returned in **1.3 s** (limit 30 s). The error path behaves as designed: generic message, no key, original notes untouched, 502 not 500. |
-| 6. Credentials / unpublished questions | **PASS (request side).** Browser request keys are only `originalNotes, route, pageUrl, portal, browser, viewport, element`; spec asserts no key/bearer/answer-key strings. The NVIDIA request body was not observable. |
-| 7. PR #165 compatibility (Admin MFA, revocation, cross-portal) | Hosted H1/H3/H4 passed on `63a8ee49` (see §5.4); not re-run on `d2353ee8` because the AI path blocks acceptance. PR #165 head `941855ce`. |
+Verified Preview: `https://mindmosaic-exam-engine-2ntjvxr3r-vishwas2018s-projects.vercel.app` (commit `64f3b4b7`, READY; branch alias `mindmosaic-exam-engine-git-feat-ai-9d0675-vishwas2018s-projects.vercel.app`).
 
-**Cause (inferred, not proven):** the code has no default model; the ID comes only from `QF_AI_NVIDIA_MODEL`. HTTP 410 from NVIDIA's API means the model or endpoint is retired. NVIDIA's public model list (`/v1/models`, unauthenticated) currently includes: `nvidia/nemotron-3-ultra-550b-a55b`, `nvidia/nemotron-3.5-lightning-30b-a3b`, `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning`, `nvidia/nemotron-3.5-super-vl-120b-a12b`. The configured value could not be read (Sensitive), so it was not compared.
+### 7.1 Timeline of findings
+| Run | Preview commit | Model | Result |
+|-----|----------------|-------|--------|
+| 1 | `d2353ee8` | retired ID | `410` — "NVIDIA API returned 410." Model ID was retired (public `/v1/models` did not list it). |
+| 2 | `08a9ac89` | `nvidia/nemotron-3.5-lightning-30b-a3b` | `502` after 14 s — "NVIDIA response contained no message content." No 410: endpoint and model accepted. |
+| 3 | `64f3b4b7` | same | **200**, genuine AI draft. |
 
-**Owner action:** set `QF_AI_NVIDIA_MODEL` on Preview to a model ID present in that list, redeploy, rerun UAT-H2.
+**Defect (fixed, code):** the model is a reasoning model; with default thinking it can spend `max_tokens` on hidden reasoning and return empty `message.content`. Fix: send `chat_template_kwargs: { enable_thinking: false }` (documented switch, NVIDIA API reference for this model) and report `finish_reason: "length"` as a distinct "truncated" message. Reasoning text is never read or surfaced. Two unit tests were written first and failed before the fix. No assertion was weakened.
+
+### 7.2 Evidence (hosted UAT-H2, real NVIDIA API, no mocks)
+- `POST /api/uat/improve` → 200, `ok: true`, `mode: "ai"`, `providerId: "nvidia"`, `modelId: "nvidia/nemotron-3.5-lightning-30b-a3b"`.
+- Structured JSON valid: title 68–71 chars, 3–4 steps, severity/category within the allowed enums (`low` / `ui_visual`).
+- **Latency:** 2.4 s and 2.7 s (two runs) against the 30 s timeout. The failing 502 run took 14 s, also inside the limit.
+- **Privacy:** browser request body keys are only `originalNotes, route, pageUrl, portal, browser, viewport, element`; spec asserts no key/bearer/answer-key strings. A tester email in the notes is not echoed in the draft. The server-to-NVIDIA body was not observable from the browser; it is covered by unit tests (redaction before send, key only in the Authorization header).
+- **Original notes preserved:** the notes field value is unchanged after the rewrite (spec assertion).
+- **Error handling:** observed live (410 → generic provider_failed message, no key; empty content → 502 with notes untouched). 401/403/429/5xx/timeout/network paths are unit-tested (37 tests in the NVIDIA suite).
+- Env scoping verified through the Vercel API: `NVIDIA_API_KEY`, `MM_UAT_AI_PROVIDER`, `QF_AI_NVIDIA_MODEL` are `sensitive`, target `["preview"]` only.
+
+### 7.3 Full hosted suite on `64f3b4b7`: 4/4 passed
+H1 admin gets assistant, session metadata leaks no secrets, Admin CSP enforced (`authorizedVia: admin_role`); H2 real AI; H3 workflow incl. irreversible redaction (stored and exported pixels at redaction centre `[0,0,0]`), cross-portal tester cookie, revocation (`afterRevoke.enabled: false`, cookie cleared); H4 End UAT session (`apiStatusAfterEnd: 403`, restart works). Test accounts were fixture accounts; nothing deleted.
+
+### 7.4 PR #165 compatibility (head `941855ce`)
+- `git merge-tree` of #166 + #165: **clean, no conflicts**.
+- In a scratch merged worktree (removed afterwards): `tsc --noEmit` clean; UAT, `multi-role-entitlements` and `require-role-entitlements` suites: **113/113 passed**.
+- UAT authorization already follows #165's model: admin via active `user_roles` grant, Admin MFA (aal2) never bypassed (`admin_mfa_required`, credentials cleared), revocation honoured, entitlement lookup failure fails closed.
+- **Not verified live:** real aal2 step-up and revocation of a grant against #165's DB migration, because that migration is not applied on DEV and the Preview is built from #166. Hosted revocation shown above uses the existing `access_revoked_at` path.
+
+### 7.5 Residual items
+- Same three variables previously also targeted Production/Development; now Preview-only (verified).
+- Unrelated: four integration secrets (`KV_*`, `REDIS_URL`) are flagged `readable-secret` by Vercel; consider marking Sensitive.
+- Final CI result for the report commit is recorded on the PR, not here.
