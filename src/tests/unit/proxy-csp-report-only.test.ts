@@ -165,3 +165,18 @@ describe("loopback Supabase connect-src", () => {
     }
   });
 });
+
+describe("requested admin path header", () => {
+  it("is set for admin routes from the real URL, and a client-sent value is discarded", async () => {
+    const forged = new NextRequest("https://example.test/admin/review?bank=x", {
+      headers: { "x-mm-requested-path": "/evil" },
+    });
+    const response = await proxy(forged);
+    expect(response.headers.get("x-middleware-request-x-mm-requested-path")).toBe("/admin/review?bank=x");
+
+    const other = await proxy(
+      new NextRequest("https://example.test/pricing", { headers: { "x-mm-requested-path": "/admin/evil" } }),
+    );
+    expect(other.headers.get("x-middleware-request-x-mm-requested-path")).toBeNull();
+  });
+});

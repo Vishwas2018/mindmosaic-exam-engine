@@ -114,6 +114,8 @@ describe("navigation graph", () => {
     "/sign-in",
     "/sign-up",
     "/student-sign-in",
+    "/staff/sign-in", // staff entry inside AuthShell; the form links back to /sign-in
+    "/staff/mfa", // step-up screen inside AuthShell; a stranded step-up is signed out by design
     "/welcome", // a server redirect to /sign-in, not a screen
     "/auth/confirm",
     "/auth/reset",

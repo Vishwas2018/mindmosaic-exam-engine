@@ -2996,6 +2996,29 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261126090000",
+    name: "multi_role_workspaces",
+    checks: [
+      tableExists("user_roles"),
+      tableExists("role_audit_events"),
+      tableExists("security_settings"),
+      functionExists("is_admin"),
+      functionExists("has_active_admin_role"),
+      functionExists("admin_mfa_satisfied"),
+      functionExists("grant_admin_role"),
+      functionExists("revoke_admin_role"),
+      policyExists("user_roles", "user_roles_read_own"),
+      {
+        describes: "grant/revoke are service_role-only and users cannot write user_roles",
+        sql: `select has_function_privilege('service_role', 'public.grant_admin_role(uuid,text,text)', 'EXECUTE')
+          and not has_function_privilege('authenticated', 'public.grant_admin_role(uuid,text,text)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.revoke_admin_role(uuid,text,text)', 'EXECUTE')
+          and not has_table_privilege('authenticated', 'public.user_roles', 'insert,update,delete,truncate')
+          and not has_table_privilege('anon', 'public.user_roles', 'select') as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
