@@ -269,6 +269,10 @@ export function resolveApprovedUatAiProvider(
                 temperature: 0.1,
                 max_tokens: 2048,
                 stream: false,
+                // Nemotron reasoning models otherwise spend max_tokens on hidden reasoning and can return empty
+                // `content`. This task is strict JSON formatting and needs no chain of thought (documented switch:
+                // https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b/apireference).
+                chat_template_kwargs: { enable_thinking: false },
                 messages: [{ role: "user", content: prompt }],
               }),
             });
@@ -276,11 +280,19 @@ export function resolveApprovedUatAiProvider(
               return { ok: false, message: describeHttpFailure("NVIDIA", response.status) };
             }
             const body = (await response.json()) as {
-              choices?: readonly { message?: { content?: string | null } }[];
+              choices?: readonly { finish_reason?: string | null; message?: { content?: string | null } }[];
             };
-            const text = body.choices?.[0]?.message?.content;
+            const choice = body.choices?.[0];
+            const text = choice?.message?.content;
             if (typeof text !== "string" || !text.trim()) {
-              return { ok: false, message: "NVIDIA response contained no message content." };
+              // Reasoning text (if any) is deliberately never read or surfaced.
+              return {
+                ok: false,
+                message:
+                  choice?.finish_reason === "length"
+                    ? "NVIDIA response was truncated before any answer was produced."
+                    : "NVIDIA response contained no message content.",
+              };
             }
             return { ok: true, text };
           } catch (error) {

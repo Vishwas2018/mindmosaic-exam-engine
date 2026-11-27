@@ -257,6 +257,31 @@ describe("NVIDIA Nemotron — failure handling", () => {
     expect(outcome).toMatchObject({ ok: false, code: "provider_failed" });
   });
 
+  it("disables Nemotron thinking so the structured answer is returned in message.content", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(chatResponse(JSON.stringify(validFields)));
+    await improveDefectWithAi(request(), nvidiaEnv);
+    const [, init] = fetchSpy.mock.calls[0] as [string, RequestInit];
+    const sent = JSON.parse(String(init.body)) as { chat_template_kwargs?: { enable_thinking?: boolean } };
+    expect(sent.chat_template_kwargs).toEqual({ enable_thinking: false });
+  });
+
+  it("explains a truncated response (finish_reason length, empty content) distinctly and never exposes reasoning text", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response(
+        JSON.stringify({
+          choices: [{ finish_reason: "length", message: { content: null, reasoning_content: "secret chain of thought" } }],
+        }),
+        { status: 200, headers: { "content-type": "application/json" } },
+      ),
+    );
+    const outcome = await improveDefectWithAi(request(), nvidiaEnv);
+    expect(outcome).toMatchObject({ ok: false, code: "provider_failed" });
+    if (!outcome.ok) {
+      expect(outcome.message).toMatch(/truncated/i);
+      expect(outcome.message).not.toContain("chain of thought");
+    }
+  });
+
   it("does not throw when the response body is not JSON", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(new Response("<html>gateway</html>", { status: 200 }));
     const outcome = await improveDefectWithAi(request(), nvidiaEnv);
