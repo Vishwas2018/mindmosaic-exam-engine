@@ -34,6 +34,26 @@ async function signIn(page: Page, email: string) {
   await page.waitForURL((url) => !url.pathname.startsWith("/sign-in"), { timeout: 45_000 });
 }
 
+const IDB_DUMP = `
+  (async () => {
+    const db = await new Promise((resolve, reject) => {
+      const r = indexedDB.open("mindmosaic_uat_assistant_v1");
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+    });
+    const out = {};
+    for (const name of Array.from(db.objectStoreNames)) {
+      out[name] = await new Promise((resolve, reject) => {
+        const req = db.transaction(name, "readonly").objectStore(name).getAll();
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+    db.close();
+    return JSON.stringify(out);
+  })()
+`;
+
 const session = (page: Page) => page.evaluate(async () => (await fetch("/api/uat/session")).json());
 
 let dual: { id: string; email: string };
@@ -123,6 +143,19 @@ test.describe.serial("Phase 4 hosted: multi-role + UAT Assistant", () => {
     const s = await session(page);
     evidence["P4-2-session"] = { enabled: s.enabled };
     expect(s.enabled).toBe(false);
+    // Forged workspace claims from the browser change nothing: the decision is made from the session alone.
+    const forged = await page.evaluate(async () => {
+      const r = await fetch("/api/uat/session?workspace=admin&activeRole=admin&role=admin", {
+        headers: { "x-mm-workspace": "admin", "x-mm-active-role": "admin", "x-mm-requested-path": "/admin" },
+      });
+      return r.json();
+    });
+    expect(forged).toEqual({ enabled: false });
+    const forgedImprove = await page.evaluate(async () =>
+      (await fetch("/api/uat/improve", { method: "POST", headers: { "content-type": "application/json", "x-mm-workspace": "admin" }, body: JSON.stringify({ activeWorkspace: "admin" }) })).status,
+    );
+    expect(forgedImprove).toBe(403);
+    evidence["P4-2-forged-claims"] = { session: forged, improveStatus: forgedImprove };
   });
 
   test("P4-3 cross-portal UAT Assistant: launcher in Parent, Admin, Admin Review and public pages; no secrets", async ({ page }) => {
@@ -134,7 +167,11 @@ test.describe.serial("Phase 4 hosted: multi-role + UAT Assistant", () => {
       const s = await session(page);
       expect(s.enabled).toBe(true);
       expect(JSON.stringify(s)).not.toMatch(/sk[-_]|nvapi-|ghp_|Bearer|eyJ[A-Za-z0-9_-]{20,}/);
-      seen[p] = { activeRole: s.activeRole, authorizedVia: s.authorizedVia, aiConfigured: s.aiConfigured };
+      seen[p] = { primaryRole: s.primaryRole, entitledRoles: s.entitledRoles, authorizedVia: s.authorizedVia, aiConfigured: s.aiConfigured };
+      // Primary role is what the account IS (parent for a dual-role login everywhere); entitlements list both workspaces.
+      expect(s.primaryRole).toBe("parent");
+      expect([...s.entitledRoles].sort()).toEqual(["admin", "parent"]);
+      expect(s).not.toHaveProperty("activeRole");
     }
     evidence["P4-3-portals"] = seen;
     expect((seen["/admin"] as { authorizedVia: string }).authorizedVia).toBe("admin_role");
@@ -168,6 +205,31 @@ test.describe.serial("Phase 4 hosted: multi-role + UAT Assistant", () => {
     expect(JSON.stringify(json.draft)).not.toContain("qa.person@example.org");
     expect(elapsedMs).toBeLessThan(30_000);
     await expect(page.getByLabel(/Your observation notes/i)).toHaveValue(notes);
+  });
+
+  test("P4-6 defect reports record the real workspace and route (Parent vs Admin vs Admin Review)", async ({ page }) => {
+    await signIn(page, dual.email);
+    for (const [route, workspace] of [["/parent", "parent"], ["/admin", "admin"], ["/admin/review", "admin"]] as const) {
+      await page.goto(route);
+      await expect(page.getByTestId("uat-floating-launcher")).toBeVisible({ timeout: 30_000 });
+      await page.getByTestId("uat-launcher-report-btn").click();
+      await page.getByLabel(/Your observation notes/i).fill(`workspace context check from ${route}: the heading spacing looks uneven on a phone`);
+      await page.getByTestId("uat-improve-ai-btn").click();
+      await expect(page.getByLabel("Defect title")).not.toHaveValue("", { timeout: 30_000 });
+      await page.getByTestId("uat-save-issue-btn").click();
+      await expect(page.getByTestId("uat-dashboard-dialog")).toBeVisible();
+      await page.keyboard.press("Escape");
+      void workspace;
+    }
+    const dump = JSON.parse((await page.evaluate(IDB_DUMP)) as string) as {
+      issues: { environment: { route: string; portal: string; primaryRole: string; entitledRoles: string[]; activeWorkspace: string | null; workspaceEntitled: boolean; activeRole: string } }[];
+    };
+    const byRoute = Object.fromEntries(dump.issues.map((i) => [i.environment.route, i.environment]));
+    evidence["P4-6-stored-context"] = byRoute;
+    expect(byRoute["/parent"]).toMatchObject({ portal: "parent", primaryRole: "parent", activeWorkspace: "parent", activeRole: "parent", workspaceEntitled: true });
+    expect(byRoute["/admin"]).toMatchObject({ portal: "admin", primaryRole: "parent", activeWorkspace: "admin", activeRole: "admin", workspaceEntitled: true });
+    expect(byRoute["/admin/review"]).toMatchObject({ portal: "admin", primaryRole: "parent", activeWorkspace: "admin", activeRole: "admin", workspaceEntitled: true });
+    for (const env of Object.values(byRoute)) expect([...env.entitledRoles].sort()).toEqual(["admin", "parent"]);
   });
 
   test("P4-5 revocation: after Admin entitlement is revoked the same login loses Admin and UAT but keeps Parent", async ({ page }) => {

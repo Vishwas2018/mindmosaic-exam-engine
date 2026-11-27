@@ -25,7 +25,8 @@ export async function GET(request: Request) {
   const response = NextResponse.json(
     {
       enabled: true,
-      activeRole: decision.activeRole,
+      primaryRole: decision.primaryRole,
+      entitledRoles: decision.entitledRoles,
       authorizedVia: decision.authorizedVia,
       aiConfigured: decision.aiConfigured,
       githubConfigured: decision.githubConfigured,

@@ -104,7 +104,20 @@ export const uatEnvironmentContextSchema = z.object({
   portal: z.enum(UAT_PORTAL_SURFACES),
   testSessionId: z.string().min(1).max(120),
   testSessionLabel: z.string().min(1).max(160),
+  /**
+   * Role context. NEVER used for authorisation (the server decides from the session on every call); recorded so a
+   * defect shows who was acting where. Three distinct facts:
+   * - primaryRole: the account's profile role (what the account IS);
+   * - entitledRoles: server-verified workspaces the account may open (parent + admin for a dual-role login);
+   * - activeWorkspace: the workspace the route belongs to when the report was filed (derived from the route, then
+   *   checked against entitledRoles; workspaceEntitled says whether that check passed).
+   * `activeRole` is kept for older records/exports: the workspace role on a workspace route, else the primary role.
+   */
   activeRole: z.string().max(64).nullable(),
+  primaryRole: z.string().max(64).nullable().optional(),
+  entitledRoles: z.array(z.string().max(32)).max(8).optional(),
+  activeWorkspace: z.enum(["admin", "student", "parent", "teacher"]).nullable().optional(),
+  workspaceEntitled: z.boolean().optional(),
 });
 export type UatEnvironmentContext = z.infer<typeof uatEnvironmentContextSchema>;
 

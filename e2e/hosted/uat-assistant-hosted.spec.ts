@@ -119,7 +119,8 @@ test.describe.serial("UAT Assistant — hosted DEV Preview acceptance", () => {
     evidence["H1-session"] = {
       enabled: body.enabled,
       authorizedVia: body.authorizedVia,
-      activeRole: body.activeRole,
+      primaryRole: body.primaryRole,
+      entitledRoles: body.entitledRoles,
       aiConfigured: body.aiConfigured,
       githubConfigured: body.githubConfigured,
     };

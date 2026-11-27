@@ -60,7 +60,8 @@ export function UatAssistantBootstrap() {
         if (cancelled) return;
         setShellComponent(() => mod.UatAssistantShell);
         setSessionConfig({
-          activeRole: data.activeRole,
+          primaryRole: data.primaryRole,
+          entitledRoles: data.entitledRoles,
           aiConfigured: data.aiConfigured,
           githubConfigured: data.githubConfigured,
           githubRepo: data.githubRepo,

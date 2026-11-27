@@ -15,7 +15,7 @@ import type {
   UatTestSession,
 } from "../types";
 import {
-  detectPortalSurface,
+  resolveWorkspaceContext,
   sanitizeUrlForReport,
   summarizeBrowserUserAgent,
 } from "../utils/redaction";
@@ -24,7 +24,8 @@ import { ElementInspectorOverlay } from "./ElementInspectorOverlay";
 import { ReportIssueModal } from "./ReportIssueModal";
 
 export interface UatSessionConfig {
-  readonly activeRole: string;
+  readonly primaryRole: string;
+  readonly entitledRoles: readonly string[];
   readonly aiConfigured: boolean;
   readonly githubConfigured: boolean;
   readonly githubRepo: string;
@@ -144,16 +145,18 @@ export function UatAssistantShell({
     return () => dialog.removeEventListener("close", handleClose);
   }, [dashboardModalOpen]);
 
+  const workspace = resolveWorkspaceContext(pathname, config.primaryRole, config.entitledRoles);
   const environmentContext: UatEnvironmentContext = {
     browser: browserSummary,
     viewport,
     timestamp: new Date().toISOString(),
     route: pathname,
     pageUrl: currentUrl,
-    portal: detectPortalSurface(pathname),
+    ...workspace,
     testSessionId: testSession.id,
     testSessionLabel: testSession.label,
-    activeRole: config.activeRole,
+    primaryRole: config.primaryRole,
+    entitledRoles: [...config.entitledRoles],
   };
 
   return (
