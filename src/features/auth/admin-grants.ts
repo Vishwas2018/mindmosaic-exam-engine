@@ -34,3 +34,31 @@ export async function loadAdminGrants(
     return "error";
   }
 }
+
+export type AdminMfaOutcome = "ok" | "step_up" | "deny";
+
+/**
+ * The one Admin MFA decision, shared by the role gate and the UAT Assistant so they can never disagree.
+ * Reads the platform switch (security_settings.require_admin_mfa via admin_mfa_required()); when it is on, an aal2 session
+ * is required. Fails CLOSED: an unreadable switch is "deny"; an unprovable aal2 is "step_up".
+ */
+export async function adminMfaOutcome(
+  supabase: Pick<SupabaseClient, "rpc" | "auth">,
+): Promise<AdminMfaOutcome> {
+  let required: unknown;
+  try {
+    const result = await supabase.rpc("admin_mfa_required");
+    if (result.error) return "deny";
+    required = result.data;
+  } catch {
+    return "deny";
+  }
+  if (required !== true) return "ok";
+  try {
+    const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (data?.currentLevel === "aal2") return "ok";
+  } catch {
+    /* Cannot prove aal2: treat as not verified. */
+  }
+  return "step_up";
+}

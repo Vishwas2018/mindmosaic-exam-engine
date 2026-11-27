@@ -2,47 +2,19 @@ import "server-only";
 
 import { createClient as createSupabaseClient, type SupabaseClient } from "@supabase/supabase-js";
 
+import { loadAdminGrants } from "@/features/auth/admin-grants";
+import { isProfileRole, resolveEntitledRoles, type AdminGrantLookup } from "@/features/auth/roles";
+
 /**
- * UAT entitlement rules, aligned with the multi-role model of PR #165:
- *   - Admin is an ACTIVE `user_roles` grant (not merely `profiles.role = 'admin'`).
- *   - A revoked grant removes the privilege, even when the profile still says "admin".
- *   - The pre-migration database (no `user_roles` table) keeps the legacy `profiles.role` rule so this PR is safe to
- *     deploy before or after the migration.
- *   - Any other lookup failure fails CLOSED.
- *   - When `security_settings.require_admin_mfa` is on, an admin needs an aal2 session. The UAT assistant never relaxes
- *     that: a UAT cookie, allowlist entry or tester id cannot stand in for it.
- * These helpers intentionally do not import PR #165's modules so the two PRs can land in either order; once #165 is on
- * `dev` they can be swapped for `loadAdminGrants` / `resolveEntitledRoles` (the semantics are identical and tested).
+ * UAT entitlement rules. They use the SAME shared helpers as the role gate (PR #165), so the UAT Assistant can never
+ * disagree with /admin about who is an administrator:
+ *   - Admin is an ACTIVE `user_roles` grant (resolveEntitledRoles); a profile that merely says "admin" confers nothing
+ *     once the migration is applied.
+ *   - The pre-migration database (no `user_roles` table) keeps the legacy `profiles.role` rule.
+ *   - Any other lookup failure fails CLOSED ("unknown").
+ *   - When `security_settings.require_admin_mfa` is on, an admin needs an aal2 session (adminMfaOutcome). A UAT cookie,
+ *     allowlist entry or tester id cannot stand in for it.
  */
-
-export type UatGrantRow = { readonly role: string; readonly revoked_at: string | null };
-export type UatGrantLookup = readonly UatGrantRow[] | "missing" | "error";
-
-/** Undefined table / PostgREST "not in schema cache": the only outcomes that mean "migration not applied yet". */
-const TABLE_MISSING_CODES = new Set(["42P01", "PGRST205"]);
-
-export function classifyUatGrantLookup(
-  data: readonly UatGrantRow[] | null,
-  error: { code?: string } | null,
-): UatGrantLookup {
-  if (error) return TABLE_MISSING_CODES.has(error.code ?? "") ? "missing" : "error";
-  return data ?? [];
-}
-
-export async function loadUatGrants(
-  client: Pick<SupabaseClient, "from">,
-  userId: string,
-): Promise<UatGrantLookup> {
-  try {
-    const { data, error } = await client
-      .from("user_roles")
-      .select("role, revoked_at")
-      .eq("user_id", userId);
-    return classifyUatGrantLookup((data ?? null) as UatGrantRow[] | null, error);
-  } catch {
-    return "error";
-  }
-}
 
 export type UatAdminStanding =
   | { readonly kind: "admin"; readonly mfaApplies: boolean }
@@ -52,41 +24,15 @@ export type UatAdminStanding =
 /** Pure: is this account an administrator right now? "unknown" means we could not tell and must fail closed. */
 export function resolveUatAdminStanding(
   profileRole: string | null | undefined,
-  grants: UatGrantLookup,
+  grants: AdminGrantLookup,
   accessRevoked: boolean,
 ): UatAdminStanding {
   if (accessRevoked) return { kind: "not_admin" };
   if (grants === "error") return { kind: "unknown" };
-  if (grants === "missing") {
-    // Pre-migration: the legacy rule, and there is no MFA switch to honour yet.
-    return profileRole === "admin" ? { kind: "admin", mfaApplies: false } : { kind: "not_admin" };
-  }
-  const active = grants.some((row) => row.role === "admin" && !row.revoked_at);
-  return active ? { kind: "admin", mfaApplies: true } : { kind: "not_admin" };
-}
-
-export type UatMfaOutcome = "ok" | "step_up" | "deny";
-
-/** Admin MFA gate. Reads the platform switch; fails closed if it cannot be read or aal2 cannot be proven. */
-export async function checkUatAdminMfa(
-  supabase: Pick<SupabaseClient, "rpc" | "auth">,
-): Promise<UatMfaOutcome> {
-  let required: unknown;
-  try {
-    const result = await supabase.rpc("admin_mfa_required");
-    if (result.error) return "deny";
-    required = result.data;
-  } catch {
-    return "deny";
-  }
-  if (required !== true) return "ok";
-  try {
-    const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (data?.currentLevel === "aal2") return "ok";
-  } catch {
-    /* cannot prove aal2 */
-  }
-  return "step_up";
+  const primary = isProfileRole(profileRole) ? profileRole : null;
+  if (!resolveEntitledRoles(primary, grants).includes("admin")) return { kind: "not_admin" };
+  // Pre-migration there is no MFA switch to honour yet (same rule as requireRole).
+  return { kind: "admin", mfaApplies: grants !== "missing" };
 }
 
 type EnvMap = Readonly<Record<string, string | undefined>>;
@@ -129,7 +75,7 @@ export async function revalidateTesterSubject(
   }
   if (accessRevoked) return { ok: false, reason: "access_revoked" };
 
-  const grants = await loadUatGrants(client, subject);
+  const grants = await loadAdminGrants(client, subject);
   const standing = resolveUatAdminStanding(profileRole, grants, false);
   if (standing.kind === "unknown") return { ok: false, reason: "lookup_failed" };
   if (standing.kind === "admin") return { ok: true };

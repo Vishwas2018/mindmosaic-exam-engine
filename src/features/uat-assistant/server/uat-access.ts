@@ -4,6 +4,7 @@ import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 import { cookies, headers } from "next/headers";
 import type { NextResponse } from "next/server";
 
+import { adminMfaOutcome, loadAdminGrants } from "@/features/auth/admin-grants";
 import { isProfileRole, type ProfileRole } from "@/features/auth/roles";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -11,9 +12,7 @@ import { createClient } from "@/lib/supabase/server";
 import { isUatAssistantEnvironmentAllowed, uatAssistantAvailability } from "../flags";
 import { resolveNvidiaChatCompletionsUrl } from "./ai-improver";
 import {
-  checkUatAdminMfa,
   createUatServiceClient,
-  loadUatGrants,
   resolveUatAdminStanding,
   revalidateTesterSubject,
 } from "./uat-entitlement";
@@ -267,10 +266,10 @@ export async function verifyUatTesterAccess(
       if (!accessRevoked && isProfileRole(profile?.role)) {
         activeRole = profile.role;
       }
-      const grants = await loadUatGrants(supabase, user.id);
+      const grants = await loadAdminGrants(supabase, user.id);
       standing = resolveUatAdminStanding(profile?.role, grants, accessRevoked);
       if (standing.kind === "admin" && standing.mfaApplies) {
-        mfaOutcome = await checkUatAdminMfa(supabase);
+        mfaOutcome = await adminMfaOutcome(supabase);
       }
     }
   } catch {

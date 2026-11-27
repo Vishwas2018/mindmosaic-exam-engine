@@ -9,7 +9,7 @@ import {
   resolveEntitledRoles,
   type ProfileRole,
 } from "@/features/auth/roles";
-import { loadAdminGrants } from "@/features/auth/admin-grants";
+import { adminMfaOutcome, loadAdminGrants } from "@/features/auth/admin-grants";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -47,21 +47,9 @@ async function mfaStepUp(
   supabase: Awaited<ReturnType<typeof createClient>>,
   nextPath: string,
 ): Promise<StepUp> {
-  let required: unknown;
-  try {
-    const result = await supabase.rpc("admin_mfa_required");
-    if (result.error) return { kind: "deny" };
-    required = result.data;
-  } catch {
-    return { kind: "deny" };
-  }
-  if (required !== true) return { kind: "ok" };
-  try {
-    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (aal?.currentLevel === "aal2") return { kind: "ok" };
-  } catch {
-    /* Cannot prove aal2: treat as not verified and step up. */
-  }
+  const outcome = await adminMfaOutcome(supabase);
+  if (outcome === "ok") return { kind: "ok" };
+  if (outcome === "deny") return { kind: "deny" };
   return { kind: "redirect", path: `/staff/mfa?next=${encodeURIComponent(nextPath)}` };
 }
 
