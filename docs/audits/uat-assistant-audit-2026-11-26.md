@@ -131,3 +131,16 @@ The hosted runs created 2 fixture accounts per run (an admin and a parent, `mm-a
 
 - **No live NVIDIA call.** There is no NVIDIA key in any environment I can use, and I will not request one. Real rewriting quality, the exact current model id and NVIDIA-side latency remain unverified until the owner sets the Preview variables below and the hosted spec is rerun.
 - The Nemotron reasoning-block handling is based on documented model behaviour and tested with synthetic output, not captured live output.
+
+## 7. Live Nemotron acceptance attempt (2026-11-27)
+
+**Verdict: NO-GO for live AI acceptance — BLOCKED at step 1. Nothing past step 1 was run against NVIDIA.**
+
+| Step | Result |
+|------|--------|
+| 1. NVIDIA env vars present on feature-branch Preview | **FAIL.** Vercel project env inventory (49 vars) has no `NVIDIA_*`, `QF_AI_*`, `MM_UAT_*` or `*AI_PROVIDER*` variable; branch-scoped query for `feat/ai-uat-assistant` returns 0 entries. No local env file holds them either. |
+| 2. Redeploy head | Not done: redeploy without vars would not change outcome. Head is `c4d5bf9b`; CI green. |
+| 3–6. Live UAT, providerId/model/JSON, timing vs 30 s, credential/question transmission | **Not run.** Needs the key. Unit coverage only (35 mocked-fetch tests, see §6.3). |
+| 7. PR #165 compatibility | Static review only; PR #165 head `941855ce`. Hosted Admin MFA / revocation / cross-portal checks need the AI run to be meaningful and were not re-executed here. |
+
+Required owner action: add the three NVIDIA variables to the Preview environment scoped to `feat/ai-uat-assistant` (Vercel dashboard; values must not be pasted into chat or committed), then request a redeploy and rerun the hosted spec. Until then the deterministic fallback is the only verified path; production untouched, nothing merged.
