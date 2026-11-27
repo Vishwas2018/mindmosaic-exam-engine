@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import { AuthProvider } from "@/features/auth";
+import { UatAssistantBootstrap } from "@/features/uat-assistant/components/UatAssistantBootstrap";
 import { siteOrigin } from "@/lib/site-url";
 
 import "./globals.css";
@@ -84,7 +85,11 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+          {process.env.VERCEL_ENV !== "production" &&
+            process.env.VERCEL_TARGET_ENV !== "production" && <UatAssistantBootstrap />}
+        </AuthProvider>
       </body>
     </html>
   );

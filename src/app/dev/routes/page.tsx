@@ -97,6 +97,7 @@ const GROUPS: Group[] = [
     title: "Dev & Design Previews",
     access: "Dev environment only",
     routes: [
+      { path: "/dev/uat", label: "AI UAT Assistant & defect dashboard", flags: ["dev-tool"] },
       { path: "/dev/student-preview", label: "Student Canvas Design Inspector (PR #109 catalog, 56 artboards)", flags: ["dev-tool"] },
       { path: "/dev/writing", label: "Writing prompt workbench", flags: ["dev-tool"] },
       { path: "/dev/bar-model", label: "Bar model renderer sandbox", flags: ["dev-tool"] },
