@@ -4,7 +4,7 @@ import { buildContentSecurityPolicy } from "@/lib/security/csp";
 import { updateSession } from "@/lib/supabase/middleware";
 
 // These auth pages already render per request, so Next can nonce their scripts.
-const dynamicAuthRoutes = new Set(["/sign-in", "/auth/confirm", "/auth/forgot", "/auth/reset"]);
+const dynamicAuthRoutes = new Set(["/sign-in", "/auth/confirm", "/auth/forgot", "/auth/reset", "/staff/sign-in", "/staff/mfa"]);
 
 function isNonProductionTarget(request: NextRequest): boolean {
   const { hostname } = request.nextUrl;
@@ -47,6 +47,13 @@ export async function proxy(request: NextRequest) {
   const csp = buildContentSecurityPolicy(nonce, localSupabaseConnectSrc(request));
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
+  // The admin layout cannot see the URL; this lets its step-up/sign-in redirects return to the deep link the reviewer
+  // asked for. Always overwritten here (a client-sent value is discarded) and re-validated by safeNextPath on use.
+  requestHeaders.delete("x-mm-requested-path");
+  const { pathname, search } = request.nextUrl;
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+    requestHeaders.set("x-mm-requested-path", `${pathname}${search}`);
+  }
 
   const enforce = shouldEnforceAuthCsp(request) || shouldEnforceAdminCsp(request);
   // Next reads the request policy during dynamic rendering to nonce its scripts.
