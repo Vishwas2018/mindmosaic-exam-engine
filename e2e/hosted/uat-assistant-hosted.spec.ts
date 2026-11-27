@@ -164,12 +164,22 @@ test.describe.serial("UAT Assistant — hosted DEV Preview acceptance", () => {
     await page.getByLabel(/Your observation notes/i).fill(notes);
 
     const responsePromise = page.waitForResponse((r) => r.url().includes("/api/uat/improve") && r.request().method() === "POST");
+    const t0 = Date.now();
     await page.getByTestId("uat-improve-ai-btn").click();
     const response = await responsePromise;
     const json = await response.json();
+    const elapsedMs = Date.now() - t0;
+    const sentBody = response.request().postData() ?? "";
+    evidence["H2-elapsedMs"] = elapsedMs;
+    evidence["H2-request-keys"] = Object.keys(JSON.parse(sentBody || "{}"));
+    // Nothing credential-like or question-bank-like may be sent from the browser to the improve route.
+    expect(sentBody).not.toMatch(/nvapi-|NVIDIA_API_KEY|api[_-]?key|authorization|bearer|correctAnswer|correct_answer|answerKey/i);
+    expect(elapsedMs).toBeLessThan(30_000);
     evidence["H2-improve"] = {
       status: response.status(),
       ok: json.ok,
+      code: json.code,
+      message: json.message,
       mode: json.draft?.mode,
       providerId: json.draft?.providerId,
       modelId: json.draft?.modelId,
@@ -181,7 +191,8 @@ test.describe.serial("UAT Assistant — hosted DEV Preview acceptance", () => {
     expect(response.status()).toBe(200);
     expect(json.ok).toBe(true);
     expect(json.draft.mode).toBe("ai");
-    expect(String(json.draft.providerId).length).toBeGreaterThan(0);
+    expect(json.draft.providerId).toBe("nvidia");
+    expect(String(json.draft.modelId).length).toBeGreaterThan(0);
     expect(String(json.draft.title).length).toBeGreaterThan(5);
     // The tester's PII-ish text must not be echoed into the structured draft, and the original notes stay verbatim.
     expect(JSON.stringify(json.draft)).not.toContain("qa.person@example.org");

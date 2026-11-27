@@ -132,15 +132,20 @@ The hosted runs created 2 fixture accounts per run (an admin and a parent, `mm-a
 - **No live NVIDIA call.** There is no NVIDIA key in any environment I can use, and I will not request one. Real rewriting quality, the exact current model id and NVIDIA-side latency remain unverified until the owner sets the Preview variables below and the hosted spec is rerun.
 - The Nemotron reasoning-block handling is based on documented model behaviour and tested with synthetic output, not captured live output.
 
-## 7. Live Nemotron acceptance attempt (2026-11-27)
+## 7. Live Nemotron acceptance (2026-11-27)
 
-**Verdict: NO-GO for live AI acceptance — BLOCKED at step 1. Nothing past step 1 was run against NVIDIA.**
+**Verdict: NO-GO — live AI call reaches NVIDIA but is rejected with HTTP 410. Not yet accepted.**
 
 | Step | Result |
 |------|--------|
-| 1. NVIDIA env vars present on feature-branch Preview | **FAIL.** Vercel project env inventory (49 vars) has no `NVIDIA_*`, `QF_AI_*`, `MM_UAT_*` or `*AI_PROVIDER*` variable; branch-scoped query for `feat/ai-uat-assistant` returns 0 entries. No local env file holds them either. |
-| 2. Redeploy head | Not done: redeploy without vars would not change outcome. Head is `c4d5bf9b`; CI green. |
-| 3–6. Live UAT, providerId/model/JSON, timing vs 30 s, credential/question transmission | **Not run.** Needs the key. Unit coverage only (35 mocked-fetch tests, see §6.3). |
-| 7. PR #165 compatibility | Static review only; PR #165 head `941855ce`. Hosted Admin MFA / revocation / cross-portal checks need the AI run to be meaningful and were not re-executed here. |
+| 1. NVIDIA env vars on Preview | **PASS** (after owner edit). `NVIDIA_API_KEY`, `MM_UAT_AI_PROVIDER`, `QF_AI_NVIDIA_MODEL` now target production + preview + development (all Sensitive, values not readable). Production scope should be confirmed intentional. |
+| 2. Redeploy head | **PASS.** `dpl_9TMkAHbBeA8gKtSRhJpedShkMrpW`, commit `d2353ee8`, READY, alias `...-git-feat-ai-9d0675-...`. |
+| 3. Hosted UAT-H2 against real API | **FAIL.** `/api/uat/session` reports `aiConfigured: true`. `POST /api/uat/improve` → **502** `{"ok":false,"code":"provider_failed","message":"NVIDIA API returned 410."}`. |
+| 4. providerId=nvidia, mode=ai, model ID, JSON, notes preserved | **Not verifiable** — no draft returned. |
+| 5. Timing / error handling | Failure returned in **1.3 s** (limit 30 s). The error path behaves as designed: generic message, no key, original notes untouched, 502 not 500. |
+| 6. Credentials / unpublished questions | **PASS (request side).** Browser request keys are only `originalNotes, route, pageUrl, portal, browser, viewport, element`; spec asserts no key/bearer/answer-key strings. The NVIDIA request body was not observable. |
+| 7. PR #165 compatibility (Admin MFA, revocation, cross-portal) | Hosted H1/H3/H4 passed on `63a8ee49` (see §5.4); not re-run on `d2353ee8` because the AI path blocks acceptance. PR #165 head `941855ce`. |
 
-Required owner action: add the three NVIDIA variables to the Preview environment scoped to `feat/ai-uat-assistant` (Vercel dashboard; values must not be pasted into chat or committed), then request a redeploy and rerun the hosted spec. Until then the deterministic fallback is the only verified path; production untouched, nothing merged.
+**Cause (inferred, not proven):** the code has no default model; the ID comes only from `QF_AI_NVIDIA_MODEL`. HTTP 410 from NVIDIA's API means the model or endpoint is retired. NVIDIA's public model list (`/v1/models`, unauthenticated) currently includes: `nvidia/nemotron-3-ultra-550b-a55b`, `nvidia/nemotron-3.5-lightning-30b-a3b`, `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning`, `nvidia/nemotron-3.5-super-vl-120b-a12b`. The configured value could not be read (Sensitive), so it was not compared.
+
+**Owner action:** set `QF_AI_NVIDIA_MODEL` on Preview to a model ID present in that list, redeploy, rerun UAT-H2.
