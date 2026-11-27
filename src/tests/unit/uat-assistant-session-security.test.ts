@@ -5,13 +5,9 @@ import {
   signTesterBadgeToken,
   verifyTesterBadgeToken,
 } from "@/features/uat-assistant/server/uat-access";
-import {
-  checkUatAdminMfa,
-  classifyUatGrantLookup,
-  resolveUatAdminStanding,
-  revalidateTesterSubject,
-  type UatGrantRow,
-} from "@/features/uat-assistant/server/uat-entitlement";
+import { adminMfaOutcome as checkUatAdminMfa, classifyGrantLookup as classifyUatGrantLookup } from "@/features/auth/admin-grants";
+import { resolveEntitledRoles, type AdminGrantRow as UatGrantRow } from "@/features/auth/roles";
+import { resolveUatAdminStanding, revalidateTesterSubject } from "@/features/uat-assistant/server/uat-entitlement";
 import type { UatIssue } from "@/features/uat-assistant/types";
 import { uatScreenshotSchema } from "@/features/uat-assistant/types";
 import { parseImportBundle, serializeExportBundle } from "@/features/uat-assistant/utils/exporters";
@@ -337,6 +333,24 @@ describe("screenshot redaction leaves no recoverable pixels in retained data", (
       const text = JSON.stringify(parsed.bundle);
       expect(text).not.toContain("rawDataUrl");
       expect(text).not.toContain(RAW);
+    }
+  });
+});
+
+describe("UAT admin standing agrees with the shared role gate (PR #165)", () => {
+  const active: UatGrantRow = { role: "admin", revoked_at: null };
+  const revoked: UatGrantRow = { role: "admin", revoked_at: "2026-11-01T00:00:00Z" };
+  const lookups = [[active], [revoked], [], "missing", "error"] as const;
+  const primaries = ["parent", "admin", "teacher", "student", null] as const;
+
+  it("is admin exactly when resolveEntitledRoles says admin, for every primary role and lookup outcome", () => {
+    for (const primary of primaries) {
+      for (const grants of lookups) {
+        const shared = resolveEntitledRoles(primary, grants).includes("admin");
+        const standing = resolveUatAdminStanding(primary, grants, false);
+        if (grants === "error") expect(standing.kind).toBe("unknown");
+        else expect(standing.kind === "admin").toBe(shared);
+      }
     }
   });
 });
