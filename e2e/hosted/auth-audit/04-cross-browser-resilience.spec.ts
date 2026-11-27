@@ -26,6 +26,7 @@ import {
   expect,
   seededEmail,
   test,
+  retireFixtureUser,
 } from "../fixtures";
 
 const OUT = process.env.HOSTED_OUTPUT ?? "test-results/hosted";
@@ -34,7 +35,7 @@ const createdUserIds: string[] = [];
 test.describe("Auth Audit 04: Cross-Browser & Resilience @responsive", () => {
   test.afterAll(async () => {
     for (const id of createdUserIds) {
-      await devAdmin().auth.admin.deleteUser(id).catch(() => undefined);
+      await retireFixtureUser(id);
     }
   });
 

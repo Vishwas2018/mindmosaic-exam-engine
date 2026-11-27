@@ -22,6 +22,8 @@ import {
   seededEmail,
   STRONG_PASSWORD,
   test,
+  grantFixtureAdmin,
+  retireFixtureUser,
 } from "./fixtures";
 
 const OUT = path.resolve("test-results", "hosted", RUN_ID);
@@ -52,6 +54,7 @@ async function makeUser(
     .update({ role, display_name: displayName })
     .eq("id", data.user.id);
   if (upErr) throw new Error(`profile ${label}: ${upErr.message}`);
+  if (role === "admin") await grantFixtureAdmin(data.user.id, `admin-review hosted fixture ${label}`);
   return { id: data.user.id, email };
 }
 
@@ -126,10 +129,7 @@ test.describe("Admin Review 162: hosted DEV acceptance", () => {
       path.join(OUT, "admin-review-evidence.json"),
       JSON.stringify(evidence, null, 2),
     );
-    for (const id of created)
-      await devAdmin()
-        .auth.admin.deleteUser(id)
-        .catch(() => undefined);
+    for (const id of created) await retireFixtureUser(id);
   });
 
   test("AR-01 non-admin roles and guests are denied; no draft content leaks", async ({

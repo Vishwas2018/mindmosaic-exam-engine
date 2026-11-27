@@ -31,6 +31,8 @@ import {
   seedBypassCookie,
   seededEmail,
   test,
+  grantFixtureAdmin,
+  retireFixtureUser,
 } from "../fixtures";
 import { actionLink, checkLinkTarget, createInbox, waitForMail } from "../mailtm";
 
@@ -62,6 +64,7 @@ async function createSeededUser(label: string, role: "parent" | "teacher" | "adm
       .update({ role })
       .eq("id", data.user.id);
     if (upErr) throw new Error(`update role ${role} failed: ${upErr.message}`);
+    if (role === "admin") await grantFixtureAdmin(data.user.id, `auth-audit-02 fixture ${label}`);
   }
   return { id: data.user.id, email };
 }
@@ -81,7 +84,7 @@ test.describe("Auth Audit 02: Login, Logout, Session Lifecycle & Password Recove
     fs.mkdirSync(OUT, { recursive: true });
     fs.writeFileSync(path.join(OUT, "audit-02-evidence.json"), JSON.stringify(evidence, null, 2));
     for (const id of createdUserIds) {
-      await devAdmin().auth.admin.deleteUser(id).catch(() => undefined);
+      await retireFixtureUser(id);
     }
   });
 

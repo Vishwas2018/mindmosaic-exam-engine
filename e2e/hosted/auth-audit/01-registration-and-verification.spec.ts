@@ -27,6 +27,7 @@ import {
   protectContext,
   seedBypassCookie,
   test,
+  retireFixtureUser,
 } from "../fixtures";
 import { actionLink, checkLinkTarget, createInbox, waitForMail, type Inbox } from "../mailtm";
 
@@ -144,7 +145,7 @@ test.describe("Auth Audit 01: Registration & Email Verification", () => {
     for (const email of createdEmails) {
       const user = await findUserByEmail(email).catch(() => null);
       if (user) {
-        await devAdmin().auth.admin.deleteUser(user.id).catch(() => undefined);
+        await retireFixtureUser(user.id);
       }
     }
   });
