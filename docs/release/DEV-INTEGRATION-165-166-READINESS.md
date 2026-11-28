@@ -222,7 +222,7 @@ Gaps by design: local `test:rls` / `test:e2e` / `test:e2e:auth` did not run (Doc
 - **Confirmed on DEV with controlled fixtures:** `has_active_access`, `is_student_profile` and `session_has_attempt` return `true` for another family's id to **anon** and to an unrelated parent. Medium severity: one bit per call, random-UUID ids, no row data, no authentication needed.
 - PR #169: caller-relationship checks, EXECUTE revoked from PUBLIC and anon, rollback, new RLS isolation tests, registry post-check, review doc `docs/security/DEFINER-HARDENING-2026-11-28.md`.
 - Views (9) and definer functions: statically reviewed; the six `admin_*` views are gated by `is_admin()`, the three `visible_*` views carry full ownership predicates; no authenticated-executable function with an id argument lacks a relationship check. Remaining anon-executable helpers read `auth.uid()` and are low (phase 2).
-- **Not done:** live catalog/advisor read (Supabase DEV MCP needs owner read-only OAuth), local RLS run (no Docker), DEV migration.
+- RLS CI (real Postgres) on PR #169: **41 files, 641 tests pass, including the 12 new isolation tests**. **Not done:** live catalog/advisor read (Supabase DEV MCP needs owner read-only OAuth) and the DEV migration.
 
 ### 5. GitHub integration
 - Runbook `docs/release/GITHUB-ISSUE-INTEGRATION-RUNBOOK.md`: fine-grained token, one repo, Issues read/write only, 30-day expiry, Vercel Preview + `dev` branch Sensitive variable, kill switch. Nothing configured; `githubConfigured:false`; the Markdown fallback was re-verified by UAT-H3.
