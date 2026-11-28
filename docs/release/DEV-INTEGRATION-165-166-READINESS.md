@@ -287,3 +287,23 @@ DEV owner manual testing: **GO**. Private beta: **NO-GO until criteria 1-3 and 5
 - **Not run in this session:** manual-family seed and Parent–Student journey, security probes, hosted regression, W1–W4, real-mail and password-recovery verification. Free RAM was about 1 GB against the 8 GB gate, the migration is not applied, `BILLING_WEBHOOK_SECRET` is not confirmed matching, and SMTP needs the owner's mailbox and token. Procedures and expected results are in the handoff file; none of these results is claimed.
 - Bypass-secret rotation plan written, **not executed** (section 3). `BILLING_WEBHOOK_SECRET` instructions in section 4.
 - Verdict unchanged: DEV owner testing GO; private beta NO-GO until the migration is applied and verified, W1–W4 pass, and real-mail/recovery is evidenced.
+
+## Post-migration results (2026-11-28, DEV, stable alias, `dev` `2104c0c7`, deployment `dpl_G2p3ogdUZJKhGoHRCTTVnD62j936`)
+
+Migration `20261128090000` was applied and verified out-of-band (not reapplied). One worker, sequential.
+
+| Run | Result |
+|---|---|
+| Anonymous RPC probe (3 hardened helpers) | 401 `42501` x3 |
+| Manual-family seed (`m-manual-test-family.spec.ts`, run `rmx0a09xe`) | 1/1 pass |
+| Hosted regression (run `rmx0a2unz`; security isolation D, Vihaan restriction, negative auth, student assessment B/C incl. Parent view, guest guard, content governance, programme labels, responsive/a11y, multi-role + UAT Assistant, Admin review, auth-audit RBAC-01/SEC-01/AUTH-01/02/XBR-01) | **49 passed, 0 failed, 10 skipped** (21.0 min) |
+| Admin entitlements after the runs | **3 active, 0 orphan fixtures** (reconcile dry run) |
+
+**Skipped (all 10 need a readable real inbox, `HOSTED_MAIL_BASE`; not run, not claimed):** A1–A2, REG-01..04, REC-01, N1–N4, N5–N9, N11, N12.
+**Not run, credential-dependent:** W1–W4 (`s1`–`s4`, needs the local Stripe signing secret); real-SMTP delivery and password recovery (owner mailbox and Supabase token).
+The student-reads-parent-access path and class enrolment ran inside B/C and D against the hardened helpers with no regression. The Parent–Student journey (B1–B8, C including the Parent's view of the attempt) passed on the seeded and synthetic families.
+
+### Final beta readiness assessment
+- **DEV owner manual testing: GO.** Migration applied and verified, regression green, three Admins, MFA off.
+- **Private beta: still NO-GO** until three owner-held items close: (1) W1–W4 pass with the correct `STRIPE_WEBHOOK_SECRET` locally; (2) custom SMTP delivery and password recovery evidenced from a real inbox (the 10 skipped specs); (3) the Vercel bypass-secret rotation decision (plan in the handoff file, not executed).
+- Nothing excluded silently; no migration, secret, account or production change was made in this run.
