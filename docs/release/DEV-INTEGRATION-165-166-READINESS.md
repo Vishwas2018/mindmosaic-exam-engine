@@ -282,7 +282,7 @@ DEV owner manual testing: **GO**. Private beta: **NO-GO until criteria 1-3 and 5
 ## Final remediation, hand-off state (2026-11-28, evening)
 
 - #169 merged `8ca82820`, #170 merged `2104c0c7`; both integrated `dev` CI runs of `8ca82820` green.
-- **DEV migration `20261128090000` not applied.** Handoff with pre-flight, apply, post-apply SQL and rollback: `docs/release/FINAL-BETA-HANDOFF-2026-11-28.md` section 1.
+- **DEV migration `20261128090000` APPLIED and independently verified (ledger, anon denied x3, trigger, policies, counts, 3 Admins, MFA off; anon probe 401/42501 x3).** Do not reapply. Handoff with pre-flight, apply, post-apply SQL and rollback: `docs/release/FINAL-BETA-HANDOFF-2026-11-28.md` section 1.
 - Admin entitlements measured after both merges: 3 active, 0 orphan fixtures (dry-run reconcile, DEV).
 - **Not run in this session:** manual-family seed and Parent–Student journey, security probes, hosted regression, W1–W4, real-mail and password-recovery verification. Free RAM was about 1 GB against the 8 GB gate, the migration is not applied, `BILLING_WEBHOOK_SECRET` is not confirmed matching, and SMTP needs the owner's mailbox and token. Procedures and expected results are in the handoff file; none of these results is claimed.
 - Bypass-secret rotation plan written, **not executed** (section 3). `BILLING_WEBHOOK_SECRET` instructions in section 4.

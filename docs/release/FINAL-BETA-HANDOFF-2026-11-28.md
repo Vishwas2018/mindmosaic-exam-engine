@@ -4,9 +4,24 @@ DEV only (`mfglzabnayacssgertat`). No secret value appears in this file or may b
 Production is out of scope. No account deletions. Global MFA stays off.
 
 State at hand-off: PR #169 merged to `dev` (`8ca82820`), PR #170 merged (`2104c0c7`), integrated `dev` CI green on both
-runs of `8ca82820`. **The #169 migration is not applied to DEV** (applying it is the next, human-held step).
+runs of `8ca82820`. **The #169 migration is now APPLIED to DEV and independently verified** (see section 0). Do not reapply.
 
-## 1. DEV migration handoff: `20261128090000_harden_definer_helpers.sql`
+## 0. Migration evidence (applied and verified, 2026-11-28)
+
+Applied by the owner; independently verified by ChatGPT on DEV `mfglzabnayacssgertat`. **DO NOT REAPPLY.**
+- Ledger row `20261128090000_harden_definer_helpers` matches the repository version.
+- Anonymous EXECUTE denied for `has_active_access`, `is_student_profile`, `session_has_attempt`.
+- `is_student_profile` restricted to the service role; enrolment trigger `class_students_require_student` enabled.
+- `exam_responses` INSERT and UPDATE ownership policies verified.
+- Existing data counts unchanged; exactly three active Admin entitlements; global MFA still disabled.
+- Anonymous SECURITY DEFINER advisor findings: 13 to 10.
+
+Independent anon probe by this agent (PostgREST RPC with the public anon key, DEV only, ids are a nil-style UUID, no data
+returned): `has_active_access` 401 `42501`, `is_student_profile` 401 `42501`, `session_has_attempt` 401 `42501`
+(permission denied for all three). The authenticated-role and service-role probes, hosted regression, manual-family
+seed and W1-W4 are **not yet run**: free RAM was 4.2 GB against the 8 GB gate.
+
+## 1. DEV migration handoff (historical: already applied, see section 0): `20261128090000_harden_definer_helpers.sql`
 
 Applied by ChatGPT / the owner (not by this agent). File: `supabase/migrations/20261128090000_harden_definer_helpers.sql`.
 Rollback: `supabase/migrations/rollbacks/20261128090000_harden_definer_helpers.down.sql`.
