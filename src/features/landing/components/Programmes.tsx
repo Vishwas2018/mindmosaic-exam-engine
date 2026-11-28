@@ -305,7 +305,7 @@ export function Programmes() {
               <>
                 {activeLimited && activeCovered && (
                   <p className="mt-6 rounded-[10px] border border-mm-tint-line bg-mm-tint-soft px-4 py-3.5 text-sm leading-[1.55] text-mm-ink">
-                    <strong>Limited.</strong> Some learning content is live for {yearLevelLabel(active)}; the wider
+                    <strong>Limited.</strong> Some content is open for {yearLevelLabel(active)}; the wider
                     programme is still being developed.
                   </p>
                 )}

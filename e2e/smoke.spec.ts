@@ -90,7 +90,7 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
 
   await page.goto("/sign-up");
   await expect(page).toHaveTitle(
-    PUBLIC_SIGNUP_ENABLED ? "Sign up | MindMosaic" : "Sign-up closed | MindMosaic",
+    PUBLIC_SIGNUP_ENABLED ? "Create a family account | MindMosaic" : "Sign-up closed | MindMosaic",
   );
 
   const titles = new Set([
@@ -101,7 +101,7 @@ test("every route has a distinct, non-revealing page title", async ({ page }) =>
     "Your results | MindMosaic",
     "Renderer showcase | MindMosaic",
     "Sign in | MindMosaic",
-    PUBLIC_SIGNUP_ENABLED ? "Sign up | MindMosaic" : "Sign-up closed | MindMosaic",
+    PUBLIC_SIGNUP_ENABLED ? "Create a family account | MindMosaic" : "Sign-up closed | MindMosaic",
   ]);
   expect(titles.size).toBe(8);
 });

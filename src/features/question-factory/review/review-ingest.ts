@@ -269,6 +269,10 @@ async function attemptIngest(
     return { status: "rejected", issueCode: candidateOutcome.issueCode, message: candidateOutcome.message };
   }
   const { record, provenance, semanticClassification } = candidateOutcome.data;
+  if (provenance.kind === "legacy_import") return {
+    status: "rejected", issueCode: "legacy_origin_unverified",
+    message: "Unknown original generator: independence cannot be established. Legacy advisory evidence must not be appended as a production review chain.",
+  };
 
   // Mission 3B blueprint remediation: resolve and verify the candidate's
   // bound blueprint *before anything else this function decides* —

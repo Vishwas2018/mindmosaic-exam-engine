@@ -1,0 +1,83 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-e1d2a343e8c817bea07b1923",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "e203ef0b156a9cfea8508307bdcd75fffc3fb1f862fb3fb9541a8f229e0ede5b",
+  "sourceManifestHash": "f4db7c28582ddf47b16a42ae481ad303272e74e8121f599bcbc7126b723a0320",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-e1d2a343e8c817bea07b1923",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart shows how many books each Year 3 class borrowed from the library in October. Which class borrowed the most books?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "3A"
+      },
+      {
+        "id": "opt-b",
+        "text": "3B"
+      },
+      {
+        "id": "opt-c",
+        "text": "3C"
+      },
+      {
+        "id": "opt-d",
+        "text": "3D"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "bar-3b",
+        "altText": "Bar chart with 4 bars showing how many books each of four Year 3 classes borrowed, with values 15, 22, 9, 18.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "3A",
+            "3B",
+            "3C",
+            "3D"
+          ],
+          "values": [
+            15,
+            22,
+            9,
+            18
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-b"
+    },
+    "explanation": "3B borrowed the most books, with 22.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "num.prod.statistics.reading-a-bar-chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "0776d5d4c5524855deb2ce7bcad22dce5123d89d380e119cf6c65ef6d7778e0b"
+}

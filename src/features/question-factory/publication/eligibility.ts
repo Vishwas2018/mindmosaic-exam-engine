@@ -81,6 +81,7 @@ export async function checkPublicationEligibility(
 ): Promise<PublicationEligibilityResult> {
   const issues: PublicationIssue[] = [];
   const { candidateId, question, provenance } = context;
+  if (provenance.kind === "legacy_import") return { ok: false, issues: [issue("publication_upstream_evidence_invalid", "provenance.originalGeneration", "Legacy origin is unverified; Phase 1 publication is refused regardless of other evidence.")] };
 
   if (hashJson(question) !== provenance.contentHash) {
     issues.push(

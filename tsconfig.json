@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "content/question-factory", "src/features/landing/_archive"]
+  "exclude": ["node_modules", "content/question-factory", "src/features/landing/_archive", "mindmosaic-exam-engine-bar-model-pilot"]
 }

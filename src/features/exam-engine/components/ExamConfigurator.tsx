@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
 import { Badge, Button, Card, Select } from "@/components/ui";
@@ -24,7 +24,7 @@ import {
   type YearLevelFilter,
 } from "@/features/exam-engine/selection";
 import { useExamStore } from "@/features/exam-engine/state";
-import type { AuthoringQuestion } from "@/features/exam-engine/types";
+import {useHydrated} from "@/lib/use-hydrated";
 
 import { STYLE_LABELS, SUBJECT_LABELS, YEAR_LABELS, describeConfig } from "./describe-config";
 import { ExamInstructions } from "./ExamInstructions";
@@ -36,9 +36,8 @@ export interface ExamConfiguratorProps {
    * Per-bank eligibility summaries (counts and full-exam durations per
    * filter combination) computed server-side. This is the only bank data
    * in the page payload: no question content, no answer keys — see
-   * docs/ASSESSMENT_SECURITY_MODEL.md (Phase 0 addendum). Guests fetch
-   * the actual bank from /api/exam/guest-bank when they start; signed-in
-   * visitors get server-selected questions from /api/exam/session.
+   * docs/ASSESSMENT_SECURITY_MODEL.md. Both guests and signed-in students
+   * receive server-selected candidate questions when they start.
    */
   bankEligibility: Record<ExamBankId, BankEligibilitySummary>;
   /**
@@ -65,30 +64,34 @@ export interface ExamConfiguratorProps {
    * too thin on its own.
    */
   initialBankId?: ExamBankId;
-}
-
-interface GuestBanks {
-  curated: readonly AuthoringQuestion[];
-  published: readonly AuthoringQuestion[];
+  /**
+   * `?seed=` and `?confidenceMode=true`, read by the page on the server. Reading them here, on the client, needed a
+   * Suspense boundary, and React reveals streamed boundaries up to ~300 ms late: a signed-in student's
+   * auth update in that window made React client-render the boundary next to the still-hidden server copy, so the
+   * page briefly held two start buttons (D-018).
+   */
+  seed?: string;
+  confidenceMode?: boolean;
 }
 
 /**
  * Exam setup panel. Students choose year level, exam style, subject,
  * question count and timing; the eligible-question count updates live and
- * starting a session runs the deterministic seeded selection (guests) or
- * creates a server-selected session (signed-in).
+ * starting a session requests a selection from the server.
  */
 export function ExamConfigurator({
   bankEligibility,
   initialScope,
   lockScope = false,
   initialBankId,
+  seed,
+  confidenceMode = false,
 }: ExamConfiguratorProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const startExam = useExamStore((state) => state.startExam);
+  const startGuestExam = useExamStore((state) => state.startGuestExam);
   const startServerExam = useExamStore((state) => state.startServerExam);
   const auth = useAuth();
+  const hydrated = useHydrated();
   /* Signed-in visitors go through the server session flow —
      the page payload carries no bank for them to practise from locally.
      Non-student roles (admin, parent, teacher) are prohibited from creating student sessions (MM-AUTH-01). */
@@ -121,36 +124,6 @@ export function ExamConfigurator({
   /* True while a start is in flight (guest bank download or server
      session creation) — same double-start protection, pre-session. */
   const [isCreating, setIsCreating] = useState(false);
-
-  /*
-   * Guest banks are fetched once, lazily, and only for guests. The
-   * promise (not state) is the cache: the count display never needs the
-   * bank — it reads the eligibility summaries — so nothing re-renders on
-   * arrival; startExam awaits it at click time.
-   */
-  const guestBanksPromise = useRef<Promise<GuestBanks> | null>(null);
-  const loadGuestBanks = useCallback(() => {
-    guestBanksPromise.current ??= fetch("/api/exam/guest-bank")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Guest bank request failed: ${response.status}`);
-        }
-        return response.json() as Promise<GuestBanks>;
-      })
-      .catch((error) => {
-        /* Allow a retry on the next Start click instead of caching failure. */
-        guestBanksPromise.current = null;
-        throw error;
-      });
-    return guestBanksPromise.current;
-  }, []);
-
-  useEffect(() => {
-    /* Warm the guest bank download while the guest is still configuring. */
-    if (auth.status === "anonymous" || auth.status === "unconfigured") {
-      loadGuestBanks().catch(() => {});
-    }
-  }, [auth.status, loadGuestBanks]);
 
   /*
    * Warm the router cache for the exam route while the student is still
@@ -197,8 +170,6 @@ export function ExamConfigurator({
 
   const requestedCount = questionCount === "full" ? eligibleCount : questionCount;
   const insufficient = eligibleCount === 0 || eligibleCount < requestedCount;
-
-  const confidenceMode = searchParams.get("confidenceMode") === "true";
 
   const config: ExamSelectionConfig = {
     yearLevel,
@@ -252,27 +223,11 @@ export function ExamConfigurator({
       return;
     }
 
-    /* Guest flow: fully client-side, exactly as before — an explicit
-       ?seed= makes sessions reproducible for tests and sharing. */
-    const seed = searchParams.get("seed") ?? undefined;
-    let pool: readonly AuthoringQuestion[];
-    try {
-      setIsCreating(true);
-      const banks = await loadGuestBanks();
-      pool = banks[bankId];
-    } catch {
-      setStartError(
-        "We couldn't load the practice questions. Check your connection and try again.",
-      );
-      return;
-    } finally {
-      setIsCreating(false);
-    }
-    const started = startExam(pool, config, { seed, bankId });
+    setIsCreating(true);
+    const started = await startGuestExam({ config, bankId }, { seed });
+    setIsCreating(false);
     if (!started) {
-      setStartError(
-        "Not enough questions match this combination. Try a broader selection.",
-      );
+      setStartError(useExamStore.getState().lastServerError);
       return;
     }
     /* The session now exists in the store; useBoundedNavigation takes over
@@ -335,7 +290,7 @@ export function ExamConfigurator({
       </div>
 
       <div className="px-6 py-7 sm:px-8 sm:py-8">
-        <fieldset className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
+        <fieldset disabled={!hydrated} className="m-0 grid gap-4 border-0 p-0 sm:grid-cols-3">
           <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
             Paper
           </legend>
@@ -399,7 +354,7 @@ export function ExamConfigurator({
           </Select>
         </fieldset>
 
-        <fieldset className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
+        <fieldset disabled={!hydrated} className="m-0 mt-7 grid gap-4 border-0 p-0 sm:grid-cols-2">
           <legend className="col-span-full mb-3 w-full p-0 text-xs font-extrabold uppercase tracking-[0.14em] text-royal">
             Sitting
           </legend>
@@ -468,6 +423,7 @@ export function ExamConfigurator({
             setStage("instructions");
           }}
           disabled={
+            !hydrated ||
             insufficient ||
             isStarting ||
             isCreating ||

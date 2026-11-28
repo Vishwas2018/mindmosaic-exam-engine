@@ -1,0 +1,49 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e2-010",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "84389a2163bf292e4b33764dbb3eb1f95a63474f0e04b89828a5c531454d708b",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e2-010",
+    "type": "true_false",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "For the same shape, one half is always larger than one quarter. Is this statement true or false?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "boolean",
+      "value": true
+    },
+    "explanation": "Splitting a shape into 2 equal parts gives bigger pieces than splitting the same shape into 4 equal parts. So one half of a shape is always larger than one quarter of that same shape. The statement is true.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Comparing fractions",
+      "skill": "Compare the size of halves and quarters of one whole",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "fractions",
+        "halves",
+        "quarters"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "bc32f60168f7a143cf9de6b48777556ec3093a07b658d01923c6537d7563149a"
+}

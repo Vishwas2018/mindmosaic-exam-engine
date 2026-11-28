@@ -20,14 +20,20 @@ afterEach(() => {
 });
 
 describe("ChildrenManager", () => {
-  it("lists every child with their grade and session count", () => {
+  it("lists every child with their year, and Manage / Progress (artboard 11)", () => {
     render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
-    const arjunCard = screen.getByText("Arjun").closest("div.rounded-3xl") as HTMLElement;
-    expect(within(arjunCard).getByText("Grade 5")).toBeInTheDocument();
-    expect(within(arjunCard).getByText("4 sessions")).toBeInTheDocument();
-
-    const priyaCard = screen.getByText("Priya").closest("div.rounded-3xl") as HTMLElement;
-    expect(within(priyaCard).getByText("0 sessions")).toBeInTheDocument();
+    const arjun = screen.getByRole("link", { name: /Arjun\s*Year 5/ });
+    expect(arjun).toHaveAttribute("href", "/parent/children/child-1");
+    expect(screen.getByRole("link", { name: "Manage Arjun" })).toHaveAttribute("href", "/parent/children/child-1");
+    expect(screen.getByRole("link", { name: "Progress for Arjun" })).toHaveAttribute(
+      "href",
+      "/parent/children/child-1/progress",
+    );
+    expect(screen.getByRole("link", { name: /Priya\s*Year 3/ })).toBeInTheDocument();
+    expect(screen.queryByText(/Grade/)).not.toBeInTheDocument();
+    /* Rename, PIN reset and pausing live on the child's own page now (artboard 12). */
+    expect(screen.queryByRole("button", { name: "Archive" })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Add a child" })).toHaveAttribute("href", "/parent/setup");
   });
 
   it("renames a child through PATCH /api/parent/children/[id]", async () => {
@@ -35,9 +41,9 @@ describe("ChildrenManager", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={[{ ...CHILDREN[0]!, archived: true }]} />);
 
-    await user.click(screen.getAllByRole("button", { name: /edit/i })[0]);
+    await user.click(screen.getByRole("button", { name: /^edit arjun$/i }));
     const nameInput = screen.getByLabelText("Name");
     await user.clear(nameInput);
     await user.type(nameInput, "Arjun R");
@@ -57,9 +63,9 @@ describe("ChildrenManager", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={[{ ...CHILDREN[0]!, archived: true }]} />);
 
-    await user.click(screen.getAllByRole("button", { name: /edit/i })[0]);
+    await user.click(screen.getByRole("button", { name: /^edit arjun$/i }));
     await user.type(screen.getByLabelText(/reset pin/i), "123");
     await user.click(screen.getByRole("button", { name: /save changes/i }));
 
@@ -67,19 +73,81 @@ describe("ChildrenManager", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("archives a child after confirming, and removes them from the list", async () => {
+  it("lists children that arrive already archived in their own section, with results kept and a Restore action", () => {
+    render(
+      <ChildrenManager
+        availableYearLevels={[3, 5]}
+        initialChildren={[{ ...CHILDREN[0]!, archived: true }, CHILDREN[1]!]}
+      />,
+    );
+    const archived = screen.getByRole("region", { name: "Archived children" });
+    expect(within(archived).getByText("Arjun")).toBeInTheDocument();
+    expect(within(archived).getByText(/Year 5 · archived/)).toBeInTheDocument();
+    expect(within(archived).getByRole("button", { name: /restore arjun/i })).toBeInTheDocument();
+  });
+
+  it("says so when every child is archived", () => {
+    render(
+      <ChildrenManager
+        availableYearLevels={[3, 5]}
+        initialChildren={CHILDREN.map((child) => ({ ...child, archived: true }))}
+      />,
+    );
+    expect(screen.getByText(/no active children/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /restore/i })).toHaveLength(2);
+  });
+
+  it("restores an archived child through PATCH { archived: false } and returns them to the active list", async () => {
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
     vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
-    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+    render(
+      <ChildrenManager
+        availableYearLevels={[3, 5]}
+        initialChildren={[{ ...CHILDREN[0]!, archived: true }, CHILDREN[1]!]}
+      />,
+    );
 
-    await user.click(screen.getAllByRole("button", { name: "Archive" })[0]);
-    await user.click(screen.getByRole("button", { name: "Yes, archive" }));
+    await user.click(screen.getByRole("button", { name: /restore arjun/i }));
 
-    expect(fetchMock).toHaveBeenCalledWith("/api/parent/children/child-1", { method: "DELETE" });
-    expect(await screen.findByText("Priya")).toBeInTheDocument();
-    expect(screen.queryByText("Arjun")).not.toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/parent/children/child-1",
+      expect.objectContaining({ method: "PATCH" }),
+    );
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toEqual({ archived: false });
+    expect(await screen.findByRole("link", { name: "Manage Arjun" })).toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Archived children" })).not.toBeInTheDocument();
+    expect(refresh).toHaveBeenCalled();
+  });
+
+  it("keeps a child archived and shows an error when the restore request fails", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: false, message: "Could not restore this child. Please try again." }), { status: 500 })),
+    );
+
+    const user = userEvent.setup();
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={[{ ...CHILDREN[0]!, archived: true }]} />);
+
+    await user.click(screen.getByRole("button", { name: /restore arjun/i }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(/could not restore this child/i);
+    expect(screen.getByRole("region", { name: "Archived children" })).toBeInTheDocument();
+  });
+
+  it("lets a parent edit (for example reset the PIN of) an archived child", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const user = userEvent.setup();
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={[{ ...CHILDREN[0]!, archived: true }]} />);
+
+    await user.click(screen.getByRole("button", { name: /^edit arjun$/i }));
+    await user.type(screen.getByLabelText(/reset pin/i), "482916");
+    await user.click(screen.getByRole("button", { name: /save changes/i }));
+
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body)).toMatchObject({ pin: "482916" });
   });
 
   it("shows a friendly error instead of crashing when the rename request fails", async () => {
@@ -91,9 +159,9 @@ describe("ChildrenManager", () => {
     );
 
     const user = userEvent.setup();
-    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={CHILDREN} />);
+    render(<ChildrenManager availableYearLevels={[3, 5]} initialChildren={[{ ...CHILDREN[0]!, archived: true }]} />);
 
-    await user.click(screen.getAllByRole("button", { name: /edit/i })[0]);
+    await user.click(screen.getByRole("button", { name: /^edit arjun$/i }));
     await user.click(screen.getByRole("button", { name: /save changes/i }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/could not update this child/i);

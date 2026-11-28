@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e2-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "4c4920fbc18e694a700919ed6fe17731d9e1cc1848660074bd392dedeb6627c5",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e2-001",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "In the number 486, the digit 8 stands for how much?",
+    "options": [
+      {
+        "id": "eighty",
+        "text": "80"
+      },
+      {
+        "id": "eight",
+        "text": "8"
+      },
+      {
+        "id": "eight-hundred",
+        "text": "800"
+      },
+      {
+        "id": "forty-eight",
+        "text": "48"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "eighty"
+    },
+    "explanation": "In 486 the 8 sits in the tens place, so it stands for 8 tens, which is 80. The 4 means 400 and the 6 means 6 ones.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Place value",
+      "skill": "Understand the value of a digit in a 3-digit number",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 40,
+      "tags": [
+        "place value",
+        "tens",
+        "year 3 numeracy"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "2c546538fb9119320c0de914fb2447a8dc90af557b4bbfd132b0c586733a566d"
+}

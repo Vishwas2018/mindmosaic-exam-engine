@@ -14,6 +14,8 @@ import {
 import type {
   ActiveSessionResponse,
   CreateSessionResponse,
+  GuestSessionSelection,
+  GuestSessionStartResponse,
 } from "@/features/exam-engine/scoring/server-scoring-contract";
 import {
   patternExamConfig,
@@ -46,6 +48,7 @@ import {
   type Clock,
 } from "./deadline";
 import { reconcileResumedSession } from "./resume";
+import { recordConfirmedSave, recordNoOpenWork } from "@/features/auth/session-work-status";
 
 export type ExamStatus = "not_started" | "in_progress" | "submitting" | "submitted";
 
@@ -61,7 +64,8 @@ export interface ExamState {
    * scores locally. Decided at start, not at submit — auth state changing
    * mid-attempt cannot re-route a session to a scorer it wasn't built for.
    */
-  sessionMode: "local" | "server";
+  sessionMode: "local" | "guest" | "server";
+  guestTicket: string | null;
   sessionId: string | null;
   /**
    * When the last autosave flush was accepted by the server, as an epoch
@@ -136,6 +140,10 @@ export interface StartPatternExamOptions extends StartExamOptions {
 }
 
 export interface ExamActions {
+  startGuestExam: (
+    selection: GuestSessionSelection,
+    options?: { seed?: string; confidenceMode?: boolean },
+  ) => Promise<boolean>;
   startExam: (
     bank: readonly AuthoringQuestion[],
     config: ExamSelectionConfig,
@@ -202,6 +210,7 @@ function createInitialExamState(): ExamState {
   return {
     status: "not_started",
     sessionMode: "local",
+    guestTicket: null,
     sessionId: null,
     lastAutosavedAt: null,
     lastServerError: null,
@@ -303,6 +312,26 @@ function recomputeAuthoringQuestions(
 const AUTOSAVE_DEBOUNCE_MS = 2_000;
 const AUTOSAVE_POLL_MS = 1_000;
 
+/**
+ * The single in-flight server-session creation, if any.
+ *
+ * POST /api/exam/session already dedupes on `idempotencyKey` and answers 409
+ * `idempotency_key_reused` — but no caller ever sent one, so the route fell
+ * back to `idempotencyKey ?? crypto.randomUUID()` and minted a fresh key per
+ * request. The dedupe was therefore unreachable from the application, and two
+ * concurrent POSTs (a double submit that outruns the React state guard in
+ * ExamConfigurator, or a request the browser retries on a flaky connection)
+ * would each create a real session, leaving an orphan attached to the student.
+ *
+ * Two things close that. One stable key per start attempt, so the server can
+ * recognise a duplicate; and coalescing, so a second concurrent call reuses
+ * the in-flight promise rather than issuing a request at all. The key must be
+ * fresh per *user-initiated* attempt — reusing it after a genuine failure
+ * would 409 and lock the student out of retrying — which is exactly what
+ * clearing this on settle gives.
+ */
+let pendingServerStart: Promise<boolean> | null = null;
+
 let autosaveLastChangeAt: number | null = null;
 let autosaveLastFlushedAt: number | null = null;
 let autosaveTimer: ReturnType<typeof setInterval> | null = null;
@@ -344,7 +373,16 @@ function startAutosaveLoop(getState: () => ExamStore): void {
       /* Only a response the server actually accepted counts as saved — a
          4xx/5xx must never light up "saved a moment ago" on a paper the
          server has not recorded. */
-      if (response.ok) useExamStore.setState({ lastAutosavedAt: clock() });
+      if (response.ok) {
+        useExamStore.setState({ lastAutosavedAt: clock() });
+        /* Remember the time the SERVER returned, so a later sign-out can say
+           "saved at 4:02 pm" and mean it (see features/auth/session-work-status). */
+        void response
+          .clone()
+          .json()
+          .then((body: { savedAt?: unknown } | null) => recordConfirmedSave(body?.savedAt))
+          .catch(() => undefined);
+      }
     }).catch((error) => {
       /* Best-effort: the next change (or the next poll tick, once
          autosaveLastChangeAt is set again) retries. Nothing here can lose
@@ -357,6 +395,50 @@ function startAutosaveLoop(getState: () => ExamStore): void {
 
 export const useExamStore = create<ExamStore>((set, get) => ({
   ...createInitialExamState(),
+
+  startGuestExam: async (selection, options) => {
+    set({ lastServerError: null });
+    try {
+      const response = await fetch("/api/exam/guest-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ selection, ...options }),
+      });
+      if (!response.ok) {
+        set({
+          lastServerError: response.status === 404
+            ? "There aren't enough available questions for this selection."
+            : "We couldn't start your exam just now. Check your connection and try again.",
+        });
+        return false;
+      }
+      const { ticket, sessionId, startedAt, bankId, config, durationSeconds, questions } =
+        (await response.json()) as GuestSessionStartResponse;
+      stopAutosaveLoop();
+      activeBank = [];
+      activePattern = null;
+      activePatternOptions = {};
+      const deadlineAt = durationSeconds === null ? null : startedAt + durationSeconds * 1000;
+      set({
+        ...createInitialExamState(),
+        status: "in_progress",
+        sessionMode: "guest",
+        guestTicket: ticket,
+        sessionId,
+        startedAt,
+        bankId,
+        config,
+        durationSeconds,
+        questions,
+        deadlineAt,
+        remainingSeconds: getEffectiveRemainingSeconds(deadlineAt, clock()),
+      });
+      return true;
+    } catch {
+      set({ lastServerError: "We couldn't connect to start this exam. Please try again." });
+      return false;
+    }
+  },
 
   startExam: (bank, config, options) => {
     const seed = options?.seed ?? generateSeed();
@@ -512,12 +594,19 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   },
 
   startServerExam: async (config, options) => {
+    /* Coalesce: a concurrent second call joins the request already in flight
+       instead of creating a second session. See pendingServerStart. */
+    if (pendingServerStart) return pendingServerStart;
+    const run = (async (): Promise<boolean> => {
     const bankId = options?.bankId ?? "curated";
+    /* One stable key for this attempt, so if this single request is
+       duplicated in transit the server recognises the second one. */
+    const idempotencyKey = crypto.randomUUID();
     try {
       const response = await fetch("/api/exam/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ config, bankId }),
+        body: JSON.stringify({ config, bankId, idempotencyKey }),
       });
       if (!response.ok) {
         const errorMsg = await parseSessionCreationError(
@@ -569,6 +658,15 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           "We couldn't connect to the server. Check your internet connection and try again.",
       });
       return false;
+    }
+    })();
+    pendingServerStart = run;
+    try {
+      return await run;
+    } finally {
+      /* Cleared however it settled, so a genuine retry after a failure mints
+         a fresh key rather than replaying a spent one into a 409. */
+      pendingServerStart = null;
     }
   },
 
@@ -651,6 +749,24 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     }
     set({ responses: { ...state.responses, [questionId]: answer } });
     noteAutosaveChange(get());
+    if (!state.guestTicket || !state.config?.confidenceMode || isUnanswered(answer)) return;
+    const question = state.questions.find(({ id }) => id === questionId);
+    if (!question || question.explanation !== undefined) return;
+    const ticket = state.guestTicket;
+    void fetch("/api/exam/guest-session", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ticket, questionId, answer }),
+    }).then(async (response) => {
+      if (!response.ok) return;
+      const { explanation } = await response.json() as { explanation: string | null };
+      if (!explanation) return;
+      const latest = get();
+      if (latest.status !== "in_progress" || latest.guestTicket !== ticket) return;
+      set({ questions: latest.questions.map((item) => item.id === questionId ? { ...item, explanation } : item) });
+    }).catch(() => {
+      // A connection failure affects feedback only. The candidate response stays in the sitting.
+    });
   },
 
   goToQuestion: (index) => {
@@ -753,7 +869,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
      * review questions arrive in the submit response instead.
      */
     const isServerSession = state.sessionMode === "server";
-    const authoringQuestions = isServerSession
+    const authoringQuestions = isServerSession || state.guestTicket
       ? []
       : recomputeAuthoringQuestions(state.config!, state.seed!);
     const context = {
@@ -764,7 +880,10 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     const scoringService: AssessmentScoringService = isServerSession
       ? new ServerAuthoritativeScoringService(state.sessionId!)
       : localPracticeScoringService;
-    const finalize = (submission: ScoredSubmission) =>
+    const finalize = (submission: ScoredSubmission) => {
+      if (get().sessionId !== state.sessionId) return;
+      /* The server accepted the submission: there is no open sitting left. */
+      if (isServerSession) recordNoOpenWork();
       set({
         status: "submitted",
         submittedAt: effectiveSubmittedAt,
@@ -773,9 +892,20 @@ export const useExamStore = create<ExamStore>((set, get) => ({
         reviewQuestions: submission.reviewQuestions,
         remainingSeconds: state.durationSeconds === null ? null : 0,
       });
-    const outcome = scoringService.score(authoringQuestions, state.responses, context);
+    };
+    const outcome = state.guestTicket
+      ? fetch("/api/exam/guest-session", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ticket: state.guestTicket, responses: state.responses, submissionReason: effectiveReason }),
+        }).then(async (response) => {
+          if (!response.ok) throw new Error("Guest exam submission was not accepted.");
+          return await response.json() as ScoredSubmission;
+        })
+      : scoringService.score(authoringQuestions, state.responses, context);
     if (outcome instanceof Promise) {
       outcome.then(finalize).catch((error) => {
+        if (get().sessionId !== state.sessionId) return;
         /*
          * A server session cannot be scored locally — the client holds no
          * answer keys — so the only honest recovery is to return to

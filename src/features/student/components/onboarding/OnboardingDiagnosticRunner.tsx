@@ -7,7 +7,14 @@ import { ExamQuestion } from "@/features/exam-engine/components/ExamQuestion";
 import type { CandidateQuestion } from "@/features/exam-engine/types";
 import { useOnboardingStore } from "@/features/student/onboarding/onboarding-store";
 
-export function OnboardingDiagnosticRunner() {
+export function OnboardingDiagnosticRunner({
+  preferences = true,
+  heading = "Diagnostic Warmup",
+}: {
+  /** `false` for the optional warm-up from My Space: record the warm-up only, leave interests/goal/year untouched. */
+  preferences?: boolean;
+  heading?: string;
+} = {}) {
   const {
     yearLevel,
     interests,
@@ -63,7 +70,7 @@ export function OnboardingDiagnosticRunner() {
     return (
       <div className="flex min-h-64 flex-col items-center justify-center space-y-3 py-12 text-center">
         <LoaderCircle aria-hidden="true" className="h-8 w-8 animate-spin text-primary" />
-        <p className="font-[family-name:var(--font-display)] text-lg font-bold text-mm-ink">
+        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-mm-ink">
           Preparing your warmup questions…
         </p>
         <p className="text-xs text-mm-muted">
@@ -116,8 +123,8 @@ export function OnboardingDiagnosticRunner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           yearLevel,
-          interests,
-          weeklyGoalMinutes,
+          ...(preferences ? { interests, weeklyGoalMinutes } : {}),
+          preferences,
           responses,
           startedAt: startedAtRef.current ?? Date.now(),
         }),
@@ -128,7 +135,7 @@ export function OnboardingDiagnosticRunner() {
         throw new Error(data.message ?? data.error ?? "Failed to save diagnostic warmup.");
       }
 
-      setDiagnosticOutcome(data.result, data.baseline);
+      setDiagnosticOutcome(data.result, data.baseline, data.recommendations ?? null);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Submission failed.";
       setError(message);
@@ -142,9 +149,9 @@ export function OnboardingDiagnosticRunner() {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs font-semibold text-mm-muted">
           <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
-          <span className="text-primary font-bold">Diagnostic Warmup · Untimed</span>
+          <span className="text-primary font-semibold">{heading} · Untimed</span>
         </div>
-        <div className="h-2 w-full overflow-hidden rounded-full bg-royal/10">
+        <div className="h-2 w-full overflow-hidden rounded-full bg-mm-brand/10">
           <div
             className="h-full rounded-full bg-primary transition-all duration-300"
             style={{
@@ -155,7 +162,7 @@ export function OnboardingDiagnosticRunner() {
       </div>
 
       {/* Question container */}
-      <div className="rounded-2xl border border-royal/15 bg-white p-4 sm:p-6 shadow-sm">
+      <div className="rounded-2xl border border-mm-brand/15 bg-white p-4 sm:p-6 shadow-sm">
         <ExamQuestion
           question={currentQuestion}
           answer={currentAnswer}

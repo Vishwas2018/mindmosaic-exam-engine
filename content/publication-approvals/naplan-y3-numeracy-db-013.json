@@ -1,0 +1,66 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-db-013",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "51dd8ef8e3a61725f5be0bb38dbf6e7d39acecc71a747ce56747c7ba065e0bb3",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-db-013",
+    "type": "multiple_choice",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A cardboard box has 6 flat faces. The top and bottom are squares, but the four side faces are rectangles that are taller than they are wide. What 3D shape is the box?",
+    "options": [
+      {
+        "id": "opt-cube",
+        "text": "cube"
+      },
+      {
+        "id": "opt-prism",
+        "text": "rectangular prism"
+      },
+      {
+        "id": "opt-cylinder",
+        "text": "cylinder"
+      },
+      {
+        "id": "opt-pyramid",
+        "text": "square pyramid"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-prism"
+    },
+    "explanation": "A shape with 6 flat rectangular faces is a rectangular prism. It is not a cube, because a cube must have all six faces the same size squares, and here the side faces are taller rectangles. A cylinder has curved sides and a square pyramid has a point on top.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "3D objects",
+      "skill": "Name a 3D object from its faces",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "3D shapes",
+        "faces",
+        "rectangular prism"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "a3fa9d7404d63c8ffeadc0804ba60c46095e251758c85631024abb7e7a5e299c"
+}

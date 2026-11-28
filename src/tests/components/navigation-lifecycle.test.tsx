@@ -6,7 +6,8 @@ import ExamPage from "@/app/exam/page";
 import { questionBank } from "@/content/questions/question-bank";
 import { AuthProvider } from "@/features/auth";
 import { ExamConfigurator } from "@/features/exam-engine/components/ExamConfigurator";
-import { buildBankEligibilitySummary } from "@/features/exam-engine/selection";
+import { buildBankEligibilitySummary, selectExamQuestions } from "@/features/exam-engine/selection";
+import { toCandidateQuestions } from "@/features/exam-engine/types";
 import { useExamStore } from "@/features/exam-engine/state";
 
 /* Summaries built from the curated bank for every pool — the configurator
@@ -17,22 +18,17 @@ const bankEligibility = {
   practice: buildBankEligibilitySummary(questionBank),
 };
 
-/* Guests download the bank from /api/exam/guest-bank at start time; tests
-   serve it from a stubbed fetch. Supabase is unconfigured under vitest, so
-   AuthProvider immediately reports "unconfigured" (guest mode). */
-function stubGuestBankFetch(): void {
-  vi.stubGlobal(
-    "fetch",
-    vi.fn().mockResolvedValue(
-      new Response(
-        JSON.stringify({
-          curated: questionBank,
-          published: questionBank,
-          practice: questionBank,
-        }),
-      ),
-    ),
-  );
+function stubGuestStartFetch(): void {
+  vi.stubGlobal("fetch", vi.fn(async (_url: string, init: RequestInit) => {
+    const { selection } = JSON.parse(String(init.body));
+    const picked = selectExamQuestions(questionBank, selection.config, "nav-test");
+    if (!picked.ok) return new Response(null, { status: 404 });
+    return Response.json({
+      ticket: "synthetic-ticket", sessionId: "guest-navigation",
+      bankId: "curated", startedAt: Date.now(), durationSeconds: 600,
+      config: selection.config, questions: toCandidateQuestions(picked.questions),
+    }, { status: 201 });
+  }));
 }
 
 function renderConfigurator() {
@@ -152,7 +148,7 @@ describe("exam submission navigates by replace, not push", () => {
 
 describe("exam start has a pending state and cannot create duplicate sessions", () => {
   beforeEach(() => {
-    stubGuestBankFetch();
+    stubGuestStartFetch();
   });
 
   afterEach(() => {
@@ -172,7 +168,7 @@ describe("exam start has a pending state and cannot create duplicate sessions", 
     /* A real browser (and user-event, matching it) refuses to dispatch a
        click to a disabled button at all, so this is what actually stops a
        second click from creating a second session. Session creation now
-       awaits the guest bank download, so settle on the session existing. */
+       awaits the guest session response, so settle on the session existing. */
     await waitFor(() => {
       expect(useExamStore.getState().sessionId).not.toBeNull();
     });
@@ -190,7 +186,7 @@ describe("exam start has a pending state and cannot create duplicate sessions", 
       screen.getByTestId("start-exam").click();
     });
     const startButton = screen.getByTestId("begin-exam");
-    /* The async act flushes the guest-bank fetch microtasks (fake timers
+    /* The async act flushes the guest session request microtasks (fake timers
        never gate promise continuations), so the session exists on exit. */
     await act(async () => {
       startButton.click();

@@ -18,7 +18,9 @@ test("Scholarship review is denied to guests and non-admin roles", async ({
       0,
     );
     await expect(
-      page.getByText("THERMOMETER is to TEMPERATURE as ODOMETER is to:", { exact: true }),
+      page.getByText("THERMOMETER is to TEMPERATURE as ODOMETER is to:", {
+        exact: true,
+      }),
     ).toHaveCount(0);
     await page.close();
   }
@@ -32,8 +34,12 @@ test("admin renders every corrected release item with current governance and his
   await page.goto("/admin/review");
   // Next streaming can retain a hidden server copy outside the active main.
   // Role locators keep assertions on the accessible review without ignoring duplicates.
-  await expect(page.getByRole("status")).toBeVisible();
-  await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("160 drafts match your filters");
   for (const [bucket, count] of [
     ["ready_for_review", 45],
     ["requires_revision_or_decision", 35],
@@ -42,10 +48,12 @@ test("admin renders every corrected release item with current governance and his
     await page
       .getByRole("combobox", { name: "Review status", exact: true })
       .selectOption(`release:${bucket}`);
-    await expect(page.getByRole("status")).toBeVisible();
-    await expect(page.getByRole("status")).toHaveText(
-      `${count} drafts match your filters`,
-    );
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toHaveText(`${count} drafts match your filters`);
   }
   await page
     .getByRole("combobox", { name: "Review status", exact: true })
@@ -87,18 +95,27 @@ test("admin renders every corrected release item with current governance and his
     .getByRole("combobox", { name: "Question", exact: true })
     .selectOption("scholarship-y6-rc-025");
   await expect(
-    page.getByRole("main").getByText(
-      /Superseded content: these findings do not describe the current revision/,
-    ),
+    page
+      .getByRole("main")
+      .getByText(
+        /Superseded content: these findings do not describe the current revision/,
+      ),
   ).toBeVisible();
-  await page.getByRole("main").getByText("Content revision", { exact: true }).click();
+  await page
+    .getByRole("main")
+    .getByText("Content revision", { exact: true })
+    .click();
   await expect(
-    page.getByRole("main").getByText(identities.sourceRevision, { exact: true }),
+    page
+      .getByRole("main")
+      .getByText(identities.sourceRevision, { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("main").getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
-      exact: true,
-    }),
+    page
+      .getByRole("main")
+      .getByText(identities.questions["scholarship-y6-rc-025"].contentHash, {
+        exact: true,
+      }),
   ).toBeVisible();
 });
 
@@ -116,10 +133,16 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   });
   await page.goto("/admin/review");
   await expect(
-    page.getByRole("main").getByText("Scholarship: 160 draft questions across four sections."),
+    page
+      .getByRole("main")
+      .getByText("Scholarship: 160 draft questions across four sections."),
   ).toBeVisible();
-  await expect(page.getByRole("status")).toBeVisible();
-  await expect(page.getByRole("status")).toHaveText("160 drafts match your filters");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("160 drafts match your filters");
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.screenshot({
     path: testInfo.outputPath("review-desktop.png"),
@@ -145,10 +168,12 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
     await page
       .getByRole("combobox", { name: "Section", exact: true })
       .selectOption(section);
-    await expect(page.getByRole("status")).toBeVisible();
-    await expect(page.getByRole("status")).toHaveText(
-      `${count} drafts match your filters`,
-    );
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+    ).toHaveText(`${count} drafts match your filters`);
   }
   await page.getByRole("button", { name: "Complete draft papers" }).click();
   await page
@@ -165,15 +190,128 @@ test("admin can browse all 160 drafts and try a complete Reading paper without s
   await page.getByRole("button", { name: "Previous", exact: true }).click();
   await expect(page.getByRole("radio").first()).toBeChecked();
   await page.getByRole("button", { name: "Submit draft paper" }).click();
-  await expect(page.getByRole("main").getByText(/Preview total: 1 \/ 35 marks/)).toBeVisible();
+  await expect(
+    page.getByRole("main").getByText(/Preview total: 1 \/ 35 marks/),
+  ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Worked explanation" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("main").getByText(/Preview responses|No student progress was recorded/),
+    page
+      .getByRole("main")
+      .getByText(/Preview responses|No student progress was recorded/),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Record my explicit approval" }),
   ).toBeDisabled();
+  expect(studentWrites).toEqual([]);
+});
+
+test("admin can review the provisional canonical 500-item Codex Scholarship bank with blind-first solving, pool isolation and human-only guards", async ({
+  contextAs,
+}) => {
+  test.setTimeout(120_000);
+  const page = await (await contextAs("admin")).newPage();
+  const studentWrites: string[] = [];
+  page.on("request", (request) => {
+    if (
+      request.method() !== "GET" &&
+      /\/api\/(exam|assessment|student)\//.test(request.url())
+    )
+      studentWrites.push(request.url());
+  });
+
+  await page.goto("/admin/review?bank=vihaan-scholarship-500");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("500 drafts match your filters");
+
+  // Verify strict practice vs mock pool filtering (400 practice / 100 mock reserve).
+  await page.getByLabel("Pool", { exact: true }).selectOption("practice");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("400 drafts match your filters");
+  await page.getByLabel("Pool", { exact: true }).selectOption("mock");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("100 drafts match your filters");
+  await page.getByLabel("Pool", { exact: true }).selectOption("mock-a");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("50 drafts match your filters");
+  await page.getByLabel("Pool", { exact: true }).selectOption("");
+
+  // Verify Written Expression prompts render through the existing governed rubric.
+  await page.getByLabel("Section", { exact: true }).selectOption("writing");
+  await expect(
+    page.getByRole("status").filter({ hasText: /drafts match your filters/ }),
+  ).toHaveText("40 drafts match your filters");
+  await expect(
+    page.getByText("Written Expression — Human Rubric Only"),
+  ).toBeVisible();
+
+  // Switch back to Mathematics MCQ and verify blind-first solving hides key until solved.
+  await page.getByLabel("Section", { exact: true }).selectOption("numeracy");
+  await expect(page.getByText("Blind solve mode")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Declared answer" }),
+  ).toHaveCount(0);
+
+  await page.getByRole("radio").first().check();
+  await page.getByRole("button", { name: "Submit preview answer" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Declared answer" }),
+  ).toBeVisible();
+
+  // Verify server-locked human reviewer identity (read-only from profiles.display_name)
+  // and exercise real human approval + reload persistence + Defect A-06 block.
+  const nameInput = page.getByLabel(/Verified human reviewer identity/i);
+  if ((await nameInput.count()) > 0) {
+    await expect(nameInput).toHaveAttribute("readonly", "");
+    await expect(nameInput).toHaveValue("Avery Patel");
+
+    const checkboxes = page.getByRole("checkbox");
+    const boxCount = await checkboxes.count();
+    for (let i = 0; i < boxCount; i += 1) {
+      await checkboxes.nth(i).check();
+    }
+    const approveSubmit = page.getByRole("button", {
+      name: "Record my explicit approval",
+    });
+    await expect(approveSubmit).toBeEnabled();
+    await approveSubmit.click();
+    await expect(
+      page.getByText(
+        /Your human approval was recorded for this revision|already recorded an approval/i,
+      ),
+    ).toBeVisible();
+
+    // Confirm known defective vihaan-e500-m069 cannot be approved and supports Request revision.
+    await page.getByLabel("Section", { exact: true }).selectOption("");
+    await page
+      .getByRole("combobox", { name: "Question", exact: true })
+      .selectOption("vihaan-e500-m069");
+    await expect(
+      page.getByText(/Approval blocked — Known Defect A-06/i),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Approve", exact: true }),
+    ).toBeDisabled();
+    await page
+      .getByLabel(/Required rationale/i)
+      .fill("Verified Defect A-06 in E2E: squares 64 and 81 do not sum to 13.");
+    await page.getByRole("button", { name: "Record revision request" }).click();
+    await expect(
+      page.getByText(/Revision request recorded for this content hash/i),
+    ).toBeVisible();
+  }
+
+  // Verify Batch progress & export view renders all 11 batches (pilot + 10 expansion).
+  await page.getByRole("button", { name: "Batch progress & export" }).click();
+  await expect(
+    page.getByText(/Batch progress & publication readiness/i),
+  ).toBeVisible();
+  await expect(page.getByText("vihaan-pilot-01")).toBeVisible();
+  await expect(page.getByText("vihaan-expansion-10")).toBeVisible();
   expect(studentWrites).toEqual([]);
 });

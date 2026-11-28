@@ -5,14 +5,17 @@ vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
 const mockGetUser = vi.fn();
 const mockSingle = vi.fn();
+const mockRpc = vi.fn();
+/* A migrated database: an admin profile carries an active user_roles grant (admin is entitlement-only). */
+let grantRows: Array<{ role: string; revoked_at: string | null }> = [];
 vi.mock("@/lib/supabase/server", () => ({
   createClient: vi.fn(async () => ({
-    auth: { getUser: mockGetUser },
-    from: () => ({
+    auth: { getUser: mockGetUser, mfa: { getAuthenticatorAssuranceLevel: vi.fn(async () => ({ data: { currentLevel: "aal1" } })) } },
+    rpc: mockRpc,
+    from: (table: string) => ({
       select: () => ({
-        eq: () => ({
-          single: mockSingle,
-        }),
+        eq: () =>
+          table === "user_roles" ? Promise.resolve({ data: grantRows, error: null }) : { single: mockSingle },
       }),
     }),
   })),
@@ -29,12 +32,15 @@ function redirectPath(error: unknown): string {
 function setSession(user: { id: string } | null, role: string | null) {
   mockGetUser.mockResolvedValue({ data: { user } });
   mockSingle.mockResolvedValue({ data: role ? { role } : null });
+  grantRows = role === "admin" ? [{ role: "admin", revoked_at: null }] : [];
 }
 
 describe("admin layout auth gate", () => {
   beforeEach(() => {
     mockGetUser.mockReset();
     mockSingle.mockReset();
+    mockRpc.mockReset();
+    mockRpc.mockResolvedValue({ data: false, error: null });
   });
 
   /*

@@ -13,7 +13,7 @@ export function LearningHubLabSpotlight() {
           <FlaskConical aria-hidden="true" className="h-4 w-4" />
           Interactive visual lab spotlight
         </span>
-        <h3 className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+        <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
           The Fraction Wall &amp; Equi-Angle Gauge
         </h3>
         <p className="text-sm leading-relaxed text-mm-muted">

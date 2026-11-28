@@ -1,0 +1,67 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-d882abfc258e6f34e8806af2",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "83065870ae8f01133fe514eaaf0729df1848d443fdb4fa23083a3670a2cd19b7",
+  "sourceManifestHash": "83dd5486798cd492442c9efc6337a2ce68fc0ccaca4f1ce92ca7e0dfd1018b55",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-d882abfc258e6f34e8806af2",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "When a triangle is translated 5 cm to the left, which statement is TRUE?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "Its area decreases"
+      },
+      {
+        "id": "opt-b",
+        "text": "Its angles change size"
+      },
+      {
+        "id": "opt-c",
+        "text": "Its size and shape remain congruent"
+      },
+      {
+        "id": "opt-d",
+        "text": "It flips upside down"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-c"
+    },
+    "explanation": "Translation is a rigid motion (isometry): size, side lengths, angles, and area remain identical (congruent).",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Space",
+      "topic": "Space",
+      "skill": "Congruence under translation",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "congruence",
+        "translation",
+        "properties",
+        "orig-id:g5-sp-trans-006"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "5af2a5e5885b828b0eac83e466485a66e1f6f6a6eaf6256c8bc325b97664a3d4"
+}

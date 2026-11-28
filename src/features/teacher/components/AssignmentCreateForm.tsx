@@ -39,6 +39,7 @@ import {
   type AssignmentSkill,
 } from "../mock-catalogue";
 
+import { countLabel } from "@/lib/format-count";
 type WizardStep = "target" | "content" | "review";
 
 const STEPS: { key: WizardStep; label: string }[] = [
@@ -426,7 +427,7 @@ export function AssignmentCreateForm({
               >
                 {QUESTION_COUNT_OPTIONS.map((option) => (
                   <option key={String(option)} value={String(option)}>
-                    {option === "full" ? "Full set" : `${option} questions`}
+                    {option === "full" ? "Full set" : `${countLabel(option, "question")}`}
                   </option>
                 ))}
               </Select>
@@ -577,7 +578,7 @@ export function AssignmentCreateForm({
               <dd className="font-bold text-ink">
                 {YEAR_LABELS[String(yearLevel)]} · {STYLE_LABELS[examStyle]} ·{" "}
                 {SUBJECT_LABELS[subject]} ·{" "}
-                {questionCount === "full" ? "Full set" : `${questionCount} questions`}
+                {questionCount === "full" ? "Full set" : `${countLabel(questionCount, "question")}`}
               </dd>
             </div>
             <div>

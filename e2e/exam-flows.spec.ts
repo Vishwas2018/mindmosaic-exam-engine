@@ -164,10 +164,13 @@ test("a cleared fill-blank answer stays unanswered across navigation", async ({ 
 
   /* Find whichever question in this deterministic selection is a
      fill-blank interaction, rather than assuming a fixed position. */
+  await expect(page.getByTestId("nav-question-1")).toBeVisible();
   const totalQuestions = await page.locator('[data-testid^="nav-question-"]').count();
   let fillBlankIndex = -1;
   for (let index = 1; index <= totalQuestions; index += 1) {
     await page.getByTestId(`nav-question-${index}`).click();
+    /* The question body and the nav state commit together; sampling before that races the render. */
+    await expect(page.getByTestId(`nav-question-${index}`)).toHaveAttribute("data-nav-state", "current");
     if ((await page.locator('input[id*="-blank-"]').count()) > 0) {
       fillBlankIndex = index;
       break;

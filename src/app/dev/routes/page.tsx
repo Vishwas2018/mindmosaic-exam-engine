@@ -65,6 +65,7 @@ const GROUPS: Group[] = [
     routes: [
       { path: "/parent", label: "Dashboard" },
       { path: "/parent/children", label: "Manage children" },
+      { path: "/parent/settings", label: "Account settings" },
       { path: "/billing", label: "Billing & subscription" },
     ],
   },
@@ -90,6 +91,16 @@ const GROUPS: Group[] = [
       { path: "/admin/analytics", label: "Analytics" },
       { path: "/admin/intelligence", label: "Content intelligence" },
       { path: "/admin/operations", label: "Operations", flags: ["mock-data"], note: "mock background jobs" },
+    ],
+  },
+  {
+    title: "Dev & Design Previews",
+    access: "Dev environment only",
+    routes: [
+      { path: "/dev/uat", label: "AI UAT Assistant & defect dashboard", flags: ["dev-tool"] },
+      { path: "/dev/student-preview", label: "Student Canvas Design Inspector (PR #109 catalog, 56 artboards)", flags: ["dev-tool"] },
+      { path: "/dev/writing", label: "Writing prompt workbench", flags: ["dev-tool"] },
+      { path: "/dev/bar-model", label: "Bar model renderer sandbox", flags: ["dev-tool"] },
     ],
   },
 ];

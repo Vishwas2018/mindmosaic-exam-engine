@@ -149,7 +149,7 @@ export function parsePracticeSessionParams(
     subject: searchParams.get("subject"),
     year: searchParams.get("year"),
     style: searchParams.get("style"),
-    skill: searchParams.get("skill"),
+    skill: searchParams.get("skill") ?? searchParams.get("strand"),
     count: searchParams.get("count"),
     seed: searchParams.get("seed"),
     extended: searchParams.get("extended"),

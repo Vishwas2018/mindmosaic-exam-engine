@@ -1,8 +1,16 @@
 name: CI
 
 on:
+  # Branch pushes run only for the long-lived branches; every other branch is tested through its pull request.
+  # Running both on a PR branch doubled the cost (each run is ~30 job-minutes) and double-queued every check.
   push:
+    branches: [main, dev]
   pull_request:
+
+# A newer push to the same ref supersedes the run still in flight for it.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 # Test-only, obviously-fake placeholder values — never real secrets. These
 # exist solely so src/tests/unit/stripe-webhook-route.test.ts (part of the
@@ -44,6 +52,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - run: npm ci
+      - run: node --test .agents/scripts/safety-gate.test.mjs
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run build
@@ -110,6 +119,8 @@ jobs:
       PROJECTION_DB_URL: postgresql://postgres:postgres@127.0.0.1:56322/postgres
     steps:
       - uses: actions/checkout@v4
+      # Before npm ci / apt / docker pulls open outbound sockets: see scripts/ci/supabase-start.sh.
+      - run: bash scripts/ci/supabase-start.sh --reserve-only
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -131,7 +142,7 @@ jobs:
       # Supabase's own `anon`/`authenticated` roles and calls `auth.uid()`,
       # neither of which exists on a vanilla Postgres image; only the real
       # Supabase local stack provisions them.
-      - run: supabase start
+      - run: bash scripts/ci/supabase-start.sh
       # The mindmosaic_scoring role (spec §9.3.1) is created by
       # 20260812110000 with LOGIN and no password, deliberately: a migration is
       # committed and a credential must not be. tests/rls connects as that role
@@ -139,6 +150,7 @@ jobs:
       # value; production sets SCORING_DB_PASSWORD from its secret store.
       - run: npm run scoring:bootstrap
       - run: npm run content:answer-writer:bootstrap
+      - run: npm run exam-writer:bootstrap
       # Spec §22's "fresh apply plus live object verification", and DoD item 4.
       # `supabase start` above has just applied every migration to an empty
       # database, so this is the only place the registry can be checked against
@@ -209,6 +221,15 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run test:e2e
+      # A red run has to be diagnosable from the run itself: Playwright's per-test error context (an accessibility
+      # snapshot of the page at the moment of failure) and first-retry traces live here and were being thrown away.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-results
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
 
   # Infra-heavy (Docker + local Supabase + a real browser, both at once) —
   # its own job for the same reason as rls and e2e: this must never block
@@ -235,8 +256,19 @@ jobs:
       # — one shared password/PIN for every seeded fixture identity.
       E2E_FIXTURE_PASSWORD: Fixture-Password-123!
       E2E_FIXTURE_STUDENT_PIN: "194728"
+      # The server-only exam write path (20261031090000). Local-only value, set by
+      # exam-writer:bootstrap below; hosted environments take it from a secret store.
+      EXAM_WRITE_DB_URL: postgresql://mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret@127.0.0.1:56322/postgres
+      # `supabase start` runs a mail catcher on this port ([inbucket] in supabase/config.toml). Without this variable
+      # every test that reads an email (sign-up confirmation, password recovery, parent sign-in/out: nine tests)
+      # skips, and the job is green without having exercised any of them.
+      E2E_MAILPIT_URL: http://127.0.0.1:56324
+      # supabase/templates/{confirm,recovery}.html link with token_hash, so the device-independent tests apply.
+      E2E_TOKEN_HASH_TEMPLATES: "1"
     steps:
       - uses: actions/checkout@v4
+      # Before npm ci / apt / docker pulls open outbound sockets: see scripts/ci/supabase-start.sh.
+      - run: bash scripts/ci/supabase-start.sh --reserve-only
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -246,7 +278,8 @@ jobs:
       - uses: supabase/setup-cli@v1
         with:
           version: 2.108.0
-      - run: supabase start
+      - run: bash scripts/ci/supabase-start.sh
+      - run: npm run exam-writer:bootstrap
       # globalSetup (e2e/setup/auth.setup.ts) also seeds automatically, but
       # seeding explicitly first gives a clear, separately-attributable CI
       # failure if seeding itself is what's broken, rather than folding
@@ -254,5 +287,12 @@ jobs:
       # context.
       - run: npm run e2e:seed
       - run: npm run test:e2e:auth
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-auth-test-results
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
       - if: always()
         run: supabase stop

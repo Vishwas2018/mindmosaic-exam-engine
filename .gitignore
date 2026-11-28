@@ -47,8 +47,41 @@ yarn-error.log*
 next-env.d.ts
 
 # local agent / assistant tooling (worktrees, session state) — never project source
-/.claude/
-/.agents/
+# Claude Code: ignore everything local except the shared project config below.
+# (settings.local.json, scheduled_tasks.lock, third-party skills/agents stay local.)
+/.claude/*
+!/.claude/settings.json
+!/.claude/scripts/
+/.claude/scripts/*
+!/.claude/scripts/codex-review.mjs
+!/.claude/scripts/playwright-mcp.mjs
+!/.claude/rules/
+!/.claude/agents/
+/.claude/agents/*
+!/.claude/agents/mm-*.md
+!/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/architecture-review/
+!/.claude/skills/database-review/
+!/.claude/skills/feature-development/
+!/.claude/skills/qa-automation/
+!/.claude/skills/release-readiness/
+!/.claude/skills/security-review/
+!/.claude/skills/pr-gate/
+!/.claude/skills/debug-rootcause/
+!/.claude/skills/codex-review/
+!/.claude/skills/environment-safety/
+!/.claude/skills/regression-testing/
+/docs/extracted-screens/
+/docs/clean-screens/
+/docs/NewUIScreens/
+# AGY / shared agent tooling: only the safety hook and gate are project config.
+/.agents/*
+!/.agents/hooks.json
+!/.agents/scripts/
+/.agents/scripts/*
+!/.agents/scripts/safety-gate.mjs
+!/.agents/scripts/safety-gate.test.mjs
 /.agent/
 /.codex/
 /.cursor/
@@ -70,6 +103,7 @@ __pycache__/
 
 # generated test output & debug screenshots — never commit
 /docs/overnight/screenshots/
+/docs/audits/screenshots/
 
 # local scratch & cleanup staging — never project source
 /_to_delete/

@@ -47,6 +47,13 @@ retrofitted after a mistake.
 - Billing status determines feature access (e.g. which roles/seats are
   active) but must never gate whether a **guest** can practise — the
   guests-allowed decision applies regardless of billing state.
+- The Free plan limit is a **server-side sample for signed-in students** whose
+  linked parent has no active access, and only while
+  `BILLING_ENFORCEMENT_ENABLED=true`: `/api/exam/session` narrows the bank to
+  `FREE_PLAN.sampleQuestionsPerProgramme` questions per programme (exam style ×
+  year level × subject, `src/lib/billing/free-sample.ts`) and refuses full-length
+  papers with 402. It is never a client-side counter. Guest practice is not
+  limited by billing state.
 
 ## Content and account safety
 

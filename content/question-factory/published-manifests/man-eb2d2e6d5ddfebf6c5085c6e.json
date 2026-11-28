@@ -29,12 +29,12 @@
     "visuals": [
       {
         "id": "vis-numline",
-        "altText": "Number line from 2.2 to beyond 3.4, with four evenly spaced values highlighted.",
+        "altText": "Number line from 2 to 4.4, marked in steps of 0.2, with 2.2, 2.6, 3 and 3.4 highlighted.",
         "type": "number_line",
         "data": {
           "min": 2,
-          "max": 5,
-          "step": 0.4,
+          "max": 4.4,
+          "step": 0.2,
           "highlightedValues": [
             2.2,
             2.6,
@@ -68,7 +68,16 @@
       "schemaVersion": 1
     }
   },
-  "manifestFingerprint": "325af5e60a9b47f63f233c842ebe7edb7da0f5230944aabbb658ac735c0bc292",
+  "manifestFingerprint": "c154ce2387f22367b2d61d2f21bba655d3be0600737ab977bd2c66ec0a19c614",
   "manifestSchemaVersion": 1,
-  "noChainRecovered": true
+  "noChainRecovered": true,
+  "postPublicationCorrections": [
+    {
+      "correctedAt": "2026-11-13",
+      "field": "question.visuals[0]",
+      "reason": "Highlighted values 2.2, 2.6, 3 and 3.4 fell between ticks (min 2, step 0.4). Ticks now every 0.2 from 2 to 4.4, so every highlight and the answer 3.8 sit on a labelled tick. Prompt, answer key and explanation unchanged. contentHash still binds the originally gated candidate.",
+      "previousQuestionHash": "8a1032d9b40e3b276d34754b5b6d806ddb9aa0be2d9e141dc97a183ce1fbf855",
+      "previousManifestFingerprint": "325af5e60a9b47f63f233c842ebe7edb7da0f5230944aabbb658ac735c0bc292"
+    }
+  ]
 }

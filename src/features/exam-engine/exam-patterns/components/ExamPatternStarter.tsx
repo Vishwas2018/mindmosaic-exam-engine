@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Clock3, ListChecks } from "lucide-react";
 
@@ -10,7 +10,6 @@ import { useAuth } from "@/features/auth";
 import { ExamInstructions } from "@/features/exam-engine/components/ExamInstructions";
 import { useBoundedNavigation } from "@/features/exam-engine/components/use-bounded-navigation";
 import { useExamStore } from "@/features/exam-engine/state";
-import type { AuthoringQuestion } from "@/features/exam-engine/types";
 
 import type { ExamPattern } from "../exam-pattern";
 import type { PatternReadiness } from "../pattern-readiness";
@@ -22,10 +21,7 @@ import {
   reducedModuleMinutes,
 } from "../pattern-session";
 
-interface GuestBanks {
-  curated: readonly AuthoringQuestion[];
-  published: readonly AuthoringQuestion[];
-}
+import { countLabel } from "@/lib/format-count";
 
 /**
  * The start screen for one full-length practice paper.
@@ -36,24 +32,22 @@ interface GuestBanks {
  * one disjoint form) and, where the full-length shape is not satisfiable,
  * whether to sit the shorter practice module instead.
  *
- * Both halves of the existing start path are kept, unchanged in behaviour: a
- * signed-in student gets a server-selected session (the server resolves the
- * same pattern and stores the ids before they see a question); a guest draws
- * locally from the gated bank fetched from /api/exam/guest-bank. Simulations
- * never offer the extended practice bank — a full-length paper padded with
- * ungated seeds is exactly what the pattern doc forbids.
+ * Both signed-in and guest paths resolve the pattern on the server before
+ * displaying the selected questions.
  */
 export function ExamPatternStarter({
   pattern,
   readiness,
+  seed,
 }: {
   pattern: ExamPattern;
   readiness: PatternReadiness;
+  /** `?seed=`, read by the page on the server (see ExamConfigurator's `seed` for why: D-018). */
+  seed?: string;
 }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const auth = useAuth();
-  const startPatternExam = useExamStore((state) => state.startPatternExam);
+  const startGuestExam = useExamStore((state) => state.startGuestExam);
   const startServerPatternExam = useExamStore((state) => state.startServerPatternExam);
   const serverMode = auth.status === "authenticated";
   /* Non-student roles (admin, parent, teacher) are intentionally prohibited from creating student exam sessions (MM-AUTH-01). */
@@ -75,28 +69,6 @@ export function ExamPatternStarter({
   const [startError, setStartError] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [isStarting, setIsStarting] = useState(false);
-
-  const guestBanksPromise = useRef<Promise<GuestBanks> | null>(null);
-  const loadGuestBanks = useCallback(() => {
-    guestBanksPromise.current ??= fetch("/api/exam/guest-bank")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Guest bank request failed: ${response.status}`);
-        }
-        return response.json() as Promise<GuestBanks>;
-      })
-      .catch((error) => {
-        guestBanksPromise.current = null;
-        throw error;
-      });
-    return guestBanksPromise.current;
-  }, []);
-
-  useEffect(() => {
-    if (auth.status === "anonymous" || auth.status === "unconfigured") {
-      loadGuestBanks().catch(() => {});
-    }
-  }, [auth.status, loadGuestBanks]);
 
   useEffect(() => {
     router.prefetch("/exam");
@@ -145,28 +117,16 @@ export function ExamPatternStarter({
       return;
     }
 
-    /* Guest flow, mirroring the configurator's: an explicit ?seed= makes a
-       sitting reproducible for tests and for sharing. */
-    const seed = searchParams.get("seed") ?? undefined;
-    let pool: readonly AuthoringQuestion[];
-    try {
-      setIsCreating(true);
-      const banks = await loadGuestBanks();
-      /* Gated content only. No extended-bank opt-in on this pathway. */
-      pool = banks.published;
-    } catch {
-      setStartError(
-        "We couldn't load the questions. Check your connection and try again.",
-      );
-      setIsCreating(false);
-      return;
-    }
+    setIsCreating(true);
+    const started = await startGuestExam({
+      patternId: pattern.id,
+      asPracticeModule: options.asPracticeModule,
+      form: options.form,
+      formCount: options.formCount,
+    }, { seed, confidenceMode });
     setIsCreating(false);
-    const started = startPatternExam(pool, pattern, { ...options, seed });
     if (!started) {
-      setStartError(
-        "We don't have enough reviewed questions for this paper yet. Try another one.",
-      );
+      setStartError(useExamStore.getState().lastServerError);
       return;
     }
     setIsStarting(true);
@@ -212,7 +172,7 @@ export function ExamPatternStarter({
           data-testid="pattern-sitting-shape"
         >
           {confidenceMode
-            ? `${servedCount} questions · Untimed (Confidence Mode)`
+            ? `${countLabel(servedCount, "question")} · Untimed (Confidence Mode)`
             : describePaperShape(servedCount, minutes)}
         </p>
       </div>

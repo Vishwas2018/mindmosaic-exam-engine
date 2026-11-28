@@ -7,10 +7,8 @@ import { mmButton, SectionHeading } from "./primitives";
 
 /**
  * The three plan cards — design handoff screen 3, only ever rendered on
- * /pricing. The Family cards' `price` is the literal string "Price to be
- * confirmed", never a figure from src/lib/billing/prices.ts: those amounts
- * are placeholders (FAMILY_PLAN_AVAILABILITY === "roadmap"), and no public
- * page may display them.
+ * /pricing. Prices come from `plans` in content.ts, which reads them from
+ * src/lib/billing/prices.ts, so this page and /billing cannot disagree.
  */
 export function Plans() {
   return (

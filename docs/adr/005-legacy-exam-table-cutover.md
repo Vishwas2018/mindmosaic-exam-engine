@@ -529,3 +529,38 @@ The ordering inside that function is dictated by this ADR's own constraints:
 are `ON DELETE RESTRICT`, so the target model must be erased first. A workflow
 that deleted in the obvious order would fail on exactly the children who had
 been through the cutover.
+
+## Amendment E (2026-10-31): the legacy write RPCs leave the client before the drain
+
+**Status:** accepted (interim; does not replace §8).
+
+**Finding.** `create_exam_session` and `record_exam_attempt` were granted to `authenticated` so the route handlers
+could call them with the learner's own JWT. PostgREST exposes every function granted to `authenticated`, so a signed-in
+student could call them directly: `create_exam_session` accepts a caller-chosen question list and config (a
+one-question "full NAPLAN paper", even non-existent question ids), and `record_exam_attempt` stores a caller-chosen
+`p_result` (a forged 100%). The routes scored correctly; the functions behind them did not enforce that the caller was
+a route. The comment in `20260811090000` ("the route's computation is the only origin a `result` can have") held for
+the route, not for the function. §8 planned to revoke both at the drain, which left the window open until then.
+
+**Decision.** Close the window now, without the cutover:
+
+1. Two server-only functions, `create_exam_session_for(p_student_id, ...)` and `record_exam_attempt_for(p_student_id,
+   ...)`, with the same role, ownership, expiry and duplicate checks as the originals (`20261031090000`).
+2. Executable by exactly one role, `mindmosaic_exam_writer`: `LOGIN`, no superuser/createdb/createrole/replication,
+   `NOBYPASSRLS`, `NOINHERIT`, no table privilege. Not `service_role`, for the reason `20260812110000` gives for the
+   scoring role (it bypasses RLS on every table). Held by one module, `src/server/exam-write/legacy-exam-writes.ts`,
+   enforced by `scoring-module-boundary.test.ts`.
+3. The routes pass the student id they have just authenticated (`auth.getUser()`), never one from the request.
+4. `20261031090100` revokes both legacy functions from `anon`, `authenticated` and `PUBLIC`, across every overload
+   found in the catalogue, and asserts the outcome.
+
+**What this does not change.** Storage model, session selection, scoring, timing, autosave, duplicate protection,
+Scholarship/AMC handling and the drain conditions in §8 are untouched. The legacy functions are not dropped; §8's
+drain migration still owns that. `create_assessment_session` (target model) is unchanged: it was already role- and
+cohort-gated inside the function and chooses the composition itself.
+
+**Cost, stated.** The create and submit routes now open one short-lived direct Postgres connection as the writer role
+per write, the pattern `answer-access.ts` already uses. They fail closed with `503 not_configured` if
+`EXAM_WRITE_DB_URL` is unset; there is deliberately no fallback to the user's client or to `service_role`.
+
+Rollout and rollback: `docs/runbooks/legacy-exam-write-lockdown.md`.

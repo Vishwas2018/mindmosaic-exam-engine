@@ -1,0 +1,49 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-depth-vc2m5sp03-002",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "67715b0e1a2a106ab33cc73436a951ba1d4d078de2a8775050de7bfba7f5aeba",
+  "sourceManifestHash": "86b3da7fdbcb41eb756952ec4c84b565da8a6083dda9f24bea8ecd1f3e7104d8",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-depth-vc2m5sp03-002",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "How many lines of reflective symmetry does a regular hexagon have?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 6,
+      "tolerance": 0
+    },
+    "explanation": "A regular polygon with n sides has exactly n lines of reflective symmetry. A regular hexagon has 6 sides and 6 lines of symmetry.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "space",
+      "topic": "Symmetry",
+      "skill": "Lines of symmetry in regular polygons",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 60,
+      "tags": [
+        "maths",
+        "symmetry"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "690bf16b59e1ddba9446c3b4b09ddfdd3e02879da2b5f5d2c28b9feb7a2bd18e"
+}

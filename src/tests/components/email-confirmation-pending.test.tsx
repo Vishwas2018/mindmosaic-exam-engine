@@ -60,16 +60,50 @@ describe("EmailConfirmationPending (parent sign-up screen 2 gap)", () => {
     expect(mockResend).toHaveBeenCalledTimes(1);
     expect(mockResend.mock.calls[0][0]).toMatchObject({ type: "signup", email: "jamie@example.com" });
 
-    expect(await screen.findByRole("status")).toHaveTextContent(/resent/i);
+    /* "Sent" only because the server accepted the resend. */
+    expect(await screen.findByRole("status")).toHaveTextContent(/a new link is on its way/i);
     expect(screen.getByRole("button", { name: /resend available in \d+s/i })).toBeDisabled();
   });
 
-  it("calls onBack when the back-to-sign-in link is used", async () => {
+  it("does not claim a new link was sent when the resend fails, and offers a person", async () => {
+    mockResend.mockResolvedValue({ error: { message: "SMTP exploded", status: 500 } });
+    const user = userEvent.setup();
+    renderPending();
+
+    await user.click(screen.getByRole("button", { name: /resend confirmation email/i }));
+
+    const status = await screen.findByRole("status");
+    expect(status).not.toHaveTextContent(/on its way|resent|sent/i);
+    expect(status).not.toHaveTextContent(/smtp/i);
+    expect(status).toHaveTextContent(/hello@mindmosaic\.app/i);
+  });
+
+  it("says how long to wait and where to look, without stating an unverified expiry time", () => {
+    renderPending();
+    expect(screen.getByText(/give it a minute, then check spam/i)).toBeInTheDocument();
+    expect(document.body).not.toHaveTextContent(/24 hours|expires in \d/i);
+  });
+
+  it("calls onBack when 'sign in' is chosen for an already-confirmed address", async () => {
     const onBack = vi.fn();
     const user = userEvent.setup();
     renderPending(onBack);
 
-    await user.click(screen.getByRole("button", { name: /back to sign in/i }));
+    await user.click(screen.getByRole("button", { name: /^sign in$/i }));
     expect(onBack).toHaveBeenCalledTimes(1);
+  });
+
+  it("offers to change the email only when the caller can take the person back to the form", async () => {
+    const { rerender } = renderPending();
+    expect(screen.queryByRole("button", { name: /change your email/i })).not.toBeInTheDocument();
+
+    const onChangeEmail = vi.fn();
+    rerender(
+      <AuthProvider>
+        <EmailConfirmationPending email="jamie@example.com" onBack={vi.fn()} onChangeEmail={onChangeEmail} />
+      </AuthProvider>,
+    );
+    await userEvent.setup().click(screen.getByRole("button", { name: /change your email/i }));
+    expect(onChangeEmail).toHaveBeenCalledTimes(1);
   });
 });

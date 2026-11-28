@@ -237,7 +237,8 @@ describe("Confidence Mode Aggregation Isolation", () => {
       // Evaluated metrics reflect ONLY the unassisted timed attempt (50%, not (50+100)/2 = 75%)
       expect(summary.averagePercentage).toBe(50);
       expect(summary.latestPercentage).toBe(50);
-      expect(summary.readinessScore).toBe(50);
+      /* One finished paper is below the evidence floor, so no recent average is claimed. */
+      expect(summary.recentAveragePercentage).toBeNull();
 
       // Subject mastery reflects only the timed attempt
       const numeracy = summary.subjects.find((s) => s.subject === "numeracy");

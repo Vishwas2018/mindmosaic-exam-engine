@@ -67,6 +67,10 @@ export function validateCandidateStructure(
   if (!questionOutcome.ok) issues.push(...questionOutcome.issues);
 
   if (provenanceOutcome.ok) {
+    const provenance = provenanceOutcome.data;
+    if (provenance.kind === "legacy_import" && context.blueprintHash !== provenance.repositoryImport.blueprint.contentHash) {
+      issues.push({ code: "stale_blueprint_binding", severity: "error", path: "provenance.repositoryImport.blueprint.contentHash", message: "Legacy import requires its exact verified blueprint binding at structural validation." });
+    }
     issues.push(...checkCandidateIdBinding(candidate.candidateId, provenanceOutcome.data));
     issues.push(...checkVersions(provenanceOutcome.data));
     issues.push(...checkStaleness(provenanceOutcome.data, context));

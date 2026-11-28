@@ -1,20 +1,64 @@
 import "server-only";
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { isProfileRole, roleHomePath, type ProfileRole } from "@/features/auth/roles";
+import {
+  isProfileRole,
+  landingForEntitled,
+  resolveEntitledRoles,
+  type ProfileRole,
+} from "@/features/auth/roles";
+import { adminMfaOutcome, loadAdminGrants } from "@/features/auth/admin-grants";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
+async function hadAuthCookie(): Promise<boolean> {
+  try {
+    const jar = await cookies();
+    return jar.getAll().some((cookie) => /^sb-.+-auth-token(\.\d+)?$/.test(cookie.name));
+  } catch {
+    /* No request scope (e.g. unit tests): fall back to the ordinary sign-in redirect. */
+    return false;
+  }
+}
+
 export type RoleGateResult =
   | { configured: false }
-  | { configured: true; userId: string };
+  | {
+      configured: true;
+      userId: string;
+      /** Every workspace this login may enter (primary role plus any active admin entitlement). */
+      roles: ProfileRole[];
+    };
+
+/**
+ * Step-up for privileged work. When the platform switch (security_settings.require_admin_mfa) is on, an admin session
+ * must be MFA-verified (aal2): others are sent to /staff/mfa, then back. The same switch is enforced again inside the
+ * database (is_admin()), so a stale page or a direct API call cannot bypass this.
+ *
+ * Fails CLOSED: if the switch cannot be read (unexpected database error) the admin workspace is refused rather than
+ * opened without MFA. "deny" is only returned for a database that HAS the entitlement table, so a pre-migration
+ * database (no switch at all) is never affected; the caller passes skipMissingSwitch for that case.
+ */
+type StepUp = { kind: "ok" } | { kind: "redirect"; path: string } | { kind: "deny" };
+
+async function mfaStepUp(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  nextPath: string,
+): Promise<StepUp> {
+  const outcome = await adminMfaOutcome(supabase);
+  if (outcome === "ok") return { kind: "ok" };
+  if (outcome === "deny") return { kind: "deny" };
+  return { kind: "redirect", path: `/staff/mfa?next=${encodeURIComponent(nextPath)}` };
+}
 
 /**
  * Central auth+role gate for every /{role} route tree, run once per request
  * from each role's layout.tsx (src/app/{student,parent,teacher,admin}/layout.tsx).
- * Guests are sent to sign-in, wrong roles to their own home; a matching
- * profile role passes through untouched. RLS is the real enforcement
+ * Guests are sent to sign-in, un-entitled roles to an entitled home; an entitled
+ * role passes through untouched. Entitlement = primary profile role, plus admin
+ * only through an active user_roles grant (see resolveEntitledRoles). RLS is the real enforcement
  * (docs/DATA_MODEL_AND_ROLES.md) — this exists to route each visitor
  * somewhere sensible instead of rendering a page they can't use.
  *
@@ -51,7 +95,16 @@ export async function requireRole(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
+  if (!user) {
+    /* A browser that still carries Supabase auth cookies, but whose session
+       no longer resolves, was signed in and has been signed out: say so,
+       rather than greeting it like a stranger. The cookie is the browser's
+       own, so this reveals nothing to anyone else. */
+    if (await hadAuthCookie()) {
+      redirect(`/session-expired?next=${encodeURIComponent(nextPath)}`);
+    }
+    redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
+  }
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -64,8 +117,17 @@ export async function requireRole(
     redirect(`/sign-in?next=${encodeURIComponent(nextPath)}`);
   }
 
-  const profileRole = isProfileRole(profile?.role) ? profile.role : null;
-  if (profileRole !== role) redirect(roleHomePath(profileRole));
+  const primary = isProfileRole(profile?.role) ? profile.role : null;
+  const grants = await loadAdminGrants(supabase, user.id);
+  const roles = resolveEntitledRoles(primary, grants);
+  if (!roles.includes(role)) redirect(landingForEntitled(roles, primary));
 
-  return { configured: true, userId: user.id };
+  /* "missing" = database predates the multi-role migration: there is no MFA switch to read either. */
+  if (role === "admin" && grants !== "missing") {
+    const stepUp = await mfaStepUp(supabase, nextPath);
+    if (stepUp.kind === "redirect") redirect(stepUp.path);
+    if (stepUp.kind === "deny") redirect(landingForEntitled(roles.filter((r) => r !== "admin"), primary));
+  }
+
+  return { configured: true, userId: user.id, roles };
 }

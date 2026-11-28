@@ -1,0 +1,67 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-fc5cbe3546c64e0b7c536cca",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "2a86e02063f4917e3af503c724807dbcdecafec4713f6efd124d7ea96411bf6b",
+  "sourceManifestHash": "aef2c2b77a32f63c2588a201d9ce0d8fc686932cea6a559e018997c6d686f513",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-fc5cbe3546c64e0b7c536cca",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "If the probability of rain tomorrow is 0.35, what is the probability that it will NOT rain?",
+    "options": [
+      {
+        "id": "opt-a",
+        "text": "0.65"
+      },
+      {
+        "id": "opt-b",
+        "text": "0.75"
+      },
+      {
+        "id": "opt-c",
+        "text": "0.35"
+      },
+      {
+        "id": "opt-d",
+        "text": "1.35"
+      }
+    ],
+    "visuals": [],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "opt-a"
+    },
+    "explanation": "The sum of complementary probabilities is 1. P(not rain) = 1 - 0.35 = 0.65.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Probability",
+      "topic": "Probability",
+      "skill": "Complementary event probability",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [
+        "probability",
+        "complementary-events",
+        "decimals",
+        "orig-id:g5-prob-theo-004"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "bdb04fd774ad1ed9857c0d888b915c3f9d61871b6fec2cbac6acc550746584bb"
+}

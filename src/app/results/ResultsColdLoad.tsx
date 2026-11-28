@@ -9,6 +9,7 @@ import { formatSubmittedAt, type AttemptSummary } from "@/features/student/attem
 
 import { fetchAttemptHistory } from "./history-fetch";
 
+import { countLabel } from "@/lib/format-count";
 /**
  * What /results shows when the in-memory exam store is empty.
  *
@@ -47,10 +48,10 @@ function AttemptRow({ attempt }: { attempt: AttemptSummary }) {
       className="flex flex-wrap items-center justify-between gap-3 border-t border-primary/8 px-6 py-4 first:border-t-0"
     >
       <div className="min-w-0">
-        <p className="truncate text-sm font-extrabold text-plum-dark">{attempt.title}</p>
+        <p className="truncate text-sm font-semibold text-plum-dark">{attempt.title}</p>
         <p className="mt-0.5 text-xs font-semibold text-plum-muted">
           {formatSubmittedAt(attempt.submittedAt)}
-          {attempt.totalQuestions !== null ? ` · ${attempt.totalQuestions} questions` : ""}
+          {attempt.totalQuestions !== null ? ` · ${countLabel(attempt.totalQuestions, "question")}` : ""}
           {attempt.timing ? ` · ${attempt.timing === "timed" ? "Timed" : "Untimed"}` : ""}
           {attempt.pendingManualReview ? " · some marks pending" : ""}
         </p>
@@ -60,14 +61,14 @@ function AttemptRow({ attempt }: { attempt: AttemptSummary }) {
         /* Not "0%" — see the dashboard fix. A paper submitted without an
            answer is not a score, and showing one here would reintroduce
            exactly the confusion that reported as broken aggregation. */
-        <span className="inline-flex items-center gap-1.5 text-sm font-bold text-plum-muted">
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-plum-muted">
           <Minus aria-hidden="true" className="h-4 w-4" />
           No answers
         </span>
       ) : attempt.scorePercent === null ? (
-        <span className="text-sm font-bold text-plum-muted">Awaiting marking</span>
+        <span className="text-sm font-semibold text-plum-muted">Awaiting marking</span>
       ) : (
-        <span className="text-lg font-black tabular-nums text-plum-dark">{attempt.scorePercent}%</span>
+        <span className="text-lg font-semibold tabular-nums text-plum-dark">{attempt.scorePercent}%</span>
       )}
     </li>
   );
@@ -132,10 +133,10 @@ export function ResultsColdLoad() {
     <main id="main-content" className="site-width py-10 sm:py-14">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-primary">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-primary">
             Your history
           </p>
-          <h1 className="mt-2 font-jakarta text-3xl font-black tracking-[-0.035em] text-plum-dark sm:text-4xl">
+          <h1 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mt-2 font-jakarta text-3xl font-semibold tracking-[-0.035em] text-plum-dark sm:text-4xl">
             Finished sessions
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-plum-muted">
@@ -147,7 +148,7 @@ export function ResultsColdLoad() {
 
         <Card variant="default" className="mt-8 overflow-hidden">
           <div className="flex items-center justify-between gap-3 border-b border-primary/8 px-6 py-4">
-            <h2 className="font-jakarta text-sm font-extrabold text-plum-dark">Sessions</h2>
+            <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta text-sm font-semibold text-plum-dark">Sessions</h2>
             <Badge variant="purple">{state.attempts.length} finished</Badge>
           </div>
           <ol>

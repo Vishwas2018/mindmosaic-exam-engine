@@ -1,0 +1,92 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-6f6b3b1658d356c8cacee404",
+  "revision": 2,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "0e731096e3ba99c087574b50d58f86ae5e03fd89cccf89a071cfd030a6300fbd",
+  "sourceManifestHash": "2cce36e056b719a7556fdb0fe2ff4a9d3889a7c0e7721cecd5766123c3c3615a",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-6f6b3b1658d356c8cacee404",
+    "type": "matching",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Match each fraction on the left to the equivalent fraction on the right that describes exactly the same amount.",
+    "options": [],
+    "interaction": {
+      "type": "matching",
+      "sources": [
+        {
+          "id": "src-0",
+          "text": "2/3"
+        },
+        {
+          "id": "src-1",
+          "text": "1/4"
+        },
+        {
+          "id": "src-2",
+          "text": "5/6"
+        }
+      ],
+      "targets": [
+        {
+          "id": "tgt-0",
+          "text": "4/6"
+        },
+        {
+          "id": "tgt-1",
+          "text": "3/12"
+        },
+        {
+          "id": "tgt-2",
+          "text": "10/12"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "matching",
+      "pairs": [
+        {
+          "sourceId": "src-0",
+          "targetId": "tgt-0"
+        },
+        {
+          "sourceId": "src-1",
+          "targetId": "tgt-1"
+        },
+        {
+          "sourceId": "src-2",
+          "targetId": "tgt-2"
+        }
+      ]
+    },
+    "explanation": "2/3 matches 4/6, since multiplying both parts of 2/3 by 2 gives 4/6. 1/4 matches 3/12, since multiplying both parts of 1/4 by 3 gives 3/12. 5/6 matches 10/12, since multiplying both parts of 5/6 by 2 gives 10/12.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Fractions",
+      "topic": "Fractions",
+      "skill": "Identifying equivalent fractions",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "fractions",
+        "equivalence"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "6a0667acfc2667c22d9efad5ece4280cb5e7bdc6aef6fa80254f903946c12932"
+}

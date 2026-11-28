@@ -1,0 +1,10 @@
+hosted acceptance rmwt5p1ep: feat/stripe-billing-readiness 08352f8a dpl_ExKZyrTDd8Fn5gWbECNTXTsDP4G4
+
+Running 4 tests using 1 worker
+
+  ✓  1 [desktop-1440] › e2e\hosted\s4-billing-extended.spec.ts:39:5 › L4 upgrade and downgrade re-map the plan and the child cap, without deleting anyone's children (38.5s)
+  ✓  2 [desktop-1440] › e2e\hosted\s4-billing-extended.spec.ts:88:5 › P1 customer portal: a parent gets a portal session for their own customer only; the return path is allow-listed (25.2s)
+  ✓  3 [desktop-1440] › e2e\hosted\s4-billing-extended.spec.ts:118:5 › W4 a delivery that cannot be applied is refused (so Stripe retries) and leaves no ledger trace (1.1s)
+  ✓  4 [desktop-1440] › e2e\hosted\s4-billing-extended.spec.ts:138:5 › F1 characterisation: what a guest is actually served, versus the 'Free: 5 sample questions' claim (2.6s)
+
+  4 passed (1.2m)

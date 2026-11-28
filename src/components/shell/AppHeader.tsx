@@ -25,13 +25,25 @@ const NAV_ITEMS: {
   href: string;
   roles: readonly ProfileRole[] | null;
   requiresAuth?: boolean;
+  /** Roles that must not see this entry even though `roles` is null. */
+  hideForRoles?: readonly ProfileRole[];
 }[] = [
-  { label: "Practice", href: "/practice", roles: null },
+  /* Practice and Exam papers are what a child does. A parent supervises, so
+     they get the Children and Curriculum entries below instead. Guests (no
+     role) still see them: it is the public catalogue. */
+  { label: "Practice", href: "/practice", roles: null, hideForRoles: ["parent"] },
   /* Full-length practice papers. Sits beside Practice rather than inside it:
      choosing a short set to work on a skill and sitting a whole paper under
      a clock are different intents, and burying the second inside the first
      is how it stayed unreachable. */
-  { label: "Exam papers", href: "/exams", roles: null },
+  { label: "Exam papers", href: "/exams", roles: null, hideForRoles: ["parent"] },
+  { label: "Children", href: "/parent/children", roles: ["parent"], requiresAuth: true },
+  {
+    label: "Curriculum",
+    href: "/parent/curriculum-explorer",
+    roles: ["parent"],
+    requiresAuth: true,
+  },
   { label: "Learn", href: "/student/learn", roles: ["student"], requiresAuth: true },
   { label: "Results", href: "/results", roles: null },
   { label: "Help", href: "/help", roles: null },
@@ -167,6 +179,7 @@ export function AppHeader() {
     ...NAV_ITEMS,
   ].filter((item) => {
     if (item.requiresAuth && !isSignedIn) return false;
+    if (role !== null && item.hideForRoles?.includes(role)) return false;
     if (item.roles === null) return true;
     return role !== null && item.roles.includes(role);
   });
@@ -177,6 +190,8 @@ export function AppHeader() {
     /* Same reasoning as AuthNav's own sign-out: signOut() only clears the
        browser client's session, so a server-rendered tree still on screen
        needs an explicit re-render to pick up the signed-out state. */
+    /* Land on the clean-exit screen, then re-render so no signed-in tree lingers. */
+    router.push("/signed-out");
     router.refresh();
   }
 

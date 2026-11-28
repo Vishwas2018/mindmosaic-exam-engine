@@ -1,0 +1,75 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-dc-002",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "a4a58320a06aaee029a9882165d8c532f15a8bdffb7e78ccb09e2eadea9dfb4c",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-dc-002",
+    "type": "ordering",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Four bushwalking tracks have these lengths: Fern Track 380 m, Ridge Track 830 m, Creek Track 308 m and Gully Track 803 m. Put the tracks in order from shortest to longest.",
+    "options": [],
+    "interaction": {
+      "type": "ordering",
+      "items": [
+        {
+          "id": "fern",
+          "text": "Fern Track (380 m)"
+        },
+        {
+          "id": "ridge",
+          "text": "Ridge Track (830 m)"
+        },
+        {
+          "id": "creek",
+          "text": "Creek Track (308 m)"
+        },
+        {
+          "id": "gully",
+          "text": "Gully Track (803 m)"
+        }
+      ]
+    },
+    "visuals": [],
+    "answerKey": {
+      "kind": "ordering",
+      "optionIds": [
+        "creek",
+        "fern",
+        "gully",
+        "ridge"
+      ]
+    },
+    "explanation": "Compare the hundreds digit first. Creek 308 and Fern 380 both start with 3, so they are smallest; 308 is less than 380. Gully 803 and Ridge 830 both start with 8; 803 is less than 830. Shortest to longest is 308, 380, 803, 830.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Comparing and ordering numbers",
+      "skill": "Order three-digit numbers from smallest to largest",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "ordering",
+        "place value",
+        "comparing numbers"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "669ed88aee54291bcd809d2bcd6397256f477a69da5cc5a59cd8c257c1472323"
+}

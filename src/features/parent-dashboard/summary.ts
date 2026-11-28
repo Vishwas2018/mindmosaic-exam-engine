@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { describeConfig } from "@/features/exam-engine/components/describe-config";
 import { examSelectionConfigSchema } from "@/features/exam-engine/scoring/server-scoring-contract";
+import { describeEvidence, hasEnoughEvidence } from "./evidence";
 import { performanceBand } from "./performance-band";
 
 /**
@@ -82,6 +83,13 @@ export interface SubjectSummary {
   marksEarned: number;
   marksAvailable: number;
   questionCount: number;
+  /** Finished papers that contributed marks to this subject. */
+  paperCount: number;
+  /**
+   * True only when this subject rests on enough work to be described (see
+   * ./evidence.ts). When false, no band, ranking or comparison is made for it.
+   */
+  sufficientEvidence: boolean;
 }
 
 export interface WeekDay {
@@ -98,6 +106,11 @@ export interface RecommendedAction {
 
 export interface ChildSummary {
   childId: string;
+  /**
+   * True when the child's login is paused (archived). Their results stay visible; set by the page from
+   * Supabase Auth, not derived from attempts. Absent means active.
+   */
+  archived?: boolean;
   displayName: string;
   yearLevel: number | null;
   attemptCount: number;
@@ -106,6 +119,11 @@ export interface ChildSummary {
   latestPercentage: number | null;
   previousPercentage: number | null;
   averagePercentage: number | null;
+  /**
+   * True when the lifetime average rests on enough finished papers and marks to be shown as
+   * a figure (see ./evidence.ts). When false the dashboard shows counts instead.
+   */
+  averageHasEvidence: boolean;
   attemptsThisWeek: number;
   timeThisWeekSeconds: number;
   streakDays: number;
@@ -117,13 +135,16 @@ export interface ChildSummary {
   recentAttempts: AttemptSummary[];
   /**
    * Average objective percentage across the most recent attempts (see
-   * READINESS_WINDOW), distinct from averagePercentage (which spans every
-   * attempt ever recorded) — this is meant to reflect current standing, not
-   * lifetime performance. Null with no scored attempts.
+   * RECENT_WINDOW), distinct from averagePercentage (which spans every
+   * attempt ever recorded). It is an average, not a prediction, and is null
+   * unless the window holds enough evidence (see ./evidence.ts).
    */
-  readinessScore: number | null;
-  /** Count of subjects with an objective percentage at or above the "strong" band threshold. */
-  topicsMasteredCount: number;
+  recentAveragePercentage: number | null;
+  /**
+   * Subjects at or above the "strong" threshold AND resting on enough
+   * evidence. A subject seen in one short paper is never counted.
+   */
+  strongSubjectCount: number;
   /** Short, plain-language observations for the parent dashboard's insights panel. */
   observations: string[];
   /** Suggested next steps, most relevant first. */
@@ -132,8 +153,8 @@ export interface ChildSummary {
 
 const RECENT_ATTEMPTS_LIMIT = 5;
 
-/** How many of the most recent attempts feed the readiness score. */
-const READINESS_WINDOW = 5;
+/** How many of the most recent attempts feed the recent average. */
+const RECENT_WINDOW = 5;
 
 const SUBJECT_LABELS: Record<string, string> = {
   numeracy: "Numeracy",
@@ -190,10 +211,12 @@ function attemptLabel(sessionConfig: unknown, mode?: string): string {
   return isConfidence ? `${base} (Confidence Mode)` : base;
 }
 
-function computeReadinessScore(parsed: ParsedAttempt[]): number | null {
+function computeRecentAverage(parsed: ParsedAttempt[]): number | null {
   if (parsed.length === 0) return null;
   // parsed is already sorted newest-first.
-  const window = parsed.slice(0, READINESS_WINDOW);
+  const window = parsed.slice(0, RECENT_WINDOW);
+  const marksAvailable = window.reduce((total, a) => total + a.result.objectiveMarksAvailable, 0);
+  if (!hasEnoughEvidence({ papers: window.length, marksAvailable })) return null;
   const sum = window.reduce((total, attempt) => total + attempt.result.objectivePercentage, 0);
   return Math.round(sum / window.length);
 }
@@ -206,17 +229,30 @@ function buildObservations(params: {
 }): string[] {
   const { displayName, subjects, streakDays, attemptsThisWeek } = params;
   const scored = subjects.filter((subject) => subject.percentage !== null);
+  const claimable = scored.filter((subject) => subject.sufficientEvidence);
   const observations: string[] = [];
 
-  if (scored.length > 0) {
-    const strongest = scored[0];
-    observations.push(
-      `${displayName} is strongest in ${strongest.label} (${strongest.percentage}%).`,
-    );
-    const weakest = scored[scored.length - 1];
-    if (weakest.subject !== strongest.subject) {
+  if (claimable.length >= 2) {
+    /* A comparison needs two subjects that each rest on enough work. */
+    const strongest = claimable[0];
+    const weakest = claimable[claimable.length - 1];
+    if (strongest.percentage !== weakest.percentage) {
+      observations.push(
+        `${displayName} is strongest in ${strongest.label} (${strongest.percentage}%).`,
+      );
       observations.push(`${weakest.label} could use more practice (${weakest.percentage}%).`);
     }
+  }
+  /* Where a subject is still thin, say so with the real counts rather than a
+     verdict. */
+  for (const subject of scored.filter((entry) => !entry.sufficientEvidence)) {
+    observations.push(
+      `${subject.label}: ${describeEvidence({
+        papers: subject.paperCount,
+        marksEarned: subject.marksEarned,
+        marksAvailable: subject.marksAvailable,
+      })}. Not enough yet to say how ${displayName} is doing here.`,
+    );
   }
 
   if (streakDays >= 3) {
@@ -248,7 +284,9 @@ function buildRecommendedActions(params: {
 
   const scored = subjects.filter((subject) => subject.percentage !== null);
   const actions: RecommendedAction[] = [];
-  const focusSubject = scored.find((subject) => performanceBand(subject.percentage as number) === "focus");
+  const focusSubject = scored.find(
+    (subject) => subject.sufficientEvidence && performanceBand(subject.percentage as number) === "focus",
+  );
   if (focusSubject) {
     actions.push({
       id: `focus-${focusSubject.subject}`,
@@ -267,11 +305,20 @@ function buildRecommendedActions(params: {
   }
 
   if (actions.length === 0) {
-    actions.push({
-      id: "keep-going",
-      title: "Keep up the regular practice",
-      description: "Scores are solid across the board — steady practice keeps it that way.",
-    });
+    const anyClaim = scored.some((subject) => subject.sufficientEvidence);
+    actions.push(
+      anyClaim
+        ? {
+            id: "keep-going",
+            title: "Keep up the regular practice",
+            description: "Nothing here needs attention right now — steady practice keeps it that way.",
+          }
+        : {
+            id: "more-evidence",
+            title: "Another paper or two will make this clearer",
+            description: "There is not yet enough finished work to say where to focus.",
+          },
+    );
   }
 
   return actions;
@@ -337,7 +384,7 @@ export function buildChildSummary(
 
   const subjectTotals = new Map<
     string,
-    { earned: number; available: number; questionCount: number }
+    { earned: number; available: number; questionCount: number; papers: number }
   >();
   for (const attempt of evaluableAttempts) {
     for (const [subject, row] of Object.entries(attempt.result.breakdowns.bySubject)) {
@@ -345,10 +392,12 @@ export function buildChildSummary(
         earned: 0,
         available: 0,
         questionCount: 0,
+        papers: 0,
       };
       totals.earned += row.objectiveMarksEarned;
       totals.available += row.objectiveMarksAvailable;
       totals.questionCount += row.total;
+      if (row.objectiveMarksAvailable > 0) totals.papers += 1;
       subjectTotals.set(subject, totals);
     }
   }
@@ -361,6 +410,8 @@ export function buildChildSummary(
       marksEarned: totals.earned,
       marksAvailable: totals.available,
       questionCount: totals.questionCount,
+      paperCount: totals.papers,
+      sufficientEvidence: hasEnoughEvidence({ papers: totals.papers, marksAvailable: totals.available }),
     }))
     .sort((a, b) => (b.percentage ?? -1) - (a.percentage ?? -1));
 
@@ -381,8 +432,11 @@ export function buildChildSummary(
     }));
 
   const displayName = child.displayName?.trim() || "Your child";
-  const topicsMasteredCount = subjects.filter(
-    (subject) => subject.percentage !== null && performanceBand(subject.percentage) === "strong",
+  const strongSubjectCount = subjects.filter(
+    (subject) =>
+      subject.sufficientEvidence &&
+      subject.percentage !== null &&
+      performanceBand(subject.percentage) === "strong",
   ).length;
 
   return {
@@ -394,14 +448,18 @@ export function buildChildSummary(
     latestPercentage,
     previousPercentage,
     averagePercentage,
+    averageHasEvidence: hasEnoughEvidence({
+      papers: evaluableAttempts.length,
+      marksAvailable: evaluableAttempts.reduce((sum, a) => sum + a.result.objectiveMarksAvailable, 0),
+    }),
     attemptsThisWeek: thisWeek.length,
     timeThisWeekSeconds,
     streakDays,
     weekActivity,
     subjects,
     recentAttempts,
-    readinessScore: computeReadinessScore(evaluableAttempts),
-    topicsMasteredCount,
+    recentAveragePercentage: computeRecentAverage(evaluableAttempts),
+    strongSubjectCount,
     observations: buildObservations({
       displayName,
       subjects,

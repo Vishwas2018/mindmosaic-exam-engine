@@ -1,5 +1,14 @@
 import type { NextConfig } from "next";
 
+import { isUatAssistantEnvironmentAllowed } from "./src/features/uat-assistant/flags";
+
+// Microphone access stays `microphone=()` in production and unflagged builds;
+// same-origin `microphone=(self)` is enabled only when the DEV UAT Assistant
+// is active so voice-to-text dictation can request permission cleanly.
+const microphonePolicy = isUatAssistantEnvironmentAllowed(process.env)
+  ? "microphone=(self)"
+  : "microphone=()";
+
 // CSP is handled per-request in src/proxy.ts (needs a per-request nonce);
 // everything else that's static lives here.
 const securityHeaders = [
@@ -9,7 +18,7 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), interest-cohort=(), usb=(), payment=(self)",
+    value: `camera=(), ${microphonePolicy}, geolocation=(), browsing-topics=(), interest-cohort=(), usb=(), payment=(self)`,
   },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
@@ -21,7 +30,15 @@ const nextConfig: NextConfig = {
   // has been verified in a standalone build; omitting one would silently drop
   // publication evidence from that route's deployment bundle.
   outputFileTracingIncludes: {
-    "/admin/review": ["./content/scholarship-drafts/*-draft.json", "./docs/content-status/scholarship-review-2026-10-16/blind-review-*.json", "./docs/reviews/scholarship-2026-10-18/status.json"],
+    "/admin/review": [
+      "./content/scholarship-drafts/*-draft.json",
+      "./docs/content-status/scholarship-review-2026-10-16/blind-review-*.json",
+      "./docs/reviews/scholarship-2026-10-18/status.json",
+      "./content/vihaan-scholarship/pilot-01/draft.json",
+      "./content/vihaan-scholarship/expansion-500/bank.draft.json",
+      "./content/vihaan-scholarship/expansion-500/batch-*.draft.json",
+      "./content/vihaan-scholarship/expansion-500/quality-coverage-report.json",
+    ],
     "/*": ["./content/question-factory/published-manifests/*.json", "./content/publication-approvals/*", "./content/publication-approvals/writing-prompts/*.json"],
   },
   // Landing photographs are served as AVIF where supported, WebP otherwise. 85 is the Chapter 1 hero quality.

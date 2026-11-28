@@ -40,7 +40,7 @@ test.describe("student portal: real data, not placeholders", () => {
     // double-mount (RecentActivityCard is only ever referenced once in
     // src/app/student/page.tsx). Worth a follow-up if it recurs; .first()
     // still verifies the heading is genuinely present either way.
-    await expect(page.getByText("Recent activity").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Recent results" })).toBeVisible();
     // RecentActivityCard renders the attempt title as an <h3> — the only
     // one on this page, so this is unambiguous.
     await expect(page.getByRole("heading", { level: 3, name: REAL_ATTEMPT_TITLE })).toBeVisible();
@@ -84,34 +84,43 @@ test.describe("student portal: real data, not placeholders", () => {
     const page = await context.newPage();
 
     await visitAndStabilize(page, "/student/practice", { readyLocator: "main" });
-    await expect(page.getByRole("button", { name: "Start daily sprint" })).toHaveAttribute(
+    await expect(page.getByRole("button", { name: "Configure all steps to start" })).toHaveAttribute(
       "aria-disabled",
       "true",
     );
-    // exact: true — the drill-module card below also has this string
-    // inside its (much longer) accessible name.
-    await expect(
-      page.getByRole("button", { name: "Thinking Skills & Logic", exact: true }),
-    ).toHaveAttribute("aria-disabled", "true");
 
     await visitAndStabilize(page, "/student", { readyLocator: "main" });
-    await expect(page.getByTitle("No notifications")).toHaveAttribute("aria-disabled", "true");
+    /* The design top bar has no placeholder controls at all: no inert bell, no "coming soon" goal editor. */
+    await expect(page.getByTitle("No notifications")).toHaveCount(0);
+    await expect(page.getByText(/Term \d · Week \d|Edit interests/)).toHaveCount(0);
   });
 
-  test("Practice Studio's real drill-module links resolve to correctly filtered catalogue pages", async ({
+  test("Practice Studio's five-step selector configures and links to real practice sessions", async ({
     contextAs,
   }) => {
     const context = await contextAs("student-no-attempts");
     const page = await context.newPage();
     await visitAndStabilize(page, "/student/practice", { readyLocator: "main" });
 
-    await page.getByRole("link", { name: "Practise arithmetic" }).click();
-    await expect(page).toHaveURL(/\/practice\?subject=numeracy&grade=\d&style=naplan_style/);
-    // The query params land on the catalogue pre-filtered to exactly the
-    // matching program (a distinct step before that program's own
-    // configurator at /practice/naplan-g{year}-numeracy) — real filtering,
-    // real content, not a 404 or an unfiltered "browse everything" result.
-    await expect(page.getByText("Showing 1 program")).toBeVisible();
-    await expect(page.getByRole("link", { name: /NAPLAN-style Numeracy — Grade \d/ })).toBeVisible();
+    // Step 1: Enrolled year is selected by default
+    // Step 2: Choose NAPLAN-style
+    const naplanBtn = page.getByRole("button", { name: /NAPLAN-style/i });
+    await naplanBtn.click();
+    await expect(naplanBtn).toHaveAttribute("aria-pressed", "true");
+
+    // Step 3: Choose first available subject
+    const subjectBtn = page.locator("section[aria-labelledby='step-subject-heading'] button").first();
+    await subjectBtn.click();
+    await expect(subjectBtn).toHaveAttribute("aria-pressed", "true");
+
+    // Step 4: Choose first available strand
+    const strandBtn = page.locator("section[aria-labelledby='step-strand-heading'] button").first();
+    await strandBtn.click();
+    await expect(strandBtn).toHaveAttribute("aria-pressed", "true");
+
+    // Summary rail: Start practice link is now configured and active
+    const startLink = page.getByRole("link", { name: /Start practice/i });
+    await expect(startLink).toBeVisible();
+    await expect(startLink).toHaveAttribute("href", /\/practice\/session\?year=\d&style=naplan_style/);
   });
 });

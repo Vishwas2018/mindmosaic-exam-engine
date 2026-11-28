@@ -136,6 +136,9 @@ const eslintConfig = defineConfig([
      * truth the screens were built from, and DESIGN_AUDIT.md refers to it.
      */
     "design_handoff_mindmosaic/**",
+    "docs/extracted-screens/**",
+    "docs/clean-screens/**",
+    "docs/NewUIScreens/**",
     /*
      * Landing sections retired by the Home.dc.html rebuild (kept, not
      * deleted, per the reviewer's instruction) and excluded from tsconfig

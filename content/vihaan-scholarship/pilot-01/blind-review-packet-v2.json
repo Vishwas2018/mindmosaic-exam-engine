@@ -1,0 +1,314 @@
+[
+  {
+    "id": "vihaan-p01-n01",
+    "prompt": "A sequence begins 6, 11, 18, 27. The differences between consecutive terms are consecutive odd numbers, beginning with 5. What is the next term?",
+    "options": [
+      {
+        "id": "a",
+        "text": "36"
+      },
+      {
+        "id": "b",
+        "text": "37"
+      },
+      {
+        "id": "c",
+        "text": "38"
+      },
+      {
+        "id": "d",
+        "text": "40"
+      }
+    ],
+    "stimulus": null,
+    "subject": "numerical_reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-n02",
+    "prompt": "Each row follows the same rule: multiply the first number by the second, then subtract the first number. The rows are (4, 6, 20), (7, 3, 14) and (9, 5, ?). What replaces the question mark?",
+    "options": [
+      {
+        "id": "a",
+        "text": "36"
+      },
+      {
+        "id": "b",
+        "text": "40"
+      },
+      {
+        "id": "c",
+        "text": "41"
+      },
+      {
+        "id": "d",
+        "text": "45"
+      }
+    ],
+    "stimulus": null,
+    "subject": "numerical_reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-n03",
+    "prompt": "A two-digit number has digits whose sum is 11. Reversing its digits produces a number 27 smaller than the original. What is the original number?",
+    "options": [
+      {
+        "id": "a",
+        "text": "47"
+      },
+      {
+        "id": "b",
+        "text": "56"
+      },
+      {
+        "id": "c",
+        "text": "74"
+      },
+      {
+        "id": "d",
+        "text": "83"
+      }
+    ],
+    "stimulus": null,
+    "subject": "numerical_reasoning",
+    "difficulty": "medium"
+  },
+  {
+    "id": "vihaan-p01-n04",
+    "prompt": "Two identical sealed boxes and 3 loose blocks weigh the same as 19 loose blocks. Each loose block weighs 50 grams. What is the weight of one sealed box in grams?",
+    "options": [
+      {
+        "id": "a",
+        "text": "350"
+      },
+      {
+        "id": "b",
+        "text": "400"
+      },
+      {
+        "id": "c",
+        "text": "475"
+      },
+      {
+        "id": "d",
+        "text": "800"
+      }
+    ],
+    "stimulus": null,
+    "subject": "numerical_reasoning",
+    "difficulty": "medium"
+  },
+  {
+    "id": "vihaan-p01-n05",
+    "prompt": "A bead pattern repeats red, blue, blue, green from position 1 onwards. What colour is the bead at position 78?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Red"
+      },
+      {
+        "id": "b",
+        "text": "Blue"
+      },
+      {
+        "id": "c",
+        "text": "Green"
+      },
+      {
+        "id": "d",
+        "text": "Cannot be determined"
+      }
+    ],
+    "stimulus": null,
+    "subject": "numerical_reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-v01",
+    "prompt": "A sieve separates particles by size. A filter separates particles from a liquid. Complete the analogy using the tool-to-material relationship: sieve is to flour as filter is to _____.",
+    "options": [
+      {
+        "id": "a",
+        "text": "water"
+      },
+      {
+        "id": "b",
+        "text": "paper"
+      },
+      {
+        "id": "c",
+        "text": "bucket"
+      },
+      {
+        "id": "d",
+        "text": "mesh"
+      }
+    ],
+    "stimulus": null,
+    "subject": "verbal_reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-v02",
+    "prompt": "Every member of the astronomy group keeps a logbook. No person who keeps a logbook leaves it in the rain. Mira is a member of the astronomy group. Which statement must be true?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Mira never goes outside in the rain."
+      },
+      {
+        "id": "b",
+        "text": "Everyone who keeps a logbook belongs to the astronomy group."
+      },
+      {
+        "id": "c",
+        "text": "Mira does not leave her logbook in the rain."
+      },
+      {
+        "id": "d",
+        "text": "Mira writes in her logbook every day."
+      }
+    ],
+    "stimulus": null,
+    "subject": "verbal_reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-v03",
+    "prompt": "In the sentence, \"Although she disagreed, Asha gave a measured reply rather than shouting\", which word is closest in meaning to measured?",
+    "options": [
+      {
+        "id": "a",
+        "text": "lengthy"
+      },
+      {
+        "id": "b",
+        "text": "calm"
+      },
+      {
+        "id": "c",
+        "text": "counted"
+      },
+      {
+        "id": "d",
+        "text": "uncertain"
+      }
+    ],
+    "stimulus": null,
+    "subject": "verbal_reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-v04",
+    "prompt": "Four books, Atlas, Birch, Coral and Drift, stand in a row. Atlas is somewhere to the left of Coral. Birch is immediately to the right of Atlas. Drift is not at either end. Which order, from left to right, satisfies all the clues?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Atlas, Birch, Drift, Coral"
+      },
+      {
+        "id": "b",
+        "text": "Atlas, Drift, Birch, Coral"
+      },
+      {
+        "id": "c",
+        "text": "Drift, Atlas, Birch, Coral"
+      },
+      {
+        "id": "d",
+        "text": "Coral, Atlas, Birch, Drift"
+      }
+    ],
+    "stimulus": null,
+    "subject": "verbal_reasoning",
+    "difficulty": "medium"
+  },
+  {
+    "id": "vihaan-p01-r01",
+    "prompt": "According to the passage, what actually stopped the stool wobbling after the card was removed?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Replacing its shortest leg"
+      },
+      {
+        "id": "b",
+        "text": "Adding glue to all four legs"
+      },
+      {
+        "id": "c",
+        "text": "Putting it on the flat board"
+      },
+      {
+        "id": "d",
+        "text": "Tightening a screw at the loose joint"
+      }
+    ],
+    "stimulus": {
+      "title": "The repair table",
+      "body": "On Saturday, Leila carried a wobbling stool to the neighbourhood repair table. She expected Arun, the volunteer, to replace its shortest leg. Instead, he set the stool on a flat board and slid a folded card beneath one foot. The wobble stopped. He checked the legs against one another, then pointed to a loose joint. \"The legs match, but this one shifts when you sit,\" he said.\n\nLeila reached for the glue, but Arun asked her to hold the joint while he checked it. After tightening a screw, he removed the card. The stool stood firm. At the next table, someone cheered as an old radio crackled into life.\n\n\"I nearly bought a new stool,\" Leila said. Arun placed the unused glue back on the shelf. \"Sometimes the useful part is the pause before choosing a tool.\"\n\nThat afternoon, Leila found her brother pulling at a stuck zip on his bag. She started to tell him to pull harder, then stopped. A corner of fabric was caught between the teeth. She eased it free, and the zip moved. The stool had stayed at home, but she felt she had brought something from the repair table. For once, she was pleased that her first idea had been wrong.",
+      "attribution": "MindMosaic original"
+    },
+    "subject": "reading",
+    "difficulty": "easy"
+  },
+  {
+    "id": "vihaan-p01-r02",
+    "prompt": "What has Leila most likely brought from the repair table in the final paragraph?",
+    "options": [
+      {
+        "id": "a",
+        "text": "A spare piece of folded card"
+      },
+      {
+        "id": "b",
+        "text": "A habit of examining a problem before acting"
+      },
+      {
+        "id": "c",
+        "text": "A belief that new furniture is always wasteful"
+      },
+      {
+        "id": "d",
+        "text": "A rule that glue should never be used"
+      }
+    ],
+    "stimulus": {
+      "title": "The repair table",
+      "body": "On Saturday, Leila carried a wobbling stool to the neighbourhood repair table. She expected Arun, the volunteer, to replace its shortest leg. Instead, he set the stool on a flat board and slid a folded card beneath one foot. The wobble stopped. He checked the legs against one another, then pointed to a loose joint. \"The legs match, but this one shifts when you sit,\" he said.\n\nLeila reached for the glue, but Arun asked her to hold the joint while he checked it. After tightening a screw, he removed the card. The stool stood firm. At the next table, someone cheered as an old radio crackled into life.\n\n\"I nearly bought a new stool,\" Leila said. Arun placed the unused glue back on the shelf. \"Sometimes the useful part is the pause before choosing a tool.\"\n\nThat afternoon, Leila found her brother pulling at a stuck zip on his bag. She started to tell him to pull harder, then stopped. A corner of fabric was caught between the teeth. She eased it free, and the zip moved. The stool had stayed at home, but she felt she had brought something from the repair table. For once, she was pleased that her first idea had been wrong.",
+      "attribution": "MindMosaic original"
+    },
+    "subject": "reading",
+    "difficulty": "medium"
+  },
+  {
+    "id": "vihaan-p01-r03",
+    "prompt": "Why does the writer mention that Arun puts the unused glue back on the shelf?",
+    "options": [
+      {
+        "id": "a",
+        "text": "To show that the repair has failed"
+      },
+      {
+        "id": "b",
+        "text": "To suggest that Arun dislikes sharing tools"
+      },
+      {
+        "id": "c",
+        "text": "To reinforce that inspection avoided an unnecessary action"
+      },
+      {
+        "id": "d",
+        "text": "To explain why the radio starts working"
+      }
+    ],
+    "stimulus": {
+      "title": "The repair table",
+      "body": "On Saturday, Leila carried a wobbling stool to the neighbourhood repair table. She expected Arun, the volunteer, to replace its shortest leg. Instead, he set the stool on a flat board and slid a folded card beneath one foot. The wobble stopped. He checked the legs against one another, then pointed to a loose joint. \"The legs match, but this one shifts when you sit,\" he said.\n\nLeila reached for the glue, but Arun asked her to hold the joint while he checked it. After tightening a screw, he removed the card. The stool stood firm. At the next table, someone cheered as an old radio crackled into life.\n\n\"I nearly bought a new stool,\" Leila said. Arun placed the unused glue back on the shelf. \"Sometimes the useful part is the pause before choosing a tool.\"\n\nThat afternoon, Leila found her brother pulling at a stuck zip on his bag. She started to tell him to pull harder, then stopped. A corner of fabric was caught between the teeth. She eased it free, and the zip moved. The stool had stayed at home, but she felt she had brought something from the repair table. For once, she was pleased that her first idea had been wrong.",
+      "attribution": "MindMosaic original"
+    },
+    "subject": "reading",
+    "difficulty": "medium"
+  }
+]

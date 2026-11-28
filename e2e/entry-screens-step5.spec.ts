@@ -44,105 +44,66 @@ test.describe("skip link", () => {
 });
 
 if (PUBLIC_SIGNUP_ENABLED) {
-  test.describe("sign-up wizard — every step", () => {
-    test("steps 1–3 have no horizontal overflow at every viewport", async ({ page }) => {
+  /* Create a family account is one card, one step (Claude Design auth artboards 05 / 09). */
+  async function fillSignUp(page: import("@playwright/test").Page, email: string) {
+    await page.getByLabel("Your name").fill("Priya Raman");
+    await page.getByLabel(/^email$/i).fill(email);
+    await page.getByLabel(/create a password/i).fill("Str0ng!pass123");
+    await page.getByRole("checkbox").click();
+  }
+
+  test.describe("create a family account", () => {
+    test("has no horizontal overflow at every viewport", async ({ page }) => {
       for (const viewport of A11Y_VIEWPORTS) {
         await setViewport(page, viewport);
         await visitAndStabilize(page, "/sign-up", { readyLocator: "main" });
         await expectNoHorizontalOverflow(page);
-
-        await page.getByLabel(/first name/i).fill("Priya");
-        await page.getByLabel(/last name/i).fill("Raman");
-        await page.getByLabel(/email address/i).fill(`priya+${viewport.name}@example.com`);
-        await page.getByLabel(/create a password/i).fill("Str0ng!pass123");
-        await page.getByRole("checkbox").click();
-        await page.getByRole("button", { name: "Continue" }).click();
-        await expect(page.getByText(/step 2 of 3/i)).toBeVisible();
-        await expectNoHorizontalOverflow(page);
-
-        await page.getByRole("button", { name: /skip for now/i }).click();
-        await expect(page.getByText(/step 3 of 3/i)).toBeVisible();
+        await fillSignUp(page, `priya+${viewport.name}@example.com`);
         await expectNoHorizontalOverflow(page);
       }
     });
 
-    test("steps 1–3 have no serious/critical axe violations", async ({ page }) => {
+    test("has no serious/critical axe violations, empty or filled", async ({ page }) => {
       await visitAndStabilize(page, "/sign-up", { readyLocator: "main" });
-      await assertNoSeriousAccessibilityViolations(page, "sign-up step 1");
-
-      await page.getByLabel(/first name/i).fill("Priya");
-      await page.getByLabel(/last name/i).fill("Raman");
-      await page.getByLabel(/email address/i).fill("priya@example.com");
-      await page.getByLabel(/create a password/i).fill("Str0ng!pass123");
-      await page.getByRole("checkbox").click();
-      await page.getByRole("button", { name: "Continue" }).click();
-      await assertNoSeriousAccessibilityViolations(page, "sign-up step 2");
-
-      await page.getByRole("button", { name: /skip for now/i }).click();
-      await assertNoSeriousAccessibilityViolations(page, "sign-up step 3");
+      await assertNoSeriousAccessibilityViolations(page, "sign-up empty");
+      await fillSignUp(page, "priya@example.com");
+      await assertNoSeriousAccessibilityViolations(page, "sign-up filled");
     });
 
-    test("step 1 is keyboard-reachable in order, with a visible focus ring throughout", async ({
-      page,
-    }) => {
+    test("is keyboard-reachable in order, with a visible focus ring throughout", async ({ page }) => {
       await setViewport(page, A11Y_VIEWPORTS[0]);
       await visitAndStabilize(page, "/sign-up", { readyLocator: "main" });
-
-      /* Continue is disabled (and so excluded from tab order entirely)
-         until step 1 validates, so the walk needs real values first to
-         cover the whole step "throughout", including that button. */
-      await page.getByLabel(/first name/i).fill("Priya");
-      await page.getByLabel(/last name/i).fill("Raman");
-      await page.getByLabel(/email address/i).fill("priya@example.com");
-      await page.getByLabel(/create a password/i).fill("Str0ng!pass123");
-      await page.getByRole("checkbox").click();
-
-      /* Tab order resumes from wherever focus last landed, even after
-         blur() — Chromium does not reset to document start just because
-         document.activeElement reports <body>. Focusing the skip link
-         (always the first focusable element) puts the walk back at the
-         top of the page before it starts pressing Tab. */
       await page.locator(".skip-link").focus();
       const sequence = await walkTabOrderAndAssertVisibleFocus(page);
-
-      const firstName = sequence.findIndex((key) => key.includes("su-first-name"));
-      const lastName = sequence.findIndex((key) => key.includes("su-last-name"));
+      const name = sequence.findIndex((key) => key.includes("su-name"));
       const email = sequence.findIndex((key) => key.includes("su-email"));
       const password = sequence.findIndex((key) => key.includes("su-password"));
-      const continueBtn = sequence.findIndex((key) => key.includes("Continue"));
-
-      expect(firstName).toBeGreaterThanOrEqual(0);
-      expect(lastName).toBeGreaterThan(firstName);
-      expect(email).toBeGreaterThan(lastName);
+      const create = sequence.findIndex((key) => key.includes("Create account"));
+      expect(name).toBeGreaterThanOrEqual(0);
+      expect(email).toBeGreaterThan(name);
       expect(password).toBeGreaterThan(email);
-      expect(continueBtn).toBeGreaterThan(password);
+      expect(create).toBeGreaterThan(password);
     });
 
-    test("an invalid submit shakes the step card", async ({ page }) => {
-      /* Deliberately not visitAndStabilize(): it injects `animation: none
-         !important` globally for layout-test stability, which would make
-         this exact check meaningless. */
+    test("keeps name, email and consent after a trip to the Terms and back", async ({ page }) => {
+      await visitAndStabilize(page, "/sign-up", { readyLocator: "main" });
+      await fillSignUp(page, "priya@example.com");
+      await expect(page.getByRole("link", { name: /^terms/i })).toHaveAttribute("target", "_blank");
+      await page.goto("/terms");
+      await page.goBack();
+      await expect(page.getByLabel("Your name")).toHaveValue("Priya Raman");
+      await expect(page.getByLabel(/^email$/i)).toHaveValue("priya@example.com");
+      await expect(page.getByRole("checkbox")).toBeChecked();
+    });
+
+    test("an invalid submit shakes the form", async ({ page }) => {
+      /* Not visitAndStabilize(): it disables animation globally, which would make this check meaningless. */
       await page.goto("/sign-up", { waitUntil: "domcontentloaded" });
       await page.locator("main").first().waitFor({ state: "visible" });
-      await page.getByLabel(/first name/i).fill("Priya");
-      await page.getByLabel(/last name/i).fill("Raman");
-      await page.getByLabel(/email address/i).fill("priya@example.com");
-      await page.getByLabel(/create a password/i).fill("Str0ng!pass123");
-      await page.getByRole("checkbox").click();
-      await page.getByRole("button", { name: "Continue" }).click();
-      await page.getByRole("button", { name: /skip for now/i }).click();
-
-      /* Supabase is not configured in this environment, so account
-         creation fails — the one real "invalid submit" on this step, and
-         exactly the path shake.trigger() is wired into. */
-      await page.getByRole("button", { name: /create the account/i }).click();
-      /* .first(): Next.js's own hidden route-announcer also carries
-         role="alert", unrelated to this page's validation message. */
+      await page.getByRole("button", { name: "Create account" }).click();
       const errorPanel = page.getByRole("alert").first();
       await expect(errorPanel).toBeVisible();
-      const animationName = await errorPanel
-        .locator("..")
-        .evaluate((el) => getComputedStyle(el).animationName);
+      const animationName = await errorPanel.locator("..").evaluate((el) => getComputedStyle(el).animationName);
       expect(animationName).toBe("mm-shake");
     });
 
@@ -150,16 +111,7 @@ if (PUBLIC_SIGNUP_ENABLED) {
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto("/sign-up", { waitUntil: "domcontentloaded" });
       await page.locator("main").first().waitFor({ state: "visible" });
-
-      await page.getByLabel(/first name/i).fill("Priya");
-      await page.getByLabel(/last name/i).fill("Raman");
-      await page.getByLabel(/email address/i).fill("priya@example.com");
-      await page.getByLabel(/create a password/i).fill("Str0ng!pass123");
-      await page.getByRole("checkbox").click();
-      await page.getByRole("button", { name: "Continue" }).click();
-      await page.getByRole("button", { name: /skip for now/i }).click();
-      await page.getByRole("button", { name: /create the account/i }).click();
-
+      await page.getByRole("button", { name: "Create account" }).click();
       const errorPanel = page.getByRole("alert").first();
       await expect(errorPanel).toBeVisible();
       const durationMs = await errorPanel.locator("..").evaluate((el) => {
@@ -172,6 +124,12 @@ if (PUBLIC_SIGNUP_ENABLED) {
 }
 
 test.describe("email verification (/auth/confirm)", () => {
+  test("includes the resend form in the initial response before client JavaScript", async ({request}) => {
+    const response = await request.get("/auth/confirm");
+    expect(response.ok()).toBe(true);
+    expect(await response.text()).toContain('id="verify-resend-email"');
+  });
+
   test("an invalid/expired link has no horizontal overflow at every viewport and offers resend", async ({
     page,
   }) => {
@@ -179,7 +137,7 @@ test.describe("email verification (/auth/confirm)", () => {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/auth/confirm", { readyLocator: "main" });
       await expect(
-        page.getByRole("heading", { level: 1, name: /link expired or invalid/i }),
+        page.getByRole("heading", { level: 1, name: /this link (has expired|can’t be used)/i }),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
     }
@@ -233,7 +191,7 @@ test.describe("account recovery", () => {
         readyLocator: "main",
       });
       await expect(
-        page.getByRole("heading", { level: 1, name: /link expired or invalid/i }),
+        page.getByRole("heading", { level: 1, name: /this reset link has expired/i }),
       ).toBeVisible();
       await expectNoHorizontalOverflow(page);
     }
@@ -250,7 +208,7 @@ test.describe("account recovery", () => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/auth/reset", { readyLocator: "main" });
     await expect(
-      page.getByRole("heading", { level: 1, name: "Choose a new password" }),
+      page.getByRole("heading", { level: 1, name: "Set a new password" }),
     ).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await assertNoSeriousAccessibilityViolations(page, "account recovery (set new password)");

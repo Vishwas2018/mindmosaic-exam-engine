@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e1-012",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "e38cc6d93f8e2def603020bbe1dd28eaf263bde7244ebbe6b6d89a979924a5bd",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e1-012",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "On Saturday, 385 people visited the weekend markets. On Sunday, 267 people visited. How many people visited the markets across the two days altogether?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 652,
+      "tolerance": 0
+    },
+    "explanation": "Add the two days. Ones: 5 + 7 = 12, write 2 and carry 1 ten. Tens: 8 + 6 + 1 = 15, write 5 and carry 1 hundred. Hundreds: 3 + 2 + 1 = 6. The total is 652 people.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Addition with regrouping",
+      "skill": "Add 3-digit numbers with two regroupings",
+      "difficulty": "challenging",
+      "marks": 1,
+      "estimatedTimeSeconds": 85,
+      "tags": [
+        "addition",
+        "regrouping",
+        "market"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "5c263a3c09f50e826ace79fdb405dae42112b9d9ab7e53e2ab3e1eefa58b7790"
+}

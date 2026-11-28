@@ -1,20 +1,10 @@
-"use client";
-
-import { Suspense } from "react";
-import { Loader2 } from "lucide-react";
+import { connection } from "next/server";
 
 import { EmailVerificationScreen } from "@/features/auth/components/EmailVerificationScreen";
 
-export default function EmailConfirmPage() {
-  return (
-    <Suspense
-      fallback={
-        <main className="flex min-h-screen items-center justify-center bg-page">
-          <Loader2 aria-hidden="true" className="h-10 w-10 animate-spin text-royal" />
-        </main>
-      }
-    >
-      <EmailVerificationScreen />
-    </Suspense>
-  );
+export default async function EmailConfirmPage() {
+  // useSearchParams needs the incoming request to render the right initial
+  // screen. A static client-only shell hides the resend form until JS loads.
+  await connection();
+  return <EmailVerificationScreen />;
 }

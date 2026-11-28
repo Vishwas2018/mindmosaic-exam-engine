@@ -2,7 +2,7 @@
 
 import type { QuestionRendererProps } from "@/features/exam-engine/types";
 
-import { OPTION_LETTERS, optionLetterClasses } from "./renderer-utils";
+import { OPTION_LETTERS, optionLetterClasses, promptLayoutClass } from "./renderer-utils";
 
 function toDomId(value: string): string {
   return value.replace(/[^a-zA-Z0-9_-]/g, "-");
@@ -26,7 +26,7 @@ export function MultipleChoiceRenderer({
       disabled={disabled}
       aria-describedby={instructionsId}
     >
-      <legend className="text-lg font-semibold text-ink">
+      <legend className={`text-lg font-semibold text-ink ${promptLayoutClass(question.examStyle)}`.trim()}>
         {question.prompt}
       </legend>
 

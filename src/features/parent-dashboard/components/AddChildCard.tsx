@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, Check, Copy, LoaderCircle, UserPlus } from "lucide-react";
+import { AlertTriangle, Check, Copy, LoaderCircle, Printer, UserPlus } from "lucide-react";
 
+import { FAMILY_PLAN } from "@/lib/billing/prices";
 import {
   Button,
   Card,
@@ -42,7 +44,17 @@ interface ProvisionChildResponse {
  * action returns the login code and PIN exactly once; we surface them here
  * with a clear "save these now" warning and never persist them client-side.
  */
-export function AddChildCard({ availableYearLevels }: { availableYearLevels: readonly number[] }) {
+export function AddChildCard({
+  availableYearLevels,
+  atLimit = false,
+  maxChildren = FAMILY_PLAN.maxChildren,
+}: {
+  availableYearLevels: readonly number[];
+  /** True when the family already has the maximum number of children. */
+  atLimit?: boolean;
+  /** The plan's child-profile cap, for the at-limit message. */
+  maxChildren?: number;
+}) {
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
   const [yearLevel, setYearLevel] = useState<string>("");
@@ -130,7 +142,7 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <UserPlus aria-hidden="true" className="h-5 w-5 text-royal" />
+          <UserPlus aria-hidden="true" className="h-5 w-5 text-mm-brand" />
           Add a child
         </CardTitle>
         <CardDescription>
@@ -144,17 +156,17 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
             role="status"
             className="rounded-xl border border-success/30 bg-success/10 p-5"
           >
-            <p className="text-sm font-bold text-ink">
+            <p className="text-sm font-semibold text-mm-ink">
               Account created. These are shown once &mdash; save them now and give
               them to your child.
             </p>
             <dl className="mt-4 grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 text-base">
-              <dt className="font-semibold text-muted">Login code</dt>
-              <dd className="font-black tracking-wide text-ink">
+              <dt className="font-semibold text-mm-ink-soft">Login code</dt>
+              <dd className="font-semibold tracking-wide text-mm-ink">
                 {credentials.loginCode}
               </dd>
-              <dt className="font-semibold text-muted">PIN</dt>
-              <dd className="font-black tracking-wide text-ink">
+              <dt className="font-semibold text-mm-ink-soft">PIN</dt>
+              <dd className="font-semibold tracking-wide text-mm-ink">
                 {credentials.pin}
               </dd>
             </dl>
@@ -167,6 +179,10 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
                 )}
                 {copied ? "Copied" : "Copy"}
               </Button>
+              <Button type="button" variant="secondary" size="sm" onClick={() => window.print()}>
+                <Printer aria-hidden="true" className="h-4 w-4" />
+                Print a sign-in card
+              </Button>
               <Button
                 type="button"
                 variant="ghost"
@@ -178,11 +194,33 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
               >
                 Add another child
               </Button>
-              <Button type="button" variant="primary" size="sm" onClick={() => router.refresh()}>
+              <Button type="button" variant="primary" size="sm" onClick={() => {
+                  // On /parent a refresh is enough, but on /parent/children it
+                  // re-renders the same page and looks like a dead button.
+                  if (window.location.pathname === "/parent") {
+                    router.refresh();
+                  } else {
+                    router.push("/parent");
+                  }
+                }}>
                 Done &mdash; show on dashboard
               </Button>
             </div>
           </div>
+        ) : atLimit ? (
+          <p className="text-sm font-semibold text-muted">
+            {maxChildren === 1 ? (
+              <>
+                The Individual plan covers one child.{" "}
+                <Link href="/billing" className="font-extrabold text-royal underline-offset-2 hover:underline">
+                  Upgrade to Family
+                </Link>{" "}
+                to add up to {FAMILY_PLAN.maxChildren}.
+              </>
+            ) : (
+              <>Your family account is at its limit of {maxChildren} children.</>
+            )}
+          </p>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {error && (
@@ -198,11 +236,11 @@ export function AddChildCard({ availableYearLevels }: { availableYearLevels: rea
                 role="alert"
                 className="rounded-xl border border-warning/30 bg-warning/10 px-4 py-3"
               >
-                <p className="flex items-start gap-2 text-sm font-semibold text-ink">
+                <p className="flex items-start gap-2 text-sm font-semibold text-mm-ink">
                   <AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
                   {duplicatePrompt}
                 </p>
-                <p className="mt-1 pl-6 text-sm text-muted">
+                <p className="mt-1 pl-6 text-sm text-mm-ink-soft">
                   This creates a second, separate account with its own login code
                   and PIN.
                 </p>

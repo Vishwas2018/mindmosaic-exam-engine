@@ -9,6 +9,11 @@ export const metadata: Metadata = {
     "How MindMosaic collects, uses and protects family and student data.",
 };
 
+// Static prerendering of this page triggers a Next.js 16.4.6 invariant
+// error ("Expected workStore to be initialized"). Render server-side
+// instead; content is static and identical for all users.
+export const dynamic = "force-dynamic";
+
 export default function PrivacyPage() {
   return (
     <LegalPageShell title="Privacy Policy" lastUpdated="20 July 2026">

@@ -111,13 +111,10 @@ As built (including the Phase 0.1 delivery-channel fix):
    sanctioned reveal, after the attempt is recorded, for the review
    screen. The client never sends or receives an answer key before this
    point.
-3. `exam-store.ts`'s `submitExam` selects the scoring service from how the
-   session was created (`sessionMode`, fixed at start): a server-created
-   session submits to the server; a guest session keeps
-   `LocalPracticeScoringService` exactly as today. One conditional at the
-   existing call site — no renderer or page rewrite, the point of the
-   `AssessmentScoringService` seam. Auth state changing mid-attempt cannot
-   re-route a session to a scorer it wasn't built for.
+3. The exam store fixes the scoring path when it starts a session. A
+   signed-in session submits through the signed-in server API. An accountless
+   session submits through the guest API, using the browser-bound ticket
+   issued at allocation. Changes in sign-in state do not reroute a sitting.
 4. The question bank is server-only across **every server-to-client
    delivery channel**, not just JS chunks: no client module may import it
    (eslint rule + `server-only` marker on `src/server/exam-bank.ts`), no
@@ -127,32 +124,18 @@ As built (including the Phase 0.1 delivery-channel fix):
    RSC flight payloads** for bank-content sentinels. The JS-only version of
    that check once missed the bank riding to every visitor as home-page
    RSC props; the payload scan exists so that cannot regress silently.
-5. Guest practice stays fully client-side and account-free: guests
-   download the bank (answer keys included) from the public, statically
-   generated `/api/exam/guest-bank` endpoint at start time. That endpoint
-   is guest mode's documented, accepted residual — equivalent exposure to
-   the bank that used to ship in the client bundle, now confined to a URL
-   that no signed-in flow ever fetches or depends on.
+5. Guests still start without an account. The guest exam endpoint selects
+   questions on the server and delivers only the candidate projection. A
+   signed ticket binds the chosen configuration, exact selected revision,
+   starting time and browser cookie. Timed exams expose review content for
+   attempted items after submission. Untimed confidence practice can also
+   request an explanation after a response. Results stay in browser memory.
+   Guest practice uses the scoped practice session and answer-check API.
 
-### Updated residual risk table (post-Phase-0, with 0.1 delivery fix)
+### Residual risk
 
-| Risk | Guest session | Signed-in session |
+| Area | Guest session | Signed-in session |
 | --- | --- | --- |
-| Answer keys delivered to the browser (any channel: JS chunk, HTML/RSC payload, fetch) | Yes — via `/api/exam/guest-bank`, the accepted trade-off of accountless practice | No — page payloads carry eligibility summaries only (verified by the `check:bundle` payload scan); questions arrive answer-stripped from `/api/exam/session`; answer keys appear only in the submit response, after the attempt is recorded |
-| Client can choose or predict its own seed/question set | Yes (URL param, local selection) | No — the server generates the seed and stores the selection at start; the request schema has no seed field |
-| Console/runtime tampering with scores or responses | Yes | No — the server recomputes questions and score from its own stored session, independent of anything client-held |
-| Parent/teacher dashboards reflect a trustworthy score | N/A (no dashboards read guest data) | Yes — dashboards read only server-computed `exam_attempts` rows |
-
-One caveat stated plainly: `/api/exam/guest-bank` is a public URL, so a
-signed-in student who goes looking can fetch it — exactly as they could
-read the client bundle before. What signed-in mode guarantees is that
-their own session's selection and scoring never depend on anything the
-client holds, and that no page render hands them answer keys. Removing
-the public guest bank entirely would mean removing accountless guest
-practice, which the guests-allowed decision forbids.
-
-Guests remain exactly as documented in the rest of this file — this
-addendum does not change guest behaviour (their bank now arrives via a
-fetch instead of inside the page/bundle payload, with the same content
-and the same client-side flow), only what happens once a visitor is
-signed in.
+| Before submission | Candidate-only timed exam delivery. Practice feedback follows a response. | Candidate delivery for standard sittings. The existing signed-in confidence path is a separate delivery policy. |
+| After submission | Server scoring and review for attempted questions. The guest result is transient. | Server scoring and persisted results with authorised review. |
+| Question source | The old bulk guest endpoint is retired. Historical public source remains a separate exposure. | Allocation and resolution are verified server-side. |

@@ -26,7 +26,8 @@ export type ParentKey =
   | "parent-one-child"
   | "parent-multi-children"
   | "household-expired"
-  | "household-active-premium";
+  | "household-active-premium"
+  | "parent-admin-dual";
 
 export type StudentKey =
   | "student-no-attempts"
@@ -76,6 +77,8 @@ export const PARENTS: readonly ParentIdentity[] = [
   { kind: "parent", key: "parent-multi-children", email: parentEmail("parent-multi-children"), displayName: "Parent Multi Children" },
   { kind: "parent", key: "household-expired", email: parentEmail("household-expired"), displayName: "Household Expired" },
   { kind: "parent", key: "household-active-premium", email: parentEmail("household-active-premium"), displayName: "Household Active Premium" },
+  /* One login, two workspaces: a parent (billing + children unchanged) that also holds an admin entitlement. */
+  { kind: "parent", key: "parent-admin-dual", email: parentEmail("parent-admin-dual"), displayName: "Dana Dualrole" },
 ];
 
 export const STUDENTS: readonly StudentIdentity[] = [
@@ -114,7 +117,7 @@ export const ADMIN: AdminIdentity = {
   kind: "admin",
   key: "admin",
   email: parentEmail("admin"),
-  displayName: "Admin",
+  displayName: "Avery Patel",
 };
 
 export const ALL_IDENTITIES: readonly Identity[] = [...PARENTS, ...STUDENTS, ...TEACHERS, ADMIN];

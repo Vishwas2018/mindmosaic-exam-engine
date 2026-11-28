@@ -29,6 +29,7 @@ export const DEFAULT_PRIMARY_URL = "postgresql://postgres:postgres@127.0.0.1:563
 
 const SCORING_CREDENTIAL = "mindmosaic_scoring:local-dev-scoring-not-a-secret";
 const WRITER_CREDENTIAL = "mindmosaic_content_answer_writer:local-dev-content-answer-writer-not-a-secret";
+const EXAM_WRITER_CREDENTIAL = "mindmosaic_exam_writer:local-dev-exam-writer-not-a-secret";
 
 /** Variables that may carry a database URL, in the order they are reported. */
 export const DB_URL_VARIABLES = [
@@ -37,6 +38,7 @@ export const DB_URL_VARIABLES = [
   "DATABASE_URL",
   "SCORING_DB_URL",
   "CONTENT_ANSWER_WRITER_DB_URL",
+  "EXAM_WRITE_DB_URL",
 ] as const;
 
 export class DbTargetError extends Error {
@@ -85,6 +87,10 @@ export function defaultScoringUrl(env: Env = process.env): string {
 
 export function defaultContentAnswerWriterUrl(env: Env = process.env): string {
   return derived(env, WRITER_CREDENTIAL);
+}
+
+export function defaultExamWriterUrl(env: Env = process.env): string {
+  return derived(env, EXAM_WRITER_CREDENTIAL);
 }
 
 /**

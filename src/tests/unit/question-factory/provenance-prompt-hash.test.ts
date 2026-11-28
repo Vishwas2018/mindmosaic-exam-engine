@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { FACTORY_LIMITS } from "@/features/question-factory/config";
 import {
   candidateProvenanceSchema,
-  type CandidateProvenanceInput,
+  type KnownCandidateProvenanceInput as CandidateProvenanceInput,
 } from "@/features/question-factory/provenance";
 import { FsFactoryRepository } from "@/features/question-factory/storage";
 

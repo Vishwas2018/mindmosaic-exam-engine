@@ -25,14 +25,14 @@ export function StudentShell({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-page">
-      <header className="sticky top-0 z-40 border-b border-royal/8 bg-white/85 backdrop-blur-xl">
+    <div className="min-h-screen bg-mm-tint-soft">
+      <header className="sticky top-0 z-40 border-b border-mm-brand/8 bg-white/85 backdrop-blur-xl">
         <div className="site-width relative flex min-h-20 items-center justify-between gap-4 py-3">
           <div className="flex items-center gap-8">
             <Link
               href="/"
               aria-label="MindMosaic home"
-              className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              className="rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20"
             >
               <MindMosaicLogo size="md" />
             </Link>
@@ -52,10 +52,10 @@ export function StudentShell({
                     key={item.key}
                     href={item.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`inline-flex min-h-11 items-center rounded-xl px-3 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20 ${
+                    className={`inline-flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20 ${
                       isActive
-                        ? "bg-royal/8 text-royal"
-                        : "text-muted hover:bg-royal/5 hover:text-royal"
+                        ? "bg-mm-brand/8 text-mm-brand"
+                        : "text-mm-ink-soft hover:bg-mm-brand/5 hover:text-mm-brand"
                     }`}
                   >
                     {item.label}
@@ -64,7 +64,7 @@ export function StudentShell({
               })}
               <Link
                 href={BACK_TO_SITE.href}
-                className="ml-1 inline-flex min-h-11 items-center gap-1.5 rounded-xl border-l border-royal/10 px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+                className="ml-1 inline-flex min-h-11 items-center gap-1.5 rounded-xl border-l border-mm-brand/10 px-3 text-sm font-semibold text-mm-ink-soft transition hover:bg-mm-brand/5 hover:text-mm-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-mm-brand/20"
               >
                 <Home aria-hidden="true" className="h-4 w-4" />
                 {BACK_TO_SITE.label}

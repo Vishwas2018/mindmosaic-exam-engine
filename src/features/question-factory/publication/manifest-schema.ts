@@ -73,6 +73,7 @@ export interface RecoveredReviewEvidence {
 export type CorrectnessBasis = "deterministic" | "independent_semantic_review";
 
 export interface ManifestReviewEvidence {
+  readonly generatorAdapter?: unknown;
   readonly question?: { readonly metadata?: { readonly subject?: string } };
   readonly humanApproval?: HumanPublicationApproval;
   readonly humanApprovalSource?: unknown;
@@ -106,6 +107,32 @@ function issue(path: string, message: string): ManifestValidationIssue {
   return { path, message };
 }
 
+/** Generation classes a published manifest may legitimately carry. `legacy_import` is deliberately absent. */
+const PUBLISHABLE_GENERATOR_CLASSES: ReadonlySet<unknown> = new Set(["deterministic_fixture", "manual_external", "live_provider"]);
+
+/**
+ * Allow-list, not deny-list. Enforced by `validatePublicationSource`, the single chokepoint for bank assembly,
+ * approved-question selection and publication replay (`validateManifestReviewEvidence` stays a chain-logic
+ * validator and only refuses the explicit marker). `generatorAdapter` is optional on `ManifestReviewEvidence`
+ * only because the type is shared with chain-logic fixtures; every committed manifest (v1 and v2) carries a known class, and
+ * `manifestFingerprint` and the human approval's `sourceManifestHash` both bind it. A manifest whose
+ * adapter is absent, mis-shaped, aliased (case/whitespace variants) or `legacy_import` must never be
+ * admitted: unknown origin must not become publishable by relabelling or omitting the marker, even if
+ * an attacker also recomputes the fingerprint. The `identity` object is intentionally not required, so
+ * the historical `{ class: "manual_external" }` fixture shape stays valid.
+ */
+export function manifestGeneratorAttributionIssue(adapter: unknown): ManifestValidationIssue | undefined {
+  if (typeof adapter !== "object" || adapter === null || Array.isArray(adapter)) {
+    return issue("generatorAdapter", "A published manifest must carry a generatorAdapter object; absent or malformed attribution is refused.");
+  }
+  const cls = (adapter as { class?: unknown }).class;
+  if (cls === "legacy_import") return issue("generatorAdapter", "Unverified legacy origin cannot be published in Phase 1.");
+  if (!PUBLISHABLE_GENERATOR_CLASSES.has(cls)) {
+    return issue("generatorAdapter", "generatorAdapter.class is not a recognised verified-generation class; refused.");
+  }
+  return undefined;
+}
+
 /** Absent version field means a manifest written before P0-B existed. */
 export function manifestSchemaVersionOf(manifest: { manifestSchemaVersion?: unknown }): number {
   const raw = manifest.manifestSchemaVersion;
@@ -125,6 +152,9 @@ export function validateManifestReviewEvidence(
   manifest: ManifestReviewEvidence & { candidateId: string; contentHash: string; revision: number },
 ): ManifestValidationResult {
   const issues: ManifestValidationIssue[] = [];
+  if ((manifest.generatorAdapter as { class?: unknown } | null | undefined)?.class === "legacy_import") {
+    return { ok: false, issues: [issue("generatorAdapter", "Unverified legacy origin cannot be published in Phase 1.")] };
+  }
   const version = manifestSchemaVersionOf(manifest);
   if (manifest.question?.metadata?.subject === "amc_mathematics") {
     const chain = manifest.reviewChain ?? [];

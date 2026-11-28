@@ -1,0 +1,369 @@
+worktree C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine
+HEAD 17d8be2fcf81ab456980b24a65d4da0bc38950b2
+branch refs/heads/dev
+
+worktree C:/tmp/mindmosaic-admin-production-release
+HEAD 5e6d2b76b12c0b9f93d2a35869e529bb53e5b5ed
+detached
+
+worktree C:/tmp/mindmosaic-admin-review
+HEAD f60a7b3494d1ff23e56d1398a3940660f7dee4be
+branch refs/heads/feat/admin-scholarship-review
+
+worktree C:/tmp/mindmosaic-bar-model-generation
+HEAD 28da95bd7b61af996ef5f2ad6df8beb59afd0517
+branch refs/heads/feat/bar-model-generation-foundation
+
+worktree C:/tmp/mindmosaic-matrix-orientations
+HEAD e455f156b7cb67bd9797f47065d00f361fe23c0b
+branch refs/heads/fix/scholarship-matrix-orientations
+
+worktree C:/tmp/mindmosaic-scholarship-ci
+HEAD 21b1cab55b100ecfaf3ca08db1a94fbf77d61ee0
+branch refs/heads/ci/scholarship-drafts-advisory
+
+worktree C:/tmp/mindmosaic-scholarship-migration
+HEAD e455f156b7cb67bd9797f47065d00f361fe23c0b
+branch refs/heads/content/scholarship-declarative-migration
+
+worktree C:/tmp/mindmosaic-singapore-audit
+HEAD 3b85a10214ac7d14f82a96ef509b14f5c98fcbc1
+detached
+
+worktree C:/tmp/mindmosaic-singapore-foundation
+HEAD 1cdc6d229150f416a5e0755daab4ea53235c5194
+branch refs/heads/feat/singapore-maths-foundation
+
+worktree C:/tmp/rel-amc
+HEAD 31bc5a3a60b02439d1018281b8c12c9a366f3ff1
+branch refs/heads/release/amc-complete
+
+worktree C:/tmp/rel-amcinc
+HEAD 05592364d1c192ddcc3409a9e764d8d04f6cfeaf
+branch refs/heads/release/amc-incremental
+
+worktree C:/tmp/rel-base
+HEAD 3b85a10214ac7d14f82a96ef509b14f5c98fcbc1
+detached
+
+worktree C:/tmp/rel-inc
+HEAD 5b34ede31a0b820111b6ecdf1f503bb935c7f0fe
+branch refs/heads/release/incremental
+
+worktree C:/tmp/rel-int
+HEAD 4232ab1b7b6810a09bb0c0557269bf9980d3ae2a
+branch refs/heads/release/integrated
+
+worktree C:/tmp/rel-policy
+HEAD 194e34fe89f6e52b45ce667f59e0189f93840de7
+branch refs/heads/proposal/scholarship-difficulty-advisory
+
+worktree C:/tmp/rel-sch
+HEAD 4fec6c0a9659124f0e8ac98a4ba7d89d94d6b6a6
+branch refs/heads/release/scholarship-complete
+
+worktree C:/tmp/wt-admin-discovery-20261111
+HEAD f3199bccab464638400f73f055dc4dcd62f35a46
+branch refs/heads/docs/admin-workspace-discovery-20261111
+
+worktree C:/tmp/wt-admin-preview
+HEAD aa17368a79cb2f908535d9d4fd72fcea82b12885
+branch refs/heads/feat/admin-workspace-preview
+
+worktree C:/tmp/wt-adr-017-approval-auth-design
+HEAD 2a5e60b2e4ba8e6e7c2fadc56a31c27742300639
+branch refs/heads/rfc/adr-017-approval-authentication-design
+
+worktree C:/tmp/wt-amc-final-seven-fixes
+HEAD 09db5090837178a57177b94e86c4ff2194d6ae3f
+branch refs/heads/content/amc-final-seven-corrections
+
+worktree C:/tmp/wt-amc-intake-preflight
+HEAD 93db07974dabc80c202cbd5f8b48ff61acb7f427
+branch refs/heads/feat/amc-final-seven-intake-preflight
+
+worktree C:/tmp/wt-amc-publication-clean
+HEAD 2b9e0d47cd4b16de405744edf8cc7722dc11505d
+branch refs/heads/fix/amc-publication-clean
+
+worktree C:/tmp/wt-amc-release
+HEAD 0982b47f6630b3f6ec31eceb2c6b86911521e264
+branch refs/heads/feat/amc-release-delivery
+
+worktree C:/tmp/wt-amc-taxonomy-impl
+HEAD 8dee3bf7d45596390b46f875608188c9953a790b
+detached
+
+worktree C:/tmp/wt-audit-beta-20261102
+HEAD 17d8be2fcf81ab456980b24a65d4da0bc38950b2
+detached
+
+worktree C:/tmp/wt-auth-audit-20261104
+HEAD 46592735540014e4dcbcf7c58433a3078930a5c3
+detached
+
+worktree C:/tmp/wt-auth-final
+HEAD 46592735540014e4dcbcf7c58433a3078930a5c3
+detached
+
+worktree C:/tmp/wt-auth-journey-phase2
+HEAD a976567a41a5a7aa659fc16edc25594600d6d9cb
+branch refs/heads/feat/auth-journey-phase2
+
+worktree C:/tmp/wt-auth-links
+HEAD 75549435a7c4070e53e69ca5f5c626e25468190c
+branch refs/heads/fix/auth-device-independent-links
+
+worktree C:/tmp/wt-auth-preview
+HEAD 40a705a785a6ec829e1c4c845c468a9539cf22fa
+branch refs/heads/feat/auth-workspace-preview
+
+worktree C:/tmp/wt-auth-recovery
+HEAD 46592735540014e4dcbcf7c58433a3078930a5c3
+branch refs/heads/fix/auth-recovery-verified
+
+worktree C:/tmp/wt-baseline
+HEAD d63140d2c96d8ffc2f98839a9f246d3952c720bd
+detached
+
+worktree C:/tmp/wt-baseline-dev-20261102
+HEAD 17d8be2fcf81ab456980b24a65d4da0bc38950b2
+detached
+
+worktree C:/tmp/wt-billing-preview
+HEAD d895d150d99794ae7758a56357f040bba5cb8f68
+branch refs/heads/feat/billing-workspace-preview
+
+worktree C:/tmp/wt-deployed-landing
+HEAD 4e1d80ae2c84d65c4201bccc9323a37af4a03775
+detached
+
+worktree C:/tmp/wt-dev-landing-workspace
+HEAD 17d8be2fcf81ab456980b24a65d4da0bc38950b2
+branch refs/heads/chore/dev-landing-workspace
+
+worktree C:/tmp/wt-dev-readiness-20261111
+HEAD 17d8be2fcf81ab456980b24a65d4da0bc38950b2
+branch refs/heads/integration/dev-manual-testing-20261111
+
+worktree C:/tmp/wt-family-beta-auth-check-20261101
+HEAD a9e4272781910eeaf3ec819c0d5de4a3f0d4229d
+branch refs/heads/chore/family-beta-auth-check-20261101
+
+worktree C:/tmp/wt-family-beta-content-20261103
+HEAD 23a7586b32472cabfd9c32f9e647fd8b6ac2c4a9
+branch refs/heads/chore/family-beta-content-20261103
+
+worktree C:/tmp/wt-family-beta-fixed-papers
+HEAD 5cfa3555c24668599a70bc99f2cc84a140765d4e
+branch refs/heads/feat/family-beta-fixed-papers
+
+worktree C:/tmp/wt-family-beta-readiness-20261101
+HEAD a9e4272781910eeaf3ec819c0d5de4a3f0d4229d
+branch refs/heads/chore/family-beta-readiness-20261101
+
+worktree C:/tmp/wt-family-beta-wp1-20261102
+HEAD 79441a12ba38b5e8fd35235c846428a1a50af485
+branch refs/heads/chore/family-beta-wp1-candidate-20261102
+
+worktree C:/tmp/wt-icas-y5-science-depth
+HEAD 83ffe0f5db97e9bbead8ca31535398e8c5ab83b8
+branch refs/heads/content/icas-y5-science-depth
+
+worktree C:/tmp/wt-infra-dev
+HEAD d63140d2c96d8ffc2f98839a9f246d3952c720bd
+detached
+
+worktree C:/tmp/wt-integration-88-89
+HEAD 7e2172880f563740cca5be1d412d70fac5e0296a
+branch refs/heads/chore/integration-check-88-89
+
+worktree C:/tmp/wt-landing-a11y
+HEAD 25e9dfc5595a15fcb02538f38ebea037e689d331
+branch refs/heads/fix/landing-keyboard-focus-targets
+
+worktree C:/tmp/wt-landing-audit-20261104
+HEAD 4be720bfdaf36b33c5541988a2fb5ec2a8c2e29d
+branch refs/heads/fix/landing-audit-2026-11-04
+
+worktree C:/tmp/wt-landing-base
+HEAD 19fbcd67928fa852e542764031c7618a1ba82fab
+detached
+
+worktree C:/tmp/wt-landing-ch34-focus
+HEAD e10398741415f184ddfe84ccab9a1a95f5405ddc
+branch refs/heads/fix/landing-ch34-prehydration-focus
+
+worktree C:/tmp/wt-landing-uiux-fixes
+HEAD 88458f5c7c678c11ba61b5b1846c9b320c8420fc
+branch refs/heads/fix/signin-polish
+
+worktree C:/tmp/wt-ms-p0
+HEAD 1476d1eaf3d5d18b69fa94cb16bd6b8b8a3c4f04
+branch refs/heads/docs/my-space-trace-2026-11
+
+worktree C:/tmp/wt-myspace-review-20261110
+HEAD 17d8be2fcf81ab456980b24a65d4da0bc38950b2
+branch refs/heads/docs/myspace-canvas-review-20261110
+
+worktree C:/tmp/wt-parent-lifecycle
+HEAD b2fa65ee0580748b282e8c92c6a52b07ef2de080
+branch refs/heads/fix/parent-child-archive-lifecycle
+
+worktree C:/tmp/wt-parent-workspace-ui
+HEAD ff560a7bb1095147c6c6f7667dc370d0c3a35637
+branch refs/heads/feat/parent-workspace-ui
+
+worktree C:/tmp/wt-pj-p0
+HEAD 5c4f2fb2d130da3f770c1cbb9a2d82667b30b68c
+branch refs/heads/docs/parent-journey-trace-2026-11
+
+worktree C:/tmp/wt-pj-p1
+HEAD dd00db1a16629462c9d7431377ac4c9de84ba500
+branch refs/heads/feat/parent-nav-shell-primitives
+
+worktree C:/tmp/wt-pj-p2
+HEAD bb0672378a7385bf7ecd4d7c479f5fabef847b6e
+branch refs/heads/feat/parent-family-overview
+
+worktree C:/tmp/wt-pj-p3
+HEAD 4a472d65e4338f74678d833df84945aa7bd1346a
+branch refs/heads/feat/parent-child-profiles
+
+worktree C:/tmp/wt-pj-p4
+HEAD 5e798381198e2661d9888c03e1756da308d86ed7
+branch refs/heads/feat/parent-child-progress
+
+worktree C:/tmp/wt-pj-p5
+HEAD 5e798381198e2661d9888c03e1756da308d86ed7
+branch refs/heads/feat/parent-learning-controls
+
+worktree C:/tmp/wt-preview-landing
+HEAD a9db90d7d762919ef1a9d8db4405a143a72bac5e
+detached
+
+worktree C:/tmp/wt-release-readiness-20261030
+HEAD d63140d2c96d8ffc2f98839a9f246d3952c720bd
+branch refs/heads/chore/release-readiness-2026-10-30
+
+worktree C:/tmp/wt-rpc-lockdown
+HEAD ed52ef990312f0ab4d0d48cdcc87fe1ef41d2ce5
+branch refs/heads/fix/exam-legacy-write-rpc-server-only
+
+worktree C:/tmp/wt-scholarship-core
+HEAD ec9718ebc6f150209fd021fcbeb5c57d8cfc231b
+branch refs/heads/feat/scholarship-nr-attestation
+
+worktree C:/tmp/wt-scholarship-dev-sample-isolated
+HEAD 2db7e444e9f00443825626a34b26ee7b638bad07
+branch refs/heads/feat/scholarship-dev-sample-isolated
+
+worktree C:/tmp/wt-scholarship-prod
+HEAD 6b7d3339a9c04e3b3196b8e51fdf936be6293624
+branch refs/heads/release/scholarship-prod
+
+worktree C:/tmp/wt-scholarship-remediation
+HEAD d7fa15cdd86ddcb6312f8496c4dd142c73b363eb
+branch refs/heads/fix/scholarship-remediation
+
+worktree C:/tmp/wt-scholarship-y6-production-readiness
+HEAD 4ef598dff751dbf30174a973e5d2a53248a25fdb
+branch refs/heads/audit/scholarship-y6-production-readiness
+
+worktree C:/tmp/wt-scholarship-y6-release-readiness
+HEAD e1f6257f2ae81f5b3979d1e60a7b6008692aa51c
+branch refs/heads/feat/scholarship-sample-dev-preview
+
+worktree C:/tmp/wt-scholarship-y6-sample
+HEAD dcb60a80f3f6eabdb522b20202929d2e3f328a94
+branch refs/heads/feat/scholarship-y6-sample
+
+worktree C:/tmp/wt-sg-preview-fix
+HEAD 32636f7d6f32c17acea7cb7f78b144f255f8aa99
+branch refs/heads/fix/singapore-sample-preview-load
+
+worktree C:/tmp/wt-sg-reliability
+HEAD bb4a520b1d68be35778bf81c1d8acd9006e70236
+branch refs/heads/fix/singapore-sample-persistence
+
+worktree C:/tmp/wt-sj-p0
+HEAD 14d6005aeed9f12069d18117de50758b2beb1eb3
+branch refs/heads/docs/student-journey-trace-2026-11
+
+worktree C:/tmp/wt-sj-p1
+HEAD 23d5d2129953f25c100fdff7aee412c7bd8cc396
+branch refs/heads/feat/practice-studio-availability-logic
+
+worktree C:/tmp/wt-sj-p2
+HEAD e4b8834d3fe370750c2a8c166536d8f1c28ea9ca
+branch refs/heads/feat/student-nav-shell
+
+worktree C:/tmp/wt-sj-p3
+HEAD 128268dc9150aa7ebd3817437d78c7b8659855e5
+branch refs/heads/feat/my-space
+
+worktree C:/tmp/wt-sj-p4
+HEAD 92a0a172f201200cdc6b72dc60ef70c28b648192
+branch refs/heads/feat/practice-studio
+
+worktree C:/tmp/wt-sj-p5
+HEAD 322d3f7e96973a1f7026cb26252cac4825a58c72
+branch refs/heads/feat/learning-hub
+
+worktree C:/tmp/wt-sj-p6
+HEAD 2b3b5f690b97f34a497332e1acafe81c8f633a45
+branch refs/heads/feat/practice-runner
+
+worktree C:/tmp/wt-student-workspace-ui
+HEAD 65d62eb9b49d62f26cb27d1487f6931e627f5897
+branch refs/heads/feat/student-workspace-preview
+
+worktree C:/tmp/wt-y5-drafts
+HEAD 46c055316f52b9da1fd743336848966575553aae
+detached
+
+worktree C:/Users/vishw/AppData/Local/Temp/mindmosaic-font-reliability
+HEAD a879e41922095a333c3122a189efba7a6c772517
+branch refs/heads/fix/ci-font-build-reliability
+prunable gitdir file points to non-existent location
+
+worktree C:/Users/vishw/AppData/Local/Temp/mm-pr80-review
+HEAD 19fbcd67928fa852e542764031c7618a1ba82fab
+detached
+prunable gitdir file points to non-existent location
+
+worktree C:/Users/vishw/AppData/Local/Temp/mm-pr80-review-worktree
+HEAD 19fbcd67928fa852e542764031c7618a1ba82fab
+detached
+prunable gitdir file points to non-existent location
+
+worktree C:/Users/vishw/AppData/Local/Temp/mm-singapore-maths-arch
+HEAD a0c3c14ae15ecfd0c76cc33464d1c0646149e068
+detached
+prunable gitdir file points to non-existent location
+
+worktree C:/Users/vishw/AppData/Local/Temp/mm-singapore-maths-phase1
+HEAD 8ee32d995efa4dcd2de4a9726231c18b0dec1994
+branch refs/heads/feat/singapore-maths-student-sample-practice
+prunable gitdir file points to non-existent location
+
+worktree C:/Users/vishw/Vish/Vish/.worktrees/docs-programme-readiness-audit-2026-10-16
+HEAD 6fa3e55fdec18f64cdfef37ff7f09679b0fb8a58
+branch refs/heads/docs/programme-readiness-audit-2026-10-16
+
+worktree C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine/mindmosaic-exam-engine-bar-model-pilot
+HEAD 10cc1d93b4726c096c2ca673c54602ef704a71f3
+detached
+
+worktree C:/Users/vishw/Vish/Vish/mindmosaic-exam-engine-bar-model-pilot
+HEAD d19591f38ec5bc549826aaaebfaa63a0ede6d6f1
+branch refs/heads/feat/bar-modelling-30-question-pilot
+
+worktree C:/Users/vishw/Vish/Vish/mindmosaic-programs-cinematic
+HEAD a4689ba6fed86737cff52af8c55b2ba97e32a7c1
+branch refs/heads/feat/programs-cinematic-ui
+
+worktree C:/Users/vishw/Vish/Vish/mm-beta-hardening
+HEAD c1e309955cdbb1e0aeabde34f1ee368499180c8d
+branch refs/heads/fix/beta-hardening
+

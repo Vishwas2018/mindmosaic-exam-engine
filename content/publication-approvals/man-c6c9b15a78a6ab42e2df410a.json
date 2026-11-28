@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-c6c9b15a78a6ab42e2df410a",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "9949d5e02ee0407d6a6b660ab60964a62f86dd18a98da6f4e3d6b87785dad424",
+  "sourceManifestHash": "d7036958f7e98978d363f0aa1ca66cc5d8ca07377d866d58d890de36d982453b",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-c6c9b15a78a6ab42e2df410a",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "48 stickers are shared equally into 6 groups. How many stickers are in each group? (48 ÷ 6)",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 8,
+      "tolerance": 0
+    },
+    "explanation": "48 ÷ 6 = 8 stickers in each group.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.multiplication-equal-groups",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "eb5de8ab374caa0d9e7815f89f9574c7ee3fb7ce63abb576a48cabb863f3d985"
+}

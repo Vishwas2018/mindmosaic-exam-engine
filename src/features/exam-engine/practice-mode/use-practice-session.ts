@@ -2,12 +2,13 @@
 
 import { useMemo, useReducer } from "react";
 
-import type { CandidateAnswer } from "@/features/exam-engine/types";
+import type { CandidateAnswer, CandidateQuestion } from "@/features/exam-engine/types";
 import type { Question } from "@/schemas/question.schema";
 
 import {
   createInitialPracticeState,
   practiceReducer,
+  type PracticeQuestionStatus,
   type PracticeState,
 } from "./practice-reducer";
 
@@ -15,6 +16,12 @@ export interface UsePracticeSessionResult {
   state: PracticeState;
   setAnswer: (answer: CandidateAnswer) => void;
   checkAnswer: () => void;
+  checkAnswerResult: (payload: {
+    status: PracticeQuestionStatus;
+    explanation?: string | null;
+    correctAnswer?: string | null;
+    yourAnswer?: string | null;
+  }) => void;
   skip: () => void;
   next: () => void;
   toggleFlag: () => void;
@@ -26,7 +33,7 @@ export interface UsePracticeSessionResult {
 
 /** Thin React binding over the pure practiceReducer — see practice-reducer.ts. */
 export function usePracticeSession(
-  questions: readonly Question[],
+  questions: readonly (Question | CandidateQuestion)[],
 ): UsePracticeSessionResult {
   const [state, dispatch] = useReducer(
     practiceReducer,
@@ -39,6 +46,8 @@ export function usePracticeSession(
       state,
       setAnswer: (answer: CandidateAnswer) => dispatch({ type: "set_answer", answer }),
       checkAnswer: () => dispatch({ type: "check_answer" }),
+      checkAnswerResult: (payload) =>
+        dispatch({ type: "check_answer_result", ...payload }),
       skip: () => dispatch({ type: "skip" }),
       next: () => dispatch({ type: "next" }),
       toggleFlag: () => dispatch({ type: "toggle_flag" }),

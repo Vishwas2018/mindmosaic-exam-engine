@@ -8,6 +8,9 @@ import { buildDiagnosticBaseline } from "@/features/student/onboarding/baseline-
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { getExamBank } from "@/server/exam-bank";
+import { getStudioAvailability } from "@/server/practice-studio-availability";
+import { recommendFromWarmup } from "@/features/student/onboarding/recommendations";
+import { createLegacyExamSession, recordLegacyExamAttempt } from "@/server/exam-write/legacy-exam-writes";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +20,11 @@ const completeOnboardingSchema = z.object({
   weeklyGoalMinutes: z.number().int().min(15).max(600).optional().default(60),
   responses: z.record(z.string(), z.unknown()).default({}),
   startedAt: z.number().int().positive().optional(),
+  /**
+   * `false` for the optional warm-up taken from My Space: it records the warm-up only and never rewrites the
+   * child's year level, interests or weekly goal. The first-run onboarding flow keeps the default (`true`).
+   */
+  preferences: z.boolean().optional().default(true),
 });
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -46,7 +54,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  const { yearLevel, interests, weeklyGoalMinutes, responses, startedAt: clientStartedAt } =
+  const { yearLevel, interests, weeklyGoalMinutes, responses, startedAt: clientStartedAt, preferences } =
     parsed.data;
 
   // Verify student role
@@ -112,22 +120,23 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   // Create session and attempt row in Supabase
   let sessionId: string | null = null;
-  const { data: createdSessionId, error: sessionError } = await supabase.rpc(
-    "create_exam_session",
-    {
-      p_config: sessionConfig,
-      p_seed: seed,
-      p_selected_question_ids: selectedQuestionIds,
-      p_expires_at: expiresAt,
-    },
-  );
+  /* Written by the dedicated exam-writer role (20261031090000); `authenticated` can no longer execute the legacy
+     functions. Best-effort, as before: a failure here must not block finishing onboarding. */
+  const { sessionId: createdSessionId, error: sessionError } = await createLegacyExamSession({
+    studentId: user.id,
+    config: sessionConfig,
+    seed,
+    selectedQuestionIds,
+    expiresAt,
+  });
 
   if (!sessionError && createdSessionId) {
-    sessionId = createdSessionId as string;
-    await supabase.rpc("record_exam_attempt", {
-      p_session_id: sessionId,
-      p_responses: responses,
-      p_result: result,
+    sessionId = createdSessionId;
+    await recordLegacyExamAttempt({
+      studentId: user.id,
+      sessionId,
+      responses,
+      result,
     });
   }
 
@@ -135,13 +144,17 @@ export async function POST(request: Request): Promise<NextResponse> {
   const nowIso = new Date().toISOString();
   const { error: profileError } = await supabase
     .from("profiles")
-    .update({
-      year_level: yearLevel,
-      interests,
-      weekly_goal_minutes: weeklyGoalMinutes,
-      onboarding_completed_at: nowIso,
-      diagnostic_completed_at: nowIso,
-    })
+    .update(
+      preferences
+        ? {
+            year_level: yearLevel,
+            interests,
+            weekly_goal_minutes: weeklyGoalMinutes,
+            onboarding_completed_at: nowIso,
+            diagnostic_completed_at: nowIso,
+          }
+        : { diagnostic_completed_at: nowIso },
+    )
     .eq("id", user.id);
 
   if (profileError) {
@@ -155,5 +168,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     ok: true,
     result,
     baseline: baselineReport,
+    /* Server-authoritative: worked out from this sitting's own marks and what Practice Studio can serve today. */
+    recommendations: recommendFromWarmup(baselineReport, getStudioAvailability()),
   });
 }

@@ -4,15 +4,16 @@ vi.mock("server-only", () => ({}));
 
 vi.mock("@/lib/supabase/config", () => ({ isSupabaseConfigured: true }));
 
-vi.mock("@/server/exam-bank", () => ({
-  getExamBank: vi.fn(() => [
+vi.mock("@/server/exam-bank", () => {
+  const bank = () => [
     {
       id: "q1",
       answerKey: { kind: "exact", value: "1" },
       explanation: "",
     },
-  ]),
-}));
+  ];
+  return { getExamBank: vi.fn(bank), getResolutionExamBank: vi.fn(bank) };
+});
 
 const mockGetUser = vi.fn();
 const mockOpenSittings = vi.fn();

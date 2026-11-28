@@ -4,14 +4,15 @@ import { clsx } from "clsx";
 import { GraduationCap, Medal, School, Sigma } from "lucide-react";
 
 import { JurisdictionPicker } from "@/features/student/components/JurisdictionPicker";
+import { getStyleAvailability } from "@/features/catalogue/style-availability";
 import { ExamCentreAdviceCard } from "@/features/student/components/exam-centre/ExamCentreAdviceCard";
-import { ExamCentreBatterySpotlight } from "@/features/student/components/exam-centre/ExamCentreBatterySpotlight";
 import { ExamCentreHero } from "@/features/student/components/exam-centre/ExamCentreHero";
 import { StudentPortalShell } from "@/features/student/components/StudentPortalShell";
 import { fetchStudentPortalShellData } from "@/features/student/components/student-portal-shell-data";
 import { fetchStudentOverview } from "@/features/student/data";
 import { requireStudent } from "@/features/student/require-student";
 
+import { countLabel } from "@/lib/format-count";
 export const metadata: Metadata = { title: "Exam Centre" };
 
 /* Per-user page — always render at request time (see /student/page.tsx). */
@@ -31,9 +32,10 @@ export const dynamic = "force-dynamic";
  * Placeholder, clearly marked in their own files: the hero's readiness tile
  * uses real average mastery instead of the mock's fabricated "Cohort
  * Preparedness"/"Stage 3 Ready" framing (no cohort/class-comparison data
- * exists), and the "NAPLAN Year 5 Simulation Battery" is a fixed
- * illustrative preview — this codebase has no multi-domain "battery"
- * concept, only single-paper attempts (see ExamCentreBatterySpotlight).
+ * exists). The canvas's "NAPLAN Year 5 Simulation Battery" is not shown to
+ * students: it was a fixed illustration ("Example: 1 / 4 complete") of a
+ * multi-paper concept this codebase does not have, and a child cannot tell
+ * an illustration from their own progress.
  */
 
 interface FormatCard {
@@ -46,13 +48,18 @@ interface FormatCard {
   readonly icon: typeof GraduationCap;
 }
 
-const FORMATS: readonly FormatCard[] = [
+function buildFormats(): readonly FormatCard[] {
+  const naplan = getStyleAvailability("naplan_style");
+  const icas = getStyleAvailability("icas_style");
+  const amc = getStyleAvailability("amc_style");
+  const yearsText = (years: readonly number[]) => (years.length === 0 ? "" : `Year${years.length > 1 ? "s" : ""} ${years.join(" and ")}`);
+  return [
   {
     tag: "NAPLAN-style",
     title: "Numeracy and literacy",
     body: "Sections in the NAPLAN test areas, sat either as a short set or a full-length simulation.",
-    meta: "Years 3 and 5 · Coverage confirmed",
-    confirmed: true,
+    meta: naplan.state === "in_development" ? "Not open yet" : `${yearsText(naplan.years)} · ${naplan.subjects.length === 0 ? "" : "Open: " + naplan.subjects.join(", ")}`,
+    confirmed: naplan.state !== "in_development",
     href: "/practice?style=naplan_style",
     icon: GraduationCap,
   },
@@ -60,8 +67,8 @@ const FORMATS: readonly FormatCard[] = [
     tag: "ICAS-style",
     title: "Reasoning and problem solving",
     body: "Extension-style questions rewarding close reading and unfamiliar problems, in ICAS response formats.",
-    meta: "Years 3 and 5 · Coverage confirmed",
-    confirmed: true,
+    meta: icas.state === "in_development" ? "Not open yet · questions are still being reviewed" : `${yearsText(icas.years)} · Open: ${icas.subjects.join(", ")}`,
+    confirmed: icas.state !== "in_development",
     href: "/practice?style=icas_style",
     icon: Medal,
   },
@@ -69,9 +76,9 @@ const FORMATS: readonly FormatCard[] = [
     tag: "AMC-style",
     title: "Mathematics competition style",
     body: "Multi-step reasoning and pattern problems designed to be worked rather than recalled.",
-    meta: "Coverage being confirmed",
-    confirmed: false,
-    href: "/exam-preparation",
+    meta: amc.state === "in_development" ? "Not open yet" : `${yearsText(amc.years)} · Practice modules open, full-length papers not open yet`,
+    confirmed: amc.state !== "in_development",
+    href: amc.state === "in_development" ? "/exam-preparation" : "/exams",
     icon: Sigma,
   },
   {
@@ -83,7 +90,8 @@ const FORMATS: readonly FormatCard[] = [
     href: "#jurisdiction",
     icon: School,
   },
-];
+  ];
+}
 
 function formatDate(iso: string): string {
   const date = new Date(iso);
@@ -103,18 +111,21 @@ export default async function StudentExamPreparationPage() {
   ).length;
   const answeredAttempts = overview.attempts.length - blankSessions;
 
-  const averageReadiness =
-    overview.mastery.length === 0
+  /* An average of marks, only over subjects with enough work behind them. It is not a
+     readiness or prediction figure. */
+  const evidencedSubjects = overview.mastery.filter((m) => m.sufficientEvidence);
+  const averageMarks =
+    evidencedSubjects.length === 0
       ? null
-      : Math.round(overview.mastery.reduce((sum, m) => sum + m.percent, 0) / overview.mastery.length);
+      : Math.round(evidencedSubjects.reduce((sum, m) => sum + m.percent, 0) / evidencedSubjects.length);
 
   return (
     <StudentPortalShell active="examCentre" breadcrumbLabel="Exam Centre" student={student} shellData={shellData}>
-      <ExamCentreHero averageReadiness={averageReadiness} />
+      <ExamCentreHero averageMarks={averageMarks} />
 
       {/* ---------- Readiness by subject ---------- */}
       <section className="grid gap-4 rounded-2xl border border-mm-line bg-white p-6">
-        <h2 className="text-lg font-bold text-mm-ink">Readiness by subject</h2>
+        <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-lg font-semibold text-mm-ink">Your marks by subject</h2>
         {/*
           A paper submitted without a single answer contributes its
           marks to `available` and nothing to `earned`, so readiness
@@ -141,7 +152,10 @@ export default async function StudentExamPreparationPage() {
               <div key={subject.subject} className="grid gap-1.5">
                 <div className="flex justify-between gap-3 text-sm">
                   <span className="font-semibold text-mm-ink">{subject.label}</span>
-                  <span className="text-mm-muted">{subject.percent}%</span>
+                  <span className="text-mm-muted">
+                    {subject.marksEarned} of {subject.marksAvailable} marks
+                    {!subject.sufficientEvidence && " · too few sets to read much into"}
+                  </span>
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-mm-line-soft">
                   <div
@@ -162,15 +176,13 @@ export default async function StudentExamPreparationPage() {
         )}
       </section>
 
-      <ExamCentreBatterySpotlight />
-
       {/* ---------- Format cards ---------- */}
       <section aria-labelledby="formats-heading" className="grid gap-3.5">
-        <h2 id="formats-heading" className="text-xl font-bold text-mm-ink">
+        <h2 id="formats-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
           Assessment formats
         </h2>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {FORMATS.map((format) => {
+          {buildFormats().map((format) => {
             const Icon = format.icon;
             return (
               <Link
@@ -195,7 +207,7 @@ export default async function StudentExamPreparationPage() {
                   >
                     {format.tag}
                   </p>
-                  <h3 className="text-[15px] font-bold text-mm-ink">{format.title}</h3>
+                  <h3 className="text-[15px] font-semibold text-mm-ink">{format.title}</h3>
                   <p className="text-[13px] leading-relaxed text-mm-muted">{format.body}</p>
                   <p
                     className={clsx(
@@ -215,7 +227,7 @@ export default async function StudentExamPreparationPage() {
       {/* ---------- Jurisdiction picker ---------- */}
       <section id="jurisdiction" aria-labelledby="jurisdiction-heading" className="grid gap-3.5">
         <div>
-          <h2 id="jurisdiction-heading" className="text-xl font-bold text-mm-ink">
+          <h2 id="jurisdiction-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
             Selective entry, by state and territory
           </h2>
           <p className="mt-2 max-w-[70ch] text-sm leading-relaxed text-mm-muted">
@@ -228,7 +240,7 @@ export default async function StudentExamPreparationPage() {
 
       {/* ---------- Recent papers ---------- */}
       <section aria-labelledby="recent-papers-heading" className="grid gap-3.5">
-        <h2 id="recent-papers-heading" className="text-xl font-bold text-mm-ink">
+        <h2 id="recent-papers-heading" className="font-[family-name:var(--font-display)] tracking-[-0.02em] text-xl font-semibold text-mm-ink">
           Recent papers
         </h2>
         {recent.length === 0 ? (
@@ -250,17 +262,17 @@ export default async function StudentExamPreparationPage() {
                   )}
                 >
                   <div className="min-w-0">
-                    <p className="truncate text-[15px] font-bold text-mm-ink">{attempt.title}</p>
+                    <p className="truncate text-[15px] font-semibold text-mm-ink">{attempt.title}</p>
                     <p className="mt-0.5 text-[13px] text-mm-muted">
                       {attempt.timing === "timed" ? "Timed" : "Untimed"}
-                      {attempt.totalQuestions !== null ? ` · ${attempt.totalQuestions} questions` : ""}
+                      {attempt.totalQuestions !== null ? ` · ${countLabel(attempt.totalQuestions, "question")}` : ""}
                       {attempt.pendingManualReview ? " · some marks pending" : ""}
                     </p>
                   </div>
                   <p className="text-[13px] text-mm-muted">{formatDate(attempt.submittedAt)}</p>
                   <p
                     className={clsx(
-                      "font-mono text-[15px] font-bold",
+                      "font-mono text-[15px] font-semibold",
                       attempt.scorePercent === null
                         ? "text-mm-muted"
                         : attempt.scorePercent >= 55

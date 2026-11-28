@@ -1,0 +1,46 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-10ff8545e5a15d34b712482d",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "4500490d16e319b59a983150bcd3a0a46d8702b218a4c4141d6d4d38f441c4f5",
+  "sourceManifestHash": "c6a0c7fe8b7f9a616ea1127313c086e5cc3772f71b559007a32718270a58a211",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-10ff8545e5a15d34b712482d",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "What is 6 × 7?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 42,
+      "tolerance": 0
+    },
+    "explanation": "6 × 7 = 42.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number",
+      "topic": "Number",
+      "skill": "num.prod.number.multiplication-equal-groups",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 45,
+      "tags": [],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "44530bad0b58dcec2792b435e61951669c6164c191bbbe537f5d66d494d0c470"
+}

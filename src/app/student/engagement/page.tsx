@@ -57,9 +57,8 @@ export default async function StudentEngagementPage() {
   const questionsAnswered = overview.attempts.reduce((sum, a) => sum + a.attemptedQuestions, 0);
 
   return (
-    <StudentPortalShell active="progress" breadcrumbLabel="My Progress" student={student} shellData={shellData}>
+    <StudentPortalShell active="results" breadcrumbLabel="My Progress" student={student} shellData={shellData}>
       <MyProgressHero
-        yearLevel={student.yearLevel}
         questionsAnswered={questionsAnswered}
         recommendedFocus={overview.recommendedFocus}
       />
@@ -86,7 +85,7 @@ export default async function StudentEngagementPage() {
       )}
 
       <div>
-        <h2 className="mb-3 text-xl font-bold text-mm-ink">Recent completed sessions</h2>
+        <h2 className="font-[family-name:var(--font-display)] tracking-[-0.02em] mb-3 text-xl font-semibold text-mm-ink">Recent completed sessions</h2>
         <MyProgressSessionsTable attempts={overview.attempts} />
       </div>
     </StudentPortalShell>

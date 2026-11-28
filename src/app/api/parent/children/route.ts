@@ -43,6 +43,16 @@ export async function POST(request: Request): Promise<NextResponse> {
    * by confirming and retrying with allowDuplicate, so it reads as a
    * conflict rather than a client error like the 400s around it.
    */
-  const status = result.ok ? 200 : result.duplicate ? 409 : 400;
+  const status = result.ok
+    ? 200
+    : result.duplicate
+      ? 409
+      : result.errorCode === "unauthenticated"
+        ? 401
+        : result.errorCode === "forbidden"
+          ? 403
+          : result.errorCode === "not_configured"
+            ? 503
+            : 400;
   return NextResponse.json(result, { status });
 }

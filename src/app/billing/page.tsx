@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { Home } from "lucide-react";
 
@@ -8,14 +9,16 @@ import { Badge } from "@/components/ui";
 import { AuthNav } from "@/features/auth/components/AuthNav";
 import { RoleHomeLink } from "@/features/auth/components/RoleHomeLink";
 import {
-  FamilyPlanCard,
   InvoiceHistoryCard,
   PaymentMethodCard,
   PlanComparisonTable,
+  PricingPlans,
   SubscriptionOverviewCard,
 } from "@/features/billing";
 import { getMySubscription } from "@/lib/billing/subscription";
+import { isStripeConfigured, purchasablePlans } from "@/lib/stripe/config";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Billing",
@@ -32,7 +35,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-page">
       <header className="border-b border-royal/8 bg-white">
-        <div className="site-width flex min-h-20 items-center justify-between gap-4 py-3">
+        <div className="site-width flex min-h-20 flex-wrap items-center justify-between gap-x-4 gap-y-2 py-3">
           <Link
             href="/"
             aria-label="MindMosaic home"
@@ -47,7 +50,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             which goes to the marketing site instead. RoleHomeLink supplies
             the right destination per role and renders nothing for guests.
           */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex min-w-0 flex-wrap items-center justify-end gap-2 sm:gap-3">
             <Link
               href="/"
               className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-bold text-muted transition hover:bg-royal/5 hover:text-royal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
@@ -59,7 +62,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             <Badge variant="purple" className="hidden sm:inline-flex">
               Billing
             </Badge>
-            <AuthNav />
+            <AuthNav showRoleHome={false} />
           </div>
         </div>
       </header>
@@ -83,24 +86,96 @@ function Shell({ children }: { children: React.ReactNode }) {
  * this page's behaviour before this batch.
  */
 export default async function BillingPage() {
+  /* Billing is a parent's business: a signed-in child is never shown a plan or a price. Not a redirect, because
+     requireActiveSubscription's (dormant) gate sends students here and a redirect back would loop. */
+  if (isSupabaseConfigured) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+      /* Billing lives inside Account for a parent (Claude Design parent artboard 26). While payments are off
+         (the DEV family beta) a stored trial row must not surface card or invoice controls that can only fail. */
+      if (profile?.role === "parent" && !isStripeConfigured) redirect("/parent/account/billing");
+      if (profile?.role === "student") {
+        return (
+          <Shell>
+            <div className="mx-auto max-w-xl text-center" data-testid="billing-student">
+              <h1 className="text-3xl font-black tracking-[-0.03em] text-ink">This page is for grown-ups</h1>
+              <p className="mt-3 text-base leading-7 text-muted">
+                Plans are looked after by the parent who set up your account. You can keep practising.
+              </p>
+              <Link
+                href="/student"
+                className="mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-5 text-sm font-bold text-white transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+              >
+                Back to My Space
+              </Link>
+            </div>
+          </Shell>
+        );
+      }
+    }
+  }
+
   const result = isSupabaseConfigured ? await getMySubscription() : { status: "error" as const };
   const subscription = result.status === "ready" ? result.subscription : null;
+
+  /* Whether a tier can take a payment in THIS deployment (Stripe configured and both cadence prices set) is a
+     server-side runtime fact; the client picker only renders what it is told. */
+  const purchasable = purchasablePlans();
+  const availability = {
+    individual: purchasable.individual ? ("purchasable" as const) : ("roadmap" as const),
+    family: purchasable.family ? ("purchasable" as const) : ("roadmap" as const),
+  };
+
+  /* Someone on a trial, an expired or cancelled plan, or with no paid plan yet can still choose one; an active
+     paid subscriber manages theirs below. */
+  const showPlans =
+    subscription !== null &&
+    (subscription.plan === null ||
+      subscription.status === "trialing" ||
+      subscription.status === "trial_expired" ||
+      subscription.status === "canceled");
+
+  /* Where payments are not switched on (the DEV family beta), nothing is offered for sale: a plan card here would
+     lead to a checkout that can only fail. */
+  if (!isStripeConfigured) {
+    return (
+      <Shell>
+        <div className="mx-auto max-w-2xl text-center" data-testid="billing-free-beta">
+          <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">The family beta is free</h1>
+          <p className="mt-3 text-base leading-7 text-muted">
+            There is nothing to pay during the beta, no card on file and nothing to cancel. Every feature open to
+            beta families is included. We will tell you well before anything changes.
+          </p>
+          <Link
+            href="/parent"
+            className="mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-royal px-5 text-sm font-bold text-white transition hover:bg-royal/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-royal/20"
+          >
+            Back to your family
+          </Link>
+        </div>
+      </Shell>
+    );
+  }
 
   if (!subscription) {
     return (
       <Shell>
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-3xl font-black tracking-[-0.03em] text-ink sm:text-4xl">
-            Choose the Family plan
+            Pick the plan that fits your family
           </h1>
           <p className="mt-3 text-base leading-7 text-muted">
-            One plan for the whole family — up to 3 children, full question bank, full
-            skill-level breakdowns. Guests can keep practising for free, any time.
+            Try practice free as a guest, then subscribe for child profiles, saved progress, full-length exam
+            papers and a parent dashboard.
           </p>
         </div>
-        <div className="mx-auto mt-10 max-w-3xl space-y-8">
+        <div className="mx-auto mt-10 max-w-5xl space-y-8">
+          <PricingPlans availability={availability} />
           <PlanComparisonTable />
-          <FamilyPlanCard />
         </div>
       </Shell>
     );
@@ -114,9 +189,10 @@ export default async function BillingPage() {
             Billing &amp; subscription
           </h1>
           <p className="mt-2 text-sm font-semibold text-muted">
-            Manage your Family plan, payment method, and invoice history.
+            Manage your plan, payment method, and invoice history.
           </p>
         </div>
+        {showPlans && <PricingPlans availability={availability} />}
         <SubscriptionOverviewCard subscription={subscription} />
         <PaymentMethodCard />
         <InvoiceHistoryCard />

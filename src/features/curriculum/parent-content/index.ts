@@ -9,6 +9,7 @@ import { ENGLISH_LEVEL_3_PARENT_CONTENT } from "./english-level-3";
 import { ENGLISH_LEVEL_5_PARENT_CONTENT } from "./english-level-5";
 import { isClassroomOnlyCurriculumNode } from "../lessons/classroom-only";
 
+import { countLabel } from "@/lib/format-count";
 export * from "./types";
 export { MATH_LEVEL_3_PARENT_CONTENT } from "./math-level-3";
 export { MATH_LEVEL_5_PARENT_CONTENT } from "./math-level-5";
@@ -127,7 +128,7 @@ export function resolveCoverageBadge(
       state: "covered",
       meta: {
         label: "Ready to practise",
-        description: `${coverage.supportingContentCount} questions available`,
+        description: `${countLabel(coverage.supportingContentCount, "question")} available`,
         variant: "success",
       },
     };

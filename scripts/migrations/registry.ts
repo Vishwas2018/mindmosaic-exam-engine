@@ -259,22 +259,11 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
     checks: [
       functionExists("create_exam_session"),
       functionExists("record_exam_attempt"),
-      {
-        /* Unlike apply_stripe_subscription_event, these are meant to be
-           called by the signed-in student — so the assertion is that
-           authenticated CAN execute them. Without the explicit grant the
-           routes fail closed, which is safe but is still drift. */
-        describes:
-          "create_exam_session/record_exam_attempt executable by authenticated",
-        sql: `select count(distinct p.proname) = 2 as present
-              from pg_proc p
-              join pg_namespace n on n.oid = p.pronamespace
-              join lateral aclexplode(p.proacl) a on true
-              where n.nspname = 'public'
-                and p.proname in ('create_exam_session', 'record_exam_attempt')
-                and a.privilege_type = 'EXECUTE'
-                and a.grantee::regrole::text = 'authenticated'`,
-      },
+      /* This entry used to assert that authenticated CAN execute both functions (the routes called them with the
+         learner's own JWT). That grant was the P1 assessment-integrity defect: a signed-in student could call either
+         function over PostgREST with a question list or a result of their own. It is revoked by 20261031090100, and
+         the assertion now lives on that entry as its inverse. It is deliberately not repeated here, because this
+         registry also verifies hosted databases that have not yet applied that migration. */
       {
         /* The whole point of the definer path: neither function may be
            reachable by an unauthenticated caller. */
@@ -437,10 +426,13 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
       {
         describes:
-          "class_students insert requires a teacher caller and a student target",
+          "class_students insert requires a teacher caller and a student target (policy predicate, or the hardening trigger)",
         sql: `select coalesce(
                 (select pg_get_expr(polwithcheck, polrelid) ~ 'caller_is_teacher'
-                    and pg_get_expr(polwithcheck, polrelid) ~ 'is_student_profile'
+                    and (pg_get_expr(polwithcheck, polrelid) ~ 'is_student_profile'
+                         or exists (select 1 from pg_trigger t
+                                    where t.tgrelid = 'public.class_students'::regclass
+                                      and t.tgname = 'class_students_require_student' and not t.tgisinternal))
                  from pg_policy where polrelid = 'public.class_students'::regclass
                    and polname = 'class_students: teacher adds to own class'),
                 false) as present`,
@@ -2877,6 +2869,175 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
           and has_table_privilege('authenticated', 'public.admin_draft_review_approvals', 'select,insert')
           and not has_table_privilege('authenticated', 'public.admin_draft_review_approvals', 'update,delete')
           and not has_table_privilege('anon', 'public.admin_draft_review_approvals', 'select,insert,update,delete') as present`,
+      },
+    ],
+  },
+  {
+    version: "20261031090000",
+    name: "exam_writer_role_and_server_write_functions",
+    checks: [
+      {
+        describes: "role mindmosaic_exam_writer exists and is not super/createdb/createrole/replication, cannot bypass RLS, does not inherit",
+        sql: `select coalesce(
+                (select not rolsuper and not rolcreatedb and not rolcreaterole and not rolbypassrls
+                    and not rolreplication and not rolinherit and rolcanlogin
+                 from pg_roles where rolname = 'mindmosaic_exam_writer'),
+                false) as present`,
+      },
+      functionExists("create_exam_session_for"),
+      functionExists("record_exam_attempt_for"),
+      {
+        describes: "the _for write functions are executable by mindmosaic_exam_writer and by no client role (anon, authenticated, PUBLIC, service_role)",
+        sql: `select (
+                select count(*) = 2 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname in ('create_exam_session_for', 'record_exam_attempt_for')
+                  and has_function_privilege('mindmosaic_exam_writer', p.oid, 'EXECUTE')
+              ) and not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname in ('create_exam_session_for', 'record_exam_attempt_for')
+                  and (has_function_privilege('anon', p.oid, 'EXECUTE')
+                    or has_function_privilege('authenticated', p.oid, 'EXECUTE')
+                    or has_function_privilege('service_role', p.oid, 'EXECUTE'))
+              ) as present`,
+      },
+      {
+        describes: "mindmosaic_exam_writer holds no table privilege",
+        sql: `select not exists (
+                select 1 from information_schema.table_privileges where grantee = 'mindmosaic_exam_writer'
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20261031090100",
+    name: "revoke_legacy_exam_write_rpcs_from_clients",
+    checks: [
+      {
+        describes: "no overload of create_exam_session / record_exam_attempt is executable by anon, authenticated or PUBLIC (P1 lockdown)",
+        sql: `select not exists (
+                select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+                where n.nspname = 'public' and p.proname in ('create_exam_session', 'record_exam_attempt')
+                  and (has_function_privilege('anon', p.oid, 'EXECUTE')
+                    or has_function_privilege('authenticated', p.oid, 'EXECUTE'))
+              ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20261106090000",
+    name: "individual_plans",
+    checks: [
+      {
+        describes: "subscriptions.plan accepts the individual_* plan values",
+        sql: `select exists (
+          select 1 from pg_constraint
+          where conrelid = 'public.subscriptions'::regclass
+            and conname = 'subscriptions_plan_check'
+            and pg_get_constraintdef(oid) like '%individual_monthly%'
+            and pg_get_constraintdef(oid) like '%individual_annual%'
+        ) as present`,
+      },
+    ],
+  },
+  {
+    version: "20261124090000",
+    name: "admin_review_decisions",
+    checks: [
+      tableExists("admin_draft_review_decisions"),
+      functionExists("deny_admin_review_decision_mutation"),
+      functionExists("authenticated_admin_email"),
+      triggerExists(
+        "public",
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_immutable",
+      ),
+      triggerExists(
+        "public",
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_no_truncate",
+      ),
+      policyExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_read",
+      ),
+      policyExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_insert",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_checks_valid",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_notes_required",
+      ),
+      constraintExists(
+        "admin_draft_review_decisions",
+        "admin_draft_review_decisions_known_defect_blocked",
+      ),
+      {
+        describes:
+          "admin_draft_review_decisions has unique same-revision approval index",
+        sql: `select exists (
+          select 1 from pg_indexes
+          where schemaname = 'public'
+            and tablename = 'admin_draft_review_decisions'
+            and indexname = 'admin_draft_review_decisions_unique_approval_idx'
+        ) as present`,
+      },
+      {
+        describes:
+          "admin_draft_review_decisions is RLS-enabled, admin-only, append-only, and email helper is authenticated-only",
+        sql: `select coalesce((select relrowsecurity from pg_class where oid = to_regclass('public.admin_draft_review_decisions')), false)
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'select')
+          and has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'insert')
+          and not has_table_privilege('authenticated', 'public.admin_draft_review_decisions', 'update,delete,truncate')
+          and not has_table_privilege('anon', 'public.admin_draft_review_decisions', 'select,insert,update,delete,truncate')
+          and has_function_privilege('authenticated', 'public.authenticated_admin_email()', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.authenticated_admin_email()', 'EXECUTE') as present`,
+      },
+    ],
+  },
+  {
+    version: "20261126090000",
+    name: "multi_role_workspaces",
+    checks: [
+      tableExists("user_roles"),
+      tableExists("role_audit_events"),
+      tableExists("security_settings"),
+      functionExists("is_admin"),
+      functionExists("has_active_admin_role"),
+      functionExists("admin_mfa_satisfied"),
+      functionExists("grant_admin_role"),
+      functionExists("revoke_admin_role"),
+      policyExists("user_roles", "user_roles_read_own"),
+      {
+        describes: "grant/revoke are service_role-only and users cannot write user_roles",
+        sql: `select has_function_privilege('service_role', 'public.grant_admin_role(uuid,text,text)', 'EXECUTE')
+          and not has_function_privilege('authenticated', 'public.grant_admin_role(uuid,text,text)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.revoke_admin_role(uuid,text,text)', 'EXECUTE')
+          and not has_table_privilege('authenticated', 'public.user_roles', 'insert,update,delete,truncate')
+          and not has_table_privilege('anon', 'public.user_roles', 'select') as present`,
+      },
+    ],
+  },
+  {
+    version: "20261128090000",
+    name: "harden_definer_helpers",
+    checks: [
+      functionExists("has_active_access"),
+      functionExists("is_student_profile"),
+      functionExists("session_has_attempt"),
+      functionExists("enforce_class_student_is_student"),
+      {
+        describes: "the definer helpers are not executable by anon/PUBLIC; is_student_profile is service-role only; the others stay executable by authenticated",
+        sql: `select not has_function_privilege('anon', 'public.has_active_access(uuid)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.session_has_attempt(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.has_active_access(uuid)', 'EXECUTE')
+          and not has_function_privilege('authenticated', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.session_has_attempt(uuid)', 'EXECUTE') as present`,
       },
     ],
   },

@@ -30,6 +30,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "unauthenticated" }, { status: 401 });
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+  if (profile?.role !== "student") {
+    return NextResponse.json({ error: "students_only" }, { status: 403 });
+  }
+
   const body = await request.json().catch(() => null);
   const parsed = preferencesSchema.safeParse(body);
   if (!parsed.success) {

@@ -15,7 +15,7 @@ export function NextForYouSection({
       <div>
         <h2
           id="next-for-you-heading"
-          className="font-jakarta font-extrabold text-xl md:text-2xl text-plum-dark tracking-tight"
+          className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-xl md:text-2xl text-plum-dark tracking-tight"
         >
           Next for you
         </h2>
@@ -29,7 +29,7 @@ export function NextForYouSection({
         <div className="bg-white rounded-2xl border border-parchment-border p-6 shadow-warm-sm hover:border-primary/40 hover:shadow-warm-card flex flex-col justify-between transition-all group">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="px-2.5 py-0.5 rounded-full bg-primary-tint text-primary font-jakarta font-bold text-xs border border-primary/20">
+              <span className="px-2.5 py-0.5 rounded-full bg-primary-tint text-primary font-jakarta font-semibold text-xs border border-primary/20">
                 {cards[0]?.tag ?? "In Progress"}
               </span>
               <div className="w-10 h-10 rounded-xl bg-primary-tint text-primary flex items-center justify-center border border-primary/20 group-hover:scale-105 transition-transform">
@@ -53,7 +53,7 @@ export function NextForYouSection({
                 </svg>
               </div>
             </div>
-            <h3 className="font-jakarta font-bold text-base md:text-lg text-plum-dark leading-snug">
+            <h3 className="font-jakarta font-semibold text-base md:text-lg text-plum-dark leading-snug">
               {cards[0]?.title ?? "Continue where you left off"}
             </h3>
             <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-2 leading-relaxed">
@@ -62,7 +62,7 @@ export function NextForYouSection({
           </div>
           <div className="mt-5 pt-3.5 border-t border-parchment-border/70">
             <Link
-              className="h-10 px-3.5 rounded-xl bg-parchment-subtle group-hover:bg-primary group-hover:text-white border border-parchment-border text-primary font-jakarta font-bold text-xs md:text-sm flex items-center justify-between transition-colors"
+              className="h-10 px-3.5 rounded-xl bg-parchment-subtle group-hover:bg-primary group-hover:text-white border border-parchment-border text-primary font-jakarta font-semibold text-xs md:text-sm flex items-center justify-between transition-colors"
               href={cards[0]?.href ?? "/student/learn"}
             >
               <span>{cards[0]?.actionLabel ?? "Resume lesson"}</span>
@@ -75,7 +75,7 @@ export function NextForYouSection({
         <div className="bg-white rounded-2xl border border-parchment-border p-6 shadow-warm-sm hover:border-coral-accent/40 hover:shadow-warm-card flex flex-col justify-between transition-all group">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="px-2.5 py-0.5 rounded-full bg-coral-light text-coral-accent font-jakarta font-bold text-xs border border-coral-border">
+              <span className="px-2.5 py-0.5 rounded-full bg-coral-light text-coral-accent font-jakarta font-semibold text-xs border border-coral-border">
                 {cards[1]?.tag ?? "Targeted Review"}
               </span>
               <div className="w-10 h-10 rounded-xl bg-coral-light text-coral-accent flex items-center justify-center border border-coral-border group-hover:scale-105 transition-transform">
@@ -96,7 +96,7 @@ export function NextForYouSection({
                 </svg>
               </div>
             </div>
-            <h3 className="font-jakarta font-bold text-base md:text-lg text-plum-dark leading-snug">
+            <h3 className="font-jakarta font-semibold text-base md:text-lg text-plum-dark leading-snug">
               {cards[1]?.title ?? "Practise what you missed"}
             </h3>
             <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-2 leading-relaxed">
@@ -105,7 +105,7 @@ export function NextForYouSection({
           </div>
           <div className="mt-5 pt-3.5 border-t border-parchment-border/70">
             <Link
-              className="h-10 px-3.5 rounded-xl bg-coral-light/60 group-hover:bg-coral-accent group-hover:text-white border border-coral-border text-coral-accent font-jakarta font-bold text-xs md:text-sm flex items-center justify-between transition-colors"
+              className="h-10 px-3.5 rounded-xl bg-coral-light/60 group-hover:bg-coral-accent group-hover:text-white border border-coral-border text-coral-accent font-jakarta font-semibold text-xs md:text-sm flex items-center justify-between transition-colors"
               href={cards[1]?.href ?? "/practice"}
             >
               <span>{cards[1]?.actionLabel ?? "Practise now"}</span>
@@ -118,7 +118,7 @@ export function NextForYouSection({
         <div className="bg-white rounded-2xl border border-parchment-border p-6 shadow-warm-sm hover:border-teal-accent/40 hover:shadow-warm-card flex flex-col justify-between transition-all group">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="px-2.5 py-0.5 rounded-full bg-teal-light text-teal-accent font-jakarta font-bold text-xs border border-teal-border">
+              <span className="px-2.5 py-0.5 rounded-full bg-teal-light text-teal-accent font-jakarta font-semibold text-xs border border-teal-border">
                 {cards[2]?.tag ?? "Suggested Next"}
               </span>
               <div className="w-10 h-10 rounded-xl bg-teal-light text-teal-accent flex items-center justify-center border border-teal-border group-hover:scale-105 transition-transform">
@@ -140,7 +140,7 @@ export function NextForYouSection({
                 </svg>
               </div>
             </div>
-            <h3 className="font-jakarta font-bold text-base md:text-lg text-plum-dark leading-snug">
+            <h3 className="font-jakarta font-semibold text-base md:text-lg text-plum-dark leading-snug">
               {cards[2]?.title ?? "Try something next"}
             </h3>
             <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-2 leading-relaxed">
@@ -149,7 +149,7 @@ export function NextForYouSection({
           </div>
           <div className="mt-5 pt-3.5 border-t border-parchment-border/70">
             <Link
-              className="h-10 px-3.5 rounded-xl bg-teal-light/60 group-hover:bg-teal-accent group-hover:text-white border border-teal-border text-teal-accent font-jakarta font-bold text-xs md:text-sm flex items-center justify-between transition-colors"
+              className="h-10 px-3.5 rounded-xl bg-teal-light/60 group-hover:bg-teal-accent group-hover:text-white border border-teal-border text-teal-accent font-jakarta font-semibold text-xs md:text-sm flex items-center justify-between transition-colors"
               href={cards[2]?.href ?? "/practice/mixed-practice"}
             >
               <span>{cards[2]?.actionLabel ?? "Start next"}</span>

@@ -1,0 +1,106 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-nap-num-space-001",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "53959092145d262d39b6d6cc5d2d0371dd3eca359c7e23074b0bb65999e2670d",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-nap-num-space-001",
+    "type": "multiple_choice",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "Which point is at position (3, 4)?",
+    "instructions": "The first number counts across from 0. The second number counts up from 0.",
+    "options": [
+      {
+        "id": "point-q",
+        "text": "Q"
+      },
+      {
+        "id": "point-r",
+        "text": "R"
+      },
+      {
+        "id": "point-p",
+        "text": "P"
+      },
+      {
+        "id": "point-s",
+        "text": "S"
+      }
+    ],
+    "visuals": [
+      {
+        "id": "g5-coordinates-grid",
+        "altText": "Coordinate grid from 0 to 8 on both axes with point P at (3, 4), point Q at (4, 3), point R at (6, 2) and point S at (2, 6).",
+        "title": "Four points on a grid",
+        "type": "coordinate_grid",
+        "data": {
+          "xRange": [
+            0,
+            8
+          ],
+          "yRange": [
+            0,
+            8
+          ],
+          "points": [
+            {
+              "x": 3,
+              "y": 4,
+              "label": "P"
+            },
+            {
+              "x": 4,
+              "y": 3,
+              "label": "Q"
+            },
+            {
+              "x": 6,
+              "y": 2,
+              "label": "R"
+            },
+            {
+              "x": 2,
+              "y": 6,
+              "label": "S"
+            }
+          ],
+          "gridStep": 1
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "single_option",
+      "optionId": "point-p"
+    },
+    "explanation": "Position (3, 4) means 3 across and 4 up, which is point P. Point Q at (4, 3) swaps the two numbers, so it is a different position.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Measurement and geometry",
+      "topic": "Coordinates",
+      "skill": "Reading coordinate pairs",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "coordinates",
+        "grid"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "1c5403454613b8f9a268e17eee29e7c24bb426e9a853f05e4a261f09f56b358f"
+}

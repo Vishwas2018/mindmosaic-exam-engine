@@ -23,6 +23,7 @@
 import type { ExamResult } from "../scoring/exam-report";
 import type { Question } from "@/schemas/question.schema";
 import type { SubjectId } from "@/features/taxonomy/subject-registry";
+import { skillLabel } from "@/features/parent-dashboard/skill-label";
 
 // ---------------------------------------------------------------------------
 // Public contracts
@@ -96,7 +97,7 @@ function groupKey(subject: string, skillOrTopic: string): string {
  */
 export function recommendSkills(
   result: ExamResult,
-  questions: readonly Question[],
+  questions: readonly Pick<Question, "id" | "metadata">[],
 ): RecommendationResult {
   const questionById = new Map(questions.map((q) => [q.id, q]));
   const groups = new Map<string, SkillGroup>();
@@ -232,7 +233,7 @@ function buildReason(group: SkillGroup): string {
 
 /** Title-case a skill or topic name for display, preserving acronyms. */
 function formatLabel(raw: string): string {
-  // The raw value is already human-readable in the bank (e.g. "Fractions",
-  // "Punctuation and grammar"). Return as-is.
-  return raw;
+  // Most bank values are already readable ("Fractions"); a dotted taxonomy id ("num.prod.measurement.perimeter") is
+  // turned into words so a child never reads an internal identifier (MT-003).
+  return skillLabel(raw);
 }

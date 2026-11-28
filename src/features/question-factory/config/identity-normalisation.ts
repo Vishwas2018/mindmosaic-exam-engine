@@ -190,7 +190,10 @@ export function normaliseIdentityOrThrow(declaredName: string): NormalisedIdenti
  * triple (provider + modelId + modelFamily), never on interactionMode or
  * on the raw declared display name.
  */
-export function identitiesAreIndependent(a: NormalisedIdentity, b: NormalisedIdentity): boolean {
+export function identitiesAreIndependent(a: NormalisedIdentity | null | undefined, b: NormalisedIdentity | null | undefined): boolean {
+  if (!a || !b) return false;
+  const unknown = new Set(["unknown", "unverified", "legacy-unknown"]);
+  if ([a.modelId, a.modelFamily, b.modelId, b.modelFamily].some(value => unknown.has(value.trim().toLowerCase()))) return false;
   return !(a.provider === b.provider && a.modelId === b.modelId && a.modelFamily === b.modelFamily);
 }
 
@@ -219,9 +222,10 @@ export function identitiesAreIndependent(a: NormalisedIdentity, b: NormalisedIde
  * correctness gate proves it outright and no semantic review is required.
  */
 export function identitiesAreIndependentForJudgementReview(
-  generator: NormalisedIdentity,
-  reviewer: NormalisedIdentity,
+  generator: NormalisedIdentity | null | undefined,
+  reviewer: NormalisedIdentity | null | undefined,
 ): boolean {
+  if (!generator || !reviewer) return false;
   if (!identitiesAreIndependent(generator, reviewer)) {
     return false;
   }

@@ -152,7 +152,7 @@ export function LessonPathwayList({
                 <div className="mt-2 flex flex-wrap items-center gap-2.5 md:mt-0 md:flex-col md:items-end">
                   <Link
                     href={lessonHref}
-                    className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-primary px-4 font-jakarta text-sm font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 font-jakarta text-sm font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-primary"
                   >
                     <span>Start Lesson</span>
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -161,13 +161,13 @@ export function LessonPathwayList({
                   {hasDigitalPractice ? (
                     <Link
                       href={drillHref}
-                      className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-parchment-border bg-white px-3 font-vietnam text-xs font-bold text-plum-dark hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
+                      className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-parchment-border bg-white px-3 font-vietnam text-xs font-bold text-plum-dark hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary"
                     >
                       <PlayCircle className="h-3.5 w-3.5 text-teal-accent" aria-hidden="true" />
                       <span>Practise drill</span>
                     </Link>
                   ) : (
-                    <span className="inline-flex min-h-[38px] items-center gap-1.5 px-3 font-vietnam text-xs font-semibold text-plum-muted">
+                    <span className="inline-flex min-h-11 items-center gap-1.5 px-3 font-vietnam text-xs font-semibold text-plum-muted">
                       {node.isClassroomOnly ? "Practised in class" : "Practice coming soon"}
                     </span>
                   )}

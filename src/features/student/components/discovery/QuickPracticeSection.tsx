@@ -9,7 +9,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
       <div>
         <h2
           id="quick-practice-heading"
-          className="font-jakarta font-extrabold text-xl md:text-2xl text-plum-dark tracking-tight"
+          className="font-[family-name:var(--font-display)] tracking-[-0.02em] font-jakarta font-semibold text-xl md:text-2xl text-plum-dark tracking-tight"
         >
           Quick practice
         </h2>
@@ -26,7 +26,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
               <Timer className="w-[24px] h-[24px]" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="font-jakarta font-bold text-base md:text-lg text-plum-dark leading-snug">
+              <h3 className="font-jakarta font-semibold text-base md:text-lg text-plum-dark leading-snug">
                 10-minute practice
               </h3>
               <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-1.5 leading-relaxed">
@@ -37,7 +37,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
           <div className="mt-5 pt-3.5 border-t border-parchment-border/60 flex items-center justify-end">
             <Link
               href="/practice/mixed-practice"
-              className="h-10 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-jakarta font-bold text-xs md:text-sm flex items-center gap-1.5 transition-all shadow-sm"
+              className="h-10 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-jakarta font-semibold text-xs md:text-sm flex items-center gap-1.5 transition-all shadow-sm"
             >
               <span>Start 10m run</span>
               <span aria-hidden="true">⚡</span>
@@ -52,7 +52,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
               <RefreshCw className="w-[24px] h-[24px]" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="font-jakarta font-bold text-base md:text-lg text-plum-dark leading-snug">
+              <h3 className="font-jakarta font-semibold text-base md:text-lg text-plum-dark leading-snug">
                 Retry missed questions
               </h3>
               <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-1.5 leading-relaxed">
@@ -63,7 +63,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
           <div className="mt-5 pt-3.5 border-t border-parchment-border/60 flex items-center justify-end">
             <Link
               href="/practice"
-              className="h-10 px-4 rounded-xl bg-coral-accent hover:bg-coral-hover text-white font-jakarta font-bold text-xs md:text-sm flex items-center gap-1.5 transition-all shadow-sm"
+              className="h-10 px-4 rounded-xl bg-coral-accent hover:bg-coral-hover text-white font-jakarta font-semibold text-xs md:text-sm flex items-center gap-1.5 transition-all shadow-sm"
             >
               <span>Review &amp; retry</span>
               <span aria-hidden="true">↺</span>
@@ -78,7 +78,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
               <Rocket className="w-[24px] h-[24px]" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="font-jakarta font-bold text-base md:text-lg text-plum-dark leading-snug">
+              <h3 className="font-jakarta font-semibold text-base md:text-lg text-plum-dark leading-snug">
                 Challenge me
               </h3>
               <p className="font-vietnam text-xs md:text-sm text-plum-muted mt-1.5 leading-relaxed">
@@ -89,7 +89,7 @@ export function QuickPracticeSection({ yearLevel }: { yearLevel?: number | null 
           <div className="mt-5 pt-3.5 border-t border-parchment-border/60 flex items-center justify-end">
             <Link
               href="/practice?timing=timed"
-              className="h-10 px-4 rounded-xl bg-teal-accent hover:bg-teal-accent/90 text-white font-jakarta font-bold text-xs md:text-sm flex items-center gap-1.5 transition-all shadow-sm"
+              className="h-10 px-4 rounded-xl bg-teal-accent hover:bg-teal-accent/90 text-white font-jakarta font-semibold text-xs md:text-sm flex items-center gap-1.5 transition-all shadow-sm"
             >
               <span>Take challenge</span>
               <span aria-hidden="true">🚀</span>

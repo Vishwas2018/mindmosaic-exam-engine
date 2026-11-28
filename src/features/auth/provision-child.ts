@@ -8,6 +8,7 @@ import "server-only";
 
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 
+import { maxChildrenForPlan, type BillingPlan } from "@/lib/billing/prices";
 import { SUPABASE_URL } from "@/lib/supabase/config";
 import { createClient as createRequestClient } from "@/lib/supabase/server";
 
@@ -40,6 +41,7 @@ export interface ProvisionChildInput {
 export interface ProvisionChildResult {
   readonly ok: boolean;
   readonly message?: string;
+  readonly errorCode?: "unauthenticated" | "forbidden" | "not_configured";
   /**
    * True when the only thing wrong was that this parent already has a child
    * with this name. The caller is expected to show `message` as a
@@ -101,6 +103,7 @@ export async function provisionChild(
     // Fail clean, not crash: this is a server configuration gap, not a bug.
     return {
       ok: false,
+      errorCode: "not_configured",
       message: "Student provisioning isn't configured on this server yet.",
     };
   }
@@ -112,7 +115,7 @@ export async function provisionChild(
     data: { user: requester },
   } = await requesterClient.auth.getUser();
   if (!requester) {
-    return { ok: false, message: "Sign in as a parent to add a child." };
+    return { ok: false, errorCode: "unauthenticated", message: "Sign in as a parent to add a child." };
   }
 
   const { data: requesterProfile } = await requesterClient
@@ -121,7 +124,7 @@ export async function provisionChild(
     .eq("id", requester.id)
     .single();
   if (requesterProfile?.role !== "parent") {
-    return { ok: false, message: "Only a parent account can add a child." };
+    return { ok: false, errorCode: "forbidden", message: "Only a parent account can add a child." };
   }
 
   /*
@@ -142,13 +145,34 @@ export async function provisionChild(
    * (parent_children "own links", profiles "parent reads linked children"),
    * so this needs no privilege the caller doesn't have.
    */
-  if (!input.allowDuplicate) {
-    const { data: links } = await requesterClient
-      .from("parent_children")
-      .select("child_id")
-      .eq("parent_id", requester.id);
+  const { data: links } = await requesterClient
+    .from("parent_children")
+    .select("child_id")
+    .eq("parent_id", requester.id);
+  const childIds = (links ?? []).map((link) => link.child_id as string);
 
-    const childIds = (links ?? []).map((link) => link.child_id as string);
+  /*
+   * Family limit. Archived children still hold a link (they can be restored),
+   * so they count: otherwise archive-then-add would exceed the cap on restore.
+   * Enforced here, not just in the UI, and regardless of allowDuplicate.
+   */
+  const { data: subscriptionRow } = await requesterClient
+    .from("subscriptions")
+    .select("plan")
+    .eq("parent_id", requester.id)
+    .maybeSingle();
+  const maxChildren = maxChildrenForPlan((subscriptionRow?.plan ?? null) as BillingPlan | null);
+  if (childIds.length >= maxChildren) {
+    return {
+      ok: false,
+      message:
+        maxChildren === 1
+          ? "The Individual plan covers one child. Upgrade to Family from the Billing page to add more."
+          : `A family account can have up to ${maxChildren} children. You've reached that limit.`,
+    };
+  }
+
+  if (!input.allowDuplicate) {
     if (childIds.length > 0) {
       const { data: existing } = await requesterClient
         .from("profiles")

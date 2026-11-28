@@ -1,0 +1,10 @@
+hosted acceptance rmwt5yjbw: feat/stripe-billing-readiness 08352f8a dpl_ExKZyrTDd8Fn5gWbECNTXTsDP4G4
+
+Running 4 tests using 1 worker
+
+  ✓  1 [desktop-1440] › e2e\hosted\s1-billing-lifecycle.spec.ts:36:5 › L1 Family monthly: pay, renew, cancel at period end, resume, expire (52.1s)
+  ✓  2 [desktop-1440] › e2e\hosted\s1-billing-lifecycle.spec.ts:84:5 › L1b failed renewal: access follows Stripe's dunning outcome, and a paid invoice recovers a past_due subscription (30.5s)
+  ✓  3 [desktop-1440] › e2e\hosted\s1-billing-lifecycle.spec.ts:139:5 › L2 plans: annual and Individual cadences map to the right plan and period (21.9s)
+  ✓  4 [desktop-1440] › e2e\hosted\s1-billing-lifecycle.spec.ts:158:5 › L3 declined payments never grant access (9.9s)
+
+  4 passed (2.1m)

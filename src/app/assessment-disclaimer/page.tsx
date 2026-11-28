@@ -9,6 +9,11 @@ export const metadata: Metadata = {
     "MindMosaic is not affiliated with, endorsed by, or administered by NAPLAN, ICAS or AMC.",
 };
 
+// Static prerendering of this page triggers a Next.js 16.4.6 invariant
+// error ("Expected workStore to be initialized"). Render server-side
+// instead; content is static and identical for all users.
+export const dynamic = "force-dynamic";
+
 export default function AssessmentDisclaimerPage() {
   return (
     <LegalPageShell title="Assessment Disclaimer" lastUpdated="29 July 2026">

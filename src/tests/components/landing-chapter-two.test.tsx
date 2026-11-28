@@ -16,7 +16,7 @@ describe("Chapter 2 programmes", () => {
   it("opens with 'Choose your pathway.' as the chapter heading and states what is open", () => {
     render(<ChapterTwoPrograms />);
     expect(screen.getByRole("heading", { level: 2, name: chapterTwo.heading })).toBeInTheDocument();
-    expect(screen.getByText(/Open now: NAPLAN-style and ICAS-style practice for Years 3 and 5/)).toBeInTheDocument();
+    expect(screen.getByText(/Open now: NAPLAN-style Numeracy practice and AMC-style practice modules for Years 3 and 5/)).toBeInTheDocument();
   });
 
   it("renders the six scenes in order, each with an h3, a status and its 0N / 06 label", () => {
@@ -31,15 +31,17 @@ describe("Chapter 2 programmes", () => {
     });
   });
 
-  it("labels NAPLAN and ICAS Available, Curriculum Limited, and the other three In development", () => {
+  it("labels NAPLAN, Curriculum and AMC Limited, and ICAS, Singapore and Selective In development", () => {
     const { container } = render(<ChapterTwoPrograms />);
     const text = (id: string) => container.querySelector(`[data-scene="${id}"]`)!.textContent ?? "";
-    expect(text("naplan")).toContain("Available now · Years 3 & 5");
-    expect(text("icas")).toContain("Available now · Years 3 & 5");
+    expect(text("naplan")).toContain("Limited · Years 3 & 5");
+    expect(text("amc")).toContain("Limited · Years 3 & 5");
+    expect(text("icas")).toContain("In development");
+    expect(text("icas")).not.toContain("Available now");
     expect(text("curriculum")).toContain("Limited · Years 3 & 5");
     expect(text("curriculum")).not.toContain("In development");
     expect(text("curriculum")).not.toContain("Available now");
-    for (const id of ["amc", "singapore", "selective"]) {
+    for (const id of ["singapore", "selective"]) {
       expect(text(id), id).toContain("In development");
       expect(text(id), id).not.toContain("Available now");
     }

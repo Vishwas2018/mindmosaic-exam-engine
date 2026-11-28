@@ -1,0 +1,71 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "man-410cc1f2c7db50b1cdd5fdfe",
+  "revision": 2,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "b4463c215a61e582bf6024e2d66091e998618db737d5a998dce5ace19de37827",
+  "sourceManifestHash": "3f2f0066377ddec6d1aae2706e904e9bcae37ddd97f5d3121ba87afaaf4b0657",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "man-410cc1f2c7db50b1cdd5fdfe",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "The bar chart below shows the number of cans collected by four classes for a recycling drive. What is the combined total shown across all four categories?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-total",
+        "altText": "Bar chart showing the number of cans collected by four classes for a recycling drive, with four categories of different values.",
+        "type": "bar_chart",
+        "data": {
+          "labels": [
+            "3A",
+            "3B",
+            "4A",
+            "4B"
+          ],
+          "values": [
+            22,
+            18,
+            27,
+            15
+          ],
+          "colour": "#4B2E83"
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 82,
+      "tolerance": 0
+    },
+    "explanation": "Adding every value shown on the chart gives the combined total. Adding 22, 18, 27, 15 together gives a combined total of 82.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Statistics",
+      "topic": "Statistics",
+      "skill": "Adding values from a bar chart",
+      "difficulty": "easy",
+      "marks": 1,
+      "estimatedTimeSeconds": 65,
+      "tags": [
+        "statistics",
+        "bar-chart",
+        "totals"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "003ae6e8ad44b67b368b8643612d6cf300ab6bc1a197875858efaa2e1cc2487b"
+}

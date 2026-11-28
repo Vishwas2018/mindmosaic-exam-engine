@@ -1,5 +1,6 @@
 import { CheckCircle2, Hourglass, PlayCircle, RotateCw } from "lucide-react";
 
+import { countLabel } from "@/lib/format-count";
 interface DomainCard {
   index: string;
   subject: string;
@@ -83,7 +84,7 @@ export function ExamCentreBatterySpotlight() {
           <span className="inline-flex items-center gap-1.5 rounded-full bg-mm-tint px-2.5 py-0.5 text-[11px] font-semibold text-primary">
             Official ACARA format · Preview
           </span>
-          <h2 className="mt-2 font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-mm-ink">
+          <h2 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-mm-ink">
             NAPLAN Year 5 Simulation Battery
           </h2>
           <p className="mt-1 max-w-2xl text-sm text-mm-muted">
@@ -102,17 +103,17 @@ export function ExamCentreBatterySpotlight() {
           return (
             <div key={domain.index} className="flex flex-col gap-2 rounded-2xl border border-mm-line bg-mm-page/40 p-4">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-mm-muted">{domain.index}</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-mm-muted">{domain.index}</span>
                 <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${STATUS_STYLES[domain.status]}`}>
                   {domain.statusLabel}
                 </span>
               </div>
-              <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-mm-ink">
+              <h3 className="font-[family-name:var(--font-display)] text-sm font-semibold text-mm-ink">
                 {domain.subject} <span className="font-normal text-mm-muted">({domain.focus})</span>
               </h3>
               <p className="text-xs leading-relaxed text-mm-muted">{domain.description}</p>
               <div className="mt-1 flex items-center justify-between">
-                <span className="text-[11px] font-medium text-mm-muted">{domain.questionCount} questions</span>
+                <span className="text-[11px] font-medium text-mm-muted">{countLabel(domain.questionCount, "question")}</span>
                 <button
                   type="button"
                   title={`${domain.actionLabel} (illustrative example)`}

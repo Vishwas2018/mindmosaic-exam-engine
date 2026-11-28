@@ -11,11 +11,16 @@ import { createSessionRequestSchema } from "@/features/exam-engine/scoring/serve
 import { selectExamQuestions, type ExamSelectionConfig } from "@/features/exam-engine/selection";
 import type { AuthoringQuestion } from "@/features/exam-engine/types";
 import { toCandidateQuestions } from "@/features/exam-engine/types";
+import { studentHasFullAccess } from "@/features/billing/student-access";
+import { selectFreeSample } from "@/lib/billing/free-sample";
+import { FREE_PLAN } from "@/lib/billing/prices";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { createTargetSession } from "@/server/assessment/target-session-writes";
 import { resolveSessionStorageModel } from "@/server/assessment/storage-model";
 import { getExamBank } from "@/server/exam-bank";
+import { createLegacyExamSession } from "@/server/exam-write/legacy-exam-writes";
+import { isScholarshipHiddenFor, withScholarshipSample } from "@/server/scholarship-sample-preview";
 
 /**
  * Creates a server-selected exam session for a signed-in student
@@ -34,16 +39,17 @@ import { getExamBank } from "@/server/exam-bank";
  * fix. See tests/rls/exam-attempts.test.ts (MM-AUTH-01 cases) and
  * src/tests/unit/exam-session-create-route.test.ts.
  *
- * MM-AUD-SEC-001: the session row is written by the SECURITY DEFINER
- * function public.create_exam_session (see
- * supabase/migrations/20260811090000_exam_write_rpcs.sql), not by an
- * insert through the caller's own JWT. `authenticated` no longer holds
- * INSERT on exam_sessions at all (20260811091000), because the policy that
- * used to guard it could only constrain WHO the row belonged to — never
- * that selected_question_ids was the server's own selection rather than a
- * paper the student picked for themselves over PostgREST. The role check
- * below still runs first so a non-student gets a clear 403; the function
- * re-checks it independently (SQLSTATE MM002) as the actual boundary.
+ * MM-AUD-SEC-001 / P1 lockdown: the session row is written by the SECURITY DEFINER
+ * function public.create_exam_session_for, executable only by the dedicated
+ * mindmosaic_exam_writer role (20261031090000), never by an insert through the
+ * caller's own JWT. `authenticated` holds no INSERT on exam_sessions
+ * (20260811091000) and, since 20261031090100, cannot execute the original
+ * client-callable create_exam_session either: that function took the question
+ * list from the caller, so a student could create a one-question "full paper"
+ * over PostgREST. The student id passed here is the one this route has just
+ * authenticated. The role check below still runs first so a non-student gets a
+ * clear 403; the function re-checks it independently (SQLSTATE MM002) as the
+ * actual boundary.
  */
 
 /* Submission grace beyond the timed deadline; late submissions are clamped
@@ -99,6 +105,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "students_only" }, { status: 403 });
   }
 
+  /* Free plan entitlement, resolved before either storage path so neither can
+     serve a free student more than the sample. */
+  const fullAccess = await studentHasFullAccess(supabase, user.id);
+
   /* Spec §12.7 step 6: a server-side flag chooses the storage model for a NEWLY
      created session, and only for a new one. The answer comes from the database
      (ADR-006 Amendment C) so this route and `create_assessment_session` cannot
@@ -114,6 +124,14 @@ export async function POST(request: Request): Promise<NextResponse> {
      depends on it. */
   const storageModel = await resolveSessionStorageModel(supabase);
   if (storageModel === "version_pinned") {
+    /* The target model draws its own paper and has no free-sample path yet, so
+       a free student is refused rather than handed more than the sample. */
+    if (!fullAccess) {
+      return NextResponse.json(
+        { error: "upgrade_required", message: "This practice isn't part of the Free plan." },
+        { status: 402 },
+      );
+    }
     /* THE STEP 7 SEAM, closed (Gate A item A9). Read dispatch (steps 7/8) and
        the target write RPCs (A1-A3, A10-A13) are done and tested, so a
        target-cohort caller now gets a real, server-selected paper on the
@@ -157,7 +175,23 @@ export async function POST(request: Request): Promise<NextResponse> {
   /* Server-chosen, never client-supplied: the client cannot pick or
      predict its own question selection for a signed-in session. */
   const seed = crypto.randomUUID();
-  const bank = getExamBank(bankId);
+  /* Preview-only second source for the Scholarship sample: a no-op unless the gated, allowlisted preview is active. */
+  const fullBank = await withScholarshipSample(getExamBank(bankId), user.id);
+
+  /* Free plan: a student whose linked parent has no active access is served a
+     fixed sample of each programme, not the bank. Full-length papers are part
+     of the paid plans and are refused outright. (A no-op unless billing
+     enforcement is on — see student-access.ts.) */
+  if (!fullAccess && patternId !== undefined) {
+    return NextResponse.json(
+      {
+        error: "upgrade_required",
+        message: "Full-length exam papers are part of the Individual and Family plans.",
+      },
+      { status: 402 },
+    );
+  }
+  const bank = fullAccess ? fullBank : selectFreeSample(fullBank);
 
   let config: ExamSelectionConfig;
   let selectedQuestions: readonly AuthoringQuestion[];
@@ -167,7 +201,7 @@ export async function POST(request: Request): Promise<NextResponse> {
        server's own copy of the registry, so the only thing the request
        decides is WHICH pattern — never how many questions or how long. */
     const pattern = getExamPattern(patternId);
-    if (!pattern) {
+    if (!pattern || isScholarshipHiddenFor(pattern, user.id)) {
       return NextResponse.json({ error: "unknown_pattern" }, { status: 404 });
     }
     /* Deferred patterns (the writing tasks) are listed in the picker and are
@@ -195,6 +229,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   } else {
     /* parsed.data guarantees exactly one of config/patternId is present. */
     config = parsed.data.config!;
+    /* The free sample is smaller than any fixed paper length, so a limited
+       student sits "all of it" rather than being told it does not fit. */
+    if (!fullAccess) config = { ...config, questionCount: "full" };
     /* Scholarship-style content is sat only as a whole named paper, never as a custom-length or mixed draw. */
     if (config.examStyle === "scholarship_style") {
       return NextResponse.json({ error: "scholarship_requires_paper" }, { status: 422 });
@@ -205,6 +242,15 @@ export async function POST(request: Request): Promise<NextResponse> {
       seed,
     );
     if (!selection.ok) {
+      if (!fullAccess) {
+        return NextResponse.json(
+          {
+            error: "free_sample_empty",
+            message: `The Free plan includes ${FREE_PLAN.sampleQuestionsPerProgramme} sample questions per programme, and none match this selection.`,
+          },
+          { status: 422 },
+        );
+      }
       return NextResponse.json(
         {
           error: "insufficient_questions",
@@ -224,15 +270,17 @@ export async function POST(request: Request): Promise<NextResponse> {
       : durationSeconds + TIMED_GRACE_SECONDS;
   const expiresAt = new Date(Date.now() + lifetimeSeconds * 1000);
 
-  /* student_id is not passed: create_exam_session takes it from auth.uid()
-     inside the database, so this route cannot record a session against
-     anyone but the caller even if it wanted to. Returns the new id. */
+  /* The student id is the one this route just authenticated (`user.id`), never anything from the request body, and
+     the write is made by the dedicated mindmosaic_exam_writer role: since 20261031090100 `authenticated` cannot
+     execute the legacy create function, so a client can no longer create a session with a question list of its own.
+     The database still re-checks that the id is a student. */
   const mode = config.confidenceMode ? "confidence" : "standard";
-  const { data: sessionId, error } = await supabase.rpc("create_exam_session", {
-    p_config: { ...config, bankId, mode },
-    p_seed: seed,
-    p_selected_question_ids: selectedQuestions.map((question) => question.id),
-    p_expires_at: expiresAt.toISOString(),
+  const { sessionId, error } = await createLegacyExamSession({
+    studentId: user.id,
+    config: { ...config, bankId, mode },
+    seed,
+    selectedQuestionIds: selectedQuestions.map((question) => question.id),
+    expiresAt: expiresAt.toISOString(),
   });
   if (error || !sessionId) {
     /* MM002 is the function's own role gate firing. The profile check above
@@ -241,6 +289,10 @@ export async function POST(request: Request): Promise<NextResponse> {
        403 the client knows how to handle rather than a generic 500. */
     if (error?.code === "MM002") {
       return NextResponse.json({ error: "students_only" }, { status: 403 });
+    }
+    /* Fails closed when the write role is not configured; never falls back to the user's own client. */
+    if (error?.code === "not_configured") {
+      return NextResponse.json({ error: "not_configured" }, { status: 503 });
     }
     return NextResponse.json({ error: "session_not_created" }, { status: 500 });
   }

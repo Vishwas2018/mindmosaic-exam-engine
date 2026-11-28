@@ -12,12 +12,13 @@ import {
 } from "./helpers/screen-helpers";
 
 const PAGES = [
-  { path: "/sign-in", heading: "Sign in" },
+  { path: "/sign-in", heading: "Welcome to MindMosaic" },
+  { path: "/sign-in?entry=signin", heading: "Parent sign-in" },
   {
     path: "/sign-up",
-    heading: PUBLIC_SIGNUP_ENABLED ? "Create the parent account" : "Sign-up is closed",
+    heading: PUBLIC_SIGNUP_ENABLED ? "Create a family account" : "Sign-up is closed",
   },
-  { path: "/student-sign-in", heading: "Sign in" },
+  { path: "/student-sign-in", heading: "Student sign-in" },
 ] as const;
 
 test.describe("auth pages: accessibility and responsive layout", () => {
@@ -40,7 +41,10 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
+    /* Wait for the sign-in form itself, not just <main>: the panel sits in a <Suspense> (it reads useSearchParams),
+       so <main> first holds an aria-hidden placeholder. A walk started then finds no fields (failed first try in both
+       CI runs on 1f211563, D-038). */
+    await visitAndStabilize(page, "/sign-in?entry=signin", { readyLocator: "#auth-ident" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const emailIndex = sequence.indexOf("auth-ident");
@@ -56,11 +60,13 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/student-sign-in", { readyLocator: "main" });
+    /* Same Suspense placeholder as /sign-in (D-038): <main> first holds an aria-hidden skeleton, so waiting on
+       <main> let the walk start before the login-code field existed (A-30: failed in 440 ms, flaky in CI). */
+    await visitAndStabilize(page, "/student-sign-in", { readyLocator: "#auth-ident" });
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
 
     const codeIndex = sequence.indexOf("auth-ident");
-    const pinIndex = sequence.indexOf("auth-secret");
+    const pinIndex = sequence.indexOf("Your PIN, number 1 of 6");
 
     expect(codeIndex).toBeGreaterThanOrEqual(0);
     expect(pinIndex).toBeGreaterThan(codeIndex);
@@ -73,7 +79,7 @@ test.describe("auth pages: accessibility and responsive layout", () => {
     page,
   }) => {
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    await visitAndStabilize(page, "/sign-in", { readyLocator: "main" });
+    await visitAndStabilize(page, "/sign-in?entry=signin", { readyLocator: "main" });
 
     await expect(page.getByRole("button", { name: "Create an account" })).toHaveCount(0);
 

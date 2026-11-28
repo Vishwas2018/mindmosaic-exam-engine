@@ -10,7 +10,7 @@ import {
 } from "../helpers/screen-helpers";
 
 test.describe("parent dashboard: accessibility and responsive layout", () => {
-  test("empty state (parent with no children) has no violations at every viewport", async ({
+  test("a parent with no children lands on setup, which has no violations at every viewport", async ({
     contextAs,
   }) => {
     const context = await contextAs("parent-no-children");
@@ -19,9 +19,9 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      await expect(
-        page.getByRole("heading", { name: "No children linked to your account yet" }),
-      ).toBeVisible();
+      await expect(page).toHaveURL(/\/parent\/setup$/);
+      await expect(page.getByRole("heading", { level: 1, name: /^Welcome/ })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Add your first child" })).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(page, "main button, main a[href], main input, main select");
       await assertNoSeriousAccessibilityViolations(page, `parent dashboard, no children (${viewport.name})`);
@@ -35,9 +35,9 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-      // Single child: the child-switcher tablist must not render.
-      await expect(page.getByRole("tablist", { name: "Choose a child" })).toHaveCount(0);
+      await expect(page.getByRole("heading", { level: 1, name: "Family Overview" })).toBeVisible();
+      // Single child: ChildSwitcher only renders when there are 2 or more children.
+      await expect(page.locator('[aria-label="Choose a child"]')).toHaveCount(0);
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(page, "main button, main a[href], main input, main select");
       await assertNoSeriousAccessibilityViolations(page, `parent dashboard, one child (${viewport.name})`);
@@ -53,37 +53,40 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
       await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      const tabs = page.getByRole("tablist", { name: "Choose a child" });
-      await expect(tabs).toBeVisible();
+      const switcher = page.locator('[aria-label="Choose a child"]');
+      await expect(switcher).toBeVisible();
       await expectNoHorizontalOverflow(page);
-      await expectMinimumTouchTargets(page, 'main [role="tab"], main button, main a[href], main input, main select');
+      await expectMinimumTouchTargets(
+        page,
+        'main [aria-label="Choose a child"] button, main button, main a[href], main input, main select',
+      );
       await assertNoSeriousAccessibilityViolations(page, `parent dashboard, multi child (${viewport.name})`);
     }
 
     // Switching the active child must not introduce new violations.
     await setViewport(page, A11Y_VIEWPORTS[0]);
-    const secondTab = page.getByRole("tab").nth(1);
-    await secondTab.click();
-    await expect(secondTab).toHaveAttribute("aria-selected", "true");
+    const secondChildButton = page.locator('[aria-label="Choose a child"] button').nth(1);
+    await secondChildButton.click();
+    await expect(secondChildButton).toHaveAttribute("aria-pressed", "true");
     await expectNoHorizontalOverflow(page);
     await assertNoSeriousAccessibilityViolations(page, "parent dashboard, after switching child");
   });
 
-  test("keyboard walkthrough reaches the child switcher and add-child form in order, with visible focus", async ({
+  test("keyboard walkthrough reaches the child switcher and then each child card, with visible focus", async ({
     contextAs,
   }) => {
     const context = await contextAs("parent-multi-children");
     const page = await context.newPage();
     await setViewport(page, A11Y_VIEWPORTS[0]);
     await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-    await expect(page.getByRole("tablist", { name: "Choose a child" })).toBeVisible();
+    await expect(page.locator('[aria-label="Choose a child"]')).toBeVisible();
 
     const sequence = await walkTabOrderAndAssertVisibleFocus(page);
-    const firstTabIndex = sequence.findIndex((key) => key.includes("BUTTON"));
-    const nameFieldIndex = sequence.indexOf("add-child-name");
+    const firstSwitcherIndex = sequence.findIndex((key) => key.includes("BUTTON"));
+    const firstCardActionIndex = sequence.findIndex((key) => /View progress|get started|Sign-in details/.test(key));
 
-    expect(firstTabIndex).toBeGreaterThanOrEqual(0);
-    expect(nameFieldIndex).toBeGreaterThan(firstTabIndex);
+    expect(firstSwitcherIndex).toBeGreaterThanOrEqual(0);
+    expect(firstCardActionIndex, sequence.join(" > ")).toBeGreaterThan(firstSwitcherIndex);
   });
 
   test("add-child form is accessible at every viewport", async ({ contextAs }) => {
@@ -92,9 +95,9 @@ test.describe("parent dashboard: accessibility and responsive layout", () => {
 
     for (const viewport of A11Y_VIEWPORTS) {
       await setViewport(page, viewport);
-      await visitAndStabilize(page, "/parent", { readyLocator: "main" });
-      await expect(page.getByRole("heading", { name: "Add a child" })).toBeVisible();
-      await expect(page.getByLabel("Child's name")).toBeVisible();
+      await visitAndStabilize(page, "/parent/setup", { readyLocator: "main" });
+      await expect(page.getByRole("heading", { name: "Add a child" }).first()).toBeVisible();
+      await expect(page.getByLabel("First name")).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await expectMinimumTouchTargets(page, "main button, main a[href], main input, main select");
     }

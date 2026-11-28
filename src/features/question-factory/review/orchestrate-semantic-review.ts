@@ -48,7 +48,7 @@ import { writeSemanticCompletionEvidence } from "./governed-semantic-evidence-wr
  * rule, unchanged behaviour.
  */
 function findIndependentReviewerRecordAtThreshold(
-  generatorIdentity: NormalisedIdentity,
+  generatorIdentity: NormalisedIdentity | null,
   chain: readonly ReviewRecord[],
   current: { readonly candidateId: string; readonly contentHash: string; readonly blueprintHash: string; readonly revision: number },
 ): ReviewRecord | undefined {
@@ -70,7 +70,7 @@ function findIndependentReviewerRecordAtThreshold(
 }
 
 function hasIndependentReviewerRecordAtThreshold(
-  generatorIdentity: NormalisedIdentity,
+  generatorIdentity: NormalisedIdentity | null,
   chain: readonly ReviewRecord[],
   current: { readonly candidateId: string; readonly contentHash: string; readonly blueprintHash: string; readonly revision: number },
 ): boolean {

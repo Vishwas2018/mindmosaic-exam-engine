@@ -58,7 +58,11 @@
  *     /signup are not routes here (/sign-in and /sign-up are).
  */
 
-import { FAMILY_PLAN } from "@/lib/billing/prices";
+import {
+  annualSavingsPercent,
+  FAMILY_PLAN,
+  INDIVIDUAL_PLAN,
+} from "@/lib/billing/prices";
 
 /**
  * The one real support address — every page that mentions it (FAQ, footer,
@@ -198,7 +202,7 @@ export const hero = {
       label: "Prepare",
       eyebrow: "Prepare",
       headline: ["Ready for the", "real challenge."],
-      body: "Build familiarity with NAPLAN-style and ICAS-style practice for Years 3 and 5, including timed options where available.",
+      body: "Build familiarity with NAPLAN-style Numeracy practice for Years 3 and 5, including timed options where available. More subjects and styles open as reviewed questions are added.",
     },
     {
       id: "understand",
@@ -219,7 +223,7 @@ export const hero = {
       label: "Explore",
       eyebrow: "Explore",
       headline: ["Learning beyond", "one pathway."],
-      body: "Start with available NAPLAN- and ICAS-style practice, explore limited curriculum learning, and see what is in development.",
+      body: "Start with NAPLAN-style Numeracy practice, explore limited curriculum learning, and see what is in development.",
     },
   ],
   demo: {
@@ -252,7 +256,7 @@ export const hero = {
     "Parent progress view",
   ],
   availability: {
-    text: "Available now: NAPLAN-style and ICAS-style practice for Years 3 and 5.",
+    text: "Available now: NAPLAN-style Numeracy practice and AMC-style practice modules for Years 3 and 5.",
     link: { label: "See what's open", href: routes.programs },
   },
 } as const;
@@ -269,7 +273,7 @@ export const chapterTwo = {
   heading: "Choose your pathway.",
   intro: "Choose the pathway that matches what your child is learning, preparing for or ready to explore next.",
   availability:
-    "Open now: NAPLAN-style and ICAS-style practice for Years 3 and 5. Curriculum learning has limited Years 3 and 5 lesson coverage. The remaining pathways are in development.",
+    "Open now: NAPLAN-style Numeracy practice and AMC-style practice modules for Years 3 and 5. Curriculum learning has limited Years 3 and 5 lesson coverage. The remaining pathways, including ICAS-style, are in development.",
   progressLabel: "Programme progress",
   handoff: {
     heading: "See how MindMosaic works.",
@@ -432,13 +436,13 @@ export const programmes = {
       from: 3,
       to: 5,
       coveredYears: [3, 5],
-      tbc: "Years 7 and 9 to be confirmed",
-      status: "available",
+      tbc: "Reading, Language Conventions and Years 7 and 9 to be confirmed",
+      status: "limited",
       blurb:
-        "Assessment-format practice in the NAPLAN test areas, available as short exam-style sets or full-length simulations. Original questions only — not past papers.",
-      subjects: ["Numeracy", "Reading", "Writing", "Language conventions"],
-      practice: "Available",
-      exam: "Full-length simulation",
+        "NAPLAN-style Numeracy practice is open for Years 3 and 5. Reading and Language Conventions open as their reviewed questions are added. Original questions only — not past papers.",
+      subjects: ["Numeracy"],
+      practice: "Numeracy practice",
+      exam: "Numeracy papers only",
       cta: { label: "Explore exam preparation", href: routes.examPrep },
     },
     {
@@ -450,14 +454,13 @@ export const programmes = {
          refers to. */
       from: 3,
       to: 5,
-      coveredYears: [3, 5],
-      tbc: "Wider year coverage to be confirmed",
-      status: "available",
+      tbc: "Planned scope — no year level is open yet",
+      status: "in_development",
       blurb:
-        "Extension-style questions that reward close reading and unfamiliar problems, in the ICAS response formats.",
+        "Extension-style questions that reward close reading and unfamiliar problems, in the ICAS response formats. Questions are written and still being reviewed, so none is open to practise yet.",
       subjects: ["Mathematics", "English", "Spelling"],
-      practice: "Available",
-      exam: "Short exam-style sets",
+      practice: IN_DEVELOPMENT,
+      exam: IN_DEVELOPMENT,
       cta: { label: "Explore exam preparation", href: routes.examPrep },
     },
     {
@@ -466,13 +469,14 @@ export const programmes = {
       category: "Competitions",
       from: 3,
       to: 12,
-      tbc: "Planned scope — no year level is live yet",
-      status: "in_development",
+      coveredYears: [3, 5],
+      tbc: "Practice modules for Years 3 and 5 only; full-length papers and other years are planned",
+      status: "limited",
       blurb:
-        "Competition-style mathematics: multi-step reasoning, pattern spotting and problems designed to be worked rather than recalled.",
+        "Competition-style mathematics: multi-step reasoning, pattern spotting and problems designed to be worked rather than recalled. Years 3 and 5 have shorter practice modules, not full-length papers.",
       subjects: ["Mathematics", "Problem solving", "Logic & reasoning"],
-      practice: IN_DEVELOPMENT,
-      exam: IN_DEVELOPMENT,
+      practice: "Practice modules (Years 3 and 5)",
+      exam: "Full-length papers not open yet",
       cta: { label: "Explore exam preparation", href: routes.examPrep },
     },
     {
@@ -533,7 +537,7 @@ function highlightStatus(programmeId: string) {
  * "Find the right program": four pathways, each with its real status from
  * the same facts the full catalogue uses (`programmes` above). Nothing is
  * shown as available until a learner can use it — the advanced pathways
- * are named because families ask about them, and labelled Planned.
+ * are named because families ask about them, and labelled Planned (or Limited where only part is open, as AMC-style practice modules are).
  */
 export const programHighlights = {
   eyebrow: "Programs",
@@ -553,8 +557,8 @@ export const programHighlights = {
       id: "naplan",
       icon: "naplan" as const,
       name: "NAPLAN-style practice",
-      body: "Numeracy, Reading and Language Conventions, in the formats Years 3 and 5 will recognise.",
-      meta: "Years 3 and 5",
+      body: "Numeracy practice in the format Years 3 and 5 will recognise. Reading and Language Conventions open as their reviewed questions are added.",
+      meta: "Years 3 and 5 · Numeracy open",
       ...highlightStatus("naplan-style"),
       href: `${routes.programs}/naplan-style`,
     },
@@ -562,8 +566,8 @@ export const programHighlights = {
       id: "icas",
       icon: "icas" as const,
       name: "ICAS-style practice",
-      body: "Mathematics, Reading and Language questions that reward close reading and unfamiliar problems.",
-      meta: "Years 3 and 5",
+      body: "Mathematics, Reading and Language questions that reward close reading and unfamiliar problems. Still being reviewed.",
+      meta: "Years 3 and 5 · Not open yet",
       ...highlightStatus("icas-style"),
       href: `${routes.programs}/icas-style`,
     },
@@ -580,8 +584,8 @@ export const programHighlights = {
       id: "advanced",
       icon: "advanced" as const,
       name: "Advanced & competition pathways",
-      body: "AMC-style, Olympiad-style, selective-entry and scholarship preparation.",
-      meta: "Being built — not open yet",
+      body: "AMC-style practice modules are open for Years 3 and 5. Full AMC-style papers, Olympiad-style, selective-entry and scholarship preparation are being built.",
+      meta: "AMC-style modules open · full papers not open yet",
       ...highlightStatus("amc-style"),
       href: routes.programs,
     },
@@ -1205,151 +1209,133 @@ export const audiences = {
 /* ---------- Plans ---------- */
 
 /*
- * Screen 3 of the design handoff, reconciled against the real billing
- * model (DESIGN_AUDIT.md §13).
+ * Three plans, all priced from src/lib/billing/prices.ts so this page, the
+ * billing page and Stripe cannot disagree:
  *
- * The design's three cards are a 7-day free trial, a $14.99 month and a
- * $149 family year. Two of those are real and one is not:
+ *  - Free: guest practice with no account or card. Copy must not promise a
+ *    question count: the guest-session endpoint is not limited by billing
+ *    (docs/PRIVACY_AND_BILLING_GUARDRAILS.md). Only signed-in students of a
+ *    parent without access are held to FREE_PLAN's sample, and only while
+ *    BILLING_ENFORCEMENT_ENABLED is on. Do not describe that as the Free plan.
+ *  - Individual: one learner.
+ *  - Family: up to FAMILY_PLAN.maxChildren learners.
  *
- *  - There is NO trial mechanism anywhere in this product — no trial days,
- *    no trial state on a subscription, no path that starts one. The first
- *    card is therefore the thing that genuinely costs nothing and always
- *    will: guest practice, ungated and account-free. It keeps the design's
- *    "$0" and its position; it does not keep "7 days", because that would
- *    describe a feature that does not exist.
- *  - The monthly and yearly cards show "Price to be confirmed", not a real
- *    figure: src/lib/billing/prices.ts's amounts are still placeholders
- *    (FAMILY_PLAN_AVAILABILITY === "roadmap"), and no public page may
- *    display them until that flips. Both cards' CTA is "Register
- *    interest" → /contact, never a "Subscribe" link to a checkout that
- *    cannot yet take a real payment.
- *
- * The Individual learner tier is genuinely unpriced. It is not a fourth
- * card (the design has three); it sits under the comparison table, where
- * "still being confirmed" reads as a fact rather than an offer.
+ * There is no trial mechanism advertised here.
  */
 
 export const plans = {
   eyebrow: "Plans",
   heading: "Three ways to access MindMosaic.",
-  intro:
-    "Guest practice is free today and is never gated behind a subscription. The Family plan is still being finalised, so it can't be bought yet.",
+  intro: "Try practice as a guest, free, with no account or card. Subscribe for child profiles, saved progress, full-length exam papers and a parent dashboard.",
   /** Sits on the top edge of the featured card. */
-  featuredTab: "Most families choose this",
+  featuredTab: "Best value",
   items: [
     {
       id: "free",
       eyebrow: "Free access",
-      name: "Practise as a guest",
-      body: "A full practice session, scored, with a worked explanation after every question — and no account at any point.",
-      price: "$0" as string | null,
+      name: "Free",
+      body: "Try practice as a guest, scored, with a worked explanation after every question.",
+      price: "A$0" as string | null,
       cadence: "forever" as string | null,
-      note: "Unlimited guest practice — no account required.",
+      note: "Guest practice. No account or card needed.",
       pending: false,
       features: [
-        "Unlimited practice sessions",
+        "Practise as a guest, no account needed",
         "A worked explanation after every question",
         "All 14 question types",
-        "Nothing about the session stored on our servers",
+        "No account needed to try",
       ],
-      /* Not `startFree`: this card's whole claim is that it needs no
-         account, so it must not lead to the account form. */
-      cta: { label: "Start practising", href: routes.guestPractice },
+      /* Not `startFree`: this card's claim is that it needs no account, so it
+         must not lead to the account form. */
+      cta: { label: "Try the samples", href: routes.guestPractice },
       highlighted: false,
       tone: "default" as const,
     },
     {
-      id: "family-monthly",
-      eyebrow: "Family access",
-      name: "Month by month",
-      body: `Every mode, saved and reported, for up to ${FAMILY_PLAN.maxChildren} student profiles under one parent account.`,
-      price: "Price to be confirmed" as string | null,
-      cadence: null as string | null,
-      note: "Billing and refund terms are being finalised before checkout opens.",
+      id: "individual",
+      eyebrow: "One learner",
+      name: INDIVIDUAL_PLAN.name,
+      body: "The full question bank and progress tracking for a single learner.",
+      price: INDIVIDUAL_PLAN.monthly.display as string | null,
+      cadence: "per month" as string | null,
+      note: `or ${INDIVIDUAL_PLAN.annual.display} a year, saving ${annualSavingsPercent(INDIVIDUAL_PLAN)}%.`,
       pending: false,
       features: [
-        "Everything in guest practice, kept",
-        "Progress saved across sessions and devices",
-        "Exam simulations with results and explanations",
-        "Parent view with skill-by-skill reporting",
-        `Up to ${FAMILY_PLAN.maxChildren} student profiles`,
+        `${INDIVIDUAL_PLAN.maxChildren} student profile`,
+        "Full question bank, every programme",
+        "Full-length practice exam papers",
+        "Progress saved, with skill-by-skill reporting",
         "Cancel any time",
       ],
-      cta: { label: "Register interest", href: routes.contact },
-      highlighted: true,
+      cta: { label: "See plans", href: "/billing" },
+      highlighted: false,
       tone: "default" as const,
     },
     {
-      id: "family-annual",
+      id: "family",
       eyebrow: "Best value",
-      name: "Family year",
-      body: "The same Family access, paid twelve months at a time.",
-      price: "Price to be confirmed" as string | null,
-      cadence: null as string | null,
-      note: "Billing and refund terms are being finalised before checkout opens.",
+      name: FAMILY_PLAN.name,
+      body: `Everything in Individual, for up to ${FAMILY_PLAN.maxChildren} student profiles under one parent account.`,
+      price: FAMILY_PLAN.monthly.display as string | null,
+      cadence: "per month" as string | null,
+      note: `or ${FAMILY_PLAN.annual.display} a year, saving ${annualSavingsPercent(FAMILY_PLAN)}%.`,
       pending: false,
       features: [
-        "Everything in the monthly plan",
-        "Twelve months of access",
+        `Up to ${FAMILY_PLAN.maxChildren} student profiles`,
+        "Everything in Individual",
+        "Learning observations and recommendations",
+        "Exam history and re-attempts",
         "One parent view across every child",
       ],
-      cta: { label: "Register interest", href: routes.contact },
-      highlighted: false,
+      cta: { label: "See plans", href: "/billing" },
+      highlighted: true,
       /** The design gives this card a coral eyebrow. */
       tone: "coral" as const,
     },
   ],
 
-  /* ---- Nine-row comparison table ---- */
+  /* ---- Comparison table ---- */
   comparison: {
     heading: "What each plan includes",
     intro:
       "Where a row says a programme is still being written, that is why it is unavailable — not a plan holding it back.",
-    columns: ["Guest", "Monthly", "Family year"],
+    columns: ["Free", INDIVIDUAL_PLAN.name, FAMILY_PLAN.name],
     rows: [
-      { label: "Practice with instant explanations", values: ["Yes", "Yes", "Yes"] },
-      { label: "All 14 question types", values: ["Yes", "Yes", "Yes"] },
       {
-        label: "Exam simulations (NAPLAN-style, ICAS-style)",
-        values: ["Yes", "Yes", "Yes"],
+        label: "Practice questions",
+        values: ["Guest practice", "Full bank", "Full bank"],
       },
+      { label: "Worked explanation after every question", values: ["Yes", "Yes", "Yes"] },
+      { label: "All 14 question types", values: ["Yes", "Yes", "Yes"] },
+      { label: "Full-length exam papers", values: ["No", "Yes", "Yes"] },
       { label: "Progress saved between sessions", values: ["No", "Yes", "Yes"] },
       { label: "Parent view and skill reporting", values: ["No", "Yes", "Yes"] },
       {
         label: "Student profiles included",
-        values: [
-          "None",
-          String(FAMILY_PLAN.maxChildren),
-          String(FAMILY_PLAN.maxChildren),
-        ],
+        values: ["None", String(INDIVIDUAL_PLAN.maxChildren), String(FAMILY_PLAN.maxChildren)],
       },
+      { label: "Learning observations and exam history", values: ["No", "No", "Yes"] },
       {
         label: "Australian Curriculum learning pathways",
-        values: ["Being written", "Being written", "Being written"],
-      },
-      {
-        label: "Singapore Maths programme",
         values: ["Being written", "Being written", "Being written"],
       },
       { label: "Cancel any time", values: ["—", "Yes", "Yes"] },
     ],
     footnote:
-      "An Individual learner tier — one student, full access, below the family price — is planned. Its price and inclusions are still being confirmed, so it is not offered here rather than being listed at a number we would have to change.",
+      "Prices are in Australian dollars and include GST. Annual plans cost less than twelve monthly payments.",
   },
 
-  /* ---- Five billing FAQs ---- */
+  /* ---- Billing FAQs ---- */
   faq: {
     heading: "Billing questions",
     items: [
       {
         question: "Do I need a card to try MindMosaic?",
-        answer:
-          "No — and not because of a trial. Guest practice needs no account and no card at all. Sessions are scored and explained in the browser; what an account adds is keeping that progress.",
+        answer: "No. You can practise as a guest with no card and no account, with every answer scored and explained.",
       },
       {
-        question: "Is there a free trial?",
-        answer:
-          "Not today. Rather than describe one that does not exist, the free tier is simply free: unlimited guest practice, permanently, with no card and no expiry.",
+        question: "What does the Free plan include?",
+        answer: "Guest practice with no account or card, with a worked explanation after every question. A subscription adds child profiles, saved progress, full-length exam papers and the parent dashboard.",
       },
       {
         question: "Can I switch between monthly and yearly?",
@@ -1357,8 +1343,8 @@ export const plans = {
           "Yes, from the billing page in the parent account. A switch takes effect at the next billing date and the remaining paid period is credited.",
       },
       {
-        question: "How many children does the Family plan cover?",
-        answer: `Up to ${FAMILY_PLAN.maxChildren} student profiles under one parent account, each with its own progress, all visible from one parent view.`,
+        question: "How many children does each plan cover?",
+        answer: `Individual covers ${INDIVIDUAL_PLAN.maxChildren} student profile. Family covers up to ${FAMILY_PLAN.maxChildren} under one parent account, each with its own progress, all visible from one parent view.`,
       },
       {
         question: "How do I cancel?",
@@ -1366,8 +1352,7 @@ export const plans = {
           "From the billing page in the parent account. Access continues until the end of the period already paid for, and the account stays open afterwards so progress is not lost.",
       },
     ],
-    footnote:
-      "Prices are in Australian dollars and include GST. Billing and refund terms are pending legal sign-off before production.",
+    footnote: "Prices are in Australian dollars and include GST.",
   },
 } as const;
 
@@ -1445,7 +1430,7 @@ export const about = {
     paragraphs: [
       "Most preparation material asks a student to answer questions and then tells them a score. That produces practice without understanding, and a report a parent cannot use.",
       "MindMosaic starts from the opposite end. Each session teaches the concept, practises it with the explanation available immediately, and only then puts it under exam conditions. Progress is reported by named skill, linked back to the lesson that explains it.",
-      "What is live today is Years 3 and 5 in NAPLAN-style and ICAS-style formats, across numeracy, reading and language conventions. The wider programme — Years 1 to 12, the Australian Curriculum pathways, Singapore Maths, AMC-style and selective school entry-style preparation — is being built, and every programme page states which year levels it currently covers rather than implying the rest.",
+      "What is live today is Years 3 and 5: NAPLAN-style Numeracy practice and AMC-style practice modules, with limited curriculum lessons. Only questions that have passed human review are served, so NAPLAN-style Reading and Language Conventions and ICAS-style practice open as their reviewed questions are added. The wider programme — Years 1 to 12, the Australian Curriculum pathways, Singapore Maths and selective school entry-style preparation — is being built, and every programme page states which year levels it currently covers rather than implying the rest.",
     ],
   },
   /** Every third tile is inverted to solid brand purple, per the design. */
@@ -1527,7 +1512,7 @@ export const about = {
   },
   closing: {
     heading: "See it with your own child's year level.",
-    body: "Guest practice is free and needs no account or card. An account is what saves progress across sessions.",
+    body: "You can try practice as a guest, with no account or card. A subscription adds child profiles and saves progress across sessions.",
     primaryCta: { label: "Start free", href: routes.startFree },
     secondaryCta: { label: "See plans", href: routes.pricing },
   },
@@ -1686,7 +1671,7 @@ export const faqAndStart = {
     {
       question: "Which year levels and programs does MindMosaic support?",
       answer:
-        "Today: NAPLAN-style Numeracy, Reading and Language Conventions, and ICAS-style Mathematics, Reading and Language, for Years 3 and 5. Curriculum lessons are limited and open to signed-in students: published Maths and English lessons for Years 3 and 5, with wider coverage still being developed. Wider year levels and the advanced pathways — AMC-style, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
+        "Today: NAPLAN-style Numeracy and AMC-style practice modules for Years 3 and 5. NAPLAN-style Reading and Language Conventions and ICAS-style Mathematics, Reading and Language open as their reviewed questions are added. Curriculum lessons are limited and open to signed-in students: published Maths and English lessons for Years 3 and 5, with wider coverage still being developed. Wider year levels and the advanced pathways — full-length AMC-style papers, selective-entry and scholarship preparation — are being built, and Programs shows the status of each.",
     },
     {
       question: "What is the difference between learning, practice and exam preparation?",
@@ -1716,7 +1701,7 @@ export const faqAndStart = {
     {
       question: "Can I try MindMosaic before paying?",
       answer:
-        "Yes. Guest practice is free and needs no account. A free parent account saves your child's progress. The Family plan, for up to three children, isn't open for purchase yet — its price is to be confirmed on Plans.",
+        "Yes. You can practise as a guest with no account or card. Individual (one child) and Family (up to three children) add child profiles, saved progress and the parent dashboard — see Plans for prices.",
     },
   ],
   card: {

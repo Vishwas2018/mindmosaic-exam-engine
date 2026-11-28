@@ -49,7 +49,7 @@ export function MyProgressSessionsTable({ attempts }: { attempts: readonly Attem
                 </td>
                 <td className="px-5 py-3.5 font-semibold text-mm-ink">{attempt.subjectLabel}</td>
                 <td className="px-5 py-3.5 text-mm-muted">{attempt.title}</td>
-                <td className="whitespace-nowrap px-5 py-3.5 font-mono font-bold text-mm-ink">
+                <td className="whitespace-nowrap px-5 py-3.5 font-mono font-semibold text-mm-ink">
                   {attempt.scorePercent === null
                     ? "Pending"
                     : `${attempt.attemptedQuestions} of ${attempt.totalQuestions ?? attempt.attemptedQuestions} · ${attempt.scorePercent}%`}

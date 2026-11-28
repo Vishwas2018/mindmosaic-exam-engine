@@ -1,0 +1,50 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "naplan-y3-numeracy-e1-002",
+  "revision": 1,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "3b56abac2a57cad325ed0b2d25100e288665f9cf5e0240993b065b8e0b95bd39",
+  "sourceManifestHash": null,
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "naplan-y3-numeracy-e1-002",
+    "type": "number_entry",
+    "yearLevel": 3,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A baker made 342 bread rolls early in the morning. By lunchtime, 178 of the rolls had been sold. How many rolls were left?",
+    "options": [],
+    "visuals": [],
+    "answerKey": {
+      "kind": "number",
+      "value": 164,
+      "tolerance": 0
+    },
+    "explanation": "Subtract using regrouping. In the ones, 2 is smaller than 8, so borrow a ten: 12 - 8 = 4. In the tens you now have 3, and 3 - 7 needs another borrow from the hundreds: 13 - 7 = 6. In the hundreds, 2 - 1 = 1. The rolls left are 164.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "Number and algebra",
+      "topic": "Subtraction with regrouping",
+      "skill": "Subtract 3-digit numbers with regrouping",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "subtraction",
+        "regrouping",
+        "cooking"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "8f8c2113e4b0257a840010cc6cab929e7b3bb63a76b9c8bb7061d31599272b0f"
+}

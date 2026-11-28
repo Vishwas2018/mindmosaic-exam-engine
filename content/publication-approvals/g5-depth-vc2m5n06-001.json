@@ -1,0 +1,73 @@
+{
+  "kind": "human_publication_approval",
+  "schemaVersion": 1,
+  "questionId": "g5-depth-vc2m5n06-001",
+  "revision": 0,
+  "approvedBy": "Vishwas Joshi",
+  "approvedAt": "2026-11-13T10:57:49.837Z",
+  "contentHash": "967718eb4913cdba0317afc01f33c519e09a86228f6abecb0571d0d67bdca287",
+  "sourceManifestHash": "6321350f47ad6a0f9b19cf04bb8135e8c3eeada89b46085b9f03ae2aa0cfef6c",
+  "checks": {
+    "correctness": true,
+    "originality": true,
+    "ageAppropriateness": true
+  },
+  "question": {
+    "id": "g5-depth-vc2m5n06-001",
+    "type": "number_entry",
+    "yearLevel": 5,
+    "examStyle": "naplan_style",
+    "status": "published",
+    "origin": "original_seed",
+    "prompt": "A school hall has 24 rows of chairs. Each row contains exactly 16 chairs. How many chairs are in the hall altogether?",
+    "options": [],
+    "visuals": [
+      {
+        "id": "vis-hall-chairs",
+        "altText": "Table showing seating layout with 24 rows and 16 chairs in each row.",
+        "type": "table",
+        "data": {
+          "headers": [
+            "Arrangement",
+            "Count"
+          ],
+          "rows": [
+            [
+              "Total Rows",
+              "24"
+            ],
+            [
+              "Chairs Per Row",
+              "16"
+            ]
+          ],
+          "rowHeaders": false
+        }
+      }
+    ],
+    "answerKey": {
+      "kind": "number",
+      "value": 384,
+      "tolerance": 0,
+      "unit": "chairs"
+    },
+    "explanation": "Multiply 24 by 16: 24 × 10 = 240, and 24 × 6 = 144. 240 + 144 = 384 chairs.",
+    "metadata": {
+      "subject": "numeracy",
+      "strand": "number",
+      "topic": "Multiplication",
+      "skill": "2-digit by 2-digit multiplication",
+      "difficulty": "medium",
+      "marks": 1,
+      "estimatedTimeSeconds": 75,
+      "tags": [
+        "maths",
+        "multiplication"
+      ],
+      "locale": "en-AU",
+      "source": "original",
+      "schemaVersion": 1
+    }
+  },
+  "fingerprint": "8e72669d949149cfdbffe70595a09eafe085d32a7e8bf3440c2bc55fc0f4d8e3"
+}

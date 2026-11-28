@@ -8,7 +8,7 @@ import {
   type SubjectFilter,
 } from "@/features/exam-engine/selection";
 import { findPaperForCell } from "@/features/exam-engine/exam-patterns";
-import { getExamBank, getPatternReadiness } from "@/server/exam-bank";
+import { getExamBank, getPatternReadiness, isPublicationGateEnforced } from "@/server/exam-bank";
 
 import { isSubjectSatIn } from "./subject-registry";
 import { isValidStyleYear, YEAR_LEVELS } from "./year-registry";
@@ -194,8 +194,17 @@ export function resolveProgramStatuses<
     };
   },
 >(programs: readonly P[]): P[] {
+  const enforced = isPublicationGateEnforced();
   return programs.map((program) => {
-    if (program.status === "live" || !program.scope) return program;
+    if (!program.scope) return program;
+    if (program.status === "live") {
+      /* While the publication gate enforces approved-only content (every deployed build), a hand-written live
+         programme that approved content cannot fill is withdrawn to coming_soon instead of offering a child a
+         paper of "0 matching questions". In report mode (local, CI) live programmes are never demoted. */
+      if (!enforced) return program;
+      const liveCell = getCoverageCell(program.scope.yearLevel, program.scope.examStyle, program.scope.subject);
+      return liveCell?.ready ? program : { ...program, status: "coming_soon" as const };
+    }
     const cell = getCoverageCell(
       program.scope.yearLevel,
       program.scope.examStyle,
