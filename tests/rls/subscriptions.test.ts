@@ -150,6 +150,7 @@ describe("RLS: subscriptions / subscription_events (supabase/migrations/20260720
 
   describe("entitlement helpers", () => {
     it("has_active_access is true during an unexpired trial", async () => {
+      await asAuthenticated(client, PARENT_D);
       const result = await client.query(`select public.has_active_access($1) as ok`, [PARENT_D]);
       expect(result.rows[0].ok).toBe(true);
     });
@@ -160,6 +161,7 @@ describe("RLS: subscriptions / subscription_events (supabase/migrations/20260720
         [PARENT_E],
       );
 
+      await asAuthenticated(client, PARENT_E);
       const result = await client.query(`select public.has_active_access($1) as ok`, [PARENT_E]);
       expect(result.rows[0].ok).toBe(false);
     });
@@ -172,6 +174,7 @@ describe("RLS: subscriptions / subscription_events (supabase/migrations/20260720
         [PARENT_D],
       );
 
+      await asAuthenticated(client, PARENT_D);
       const result = await client.query(`select public.has_active_access($1) as ok`, [PARENT_D]);
       expect(result.rows[0].ok).toBe(true);
     });
@@ -184,6 +187,7 @@ describe("RLS: subscriptions / subscription_events (supabase/migrations/20260720
         [PARENT_D],
       );
 
+      await asAuthenticated(client, PARENT_D);
       const result = await client.query(`select public.has_active_access($1) as ok`, [PARENT_D]);
       expect(result.rows[0].ok).toBe(false);
     });

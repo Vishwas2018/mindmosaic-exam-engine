@@ -426,10 +426,13 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
       {
         describes:
-          "class_students insert requires a teacher caller and a student target",
+          "class_students insert requires a teacher caller and a student target (policy predicate, or the hardening trigger)",
         sql: `select coalesce(
                 (select pg_get_expr(polwithcheck, polrelid) ~ 'caller_is_teacher'
-                    and pg_get_expr(polwithcheck, polrelid) ~ 'is_student_profile'
+                    and (pg_get_expr(polwithcheck, polrelid) ~ 'is_student_profile'
+                         or exists (select 1 from pg_trigger t
+                                    where t.tgrelid = 'public.class_students'::regclass
+                                      and t.tgname = 'class_students_require_student' and not t.tgisinternal))
                  from pg_policy where polrelid = 'public.class_students'::regclass
                    and polname = 'class_students: teacher adds to own class'),
                 false) as present`,
@@ -3016,6 +3019,25 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
           and not has_function_privilege('anon', 'public.revoke_admin_role(uuid,text,text)', 'EXECUTE')
           and not has_table_privilege('authenticated', 'public.user_roles', 'insert,update,delete,truncate')
           and not has_table_privilege('anon', 'public.user_roles', 'select') as present`,
+      },
+    ],
+  },
+  {
+    version: "20261128090000",
+    name: "harden_definer_helpers",
+    checks: [
+      functionExists("has_active_access"),
+      functionExists("is_student_profile"),
+      functionExists("session_has_attempt"),
+      functionExists("enforce_class_student_is_student"),
+      {
+        describes: "the definer helpers are not executable by anon/PUBLIC; is_student_profile is service-role only; the others stay executable by authenticated",
+        sql: `select not has_function_privilege('anon', 'public.has_active_access(uuid)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.session_has_attempt(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.has_active_access(uuid)', 'EXECUTE')
+          and not has_function_privilege('authenticated', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.session_has_attempt(uuid)', 'EXECUTE') as present`,
       },
     ],
   },
