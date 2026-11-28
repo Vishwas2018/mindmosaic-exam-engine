@@ -3019,6 +3019,24 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       },
     ],
   },
+  {
+    version: "20261128090000",
+    name: "harden_definer_helpers",
+    checks: [
+      functionExists("has_active_access"),
+      functionExists("is_student_profile"),
+      functionExists("session_has_attempt"),
+      {
+        describes: "the three definer helpers are not executable by anon/PUBLIC but remain executable by authenticated",
+        sql: `select not has_function_privilege('anon', 'public.has_active_access(uuid)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and not has_function_privilege('anon', 'public.session_has_attempt(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.has_active_access(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and has_function_privilege('authenticated', 'public.session_has_attempt(uuid)', 'EXECUTE') as present`,
+      },
+    ],
+  },
 ];
 
 /** Reconstructs the migration's filename, so the registry can be checked against disk. */
