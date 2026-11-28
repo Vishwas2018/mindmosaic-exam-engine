@@ -182,3 +182,62 @@ The fix is only on the PR Preview until #168 is merged (merge is not authorised)
 ### Recommendation
 - **GO** to merge PR #168 into `dev` (owner approval needed) and to continue manual UAT on DEV.
 - **Not yet GO for beta**: advisor review, the three leftover admin fixtures, GitHub token, and the remaining hosted suites are open. **Production remains NO-GO.**
+
+---
+
+## Final DEV acceptance — post-merge (2026-11-28)
+
+DEV only. Global MFA off. No production change, no account deleted, no credential changed.
+
+### 1. Merge and deployment
+- PR #168 merged into `dev` at head `a3f5614b` (merge `7a6cf07a`) after CI was green and mergeable.
+- CI on `dev` `7a6cf07a`: both runs **success**. Vercel `dpl_FeL51ZvQBa5kdC1Zj7xuToR3SL3g` READY; the stable alias `mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app` serves `7a6cf07a` (the hosted runner records `dev 7a6cf07a` in every run).
+
+### 2. Fixture remediation
+- Confirmed three `RBAC admin rba` Admin entitlements (created 23–24 Nov, backfilled by the migration).
+- Revoked through the audited `revoke_admin_role` RPC (actor `owner-approved:phase5-fixture-remediation`); accounts untouched.
+- Retained: QA Admin, E2E Beta Administrator, Release Tester. **Exactly three active Admin entitlements verified.**
+- Defect found while verifying: `RBAC-01` leaves a fresh Admin fixture entitlement when its worker crashes mid-test (host fault `0xC0000409`). Revoked again with the same RPC; end state three. Register as a test-hygiene defect (D-FIX-1): the crash path must still retire.
+
+### 3. Hosted regression on the stable alias (`7a6cf07a`)
+| Suite | Result |
+|---|---|
+| Auth-audit 01 (registration/verification, real mail.tm inbox) | **pass** REG-01..04 |
+| Auth-audit 04 cross-browser resilience | **pass** on chromium, Firefox and WebKit |
+| Auth-audit 02 (login, logout, session, **password recovery REC-01**) | **pass** AUTH-01, AUTH-02, REC-01 on the stable alias (REC-01 failed only on the PR preview alias, which Supabase does not allow-list) |
+| Auth-audit 03 (RBAC-01 six-role matrix, SEC-01) | **pass** (RBAC-01 passed twice; one run lost to a worker crash, see D-FIX-1) |
+| Onboarding A1–A11 (real email) | **pass** |
+| Student journeys B1–B8 + C (timed paper, autosave, resume, submit, marks = stored attempt) | **pass** |
+| Security D (two-family isolation, anon/parent/student refusals) | **pass** |
+| Negative auth N1–N12 | **pass** (4/4) |
+| Responsive/a11y E (desktop 1440, tablet 834, mobile 390) | **pass** (9/9) |
+| Multi-role + UAT P4-0..P4-6, UAT-H1..H4 (live NVIDIA) | **pass** 11/11 |
+| Billing S1–S6, L1, L1b, L2, L3, L4, P1, F1, U1–U4 (Stripe sandbox, real Checkout and real webhooks) | **pass** |
+| **Billing W1–W4 (signed-webhook acceptance)** | **BLOCKED, not a pass.** W1's rejection checks (no signature, malformed, wrong secret, tampered body, replayed timestamp) all returned 400 as required; the final "correctly signed event is accepted" assertion got 400, and W2/W3/W4 depend on it. Neither local `whsec` copy (`C:/tmp/stripe-readiness`, `.env.local`) matches the secret deployed to DEV, while real Stripe deliveries (L1 renew/cancel) are accepted, so the deployment is healthy and the test credential is stale. Owner must supply the DEV endpoint signing secret to the test runner, then rerun W1–W4. |
+| Manual family seed (`m-manual-test-family`) | **NOT RUN.** Needs the owner's `MANUAL_PARENT_PASSWORD`; I will not invent or reset credentials for the owner's accounts. |
+
+Gaps by design: local `test:rls` / `test:e2e` / `test:e2e:auth` did not run (Docker daemon off); CI ran them green on the PR head.
+
+### 4. Security hardening (separate PR #169, **migration not applied**)
+- **Confirmed on DEV with controlled fixtures:** `has_active_access`, `is_student_profile` and `session_has_attempt` return `true` for another family's id to **anon** and to an unrelated parent. Medium severity: one bit per call, random-UUID ids, no row data, no authentication needed.
+- PR #169: caller-relationship checks, EXECUTE revoked from PUBLIC and anon, rollback, new RLS isolation tests, registry post-check, review doc `docs/security/DEFINER-HARDENING-2026-11-28.md`.
+- Views (9) and definer functions: statically reviewed; the six `admin_*` views are gated by `is_admin()`, the three `visible_*` views carry full ownership predicates; no authenticated-executable function with an id argument lacks a relationship check. Remaining anon-executable helpers read `auth.uid()` and are low (phase 2).
+- **Not done:** live catalog/advisor read (Supabase DEV MCP needs owner read-only OAuth), local RLS run (no Docker), DEV migration.
+
+### 5. GitHub integration
+- Runbook `docs/release/GITHUB-ISSUE-INTEGRATION-RUNBOOK.md`: fine-grained token, one repo, Issues read/write only, 30-day expiry, Vercel Preview + `dev` branch Sensitive variable, kill switch. Nothing configured; `githubConfigured:false`; the Markdown fallback was re-verified by UAT-H3.
+
+### 6. Outstanding defects
+| ID | Severity | Item |
+|---|---|---|
+| SEC-DEF-1 | Medium | anon/cross-account oracle on three definer helpers; fix in PR #169, awaiting approval to apply to DEV |
+| TEST-W | Medium (coverage) | W1–W4 webhook-acceptance tests blocked by stale local signing secret |
+| D-FIX-1 | Low | RBAC-01 leaves an Admin fixture entitlement after a crash |
+| MAN-SEED | Info | manual family seed needs owner password |
+| MAIL | Known | Supabase hourly mail cap on the built-in sender; custom SMTP was proven earlier but not re-verified here |
+| SEC-ADV | Open | live advisor/catalog review pending owner OAuth |
+
+### 7. Recommendation
+- **DEV owner manual testing: GO.** Dev is green, deployed and verified; all journeys, isolation, billing lifecycle and security routes pass.
+- **Private beta: NO-GO until three things close** (all small): (1) owner approves and DEV verifies the PR #169 hardening migration (apply, rerun the probe, rerun hosted D + billing S1–S6); (2) W1–W4 rerun green with the correct DEV webhook secret; (3) owner-run read-only catalog/advisor confirmation. Then beta is **GO** from the engineering side; GitHub issue creation stays optional and Markdown fallback is sufficient.
+- **Production: NO-GO.** Not assessed here and no change made.
