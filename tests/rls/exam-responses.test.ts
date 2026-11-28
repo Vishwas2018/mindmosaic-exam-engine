@@ -18,7 +18,7 @@ import type { Client } from "pg";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { connect } from "./db";
-import { asAuthenticated, seed, SESSION_A, STUDENT_A } from "./fixtures";
+import { asAuthenticated, seed, SESSION_A, SESSION_B, STUDENT_A, STUDENT_B } from "./fixtures";
 
 let client: Client;
 
@@ -139,5 +139,72 @@ describe("RLS: exam_responses autosave lock (MM-AUD-SEC-001 step 4)", () => {
     await expect(client.query("truncate public.exam_responses")).rejects.toThrow(
       /permission denied/i,
     );
+  });
+
+  /**
+   * Hardening 20261128090000: session_has_attempt() now sees only the caller's own sessions, so "not
+   * session_has_attempt(x)" alone would pass for a foreign session. Ownership is therefore explicit in both policies.
+   */
+  describe("session ownership is explicit and the submit lock cannot be weakened", () => {
+    const B_OPEN = "11111111-0000-0000-0000-0000000000dd";
+    const insertRow = (session: string, student: string, json = "{}") =>
+      client.query(
+        `insert into public.exam_responses (session_id, student_id, responses) values ($1, $2, $3::jsonb)`,
+        [session, student, json],
+      );
+
+    beforeEach(async () => {
+      await client.query(
+        `insert into public.exam_sessions (id, student_id, config, seed, selected_question_ids, expires_at)
+         values ($1, $2, '{}'::jsonb, 'seed-b-open', array['q1'], now() + interval '1 hour')`,
+        [B_OPEN, STUDENT_B],
+      );
+    });
+
+    it("negative: cannot insert a response for another student's unsubmitted session", async () => {
+      await asAuthenticated(client, STUDENT_A);
+      await expect(insertRow(B_OPEN, STUDENT_A)).rejects.toThrow(/row-level security/i);
+    });
+
+    it("negative: cannot re-point an own autosave row at another student's open session", async () => {
+      await insertRow(OPEN_SESSION, STUDENT_A);
+      await asAuthenticated(client, STUDENT_A);
+      await expect(
+        client.query(`update public.exam_responses set session_id = $1 where session_id = $2`, [B_OPEN, OPEN_SESSION]),
+      ).rejects.toThrow(/row-level security/i);
+    });
+
+    it("negative: cannot re-point an own autosave row at an own submitted session", async () => {
+      await insertRow(OPEN_SESSION, STUDENT_A);
+      await asAuthenticated(client, STUDENT_A);
+      await expect(
+        client.query(`update public.exam_responses set session_id = $1 where session_id = $2`, [SESSION_A, OPEN_SESSION]),
+      ).rejects.toThrow(/row-level security/i);
+    });
+
+    it("negative: cannot write into another student's submitted session either", async () => {
+      await asAuthenticated(client, STUDENT_A);
+      await expect(insertRow(SESSION_B, STUDENT_A)).rejects.toThrow(/row-level security/i);
+    });
+
+    it("negative: another student cannot update A's autosave row", async () => {
+      await insertRow(OPEN_SESSION, STUDENT_A, '{"q1":"a"}');
+      await asAuthenticated(client, STUDENT_B);
+      const r = await client.query(
+        `update public.exam_responses set responses = '{"q1":"x"}'::jsonb where session_id = $1 returning session_id`,
+        [OPEN_SESSION],
+      );
+      expect(r.rows).toHaveLength(0);
+    });
+
+    it("positive: the owner can still autosave an unsubmitted session (insert then update)", async () => {
+      await asAuthenticated(client, STUDENT_A);
+      await insertRow(OPEN_SESSION, STUDENT_A, '{"q1":"a"}');
+      const r = await client.query(
+        `update public.exam_responses set responses = '{"q1":"b"}'::jsonb where session_id = $1 returning responses`,
+        [OPEN_SESSION],
+      );
+      expect(r.rows).toEqual([{ responses: { q1: "b" } }]);
+    });
   });
 });

@@ -82,24 +82,72 @@ describe("has_active_access", () => {
   });
 });
 
-describe("is_student_profile", () => {
-  it("answers for a signed-in teacher", async () => {
-    await asAuthenticated(client, TEACHER_D);
+describe("is_student_profile (service-role only; no client can look up student status)", () => {
+  it("answers for the service role", async () => {
+    await asService();
     expect(await isStudent(STUDENT_A)).toBe(true);
     expect(await isStudent(PARENT_OTHER)).toBe(false);
   });
 
-  it("refuses non-teachers (students and parents learn nothing about other ids)", async () => {
-    await asAuthenticated(client, STUDENT_B);
-    expect(await isStudent(STUDENT_A)).toBe(false);
-    await reset();
-    await asAuthenticated(client, PARENT_OTHER);
-    expect(await isStudent(STUDENT_A)).toBe(false);
+  it.each([
+    ["teacher", TEACHER_D],
+    ["student", STUDENT_B],
+    ["parent", PARENT_OTHER],
+  ])("a signed-in %s cannot call it at all", async (_label, sub) => {
+    await asAuthenticated(client, sub);
+    await expect(isStudent(STUDENT_A)).rejects.toThrow(/permission denied/i);
   });
 
   it("is not executable by anon", async () => {
     await asAnon(client);
     await expect(isStudent(STUDENT_A)).rejects.toThrow(/permission denied/i);
+  });
+});
+
+describe("class enrolment still works, and still must target a student", () => {
+  const OWN_CLASS = "22222222-0000-0000-0000-0000000000e1";
+  const OTHER_CLASS = "22222222-0000-0000-0000-0000000000e2";
+
+  async function teacherWithClass() {
+    await asAuthenticated(client, TEACHER_D);
+    await client.query(`insert into public.classes (id, teacher_id, name) values ($1, $2, 'C')`, [OWN_CLASS, TEACHER_D]);
+  }
+  const enrol = (target: string, cls = OWN_CLASS) =>
+    client.query(`insert into public.class_students (class_id, student_id) values ($1, $2) returning student_id`, [cls, target]);
+
+  it("positive: a teacher enrols a student into their own class", async () => {
+    await teacherWithClass();
+    expect((await enrol(STUDENT_A)).rows).toEqual([{ student_id: STUDENT_A }]);
+  });
+
+  it("negative: a non-student target (parent, teacher, random uuid) is refused with the standard RLS error", async () => {
+    await teacherWithClass();
+    for (const target of [PARENT_OTHER, TEACHER_D, "99999999-9999-9999-9999-999999999999"]) {
+      await client.query("savepoint e");
+      await expect(enrol(target)).rejects.toMatchObject({ code: "42501", message: expect.stringMatching(/row-level security/i) });
+      await client.query("rollback to savepoint e");
+    }
+  });
+
+  it("negative: refusal for a class the teacher does not own is the same error (no oracle)", async () => {
+    await client.query(`insert into public.classes (id, teacher_id, name) values ($1, $2, 'Other')`, [OTHER_CLASS, PARENT_OTHER]);
+    await asAuthenticated(client, TEACHER_D);
+    await client.query("savepoint e");
+    const err = (await enrol(STUDENT_A, OTHER_CLASS).catch((e: unknown) => e)) as { code: string; message: string };
+    await client.query("rollback to savepoint e");
+    expect(err.code).toBe("42501");
+    expect(err.message).toMatch(/row-level security/i);
+  });
+
+  it("negative: a student cannot enrol anyone", async () => {
+    await client.query(`insert into public.classes (id, teacher_id, name) values ($1, $2, 'T')`, [OWN_CLASS, TEACHER_D]);
+    await asAuthenticated(client, STUDENT_B);
+    await expect(enrol(STUDENT_A)).rejects.toThrow(/row-level security/i);
+  });
+
+  it("the enrolment guard is not callable as an RPC", async () => {
+    await asAuthenticated(client, TEACHER_D);
+    await expect(client.query(`select public.enforce_class_student_is_student()`)).rejects.toThrow();
   });
 });
 

@@ -3026,13 +3026,14 @@ export const MIGRATIONS: readonly MigrationEntry[] = [
       functionExists("has_active_access"),
       functionExists("is_student_profile"),
       functionExists("session_has_attempt"),
+      functionExists("enforce_class_student_is_student"),
       {
-        describes: "the three definer helpers are not executable by anon/PUBLIC but remain executable by authenticated",
+        describes: "the definer helpers are not executable by anon/PUBLIC; is_student_profile is service-role only; the others stay executable by authenticated",
         sql: `select not has_function_privilege('anon', 'public.has_active_access(uuid)', 'EXECUTE')
           and not has_function_privilege('anon', 'public.is_student_profile(uuid)', 'EXECUTE')
           and not has_function_privilege('anon', 'public.session_has_attempt(uuid)', 'EXECUTE')
           and has_function_privilege('authenticated', 'public.has_active_access(uuid)', 'EXECUTE')
-          and has_function_privilege('authenticated', 'public.is_student_profile(uuid)', 'EXECUTE')
+          and not has_function_privilege('authenticated', 'public.is_student_profile(uuid)', 'EXECUTE')
           and has_function_privilege('authenticated', 'public.session_has_attempt(uuid)', 'EXECUTE') as present`,
       },
     ],

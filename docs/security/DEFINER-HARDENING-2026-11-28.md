@@ -44,10 +44,27 @@ Fixtures (no accounts deleted; inert, `example.com`): tag `sechardmwzvdd7f` — 
 No signature changes. `EXECUTE` revoked from `PUBLIC` and `anon`; kept for `authenticated` (RLS policies evaluate the
 helpers as the caller) and `service_role`.
 
+## 2b. Review round 2 (live-catalogue findings)
+
+1. **`is_student_profile` still let any teacher look up arbitrary ids.** Now service-role only. Class enrolment (the only
+   legitimate use) is enforced by a `BEFORE INSERT/UPDATE OF student_id` trigger on `class_students`
+   (`enforce_class_student_is_student`, not RPC-callable) that raises the *same* `42501 row-level security` error the
+   policy raises for a class the teacher does not own, so a refusal reveals nothing about the id. The policy now only
+   requires `teaches_class` + `caller_is_teacher`. Residual: a teacher who enrols a student learns the id was a student
+   by the enrolment succeeding; closing that needs an invite/consent flow (product decision, tracked as follow-up).
+2. **`exam_responses` INSERT/UPDATE.** `session_has_attempt()` now only sees the caller's own sessions, so
+   `not session_has_attempt(x)` alone would pass for a foreign session. Both policies (INSERT; UPDATE USING and WITH
+   CHECK) now require explicit session ownership (`exam_sessions.student_id = auth.uid()`) **and** the not-submitted
+   test. The UPDATE pair previously relied on row ownership only, so an own row could be re-pointed at another
+   student's session id. For an own submitted session the helper still returns true, so the submit lock is unchanged.
+   Autosave (`upsert` on `session_id`) is unaffected; nothing re-points `session_id`.
+
 ## 3. Tests
 
 * `tests/rls/definer-helper-isolation.test.ts` (new): self / linked child / unrelated caller / service role / anon for each
   helper, plus a check that the submit-lock policy still blocks writes to a submitted session.
+* `tests/rls/exam-responses.test.ts`: six new cases (foreign open session insert, re-point to foreign / own submitted session, foreign submitted insert, cross-student update refused; owner autosave still works).
+* Enrolment cases in the isolation test: teacher enrols a student (positive); parent / teacher / random-uuid targets refused with the standard RLS error; foreign-class refusal identical; students cannot enrol; guard not callable.
 * `tests/rls/subscriptions.test.ts`: the four `has_active_access` entitlement tests now call as the owning parent (the old
   tests called as the superuser for arbitrary ids, which is exactly the behaviour being closed).
 * `scripts/migrations/registry.ts`: post-apply check that anon has no EXECUTE and authenticated keeps it.
