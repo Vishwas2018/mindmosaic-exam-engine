@@ -274,8 +274,8 @@ export function api(page: Page) {
 export async function grantFixtureAdmin(userId: string, reason: string): Promise<string> {
   const { data, error } = await devAdmin().rpc("grant_admin_role", {
     p_user: userId,
-    p_actor: "e2e:hosted",
-    p_reason: reason,
+    p_actor: `e2e:hosted:${RUN_ID}`,
+    p_reason: `fixture:${RUN_ID}: ${reason}`,
   });
   if (error) throw new Error(`grant_admin_role failed: ${error.message}`);
   return String(data);

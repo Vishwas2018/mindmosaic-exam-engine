@@ -19,6 +19,8 @@ if (!/^https:\/\/mindmosaic-exam-engine-[a-z0-9-]+-vishwas2018s-projects\.vercel
 
 export default defineConfig({
   testDir: "./e2e/hosted",
+  // Revokes this run's synthetic Admin entitlements even if a worker crashed (see e2e/hosted/global-teardown.ts).
+  globalTeardown: "./e2e/hosted/global-teardown.ts",
   fullyParallel: false,
   workers: 1,
   retries: 0,
