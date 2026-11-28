@@ -278,3 +278,40 @@ Dedicated synthetic `mm-manual-beta-parent@example.com` (the 15 Nov `mm-manual-p
 
 ### F. Status
 DEV owner manual testing: **GO**. Private beta: **NO-GO until criteria 1-3 and 5 close** (all owner-gated). Production: **NO-GO**.
+
+## Final remediation, hand-off state (2026-11-28, evening)
+
+- #169 merged `8ca82820`, #170 merged `2104c0c7`; both integrated `dev` CI runs of `8ca82820` green.
+- **DEV migration `20261128090000` APPLIED and independently verified (ledger, anon denied x3, trigger, policies, counts, 3 Admins, MFA off; anon probe 401/42501 x3).** Do not reapply. Handoff with pre-flight, apply, post-apply SQL and rollback: `docs/release/FINAL-BETA-HANDOFF-2026-11-28.md` section 1.
+- Admin entitlements measured after both merges: 3 active, 0 orphan fixtures (dry-run reconcile, DEV).
+- **Not run in this session:** manual-family seed and Parent–Student journey, security probes, hosted regression, W1–W4, real-mail and password-recovery verification. Free RAM was about 1 GB against the 8 GB gate, the migration is not applied, `BILLING_WEBHOOK_SECRET` is not confirmed matching, and SMTP needs the owner's mailbox and token. Procedures and expected results are in the handoff file; none of these results is claimed.
+- Bypass-secret rotation plan written, **not executed** (section 3). `BILLING_WEBHOOK_SECRET` instructions in section 4.
+- Verdict unchanged: DEV owner testing GO; private beta NO-GO until the migration is applied and verified, W1–W4 pass, and real-mail/recovery is evidenced.
+
+## Post-migration results (2026-11-28, DEV, stable alias, `dev` `2104c0c7`, deployment `dpl_G2p3ogdUZJKhGoHRCTTVnD62j936`)
+
+Migration `20261128090000` was applied and verified out-of-band (not reapplied). One worker, sequential.
+
+| Run | Result |
+|---|---|
+| Anonymous RPC probe (3 hardened helpers) | 401 `42501` x3 |
+| Manual-family seed (`m-manual-test-family.spec.ts`, run `rmx0a09xe`) | 1/1 pass |
+| Hosted regression (run `rmx0a2unz`; security isolation D, Vihaan restriction, negative auth, student assessment B/C incl. Parent view, guest guard, content governance, programme labels, responsive/a11y, multi-role + UAT Assistant, Admin review, auth-audit RBAC-01/SEC-01/AUTH-01/02/XBR-01) | **49 passed, 0 failed, 10 skipped** (21.0 min) |
+| Admin entitlements after the runs | **3 active, 0 orphan fixtures** (reconcile dry run) |
+
+**Skipped (all 10 need a readable real inbox, `HOSTED_MAIL_BASE`; not run, not claimed):** A1–A2, REG-01..04, REC-01, N1–N4, N5–N9, N11, N12.
+**Not run, credential-dependent:** W1–W4 (`s1`–`s4`, needs the local Stripe signing secret); real-SMTP delivery and password recovery (owner mailbox and Supabase token).
+The student-reads-parent-access path and class enrolment ran inside B/C and D against the hardened helpers with no regression. The Parent–Student journey (B1–B8, C including the Parent's view of the attempt) passed on the seeded and synthetic families.
+
+### Final beta readiness assessment
+- **DEV owner manual testing: GO.** Migration applied and verified, regression green, three Admins, MFA off.
+- **Private beta: still NO-GO** until three owner-held items close: (1) W1–W4 pass with the correct `STRIPE_WEBHOOK_SECRET` locally; (2) custom SMTP delivery and password recovery evidenced from a real inbox (the 10 skipped specs); (3) the Vercel bypass-secret rotation decision (plan in the handoff file, not executed).
+- Nothing excluded silently; no migration, secret, account or production change was made in this run.
+
+## W1–W4 attempt (2026-11-28): blocked by a Vercel team soft block, not by the signing secret
+
+- Local `STRIPE_WEBHOOK_SECRET` format check passed (value never printed).
+- `s2` + `s4` run (`rmx0dh2y6`, dev `2104c0c7`): W1 failed at its first assertion with **402** instead of 400; the very next probe of `/`, `/api/health` and `/api/stripe/webhook` also returns **402 `DEPLOYMENT_DISABLED`**. L4 timed out waiting for a webhook-driven row (real Stripe deliveries cannot be reaching the app either). W2–W4 did not run.
+- Cause, read from the Vercel API (read-only): the team (`hobby` plan) has a **soft block** `FAIR_USE_LIMITS_EXCEEDED` on `fluidCpuDuration`, set 2026-11-28T12:13:05Z, auto-lift `2026-12-28T12:13:05Z`. The hosted regression passed minutes before the block, so the whole DEV site is now unavailable to everyone, including owner manual testing.
+- So W1–W4 are **neither passed nor failed**: they could not exercise the endpoint. No secret, account or project setting was changed.
+- Beta consequence: a Hobby plan cannot serve the beta. Upgrade the team to Pro (owner billing action) or wait for the lift, then rerun `s2`/`s4` (and the 10 mail specs).
