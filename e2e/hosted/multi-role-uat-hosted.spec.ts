@@ -226,7 +226,9 @@ test.describe.serial("Phase 4 hosted: multi-role + UAT Assistant", () => {
     };
     const byRoute = Object.fromEntries(dump.issues.map((i) => [i.environment.route, i.environment]));
     evidence["P4-6-stored-context"] = byRoute;
-    expect(byRoute["/parent"]).toMatchObject({ portal: "parent", primaryRole: "parent", activeWorkspace: "parent", activeRole: "parent", workspaceEntitled: true });
+    // A parent with no children is redirected from /parent to /parent/setup; both are the Parent workspace.
+    const parentEnv = byRoute["/parent"] ?? byRoute["/parent/setup"];
+    expect(parentEnv).toMatchObject({ portal: "parent", primaryRole: "parent", activeWorkspace: "parent", activeRole: "parent", workspaceEntitled: true });
     expect(byRoute["/admin"]).toMatchObject({ portal: "admin", primaryRole: "parent", activeWorkspace: "admin", activeRole: "admin", workspaceEntitled: true });
     expect(byRoute["/admin/review"]).toMatchObject({ portal: "admin", primaryRole: "parent", activeWorkspace: "admin", activeRole: "admin", workspaceEntitled: true });
     for (const env of Object.values(byRoute)) expect([...env.entitledRoles].sort()).toEqual(["admin", "parent"]);
