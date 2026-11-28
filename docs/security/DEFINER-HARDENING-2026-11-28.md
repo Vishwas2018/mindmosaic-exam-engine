@@ -51,7 +51,7 @@ helpers as the caller) and `service_role`.
 * `tests/rls/subscriptions.test.ts`: the four `has_active_access` entitlement tests now call as the owning parent (the old
   tests called as the superuser for arbitrary ids, which is exactly the behaviour being closed).
 * `scripts/migrations/registry.ts`: post-apply check that anon has no EXECUTE and authenticated keeps it.
-* RLS tests need a local Supabase stack; they run in the `rls` CI job on the PR. They were **not run locally** (Docker daemon off).
+* RLS tests need a local Supabase stack; they run in the `rls` CI job on the PR. Not run locally (Docker daemon off); the `rls` CI job on PR #169 ran them against real Postgres: 41 files, 641 tests pass, including the 12 new ones.
 
 ## 4. Apply / rollback (owner-approved, DEV only)
 
