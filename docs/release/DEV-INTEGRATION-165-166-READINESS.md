@@ -182,3 +182,99 @@ The fix is only on the PR Preview until #168 is merged (merge is not authorised)
 ### Recommendation
 - **GO** to merge PR #168 into `dev` (owner approval needed) and to continue manual UAT on DEV.
 - **Not yet GO for beta**: advisor review, the three leftover admin fixtures, GitHub token, and the remaining hosted suites are open. **Production remains NO-GO.**
+
+---
+
+## Final DEV acceptance — post-merge (2026-11-28)
+
+DEV only. Global MFA off. No production change, no account deleted, no credential changed.
+
+### 1. Merge and deployment
+- PR #168 merged into `dev` at head `a3f5614b` (merge `7a6cf07a`) after CI was green and mergeable.
+- CI on `dev` `7a6cf07a`: both runs **success**. Vercel `dpl_FeL51ZvQBa5kdC1Zj7xuToR3SL3g` READY; the stable alias `mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app` serves `7a6cf07a` (the hosted runner records `dev 7a6cf07a` in every run).
+
+### 2. Fixture remediation
+- Confirmed three `RBAC admin rba` Admin entitlements (created 23–24 Nov, backfilled by the migration).
+- Revoked through the audited `revoke_admin_role` RPC (actor `owner-approved:phase5-fixture-remediation`); accounts untouched.
+- Retained: QA Admin, E2E Beta Administrator, Release Tester. **Exactly three active Admin entitlements verified.**
+- Defect found while verifying: `RBAC-01` leaves a fresh Admin fixture entitlement when its worker crashes mid-test (host fault `0xC0000409`). Revoked again with the same RPC; end state three. Register as a test-hygiene defect (D-FIX-1): the crash path must still retire.
+
+### 3. Hosted regression on the stable alias (`7a6cf07a`)
+| Suite | Result |
+|---|---|
+| Auth-audit 01 (registration/verification, real mail.tm inbox) | **pass** REG-01..04 |
+| Auth-audit 04 cross-browser resilience | **pass** on chromium, Firefox and WebKit |
+| Auth-audit 02 (login, logout, session, **password recovery REC-01**) | **pass** AUTH-01, AUTH-02, REC-01 on the stable alias (REC-01 failed only on the PR preview alias, which Supabase does not allow-list) |
+| Auth-audit 03 (RBAC-01 six-role matrix, SEC-01) | **pass** (RBAC-01 passed twice; one run lost to a worker crash, see D-FIX-1) |
+| Onboarding A1–A11 (real email) | **pass** |
+| Student journeys B1–B8 + C (timed paper, autosave, resume, submit, marks = stored attempt) | **pass** |
+| Security D (two-family isolation, anon/parent/student refusals) | **pass** |
+| Negative auth N1–N12 | **pass** (4/4) |
+| Responsive/a11y E (desktop 1440, tablet 834, mobile 390) | **pass** (9/9) |
+| Multi-role + UAT P4-0..P4-6, UAT-H1..H4 (live NVIDIA) | **pass** 11/11 |
+| Billing S1–S6, L1, L1b, L2, L3, L4, P1, F1, U1–U4 (Stripe sandbox, real Checkout and real webhooks) | **pass** |
+| **Billing W1–W4 (signed-webhook acceptance)** | **BLOCKED, not a pass.** W1's rejection checks (no signature, malformed, wrong secret, tampered body, replayed timestamp) all returned 400 as required; the final "correctly signed event is accepted" assertion got 400, and W2/W3/W4 depend on it. Neither local `whsec` copy (`C:/tmp/stripe-readiness`, `.env.local`) matches the secret deployed to DEV, while real Stripe deliveries (L1 renew/cancel) are accepted, so the deployment is healthy and the test credential is stale. Owner must supply the DEV endpoint signing secret to the test runner, then rerun W1–W4. |
+| Manual family seed (`m-manual-test-family`) | **NOT RUN.** Needs the owner's `MANUAL_PARENT_PASSWORD`; I will not invent or reset credentials for the owner's accounts. |
+
+Gaps by design: local `test:rls` / `test:e2e` / `test:e2e:auth` did not run (Docker daemon off); CI ran them green on the PR head.
+
+### 4. Security hardening (separate PR #169, **migration not applied**)
+- **Confirmed on DEV with controlled fixtures:** `has_active_access`, `is_student_profile` and `session_has_attempt` return `true` for another family's id to **anon** and to an unrelated parent. Medium severity: one bit per call, random-UUID ids, no row data, no authentication needed.
+- PR #169: caller-relationship checks, EXECUTE revoked from PUBLIC and anon, rollback, new RLS isolation tests, registry post-check, review doc `docs/security/DEFINER-HARDENING-2026-11-28.md`.
+- Views (9) and definer functions: statically reviewed; the six `admin_*` views are gated by `is_admin()`, the three `visible_*` views carry full ownership predicates; no authenticated-executable function with an id argument lacks a relationship check. Remaining anon-executable helpers read `auth.uid()` and are low (phase 2).
+- RLS CI (real Postgres) on PR #169: **41 files, 641 tests pass, including the 12 new isolation tests**. **Not done:** live catalog/advisor read (Supabase DEV MCP needs owner read-only OAuth) and the DEV migration.
+
+### 5. GitHub integration
+- Runbook `docs/release/GITHUB-ISSUE-INTEGRATION-RUNBOOK.md`: fine-grained token, one repo, Issues read/write only, 30-day expiry, Vercel Preview + `dev` branch Sensitive variable, kill switch. Nothing configured; `githubConfigured:false`; the Markdown fallback was re-verified by UAT-H3.
+
+### 6. Outstanding defects
+| ID | Severity | Item |
+|---|---|---|
+| SEC-DEF-1 | Medium | anon/cross-account oracle on three definer helpers; fix in PR #169, awaiting approval to apply to DEV |
+| TEST-W | Medium (coverage) | W1–W4 webhook-acceptance tests blocked by stale local signing secret |
+| D-FIX-1 | Low | RBAC-01 leaves an Admin fixture entitlement after a crash |
+| MAN-SEED | Info | manual family seed needs owner password |
+| MAIL | Known | Supabase hourly mail cap on the built-in sender; custom SMTP was proven earlier but not re-verified here |
+| SEC-ADV | Open | live advisor/catalog review pending owner OAuth |
+
+### 7. Recommendation
+- **DEV owner manual testing: GO.** Dev is green, deployed and verified; all journeys, isolation, billing lifecycle and security routes pass.
+- **Private beta: NO-GO until three things close** (all small): (1) owner approves and DEV verifies the PR #169 hardening migration (apply, rerun the probe, rerun hosted D + billing S1–S6); (2) W1–W4 rerun green with the correct DEV webhook secret; (3) owner-run read-only catalog/advisor confirmation. Then beta is **GO** from the engineering side; GitHub issue creation stays optional and Markdown fallback is sufficient.
+- **Production: NO-GO.** Not assessed here and no change made.
+
+---
+
+## Beta remediation, round 2 (2026-11-28)
+
+DEV isolated. No migration applied, no account deleted, global MFA off, no production or credential change.
+
+### A. PR #169 revised after the live-catalogue review (CI: all 41 RLS files, 654 tests pass)
+| Finding | Resolution |
+|---|---|
+| `is_student_profile()` still let any teacher look up student status for arbitrary ids | Now **service-role only**. Class enrolment is preserved: a `BEFORE INSERT/UPDATE OF student_id` trigger on `class_students` (not RPC-callable) enforces a student target and raises the same `42501 row-level security` error as a foreign class, so a refusal discloses nothing. Residual, accepted: a teacher who successfully enrols a student learns the id was a student by the act of enrolling; closing that needs an invite/consent flow (product decision). |
+| `authenticated` keeps INSERT/UPDATE on `exam_responses` | Both policies (INSERT; UPDATE `USING` and `WITH CHECK`) now require **explicit session ownership** plus the not-submitted test. The UPDATE pair previously relied on row ownership only, so an own row could be re-pointed at another student's session. Because `session_has_attempt()` is now caller-scoped, the ownership predicate is what makes `not session_has_attempt()` meaningful for foreign sessions; for an own submitted session the helper still returns true, so the submit lock is **not weakened** (tested). |
+| Tests | Positive: teacher enrols a student; owner autosaves insert+update. Negative: parent/teacher/random target refused with the standard RLS error; foreign-class refusal identical; students cannot enrol; guard not callable; helper not callable by teacher/student/parent/anon; foreign open/submitted session insert refused; re-point to foreign or own submitted session refused; cross-student update affects 0 rows. |
+| Rollback | Restores the original policies and bodies, drops the trigger and function, restores grants. The legacy registry check for `20260811094000` now accepts the trigger as the student-target guard. |
+
+Process note: the first CI run of this round failed on that legacy registry check (it asserted the old policy text); fixed, then green.
+
+### B. D-FIX-1: admin fixture lifecycle (fixed, proven on DEV)
+Per-run tagged grants; `globalTeardown` revokes the run's entitlements even after a worker crash; `reconcile-fixtures.mts` (dry-run default, `--apply`, `--older-than`, `--run`, DEV-only, email-pattern selection plus protected list, audited RPC, never deletes). Simulated crash orphans: 4 to 3 via `--apply`, 4 to 3 via teardown alone; the three retained Admins untouched. Procedure: `docs/release/DEV-OPERATIONS-RUNBOOK.md` section 1.
+
+### C. Stripe webhook (W1-W4)
+Endpoint `we_1UfGSWDtPH5dvWkmfOn2qOh8` (sandbox `acct_1StznKDtPH5dvWkm`), deployed variable `STRIPE_WEBHOOK_SECRET` (Sensitive, Preview, branch `dev`), local variable `BILLING_WEBHOOK_SECRET` from `C:/tmp/stripe-readiness/webhook-secret.env`. The local copy is stale; the owner reveals the endpoint secret in the Stripe Dashboard and writes it to that file. Steps in the runbook section 2. **Security note:** the Stripe-side endpoint URLs embed the Vercel protection-bypass secret as a query parameter; recommend rotating it.
+
+### D. Manual family
+Dedicated synthetic `mm-manual-beta-parent@example.com` (the 15 Nov `mm-manual-parent` is untouched). Credentials generated locally, random, outside the repo, current-user ACL, values never printed. The seed refuses non-synthetic emails and never resets an existing password unless explicitly told. **Seed not run yet**; one command in the runbook section 3.
+
+### E. Revised private-beta acceptance criteria (all must be met)
+1. PR #169 approved; migration applied to DEV by the owner; probe rerun shows anon and cross-account denied (including teacher `is_student_profile`); hosted D, student journey and billing S1-S6 rerun green; RLS CI green.
+2. Billing W1-W4 green with the endpoint's real signing secret.
+3. Owner-run read-only catalogue/advisor check matches the review (anon/authenticated EXECUTE lists; nine views).
+4. After every hosted run: exactly three active Admin entitlements (reconcile dry run reports 0).
+5. Manual family seeded with the dedicated Parent; owner completes the MANUAL-TESTING checklist with it.
+6. Custom SMTP verified for the beta window (the built-in sender hourly cap is a known limit).
+7. Global MFA remains off by decision; Production unchanged.
+
+### F. Status
+DEV owner manual testing: **GO**. Private beta: **NO-GO until criteria 1-3 and 5 close** (all owner-gated). Production: **NO-GO**.

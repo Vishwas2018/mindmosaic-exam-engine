@@ -13,7 +13,11 @@ import path from "node:path";
 
 import { devAdmin, expect, findUserByEmail, parentSignIn, test } from "./fixtures";
 
-const EMAIL = "mm-manual-parent@example.com";
+/**
+ * A DEDICATED synthetic identity (never the owner's personal account). Credentials come from
+ * scripts/hosted-acceptance/prepare-manual-credentials.mjs, stored outside the repo and passed via the environment.
+ */
+const EMAIL = (process.env.MANUAL_PARENT_EMAIL ?? "mm-manual-beta-parent@example.com").toLowerCase();
 const OUT = path.join(process.env.HOSTED_OUTPUT ?? "test-results/hosted", "manual-family.json");
 const CHILDREN = [
   { name: "Maya", year: "Year 3", pin: process.env.MANUAL_PIN_1 ?? "" },
@@ -25,9 +29,15 @@ test("seed the owner's manual-testing family", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440", "seed once");
   const password = process.env.MANUAL_PARENT_PASSWORD;
   expect(password, "MANUAL_PARENT_PASSWORD").toBeTruthy();
+  expect(EMAIL, "manual parent must be a synthetic mm-manual-*@example.com identity").toMatch(/^mm-manual-[a-z0-9-]+@example\.com$/);
 
   const existing = await findUserByEmail(EMAIL);
   if (existing) {
+    // Never change an existing account's password as a side effect; rotation is an explicit decision.
+    expect(
+      process.env.MANUAL_ALLOW_PASSWORD_RESET,
+      "account already exists: set MANUAL_ALLOW_PASSWORD_RESET=1 to rotate its password on purpose",
+    ).toBe("1");
     const { error } = await devAdmin().auth.admin.updateUserById(existing.id, { password: password! });
     expect(error).toBeNull();
   } else {
