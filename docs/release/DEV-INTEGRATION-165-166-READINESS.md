@@ -307,3 +307,11 @@ The student-reads-parent-access path and class enrolment ran inside B/C and D ag
 - **DEV owner manual testing: GO.** Migration applied and verified, regression green, three Admins, MFA off.
 - **Private beta: still NO-GO** until three owner-held items close: (1) W1–W4 pass with the correct `STRIPE_WEBHOOK_SECRET` locally; (2) custom SMTP delivery and password recovery evidenced from a real inbox (the 10 skipped specs); (3) the Vercel bypass-secret rotation decision (plan in the handoff file, not executed).
 - Nothing excluded silently; no migration, secret, account or production change was made in this run.
+
+## W1–W4 attempt (2026-11-28): blocked by a Vercel team soft block, not by the signing secret
+
+- Local `STRIPE_WEBHOOK_SECRET` format check passed (value never printed).
+- `s2` + `s4` run (`rmx0dh2y6`, dev `2104c0c7`): W1 failed at its first assertion with **402** instead of 400; the very next probe of `/`, `/api/health` and `/api/stripe/webhook` also returns **402 `DEPLOYMENT_DISABLED`**. L4 timed out waiting for a webhook-driven row (real Stripe deliveries cannot be reaching the app either). W2–W4 did not run.
+- Cause, read from the Vercel API (read-only): the team (`hobby` plan) has a **soft block** `FAIR_USE_LIMITS_EXCEEDED` on `fluidCpuDuration`, set 2026-11-28T12:13:05Z, auto-lift `2026-12-28T12:13:05Z`. The hosted regression passed minutes before the block, so the whole DEV site is now unavailable to everyone, including owner manual testing.
+- So W1–W4 are **neither passed nor failed**: they could not exercise the endpoint. No secret, account or project setting was changed.
+- Beta consequence: a Hobby plan cannot serve the beta. Upgrade the team to Pro (owner billing action) or wait for the lift, then rerun `s2`/`s4` (and the 10 mail specs).
