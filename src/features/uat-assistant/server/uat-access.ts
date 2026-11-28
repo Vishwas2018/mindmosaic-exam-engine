@@ -5,7 +5,7 @@ import { cookies, headers } from "next/headers";
 import type { NextResponse } from "next/server";
 
 import { adminMfaOutcome, loadAdminGrants } from "@/features/auth/admin-grants";
-import { isProfileRole, type ProfileRole } from "@/features/auth/roles";
+import { isProfileRole, resolveEntitledRoles, type ProfileRole } from "@/features/auth/roles";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 
@@ -27,7 +27,10 @@ const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{
 
 export interface VerifiedUatTester {
   readonly enabled: true;
-  readonly activeRole: ProfileRole | "guest";
+  /** The account's profile role (what it is), NOT the workspace it is in: a dual-role login is `parent` everywhere. */
+  readonly primaryRole: ProfileRole | "guest";
+  /** Workspaces this account may open right now, resolved server-side from the profile and Admin grants. */
+  readonly entitledRoles: readonly ProfileRole[];
   readonly authorizedVia: "admin_role" | "tester_allowlist" | "tester_cookie" | "local_preview";
   readonly shouldIssueTesterCookie: boolean;
   readonly testerSubject: string;
@@ -228,7 +231,8 @@ export async function verifyUatTesterAccess(
     if (await isLoopbackRequest(request)) {
       return {
         enabled: true,
-        activeRole: "guest",
+        primaryRole: "guest",
+        entitledRoles: [],
         authorizedVia: "local_preview",
         shouldIssueTesterCookie: false,
         testerSubject: "local-preview",
@@ -240,7 +244,8 @@ export async function verifyUatTesterAccess(
     return { enabled: false, status: 403, reason: "supabase_not_configured" };
   }
 
-  let activeRole: ProfileRole | "guest" = "guest";
+  let primaryRole: ProfileRole | "guest" = "guest";
+  let entitledRoles: readonly ProfileRole[] = [];
   let userId: string | null = null;
   let userEmail: string | null = null;
   let accessRevoked = false;
@@ -264,9 +269,12 @@ export async function verifyUatTesterAccess(
 
       accessRevoked = Boolean(profile?.access_revoked_at);
       if (!accessRevoked && isProfileRole(profile?.role)) {
-        activeRole = profile.role;
+        primaryRole = profile.role;
       }
       const grants = await loadAdminGrants(supabase, user.id);
+      if (!accessRevoked) {
+        entitledRoles = resolveEntitledRoles(primaryRole === "guest" ? null : primaryRole, grants);
+      }
       standing = resolveUatAdminStanding(profile?.role, grants, accessRevoked);
       if (standing.kind === "admin" && standing.mfaApplies) {
         mfaOutcome = await adminMfaOutcome(supabase);
@@ -293,7 +301,8 @@ export async function verifyUatTesterAccess(
   if (userId && standing.kind === "admin") {
     return {
       enabled: true,
-      activeRole,
+      primaryRole,
+      entitledRoles,
       authorizedVia: "admin_role",
       shouldIssueTesterCookie: true,
       testerSubject: userId,
@@ -309,7 +318,8 @@ export async function verifyUatTesterAccess(
   if (userId && (allowIds.has(userId) || (userEmail && allowEmails.has(userEmail)))) {
     return {
       enabled: true,
-      activeRole,
+      primaryRole,
+      entitledRoles,
       authorizedVia: "tester_allowlist",
       shouldIssueTesterCookie: true,
       testerSubject: userId,
@@ -341,7 +351,8 @@ export async function verifyUatTesterAccess(
     }
     return {
       enabled: true,
-      activeRole,
+      primaryRole,
+      entitledRoles,
       authorizedVia: "tester_cookie",
       shouldIssueTesterCookie: false,
       testerSubject: verifiedBadge.sub,

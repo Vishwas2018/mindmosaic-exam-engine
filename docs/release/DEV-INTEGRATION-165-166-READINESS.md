@@ -138,3 +138,47 @@ Note: hosted deployments fail closed when the Redis guard is missing or failing,
 3. Apply the migration to DEV (steps 1-3 of section 5) and run the owner grant and TOTP enrolment (4-5).
 4. Decide on flipping `require_admin_mfa` and how to treat synthetic/fixture admins (step 6).
 5. Execute the secret remediation (section 8).
+
+## 11. Phase 5: integrated DEV release acceptance (PR #168, head `61685534`)
+
+DEV only. Global MFA stayed off (`require_admin_mfa=false`, re-read at the end). No production, credential or account-deletion action. The owner grant was not repeated. Fixtures are retired by revoking their Admin entitlement; no account was deleted.
+
+### Deployment identity
+| Target | Identity |
+|---|---|
+| Stable DEV alias | `mindmosaic-exam-engine-git-dev-vishwas2018s-projects.vercel.app`, dev `9b936502` (`dpl_BcqkBDeNytU7Bo8SAi87E1Vta2Ji`) |
+| PR #168 Preview | `mindmosaic-exam-engine-git-test-ph-5d57a1-vishwas2018s-projects.vercel.app`, contains the UAT context fix |
+
+The fix is only on the PR Preview until #168 is merged (merge is not authorised).
+
+### What changed
+1. **Phase 4 spec preserved**: `e2e/hosted/multi-role-uat-hosted.spec.ts` (P4-0..P4-5 unchanged, assertions tightened for the new session fields).
+2. **Legacy fixtures migrated**: `admin-review-scholarship`, `uat-assistant-hosted`, `auth-audit/02`, `auth-audit/03` grant Admin through the audited `grant_admin_role` RPC (`grantFixtureAdmin`). Every hosted spec that deleted accounts (`admin-review`, `auth-audit/01-04`, `billing-helpers`) now calls `retireFixtureUser`, which revokes Admin and never deletes unless `HOSTED_ALLOW_DELETE=1`. Original objectives and negative-access assertions are unchanged.
+3. **UAT workspace context**: `activeRole` was the profile role, so a dual-role login in Admin was labelled `parent`. `/api/uat/session` now returns `primaryRole` and server-resolved `entitledRoles`; the shell derives the workspace from the route (`resolveWorkspaceContext`) and stores `activeWorkspace`, `workspaceEntitled`, `primaryRole`, `entitledRoles` on each defect (and in the Markdown export). The route value is advisory metadata only; authorisation still comes from the session on every call. New P4-6 hosted test and 15 unit tests (all portals, not-entitled flag, forged query/headers refused, revoked grant refused, access-revoked refused).
+
+### Results
+| Suite | Result |
+|---|---|
+| CI on `61685534` | core 480 files / **7,679 tests** pass; e2e **395** pass; e2e-auth **109** pass; rls pass; scholarship-drafts pass; Vercel pass |
+| Hosted Phase 4 (P4-0..P4-6) | **7/7** on the PR Preview (first run 6/7: P4-6 asserted `/parent`, but an empty parent account redirects to `/parent/setup`; test corrected, product behaved correctly) |
+| Hosted UAT-H1..H4 | **4/4** (live NVIDIA `nvidia/nemotron-3.5-lightning-30b-a3b`, screenshot redaction burned into pixels, IndexedDB persistence, Markdown/JSON export, GitHub confirmation gate, End session, revocation) |
+| Hosted Admin Review AR-01..AR-06 | **6/6** desktop; AR-05 also **tablet-834 and mobile-390** pass; no Approve submitted |
+| Hosted auth-audit 02 + 03 | 4/5 on the PR Preview; **REC-01** fails there only because DEV Supabase allow-lists the `git-dev` alias for mail redirects (`redirect stays on this Preview`); it **passes 1/1** on the dev alias. RBAC-01 and SEC-01 pass |
+| Unit | 63/63 UAT tests; the 7 failures in the full local run were 5 s timeouts under load and pass in isolation; CI is clean |
+
+### Security validation
+- Anonymous black-box probe of DEV PostgREST (service role used only to list the schema): **0 of 99 relations readable by anon** (all 401). Of 49 RPCs, anon-executable with empty arguments: `caller_is_teacher` and `current_parent_has_access` (boolean predicates). Functions with required arguments return 404 on an empty call, so this proves read isolation but is **not** a full privilege audit.
+- The Supabase advisor findings (nine security-definer views, anon-executable functions) are **not reviewed**: they need the read-only Supabase DEV MCP, whose OAuth is awaiting the owner. No policy was changed.
+- Cross-account isolation and negative access: AR-01, AR-04, RBAC-01, SEC-01, P4-2 (including forged `workspace`/`role` query and headers: refused, 403) all pass.
+- Revoked fixtures: P4-5 proves a revoked Admin loses `/admin`, the switcher and UAT on the next request. End state: **6 active Admin entitlements** (unchanged from before Phase 4), **0 student Admin entitlements**, no Phase 4/5 fixture holds Admin.
+- **Finding for the owner**: 3 of the 6 active entitlements are leftover `RBAC admin rba` fixtures from audit runs on 23-24 Nov, backfilled by the migration (`granted_by: migration:20261126090000`). With `QA Admin`, `E2E Beta Administrator` and `Release Tester` that makes six. They are not from this phase and were not touched. Recommend revoking the three through `revoke_admin_role` after approval.
+
+### Not done / gaps (nothing excluded silently)
+- Local `test:rls`, `test:e2e`, `test:e2e:auth`: Docker Desktop is not running and free RAM was 3.9 GB. CI ran all three green on the PR head instead.
+- Hosted suites not rerun: `auth-audit/01` and `04` (mail and cross-browser; only the retire helper changed), billing `s1-s4` (Stripe), `a-parent-onboarding`, `b-c-student-assessment`, `d-security`, `m-manual-test-family`. They typecheck; CI covers Student, Parent, Teacher and Admin journeys locally.
+- **GitHub issue creation is not ready**: `MM_UAT_GITHUB_TOKEN` is unset (`githubConfigured:false`). The confirmation gate and copy-Markdown fallback are verified; no issue was created.
+- Real-mailbox Admin check: the owner login was not used (no credential). Owner state was verified read-only: profile `parent`, one active Admin entitlement, no MFA factors.
+
+### Recommendation
+- **GO** to merge PR #168 into `dev` (owner approval needed) and to continue manual UAT on DEV.
+- **Not yet GO for beta**: advisor review, the three leftover admin fixtures, GitHub token, and the remaining hosted suites are open. **Production remains NO-GO.**

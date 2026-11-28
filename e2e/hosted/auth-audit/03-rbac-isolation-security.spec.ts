@@ -39,6 +39,8 @@ import {
   protectContext,
   seededEmail,
   test,
+  grantFixtureAdmin,
+  retireFixtureUser,
 } from "../fixtures";
 
 const OUT = process.env.HOSTED_OUTPUT ?? "test-results/hosted";
@@ -69,6 +71,7 @@ async function createSeededUser(label: string, role: "parent" | "teacher" | "adm
   if (role !== "parent") {
     const { error: upErr } = await devAdmin().from("profiles").update({ role }).eq("id", data.user.id);
     if (upErr) throw new Error(`set role ${role} failed: ${upErr.message}`);
+    if (role === "admin") await grantFixtureAdmin(data.user.id, `auth-audit-03 fixture ${label}`);
   }
   return { id: data.user.id, email };
 }
@@ -111,7 +114,7 @@ test.describe("Auth Audit 03: RBAC Matrix, Data Isolation & Security", () => {
     fs.mkdirSync(OUT, { recursive: true });
     fs.writeFileSync(path.join(OUT, "audit-03-evidence.json"), JSON.stringify(evidence, null, 2));
     for (const id of createdUserIds) {
-      await devAdmin().auth.admin.deleteUser(id).catch(() => undefined);
+      await retireFixtureUser(id);
     }
   });
 

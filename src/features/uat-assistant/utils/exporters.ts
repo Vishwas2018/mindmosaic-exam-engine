@@ -97,6 +97,7 @@ export function formatIssueMarkdown(issue: UatIssue): string {
     `- **Severity:** ${SEVERITY_LABELS[issue.severity]}`,
     `- **Category:** ${CATEGORY_LABELS[issue.category]}`,
     `- **Portal / Route:** \`${issue.environment.portal}\` · \`${issue.environment.route}\``,
+    `- **Role context:** account \`${issue.environment.primaryRole ?? issue.environment.activeRole ?? "unknown"}\` · entitled [${(issue.environment.entitledRoles ?? []).join(", ") || "not recorded"}] · workspace \`${issue.environment.activeWorkspace ?? "none"}\`${issue.environment.workspaceEntitled === false ? " (NOT entitled)" : ""}`,
     `- **Page URL:** \`${sanitizeUrlForReport(issue.environment.pageUrl)}\``,
     `- **Environment:** ${issue.environment.browser} · ${issue.environment.viewport.width}×${issue.environment.viewport.height} (@${issue.environment.viewport.devicePixelRatio}x)`,
     `- **Test Session:** ${issue.environment.testSessionLabel} (\`${issue.environment.testSessionId}\`)`,

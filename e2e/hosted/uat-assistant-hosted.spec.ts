@@ -13,7 +13,7 @@ import path from "node:path";
 import type { Page } from "@playwright/test";
 
 import { assertNoSeriousAccessibilityViolations } from "../accessibility";
-import { devAdmin, expect, parentSignIn, RUN_ID, seededEmail, STRONG_PASSWORD, test } from "./fixtures";
+import { devAdmin, expect, grantFixtureAdmin, parentSignIn, retireFixtureUser, RUN_ID, seededEmail, STRONG_PASSWORD, test } from "./fixtures";
 
 const OUT = path.resolve("test-results", "hosted", RUN_ID);
 const evidence: Record<string, unknown> = {};
@@ -30,6 +30,7 @@ async function makeUser(label: string, role: "parent" | "admin", displayName: st
   if (error || !data.user) throw new Error(`createUser ${label}: ${error?.message}`);
   const { error: upErr } = await devAdmin().from("profiles").update({ role, display_name: displayName }).eq("id", data.user.id);
   if (upErr) throw new Error(`profile ${label}: ${upErr.message}`);
+  if (role === "admin") await grantFixtureAdmin(data.user.id, `uat-assistant hosted fixture ${label}`);
   created.push({ id: data.user.id, email, role });
   return { id: data.user.id, email };
 }
@@ -94,7 +95,9 @@ test.describe.serial("UAT Assistant — hosted DEV Preview acceptance", () => {
   });
 
   test.afterAll(async () => {
-    // No deletes. Demote the fixture admin so it holds no privilege after the run (an update, not a removal).
+    // No deletes. Revoke the audited Admin entitlement and demote the profile so the fixture holds no privilege after
+    // the run (updates, not a removal).
+    await retireFixtureUser(admin.id);
     await devAdmin().from("profiles").update({ role: "parent" }).eq("id", admin.id);
     await devAdmin().from("profiles").update({ access_revoked_at: null }).eq("id", admin.id);
     evidence.fixtures = created.map((c) => ({ id: c.id, email: c.email, createdAs: c.role, nowRole: "parent" }));
@@ -116,7 +119,8 @@ test.describe.serial("UAT Assistant — hosted DEV Preview acceptance", () => {
     evidence["H1-session"] = {
       enabled: body.enabled,
       authorizedVia: body.authorizedVia,
-      activeRole: body.activeRole,
+      primaryRole: body.primaryRole,
+      entitledRoles: body.entitledRoles,
       aiConfigured: body.aiConfigured,
       githubConfigured: body.githubConfigured,
     };

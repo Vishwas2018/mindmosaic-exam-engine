@@ -9,7 +9,7 @@
  */
 import Stripe from "stripe";
 
-import { HOSTED_URL, STRONG_PASSWORD, devAdmin, expect, seededEmail } from "./fixtures";
+import { HOSTED_URL, STRONG_PASSWORD, devAdmin, expect, retireFixtureUser, seededEmail } from "./fixtures";
 
 export const SANDBOX_ACCOUNT = "acct_1StznKDtPH5dvWkm";
 
@@ -241,5 +241,5 @@ export async function cleanupBilling(): Promise<void> {
   const stripe = stripeClient();
   for (const id of created.clocks) await stripe.testHelpers.testClocks.del(id).catch(() => undefined);
   for (const id of created.customers) await stripe.customers.del(id).catch(() => undefined);
-  for (const id of created.users) await devAdmin().auth.admin.deleteUser(id).catch(() => undefined);
+  for (const id of created.users) await retireFixtureUser(id);
 }

@@ -229,3 +229,31 @@ export function summarizeBrowserUserAgent(userAgent: string): string {
   if (safari) return `Safari ${safari[1]} · ${os}`;
   return os;
 }
+
+export interface UatWorkspaceContext {
+  readonly portal: UatPortalSurface;
+  readonly activeWorkspace: "admin" | "student" | "parent" | "teacher" | null;
+  readonly workspaceEntitled: boolean;
+  readonly activeRole: string | null;
+}
+
+/**
+ * Labels a report with the workspace it was filed from. Pure and advisory: the route is client-observed, so the result
+ * is only ever stored on a defect, never used to authorise anything. `entitledRoles` comes from the server.
+ */
+export function resolveWorkspaceContext(
+  pathname: string,
+  primaryRole: string | null,
+  entitledRoles: readonly string[],
+): UatWorkspaceContext {
+  const portal = detectPortalSurface(pathname);
+  const activeWorkspace =
+    portal === "admin" || portal === "student" || portal === "parent" || portal === "teacher" ? portal : null;
+  const workspaceEntitled = activeWorkspace === null ? true : entitledRoles.includes(activeWorkspace);
+  return {
+    portal,
+    activeWorkspace,
+    workspaceEntitled,
+    activeRole: activeWorkspace && workspaceEntitled ? activeWorkspace : primaryRole,
+  };
+}

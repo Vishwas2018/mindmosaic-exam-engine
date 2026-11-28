@@ -265,3 +265,38 @@ export function api(page: Page) {
     put: async (url: string, data: unknown) => guard(await req.put(url, { headers, data, maxRedirects: 0 })),
   };
 }
+
+/**
+ * Admin entitlement for a fixture, through the audited service-role RPC (the supported path since the multi-role
+ * migration). `profiles.role = 'admin'` alone confers nothing; it only matters via the sync trigger, so fixtures call
+ * this explicitly and assert the outcome. Idempotent ("granted" | "already-granted").
+ */
+export async function grantFixtureAdmin(userId: string, reason: string): Promise<string> {
+  const { data, error } = await devAdmin().rpc("grant_admin_role", {
+    p_user: userId,
+    p_actor: "e2e:hosted",
+    p_reason: reason,
+  });
+  if (error) throw new Error(`grant_admin_role failed: ${error.message}`);
+  return String(data);
+}
+
+/**
+ * Fixture retirement. Accounts are NEVER deleted by default (release restriction: no account deletions). Retiring
+ * revokes any Admin entitlement through the audited RPC, leaving the account inert. Set HOSTED_ALLOW_DELETE=1 only for
+ * an owner-approved clean-up run.
+ */
+export async function retireFixtureUser(userId: string): Promise<void> {
+  const { error } = await devAdmin().rpc("revoke_admin_role", {
+    p_user: userId,
+    p_actor: "e2e:hosted",
+    p_reason: "fixture retired",
+  });
+  if (error && !/not.*(found|admin)|no active/i.test(error.message)) {
+    // A revoke of a non-admin is expected to be a no-op; anything else is worth surfacing in the run log.
+    console.warn(`retireFixtureUser: ${error.message}`);
+  }
+  if (process.env.HOSTED_ALLOW_DELETE === "1") {
+    await devAdmin().auth.admin.deleteUser(userId).catch(() => undefined);
+  }
+}
